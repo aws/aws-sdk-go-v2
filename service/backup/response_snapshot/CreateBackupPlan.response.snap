@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AdvancedBackupSettings":[{"BackupOptions":{"key0":"__Value__"},"ResourceType":"__ResourceType__"},{"BackupOptions":{"key0":"__Value__"},"ResourceType":"__ResourceType__"}],"BackupPlanArn":"__BackupPlanArn__","BackupPlanId":"__BackupPlanId__","CreationDate":946684800,"VersionId":"__VersionId__"}

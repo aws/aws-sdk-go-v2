@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"dataflowEndpointGroupList":[{"dataflowEndpointGroupArn":"__DataflowEndpointGroupArn__","dataflowEndpointGroupId":"__DataflowEndpointGroupId__"},{"dataflowEndpointGroupArn":"__DataflowEndpointGroupArn__","dataflowEndpointGroupId":"__DataflowEndpointGroupId__"}],"nextToken":"__NextToken__"}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/xml
-
-<FlattenedXmlMapWithXmlNamespaceOutput><KVP><K xmlns="https://the-key.example.com">key0</K><V xmlns="https://the-value.example.com">__Value__</V></KVP></FlattenedXmlMapWithXmlNamespaceOutput>

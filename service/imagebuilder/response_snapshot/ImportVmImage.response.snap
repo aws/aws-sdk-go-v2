@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","imageArn":"__ImageArn__","requestId":"__RequestId__"}

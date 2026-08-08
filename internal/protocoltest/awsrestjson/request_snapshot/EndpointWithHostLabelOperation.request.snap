@@ -1,5 +1,0 @@
-POST /EndpointWithHostLabelOperation
-
-Content-Type: application/json
-
-{"label":"Label-value"}

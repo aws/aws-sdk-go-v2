@@ -127,7 +127,14 @@ func TestCheckResponseSnapshot_CreateApp(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApp(context.Background(), &CreateAppInput{})
+	got, err := svc.CreateApp(context.Background(), &CreateAppInput{
+		CreateApplicationRequest: &types.CreateApplicationRequest{
+			Name: ptr.String("__Name__"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1078,7 +1085,920 @@ func TestCheckResponseSnapshot_CreateCampaign(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCampaign(context.Background(), &CreateCampaignInput{})
+	got, err := svc.CreateCampaign(context.Background(), &CreateCampaignInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		WriteCampaignRequest: &types.WriteCampaignRequest{
+			AdditionalTreatments: []types.WriteTreatmentResource{
+				{
+					CustomDeliveryConfiguration: &types.CustomDeliveryConfiguration{
+						DeliveryUri: ptr.String("__DeliveryUri__"),
+						EndpointTypes: []types.EndpointTypesElement{
+							types.EndpointTypesElement("PUSH"),
+							types.EndpointTypesElement("PUSH"),
+						},
+					},
+					MessageConfiguration: &types.MessageConfiguration{
+						ADMMessage: &types.Message{
+							Action:            types.Action("OPEN_APP"),
+							Body:              ptr.String("__Body__"),
+							ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+							ImageSmallIconUrl: ptr.String("__ImageSmallIconUrl__"),
+							ImageUrl:          ptr.String("__ImageUrl__"),
+							JsonBody:          ptr.String("__JsonBody__"),
+							MediaUrl:          ptr.String("__MediaUrl__"),
+							RawContent:        ptr.String("__RawContent__"),
+							SilentPush:        ptr.Bool(true),
+							TimeToLive:        ptr.Int32(1),
+							Title:             ptr.String("__Title__"),
+							Url:               ptr.String("__Url__"),
+						},
+						APNSMessage: &types.Message{
+							Action:            types.Action("OPEN_APP"),
+							Body:              ptr.String("__Body__"),
+							ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+							ImageSmallIconUrl: ptr.String("__ImageSmallIconUrl__"),
+							ImageUrl:          ptr.String("__ImageUrl__"),
+							JsonBody:          ptr.String("__JsonBody__"),
+							MediaUrl:          ptr.String("__MediaUrl__"),
+							RawContent:        ptr.String("__RawContent__"),
+							SilentPush:        ptr.Bool(true),
+							TimeToLive:        ptr.Int32(1),
+							Title:             ptr.String("__Title__"),
+							Url:               ptr.String("__Url__"),
+						},
+						BaiduMessage: &types.Message{
+							Action:            types.Action("OPEN_APP"),
+							Body:              ptr.String("__Body__"),
+							ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+							ImageSmallIconUrl: ptr.String("__ImageSmallIconUrl__"),
+							ImageUrl:          ptr.String("__ImageUrl__"),
+							JsonBody:          ptr.String("__JsonBody__"),
+							MediaUrl:          ptr.String("__MediaUrl__"),
+							RawContent:        ptr.String("__RawContent__"),
+							SilentPush:        ptr.Bool(true),
+							TimeToLive:        ptr.Int32(1),
+							Title:             ptr.String("__Title__"),
+							Url:               ptr.String("__Url__"),
+						},
+						CustomMessage: &types.CampaignCustomMessage{
+							Data: ptr.String("__Data__"),
+						},
+						DefaultMessage: &types.Message{
+							Action:            types.Action("OPEN_APP"),
+							Body:              ptr.String("__Body__"),
+							ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+							ImageSmallIconUrl: ptr.String("__ImageSmallIconUrl__"),
+							ImageUrl:          ptr.String("__ImageUrl__"),
+							JsonBody:          ptr.String("__JsonBody__"),
+							MediaUrl:          ptr.String("__MediaUrl__"),
+							RawContent:        ptr.String("__RawContent__"),
+							SilentPush:        ptr.Bool(true),
+							TimeToLive:        ptr.Int32(1),
+							Title:             ptr.String("__Title__"),
+							Url:               ptr.String("__Url__"),
+						},
+						EmailMessage: &types.CampaignEmailMessage{
+							Body:        ptr.String("__Body__"),
+							FromAddress: ptr.String("__FromAddress__"),
+							Headers: []types.MessageHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							HtmlBody: ptr.String("__HtmlBody__"),
+							Title:    ptr.String("__Title__"),
+						},
+						GCMMessage: &types.Message{
+							Action:            types.Action("OPEN_APP"),
+							Body:              ptr.String("__Body__"),
+							ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+							ImageSmallIconUrl: ptr.String("__ImageSmallIconUrl__"),
+							ImageUrl:          ptr.String("__ImageUrl__"),
+							JsonBody:          ptr.String("__JsonBody__"),
+							MediaUrl:          ptr.String("__MediaUrl__"),
+							RawContent:        ptr.String("__RawContent__"),
+							SilentPush:        ptr.Bool(true),
+							TimeToLive:        ptr.Int32(1),
+							Title:             ptr.String("__Title__"),
+							Url:               ptr.String("__Url__"),
+						},
+						SMSMessage: &types.CampaignSmsMessage{
+							Body:              ptr.String("__Body__"),
+							MessageType:       types.MessageType("TRANSACTIONAL"),
+							OriginationNumber: ptr.String("__OriginationNumber__"),
+							SenderId:          ptr.String("__SenderId__"),
+							EntityId:          ptr.String("__EntityId__"),
+							TemplateId:        ptr.String("__TemplateId__"),
+						},
+						InAppMessage: &types.CampaignInAppMessage{
+							Body: ptr.String("__Body__"),
+							Content: []types.InAppMessageContent{
+								{
+									BackgroundColor: ptr.String("__BackgroundColor__"),
+									BodyConfig: &types.InAppMessageBodyConfig{
+										Alignment: types.Alignment("LEFT"),
+										Body:      ptr.String("__Body__"),
+										TextColor: ptr.String("__TextColor__"),
+									},
+									HeaderConfig: &types.InAppMessageHeaderConfig{
+										Alignment: types.Alignment("LEFT"),
+										Header:    ptr.String("__Header__"),
+										TextColor: ptr.String("__TextColor__"),
+									},
+									ImageUrl: ptr.String("__ImageUrl__"),
+									PrimaryBtn: &types.InAppMessageButton{
+										Android: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										DefaultConfig: &types.DefaultButtonConfiguration{
+											BackgroundColor: ptr.String("__BackgroundColor__"),
+											BorderRadius:    ptr.Int32(1),
+											ButtonAction:    types.ButtonAction("LINK"),
+											Link:            ptr.String("__Link__"),
+											Text:            ptr.String("__Text__"),
+											TextColor:       ptr.String("__TextColor__"),
+										},
+										IOS: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										Web: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+									},
+									SecondaryBtn: &types.InAppMessageButton{
+										Android: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										DefaultConfig: &types.DefaultButtonConfiguration{
+											BackgroundColor: ptr.String("__BackgroundColor__"),
+											BorderRadius:    ptr.Int32(1),
+											ButtonAction:    types.ButtonAction("LINK"),
+											Link:            ptr.String("__Link__"),
+											Text:            ptr.String("__Text__"),
+											TextColor:       ptr.String("__TextColor__"),
+										},
+										IOS: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										Web: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+									},
+								},
+								{
+									BackgroundColor: ptr.String("__BackgroundColor__"),
+									BodyConfig: &types.InAppMessageBodyConfig{
+										Alignment: types.Alignment("LEFT"),
+										Body:      ptr.String("__Body__"),
+										TextColor: ptr.String("__TextColor__"),
+									},
+									HeaderConfig: &types.InAppMessageHeaderConfig{
+										Alignment: types.Alignment("LEFT"),
+										Header:    ptr.String("__Header__"),
+										TextColor: ptr.String("__TextColor__"),
+									},
+									ImageUrl: ptr.String("__ImageUrl__"),
+									PrimaryBtn: &types.InAppMessageButton{
+										Android: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										DefaultConfig: &types.DefaultButtonConfiguration{
+											BackgroundColor: ptr.String("__BackgroundColor__"),
+											BorderRadius:    ptr.Int32(1),
+											ButtonAction:    types.ButtonAction("LINK"),
+											Link:            ptr.String("__Link__"),
+											Text:            ptr.String("__Text__"),
+											TextColor:       ptr.String("__TextColor__"),
+										},
+										IOS: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										Web: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+									},
+									SecondaryBtn: &types.InAppMessageButton{
+										Android: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										DefaultConfig: &types.DefaultButtonConfiguration{
+											BackgroundColor: ptr.String("__BackgroundColor__"),
+											BorderRadius:    ptr.Int32(1),
+											ButtonAction:    types.ButtonAction("LINK"),
+											Link:            ptr.String("__Link__"),
+											Text:            ptr.String("__Text__"),
+											TextColor:       ptr.String("__TextColor__"),
+										},
+										IOS: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										Web: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+									},
+								},
+							},
+							CustomConfig: map[string]string{
+								"key0": "__Value__",
+							},
+							Layout: types.Layout("BOTTOM_BANNER"),
+						},
+					},
+					Schedule: &types.Schedule{
+						EndTime: ptr.String("__EndTime__"),
+						EventFilter: &types.CampaignEventFilter{
+							Dimensions: &types.EventDimensions{
+								Attributes: map[string]types.AttributeDimension{
+									"key0": {
+										AttributeType: types.AttributeType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								EventType: &types.SetDimension{
+									DimensionType: types.DimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Metrics: map[string]types.MetricDimension{
+									"key0": {
+										ComparisonOperator: ptr.String("__ComparisonOperator__"),
+										Value:              ptr.Float64(1.0),
+									},
+								},
+							},
+							FilterType: types.FilterType("SYSTEM"),
+						},
+						Frequency:   types.Frequency("ONCE"),
+						IsLocalTime: ptr.Bool(true),
+						QuietTime: &types.QuietTime{
+							End:   ptr.String("__End__"),
+							Start: ptr.String("__Start__"),
+						},
+						StartTime: ptr.String("__StartTime__"),
+						Timezone:  ptr.String("__Timezone__"),
+					},
+					SizePercent: ptr.Int32(1),
+					TemplateConfiguration: &types.TemplateConfiguration{
+						EmailTemplate: &types.Template{
+							Name:    ptr.String("__Name__"),
+							Version: ptr.String("__Version__"),
+						},
+						PushTemplate: &types.Template{
+							Name:    ptr.String("__Name__"),
+							Version: ptr.String("__Version__"),
+						},
+						SMSTemplate: &types.Template{
+							Name:    ptr.String("__Name__"),
+							Version: ptr.String("__Version__"),
+						},
+						VoiceTemplate: &types.Template{
+							Name:    ptr.String("__Name__"),
+							Version: ptr.String("__Version__"),
+						},
+						InAppTemplate: &types.Template{
+							Name:    ptr.String("__Name__"),
+							Version: ptr.String("__Version__"),
+						},
+					},
+					TreatmentDescription: ptr.String("__TreatmentDescription__"),
+					TreatmentName:        ptr.String("__TreatmentName__"),
+				},
+				{
+					CustomDeliveryConfiguration: &types.CustomDeliveryConfiguration{
+						DeliveryUri: ptr.String("__DeliveryUri__"),
+						EndpointTypes: []types.EndpointTypesElement{
+							types.EndpointTypesElement("PUSH"),
+							types.EndpointTypesElement("PUSH"),
+						},
+					},
+					MessageConfiguration: &types.MessageConfiguration{
+						ADMMessage: &types.Message{
+							Action:            types.Action("OPEN_APP"),
+							Body:              ptr.String("__Body__"),
+							ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+							ImageSmallIconUrl: ptr.String("__ImageSmallIconUrl__"),
+							ImageUrl:          ptr.String("__ImageUrl__"),
+							JsonBody:          ptr.String("__JsonBody__"),
+							MediaUrl:          ptr.String("__MediaUrl__"),
+							RawContent:        ptr.String("__RawContent__"),
+							SilentPush:        ptr.Bool(true),
+							TimeToLive:        ptr.Int32(1),
+							Title:             ptr.String("__Title__"),
+							Url:               ptr.String("__Url__"),
+						},
+						APNSMessage: &types.Message{
+							Action:            types.Action("OPEN_APP"),
+							Body:              ptr.String("__Body__"),
+							ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+							ImageSmallIconUrl: ptr.String("__ImageSmallIconUrl__"),
+							ImageUrl:          ptr.String("__ImageUrl__"),
+							JsonBody:          ptr.String("__JsonBody__"),
+							MediaUrl:          ptr.String("__MediaUrl__"),
+							RawContent:        ptr.String("__RawContent__"),
+							SilentPush:        ptr.Bool(true),
+							TimeToLive:        ptr.Int32(1),
+							Title:             ptr.String("__Title__"),
+							Url:               ptr.String("__Url__"),
+						},
+						BaiduMessage: &types.Message{
+							Action:            types.Action("OPEN_APP"),
+							Body:              ptr.String("__Body__"),
+							ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+							ImageSmallIconUrl: ptr.String("__ImageSmallIconUrl__"),
+							ImageUrl:          ptr.String("__ImageUrl__"),
+							JsonBody:          ptr.String("__JsonBody__"),
+							MediaUrl:          ptr.String("__MediaUrl__"),
+							RawContent:        ptr.String("__RawContent__"),
+							SilentPush:        ptr.Bool(true),
+							TimeToLive:        ptr.Int32(1),
+							Title:             ptr.String("__Title__"),
+							Url:               ptr.String("__Url__"),
+						},
+						CustomMessage: &types.CampaignCustomMessage{
+							Data: ptr.String("__Data__"),
+						},
+						DefaultMessage: &types.Message{
+							Action:            types.Action("OPEN_APP"),
+							Body:              ptr.String("__Body__"),
+							ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+							ImageSmallIconUrl: ptr.String("__ImageSmallIconUrl__"),
+							ImageUrl:          ptr.String("__ImageUrl__"),
+							JsonBody:          ptr.String("__JsonBody__"),
+							MediaUrl:          ptr.String("__MediaUrl__"),
+							RawContent:        ptr.String("__RawContent__"),
+							SilentPush:        ptr.Bool(true),
+							TimeToLive:        ptr.Int32(1),
+							Title:             ptr.String("__Title__"),
+							Url:               ptr.String("__Url__"),
+						},
+						EmailMessage: &types.CampaignEmailMessage{
+							Body:        ptr.String("__Body__"),
+							FromAddress: ptr.String("__FromAddress__"),
+							Headers: []types.MessageHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							HtmlBody: ptr.String("__HtmlBody__"),
+							Title:    ptr.String("__Title__"),
+						},
+						GCMMessage: &types.Message{
+							Action:            types.Action("OPEN_APP"),
+							Body:              ptr.String("__Body__"),
+							ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+							ImageSmallIconUrl: ptr.String("__ImageSmallIconUrl__"),
+							ImageUrl:          ptr.String("__ImageUrl__"),
+							JsonBody:          ptr.String("__JsonBody__"),
+							MediaUrl:          ptr.String("__MediaUrl__"),
+							RawContent:        ptr.String("__RawContent__"),
+							SilentPush:        ptr.Bool(true),
+							TimeToLive:        ptr.Int32(1),
+							Title:             ptr.String("__Title__"),
+							Url:               ptr.String("__Url__"),
+						},
+						SMSMessage: &types.CampaignSmsMessage{
+							Body:              ptr.String("__Body__"),
+							MessageType:       types.MessageType("TRANSACTIONAL"),
+							OriginationNumber: ptr.String("__OriginationNumber__"),
+							SenderId:          ptr.String("__SenderId__"),
+							EntityId:          ptr.String("__EntityId__"),
+							TemplateId:        ptr.String("__TemplateId__"),
+						},
+						InAppMessage: &types.CampaignInAppMessage{
+							Body: ptr.String("__Body__"),
+							Content: []types.InAppMessageContent{
+								{
+									BackgroundColor: ptr.String("__BackgroundColor__"),
+									BodyConfig: &types.InAppMessageBodyConfig{
+										Alignment: types.Alignment("LEFT"),
+										Body:      ptr.String("__Body__"),
+										TextColor: ptr.String("__TextColor__"),
+									},
+									HeaderConfig: &types.InAppMessageHeaderConfig{
+										Alignment: types.Alignment("LEFT"),
+										Header:    ptr.String("__Header__"),
+										TextColor: ptr.String("__TextColor__"),
+									},
+									ImageUrl: ptr.String("__ImageUrl__"),
+									PrimaryBtn: &types.InAppMessageButton{
+										Android: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										DefaultConfig: &types.DefaultButtonConfiguration{
+											BackgroundColor: ptr.String("__BackgroundColor__"),
+											BorderRadius:    ptr.Int32(1),
+											ButtonAction:    types.ButtonAction("LINK"),
+											Link:            ptr.String("__Link__"),
+											Text:            ptr.String("__Text__"),
+											TextColor:       ptr.String("__TextColor__"),
+										},
+										IOS: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										Web: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+									},
+									SecondaryBtn: &types.InAppMessageButton{
+										Android: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										DefaultConfig: &types.DefaultButtonConfiguration{
+											BackgroundColor: ptr.String("__BackgroundColor__"),
+											BorderRadius:    ptr.Int32(1),
+											ButtonAction:    types.ButtonAction("LINK"),
+											Link:            ptr.String("__Link__"),
+											Text:            ptr.String("__Text__"),
+											TextColor:       ptr.String("__TextColor__"),
+										},
+										IOS: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										Web: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+									},
+								},
+								{
+									BackgroundColor: ptr.String("__BackgroundColor__"),
+									BodyConfig: &types.InAppMessageBodyConfig{
+										Alignment: types.Alignment("LEFT"),
+										Body:      ptr.String("__Body__"),
+										TextColor: ptr.String("__TextColor__"),
+									},
+									HeaderConfig: &types.InAppMessageHeaderConfig{
+										Alignment: types.Alignment("LEFT"),
+										Header:    ptr.String("__Header__"),
+										TextColor: ptr.String("__TextColor__"),
+									},
+									ImageUrl: ptr.String("__ImageUrl__"),
+									PrimaryBtn: &types.InAppMessageButton{
+										Android: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										DefaultConfig: &types.DefaultButtonConfiguration{
+											BackgroundColor: ptr.String("__BackgroundColor__"),
+											BorderRadius:    ptr.Int32(1),
+											ButtonAction:    types.ButtonAction("LINK"),
+											Link:            ptr.String("__Link__"),
+											Text:            ptr.String("__Text__"),
+											TextColor:       ptr.String("__TextColor__"),
+										},
+										IOS: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										Web: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+									},
+									SecondaryBtn: &types.InAppMessageButton{
+										Android: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										DefaultConfig: &types.DefaultButtonConfiguration{
+											BackgroundColor: ptr.String("__BackgroundColor__"),
+											BorderRadius:    ptr.Int32(1),
+											ButtonAction:    types.ButtonAction("LINK"),
+											Link:            ptr.String("__Link__"),
+											Text:            ptr.String("__Text__"),
+											TextColor:       ptr.String("__TextColor__"),
+										},
+										IOS: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										Web: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+									},
+								},
+							},
+							CustomConfig: map[string]string{
+								"key0": "__Value__",
+							},
+							Layout: types.Layout("BOTTOM_BANNER"),
+						},
+					},
+					Schedule: &types.Schedule{
+						EndTime: ptr.String("__EndTime__"),
+						EventFilter: &types.CampaignEventFilter{
+							Dimensions: &types.EventDimensions{
+								Attributes: map[string]types.AttributeDimension{
+									"key0": {
+										AttributeType: types.AttributeType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								EventType: &types.SetDimension{
+									DimensionType: types.DimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Metrics: map[string]types.MetricDimension{
+									"key0": {
+										ComparisonOperator: ptr.String("__ComparisonOperator__"),
+										Value:              ptr.Float64(1.0),
+									},
+								},
+							},
+							FilterType: types.FilterType("SYSTEM"),
+						},
+						Frequency:   types.Frequency("ONCE"),
+						IsLocalTime: ptr.Bool(true),
+						QuietTime: &types.QuietTime{
+							End:   ptr.String("__End__"),
+							Start: ptr.String("__Start__"),
+						},
+						StartTime: ptr.String("__StartTime__"),
+						Timezone:  ptr.String("__Timezone__"),
+					},
+					SizePercent: ptr.Int32(1),
+					TemplateConfiguration: &types.TemplateConfiguration{
+						EmailTemplate: &types.Template{
+							Name:    ptr.String("__Name__"),
+							Version: ptr.String("__Version__"),
+						},
+						PushTemplate: &types.Template{
+							Name:    ptr.String("__Name__"),
+							Version: ptr.String("__Version__"),
+						},
+						SMSTemplate: &types.Template{
+							Name:    ptr.String("__Name__"),
+							Version: ptr.String("__Version__"),
+						},
+						VoiceTemplate: &types.Template{
+							Name:    ptr.String("__Name__"),
+							Version: ptr.String("__Version__"),
+						},
+						InAppTemplate: &types.Template{
+							Name:    ptr.String("__Name__"),
+							Version: ptr.String("__Version__"),
+						},
+					},
+					TreatmentDescription: ptr.String("__TreatmentDescription__"),
+					TreatmentName:        ptr.String("__TreatmentName__"),
+				},
+			},
+			CustomDeliveryConfiguration: &types.CustomDeliveryConfiguration{
+				DeliveryUri: ptr.String("__DeliveryUri__"),
+				EndpointTypes: []types.EndpointTypesElement{
+					types.EndpointTypesElement("PUSH"),
+					types.EndpointTypesElement("PUSH"),
+				},
+			},
+			Description:    ptr.String("__Description__"),
+			HoldoutPercent: ptr.Int32(1),
+			Hook: &types.CampaignHook{
+				LambdaFunctionName: ptr.String("__LambdaFunctionName__"),
+				Mode:               types.Mode("DELIVERY"),
+				WebUrl:             ptr.String("__WebUrl__"),
+			},
+			IsPaused: ptr.Bool(true),
+			Limits: &types.CampaignLimits{
+				Daily:             ptr.Int32(1),
+				MaximumDuration:   ptr.Int32(1),
+				MessagesPerSecond: ptr.Int32(1),
+				Total:             ptr.Int32(1),
+				Session:           ptr.Int32(1),
+			},
+			MessageConfiguration: &types.MessageConfiguration{
+				ADMMessage: &types.Message{
+					Action:            types.Action("OPEN_APP"),
+					Body:              ptr.String("__Body__"),
+					ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+					ImageSmallIconUrl: ptr.String("__ImageSmallIconUrl__"),
+					ImageUrl:          ptr.String("__ImageUrl__"),
+					JsonBody:          ptr.String("__JsonBody__"),
+					MediaUrl:          ptr.String("__MediaUrl__"),
+					RawContent:        ptr.String("__RawContent__"),
+					SilentPush:        ptr.Bool(true),
+					TimeToLive:        ptr.Int32(1),
+					Title:             ptr.String("__Title__"),
+					Url:               ptr.String("__Url__"),
+				},
+				APNSMessage: &types.Message{
+					Action:            types.Action("OPEN_APP"),
+					Body:              ptr.String("__Body__"),
+					ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+					ImageSmallIconUrl: ptr.String("__ImageSmallIconUrl__"),
+					ImageUrl:          ptr.String("__ImageUrl__"),
+					JsonBody:          ptr.String("__JsonBody__"),
+					MediaUrl:          ptr.String("__MediaUrl__"),
+					RawContent:        ptr.String("__RawContent__"),
+					SilentPush:        ptr.Bool(true),
+					TimeToLive:        ptr.Int32(1),
+					Title:             ptr.String("__Title__"),
+					Url:               ptr.String("__Url__"),
+				},
+				BaiduMessage: &types.Message{
+					Action:            types.Action("OPEN_APP"),
+					Body:              ptr.String("__Body__"),
+					ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+					ImageSmallIconUrl: ptr.String("__ImageSmallIconUrl__"),
+					ImageUrl:          ptr.String("__ImageUrl__"),
+					JsonBody:          ptr.String("__JsonBody__"),
+					MediaUrl:          ptr.String("__MediaUrl__"),
+					RawContent:        ptr.String("__RawContent__"),
+					SilentPush:        ptr.Bool(true),
+					TimeToLive:        ptr.Int32(1),
+					Title:             ptr.String("__Title__"),
+					Url:               ptr.String("__Url__"),
+				},
+				CustomMessage: &types.CampaignCustomMessage{
+					Data: ptr.String("__Data__"),
+				},
+				DefaultMessage: &types.Message{
+					Action:            types.Action("OPEN_APP"),
+					Body:              ptr.String("__Body__"),
+					ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+					ImageSmallIconUrl: ptr.String("__ImageSmallIconUrl__"),
+					ImageUrl:          ptr.String("__ImageUrl__"),
+					JsonBody:          ptr.String("__JsonBody__"),
+					MediaUrl:          ptr.String("__MediaUrl__"),
+					RawContent:        ptr.String("__RawContent__"),
+					SilentPush:        ptr.Bool(true),
+					TimeToLive:        ptr.Int32(1),
+					Title:             ptr.String("__Title__"),
+					Url:               ptr.String("__Url__"),
+				},
+				EmailMessage: &types.CampaignEmailMessage{
+					Body:        ptr.String("__Body__"),
+					FromAddress: ptr.String("__FromAddress__"),
+					Headers: []types.MessageHeader{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					HtmlBody: ptr.String("__HtmlBody__"),
+					Title:    ptr.String("__Title__"),
+				},
+				GCMMessage: &types.Message{
+					Action:            types.Action("OPEN_APP"),
+					Body:              ptr.String("__Body__"),
+					ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+					ImageSmallIconUrl: ptr.String("__ImageSmallIconUrl__"),
+					ImageUrl:          ptr.String("__ImageUrl__"),
+					JsonBody:          ptr.String("__JsonBody__"),
+					MediaUrl:          ptr.String("__MediaUrl__"),
+					RawContent:        ptr.String("__RawContent__"),
+					SilentPush:        ptr.Bool(true),
+					TimeToLive:        ptr.Int32(1),
+					Title:             ptr.String("__Title__"),
+					Url:               ptr.String("__Url__"),
+				},
+				SMSMessage: &types.CampaignSmsMessage{
+					Body:              ptr.String("__Body__"),
+					MessageType:       types.MessageType("TRANSACTIONAL"),
+					OriginationNumber: ptr.String("__OriginationNumber__"),
+					SenderId:          ptr.String("__SenderId__"),
+					EntityId:          ptr.String("__EntityId__"),
+					TemplateId:        ptr.String("__TemplateId__"),
+				},
+				InAppMessage: &types.CampaignInAppMessage{
+					Body: ptr.String("__Body__"),
+					Content: []types.InAppMessageContent{
+						{
+							BackgroundColor: ptr.String("__BackgroundColor__"),
+							BodyConfig: &types.InAppMessageBodyConfig{
+								Alignment: types.Alignment("LEFT"),
+								Body:      ptr.String("__Body__"),
+								TextColor: ptr.String("__TextColor__"),
+							},
+							HeaderConfig: &types.InAppMessageHeaderConfig{
+								Alignment: types.Alignment("LEFT"),
+								Header:    ptr.String("__Header__"),
+								TextColor: ptr.String("__TextColor__"),
+							},
+							ImageUrl: ptr.String("__ImageUrl__"),
+							PrimaryBtn: &types.InAppMessageButton{
+								Android: &types.OverrideButtonConfiguration{
+									ButtonAction: types.ButtonAction("LINK"),
+									Link:         ptr.String("__Link__"),
+								},
+								DefaultConfig: &types.DefaultButtonConfiguration{
+									BackgroundColor: ptr.String("__BackgroundColor__"),
+									BorderRadius:    ptr.Int32(1),
+									ButtonAction:    types.ButtonAction("LINK"),
+									Link:            ptr.String("__Link__"),
+									Text:            ptr.String("__Text__"),
+									TextColor:       ptr.String("__TextColor__"),
+								},
+								IOS: &types.OverrideButtonConfiguration{
+									ButtonAction: types.ButtonAction("LINK"),
+									Link:         ptr.String("__Link__"),
+								},
+								Web: &types.OverrideButtonConfiguration{
+									ButtonAction: types.ButtonAction("LINK"),
+									Link:         ptr.String("__Link__"),
+								},
+							},
+							SecondaryBtn: &types.InAppMessageButton{
+								Android: &types.OverrideButtonConfiguration{
+									ButtonAction: types.ButtonAction("LINK"),
+									Link:         ptr.String("__Link__"),
+								},
+								DefaultConfig: &types.DefaultButtonConfiguration{
+									BackgroundColor: ptr.String("__BackgroundColor__"),
+									BorderRadius:    ptr.Int32(1),
+									ButtonAction:    types.ButtonAction("LINK"),
+									Link:            ptr.String("__Link__"),
+									Text:            ptr.String("__Text__"),
+									TextColor:       ptr.String("__TextColor__"),
+								},
+								IOS: &types.OverrideButtonConfiguration{
+									ButtonAction: types.ButtonAction("LINK"),
+									Link:         ptr.String("__Link__"),
+								},
+								Web: &types.OverrideButtonConfiguration{
+									ButtonAction: types.ButtonAction("LINK"),
+									Link:         ptr.String("__Link__"),
+								},
+							},
+						},
+						{
+							BackgroundColor: ptr.String("__BackgroundColor__"),
+							BodyConfig: &types.InAppMessageBodyConfig{
+								Alignment: types.Alignment("LEFT"),
+								Body:      ptr.String("__Body__"),
+								TextColor: ptr.String("__TextColor__"),
+							},
+							HeaderConfig: &types.InAppMessageHeaderConfig{
+								Alignment: types.Alignment("LEFT"),
+								Header:    ptr.String("__Header__"),
+								TextColor: ptr.String("__TextColor__"),
+							},
+							ImageUrl: ptr.String("__ImageUrl__"),
+							PrimaryBtn: &types.InAppMessageButton{
+								Android: &types.OverrideButtonConfiguration{
+									ButtonAction: types.ButtonAction("LINK"),
+									Link:         ptr.String("__Link__"),
+								},
+								DefaultConfig: &types.DefaultButtonConfiguration{
+									BackgroundColor: ptr.String("__BackgroundColor__"),
+									BorderRadius:    ptr.Int32(1),
+									ButtonAction:    types.ButtonAction("LINK"),
+									Link:            ptr.String("__Link__"),
+									Text:            ptr.String("__Text__"),
+									TextColor:       ptr.String("__TextColor__"),
+								},
+								IOS: &types.OverrideButtonConfiguration{
+									ButtonAction: types.ButtonAction("LINK"),
+									Link:         ptr.String("__Link__"),
+								},
+								Web: &types.OverrideButtonConfiguration{
+									ButtonAction: types.ButtonAction("LINK"),
+									Link:         ptr.String("__Link__"),
+								},
+							},
+							SecondaryBtn: &types.InAppMessageButton{
+								Android: &types.OverrideButtonConfiguration{
+									ButtonAction: types.ButtonAction("LINK"),
+									Link:         ptr.String("__Link__"),
+								},
+								DefaultConfig: &types.DefaultButtonConfiguration{
+									BackgroundColor: ptr.String("__BackgroundColor__"),
+									BorderRadius:    ptr.Int32(1),
+									ButtonAction:    types.ButtonAction("LINK"),
+									Link:            ptr.String("__Link__"),
+									Text:            ptr.String("__Text__"),
+									TextColor:       ptr.String("__TextColor__"),
+								},
+								IOS: &types.OverrideButtonConfiguration{
+									ButtonAction: types.ButtonAction("LINK"),
+									Link:         ptr.String("__Link__"),
+								},
+								Web: &types.OverrideButtonConfiguration{
+									ButtonAction: types.ButtonAction("LINK"),
+									Link:         ptr.String("__Link__"),
+								},
+							},
+						},
+					},
+					CustomConfig: map[string]string{
+						"key0": "__Value__",
+					},
+					Layout: types.Layout("BOTTOM_BANNER"),
+				},
+			},
+			Name: ptr.String("__Name__"),
+			Schedule: &types.Schedule{
+				EndTime: ptr.String("__EndTime__"),
+				EventFilter: &types.CampaignEventFilter{
+					Dimensions: &types.EventDimensions{
+						Attributes: map[string]types.AttributeDimension{
+							"key0": {
+								AttributeType: types.AttributeType("INCLUSIVE"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						EventType: &types.SetDimension{
+							DimensionType: types.DimensionType("INCLUSIVE"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Metrics: map[string]types.MetricDimension{
+							"key0": {
+								ComparisonOperator: ptr.String("__ComparisonOperator__"),
+								Value:              ptr.Float64(1.0),
+							},
+						},
+					},
+					FilterType: types.FilterType("SYSTEM"),
+				},
+				Frequency:   types.Frequency("ONCE"),
+				IsLocalTime: ptr.Bool(true),
+				QuietTime: &types.QuietTime{
+					End:   ptr.String("__End__"),
+					Start: ptr.String("__Start__"),
+				},
+				StartTime: ptr.String("__StartTime__"),
+				Timezone:  ptr.String("__Timezone__"),
+			},
+			SegmentId:      ptr.String("__SegmentId__"),
+			SegmentVersion: ptr.Int32(1),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+			TemplateConfiguration: &types.TemplateConfiguration{
+				EmailTemplate: &types.Template{
+					Name:    ptr.String("__Name__"),
+					Version: ptr.String("__Version__"),
+				},
+				PushTemplate: &types.Template{
+					Name:    ptr.String("__Name__"),
+					Version: ptr.String("__Version__"),
+				},
+				SMSTemplate: &types.Template{
+					Name:    ptr.String("__Name__"),
+					Version: ptr.String("__Version__"),
+				},
+				VoiceTemplate: &types.Template{
+					Name:    ptr.String("__Name__"),
+					Version: ptr.String("__Version__"),
+				},
+				InAppTemplate: &types.Template{
+					Name:    ptr.String("__Name__"),
+					Version: ptr.String("__Version__"),
+				},
+			},
+			TreatmentDescription: ptr.String("__TreatmentDescription__"),
+			TreatmentName:        ptr.String("__TreatmentName__"),
+			Priority:             ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1103,7 +2023,30 @@ func TestCheckResponseSnapshot_CreateEmailTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEmailTemplate(context.Background(), &CreateEmailTemplateInput{})
+	got, err := svc.CreateEmailTemplate(context.Background(), &CreateEmailTemplateInput{
+		EmailTemplateRequest: &types.EmailTemplateRequest{
+			DefaultSubstitutions: ptr.String("__DefaultSubstitutions__"),
+			HtmlPart:             ptr.String("__HtmlPart__"),
+			RecommenderId:        ptr.String("__RecommenderId__"),
+			Subject:              ptr.String("__Subject__"),
+			Headers: []types.MessageHeader{
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+			TemplateDescription: ptr.String("__TemplateDescription__"),
+			TextPart:            ptr.String("__TextPart__"),
+		},
+		TemplateName: ptr.String("__TemplateName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1146,7 +2089,15 @@ func TestCheckResponseSnapshot_CreateExportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateExportJob(context.Background(), &CreateExportJobInput{})
+	got, err := svc.CreateExportJob(context.Background(), &CreateExportJobInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		ExportJobRequest: &types.ExportJobRequest{
+			RoleArn:        ptr.String("__RoleArn__"),
+			S3UrlPrefix:    ptr.String("__S3UrlPrefix__"),
+			SegmentId:      ptr.String("__SegmentId__"),
+			SegmentVersion: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1193,7 +2144,19 @@ func TestCheckResponseSnapshot_CreateImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateImportJob(context.Background(), &CreateImportJobInput{})
+	got, err := svc.CreateImportJob(context.Background(), &CreateImportJobInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		ImportJobRequest: &types.ImportJobRequest{
+			DefineSegment:     ptr.Bool(true),
+			ExternalId:        ptr.String("__ExternalId__"),
+			Format:            types.Format("CSV"),
+			RegisterEndpoints: ptr.Bool(true),
+			RoleArn:           ptr.String("__RoleArn__"),
+			S3Url:             ptr.String("__S3Url__"),
+			SegmentId:         ptr.String("__SegmentId__"),
+			SegmentName:       ptr.String("__SegmentName__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1218,7 +2181,137 @@ func TestCheckResponseSnapshot_CreateInAppTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateInAppTemplate(context.Background(), &CreateInAppTemplateInput{})
+	got, err := svc.CreateInAppTemplate(context.Background(), &CreateInAppTemplateInput{
+		InAppTemplateRequest: &types.InAppTemplateRequest{
+			Content: []types.InAppMessageContent{
+				{
+					BackgroundColor: ptr.String("__BackgroundColor__"),
+					BodyConfig: &types.InAppMessageBodyConfig{
+						Alignment: types.Alignment("LEFT"),
+						Body:      ptr.String("__Body__"),
+						TextColor: ptr.String("__TextColor__"),
+					},
+					HeaderConfig: &types.InAppMessageHeaderConfig{
+						Alignment: types.Alignment("LEFT"),
+						Header:    ptr.String("__Header__"),
+						TextColor: ptr.String("__TextColor__"),
+					},
+					ImageUrl: ptr.String("__ImageUrl__"),
+					PrimaryBtn: &types.InAppMessageButton{
+						Android: &types.OverrideButtonConfiguration{
+							ButtonAction: types.ButtonAction("LINK"),
+							Link:         ptr.String("__Link__"),
+						},
+						DefaultConfig: &types.DefaultButtonConfiguration{
+							BackgroundColor: ptr.String("__BackgroundColor__"),
+							BorderRadius:    ptr.Int32(1),
+							ButtonAction:    types.ButtonAction("LINK"),
+							Link:            ptr.String("__Link__"),
+							Text:            ptr.String("__Text__"),
+							TextColor:       ptr.String("__TextColor__"),
+						},
+						IOS: &types.OverrideButtonConfiguration{
+							ButtonAction: types.ButtonAction("LINK"),
+							Link:         ptr.String("__Link__"),
+						},
+						Web: &types.OverrideButtonConfiguration{
+							ButtonAction: types.ButtonAction("LINK"),
+							Link:         ptr.String("__Link__"),
+						},
+					},
+					SecondaryBtn: &types.InAppMessageButton{
+						Android: &types.OverrideButtonConfiguration{
+							ButtonAction: types.ButtonAction("LINK"),
+							Link:         ptr.String("__Link__"),
+						},
+						DefaultConfig: &types.DefaultButtonConfiguration{
+							BackgroundColor: ptr.String("__BackgroundColor__"),
+							BorderRadius:    ptr.Int32(1),
+							ButtonAction:    types.ButtonAction("LINK"),
+							Link:            ptr.String("__Link__"),
+							Text:            ptr.String("__Text__"),
+							TextColor:       ptr.String("__TextColor__"),
+						},
+						IOS: &types.OverrideButtonConfiguration{
+							ButtonAction: types.ButtonAction("LINK"),
+							Link:         ptr.String("__Link__"),
+						},
+						Web: &types.OverrideButtonConfiguration{
+							ButtonAction: types.ButtonAction("LINK"),
+							Link:         ptr.String("__Link__"),
+						},
+					},
+				},
+				{
+					BackgroundColor: ptr.String("__BackgroundColor__"),
+					BodyConfig: &types.InAppMessageBodyConfig{
+						Alignment: types.Alignment("LEFT"),
+						Body:      ptr.String("__Body__"),
+						TextColor: ptr.String("__TextColor__"),
+					},
+					HeaderConfig: &types.InAppMessageHeaderConfig{
+						Alignment: types.Alignment("LEFT"),
+						Header:    ptr.String("__Header__"),
+						TextColor: ptr.String("__TextColor__"),
+					},
+					ImageUrl: ptr.String("__ImageUrl__"),
+					PrimaryBtn: &types.InAppMessageButton{
+						Android: &types.OverrideButtonConfiguration{
+							ButtonAction: types.ButtonAction("LINK"),
+							Link:         ptr.String("__Link__"),
+						},
+						DefaultConfig: &types.DefaultButtonConfiguration{
+							BackgroundColor: ptr.String("__BackgroundColor__"),
+							BorderRadius:    ptr.Int32(1),
+							ButtonAction:    types.ButtonAction("LINK"),
+							Link:            ptr.String("__Link__"),
+							Text:            ptr.String("__Text__"),
+							TextColor:       ptr.String("__TextColor__"),
+						},
+						IOS: &types.OverrideButtonConfiguration{
+							ButtonAction: types.ButtonAction("LINK"),
+							Link:         ptr.String("__Link__"),
+						},
+						Web: &types.OverrideButtonConfiguration{
+							ButtonAction: types.ButtonAction("LINK"),
+							Link:         ptr.String("__Link__"),
+						},
+					},
+					SecondaryBtn: &types.InAppMessageButton{
+						Android: &types.OverrideButtonConfiguration{
+							ButtonAction: types.ButtonAction("LINK"),
+							Link:         ptr.String("__Link__"),
+						},
+						DefaultConfig: &types.DefaultButtonConfiguration{
+							BackgroundColor: ptr.String("__BackgroundColor__"),
+							BorderRadius:    ptr.Int32(1),
+							ButtonAction:    types.ButtonAction("LINK"),
+							Link:            ptr.String("__Link__"),
+							Text:            ptr.String("__Text__"),
+							TextColor:       ptr.String("__TextColor__"),
+						},
+						IOS: &types.OverrideButtonConfiguration{
+							ButtonAction: types.ButtonAction("LINK"),
+							Link:         ptr.String("__Link__"),
+						},
+						Web: &types.OverrideButtonConfiguration{
+							ButtonAction: types.ButtonAction("LINK"),
+							Link:         ptr.String("__Link__"),
+						},
+					},
+				},
+			},
+			CustomConfig: map[string]string{
+				"key0": "__Value__",
+			},
+			Layout: types.Layout("BOTTOM_BANNER"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+			TemplateDescription: ptr.String("__TemplateDescription__"),
+		},
+		TemplateName: ptr.String("__TemplateName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2039,7 +3132,805 @@ func TestCheckResponseSnapshot_CreateJourney(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateJourney(context.Background(), &CreateJourneyInput{})
+	got, err := svc.CreateJourney(context.Background(), &CreateJourneyInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		WriteJourneyRequest: &types.WriteJourneyRequest{
+			Activities: map[string]types.Activity{
+				"key0": {
+					CUSTOM: &types.CustomMessageActivity{
+						DeliveryUri: ptr.String("__DeliveryUri__"),
+						EndpointTypes: []types.EndpointTypesElement{
+							types.EndpointTypesElement("PUSH"),
+							types.EndpointTypesElement("PUSH"),
+						},
+						MessageConfig: &types.JourneyCustomMessage{
+							Data: ptr.String("__Data__"),
+						},
+						NextActivity:    ptr.String("__NextActivity__"),
+						TemplateName:    ptr.String("__TemplateName__"),
+						TemplateVersion: ptr.String("__TemplateVersion__"),
+					},
+					ConditionalSplit: &types.ConditionalSplitActivity{
+						Condition: &types.Condition{
+							Conditions: []types.SimpleCondition{
+								{
+									EventCondition: &types.EventCondition{
+										Dimensions: &types.EventDimensions{
+											Attributes: map[string]types.AttributeDimension{
+												"key0": {
+													AttributeType: types.AttributeType("INCLUSIVE"),
+													Values: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+											},
+											EventType: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Metrics: map[string]types.MetricDimension{
+												"key0": {
+													ComparisonOperator: ptr.String("__ComparisonOperator__"),
+													Value:              ptr.Float64(1.0),
+												},
+											},
+										},
+										MessageActivity: ptr.String("__MessageActivity__"),
+									},
+									SegmentCondition: &types.SegmentCondition{
+										SegmentId: ptr.String("__SegmentId__"),
+									},
+									SegmentDimensions: &types.SegmentDimensions{
+										Attributes: map[string]types.AttributeDimension{
+											"key0": {
+												AttributeType: types.AttributeType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+										Behavior: &types.SegmentBehaviors{
+											Recency: &types.RecencyDimension{
+												Duration:    types.Duration("HR_24"),
+												RecencyType: types.RecencyType("ACTIVE"),
+											},
+										},
+										Demographic: &types.SegmentDemographics{
+											AppVersion: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Channel: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											DeviceType: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Make: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Model: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Platform: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+										Location: &types.SegmentLocation{
+											Country: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											GPSPoint: &types.GPSPointDimension{
+												Coordinates: &types.GPSCoordinates{
+													Latitude:  ptr.Float64(1.0),
+													Longitude: ptr.Float64(1.0),
+												},
+												RangeInKilometers: ptr.Float64(1.0),
+											},
+										},
+										Metrics: map[string]types.MetricDimension{
+											"key0": {
+												ComparisonOperator: ptr.String("__ComparisonOperator__"),
+												Value:              ptr.Float64(1.0),
+											},
+										},
+										UserAttributes: map[string]types.AttributeDimension{
+											"key0": {
+												AttributeType: types.AttributeType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+									},
+								},
+								{
+									EventCondition: &types.EventCondition{
+										Dimensions: &types.EventDimensions{
+											Attributes: map[string]types.AttributeDimension{
+												"key0": {
+													AttributeType: types.AttributeType("INCLUSIVE"),
+													Values: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+											},
+											EventType: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Metrics: map[string]types.MetricDimension{
+												"key0": {
+													ComparisonOperator: ptr.String("__ComparisonOperator__"),
+													Value:              ptr.Float64(1.0),
+												},
+											},
+										},
+										MessageActivity: ptr.String("__MessageActivity__"),
+									},
+									SegmentCondition: &types.SegmentCondition{
+										SegmentId: ptr.String("__SegmentId__"),
+									},
+									SegmentDimensions: &types.SegmentDimensions{
+										Attributes: map[string]types.AttributeDimension{
+											"key0": {
+												AttributeType: types.AttributeType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+										Behavior: &types.SegmentBehaviors{
+											Recency: &types.RecencyDimension{
+												Duration:    types.Duration("HR_24"),
+												RecencyType: types.RecencyType("ACTIVE"),
+											},
+										},
+										Demographic: &types.SegmentDemographics{
+											AppVersion: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Channel: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											DeviceType: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Make: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Model: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Platform: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+										Location: &types.SegmentLocation{
+											Country: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											GPSPoint: &types.GPSPointDimension{
+												Coordinates: &types.GPSCoordinates{
+													Latitude:  ptr.Float64(1.0),
+													Longitude: ptr.Float64(1.0),
+												},
+												RangeInKilometers: ptr.Float64(1.0),
+											},
+										},
+										Metrics: map[string]types.MetricDimension{
+											"key0": {
+												ComparisonOperator: ptr.String("__ComparisonOperator__"),
+												Value:              ptr.Float64(1.0),
+											},
+										},
+										UserAttributes: map[string]types.AttributeDimension{
+											"key0": {
+												AttributeType: types.AttributeType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+									},
+								},
+							},
+							Operator: types.Operator("ALL"),
+						},
+						EvaluationWaitTime: &types.WaitTime{
+							WaitFor:   ptr.String("__WaitFor__"),
+							WaitUntil: ptr.String("__WaitUntil__"),
+						},
+						FalseActivity: ptr.String("__FalseActivity__"),
+						TrueActivity:  ptr.String("__TrueActivity__"),
+					},
+					Description: ptr.String("__Description__"),
+					EMAIL: &types.EmailMessageActivity{
+						MessageConfig: &types.JourneyEmailMessage{
+							FromAddress: ptr.String("__FromAddress__"),
+						},
+						NextActivity:    ptr.String("__NextActivity__"),
+						TemplateName:    ptr.String("__TemplateName__"),
+						TemplateVersion: ptr.String("__TemplateVersion__"),
+					},
+					Holdout: &types.HoldoutActivity{
+						NextActivity: ptr.String("__NextActivity__"),
+						Percentage:   ptr.Int32(1),
+					},
+					MultiCondition: &types.MultiConditionalSplitActivity{
+						Branches: []types.MultiConditionalBranch{
+							{
+								Condition: &types.SimpleCondition{
+									EventCondition: &types.EventCondition{
+										Dimensions: &types.EventDimensions{
+											Attributes: map[string]types.AttributeDimension{
+												"key0": {
+													AttributeType: types.AttributeType("INCLUSIVE"),
+													Values: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+											},
+											EventType: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Metrics: map[string]types.MetricDimension{
+												"key0": {
+													ComparisonOperator: ptr.String("__ComparisonOperator__"),
+													Value:              ptr.Float64(1.0),
+												},
+											},
+										},
+										MessageActivity: ptr.String("__MessageActivity__"),
+									},
+									SegmentCondition: &types.SegmentCondition{
+										SegmentId: ptr.String("__SegmentId__"),
+									},
+									SegmentDimensions: &types.SegmentDimensions{
+										Attributes: map[string]types.AttributeDimension{
+											"key0": {
+												AttributeType: types.AttributeType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+										Behavior: &types.SegmentBehaviors{
+											Recency: &types.RecencyDimension{
+												Duration:    types.Duration("HR_24"),
+												RecencyType: types.RecencyType("ACTIVE"),
+											},
+										},
+										Demographic: &types.SegmentDemographics{
+											AppVersion: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Channel: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											DeviceType: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Make: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Model: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Platform: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+										Location: &types.SegmentLocation{
+											Country: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											GPSPoint: &types.GPSPointDimension{
+												Coordinates: &types.GPSCoordinates{
+													Latitude:  ptr.Float64(1.0),
+													Longitude: ptr.Float64(1.0),
+												},
+												RangeInKilometers: ptr.Float64(1.0),
+											},
+										},
+										Metrics: map[string]types.MetricDimension{
+											"key0": {
+												ComparisonOperator: ptr.String("__ComparisonOperator__"),
+												Value:              ptr.Float64(1.0),
+											},
+										},
+										UserAttributes: map[string]types.AttributeDimension{
+											"key0": {
+												AttributeType: types.AttributeType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+									},
+								},
+								NextActivity: ptr.String("__NextActivity__"),
+							},
+							{
+								Condition: &types.SimpleCondition{
+									EventCondition: &types.EventCondition{
+										Dimensions: &types.EventDimensions{
+											Attributes: map[string]types.AttributeDimension{
+												"key0": {
+													AttributeType: types.AttributeType("INCLUSIVE"),
+													Values: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+											},
+											EventType: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Metrics: map[string]types.MetricDimension{
+												"key0": {
+													ComparisonOperator: ptr.String("__ComparisonOperator__"),
+													Value:              ptr.Float64(1.0),
+												},
+											},
+										},
+										MessageActivity: ptr.String("__MessageActivity__"),
+									},
+									SegmentCondition: &types.SegmentCondition{
+										SegmentId: ptr.String("__SegmentId__"),
+									},
+									SegmentDimensions: &types.SegmentDimensions{
+										Attributes: map[string]types.AttributeDimension{
+											"key0": {
+												AttributeType: types.AttributeType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+										Behavior: &types.SegmentBehaviors{
+											Recency: &types.RecencyDimension{
+												Duration:    types.Duration("HR_24"),
+												RecencyType: types.RecencyType("ACTIVE"),
+											},
+										},
+										Demographic: &types.SegmentDemographics{
+											AppVersion: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Channel: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											DeviceType: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Make: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Model: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Platform: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+										Location: &types.SegmentLocation{
+											Country: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											GPSPoint: &types.GPSPointDimension{
+												Coordinates: &types.GPSCoordinates{
+													Latitude:  ptr.Float64(1.0),
+													Longitude: ptr.Float64(1.0),
+												},
+												RangeInKilometers: ptr.Float64(1.0),
+											},
+										},
+										Metrics: map[string]types.MetricDimension{
+											"key0": {
+												ComparisonOperator: ptr.String("__ComparisonOperator__"),
+												Value:              ptr.Float64(1.0),
+											},
+										},
+										UserAttributes: map[string]types.AttributeDimension{
+											"key0": {
+												AttributeType: types.AttributeType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+									},
+								},
+								NextActivity: ptr.String("__NextActivity__"),
+							},
+						},
+						DefaultActivity: ptr.String("__DefaultActivity__"),
+						EvaluationWaitTime: &types.WaitTime{
+							WaitFor:   ptr.String("__WaitFor__"),
+							WaitUntil: ptr.String("__WaitUntil__"),
+						},
+					},
+					PUSH: &types.PushMessageActivity{
+						MessageConfig: &types.JourneyPushMessage{
+							TimeToLive: ptr.String("__TimeToLive__"),
+						},
+						NextActivity:    ptr.String("__NextActivity__"),
+						TemplateName:    ptr.String("__TemplateName__"),
+						TemplateVersion: ptr.String("__TemplateVersion__"),
+					},
+					RandomSplit: &types.RandomSplitActivity{
+						Branches: []types.RandomSplitEntry{
+							{
+								NextActivity: ptr.String("__NextActivity__"),
+								Percentage:   ptr.Int32(1),
+							},
+							{
+								NextActivity: ptr.String("__NextActivity__"),
+								Percentage:   ptr.Int32(1),
+							},
+						},
+					},
+					SMS: &types.SMSMessageActivity{
+						MessageConfig: &types.JourneySMSMessage{
+							MessageType:       types.MessageType("TRANSACTIONAL"),
+							OriginationNumber: ptr.String("__OriginationNumber__"),
+							SenderId:          ptr.String("__SenderId__"),
+							EntityId:          ptr.String("__EntityId__"),
+							TemplateId:        ptr.String("__TemplateId__"),
+						},
+						NextActivity:    ptr.String("__NextActivity__"),
+						TemplateName:    ptr.String("__TemplateName__"),
+						TemplateVersion: ptr.String("__TemplateVersion__"),
+					},
+					Wait: &types.WaitActivity{
+						NextActivity: ptr.String("__NextActivity__"),
+						WaitTime: &types.WaitTime{
+							WaitFor:   ptr.String("__WaitFor__"),
+							WaitUntil: ptr.String("__WaitUntil__"),
+						},
+					},
+					ContactCenter: &types.ContactCenterActivity{
+						NextActivity: ptr.String("__NextActivity__"),
+					},
+				},
+			},
+			CreationDate:     ptr.String("__CreationDate__"),
+			LastModifiedDate: ptr.String("__LastModifiedDate__"),
+			Limits: &types.JourneyLimits{
+				DailyCap:                ptr.Int32(1),
+				EndpointReentryCap:      ptr.Int32(1),
+				MessagesPerSecond:       ptr.Int32(1),
+				EndpointReentryInterval: ptr.String("__EndpointReentryInterval__"),
+				TimeframeCap: &types.JourneyTimeframeCap{
+					Cap:  ptr.Int32(1),
+					Days: ptr.Int32(1),
+				},
+				TotalCap: ptr.Int32(1),
+			},
+			LocalTime: ptr.Bool(true),
+			Name:      ptr.String("__Name__"),
+			QuietTime: &types.QuietTime{
+				End:   ptr.String("__End__"),
+				Start: ptr.String("__Start__"),
+			},
+			RefreshFrequency: ptr.String("__RefreshFrequency__"),
+			Schedule: &types.JourneySchedule{
+				EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Timezone:  ptr.String("__Timezone__"),
+			},
+			StartActivity: ptr.String("__StartActivity__"),
+			StartCondition: &types.StartCondition{
+				Description: ptr.String("__Description__"),
+				EventStartCondition: &types.EventStartCondition{
+					EventFilter: &types.EventFilter{
+						Dimensions: &types.EventDimensions{
+							Attributes: map[string]types.AttributeDimension{
+								"key0": {
+									AttributeType: types.AttributeType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							EventType: &types.SetDimension{
+								DimensionType: types.DimensionType("INCLUSIVE"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							Metrics: map[string]types.MetricDimension{
+								"key0": {
+									ComparisonOperator: ptr.String("__ComparisonOperator__"),
+									Value:              ptr.Float64(1.0),
+								},
+							},
+						},
+						FilterType: types.FilterType("SYSTEM"),
+					},
+					SegmentId: ptr.String("__SegmentId__"),
+				},
+				SegmentStartCondition: &types.SegmentCondition{
+					SegmentId: ptr.String("__SegmentId__"),
+				},
+			},
+			State:                  types.State("DRAFT"),
+			WaitForQuietTime:       ptr.Bool(true),
+			RefreshOnSegmentUpdate: ptr.Bool(true),
+			JourneyChannelSettings: &types.JourneyChannelSettings{
+				ConnectCampaignArn:              ptr.String("__ConnectCampaignArn__"),
+				ConnectCampaignExecutionRoleArn: ptr.String("__ConnectCampaignExecutionRoleArn__"),
+			},
+			SendingSchedule: ptr.Bool(true),
+			OpenHours: &types.OpenHours{
+				EMAIL: map[string][]types.OpenHoursRule{
+					"key0": {
+						{
+							StartTime: ptr.String("__StartTime__"),
+							EndTime:   ptr.String("__EndTime__"),
+						},
+						{
+							StartTime: ptr.String("__StartTime__"),
+							EndTime:   ptr.String("__EndTime__"),
+						},
+					},
+				},
+				SMS: map[string][]types.OpenHoursRule{
+					"key0": {
+						{
+							StartTime: ptr.String("__StartTime__"),
+							EndTime:   ptr.String("__EndTime__"),
+						},
+						{
+							StartTime: ptr.String("__StartTime__"),
+							EndTime:   ptr.String("__EndTime__"),
+						},
+					},
+				},
+				PUSH: map[string][]types.OpenHoursRule{
+					"key0": {
+						{
+							StartTime: ptr.String("__StartTime__"),
+							EndTime:   ptr.String("__EndTime__"),
+						},
+						{
+							StartTime: ptr.String("__StartTime__"),
+							EndTime:   ptr.String("__EndTime__"),
+						},
+					},
+				},
+				VOICE: map[string][]types.OpenHoursRule{
+					"key0": {
+						{
+							StartTime: ptr.String("__StartTime__"),
+							EndTime:   ptr.String("__EndTime__"),
+						},
+						{
+							StartTime: ptr.String("__StartTime__"),
+							EndTime:   ptr.String("__EndTime__"),
+						},
+					},
+				},
+				CUSTOM: map[string][]types.OpenHoursRule{
+					"key0": {
+						{
+							StartTime: ptr.String("__StartTime__"),
+							EndTime:   ptr.String("__EndTime__"),
+						},
+						{
+							StartTime: ptr.String("__StartTime__"),
+							EndTime:   ptr.String("__EndTime__"),
+						},
+					},
+				},
+			},
+			ClosedDays: &types.ClosedDays{
+				EMAIL: []types.ClosedDaysRule{
+					{
+						Name:          ptr.String("__Name__"),
+						StartDateTime: ptr.String("__StartDateTime__"),
+						EndDateTime:   ptr.String("__EndDateTime__"),
+					},
+					{
+						Name:          ptr.String("__Name__"),
+						StartDateTime: ptr.String("__StartDateTime__"),
+						EndDateTime:   ptr.String("__EndDateTime__"),
+					},
+				},
+				SMS: []types.ClosedDaysRule{
+					{
+						Name:          ptr.String("__Name__"),
+						StartDateTime: ptr.String("__StartDateTime__"),
+						EndDateTime:   ptr.String("__EndDateTime__"),
+					},
+					{
+						Name:          ptr.String("__Name__"),
+						StartDateTime: ptr.String("__StartDateTime__"),
+						EndDateTime:   ptr.String("__EndDateTime__"),
+					},
+				},
+				PUSH: []types.ClosedDaysRule{
+					{
+						Name:          ptr.String("__Name__"),
+						StartDateTime: ptr.String("__StartDateTime__"),
+						EndDateTime:   ptr.String("__EndDateTime__"),
+					},
+					{
+						Name:          ptr.String("__Name__"),
+						StartDateTime: ptr.String("__StartDateTime__"),
+						EndDateTime:   ptr.String("__EndDateTime__"),
+					},
+				},
+				VOICE: []types.ClosedDaysRule{
+					{
+						Name:          ptr.String("__Name__"),
+						StartDateTime: ptr.String("__StartDateTime__"),
+						EndDateTime:   ptr.String("__EndDateTime__"),
+					},
+					{
+						Name:          ptr.String("__Name__"),
+						StartDateTime: ptr.String("__StartDateTime__"),
+						EndDateTime:   ptr.String("__EndDateTime__"),
+					},
+				},
+				CUSTOM: []types.ClosedDaysRule{
+					{
+						Name:          ptr.String("__Name__"),
+						StartDateTime: ptr.String("__StartDateTime__"),
+						EndDateTime:   ptr.String("__EndDateTime__"),
+					},
+					{
+						Name:          ptr.String("__Name__"),
+						StartDateTime: ptr.String("__StartDateTime__"),
+						EndDateTime:   ptr.String("__EndDateTime__"),
+					},
+				},
+			},
+			TimezoneEstimationMethods: []types.TimezoneEstimationMethodsElement{
+				types.TimezoneEstimationMethodsElement("PHONE_NUMBER"),
+				types.TimezoneEstimationMethodsElement("PHONE_NUMBER"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2064,7 +3955,66 @@ func TestCheckResponseSnapshot_CreatePushTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePushTemplate(context.Background(), &CreatePushTemplateInput{})
+	got, err := svc.CreatePushTemplate(context.Background(), &CreatePushTemplateInput{
+		PushNotificationTemplateRequest: &types.PushNotificationTemplateRequest{
+			ADM: &types.AndroidPushNotificationTemplate{
+				Action:            types.Action("OPEN_APP"),
+				Body:              ptr.String("__Body__"),
+				ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+				ImageUrl:          ptr.String("__ImageUrl__"),
+				RawContent:        ptr.String("__RawContent__"),
+				SmallImageIconUrl: ptr.String("__SmallImageIconUrl__"),
+				Sound:             ptr.String("__Sound__"),
+				Title:             ptr.String("__Title__"),
+				Url:               ptr.String("__Url__"),
+			},
+			APNS: &types.APNSPushNotificationTemplate{
+				Action:     types.Action("OPEN_APP"),
+				Body:       ptr.String("__Body__"),
+				MediaUrl:   ptr.String("__MediaUrl__"),
+				RawContent: ptr.String("__RawContent__"),
+				Sound:      ptr.String("__Sound__"),
+				Title:      ptr.String("__Title__"),
+				Url:        ptr.String("__Url__"),
+			},
+			Baidu: &types.AndroidPushNotificationTemplate{
+				Action:            types.Action("OPEN_APP"),
+				Body:              ptr.String("__Body__"),
+				ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+				ImageUrl:          ptr.String("__ImageUrl__"),
+				RawContent:        ptr.String("__RawContent__"),
+				SmallImageIconUrl: ptr.String("__SmallImageIconUrl__"),
+				Sound:             ptr.String("__Sound__"),
+				Title:             ptr.String("__Title__"),
+				Url:               ptr.String("__Url__"),
+			},
+			Default: &types.DefaultPushNotificationTemplate{
+				Action: types.Action("OPEN_APP"),
+				Body:   ptr.String("__Body__"),
+				Sound:  ptr.String("__Sound__"),
+				Title:  ptr.String("__Title__"),
+				Url:    ptr.String("__Url__"),
+			},
+			DefaultSubstitutions: ptr.String("__DefaultSubstitutions__"),
+			GCM: &types.AndroidPushNotificationTemplate{
+				Action:            types.Action("OPEN_APP"),
+				Body:              ptr.String("__Body__"),
+				ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+				ImageUrl:          ptr.String("__ImageUrl__"),
+				RawContent:        ptr.String("__RawContent__"),
+				SmallImageIconUrl: ptr.String("__SmallImageIconUrl__"),
+				Sound:             ptr.String("__Sound__"),
+				Title:             ptr.String("__Title__"),
+				Url:               ptr.String("__Url__"),
+			},
+			RecommenderId: ptr.String("__RecommenderId__"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+			TemplateDescription: ptr.String("__TemplateDescription__"),
+		},
+		TemplateName: ptr.String("__TemplateName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2100,7 +4050,21 @@ func TestCheckResponseSnapshot_CreateRecommenderConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRecommenderConfiguration(context.Background(), &CreateRecommenderConfigurationInput{})
+	got, err := svc.CreateRecommenderConfiguration(context.Background(), &CreateRecommenderConfigurationInput{
+		CreateRecommenderConfiguration: &types.CreateRecommenderConfigurationShape{
+			Attributes: map[string]string{
+				"key0": "__Value__",
+			},
+			Description:                   ptr.String("__Description__"),
+			Name:                          ptr.String("__Name__"),
+			RecommendationProviderIdType:  ptr.String("__RecommendationProviderIdType__"),
+			RecommendationProviderRoleArn: ptr.String("__RecommendationProviderRoleArn__"),
+			RecommendationProviderUri:     ptr.String("__RecommendationProviderUri__"),
+			RecommendationTransformerUri:  ptr.String("__RecommendationTransformerUri__"),
+			RecommendationsDisplayName:    ptr.String("__RecommendationsDisplayName__"),
+			RecommendationsPerMessage:     ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2640,7 +4604,512 @@ func TestCheckResponseSnapshot_CreateSegment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSegment(context.Background(), &CreateSegmentInput{})
+	got, err := svc.CreateSegment(context.Background(), &CreateSegmentInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		WriteSegmentRequest: &types.WriteSegmentRequest{
+			Dimensions: &types.SegmentDimensions{
+				Attributes: map[string]types.AttributeDimension{
+					"key0": {
+						AttributeType: types.AttributeType("INCLUSIVE"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				Behavior: &types.SegmentBehaviors{
+					Recency: &types.RecencyDimension{
+						Duration:    types.Duration("HR_24"),
+						RecencyType: types.RecencyType("ACTIVE"),
+					},
+				},
+				Demographic: &types.SegmentDemographics{
+					AppVersion: &types.SetDimension{
+						DimensionType: types.DimensionType("INCLUSIVE"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Channel: &types.SetDimension{
+						DimensionType: types.DimensionType("INCLUSIVE"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					DeviceType: &types.SetDimension{
+						DimensionType: types.DimensionType("INCLUSIVE"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Make: &types.SetDimension{
+						DimensionType: types.DimensionType("INCLUSIVE"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Model: &types.SetDimension{
+						DimensionType: types.DimensionType("INCLUSIVE"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Platform: &types.SetDimension{
+						DimensionType: types.DimensionType("INCLUSIVE"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				Location: &types.SegmentLocation{
+					Country: &types.SetDimension{
+						DimensionType: types.DimensionType("INCLUSIVE"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					GPSPoint: &types.GPSPointDimension{
+						Coordinates: &types.GPSCoordinates{
+							Latitude:  ptr.Float64(1.0),
+							Longitude: ptr.Float64(1.0),
+						},
+						RangeInKilometers: ptr.Float64(1.0),
+					},
+				},
+				Metrics: map[string]types.MetricDimension{
+					"key0": {
+						ComparisonOperator: ptr.String("__ComparisonOperator__"),
+						Value:              ptr.Float64(1.0),
+					},
+				},
+				UserAttributes: map[string]types.AttributeDimension{
+					"key0": {
+						AttributeType: types.AttributeType("INCLUSIVE"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			Name: ptr.String("__Name__"),
+			SegmentGroups: &types.SegmentGroupList{
+				Groups: []types.SegmentGroup{
+					{
+						Dimensions: []types.SegmentDimensions{
+							{
+								Attributes: map[string]types.AttributeDimension{
+									"key0": {
+										AttributeType: types.AttributeType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								Behavior: &types.SegmentBehaviors{
+									Recency: &types.RecencyDimension{
+										Duration:    types.Duration("HR_24"),
+										RecencyType: types.RecencyType("ACTIVE"),
+									},
+								},
+								Demographic: &types.SegmentDemographics{
+									AppVersion: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Channel: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									DeviceType: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Make: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Model: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Platform: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								Location: &types.SegmentLocation{
+									Country: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									GPSPoint: &types.GPSPointDimension{
+										Coordinates: &types.GPSCoordinates{
+											Latitude:  ptr.Float64(1.0),
+											Longitude: ptr.Float64(1.0),
+										},
+										RangeInKilometers: ptr.Float64(1.0),
+									},
+								},
+								Metrics: map[string]types.MetricDimension{
+									"key0": {
+										ComparisonOperator: ptr.String("__ComparisonOperator__"),
+										Value:              ptr.Float64(1.0),
+									},
+								},
+								UserAttributes: map[string]types.AttributeDimension{
+									"key0": {
+										AttributeType: types.AttributeType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+							},
+							{
+								Attributes: map[string]types.AttributeDimension{
+									"key0": {
+										AttributeType: types.AttributeType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								Behavior: &types.SegmentBehaviors{
+									Recency: &types.RecencyDimension{
+										Duration:    types.Duration("HR_24"),
+										RecencyType: types.RecencyType("ACTIVE"),
+									},
+								},
+								Demographic: &types.SegmentDemographics{
+									AppVersion: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Channel: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									DeviceType: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Make: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Model: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Platform: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								Location: &types.SegmentLocation{
+									Country: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									GPSPoint: &types.GPSPointDimension{
+										Coordinates: &types.GPSCoordinates{
+											Latitude:  ptr.Float64(1.0),
+											Longitude: ptr.Float64(1.0),
+										},
+										RangeInKilometers: ptr.Float64(1.0),
+									},
+								},
+								Metrics: map[string]types.MetricDimension{
+									"key0": {
+										ComparisonOperator: ptr.String("__ComparisonOperator__"),
+										Value:              ptr.Float64(1.0),
+									},
+								},
+								UserAttributes: map[string]types.AttributeDimension{
+									"key0": {
+										AttributeType: types.AttributeType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+							},
+						},
+						SourceSegments: []types.SegmentReference{
+							{
+								Id:      ptr.String("__Id__"),
+								Version: ptr.Int32(1),
+							},
+							{
+								Id:      ptr.String("__Id__"),
+								Version: ptr.Int32(1),
+							},
+						},
+						SourceType: types.SourceType("ALL"),
+						Type:       types.Type("ALL"),
+					},
+					{
+						Dimensions: []types.SegmentDimensions{
+							{
+								Attributes: map[string]types.AttributeDimension{
+									"key0": {
+										AttributeType: types.AttributeType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								Behavior: &types.SegmentBehaviors{
+									Recency: &types.RecencyDimension{
+										Duration:    types.Duration("HR_24"),
+										RecencyType: types.RecencyType("ACTIVE"),
+									},
+								},
+								Demographic: &types.SegmentDemographics{
+									AppVersion: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Channel: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									DeviceType: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Make: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Model: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Platform: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								Location: &types.SegmentLocation{
+									Country: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									GPSPoint: &types.GPSPointDimension{
+										Coordinates: &types.GPSCoordinates{
+											Latitude:  ptr.Float64(1.0),
+											Longitude: ptr.Float64(1.0),
+										},
+										RangeInKilometers: ptr.Float64(1.0),
+									},
+								},
+								Metrics: map[string]types.MetricDimension{
+									"key0": {
+										ComparisonOperator: ptr.String("__ComparisonOperator__"),
+										Value:              ptr.Float64(1.0),
+									},
+								},
+								UserAttributes: map[string]types.AttributeDimension{
+									"key0": {
+										AttributeType: types.AttributeType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+							},
+							{
+								Attributes: map[string]types.AttributeDimension{
+									"key0": {
+										AttributeType: types.AttributeType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								Behavior: &types.SegmentBehaviors{
+									Recency: &types.RecencyDimension{
+										Duration:    types.Duration("HR_24"),
+										RecencyType: types.RecencyType("ACTIVE"),
+									},
+								},
+								Demographic: &types.SegmentDemographics{
+									AppVersion: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Channel: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									DeviceType: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Make: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Model: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Platform: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								Location: &types.SegmentLocation{
+									Country: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									GPSPoint: &types.GPSPointDimension{
+										Coordinates: &types.GPSCoordinates{
+											Latitude:  ptr.Float64(1.0),
+											Longitude: ptr.Float64(1.0),
+										},
+										RangeInKilometers: ptr.Float64(1.0),
+									},
+								},
+								Metrics: map[string]types.MetricDimension{
+									"key0": {
+										ComparisonOperator: ptr.String("__ComparisonOperator__"),
+										Value:              ptr.Float64(1.0),
+									},
+								},
+								UserAttributes: map[string]types.AttributeDimension{
+									"key0": {
+										AttributeType: types.AttributeType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+							},
+						},
+						SourceSegments: []types.SegmentReference{
+							{
+								Id:      ptr.String("__Id__"),
+								Version: ptr.Int32(1),
+							},
+							{
+								Id:      ptr.String("__Id__"),
+								Version: ptr.Int32(1),
+							},
+						},
+						SourceType: types.SourceType("ALL"),
+						Type:       types.Type("ALL"),
+					},
+				},
+				Include: types.Include("ALL"),
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2665,7 +5134,18 @@ func TestCheckResponseSnapshot_CreateSmsTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSmsTemplate(context.Background(), &CreateSmsTemplateInput{})
+	got, err := svc.CreateSmsTemplate(context.Background(), &CreateSmsTemplateInput{
+		SMSTemplateRequest: &types.SMSTemplateRequest{
+			Body:                 ptr.String("__Body__"),
+			DefaultSubstitutions: ptr.String("__DefaultSubstitutions__"),
+			RecommenderId:        ptr.String("__RecommenderId__"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+			TemplateDescription: ptr.String("__TemplateDescription__"),
+		},
+		TemplateName: ptr.String("__TemplateName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2690,7 +5170,19 @@ func TestCheckResponseSnapshot_CreateVoiceTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVoiceTemplate(context.Background(), &CreateVoiceTemplateInput{})
+	got, err := svc.CreateVoiceTemplate(context.Background(), &CreateVoiceTemplateInput{
+		TemplateName: ptr.String("__TemplateName__"),
+		VoiceTemplateRequest: &types.VoiceTemplateRequest{
+			Body:                 ptr.String("__Body__"),
+			DefaultSubstitutions: ptr.String("__DefaultSubstitutions__"),
+			LanguageCode:         ptr.String("__LanguageCode__"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+			TemplateDescription: ptr.String("__TemplateDescription__"),
+			VoiceId:             ptr.String("__VoiceId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2722,7 +5214,9 @@ func TestCheckResponseSnapshot_DeleteAdmChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAdmChannel(context.Background(), &DeleteAdmChannelInput{})
+	got, err := svc.DeleteAdmChannel(context.Background(), &DeleteAdmChannelInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2756,7 +5250,9 @@ func TestCheckResponseSnapshot_DeleteApnsChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApnsChannel(context.Background(), &DeleteApnsChannelInput{})
+	got, err := svc.DeleteApnsChannel(context.Background(), &DeleteApnsChannelInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2790,7 +5286,9 @@ func TestCheckResponseSnapshot_DeleteApnsSandboxChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApnsSandboxChannel(context.Background(), &DeleteApnsSandboxChannelInput{})
+	got, err := svc.DeleteApnsSandboxChannel(context.Background(), &DeleteApnsSandboxChannelInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2824,7 +5322,9 @@ func TestCheckResponseSnapshot_DeleteApnsVoipChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApnsVoipChannel(context.Background(), &DeleteApnsVoipChannelInput{})
+	got, err := svc.DeleteApnsVoipChannel(context.Background(), &DeleteApnsVoipChannelInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2858,7 +5358,9 @@ func TestCheckResponseSnapshot_DeleteApnsVoipSandboxChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApnsVoipSandboxChannel(context.Background(), &DeleteApnsVoipSandboxChannelInput{})
+	got, err := svc.DeleteApnsVoipSandboxChannel(context.Background(), &DeleteApnsVoipSandboxChannelInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2887,7 +5389,9 @@ func TestCheckResponseSnapshot_DeleteApp(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApp(context.Background(), &DeleteAppInput{})
+	got, err := svc.DeleteApp(context.Background(), &DeleteAppInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2920,7 +5424,9 @@ func TestCheckResponseSnapshot_DeleteBaiduChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBaiduChannel(context.Background(), &DeleteBaiduChannelInput{})
+	got, err := svc.DeleteBaiduChannel(context.Background(), &DeleteBaiduChannelInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3871,7 +6377,10 @@ func TestCheckResponseSnapshot_DeleteCampaign(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCampaign(context.Background(), &DeleteCampaignInput{})
+	got, err := svc.DeleteCampaign(context.Background(), &DeleteCampaignInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		CampaignId:    ptr.String("__CampaignId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3909,7 +6418,9 @@ func TestCheckResponseSnapshot_DeleteEmailChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEmailChannel(context.Background(), &DeleteEmailChannelInput{})
+	got, err := svc.DeleteEmailChannel(context.Background(), &DeleteEmailChannelInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3933,7 +6444,10 @@ func TestCheckResponseSnapshot_DeleteEmailTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEmailTemplate(context.Background(), &DeleteEmailTemplateInput{})
+	got, err := svc.DeleteEmailTemplate(context.Background(), &DeleteEmailTemplateInput{
+		TemplateName: ptr.String("__TemplateName__"),
+		Version:      ptr.String("__Version__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4001,7 +6515,10 @@ func TestCheckResponseSnapshot_DeleteEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEndpoint(context.Background(), &DeleteEndpointInput{})
+	got, err := svc.DeleteEndpoint(context.Background(), &DeleteEndpointInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		EndpointId:    ptr.String("__EndpointId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4029,7 +6546,9 @@ func TestCheckResponseSnapshot_DeleteEventStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEventStream(context.Background(), &DeleteEventStreamInput{})
+	got, err := svc.DeleteEventStream(context.Background(), &DeleteEventStreamInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4064,7 +6583,9 @@ func TestCheckResponseSnapshot_DeleteGcmChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGcmChannel(context.Background(), &DeleteGcmChannelInput{})
+	got, err := svc.DeleteGcmChannel(context.Background(), &DeleteGcmChannelInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4088,7 +6609,10 @@ func TestCheckResponseSnapshot_DeleteInAppTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteInAppTemplate(context.Background(), &DeleteInAppTemplateInput{})
+	got, err := svc.DeleteInAppTemplate(context.Background(), &DeleteInAppTemplateInput{
+		TemplateName: ptr.String("__TemplateName__"),
+		Version:      ptr.String("__Version__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4909,7 +7433,10 @@ func TestCheckResponseSnapshot_DeleteJourney(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteJourney(context.Background(), &DeleteJourneyInput{})
+	got, err := svc.DeleteJourney(context.Background(), &DeleteJourneyInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		JourneyId:     ptr.String("__JourneyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4933,7 +7460,10 @@ func TestCheckResponseSnapshot_DeletePushTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePushTemplate(context.Background(), &DeletePushTemplateInput{})
+	got, err := svc.DeletePushTemplate(context.Background(), &DeletePushTemplateInput{
+		TemplateName: ptr.String("__TemplateName__"),
+		Version:      ptr.String("__Version__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4969,7 +7499,9 @@ func TestCheckResponseSnapshot_DeleteRecommenderConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRecommenderConfiguration(context.Background(), &DeleteRecommenderConfigurationInput{})
+	got, err := svc.DeleteRecommenderConfiguration(context.Background(), &DeleteRecommenderConfigurationInput{
+		RecommenderId: ptr.String("__RecommenderId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5509,7 +8041,10 @@ func TestCheckResponseSnapshot_DeleteSegment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSegment(context.Background(), &DeleteSegmentInput{})
+	got, err := svc.DeleteSegment(context.Background(), &DeleteSegmentInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		SegmentId:     ptr.String("__SegmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5545,7 +8080,9 @@ func TestCheckResponseSnapshot_DeleteSmsChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSmsChannel(context.Background(), &DeleteSmsChannelInput{})
+	got, err := svc.DeleteSmsChannel(context.Background(), &DeleteSmsChannelInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5569,7 +8106,10 @@ func TestCheckResponseSnapshot_DeleteSmsTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSmsTemplate(context.Background(), &DeleteSmsTemplateInput{})
+	got, err := svc.DeleteSmsTemplate(context.Background(), &DeleteSmsTemplateInput{
+		TemplateName: ptr.String("__TemplateName__"),
+		Version:      ptr.String("__Version__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5689,7 +8229,10 @@ func TestCheckResponseSnapshot_DeleteUserEndpoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteUserEndpoints(context.Background(), &DeleteUserEndpointsInput{})
+	got, err := svc.DeleteUserEndpoints(context.Background(), &DeleteUserEndpointsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		UserId:        ptr.String("__UserId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5721,7 +8264,9 @@ func TestCheckResponseSnapshot_DeleteVoiceChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVoiceChannel(context.Background(), &DeleteVoiceChannelInput{})
+	got, err := svc.DeleteVoiceChannel(context.Background(), &DeleteVoiceChannelInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5745,7 +8290,10 @@ func TestCheckResponseSnapshot_DeleteVoiceTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVoiceTemplate(context.Background(), &DeleteVoiceTemplateInput{})
+	got, err := svc.DeleteVoiceTemplate(context.Background(), &DeleteVoiceTemplateInput{
+		TemplateName: ptr.String("__TemplateName__"),
+		Version:      ptr.String("__Version__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5777,7 +8325,9 @@ func TestCheckResponseSnapshot_GetAdmChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAdmChannel(context.Background(), &GetAdmChannelInput{})
+	got, err := svc.GetAdmChannel(context.Background(), &GetAdmChannelInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5811,7 +8361,9 @@ func TestCheckResponseSnapshot_GetApnsChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApnsChannel(context.Background(), &GetApnsChannelInput{})
+	got, err := svc.GetApnsChannel(context.Background(), &GetApnsChannelInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5845,7 +8397,9 @@ func TestCheckResponseSnapshot_GetApnsSandboxChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApnsSandboxChannel(context.Background(), &GetApnsSandboxChannelInput{})
+	got, err := svc.GetApnsSandboxChannel(context.Background(), &GetApnsSandboxChannelInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5879,7 +8433,9 @@ func TestCheckResponseSnapshot_GetApnsVoipChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApnsVoipChannel(context.Background(), &GetApnsVoipChannelInput{})
+	got, err := svc.GetApnsVoipChannel(context.Background(), &GetApnsVoipChannelInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5913,7 +8469,9 @@ func TestCheckResponseSnapshot_GetApnsVoipSandboxChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApnsVoipSandboxChannel(context.Background(), &GetApnsVoipSandboxChannelInput{})
+	got, err := svc.GetApnsVoipSandboxChannel(context.Background(), &GetApnsVoipSandboxChannelInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5942,7 +8500,9 @@ func TestCheckResponseSnapshot_GetApp(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApp(context.Background(), &GetAppInput{})
+	got, err := svc.GetApp(context.Background(), &GetAppInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6025,7 +8585,14 @@ func TestCheckResponseSnapshot_GetApplicationDateRangeKpi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApplicationDateRangeKpi(context.Background(), &GetApplicationDateRangeKpiInput{})
+	got, err := svc.GetApplicationDateRangeKpi(context.Background(), &GetApplicationDateRangeKpiInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		EndTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		KpiName:       ptr.String("__KpiName__"),
+		NextToken:     ptr.String("__NextToken__"),
+		PageSize:      ptr.String("__PageSize__"),
+		StartTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6073,7 +8640,9 @@ func TestCheckResponseSnapshot_GetApplicationSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApplicationSettings(context.Background(), &GetApplicationSettingsInput{})
+	got, err := svc.GetApplicationSettings(context.Background(), &GetApplicationSettingsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6116,7 +8685,10 @@ func TestCheckResponseSnapshot_GetApps(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApps(context.Background(), &GetAppsInput{})
+	got, err := svc.GetApps(context.Background(), &GetAppsInput{
+		PageSize: ptr.String("__PageSize__"),
+		Token:    ptr.String("__Token__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6149,7 +8721,9 @@ func TestCheckResponseSnapshot_GetBaiduChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBaiduChannel(context.Background(), &GetBaiduChannelInput{})
+	got, err := svc.GetBaiduChannel(context.Background(), &GetBaiduChannelInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7100,7 +9674,10 @@ func TestCheckResponseSnapshot_GetCampaign(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCampaign(context.Background(), &GetCampaignInput{})
+	got, err := svc.GetCampaign(context.Background(), &GetCampaignInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		CampaignId:    ptr.String("__CampaignId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7161,7 +9738,12 @@ func TestCheckResponseSnapshot_GetCampaignActivities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCampaignActivities(context.Background(), &GetCampaignActivitiesInput{})
+	got, err := svc.GetCampaignActivities(context.Background(), &GetCampaignActivitiesInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		CampaignId:    ptr.String("__CampaignId__"),
+		PageSize:      ptr.String("__PageSize__"),
+		Token:         ptr.String("__Token__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7245,7 +9827,15 @@ func TestCheckResponseSnapshot_GetCampaignDateRangeKpi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCampaignDateRangeKpi(context.Background(), &GetCampaignDateRangeKpiInput{})
+	got, err := svc.GetCampaignDateRangeKpi(context.Background(), &GetCampaignDateRangeKpiInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		CampaignId:    ptr.String("__CampaignId__"),
+		EndTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		KpiName:       ptr.String("__KpiName__"),
+		NextToken:     ptr.String("__NextToken__"),
+		PageSize:      ptr.String("__PageSize__"),
+		StartTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8196,7 +10786,11 @@ func TestCheckResponseSnapshot_GetCampaignVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCampaignVersion(context.Background(), &GetCampaignVersionInput{})
+	got, err := svc.GetCampaignVersion(context.Background(), &GetCampaignVersionInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		CampaignId:    ptr.String("__CampaignId__"),
+		Version:       ptr.String("__Version__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10083,7 +12677,12 @@ func TestCheckResponseSnapshot_GetCampaignVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCampaignVersions(context.Background(), &GetCampaignVersionsInput{})
+	got, err := svc.GetCampaignVersions(context.Background(), &GetCampaignVersionsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		CampaignId:    ptr.String("__CampaignId__"),
+		PageSize:      ptr.String("__PageSize__"),
+		Token:         ptr.String("__Token__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11970,7 +14569,11 @@ func TestCheckResponseSnapshot_GetCampaigns(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCampaigns(context.Background(), &GetCampaignsInput{})
+	got, err := svc.GetCampaigns(context.Background(), &GetCampaignsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		PageSize:      ptr.String("__PageSize__"),
+		Token:         ptr.String("__Token__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12005,7 +14608,9 @@ func TestCheckResponseSnapshot_GetChannels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetChannels(context.Background(), &GetChannelsInput{})
+	got, err := svc.GetChannels(context.Background(), &GetChannelsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12043,7 +14648,9 @@ func TestCheckResponseSnapshot_GetEmailChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEmailChannel(context.Background(), &GetEmailChannelInput{})
+	got, err := svc.GetEmailChannel(context.Background(), &GetEmailChannelInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12090,7 +14697,10 @@ func TestCheckResponseSnapshot_GetEmailTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEmailTemplate(context.Background(), &GetEmailTemplateInput{})
+	got, err := svc.GetEmailTemplate(context.Background(), &GetEmailTemplateInput{
+		TemplateName: ptr.String("__TemplateName__"),
+		Version:      ptr.String("__Version__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12158,7 +14768,10 @@ func TestCheckResponseSnapshot_GetEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEndpoint(context.Background(), &GetEndpointInput{})
+	got, err := svc.GetEndpoint(context.Background(), &GetEndpointInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		EndpointId:    ptr.String("__EndpointId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12186,7 +14799,9 @@ func TestCheckResponseSnapshot_GetEventStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEventStream(context.Background(), &GetEventStreamInput{})
+	got, err := svc.GetEventStream(context.Background(), &GetEventStreamInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12229,7 +14844,10 @@ func TestCheckResponseSnapshot_GetExportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetExportJob(context.Background(), &GetExportJobInput{})
+	got, err := svc.GetExportJob(context.Background(), &GetExportJobInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		JobId:         ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12300,7 +14918,11 @@ func TestCheckResponseSnapshot_GetExportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetExportJobs(context.Background(), &GetExportJobsInput{})
+	got, err := svc.GetExportJobs(context.Background(), &GetExportJobsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		PageSize:      ptr.String("__PageSize__"),
+		Token:         ptr.String("__Token__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12335,7 +14957,9 @@ func TestCheckResponseSnapshot_GetGcmChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGcmChannel(context.Background(), &GetGcmChannelInput{})
+	got, err := svc.GetGcmChannel(context.Background(), &GetGcmChannelInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12382,7 +15006,10 @@ func TestCheckResponseSnapshot_GetImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetImportJob(context.Background(), &GetImportJobInput{})
+	got, err := svc.GetImportJob(context.Background(), &GetImportJobInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		JobId:         ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12461,7 +15088,11 @@ func TestCheckResponseSnapshot_GetImportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetImportJobs(context.Background(), &GetImportJobsInput{})
+	got, err := svc.GetImportJobs(context.Background(), &GetImportJobsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		PageSize:      ptr.String("__PageSize__"),
+		Token:         ptr.String("__Token__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12817,7 +15448,10 @@ func TestCheckResponseSnapshot_GetInAppMessages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetInAppMessages(context.Background(), &GetInAppMessagesInput{})
+	got, err := svc.GetInAppMessages(context.Background(), &GetInAppMessagesInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		EndpointId:    ptr.String("__EndpointId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12971,7 +15605,10 @@ func TestCheckResponseSnapshot_GetInAppTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetInAppTemplate(context.Background(), &GetInAppTemplateInput{})
+	got, err := svc.GetInAppTemplate(context.Background(), &GetInAppTemplateInput{
+		TemplateName: ptr.String("__TemplateName__"),
+		Version:      ptr.String("__Version__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13792,7 +16429,10 @@ func TestCheckResponseSnapshot_GetJourney(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetJourney(context.Background(), &GetJourneyInput{})
+	got, err := svc.GetJourney(context.Background(), &GetJourneyInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		JourneyId:     ptr.String("__JourneyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13876,7 +16516,15 @@ func TestCheckResponseSnapshot_GetJourneyDateRangeKpi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetJourneyDateRangeKpi(context.Background(), &GetJourneyDateRangeKpiInput{})
+	got, err := svc.GetJourneyDateRangeKpi(context.Background(), &GetJourneyDateRangeKpiInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		EndTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		JourneyId:     ptr.String("__JourneyId__"),
+		KpiName:       ptr.String("__KpiName__"),
+		NextToken:     ptr.String("__NextToken__"),
+		PageSize:      ptr.String("__PageSize__"),
+		StartTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13906,7 +16554,13 @@ func TestCheckResponseSnapshot_GetJourneyExecutionActivityMetrics(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetJourneyExecutionActivityMetrics(context.Background(), &GetJourneyExecutionActivityMetricsInput{})
+	got, err := svc.GetJourneyExecutionActivityMetrics(context.Background(), &GetJourneyExecutionActivityMetricsInput{
+		ApplicationId:     ptr.String("__ApplicationId__"),
+		JourneyActivityId: ptr.String("__JourneyActivityId__"),
+		JourneyId:         ptr.String("__JourneyId__"),
+		NextToken:         ptr.String("__NextToken__"),
+		PageSize:          ptr.String("__PageSize__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13934,7 +16588,12 @@ func TestCheckResponseSnapshot_GetJourneyExecutionMetrics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetJourneyExecutionMetrics(context.Background(), &GetJourneyExecutionMetricsInput{})
+	got, err := svc.GetJourneyExecutionMetrics(context.Background(), &GetJourneyExecutionMetricsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		JourneyId:     ptr.String("__JourneyId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		PageSize:      ptr.String("__PageSize__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13965,7 +16624,14 @@ func TestCheckResponseSnapshot_GetJourneyRunExecutionActivityMetrics(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetJourneyRunExecutionActivityMetrics(context.Background(), &GetJourneyRunExecutionActivityMetricsInput{})
+	got, err := svc.GetJourneyRunExecutionActivityMetrics(context.Background(), &GetJourneyRunExecutionActivityMetricsInput{
+		ApplicationId:     ptr.String("__ApplicationId__"),
+		JourneyActivityId: ptr.String("__JourneyActivityId__"),
+		JourneyId:         ptr.String("__JourneyId__"),
+		NextToken:         ptr.String("__NextToken__"),
+		PageSize:          ptr.String("__PageSize__"),
+		RunId:             ptr.String("__RunId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13994,7 +16660,13 @@ func TestCheckResponseSnapshot_GetJourneyRunExecutionMetrics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetJourneyRunExecutionMetrics(context.Background(), &GetJourneyRunExecutionMetricsInput{})
+	got, err := svc.GetJourneyRunExecutionMetrics(context.Background(), &GetJourneyRunExecutionMetricsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		JourneyId:     ptr.String("__JourneyId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		PageSize:      ptr.String("__PageSize__"),
+		RunId:         ptr.String("__RunId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14031,7 +16703,12 @@ func TestCheckResponseSnapshot_GetJourneyRuns(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetJourneyRuns(context.Background(), &GetJourneyRunsInput{})
+	got, err := svc.GetJourneyRuns(context.Background(), &GetJourneyRunsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		JourneyId:     ptr.String("__JourneyId__"),
+		PageSize:      ptr.String("__PageSize__"),
+		Token:         ptr.String("__Token__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14114,7 +16791,10 @@ func TestCheckResponseSnapshot_GetPushTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPushTemplate(context.Background(), &GetPushTemplateInput{})
+	got, err := svc.GetPushTemplate(context.Background(), &GetPushTemplateInput{
+		TemplateName: ptr.String("__TemplateName__"),
+		Version:      ptr.String("__Version__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14150,7 +16830,9 @@ func TestCheckResponseSnapshot_GetRecommenderConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRecommenderConfiguration(context.Background(), &GetRecommenderConfigurationInput{})
+	got, err := svc.GetRecommenderConfiguration(context.Background(), &GetRecommenderConfigurationInput{
+		RecommenderId: ptr.String("__RecommenderId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14207,7 +16889,10 @@ func TestCheckResponseSnapshot_GetRecommenderConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRecommenderConfigurations(context.Background(), &GetRecommenderConfigurationsInput{})
+	got, err := svc.GetRecommenderConfigurations(context.Background(), &GetRecommenderConfigurationsInput{
+		PageSize: ptr.String("__PageSize__"),
+		Token:    ptr.String("__Token__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14747,7 +17432,10 @@ func TestCheckResponseSnapshot_GetSegment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSegment(context.Background(), &GetSegmentInput{})
+	got, err := svc.GetSegment(context.Background(), &GetSegmentInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		SegmentId:     ptr.String("__SegmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14818,7 +17506,12 @@ func TestCheckResponseSnapshot_GetSegmentExportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSegmentExportJobs(context.Background(), &GetSegmentExportJobsInput{})
+	got, err := svc.GetSegmentExportJobs(context.Background(), &GetSegmentExportJobsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		PageSize:      ptr.String("__PageSize__"),
+		SegmentId:     ptr.String("__SegmentId__"),
+		Token:         ptr.String("__Token__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14897,7 +17590,12 @@ func TestCheckResponseSnapshot_GetSegmentImportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSegmentImportJobs(context.Background(), &GetSegmentImportJobsInput{})
+	got, err := svc.GetSegmentImportJobs(context.Background(), &GetSegmentImportJobsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		PageSize:      ptr.String("__PageSize__"),
+		SegmentId:     ptr.String("__SegmentId__"),
+		Token:         ptr.String("__Token__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15437,7 +18135,11 @@ func TestCheckResponseSnapshot_GetSegmentVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSegmentVersion(context.Background(), &GetSegmentVersionInput{})
+	got, err := svc.GetSegmentVersion(context.Background(), &GetSegmentVersionInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		SegmentId:     ptr.String("__SegmentId__"),
+		Version:       ptr.String("__Version__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16502,7 +19204,12 @@ func TestCheckResponseSnapshot_GetSegmentVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSegmentVersions(context.Background(), &GetSegmentVersionsInput{})
+	got, err := svc.GetSegmentVersions(context.Background(), &GetSegmentVersionsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		PageSize:      ptr.String("__PageSize__"),
+		SegmentId:     ptr.String("__SegmentId__"),
+		Token:         ptr.String("__Token__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17567,7 +20274,11 @@ func TestCheckResponseSnapshot_GetSegments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSegments(context.Background(), &GetSegmentsInput{})
+	got, err := svc.GetSegments(context.Background(), &GetSegmentsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		PageSize:      ptr.String("__PageSize__"),
+		Token:         ptr.String("__Token__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17603,7 +20314,9 @@ func TestCheckResponseSnapshot_GetSmsChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSmsChannel(context.Background(), &GetSmsChannelInput{})
+	got, err := svc.GetSmsChannel(context.Background(), &GetSmsChannelInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17638,7 +20351,10 @@ func TestCheckResponseSnapshot_GetSmsTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSmsTemplate(context.Background(), &GetSmsTemplateInput{})
+	got, err := svc.GetSmsTemplate(context.Background(), &GetSmsTemplateInput{
+		TemplateName: ptr.String("__TemplateName__"),
+		Version:      ptr.String("__Version__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17758,7 +20474,10 @@ func TestCheckResponseSnapshot_GetUserEndpoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUserEndpoints(context.Background(), &GetUserEndpointsInput{})
+	got, err := svc.GetUserEndpoints(context.Background(), &GetUserEndpointsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		UserId:        ptr.String("__UserId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17790,7 +20509,9 @@ func TestCheckResponseSnapshot_GetVoiceChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVoiceChannel(context.Background(), &GetVoiceChannelInput{})
+	got, err := svc.GetVoiceChannel(context.Background(), &GetVoiceChannelInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17826,7 +20547,10 @@ func TestCheckResponseSnapshot_GetVoiceTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVoiceTemplate(context.Background(), &GetVoiceTemplateInput{})
+	got, err := svc.GetVoiceTemplate(context.Background(), &GetVoiceTemplateInput{
+		TemplateName: ptr.String("__TemplateName__"),
+		Version:      ptr.String("__Version__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18053,7 +20777,11 @@ func TestCheckResponseSnapshot_ListJourneys(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListJourneys(context.Background(), &ListJourneysInput{})
+	got, err := svc.ListJourneys(context.Background(), &ListJourneysInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		PageSize:      ptr.String("__PageSize__"),
+		Token:         ptr.String("__Token__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18078,7 +20806,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18123,7 +20853,12 @@ func TestCheckResponseSnapshot_ListTemplateVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTemplateVersions(context.Background(), &ListTemplateVersionsInput{})
+	got, err := svc.ListTemplateVersions(context.Background(), &ListTemplateVersionsInput{
+		NextToken:    ptr.String("__NextToken__"),
+		PageSize:     ptr.String("__PageSize__"),
+		TemplateName: ptr.String("__TemplateName__"),
+		TemplateType: ptr.String("__TemplateType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18174,7 +20909,12 @@ func TestCheckResponseSnapshot_ListTemplates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTemplates(context.Background(), &ListTemplatesInput{})
+	got, err := svc.ListTemplates(context.Background(), &ListTemplatesInput{
+		NextToken:    ptr.String("__NextToken__"),
+		PageSize:     ptr.String("__PageSize__"),
+		Prefix:       ptr.String("__Prefix__"),
+		TemplateType: ptr.String("__TemplateType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18210,7 +20950,12 @@ func TestCheckResponseSnapshot_PhoneNumberValidate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PhoneNumberValidate(context.Background(), &PhoneNumberValidateInput{})
+	got, err := svc.PhoneNumberValidate(context.Background(), &PhoneNumberValidateInput{
+		NumberValidateRequest: &types.NumberValidateRequest{
+			IsoCountryCode: ptr.String("__IsoCountryCode__"),
+			PhoneNumber:    ptr.String("__PhoneNumber__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18238,7 +20983,13 @@ func TestCheckResponseSnapshot_PutEventStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutEventStream(context.Background(), &PutEventStreamInput{})
+	got, err := svc.PutEventStream(context.Background(), &PutEventStreamInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		WriteEventStream: &types.WriteEventStream{
+			DestinationStreamArn: ptr.String("__DestinationStreamArn__"),
+			RoleArn:              ptr.String("__RoleArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18274,7 +21025,82 @@ func TestCheckResponseSnapshot_PutEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutEvents(context.Background(), &PutEventsInput{})
+	got, err := svc.PutEvents(context.Background(), &PutEventsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		EventsRequest: &types.EventsRequest{
+			BatchItem: map[string]types.EventsBatch{
+				"key0": {
+					Endpoint: &types.PublicEndpoint{
+						Address: ptr.String("__Address__"),
+						Attributes: map[string][]string{
+							"key0": {
+								"__Member__",
+								"__Member__",
+							},
+						},
+						ChannelType: types.ChannelType("PUSH"),
+						Demographic: &types.EndpointDemographic{
+							AppVersion:      ptr.String("__AppVersion__"),
+							Locale:          ptr.String("__Locale__"),
+							Make:            ptr.String("__Make__"),
+							Model:           ptr.String("__Model__"),
+							ModelVersion:    ptr.String("__ModelVersion__"),
+							Platform:        ptr.String("__Platform__"),
+							PlatformVersion: ptr.String("__PlatformVersion__"),
+							Timezone:        ptr.String("__Timezone__"),
+						},
+						EffectiveDate:  ptr.String("__EffectiveDate__"),
+						EndpointStatus: ptr.String("__EndpointStatus__"),
+						Location: &types.EndpointLocation{
+							City:       ptr.String("__City__"),
+							Country:    ptr.String("__Country__"),
+							Latitude:   ptr.Float64(1.0),
+							Longitude:  ptr.Float64(1.0),
+							PostalCode: ptr.String("__PostalCode__"),
+							Region:     ptr.String("__Region__"),
+						},
+						Metrics: map[string]float64{
+							"key0": 1.0,
+						},
+						OptOut:    ptr.String("__OptOut__"),
+						RequestId: ptr.String("__RequestId__"),
+						User: &types.EndpointUser{
+							UserAttributes: map[string][]string{
+								"key0": {
+									"__Member__",
+									"__Member__",
+								},
+							},
+							UserId: ptr.String("__UserId__"),
+						},
+					},
+					Events: map[string]types.Event{
+						"key0": {
+							AppPackageName: ptr.String("__AppPackageName__"),
+							AppTitle:       ptr.String("__AppTitle__"),
+							AppVersionCode: ptr.String("__AppVersionCode__"),
+							Attributes: map[string]string{
+								"key0": "__Value__",
+							},
+							ClientSdkVersion: ptr.String("__ClientSdkVersion__"),
+							EventType:        ptr.String("__EventType__"),
+							Metrics: map[string]float64{
+								"key0": 1.0,
+							},
+							SdkName: ptr.String("__SdkName__"),
+							Session: &types.Session{
+								Duration:       ptr.Int32(1),
+								Id:             ptr.String("__Id__"),
+								StartTimestamp: ptr.String("__StartTimestamp__"),
+								StopTimestamp:  ptr.String("__StopTimestamp__"),
+							},
+							Timestamp: ptr.String("__Timestamp__"),
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18302,7 +21128,16 @@ func TestCheckResponseSnapshot_RemoveAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveAttributes(context.Background(), &RemoveAttributesInput{})
+	got, err := svc.RemoveAttributes(context.Background(), &RemoveAttributesInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		AttributeType: ptr.String("__AttributeType__"),
+		UpdateAttributesRequest: &types.UpdateAttributesRequest{
+			Blacklist: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18345,7 +21180,269 @@ func TestCheckResponseSnapshot_SendMessages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendMessages(context.Background(), &SendMessagesInput{})
+	got, err := svc.SendMessages(context.Background(), &SendMessagesInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		MessageRequest: &types.MessageRequest{
+			Addresses: map[string]types.AddressConfiguration{
+				"key0": {
+					BodyOverride: ptr.String("__BodyOverride__"),
+					ChannelType:  types.ChannelType("PUSH"),
+					Context: map[string]string{
+						"key0": "__Value__",
+					},
+					RawContent: ptr.String("__RawContent__"),
+					Substitutions: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TitleOverride: ptr.String("__TitleOverride__"),
+				},
+			},
+			Context: map[string]string{
+				"key0": "__Value__",
+			},
+			Endpoints: map[string]types.EndpointSendConfiguration{
+				"key0": {
+					BodyOverride: ptr.String("__BodyOverride__"),
+					Context: map[string]string{
+						"key0": "__Value__",
+					},
+					RawContent: ptr.String("__RawContent__"),
+					Substitutions: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TitleOverride: ptr.String("__TitleOverride__"),
+				},
+			},
+			MessageConfiguration: &types.DirectMessageConfiguration{
+				ADMMessage: &types.ADMMessage{
+					Action:           types.Action("OPEN_APP"),
+					Body:             ptr.String("__Body__"),
+					ConsolidationKey: ptr.String("__ConsolidationKey__"),
+					Data: map[string]string{
+						"key0": "__Value__",
+					},
+					ExpiresAfter:      ptr.String("__ExpiresAfter__"),
+					IconReference:     ptr.String("__IconReference__"),
+					ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+					ImageUrl:          ptr.String("__ImageUrl__"),
+					MD5:               ptr.String("__MD5__"),
+					RawContent:        ptr.String("__RawContent__"),
+					SilentPush:        ptr.Bool(true),
+					SmallImageIconUrl: ptr.String("__SmallImageIconUrl__"),
+					Sound:             ptr.String("__Sound__"),
+					Substitutions: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Title: ptr.String("__Title__"),
+					Url:   ptr.String("__Url__"),
+				},
+				APNSMessage: &types.APNSMessage{
+					APNSPushType: ptr.String("__APNSPushType__"),
+					Action:       types.Action("OPEN_APP"),
+					Badge:        ptr.Int32(1),
+					Body:         ptr.String("__Body__"),
+					Category:     ptr.String("__Category__"),
+					CollapseId:   ptr.String("__CollapseId__"),
+					Data: map[string]string{
+						"key0": "__Value__",
+					},
+					MediaUrl:                      ptr.String("__MediaUrl__"),
+					PreferredAuthenticationMethod: ptr.String("__PreferredAuthenticationMethod__"),
+					Priority:                      ptr.String("__Priority__"),
+					RawContent:                    ptr.String("__RawContent__"),
+					SilentPush:                    ptr.Bool(true),
+					Sound:                         ptr.String("__Sound__"),
+					Substitutions: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ThreadId:   ptr.String("__ThreadId__"),
+					TimeToLive: ptr.Int32(1),
+					Title:      ptr.String("__Title__"),
+					Url:        ptr.String("__Url__"),
+				},
+				BaiduMessage: &types.BaiduMessage{
+					Action: types.Action("OPEN_APP"),
+					Body:   ptr.String("__Body__"),
+					Data: map[string]string{
+						"key0": "__Value__",
+					},
+					IconReference:     ptr.String("__IconReference__"),
+					ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+					ImageUrl:          ptr.String("__ImageUrl__"),
+					RawContent:        ptr.String("__RawContent__"),
+					SilentPush:        ptr.Bool(true),
+					SmallImageIconUrl: ptr.String("__SmallImageIconUrl__"),
+					Sound:             ptr.String("__Sound__"),
+					Substitutions: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TimeToLive: ptr.Int32(1),
+					Title:      ptr.String("__Title__"),
+					Url:        ptr.String("__Url__"),
+				},
+				DefaultMessage: &types.DefaultMessage{
+					Body: ptr.String("__Body__"),
+					Substitutions: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				DefaultPushNotificationMessage: &types.DefaultPushNotificationMessage{
+					Action: types.Action("OPEN_APP"),
+					Body:   ptr.String("__Body__"),
+					Data: map[string]string{
+						"key0": "__Value__",
+					},
+					SilentPush: ptr.Bool(true),
+					Substitutions: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Title: ptr.String("__Title__"),
+					Url:   ptr.String("__Url__"),
+				},
+				EmailMessage: &types.EmailMessage{
+					Body:                      ptr.String("__Body__"),
+					FeedbackForwardingAddress: ptr.String("__FeedbackForwardingAddress__"),
+					FromAddress:               ptr.String("__FromAddress__"),
+					RawEmail: &types.RawEmail{
+						Data: []byte("blob"),
+					},
+					ReplyToAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SimpleEmail: &types.SimpleEmail{
+						HtmlPart: &types.SimpleEmailPart{
+							Charset: ptr.String("__Charset__"),
+							Data:    ptr.String("__Data__"),
+						},
+						Subject: &types.SimpleEmailPart{
+							Charset: ptr.String("__Charset__"),
+							Data:    ptr.String("__Data__"),
+						},
+						TextPart: &types.SimpleEmailPart{
+							Charset: ptr.String("__Charset__"),
+							Data:    ptr.String("__Data__"),
+						},
+						Headers: []types.MessageHeader{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					Substitutions: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				GCMMessage: &types.GCMMessage{
+					Action:      types.Action("OPEN_APP"),
+					Body:        ptr.String("__Body__"),
+					CollapseKey: ptr.String("__CollapseKey__"),
+					Data: map[string]string{
+						"key0": "__Value__",
+					},
+					IconReference:                 ptr.String("__IconReference__"),
+					ImageIconUrl:                  ptr.String("__ImageIconUrl__"),
+					ImageUrl:                      ptr.String("__ImageUrl__"),
+					PreferredAuthenticationMethod: ptr.String("__PreferredAuthenticationMethod__"),
+					Priority:                      ptr.String("__Priority__"),
+					RawContent:                    ptr.String("__RawContent__"),
+					RestrictedPackageName:         ptr.String("__RestrictedPackageName__"),
+					SilentPush:                    ptr.Bool(true),
+					SmallImageIconUrl:             ptr.String("__SmallImageIconUrl__"),
+					Sound:                         ptr.String("__Sound__"),
+					Substitutions: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TimeToLive: ptr.Int32(1),
+					Title:      ptr.String("__Title__"),
+					Url:        ptr.String("__Url__"),
+				},
+				SMSMessage: &types.SMSMessage{
+					Body:              ptr.String("__Body__"),
+					Keyword:           ptr.String("__Keyword__"),
+					MediaUrl:          ptr.String("__MediaUrl__"),
+					MessageType:       types.MessageType("TRANSACTIONAL"),
+					OriginationNumber: ptr.String("__OriginationNumber__"),
+					SenderId:          ptr.String("__SenderId__"),
+					Substitutions: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+					EntityId:   ptr.String("__EntityId__"),
+					TemplateId: ptr.String("__TemplateId__"),
+				},
+				VoiceMessage: &types.VoiceMessage{
+					Body:              ptr.String("__Body__"),
+					LanguageCode:      ptr.String("__LanguageCode__"),
+					OriginationNumber: ptr.String("__OriginationNumber__"),
+					Substitutions: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+					VoiceId: ptr.String("__VoiceId__"),
+				},
+			},
+			TemplateConfiguration: &types.TemplateConfiguration{
+				EmailTemplate: &types.Template{
+					Name:    ptr.String("__Name__"),
+					Version: ptr.String("__Version__"),
+				},
+				PushTemplate: &types.Template{
+					Name:    ptr.String("__Name__"),
+					Version: ptr.String("__Version__"),
+				},
+				SMSTemplate: &types.Template{
+					Name:    ptr.String("__Name__"),
+					Version: ptr.String("__Version__"),
+				},
+				VoiceTemplate: &types.Template{
+					Name:    ptr.String("__Name__"),
+					Version: ptr.String("__Version__"),
+				},
+				InAppTemplate: &types.Template{
+					Name:    ptr.String("__Name__"),
+					Version: ptr.String("__Version__"),
+				},
+			},
+			TraceId: ptr.String("__TraceId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18388,7 +21485,22 @@ func TestCheckResponseSnapshot_SendOTPMessage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendOTPMessage(context.Background(), &SendOTPMessageInput{})
+	got, err := svc.SendOTPMessage(context.Background(), &SendOTPMessageInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		SendOTPMessageRequestParameters: &types.SendOTPMessageRequestParameters{
+			AllowedAttempts:     ptr.Int32(1),
+			BrandName:           ptr.String("__BrandName__"),
+			Channel:             ptr.String("__Channel__"),
+			CodeLength:          ptr.Int32(1),
+			DestinationIdentity: ptr.String("__DestinationIdentity__"),
+			EntityId:            ptr.String("__EntityId__"),
+			Language:            ptr.String("__Language__"),
+			OriginationIdentity: ptr.String("__OriginationIdentity__"),
+			ReferenceId:         ptr.String("__ReferenceId__"),
+			TemplateId:          ptr.String("__TemplateId__"),
+			ValidityPeriod:      ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18424,7 +21536,252 @@ func TestCheckResponseSnapshot_SendUsersMessages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendUsersMessages(context.Background(), &SendUsersMessagesInput{})
+	got, err := svc.SendUsersMessages(context.Background(), &SendUsersMessagesInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		SendUsersMessageRequest: &types.SendUsersMessageRequest{
+			Context: map[string]string{
+				"key0": "__Value__",
+			},
+			MessageConfiguration: &types.DirectMessageConfiguration{
+				ADMMessage: &types.ADMMessage{
+					Action:           types.Action("OPEN_APP"),
+					Body:             ptr.String("__Body__"),
+					ConsolidationKey: ptr.String("__ConsolidationKey__"),
+					Data: map[string]string{
+						"key0": "__Value__",
+					},
+					ExpiresAfter:      ptr.String("__ExpiresAfter__"),
+					IconReference:     ptr.String("__IconReference__"),
+					ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+					ImageUrl:          ptr.String("__ImageUrl__"),
+					MD5:               ptr.String("__MD5__"),
+					RawContent:        ptr.String("__RawContent__"),
+					SilentPush:        ptr.Bool(true),
+					SmallImageIconUrl: ptr.String("__SmallImageIconUrl__"),
+					Sound:             ptr.String("__Sound__"),
+					Substitutions: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Title: ptr.String("__Title__"),
+					Url:   ptr.String("__Url__"),
+				},
+				APNSMessage: &types.APNSMessage{
+					APNSPushType: ptr.String("__APNSPushType__"),
+					Action:       types.Action("OPEN_APP"),
+					Badge:        ptr.Int32(1),
+					Body:         ptr.String("__Body__"),
+					Category:     ptr.String("__Category__"),
+					CollapseId:   ptr.String("__CollapseId__"),
+					Data: map[string]string{
+						"key0": "__Value__",
+					},
+					MediaUrl:                      ptr.String("__MediaUrl__"),
+					PreferredAuthenticationMethod: ptr.String("__PreferredAuthenticationMethod__"),
+					Priority:                      ptr.String("__Priority__"),
+					RawContent:                    ptr.String("__RawContent__"),
+					SilentPush:                    ptr.Bool(true),
+					Sound:                         ptr.String("__Sound__"),
+					Substitutions: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ThreadId:   ptr.String("__ThreadId__"),
+					TimeToLive: ptr.Int32(1),
+					Title:      ptr.String("__Title__"),
+					Url:        ptr.String("__Url__"),
+				},
+				BaiduMessage: &types.BaiduMessage{
+					Action: types.Action("OPEN_APP"),
+					Body:   ptr.String("__Body__"),
+					Data: map[string]string{
+						"key0": "__Value__",
+					},
+					IconReference:     ptr.String("__IconReference__"),
+					ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+					ImageUrl:          ptr.String("__ImageUrl__"),
+					RawContent:        ptr.String("__RawContent__"),
+					SilentPush:        ptr.Bool(true),
+					SmallImageIconUrl: ptr.String("__SmallImageIconUrl__"),
+					Sound:             ptr.String("__Sound__"),
+					Substitutions: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TimeToLive: ptr.Int32(1),
+					Title:      ptr.String("__Title__"),
+					Url:        ptr.String("__Url__"),
+				},
+				DefaultMessage: &types.DefaultMessage{
+					Body: ptr.String("__Body__"),
+					Substitutions: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				DefaultPushNotificationMessage: &types.DefaultPushNotificationMessage{
+					Action: types.Action("OPEN_APP"),
+					Body:   ptr.String("__Body__"),
+					Data: map[string]string{
+						"key0": "__Value__",
+					},
+					SilentPush: ptr.Bool(true),
+					Substitutions: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Title: ptr.String("__Title__"),
+					Url:   ptr.String("__Url__"),
+				},
+				EmailMessage: &types.EmailMessage{
+					Body:                      ptr.String("__Body__"),
+					FeedbackForwardingAddress: ptr.String("__FeedbackForwardingAddress__"),
+					FromAddress:               ptr.String("__FromAddress__"),
+					RawEmail: &types.RawEmail{
+						Data: []byte("blob"),
+					},
+					ReplyToAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SimpleEmail: &types.SimpleEmail{
+						HtmlPart: &types.SimpleEmailPart{
+							Charset: ptr.String("__Charset__"),
+							Data:    ptr.String("__Data__"),
+						},
+						Subject: &types.SimpleEmailPart{
+							Charset: ptr.String("__Charset__"),
+							Data:    ptr.String("__Data__"),
+						},
+						TextPart: &types.SimpleEmailPart{
+							Charset: ptr.String("__Charset__"),
+							Data:    ptr.String("__Data__"),
+						},
+						Headers: []types.MessageHeader{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					Substitutions: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				GCMMessage: &types.GCMMessage{
+					Action:      types.Action("OPEN_APP"),
+					Body:        ptr.String("__Body__"),
+					CollapseKey: ptr.String("__CollapseKey__"),
+					Data: map[string]string{
+						"key0": "__Value__",
+					},
+					IconReference:                 ptr.String("__IconReference__"),
+					ImageIconUrl:                  ptr.String("__ImageIconUrl__"),
+					ImageUrl:                      ptr.String("__ImageUrl__"),
+					PreferredAuthenticationMethod: ptr.String("__PreferredAuthenticationMethod__"),
+					Priority:                      ptr.String("__Priority__"),
+					RawContent:                    ptr.String("__RawContent__"),
+					RestrictedPackageName:         ptr.String("__RestrictedPackageName__"),
+					SilentPush:                    ptr.Bool(true),
+					SmallImageIconUrl:             ptr.String("__SmallImageIconUrl__"),
+					Sound:                         ptr.String("__Sound__"),
+					Substitutions: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TimeToLive: ptr.Int32(1),
+					Title:      ptr.String("__Title__"),
+					Url:        ptr.String("__Url__"),
+				},
+				SMSMessage: &types.SMSMessage{
+					Body:              ptr.String("__Body__"),
+					Keyword:           ptr.String("__Keyword__"),
+					MediaUrl:          ptr.String("__MediaUrl__"),
+					MessageType:       types.MessageType("TRANSACTIONAL"),
+					OriginationNumber: ptr.String("__OriginationNumber__"),
+					SenderId:          ptr.String("__SenderId__"),
+					Substitutions: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+					EntityId:   ptr.String("__EntityId__"),
+					TemplateId: ptr.String("__TemplateId__"),
+				},
+				VoiceMessage: &types.VoiceMessage{
+					Body:              ptr.String("__Body__"),
+					LanguageCode:      ptr.String("__LanguageCode__"),
+					OriginationNumber: ptr.String("__OriginationNumber__"),
+					Substitutions: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+					VoiceId: ptr.String("__VoiceId__"),
+				},
+			},
+			TemplateConfiguration: &types.TemplateConfiguration{
+				EmailTemplate: &types.Template{
+					Name:    ptr.String("__Name__"),
+					Version: ptr.String("__Version__"),
+				},
+				PushTemplate: &types.Template{
+					Name:    ptr.String("__Name__"),
+					Version: ptr.String("__Version__"),
+				},
+				SMSTemplate: &types.Template{
+					Name:    ptr.String("__Name__"),
+					Version: ptr.String("__Version__"),
+				},
+				VoiceTemplate: &types.Template{
+					Name:    ptr.String("__Name__"),
+					Version: ptr.String("__Version__"),
+				},
+				InAppTemplate: &types.Template{
+					Name:    ptr.String("__Name__"),
+					Version: ptr.String("__Version__"),
+				},
+			},
+			TraceId: ptr.String("__TraceId__"),
+			Users: map[string]types.EndpointSendConfiguration{
+				"key0": {
+					BodyOverride: ptr.String("__BodyOverride__"),
+					Context: map[string]string{
+						"key0": "__Value__",
+					},
+					RawContent: ptr.String("__RawContent__"),
+					Substitutions: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+					TitleOverride: ptr.String("__TitleOverride__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18443,7 +21800,14 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagsModel: &types.TagsModel{
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18462,7 +21826,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18494,7 +21864,14 @@ func TestCheckResponseSnapshot_UpdateAdmChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAdmChannel(context.Background(), &UpdateAdmChannelInput{})
+	got, err := svc.UpdateAdmChannel(context.Background(), &UpdateAdmChannelInput{
+		ADMChannelRequest: &types.ADMChannelRequest{
+			ClientId:     ptr.String("__ClientId__"),
+			ClientSecret: ptr.String("__ClientSecret__"),
+			Enabled:      ptr.Bool(true),
+		},
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18528,7 +21905,19 @@ func TestCheckResponseSnapshot_UpdateApnsChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApnsChannel(context.Background(), &UpdateApnsChannelInput{})
+	got, err := svc.UpdateApnsChannel(context.Background(), &UpdateApnsChannelInput{
+		APNSChannelRequest: &types.APNSChannelRequest{
+			BundleId:                    ptr.String("__BundleId__"),
+			Certificate:                 ptr.String("__Certificate__"),
+			DefaultAuthenticationMethod: ptr.String("__DefaultAuthenticationMethod__"),
+			Enabled:                     ptr.Bool(true),
+			PrivateKey:                  ptr.String("__PrivateKey__"),
+			TeamId:                      ptr.String("__TeamId__"),
+			TokenKey:                    ptr.String("__TokenKey__"),
+			TokenKeyId:                  ptr.String("__TokenKeyId__"),
+		},
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18562,7 +21951,19 @@ func TestCheckResponseSnapshot_UpdateApnsSandboxChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApnsSandboxChannel(context.Background(), &UpdateApnsSandboxChannelInput{})
+	got, err := svc.UpdateApnsSandboxChannel(context.Background(), &UpdateApnsSandboxChannelInput{
+		APNSSandboxChannelRequest: &types.APNSSandboxChannelRequest{
+			BundleId:                    ptr.String("__BundleId__"),
+			Certificate:                 ptr.String("__Certificate__"),
+			DefaultAuthenticationMethod: ptr.String("__DefaultAuthenticationMethod__"),
+			Enabled:                     ptr.Bool(true),
+			PrivateKey:                  ptr.String("__PrivateKey__"),
+			TeamId:                      ptr.String("__TeamId__"),
+			TokenKey:                    ptr.String("__TokenKey__"),
+			TokenKeyId:                  ptr.String("__TokenKeyId__"),
+		},
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18596,7 +21997,19 @@ func TestCheckResponseSnapshot_UpdateApnsVoipChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApnsVoipChannel(context.Background(), &UpdateApnsVoipChannelInput{})
+	got, err := svc.UpdateApnsVoipChannel(context.Background(), &UpdateApnsVoipChannelInput{
+		APNSVoipChannelRequest: &types.APNSVoipChannelRequest{
+			BundleId:                    ptr.String("__BundleId__"),
+			Certificate:                 ptr.String("__Certificate__"),
+			DefaultAuthenticationMethod: ptr.String("__DefaultAuthenticationMethod__"),
+			Enabled:                     ptr.Bool(true),
+			PrivateKey:                  ptr.String("__PrivateKey__"),
+			TeamId:                      ptr.String("__TeamId__"),
+			TokenKey:                    ptr.String("__TokenKey__"),
+			TokenKeyId:                  ptr.String("__TokenKeyId__"),
+		},
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18630,7 +22043,19 @@ func TestCheckResponseSnapshot_UpdateApnsVoipSandboxChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApnsVoipSandboxChannel(context.Background(), &UpdateApnsVoipSandboxChannelInput{})
+	got, err := svc.UpdateApnsVoipSandboxChannel(context.Background(), &UpdateApnsVoipSandboxChannelInput{
+		APNSVoipSandboxChannelRequest: &types.APNSVoipSandboxChannelRequest{
+			BundleId:                    ptr.String("__BundleId__"),
+			Certificate:                 ptr.String("__Certificate__"),
+			DefaultAuthenticationMethod: ptr.String("__DefaultAuthenticationMethod__"),
+			Enabled:                     ptr.Bool(true),
+			PrivateKey:                  ptr.String("__PrivateKey__"),
+			TeamId:                      ptr.String("__TeamId__"),
+			TokenKey:                    ptr.String("__TokenKey__"),
+			TokenKeyId:                  ptr.String("__TokenKeyId__"),
+		},
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18678,7 +22103,37 @@ func TestCheckResponseSnapshot_UpdateApplicationSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApplicationSettings(context.Background(), &UpdateApplicationSettingsInput{})
+	got, err := svc.UpdateApplicationSettings(context.Background(), &UpdateApplicationSettingsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		WriteApplicationSettingsRequest: &types.WriteApplicationSettingsRequest{
+			CampaignHook: &types.CampaignHook{
+				LambdaFunctionName: ptr.String("__LambdaFunctionName__"),
+				Mode:               types.Mode("DELIVERY"),
+				WebUrl:             ptr.String("__WebUrl__"),
+			},
+			CloudWatchMetricsEnabled: ptr.Bool(true),
+			EventTaggingEnabled:      ptr.Bool(true),
+			Limits: &types.CampaignLimits{
+				Daily:             ptr.Int32(1),
+				MaximumDuration:   ptr.Int32(1),
+				MessagesPerSecond: ptr.Int32(1),
+				Total:             ptr.Int32(1),
+				Session:           ptr.Int32(1),
+			},
+			QuietTime: &types.QuietTime{
+				End:   ptr.String("__End__"),
+				Start: ptr.String("__Start__"),
+			},
+			JourneyLimits: &types.ApplicationSettingsJourneyLimits{
+				DailyCap: ptr.Int32(1),
+				TimeframeCap: &types.JourneyTimeframeCap{
+					Cap:  ptr.Int32(1),
+					Days: ptr.Int32(1),
+				},
+				TotalCap: ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18711,7 +22166,14 @@ func TestCheckResponseSnapshot_UpdateBaiduChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBaiduChannel(context.Background(), &UpdateBaiduChannelInput{})
+	got, err := svc.UpdateBaiduChannel(context.Background(), &UpdateBaiduChannelInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		BaiduChannelRequest: &types.BaiduChannelRequest{
+			ApiKey:    ptr.String("__ApiKey__"),
+			Enabled:   ptr.Bool(true),
+			SecretKey: ptr.String("__SecretKey__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19662,7 +23124,921 @@ func TestCheckResponseSnapshot_UpdateCampaign(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCampaign(context.Background(), &UpdateCampaignInput{})
+	got, err := svc.UpdateCampaign(context.Background(), &UpdateCampaignInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		CampaignId:    ptr.String("__CampaignId__"),
+		WriteCampaignRequest: &types.WriteCampaignRequest{
+			AdditionalTreatments: []types.WriteTreatmentResource{
+				{
+					CustomDeliveryConfiguration: &types.CustomDeliveryConfiguration{
+						DeliveryUri: ptr.String("__DeliveryUri__"),
+						EndpointTypes: []types.EndpointTypesElement{
+							types.EndpointTypesElement("PUSH"),
+							types.EndpointTypesElement("PUSH"),
+						},
+					},
+					MessageConfiguration: &types.MessageConfiguration{
+						ADMMessage: &types.Message{
+							Action:            types.Action("OPEN_APP"),
+							Body:              ptr.String("__Body__"),
+							ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+							ImageSmallIconUrl: ptr.String("__ImageSmallIconUrl__"),
+							ImageUrl:          ptr.String("__ImageUrl__"),
+							JsonBody:          ptr.String("__JsonBody__"),
+							MediaUrl:          ptr.String("__MediaUrl__"),
+							RawContent:        ptr.String("__RawContent__"),
+							SilentPush:        ptr.Bool(true),
+							TimeToLive:        ptr.Int32(1),
+							Title:             ptr.String("__Title__"),
+							Url:               ptr.String("__Url__"),
+						},
+						APNSMessage: &types.Message{
+							Action:            types.Action("OPEN_APP"),
+							Body:              ptr.String("__Body__"),
+							ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+							ImageSmallIconUrl: ptr.String("__ImageSmallIconUrl__"),
+							ImageUrl:          ptr.String("__ImageUrl__"),
+							JsonBody:          ptr.String("__JsonBody__"),
+							MediaUrl:          ptr.String("__MediaUrl__"),
+							RawContent:        ptr.String("__RawContent__"),
+							SilentPush:        ptr.Bool(true),
+							TimeToLive:        ptr.Int32(1),
+							Title:             ptr.String("__Title__"),
+							Url:               ptr.String("__Url__"),
+						},
+						BaiduMessage: &types.Message{
+							Action:            types.Action("OPEN_APP"),
+							Body:              ptr.String("__Body__"),
+							ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+							ImageSmallIconUrl: ptr.String("__ImageSmallIconUrl__"),
+							ImageUrl:          ptr.String("__ImageUrl__"),
+							JsonBody:          ptr.String("__JsonBody__"),
+							MediaUrl:          ptr.String("__MediaUrl__"),
+							RawContent:        ptr.String("__RawContent__"),
+							SilentPush:        ptr.Bool(true),
+							TimeToLive:        ptr.Int32(1),
+							Title:             ptr.String("__Title__"),
+							Url:               ptr.String("__Url__"),
+						},
+						CustomMessage: &types.CampaignCustomMessage{
+							Data: ptr.String("__Data__"),
+						},
+						DefaultMessage: &types.Message{
+							Action:            types.Action("OPEN_APP"),
+							Body:              ptr.String("__Body__"),
+							ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+							ImageSmallIconUrl: ptr.String("__ImageSmallIconUrl__"),
+							ImageUrl:          ptr.String("__ImageUrl__"),
+							JsonBody:          ptr.String("__JsonBody__"),
+							MediaUrl:          ptr.String("__MediaUrl__"),
+							RawContent:        ptr.String("__RawContent__"),
+							SilentPush:        ptr.Bool(true),
+							TimeToLive:        ptr.Int32(1),
+							Title:             ptr.String("__Title__"),
+							Url:               ptr.String("__Url__"),
+						},
+						EmailMessage: &types.CampaignEmailMessage{
+							Body:        ptr.String("__Body__"),
+							FromAddress: ptr.String("__FromAddress__"),
+							Headers: []types.MessageHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							HtmlBody: ptr.String("__HtmlBody__"),
+							Title:    ptr.String("__Title__"),
+						},
+						GCMMessage: &types.Message{
+							Action:            types.Action("OPEN_APP"),
+							Body:              ptr.String("__Body__"),
+							ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+							ImageSmallIconUrl: ptr.String("__ImageSmallIconUrl__"),
+							ImageUrl:          ptr.String("__ImageUrl__"),
+							JsonBody:          ptr.String("__JsonBody__"),
+							MediaUrl:          ptr.String("__MediaUrl__"),
+							RawContent:        ptr.String("__RawContent__"),
+							SilentPush:        ptr.Bool(true),
+							TimeToLive:        ptr.Int32(1),
+							Title:             ptr.String("__Title__"),
+							Url:               ptr.String("__Url__"),
+						},
+						SMSMessage: &types.CampaignSmsMessage{
+							Body:              ptr.String("__Body__"),
+							MessageType:       types.MessageType("TRANSACTIONAL"),
+							OriginationNumber: ptr.String("__OriginationNumber__"),
+							SenderId:          ptr.String("__SenderId__"),
+							EntityId:          ptr.String("__EntityId__"),
+							TemplateId:        ptr.String("__TemplateId__"),
+						},
+						InAppMessage: &types.CampaignInAppMessage{
+							Body: ptr.String("__Body__"),
+							Content: []types.InAppMessageContent{
+								{
+									BackgroundColor: ptr.String("__BackgroundColor__"),
+									BodyConfig: &types.InAppMessageBodyConfig{
+										Alignment: types.Alignment("LEFT"),
+										Body:      ptr.String("__Body__"),
+										TextColor: ptr.String("__TextColor__"),
+									},
+									HeaderConfig: &types.InAppMessageHeaderConfig{
+										Alignment: types.Alignment("LEFT"),
+										Header:    ptr.String("__Header__"),
+										TextColor: ptr.String("__TextColor__"),
+									},
+									ImageUrl: ptr.String("__ImageUrl__"),
+									PrimaryBtn: &types.InAppMessageButton{
+										Android: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										DefaultConfig: &types.DefaultButtonConfiguration{
+											BackgroundColor: ptr.String("__BackgroundColor__"),
+											BorderRadius:    ptr.Int32(1),
+											ButtonAction:    types.ButtonAction("LINK"),
+											Link:            ptr.String("__Link__"),
+											Text:            ptr.String("__Text__"),
+											TextColor:       ptr.String("__TextColor__"),
+										},
+										IOS: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										Web: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+									},
+									SecondaryBtn: &types.InAppMessageButton{
+										Android: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										DefaultConfig: &types.DefaultButtonConfiguration{
+											BackgroundColor: ptr.String("__BackgroundColor__"),
+											BorderRadius:    ptr.Int32(1),
+											ButtonAction:    types.ButtonAction("LINK"),
+											Link:            ptr.String("__Link__"),
+											Text:            ptr.String("__Text__"),
+											TextColor:       ptr.String("__TextColor__"),
+										},
+										IOS: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										Web: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+									},
+								},
+								{
+									BackgroundColor: ptr.String("__BackgroundColor__"),
+									BodyConfig: &types.InAppMessageBodyConfig{
+										Alignment: types.Alignment("LEFT"),
+										Body:      ptr.String("__Body__"),
+										TextColor: ptr.String("__TextColor__"),
+									},
+									HeaderConfig: &types.InAppMessageHeaderConfig{
+										Alignment: types.Alignment("LEFT"),
+										Header:    ptr.String("__Header__"),
+										TextColor: ptr.String("__TextColor__"),
+									},
+									ImageUrl: ptr.String("__ImageUrl__"),
+									PrimaryBtn: &types.InAppMessageButton{
+										Android: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										DefaultConfig: &types.DefaultButtonConfiguration{
+											BackgroundColor: ptr.String("__BackgroundColor__"),
+											BorderRadius:    ptr.Int32(1),
+											ButtonAction:    types.ButtonAction("LINK"),
+											Link:            ptr.String("__Link__"),
+											Text:            ptr.String("__Text__"),
+											TextColor:       ptr.String("__TextColor__"),
+										},
+										IOS: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										Web: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+									},
+									SecondaryBtn: &types.InAppMessageButton{
+										Android: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										DefaultConfig: &types.DefaultButtonConfiguration{
+											BackgroundColor: ptr.String("__BackgroundColor__"),
+											BorderRadius:    ptr.Int32(1),
+											ButtonAction:    types.ButtonAction("LINK"),
+											Link:            ptr.String("__Link__"),
+											Text:            ptr.String("__Text__"),
+											TextColor:       ptr.String("__TextColor__"),
+										},
+										IOS: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										Web: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+									},
+								},
+							},
+							CustomConfig: map[string]string{
+								"key0": "__Value__",
+							},
+							Layout: types.Layout("BOTTOM_BANNER"),
+						},
+					},
+					Schedule: &types.Schedule{
+						EndTime: ptr.String("__EndTime__"),
+						EventFilter: &types.CampaignEventFilter{
+							Dimensions: &types.EventDimensions{
+								Attributes: map[string]types.AttributeDimension{
+									"key0": {
+										AttributeType: types.AttributeType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								EventType: &types.SetDimension{
+									DimensionType: types.DimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Metrics: map[string]types.MetricDimension{
+									"key0": {
+										ComparisonOperator: ptr.String("__ComparisonOperator__"),
+										Value:              ptr.Float64(1.0),
+									},
+								},
+							},
+							FilterType: types.FilterType("SYSTEM"),
+						},
+						Frequency:   types.Frequency("ONCE"),
+						IsLocalTime: ptr.Bool(true),
+						QuietTime: &types.QuietTime{
+							End:   ptr.String("__End__"),
+							Start: ptr.String("__Start__"),
+						},
+						StartTime: ptr.String("__StartTime__"),
+						Timezone:  ptr.String("__Timezone__"),
+					},
+					SizePercent: ptr.Int32(1),
+					TemplateConfiguration: &types.TemplateConfiguration{
+						EmailTemplate: &types.Template{
+							Name:    ptr.String("__Name__"),
+							Version: ptr.String("__Version__"),
+						},
+						PushTemplate: &types.Template{
+							Name:    ptr.String("__Name__"),
+							Version: ptr.String("__Version__"),
+						},
+						SMSTemplate: &types.Template{
+							Name:    ptr.String("__Name__"),
+							Version: ptr.String("__Version__"),
+						},
+						VoiceTemplate: &types.Template{
+							Name:    ptr.String("__Name__"),
+							Version: ptr.String("__Version__"),
+						},
+						InAppTemplate: &types.Template{
+							Name:    ptr.String("__Name__"),
+							Version: ptr.String("__Version__"),
+						},
+					},
+					TreatmentDescription: ptr.String("__TreatmentDescription__"),
+					TreatmentName:        ptr.String("__TreatmentName__"),
+				},
+				{
+					CustomDeliveryConfiguration: &types.CustomDeliveryConfiguration{
+						DeliveryUri: ptr.String("__DeliveryUri__"),
+						EndpointTypes: []types.EndpointTypesElement{
+							types.EndpointTypesElement("PUSH"),
+							types.EndpointTypesElement("PUSH"),
+						},
+					},
+					MessageConfiguration: &types.MessageConfiguration{
+						ADMMessage: &types.Message{
+							Action:            types.Action("OPEN_APP"),
+							Body:              ptr.String("__Body__"),
+							ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+							ImageSmallIconUrl: ptr.String("__ImageSmallIconUrl__"),
+							ImageUrl:          ptr.String("__ImageUrl__"),
+							JsonBody:          ptr.String("__JsonBody__"),
+							MediaUrl:          ptr.String("__MediaUrl__"),
+							RawContent:        ptr.String("__RawContent__"),
+							SilentPush:        ptr.Bool(true),
+							TimeToLive:        ptr.Int32(1),
+							Title:             ptr.String("__Title__"),
+							Url:               ptr.String("__Url__"),
+						},
+						APNSMessage: &types.Message{
+							Action:            types.Action("OPEN_APP"),
+							Body:              ptr.String("__Body__"),
+							ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+							ImageSmallIconUrl: ptr.String("__ImageSmallIconUrl__"),
+							ImageUrl:          ptr.String("__ImageUrl__"),
+							JsonBody:          ptr.String("__JsonBody__"),
+							MediaUrl:          ptr.String("__MediaUrl__"),
+							RawContent:        ptr.String("__RawContent__"),
+							SilentPush:        ptr.Bool(true),
+							TimeToLive:        ptr.Int32(1),
+							Title:             ptr.String("__Title__"),
+							Url:               ptr.String("__Url__"),
+						},
+						BaiduMessage: &types.Message{
+							Action:            types.Action("OPEN_APP"),
+							Body:              ptr.String("__Body__"),
+							ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+							ImageSmallIconUrl: ptr.String("__ImageSmallIconUrl__"),
+							ImageUrl:          ptr.String("__ImageUrl__"),
+							JsonBody:          ptr.String("__JsonBody__"),
+							MediaUrl:          ptr.String("__MediaUrl__"),
+							RawContent:        ptr.String("__RawContent__"),
+							SilentPush:        ptr.Bool(true),
+							TimeToLive:        ptr.Int32(1),
+							Title:             ptr.String("__Title__"),
+							Url:               ptr.String("__Url__"),
+						},
+						CustomMessage: &types.CampaignCustomMessage{
+							Data: ptr.String("__Data__"),
+						},
+						DefaultMessage: &types.Message{
+							Action:            types.Action("OPEN_APP"),
+							Body:              ptr.String("__Body__"),
+							ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+							ImageSmallIconUrl: ptr.String("__ImageSmallIconUrl__"),
+							ImageUrl:          ptr.String("__ImageUrl__"),
+							JsonBody:          ptr.String("__JsonBody__"),
+							MediaUrl:          ptr.String("__MediaUrl__"),
+							RawContent:        ptr.String("__RawContent__"),
+							SilentPush:        ptr.Bool(true),
+							TimeToLive:        ptr.Int32(1),
+							Title:             ptr.String("__Title__"),
+							Url:               ptr.String("__Url__"),
+						},
+						EmailMessage: &types.CampaignEmailMessage{
+							Body:        ptr.String("__Body__"),
+							FromAddress: ptr.String("__FromAddress__"),
+							Headers: []types.MessageHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							HtmlBody: ptr.String("__HtmlBody__"),
+							Title:    ptr.String("__Title__"),
+						},
+						GCMMessage: &types.Message{
+							Action:            types.Action("OPEN_APP"),
+							Body:              ptr.String("__Body__"),
+							ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+							ImageSmallIconUrl: ptr.String("__ImageSmallIconUrl__"),
+							ImageUrl:          ptr.String("__ImageUrl__"),
+							JsonBody:          ptr.String("__JsonBody__"),
+							MediaUrl:          ptr.String("__MediaUrl__"),
+							RawContent:        ptr.String("__RawContent__"),
+							SilentPush:        ptr.Bool(true),
+							TimeToLive:        ptr.Int32(1),
+							Title:             ptr.String("__Title__"),
+							Url:               ptr.String("__Url__"),
+						},
+						SMSMessage: &types.CampaignSmsMessage{
+							Body:              ptr.String("__Body__"),
+							MessageType:       types.MessageType("TRANSACTIONAL"),
+							OriginationNumber: ptr.String("__OriginationNumber__"),
+							SenderId:          ptr.String("__SenderId__"),
+							EntityId:          ptr.String("__EntityId__"),
+							TemplateId:        ptr.String("__TemplateId__"),
+						},
+						InAppMessage: &types.CampaignInAppMessage{
+							Body: ptr.String("__Body__"),
+							Content: []types.InAppMessageContent{
+								{
+									BackgroundColor: ptr.String("__BackgroundColor__"),
+									BodyConfig: &types.InAppMessageBodyConfig{
+										Alignment: types.Alignment("LEFT"),
+										Body:      ptr.String("__Body__"),
+										TextColor: ptr.String("__TextColor__"),
+									},
+									HeaderConfig: &types.InAppMessageHeaderConfig{
+										Alignment: types.Alignment("LEFT"),
+										Header:    ptr.String("__Header__"),
+										TextColor: ptr.String("__TextColor__"),
+									},
+									ImageUrl: ptr.String("__ImageUrl__"),
+									PrimaryBtn: &types.InAppMessageButton{
+										Android: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										DefaultConfig: &types.DefaultButtonConfiguration{
+											BackgroundColor: ptr.String("__BackgroundColor__"),
+											BorderRadius:    ptr.Int32(1),
+											ButtonAction:    types.ButtonAction("LINK"),
+											Link:            ptr.String("__Link__"),
+											Text:            ptr.String("__Text__"),
+											TextColor:       ptr.String("__TextColor__"),
+										},
+										IOS: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										Web: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+									},
+									SecondaryBtn: &types.InAppMessageButton{
+										Android: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										DefaultConfig: &types.DefaultButtonConfiguration{
+											BackgroundColor: ptr.String("__BackgroundColor__"),
+											BorderRadius:    ptr.Int32(1),
+											ButtonAction:    types.ButtonAction("LINK"),
+											Link:            ptr.String("__Link__"),
+											Text:            ptr.String("__Text__"),
+											TextColor:       ptr.String("__TextColor__"),
+										},
+										IOS: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										Web: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+									},
+								},
+								{
+									BackgroundColor: ptr.String("__BackgroundColor__"),
+									BodyConfig: &types.InAppMessageBodyConfig{
+										Alignment: types.Alignment("LEFT"),
+										Body:      ptr.String("__Body__"),
+										TextColor: ptr.String("__TextColor__"),
+									},
+									HeaderConfig: &types.InAppMessageHeaderConfig{
+										Alignment: types.Alignment("LEFT"),
+										Header:    ptr.String("__Header__"),
+										TextColor: ptr.String("__TextColor__"),
+									},
+									ImageUrl: ptr.String("__ImageUrl__"),
+									PrimaryBtn: &types.InAppMessageButton{
+										Android: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										DefaultConfig: &types.DefaultButtonConfiguration{
+											BackgroundColor: ptr.String("__BackgroundColor__"),
+											BorderRadius:    ptr.Int32(1),
+											ButtonAction:    types.ButtonAction("LINK"),
+											Link:            ptr.String("__Link__"),
+											Text:            ptr.String("__Text__"),
+											TextColor:       ptr.String("__TextColor__"),
+										},
+										IOS: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										Web: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+									},
+									SecondaryBtn: &types.InAppMessageButton{
+										Android: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										DefaultConfig: &types.DefaultButtonConfiguration{
+											BackgroundColor: ptr.String("__BackgroundColor__"),
+											BorderRadius:    ptr.Int32(1),
+											ButtonAction:    types.ButtonAction("LINK"),
+											Link:            ptr.String("__Link__"),
+											Text:            ptr.String("__Text__"),
+											TextColor:       ptr.String("__TextColor__"),
+										},
+										IOS: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+										Web: &types.OverrideButtonConfiguration{
+											ButtonAction: types.ButtonAction("LINK"),
+											Link:         ptr.String("__Link__"),
+										},
+									},
+								},
+							},
+							CustomConfig: map[string]string{
+								"key0": "__Value__",
+							},
+							Layout: types.Layout("BOTTOM_BANNER"),
+						},
+					},
+					Schedule: &types.Schedule{
+						EndTime: ptr.String("__EndTime__"),
+						EventFilter: &types.CampaignEventFilter{
+							Dimensions: &types.EventDimensions{
+								Attributes: map[string]types.AttributeDimension{
+									"key0": {
+										AttributeType: types.AttributeType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								EventType: &types.SetDimension{
+									DimensionType: types.DimensionType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								Metrics: map[string]types.MetricDimension{
+									"key0": {
+										ComparisonOperator: ptr.String("__ComparisonOperator__"),
+										Value:              ptr.Float64(1.0),
+									},
+								},
+							},
+							FilterType: types.FilterType("SYSTEM"),
+						},
+						Frequency:   types.Frequency("ONCE"),
+						IsLocalTime: ptr.Bool(true),
+						QuietTime: &types.QuietTime{
+							End:   ptr.String("__End__"),
+							Start: ptr.String("__Start__"),
+						},
+						StartTime: ptr.String("__StartTime__"),
+						Timezone:  ptr.String("__Timezone__"),
+					},
+					SizePercent: ptr.Int32(1),
+					TemplateConfiguration: &types.TemplateConfiguration{
+						EmailTemplate: &types.Template{
+							Name:    ptr.String("__Name__"),
+							Version: ptr.String("__Version__"),
+						},
+						PushTemplate: &types.Template{
+							Name:    ptr.String("__Name__"),
+							Version: ptr.String("__Version__"),
+						},
+						SMSTemplate: &types.Template{
+							Name:    ptr.String("__Name__"),
+							Version: ptr.String("__Version__"),
+						},
+						VoiceTemplate: &types.Template{
+							Name:    ptr.String("__Name__"),
+							Version: ptr.String("__Version__"),
+						},
+						InAppTemplate: &types.Template{
+							Name:    ptr.String("__Name__"),
+							Version: ptr.String("__Version__"),
+						},
+					},
+					TreatmentDescription: ptr.String("__TreatmentDescription__"),
+					TreatmentName:        ptr.String("__TreatmentName__"),
+				},
+			},
+			CustomDeliveryConfiguration: &types.CustomDeliveryConfiguration{
+				DeliveryUri: ptr.String("__DeliveryUri__"),
+				EndpointTypes: []types.EndpointTypesElement{
+					types.EndpointTypesElement("PUSH"),
+					types.EndpointTypesElement("PUSH"),
+				},
+			},
+			Description:    ptr.String("__Description__"),
+			HoldoutPercent: ptr.Int32(1),
+			Hook: &types.CampaignHook{
+				LambdaFunctionName: ptr.String("__LambdaFunctionName__"),
+				Mode:               types.Mode("DELIVERY"),
+				WebUrl:             ptr.String("__WebUrl__"),
+			},
+			IsPaused: ptr.Bool(true),
+			Limits: &types.CampaignLimits{
+				Daily:             ptr.Int32(1),
+				MaximumDuration:   ptr.Int32(1),
+				MessagesPerSecond: ptr.Int32(1),
+				Total:             ptr.Int32(1),
+				Session:           ptr.Int32(1),
+			},
+			MessageConfiguration: &types.MessageConfiguration{
+				ADMMessage: &types.Message{
+					Action:            types.Action("OPEN_APP"),
+					Body:              ptr.String("__Body__"),
+					ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+					ImageSmallIconUrl: ptr.String("__ImageSmallIconUrl__"),
+					ImageUrl:          ptr.String("__ImageUrl__"),
+					JsonBody:          ptr.String("__JsonBody__"),
+					MediaUrl:          ptr.String("__MediaUrl__"),
+					RawContent:        ptr.String("__RawContent__"),
+					SilentPush:        ptr.Bool(true),
+					TimeToLive:        ptr.Int32(1),
+					Title:             ptr.String("__Title__"),
+					Url:               ptr.String("__Url__"),
+				},
+				APNSMessage: &types.Message{
+					Action:            types.Action("OPEN_APP"),
+					Body:              ptr.String("__Body__"),
+					ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+					ImageSmallIconUrl: ptr.String("__ImageSmallIconUrl__"),
+					ImageUrl:          ptr.String("__ImageUrl__"),
+					JsonBody:          ptr.String("__JsonBody__"),
+					MediaUrl:          ptr.String("__MediaUrl__"),
+					RawContent:        ptr.String("__RawContent__"),
+					SilentPush:        ptr.Bool(true),
+					TimeToLive:        ptr.Int32(1),
+					Title:             ptr.String("__Title__"),
+					Url:               ptr.String("__Url__"),
+				},
+				BaiduMessage: &types.Message{
+					Action:            types.Action("OPEN_APP"),
+					Body:              ptr.String("__Body__"),
+					ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+					ImageSmallIconUrl: ptr.String("__ImageSmallIconUrl__"),
+					ImageUrl:          ptr.String("__ImageUrl__"),
+					JsonBody:          ptr.String("__JsonBody__"),
+					MediaUrl:          ptr.String("__MediaUrl__"),
+					RawContent:        ptr.String("__RawContent__"),
+					SilentPush:        ptr.Bool(true),
+					TimeToLive:        ptr.Int32(1),
+					Title:             ptr.String("__Title__"),
+					Url:               ptr.String("__Url__"),
+				},
+				CustomMessage: &types.CampaignCustomMessage{
+					Data: ptr.String("__Data__"),
+				},
+				DefaultMessage: &types.Message{
+					Action:            types.Action("OPEN_APP"),
+					Body:              ptr.String("__Body__"),
+					ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+					ImageSmallIconUrl: ptr.String("__ImageSmallIconUrl__"),
+					ImageUrl:          ptr.String("__ImageUrl__"),
+					JsonBody:          ptr.String("__JsonBody__"),
+					MediaUrl:          ptr.String("__MediaUrl__"),
+					RawContent:        ptr.String("__RawContent__"),
+					SilentPush:        ptr.Bool(true),
+					TimeToLive:        ptr.Int32(1),
+					Title:             ptr.String("__Title__"),
+					Url:               ptr.String("__Url__"),
+				},
+				EmailMessage: &types.CampaignEmailMessage{
+					Body:        ptr.String("__Body__"),
+					FromAddress: ptr.String("__FromAddress__"),
+					Headers: []types.MessageHeader{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					HtmlBody: ptr.String("__HtmlBody__"),
+					Title:    ptr.String("__Title__"),
+				},
+				GCMMessage: &types.Message{
+					Action:            types.Action("OPEN_APP"),
+					Body:              ptr.String("__Body__"),
+					ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+					ImageSmallIconUrl: ptr.String("__ImageSmallIconUrl__"),
+					ImageUrl:          ptr.String("__ImageUrl__"),
+					JsonBody:          ptr.String("__JsonBody__"),
+					MediaUrl:          ptr.String("__MediaUrl__"),
+					RawContent:        ptr.String("__RawContent__"),
+					SilentPush:        ptr.Bool(true),
+					TimeToLive:        ptr.Int32(1),
+					Title:             ptr.String("__Title__"),
+					Url:               ptr.String("__Url__"),
+				},
+				SMSMessage: &types.CampaignSmsMessage{
+					Body:              ptr.String("__Body__"),
+					MessageType:       types.MessageType("TRANSACTIONAL"),
+					OriginationNumber: ptr.String("__OriginationNumber__"),
+					SenderId:          ptr.String("__SenderId__"),
+					EntityId:          ptr.String("__EntityId__"),
+					TemplateId:        ptr.String("__TemplateId__"),
+				},
+				InAppMessage: &types.CampaignInAppMessage{
+					Body: ptr.String("__Body__"),
+					Content: []types.InAppMessageContent{
+						{
+							BackgroundColor: ptr.String("__BackgroundColor__"),
+							BodyConfig: &types.InAppMessageBodyConfig{
+								Alignment: types.Alignment("LEFT"),
+								Body:      ptr.String("__Body__"),
+								TextColor: ptr.String("__TextColor__"),
+							},
+							HeaderConfig: &types.InAppMessageHeaderConfig{
+								Alignment: types.Alignment("LEFT"),
+								Header:    ptr.String("__Header__"),
+								TextColor: ptr.String("__TextColor__"),
+							},
+							ImageUrl: ptr.String("__ImageUrl__"),
+							PrimaryBtn: &types.InAppMessageButton{
+								Android: &types.OverrideButtonConfiguration{
+									ButtonAction: types.ButtonAction("LINK"),
+									Link:         ptr.String("__Link__"),
+								},
+								DefaultConfig: &types.DefaultButtonConfiguration{
+									BackgroundColor: ptr.String("__BackgroundColor__"),
+									BorderRadius:    ptr.Int32(1),
+									ButtonAction:    types.ButtonAction("LINK"),
+									Link:            ptr.String("__Link__"),
+									Text:            ptr.String("__Text__"),
+									TextColor:       ptr.String("__TextColor__"),
+								},
+								IOS: &types.OverrideButtonConfiguration{
+									ButtonAction: types.ButtonAction("LINK"),
+									Link:         ptr.String("__Link__"),
+								},
+								Web: &types.OverrideButtonConfiguration{
+									ButtonAction: types.ButtonAction("LINK"),
+									Link:         ptr.String("__Link__"),
+								},
+							},
+							SecondaryBtn: &types.InAppMessageButton{
+								Android: &types.OverrideButtonConfiguration{
+									ButtonAction: types.ButtonAction("LINK"),
+									Link:         ptr.String("__Link__"),
+								},
+								DefaultConfig: &types.DefaultButtonConfiguration{
+									BackgroundColor: ptr.String("__BackgroundColor__"),
+									BorderRadius:    ptr.Int32(1),
+									ButtonAction:    types.ButtonAction("LINK"),
+									Link:            ptr.String("__Link__"),
+									Text:            ptr.String("__Text__"),
+									TextColor:       ptr.String("__TextColor__"),
+								},
+								IOS: &types.OverrideButtonConfiguration{
+									ButtonAction: types.ButtonAction("LINK"),
+									Link:         ptr.String("__Link__"),
+								},
+								Web: &types.OverrideButtonConfiguration{
+									ButtonAction: types.ButtonAction("LINK"),
+									Link:         ptr.String("__Link__"),
+								},
+							},
+						},
+						{
+							BackgroundColor: ptr.String("__BackgroundColor__"),
+							BodyConfig: &types.InAppMessageBodyConfig{
+								Alignment: types.Alignment("LEFT"),
+								Body:      ptr.String("__Body__"),
+								TextColor: ptr.String("__TextColor__"),
+							},
+							HeaderConfig: &types.InAppMessageHeaderConfig{
+								Alignment: types.Alignment("LEFT"),
+								Header:    ptr.String("__Header__"),
+								TextColor: ptr.String("__TextColor__"),
+							},
+							ImageUrl: ptr.String("__ImageUrl__"),
+							PrimaryBtn: &types.InAppMessageButton{
+								Android: &types.OverrideButtonConfiguration{
+									ButtonAction: types.ButtonAction("LINK"),
+									Link:         ptr.String("__Link__"),
+								},
+								DefaultConfig: &types.DefaultButtonConfiguration{
+									BackgroundColor: ptr.String("__BackgroundColor__"),
+									BorderRadius:    ptr.Int32(1),
+									ButtonAction:    types.ButtonAction("LINK"),
+									Link:            ptr.String("__Link__"),
+									Text:            ptr.String("__Text__"),
+									TextColor:       ptr.String("__TextColor__"),
+								},
+								IOS: &types.OverrideButtonConfiguration{
+									ButtonAction: types.ButtonAction("LINK"),
+									Link:         ptr.String("__Link__"),
+								},
+								Web: &types.OverrideButtonConfiguration{
+									ButtonAction: types.ButtonAction("LINK"),
+									Link:         ptr.String("__Link__"),
+								},
+							},
+							SecondaryBtn: &types.InAppMessageButton{
+								Android: &types.OverrideButtonConfiguration{
+									ButtonAction: types.ButtonAction("LINK"),
+									Link:         ptr.String("__Link__"),
+								},
+								DefaultConfig: &types.DefaultButtonConfiguration{
+									BackgroundColor: ptr.String("__BackgroundColor__"),
+									BorderRadius:    ptr.Int32(1),
+									ButtonAction:    types.ButtonAction("LINK"),
+									Link:            ptr.String("__Link__"),
+									Text:            ptr.String("__Text__"),
+									TextColor:       ptr.String("__TextColor__"),
+								},
+								IOS: &types.OverrideButtonConfiguration{
+									ButtonAction: types.ButtonAction("LINK"),
+									Link:         ptr.String("__Link__"),
+								},
+								Web: &types.OverrideButtonConfiguration{
+									ButtonAction: types.ButtonAction("LINK"),
+									Link:         ptr.String("__Link__"),
+								},
+							},
+						},
+					},
+					CustomConfig: map[string]string{
+						"key0": "__Value__",
+					},
+					Layout: types.Layout("BOTTOM_BANNER"),
+				},
+			},
+			Name: ptr.String("__Name__"),
+			Schedule: &types.Schedule{
+				EndTime: ptr.String("__EndTime__"),
+				EventFilter: &types.CampaignEventFilter{
+					Dimensions: &types.EventDimensions{
+						Attributes: map[string]types.AttributeDimension{
+							"key0": {
+								AttributeType: types.AttributeType("INCLUSIVE"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						EventType: &types.SetDimension{
+							DimensionType: types.DimensionType("INCLUSIVE"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Metrics: map[string]types.MetricDimension{
+							"key0": {
+								ComparisonOperator: ptr.String("__ComparisonOperator__"),
+								Value:              ptr.Float64(1.0),
+							},
+						},
+					},
+					FilterType: types.FilterType("SYSTEM"),
+				},
+				Frequency:   types.Frequency("ONCE"),
+				IsLocalTime: ptr.Bool(true),
+				QuietTime: &types.QuietTime{
+					End:   ptr.String("__End__"),
+					Start: ptr.String("__Start__"),
+				},
+				StartTime: ptr.String("__StartTime__"),
+				Timezone:  ptr.String("__Timezone__"),
+			},
+			SegmentId:      ptr.String("__SegmentId__"),
+			SegmentVersion: ptr.Int32(1),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+			TemplateConfiguration: &types.TemplateConfiguration{
+				EmailTemplate: &types.Template{
+					Name:    ptr.String("__Name__"),
+					Version: ptr.String("__Version__"),
+				},
+				PushTemplate: &types.Template{
+					Name:    ptr.String("__Name__"),
+					Version: ptr.String("__Version__"),
+				},
+				SMSTemplate: &types.Template{
+					Name:    ptr.String("__Name__"),
+					Version: ptr.String("__Version__"),
+				},
+				VoiceTemplate: &types.Template{
+					Name:    ptr.String("__Name__"),
+					Version: ptr.String("__Version__"),
+				},
+				InAppTemplate: &types.Template{
+					Name:    ptr.String("__Name__"),
+					Version: ptr.String("__Version__"),
+				},
+			},
+			TreatmentDescription: ptr.String("__TreatmentDescription__"),
+			TreatmentName:        ptr.String("__TreatmentName__"),
+			Priority:             ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19700,7 +24076,17 @@ func TestCheckResponseSnapshot_UpdateEmailChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEmailChannel(context.Background(), &UpdateEmailChannelInput{})
+	got, err := svc.UpdateEmailChannel(context.Background(), &UpdateEmailChannelInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		EmailChannelRequest: &types.EmailChannelRequest{
+			ConfigurationSet:            ptr.String("__ConfigurationSet__"),
+			Enabled:                     ptr.Bool(true),
+			FromAddress:                 ptr.String("__FromAddress__"),
+			Identity:                    ptr.String("__Identity__"),
+			RoleArn:                     ptr.String("__RoleArn__"),
+			OrchestrationSendingRoleArn: ptr.String("__OrchestrationSendingRoleArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19724,7 +24110,32 @@ func TestCheckResponseSnapshot_UpdateEmailTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEmailTemplate(context.Background(), &UpdateEmailTemplateInput{})
+	got, err := svc.UpdateEmailTemplate(context.Background(), &UpdateEmailTemplateInput{
+		CreateNewVersion: ptr.Bool(true),
+		EmailTemplateRequest: &types.EmailTemplateRequest{
+			DefaultSubstitutions: ptr.String("__DefaultSubstitutions__"),
+			HtmlPart:             ptr.String("__HtmlPart__"),
+			RecommenderId:        ptr.String("__RecommenderId__"),
+			Subject:              ptr.String("__Subject__"),
+			Headers: []types.MessageHeader{
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+			TemplateDescription: ptr.String("__TemplateDescription__"),
+			TextPart:            ptr.String("__TextPart__"),
+		},
+		TemplateName: ptr.String("__TemplateName__"),
+		Version:      ptr.String("__Version__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19748,7 +24159,54 @@ func TestCheckResponseSnapshot_UpdateEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEndpoint(context.Background(), &UpdateEndpointInput{})
+	got, err := svc.UpdateEndpoint(context.Background(), &UpdateEndpointInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		EndpointId:    ptr.String("__EndpointId__"),
+		EndpointRequest: &types.EndpointRequest{
+			Address: ptr.String("__Address__"),
+			Attributes: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+			ChannelType: types.ChannelType("PUSH"),
+			Demographic: &types.EndpointDemographic{
+				AppVersion:      ptr.String("__AppVersion__"),
+				Locale:          ptr.String("__Locale__"),
+				Make:            ptr.String("__Make__"),
+				Model:           ptr.String("__Model__"),
+				ModelVersion:    ptr.String("__ModelVersion__"),
+				Platform:        ptr.String("__Platform__"),
+				PlatformVersion: ptr.String("__PlatformVersion__"),
+				Timezone:        ptr.String("__Timezone__"),
+			},
+			EffectiveDate:  ptr.String("__EffectiveDate__"),
+			EndpointStatus: ptr.String("__EndpointStatus__"),
+			Location: &types.EndpointLocation{
+				City:       ptr.String("__City__"),
+				Country:    ptr.String("__Country__"),
+				Latitude:   ptr.Float64(1.0),
+				Longitude:  ptr.Float64(1.0),
+				PostalCode: ptr.String("__PostalCode__"),
+				Region:     ptr.String("__Region__"),
+			},
+			Metrics: map[string]float64{
+				"key0": 1.0,
+			},
+			OptOut:    ptr.String("__OptOut__"),
+			RequestId: ptr.String("__RequestId__"),
+			User: &types.EndpointUser{
+				UserAttributes: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
+				},
+				UserId: ptr.String("__UserId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19772,7 +24230,103 @@ func TestCheckResponseSnapshot_UpdateEndpointsBatch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEndpointsBatch(context.Background(), &UpdateEndpointsBatchInput{})
+	got, err := svc.UpdateEndpointsBatch(context.Background(), &UpdateEndpointsBatchInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		EndpointBatchRequest: &types.EndpointBatchRequest{
+			Item: []types.EndpointBatchItem{
+				{
+					Address: ptr.String("__Address__"),
+					Attributes: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ChannelType: types.ChannelType("PUSH"),
+					Demographic: &types.EndpointDemographic{
+						AppVersion:      ptr.String("__AppVersion__"),
+						Locale:          ptr.String("__Locale__"),
+						Make:            ptr.String("__Make__"),
+						Model:           ptr.String("__Model__"),
+						ModelVersion:    ptr.String("__ModelVersion__"),
+						Platform:        ptr.String("__Platform__"),
+						PlatformVersion: ptr.String("__PlatformVersion__"),
+						Timezone:        ptr.String("__Timezone__"),
+					},
+					EffectiveDate:  ptr.String("__EffectiveDate__"),
+					EndpointStatus: ptr.String("__EndpointStatus__"),
+					Id:             ptr.String("__Id__"),
+					Location: &types.EndpointLocation{
+						City:       ptr.String("__City__"),
+						Country:    ptr.String("__Country__"),
+						Latitude:   ptr.Float64(1.0),
+						Longitude:  ptr.Float64(1.0),
+						PostalCode: ptr.String("__PostalCode__"),
+						Region:     ptr.String("__Region__"),
+					},
+					Metrics: map[string]float64{
+						"key0": 1.0,
+					},
+					OptOut:    ptr.String("__OptOut__"),
+					RequestId: ptr.String("__RequestId__"),
+					User: &types.EndpointUser{
+						UserAttributes: map[string][]string{
+							"key0": {
+								"__Member__",
+								"__Member__",
+							},
+						},
+						UserId: ptr.String("__UserId__"),
+					},
+				},
+				{
+					Address: ptr.String("__Address__"),
+					Attributes: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ChannelType: types.ChannelType("PUSH"),
+					Demographic: &types.EndpointDemographic{
+						AppVersion:      ptr.String("__AppVersion__"),
+						Locale:          ptr.String("__Locale__"),
+						Make:            ptr.String("__Make__"),
+						Model:           ptr.String("__Model__"),
+						ModelVersion:    ptr.String("__ModelVersion__"),
+						Platform:        ptr.String("__Platform__"),
+						PlatformVersion: ptr.String("__PlatformVersion__"),
+						Timezone:        ptr.String("__Timezone__"),
+					},
+					EffectiveDate:  ptr.String("__EffectiveDate__"),
+					EndpointStatus: ptr.String("__EndpointStatus__"),
+					Id:             ptr.String("__Id__"),
+					Location: &types.EndpointLocation{
+						City:       ptr.String("__City__"),
+						Country:    ptr.String("__Country__"),
+						Latitude:   ptr.Float64(1.0),
+						Longitude:  ptr.Float64(1.0),
+						PostalCode: ptr.String("__PostalCode__"),
+						Region:     ptr.String("__Region__"),
+					},
+					Metrics: map[string]float64{
+						"key0": 1.0,
+					},
+					OptOut:    ptr.String("__OptOut__"),
+					RequestId: ptr.String("__RequestId__"),
+					User: &types.EndpointUser{
+						UserAttributes: map[string][]string{
+							"key0": {
+								"__Member__",
+								"__Member__",
+							},
+						},
+						UserId: ptr.String("__UserId__"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19807,7 +24361,15 @@ func TestCheckResponseSnapshot_UpdateGcmChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGcmChannel(context.Background(), &UpdateGcmChannelInput{})
+	got, err := svc.UpdateGcmChannel(context.Background(), &UpdateGcmChannelInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		GCMChannelRequest: &types.GCMChannelRequest{
+			ApiKey:                      ptr.String("__ApiKey__"),
+			DefaultAuthenticationMethod: ptr.String("__DefaultAuthenticationMethod__"),
+			Enabled:                     ptr.Bool(true),
+			ServiceJson:                 ptr.String("__ServiceJson__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -19831,7 +24393,139 @@ func TestCheckResponseSnapshot_UpdateInAppTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateInAppTemplate(context.Background(), &UpdateInAppTemplateInput{})
+	got, err := svc.UpdateInAppTemplate(context.Background(), &UpdateInAppTemplateInput{
+		CreateNewVersion: ptr.Bool(true),
+		InAppTemplateRequest: &types.InAppTemplateRequest{
+			Content: []types.InAppMessageContent{
+				{
+					BackgroundColor: ptr.String("__BackgroundColor__"),
+					BodyConfig: &types.InAppMessageBodyConfig{
+						Alignment: types.Alignment("LEFT"),
+						Body:      ptr.String("__Body__"),
+						TextColor: ptr.String("__TextColor__"),
+					},
+					HeaderConfig: &types.InAppMessageHeaderConfig{
+						Alignment: types.Alignment("LEFT"),
+						Header:    ptr.String("__Header__"),
+						TextColor: ptr.String("__TextColor__"),
+					},
+					ImageUrl: ptr.String("__ImageUrl__"),
+					PrimaryBtn: &types.InAppMessageButton{
+						Android: &types.OverrideButtonConfiguration{
+							ButtonAction: types.ButtonAction("LINK"),
+							Link:         ptr.String("__Link__"),
+						},
+						DefaultConfig: &types.DefaultButtonConfiguration{
+							BackgroundColor: ptr.String("__BackgroundColor__"),
+							BorderRadius:    ptr.Int32(1),
+							ButtonAction:    types.ButtonAction("LINK"),
+							Link:            ptr.String("__Link__"),
+							Text:            ptr.String("__Text__"),
+							TextColor:       ptr.String("__TextColor__"),
+						},
+						IOS: &types.OverrideButtonConfiguration{
+							ButtonAction: types.ButtonAction("LINK"),
+							Link:         ptr.String("__Link__"),
+						},
+						Web: &types.OverrideButtonConfiguration{
+							ButtonAction: types.ButtonAction("LINK"),
+							Link:         ptr.String("__Link__"),
+						},
+					},
+					SecondaryBtn: &types.InAppMessageButton{
+						Android: &types.OverrideButtonConfiguration{
+							ButtonAction: types.ButtonAction("LINK"),
+							Link:         ptr.String("__Link__"),
+						},
+						DefaultConfig: &types.DefaultButtonConfiguration{
+							BackgroundColor: ptr.String("__BackgroundColor__"),
+							BorderRadius:    ptr.Int32(1),
+							ButtonAction:    types.ButtonAction("LINK"),
+							Link:            ptr.String("__Link__"),
+							Text:            ptr.String("__Text__"),
+							TextColor:       ptr.String("__TextColor__"),
+						},
+						IOS: &types.OverrideButtonConfiguration{
+							ButtonAction: types.ButtonAction("LINK"),
+							Link:         ptr.String("__Link__"),
+						},
+						Web: &types.OverrideButtonConfiguration{
+							ButtonAction: types.ButtonAction("LINK"),
+							Link:         ptr.String("__Link__"),
+						},
+					},
+				},
+				{
+					BackgroundColor: ptr.String("__BackgroundColor__"),
+					BodyConfig: &types.InAppMessageBodyConfig{
+						Alignment: types.Alignment("LEFT"),
+						Body:      ptr.String("__Body__"),
+						TextColor: ptr.String("__TextColor__"),
+					},
+					HeaderConfig: &types.InAppMessageHeaderConfig{
+						Alignment: types.Alignment("LEFT"),
+						Header:    ptr.String("__Header__"),
+						TextColor: ptr.String("__TextColor__"),
+					},
+					ImageUrl: ptr.String("__ImageUrl__"),
+					PrimaryBtn: &types.InAppMessageButton{
+						Android: &types.OverrideButtonConfiguration{
+							ButtonAction: types.ButtonAction("LINK"),
+							Link:         ptr.String("__Link__"),
+						},
+						DefaultConfig: &types.DefaultButtonConfiguration{
+							BackgroundColor: ptr.String("__BackgroundColor__"),
+							BorderRadius:    ptr.Int32(1),
+							ButtonAction:    types.ButtonAction("LINK"),
+							Link:            ptr.String("__Link__"),
+							Text:            ptr.String("__Text__"),
+							TextColor:       ptr.String("__TextColor__"),
+						},
+						IOS: &types.OverrideButtonConfiguration{
+							ButtonAction: types.ButtonAction("LINK"),
+							Link:         ptr.String("__Link__"),
+						},
+						Web: &types.OverrideButtonConfiguration{
+							ButtonAction: types.ButtonAction("LINK"),
+							Link:         ptr.String("__Link__"),
+						},
+					},
+					SecondaryBtn: &types.InAppMessageButton{
+						Android: &types.OverrideButtonConfiguration{
+							ButtonAction: types.ButtonAction("LINK"),
+							Link:         ptr.String("__Link__"),
+						},
+						DefaultConfig: &types.DefaultButtonConfiguration{
+							BackgroundColor: ptr.String("__BackgroundColor__"),
+							BorderRadius:    ptr.Int32(1),
+							ButtonAction:    types.ButtonAction("LINK"),
+							Link:            ptr.String("__Link__"),
+							Text:            ptr.String("__Text__"),
+							TextColor:       ptr.String("__TextColor__"),
+						},
+						IOS: &types.OverrideButtonConfiguration{
+							ButtonAction: types.ButtonAction("LINK"),
+							Link:         ptr.String("__Link__"),
+						},
+						Web: &types.OverrideButtonConfiguration{
+							ButtonAction: types.ButtonAction("LINK"),
+							Link:         ptr.String("__Link__"),
+						},
+					},
+				},
+			},
+			CustomConfig: map[string]string{
+				"key0": "__Value__",
+			},
+			Layout: types.Layout("BOTTOM_BANNER"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+			TemplateDescription: ptr.String("__TemplateDescription__"),
+		},
+		TemplateName: ptr.String("__TemplateName__"),
+		Version:      ptr.String("__Version__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -20652,7 +25346,806 @@ func TestCheckResponseSnapshot_UpdateJourney(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateJourney(context.Background(), &UpdateJourneyInput{})
+	got, err := svc.UpdateJourney(context.Background(), &UpdateJourneyInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		JourneyId:     ptr.String("__JourneyId__"),
+		WriteJourneyRequest: &types.WriteJourneyRequest{
+			Activities: map[string]types.Activity{
+				"key0": {
+					CUSTOM: &types.CustomMessageActivity{
+						DeliveryUri: ptr.String("__DeliveryUri__"),
+						EndpointTypes: []types.EndpointTypesElement{
+							types.EndpointTypesElement("PUSH"),
+							types.EndpointTypesElement("PUSH"),
+						},
+						MessageConfig: &types.JourneyCustomMessage{
+							Data: ptr.String("__Data__"),
+						},
+						NextActivity:    ptr.String("__NextActivity__"),
+						TemplateName:    ptr.String("__TemplateName__"),
+						TemplateVersion: ptr.String("__TemplateVersion__"),
+					},
+					ConditionalSplit: &types.ConditionalSplitActivity{
+						Condition: &types.Condition{
+							Conditions: []types.SimpleCondition{
+								{
+									EventCondition: &types.EventCondition{
+										Dimensions: &types.EventDimensions{
+											Attributes: map[string]types.AttributeDimension{
+												"key0": {
+													AttributeType: types.AttributeType("INCLUSIVE"),
+													Values: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+											},
+											EventType: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Metrics: map[string]types.MetricDimension{
+												"key0": {
+													ComparisonOperator: ptr.String("__ComparisonOperator__"),
+													Value:              ptr.Float64(1.0),
+												},
+											},
+										},
+										MessageActivity: ptr.String("__MessageActivity__"),
+									},
+									SegmentCondition: &types.SegmentCondition{
+										SegmentId: ptr.String("__SegmentId__"),
+									},
+									SegmentDimensions: &types.SegmentDimensions{
+										Attributes: map[string]types.AttributeDimension{
+											"key0": {
+												AttributeType: types.AttributeType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+										Behavior: &types.SegmentBehaviors{
+											Recency: &types.RecencyDimension{
+												Duration:    types.Duration("HR_24"),
+												RecencyType: types.RecencyType("ACTIVE"),
+											},
+										},
+										Demographic: &types.SegmentDemographics{
+											AppVersion: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Channel: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											DeviceType: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Make: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Model: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Platform: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+										Location: &types.SegmentLocation{
+											Country: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											GPSPoint: &types.GPSPointDimension{
+												Coordinates: &types.GPSCoordinates{
+													Latitude:  ptr.Float64(1.0),
+													Longitude: ptr.Float64(1.0),
+												},
+												RangeInKilometers: ptr.Float64(1.0),
+											},
+										},
+										Metrics: map[string]types.MetricDimension{
+											"key0": {
+												ComparisonOperator: ptr.String("__ComparisonOperator__"),
+												Value:              ptr.Float64(1.0),
+											},
+										},
+										UserAttributes: map[string]types.AttributeDimension{
+											"key0": {
+												AttributeType: types.AttributeType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+									},
+								},
+								{
+									EventCondition: &types.EventCondition{
+										Dimensions: &types.EventDimensions{
+											Attributes: map[string]types.AttributeDimension{
+												"key0": {
+													AttributeType: types.AttributeType("INCLUSIVE"),
+													Values: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+											},
+											EventType: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Metrics: map[string]types.MetricDimension{
+												"key0": {
+													ComparisonOperator: ptr.String("__ComparisonOperator__"),
+													Value:              ptr.Float64(1.0),
+												},
+											},
+										},
+										MessageActivity: ptr.String("__MessageActivity__"),
+									},
+									SegmentCondition: &types.SegmentCondition{
+										SegmentId: ptr.String("__SegmentId__"),
+									},
+									SegmentDimensions: &types.SegmentDimensions{
+										Attributes: map[string]types.AttributeDimension{
+											"key0": {
+												AttributeType: types.AttributeType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+										Behavior: &types.SegmentBehaviors{
+											Recency: &types.RecencyDimension{
+												Duration:    types.Duration("HR_24"),
+												RecencyType: types.RecencyType("ACTIVE"),
+											},
+										},
+										Demographic: &types.SegmentDemographics{
+											AppVersion: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Channel: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											DeviceType: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Make: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Model: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Platform: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+										Location: &types.SegmentLocation{
+											Country: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											GPSPoint: &types.GPSPointDimension{
+												Coordinates: &types.GPSCoordinates{
+													Latitude:  ptr.Float64(1.0),
+													Longitude: ptr.Float64(1.0),
+												},
+												RangeInKilometers: ptr.Float64(1.0),
+											},
+										},
+										Metrics: map[string]types.MetricDimension{
+											"key0": {
+												ComparisonOperator: ptr.String("__ComparisonOperator__"),
+												Value:              ptr.Float64(1.0),
+											},
+										},
+										UserAttributes: map[string]types.AttributeDimension{
+											"key0": {
+												AttributeType: types.AttributeType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+									},
+								},
+							},
+							Operator: types.Operator("ALL"),
+						},
+						EvaluationWaitTime: &types.WaitTime{
+							WaitFor:   ptr.String("__WaitFor__"),
+							WaitUntil: ptr.String("__WaitUntil__"),
+						},
+						FalseActivity: ptr.String("__FalseActivity__"),
+						TrueActivity:  ptr.String("__TrueActivity__"),
+					},
+					Description: ptr.String("__Description__"),
+					EMAIL: &types.EmailMessageActivity{
+						MessageConfig: &types.JourneyEmailMessage{
+							FromAddress: ptr.String("__FromAddress__"),
+						},
+						NextActivity:    ptr.String("__NextActivity__"),
+						TemplateName:    ptr.String("__TemplateName__"),
+						TemplateVersion: ptr.String("__TemplateVersion__"),
+					},
+					Holdout: &types.HoldoutActivity{
+						NextActivity: ptr.String("__NextActivity__"),
+						Percentage:   ptr.Int32(1),
+					},
+					MultiCondition: &types.MultiConditionalSplitActivity{
+						Branches: []types.MultiConditionalBranch{
+							{
+								Condition: &types.SimpleCondition{
+									EventCondition: &types.EventCondition{
+										Dimensions: &types.EventDimensions{
+											Attributes: map[string]types.AttributeDimension{
+												"key0": {
+													AttributeType: types.AttributeType("INCLUSIVE"),
+													Values: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+											},
+											EventType: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Metrics: map[string]types.MetricDimension{
+												"key0": {
+													ComparisonOperator: ptr.String("__ComparisonOperator__"),
+													Value:              ptr.Float64(1.0),
+												},
+											},
+										},
+										MessageActivity: ptr.String("__MessageActivity__"),
+									},
+									SegmentCondition: &types.SegmentCondition{
+										SegmentId: ptr.String("__SegmentId__"),
+									},
+									SegmentDimensions: &types.SegmentDimensions{
+										Attributes: map[string]types.AttributeDimension{
+											"key0": {
+												AttributeType: types.AttributeType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+										Behavior: &types.SegmentBehaviors{
+											Recency: &types.RecencyDimension{
+												Duration:    types.Duration("HR_24"),
+												RecencyType: types.RecencyType("ACTIVE"),
+											},
+										},
+										Demographic: &types.SegmentDemographics{
+											AppVersion: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Channel: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											DeviceType: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Make: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Model: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Platform: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+										Location: &types.SegmentLocation{
+											Country: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											GPSPoint: &types.GPSPointDimension{
+												Coordinates: &types.GPSCoordinates{
+													Latitude:  ptr.Float64(1.0),
+													Longitude: ptr.Float64(1.0),
+												},
+												RangeInKilometers: ptr.Float64(1.0),
+											},
+										},
+										Metrics: map[string]types.MetricDimension{
+											"key0": {
+												ComparisonOperator: ptr.String("__ComparisonOperator__"),
+												Value:              ptr.Float64(1.0),
+											},
+										},
+										UserAttributes: map[string]types.AttributeDimension{
+											"key0": {
+												AttributeType: types.AttributeType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+									},
+								},
+								NextActivity: ptr.String("__NextActivity__"),
+							},
+							{
+								Condition: &types.SimpleCondition{
+									EventCondition: &types.EventCondition{
+										Dimensions: &types.EventDimensions{
+											Attributes: map[string]types.AttributeDimension{
+												"key0": {
+													AttributeType: types.AttributeType("INCLUSIVE"),
+													Values: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+											},
+											EventType: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Metrics: map[string]types.MetricDimension{
+												"key0": {
+													ComparisonOperator: ptr.String("__ComparisonOperator__"),
+													Value:              ptr.Float64(1.0),
+												},
+											},
+										},
+										MessageActivity: ptr.String("__MessageActivity__"),
+									},
+									SegmentCondition: &types.SegmentCondition{
+										SegmentId: ptr.String("__SegmentId__"),
+									},
+									SegmentDimensions: &types.SegmentDimensions{
+										Attributes: map[string]types.AttributeDimension{
+											"key0": {
+												AttributeType: types.AttributeType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+										Behavior: &types.SegmentBehaviors{
+											Recency: &types.RecencyDimension{
+												Duration:    types.Duration("HR_24"),
+												RecencyType: types.RecencyType("ACTIVE"),
+											},
+										},
+										Demographic: &types.SegmentDemographics{
+											AppVersion: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Channel: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											DeviceType: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Make: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Model: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Platform: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+										Location: &types.SegmentLocation{
+											Country: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											GPSPoint: &types.GPSPointDimension{
+												Coordinates: &types.GPSCoordinates{
+													Latitude:  ptr.Float64(1.0),
+													Longitude: ptr.Float64(1.0),
+												},
+												RangeInKilometers: ptr.Float64(1.0),
+											},
+										},
+										Metrics: map[string]types.MetricDimension{
+											"key0": {
+												ComparisonOperator: ptr.String("__ComparisonOperator__"),
+												Value:              ptr.Float64(1.0),
+											},
+										},
+										UserAttributes: map[string]types.AttributeDimension{
+											"key0": {
+												AttributeType: types.AttributeType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+									},
+								},
+								NextActivity: ptr.String("__NextActivity__"),
+							},
+						},
+						DefaultActivity: ptr.String("__DefaultActivity__"),
+						EvaluationWaitTime: &types.WaitTime{
+							WaitFor:   ptr.String("__WaitFor__"),
+							WaitUntil: ptr.String("__WaitUntil__"),
+						},
+					},
+					PUSH: &types.PushMessageActivity{
+						MessageConfig: &types.JourneyPushMessage{
+							TimeToLive: ptr.String("__TimeToLive__"),
+						},
+						NextActivity:    ptr.String("__NextActivity__"),
+						TemplateName:    ptr.String("__TemplateName__"),
+						TemplateVersion: ptr.String("__TemplateVersion__"),
+					},
+					RandomSplit: &types.RandomSplitActivity{
+						Branches: []types.RandomSplitEntry{
+							{
+								NextActivity: ptr.String("__NextActivity__"),
+								Percentage:   ptr.Int32(1),
+							},
+							{
+								NextActivity: ptr.String("__NextActivity__"),
+								Percentage:   ptr.Int32(1),
+							},
+						},
+					},
+					SMS: &types.SMSMessageActivity{
+						MessageConfig: &types.JourneySMSMessage{
+							MessageType:       types.MessageType("TRANSACTIONAL"),
+							OriginationNumber: ptr.String("__OriginationNumber__"),
+							SenderId:          ptr.String("__SenderId__"),
+							EntityId:          ptr.String("__EntityId__"),
+							TemplateId:        ptr.String("__TemplateId__"),
+						},
+						NextActivity:    ptr.String("__NextActivity__"),
+						TemplateName:    ptr.String("__TemplateName__"),
+						TemplateVersion: ptr.String("__TemplateVersion__"),
+					},
+					Wait: &types.WaitActivity{
+						NextActivity: ptr.String("__NextActivity__"),
+						WaitTime: &types.WaitTime{
+							WaitFor:   ptr.String("__WaitFor__"),
+							WaitUntil: ptr.String("__WaitUntil__"),
+						},
+					},
+					ContactCenter: &types.ContactCenterActivity{
+						NextActivity: ptr.String("__NextActivity__"),
+					},
+				},
+			},
+			CreationDate:     ptr.String("__CreationDate__"),
+			LastModifiedDate: ptr.String("__LastModifiedDate__"),
+			Limits: &types.JourneyLimits{
+				DailyCap:                ptr.Int32(1),
+				EndpointReentryCap:      ptr.Int32(1),
+				MessagesPerSecond:       ptr.Int32(1),
+				EndpointReentryInterval: ptr.String("__EndpointReentryInterval__"),
+				TimeframeCap: &types.JourneyTimeframeCap{
+					Cap:  ptr.Int32(1),
+					Days: ptr.Int32(1),
+				},
+				TotalCap: ptr.Int32(1),
+			},
+			LocalTime: ptr.Bool(true),
+			Name:      ptr.String("__Name__"),
+			QuietTime: &types.QuietTime{
+				End:   ptr.String("__End__"),
+				Start: ptr.String("__Start__"),
+			},
+			RefreshFrequency: ptr.String("__RefreshFrequency__"),
+			Schedule: &types.JourneySchedule{
+				EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Timezone:  ptr.String("__Timezone__"),
+			},
+			StartActivity: ptr.String("__StartActivity__"),
+			StartCondition: &types.StartCondition{
+				Description: ptr.String("__Description__"),
+				EventStartCondition: &types.EventStartCondition{
+					EventFilter: &types.EventFilter{
+						Dimensions: &types.EventDimensions{
+							Attributes: map[string]types.AttributeDimension{
+								"key0": {
+									AttributeType: types.AttributeType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							EventType: &types.SetDimension{
+								DimensionType: types.DimensionType("INCLUSIVE"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							Metrics: map[string]types.MetricDimension{
+								"key0": {
+									ComparisonOperator: ptr.String("__ComparisonOperator__"),
+									Value:              ptr.Float64(1.0),
+								},
+							},
+						},
+						FilterType: types.FilterType("SYSTEM"),
+					},
+					SegmentId: ptr.String("__SegmentId__"),
+				},
+				SegmentStartCondition: &types.SegmentCondition{
+					SegmentId: ptr.String("__SegmentId__"),
+				},
+			},
+			State:                  types.State("DRAFT"),
+			WaitForQuietTime:       ptr.Bool(true),
+			RefreshOnSegmentUpdate: ptr.Bool(true),
+			JourneyChannelSettings: &types.JourneyChannelSettings{
+				ConnectCampaignArn:              ptr.String("__ConnectCampaignArn__"),
+				ConnectCampaignExecutionRoleArn: ptr.String("__ConnectCampaignExecutionRoleArn__"),
+			},
+			SendingSchedule: ptr.Bool(true),
+			OpenHours: &types.OpenHours{
+				EMAIL: map[string][]types.OpenHoursRule{
+					"key0": {
+						{
+							StartTime: ptr.String("__StartTime__"),
+							EndTime:   ptr.String("__EndTime__"),
+						},
+						{
+							StartTime: ptr.String("__StartTime__"),
+							EndTime:   ptr.String("__EndTime__"),
+						},
+					},
+				},
+				SMS: map[string][]types.OpenHoursRule{
+					"key0": {
+						{
+							StartTime: ptr.String("__StartTime__"),
+							EndTime:   ptr.String("__EndTime__"),
+						},
+						{
+							StartTime: ptr.String("__StartTime__"),
+							EndTime:   ptr.String("__EndTime__"),
+						},
+					},
+				},
+				PUSH: map[string][]types.OpenHoursRule{
+					"key0": {
+						{
+							StartTime: ptr.String("__StartTime__"),
+							EndTime:   ptr.String("__EndTime__"),
+						},
+						{
+							StartTime: ptr.String("__StartTime__"),
+							EndTime:   ptr.String("__EndTime__"),
+						},
+					},
+				},
+				VOICE: map[string][]types.OpenHoursRule{
+					"key0": {
+						{
+							StartTime: ptr.String("__StartTime__"),
+							EndTime:   ptr.String("__EndTime__"),
+						},
+						{
+							StartTime: ptr.String("__StartTime__"),
+							EndTime:   ptr.String("__EndTime__"),
+						},
+					},
+				},
+				CUSTOM: map[string][]types.OpenHoursRule{
+					"key0": {
+						{
+							StartTime: ptr.String("__StartTime__"),
+							EndTime:   ptr.String("__EndTime__"),
+						},
+						{
+							StartTime: ptr.String("__StartTime__"),
+							EndTime:   ptr.String("__EndTime__"),
+						},
+					},
+				},
+			},
+			ClosedDays: &types.ClosedDays{
+				EMAIL: []types.ClosedDaysRule{
+					{
+						Name:          ptr.String("__Name__"),
+						StartDateTime: ptr.String("__StartDateTime__"),
+						EndDateTime:   ptr.String("__EndDateTime__"),
+					},
+					{
+						Name:          ptr.String("__Name__"),
+						StartDateTime: ptr.String("__StartDateTime__"),
+						EndDateTime:   ptr.String("__EndDateTime__"),
+					},
+				},
+				SMS: []types.ClosedDaysRule{
+					{
+						Name:          ptr.String("__Name__"),
+						StartDateTime: ptr.String("__StartDateTime__"),
+						EndDateTime:   ptr.String("__EndDateTime__"),
+					},
+					{
+						Name:          ptr.String("__Name__"),
+						StartDateTime: ptr.String("__StartDateTime__"),
+						EndDateTime:   ptr.String("__EndDateTime__"),
+					},
+				},
+				PUSH: []types.ClosedDaysRule{
+					{
+						Name:          ptr.String("__Name__"),
+						StartDateTime: ptr.String("__StartDateTime__"),
+						EndDateTime:   ptr.String("__EndDateTime__"),
+					},
+					{
+						Name:          ptr.String("__Name__"),
+						StartDateTime: ptr.String("__StartDateTime__"),
+						EndDateTime:   ptr.String("__EndDateTime__"),
+					},
+				},
+				VOICE: []types.ClosedDaysRule{
+					{
+						Name:          ptr.String("__Name__"),
+						StartDateTime: ptr.String("__StartDateTime__"),
+						EndDateTime:   ptr.String("__EndDateTime__"),
+					},
+					{
+						Name:          ptr.String("__Name__"),
+						StartDateTime: ptr.String("__StartDateTime__"),
+						EndDateTime:   ptr.String("__EndDateTime__"),
+					},
+				},
+				CUSTOM: []types.ClosedDaysRule{
+					{
+						Name:          ptr.String("__Name__"),
+						StartDateTime: ptr.String("__StartDateTime__"),
+						EndDateTime:   ptr.String("__EndDateTime__"),
+					},
+					{
+						Name:          ptr.String("__Name__"),
+						StartDateTime: ptr.String("__StartDateTime__"),
+						EndDateTime:   ptr.String("__EndDateTime__"),
+					},
+				},
+			},
+			TimezoneEstimationMethods: []types.TimezoneEstimationMethodsElement{
+				types.TimezoneEstimationMethodsElement("PHONE_NUMBER"),
+				types.TimezoneEstimationMethodsElement("PHONE_NUMBER"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -21473,7 +26966,13 @@ func TestCheckResponseSnapshot_UpdateJourneyState(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateJourneyState(context.Background(), &UpdateJourneyStateInput{})
+	got, err := svc.UpdateJourneyState(context.Background(), &UpdateJourneyStateInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		JourneyId:     ptr.String("__JourneyId__"),
+		JourneyStateRequest: &types.JourneyStateRequest{
+			State: types.State("DRAFT"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -21497,7 +26996,68 @@ func TestCheckResponseSnapshot_UpdatePushTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePushTemplate(context.Background(), &UpdatePushTemplateInput{})
+	got, err := svc.UpdatePushTemplate(context.Background(), &UpdatePushTemplateInput{
+		CreateNewVersion: ptr.Bool(true),
+		PushNotificationTemplateRequest: &types.PushNotificationTemplateRequest{
+			ADM: &types.AndroidPushNotificationTemplate{
+				Action:            types.Action("OPEN_APP"),
+				Body:              ptr.String("__Body__"),
+				ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+				ImageUrl:          ptr.String("__ImageUrl__"),
+				RawContent:        ptr.String("__RawContent__"),
+				SmallImageIconUrl: ptr.String("__SmallImageIconUrl__"),
+				Sound:             ptr.String("__Sound__"),
+				Title:             ptr.String("__Title__"),
+				Url:               ptr.String("__Url__"),
+			},
+			APNS: &types.APNSPushNotificationTemplate{
+				Action:     types.Action("OPEN_APP"),
+				Body:       ptr.String("__Body__"),
+				MediaUrl:   ptr.String("__MediaUrl__"),
+				RawContent: ptr.String("__RawContent__"),
+				Sound:      ptr.String("__Sound__"),
+				Title:      ptr.String("__Title__"),
+				Url:        ptr.String("__Url__"),
+			},
+			Baidu: &types.AndroidPushNotificationTemplate{
+				Action:            types.Action("OPEN_APP"),
+				Body:              ptr.String("__Body__"),
+				ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+				ImageUrl:          ptr.String("__ImageUrl__"),
+				RawContent:        ptr.String("__RawContent__"),
+				SmallImageIconUrl: ptr.String("__SmallImageIconUrl__"),
+				Sound:             ptr.String("__Sound__"),
+				Title:             ptr.String("__Title__"),
+				Url:               ptr.String("__Url__"),
+			},
+			Default: &types.DefaultPushNotificationTemplate{
+				Action: types.Action("OPEN_APP"),
+				Body:   ptr.String("__Body__"),
+				Sound:  ptr.String("__Sound__"),
+				Title:  ptr.String("__Title__"),
+				Url:    ptr.String("__Url__"),
+			},
+			DefaultSubstitutions: ptr.String("__DefaultSubstitutions__"),
+			GCM: &types.AndroidPushNotificationTemplate{
+				Action:            types.Action("OPEN_APP"),
+				Body:              ptr.String("__Body__"),
+				ImageIconUrl:      ptr.String("__ImageIconUrl__"),
+				ImageUrl:          ptr.String("__ImageUrl__"),
+				RawContent:        ptr.String("__RawContent__"),
+				SmallImageIconUrl: ptr.String("__SmallImageIconUrl__"),
+				Sound:             ptr.String("__Sound__"),
+				Title:             ptr.String("__Title__"),
+				Url:               ptr.String("__Url__"),
+			},
+			RecommenderId: ptr.String("__RecommenderId__"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+			TemplateDescription: ptr.String("__TemplateDescription__"),
+		},
+		TemplateName: ptr.String("__TemplateName__"),
+		Version:      ptr.String("__Version__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -21533,7 +27093,22 @@ func TestCheckResponseSnapshot_UpdateRecommenderConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRecommenderConfiguration(context.Background(), &UpdateRecommenderConfigurationInput{})
+	got, err := svc.UpdateRecommenderConfiguration(context.Background(), &UpdateRecommenderConfigurationInput{
+		RecommenderId: ptr.String("__RecommenderId__"),
+		UpdateRecommenderConfiguration: &types.UpdateRecommenderConfigurationShape{
+			Attributes: map[string]string{
+				"key0": "__Value__",
+			},
+			Description:                   ptr.String("__Description__"),
+			Name:                          ptr.String("__Name__"),
+			RecommendationProviderIdType:  ptr.String("__RecommendationProviderIdType__"),
+			RecommendationProviderRoleArn: ptr.String("__RecommendationProviderRoleArn__"),
+			RecommendationProviderUri:     ptr.String("__RecommendationProviderUri__"),
+			RecommendationTransformerUri:  ptr.String("__RecommendationTransformerUri__"),
+			RecommendationsDisplayName:    ptr.String("__RecommendationsDisplayName__"),
+			RecommendationsPerMessage:     ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -22073,7 +27648,513 @@ func TestCheckResponseSnapshot_UpdateSegment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSegment(context.Background(), &UpdateSegmentInput{})
+	got, err := svc.UpdateSegment(context.Background(), &UpdateSegmentInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		SegmentId:     ptr.String("__SegmentId__"),
+		WriteSegmentRequest: &types.WriteSegmentRequest{
+			Dimensions: &types.SegmentDimensions{
+				Attributes: map[string]types.AttributeDimension{
+					"key0": {
+						AttributeType: types.AttributeType("INCLUSIVE"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				Behavior: &types.SegmentBehaviors{
+					Recency: &types.RecencyDimension{
+						Duration:    types.Duration("HR_24"),
+						RecencyType: types.RecencyType("ACTIVE"),
+					},
+				},
+				Demographic: &types.SegmentDemographics{
+					AppVersion: &types.SetDimension{
+						DimensionType: types.DimensionType("INCLUSIVE"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Channel: &types.SetDimension{
+						DimensionType: types.DimensionType("INCLUSIVE"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					DeviceType: &types.SetDimension{
+						DimensionType: types.DimensionType("INCLUSIVE"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Make: &types.SetDimension{
+						DimensionType: types.DimensionType("INCLUSIVE"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Model: &types.SetDimension{
+						DimensionType: types.DimensionType("INCLUSIVE"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Platform: &types.SetDimension{
+						DimensionType: types.DimensionType("INCLUSIVE"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				Location: &types.SegmentLocation{
+					Country: &types.SetDimension{
+						DimensionType: types.DimensionType("INCLUSIVE"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					GPSPoint: &types.GPSPointDimension{
+						Coordinates: &types.GPSCoordinates{
+							Latitude:  ptr.Float64(1.0),
+							Longitude: ptr.Float64(1.0),
+						},
+						RangeInKilometers: ptr.Float64(1.0),
+					},
+				},
+				Metrics: map[string]types.MetricDimension{
+					"key0": {
+						ComparisonOperator: ptr.String("__ComparisonOperator__"),
+						Value:              ptr.Float64(1.0),
+					},
+				},
+				UserAttributes: map[string]types.AttributeDimension{
+					"key0": {
+						AttributeType: types.AttributeType("INCLUSIVE"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			Name: ptr.String("__Name__"),
+			SegmentGroups: &types.SegmentGroupList{
+				Groups: []types.SegmentGroup{
+					{
+						Dimensions: []types.SegmentDimensions{
+							{
+								Attributes: map[string]types.AttributeDimension{
+									"key0": {
+										AttributeType: types.AttributeType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								Behavior: &types.SegmentBehaviors{
+									Recency: &types.RecencyDimension{
+										Duration:    types.Duration("HR_24"),
+										RecencyType: types.RecencyType("ACTIVE"),
+									},
+								},
+								Demographic: &types.SegmentDemographics{
+									AppVersion: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Channel: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									DeviceType: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Make: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Model: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Platform: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								Location: &types.SegmentLocation{
+									Country: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									GPSPoint: &types.GPSPointDimension{
+										Coordinates: &types.GPSCoordinates{
+											Latitude:  ptr.Float64(1.0),
+											Longitude: ptr.Float64(1.0),
+										},
+										RangeInKilometers: ptr.Float64(1.0),
+									},
+								},
+								Metrics: map[string]types.MetricDimension{
+									"key0": {
+										ComparisonOperator: ptr.String("__ComparisonOperator__"),
+										Value:              ptr.Float64(1.0),
+									},
+								},
+								UserAttributes: map[string]types.AttributeDimension{
+									"key0": {
+										AttributeType: types.AttributeType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+							},
+							{
+								Attributes: map[string]types.AttributeDimension{
+									"key0": {
+										AttributeType: types.AttributeType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								Behavior: &types.SegmentBehaviors{
+									Recency: &types.RecencyDimension{
+										Duration:    types.Duration("HR_24"),
+										RecencyType: types.RecencyType("ACTIVE"),
+									},
+								},
+								Demographic: &types.SegmentDemographics{
+									AppVersion: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Channel: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									DeviceType: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Make: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Model: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Platform: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								Location: &types.SegmentLocation{
+									Country: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									GPSPoint: &types.GPSPointDimension{
+										Coordinates: &types.GPSCoordinates{
+											Latitude:  ptr.Float64(1.0),
+											Longitude: ptr.Float64(1.0),
+										},
+										RangeInKilometers: ptr.Float64(1.0),
+									},
+								},
+								Metrics: map[string]types.MetricDimension{
+									"key0": {
+										ComparisonOperator: ptr.String("__ComparisonOperator__"),
+										Value:              ptr.Float64(1.0),
+									},
+								},
+								UserAttributes: map[string]types.AttributeDimension{
+									"key0": {
+										AttributeType: types.AttributeType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+							},
+						},
+						SourceSegments: []types.SegmentReference{
+							{
+								Id:      ptr.String("__Id__"),
+								Version: ptr.Int32(1),
+							},
+							{
+								Id:      ptr.String("__Id__"),
+								Version: ptr.Int32(1),
+							},
+						},
+						SourceType: types.SourceType("ALL"),
+						Type:       types.Type("ALL"),
+					},
+					{
+						Dimensions: []types.SegmentDimensions{
+							{
+								Attributes: map[string]types.AttributeDimension{
+									"key0": {
+										AttributeType: types.AttributeType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								Behavior: &types.SegmentBehaviors{
+									Recency: &types.RecencyDimension{
+										Duration:    types.Duration("HR_24"),
+										RecencyType: types.RecencyType("ACTIVE"),
+									},
+								},
+								Demographic: &types.SegmentDemographics{
+									AppVersion: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Channel: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									DeviceType: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Make: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Model: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Platform: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								Location: &types.SegmentLocation{
+									Country: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									GPSPoint: &types.GPSPointDimension{
+										Coordinates: &types.GPSCoordinates{
+											Latitude:  ptr.Float64(1.0),
+											Longitude: ptr.Float64(1.0),
+										},
+										RangeInKilometers: ptr.Float64(1.0),
+									},
+								},
+								Metrics: map[string]types.MetricDimension{
+									"key0": {
+										ComparisonOperator: ptr.String("__ComparisonOperator__"),
+										Value:              ptr.Float64(1.0),
+									},
+								},
+								UserAttributes: map[string]types.AttributeDimension{
+									"key0": {
+										AttributeType: types.AttributeType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+							},
+							{
+								Attributes: map[string]types.AttributeDimension{
+									"key0": {
+										AttributeType: types.AttributeType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								Behavior: &types.SegmentBehaviors{
+									Recency: &types.RecencyDimension{
+										Duration:    types.Duration("HR_24"),
+										RecencyType: types.RecencyType("ACTIVE"),
+									},
+								},
+								Demographic: &types.SegmentDemographics{
+									AppVersion: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Channel: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									DeviceType: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Make: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Model: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									Platform: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+								Location: &types.SegmentLocation{
+									Country: &types.SetDimension{
+										DimensionType: types.DimensionType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+									GPSPoint: &types.GPSPointDimension{
+										Coordinates: &types.GPSCoordinates{
+											Latitude:  ptr.Float64(1.0),
+											Longitude: ptr.Float64(1.0),
+										},
+										RangeInKilometers: ptr.Float64(1.0),
+									},
+								},
+								Metrics: map[string]types.MetricDimension{
+									"key0": {
+										ComparisonOperator: ptr.String("__ComparisonOperator__"),
+										Value:              ptr.Float64(1.0),
+									},
+								},
+								UserAttributes: map[string]types.AttributeDimension{
+									"key0": {
+										AttributeType: types.AttributeType("INCLUSIVE"),
+										Values: []string{
+											"__Member__",
+											"__Member__",
+										},
+									},
+								},
+							},
+						},
+						SourceSegments: []types.SegmentReference{
+							{
+								Id:      ptr.String("__Id__"),
+								Version: ptr.Int32(1),
+							},
+							{
+								Id:      ptr.String("__Id__"),
+								Version: ptr.Int32(1),
+							},
+						},
+						SourceType: types.SourceType("ALL"),
+						Type:       types.Type("ALL"),
+					},
+				},
+				Include: types.Include("ALL"),
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -22109,7 +28190,14 @@ func TestCheckResponseSnapshot_UpdateSmsChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSmsChannel(context.Background(), &UpdateSmsChannelInput{})
+	got, err := svc.UpdateSmsChannel(context.Background(), &UpdateSmsChannelInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		SMSChannelRequest: &types.SMSChannelRequest{
+			Enabled:   ptr.Bool(true),
+			SenderId:  ptr.String("__SenderId__"),
+			ShortCode: ptr.String("__ShortCode__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -22133,7 +28221,20 @@ func TestCheckResponseSnapshot_UpdateSmsTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSmsTemplate(context.Background(), &UpdateSmsTemplateInput{})
+	got, err := svc.UpdateSmsTemplate(context.Background(), &UpdateSmsTemplateInput{
+		CreateNewVersion: ptr.Bool(true),
+		SMSTemplateRequest: &types.SMSTemplateRequest{
+			Body:                 ptr.String("__Body__"),
+			DefaultSubstitutions: ptr.String("__DefaultSubstitutions__"),
+			RecommenderId:        ptr.String("__RecommenderId__"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+			TemplateDescription: ptr.String("__TemplateDescription__"),
+		},
+		TemplateName: ptr.String("__TemplateName__"),
+		Version:      ptr.String("__Version__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -22157,7 +28258,13 @@ func TestCheckResponseSnapshot_UpdateTemplateActiveVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTemplateActiveVersion(context.Background(), &UpdateTemplateActiveVersionInput{})
+	got, err := svc.UpdateTemplateActiveVersion(context.Background(), &UpdateTemplateActiveVersionInput{
+		TemplateActiveVersionRequest: &types.TemplateActiveVersionRequest{
+			Version: ptr.String("__Version__"),
+		},
+		TemplateName: ptr.String("__TemplateName__"),
+		TemplateType: ptr.String("__TemplateType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -22189,7 +28296,12 @@ func TestCheckResponseSnapshot_UpdateVoiceChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateVoiceChannel(context.Background(), &UpdateVoiceChannelInput{})
+	got, err := svc.UpdateVoiceChannel(context.Background(), &UpdateVoiceChannelInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		VoiceChannelRequest: &types.VoiceChannelRequest{
+			Enabled: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -22213,7 +28325,21 @@ func TestCheckResponseSnapshot_UpdateVoiceTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateVoiceTemplate(context.Background(), &UpdateVoiceTemplateInput{})
+	got, err := svc.UpdateVoiceTemplate(context.Background(), &UpdateVoiceTemplateInput{
+		CreateNewVersion: ptr.Bool(true),
+		TemplateName:     ptr.String("__TemplateName__"),
+		Version:          ptr.String("__Version__"),
+		VoiceTemplateRequest: &types.VoiceTemplateRequest{
+			Body:                 ptr.String("__Body__"),
+			DefaultSubstitutions: ptr.String("__DefaultSubstitutions__"),
+			LanguageCode:         ptr.String("__LanguageCode__"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+			TemplateDescription: ptr.String("__TemplateDescription__"),
+			VoiceId:             ptr.String("__VoiceId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -22236,7 +28362,14 @@ func TestCheckResponseSnapshot_VerifyOTPMessage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.VerifyOTPMessage(context.Background(), &VerifyOTPMessageInput{})
+	got, err := svc.VerifyOTPMessage(context.Background(), &VerifyOTPMessageInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		VerifyOTPMessageRequestParameters: &types.VerifyOTPMessageRequestParameters{
+			DestinationIdentity: ptr.String("__DestinationIdentity__"),
+			Otp:                 ptr.String("__Otp__"),
+			ReferenceId:         ptr.String("__ReferenceId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -22258,7 +28391,14 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApp(context.Background(), &CreateAppInput{})
+	_, opErr := svc.CreateApp(context.Background(), &CreateAppInput{
+		CreateApplicationRequest: &types.CreateApplicationRequest{
+			Name: ptr.String("__Name__"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22284,7 +28424,806 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateJourney(context.Background(), &UpdateJourneyInput{})
+	_, opErr := svc.UpdateJourney(context.Background(), &UpdateJourneyInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		JourneyId:     ptr.String("__JourneyId__"),
+		WriteJourneyRequest: &types.WriteJourneyRequest{
+			Activities: map[string]types.Activity{
+				"key0": {
+					CUSTOM: &types.CustomMessageActivity{
+						DeliveryUri: ptr.String("__DeliveryUri__"),
+						EndpointTypes: []types.EndpointTypesElement{
+							types.EndpointTypesElement("PUSH"),
+							types.EndpointTypesElement("PUSH"),
+						},
+						MessageConfig: &types.JourneyCustomMessage{
+							Data: ptr.String("__Data__"),
+						},
+						NextActivity:    ptr.String("__NextActivity__"),
+						TemplateName:    ptr.String("__TemplateName__"),
+						TemplateVersion: ptr.String("__TemplateVersion__"),
+					},
+					ConditionalSplit: &types.ConditionalSplitActivity{
+						Condition: &types.Condition{
+							Conditions: []types.SimpleCondition{
+								{
+									EventCondition: &types.EventCondition{
+										Dimensions: &types.EventDimensions{
+											Attributes: map[string]types.AttributeDimension{
+												"key0": {
+													AttributeType: types.AttributeType("INCLUSIVE"),
+													Values: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+											},
+											EventType: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Metrics: map[string]types.MetricDimension{
+												"key0": {
+													ComparisonOperator: ptr.String("__ComparisonOperator__"),
+													Value:              ptr.Float64(1.0),
+												},
+											},
+										},
+										MessageActivity: ptr.String("__MessageActivity__"),
+									},
+									SegmentCondition: &types.SegmentCondition{
+										SegmentId: ptr.String("__SegmentId__"),
+									},
+									SegmentDimensions: &types.SegmentDimensions{
+										Attributes: map[string]types.AttributeDimension{
+											"key0": {
+												AttributeType: types.AttributeType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+										Behavior: &types.SegmentBehaviors{
+											Recency: &types.RecencyDimension{
+												Duration:    types.Duration("HR_24"),
+												RecencyType: types.RecencyType("ACTIVE"),
+											},
+										},
+										Demographic: &types.SegmentDemographics{
+											AppVersion: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Channel: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											DeviceType: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Make: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Model: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Platform: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+										Location: &types.SegmentLocation{
+											Country: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											GPSPoint: &types.GPSPointDimension{
+												Coordinates: &types.GPSCoordinates{
+													Latitude:  ptr.Float64(1.0),
+													Longitude: ptr.Float64(1.0),
+												},
+												RangeInKilometers: ptr.Float64(1.0),
+											},
+										},
+										Metrics: map[string]types.MetricDimension{
+											"key0": {
+												ComparisonOperator: ptr.String("__ComparisonOperator__"),
+												Value:              ptr.Float64(1.0),
+											},
+										},
+										UserAttributes: map[string]types.AttributeDimension{
+											"key0": {
+												AttributeType: types.AttributeType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+									},
+								},
+								{
+									EventCondition: &types.EventCondition{
+										Dimensions: &types.EventDimensions{
+											Attributes: map[string]types.AttributeDimension{
+												"key0": {
+													AttributeType: types.AttributeType("INCLUSIVE"),
+													Values: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+											},
+											EventType: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Metrics: map[string]types.MetricDimension{
+												"key0": {
+													ComparisonOperator: ptr.String("__ComparisonOperator__"),
+													Value:              ptr.Float64(1.0),
+												},
+											},
+										},
+										MessageActivity: ptr.String("__MessageActivity__"),
+									},
+									SegmentCondition: &types.SegmentCondition{
+										SegmentId: ptr.String("__SegmentId__"),
+									},
+									SegmentDimensions: &types.SegmentDimensions{
+										Attributes: map[string]types.AttributeDimension{
+											"key0": {
+												AttributeType: types.AttributeType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+										Behavior: &types.SegmentBehaviors{
+											Recency: &types.RecencyDimension{
+												Duration:    types.Duration("HR_24"),
+												RecencyType: types.RecencyType("ACTIVE"),
+											},
+										},
+										Demographic: &types.SegmentDemographics{
+											AppVersion: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Channel: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											DeviceType: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Make: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Model: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Platform: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+										Location: &types.SegmentLocation{
+											Country: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											GPSPoint: &types.GPSPointDimension{
+												Coordinates: &types.GPSCoordinates{
+													Latitude:  ptr.Float64(1.0),
+													Longitude: ptr.Float64(1.0),
+												},
+												RangeInKilometers: ptr.Float64(1.0),
+											},
+										},
+										Metrics: map[string]types.MetricDimension{
+											"key0": {
+												ComparisonOperator: ptr.String("__ComparisonOperator__"),
+												Value:              ptr.Float64(1.0),
+											},
+										},
+										UserAttributes: map[string]types.AttributeDimension{
+											"key0": {
+												AttributeType: types.AttributeType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+									},
+								},
+							},
+							Operator: types.Operator("ALL"),
+						},
+						EvaluationWaitTime: &types.WaitTime{
+							WaitFor:   ptr.String("__WaitFor__"),
+							WaitUntil: ptr.String("__WaitUntil__"),
+						},
+						FalseActivity: ptr.String("__FalseActivity__"),
+						TrueActivity:  ptr.String("__TrueActivity__"),
+					},
+					Description: ptr.String("__Description__"),
+					EMAIL: &types.EmailMessageActivity{
+						MessageConfig: &types.JourneyEmailMessage{
+							FromAddress: ptr.String("__FromAddress__"),
+						},
+						NextActivity:    ptr.String("__NextActivity__"),
+						TemplateName:    ptr.String("__TemplateName__"),
+						TemplateVersion: ptr.String("__TemplateVersion__"),
+					},
+					Holdout: &types.HoldoutActivity{
+						NextActivity: ptr.String("__NextActivity__"),
+						Percentage:   ptr.Int32(1),
+					},
+					MultiCondition: &types.MultiConditionalSplitActivity{
+						Branches: []types.MultiConditionalBranch{
+							{
+								Condition: &types.SimpleCondition{
+									EventCondition: &types.EventCondition{
+										Dimensions: &types.EventDimensions{
+											Attributes: map[string]types.AttributeDimension{
+												"key0": {
+													AttributeType: types.AttributeType("INCLUSIVE"),
+													Values: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+											},
+											EventType: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Metrics: map[string]types.MetricDimension{
+												"key0": {
+													ComparisonOperator: ptr.String("__ComparisonOperator__"),
+													Value:              ptr.Float64(1.0),
+												},
+											},
+										},
+										MessageActivity: ptr.String("__MessageActivity__"),
+									},
+									SegmentCondition: &types.SegmentCondition{
+										SegmentId: ptr.String("__SegmentId__"),
+									},
+									SegmentDimensions: &types.SegmentDimensions{
+										Attributes: map[string]types.AttributeDimension{
+											"key0": {
+												AttributeType: types.AttributeType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+										Behavior: &types.SegmentBehaviors{
+											Recency: &types.RecencyDimension{
+												Duration:    types.Duration("HR_24"),
+												RecencyType: types.RecencyType("ACTIVE"),
+											},
+										},
+										Demographic: &types.SegmentDemographics{
+											AppVersion: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Channel: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											DeviceType: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Make: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Model: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Platform: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+										Location: &types.SegmentLocation{
+											Country: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											GPSPoint: &types.GPSPointDimension{
+												Coordinates: &types.GPSCoordinates{
+													Latitude:  ptr.Float64(1.0),
+													Longitude: ptr.Float64(1.0),
+												},
+												RangeInKilometers: ptr.Float64(1.0),
+											},
+										},
+										Metrics: map[string]types.MetricDimension{
+											"key0": {
+												ComparisonOperator: ptr.String("__ComparisonOperator__"),
+												Value:              ptr.Float64(1.0),
+											},
+										},
+										UserAttributes: map[string]types.AttributeDimension{
+											"key0": {
+												AttributeType: types.AttributeType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+									},
+								},
+								NextActivity: ptr.String("__NextActivity__"),
+							},
+							{
+								Condition: &types.SimpleCondition{
+									EventCondition: &types.EventCondition{
+										Dimensions: &types.EventDimensions{
+											Attributes: map[string]types.AttributeDimension{
+												"key0": {
+													AttributeType: types.AttributeType("INCLUSIVE"),
+													Values: []string{
+														"__Member__",
+														"__Member__",
+													},
+												},
+											},
+											EventType: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Metrics: map[string]types.MetricDimension{
+												"key0": {
+													ComparisonOperator: ptr.String("__ComparisonOperator__"),
+													Value:              ptr.Float64(1.0),
+												},
+											},
+										},
+										MessageActivity: ptr.String("__MessageActivity__"),
+									},
+									SegmentCondition: &types.SegmentCondition{
+										SegmentId: ptr.String("__SegmentId__"),
+									},
+									SegmentDimensions: &types.SegmentDimensions{
+										Attributes: map[string]types.AttributeDimension{
+											"key0": {
+												AttributeType: types.AttributeType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+										Behavior: &types.SegmentBehaviors{
+											Recency: &types.RecencyDimension{
+												Duration:    types.Duration("HR_24"),
+												RecencyType: types.RecencyType("ACTIVE"),
+											},
+										},
+										Demographic: &types.SegmentDemographics{
+											AppVersion: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Channel: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											DeviceType: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Make: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Model: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											Platform: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+										Location: &types.SegmentLocation{
+											Country: &types.SetDimension{
+												DimensionType: types.DimensionType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+											GPSPoint: &types.GPSPointDimension{
+												Coordinates: &types.GPSCoordinates{
+													Latitude:  ptr.Float64(1.0),
+													Longitude: ptr.Float64(1.0),
+												},
+												RangeInKilometers: ptr.Float64(1.0),
+											},
+										},
+										Metrics: map[string]types.MetricDimension{
+											"key0": {
+												ComparisonOperator: ptr.String("__ComparisonOperator__"),
+												Value:              ptr.Float64(1.0),
+											},
+										},
+										UserAttributes: map[string]types.AttributeDimension{
+											"key0": {
+												AttributeType: types.AttributeType("INCLUSIVE"),
+												Values: []string{
+													"__Member__",
+													"__Member__",
+												},
+											},
+										},
+									},
+								},
+								NextActivity: ptr.String("__NextActivity__"),
+							},
+						},
+						DefaultActivity: ptr.String("__DefaultActivity__"),
+						EvaluationWaitTime: &types.WaitTime{
+							WaitFor:   ptr.String("__WaitFor__"),
+							WaitUntil: ptr.String("__WaitUntil__"),
+						},
+					},
+					PUSH: &types.PushMessageActivity{
+						MessageConfig: &types.JourneyPushMessage{
+							TimeToLive: ptr.String("__TimeToLive__"),
+						},
+						NextActivity:    ptr.String("__NextActivity__"),
+						TemplateName:    ptr.String("__TemplateName__"),
+						TemplateVersion: ptr.String("__TemplateVersion__"),
+					},
+					RandomSplit: &types.RandomSplitActivity{
+						Branches: []types.RandomSplitEntry{
+							{
+								NextActivity: ptr.String("__NextActivity__"),
+								Percentage:   ptr.Int32(1),
+							},
+							{
+								NextActivity: ptr.String("__NextActivity__"),
+								Percentage:   ptr.Int32(1),
+							},
+						},
+					},
+					SMS: &types.SMSMessageActivity{
+						MessageConfig: &types.JourneySMSMessage{
+							MessageType:       types.MessageType("TRANSACTIONAL"),
+							OriginationNumber: ptr.String("__OriginationNumber__"),
+							SenderId:          ptr.String("__SenderId__"),
+							EntityId:          ptr.String("__EntityId__"),
+							TemplateId:        ptr.String("__TemplateId__"),
+						},
+						NextActivity:    ptr.String("__NextActivity__"),
+						TemplateName:    ptr.String("__TemplateName__"),
+						TemplateVersion: ptr.String("__TemplateVersion__"),
+					},
+					Wait: &types.WaitActivity{
+						NextActivity: ptr.String("__NextActivity__"),
+						WaitTime: &types.WaitTime{
+							WaitFor:   ptr.String("__WaitFor__"),
+							WaitUntil: ptr.String("__WaitUntil__"),
+						},
+					},
+					ContactCenter: &types.ContactCenterActivity{
+						NextActivity: ptr.String("__NextActivity__"),
+					},
+				},
+			},
+			CreationDate:     ptr.String("__CreationDate__"),
+			LastModifiedDate: ptr.String("__LastModifiedDate__"),
+			Limits: &types.JourneyLimits{
+				DailyCap:                ptr.Int32(1),
+				EndpointReentryCap:      ptr.Int32(1),
+				MessagesPerSecond:       ptr.Int32(1),
+				EndpointReentryInterval: ptr.String("__EndpointReentryInterval__"),
+				TimeframeCap: &types.JourneyTimeframeCap{
+					Cap:  ptr.Int32(1),
+					Days: ptr.Int32(1),
+				},
+				TotalCap: ptr.Int32(1),
+			},
+			LocalTime: ptr.Bool(true),
+			Name:      ptr.String("__Name__"),
+			QuietTime: &types.QuietTime{
+				End:   ptr.String("__End__"),
+				Start: ptr.String("__Start__"),
+			},
+			RefreshFrequency: ptr.String("__RefreshFrequency__"),
+			Schedule: &types.JourneySchedule{
+				EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Timezone:  ptr.String("__Timezone__"),
+			},
+			StartActivity: ptr.String("__StartActivity__"),
+			StartCondition: &types.StartCondition{
+				Description: ptr.String("__Description__"),
+				EventStartCondition: &types.EventStartCondition{
+					EventFilter: &types.EventFilter{
+						Dimensions: &types.EventDimensions{
+							Attributes: map[string]types.AttributeDimension{
+								"key0": {
+									AttributeType: types.AttributeType("INCLUSIVE"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							EventType: &types.SetDimension{
+								DimensionType: types.DimensionType("INCLUSIVE"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							Metrics: map[string]types.MetricDimension{
+								"key0": {
+									ComparisonOperator: ptr.String("__ComparisonOperator__"),
+									Value:              ptr.Float64(1.0),
+								},
+							},
+						},
+						FilterType: types.FilterType("SYSTEM"),
+					},
+					SegmentId: ptr.String("__SegmentId__"),
+				},
+				SegmentStartCondition: &types.SegmentCondition{
+					SegmentId: ptr.String("__SegmentId__"),
+				},
+			},
+			State:                  types.State("DRAFT"),
+			WaitForQuietTime:       ptr.Bool(true),
+			RefreshOnSegmentUpdate: ptr.Bool(true),
+			JourneyChannelSettings: &types.JourneyChannelSettings{
+				ConnectCampaignArn:              ptr.String("__ConnectCampaignArn__"),
+				ConnectCampaignExecutionRoleArn: ptr.String("__ConnectCampaignExecutionRoleArn__"),
+			},
+			SendingSchedule: ptr.Bool(true),
+			OpenHours: &types.OpenHours{
+				EMAIL: map[string][]types.OpenHoursRule{
+					"key0": {
+						{
+							StartTime: ptr.String("__StartTime__"),
+							EndTime:   ptr.String("__EndTime__"),
+						},
+						{
+							StartTime: ptr.String("__StartTime__"),
+							EndTime:   ptr.String("__EndTime__"),
+						},
+					},
+				},
+				SMS: map[string][]types.OpenHoursRule{
+					"key0": {
+						{
+							StartTime: ptr.String("__StartTime__"),
+							EndTime:   ptr.String("__EndTime__"),
+						},
+						{
+							StartTime: ptr.String("__StartTime__"),
+							EndTime:   ptr.String("__EndTime__"),
+						},
+					},
+				},
+				PUSH: map[string][]types.OpenHoursRule{
+					"key0": {
+						{
+							StartTime: ptr.String("__StartTime__"),
+							EndTime:   ptr.String("__EndTime__"),
+						},
+						{
+							StartTime: ptr.String("__StartTime__"),
+							EndTime:   ptr.String("__EndTime__"),
+						},
+					},
+				},
+				VOICE: map[string][]types.OpenHoursRule{
+					"key0": {
+						{
+							StartTime: ptr.String("__StartTime__"),
+							EndTime:   ptr.String("__EndTime__"),
+						},
+						{
+							StartTime: ptr.String("__StartTime__"),
+							EndTime:   ptr.String("__EndTime__"),
+						},
+					},
+				},
+				CUSTOM: map[string][]types.OpenHoursRule{
+					"key0": {
+						{
+							StartTime: ptr.String("__StartTime__"),
+							EndTime:   ptr.String("__EndTime__"),
+						},
+						{
+							StartTime: ptr.String("__StartTime__"),
+							EndTime:   ptr.String("__EndTime__"),
+						},
+					},
+				},
+			},
+			ClosedDays: &types.ClosedDays{
+				EMAIL: []types.ClosedDaysRule{
+					{
+						Name:          ptr.String("__Name__"),
+						StartDateTime: ptr.String("__StartDateTime__"),
+						EndDateTime:   ptr.String("__EndDateTime__"),
+					},
+					{
+						Name:          ptr.String("__Name__"),
+						StartDateTime: ptr.String("__StartDateTime__"),
+						EndDateTime:   ptr.String("__EndDateTime__"),
+					},
+				},
+				SMS: []types.ClosedDaysRule{
+					{
+						Name:          ptr.String("__Name__"),
+						StartDateTime: ptr.String("__StartDateTime__"),
+						EndDateTime:   ptr.String("__EndDateTime__"),
+					},
+					{
+						Name:          ptr.String("__Name__"),
+						StartDateTime: ptr.String("__StartDateTime__"),
+						EndDateTime:   ptr.String("__EndDateTime__"),
+					},
+				},
+				PUSH: []types.ClosedDaysRule{
+					{
+						Name:          ptr.String("__Name__"),
+						StartDateTime: ptr.String("__StartDateTime__"),
+						EndDateTime:   ptr.String("__EndDateTime__"),
+					},
+					{
+						Name:          ptr.String("__Name__"),
+						StartDateTime: ptr.String("__StartDateTime__"),
+						EndDateTime:   ptr.String("__EndDateTime__"),
+					},
+				},
+				VOICE: []types.ClosedDaysRule{
+					{
+						Name:          ptr.String("__Name__"),
+						StartDateTime: ptr.String("__StartDateTime__"),
+						EndDateTime:   ptr.String("__EndDateTime__"),
+					},
+					{
+						Name:          ptr.String("__Name__"),
+						StartDateTime: ptr.String("__StartDateTime__"),
+						EndDateTime:   ptr.String("__EndDateTime__"),
+					},
+				},
+				CUSTOM: []types.ClosedDaysRule{
+					{
+						Name:          ptr.String("__Name__"),
+						StartDateTime: ptr.String("__StartDateTime__"),
+						EndDateTime:   ptr.String("__EndDateTime__"),
+					},
+					{
+						Name:          ptr.String("__Name__"),
+						StartDateTime: ptr.String("__StartDateTime__"),
+						EndDateTime:   ptr.String("__EndDateTime__"),
+					},
+				},
+			},
+			TimezoneEstimationMethods: []types.TimezoneEstimationMethodsElement{
+				types.TimezoneEstimationMethodsElement("PHONE_NUMBER"),
+				types.TimezoneEstimationMethodsElement("PHONE_NUMBER"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22310,7 +29249,14 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApp(context.Background(), &CreateAppInput{})
+	_, opErr := svc.CreateApp(context.Background(), &CreateAppInput{
+		CreateApplicationRequest: &types.CreateApplicationRequest{
+			Name: ptr.String("__Name__"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22336,7 +29282,14 @@ func TestCheckResponseSnapshot_Error_InternalServerErrorException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApp(context.Background(), &CreateAppInput{})
+	_, opErr := svc.CreateApp(context.Background(), &CreateAppInput{
+		CreateApplicationRequest: &types.CreateApplicationRequest{
+			Name: ptr.String("__Name__"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22362,7 +29315,14 @@ func TestCheckResponseSnapshot_Error_MethodNotAllowedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApp(context.Background(), &CreateAppInput{})
+	_, opErr := svc.CreateApp(context.Background(), &CreateAppInput{
+		CreateApplicationRequest: &types.CreateApplicationRequest{
+			Name: ptr.String("__Name__"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22388,7 +29348,14 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApp(context.Background(), &CreateAppInput{})
+	_, opErr := svc.CreateApp(context.Background(), &CreateAppInput{
+		CreateApplicationRequest: &types.CreateApplicationRequest{
+			Name: ptr.String("__Name__"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22414,7 +29381,14 @@ func TestCheckResponseSnapshot_Error_PayloadTooLargeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApp(context.Background(), &CreateAppInput{})
+	_, opErr := svc.CreateApp(context.Background(), &CreateAppInput{
+		CreateApplicationRequest: &types.CreateApplicationRequest{
+			Name: ptr.String("__Name__"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -22440,7 +29414,14 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApp(context.Background(), &CreateAppInput{})
+	_, opErr := svc.CreateApp(context.Background(), &CreateAppInput{
+		CreateApplicationRequest: &types.CreateApplicationRequest{
+			Name: ptr.String("__Name__"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

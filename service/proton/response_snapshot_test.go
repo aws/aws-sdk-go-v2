@@ -131,7 +131,9 @@ func TestCheckResponseSnapshot_AcceptEnvironmentAccountConnection(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptEnvironmentAccountConnection(context.Background(), &AcceptEnvironmentAccountConnectionInput{})
+	got, err := svc.AcceptEnvironmentAccountConnection(context.Background(), &AcceptEnvironmentAccountConnectionInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -169,7 +171,9 @@ func TestCheckResponseSnapshot_CancelComponentDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelComponentDeployment(context.Background(), &CancelComponentDeploymentInput{})
+	got, err := svc.CancelComponentDeployment(context.Background(), &CancelComponentDeploymentInput{
+		ComponentName: ptr.String("__ComponentName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -217,7 +221,9 @@ func TestCheckResponseSnapshot_CancelEnvironmentDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelEnvironmentDeployment(context.Background(), &CancelEnvironmentDeploymentInput{})
+	got, err := svc.CancelEnvironmentDeployment(context.Background(), &CancelEnvironmentDeploymentInput{
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -255,7 +261,10 @@ func TestCheckResponseSnapshot_CancelServiceInstanceDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelServiceInstanceDeployment(context.Background(), &CancelServiceInstanceDeploymentInput{})
+	got, err := svc.CancelServiceInstanceDeployment(context.Background(), &CancelServiceInstanceDeploymentInput{
+		ServiceInstanceName: ptr.String("__ServiceInstanceName__"),
+		ServiceName:         ptr.String("__ServiceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -289,7 +298,9 @@ func TestCheckResponseSnapshot_CancelServicePipelineDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelServicePipelineDeployment(context.Background(), &CancelServicePipelineDeploymentInput{})
+	got, err := svc.CancelServicePipelineDeployment(context.Background(), &CancelServicePipelineDeploymentInput{
+		ServiceName: ptr.String("__ServiceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -327,7 +338,27 @@ func TestCheckResponseSnapshot_CreateComponent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateComponent(context.Background(), &CreateComponentInput{})
+	got, err := svc.CreateComponent(context.Background(), &CreateComponentInput{
+		Name:                ptr.String("__Name__"),
+		Description:         ptr.String("__Description__"),
+		ServiceName:         ptr.String("__ServiceName__"),
+		ServiceInstanceName: ptr.String("__ServiceInstanceName__"),
+		EnvironmentName:     ptr.String("__EnvironmentName__"),
+		TemplateFile:        ptr.String("__TemplateFile__"),
+		Manifest:            ptr.String("__Manifest__"),
+		ServiceSpec:         ptr.String("__ServiceSpec__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -375,7 +406,33 @@ func TestCheckResponseSnapshot_CreateEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{})
+	got, err := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{
+		Name:                           ptr.String("__Name__"),
+		TemplateName:                   ptr.String("__TemplateName__"),
+		TemplateMajorVersion:           ptr.String("__TemplateMajorVersion__"),
+		TemplateMinorVersion:           ptr.String("__TemplateMinorVersion__"),
+		Description:                    ptr.String("__Description__"),
+		Spec:                           ptr.String("__Spec__"),
+		ProtonServiceRoleArn:           ptr.String("__ProtonServiceRoleArn__"),
+		EnvironmentAccountConnectionId: ptr.String("__EnvironmentAccountConnectionId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ProvisioningRepository: &types.RepositoryBranchInput{
+			Provider: types.RepositoryProvider("GITHUB"),
+			Name:     ptr.String("__Name__"),
+			Branch:   ptr.String("__Branch__"),
+		},
+		ComponentRoleArn: ptr.String("__ComponentRoleArn__"),
+		CodebuildRoleArn: ptr.String("__CodebuildRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -408,7 +465,24 @@ func TestCheckResponseSnapshot_CreateEnvironmentAccountConnection(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEnvironmentAccountConnection(context.Background(), &CreateEnvironmentAccountConnectionInput{})
+	got, err := svc.CreateEnvironmentAccountConnection(context.Background(), &CreateEnvironmentAccountConnectionInput{
+		ClientToken:         ptr.String("__ClientToken__"),
+		ManagementAccountId: ptr.String("__ManagementAccountId__"),
+		RoleArn:             ptr.String("__RoleArn__"),
+		EnvironmentName:     ptr.String("__EnvironmentName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ComponentRoleArn: ptr.String("__ComponentRoleArn__"),
+		CodebuildRoleArn: ptr.String("__CodebuildRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -439,7 +513,23 @@ func TestCheckResponseSnapshot_CreateEnvironmentTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEnvironmentTemplate(context.Background(), &CreateEnvironmentTemplateInput{})
+	got, err := svc.CreateEnvironmentTemplate(context.Background(), &CreateEnvironmentTemplateInput{
+		Name:          ptr.String("__Name__"),
+		DisplayName:   ptr.String("__DisplayName__"),
+		Description:   ptr.String("__Description__"),
+		EncryptionKey: ptr.String("__EncryptionKey__"),
+		Provisioning:  types.Provisioning("CUSTOMER_MANAGED"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -472,7 +562,28 @@ func TestCheckResponseSnapshot_CreateEnvironmentTemplateVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEnvironmentTemplateVersion(context.Background(), &CreateEnvironmentTemplateVersionInput{})
+	got, err := svc.CreateEnvironmentTemplateVersion(context.Background(), &CreateEnvironmentTemplateVersionInput{
+		ClientToken:  ptr.String("__ClientToken__"),
+		TemplateName: ptr.String("__TemplateName__"),
+		Description:  ptr.String("__Description__"),
+		MajorVersion: ptr.String("__MajorVersion__"),
+		Source: &types.TemplateVersionSourceInputMemberS3{
+			Value: types.S3ObjectSource{
+				Bucket: ptr.String("__Bucket__"),
+				Key:    ptr.String("__Key__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -499,7 +610,22 @@ func TestCheckResponseSnapshot_CreateRepository(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRepository(context.Background(), &CreateRepositoryInput{})
+	got, err := svc.CreateRepository(context.Background(), &CreateRepositoryInput{
+		Provider:      types.RepositoryProvider("GITHUB"),
+		Name:          ptr.String("__Name__"),
+		ConnectionArn: ptr.String("__ConnectionArn__"),
+		EncryptionKey: ptr.String("__EncryptionKey__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -547,7 +673,27 @@ func TestCheckResponseSnapshot_CreateService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateService(context.Background(), &CreateServiceInput{})
+	got, err := svc.CreateService(context.Background(), &CreateServiceInput{
+		Name:                    ptr.String("__Name__"),
+		Description:             ptr.String("__Description__"),
+		TemplateName:            ptr.String("__TemplateName__"),
+		TemplateMajorVersion:    ptr.String("__TemplateMajorVersion__"),
+		TemplateMinorVersion:    ptr.String("__TemplateMinorVersion__"),
+		Spec:                    ptr.String("__Spec__"),
+		RepositoryConnectionArn: ptr.String("__RepositoryConnectionArn__"),
+		RepositoryId:            ptr.String("__RepositoryId__"),
+		BranchName:              ptr.String("__BranchName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -585,7 +731,24 @@ func TestCheckResponseSnapshot_CreateServiceInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateServiceInstance(context.Background(), &CreateServiceInstanceInput{})
+	got, err := svc.CreateServiceInstance(context.Background(), &CreateServiceInstanceInput{
+		Name:                 ptr.String("__Name__"),
+		ServiceName:          ptr.String("__ServiceName__"),
+		Spec:                 ptr.String("__Spec__"),
+		TemplateMajorVersion: ptr.String("__TemplateMajorVersion__"),
+		TemplateMinorVersion: ptr.String("__TemplateMinorVersion__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -612,7 +775,13 @@ func TestCheckResponseSnapshot_CreateServiceSyncConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateServiceSyncConfig(context.Background(), &CreateServiceSyncConfigInput{})
+	got, err := svc.CreateServiceSyncConfig(context.Background(), &CreateServiceSyncConfigInput{
+		ServiceName:        ptr.String("__ServiceName__"),
+		RepositoryProvider: types.RepositoryProvider("GITHUB"),
+		RepositoryName:     ptr.String("__RepositoryName__"),
+		Branch:             ptr.String("__Branch__"),
+		FilePath:           ptr.String("__FilePath__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -643,7 +812,23 @@ func TestCheckResponseSnapshot_CreateServiceTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateServiceTemplate(context.Background(), &CreateServiceTemplateInput{})
+	got, err := svc.CreateServiceTemplate(context.Background(), &CreateServiceTemplateInput{
+		Name:                 ptr.String("__Name__"),
+		DisplayName:          ptr.String("__DisplayName__"),
+		Description:          ptr.String("__Description__"),
+		EncryptionKey:        ptr.String("__EncryptionKey__"),
+		PipelineProvisioning: types.Provisioning("CUSTOMER_MANAGED"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -690,7 +875,42 @@ func TestCheckResponseSnapshot_CreateServiceTemplateVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateServiceTemplateVersion(context.Background(), &CreateServiceTemplateVersionInput{})
+	got, err := svc.CreateServiceTemplateVersion(context.Background(), &CreateServiceTemplateVersionInput{
+		ClientToken:  ptr.String("__ClientToken__"),
+		TemplateName: ptr.String("__TemplateName__"),
+		Description:  ptr.String("__Description__"),
+		MajorVersion: ptr.String("__MajorVersion__"),
+		Source: &types.TemplateVersionSourceInputMemberS3{
+			Value: types.S3ObjectSource{
+				Bucket: ptr.String("__Bucket__"),
+				Key:    ptr.String("__Key__"),
+			},
+		},
+		CompatibleEnvironmentTemplates: []types.CompatibleEnvironmentTemplateInput{
+			{
+				TemplateName: ptr.String("__TemplateName__"),
+				MajorVersion: ptr.String("__MajorVersion__"),
+			},
+			{
+				TemplateName: ptr.String("__TemplateName__"),
+				MajorVersion: ptr.String("__MajorVersion__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SupportedComponentSources: []types.ServiceTemplateSupportedComponentSourceType{
+			types.ServiceTemplateSupportedComponentSourceType("DIRECTLY_DEFINED"),
+			types.ServiceTemplateSupportedComponentSourceType("DIRECTLY_DEFINED"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -718,7 +938,14 @@ func TestCheckResponseSnapshot_CreateTemplateSyncConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTemplateSyncConfig(context.Background(), &CreateTemplateSyncConfigInput{})
+	got, err := svc.CreateTemplateSyncConfig(context.Background(), &CreateTemplateSyncConfigInput{
+		TemplateName:       ptr.String("__TemplateName__"),
+		TemplateType:       types.TemplateType("ENVIRONMENT"),
+		RepositoryProvider: types.RepositoryProvider("GITHUB"),
+		RepositoryName:     ptr.String("__RepositoryName__"),
+		Branch:             ptr.String("__Branch__"),
+		Subdirectory:       ptr.String("__Subdirectory__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -756,7 +983,9 @@ func TestCheckResponseSnapshot_DeleteComponent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteComponent(context.Background(), &DeleteComponentInput{})
+	got, err := svc.DeleteComponent(context.Background(), &DeleteComponentInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -822,7 +1051,9 @@ func TestCheckResponseSnapshot_DeleteDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDeployment(context.Background(), &DeleteDeploymentInput{})
+	got, err := svc.DeleteDeployment(context.Background(), &DeleteDeploymentInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -870,7 +1101,9 @@ func TestCheckResponseSnapshot_DeleteEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEnvironment(context.Background(), &DeleteEnvironmentInput{})
+	got, err := svc.DeleteEnvironment(context.Background(), &DeleteEnvironmentInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -903,7 +1136,9 @@ func TestCheckResponseSnapshot_DeleteEnvironmentAccountConnection(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEnvironmentAccountConnection(context.Background(), &DeleteEnvironmentAccountConnectionInput{})
+	got, err := svc.DeleteEnvironmentAccountConnection(context.Background(), &DeleteEnvironmentAccountConnectionInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -934,7 +1169,9 @@ func TestCheckResponseSnapshot_DeleteEnvironmentTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEnvironmentTemplate(context.Background(), &DeleteEnvironmentTemplateInput{})
+	got, err := svc.DeleteEnvironmentTemplate(context.Background(), &DeleteEnvironmentTemplateInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -967,7 +1204,11 @@ func TestCheckResponseSnapshot_DeleteEnvironmentTemplateVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEnvironmentTemplateVersion(context.Background(), &DeleteEnvironmentTemplateVersionInput{})
+	got, err := svc.DeleteEnvironmentTemplateVersion(context.Background(), &DeleteEnvironmentTemplateVersionInput{
+		TemplateName: ptr.String("__TemplateName__"),
+		MajorVersion: ptr.String("__MajorVersion__"),
+		MinorVersion: ptr.String("__MinorVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -994,7 +1235,10 @@ func TestCheckResponseSnapshot_DeleteRepository(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRepository(context.Background(), &DeleteRepositoryInput{})
+	got, err := svc.DeleteRepository(context.Background(), &DeleteRepositoryInput{
+		Provider: types.RepositoryProvider("GITHUB"),
+		Name:     ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1042,7 +1286,9 @@ func TestCheckResponseSnapshot_DeleteService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteService(context.Background(), &DeleteServiceInput{})
+	got, err := svc.DeleteService(context.Background(), &DeleteServiceInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1069,7 +1315,9 @@ func TestCheckResponseSnapshot_DeleteServiceSyncConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteServiceSyncConfig(context.Background(), &DeleteServiceSyncConfigInput{})
+	got, err := svc.DeleteServiceSyncConfig(context.Background(), &DeleteServiceSyncConfigInput{
+		ServiceName: ptr.String("__ServiceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1100,7 +1348,9 @@ func TestCheckResponseSnapshot_DeleteServiceTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteServiceTemplate(context.Background(), &DeleteServiceTemplateInput{})
+	got, err := svc.DeleteServiceTemplate(context.Background(), &DeleteServiceTemplateInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1147,7 +1397,11 @@ func TestCheckResponseSnapshot_DeleteServiceTemplateVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteServiceTemplateVersion(context.Background(), &DeleteServiceTemplateVersionInput{})
+	got, err := svc.DeleteServiceTemplateVersion(context.Background(), &DeleteServiceTemplateVersionInput{
+		TemplateName: ptr.String("__TemplateName__"),
+		MajorVersion: ptr.String("__MajorVersion__"),
+		MinorVersion: ptr.String("__MinorVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1175,7 +1429,10 @@ func TestCheckResponseSnapshot_DeleteTemplateSyncConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTemplateSyncConfig(context.Background(), &DeleteTemplateSyncConfigInput{})
+	got, err := svc.DeleteTemplateSyncConfig(context.Background(), &DeleteTemplateSyncConfigInput{
+		TemplateName: ptr.String("__TemplateName__"),
+		TemplateType: types.TemplateType("ENVIRONMENT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1243,7 +1500,9 @@ func TestCheckResponseSnapshot_GetComponent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetComponent(context.Background(), &GetComponentInput{})
+	got, err := svc.GetComponent(context.Background(), &GetComponentInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1309,7 +1568,13 @@ func TestCheckResponseSnapshot_GetDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDeployment(context.Background(), &GetDeploymentInput{})
+	got, err := svc.GetDeployment(context.Background(), &GetDeploymentInput{
+		Id:                  ptr.String("__Id__"),
+		EnvironmentName:     ptr.String("__EnvironmentName__"),
+		ServiceName:         ptr.String("__ServiceName__"),
+		ServiceInstanceName: ptr.String("__ServiceInstanceName__"),
+		ComponentName:       ptr.String("__ComponentName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1357,7 +1622,9 @@ func TestCheckResponseSnapshot_GetEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEnvironment(context.Background(), &GetEnvironmentInput{})
+	got, err := svc.GetEnvironment(context.Background(), &GetEnvironmentInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1390,7 +1657,9 @@ func TestCheckResponseSnapshot_GetEnvironmentAccountConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEnvironmentAccountConnection(context.Background(), &GetEnvironmentAccountConnectionInput{})
+	got, err := svc.GetEnvironmentAccountConnection(context.Background(), &GetEnvironmentAccountConnectionInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1421,7 +1690,9 @@ func TestCheckResponseSnapshot_GetEnvironmentTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEnvironmentTemplate(context.Background(), &GetEnvironmentTemplateInput{})
+	got, err := svc.GetEnvironmentTemplate(context.Background(), &GetEnvironmentTemplateInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1454,7 +1725,11 @@ func TestCheckResponseSnapshot_GetEnvironmentTemplateVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEnvironmentTemplateVersion(context.Background(), &GetEnvironmentTemplateVersionInput{})
+	got, err := svc.GetEnvironmentTemplateVersion(context.Background(), &GetEnvironmentTemplateVersionInput{
+		TemplateName: ptr.String("__TemplateName__"),
+		MajorVersion: ptr.String("__MajorVersion__"),
+		MinorVersion: ptr.String("__MinorVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1481,7 +1756,10 @@ func TestCheckResponseSnapshot_GetRepository(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRepository(context.Background(), &GetRepositoryInput{})
+	got, err := svc.GetRepository(context.Background(), &GetRepositoryInput{
+		Provider: types.RepositoryProvider("GITHUB"),
+		Name:     ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1519,7 +1797,12 @@ func TestCheckResponseSnapshot_GetRepositorySyncStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRepositorySyncStatus(context.Background(), &GetRepositorySyncStatusInput{})
+	got, err := svc.GetRepositorySyncStatus(context.Background(), &GetRepositorySyncStatusInput{
+		RepositoryName:     ptr.String("__RepositoryName__"),
+		RepositoryProvider: types.RepositoryProvider("GITHUB"),
+		Branch:             ptr.String("__Branch__"),
+		SyncType:           types.SyncType("TEMPLATE_SYNC"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1638,7 +1921,9 @@ func TestCheckResponseSnapshot_GetService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetService(context.Background(), &GetServiceInput{})
+	got, err := svc.GetService(context.Background(), &GetServiceInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1676,7 +1961,10 @@ func TestCheckResponseSnapshot_GetServiceInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetServiceInstance(context.Background(), &GetServiceInstanceInput{})
+	got, err := svc.GetServiceInstance(context.Background(), &GetServiceInstanceInput{
+		Name:        ptr.String("__Name__"),
+		ServiceName: ptr.String("__ServiceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1769,7 +2057,10 @@ func TestCheckResponseSnapshot_GetServiceInstanceSyncStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetServiceInstanceSyncStatus(context.Background(), &GetServiceInstanceSyncStatusInput{})
+	got, err := svc.GetServiceInstanceSyncStatus(context.Background(), &GetServiceInstanceSyncStatusInput{
+		ServiceName:         ptr.String("__ServiceName__"),
+		ServiceInstanceName: ptr.String("__ServiceInstanceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1833,7 +2124,10 @@ func TestCheckResponseSnapshot_GetServiceSyncBlockerSummary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetServiceSyncBlockerSummary(context.Background(), &GetServiceSyncBlockerSummaryInput{})
+	got, err := svc.GetServiceSyncBlockerSummary(context.Background(), &GetServiceSyncBlockerSummaryInput{
+		ServiceName:         ptr.String("__ServiceName__"),
+		ServiceInstanceName: ptr.String("__ServiceInstanceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1860,7 +2154,9 @@ func TestCheckResponseSnapshot_GetServiceSyncConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetServiceSyncConfig(context.Background(), &GetServiceSyncConfigInput{})
+	got, err := svc.GetServiceSyncConfig(context.Background(), &GetServiceSyncConfigInput{
+		ServiceName: ptr.String("__ServiceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1891,7 +2187,9 @@ func TestCheckResponseSnapshot_GetServiceTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetServiceTemplate(context.Background(), &GetServiceTemplateInput{})
+	got, err := svc.GetServiceTemplate(context.Background(), &GetServiceTemplateInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1938,7 +2236,11 @@ func TestCheckResponseSnapshot_GetServiceTemplateVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetServiceTemplateVersion(context.Background(), &GetServiceTemplateVersionInput{})
+	got, err := svc.GetServiceTemplateVersion(context.Background(), &GetServiceTemplateVersionInput{
+		TemplateName: ptr.String("__TemplateName__"),
+		MajorVersion: ptr.String("__MajorVersion__"),
+		MinorVersion: ptr.String("__MinorVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1966,7 +2268,10 @@ func TestCheckResponseSnapshot_GetTemplateSyncConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTemplateSyncConfig(context.Background(), &GetTemplateSyncConfigInput{})
+	got, err := svc.GetTemplateSyncConfig(context.Background(), &GetTemplateSyncConfigInput{
+		TemplateName: ptr.String("__TemplateName__"),
+		TemplateType: types.TemplateType("ENVIRONMENT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2059,7 +2364,11 @@ func TestCheckResponseSnapshot_GetTemplateSyncStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTemplateSyncStatus(context.Background(), &GetTemplateSyncStatusInput{})
+	got, err := svc.GetTemplateSyncStatus(context.Background(), &GetTemplateSyncStatusInput{
+		TemplateName:    ptr.String("__TemplateName__"),
+		TemplateType:    types.TemplateType("ENVIRONMENT"),
+		TemplateVersion: ptr.String("__TemplateVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2090,7 +2399,11 @@ func TestCheckResponseSnapshot_ListComponentOutputs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListComponentOutputs(context.Background(), &ListComponentOutputsInput{})
+	got, err := svc.ListComponentOutputs(context.Background(), &ListComponentOutputsInput{
+		ComponentName: ptr.String("__ComponentName__"),
+		NextToken:     ptr.String("__NextToken__"),
+		DeploymentId:  ptr.String("__DeploymentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2123,7 +2436,10 @@ func TestCheckResponseSnapshot_ListComponentProvisionedResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListComponentProvisionedResources(context.Background(), &ListComponentProvisionedResourcesInput{})
+	got, err := svc.ListComponentProvisionedResources(context.Background(), &ListComponentProvisionedResourcesInput{
+		ComponentName: ptr.String("__ComponentName__"),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2176,7 +2492,13 @@ func TestCheckResponseSnapshot_ListComponents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListComponents(context.Background(), &ListComponentsInput{})
+	got, err := svc.ListComponents(context.Background(), &ListComponentsInput{
+		NextToken:           ptr.String("__NextToken__"),
+		EnvironmentName:     ptr.String("__EnvironmentName__"),
+		ServiceName:         ptr.String("__ServiceName__"),
+		ServiceInstanceName: ptr.String("__ServiceInstanceName__"),
+		MaxResults:          ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2233,7 +2555,14 @@ func TestCheckResponseSnapshot_ListDeployments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDeployments(context.Background(), &ListDeploymentsInput{})
+	got, err := svc.ListDeployments(context.Background(), &ListDeploymentsInput{
+		NextToken:           ptr.String("__NextToken__"),
+		EnvironmentName:     ptr.String("__EnvironmentName__"),
+		ServiceName:         ptr.String("__ServiceName__"),
+		ServiceInstanceName: ptr.String("__ServiceInstanceName__"),
+		ComponentName:       ptr.String("__ComponentName__"),
+		MaxResults:          ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2280,7 +2609,16 @@ func TestCheckResponseSnapshot_ListEnvironmentAccountConnections(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEnvironmentAccountConnections(context.Background(), &ListEnvironmentAccountConnectionsInput{})
+	got, err := svc.ListEnvironmentAccountConnections(context.Background(), &ListEnvironmentAccountConnectionsInput{
+		RequestedBy:     types.EnvironmentAccountConnectionRequesterAccountType("MANAGEMENT_ACCOUNT"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		Statuses: []types.EnvironmentAccountConnectionStatus{
+			types.EnvironmentAccountConnectionStatus("PENDING"),
+			types.EnvironmentAccountConnectionStatus("PENDING"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2311,7 +2649,11 @@ func TestCheckResponseSnapshot_ListEnvironmentOutputs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEnvironmentOutputs(context.Background(), &ListEnvironmentOutputsInput{})
+	got, err := svc.ListEnvironmentOutputs(context.Background(), &ListEnvironmentOutputsInput{
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		NextToken:       ptr.String("__NextToken__"),
+		DeploymentId:    ptr.String("__DeploymentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2344,7 +2686,10 @@ func TestCheckResponseSnapshot_ListEnvironmentProvisionedResources(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEnvironmentProvisionedResources(context.Background(), &ListEnvironmentProvisionedResourcesInput{})
+	got, err := svc.ListEnvironmentProvisionedResources(context.Background(), &ListEnvironmentProvisionedResourcesInput{
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2391,7 +2736,12 @@ func TestCheckResponseSnapshot_ListEnvironmentTemplateVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEnvironmentTemplateVersions(context.Background(), &ListEnvironmentTemplateVersionsInput{})
+	got, err := svc.ListEnvironmentTemplateVersions(context.Background(), &ListEnvironmentTemplateVersionsInput{
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		TemplateName: ptr.String("__TemplateName__"),
+		MajorVersion: ptr.String("__MajorVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2434,7 +2784,10 @@ func TestCheckResponseSnapshot_ListEnvironmentTemplates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEnvironmentTemplates(context.Background(), &ListEnvironmentTemplatesInput{})
+	got, err := svc.ListEnvironmentTemplates(context.Background(), &ListEnvironmentTemplatesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2497,7 +2850,20 @@ func TestCheckResponseSnapshot_ListEnvironments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEnvironments(context.Background(), &ListEnvironmentsInput{})
+	got, err := svc.ListEnvironments(context.Background(), &ListEnvironmentsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		EnvironmentTemplates: []types.EnvironmentTemplateFilter{
+			{
+				TemplateName: ptr.String("__TemplateName__"),
+				MajorVersion: ptr.String("__MajorVersion__"),
+			},
+			{
+				TemplateName: ptr.String("__TemplateName__"),
+				MajorVersion: ptr.String("__MajorVersion__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2532,7 +2898,10 @@ func TestCheckResponseSnapshot_ListRepositories(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRepositories(context.Background(), &ListRepositoriesInput{})
+	got, err := svc.ListRepositories(context.Background(), &ListRepositoriesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2567,7 +2936,12 @@ func TestCheckResponseSnapshot_ListRepositorySyncDefinitions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRepositorySyncDefinitions(context.Background(), &ListRepositorySyncDefinitionsInput{})
+	got, err := svc.ListRepositorySyncDefinitions(context.Background(), &ListRepositorySyncDefinitionsInput{
+		RepositoryName:     ptr.String("__RepositoryName__"),
+		RepositoryProvider: types.RepositoryProvider("GITHUB"),
+		SyncType:           types.SyncType("TEMPLATE_SYNC"),
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2598,7 +2972,12 @@ func TestCheckResponseSnapshot_ListServiceInstanceOutputs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServiceInstanceOutputs(context.Background(), &ListServiceInstanceOutputsInput{})
+	got, err := svc.ListServiceInstanceOutputs(context.Background(), &ListServiceInstanceOutputsInput{
+		ServiceInstanceName: ptr.String("__ServiceInstanceName__"),
+		ServiceName:         ptr.String("__ServiceName__"),
+		NextToken:           ptr.String("__NextToken__"),
+		DeploymentId:        ptr.String("__DeploymentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2631,7 +3010,11 @@ func TestCheckResponseSnapshot_ListServiceInstanceProvisionedResources(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServiceInstanceProvisionedResources(context.Background(), &ListServiceInstanceProvisionedResourcesInput{})
+	got, err := svc.ListServiceInstanceProvisionedResources(context.Background(), &ListServiceInstanceProvisionedResourcesInput{
+		ServiceName:         ptr.String("__ServiceName__"),
+		ServiceInstanceName: ptr.String("__ServiceInstanceName__"),
+		NextToken:           ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2686,7 +3069,23 @@ func TestCheckResponseSnapshot_ListServiceInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServiceInstances(context.Background(), &ListServiceInstancesInput{})
+	got, err := svc.ListServiceInstances(context.Background(), &ListServiceInstancesInput{
+		ServiceName: ptr.String("__ServiceName__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		Filters: []types.ListServiceInstancesFilter{
+			{
+				Key:   types.ListServiceInstancesFilterBy("name"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   types.ListServiceInstancesFilterBy("name"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SortBy:    types.ListServiceInstancesSortBy("name"),
+		SortOrder: types.SortOrder("ASCENDING"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2717,7 +3116,11 @@ func TestCheckResponseSnapshot_ListServicePipelineOutputs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServicePipelineOutputs(context.Background(), &ListServicePipelineOutputsInput{})
+	got, err := svc.ListServicePipelineOutputs(context.Background(), &ListServicePipelineOutputsInput{
+		ServiceName:  ptr.String("__ServiceName__"),
+		NextToken:    ptr.String("__NextToken__"),
+		DeploymentId: ptr.String("__DeploymentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2750,7 +3153,10 @@ func TestCheckResponseSnapshot_ListServicePipelineProvisionedResources(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServicePipelineProvisionedResources(context.Background(), &ListServicePipelineProvisionedResourcesInput{})
+	got, err := svc.ListServicePipelineProvisionedResources(context.Background(), &ListServicePipelineProvisionedResourcesInput{
+		ServiceName: ptr.String("__ServiceName__"),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2797,7 +3203,12 @@ func TestCheckResponseSnapshot_ListServiceTemplateVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServiceTemplateVersions(context.Background(), &ListServiceTemplateVersionsInput{})
+	got, err := svc.ListServiceTemplateVersions(context.Background(), &ListServiceTemplateVersionsInput{
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		TemplateName: ptr.String("__TemplateName__"),
+		MajorVersion: ptr.String("__MajorVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2840,7 +3251,10 @@ func TestCheckResponseSnapshot_ListServiceTemplates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServiceTemplates(context.Background(), &ListServiceTemplatesInput{})
+	got, err := svc.ListServiceTemplates(context.Background(), &ListServiceTemplatesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2883,7 +3297,10 @@ func TestCheckResponseSnapshot_ListServices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServices(context.Background(), &ListServicesInput{})
+	got, err := svc.ListServices(context.Background(), &ListServicesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2914,7 +3331,11 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2933,7 +3354,22 @@ func TestCheckResponseSnapshot_NotifyResourceDeploymentStatusChange(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.NotifyResourceDeploymentStatusChange(context.Background(), &NotifyResourceDeploymentStatusChangeInput{})
+	got, err := svc.NotifyResourceDeploymentStatusChange(context.Background(), &NotifyResourceDeploymentStatusChangeInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Status:      types.ResourceDeploymentStatus("IN_PROGRESS"),
+		Outputs: []types.Output{
+			{
+				Key:         ptr.String("__Key__"),
+				ValueString: ptr.String("__ValueString__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				ValueString: ptr.String("__ValueString__"),
+			},
+		},
+		DeploymentId:  ptr.String("__DeploymentId__"),
+		StatusMessage: ptr.String("__StatusMessage__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2966,7 +3402,9 @@ func TestCheckResponseSnapshot_RejectEnvironmentAccountConnection(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RejectEnvironmentAccountConnection(context.Background(), &RejectEnvironmentAccountConnectionInput{})
+	got, err := svc.RejectEnvironmentAccountConnection(context.Background(), &RejectEnvironmentAccountConnectionInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2985,7 +3423,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3004,7 +3454,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3034,7 +3490,16 @@ func TestCheckResponseSnapshot_UpdateAccountSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAccountSettings(context.Background(), &UpdateAccountSettingsInput{})
+	got, err := svc.UpdateAccountSettings(context.Background(), &UpdateAccountSettingsInput{
+		PipelineServiceRoleArn: ptr.String("__PipelineServiceRoleArn__"),
+		PipelineProvisioningRepository: &types.RepositoryBranchInput{
+			Provider: types.RepositoryProvider("GITHUB"),
+			Name:     ptr.String("__Name__"),
+			Branch:   ptr.String("__Branch__"),
+		},
+		DeletePipelineProvisioningRepository: ptr.Bool(true),
+		PipelineCodebuildRoleArn:             ptr.String("__PipelineCodebuildRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3072,7 +3537,16 @@ func TestCheckResponseSnapshot_UpdateComponent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateComponent(context.Background(), &UpdateComponentInput{})
+	got, err := svc.UpdateComponent(context.Background(), &UpdateComponentInput{
+		Name:                ptr.String("__Name__"),
+		DeploymentType:      types.ComponentDeploymentUpdateType("NONE"),
+		Description:         ptr.String("__Description__"),
+		ServiceName:         ptr.String("__ServiceName__"),
+		ServiceInstanceName: ptr.String("__ServiceInstanceName__"),
+		ServiceSpec:         ptr.String("__ServiceSpec__"),
+		TemplateFile:        ptr.String("__TemplateFile__"),
+		ClientToken:         ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3120,7 +3594,23 @@ func TestCheckResponseSnapshot_UpdateEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEnvironment(context.Background(), &UpdateEnvironmentInput{})
+	got, err := svc.UpdateEnvironment(context.Background(), &UpdateEnvironmentInput{
+		Name:                           ptr.String("__Name__"),
+		Description:                    ptr.String("__Description__"),
+		Spec:                           ptr.String("__Spec__"),
+		TemplateMajorVersion:           ptr.String("__TemplateMajorVersion__"),
+		TemplateMinorVersion:           ptr.String("__TemplateMinorVersion__"),
+		ProtonServiceRoleArn:           ptr.String("__ProtonServiceRoleArn__"),
+		DeploymentType:                 types.DeploymentUpdateType("NONE"),
+		EnvironmentAccountConnectionId: ptr.String("__EnvironmentAccountConnectionId__"),
+		ProvisioningRepository: &types.RepositoryBranchInput{
+			Provider: types.RepositoryProvider("GITHUB"),
+			Name:     ptr.String("__Name__"),
+			Branch:   ptr.String("__Branch__"),
+		},
+		ComponentRoleArn: ptr.String("__ComponentRoleArn__"),
+		CodebuildRoleArn: ptr.String("__CodebuildRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3153,7 +3643,12 @@ func TestCheckResponseSnapshot_UpdateEnvironmentAccountConnection(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEnvironmentAccountConnection(context.Background(), &UpdateEnvironmentAccountConnectionInput{})
+	got, err := svc.UpdateEnvironmentAccountConnection(context.Background(), &UpdateEnvironmentAccountConnectionInput{
+		Id:               ptr.String("__Id__"),
+		RoleArn:          ptr.String("__RoleArn__"),
+		ComponentRoleArn: ptr.String("__ComponentRoleArn__"),
+		CodebuildRoleArn: ptr.String("__CodebuildRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3184,7 +3679,11 @@ func TestCheckResponseSnapshot_UpdateEnvironmentTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEnvironmentTemplate(context.Background(), &UpdateEnvironmentTemplateInput{})
+	got, err := svc.UpdateEnvironmentTemplate(context.Background(), &UpdateEnvironmentTemplateInput{
+		Name:        ptr.String("__Name__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3217,7 +3716,13 @@ func TestCheckResponseSnapshot_UpdateEnvironmentTemplateVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEnvironmentTemplateVersion(context.Background(), &UpdateEnvironmentTemplateVersionInput{})
+	got, err := svc.UpdateEnvironmentTemplateVersion(context.Background(), &UpdateEnvironmentTemplateVersionInput{
+		TemplateName: ptr.String("__TemplateName__"),
+		MajorVersion: ptr.String("__MajorVersion__"),
+		MinorVersion: ptr.String("__MinorVersion__"),
+		Description:  ptr.String("__Description__"),
+		Status:       types.TemplateVersionStatus("REGISTRATION_IN_PROGRESS"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3265,7 +3770,11 @@ func TestCheckResponseSnapshot_UpdateService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateService(context.Background(), &UpdateServiceInput{})
+	got, err := svc.UpdateService(context.Background(), &UpdateServiceInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Spec:        ptr.String("__Spec__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3303,7 +3812,15 @@ func TestCheckResponseSnapshot_UpdateServiceInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateServiceInstance(context.Background(), &UpdateServiceInstanceInput{})
+	got, err := svc.UpdateServiceInstance(context.Background(), &UpdateServiceInstanceInput{
+		Name:                 ptr.String("__Name__"),
+		ServiceName:          ptr.String("__ServiceName__"),
+		DeploymentType:       types.DeploymentUpdateType("NONE"),
+		Spec:                 ptr.String("__Spec__"),
+		TemplateMajorVersion: ptr.String("__TemplateMajorVersion__"),
+		TemplateMinorVersion: ptr.String("__TemplateMinorVersion__"),
+		ClientToken:          ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3337,7 +3854,13 @@ func TestCheckResponseSnapshot_UpdateServicePipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateServicePipeline(context.Background(), &UpdateServicePipelineInput{})
+	got, err := svc.UpdateServicePipeline(context.Background(), &UpdateServicePipelineInput{
+		ServiceName:          ptr.String("__ServiceName__"),
+		Spec:                 ptr.String("__Spec__"),
+		DeploymentType:       types.DeploymentUpdateType("NONE"),
+		TemplateMajorVersion: ptr.String("__TemplateMajorVersion__"),
+		TemplateMinorVersion: ptr.String("__TemplateMinorVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3378,7 +3901,10 @@ func TestCheckResponseSnapshot_UpdateServiceSyncBlocker(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateServiceSyncBlocker(context.Background(), &UpdateServiceSyncBlockerInput{})
+	got, err := svc.UpdateServiceSyncBlocker(context.Background(), &UpdateServiceSyncBlockerInput{
+		Id:             ptr.String("__Id__"),
+		ResolvedReason: ptr.String("__ResolvedReason__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3405,7 +3931,13 @@ func TestCheckResponseSnapshot_UpdateServiceSyncConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateServiceSyncConfig(context.Background(), &UpdateServiceSyncConfigInput{})
+	got, err := svc.UpdateServiceSyncConfig(context.Background(), &UpdateServiceSyncConfigInput{
+		ServiceName:        ptr.String("__ServiceName__"),
+		RepositoryProvider: types.RepositoryProvider("GITHUB"),
+		RepositoryName:     ptr.String("__RepositoryName__"),
+		Branch:             ptr.String("__Branch__"),
+		FilePath:           ptr.String("__FilePath__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3436,7 +3968,11 @@ func TestCheckResponseSnapshot_UpdateServiceTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateServiceTemplate(context.Background(), &UpdateServiceTemplateInput{})
+	got, err := svc.UpdateServiceTemplate(context.Background(), &UpdateServiceTemplateInput{
+		Name:        ptr.String("__Name__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3483,7 +4019,27 @@ func TestCheckResponseSnapshot_UpdateServiceTemplateVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateServiceTemplateVersion(context.Background(), &UpdateServiceTemplateVersionInput{})
+	got, err := svc.UpdateServiceTemplateVersion(context.Background(), &UpdateServiceTemplateVersionInput{
+		TemplateName: ptr.String("__TemplateName__"),
+		MajorVersion: ptr.String("__MajorVersion__"),
+		MinorVersion: ptr.String("__MinorVersion__"),
+		Description:  ptr.String("__Description__"),
+		Status:       types.TemplateVersionStatus("REGISTRATION_IN_PROGRESS"),
+		CompatibleEnvironmentTemplates: []types.CompatibleEnvironmentTemplateInput{
+			{
+				TemplateName: ptr.String("__TemplateName__"),
+				MajorVersion: ptr.String("__MajorVersion__"),
+			},
+			{
+				TemplateName: ptr.String("__TemplateName__"),
+				MajorVersion: ptr.String("__MajorVersion__"),
+			},
+		},
+		SupportedComponentSources: []types.ServiceTemplateSupportedComponentSourceType{
+			types.ServiceTemplateSupportedComponentSourceType("DIRECTLY_DEFINED"),
+			types.ServiceTemplateSupportedComponentSourceType("DIRECTLY_DEFINED"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3511,7 +4067,14 @@ func TestCheckResponseSnapshot_UpdateTemplateSyncConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTemplateSyncConfig(context.Background(), &UpdateTemplateSyncConfigInput{})
+	got, err := svc.UpdateTemplateSyncConfig(context.Background(), &UpdateTemplateSyncConfigInput{
+		TemplateName:       ptr.String("__TemplateName__"),
+		TemplateType:       types.TemplateType("ENVIRONMENT"),
+		RepositoryProvider: types.RepositoryProvider("GITHUB"),
+		RepositoryName:     ptr.String("__RepositoryName__"),
+		Branch:             ptr.String("__Branch__"),
+		Subdirectory:       ptr.String("__Subdirectory__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3532,7 +4095,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptEnvironmentAccountConnection(context.Background(), &AcceptEnvironmentAccountConnectionInput{})
+	_, opErr := svc.AcceptEnvironmentAccountConnection(context.Background(), &AcceptEnvironmentAccountConnectionInput{
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3557,7 +4122,9 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptEnvironmentAccountConnection(context.Background(), &AcceptEnvironmentAccountConnectionInput{})
+	_, opErr := svc.AcceptEnvironmentAccountConnection(context.Background(), &AcceptEnvironmentAccountConnectionInput{
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3582,7 +4149,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptEnvironmentAccountConnection(context.Background(), &AcceptEnvironmentAccountConnectionInput{})
+	_, opErr := svc.AcceptEnvironmentAccountConnection(context.Background(), &AcceptEnvironmentAccountConnectionInput{
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3607,7 +4176,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptEnvironmentAccountConnection(context.Background(), &AcceptEnvironmentAccountConnectionInput{})
+	_, opErr := svc.AcceptEnvironmentAccountConnection(context.Background(), &AcceptEnvironmentAccountConnectionInput{
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3632,7 +4203,27 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateComponent(context.Background(), &CreateComponentInput{})
+	_, opErr := svc.CreateComponent(context.Background(), &CreateComponentInput{
+		Name:                ptr.String("__Name__"),
+		Description:         ptr.String("__Description__"),
+		ServiceName:         ptr.String("__ServiceName__"),
+		ServiceInstanceName: ptr.String("__ServiceInstanceName__"),
+		EnvironmentName:     ptr.String("__EnvironmentName__"),
+		TemplateFile:        ptr.String("__TemplateFile__"),
+		Manifest:            ptr.String("__Manifest__"),
+		ServiceSpec:         ptr.String("__ServiceSpec__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3657,7 +4248,9 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptEnvironmentAccountConnection(context.Background(), &AcceptEnvironmentAccountConnectionInput{})
+	_, opErr := svc.AcceptEnvironmentAccountConnection(context.Background(), &AcceptEnvironmentAccountConnectionInput{
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3682,7 +4275,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptEnvironmentAccountConnection(context.Background(), &AcceptEnvironmentAccountConnectionInput{})
+	_, opErr := svc.AcceptEnvironmentAccountConnection(context.Background(), &AcceptEnvironmentAccountConnectionInput{
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

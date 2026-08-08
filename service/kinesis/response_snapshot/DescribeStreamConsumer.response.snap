@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Kinesis_20131202.DescribeStreamConsumer
+
+{"ConsumerDescription":{"ConsumerARN":"__ConsumerARN__","ConsumerCreationTimestamp":946684800,"ConsumerName":"__ConsumerName__","ConsumerStatus":"CREATING","StreamARN":"__StreamARN__"}}

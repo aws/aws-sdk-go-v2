@@ -121,7 +121,14 @@ func TestCheckResponseSnapshot_CreateAccessor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAccessor(context.Background(), &CreateAccessorInput{})
+	got, err := svc.CreateAccessor(context.Background(), &CreateAccessorInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		AccessorType:       types.AccessorType("BILLING_TOKEN"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		NetworkType: types.AccessorNetworkType("ETHEREUM_GOERLI"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -142,7 +149,34 @@ func TestCheckResponseSnapshot_CreateMember(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMember(context.Background(), &CreateMemberInput{})
+	got, err := svc.CreateMember(context.Background(), &CreateMemberInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		InvitationId:       ptr.String("__InvitationId__"),
+		NetworkId:          ptr.String("__NetworkId__"),
+		MemberConfiguration: &types.MemberConfiguration{
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+			FrameworkConfiguration: &types.MemberFrameworkConfiguration{
+				Fabric: &types.MemberFabricConfiguration{
+					AdminUsername: ptr.String("__AdminUsername__"),
+					AdminPassword: ptr.String("__AdminPassword__"),
+				},
+			},
+			LogPublishingConfiguration: &types.MemberLogPublishingConfiguration{
+				Fabric: &types.MemberFabricLogPublishingConfiguration{
+					CaLogs: &types.LogConfigurations{
+						Cloudwatch: &types.LogConfiguration{
+							Enabled: ptr.Bool(true),
+						},
+					},
+				},
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -164,7 +198,51 @@ func TestCheckResponseSnapshot_CreateNetwork(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateNetwork(context.Background(), &CreateNetworkInput{})
+	got, err := svc.CreateNetwork(context.Background(), &CreateNetworkInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		Framework:          types.Framework("HYPERLEDGER_FABRIC"),
+		FrameworkVersion:   ptr.String("__FrameworkVersion__"),
+		FrameworkConfiguration: &types.NetworkFrameworkConfiguration{
+			Fabric: &types.NetworkFabricConfiguration{
+				Edition: types.Edition("STARTER"),
+			},
+		},
+		VotingPolicy: &types.VotingPolicy{
+			ApprovalThresholdPolicy: &types.ApprovalThresholdPolicy{
+				ThresholdPercentage:     ptr.Int32(1),
+				ProposalDurationInHours: ptr.Int32(1),
+				ThresholdComparator:     types.ThresholdComparator("GREATER_THAN"),
+			},
+		},
+		MemberConfiguration: &types.MemberConfiguration{
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+			FrameworkConfiguration: &types.MemberFrameworkConfiguration{
+				Fabric: &types.MemberFabricConfiguration{
+					AdminUsername: ptr.String("__AdminUsername__"),
+					AdminPassword: ptr.String("__AdminPassword__"),
+				},
+			},
+			LogPublishingConfiguration: &types.MemberLogPublishingConfiguration{
+				Fabric: &types.MemberFabricLogPublishingConfiguration{
+					CaLogs: &types.LogConfigurations{
+						Cloudwatch: &types.LogConfiguration{
+							Enabled: ptr.Bool(true),
+						},
+					},
+				},
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -185,7 +263,33 @@ func TestCheckResponseSnapshot_CreateNode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateNode(context.Background(), &CreateNodeInput{})
+	got, err := svc.CreateNode(context.Background(), &CreateNodeInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		NetworkId:          ptr.String("__NetworkId__"),
+		MemberId:           ptr.String("__MemberId__"),
+		NodeConfiguration: &types.NodeConfiguration{
+			InstanceType:     ptr.String("__InstanceType__"),
+			AvailabilityZone: ptr.String("__AvailabilityZone__"),
+			LogPublishingConfiguration: &types.NodeLogPublishingConfiguration{
+				Fabric: &types.NodeFabricLogPublishingConfiguration{
+					ChaincodeLogs: &types.LogConfigurations{
+						Cloudwatch: &types.LogConfiguration{
+							Enabled: ptr.Bool(true),
+						},
+					},
+					PeerLogs: &types.LogConfigurations{
+						Cloudwatch: &types.LogConfiguration{
+							Enabled: ptr.Bool(true),
+						},
+					},
+				},
+			},
+			StateDB: types.StateDBType("LevelDB"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -206,7 +310,33 @@ func TestCheckResponseSnapshot_CreateProposal(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProposal(context.Background(), &CreateProposalInput{})
+	got, err := svc.CreateProposal(context.Background(), &CreateProposalInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		NetworkId:          ptr.String("__NetworkId__"),
+		MemberId:           ptr.String("__MemberId__"),
+		Actions: &types.ProposalActions{
+			Invitations: []types.InviteAction{
+				{
+					Principal: ptr.String("__Principal__"),
+				},
+				{
+					Principal: ptr.String("__Principal__"),
+				},
+			},
+			Removals: []types.RemoveAction{
+				{
+					MemberId: ptr.String("__MemberId__"),
+				},
+				{
+					MemberId: ptr.String("__MemberId__"),
+				},
+			},
+		},
+		Description: ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -225,7 +355,9 @@ func TestCheckResponseSnapshot_DeleteAccessor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAccessor(context.Background(), &DeleteAccessorInput{})
+	got, err := svc.DeleteAccessor(context.Background(), &DeleteAccessorInput{
+		AccessorId: ptr.String("__AccessorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -244,7 +376,10 @@ func TestCheckResponseSnapshot_DeleteMember(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMember(context.Background(), &DeleteMemberInput{})
+	got, err := svc.DeleteMember(context.Background(), &DeleteMemberInput{
+		NetworkId: ptr.String("__NetworkId__"),
+		MemberId:  ptr.String("__MemberId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -263,7 +398,11 @@ func TestCheckResponseSnapshot_DeleteNode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteNode(context.Background(), &DeleteNodeInput{})
+	got, err := svc.DeleteNode(context.Background(), &DeleteNodeInput{
+		NetworkId: ptr.String("__NetworkId__"),
+		MemberId:  ptr.String("__MemberId__"),
+		NodeId:    ptr.String("__NodeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -295,7 +434,9 @@ func TestCheckResponseSnapshot_GetAccessor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAccessor(context.Background(), &GetAccessorInput{})
+	got, err := svc.GetAccessor(context.Background(), &GetAccessorInput{
+		AccessorId: ptr.String("__AccessorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -343,7 +484,10 @@ func TestCheckResponseSnapshot_GetMember(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMember(context.Background(), &GetMemberInput{})
+	got, err := svc.GetMember(context.Background(), &GetMemberInput{
+		NetworkId: ptr.String("__NetworkId__"),
+		MemberId:  ptr.String("__MemberId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -393,7 +537,9 @@ func TestCheckResponseSnapshot_GetNetwork(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetNetwork(context.Background(), &GetNetworkInput{})
+	got, err := svc.GetNetwork(context.Background(), &GetNetworkInput{
+		NetworkId: ptr.String("__NetworkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -452,7 +598,11 @@ func TestCheckResponseSnapshot_GetNode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetNode(context.Background(), &GetNodeInput{})
+	got, err := svc.GetNode(context.Background(), &GetNodeInput{
+		NetworkId: ptr.String("__NetworkId__"),
+		MemberId:  ptr.String("__MemberId__"),
+		NodeId:    ptr.String("__NodeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -507,7 +657,10 @@ func TestCheckResponseSnapshot_GetProposal(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProposal(context.Background(), &GetProposalInput{})
+	got, err := svc.GetProposal(context.Background(), &GetProposalInput{
+		NetworkId:  ptr.String("__NetworkId__"),
+		ProposalId: ptr.String("__ProposalId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -546,7 +699,11 @@ func TestCheckResponseSnapshot_ListAccessors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccessors(context.Background(), &ListAccessorsInput{})
+	got, err := svc.ListAccessors(context.Background(), &ListAccessorsInput{
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+		NetworkType: types.AccessorNetworkType("ETHEREUM_GOERLI"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -603,7 +760,10 @@ func TestCheckResponseSnapshot_ListInvitations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInvitations(context.Background(), &ListInvitationsInput{})
+	got, err := svc.ListInvitations(context.Background(), &ListInvitationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -644,7 +804,14 @@ func TestCheckResponseSnapshot_ListMembers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMembers(context.Background(), &ListMembersInput{})
+	got, err := svc.ListMembers(context.Background(), &ListMembersInput{
+		NetworkId:  ptr.String("__NetworkId__"),
+		Name:       ptr.String("__Name__"),
+		Status:     types.MemberStatus("CREATING"),
+		IsOwned:    ptr.Bool(true),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -687,7 +854,13 @@ func TestCheckResponseSnapshot_ListNetworks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListNetworks(context.Background(), &ListNetworksInput{})
+	got, err := svc.ListNetworks(context.Background(), &ListNetworksInput{
+		Name:       ptr.String("__Name__"),
+		Framework:  types.Framework("HYPERLEDGER_FABRIC"),
+		Status:     types.NetworkStatus("CREATING"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -726,7 +899,13 @@ func TestCheckResponseSnapshot_ListNodes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListNodes(context.Background(), &ListNodesInput{})
+	got, err := svc.ListNodes(context.Background(), &ListNodesInput{
+		NetworkId:  ptr.String("__NetworkId__"),
+		MemberId:   ptr.String("__MemberId__"),
+		Status:     types.NodeStatus("CREATING"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -759,7 +938,12 @@ func TestCheckResponseSnapshot_ListProposalVotes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProposalVotes(context.Background(), &ListProposalVotesInput{})
+	got, err := svc.ListProposalVotes(context.Background(), &ListProposalVotesInput{
+		NetworkId:  ptr.String("__NetworkId__"),
+		ProposalId: ptr.String("__ProposalId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -802,7 +986,11 @@ func TestCheckResponseSnapshot_ListProposals(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProposals(context.Background(), &ListProposalsInput{})
+	got, err := svc.ListProposals(context.Background(), &ListProposalsInput{
+		NetworkId:  ptr.String("__NetworkId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -825,7 +1013,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -844,7 +1034,9 @@ func TestCheckResponseSnapshot_RejectInvitation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RejectInvitation(context.Background(), &RejectInvitationInput{})
+	got, err := svc.RejectInvitation(context.Background(), &RejectInvitationInput{
+		InvitationId: ptr.String("__InvitationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -863,7 +1055,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -882,7 +1079,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -901,7 +1104,19 @@ func TestCheckResponseSnapshot_UpdateMember(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMember(context.Background(), &UpdateMemberInput{})
+	got, err := svc.UpdateMember(context.Background(), &UpdateMemberInput{
+		NetworkId: ptr.String("__NetworkId__"),
+		MemberId:  ptr.String("__MemberId__"),
+		LogPublishingConfiguration: &types.MemberLogPublishingConfiguration{
+			Fabric: &types.MemberFabricLogPublishingConfiguration{
+				CaLogs: &types.LogConfigurations{
+					Cloudwatch: &types.LogConfiguration{
+						Enabled: ptr.Bool(true),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -920,7 +1135,25 @@ func TestCheckResponseSnapshot_UpdateNode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateNode(context.Background(), &UpdateNodeInput{})
+	got, err := svc.UpdateNode(context.Background(), &UpdateNodeInput{
+		NetworkId: ptr.String("__NetworkId__"),
+		MemberId:  ptr.String("__MemberId__"),
+		NodeId:    ptr.String("__NodeId__"),
+		LogPublishingConfiguration: &types.NodeLogPublishingConfiguration{
+			Fabric: &types.NodeFabricLogPublishingConfiguration{
+				ChaincodeLogs: &types.LogConfigurations{
+					Cloudwatch: &types.LogConfiguration{
+						Enabled: ptr.Bool(true),
+					},
+				},
+				PeerLogs: &types.LogConfigurations{
+					Cloudwatch: &types.LogConfiguration{
+						Enabled: ptr.Bool(true),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -939,7 +1172,12 @@ func TestCheckResponseSnapshot_VoteOnProposal(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.VoteOnProposal(context.Background(), &VoteOnProposalInput{})
+	got, err := svc.VoteOnProposal(context.Background(), &VoteOnProposalInput{
+		NetworkId:     ptr.String("__NetworkId__"),
+		ProposalId:    ptr.String("__ProposalId__"),
+		VoterMemberId: ptr.String("__VoterMemberId__"),
+		Vote:          types.VoteValue("YES"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -960,7 +1198,14 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAccessor(context.Background(), &CreateAccessorInput{})
+	_, opErr := svc.CreateAccessor(context.Background(), &CreateAccessorInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		AccessorType:       types.AccessorType("BILLING_TOKEN"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		NetworkType: types.AccessorNetworkType("ETHEREUM_GOERLI"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -985,7 +1230,9 @@ func TestCheckResponseSnapshot_Error_IllegalActionException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RejectInvitation(context.Background(), &RejectInvitationInput{})
+	_, opErr := svc.RejectInvitation(context.Background(), &RejectInvitationInput{
+		InvitationId: ptr.String("__InvitationId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1008,7 +1255,14 @@ func TestCheckResponseSnapshot_Error_InternalServiceErrorException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAccessor(context.Background(), &CreateAccessorInput{})
+	_, opErr := svc.CreateAccessor(context.Background(), &CreateAccessorInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		AccessorType:       types.AccessorType("BILLING_TOKEN"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		NetworkType: types.AccessorNetworkType("ETHEREUM_GOERLI"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1033,7 +1287,14 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAccessor(context.Background(), &CreateAccessorInput{})
+	_, opErr := svc.CreateAccessor(context.Background(), &CreateAccessorInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		AccessorType:       types.AccessorType("BILLING_TOKEN"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		NetworkType: types.AccessorNetworkType("ETHEREUM_GOERLI"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1058,7 +1319,14 @@ func TestCheckResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAccessor(context.Background(), &CreateAccessorInput{})
+	_, opErr := svc.CreateAccessor(context.Background(), &CreateAccessorInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		AccessorType:       types.AccessorType("BILLING_TOKEN"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		NetworkType: types.AccessorNetworkType("ETHEREUM_GOERLI"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1083,7 +1351,14 @@ func TestCheckResponseSnapshot_Error_ResourceLimitExceededException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAccessor(context.Background(), &CreateAccessorInput{})
+	_, opErr := svc.CreateAccessor(context.Background(), &CreateAccessorInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		AccessorType:       types.AccessorType("BILLING_TOKEN"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		NetworkType: types.AccessorNetworkType("ETHEREUM_GOERLI"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1109,7 +1384,34 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMember(context.Background(), &CreateMemberInput{})
+	_, opErr := svc.CreateMember(context.Background(), &CreateMemberInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		InvitationId:       ptr.String("__InvitationId__"),
+		NetworkId:          ptr.String("__NetworkId__"),
+		MemberConfiguration: &types.MemberConfiguration{
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+			FrameworkConfiguration: &types.MemberFrameworkConfiguration{
+				Fabric: &types.MemberFabricConfiguration{
+					AdminUsername: ptr.String("__AdminUsername__"),
+					AdminPassword: ptr.String("__AdminPassword__"),
+				},
+			},
+			LogPublishingConfiguration: &types.MemberLogPublishingConfiguration{
+				Fabric: &types.MemberFabricLogPublishingConfiguration{
+					CaLogs: &types.LogConfigurations{
+						Cloudwatch: &types.LogConfiguration{
+							Enabled: ptr.Bool(true),
+						},
+					},
+				},
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1134,7 +1436,34 @@ func TestCheckResponseSnapshot_Error_ResourceNotReadyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMember(context.Background(), &CreateMemberInput{})
+	_, opErr := svc.CreateMember(context.Background(), &CreateMemberInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		InvitationId:       ptr.String("__InvitationId__"),
+		NetworkId:          ptr.String("__NetworkId__"),
+		MemberConfiguration: &types.MemberConfiguration{
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+			FrameworkConfiguration: &types.MemberFrameworkConfiguration{
+				Fabric: &types.MemberFabricConfiguration{
+					AdminUsername: ptr.String("__AdminUsername__"),
+					AdminPassword: ptr.String("__AdminPassword__"),
+				},
+			},
+			LogPublishingConfiguration: &types.MemberLogPublishingConfiguration{
+				Fabric: &types.MemberFabricLogPublishingConfiguration{
+					CaLogs: &types.LogConfigurations{
+						Cloudwatch: &types.LogConfiguration{
+							Enabled: ptr.Bool(true),
+						},
+					},
+				},
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1157,7 +1486,14 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAccessor(context.Background(), &CreateAccessorInput{})
+	_, opErr := svc.CreateAccessor(context.Background(), &CreateAccessorInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		AccessorType:       types.AccessorType("BILLING_TOKEN"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		NetworkType: types.AccessorNetworkType("ETHEREUM_GOERLI"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1183,7 +1519,14 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAccessor(context.Background(), &CreateAccessorInput{})
+	_, opErr := svc.CreateAccessor(context.Background(), &CreateAccessorInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		AccessorType:       types.AccessorType("BILLING_TOKEN"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		NetworkType: types.AccessorNetworkType("ETHEREUM_GOERLI"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

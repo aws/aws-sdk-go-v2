@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.GetResourcesSummary
+
+{"counts":{"components":{"behindMajor":1,"behindMinor":1,"failed":1,"total":1,"upToDate":1},"environmentTemplates":{"behindMajor":1,"behindMinor":1,"failed":1,"total":1,"upToDate":1},"environments":{"behindMajor":1,"behindMinor":1,"failed":1,"total":1,"upToDate":1},"pipelines":{"behindMajor":1,"behindMinor":1,"failed":1,"total":1,"upToDate":1},"serviceInstances":{"behindMajor":1,"behindMinor":1,"failed":1,"total":1,"upToDate":1},"serviceTemplates":{"behindMajor":1,"behindMinor":1,"failed":1,"total":1,"upToDate":1},"services":{"behindMajor":1,"behindMinor":1,"failed":1,"total":1,"upToDate":1}}}

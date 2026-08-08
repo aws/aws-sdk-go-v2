@@ -130,7 +130,18 @@ func TestCheckResponseSnapshot_BatchUpdateRecommendationResourceExclusion(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchUpdateRecommendationResourceExclusion(context.Background(), &BatchUpdateRecommendationResourceExclusionInput{})
+	got, err := svc.BatchUpdateRecommendationResourceExclusion(context.Background(), &BatchUpdateRecommendationResourceExclusionInput{
+		RecommendationResourceExclusions: []types.RecommendationResourceExclusion{
+			{
+				Arn:        ptr.String("__Arn__"),
+				IsExcluded: ptr.Bool(true),
+			},
+			{
+				Arn:        ptr.String("__Arn__"),
+				IsExcluded: ptr.Bool(true),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -189,7 +200,9 @@ func TestCheckResponseSnapshot_GetOrganizationRecommendation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOrganizationRecommendation(context.Background(), &GetOrganizationRecommendationInput{})
+	got, err := svc.GetOrganizationRecommendation(context.Background(), &GetOrganizationRecommendationInput{
+		OrganizationRecommendationIdentifier: ptr.String("__OrganizationRecommendationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -249,7 +262,10 @@ func TestCheckResponseSnapshot_GetRecommendation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRecommendation(context.Background(), &GetRecommendationInput{})
+	got, err := svc.GetRecommendation(context.Background(), &GetRecommendationInput{
+		RecommendationIdentifier: ptr.String("__RecommendationIdentifier__"),
+		Language:                 types.RecommendationLanguage("en"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -322,7 +338,14 @@ func TestCheckResponseSnapshot_ListChecks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListChecks(context.Background(), &ListChecksInput{})
+	got, err := svc.ListChecks(context.Background(), &ListChecksInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Pillar:     types.RecommendationPillar("cost_optimizing"),
+		AwsService: ptr.String("__AwsService__"),
+		Source:     types.RecommendationSource("aws_config"),
+		Language:   types.RecommendationLanguage("en"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -365,7 +388,12 @@ func TestCheckResponseSnapshot_ListOrganizationRecommendationAccounts(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOrganizationRecommendationAccounts(context.Background(), &ListOrganizationRecommendationAccountsInput{})
+	got, err := svc.ListOrganizationRecommendationAccounts(context.Background(), &ListOrganizationRecommendationAccountsInput{
+		NextToken:                            ptr.String("__NextToken__"),
+		MaxResults:                           ptr.Int32(1),
+		OrganizationRecommendationIdentifier: ptr.String("__OrganizationRecommendationIdentifier__"),
+		AffectedAccountId:                    ptr.String("__AffectedAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -416,7 +444,15 @@ func TestCheckResponseSnapshot_ListOrganizationRecommendationResources(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOrganizationRecommendationResources(context.Background(), &ListOrganizationRecommendationResourcesInput{})
+	got, err := svc.ListOrganizationRecommendationResources(context.Background(), &ListOrganizationRecommendationResourcesInput{
+		NextToken:                            ptr.String("__NextToken__"),
+		MaxResults:                           ptr.Int32(1),
+		Status:                               types.ResourceStatus("ok"),
+		ExclusionStatus:                      types.ExclusionStatus("excluded"),
+		RegionCode:                           ptr.String("__RegionCode__"),
+		OrganizationRecommendationIdentifier: ptr.String("__OrganizationRecommendationIdentifier__"),
+		AffectedAccountId:                    ptr.String("__AffectedAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -503,7 +539,18 @@ func TestCheckResponseSnapshot_ListOrganizationRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOrganizationRecommendations(context.Background(), &ListOrganizationRecommendationsInput{})
+	got, err := svc.ListOrganizationRecommendations(context.Background(), &ListOrganizationRecommendationsInput{
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          ptr.Int32(1),
+		Type:                types.RecommendationType("standard"),
+		Status:              types.RecommendationStatus("ok"),
+		Pillar:              types.RecommendationPillar("cost_optimizing"),
+		AwsService:          ptr.String("__AwsService__"),
+		Source:              types.RecommendationSource("aws_config"),
+		CheckIdentifier:     ptr.String("__CheckIdentifier__"),
+		AfterLastUpdatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		BeforeLastUpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -552,7 +599,15 @@ func TestCheckResponseSnapshot_ListRecommendationResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRecommendationResources(context.Background(), &ListRecommendationResourcesInput{})
+	got, err := svc.ListRecommendationResources(context.Background(), &ListRecommendationResourcesInput{
+		NextToken:                ptr.String("__NextToken__"),
+		MaxResults:               ptr.Int32(1),
+		Status:                   types.ResourceStatus("ok"),
+		ExclusionStatus:          types.ExclusionStatus("excluded"),
+		RegionCode:               ptr.String("__RegionCode__"),
+		RecommendationIdentifier: ptr.String("__RecommendationIdentifier__"),
+		Language:                 types.RecommendationLanguage("en"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -641,7 +696,19 @@ func TestCheckResponseSnapshot_ListRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRecommendations(context.Background(), &ListRecommendationsInput{})
+	got, err := svc.ListRecommendations(context.Background(), &ListRecommendationsInput{
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          ptr.Int32(1),
+		Type:                types.RecommendationType("standard"),
+		Status:              types.RecommendationStatus("ok"),
+		Pillar:              types.RecommendationPillar("cost_optimizing"),
+		AwsService:          ptr.String("__AwsService__"),
+		Source:              types.RecommendationSource("aws_config"),
+		CheckIdentifier:     ptr.String("__CheckIdentifier__"),
+		AfterLastUpdatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		BeforeLastUpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Language:            types.RecommendationLanguage("en"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -694,7 +761,15 @@ func TestCheckResponseSnapshot_ListRecommendationsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRecommendationsForResource(context.Background(), &ListRecommendationsForResourceInput{})
+	got, err := svc.ListRecommendationsForResource(context.Background(), &ListRecommendationsForResourceInput{
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+		AwsResourceArn: ptr.String("__AwsResourceArn__"),
+		Pillar:         types.RecommendationPillar("cost_optimizing"),
+		Status:         types.ResourceStatus("ok"),
+		CheckArn:       ptr.String("__CheckArn__"),
+		Language:       types.RecommendationLanguage("en"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -713,7 +788,12 @@ func TestCheckResponseSnapshot_UpdateOrganizationRecommendationLifecycle(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateOrganizationRecommendationLifecycle(context.Background(), &UpdateOrganizationRecommendationLifecycleInput{})
+	got, err := svc.UpdateOrganizationRecommendationLifecycle(context.Background(), &UpdateOrganizationRecommendationLifecycleInput{
+		LifecycleStage:                       types.UpdateRecommendationLifecycleStage("pending_response"),
+		UpdateReason:                         ptr.String("__UpdateReason__"),
+		UpdateReasonCode:                     types.UpdateRecommendationLifecycleStageReasonCode("non_critical_account"),
+		OrganizationRecommendationIdentifier: ptr.String("__OrganizationRecommendationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -732,7 +812,12 @@ func TestCheckResponseSnapshot_UpdateRecommendationLifecycle(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRecommendationLifecycle(context.Background(), &UpdateRecommendationLifecycleInput{})
+	got, err := svc.UpdateRecommendationLifecycle(context.Background(), &UpdateRecommendationLifecycleInput{
+		LifecycleStage:           types.UpdateRecommendationLifecycleStage("pending_response"),
+		UpdateReason:             ptr.String("__UpdateReason__"),
+		UpdateReasonCode:         types.UpdateRecommendationLifecycleStageReasonCode("non_critical_account"),
+		RecommendationIdentifier: ptr.String("__RecommendationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -753,7 +838,18 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchUpdateRecommendationResourceExclusion(context.Background(), &BatchUpdateRecommendationResourceExclusionInput{})
+	_, opErr := svc.BatchUpdateRecommendationResourceExclusion(context.Background(), &BatchUpdateRecommendationResourceExclusionInput{
+		RecommendationResourceExclusions: []types.RecommendationResourceExclusion{
+			{
+				Arn:        ptr.String("__Arn__"),
+				IsExcluded: ptr.Bool(true),
+			},
+			{
+				Arn:        ptr.String("__Arn__"),
+				IsExcluded: ptr.Bool(true),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -778,7 +874,18 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchUpdateRecommendationResourceExclusion(context.Background(), &BatchUpdateRecommendationResourceExclusionInput{})
+	_, opErr := svc.BatchUpdateRecommendationResourceExclusion(context.Background(), &BatchUpdateRecommendationResourceExclusionInput{
+		RecommendationResourceExclusions: []types.RecommendationResourceExclusion{
+			{
+				Arn:        ptr.String("__Arn__"),
+				IsExcluded: ptr.Bool(true),
+			},
+			{
+				Arn:        ptr.String("__Arn__"),
+				IsExcluded: ptr.Bool(true),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -803,7 +910,18 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchUpdateRecommendationResourceExclusion(context.Background(), &BatchUpdateRecommendationResourceExclusionInput{})
+	_, opErr := svc.BatchUpdateRecommendationResourceExclusion(context.Background(), &BatchUpdateRecommendationResourceExclusionInput{
+		RecommendationResourceExclusions: []types.RecommendationResourceExclusion{
+			{
+				Arn:        ptr.String("__Arn__"),
+				IsExcluded: ptr.Bool(true),
+			},
+			{
+				Arn:        ptr.String("__Arn__"),
+				IsExcluded: ptr.Bool(true),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -828,7 +946,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetOrganizationRecommendation(context.Background(), &GetOrganizationRecommendationInput{})
+	_, opErr := svc.GetOrganizationRecommendation(context.Background(), &GetOrganizationRecommendationInput{
+		OrganizationRecommendationIdentifier: ptr.String("__OrganizationRecommendationIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -853,7 +973,18 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchUpdateRecommendationResourceExclusion(context.Background(), &BatchUpdateRecommendationResourceExclusionInput{})
+	_, opErr := svc.BatchUpdateRecommendationResourceExclusion(context.Background(), &BatchUpdateRecommendationResourceExclusionInput{
+		RecommendationResourceExclusions: []types.RecommendationResourceExclusion{
+			{
+				Arn:        ptr.String("__Arn__"),
+				IsExcluded: ptr.Bool(true),
+			},
+			{
+				Arn:        ptr.String("__Arn__"),
+				IsExcluded: ptr.Bool(true),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -878,7 +1009,18 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchUpdateRecommendationResourceExclusion(context.Background(), &BatchUpdateRecommendationResourceExclusionInput{})
+	_, opErr := svc.BatchUpdateRecommendationResourceExclusion(context.Background(), &BatchUpdateRecommendationResourceExclusionInput{
+		RecommendationResourceExclusions: []types.RecommendationResourceExclusion{
+			{
+				Arn:        ptr.String("__Arn__"),
+				IsExcluded: ptr.Bool(true),
+			},
+			{
+				Arn:        ptr.String("__Arn__"),
+				IsExcluded: ptr.Bool(true),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RekognitionService.DetectModerationLabels
+
+{"ContentTypes":[{"Confidence":1,"Name":"__Name__"},{"Confidence":1,"Name":"__Name__"}],"HumanLoopActivationOutput":{"HumanLoopActivationConditionsEvaluationResults":"__HumanLoopActivationConditionsEvaluationResults__","HumanLoopActivationReasons":["__Member__","__Member__"],"HumanLoopArn":"__HumanLoopArn__"},"ModerationLabels":[{"Confidence":1,"Name":"__Name__","ParentName":"__ParentName__","TaxonomyLevel":1},{"Confidence":1,"Name":"__Name__","ParentName":"__ParentName__","TaxonomyLevel":1}],"ModerationModelVersion":"__ModerationModelVersion__","ProjectVersion":"__ProjectVersion__"}

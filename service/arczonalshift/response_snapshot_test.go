@@ -125,7 +125,9 @@ func TestCheckResponseSnapshot_CancelPracticeRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelPracticeRun(context.Background(), &CancelPracticeRunInput{})
+	got, err := svc.CancelPracticeRun(context.Background(), &CancelPracticeRunInput{
+		ZonalShiftId: ptr.String("__ZonalShiftId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -152,7 +154,9 @@ func TestCheckResponseSnapshot_CancelZonalShift(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelZonalShift(context.Background(), &CancelZonalShiftInput{})
+	got, err := svc.CancelZonalShift(context.Background(), &CancelZonalShiftInput{
+		ZonalShiftId: ptr.String("__ZonalShiftId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -209,7 +213,41 @@ func TestCheckResponseSnapshot_CreatePracticeRunConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePracticeRunConfiguration(context.Background(), &CreatePracticeRunConfigurationInput{})
+	got, err := svc.CreatePracticeRunConfiguration(context.Background(), &CreatePracticeRunConfigurationInput{
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+		BlockedWindows: []string{
+			"__Member__",
+			"__Member__",
+		},
+		BlockedDates: []string{
+			"__Member__",
+			"__Member__",
+		},
+		BlockingAlarms: []types.ControlCondition{
+			{
+				Type:            types.ControlConditionType("CLOUDWATCH"),
+				AlarmIdentifier: ptr.String("__AlarmIdentifier__"),
+			},
+			{
+				Type:            types.ControlConditionType("CLOUDWATCH"),
+				AlarmIdentifier: ptr.String("__AlarmIdentifier__"),
+			},
+		},
+		AllowedWindows: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OutcomeAlarms: []types.ControlCondition{
+			{
+				Type:            types.ControlConditionType("CLOUDWATCH"),
+				AlarmIdentifier: ptr.String("__AlarmIdentifier__"),
+			},
+			{
+				Type:            types.ControlConditionType("CLOUDWATCH"),
+				AlarmIdentifier: ptr.String("__AlarmIdentifier__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -232,7 +270,9 @@ func TestCheckResponseSnapshot_DeletePracticeRunConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePracticeRunConfiguration(context.Background(), &DeletePracticeRunConfigurationInput{})
+	got, err := svc.DeletePracticeRunConfiguration(context.Background(), &DeletePracticeRunConfigurationInput{
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -349,7 +389,9 @@ func TestCheckResponseSnapshot_GetManagedResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetManagedResource(context.Background(), &GetManagedResourceInput{})
+	got, err := svc.GetManagedResource(context.Background(), &GetManagedResourceInput{
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -384,7 +426,11 @@ func TestCheckResponseSnapshot_ListAutoshifts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAutoshifts(context.Background(), &ListAutoshiftsInput{})
+	got, err := svc.ListAutoshifts(context.Background(), &ListAutoshiftsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		Status:     types.AutoshiftExecutionStatus("ACTIVE"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -505,7 +551,10 @@ func TestCheckResponseSnapshot_ListManagedResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListManagedResources(context.Background(), &ListManagedResourcesInput{})
+	got, err := svc.ListManagedResources(context.Background(), &ListManagedResourcesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -550,7 +599,12 @@ func TestCheckResponseSnapshot_ListZonalShifts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListZonalShifts(context.Background(), &ListZonalShiftsInput{})
+	got, err := svc.ListZonalShifts(context.Background(), &ListZonalShiftsInput{
+		NextToken:          ptr.String("__NextToken__"),
+		Status:             types.ZonalShiftStatus("ACTIVE"),
+		MaxResults:         ptr.Int32(1),
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -577,7 +631,11 @@ func TestCheckResponseSnapshot_StartPracticeRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartPracticeRun(context.Background(), &StartPracticeRunInput{})
+	got, err := svc.StartPracticeRun(context.Background(), &StartPracticeRunInput{
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+		AwayFrom:           ptr.String("__AwayFrom__"),
+		Comment:            ptr.String("__Comment__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -604,7 +662,12 @@ func TestCheckResponseSnapshot_StartZonalShift(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartZonalShift(context.Background(), &StartZonalShiftInput{})
+	got, err := svc.StartZonalShift(context.Background(), &StartZonalShiftInput{
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+		AwayFrom:           ptr.String("__AwayFrom__"),
+		ExpiresIn:          ptr.String("__ExpiresIn__"),
+		Comment:            ptr.String("__Comment__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -625,7 +688,9 @@ func TestCheckResponseSnapshot_UpdateAutoshiftObserverNotificationStatus(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAutoshiftObserverNotificationStatus(context.Background(), &UpdateAutoshiftObserverNotificationStatusInput{})
+	got, err := svc.UpdateAutoshiftObserverNotificationStatus(context.Background(), &UpdateAutoshiftObserverNotificationStatusInput{
+		Status: types.AutoshiftObserverNotificationStatus("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -682,7 +747,41 @@ func TestCheckResponseSnapshot_UpdatePracticeRunConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePracticeRunConfiguration(context.Background(), &UpdatePracticeRunConfigurationInput{})
+	got, err := svc.UpdatePracticeRunConfiguration(context.Background(), &UpdatePracticeRunConfigurationInput{
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+		BlockedWindows: []string{
+			"__Member__",
+			"__Member__",
+		},
+		BlockedDates: []string{
+			"__Member__",
+			"__Member__",
+		},
+		BlockingAlarms: []types.ControlCondition{
+			{
+				Type:            types.ControlConditionType("CLOUDWATCH"),
+				AlarmIdentifier: ptr.String("__AlarmIdentifier__"),
+			},
+			{
+				Type:            types.ControlConditionType("CLOUDWATCH"),
+				AlarmIdentifier: ptr.String("__AlarmIdentifier__"),
+			},
+		},
+		AllowedWindows: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OutcomeAlarms: []types.ControlCondition{
+			{
+				Type:            types.ControlConditionType("CLOUDWATCH"),
+				AlarmIdentifier: ptr.String("__AlarmIdentifier__"),
+			},
+			{
+				Type:            types.ControlConditionType("CLOUDWATCH"),
+				AlarmIdentifier: ptr.String("__AlarmIdentifier__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -704,7 +803,10 @@ func TestCheckResponseSnapshot_UpdateZonalAutoshiftConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateZonalAutoshiftConfiguration(context.Background(), &UpdateZonalAutoshiftConfigurationInput{})
+	got, err := svc.UpdateZonalAutoshiftConfiguration(context.Background(), &UpdateZonalAutoshiftConfigurationInput{
+		ResourceIdentifier:   ptr.String("__ResourceIdentifier__"),
+		ZonalAutoshiftStatus: types.ZonalAutoshiftStatus("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -731,7 +833,11 @@ func TestCheckResponseSnapshot_UpdateZonalShift(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateZonalShift(context.Background(), &UpdateZonalShiftInput{})
+	got, err := svc.UpdateZonalShift(context.Background(), &UpdateZonalShiftInput{
+		ZonalShiftId: ptr.String("__ZonalShiftId__"),
+		Comment:      ptr.String("__Comment__"),
+		ExpiresIn:    ptr.String("__ExpiresIn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -752,7 +858,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelPracticeRun(context.Background(), &CancelPracticeRunInput{})
+	_, opErr := svc.CancelPracticeRun(context.Background(), &CancelPracticeRunInput{
+		ZonalShiftId: ptr.String("__ZonalShiftId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -779,7 +887,9 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelPracticeRun(context.Background(), &CancelPracticeRunInput{})
+	_, opErr := svc.CancelPracticeRun(context.Background(), &CancelPracticeRunInput{
+		ZonalShiftId: ptr.String("__ZonalShiftId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -804,7 +914,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelPracticeRun(context.Background(), &CancelPracticeRunInput{})
+	_, opErr := svc.CancelPracticeRun(context.Background(), &CancelPracticeRunInput{
+		ZonalShiftId: ptr.String("__ZonalShiftId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -829,7 +941,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelPracticeRun(context.Background(), &CancelPracticeRunInput{})
+	_, opErr := svc.CancelPracticeRun(context.Background(), &CancelPracticeRunInput{
+		ZonalShiftId: ptr.String("__ZonalShiftId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -854,7 +968,9 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelPracticeRun(context.Background(), &CancelPracticeRunInput{})
+	_, opErr := svc.CancelPracticeRun(context.Background(), &CancelPracticeRunInput{
+		ZonalShiftId: ptr.String("__ZonalShiftId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -880,7 +996,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelPracticeRun(context.Background(), &CancelPracticeRunInput{})
+	_, opErr := svc.CancelPracticeRun(context.Background(), &CancelPracticeRunInput{
+		ZonalShiftId: ptr.String("__ZonalShiftId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

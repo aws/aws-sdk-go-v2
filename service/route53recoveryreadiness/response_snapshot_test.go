@@ -131,7 +131,16 @@ func TestCheckResponseSnapshot_CreateCell(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCell(context.Background(), &CreateCellInput{})
+	got, err := svc.CreateCell(context.Background(), &CreateCellInput{
+		CellName: ptr.String("__CellName__"),
+		Cells: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -152,7 +161,9 @@ func TestCheckResponseSnapshot_CreateCrossAccountAuthorization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCrossAccountAuthorization(context.Background(), &CreateCrossAccountAuthorizationInput{})
+	got, err := svc.CreateCrossAccountAuthorization(context.Background(), &CreateCrossAccountAuthorizationInput{
+		CrossAccountAuthorization: ptr.String("__CrossAccountAuthorization__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -178,7 +189,13 @@ func TestCheckResponseSnapshot_CreateReadinessCheck(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateReadinessCheck(context.Background(), &CreateReadinessCheckInput{})
+	got, err := svc.CreateReadinessCheck(context.Background(), &CreateReadinessCheckInput{
+		ReadinessCheckName: ptr.String("__ReadinessCheckName__"),
+		ResourceSetName:    ptr.String("__ResourceSetName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -207,7 +224,16 @@ func TestCheckResponseSnapshot_CreateRecoveryGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRecoveryGroup(context.Background(), &CreateRecoveryGroupInput{})
+	got, err := svc.CreateRecoveryGroup(context.Background(), &CreateRecoveryGroupInput{
+		Cells: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RecoveryGroupName: ptr.String("__RecoveryGroupName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -281,7 +307,61 @@ func TestCheckResponseSnapshot_CreateResourceSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateResourceSet(context.Background(), &CreateResourceSetInput{})
+	got, err := svc.CreateResourceSet(context.Background(), &CreateResourceSetInput{
+		ResourceSetName: ptr.String("__ResourceSetName__"),
+		ResourceSetType: ptr.String("__ResourceSetType__"),
+		Resources: []types.Resource{
+			{
+				ComponentId: ptr.String("__ComponentId__"),
+				DnsTargetResource: &types.DNSTargetResource{
+					DomainName:    ptr.String("__DomainName__"),
+					HostedZoneArn: ptr.String("__HostedZoneArn__"),
+					RecordSetId:   ptr.String("__RecordSetId__"),
+					RecordType:    ptr.String("__RecordType__"),
+					TargetResource: &types.TargetResource{
+						NLBResource: &types.NLBResource{
+							Arn: ptr.String("__Arn__"),
+						},
+						R53Resource: &types.R53ResourceRecord{
+							DomainName:  ptr.String("__DomainName__"),
+							RecordSetId: ptr.String("__RecordSetId__"),
+						},
+					},
+				},
+				ReadinessScopes: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				ComponentId: ptr.String("__ComponentId__"),
+				DnsTargetResource: &types.DNSTargetResource{
+					DomainName:    ptr.String("__DomainName__"),
+					HostedZoneArn: ptr.String("__HostedZoneArn__"),
+					RecordSetId:   ptr.String("__RecordSetId__"),
+					RecordType:    ptr.String("__RecordType__"),
+					TargetResource: &types.TargetResource{
+						NLBResource: &types.NLBResource{
+							Arn: ptr.String("__Arn__"),
+						},
+						R53Resource: &types.R53ResourceRecord{
+							DomainName:  ptr.String("__DomainName__"),
+							RecordSetId: ptr.String("__RecordSetId__"),
+						},
+					},
+				},
+				ReadinessScopes: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -300,7 +380,9 @@ func TestCheckResponseSnapshot_DeleteCell(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCell(context.Background(), &DeleteCellInput{})
+	got, err := svc.DeleteCell(context.Background(), &DeleteCellInput{
+		CellName: ptr.String("__CellName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -319,7 +401,9 @@ func TestCheckResponseSnapshot_DeleteCrossAccountAuthorization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCrossAccountAuthorization(context.Background(), &DeleteCrossAccountAuthorizationInput{})
+	got, err := svc.DeleteCrossAccountAuthorization(context.Background(), &DeleteCrossAccountAuthorizationInput{
+		CrossAccountAuthorization: ptr.String("__CrossAccountAuthorization__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -338,7 +422,9 @@ func TestCheckResponseSnapshot_DeleteReadinessCheck(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteReadinessCheck(context.Background(), &DeleteReadinessCheckInput{})
+	got, err := svc.DeleteReadinessCheck(context.Background(), &DeleteReadinessCheckInput{
+		ReadinessCheckName: ptr.String("__ReadinessCheckName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -357,7 +443,9 @@ func TestCheckResponseSnapshot_DeleteRecoveryGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRecoveryGroup(context.Background(), &DeleteRecoveryGroupInput{})
+	got, err := svc.DeleteRecoveryGroup(context.Background(), &DeleteRecoveryGroupInput{
+		RecoveryGroupName: ptr.String("__RecoveryGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -376,7 +464,9 @@ func TestCheckResponseSnapshot_DeleteResourceSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourceSet(context.Background(), &DeleteResourceSetInput{})
+	got, err := svc.DeleteResourceSet(context.Background(), &DeleteResourceSetInput{
+		ResourceSetName: ptr.String("__ResourceSetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -406,7 +496,11 @@ func TestCheckResponseSnapshot_GetArchitectureRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetArchitectureRecommendations(context.Background(), &GetArchitectureRecommendationsInput{})
+	got, err := svc.GetArchitectureRecommendations(context.Background(), &GetArchitectureRecommendationsInput{
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+		RecoveryGroupName: ptr.String("__RecoveryGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -439,7 +533,9 @@ func TestCheckResponseSnapshot_GetCell(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCell(context.Background(), &GetCellInput{})
+	got, err := svc.GetCell(context.Background(), &GetCellInput{
+		CellName: ptr.String("__CellName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -471,7 +567,11 @@ func TestCheckResponseSnapshot_GetCellReadinessSummary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCellReadinessSummary(context.Background(), &GetCellReadinessSummaryInput{})
+	got, err := svc.GetCellReadinessSummary(context.Background(), &GetCellReadinessSummaryInput{
+		CellName:   ptr.String("__CellName__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -497,7 +597,9 @@ func TestCheckResponseSnapshot_GetReadinessCheck(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetReadinessCheck(context.Background(), &GetReadinessCheckInput{})
+	got, err := svc.GetReadinessCheck(context.Background(), &GetReadinessCheckInput{
+		ReadinessCheckName: ptr.String("__ReadinessCheckName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -547,7 +649,12 @@ func TestCheckResponseSnapshot_GetReadinessCheckResourceStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetReadinessCheckResourceStatus(context.Background(), &GetReadinessCheckResourceStatusInput{})
+	got, err := svc.GetReadinessCheckResourceStatus(context.Background(), &GetReadinessCheckResourceStatusInput{
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+		ReadinessCheckName: ptr.String("__ReadinessCheckName__"),
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -591,7 +698,11 @@ func TestCheckResponseSnapshot_GetReadinessCheckStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetReadinessCheckStatus(context.Background(), &GetReadinessCheckStatusInput{})
+	got, err := svc.GetReadinessCheckStatus(context.Background(), &GetReadinessCheckStatusInput{
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+		ReadinessCheckName: ptr.String("__ReadinessCheckName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -620,7 +731,9 @@ func TestCheckResponseSnapshot_GetRecoveryGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRecoveryGroup(context.Background(), &GetRecoveryGroupInput{})
+	got, err := svc.GetRecoveryGroup(context.Background(), &GetRecoveryGroupInput{
+		RecoveryGroupName: ptr.String("__RecoveryGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -652,7 +765,11 @@ func TestCheckResponseSnapshot_GetRecoveryGroupReadinessSummary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRecoveryGroupReadinessSummary(context.Background(), &GetRecoveryGroupReadinessSummaryInput{})
+	got, err := svc.GetRecoveryGroupReadinessSummary(context.Background(), &GetRecoveryGroupReadinessSummaryInput{
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+		RecoveryGroupName: ptr.String("__RecoveryGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -726,7 +843,9 @@ func TestCheckResponseSnapshot_GetResourceSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourceSet(context.Background(), &GetResourceSetInput{})
+	got, err := svc.GetResourceSet(context.Background(), &GetResourceSetInput{
+		ResourceSetName: ptr.String("__ResourceSetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -779,7 +898,10 @@ func TestCheckResponseSnapshot_ListCells(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCells(context.Background(), &ListCellsInput{})
+	got, err := svc.ListCells(context.Background(), &ListCellsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -804,7 +926,10 @@ func TestCheckResponseSnapshot_ListCrossAccountAuthorizations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCrossAccountAuthorizations(context.Background(), &ListCrossAccountAuthorizationsInput{})
+	got, err := svc.ListCrossAccountAuthorizations(context.Background(), &ListCrossAccountAuthorizationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -843,7 +968,10 @@ func TestCheckResponseSnapshot_ListReadinessChecks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReadinessChecks(context.Background(), &ListReadinessChecksInput{})
+	got, err := svc.ListReadinessChecks(context.Background(), &ListReadinessChecksInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -888,7 +1016,10 @@ func TestCheckResponseSnapshot_ListRecoveryGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRecoveryGroups(context.Background(), &ListRecoveryGroupsInput{})
+	got, err := svc.ListRecoveryGroups(context.Background(), &ListRecoveryGroupsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1023,7 +1154,10 @@ func TestCheckResponseSnapshot_ListResourceSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourceSets(context.Background(), &ListResourceSetsInput{})
+	got, err := svc.ListResourceSets(context.Background(), &ListResourceSetsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1056,7 +1190,11 @@ func TestCheckResponseSnapshot_ListRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRules(context.Background(), &ListRulesInput{})
+	got, err := svc.ListRules(context.Background(), &ListRulesInput{
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		ResourceType: ptr.String("__ResourceType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1079,7 +1217,9 @@ func TestCheckResponseSnapshot_ListTagsForResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResources(context.Background(), &ListTagsForResourcesInput{})
+	got, err := svc.ListTagsForResources(context.Background(), &ListTagsForResourcesInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1098,7 +1238,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1117,7 +1262,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1150,7 +1301,13 @@ func TestCheckResponseSnapshot_UpdateCell(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCell(context.Background(), &UpdateCellInput{})
+	got, err := svc.UpdateCell(context.Background(), &UpdateCellInput{
+		CellName: ptr.String("__CellName__"),
+		Cells: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1176,7 +1333,10 @@ func TestCheckResponseSnapshot_UpdateReadinessCheck(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateReadinessCheck(context.Background(), &UpdateReadinessCheckInput{})
+	got, err := svc.UpdateReadinessCheck(context.Background(), &UpdateReadinessCheckInput{
+		ReadinessCheckName: ptr.String("__ReadinessCheckName__"),
+		ResourceSetName:    ptr.String("__ResourceSetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1205,7 +1365,13 @@ func TestCheckResponseSnapshot_UpdateRecoveryGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRecoveryGroup(context.Background(), &UpdateRecoveryGroupInput{})
+	got, err := svc.UpdateRecoveryGroup(context.Background(), &UpdateRecoveryGroupInput{
+		Cells: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RecoveryGroupName: ptr.String("__RecoveryGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1279,7 +1445,58 @@ func TestCheckResponseSnapshot_UpdateResourceSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateResourceSet(context.Background(), &UpdateResourceSetInput{})
+	got, err := svc.UpdateResourceSet(context.Background(), &UpdateResourceSetInput{
+		ResourceSetName: ptr.String("__ResourceSetName__"),
+		ResourceSetType: ptr.String("__ResourceSetType__"),
+		Resources: []types.Resource{
+			{
+				ComponentId: ptr.String("__ComponentId__"),
+				DnsTargetResource: &types.DNSTargetResource{
+					DomainName:    ptr.String("__DomainName__"),
+					HostedZoneArn: ptr.String("__HostedZoneArn__"),
+					RecordSetId:   ptr.String("__RecordSetId__"),
+					RecordType:    ptr.String("__RecordType__"),
+					TargetResource: &types.TargetResource{
+						NLBResource: &types.NLBResource{
+							Arn: ptr.String("__Arn__"),
+						},
+						R53Resource: &types.R53ResourceRecord{
+							DomainName:  ptr.String("__DomainName__"),
+							RecordSetId: ptr.String("__RecordSetId__"),
+						},
+					},
+				},
+				ReadinessScopes: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				ComponentId: ptr.String("__ComponentId__"),
+				DnsTargetResource: &types.DNSTargetResource{
+					DomainName:    ptr.String("__DomainName__"),
+					HostedZoneArn: ptr.String("__HostedZoneArn__"),
+					RecordSetId:   ptr.String("__RecordSetId__"),
+					RecordType:    ptr.String("__RecordType__"),
+					TargetResource: &types.TargetResource{
+						NLBResource: &types.NLBResource{
+							Arn: ptr.String("__Arn__"),
+						},
+						R53Resource: &types.R53ResourceRecord{
+							DomainName:  ptr.String("__DomainName__"),
+							RecordSetId: ptr.String("__RecordSetId__"),
+						},
+					},
+				},
+				ReadinessScopes: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1300,7 +1517,16 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCell(context.Background(), &CreateCellInput{})
+	_, opErr := svc.CreateCell(context.Background(), &CreateCellInput{
+		CellName: ptr.String("__CellName__"),
+		Cells: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1325,7 +1551,16 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCell(context.Background(), &CreateCellInput{})
+	_, opErr := svc.CreateCell(context.Background(), &CreateCellInput{
+		CellName: ptr.String("__CellName__"),
+		Cells: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1350,7 +1585,16 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCell(context.Background(), &CreateCellInput{})
+	_, opErr := svc.CreateCell(context.Background(), &CreateCellInput{
+		CellName: ptr.String("__CellName__"),
+		Cells: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1375,7 +1619,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteCell(context.Background(), &DeleteCellInput{})
+	_, opErr := svc.DeleteCell(context.Background(), &DeleteCellInput{
+		CellName: ptr.String("__CellName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1400,7 +1646,16 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCell(context.Background(), &CreateCellInput{})
+	_, opErr := svc.CreateCell(context.Background(), &CreateCellInput{
+		CellName: ptr.String("__CellName__"),
+		Cells: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1425,7 +1680,16 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCell(context.Background(), &CreateCellInput{})
+	_, opErr := svc.CreateCell(context.Background(), &CreateCellInput{
+		CellName: ptr.String("__CellName__"),
+		Cells: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

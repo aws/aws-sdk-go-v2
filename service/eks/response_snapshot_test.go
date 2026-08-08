@@ -132,7 +132,18 @@ func TestCheckResponseSnapshot_AssociateAccessPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateAccessPolicy(context.Background(), &AssociateAccessPolicyInput{})
+	got, err := svc.AssociateAccessPolicy(context.Background(), &AssociateAccessPolicyInput{
+		ClusterName:  ptr.String("__ClusterName__"),
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+		PolicyArn:    ptr.String("__PolicyArn__"),
+		AccessScope: &types.AccessScope{
+			Type: types.AccessScopeType("cluster"),
+			Namespaces: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -190,7 +201,30 @@ func TestCheckResponseSnapshot_AssociateEncryptionConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateEncryptionConfig(context.Background(), &AssociateEncryptionConfigInput{})
+	got, err := svc.AssociateEncryptionConfig(context.Background(), &AssociateEncryptionConfigInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		EncryptionConfig: []types.EncryptionConfig{
+			{
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Provider: &types.Provider{
+					KeyArn: ptr.String("__KeyArn__"),
+				},
+			},
+			{
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Provider: &types.Provider{
+					KeyArn: ptr.String("__KeyArn__"),
+				},
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -251,7 +285,25 @@ func TestCheckResponseSnapshot_AssociateIdentityProviderConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateIdentityProviderConfig(context.Background(), &AssociateIdentityProviderConfigInput{})
+	got, err := svc.AssociateIdentityProviderConfig(context.Background(), &AssociateIdentityProviderConfigInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		Oidc: &types.OidcIdentityProviderConfigRequest{
+			IdentityProviderConfigName: ptr.String("__IdentityProviderConfigName__"),
+			IssuerUrl:                  ptr.String("__IssuerUrl__"),
+			ClientId:                   ptr.String("__ClientId__"),
+			UsernameClaim:              ptr.String("__UsernameClaim__"),
+			UsernamePrefix:             ptr.String("__UsernamePrefix__"),
+			GroupsClaim:                ptr.String("__GroupsClaim__"),
+			GroupsPrefix:               ptr.String("__GroupsPrefix__"),
+			RequiredClaims: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -309,7 +361,11 @@ func TestCheckResponseSnapshot_CancelUpdate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelUpdate(context.Background(), &CancelUpdateInput{})
+	got, err := svc.CancelUpdate(context.Background(), &CancelUpdateInput{
+		Name:               ptr.String("__Name__"),
+		UpdateId:           ptr.String("__UpdateId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -345,7 +401,20 @@ func TestCheckResponseSnapshot_CreateAccessEntry(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAccessEntry(context.Background(), &CreateAccessEntryInput{})
+	got, err := svc.CreateAccessEntry(context.Background(), &CreateAccessEntryInput{
+		ClusterName:  ptr.String("__ClusterName__"),
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+		KubernetesGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Username:           ptr.String("__Username__"),
+		Type:               ptr.String("__Type__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -412,7 +481,31 @@ func TestCheckResponseSnapshot_CreateAddon(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAddon(context.Background(), &CreateAddonInput{})
+	got, err := svc.CreateAddon(context.Background(), &CreateAddonInput{
+		ClusterName:           ptr.String("__ClusterName__"),
+		AddonName:             ptr.String("__AddonName__"),
+		AddonVersion:          ptr.String("__AddonVersion__"),
+		ServiceAccountRoleArn: ptr.String("__ServiceAccountRoleArn__"),
+		ResolveConflicts:      types.ResolveConflicts("OVERWRITE"),
+		ClientRequestToken:    ptr.String("__ClientRequestToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ConfigurationValues: ptr.String("__ConfigurationValues__"),
+		PodIdentityAssociations: []types.AddonPodIdentityAssociations{
+			{
+				ServiceAccount: ptr.String("__ServiceAccount__"),
+				RoleArn:        ptr.String("__RoleArn__"),
+			},
+			{
+				ServiceAccount: ptr.String("__ServiceAccount__"),
+				RoleArn:        ptr.String("__RoleArn__"),
+			},
+		},
+		NamespaceConfig: &types.AddonNamespaceConfigRequest{
+			Namespace: ptr.String("__Namespace__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -504,7 +597,60 @@ func TestCheckResponseSnapshot_CreateCapability(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCapability(context.Background(), &CreateCapabilityInput{})
+	got, err := svc.CreateCapability(context.Background(), &CreateCapabilityInput{
+		CapabilityName:     ptr.String("__CapabilityName__"),
+		ClusterName:        ptr.String("__ClusterName__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Type:               types.CapabilityType("ACK"),
+		RoleArn:            ptr.String("__RoleArn__"),
+		Configuration: &types.CapabilityConfigurationRequest{
+			ArgoCd: &types.ArgoCdConfigRequest{
+				Namespace: ptr.String("__Namespace__"),
+				AwsIdc: &types.ArgoCdAwsIdcConfigRequest{
+					IdcInstanceArn: ptr.String("__IdcInstanceArn__"),
+					IdcRegion:      ptr.String("__IdcRegion__"),
+				},
+				RbacRoleMappings: []types.ArgoCdRoleMapping{
+					{
+						Role: types.ArgoCdRole("ADMIN"),
+						Identities: []types.SsoIdentity{
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.SsoIdentityType("SSO_USER"),
+							},
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.SsoIdentityType("SSO_USER"),
+							},
+						},
+					},
+					{
+						Role: types.ArgoCdRole("ADMIN"),
+						Identities: []types.SsoIdentity{
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.SsoIdentityType("SSO_USER"),
+							},
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.SsoIdentityType("SSO_USER"),
+							},
+						},
+					},
+				},
+				NetworkAccess: &types.ArgoCdNetworkAccessConfigRequest{
+					VpceIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		DeletePropagationPolicy: types.CapabilityDeletePropagationPolicy("RETAIN"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -711,7 +857,150 @@ func TestCheckResponseSnapshot_CreateCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	got, err := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		Name:    ptr.String("__Name__"),
+		Version: ptr.String("__Version__"),
+		RoleArn: ptr.String("__RoleArn__"),
+		ResourcesVpcConfig: &types.VpcConfigRequest{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EndpointPublicAccess:  ptr.Bool(true),
+			EndpointPrivateAccess: ptr.Bool(true),
+			PublicAccessCidrs: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ControlPlaneEgressMode: types.ControlPlaneEgressModeType("AWS_MANAGED"),
+		},
+		KubernetesNetworkConfig: &types.KubernetesNetworkConfigRequest{
+			ServiceIpv4Cidr: ptr.String("__ServiceIpv4Cidr__"),
+			IpFamily:        types.IpFamily("ipv4"),
+			ElasticLoadBalancing: &types.ElasticLoadBalancing{
+				Enabled: ptr.Bool(true),
+			},
+		},
+		Logging: &types.Logging{
+			ClusterLogging: []types.LogSetup{
+				{
+					Types: []types.LogType{
+						types.LogType("api"),
+						types.LogType("api"),
+					},
+					Enabled: ptr.Bool(true),
+				},
+				{
+					Types: []types.LogType{
+						types.LogType("api"),
+						types.LogType("api"),
+					},
+					Enabled: ptr.Bool(true),
+				},
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		EncryptionConfig: []types.EncryptionConfig{
+			{
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Provider: &types.Provider{
+					KeyArn: ptr.String("__KeyArn__"),
+				},
+			},
+			{
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Provider: &types.Provider{
+					KeyArn: ptr.String("__KeyArn__"),
+				},
+			},
+		},
+		OutpostConfig: &types.OutpostConfigRequest{
+			OutpostArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ControlPlaneInstanceType: ptr.String("__ControlPlaneInstanceType__"),
+			ControlPlanePlacement: &types.ControlPlanePlacementRequest{
+				GroupName:   ptr.String("__GroupName__"),
+				SpreadLevel: types.SpreadLevel("host"),
+			},
+			EtcdInstanceType: ptr.String("__EtcdInstanceType__"),
+			EtcdPlacement: &types.EtcdPlacementRequest{
+				SpreadLevel: types.SpreadLevel("host"),
+			},
+		},
+		AccessConfig: &types.CreateAccessConfigRequest{
+			BootstrapClusterCreatorAdminPermissions: ptr.Bool(true),
+			AuthenticationMode:                      types.AuthenticationMode("API"),
+		},
+		BootstrapSelfManagedAddons: ptr.Bool(true),
+		UpgradePolicy: &types.UpgradePolicyRequest{
+			SupportType: types.SupportType("STANDARD"),
+		},
+		ZonalShiftConfig: &types.ZonalShiftConfigRequest{
+			Enabled: ptr.Bool(true),
+		},
+		RemoteNetworkConfig: &types.RemoteNetworkConfigRequest{
+			RemoteNodeNetworks: []types.RemoteNodeNetwork{
+				{
+					Cidrs: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Cidrs: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			RemotePodNetworks: []types.RemotePodNetwork{
+				{
+					Cidrs: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Cidrs: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		ComputeConfig: &types.ComputeConfigRequest{
+			Enabled: ptr.Bool(true),
+			NodePools: []string{
+				"__Member__",
+				"__Member__",
+			},
+			NodeRoleArn: ptr.String("__NodeRoleArn__"),
+		},
+		StorageConfig: &types.StorageConfigRequest{
+			BlockStorage: &types.BlockStorage{
+				Enabled: ptr.Bool(true),
+			},
+		},
+		DeletionProtection: ptr.Bool(true),
+		ControlPlaneScalingConfig: &types.ControlPlaneScalingConfig{
+			Tier: types.ProvisionedControlPlaneTier("standard"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -763,7 +1052,20 @@ func TestCheckResponseSnapshot_CreateEksAnywhereSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEksAnywhereSubscription(context.Background(), &CreateEksAnywhereSubscriptionInput{})
+	got, err := svc.CreateEksAnywhereSubscription(context.Background(), &CreateEksAnywhereSubscriptionInput{
+		Name: ptr.String("__Name__"),
+		Term: &types.EksAnywhereSubscriptionTerm{
+			Duration: 1,
+			Unit:     types.EksAnywhereSubscriptionTermUnit("MONTHS"),
+		},
+		LicenseQuantity:    1,
+		LicenseType:        types.EksAnywhereSubscriptionLicenseType("Cluster"),
+		AutoRenew:          true,
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -832,7 +1134,33 @@ func TestCheckResponseSnapshot_CreateFargateProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFargateProfile(context.Background(), &CreateFargateProfileInput{})
+	got, err := svc.CreateFargateProfile(context.Background(), &CreateFargateProfileInput{
+		FargateProfileName:  ptr.String("__FargateProfileName__"),
+		ClusterName:         ptr.String("__ClusterName__"),
+		PodExecutionRoleArn: ptr.String("__PodExecutionRoleArn__"),
+		Subnets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Selectors: []types.FargateProfileSelector{
+			{
+				Namespace: ptr.String("__Namespace__"),
+				Labels: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				Namespace: ptr.String("__Namespace__"),
+				Labels: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -973,7 +1301,93 @@ func TestCheckResponseSnapshot_CreateNodegroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateNodegroup(context.Background(), &CreateNodegroupInput{})
+	got, err := svc.CreateNodegroup(context.Background(), &CreateNodegroupInput{
+		ClusterName:   ptr.String("__ClusterName__"),
+		NodegroupName: ptr.String("__NodegroupName__"),
+		ScalingConfig: &types.NodegroupScalingConfig{
+			MinSize:     ptr.Int32(1),
+			MaxSize:     ptr.Int32(1),
+			DesiredSize: ptr.Int32(1),
+		},
+		DiskSize: ptr.Int32(1),
+		Subnets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		InstanceTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AmiType: types.AMITypes("AL2_x86_64"),
+		RemoteAccess: &types.RemoteAccessConfig{
+			Ec2SshKey: ptr.String("__Ec2SshKey__"),
+			SourceSecurityGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		NodeRole: ptr.String("__NodeRole__"),
+		Labels: map[string]string{
+			"key0": "__Value__",
+		},
+		Taints: []types.Taint{
+			{
+				Key:    ptr.String("__Key__"),
+				Value:  ptr.String("__Value__"),
+				Effect: types.TaintEffect("NO_SCHEDULE"),
+			},
+			{
+				Key:    ptr.String("__Key__"),
+				Value:  ptr.String("__Value__"),
+				Effect: types.TaintEffect("NO_SCHEDULE"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		LaunchTemplate: &types.LaunchTemplateSpecification{
+			Name:    ptr.String("__Name__"),
+			Version: ptr.String("__Version__"),
+			Id:      ptr.String("__Id__"),
+		},
+		UpdateConfig: &types.NodegroupUpdateConfig{
+			MaxUnavailable:           ptr.Int32(1),
+			MaxUnavailablePercentage: ptr.Int32(1),
+			UpdateStrategy:           types.NodegroupUpdateStrategies("DEFAULT"),
+		},
+		NodeRepairConfig: &types.NodeRepairConfig{
+			Enabled:                             ptr.Bool(true),
+			MaxUnhealthyNodeThresholdCount:      ptr.Int32(1),
+			MaxUnhealthyNodeThresholdPercentage: ptr.Int32(1),
+			MaxParallelNodesRepairedCount:       ptr.Int32(1),
+			MaxParallelNodesRepairedPercentage:  ptr.Int32(1),
+			NodeRepairConfigOverrides: []types.NodeRepairConfigOverrides{
+				{
+					NodeMonitoringCondition: ptr.String("__NodeMonitoringCondition__"),
+					NodeUnhealthyReason:     ptr.String("__NodeUnhealthyReason__"),
+					MinRepairWaitTimeMins:   ptr.Int32(1),
+					RepairAction:            types.RepairAction("Replace"),
+				},
+				{
+					NodeMonitoringCondition: ptr.String("__NodeMonitoringCondition__"),
+					NodeUnhealthyReason:     ptr.String("__NodeUnhealthyReason__"),
+					MinRepairWaitTimeMins:   ptr.Int32(1),
+					RepairAction:            types.RepairAction("Replace"),
+				},
+			},
+		},
+		CapacityType:   types.CapacityTypes("ON_DEMAND"),
+		Version:        ptr.String("__Version__"),
+		ReleaseVersion: ptr.String("__ReleaseVersion__"),
+		WarmPoolConfig: &types.WarmPoolConfig{
+			Enabled:                  ptr.Bool(true),
+			MinSize:                  ptr.Int32(1),
+			MaxGroupPreparedCapacity: ptr.Int32(1),
+			PoolState:                types.WarmPoolState("STOPPED"),
+			ReuseOnScaleIn:           ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1011,7 +1425,19 @@ func TestCheckResponseSnapshot_CreatePodIdentityAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePodIdentityAssociation(context.Background(), &CreatePodIdentityAssociationInput{})
+	got, err := svc.CreatePodIdentityAssociation(context.Background(), &CreatePodIdentityAssociationInput{
+		ClusterName:        ptr.String("__ClusterName__"),
+		Namespace:          ptr.String("__Namespace__"),
+		ServiceAccount:     ptr.String("__ServiceAccount__"),
+		RoleArn:            ptr.String("__RoleArn__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		DisableSessionTags: ptr.Bool(true),
+		TargetRoleArn:      ptr.String("__TargetRoleArn__"),
+		Policy:             ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1030,7 +1456,10 @@ func TestCheckResponseSnapshot_DeleteAccessEntry(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAccessEntry(context.Background(), &DeleteAccessEntryInput{})
+	got, err := svc.DeleteAccessEntry(context.Background(), &DeleteAccessEntryInput{
+		ClusterName:  ptr.String("__ClusterName__"),
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1097,7 +1526,11 @@ func TestCheckResponseSnapshot_DeleteAddon(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAddon(context.Background(), &DeleteAddonInput{})
+	got, err := svc.DeleteAddon(context.Background(), &DeleteAddonInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		AddonName:   ptr.String("__AddonName__"),
+		Preserve:    true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1189,7 +1622,10 @@ func TestCheckResponseSnapshot_DeleteCapability(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCapability(context.Background(), &DeleteCapabilityInput{})
+	got, err := svc.DeleteCapability(context.Background(), &DeleteCapabilityInput{
+		ClusterName:    ptr.String("__ClusterName__"),
+		CapabilityName: ptr.String("__CapabilityName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1396,7 +1832,9 @@ func TestCheckResponseSnapshot_DeleteCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCluster(context.Background(), &DeleteClusterInput{})
+	got, err := svc.DeleteCluster(context.Background(), &DeleteClusterInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1448,7 +1886,9 @@ func TestCheckResponseSnapshot_DeleteEksAnywhereSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEksAnywhereSubscription(context.Background(), &DeleteEksAnywhereSubscriptionInput{})
+	got, err := svc.DeleteEksAnywhereSubscription(context.Background(), &DeleteEksAnywhereSubscriptionInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1517,7 +1957,10 @@ func TestCheckResponseSnapshot_DeleteFargateProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFargateProfile(context.Background(), &DeleteFargateProfileInput{})
+	got, err := svc.DeleteFargateProfile(context.Background(), &DeleteFargateProfileInput{
+		ClusterName:        ptr.String("__ClusterName__"),
+		FargateProfileName: ptr.String("__FargateProfileName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1658,7 +2101,10 @@ func TestCheckResponseSnapshot_DeleteNodegroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteNodegroup(context.Background(), &DeleteNodegroupInput{})
+	got, err := svc.DeleteNodegroup(context.Background(), &DeleteNodegroupInput{
+		ClusterName:   ptr.String("__ClusterName__"),
+		NodegroupName: ptr.String("__NodegroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1696,7 +2142,10 @@ func TestCheckResponseSnapshot_DeletePodIdentityAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePodIdentityAssociation(context.Background(), &DeletePodIdentityAssociationInput{})
+	got, err := svc.DeletePodIdentityAssociation(context.Background(), &DeletePodIdentityAssociationInput{
+		ClusterName:   ptr.String("__ClusterName__"),
+		AssociationId: ptr.String("__AssociationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1903,7 +2352,9 @@ func TestCheckResponseSnapshot_DeregisterCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterCluster(context.Background(), &DeregisterClusterInput{})
+	got, err := svc.DeregisterCluster(context.Background(), &DeregisterClusterInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1939,7 +2390,10 @@ func TestCheckResponseSnapshot_DescribeAccessEntry(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAccessEntry(context.Background(), &DescribeAccessEntryInput{})
+	got, err := svc.DescribeAccessEntry(context.Background(), &DescribeAccessEntryInput{
+		ClusterName:  ptr.String("__ClusterName__"),
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2006,7 +2460,10 @@ func TestCheckResponseSnapshot_DescribeAddon(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAddon(context.Background(), &DescribeAddonInput{})
+	got, err := svc.DescribeAddon(context.Background(), &DescribeAddonInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		AddonName:   ptr.String("__AddonName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2045,7 +2502,10 @@ func TestCheckResponseSnapshot_DescribeAddonConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAddonConfiguration(context.Background(), &DescribeAddonConfigurationInput{})
+	got, err := svc.DescribeAddonConfiguration(context.Background(), &DescribeAddonConfigurationInput{
+		AddonName:    ptr.String("__AddonName__"),
+		AddonVersion: ptr.String("__AddonVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2218,7 +2678,24 @@ func TestCheckResponseSnapshot_DescribeAddonVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAddonVersions(context.Background(), &DescribeAddonVersionsInput{})
+	got, err := svc.DescribeAddonVersions(context.Background(), &DescribeAddonVersionsInput{
+		KubernetesVersion: ptr.String("__KubernetesVersion__"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+		AddonName:         ptr.String("__AddonName__"),
+		Types: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Publishers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Owners: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2310,7 +2787,10 @@ func TestCheckResponseSnapshot_DescribeCapability(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCapability(context.Background(), &DescribeCapabilityInput{})
+	got, err := svc.DescribeCapability(context.Background(), &DescribeCapabilityInput{
+		ClusterName:    ptr.String("__ClusterName__"),
+		CapabilityName: ptr.String("__CapabilityName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2517,7 +2997,9 @@ func TestCheckResponseSnapshot_DescribeCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCluster(context.Background(), &DescribeClusterInput{})
+	got, err := svc.DescribeCluster(context.Background(), &DescribeClusterInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2564,7 +3046,19 @@ func TestCheckResponseSnapshot_DescribeClusterVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeClusterVersions(context.Background(), &DescribeClusterVersionsInput{})
+	got, err := svc.DescribeClusterVersions(context.Background(), &DescribeClusterVersionsInput{
+		ClusterType: ptr.String("__ClusterType__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+		DefaultOnly: ptr.Bool(true),
+		IncludeAll:  ptr.Bool(true),
+		ClusterVersions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Status:        types.ClusterVersionStatus("unsupported"),
+		VersionStatus: types.VersionStatus("UNSUPPORTED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2616,7 +3110,9 @@ func TestCheckResponseSnapshot_DescribeEksAnywhereSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEksAnywhereSubscription(context.Background(), &DescribeEksAnywhereSubscriptionInput{})
+	got, err := svc.DescribeEksAnywhereSubscription(context.Background(), &DescribeEksAnywhereSubscriptionInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2685,7 +3181,10 @@ func TestCheckResponseSnapshot_DescribeFargateProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFargateProfile(context.Background(), &DescribeFargateProfileInput{})
+	got, err := svc.DescribeFargateProfile(context.Background(), &DescribeFargateProfileInput{
+		ClusterName:        ptr.String("__ClusterName__"),
+		FargateProfileName: ptr.String("__FargateProfileName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2725,7 +3224,13 @@ func TestCheckResponseSnapshot_DescribeIdentityProviderConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeIdentityProviderConfig(context.Background(), &DescribeIdentityProviderConfigInput{})
+	got, err := svc.DescribeIdentityProviderConfig(context.Background(), &DescribeIdentityProviderConfigInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		IdentityProviderConfig: &types.IdentityProviderConfig{
+			Type: ptr.String("__Type__"),
+			Name: ptr.String("__Name__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2836,7 +3341,10 @@ func TestCheckResponseSnapshot_DescribeInsight(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeInsight(context.Background(), &DescribeInsightInput{})
+	got, err := svc.DescribeInsight(context.Background(), &DescribeInsightInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		Id:          ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2860,7 +3368,9 @@ func TestCheckResponseSnapshot_DescribeInsightsRefresh(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeInsightsRefresh(context.Background(), &DescribeInsightsRefreshInput{})
+	got, err := svc.DescribeInsightsRefresh(context.Background(), &DescribeInsightsRefreshInput{
+		ClusterName: ptr.String("__ClusterName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3001,7 +3511,10 @@ func TestCheckResponseSnapshot_DescribeNodegroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeNodegroup(context.Background(), &DescribeNodegroupInput{})
+	got, err := svc.DescribeNodegroup(context.Background(), &DescribeNodegroupInput{
+		ClusterName:   ptr.String("__ClusterName__"),
+		NodegroupName: ptr.String("__NodegroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3039,7 +3552,10 @@ func TestCheckResponseSnapshot_DescribePodIdentityAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePodIdentityAssociation(context.Background(), &DescribePodIdentityAssociationInput{})
+	got, err := svc.DescribePodIdentityAssociation(context.Background(), &DescribePodIdentityAssociationInput{
+		ClusterName:   ptr.String("__ClusterName__"),
+		AssociationId: ptr.String("__AssociationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3097,7 +3613,13 @@ func TestCheckResponseSnapshot_DescribeUpdate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeUpdate(context.Background(), &DescribeUpdateInput{})
+	got, err := svc.DescribeUpdate(context.Background(), &DescribeUpdateInput{
+		Name:           ptr.String("__Name__"),
+		UpdateId:       ptr.String("__UpdateId__"),
+		NodegroupName:  ptr.String("__NodegroupName__"),
+		AddonName:      ptr.String("__AddonName__"),
+		CapabilityName: ptr.String("__CapabilityName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3116,7 +3638,11 @@ func TestCheckResponseSnapshot_DisassociateAccessPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateAccessPolicy(context.Background(), &DisassociateAccessPolicyInput{})
+	got, err := svc.DisassociateAccessPolicy(context.Background(), &DisassociateAccessPolicyInput{
+		ClusterName:  ptr.String("__ClusterName__"),
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+		PolicyArn:    ptr.String("__PolicyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3174,7 +3700,14 @@ func TestCheckResponseSnapshot_DisassociateIdentityProviderConfig(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateIdentityProviderConfig(context.Background(), &DisassociateIdentityProviderConfigInput{})
+	got, err := svc.DisassociateIdentityProviderConfig(context.Background(), &DisassociateIdentityProviderConfigInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		IdentityProviderConfig: &types.IdentityProviderConfig{
+			Type: ptr.String("__Type__"),
+			Name: ptr.String("__Name__"),
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3199,7 +3732,12 @@ func TestCheckResponseSnapshot_ListAccessEntries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccessEntries(context.Background(), &ListAccessEntriesInput{})
+	got, err := svc.ListAccessEntries(context.Background(), &ListAccessEntriesInput{
+		ClusterName:         ptr.String("__ClusterName__"),
+		AssociatedPolicyArn: ptr.String("__AssociatedPolicyArn__"),
+		MaxResults:          ptr.Int32(1),
+		NextToken:           ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3230,7 +3768,10 @@ func TestCheckResponseSnapshot_ListAccessPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccessPolicies(context.Background(), &ListAccessPoliciesInput{})
+	got, err := svc.ListAccessPolicies(context.Background(), &ListAccessPoliciesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3255,7 +3796,11 @@ func TestCheckResponseSnapshot_ListAddons(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAddons(context.Background(), &ListAddonsInput{})
+	got, err := svc.ListAddons(context.Background(), &ListAddonsInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3304,7 +3849,12 @@ func TestCheckResponseSnapshot_ListAssociatedAccessPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssociatedAccessPolicies(context.Background(), &ListAssociatedAccessPoliciesInput{})
+	got, err := svc.ListAssociatedAccessPolicies(context.Background(), &ListAssociatedAccessPoliciesInput{
+		ClusterName:  ptr.String("__ClusterName__"),
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3345,7 +3895,11 @@ func TestCheckResponseSnapshot_ListCapabilities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCapabilities(context.Background(), &ListCapabilitiesInput{})
+	got, err := svc.ListCapabilities(context.Background(), &ListCapabilitiesInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3370,7 +3924,14 @@ func TestCheckResponseSnapshot_ListClusters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListClusters(context.Background(), &ListClustersInput{})
+	got, err := svc.ListClusters(context.Background(), &ListClustersInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Include: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3457,7 +4018,14 @@ func TestCheckResponseSnapshot_ListEksAnywhereSubscriptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEksAnywhereSubscriptions(context.Background(), &ListEksAnywhereSubscriptionsInput{})
+	got, err := svc.ListEksAnywhereSubscriptions(context.Background(), &ListEksAnywhereSubscriptionsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		IncludeStatus: []types.EksAnywhereSubscriptionStatus{
+			types.EksAnywhereSubscriptionStatus("CREATING"),
+			types.EksAnywhereSubscriptionStatus("CREATING"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3482,7 +4050,11 @@ func TestCheckResponseSnapshot_ListFargateProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFargateProfiles(context.Background(), &ListFargateProfilesInput{})
+	got, err := svc.ListFargateProfiles(context.Background(), &ListFargateProfilesInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3513,7 +4085,11 @@ func TestCheckResponseSnapshot_ListIdentityProviderConfigs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIdentityProviderConfigs(context.Background(), &ListIdentityProviderConfigsInput{})
+	got, err := svc.ListIdentityProviderConfigs(context.Background(), &ListIdentityProviderConfigsInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3562,7 +4138,25 @@ func TestCheckResponseSnapshot_ListInsights(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInsights(context.Background(), &ListInsightsInput{})
+	got, err := svc.ListInsights(context.Background(), &ListInsightsInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		Filter: &types.InsightsFilter{
+			Categories: []types.Category{
+				types.Category("UPGRADE_READINESS"),
+				types.Category("UPGRADE_READINESS"),
+			},
+			KubernetesVersions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Statuses: []types.InsightStatusValue{
+				types.InsightStatusValue("PASSING"),
+				types.InsightStatusValue("PASSING"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3587,7 +4181,11 @@ func TestCheckResponseSnapshot_ListNodegroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListNodegroups(context.Background(), &ListNodegroupsInput{})
+	got, err := svc.ListNodegroups(context.Background(), &ListNodegroupsInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3626,7 +4224,13 @@ func TestCheckResponseSnapshot_ListPodIdentityAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPodIdentityAssociations(context.Background(), &ListPodIdentityAssociationsInput{})
+	got, err := svc.ListPodIdentityAssociations(context.Background(), &ListPodIdentityAssociationsInput{
+		ClusterName:    ptr.String("__ClusterName__"),
+		Namespace:      ptr.String("__Namespace__"),
+		ServiceAccount: ptr.String("__ServiceAccount__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3649,7 +4253,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3674,7 +4280,14 @@ func TestCheckResponseSnapshot_ListUpdates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUpdates(context.Background(), &ListUpdatesInput{})
+	got, err := svc.ListUpdates(context.Background(), &ListUpdatesInput{
+		Name:           ptr.String("__Name__"),
+		NodegroupName:  ptr.String("__NodegroupName__"),
+		AddonName:      ptr.String("__AddonName__"),
+		CapabilityName: ptr.String("__CapabilityName__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3881,7 +4494,17 @@ func TestCheckResponseSnapshot_RegisterCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterCluster(context.Background(), &RegisterClusterInput{})
+	got, err := svc.RegisterCluster(context.Background(), &RegisterClusterInput{
+		Name: ptr.String("__Name__"),
+		ConnectorConfig: &types.ConnectorConfigRequest{
+			RoleArn:  ptr.String("__RoleArn__"),
+			Provider: types.ConnectorConfigProvider("EKS_ANYWHERE"),
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3903,7 +4526,9 @@ func TestCheckResponseSnapshot_StartInsightsRefresh(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartInsightsRefresh(context.Background(), &StartInsightsRefreshInput{})
+	got, err := svc.StartInsightsRefresh(context.Background(), &StartInsightsRefreshInput{
+		ClusterName: ptr.String("__ClusterName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3922,7 +4547,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3941,7 +4571,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3977,7 +4613,16 @@ func TestCheckResponseSnapshot_UpdateAccessEntry(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAccessEntry(context.Background(), &UpdateAccessEntryInput{})
+	got, err := svc.UpdateAccessEntry(context.Background(), &UpdateAccessEntryInput{
+		ClusterName:  ptr.String("__ClusterName__"),
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+		KubernetesGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Username:           ptr.String("__Username__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4035,7 +4680,25 @@ func TestCheckResponseSnapshot_UpdateAddon(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAddon(context.Background(), &UpdateAddonInput{})
+	got, err := svc.UpdateAddon(context.Background(), &UpdateAddonInput{
+		ClusterName:           ptr.String("__ClusterName__"),
+		AddonName:             ptr.String("__AddonName__"),
+		AddonVersion:          ptr.String("__AddonVersion__"),
+		ServiceAccountRoleArn: ptr.String("__ServiceAccountRoleArn__"),
+		ResolveConflicts:      types.ResolveConflicts("OVERWRITE"),
+		ClientRequestToken:    ptr.String("__ClientRequestToken__"),
+		ConfigurationValues:   ptr.String("__ConfigurationValues__"),
+		PodIdentityAssociations: []types.AddonPodIdentityAssociations{
+			{
+				ServiceAccount: ptr.String("__ServiceAccount__"),
+				RoleArn:        ptr.String("__RoleArn__"),
+			},
+			{
+				ServiceAccount: ptr.String("__ServiceAccount__"),
+				RoleArn:        ptr.String("__RoleArn__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4093,7 +4756,81 @@ func TestCheckResponseSnapshot_UpdateCapability(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCapability(context.Background(), &UpdateCapabilityInput{})
+	got, err := svc.UpdateCapability(context.Background(), &UpdateCapabilityInput{
+		ClusterName:    ptr.String("__ClusterName__"),
+		CapabilityName: ptr.String("__CapabilityName__"),
+		RoleArn:        ptr.String("__RoleArn__"),
+		Configuration: &types.UpdateCapabilityConfiguration{
+			ArgoCd: &types.UpdateArgoCdConfig{
+				RbacRoleMappings: &types.UpdateRoleMappings{
+					AddOrUpdateRoleMappings: []types.ArgoCdRoleMapping{
+						{
+							Role: types.ArgoCdRole("ADMIN"),
+							Identities: []types.SsoIdentity{
+								{
+									Id:   ptr.String("__Id__"),
+									Type: types.SsoIdentityType("SSO_USER"),
+								},
+								{
+									Id:   ptr.String("__Id__"),
+									Type: types.SsoIdentityType("SSO_USER"),
+								},
+							},
+						},
+						{
+							Role: types.ArgoCdRole("ADMIN"),
+							Identities: []types.SsoIdentity{
+								{
+									Id:   ptr.String("__Id__"),
+									Type: types.SsoIdentityType("SSO_USER"),
+								},
+								{
+									Id:   ptr.String("__Id__"),
+									Type: types.SsoIdentityType("SSO_USER"),
+								},
+							},
+						},
+					},
+					RemoveRoleMappings: []types.ArgoCdRoleMapping{
+						{
+							Role: types.ArgoCdRole("ADMIN"),
+							Identities: []types.SsoIdentity{
+								{
+									Id:   ptr.String("__Id__"),
+									Type: types.SsoIdentityType("SSO_USER"),
+								},
+								{
+									Id:   ptr.String("__Id__"),
+									Type: types.SsoIdentityType("SSO_USER"),
+								},
+							},
+						},
+						{
+							Role: types.ArgoCdRole("ADMIN"),
+							Identities: []types.SsoIdentity{
+								{
+									Id:   ptr.String("__Id__"),
+									Type: types.SsoIdentityType("SSO_USER"),
+								},
+								{
+									Id:   ptr.String("__Id__"),
+									Type: types.SsoIdentityType("SSO_USER"),
+								},
+							},
+						},
+					},
+				},
+				NetworkAccess: &types.ArgoCdNetworkAccessConfigRequest{
+					VpceIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		ClientRequestToken:      ptr.String("__ClientRequestToken__"),
+		DeletePropagationPolicy: types.CapabilityDeletePropagationPolicy("RETAIN"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4151,7 +4888,108 @@ func TestCheckResponseSnapshot_UpdateClusterConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateClusterConfig(context.Background(), &UpdateClusterConfigInput{})
+	got, err := svc.UpdateClusterConfig(context.Background(), &UpdateClusterConfigInput{
+		Name: ptr.String("__Name__"),
+		ResourcesVpcConfig: &types.VpcConfigRequest{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EndpointPublicAccess:  ptr.Bool(true),
+			EndpointPrivateAccess: ptr.Bool(true),
+			PublicAccessCidrs: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ControlPlaneEgressMode: types.ControlPlaneEgressModeType("AWS_MANAGED"),
+		},
+		Logging: &types.Logging{
+			ClusterLogging: []types.LogSetup{
+				{
+					Types: []types.LogType{
+						types.LogType("api"),
+						types.LogType("api"),
+					},
+					Enabled: ptr.Bool(true),
+				},
+				{
+					Types: []types.LogType{
+						types.LogType("api"),
+						types.LogType("api"),
+					},
+					Enabled: ptr.Bool(true),
+				},
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		AccessConfig: &types.UpdateAccessConfigRequest{
+			AuthenticationMode: types.AuthenticationMode("API"),
+		},
+		UpgradePolicy: &types.UpgradePolicyRequest{
+			SupportType: types.SupportType("STANDARD"),
+		},
+		ZonalShiftConfig: &types.ZonalShiftConfigRequest{
+			Enabled: ptr.Bool(true),
+		},
+		ComputeConfig: &types.ComputeConfigRequest{
+			Enabled: ptr.Bool(true),
+			NodePools: []string{
+				"__Member__",
+				"__Member__",
+			},
+			NodeRoleArn: ptr.String("__NodeRoleArn__"),
+		},
+		KubernetesNetworkConfig: &types.KubernetesNetworkConfigRequest{
+			ServiceIpv4Cidr: ptr.String("__ServiceIpv4Cidr__"),
+			IpFamily:        types.IpFamily("ipv4"),
+			ElasticLoadBalancing: &types.ElasticLoadBalancing{
+				Enabled: ptr.Bool(true),
+			},
+		},
+		StorageConfig: &types.StorageConfigRequest{
+			BlockStorage: &types.BlockStorage{
+				Enabled: ptr.Bool(true),
+			},
+		},
+		RemoteNetworkConfig: &types.RemoteNetworkConfigRequest{
+			RemoteNodeNetworks: []types.RemoteNodeNetwork{
+				{
+					Cidrs: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Cidrs: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			RemotePodNetworks: []types.RemotePodNetwork{
+				{
+					Cidrs: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Cidrs: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		DeletionProtection: ptr.Bool(true),
+		ControlPlaneScalingConfig: &types.ControlPlaneScalingConfig{
+			Tier: types.ProvisionedControlPlaneTier("standard"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4209,7 +5047,15 @@ func TestCheckResponseSnapshot_UpdateClusterVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateClusterVersion(context.Background(), &UpdateClusterVersionInput{})
+	got, err := svc.UpdateClusterVersion(context.Background(), &UpdateClusterVersionInput{
+		Name:               ptr.String("__Name__"),
+		Version:            ptr.String("__Version__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Force:              true,
+		RollbackConfig: &types.RollbackConfig{
+			TimeoutMinutes: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4261,7 +5107,11 @@ func TestCheckResponseSnapshot_UpdateEksAnywhereSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEksAnywhereSubscription(context.Background(), &UpdateEksAnywhereSubscriptionInput{})
+	got, err := svc.UpdateEksAnywhereSubscription(context.Background(), &UpdateEksAnywhereSubscriptionInput{
+		Id:                 ptr.String("__Id__"),
+		AutoRenew:          true,
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4319,7 +5169,84 @@ func TestCheckResponseSnapshot_UpdateNodegroupConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateNodegroupConfig(context.Background(), &UpdateNodegroupConfigInput{})
+	got, err := svc.UpdateNodegroupConfig(context.Background(), &UpdateNodegroupConfigInput{
+		ClusterName:   ptr.String("__ClusterName__"),
+		NodegroupName: ptr.String("__NodegroupName__"),
+		Labels: &types.UpdateLabelsPayload{
+			AddOrUpdateLabels: map[string]string{
+				"key0": "__Value__",
+			},
+			RemoveLabels: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Taints: &types.UpdateTaintsPayload{
+			AddOrUpdateTaints: []types.Taint{
+				{
+					Key:    ptr.String("__Key__"),
+					Value:  ptr.String("__Value__"),
+					Effect: types.TaintEffect("NO_SCHEDULE"),
+				},
+				{
+					Key:    ptr.String("__Key__"),
+					Value:  ptr.String("__Value__"),
+					Effect: types.TaintEffect("NO_SCHEDULE"),
+				},
+			},
+			RemoveTaints: []types.Taint{
+				{
+					Key:    ptr.String("__Key__"),
+					Value:  ptr.String("__Value__"),
+					Effect: types.TaintEffect("NO_SCHEDULE"),
+				},
+				{
+					Key:    ptr.String("__Key__"),
+					Value:  ptr.String("__Value__"),
+					Effect: types.TaintEffect("NO_SCHEDULE"),
+				},
+			},
+		},
+		ScalingConfig: &types.NodegroupScalingConfig{
+			MinSize:     ptr.Int32(1),
+			MaxSize:     ptr.Int32(1),
+			DesiredSize: ptr.Int32(1),
+		},
+		UpdateConfig: &types.NodegroupUpdateConfig{
+			MaxUnavailable:           ptr.Int32(1),
+			MaxUnavailablePercentage: ptr.Int32(1),
+			UpdateStrategy:           types.NodegroupUpdateStrategies("DEFAULT"),
+		},
+		NodeRepairConfig: &types.NodeRepairConfig{
+			Enabled:                             ptr.Bool(true),
+			MaxUnhealthyNodeThresholdCount:      ptr.Int32(1),
+			MaxUnhealthyNodeThresholdPercentage: ptr.Int32(1),
+			MaxParallelNodesRepairedCount:       ptr.Int32(1),
+			MaxParallelNodesRepairedPercentage:  ptr.Int32(1),
+			NodeRepairConfigOverrides: []types.NodeRepairConfigOverrides{
+				{
+					NodeMonitoringCondition: ptr.String("__NodeMonitoringCondition__"),
+					NodeUnhealthyReason:     ptr.String("__NodeUnhealthyReason__"),
+					MinRepairWaitTimeMins:   ptr.Int32(1),
+					RepairAction:            types.RepairAction("Replace"),
+				},
+				{
+					NodeMonitoringCondition: ptr.String("__NodeMonitoringCondition__"),
+					NodeUnhealthyReason:     ptr.String("__NodeUnhealthyReason__"),
+					MinRepairWaitTimeMins:   ptr.Int32(1),
+					RepairAction:            types.RepairAction("Replace"),
+				},
+			},
+		},
+		WarmPoolConfig: &types.WarmPoolConfig{
+			Enabled:                  ptr.Bool(true),
+			MinSize:                  ptr.Int32(1),
+			MaxGroupPreparedCapacity: ptr.Int32(1),
+			PoolState:                types.WarmPoolState("STOPPED"),
+			ReuseOnScaleIn:           ptr.Bool(true),
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4377,7 +5304,19 @@ func TestCheckResponseSnapshot_UpdateNodegroupVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateNodegroupVersion(context.Background(), &UpdateNodegroupVersionInput{})
+	got, err := svc.UpdateNodegroupVersion(context.Background(), &UpdateNodegroupVersionInput{
+		ClusterName:    ptr.String("__ClusterName__"),
+		NodegroupName:  ptr.String("__NodegroupName__"),
+		Version:        ptr.String("__Version__"),
+		ReleaseVersion: ptr.String("__ReleaseVersion__"),
+		LaunchTemplate: &types.LaunchTemplateSpecification{
+			Name:    ptr.String("__Name__"),
+			Version: ptr.String("__Version__"),
+			Id:      ptr.String("__Id__"),
+		},
+		Force:              true,
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4415,7 +5354,15 @@ func TestCheckResponseSnapshot_UpdatePodIdentityAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePodIdentityAssociation(context.Background(), &UpdatePodIdentityAssociationInput{})
+	got, err := svc.UpdatePodIdentityAssociation(context.Background(), &UpdatePodIdentityAssociationInput{
+		ClusterName:        ptr.String("__ClusterName__"),
+		AssociationId:      ptr.String("__AssociationId__"),
+		RoleArn:            ptr.String("__RoleArn__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		DisableSessionTags: ptr.Bool(true),
+		TargetRoleArn:      ptr.String("__TargetRoleArn__"),
+		Policy:             ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4436,7 +5383,60 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCapability(context.Background(), &CreateCapabilityInput{})
+	_, opErr := svc.CreateCapability(context.Background(), &CreateCapabilityInput{
+		CapabilityName:     ptr.String("__CapabilityName__"),
+		ClusterName:        ptr.String("__ClusterName__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Type:               types.CapabilityType("ACK"),
+		RoleArn:            ptr.String("__RoleArn__"),
+		Configuration: &types.CapabilityConfigurationRequest{
+			ArgoCd: &types.ArgoCdConfigRequest{
+				Namespace: ptr.String("__Namespace__"),
+				AwsIdc: &types.ArgoCdAwsIdcConfigRequest{
+					IdcInstanceArn: ptr.String("__IdcInstanceArn__"),
+					IdcRegion:      ptr.String("__IdcRegion__"),
+				},
+				RbacRoleMappings: []types.ArgoCdRoleMapping{
+					{
+						Role: types.ArgoCdRole("ADMIN"),
+						Identities: []types.SsoIdentity{
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.SsoIdentityType("SSO_USER"),
+							},
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.SsoIdentityType("SSO_USER"),
+							},
+						},
+					},
+					{
+						Role: types.ArgoCdRole("ADMIN"),
+						Identities: []types.SsoIdentity{
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.SsoIdentityType("SSO_USER"),
+							},
+							{
+								Id:   ptr.String("__Id__"),
+								Type: types.SsoIdentityType("SSO_USER"),
+							},
+						},
+					},
+				},
+				NetworkAccess: &types.ArgoCdNetworkAccessConfigRequest{
+					VpceIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		DeletePropagationPolicy: types.CapabilityDeletePropagationPolicy("RETAIN"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4461,7 +5461,9 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4490,7 +5492,30 @@ func TestCheckResponseSnapshot_Error_ClientException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateEncryptionConfig(context.Background(), &AssociateEncryptionConfigInput{})
+	_, opErr := svc.AssociateEncryptionConfig(context.Background(), &AssociateEncryptionConfigInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		EncryptionConfig: []types.EncryptionConfig{
+			{
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Provider: &types.Provider{
+					KeyArn: ptr.String("__KeyArn__"),
+				},
+			},
+			{
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Provider: &types.Provider{
+					KeyArn: ptr.String("__KeyArn__"),
+				},
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4520,7 +5545,18 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAccessPolicy(context.Background(), &AssociateAccessPolicyInput{})
+	_, opErr := svc.AssociateAccessPolicy(context.Background(), &AssociateAccessPolicyInput{
+		ClusterName:  ptr.String("__ClusterName__"),
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+		PolicyArn:    ptr.String("__PolicyArn__"),
+		AccessScope: &types.AccessScope{
+			Type: types.AccessScopeType("cluster"),
+			Namespaces: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4549,7 +5585,18 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAccessPolicy(context.Background(), &AssociateAccessPolicyInput{})
+	_, opErr := svc.AssociateAccessPolicy(context.Background(), &AssociateAccessPolicyInput{
+		ClusterName:  ptr.String("__ClusterName__"),
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+		PolicyArn:    ptr.String("__PolicyArn__"),
+		AccessScope: &types.AccessScope{
+			Type: types.AccessScopeType("cluster"),
+			Namespaces: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4575,7 +5622,11 @@ func TestCheckResponseSnapshot_Error_InvalidStateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelUpdate(context.Background(), &CancelUpdateInput{})
+	_, opErr := svc.CancelUpdate(context.Background(), &CancelUpdateInput{
+		Name:               ptr.String("__Name__"),
+		UpdateId:           ptr.String("__UpdateId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4600,7 +5651,9 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4628,7 +5681,30 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateEncryptionConfig(context.Background(), &AssociateEncryptionConfigInput{})
+	_, opErr := svc.AssociateEncryptionConfig(context.Background(), &AssociateEncryptionConfigInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		EncryptionConfig: []types.EncryptionConfig{
+			{
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Provider: &types.Provider{
+					KeyArn: ptr.String("__KeyArn__"),
+				},
+			},
+			{
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Provider: &types.Provider{
+					KeyArn: ptr.String("__KeyArn__"),
+				},
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4656,7 +5732,20 @@ func TestCheckResponseSnapshot_Error_ResourceLimitExceededException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAccessEntry(context.Background(), &CreateAccessEntryInput{})
+	_, opErr := svc.CreateAccessEntry(context.Background(), &CreateAccessEntryInput{
+		ClusterName:  ptr.String("__ClusterName__"),
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+		KubernetesGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Username:           ptr.String("__Username__"),
+		Type:               ptr.String("__Type__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4686,7 +5775,18 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAccessPolicy(context.Background(), &AssociateAccessPolicyInput{})
+	_, opErr := svc.AssociateAccessPolicy(context.Background(), &AssociateAccessPolicyInput{
+		ClusterName:  ptr.String("__ClusterName__"),
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+		PolicyArn:    ptr.String("__PolicyArn__"),
+		AccessScope: &types.AccessScope{
+			Type: types.AccessScopeType("cluster"),
+			Namespaces: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4711,7 +5811,17 @@ func TestCheckResponseSnapshot_Error_ResourcePropagationDelayException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RegisterCluster(context.Background(), &RegisterClusterInput{})
+	_, opErr := svc.RegisterCluster(context.Background(), &RegisterClusterInput{
+		Name: ptr.String("__Name__"),
+		ConnectorConfig: &types.ConnectorConfigRequest{
+			RoleArn:  ptr.String("__RoleArn__"),
+			Provider: types.ConnectorConfigProvider("EKS_ANYWHERE"),
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4740,7 +5850,18 @@ func TestCheckResponseSnapshot_Error_ServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAccessPolicy(context.Background(), &AssociateAccessPolicyInput{})
+	_, opErr := svc.AssociateAccessPolicy(context.Background(), &AssociateAccessPolicyInput{
+		ClusterName:  ptr.String("__ClusterName__"),
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+		PolicyArn:    ptr.String("__PolicyArn__"),
+		AccessScope: &types.AccessScope{
+			Type: types.AccessScopeType("cluster"),
+			Namespaces: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4765,7 +5886,150 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		Name:    ptr.String("__Name__"),
+		Version: ptr.String("__Version__"),
+		RoleArn: ptr.String("__RoleArn__"),
+		ResourcesVpcConfig: &types.VpcConfigRequest{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EndpointPublicAccess:  ptr.Bool(true),
+			EndpointPrivateAccess: ptr.Bool(true),
+			PublicAccessCidrs: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ControlPlaneEgressMode: types.ControlPlaneEgressModeType("AWS_MANAGED"),
+		},
+		KubernetesNetworkConfig: &types.KubernetesNetworkConfigRequest{
+			ServiceIpv4Cidr: ptr.String("__ServiceIpv4Cidr__"),
+			IpFamily:        types.IpFamily("ipv4"),
+			ElasticLoadBalancing: &types.ElasticLoadBalancing{
+				Enabled: ptr.Bool(true),
+			},
+		},
+		Logging: &types.Logging{
+			ClusterLogging: []types.LogSetup{
+				{
+					Types: []types.LogType{
+						types.LogType("api"),
+						types.LogType("api"),
+					},
+					Enabled: ptr.Bool(true),
+				},
+				{
+					Types: []types.LogType{
+						types.LogType("api"),
+						types.LogType("api"),
+					},
+					Enabled: ptr.Bool(true),
+				},
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		EncryptionConfig: []types.EncryptionConfig{
+			{
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Provider: &types.Provider{
+					KeyArn: ptr.String("__KeyArn__"),
+				},
+			},
+			{
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Provider: &types.Provider{
+					KeyArn: ptr.String("__KeyArn__"),
+				},
+			},
+		},
+		OutpostConfig: &types.OutpostConfigRequest{
+			OutpostArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ControlPlaneInstanceType: ptr.String("__ControlPlaneInstanceType__"),
+			ControlPlanePlacement: &types.ControlPlanePlacementRequest{
+				GroupName:   ptr.String("__GroupName__"),
+				SpreadLevel: types.SpreadLevel("host"),
+			},
+			EtcdInstanceType: ptr.String("__EtcdInstanceType__"),
+			EtcdPlacement: &types.EtcdPlacementRequest{
+				SpreadLevel: types.SpreadLevel("host"),
+			},
+		},
+		AccessConfig: &types.CreateAccessConfigRequest{
+			BootstrapClusterCreatorAdminPermissions: ptr.Bool(true),
+			AuthenticationMode:                      types.AuthenticationMode("API"),
+		},
+		BootstrapSelfManagedAddons: ptr.Bool(true),
+		UpgradePolicy: &types.UpgradePolicyRequest{
+			SupportType: types.SupportType("STANDARD"),
+		},
+		ZonalShiftConfig: &types.ZonalShiftConfigRequest{
+			Enabled: ptr.Bool(true),
+		},
+		RemoteNetworkConfig: &types.RemoteNetworkConfigRequest{
+			RemoteNodeNetworks: []types.RemoteNodeNetwork{
+				{
+					Cidrs: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Cidrs: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			RemotePodNetworks: []types.RemotePodNetwork{
+				{
+					Cidrs: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Cidrs: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		ComputeConfig: &types.ComputeConfigRequest{
+			Enabled: ptr.Bool(true),
+			NodePools: []string{
+				"__Member__",
+				"__Member__",
+			},
+			NodeRoleArn: ptr.String("__NodeRoleArn__"),
+		},
+		StorageConfig: &types.StorageConfigRequest{
+			BlockStorage: &types.BlockStorage{
+				Enabled: ptr.Bool(true),
+			},
+		},
+		DeletionProtection: ptr.Bool(true),
+		ControlPlaneScalingConfig: &types.ControlPlaneScalingConfig{
+			Tier: types.ProvisionedControlPlaneTier("standard"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4791,7 +6055,30 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateEncryptionConfig(context.Background(), &AssociateEncryptionConfigInput{})
+	_, opErr := svc.AssociateEncryptionConfig(context.Background(), &AssociateEncryptionConfigInput{
+		ClusterName: ptr.String("__ClusterName__"),
+		EncryptionConfig: []types.EncryptionConfig{
+			{
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Provider: &types.Provider{
+					KeyArn: ptr.String("__KeyArn__"),
+				},
+			},
+			{
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Provider: &types.Provider{
+					KeyArn: ptr.String("__KeyArn__"),
+				},
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4822,7 +6109,150 @@ func TestCheckResponseSnapshot_Error_UnsupportedAvailabilityZoneException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	_, opErr := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		Name:    ptr.String("__Name__"),
+		Version: ptr.String("__Version__"),
+		RoleArn: ptr.String("__RoleArn__"),
+		ResourcesVpcConfig: &types.VpcConfigRequest{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EndpointPublicAccess:  ptr.Bool(true),
+			EndpointPrivateAccess: ptr.Bool(true),
+			PublicAccessCidrs: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ControlPlaneEgressMode: types.ControlPlaneEgressModeType("AWS_MANAGED"),
+		},
+		KubernetesNetworkConfig: &types.KubernetesNetworkConfigRequest{
+			ServiceIpv4Cidr: ptr.String("__ServiceIpv4Cidr__"),
+			IpFamily:        types.IpFamily("ipv4"),
+			ElasticLoadBalancing: &types.ElasticLoadBalancing{
+				Enabled: ptr.Bool(true),
+			},
+		},
+		Logging: &types.Logging{
+			ClusterLogging: []types.LogSetup{
+				{
+					Types: []types.LogType{
+						types.LogType("api"),
+						types.LogType("api"),
+					},
+					Enabled: ptr.Bool(true),
+				},
+				{
+					Types: []types.LogType{
+						types.LogType("api"),
+						types.LogType("api"),
+					},
+					Enabled: ptr.Bool(true),
+				},
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		EncryptionConfig: []types.EncryptionConfig{
+			{
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Provider: &types.Provider{
+					KeyArn: ptr.String("__KeyArn__"),
+				},
+			},
+			{
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Provider: &types.Provider{
+					KeyArn: ptr.String("__KeyArn__"),
+				},
+			},
+		},
+		OutpostConfig: &types.OutpostConfigRequest{
+			OutpostArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ControlPlaneInstanceType: ptr.String("__ControlPlaneInstanceType__"),
+			ControlPlanePlacement: &types.ControlPlanePlacementRequest{
+				GroupName:   ptr.String("__GroupName__"),
+				SpreadLevel: types.SpreadLevel("host"),
+			},
+			EtcdInstanceType: ptr.String("__EtcdInstanceType__"),
+			EtcdPlacement: &types.EtcdPlacementRequest{
+				SpreadLevel: types.SpreadLevel("host"),
+			},
+		},
+		AccessConfig: &types.CreateAccessConfigRequest{
+			BootstrapClusterCreatorAdminPermissions: ptr.Bool(true),
+			AuthenticationMode:                      types.AuthenticationMode("API"),
+		},
+		BootstrapSelfManagedAddons: ptr.Bool(true),
+		UpgradePolicy: &types.UpgradePolicyRequest{
+			SupportType: types.SupportType("STANDARD"),
+		},
+		ZonalShiftConfig: &types.ZonalShiftConfigRequest{
+			Enabled: ptr.Bool(true),
+		},
+		RemoteNetworkConfig: &types.RemoteNetworkConfigRequest{
+			RemoteNodeNetworks: []types.RemoteNodeNetwork{
+				{
+					Cidrs: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Cidrs: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			RemotePodNetworks: []types.RemotePodNetwork{
+				{
+					Cidrs: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Cidrs: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		ComputeConfig: &types.ComputeConfigRequest{
+			Enabled: ptr.Bool(true),
+			NodePools: []string{
+				"__Member__",
+				"__Member__",
+			},
+			NodeRoleArn: ptr.String("__NodeRoleArn__"),
+		},
+		StorageConfig: &types.StorageConfigRequest{
+			BlockStorage: &types.BlockStorage{
+				Enabled: ptr.Bool(true),
+			},
+		},
+		DeletionProtection: ptr.Bool(true),
+		ControlPlaneScalingConfig: &types.ControlPlaneScalingConfig{
+			Tier: types.ProvisionedControlPlaneTier("standard"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

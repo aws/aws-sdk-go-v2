@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"createdBy":"__CreatedBy__","domainId":"__DomainId__","domainUnitId":"__DomainUnitId__","id":"__Id__","name":"__Name__","resolutionStrategy":"MANUAL","updatedBy":"__UpdatedBy__"},{"createdBy":"__CreatedBy__","domainId":"__DomainId__","domainUnitId":"__DomainUnitId__","id":"__Id__","name":"__Name__","resolutionStrategy":"MANUAL","updatedBy":"__UpdatedBy__"}],"nextToken":"__NextToken__"}

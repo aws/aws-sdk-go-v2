@@ -7,8 +7,10 @@ package cognitoidentityprovider
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/document"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -18,6 +20,7 @@ import (
 	"io/fs"
 	"net/url"
 	"os"
+	"reflect"
 	"slices"
 	"strings"
 	"testing"
@@ -180,7 +183,28 @@ func serdeNewClient() *Client {
 	})
 }
 func serdeBodyEqual(got, expected []byte) bool {
-	return bytes.Equal(got, expected)
+	if len(got) == 0 || len(expected) == 0 {
+		return bytes.Equal(got, expected)
+	}
+	gv, gok := serdeDecodeJSON(got)
+	ev, eok := serdeDecodeJSON(expected)
+	if !gok || !eok {
+		return bytes.Equal(got, expected)
+	}
+	return reflect.DeepEqual(gv, ev)
+}
+
+// serdeDecodeJSON decodes a body for structural comparison. Numbers are kept as
+// json.Number rather than float64 so a large int64 doesn't lose precision (which would
+// mask a real difference) and so numeric formatting differences still show up.
+func serdeDecodeJSON(b []byte) (any, bool) {
+	d := json.NewDecoder(bytes.NewReader(b))
+	d.UseNumber()
+	var v any
+	if err := d.Decode(&v); err != nil {
+		return nil, false
+	}
+	return v, true
 }
 func TestCheckRequestSnapshot_AddCustomAttributes(t *testing.T) {
 	input := &AddCustomAttributesInput{
@@ -1247,7 +1271,7 @@ func TestCheckRequestSnapshot_ChangePassword(t *testing.T) {
 func TestCheckRequestSnapshot_CompleteWebAuthnRegistration(t *testing.T) {
 	input := &CompleteWebAuthnRegistrationInput{
 		AccessToken: ptr.String("__AccessToken__"),
-		Credential:  nil,
+		Credential:  document.NewLazyDocument("__Document__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1463,7 +1487,7 @@ func TestCheckRequestSnapshot_CreateManagedLoginBranding(t *testing.T) {
 		UserPoolId:               ptr.String("__UserPoolId__"),
 		ClientId:                 ptr.String("__ClientId__"),
 		UseCognitoProvidedValues: true,
-		Settings:                 nil,
+		Settings:                 document.NewLazyDocument("__Document__"),
 		Assets: []types.AssetType{
 			{
 				Category:   types.AssetCategoryType("FAVICON_ICO"),
@@ -4279,7 +4303,7 @@ func TestCheckRequestSnapshot_UpdateManagedLoginBranding(t *testing.T) {
 		UserPoolId:               ptr.String("__UserPoolId__"),
 		ManagedLoginBrandingId:   ptr.String("__ManagedLoginBrandingId__"),
 		UseCognitoProvidedValues: true,
-		Settings:                 nil,
+		Settings:                 document.NewLazyDocument("__Document__"),
 		Assets: []types.AssetType{
 			{
 				Category:   types.AssetCategoryType("FAVICON_ICO"),
@@ -5904,7 +5928,7 @@ func TestUpdateRequestSnapshot_ChangePassword(t *testing.T) {
 func TestUpdateRequestSnapshot_CompleteWebAuthnRegistration(t *testing.T) {
 	input := &CompleteWebAuthnRegistrationInput{
 		AccessToken: ptr.String("__AccessToken__"),
-		Credential:  nil,
+		Credential:  document.NewLazyDocument("__Document__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6120,7 +6144,7 @@ func TestUpdateRequestSnapshot_CreateManagedLoginBranding(t *testing.T) {
 		UserPoolId:               ptr.String("__UserPoolId__"),
 		ClientId:                 ptr.String("__ClientId__"),
 		UseCognitoProvidedValues: true,
-		Settings:                 nil,
+		Settings:                 document.NewLazyDocument("__Document__"),
 		Assets: []types.AssetType{
 			{
 				Category:   types.AssetCategoryType("FAVICON_ICO"),
@@ -8936,7 +8960,7 @@ func TestUpdateRequestSnapshot_UpdateManagedLoginBranding(t *testing.T) {
 		UserPoolId:               ptr.String("__UserPoolId__"),
 		ManagedLoginBrandingId:   ptr.String("__ManagedLoginBrandingId__"),
 		UseCognitoProvidedValues: true,
-		Settings:                 nil,
+		Settings:                 document.NewLazyDocument("__Document__"),
 		Assets: []types.AssetType{
 			{
 				Category:   types.AssetCategoryType("FAVICON_ICO"),

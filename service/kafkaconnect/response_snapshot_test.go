@@ -121,7 +121,93 @@ func TestCheckResponseSnapshot_CreateConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConnector(context.Background(), &CreateConnectorInput{})
+	got, err := svc.CreateConnector(context.Background(), &CreateConnectorInput{
+		Capacity: &types.Capacity{
+			AutoScaling: &types.AutoScaling{
+				MaxWorkerCount: 1,
+				McuCount:       1,
+				MinWorkerCount: 1,
+				ScaleInPolicy: &types.ScaleInPolicy{
+					CpuUtilizationPercentage: 1,
+				},
+				ScaleOutPolicy: &types.ScaleOutPolicy{
+					CpuUtilizationPercentage: 1,
+				},
+				MaxAutoscalingTaskCount: 1,
+			},
+			ProvisionedCapacity: &types.ProvisionedCapacity{
+				McuCount:    1,
+				WorkerCount: 1,
+			},
+		},
+		ConnectorConfiguration: map[string]string{
+			"key0": "__Value__",
+		},
+		ConnectorDescription: ptr.String("__ConnectorDescription__"),
+		ConnectorName:        ptr.String("__ConnectorName__"),
+		KafkaCluster: &types.KafkaCluster{
+			ApacheKafkaCluster: &types.ApacheKafkaCluster{
+				BootstrapServers: ptr.String("__BootstrapServers__"),
+				Vpc: &types.Vpc{
+					SecurityGroups: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Subnets: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		KafkaClusterClientAuthentication: &types.KafkaClusterClientAuthentication{
+			AuthenticationType: types.KafkaClusterClientAuthenticationType("NONE"),
+		},
+		KafkaClusterEncryptionInTransit: &types.KafkaClusterEncryptionInTransit{
+			EncryptionType: types.KafkaClusterEncryptionInTransitType("PLAINTEXT"),
+		},
+		KafkaConnectVersion: ptr.String("__KafkaConnectVersion__"),
+		LogDelivery: &types.LogDelivery{
+			WorkerLogDelivery: &types.WorkerLogDelivery{
+				CloudWatchLogs: &types.CloudWatchLogsLogDelivery{
+					Enabled:  true,
+					LogGroup: ptr.String("__LogGroup__"),
+				},
+				Firehose: &types.FirehoseLogDelivery{
+					DeliveryStream: ptr.String("__DeliveryStream__"),
+					Enabled:        true,
+				},
+				S3: &types.S3LogDelivery{
+					Bucket:  ptr.String("__Bucket__"),
+					Enabled: true,
+					Prefix:  ptr.String("__Prefix__"),
+				},
+			},
+		},
+		NetworkType: types.NetworkType("IPV4"),
+		Plugins: []types.Plugin{
+			{
+				CustomPlugin: &types.CustomPlugin{
+					CustomPluginArn: ptr.String("__CustomPluginArn__"),
+					Revision:        1,
+				},
+			},
+			{
+				CustomPlugin: &types.CustomPlugin{
+					CustomPluginArn: ptr.String("__CustomPluginArn__"),
+					Revision:        1,
+				},
+			},
+		},
+		ServiceExecutionRoleArn: ptr.String("__ServiceExecutionRoleArn__"),
+		WorkerConfiguration: &types.WorkerConfiguration{
+			Revision:               1,
+			WorkerConfigurationArn: ptr.String("__WorkerConfigurationArn__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -145,7 +231,21 @@ func TestCheckResponseSnapshot_CreateCustomPlugin(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCustomPlugin(context.Background(), &CreateCustomPluginInput{})
+	got, err := svc.CreateCustomPlugin(context.Background(), &CreateCustomPluginInput{
+		ContentType: types.CustomPluginContentType("JAR"),
+		Description: ptr.String("__Description__"),
+		Location: &types.CustomPluginLocation{
+			S3Location: &types.S3Location{
+				BucketArn:     ptr.String("__BucketArn__"),
+				FileKey:       ptr.String("__FileKey__"),
+				ObjectVersion: ptr.String("__ObjectVersion__"),
+			},
+		},
+		Name: ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -174,7 +274,14 @@ func TestCheckResponseSnapshot_CreateWorkerConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWorkerConfiguration(context.Background(), &CreateWorkerConfigurationInput{})
+	got, err := svc.CreateWorkerConfiguration(context.Background(), &CreateWorkerConfigurationInput{
+		Description:           ptr.String("__Description__"),
+		Name:                  ptr.String("__Name__"),
+		PropertiesFileContent: ptr.String("__PropertiesFileContent__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -196,7 +303,10 @@ func TestCheckResponseSnapshot_DeleteConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConnector(context.Background(), &DeleteConnectorInput{})
+	got, err := svc.DeleteConnector(context.Background(), &DeleteConnectorInput{
+		ConnectorArn:   ptr.String("__ConnectorArn__"),
+		CurrentVersion: ptr.String("__CurrentVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -218,7 +328,9 @@ func TestCheckResponseSnapshot_DeleteCustomPlugin(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCustomPlugin(context.Background(), &DeleteCustomPluginInput{})
+	got, err := svc.DeleteCustomPlugin(context.Background(), &DeleteCustomPluginInput{
+		CustomPluginArn: ptr.String("__CustomPluginArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -240,7 +352,9 @@ func TestCheckResponseSnapshot_DeleteWorkerConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorkerConfiguration(context.Background(), &DeleteWorkerConfigurationInput{})
+	got, err := svc.DeleteWorkerConfiguration(context.Background(), &DeleteWorkerConfigurationInput{
+		WorkerConfigurationArn: ptr.String("__WorkerConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -350,7 +464,9 @@ func TestCheckResponseSnapshot_DescribeConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConnector(context.Background(), &DescribeConnectorInput{})
+	got, err := svc.DescribeConnector(context.Background(), &DescribeConnectorInput{
+		ConnectorArn: ptr.String("__ConnectorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -436,7 +552,9 @@ func TestCheckResponseSnapshot_DescribeConnectorOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConnectorOperation(context.Background(), &DescribeConnectorOperationInput{})
+	got, err := svc.DescribeConnectorOperation(context.Background(), &DescribeConnectorOperationInput{
+		ConnectorOperationArn: ptr.String("__ConnectorOperationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -482,7 +600,9 @@ func TestCheckResponseSnapshot_DescribeCustomPlugin(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCustomPlugin(context.Background(), &DescribeCustomPluginInput{})
+	got, err := svc.DescribeCustomPlugin(context.Background(), &DescribeCustomPluginInput{
+		CustomPluginArn: ptr.String("__CustomPluginArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -513,7 +633,9 @@ func TestCheckResponseSnapshot_DescribeWorkerConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeWorkerConfiguration(context.Background(), &DescribeWorkerConfigurationInput{})
+	got, err := svc.DescribeWorkerConfiguration(context.Background(), &DescribeWorkerConfigurationInput{
+		WorkerConfigurationArn: ptr.String("__WorkerConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -550,7 +672,11 @@ func TestCheckResponseSnapshot_ListConnectorOperations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConnectorOperations(context.Background(), &ListConnectorOperationsInput{})
+	got, err := svc.ListConnectorOperations(context.Background(), &ListConnectorOperationsInput{
+		ConnectorArn: ptr.String("__ConnectorArn__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -743,7 +869,11 @@ func TestCheckResponseSnapshot_ListConnectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConnectors(context.Background(), &ListConnectorsInput{})
+	got, err := svc.ListConnectors(context.Background(), &ListConnectorsInput{
+		ConnectorNamePrefix: ptr.String("__ConnectorNamePrefix__"),
+		MaxResults:          ptr.Int32(1),
+		NextToken:           ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -814,7 +944,11 @@ func TestCheckResponseSnapshot_ListCustomPlugins(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCustomPlugins(context.Background(), &ListCustomPluginsInput{})
+	got, err := svc.ListCustomPlugins(context.Background(), &ListCustomPluginsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		NamePrefix: ptr.String("__NamePrefix__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -837,7 +971,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -884,7 +1020,11 @@ func TestCheckResponseSnapshot_ListWorkerConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkerConfigurations(context.Background(), &ListWorkerConfigurationsInput{})
+	got, err := svc.ListWorkerConfigurations(context.Background(), &ListWorkerConfigurationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		NamePrefix: ptr.String("__NamePrefix__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -903,7 +1043,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -922,7 +1067,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -945,7 +1096,31 @@ func TestCheckResponseSnapshot_UpdateConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConnector(context.Background(), &UpdateConnectorInput{})
+	got, err := svc.UpdateConnector(context.Background(), &UpdateConnectorInput{
+		Capacity: &types.CapacityUpdate{
+			AutoScaling: &types.AutoScalingUpdate{
+				MaxWorkerCount: 1,
+				McuCount:       1,
+				MinWorkerCount: 1,
+				ScaleInPolicy: &types.ScaleInPolicyUpdate{
+					CpuUtilizationPercentage: 1,
+				},
+				ScaleOutPolicy: &types.ScaleOutPolicyUpdate{
+					CpuUtilizationPercentage: 1,
+				},
+				MaxAutoscalingTaskCount: 1,
+			},
+			ProvisionedCapacity: &types.ProvisionedCapacityUpdate{
+				McuCount:    1,
+				WorkerCount: 1,
+			},
+		},
+		ConnectorConfiguration: map[string]string{
+			"key0": "__Value__",
+		},
+		ConnectorArn:   ptr.String("__ConnectorArn__"),
+		CurrentVersion: ptr.String("__CurrentVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -966,7 +1141,93 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConnector(context.Background(), &CreateConnectorInput{})
+	_, opErr := svc.CreateConnector(context.Background(), &CreateConnectorInput{
+		Capacity: &types.Capacity{
+			AutoScaling: &types.AutoScaling{
+				MaxWorkerCount: 1,
+				McuCount:       1,
+				MinWorkerCount: 1,
+				ScaleInPolicy: &types.ScaleInPolicy{
+					CpuUtilizationPercentage: 1,
+				},
+				ScaleOutPolicy: &types.ScaleOutPolicy{
+					CpuUtilizationPercentage: 1,
+				},
+				MaxAutoscalingTaskCount: 1,
+			},
+			ProvisionedCapacity: &types.ProvisionedCapacity{
+				McuCount:    1,
+				WorkerCount: 1,
+			},
+		},
+		ConnectorConfiguration: map[string]string{
+			"key0": "__Value__",
+		},
+		ConnectorDescription: ptr.String("__ConnectorDescription__"),
+		ConnectorName:        ptr.String("__ConnectorName__"),
+		KafkaCluster: &types.KafkaCluster{
+			ApacheKafkaCluster: &types.ApacheKafkaCluster{
+				BootstrapServers: ptr.String("__BootstrapServers__"),
+				Vpc: &types.Vpc{
+					SecurityGroups: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Subnets: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		KafkaClusterClientAuthentication: &types.KafkaClusterClientAuthentication{
+			AuthenticationType: types.KafkaClusterClientAuthenticationType("NONE"),
+		},
+		KafkaClusterEncryptionInTransit: &types.KafkaClusterEncryptionInTransit{
+			EncryptionType: types.KafkaClusterEncryptionInTransitType("PLAINTEXT"),
+		},
+		KafkaConnectVersion: ptr.String("__KafkaConnectVersion__"),
+		LogDelivery: &types.LogDelivery{
+			WorkerLogDelivery: &types.WorkerLogDelivery{
+				CloudWatchLogs: &types.CloudWatchLogsLogDelivery{
+					Enabled:  true,
+					LogGroup: ptr.String("__LogGroup__"),
+				},
+				Firehose: &types.FirehoseLogDelivery{
+					DeliveryStream: ptr.String("__DeliveryStream__"),
+					Enabled:        true,
+				},
+				S3: &types.S3LogDelivery{
+					Bucket:  ptr.String("__Bucket__"),
+					Enabled: true,
+					Prefix:  ptr.String("__Prefix__"),
+				},
+			},
+		},
+		NetworkType: types.NetworkType("IPV4"),
+		Plugins: []types.Plugin{
+			{
+				CustomPlugin: &types.CustomPlugin{
+					CustomPluginArn: ptr.String("__CustomPluginArn__"),
+					Revision:        1,
+				},
+			},
+			{
+				CustomPlugin: &types.CustomPlugin{
+					CustomPluginArn: ptr.String("__CustomPluginArn__"),
+					Revision:        1,
+				},
+			},
+		},
+		ServiceExecutionRoleArn: ptr.String("__ServiceExecutionRoleArn__"),
+		WorkerConfiguration: &types.WorkerConfiguration{
+			Revision:               1,
+			WorkerConfigurationArn: ptr.String("__WorkerConfigurationArn__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -991,7 +1252,93 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConnector(context.Background(), &CreateConnectorInput{})
+	_, opErr := svc.CreateConnector(context.Background(), &CreateConnectorInput{
+		Capacity: &types.Capacity{
+			AutoScaling: &types.AutoScaling{
+				MaxWorkerCount: 1,
+				McuCount:       1,
+				MinWorkerCount: 1,
+				ScaleInPolicy: &types.ScaleInPolicy{
+					CpuUtilizationPercentage: 1,
+				},
+				ScaleOutPolicy: &types.ScaleOutPolicy{
+					CpuUtilizationPercentage: 1,
+				},
+				MaxAutoscalingTaskCount: 1,
+			},
+			ProvisionedCapacity: &types.ProvisionedCapacity{
+				McuCount:    1,
+				WorkerCount: 1,
+			},
+		},
+		ConnectorConfiguration: map[string]string{
+			"key0": "__Value__",
+		},
+		ConnectorDescription: ptr.String("__ConnectorDescription__"),
+		ConnectorName:        ptr.String("__ConnectorName__"),
+		KafkaCluster: &types.KafkaCluster{
+			ApacheKafkaCluster: &types.ApacheKafkaCluster{
+				BootstrapServers: ptr.String("__BootstrapServers__"),
+				Vpc: &types.Vpc{
+					SecurityGroups: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Subnets: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		KafkaClusterClientAuthentication: &types.KafkaClusterClientAuthentication{
+			AuthenticationType: types.KafkaClusterClientAuthenticationType("NONE"),
+		},
+		KafkaClusterEncryptionInTransit: &types.KafkaClusterEncryptionInTransit{
+			EncryptionType: types.KafkaClusterEncryptionInTransitType("PLAINTEXT"),
+		},
+		KafkaConnectVersion: ptr.String("__KafkaConnectVersion__"),
+		LogDelivery: &types.LogDelivery{
+			WorkerLogDelivery: &types.WorkerLogDelivery{
+				CloudWatchLogs: &types.CloudWatchLogsLogDelivery{
+					Enabled:  true,
+					LogGroup: ptr.String("__LogGroup__"),
+				},
+				Firehose: &types.FirehoseLogDelivery{
+					DeliveryStream: ptr.String("__DeliveryStream__"),
+					Enabled:        true,
+				},
+				S3: &types.S3LogDelivery{
+					Bucket:  ptr.String("__Bucket__"),
+					Enabled: true,
+					Prefix:  ptr.String("__Prefix__"),
+				},
+			},
+		},
+		NetworkType: types.NetworkType("IPV4"),
+		Plugins: []types.Plugin{
+			{
+				CustomPlugin: &types.CustomPlugin{
+					CustomPluginArn: ptr.String("__CustomPluginArn__"),
+					Revision:        1,
+				},
+			},
+			{
+				CustomPlugin: &types.CustomPlugin{
+					CustomPluginArn: ptr.String("__CustomPluginArn__"),
+					Revision:        1,
+				},
+			},
+		},
+		ServiceExecutionRoleArn: ptr.String("__ServiceExecutionRoleArn__"),
+		WorkerConfiguration: &types.WorkerConfiguration{
+			Revision:               1,
+			WorkerConfigurationArn: ptr.String("__WorkerConfigurationArn__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1016,7 +1363,93 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConnector(context.Background(), &CreateConnectorInput{})
+	_, opErr := svc.CreateConnector(context.Background(), &CreateConnectorInput{
+		Capacity: &types.Capacity{
+			AutoScaling: &types.AutoScaling{
+				MaxWorkerCount: 1,
+				McuCount:       1,
+				MinWorkerCount: 1,
+				ScaleInPolicy: &types.ScaleInPolicy{
+					CpuUtilizationPercentage: 1,
+				},
+				ScaleOutPolicy: &types.ScaleOutPolicy{
+					CpuUtilizationPercentage: 1,
+				},
+				MaxAutoscalingTaskCount: 1,
+			},
+			ProvisionedCapacity: &types.ProvisionedCapacity{
+				McuCount:    1,
+				WorkerCount: 1,
+			},
+		},
+		ConnectorConfiguration: map[string]string{
+			"key0": "__Value__",
+		},
+		ConnectorDescription: ptr.String("__ConnectorDescription__"),
+		ConnectorName:        ptr.String("__ConnectorName__"),
+		KafkaCluster: &types.KafkaCluster{
+			ApacheKafkaCluster: &types.ApacheKafkaCluster{
+				BootstrapServers: ptr.String("__BootstrapServers__"),
+				Vpc: &types.Vpc{
+					SecurityGroups: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Subnets: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		KafkaClusterClientAuthentication: &types.KafkaClusterClientAuthentication{
+			AuthenticationType: types.KafkaClusterClientAuthenticationType("NONE"),
+		},
+		KafkaClusterEncryptionInTransit: &types.KafkaClusterEncryptionInTransit{
+			EncryptionType: types.KafkaClusterEncryptionInTransitType("PLAINTEXT"),
+		},
+		KafkaConnectVersion: ptr.String("__KafkaConnectVersion__"),
+		LogDelivery: &types.LogDelivery{
+			WorkerLogDelivery: &types.WorkerLogDelivery{
+				CloudWatchLogs: &types.CloudWatchLogsLogDelivery{
+					Enabled:  true,
+					LogGroup: ptr.String("__LogGroup__"),
+				},
+				Firehose: &types.FirehoseLogDelivery{
+					DeliveryStream: ptr.String("__DeliveryStream__"),
+					Enabled:        true,
+				},
+				S3: &types.S3LogDelivery{
+					Bucket:  ptr.String("__Bucket__"),
+					Enabled: true,
+					Prefix:  ptr.String("__Prefix__"),
+				},
+			},
+		},
+		NetworkType: types.NetworkType("IPV4"),
+		Plugins: []types.Plugin{
+			{
+				CustomPlugin: &types.CustomPlugin{
+					CustomPluginArn: ptr.String("__CustomPluginArn__"),
+					Revision:        1,
+				},
+			},
+			{
+				CustomPlugin: &types.CustomPlugin{
+					CustomPluginArn: ptr.String("__CustomPluginArn__"),
+					Revision:        1,
+				},
+			},
+		},
+		ServiceExecutionRoleArn: ptr.String("__ServiceExecutionRoleArn__"),
+		WorkerConfiguration: &types.WorkerConfiguration{
+			Revision:               1,
+			WorkerConfigurationArn: ptr.String("__WorkerConfigurationArn__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1041,7 +1474,93 @@ func TestCheckResponseSnapshot_Error_InternalServerErrorException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConnector(context.Background(), &CreateConnectorInput{})
+	_, opErr := svc.CreateConnector(context.Background(), &CreateConnectorInput{
+		Capacity: &types.Capacity{
+			AutoScaling: &types.AutoScaling{
+				MaxWorkerCount: 1,
+				McuCount:       1,
+				MinWorkerCount: 1,
+				ScaleInPolicy: &types.ScaleInPolicy{
+					CpuUtilizationPercentage: 1,
+				},
+				ScaleOutPolicy: &types.ScaleOutPolicy{
+					CpuUtilizationPercentage: 1,
+				},
+				MaxAutoscalingTaskCount: 1,
+			},
+			ProvisionedCapacity: &types.ProvisionedCapacity{
+				McuCount:    1,
+				WorkerCount: 1,
+			},
+		},
+		ConnectorConfiguration: map[string]string{
+			"key0": "__Value__",
+		},
+		ConnectorDescription: ptr.String("__ConnectorDescription__"),
+		ConnectorName:        ptr.String("__ConnectorName__"),
+		KafkaCluster: &types.KafkaCluster{
+			ApacheKafkaCluster: &types.ApacheKafkaCluster{
+				BootstrapServers: ptr.String("__BootstrapServers__"),
+				Vpc: &types.Vpc{
+					SecurityGroups: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Subnets: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		KafkaClusterClientAuthentication: &types.KafkaClusterClientAuthentication{
+			AuthenticationType: types.KafkaClusterClientAuthenticationType("NONE"),
+		},
+		KafkaClusterEncryptionInTransit: &types.KafkaClusterEncryptionInTransit{
+			EncryptionType: types.KafkaClusterEncryptionInTransitType("PLAINTEXT"),
+		},
+		KafkaConnectVersion: ptr.String("__KafkaConnectVersion__"),
+		LogDelivery: &types.LogDelivery{
+			WorkerLogDelivery: &types.WorkerLogDelivery{
+				CloudWatchLogs: &types.CloudWatchLogsLogDelivery{
+					Enabled:  true,
+					LogGroup: ptr.String("__LogGroup__"),
+				},
+				Firehose: &types.FirehoseLogDelivery{
+					DeliveryStream: ptr.String("__DeliveryStream__"),
+					Enabled:        true,
+				},
+				S3: &types.S3LogDelivery{
+					Bucket:  ptr.String("__Bucket__"),
+					Enabled: true,
+					Prefix:  ptr.String("__Prefix__"),
+				},
+			},
+		},
+		NetworkType: types.NetworkType("IPV4"),
+		Plugins: []types.Plugin{
+			{
+				CustomPlugin: &types.CustomPlugin{
+					CustomPluginArn: ptr.String("__CustomPluginArn__"),
+					Revision:        1,
+				},
+			},
+			{
+				CustomPlugin: &types.CustomPlugin{
+					CustomPluginArn: ptr.String("__CustomPluginArn__"),
+					Revision:        1,
+				},
+			},
+		},
+		ServiceExecutionRoleArn: ptr.String("__ServiceExecutionRoleArn__"),
+		WorkerConfiguration: &types.WorkerConfiguration{
+			Revision:               1,
+			WorkerConfigurationArn: ptr.String("__WorkerConfigurationArn__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1066,7 +1585,93 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConnector(context.Background(), &CreateConnectorInput{})
+	_, opErr := svc.CreateConnector(context.Background(), &CreateConnectorInput{
+		Capacity: &types.Capacity{
+			AutoScaling: &types.AutoScaling{
+				MaxWorkerCount: 1,
+				McuCount:       1,
+				MinWorkerCount: 1,
+				ScaleInPolicy: &types.ScaleInPolicy{
+					CpuUtilizationPercentage: 1,
+				},
+				ScaleOutPolicy: &types.ScaleOutPolicy{
+					CpuUtilizationPercentage: 1,
+				},
+				MaxAutoscalingTaskCount: 1,
+			},
+			ProvisionedCapacity: &types.ProvisionedCapacity{
+				McuCount:    1,
+				WorkerCount: 1,
+			},
+		},
+		ConnectorConfiguration: map[string]string{
+			"key0": "__Value__",
+		},
+		ConnectorDescription: ptr.String("__ConnectorDescription__"),
+		ConnectorName:        ptr.String("__ConnectorName__"),
+		KafkaCluster: &types.KafkaCluster{
+			ApacheKafkaCluster: &types.ApacheKafkaCluster{
+				BootstrapServers: ptr.String("__BootstrapServers__"),
+				Vpc: &types.Vpc{
+					SecurityGroups: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Subnets: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		KafkaClusterClientAuthentication: &types.KafkaClusterClientAuthentication{
+			AuthenticationType: types.KafkaClusterClientAuthenticationType("NONE"),
+		},
+		KafkaClusterEncryptionInTransit: &types.KafkaClusterEncryptionInTransit{
+			EncryptionType: types.KafkaClusterEncryptionInTransitType("PLAINTEXT"),
+		},
+		KafkaConnectVersion: ptr.String("__KafkaConnectVersion__"),
+		LogDelivery: &types.LogDelivery{
+			WorkerLogDelivery: &types.WorkerLogDelivery{
+				CloudWatchLogs: &types.CloudWatchLogsLogDelivery{
+					Enabled:  true,
+					LogGroup: ptr.String("__LogGroup__"),
+				},
+				Firehose: &types.FirehoseLogDelivery{
+					DeliveryStream: ptr.String("__DeliveryStream__"),
+					Enabled:        true,
+				},
+				S3: &types.S3LogDelivery{
+					Bucket:  ptr.String("__Bucket__"),
+					Enabled: true,
+					Prefix:  ptr.String("__Prefix__"),
+				},
+			},
+		},
+		NetworkType: types.NetworkType("IPV4"),
+		Plugins: []types.Plugin{
+			{
+				CustomPlugin: &types.CustomPlugin{
+					CustomPluginArn: ptr.String("__CustomPluginArn__"),
+					Revision:        1,
+				},
+			},
+			{
+				CustomPlugin: &types.CustomPlugin{
+					CustomPluginArn: ptr.String("__CustomPluginArn__"),
+					Revision:        1,
+				},
+			},
+		},
+		ServiceExecutionRoleArn: ptr.String("__ServiceExecutionRoleArn__"),
+		WorkerConfiguration: &types.WorkerConfiguration{
+			Revision:               1,
+			WorkerConfigurationArn: ptr.String("__WorkerConfigurationArn__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1091,7 +1696,93 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConnector(context.Background(), &CreateConnectorInput{})
+	_, opErr := svc.CreateConnector(context.Background(), &CreateConnectorInput{
+		Capacity: &types.Capacity{
+			AutoScaling: &types.AutoScaling{
+				MaxWorkerCount: 1,
+				McuCount:       1,
+				MinWorkerCount: 1,
+				ScaleInPolicy: &types.ScaleInPolicy{
+					CpuUtilizationPercentage: 1,
+				},
+				ScaleOutPolicy: &types.ScaleOutPolicy{
+					CpuUtilizationPercentage: 1,
+				},
+				MaxAutoscalingTaskCount: 1,
+			},
+			ProvisionedCapacity: &types.ProvisionedCapacity{
+				McuCount:    1,
+				WorkerCount: 1,
+			},
+		},
+		ConnectorConfiguration: map[string]string{
+			"key0": "__Value__",
+		},
+		ConnectorDescription: ptr.String("__ConnectorDescription__"),
+		ConnectorName:        ptr.String("__ConnectorName__"),
+		KafkaCluster: &types.KafkaCluster{
+			ApacheKafkaCluster: &types.ApacheKafkaCluster{
+				BootstrapServers: ptr.String("__BootstrapServers__"),
+				Vpc: &types.Vpc{
+					SecurityGroups: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Subnets: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		KafkaClusterClientAuthentication: &types.KafkaClusterClientAuthentication{
+			AuthenticationType: types.KafkaClusterClientAuthenticationType("NONE"),
+		},
+		KafkaClusterEncryptionInTransit: &types.KafkaClusterEncryptionInTransit{
+			EncryptionType: types.KafkaClusterEncryptionInTransitType("PLAINTEXT"),
+		},
+		KafkaConnectVersion: ptr.String("__KafkaConnectVersion__"),
+		LogDelivery: &types.LogDelivery{
+			WorkerLogDelivery: &types.WorkerLogDelivery{
+				CloudWatchLogs: &types.CloudWatchLogsLogDelivery{
+					Enabled:  true,
+					LogGroup: ptr.String("__LogGroup__"),
+				},
+				Firehose: &types.FirehoseLogDelivery{
+					DeliveryStream: ptr.String("__DeliveryStream__"),
+					Enabled:        true,
+				},
+				S3: &types.S3LogDelivery{
+					Bucket:  ptr.String("__Bucket__"),
+					Enabled: true,
+					Prefix:  ptr.String("__Prefix__"),
+				},
+			},
+		},
+		NetworkType: types.NetworkType("IPV4"),
+		Plugins: []types.Plugin{
+			{
+				CustomPlugin: &types.CustomPlugin{
+					CustomPluginArn: ptr.String("__CustomPluginArn__"),
+					Revision:        1,
+				},
+			},
+			{
+				CustomPlugin: &types.CustomPlugin{
+					CustomPluginArn: ptr.String("__CustomPluginArn__"),
+					Revision:        1,
+				},
+			},
+		},
+		ServiceExecutionRoleArn: ptr.String("__ServiceExecutionRoleArn__"),
+		WorkerConfiguration: &types.WorkerConfiguration{
+			Revision:               1,
+			WorkerConfigurationArn: ptr.String("__WorkerConfigurationArn__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1116,7 +1807,93 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConnector(context.Background(), &CreateConnectorInput{})
+	_, opErr := svc.CreateConnector(context.Background(), &CreateConnectorInput{
+		Capacity: &types.Capacity{
+			AutoScaling: &types.AutoScaling{
+				MaxWorkerCount: 1,
+				McuCount:       1,
+				MinWorkerCount: 1,
+				ScaleInPolicy: &types.ScaleInPolicy{
+					CpuUtilizationPercentage: 1,
+				},
+				ScaleOutPolicy: &types.ScaleOutPolicy{
+					CpuUtilizationPercentage: 1,
+				},
+				MaxAutoscalingTaskCount: 1,
+			},
+			ProvisionedCapacity: &types.ProvisionedCapacity{
+				McuCount:    1,
+				WorkerCount: 1,
+			},
+		},
+		ConnectorConfiguration: map[string]string{
+			"key0": "__Value__",
+		},
+		ConnectorDescription: ptr.String("__ConnectorDescription__"),
+		ConnectorName:        ptr.String("__ConnectorName__"),
+		KafkaCluster: &types.KafkaCluster{
+			ApacheKafkaCluster: &types.ApacheKafkaCluster{
+				BootstrapServers: ptr.String("__BootstrapServers__"),
+				Vpc: &types.Vpc{
+					SecurityGroups: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Subnets: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		KafkaClusterClientAuthentication: &types.KafkaClusterClientAuthentication{
+			AuthenticationType: types.KafkaClusterClientAuthenticationType("NONE"),
+		},
+		KafkaClusterEncryptionInTransit: &types.KafkaClusterEncryptionInTransit{
+			EncryptionType: types.KafkaClusterEncryptionInTransitType("PLAINTEXT"),
+		},
+		KafkaConnectVersion: ptr.String("__KafkaConnectVersion__"),
+		LogDelivery: &types.LogDelivery{
+			WorkerLogDelivery: &types.WorkerLogDelivery{
+				CloudWatchLogs: &types.CloudWatchLogsLogDelivery{
+					Enabled:  true,
+					LogGroup: ptr.String("__LogGroup__"),
+				},
+				Firehose: &types.FirehoseLogDelivery{
+					DeliveryStream: ptr.String("__DeliveryStream__"),
+					Enabled:        true,
+				},
+				S3: &types.S3LogDelivery{
+					Bucket:  ptr.String("__Bucket__"),
+					Enabled: true,
+					Prefix:  ptr.String("__Prefix__"),
+				},
+			},
+		},
+		NetworkType: types.NetworkType("IPV4"),
+		Plugins: []types.Plugin{
+			{
+				CustomPlugin: &types.CustomPlugin{
+					CustomPluginArn: ptr.String("__CustomPluginArn__"),
+					Revision:        1,
+				},
+			},
+			{
+				CustomPlugin: &types.CustomPlugin{
+					CustomPluginArn: ptr.String("__CustomPluginArn__"),
+					Revision:        1,
+				},
+			},
+		},
+		ServiceExecutionRoleArn: ptr.String("__ServiceExecutionRoleArn__"),
+		WorkerConfiguration: &types.WorkerConfiguration{
+			Revision:               1,
+			WorkerConfigurationArn: ptr.String("__WorkerConfigurationArn__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1141,7 +1918,93 @@ func TestCheckResponseSnapshot_Error_UnauthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConnector(context.Background(), &CreateConnectorInput{})
+	_, opErr := svc.CreateConnector(context.Background(), &CreateConnectorInput{
+		Capacity: &types.Capacity{
+			AutoScaling: &types.AutoScaling{
+				MaxWorkerCount: 1,
+				McuCount:       1,
+				MinWorkerCount: 1,
+				ScaleInPolicy: &types.ScaleInPolicy{
+					CpuUtilizationPercentage: 1,
+				},
+				ScaleOutPolicy: &types.ScaleOutPolicy{
+					CpuUtilizationPercentage: 1,
+				},
+				MaxAutoscalingTaskCount: 1,
+			},
+			ProvisionedCapacity: &types.ProvisionedCapacity{
+				McuCount:    1,
+				WorkerCount: 1,
+			},
+		},
+		ConnectorConfiguration: map[string]string{
+			"key0": "__Value__",
+		},
+		ConnectorDescription: ptr.String("__ConnectorDescription__"),
+		ConnectorName:        ptr.String("__ConnectorName__"),
+		KafkaCluster: &types.KafkaCluster{
+			ApacheKafkaCluster: &types.ApacheKafkaCluster{
+				BootstrapServers: ptr.String("__BootstrapServers__"),
+				Vpc: &types.Vpc{
+					SecurityGroups: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Subnets: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		KafkaClusterClientAuthentication: &types.KafkaClusterClientAuthentication{
+			AuthenticationType: types.KafkaClusterClientAuthenticationType("NONE"),
+		},
+		KafkaClusterEncryptionInTransit: &types.KafkaClusterEncryptionInTransit{
+			EncryptionType: types.KafkaClusterEncryptionInTransitType("PLAINTEXT"),
+		},
+		KafkaConnectVersion: ptr.String("__KafkaConnectVersion__"),
+		LogDelivery: &types.LogDelivery{
+			WorkerLogDelivery: &types.WorkerLogDelivery{
+				CloudWatchLogs: &types.CloudWatchLogsLogDelivery{
+					Enabled:  true,
+					LogGroup: ptr.String("__LogGroup__"),
+				},
+				Firehose: &types.FirehoseLogDelivery{
+					DeliveryStream: ptr.String("__DeliveryStream__"),
+					Enabled:        true,
+				},
+				S3: &types.S3LogDelivery{
+					Bucket:  ptr.String("__Bucket__"),
+					Enabled: true,
+					Prefix:  ptr.String("__Prefix__"),
+				},
+			},
+		},
+		NetworkType: types.NetworkType("IPV4"),
+		Plugins: []types.Plugin{
+			{
+				CustomPlugin: &types.CustomPlugin{
+					CustomPluginArn: ptr.String("__CustomPluginArn__"),
+					Revision:        1,
+				},
+			},
+			{
+				CustomPlugin: &types.CustomPlugin{
+					CustomPluginArn: ptr.String("__CustomPluginArn__"),
+					Revision:        1,
+				},
+			},
+		},
+		ServiceExecutionRoleArn: ptr.String("__ServiceExecutionRoleArn__"),
+		WorkerConfiguration: &types.WorkerConfiguration{
+			Revision:               1,
+			WorkerConfigurationArn: ptr.String("__WorkerConfigurationArn__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

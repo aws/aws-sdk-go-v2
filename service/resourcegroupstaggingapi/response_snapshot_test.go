@@ -160,7 +160,30 @@ func TestCheckResponseSnapshot_GetComplianceSummary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetComplianceSummary(context.Background(), &GetComplianceSummaryInput{})
+	got, err := svc.GetComplianceSummary(context.Background(), &GetComplianceSummaryInput{
+		TargetIdFilters: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RegionFilters: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResourceTypeFilters: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TagKeyFilters: []string{
+			"__Member__",
+			"__Member__",
+		},
+		GroupBy: []types.GroupByAttribute{
+			types.GroupByAttribute("TARGET_ID"),
+			types.GroupByAttribute("TARGET_ID"),
+		},
+		MaxResults:      ptr.Int32(1),
+		PaginationToken: ptr.String("__PaginationToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -239,7 +262,37 @@ func TestCheckResponseSnapshot_GetResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResources(context.Background(), &GetResourcesInput{})
+	got, err := svc.GetResources(context.Background(), &GetResourcesInput{
+		PaginationToken: ptr.String("__PaginationToken__"),
+		TagFilters: []types.TagFilter{
+			{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ResourcesPerPage: ptr.Int32(1),
+		TagsPerPage:      ptr.Int32(1),
+		ResourceTypeFilters: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IncludeComplianceDetails:  ptr.Bool(true),
+		ExcludeCompliantResources: ptr.Bool(true),
+		ResourceARNList: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -264,7 +317,9 @@ func TestCheckResponseSnapshot_GetTagKeys(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTagKeys(context.Background(), &GetTagKeysInput{})
+	got, err := svc.GetTagKeys(context.Background(), &GetTagKeysInput{
+		PaginationToken: ptr.String("__PaginationToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -289,7 +344,10 @@ func TestCheckResponseSnapshot_GetTagValues(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTagValues(context.Background(), &GetTagValuesInput{})
+	got, err := svc.GetTagValues(context.Background(), &GetTagValuesInput{
+		PaginationToken: ptr.String("__PaginationToken__"),
+		Key:             ptr.String("__Key__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -334,7 +392,10 @@ func TestCheckResponseSnapshot_ListRequiredTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRequiredTags(context.Background(), &ListRequiredTagsInput{})
+	got, err := svc.ListRequiredTags(context.Background(), &ListRequiredTagsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -353,7 +414,9 @@ func TestCheckResponseSnapshot_StartReportCreation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartReportCreation(context.Background(), &StartReportCreationInput{})
+	got, err := svc.StartReportCreation(context.Background(), &StartReportCreationInput{
+		S3Bucket: ptr.String("__S3Bucket__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -380,7 +443,15 @@ func TestCheckResponseSnapshot_TagResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResources(context.Background(), &TagResourcesInput{})
+	got, err := svc.TagResources(context.Background(), &TagResourcesInput{
+		ResourceARNList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -407,7 +478,16 @@ func TestCheckResponseSnapshot_UntagResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResources(context.Background(), &UntagResourcesInput{})
+	got, err := svc.UntagResources(context.Background(), &UntagResourcesInput{
+		ResourceARNList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -428,7 +508,9 @@ func TestCheckResponseSnapshot_Error_ConcurrentModificationException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartReportCreation(context.Background(), &StartReportCreationInput{})
+	_, opErr := svc.StartReportCreation(context.Background(), &StartReportCreationInput{
+		S3Bucket: ptr.String("__S3Bucket__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -528,7 +610,37 @@ func TestCheckResponseSnapshot_Error_PaginationTokenExpiredException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetResources(context.Background(), &GetResourcesInput{})
+	_, opErr := svc.GetResources(context.Background(), &GetResourcesInput{
+		PaginationToken: ptr.String("__PaginationToken__"),
+		TagFilters: []types.TagFilter{
+			{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ResourcesPerPage: ptr.Int32(1),
+		TagsPerPage:      ptr.Int32(1),
+		ResourceTypeFilters: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IncludeComplianceDetails:  ptr.Bool(true),
+		ExcludeCompliantResources: ptr.Bool(true),
+		ResourceARNList: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

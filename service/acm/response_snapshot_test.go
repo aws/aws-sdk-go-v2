@@ -117,7 +117,19 @@ func TestCheckResponseSnapshot_AddTagsToCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddTagsToCertificate(context.Background(), &AddTagsToCertificateInput{})
+	got, err := svc.AddTagsToCertificate(context.Background(), &AddTagsToCertificateInput{
+		CertificateArn: ptr.String("__CertificateArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -138,7 +150,31 @@ func TestCheckResponseSnapshot_CreateAcmeDomainValidation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAcmeDomainValidation(context.Background(), &CreateAcmeDomainValidationInput{})
+	got, err := svc.CreateAcmeDomainValidation(context.Background(), &CreateAcmeDomainValidationInput{
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+		AcmeEndpointArn:  ptr.String("__AcmeEndpointArn__"),
+		DomainName:       ptr.String("__DomainName__"),
+		PrevalidationOptions: &types.PrevalidationOptionsMemberDnsPrevalidation{
+			Value: types.DnsPrevalidationOptions{
+				DomainScope: &types.DomainScope{
+					ExactDomain: types.DomainScopeOption("ENABLED"),
+					Subdomains:  types.DomainScopeOption("ENABLED"),
+					Wildcards:   types.DomainScopeOption("ENABLED"),
+				},
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -159,7 +195,39 @@ func TestCheckResponseSnapshot_CreateAcmeEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAcmeEndpoint(context.Background(), &CreateAcmeEndpointInput{})
+	got, err := svc.CreateAcmeEndpoint(context.Background(), &CreateAcmeEndpointInput{
+		IdempotencyToken:      ptr.String("__IdempotencyToken__"),
+		AuthorizationBehavior: types.AcmeAuthorizationBehavior("PRE_APPROVED"),
+		Contact:               types.AcmeContact("REQUIRED"),
+		CertificateAuthority: &types.CertificateAuthorityMemberPublicCertificateAuthority{
+			Value: types.PublicCertificateAuthority{
+				AllowedKeyAlgorithms: []types.PublicKeyAlgorithm{
+					types.PublicKeyAlgorithm("RSA_2048"),
+					types.PublicKeyAlgorithm("RSA_2048"),
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		CertificateTags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -189,7 +257,25 @@ func TestCheckResponseSnapshot_CreateAcmeExternalAccountBinding(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAcmeExternalAccountBinding(context.Background(), &CreateAcmeExternalAccountBindingInput{})
+	got, err := svc.CreateAcmeExternalAccountBinding(context.Background(), &CreateAcmeExternalAccountBindingInput{
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+		AcmeEndpointArn:  ptr.String("__AcmeEndpointArn__"),
+		RoleArn:          ptr.String("__RoleArn__"),
+		Expiration: &types.Expiration{
+			Value: ptr.Int64(1),
+			Type:  types.TimeType("MINUTES"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -208,7 +294,9 @@ func TestCheckResponseSnapshot_DeleteAcmeDomainValidation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAcmeDomainValidation(context.Background(), &DeleteAcmeDomainValidationInput{})
+	got, err := svc.DeleteAcmeDomainValidation(context.Background(), &DeleteAcmeDomainValidationInput{
+		AcmeDomainValidationArn: ptr.String("__AcmeDomainValidationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -227,7 +315,9 @@ func TestCheckResponseSnapshot_DeleteAcmeEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAcmeEndpoint(context.Background(), &DeleteAcmeEndpointInput{})
+	got, err := svc.DeleteAcmeEndpoint(context.Background(), &DeleteAcmeEndpointInput{
+		AcmeEndpointArn: ptr.String("__AcmeEndpointArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -246,7 +336,9 @@ func TestCheckResponseSnapshot_DeleteAcmeExternalAccountBinding(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAcmeExternalAccountBinding(context.Background(), &DeleteAcmeExternalAccountBindingInput{})
+	got, err := svc.DeleteAcmeExternalAccountBinding(context.Background(), &DeleteAcmeExternalAccountBindingInput{
+		AcmeExternalAccountBindingArn: ptr.String("__AcmeExternalAccountBindingArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -265,7 +357,9 @@ func TestCheckResponseSnapshot_DeleteCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCertificate(context.Background(), &DeleteCertificateInput{})
+	got, err := svc.DeleteCertificate(context.Background(), &DeleteCertificateInput{
+		CertificateArn: ptr.String("__CertificateArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -296,7 +390,10 @@ func TestCheckResponseSnapshot_DescribeAcmeAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAcmeAccount(context.Background(), &DescribeAcmeAccountInput{})
+	got, err := svc.DescribeAcmeAccount(context.Background(), &DescribeAcmeAccountInput{
+		AcmeEndpointArn: ptr.String("__AcmeEndpointArn__"),
+		AccountUrl:      ptr.String("__AccountUrl__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -344,7 +441,9 @@ func TestCheckResponseSnapshot_DescribeAcmeDomainValidation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAcmeDomainValidation(context.Background(), &DescribeAcmeDomainValidationInput{})
+	got, err := svc.DescribeAcmeDomainValidation(context.Background(), &DescribeAcmeDomainValidationInput{
+		AcmeDomainValidationArn: ptr.String("__AcmeDomainValidationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -392,7 +491,9 @@ func TestCheckResponseSnapshot_DescribeAcmeEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAcmeEndpoint(context.Background(), &DescribeAcmeEndpointInput{})
+	got, err := svc.DescribeAcmeEndpoint(context.Background(), &DescribeAcmeEndpointInput{
+		AcmeEndpointArn: ptr.String("__AcmeEndpointArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -422,7 +523,9 @@ func TestCheckResponseSnapshot_DescribeAcmeExternalAccountBinding(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAcmeExternalAccountBinding(context.Background(), &DescribeAcmeExternalAccountBindingInput{})
+	got, err := svc.DescribeAcmeExternalAccountBinding(context.Background(), &DescribeAcmeExternalAccountBindingInput{
+		AcmeExternalAccountBindingArn: ptr.String("__AcmeExternalAccountBindingArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -582,7 +685,9 @@ func TestCheckResponseSnapshot_DescribeCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCertificate(context.Background(), &DescribeCertificateInput{})
+	got, err := svc.DescribeCertificate(context.Background(), &DescribeCertificateInput{
+		CertificateArn: ptr.String("__CertificateArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -605,7 +710,10 @@ func TestCheckResponseSnapshot_ExportCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExportCertificate(context.Background(), &ExportCertificateInput{})
+	got, err := svc.ExportCertificate(context.Background(), &ExportCertificateInput{
+		CertificateArn: ptr.String("__CertificateArn__"),
+		Passphrase:     []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -650,7 +758,9 @@ func TestCheckResponseSnapshot_GetAcmeExternalAccountBindingCredentials(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAcmeExternalAccountBindingCredentials(context.Background(), &GetAcmeExternalAccountBindingCredentialsInput{})
+	got, err := svc.GetAcmeExternalAccountBindingCredentials(context.Background(), &GetAcmeExternalAccountBindingCredentialsInput{
+		AcmeExternalAccountBindingArn: ptr.String("__AcmeExternalAccountBindingArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -672,7 +782,9 @@ func TestCheckResponseSnapshot_GetCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCertificate(context.Background(), &GetCertificateInput{})
+	got, err := svc.GetCertificate(context.Background(), &GetCertificateInput{
+		CertificateArn: ptr.String("__CertificateArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -693,7 +805,22 @@ func TestCheckResponseSnapshot_ImportCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportCertificate(context.Background(), &ImportCertificateInput{})
+	got, err := svc.ImportCertificate(context.Background(), &ImportCertificateInput{
+		CertificateArn:   ptr.String("__CertificateArn__"),
+		Certificate:      []byte("blob"),
+		PrivateKey:       []byte("blob"),
+		CertificateChain: []byte("blob"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -738,7 +865,11 @@ func TestCheckResponseSnapshot_ListAcmeAccounts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAcmeAccounts(context.Background(), &ListAcmeAccountsInput{})
+	got, err := svc.ListAcmeAccounts(context.Background(), &ListAcmeAccountsInput{
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		AcmeEndpointArn: ptr.String("__AcmeEndpointArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -817,7 +948,11 @@ func TestCheckResponseSnapshot_ListAcmeDomainValidations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAcmeDomainValidations(context.Background(), &ListAcmeDomainValidationsInput{})
+	got, err := svc.ListAcmeDomainValidations(context.Background(), &ListAcmeDomainValidationsInput{
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		AcmeEndpointArn: ptr.String("__AcmeEndpointArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -896,7 +1031,10 @@ func TestCheckResponseSnapshot_ListAcmeEndpoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAcmeEndpoints(context.Background(), &ListAcmeEndpointsInput{})
+	got, err := svc.ListAcmeEndpoints(context.Background(), &ListAcmeEndpointsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -939,7 +1077,11 @@ func TestCheckResponseSnapshot_ListAcmeExternalAccountBindings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAcmeExternalAccountBindings(context.Background(), &ListAcmeExternalAccountBindingsInput{})
+	got, err := svc.ListAcmeExternalAccountBindings(context.Background(), &ListAcmeExternalAccountBindingsInput{
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		AcmeEndpointArn: ptr.String("__AcmeEndpointArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1026,7 +1168,36 @@ func TestCheckResponseSnapshot_ListCertificates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCertificates(context.Background(), &ListCertificatesInput{})
+	got, err := svc.ListCertificates(context.Background(), &ListCertificatesInput{
+		CertificateStatuses: []types.CertificateStatus{
+			types.CertificateStatus("PENDING_VALIDATION"),
+			types.CertificateStatus("PENDING_VALIDATION"),
+		},
+		CertificateKeyPairOrigins: []types.CertificateKeyPairOrigin{
+			types.CertificateKeyPairOrigin("AWS_MANAGED"),
+			types.CertificateKeyPairOrigin("AWS_MANAGED"),
+		},
+		Includes: &types.Filters{
+			ExtendedKeyUsage: []types.ExtendedKeyUsageName{
+				types.ExtendedKeyUsageName("TLS_WEB_SERVER_AUTHENTICATION"),
+				types.ExtendedKeyUsageName("TLS_WEB_SERVER_AUTHENTICATION"),
+			},
+			KeyUsage: []types.KeyUsageName{
+				types.KeyUsageName("DIGITAL_SIGNATURE"),
+				types.KeyUsageName("DIGITAL_SIGNATURE"),
+			},
+			KeyTypes: []types.KeyAlgorithm{
+				types.KeyAlgorithm("RSA_1024"),
+				types.KeyAlgorithm("RSA_1024"),
+			},
+			ExportOption: types.CertificateExport("ENABLED"),
+			ManagedBy:    types.CertificateManagedBy("CLOUDFRONT"),
+		},
+		NextToken: ptr.String("__NextToken__"),
+		MaxItems:  ptr.Int32(1),
+		SortBy:    types.SortBy("CREATED_AT"),
+		SortOrder: types.SortOrder("ASCENDING"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1056,7 +1227,9 @@ func TestCheckResponseSnapshot_ListTagsForCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForCertificate(context.Background(), &ListTagsForCertificateInput{})
+	got, err := svc.ListTagsForCertificate(context.Background(), &ListTagsForCertificateInput{
+		CertificateArn: ptr.String("__CertificateArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1086,7 +1259,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1105,7 +1280,12 @@ func TestCheckResponseSnapshot_PutAccountConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAccountConfiguration(context.Background(), &PutAccountConfigurationInput{})
+	got, err := svc.PutAccountConfiguration(context.Background(), &PutAccountConfigurationInput{
+		ExpiryEvents: &types.ExpiryEventsConfiguration{
+			DaysBeforeExpiry: ptr.Int32(1),
+		},
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1124,7 +1304,19 @@ func TestCheckResponseSnapshot_RemoveTagsFromCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveTagsFromCertificate(context.Background(), &RemoveTagsFromCertificateInput{})
+	got, err := svc.RemoveTagsFromCertificate(context.Background(), &RemoveTagsFromCertificateInput{
+		CertificateArn: ptr.String("__CertificateArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1143,7 +1335,9 @@ func TestCheckResponseSnapshot_RenewCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RenewCertificate(context.Background(), &RenewCertificateInput{})
+	got, err := svc.RenewCertificate(context.Background(), &RenewCertificateInput{
+		CertificateArn: ptr.String("__CertificateArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1164,7 +1358,42 @@ func TestCheckResponseSnapshot_RequestCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RequestCertificate(context.Background(), &RequestCertificateInput{})
+	got, err := svc.RequestCertificate(context.Background(), &RequestCertificateInput{
+		DomainName:       ptr.String("__DomainName__"),
+		ValidationMethod: types.ValidationMethod("EMAIL"),
+		SubjectAlternativeNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+		DomainValidationOptions: []types.DomainValidationOption{
+			{
+				DomainName:       ptr.String("__DomainName__"),
+				ValidationDomain: ptr.String("__ValidationDomain__"),
+			},
+			{
+				DomainName:       ptr.String("__DomainName__"),
+				ValidationDomain: ptr.String("__ValidationDomain__"),
+			},
+		},
+		Options: &types.CertificateOptions{
+			CertificateTransparencyLoggingPreference: types.CertificateTransparencyLoggingPreference("ENABLED"),
+			Export:                                   types.CertificateExport("ENABLED"),
+		},
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		KeyAlgorithm: types.KeyAlgorithm("RSA_1024"),
+		ManagedBy:    types.CertificateManagedBy("CLOUDFRONT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1183,7 +1412,11 @@ func TestCheckResponseSnapshot_ResendValidationEmail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResendValidationEmail(context.Background(), &ResendValidationEmailInput{})
+	got, err := svc.ResendValidationEmail(context.Background(), &ResendValidationEmailInput{
+		CertificateArn:   ptr.String("__CertificateArn__"),
+		Domain:           ptr.String("__Domain__"),
+		ValidationDomain: ptr.String("__ValidationDomain__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1202,7 +1435,10 @@ func TestCheckResponseSnapshot_RevokeAcmeAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RevokeAcmeAccount(context.Background(), &RevokeAcmeAccountInput{})
+	got, err := svc.RevokeAcmeAccount(context.Background(), &RevokeAcmeAccountInput{
+		AcmeEndpointArn: ptr.String("__AcmeEndpointArn__"),
+		AccountUrl:      ptr.String("__AccountUrl__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1221,7 +1457,9 @@ func TestCheckResponseSnapshot_RevokeAcmeExternalAccountBinding(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RevokeAcmeExternalAccountBinding(context.Background(), &RevokeAcmeExternalAccountBindingInput{})
+	got, err := svc.RevokeAcmeExternalAccountBinding(context.Background(), &RevokeAcmeExternalAccountBindingInput{
+		AcmeExternalAccountBindingArn: ptr.String("__AcmeExternalAccountBindingArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1242,7 +1480,10 @@ func TestCheckResponseSnapshot_RevokeCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RevokeCertificate(context.Background(), &RevokeCertificateInput{})
+	got, err := svc.RevokeCertificate(context.Background(), &RevokeCertificateInput{
+		CertificateArn:   ptr.String("__CertificateArn__"),
+		RevocationReason: types.RevocationReason("UNSPECIFIED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1591,7 +1832,26 @@ func TestCheckResponseSnapshot_SearchCertificates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchCertificates(context.Background(), &SearchCertificatesInput{})
+	got, err := svc.SearchCertificates(context.Background(), &SearchCertificatesInput{
+		FilterStatement: &types.CertificateFilterStatementMemberAnd{
+			Value: []types.CertificateFilterStatement{
+				&types.CertificateFilterStatementMemberFilter{
+					Value: &types.CertificateFilterMemberCertificateArn{
+						Value: "__CertificateFilterMemberCertificateArn__",
+					},
+				},
+				&types.CertificateFilterStatementMemberFilter{
+					Value: &types.CertificateFilterMemberCertificateArn{
+						Value: "__CertificateFilterMemberCertificateArn__",
+					},
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		SortBy:     types.SearchCertificatesSortBy("CREATED_AT"),
+		SortOrder:  types.SearchCertificatesSortOrder("ASCENDING"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1610,7 +1870,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1629,7 +1901,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1648,7 +1926,19 @@ func TestCheckResponseSnapshot_UpdateAcmeDomainValidation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAcmeDomainValidation(context.Background(), &UpdateAcmeDomainValidationInput{})
+	got, err := svc.UpdateAcmeDomainValidation(context.Background(), &UpdateAcmeDomainValidationInput{
+		AcmeDomainValidationArn: ptr.String("__AcmeDomainValidationArn__"),
+		PrevalidationOptions: &types.PrevalidationOptionsMemberDnsPrevalidation{
+			Value: types.DnsPrevalidationOptions{
+				DomainScope: &types.DomainScope{
+					ExactDomain: types.DomainScopeOption("ENABLED"),
+					Subdomains:  types.DomainScopeOption("ENABLED"),
+					Wildcards:   types.DomainScopeOption("ENABLED"),
+				},
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1667,7 +1957,19 @@ func TestCheckResponseSnapshot_UpdateAcmeEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAcmeEndpoint(context.Background(), &UpdateAcmeEndpointInput{})
+	got, err := svc.UpdateAcmeEndpoint(context.Background(), &UpdateAcmeEndpointInput{
+		AcmeEndpointArn:       ptr.String("__AcmeEndpointArn__"),
+		AuthorizationBehavior: types.AcmeAuthorizationBehavior("PRE_APPROVED"),
+		Contact:               types.AcmeContact("REQUIRED"),
+		CertificateAuthority: &types.CertificateAuthorityMemberPublicCertificateAuthority{
+			Value: types.PublicCertificateAuthority{
+				AllowedKeyAlgorithms: []types.PublicKeyAlgorithm{
+					types.PublicKeyAlgorithm("RSA_2048"),
+					types.PublicKeyAlgorithm("RSA_2048"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1686,7 +1988,13 @@ func TestCheckResponseSnapshot_UpdateCertificateOptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCertificateOptions(context.Background(), &UpdateCertificateOptionsInput{})
+	got, err := svc.UpdateCertificateOptions(context.Background(), &UpdateCertificateOptionsInput{
+		CertificateArn: ptr.String("__CertificateArn__"),
+		Options: &types.CertificateOptions{
+			CertificateTransparencyLoggingPreference: types.CertificateTransparencyLoggingPreference("ENABLED"),
+			Export:                                   types.CertificateExport("ENABLED"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1707,7 +2015,31 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAcmeDomainValidation(context.Background(), &CreateAcmeDomainValidationInput{})
+	_, opErr := svc.CreateAcmeDomainValidation(context.Background(), &CreateAcmeDomainValidationInput{
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+		AcmeEndpointArn:  ptr.String("__AcmeEndpointArn__"),
+		DomainName:       ptr.String("__DomainName__"),
+		PrevalidationOptions: &types.PrevalidationOptionsMemberDnsPrevalidation{
+			Value: types.DnsPrevalidationOptions{
+				DomainScope: &types.DomainScope{
+					ExactDomain: types.DomainScopeOption("ENABLED"),
+					Subdomains:  types.DomainScopeOption("ENABLED"),
+					Wildcards:   types.DomainScopeOption("ENABLED"),
+				},
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1732,7 +2064,31 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAcmeDomainValidation(context.Background(), &CreateAcmeDomainValidationInput{})
+	_, opErr := svc.CreateAcmeDomainValidation(context.Background(), &CreateAcmeDomainValidationInput{
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+		AcmeEndpointArn:  ptr.String("__AcmeEndpointArn__"),
+		DomainName:       ptr.String("__DomainName__"),
+		PrevalidationOptions: &types.PrevalidationOptionsMemberDnsPrevalidation{
+			Value: types.DnsPrevalidationOptions{
+				DomainScope: &types.DomainScope{
+					ExactDomain: types.DomainScopeOption("ENABLED"),
+					Subdomains:  types.DomainScopeOption("ENABLED"),
+					Wildcards:   types.DomainScopeOption("ENABLED"),
+				},
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1757,7 +2113,31 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAcmeDomainValidation(context.Background(), &CreateAcmeDomainValidationInput{})
+	_, opErr := svc.CreateAcmeDomainValidation(context.Background(), &CreateAcmeDomainValidationInput{
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+		AcmeEndpointArn:  ptr.String("__AcmeEndpointArn__"),
+		DomainName:       ptr.String("__DomainName__"),
+		PrevalidationOptions: &types.PrevalidationOptionsMemberDnsPrevalidation{
+			Value: types.DnsPrevalidationOptions{
+				DomainScope: &types.DomainScope{
+					ExactDomain: types.DomainScopeOption("ENABLED"),
+					Subdomains:  types.DomainScopeOption("ENABLED"),
+					Wildcards:   types.DomainScopeOption("ENABLED"),
+				},
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1782,7 +2162,36 @@ func TestCheckResponseSnapshot_Error_InvalidArgsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListCertificates(context.Background(), &ListCertificatesInput{})
+	_, opErr := svc.ListCertificates(context.Background(), &ListCertificatesInput{
+		CertificateStatuses: []types.CertificateStatus{
+			types.CertificateStatus("PENDING_VALIDATION"),
+			types.CertificateStatus("PENDING_VALIDATION"),
+		},
+		CertificateKeyPairOrigins: []types.CertificateKeyPairOrigin{
+			types.CertificateKeyPairOrigin("AWS_MANAGED"),
+			types.CertificateKeyPairOrigin("AWS_MANAGED"),
+		},
+		Includes: &types.Filters{
+			ExtendedKeyUsage: []types.ExtendedKeyUsageName{
+				types.ExtendedKeyUsageName("TLS_WEB_SERVER_AUTHENTICATION"),
+				types.ExtendedKeyUsageName("TLS_WEB_SERVER_AUTHENTICATION"),
+			},
+			KeyUsage: []types.KeyUsageName{
+				types.KeyUsageName("DIGITAL_SIGNATURE"),
+				types.KeyUsageName("DIGITAL_SIGNATURE"),
+			},
+			KeyTypes: []types.KeyAlgorithm{
+				types.KeyAlgorithm("RSA_1024"),
+				types.KeyAlgorithm("RSA_1024"),
+			},
+			ExportOption: types.CertificateExport("ENABLED"),
+			ManagedBy:    types.CertificateManagedBy("CLOUDFRONT"),
+		},
+		NextToken: ptr.String("__NextToken__"),
+		MaxItems:  ptr.Int32(1),
+		SortBy:    types.SortBy("CREATED_AT"),
+		SortOrder: types.SortOrder("ASCENDING"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1807,7 +2216,19 @@ func TestCheckResponseSnapshot_Error_InvalidArnException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToCertificate(context.Background(), &AddTagsToCertificateInput{})
+	_, opErr := svc.AddTagsToCertificate(context.Background(), &AddTagsToCertificateInput{
+		CertificateArn: ptr.String("__CertificateArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1832,7 +2253,42 @@ func TestCheckResponseSnapshot_Error_InvalidDomainValidationOptionsException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RequestCertificate(context.Background(), &RequestCertificateInput{})
+	_, opErr := svc.RequestCertificate(context.Background(), &RequestCertificateInput{
+		DomainName:       ptr.String("__DomainName__"),
+		ValidationMethod: types.ValidationMethod("EMAIL"),
+		SubjectAlternativeNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+		DomainValidationOptions: []types.DomainValidationOption{
+			{
+				DomainName:       ptr.String("__DomainName__"),
+				ValidationDomain: ptr.String("__ValidationDomain__"),
+			},
+			{
+				DomainName:       ptr.String("__DomainName__"),
+				ValidationDomain: ptr.String("__ValidationDomain__"),
+			},
+		},
+		Options: &types.CertificateOptions{
+			CertificateTransparencyLoggingPreference: types.CertificateTransparencyLoggingPreference("ENABLED"),
+			Export:                                   types.CertificateExport("ENABLED"),
+		},
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		KeyAlgorithm: types.KeyAlgorithm("RSA_1024"),
+		ManagedBy:    types.CertificateManagedBy("CLOUDFRONT"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1857,7 +2313,19 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToCertificate(context.Background(), &AddTagsToCertificateInput{})
+	_, opErr := svc.AddTagsToCertificate(context.Background(), &AddTagsToCertificateInput{
+		CertificateArn: ptr.String("__CertificateArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1882,7 +2350,11 @@ func TestCheckResponseSnapshot_Error_InvalidStateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ResendValidationEmail(context.Background(), &ResendValidationEmailInput{})
+	_, opErr := svc.ResendValidationEmail(context.Background(), &ResendValidationEmailInput{
+		CertificateArn:   ptr.String("__CertificateArn__"),
+		Domain:           ptr.String("__Domain__"),
+		ValidationDomain: ptr.String("__ValidationDomain__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1907,7 +2379,19 @@ func TestCheckResponseSnapshot_Error_InvalidTagException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToCertificate(context.Background(), &AddTagsToCertificateInput{})
+	_, opErr := svc.AddTagsToCertificate(context.Background(), &AddTagsToCertificateInput{
+		CertificateArn: ptr.String("__CertificateArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1932,7 +2416,22 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ImportCertificate(context.Background(), &ImportCertificateInput{})
+	_, opErr := svc.ImportCertificate(context.Background(), &ImportCertificateInput{
+		CertificateArn:   ptr.String("__CertificateArn__"),
+		Certificate:      []byte("blob"),
+		PrivateKey:       []byte("blob"),
+		CertificateChain: []byte("blob"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1957,7 +2456,10 @@ func TestCheckResponseSnapshot_Error_RequestInProgressException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ExportCertificate(context.Background(), &ExportCertificateInput{})
+	_, opErr := svc.ExportCertificate(context.Background(), &ExportCertificateInput{
+		CertificateArn: ptr.String("__CertificateArn__"),
+		Passphrase:     []byte("blob"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1982,7 +2484,9 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteCertificate(context.Background(), &DeleteCertificateInput{})
+	_, opErr := svc.DeleteCertificate(context.Background(), &DeleteCertificateInput{
+		CertificateArn: ptr.String("__CertificateArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2007,7 +2511,19 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToCertificate(context.Background(), &AddTagsToCertificateInput{})
+	_, opErr := svc.AddTagsToCertificate(context.Background(), &AddTagsToCertificateInput{
+		CertificateArn: ptr.String("__CertificateArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2032,7 +2548,31 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAcmeDomainValidation(context.Background(), &CreateAcmeDomainValidationInput{})
+	_, opErr := svc.CreateAcmeDomainValidation(context.Background(), &CreateAcmeDomainValidationInput{
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+		AcmeEndpointArn:  ptr.String("__AcmeEndpointArn__"),
+		DomainName:       ptr.String("__DomainName__"),
+		PrevalidationOptions: &types.PrevalidationOptionsMemberDnsPrevalidation{
+			Value: types.DnsPrevalidationOptions{
+				DomainScope: &types.DomainScope{
+					ExactDomain: types.DomainScopeOption("ENABLED"),
+					Subdomains:  types.DomainScopeOption("ENABLED"),
+					Wildcards:   types.DomainScopeOption("ENABLED"),
+				},
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2057,7 +2597,19 @@ func TestCheckResponseSnapshot_Error_TagPolicyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToCertificate(context.Background(), &AddTagsToCertificateInput{})
+	_, opErr := svc.AddTagsToCertificate(context.Background(), &AddTagsToCertificateInput{
+		CertificateArn: ptr.String("__CertificateArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2092,7 +2644,19 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToCertificate(context.Background(), &AddTagsToCertificateInput{})
+	_, opErr := svc.AddTagsToCertificate(context.Background(), &AddTagsToCertificateInput{
+		CertificateArn: ptr.String("__CertificateArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2117,7 +2681,19 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToCertificate(context.Background(), &AddTagsToCertificateInput{})
+	_, opErr := svc.AddTagsToCertificate(context.Background(), &AddTagsToCertificateInput{
+		CertificateArn: ptr.String("__CertificateArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2142,7 +2718,19 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToCertificate(context.Background(), &AddTagsToCertificateInput{})
+	_, opErr := svc.AddTagsToCertificate(context.Background(), &AddTagsToCertificateInput{
+		CertificateArn: ptr.String("__CertificateArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

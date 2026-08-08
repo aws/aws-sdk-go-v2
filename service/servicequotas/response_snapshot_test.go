@@ -136,7 +136,9 @@ func TestCheckResponseSnapshot_CreateSupportCase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSupportCase(context.Background(), &CreateSupportCaseInput{})
+	got, err := svc.CreateSupportCase(context.Background(), &CreateSupportCaseInput{
+		RequestId: ptr.String("__RequestId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -155,7 +157,11 @@ func TestCheckResponseSnapshot_DeleteServiceQuotaIncreaseRequestFromTemplate(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteServiceQuotaIncreaseRequestFromTemplate(context.Background(), &DeleteServiceQuotaIncreaseRequestFromTemplateInput{})
+	got, err := svc.DeleteServiceQuotaIncreaseRequestFromTemplate(context.Background(), &DeleteServiceQuotaIncreaseRequestFromTemplateInput{
+		ServiceCode: ptr.String("__ServiceCode__"),
+		QuotaCode:   ptr.String("__QuotaCode__"),
+		AwsRegion:   ptr.String("__AwsRegion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -228,7 +234,10 @@ func TestCheckResponseSnapshot_GetAWSDefaultServiceQuota(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAWSDefaultServiceQuota(context.Background(), &GetAWSDefaultServiceQuotaInput{})
+	got, err := svc.GetAWSDefaultServiceQuota(context.Background(), &GetAWSDefaultServiceQuotaInput{
+		ServiceCode: ptr.String("__ServiceCode__"),
+		QuotaCode:   ptr.String("__QuotaCode__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -336,7 +345,11 @@ func TestCheckResponseSnapshot_GetQuotaUtilizationReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQuotaUtilizationReport(context.Background(), &GetQuotaUtilizationReportInput{})
+	got, err := svc.GetQuotaUtilizationReport(context.Background(), &GetQuotaUtilizationReportInput{
+		ReportId:   ptr.String("__ReportId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -379,7 +392,9 @@ func TestCheckResponseSnapshot_GetRequestedServiceQuotaChange(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRequestedServiceQuotaChange(context.Background(), &GetRequestedServiceQuotaChangeInput{})
+	got, err := svc.GetRequestedServiceQuotaChange(context.Background(), &GetRequestedServiceQuotaChangeInput{
+		RequestId: ptr.String("__RequestId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -433,7 +448,11 @@ func TestCheckResponseSnapshot_GetServiceQuota(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetServiceQuota(context.Background(), &GetServiceQuotaInput{})
+	got, err := svc.GetServiceQuota(context.Background(), &GetServiceQuotaInput{
+		ServiceCode: ptr.String("__ServiceCode__"),
+		QuotaCode:   ptr.String("__QuotaCode__"),
+		ContextId:   ptr.String("__ContextId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -463,7 +482,11 @@ func TestCheckResponseSnapshot_GetServiceQuotaIncreaseRequestFromTemplate(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetServiceQuotaIncreaseRequestFromTemplate(context.Background(), &GetServiceQuotaIncreaseRequestFromTemplateInput{})
+	got, err := svc.GetServiceQuotaIncreaseRequestFromTemplate(context.Background(), &GetServiceQuotaIncreaseRequestFromTemplateInput{
+		ServiceCode: ptr.String("__ServiceCode__"),
+		QuotaCode:   ptr.String("__QuotaCode__"),
+		AwsRegion:   ptr.String("__AwsRegion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -554,7 +577,11 @@ func TestCheckResponseSnapshot_ListAWSDefaultServiceQuotas(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAWSDefaultServiceQuotas(context.Background(), &ListAWSDefaultServiceQuotasInput{})
+	got, err := svc.ListAWSDefaultServiceQuotas(context.Background(), &ListAWSDefaultServiceQuotasInput{
+		ServiceCode: ptr.String("__ServiceCode__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -623,7 +650,13 @@ func TestCheckResponseSnapshot_ListRequestedServiceQuotaChangeHistory(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRequestedServiceQuotaChangeHistory(context.Background(), &ListRequestedServiceQuotaChangeHistoryInput{})
+	got, err := svc.ListRequestedServiceQuotaChangeHistory(context.Background(), &ListRequestedServiceQuotaChangeHistoryInput{
+		ServiceCode:           ptr.String("__ServiceCode__"),
+		Status:                types.RequestStatus("PENDING"),
+		NextToken:             ptr.String("__NextToken__"),
+		MaxResults:            ptr.Int32(1),
+		QuotaRequestedAtLevel: types.AppliedLevelEnum("ACCOUNT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -692,7 +725,14 @@ func TestCheckResponseSnapshot_ListRequestedServiceQuotaChangeHistoryByQuota(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRequestedServiceQuotaChangeHistoryByQuota(context.Background(), &ListRequestedServiceQuotaChangeHistoryByQuotaInput{})
+	got, err := svc.ListRequestedServiceQuotaChangeHistoryByQuota(context.Background(), &ListRequestedServiceQuotaChangeHistoryByQuotaInput{
+		ServiceCode:           ptr.String("__ServiceCode__"),
+		QuotaCode:             ptr.String("__QuotaCode__"),
+		Status:                types.RequestStatus("PENDING"),
+		NextToken:             ptr.String("__NextToken__"),
+		MaxResults:            ptr.Int32(1),
+		QuotaRequestedAtLevel: types.AppliedLevelEnum("ACCOUNT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -735,7 +775,12 @@ func TestCheckResponseSnapshot_ListServiceQuotaIncreaseRequestsInTemplate(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServiceQuotaIncreaseRequestsInTemplate(context.Background(), &ListServiceQuotaIncreaseRequestsInTemplateInput{})
+	got, err := svc.ListServiceQuotaIncreaseRequestsInTemplate(context.Background(), &ListServiceQuotaIncreaseRequestsInTemplateInput{
+		ServiceCode: ptr.String("__ServiceCode__"),
+		AwsRegion:   ptr.String("__AwsRegion__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -826,7 +871,13 @@ func TestCheckResponseSnapshot_ListServiceQuotas(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServiceQuotas(context.Background(), &ListServiceQuotasInput{})
+	got, err := svc.ListServiceQuotas(context.Background(), &ListServiceQuotasInput{
+		ServiceCode:         ptr.String("__ServiceCode__"),
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          ptr.Int32(1),
+		QuotaCode:           ptr.String("__QuotaCode__"),
+		QuotaAppliedAtLevel: types.AppliedLevelEnum("ACCOUNT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -857,7 +908,10 @@ func TestCheckResponseSnapshot_ListServices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServices(context.Background(), &ListServicesInput{})
+	got, err := svc.ListServices(context.Background(), &ListServicesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -887,7 +941,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -917,7 +973,12 @@ func TestCheckResponseSnapshot_PutServiceQuotaIncreaseRequestIntoTemplate(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutServiceQuotaIncreaseRequestIntoTemplate(context.Background(), &PutServiceQuotaIncreaseRequestIntoTemplateInput{})
+	got, err := svc.PutServiceQuotaIncreaseRequestIntoTemplate(context.Background(), &PutServiceQuotaIncreaseRequestIntoTemplateInput{
+		QuotaCode:    ptr.String("__QuotaCode__"),
+		ServiceCode:  ptr.String("__ServiceCode__"),
+		AwsRegion:    ptr.String("__AwsRegion__"),
+		DesiredValue: ptr.Float64(1.0),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -960,7 +1021,13 @@ func TestCheckResponseSnapshot_RequestServiceQuotaIncrease(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RequestServiceQuotaIncrease(context.Background(), &RequestServiceQuotaIncreaseInput{})
+	got, err := svc.RequestServiceQuotaIncrease(context.Background(), &RequestServiceQuotaIncreaseInput{
+		ServiceCode:        ptr.String("__ServiceCode__"),
+		QuotaCode:          ptr.String("__QuotaCode__"),
+		DesiredValue:       ptr.Float64(1.0),
+		ContextId:          ptr.String("__ContextId__"),
+		SupportCaseAllowed: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -979,7 +1046,17 @@ func TestCheckResponseSnapshot_StartAutoManagement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartAutoManagement(context.Background(), &StartAutoManagementInput{})
+	got, err := svc.StartAutoManagement(context.Background(), &StartAutoManagementInput{
+		OptInLevel:      types.OptInLevel("ACCOUNT"),
+		OptInType:       types.OptInType("NotifyOnly"),
+		NotificationArn: ptr.String("__NotificationArn__"),
+		ExclusionList: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1040,7 +1117,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1059,7 +1148,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1078,7 +1173,16 @@ func TestCheckResponseSnapshot_UpdateAutoManagement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAutoManagement(context.Background(), &UpdateAutoManagementInput{})
+	got, err := svc.UpdateAutoManagement(context.Background(), &UpdateAutoManagementInput{
+		OptInType:       types.OptInType("NotifyOnly"),
+		NotificationArn: ptr.String("__NotificationArn__"),
+		ExclusionList: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1174,7 +1278,9 @@ func TestCheckResponseSnapshot_Error_IllegalArgumentException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSupportCase(context.Background(), &CreateSupportCaseInput{})
+	_, opErr := svc.CreateSupportCase(context.Background(), &CreateSupportCaseInput{
+		RequestId: ptr.String("__RequestId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1199,7 +1305,11 @@ func TestCheckResponseSnapshot_Error_InvalidPaginationTokenException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListAWSDefaultServiceQuotas(context.Background(), &ListAWSDefaultServiceQuotasInput{})
+	_, opErr := svc.ListAWSDefaultServiceQuotas(context.Background(), &ListAWSDefaultServiceQuotasInput{
+		ServiceCode: ptr.String("__ServiceCode__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1224,7 +1334,9 @@ func TestCheckResponseSnapshot_Error_InvalidResourceStateException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSupportCase(context.Background(), &CreateSupportCaseInput{})
+	_, opErr := svc.CreateSupportCase(context.Background(), &CreateSupportCaseInput{
+		RequestId: ptr.String("__RequestId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1274,7 +1386,9 @@ func TestCheckResponseSnapshot_Error_NoSuchResourceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSupportCase(context.Background(), &CreateSupportCaseInput{})
+	_, opErr := svc.CreateSupportCase(context.Background(), &CreateSupportCaseInput{
+		RequestId: ptr.String("__RequestId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1324,7 +1438,12 @@ func TestCheckResponseSnapshot_Error_QuotaExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutServiceQuotaIncreaseRequestIntoTemplate(context.Background(), &PutServiceQuotaIncreaseRequestIntoTemplateInput{})
+	_, opErr := svc.PutServiceQuotaIncreaseRequestIntoTemplate(context.Background(), &PutServiceQuotaIncreaseRequestIntoTemplateInput{
+		QuotaCode:    ptr.String("__QuotaCode__"),
+		ServiceCode:  ptr.String("__ServiceCode__"),
+		AwsRegion:    ptr.String("__AwsRegion__"),
+		DesiredValue: ptr.Float64(1.0),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1349,7 +1468,9 @@ func TestCheckResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSupportCase(context.Background(), &CreateSupportCaseInput{})
+	_, opErr := svc.CreateSupportCase(context.Background(), &CreateSupportCaseInput{
+		RequestId: ptr.String("__RequestId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1424,7 +1545,19 @@ func TestCheckResponseSnapshot_Error_TagPolicyViolationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1499,7 +1632,19 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"environmentId":"__EnvironmentId__","iamRole":"__IamRole__","userArn":"__UserArn__","userName":"__UserName__"}

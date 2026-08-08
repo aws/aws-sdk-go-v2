@@ -7,8 +7,10 @@ package quicksight
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/document"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -18,6 +20,7 @@ import (
 	"io/fs"
 	"net/url"
 	"os"
+	"reflect"
 	"slices"
 	"strings"
 	"testing"
@@ -181,7 +184,28 @@ func serdeNewClient() *Client {
 	})
 }
 func serdeBodyEqual(got, expected []byte) bool {
-	return bytes.Equal(got, expected)
+	if len(got) == 0 || len(expected) == 0 {
+		return bytes.Equal(got, expected)
+	}
+	gv, gok := serdeDecodeJSON(got)
+	ev, eok := serdeDecodeJSON(expected)
+	if !gok || !eok {
+		return bytes.Equal(got, expected)
+	}
+	return reflect.DeepEqual(gv, ev)
+}
+
+// serdeDecodeJSON decodes a body for structural comparison. Numbers are kept as
+// json.Number rather than float64 so a large int64 doesn't lose precision (which would
+// mask a real difference) and so numeric formatting differences still show up.
+func serdeDecodeJSON(b []byte) (any, bool) {
+	d := json.NewDecoder(bytes.NewReader(b))
+	d.UseNumber()
+	var v any
+	if err := d.Decode(&v); err != nil {
+		return nil, false
+	}
+	return v, true
 }
 func TestCheckRequestSnapshot_BatchCreateTopicReviewedAnswer(t *testing.T) {
 	input := &BatchCreateTopicReviewedAnswerInput{
@@ -9764,7 +9788,7 @@ func TestCheckRequestSnapshot_CreateFlow(t *testing.T) {
 		AwsAccountId:   ptr.String("__AwsAccountId__"),
 		Name:           ptr.String("__Name__"),
 		Description:    ptr.String("__Description__"),
-		FlowDefinition: nil,
+		FlowDefinition: document.NewLazyDocument("__Document__"),
 		Permissions: []types.Permission{
 			{
 				Actions: []string{
@@ -10029,7 +10053,7 @@ func TestCheckRequestSnapshot_CreateKnowledgeBase(t *testing.T) {
 		DataSourceArn:   ptr.String("__DataSourceArn__"),
 		KnowledgeBaseConfiguration: &types.KnowledgeBaseConfiguration{
 			TemplateConfiguration: &types.KbTemplateConfiguration{
-				Template: nil,
+				Template: document.NewLazyDocument("__Document__"),
 			},
 		},
 		Description: ptr.String("__Description__"),
@@ -27120,7 +27144,7 @@ func TestCheckRequestSnapshot_UpdateFlow(t *testing.T) {
 		FlowId:         ptr.String("__FlowId__"),
 		Name:           ptr.String("__Name__"),
 		Description:    ptr.String("__Description__"),
-		FlowDefinition: nil,
+		FlowDefinition: document.NewLazyDocument("__Document__"),
 		ClientToken:    ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
@@ -27476,7 +27500,7 @@ func TestCheckRequestSnapshot_UpdateKnowledgeBase(t *testing.T) {
 		Description:     ptr.String("__Description__"),
 		KnowledgeBaseConfiguration: &types.KnowledgeBaseConfiguration{
 			TemplateConfiguration: &types.KbTemplateConfiguration{
-				Template: nil,
+				Template: document.NewLazyDocument("__Document__"),
 			},
 		},
 		MediaExtractionConfiguration: &types.MediaExtractionConfiguration{
@@ -41671,7 +41695,7 @@ func TestUpdateRequestSnapshot_CreateFlow(t *testing.T) {
 		AwsAccountId:   ptr.String("__AwsAccountId__"),
 		Name:           ptr.String("__Name__"),
 		Description:    ptr.String("__Description__"),
-		FlowDefinition: nil,
+		FlowDefinition: document.NewLazyDocument("__Document__"),
 		Permissions: []types.Permission{
 			{
 				Actions: []string{
@@ -41936,7 +41960,7 @@ func TestUpdateRequestSnapshot_CreateKnowledgeBase(t *testing.T) {
 		DataSourceArn:   ptr.String("__DataSourceArn__"),
 		KnowledgeBaseConfiguration: &types.KnowledgeBaseConfiguration{
 			TemplateConfiguration: &types.KbTemplateConfiguration{
-				Template: nil,
+				Template: document.NewLazyDocument("__Document__"),
 			},
 		},
 		Description: ptr.String("__Description__"),
@@ -59027,7 +59051,7 @@ func TestUpdateRequestSnapshot_UpdateFlow(t *testing.T) {
 		FlowId:         ptr.String("__FlowId__"),
 		Name:           ptr.String("__Name__"),
 		Description:    ptr.String("__Description__"),
-		FlowDefinition: nil,
+		FlowDefinition: document.NewLazyDocument("__Document__"),
 		ClientToken:    ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
@@ -59383,7 +59407,7 @@ func TestUpdateRequestSnapshot_UpdateKnowledgeBase(t *testing.T) {
 		Description:     ptr.String("__Description__"),
 		KnowledgeBaseConfiguration: &types.KnowledgeBaseConfiguration{
 			TemplateConfiguration: &types.KbTemplateConfiguration{
-				Template: nil,
+				Template: document.NewLazyDocument("__Document__"),
 			},
 		},
 		MediaExtractionConfiguration: &types.MediaExtractionConfiguration{

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","retainedTopics":[{"lastModifiedTime":1,"payloadSize":1,"qos":1,"topic":"__Topic__"},{"lastModifiedTime":1,"payloadSize":1,"qos":1,"topic":"__Topic__"}]}

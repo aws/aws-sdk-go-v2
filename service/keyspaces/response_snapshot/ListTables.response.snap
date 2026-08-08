@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: KeyspacesService.ListTables
+
+{"nextToken":"__NextToken__","tables":[{"keyspaceName":"__KeyspaceName__","resourceArn":"__ResourceArn__","tableName":"__TableName__"},{"keyspaceName":"__KeyspaceName__","resourceArn":"__ResourceArn__","tableName":"__TableName__"}]}

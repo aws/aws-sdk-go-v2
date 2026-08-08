@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/document"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -119,7 +120,33 @@ func TestCheckResponseSnapshot_AssociatePermission(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociatePermission(context.Background(), &AssociatePermissionInput{})
+	got, err := svc.AssociatePermission(context.Background(), &AssociatePermissionInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		StatementId:   ptr.String("__StatementId__"),
+		Actions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Conditions: []types.PermissionCondition{
+			{
+				ConditionOperator: types.PermissionConditionOperator("StringEquals"),
+				ConditionKey:      ptr.String("__ConditionKey__"),
+				ConditionValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				ConditionOperator: types.PermissionConditionOperator("StringEquals"),
+				ConditionKey:      ptr.String("__ConditionKey__"),
+				ConditionValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Principal: ptr.String("__Principal__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -157,7 +184,19 @@ func TestCheckResponseSnapshot_BatchDeleteDocument(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDeleteDocument(context.Background(), &BatchDeleteDocumentInput{})
+	got, err := svc.BatchDeleteDocument(context.Background(), &BatchDeleteDocumentInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		IndexId:       ptr.String("__IndexId__"),
+		Documents: []types.DeleteDocument{
+			{
+				DocumentId: ptr.String("__DocumentId__"),
+			},
+			{
+				DocumentId: ptr.String("__DocumentId__"),
+			},
+		},
+		DataSourceSyncId: ptr.String("__DataSourceSyncId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -195,7 +234,290 @@ func TestCheckResponseSnapshot_BatchPutDocument(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchPutDocument(context.Background(), &BatchPutDocumentInput{})
+	got, err := svc.BatchPutDocument(context.Background(), &BatchPutDocumentInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		IndexId:       ptr.String("__IndexId__"),
+		Documents: []types.Document{
+			{
+				Id: ptr.String("__Id__"),
+				Attributes: []types.DocumentAttribute{
+					{
+						Name: ptr.String("__Name__"),
+						Value: &types.DocumentAttributeValueMemberStringValue{
+							Value: "__DocumentAttributeValueMemberStringValue__",
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Value: &types.DocumentAttributeValueMemberStringValue{
+							Value: "__DocumentAttributeValueMemberStringValue__",
+						},
+					},
+				},
+				Content: &types.DocumentContentMemberBlob{
+					Value: []byte("blob"),
+				},
+				ContentType: types.ContentType("PDF"),
+				Title:       ptr.String("__Title__"),
+				AccessConfiguration: &types.AccessConfiguration{
+					AccessControls: []types.AccessControl{
+						{
+							Principals: []types.Principal{
+								&types.PrincipalMemberUser{
+									Value: types.PrincipalUser{
+										Id:             ptr.String("__Id__"),
+										Access:         types.ReadAccessType("ALLOW"),
+										MembershipType: types.MembershipType("INDEX"),
+									},
+								},
+								&types.PrincipalMemberUser{
+									Value: types.PrincipalUser{
+										Id:             ptr.String("__Id__"),
+										Access:         types.ReadAccessType("ALLOW"),
+										MembershipType: types.MembershipType("INDEX"),
+									},
+								},
+							},
+							MemberRelation: types.MemberRelation("AND"),
+						},
+						{
+							Principals: []types.Principal{
+								&types.PrincipalMemberUser{
+									Value: types.PrincipalUser{
+										Id:             ptr.String("__Id__"),
+										Access:         types.ReadAccessType("ALLOW"),
+										MembershipType: types.MembershipType("INDEX"),
+									},
+								},
+								&types.PrincipalMemberUser{
+									Value: types.PrincipalUser{
+										Id:             ptr.String("__Id__"),
+										Access:         types.ReadAccessType("ALLOW"),
+										MembershipType: types.MembershipType("INDEX"),
+									},
+								},
+							},
+							MemberRelation: types.MemberRelation("AND"),
+						},
+					},
+					MemberRelation: types.MemberRelation("AND"),
+				},
+				DocumentEnrichmentConfiguration: &types.DocumentEnrichmentConfiguration{
+					InlineConfigurations: []types.InlineDocumentEnrichmentConfiguration{
+						{
+							Condition: &types.DocumentAttributeCondition{
+								Key:      ptr.String("__Key__"),
+								Operator: types.DocumentEnrichmentConditionOperator("GREATER_THAN"),
+								Value: &types.DocumentAttributeValueMemberStringValue{
+									Value: "__DocumentAttributeValueMemberStringValue__",
+								},
+							},
+							Target: &types.DocumentAttributeTarget{
+								Key: ptr.String("__Key__"),
+								Value: &types.DocumentAttributeValueMemberStringValue{
+									Value: "__DocumentAttributeValueMemberStringValue__",
+								},
+								AttributeValueOperator: types.AttributeValueOperator("DELETE"),
+							},
+							DocumentContentOperator: types.DocumentContentOperator("DELETE"),
+						},
+						{
+							Condition: &types.DocumentAttributeCondition{
+								Key:      ptr.String("__Key__"),
+								Operator: types.DocumentEnrichmentConditionOperator("GREATER_THAN"),
+								Value: &types.DocumentAttributeValueMemberStringValue{
+									Value: "__DocumentAttributeValueMemberStringValue__",
+								},
+							},
+							Target: &types.DocumentAttributeTarget{
+								Key: ptr.String("__Key__"),
+								Value: &types.DocumentAttributeValueMemberStringValue{
+									Value: "__DocumentAttributeValueMemberStringValue__",
+								},
+								AttributeValueOperator: types.AttributeValueOperator("DELETE"),
+							},
+							DocumentContentOperator: types.DocumentContentOperator("DELETE"),
+						},
+					},
+					PreExtractionHookConfiguration: &types.HookConfiguration{
+						InvocationCondition: &types.DocumentAttributeCondition{
+							Key:      ptr.String("__Key__"),
+							Operator: types.DocumentEnrichmentConditionOperator("GREATER_THAN"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+						LambdaArn:    ptr.String("__LambdaArn__"),
+						S3BucketName: ptr.String("__S3BucketName__"),
+						RoleArn:      ptr.String("__RoleArn__"),
+					},
+					PostExtractionHookConfiguration: &types.HookConfiguration{
+						InvocationCondition: &types.DocumentAttributeCondition{
+							Key:      ptr.String("__Key__"),
+							Operator: types.DocumentEnrichmentConditionOperator("GREATER_THAN"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+						LambdaArn:    ptr.String("__LambdaArn__"),
+						S3BucketName: ptr.String("__S3BucketName__"),
+						RoleArn:      ptr.String("__RoleArn__"),
+					},
+				},
+				MediaExtractionConfiguration: &types.MediaExtractionConfiguration{
+					ImageExtractionConfiguration: &types.ImageExtractionConfiguration{
+						ImageExtractionStatus: types.ImageExtractionStatus("ENABLED"),
+					},
+					AudioExtractionConfiguration: &types.AudioExtractionConfiguration{
+						AudioExtractionStatus: types.AudioExtractionStatus("ENABLED"),
+					},
+					VideoExtractionConfiguration: &types.VideoExtractionConfiguration{
+						VideoExtractionStatus: types.VideoExtractionStatus("ENABLED"),
+					},
+				},
+			},
+			{
+				Id: ptr.String("__Id__"),
+				Attributes: []types.DocumentAttribute{
+					{
+						Name: ptr.String("__Name__"),
+						Value: &types.DocumentAttributeValueMemberStringValue{
+							Value: "__DocumentAttributeValueMemberStringValue__",
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Value: &types.DocumentAttributeValueMemberStringValue{
+							Value: "__DocumentAttributeValueMemberStringValue__",
+						},
+					},
+				},
+				Content: &types.DocumentContentMemberBlob{
+					Value: []byte("blob"),
+				},
+				ContentType: types.ContentType("PDF"),
+				Title:       ptr.String("__Title__"),
+				AccessConfiguration: &types.AccessConfiguration{
+					AccessControls: []types.AccessControl{
+						{
+							Principals: []types.Principal{
+								&types.PrincipalMemberUser{
+									Value: types.PrincipalUser{
+										Id:             ptr.String("__Id__"),
+										Access:         types.ReadAccessType("ALLOW"),
+										MembershipType: types.MembershipType("INDEX"),
+									},
+								},
+								&types.PrincipalMemberUser{
+									Value: types.PrincipalUser{
+										Id:             ptr.String("__Id__"),
+										Access:         types.ReadAccessType("ALLOW"),
+										MembershipType: types.MembershipType("INDEX"),
+									},
+								},
+							},
+							MemberRelation: types.MemberRelation("AND"),
+						},
+						{
+							Principals: []types.Principal{
+								&types.PrincipalMemberUser{
+									Value: types.PrincipalUser{
+										Id:             ptr.String("__Id__"),
+										Access:         types.ReadAccessType("ALLOW"),
+										MembershipType: types.MembershipType("INDEX"),
+									},
+								},
+								&types.PrincipalMemberUser{
+									Value: types.PrincipalUser{
+										Id:             ptr.String("__Id__"),
+										Access:         types.ReadAccessType("ALLOW"),
+										MembershipType: types.MembershipType("INDEX"),
+									},
+								},
+							},
+							MemberRelation: types.MemberRelation("AND"),
+						},
+					},
+					MemberRelation: types.MemberRelation("AND"),
+				},
+				DocumentEnrichmentConfiguration: &types.DocumentEnrichmentConfiguration{
+					InlineConfigurations: []types.InlineDocumentEnrichmentConfiguration{
+						{
+							Condition: &types.DocumentAttributeCondition{
+								Key:      ptr.String("__Key__"),
+								Operator: types.DocumentEnrichmentConditionOperator("GREATER_THAN"),
+								Value: &types.DocumentAttributeValueMemberStringValue{
+									Value: "__DocumentAttributeValueMemberStringValue__",
+								},
+							},
+							Target: &types.DocumentAttributeTarget{
+								Key: ptr.String("__Key__"),
+								Value: &types.DocumentAttributeValueMemberStringValue{
+									Value: "__DocumentAttributeValueMemberStringValue__",
+								},
+								AttributeValueOperator: types.AttributeValueOperator("DELETE"),
+							},
+							DocumentContentOperator: types.DocumentContentOperator("DELETE"),
+						},
+						{
+							Condition: &types.DocumentAttributeCondition{
+								Key:      ptr.String("__Key__"),
+								Operator: types.DocumentEnrichmentConditionOperator("GREATER_THAN"),
+								Value: &types.DocumentAttributeValueMemberStringValue{
+									Value: "__DocumentAttributeValueMemberStringValue__",
+								},
+							},
+							Target: &types.DocumentAttributeTarget{
+								Key: ptr.String("__Key__"),
+								Value: &types.DocumentAttributeValueMemberStringValue{
+									Value: "__DocumentAttributeValueMemberStringValue__",
+								},
+								AttributeValueOperator: types.AttributeValueOperator("DELETE"),
+							},
+							DocumentContentOperator: types.DocumentContentOperator("DELETE"),
+						},
+					},
+					PreExtractionHookConfiguration: &types.HookConfiguration{
+						InvocationCondition: &types.DocumentAttributeCondition{
+							Key:      ptr.String("__Key__"),
+							Operator: types.DocumentEnrichmentConditionOperator("GREATER_THAN"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+						LambdaArn:    ptr.String("__LambdaArn__"),
+						S3BucketName: ptr.String("__S3BucketName__"),
+						RoleArn:      ptr.String("__RoleArn__"),
+					},
+					PostExtractionHookConfiguration: &types.HookConfiguration{
+						InvocationCondition: &types.DocumentAttributeCondition{
+							Key:      ptr.String("__Key__"),
+							Operator: types.DocumentEnrichmentConditionOperator("GREATER_THAN"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+						LambdaArn:    ptr.String("__LambdaArn__"),
+						S3BucketName: ptr.String("__S3BucketName__"),
+						RoleArn:      ptr.String("__RoleArn__"),
+					},
+				},
+				MediaExtractionConfiguration: &types.MediaExtractionConfiguration{
+					ImageExtractionConfiguration: &types.ImageExtractionConfiguration{
+						ImageExtractionStatus: types.ImageExtractionStatus("ENABLED"),
+					},
+					AudioExtractionConfiguration: &types.AudioExtractionConfiguration{
+						AudioExtractionStatus: types.AudioExtractionStatus("ENABLED"),
+					},
+					VideoExtractionConfiguration: &types.VideoExtractionConfiguration{
+						VideoExtractionStatus: types.VideoExtractionStatus("ENABLED"),
+					},
+				},
+			},
+		},
+		RoleArn:          ptr.String("__RoleArn__"),
+		DataSourceSyncId: ptr.String("__DataSourceSyncId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -222,13 +544,20 @@ func TestCheckResponseSnapshot_CancelSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelSubscription(context.Background(), &CancelSubscriptionInput{})
+	got, err := svc.CancelSubscription(context.Background(), &CancelSubscriptionInput{
+		ApplicationId:  ptr.String("__ApplicationId__"),
+		SubscriptionId: ptr.String("__SubscriptionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CancelSubscription.response", err)
 	}
+}
+
+func TestCheckResponseSnapshot_Chat(t *testing.T) {
+	t.Skip("event stream operation")
 }
 
 func TestCheckResponseSnapshot_ChatSync(t *testing.T) {
@@ -246,19 +575,19 @@ func TestCheckResponseSnapshot_ChatSync(t *testing.T) {
 					DisplayOrder:       ptr.Int32(1),
 					DisplayDescription: ptr.String("__DisplayDescription__"),
 					Type:               types.ActionPayloadFieldType("STRING"),
-					Value:              nil,
+					Value:              document.NewLazyDocument("__Document__"),
 					AllowedValues: []types.ActionReviewPayloadFieldAllowedValue{
 						{
-							Value:        nil,
-							DisplayValue: nil,
+							Value:        document.NewLazyDocument("__Document__"),
+							DisplayValue: document.NewLazyDocument("__Document__"),
 						},
 						{
-							Value:        nil,
-							DisplayValue: nil,
+							Value:        document.NewLazyDocument("__Document__"),
+							DisplayValue: document.NewLazyDocument("__Document__"),
 						},
 					},
 					AllowedFormat:       ptr.String("__AllowedFormat__"),
-					ArrayItemJsonSchema: nil,
+					ArrayItemJsonSchema: document.NewLazyDocument("__Document__"),
 					Required:            ptr.Bool(true),
 				},
 			},
@@ -384,7 +713,113 @@ func TestCheckResponseSnapshot_ChatSync(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ChatSync(context.Background(), &ChatSyncInput{})
+	got, err := svc.ChatSync(context.Background(), &ChatSyncInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		UserId:        ptr.String("__UserId__"),
+		UserGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UserMessage: ptr.String("__UserMessage__"),
+		Attachments: []types.AttachmentInput{
+			{
+				Data: []byte("blob"),
+				Name: ptr.String("__Name__"),
+				CopyFrom: &types.CopyFromSourceMemberConversation{
+					Value: types.ConversationSource{
+						ConversationId: ptr.String("__ConversationId__"),
+						AttachmentId:   ptr.String("__AttachmentId__"),
+					},
+				},
+			},
+			{
+				Data: []byte("blob"),
+				Name: ptr.String("__Name__"),
+				CopyFrom: &types.CopyFromSourceMemberConversation{
+					Value: types.ConversationSource{
+						ConversationId: ptr.String("__ConversationId__"),
+						AttachmentId:   ptr.String("__AttachmentId__"),
+					},
+				},
+			},
+		},
+		ActionExecution: &types.ActionExecution{
+			PluginId: ptr.String("__PluginId__"),
+			Payload: map[string]types.ActionExecutionPayloadField{
+				"key0": {
+					Value: document.NewLazyDocument("__Document__"),
+				},
+			},
+			PayloadFieldNameSeparator: ptr.String("__PayloadFieldNameSeparator__"),
+		},
+		AuthChallengeResponse: &types.AuthChallengeResponse{
+			ResponseMap: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		ConversationId:  ptr.String("__ConversationId__"),
+		ParentMessageId: ptr.String("__ParentMessageId__"),
+		AttributeFilter: &types.AttributeFilter{
+			AndAllFilters: []types.AttributeFilter{
+				{},
+				{},
+			},
+			OrAllFilters: []types.AttributeFilter{
+				{},
+				{},
+			},
+			NotFilter: nil,
+			EqualsTo: &types.DocumentAttribute{
+				Name: ptr.String("__Name__"),
+				Value: &types.DocumentAttributeValueMemberStringValue{
+					Value: "__DocumentAttributeValueMemberStringValue__",
+				},
+			},
+			ContainsAll: &types.DocumentAttribute{
+				Name: ptr.String("__Name__"),
+				Value: &types.DocumentAttributeValueMemberStringValue{
+					Value: "__DocumentAttributeValueMemberStringValue__",
+				},
+			},
+			ContainsAny: &types.DocumentAttribute{
+				Name: ptr.String("__Name__"),
+				Value: &types.DocumentAttributeValueMemberStringValue{
+					Value: "__DocumentAttributeValueMemberStringValue__",
+				},
+			},
+			GreaterThan: &types.DocumentAttribute{
+				Name: ptr.String("__Name__"),
+				Value: &types.DocumentAttributeValueMemberStringValue{
+					Value: "__DocumentAttributeValueMemberStringValue__",
+				},
+			},
+			GreaterThanOrEquals: &types.DocumentAttribute{
+				Name: ptr.String("__Name__"),
+				Value: &types.DocumentAttributeValueMemberStringValue{
+					Value: "__DocumentAttributeValueMemberStringValue__",
+				},
+			},
+			LessThan: &types.DocumentAttribute{
+				Name: ptr.String("__Name__"),
+				Value: &types.DocumentAttributeValueMemberStringValue{
+					Value: "__DocumentAttributeValueMemberStringValue__",
+				},
+			},
+			LessThanOrEquals: &types.DocumentAttribute{
+				Name: ptr.String("__Name__"),
+				Value: &types.DocumentAttributeValueMemberStringValue{
+					Value: "__DocumentAttributeValueMemberStringValue__",
+				},
+			},
+		},
+		ChatMode: types.ChatMode("RETRIEVAL_MODE"),
+		ChatModeConfiguration: &types.ChatModeConfigurationMemberPluginConfiguration{
+			Value: types.PluginConfiguration{
+				PluginId: ptr.String("__PluginId__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -529,7 +964,13 @@ func TestCheckResponseSnapshot_CheckDocumentAccess(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CheckDocumentAccess(context.Background(), &CheckDocumentAccessInput{})
+	got, err := svc.CheckDocumentAccess(context.Background(), &CheckDocumentAccessInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		IndexId:       ptr.String("__IndexId__"),
+		UserId:        ptr.String("__UserId__"),
+		DocumentId:    ptr.String("__DocumentId__"),
+		DataSourceId:  ptr.String("__DataSourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -550,7 +991,11 @@ func TestCheckResponseSnapshot_CreateAnonymousWebExperienceUrl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAnonymousWebExperienceUrl(context.Background(), &CreateAnonymousWebExperienceUrlInput{})
+	got, err := svc.CreateAnonymousWebExperienceUrl(context.Background(), &CreateAnonymousWebExperienceUrlInput{
+		ApplicationId:            ptr.String("__ApplicationId__"),
+		WebExperienceId:          ptr.String("__WebExperienceId__"),
+		SessionDurationInMinutes: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -572,7 +1017,44 @@ func TestCheckResponseSnapshot_CreateApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		DisplayName:               ptr.String("__DisplayName__"),
+		RoleArn:                   ptr.String("__RoleArn__"),
+		IdentityType:              types.IdentityType("AWS_IAM_IDP_SAML"),
+		IamIdentityProviderArn:    ptr.String("__IamIdentityProviderArn__"),
+		IdentityCenterInstanceArn: ptr.String("__IdentityCenterInstanceArn__"),
+		ClientIdsForOIDC: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Description: ptr.String("__Description__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		AttachmentsConfiguration: &types.AttachmentsConfiguration{
+			AttachmentsControlMode: types.AttachmentsControlMode("ENABLED"),
+		},
+		QAppsConfiguration: &types.QAppsConfiguration{
+			QAppsControlMode: types.QAppsControlMode("ENABLED"),
+		},
+		PersonalizationConfiguration: &types.PersonalizationConfiguration{
+			PersonalizationControlMode: types.PersonalizationControlMode("ENABLED"),
+		},
+		QuickSightConfiguration: &types.QuickSightConfiguration{
+			ClientNamespace: ptr.String("__ClientNamespace__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -594,7 +1076,35 @@ func TestCheckResponseSnapshot_CreateChatResponseConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateChatResponseConfiguration(context.Background(), &CreateChatResponseConfigurationInput{})
+	got, err := svc.CreateChatResponseConfiguration(context.Background(), &CreateChatResponseConfigurationInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		DisplayName:   ptr.String("__DisplayName__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		ResponseConfigurations: map[string]types.ResponseConfiguration{
+			"key0": {
+				InstructionCollection: &types.InstructionCollection{
+					ResponseLength:     ptr.String("__ResponseLength__"),
+					TargetAudience:     ptr.String("__TargetAudience__"),
+					Perspective:        ptr.String("__Perspective__"),
+					OutputStyle:        ptr.String("__OutputStyle__"),
+					Identity:           ptr.String("__Identity__"),
+					Tone:               ptr.String("__Tone__"),
+					CustomInstructions: ptr.String("__CustomInstructions__"),
+					Examples:           ptr.String("__Examples__"),
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -617,7 +1127,152 @@ func TestCheckResponseSnapshot_CreateDataAccessor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataAccessor(context.Background(), &CreateDataAccessorInput{})
+	got, err := svc.CreateDataAccessor(context.Background(), &CreateDataAccessorInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		Principal:     ptr.String("__Principal__"),
+		ActionConfigurations: []types.ActionConfiguration{
+			{
+				Action: ptr.String("__Action__"),
+				FilterConfiguration: &types.ActionFilterConfiguration{
+					DocumentAttributeFilter: &types.AttributeFilter{
+						AndAllFilters: []types.AttributeFilter{
+							{},
+							{},
+						},
+						OrAllFilters: []types.AttributeFilter{
+							{},
+							{},
+						},
+						NotFilter: nil,
+						EqualsTo: &types.DocumentAttribute{
+							Name: ptr.String("__Name__"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+						ContainsAll: &types.DocumentAttribute{
+							Name: ptr.String("__Name__"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+						ContainsAny: &types.DocumentAttribute{
+							Name: ptr.String("__Name__"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+						GreaterThan: &types.DocumentAttribute{
+							Name: ptr.String("__Name__"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+						GreaterThanOrEquals: &types.DocumentAttribute{
+							Name: ptr.String("__Name__"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+						LessThan: &types.DocumentAttribute{
+							Name: ptr.String("__Name__"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+						LessThanOrEquals: &types.DocumentAttribute{
+							Name: ptr.String("__Name__"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+					},
+				},
+			},
+			{
+				Action: ptr.String("__Action__"),
+				FilterConfiguration: &types.ActionFilterConfiguration{
+					DocumentAttributeFilter: &types.AttributeFilter{
+						AndAllFilters: []types.AttributeFilter{
+							{},
+							{},
+						},
+						OrAllFilters: []types.AttributeFilter{
+							{},
+							{},
+						},
+						NotFilter: nil,
+						EqualsTo: &types.DocumentAttribute{
+							Name: ptr.String("__Name__"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+						ContainsAll: &types.DocumentAttribute{
+							Name: ptr.String("__Name__"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+						ContainsAny: &types.DocumentAttribute{
+							Name: ptr.String("__Name__"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+						GreaterThan: &types.DocumentAttribute{
+							Name: ptr.String("__Name__"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+						GreaterThanOrEquals: &types.DocumentAttribute{
+							Name: ptr.String("__Name__"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+						LessThan: &types.DocumentAttribute{
+							Name: ptr.String("__Name__"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+						LessThanOrEquals: &types.DocumentAttribute{
+							Name: ptr.String("__Name__"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		AuthenticationDetail: &types.DataAccessorAuthenticationDetail{
+			AuthenticationType: types.DataAccessorAuthenticationType("AWS_IAM_IDC_TTI"),
+			AuthenticationConfiguration: &types.DataAccessorAuthenticationConfigurationMemberIdcTrustedTokenIssuerConfiguration{
+				Value: types.DataAccessorIdcTrustedTokenIssuerConfiguration{
+					IdcTrustedTokenIssuerArn: ptr.String("__IdcTrustedTokenIssuerArn__"),
+				},
+			},
+			ExternalIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -639,7 +1294,109 @@ func TestCheckResponseSnapshot_CreateDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataSource(context.Background(), &CreateDataSourceInput{})
+	got, err := svc.CreateDataSource(context.Background(), &CreateDataSourceInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		IndexId:       ptr.String("__IndexId__"),
+		DisplayName:   ptr.String("__DisplayName__"),
+		Configuration: document.NewLazyDocument("__Document__"),
+		VpcConfiguration: &types.DataSourceVpcConfiguration{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Description: ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		SyncSchedule: ptr.String("__SyncSchedule__"),
+		RoleArn:      ptr.String("__RoleArn__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+		DocumentEnrichmentConfiguration: &types.DocumentEnrichmentConfiguration{
+			InlineConfigurations: []types.InlineDocumentEnrichmentConfiguration{
+				{
+					Condition: &types.DocumentAttributeCondition{
+						Key:      ptr.String("__Key__"),
+						Operator: types.DocumentEnrichmentConditionOperator("GREATER_THAN"),
+						Value: &types.DocumentAttributeValueMemberStringValue{
+							Value: "__DocumentAttributeValueMemberStringValue__",
+						},
+					},
+					Target: &types.DocumentAttributeTarget{
+						Key: ptr.String("__Key__"),
+						Value: &types.DocumentAttributeValueMemberStringValue{
+							Value: "__DocumentAttributeValueMemberStringValue__",
+						},
+						AttributeValueOperator: types.AttributeValueOperator("DELETE"),
+					},
+					DocumentContentOperator: types.DocumentContentOperator("DELETE"),
+				},
+				{
+					Condition: &types.DocumentAttributeCondition{
+						Key:      ptr.String("__Key__"),
+						Operator: types.DocumentEnrichmentConditionOperator("GREATER_THAN"),
+						Value: &types.DocumentAttributeValueMemberStringValue{
+							Value: "__DocumentAttributeValueMemberStringValue__",
+						},
+					},
+					Target: &types.DocumentAttributeTarget{
+						Key: ptr.String("__Key__"),
+						Value: &types.DocumentAttributeValueMemberStringValue{
+							Value: "__DocumentAttributeValueMemberStringValue__",
+						},
+						AttributeValueOperator: types.AttributeValueOperator("DELETE"),
+					},
+					DocumentContentOperator: types.DocumentContentOperator("DELETE"),
+				},
+			},
+			PreExtractionHookConfiguration: &types.HookConfiguration{
+				InvocationCondition: &types.DocumentAttributeCondition{
+					Key:      ptr.String("__Key__"),
+					Operator: types.DocumentEnrichmentConditionOperator("GREATER_THAN"),
+					Value: &types.DocumentAttributeValueMemberStringValue{
+						Value: "__DocumentAttributeValueMemberStringValue__",
+					},
+				},
+				LambdaArn:    ptr.String("__LambdaArn__"),
+				S3BucketName: ptr.String("__S3BucketName__"),
+				RoleArn:      ptr.String("__RoleArn__"),
+			},
+			PostExtractionHookConfiguration: &types.HookConfiguration{
+				InvocationCondition: &types.DocumentAttributeCondition{
+					Key:      ptr.String("__Key__"),
+					Operator: types.DocumentEnrichmentConditionOperator("GREATER_THAN"),
+					Value: &types.DocumentAttributeValueMemberStringValue{
+						Value: "__DocumentAttributeValueMemberStringValue__",
+					},
+				},
+				LambdaArn:    ptr.String("__LambdaArn__"),
+				S3BucketName: ptr.String("__S3BucketName__"),
+				RoleArn:      ptr.String("__RoleArn__"),
+			},
+		},
+		MediaExtractionConfiguration: &types.MediaExtractionConfiguration{
+			ImageExtractionConfiguration: &types.ImageExtractionConfiguration{
+				ImageExtractionStatus: types.ImageExtractionStatus("ENABLED"),
+			},
+			AudioExtractionConfiguration: &types.AudioExtractionConfiguration{
+				AudioExtractionStatus: types.AudioExtractionStatus("ENABLED"),
+			},
+			VideoExtractionConfiguration: &types.VideoExtractionConfiguration{
+				VideoExtractionStatus: types.VideoExtractionStatus("ENABLED"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -661,7 +1418,26 @@ func TestCheckResponseSnapshot_CreateIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIndex(context.Background(), &CreateIndexInput{})
+	got, err := svc.CreateIndex(context.Background(), &CreateIndexInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		DisplayName:   ptr.String("__DisplayName__"),
+		Description:   ptr.String("__Description__"),
+		Type:          types.IndexType("ENTERPRISE"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		CapacityConfiguration: &types.IndexCapacityConfiguration{
+			Units: ptr.Int32(1),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -684,7 +1460,36 @@ func TestCheckResponseSnapshot_CreatePlugin(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePlugin(context.Background(), &CreatePluginInput{})
+	got, err := svc.CreatePlugin(context.Background(), &CreatePluginInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		DisplayName:   ptr.String("__DisplayName__"),
+		Type:          types.PluginType("SERVICE_NOW"),
+		AuthConfiguration: &types.PluginAuthConfigurationMemberBasicAuthConfiguration{
+			Value: types.BasicAuthConfiguration{
+				SecretArn: ptr.String("__SecretArn__"),
+				RoleArn:   ptr.String("__RoleArn__"),
+			},
+		},
+		ServerUrl: ptr.String("__ServerUrl__"),
+		CustomPluginConfiguration: &types.CustomPluginConfiguration{
+			Description:   ptr.String("__Description__"),
+			ApiSchemaType: types.APISchemaType("OPEN_API_V3"),
+			ApiSchema: &types.APISchemaMemberPayload{
+				Value: "__APISchemaMemberPayload__",
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -706,7 +1511,37 @@ func TestCheckResponseSnapshot_CreateRetriever(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRetriever(context.Background(), &CreateRetrieverInput{})
+	got, err := svc.CreateRetriever(context.Background(), &CreateRetrieverInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		Type:          types.RetrieverType("NATIVE_INDEX"),
+		DisplayName:   ptr.String("__DisplayName__"),
+		Configuration: &types.RetrieverConfigurationMemberNativeIndexConfiguration{
+			Value: types.NativeIndexConfiguration{
+				IndexId: ptr.String("__IndexId__"),
+				Version: ptr.Int64(1),
+				BoostingOverride: map[string]types.DocumentAttributeBoostingConfiguration{
+					"key0": &types.DocumentAttributeBoostingConfigurationMemberNumberConfiguration{
+						Value: types.NumberAttributeBoostingConfiguration{
+							BoostingLevel: types.DocumentAttributeBoostingLevel("NONE"),
+							BoostingType:  types.NumberAttributeBoostingType("PRIORITIZE_LARGER_VALUES"),
+						},
+					},
+				},
+			},
+		},
+		RoleArn:     ptr.String("__RoleArn__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -734,7 +1569,14 @@ func TestCheckResponseSnapshot_CreateSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSubscription(context.Background(), &CreateSubscriptionInput{})
+	got, err := svc.CreateSubscription(context.Background(), &CreateSubscriptionInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		Principal: &types.SubscriptionPrincipalMemberUser{
+			Value: "__SubscriptionPrincipalMemberUser__",
+		},
+		Type:        types.SubscriptionType("Q_LITE"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -753,7 +1595,23 @@ func TestCheckResponseSnapshot_CreateUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUser(context.Background(), &CreateUserInput{})
+	got, err := svc.CreateUser(context.Background(), &CreateUserInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		UserId:        ptr.String("__UserId__"),
+		UserAliases: []types.UserAlias{
+			{
+				IndexId:      ptr.String("__IndexId__"),
+				DataSourceId: ptr.String("__DataSourceId__"),
+				UserId:       ptr.String("__UserId__"),
+			},
+			{
+				IndexId:      ptr.String("__IndexId__"),
+				DataSourceId: ptr.String("__DataSourceId__"),
+				UserId:       ptr.String("__UserId__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -775,7 +1633,46 @@ func TestCheckResponseSnapshot_CreateWebExperience(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWebExperience(context.Background(), &CreateWebExperienceInput{})
+	got, err := svc.CreateWebExperience(context.Background(), &CreateWebExperienceInput{
+		ApplicationId:            ptr.String("__ApplicationId__"),
+		Title:                    ptr.String("__Title__"),
+		Subtitle:                 ptr.String("__Subtitle__"),
+		WelcomeMessage:           ptr.String("__WelcomeMessage__"),
+		SamplePromptsControlMode: types.WebExperienceSamplePromptsControlMode("ENABLED"),
+		Origins: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		IdentityProviderConfiguration: &types.IdentityProviderConfigurationMemberSamlConfiguration{
+			Value: types.SamlProviderConfiguration{
+				AuthenticationUrl: ptr.String("__AuthenticationUrl__"),
+			},
+		},
+		BrowserExtensionConfiguration: &types.BrowserExtensionConfiguration{
+			EnabledBrowserExtensions: []types.BrowserExtension{
+				types.BrowserExtension("FIREFOX"),
+				types.BrowserExtension("FIREFOX"),
+			},
+		},
+		CustomizationConfiguration: &types.CustomizationConfiguration{
+			CustomCSSUrl: ptr.String("__CustomCSSUrl__"),
+			LogoUrl:      ptr.String("__LogoUrl__"),
+			FontUrl:      ptr.String("__FontUrl__"),
+			FaviconUrl:   ptr.String("__FaviconUrl__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -794,7 +1691,9 @@ func TestCheckResponseSnapshot_DeleteApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{})
+	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -813,7 +1712,12 @@ func TestCheckResponseSnapshot_DeleteAttachment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAttachment(context.Background(), &DeleteAttachmentInput{})
+	got, err := svc.DeleteAttachment(context.Background(), &DeleteAttachmentInput{
+		ApplicationId:  ptr.String("__ApplicationId__"),
+		ConversationId: ptr.String("__ConversationId__"),
+		AttachmentId:   ptr.String("__AttachmentId__"),
+		UserId:         ptr.String("__UserId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -832,7 +1736,9 @@ func TestCheckResponseSnapshot_DeleteChatControlsConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteChatControlsConfiguration(context.Background(), &DeleteChatControlsConfigurationInput{})
+	got, err := svc.DeleteChatControlsConfiguration(context.Background(), &DeleteChatControlsConfigurationInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -851,7 +1757,10 @@ func TestCheckResponseSnapshot_DeleteChatResponseConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteChatResponseConfiguration(context.Background(), &DeleteChatResponseConfigurationInput{})
+	got, err := svc.DeleteChatResponseConfiguration(context.Background(), &DeleteChatResponseConfigurationInput{
+		ApplicationId:               ptr.String("__ApplicationId__"),
+		ChatResponseConfigurationId: ptr.String("__ChatResponseConfigurationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -870,7 +1779,11 @@ func TestCheckResponseSnapshot_DeleteConversation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConversation(context.Background(), &DeleteConversationInput{})
+	got, err := svc.DeleteConversation(context.Background(), &DeleteConversationInput{
+		ConversationId: ptr.String("__ConversationId__"),
+		ApplicationId:  ptr.String("__ApplicationId__"),
+		UserId:         ptr.String("__UserId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -889,7 +1802,10 @@ func TestCheckResponseSnapshot_DeleteDataAccessor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataAccessor(context.Background(), &DeleteDataAccessorInput{})
+	got, err := svc.DeleteDataAccessor(context.Background(), &DeleteDataAccessorInput{
+		ApplicationId:  ptr.String("__ApplicationId__"),
+		DataAccessorId: ptr.String("__DataAccessorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -908,7 +1824,11 @@ func TestCheckResponseSnapshot_DeleteDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataSource(context.Background(), &DeleteDataSourceInput{})
+	got, err := svc.DeleteDataSource(context.Background(), &DeleteDataSourceInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		IndexId:       ptr.String("__IndexId__"),
+		DataSourceId:  ptr.String("__DataSourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -927,7 +1847,12 @@ func TestCheckResponseSnapshot_DeleteGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGroup(context.Background(), &DeleteGroupInput{})
+	got, err := svc.DeleteGroup(context.Background(), &DeleteGroupInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		IndexId:       ptr.String("__IndexId__"),
+		GroupName:     ptr.String("__GroupName__"),
+		DataSourceId:  ptr.String("__DataSourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -946,7 +1871,10 @@ func TestCheckResponseSnapshot_DeleteIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIndex(context.Background(), &DeleteIndexInput{})
+	got, err := svc.DeleteIndex(context.Background(), &DeleteIndexInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		IndexId:       ptr.String("__IndexId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -965,7 +1893,10 @@ func TestCheckResponseSnapshot_DeletePlugin(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePlugin(context.Background(), &DeletePluginInput{})
+	got, err := svc.DeletePlugin(context.Background(), &DeletePluginInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		PluginId:      ptr.String("__PluginId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -984,7 +1915,10 @@ func TestCheckResponseSnapshot_DeleteRetriever(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRetriever(context.Background(), &DeleteRetrieverInput{})
+	got, err := svc.DeleteRetriever(context.Background(), &DeleteRetrieverInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		RetrieverId:   ptr.String("__RetrieverId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1003,7 +1937,10 @@ func TestCheckResponseSnapshot_DeleteUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteUser(context.Background(), &DeleteUserInput{})
+	got, err := svc.DeleteUser(context.Background(), &DeleteUserInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		UserId:        ptr.String("__UserId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1022,7 +1959,10 @@ func TestCheckResponseSnapshot_DeleteWebExperience(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWebExperience(context.Background(), &DeleteWebExperienceInput{})
+	got, err := svc.DeleteWebExperience(context.Background(), &DeleteWebExperienceInput{
+		ApplicationId:   ptr.String("__ApplicationId__"),
+		WebExperienceId: ptr.String("__WebExperienceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1041,7 +1981,10 @@ func TestCheckResponseSnapshot_DisassociatePermission(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociatePermission(context.Background(), &DisassociatePermissionInput{})
+	got, err := svc.DisassociatePermission(context.Background(), &DisassociatePermissionInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		StatementId:   ptr.String("__StatementId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1099,7 +2042,9 @@ func TestCheckResponseSnapshot_GetApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApplication(context.Background(), &GetApplicationInput{})
+	got, err := svc.GetApplication(context.Background(), &GetApplicationInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1271,7 +2216,11 @@ func TestCheckResponseSnapshot_GetChatControlsConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetChatControlsConfiguration(context.Background(), &GetChatControlsConfigurationInput{})
+	got, err := svc.GetChatControlsConfiguration(context.Background(), &GetChatControlsConfigurationInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1341,7 +2290,10 @@ func TestCheckResponseSnapshot_GetChatResponseConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetChatResponseConfiguration(context.Background(), &GetChatResponseConfigurationInput{})
+	got, err := svc.GetChatResponseConfiguration(context.Background(), &GetChatResponseConfigurationInput{
+		ApplicationId:               ptr.String("__ApplicationId__"),
+		ChatResponseConfigurationId: ptr.String("__ChatResponseConfigurationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1499,7 +2451,10 @@ func TestCheckResponseSnapshot_GetDataAccessor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataAccessor(context.Background(), &GetDataAccessorInput{})
+	got, err := svc.GetDataAccessor(context.Background(), &GetDataAccessorInput{
+		ApplicationId:  ptr.String("__ApplicationId__"),
+		DataAccessorId: ptr.String("__DataAccessorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1516,7 +2471,7 @@ func TestCheckResponseSnapshot_GetDataSource(t *testing.T) {
 		DataSourceArn: ptr.String("__DataSourceArn__"),
 		DisplayName:   ptr.String("__DisplayName__"),
 		Type:          ptr.String("__Type__"),
-		Configuration: nil,
+		Configuration: document.NewLazyDocument("__Document__"),
 		VpcConfiguration: &types.DataSourceVpcConfiguration{
 			SubnetIds: []string{
 				"__Member__",
@@ -1619,7 +2574,11 @@ func TestCheckResponseSnapshot_GetDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataSource(context.Background(), &GetDataSourceInput{})
+	got, err := svc.GetDataSource(context.Background(), &GetDataSourceInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		IndexId:       ptr.String("__IndexId__"),
+		DataSourceId:  ptr.String("__DataSourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1641,7 +2600,13 @@ func TestCheckResponseSnapshot_GetDocumentContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDocumentContent(context.Background(), &GetDocumentContentInput{})
+	got, err := svc.GetDocumentContent(context.Background(), &GetDocumentContentInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		IndexId:       ptr.String("__IndexId__"),
+		DataSourceId:  ptr.String("__DataSourceId__"),
+		DocumentId:    ptr.String("__DocumentId__"),
+		OutputFormat:  types.OutputFormat("RAW"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1687,7 +2652,12 @@ func TestCheckResponseSnapshot_GetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGroup(context.Background(), &GetGroupInput{})
+	got, err := svc.GetGroup(context.Background(), &GetGroupInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		IndexId:       ptr.String("__IndexId__"),
+		GroupName:     ptr.String("__GroupName__"),
+		DataSourceId:  ptr.String("__DataSourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1741,7 +2711,10 @@ func TestCheckResponseSnapshot_GetIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIndex(context.Background(), &GetIndexInput{})
+	got, err := svc.GetIndex(context.Background(), &GetIndexInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		IndexId:       ptr.String("__IndexId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1763,7 +2736,12 @@ func TestCheckResponseSnapshot_GetMedia(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMedia(context.Background(), &GetMediaInput{})
+	got, err := svc.GetMedia(context.Background(), &GetMediaInput{
+		ApplicationId:  ptr.String("__ApplicationId__"),
+		ConversationId: ptr.String("__ConversationId__"),
+		MessageId:      ptr.String("__MessageId__"),
+		MediaId:        ptr.String("__MediaId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1806,7 +2784,10 @@ func TestCheckResponseSnapshot_GetPlugin(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPlugin(context.Background(), &GetPluginInput{})
+	got, err := svc.GetPlugin(context.Background(), &GetPluginInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		PluginId:      ptr.String("__PluginId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1827,7 +2808,9 @@ func TestCheckResponseSnapshot_GetPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPolicy(context.Background(), &GetPolicyInput{})
+	got, err := svc.GetPolicy(context.Background(), &GetPolicyInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1870,7 +2853,10 @@ func TestCheckResponseSnapshot_GetRetriever(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRetriever(context.Background(), &GetRetrieverInput{})
+	got, err := svc.GetRetriever(context.Background(), &GetRetrieverInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		RetrieverId:   ptr.String("__RetrieverId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1902,7 +2888,10 @@ func TestCheckResponseSnapshot_GetUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUser(context.Background(), &GetUserInput{})
+	got, err := svc.GetUser(context.Background(), &GetUserInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		UserId:        ptr.String("__UserId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1967,7 +2956,10 @@ func TestCheckResponseSnapshot_GetWebExperience(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWebExperience(context.Background(), &GetWebExperienceInput{})
+	got, err := svc.GetWebExperience(context.Background(), &GetWebExperienceInput{
+		ApplicationId:   ptr.String("__ApplicationId__"),
+		WebExperienceId: ptr.String("__WebExperienceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2012,7 +3004,10 @@ func TestCheckResponseSnapshot_ListApplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplications(context.Background(), &ListApplicationsInput{})
+	got, err := svc.ListApplications(context.Background(), &ListApplicationsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2075,7 +3070,13 @@ func TestCheckResponseSnapshot_ListAttachments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAttachments(context.Background(), &ListAttachmentsInput{})
+	got, err := svc.ListAttachments(context.Background(), &ListAttachmentsInput{
+		ApplicationId:  ptr.String("__ApplicationId__"),
+		ConversationId: ptr.String("__ConversationId__"),
+		UserId:         ptr.String("__UserId__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2116,7 +3117,11 @@ func TestCheckResponseSnapshot_ListChatResponseConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListChatResponseConfigurations(context.Background(), &ListChatResponseConfigurationsInput{})
+	got, err := svc.ListChatResponseConfigurations(context.Background(), &ListChatResponseConfigurationsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2149,7 +3154,12 @@ func TestCheckResponseSnapshot_ListConversations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConversations(context.Background(), &ListConversationsInput{})
+	got, err := svc.ListConversations(context.Background(), &ListConversationsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		UserId:        ptr.String("__UserId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2214,7 +3224,11 @@ func TestCheckResponseSnapshot_ListDataAccessors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataAccessors(context.Background(), &ListDataAccessorsInput{})
+	got, err := svc.ListDataAccessors(context.Background(), &ListDataAccessorsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2273,7 +3287,16 @@ func TestCheckResponseSnapshot_ListDataSourceSyncJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataSourceSyncJobs(context.Background(), &ListDataSourceSyncJobsInput{})
+	got, err := svc.ListDataSourceSyncJobs(context.Background(), &ListDataSourceSyncJobsInput{
+		DataSourceId:  ptr.String("__DataSourceId__"),
+		ApplicationId: ptr.String("__ApplicationId__"),
+		IndexId:       ptr.String("__IndexId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+		StartTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StatusFilter:  types.DataSourceSyncJobStatus("FAILED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2312,7 +3335,12 @@ func TestCheckResponseSnapshot_ListDataSources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataSources(context.Background(), &ListDataSourcesInput{})
+	got, err := svc.ListDataSources(context.Background(), &ListDataSourcesInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		IndexId:       ptr.String("__IndexId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2355,7 +3383,16 @@ func TestCheckResponseSnapshot_ListDocuments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDocuments(context.Background(), &ListDocumentsInput{})
+	got, err := svc.ListDocuments(context.Background(), &ListDocumentsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		IndexId:       ptr.String("__IndexId__"),
+		DataSourceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2384,7 +3421,14 @@ func TestCheckResponseSnapshot_ListGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGroups(context.Background(), &ListGroupsInput{})
+	got, err := svc.ListGroups(context.Background(), &ListGroupsInput{
+		ApplicationId:      ptr.String("__ApplicationId__"),
+		IndexId:            ptr.String("__IndexId__"),
+		UpdatedEarlierThan: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		DataSourceId:       ptr.String("__DataSourceId__"),
+		NextToken:          ptr.String("__NextToken__"),
+		MaxResults:         ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2421,7 +3465,11 @@ func TestCheckResponseSnapshot_ListIndices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIndices(context.Background(), &ListIndicesInput{})
+	got, err := svc.ListIndices(context.Background(), &ListIndicesInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2555,19 +3603,19 @@ func TestCheckResponseSnapshot_ListMessages(t *testing.T) {
 							DisplayOrder:       ptr.Int32(1),
 							DisplayDescription: ptr.String("__DisplayDescription__"),
 							Type:               types.ActionPayloadFieldType("STRING"),
-							Value:              nil,
+							Value:              document.NewLazyDocument("__Document__"),
 							AllowedValues: []types.ActionReviewPayloadFieldAllowedValue{
 								{
-									Value:        nil,
-									DisplayValue: nil,
+									Value:        document.NewLazyDocument("__Document__"),
+									DisplayValue: document.NewLazyDocument("__Document__"),
 								},
 								{
-									Value:        nil,
-									DisplayValue: nil,
+									Value:        document.NewLazyDocument("__Document__"),
+									DisplayValue: document.NewLazyDocument("__Document__"),
 								},
 							},
 							AllowedFormat:       ptr.String("__AllowedFormat__"),
-							ArrayItemJsonSchema: nil,
+							ArrayItemJsonSchema: document.NewLazyDocument("__Document__"),
 							Required:            ptr.Bool(true),
 						},
 					},
@@ -2577,7 +3625,7 @@ func TestCheckResponseSnapshot_ListMessages(t *testing.T) {
 					PluginId: ptr.String("__PluginId__"),
 					Payload: map[string]types.ActionExecutionPayloadField{
 						"key0": {
-							Value: nil,
+							Value: document.NewLazyDocument("__Document__"),
 						},
 					},
 					PayloadFieldNameSeparator: ptr.String("__PayloadFieldNameSeparator__"),
@@ -2705,19 +3753,19 @@ func TestCheckResponseSnapshot_ListMessages(t *testing.T) {
 							DisplayOrder:       ptr.Int32(1),
 							DisplayDescription: ptr.String("__DisplayDescription__"),
 							Type:               types.ActionPayloadFieldType("STRING"),
-							Value:              nil,
+							Value:              document.NewLazyDocument("__Document__"),
 							AllowedValues: []types.ActionReviewPayloadFieldAllowedValue{
 								{
-									Value:        nil,
-									DisplayValue: nil,
+									Value:        document.NewLazyDocument("__Document__"),
+									DisplayValue: document.NewLazyDocument("__Document__"),
 								},
 								{
-									Value:        nil,
-									DisplayValue: nil,
+									Value:        document.NewLazyDocument("__Document__"),
+									DisplayValue: document.NewLazyDocument("__Document__"),
 								},
 							},
 							AllowedFormat:       ptr.String("__AllowedFormat__"),
-							ArrayItemJsonSchema: nil,
+							ArrayItemJsonSchema: document.NewLazyDocument("__Document__"),
 							Required:            ptr.Bool(true),
 						},
 					},
@@ -2727,7 +3775,7 @@ func TestCheckResponseSnapshot_ListMessages(t *testing.T) {
 					PluginId: ptr.String("__PluginId__"),
 					Payload: map[string]types.ActionExecutionPayloadField{
 						"key0": {
-							Value: nil,
+							Value: document.NewLazyDocument("__Document__"),
 						},
 					},
 					PayloadFieldNameSeparator: ptr.String("__PayloadFieldNameSeparator__"),
@@ -2744,7 +3792,13 @@ func TestCheckResponseSnapshot_ListMessages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMessages(context.Background(), &ListMessagesInput{})
+	got, err := svc.ListMessages(context.Background(), &ListMessagesInput{
+		ConversationId: ptr.String("__ConversationId__"),
+		ApplicationId:  ptr.String("__ApplicationId__"),
+		UserId:         ptr.String("__UserId__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2779,7 +3833,12 @@ func TestCheckResponseSnapshot_ListPluginActions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPluginActions(context.Background(), &ListPluginActionsInput{})
+	got, err := svc.ListPluginActions(context.Background(), &ListPluginActionsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		PluginId:      ptr.String("__PluginId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2814,7 +3873,11 @@ func TestCheckResponseSnapshot_ListPluginTypeActions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPluginTypeActions(context.Background(), &ListPluginTypeActionsInput{})
+	got, err := svc.ListPluginTypeActions(context.Background(), &ListPluginTypeActionsInput{
+		PluginType: types.PluginType("SERVICE_NOW"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2847,7 +3910,10 @@ func TestCheckResponseSnapshot_ListPluginTypeMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPluginTypeMetadata(context.Background(), &ListPluginTypeMetadataInput{})
+	got, err := svc.ListPluginTypeMetadata(context.Background(), &ListPluginTypeMetadataInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2890,7 +3956,11 @@ func TestCheckResponseSnapshot_ListPlugins(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPlugins(context.Background(), &ListPluginsInput{})
+	got, err := svc.ListPlugins(context.Background(), &ListPluginsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2927,7 +3997,11 @@ func TestCheckResponseSnapshot_ListRetrievers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRetrievers(context.Background(), &ListRetrieversInput{})
+	got, err := svc.ListRetrievers(context.Background(), &ListRetrieversInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2976,7 +4050,11 @@ func TestCheckResponseSnapshot_ListSubscriptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSubscriptions(context.Background(), &ListSubscriptionsInput{})
+	got, err := svc.ListSubscriptions(context.Background(), &ListSubscriptionsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3006,7 +4084,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3043,7 +4123,11 @@ func TestCheckResponseSnapshot_ListWebExperiences(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWebExperiences(context.Background(), &ListWebExperiencesInput{})
+	got, err := svc.ListWebExperiences(context.Background(), &ListWebExperiencesInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3062,7 +4146,19 @@ func TestCheckResponseSnapshot_PutFeedback(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutFeedback(context.Background(), &PutFeedbackInput{})
+	got, err := svc.PutFeedback(context.Background(), &PutFeedbackInput{
+		ApplicationId:   ptr.String("__ApplicationId__"),
+		UserId:          ptr.String("__UserId__"),
+		ConversationId:  ptr.String("__ConversationId__"),
+		MessageId:       ptr.String("__MessageId__"),
+		MessageCopiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MessageUsefulness: &types.MessageUsefulnessFeedback{
+			Usefulness:  types.MessageUsefulness("USEFUL"),
+			Reason:      types.MessageUsefulnessReason("NOT_FACTUALLY_CORRECT"),
+			Comment:     ptr.String("__Comment__"),
+			SubmittedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3081,7 +4177,40 @@ func TestCheckResponseSnapshot_PutGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutGroup(context.Background(), &PutGroupInput{})
+	got, err := svc.PutGroup(context.Background(), &PutGroupInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		IndexId:       ptr.String("__IndexId__"),
+		GroupName:     ptr.String("__GroupName__"),
+		DataSourceId:  ptr.String("__DataSourceId__"),
+		Type:          types.MembershipType("INDEX"),
+		GroupMembers: &types.GroupMembers{
+			MemberGroups: []types.MemberGroup{
+				{
+					GroupName: ptr.String("__GroupName__"),
+					Type:      types.MembershipType("INDEX"),
+				},
+				{
+					GroupName: ptr.String("__GroupName__"),
+					Type:      types.MembershipType("INDEX"),
+				},
+			},
+			MemberUsers: []types.MemberUser{
+				{
+					UserId: ptr.String("__UserId__"),
+					Type:   types.MembershipType("INDEX"),
+				},
+				{
+					UserId: ptr.String("__UserId__"),
+					Type:   types.MembershipType("INDEX"),
+				},
+			},
+			S3PathForGroupMembers: &types.S3{
+				Bucket: ptr.String("__Bucket__"),
+				Key:    ptr.String("__Key__"),
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3150,7 +4279,70 @@ func TestCheckResponseSnapshot_SearchRelevantContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchRelevantContent(context.Background(), &SearchRelevantContentInput{})
+	got, err := svc.SearchRelevantContent(context.Background(), &SearchRelevantContentInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		QueryText:     ptr.String("__QueryText__"),
+		ContentSource: &types.ContentSourceMemberRetriever{
+			Value: types.RetrieverContentSource{
+				RetrieverId: ptr.String("__RetrieverId__"),
+			},
+		},
+		AttributeFilter: &types.AttributeFilter{
+			AndAllFilters: []types.AttributeFilter{
+				{},
+				{},
+			},
+			OrAllFilters: []types.AttributeFilter{
+				{},
+				{},
+			},
+			NotFilter: nil,
+			EqualsTo: &types.DocumentAttribute{
+				Name: ptr.String("__Name__"),
+				Value: &types.DocumentAttributeValueMemberStringValue{
+					Value: "__DocumentAttributeValueMemberStringValue__",
+				},
+			},
+			ContainsAll: &types.DocumentAttribute{
+				Name: ptr.String("__Name__"),
+				Value: &types.DocumentAttributeValueMemberStringValue{
+					Value: "__DocumentAttributeValueMemberStringValue__",
+				},
+			},
+			ContainsAny: &types.DocumentAttribute{
+				Name: ptr.String("__Name__"),
+				Value: &types.DocumentAttributeValueMemberStringValue{
+					Value: "__DocumentAttributeValueMemberStringValue__",
+				},
+			},
+			GreaterThan: &types.DocumentAttribute{
+				Name: ptr.String("__Name__"),
+				Value: &types.DocumentAttributeValueMemberStringValue{
+					Value: "__DocumentAttributeValueMemberStringValue__",
+				},
+			},
+			GreaterThanOrEquals: &types.DocumentAttribute{
+				Name: ptr.String("__Name__"),
+				Value: &types.DocumentAttributeValueMemberStringValue{
+					Value: "__DocumentAttributeValueMemberStringValue__",
+				},
+			},
+			LessThan: &types.DocumentAttribute{
+				Name: ptr.String("__Name__"),
+				Value: &types.DocumentAttributeValueMemberStringValue{
+					Value: "__DocumentAttributeValueMemberStringValue__",
+				},
+			},
+			LessThanOrEquals: &types.DocumentAttribute{
+				Name: ptr.String("__Name__"),
+				Value: &types.DocumentAttributeValueMemberStringValue{
+					Value: "__DocumentAttributeValueMemberStringValue__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3171,7 +4363,11 @@ func TestCheckResponseSnapshot_StartDataSourceSyncJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartDataSourceSyncJob(context.Background(), &StartDataSourceSyncJobInput{})
+	got, err := svc.StartDataSourceSyncJob(context.Background(), &StartDataSourceSyncJobInput{
+		DataSourceId:  ptr.String("__DataSourceId__"),
+		ApplicationId: ptr.String("__ApplicationId__"),
+		IndexId:       ptr.String("__IndexId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3190,7 +4386,11 @@ func TestCheckResponseSnapshot_StopDataSourceSyncJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopDataSourceSyncJob(context.Background(), &StopDataSourceSyncJobInput{})
+	got, err := svc.StopDataSourceSyncJob(context.Background(), &StopDataSourceSyncJobInput{
+		DataSourceId:  ptr.String("__DataSourceId__"),
+		ApplicationId: ptr.String("__ApplicationId__"),
+		IndexId:       ptr.String("__IndexId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3209,7 +4409,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3228,7 +4440,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3247,7 +4465,26 @@ func TestCheckResponseSnapshot_UpdateApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApplication(context.Background(), &UpdateApplicationInput{})
+	got, err := svc.UpdateApplication(context.Background(), &UpdateApplicationInput{
+		ApplicationId:             ptr.String("__ApplicationId__"),
+		IdentityCenterInstanceArn: ptr.String("__IdentityCenterInstanceArn__"),
+		DisplayName:               ptr.String("__DisplayName__"),
+		Description:               ptr.String("__Description__"),
+		RoleArn:                   ptr.String("__RoleArn__"),
+		AttachmentsConfiguration: &types.AttachmentsConfiguration{
+			AttachmentsControlMode: types.AttachmentsControlMode("ENABLED"),
+		},
+		QAppsConfiguration: &types.QAppsConfiguration{
+			QAppsControlMode: types.QAppsControlMode("ENABLED"),
+		},
+		PersonalizationConfiguration: &types.PersonalizationConfiguration{
+			PersonalizationControlMode: types.PersonalizationControlMode("ENABLED"),
+		},
+		AutoSubscriptionConfiguration: &types.AutoSubscriptionConfiguration{
+			AutoSubscribe:           types.AutoSubscriptionStatus("ENABLED"),
+			DefaultSubscriptionType: types.SubscriptionType("Q_LITE"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3266,7 +4503,299 @@ func TestCheckResponseSnapshot_UpdateChatControlsConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateChatControlsConfiguration(context.Background(), &UpdateChatControlsConfigurationInput{})
+	got, err := svc.UpdateChatControlsConfiguration(context.Background(), &UpdateChatControlsConfigurationInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		ResponseScope: types.ResponseScope("ENTERPRISE_CONTENT_ONLY"),
+		OrchestrationConfiguration: &types.OrchestrationConfiguration{
+			Control: types.OrchestrationControl("ENABLED"),
+		},
+		BlockedPhrasesConfigurationUpdate: &types.BlockedPhrasesConfigurationUpdate{
+			BlockedPhrasesToCreateOrUpdate: []string{
+				"__Member__",
+				"__Member__",
+			},
+			BlockedPhrasesToDelete: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SystemMessageOverride: ptr.String("__SystemMessageOverride__"),
+		},
+		TopicConfigurationsToCreateOrUpdate: []types.TopicConfiguration{
+			{
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				ExampleChatMessages: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Rules: []types.Rule{
+					{
+						IncludedUsersAndGroups: &types.UsersAndGroups{
+							UserIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UserGroups: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						ExcludedUsersAndGroups: &types.UsersAndGroups{
+							UserIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UserGroups: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						RuleType: types.RuleType("CONTENT_BLOCKER_RULE"),
+						RuleConfiguration: &types.RuleConfigurationMemberContentBlockerRule{
+							Value: types.ContentBlockerRule{
+								SystemMessageOverride: ptr.String("__SystemMessageOverride__"),
+							},
+						},
+					},
+					{
+						IncludedUsersAndGroups: &types.UsersAndGroups{
+							UserIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UserGroups: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						ExcludedUsersAndGroups: &types.UsersAndGroups{
+							UserIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UserGroups: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						RuleType: types.RuleType("CONTENT_BLOCKER_RULE"),
+						RuleConfiguration: &types.RuleConfigurationMemberContentBlockerRule{
+							Value: types.ContentBlockerRule{
+								SystemMessageOverride: ptr.String("__SystemMessageOverride__"),
+							},
+						},
+					},
+				},
+			},
+			{
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				ExampleChatMessages: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Rules: []types.Rule{
+					{
+						IncludedUsersAndGroups: &types.UsersAndGroups{
+							UserIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UserGroups: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						ExcludedUsersAndGroups: &types.UsersAndGroups{
+							UserIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UserGroups: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						RuleType: types.RuleType("CONTENT_BLOCKER_RULE"),
+						RuleConfiguration: &types.RuleConfigurationMemberContentBlockerRule{
+							Value: types.ContentBlockerRule{
+								SystemMessageOverride: ptr.String("__SystemMessageOverride__"),
+							},
+						},
+					},
+					{
+						IncludedUsersAndGroups: &types.UsersAndGroups{
+							UserIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UserGroups: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						ExcludedUsersAndGroups: &types.UsersAndGroups{
+							UserIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UserGroups: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						RuleType: types.RuleType("CONTENT_BLOCKER_RULE"),
+						RuleConfiguration: &types.RuleConfigurationMemberContentBlockerRule{
+							Value: types.ContentBlockerRule{
+								SystemMessageOverride: ptr.String("__SystemMessageOverride__"),
+							},
+						},
+					},
+				},
+			},
+		},
+		TopicConfigurationsToDelete: []types.TopicConfiguration{
+			{
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				ExampleChatMessages: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Rules: []types.Rule{
+					{
+						IncludedUsersAndGroups: &types.UsersAndGroups{
+							UserIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UserGroups: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						ExcludedUsersAndGroups: &types.UsersAndGroups{
+							UserIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UserGroups: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						RuleType: types.RuleType("CONTENT_BLOCKER_RULE"),
+						RuleConfiguration: &types.RuleConfigurationMemberContentBlockerRule{
+							Value: types.ContentBlockerRule{
+								SystemMessageOverride: ptr.String("__SystemMessageOverride__"),
+							},
+						},
+					},
+					{
+						IncludedUsersAndGroups: &types.UsersAndGroups{
+							UserIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UserGroups: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						ExcludedUsersAndGroups: &types.UsersAndGroups{
+							UserIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UserGroups: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						RuleType: types.RuleType("CONTENT_BLOCKER_RULE"),
+						RuleConfiguration: &types.RuleConfigurationMemberContentBlockerRule{
+							Value: types.ContentBlockerRule{
+								SystemMessageOverride: ptr.String("__SystemMessageOverride__"),
+							},
+						},
+					},
+				},
+			},
+			{
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				ExampleChatMessages: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Rules: []types.Rule{
+					{
+						IncludedUsersAndGroups: &types.UsersAndGroups{
+							UserIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UserGroups: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						ExcludedUsersAndGroups: &types.UsersAndGroups{
+							UserIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UserGroups: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						RuleType: types.RuleType("CONTENT_BLOCKER_RULE"),
+						RuleConfiguration: &types.RuleConfigurationMemberContentBlockerRule{
+							Value: types.ContentBlockerRule{
+								SystemMessageOverride: ptr.String("__SystemMessageOverride__"),
+							},
+						},
+					},
+					{
+						IncludedUsersAndGroups: &types.UsersAndGroups{
+							UserIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UserGroups: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						ExcludedUsersAndGroups: &types.UsersAndGroups{
+							UserIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UserGroups: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						RuleType: types.RuleType("CONTENT_BLOCKER_RULE"),
+						RuleConfiguration: &types.RuleConfigurationMemberContentBlockerRule{
+							Value: types.ContentBlockerRule{
+								SystemMessageOverride: ptr.String("__SystemMessageOverride__"),
+							},
+						},
+					},
+				},
+			},
+		},
+		CreatorModeConfiguration: &types.CreatorModeConfiguration{
+			CreatorModeControl: types.CreatorModeControl("ENABLED"),
+		},
+		HallucinationReductionConfiguration: &types.HallucinationReductionConfiguration{
+			HallucinationReductionControl: types.HallucinationReductionControl("ENABLED"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3285,7 +4814,26 @@ func TestCheckResponseSnapshot_UpdateChatResponseConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateChatResponseConfiguration(context.Background(), &UpdateChatResponseConfigurationInput{})
+	got, err := svc.UpdateChatResponseConfiguration(context.Background(), &UpdateChatResponseConfigurationInput{
+		ApplicationId:               ptr.String("__ApplicationId__"),
+		ChatResponseConfigurationId: ptr.String("__ChatResponseConfigurationId__"),
+		DisplayName:                 ptr.String("__DisplayName__"),
+		ResponseConfigurations: map[string]types.ResponseConfiguration{
+			"key0": {
+				InstructionCollection: &types.InstructionCollection{
+					ResponseLength:     ptr.String("__ResponseLength__"),
+					TargetAudience:     ptr.String("__TargetAudience__"),
+					Perspective:        ptr.String("__Perspective__"),
+					OutputStyle:        ptr.String("__OutputStyle__"),
+					Identity:           ptr.String("__Identity__"),
+					Tone:               ptr.String("__Tone__"),
+					CustomInstructions: ptr.String("__CustomInstructions__"),
+					Examples:           ptr.String("__Examples__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3304,7 +4852,141 @@ func TestCheckResponseSnapshot_UpdateDataAccessor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataAccessor(context.Background(), &UpdateDataAccessorInput{})
+	got, err := svc.UpdateDataAccessor(context.Background(), &UpdateDataAccessorInput{
+		ApplicationId:  ptr.String("__ApplicationId__"),
+		DataAccessorId: ptr.String("__DataAccessorId__"),
+		ActionConfigurations: []types.ActionConfiguration{
+			{
+				Action: ptr.String("__Action__"),
+				FilterConfiguration: &types.ActionFilterConfiguration{
+					DocumentAttributeFilter: &types.AttributeFilter{
+						AndAllFilters: []types.AttributeFilter{
+							{},
+							{},
+						},
+						OrAllFilters: []types.AttributeFilter{
+							{},
+							{},
+						},
+						NotFilter: nil,
+						EqualsTo: &types.DocumentAttribute{
+							Name: ptr.String("__Name__"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+						ContainsAll: &types.DocumentAttribute{
+							Name: ptr.String("__Name__"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+						ContainsAny: &types.DocumentAttribute{
+							Name: ptr.String("__Name__"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+						GreaterThan: &types.DocumentAttribute{
+							Name: ptr.String("__Name__"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+						GreaterThanOrEquals: &types.DocumentAttribute{
+							Name: ptr.String("__Name__"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+						LessThan: &types.DocumentAttribute{
+							Name: ptr.String("__Name__"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+						LessThanOrEquals: &types.DocumentAttribute{
+							Name: ptr.String("__Name__"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+					},
+				},
+			},
+			{
+				Action: ptr.String("__Action__"),
+				FilterConfiguration: &types.ActionFilterConfiguration{
+					DocumentAttributeFilter: &types.AttributeFilter{
+						AndAllFilters: []types.AttributeFilter{
+							{},
+							{},
+						},
+						OrAllFilters: []types.AttributeFilter{
+							{},
+							{},
+						},
+						NotFilter: nil,
+						EqualsTo: &types.DocumentAttribute{
+							Name: ptr.String("__Name__"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+						ContainsAll: &types.DocumentAttribute{
+							Name: ptr.String("__Name__"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+						ContainsAny: &types.DocumentAttribute{
+							Name: ptr.String("__Name__"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+						GreaterThan: &types.DocumentAttribute{
+							Name: ptr.String("__Name__"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+						GreaterThanOrEquals: &types.DocumentAttribute{
+							Name: ptr.String("__Name__"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+						LessThan: &types.DocumentAttribute{
+							Name: ptr.String("__Name__"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+						LessThanOrEquals: &types.DocumentAttribute{
+							Name: ptr.String("__Name__"),
+							Value: &types.DocumentAttributeValueMemberStringValue{
+								Value: "__DocumentAttributeValueMemberStringValue__",
+							},
+						},
+					},
+				},
+			},
+		},
+		AuthenticationDetail: &types.DataAccessorAuthenticationDetail{
+			AuthenticationType: types.DataAccessorAuthenticationType("AWS_IAM_IDC_TTI"),
+			AuthenticationConfiguration: &types.DataAccessorAuthenticationConfigurationMemberIdcTrustedTokenIssuerConfiguration{
+				Value: types.DataAccessorIdcTrustedTokenIssuerConfiguration{
+					IdcTrustedTokenIssuerArn: ptr.String("__IdcTrustedTokenIssuerArn__"),
+				},
+			},
+			ExternalIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		DisplayName: ptr.String("__DisplayName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3323,7 +5005,99 @@ func TestCheckResponseSnapshot_UpdateDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataSource(context.Background(), &UpdateDataSourceInput{})
+	got, err := svc.UpdateDataSource(context.Background(), &UpdateDataSourceInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		IndexId:       ptr.String("__IndexId__"),
+		DataSourceId:  ptr.String("__DataSourceId__"),
+		DisplayName:   ptr.String("__DisplayName__"),
+		Configuration: document.NewLazyDocument("__Document__"),
+		VpcConfiguration: &types.DataSourceVpcConfiguration{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Description:  ptr.String("__Description__"),
+		SyncSchedule: ptr.String("__SyncSchedule__"),
+		RoleArn:      ptr.String("__RoleArn__"),
+		DocumentEnrichmentConfiguration: &types.DocumentEnrichmentConfiguration{
+			InlineConfigurations: []types.InlineDocumentEnrichmentConfiguration{
+				{
+					Condition: &types.DocumentAttributeCondition{
+						Key:      ptr.String("__Key__"),
+						Operator: types.DocumentEnrichmentConditionOperator("GREATER_THAN"),
+						Value: &types.DocumentAttributeValueMemberStringValue{
+							Value: "__DocumentAttributeValueMemberStringValue__",
+						},
+					},
+					Target: &types.DocumentAttributeTarget{
+						Key: ptr.String("__Key__"),
+						Value: &types.DocumentAttributeValueMemberStringValue{
+							Value: "__DocumentAttributeValueMemberStringValue__",
+						},
+						AttributeValueOperator: types.AttributeValueOperator("DELETE"),
+					},
+					DocumentContentOperator: types.DocumentContentOperator("DELETE"),
+				},
+				{
+					Condition: &types.DocumentAttributeCondition{
+						Key:      ptr.String("__Key__"),
+						Operator: types.DocumentEnrichmentConditionOperator("GREATER_THAN"),
+						Value: &types.DocumentAttributeValueMemberStringValue{
+							Value: "__DocumentAttributeValueMemberStringValue__",
+						},
+					},
+					Target: &types.DocumentAttributeTarget{
+						Key: ptr.String("__Key__"),
+						Value: &types.DocumentAttributeValueMemberStringValue{
+							Value: "__DocumentAttributeValueMemberStringValue__",
+						},
+						AttributeValueOperator: types.AttributeValueOperator("DELETE"),
+					},
+					DocumentContentOperator: types.DocumentContentOperator("DELETE"),
+				},
+			},
+			PreExtractionHookConfiguration: &types.HookConfiguration{
+				InvocationCondition: &types.DocumentAttributeCondition{
+					Key:      ptr.String("__Key__"),
+					Operator: types.DocumentEnrichmentConditionOperator("GREATER_THAN"),
+					Value: &types.DocumentAttributeValueMemberStringValue{
+						Value: "__DocumentAttributeValueMemberStringValue__",
+					},
+				},
+				LambdaArn:    ptr.String("__LambdaArn__"),
+				S3BucketName: ptr.String("__S3BucketName__"),
+				RoleArn:      ptr.String("__RoleArn__"),
+			},
+			PostExtractionHookConfiguration: &types.HookConfiguration{
+				InvocationCondition: &types.DocumentAttributeCondition{
+					Key:      ptr.String("__Key__"),
+					Operator: types.DocumentEnrichmentConditionOperator("GREATER_THAN"),
+					Value: &types.DocumentAttributeValueMemberStringValue{
+						Value: "__DocumentAttributeValueMemberStringValue__",
+					},
+				},
+				LambdaArn:    ptr.String("__LambdaArn__"),
+				S3BucketName: ptr.String("__S3BucketName__"),
+				RoleArn:      ptr.String("__RoleArn__"),
+			},
+		},
+		MediaExtractionConfiguration: &types.MediaExtractionConfiguration{
+			ImageExtractionConfiguration: &types.ImageExtractionConfiguration{
+				ImageExtractionStatus: types.ImageExtractionStatus("ENABLED"),
+			},
+			AudioExtractionConfiguration: &types.AudioExtractionConfiguration{
+				AudioExtractionStatus: types.AudioExtractionStatus("ENABLED"),
+			},
+			VideoExtractionConfiguration: &types.VideoExtractionConfiguration{
+				VideoExtractionStatus: types.VideoExtractionStatus("ENABLED"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3342,7 +5116,27 @@ func TestCheckResponseSnapshot_UpdateIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIndex(context.Background(), &UpdateIndexInput{})
+	got, err := svc.UpdateIndex(context.Background(), &UpdateIndexInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		IndexId:       ptr.String("__IndexId__"),
+		DisplayName:   ptr.String("__DisplayName__"),
+		Description:   ptr.String("__Description__"),
+		CapacityConfiguration: &types.IndexCapacityConfiguration{
+			Units: ptr.Int32(1),
+		},
+		DocumentAttributeConfigurations: []types.DocumentAttributeConfiguration{
+			{
+				Name:   ptr.String("__Name__"),
+				Type:   types.AttributeType("STRING"),
+				Search: types.Status("ENABLED"),
+			},
+			{
+				Name:   ptr.String("__Name__"),
+				Type:   types.AttributeType("STRING"),
+				Search: types.Status("ENABLED"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3361,7 +5155,26 @@ func TestCheckResponseSnapshot_UpdatePlugin(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePlugin(context.Background(), &UpdatePluginInput{})
+	got, err := svc.UpdatePlugin(context.Background(), &UpdatePluginInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		PluginId:      ptr.String("__PluginId__"),
+		DisplayName:   ptr.String("__DisplayName__"),
+		State:         types.PluginState("ENABLED"),
+		ServerUrl:     ptr.String("__ServerUrl__"),
+		CustomPluginConfiguration: &types.CustomPluginConfiguration{
+			Description:   ptr.String("__Description__"),
+			ApiSchemaType: types.APISchemaType("OPEN_API_V3"),
+			ApiSchema: &types.APISchemaMemberPayload{
+				Value: "__APISchemaMemberPayload__",
+			},
+		},
+		AuthConfiguration: &types.PluginAuthConfigurationMemberBasicAuthConfiguration{
+			Value: types.BasicAuthConfiguration{
+				SecretArn: ptr.String("__SecretArn__"),
+				RoleArn:   ptr.String("__RoleArn__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3380,7 +5193,26 @@ func TestCheckResponseSnapshot_UpdateRetriever(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRetriever(context.Background(), &UpdateRetrieverInput{})
+	got, err := svc.UpdateRetriever(context.Background(), &UpdateRetrieverInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		RetrieverId:   ptr.String("__RetrieverId__"),
+		Configuration: &types.RetrieverConfigurationMemberNativeIndexConfiguration{
+			Value: types.NativeIndexConfiguration{
+				IndexId: ptr.String("__IndexId__"),
+				Version: ptr.Int64(1),
+				BoostingOverride: map[string]types.DocumentAttributeBoostingConfiguration{
+					"key0": &types.DocumentAttributeBoostingConfigurationMemberNumberConfiguration{
+						Value: types.NumberAttributeBoostingConfiguration{
+							BoostingLevel: types.DocumentAttributeBoostingLevel("NONE"),
+							BoostingType:  types.NumberAttributeBoostingType("PRIORITIZE_LARGER_VALUES"),
+						},
+					},
+				},
+			},
+		},
+		DisplayName: ptr.String("__DisplayName__"),
+		RoleArn:     ptr.String("__RoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3407,7 +5239,11 @@ func TestCheckResponseSnapshot_UpdateSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSubscription(context.Background(), &UpdateSubscriptionInput{})
+	got, err := svc.UpdateSubscription(context.Background(), &UpdateSubscriptionInput{
+		ApplicationId:  ptr.String("__ApplicationId__"),
+		SubscriptionId: ptr.String("__SubscriptionId__"),
+		Type:           types.SubscriptionType("Q_LITE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3463,7 +5299,34 @@ func TestCheckResponseSnapshot_UpdateUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUser(context.Background(), &UpdateUserInput{})
+	got, err := svc.UpdateUser(context.Background(), &UpdateUserInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		UserId:        ptr.String("__UserId__"),
+		UserAliasesToUpdate: []types.UserAlias{
+			{
+				IndexId:      ptr.String("__IndexId__"),
+				DataSourceId: ptr.String("__DataSourceId__"),
+				UserId:       ptr.String("__UserId__"),
+			},
+			{
+				IndexId:      ptr.String("__IndexId__"),
+				DataSourceId: ptr.String("__DataSourceId__"),
+				UserId:       ptr.String("__UserId__"),
+			},
+		},
+		UserAliasesToDelete: []types.UserAlias{
+			{
+				IndexId:      ptr.String("__IndexId__"),
+				DataSourceId: ptr.String("__DataSourceId__"),
+				UserId:       ptr.String("__UserId__"),
+			},
+			{
+				IndexId:      ptr.String("__IndexId__"),
+				DataSourceId: ptr.String("__DataSourceId__"),
+				UserId:       ptr.String("__UserId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3482,7 +5345,44 @@ func TestCheckResponseSnapshot_UpdateWebExperience(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWebExperience(context.Background(), &UpdateWebExperienceInput{})
+	got, err := svc.UpdateWebExperience(context.Background(), &UpdateWebExperienceInput{
+		ApplicationId:   ptr.String("__ApplicationId__"),
+		WebExperienceId: ptr.String("__WebExperienceId__"),
+		RoleArn:         ptr.String("__RoleArn__"),
+		AuthenticationConfiguration: &types.WebExperienceAuthConfigurationMemberSamlConfiguration{
+			Value: types.SamlConfiguration{
+				MetadataXML:        ptr.String("__MetadataXML__"),
+				RoleArn:            ptr.String("__RoleArn__"),
+				UserIdAttribute:    ptr.String("__UserIdAttribute__"),
+				UserGroupAttribute: ptr.String("__UserGroupAttribute__"),
+			},
+		},
+		Title:                    ptr.String("__Title__"),
+		Subtitle:                 ptr.String("__Subtitle__"),
+		WelcomeMessage:           ptr.String("__WelcomeMessage__"),
+		SamplePromptsControlMode: types.WebExperienceSamplePromptsControlMode("ENABLED"),
+		IdentityProviderConfiguration: &types.IdentityProviderConfigurationMemberSamlConfiguration{
+			Value: types.SamlProviderConfiguration{
+				AuthenticationUrl: ptr.String("__AuthenticationUrl__"),
+			},
+		},
+		Origins: []string{
+			"__Member__",
+			"__Member__",
+		},
+		BrowserExtensionConfiguration: &types.BrowserExtensionConfiguration{
+			EnabledBrowserExtensions: []types.BrowserExtension{
+				types.BrowserExtension("FIREFOX"),
+				types.BrowserExtension("FIREFOX"),
+			},
+		},
+		CustomizationConfiguration: &types.CustomizationConfiguration{
+			CustomCSSUrl: ptr.String("__CustomCSSUrl__"),
+			LogoUrl:      ptr.String("__LogoUrl__"),
+			FontUrl:      ptr.String("__FontUrl__"),
+			FaviconUrl:   ptr.String("__FaviconUrl__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3503,7 +5403,33 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociatePermission(context.Background(), &AssociatePermissionInput{})
+	_, opErr := svc.AssociatePermission(context.Background(), &AssociatePermissionInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		StatementId:   ptr.String("__StatementId__"),
+		Actions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Conditions: []types.PermissionCondition{
+			{
+				ConditionOperator: types.PermissionConditionOperator("StringEquals"),
+				ConditionKey:      ptr.String("__ConditionKey__"),
+				ConditionValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				ConditionOperator: types.PermissionConditionOperator("StringEquals"),
+				ConditionKey:      ptr.String("__ConditionKey__"),
+				ConditionValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Principal: ptr.String("__Principal__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3530,7 +5456,33 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociatePermission(context.Background(), &AssociatePermissionInput{})
+	_, opErr := svc.AssociatePermission(context.Background(), &AssociatePermissionInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		StatementId:   ptr.String("__StatementId__"),
+		Actions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Conditions: []types.PermissionCondition{
+			{
+				ConditionOperator: types.PermissionConditionOperator("StringEquals"),
+				ConditionKey:      ptr.String("__ConditionKey__"),
+				ConditionValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				ConditionOperator: types.PermissionConditionOperator("StringEquals"),
+				ConditionKey:      ptr.String("__ConditionKey__"),
+				ConditionValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Principal: ptr.String("__Principal__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3555,7 +5507,113 @@ func TestCheckResponseSnapshot_Error_ExternalResourceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ChatSync(context.Background(), &ChatSyncInput{})
+	_, opErr := svc.ChatSync(context.Background(), &ChatSyncInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		UserId:        ptr.String("__UserId__"),
+		UserGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UserMessage: ptr.String("__UserMessage__"),
+		Attachments: []types.AttachmentInput{
+			{
+				Data: []byte("blob"),
+				Name: ptr.String("__Name__"),
+				CopyFrom: &types.CopyFromSourceMemberConversation{
+					Value: types.ConversationSource{
+						ConversationId: ptr.String("__ConversationId__"),
+						AttachmentId:   ptr.String("__AttachmentId__"),
+					},
+				},
+			},
+			{
+				Data: []byte("blob"),
+				Name: ptr.String("__Name__"),
+				CopyFrom: &types.CopyFromSourceMemberConversation{
+					Value: types.ConversationSource{
+						ConversationId: ptr.String("__ConversationId__"),
+						AttachmentId:   ptr.String("__AttachmentId__"),
+					},
+				},
+			},
+		},
+		ActionExecution: &types.ActionExecution{
+			PluginId: ptr.String("__PluginId__"),
+			Payload: map[string]types.ActionExecutionPayloadField{
+				"key0": {
+					Value: document.NewLazyDocument("__Document__"),
+				},
+			},
+			PayloadFieldNameSeparator: ptr.String("__PayloadFieldNameSeparator__"),
+		},
+		AuthChallengeResponse: &types.AuthChallengeResponse{
+			ResponseMap: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		ConversationId:  ptr.String("__ConversationId__"),
+		ParentMessageId: ptr.String("__ParentMessageId__"),
+		AttributeFilter: &types.AttributeFilter{
+			AndAllFilters: []types.AttributeFilter{
+				{},
+				{},
+			},
+			OrAllFilters: []types.AttributeFilter{
+				{},
+				{},
+			},
+			NotFilter: nil,
+			EqualsTo: &types.DocumentAttribute{
+				Name: ptr.String("__Name__"),
+				Value: &types.DocumentAttributeValueMemberStringValue{
+					Value: "__DocumentAttributeValueMemberStringValue__",
+				},
+			},
+			ContainsAll: &types.DocumentAttribute{
+				Name: ptr.String("__Name__"),
+				Value: &types.DocumentAttributeValueMemberStringValue{
+					Value: "__DocumentAttributeValueMemberStringValue__",
+				},
+			},
+			ContainsAny: &types.DocumentAttribute{
+				Name: ptr.String("__Name__"),
+				Value: &types.DocumentAttributeValueMemberStringValue{
+					Value: "__DocumentAttributeValueMemberStringValue__",
+				},
+			},
+			GreaterThan: &types.DocumentAttribute{
+				Name: ptr.String("__Name__"),
+				Value: &types.DocumentAttributeValueMemberStringValue{
+					Value: "__DocumentAttributeValueMemberStringValue__",
+				},
+			},
+			GreaterThanOrEquals: &types.DocumentAttribute{
+				Name: ptr.String("__Name__"),
+				Value: &types.DocumentAttributeValueMemberStringValue{
+					Value: "__DocumentAttributeValueMemberStringValue__",
+				},
+			},
+			LessThan: &types.DocumentAttribute{
+				Name: ptr.String("__Name__"),
+				Value: &types.DocumentAttributeValueMemberStringValue{
+					Value: "__DocumentAttributeValueMemberStringValue__",
+				},
+			},
+			LessThanOrEquals: &types.DocumentAttribute{
+				Name: ptr.String("__Name__"),
+				Value: &types.DocumentAttributeValueMemberStringValue{
+					Value: "__DocumentAttributeValueMemberStringValue__",
+				},
+			},
+		},
+		ChatMode: types.ChatMode("RETRIEVAL_MODE"),
+		ChatModeConfiguration: &types.ChatModeConfigurationMemberPluginConfiguration{
+			Value: types.PluginConfiguration{
+				PluginId: ptr.String("__PluginId__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3580,7 +5638,33 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociatePermission(context.Background(), &AssociatePermissionInput{})
+	_, opErr := svc.AssociatePermission(context.Background(), &AssociatePermissionInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		StatementId:   ptr.String("__StatementId__"),
+		Actions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Conditions: []types.PermissionCondition{
+			{
+				ConditionOperator: types.PermissionConditionOperator("StringEquals"),
+				ConditionKey:      ptr.String("__ConditionKey__"),
+				ConditionValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				ConditionOperator: types.PermissionConditionOperator("StringEquals"),
+				ConditionKey:      ptr.String("__ConditionKey__"),
+				ConditionValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Principal: ptr.String("__Principal__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3605,7 +5689,113 @@ func TestCheckResponseSnapshot_Error_LicenseNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ChatSync(context.Background(), &ChatSyncInput{})
+	_, opErr := svc.ChatSync(context.Background(), &ChatSyncInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		UserId:        ptr.String("__UserId__"),
+		UserGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UserMessage: ptr.String("__UserMessage__"),
+		Attachments: []types.AttachmentInput{
+			{
+				Data: []byte("blob"),
+				Name: ptr.String("__Name__"),
+				CopyFrom: &types.CopyFromSourceMemberConversation{
+					Value: types.ConversationSource{
+						ConversationId: ptr.String("__ConversationId__"),
+						AttachmentId:   ptr.String("__AttachmentId__"),
+					},
+				},
+			},
+			{
+				Data: []byte("blob"),
+				Name: ptr.String("__Name__"),
+				CopyFrom: &types.CopyFromSourceMemberConversation{
+					Value: types.ConversationSource{
+						ConversationId: ptr.String("__ConversationId__"),
+						AttachmentId:   ptr.String("__AttachmentId__"),
+					},
+				},
+			},
+		},
+		ActionExecution: &types.ActionExecution{
+			PluginId: ptr.String("__PluginId__"),
+			Payload: map[string]types.ActionExecutionPayloadField{
+				"key0": {
+					Value: document.NewLazyDocument("__Document__"),
+				},
+			},
+			PayloadFieldNameSeparator: ptr.String("__PayloadFieldNameSeparator__"),
+		},
+		AuthChallengeResponse: &types.AuthChallengeResponse{
+			ResponseMap: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		ConversationId:  ptr.String("__ConversationId__"),
+		ParentMessageId: ptr.String("__ParentMessageId__"),
+		AttributeFilter: &types.AttributeFilter{
+			AndAllFilters: []types.AttributeFilter{
+				{},
+				{},
+			},
+			OrAllFilters: []types.AttributeFilter{
+				{},
+				{},
+			},
+			NotFilter: nil,
+			EqualsTo: &types.DocumentAttribute{
+				Name: ptr.String("__Name__"),
+				Value: &types.DocumentAttributeValueMemberStringValue{
+					Value: "__DocumentAttributeValueMemberStringValue__",
+				},
+			},
+			ContainsAll: &types.DocumentAttribute{
+				Name: ptr.String("__Name__"),
+				Value: &types.DocumentAttributeValueMemberStringValue{
+					Value: "__DocumentAttributeValueMemberStringValue__",
+				},
+			},
+			ContainsAny: &types.DocumentAttribute{
+				Name: ptr.String("__Name__"),
+				Value: &types.DocumentAttributeValueMemberStringValue{
+					Value: "__DocumentAttributeValueMemberStringValue__",
+				},
+			},
+			GreaterThan: &types.DocumentAttribute{
+				Name: ptr.String("__Name__"),
+				Value: &types.DocumentAttributeValueMemberStringValue{
+					Value: "__DocumentAttributeValueMemberStringValue__",
+				},
+			},
+			GreaterThanOrEquals: &types.DocumentAttribute{
+				Name: ptr.String("__Name__"),
+				Value: &types.DocumentAttributeValueMemberStringValue{
+					Value: "__DocumentAttributeValueMemberStringValue__",
+				},
+			},
+			LessThan: &types.DocumentAttribute{
+				Name: ptr.String("__Name__"),
+				Value: &types.DocumentAttributeValueMemberStringValue{
+					Value: "__DocumentAttributeValueMemberStringValue__",
+				},
+			},
+			LessThanOrEquals: &types.DocumentAttribute{
+				Name: ptr.String("__Name__"),
+				Value: &types.DocumentAttributeValueMemberStringValue{
+					Value: "__DocumentAttributeValueMemberStringValue__",
+				},
+			},
+		},
+		ChatMode: types.ChatMode("RETRIEVAL_MODE"),
+		ChatModeConfiguration: &types.ChatModeConfigurationMemberPluginConfiguration{
+			Value: types.PluginConfiguration{
+				PluginId: ptr.String("__PluginId__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3630,7 +5820,12 @@ func TestCheckResponseSnapshot_Error_MediaTooLargeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetMedia(context.Background(), &GetMediaInput{})
+	_, opErr := svc.GetMedia(context.Background(), &GetMediaInput{
+		ApplicationId:  ptr.String("__ApplicationId__"),
+		ConversationId: ptr.String("__ConversationId__"),
+		MessageId:      ptr.String("__MessageId__"),
+		MediaId:        ptr.String("__MediaId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3657,7 +5852,33 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociatePermission(context.Background(), &AssociatePermissionInput{})
+	_, opErr := svc.AssociatePermission(context.Background(), &AssociatePermissionInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		StatementId:   ptr.String("__StatementId__"),
+		Actions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Conditions: []types.PermissionCondition{
+			{
+				ConditionOperator: types.PermissionConditionOperator("StringEquals"),
+				ConditionKey:      ptr.String("__ConditionKey__"),
+				ConditionValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				ConditionOperator: types.PermissionConditionOperator("StringEquals"),
+				ConditionKey:      ptr.String("__ConditionKey__"),
+				ConditionValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Principal: ptr.String("__Principal__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3684,7 +5905,33 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociatePermission(context.Background(), &AssociatePermissionInput{})
+	_, opErr := svc.AssociatePermission(context.Background(), &AssociatePermissionInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		StatementId:   ptr.String("__StatementId__"),
+		Actions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Conditions: []types.PermissionCondition{
+			{
+				ConditionOperator: types.PermissionConditionOperator("StringEquals"),
+				ConditionKey:      ptr.String("__ConditionKey__"),
+				ConditionValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				ConditionOperator: types.PermissionConditionOperator("StringEquals"),
+				ConditionKey:      ptr.String("__ConditionKey__"),
+				ConditionValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Principal: ptr.String("__Principal__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3709,7 +5956,33 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociatePermission(context.Background(), &AssociatePermissionInput{})
+	_, opErr := svc.AssociatePermission(context.Background(), &AssociatePermissionInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		StatementId:   ptr.String("__StatementId__"),
+		Actions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Conditions: []types.PermissionCondition{
+			{
+				ConditionOperator: types.PermissionConditionOperator("StringEquals"),
+				ConditionKey:      ptr.String("__ConditionKey__"),
+				ConditionValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				ConditionOperator: types.PermissionConditionOperator("StringEquals"),
+				ConditionKey:      ptr.String("__ConditionKey__"),
+				ConditionValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Principal: ptr.String("__Principal__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3745,7 +6018,33 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociatePermission(context.Background(), &AssociatePermissionInput{})
+	_, opErr := svc.AssociatePermission(context.Background(), &AssociatePermissionInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		StatementId:   ptr.String("__StatementId__"),
+		Actions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Conditions: []types.PermissionCondition{
+			{
+				ConditionOperator: types.PermissionConditionOperator("StringEquals"),
+				ConditionKey:      ptr.String("__ConditionKey__"),
+				ConditionValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				ConditionOperator: types.PermissionConditionOperator("StringEquals"),
+				ConditionKey:      ptr.String("__ConditionKey__"),
+				ConditionValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Principal: ptr.String("__Principal__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

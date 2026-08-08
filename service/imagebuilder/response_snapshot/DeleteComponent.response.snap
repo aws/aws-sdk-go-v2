@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"componentBuildVersionArn":"__ComponentBuildVersionArn__","requestId":"__RequestId__"}

@@ -119,7 +119,49 @@ func TestCheckResponseSnapshot_CreateBatchInferenceJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBatchInferenceJob(context.Background(), &CreateBatchInferenceJobInput{})
+	got, err := svc.CreateBatchInferenceJob(context.Background(), &CreateBatchInferenceJobInput{
+		JobName:            ptr.String("__JobName__"),
+		SolutionVersionArn: ptr.String("__SolutionVersionArn__"),
+		FilterArn:          ptr.String("__FilterArn__"),
+		NumResults:         ptr.Int32(1),
+		JobInput: &types.BatchInferenceJobInput{
+			S3DataSource: &types.S3DataConfig{
+				Path:      ptr.String("__Path__"),
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+		},
+		JobOutput: &types.BatchInferenceJobOutput{
+			S3DataDestination: &types.S3DataConfig{
+				Path:      ptr.String("__Path__"),
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		BatchInferenceJobConfig: &types.BatchInferenceJobConfig{
+			ItemExplorationConfig: map[string]string{
+				"key0": "__Value__",
+			},
+			RankingInfluence: map[string]float64{
+				"key0": 1.0,
+			},
+		},
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+		BatchInferenceJobMode: types.BatchInferenceJobMode("BATCH_INFERENCE"),
+		ThemeGenerationConfig: &types.ThemeGenerationConfig{
+			FieldsForThemeGeneration: &types.FieldsForThemeGeneration{
+				ItemName: ptr.String("__ItemName__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -140,7 +182,35 @@ func TestCheckResponseSnapshot_CreateBatchSegmentJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBatchSegmentJob(context.Background(), &CreateBatchSegmentJobInput{})
+	got, err := svc.CreateBatchSegmentJob(context.Background(), &CreateBatchSegmentJobInput{
+		JobName:            ptr.String("__JobName__"),
+		SolutionVersionArn: ptr.String("__SolutionVersionArn__"),
+		FilterArn:          ptr.String("__FilterArn__"),
+		NumResults:         ptr.Int32(1),
+		JobInput: &types.BatchSegmentJobInput{
+			S3DataSource: &types.S3DataConfig{
+				Path:      ptr.String("__Path__"),
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+		},
+		JobOutput: &types.BatchSegmentJobOutput{
+			S3DataDestination: &types.S3DataConfig{
+				Path:      ptr.String("__Path__"),
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -161,7 +231,31 @@ func TestCheckResponseSnapshot_CreateCampaign(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCampaign(context.Background(), &CreateCampaignInput{})
+	got, err := svc.CreateCampaign(context.Background(), &CreateCampaignInput{
+		Name:               ptr.String("__Name__"),
+		SolutionVersionArn: ptr.String("__SolutionVersionArn__"),
+		MinProvisionedTPS:  ptr.Int32(1),
+		CampaignConfig: &types.CampaignConfig{
+			ItemExplorationConfig: map[string]string{
+				"key0": "__Value__",
+			},
+			EnableMetadataWithRecommendations: ptr.Bool(true),
+			SyncWithLatestSolutionVersion:     ptr.Bool(true),
+			RankingInfluence: map[string]float64{
+				"key0": 1.0,
+			},
+		},
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -182,7 +276,24 @@ func TestCheckResponseSnapshot_CreateDataDeletionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataDeletionJob(context.Background(), &CreateDataDeletionJobInput{})
+	got, err := svc.CreateDataDeletionJob(context.Background(), &CreateDataDeletionJobInput{
+		JobName:         ptr.String("__JobName__"),
+		DatasetGroupArn: ptr.String("__DatasetGroupArn__"),
+		DataSource: &types.DataSource{
+			DataLocation: ptr.String("__DataLocation__"),
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -203,7 +314,22 @@ func TestCheckResponseSnapshot_CreateDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataset(context.Background(), &CreateDatasetInput{})
+	got, err := svc.CreateDataset(context.Background(), &CreateDatasetInput{
+		Name:            ptr.String("__Name__"),
+		SchemaArn:       ptr.String("__SchemaArn__"),
+		DatasetGroupArn: ptr.String("__DatasetGroupArn__"),
+		DatasetType:     ptr.String("__DatasetType__"),
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -224,7 +350,28 @@ func TestCheckResponseSnapshot_CreateDatasetExportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDatasetExportJob(context.Background(), &CreateDatasetExportJobInput{})
+	got, err := svc.CreateDatasetExportJob(context.Background(), &CreateDatasetExportJobInput{
+		JobName:       ptr.String("__JobName__"),
+		DatasetArn:    ptr.String("__DatasetArn__"),
+		IngestionMode: types.IngestionMode("BULK"),
+		RoleArn:       ptr.String("__RoleArn__"),
+		JobOutput: &types.DatasetExportJobOutput{
+			S3DataDestination: &types.S3DataConfig{
+				Path:      ptr.String("__Path__"),
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -246,7 +393,22 @@ func TestCheckResponseSnapshot_CreateDatasetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDatasetGroup(context.Background(), &CreateDatasetGroupInput{})
+	got, err := svc.CreateDatasetGroup(context.Background(), &CreateDatasetGroupInput{
+		Name:      ptr.String("__Name__"),
+		RoleArn:   ptr.String("__RoleArn__"),
+		KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		Domain:    types.Domain("ECOMMERCE"),
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -267,7 +429,26 @@ func TestCheckResponseSnapshot_CreateDatasetImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDatasetImportJob(context.Background(), &CreateDatasetImportJobInput{})
+	got, err := svc.CreateDatasetImportJob(context.Background(), &CreateDatasetImportJobInput{
+		JobName:    ptr.String("__JobName__"),
+		DatasetArn: ptr.String("__DatasetArn__"),
+		DataSource: &types.DataSource{
+			DataLocation: ptr.String("__DataLocation__"),
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+		ImportMode:                    types.ImportMode("FULL"),
+		PublishAttributionMetricsToS3: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -289,7 +470,20 @@ func TestCheckResponseSnapshot_CreateEventTracker(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEventTracker(context.Background(), &CreateEventTrackerInput{})
+	got, err := svc.CreateEventTracker(context.Background(), &CreateEventTrackerInput{
+		Name:            ptr.String("__Name__"),
+		DatasetGroupArn: ptr.String("__DatasetGroupArn__"),
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -310,7 +504,21 @@ func TestCheckResponseSnapshot_CreateFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFilter(context.Background(), &CreateFilterInput{})
+	got, err := svc.CreateFilter(context.Background(), &CreateFilterInput{
+		Name:             ptr.String("__Name__"),
+		DatasetGroupArn:  ptr.String("__DatasetGroupArn__"),
+		FilterExpression: ptr.String("__FilterExpression__"),
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -331,7 +539,29 @@ func TestCheckResponseSnapshot_CreateMetricAttribution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMetricAttribution(context.Background(), &CreateMetricAttributionInput{})
+	got, err := svc.CreateMetricAttribution(context.Background(), &CreateMetricAttributionInput{
+		Name:            ptr.String("__Name__"),
+		DatasetGroupArn: ptr.String("__DatasetGroupArn__"),
+		Metrics: []types.MetricAttribute{
+			{
+				EventType:  ptr.String("__EventType__"),
+				MetricName: ptr.String("__MetricName__"),
+				Expression: ptr.String("__Expression__"),
+			},
+			{
+				EventType:  ptr.String("__EventType__"),
+				MetricName: ptr.String("__MetricName__"),
+				Expression: ptr.String("__Expression__"),
+			},
+		},
+		MetricsOutputConfig: &types.MetricAttributionOutput{
+			S3DataDestination: &types.S3DataConfig{
+				Path:      ptr.String("__Path__"),
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+			RoleArn: ptr.String("__RoleArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -352,7 +582,42 @@ func TestCheckResponseSnapshot_CreateRecommender(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRecommender(context.Background(), &CreateRecommenderInput{})
+	got, err := svc.CreateRecommender(context.Background(), &CreateRecommenderInput{
+		Name:            ptr.String("__Name__"),
+		DatasetGroupArn: ptr.String("__DatasetGroupArn__"),
+		RecipeArn:       ptr.String("__RecipeArn__"),
+		RecommenderConfig: &types.RecommenderConfig{
+			ItemExplorationConfig: map[string]string{
+				"key0": "__Value__",
+			},
+			MinRecommendationRequestsPerSecond: ptr.Int32(1),
+			TrainingDataConfig: &types.TrainingDataConfig{
+				ExcludedDatasetColumns: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
+				},
+				IncludedDatasetColumns: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			EnableMetadataWithRecommendations: ptr.Bool(true),
+		},
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -373,7 +638,11 @@ func TestCheckResponseSnapshot_CreateSchema(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSchema(context.Background(), &CreateSchemaInput{})
+	got, err := svc.CreateSchema(context.Background(), &CreateSchemaInput{
+		Name:   ptr.String("__Name__"),
+		Schema: ptr.String("__Schema__"),
+		Domain: types.Domain("ECOMMERCE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -394,7 +663,130 @@ func TestCheckResponseSnapshot_CreateSolution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSolution(context.Background(), &CreateSolutionInput{})
+	got, err := svc.CreateSolution(context.Background(), &CreateSolutionInput{
+		Name:                     ptr.String("__Name__"),
+		PerformHPO:               ptr.Bool(true),
+		PerformAutoML:            true,
+		PerformAutoTraining:      ptr.Bool(true),
+		PerformIncrementalUpdate: ptr.Bool(true),
+		RecipeArn:                ptr.String("__RecipeArn__"),
+		DatasetGroupArn:          ptr.String("__DatasetGroupArn__"),
+		EventType:                ptr.String("__EventType__"),
+		SolutionConfig: &types.SolutionConfig{
+			EventValueThreshold: ptr.String("__EventValueThreshold__"),
+			HpoConfig: &types.HPOConfig{
+				HpoObjective: &types.HPOObjective{
+					Type:        ptr.String("__Type__"),
+					MetricName:  ptr.String("__MetricName__"),
+					MetricRegex: ptr.String("__MetricRegex__"),
+				},
+				HpoResourceConfig: &types.HPOResourceConfig{
+					MaxNumberOfTrainingJobs: ptr.String("__MaxNumberOfTrainingJobs__"),
+					MaxParallelTrainingJobs: ptr.String("__MaxParallelTrainingJobs__"),
+				},
+				AlgorithmHyperParameterRanges: &types.HyperParameterRanges{
+					IntegerHyperParameterRanges: []types.IntegerHyperParameterRange{
+						{
+							Name:     ptr.String("__Name__"),
+							MinValue: 1,
+							MaxValue: 1,
+						},
+						{
+							Name:     ptr.String("__Name__"),
+							MinValue: 1,
+							MaxValue: 1,
+						},
+					},
+					ContinuousHyperParameterRanges: []types.ContinuousHyperParameterRange{
+						{
+							Name:     ptr.String("__Name__"),
+							MinValue: 1.0,
+							MaxValue: 1.0,
+						},
+						{
+							Name:     ptr.String("__Name__"),
+							MinValue: 1.0,
+							MaxValue: 1.0,
+						},
+					},
+					CategoricalHyperParameterRanges: []types.CategoricalHyperParameterRange{
+						{
+							Name: ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			AlgorithmHyperParameters: map[string]string{
+				"key0": "__Value__",
+			},
+			FeatureTransformationParameters: map[string]string{
+				"key0": "__Value__",
+			},
+			AutoMLConfig: &types.AutoMLConfig{
+				MetricName: ptr.String("__MetricName__"),
+				RecipeList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			EventsConfig: &types.EventsConfig{
+				EventParametersList: []types.EventParameters{
+					{
+						EventType:           ptr.String("__EventType__"),
+						EventValueThreshold: ptr.Float64(1.0),
+						Weight:              ptr.Float64(1.0),
+					},
+					{
+						EventType:           ptr.String("__EventType__"),
+						EventValueThreshold: ptr.Float64(1.0),
+						Weight:              ptr.Float64(1.0),
+					},
+				},
+			},
+			OptimizationObjective: &types.OptimizationObjective{
+				ItemAttribute:        ptr.String("__ItemAttribute__"),
+				ObjectiveSensitivity: types.ObjectiveSensitivity("LOW"),
+			},
+			TrainingDataConfig: &types.TrainingDataConfig{
+				ExcludedDatasetColumns: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
+				},
+				IncludedDatasetColumns: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			AutoTrainingConfig: &types.AutoTrainingConfig{
+				SchedulingExpression: ptr.String("__SchedulingExpression__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -415,7 +807,21 @@ func TestCheckResponseSnapshot_CreateSolutionVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSolutionVersion(context.Background(), &CreateSolutionVersionInput{})
+	got, err := svc.CreateSolutionVersion(context.Background(), &CreateSolutionVersionInput{
+		Name:         ptr.String("__Name__"),
+		SolutionArn:  ptr.String("__SolutionArn__"),
+		TrainingMode: types.TrainingMode("FULL"),
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -434,7 +840,9 @@ func TestCheckResponseSnapshot_DeleteCampaign(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCampaign(context.Background(), &DeleteCampaignInput{})
+	got, err := svc.DeleteCampaign(context.Background(), &DeleteCampaignInput{
+		CampaignArn: ptr.String("__CampaignArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -453,7 +861,9 @@ func TestCheckResponseSnapshot_DeleteDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataset(context.Background(), &DeleteDatasetInput{})
+	got, err := svc.DeleteDataset(context.Background(), &DeleteDatasetInput{
+		DatasetArn: ptr.String("__DatasetArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -472,7 +882,9 @@ func TestCheckResponseSnapshot_DeleteDatasetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDatasetGroup(context.Background(), &DeleteDatasetGroupInput{})
+	got, err := svc.DeleteDatasetGroup(context.Background(), &DeleteDatasetGroupInput{
+		DatasetGroupArn: ptr.String("__DatasetGroupArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -491,7 +903,9 @@ func TestCheckResponseSnapshot_DeleteEventTracker(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEventTracker(context.Background(), &DeleteEventTrackerInput{})
+	got, err := svc.DeleteEventTracker(context.Background(), &DeleteEventTrackerInput{
+		EventTrackerArn: ptr.String("__EventTrackerArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -510,7 +924,9 @@ func TestCheckResponseSnapshot_DeleteFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFilter(context.Background(), &DeleteFilterInput{})
+	got, err := svc.DeleteFilter(context.Background(), &DeleteFilterInput{
+		FilterArn: ptr.String("__FilterArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -529,7 +945,9 @@ func TestCheckResponseSnapshot_DeleteMetricAttribution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMetricAttribution(context.Background(), &DeleteMetricAttributionInput{})
+	got, err := svc.DeleteMetricAttribution(context.Background(), &DeleteMetricAttributionInput{
+		MetricAttributionArn: ptr.String("__MetricAttributionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -548,7 +966,9 @@ func TestCheckResponseSnapshot_DeleteRecommender(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRecommender(context.Background(), &DeleteRecommenderInput{})
+	got, err := svc.DeleteRecommender(context.Background(), &DeleteRecommenderInput{
+		RecommenderArn: ptr.String("__RecommenderArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -567,7 +987,9 @@ func TestCheckResponseSnapshot_DeleteSchema(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSchema(context.Background(), &DeleteSchemaInput{})
+	got, err := svc.DeleteSchema(context.Background(), &DeleteSchemaInput{
+		SchemaArn: ptr.String("__SchemaArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -586,7 +1008,9 @@ func TestCheckResponseSnapshot_DeleteSolution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSolution(context.Background(), &DeleteSolutionInput{})
+	got, err := svc.DeleteSolution(context.Background(), &DeleteSolutionInput{
+		SolutionArn: ptr.String("__SolutionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -672,7 +1096,9 @@ func TestCheckResponseSnapshot_DescribeAlgorithm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAlgorithm(context.Background(), &DescribeAlgorithmInput{})
+	got, err := svc.DescribeAlgorithm(context.Background(), &DescribeAlgorithmInput{
+		AlgorithmArn: ptr.String("__AlgorithmArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -730,7 +1156,9 @@ func TestCheckResponseSnapshot_DescribeBatchInferenceJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBatchInferenceJob(context.Background(), &DescribeBatchInferenceJobInput{})
+	got, err := svc.DescribeBatchInferenceJob(context.Background(), &DescribeBatchInferenceJobInput{
+		BatchInferenceJobArn: ptr.String("__BatchInferenceJobArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -774,7 +1202,9 @@ func TestCheckResponseSnapshot_DescribeBatchSegmentJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBatchSegmentJob(context.Background(), &DescribeBatchSegmentJobInput{})
+	got, err := svc.DescribeBatchSegmentJob(context.Background(), &DescribeBatchSegmentJobInput{
+		BatchSegmentJobArn: ptr.String("__BatchSegmentJobArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -832,7 +1262,9 @@ func TestCheckResponseSnapshot_DescribeCampaign(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCampaign(context.Background(), &DescribeCampaignInput{})
+	got, err := svc.DescribeCampaign(context.Background(), &DescribeCampaignInput{
+		CampaignArn: ptr.String("__CampaignArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -866,7 +1298,9 @@ func TestCheckResponseSnapshot_DescribeDataDeletionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDataDeletionJob(context.Background(), &DescribeDataDeletionJobInput{})
+	got, err := svc.DescribeDataDeletionJob(context.Background(), &DescribeDataDeletionJobInput{
+		DataDeletionJobArn: ptr.String("__DataDeletionJobArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -904,7 +1338,9 @@ func TestCheckResponseSnapshot_DescribeDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDataset(context.Background(), &DescribeDatasetInput{})
+	got, err := svc.DescribeDataset(context.Background(), &DescribeDatasetInput{
+		DatasetArn: ptr.String("__DatasetArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -941,7 +1377,9 @@ func TestCheckResponseSnapshot_DescribeDatasetExportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDatasetExportJob(context.Background(), &DescribeDatasetExportJobInput{})
+	got, err := svc.DescribeDatasetExportJob(context.Background(), &DescribeDatasetExportJobInput{
+		DatasetExportJobArn: ptr.String("__DatasetExportJobArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -972,7 +1410,9 @@ func TestCheckResponseSnapshot_DescribeDatasetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDatasetGroup(context.Background(), &DescribeDatasetGroupInput{})
+	got, err := svc.DescribeDatasetGroup(context.Background(), &DescribeDatasetGroupInput{
+		DatasetGroupArn: ptr.String("__DatasetGroupArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1007,7 +1447,9 @@ func TestCheckResponseSnapshot_DescribeDatasetImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDatasetImportJob(context.Background(), &DescribeDatasetImportJobInput{})
+	got, err := svc.DescribeDatasetImportJob(context.Background(), &DescribeDatasetImportJobInput{
+		DatasetImportJobArn: ptr.String("__DatasetImportJobArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1037,7 +1479,9 @@ func TestCheckResponseSnapshot_DescribeEventTracker(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEventTracker(context.Background(), &DescribeEventTrackerInput{})
+	got, err := svc.DescribeEventTracker(context.Background(), &DescribeEventTrackerInput{
+		EventTrackerArn: ptr.String("__EventTrackerArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1067,7 +1511,9 @@ func TestCheckResponseSnapshot_DescribeFeatureTransformation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFeatureTransformation(context.Background(), &DescribeFeatureTransformationInput{})
+	got, err := svc.DescribeFeatureTransformation(context.Background(), &DescribeFeatureTransformationInput{
+		FeatureTransformationArn: ptr.String("__FeatureTransformationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1097,7 +1543,9 @@ func TestCheckResponseSnapshot_DescribeFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFilter(context.Background(), &DescribeFilterInput{})
+	got, err := svc.DescribeFilter(context.Background(), &DescribeFilterInput{
+		FilterArn: ptr.String("__FilterArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1133,7 +1581,9 @@ func TestCheckResponseSnapshot_DescribeMetricAttribution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMetricAttribution(context.Background(), &DescribeMetricAttributionInput{})
+	got, err := svc.DescribeMetricAttribution(context.Background(), &DescribeMetricAttributionInput{
+		MetricAttributionArn: ptr.String("__MetricAttributionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1164,7 +1614,9 @@ func TestCheckResponseSnapshot_DescribeRecipe(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRecipe(context.Background(), &DescribeRecipeInput{})
+	got, err := svc.DescribeRecipe(context.Background(), &DescribeRecipeInput{
+		RecipeArn: ptr.String("__RecipeArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1245,7 +1697,9 @@ func TestCheckResponseSnapshot_DescribeRecommender(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRecommender(context.Background(), &DescribeRecommenderInput{})
+	got, err := svc.DescribeRecommender(context.Background(), &DescribeRecommenderInput{
+		RecommenderArn: ptr.String("__RecommenderArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1273,7 +1727,9 @@ func TestCheckResponseSnapshot_DescribeSchema(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSchema(context.Background(), &DescribeSchemaInput{})
+	got, err := svc.DescribeSchema(context.Background(), &DescribeSchemaInput{
+		SchemaArn: ptr.String("__SchemaArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1450,7 +1906,9 @@ func TestCheckResponseSnapshot_DescribeSolution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSolution(context.Background(), &DescribeSolutionInput{})
+	got, err := svc.DescribeSolution(context.Background(), &DescribeSolutionInput{
+		SolutionArn: ptr.String("__SolutionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1597,7 +2055,9 @@ func TestCheckResponseSnapshot_DescribeSolutionVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSolutionVersion(context.Background(), &DescribeSolutionVersionInput{})
+	got, err := svc.DescribeSolutionVersion(context.Background(), &DescribeSolutionVersionInput{
+		SolutionVersionArn: ptr.String("__SolutionVersionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1621,7 +2081,9 @@ func TestCheckResponseSnapshot_GetSolutionMetrics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSolutionMetrics(context.Background(), &GetSolutionMetricsInput{})
+	got, err := svc.GetSolutionMetrics(context.Background(), &GetSolutionMetricsInput{
+		SolutionVersionArn: ptr.String("__SolutionVersionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1664,7 +2126,11 @@ func TestCheckResponseSnapshot_ListBatchInferenceJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBatchInferenceJobs(context.Background(), &ListBatchInferenceJobsInput{})
+	got, err := svc.ListBatchInferenceJobs(context.Background(), &ListBatchInferenceJobsInput{
+		SolutionVersionArn: ptr.String("__SolutionVersionArn__"),
+		NextToken:          ptr.String("__NextToken__"),
+		MaxResults:         ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1705,7 +2171,11 @@ func TestCheckResponseSnapshot_ListBatchSegmentJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBatchSegmentJobs(context.Background(), &ListBatchSegmentJobsInput{})
+	got, err := svc.ListBatchSegmentJobs(context.Background(), &ListBatchSegmentJobsInput{
+		SolutionVersionArn: ptr.String("__SolutionVersionArn__"),
+		NextToken:          ptr.String("__NextToken__"),
+		MaxResults:         ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1744,7 +2214,11 @@ func TestCheckResponseSnapshot_ListCampaigns(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCampaigns(context.Background(), &ListCampaignsInput{})
+	got, err := svc.ListCampaigns(context.Background(), &ListCampaignsInput{
+		SolutionArn: ptr.String("__SolutionArn__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1785,7 +2259,11 @@ func TestCheckResponseSnapshot_ListDataDeletionJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataDeletionJobs(context.Background(), &ListDataDeletionJobsInput{})
+	got, err := svc.ListDataDeletionJobs(context.Background(), &ListDataDeletionJobsInput{
+		DatasetGroupArn: ptr.String("__DatasetGroupArn__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1824,7 +2302,11 @@ func TestCheckResponseSnapshot_ListDatasetExportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDatasetExportJobs(context.Background(), &ListDatasetExportJobsInput{})
+	got, err := svc.ListDatasetExportJobs(context.Background(), &ListDatasetExportJobsInput{
+		DatasetArn: ptr.String("__DatasetArn__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1865,7 +2347,10 @@ func TestCheckResponseSnapshot_ListDatasetGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDatasetGroups(context.Background(), &ListDatasetGroupsInput{})
+	got, err := svc.ListDatasetGroups(context.Background(), &ListDatasetGroupsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1906,7 +2391,11 @@ func TestCheckResponseSnapshot_ListDatasetImportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDatasetImportJobs(context.Background(), &ListDatasetImportJobsInput{})
+	got, err := svc.ListDatasetImportJobs(context.Background(), &ListDatasetImportJobsInput{
+		DatasetArn: ptr.String("__DatasetArn__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1945,7 +2434,11 @@ func TestCheckResponseSnapshot_ListDatasets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDatasets(context.Background(), &ListDatasetsInput{})
+	got, err := svc.ListDatasets(context.Background(), &ListDatasetsInput{
+		DatasetGroupArn: ptr.String("__DatasetGroupArn__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1982,7 +2475,11 @@ func TestCheckResponseSnapshot_ListEventTrackers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEventTrackers(context.Background(), &ListEventTrackersInput{})
+	got, err := svc.ListEventTrackers(context.Background(), &ListEventTrackersInput{
+		DatasetGroupArn: ptr.String("__DatasetGroupArn__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2023,7 +2520,11 @@ func TestCheckResponseSnapshot_ListFilters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFilters(context.Background(), &ListFiltersInput{})
+	got, err := svc.ListFilters(context.Background(), &ListFiltersInput{
+		DatasetGroupArn: ptr.String("__DatasetGroupArn__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2056,7 +2557,11 @@ func TestCheckResponseSnapshot_ListMetricAttributionMetrics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMetricAttributionMetrics(context.Background(), &ListMetricAttributionMetricsInput{})
+	got, err := svc.ListMetricAttributionMetrics(context.Background(), &ListMetricAttributionMetricsInput{
+		MetricAttributionArn: ptr.String("__MetricAttributionArn__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2095,7 +2600,11 @@ func TestCheckResponseSnapshot_ListMetricAttributions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMetricAttributions(context.Background(), &ListMetricAttributionsInput{})
+	got, err := svc.ListMetricAttributions(context.Background(), &ListMetricAttributionsInput{
+		DatasetGroupArn: ptr.String("__DatasetGroupArn__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2134,7 +2643,12 @@ func TestCheckResponseSnapshot_ListRecipes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRecipes(context.Background(), &ListRecipesInput{})
+	got, err := svc.ListRecipes(context.Background(), &ListRecipesInput{
+		RecipeProvider: types.RecipeProvider("SERVICE"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+		Domain:         types.Domain("ECOMMERCE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2217,7 +2731,11 @@ func TestCheckResponseSnapshot_ListRecommenders(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRecommenders(context.Background(), &ListRecommendersInput{})
+	got, err := svc.ListRecommenders(context.Background(), &ListRecommendersInput{
+		DatasetGroupArn: ptr.String("__DatasetGroupArn__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2254,7 +2772,10 @@ func TestCheckResponseSnapshot_ListSchemas(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSchemas(context.Background(), &ListSchemasInput{})
+	got, err := svc.ListSchemas(context.Background(), &ListSchemasInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2295,7 +2816,11 @@ func TestCheckResponseSnapshot_ListSolutionVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSolutionVersions(context.Background(), &ListSolutionVersionsInput{})
+	got, err := svc.ListSolutionVersions(context.Background(), &ListSolutionVersionsInput{
+		SolutionArn: ptr.String("__SolutionArn__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2334,7 +2859,11 @@ func TestCheckResponseSnapshot_ListSolutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSolutions(context.Background(), &ListSolutionsInput{})
+	got, err := svc.ListSolutions(context.Background(), &ListSolutionsInput{
+		DatasetGroupArn: ptr.String("__DatasetGroupArn__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2364,7 +2893,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2385,7 +2916,9 @@ func TestCheckResponseSnapshot_StartRecommender(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartRecommender(context.Background(), &StartRecommenderInput{})
+	got, err := svc.StartRecommender(context.Background(), &StartRecommenderInput{
+		RecommenderArn: ptr.String("__RecommenderArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2406,7 +2939,9 @@ func TestCheckResponseSnapshot_StopRecommender(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopRecommender(context.Background(), &StopRecommenderInput{})
+	got, err := svc.StopRecommender(context.Background(), &StopRecommenderInput{
+		RecommenderArn: ptr.String("__RecommenderArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2425,7 +2960,9 @@ func TestCheckResponseSnapshot_StopSolutionVersionCreation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopSolutionVersionCreation(context.Background(), &StopSolutionVersionCreationInput{})
+	got, err := svc.StopSolutionVersionCreation(context.Background(), &StopSolutionVersionCreationInput{
+		SolutionVersionArn: ptr.String("__SolutionVersionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2444,7 +2981,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2463,7 +3012,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2484,7 +3039,21 @@ func TestCheckResponseSnapshot_UpdateCampaign(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCampaign(context.Background(), &UpdateCampaignInput{})
+	got, err := svc.UpdateCampaign(context.Background(), &UpdateCampaignInput{
+		CampaignArn:        ptr.String("__CampaignArn__"),
+		SolutionVersionArn: ptr.String("__SolutionVersionArn__"),
+		MinProvisionedTPS:  ptr.Int32(1),
+		CampaignConfig: &types.CampaignConfig{
+			ItemExplorationConfig: map[string]string{
+				"key0": "__Value__",
+			},
+			EnableMetadataWithRecommendations: ptr.Bool(true),
+			SyncWithLatestSolutionVersion:     ptr.Bool(true),
+			RankingInfluence: map[string]float64{
+				"key0": 1.0,
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2505,7 +3074,10 @@ func TestCheckResponseSnapshot_UpdateDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataset(context.Background(), &UpdateDatasetInput{})
+	got, err := svc.UpdateDataset(context.Background(), &UpdateDatasetInput{
+		DatasetArn: ptr.String("__DatasetArn__"),
+		SchemaArn:  ptr.String("__SchemaArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2526,7 +3098,32 @@ func TestCheckResponseSnapshot_UpdateMetricAttribution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMetricAttribution(context.Background(), &UpdateMetricAttributionInput{})
+	got, err := svc.UpdateMetricAttribution(context.Background(), &UpdateMetricAttributionInput{
+		AddMetrics: []types.MetricAttribute{
+			{
+				EventType:  ptr.String("__EventType__"),
+				MetricName: ptr.String("__MetricName__"),
+				Expression: ptr.String("__Expression__"),
+			},
+			{
+				EventType:  ptr.String("__EventType__"),
+				MetricName: ptr.String("__MetricName__"),
+				Expression: ptr.String("__Expression__"),
+			},
+		},
+		RemoveMetrics: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MetricsOutputConfig: &types.MetricAttributionOutput{
+			S3DataDestination: &types.S3DataConfig{
+				Path:      ptr.String("__Path__"),
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+			RoleArn: ptr.String("__RoleArn__"),
+		},
+		MetricAttributionArn: ptr.String("__MetricAttributionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2547,7 +3144,30 @@ func TestCheckResponseSnapshot_UpdateRecommender(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRecommender(context.Background(), &UpdateRecommenderInput{})
+	got, err := svc.UpdateRecommender(context.Background(), &UpdateRecommenderInput{
+		RecommenderArn: ptr.String("__RecommenderArn__"),
+		RecommenderConfig: &types.RecommenderConfig{
+			ItemExplorationConfig: map[string]string{
+				"key0": "__Value__",
+			},
+			MinRecommendationRequestsPerSecond: ptr.Int32(1),
+			TrainingDataConfig: &types.TrainingDataConfig{
+				ExcludedDatasetColumns: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
+				},
+				IncludedDatasetColumns: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			EnableMetadataWithRecommendations: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2568,7 +3188,30 @@ func TestCheckResponseSnapshot_UpdateSolution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSolution(context.Background(), &UpdateSolutionInput{})
+	got, err := svc.UpdateSolution(context.Background(), &UpdateSolutionInput{
+		SolutionArn:              ptr.String("__SolutionArn__"),
+		PerformAutoTraining:      ptr.Bool(true),
+		PerformIncrementalUpdate: ptr.Bool(true),
+		SolutionUpdateConfig: &types.SolutionUpdateConfig{
+			AutoTrainingConfig: &types.AutoTrainingConfig{
+				SchedulingExpression: ptr.String("__SchedulingExpression__"),
+			},
+			EventsConfig: &types.EventsConfig{
+				EventParametersList: []types.EventParameters{
+					{
+						EventType:           ptr.String("__EventType__"),
+						EventValueThreshold: ptr.Float64(1.0),
+						Weight:              ptr.Float64(1.0),
+					},
+					{
+						EventType:           ptr.String("__EventType__"),
+						EventValueThreshold: ptr.Float64(1.0),
+						Weight:              ptr.Float64(1.0),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2589,7 +3232,49 @@ func TestCheckResponseSnapshot_Error_InvalidInputException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBatchInferenceJob(context.Background(), &CreateBatchInferenceJobInput{})
+	_, opErr := svc.CreateBatchInferenceJob(context.Background(), &CreateBatchInferenceJobInput{
+		JobName:            ptr.String("__JobName__"),
+		SolutionVersionArn: ptr.String("__SolutionVersionArn__"),
+		FilterArn:          ptr.String("__FilterArn__"),
+		NumResults:         ptr.Int32(1),
+		JobInput: &types.BatchInferenceJobInput{
+			S3DataSource: &types.S3DataConfig{
+				Path:      ptr.String("__Path__"),
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+		},
+		JobOutput: &types.BatchInferenceJobOutput{
+			S3DataDestination: &types.S3DataConfig{
+				Path:      ptr.String("__Path__"),
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		BatchInferenceJobConfig: &types.BatchInferenceJobConfig{
+			ItemExplorationConfig: map[string]string{
+				"key0": "__Value__",
+			},
+			RankingInfluence: map[string]float64{
+				"key0": 1.0,
+			},
+		},
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+		BatchInferenceJobMode: types.BatchInferenceJobMode("BATCH_INFERENCE"),
+		ThemeGenerationConfig: &types.ThemeGenerationConfig{
+			FieldsForThemeGeneration: &types.FieldsForThemeGeneration{
+				ItemName: ptr.String("__ItemName__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2614,7 +3299,11 @@ func TestCheckResponseSnapshot_Error_InvalidNextTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListBatchInferenceJobs(context.Background(), &ListBatchInferenceJobsInput{})
+	_, opErr := svc.ListBatchInferenceJobs(context.Background(), &ListBatchInferenceJobsInput{
+		SolutionVersionArn: ptr.String("__SolutionVersionArn__"),
+		NextToken:          ptr.String("__NextToken__"),
+		MaxResults:         ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2639,7 +3328,49 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBatchInferenceJob(context.Background(), &CreateBatchInferenceJobInput{})
+	_, opErr := svc.CreateBatchInferenceJob(context.Background(), &CreateBatchInferenceJobInput{
+		JobName:            ptr.String("__JobName__"),
+		SolutionVersionArn: ptr.String("__SolutionVersionArn__"),
+		FilterArn:          ptr.String("__FilterArn__"),
+		NumResults:         ptr.Int32(1),
+		JobInput: &types.BatchInferenceJobInput{
+			S3DataSource: &types.S3DataConfig{
+				Path:      ptr.String("__Path__"),
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+		},
+		JobOutput: &types.BatchInferenceJobOutput{
+			S3DataDestination: &types.S3DataConfig{
+				Path:      ptr.String("__Path__"),
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		BatchInferenceJobConfig: &types.BatchInferenceJobConfig{
+			ItemExplorationConfig: map[string]string{
+				"key0": "__Value__",
+			},
+			RankingInfluence: map[string]float64{
+				"key0": 1.0,
+			},
+		},
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+		BatchInferenceJobMode: types.BatchInferenceJobMode("BATCH_INFERENCE"),
+		ThemeGenerationConfig: &types.ThemeGenerationConfig{
+			FieldsForThemeGeneration: &types.FieldsForThemeGeneration{
+				ItemName: ptr.String("__ItemName__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2664,7 +3395,49 @@ func TestCheckResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBatchInferenceJob(context.Background(), &CreateBatchInferenceJobInput{})
+	_, opErr := svc.CreateBatchInferenceJob(context.Background(), &CreateBatchInferenceJobInput{
+		JobName:            ptr.String("__JobName__"),
+		SolutionVersionArn: ptr.String("__SolutionVersionArn__"),
+		FilterArn:          ptr.String("__FilterArn__"),
+		NumResults:         ptr.Int32(1),
+		JobInput: &types.BatchInferenceJobInput{
+			S3DataSource: &types.S3DataConfig{
+				Path:      ptr.String("__Path__"),
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+		},
+		JobOutput: &types.BatchInferenceJobOutput{
+			S3DataDestination: &types.S3DataConfig{
+				Path:      ptr.String("__Path__"),
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		BatchInferenceJobConfig: &types.BatchInferenceJobConfig{
+			ItemExplorationConfig: map[string]string{
+				"key0": "__Value__",
+			},
+			RankingInfluence: map[string]float64{
+				"key0": 1.0,
+			},
+		},
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+		BatchInferenceJobMode: types.BatchInferenceJobMode("BATCH_INFERENCE"),
+		ThemeGenerationConfig: &types.ThemeGenerationConfig{
+			FieldsForThemeGeneration: &types.FieldsForThemeGeneration{
+				ItemName: ptr.String("__ItemName__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2689,7 +3462,49 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBatchInferenceJob(context.Background(), &CreateBatchInferenceJobInput{})
+	_, opErr := svc.CreateBatchInferenceJob(context.Background(), &CreateBatchInferenceJobInput{
+		JobName:            ptr.String("__JobName__"),
+		SolutionVersionArn: ptr.String("__SolutionVersionArn__"),
+		FilterArn:          ptr.String("__FilterArn__"),
+		NumResults:         ptr.Int32(1),
+		JobInput: &types.BatchInferenceJobInput{
+			S3DataSource: &types.S3DataConfig{
+				Path:      ptr.String("__Path__"),
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+		},
+		JobOutput: &types.BatchInferenceJobOutput{
+			S3DataDestination: &types.S3DataConfig{
+				Path:      ptr.String("__Path__"),
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		BatchInferenceJobConfig: &types.BatchInferenceJobConfig{
+			ItemExplorationConfig: map[string]string{
+				"key0": "__Value__",
+			},
+			RankingInfluence: map[string]float64{
+				"key0": 1.0,
+			},
+		},
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+		BatchInferenceJobMode: types.BatchInferenceJobMode("BATCH_INFERENCE"),
+		ThemeGenerationConfig: &types.ThemeGenerationConfig{
+			FieldsForThemeGeneration: &types.FieldsForThemeGeneration{
+				ItemName: ptr.String("__ItemName__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2714,7 +3529,49 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBatchInferenceJob(context.Background(), &CreateBatchInferenceJobInput{})
+	_, opErr := svc.CreateBatchInferenceJob(context.Background(), &CreateBatchInferenceJobInput{
+		JobName:            ptr.String("__JobName__"),
+		SolutionVersionArn: ptr.String("__SolutionVersionArn__"),
+		FilterArn:          ptr.String("__FilterArn__"),
+		NumResults:         ptr.Int32(1),
+		JobInput: &types.BatchInferenceJobInput{
+			S3DataSource: &types.S3DataConfig{
+				Path:      ptr.String("__Path__"),
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+		},
+		JobOutput: &types.BatchInferenceJobOutput{
+			S3DataDestination: &types.S3DataConfig{
+				Path:      ptr.String("__Path__"),
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		BatchInferenceJobConfig: &types.BatchInferenceJobConfig{
+			ItemExplorationConfig: map[string]string{
+				"key0": "__Value__",
+			},
+			RankingInfluence: map[string]float64{
+				"key0": 1.0,
+			},
+		},
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+		BatchInferenceJobMode: types.BatchInferenceJobMode("BATCH_INFERENCE"),
+		ThemeGenerationConfig: &types.ThemeGenerationConfig{
+			FieldsForThemeGeneration: &types.FieldsForThemeGeneration{
+				ItemName: ptr.String("__ItemName__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2739,7 +3596,13 @@ func TestCheckResponseSnapshot_Error_TooManyTagKeysException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	_, opErr := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2764,7 +3627,49 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBatchInferenceJob(context.Background(), &CreateBatchInferenceJobInput{})
+	_, opErr := svc.CreateBatchInferenceJob(context.Background(), &CreateBatchInferenceJobInput{
+		JobName:            ptr.String("__JobName__"),
+		SolutionVersionArn: ptr.String("__SolutionVersionArn__"),
+		FilterArn:          ptr.String("__FilterArn__"),
+		NumResults:         ptr.Int32(1),
+		JobInput: &types.BatchInferenceJobInput{
+			S3DataSource: &types.S3DataConfig{
+				Path:      ptr.String("__Path__"),
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+		},
+		JobOutput: &types.BatchInferenceJobOutput{
+			S3DataDestination: &types.S3DataConfig{
+				Path:      ptr.String("__Path__"),
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		BatchInferenceJobConfig: &types.BatchInferenceJobConfig{
+			ItemExplorationConfig: map[string]string{
+				"key0": "__Value__",
+			},
+			RankingInfluence: map[string]float64{
+				"key0": 1.0,
+			},
+		},
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+		BatchInferenceJobMode: types.BatchInferenceJobMode("BATCH_INFERENCE"),
+		ThemeGenerationConfig: &types.ThemeGenerationConfig{
+			FieldsForThemeGeneration: &types.FieldsForThemeGeneration{
+				ItemName: ptr.String("__ItemName__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -128,7 +128,15 @@ func TestCheckResponseSnapshot_GetActionRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetActionRecommendations(context.Background(), &GetActionRecommendationsInput{})
+	got, err := svc.GetActionRecommendations(context.Background(), &GetActionRecommendationsInput{
+		CampaignArn: ptr.String("__CampaignArn__"),
+		UserId:      ptr.String("__UserId__"),
+		NumResults:  1,
+		FilterArn:   ptr.String("__FilterArn__"),
+		FilterValues: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -175,7 +183,27 @@ func TestCheckResponseSnapshot_GetPersonalizedRanking(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPersonalizedRanking(context.Background(), &GetPersonalizedRankingInput{})
+	got, err := svc.GetPersonalizedRanking(context.Background(), &GetPersonalizedRankingInput{
+		CampaignArn: ptr.String("__CampaignArn__"),
+		InputList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UserId: ptr.String("__UserId__"),
+		Context: map[string]string{
+			"key0": "__Value__",
+		},
+		FilterArn: ptr.String("__FilterArn__"),
+		FilterValues: map[string]string{
+			"key0": "__Value__",
+		},
+		MetadataColumns: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -222,7 +250,44 @@ func TestCheckResponseSnapshot_GetRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRecommendations(context.Background(), &GetRecommendationsInput{})
+	got, err := svc.GetRecommendations(context.Background(), &GetRecommendationsInput{
+		CampaignArn: ptr.String("__CampaignArn__"),
+		ItemId:      ptr.String("__ItemId__"),
+		UserId:      ptr.String("__UserId__"),
+		NumResults:  1,
+		Context: map[string]string{
+			"key0": "__Value__",
+		},
+		FilterArn: ptr.String("__FilterArn__"),
+		FilterValues: map[string]string{
+			"key0": "__Value__",
+		},
+		RecommenderArn: ptr.String("__RecommenderArn__"),
+		Promotions: []types.Promotion{
+			{
+				Name:                 ptr.String("__Name__"),
+				PercentPromotedItems: ptr.Int32(1),
+				FilterArn:            ptr.String("__FilterArn__"),
+				FilterValues: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				Name:                 ptr.String("__Name__"),
+				PercentPromotedItems: ptr.Int32(1),
+				FilterArn:            ptr.String("__FilterArn__"),
+				FilterValues: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		MetadataColumns: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -243,7 +308,15 @@ func TestCheckResponseSnapshot_Error_InvalidInputException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetActionRecommendations(context.Background(), &GetActionRecommendationsInput{})
+	_, opErr := svc.GetActionRecommendations(context.Background(), &GetActionRecommendationsInput{
+		CampaignArn: ptr.String("__CampaignArn__"),
+		UserId:      ptr.String("__UserId__"),
+		NumResults:  1,
+		FilterArn:   ptr.String("__FilterArn__"),
+		FilterValues: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -268,7 +341,15 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetActionRecommendations(context.Background(), &GetActionRecommendationsInput{})
+	_, opErr := svc.GetActionRecommendations(context.Background(), &GetActionRecommendationsInput{
+		CampaignArn: ptr.String("__CampaignArn__"),
+		UserId:      ptr.String("__UserId__"),
+		NumResults:  1,
+		FilterArn:   ptr.String("__FilterArn__"),
+		FilterValues: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

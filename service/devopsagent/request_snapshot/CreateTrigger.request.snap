@@ -2,4 +2,4 @@ POST /trigger/agent-space/__AgentSpaceId__/triggers
 
 Content-Type: application/json
 
-{"clientToken":"__ClientToken__","condition":{"schedule":{"expression":"__Expression__"}},"status":"__Status__","type":"__Type__"}
+{"action":"__Document__","clientToken":"__ClientToken__","condition":{"schedule":{"expression":"__Expression__"}},"status":"__Status__","type":"__Type__"}

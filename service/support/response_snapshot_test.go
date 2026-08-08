@@ -119,7 +119,19 @@ func TestCheckResponseSnapshot_AddAttachmentsToSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddAttachmentsToSet(context.Background(), &AddAttachmentsToSetInput{})
+	got, err := svc.AddAttachmentsToSet(context.Background(), &AddAttachmentsToSetInput{
+		AttachmentSetId: ptr.String("__AttachmentSetId__"),
+		Attachments: []types.Attachment{
+			{
+				FileName: ptr.String("__FileName__"),
+				Data:     []byte("blob"),
+			},
+			{
+				FileName: ptr.String("__FileName__"),
+				Data:     []byte("blob"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -140,7 +152,15 @@ func TestCheckResponseSnapshot_AddCommunicationToCase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddCommunicationToCase(context.Background(), &AddCommunicationToCaseInput{})
+	got, err := svc.AddCommunicationToCase(context.Background(), &AddCommunicationToCaseInput{
+		CaseId:            ptr.String("__CaseId__"),
+		CommunicationBody: ptr.String("__CommunicationBody__"),
+		CcEmailAddresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AttachmentSetId: ptr.String("__AttachmentSetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -161,7 +181,20 @@ func TestCheckResponseSnapshot_CreateCase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCase(context.Background(), &CreateCaseInput{})
+	got, err := svc.CreateCase(context.Background(), &CreateCaseInput{
+		Subject:           ptr.String("__Subject__"),
+		ServiceCode:       ptr.String("__ServiceCode__"),
+		SeverityCode:      ptr.String("__SeverityCode__"),
+		CategoryCode:      ptr.String("__CategoryCode__"),
+		CommunicationBody: ptr.String("__CommunicationBody__"),
+		CcEmailAddresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Language:        ptr.String("__Language__"),
+		IssueType:       ptr.String("__IssueType__"),
+		AttachmentSetId: ptr.String("__AttachmentSetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -185,7 +218,9 @@ func TestCheckResponseSnapshot_DescribeAttachment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAttachment(context.Background(), &DescribeAttachmentInput{})
+	got, err := svc.DescribeAttachment(context.Background(), &DescribeAttachmentInput{
+		AttachmentId: ptr.String("__AttachmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -314,7 +349,20 @@ func TestCheckResponseSnapshot_DescribeCases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCases(context.Background(), &DescribeCasesInput{})
+	got, err := svc.DescribeCases(context.Background(), &DescribeCasesInput{
+		CaseIdList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DisplayId:             ptr.String("__DisplayId__"),
+		AfterTime:             ptr.String("__AfterTime__"),
+		BeforeTime:            ptr.String("__BeforeTime__"),
+		IncludeResolvedCases:  true,
+		NextToken:             ptr.String("__NextToken__"),
+		MaxResults:            ptr.Int32(1),
+		Language:              ptr.String("__Language__"),
+		IncludeCommunications: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -369,7 +417,13 @@ func TestCheckResponseSnapshot_DescribeCommunications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCommunications(context.Background(), &DescribeCommunicationsInput{})
+	got, err := svc.DescribeCommunications(context.Background(), &DescribeCommunicationsInput{
+		CaseId:     ptr.String("__CaseId__"),
+		BeforeTime: ptr.String("__BeforeTime__"),
+		AfterTime:  ptr.String("__AfterTime__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -438,7 +492,12 @@ func TestCheckResponseSnapshot_DescribeCreateCaseOptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCreateCaseOptions(context.Background(), &DescribeCreateCaseOptionsInput{})
+	got, err := svc.DescribeCreateCaseOptions(context.Background(), &DescribeCreateCaseOptionsInput{
+		IssueType:    ptr.String("__IssueType__"),
+		ServiceCode:  ptr.String("__ServiceCode__"),
+		Language:     ptr.String("__Language__"),
+		CategoryCode: ptr.String("__CategoryCode__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -488,7 +547,13 @@ func TestCheckResponseSnapshot_DescribeServices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeServices(context.Background(), &DescribeServicesInput{})
+	got, err := svc.DescribeServices(context.Background(), &DescribeServicesInput{
+		ServiceCodeList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Language: ptr.String("__Language__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -518,7 +583,9 @@ func TestCheckResponseSnapshot_DescribeSeverityLevels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSeverityLevels(context.Background(), &DescribeSeverityLevelsInput{})
+	got, err := svc.DescribeSeverityLevels(context.Background(), &DescribeSeverityLevelsInput{
+		Language: ptr.String("__Language__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -550,7 +617,11 @@ func TestCheckResponseSnapshot_DescribeSupportedLanguages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSupportedLanguages(context.Background(), &DescribeSupportedLanguagesInput{})
+	got, err := svc.DescribeSupportedLanguages(context.Background(), &DescribeSupportedLanguagesInput{
+		IssueType:    ptr.String("__IssueType__"),
+		ServiceCode:  ptr.String("__ServiceCode__"),
+		CategoryCode: ptr.String("__CategoryCode__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -582,7 +653,12 @@ func TestCheckResponseSnapshot_DescribeTrustedAdvisorCheckRefreshStatuses(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTrustedAdvisorCheckRefreshStatuses(context.Background(), &DescribeTrustedAdvisorCheckRefreshStatusesInput{})
+	got, err := svc.DescribeTrustedAdvisorCheckRefreshStatuses(context.Background(), &DescribeTrustedAdvisorCheckRefreshStatusesInput{
+		CheckIds: []*string{
+			ptr.String("__Member__"),
+			ptr.String("__Member__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -641,7 +717,10 @@ func TestCheckResponseSnapshot_DescribeTrustedAdvisorCheckResult(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTrustedAdvisorCheckResult(context.Background(), &DescribeTrustedAdvisorCheckResultInput{})
+	got, err := svc.DescribeTrustedAdvisorCheckResult(context.Background(), &DescribeTrustedAdvisorCheckResultInput{
+		CheckId:  ptr.String("__CheckId__"),
+		Language: ptr.String("__Language__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -699,7 +778,12 @@ func TestCheckResponseSnapshot_DescribeTrustedAdvisorCheckSummaries(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTrustedAdvisorCheckSummaries(context.Background(), &DescribeTrustedAdvisorCheckSummariesInput{})
+	got, err := svc.DescribeTrustedAdvisorCheckSummaries(context.Background(), &DescribeTrustedAdvisorCheckSummariesInput{
+		CheckIds: []*string{
+			ptr.String("__Member__"),
+			ptr.String("__Member__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -741,7 +825,9 @@ func TestCheckResponseSnapshot_DescribeTrustedAdvisorChecks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTrustedAdvisorChecks(context.Background(), &DescribeTrustedAdvisorChecksInput{})
+	got, err := svc.DescribeTrustedAdvisorChecks(context.Background(), &DescribeTrustedAdvisorChecksInput{
+		Language: ptr.String("__Language__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -766,7 +852,9 @@ func TestCheckResponseSnapshot_RefreshTrustedAdvisorCheck(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RefreshTrustedAdvisorCheck(context.Background(), &RefreshTrustedAdvisorCheckInput{})
+	got, err := svc.RefreshTrustedAdvisorCheck(context.Background(), &RefreshTrustedAdvisorCheckInput{
+		CheckId: ptr.String("__CheckId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -788,7 +876,9 @@ func TestCheckResponseSnapshot_ResolveCase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResolveCase(context.Background(), &ResolveCaseInput{})
+	got, err := svc.ResolveCase(context.Background(), &ResolveCaseInput{
+		CaseId: ptr.String("__CaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -809,7 +899,9 @@ func TestCheckResponseSnapshot_Error_AttachmentIdNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeAttachment(context.Background(), &DescribeAttachmentInput{})
+	_, opErr := svc.DescribeAttachment(context.Background(), &DescribeAttachmentInput{
+		AttachmentId: ptr.String("__AttachmentId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -834,7 +926,19 @@ func TestCheckResponseSnapshot_Error_AttachmentLimitExceeded(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddAttachmentsToSet(context.Background(), &AddAttachmentsToSetInput{})
+	_, opErr := svc.AddAttachmentsToSet(context.Background(), &AddAttachmentsToSetInput{
+		AttachmentSetId: ptr.String("__AttachmentSetId__"),
+		Attachments: []types.Attachment{
+			{
+				FileName: ptr.String("__FileName__"),
+				Data:     []byte("blob"),
+			},
+			{
+				FileName: ptr.String("__FileName__"),
+				Data:     []byte("blob"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -859,7 +963,19 @@ func TestCheckResponseSnapshot_Error_AttachmentSetExpired(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddAttachmentsToSet(context.Background(), &AddAttachmentsToSetInput{})
+	_, opErr := svc.AddAttachmentsToSet(context.Background(), &AddAttachmentsToSetInput{
+		AttachmentSetId: ptr.String("__AttachmentSetId__"),
+		Attachments: []types.Attachment{
+			{
+				FileName: ptr.String("__FileName__"),
+				Data:     []byte("blob"),
+			},
+			{
+				FileName: ptr.String("__FileName__"),
+				Data:     []byte("blob"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -884,7 +1000,19 @@ func TestCheckResponseSnapshot_Error_AttachmentSetIdNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddAttachmentsToSet(context.Background(), &AddAttachmentsToSetInput{})
+	_, opErr := svc.AddAttachmentsToSet(context.Background(), &AddAttachmentsToSetInput{
+		AttachmentSetId: ptr.String("__AttachmentSetId__"),
+		Attachments: []types.Attachment{
+			{
+				FileName: ptr.String("__FileName__"),
+				Data:     []byte("blob"),
+			},
+			{
+				FileName: ptr.String("__FileName__"),
+				Data:     []byte("blob"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -909,7 +1037,19 @@ func TestCheckResponseSnapshot_Error_AttachmentSetSizeLimitExceeded(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddAttachmentsToSet(context.Background(), &AddAttachmentsToSetInput{})
+	_, opErr := svc.AddAttachmentsToSet(context.Background(), &AddAttachmentsToSetInput{
+		AttachmentSetId: ptr.String("__AttachmentSetId__"),
+		Attachments: []types.Attachment{
+			{
+				FileName: ptr.String("__FileName__"),
+				Data:     []byte("blob"),
+			},
+			{
+				FileName: ptr.String("__FileName__"),
+				Data:     []byte("blob"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -934,7 +1074,20 @@ func TestCheckResponseSnapshot_Error_CaseCreationLimitExceeded(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCase(context.Background(), &CreateCaseInput{})
+	_, opErr := svc.CreateCase(context.Background(), &CreateCaseInput{
+		Subject:           ptr.String("__Subject__"),
+		ServiceCode:       ptr.String("__ServiceCode__"),
+		SeverityCode:      ptr.String("__SeverityCode__"),
+		CategoryCode:      ptr.String("__CategoryCode__"),
+		CommunicationBody: ptr.String("__CommunicationBody__"),
+		CcEmailAddresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Language:        ptr.String("__Language__"),
+		IssueType:       ptr.String("__IssueType__"),
+		AttachmentSetId: ptr.String("__AttachmentSetId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -959,7 +1112,15 @@ func TestCheckResponseSnapshot_Error_CaseIdNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddCommunicationToCase(context.Background(), &AddCommunicationToCaseInput{})
+	_, opErr := svc.AddCommunicationToCase(context.Background(), &AddCommunicationToCaseInput{
+		CaseId:            ptr.String("__CaseId__"),
+		CommunicationBody: ptr.String("__CommunicationBody__"),
+		CcEmailAddresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AttachmentSetId: ptr.String("__AttachmentSetId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -984,7 +1145,9 @@ func TestCheckResponseSnapshot_Error_DescribeAttachmentLimitExceeded(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeAttachment(context.Background(), &DescribeAttachmentInput{})
+	_, opErr := svc.DescribeAttachment(context.Background(), &DescribeAttachmentInput{
+		AttachmentId: ptr.String("__AttachmentId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1009,7 +1172,19 @@ func TestCheckResponseSnapshot_Error_InternalServerError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddAttachmentsToSet(context.Background(), &AddAttachmentsToSetInput{})
+	_, opErr := svc.AddAttachmentsToSet(context.Background(), &AddAttachmentsToSetInput{
+		AttachmentSetId: ptr.String("__AttachmentSetId__"),
+		Attachments: []types.Attachment{
+			{
+				FileName: ptr.String("__FileName__"),
+				Data:     []byte("blob"),
+			},
+			{
+				FileName: ptr.String("__FileName__"),
+				Data:     []byte("blob"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1034,7 +1209,12 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeCreateCaseOptions(context.Background(), &DescribeCreateCaseOptionsInput{})
+	_, opErr := svc.DescribeCreateCaseOptions(context.Background(), &DescribeCreateCaseOptionsInput{
+		IssueType:    ptr.String("__IssueType__"),
+		ServiceCode:  ptr.String("__ServiceCode__"),
+		Language:     ptr.String("__Language__"),
+		CategoryCode: ptr.String("__CategoryCode__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

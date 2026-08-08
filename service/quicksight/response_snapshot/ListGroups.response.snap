@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"GroupList":[{"Arn":"__Arn__","Description":"__Description__","GroupName":"__GroupName__","PrincipalId":"__PrincipalId__"},{"Arn":"__Arn__","Description":"__Description__","GroupName":"__GroupName__","PrincipalId":"__PrincipalId__"}],"NextToken":"__NextToken__","RequestId":"__RequestId__","Status":200}

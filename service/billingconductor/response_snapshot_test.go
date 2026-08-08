@@ -118,7 +118,13 @@ func TestCheckResponseSnapshot_AssociateAccounts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{})
+	got, err := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{
+		Arn: ptr.String("__Arn__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -139,7 +145,13 @@ func TestCheckResponseSnapshot_AssociatePricingRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociatePricingRules(context.Background(), &AssociatePricingRulesInput{})
+	got, err := svc.AssociatePricingRules(context.Background(), &AssociatePricingRulesInput{
+		Arn: ptr.String("__Arn__"),
+		PricingRuleArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -191,7 +203,17 @@ func TestCheckResponseSnapshot_BatchAssociateResourcesToCustomLineItem(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchAssociateResourcesToCustomLineItem(context.Background(), &BatchAssociateResourcesToCustomLineItemInput{})
+	got, err := svc.BatchAssociateResourcesToCustomLineItem(context.Background(), &BatchAssociateResourcesToCustomLineItemInput{
+		TargetArn: ptr.String("__TargetArn__"),
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		BillingPeriodRange: &types.CustomLineItemBillingPeriodRange{
+			InclusiveStartBillingPeriod: ptr.String("__InclusiveStartBillingPeriod__"),
+			ExclusiveEndBillingPeriod:   ptr.String("__ExclusiveEndBillingPeriod__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -243,7 +265,17 @@ func TestCheckResponseSnapshot_BatchDisassociateResourcesFromCustomLineItem(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDisassociateResourcesFromCustomLineItem(context.Background(), &BatchDisassociateResourcesFromCustomLineItemInput{})
+	got, err := svc.BatchDisassociateResourcesFromCustomLineItem(context.Background(), &BatchDisassociateResourcesFromCustomLineItemInput{
+		TargetArn: ptr.String("__TargetArn__"),
+		ResourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		BillingPeriodRange: &types.CustomLineItemBillingPeriodRange{
+			InclusiveStartBillingPeriod: ptr.String("__InclusiveStartBillingPeriod__"),
+			ExclusiveEndBillingPeriod:   ptr.String("__ExclusiveEndBillingPeriod__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -264,7 +296,26 @@ func TestCheckResponseSnapshot_CreateBillingGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBillingGroup(context.Background(), &CreateBillingGroupInput{})
+	got, err := svc.CreateBillingGroup(context.Background(), &CreateBillingGroupInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Name:        ptr.String("__Name__"),
+		AccountGrouping: &types.AccountGrouping{
+			LinkedAccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AutoAssociate:             ptr.Bool(true),
+			ResponsibilityTransferArn: ptr.String("__ResponsibilityTransferArn__"),
+		},
+		ComputationPreference: &types.ComputationPreference{
+			PricingPlanArn: ptr.String("__PricingPlanArn__"),
+		},
+		PrimaryAccountId: ptr.String("__PrimaryAccountId__"),
+		Description:      ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -285,7 +336,63 @@ func TestCheckResponseSnapshot_CreateCustomLineItem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCustomLineItem(context.Background(), &CreateCustomLineItemInput{})
+	got, err := svc.CreateCustomLineItem(context.Background(), &CreateCustomLineItemInput{
+		ClientToken:     ptr.String("__ClientToken__"),
+		Name:            ptr.String("__Name__"),
+		Description:     ptr.String("__Description__"),
+		BillingGroupArn: ptr.String("__BillingGroupArn__"),
+		BillingPeriodRange: &types.CustomLineItemBillingPeriodRange{
+			InclusiveStartBillingPeriod: ptr.String("__InclusiveStartBillingPeriod__"),
+			ExclusiveEndBillingPeriod:   ptr.String("__ExclusiveEndBillingPeriod__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ChargeDetails: &types.CustomLineItemChargeDetails{
+			Flat: &types.CustomLineItemFlatChargeDetails{
+				ChargeValue: ptr.Float64(1.0),
+			},
+			Percentage: &types.CustomLineItemPercentageChargeDetails{
+				PercentageValue: ptr.Float64(1.0),
+				AssociatedValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Type: types.CustomLineItemType("CREDIT"),
+			LineItemFilters: []types.LineItemFilter{
+				{
+					Attribute:   types.LineItemFilterAttributeName("LINE_ITEM_TYPE"),
+					MatchOption: types.MatchOption("NOT_EQUAL"),
+					Values: []types.LineItemFilterValue{
+						types.LineItemFilterValue("SAVINGS_PLAN_NEGATION"),
+						types.LineItemFilterValue("SAVINGS_PLAN_NEGATION"),
+					},
+					AttributeValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Attribute:   types.LineItemFilterAttributeName("LINE_ITEM_TYPE"),
+					MatchOption: types.MatchOption("NOT_EQUAL"),
+					Values: []types.LineItemFilterValue{
+						types.LineItemFilterValue("SAVINGS_PLAN_NEGATION"),
+						types.LineItemFilterValue("SAVINGS_PLAN_NEGATION"),
+					},
+					AttributeValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		AccountId:       ptr.String("__AccountId__"),
+		ComputationRule: types.ComputationRuleEnum("ITEMIZED"),
+		PresentationDetails: &types.PresentationObject{
+			Service: ptr.String("__Service__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -306,7 +413,18 @@ func TestCheckResponseSnapshot_CreatePricingPlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePricingPlan(context.Background(), &CreatePricingPlanInput{})
+	got, err := svc.CreatePricingPlan(context.Background(), &CreatePricingPlanInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		PricingRuleArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -327,7 +445,26 @@ func TestCheckResponseSnapshot_CreatePricingRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePricingRule(context.Background(), &CreatePricingRuleInput{})
+	got, err := svc.CreatePricingRule(context.Background(), &CreatePricingRuleInput{
+		ClientToken:        ptr.String("__ClientToken__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		Scope:              types.PricingRuleScope("GLOBAL"),
+		Type:               types.PricingRuleType("MARKUP"),
+		ModifierPercentage: ptr.Float64(1.0),
+		Service:            ptr.String("__Service__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		BillingEntity: ptr.String("__BillingEntity__"),
+		Tiering: &types.CreateTieringInput{
+			FreeTier: &types.CreateFreeTierConfig{
+				Activated: ptr.Bool(true),
+			},
+		},
+		UsageType: ptr.String("__UsageType__"),
+		Operation: ptr.String("__Operation__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -348,7 +485,9 @@ func TestCheckResponseSnapshot_DeleteBillingGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBillingGroup(context.Background(), &DeleteBillingGroupInput{})
+	got, err := svc.DeleteBillingGroup(context.Background(), &DeleteBillingGroupInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -369,7 +508,13 @@ func TestCheckResponseSnapshot_DeleteCustomLineItem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCustomLineItem(context.Background(), &DeleteCustomLineItemInput{})
+	got, err := svc.DeleteCustomLineItem(context.Background(), &DeleteCustomLineItemInput{
+		Arn: ptr.String("__Arn__"),
+		BillingPeriodRange: &types.CustomLineItemBillingPeriodRange{
+			InclusiveStartBillingPeriod: ptr.String("__InclusiveStartBillingPeriod__"),
+			ExclusiveEndBillingPeriod:   ptr.String("__ExclusiveEndBillingPeriod__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -390,7 +535,9 @@ func TestCheckResponseSnapshot_DeletePricingPlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePricingPlan(context.Background(), &DeletePricingPlanInput{})
+	got, err := svc.DeletePricingPlan(context.Background(), &DeletePricingPlanInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -411,7 +558,9 @@ func TestCheckResponseSnapshot_DeletePricingRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePricingRule(context.Background(), &DeletePricingRuleInput{})
+	got, err := svc.DeletePricingRule(context.Background(), &DeletePricingRuleInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -432,7 +581,13 @@ func TestCheckResponseSnapshot_DisassociateAccounts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateAccounts(context.Background(), &DisassociateAccountsInput{})
+	got, err := svc.DisassociateAccounts(context.Background(), &DisassociateAccountsInput{
+		Arn: ptr.String("__Arn__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -453,7 +608,13 @@ func TestCheckResponseSnapshot_DisassociatePricingRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociatePricingRules(context.Background(), &DisassociatePricingRulesInput{})
+	got, err := svc.DisassociatePricingRules(context.Background(), &DisassociatePricingRulesInput{
+		Arn: ptr.String("__Arn__"),
+		PricingRuleArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -512,7 +673,19 @@ func TestCheckResponseSnapshot_GetBillingGroupCostReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBillingGroupCostReport(context.Background(), &GetBillingGroupCostReportInput{})
+	got, err := svc.GetBillingGroupCostReport(context.Background(), &GetBillingGroupCostReportInput{
+		Arn: ptr.String("__Arn__"),
+		BillingPeriodRange: &types.BillingPeriodRange{
+			InclusiveStartBillingPeriod: ptr.String("__InclusiveStartBillingPeriod__"),
+			ExclusiveEndBillingPeriod:   ptr.String("__ExclusiveEndBillingPeriod__"),
+		},
+		GroupBy: []types.GroupByAttributeName{
+			types.GroupByAttributeName("PRODUCT_NAME"),
+			types.GroupByAttributeName("PRODUCT_NAME"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -547,7 +720,18 @@ func TestCheckResponseSnapshot_ListAccountAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccountAssociations(context.Background(), &ListAccountAssociationsInput{})
+	got, err := svc.ListAccountAssociations(context.Background(), &ListAccountAssociationsInput{
+		BillingPeriod: ptr.String("__BillingPeriod__"),
+		Filters: &types.ListAccountAssociationsFilter{
+			Association: ptr.String("__Association__"),
+			AccountId:   ptr.String("__AccountId__"),
+			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -586,7 +770,17 @@ func TestCheckResponseSnapshot_ListBillingGroupCostReports(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBillingGroupCostReports(context.Background(), &ListBillingGroupCostReportsInput{})
+	got, err := svc.ListBillingGroupCostReports(context.Background(), &ListBillingGroupCostReportsInput{
+		BillingPeriod: ptr.String("__BillingPeriod__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		Filters: &types.ListBillingGroupCostReportsFilter{
+			BillingGroupArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -647,7 +841,45 @@ func TestCheckResponseSnapshot_ListBillingGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBillingGroups(context.Background(), &ListBillingGroupsInput{})
+	got, err := svc.ListBillingGroups(context.Background(), &ListBillingGroupsInput{
+		BillingPeriod: ptr.String("__BillingPeriod__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		Filters: &types.ListBillingGroupsFilter{
+			Arns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			PricingPlan: ptr.String("__PricingPlan__"),
+			Statuses: []types.BillingGroupStatus{
+				types.BillingGroupStatus("ACTIVE"),
+				types.BillingGroupStatus("ACTIVE"),
+			},
+			AutoAssociate: ptr.Bool(true),
+			PrimaryAccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			BillingGroupTypes: []types.BillingGroupType{
+				types.BillingGroupType("STANDARD"),
+				types.BillingGroupType("STANDARD"),
+			},
+			Names: []types.StringSearch{
+				{
+					SearchOption: types.SearchOption("STARTS_WITH"),
+					SearchValue:  ptr.String("__SearchValue__"),
+				},
+				{
+					SearchOption: types.SearchOption("STARTS_WITH"),
+					SearchValue:  ptr.String("__SearchValue__"),
+				},
+			},
+			ResponsibilityTransferArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -778,7 +1010,17 @@ func TestCheckResponseSnapshot_ListCustomLineItemVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCustomLineItemVersions(context.Background(), &ListCustomLineItemVersionsInput{})
+	got, err := svc.ListCustomLineItemVersions(context.Background(), &ListCustomLineItemVersionsInput{
+		Arn:        ptr.String("__Arn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: &types.ListCustomLineItemVersionsFilter{
+			BillingPeriodRange: &types.ListCustomLineItemVersionsBillingPeriodRangeFilter{
+				StartBillingPeriod: ptr.String("__StartBillingPeriod__"),
+				EndBillingPeriod:   ptr.String("__EndBillingPeriod__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -903,7 +1145,29 @@ func TestCheckResponseSnapshot_ListCustomLineItems(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCustomLineItems(context.Background(), &ListCustomLineItemsInput{})
+	got, err := svc.ListCustomLineItems(context.Background(), &ListCustomLineItemsInput{
+		BillingPeriod: ptr.String("__BillingPeriod__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		Filters: &types.ListCustomLineItemsFilter{
+			Names: []string{
+				"__Member__",
+				"__Member__",
+			},
+			BillingGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Arns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -943,7 +1207,17 @@ func TestCheckResponseSnapshot_ListPricingPlans(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPricingPlans(context.Background(), &ListPricingPlansInput{})
+	got, err := svc.ListPricingPlans(context.Background(), &ListPricingPlansInput{
+		BillingPeriod: ptr.String("__BillingPeriod__"),
+		Filters: &types.ListPricingPlansFilter{
+			Arns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -970,7 +1244,12 @@ func TestCheckResponseSnapshot_ListPricingPlansAssociatedWithPricingRule(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPricingPlansAssociatedWithPricingRule(context.Background(), &ListPricingPlansAssociatedWithPricingRuleInput{})
+	got, err := svc.ListPricingPlansAssociatedWithPricingRule(context.Background(), &ListPricingPlansAssociatedWithPricingRuleInput{
+		BillingPeriod:  ptr.String("__BillingPeriod__"),
+		PricingRuleArn: ptr.String("__PricingRuleArn__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1034,7 +1313,17 @@ func TestCheckResponseSnapshot_ListPricingRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPricingRules(context.Background(), &ListPricingRulesInput{})
+	got, err := svc.ListPricingRules(context.Background(), &ListPricingRulesInput{
+		BillingPeriod: ptr.String("__BillingPeriod__"),
+		Filters: &types.ListPricingRulesFilter{
+			Arns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1061,7 +1350,12 @@ func TestCheckResponseSnapshot_ListPricingRulesAssociatedToPricingPlan(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPricingRulesAssociatedToPricingPlan(context.Background(), &ListPricingRulesAssociatedToPricingPlanInput{})
+	got, err := svc.ListPricingRulesAssociatedToPricingPlan(context.Background(), &ListPricingRulesAssociatedToPricingPlanInput{
+		BillingPeriod:  ptr.String("__BillingPeriod__"),
+		PricingPlanArn: ptr.String("__PricingPlanArn__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1095,7 +1389,15 @@ func TestCheckResponseSnapshot_ListResourcesAssociatedToCustomLineItem(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourcesAssociatedToCustomLineItem(context.Background(), &ListResourcesAssociatedToCustomLineItemInput{})
+	got, err := svc.ListResourcesAssociatedToCustomLineItem(context.Background(), &ListResourcesAssociatedToCustomLineItemInput{
+		BillingPeriod: ptr.String("__BillingPeriod__"),
+		Arn:           ptr.String("__Arn__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		Filters: &types.ListResourcesAssociatedToCustomLineItemFilter{
+			Relationship: types.CustomLineItemRelationship("PARENT"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1118,7 +1420,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1137,7 +1441,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1156,7 +1465,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1189,7 +1504,19 @@ func TestCheckResponseSnapshot_UpdateBillingGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBillingGroup(context.Background(), &UpdateBillingGroupInput{})
+	got, err := svc.UpdateBillingGroup(context.Background(), &UpdateBillingGroupInput{
+		Arn:    ptr.String("__Arn__"),
+		Name:   ptr.String("__Name__"),
+		Status: types.BillingGroupStatus("ACTIVE"),
+		ComputationPreference: &types.ComputationPreference{
+			PricingPlanArn: ptr.String("__PricingPlanArn__"),
+		},
+		Description: ptr.String("__Description__"),
+		AccountGrouping: &types.UpdateBillingGroupAccountGrouping{
+			AutoAssociate:             ptr.Bool(true),
+			ResponsibilityTransferArn: ptr.String("__ResponsibilityTransferArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1250,7 +1577,49 @@ func TestCheckResponseSnapshot_UpdateCustomLineItem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCustomLineItem(context.Background(), &UpdateCustomLineItemInput{})
+	got, err := svc.UpdateCustomLineItem(context.Background(), &UpdateCustomLineItemInput{
+		Arn:         ptr.String("__Arn__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ChargeDetails: &types.UpdateCustomLineItemChargeDetails{
+			Flat: &types.UpdateCustomLineItemFlatChargeDetails{
+				ChargeValue: ptr.Float64(1.0),
+			},
+			Percentage: &types.UpdateCustomLineItemPercentageChargeDetails{
+				PercentageValue: ptr.Float64(1.0),
+			},
+			LineItemFilters: []types.LineItemFilter{
+				{
+					Attribute:   types.LineItemFilterAttributeName("LINE_ITEM_TYPE"),
+					MatchOption: types.MatchOption("NOT_EQUAL"),
+					Values: []types.LineItemFilterValue{
+						types.LineItemFilterValue("SAVINGS_PLAN_NEGATION"),
+						types.LineItemFilterValue("SAVINGS_PLAN_NEGATION"),
+					},
+					AttributeValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Attribute:   types.LineItemFilterAttributeName("LINE_ITEM_TYPE"),
+					MatchOption: types.MatchOption("NOT_EQUAL"),
+					Values: []types.LineItemFilterValue{
+						types.LineItemFilterValue("SAVINGS_PLAN_NEGATION"),
+						types.LineItemFilterValue("SAVINGS_PLAN_NEGATION"),
+					},
+					AttributeValues: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		BillingPeriodRange: &types.CustomLineItemBillingPeriodRange{
+			InclusiveStartBillingPeriod: ptr.String("__InclusiveStartBillingPeriod__"),
+			ExclusiveEndBillingPeriod:   ptr.String("__ExclusiveEndBillingPeriod__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1275,7 +1644,11 @@ func TestCheckResponseSnapshot_UpdatePricingPlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePricingPlan(context.Background(), &UpdatePricingPlanInput{})
+	got, err := svc.UpdatePricingPlan(context.Background(), &UpdatePricingPlanInput{
+		Arn:         ptr.String("__Arn__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1312,7 +1685,18 @@ func TestCheckResponseSnapshot_UpdatePricingRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePricingRule(context.Background(), &UpdatePricingRuleInput{})
+	got, err := svc.UpdatePricingRule(context.Background(), &UpdatePricingRuleInput{
+		Arn:                ptr.String("__Arn__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		Type:               types.PricingRuleType("MARKUP"),
+		ModifierPercentage: ptr.Float64(1.0),
+		Tiering: &types.UpdateTieringInput{
+			FreeTier: &types.UpdateFreeTierConfig{
+				Activated: ptr.Bool(true),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1333,7 +1717,13 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{})
+	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{
+		Arn: ptr.String("__Arn__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1361,7 +1751,13 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{})
+	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{
+		Arn: ptr.String("__Arn__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1387,7 +1783,13 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{})
+	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{
+		Arn: ptr.String("__Arn__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1414,7 +1816,13 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{})
+	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{
+		Arn: ptr.String("__Arn__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1443,7 +1851,13 @@ func TestCheckResponseSnapshot_Error_ServiceLimitExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{})
+	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{
+		Arn: ptr.String("__Arn__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1469,7 +1883,13 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{})
+	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{
+		Arn: ptr.String("__Arn__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1505,7 +1925,13 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{})
+	_, opErr := svc.AssociateAccounts(context.Background(), &AssociateAccountsInput{
+		Arn: ptr.String("__Arn__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

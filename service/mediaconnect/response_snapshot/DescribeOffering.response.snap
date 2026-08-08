@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"offering":{"currencyCode":"__CurrencyCode__","duration":1,"durationUnits":"MONTHS","offeringArn":"__OfferingArn__","offeringDescription":"__OfferingDescription__","pricePerUnit":"__PricePerUnit__","priceUnits":"HOURLY","resourceSpecification":{"reservedBitrate":1,"resourceType":"Mbps_Outbound_Bandwidth"}}}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"channelAssociations":[{"channelIdentifier":"__ChannelIdentifier__","channelType":"MOBILE","overrideOption":"ENABLED"},{"channelIdentifier":"__ChannelIdentifier__","channelType":"MOBILE","overrideOption":"ENABLED"}],"nextToken":"__NextToken__"}

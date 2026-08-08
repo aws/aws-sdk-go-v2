@@ -117,7 +117,10 @@ func TestCheckResponseSnapshot_AssociateWebACL(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateWebACL(context.Background(), &AssociateWebACLInput{})
+	got, err := svc.AssociateWebACL(context.Background(), &AssociateWebACLInput{
+		WebACLArn:   ptr.String("__WebACLArn__"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -138,7 +141,3155 @@ func TestCheckResponseSnapshot_CheckCapacity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CheckCapacity(context.Background(), &CheckCapacityInput{})
+	got, err := svc.CheckCapacity(context.Background(), &CheckCapacityInput{
+		Scope: types.Scope("CLOUDFRONT"),
+		Rules: []types.Rule{
+			{
+				Name:     ptr.String("__Name__"),
+				Priority: 1,
+				Statement: &types.Statement{
+					ByteMatchStatement: &types.ByteMatchStatement{
+						SearchString: []byte("blob"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
+					},
+					SqliMatchStatement: &types.SqliMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						SensitivityLevel: types.SensitivityLevel("LOW"),
+					},
+					XssMatchStatement: &types.XssMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					SizeConstraintStatement: &types.SizeConstraintStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						ComparisonOperator: types.ComparisonOperator("EQ"),
+						Size:               1,
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					GeoMatchStatement: &types.GeoMatchStatement{
+						CountryCodes: []types.CountryCode{
+							types.CountryCode("AF"),
+							types.CountryCode("AF"),
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+					RuleGroupReferenceStatement: &types.RuleGroupReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					IPSetReferenceStatement: &types.IPSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						IPSetForwardedIPConfig: &types.IPSetForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+							Position:         types.ForwardedIPPosition("FIRST"),
+						},
+					},
+					RegexPatternSetReferenceStatement: &types.RegexPatternSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					RateBasedStatement: &types.RateBasedStatement{
+						Limit:               ptr.Int64(1),
+						EvaluationWindowSec: 1,
+						AggregateKeyType:    types.RateBasedStatementAggregateKeyType("IP"),
+						ScopeDownStatement:  nil,
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+						CustomKeys: []types.RateBasedStatementCustomKey{
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+						},
+					},
+					AndStatement: &types.AndStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					OrStatement: &types.OrStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					NotStatement: &types.NotStatement{
+						Statement: nil,
+					},
+					ManagedRuleGroupStatement: &types.ManagedRuleGroupStatement{
+						VendorName: ptr.String("__VendorName__"),
+						Name:       ptr.String("__Name__"),
+						Version:    ptr.String("__Version__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						ScopeDownStatement: nil,
+						ManagedRuleGroupConfigs: []types.ManagedRuleGroupConfig{
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					LabelMatchStatement: &types.LabelMatchStatement{
+						Scope: types.LabelMatchScope("LABEL"),
+						Key:   ptr.String("__Key__"),
+					},
+					RegexMatchStatement: &types.RegexMatchStatement{
+						RegexString: ptr.String("__RegexString__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					AsnMatchStatement: &types.AsnMatchStatement{
+						AsnList: []int64{
+							1,
+							1,
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+				},
+				Action: &types.RuleAction{
+					Block: &types.BlockAction{
+						CustomResponse: &types.CustomResponse{
+							ResponseCode:          ptr.Int32(1),
+							CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+							ResponseHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Allow: &types.AllowAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Captcha: &types.CaptchaAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Challenge: &types.ChallengeAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Monetize: &types.MonetizeAction{
+						PriceMultiplier: ptr.String("__PriceMultiplier__"),
+					},
+				},
+				OverrideAction: &types.OverrideAction{
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					None: &types.NoneAction{},
+				},
+				RuleLabels: []types.Label{
+					{
+						Name: ptr.String("__Name__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+					},
+				},
+				VisibilityConfig: &types.VisibilityConfig{
+					SampledRequestsEnabled:   true,
+					CloudWatchMetricsEnabled: true,
+					MetricName:               ptr.String("__MetricName__"),
+				},
+				CaptchaConfig: &types.CaptchaConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+				ChallengeConfig: &types.ChallengeConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Priority: 1,
+				Statement: &types.Statement{
+					ByteMatchStatement: &types.ByteMatchStatement{
+						SearchString: []byte("blob"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
+					},
+					SqliMatchStatement: &types.SqliMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						SensitivityLevel: types.SensitivityLevel("LOW"),
+					},
+					XssMatchStatement: &types.XssMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					SizeConstraintStatement: &types.SizeConstraintStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						ComparisonOperator: types.ComparisonOperator("EQ"),
+						Size:               1,
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					GeoMatchStatement: &types.GeoMatchStatement{
+						CountryCodes: []types.CountryCode{
+							types.CountryCode("AF"),
+							types.CountryCode("AF"),
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+					RuleGroupReferenceStatement: &types.RuleGroupReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					IPSetReferenceStatement: &types.IPSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						IPSetForwardedIPConfig: &types.IPSetForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+							Position:         types.ForwardedIPPosition("FIRST"),
+						},
+					},
+					RegexPatternSetReferenceStatement: &types.RegexPatternSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					RateBasedStatement: &types.RateBasedStatement{
+						Limit:               ptr.Int64(1),
+						EvaluationWindowSec: 1,
+						AggregateKeyType:    types.RateBasedStatementAggregateKeyType("IP"),
+						ScopeDownStatement:  nil,
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+						CustomKeys: []types.RateBasedStatementCustomKey{
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+						},
+					},
+					AndStatement: &types.AndStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					OrStatement: &types.OrStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					NotStatement: &types.NotStatement{
+						Statement: nil,
+					},
+					ManagedRuleGroupStatement: &types.ManagedRuleGroupStatement{
+						VendorName: ptr.String("__VendorName__"),
+						Name:       ptr.String("__Name__"),
+						Version:    ptr.String("__Version__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						ScopeDownStatement: nil,
+						ManagedRuleGroupConfigs: []types.ManagedRuleGroupConfig{
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					LabelMatchStatement: &types.LabelMatchStatement{
+						Scope: types.LabelMatchScope("LABEL"),
+						Key:   ptr.String("__Key__"),
+					},
+					RegexMatchStatement: &types.RegexMatchStatement{
+						RegexString: ptr.String("__RegexString__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					AsnMatchStatement: &types.AsnMatchStatement{
+						AsnList: []int64{
+							1,
+							1,
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+				},
+				Action: &types.RuleAction{
+					Block: &types.BlockAction{
+						CustomResponse: &types.CustomResponse{
+							ResponseCode:          ptr.Int32(1),
+							CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+							ResponseHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Allow: &types.AllowAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Captcha: &types.CaptchaAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Challenge: &types.ChallengeAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Monetize: &types.MonetizeAction{
+						PriceMultiplier: ptr.String("__PriceMultiplier__"),
+					},
+				},
+				OverrideAction: &types.OverrideAction{
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					None: &types.NoneAction{},
+				},
+				RuleLabels: []types.Label{
+					{
+						Name: ptr.String("__Name__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+					},
+				},
+				VisibilityConfig: &types.VisibilityConfig{
+					SampledRequestsEnabled:   true,
+					CloudWatchMetricsEnabled: true,
+					MetricName:               ptr.String("__MetricName__"),
+				},
+				CaptchaConfig: &types.CaptchaConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+				ChallengeConfig: &types.ChallengeConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -159,7 +3310,13 @@ func TestCheckResponseSnapshot_CreateAPIKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAPIKey(context.Background(), &CreateAPIKeyInput{})
+	got, err := svc.CreateAPIKey(context.Background(), &CreateAPIKeyInput{
+		Scope: types.Scope("CLOUDFRONT"),
+		TokenDomains: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -186,7 +3343,26 @@ func TestCheckResponseSnapshot_CreateIPSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIPSet(context.Background(), &CreateIPSetInput{})
+	got, err := svc.CreateIPSet(context.Background(), &CreateIPSetInput{
+		Name:             ptr.String("__Name__"),
+		Scope:            types.Scope("CLOUDFRONT"),
+		Description:      ptr.String("__Description__"),
+		IPAddressVersion: types.IPAddressVersion("IPV4"),
+		Addresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -213,7 +3389,29 @@ func TestCheckResponseSnapshot_CreateRegexPatternSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRegexPatternSet(context.Background(), &CreateRegexPatternSetInput{})
+	got, err := svc.CreateRegexPatternSet(context.Background(), &CreateRegexPatternSetInput{
+		Name:        ptr.String("__Name__"),
+		Scope:       types.Scope("CLOUDFRONT"),
+		Description: ptr.String("__Description__"),
+		RegularExpressionList: []types.Regex{
+			{
+				RegexString: ptr.String("__RegexString__"),
+			},
+			{
+				RegexString: ptr.String("__RegexString__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -240,7 +3438,3214 @@ func TestCheckResponseSnapshot_CreateRuleGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRuleGroup(context.Background(), &CreateRuleGroupInput{})
+	got, err := svc.CreateRuleGroup(context.Background(), &CreateRuleGroupInput{
+		Name:        ptr.String("__Name__"),
+		Scope:       types.Scope("CLOUDFRONT"),
+		Capacity:    ptr.Int64(1),
+		Description: ptr.String("__Description__"),
+		Rules: []types.Rule{
+			{
+				Name:     ptr.String("__Name__"),
+				Priority: 1,
+				Statement: &types.Statement{
+					ByteMatchStatement: &types.ByteMatchStatement{
+						SearchString: []byte("blob"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
+					},
+					SqliMatchStatement: &types.SqliMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						SensitivityLevel: types.SensitivityLevel("LOW"),
+					},
+					XssMatchStatement: &types.XssMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					SizeConstraintStatement: &types.SizeConstraintStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						ComparisonOperator: types.ComparisonOperator("EQ"),
+						Size:               1,
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					GeoMatchStatement: &types.GeoMatchStatement{
+						CountryCodes: []types.CountryCode{
+							types.CountryCode("AF"),
+							types.CountryCode("AF"),
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+					RuleGroupReferenceStatement: &types.RuleGroupReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					IPSetReferenceStatement: &types.IPSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						IPSetForwardedIPConfig: &types.IPSetForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+							Position:         types.ForwardedIPPosition("FIRST"),
+						},
+					},
+					RegexPatternSetReferenceStatement: &types.RegexPatternSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					RateBasedStatement: &types.RateBasedStatement{
+						Limit:               ptr.Int64(1),
+						EvaluationWindowSec: 1,
+						AggregateKeyType:    types.RateBasedStatementAggregateKeyType("IP"),
+						ScopeDownStatement:  nil,
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+						CustomKeys: []types.RateBasedStatementCustomKey{
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+						},
+					},
+					AndStatement: &types.AndStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					OrStatement: &types.OrStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					NotStatement: &types.NotStatement{
+						Statement: nil,
+					},
+					ManagedRuleGroupStatement: &types.ManagedRuleGroupStatement{
+						VendorName: ptr.String("__VendorName__"),
+						Name:       ptr.String("__Name__"),
+						Version:    ptr.String("__Version__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						ScopeDownStatement: nil,
+						ManagedRuleGroupConfigs: []types.ManagedRuleGroupConfig{
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					LabelMatchStatement: &types.LabelMatchStatement{
+						Scope: types.LabelMatchScope("LABEL"),
+						Key:   ptr.String("__Key__"),
+					},
+					RegexMatchStatement: &types.RegexMatchStatement{
+						RegexString: ptr.String("__RegexString__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					AsnMatchStatement: &types.AsnMatchStatement{
+						AsnList: []int64{
+							1,
+							1,
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+				},
+				Action: &types.RuleAction{
+					Block: &types.BlockAction{
+						CustomResponse: &types.CustomResponse{
+							ResponseCode:          ptr.Int32(1),
+							CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+							ResponseHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Allow: &types.AllowAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Captcha: &types.CaptchaAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Challenge: &types.ChallengeAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Monetize: &types.MonetizeAction{
+						PriceMultiplier: ptr.String("__PriceMultiplier__"),
+					},
+				},
+				OverrideAction: &types.OverrideAction{
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					None: &types.NoneAction{},
+				},
+				RuleLabels: []types.Label{
+					{
+						Name: ptr.String("__Name__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+					},
+				},
+				VisibilityConfig: &types.VisibilityConfig{
+					SampledRequestsEnabled:   true,
+					CloudWatchMetricsEnabled: true,
+					MetricName:               ptr.String("__MetricName__"),
+				},
+				CaptchaConfig: &types.CaptchaConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+				ChallengeConfig: &types.ChallengeConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Priority: 1,
+				Statement: &types.Statement{
+					ByteMatchStatement: &types.ByteMatchStatement{
+						SearchString: []byte("blob"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
+					},
+					SqliMatchStatement: &types.SqliMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						SensitivityLevel: types.SensitivityLevel("LOW"),
+					},
+					XssMatchStatement: &types.XssMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					SizeConstraintStatement: &types.SizeConstraintStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						ComparisonOperator: types.ComparisonOperator("EQ"),
+						Size:               1,
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					GeoMatchStatement: &types.GeoMatchStatement{
+						CountryCodes: []types.CountryCode{
+							types.CountryCode("AF"),
+							types.CountryCode("AF"),
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+					RuleGroupReferenceStatement: &types.RuleGroupReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					IPSetReferenceStatement: &types.IPSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						IPSetForwardedIPConfig: &types.IPSetForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+							Position:         types.ForwardedIPPosition("FIRST"),
+						},
+					},
+					RegexPatternSetReferenceStatement: &types.RegexPatternSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					RateBasedStatement: &types.RateBasedStatement{
+						Limit:               ptr.Int64(1),
+						EvaluationWindowSec: 1,
+						AggregateKeyType:    types.RateBasedStatementAggregateKeyType("IP"),
+						ScopeDownStatement:  nil,
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+						CustomKeys: []types.RateBasedStatementCustomKey{
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+						},
+					},
+					AndStatement: &types.AndStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					OrStatement: &types.OrStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					NotStatement: &types.NotStatement{
+						Statement: nil,
+					},
+					ManagedRuleGroupStatement: &types.ManagedRuleGroupStatement{
+						VendorName: ptr.String("__VendorName__"),
+						Name:       ptr.String("__Name__"),
+						Version:    ptr.String("__Version__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						ScopeDownStatement: nil,
+						ManagedRuleGroupConfigs: []types.ManagedRuleGroupConfig{
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					LabelMatchStatement: &types.LabelMatchStatement{
+						Scope: types.LabelMatchScope("LABEL"),
+						Key:   ptr.String("__Key__"),
+					},
+					RegexMatchStatement: &types.RegexMatchStatement{
+						RegexString: ptr.String("__RegexString__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					AsnMatchStatement: &types.AsnMatchStatement{
+						AsnList: []int64{
+							1,
+							1,
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+				},
+				Action: &types.RuleAction{
+					Block: &types.BlockAction{
+						CustomResponse: &types.CustomResponse{
+							ResponseCode:          ptr.Int32(1),
+							CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+							ResponseHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Allow: &types.AllowAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Captcha: &types.CaptchaAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Challenge: &types.ChallengeAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Monetize: &types.MonetizeAction{
+						PriceMultiplier: ptr.String("__PriceMultiplier__"),
+					},
+				},
+				OverrideAction: &types.OverrideAction{
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					None: &types.NoneAction{},
+				},
+				RuleLabels: []types.Label{
+					{
+						Name: ptr.String("__Name__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+					},
+				},
+				VisibilityConfig: &types.VisibilityConfig{
+					SampledRequestsEnabled:   true,
+					CloudWatchMetricsEnabled: true,
+					MetricName:               ptr.String("__MetricName__"),
+				},
+				CaptchaConfig: &types.CaptchaConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+				ChallengeConfig: &types.ChallengeConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+			},
+		},
+		VisibilityConfig: &types.VisibilityConfig{
+			SampledRequestsEnabled:   true,
+			CloudWatchMetricsEnabled: true,
+			MetricName:               ptr.String("__MetricName__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		CustomResponseBodies: map[string]types.CustomResponseBody{
+			"key0": {
+				ContentType: types.ResponseContentType("TEXT_PLAIN"),
+				Content:     ptr.String("__Content__"),
+			},
+		},
+		MonetizationConfig: &types.MonetizationConfig{
+			CryptoConfig: &types.CryptoConfig{
+				PaymentNetworks: []types.PaymentNetwork{
+					{
+						Chain:         types.BlockchainChain("BASE"),
+						WalletAddress: ptr.String("__WalletAddress__"),
+						Prices: []types.Price{
+							{
+								Amount:   ptr.String("__Amount__"),
+								Currency: types.CryptoCurrency("USDC"),
+							},
+							{
+								Amount:   ptr.String("__Amount__"),
+								Currency: types.CryptoCurrency("USDC"),
+							},
+						},
+					},
+					{
+						Chain:         types.BlockchainChain("BASE"),
+						WalletAddress: ptr.String("__WalletAddress__"),
+						Prices: []types.Price{
+							{
+								Amount:   ptr.String("__Amount__"),
+								Currency: types.CryptoCurrency("USDC"),
+							},
+							{
+								Amount:   ptr.String("__Amount__"),
+								Currency: types.CryptoCurrency("USDC"),
+							},
+						},
+					},
+				},
+			},
+			CurrencyMode: types.CurrencyMode("REAL"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -267,7 +6672,3315 @@ func TestCheckResponseSnapshot_CreateWebACL(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWebACL(context.Background(), &CreateWebACLInput{})
+	got, err := svc.CreateWebACL(context.Background(), &CreateWebACLInput{
+		Name:  ptr.String("__Name__"),
+		Scope: types.Scope("CLOUDFRONT"),
+		DefaultAction: &types.DefaultAction{
+			Block: &types.BlockAction{
+				CustomResponse: &types.CustomResponse{
+					ResponseCode:          ptr.Int32(1),
+					CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+					ResponseHeaders: []types.CustomHTTPHeader{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+			},
+			Allow: &types.AllowAction{
+				CustomRequestHandling: &types.CustomRequestHandling{
+					InsertHeaders: []types.CustomHTTPHeader{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+			},
+		},
+		Description: ptr.String("__Description__"),
+		Rules: []types.Rule{
+			{
+				Name:     ptr.String("__Name__"),
+				Priority: 1,
+				Statement: &types.Statement{
+					ByteMatchStatement: &types.ByteMatchStatement{
+						SearchString: []byte("blob"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
+					},
+					SqliMatchStatement: &types.SqliMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						SensitivityLevel: types.SensitivityLevel("LOW"),
+					},
+					XssMatchStatement: &types.XssMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					SizeConstraintStatement: &types.SizeConstraintStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						ComparisonOperator: types.ComparisonOperator("EQ"),
+						Size:               1,
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					GeoMatchStatement: &types.GeoMatchStatement{
+						CountryCodes: []types.CountryCode{
+							types.CountryCode("AF"),
+							types.CountryCode("AF"),
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+					RuleGroupReferenceStatement: &types.RuleGroupReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					IPSetReferenceStatement: &types.IPSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						IPSetForwardedIPConfig: &types.IPSetForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+							Position:         types.ForwardedIPPosition("FIRST"),
+						},
+					},
+					RegexPatternSetReferenceStatement: &types.RegexPatternSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					RateBasedStatement: &types.RateBasedStatement{
+						Limit:               ptr.Int64(1),
+						EvaluationWindowSec: 1,
+						AggregateKeyType:    types.RateBasedStatementAggregateKeyType("IP"),
+						ScopeDownStatement:  nil,
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+						CustomKeys: []types.RateBasedStatementCustomKey{
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+						},
+					},
+					AndStatement: &types.AndStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					OrStatement: &types.OrStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					NotStatement: &types.NotStatement{
+						Statement: nil,
+					},
+					ManagedRuleGroupStatement: &types.ManagedRuleGroupStatement{
+						VendorName: ptr.String("__VendorName__"),
+						Name:       ptr.String("__Name__"),
+						Version:    ptr.String("__Version__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						ScopeDownStatement: nil,
+						ManagedRuleGroupConfigs: []types.ManagedRuleGroupConfig{
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					LabelMatchStatement: &types.LabelMatchStatement{
+						Scope: types.LabelMatchScope("LABEL"),
+						Key:   ptr.String("__Key__"),
+					},
+					RegexMatchStatement: &types.RegexMatchStatement{
+						RegexString: ptr.String("__RegexString__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					AsnMatchStatement: &types.AsnMatchStatement{
+						AsnList: []int64{
+							1,
+							1,
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+				},
+				Action: &types.RuleAction{
+					Block: &types.BlockAction{
+						CustomResponse: &types.CustomResponse{
+							ResponseCode:          ptr.Int32(1),
+							CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+							ResponseHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Allow: &types.AllowAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Captcha: &types.CaptchaAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Challenge: &types.ChallengeAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Monetize: &types.MonetizeAction{
+						PriceMultiplier: ptr.String("__PriceMultiplier__"),
+					},
+				},
+				OverrideAction: &types.OverrideAction{
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					None: &types.NoneAction{},
+				},
+				RuleLabels: []types.Label{
+					{
+						Name: ptr.String("__Name__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+					},
+				},
+				VisibilityConfig: &types.VisibilityConfig{
+					SampledRequestsEnabled:   true,
+					CloudWatchMetricsEnabled: true,
+					MetricName:               ptr.String("__MetricName__"),
+				},
+				CaptchaConfig: &types.CaptchaConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+				ChallengeConfig: &types.ChallengeConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Priority: 1,
+				Statement: &types.Statement{
+					ByteMatchStatement: &types.ByteMatchStatement{
+						SearchString: []byte("blob"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
+					},
+					SqliMatchStatement: &types.SqliMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						SensitivityLevel: types.SensitivityLevel("LOW"),
+					},
+					XssMatchStatement: &types.XssMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					SizeConstraintStatement: &types.SizeConstraintStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						ComparisonOperator: types.ComparisonOperator("EQ"),
+						Size:               1,
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					GeoMatchStatement: &types.GeoMatchStatement{
+						CountryCodes: []types.CountryCode{
+							types.CountryCode("AF"),
+							types.CountryCode("AF"),
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+					RuleGroupReferenceStatement: &types.RuleGroupReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					IPSetReferenceStatement: &types.IPSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						IPSetForwardedIPConfig: &types.IPSetForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+							Position:         types.ForwardedIPPosition("FIRST"),
+						},
+					},
+					RegexPatternSetReferenceStatement: &types.RegexPatternSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					RateBasedStatement: &types.RateBasedStatement{
+						Limit:               ptr.Int64(1),
+						EvaluationWindowSec: 1,
+						AggregateKeyType:    types.RateBasedStatementAggregateKeyType("IP"),
+						ScopeDownStatement:  nil,
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+						CustomKeys: []types.RateBasedStatementCustomKey{
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+						},
+					},
+					AndStatement: &types.AndStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					OrStatement: &types.OrStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					NotStatement: &types.NotStatement{
+						Statement: nil,
+					},
+					ManagedRuleGroupStatement: &types.ManagedRuleGroupStatement{
+						VendorName: ptr.String("__VendorName__"),
+						Name:       ptr.String("__Name__"),
+						Version:    ptr.String("__Version__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						ScopeDownStatement: nil,
+						ManagedRuleGroupConfigs: []types.ManagedRuleGroupConfig{
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					LabelMatchStatement: &types.LabelMatchStatement{
+						Scope: types.LabelMatchScope("LABEL"),
+						Key:   ptr.String("__Key__"),
+					},
+					RegexMatchStatement: &types.RegexMatchStatement{
+						RegexString: ptr.String("__RegexString__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					AsnMatchStatement: &types.AsnMatchStatement{
+						AsnList: []int64{
+							1,
+							1,
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+				},
+				Action: &types.RuleAction{
+					Block: &types.BlockAction{
+						CustomResponse: &types.CustomResponse{
+							ResponseCode:          ptr.Int32(1),
+							CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+							ResponseHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Allow: &types.AllowAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Captcha: &types.CaptchaAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Challenge: &types.ChallengeAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Monetize: &types.MonetizeAction{
+						PriceMultiplier: ptr.String("__PriceMultiplier__"),
+					},
+				},
+				OverrideAction: &types.OverrideAction{
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					None: &types.NoneAction{},
+				},
+				RuleLabels: []types.Label{
+					{
+						Name: ptr.String("__Name__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+					},
+				},
+				VisibilityConfig: &types.VisibilityConfig{
+					SampledRequestsEnabled:   true,
+					CloudWatchMetricsEnabled: true,
+					MetricName:               ptr.String("__MetricName__"),
+				},
+				CaptchaConfig: &types.CaptchaConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+				ChallengeConfig: &types.ChallengeConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+			},
+		},
+		VisibilityConfig: &types.VisibilityConfig{
+			SampledRequestsEnabled:   true,
+			CloudWatchMetricsEnabled: true,
+			MetricName:               ptr.String("__MetricName__"),
+		},
+		DataProtectionConfig: &types.DataProtectionConfig{
+			DataProtections: []types.DataProtection{
+				{
+					Field: &types.FieldToProtect{
+						FieldType: types.FieldToProtectType("SINGLE_HEADER"),
+						FieldKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Action:                  types.DataProtectionAction("SUBSTITUTION"),
+					ExcludeRuleMatchDetails: true,
+					ExcludeRateBasedDetails: true,
+				},
+				{
+					Field: &types.FieldToProtect{
+						FieldType: types.FieldToProtectType("SINGLE_HEADER"),
+						FieldKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Action:                  types.DataProtectionAction("SUBSTITUTION"),
+					ExcludeRuleMatchDetails: true,
+					ExcludeRateBasedDetails: true,
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		CustomResponseBodies: map[string]types.CustomResponseBody{
+			"key0": {
+				ContentType: types.ResponseContentType("TEXT_PLAIN"),
+				Content:     ptr.String("__Content__"),
+			},
+		},
+		CaptchaConfig: &types.CaptchaConfig{
+			ImmunityTimeProperty: &types.ImmunityTimeProperty{
+				ImmunityTime: ptr.Int64(1),
+			},
+		},
+		ChallengeConfig: &types.ChallengeConfig{
+			ImmunityTimeProperty: &types.ImmunityTimeProperty{
+				ImmunityTime: ptr.Int64(1),
+			},
+		},
+		TokenDomains: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AssociationConfig: &types.AssociationConfig{
+			RequestBody: map[string]types.RequestBodyAssociatedResourceTypeConfig{
+				"key0": {
+					DefaultSizeInspectionLimit: types.SizeInspectionLimit("KB_16"),
+				},
+			},
+		},
+		OnSourceDDoSProtectionConfig: &types.OnSourceDDoSProtectionConfig{
+			ALBLowReputationMode: types.LowReputationMode("ACTIVE_UNDER_DDOS"),
+		},
+		ApplicationConfig: &types.ApplicationConfig{
+			Attributes: []types.ApplicationAttribute{
+				{
+					Name: ptr.String("__Name__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		MonetizationConfig: &types.MonetizationConfig{
+			CryptoConfig: &types.CryptoConfig{
+				PaymentNetworks: []types.PaymentNetwork{
+					{
+						Chain:         types.BlockchainChain("BASE"),
+						WalletAddress: ptr.String("__WalletAddress__"),
+						Prices: []types.Price{
+							{
+								Amount:   ptr.String("__Amount__"),
+								Currency: types.CryptoCurrency("USDC"),
+							},
+							{
+								Amount:   ptr.String("__Amount__"),
+								Currency: types.CryptoCurrency("USDC"),
+							},
+						},
+					},
+					{
+						Chain:         types.BlockchainChain("BASE"),
+						WalletAddress: ptr.String("__WalletAddress__"),
+						Prices: []types.Price{
+							{
+								Amount:   ptr.String("__Amount__"),
+								Currency: types.CryptoCurrency("USDC"),
+							},
+							{
+								Amount:   ptr.String("__Amount__"),
+								Currency: types.CryptoCurrency("USDC"),
+							},
+						},
+					},
+				},
+			},
+			CurrencyMode: types.CurrencyMode("REAL"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -286,7 +9999,10 @@ func TestCheckResponseSnapshot_DeleteAPIKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAPIKey(context.Background(), &DeleteAPIKeyInput{})
+	got, err := svc.DeleteAPIKey(context.Background(), &DeleteAPIKeyInput{
+		Scope:  types.Scope("CLOUDFRONT"),
+		APIKey: ptr.String("__APIKey__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -307,7 +10023,10 @@ func TestCheckResponseSnapshot_DeleteFirewallManagerRuleGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFirewallManagerRuleGroups(context.Background(), &DeleteFirewallManagerRuleGroupsInput{})
+	got, err := svc.DeleteFirewallManagerRuleGroups(context.Background(), &DeleteFirewallManagerRuleGroupsInput{
+		WebACLArn:       ptr.String("__WebACLArn__"),
+		WebACLLockToken: ptr.String("__WebACLLockToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -326,7 +10045,12 @@ func TestCheckResponseSnapshot_DeleteIPSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIPSet(context.Background(), &DeleteIPSetInput{})
+	got, err := svc.DeleteIPSet(context.Background(), &DeleteIPSetInput{
+		Name:      ptr.String("__Name__"),
+		Scope:     types.Scope("CLOUDFRONT"),
+		Id:        ptr.String("__Id__"),
+		LockToken: ptr.String("__LockToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -345,7 +10069,11 @@ func TestCheckResponseSnapshot_DeleteLoggingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLoggingConfiguration(context.Background(), &DeleteLoggingConfigurationInput{})
+	got, err := svc.DeleteLoggingConfiguration(context.Background(), &DeleteLoggingConfigurationInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		LogType:     types.LogType("WAF_LOGS"),
+		LogScope:    types.LogScope("CUSTOMER"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -364,7 +10092,9 @@ func TestCheckResponseSnapshot_DeletePermissionPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePermissionPolicy(context.Background(), &DeletePermissionPolicyInput{})
+	got, err := svc.DeletePermissionPolicy(context.Background(), &DeletePermissionPolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -383,7 +10113,12 @@ func TestCheckResponseSnapshot_DeleteRegexPatternSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRegexPatternSet(context.Background(), &DeleteRegexPatternSetInput{})
+	got, err := svc.DeleteRegexPatternSet(context.Background(), &DeleteRegexPatternSetInput{
+		Name:      ptr.String("__Name__"),
+		Scope:     types.Scope("CLOUDFRONT"),
+		Id:        ptr.String("__Id__"),
+		LockToken: ptr.String("__LockToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -402,7 +10137,12 @@ func TestCheckResponseSnapshot_DeleteRuleGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRuleGroup(context.Background(), &DeleteRuleGroupInput{})
+	got, err := svc.DeleteRuleGroup(context.Background(), &DeleteRuleGroupInput{
+		Name:      ptr.String("__Name__"),
+		Scope:     types.Scope("CLOUDFRONT"),
+		Id:        ptr.String("__Id__"),
+		LockToken: ptr.String("__LockToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -421,7 +10161,12 @@ func TestCheckResponseSnapshot_DeleteWebACL(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWebACL(context.Background(), &DeleteWebACLInput{})
+	got, err := svc.DeleteWebACL(context.Background(), &DeleteWebACLInput{
+		Name:      ptr.String("__Name__"),
+		Scope:     types.Scope("CLOUDFRONT"),
+		Id:        ptr.String("__Id__"),
+		LockToken: ptr.String("__LockToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -465,7 +10210,9 @@ func TestCheckResponseSnapshot_DescribeAllManagedProducts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAllManagedProducts(context.Background(), &DescribeAllManagedProductsInput{})
+	got, err := svc.DescribeAllManagedProducts(context.Background(), &DescribeAllManagedProductsInput{
+		Scope: types.Scope("CLOUDFRONT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -509,7 +10256,10 @@ func TestCheckResponseSnapshot_DescribeManagedProductsByVendor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeManagedProductsByVendor(context.Background(), &DescribeManagedProductsByVendorInput{})
+	got, err := svc.DescribeManagedProductsByVendor(context.Background(), &DescribeManagedProductsByVendorInput{
+		VendorName: ptr.String("__VendorName__"),
+		Scope:      types.Scope("CLOUDFRONT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -711,7 +10461,12 @@ func TestCheckResponseSnapshot_DescribeManagedRuleGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeManagedRuleGroup(context.Background(), &DescribeManagedRuleGroupInput{})
+	got, err := svc.DescribeManagedRuleGroup(context.Background(), &DescribeManagedRuleGroupInput{
+		VendorName:  ptr.String("__VendorName__"),
+		Name:        ptr.String("__Name__"),
+		Scope:       types.Scope("CLOUDFRONT"),
+		VersionName: ptr.String("__VersionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -730,7 +10485,9 @@ func TestCheckResponseSnapshot_DisassociateWebACL(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateWebACL(context.Background(), &DisassociateWebACLInput{})
+	got, err := svc.DisassociateWebACL(context.Background(), &DisassociateWebACLInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -751,7 +10508,10 @@ func TestCheckResponseSnapshot_GenerateMobileSdkReleaseUrl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GenerateMobileSdkReleaseUrl(context.Background(), &GenerateMobileSdkReleaseUrlInput{})
+	got, err := svc.GenerateMobileSdkReleaseUrl(context.Background(), &GenerateMobileSdkReleaseUrlInput{
+		Platform:       types.Platform("IOS"),
+		ReleaseVersion: ptr.String("__ReleaseVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -776,7 +10536,10 @@ func TestCheckResponseSnapshot_GetDecryptedAPIKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDecryptedAPIKey(context.Background(), &GetDecryptedAPIKeyInput{})
+	got, err := svc.GetDecryptedAPIKey(context.Background(), &GetDecryptedAPIKeyInput{
+		Scope:  types.Scope("CLOUDFRONT"),
+		APIKey: ptr.String("__APIKey__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -808,7 +10571,11 @@ func TestCheckResponseSnapshot_GetIPSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIPSet(context.Background(), &GetIPSetInput{})
+	got, err := svc.GetIPSet(context.Background(), &GetIPSetInput{
+		Name:  ptr.String("__Name__"),
+		Scope: types.Scope("CLOUDFRONT"),
+		Id:    ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1027,7 +10794,11 @@ func TestCheckResponseSnapshot_GetLoggingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLoggingConfiguration(context.Background(), &GetLoggingConfigurationInput{})
+	got, err := svc.GetLoggingConfiguration(context.Background(), &GetLoggingConfigurationInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		LogType:     types.LogType("WAF_LOGS"),
+		LogScope:    types.LogScope("CUSTOMER"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1066,7 +10837,11 @@ func TestCheckResponseSnapshot_GetManagedRuleSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetManagedRuleSet(context.Background(), &GetManagedRuleSetInput{})
+	got, err := svc.GetManagedRuleSet(context.Background(), &GetManagedRuleSetInput{
+		Name:  ptr.String("__Name__"),
+		Scope: types.Scope("CLOUDFRONT"),
+		Id:    ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1101,7 +10876,10 @@ func TestCheckResponseSnapshot_GetMobileSdkRelease(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMobileSdkRelease(context.Background(), &GetMobileSdkReleaseInput{})
+	got, err := svc.GetMobileSdkRelease(context.Background(), &GetMobileSdkReleaseInput{
+		Platform:       types.Platform("IOS"),
+		ReleaseVersion: ptr.String("__ReleaseVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1122,7 +10900,9 @@ func TestCheckResponseSnapshot_GetPermissionPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPermissionPolicy(context.Background(), &GetPermissionPolicyInput{})
+	got, err := svc.GetPermissionPolicy(context.Background(), &GetPermissionPolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1156,7 +10936,13 @@ func TestCheckResponseSnapshot_GetRateBasedStatementManagedKeys(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRateBasedStatementManagedKeys(context.Background(), &GetRateBasedStatementManagedKeysInput{})
+	got, err := svc.GetRateBasedStatementManagedKeys(context.Background(), &GetRateBasedStatementManagedKeysInput{
+		Scope:             types.Scope("CLOUDFRONT"),
+		WebACLName:        ptr.String("__WebACLName__"),
+		WebACLId:          ptr.String("__WebACLId__"),
+		RuleGroupRuleName: ptr.String("__RuleGroupRuleName__"),
+		RuleName:          ptr.String("__RuleName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1191,7 +10977,11 @@ func TestCheckResponseSnapshot_GetRegexPatternSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRegexPatternSet(context.Background(), &GetRegexPatternSetInput{})
+	got, err := svc.GetRegexPatternSet(context.Background(), &GetRegexPatternSetInput{
+		Name:  ptr.String("__Name__"),
+		Scope: types.Scope("CLOUDFRONT"),
+		Id:    ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1250,7 +11040,36 @@ func TestCheckResponseSnapshot_GetRevenueStatistics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRevenueStatistics(context.Background(), &GetRevenueStatisticsInput{})
+	got, err := svc.GetRevenueStatistics(context.Background(), &GetRevenueStatisticsInput{
+		StatisticType: types.RankingStatisticType("TOP_SOURCES_BY_REVENUE"),
+		TimeWindow: &types.TimeWindow{
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		Scope:    types.Scope("CLOUDFRONT"),
+		Currency: types.Currency("USDC"),
+		GroupBy:  types.GroupByType("NAME"),
+		Filters: []types.MonetizationFilter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextMarker: ptr.String("__NextMarker__"),
+		Limit:      ptr.Int32(1),
+		SortBy:     types.RankingSortBy("REVENUE"),
+		SortOrder:  types.SortOrder("ASC"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1278,7 +11097,30 @@ func TestCheckResponseSnapshot_GetRevenueStatisticsSummary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRevenueStatisticsSummary(context.Background(), &GetRevenueStatisticsSummaryInput{})
+	got, err := svc.GetRevenueStatisticsSummary(context.Background(), &GetRevenueStatisticsSummaryInput{
+		TimeWindow: &types.TimeWindow{
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		Scope:    types.Scope("CLOUDFRONT"),
+		Currency: types.Currency("USDC"),
+		Filters: []types.MonetizationFilter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1319,7 +11161,35 @@ func TestCheckResponseSnapshot_GetRevenueStatisticsTimeSeries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRevenueStatisticsTimeSeries(context.Background(), &GetRevenueStatisticsTimeSeriesInput{})
+	got, err := svc.GetRevenueStatisticsTimeSeries(context.Background(), &GetRevenueStatisticsTimeSeriesInput{
+		StatisticType: types.TimeSeriesStatisticType("DATE_HISTOGRAM"),
+		TimeWindow: &types.TimeWindow{
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		Scope:    types.Scope("CLOUDFRONT"),
+		Interval: types.IntervalType("MINUTELY"),
+		Currency: types.Currency("USDC"),
+		GroupBy:  types.GroupByType("NAME"),
+		Filters: []types.MonetizationFilter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Limit:      ptr.Int32(1),
+		NextMarker: ptr.String("__NextMarker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4556,7 +14426,12 @@ func TestCheckResponseSnapshot_GetRuleGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRuleGroup(context.Background(), &GetRuleGroupInput{})
+	got, err := svc.GetRuleGroup(context.Background(), &GetRuleGroupInput{
+		Name:  ptr.String("__Name__"),
+		Scope: types.Scope("CLOUDFRONT"),
+		Id:    ptr.String("__Id__"),
+		ARN:   ptr.String("__ARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4689,7 +14564,16 @@ func TestCheckResponseSnapshot_GetSampledRequests(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSampledRequests(context.Background(), &GetSampledRequestsInput{})
+	got, err := svc.GetSampledRequests(context.Background(), &GetSampledRequestsInput{
+		WebAclArn:      ptr.String("__WebAclArn__"),
+		RuleMetricName: ptr.String("__RuleMetricName__"),
+		Scope:          types.Scope("CLOUDFRONT"),
+		TimeWindow: &types.TimeWindow{
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		MaxItems: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4803,7 +14687,21 @@ func TestCheckResponseSnapshot_GetTopPathStatisticsByTraffic(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTopPathStatisticsByTraffic(context.Background(), &GetTopPathStatisticsByTrafficInput{})
+	got, err := svc.GetTopPathStatisticsByTraffic(context.Background(), &GetTopPathStatisticsByTrafficInput{
+		WebAclArn:     ptr.String("__WebAclArn__"),
+		Scope:         types.Scope("CLOUDFRONT"),
+		UriPathPrefix: ptr.String("__UriPathPrefix__"),
+		TimeWindow: &types.TimeWindow{
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		BotCategory:                   ptr.String("__BotCategory__"),
+		BotOrganization:               ptr.String("__BotOrganization__"),
+		BotName:                       ptr.String("__BotName__"),
+		Limit:                         ptr.Int32(1),
+		NumberOfTopTrafficBotsPerPath: ptr.Int32(1),
+		NextMarker:                    ptr.String("__NextMarker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8162,7 +18060,12 @@ func TestCheckResponseSnapshot_GetWebACL(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWebACL(context.Background(), &GetWebACLInput{})
+	got, err := svc.GetWebACL(context.Background(), &GetWebACLInput{
+		Name:  ptr.String("__Name__"),
+		Scope: types.Scope("CLOUDFRONT"),
+		Id:    ptr.String("__Id__"),
+		ARN:   ptr.String("__ARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11519,7 +21422,9 @@ func TestCheckResponseSnapshot_GetWebACLForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWebACLForResource(context.Background(), &GetWebACLForResourceInput{})
+	got, err := svc.GetWebACLForResource(context.Background(), &GetWebACLForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11561,7 +21466,11 @@ func TestCheckResponseSnapshot_ListAPIKeys(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAPIKeys(context.Background(), &ListAPIKeysInput{})
+	got, err := svc.ListAPIKeys(context.Background(), &ListAPIKeysInput{
+		Scope:      types.Scope("CLOUDFRONT"),
+		NextMarker: ptr.String("__NextMarker__"),
+		Limit:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11593,7 +21502,13 @@ func TestCheckResponseSnapshot_ListAvailableManagedRuleGroupVersions(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAvailableManagedRuleGroupVersions(context.Background(), &ListAvailableManagedRuleGroupVersionsInput{})
+	got, err := svc.ListAvailableManagedRuleGroupVersions(context.Background(), &ListAvailableManagedRuleGroupVersionsInput{
+		VendorName: ptr.String("__VendorName__"),
+		Name:       ptr.String("__Name__"),
+		Scope:      types.Scope("CLOUDFRONT"),
+		NextMarker: ptr.String("__NextMarker__"),
+		Limit:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11628,7 +21543,11 @@ func TestCheckResponseSnapshot_ListAvailableManagedRuleGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAvailableManagedRuleGroups(context.Background(), &ListAvailableManagedRuleGroupsInput{})
+	got, err := svc.ListAvailableManagedRuleGroups(context.Background(), &ListAvailableManagedRuleGroupsInput{
+		Scope:      types.Scope("CLOUDFRONT"),
+		NextMarker: ptr.String("__NextMarker__"),
+		Limit:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11665,7 +21584,11 @@ func TestCheckResponseSnapshot_ListIPSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIPSets(context.Background(), &ListIPSetsInput{})
+	got, err := svc.ListIPSets(context.Background(), &ListIPSetsInput{
+		Scope:      types.Scope("CLOUDFRONT"),
+		NextMarker: ptr.String("__NextMarker__"),
+		Limit:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12086,7 +22009,12 @@ func TestCheckResponseSnapshot_ListLoggingConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLoggingConfigurations(context.Background(), &ListLoggingConfigurationsInput{})
+	got, err := svc.ListLoggingConfigurations(context.Background(), &ListLoggingConfigurationsInput{
+		Scope:      types.Scope("CLOUDFRONT"),
+		NextMarker: ptr.String("__NextMarker__"),
+		Limit:      ptr.Int32(1),
+		LogScope:   types.LogScope("CUSTOMER"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12125,7 +22053,11 @@ func TestCheckResponseSnapshot_ListManagedRuleSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListManagedRuleSets(context.Background(), &ListManagedRuleSetsInput{})
+	got, err := svc.ListManagedRuleSets(context.Background(), &ListManagedRuleSetsInput{
+		Scope:      types.Scope("CLOUDFRONT"),
+		NextMarker: ptr.String("__NextMarker__"),
+		Limit:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12156,7 +22088,11 @@ func TestCheckResponseSnapshot_ListMobileSdkReleases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMobileSdkReleases(context.Background(), &ListMobileSdkReleasesInput{})
+	got, err := svc.ListMobileSdkReleases(context.Background(), &ListMobileSdkReleasesInput{
+		Platform:   types.Platform("IOS"),
+		NextMarker: ptr.String("__NextMarker__"),
+		Limit:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12193,7 +22129,11 @@ func TestCheckResponseSnapshot_ListRegexPatternSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRegexPatternSets(context.Background(), &ListRegexPatternSetsInput{})
+	got, err := svc.ListRegexPatternSets(context.Background(), &ListRegexPatternSetsInput{
+		Scope:      types.Scope("CLOUDFRONT"),
+		NextMarker: ptr.String("__NextMarker__"),
+		Limit:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12217,7 +22157,10 @@ func TestCheckResponseSnapshot_ListResourcesForWebACL(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourcesForWebACL(context.Background(), &ListResourcesForWebACLInput{})
+	got, err := svc.ListResourcesForWebACL(context.Background(), &ListResourcesForWebACLInput{
+		WebACLArn:    ptr.String("__WebACLArn__"),
+		ResourceType: types.ResourceType("APPLICATION_LOAD_BALANCER"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12254,7 +22197,11 @@ func TestCheckResponseSnapshot_ListRuleGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRuleGroups(context.Background(), &ListRuleGroupsInput{})
+	got, err := svc.ListRuleGroups(context.Background(), &ListRuleGroupsInput{
+		Scope:      types.Scope("CLOUDFRONT"),
+		NextMarker: ptr.String("__NextMarker__"),
+		Limit:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12315,7 +22262,34 @@ func TestCheckResponseSnapshot_ListSettlementRecords(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSettlementRecords(context.Background(), &ListSettlementRecordsInput{})
+	got, err := svc.ListSettlementRecords(context.Background(), &ListSettlementRecordsInput{
+		TimeWindow: &types.TimeWindow{
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		Scope:    types.Scope("CLOUDFRONT"),
+		Currency: types.Currency("USDC"),
+		Filters: []types.MonetizationFilter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		SortBy:     types.SettlementSortBy("TIMESTAMP"),
+		SortOrder:  types.SortOrder("ASC"),
+		Limit:      ptr.Int32(1),
+		NextMarker: ptr.String("__NextMarker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12349,7 +22323,11 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		NextMarker:  ptr.String("__NextMarker__"),
+		Limit:       ptr.Int32(1),
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12386,7 +22364,11 @@ func TestCheckResponseSnapshot_ListWebACLs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWebACLs(context.Background(), &ListWebACLsInput{})
+	got, err := svc.ListWebACLs(context.Background(), &ListWebACLsInput{
+		Scope:      types.Scope("CLOUDFRONT"),
+		NextMarker: ptr.String("__NextMarker__"),
+		Limit:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12605,7 +22587,207 @@ func TestCheckResponseSnapshot_PutLoggingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutLoggingConfiguration(context.Background(), &PutLoggingConfigurationInput{})
+	got, err := svc.PutLoggingConfiguration(context.Background(), &PutLoggingConfigurationInput{
+		LoggingConfiguration: &types.LoggingConfiguration{
+			ResourceArn: ptr.String("__ResourceArn__"),
+			LogDestinationConfigs: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RedactedFields: []types.FieldToMatch{
+				{
+					SingleHeader: &types.SingleHeader{
+						Name: ptr.String("__Name__"),
+					},
+					SingleQueryArgument: &types.SingleQueryArgument{
+						Name: ptr.String("__Name__"),
+					},
+					AllQueryArguments: &types.AllQueryArguments{},
+					UriPath:           &types.UriPath{},
+					QueryString:       &types.QueryString{},
+					Body: &types.Body{
+						OversizeHandling: types.OversizeHandling("CONTINUE"),
+					},
+					Method: &types.Method{},
+					JsonBody: &types.JsonBody{
+						MatchPattern: &types.JsonMatchPattern{
+							All: &types.All{},
+							IncludedPaths: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						MatchScope:              types.JsonMatchScope("ALL"),
+						InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+						OversizeHandling:        types.OversizeHandling("CONTINUE"),
+					},
+					Headers: &types.Headers{
+						MatchPattern: &types.HeaderMatchPattern{
+							All: &types.All{},
+							IncludedHeaders: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ExcludedHeaders: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						MatchScope:       types.MapMatchScope("ALL"),
+						OversizeHandling: types.OversizeHandling("CONTINUE"),
+					},
+					Cookies: &types.Cookies{
+						MatchPattern: &types.CookieMatchPattern{
+							All: &types.All{},
+							IncludedCookies: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ExcludedCookies: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						MatchScope:       types.MapMatchScope("ALL"),
+						OversizeHandling: types.OversizeHandling("CONTINUE"),
+					},
+					HeaderOrder: &types.HeaderOrder{
+						OversizeHandling: types.OversizeHandling("CONTINUE"),
+					},
+					JA3Fingerprint: &types.JA3Fingerprint{
+						FallbackBehavior: types.FallbackBehavior("MATCH"),
+					},
+					JA4Fingerprint: &types.JA4Fingerprint{
+						FallbackBehavior: types.FallbackBehavior("MATCH"),
+					},
+					UriFragment: &types.UriFragment{
+						FallbackBehavior: types.FallbackBehavior("MATCH"),
+					},
+				},
+				{
+					SingleHeader: &types.SingleHeader{
+						Name: ptr.String("__Name__"),
+					},
+					SingleQueryArgument: &types.SingleQueryArgument{
+						Name: ptr.String("__Name__"),
+					},
+					AllQueryArguments: &types.AllQueryArguments{},
+					UriPath:           &types.UriPath{},
+					QueryString:       &types.QueryString{},
+					Body: &types.Body{
+						OversizeHandling: types.OversizeHandling("CONTINUE"),
+					},
+					Method: &types.Method{},
+					JsonBody: &types.JsonBody{
+						MatchPattern: &types.JsonMatchPattern{
+							All: &types.All{},
+							IncludedPaths: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						MatchScope:              types.JsonMatchScope("ALL"),
+						InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+						OversizeHandling:        types.OversizeHandling("CONTINUE"),
+					},
+					Headers: &types.Headers{
+						MatchPattern: &types.HeaderMatchPattern{
+							All: &types.All{},
+							IncludedHeaders: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ExcludedHeaders: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						MatchScope:       types.MapMatchScope("ALL"),
+						OversizeHandling: types.OversizeHandling("CONTINUE"),
+					},
+					Cookies: &types.Cookies{
+						MatchPattern: &types.CookieMatchPattern{
+							All: &types.All{},
+							IncludedCookies: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ExcludedCookies: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						MatchScope:       types.MapMatchScope("ALL"),
+						OversizeHandling: types.OversizeHandling("CONTINUE"),
+					},
+					HeaderOrder: &types.HeaderOrder{
+						OversizeHandling: types.OversizeHandling("CONTINUE"),
+					},
+					JA3Fingerprint: &types.JA3Fingerprint{
+						FallbackBehavior: types.FallbackBehavior("MATCH"),
+					},
+					JA4Fingerprint: &types.JA4Fingerprint{
+						FallbackBehavior: types.FallbackBehavior("MATCH"),
+					},
+					UriFragment: &types.UriFragment{
+						FallbackBehavior: types.FallbackBehavior("MATCH"),
+					},
+				},
+			},
+			ManagedByFirewallManager: true,
+			LoggingFilter: &types.LoggingFilter{
+				Filters: []types.Filter{
+					{
+						Behavior:    types.FilterBehavior("KEEP"),
+						Requirement: types.FilterRequirement("MEETS_ALL"),
+						Conditions: []types.Condition{
+							{
+								ActionCondition: &types.ActionCondition{
+									Action: types.ActionValue("ALLOW"),
+								},
+								LabelNameCondition: &types.LabelNameCondition{
+									LabelName: ptr.String("__LabelName__"),
+								},
+							},
+							{
+								ActionCondition: &types.ActionCondition{
+									Action: types.ActionValue("ALLOW"),
+								},
+								LabelNameCondition: &types.LabelNameCondition{
+									LabelName: ptr.String("__LabelName__"),
+								},
+							},
+						},
+					},
+					{
+						Behavior:    types.FilterBehavior("KEEP"),
+						Requirement: types.FilterRequirement("MEETS_ALL"),
+						Conditions: []types.Condition{
+							{
+								ActionCondition: &types.ActionCondition{
+									Action: types.ActionValue("ALLOW"),
+								},
+								LabelNameCondition: &types.LabelNameCondition{
+									LabelName: ptr.String("__LabelName__"),
+								},
+							},
+							{
+								ActionCondition: &types.ActionCondition{
+									Action: types.ActionValue("ALLOW"),
+								},
+								LabelNameCondition: &types.LabelNameCondition{
+									LabelName: ptr.String("__LabelName__"),
+								},
+							},
+						},
+					},
+				},
+				DefaultBehavior: types.FilterBehavior("KEEP"),
+			},
+			LogType:  types.LogType("WAF_LOGS"),
+			LogScope: types.LogScope("CUSTOMER"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12626,7 +22808,19 @@ func TestCheckResponseSnapshot_PutManagedRuleSetVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutManagedRuleSetVersions(context.Background(), &PutManagedRuleSetVersionsInput{})
+	got, err := svc.PutManagedRuleSetVersions(context.Background(), &PutManagedRuleSetVersionsInput{
+		Name:               ptr.String("__Name__"),
+		Scope:              types.Scope("CLOUDFRONT"),
+		Id:                 ptr.String("__Id__"),
+		LockToken:          ptr.String("__LockToken__"),
+		RecommendedVersion: ptr.String("__RecommendedVersion__"),
+		VersionsToPublish: map[string]types.VersionToPublish{
+			"key0": {
+				AssociatedRuleGroupArn: ptr.String("__AssociatedRuleGroupArn__"),
+				ForecastedLifetime:     ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12645,7 +22839,10 @@ func TestCheckResponseSnapshot_PutPermissionPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutPermissionPolicy(context.Background(), &PutPermissionPolicyInput{})
+	got, err := svc.PutPermissionPolicy(context.Background(), &PutPermissionPolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Policy:      ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12664,7 +22861,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12683,7 +22892,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12704,7 +22919,17 @@ func TestCheckResponseSnapshot_UpdateIPSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIPSet(context.Background(), &UpdateIPSetInput{})
+	got, err := svc.UpdateIPSet(context.Background(), &UpdateIPSetInput{
+		Name:        ptr.String("__Name__"),
+		Scope:       types.Scope("CLOUDFRONT"),
+		Id:          ptr.String("__Id__"),
+		Description: ptr.String("__Description__"),
+		Addresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LockToken: ptr.String("__LockToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12727,7 +22952,14 @@ func TestCheckResponseSnapshot_UpdateManagedRuleSetVersionExpiryDate(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateManagedRuleSetVersionExpiryDate(context.Background(), &UpdateManagedRuleSetVersionExpiryDateInput{})
+	got, err := svc.UpdateManagedRuleSetVersionExpiryDate(context.Background(), &UpdateManagedRuleSetVersionExpiryDateInput{
+		Name:            ptr.String("__Name__"),
+		Scope:           types.Scope("CLOUDFRONT"),
+		Id:              ptr.String("__Id__"),
+		LockToken:       ptr.String("__LockToken__"),
+		VersionToExpire: ptr.String("__VersionToExpire__"),
+		ExpiryTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12748,7 +22980,21 @@ func TestCheckResponseSnapshot_UpdateRegexPatternSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRegexPatternSet(context.Background(), &UpdateRegexPatternSetInput{})
+	got, err := svc.UpdateRegexPatternSet(context.Background(), &UpdateRegexPatternSetInput{
+		Name:        ptr.String("__Name__"),
+		Scope:       types.Scope("CLOUDFRONT"),
+		Id:          ptr.String("__Id__"),
+		Description: ptr.String("__Description__"),
+		RegularExpressionList: []types.Regex{
+			{
+				RegexString: ptr.String("__RegexString__"),
+			},
+			{
+				RegexString: ptr.String("__RegexString__"),
+			},
+		},
+		LockToken: ptr.String("__LockToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12769,7 +23015,3205 @@ func TestCheckResponseSnapshot_UpdateRuleGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRuleGroup(context.Background(), &UpdateRuleGroupInput{})
+	got, err := svc.UpdateRuleGroup(context.Background(), &UpdateRuleGroupInput{
+		Name:        ptr.String("__Name__"),
+		Scope:       types.Scope("CLOUDFRONT"),
+		Id:          ptr.String("__Id__"),
+		Description: ptr.String("__Description__"),
+		Rules: []types.Rule{
+			{
+				Name:     ptr.String("__Name__"),
+				Priority: 1,
+				Statement: &types.Statement{
+					ByteMatchStatement: &types.ByteMatchStatement{
+						SearchString: []byte("blob"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
+					},
+					SqliMatchStatement: &types.SqliMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						SensitivityLevel: types.SensitivityLevel("LOW"),
+					},
+					XssMatchStatement: &types.XssMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					SizeConstraintStatement: &types.SizeConstraintStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						ComparisonOperator: types.ComparisonOperator("EQ"),
+						Size:               1,
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					GeoMatchStatement: &types.GeoMatchStatement{
+						CountryCodes: []types.CountryCode{
+							types.CountryCode("AF"),
+							types.CountryCode("AF"),
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+					RuleGroupReferenceStatement: &types.RuleGroupReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					IPSetReferenceStatement: &types.IPSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						IPSetForwardedIPConfig: &types.IPSetForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+							Position:         types.ForwardedIPPosition("FIRST"),
+						},
+					},
+					RegexPatternSetReferenceStatement: &types.RegexPatternSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					RateBasedStatement: &types.RateBasedStatement{
+						Limit:               ptr.Int64(1),
+						EvaluationWindowSec: 1,
+						AggregateKeyType:    types.RateBasedStatementAggregateKeyType("IP"),
+						ScopeDownStatement:  nil,
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+						CustomKeys: []types.RateBasedStatementCustomKey{
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+						},
+					},
+					AndStatement: &types.AndStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					OrStatement: &types.OrStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					NotStatement: &types.NotStatement{
+						Statement: nil,
+					},
+					ManagedRuleGroupStatement: &types.ManagedRuleGroupStatement{
+						VendorName: ptr.String("__VendorName__"),
+						Name:       ptr.String("__Name__"),
+						Version:    ptr.String("__Version__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						ScopeDownStatement: nil,
+						ManagedRuleGroupConfigs: []types.ManagedRuleGroupConfig{
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					LabelMatchStatement: &types.LabelMatchStatement{
+						Scope: types.LabelMatchScope("LABEL"),
+						Key:   ptr.String("__Key__"),
+					},
+					RegexMatchStatement: &types.RegexMatchStatement{
+						RegexString: ptr.String("__RegexString__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					AsnMatchStatement: &types.AsnMatchStatement{
+						AsnList: []int64{
+							1,
+							1,
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+				},
+				Action: &types.RuleAction{
+					Block: &types.BlockAction{
+						CustomResponse: &types.CustomResponse{
+							ResponseCode:          ptr.Int32(1),
+							CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+							ResponseHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Allow: &types.AllowAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Captcha: &types.CaptchaAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Challenge: &types.ChallengeAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Monetize: &types.MonetizeAction{
+						PriceMultiplier: ptr.String("__PriceMultiplier__"),
+					},
+				},
+				OverrideAction: &types.OverrideAction{
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					None: &types.NoneAction{},
+				},
+				RuleLabels: []types.Label{
+					{
+						Name: ptr.String("__Name__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+					},
+				},
+				VisibilityConfig: &types.VisibilityConfig{
+					SampledRequestsEnabled:   true,
+					CloudWatchMetricsEnabled: true,
+					MetricName:               ptr.String("__MetricName__"),
+				},
+				CaptchaConfig: &types.CaptchaConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+				ChallengeConfig: &types.ChallengeConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Priority: 1,
+				Statement: &types.Statement{
+					ByteMatchStatement: &types.ByteMatchStatement{
+						SearchString: []byte("blob"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
+					},
+					SqliMatchStatement: &types.SqliMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						SensitivityLevel: types.SensitivityLevel("LOW"),
+					},
+					XssMatchStatement: &types.XssMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					SizeConstraintStatement: &types.SizeConstraintStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						ComparisonOperator: types.ComparisonOperator("EQ"),
+						Size:               1,
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					GeoMatchStatement: &types.GeoMatchStatement{
+						CountryCodes: []types.CountryCode{
+							types.CountryCode("AF"),
+							types.CountryCode("AF"),
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+					RuleGroupReferenceStatement: &types.RuleGroupReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					IPSetReferenceStatement: &types.IPSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						IPSetForwardedIPConfig: &types.IPSetForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+							Position:         types.ForwardedIPPosition("FIRST"),
+						},
+					},
+					RegexPatternSetReferenceStatement: &types.RegexPatternSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					RateBasedStatement: &types.RateBasedStatement{
+						Limit:               ptr.Int64(1),
+						EvaluationWindowSec: 1,
+						AggregateKeyType:    types.RateBasedStatementAggregateKeyType("IP"),
+						ScopeDownStatement:  nil,
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+						CustomKeys: []types.RateBasedStatementCustomKey{
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+						},
+					},
+					AndStatement: &types.AndStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					OrStatement: &types.OrStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					NotStatement: &types.NotStatement{
+						Statement: nil,
+					},
+					ManagedRuleGroupStatement: &types.ManagedRuleGroupStatement{
+						VendorName: ptr.String("__VendorName__"),
+						Name:       ptr.String("__Name__"),
+						Version:    ptr.String("__Version__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						ScopeDownStatement: nil,
+						ManagedRuleGroupConfigs: []types.ManagedRuleGroupConfig{
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					LabelMatchStatement: &types.LabelMatchStatement{
+						Scope: types.LabelMatchScope("LABEL"),
+						Key:   ptr.String("__Key__"),
+					},
+					RegexMatchStatement: &types.RegexMatchStatement{
+						RegexString: ptr.String("__RegexString__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					AsnMatchStatement: &types.AsnMatchStatement{
+						AsnList: []int64{
+							1,
+							1,
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+				},
+				Action: &types.RuleAction{
+					Block: &types.BlockAction{
+						CustomResponse: &types.CustomResponse{
+							ResponseCode:          ptr.Int32(1),
+							CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+							ResponseHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Allow: &types.AllowAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Captcha: &types.CaptchaAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Challenge: &types.ChallengeAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Monetize: &types.MonetizeAction{
+						PriceMultiplier: ptr.String("__PriceMultiplier__"),
+					},
+				},
+				OverrideAction: &types.OverrideAction{
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					None: &types.NoneAction{},
+				},
+				RuleLabels: []types.Label{
+					{
+						Name: ptr.String("__Name__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+					},
+				},
+				VisibilityConfig: &types.VisibilityConfig{
+					SampledRequestsEnabled:   true,
+					CloudWatchMetricsEnabled: true,
+					MetricName:               ptr.String("__MetricName__"),
+				},
+				CaptchaConfig: &types.CaptchaConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+				ChallengeConfig: &types.ChallengeConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+			},
+		},
+		VisibilityConfig: &types.VisibilityConfig{
+			SampledRequestsEnabled:   true,
+			CloudWatchMetricsEnabled: true,
+			MetricName:               ptr.String("__MetricName__"),
+		},
+		LockToken: ptr.String("__LockToken__"),
+		CustomResponseBodies: map[string]types.CustomResponseBody{
+			"key0": {
+				ContentType: types.ResponseContentType("TEXT_PLAIN"),
+				Content:     ptr.String("__Content__"),
+			},
+		},
+		MonetizationConfig: &types.MonetizationConfig{
+			CryptoConfig: &types.CryptoConfig{
+				PaymentNetworks: []types.PaymentNetwork{
+					{
+						Chain:         types.BlockchainChain("BASE"),
+						WalletAddress: ptr.String("__WalletAddress__"),
+						Prices: []types.Price{
+							{
+								Amount:   ptr.String("__Amount__"),
+								Currency: types.CryptoCurrency("USDC"),
+							},
+							{
+								Amount:   ptr.String("__Amount__"),
+								Currency: types.CryptoCurrency("USDC"),
+							},
+						},
+					},
+					{
+						Chain:         types.BlockchainChain("BASE"),
+						WalletAddress: ptr.String("__WalletAddress__"),
+						Prices: []types.Price{
+							{
+								Amount:   ptr.String("__Amount__"),
+								Currency: types.CryptoCurrency("USDC"),
+							},
+							{
+								Amount:   ptr.String("__Amount__"),
+								Currency: types.CryptoCurrency("USDC"),
+							},
+						},
+					},
+				},
+			},
+			CurrencyMode: types.CurrencyMode("REAL"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12790,7 +26234,3307 @@ func TestCheckResponseSnapshot_UpdateWebACL(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWebACL(context.Background(), &UpdateWebACLInput{})
+	got, err := svc.UpdateWebACL(context.Background(), &UpdateWebACLInput{
+		Name:  ptr.String("__Name__"),
+		Scope: types.Scope("CLOUDFRONT"),
+		Id:    ptr.String("__Id__"),
+		DefaultAction: &types.DefaultAction{
+			Block: &types.BlockAction{
+				CustomResponse: &types.CustomResponse{
+					ResponseCode:          ptr.Int32(1),
+					CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+					ResponseHeaders: []types.CustomHTTPHeader{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+			},
+			Allow: &types.AllowAction{
+				CustomRequestHandling: &types.CustomRequestHandling{
+					InsertHeaders: []types.CustomHTTPHeader{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+			},
+		},
+		Description: ptr.String("__Description__"),
+		Rules: []types.Rule{
+			{
+				Name:     ptr.String("__Name__"),
+				Priority: 1,
+				Statement: &types.Statement{
+					ByteMatchStatement: &types.ByteMatchStatement{
+						SearchString: []byte("blob"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
+					},
+					SqliMatchStatement: &types.SqliMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						SensitivityLevel: types.SensitivityLevel("LOW"),
+					},
+					XssMatchStatement: &types.XssMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					SizeConstraintStatement: &types.SizeConstraintStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						ComparisonOperator: types.ComparisonOperator("EQ"),
+						Size:               1,
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					GeoMatchStatement: &types.GeoMatchStatement{
+						CountryCodes: []types.CountryCode{
+							types.CountryCode("AF"),
+							types.CountryCode("AF"),
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+					RuleGroupReferenceStatement: &types.RuleGroupReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					IPSetReferenceStatement: &types.IPSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						IPSetForwardedIPConfig: &types.IPSetForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+							Position:         types.ForwardedIPPosition("FIRST"),
+						},
+					},
+					RegexPatternSetReferenceStatement: &types.RegexPatternSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					RateBasedStatement: &types.RateBasedStatement{
+						Limit:               ptr.Int64(1),
+						EvaluationWindowSec: 1,
+						AggregateKeyType:    types.RateBasedStatementAggregateKeyType("IP"),
+						ScopeDownStatement:  nil,
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+						CustomKeys: []types.RateBasedStatementCustomKey{
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+						},
+					},
+					AndStatement: &types.AndStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					OrStatement: &types.OrStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					NotStatement: &types.NotStatement{
+						Statement: nil,
+					},
+					ManagedRuleGroupStatement: &types.ManagedRuleGroupStatement{
+						VendorName: ptr.String("__VendorName__"),
+						Name:       ptr.String("__Name__"),
+						Version:    ptr.String("__Version__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						ScopeDownStatement: nil,
+						ManagedRuleGroupConfigs: []types.ManagedRuleGroupConfig{
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					LabelMatchStatement: &types.LabelMatchStatement{
+						Scope: types.LabelMatchScope("LABEL"),
+						Key:   ptr.String("__Key__"),
+					},
+					RegexMatchStatement: &types.RegexMatchStatement{
+						RegexString: ptr.String("__RegexString__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					AsnMatchStatement: &types.AsnMatchStatement{
+						AsnList: []int64{
+							1,
+							1,
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+				},
+				Action: &types.RuleAction{
+					Block: &types.BlockAction{
+						CustomResponse: &types.CustomResponse{
+							ResponseCode:          ptr.Int32(1),
+							CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+							ResponseHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Allow: &types.AllowAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Captcha: &types.CaptchaAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Challenge: &types.ChallengeAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Monetize: &types.MonetizeAction{
+						PriceMultiplier: ptr.String("__PriceMultiplier__"),
+					},
+				},
+				OverrideAction: &types.OverrideAction{
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					None: &types.NoneAction{},
+				},
+				RuleLabels: []types.Label{
+					{
+						Name: ptr.String("__Name__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+					},
+				},
+				VisibilityConfig: &types.VisibilityConfig{
+					SampledRequestsEnabled:   true,
+					CloudWatchMetricsEnabled: true,
+					MetricName:               ptr.String("__MetricName__"),
+				},
+				CaptchaConfig: &types.CaptchaConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+				ChallengeConfig: &types.ChallengeConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Priority: 1,
+				Statement: &types.Statement{
+					ByteMatchStatement: &types.ByteMatchStatement{
+						SearchString: []byte("blob"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
+					},
+					SqliMatchStatement: &types.SqliMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						SensitivityLevel: types.SensitivityLevel("LOW"),
+					},
+					XssMatchStatement: &types.XssMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					SizeConstraintStatement: &types.SizeConstraintStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						ComparisonOperator: types.ComparisonOperator("EQ"),
+						Size:               1,
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					GeoMatchStatement: &types.GeoMatchStatement{
+						CountryCodes: []types.CountryCode{
+							types.CountryCode("AF"),
+							types.CountryCode("AF"),
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+					RuleGroupReferenceStatement: &types.RuleGroupReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					IPSetReferenceStatement: &types.IPSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						IPSetForwardedIPConfig: &types.IPSetForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+							Position:         types.ForwardedIPPosition("FIRST"),
+						},
+					},
+					RegexPatternSetReferenceStatement: &types.RegexPatternSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					RateBasedStatement: &types.RateBasedStatement{
+						Limit:               ptr.Int64(1),
+						EvaluationWindowSec: 1,
+						AggregateKeyType:    types.RateBasedStatementAggregateKeyType("IP"),
+						ScopeDownStatement:  nil,
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+						CustomKeys: []types.RateBasedStatementCustomKey{
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+						},
+					},
+					AndStatement: &types.AndStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					OrStatement: &types.OrStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					NotStatement: &types.NotStatement{
+						Statement: nil,
+					},
+					ManagedRuleGroupStatement: &types.ManagedRuleGroupStatement{
+						VendorName: ptr.String("__VendorName__"),
+						Name:       ptr.String("__Name__"),
+						Version:    ptr.String("__Version__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						ScopeDownStatement: nil,
+						ManagedRuleGroupConfigs: []types.ManagedRuleGroupConfig{
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					LabelMatchStatement: &types.LabelMatchStatement{
+						Scope: types.LabelMatchScope("LABEL"),
+						Key:   ptr.String("__Key__"),
+					},
+					RegexMatchStatement: &types.RegexMatchStatement{
+						RegexString: ptr.String("__RegexString__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					AsnMatchStatement: &types.AsnMatchStatement{
+						AsnList: []int64{
+							1,
+							1,
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+				},
+				Action: &types.RuleAction{
+					Block: &types.BlockAction{
+						CustomResponse: &types.CustomResponse{
+							ResponseCode:          ptr.Int32(1),
+							CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+							ResponseHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Allow: &types.AllowAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Captcha: &types.CaptchaAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Challenge: &types.ChallengeAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Monetize: &types.MonetizeAction{
+						PriceMultiplier: ptr.String("__PriceMultiplier__"),
+					},
+				},
+				OverrideAction: &types.OverrideAction{
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					None: &types.NoneAction{},
+				},
+				RuleLabels: []types.Label{
+					{
+						Name: ptr.String("__Name__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+					},
+				},
+				VisibilityConfig: &types.VisibilityConfig{
+					SampledRequestsEnabled:   true,
+					CloudWatchMetricsEnabled: true,
+					MetricName:               ptr.String("__MetricName__"),
+				},
+				CaptchaConfig: &types.CaptchaConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+				ChallengeConfig: &types.ChallengeConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+			},
+		},
+		VisibilityConfig: &types.VisibilityConfig{
+			SampledRequestsEnabled:   true,
+			CloudWatchMetricsEnabled: true,
+			MetricName:               ptr.String("__MetricName__"),
+		},
+		DataProtectionConfig: &types.DataProtectionConfig{
+			DataProtections: []types.DataProtection{
+				{
+					Field: &types.FieldToProtect{
+						FieldType: types.FieldToProtectType("SINGLE_HEADER"),
+						FieldKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Action:                  types.DataProtectionAction("SUBSTITUTION"),
+					ExcludeRuleMatchDetails: true,
+					ExcludeRateBasedDetails: true,
+				},
+				{
+					Field: &types.FieldToProtect{
+						FieldType: types.FieldToProtectType("SINGLE_HEADER"),
+						FieldKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Action:                  types.DataProtectionAction("SUBSTITUTION"),
+					ExcludeRuleMatchDetails: true,
+					ExcludeRateBasedDetails: true,
+				},
+			},
+		},
+		LockToken: ptr.String("__LockToken__"),
+		CustomResponseBodies: map[string]types.CustomResponseBody{
+			"key0": {
+				ContentType: types.ResponseContentType("TEXT_PLAIN"),
+				Content:     ptr.String("__Content__"),
+			},
+		},
+		CaptchaConfig: &types.CaptchaConfig{
+			ImmunityTimeProperty: &types.ImmunityTimeProperty{
+				ImmunityTime: ptr.Int64(1),
+			},
+		},
+		ChallengeConfig: &types.ChallengeConfig{
+			ImmunityTimeProperty: &types.ImmunityTimeProperty{
+				ImmunityTime: ptr.Int64(1),
+			},
+		},
+		TokenDomains: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AssociationConfig: &types.AssociationConfig{
+			RequestBody: map[string]types.RequestBodyAssociatedResourceTypeConfig{
+				"key0": {
+					DefaultSizeInspectionLimit: types.SizeInspectionLimit("KB_16"),
+				},
+			},
+		},
+		OnSourceDDoSProtectionConfig: &types.OnSourceDDoSProtectionConfig{
+			ALBLowReputationMode: types.LowReputationMode("ACTIVE_UNDER_DDOS"),
+		},
+		ApplicationConfig: &types.ApplicationConfig{
+			Attributes: []types.ApplicationAttribute{
+				{
+					Name: ptr.String("__Name__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		MonetizationConfig: &types.MonetizationConfig{
+			CryptoConfig: &types.CryptoConfig{
+				PaymentNetworks: []types.PaymentNetwork{
+					{
+						Chain:         types.BlockchainChain("BASE"),
+						WalletAddress: ptr.String("__WalletAddress__"),
+						Prices: []types.Price{
+							{
+								Amount:   ptr.String("__Amount__"),
+								Currency: types.CryptoCurrency("USDC"),
+							},
+							{
+								Amount:   ptr.String("__Amount__"),
+								Currency: types.CryptoCurrency("USDC"),
+							},
+						},
+					},
+					{
+						Chain:         types.BlockchainChain("BASE"),
+						WalletAddress: ptr.String("__WalletAddress__"),
+						Prices: []types.Price{
+							{
+								Amount:   ptr.String("__Amount__"),
+								Currency: types.CryptoCurrency("USDC"),
+							},
+							{
+								Amount:   ptr.String("__Amount__"),
+								Currency: types.CryptoCurrency("USDC"),
+							},
+						},
+					},
+				},
+			},
+			CurrencyMode: types.CurrencyMode("REAL"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -12811,7 +29555,12 @@ func TestCheckResponseSnapshot_Error_WAFAssociatedItemException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteIPSet(context.Background(), &DeleteIPSetInput{})
+	_, opErr := svc.DeleteIPSet(context.Background(), &DeleteIPSetInput{
+		Name:      ptr.String("__Name__"),
+		Scope:     types.Scope("CLOUDFRONT"),
+		Id:        ptr.String("__Id__"),
+		LockToken: ptr.String("__LockToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -12836,7 +29585,3315 @@ func TestCheckResponseSnapshot_Error_WAFConfigurationWarningException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateWebACL(context.Background(), &CreateWebACLInput{})
+	_, opErr := svc.CreateWebACL(context.Background(), &CreateWebACLInput{
+		Name:  ptr.String("__Name__"),
+		Scope: types.Scope("CLOUDFRONT"),
+		DefaultAction: &types.DefaultAction{
+			Block: &types.BlockAction{
+				CustomResponse: &types.CustomResponse{
+					ResponseCode:          ptr.Int32(1),
+					CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+					ResponseHeaders: []types.CustomHTTPHeader{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+			},
+			Allow: &types.AllowAction{
+				CustomRequestHandling: &types.CustomRequestHandling{
+					InsertHeaders: []types.CustomHTTPHeader{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+			},
+		},
+		Description: ptr.String("__Description__"),
+		Rules: []types.Rule{
+			{
+				Name:     ptr.String("__Name__"),
+				Priority: 1,
+				Statement: &types.Statement{
+					ByteMatchStatement: &types.ByteMatchStatement{
+						SearchString: []byte("blob"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
+					},
+					SqliMatchStatement: &types.SqliMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						SensitivityLevel: types.SensitivityLevel("LOW"),
+					},
+					XssMatchStatement: &types.XssMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					SizeConstraintStatement: &types.SizeConstraintStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						ComparisonOperator: types.ComparisonOperator("EQ"),
+						Size:               1,
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					GeoMatchStatement: &types.GeoMatchStatement{
+						CountryCodes: []types.CountryCode{
+							types.CountryCode("AF"),
+							types.CountryCode("AF"),
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+					RuleGroupReferenceStatement: &types.RuleGroupReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					IPSetReferenceStatement: &types.IPSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						IPSetForwardedIPConfig: &types.IPSetForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+							Position:         types.ForwardedIPPosition("FIRST"),
+						},
+					},
+					RegexPatternSetReferenceStatement: &types.RegexPatternSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					RateBasedStatement: &types.RateBasedStatement{
+						Limit:               ptr.Int64(1),
+						EvaluationWindowSec: 1,
+						AggregateKeyType:    types.RateBasedStatementAggregateKeyType("IP"),
+						ScopeDownStatement:  nil,
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+						CustomKeys: []types.RateBasedStatementCustomKey{
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+						},
+					},
+					AndStatement: &types.AndStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					OrStatement: &types.OrStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					NotStatement: &types.NotStatement{
+						Statement: nil,
+					},
+					ManagedRuleGroupStatement: &types.ManagedRuleGroupStatement{
+						VendorName: ptr.String("__VendorName__"),
+						Name:       ptr.String("__Name__"),
+						Version:    ptr.String("__Version__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						ScopeDownStatement: nil,
+						ManagedRuleGroupConfigs: []types.ManagedRuleGroupConfig{
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					LabelMatchStatement: &types.LabelMatchStatement{
+						Scope: types.LabelMatchScope("LABEL"),
+						Key:   ptr.String("__Key__"),
+					},
+					RegexMatchStatement: &types.RegexMatchStatement{
+						RegexString: ptr.String("__RegexString__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					AsnMatchStatement: &types.AsnMatchStatement{
+						AsnList: []int64{
+							1,
+							1,
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+				},
+				Action: &types.RuleAction{
+					Block: &types.BlockAction{
+						CustomResponse: &types.CustomResponse{
+							ResponseCode:          ptr.Int32(1),
+							CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+							ResponseHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Allow: &types.AllowAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Captcha: &types.CaptchaAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Challenge: &types.ChallengeAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Monetize: &types.MonetizeAction{
+						PriceMultiplier: ptr.String("__PriceMultiplier__"),
+					},
+				},
+				OverrideAction: &types.OverrideAction{
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					None: &types.NoneAction{},
+				},
+				RuleLabels: []types.Label{
+					{
+						Name: ptr.String("__Name__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+					},
+				},
+				VisibilityConfig: &types.VisibilityConfig{
+					SampledRequestsEnabled:   true,
+					CloudWatchMetricsEnabled: true,
+					MetricName:               ptr.String("__MetricName__"),
+				},
+				CaptchaConfig: &types.CaptchaConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+				ChallengeConfig: &types.ChallengeConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Priority: 1,
+				Statement: &types.Statement{
+					ByteMatchStatement: &types.ByteMatchStatement{
+						SearchString: []byte("blob"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
+					},
+					SqliMatchStatement: &types.SqliMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						SensitivityLevel: types.SensitivityLevel("LOW"),
+					},
+					XssMatchStatement: &types.XssMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					SizeConstraintStatement: &types.SizeConstraintStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						ComparisonOperator: types.ComparisonOperator("EQ"),
+						Size:               1,
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					GeoMatchStatement: &types.GeoMatchStatement{
+						CountryCodes: []types.CountryCode{
+							types.CountryCode("AF"),
+							types.CountryCode("AF"),
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+					RuleGroupReferenceStatement: &types.RuleGroupReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					IPSetReferenceStatement: &types.IPSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						IPSetForwardedIPConfig: &types.IPSetForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+							Position:         types.ForwardedIPPosition("FIRST"),
+						},
+					},
+					RegexPatternSetReferenceStatement: &types.RegexPatternSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					RateBasedStatement: &types.RateBasedStatement{
+						Limit:               ptr.Int64(1),
+						EvaluationWindowSec: 1,
+						AggregateKeyType:    types.RateBasedStatementAggregateKeyType("IP"),
+						ScopeDownStatement:  nil,
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+						CustomKeys: []types.RateBasedStatementCustomKey{
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+						},
+					},
+					AndStatement: &types.AndStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					OrStatement: &types.OrStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					NotStatement: &types.NotStatement{
+						Statement: nil,
+					},
+					ManagedRuleGroupStatement: &types.ManagedRuleGroupStatement{
+						VendorName: ptr.String("__VendorName__"),
+						Name:       ptr.String("__Name__"),
+						Version:    ptr.String("__Version__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						ScopeDownStatement: nil,
+						ManagedRuleGroupConfigs: []types.ManagedRuleGroupConfig{
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					LabelMatchStatement: &types.LabelMatchStatement{
+						Scope: types.LabelMatchScope("LABEL"),
+						Key:   ptr.String("__Key__"),
+					},
+					RegexMatchStatement: &types.RegexMatchStatement{
+						RegexString: ptr.String("__RegexString__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					AsnMatchStatement: &types.AsnMatchStatement{
+						AsnList: []int64{
+							1,
+							1,
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+				},
+				Action: &types.RuleAction{
+					Block: &types.BlockAction{
+						CustomResponse: &types.CustomResponse{
+							ResponseCode:          ptr.Int32(1),
+							CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+							ResponseHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Allow: &types.AllowAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Captcha: &types.CaptchaAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Challenge: &types.ChallengeAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Monetize: &types.MonetizeAction{
+						PriceMultiplier: ptr.String("__PriceMultiplier__"),
+					},
+				},
+				OverrideAction: &types.OverrideAction{
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					None: &types.NoneAction{},
+				},
+				RuleLabels: []types.Label{
+					{
+						Name: ptr.String("__Name__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+					},
+				},
+				VisibilityConfig: &types.VisibilityConfig{
+					SampledRequestsEnabled:   true,
+					CloudWatchMetricsEnabled: true,
+					MetricName:               ptr.String("__MetricName__"),
+				},
+				CaptchaConfig: &types.CaptchaConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+				ChallengeConfig: &types.ChallengeConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+			},
+		},
+		VisibilityConfig: &types.VisibilityConfig{
+			SampledRequestsEnabled:   true,
+			CloudWatchMetricsEnabled: true,
+			MetricName:               ptr.String("__MetricName__"),
+		},
+		DataProtectionConfig: &types.DataProtectionConfig{
+			DataProtections: []types.DataProtection{
+				{
+					Field: &types.FieldToProtect{
+						FieldType: types.FieldToProtectType("SINGLE_HEADER"),
+						FieldKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Action:                  types.DataProtectionAction("SUBSTITUTION"),
+					ExcludeRuleMatchDetails: true,
+					ExcludeRateBasedDetails: true,
+				},
+				{
+					Field: &types.FieldToProtect{
+						FieldType: types.FieldToProtectType("SINGLE_HEADER"),
+						FieldKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					Action:                  types.DataProtectionAction("SUBSTITUTION"),
+					ExcludeRuleMatchDetails: true,
+					ExcludeRateBasedDetails: true,
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		CustomResponseBodies: map[string]types.CustomResponseBody{
+			"key0": {
+				ContentType: types.ResponseContentType("TEXT_PLAIN"),
+				Content:     ptr.String("__Content__"),
+			},
+		},
+		CaptchaConfig: &types.CaptchaConfig{
+			ImmunityTimeProperty: &types.ImmunityTimeProperty{
+				ImmunityTime: ptr.Int64(1),
+			},
+		},
+		ChallengeConfig: &types.ChallengeConfig{
+			ImmunityTimeProperty: &types.ImmunityTimeProperty{
+				ImmunityTime: ptr.Int64(1),
+			},
+		},
+		TokenDomains: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AssociationConfig: &types.AssociationConfig{
+			RequestBody: map[string]types.RequestBodyAssociatedResourceTypeConfig{
+				"key0": {
+					DefaultSizeInspectionLimit: types.SizeInspectionLimit("KB_16"),
+				},
+			},
+		},
+		OnSourceDDoSProtectionConfig: &types.OnSourceDDoSProtectionConfig{
+			ALBLowReputationMode: types.LowReputationMode("ACTIVE_UNDER_DDOS"),
+		},
+		ApplicationConfig: &types.ApplicationConfig{
+			Attributes: []types.ApplicationAttribute{
+				{
+					Name: ptr.String("__Name__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		MonetizationConfig: &types.MonetizationConfig{
+			CryptoConfig: &types.CryptoConfig{
+				PaymentNetworks: []types.PaymentNetwork{
+					{
+						Chain:         types.BlockchainChain("BASE"),
+						WalletAddress: ptr.String("__WalletAddress__"),
+						Prices: []types.Price{
+							{
+								Amount:   ptr.String("__Amount__"),
+								Currency: types.CryptoCurrency("USDC"),
+							},
+							{
+								Amount:   ptr.String("__Amount__"),
+								Currency: types.CryptoCurrency("USDC"),
+							},
+						},
+					},
+					{
+						Chain:         types.BlockchainChain("BASE"),
+						WalletAddress: ptr.String("__WalletAddress__"),
+						Prices: []types.Price{
+							{
+								Amount:   ptr.String("__Amount__"),
+								Currency: types.CryptoCurrency("USDC"),
+							},
+							{
+								Amount:   ptr.String("__Amount__"),
+								Currency: types.CryptoCurrency("USDC"),
+							},
+						},
+					},
+				},
+			},
+			CurrencyMode: types.CurrencyMode("REAL"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -12861,7 +32918,26 @@ func TestCheckResponseSnapshot_Error_WAFDuplicateItemException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateIPSet(context.Background(), &CreateIPSetInput{})
+	_, opErr := svc.CreateIPSet(context.Background(), &CreateIPSetInput{
+		Name:             ptr.String("__Name__"),
+		Scope:            types.Scope("CLOUDFRONT"),
+		Description:      ptr.String("__Description__"),
+		IPAddressVersion: types.IPAddressVersion("IPV4"),
+		Addresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -12886,7 +32962,3155 @@ func TestCheckResponseSnapshot_Error_WAFExpiredManagedRuleGroupVersionException(
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CheckCapacity(context.Background(), &CheckCapacityInput{})
+	_, opErr := svc.CheckCapacity(context.Background(), &CheckCapacityInput{
+		Scope: types.Scope("CLOUDFRONT"),
+		Rules: []types.Rule{
+			{
+				Name:     ptr.String("__Name__"),
+				Priority: 1,
+				Statement: &types.Statement{
+					ByteMatchStatement: &types.ByteMatchStatement{
+						SearchString: []byte("blob"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
+					},
+					SqliMatchStatement: &types.SqliMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						SensitivityLevel: types.SensitivityLevel("LOW"),
+					},
+					XssMatchStatement: &types.XssMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					SizeConstraintStatement: &types.SizeConstraintStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						ComparisonOperator: types.ComparisonOperator("EQ"),
+						Size:               1,
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					GeoMatchStatement: &types.GeoMatchStatement{
+						CountryCodes: []types.CountryCode{
+							types.CountryCode("AF"),
+							types.CountryCode("AF"),
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+					RuleGroupReferenceStatement: &types.RuleGroupReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					IPSetReferenceStatement: &types.IPSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						IPSetForwardedIPConfig: &types.IPSetForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+							Position:         types.ForwardedIPPosition("FIRST"),
+						},
+					},
+					RegexPatternSetReferenceStatement: &types.RegexPatternSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					RateBasedStatement: &types.RateBasedStatement{
+						Limit:               ptr.Int64(1),
+						EvaluationWindowSec: 1,
+						AggregateKeyType:    types.RateBasedStatementAggregateKeyType("IP"),
+						ScopeDownStatement:  nil,
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+						CustomKeys: []types.RateBasedStatementCustomKey{
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+						},
+					},
+					AndStatement: &types.AndStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					OrStatement: &types.OrStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					NotStatement: &types.NotStatement{
+						Statement: nil,
+					},
+					ManagedRuleGroupStatement: &types.ManagedRuleGroupStatement{
+						VendorName: ptr.String("__VendorName__"),
+						Name:       ptr.String("__Name__"),
+						Version:    ptr.String("__Version__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						ScopeDownStatement: nil,
+						ManagedRuleGroupConfigs: []types.ManagedRuleGroupConfig{
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					LabelMatchStatement: &types.LabelMatchStatement{
+						Scope: types.LabelMatchScope("LABEL"),
+						Key:   ptr.String("__Key__"),
+					},
+					RegexMatchStatement: &types.RegexMatchStatement{
+						RegexString: ptr.String("__RegexString__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					AsnMatchStatement: &types.AsnMatchStatement{
+						AsnList: []int64{
+							1,
+							1,
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+				},
+				Action: &types.RuleAction{
+					Block: &types.BlockAction{
+						CustomResponse: &types.CustomResponse{
+							ResponseCode:          ptr.Int32(1),
+							CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+							ResponseHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Allow: &types.AllowAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Captcha: &types.CaptchaAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Challenge: &types.ChallengeAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Monetize: &types.MonetizeAction{
+						PriceMultiplier: ptr.String("__PriceMultiplier__"),
+					},
+				},
+				OverrideAction: &types.OverrideAction{
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					None: &types.NoneAction{},
+				},
+				RuleLabels: []types.Label{
+					{
+						Name: ptr.String("__Name__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+					},
+				},
+				VisibilityConfig: &types.VisibilityConfig{
+					SampledRequestsEnabled:   true,
+					CloudWatchMetricsEnabled: true,
+					MetricName:               ptr.String("__MetricName__"),
+				},
+				CaptchaConfig: &types.CaptchaConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+				ChallengeConfig: &types.ChallengeConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Priority: 1,
+				Statement: &types.Statement{
+					ByteMatchStatement: &types.ByteMatchStatement{
+						SearchString: []byte("blob"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
+					},
+					SqliMatchStatement: &types.SqliMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						SensitivityLevel: types.SensitivityLevel("LOW"),
+					},
+					XssMatchStatement: &types.XssMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					SizeConstraintStatement: &types.SizeConstraintStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						ComparisonOperator: types.ComparisonOperator("EQ"),
+						Size:               1,
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					GeoMatchStatement: &types.GeoMatchStatement{
+						CountryCodes: []types.CountryCode{
+							types.CountryCode("AF"),
+							types.CountryCode("AF"),
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+					RuleGroupReferenceStatement: &types.RuleGroupReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					IPSetReferenceStatement: &types.IPSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						IPSetForwardedIPConfig: &types.IPSetForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+							Position:         types.ForwardedIPPosition("FIRST"),
+						},
+					},
+					RegexPatternSetReferenceStatement: &types.RegexPatternSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					RateBasedStatement: &types.RateBasedStatement{
+						Limit:               ptr.Int64(1),
+						EvaluationWindowSec: 1,
+						AggregateKeyType:    types.RateBasedStatementAggregateKeyType("IP"),
+						ScopeDownStatement:  nil,
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+						CustomKeys: []types.RateBasedStatementCustomKey{
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+						},
+					},
+					AndStatement: &types.AndStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					OrStatement: &types.OrStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					NotStatement: &types.NotStatement{
+						Statement: nil,
+					},
+					ManagedRuleGroupStatement: &types.ManagedRuleGroupStatement{
+						VendorName: ptr.String("__VendorName__"),
+						Name:       ptr.String("__Name__"),
+						Version:    ptr.String("__Version__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						ScopeDownStatement: nil,
+						ManagedRuleGroupConfigs: []types.ManagedRuleGroupConfig{
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					LabelMatchStatement: &types.LabelMatchStatement{
+						Scope: types.LabelMatchScope("LABEL"),
+						Key:   ptr.String("__Key__"),
+					},
+					RegexMatchStatement: &types.RegexMatchStatement{
+						RegexString: ptr.String("__RegexString__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					AsnMatchStatement: &types.AsnMatchStatement{
+						AsnList: []int64{
+							1,
+							1,
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+				},
+				Action: &types.RuleAction{
+					Block: &types.BlockAction{
+						CustomResponse: &types.CustomResponse{
+							ResponseCode:          ptr.Int32(1),
+							CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+							ResponseHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Allow: &types.AllowAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Captcha: &types.CaptchaAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Challenge: &types.ChallengeAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Monetize: &types.MonetizeAction{
+						PriceMultiplier: ptr.String("__PriceMultiplier__"),
+					},
+				},
+				OverrideAction: &types.OverrideAction{
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					None: &types.NoneAction{},
+				},
+				RuleLabels: []types.Label{
+					{
+						Name: ptr.String("__Name__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+					},
+				},
+				VisibilityConfig: &types.VisibilityConfig{
+					SampledRequestsEnabled:   true,
+					CloudWatchMetricsEnabled: true,
+					MetricName:               ptr.String("__MetricName__"),
+				},
+				CaptchaConfig: &types.CaptchaConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+				ChallengeConfig: &types.ChallengeConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -12921,7 +36145,10 @@ func TestCheckResponseSnapshot_Error_WAFFeatureNotIncludedInPricingPlanException
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateWebACL(context.Background(), &AssociateWebACLInput{})
+	_, opErr := svc.AssociateWebACL(context.Background(), &AssociateWebACLInput{
+		WebACLArn:   ptr.String("__WebACLArn__"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -12946,7 +36173,10 @@ func TestCheckResponseSnapshot_Error_WAFInternalErrorException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateWebACL(context.Background(), &AssociateWebACLInput{})
+	_, opErr := svc.AssociateWebACL(context.Background(), &AssociateWebACLInput{
+		WebACLArn:   ptr.String("__WebACLArn__"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -12971,7 +36201,10 @@ func TestCheckResponseSnapshot_Error_WAFInvalidOperationException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateWebACL(context.Background(), &AssociateWebACLInput{})
+	_, opErr := svc.AssociateWebACL(context.Background(), &AssociateWebACLInput{
+		WebACLArn:   ptr.String("__WebACLArn__"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -12999,7 +36232,10 @@ func TestCheckResponseSnapshot_Error_WAFInvalidParameterException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateWebACL(context.Background(), &AssociateWebACLInput{})
+	_, opErr := svc.AssociateWebACL(context.Background(), &AssociateWebACLInput{
+		WebACLArn:   ptr.String("__WebACLArn__"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -13024,7 +36260,10 @@ func TestCheckResponseSnapshot_Error_WAFInvalidPermissionPolicyException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutPermissionPolicy(context.Background(), &PutPermissionPolicyInput{})
+	_, opErr := svc.PutPermissionPolicy(context.Background(), &PutPermissionPolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Policy:      ptr.String("__Policy__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -13049,7 +36288,3155 @@ func TestCheckResponseSnapshot_Error_WAFInvalidResourceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CheckCapacity(context.Background(), &CheckCapacityInput{})
+	_, opErr := svc.CheckCapacity(context.Background(), &CheckCapacityInput{
+		Scope: types.Scope("CLOUDFRONT"),
+		Rules: []types.Rule{
+			{
+				Name:     ptr.String("__Name__"),
+				Priority: 1,
+				Statement: &types.Statement{
+					ByteMatchStatement: &types.ByteMatchStatement{
+						SearchString: []byte("blob"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
+					},
+					SqliMatchStatement: &types.SqliMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						SensitivityLevel: types.SensitivityLevel("LOW"),
+					},
+					XssMatchStatement: &types.XssMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					SizeConstraintStatement: &types.SizeConstraintStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						ComparisonOperator: types.ComparisonOperator("EQ"),
+						Size:               1,
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					GeoMatchStatement: &types.GeoMatchStatement{
+						CountryCodes: []types.CountryCode{
+							types.CountryCode("AF"),
+							types.CountryCode("AF"),
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+					RuleGroupReferenceStatement: &types.RuleGroupReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					IPSetReferenceStatement: &types.IPSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						IPSetForwardedIPConfig: &types.IPSetForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+							Position:         types.ForwardedIPPosition("FIRST"),
+						},
+					},
+					RegexPatternSetReferenceStatement: &types.RegexPatternSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					RateBasedStatement: &types.RateBasedStatement{
+						Limit:               ptr.Int64(1),
+						EvaluationWindowSec: 1,
+						AggregateKeyType:    types.RateBasedStatementAggregateKeyType("IP"),
+						ScopeDownStatement:  nil,
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+						CustomKeys: []types.RateBasedStatementCustomKey{
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+						},
+					},
+					AndStatement: &types.AndStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					OrStatement: &types.OrStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					NotStatement: &types.NotStatement{
+						Statement: nil,
+					},
+					ManagedRuleGroupStatement: &types.ManagedRuleGroupStatement{
+						VendorName: ptr.String("__VendorName__"),
+						Name:       ptr.String("__Name__"),
+						Version:    ptr.String("__Version__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						ScopeDownStatement: nil,
+						ManagedRuleGroupConfigs: []types.ManagedRuleGroupConfig{
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					LabelMatchStatement: &types.LabelMatchStatement{
+						Scope: types.LabelMatchScope("LABEL"),
+						Key:   ptr.String("__Key__"),
+					},
+					RegexMatchStatement: &types.RegexMatchStatement{
+						RegexString: ptr.String("__RegexString__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					AsnMatchStatement: &types.AsnMatchStatement{
+						AsnList: []int64{
+							1,
+							1,
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+				},
+				Action: &types.RuleAction{
+					Block: &types.BlockAction{
+						CustomResponse: &types.CustomResponse{
+							ResponseCode:          ptr.Int32(1),
+							CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+							ResponseHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Allow: &types.AllowAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Captcha: &types.CaptchaAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Challenge: &types.ChallengeAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Monetize: &types.MonetizeAction{
+						PriceMultiplier: ptr.String("__PriceMultiplier__"),
+					},
+				},
+				OverrideAction: &types.OverrideAction{
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					None: &types.NoneAction{},
+				},
+				RuleLabels: []types.Label{
+					{
+						Name: ptr.String("__Name__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+					},
+				},
+				VisibilityConfig: &types.VisibilityConfig{
+					SampledRequestsEnabled:   true,
+					CloudWatchMetricsEnabled: true,
+					MetricName:               ptr.String("__MetricName__"),
+				},
+				CaptchaConfig: &types.CaptchaConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+				ChallengeConfig: &types.ChallengeConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Priority: 1,
+				Statement: &types.Statement{
+					ByteMatchStatement: &types.ByteMatchStatement{
+						SearchString: []byte("blob"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
+					},
+					SqliMatchStatement: &types.SqliMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						SensitivityLevel: types.SensitivityLevel("LOW"),
+					},
+					XssMatchStatement: &types.XssMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					SizeConstraintStatement: &types.SizeConstraintStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						ComparisonOperator: types.ComparisonOperator("EQ"),
+						Size:               1,
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					GeoMatchStatement: &types.GeoMatchStatement{
+						CountryCodes: []types.CountryCode{
+							types.CountryCode("AF"),
+							types.CountryCode("AF"),
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+					RuleGroupReferenceStatement: &types.RuleGroupReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					IPSetReferenceStatement: &types.IPSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						IPSetForwardedIPConfig: &types.IPSetForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+							Position:         types.ForwardedIPPosition("FIRST"),
+						},
+					},
+					RegexPatternSetReferenceStatement: &types.RegexPatternSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					RateBasedStatement: &types.RateBasedStatement{
+						Limit:               ptr.Int64(1),
+						EvaluationWindowSec: 1,
+						AggregateKeyType:    types.RateBasedStatementAggregateKeyType("IP"),
+						ScopeDownStatement:  nil,
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+						CustomKeys: []types.RateBasedStatementCustomKey{
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+						},
+					},
+					AndStatement: &types.AndStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					OrStatement: &types.OrStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					NotStatement: &types.NotStatement{
+						Statement: nil,
+					},
+					ManagedRuleGroupStatement: &types.ManagedRuleGroupStatement{
+						VendorName: ptr.String("__VendorName__"),
+						Name:       ptr.String("__Name__"),
+						Version:    ptr.String("__Version__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						ScopeDownStatement: nil,
+						ManagedRuleGroupConfigs: []types.ManagedRuleGroupConfig{
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					LabelMatchStatement: &types.LabelMatchStatement{
+						Scope: types.LabelMatchScope("LABEL"),
+						Key:   ptr.String("__Key__"),
+					},
+					RegexMatchStatement: &types.RegexMatchStatement{
+						RegexString: ptr.String("__RegexString__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					AsnMatchStatement: &types.AsnMatchStatement{
+						AsnList: []int64{
+							1,
+							1,
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+				},
+				Action: &types.RuleAction{
+					Block: &types.BlockAction{
+						CustomResponse: &types.CustomResponse{
+							ResponseCode:          ptr.Int32(1),
+							CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+							ResponseHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Allow: &types.AllowAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Captcha: &types.CaptchaAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Challenge: &types.ChallengeAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Monetize: &types.MonetizeAction{
+						PriceMultiplier: ptr.String("__PriceMultiplier__"),
+					},
+				},
+				OverrideAction: &types.OverrideAction{
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					None: &types.NoneAction{},
+				},
+				RuleLabels: []types.Label{
+					{
+						Name: ptr.String("__Name__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+					},
+				},
+				VisibilityConfig: &types.VisibilityConfig{
+					SampledRequestsEnabled:   true,
+					CloudWatchMetricsEnabled: true,
+					MetricName:               ptr.String("__MetricName__"),
+				},
+				CaptchaConfig: &types.CaptchaConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+				ChallengeConfig: &types.ChallengeConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -13075,7 +39462,10 @@ func TestCheckResponseSnapshot_Error_WAFLimitsExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateWebACL(context.Background(), &AssociateWebACLInput{})
+	_, opErr := svc.AssociateWebACL(context.Background(), &AssociateWebACLInput{
+		WebACLArn:   ptr.String("__WebACLArn__"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -13100,7 +39490,207 @@ func TestCheckResponseSnapshot_Error_WAFLogDestinationPermissionIssueException(t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutLoggingConfiguration(context.Background(), &PutLoggingConfigurationInput{})
+	_, opErr := svc.PutLoggingConfiguration(context.Background(), &PutLoggingConfigurationInput{
+		LoggingConfiguration: &types.LoggingConfiguration{
+			ResourceArn: ptr.String("__ResourceArn__"),
+			LogDestinationConfigs: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RedactedFields: []types.FieldToMatch{
+				{
+					SingleHeader: &types.SingleHeader{
+						Name: ptr.String("__Name__"),
+					},
+					SingleQueryArgument: &types.SingleQueryArgument{
+						Name: ptr.String("__Name__"),
+					},
+					AllQueryArguments: &types.AllQueryArguments{},
+					UriPath:           &types.UriPath{},
+					QueryString:       &types.QueryString{},
+					Body: &types.Body{
+						OversizeHandling: types.OversizeHandling("CONTINUE"),
+					},
+					Method: &types.Method{},
+					JsonBody: &types.JsonBody{
+						MatchPattern: &types.JsonMatchPattern{
+							All: &types.All{},
+							IncludedPaths: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						MatchScope:              types.JsonMatchScope("ALL"),
+						InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+						OversizeHandling:        types.OversizeHandling("CONTINUE"),
+					},
+					Headers: &types.Headers{
+						MatchPattern: &types.HeaderMatchPattern{
+							All: &types.All{},
+							IncludedHeaders: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ExcludedHeaders: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						MatchScope:       types.MapMatchScope("ALL"),
+						OversizeHandling: types.OversizeHandling("CONTINUE"),
+					},
+					Cookies: &types.Cookies{
+						MatchPattern: &types.CookieMatchPattern{
+							All: &types.All{},
+							IncludedCookies: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ExcludedCookies: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						MatchScope:       types.MapMatchScope("ALL"),
+						OversizeHandling: types.OversizeHandling("CONTINUE"),
+					},
+					HeaderOrder: &types.HeaderOrder{
+						OversizeHandling: types.OversizeHandling("CONTINUE"),
+					},
+					JA3Fingerprint: &types.JA3Fingerprint{
+						FallbackBehavior: types.FallbackBehavior("MATCH"),
+					},
+					JA4Fingerprint: &types.JA4Fingerprint{
+						FallbackBehavior: types.FallbackBehavior("MATCH"),
+					},
+					UriFragment: &types.UriFragment{
+						FallbackBehavior: types.FallbackBehavior("MATCH"),
+					},
+				},
+				{
+					SingleHeader: &types.SingleHeader{
+						Name: ptr.String("__Name__"),
+					},
+					SingleQueryArgument: &types.SingleQueryArgument{
+						Name: ptr.String("__Name__"),
+					},
+					AllQueryArguments: &types.AllQueryArguments{},
+					UriPath:           &types.UriPath{},
+					QueryString:       &types.QueryString{},
+					Body: &types.Body{
+						OversizeHandling: types.OversizeHandling("CONTINUE"),
+					},
+					Method: &types.Method{},
+					JsonBody: &types.JsonBody{
+						MatchPattern: &types.JsonMatchPattern{
+							All: &types.All{},
+							IncludedPaths: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						MatchScope:              types.JsonMatchScope("ALL"),
+						InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+						OversizeHandling:        types.OversizeHandling("CONTINUE"),
+					},
+					Headers: &types.Headers{
+						MatchPattern: &types.HeaderMatchPattern{
+							All: &types.All{},
+							IncludedHeaders: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ExcludedHeaders: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						MatchScope:       types.MapMatchScope("ALL"),
+						OversizeHandling: types.OversizeHandling("CONTINUE"),
+					},
+					Cookies: &types.Cookies{
+						MatchPattern: &types.CookieMatchPattern{
+							All: &types.All{},
+							IncludedCookies: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ExcludedCookies: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						MatchScope:       types.MapMatchScope("ALL"),
+						OversizeHandling: types.OversizeHandling("CONTINUE"),
+					},
+					HeaderOrder: &types.HeaderOrder{
+						OversizeHandling: types.OversizeHandling("CONTINUE"),
+					},
+					JA3Fingerprint: &types.JA3Fingerprint{
+						FallbackBehavior: types.FallbackBehavior("MATCH"),
+					},
+					JA4Fingerprint: &types.JA4Fingerprint{
+						FallbackBehavior: types.FallbackBehavior("MATCH"),
+					},
+					UriFragment: &types.UriFragment{
+						FallbackBehavior: types.FallbackBehavior("MATCH"),
+					},
+				},
+			},
+			ManagedByFirewallManager: true,
+			LoggingFilter: &types.LoggingFilter{
+				Filters: []types.Filter{
+					{
+						Behavior:    types.FilterBehavior("KEEP"),
+						Requirement: types.FilterRequirement("MEETS_ALL"),
+						Conditions: []types.Condition{
+							{
+								ActionCondition: &types.ActionCondition{
+									Action: types.ActionValue("ALLOW"),
+								},
+								LabelNameCondition: &types.LabelNameCondition{
+									LabelName: ptr.String("__LabelName__"),
+								},
+							},
+							{
+								ActionCondition: &types.ActionCondition{
+									Action: types.ActionValue("ALLOW"),
+								},
+								LabelNameCondition: &types.LabelNameCondition{
+									LabelName: ptr.String("__LabelName__"),
+								},
+							},
+						},
+					},
+					{
+						Behavior:    types.FilterBehavior("KEEP"),
+						Requirement: types.FilterRequirement("MEETS_ALL"),
+						Conditions: []types.Condition{
+							{
+								ActionCondition: &types.ActionCondition{
+									Action: types.ActionValue("ALLOW"),
+								},
+								LabelNameCondition: &types.LabelNameCondition{
+									LabelName: ptr.String("__LabelName__"),
+								},
+							},
+							{
+								ActionCondition: &types.ActionCondition{
+									Action: types.ActionValue("ALLOW"),
+								},
+								LabelNameCondition: &types.LabelNameCondition{
+									LabelName: ptr.String("__LabelName__"),
+								},
+							},
+						},
+					},
+				},
+				DefaultBehavior: types.FilterBehavior("KEEP"),
+			},
+			LogType:  types.LogType("WAF_LOGS"),
+			LogScope: types.LogScope("CUSTOMER"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -13125,7 +39715,10 @@ func TestCheckResponseSnapshot_Error_WAFNonexistentItemException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateWebACL(context.Background(), &AssociateWebACLInput{})
+	_, opErr := svc.AssociateWebACL(context.Background(), &AssociateWebACLInput{
+		WebACLArn:   ptr.String("__WebACLArn__"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -13150,7 +39743,26 @@ func TestCheckResponseSnapshot_Error_WAFOptimisticLockException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateIPSet(context.Background(), &CreateIPSetInput{})
+	_, opErr := svc.CreateIPSet(context.Background(), &CreateIPSetInput{
+		Name:             ptr.String("__Name__"),
+		Scope:            types.Scope("CLOUDFRONT"),
+		Description:      ptr.String("__Description__"),
+		IPAddressVersion: types.IPAddressVersion("IPV4"),
+		Addresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -13175,7 +39787,207 @@ func TestCheckResponseSnapshot_Error_WAFServiceLinkedRoleErrorException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutLoggingConfiguration(context.Background(), &PutLoggingConfigurationInput{})
+	_, opErr := svc.PutLoggingConfiguration(context.Background(), &PutLoggingConfigurationInput{
+		LoggingConfiguration: &types.LoggingConfiguration{
+			ResourceArn: ptr.String("__ResourceArn__"),
+			LogDestinationConfigs: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RedactedFields: []types.FieldToMatch{
+				{
+					SingleHeader: &types.SingleHeader{
+						Name: ptr.String("__Name__"),
+					},
+					SingleQueryArgument: &types.SingleQueryArgument{
+						Name: ptr.String("__Name__"),
+					},
+					AllQueryArguments: &types.AllQueryArguments{},
+					UriPath:           &types.UriPath{},
+					QueryString:       &types.QueryString{},
+					Body: &types.Body{
+						OversizeHandling: types.OversizeHandling("CONTINUE"),
+					},
+					Method: &types.Method{},
+					JsonBody: &types.JsonBody{
+						MatchPattern: &types.JsonMatchPattern{
+							All: &types.All{},
+							IncludedPaths: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						MatchScope:              types.JsonMatchScope("ALL"),
+						InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+						OversizeHandling:        types.OversizeHandling("CONTINUE"),
+					},
+					Headers: &types.Headers{
+						MatchPattern: &types.HeaderMatchPattern{
+							All: &types.All{},
+							IncludedHeaders: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ExcludedHeaders: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						MatchScope:       types.MapMatchScope("ALL"),
+						OversizeHandling: types.OversizeHandling("CONTINUE"),
+					},
+					Cookies: &types.Cookies{
+						MatchPattern: &types.CookieMatchPattern{
+							All: &types.All{},
+							IncludedCookies: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ExcludedCookies: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						MatchScope:       types.MapMatchScope("ALL"),
+						OversizeHandling: types.OversizeHandling("CONTINUE"),
+					},
+					HeaderOrder: &types.HeaderOrder{
+						OversizeHandling: types.OversizeHandling("CONTINUE"),
+					},
+					JA3Fingerprint: &types.JA3Fingerprint{
+						FallbackBehavior: types.FallbackBehavior("MATCH"),
+					},
+					JA4Fingerprint: &types.JA4Fingerprint{
+						FallbackBehavior: types.FallbackBehavior("MATCH"),
+					},
+					UriFragment: &types.UriFragment{
+						FallbackBehavior: types.FallbackBehavior("MATCH"),
+					},
+				},
+				{
+					SingleHeader: &types.SingleHeader{
+						Name: ptr.String("__Name__"),
+					},
+					SingleQueryArgument: &types.SingleQueryArgument{
+						Name: ptr.String("__Name__"),
+					},
+					AllQueryArguments: &types.AllQueryArguments{},
+					UriPath:           &types.UriPath{},
+					QueryString:       &types.QueryString{},
+					Body: &types.Body{
+						OversizeHandling: types.OversizeHandling("CONTINUE"),
+					},
+					Method: &types.Method{},
+					JsonBody: &types.JsonBody{
+						MatchPattern: &types.JsonMatchPattern{
+							All: &types.All{},
+							IncludedPaths: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						MatchScope:              types.JsonMatchScope("ALL"),
+						InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+						OversizeHandling:        types.OversizeHandling("CONTINUE"),
+					},
+					Headers: &types.Headers{
+						MatchPattern: &types.HeaderMatchPattern{
+							All: &types.All{},
+							IncludedHeaders: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ExcludedHeaders: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						MatchScope:       types.MapMatchScope("ALL"),
+						OversizeHandling: types.OversizeHandling("CONTINUE"),
+					},
+					Cookies: &types.Cookies{
+						MatchPattern: &types.CookieMatchPattern{
+							All: &types.All{},
+							IncludedCookies: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ExcludedCookies: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						MatchScope:       types.MapMatchScope("ALL"),
+						OversizeHandling: types.OversizeHandling("CONTINUE"),
+					},
+					HeaderOrder: &types.HeaderOrder{
+						OversizeHandling: types.OversizeHandling("CONTINUE"),
+					},
+					JA3Fingerprint: &types.JA3Fingerprint{
+						FallbackBehavior: types.FallbackBehavior("MATCH"),
+					},
+					JA4Fingerprint: &types.JA4Fingerprint{
+						FallbackBehavior: types.FallbackBehavior("MATCH"),
+					},
+					UriFragment: &types.UriFragment{
+						FallbackBehavior: types.FallbackBehavior("MATCH"),
+					},
+				},
+			},
+			ManagedByFirewallManager: true,
+			LoggingFilter: &types.LoggingFilter{
+				Filters: []types.Filter{
+					{
+						Behavior:    types.FilterBehavior("KEEP"),
+						Requirement: types.FilterRequirement("MEETS_ALL"),
+						Conditions: []types.Condition{
+							{
+								ActionCondition: &types.ActionCondition{
+									Action: types.ActionValue("ALLOW"),
+								},
+								LabelNameCondition: &types.LabelNameCondition{
+									LabelName: ptr.String("__LabelName__"),
+								},
+							},
+							{
+								ActionCondition: &types.ActionCondition{
+									Action: types.ActionValue("ALLOW"),
+								},
+								LabelNameCondition: &types.LabelNameCondition{
+									LabelName: ptr.String("__LabelName__"),
+								},
+							},
+						},
+					},
+					{
+						Behavior:    types.FilterBehavior("KEEP"),
+						Requirement: types.FilterRequirement("MEETS_ALL"),
+						Conditions: []types.Condition{
+							{
+								ActionCondition: &types.ActionCondition{
+									Action: types.ActionValue("ALLOW"),
+								},
+								LabelNameCondition: &types.LabelNameCondition{
+									LabelName: ptr.String("__LabelName__"),
+								},
+							},
+							{
+								ActionCondition: &types.ActionCondition{
+									Action: types.ActionValue("ALLOW"),
+								},
+								LabelNameCondition: &types.LabelNameCondition{
+									LabelName: ptr.String("__LabelName__"),
+								},
+							},
+						},
+					},
+				},
+				DefaultBehavior: types.FilterBehavior("KEEP"),
+			},
+			LogType:  types.LogType("WAF_LOGS"),
+			LogScope: types.LogScope("CUSTOMER"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -13200,7 +40012,3155 @@ func TestCheckResponseSnapshot_Error_WAFSubscriptionNotFoundException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CheckCapacity(context.Background(), &CheckCapacityInput{})
+	_, opErr := svc.CheckCapacity(context.Background(), &CheckCapacityInput{
+		Scope: types.Scope("CLOUDFRONT"),
+		Rules: []types.Rule{
+			{
+				Name:     ptr.String("__Name__"),
+				Priority: 1,
+				Statement: &types.Statement{
+					ByteMatchStatement: &types.ByteMatchStatement{
+						SearchString: []byte("blob"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
+					},
+					SqliMatchStatement: &types.SqliMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						SensitivityLevel: types.SensitivityLevel("LOW"),
+					},
+					XssMatchStatement: &types.XssMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					SizeConstraintStatement: &types.SizeConstraintStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						ComparisonOperator: types.ComparisonOperator("EQ"),
+						Size:               1,
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					GeoMatchStatement: &types.GeoMatchStatement{
+						CountryCodes: []types.CountryCode{
+							types.CountryCode("AF"),
+							types.CountryCode("AF"),
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+					RuleGroupReferenceStatement: &types.RuleGroupReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					IPSetReferenceStatement: &types.IPSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						IPSetForwardedIPConfig: &types.IPSetForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+							Position:         types.ForwardedIPPosition("FIRST"),
+						},
+					},
+					RegexPatternSetReferenceStatement: &types.RegexPatternSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					RateBasedStatement: &types.RateBasedStatement{
+						Limit:               ptr.Int64(1),
+						EvaluationWindowSec: 1,
+						AggregateKeyType:    types.RateBasedStatementAggregateKeyType("IP"),
+						ScopeDownStatement:  nil,
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+						CustomKeys: []types.RateBasedStatementCustomKey{
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+						},
+					},
+					AndStatement: &types.AndStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					OrStatement: &types.OrStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					NotStatement: &types.NotStatement{
+						Statement: nil,
+					},
+					ManagedRuleGroupStatement: &types.ManagedRuleGroupStatement{
+						VendorName: ptr.String("__VendorName__"),
+						Name:       ptr.String("__Name__"),
+						Version:    ptr.String("__Version__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						ScopeDownStatement: nil,
+						ManagedRuleGroupConfigs: []types.ManagedRuleGroupConfig{
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					LabelMatchStatement: &types.LabelMatchStatement{
+						Scope: types.LabelMatchScope("LABEL"),
+						Key:   ptr.String("__Key__"),
+					},
+					RegexMatchStatement: &types.RegexMatchStatement{
+						RegexString: ptr.String("__RegexString__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					AsnMatchStatement: &types.AsnMatchStatement{
+						AsnList: []int64{
+							1,
+							1,
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+				},
+				Action: &types.RuleAction{
+					Block: &types.BlockAction{
+						CustomResponse: &types.CustomResponse{
+							ResponseCode:          ptr.Int32(1),
+							CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+							ResponseHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Allow: &types.AllowAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Captcha: &types.CaptchaAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Challenge: &types.ChallengeAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Monetize: &types.MonetizeAction{
+						PriceMultiplier: ptr.String("__PriceMultiplier__"),
+					},
+				},
+				OverrideAction: &types.OverrideAction{
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					None: &types.NoneAction{},
+				},
+				RuleLabels: []types.Label{
+					{
+						Name: ptr.String("__Name__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+					},
+				},
+				VisibilityConfig: &types.VisibilityConfig{
+					SampledRequestsEnabled:   true,
+					CloudWatchMetricsEnabled: true,
+					MetricName:               ptr.String("__MetricName__"),
+				},
+				CaptchaConfig: &types.CaptchaConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+				ChallengeConfig: &types.ChallengeConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Priority: 1,
+				Statement: &types.Statement{
+					ByteMatchStatement: &types.ByteMatchStatement{
+						SearchString: []byte("blob"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						PositionalConstraint: types.PositionalConstraint("EXACTLY"),
+					},
+					SqliMatchStatement: &types.SqliMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+						SensitivityLevel: types.SensitivityLevel("LOW"),
+					},
+					XssMatchStatement: &types.XssMatchStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					SizeConstraintStatement: &types.SizeConstraintStatement{
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						ComparisonOperator: types.ComparisonOperator("EQ"),
+						Size:               1,
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					GeoMatchStatement: &types.GeoMatchStatement{
+						CountryCodes: []types.CountryCode{
+							types.CountryCode("AF"),
+							types.CountryCode("AF"),
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+					RuleGroupReferenceStatement: &types.RuleGroupReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					IPSetReferenceStatement: &types.IPSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						IPSetForwardedIPConfig: &types.IPSetForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+							Position:         types.ForwardedIPPosition("FIRST"),
+						},
+					},
+					RegexPatternSetReferenceStatement: &types.RegexPatternSetReferenceStatement{
+						ARN: ptr.String("__ARN__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					RateBasedStatement: &types.RateBasedStatement{
+						Limit:               ptr.Int64(1),
+						EvaluationWindowSec: 1,
+						AggregateKeyType:    types.RateBasedStatementAggregateKeyType("IP"),
+						ScopeDownStatement:  nil,
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+						CustomKeys: []types.RateBasedStatementCustomKey{
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+							{
+								Header: &types.RateLimitHeader{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								Cookie: &types.RateLimitCookie{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryArgument: &types.RateLimitQueryArgument{
+									Name: ptr.String("__Name__"),
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								QueryString: &types.RateLimitQueryString{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								HTTPMethod:  &types.RateLimitHTTPMethod{},
+								ForwardedIP: &types.RateLimitForwardedIP{},
+								IP:          &types.RateLimitIP{},
+								LabelNamespace: &types.RateLimitLabelNamespace{
+									Namespace: ptr.String("__Namespace__"),
+								},
+								UriPath: &types.RateLimitUriPath{
+									TextTransformations: []types.TextTransformation{
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+										{
+											Priority: 1,
+											Type:     types.TextTransformationType("NONE"),
+										},
+									},
+								},
+								JA3Fingerprint: &types.RateLimitJA3Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								JA4Fingerprint: &types.RateLimitJA4Fingerprint{
+									FallbackBehavior: types.FallbackBehavior("MATCH"),
+								},
+								ASN: &types.RateLimitAsn{},
+							},
+						},
+					},
+					AndStatement: &types.AndStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					OrStatement: &types.OrStatement{
+						Statements: []types.Statement{
+							{},
+							{},
+						},
+					},
+					NotStatement: &types.NotStatement{
+						Statement: nil,
+					},
+					ManagedRuleGroupStatement: &types.ManagedRuleGroupStatement{
+						VendorName: ptr.String("__VendorName__"),
+						Name:       ptr.String("__Name__"),
+						Version:    ptr.String("__Version__"),
+						ExcludedRules: []types.ExcludedRule{
+							{
+								Name: ptr.String("__Name__"),
+							},
+							{
+								Name: ptr.String("__Name__"),
+							},
+						},
+						ScopeDownStatement: nil,
+						ManagedRuleGroupConfigs: []types.ManagedRuleGroupConfig{
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+							{
+								LoginPath:   ptr.String("__LoginPath__"),
+								PayloadType: types.PayloadType("JSON"),
+								UsernameField: &types.UsernameField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								PasswordField: &types.PasswordField{
+									Identifier: ptr.String("__Identifier__"),
+								},
+								AWSManagedRulesBotControlRuleSet: &types.AWSManagedRulesBotControlRuleSet{
+									InspectionLevel:       types.InspectionLevel("COMMON"),
+									EnableMachineLearning: ptr.Bool(true),
+								},
+								AWSManagedRulesATPRuleSet: &types.AWSManagedRulesATPRuleSet{
+									LoginPath: ptr.String("__LoginPath__"),
+									RequestInspection: &types.RequestInspection{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesACFPRuleSet: &types.AWSManagedRulesACFPRuleSet{
+									CreationPath:         ptr.String("__CreationPath__"),
+									RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+									RequestInspection: &types.RequestInspectionACFP{
+										PayloadType: types.PayloadType("JSON"),
+										UsernameField: &types.UsernameField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PasswordField: &types.PasswordField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										EmailField: &types.EmailField{
+											Identifier: ptr.String("__Identifier__"),
+										},
+										PhoneNumberFields: []types.PhoneNumberField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+										AddressFields: []types.AddressField{
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+											{
+												Identifier: ptr.String("__Identifier__"),
+											},
+										},
+									},
+									ResponseInspection: &types.ResponseInspection{
+										StatusCode: &types.ResponseInspectionStatusCode{
+											SuccessCodes: []int32{
+												1,
+												1,
+											},
+											FailureCodes: []int32{
+												1,
+												1,
+											},
+										},
+										Header: &types.ResponseInspectionHeader{
+											Name: ptr.String("__Name__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										BodyContains: &types.ResponseInspectionBodyContains{
+											SuccessStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureStrings: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+										Json: &types.ResponseInspectionJson{
+											Identifier: ptr.String("__Identifier__"),
+											SuccessValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+											FailureValues: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									EnableRegexInPath: true,
+								},
+								AWSManagedRulesAntiDDoSRuleSet: &types.AWSManagedRulesAntiDDoSRuleSet{
+									ClientSideActionConfig: &types.ClientSideActionConfig{
+										Challenge: &types.ClientSideAction{
+											UsageOfAction: types.UsageOfAction("ENABLED"),
+											Sensitivity:   types.SensitivityToAct("LOW"),
+											ExemptUriRegularExpressions: []types.Regex{
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+												{
+													RegexString: ptr.String("__RegexString__"),
+												},
+											},
+										},
+									},
+									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+							},
+						},
+						RuleActionOverrides: []types.RuleActionOverride{
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+							{
+								Name: ptr.String("__Name__"),
+								ActionToUse: &types.RuleAction{
+									Block: &types.BlockAction{
+										CustomResponse: &types.CustomResponse{
+											ResponseCode:          ptr.Int32(1),
+											CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+											ResponseHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Allow: &types.AllowAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Count: &types.CountAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Captcha: &types.CaptchaAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Challenge: &types.ChallengeAction{
+										CustomRequestHandling: &types.CustomRequestHandling{
+											InsertHeaders: []types.CustomHTTPHeader{
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+												{
+													Name:  ptr.String("__Name__"),
+													Value: ptr.String("__Value__"),
+												},
+											},
+										},
+									},
+									Monetize: &types.MonetizeAction{
+										PriceMultiplier: ptr.String("__PriceMultiplier__"),
+									},
+								},
+							},
+						},
+					},
+					LabelMatchStatement: &types.LabelMatchStatement{
+						Scope: types.LabelMatchScope("LABEL"),
+						Key:   ptr.String("__Key__"),
+					},
+					RegexMatchStatement: &types.RegexMatchStatement{
+						RegexString: ptr.String("__RegexString__"),
+						FieldToMatch: &types.FieldToMatch{
+							SingleHeader: &types.SingleHeader{
+								Name: ptr.String("__Name__"),
+							},
+							SingleQueryArgument: &types.SingleQueryArgument{
+								Name: ptr.String("__Name__"),
+							},
+							AllQueryArguments: &types.AllQueryArguments{},
+							UriPath:           &types.UriPath{},
+							QueryString:       &types.QueryString{},
+							Body: &types.Body{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Method: &types.Method{},
+							JsonBody: &types.JsonBody{
+								MatchPattern: &types.JsonMatchPattern{
+									All: &types.All{},
+									IncludedPaths: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:              types.JsonMatchScope("ALL"),
+								InvalidFallbackBehavior: types.BodyParsingFallbackBehavior("MATCH"),
+								OversizeHandling:        types.OversizeHandling("CONTINUE"),
+							},
+							Headers: &types.Headers{
+								MatchPattern: &types.HeaderMatchPattern{
+									All: &types.All{},
+									IncludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedHeaders: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							Cookies: &types.Cookies{
+								MatchPattern: &types.CookieMatchPattern{
+									All: &types.All{},
+									IncludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+									ExcludedCookies: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								MatchScope:       types.MapMatchScope("ALL"),
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							HeaderOrder: &types.HeaderOrder{
+								OversizeHandling: types.OversizeHandling("CONTINUE"),
+							},
+							JA3Fingerprint: &types.JA3Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							JA4Fingerprint: &types.JA4Fingerprint{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+							UriFragment: &types.UriFragment{
+								FallbackBehavior: types.FallbackBehavior("MATCH"),
+							},
+						},
+						TextTransformations: []types.TextTransformation{
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.TextTransformationType("NONE"),
+							},
+						},
+						PreParseTextTransformations: []types.PreParseTextTransformation{
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+							{
+								Priority: 1,
+								Type:     types.PreParseTextTransformationType("NONE"),
+							},
+						},
+					},
+					AsnMatchStatement: &types.AsnMatchStatement{
+						AsnList: []int64{
+							1,
+							1,
+						},
+						ForwardedIPConfig: &types.ForwardedIPConfig{
+							HeaderName:       ptr.String("__HeaderName__"),
+							FallbackBehavior: types.FallbackBehavior("MATCH"),
+						},
+					},
+				},
+				Action: &types.RuleAction{
+					Block: &types.BlockAction{
+						CustomResponse: &types.CustomResponse{
+							ResponseCode:          ptr.Int32(1),
+							CustomResponseBodyKey: ptr.String("__CustomResponseBodyKey__"),
+							ResponseHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Allow: &types.AllowAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Captcha: &types.CaptchaAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Challenge: &types.ChallengeAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					Monetize: &types.MonetizeAction{
+						PriceMultiplier: ptr.String("__PriceMultiplier__"),
+					},
+				},
+				OverrideAction: &types.OverrideAction{
+					Count: &types.CountAction{
+						CustomRequestHandling: &types.CustomRequestHandling{
+							InsertHeaders: []types.CustomHTTPHeader{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					None: &types.NoneAction{},
+				},
+				RuleLabels: []types.Label{
+					{
+						Name: ptr.String("__Name__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+					},
+				},
+				VisibilityConfig: &types.VisibilityConfig{
+					SampledRequestsEnabled:   true,
+					CloudWatchMetricsEnabled: true,
+					MetricName:               ptr.String("__MetricName__"),
+				},
+				CaptchaConfig: &types.CaptchaConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+				ChallengeConfig: &types.ChallengeConfig{
+					ImmunityTimeProperty: &types.ImmunityTimeProperty{
+						ImmunityTime: ptr.Int64(1),
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -13225,7 +43185,26 @@ func TestCheckResponseSnapshot_Error_WAFTagOperationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateIPSet(context.Background(), &CreateIPSetInput{})
+	_, opErr := svc.CreateIPSet(context.Background(), &CreateIPSetInput{
+		Name:             ptr.String("__Name__"),
+		Scope:            types.Scope("CLOUDFRONT"),
+		Description:      ptr.String("__Description__"),
+		IPAddressVersion: types.IPAddressVersion("IPV4"),
+		Addresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -13250,7 +43229,26 @@ func TestCheckResponseSnapshot_Error_WAFTagOperationInternalErrorException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateIPSet(context.Background(), &CreateIPSetInput{})
+	_, opErr := svc.CreateIPSet(context.Background(), &CreateIPSetInput{
+		Name:             ptr.String("__Name__"),
+		Scope:            types.Scope("CLOUDFRONT"),
+		Description:      ptr.String("__Description__"),
+		IPAddressVersion: types.IPAddressVersion("IPV4"),
+		Addresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -13275,7 +43273,10 @@ func TestCheckResponseSnapshot_Error_WAFUnavailableEntityException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateWebACL(context.Background(), &AssociateWebACLInput{})
+	_, opErr := svc.AssociateWebACL(context.Background(), &AssociateWebACLInput{
+		WebACLArn:   ptr.String("__WebACLArn__"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -13300,7 +43301,13 @@ func TestCheckResponseSnapshot_Error_WAFUnsupportedAggregateKeyTypeException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRateBasedStatementManagedKeys(context.Background(), &GetRateBasedStatementManagedKeysInput{})
+	_, opErr := svc.GetRateBasedStatementManagedKeys(context.Background(), &GetRateBasedStatementManagedKeysInput{
+		Scope:             types.Scope("CLOUDFRONT"),
+		WebACLName:        ptr.String("__WebACLName__"),
+		WebACLId:          ptr.String("__WebACLId__"),
+		RuleGroupRuleName: ptr.String("__RuleGroupRuleName__"),
+		RuleName:          ptr.String("__RuleName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

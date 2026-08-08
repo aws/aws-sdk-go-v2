@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ContentSHA256":"__ContentSHA256__","ETag":"__ETag__","StorageClass":"TEMPORAL"}

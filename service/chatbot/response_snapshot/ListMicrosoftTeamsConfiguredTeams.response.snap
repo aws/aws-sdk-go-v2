@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ConfiguredTeams":[{"State":"__State__","StateReason":"__StateReason__","TeamId":"__TeamId__","TeamName":"__TeamName__","TenantId":"__TenantId__"},{"State":"__State__","StateReason":"__StateReason__","TeamId":"__TeamId__","TeamName":"__TeamName__","TenantId":"__TenantId__"}],"NextToken":"__NextToken__"}

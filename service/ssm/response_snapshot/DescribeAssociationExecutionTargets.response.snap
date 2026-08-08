@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.DescribeAssociationExecutionTargets
+
+{"AssociationExecutionTargets":[{"AssociationId":"__AssociationId__","AssociationVersion":"__AssociationVersion__","DetailedStatus":"__DetailedStatus__","ExecutionId":"__ExecutionId__","LastExecutionDate":946684800,"OutputSource":{"OutputSourceId":"__OutputSourceId__","OutputSourceType":"__OutputSourceType__"},"ResourceId":"__ResourceId__","ResourceType":"__ResourceType__","Status":"__Status__"},{"AssociationId":"__AssociationId__","AssociationVersion":"__AssociationVersion__","DetailedStatus":"__DetailedStatus__","ExecutionId":"__ExecutionId__","LastExecutionDate":946684800,"OutputSource":{"OutputSourceId":"__OutputSourceId__","OutputSourceType":"__OutputSourceType__"},"ResourceId":"__ResourceId__","ResourceType":"__ResourceType__","Status":"__Status__"}],"NextToken":"__NextToken__"}

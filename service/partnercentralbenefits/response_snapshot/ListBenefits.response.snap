@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralBenefitsService.ListBenefits
+
+{"BenefitSummaries":[{"Arn":"__Arn__","Catalog":"__Catalog__","Description":"__Description__","FulfillmentTypes":["CREDITS","CREDITS"],"Id":"__Id__","Name":"__Name__","Programs":["__Member__","__Member__"],"Status":"ACTIVE"},{"Arn":"__Arn__","Catalog":"__Catalog__","Description":"__Description__","FulfillmentTypes":["CREDITS","CREDITS"],"Id":"__Id__","Name":"__Name__","Programs":["__Member__","__Member__"],"Status":"ACTIVE"}],"NextToken":"__NextToken__"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"createdDate":946684800,"customerId":"__CustomerId__","description":"__Description__","enabled":true,"id":"__Id__","lastUpdatedDate":946684800,"name":"__Name__","stageKeys":["__Member__","__Member__"],"tags":{"key0":"__Value__"},"value":"__Value__"}

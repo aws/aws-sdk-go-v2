@@ -134,7 +134,15 @@ func TestCheckResponseSnapshot_BatchAddChannelRoleToAccessors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchAddChannelRoleToAccessors(context.Background(), &BatchAddChannelRoleToAccessorsInput{})
+	got, err := svc.BatchAddChannelRoleToAccessors(context.Background(), &BatchAddChannelRoleToAccessorsInput{
+		SpaceId:   ptr.String("__SpaceId__"),
+		ChannelId: ptr.String("__ChannelId__"),
+		AccessorIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ChannelRole: types.ChannelRole("ASKER"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -170,7 +178,14 @@ func TestCheckResponseSnapshot_BatchAddRole(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchAddRole(context.Background(), &BatchAddRoleInput{})
+	got, err := svc.BatchAddRole(context.Background(), &BatchAddRoleInput{
+		SpaceId: ptr.String("__SpaceId__"),
+		AccessorIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Role: types.Role("EXPERT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -206,7 +221,15 @@ func TestCheckResponseSnapshot_BatchRemoveChannelRoleFromAccessors(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchRemoveChannelRoleFromAccessors(context.Background(), &BatchRemoveChannelRoleFromAccessorsInput{})
+	got, err := svc.BatchRemoveChannelRoleFromAccessors(context.Background(), &BatchRemoveChannelRoleFromAccessorsInput{
+		SpaceId:   ptr.String("__SpaceId__"),
+		ChannelId: ptr.String("__ChannelId__"),
+		AccessorIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ChannelRole: types.ChannelRole("ASKER"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -242,7 +265,14 @@ func TestCheckResponseSnapshot_BatchRemoveRole(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchRemoveRole(context.Background(), &BatchRemoveRoleInput{})
+	got, err := svc.BatchRemoveRole(context.Background(), &BatchRemoveRoleInput{
+		SpaceId: ptr.String("__SpaceId__"),
+		AccessorIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Role: types.Role("EXPERT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -263,7 +293,11 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateChannel(context.Background(), &CreateChannelInput{})
+	got, err := svc.CreateChannel(context.Background(), &CreateChannelInput{
+		SpaceId:            ptr.String("__SpaceId__"),
+		ChannelName:        ptr.String("__ChannelName__"),
+		ChannelDescription: ptr.String("__ChannelDescription__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -284,7 +318,24 @@ func TestCheckResponseSnapshot_CreateSpace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSpace(context.Background(), &CreateSpaceInput{})
+	got, err := svc.CreateSpace(context.Background(), &CreateSpaceInput{
+		Name:        ptr.String("__Name__"),
+		Subdomain:   ptr.String("__Subdomain__"),
+		Tier:        types.TierLevel("BASIC"),
+		Description: ptr.String("__Description__"),
+		UserKMSKey:  ptr.String("__UserKMSKey__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		SupportedEmailDomains: &types.SupportedEmailDomainsParameters{
+			Enabled: types.FeatureEnableParameter("ENABLED"),
+			AllowedDomains: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -303,7 +354,9 @@ func TestCheckResponseSnapshot_DeleteSpace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSpace(context.Background(), &DeleteSpaceInput{})
+	got, err := svc.DeleteSpace(context.Background(), &DeleteSpaceInput{
+		SpaceId: ptr.String("__SpaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -322,7 +375,10 @@ func TestCheckResponseSnapshot_DeregisterAdmin(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterAdmin(context.Background(), &DeregisterAdminInput{})
+	got, err := svc.DeregisterAdmin(context.Background(), &DeregisterAdminInput{
+		SpaceId: ptr.String("__SpaceId__"),
+		AdminId: ptr.String("__AdminId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -355,7 +411,10 @@ func TestCheckResponseSnapshot_GetChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetChannel(context.Background(), &GetChannelInput{})
+	got, err := svc.GetChannel(context.Background(), &GetChannelInput{
+		SpaceId:   ptr.String("__SpaceId__"),
+		ChannelId: ptr.String("__ChannelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -416,7 +475,9 @@ func TestCheckResponseSnapshot_GetSpace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSpace(context.Background(), &GetSpaceInput{})
+	got, err := svc.GetSpace(context.Background(), &GetSpaceInput{
+		SpaceId: ptr.String("__SpaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -461,7 +522,11 @@ func TestCheckResponseSnapshot_ListChannels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListChannels(context.Background(), &ListChannelsInput{})
+	got, err := svc.ListChannels(context.Background(), &ListChannelsInput{
+		SpaceId:    ptr.String("__SpaceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -534,7 +599,10 @@ func TestCheckResponseSnapshot_ListSpaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSpaces(context.Background(), &ListSpacesInput{})
+	got, err := svc.ListSpaces(context.Background(), &ListSpacesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -557,7 +625,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -576,7 +646,10 @@ func TestCheckResponseSnapshot_RegisterAdmin(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterAdmin(context.Background(), &RegisterAdminInput{})
+	got, err := svc.RegisterAdmin(context.Background(), &RegisterAdminInput{
+		SpaceId: ptr.String("__SpaceId__"),
+		AdminId: ptr.String("__AdminId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -595,7 +668,15 @@ func TestCheckResponseSnapshot_SendInvites(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendInvites(context.Background(), &SendInvitesInput{})
+	got, err := svc.SendInvites(context.Background(), &SendInvitesInput{
+		SpaceId: ptr.String("__SpaceId__"),
+		AccessorIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Title: ptr.String("__Title__"),
+		Body:  ptr.String("__Body__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -614,7 +695,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -633,7 +719,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -652,7 +744,12 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateChannel(context.Background(), &UpdateChannelInput{})
+	got, err := svc.UpdateChannel(context.Background(), &UpdateChannelInput{
+		SpaceId:            ptr.String("__SpaceId__"),
+		ChannelId:          ptr.String("__ChannelId__"),
+		ChannelName:        ptr.String("__ChannelName__"),
+		ChannelDescription: ptr.String("__ChannelDescription__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -671,7 +768,19 @@ func TestCheckResponseSnapshot_UpdateSpace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSpace(context.Background(), &UpdateSpaceInput{})
+	got, err := svc.UpdateSpace(context.Background(), &UpdateSpaceInput{
+		SpaceId:     ptr.String("__SpaceId__"),
+		Description: ptr.String("__Description__"),
+		Tier:        types.TierLevel("BASIC"),
+		RoleArn:     ptr.String("__RoleArn__"),
+		SupportedEmailDomains: &types.SupportedEmailDomainsParameters{
+			Enabled: types.FeatureEnableParameter("ENABLED"),
+			AllowedDomains: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -692,7 +801,15 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchAddChannelRoleToAccessors(context.Background(), &BatchAddChannelRoleToAccessorsInput{})
+	_, opErr := svc.BatchAddChannelRoleToAccessors(context.Background(), &BatchAddChannelRoleToAccessorsInput{
+		SpaceId:   ptr.String("__SpaceId__"),
+		ChannelId: ptr.String("__ChannelId__"),
+		AccessorIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ChannelRole: types.ChannelRole("ASKER"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -719,7 +836,11 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChannel(context.Background(), &CreateChannelInput{})
+	_, opErr := svc.CreateChannel(context.Background(), &CreateChannelInput{
+		SpaceId:            ptr.String("__SpaceId__"),
+		ChannelName:        ptr.String("__ChannelName__"),
+		ChannelDescription: ptr.String("__ChannelDescription__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -745,7 +866,15 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchAddChannelRoleToAccessors(context.Background(), &BatchAddChannelRoleToAccessorsInput{})
+	_, opErr := svc.BatchAddChannelRoleToAccessors(context.Background(), &BatchAddChannelRoleToAccessorsInput{
+		SpaceId:   ptr.String("__SpaceId__"),
+		ChannelId: ptr.String("__ChannelId__"),
+		AccessorIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ChannelRole: types.ChannelRole("ASKER"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -772,7 +901,15 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchAddChannelRoleToAccessors(context.Background(), &BatchAddChannelRoleToAccessorsInput{})
+	_, opErr := svc.BatchAddChannelRoleToAccessors(context.Background(), &BatchAddChannelRoleToAccessorsInput{
+		SpaceId:   ptr.String("__SpaceId__"),
+		ChannelId: ptr.String("__ChannelId__"),
+		AccessorIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ChannelRole: types.ChannelRole("ASKER"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -801,7 +938,11 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChannel(context.Background(), &CreateChannelInput{})
+	_, opErr := svc.CreateChannel(context.Background(), &CreateChannelInput{
+		SpaceId:            ptr.String("__SpaceId__"),
+		ChannelName:        ptr.String("__ChannelName__"),
+		ChannelDescription: ptr.String("__ChannelDescription__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -829,7 +970,15 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchAddChannelRoleToAccessors(context.Background(), &BatchAddChannelRoleToAccessorsInput{})
+	_, opErr := svc.BatchAddChannelRoleToAccessors(context.Background(), &BatchAddChannelRoleToAccessorsInput{
+		SpaceId:   ptr.String("__SpaceId__"),
+		ChannelId: ptr.String("__ChannelId__"),
+		AccessorIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ChannelRole: types.ChannelRole("ASKER"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -865,7 +1014,15 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchAddChannelRoleToAccessors(context.Background(), &BatchAddChannelRoleToAccessorsInput{})
+	_, opErr := svc.BatchAddChannelRoleToAccessors(context.Background(), &BatchAddChannelRoleToAccessorsInput{
+		SpaceId:   ptr.String("__SpaceId__"),
+		ChannelId: ptr.String("__ChannelId__"),
+		AccessorIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ChannelRole: types.ChannelRole("ASKER"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

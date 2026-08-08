@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.ListServices
+
+{"nextToken":"__NextToken__","services":[{"arn":"__Arn__","createdAt":946684800,"description":"__Description__","lastModifiedAt":946684800,"name":"__Name__","status":"CREATE_IN_PROGRESS","statusMessage":"__StatusMessage__","templateName":"__TemplateName__"},{"arn":"__Arn__","createdAt":946684800,"description":"__Description__","lastModifiedAt":946684800,"name":"__Name__","status":"CREATE_IN_PROGRESS","statusMessage":"__StatusMessage__","templateName":"__TemplateName__"}]}

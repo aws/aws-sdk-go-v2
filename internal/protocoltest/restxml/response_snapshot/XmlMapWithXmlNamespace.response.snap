@@ -1,4 +1,0 @@
-200
-Content-Type: application/xml
-
-<XmlMapWithXmlNamespaceResponse><KVP xmlns="https://the-member.example.com"><entry><K xmlns="https://the-key.example.com">key0</K><V xmlns="https://the-value.example.com">__Value__</V></entry></KVP></XmlMapWithXmlNamespaceResponse>

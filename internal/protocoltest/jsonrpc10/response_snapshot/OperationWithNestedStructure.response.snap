@@ -1,5 +1,0 @@
-200
-Content-Type: application/x-amz-json-1.0
-X-Amz-Target: JsonRpc10.OperationWithNestedStructure
-
-{"dialog":{"farewell":{"phrase":"__Phrase__"},"greeting":"__Greeting__","language":"__Language__"},"dialogList":[{"farewell":{"phrase":"__Phrase__"},"greeting":"__Greeting__","language":"__Language__"},{"farewell":{"phrase":"__Phrase__"},"greeting":"__Greeting__","language":"__Language__"}],"dialogMap":{"key0":{"farewell":{"phrase":"__Phrase__"},"greeting":"__Greeting__","language":"__Language__"}}}

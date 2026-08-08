@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"BackupVaultArn":"__BackupVaultArn__","CalculatedLifecycle":{"DeleteAt":946684800,"MoveToColdStorageAt":946684800},"Lifecycle":{"DeleteAfterDays":1,"DeleteAfterEvent":"DELETE_AFTER_COPY","MoveToColdStorageAfterDays":1,"OptInToArchiveForSupportedResources":true},"RecoveryPointArn":"__RecoveryPointArn__"}

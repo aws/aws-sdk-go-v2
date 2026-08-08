@@ -149,7 +149,17 @@ func TestCheckResponseSnapshot_GetEntitlements(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEntitlements(context.Background(), &GetEntitlementsInput{})
+	got, err := svc.GetEntitlements(context.Background(), &GetEntitlementsInput{
+		ProductCode: ptr.String("__ProductCode__"),
+		Filter: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -170,7 +180,17 @@ func TestCheckResponseSnapshot_Error_InternalServiceErrorException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetEntitlements(context.Background(), &GetEntitlementsInput{})
+	_, opErr := svc.GetEntitlements(context.Background(), &GetEntitlementsInput{
+		ProductCode: ptr.String("__ProductCode__"),
+		Filter: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -195,7 +215,17 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetEntitlements(context.Background(), &GetEntitlementsInput{})
+	_, opErr := svc.GetEntitlements(context.Background(), &GetEntitlementsInput{
+		ProductCode: ptr.String("__ProductCode__"),
+		Filter: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -220,7 +250,17 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetEntitlements(context.Background(), &GetEntitlementsInput{})
+	_, opErr := svc.GetEntitlements(context.Background(), &GetEntitlementsInput{
+		ProductCode: ptr.String("__ProductCode__"),
+		Filter: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -274,7 +274,83 @@ func TestCheckResponseSnapshot_BatchMeterUsage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchMeterUsage(context.Background(), &BatchMeterUsageInput{})
+	got, err := svc.BatchMeterUsage(context.Background(), &BatchMeterUsageInput{
+		UsageRecords: []types.UsageRecord{
+			{
+				Timestamp:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CustomerIdentifier: ptr.String("__CustomerIdentifier__"),
+				Dimension:          ptr.String("__Dimension__"),
+				Quantity:           ptr.Int32(1),
+				UsageAllocations: []types.UsageAllocation{
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				CustomerAWSAccountId: ptr.String("__CustomerAWSAccountId__"),
+				LicenseArn:           ptr.String("__LicenseArn__"),
+			},
+			{
+				Timestamp:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CustomerIdentifier: ptr.String("__CustomerIdentifier__"),
+				Dimension:          ptr.String("__Dimension__"),
+				Quantity:           ptr.Int32(1),
+				UsageAllocations: []types.UsageAllocation{
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				CustomerAWSAccountId: ptr.String("__CustomerAWSAccountId__"),
+				LicenseArn:           ptr.String("__LicenseArn__"),
+			},
+		},
+		ProductCode: ptr.String("__ProductCode__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -295,7 +371,42 @@ func TestCheckResponseSnapshot_MeterUsage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MeterUsage(context.Background(), &MeterUsageInput{})
+	got, err := svc.MeterUsage(context.Background(), &MeterUsageInput{
+		ProductCode:    ptr.String("__ProductCode__"),
+		Timestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UsageDimension: ptr.String("__UsageDimension__"),
+		UsageQuantity:  ptr.Int32(1),
+		DryRun:         ptr.Bool(true),
+		UsageAllocations: []types.UsageAllocation{
+			{
+				AllocatedUsageQuantity: ptr.Int32(1),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				AllocatedUsageQuantity: ptr.Int32(1),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -317,7 +428,11 @@ func TestCheckResponseSnapshot_RegisterUsage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterUsage(context.Background(), &RegisterUsageInput{})
+	got, err := svc.RegisterUsage(context.Background(), &RegisterUsageInput{
+		ProductCode:      ptr.String("__ProductCode__"),
+		PublicKeyVersion: ptr.Int32(1),
+		Nonce:            ptr.String("__Nonce__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -341,7 +456,9 @@ func TestCheckResponseSnapshot_ResolveCustomer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResolveCustomer(context.Background(), &ResolveCustomerInput{})
+	got, err := svc.ResolveCustomer(context.Background(), &ResolveCustomerInput{
+		RegistrationToken: ptr.String("__RegistrationToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -362,7 +479,42 @@ func TestCheckResponseSnapshot_Error_CustomerNotEntitledException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.MeterUsage(context.Background(), &MeterUsageInput{})
+	_, opErr := svc.MeterUsage(context.Background(), &MeterUsageInput{
+		ProductCode:    ptr.String("__ProductCode__"),
+		Timestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UsageDimension: ptr.String("__UsageDimension__"),
+		UsageQuantity:  ptr.Int32(1),
+		DryRun:         ptr.Bool(true),
+		UsageAllocations: []types.UsageAllocation{
+			{
+				AllocatedUsageQuantity: ptr.Int32(1),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				AllocatedUsageQuantity: ptr.Int32(1),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -387,7 +539,83 @@ func TestCheckResponseSnapshot_Error_DisabledApiException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchMeterUsage(context.Background(), &BatchMeterUsageInput{})
+	_, opErr := svc.BatchMeterUsage(context.Background(), &BatchMeterUsageInput{
+		UsageRecords: []types.UsageRecord{
+			{
+				Timestamp:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CustomerIdentifier: ptr.String("__CustomerIdentifier__"),
+				Dimension:          ptr.String("__Dimension__"),
+				Quantity:           ptr.Int32(1),
+				UsageAllocations: []types.UsageAllocation{
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				CustomerAWSAccountId: ptr.String("__CustomerAWSAccountId__"),
+				LicenseArn:           ptr.String("__LicenseArn__"),
+			},
+			{
+				Timestamp:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CustomerIdentifier: ptr.String("__CustomerIdentifier__"),
+				Dimension:          ptr.String("__Dimension__"),
+				Quantity:           ptr.Int32(1),
+				UsageAllocations: []types.UsageAllocation{
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				CustomerAWSAccountId: ptr.String("__CustomerAWSAccountId__"),
+				LicenseArn:           ptr.String("__LicenseArn__"),
+			},
+		},
+		ProductCode: ptr.String("__ProductCode__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -412,7 +640,42 @@ func TestCheckResponseSnapshot_Error_DuplicateRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.MeterUsage(context.Background(), &MeterUsageInput{})
+	_, opErr := svc.MeterUsage(context.Background(), &MeterUsageInput{
+		ProductCode:    ptr.String("__ProductCode__"),
+		Timestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UsageDimension: ptr.String("__UsageDimension__"),
+		UsageQuantity:  ptr.Int32(1),
+		DryRun:         ptr.Bool(true),
+		UsageAllocations: []types.UsageAllocation{
+			{
+				AllocatedUsageQuantity: ptr.Int32(1),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				AllocatedUsageQuantity: ptr.Int32(1),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -437,7 +700,9 @@ func TestCheckResponseSnapshot_Error_ExpiredTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ResolveCustomer(context.Background(), &ResolveCustomerInput{})
+	_, opErr := svc.ResolveCustomer(context.Background(), &ResolveCustomerInput{
+		RegistrationToken: ptr.String("__RegistrationToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -462,7 +727,42 @@ func TestCheckResponseSnapshot_Error_IdempotencyConflictException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.MeterUsage(context.Background(), &MeterUsageInput{})
+	_, opErr := svc.MeterUsage(context.Background(), &MeterUsageInput{
+		ProductCode:    ptr.String("__ProductCode__"),
+		Timestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UsageDimension: ptr.String("__UsageDimension__"),
+		UsageQuantity:  ptr.Int32(1),
+		DryRun:         ptr.Bool(true),
+		UsageAllocations: []types.UsageAllocation{
+			{
+				AllocatedUsageQuantity: ptr.Int32(1),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				AllocatedUsageQuantity: ptr.Int32(1),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -487,7 +787,83 @@ func TestCheckResponseSnapshot_Error_InternalServiceErrorException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchMeterUsage(context.Background(), &BatchMeterUsageInput{})
+	_, opErr := svc.BatchMeterUsage(context.Background(), &BatchMeterUsageInput{
+		UsageRecords: []types.UsageRecord{
+			{
+				Timestamp:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CustomerIdentifier: ptr.String("__CustomerIdentifier__"),
+				Dimension:          ptr.String("__Dimension__"),
+				Quantity:           ptr.Int32(1),
+				UsageAllocations: []types.UsageAllocation{
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				CustomerAWSAccountId: ptr.String("__CustomerAWSAccountId__"),
+				LicenseArn:           ptr.String("__LicenseArn__"),
+			},
+			{
+				Timestamp:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CustomerIdentifier: ptr.String("__CustomerIdentifier__"),
+				Dimension:          ptr.String("__Dimension__"),
+				Quantity:           ptr.Int32(1),
+				UsageAllocations: []types.UsageAllocation{
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				CustomerAWSAccountId: ptr.String("__CustomerAWSAccountId__"),
+				LicenseArn:           ptr.String("__LicenseArn__"),
+			},
+		},
+		ProductCode: ptr.String("__ProductCode__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -512,7 +888,83 @@ func TestCheckResponseSnapshot_Error_InvalidCustomerIdentifierException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchMeterUsage(context.Background(), &BatchMeterUsageInput{})
+	_, opErr := svc.BatchMeterUsage(context.Background(), &BatchMeterUsageInput{
+		UsageRecords: []types.UsageRecord{
+			{
+				Timestamp:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CustomerIdentifier: ptr.String("__CustomerIdentifier__"),
+				Dimension:          ptr.String("__Dimension__"),
+				Quantity:           ptr.Int32(1),
+				UsageAllocations: []types.UsageAllocation{
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				CustomerAWSAccountId: ptr.String("__CustomerAWSAccountId__"),
+				LicenseArn:           ptr.String("__LicenseArn__"),
+			},
+			{
+				Timestamp:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CustomerIdentifier: ptr.String("__CustomerIdentifier__"),
+				Dimension:          ptr.String("__Dimension__"),
+				Quantity:           ptr.Int32(1),
+				UsageAllocations: []types.UsageAllocation{
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				CustomerAWSAccountId: ptr.String("__CustomerAWSAccountId__"),
+				LicenseArn:           ptr.String("__LicenseArn__"),
+			},
+		},
+		ProductCode: ptr.String("__ProductCode__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -537,7 +989,42 @@ func TestCheckResponseSnapshot_Error_InvalidEndpointRegionException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.MeterUsage(context.Background(), &MeterUsageInput{})
+	_, opErr := svc.MeterUsage(context.Background(), &MeterUsageInput{
+		ProductCode:    ptr.String("__ProductCode__"),
+		Timestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UsageDimension: ptr.String("__UsageDimension__"),
+		UsageQuantity:  ptr.Int32(1),
+		DryRun:         ptr.Bool(true),
+		UsageAllocations: []types.UsageAllocation{
+			{
+				AllocatedUsageQuantity: ptr.Int32(1),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				AllocatedUsageQuantity: ptr.Int32(1),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -562,7 +1049,83 @@ func TestCheckResponseSnapshot_Error_InvalidLicenseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchMeterUsage(context.Background(), &BatchMeterUsageInput{})
+	_, opErr := svc.BatchMeterUsage(context.Background(), &BatchMeterUsageInput{
+		UsageRecords: []types.UsageRecord{
+			{
+				Timestamp:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CustomerIdentifier: ptr.String("__CustomerIdentifier__"),
+				Dimension:          ptr.String("__Dimension__"),
+				Quantity:           ptr.Int32(1),
+				UsageAllocations: []types.UsageAllocation{
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				CustomerAWSAccountId: ptr.String("__CustomerAWSAccountId__"),
+				LicenseArn:           ptr.String("__LicenseArn__"),
+			},
+			{
+				Timestamp:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CustomerIdentifier: ptr.String("__CustomerIdentifier__"),
+				Dimension:          ptr.String("__Dimension__"),
+				Quantity:           ptr.Int32(1),
+				UsageAllocations: []types.UsageAllocation{
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				CustomerAWSAccountId: ptr.String("__CustomerAWSAccountId__"),
+				LicenseArn:           ptr.String("__LicenseArn__"),
+			},
+		},
+		ProductCode: ptr.String("__ProductCode__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -587,7 +1150,83 @@ func TestCheckResponseSnapshot_Error_InvalidProductCodeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchMeterUsage(context.Background(), &BatchMeterUsageInput{})
+	_, opErr := svc.BatchMeterUsage(context.Background(), &BatchMeterUsageInput{
+		UsageRecords: []types.UsageRecord{
+			{
+				Timestamp:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CustomerIdentifier: ptr.String("__CustomerIdentifier__"),
+				Dimension:          ptr.String("__Dimension__"),
+				Quantity:           ptr.Int32(1),
+				UsageAllocations: []types.UsageAllocation{
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				CustomerAWSAccountId: ptr.String("__CustomerAWSAccountId__"),
+				LicenseArn:           ptr.String("__LicenseArn__"),
+			},
+			{
+				Timestamp:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CustomerIdentifier: ptr.String("__CustomerIdentifier__"),
+				Dimension:          ptr.String("__Dimension__"),
+				Quantity:           ptr.Int32(1),
+				UsageAllocations: []types.UsageAllocation{
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				CustomerAWSAccountId: ptr.String("__CustomerAWSAccountId__"),
+				LicenseArn:           ptr.String("__LicenseArn__"),
+			},
+		},
+		ProductCode: ptr.String("__ProductCode__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -612,7 +1251,11 @@ func TestCheckResponseSnapshot_Error_InvalidPublicKeyVersionException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RegisterUsage(context.Background(), &RegisterUsageInput{})
+	_, opErr := svc.RegisterUsage(context.Background(), &RegisterUsageInput{
+		ProductCode:      ptr.String("__ProductCode__"),
+		PublicKeyVersion: ptr.Int32(1),
+		Nonce:            ptr.String("__Nonce__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -637,7 +1280,11 @@ func TestCheckResponseSnapshot_Error_InvalidRegionException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RegisterUsage(context.Background(), &RegisterUsageInput{})
+	_, opErr := svc.RegisterUsage(context.Background(), &RegisterUsageInput{
+		ProductCode:      ptr.String("__ProductCode__"),
+		PublicKeyVersion: ptr.Int32(1),
+		Nonce:            ptr.String("__Nonce__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -662,7 +1309,83 @@ func TestCheckResponseSnapshot_Error_InvalidTagException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchMeterUsage(context.Background(), &BatchMeterUsageInput{})
+	_, opErr := svc.BatchMeterUsage(context.Background(), &BatchMeterUsageInput{
+		UsageRecords: []types.UsageRecord{
+			{
+				Timestamp:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CustomerIdentifier: ptr.String("__CustomerIdentifier__"),
+				Dimension:          ptr.String("__Dimension__"),
+				Quantity:           ptr.Int32(1),
+				UsageAllocations: []types.UsageAllocation{
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				CustomerAWSAccountId: ptr.String("__CustomerAWSAccountId__"),
+				LicenseArn:           ptr.String("__LicenseArn__"),
+			},
+			{
+				Timestamp:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CustomerIdentifier: ptr.String("__CustomerIdentifier__"),
+				Dimension:          ptr.String("__Dimension__"),
+				Quantity:           ptr.Int32(1),
+				UsageAllocations: []types.UsageAllocation{
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				CustomerAWSAccountId: ptr.String("__CustomerAWSAccountId__"),
+				LicenseArn:           ptr.String("__LicenseArn__"),
+			},
+		},
+		ProductCode: ptr.String("__ProductCode__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -687,7 +1410,9 @@ func TestCheckResponseSnapshot_Error_InvalidTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ResolveCustomer(context.Background(), &ResolveCustomerInput{})
+	_, opErr := svc.ResolveCustomer(context.Background(), &ResolveCustomerInput{
+		RegistrationToken: ptr.String("__RegistrationToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -712,7 +1437,83 @@ func TestCheckResponseSnapshot_Error_InvalidUsageAllocationsException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchMeterUsage(context.Background(), &BatchMeterUsageInput{})
+	_, opErr := svc.BatchMeterUsage(context.Background(), &BatchMeterUsageInput{
+		UsageRecords: []types.UsageRecord{
+			{
+				Timestamp:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CustomerIdentifier: ptr.String("__CustomerIdentifier__"),
+				Dimension:          ptr.String("__Dimension__"),
+				Quantity:           ptr.Int32(1),
+				UsageAllocations: []types.UsageAllocation{
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				CustomerAWSAccountId: ptr.String("__CustomerAWSAccountId__"),
+				LicenseArn:           ptr.String("__LicenseArn__"),
+			},
+			{
+				Timestamp:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CustomerIdentifier: ptr.String("__CustomerIdentifier__"),
+				Dimension:          ptr.String("__Dimension__"),
+				Quantity:           ptr.Int32(1),
+				UsageAllocations: []types.UsageAllocation{
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				CustomerAWSAccountId: ptr.String("__CustomerAWSAccountId__"),
+				LicenseArn:           ptr.String("__LicenseArn__"),
+			},
+		},
+		ProductCode: ptr.String("__ProductCode__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -737,7 +1538,83 @@ func TestCheckResponseSnapshot_Error_InvalidUsageDimensionException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchMeterUsage(context.Background(), &BatchMeterUsageInput{})
+	_, opErr := svc.BatchMeterUsage(context.Background(), &BatchMeterUsageInput{
+		UsageRecords: []types.UsageRecord{
+			{
+				Timestamp:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CustomerIdentifier: ptr.String("__CustomerIdentifier__"),
+				Dimension:          ptr.String("__Dimension__"),
+				Quantity:           ptr.Int32(1),
+				UsageAllocations: []types.UsageAllocation{
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				CustomerAWSAccountId: ptr.String("__CustomerAWSAccountId__"),
+				LicenseArn:           ptr.String("__LicenseArn__"),
+			},
+			{
+				Timestamp:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CustomerIdentifier: ptr.String("__CustomerIdentifier__"),
+				Dimension:          ptr.String("__Dimension__"),
+				Quantity:           ptr.Int32(1),
+				UsageAllocations: []types.UsageAllocation{
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				CustomerAWSAccountId: ptr.String("__CustomerAWSAccountId__"),
+				LicenseArn:           ptr.String("__LicenseArn__"),
+			},
+		},
+		ProductCode: ptr.String("__ProductCode__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -762,7 +1639,11 @@ func TestCheckResponseSnapshot_Error_PlatformNotSupportedException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RegisterUsage(context.Background(), &RegisterUsageInput{})
+	_, opErr := svc.RegisterUsage(context.Background(), &RegisterUsageInput{
+		ProductCode:      ptr.String("__ProductCode__"),
+		PublicKeyVersion: ptr.Int32(1),
+		Nonce:            ptr.String("__Nonce__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -787,7 +1668,83 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchMeterUsage(context.Background(), &BatchMeterUsageInput{})
+	_, opErr := svc.BatchMeterUsage(context.Background(), &BatchMeterUsageInput{
+		UsageRecords: []types.UsageRecord{
+			{
+				Timestamp:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CustomerIdentifier: ptr.String("__CustomerIdentifier__"),
+				Dimension:          ptr.String("__Dimension__"),
+				Quantity:           ptr.Int32(1),
+				UsageAllocations: []types.UsageAllocation{
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				CustomerAWSAccountId: ptr.String("__CustomerAWSAccountId__"),
+				LicenseArn:           ptr.String("__LicenseArn__"),
+			},
+			{
+				Timestamp:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CustomerIdentifier: ptr.String("__CustomerIdentifier__"),
+				Dimension:          ptr.String("__Dimension__"),
+				Quantity:           ptr.Int32(1),
+				UsageAllocations: []types.UsageAllocation{
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				CustomerAWSAccountId: ptr.String("__CustomerAWSAccountId__"),
+				LicenseArn:           ptr.String("__LicenseArn__"),
+			},
+		},
+		ProductCode: ptr.String("__ProductCode__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -812,7 +1769,83 @@ func TestCheckResponseSnapshot_Error_TimestampOutOfBoundsException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchMeterUsage(context.Background(), &BatchMeterUsageInput{})
+	_, opErr := svc.BatchMeterUsage(context.Background(), &BatchMeterUsageInput{
+		UsageRecords: []types.UsageRecord{
+			{
+				Timestamp:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CustomerIdentifier: ptr.String("__CustomerIdentifier__"),
+				Dimension:          ptr.String("__Dimension__"),
+				Quantity:           ptr.Int32(1),
+				UsageAllocations: []types.UsageAllocation{
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				CustomerAWSAccountId: ptr.String("__CustomerAWSAccountId__"),
+				LicenseArn:           ptr.String("__LicenseArn__"),
+			},
+			{
+				Timestamp:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CustomerIdentifier: ptr.String("__CustomerIdentifier__"),
+				Dimension:          ptr.String("__Dimension__"),
+				Quantity:           ptr.Int32(1),
+				UsageAllocations: []types.UsageAllocation{
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					{
+						AllocatedUsageQuantity: ptr.Int32(1),
+						Tags: []types.Tag{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				CustomerAWSAccountId: ptr.String("__CustomerAWSAccountId__"),
+				LicenseArn:           ptr.String("__LicenseArn__"),
+			},
+		},
+		ProductCode: ptr.String("__ProductCode__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Recommendations":[{"CatalogItem":{"AdditionalInformation":"__AdditionalInformation__","Attributes":{"key0":"__Value__"},"Category":"__Category__","Code":"__Code__","CreatedAt":946684800,"Description":"__Description__","Id":"__Id__","ImageLink":"__ImageLink__","Link":"__Link__","Name":"__Name__","Price":"__Price__","Type":"__Type__","UpdatedAt":946684800},"Score":1},{"CatalogItem":{"AdditionalInformation":"__AdditionalInformation__","Attributes":{"key0":"__Value__"},"Category":"__Category__","Code":"__Code__","CreatedAt":946684800,"Description":"__Description__","Id":"__Id__","ImageLink":"__ImageLink__","Link":"__Link__","Name":"__Name__","Price":"__Price__","Type":"__Type__","UpdatedAt":946684800},"Score":1}]}

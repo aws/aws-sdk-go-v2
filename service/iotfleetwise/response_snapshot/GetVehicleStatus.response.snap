@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: IoTAutobahnControlPlane.GetVehicleStatus
+
+{"campaigns":[{"campaignName":"__CampaignName__","status":"CREATED","vehicleName":"__VehicleName__"},{"campaignName":"__CampaignName__","status":"CREATED","vehicleName":"__VehicleName__"}],"nextToken":"__NextToken__"}

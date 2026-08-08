@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"S3Exception","code":"S3Exception","detailedMessage":"__DetailedMessage__","requestId":"__RequestId__"}

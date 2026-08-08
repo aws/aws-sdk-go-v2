@@ -1,0 +1,5 @@
+429
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: CodeStar_connections_20191201.CreateRepositoryLink
+
+{"__type":"ThrottlingException","Message":"__Message__"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"meshName":"__MeshName__","metadata":{"arn":"__Arn__","createdAt":946684800,"lastUpdatedAt":946684800,"meshOwner":"__MeshOwner__","resourceOwner":"__ResourceOwner__","uid":"__Uid__","version":1},"spec":{"egressFilter":{"type":"ALLOW_ALL"},"serviceDiscovery":{"ipPreference":"IPv6_PREFERRED"}},"status":{"status":"ACTIVE"}}

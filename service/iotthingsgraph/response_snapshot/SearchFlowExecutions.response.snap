@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: IotThingsGraphFrontEndService.SearchFlowExecutions
+
+{"nextToken":"__NextToken__","summaries":[{"createdAt":946684800,"flowExecutionId":"__FlowExecutionId__","flowTemplateId":"__FlowTemplateId__","status":"RUNNING","systemInstanceId":"__SystemInstanceId__","updatedAt":946684800},{"createdAt":946684800,"flowExecutionId":"__FlowExecutionId__","flowTemplateId":"__FlowTemplateId__","status":"RUNNING","systemInstanceId":"__SystemInstanceId__","updatedAt":946684800}]}

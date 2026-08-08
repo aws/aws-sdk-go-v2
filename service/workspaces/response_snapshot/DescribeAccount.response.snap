@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkspacesService.DescribeAccount
+
+{"DedicatedTenancyAccountType":"SOURCE_ACCOUNT","DedicatedTenancyManagementCidrRange":"__DedicatedTenancyManagementCidrRange__","DedicatedTenancySupport":"ENABLED","Message":"__Message__"}

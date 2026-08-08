@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"columnMetadata":[{"arrayBaseColumnType":1,"isAutoIncrement":true,"isCaseSensitive":true,"isCurrency":true,"isSigned":true,"label":"__Label__","name":"__Name__","nullable":1,"precision":1,"scale":1,"schemaName":"__SchemaName__","tableName":"__TableName__","type":1,"typeName":"__TypeName__"},{"arrayBaseColumnType":1,"isAutoIncrement":true,"isCaseSensitive":true,"isCurrency":true,"isSigned":true,"label":"__Label__","name":"__Name__","nullable":1,"precision":1,"scale":1,"schemaName":"__SchemaName__","tableName":"__TableName__","type":1,"typeName":"__TypeName__"}],"formattedRecords":"__FormattedRecords__","generatedFields":[{"isNull":true},{"isNull":true}],"numberOfRecordsUpdated":1,"records":[[{"isNull":true},{"isNull":true}],[{"isNull":true},{"isNull":true}]]}

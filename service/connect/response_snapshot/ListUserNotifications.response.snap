@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","UserNotifications":[{"Content":{"key0":"__Value__"},"CreatedAt":946684800,"ExpiresAt":946684800,"InstanceId":"__InstanceId__","NotificationId":"__NotificationId__","NotificationStatus":"READ","Priority":"URGENT","RecipientId":"__RecipientId__","Source":"CUSTOMER"},{"Content":{"key0":"__Value__"},"CreatedAt":946684800,"ExpiresAt":946684800,"InstanceId":"__InstanceId__","NotificationId":"__NotificationId__","NotificationStatus":"READ","Priority":"URGENT","RecipientId":"__RecipientId__","Source":"CUSTOMER"}]}

@@ -327,7 +327,460 @@ func TestCheckResponseSnapshot_CalculateIsolines(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CalculateIsolines(context.Background(), &CalculateIsolinesInput{})
+	got, err := svc.CalculateIsolines(context.Background(), &CalculateIsolinesInput{
+		Allow: &types.IsolineAllowOptions{
+			Hot: ptr.Bool(true),
+			Hov: ptr.Bool(true),
+		},
+		ArrivalTime: ptr.String("__ArrivalTime__"),
+		Avoid: &types.IsolineAvoidanceOptions{
+			Areas: []types.IsolineAvoidanceArea{
+				{
+					Except: []types.IsolineAvoidanceAreaGeometry{
+						{
+							BoundingBox: []float64{
+								1.0,
+								1.0,
+							},
+							Corridor: &types.Corridor{
+								LineString: [][]float64{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								Radius: ptr.Int32(1),
+							},
+							Polygon: [][][]float64{
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+							},
+							PolylineCorridor: &types.PolylineCorridor{
+								Polyline: ptr.String("__Polyline__"),
+								Radius:   ptr.Int32(1),
+							},
+							PolylinePolygon: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							BoundingBox: []float64{
+								1.0,
+								1.0,
+							},
+							Corridor: &types.Corridor{
+								LineString: [][]float64{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								Radius: ptr.Int32(1),
+							},
+							Polygon: [][][]float64{
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+							},
+							PolylineCorridor: &types.PolylineCorridor{
+								Polyline: ptr.String("__Polyline__"),
+								Radius:   ptr.Int32(1),
+							},
+							PolylinePolygon: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					Geometry: &types.IsolineAvoidanceAreaGeometry{
+						BoundingBox: []float64{
+							1.0,
+							1.0,
+						},
+						Corridor: &types.Corridor{
+							LineString: [][]float64{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							Radius: ptr.Int32(1),
+						},
+						Polygon: [][][]float64{
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+						},
+						PolylineCorridor: &types.PolylineCorridor{
+							Polyline: ptr.String("__Polyline__"),
+							Radius:   ptr.Int32(1),
+						},
+						PolylinePolygon: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					Except: []types.IsolineAvoidanceAreaGeometry{
+						{
+							BoundingBox: []float64{
+								1.0,
+								1.0,
+							},
+							Corridor: &types.Corridor{
+								LineString: [][]float64{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								Radius: ptr.Int32(1),
+							},
+							Polygon: [][][]float64{
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+							},
+							PolylineCorridor: &types.PolylineCorridor{
+								Polyline: ptr.String("__Polyline__"),
+								Radius:   ptr.Int32(1),
+							},
+							PolylinePolygon: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							BoundingBox: []float64{
+								1.0,
+								1.0,
+							},
+							Corridor: &types.Corridor{
+								LineString: [][]float64{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								Radius: ptr.Int32(1),
+							},
+							Polygon: [][][]float64{
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+							},
+							PolylineCorridor: &types.PolylineCorridor{
+								Polyline: ptr.String("__Polyline__"),
+								Radius:   ptr.Int32(1),
+							},
+							PolylinePolygon: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					Geometry: &types.IsolineAvoidanceAreaGeometry{
+						BoundingBox: []float64{
+							1.0,
+							1.0,
+						},
+						Corridor: &types.Corridor{
+							LineString: [][]float64{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							Radius: ptr.Int32(1),
+						},
+						Polygon: [][][]float64{
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+						},
+						PolylineCorridor: &types.PolylineCorridor{
+							Polyline: ptr.String("__Polyline__"),
+							Radius:   ptr.Int32(1),
+						},
+						PolylinePolygon: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			CarShuttleTrains:         ptr.Bool(true),
+			ControlledAccessHighways: ptr.Bool(true),
+			DirtRoads:                ptr.Bool(true),
+			Ferries:                  ptr.Bool(true),
+			SeasonalClosure:          ptr.Bool(true),
+			TollRoads:                ptr.Bool(true),
+			TollTransponders:         ptr.Bool(true),
+			TruckRoadTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Tunnels: ptr.Bool(true),
+			UTurns:  ptr.Bool(true),
+			ZoneCategories: []types.IsolineAvoidanceZoneCategory{
+				{
+					Category: types.IsolineZoneCategory("CongestionPricing"),
+				},
+				{
+					Category: types.IsolineZoneCategory("CongestionPricing"),
+				},
+			},
+		},
+		DepartNow:     ptr.Bool(true),
+		DepartureTime: ptr.String("__DepartureTime__"),
+		Destination: []float64{
+			1.0,
+			1.0,
+		},
+		DestinationOptions: &types.IsolineDestinationOptions{
+			AvoidActionsForDistance: 1,
+			Heading:                 1.0,
+			Matching: &types.IsolineMatchingOptions{
+				NameHint:        ptr.String("__NameHint__"),
+				OnRoadThreshold: 1,
+				Radius:          1,
+				Strategy:        types.MatchingStrategy("MatchAny"),
+			},
+			SideOfStreet: &types.IsolineSideOfStreetOptions{
+				Position: []float64{
+					1.0,
+					1.0,
+				},
+				UseWith: types.SideOfStreetMatchingStrategy("AnyStreet"),
+			},
+		},
+		IsolineGeometryFormat: types.GeometryFormat("FlexiblePolyline"),
+		IsolineGranularity: &types.IsolineGranularityOptions{
+			MaxPoints:     ptr.Int32(1),
+			MaxResolution: 1,
+		},
+		Key:                ptr.String("__Key__"),
+		OptimizeIsolineFor: types.IsolineOptimizationObjective("AccurateCalculation"),
+		OptimizeRoutingFor: types.RoutingObjective("FastestRoute"),
+		Origin: []float64{
+			1.0,
+			1.0,
+		},
+		OriginOptions: &types.IsolineOriginOptions{
+			AvoidActionsForDistance: 1,
+			Heading:                 1.0,
+			Matching: &types.IsolineMatchingOptions{
+				NameHint:        ptr.String("__NameHint__"),
+				OnRoadThreshold: 1,
+				Radius:          1,
+				Strategy:        types.MatchingStrategy("MatchAny"),
+			},
+			SideOfStreet: &types.IsolineSideOfStreetOptions{
+				Position: []float64{
+					1.0,
+					1.0,
+				},
+				UseWith: types.SideOfStreetMatchingStrategy("AnyStreet"),
+			},
+		},
+		Thresholds: &types.IsolineThresholds{
+			Distance: []int64{
+				1,
+				1,
+			},
+			Time: []int64{
+				1,
+				1,
+			},
+		},
+		Traffic: &types.IsolineTrafficOptions{
+			FlowEventThresholdOverride: 1,
+			Usage:                      types.TrafficUsage("IgnoreTrafficData"),
+		},
+		TravelMode: types.IsolineTravelMode("Car"),
+		TravelModeOptions: &types.IsolineTravelModeOptions{
+			Car: &types.IsolineCarOptions{
+				EngineType: types.IsolineEngineType("Electric"),
+				LicensePlate: &types.IsolineVehicleLicensePlate{
+					LastCharacter: ptr.String("__LastCharacter__"),
+				},
+				MaxSpeed:  ptr.Float64(1.0),
+				Occupancy: ptr.Int32(1),
+			},
+			Scooter: &types.IsolineScooterOptions{
+				EngineType: types.IsolineEngineType("Electric"),
+				LicensePlate: &types.IsolineVehicleLicensePlate{
+					LastCharacter: ptr.String("__LastCharacter__"),
+				},
+				MaxSpeed:  ptr.Float64(1.0),
+				Occupancy: ptr.Int32(1),
+			},
+			Truck: &types.IsolineTruckOptions{
+				AxleCount:   ptr.Int32(1),
+				EngineType:  types.IsolineEngineType("Electric"),
+				GrossWeight: 1,
+				HazardousCargos: []types.IsolineHazardousCargoType{
+					types.IsolineHazardousCargoType("Combustible"),
+					types.IsolineHazardousCargoType("Combustible"),
+				},
+				Height:               1,
+				HeightAboveFirstAxle: 1,
+				KpraLength:           1,
+				Length:               1,
+				LicensePlate: &types.IsolineVehicleLicensePlate{
+					LastCharacter: ptr.String("__LastCharacter__"),
+				},
+				MaxSpeed:        ptr.Float64(1.0),
+				Occupancy:       ptr.Int32(1),
+				PayloadCapacity: 1,
+				TireCount:       ptr.Int32(1),
+				Trailer: &types.IsolineTrailerOptions{
+					AxleCount:    ptr.Int32(1),
+					TrailerCount: ptr.Int32(1),
+				},
+				TruckType:             types.IsolineTruckType("LightTruck"),
+				TunnelRestrictionCode: ptr.String("__TunnelRestrictionCode__"),
+				WeightPerAxle:         1,
+				WeightPerAxleGroup: &types.WeightPerAxleGroup{
+					Single: 1,
+					Tandem: 1,
+					Triple: 1,
+					Quad:   1,
+					Quint:  1,
+				},
+				Width: 1,
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -417,7 +870,304 @@ func TestCheckResponseSnapshot_CalculateRouteMatrix(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CalculateRouteMatrix(context.Background(), &CalculateRouteMatrixInput{})
+	got, err := svc.CalculateRouteMatrix(context.Background(), &CalculateRouteMatrixInput{
+		Allow: &types.RouteMatrixAllowOptions{
+			Hot: ptr.Bool(true),
+			Hov: ptr.Bool(true),
+		},
+		Avoid: &types.RouteMatrixAvoidanceOptions{
+			Areas: []types.RouteMatrixAvoidanceArea{
+				{
+					Geometry: &types.RouteMatrixAvoidanceAreaGeometry{
+						BoundingBox: []float64{
+							1.0,
+							1.0,
+						},
+						Polygon: [][][]float64{
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+						},
+						PolylinePolygon: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					Geometry: &types.RouteMatrixAvoidanceAreaGeometry{
+						BoundingBox: []float64{
+							1.0,
+							1.0,
+						},
+						Polygon: [][][]float64{
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+						},
+						PolylinePolygon: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			CarShuttleTrains:         ptr.Bool(true),
+			ControlledAccessHighways: ptr.Bool(true),
+			DirtRoads:                ptr.Bool(true),
+			Ferries:                  ptr.Bool(true),
+			TollRoads:                ptr.Bool(true),
+			TollTransponders:         ptr.Bool(true),
+			TruckRoadTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Tunnels: ptr.Bool(true),
+			UTurns:  ptr.Bool(true),
+			ZoneCategories: []types.RouteMatrixAvoidanceZoneCategory{
+				{
+					Category: types.RouteMatrixZoneCategory("CongestionPricing"),
+				},
+				{
+					Category: types.RouteMatrixZoneCategory("CongestionPricing"),
+				},
+			},
+		},
+		DepartNow:     ptr.Bool(true),
+		DepartureTime: ptr.String("__DepartureTime__"),
+		Destinations: []types.RouteMatrixDestination{
+			{
+				Options: &types.RouteMatrixDestinationOptions{
+					AvoidActionsForDistance: 1,
+					Heading:                 1.0,
+					Matching: &types.RouteMatrixMatchingOptions{
+						NameHint:        ptr.String("__NameHint__"),
+						OnRoadThreshold: 1,
+						Radius:          1,
+						Strategy:        types.MatchingStrategy("MatchAny"),
+					},
+					SideOfStreet: &types.RouteMatrixSideOfStreetOptions{
+						Position: []float64{
+							1.0,
+							1.0,
+						},
+						UseWith: types.SideOfStreetMatchingStrategy("AnyStreet"),
+					},
+				},
+				Position: []float64{
+					1.0,
+					1.0,
+				},
+			},
+			{
+				Options: &types.RouteMatrixDestinationOptions{
+					AvoidActionsForDistance: 1,
+					Heading:                 1.0,
+					Matching: &types.RouteMatrixMatchingOptions{
+						NameHint:        ptr.String("__NameHint__"),
+						OnRoadThreshold: 1,
+						Radius:          1,
+						Strategy:        types.MatchingStrategy("MatchAny"),
+					},
+					SideOfStreet: &types.RouteMatrixSideOfStreetOptions{
+						Position: []float64{
+							1.0,
+							1.0,
+						},
+						UseWith: types.SideOfStreetMatchingStrategy("AnyStreet"),
+					},
+				},
+				Position: []float64{
+					1.0,
+					1.0,
+				},
+			},
+		},
+		Exclude: &types.RouteMatrixExclusionOptions{
+			Countries: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Key:                ptr.String("__Key__"),
+		OptimizeRoutingFor: types.RoutingObjective("FastestRoute"),
+		Origins: []types.RouteMatrixOrigin{
+			{
+				Options: &types.RouteMatrixOriginOptions{
+					AvoidActionsForDistance: 1,
+					Heading:                 1.0,
+					Matching: &types.RouteMatrixMatchingOptions{
+						NameHint:        ptr.String("__NameHint__"),
+						OnRoadThreshold: 1,
+						Radius:          1,
+						Strategy:        types.MatchingStrategy("MatchAny"),
+					},
+					SideOfStreet: &types.RouteMatrixSideOfStreetOptions{
+						Position: []float64{
+							1.0,
+							1.0,
+						},
+						UseWith: types.SideOfStreetMatchingStrategy("AnyStreet"),
+					},
+				},
+				Position: []float64{
+					1.0,
+					1.0,
+				},
+			},
+			{
+				Options: &types.RouteMatrixOriginOptions{
+					AvoidActionsForDistance: 1,
+					Heading:                 1.0,
+					Matching: &types.RouteMatrixMatchingOptions{
+						NameHint:        ptr.String("__NameHint__"),
+						OnRoadThreshold: 1,
+						Radius:          1,
+						Strategy:        types.MatchingStrategy("MatchAny"),
+					},
+					SideOfStreet: &types.RouteMatrixSideOfStreetOptions{
+						Position: []float64{
+							1.0,
+							1.0,
+						},
+						UseWith: types.SideOfStreetMatchingStrategy("AnyStreet"),
+					},
+				},
+				Position: []float64{
+					1.0,
+					1.0,
+				},
+			},
+		},
+		RoutingBoundary: &types.RouteMatrixBoundary{
+			Geometry: &types.RouteMatrixBoundaryGeometry{
+				AutoCircle: &types.RouteMatrixAutoCircle{
+					Margin:    1,
+					MaxRadius: 1,
+				},
+				Circle: &types.Circle{
+					Center: []float64{
+						1.0,
+						1.0,
+					},
+					Radius: ptr.Float64(1.0),
+				},
+				BoundingBox: []float64{
+					1.0,
+					1.0,
+				},
+				Polygon: [][][]float64{
+					{
+						{
+							1.0,
+							1.0,
+						},
+						{
+							1.0,
+							1.0,
+						},
+					},
+					{
+						{
+							1.0,
+							1.0,
+						},
+						{
+							1.0,
+							1.0,
+						},
+					},
+				},
+			},
+			Unbounded: ptr.Bool(true),
+		},
+		Traffic: &types.RouteMatrixTrafficOptions{
+			FlowEventThresholdOverride: 1,
+			Usage:                      types.TrafficUsage("IgnoreTrafficData"),
+		},
+		TravelMode: types.RouteMatrixTravelMode("Car"),
+		TravelModeOptions: &types.RouteMatrixTravelModeOptions{
+			Car: &types.RouteMatrixCarOptions{
+				LicensePlate: &types.RouteMatrixVehicleLicensePlate{
+					LastCharacter: ptr.String("__LastCharacter__"),
+				},
+				MaxSpeed:  ptr.Float64(1.0),
+				Occupancy: ptr.Int32(1),
+			},
+			Scooter: &types.RouteMatrixScooterOptions{
+				LicensePlate: &types.RouteMatrixVehicleLicensePlate{
+					LastCharacter: ptr.String("__LastCharacter__"),
+				},
+				MaxSpeed:  ptr.Float64(1.0),
+				Occupancy: ptr.Int32(1),
+			},
+			Truck: &types.RouteMatrixTruckOptions{
+				AxleCount:   ptr.Int32(1),
+				GrossWeight: 1,
+				HazardousCargos: []types.RouteMatrixHazardousCargoType{
+					types.RouteMatrixHazardousCargoType("Combustible"),
+					types.RouteMatrixHazardousCargoType("Combustible"),
+				},
+				Height:     1,
+				KpraLength: 1,
+				Length:     1,
+				LicensePlate: &types.RouteMatrixVehicleLicensePlate{
+					LastCharacter: ptr.String("__LastCharacter__"),
+				},
+				MaxSpeed:        ptr.Float64(1.0),
+				Occupancy:       ptr.Int32(1),
+				PayloadCapacity: 1,
+				Trailer: &types.RouteMatrixTrailerOptions{
+					TrailerCount: ptr.Int32(1),
+				},
+				TruckType:             types.RouteMatrixTruckType("LightTruck"),
+				TunnelRestrictionCode: ptr.String("__TunnelRestrictionCode__"),
+				WeightPerAxle:         1,
+				WeightPerAxleGroup: &types.WeightPerAxleGroup{
+					Single: 1,
+					Tandem: 1,
+					Triple: 1,
+					Quad:   1,
+					Quint:  1,
+				},
+				Width: 1,
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13959,7 +14709,630 @@ func TestCheckResponseSnapshot_CalculateRoutes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CalculateRoutes(context.Background(), &CalculateRoutesInput{})
+	got, err := svc.CalculateRoutes(context.Background(), &CalculateRoutesInput{
+		Allow: &types.RouteAllowOptions{
+			Hot: ptr.Bool(true),
+			Hov: ptr.Bool(true),
+		},
+		ArrivalTime: ptr.String("__ArrivalTime__"),
+		Avoid: &types.RouteAvoidanceOptions{
+			Areas: []types.RouteAvoidanceArea{
+				{
+					Except: []types.RouteAvoidanceAreaGeometry{
+						{
+							Corridor: &types.Corridor{
+								LineString: [][]float64{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								Radius: ptr.Int32(1),
+							},
+							BoundingBox: []float64{
+								1.0,
+								1.0,
+							},
+							Polygon: [][][]float64{
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+							},
+							PolylineCorridor: &types.PolylineCorridor{
+								Polyline: ptr.String("__Polyline__"),
+								Radius:   ptr.Int32(1),
+							},
+							PolylinePolygon: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Corridor: &types.Corridor{
+								LineString: [][]float64{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								Radius: ptr.Int32(1),
+							},
+							BoundingBox: []float64{
+								1.0,
+								1.0,
+							},
+							Polygon: [][][]float64{
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+							},
+							PolylineCorridor: &types.PolylineCorridor{
+								Polyline: ptr.String("__Polyline__"),
+								Radius:   ptr.Int32(1),
+							},
+							PolylinePolygon: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					Geometry: &types.RouteAvoidanceAreaGeometry{
+						Corridor: &types.Corridor{
+							LineString: [][]float64{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							Radius: ptr.Int32(1),
+						},
+						BoundingBox: []float64{
+							1.0,
+							1.0,
+						},
+						Polygon: [][][]float64{
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+						},
+						PolylineCorridor: &types.PolylineCorridor{
+							Polyline: ptr.String("__Polyline__"),
+							Radius:   ptr.Int32(1),
+						},
+						PolylinePolygon: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					Except: []types.RouteAvoidanceAreaGeometry{
+						{
+							Corridor: &types.Corridor{
+								LineString: [][]float64{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								Radius: ptr.Int32(1),
+							},
+							BoundingBox: []float64{
+								1.0,
+								1.0,
+							},
+							Polygon: [][][]float64{
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+							},
+							PolylineCorridor: &types.PolylineCorridor{
+								Polyline: ptr.String("__Polyline__"),
+								Radius:   ptr.Int32(1),
+							},
+							PolylinePolygon: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Corridor: &types.Corridor{
+								LineString: [][]float64{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								Radius: ptr.Int32(1),
+							},
+							BoundingBox: []float64{
+								1.0,
+								1.0,
+							},
+							Polygon: [][][]float64{
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+							},
+							PolylineCorridor: &types.PolylineCorridor{
+								Polyline: ptr.String("__Polyline__"),
+								Radius:   ptr.Int32(1),
+							},
+							PolylinePolygon: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					Geometry: &types.RouteAvoidanceAreaGeometry{
+						Corridor: &types.Corridor{
+							LineString: [][]float64{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							Radius: ptr.Int32(1),
+						},
+						BoundingBox: []float64{
+							1.0,
+							1.0,
+						},
+						Polygon: [][][]float64{
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+						},
+						PolylineCorridor: &types.PolylineCorridor{
+							Polyline: ptr.String("__Polyline__"),
+							Radius:   ptr.Int32(1),
+						},
+						PolylinePolygon: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			CarShuttleTrains:         ptr.Bool(true),
+			ControlledAccessHighways: ptr.Bool(true),
+			DirtRoads:                ptr.Bool(true),
+			Ferries:                  ptr.Bool(true),
+			SeasonalClosure:          ptr.Bool(true),
+			TollRoads:                ptr.Bool(true),
+			TollTransponders:         ptr.Bool(true),
+			TruckRoadTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Tunnels: ptr.Bool(true),
+			UTurns:  ptr.Bool(true),
+			ZoneCategories: []types.RouteAvoidanceZoneCategory{
+				{
+					Category: types.RouteZoneCategory("CongestionPricing"),
+				},
+				{
+					Category: types.RouteZoneCategory("CongestionPricing"),
+				},
+			},
+		},
+		DepartNow:     ptr.Bool(true),
+		DepartureTime: ptr.String("__DepartureTime__"),
+		Destination: []float64{
+			1.0,
+			1.0,
+		},
+		DestinationOptions: &types.RouteDestinationOptions{
+			AvoidActionsForDistance: 1,
+			AvoidUTurns:             ptr.Bool(true),
+			Heading:                 1.0,
+			Matching: &types.RouteMatchingOptions{
+				NameHint:        ptr.String("__NameHint__"),
+				OnRoadThreshold: 1,
+				Radius:          1,
+				Strategy:        types.MatchingStrategy("MatchAny"),
+			},
+			SideOfStreet: &types.RouteSideOfStreetOptions{
+				Position: []float64{
+					1.0,
+					1.0,
+				},
+				UseWith: types.SideOfStreetMatchingStrategy("AnyStreet"),
+			},
+			StopDuration: 1,
+		},
+		Driver: &types.RouteDriverOptions{
+			Schedule: []types.RouteDriverScheduleInterval{
+				{
+					DriveDuration: 1,
+					RestDuration:  1,
+				},
+				{
+					DriveDuration: 1,
+					RestDuration:  1,
+				},
+			},
+		},
+		Exclude: &types.RouteExclusionOptions{
+			Countries: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		InstructionsMeasurementSystem: types.MeasurementSystem("Metric"),
+		Key:                           ptr.String("__Key__"),
+		Languages: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LegAdditionalFeatures: []types.RouteLegAdditionalFeature{
+			types.RouteLegAdditionalFeature("Elevation"),
+			types.RouteLegAdditionalFeature("Elevation"),
+		},
+		LegGeometryFormat:  types.GeometryFormat("FlexiblePolyline"),
+		MaxAlternatives:    ptr.Int32(1),
+		OptimizeRoutingFor: types.RoutingObjective("FastestRoute"),
+		Origin: []float64{
+			1.0,
+			1.0,
+		},
+		OriginOptions: &types.RouteOriginOptions{
+			AvoidActionsForDistance: 1,
+			AvoidUTurns:             ptr.Bool(true),
+			Heading:                 1.0,
+			Matching: &types.RouteMatchingOptions{
+				NameHint:        ptr.String("__NameHint__"),
+				OnRoadThreshold: 1,
+				Radius:          1,
+				Strategy:        types.MatchingStrategy("MatchAny"),
+			},
+			SideOfStreet: &types.RouteSideOfStreetOptions{
+				Position: []float64{
+					1.0,
+					1.0,
+				},
+				UseWith: types.SideOfStreetMatchingStrategy("AnyStreet"),
+			},
+		},
+		SpanAdditionalFeatures: []types.RouteSpanAdditionalFeature{
+			types.RouteSpanAdditionalFeature("BestCaseDuration"),
+			types.RouteSpanAdditionalFeature("BestCaseDuration"),
+		},
+		Tolls: &types.RouteTollOptions{
+			AllTransponders: ptr.Bool(true),
+			AllVignettes:    ptr.Bool(true),
+			Currency:        ptr.String("__Currency__"),
+			EmissionType: &types.RouteEmissionType{
+				Co2EmissionClass: ptr.String("__Co2EmissionClass__"),
+				Type:             ptr.String("__Type__"),
+			},
+			VehicleCategory: types.RouteTollVehicleCategory("Minibus"),
+		},
+		Traffic: &types.RouteTrafficOptions{
+			FlowEventThresholdOverride: 1,
+			Usage:                      types.TrafficUsage("IgnoreTrafficData"),
+		},
+		TravelMode: types.RouteTravelMode("Car"),
+		TravelModeOptions: &types.RouteTravelModeOptions{
+			Car: &types.RouteCarOptions{
+				EngineType: types.RouteEngineType("Electric"),
+				LicensePlate: &types.RouteVehicleLicensePlate{
+					LastCharacter: ptr.String("__LastCharacter__"),
+				},
+				MaxSpeed:  ptr.Float64(1.0),
+				Occupancy: ptr.Int32(1),
+			},
+			Pedestrian: &types.RoutePedestrianOptions{
+				Speed: ptr.Float64(1.0),
+			},
+			Scooter: &types.RouteScooterOptions{
+				EngineType: types.RouteEngineType("Electric"),
+				LicensePlate: &types.RouteVehicleLicensePlate{
+					LastCharacter: ptr.String("__LastCharacter__"),
+				},
+				MaxSpeed:  ptr.Float64(1.0),
+				Occupancy: ptr.Int32(1),
+			},
+			Truck: &types.RouteTruckOptions{
+				AxleCount:   ptr.Int32(1),
+				EngineType:  types.RouteEngineType("Electric"),
+				GrossWeight: 1,
+				HazardousCargos: []types.RouteHazardousCargoType{
+					types.RouteHazardousCargoType("Combustible"),
+					types.RouteHazardousCargoType("Combustible"),
+				},
+				Height:               1,
+				HeightAboveFirstAxle: 1,
+				KpraLength:           1,
+				Length:               1,
+				LicensePlate: &types.RouteVehicleLicensePlate{
+					LastCharacter: ptr.String("__LastCharacter__"),
+				},
+				MaxSpeed:        ptr.Float64(1.0),
+				Occupancy:       ptr.Int32(1),
+				PayloadCapacity: 1,
+				TireCount:       ptr.Int32(1),
+				Trailer: &types.RouteTrailerOptions{
+					AxleCount:    ptr.Int32(1),
+					TrailerCount: ptr.Int32(1),
+				},
+				TruckType:             types.RouteTruckType("LightTruck"),
+				TunnelRestrictionCode: ptr.String("__TunnelRestrictionCode__"),
+				WeightPerAxle:         1,
+				WeightPerAxleGroup: &types.WeightPerAxleGroup{
+					Single: 1,
+					Tandem: 1,
+					Triple: 1,
+					Quad:   1,
+					Quint:  1,
+				},
+				Width: 1,
+			},
+			Intermodal: &types.RouteIntermodalOptions{
+				AccessibilityAttributes: []types.RouteAccessibilityAttribute{
+					types.RouteAccessibilityAttribute("Wheelchair"),
+					types.RouteAccessibilityAttribute("Wheelchair"),
+				},
+				MaxTransfers: ptr.Int32(1),
+				Pedestrian: &types.RouteIntermodalPedestrianOptions{
+					MaxDistance: ptr.Int64(1),
+					Speed:       ptr.Float64(1.0),
+				},
+				Rental: &types.RouteIntermodalRentalOptions{
+					AllowedModes: []types.RouteRentalMode{
+						types.RouteRentalMode("All"),
+						types.RouteRentalMode("All"),
+					},
+					EnabledFor: []types.RouteIntermodalEnabledLegs{
+						types.RouteIntermodalEnabledLegs("FirstLeg"),
+						types.RouteIntermodalEnabledLegs("FirstLeg"),
+					},
+					ExcludedModes: []types.RouteRentalMode{
+						types.RouteRentalMode("All"),
+						types.RouteRentalMode("All"),
+					},
+				},
+				Taxi: &types.RouteIntermodalTaxiOptions{
+					AllowedModes: []types.RouteTaxiMode{
+						types.RouteTaxiMode("All"),
+						types.RouteTaxiMode("All"),
+					},
+					EnabledFor: []types.RouteIntermodalEnabledLegs{
+						types.RouteIntermodalEnabledLegs("FirstLeg"),
+						types.RouteIntermodalEnabledLegs("FirstLeg"),
+					},
+					ExcludedModes: []types.RouteTaxiMode{
+						types.RouteTaxiMode("All"),
+						types.RouteTaxiMode("All"),
+					},
+				},
+				Transit: &types.RouteIntermodalTransitOptions{
+					AllowedModes: []types.RouteTransitMode{
+						types.RouteTransitMode("AerialTramway"),
+						types.RouteTransitMode("AerialTramway"),
+					},
+					EnabledFor: []types.RouteIntermodalEnabledLegs{
+						types.RouteIntermodalEnabledLegs("FirstLeg"),
+						types.RouteIntermodalEnabledLegs("FirstLeg"),
+					},
+					ExcludedModes: []types.RouteTransitMode{
+						types.RouteTransitMode("AerialTramway"),
+						types.RouteTransitMode("AerialTramway"),
+					},
+				},
+				Vehicle: &types.RouteIntermodalVehicleOptions{
+					AllowedModes: []types.RouteVehicleMode{
+						types.RouteVehicleMode("All"),
+						types.RouteVehicleMode("All"),
+					},
+					EnabledFor: []types.RouteIntermodalEnabledLegs{
+						types.RouteIntermodalEnabledLegs("FirstLeg"),
+						types.RouteIntermodalEnabledLegs("FirstLeg"),
+					},
+					ExcludedModes: []types.RouteVehicleMode{
+						types.RouteVehicleMode("All"),
+						types.RouteVehicleMode("All"),
+					},
+				},
+			},
+			Transit: &types.RouteTransitOptions{
+				AccessibilityAttributes: []types.RouteAccessibilityAttribute{
+					types.RouteAccessibilityAttribute("Wheelchair"),
+					types.RouteAccessibilityAttribute("Wheelchair"),
+				},
+				AllowedModes: []types.RouteTransitMode{
+					types.RouteTransitMode("AerialTramway"),
+					types.RouteTransitMode("AerialTramway"),
+				},
+				ExcludedModes: []types.RouteTransitMode{
+					types.RouteTransitMode("AerialTramway"),
+					types.RouteTransitMode("AerialTramway"),
+				},
+				MaxTransfers: ptr.Int32(1),
+				Pedestrian: &types.RouteTransitPedestrianOptions{
+					MaxDistance: ptr.Int64(1),
+					Speed:       ptr.Float64(1.0),
+				},
+			},
+		},
+		TravelStepType: types.RouteTravelStepType("Default"),
+		Waypoints: []types.RouteWaypoint{
+			{
+				AvoidActionsForDistance: 1,
+				AvoidUTurns:             ptr.Bool(true),
+				Heading:                 1.0,
+				Matching: &types.RouteMatchingOptions{
+					NameHint:        ptr.String("__NameHint__"),
+					OnRoadThreshold: 1,
+					Radius:          1,
+					Strategy:        types.MatchingStrategy("MatchAny"),
+				},
+				PassThrough: ptr.Bool(true),
+				Position: []float64{
+					1.0,
+					1.0,
+				},
+				SideOfStreet: &types.RouteSideOfStreetOptions{
+					Position: []float64{
+						1.0,
+						1.0,
+					},
+					UseWith: types.SideOfStreetMatchingStrategy("AnyStreet"),
+				},
+				StopDuration: 1,
+			},
+			{
+				AvoidActionsForDistance: 1,
+				AvoidUTurns:             ptr.Bool(true),
+				Heading:                 1.0,
+				Matching: &types.RouteMatchingOptions{
+					NameHint:        ptr.String("__NameHint__"),
+					OnRoadThreshold: 1,
+					Radius:          1,
+					Strategy:        types.MatchingStrategy("MatchAny"),
+				},
+				PassThrough: ptr.Bool(true),
+				Position: []float64{
+					1.0,
+					1.0,
+				},
+				SideOfStreet: &types.RouteSideOfStreetOptions{
+					Position: []float64{
+						1.0,
+						1.0,
+					},
+					UseWith: types.SideOfStreetMatchingStrategy("AnyStreet"),
+				},
+				StopDuration: 1,
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14064,7 +15437,189 @@ func TestCheckResponseSnapshot_OptimizeWaypoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.OptimizeWaypoints(context.Background(), &OptimizeWaypointsInput{})
+	got, err := svc.OptimizeWaypoints(context.Background(), &OptimizeWaypointsInput{
+		Avoid: &types.WaypointOptimizationAvoidanceOptions{
+			Areas: []types.WaypointOptimizationAvoidanceArea{
+				{
+					Geometry: &types.WaypointOptimizationAvoidanceAreaGeometry{
+						BoundingBox: []float64{
+							1.0,
+							1.0,
+						},
+					},
+				},
+				{
+					Geometry: &types.WaypointOptimizationAvoidanceAreaGeometry{
+						BoundingBox: []float64{
+							1.0,
+							1.0,
+						},
+					},
+				},
+			},
+			CarShuttleTrains:         ptr.Bool(true),
+			ControlledAccessHighways: ptr.Bool(true),
+			DirtRoads:                ptr.Bool(true),
+			Ferries:                  ptr.Bool(true),
+			TollRoads:                ptr.Bool(true),
+			Tunnels:                  ptr.Bool(true),
+			UTurns:                   ptr.Bool(true),
+		},
+		Clustering: &types.WaypointOptimizationClusteringOptions{
+			Algorithm: types.WaypointOptimizationClusteringAlgorithm("DrivingDistance"),
+			DrivingDistanceOptions: &types.WaypointOptimizationDrivingDistanceOptions{
+				DrivingDistance: ptr.Int64(1),
+			},
+		},
+		DepartureTime: ptr.String("__DepartureTime__"),
+		Destination: []float64{
+			1.0,
+			1.0,
+		},
+		DestinationOptions: &types.WaypointOptimizationDestinationOptions{
+			AccessHours: &types.WaypointOptimizationAccessHours{
+				From: &types.WaypointOptimizationAccessHoursEntry{
+					DayOfWeek: types.DayOfWeek("Monday"),
+					TimeOfDay: ptr.String("__TimeOfDay__"),
+				},
+				To: &types.WaypointOptimizationAccessHoursEntry{
+					DayOfWeek: types.DayOfWeek("Monday"),
+					TimeOfDay: ptr.String("__TimeOfDay__"),
+				},
+			},
+			AppointmentTime: ptr.String("__AppointmentTime__"),
+			Heading:         1.0,
+			Id:              ptr.String("__Id__"),
+			ServiceDuration: 1,
+			SideOfStreet: &types.WaypointOptimizationSideOfStreetOptions{
+				Position: []float64{
+					1.0,
+					1.0,
+				},
+				UseWith: types.SideOfStreetMatchingStrategy("AnyStreet"),
+			},
+		},
+		Driver: &types.WaypointOptimizationDriverOptions{
+			RestCycles: &types.WaypointOptimizationRestCycles{
+				LongCycle: &types.WaypointOptimizationRestCycleDurations{
+					RestDuration: 1,
+					WorkDuration: 1,
+				},
+				ShortCycle: &types.WaypointOptimizationRestCycleDurations{
+					RestDuration: 1,
+					WorkDuration: 1,
+				},
+			},
+			RestProfile: &types.WaypointOptimizationRestProfile{
+				Profile: ptr.String("__Profile__"),
+			},
+			TreatServiceTimeAs: types.WaypointOptimizationServiceTimeTreatment("Rest"),
+		},
+		Exclude: &types.WaypointOptimizationExclusionOptions{
+			Countries: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Key:                   ptr.String("__Key__"),
+		OptimizeSequencingFor: types.WaypointOptimizationSequencingObjective("FastestRoute"),
+		Origin: []float64{
+			1.0,
+			1.0,
+		},
+		OriginOptions: &types.WaypointOptimizationOriginOptions{
+			Id: ptr.String("__Id__"),
+		},
+		Traffic: &types.WaypointOptimizationTrafficOptions{
+			Usage: types.TrafficUsage("IgnoreTrafficData"),
+		},
+		TravelMode: types.WaypointOptimizationTravelMode("Car"),
+		TravelModeOptions: &types.WaypointOptimizationTravelModeOptions{
+			Pedestrian: &types.WaypointOptimizationPedestrianOptions{
+				Speed: ptr.Float64(1.0),
+			},
+			Truck: &types.WaypointOptimizationTruckOptions{
+				GrossWeight: 1,
+				HazardousCargos: []types.WaypointOptimizationHazardousCargoType{
+					types.WaypointOptimizationHazardousCargoType("Combustible"),
+					types.WaypointOptimizationHazardousCargoType("Combustible"),
+				},
+				Height: 1,
+				Length: 1,
+				Trailer: &types.WaypointOptimizationTrailerOptions{
+					TrailerCount: ptr.Int32(1),
+				},
+				TruckType:             types.WaypointOptimizationTruckType("StraightTruck"),
+				TunnelRestrictionCode: ptr.String("__TunnelRestrictionCode__"),
+				WeightPerAxle:         1,
+				Width:                 1,
+			},
+		},
+		Waypoints: []types.WaypointOptimizationWaypoint{
+			{
+				AccessHours: &types.WaypointOptimizationAccessHours{
+					From: &types.WaypointOptimizationAccessHoursEntry{
+						DayOfWeek: types.DayOfWeek("Monday"),
+						TimeOfDay: ptr.String("__TimeOfDay__"),
+					},
+					To: &types.WaypointOptimizationAccessHoursEntry{
+						DayOfWeek: types.DayOfWeek("Monday"),
+						TimeOfDay: ptr.String("__TimeOfDay__"),
+					},
+				},
+				AppointmentTime: ptr.String("__AppointmentTime__"),
+				Before: []int32{
+					1,
+					1,
+				},
+				Heading: 1.0,
+				Id:      ptr.String("__Id__"),
+				Position: []float64{
+					1.0,
+					1.0,
+				},
+				ServiceDuration: 1,
+				SideOfStreet: &types.WaypointOptimizationSideOfStreetOptions{
+					Position: []float64{
+						1.0,
+						1.0,
+					},
+					UseWith: types.SideOfStreetMatchingStrategy("AnyStreet"),
+				},
+			},
+			{
+				AccessHours: &types.WaypointOptimizationAccessHours{
+					From: &types.WaypointOptimizationAccessHoursEntry{
+						DayOfWeek: types.DayOfWeek("Monday"),
+						TimeOfDay: ptr.String("__TimeOfDay__"),
+					},
+					To: &types.WaypointOptimizationAccessHoursEntry{
+						DayOfWeek: types.DayOfWeek("Monday"),
+						TimeOfDay: ptr.String("__TimeOfDay__"),
+					},
+				},
+				AppointmentTime: ptr.String("__AppointmentTime__"),
+				Before: []int32{
+					1,
+					1,
+				},
+				Heading: 1.0,
+				Id:      ptr.String("__Id__"),
+				Position: []float64{
+					1.0,
+					1.0,
+				},
+				ServiceDuration: 1,
+				SideOfStreet: &types.WaypointOptimizationSideOfStreetOptions{
+					Position: []float64{
+						1.0,
+						1.0,
+					},
+					UseWith: types.SideOfStreetMatchingStrategy("AnyStreet"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14141,7 +15696,48 @@ func TestCheckResponseSnapshot_SnapToRoads(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SnapToRoads(context.Background(), &SnapToRoadsInput{})
+	got, err := svc.SnapToRoads(context.Background(), &SnapToRoadsInput{
+		Key:                   ptr.String("__Key__"),
+		SnappedGeometryFormat: types.GeometryFormat("FlexiblePolyline"),
+		SnapRadius:            1,
+		TracePoints: []types.RoadSnapTracePoint{
+			{
+				Heading: 1.0,
+				Position: []float64{
+					1.0,
+					1.0,
+				},
+				Speed:     1.0,
+				Timestamp: ptr.String("__Timestamp__"),
+			},
+			{
+				Heading: 1.0,
+				Position: []float64{
+					1.0,
+					1.0,
+				},
+				Speed:     1.0,
+				Timestamp: ptr.String("__Timestamp__"),
+			},
+		},
+		TravelMode: types.RoadSnapTravelMode("Car"),
+		TravelModeOptions: &types.RoadSnapTravelModeOptions{
+			Truck: &types.RoadSnapTruckOptions{
+				GrossWeight: 1,
+				HazardousCargos: []types.RoadSnapHazardousCargoType{
+					types.RoadSnapHazardousCargoType("Combustible"),
+					types.RoadSnapHazardousCargoType("Combustible"),
+				},
+				Height: 1,
+				Length: 1,
+				Trailer: &types.RoadSnapTrailerOptions{
+					TrailerCount: ptr.Int32(1),
+				},
+				TunnelRestrictionCode: ptr.String("__TunnelRestrictionCode__"),
+				Width:                 1,
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14162,7 +15758,460 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CalculateIsolines(context.Background(), &CalculateIsolinesInput{})
+	_, opErr := svc.CalculateIsolines(context.Background(), &CalculateIsolinesInput{
+		Allow: &types.IsolineAllowOptions{
+			Hot: ptr.Bool(true),
+			Hov: ptr.Bool(true),
+		},
+		ArrivalTime: ptr.String("__ArrivalTime__"),
+		Avoid: &types.IsolineAvoidanceOptions{
+			Areas: []types.IsolineAvoidanceArea{
+				{
+					Except: []types.IsolineAvoidanceAreaGeometry{
+						{
+							BoundingBox: []float64{
+								1.0,
+								1.0,
+							},
+							Corridor: &types.Corridor{
+								LineString: [][]float64{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								Radius: ptr.Int32(1),
+							},
+							Polygon: [][][]float64{
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+							},
+							PolylineCorridor: &types.PolylineCorridor{
+								Polyline: ptr.String("__Polyline__"),
+								Radius:   ptr.Int32(1),
+							},
+							PolylinePolygon: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							BoundingBox: []float64{
+								1.0,
+								1.0,
+							},
+							Corridor: &types.Corridor{
+								LineString: [][]float64{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								Radius: ptr.Int32(1),
+							},
+							Polygon: [][][]float64{
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+							},
+							PolylineCorridor: &types.PolylineCorridor{
+								Polyline: ptr.String("__Polyline__"),
+								Radius:   ptr.Int32(1),
+							},
+							PolylinePolygon: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					Geometry: &types.IsolineAvoidanceAreaGeometry{
+						BoundingBox: []float64{
+							1.0,
+							1.0,
+						},
+						Corridor: &types.Corridor{
+							LineString: [][]float64{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							Radius: ptr.Int32(1),
+						},
+						Polygon: [][][]float64{
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+						},
+						PolylineCorridor: &types.PolylineCorridor{
+							Polyline: ptr.String("__Polyline__"),
+							Radius:   ptr.Int32(1),
+						},
+						PolylinePolygon: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					Except: []types.IsolineAvoidanceAreaGeometry{
+						{
+							BoundingBox: []float64{
+								1.0,
+								1.0,
+							},
+							Corridor: &types.Corridor{
+								LineString: [][]float64{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								Radius: ptr.Int32(1),
+							},
+							Polygon: [][][]float64{
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+							},
+							PolylineCorridor: &types.PolylineCorridor{
+								Polyline: ptr.String("__Polyline__"),
+								Radius:   ptr.Int32(1),
+							},
+							PolylinePolygon: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							BoundingBox: []float64{
+								1.0,
+								1.0,
+							},
+							Corridor: &types.Corridor{
+								LineString: [][]float64{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								Radius: ptr.Int32(1),
+							},
+							Polygon: [][][]float64{
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+							},
+							PolylineCorridor: &types.PolylineCorridor{
+								Polyline: ptr.String("__Polyline__"),
+								Radius:   ptr.Int32(1),
+							},
+							PolylinePolygon: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					Geometry: &types.IsolineAvoidanceAreaGeometry{
+						BoundingBox: []float64{
+							1.0,
+							1.0,
+						},
+						Corridor: &types.Corridor{
+							LineString: [][]float64{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							Radius: ptr.Int32(1),
+						},
+						Polygon: [][][]float64{
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+						},
+						PolylineCorridor: &types.PolylineCorridor{
+							Polyline: ptr.String("__Polyline__"),
+							Radius:   ptr.Int32(1),
+						},
+						PolylinePolygon: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			CarShuttleTrains:         ptr.Bool(true),
+			ControlledAccessHighways: ptr.Bool(true),
+			DirtRoads:                ptr.Bool(true),
+			Ferries:                  ptr.Bool(true),
+			SeasonalClosure:          ptr.Bool(true),
+			TollRoads:                ptr.Bool(true),
+			TollTransponders:         ptr.Bool(true),
+			TruckRoadTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Tunnels: ptr.Bool(true),
+			UTurns:  ptr.Bool(true),
+			ZoneCategories: []types.IsolineAvoidanceZoneCategory{
+				{
+					Category: types.IsolineZoneCategory("CongestionPricing"),
+				},
+				{
+					Category: types.IsolineZoneCategory("CongestionPricing"),
+				},
+			},
+		},
+		DepartNow:     ptr.Bool(true),
+		DepartureTime: ptr.String("__DepartureTime__"),
+		Destination: []float64{
+			1.0,
+			1.0,
+		},
+		DestinationOptions: &types.IsolineDestinationOptions{
+			AvoidActionsForDistance: 1,
+			Heading:                 1.0,
+			Matching: &types.IsolineMatchingOptions{
+				NameHint:        ptr.String("__NameHint__"),
+				OnRoadThreshold: 1,
+				Radius:          1,
+				Strategy:        types.MatchingStrategy("MatchAny"),
+			},
+			SideOfStreet: &types.IsolineSideOfStreetOptions{
+				Position: []float64{
+					1.0,
+					1.0,
+				},
+				UseWith: types.SideOfStreetMatchingStrategy("AnyStreet"),
+			},
+		},
+		IsolineGeometryFormat: types.GeometryFormat("FlexiblePolyline"),
+		IsolineGranularity: &types.IsolineGranularityOptions{
+			MaxPoints:     ptr.Int32(1),
+			MaxResolution: 1,
+		},
+		Key:                ptr.String("__Key__"),
+		OptimizeIsolineFor: types.IsolineOptimizationObjective("AccurateCalculation"),
+		OptimizeRoutingFor: types.RoutingObjective("FastestRoute"),
+		Origin: []float64{
+			1.0,
+			1.0,
+		},
+		OriginOptions: &types.IsolineOriginOptions{
+			AvoidActionsForDistance: 1,
+			Heading:                 1.0,
+			Matching: &types.IsolineMatchingOptions{
+				NameHint:        ptr.String("__NameHint__"),
+				OnRoadThreshold: 1,
+				Radius:          1,
+				Strategy:        types.MatchingStrategy("MatchAny"),
+			},
+			SideOfStreet: &types.IsolineSideOfStreetOptions{
+				Position: []float64{
+					1.0,
+					1.0,
+				},
+				UseWith: types.SideOfStreetMatchingStrategy("AnyStreet"),
+			},
+		},
+		Thresholds: &types.IsolineThresholds{
+			Distance: []int64{
+				1,
+				1,
+			},
+			Time: []int64{
+				1,
+				1,
+			},
+		},
+		Traffic: &types.IsolineTrafficOptions{
+			FlowEventThresholdOverride: 1,
+			Usage:                      types.TrafficUsage("IgnoreTrafficData"),
+		},
+		TravelMode: types.IsolineTravelMode("Car"),
+		TravelModeOptions: &types.IsolineTravelModeOptions{
+			Car: &types.IsolineCarOptions{
+				EngineType: types.IsolineEngineType("Electric"),
+				LicensePlate: &types.IsolineVehicleLicensePlate{
+					LastCharacter: ptr.String("__LastCharacter__"),
+				},
+				MaxSpeed:  ptr.Float64(1.0),
+				Occupancy: ptr.Int32(1),
+			},
+			Scooter: &types.IsolineScooterOptions{
+				EngineType: types.IsolineEngineType("Electric"),
+				LicensePlate: &types.IsolineVehicleLicensePlate{
+					LastCharacter: ptr.String("__LastCharacter__"),
+				},
+				MaxSpeed:  ptr.Float64(1.0),
+				Occupancy: ptr.Int32(1),
+			},
+			Truck: &types.IsolineTruckOptions{
+				AxleCount:   ptr.Int32(1),
+				EngineType:  types.IsolineEngineType("Electric"),
+				GrossWeight: 1,
+				HazardousCargos: []types.IsolineHazardousCargoType{
+					types.IsolineHazardousCargoType("Combustible"),
+					types.IsolineHazardousCargoType("Combustible"),
+				},
+				Height:               1,
+				HeightAboveFirstAxle: 1,
+				KpraLength:           1,
+				Length:               1,
+				LicensePlate: &types.IsolineVehicleLicensePlate{
+					LastCharacter: ptr.String("__LastCharacter__"),
+				},
+				MaxSpeed:        ptr.Float64(1.0),
+				Occupancy:       ptr.Int32(1),
+				PayloadCapacity: 1,
+				TireCount:       ptr.Int32(1),
+				Trailer: &types.IsolineTrailerOptions{
+					AxleCount:    ptr.Int32(1),
+					TrailerCount: ptr.Int32(1),
+				},
+				TruckType:             types.IsolineTruckType("LightTruck"),
+				TunnelRestrictionCode: ptr.String("__TunnelRestrictionCode__"),
+				WeightPerAxle:         1,
+				WeightPerAxleGroup: &types.WeightPerAxleGroup{
+					Single: 1,
+					Tandem: 1,
+					Triple: 1,
+					Quad:   1,
+					Quint:  1,
+				},
+				Width: 1,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -14187,7 +16236,460 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CalculateIsolines(context.Background(), &CalculateIsolinesInput{})
+	_, opErr := svc.CalculateIsolines(context.Background(), &CalculateIsolinesInput{
+		Allow: &types.IsolineAllowOptions{
+			Hot: ptr.Bool(true),
+			Hov: ptr.Bool(true),
+		},
+		ArrivalTime: ptr.String("__ArrivalTime__"),
+		Avoid: &types.IsolineAvoidanceOptions{
+			Areas: []types.IsolineAvoidanceArea{
+				{
+					Except: []types.IsolineAvoidanceAreaGeometry{
+						{
+							BoundingBox: []float64{
+								1.0,
+								1.0,
+							},
+							Corridor: &types.Corridor{
+								LineString: [][]float64{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								Radius: ptr.Int32(1),
+							},
+							Polygon: [][][]float64{
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+							},
+							PolylineCorridor: &types.PolylineCorridor{
+								Polyline: ptr.String("__Polyline__"),
+								Radius:   ptr.Int32(1),
+							},
+							PolylinePolygon: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							BoundingBox: []float64{
+								1.0,
+								1.0,
+							},
+							Corridor: &types.Corridor{
+								LineString: [][]float64{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								Radius: ptr.Int32(1),
+							},
+							Polygon: [][][]float64{
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+							},
+							PolylineCorridor: &types.PolylineCorridor{
+								Polyline: ptr.String("__Polyline__"),
+								Radius:   ptr.Int32(1),
+							},
+							PolylinePolygon: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					Geometry: &types.IsolineAvoidanceAreaGeometry{
+						BoundingBox: []float64{
+							1.0,
+							1.0,
+						},
+						Corridor: &types.Corridor{
+							LineString: [][]float64{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							Radius: ptr.Int32(1),
+						},
+						Polygon: [][][]float64{
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+						},
+						PolylineCorridor: &types.PolylineCorridor{
+							Polyline: ptr.String("__Polyline__"),
+							Radius:   ptr.Int32(1),
+						},
+						PolylinePolygon: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					Except: []types.IsolineAvoidanceAreaGeometry{
+						{
+							BoundingBox: []float64{
+								1.0,
+								1.0,
+							},
+							Corridor: &types.Corridor{
+								LineString: [][]float64{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								Radius: ptr.Int32(1),
+							},
+							Polygon: [][][]float64{
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+							},
+							PolylineCorridor: &types.PolylineCorridor{
+								Polyline: ptr.String("__Polyline__"),
+								Radius:   ptr.Int32(1),
+							},
+							PolylinePolygon: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							BoundingBox: []float64{
+								1.0,
+								1.0,
+							},
+							Corridor: &types.Corridor{
+								LineString: [][]float64{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								Radius: ptr.Int32(1),
+							},
+							Polygon: [][][]float64{
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+							},
+							PolylineCorridor: &types.PolylineCorridor{
+								Polyline: ptr.String("__Polyline__"),
+								Radius:   ptr.Int32(1),
+							},
+							PolylinePolygon: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					Geometry: &types.IsolineAvoidanceAreaGeometry{
+						BoundingBox: []float64{
+							1.0,
+							1.0,
+						},
+						Corridor: &types.Corridor{
+							LineString: [][]float64{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							Radius: ptr.Int32(1),
+						},
+						Polygon: [][][]float64{
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+						},
+						PolylineCorridor: &types.PolylineCorridor{
+							Polyline: ptr.String("__Polyline__"),
+							Radius:   ptr.Int32(1),
+						},
+						PolylinePolygon: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			CarShuttleTrains:         ptr.Bool(true),
+			ControlledAccessHighways: ptr.Bool(true),
+			DirtRoads:                ptr.Bool(true),
+			Ferries:                  ptr.Bool(true),
+			SeasonalClosure:          ptr.Bool(true),
+			TollRoads:                ptr.Bool(true),
+			TollTransponders:         ptr.Bool(true),
+			TruckRoadTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Tunnels: ptr.Bool(true),
+			UTurns:  ptr.Bool(true),
+			ZoneCategories: []types.IsolineAvoidanceZoneCategory{
+				{
+					Category: types.IsolineZoneCategory("CongestionPricing"),
+				},
+				{
+					Category: types.IsolineZoneCategory("CongestionPricing"),
+				},
+			},
+		},
+		DepartNow:     ptr.Bool(true),
+		DepartureTime: ptr.String("__DepartureTime__"),
+		Destination: []float64{
+			1.0,
+			1.0,
+		},
+		DestinationOptions: &types.IsolineDestinationOptions{
+			AvoidActionsForDistance: 1,
+			Heading:                 1.0,
+			Matching: &types.IsolineMatchingOptions{
+				NameHint:        ptr.String("__NameHint__"),
+				OnRoadThreshold: 1,
+				Radius:          1,
+				Strategy:        types.MatchingStrategy("MatchAny"),
+			},
+			SideOfStreet: &types.IsolineSideOfStreetOptions{
+				Position: []float64{
+					1.0,
+					1.0,
+				},
+				UseWith: types.SideOfStreetMatchingStrategy("AnyStreet"),
+			},
+		},
+		IsolineGeometryFormat: types.GeometryFormat("FlexiblePolyline"),
+		IsolineGranularity: &types.IsolineGranularityOptions{
+			MaxPoints:     ptr.Int32(1),
+			MaxResolution: 1,
+		},
+		Key:                ptr.String("__Key__"),
+		OptimizeIsolineFor: types.IsolineOptimizationObjective("AccurateCalculation"),
+		OptimizeRoutingFor: types.RoutingObjective("FastestRoute"),
+		Origin: []float64{
+			1.0,
+			1.0,
+		},
+		OriginOptions: &types.IsolineOriginOptions{
+			AvoidActionsForDistance: 1,
+			Heading:                 1.0,
+			Matching: &types.IsolineMatchingOptions{
+				NameHint:        ptr.String("__NameHint__"),
+				OnRoadThreshold: 1,
+				Radius:          1,
+				Strategy:        types.MatchingStrategy("MatchAny"),
+			},
+			SideOfStreet: &types.IsolineSideOfStreetOptions{
+				Position: []float64{
+					1.0,
+					1.0,
+				},
+				UseWith: types.SideOfStreetMatchingStrategy("AnyStreet"),
+			},
+		},
+		Thresholds: &types.IsolineThresholds{
+			Distance: []int64{
+				1,
+				1,
+			},
+			Time: []int64{
+				1,
+				1,
+			},
+		},
+		Traffic: &types.IsolineTrafficOptions{
+			FlowEventThresholdOverride: 1,
+			Usage:                      types.TrafficUsage("IgnoreTrafficData"),
+		},
+		TravelMode: types.IsolineTravelMode("Car"),
+		TravelModeOptions: &types.IsolineTravelModeOptions{
+			Car: &types.IsolineCarOptions{
+				EngineType: types.IsolineEngineType("Electric"),
+				LicensePlate: &types.IsolineVehicleLicensePlate{
+					LastCharacter: ptr.String("__LastCharacter__"),
+				},
+				MaxSpeed:  ptr.Float64(1.0),
+				Occupancy: ptr.Int32(1),
+			},
+			Scooter: &types.IsolineScooterOptions{
+				EngineType: types.IsolineEngineType("Electric"),
+				LicensePlate: &types.IsolineVehicleLicensePlate{
+					LastCharacter: ptr.String("__LastCharacter__"),
+				},
+				MaxSpeed:  ptr.Float64(1.0),
+				Occupancy: ptr.Int32(1),
+			},
+			Truck: &types.IsolineTruckOptions{
+				AxleCount:   ptr.Int32(1),
+				EngineType:  types.IsolineEngineType("Electric"),
+				GrossWeight: 1,
+				HazardousCargos: []types.IsolineHazardousCargoType{
+					types.IsolineHazardousCargoType("Combustible"),
+					types.IsolineHazardousCargoType("Combustible"),
+				},
+				Height:               1,
+				HeightAboveFirstAxle: 1,
+				KpraLength:           1,
+				Length:               1,
+				LicensePlate: &types.IsolineVehicleLicensePlate{
+					LastCharacter: ptr.String("__LastCharacter__"),
+				},
+				MaxSpeed:        ptr.Float64(1.0),
+				Occupancy:       ptr.Int32(1),
+				PayloadCapacity: 1,
+				TireCount:       ptr.Int32(1),
+				Trailer: &types.IsolineTrailerOptions{
+					AxleCount:    ptr.Int32(1),
+					TrailerCount: ptr.Int32(1),
+				},
+				TruckType:             types.IsolineTruckType("LightTruck"),
+				TunnelRestrictionCode: ptr.String("__TunnelRestrictionCode__"),
+				WeightPerAxle:         1,
+				WeightPerAxleGroup: &types.WeightPerAxleGroup{
+					Single: 1,
+					Tandem: 1,
+					Triple: 1,
+					Quad:   1,
+					Quint:  1,
+				},
+				Width: 1,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -14212,7 +16714,460 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CalculateIsolines(context.Background(), &CalculateIsolinesInput{})
+	_, opErr := svc.CalculateIsolines(context.Background(), &CalculateIsolinesInput{
+		Allow: &types.IsolineAllowOptions{
+			Hot: ptr.Bool(true),
+			Hov: ptr.Bool(true),
+		},
+		ArrivalTime: ptr.String("__ArrivalTime__"),
+		Avoid: &types.IsolineAvoidanceOptions{
+			Areas: []types.IsolineAvoidanceArea{
+				{
+					Except: []types.IsolineAvoidanceAreaGeometry{
+						{
+							BoundingBox: []float64{
+								1.0,
+								1.0,
+							},
+							Corridor: &types.Corridor{
+								LineString: [][]float64{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								Radius: ptr.Int32(1),
+							},
+							Polygon: [][][]float64{
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+							},
+							PolylineCorridor: &types.PolylineCorridor{
+								Polyline: ptr.String("__Polyline__"),
+								Radius:   ptr.Int32(1),
+							},
+							PolylinePolygon: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							BoundingBox: []float64{
+								1.0,
+								1.0,
+							},
+							Corridor: &types.Corridor{
+								LineString: [][]float64{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								Radius: ptr.Int32(1),
+							},
+							Polygon: [][][]float64{
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+							},
+							PolylineCorridor: &types.PolylineCorridor{
+								Polyline: ptr.String("__Polyline__"),
+								Radius:   ptr.Int32(1),
+							},
+							PolylinePolygon: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					Geometry: &types.IsolineAvoidanceAreaGeometry{
+						BoundingBox: []float64{
+							1.0,
+							1.0,
+						},
+						Corridor: &types.Corridor{
+							LineString: [][]float64{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							Radius: ptr.Int32(1),
+						},
+						Polygon: [][][]float64{
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+						},
+						PolylineCorridor: &types.PolylineCorridor{
+							Polyline: ptr.String("__Polyline__"),
+							Radius:   ptr.Int32(1),
+						},
+						PolylinePolygon: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					Except: []types.IsolineAvoidanceAreaGeometry{
+						{
+							BoundingBox: []float64{
+								1.0,
+								1.0,
+							},
+							Corridor: &types.Corridor{
+								LineString: [][]float64{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								Radius: ptr.Int32(1),
+							},
+							Polygon: [][][]float64{
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+							},
+							PolylineCorridor: &types.PolylineCorridor{
+								Polyline: ptr.String("__Polyline__"),
+								Radius:   ptr.Int32(1),
+							},
+							PolylinePolygon: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							BoundingBox: []float64{
+								1.0,
+								1.0,
+							},
+							Corridor: &types.Corridor{
+								LineString: [][]float64{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								Radius: ptr.Int32(1),
+							},
+							Polygon: [][][]float64{
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+							},
+							PolylineCorridor: &types.PolylineCorridor{
+								Polyline: ptr.String("__Polyline__"),
+								Radius:   ptr.Int32(1),
+							},
+							PolylinePolygon: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					Geometry: &types.IsolineAvoidanceAreaGeometry{
+						BoundingBox: []float64{
+							1.0,
+							1.0,
+						},
+						Corridor: &types.Corridor{
+							LineString: [][]float64{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							Radius: ptr.Int32(1),
+						},
+						Polygon: [][][]float64{
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+						},
+						PolylineCorridor: &types.PolylineCorridor{
+							Polyline: ptr.String("__Polyline__"),
+							Radius:   ptr.Int32(1),
+						},
+						PolylinePolygon: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			CarShuttleTrains:         ptr.Bool(true),
+			ControlledAccessHighways: ptr.Bool(true),
+			DirtRoads:                ptr.Bool(true),
+			Ferries:                  ptr.Bool(true),
+			SeasonalClosure:          ptr.Bool(true),
+			TollRoads:                ptr.Bool(true),
+			TollTransponders:         ptr.Bool(true),
+			TruckRoadTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Tunnels: ptr.Bool(true),
+			UTurns:  ptr.Bool(true),
+			ZoneCategories: []types.IsolineAvoidanceZoneCategory{
+				{
+					Category: types.IsolineZoneCategory("CongestionPricing"),
+				},
+				{
+					Category: types.IsolineZoneCategory("CongestionPricing"),
+				},
+			},
+		},
+		DepartNow:     ptr.Bool(true),
+		DepartureTime: ptr.String("__DepartureTime__"),
+		Destination: []float64{
+			1.0,
+			1.0,
+		},
+		DestinationOptions: &types.IsolineDestinationOptions{
+			AvoidActionsForDistance: 1,
+			Heading:                 1.0,
+			Matching: &types.IsolineMatchingOptions{
+				NameHint:        ptr.String("__NameHint__"),
+				OnRoadThreshold: 1,
+				Radius:          1,
+				Strategy:        types.MatchingStrategy("MatchAny"),
+			},
+			SideOfStreet: &types.IsolineSideOfStreetOptions{
+				Position: []float64{
+					1.0,
+					1.0,
+				},
+				UseWith: types.SideOfStreetMatchingStrategy("AnyStreet"),
+			},
+		},
+		IsolineGeometryFormat: types.GeometryFormat("FlexiblePolyline"),
+		IsolineGranularity: &types.IsolineGranularityOptions{
+			MaxPoints:     ptr.Int32(1),
+			MaxResolution: 1,
+		},
+		Key:                ptr.String("__Key__"),
+		OptimizeIsolineFor: types.IsolineOptimizationObjective("AccurateCalculation"),
+		OptimizeRoutingFor: types.RoutingObjective("FastestRoute"),
+		Origin: []float64{
+			1.0,
+			1.0,
+		},
+		OriginOptions: &types.IsolineOriginOptions{
+			AvoidActionsForDistance: 1,
+			Heading:                 1.0,
+			Matching: &types.IsolineMatchingOptions{
+				NameHint:        ptr.String("__NameHint__"),
+				OnRoadThreshold: 1,
+				Radius:          1,
+				Strategy:        types.MatchingStrategy("MatchAny"),
+			},
+			SideOfStreet: &types.IsolineSideOfStreetOptions{
+				Position: []float64{
+					1.0,
+					1.0,
+				},
+				UseWith: types.SideOfStreetMatchingStrategy("AnyStreet"),
+			},
+		},
+		Thresholds: &types.IsolineThresholds{
+			Distance: []int64{
+				1,
+				1,
+			},
+			Time: []int64{
+				1,
+				1,
+			},
+		},
+		Traffic: &types.IsolineTrafficOptions{
+			FlowEventThresholdOverride: 1,
+			Usage:                      types.TrafficUsage("IgnoreTrafficData"),
+		},
+		TravelMode: types.IsolineTravelMode("Car"),
+		TravelModeOptions: &types.IsolineTravelModeOptions{
+			Car: &types.IsolineCarOptions{
+				EngineType: types.IsolineEngineType("Electric"),
+				LicensePlate: &types.IsolineVehicleLicensePlate{
+					LastCharacter: ptr.String("__LastCharacter__"),
+				},
+				MaxSpeed:  ptr.Float64(1.0),
+				Occupancy: ptr.Int32(1),
+			},
+			Scooter: &types.IsolineScooterOptions{
+				EngineType: types.IsolineEngineType("Electric"),
+				LicensePlate: &types.IsolineVehicleLicensePlate{
+					LastCharacter: ptr.String("__LastCharacter__"),
+				},
+				MaxSpeed:  ptr.Float64(1.0),
+				Occupancy: ptr.Int32(1),
+			},
+			Truck: &types.IsolineTruckOptions{
+				AxleCount:   ptr.Int32(1),
+				EngineType:  types.IsolineEngineType("Electric"),
+				GrossWeight: 1,
+				HazardousCargos: []types.IsolineHazardousCargoType{
+					types.IsolineHazardousCargoType("Combustible"),
+					types.IsolineHazardousCargoType("Combustible"),
+				},
+				Height:               1,
+				HeightAboveFirstAxle: 1,
+				KpraLength:           1,
+				Length:               1,
+				LicensePlate: &types.IsolineVehicleLicensePlate{
+					LastCharacter: ptr.String("__LastCharacter__"),
+				},
+				MaxSpeed:        ptr.Float64(1.0),
+				Occupancy:       ptr.Int32(1),
+				PayloadCapacity: 1,
+				TireCount:       ptr.Int32(1),
+				Trailer: &types.IsolineTrailerOptions{
+					AxleCount:    ptr.Int32(1),
+					TrailerCount: ptr.Int32(1),
+				},
+				TruckType:             types.IsolineTruckType("LightTruck"),
+				TunnelRestrictionCode: ptr.String("__TunnelRestrictionCode__"),
+				WeightPerAxle:         1,
+				WeightPerAxleGroup: &types.WeightPerAxleGroup{
+					Single: 1,
+					Tandem: 1,
+					Triple: 1,
+					Quad:   1,
+					Quint:  1,
+				},
+				Width: 1,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -14248,7 +17203,460 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CalculateIsolines(context.Background(), &CalculateIsolinesInput{})
+	_, opErr := svc.CalculateIsolines(context.Background(), &CalculateIsolinesInput{
+		Allow: &types.IsolineAllowOptions{
+			Hot: ptr.Bool(true),
+			Hov: ptr.Bool(true),
+		},
+		ArrivalTime: ptr.String("__ArrivalTime__"),
+		Avoid: &types.IsolineAvoidanceOptions{
+			Areas: []types.IsolineAvoidanceArea{
+				{
+					Except: []types.IsolineAvoidanceAreaGeometry{
+						{
+							BoundingBox: []float64{
+								1.0,
+								1.0,
+							},
+							Corridor: &types.Corridor{
+								LineString: [][]float64{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								Radius: ptr.Int32(1),
+							},
+							Polygon: [][][]float64{
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+							},
+							PolylineCorridor: &types.PolylineCorridor{
+								Polyline: ptr.String("__Polyline__"),
+								Radius:   ptr.Int32(1),
+							},
+							PolylinePolygon: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							BoundingBox: []float64{
+								1.0,
+								1.0,
+							},
+							Corridor: &types.Corridor{
+								LineString: [][]float64{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								Radius: ptr.Int32(1),
+							},
+							Polygon: [][][]float64{
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+							},
+							PolylineCorridor: &types.PolylineCorridor{
+								Polyline: ptr.String("__Polyline__"),
+								Radius:   ptr.Int32(1),
+							},
+							PolylinePolygon: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					Geometry: &types.IsolineAvoidanceAreaGeometry{
+						BoundingBox: []float64{
+							1.0,
+							1.0,
+						},
+						Corridor: &types.Corridor{
+							LineString: [][]float64{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							Radius: ptr.Int32(1),
+						},
+						Polygon: [][][]float64{
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+						},
+						PolylineCorridor: &types.PolylineCorridor{
+							Polyline: ptr.String("__Polyline__"),
+							Radius:   ptr.Int32(1),
+						},
+						PolylinePolygon: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					Except: []types.IsolineAvoidanceAreaGeometry{
+						{
+							BoundingBox: []float64{
+								1.0,
+								1.0,
+							},
+							Corridor: &types.Corridor{
+								LineString: [][]float64{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								Radius: ptr.Int32(1),
+							},
+							Polygon: [][][]float64{
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+							},
+							PolylineCorridor: &types.PolylineCorridor{
+								Polyline: ptr.String("__Polyline__"),
+								Radius:   ptr.Int32(1),
+							},
+							PolylinePolygon: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							BoundingBox: []float64{
+								1.0,
+								1.0,
+							},
+							Corridor: &types.Corridor{
+								LineString: [][]float64{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								Radius: ptr.Int32(1),
+							},
+							Polygon: [][][]float64{
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+								{
+									{
+										1.0,
+										1.0,
+									},
+									{
+										1.0,
+										1.0,
+									},
+								},
+							},
+							PolylineCorridor: &types.PolylineCorridor{
+								Polyline: ptr.String("__Polyline__"),
+								Radius:   ptr.Int32(1),
+							},
+							PolylinePolygon: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					Geometry: &types.IsolineAvoidanceAreaGeometry{
+						BoundingBox: []float64{
+							1.0,
+							1.0,
+						},
+						Corridor: &types.Corridor{
+							LineString: [][]float64{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							Radius: ptr.Int32(1),
+						},
+						Polygon: [][][]float64{
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+							{
+								{
+									1.0,
+									1.0,
+								},
+								{
+									1.0,
+									1.0,
+								},
+							},
+						},
+						PolylineCorridor: &types.PolylineCorridor{
+							Polyline: ptr.String("__Polyline__"),
+							Radius:   ptr.Int32(1),
+						},
+						PolylinePolygon: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			CarShuttleTrains:         ptr.Bool(true),
+			ControlledAccessHighways: ptr.Bool(true),
+			DirtRoads:                ptr.Bool(true),
+			Ferries:                  ptr.Bool(true),
+			SeasonalClosure:          ptr.Bool(true),
+			TollRoads:                ptr.Bool(true),
+			TollTransponders:         ptr.Bool(true),
+			TruckRoadTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Tunnels: ptr.Bool(true),
+			UTurns:  ptr.Bool(true),
+			ZoneCategories: []types.IsolineAvoidanceZoneCategory{
+				{
+					Category: types.IsolineZoneCategory("CongestionPricing"),
+				},
+				{
+					Category: types.IsolineZoneCategory("CongestionPricing"),
+				},
+			},
+		},
+		DepartNow:     ptr.Bool(true),
+		DepartureTime: ptr.String("__DepartureTime__"),
+		Destination: []float64{
+			1.0,
+			1.0,
+		},
+		DestinationOptions: &types.IsolineDestinationOptions{
+			AvoidActionsForDistance: 1,
+			Heading:                 1.0,
+			Matching: &types.IsolineMatchingOptions{
+				NameHint:        ptr.String("__NameHint__"),
+				OnRoadThreshold: 1,
+				Radius:          1,
+				Strategy:        types.MatchingStrategy("MatchAny"),
+			},
+			SideOfStreet: &types.IsolineSideOfStreetOptions{
+				Position: []float64{
+					1.0,
+					1.0,
+				},
+				UseWith: types.SideOfStreetMatchingStrategy("AnyStreet"),
+			},
+		},
+		IsolineGeometryFormat: types.GeometryFormat("FlexiblePolyline"),
+		IsolineGranularity: &types.IsolineGranularityOptions{
+			MaxPoints:     ptr.Int32(1),
+			MaxResolution: 1,
+		},
+		Key:                ptr.String("__Key__"),
+		OptimizeIsolineFor: types.IsolineOptimizationObjective("AccurateCalculation"),
+		OptimizeRoutingFor: types.RoutingObjective("FastestRoute"),
+		Origin: []float64{
+			1.0,
+			1.0,
+		},
+		OriginOptions: &types.IsolineOriginOptions{
+			AvoidActionsForDistance: 1,
+			Heading:                 1.0,
+			Matching: &types.IsolineMatchingOptions{
+				NameHint:        ptr.String("__NameHint__"),
+				OnRoadThreshold: 1,
+				Radius:          1,
+				Strategy:        types.MatchingStrategy("MatchAny"),
+			},
+			SideOfStreet: &types.IsolineSideOfStreetOptions{
+				Position: []float64{
+					1.0,
+					1.0,
+				},
+				UseWith: types.SideOfStreetMatchingStrategy("AnyStreet"),
+			},
+		},
+		Thresholds: &types.IsolineThresholds{
+			Distance: []int64{
+				1,
+				1,
+			},
+			Time: []int64{
+				1,
+				1,
+			},
+		},
+		Traffic: &types.IsolineTrafficOptions{
+			FlowEventThresholdOverride: 1,
+			Usage:                      types.TrafficUsage("IgnoreTrafficData"),
+		},
+		TravelMode: types.IsolineTravelMode("Car"),
+		TravelModeOptions: &types.IsolineTravelModeOptions{
+			Car: &types.IsolineCarOptions{
+				EngineType: types.IsolineEngineType("Electric"),
+				LicensePlate: &types.IsolineVehicleLicensePlate{
+					LastCharacter: ptr.String("__LastCharacter__"),
+				},
+				MaxSpeed:  ptr.Float64(1.0),
+				Occupancy: ptr.Int32(1),
+			},
+			Scooter: &types.IsolineScooterOptions{
+				EngineType: types.IsolineEngineType("Electric"),
+				LicensePlate: &types.IsolineVehicleLicensePlate{
+					LastCharacter: ptr.String("__LastCharacter__"),
+				},
+				MaxSpeed:  ptr.Float64(1.0),
+				Occupancy: ptr.Int32(1),
+			},
+			Truck: &types.IsolineTruckOptions{
+				AxleCount:   ptr.Int32(1),
+				EngineType:  types.IsolineEngineType("Electric"),
+				GrossWeight: 1,
+				HazardousCargos: []types.IsolineHazardousCargoType{
+					types.IsolineHazardousCargoType("Combustible"),
+					types.IsolineHazardousCargoType("Combustible"),
+				},
+				Height:               1,
+				HeightAboveFirstAxle: 1,
+				KpraLength:           1,
+				Length:               1,
+				LicensePlate: &types.IsolineVehicleLicensePlate{
+					LastCharacter: ptr.String("__LastCharacter__"),
+				},
+				MaxSpeed:        ptr.Float64(1.0),
+				Occupancy:       ptr.Int32(1),
+				PayloadCapacity: 1,
+				TireCount:       ptr.Int32(1),
+				Trailer: &types.IsolineTrailerOptions{
+					AxleCount:    ptr.Int32(1),
+					TrailerCount: ptr.Int32(1),
+				},
+				TruckType:             types.IsolineTruckType("LightTruck"),
+				TunnelRestrictionCode: ptr.String("__TunnelRestrictionCode__"),
+				WeightPerAxle:         1,
+				WeightPerAxleGroup: &types.WeightPerAxleGroup{
+					Single: 1,
+					Tandem: 1,
+					Triple: 1,
+					Quad:   1,
+					Quint:  1,
+				},
+				Width: 1,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

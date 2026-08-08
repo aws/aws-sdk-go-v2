@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.DescribeProvisionedProduct
+
+{"CloudWatchDashboards":[{"Name":"__Name__"},{"Name":"__Name__"}],"ProvisionedProductDetail":{"Arn":"__Arn__","CreatedTime":946684800,"Id":"__Id__","IdempotencyToken":"__IdempotencyToken__","LastProvisioningRecordId":"__LastProvisioningRecordId__","LastRecordId":"__LastRecordId__","LastSuccessfulProvisioningRecordId":"__LastSuccessfulProvisioningRecordId__","LaunchRoleArn":"__LaunchRoleArn__","Name":"__Name__","ProductId":"__ProductId__","ProvisioningArtifactId":"__ProvisioningArtifactId__","Status":"AVAILABLE","StatusMessage":"__StatusMessage__","Type":"__Type__"}}

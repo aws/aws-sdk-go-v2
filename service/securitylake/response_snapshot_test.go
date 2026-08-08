@@ -122,7 +122,34 @@ func TestCheckResponseSnapshot_CreateAwsLogSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAwsLogSource(context.Background(), &CreateAwsLogSourceInput{})
+	got, err := svc.CreateAwsLogSource(context.Background(), &CreateAwsLogSourceInput{
+		Sources: []types.AwsLogSourceConfiguration{
+			{
+				Accounts: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SourceName:    types.AwsLogSourceName("ROUTE53"),
+				SourceVersion: ptr.String("__SourceVersion__"),
+			},
+			{
+				Accounts: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SourceName:    types.AwsLogSourceName("ROUTE53"),
+				SourceVersion: ptr.String("__SourceVersion__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -155,7 +182,23 @@ func TestCheckResponseSnapshot_CreateCustomLogSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCustomLogSource(context.Background(), &CreateCustomLogSourceInput{})
+	got, err := svc.CreateCustomLogSource(context.Background(), &CreateCustomLogSourceInput{
+		SourceName:    ptr.String("__SourceName__"),
+		SourceVersion: ptr.String("__SourceVersion__"),
+		EventClasses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Configuration: &types.CustomLogSourceConfiguration{
+			CrawlerConfiguration: &types.CustomLogSourceCrawlerConfiguration{
+				RoleArn: ptr.String("__RoleArn__"),
+			},
+			ProviderIdentity: &types.AwsIdentity{
+				Principal:  ptr.String("__Principal__"),
+				ExternalId: ptr.String("__ExternalId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -255,7 +298,77 @@ func TestCheckResponseSnapshot_CreateDataLake(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataLake(context.Background(), &CreateDataLakeInput{})
+	got, err := svc.CreateDataLake(context.Background(), &CreateDataLakeInput{
+		Configurations: []types.DataLakeConfiguration{
+			{
+				Region: ptr.String("__Region__"),
+				EncryptionConfiguration: &types.DataLakeEncryptionConfiguration{
+					KmsKeyId: ptr.String("__KmsKeyId__"),
+				},
+				LifecycleConfiguration: &types.DataLakeLifecycleConfiguration{
+					Expiration: &types.DataLakeLifecycleExpiration{
+						Days: ptr.Int32(1),
+					},
+					Transitions: []types.DataLakeLifecycleTransition{
+						{
+							StorageClass: ptr.String("__StorageClass__"),
+							Days:         ptr.Int32(1),
+						},
+						{
+							StorageClass: ptr.String("__StorageClass__"),
+							Days:         ptr.Int32(1),
+						},
+					},
+				},
+				ReplicationConfiguration: &types.DataLakeReplicationConfiguration{
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RoleArn: ptr.String("__RoleArn__"),
+				},
+			},
+			{
+				Region: ptr.String("__Region__"),
+				EncryptionConfiguration: &types.DataLakeEncryptionConfiguration{
+					KmsKeyId: ptr.String("__KmsKeyId__"),
+				},
+				LifecycleConfiguration: &types.DataLakeLifecycleConfiguration{
+					Expiration: &types.DataLakeLifecycleExpiration{
+						Days: ptr.Int32(1),
+					},
+					Transitions: []types.DataLakeLifecycleTransition{
+						{
+							StorageClass: ptr.String("__StorageClass__"),
+							Days:         ptr.Int32(1),
+						},
+						{
+							StorageClass: ptr.String("__StorageClass__"),
+							Days:         ptr.Int32(1),
+						},
+					},
+				},
+				ReplicationConfiguration: &types.DataLakeReplicationConfiguration{
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RoleArn: ptr.String("__RoleArn__"),
+				},
+			},
+		},
+		MetaStoreManagerRoleArn: ptr.String("__MetaStoreManagerRoleArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -274,7 +387,11 @@ func TestCheckResponseSnapshot_CreateDataLakeExceptionSubscription(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataLakeExceptionSubscription(context.Background(), &CreateDataLakeExceptionSubscriptionInput{})
+	got, err := svc.CreateDataLakeExceptionSubscription(context.Background(), &CreateDataLakeExceptionSubscriptionInput{
+		SubscriptionProtocol: ptr.String("__SubscriptionProtocol__"),
+		NotificationEndpoint: ptr.String("__NotificationEndpoint__"),
+		ExceptionTimeToLive:  ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -293,7 +410,36 @@ func TestCheckResponseSnapshot_CreateDataLakeOrganizationConfiguration(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataLakeOrganizationConfiguration(context.Background(), &CreateDataLakeOrganizationConfigurationInput{})
+	got, err := svc.CreateDataLakeOrganizationConfiguration(context.Background(), &CreateDataLakeOrganizationConfigurationInput{
+		AutoEnableNewAccount: []types.DataLakeAutoEnableNewAccountConfiguration{
+			{
+				Region: ptr.String("__Region__"),
+				Sources: []types.AwsLogSourceResource{
+					{
+						SourceName:    types.AwsLogSourceName("ROUTE53"),
+						SourceVersion: ptr.String("__SourceVersion__"),
+					},
+					{
+						SourceName:    types.AwsLogSourceName("ROUTE53"),
+						SourceVersion: ptr.String("__SourceVersion__"),
+					},
+				},
+			},
+			{
+				Region: ptr.String("__Region__"),
+				Sources: []types.AwsLogSourceResource{
+					{
+						SourceName:    types.AwsLogSourceName("ROUTE53"),
+						SourceVersion: ptr.String("__SourceVersion__"),
+					},
+					{
+						SourceName:    types.AwsLogSourceName("ROUTE53"),
+						SourceVersion: ptr.String("__SourceVersion__"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -349,7 +495,42 @@ func TestCheckResponseSnapshot_CreateSubscriber(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSubscriber(context.Background(), &CreateSubscriberInput{})
+	got, err := svc.CreateSubscriber(context.Background(), &CreateSubscriberInput{
+		SubscriberIdentity: &types.AwsIdentity{
+			Principal:  ptr.String("__Principal__"),
+			ExternalId: ptr.String("__ExternalId__"),
+		},
+		SubscriberName:        ptr.String("__SubscriberName__"),
+		SubscriberDescription: ptr.String("__SubscriberDescription__"),
+		Sources: []types.LogSourceResource{
+			&types.LogSourceResourceMemberAwsLogSource{
+				Value: types.AwsLogSourceResource{
+					SourceName:    types.AwsLogSourceName("ROUTE53"),
+					SourceVersion: ptr.String("__SourceVersion__"),
+				},
+			},
+			&types.LogSourceResourceMemberAwsLogSource{
+				Value: types.AwsLogSourceResource{
+					SourceName:    types.AwsLogSourceName("ROUTE53"),
+					SourceVersion: ptr.String("__SourceVersion__"),
+				},
+			},
+		},
+		AccessTypes: []types.AccessType{
+			types.AccessType("LAKEFORMATION"),
+			types.AccessType("LAKEFORMATION"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -370,7 +551,12 @@ func TestCheckResponseSnapshot_CreateSubscriberNotification(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSubscriberNotification(context.Background(), &CreateSubscriberNotificationInput{})
+	got, err := svc.CreateSubscriberNotification(context.Background(), &CreateSubscriberNotificationInput{
+		SubscriberId: ptr.String("__SubscriberId__"),
+		Configuration: &types.NotificationConfigurationMemberSqsNotificationConfiguration{
+			Value: types.SqsNotificationConfiguration{},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -394,7 +580,34 @@ func TestCheckResponseSnapshot_DeleteAwsLogSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAwsLogSource(context.Background(), &DeleteAwsLogSourceInput{})
+	got, err := svc.DeleteAwsLogSource(context.Background(), &DeleteAwsLogSourceInput{
+		Sources: []types.AwsLogSourceConfiguration{
+			{
+				Accounts: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SourceName:    types.AwsLogSourceName("ROUTE53"),
+				SourceVersion: ptr.String("__SourceVersion__"),
+			},
+			{
+				Accounts: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SourceName:    types.AwsLogSourceName("ROUTE53"),
+				SourceVersion: ptr.String("__SourceVersion__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -413,7 +626,10 @@ func TestCheckResponseSnapshot_DeleteCustomLogSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCustomLogSource(context.Background(), &DeleteCustomLogSourceInput{})
+	got, err := svc.DeleteCustomLogSource(context.Background(), &DeleteCustomLogSourceInput{
+		SourceName:    ptr.String("__SourceName__"),
+		SourceVersion: ptr.String("__SourceVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -432,7 +648,12 @@ func TestCheckResponseSnapshot_DeleteDataLake(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataLake(context.Background(), &DeleteDataLakeInput{})
+	got, err := svc.DeleteDataLake(context.Background(), &DeleteDataLakeInput{
+		Regions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -470,7 +691,36 @@ func TestCheckResponseSnapshot_DeleteDataLakeOrganizationConfiguration(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataLakeOrganizationConfiguration(context.Background(), &DeleteDataLakeOrganizationConfigurationInput{})
+	got, err := svc.DeleteDataLakeOrganizationConfiguration(context.Background(), &DeleteDataLakeOrganizationConfigurationInput{
+		AutoEnableNewAccount: []types.DataLakeAutoEnableNewAccountConfiguration{
+			{
+				Region: ptr.String("__Region__"),
+				Sources: []types.AwsLogSourceResource{
+					{
+						SourceName:    types.AwsLogSourceName("ROUTE53"),
+						SourceVersion: ptr.String("__SourceVersion__"),
+					},
+					{
+						SourceName:    types.AwsLogSourceName("ROUTE53"),
+						SourceVersion: ptr.String("__SourceVersion__"),
+					},
+				},
+			},
+			{
+				Region: ptr.String("__Region__"),
+				Sources: []types.AwsLogSourceResource{
+					{
+						SourceName:    types.AwsLogSourceName("ROUTE53"),
+						SourceVersion: ptr.String("__SourceVersion__"),
+					},
+					{
+						SourceName:    types.AwsLogSourceName("ROUTE53"),
+						SourceVersion: ptr.String("__SourceVersion__"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -489,7 +739,9 @@ func TestCheckResponseSnapshot_DeleteSubscriber(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSubscriber(context.Background(), &DeleteSubscriberInput{})
+	got, err := svc.DeleteSubscriber(context.Background(), &DeleteSubscriberInput{
+		SubscriberId: ptr.String("__SubscriberId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -508,7 +760,9 @@ func TestCheckResponseSnapshot_DeleteSubscriberNotification(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSubscriberNotification(context.Background(), &DeleteSubscriberNotificationInput{})
+	got, err := svc.DeleteSubscriberNotification(context.Background(), &DeleteSubscriberNotificationInput{
+		SubscriberId: ptr.String("__SubscriberId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -658,7 +912,14 @@ func TestCheckResponseSnapshot_GetDataLakeSources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataLakeSources(context.Background(), &GetDataLakeSourcesInput{})
+	got, err := svc.GetDataLakeSources(context.Background(), &GetDataLakeSourcesInput{
+		Accounts: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -714,7 +975,9 @@ func TestCheckResponseSnapshot_GetSubscriber(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSubscriber(context.Background(), &GetSubscriberInput{})
+	got, err := svc.GetSubscriber(context.Background(), &GetSubscriberInput{
+		SubscriberId: ptr.String("__SubscriberId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -749,7 +1012,14 @@ func TestCheckResponseSnapshot_ListDataLakeExceptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataLakeExceptions(context.Background(), &ListDataLakeExceptionsInput{})
+	got, err := svc.ListDataLakeExceptions(context.Background(), &ListDataLakeExceptionsInput{
+		Regions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -849,7 +1119,12 @@ func TestCheckResponseSnapshot_ListDataLakes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataLakes(context.Background(), &ListDataLakesInput{})
+	got, err := svc.ListDataLakes(context.Background(), &ListDataLakesInput{
+		Regions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -908,7 +1183,32 @@ func TestCheckResponseSnapshot_ListLogSources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLogSources(context.Background(), &ListLogSourcesInput{})
+	got, err := svc.ListLogSources(context.Background(), &ListLogSourcesInput{
+		Accounts: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Regions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Sources: []types.LogSourceResource{
+			&types.LogSourceResourceMemberAwsLogSource{
+				Value: types.AwsLogSourceResource{
+					SourceName:    types.AwsLogSourceName("ROUTE53"),
+					SourceVersion: ptr.String("__SourceVersion__"),
+				},
+			},
+			&types.LogSourceResourceMemberAwsLogSource{
+				Value: types.AwsLogSourceResource{
+					SourceName:    types.AwsLogSourceName("ROUTE53"),
+					SourceVersion: ptr.String("__SourceVersion__"),
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1003,7 +1303,10 @@ func TestCheckResponseSnapshot_ListSubscribers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSubscribers(context.Background(), &ListSubscribersInput{})
+	got, err := svc.ListSubscribers(context.Background(), &ListSubscribersInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1033,7 +1336,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1052,7 +1357,9 @@ func TestCheckResponseSnapshot_RegisterDataLakeDelegatedAdministrator(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterDataLakeDelegatedAdministrator(context.Background(), &RegisterDataLakeDelegatedAdministratorInput{})
+	got, err := svc.RegisterDataLakeDelegatedAdministrator(context.Background(), &RegisterDataLakeDelegatedAdministratorInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1071,7 +1378,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1090,7 +1409,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1190,7 +1515,67 @@ func TestCheckResponseSnapshot_UpdateDataLake(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataLake(context.Background(), &UpdateDataLakeInput{})
+	got, err := svc.UpdateDataLake(context.Background(), &UpdateDataLakeInput{
+		Configurations: []types.DataLakeConfiguration{
+			{
+				Region: ptr.String("__Region__"),
+				EncryptionConfiguration: &types.DataLakeEncryptionConfiguration{
+					KmsKeyId: ptr.String("__KmsKeyId__"),
+				},
+				LifecycleConfiguration: &types.DataLakeLifecycleConfiguration{
+					Expiration: &types.DataLakeLifecycleExpiration{
+						Days: ptr.Int32(1),
+					},
+					Transitions: []types.DataLakeLifecycleTransition{
+						{
+							StorageClass: ptr.String("__StorageClass__"),
+							Days:         ptr.Int32(1),
+						},
+						{
+							StorageClass: ptr.String("__StorageClass__"),
+							Days:         ptr.Int32(1),
+						},
+					},
+				},
+				ReplicationConfiguration: &types.DataLakeReplicationConfiguration{
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RoleArn: ptr.String("__RoleArn__"),
+				},
+			},
+			{
+				Region: ptr.String("__Region__"),
+				EncryptionConfiguration: &types.DataLakeEncryptionConfiguration{
+					KmsKeyId: ptr.String("__KmsKeyId__"),
+				},
+				LifecycleConfiguration: &types.DataLakeLifecycleConfiguration{
+					Expiration: &types.DataLakeLifecycleExpiration{
+						Days: ptr.Int32(1),
+					},
+					Transitions: []types.DataLakeLifecycleTransition{
+						{
+							StorageClass: ptr.String("__StorageClass__"),
+							Days:         ptr.Int32(1),
+						},
+						{
+							StorageClass: ptr.String("__StorageClass__"),
+							Days:         ptr.Int32(1),
+						},
+					},
+				},
+				ReplicationConfiguration: &types.DataLakeReplicationConfiguration{
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RoleArn: ptr.String("__RoleArn__"),
+				},
+			},
+		},
+		MetaStoreManagerRoleArn: ptr.String("__MetaStoreManagerRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1209,7 +1594,11 @@ func TestCheckResponseSnapshot_UpdateDataLakeExceptionSubscription(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataLakeExceptionSubscription(context.Background(), &UpdateDataLakeExceptionSubscriptionInput{})
+	got, err := svc.UpdateDataLakeExceptionSubscription(context.Background(), &UpdateDataLakeExceptionSubscriptionInput{
+		SubscriptionProtocol: ptr.String("__SubscriptionProtocol__"),
+		NotificationEndpoint: ptr.String("__NotificationEndpoint__"),
+		ExceptionTimeToLive:  ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1265,7 +1654,29 @@ func TestCheckResponseSnapshot_UpdateSubscriber(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSubscriber(context.Background(), &UpdateSubscriberInput{})
+	got, err := svc.UpdateSubscriber(context.Background(), &UpdateSubscriberInput{
+		SubscriberId: ptr.String("__SubscriberId__"),
+		SubscriberIdentity: &types.AwsIdentity{
+			Principal:  ptr.String("__Principal__"),
+			ExternalId: ptr.String("__ExternalId__"),
+		},
+		SubscriberName:        ptr.String("__SubscriberName__"),
+		SubscriberDescription: ptr.String("__SubscriberDescription__"),
+		Sources: []types.LogSourceResource{
+			&types.LogSourceResourceMemberAwsLogSource{
+				Value: types.AwsLogSourceResource{
+					SourceName:    types.AwsLogSourceName("ROUTE53"),
+					SourceVersion: ptr.String("__SourceVersion__"),
+				},
+			},
+			&types.LogSourceResourceMemberAwsLogSource{
+				Value: types.AwsLogSourceResource{
+					SourceName:    types.AwsLogSourceName("ROUTE53"),
+					SourceVersion: ptr.String("__SourceVersion__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1286,7 +1697,12 @@ func TestCheckResponseSnapshot_UpdateSubscriberNotification(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSubscriberNotification(context.Background(), &UpdateSubscriberNotificationInput{})
+	got, err := svc.UpdateSubscriberNotification(context.Background(), &UpdateSubscriberNotificationInput{
+		SubscriberId: ptr.String("__SubscriberId__"),
+		Configuration: &types.NotificationConfigurationMemberSqsNotificationConfiguration{
+			Value: types.SqsNotificationConfiguration{},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1308,7 +1724,34 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAwsLogSource(context.Background(), &CreateAwsLogSourceInput{})
+	_, opErr := svc.CreateAwsLogSource(context.Background(), &CreateAwsLogSourceInput{
+		Sources: []types.AwsLogSourceConfiguration{
+			{
+				Accounts: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SourceName:    types.AwsLogSourceName("ROUTE53"),
+				SourceVersion: ptr.String("__SourceVersion__"),
+			},
+			{
+				Accounts: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SourceName:    types.AwsLogSourceName("ROUTE53"),
+				SourceVersion: ptr.String("__SourceVersion__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1333,7 +1776,34 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAwsLogSource(context.Background(), &CreateAwsLogSourceInput{})
+	_, opErr := svc.CreateAwsLogSource(context.Background(), &CreateAwsLogSourceInput{
+		Sources: []types.AwsLogSourceConfiguration{
+			{
+				Accounts: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SourceName:    types.AwsLogSourceName("ROUTE53"),
+				SourceVersion: ptr.String("__SourceVersion__"),
+			},
+			{
+				Accounts: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SourceName:    types.AwsLogSourceName("ROUTE53"),
+				SourceVersion: ptr.String("__SourceVersion__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1360,7 +1830,34 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAwsLogSource(context.Background(), &CreateAwsLogSourceInput{})
+	_, opErr := svc.CreateAwsLogSource(context.Background(), &CreateAwsLogSourceInput{
+		Sources: []types.AwsLogSourceConfiguration{
+			{
+				Accounts: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SourceName:    types.AwsLogSourceName("ROUTE53"),
+				SourceVersion: ptr.String("__SourceVersion__"),
+			},
+			{
+				Accounts: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SourceName:    types.AwsLogSourceName("ROUTE53"),
+				SourceVersion: ptr.String("__SourceVersion__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1385,7 +1882,34 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAwsLogSource(context.Background(), &CreateAwsLogSourceInput{})
+	_, opErr := svc.CreateAwsLogSource(context.Background(), &CreateAwsLogSourceInput{
+		Sources: []types.AwsLogSourceConfiguration{
+			{
+				Accounts: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SourceName:    types.AwsLogSourceName("ROUTE53"),
+				SourceVersion: ptr.String("__SourceVersion__"),
+			},
+			{
+				Accounts: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SourceName:    types.AwsLogSourceName("ROUTE53"),
+				SourceVersion: ptr.String("__SourceVersion__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1412,7 +1936,34 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAwsLogSource(context.Background(), &CreateAwsLogSourceInput{})
+	_, opErr := svc.CreateAwsLogSource(context.Background(), &CreateAwsLogSourceInput{
+		Sources: []types.AwsLogSourceConfiguration{
+			{
+				Accounts: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SourceName:    types.AwsLogSourceName("ROUTE53"),
+				SourceVersion: ptr.String("__SourceVersion__"),
+			},
+			{
+				Accounts: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SourceName:    types.AwsLogSourceName("ROUTE53"),
+				SourceVersion: ptr.String("__SourceVersion__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1440,7 +1991,34 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAwsLogSource(context.Background(), &CreateAwsLogSourceInput{})
+	_, opErr := svc.CreateAwsLogSource(context.Background(), &CreateAwsLogSourceInput{
+		Sources: []types.AwsLogSourceConfiguration{
+			{
+				Accounts: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SourceName:    types.AwsLogSourceName("ROUTE53"),
+				SourceVersion: ptr.String("__SourceVersion__"),
+			},
+			{
+				Accounts: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SourceName:    types.AwsLogSourceName("ROUTE53"),
+				SourceVersion: ptr.String("__SourceVersion__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -128,7 +128,14 @@ func TestCheckResponseSnapshot_AssociateFileSystemAliases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateFileSystemAliases(context.Background(), &AssociateFileSystemAliasesInput{})
+	got, err := svc.AssociateFileSystemAliases(context.Background(), &AssociateFileSystemAliasesInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		FileSystemId:       ptr.String("__FileSystemId__"),
+		Aliases: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -150,7 +157,9 @@ func TestCheckResponseSnapshot_CancelDataRepositoryTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelDataRepositoryTask(context.Background(), &CancelDataRepositoryTaskInput{})
+	got, err := svc.CancelDataRepositoryTask(context.Background(), &CancelDataRepositoryTaskInput{
+		TaskId: ptr.String("__TaskId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1406,7 +1415,23 @@ func TestCheckResponseSnapshot_CopyBackup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CopyBackup(context.Background(), &CopyBackupInput{})
+	got, err := svc.CopyBackup(context.Background(), &CopyBackupInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		SourceBackupId:     ptr.String("__SourceBackupId__"),
+		SourceRegion:       ptr.String("__SourceRegion__"),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		CopyTags:           ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2208,7 +2233,16 @@ func TestCheckResponseSnapshot_CopySnapshotAndUpdateVolume(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CopySnapshotAndUpdateVolume(context.Background(), &CopySnapshotAndUpdateVolumeInput{})
+	got, err := svc.CopySnapshotAndUpdateVolume(context.Background(), &CopySnapshotAndUpdateVolumeInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		VolumeId:           ptr.String("__VolumeId__"),
+		SourceSnapshotARN:  ptr.String("__SourceSnapshotARN__"),
+		CopyStrategy:       types.OpenZFSCopyStrategy("CLONE"),
+		Options: []types.UpdateOpenZFSVolumeOption{
+			types.UpdateOpenZFSVolumeOption("DELETE_INTERMEDIATE_SNAPSHOTS"),
+			types.UpdateOpenZFSVolumeOption("DELETE_INTERMEDIATE_SNAPSHOTS"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2270,7 +2304,43 @@ func TestCheckResponseSnapshot_CreateAndAttachS3AccessPoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAndAttachS3AccessPoint(context.Background(), &CreateAndAttachS3AccessPointInput{})
+	got, err := svc.CreateAndAttachS3AccessPoint(context.Background(), &CreateAndAttachS3AccessPointInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Name:               ptr.String("__Name__"),
+		Type:               types.S3AccessPointAttachmentType("OPENZFS"),
+		OpenZFSConfiguration: &types.CreateAndAttachS3AccessPointOpenZFSConfiguration{
+			VolumeId: ptr.String("__VolumeId__"),
+			FileSystemIdentity: &types.OpenZFSFileSystemIdentity{
+				Type: types.OpenZFSFileSystemUserType("POSIX"),
+				PosixUser: &types.OpenZFSPosixFileSystemUser{
+					Uid: ptr.Int64(1),
+					Gid: ptr.Int64(1),
+					SecondaryGids: []int64{
+						1,
+						1,
+					},
+				},
+			},
+		},
+		OntapConfiguration: &types.CreateAndAttachS3AccessPointOntapConfiguration{
+			VolumeId: ptr.String("__VolumeId__"),
+			FileSystemIdentity: &types.OntapFileSystemIdentity{
+				Type: types.OntapFileSystemUserType("UNIX"),
+				UnixUser: &types.OntapUnixFileSystemUser{
+					Name: ptr.String("__Name__"),
+				},
+				WindowsUser: &types.OntapWindowsFileSystemUser{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		S3AccessPoint: &types.CreateAndAttachS3AccessPointS3Configuration{
+			VpcConfiguration: &types.S3AccessPointVpcConfiguration{
+				VpcId: ptr.String("__VpcId__"),
+			},
+			Policy: ptr.String("__Policy__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3526,7 +3596,21 @@ func TestCheckResponseSnapshot_CreateBackup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBackup(context.Background(), &CreateBackupInput{})
+	got, err := svc.CreateBackup(context.Background(), &CreateBackupInput{
+		FileSystemId:       ptr.String("__FileSystemId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		VolumeId: ptr.String("__VolumeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3603,7 +3687,38 @@ func TestCheckResponseSnapshot_CreateDataRepositoryAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataRepositoryAssociation(context.Background(), &CreateDataRepositoryAssociationInput{})
+	got, err := svc.CreateDataRepositoryAssociation(context.Background(), &CreateDataRepositoryAssociationInput{
+		FileSystemId:                ptr.String("__FileSystemId__"),
+		FileSystemPath:              ptr.String("__FileSystemPath__"),
+		DataRepositoryPath:          ptr.String("__DataRepositoryPath__"),
+		BatchImportMetaDataOnCreate: ptr.Bool(true),
+		ImportedFileChunkSize:       ptr.Int32(1),
+		S3: &types.S3DataRepositoryConfiguration{
+			AutoImportPolicy: &types.AutoImportPolicy{
+				Events: []types.EventType{
+					types.EventType("NEW"),
+					types.EventType("NEW"),
+				},
+			},
+			AutoExportPolicy: &types.AutoExportPolicy{
+				Events: []types.EventType{
+					types.EventType("NEW"),
+					types.EventType("NEW"),
+				},
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3671,7 +3786,38 @@ func TestCheckResponseSnapshot_CreateDataRepositoryTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataRepositoryTask(context.Background(), &CreateDataRepositoryTaskInput{})
+	got, err := svc.CreateDataRepositoryTask(context.Background(), &CreateDataRepositoryTaskInput{
+		Type: types.DataRepositoryTaskType("EXPORT_TO_REPOSITORY"),
+		Paths: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FileSystemId: ptr.String("__FileSystemId__"),
+		Report: &types.CompletionReport{
+			Enabled: ptr.Bool(true),
+			Path:    ptr.String("__Path__"),
+			Format:  types.ReportFormat("REPORT_CSV_20191124"),
+			Scope:   types.ReportScope("FAILED_FILES_ONLY"),
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		CapacityToRelease: ptr.Int64(1),
+		ReleaseConfiguration: &types.ReleaseConfiguration{
+			DurationSinceLastAccess: &types.DurationSinceLastAccess{
+				Unit:  types.Unit("DAYS"),
+				Value: ptr.Int64(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3743,7 +3889,72 @@ func TestCheckResponseSnapshot_CreateFileCache(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFileCache(context.Background(), &CreateFileCacheInput{})
+	got, err := svc.CreateFileCache(context.Background(), &CreateFileCacheInput{
+		ClientRequestToken:   ptr.String("__ClientRequestToken__"),
+		FileCacheType:        types.FileCacheType("LUSTRE"),
+		FileCacheTypeVersion: ptr.String("__FileCacheTypeVersion__"),
+		StorageCapacity:      ptr.Int32(1),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		CopyTagsToDataRepositoryAssociations: ptr.Bool(true),
+		KmsKeyId:                             ptr.String("__KmsKeyId__"),
+		LustreConfiguration: &types.CreateFileCacheLustreConfiguration{
+			PerUnitStorageThroughput:   ptr.Int32(1),
+			DeploymentType:             types.FileCacheLustreDeploymentType("CACHE_1"),
+			WeeklyMaintenanceStartTime: ptr.String("__WeeklyMaintenanceStartTime__"),
+			MetadataConfiguration: &types.FileCacheLustreMetadataConfiguration{
+				StorageCapacity: ptr.Int32(1),
+			},
+		},
+		DataRepositoryAssociations: []types.FileCacheDataRepositoryAssociation{
+			{
+				FileCachePath:      ptr.String("__FileCachePath__"),
+				DataRepositoryPath: ptr.String("__DataRepositoryPath__"),
+				DataRepositorySubdirectories: []string{
+					"__Member__",
+					"__Member__",
+				},
+				NFS: &types.FileCacheNFSConfiguration{
+					Version: types.NfsVersion("NFS3"),
+					DnsIps: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				FileCachePath:      ptr.String("__FileCachePath__"),
+				DataRepositoryPath: ptr.String("__DataRepositoryPath__"),
+				DataRepositorySubdirectories: []string{
+					"__Member__",
+					"__Member__",
+				},
+				NFS: &types.FileCacheNFSConfiguration{
+					Version: types.NfsVersion("NFS3"),
+					DnsIps: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4336,7 +4547,208 @@ func TestCheckResponseSnapshot_CreateFileSystem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFileSystem(context.Background(), &CreateFileSystemInput{})
+	got, err := svc.CreateFileSystem(context.Background(), &CreateFileSystemInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		FileSystemType:     types.FileSystemType("WINDOWS"),
+		StorageCapacity:    ptr.Int32(1),
+		StorageType:        types.StorageType("SSD"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+		WindowsConfiguration: &types.CreateFileSystemWindowsConfiguration{
+			ActiveDirectoryId: ptr.String("__ActiveDirectoryId__"),
+			SelfManagedActiveDirectoryConfiguration: &types.SelfManagedActiveDirectoryConfiguration{
+				DomainName:                          ptr.String("__DomainName__"),
+				OrganizationalUnitDistinguishedName: ptr.String("__OrganizationalUnitDistinguishedName__"),
+				FileSystemAdministratorsGroup:       ptr.String("__FileSystemAdministratorsGroup__"),
+				UserName:                            ptr.String("__UserName__"),
+				Password:                            ptr.String("__Password__"),
+				DnsIps: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DomainJoinServiceAccountSecret: ptr.String("__DomainJoinServiceAccountSecret__"),
+			},
+			DeploymentType:                types.WindowsDeploymentType("MULTI_AZ_1"),
+			PreferredSubnetId:             ptr.String("__PreferredSubnetId__"),
+			ThroughputCapacity:            ptr.Int32(1),
+			WeeklyMaintenanceStartTime:    ptr.String("__WeeklyMaintenanceStartTime__"),
+			DailyAutomaticBackupStartTime: ptr.String("__DailyAutomaticBackupStartTime__"),
+			AutomaticBackupRetentionDays:  ptr.Int32(1),
+			CopyTagsToBackups:             ptr.Bool(true),
+			Aliases: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AuditLogConfiguration: &types.WindowsAuditLogCreateConfiguration{
+				FileAccessAuditLogLevel:      types.WindowsAccessAuditLogLevel("DISABLED"),
+				FileShareAccessAuditLogLevel: types.WindowsAccessAuditLogLevel("DISABLED"),
+				AuditLogDestination:          ptr.String("__AuditLogDestination__"),
+			},
+			DiskIopsConfiguration: &types.DiskIopsConfiguration{
+				Mode: types.DiskIopsConfigurationMode("AUTOMATIC"),
+				Iops: ptr.Int64(1),
+			},
+			FsrmConfiguration: &types.WindowsFsrmConfiguration{
+				FsrmServiceEnabled:  ptr.Bool(true),
+				EventLogDestination: ptr.String("__EventLogDestination__"),
+			},
+		},
+		LustreConfiguration: &types.CreateFileSystemLustreConfiguration{
+			WeeklyMaintenanceStartTime:    ptr.String("__WeeklyMaintenanceStartTime__"),
+			ImportPath:                    ptr.String("__ImportPath__"),
+			ExportPath:                    ptr.String("__ExportPath__"),
+			ImportedFileChunkSize:         ptr.Int32(1),
+			DeploymentType:                types.LustreDeploymentType("SCRATCH_1"),
+			AutoImportPolicy:              types.AutoImportPolicyType("NONE"),
+			PerUnitStorageThroughput:      ptr.Int32(1),
+			DailyAutomaticBackupStartTime: ptr.String("__DailyAutomaticBackupStartTime__"),
+			AutomaticBackupRetentionDays:  ptr.Int32(1),
+			CopyTagsToBackups:             ptr.Bool(true),
+			DriveCacheType:                types.DriveCacheType("NONE"),
+			DataCompressionType:           types.DataCompressionType("NONE"),
+			EfaEnabled:                    ptr.Bool(true),
+			LogConfiguration: &types.LustreLogCreateConfiguration{
+				Level:       types.LustreAccessAuditLogLevel("DISABLED"),
+				Destination: ptr.String("__Destination__"),
+			},
+			RootSquashConfiguration: &types.LustreRootSquashConfiguration{
+				RootSquash: ptr.String("__RootSquash__"),
+				NoSquashNids: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			MetadataConfiguration: &types.CreateFileSystemLustreMetadataConfiguration{
+				Iops: ptr.Int32(1),
+				Mode: types.MetadataConfigurationMode("AUTOMATIC"),
+			},
+			ThroughputCapacity: ptr.Int32(1),
+			DataReadCacheConfiguration: &types.LustreReadCacheConfiguration{
+				SizingMode: types.LustreReadCacheSizingMode("NO_CACHE"),
+				SizeGiB:    ptr.Int32(1),
+			},
+		},
+		OntapConfiguration: &types.CreateFileSystemOntapConfiguration{
+			AutomaticBackupRetentionDays:  ptr.Int32(1),
+			DailyAutomaticBackupStartTime: ptr.String("__DailyAutomaticBackupStartTime__"),
+			DeploymentType:                types.OntapDeploymentType("MULTI_AZ_1"),
+			EndpointIpAddressRange:        ptr.String("__EndpointIpAddressRange__"),
+			FsxAdminPassword:              ptr.String("__FsxAdminPassword__"),
+			DiskIopsConfiguration: &types.DiskIopsConfiguration{
+				Mode: types.DiskIopsConfigurationMode("AUTOMATIC"),
+				Iops: ptr.Int64(1),
+			},
+			PreferredSubnetId: ptr.String("__PreferredSubnetId__"),
+			RouteTableIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ThroughputCapacity:          ptr.Int32(1),
+			WeeklyMaintenanceStartTime:  ptr.String("__WeeklyMaintenanceStartTime__"),
+			HAPairs:                     ptr.Int32(1),
+			ThroughputCapacityPerHAPair: ptr.Int32(1),
+			EndpointIpv6AddressRange:    ptr.String("__EndpointIpv6AddressRange__"),
+		},
+		FileSystemTypeVersion: ptr.String("__FileSystemTypeVersion__"),
+		OpenZFSConfiguration: &types.CreateFileSystemOpenZFSConfiguration{
+			AutomaticBackupRetentionDays:  ptr.Int32(1),
+			CopyTagsToBackups:             ptr.Bool(true),
+			CopyTagsToVolumes:             ptr.Bool(true),
+			DailyAutomaticBackupStartTime: ptr.String("__DailyAutomaticBackupStartTime__"),
+			DeploymentType:                types.OpenZFSDeploymentType("SINGLE_AZ_1"),
+			ThroughputCapacity:            ptr.Int32(1),
+			WeeklyMaintenanceStartTime:    ptr.String("__WeeklyMaintenanceStartTime__"),
+			DiskIopsConfiguration: &types.DiskIopsConfiguration{
+				Mode: types.DiskIopsConfigurationMode("AUTOMATIC"),
+				Iops: ptr.Int64(1),
+			},
+			RootVolumeConfiguration: &types.OpenZFSCreateRootVolumeConfiguration{
+				RecordSizeKiB:       ptr.Int32(1),
+				DataCompressionType: types.OpenZFSDataCompressionType("NONE"),
+				NfsExports: []types.OpenZFSNfsExport{
+					{
+						ClientConfigurations: []types.OpenZFSClientConfiguration{
+							{
+								Clients: ptr.String("__Clients__"),
+								Options: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Clients: ptr.String("__Clients__"),
+								Options: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+					{
+						ClientConfigurations: []types.OpenZFSClientConfiguration{
+							{
+								Clients: ptr.String("__Clients__"),
+								Options: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Clients: ptr.String("__Clients__"),
+								Options: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				UserAndGroupQuotas: []types.OpenZFSUserOrGroupQuota{
+					{
+						Type:                    types.OpenZFSQuotaType("USER"),
+						Id:                      ptr.Int32(1),
+						StorageCapacityQuotaGiB: ptr.Int32(1),
+					},
+					{
+						Type:                    types.OpenZFSQuotaType("USER"),
+						Id:                      ptr.Int32(1),
+						StorageCapacityQuotaGiB: ptr.Int32(1),
+					},
+				},
+				CopyTagsToSnapshots: ptr.Bool(true),
+				ReadOnly:            ptr.Bool(true),
+			},
+			PreferredSubnetId:        ptr.String("__PreferredSubnetId__"),
+			EndpointIpAddressRange:   ptr.String("__EndpointIpAddressRange__"),
+			EndpointIpv6AddressRange: ptr.String("__EndpointIpv6AddressRange__"),
+			RouteTableIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ReadCacheConfiguration: &types.OpenZFSReadCacheConfiguration{
+				SizingMode: types.OpenZFSReadCacheSizingMode("NO_CACHE"),
+				SizeGiB:    ptr.Int32(1),
+			},
+		},
+		NetworkType: types.NetworkType("IPV4"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4929,7 +5341,187 @@ func TestCheckResponseSnapshot_CreateFileSystemFromBackup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFileSystemFromBackup(context.Background(), &CreateFileSystemFromBackupInput{})
+	got, err := svc.CreateFileSystemFromBackup(context.Background(), &CreateFileSystemFromBackupInput{
+		BackupId:           ptr.String("__BackupId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		WindowsConfiguration: &types.CreateFileSystemWindowsConfiguration{
+			ActiveDirectoryId: ptr.String("__ActiveDirectoryId__"),
+			SelfManagedActiveDirectoryConfiguration: &types.SelfManagedActiveDirectoryConfiguration{
+				DomainName:                          ptr.String("__DomainName__"),
+				OrganizationalUnitDistinguishedName: ptr.String("__OrganizationalUnitDistinguishedName__"),
+				FileSystemAdministratorsGroup:       ptr.String("__FileSystemAdministratorsGroup__"),
+				UserName:                            ptr.String("__UserName__"),
+				Password:                            ptr.String("__Password__"),
+				DnsIps: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DomainJoinServiceAccountSecret: ptr.String("__DomainJoinServiceAccountSecret__"),
+			},
+			DeploymentType:                types.WindowsDeploymentType("MULTI_AZ_1"),
+			PreferredSubnetId:             ptr.String("__PreferredSubnetId__"),
+			ThroughputCapacity:            ptr.Int32(1),
+			WeeklyMaintenanceStartTime:    ptr.String("__WeeklyMaintenanceStartTime__"),
+			DailyAutomaticBackupStartTime: ptr.String("__DailyAutomaticBackupStartTime__"),
+			AutomaticBackupRetentionDays:  ptr.Int32(1),
+			CopyTagsToBackups:             ptr.Bool(true),
+			Aliases: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AuditLogConfiguration: &types.WindowsAuditLogCreateConfiguration{
+				FileAccessAuditLogLevel:      types.WindowsAccessAuditLogLevel("DISABLED"),
+				FileShareAccessAuditLogLevel: types.WindowsAccessAuditLogLevel("DISABLED"),
+				AuditLogDestination:          ptr.String("__AuditLogDestination__"),
+			},
+			DiskIopsConfiguration: &types.DiskIopsConfiguration{
+				Mode: types.DiskIopsConfigurationMode("AUTOMATIC"),
+				Iops: ptr.Int64(1),
+			},
+			FsrmConfiguration: &types.WindowsFsrmConfiguration{
+				FsrmServiceEnabled:  ptr.Bool(true),
+				EventLogDestination: ptr.String("__EventLogDestination__"),
+			},
+		},
+		LustreConfiguration: &types.CreateFileSystemLustreConfiguration{
+			WeeklyMaintenanceStartTime:    ptr.String("__WeeklyMaintenanceStartTime__"),
+			ImportPath:                    ptr.String("__ImportPath__"),
+			ExportPath:                    ptr.String("__ExportPath__"),
+			ImportedFileChunkSize:         ptr.Int32(1),
+			DeploymentType:                types.LustreDeploymentType("SCRATCH_1"),
+			AutoImportPolicy:              types.AutoImportPolicyType("NONE"),
+			PerUnitStorageThroughput:      ptr.Int32(1),
+			DailyAutomaticBackupStartTime: ptr.String("__DailyAutomaticBackupStartTime__"),
+			AutomaticBackupRetentionDays:  ptr.Int32(1),
+			CopyTagsToBackups:             ptr.Bool(true),
+			DriveCacheType:                types.DriveCacheType("NONE"),
+			DataCompressionType:           types.DataCompressionType("NONE"),
+			EfaEnabled:                    ptr.Bool(true),
+			LogConfiguration: &types.LustreLogCreateConfiguration{
+				Level:       types.LustreAccessAuditLogLevel("DISABLED"),
+				Destination: ptr.String("__Destination__"),
+			},
+			RootSquashConfiguration: &types.LustreRootSquashConfiguration{
+				RootSquash: ptr.String("__RootSquash__"),
+				NoSquashNids: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			MetadataConfiguration: &types.CreateFileSystemLustreMetadataConfiguration{
+				Iops: ptr.Int32(1),
+				Mode: types.MetadataConfigurationMode("AUTOMATIC"),
+			},
+			ThroughputCapacity: ptr.Int32(1),
+			DataReadCacheConfiguration: &types.LustreReadCacheConfiguration{
+				SizingMode: types.LustreReadCacheSizingMode("NO_CACHE"),
+				SizeGiB:    ptr.Int32(1),
+			},
+		},
+		StorageType:           types.StorageType("SSD"),
+		KmsKeyId:              ptr.String("__KmsKeyId__"),
+		FileSystemTypeVersion: ptr.String("__FileSystemTypeVersion__"),
+		OpenZFSConfiguration: &types.CreateFileSystemOpenZFSConfiguration{
+			AutomaticBackupRetentionDays:  ptr.Int32(1),
+			CopyTagsToBackups:             ptr.Bool(true),
+			CopyTagsToVolumes:             ptr.Bool(true),
+			DailyAutomaticBackupStartTime: ptr.String("__DailyAutomaticBackupStartTime__"),
+			DeploymentType:                types.OpenZFSDeploymentType("SINGLE_AZ_1"),
+			ThroughputCapacity:            ptr.Int32(1),
+			WeeklyMaintenanceStartTime:    ptr.String("__WeeklyMaintenanceStartTime__"),
+			DiskIopsConfiguration: &types.DiskIopsConfiguration{
+				Mode: types.DiskIopsConfigurationMode("AUTOMATIC"),
+				Iops: ptr.Int64(1),
+			},
+			RootVolumeConfiguration: &types.OpenZFSCreateRootVolumeConfiguration{
+				RecordSizeKiB:       ptr.Int32(1),
+				DataCompressionType: types.OpenZFSDataCompressionType("NONE"),
+				NfsExports: []types.OpenZFSNfsExport{
+					{
+						ClientConfigurations: []types.OpenZFSClientConfiguration{
+							{
+								Clients: ptr.String("__Clients__"),
+								Options: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Clients: ptr.String("__Clients__"),
+								Options: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+					{
+						ClientConfigurations: []types.OpenZFSClientConfiguration{
+							{
+								Clients: ptr.String("__Clients__"),
+								Options: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Clients: ptr.String("__Clients__"),
+								Options: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				UserAndGroupQuotas: []types.OpenZFSUserOrGroupQuota{
+					{
+						Type:                    types.OpenZFSQuotaType("USER"),
+						Id:                      ptr.Int32(1),
+						StorageCapacityQuotaGiB: ptr.Int32(1),
+					},
+					{
+						Type:                    types.OpenZFSQuotaType("USER"),
+						Id:                      ptr.Int32(1),
+						StorageCapacityQuotaGiB: ptr.Int32(1),
+					},
+				},
+				CopyTagsToSnapshots: ptr.Bool(true),
+				ReadOnly:            ptr.Bool(true),
+			},
+			PreferredSubnetId:        ptr.String("__PreferredSubnetId__"),
+			EndpointIpAddressRange:   ptr.String("__EndpointIpAddressRange__"),
+			EndpointIpv6AddressRange: ptr.String("__EndpointIpv6AddressRange__"),
+			RouteTableIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ReadCacheConfiguration: &types.OpenZFSReadCacheConfiguration{
+				SizingMode: types.OpenZFSReadCacheSizingMode("NO_CACHE"),
+				SizeGiB:    ptr.Int32(1),
+			},
+		},
+		StorageCapacity: ptr.Int32(1),
+		NetworkType:     types.NetworkType("IPV4"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5702,7 +6294,21 @@ func TestCheckResponseSnapshot_CreateSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSnapshot(context.Background(), &CreateSnapshotInput{})
+	got, err := svc.CreateSnapshot(context.Background(), &CreateSnapshotInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Name:               ptr.String("__Name__"),
+		VolumeId:           ptr.String("__VolumeId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5806,7 +6412,38 @@ func TestCheckResponseSnapshot_CreateStorageVirtualMachine(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStorageVirtualMachine(context.Background(), &CreateStorageVirtualMachineInput{})
+	got, err := svc.CreateStorageVirtualMachine(context.Background(), &CreateStorageVirtualMachineInput{
+		ActiveDirectoryConfiguration: &types.CreateSvmActiveDirectoryConfiguration{
+			NetBiosName: ptr.String("__NetBiosName__"),
+			SelfManagedActiveDirectoryConfiguration: &types.SelfManagedActiveDirectoryConfiguration{
+				DomainName:                          ptr.String("__DomainName__"),
+				OrganizationalUnitDistinguishedName: ptr.String("__OrganizationalUnitDistinguishedName__"),
+				FileSystemAdministratorsGroup:       ptr.String("__FileSystemAdministratorsGroup__"),
+				UserName:                            ptr.String("__UserName__"),
+				Password:                            ptr.String("__Password__"),
+				DnsIps: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DomainJoinServiceAccountSecret: ptr.String("__DomainJoinServiceAccountSecret__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		FileSystemId:       ptr.String("__FileSystemId__"),
+		Name:               ptr.String("__Name__"),
+		SvmAdminPassword:   ptr.String("__SvmAdminPassword__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		RootVolumeSecurityStyle: types.StorageVirtualMachineRootVolumeSecurityStyle("UNIX"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6457,7 +7094,131 @@ func TestCheckResponseSnapshot_CreateVolume(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVolume(context.Background(), &CreateVolumeInput{})
+	got, err := svc.CreateVolume(context.Background(), &CreateVolumeInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		VolumeType:         types.VolumeType("ONTAP"),
+		Name:               ptr.String("__Name__"),
+		OntapConfiguration: &types.CreateOntapVolumeConfiguration{
+			JunctionPath:             ptr.String("__JunctionPath__"),
+			SecurityStyle:            types.SecurityStyle("UNIX"),
+			SizeInMegabytes:          ptr.Int32(1),
+			StorageEfficiencyEnabled: ptr.Bool(true),
+			StorageVirtualMachineId:  ptr.String("__StorageVirtualMachineId__"),
+			TieringPolicy: &types.TieringPolicy{
+				CoolingPeriod: ptr.Int32(1),
+				Name:          types.TieringPolicyName("SNAPSHOT_ONLY"),
+			},
+			OntapVolumeType:   types.InputOntapVolumeType("RW"),
+			SnapshotPolicy:    ptr.String("__SnapshotPolicy__"),
+			CopyTagsToBackups: ptr.Bool(true),
+			SnaplockConfiguration: &types.CreateSnaplockConfiguration{
+				AuditLogVolume: ptr.Bool(true),
+				AutocommitPeriod: &types.AutocommitPeriod{
+					Type:  types.AutocommitPeriodType("MINUTES"),
+					Value: ptr.Int32(1),
+				},
+				PrivilegedDelete: types.PrivilegedDelete("DISABLED"),
+				RetentionPeriod: &types.SnaplockRetentionPeriod{
+					DefaultRetention: &types.RetentionPeriod{
+						Type:  types.RetentionPeriodType("SECONDS"),
+						Value: ptr.Int32(1),
+					},
+					MinimumRetention: &types.RetentionPeriod{
+						Type:  types.RetentionPeriodType("SECONDS"),
+						Value: ptr.Int32(1),
+					},
+					MaximumRetention: &types.RetentionPeriod{
+						Type:  types.RetentionPeriodType("SECONDS"),
+						Value: ptr.Int32(1),
+					},
+				},
+				SnaplockType:            types.SnaplockType("COMPLIANCE"),
+				VolumeAppendModeEnabled: ptr.Bool(true),
+			},
+			VolumeStyle: types.VolumeStyle("FLEXVOL"),
+			AggregateConfiguration: &types.CreateAggregateConfiguration{
+				Aggregates: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ConstituentsPerAggregate: ptr.Int32(1),
+			},
+			SizeInBytes: ptr.Int64(1),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		OpenZFSConfiguration: &types.CreateOpenZFSVolumeConfiguration{
+			ParentVolumeId:                ptr.String("__ParentVolumeId__"),
+			StorageCapacityReservationGiB: ptr.Int32(1),
+			StorageCapacityQuotaGiB:       ptr.Int32(1),
+			RecordSizeKiB:                 ptr.Int32(1),
+			DataCompressionType:           types.OpenZFSDataCompressionType("NONE"),
+			CopyTagsToSnapshots:           ptr.Bool(true),
+			OriginSnapshot: &types.CreateOpenZFSOriginSnapshotConfiguration{
+				SnapshotARN:  ptr.String("__SnapshotARN__"),
+				CopyStrategy: types.OpenZFSCopyStrategy("CLONE"),
+			},
+			ReadOnly: ptr.Bool(true),
+			NfsExports: []types.OpenZFSNfsExport{
+				{
+					ClientConfigurations: []types.OpenZFSClientConfiguration{
+						{
+							Clients: ptr.String("__Clients__"),
+							Options: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Clients: ptr.String("__Clients__"),
+							Options: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				{
+					ClientConfigurations: []types.OpenZFSClientConfiguration{
+						{
+							Clients: ptr.String("__Clients__"),
+							Options: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Clients: ptr.String("__Clients__"),
+							Options: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			UserAndGroupQuotas: []types.OpenZFSUserOrGroupQuota{
+				{
+					Type:                    types.OpenZFSQuotaType("USER"),
+					Id:                      ptr.Int32(1),
+					StorageCapacityQuotaGiB: ptr.Int32(1),
+				},
+				{
+					Type:                    types.OpenZFSQuotaType("USER"),
+					Id:                      ptr.Int32(1),
+					StorageCapacityQuotaGiB: ptr.Int32(1),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7108,7 +7869,68 @@ func TestCheckResponseSnapshot_CreateVolumeFromBackup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVolumeFromBackup(context.Background(), &CreateVolumeFromBackupInput{})
+	got, err := svc.CreateVolumeFromBackup(context.Background(), &CreateVolumeFromBackupInput{
+		BackupId:           ptr.String("__BackupId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Name:               ptr.String("__Name__"),
+		OntapConfiguration: &types.CreateOntapVolumeConfiguration{
+			JunctionPath:             ptr.String("__JunctionPath__"),
+			SecurityStyle:            types.SecurityStyle("UNIX"),
+			SizeInMegabytes:          ptr.Int32(1),
+			StorageEfficiencyEnabled: ptr.Bool(true),
+			StorageVirtualMachineId:  ptr.String("__StorageVirtualMachineId__"),
+			TieringPolicy: &types.TieringPolicy{
+				CoolingPeriod: ptr.Int32(1),
+				Name:          types.TieringPolicyName("SNAPSHOT_ONLY"),
+			},
+			OntapVolumeType:   types.InputOntapVolumeType("RW"),
+			SnapshotPolicy:    ptr.String("__SnapshotPolicy__"),
+			CopyTagsToBackups: ptr.Bool(true),
+			SnaplockConfiguration: &types.CreateSnaplockConfiguration{
+				AuditLogVolume: ptr.Bool(true),
+				AutocommitPeriod: &types.AutocommitPeriod{
+					Type:  types.AutocommitPeriodType("MINUTES"),
+					Value: ptr.Int32(1),
+				},
+				PrivilegedDelete: types.PrivilegedDelete("DISABLED"),
+				RetentionPeriod: &types.SnaplockRetentionPeriod{
+					DefaultRetention: &types.RetentionPeriod{
+						Type:  types.RetentionPeriodType("SECONDS"),
+						Value: ptr.Int32(1),
+					},
+					MinimumRetention: &types.RetentionPeriod{
+						Type:  types.RetentionPeriodType("SECONDS"),
+						Value: ptr.Int32(1),
+					},
+					MaximumRetention: &types.RetentionPeriod{
+						Type:  types.RetentionPeriodType("SECONDS"),
+						Value: ptr.Int32(1),
+					},
+				},
+				SnaplockType:            types.SnaplockType("COMPLIANCE"),
+				VolumeAppendModeEnabled: ptr.Bool(true),
+			},
+			VolumeStyle: types.VolumeStyle("FLEXVOL"),
+			AggregateConfiguration: &types.CreateAggregateConfiguration{
+				Aggregates: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ConstituentsPerAggregate: ptr.Int32(1),
+			},
+			SizeInBytes: ptr.Int64(1),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7130,7 +7952,10 @@ func TestCheckResponseSnapshot_DeleteBackup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBackup(context.Background(), &DeleteBackupInput{})
+	got, err := svc.DeleteBackup(context.Background(), &DeleteBackupInput{
+		BackupId:           ptr.String("__BackupId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7153,7 +7978,11 @@ func TestCheckResponseSnapshot_DeleteDataRepositoryAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataRepositoryAssociation(context.Background(), &DeleteDataRepositoryAssociationInput{})
+	got, err := svc.DeleteDataRepositoryAssociation(context.Background(), &DeleteDataRepositoryAssociationInput{
+		AssociationId:          ptr.String("__AssociationId__"),
+		ClientRequestToken:     ptr.String("__ClientRequestToken__"),
+		DeleteDataInFileSystem: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7175,7 +8004,10 @@ func TestCheckResponseSnapshot_DeleteFileCache(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFileCache(context.Background(), &DeleteFileCacheInput{})
+	got, err := svc.DeleteFileCache(context.Background(), &DeleteFileCacheInput{
+		FileCacheId:        ptr.String("__FileCacheId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7236,7 +8068,53 @@ func TestCheckResponseSnapshot_DeleteFileSystem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFileSystem(context.Background(), &DeleteFileSystemInput{})
+	got, err := svc.DeleteFileSystem(context.Background(), &DeleteFileSystemInput{
+		FileSystemId:       ptr.String("__FileSystemId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		WindowsConfiguration: &types.DeleteFileSystemWindowsConfiguration{
+			SkipFinalBackup: ptr.Bool(true),
+			FinalBackupTags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		LustreConfiguration: &types.DeleteFileSystemLustreConfiguration{
+			SkipFinalBackup: ptr.Bool(true),
+			FinalBackupTags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		OpenZFSConfiguration: &types.DeleteFileSystemOpenZFSConfiguration{
+			SkipFinalBackup: ptr.Bool(true),
+			FinalBackupTags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			Options: []types.DeleteFileSystemOpenZFSOption{
+				types.DeleteFileSystemOpenZFSOption("DELETE_CHILD_VOLUMES_AND_SNAPSHOTS"),
+				types.DeleteFileSystemOpenZFSOption("DELETE_CHILD_VOLUMES_AND_SNAPSHOTS"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7258,7 +8136,10 @@ func TestCheckResponseSnapshot_DeleteSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSnapshot(context.Background(), &DeleteSnapshotInput{})
+	got, err := svc.DeleteSnapshot(context.Background(), &DeleteSnapshotInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		SnapshotId:         ptr.String("__SnapshotId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7280,7 +8161,10 @@ func TestCheckResponseSnapshot_DeleteStorageVirtualMachine(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteStorageVirtualMachine(context.Background(), &DeleteStorageVirtualMachineInput{})
+	got, err := svc.DeleteStorageVirtualMachine(context.Background(), &DeleteStorageVirtualMachineInput{
+		ClientRequestToken:      ptr.String("__ClientRequestToken__"),
+		StorageVirtualMachineId: ptr.String("__StorageVirtualMachineId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7315,7 +8199,30 @@ func TestCheckResponseSnapshot_DeleteVolume(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVolume(context.Background(), &DeleteVolumeInput{})
+	got, err := svc.DeleteVolume(context.Background(), &DeleteVolumeInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		VolumeId:           ptr.String("__VolumeId__"),
+		OntapConfiguration: &types.DeleteVolumeOntapConfiguration{
+			SkipFinalBackup: ptr.Bool(true),
+			FinalBackupTags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			BypassSnaplockEnterpriseRetention: ptr.Bool(true),
+		},
+		OpenZFSConfiguration: &types.DeleteVolumeOpenZFSConfiguration{
+			Options: []types.DeleteOpenZFSVolumeOption{
+				types.DeleteOpenZFSVolumeOption("DELETE_CHILD_VOLUMES_AND_SNAPSHOTS"),
+				types.DeleteOpenZFSVolumeOption("DELETE_CHILD_VOLUMES_AND_SNAPSHOTS"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9810,7 +10717,30 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBackups(context.Background(), &DescribeBackupsInput{})
+	got, err := svc.DescribeBackups(context.Background(), &DescribeBackupsInput{
+		BackupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Name: types.FilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.FilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9947,7 +10877,30 @@ func TestCheckResponseSnapshot_DescribeDataRepositoryAssociations(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDataRepositoryAssociations(context.Background(), &DescribeDataRepositoryAssociationsInput{})
+	got, err := svc.DescribeDataRepositoryAssociations(context.Background(), &DescribeDataRepositoryAssociationsInput{
+		AssociationIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Name: types.FilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.FilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10066,7 +11019,30 @@ func TestCheckResponseSnapshot_DescribeDataRepositoryTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDataRepositoryTasks(context.Background(), &DescribeDataRepositoryTasksInput{})
+	got, err := svc.DescribeDataRepositoryTasks(context.Background(), &DescribeDataRepositoryTasksInput{
+		TaskIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.DataRepositoryTaskFilter{
+			{
+				Name: types.DataRepositoryTaskFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.DataRepositoryTaskFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10171,7 +11147,14 @@ func TestCheckResponseSnapshot_DescribeFileCaches(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFileCaches(context.Background(), &DescribeFileCachesInput{})
+	got, err := svc.DescribeFileCaches(context.Background(), &DescribeFileCachesInput{
+		FileCacheIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10202,7 +11185,12 @@ func TestCheckResponseSnapshot_DescribeFileSystemAliases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFileSystemAliases(context.Background(), &DescribeFileSystemAliasesInput{})
+	got, err := svc.DescribeFileSystemAliases(context.Background(), &DescribeFileSystemAliasesInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		FileSystemId:       ptr.String("__FileSystemId__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11371,7 +12359,14 @@ func TestCheckResponseSnapshot_DescribeFileSystems(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFileSystems(context.Background(), &DescribeFileSystemsInput{})
+	got, err := svc.DescribeFileSystems(context.Background(), &DescribeFileSystemsInput{
+		FileSystemIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -11478,7 +12473,30 @@ func TestCheckResponseSnapshot_DescribeS3AccessPointAttachments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeS3AccessPointAttachments(context.Background(), &DescribeS3AccessPointAttachmentsInput{})
+	got, err := svc.DescribeS3AccessPointAttachments(context.Background(), &DescribeS3AccessPointAttachmentsInput{
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.S3AccessPointAttachmentsFilter{
+			{
+				Name: types.S3AccessPointAttachmentsFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.S3AccessPointAttachmentsFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13028,7 +14046,31 @@ func TestCheckResponseSnapshot_DescribeSnapshots(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSnapshots(context.Background(), &DescribeSnapshotsInput{})
+	got, err := svc.DescribeSnapshots(context.Background(), &DescribeSnapshotsInput{
+		SnapshotIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.SnapshotFilter{
+			{
+				Name: types.SnapshotFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.SnapshotFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		IncludeShared: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13219,7 +14261,30 @@ func TestCheckResponseSnapshot_DescribeStorageVirtualMachines(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeStorageVirtualMachines(context.Background(), &DescribeStorageVirtualMachinesInput{})
+	got, err := svc.DescribeStorageVirtualMachines(context.Background(), &DescribeStorageVirtualMachinesInput{
+		StorageVirtualMachineIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.StorageVirtualMachineFilter{
+			{
+				Name: types.StorageVirtualMachineFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.StorageVirtualMachineFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14504,7 +15569,30 @@ func TestCheckResponseSnapshot_DescribeVolumes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeVolumes(context.Background(), &DescribeVolumesInput{})
+	got, err := svc.DescribeVolumes(context.Background(), &DescribeVolumesInput{
+		VolumeIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.VolumeFilter{
+			{
+				Name: types.VolumeFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.VolumeFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14526,7 +15614,10 @@ func TestCheckResponseSnapshot_DetachAndDeleteS3AccessPoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetachAndDeleteS3AccessPoint(context.Background(), &DetachAndDeleteS3AccessPointInput{})
+	got, err := svc.DetachAndDeleteS3AccessPoint(context.Background(), &DetachAndDeleteS3AccessPointInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Name:               ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14556,7 +15647,14 @@ func TestCheckResponseSnapshot_DisassociateFileSystemAliases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateFileSystemAliases(context.Background(), &DisassociateFileSystemAliasesInput{})
+	got, err := svc.DisassociateFileSystemAliases(context.Background(), &DisassociateFileSystemAliasesInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		FileSystemId:       ptr.String("__FileSystemId__"),
+		Aliases: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14587,7 +15685,11 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15180,7 +16282,10 @@ func TestCheckResponseSnapshot_ReleaseFileSystemNfsV3Locks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ReleaseFileSystemNfsV3Locks(context.Background(), &ReleaseFileSystemNfsV3LocksInput{})
+	got, err := svc.ReleaseFileSystemNfsV3Locks(context.Background(), &ReleaseFileSystemNfsV3LocksInput{
+		FileSystemId:       ptr.String("__FileSystemId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15982,7 +17087,15 @@ func TestCheckResponseSnapshot_RestoreVolumeFromSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RestoreVolumeFromSnapshot(context.Background(), &RestoreVolumeFromSnapshotInput{})
+	got, err := svc.RestoreVolumeFromSnapshot(context.Background(), &RestoreVolumeFromSnapshotInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		VolumeId:           ptr.String("__VolumeId__"),
+		SnapshotId:         ptr.String("__SnapshotId__"),
+		Options: []types.RestoreOpenZFSVolumeOption{
+			types.RestoreOpenZFSVolumeOption("DELETE_INTERMEDIATE_SNAPSHOTS"),
+			types.RestoreOpenZFSVolumeOption("DELETE_INTERMEDIATE_SNAPSHOTS"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16575,7 +17688,10 @@ func TestCheckResponseSnapshot_StartMisconfiguredStateRecovery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMisconfiguredStateRecovery(context.Background(), &StartMisconfiguredStateRecoveryInput{})
+	got, err := svc.StartMisconfiguredStateRecovery(context.Background(), &StartMisconfiguredStateRecoveryInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		FileSystemId:       ptr.String("__FileSystemId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16594,7 +17710,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16613,7 +17741,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16690,7 +17824,25 @@ func TestCheckResponseSnapshot_UpdateDataRepositoryAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataRepositoryAssociation(context.Background(), &UpdateDataRepositoryAssociationInput{})
+	got, err := svc.UpdateDataRepositoryAssociation(context.Background(), &UpdateDataRepositoryAssociationInput{
+		AssociationId:         ptr.String("__AssociationId__"),
+		ClientRequestToken:    ptr.String("__ClientRequestToken__"),
+		ImportedFileChunkSize: ptr.Int32(1),
+		S3: &types.S3DataRepositoryConfiguration{
+			AutoImportPolicy: &types.AutoImportPolicy{
+				Events: []types.EventType{
+					types.EventType("NEW"),
+					types.EventType("NEW"),
+				},
+			},
+			AutoExportPolicy: &types.AutoExportPolicy{
+				Events: []types.EventType{
+					types.EventType("NEW"),
+					types.EventType("NEW"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16751,7 +17903,13 @@ func TestCheckResponseSnapshot_UpdateFileCache(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFileCache(context.Background(), &UpdateFileCacheInput{})
+	got, err := svc.UpdateFileCache(context.Background(), &UpdateFileCacheInput{
+		FileCacheId:        ptr.String("__FileCacheId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		LustreConfiguration: &types.UpdateFileCacheLustreConfiguration{
+			WeeklyMaintenanceStartTime: ptr.String("__WeeklyMaintenanceStartTime__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17344,7 +18502,120 @@ func TestCheckResponseSnapshot_UpdateFileSystem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFileSystem(context.Background(), &UpdateFileSystemInput{})
+	got, err := svc.UpdateFileSystem(context.Background(), &UpdateFileSystemInput{
+		FileSystemId:       ptr.String("__FileSystemId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		StorageCapacity:    ptr.Int32(1),
+		WindowsConfiguration: &types.UpdateFileSystemWindowsConfiguration{
+			WeeklyMaintenanceStartTime:    ptr.String("__WeeklyMaintenanceStartTime__"),
+			DailyAutomaticBackupStartTime: ptr.String("__DailyAutomaticBackupStartTime__"),
+			AutomaticBackupRetentionDays:  ptr.Int32(1),
+			ThroughputCapacity:            ptr.Int32(1),
+			SelfManagedActiveDirectoryConfiguration: &types.SelfManagedActiveDirectoryConfigurationUpdates{
+				UserName: ptr.String("__UserName__"),
+				Password: ptr.String("__Password__"),
+				DnsIps: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DomainName:                          ptr.String("__DomainName__"),
+				OrganizationalUnitDistinguishedName: ptr.String("__OrganizationalUnitDistinguishedName__"),
+				FileSystemAdministratorsGroup:       ptr.String("__FileSystemAdministratorsGroup__"),
+				DomainJoinServiceAccountSecret:      ptr.String("__DomainJoinServiceAccountSecret__"),
+			},
+			AuditLogConfiguration: &types.WindowsAuditLogCreateConfiguration{
+				FileAccessAuditLogLevel:      types.WindowsAccessAuditLogLevel("DISABLED"),
+				FileShareAccessAuditLogLevel: types.WindowsAccessAuditLogLevel("DISABLED"),
+				AuditLogDestination:          ptr.String("__AuditLogDestination__"),
+			},
+			DiskIopsConfiguration: &types.DiskIopsConfiguration{
+				Mode: types.DiskIopsConfigurationMode("AUTOMATIC"),
+				Iops: ptr.Int64(1),
+			},
+			FsrmConfiguration: &types.WindowsFsrmConfiguration{
+				FsrmServiceEnabled:  ptr.Bool(true),
+				EventLogDestination: ptr.String("__EventLogDestination__"),
+			},
+		},
+		LustreConfiguration: &types.UpdateFileSystemLustreConfiguration{
+			WeeklyMaintenanceStartTime:    ptr.String("__WeeklyMaintenanceStartTime__"),
+			DailyAutomaticBackupStartTime: ptr.String("__DailyAutomaticBackupStartTime__"),
+			AutomaticBackupRetentionDays:  ptr.Int32(1),
+			AutoImportPolicy:              types.AutoImportPolicyType("NONE"),
+			DataCompressionType:           types.DataCompressionType("NONE"),
+			LogConfiguration: &types.LustreLogCreateConfiguration{
+				Level:       types.LustreAccessAuditLogLevel("DISABLED"),
+				Destination: ptr.String("__Destination__"),
+			},
+			RootSquashConfiguration: &types.LustreRootSquashConfiguration{
+				RootSquash: ptr.String("__RootSquash__"),
+				NoSquashNids: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			PerUnitStorageThroughput: ptr.Int32(1),
+			MetadataConfiguration: &types.UpdateFileSystemLustreMetadataConfiguration{
+				Iops: ptr.Int32(1),
+				Mode: types.MetadataConfigurationMode("AUTOMATIC"),
+			},
+			ThroughputCapacity: ptr.Int32(1),
+			DataReadCacheConfiguration: &types.LustreReadCacheConfiguration{
+				SizingMode: types.LustreReadCacheSizingMode("NO_CACHE"),
+				SizeGiB:    ptr.Int32(1),
+			},
+		},
+		OntapConfiguration: &types.UpdateFileSystemOntapConfiguration{
+			AutomaticBackupRetentionDays:  ptr.Int32(1),
+			DailyAutomaticBackupStartTime: ptr.String("__DailyAutomaticBackupStartTime__"),
+			FsxAdminPassword:              ptr.String("__FsxAdminPassword__"),
+			WeeklyMaintenanceStartTime:    ptr.String("__WeeklyMaintenanceStartTime__"),
+			DiskIopsConfiguration: &types.DiskIopsConfiguration{
+				Mode: types.DiskIopsConfigurationMode("AUTOMATIC"),
+				Iops: ptr.Int64(1),
+			},
+			ThroughputCapacity: ptr.Int32(1),
+			AddRouteTableIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RemoveRouteTableIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ThroughputCapacityPerHAPair: ptr.Int32(1),
+			HAPairs:                     ptr.Int32(1),
+			EndpointIpv6AddressRange:    ptr.String("__EndpointIpv6AddressRange__"),
+		},
+		OpenZFSConfiguration: &types.UpdateFileSystemOpenZFSConfiguration{
+			AutomaticBackupRetentionDays:  ptr.Int32(1),
+			CopyTagsToBackups:             ptr.Bool(true),
+			CopyTagsToVolumes:             ptr.Bool(true),
+			DailyAutomaticBackupStartTime: ptr.String("__DailyAutomaticBackupStartTime__"),
+			ThroughputCapacity:            ptr.Int32(1),
+			WeeklyMaintenanceStartTime:    ptr.String("__WeeklyMaintenanceStartTime__"),
+			DiskIopsConfiguration: &types.DiskIopsConfiguration{
+				Mode: types.DiskIopsConfigurationMode("AUTOMATIC"),
+				Iops: ptr.Int64(1),
+			},
+			AddRouteTableIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RemoveRouteTableIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ReadCacheConfiguration: &types.OpenZFSReadCacheConfiguration{
+				SizingMode: types.OpenZFSReadCacheSizingMode("NO_CACHE"),
+				SizeGiB:    ptr.Int32(1),
+			},
+			EndpointIpv6AddressRange: ptr.String("__EndpointIpv6AddressRange__"),
+		},
+		StorageType:           types.StorageType("SSD"),
+		FileSystemTypeVersion: ptr.String("__FileSystemTypeVersion__"),
+		NetworkType:           types.NetworkType("IPV4"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -17365,7 +18636,10 @@ func TestCheckResponseSnapshot_UpdateSharedVpcConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSharedVpcConfiguration(context.Background(), &UpdateSharedVpcConfigurationInput{})
+	got, err := svc.UpdateSharedVpcConfiguration(context.Background(), &UpdateSharedVpcConfigurationInput{
+		EnableFsxRouteTableUpdatesFromParticipantAccounts: ptr.String("__EnableFsxRouteTableUpdatesFromParticipantAccounts__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18138,7 +19412,11 @@ func TestCheckResponseSnapshot_UpdateSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSnapshot(context.Background(), &UpdateSnapshotInput{})
+	got, err := svc.UpdateSnapshot(context.Background(), &UpdateSnapshotInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Name:               ptr.String("__Name__"),
+		SnapshotId:         ptr.String("__SnapshotId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18242,7 +19520,26 @@ func TestCheckResponseSnapshot_UpdateStorageVirtualMachine(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateStorageVirtualMachine(context.Background(), &UpdateStorageVirtualMachineInput{})
+	got, err := svc.UpdateStorageVirtualMachine(context.Background(), &UpdateStorageVirtualMachineInput{
+		ActiveDirectoryConfiguration: &types.UpdateSvmActiveDirectoryConfiguration{
+			SelfManagedActiveDirectoryConfiguration: &types.SelfManagedActiveDirectoryConfigurationUpdates{
+				UserName: ptr.String("__UserName__"),
+				Password: ptr.String("__Password__"),
+				DnsIps: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DomainName:                          ptr.String("__DomainName__"),
+				OrganizationalUnitDistinguishedName: ptr.String("__OrganizationalUnitDistinguishedName__"),
+				FileSystemAdministratorsGroup:       ptr.String("__FileSystemAdministratorsGroup__"),
+				DomainJoinServiceAccountSecret:      ptr.String("__DomainJoinServiceAccountSecret__"),
+			},
+			NetBiosName: ptr.String("__NetBiosName__"),
+		},
+		ClientRequestToken:      ptr.String("__ClientRequestToken__"),
+		StorageVirtualMachineId: ptr.String("__StorageVirtualMachineId__"),
+		SvmAdminPassword:        ptr.String("__SvmAdminPassword__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18893,7 +20190,104 @@ func TestCheckResponseSnapshot_UpdateVolume(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateVolume(context.Background(), &UpdateVolumeInput{})
+	got, err := svc.UpdateVolume(context.Background(), &UpdateVolumeInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		VolumeId:           ptr.String("__VolumeId__"),
+		OntapConfiguration: &types.UpdateOntapVolumeConfiguration{
+			JunctionPath:             ptr.String("__JunctionPath__"),
+			SecurityStyle:            types.SecurityStyle("UNIX"),
+			SizeInMegabytes:          ptr.Int32(1),
+			StorageEfficiencyEnabled: ptr.Bool(true),
+			TieringPolicy: &types.TieringPolicy{
+				CoolingPeriod: ptr.Int32(1),
+				Name:          types.TieringPolicyName("SNAPSHOT_ONLY"),
+			},
+			SnapshotPolicy:    ptr.String("__SnapshotPolicy__"),
+			CopyTagsToBackups: ptr.Bool(true),
+			SnaplockConfiguration: &types.UpdateSnaplockConfiguration{
+				AuditLogVolume: ptr.Bool(true),
+				AutocommitPeriod: &types.AutocommitPeriod{
+					Type:  types.AutocommitPeriodType("MINUTES"),
+					Value: ptr.Int32(1),
+				},
+				PrivilegedDelete: types.PrivilegedDelete("DISABLED"),
+				RetentionPeriod: &types.SnaplockRetentionPeriod{
+					DefaultRetention: &types.RetentionPeriod{
+						Type:  types.RetentionPeriodType("SECONDS"),
+						Value: ptr.Int32(1),
+					},
+					MinimumRetention: &types.RetentionPeriod{
+						Type:  types.RetentionPeriodType("SECONDS"),
+						Value: ptr.Int32(1),
+					},
+					MaximumRetention: &types.RetentionPeriod{
+						Type:  types.RetentionPeriodType("SECONDS"),
+						Value: ptr.Int32(1),
+					},
+				},
+				VolumeAppendModeEnabled: ptr.Bool(true),
+			},
+			SizeInBytes: ptr.Int64(1),
+		},
+		Name: ptr.String("__Name__"),
+		OpenZFSConfiguration: &types.UpdateOpenZFSVolumeConfiguration{
+			StorageCapacityReservationGiB: ptr.Int32(1),
+			StorageCapacityQuotaGiB:       ptr.Int32(1),
+			RecordSizeKiB:                 ptr.Int32(1),
+			DataCompressionType:           types.OpenZFSDataCompressionType("NONE"),
+			NfsExports: []types.OpenZFSNfsExport{
+				{
+					ClientConfigurations: []types.OpenZFSClientConfiguration{
+						{
+							Clients: ptr.String("__Clients__"),
+							Options: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Clients: ptr.String("__Clients__"),
+							Options: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				{
+					ClientConfigurations: []types.OpenZFSClientConfiguration{
+						{
+							Clients: ptr.String("__Clients__"),
+							Options: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Clients: ptr.String("__Clients__"),
+							Options: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			UserAndGroupQuotas: []types.OpenZFSUserOrGroupQuota{
+				{
+					Type:                    types.OpenZFSQuotaType("USER"),
+					Id:                      ptr.Int32(1),
+					StorageCapacityQuotaGiB: ptr.Int32(1),
+				},
+				{
+					Type:                    types.OpenZFSQuotaType("USER"),
+					Id:                      ptr.Int32(1),
+					StorageCapacityQuotaGiB: ptr.Int32(1),
+				},
+			},
+			ReadOnly: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -18915,7 +20309,43 @@ func TestCheckResponseSnapshot_Error_AccessPointAlreadyOwnedByYou(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAndAttachS3AccessPoint(context.Background(), &CreateAndAttachS3AccessPointInput{})
+	_, opErr := svc.CreateAndAttachS3AccessPoint(context.Background(), &CreateAndAttachS3AccessPointInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Name:               ptr.String("__Name__"),
+		Type:               types.S3AccessPointAttachmentType("OPENZFS"),
+		OpenZFSConfiguration: &types.CreateAndAttachS3AccessPointOpenZFSConfiguration{
+			VolumeId: ptr.String("__VolumeId__"),
+			FileSystemIdentity: &types.OpenZFSFileSystemIdentity{
+				Type: types.OpenZFSFileSystemUserType("POSIX"),
+				PosixUser: &types.OpenZFSPosixFileSystemUser{
+					Uid: ptr.Int64(1),
+					Gid: ptr.Int64(1),
+					SecondaryGids: []int64{
+						1,
+						1,
+					},
+				},
+			},
+		},
+		OntapConfiguration: &types.CreateAndAttachS3AccessPointOntapConfiguration{
+			VolumeId: ptr.String("__VolumeId__"),
+			FileSystemIdentity: &types.OntapFileSystemIdentity{
+				Type: types.OntapFileSystemUserType("UNIX"),
+				UnixUser: &types.OntapUnixFileSystemUser{
+					Name: ptr.String("__Name__"),
+				},
+				WindowsUser: &types.OntapWindowsFileSystemUser{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		S3AccessPoint: &types.CreateAndAttachS3AccessPointS3Configuration{
+			VpcConfiguration: &types.S3AccessPointVpcConfiguration{
+				VpcId: ptr.String("__VpcId__"),
+			},
+			Policy: ptr.String("__Policy__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -18942,7 +20372,208 @@ func TestCheckResponseSnapshot_Error_ActiveDirectoryError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFileSystem(context.Background(), &CreateFileSystemInput{})
+	_, opErr := svc.CreateFileSystem(context.Background(), &CreateFileSystemInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		FileSystemType:     types.FileSystemType("WINDOWS"),
+		StorageCapacity:    ptr.Int32(1),
+		StorageType:        types.StorageType("SSD"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+		WindowsConfiguration: &types.CreateFileSystemWindowsConfiguration{
+			ActiveDirectoryId: ptr.String("__ActiveDirectoryId__"),
+			SelfManagedActiveDirectoryConfiguration: &types.SelfManagedActiveDirectoryConfiguration{
+				DomainName:                          ptr.String("__DomainName__"),
+				OrganizationalUnitDistinguishedName: ptr.String("__OrganizationalUnitDistinguishedName__"),
+				FileSystemAdministratorsGroup:       ptr.String("__FileSystemAdministratorsGroup__"),
+				UserName:                            ptr.String("__UserName__"),
+				Password:                            ptr.String("__Password__"),
+				DnsIps: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DomainJoinServiceAccountSecret: ptr.String("__DomainJoinServiceAccountSecret__"),
+			},
+			DeploymentType:                types.WindowsDeploymentType("MULTI_AZ_1"),
+			PreferredSubnetId:             ptr.String("__PreferredSubnetId__"),
+			ThroughputCapacity:            ptr.Int32(1),
+			WeeklyMaintenanceStartTime:    ptr.String("__WeeklyMaintenanceStartTime__"),
+			DailyAutomaticBackupStartTime: ptr.String("__DailyAutomaticBackupStartTime__"),
+			AutomaticBackupRetentionDays:  ptr.Int32(1),
+			CopyTagsToBackups:             ptr.Bool(true),
+			Aliases: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AuditLogConfiguration: &types.WindowsAuditLogCreateConfiguration{
+				FileAccessAuditLogLevel:      types.WindowsAccessAuditLogLevel("DISABLED"),
+				FileShareAccessAuditLogLevel: types.WindowsAccessAuditLogLevel("DISABLED"),
+				AuditLogDestination:          ptr.String("__AuditLogDestination__"),
+			},
+			DiskIopsConfiguration: &types.DiskIopsConfiguration{
+				Mode: types.DiskIopsConfigurationMode("AUTOMATIC"),
+				Iops: ptr.Int64(1),
+			},
+			FsrmConfiguration: &types.WindowsFsrmConfiguration{
+				FsrmServiceEnabled:  ptr.Bool(true),
+				EventLogDestination: ptr.String("__EventLogDestination__"),
+			},
+		},
+		LustreConfiguration: &types.CreateFileSystemLustreConfiguration{
+			WeeklyMaintenanceStartTime:    ptr.String("__WeeklyMaintenanceStartTime__"),
+			ImportPath:                    ptr.String("__ImportPath__"),
+			ExportPath:                    ptr.String("__ExportPath__"),
+			ImportedFileChunkSize:         ptr.Int32(1),
+			DeploymentType:                types.LustreDeploymentType("SCRATCH_1"),
+			AutoImportPolicy:              types.AutoImportPolicyType("NONE"),
+			PerUnitStorageThroughput:      ptr.Int32(1),
+			DailyAutomaticBackupStartTime: ptr.String("__DailyAutomaticBackupStartTime__"),
+			AutomaticBackupRetentionDays:  ptr.Int32(1),
+			CopyTagsToBackups:             ptr.Bool(true),
+			DriveCacheType:                types.DriveCacheType("NONE"),
+			DataCompressionType:           types.DataCompressionType("NONE"),
+			EfaEnabled:                    ptr.Bool(true),
+			LogConfiguration: &types.LustreLogCreateConfiguration{
+				Level:       types.LustreAccessAuditLogLevel("DISABLED"),
+				Destination: ptr.String("__Destination__"),
+			},
+			RootSquashConfiguration: &types.LustreRootSquashConfiguration{
+				RootSquash: ptr.String("__RootSquash__"),
+				NoSquashNids: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			MetadataConfiguration: &types.CreateFileSystemLustreMetadataConfiguration{
+				Iops: ptr.Int32(1),
+				Mode: types.MetadataConfigurationMode("AUTOMATIC"),
+			},
+			ThroughputCapacity: ptr.Int32(1),
+			DataReadCacheConfiguration: &types.LustreReadCacheConfiguration{
+				SizingMode: types.LustreReadCacheSizingMode("NO_CACHE"),
+				SizeGiB:    ptr.Int32(1),
+			},
+		},
+		OntapConfiguration: &types.CreateFileSystemOntapConfiguration{
+			AutomaticBackupRetentionDays:  ptr.Int32(1),
+			DailyAutomaticBackupStartTime: ptr.String("__DailyAutomaticBackupStartTime__"),
+			DeploymentType:                types.OntapDeploymentType("MULTI_AZ_1"),
+			EndpointIpAddressRange:        ptr.String("__EndpointIpAddressRange__"),
+			FsxAdminPassword:              ptr.String("__FsxAdminPassword__"),
+			DiskIopsConfiguration: &types.DiskIopsConfiguration{
+				Mode: types.DiskIopsConfigurationMode("AUTOMATIC"),
+				Iops: ptr.Int64(1),
+			},
+			PreferredSubnetId: ptr.String("__PreferredSubnetId__"),
+			RouteTableIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ThroughputCapacity:          ptr.Int32(1),
+			WeeklyMaintenanceStartTime:  ptr.String("__WeeklyMaintenanceStartTime__"),
+			HAPairs:                     ptr.Int32(1),
+			ThroughputCapacityPerHAPair: ptr.Int32(1),
+			EndpointIpv6AddressRange:    ptr.String("__EndpointIpv6AddressRange__"),
+		},
+		FileSystemTypeVersion: ptr.String("__FileSystemTypeVersion__"),
+		OpenZFSConfiguration: &types.CreateFileSystemOpenZFSConfiguration{
+			AutomaticBackupRetentionDays:  ptr.Int32(1),
+			CopyTagsToBackups:             ptr.Bool(true),
+			CopyTagsToVolumes:             ptr.Bool(true),
+			DailyAutomaticBackupStartTime: ptr.String("__DailyAutomaticBackupStartTime__"),
+			DeploymentType:                types.OpenZFSDeploymentType("SINGLE_AZ_1"),
+			ThroughputCapacity:            ptr.Int32(1),
+			WeeklyMaintenanceStartTime:    ptr.String("__WeeklyMaintenanceStartTime__"),
+			DiskIopsConfiguration: &types.DiskIopsConfiguration{
+				Mode: types.DiskIopsConfigurationMode("AUTOMATIC"),
+				Iops: ptr.Int64(1),
+			},
+			RootVolumeConfiguration: &types.OpenZFSCreateRootVolumeConfiguration{
+				RecordSizeKiB:       ptr.Int32(1),
+				DataCompressionType: types.OpenZFSDataCompressionType("NONE"),
+				NfsExports: []types.OpenZFSNfsExport{
+					{
+						ClientConfigurations: []types.OpenZFSClientConfiguration{
+							{
+								Clients: ptr.String("__Clients__"),
+								Options: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Clients: ptr.String("__Clients__"),
+								Options: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+					{
+						ClientConfigurations: []types.OpenZFSClientConfiguration{
+							{
+								Clients: ptr.String("__Clients__"),
+								Options: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Clients: ptr.String("__Clients__"),
+								Options: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				UserAndGroupQuotas: []types.OpenZFSUserOrGroupQuota{
+					{
+						Type:                    types.OpenZFSQuotaType("USER"),
+						Id:                      ptr.Int32(1),
+						StorageCapacityQuotaGiB: ptr.Int32(1),
+					},
+					{
+						Type:                    types.OpenZFSQuotaType("USER"),
+						Id:                      ptr.Int32(1),
+						StorageCapacityQuotaGiB: ptr.Int32(1),
+					},
+				},
+				CopyTagsToSnapshots: ptr.Bool(true),
+				ReadOnly:            ptr.Bool(true),
+			},
+			PreferredSubnetId:        ptr.String("__PreferredSubnetId__"),
+			EndpointIpAddressRange:   ptr.String("__EndpointIpAddressRange__"),
+			EndpointIpv6AddressRange: ptr.String("__EndpointIpv6AddressRange__"),
+			RouteTableIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ReadCacheConfiguration: &types.OpenZFSReadCacheConfiguration{
+				SizingMode: types.OpenZFSReadCacheSizingMode("NO_CACHE"),
+				SizeGiB:    ptr.Int32(1),
+			},
+		},
+		NetworkType: types.NetworkType("IPV4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -18968,7 +20599,10 @@ func TestCheckResponseSnapshot_Error_BackupBeingCopied(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteBackup(context.Background(), &DeleteBackupInput{})
+	_, opErr := svc.DeleteBackup(context.Background(), &DeleteBackupInput{
+		BackupId:           ptr.String("__BackupId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -18993,7 +20627,21 @@ func TestCheckResponseSnapshot_Error_BackupInProgress(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBackup(context.Background(), &CreateBackupInput{})
+	_, opErr := svc.CreateBackup(context.Background(), &CreateBackupInput{
+		FileSystemId:       ptr.String("__FileSystemId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		VolumeId: ptr.String("__VolumeId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19018,7 +20666,23 @@ func TestCheckResponseSnapshot_Error_BackupNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyBackup(context.Background(), &CopyBackupInput{})
+	_, opErr := svc.CopyBackup(context.Background(), &CopyBackupInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		SourceBackupId:     ptr.String("__SourceBackupId__"),
+		SourceRegion:       ptr.String("__SourceRegion__"),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		CopyTags:           ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19044,7 +20708,10 @@ func TestCheckResponseSnapshot_Error_BackupRestoring(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteBackup(context.Background(), &DeleteBackupInput{})
+	_, opErr := svc.DeleteBackup(context.Background(), &DeleteBackupInput{
+		BackupId:           ptr.String("__BackupId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19069,7 +20736,14 @@ func TestCheckResponseSnapshot_Error_BadRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFileSystemAliases(context.Background(), &AssociateFileSystemAliasesInput{})
+	_, opErr := svc.AssociateFileSystemAliases(context.Background(), &AssociateFileSystemAliasesInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		FileSystemId:       ptr.String("__FileSystemId__"),
+		Aliases: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19094,7 +20768,11 @@ func TestCheckResponseSnapshot_Error_DataRepositoryAssociationNotFound(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteDataRepositoryAssociation(context.Background(), &DeleteDataRepositoryAssociationInput{})
+	_, opErr := svc.DeleteDataRepositoryAssociation(context.Background(), &DeleteDataRepositoryAssociationInput{
+		AssociationId:          ptr.String("__AssociationId__"),
+		ClientRequestToken:     ptr.String("__ClientRequestToken__"),
+		DeleteDataInFileSystem: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19119,7 +20797,9 @@ func TestCheckResponseSnapshot_Error_DataRepositoryTaskEnded(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelDataRepositoryTask(context.Background(), &CancelDataRepositoryTaskInput{})
+	_, opErr := svc.CancelDataRepositoryTask(context.Background(), &CancelDataRepositoryTaskInput{
+		TaskId: ptr.String("__TaskId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19144,7 +20824,38 @@ func TestCheckResponseSnapshot_Error_DataRepositoryTaskExecuting(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataRepositoryTask(context.Background(), &CreateDataRepositoryTaskInput{})
+	_, opErr := svc.CreateDataRepositoryTask(context.Background(), &CreateDataRepositoryTaskInput{
+		Type: types.DataRepositoryTaskType("EXPORT_TO_REPOSITORY"),
+		Paths: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FileSystemId: ptr.String("__FileSystemId__"),
+		Report: &types.CompletionReport{
+			Enabled: ptr.Bool(true),
+			Path:    ptr.String("__Path__"),
+			Format:  types.ReportFormat("REPORT_CSV_20191124"),
+			Scope:   types.ReportScope("FAILED_FILES_ONLY"),
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		CapacityToRelease: ptr.Int64(1),
+		ReleaseConfiguration: &types.ReleaseConfiguration{
+			DurationSinceLastAccess: &types.DurationSinceLastAccess{
+				Unit:  types.Unit("DAYS"),
+				Value: ptr.Int64(1),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19169,7 +20880,9 @@ func TestCheckResponseSnapshot_Error_DataRepositoryTaskNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelDataRepositoryTask(context.Background(), &CancelDataRepositoryTaskInput{})
+	_, opErr := svc.CancelDataRepositoryTask(context.Background(), &CancelDataRepositoryTaskInput{
+		TaskId: ptr.String("__TaskId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19194,7 +20907,10 @@ func TestCheckResponseSnapshot_Error_FileCacheNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteFileCache(context.Background(), &DeleteFileCacheInput{})
+	_, opErr := svc.DeleteFileCache(context.Background(), &DeleteFileCacheInput{
+		FileCacheId:        ptr.String("__FileCacheId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19219,7 +20935,14 @@ func TestCheckResponseSnapshot_Error_FileSystemNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFileSystemAliases(context.Background(), &AssociateFileSystemAliasesInput{})
+	_, opErr := svc.AssociateFileSystemAliases(context.Background(), &AssociateFileSystemAliasesInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		FileSystemId:       ptr.String("__FileSystemId__"),
+		Aliases: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19245,7 +20968,23 @@ func TestCheckResponseSnapshot_Error_IncompatibleParameterError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyBackup(context.Background(), &CopyBackupInput{})
+	_, opErr := svc.CopyBackup(context.Background(), &CopyBackupInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		SourceBackupId:     ptr.String("__SourceBackupId__"),
+		SourceRegion:       ptr.String("__SourceRegion__"),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		CopyTags:           ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19270,7 +21009,23 @@ func TestCheckResponseSnapshot_Error_IncompatibleRegionForMultiAZ(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyBackup(context.Background(), &CopyBackupInput{})
+	_, opErr := svc.CopyBackup(context.Background(), &CopyBackupInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		SourceBackupId:     ptr.String("__SourceBackupId__"),
+		SourceRegion:       ptr.String("__SourceRegion__"),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		CopyTags:           ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19295,7 +21050,14 @@ func TestCheckResponseSnapshot_Error_InternalServerError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFileSystemAliases(context.Background(), &AssociateFileSystemAliasesInput{})
+	_, opErr := svc.AssociateFileSystemAliases(context.Background(), &AssociateFileSystemAliasesInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		FileSystemId:       ptr.String("__FileSystemId__"),
+		Aliases: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19321,7 +21083,43 @@ func TestCheckResponseSnapshot_Error_InvalidAccessPoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAndAttachS3AccessPoint(context.Background(), &CreateAndAttachS3AccessPointInput{})
+	_, opErr := svc.CreateAndAttachS3AccessPoint(context.Background(), &CreateAndAttachS3AccessPointInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Name:               ptr.String("__Name__"),
+		Type:               types.S3AccessPointAttachmentType("OPENZFS"),
+		OpenZFSConfiguration: &types.CreateAndAttachS3AccessPointOpenZFSConfiguration{
+			VolumeId: ptr.String("__VolumeId__"),
+			FileSystemIdentity: &types.OpenZFSFileSystemIdentity{
+				Type: types.OpenZFSFileSystemUserType("POSIX"),
+				PosixUser: &types.OpenZFSPosixFileSystemUser{
+					Uid: ptr.Int64(1),
+					Gid: ptr.Int64(1),
+					SecondaryGids: []int64{
+						1,
+						1,
+					},
+				},
+			},
+		},
+		OntapConfiguration: &types.CreateAndAttachS3AccessPointOntapConfiguration{
+			VolumeId: ptr.String("__VolumeId__"),
+			FileSystemIdentity: &types.OntapFileSystemIdentity{
+				Type: types.OntapFileSystemUserType("UNIX"),
+				UnixUser: &types.OntapUnixFileSystemUser{
+					Name: ptr.String("__Name__"),
+				},
+				WindowsUser: &types.OntapWindowsFileSystemUser{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		S3AccessPoint: &types.CreateAndAttachS3AccessPointS3Configuration{
+			VpcConfiguration: &types.S3AccessPointVpcConfiguration{
+				VpcId: ptr.String("__VpcId__"),
+			},
+			Policy: ptr.String("__Policy__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19346,7 +21144,30 @@ func TestCheckResponseSnapshot_Error_InvalidDataRepositoryType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeDataRepositoryAssociations(context.Background(), &DescribeDataRepositoryAssociationsInput{})
+	_, opErr := svc.DescribeDataRepositoryAssociations(context.Background(), &DescribeDataRepositoryAssociationsInput{
+		AssociationIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Name: types.FilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.FilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19371,7 +21192,23 @@ func TestCheckResponseSnapshot_Error_InvalidDestinationKmsKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyBackup(context.Background(), &CopyBackupInput{})
+	_, opErr := svc.CopyBackup(context.Background(), &CopyBackupInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		SourceBackupId:     ptr.String("__SourceBackupId__"),
+		SourceRegion:       ptr.String("__SourceRegion__"),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		CopyTags:           ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19396,7 +21233,208 @@ func TestCheckResponseSnapshot_Error_InvalidExportPath(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFileSystem(context.Background(), &CreateFileSystemInput{})
+	_, opErr := svc.CreateFileSystem(context.Background(), &CreateFileSystemInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		FileSystemType:     types.FileSystemType("WINDOWS"),
+		StorageCapacity:    ptr.Int32(1),
+		StorageType:        types.StorageType("SSD"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+		WindowsConfiguration: &types.CreateFileSystemWindowsConfiguration{
+			ActiveDirectoryId: ptr.String("__ActiveDirectoryId__"),
+			SelfManagedActiveDirectoryConfiguration: &types.SelfManagedActiveDirectoryConfiguration{
+				DomainName:                          ptr.String("__DomainName__"),
+				OrganizationalUnitDistinguishedName: ptr.String("__OrganizationalUnitDistinguishedName__"),
+				FileSystemAdministratorsGroup:       ptr.String("__FileSystemAdministratorsGroup__"),
+				UserName:                            ptr.String("__UserName__"),
+				Password:                            ptr.String("__Password__"),
+				DnsIps: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DomainJoinServiceAccountSecret: ptr.String("__DomainJoinServiceAccountSecret__"),
+			},
+			DeploymentType:                types.WindowsDeploymentType("MULTI_AZ_1"),
+			PreferredSubnetId:             ptr.String("__PreferredSubnetId__"),
+			ThroughputCapacity:            ptr.Int32(1),
+			WeeklyMaintenanceStartTime:    ptr.String("__WeeklyMaintenanceStartTime__"),
+			DailyAutomaticBackupStartTime: ptr.String("__DailyAutomaticBackupStartTime__"),
+			AutomaticBackupRetentionDays:  ptr.Int32(1),
+			CopyTagsToBackups:             ptr.Bool(true),
+			Aliases: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AuditLogConfiguration: &types.WindowsAuditLogCreateConfiguration{
+				FileAccessAuditLogLevel:      types.WindowsAccessAuditLogLevel("DISABLED"),
+				FileShareAccessAuditLogLevel: types.WindowsAccessAuditLogLevel("DISABLED"),
+				AuditLogDestination:          ptr.String("__AuditLogDestination__"),
+			},
+			DiskIopsConfiguration: &types.DiskIopsConfiguration{
+				Mode: types.DiskIopsConfigurationMode("AUTOMATIC"),
+				Iops: ptr.Int64(1),
+			},
+			FsrmConfiguration: &types.WindowsFsrmConfiguration{
+				FsrmServiceEnabled:  ptr.Bool(true),
+				EventLogDestination: ptr.String("__EventLogDestination__"),
+			},
+		},
+		LustreConfiguration: &types.CreateFileSystemLustreConfiguration{
+			WeeklyMaintenanceStartTime:    ptr.String("__WeeklyMaintenanceStartTime__"),
+			ImportPath:                    ptr.String("__ImportPath__"),
+			ExportPath:                    ptr.String("__ExportPath__"),
+			ImportedFileChunkSize:         ptr.Int32(1),
+			DeploymentType:                types.LustreDeploymentType("SCRATCH_1"),
+			AutoImportPolicy:              types.AutoImportPolicyType("NONE"),
+			PerUnitStorageThroughput:      ptr.Int32(1),
+			DailyAutomaticBackupStartTime: ptr.String("__DailyAutomaticBackupStartTime__"),
+			AutomaticBackupRetentionDays:  ptr.Int32(1),
+			CopyTagsToBackups:             ptr.Bool(true),
+			DriveCacheType:                types.DriveCacheType("NONE"),
+			DataCompressionType:           types.DataCompressionType("NONE"),
+			EfaEnabled:                    ptr.Bool(true),
+			LogConfiguration: &types.LustreLogCreateConfiguration{
+				Level:       types.LustreAccessAuditLogLevel("DISABLED"),
+				Destination: ptr.String("__Destination__"),
+			},
+			RootSquashConfiguration: &types.LustreRootSquashConfiguration{
+				RootSquash: ptr.String("__RootSquash__"),
+				NoSquashNids: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			MetadataConfiguration: &types.CreateFileSystemLustreMetadataConfiguration{
+				Iops: ptr.Int32(1),
+				Mode: types.MetadataConfigurationMode("AUTOMATIC"),
+			},
+			ThroughputCapacity: ptr.Int32(1),
+			DataReadCacheConfiguration: &types.LustreReadCacheConfiguration{
+				SizingMode: types.LustreReadCacheSizingMode("NO_CACHE"),
+				SizeGiB:    ptr.Int32(1),
+			},
+		},
+		OntapConfiguration: &types.CreateFileSystemOntapConfiguration{
+			AutomaticBackupRetentionDays:  ptr.Int32(1),
+			DailyAutomaticBackupStartTime: ptr.String("__DailyAutomaticBackupStartTime__"),
+			DeploymentType:                types.OntapDeploymentType("MULTI_AZ_1"),
+			EndpointIpAddressRange:        ptr.String("__EndpointIpAddressRange__"),
+			FsxAdminPassword:              ptr.String("__FsxAdminPassword__"),
+			DiskIopsConfiguration: &types.DiskIopsConfiguration{
+				Mode: types.DiskIopsConfigurationMode("AUTOMATIC"),
+				Iops: ptr.Int64(1),
+			},
+			PreferredSubnetId: ptr.String("__PreferredSubnetId__"),
+			RouteTableIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ThroughputCapacity:          ptr.Int32(1),
+			WeeklyMaintenanceStartTime:  ptr.String("__WeeklyMaintenanceStartTime__"),
+			HAPairs:                     ptr.Int32(1),
+			ThroughputCapacityPerHAPair: ptr.Int32(1),
+			EndpointIpv6AddressRange:    ptr.String("__EndpointIpv6AddressRange__"),
+		},
+		FileSystemTypeVersion: ptr.String("__FileSystemTypeVersion__"),
+		OpenZFSConfiguration: &types.CreateFileSystemOpenZFSConfiguration{
+			AutomaticBackupRetentionDays:  ptr.Int32(1),
+			CopyTagsToBackups:             ptr.Bool(true),
+			CopyTagsToVolumes:             ptr.Bool(true),
+			DailyAutomaticBackupStartTime: ptr.String("__DailyAutomaticBackupStartTime__"),
+			DeploymentType:                types.OpenZFSDeploymentType("SINGLE_AZ_1"),
+			ThroughputCapacity:            ptr.Int32(1),
+			WeeklyMaintenanceStartTime:    ptr.String("__WeeklyMaintenanceStartTime__"),
+			DiskIopsConfiguration: &types.DiskIopsConfiguration{
+				Mode: types.DiskIopsConfigurationMode("AUTOMATIC"),
+				Iops: ptr.Int64(1),
+			},
+			RootVolumeConfiguration: &types.OpenZFSCreateRootVolumeConfiguration{
+				RecordSizeKiB:       ptr.Int32(1),
+				DataCompressionType: types.OpenZFSDataCompressionType("NONE"),
+				NfsExports: []types.OpenZFSNfsExport{
+					{
+						ClientConfigurations: []types.OpenZFSClientConfiguration{
+							{
+								Clients: ptr.String("__Clients__"),
+								Options: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Clients: ptr.String("__Clients__"),
+								Options: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+					{
+						ClientConfigurations: []types.OpenZFSClientConfiguration{
+							{
+								Clients: ptr.String("__Clients__"),
+								Options: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Clients: ptr.String("__Clients__"),
+								Options: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				UserAndGroupQuotas: []types.OpenZFSUserOrGroupQuota{
+					{
+						Type:                    types.OpenZFSQuotaType("USER"),
+						Id:                      ptr.Int32(1),
+						StorageCapacityQuotaGiB: ptr.Int32(1),
+					},
+					{
+						Type:                    types.OpenZFSQuotaType("USER"),
+						Id:                      ptr.Int32(1),
+						StorageCapacityQuotaGiB: ptr.Int32(1),
+					},
+				},
+				CopyTagsToSnapshots: ptr.Bool(true),
+				ReadOnly:            ptr.Bool(true),
+			},
+			PreferredSubnetId:        ptr.String("__PreferredSubnetId__"),
+			EndpointIpAddressRange:   ptr.String("__EndpointIpAddressRange__"),
+			EndpointIpv6AddressRange: ptr.String("__EndpointIpv6AddressRange__"),
+			RouteTableIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ReadCacheConfiguration: &types.OpenZFSReadCacheConfiguration{
+				SizingMode: types.OpenZFSReadCacheSizingMode("NO_CACHE"),
+				SizeGiB:    ptr.Int32(1),
+			},
+		},
+		NetworkType: types.NetworkType("IPV4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19421,7 +21459,208 @@ func TestCheckResponseSnapshot_Error_InvalidImportPath(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFileSystem(context.Background(), &CreateFileSystemInput{})
+	_, opErr := svc.CreateFileSystem(context.Background(), &CreateFileSystemInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		FileSystemType:     types.FileSystemType("WINDOWS"),
+		StorageCapacity:    ptr.Int32(1),
+		StorageType:        types.StorageType("SSD"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+		WindowsConfiguration: &types.CreateFileSystemWindowsConfiguration{
+			ActiveDirectoryId: ptr.String("__ActiveDirectoryId__"),
+			SelfManagedActiveDirectoryConfiguration: &types.SelfManagedActiveDirectoryConfiguration{
+				DomainName:                          ptr.String("__DomainName__"),
+				OrganizationalUnitDistinguishedName: ptr.String("__OrganizationalUnitDistinguishedName__"),
+				FileSystemAdministratorsGroup:       ptr.String("__FileSystemAdministratorsGroup__"),
+				UserName:                            ptr.String("__UserName__"),
+				Password:                            ptr.String("__Password__"),
+				DnsIps: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DomainJoinServiceAccountSecret: ptr.String("__DomainJoinServiceAccountSecret__"),
+			},
+			DeploymentType:                types.WindowsDeploymentType("MULTI_AZ_1"),
+			PreferredSubnetId:             ptr.String("__PreferredSubnetId__"),
+			ThroughputCapacity:            ptr.Int32(1),
+			WeeklyMaintenanceStartTime:    ptr.String("__WeeklyMaintenanceStartTime__"),
+			DailyAutomaticBackupStartTime: ptr.String("__DailyAutomaticBackupStartTime__"),
+			AutomaticBackupRetentionDays:  ptr.Int32(1),
+			CopyTagsToBackups:             ptr.Bool(true),
+			Aliases: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AuditLogConfiguration: &types.WindowsAuditLogCreateConfiguration{
+				FileAccessAuditLogLevel:      types.WindowsAccessAuditLogLevel("DISABLED"),
+				FileShareAccessAuditLogLevel: types.WindowsAccessAuditLogLevel("DISABLED"),
+				AuditLogDestination:          ptr.String("__AuditLogDestination__"),
+			},
+			DiskIopsConfiguration: &types.DiskIopsConfiguration{
+				Mode: types.DiskIopsConfigurationMode("AUTOMATIC"),
+				Iops: ptr.Int64(1),
+			},
+			FsrmConfiguration: &types.WindowsFsrmConfiguration{
+				FsrmServiceEnabled:  ptr.Bool(true),
+				EventLogDestination: ptr.String("__EventLogDestination__"),
+			},
+		},
+		LustreConfiguration: &types.CreateFileSystemLustreConfiguration{
+			WeeklyMaintenanceStartTime:    ptr.String("__WeeklyMaintenanceStartTime__"),
+			ImportPath:                    ptr.String("__ImportPath__"),
+			ExportPath:                    ptr.String("__ExportPath__"),
+			ImportedFileChunkSize:         ptr.Int32(1),
+			DeploymentType:                types.LustreDeploymentType("SCRATCH_1"),
+			AutoImportPolicy:              types.AutoImportPolicyType("NONE"),
+			PerUnitStorageThroughput:      ptr.Int32(1),
+			DailyAutomaticBackupStartTime: ptr.String("__DailyAutomaticBackupStartTime__"),
+			AutomaticBackupRetentionDays:  ptr.Int32(1),
+			CopyTagsToBackups:             ptr.Bool(true),
+			DriveCacheType:                types.DriveCacheType("NONE"),
+			DataCompressionType:           types.DataCompressionType("NONE"),
+			EfaEnabled:                    ptr.Bool(true),
+			LogConfiguration: &types.LustreLogCreateConfiguration{
+				Level:       types.LustreAccessAuditLogLevel("DISABLED"),
+				Destination: ptr.String("__Destination__"),
+			},
+			RootSquashConfiguration: &types.LustreRootSquashConfiguration{
+				RootSquash: ptr.String("__RootSquash__"),
+				NoSquashNids: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			MetadataConfiguration: &types.CreateFileSystemLustreMetadataConfiguration{
+				Iops: ptr.Int32(1),
+				Mode: types.MetadataConfigurationMode("AUTOMATIC"),
+			},
+			ThroughputCapacity: ptr.Int32(1),
+			DataReadCacheConfiguration: &types.LustreReadCacheConfiguration{
+				SizingMode: types.LustreReadCacheSizingMode("NO_CACHE"),
+				SizeGiB:    ptr.Int32(1),
+			},
+		},
+		OntapConfiguration: &types.CreateFileSystemOntapConfiguration{
+			AutomaticBackupRetentionDays:  ptr.Int32(1),
+			DailyAutomaticBackupStartTime: ptr.String("__DailyAutomaticBackupStartTime__"),
+			DeploymentType:                types.OntapDeploymentType("MULTI_AZ_1"),
+			EndpointIpAddressRange:        ptr.String("__EndpointIpAddressRange__"),
+			FsxAdminPassword:              ptr.String("__FsxAdminPassword__"),
+			DiskIopsConfiguration: &types.DiskIopsConfiguration{
+				Mode: types.DiskIopsConfigurationMode("AUTOMATIC"),
+				Iops: ptr.Int64(1),
+			},
+			PreferredSubnetId: ptr.String("__PreferredSubnetId__"),
+			RouteTableIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ThroughputCapacity:          ptr.Int32(1),
+			WeeklyMaintenanceStartTime:  ptr.String("__WeeklyMaintenanceStartTime__"),
+			HAPairs:                     ptr.Int32(1),
+			ThroughputCapacityPerHAPair: ptr.Int32(1),
+			EndpointIpv6AddressRange:    ptr.String("__EndpointIpv6AddressRange__"),
+		},
+		FileSystemTypeVersion: ptr.String("__FileSystemTypeVersion__"),
+		OpenZFSConfiguration: &types.CreateFileSystemOpenZFSConfiguration{
+			AutomaticBackupRetentionDays:  ptr.Int32(1),
+			CopyTagsToBackups:             ptr.Bool(true),
+			CopyTagsToVolumes:             ptr.Bool(true),
+			DailyAutomaticBackupStartTime: ptr.String("__DailyAutomaticBackupStartTime__"),
+			DeploymentType:                types.OpenZFSDeploymentType("SINGLE_AZ_1"),
+			ThroughputCapacity:            ptr.Int32(1),
+			WeeklyMaintenanceStartTime:    ptr.String("__WeeklyMaintenanceStartTime__"),
+			DiskIopsConfiguration: &types.DiskIopsConfiguration{
+				Mode: types.DiskIopsConfigurationMode("AUTOMATIC"),
+				Iops: ptr.Int64(1),
+			},
+			RootVolumeConfiguration: &types.OpenZFSCreateRootVolumeConfiguration{
+				RecordSizeKiB:       ptr.Int32(1),
+				DataCompressionType: types.OpenZFSDataCompressionType("NONE"),
+				NfsExports: []types.OpenZFSNfsExport{
+					{
+						ClientConfigurations: []types.OpenZFSClientConfiguration{
+							{
+								Clients: ptr.String("__Clients__"),
+								Options: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Clients: ptr.String("__Clients__"),
+								Options: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+					{
+						ClientConfigurations: []types.OpenZFSClientConfiguration{
+							{
+								Clients: ptr.String("__Clients__"),
+								Options: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Clients: ptr.String("__Clients__"),
+								Options: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				UserAndGroupQuotas: []types.OpenZFSUserOrGroupQuota{
+					{
+						Type:                    types.OpenZFSQuotaType("USER"),
+						Id:                      ptr.Int32(1),
+						StorageCapacityQuotaGiB: ptr.Int32(1),
+					},
+					{
+						Type:                    types.OpenZFSQuotaType("USER"),
+						Id:                      ptr.Int32(1),
+						StorageCapacityQuotaGiB: ptr.Int32(1),
+					},
+				},
+				CopyTagsToSnapshots: ptr.Bool(true),
+				ReadOnly:            ptr.Bool(true),
+			},
+			PreferredSubnetId:        ptr.String("__PreferredSubnetId__"),
+			EndpointIpAddressRange:   ptr.String("__EndpointIpAddressRange__"),
+			EndpointIpv6AddressRange: ptr.String("__EndpointIpv6AddressRange__"),
+			RouteTableIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ReadCacheConfiguration: &types.OpenZFSReadCacheConfiguration{
+				SizingMode: types.OpenZFSReadCacheSizingMode("NO_CACHE"),
+				SizeGiB:    ptr.Int32(1),
+			},
+		},
+		NetworkType: types.NetworkType("IPV4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19449,7 +21688,72 @@ func TestCheckResponseSnapshot_Error_InvalidNetworkSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFileCache(context.Background(), &CreateFileCacheInput{})
+	_, opErr := svc.CreateFileCache(context.Background(), &CreateFileCacheInput{
+		ClientRequestToken:   ptr.String("__ClientRequestToken__"),
+		FileCacheType:        types.FileCacheType("LUSTRE"),
+		FileCacheTypeVersion: ptr.String("__FileCacheTypeVersion__"),
+		StorageCapacity:      ptr.Int32(1),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		CopyTagsToDataRepositoryAssociations: ptr.Bool(true),
+		KmsKeyId:                             ptr.String("__KmsKeyId__"),
+		LustreConfiguration: &types.CreateFileCacheLustreConfiguration{
+			PerUnitStorageThroughput:   ptr.Int32(1),
+			DeploymentType:             types.FileCacheLustreDeploymentType("CACHE_1"),
+			WeeklyMaintenanceStartTime: ptr.String("__WeeklyMaintenanceStartTime__"),
+			MetadataConfiguration: &types.FileCacheLustreMetadataConfiguration{
+				StorageCapacity: ptr.Int32(1),
+			},
+		},
+		DataRepositoryAssociations: []types.FileCacheDataRepositoryAssociation{
+			{
+				FileCachePath:      ptr.String("__FileCachePath__"),
+				DataRepositoryPath: ptr.String("__DataRepositoryPath__"),
+				DataRepositorySubdirectories: []string{
+					"__Member__",
+					"__Member__",
+				},
+				NFS: &types.FileCacheNFSConfiguration{
+					Version: types.NfsVersion("NFS3"),
+					DnsIps: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				FileCachePath:      ptr.String("__FileCachePath__"),
+				DataRepositoryPath: ptr.String("__DataRepositoryPath__"),
+				DataRepositorySubdirectories: []string{
+					"__Member__",
+					"__Member__",
+				},
+				NFS: &types.FileCacheNFSConfiguration{
+					Version: types.NfsVersion("NFS3"),
+					DnsIps: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19474,7 +21778,72 @@ func TestCheckResponseSnapshot_Error_InvalidPerUnitStorageThroughput(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFileCache(context.Background(), &CreateFileCacheInput{})
+	_, opErr := svc.CreateFileCache(context.Background(), &CreateFileCacheInput{
+		ClientRequestToken:   ptr.String("__ClientRequestToken__"),
+		FileCacheType:        types.FileCacheType("LUSTRE"),
+		FileCacheTypeVersion: ptr.String("__FileCacheTypeVersion__"),
+		StorageCapacity:      ptr.Int32(1),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		CopyTagsToDataRepositoryAssociations: ptr.Bool(true),
+		KmsKeyId:                             ptr.String("__KmsKeyId__"),
+		LustreConfiguration: &types.CreateFileCacheLustreConfiguration{
+			PerUnitStorageThroughput:   ptr.Int32(1),
+			DeploymentType:             types.FileCacheLustreDeploymentType("CACHE_1"),
+			WeeklyMaintenanceStartTime: ptr.String("__WeeklyMaintenanceStartTime__"),
+			MetadataConfiguration: &types.FileCacheLustreMetadataConfiguration{
+				StorageCapacity: ptr.Int32(1),
+			},
+		},
+		DataRepositoryAssociations: []types.FileCacheDataRepositoryAssociation{
+			{
+				FileCachePath:      ptr.String("__FileCachePath__"),
+				DataRepositoryPath: ptr.String("__DataRepositoryPath__"),
+				DataRepositorySubdirectories: []string{
+					"__Member__",
+					"__Member__",
+				},
+				NFS: &types.FileCacheNFSConfiguration{
+					Version: types.NfsVersion("NFS3"),
+					DnsIps: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				FileCachePath:      ptr.String("__FileCachePath__"),
+				DataRepositoryPath: ptr.String("__DataRepositoryPath__"),
+				DataRepositorySubdirectories: []string{
+					"__Member__",
+					"__Member__",
+				},
+				NFS: &types.FileCacheNFSConfiguration{
+					Version: types.NfsVersion("NFS3"),
+					DnsIps: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19499,7 +21868,23 @@ func TestCheckResponseSnapshot_Error_InvalidRegion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyBackup(context.Background(), &CopyBackupInput{})
+	_, opErr := svc.CopyBackup(context.Background(), &CopyBackupInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		SourceBackupId:     ptr.String("__SourceBackupId__"),
+		SourceRegion:       ptr.String("__SourceRegion__"),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		CopyTags:           ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19525,7 +21910,43 @@ func TestCheckResponseSnapshot_Error_InvalidRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAndAttachS3AccessPoint(context.Background(), &CreateAndAttachS3AccessPointInput{})
+	_, opErr := svc.CreateAndAttachS3AccessPoint(context.Background(), &CreateAndAttachS3AccessPointInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Name:               ptr.String("__Name__"),
+		Type:               types.S3AccessPointAttachmentType("OPENZFS"),
+		OpenZFSConfiguration: &types.CreateAndAttachS3AccessPointOpenZFSConfiguration{
+			VolumeId: ptr.String("__VolumeId__"),
+			FileSystemIdentity: &types.OpenZFSFileSystemIdentity{
+				Type: types.OpenZFSFileSystemUserType("POSIX"),
+				PosixUser: &types.OpenZFSPosixFileSystemUser{
+					Uid: ptr.Int64(1),
+					Gid: ptr.Int64(1),
+					SecondaryGids: []int64{
+						1,
+						1,
+					},
+				},
+			},
+		},
+		OntapConfiguration: &types.CreateAndAttachS3AccessPointOntapConfiguration{
+			VolumeId: ptr.String("__VolumeId__"),
+			FileSystemIdentity: &types.OntapFileSystemIdentity{
+				Type: types.OntapFileSystemUserType("UNIX"),
+				UnixUser: &types.OntapUnixFileSystemUser{
+					Name: ptr.String("__Name__"),
+				},
+				WindowsUser: &types.OntapWindowsFileSystemUser{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		S3AccessPoint: &types.CreateAndAttachS3AccessPointS3Configuration{
+			VpcConfiguration: &types.S3AccessPointVpcConfiguration{
+				VpcId: ptr.String("__VpcId__"),
+			},
+			Policy: ptr.String("__Policy__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19550,7 +21971,23 @@ func TestCheckResponseSnapshot_Error_InvalidSourceKmsKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyBackup(context.Background(), &CopyBackupInput{})
+	_, opErr := svc.CopyBackup(context.Background(), &CopyBackupInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		SourceBackupId:     ptr.String("__SourceBackupId__"),
+		SourceRegion:       ptr.String("__SourceRegion__"),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		CopyTags:           ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19575,7 +22012,72 @@ func TestCheckResponseSnapshot_Error_MissingFileCacheConfiguration(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFileCache(context.Background(), &CreateFileCacheInput{})
+	_, opErr := svc.CreateFileCache(context.Background(), &CreateFileCacheInput{
+		ClientRequestToken:   ptr.String("__ClientRequestToken__"),
+		FileCacheType:        types.FileCacheType("LUSTRE"),
+		FileCacheTypeVersion: ptr.String("__FileCacheTypeVersion__"),
+		StorageCapacity:      ptr.Int32(1),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		CopyTagsToDataRepositoryAssociations: ptr.Bool(true),
+		KmsKeyId:                             ptr.String("__KmsKeyId__"),
+		LustreConfiguration: &types.CreateFileCacheLustreConfiguration{
+			PerUnitStorageThroughput:   ptr.Int32(1),
+			DeploymentType:             types.FileCacheLustreDeploymentType("CACHE_1"),
+			WeeklyMaintenanceStartTime: ptr.String("__WeeklyMaintenanceStartTime__"),
+			MetadataConfiguration: &types.FileCacheLustreMetadataConfiguration{
+				StorageCapacity: ptr.Int32(1),
+			},
+		},
+		DataRepositoryAssociations: []types.FileCacheDataRepositoryAssociation{
+			{
+				FileCachePath:      ptr.String("__FileCachePath__"),
+				DataRepositoryPath: ptr.String("__DataRepositoryPath__"),
+				DataRepositorySubdirectories: []string{
+					"__Member__",
+					"__Member__",
+				},
+				NFS: &types.FileCacheNFSConfiguration{
+					Version: types.NfsVersion("NFS3"),
+					DnsIps: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				FileCachePath:      ptr.String("__FileCachePath__"),
+				DataRepositoryPath: ptr.String("__DataRepositoryPath__"),
+				DataRepositorySubdirectories: []string{
+					"__Member__",
+					"__Member__",
+				},
+				NFS: &types.FileCacheNFSConfiguration{
+					Version: types.NfsVersion("NFS3"),
+					DnsIps: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19600,7 +22102,208 @@ func TestCheckResponseSnapshot_Error_MissingFileSystemConfiguration(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFileSystem(context.Background(), &CreateFileSystemInput{})
+	_, opErr := svc.CreateFileSystem(context.Background(), &CreateFileSystemInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		FileSystemType:     types.FileSystemType("WINDOWS"),
+		StorageCapacity:    ptr.Int32(1),
+		StorageType:        types.StorageType("SSD"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+		WindowsConfiguration: &types.CreateFileSystemWindowsConfiguration{
+			ActiveDirectoryId: ptr.String("__ActiveDirectoryId__"),
+			SelfManagedActiveDirectoryConfiguration: &types.SelfManagedActiveDirectoryConfiguration{
+				DomainName:                          ptr.String("__DomainName__"),
+				OrganizationalUnitDistinguishedName: ptr.String("__OrganizationalUnitDistinguishedName__"),
+				FileSystemAdministratorsGroup:       ptr.String("__FileSystemAdministratorsGroup__"),
+				UserName:                            ptr.String("__UserName__"),
+				Password:                            ptr.String("__Password__"),
+				DnsIps: []string{
+					"__Member__",
+					"__Member__",
+				},
+				DomainJoinServiceAccountSecret: ptr.String("__DomainJoinServiceAccountSecret__"),
+			},
+			DeploymentType:                types.WindowsDeploymentType("MULTI_AZ_1"),
+			PreferredSubnetId:             ptr.String("__PreferredSubnetId__"),
+			ThroughputCapacity:            ptr.Int32(1),
+			WeeklyMaintenanceStartTime:    ptr.String("__WeeklyMaintenanceStartTime__"),
+			DailyAutomaticBackupStartTime: ptr.String("__DailyAutomaticBackupStartTime__"),
+			AutomaticBackupRetentionDays:  ptr.Int32(1),
+			CopyTagsToBackups:             ptr.Bool(true),
+			Aliases: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AuditLogConfiguration: &types.WindowsAuditLogCreateConfiguration{
+				FileAccessAuditLogLevel:      types.WindowsAccessAuditLogLevel("DISABLED"),
+				FileShareAccessAuditLogLevel: types.WindowsAccessAuditLogLevel("DISABLED"),
+				AuditLogDestination:          ptr.String("__AuditLogDestination__"),
+			},
+			DiskIopsConfiguration: &types.DiskIopsConfiguration{
+				Mode: types.DiskIopsConfigurationMode("AUTOMATIC"),
+				Iops: ptr.Int64(1),
+			},
+			FsrmConfiguration: &types.WindowsFsrmConfiguration{
+				FsrmServiceEnabled:  ptr.Bool(true),
+				EventLogDestination: ptr.String("__EventLogDestination__"),
+			},
+		},
+		LustreConfiguration: &types.CreateFileSystemLustreConfiguration{
+			WeeklyMaintenanceStartTime:    ptr.String("__WeeklyMaintenanceStartTime__"),
+			ImportPath:                    ptr.String("__ImportPath__"),
+			ExportPath:                    ptr.String("__ExportPath__"),
+			ImportedFileChunkSize:         ptr.Int32(1),
+			DeploymentType:                types.LustreDeploymentType("SCRATCH_1"),
+			AutoImportPolicy:              types.AutoImportPolicyType("NONE"),
+			PerUnitStorageThroughput:      ptr.Int32(1),
+			DailyAutomaticBackupStartTime: ptr.String("__DailyAutomaticBackupStartTime__"),
+			AutomaticBackupRetentionDays:  ptr.Int32(1),
+			CopyTagsToBackups:             ptr.Bool(true),
+			DriveCacheType:                types.DriveCacheType("NONE"),
+			DataCompressionType:           types.DataCompressionType("NONE"),
+			EfaEnabled:                    ptr.Bool(true),
+			LogConfiguration: &types.LustreLogCreateConfiguration{
+				Level:       types.LustreAccessAuditLogLevel("DISABLED"),
+				Destination: ptr.String("__Destination__"),
+			},
+			RootSquashConfiguration: &types.LustreRootSquashConfiguration{
+				RootSquash: ptr.String("__RootSquash__"),
+				NoSquashNids: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			MetadataConfiguration: &types.CreateFileSystemLustreMetadataConfiguration{
+				Iops: ptr.Int32(1),
+				Mode: types.MetadataConfigurationMode("AUTOMATIC"),
+			},
+			ThroughputCapacity: ptr.Int32(1),
+			DataReadCacheConfiguration: &types.LustreReadCacheConfiguration{
+				SizingMode: types.LustreReadCacheSizingMode("NO_CACHE"),
+				SizeGiB:    ptr.Int32(1),
+			},
+		},
+		OntapConfiguration: &types.CreateFileSystemOntapConfiguration{
+			AutomaticBackupRetentionDays:  ptr.Int32(1),
+			DailyAutomaticBackupStartTime: ptr.String("__DailyAutomaticBackupStartTime__"),
+			DeploymentType:                types.OntapDeploymentType("MULTI_AZ_1"),
+			EndpointIpAddressRange:        ptr.String("__EndpointIpAddressRange__"),
+			FsxAdminPassword:              ptr.String("__FsxAdminPassword__"),
+			DiskIopsConfiguration: &types.DiskIopsConfiguration{
+				Mode: types.DiskIopsConfigurationMode("AUTOMATIC"),
+				Iops: ptr.Int64(1),
+			},
+			PreferredSubnetId: ptr.String("__PreferredSubnetId__"),
+			RouteTableIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ThroughputCapacity:          ptr.Int32(1),
+			WeeklyMaintenanceStartTime:  ptr.String("__WeeklyMaintenanceStartTime__"),
+			HAPairs:                     ptr.Int32(1),
+			ThroughputCapacityPerHAPair: ptr.Int32(1),
+			EndpointIpv6AddressRange:    ptr.String("__EndpointIpv6AddressRange__"),
+		},
+		FileSystemTypeVersion: ptr.String("__FileSystemTypeVersion__"),
+		OpenZFSConfiguration: &types.CreateFileSystemOpenZFSConfiguration{
+			AutomaticBackupRetentionDays:  ptr.Int32(1),
+			CopyTagsToBackups:             ptr.Bool(true),
+			CopyTagsToVolumes:             ptr.Bool(true),
+			DailyAutomaticBackupStartTime: ptr.String("__DailyAutomaticBackupStartTime__"),
+			DeploymentType:                types.OpenZFSDeploymentType("SINGLE_AZ_1"),
+			ThroughputCapacity:            ptr.Int32(1),
+			WeeklyMaintenanceStartTime:    ptr.String("__WeeklyMaintenanceStartTime__"),
+			DiskIopsConfiguration: &types.DiskIopsConfiguration{
+				Mode: types.DiskIopsConfigurationMode("AUTOMATIC"),
+				Iops: ptr.Int64(1),
+			},
+			RootVolumeConfiguration: &types.OpenZFSCreateRootVolumeConfiguration{
+				RecordSizeKiB:       ptr.Int32(1),
+				DataCompressionType: types.OpenZFSDataCompressionType("NONE"),
+				NfsExports: []types.OpenZFSNfsExport{
+					{
+						ClientConfigurations: []types.OpenZFSClientConfiguration{
+							{
+								Clients: ptr.String("__Clients__"),
+								Options: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Clients: ptr.String("__Clients__"),
+								Options: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+					{
+						ClientConfigurations: []types.OpenZFSClientConfiguration{
+							{
+								Clients: ptr.String("__Clients__"),
+								Options: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Clients: ptr.String("__Clients__"),
+								Options: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+				UserAndGroupQuotas: []types.OpenZFSUserOrGroupQuota{
+					{
+						Type:                    types.OpenZFSQuotaType("USER"),
+						Id:                      ptr.Int32(1),
+						StorageCapacityQuotaGiB: ptr.Int32(1),
+					},
+					{
+						Type:                    types.OpenZFSQuotaType("USER"),
+						Id:                      ptr.Int32(1),
+						StorageCapacityQuotaGiB: ptr.Int32(1),
+					},
+				},
+				CopyTagsToSnapshots: ptr.Bool(true),
+				ReadOnly:            ptr.Bool(true),
+			},
+			PreferredSubnetId:        ptr.String("__PreferredSubnetId__"),
+			EndpointIpAddressRange:   ptr.String("__EndpointIpAddressRange__"),
+			EndpointIpv6AddressRange: ptr.String("__EndpointIpv6AddressRange__"),
+			RouteTableIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ReadCacheConfiguration: &types.OpenZFSReadCacheConfiguration{
+				SizingMode: types.OpenZFSReadCacheSizingMode("NO_CACHE"),
+				SizeGiB:    ptr.Int32(1),
+			},
+		},
+		NetworkType: types.NetworkType("IPV4"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19625,7 +22328,131 @@ func TestCheckResponseSnapshot_Error_MissingVolumeConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateVolume(context.Background(), &CreateVolumeInput{})
+	_, opErr := svc.CreateVolume(context.Background(), &CreateVolumeInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		VolumeType:         types.VolumeType("ONTAP"),
+		Name:               ptr.String("__Name__"),
+		OntapConfiguration: &types.CreateOntapVolumeConfiguration{
+			JunctionPath:             ptr.String("__JunctionPath__"),
+			SecurityStyle:            types.SecurityStyle("UNIX"),
+			SizeInMegabytes:          ptr.Int32(1),
+			StorageEfficiencyEnabled: ptr.Bool(true),
+			StorageVirtualMachineId:  ptr.String("__StorageVirtualMachineId__"),
+			TieringPolicy: &types.TieringPolicy{
+				CoolingPeriod: ptr.Int32(1),
+				Name:          types.TieringPolicyName("SNAPSHOT_ONLY"),
+			},
+			OntapVolumeType:   types.InputOntapVolumeType("RW"),
+			SnapshotPolicy:    ptr.String("__SnapshotPolicy__"),
+			CopyTagsToBackups: ptr.Bool(true),
+			SnaplockConfiguration: &types.CreateSnaplockConfiguration{
+				AuditLogVolume: ptr.Bool(true),
+				AutocommitPeriod: &types.AutocommitPeriod{
+					Type:  types.AutocommitPeriodType("MINUTES"),
+					Value: ptr.Int32(1),
+				},
+				PrivilegedDelete: types.PrivilegedDelete("DISABLED"),
+				RetentionPeriod: &types.SnaplockRetentionPeriod{
+					DefaultRetention: &types.RetentionPeriod{
+						Type:  types.RetentionPeriodType("SECONDS"),
+						Value: ptr.Int32(1),
+					},
+					MinimumRetention: &types.RetentionPeriod{
+						Type:  types.RetentionPeriodType("SECONDS"),
+						Value: ptr.Int32(1),
+					},
+					MaximumRetention: &types.RetentionPeriod{
+						Type:  types.RetentionPeriodType("SECONDS"),
+						Value: ptr.Int32(1),
+					},
+				},
+				SnaplockType:            types.SnaplockType("COMPLIANCE"),
+				VolumeAppendModeEnabled: ptr.Bool(true),
+			},
+			VolumeStyle: types.VolumeStyle("FLEXVOL"),
+			AggregateConfiguration: &types.CreateAggregateConfiguration{
+				Aggregates: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ConstituentsPerAggregate: ptr.Int32(1),
+			},
+			SizeInBytes: ptr.Int64(1),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		OpenZFSConfiguration: &types.CreateOpenZFSVolumeConfiguration{
+			ParentVolumeId:                ptr.String("__ParentVolumeId__"),
+			StorageCapacityReservationGiB: ptr.Int32(1),
+			StorageCapacityQuotaGiB:       ptr.Int32(1),
+			RecordSizeKiB:                 ptr.Int32(1),
+			DataCompressionType:           types.OpenZFSDataCompressionType("NONE"),
+			CopyTagsToSnapshots:           ptr.Bool(true),
+			OriginSnapshot: &types.CreateOpenZFSOriginSnapshotConfiguration{
+				SnapshotARN:  ptr.String("__SnapshotARN__"),
+				CopyStrategy: types.OpenZFSCopyStrategy("CLONE"),
+			},
+			ReadOnly: ptr.Bool(true),
+			NfsExports: []types.OpenZFSNfsExport{
+				{
+					ClientConfigurations: []types.OpenZFSClientConfiguration{
+						{
+							Clients: ptr.String("__Clients__"),
+							Options: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Clients: ptr.String("__Clients__"),
+							Options: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				{
+					ClientConfigurations: []types.OpenZFSClientConfiguration{
+						{
+							Clients: ptr.String("__Clients__"),
+							Options: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Clients: ptr.String("__Clients__"),
+							Options: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			UserAndGroupQuotas: []types.OpenZFSUserOrGroupQuota{
+				{
+					Type:                    types.OpenZFSQuotaType("USER"),
+					Id:                      ptr.Int32(1),
+					StorageCapacityQuotaGiB: ptr.Int32(1),
+				},
+				{
+					Type:                    types.OpenZFSQuotaType("USER"),
+					Id:                      ptr.Int32(1),
+					StorageCapacityQuotaGiB: ptr.Int32(1),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19651,7 +22478,11 @@ func TestCheckResponseSnapshot_Error_NotServiceResourceError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19677,7 +22508,11 @@ func TestCheckResponseSnapshot_Error_ResourceDoesNotSupportTagging(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19703,7 +22538,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19728,7 +22567,30 @@ func TestCheckResponseSnapshot_Error_S3AccessPointAttachmentNotFound(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeS3AccessPointAttachments(context.Background(), &DescribeS3AccessPointAttachmentsInput{})
+	_, opErr := svc.DescribeS3AccessPointAttachments(context.Background(), &DescribeS3AccessPointAttachmentsInput{
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.S3AccessPointAttachmentsFilter{
+			{
+				Name: types.S3AccessPointAttachmentsFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.S3AccessPointAttachmentsFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19754,7 +22616,23 @@ func TestCheckResponseSnapshot_Error_ServiceLimitExceeded(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyBackup(context.Background(), &CopyBackupInput{})
+	_, opErr := svc.CopyBackup(context.Background(), &CopyBackupInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		SourceBackupId:     ptr.String("__SourceBackupId__"),
+		SourceRegion:       ptr.String("__SourceRegion__"),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		CopyTags:           ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19779,7 +22657,10 @@ func TestCheckResponseSnapshot_Error_SnapshotNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteSnapshot(context.Background(), &DeleteSnapshotInput{})
+	_, opErr := svc.DeleteSnapshot(context.Background(), &DeleteSnapshotInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		SnapshotId:         ptr.String("__SnapshotId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19805,7 +22686,23 @@ func TestCheckResponseSnapshot_Error_SourceBackupUnavailable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyBackup(context.Background(), &CopyBackupInput{})
+	_, opErr := svc.CopyBackup(context.Background(), &CopyBackupInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		SourceBackupId:     ptr.String("__SourceBackupId__"),
+		SourceRegion:       ptr.String("__SourceRegion__"),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		CopyTags:           ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19830,7 +22727,131 @@ func TestCheckResponseSnapshot_Error_StorageVirtualMachineNotFound(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateVolume(context.Background(), &CreateVolumeInput{})
+	_, opErr := svc.CreateVolume(context.Background(), &CreateVolumeInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		VolumeType:         types.VolumeType("ONTAP"),
+		Name:               ptr.String("__Name__"),
+		OntapConfiguration: &types.CreateOntapVolumeConfiguration{
+			JunctionPath:             ptr.String("__JunctionPath__"),
+			SecurityStyle:            types.SecurityStyle("UNIX"),
+			SizeInMegabytes:          ptr.Int32(1),
+			StorageEfficiencyEnabled: ptr.Bool(true),
+			StorageVirtualMachineId:  ptr.String("__StorageVirtualMachineId__"),
+			TieringPolicy: &types.TieringPolicy{
+				CoolingPeriod: ptr.Int32(1),
+				Name:          types.TieringPolicyName("SNAPSHOT_ONLY"),
+			},
+			OntapVolumeType:   types.InputOntapVolumeType("RW"),
+			SnapshotPolicy:    ptr.String("__SnapshotPolicy__"),
+			CopyTagsToBackups: ptr.Bool(true),
+			SnaplockConfiguration: &types.CreateSnaplockConfiguration{
+				AuditLogVolume: ptr.Bool(true),
+				AutocommitPeriod: &types.AutocommitPeriod{
+					Type:  types.AutocommitPeriodType("MINUTES"),
+					Value: ptr.Int32(1),
+				},
+				PrivilegedDelete: types.PrivilegedDelete("DISABLED"),
+				RetentionPeriod: &types.SnaplockRetentionPeriod{
+					DefaultRetention: &types.RetentionPeriod{
+						Type:  types.RetentionPeriodType("SECONDS"),
+						Value: ptr.Int32(1),
+					},
+					MinimumRetention: &types.RetentionPeriod{
+						Type:  types.RetentionPeriodType("SECONDS"),
+						Value: ptr.Int32(1),
+					},
+					MaximumRetention: &types.RetentionPeriod{
+						Type:  types.RetentionPeriodType("SECONDS"),
+						Value: ptr.Int32(1),
+					},
+				},
+				SnaplockType:            types.SnaplockType("COMPLIANCE"),
+				VolumeAppendModeEnabled: ptr.Bool(true),
+			},
+			VolumeStyle: types.VolumeStyle("FLEXVOL"),
+			AggregateConfiguration: &types.CreateAggregateConfiguration{
+				Aggregates: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ConstituentsPerAggregate: ptr.Int32(1),
+			},
+			SizeInBytes: ptr.Int64(1),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		OpenZFSConfiguration: &types.CreateOpenZFSVolumeConfiguration{
+			ParentVolumeId:                ptr.String("__ParentVolumeId__"),
+			StorageCapacityReservationGiB: ptr.Int32(1),
+			StorageCapacityQuotaGiB:       ptr.Int32(1),
+			RecordSizeKiB:                 ptr.Int32(1),
+			DataCompressionType:           types.OpenZFSDataCompressionType("NONE"),
+			CopyTagsToSnapshots:           ptr.Bool(true),
+			OriginSnapshot: &types.CreateOpenZFSOriginSnapshotConfiguration{
+				SnapshotARN:  ptr.String("__SnapshotARN__"),
+				CopyStrategy: types.OpenZFSCopyStrategy("CLONE"),
+			},
+			ReadOnly: ptr.Bool(true),
+			NfsExports: []types.OpenZFSNfsExport{
+				{
+					ClientConfigurations: []types.OpenZFSClientConfiguration{
+						{
+							Clients: ptr.String("__Clients__"),
+							Options: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Clients: ptr.String("__Clients__"),
+							Options: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				{
+					ClientConfigurations: []types.OpenZFSClientConfiguration{
+						{
+							Clients: ptr.String("__Clients__"),
+							Options: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Clients: ptr.String("__Clients__"),
+							Options: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			UserAndGroupQuotas: []types.OpenZFSUserOrGroupQuota{
+				{
+					Type:                    types.OpenZFSQuotaType("USER"),
+					Id:                      ptr.Int32(1),
+					StorageCapacityQuotaGiB: ptr.Int32(1),
+				},
+				{
+					Type:                    types.OpenZFSQuotaType("USER"),
+					Id:                      ptr.Int32(1),
+					StorageCapacityQuotaGiB: ptr.Int32(1),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19856,7 +22877,43 @@ func TestCheckResponseSnapshot_Error_TooManyAccessPoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAndAttachS3AccessPoint(context.Background(), &CreateAndAttachS3AccessPointInput{})
+	_, opErr := svc.CreateAndAttachS3AccessPoint(context.Background(), &CreateAndAttachS3AccessPointInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Name:               ptr.String("__Name__"),
+		Type:               types.S3AccessPointAttachmentType("OPENZFS"),
+		OpenZFSConfiguration: &types.CreateAndAttachS3AccessPointOpenZFSConfiguration{
+			VolumeId: ptr.String("__VolumeId__"),
+			FileSystemIdentity: &types.OpenZFSFileSystemIdentity{
+				Type: types.OpenZFSFileSystemUserType("POSIX"),
+				PosixUser: &types.OpenZFSPosixFileSystemUser{
+					Uid: ptr.Int64(1),
+					Gid: ptr.Int64(1),
+					SecondaryGids: []int64{
+						1,
+						1,
+					},
+				},
+			},
+		},
+		OntapConfiguration: &types.CreateAndAttachS3AccessPointOntapConfiguration{
+			VolumeId: ptr.String("__VolumeId__"),
+			FileSystemIdentity: &types.OntapFileSystemIdentity{
+				Type: types.OntapFileSystemUserType("UNIX"),
+				UnixUser: &types.OntapUnixFileSystemUser{
+					Name: ptr.String("__Name__"),
+				},
+				WindowsUser: &types.OntapWindowsFileSystemUser{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		S3AccessPoint: &types.CreateAndAttachS3AccessPointS3Configuration{
+			VpcConfiguration: &types.S3AccessPointVpcConfiguration{
+				VpcId: ptr.String("__VpcId__"),
+			},
+			Policy: ptr.String("__Policy__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19881,7 +22938,9 @@ func TestCheckResponseSnapshot_Error_UnsupportedOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelDataRepositoryTask(context.Background(), &CancelDataRepositoryTaskInput{})
+	_, opErr := svc.CancelDataRepositoryTask(context.Background(), &CancelDataRepositoryTaskInput{
+		TaskId: ptr.String("__TaskId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -19906,7 +22965,43 @@ func TestCheckResponseSnapshot_Error_VolumeNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAndAttachS3AccessPoint(context.Background(), &CreateAndAttachS3AccessPointInput{})
+	_, opErr := svc.CreateAndAttachS3AccessPoint(context.Background(), &CreateAndAttachS3AccessPointInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Name:               ptr.String("__Name__"),
+		Type:               types.S3AccessPointAttachmentType("OPENZFS"),
+		OpenZFSConfiguration: &types.CreateAndAttachS3AccessPointOpenZFSConfiguration{
+			VolumeId: ptr.String("__VolumeId__"),
+			FileSystemIdentity: &types.OpenZFSFileSystemIdentity{
+				Type: types.OpenZFSFileSystemUserType("POSIX"),
+				PosixUser: &types.OpenZFSPosixFileSystemUser{
+					Uid: ptr.Int64(1),
+					Gid: ptr.Int64(1),
+					SecondaryGids: []int64{
+						1,
+						1,
+					},
+				},
+			},
+		},
+		OntapConfiguration: &types.CreateAndAttachS3AccessPointOntapConfiguration{
+			VolumeId: ptr.String("__VolumeId__"),
+			FileSystemIdentity: &types.OntapFileSystemIdentity{
+				Type: types.OntapFileSystemUserType("UNIX"),
+				UnixUser: &types.OntapUnixFileSystemUser{
+					Name: ptr.String("__Name__"),
+				},
+				WindowsUser: &types.OntapWindowsFileSystemUser{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		S3AccessPoint: &types.CreateAndAttachS3AccessPointS3Configuration{
+			VpcConfiguration: &types.S3AccessPointVpcConfiguration{
+				VpcId: ptr.String("__VpcId__"),
+			},
+			Policy: ptr.String("__Policy__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

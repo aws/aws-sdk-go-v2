@@ -117,7 +117,18 @@ func TestCheckResponseSnapshot_AddPermission(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddPermission(context.Background(), &AddPermissionInput{})
+	got, err := svc.AddPermission(context.Background(), &AddPermissionInput{
+		TopicArn: ptr.String("__TopicArn__"),
+		Label:    ptr.String("__Label__"),
+		AWSAccountId: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ActionName: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -138,7 +149,9 @@ func TestCheckResponseSnapshot_CheckIfPhoneNumberIsOptedOut(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CheckIfPhoneNumberIsOptedOut(context.Background(), &CheckIfPhoneNumberIsOptedOutInput{})
+	got, err := svc.CheckIfPhoneNumberIsOptedOut(context.Background(), &CheckIfPhoneNumberIsOptedOutInput{
+		PhoneNumber: ptr.String("__PhoneNumber__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -159,7 +172,11 @@ func TestCheckResponseSnapshot_ConfirmSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ConfirmSubscription(context.Background(), &ConfirmSubscriptionInput{})
+	got, err := svc.ConfirmSubscription(context.Background(), &ConfirmSubscriptionInput{
+		TopicArn:                  ptr.String("__TopicArn__"),
+		Token:                     ptr.String("__Token__"),
+		AuthenticateOnUnsubscribe: ptr.String("__AuthenticateOnUnsubscribe__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -180,7 +197,13 @@ func TestCheckResponseSnapshot_CreatePlatformApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePlatformApplication(context.Background(), &CreatePlatformApplicationInput{})
+	got, err := svc.CreatePlatformApplication(context.Background(), &CreatePlatformApplicationInput{
+		Name:     ptr.String("__Name__"),
+		Platform: ptr.String("__Platform__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -201,7 +224,14 @@ func TestCheckResponseSnapshot_CreatePlatformEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePlatformEndpoint(context.Background(), &CreatePlatformEndpointInput{})
+	got, err := svc.CreatePlatformEndpoint(context.Background(), &CreatePlatformEndpointInput{
+		PlatformApplicationArn: ptr.String("__PlatformApplicationArn__"),
+		Token:                  ptr.String("__Token__"),
+		CustomUserData:         ptr.String("__CustomUserData__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -220,7 +250,10 @@ func TestCheckResponseSnapshot_CreateSMSSandboxPhoneNumber(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSMSSandboxPhoneNumber(context.Background(), &CreateSMSSandboxPhoneNumberInput{})
+	got, err := svc.CreateSMSSandboxPhoneNumber(context.Background(), &CreateSMSSandboxPhoneNumberInput{
+		PhoneNumber:  ptr.String("__PhoneNumber__"),
+		LanguageCode: types.LanguageCodeString("en-US"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -241,7 +274,23 @@ func TestCheckResponseSnapshot_CreateTopic(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTopic(context.Background(), &CreateTopicInput{})
+	got, err := svc.CreateTopic(context.Background(), &CreateTopicInput{
+		Name: ptr.String("__Name__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DataProtectionPolicy: ptr.String("__DataProtectionPolicy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -260,7 +309,9 @@ func TestCheckResponseSnapshot_DeleteEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEndpoint(context.Background(), &DeleteEndpointInput{})
+	got, err := svc.DeleteEndpoint(context.Background(), &DeleteEndpointInput{
+		EndpointArn: ptr.String("__EndpointArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -279,7 +330,9 @@ func TestCheckResponseSnapshot_DeletePlatformApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePlatformApplication(context.Background(), &DeletePlatformApplicationInput{})
+	got, err := svc.DeletePlatformApplication(context.Background(), &DeletePlatformApplicationInput{
+		PlatformApplicationArn: ptr.String("__PlatformApplicationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -298,7 +351,9 @@ func TestCheckResponseSnapshot_DeleteSMSSandboxPhoneNumber(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSMSSandboxPhoneNumber(context.Background(), &DeleteSMSSandboxPhoneNumberInput{})
+	got, err := svc.DeleteSMSSandboxPhoneNumber(context.Background(), &DeleteSMSSandboxPhoneNumberInput{
+		PhoneNumber: ptr.String("__PhoneNumber__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -317,7 +372,9 @@ func TestCheckResponseSnapshot_DeleteTopic(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTopic(context.Background(), &DeleteTopicInput{})
+	got, err := svc.DeleteTopic(context.Background(), &DeleteTopicInput{
+		TopicArn: ptr.String("__TopicArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -338,7 +395,9 @@ func TestCheckResponseSnapshot_GetDataProtectionPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataProtectionPolicy(context.Background(), &GetDataProtectionPolicyInput{})
+	got, err := svc.GetDataProtectionPolicy(context.Background(), &GetDataProtectionPolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -361,7 +420,9 @@ func TestCheckResponseSnapshot_GetEndpointAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEndpointAttributes(context.Background(), &GetEndpointAttributesInput{})
+	got, err := svc.GetEndpointAttributes(context.Background(), &GetEndpointAttributesInput{
+		EndpointArn: ptr.String("__EndpointArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -384,7 +445,9 @@ func TestCheckResponseSnapshot_GetPlatformApplicationAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPlatformApplicationAttributes(context.Background(), &GetPlatformApplicationAttributesInput{})
+	got, err := svc.GetPlatformApplicationAttributes(context.Background(), &GetPlatformApplicationAttributesInput{
+		PlatformApplicationArn: ptr.String("__PlatformApplicationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -407,7 +470,12 @@ func TestCheckResponseSnapshot_GetSMSAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSMSAttributes(context.Background(), &GetSMSAttributesInput{})
+	got, err := svc.GetSMSAttributes(context.Background(), &GetSMSAttributesInput{
+		Attributes: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -451,7 +519,9 @@ func TestCheckResponseSnapshot_GetSubscriptionAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSubscriptionAttributes(context.Background(), &GetSubscriptionAttributesInput{})
+	got, err := svc.GetSubscriptionAttributes(context.Background(), &GetSubscriptionAttributesInput{
+		SubscriptionArn: ptr.String("__SubscriptionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -474,7 +544,9 @@ func TestCheckResponseSnapshot_GetTopicAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTopicAttributes(context.Background(), &GetTopicAttributesInput{})
+	got, err := svc.GetTopicAttributes(context.Background(), &GetTopicAttributesInput{
+		TopicArn: ptr.String("__TopicArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -509,7 +581,10 @@ func TestCheckResponseSnapshot_ListEndpointsByPlatformApplication(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEndpointsByPlatformApplication(context.Background(), &ListEndpointsByPlatformApplicationInput{})
+	got, err := svc.ListEndpointsByPlatformApplication(context.Background(), &ListEndpointsByPlatformApplicationInput{
+		PlatformApplicationArn: ptr.String("__PlatformApplicationArn__"),
+		NextToken:              ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -554,7 +629,10 @@ func TestCheckResponseSnapshot_ListOriginationNumbers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOriginationNumbers(context.Background(), &ListOriginationNumbersInput{})
+	got, err := svc.ListOriginationNumbers(context.Background(), &ListOriginationNumbersInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -579,7 +657,9 @@ func TestCheckResponseSnapshot_ListPhoneNumbersOptedOut(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPhoneNumbersOptedOut(context.Background(), &ListPhoneNumbersOptedOutInput{})
+	got, err := svc.ListPhoneNumbersOptedOut(context.Background(), &ListPhoneNumbersOptedOutInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -614,7 +694,9 @@ func TestCheckResponseSnapshot_ListPlatformApplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPlatformApplications(context.Background(), &ListPlatformApplicationsInput{})
+	got, err := svc.ListPlatformApplications(context.Background(), &ListPlatformApplicationsInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -645,7 +727,10 @@ func TestCheckResponseSnapshot_ListSMSSandboxPhoneNumbers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSMSSandboxPhoneNumbers(context.Background(), &ListSMSSandboxPhoneNumbersInput{})
+	got, err := svc.ListSMSSandboxPhoneNumbers(context.Background(), &ListSMSSandboxPhoneNumbersInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -682,7 +767,9 @@ func TestCheckResponseSnapshot_ListSubscriptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSubscriptions(context.Background(), &ListSubscriptionsInput{})
+	got, err := svc.ListSubscriptions(context.Background(), &ListSubscriptionsInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -719,7 +806,10 @@ func TestCheckResponseSnapshot_ListSubscriptionsByTopic(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSubscriptionsByTopic(context.Background(), &ListSubscriptionsByTopicInput{})
+	got, err := svc.ListSubscriptionsByTopic(context.Background(), &ListSubscriptionsByTopicInput{
+		TopicArn:  ptr.String("__TopicArn__"),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -749,7 +839,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -778,7 +870,9 @@ func TestCheckResponseSnapshot_ListTopics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTopics(context.Background(), &ListTopicsInput{})
+	got, err := svc.ListTopics(context.Background(), &ListTopicsInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -797,7 +891,9 @@ func TestCheckResponseSnapshot_OptInPhoneNumber(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.OptInPhoneNumber(context.Background(), &OptInPhoneNumberInput{})
+	got, err := svc.OptInPhoneNumber(context.Background(), &OptInPhoneNumberInput{
+		PhoneNumber: ptr.String("__PhoneNumber__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -819,7 +915,23 @@ func TestCheckResponseSnapshot_Publish(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Publish(context.Background(), &PublishInput{})
+	got, err := svc.Publish(context.Background(), &PublishInput{
+		TopicArn:         ptr.String("__TopicArn__"),
+		TargetArn:        ptr.String("__TargetArn__"),
+		PhoneNumber:      ptr.String("__PhoneNumber__"),
+		Message:          ptr.String("__Message__"),
+		Subject:          ptr.String("__Subject__"),
+		MessageStructure: ptr.String("__MessageStructure__"),
+		MessageAttributes: map[string]types.MessageAttributeValue{
+			"key0": {
+				DataType:    ptr.String("__DataType__"),
+				StringValue: ptr.String("__StringValue__"),
+				BinaryValue: []byte("blob"),
+			},
+		},
+		MessageDeduplicationId: ptr.String("__MessageDeduplicationId__"),
+		MessageGroupId:         ptr.String("__MessageGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -865,7 +977,41 @@ func TestCheckResponseSnapshot_PublishBatch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PublishBatch(context.Background(), &PublishBatchInput{})
+	got, err := svc.PublishBatch(context.Background(), &PublishBatchInput{
+		TopicArn: ptr.String("__TopicArn__"),
+		PublishBatchRequestEntries: []types.PublishBatchRequestEntry{
+			{
+				Id:               ptr.String("__Id__"),
+				Message:          ptr.String("__Message__"),
+				Subject:          ptr.String("__Subject__"),
+				MessageStructure: ptr.String("__MessageStructure__"),
+				MessageAttributes: map[string]types.MessageAttributeValue{
+					"key0": {
+						DataType:    ptr.String("__DataType__"),
+						StringValue: ptr.String("__StringValue__"),
+						BinaryValue: []byte("blob"),
+					},
+				},
+				MessageDeduplicationId: ptr.String("__MessageDeduplicationId__"),
+				MessageGroupId:         ptr.String("__MessageGroupId__"),
+			},
+			{
+				Id:               ptr.String("__Id__"),
+				Message:          ptr.String("__Message__"),
+				Subject:          ptr.String("__Subject__"),
+				MessageStructure: ptr.String("__MessageStructure__"),
+				MessageAttributes: map[string]types.MessageAttributeValue{
+					"key0": {
+						DataType:    ptr.String("__DataType__"),
+						StringValue: ptr.String("__StringValue__"),
+						BinaryValue: []byte("blob"),
+					},
+				},
+				MessageDeduplicationId: ptr.String("__MessageDeduplicationId__"),
+				MessageGroupId:         ptr.String("__MessageGroupId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -884,7 +1030,10 @@ func TestCheckResponseSnapshot_PutDataProtectionPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutDataProtectionPolicy(context.Background(), &PutDataProtectionPolicyInput{})
+	got, err := svc.PutDataProtectionPolicy(context.Background(), &PutDataProtectionPolicyInput{
+		ResourceArn:          ptr.String("__ResourceArn__"),
+		DataProtectionPolicy: ptr.String("__DataProtectionPolicy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -903,7 +1052,10 @@ func TestCheckResponseSnapshot_RemovePermission(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemovePermission(context.Background(), &RemovePermissionInput{})
+	got, err := svc.RemovePermission(context.Background(), &RemovePermissionInput{
+		TopicArn: ptr.String("__TopicArn__"),
+		Label:    ptr.String("__Label__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -922,7 +1074,12 @@ func TestCheckResponseSnapshot_SetEndpointAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetEndpointAttributes(context.Background(), &SetEndpointAttributesInput{})
+	got, err := svc.SetEndpointAttributes(context.Background(), &SetEndpointAttributesInput{
+		EndpointArn: ptr.String("__EndpointArn__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -941,7 +1098,12 @@ func TestCheckResponseSnapshot_SetPlatformApplicationAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetPlatformApplicationAttributes(context.Background(), &SetPlatformApplicationAttributesInput{})
+	got, err := svc.SetPlatformApplicationAttributes(context.Background(), &SetPlatformApplicationAttributesInput{
+		PlatformApplicationArn: ptr.String("__PlatformApplicationArn__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -960,7 +1122,11 @@ func TestCheckResponseSnapshot_SetSMSAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetSMSAttributes(context.Background(), &SetSMSAttributesInput{})
+	got, err := svc.SetSMSAttributes(context.Background(), &SetSMSAttributesInput{
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -979,7 +1145,11 @@ func TestCheckResponseSnapshot_SetSubscriptionAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetSubscriptionAttributes(context.Background(), &SetSubscriptionAttributesInput{})
+	got, err := svc.SetSubscriptionAttributes(context.Background(), &SetSubscriptionAttributesInput{
+		SubscriptionArn: ptr.String("__SubscriptionArn__"),
+		AttributeName:   ptr.String("__AttributeName__"),
+		AttributeValue:  ptr.String("__AttributeValue__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -998,7 +1168,11 @@ func TestCheckResponseSnapshot_SetTopicAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetTopicAttributes(context.Background(), &SetTopicAttributesInput{})
+	got, err := svc.SetTopicAttributes(context.Background(), &SetTopicAttributesInput{
+		TopicArn:       ptr.String("__TopicArn__"),
+		AttributeName:  ptr.String("__AttributeName__"),
+		AttributeValue: ptr.String("__AttributeValue__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1019,7 +1193,15 @@ func TestCheckResponseSnapshot_Subscribe(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Subscribe(context.Background(), &SubscribeInput{})
+	got, err := svc.Subscribe(context.Background(), &SubscribeInput{
+		TopicArn: ptr.String("__TopicArn__"),
+		Protocol: ptr.String("__Protocol__"),
+		Endpoint: ptr.String("__Endpoint__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		ReturnSubscriptionArn: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1038,7 +1220,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1057,7 +1251,9 @@ func TestCheckResponseSnapshot_Unsubscribe(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Unsubscribe(context.Background(), &UnsubscribeInput{})
+	got, err := svc.Unsubscribe(context.Background(), &UnsubscribeInput{
+		SubscriptionArn: ptr.String("__SubscriptionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1076,7 +1272,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1095,7 +1297,10 @@ func TestCheckResponseSnapshot_VerifySMSSandboxPhoneNumber(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.VerifySMSSandboxPhoneNumber(context.Background(), &VerifySMSSandboxPhoneNumberInput{})
+	got, err := svc.VerifySMSSandboxPhoneNumber(context.Background(), &VerifySMSSandboxPhoneNumberInput{
+		PhoneNumber:     ptr.String("__PhoneNumber__"),
+		OneTimePassword: ptr.String("__OneTimePassword__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1116,7 +1321,18 @@ func TestCheckResponseSnapshot_Error_AuthorizationErrorException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddPermission(context.Background(), &AddPermissionInput{})
+	_, opErr := svc.AddPermission(context.Background(), &AddPermissionInput{
+		TopicArn: ptr.String("__TopicArn__"),
+		Label:    ptr.String("__Label__"),
+		AWSAccountId: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ActionName: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1141,7 +1357,41 @@ func TestCheckResponseSnapshot_Error_BatchEntryIdsNotDistinctException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PublishBatch(context.Background(), &PublishBatchInput{})
+	_, opErr := svc.PublishBatch(context.Background(), &PublishBatchInput{
+		TopicArn: ptr.String("__TopicArn__"),
+		PublishBatchRequestEntries: []types.PublishBatchRequestEntry{
+			{
+				Id:               ptr.String("__Id__"),
+				Message:          ptr.String("__Message__"),
+				Subject:          ptr.String("__Subject__"),
+				MessageStructure: ptr.String("__MessageStructure__"),
+				MessageAttributes: map[string]types.MessageAttributeValue{
+					"key0": {
+						DataType:    ptr.String("__DataType__"),
+						StringValue: ptr.String("__StringValue__"),
+						BinaryValue: []byte("blob"),
+					},
+				},
+				MessageDeduplicationId: ptr.String("__MessageDeduplicationId__"),
+				MessageGroupId:         ptr.String("__MessageGroupId__"),
+			},
+			{
+				Id:               ptr.String("__Id__"),
+				Message:          ptr.String("__Message__"),
+				Subject:          ptr.String("__Subject__"),
+				MessageStructure: ptr.String("__MessageStructure__"),
+				MessageAttributes: map[string]types.MessageAttributeValue{
+					"key0": {
+						DataType:    ptr.String("__DataType__"),
+						StringValue: ptr.String("__StringValue__"),
+						BinaryValue: []byte("blob"),
+					},
+				},
+				MessageDeduplicationId: ptr.String("__MessageDeduplicationId__"),
+				MessageGroupId:         ptr.String("__MessageGroupId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1166,7 +1416,41 @@ func TestCheckResponseSnapshot_Error_BatchRequestTooLongException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PublishBatch(context.Background(), &PublishBatchInput{})
+	_, opErr := svc.PublishBatch(context.Background(), &PublishBatchInput{
+		TopicArn: ptr.String("__TopicArn__"),
+		PublishBatchRequestEntries: []types.PublishBatchRequestEntry{
+			{
+				Id:               ptr.String("__Id__"),
+				Message:          ptr.String("__Message__"),
+				Subject:          ptr.String("__Subject__"),
+				MessageStructure: ptr.String("__MessageStructure__"),
+				MessageAttributes: map[string]types.MessageAttributeValue{
+					"key0": {
+						DataType:    ptr.String("__DataType__"),
+						StringValue: ptr.String("__StringValue__"),
+						BinaryValue: []byte("blob"),
+					},
+				},
+				MessageDeduplicationId: ptr.String("__MessageDeduplicationId__"),
+				MessageGroupId:         ptr.String("__MessageGroupId__"),
+			},
+			{
+				Id:               ptr.String("__Id__"),
+				Message:          ptr.String("__Message__"),
+				Subject:          ptr.String("__Subject__"),
+				MessageStructure: ptr.String("__MessageStructure__"),
+				MessageAttributes: map[string]types.MessageAttributeValue{
+					"key0": {
+						DataType:    ptr.String("__DataType__"),
+						StringValue: ptr.String("__StringValue__"),
+						BinaryValue: []byte("blob"),
+					},
+				},
+				MessageDeduplicationId: ptr.String("__MessageDeduplicationId__"),
+				MessageGroupId:         ptr.String("__MessageGroupId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1191,7 +1475,23 @@ func TestCheckResponseSnapshot_Error_ConcurrentAccessException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTopic(context.Background(), &CreateTopicInput{})
+	_, opErr := svc.CreateTopic(context.Background(), &CreateTopicInput{
+		Name: ptr.String("__Name__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DataProtectionPolicy: ptr.String("__DataProtectionPolicy__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1216,7 +1516,41 @@ func TestCheckResponseSnapshot_Error_EmptyBatchRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PublishBatch(context.Background(), &PublishBatchInput{})
+	_, opErr := svc.PublishBatch(context.Background(), &PublishBatchInput{
+		TopicArn: ptr.String("__TopicArn__"),
+		PublishBatchRequestEntries: []types.PublishBatchRequestEntry{
+			{
+				Id:               ptr.String("__Id__"),
+				Message:          ptr.String("__Message__"),
+				Subject:          ptr.String("__Subject__"),
+				MessageStructure: ptr.String("__MessageStructure__"),
+				MessageAttributes: map[string]types.MessageAttributeValue{
+					"key0": {
+						DataType:    ptr.String("__DataType__"),
+						StringValue: ptr.String("__StringValue__"),
+						BinaryValue: []byte("blob"),
+					},
+				},
+				MessageDeduplicationId: ptr.String("__MessageDeduplicationId__"),
+				MessageGroupId:         ptr.String("__MessageGroupId__"),
+			},
+			{
+				Id:               ptr.String("__Id__"),
+				Message:          ptr.String("__Message__"),
+				Subject:          ptr.String("__Subject__"),
+				MessageStructure: ptr.String("__MessageStructure__"),
+				MessageAttributes: map[string]types.MessageAttributeValue{
+					"key0": {
+						DataType:    ptr.String("__DataType__"),
+						StringValue: ptr.String("__StringValue__"),
+						BinaryValue: []byte("blob"),
+					},
+				},
+				MessageDeduplicationId: ptr.String("__MessageDeduplicationId__"),
+				MessageGroupId:         ptr.String("__MessageGroupId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1241,7 +1575,23 @@ func TestCheckResponseSnapshot_Error_EndpointDisabledException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Publish(context.Background(), &PublishInput{})
+	_, opErr := svc.Publish(context.Background(), &PublishInput{
+		TopicArn:         ptr.String("__TopicArn__"),
+		TargetArn:        ptr.String("__TargetArn__"),
+		PhoneNumber:      ptr.String("__PhoneNumber__"),
+		Message:          ptr.String("__Message__"),
+		Subject:          ptr.String("__Subject__"),
+		MessageStructure: ptr.String("__MessageStructure__"),
+		MessageAttributes: map[string]types.MessageAttributeValue{
+			"key0": {
+				DataType:    ptr.String("__DataType__"),
+				StringValue: ptr.String("__StringValue__"),
+				BinaryValue: []byte("blob"),
+			},
+		},
+		MessageDeduplicationId: ptr.String("__MessageDeduplicationId__"),
+		MessageGroupId:         ptr.String("__MessageGroupId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1266,7 +1616,11 @@ func TestCheckResponseSnapshot_Error_FilterPolicyLimitExceededException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ConfirmSubscription(context.Background(), &ConfirmSubscriptionInput{})
+	_, opErr := svc.ConfirmSubscription(context.Background(), &ConfirmSubscriptionInput{
+		TopicArn:                  ptr.String("__TopicArn__"),
+		Token:                     ptr.String("__Token__"),
+		AuthenticateOnUnsubscribe: ptr.String("__AuthenticateOnUnsubscribe__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1291,7 +1645,18 @@ func TestCheckResponseSnapshot_Error_InternalErrorException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddPermission(context.Background(), &AddPermissionInput{})
+	_, opErr := svc.AddPermission(context.Background(), &AddPermissionInput{
+		TopicArn: ptr.String("__TopicArn__"),
+		Label:    ptr.String("__Label__"),
+		AWSAccountId: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ActionName: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1316,7 +1681,41 @@ func TestCheckResponseSnapshot_Error_InvalidBatchEntryIdException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PublishBatch(context.Background(), &PublishBatchInput{})
+	_, opErr := svc.PublishBatch(context.Background(), &PublishBatchInput{
+		TopicArn: ptr.String("__TopicArn__"),
+		PublishBatchRequestEntries: []types.PublishBatchRequestEntry{
+			{
+				Id:               ptr.String("__Id__"),
+				Message:          ptr.String("__Message__"),
+				Subject:          ptr.String("__Subject__"),
+				MessageStructure: ptr.String("__MessageStructure__"),
+				MessageAttributes: map[string]types.MessageAttributeValue{
+					"key0": {
+						DataType:    ptr.String("__DataType__"),
+						StringValue: ptr.String("__StringValue__"),
+						BinaryValue: []byte("blob"),
+					},
+				},
+				MessageDeduplicationId: ptr.String("__MessageDeduplicationId__"),
+				MessageGroupId:         ptr.String("__MessageGroupId__"),
+			},
+			{
+				Id:               ptr.String("__Id__"),
+				Message:          ptr.String("__Message__"),
+				Subject:          ptr.String("__Subject__"),
+				MessageStructure: ptr.String("__MessageStructure__"),
+				MessageAttributes: map[string]types.MessageAttributeValue{
+					"key0": {
+						DataType:    ptr.String("__DataType__"),
+						StringValue: ptr.String("__StringValue__"),
+						BinaryValue: []byte("blob"),
+					},
+				},
+				MessageDeduplicationId: ptr.String("__MessageDeduplicationId__"),
+				MessageGroupId:         ptr.String("__MessageGroupId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1341,7 +1740,18 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddPermission(context.Background(), &AddPermissionInput{})
+	_, opErr := svc.AddPermission(context.Background(), &AddPermissionInput{
+		TopicArn: ptr.String("__TopicArn__"),
+		Label:    ptr.String("__Label__"),
+		AWSAccountId: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ActionName: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1366,7 +1776,23 @@ func TestCheckResponseSnapshot_Error_InvalidParameterValueException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Publish(context.Background(), &PublishInput{})
+	_, opErr := svc.Publish(context.Background(), &PublishInput{
+		TopicArn:         ptr.String("__TopicArn__"),
+		TargetArn:        ptr.String("__TargetArn__"),
+		PhoneNumber:      ptr.String("__PhoneNumber__"),
+		Message:          ptr.String("__Message__"),
+		Subject:          ptr.String("__Subject__"),
+		MessageStructure: ptr.String("__MessageStructure__"),
+		MessageAttributes: map[string]types.MessageAttributeValue{
+			"key0": {
+				DataType:    ptr.String("__DataType__"),
+				StringValue: ptr.String("__StringValue__"),
+				BinaryValue: []byte("blob"),
+			},
+		},
+		MessageDeduplicationId: ptr.String("__MessageDeduplicationId__"),
+		MessageGroupId:         ptr.String("__MessageGroupId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1391,7 +1817,23 @@ func TestCheckResponseSnapshot_Error_InvalidSecurityException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTopic(context.Background(), &CreateTopicInput{})
+	_, opErr := svc.CreateTopic(context.Background(), &CreateTopicInput{
+		Name: ptr.String("__Name__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DataProtectionPolicy: ptr.String("__DataProtectionPolicy__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1416,7 +1858,9 @@ func TestCheckResponseSnapshot_Error_InvalidStateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteTopic(context.Background(), &DeleteTopicInput{})
+	_, opErr := svc.DeleteTopic(context.Background(), &DeleteTopicInput{
+		TopicArn: ptr.String("__TopicArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1441,7 +1885,23 @@ func TestCheckResponseSnapshot_Error_KMSAccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Publish(context.Background(), &PublishInput{})
+	_, opErr := svc.Publish(context.Background(), &PublishInput{
+		TopicArn:         ptr.String("__TopicArn__"),
+		TargetArn:        ptr.String("__TargetArn__"),
+		PhoneNumber:      ptr.String("__PhoneNumber__"),
+		Message:          ptr.String("__Message__"),
+		Subject:          ptr.String("__Subject__"),
+		MessageStructure: ptr.String("__MessageStructure__"),
+		MessageAttributes: map[string]types.MessageAttributeValue{
+			"key0": {
+				DataType:    ptr.String("__DataType__"),
+				StringValue: ptr.String("__StringValue__"),
+				BinaryValue: []byte("blob"),
+			},
+		},
+		MessageDeduplicationId: ptr.String("__MessageDeduplicationId__"),
+		MessageGroupId:         ptr.String("__MessageGroupId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1466,7 +1926,23 @@ func TestCheckResponseSnapshot_Error_KMSDisabledException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Publish(context.Background(), &PublishInput{})
+	_, opErr := svc.Publish(context.Background(), &PublishInput{
+		TopicArn:         ptr.String("__TopicArn__"),
+		TargetArn:        ptr.String("__TargetArn__"),
+		PhoneNumber:      ptr.String("__PhoneNumber__"),
+		Message:          ptr.String("__Message__"),
+		Subject:          ptr.String("__Subject__"),
+		MessageStructure: ptr.String("__MessageStructure__"),
+		MessageAttributes: map[string]types.MessageAttributeValue{
+			"key0": {
+				DataType:    ptr.String("__DataType__"),
+				StringValue: ptr.String("__StringValue__"),
+				BinaryValue: []byte("blob"),
+			},
+		},
+		MessageDeduplicationId: ptr.String("__MessageDeduplicationId__"),
+		MessageGroupId:         ptr.String("__MessageGroupId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1491,7 +1967,23 @@ func TestCheckResponseSnapshot_Error_KMSInvalidStateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Publish(context.Background(), &PublishInput{})
+	_, opErr := svc.Publish(context.Background(), &PublishInput{
+		TopicArn:         ptr.String("__TopicArn__"),
+		TargetArn:        ptr.String("__TargetArn__"),
+		PhoneNumber:      ptr.String("__PhoneNumber__"),
+		Message:          ptr.String("__Message__"),
+		Subject:          ptr.String("__Subject__"),
+		MessageStructure: ptr.String("__MessageStructure__"),
+		MessageAttributes: map[string]types.MessageAttributeValue{
+			"key0": {
+				DataType:    ptr.String("__DataType__"),
+				StringValue: ptr.String("__StringValue__"),
+				BinaryValue: []byte("blob"),
+			},
+		},
+		MessageDeduplicationId: ptr.String("__MessageDeduplicationId__"),
+		MessageGroupId:         ptr.String("__MessageGroupId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1516,7 +2008,23 @@ func TestCheckResponseSnapshot_Error_KMSNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Publish(context.Background(), &PublishInput{})
+	_, opErr := svc.Publish(context.Background(), &PublishInput{
+		TopicArn:         ptr.String("__TopicArn__"),
+		TargetArn:        ptr.String("__TargetArn__"),
+		PhoneNumber:      ptr.String("__PhoneNumber__"),
+		Message:          ptr.String("__Message__"),
+		Subject:          ptr.String("__Subject__"),
+		MessageStructure: ptr.String("__MessageStructure__"),
+		MessageAttributes: map[string]types.MessageAttributeValue{
+			"key0": {
+				DataType:    ptr.String("__DataType__"),
+				StringValue: ptr.String("__StringValue__"),
+				BinaryValue: []byte("blob"),
+			},
+		},
+		MessageDeduplicationId: ptr.String("__MessageDeduplicationId__"),
+		MessageGroupId:         ptr.String("__MessageGroupId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1541,7 +2049,23 @@ func TestCheckResponseSnapshot_Error_KMSOptInRequired(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Publish(context.Background(), &PublishInput{})
+	_, opErr := svc.Publish(context.Background(), &PublishInput{
+		TopicArn:         ptr.String("__TopicArn__"),
+		TargetArn:        ptr.String("__TargetArn__"),
+		PhoneNumber:      ptr.String("__PhoneNumber__"),
+		Message:          ptr.String("__Message__"),
+		Subject:          ptr.String("__Subject__"),
+		MessageStructure: ptr.String("__MessageStructure__"),
+		MessageAttributes: map[string]types.MessageAttributeValue{
+			"key0": {
+				DataType:    ptr.String("__DataType__"),
+				StringValue: ptr.String("__StringValue__"),
+				BinaryValue: []byte("blob"),
+			},
+		},
+		MessageDeduplicationId: ptr.String("__MessageDeduplicationId__"),
+		MessageGroupId:         ptr.String("__MessageGroupId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1566,7 +2090,23 @@ func TestCheckResponseSnapshot_Error_KMSThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Publish(context.Background(), &PublishInput{})
+	_, opErr := svc.Publish(context.Background(), &PublishInput{
+		TopicArn:         ptr.String("__TopicArn__"),
+		TargetArn:        ptr.String("__TargetArn__"),
+		PhoneNumber:      ptr.String("__PhoneNumber__"),
+		Message:          ptr.String("__Message__"),
+		Subject:          ptr.String("__Subject__"),
+		MessageStructure: ptr.String("__MessageStructure__"),
+		MessageAttributes: map[string]types.MessageAttributeValue{
+			"key0": {
+				DataType:    ptr.String("__DataType__"),
+				StringValue: ptr.String("__StringValue__"),
+				BinaryValue: []byte("blob"),
+			},
+		},
+		MessageDeduplicationId: ptr.String("__MessageDeduplicationId__"),
+		MessageGroupId:         ptr.String("__MessageGroupId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1591,7 +2131,18 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddPermission(context.Background(), &AddPermissionInput{})
+	_, opErr := svc.AddPermission(context.Background(), &AddPermissionInput{
+		TopicArn: ptr.String("__TopicArn__"),
+		Label:    ptr.String("__Label__"),
+		AWSAccountId: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ActionName: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1616,7 +2167,10 @@ func TestCheckResponseSnapshot_Error_OptedOutException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSMSSandboxPhoneNumber(context.Background(), &CreateSMSSandboxPhoneNumberInput{})
+	_, opErr := svc.CreateSMSSandboxPhoneNumber(context.Background(), &CreateSMSSandboxPhoneNumberInput{
+		PhoneNumber:  ptr.String("__PhoneNumber__"),
+		LanguageCode: types.LanguageCodeString("en-US"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1641,7 +2195,23 @@ func TestCheckResponseSnapshot_Error_PlatformApplicationDisabledException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Publish(context.Background(), &PublishInput{})
+	_, opErr := svc.Publish(context.Background(), &PublishInput{
+		TopicArn:         ptr.String("__TopicArn__"),
+		TargetArn:        ptr.String("__TargetArn__"),
+		PhoneNumber:      ptr.String("__PhoneNumber__"),
+		Message:          ptr.String("__Message__"),
+		Subject:          ptr.String("__Subject__"),
+		MessageStructure: ptr.String("__MessageStructure__"),
+		MessageAttributes: map[string]types.MessageAttributeValue{
+			"key0": {
+				DataType:    ptr.String("__DataType__"),
+				StringValue: ptr.String("__StringValue__"),
+				BinaryValue: []byte("blob"),
+			},
+		},
+		MessageDeduplicationId: ptr.String("__MessageDeduplicationId__"),
+		MessageGroupId:         ptr.String("__MessageGroupId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1666,7 +2236,11 @@ func TestCheckResponseSnapshot_Error_ReplayLimitExceededException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ConfirmSubscription(context.Background(), &ConfirmSubscriptionInput{})
+	_, opErr := svc.ConfirmSubscription(context.Background(), &ConfirmSubscriptionInput{
+		TopicArn:                  ptr.String("__TopicArn__"),
+		Token:                     ptr.String("__Token__"),
+		AuthenticateOnUnsubscribe: ptr.String("__AuthenticateOnUnsubscribe__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1691,7 +2265,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteSMSSandboxPhoneNumber(context.Background(), &DeleteSMSSandboxPhoneNumberInput{})
+	_, opErr := svc.DeleteSMSSandboxPhoneNumber(context.Background(), &DeleteSMSSandboxPhoneNumberInput{
+		PhoneNumber: ptr.String("__PhoneNumber__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1716,7 +2292,23 @@ func TestCheckResponseSnapshot_Error_StaleTagException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTopic(context.Background(), &CreateTopicInput{})
+	_, opErr := svc.CreateTopic(context.Background(), &CreateTopicInput{
+		Name: ptr.String("__Name__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DataProtectionPolicy: ptr.String("__DataProtectionPolicy__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1741,7 +2333,11 @@ func TestCheckResponseSnapshot_Error_SubscriptionLimitExceededException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ConfirmSubscription(context.Background(), &ConfirmSubscriptionInput{})
+	_, opErr := svc.ConfirmSubscription(context.Background(), &ConfirmSubscriptionInput{
+		TopicArn:                  ptr.String("__TopicArn__"),
+		Token:                     ptr.String("__Token__"),
+		AuthenticateOnUnsubscribe: ptr.String("__AuthenticateOnUnsubscribe__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1766,7 +2362,23 @@ func TestCheckResponseSnapshot_Error_TagLimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTopic(context.Background(), &CreateTopicInput{})
+	_, opErr := svc.CreateTopic(context.Background(), &CreateTopicInput{
+		Name: ptr.String("__Name__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DataProtectionPolicy: ptr.String("__DataProtectionPolicy__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1791,7 +2403,23 @@ func TestCheckResponseSnapshot_Error_TagPolicyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTopic(context.Background(), &CreateTopicInput{})
+	_, opErr := svc.CreateTopic(context.Background(), &CreateTopicInput{
+		Name: ptr.String("__Name__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DataProtectionPolicy: ptr.String("__DataProtectionPolicy__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1816,7 +2444,9 @@ func TestCheckResponseSnapshot_Error_ThrottledException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CheckIfPhoneNumberIsOptedOut(context.Background(), &CheckIfPhoneNumberIsOptedOutInput{})
+	_, opErr := svc.CheckIfPhoneNumberIsOptedOut(context.Background(), &CheckIfPhoneNumberIsOptedOutInput{
+		PhoneNumber: ptr.String("__PhoneNumber__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1841,7 +2471,41 @@ func TestCheckResponseSnapshot_Error_TooManyEntriesInBatchRequestException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PublishBatch(context.Background(), &PublishBatchInput{})
+	_, opErr := svc.PublishBatch(context.Background(), &PublishBatchInput{
+		TopicArn: ptr.String("__TopicArn__"),
+		PublishBatchRequestEntries: []types.PublishBatchRequestEntry{
+			{
+				Id:               ptr.String("__Id__"),
+				Message:          ptr.String("__Message__"),
+				Subject:          ptr.String("__Subject__"),
+				MessageStructure: ptr.String("__MessageStructure__"),
+				MessageAttributes: map[string]types.MessageAttributeValue{
+					"key0": {
+						DataType:    ptr.String("__DataType__"),
+						StringValue: ptr.String("__StringValue__"),
+						BinaryValue: []byte("blob"),
+					},
+				},
+				MessageDeduplicationId: ptr.String("__MessageDeduplicationId__"),
+				MessageGroupId:         ptr.String("__MessageGroupId__"),
+			},
+			{
+				Id:               ptr.String("__Id__"),
+				Message:          ptr.String("__Message__"),
+				Subject:          ptr.String("__Subject__"),
+				MessageStructure: ptr.String("__MessageStructure__"),
+				MessageAttributes: map[string]types.MessageAttributeValue{
+					"key0": {
+						DataType:    ptr.String("__DataType__"),
+						StringValue: ptr.String("__StringValue__"),
+						BinaryValue: []byte("blob"),
+					},
+				},
+				MessageDeduplicationId: ptr.String("__MessageDeduplicationId__"),
+				MessageGroupId:         ptr.String("__MessageGroupId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1866,7 +2530,23 @@ func TestCheckResponseSnapshot_Error_TopicLimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTopic(context.Background(), &CreateTopicInput{})
+	_, opErr := svc.CreateTopic(context.Background(), &CreateTopicInput{
+		Name: ptr.String("__Name__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DataProtectionPolicy: ptr.String("__DataProtectionPolicy__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1891,7 +2571,10 @@ func TestCheckResponseSnapshot_Error_UserErrorException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSMSSandboxPhoneNumber(context.Background(), &CreateSMSSandboxPhoneNumberInput{})
+	_, opErr := svc.CreateSMSSandboxPhoneNumber(context.Background(), &CreateSMSSandboxPhoneNumberInput{
+		PhoneNumber:  ptr.String("__PhoneNumber__"),
+		LanguageCode: types.LanguageCodeString("en-US"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1916,7 +2599,10 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListOriginationNumbers(context.Background(), &ListOriginationNumbersInput{})
+	_, opErr := svc.ListOriginationNumbers(context.Background(), &ListOriginationNumbersInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1942,7 +2628,10 @@ func TestCheckResponseSnapshot_Error_VerificationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.VerifySMSSandboxPhoneNumber(context.Background(), &VerifySMSSandboxPhoneNumberInput{})
+	_, opErr := svc.VerifySMSSandboxPhoneNumber(context.Background(), &VerifySMSSandboxPhoneNumberInput{
+		PhoneNumber:     ptr.String("__PhoneNumber__"),
+		OneTimePassword: ptr.String("__OneTimePassword__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

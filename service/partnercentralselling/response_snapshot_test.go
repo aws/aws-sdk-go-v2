@@ -117,7 +117,10 @@ func TestCheckResponseSnapshot_AcceptEngagementInvitation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptEngagementInvitation(context.Background(), &AcceptEngagementInvitationInput{})
+	got, err := svc.AcceptEngagementInvitation(context.Background(), &AcceptEngagementInvitationInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -136,7 +139,17 @@ func TestCheckResponseSnapshot_AssignOpportunity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssignOpportunity(context.Background(), &AssignOpportunityInput{})
+	got, err := svc.AssignOpportunity(context.Background(), &AssignOpportunityInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+		Assignee: &types.AssigneeContact{
+			Email:         ptr.String("__Email__"),
+			FirstName:     ptr.String("__FirstName__"),
+			LastName:      ptr.String("__LastName__"),
+			Phone:         ptr.String("__Phone__"),
+			BusinessTitle: ptr.String("__BusinessTitle__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -155,7 +168,12 @@ func TestCheckResponseSnapshot_AssociateOpportunity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateOpportunity(context.Background(), &AssociateOpportunityInput{})
+	got, err := svc.AssociateOpportunity(context.Background(), &AssociateOpportunityInput{
+		Catalog:                 ptr.String("__Catalog__"),
+		OpportunityIdentifier:   ptr.String("__OpportunityIdentifier__"),
+		RelatedEntityType:       types.RelatedEntityType("Solutions"),
+		RelatedEntityIdentifier: ptr.String("__RelatedEntityIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -178,7 +196,52 @@ func TestCheckResponseSnapshot_CreateEngagement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEngagement(context.Background(), &CreateEngagementInput{})
+	got, err := svc.CreateEngagement(context.Background(), &CreateEngagementInput{
+		Catalog:     ptr.String("__Catalog__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Title:       ptr.String("__Title__"),
+		Description: ptr.String("__Description__"),
+		Contexts: []types.EngagementContextDetails{
+			{
+				Id:   ptr.String("__Id__"),
+				Type: types.EngagementContextType("CustomerProject"),
+				Payload: &types.EngagementContextPayloadMemberCustomerProject{
+					Value: types.CustomerProjectsContext{
+						Customer: &types.EngagementCustomer{
+							Industry:    types.Industry("Aerospace"),
+							CompanyName: ptr.String("__CompanyName__"),
+							WebsiteUrl:  ptr.String("__WebsiteUrl__"),
+							CountryCode: types.CountryCode("US"),
+						},
+						Project: &types.EngagementCustomerProjectDetails{
+							Title:                ptr.String("__Title__"),
+							BusinessProblem:      ptr.String("__BusinessProblem__"),
+							TargetCompletionDate: ptr.String("__TargetCompletionDate__"),
+						},
+					},
+				},
+			},
+			{
+				Id:   ptr.String("__Id__"),
+				Type: types.EngagementContextType("CustomerProject"),
+				Payload: &types.EngagementContextPayloadMemberCustomerProject{
+					Value: types.CustomerProjectsContext{
+						Customer: &types.EngagementCustomer{
+							Industry:    types.Industry("Aerospace"),
+							CompanyName: ptr.String("__CompanyName__"),
+							WebsiteUrl:  ptr.String("__WebsiteUrl__"),
+							CountryCode: types.CountryCode("US"),
+						},
+						Project: &types.EngagementCustomerProjectDetails{
+							Title:                ptr.String("__Title__"),
+							BusinessProblem:      ptr.String("__BusinessProblem__"),
+							TargetCompletionDate: ptr.String("__TargetCompletionDate__"),
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -202,7 +265,27 @@ func TestCheckResponseSnapshot_CreateEngagementContext(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEngagementContext(context.Background(), &CreateEngagementContextInput{})
+	got, err := svc.CreateEngagementContext(context.Background(), &CreateEngagementContextInput{
+		Catalog:              ptr.String("__Catalog__"),
+		EngagementIdentifier: ptr.String("__EngagementIdentifier__"),
+		ClientToken:          ptr.String("__ClientToken__"),
+		Type:                 types.EngagementContextType("CustomerProject"),
+		Payload: &types.EngagementContextPayloadMemberCustomerProject{
+			Value: types.CustomerProjectsContext{
+				Customer: &types.EngagementCustomer{
+					Industry:    types.Industry("Aerospace"),
+					CompanyName: ptr.String("__CompanyName__"),
+					WebsiteUrl:  ptr.String("__WebsiteUrl__"),
+					CountryCode: types.CountryCode("US"),
+				},
+				Project: &types.EngagementCustomerProjectDetails{
+					Title:                ptr.String("__Title__"),
+					BusinessProblem:      ptr.String("__BusinessProblem__"),
+					TargetCompletionDate: ptr.String("__TargetCompletionDate__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -224,7 +307,71 @@ func TestCheckResponseSnapshot_CreateEngagementInvitation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEngagementInvitation(context.Background(), &CreateEngagementInvitationInput{})
+	got, err := svc.CreateEngagementInvitation(context.Background(), &CreateEngagementInvitationInput{
+		Catalog:              ptr.String("__Catalog__"),
+		ClientToken:          ptr.String("__ClientToken__"),
+		EngagementIdentifier: ptr.String("__EngagementIdentifier__"),
+		Invitation: &types.Invitation{
+			Message: ptr.String("__Message__"),
+			Receiver: &types.ReceiverMemberAccount{
+				Value: types.AccountReceiver{
+					Alias:        ptr.String("__Alias__"),
+					AwsAccountId: ptr.String("__AwsAccountId__"),
+				},
+			},
+			Payload: &types.PayloadMemberOpportunityInvitation{
+				Value: types.OpportunityInvitationPayload{
+					SenderContacts: []types.SenderContact{
+						{
+							Email:         ptr.String("__Email__"),
+							FirstName:     ptr.String("__FirstName__"),
+							LastName:      ptr.String("__LastName__"),
+							BusinessTitle: ptr.String("__BusinessTitle__"),
+							Phone:         ptr.String("__Phone__"),
+						},
+						{
+							Email:         ptr.String("__Email__"),
+							FirstName:     ptr.String("__FirstName__"),
+							LastName:      ptr.String("__LastName__"),
+							BusinessTitle: ptr.String("__BusinessTitle__"),
+							Phone:         ptr.String("__Phone__"),
+						},
+					},
+					ReceiverResponsibilities: []types.ReceiverResponsibility{
+						types.ReceiverResponsibility("Distributor"),
+						types.ReceiverResponsibility("Distributor"),
+					},
+					Customer: &types.EngagementCustomer{
+						Industry:    types.Industry("Aerospace"),
+						CompanyName: ptr.String("__CompanyName__"),
+						WebsiteUrl:  ptr.String("__WebsiteUrl__"),
+						CountryCode: types.CountryCode("US"),
+					},
+					Project: &types.ProjectDetails{
+						BusinessProblem:      ptr.String("__BusinessProblem__"),
+						Title:                ptr.String("__Title__"),
+						TargetCompletionDate: ptr.String("__TargetCompletionDate__"),
+						ExpectedCustomerSpend: []types.ExpectedCustomerSpend{
+							{
+								Amount:        ptr.String("__Amount__"),
+								CurrencyCode:  types.CurrencyCode("USD"),
+								Frequency:     types.PaymentFrequency("Monthly"),
+								TargetCompany: ptr.String("__TargetCompany__"),
+								EstimationUrl: ptr.String("__EstimationUrl__"),
+							},
+							{
+								Amount:        ptr.String("__Amount__"),
+								CurrencyCode:  types.CurrencyCode("USD"),
+								Frequency:     types.PaymentFrequency("Monthly"),
+								TargetCompany: ptr.String("__TargetCompany__"),
+								EstimationUrl: ptr.String("__EstimationUrl__"),
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -247,7 +394,161 @@ func TestCheckResponseSnapshot_CreateOpportunity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateOpportunity(context.Background(), &CreateOpportunityInput{})
+	got, err := svc.CreateOpportunity(context.Background(), &CreateOpportunityInput{
+		Catalog: ptr.String("__Catalog__"),
+		PrimaryNeedsFromAws: []types.PrimaryNeedFromAws{
+			types.PrimaryNeedFromAws("Co-Sell - Architectural Validation"),
+			types.PrimaryNeedFromAws("Co-Sell - Architectural Validation"),
+		},
+		NationalSecurity:             types.NationalSecurity("Yes"),
+		PartnerOpportunityIdentifier: ptr.String("__PartnerOpportunityIdentifier__"),
+		Customer: &types.Customer{
+			Account: &types.Account{
+				Industry:      types.Industry("Aerospace"),
+				OtherIndustry: ptr.String("__OtherIndustry__"),
+				CompanyName:   ptr.String("__CompanyName__"),
+				WebsiteUrl:    ptr.String("__WebsiteUrl__"),
+				AwsAccountId:  ptr.String("__AwsAccountId__"),
+				Address: &types.Address{
+					City:          ptr.String("__City__"),
+					PostalCode:    ptr.String("__PostalCode__"),
+					StateOrRegion: ptr.String("__StateOrRegion__"),
+					CountryCode:   types.CountryCode("US"),
+					StreetAddress: ptr.String("__StreetAddress__"),
+				},
+				Duns: ptr.String("__Duns__"),
+			},
+			Contacts: []types.Contact{
+				{
+					Email:         ptr.String("__Email__"),
+					FirstName:     ptr.String("__FirstName__"),
+					LastName:      ptr.String("__LastName__"),
+					BusinessTitle: ptr.String("__BusinessTitle__"),
+					Phone:         ptr.String("__Phone__"),
+				},
+				{
+					Email:         ptr.String("__Email__"),
+					FirstName:     ptr.String("__FirstName__"),
+					LastName:      ptr.String("__LastName__"),
+					BusinessTitle: ptr.String("__BusinessTitle__"),
+					Phone:         ptr.String("__Phone__"),
+				},
+			},
+		},
+		Project: &types.Project{
+			DeliveryModels: []types.DeliveryModel{
+				types.DeliveryModel("SaaS or PaaS"),
+				types.DeliveryModel("SaaS or PaaS"),
+			},
+			ExpectedCustomerSpend: []types.ExpectedCustomerSpend{
+				{
+					Amount:        ptr.String("__Amount__"),
+					CurrencyCode:  types.CurrencyCode("USD"),
+					Frequency:     types.PaymentFrequency("Monthly"),
+					TargetCompany: ptr.String("__TargetCompany__"),
+					EstimationUrl: ptr.String("__EstimationUrl__"),
+				},
+				{
+					Amount:        ptr.String("__Amount__"),
+					CurrencyCode:  types.CurrencyCode("USD"),
+					Frequency:     types.PaymentFrequency("Monthly"),
+					TargetCompany: ptr.String("__TargetCompany__"),
+					EstimationUrl: ptr.String("__EstimationUrl__"),
+				},
+			},
+			ExpectedContractDuration: &types.ExpectedContractDuration{
+				Term:  types.ExpectedContractDurationTerm("Months"),
+				Value: ptr.String("__Value__"),
+			},
+			Title: ptr.String("__Title__"),
+			ApnPrograms: []string{
+				"__Member__",
+				"__Member__",
+			},
+			CustomerBusinessProblem:      ptr.String("__CustomerBusinessProblem__"),
+			CustomerUseCase:              ptr.String("__CustomerUseCase__"),
+			RelatedOpportunityIdentifier: ptr.String("__RelatedOpportunityIdentifier__"),
+			SalesActivities: []types.SalesActivity{
+				types.SalesActivity("Initialized discussions with customer"),
+				types.SalesActivity("Initialized discussions with customer"),
+			},
+			CompetitorName:           types.CompetitorName("Oracle Cloud"),
+			OtherCompetitorNames:     ptr.String("__OtherCompetitorNames__"),
+			OtherSolutionDescription: ptr.String("__OtherSolutionDescription__"),
+			AdditionalComments:       ptr.String("__AdditionalComments__"),
+			AwsPartition:             types.AwsPartition("aws-eusc"),
+		},
+		OpportunityType: types.OpportunityType("Net New Business"),
+		Marketing: &types.Marketing{
+			CampaignName: ptr.String("__CampaignName__"),
+			Source:       types.MarketingSource("Marketing Activity"),
+			UseCases: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Channels: []types.Channel{
+				types.Channel("AWS Marketing Central"),
+				types.Channel("AWS Marketing Central"),
+			},
+			AwsFundingUsed: types.AwsFundingUsed("Yes"),
+		},
+		SoftwareRevenue: &types.SoftwareRevenue{
+			DeliveryModel: types.RevenueModel("Contract"),
+			Value: &types.MonetaryValue{
+				Amount:       ptr.String("__Amount__"),
+				CurrencyCode: types.CurrencyCode("USD"),
+			},
+			EffectiveDate:  ptr.String("__EffectiveDate__"),
+			ExpirationDate: ptr.String("__ExpirationDate__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		LifeCycle: &types.LifeCycle{
+			Stage:              types.Stage("Prospect"),
+			ClosedLostReason:   types.ClosedLostReason("Customer Deficiency"),
+			NextSteps:          ptr.String("__NextSteps__"),
+			TargetCloseDate:    ptr.String("__TargetCloseDate__"),
+			ReviewStatus:       types.ReviewStatus("Pending Submission"),
+			ReviewComments:     ptr.String("__ReviewComments__"),
+			ReviewStatusReason: ptr.String("__ReviewStatusReason__"),
+			NextStepsHistory: []types.NextStepsHistory{
+				{
+					Value: ptr.String("__Value__"),
+					Time:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					Value: ptr.String("__Value__"),
+					Time:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+		},
+		Origin: types.OpportunityOrigin("AWS Referral"),
+		OpportunityTeam: []types.Contact{
+			{
+				Email:         ptr.String("__Email__"),
+				FirstName:     ptr.String("__FirstName__"),
+				LastName:      ptr.String("__LastName__"),
+				BusinessTitle: ptr.String("__BusinessTitle__"),
+				Phone:         ptr.String("__Phone__"),
+			},
+			{
+				Email:         ptr.String("__Email__"),
+				FirstName:     ptr.String("__FirstName__"),
+				LastName:      ptr.String("__LastName__"),
+				BusinessTitle: ptr.String("__BusinessTitle__"),
+				Phone:         ptr.String("__Phone__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -269,7 +570,14 @@ func TestCheckResponseSnapshot_CreateResourceSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateResourceSnapshot(context.Background(), &CreateResourceSnapshotInput{})
+	got, err := svc.CreateResourceSnapshot(context.Background(), &CreateResourceSnapshotInput{
+		Catalog:                            ptr.String("__Catalog__"),
+		EngagementIdentifier:               ptr.String("__EngagementIdentifier__"),
+		ResourceType:                       types.ResourceType("Opportunity"),
+		ResourceIdentifier:                 ptr.String("__ResourceIdentifier__"),
+		ResourceSnapshotTemplateIdentifier: ptr.String("__ResourceSnapshotTemplateIdentifier__"),
+		ClientToken:                        ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -291,7 +599,24 @@ func TestCheckResponseSnapshot_CreateResourceSnapshotJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateResourceSnapshotJob(context.Background(), &CreateResourceSnapshotJobInput{})
+	got, err := svc.CreateResourceSnapshotJob(context.Background(), &CreateResourceSnapshotJobInput{
+		Catalog:                            ptr.String("__Catalog__"),
+		ClientToken:                        ptr.String("__ClientToken__"),
+		EngagementIdentifier:               ptr.String("__EngagementIdentifier__"),
+		ResourceType:                       types.ResourceType("Opportunity"),
+		ResourceIdentifier:                 ptr.String("__ResourceIdentifier__"),
+		ResourceSnapshotTemplateIdentifier: ptr.String("__ResourceSnapshotTemplateIdentifier__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -310,7 +635,10 @@ func TestCheckResponseSnapshot_DeleteResourceSnapshotJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourceSnapshotJob(context.Background(), &DeleteResourceSnapshotJobInput{})
+	got, err := svc.DeleteResourceSnapshotJob(context.Background(), &DeleteResourceSnapshotJobInput{
+		Catalog:                       ptr.String("__Catalog__"),
+		ResourceSnapshotJobIdentifier: ptr.String("__ResourceSnapshotJobIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -329,7 +657,12 @@ func TestCheckResponseSnapshot_DisassociateOpportunity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateOpportunity(context.Background(), &DisassociateOpportunityInput{})
+	got, err := svc.DisassociateOpportunity(context.Background(), &DisassociateOpportunityInput{
+		Catalog:                 ptr.String("__Catalog__"),
+		OpportunityIdentifier:   ptr.String("__OpportunityIdentifier__"),
+		RelatedEntityType:       types.RelatedEntityType("Solutions"),
+		RelatedEntityIdentifier: ptr.String("__RelatedEntityIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -575,7 +908,10 @@ func TestCheckResponseSnapshot_GetAwsOpportunitySummary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAwsOpportunitySummary(context.Background(), &GetAwsOpportunitySummaryInput{})
+	got, err := svc.GetAwsOpportunitySummary(context.Background(), &GetAwsOpportunitySummaryInput{
+		Catalog:                      ptr.String("__Catalog__"),
+		RelatedOpportunityIdentifier: ptr.String("__RelatedOpportunityIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -644,7 +980,10 @@ func TestCheckResponseSnapshot_GetEngagement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEngagement(context.Background(), &GetEngagementInput{})
+	got, err := svc.GetEngagement(context.Background(), &GetEngagementInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -774,7 +1113,10 @@ func TestCheckResponseSnapshot_GetEngagementInvitation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEngagementInvitation(context.Background(), &GetEngagementInvitationInput{})
+	got, err := svc.GetEngagementInvitation(context.Background(), &GetEngagementInvitationInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -965,7 +1307,10 @@ func TestCheckResponseSnapshot_GetOpportunity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOpportunity(context.Background(), &GetOpportunityInput{})
+	got, err := svc.GetOpportunity(context.Background(), &GetOpportunityInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1006,7 +1351,10 @@ func TestCheckResponseSnapshot_GetProspectingFromEngagementTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProspectingFromEngagementTask(context.Background(), &GetProspectingFromEngagementTaskInput{})
+	got, err := svc.GetProspectingFromEngagementTask(context.Background(), &GetProspectingFromEngagementTaskInput{
+		Catalog:        ptr.String("__Catalog__"),
+		TaskIdentifier: ptr.String("__TaskIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1161,7 +1509,14 @@ func TestCheckResponseSnapshot_GetResourceSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourceSnapshot(context.Background(), &GetResourceSnapshotInput{})
+	got, err := svc.GetResourceSnapshot(context.Background(), &GetResourceSnapshotInput{
+		Catalog:                            ptr.String("__Catalog__"),
+		EngagementIdentifier:               ptr.String("__EngagementIdentifier__"),
+		ResourceType:                       types.ResourceType("Opportunity"),
+		ResourceIdentifier:                 ptr.String("__ResourceIdentifier__"),
+		ResourceSnapshotTemplateIdentifier: ptr.String("__ResourceSnapshotTemplateIdentifier__"),
+		Revision:                           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1193,7 +1548,10 @@ func TestCheckResponseSnapshot_GetResourceSnapshotJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourceSnapshotJob(context.Background(), &GetResourceSnapshotJobInput{})
+	got, err := svc.GetResourceSnapshotJob(context.Background(), &GetResourceSnapshotJobInput{
+		Catalog:                       ptr.String("__Catalog__"),
+		ResourceSnapshotJobIdentifier: ptr.String("__ResourceSnapshotJobIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1215,7 +1573,9 @@ func TestCheckResponseSnapshot_GetSellingSystemSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSellingSystemSettings(context.Background(), &GetSellingSystemSettingsInput{})
+	got, err := svc.GetSellingSystemSettings(context.Background(), &GetSellingSystemSettingsInput{
+		Catalog: ptr.String("__Catalog__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1260,7 +1620,31 @@ func TestCheckResponseSnapshot_ListEngagementByAcceptingInvitationTasks(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEngagementByAcceptingInvitationTasks(context.Background(), &ListEngagementByAcceptingInvitationTasksInput{})
+	got, err := svc.ListEngagementByAcceptingInvitationTasks(context.Background(), &ListEngagementByAcceptingInvitationTasksInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Sort: &types.ListTasksSortBase{
+			SortOrder: types.SortOrder("ASCENDING"),
+			SortBy:    types.ListTasksSortName("StartTime"),
+		},
+		Catalog: ptr.String("__Catalog__"),
+		TaskStatus: []types.TaskStatus{
+			types.TaskStatus("IN_PROGRESS"),
+			types.TaskStatus("IN_PROGRESS"),
+		},
+		OpportunityIdentifier: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EngagementInvitationIdentifier: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TaskIdentifier: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1307,7 +1691,31 @@ func TestCheckResponseSnapshot_ListEngagementFromOpportunityTasks(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEngagementFromOpportunityTasks(context.Background(), &ListEngagementFromOpportunityTasksInput{})
+	got, err := svc.ListEngagementFromOpportunityTasks(context.Background(), &ListEngagementFromOpportunityTasksInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Sort: &types.ListTasksSortBase{
+			SortOrder: types.SortOrder("ASCENDING"),
+			SortBy:    types.ListTasksSortName("StartTime"),
+		},
+		Catalog: ptr.String("__Catalog__"),
+		TaskStatus: []types.TaskStatus{
+			types.TaskStatus("IN_PROGRESS"),
+			types.TaskStatus("IN_PROGRESS"),
+		},
+		TaskIdentifier: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OpportunityIdentifier: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EngagementIdentifier: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1370,7 +1778,32 @@ func TestCheckResponseSnapshot_ListEngagementInvitations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEngagementInvitations(context.Background(), &ListEngagementInvitationsInput{})
+	got, err := svc.ListEngagementInvitations(context.Background(), &ListEngagementInvitationsInput{
+		Catalog:    ptr.String("__Catalog__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Sort: &types.OpportunityEngagementInvitationSort{
+			SortOrder: types.SortOrder("ASCENDING"),
+			SortBy:    types.OpportunityEngagementInvitationSortName("InvitationDate"),
+		},
+		PayloadType: []types.EngagementInvitationPayloadType{
+			types.EngagementInvitationPayloadType("OpportunityInvitation"),
+			types.EngagementInvitationPayloadType("OpportunityInvitation"),
+		},
+		ParticipantType: types.ParticipantType("SENDER"),
+		Status: []types.InvitationStatus{
+			types.InvitationStatus("ACCEPTED"),
+			types.InvitationStatus("ACCEPTED"),
+		},
+		EngagementIdentifier: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SenderAwsAccountId: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1403,7 +1836,12 @@ func TestCheckResponseSnapshot_ListEngagementMembers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEngagementMembers(context.Background(), &ListEngagementMembersInput{})
+	got, err := svc.ListEngagementMembers(context.Background(), &ListEngagementMembersInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1440,7 +1878,15 @@ func TestCheckResponseSnapshot_ListEngagementResourceAssociations(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEngagementResourceAssociations(context.Background(), &ListEngagementResourceAssociationsInput{})
+	got, err := svc.ListEngagementResourceAssociations(context.Background(), &ListEngagementResourceAssociationsInput{
+		Catalog:              ptr.String("__Catalog__"),
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+		EngagementIdentifier: ptr.String("__EngagementIdentifier__"),
+		ResourceType:         types.ResourceType("Opportunity"),
+		ResourceIdentifier:   ptr.String("__ResourceIdentifier__"),
+		CreatedBy:            ptr.String("__CreatedBy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1491,7 +1937,35 @@ func TestCheckResponseSnapshot_ListEngagements(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEngagements(context.Background(), &ListEngagementsInput{})
+	got, err := svc.ListEngagements(context.Background(), &ListEngagementsInput{
+		Catalog: ptr.String("__Catalog__"),
+		CreatedBy: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ExcludeCreatedBy: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ContextTypes: []types.EngagementContextType{
+			types.EngagementContextType("CustomerProject"),
+			types.EngagementContextType("CustomerProject"),
+		},
+		ExcludeContextTypes: []types.EngagementContextType{
+			types.EngagementContextType("CustomerProject"),
+			types.EngagementContextType("CustomerProject"),
+		},
+		Sort: &types.EngagementSort{
+			SortOrder: types.SortOrder("ASCENDING"),
+			SortBy:    types.EngagementSortName("CreatedDate"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		EngagementIdentifier: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1630,7 +2104,43 @@ func TestCheckResponseSnapshot_ListOpportunities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOpportunities(context.Background(), &ListOpportunitiesInput{})
+	got, err := svc.ListOpportunities(context.Background(), &ListOpportunitiesInput{
+		Catalog:    ptr.String("__Catalog__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Sort: &types.OpportunitySort{
+			SortOrder: types.SortOrder("ASCENDING"),
+			SortBy:    types.OpportunitySortName("LastModifiedDate"),
+		},
+		LastModifiedDate: &types.LastModifiedDate{
+			AfterLastModifiedDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			BeforeLastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		Identifier: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LifeCycleStage: []types.Stage{
+			types.Stage("Prospect"),
+			types.Stage("Prospect"),
+		},
+		LifeCycleReviewStatus: []types.ReviewStatus{
+			types.ReviewStatus("Pending Submission"),
+			types.ReviewStatus("Pending Submission"),
+		},
+		CustomerCompanyName: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CreatedDate: &types.CreatedDateFilter{
+			AfterCreatedDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			BeforeCreatedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		TargetCloseDate: &types.TargetCloseDateFilter{
+			AfterTargetCloseDate:  ptr.String("__AfterTargetCloseDate__"),
+			BeforeTargetCloseDate: ptr.String("__BeforeTargetCloseDate__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1677,7 +2187,35 @@ func TestCheckResponseSnapshot_ListOpportunityFromEngagementTasks(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOpportunityFromEngagementTasks(context.Background(), &ListOpportunityFromEngagementTasksInput{})
+	got, err := svc.ListOpportunityFromEngagementTasks(context.Background(), &ListOpportunityFromEngagementTasksInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Sort: &types.ListTasksSortBase{
+			SortOrder: types.SortOrder("ASCENDING"),
+			SortBy:    types.ListTasksSortName("StartTime"),
+		},
+		Catalog: ptr.String("__Catalog__"),
+		TaskStatus: []types.TaskStatus{
+			types.TaskStatus("IN_PROGRESS"),
+			types.TaskStatus("IN_PROGRESS"),
+		},
+		TaskIdentifier: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OpportunityIdentifier: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EngagementIdentifier: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ContextIdentifier: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1720,7 +2258,25 @@ func TestCheckResponseSnapshot_ListProspectingFromEngagementTasks(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProspectingFromEngagementTasks(context.Background(), &ListProspectingFromEngagementTasksInput{})
+	got, err := svc.ListProspectingFromEngagementTasks(context.Background(), &ListProspectingFromEngagementTasksInput{
+		Catalog:    ptr.String("__Catalog__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		TaskIdentifier: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TaskName: []string{
+			"__Member__",
+			"__Member__",
+		},
+		StartAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StartBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Sort: &types.ProspectingFromEngagementTaskSort{
+			SortOrder: types.SortOrder("ASCENDING"),
+			SortBy:    types.ProspectingFromEngagementTaskSortName("StartTime"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1755,7 +2311,17 @@ func TestCheckResponseSnapshot_ListResourceSnapshotJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourceSnapshotJobs(context.Background(), &ListResourceSnapshotJobsInput{})
+	got, err := svc.ListResourceSnapshotJobs(context.Background(), &ListResourceSnapshotJobsInput{
+		Catalog:              ptr.String("__Catalog__"),
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+		EngagementIdentifier: ptr.String("__EngagementIdentifier__"),
+		Status:               types.ResourceSnapshotJobStatus("Running"),
+		Sort: &types.SortObject{
+			SortBy:    types.SortBy("CreatedDate"),
+			SortOrder: types.SortOrder("ASCENDING"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1794,7 +2360,16 @@ func TestCheckResponseSnapshot_ListResourceSnapshots(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourceSnapshots(context.Background(), &ListResourceSnapshotsInput{})
+	got, err := svc.ListResourceSnapshots(context.Background(), &ListResourceSnapshotsInput{
+		Catalog:                            ptr.String("__Catalog__"),
+		MaxResults:                         ptr.Int32(1),
+		NextToken:                          ptr.String("__NextToken__"),
+		EngagementIdentifier:               ptr.String("__EngagementIdentifier__"),
+		ResourceType:                       types.ResourceType("Opportunity"),
+		ResourceIdentifier:                 ptr.String("__ResourceIdentifier__"),
+		ResourceSnapshotTemplateIdentifier: ptr.String("__ResourceSnapshotTemplateIdentifier__"),
+		CreatedBy:                          ptr.String("__CreatedBy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1837,7 +2412,31 @@ func TestCheckResponseSnapshot_ListSolutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSolutions(context.Background(), &ListSolutionsInput{})
+	got, err := svc.ListSolutions(context.Background(), &ListSolutionsInput{
+		Catalog:    ptr.String("__Catalog__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Sort: &types.SolutionSort{
+			SortOrder: types.SortOrder("ASCENDING"),
+			SortBy:    types.SolutionSortName("Identifier"),
+		},
+		Status: []types.SolutionStatus{
+			types.SolutionStatus("Active"),
+			types.SolutionStatus("Active"),
+		},
+		Identifier: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Category: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AwsMarketplaceSolutionArn: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1867,7 +2466,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1889,7 +2490,10 @@ func TestCheckResponseSnapshot_PutSellingSystemSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutSellingSystemSettings(context.Background(), &PutSellingSystemSettingsInput{})
+	got, err := svc.PutSellingSystemSettings(context.Background(), &PutSellingSystemSettingsInput{
+		Catalog:                           ptr.String("__Catalog__"),
+		ResourceSnapshotJobRoleIdentifier: ptr.String("__ResourceSnapshotJobRoleIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1908,7 +2512,11 @@ func TestCheckResponseSnapshot_RejectEngagementInvitation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RejectEngagementInvitation(context.Background(), &RejectEngagementInvitationInput{})
+	got, err := svc.RejectEngagementInvitation(context.Background(), &RejectEngagementInvitationInput{
+		Catalog:         ptr.String("__Catalog__"),
+		Identifier:      ptr.String("__Identifier__"),
+		RejectionReason: ptr.String("__RejectionReason__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1937,7 +2545,21 @@ func TestCheckResponseSnapshot_StartEngagementByAcceptingInvitationTask(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartEngagementByAcceptingInvitationTask(context.Background(), &StartEngagementByAcceptingInvitationTaskInput{})
+	got, err := svc.StartEngagementByAcceptingInvitationTask(context.Background(), &StartEngagementByAcceptingInvitationTaskInput{
+		Catalog:     ptr.String("__Catalog__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Identifier:  ptr.String("__Identifier__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1967,7 +2589,25 @@ func TestCheckResponseSnapshot_StartEngagementFromOpportunityTask(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartEngagementFromOpportunityTask(context.Background(), &StartEngagementFromOpportunityTaskInput{})
+	got, err := svc.StartEngagementFromOpportunityTask(context.Background(), &StartEngagementFromOpportunityTaskInput{
+		Catalog:     ptr.String("__Catalog__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Identifier:  ptr.String("__Identifier__"),
+		AwsSubmission: &types.AwsSubmission{
+			InvolvementType: types.SalesInvolvementType("For Visibility Only"),
+			Visibility:      types.Visibility("Full"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1997,7 +2637,22 @@ func TestCheckResponseSnapshot_StartOpportunityFromEngagementTask(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartOpportunityFromEngagementTask(context.Background(), &StartOpportunityFromEngagementTaskInput{})
+	got, err := svc.StartOpportunityFromEngagementTask(context.Background(), &StartOpportunityFromEngagementTaskInput{
+		Catalog:           ptr.String("__Catalog__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+		Identifier:        ptr.String("__Identifier__"),
+		ContextIdentifier: ptr.String("__ContextIdentifier__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2028,7 +2683,15 @@ func TestCheckResponseSnapshot_StartProspectingFromEngagementTask(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartProspectingFromEngagementTask(context.Background(), &StartProspectingFromEngagementTaskInput{})
+	got, err := svc.StartProspectingFromEngagementTask(context.Background(), &StartProspectingFromEngagementTaskInput{
+		Catalog: ptr.String("__Catalog__"),
+		Identifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TaskName:    ptr.String("__TaskName__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2047,7 +2710,10 @@ func TestCheckResponseSnapshot_StartResourceSnapshotJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartResourceSnapshotJob(context.Background(), &StartResourceSnapshotJobInput{})
+	got, err := svc.StartResourceSnapshotJob(context.Background(), &StartResourceSnapshotJobInput{
+		Catalog:                       ptr.String("__Catalog__"),
+		ResourceSnapshotJobIdentifier: ptr.String("__ResourceSnapshotJobIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2066,7 +2732,10 @@ func TestCheckResponseSnapshot_StopResourceSnapshotJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopResourceSnapshotJob(context.Background(), &StopResourceSnapshotJobInput{})
+	got, err := svc.StopResourceSnapshotJob(context.Background(), &StopResourceSnapshotJobInput{
+		Catalog:                       ptr.String("__Catalog__"),
+		ResourceSnapshotJobIdentifier: ptr.String("__ResourceSnapshotJobIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2085,7 +2754,12 @@ func TestCheckResponseSnapshot_SubmitOpportunity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SubmitOpportunity(context.Background(), &SubmitOpportunityInput{})
+	got, err := svc.SubmitOpportunity(context.Background(), &SubmitOpportunityInput{
+		Catalog:         ptr.String("__Catalog__"),
+		Identifier:      ptr.String("__Identifier__"),
+		InvolvementType: types.SalesInvolvementType("For Visibility Only"),
+		Visibility:      types.Visibility("Full"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2104,7 +2778,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2123,7 +2809,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2147,7 +2839,50 @@ func TestCheckResponseSnapshot_UpdateEngagementContext(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEngagementContext(context.Background(), &UpdateEngagementContextInput{})
+	got, err := svc.UpdateEngagementContext(context.Background(), &UpdateEngagementContextInput{
+		Catalog:                  ptr.String("__Catalog__"),
+		EngagementIdentifier:     ptr.String("__EngagementIdentifier__"),
+		ContextIdentifier:        ptr.String("__ContextIdentifier__"),
+		EngagementLastModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Type:                     types.EngagementContextType("CustomerProject"),
+		Payload: &types.UpdateEngagementContextPayloadMemberLead{
+			Value: types.UpdateLeadContext{
+				QualificationStatus: ptr.String("__QualificationStatus__"),
+				Customer: &types.LeadCustomer{
+					Industry:    ptr.String("__Industry__"),
+					CompanyName: ptr.String("__CompanyName__"),
+					WebsiteUrl:  ptr.String("__WebsiteUrl__"),
+					Address: &types.LeadAddress{
+						City:          ptr.String("__City__"),
+						PostalCode:    ptr.String("__PostalCode__"),
+						StateOrRegion: ptr.String("__StateOrRegion__"),
+						CountryCode:   ptr.String("__CountryCode__"),
+					},
+					AwsMaturity:   ptr.String("__AwsMaturity__"),
+					MarketSegment: ptr.String("__MarketSegment__"),
+				},
+				Interaction: &types.LeadInteraction{
+					SourceType:      ptr.String("__SourceType__"),
+					SourceId:        ptr.String("__SourceId__"),
+					SourceName:      ptr.String("__SourceName__"),
+					Usecase:         ptr.String("__Usecase__"),
+					InteractionDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					CustomerAction:  ptr.String("__CustomerAction__"),
+					BusinessProblem: ptr.String("__BusinessProblem__"),
+					Contact: &types.LeadContact{
+						BusinessTitle: ptr.String("__BusinessTitle__"),
+						Email:         ptr.String("__Email__"),
+						FirstName:     ptr.String("__FirstName__"),
+						LastName:      ptr.String("__LastName__"),
+						Phone:         ptr.String("__Phone__"),
+					},
+				},
+				Insights: &types.LeadInsights{
+					LeadReadinessScore: ptr.String("__LeadReadinessScore__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2169,7 +2904,135 @@ func TestCheckResponseSnapshot_UpdateOpportunity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateOpportunity(context.Background(), &UpdateOpportunityInput{})
+	got, err := svc.UpdateOpportunity(context.Background(), &UpdateOpportunityInput{
+		Catalog: ptr.String("__Catalog__"),
+		PrimaryNeedsFromAws: []types.PrimaryNeedFromAws{
+			types.PrimaryNeedFromAws("Co-Sell - Architectural Validation"),
+			types.PrimaryNeedFromAws("Co-Sell - Architectural Validation"),
+		},
+		NationalSecurity:             types.NationalSecurity("Yes"),
+		PartnerOpportunityIdentifier: ptr.String("__PartnerOpportunityIdentifier__"),
+		Customer: &types.Customer{
+			Account: &types.Account{
+				Industry:      types.Industry("Aerospace"),
+				OtherIndustry: ptr.String("__OtherIndustry__"),
+				CompanyName:   ptr.String("__CompanyName__"),
+				WebsiteUrl:    ptr.String("__WebsiteUrl__"),
+				AwsAccountId:  ptr.String("__AwsAccountId__"),
+				Address: &types.Address{
+					City:          ptr.String("__City__"),
+					PostalCode:    ptr.String("__PostalCode__"),
+					StateOrRegion: ptr.String("__StateOrRegion__"),
+					CountryCode:   types.CountryCode("US"),
+					StreetAddress: ptr.String("__StreetAddress__"),
+				},
+				Duns: ptr.String("__Duns__"),
+			},
+			Contacts: []types.Contact{
+				{
+					Email:         ptr.String("__Email__"),
+					FirstName:     ptr.String("__FirstName__"),
+					LastName:      ptr.String("__LastName__"),
+					BusinessTitle: ptr.String("__BusinessTitle__"),
+					Phone:         ptr.String("__Phone__"),
+				},
+				{
+					Email:         ptr.String("__Email__"),
+					FirstName:     ptr.String("__FirstName__"),
+					LastName:      ptr.String("__LastName__"),
+					BusinessTitle: ptr.String("__BusinessTitle__"),
+					Phone:         ptr.String("__Phone__"),
+				},
+			},
+		},
+		Project: &types.Project{
+			DeliveryModels: []types.DeliveryModel{
+				types.DeliveryModel("SaaS or PaaS"),
+				types.DeliveryModel("SaaS or PaaS"),
+			},
+			ExpectedCustomerSpend: []types.ExpectedCustomerSpend{
+				{
+					Amount:        ptr.String("__Amount__"),
+					CurrencyCode:  types.CurrencyCode("USD"),
+					Frequency:     types.PaymentFrequency("Monthly"),
+					TargetCompany: ptr.String("__TargetCompany__"),
+					EstimationUrl: ptr.String("__EstimationUrl__"),
+				},
+				{
+					Amount:        ptr.String("__Amount__"),
+					CurrencyCode:  types.CurrencyCode("USD"),
+					Frequency:     types.PaymentFrequency("Monthly"),
+					TargetCompany: ptr.String("__TargetCompany__"),
+					EstimationUrl: ptr.String("__EstimationUrl__"),
+				},
+			},
+			ExpectedContractDuration: &types.ExpectedContractDuration{
+				Term:  types.ExpectedContractDurationTerm("Months"),
+				Value: ptr.String("__Value__"),
+			},
+			Title: ptr.String("__Title__"),
+			ApnPrograms: []string{
+				"__Member__",
+				"__Member__",
+			},
+			CustomerBusinessProblem:      ptr.String("__CustomerBusinessProblem__"),
+			CustomerUseCase:              ptr.String("__CustomerUseCase__"),
+			RelatedOpportunityIdentifier: ptr.String("__RelatedOpportunityIdentifier__"),
+			SalesActivities: []types.SalesActivity{
+				types.SalesActivity("Initialized discussions with customer"),
+				types.SalesActivity("Initialized discussions with customer"),
+			},
+			CompetitorName:           types.CompetitorName("Oracle Cloud"),
+			OtherCompetitorNames:     ptr.String("__OtherCompetitorNames__"),
+			OtherSolutionDescription: ptr.String("__OtherSolutionDescription__"),
+			AdditionalComments:       ptr.String("__AdditionalComments__"),
+			AwsPartition:             types.AwsPartition("aws-eusc"),
+		},
+		OpportunityType: types.OpportunityType("Net New Business"),
+		Marketing: &types.Marketing{
+			CampaignName: ptr.String("__CampaignName__"),
+			Source:       types.MarketingSource("Marketing Activity"),
+			UseCases: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Channels: []types.Channel{
+				types.Channel("AWS Marketing Central"),
+				types.Channel("AWS Marketing Central"),
+			},
+			AwsFundingUsed: types.AwsFundingUsed("Yes"),
+		},
+		SoftwareRevenue: &types.SoftwareRevenue{
+			DeliveryModel: types.RevenueModel("Contract"),
+			Value: &types.MonetaryValue{
+				Amount:       ptr.String("__Amount__"),
+				CurrencyCode: types.CurrencyCode("USD"),
+			},
+			EffectiveDate:  ptr.String("__EffectiveDate__"),
+			ExpirationDate: ptr.String("__ExpirationDate__"),
+		},
+		LastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Identifier:       ptr.String("__Identifier__"),
+		LifeCycle: &types.LifeCycle{
+			Stage:              types.Stage("Prospect"),
+			ClosedLostReason:   types.ClosedLostReason("Customer Deficiency"),
+			NextSteps:          ptr.String("__NextSteps__"),
+			TargetCloseDate:    ptr.String("__TargetCloseDate__"),
+			ReviewStatus:       types.ReviewStatus("Pending Submission"),
+			ReviewComments:     ptr.String("__ReviewComments__"),
+			ReviewStatusReason: ptr.String("__ReviewStatusReason__"),
+			NextStepsHistory: []types.NextStepsHistory{
+				{
+					Value: ptr.String("__Value__"),
+					Time:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					Value: ptr.String("__Value__"),
+					Time:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2191,7 +3054,10 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptEngagementInvitation(context.Background(), &AcceptEngagementInvitationInput{})
+	_, opErr := svc.AcceptEngagementInvitation(context.Background(), &AcceptEngagementInvitationInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2216,7 +3082,10 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptEngagementInvitation(context.Background(), &AcceptEngagementInvitationInput{})
+	_, opErr := svc.AcceptEngagementInvitation(context.Background(), &AcceptEngagementInvitationInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2241,7 +3110,10 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptEngagementInvitation(context.Background(), &AcceptEngagementInvitationInput{})
+	_, opErr := svc.AcceptEngagementInvitation(context.Background(), &AcceptEngagementInvitationInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2266,7 +3138,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptEngagementInvitation(context.Background(), &AcceptEngagementInvitationInput{})
+	_, opErr := svc.AcceptEngagementInvitation(context.Background(), &AcceptEngagementInvitationInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2291,7 +3166,52 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEngagement(context.Background(), &CreateEngagementInput{})
+	_, opErr := svc.CreateEngagement(context.Background(), &CreateEngagementInput{
+		Catalog:     ptr.String("__Catalog__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Title:       ptr.String("__Title__"),
+		Description: ptr.String("__Description__"),
+		Contexts: []types.EngagementContextDetails{
+			{
+				Id:   ptr.String("__Id__"),
+				Type: types.EngagementContextType("CustomerProject"),
+				Payload: &types.EngagementContextPayloadMemberCustomerProject{
+					Value: types.CustomerProjectsContext{
+						Customer: &types.EngagementCustomer{
+							Industry:    types.Industry("Aerospace"),
+							CompanyName: ptr.String("__CompanyName__"),
+							WebsiteUrl:  ptr.String("__WebsiteUrl__"),
+							CountryCode: types.CountryCode("US"),
+						},
+						Project: &types.EngagementCustomerProjectDetails{
+							Title:                ptr.String("__Title__"),
+							BusinessProblem:      ptr.String("__BusinessProblem__"),
+							TargetCompletionDate: ptr.String("__TargetCompletionDate__"),
+						},
+					},
+				},
+			},
+			{
+				Id:   ptr.String("__Id__"),
+				Type: types.EngagementContextType("CustomerProject"),
+				Payload: &types.EngagementContextPayloadMemberCustomerProject{
+					Value: types.CustomerProjectsContext{
+						Customer: &types.EngagementCustomer{
+							Industry:    types.Industry("Aerospace"),
+							CompanyName: ptr.String("__CompanyName__"),
+							WebsiteUrl:  ptr.String("__WebsiteUrl__"),
+							CountryCode: types.CountryCode("US"),
+						},
+						Project: &types.EngagementCustomerProjectDetails{
+							Title:                ptr.String("__Title__"),
+							BusinessProblem:      ptr.String("__BusinessProblem__"),
+							TargetCompletionDate: ptr.String("__TargetCompletionDate__"),
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2316,7 +3236,10 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptEngagementInvitation(context.Background(), &AcceptEngagementInvitationInput{})
+	_, opErr := svc.AcceptEngagementInvitation(context.Background(), &AcceptEngagementInvitationInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2354,7 +3277,10 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptEngagementInvitation(context.Background(), &AcceptEngagementInvitationInput{})
+	_, opErr := svc.AcceptEngagementInvitation(context.Background(), &AcceptEngagementInvitationInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

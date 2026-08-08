@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"memoryRecord":{"content":{"text":"__MemoryContentMemberText__"},"createdAt":946684800,"memoryRecordId":"__MemoryRecordId__","memoryStrategyId":"__MemoryStrategyId__","metadata":{"key0":{"stringValue":"__MemoryRecordMetadataValueMemberStringValue__"}},"namespaces":["__Member__","__Member__"]}}

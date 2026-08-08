@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SWBExternalService.ListInstances
+
+{"Instances":[{"CreatedDate":946684800,"IdentityStoreId":"__IdentityStoreId__","InstanceArn":"__InstanceArn__","Name":"__Name__","OwnerAccountId":"__OwnerAccountId__","PrimaryRegion":"__PrimaryRegion__","Regions":[{"AddedDate":946684800,"IsPrimaryRegion":true,"RegionName":"__RegionName__","Status":"ACTIVE"},{"AddedDate":946684800,"IsPrimaryRegion":true,"RegionName":"__RegionName__","Status":"ACTIVE"}],"Status":"CREATE_IN_PROGRESS","StatusReason":"__StatusReason__"},{"CreatedDate":946684800,"IdentityStoreId":"__IdentityStoreId__","InstanceArn":"__InstanceArn__","Name":"__Name__","OwnerAccountId":"__OwnerAccountId__","PrimaryRegion":"__PrimaryRegion__","Regions":[{"AddedDate":946684800,"IsPrimaryRegion":true,"RegionName":"__RegionName__","Status":"ACTIVE"},{"AddedDate":946684800,"IsPrimaryRegion":true,"RegionName":"__RegionName__","Status":"ACTIVE"}],"Status":"CREATE_IN_PROGRESS","StatusReason":"__StatusReason__"}],"NextToken":"__NextToken__"}

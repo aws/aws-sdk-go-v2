@@ -24,6 +24,7 @@ import (
 	"strconv"
 	"strings"
 	"testing"
+	"time"
 )
 
 const serdeRespSSPrefix = "response_snapshot"
@@ -116,7 +117,11 @@ func TestCheckResponseSnapshot_AssociateVolume(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateVolume(context.Background(), &AssociateVolumeInput{})
+	got, err := svc.AssociateVolume(context.Background(), &AssociateVolumeInput{
+		WorkspaceInstanceId: ptr.String("__WorkspaceInstanceId__"),
+		VolumeId:            ptr.String("__VolumeId__"),
+		Device:              ptr.String("__Device__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -137,7 +142,45 @@ func TestCheckResponseSnapshot_CreateVolume(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVolume(context.Background(), &CreateVolumeInput{})
+	got, err := svc.CreateVolume(context.Background(), &CreateVolumeInput{
+		AvailabilityZone: ptr.String("__AvailabilityZone__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+		Encrypted:        ptr.Bool(true),
+		Iops:             ptr.Int32(1),
+		KmsKeyId:         ptr.String("__KmsKeyId__"),
+		SizeInGB:         ptr.Int32(1),
+		SnapshotId:       ptr.String("__SnapshotId__"),
+		TagSpecifications: []types.TagSpecification{
+			{
+				ResourceType: types.ResourceTypeEnum("instance"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ResourceType: types.ResourceTypeEnum("instance"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		Throughput: ptr.Int32(1),
+		VolumeType: types.VolumeTypeEnum("standard"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -158,7 +201,320 @@ func TestCheckResponseSnapshot_CreateWorkspaceInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWorkspaceInstance(context.Background(), &CreateWorkspaceInstanceInput{})
+	got, err := svc.CreateWorkspaceInstance(context.Background(), &CreateWorkspaceInstanceInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ManagedInstance: &types.ManagedInstanceRequest{
+			BlockDeviceMappings: []types.BlockDeviceMappingRequest{
+				{
+					DeviceName: ptr.String("__DeviceName__"),
+					Ebs: &types.EbsBlockDevice{
+						VolumeType: types.VolumeTypeEnum("standard"),
+						Encrypted:  ptr.Bool(true),
+						KmsKeyId:   ptr.String("__KmsKeyId__"),
+						Iops:       ptr.Int32(1),
+						Throughput: ptr.Int32(1),
+						VolumeSize: ptr.Int32(1),
+					},
+					NoDevice:    ptr.String("__NoDevice__"),
+					VirtualName: ptr.String("__VirtualName__"),
+				},
+				{
+					DeviceName: ptr.String("__DeviceName__"),
+					Ebs: &types.EbsBlockDevice{
+						VolumeType: types.VolumeTypeEnum("standard"),
+						Encrypted:  ptr.Bool(true),
+						KmsKeyId:   ptr.String("__KmsKeyId__"),
+						Iops:       ptr.Int32(1),
+						Throughput: ptr.Int32(1),
+						VolumeSize: ptr.Int32(1),
+					},
+					NoDevice:    ptr.String("__NoDevice__"),
+					VirtualName: ptr.String("__VirtualName__"),
+				},
+			},
+			CapacityReservationSpecification: &types.CapacityReservationSpecification{
+				CapacityReservationPreference: types.CapacityReservationPreferenceEnum("capacity-reservations-only"),
+				CapacityReservationTarget: &types.CapacityReservationTarget{
+					CapacityReservationId:               ptr.String("__CapacityReservationId__"),
+					CapacityReservationResourceGroupArn: ptr.String("__CapacityReservationResourceGroupArn__"),
+				},
+			},
+			CpuOptions: &types.CpuOptionsRequest{
+				AmdSevSnp:      types.AmdSevSnpEnum("enabled"),
+				CoreCount:      ptr.Int32(1),
+				ThreadsPerCore: ptr.Int32(1),
+			},
+			CreditSpecification: &types.CreditSpecificationRequest{
+				CpuCredits: types.CpuCreditsEnum("standard"),
+			},
+			DisableApiStop:    ptr.Bool(true),
+			EbsOptimized:      ptr.Bool(true),
+			EnablePrimaryIpv6: ptr.Bool(true),
+			EnclaveOptions: &types.EnclaveOptionsRequest{
+				Enabled: ptr.Bool(true),
+			},
+			HibernationOptions: &types.HibernationOptionsRequest{
+				Configured: ptr.Bool(true),
+			},
+			IamInstanceProfile: &types.IamInstanceProfileSpecification{
+				Arn:  ptr.String("__Arn__"),
+				Name: ptr.String("__Name__"),
+			},
+			ImageId: ptr.String("__ImageId__"),
+			InstanceMarketOptions: &types.InstanceMarketOptionsRequest{
+				MarketType: types.MarketTypeEnum("spot"),
+				SpotOptions: &types.SpotMarketOptions{
+					BlockDurationMinutes:         ptr.Int32(1),
+					InstanceInterruptionBehavior: types.InstanceInterruptionBehaviorEnum("hibernate"),
+					MaxPrice:                     ptr.String("__MaxPrice__"),
+					SpotInstanceType:             types.SpotInstanceTypeEnum("one-time"),
+					ValidUntilUtc:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			InstanceType: ptr.String("__InstanceType__"),
+			Ipv6Addresses: []types.InstanceIpv6Address{
+				{
+					Ipv6Address:   ptr.String("__Ipv6Address__"),
+					IsPrimaryIpv6: ptr.Bool(true),
+				},
+				{
+					Ipv6Address:   ptr.String("__Ipv6Address__"),
+					IsPrimaryIpv6: ptr.Bool(true),
+				},
+			},
+			Ipv6AddressCount: ptr.Int32(1),
+			KernelId:         ptr.String("__KernelId__"),
+			KeyName:          ptr.String("__KeyName__"),
+			LicenseSpecifications: []types.LicenseConfigurationRequest{
+				{
+					LicenseConfigurationArn: ptr.String("__LicenseConfigurationArn__"),
+				},
+				{
+					LicenseConfigurationArn: ptr.String("__LicenseConfigurationArn__"),
+				},
+			},
+			MaintenanceOptions: &types.InstanceMaintenanceOptionsRequest{
+				AutoRecovery: types.AutoRecoveryEnum("disabled"),
+			},
+			MetadataOptions: &types.InstanceMetadataOptionsRequest{
+				HttpEndpoint:            types.HttpEndpointEnum("enabled"),
+				HttpProtocolIpv6:        types.HttpProtocolIpv6Enum("enabled"),
+				HttpPutResponseHopLimit: ptr.Int32(1),
+				HttpTokens:              types.HttpTokensEnum("optional"),
+				InstanceMetadataTags:    types.InstanceMetadataTagsEnum("enabled"),
+			},
+			Monitoring: &types.RunInstancesMonitoringEnabled{
+				Enabled: ptr.Bool(true),
+			},
+			NetworkInterfaces: []types.InstanceNetworkInterfaceSpecification{
+				{
+					AssociateCarrierIpAddress: ptr.Bool(true),
+					AssociatePublicIpAddress:  ptr.Bool(true),
+					ConnectionTrackingSpecification: &types.ConnectionTrackingSpecificationRequest{
+						TcpEstablishedTimeout: ptr.Int32(1),
+						UdpStreamTimeout:      ptr.Int32(1),
+						UdpTimeout:            ptr.Int32(1),
+					},
+					Description: ptr.String("__Description__"),
+					DeviceIndex: ptr.Int32(1),
+					EnaSrdSpecification: &types.EnaSrdSpecificationRequest{
+						EnaSrdEnabled: ptr.Bool(true),
+						EnaSrdUdpSpecification: &types.EnaSrdUdpSpecificationRequest{
+							EnaSrdUdpEnabled: ptr.Bool(true),
+						},
+					},
+					InterfaceType: types.InterfaceTypeEnum("interface"),
+					Ipv4Prefixes: []types.Ipv4PrefixSpecificationRequest{
+						{
+							Ipv4Prefix: ptr.String("__Ipv4Prefix__"),
+						},
+						{
+							Ipv4Prefix: ptr.String("__Ipv4Prefix__"),
+						},
+					},
+					Ipv4PrefixCount:  ptr.Int32(1),
+					Ipv6AddressCount: ptr.Int32(1),
+					Ipv6Addresses: []types.InstanceIpv6Address{
+						{
+							Ipv6Address:   ptr.String("__Ipv6Address__"),
+							IsPrimaryIpv6: ptr.Bool(true),
+						},
+						{
+							Ipv6Address:   ptr.String("__Ipv6Address__"),
+							IsPrimaryIpv6: ptr.Bool(true),
+						},
+					},
+					Ipv6Prefixes: []types.Ipv6PrefixSpecificationRequest{
+						{
+							Ipv6Prefix: ptr.String("__Ipv6Prefix__"),
+						},
+						{
+							Ipv6Prefix: ptr.String("__Ipv6Prefix__"),
+						},
+					},
+					Ipv6PrefixCount:    ptr.Int32(1),
+					NetworkCardIndex:   ptr.Int32(1),
+					NetworkInterfaceId: ptr.String("__NetworkInterfaceId__"),
+					PrimaryIpv6:        ptr.Bool(true),
+					PrivateIpAddress:   ptr.String("__PrivateIpAddress__"),
+					PrivateIpAddresses: []types.PrivateIpAddressSpecification{
+						{
+							Primary:          ptr.Bool(true),
+							PrivateIpAddress: ptr.String("__PrivateIpAddress__"),
+						},
+						{
+							Primary:          ptr.Bool(true),
+							PrivateIpAddress: ptr.String("__PrivateIpAddress__"),
+						},
+					},
+					SecondaryPrivateIpAddressCount: ptr.Int32(1),
+					Groups: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SubnetId: ptr.String("__SubnetId__"),
+				},
+				{
+					AssociateCarrierIpAddress: ptr.Bool(true),
+					AssociatePublicIpAddress:  ptr.Bool(true),
+					ConnectionTrackingSpecification: &types.ConnectionTrackingSpecificationRequest{
+						TcpEstablishedTimeout: ptr.Int32(1),
+						UdpStreamTimeout:      ptr.Int32(1),
+						UdpTimeout:            ptr.Int32(1),
+					},
+					Description: ptr.String("__Description__"),
+					DeviceIndex: ptr.Int32(1),
+					EnaSrdSpecification: &types.EnaSrdSpecificationRequest{
+						EnaSrdEnabled: ptr.Bool(true),
+						EnaSrdUdpSpecification: &types.EnaSrdUdpSpecificationRequest{
+							EnaSrdUdpEnabled: ptr.Bool(true),
+						},
+					},
+					InterfaceType: types.InterfaceTypeEnum("interface"),
+					Ipv4Prefixes: []types.Ipv4PrefixSpecificationRequest{
+						{
+							Ipv4Prefix: ptr.String("__Ipv4Prefix__"),
+						},
+						{
+							Ipv4Prefix: ptr.String("__Ipv4Prefix__"),
+						},
+					},
+					Ipv4PrefixCount:  ptr.Int32(1),
+					Ipv6AddressCount: ptr.Int32(1),
+					Ipv6Addresses: []types.InstanceIpv6Address{
+						{
+							Ipv6Address:   ptr.String("__Ipv6Address__"),
+							IsPrimaryIpv6: ptr.Bool(true),
+						},
+						{
+							Ipv6Address:   ptr.String("__Ipv6Address__"),
+							IsPrimaryIpv6: ptr.Bool(true),
+						},
+					},
+					Ipv6Prefixes: []types.Ipv6PrefixSpecificationRequest{
+						{
+							Ipv6Prefix: ptr.String("__Ipv6Prefix__"),
+						},
+						{
+							Ipv6Prefix: ptr.String("__Ipv6Prefix__"),
+						},
+					},
+					Ipv6PrefixCount:    ptr.Int32(1),
+					NetworkCardIndex:   ptr.Int32(1),
+					NetworkInterfaceId: ptr.String("__NetworkInterfaceId__"),
+					PrimaryIpv6:        ptr.Bool(true),
+					PrivateIpAddress:   ptr.String("__PrivateIpAddress__"),
+					PrivateIpAddresses: []types.PrivateIpAddressSpecification{
+						{
+							Primary:          ptr.Bool(true),
+							PrivateIpAddress: ptr.String("__PrivateIpAddress__"),
+						},
+						{
+							Primary:          ptr.Bool(true),
+							PrivateIpAddress: ptr.String("__PrivateIpAddress__"),
+						},
+					},
+					SecondaryPrivateIpAddressCount: ptr.Int32(1),
+					Groups: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SubnetId: ptr.String("__SubnetId__"),
+				},
+			},
+			NetworkPerformanceOptions: &types.InstanceNetworkPerformanceOptionsRequest{
+				BandwidthWeighting: types.BandwidthWeightingEnum("default"),
+			},
+			Placement: &types.Placement{
+				Affinity:             ptr.String("__Affinity__"),
+				AvailabilityZone:     ptr.String("__AvailabilityZone__"),
+				GroupId:              ptr.String("__GroupId__"),
+				GroupName:            ptr.String("__GroupName__"),
+				HostId:               ptr.String("__HostId__"),
+				HostResourceGroupArn: ptr.String("__HostResourceGroupArn__"),
+				PartitionNumber:      ptr.Int32(1),
+				Tenancy:              types.TenancyEnum("default"),
+			},
+			PrivateDnsNameOptions: &types.PrivateDnsNameOptionsRequest{
+				HostnameType:                    types.HostnameTypeEnum("ip-name"),
+				EnableResourceNameDnsARecord:    ptr.Bool(true),
+				EnableResourceNameDnsAAAARecord: ptr.Bool(true),
+			},
+			PrivateIpAddress: ptr.String("__PrivateIpAddress__"),
+			RamdiskId:        ptr.String("__RamdiskId__"),
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SubnetId: ptr.String("__SubnetId__"),
+			TagSpecifications: []types.TagSpecification{
+				{
+					ResourceType: types.ResourceTypeEnum("instance"),
+					Tags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+				{
+					ResourceType: types.ResourceTypeEnum("instance"),
+					Tags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+			},
+			UserData: ptr.String("__UserData__"),
+		},
+		BillingConfiguration: &types.BillingConfiguration{
+			BillingMode: types.BillingMode("MONTHLY"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -177,7 +533,9 @@ func TestCheckResponseSnapshot_DeleteVolume(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVolume(context.Background(), &DeleteVolumeInput{})
+	got, err := svc.DeleteVolume(context.Background(), &DeleteVolumeInput{
+		VolumeId: ptr.String("__VolumeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -196,7 +554,9 @@ func TestCheckResponseSnapshot_DeleteWorkspaceInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorkspaceInstance(context.Background(), &DeleteWorkspaceInstanceInput{})
+	got, err := svc.DeleteWorkspaceInstance(context.Background(), &DeleteWorkspaceInstanceInput{
+		WorkspaceInstanceId: ptr.String("__WorkspaceInstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -215,7 +575,12 @@ func TestCheckResponseSnapshot_DisassociateVolume(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateVolume(context.Background(), &DisassociateVolumeInput{})
+	got, err := svc.DisassociateVolume(context.Background(), &DisassociateVolumeInput{
+		WorkspaceInstanceId: ptr.String("__WorkspaceInstanceId__"),
+		VolumeId:            ptr.String("__VolumeId__"),
+		Device:              ptr.String("__Device__"),
+		DisassociateMode:    types.DisassociateModeEnum("FORCE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -265,7 +630,9 @@ func TestCheckResponseSnapshot_GetWorkspaceInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorkspaceInstance(context.Background(), &GetWorkspaceInstanceInput{})
+	got, err := svc.GetWorkspaceInstance(context.Background(), &GetWorkspaceInstanceInput{
+		WorkspaceInstanceId: ptr.String("__WorkspaceInstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -318,7 +685,15 @@ func TestCheckResponseSnapshot_ListInstanceTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInstanceTypes(context.Background(), &ListInstanceTypesInput{})
+	got, err := svc.ListInstanceTypes(context.Background(), &ListInstanceTypesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		InstanceConfigurationFilter: &types.InstanceConfigurationFilter{
+			BillingMode:  types.BillingMode("MONTHLY"),
+			PlatformType: types.PlatformTypeEnum("Windows"),
+			Tenancy:      types.InstanceConfigurationTenancyEnum("SHARED"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -347,7 +722,10 @@ func TestCheckResponseSnapshot_ListRegions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRegions(context.Background(), &ListRegionsInput{})
+	got, err := svc.ListRegions(context.Background(), &ListRegionsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -377,7 +755,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		WorkspaceInstanceId: ptr.String("__WorkspaceInstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -414,7 +794,14 @@ func TestCheckResponseSnapshot_ListWorkspaceInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkspaceInstances(context.Background(), &ListWorkspaceInstancesInput{})
+	got, err := svc.ListWorkspaceInstances(context.Background(), &ListWorkspaceInstancesInput{
+		ProvisionStates: []types.ProvisionStateEnum{
+			types.ProvisionStateEnum("ALLOCATING"),
+			types.ProvisionStateEnum("ALLOCATING"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -433,7 +820,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		WorkspaceInstanceId: ptr.String("__WorkspaceInstanceId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -452,7 +851,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		WorkspaceInstanceId: ptr.String("__WorkspaceInstanceId__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -473,7 +878,11 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateVolume(context.Background(), &AssociateVolumeInput{})
+	_, opErr := svc.AssociateVolume(context.Background(), &AssociateVolumeInput{
+		WorkspaceInstanceId: ptr.String("__WorkspaceInstanceId__"),
+		VolumeId:            ptr.String("__VolumeId__"),
+		Device:              ptr.String("__Device__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -500,7 +909,11 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateVolume(context.Background(), &AssociateVolumeInput{})
+	_, opErr := svc.AssociateVolume(context.Background(), &AssociateVolumeInput{
+		WorkspaceInstanceId: ptr.String("__WorkspaceInstanceId__"),
+		VolumeId:            ptr.String("__VolumeId__"),
+		Device:              ptr.String("__Device__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -526,7 +939,11 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateVolume(context.Background(), &AssociateVolumeInput{})
+	_, opErr := svc.AssociateVolume(context.Background(), &AssociateVolumeInput{
+		WorkspaceInstanceId: ptr.String("__WorkspaceInstanceId__"),
+		VolumeId:            ptr.String("__VolumeId__"),
+		Device:              ptr.String("__Device__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -553,7 +970,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateVolume(context.Background(), &AssociateVolumeInput{})
+	_, opErr := svc.AssociateVolume(context.Background(), &AssociateVolumeInput{
+		WorkspaceInstanceId: ptr.String("__WorkspaceInstanceId__"),
+		VolumeId:            ptr.String("__VolumeId__"),
+		Device:              ptr.String("__Device__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -582,7 +1003,45 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateVolume(context.Background(), &CreateVolumeInput{})
+	_, opErr := svc.CreateVolume(context.Background(), &CreateVolumeInput{
+		AvailabilityZone: ptr.String("__AvailabilityZone__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+		Encrypted:        ptr.Bool(true),
+		Iops:             ptr.Int32(1),
+		KmsKeyId:         ptr.String("__KmsKeyId__"),
+		SizeInGB:         ptr.Int32(1),
+		SnapshotId:       ptr.String("__SnapshotId__"),
+		TagSpecifications: []types.TagSpecification{
+			{
+				ResourceType: types.ResourceTypeEnum("instance"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ResourceType: types.ResourceTypeEnum("instance"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		Throughput: ptr.Int32(1),
+		VolumeType: types.VolumeTypeEnum("standard"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -610,7 +1069,11 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateVolume(context.Background(), &AssociateVolumeInput{})
+	_, opErr := svc.AssociateVolume(context.Background(), &AssociateVolumeInput{
+		WorkspaceInstanceId: ptr.String("__WorkspaceInstanceId__"),
+		VolumeId:            ptr.String("__VolumeId__"),
+		Device:              ptr.String("__Device__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -648,7 +1111,11 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateVolume(context.Background(), &AssociateVolumeInput{})
+	_, opErr := svc.AssociateVolume(context.Background(), &AssociateVolumeInput{
+		WorkspaceInstanceId: ptr.String("__WorkspaceInstanceId__"),
+		VolumeId:            ptr.String("__VolumeId__"),
+		Device:              ptr.String("__Device__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

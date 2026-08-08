@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.DeleteVerifiedDestinationNumber
+
+{"CreatedTimestamp":946684800,"DestinationPhoneNumber":"__DestinationPhoneNumber__","VerifiedDestinationNumberArn":"__VerifiedDestinationNumberArn__","VerifiedDestinationNumberId":"__VerifiedDestinationNumberId__"}

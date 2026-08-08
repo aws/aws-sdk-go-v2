@@ -125,7 +125,13 @@ func TestCheckResponseSnapshot_CreateChallenge(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateChallenge(context.Background(), &CreateChallengeInput{})
+	got, err := svc.CreateChallenge(context.Background(), &CreateChallengeInput{
+		ConnectorArn: ptr.String("__ConnectorArn__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -146,7 +152,20 @@ func TestCheckResponseSnapshot_CreateConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConnector(context.Background(), &CreateConnectorInput{})
+	got, err := svc.CreateConnector(context.Background(), &CreateConnectorInput{
+		CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		MobileDeviceManagement: &types.MobileDeviceManagementMemberIntune{
+			Value: types.IntuneConfiguration{
+				AzureApplicationId: ptr.String("__AzureApplicationId__"),
+				Domain:             ptr.String("__Domain__"),
+			},
+		},
+		VpcEndpointId: ptr.String("__VpcEndpointId__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -165,7 +184,9 @@ func TestCheckResponseSnapshot_DeleteChallenge(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteChallenge(context.Background(), &DeleteChallengeInput{})
+	got, err := svc.DeleteChallenge(context.Background(), &DeleteChallengeInput{
+		ChallengeArn: ptr.String("__ChallengeArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -184,7 +205,9 @@ func TestCheckResponseSnapshot_DeleteConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConnector(context.Background(), &DeleteConnectorInput{})
+	got, err := svc.DeleteConnector(context.Background(), &DeleteConnectorInput{
+		ConnectorArn: ptr.String("__ConnectorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -210,7 +233,9 @@ func TestCheckResponseSnapshot_GetChallengeMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetChallengeMetadata(context.Background(), &GetChallengeMetadataInput{})
+	got, err := svc.GetChallengeMetadata(context.Background(), &GetChallengeMetadataInput{
+		ChallengeArn: ptr.String("__ChallengeArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -231,7 +256,9 @@ func TestCheckResponseSnapshot_GetChallengePassword(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetChallengePassword(context.Background(), &GetChallengePasswordInput{})
+	got, err := svc.GetChallengePassword(context.Background(), &GetChallengePasswordInput{
+		ChallengeArn: ptr.String("__ChallengeArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -272,7 +299,9 @@ func TestCheckResponseSnapshot_GetConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConnector(context.Background(), &GetConnectorInput{})
+	got, err := svc.GetConnector(context.Background(), &GetConnectorInput{
+		ConnectorArn: ptr.String("__ConnectorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -307,7 +336,11 @@ func TestCheckResponseSnapshot_ListChallengeMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListChallengeMetadata(context.Background(), &ListChallengeMetadataInput{})
+	got, err := svc.ListChallengeMetadata(context.Background(), &ListChallengeMetadataInput{
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		ConnectorArn: ptr.String("__ConnectorArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -372,7 +405,10 @@ func TestCheckResponseSnapshot_ListConnectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConnectors(context.Background(), &ListConnectorsInput{})
+	got, err := svc.ListConnectors(context.Background(), &ListConnectorsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -395,7 +431,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -414,7 +452,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -433,7 +476,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -454,7 +503,13 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChallenge(context.Background(), &CreateChallengeInput{})
+	_, opErr := svc.CreateChallenge(context.Background(), &CreateChallengeInput{
+		ConnectorArn: ptr.String("__ConnectorArn__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -479,7 +534,13 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChallenge(context.Background(), &CreateChallengeInput{})
+	_, opErr := svc.CreateChallenge(context.Background(), &CreateChallengeInput{
+		ConnectorArn: ptr.String("__ConnectorArn__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -506,7 +567,13 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChallenge(context.Background(), &CreateChallengeInput{})
+	_, opErr := svc.CreateChallenge(context.Background(), &CreateChallengeInput{
+		ConnectorArn: ptr.String("__ConnectorArn__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -531,7 +598,13 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChallenge(context.Background(), &CreateChallengeInput{})
+	_, opErr := svc.CreateChallenge(context.Background(), &CreateChallengeInput{
+		ConnectorArn: ptr.String("__ConnectorArn__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -558,7 +631,13 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChallenge(context.Background(), &CreateChallengeInput{})
+	_, opErr := svc.CreateChallenge(context.Background(), &CreateChallengeInput{
+		ConnectorArn: ptr.String("__ConnectorArn__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -586,7 +665,13 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChallenge(context.Background(), &CreateChallengeInput{})
+	_, opErr := svc.CreateChallenge(context.Background(), &CreateChallengeInput{
+		ConnectorArn: ptr.String("__ConnectorArn__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -611,7 +696,13 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChallenge(context.Background(), &CreateChallengeInput{})
+	_, opErr := svc.CreateChallenge(context.Background(), &CreateChallengeInput{
+		ConnectorArn: ptr.String("__ConnectorArn__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -637,7 +728,13 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChallenge(context.Background(), &CreateChallengeInput{})
+	_, opErr := svc.CreateChallenge(context.Background(), &CreateChallengeInput{
+		ConnectorArn: ptr.String("__ConnectorArn__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

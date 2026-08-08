@@ -122,7 +122,32 @@ func TestCheckResponseSnapshot_CreateSuiteDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSuiteDefinition(context.Background(), &CreateSuiteDefinitionInput{})
+	got, err := svc.CreateSuiteDefinition(context.Background(), &CreateSuiteDefinitionInput{
+		SuiteDefinitionConfiguration: &types.SuiteDefinitionConfiguration{
+			SuiteDefinitionName: ptr.String("__SuiteDefinitionName__"),
+			Devices: []types.DeviceUnderTest{
+				{
+					ThingArn:       ptr.String("__ThingArn__"),
+					CertificateArn: ptr.String("__CertificateArn__"),
+					DeviceRoleArn:  ptr.String("__DeviceRoleArn__"),
+				},
+				{
+					ThingArn:       ptr.String("__ThingArn__"),
+					CertificateArn: ptr.String("__CertificateArn__"),
+					DeviceRoleArn:  ptr.String("__DeviceRoleArn__"),
+				},
+			},
+			IntendedForQualification: ptr.Bool(true),
+			IsLongDurationTest:       ptr.Bool(true),
+			RootGroup:                ptr.String("__RootGroup__"),
+			DevicePermissionRoleArn:  ptr.String("__DevicePermissionRoleArn__"),
+			Protocol:                 types.Protocol("MqttV3_1_1"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -141,7 +166,9 @@ func TestCheckResponseSnapshot_DeleteSuiteDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSuiteDefinition(context.Background(), &DeleteSuiteDefinitionInput{})
+	got, err := svc.DeleteSuiteDefinition(context.Background(), &DeleteSuiteDefinitionInput{
+		SuiteDefinitionId: ptr.String("__SuiteDefinitionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -162,7 +189,12 @@ func TestCheckResponseSnapshot_GetEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEndpoint(context.Background(), &GetEndpointInput{})
+	got, err := svc.GetEndpoint(context.Background(), &GetEndpointInput{
+		ThingArn:             ptr.String("__ThingArn__"),
+		CertificateArn:       ptr.String("__CertificateArn__"),
+		DeviceRoleArn:        ptr.String("__DeviceRoleArn__"),
+		AuthenticationMethod: types.AuthenticationMethod("X509ClientCertificate"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -211,7 +243,10 @@ func TestCheckResponseSnapshot_GetSuiteDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSuiteDefinition(context.Background(), &GetSuiteDefinitionInput{})
+	got, err := svc.GetSuiteDefinition(context.Background(), &GetSuiteDefinitionInput{
+		SuiteDefinitionId:      ptr.String("__SuiteDefinitionId__"),
+		SuiteDefinitionVersion: ptr.String("__SuiteDefinitionVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -378,7 +413,10 @@ func TestCheckResponseSnapshot_GetSuiteRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSuiteRun(context.Background(), &GetSuiteRunInput{})
+	got, err := svc.GetSuiteRun(context.Background(), &GetSuiteRunInput{
+		SuiteDefinitionId: ptr.String("__SuiteDefinitionId__"),
+		SuiteRunId:        ptr.String("__SuiteRunId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -399,7 +437,10 @@ func TestCheckResponseSnapshot_GetSuiteRunReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSuiteRunReport(context.Background(), &GetSuiteRunReportInput{})
+	got, err := svc.GetSuiteRunReport(context.Background(), &GetSuiteRunReportInput{
+		SuiteDefinitionId: ptr.String("__SuiteDefinitionId__"),
+		SuiteRunId:        ptr.String("__SuiteRunId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -462,7 +503,10 @@ func TestCheckResponseSnapshot_ListSuiteDefinitions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSuiteDefinitions(context.Background(), &ListSuiteDefinitionsInput{})
+	got, err := svc.ListSuiteDefinitions(context.Background(), &ListSuiteDefinitionsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -509,7 +553,12 @@ func TestCheckResponseSnapshot_ListSuiteRuns(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSuiteRuns(context.Background(), &ListSuiteRunsInput{})
+	got, err := svc.ListSuiteRuns(context.Background(), &ListSuiteRunsInput{
+		SuiteDefinitionId:      ptr.String("__SuiteDefinitionId__"),
+		SuiteDefinitionVersion: ptr.String("__SuiteDefinitionVersion__"),
+		MaxResults:             ptr.Int32(1),
+		NextToken:              ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -532,7 +581,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -556,7 +607,25 @@ func TestCheckResponseSnapshot_StartSuiteRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartSuiteRun(context.Background(), &StartSuiteRunInput{})
+	got, err := svc.StartSuiteRun(context.Background(), &StartSuiteRunInput{
+		SuiteDefinitionId:      ptr.String("__SuiteDefinitionId__"),
+		SuiteDefinitionVersion: ptr.String("__SuiteDefinitionVersion__"),
+		SuiteRunConfiguration: &types.SuiteRunConfiguration{
+			PrimaryDevice: &types.DeviceUnderTest{
+				ThingArn:       ptr.String("__ThingArn__"),
+				CertificateArn: ptr.String("__CertificateArn__"),
+				DeviceRoleArn:  ptr.String("__DeviceRoleArn__"),
+			},
+			SelectedTestList: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ParallelRun: ptr.Bool(true),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -575,7 +644,10 @@ func TestCheckResponseSnapshot_StopSuiteRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopSuiteRun(context.Background(), &StopSuiteRunInput{})
+	got, err := svc.StopSuiteRun(context.Background(), &StopSuiteRunInput{
+		SuiteDefinitionId: ptr.String("__SuiteDefinitionId__"),
+		SuiteRunId:        ptr.String("__SuiteRunId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -594,7 +666,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -613,7 +690,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -639,7 +722,29 @@ func TestCheckResponseSnapshot_UpdateSuiteDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSuiteDefinition(context.Background(), &UpdateSuiteDefinitionInput{})
+	got, err := svc.UpdateSuiteDefinition(context.Background(), &UpdateSuiteDefinitionInput{
+		SuiteDefinitionId: ptr.String("__SuiteDefinitionId__"),
+		SuiteDefinitionConfiguration: &types.SuiteDefinitionConfiguration{
+			SuiteDefinitionName: ptr.String("__SuiteDefinitionName__"),
+			Devices: []types.DeviceUnderTest{
+				{
+					ThingArn:       ptr.String("__ThingArn__"),
+					CertificateArn: ptr.String("__CertificateArn__"),
+					DeviceRoleArn:  ptr.String("__DeviceRoleArn__"),
+				},
+				{
+					ThingArn:       ptr.String("__ThingArn__"),
+					CertificateArn: ptr.String("__CertificateArn__"),
+					DeviceRoleArn:  ptr.String("__DeviceRoleArn__"),
+				},
+			},
+			IntendedForQualification: ptr.Bool(true),
+			IsLongDurationTest:       ptr.Bool(true),
+			RootGroup:                ptr.String("__RootGroup__"),
+			DevicePermissionRoleArn:  ptr.String("__DevicePermissionRoleArn__"),
+			Protocol:                 types.Protocol("MqttV3_1_1"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -660,7 +765,25 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartSuiteRun(context.Background(), &StartSuiteRunInput{})
+	_, opErr := svc.StartSuiteRun(context.Background(), &StartSuiteRunInput{
+		SuiteDefinitionId:      ptr.String("__SuiteDefinitionId__"),
+		SuiteDefinitionVersion: ptr.String("__SuiteDefinitionVersion__"),
+		SuiteRunConfiguration: &types.SuiteRunConfiguration{
+			PrimaryDevice: &types.DeviceUnderTest{
+				ThingArn:       ptr.String("__ThingArn__"),
+				CertificateArn: ptr.String("__CertificateArn__"),
+				DeviceRoleArn:  ptr.String("__DeviceRoleArn__"),
+			},
+			SelectedTestList: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ParallelRun: ptr.Bool(true),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -685,7 +808,32 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSuiteDefinition(context.Background(), &CreateSuiteDefinitionInput{})
+	_, opErr := svc.CreateSuiteDefinition(context.Background(), &CreateSuiteDefinitionInput{
+		SuiteDefinitionConfiguration: &types.SuiteDefinitionConfiguration{
+			SuiteDefinitionName: ptr.String("__SuiteDefinitionName__"),
+			Devices: []types.DeviceUnderTest{
+				{
+					ThingArn:       ptr.String("__ThingArn__"),
+					CertificateArn: ptr.String("__CertificateArn__"),
+					DeviceRoleArn:  ptr.String("__DeviceRoleArn__"),
+				},
+				{
+					ThingArn:       ptr.String("__ThingArn__"),
+					CertificateArn: ptr.String("__CertificateArn__"),
+					DeviceRoleArn:  ptr.String("__DeviceRoleArn__"),
+				},
+			},
+			IntendedForQualification: ptr.Bool(true),
+			IsLongDurationTest:       ptr.Bool(true),
+			RootGroup:                ptr.String("__RootGroup__"),
+			DevicePermissionRoleArn:  ptr.String("__DevicePermissionRoleArn__"),
+			Protocol:                 types.Protocol("MqttV3_1_1"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -710,7 +858,12 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetEndpoint(context.Background(), &GetEndpointInput{})
+	_, opErr := svc.GetEndpoint(context.Background(), &GetEndpointInput{
+		ThingArn:             ptr.String("__ThingArn__"),
+		CertificateArn:       ptr.String("__CertificateArn__"),
+		DeviceRoleArn:        ptr.String("__DeviceRoleArn__"),
+		AuthenticationMethod: types.AuthenticationMethod("X509ClientCertificate"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -735,7 +888,32 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSuiteDefinition(context.Background(), &CreateSuiteDefinitionInput{})
+	_, opErr := svc.CreateSuiteDefinition(context.Background(), &CreateSuiteDefinitionInput{
+		SuiteDefinitionConfiguration: &types.SuiteDefinitionConfiguration{
+			SuiteDefinitionName: ptr.String("__SuiteDefinitionName__"),
+			Devices: []types.DeviceUnderTest{
+				{
+					ThingArn:       ptr.String("__ThingArn__"),
+					CertificateArn: ptr.String("__CertificateArn__"),
+					DeviceRoleArn:  ptr.String("__DeviceRoleArn__"),
+				},
+				{
+					ThingArn:       ptr.String("__ThingArn__"),
+					CertificateArn: ptr.String("__CertificateArn__"),
+					DeviceRoleArn:  ptr.String("__DeviceRoleArn__"),
+				},
+			},
+			IntendedForQualification: ptr.Bool(true),
+			IsLongDurationTest:       ptr.Bool(true),
+			RootGroup:                ptr.String("__RootGroup__"),
+			DevicePermissionRoleArn:  ptr.String("__DevicePermissionRoleArn__"),
+			Protocol:                 types.Protocol("MqttV3_1_1"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

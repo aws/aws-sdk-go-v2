@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","id":"__Id__","instantiatedVnfInfo":{"vnfState":"STARTED","vnfcResourceInfo":[{"metadata":{"cluster":"__Cluster__","helmChart":"__HelmChart__","nodeGroup":"__NodeGroup__"}},{"metadata":{"cluster":"__Cluster__","helmChart":"__HelmChart__","nodeGroup":"__NodeGroup__"}}]},"instantiationState":"INSTANTIATED","metadata":{"createdAt":"2000-01-01T00:00:00Z","lastModified":"2000-01-01T00:00:00Z"},"nsInstanceId":"__NsInstanceId__","tags":{"key0":"__Value__"},"vnfPkgId":"__VnfPkgId__","vnfProductName":"__VnfProductName__","vnfProvider":"__VnfProvider__","vnfdId":"__VnfdId__","vnfdVersion":"__VnfdVersion__"}

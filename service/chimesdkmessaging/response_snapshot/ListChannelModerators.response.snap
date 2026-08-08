@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ChannelArn":"__ChannelArn__","ChannelModerators":[{"Moderator":{"Arn":"__Arn__","Name":"__Name__"}},{"Moderator":{"Arn":"__Arn__","Name":"__Name__"}}],"NextToken":"__NextToken__"}

@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/document"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -121,7 +122,11 @@ func TestCheckResponseSnapshot_ActivateMessageTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ActivateMessageTemplate(context.Background(), &ActivateMessageTemplateInput{})
+	got, err := svc.ActivateMessageTemplate(context.Background(), &ActivateMessageTemplateInput{
+		KnowledgeBaseId:   ptr.String("__KnowledgeBaseId__"),
+		MessageTemplateId: ptr.String("__MessageTemplateId__"),
+		VersionNumber:     ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -198,7 +203,58 @@ func TestCheckResponseSnapshot_CreateAIAgent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAIAgent(context.Background(), &CreateAIAgentInput{})
+	got, err := svc.CreateAIAgent(context.Background(), &CreateAIAgentInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		AssistantId: ptr.String("__AssistantId__"),
+		Name:        ptr.String("__Name__"),
+		Type:        types.AIAgentType("MANUAL_SEARCH"),
+		Configuration: &types.AIAgentConfigurationMemberManualSearchAIAgentConfiguration{
+			Value: types.ManualSearchAIAgentConfiguration{
+				AnswerGenerationAIPromptId:    ptr.String("__AnswerGenerationAIPromptId__"),
+				AnswerGenerationAIGuardrailId: ptr.String("__AnswerGenerationAIGuardrailId__"),
+				AssociationConfigurations: []types.AssociationConfiguration{
+					{
+						AssociationId:   ptr.String("__AssociationId__"),
+						AssociationType: types.AIAgentAssociationConfigurationType("KNOWLEDGE_BASE"),
+						AssociationConfigurationData: &types.AssociationConfigurationDataMemberKnowledgeBaseAssociationConfigurationData{
+							Value: types.KnowledgeBaseAssociationConfigurationData{
+								ContentTagFilter: &types.TagFilterMemberTagCondition{
+									Value: types.TagCondition{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								MaxResults:                      ptr.Int32(1),
+								OverrideKnowledgeBaseSearchType: types.KnowledgeBaseSearchType("HYBRID"),
+							},
+						},
+					},
+					{
+						AssociationId:   ptr.String("__AssociationId__"),
+						AssociationType: types.AIAgentAssociationConfigurationType("KNOWLEDGE_BASE"),
+						AssociationConfigurationData: &types.AssociationConfigurationDataMemberKnowledgeBaseAssociationConfigurationData{
+							Value: types.KnowledgeBaseAssociationConfigurationData{
+								ContentTagFilter: &types.TagFilterMemberTagCondition{
+									Value: types.TagCondition{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								MaxResults:                      ptr.Int32(1),
+								OverrideKnowledgeBaseSearchType: types.KnowledgeBaseSearchType("HYBRID"),
+							},
+						},
+					},
+				},
+				Locale: ptr.String("__Locale__"),
+			},
+		},
+		VisibilityStatus: types.VisibilityStatus("SAVED"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -276,7 +332,12 @@ func TestCheckResponseSnapshot_CreateAIAgentVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAIAgentVersion(context.Background(), &CreateAIAgentVersionInput{})
+	got, err := svc.CreateAIAgentVersion(context.Background(), &CreateAIAgentVersionInput{
+		AssistantId:  ptr.String("__AssistantId__"),
+		AiAgentId:    ptr.String("__AiAgentId__"),
+		ModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -404,7 +465,110 @@ func TestCheckResponseSnapshot_CreateAIGuardrail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAIGuardrail(context.Background(), &CreateAIGuardrailInput{})
+	got, err := svc.CreateAIGuardrail(context.Background(), &CreateAIGuardrailInput{
+		ClientToken:             ptr.String("__ClientToken__"),
+		AssistantId:             ptr.String("__AssistantId__"),
+		Name:                    ptr.String("__Name__"),
+		BlockedInputMessaging:   ptr.String("__BlockedInputMessaging__"),
+		BlockedOutputsMessaging: ptr.String("__BlockedOutputsMessaging__"),
+		VisibilityStatus:        types.VisibilityStatus("SAVED"),
+		Description:             ptr.String("__Description__"),
+		TopicPolicyConfig: &types.AIGuardrailTopicPolicyConfig{
+			TopicsConfig: []types.GuardrailTopicConfig{
+				{
+					Name:       ptr.String("__Name__"),
+					Definition: ptr.String("__Definition__"),
+					Examples: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Type: types.GuardrailTopicType("DENY"),
+				},
+				{
+					Name:       ptr.String("__Name__"),
+					Definition: ptr.String("__Definition__"),
+					Examples: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Type: types.GuardrailTopicType("DENY"),
+				},
+			},
+		},
+		ContentPolicyConfig: &types.AIGuardrailContentPolicyConfig{
+			FiltersConfig: []types.GuardrailContentFilterConfig{
+				{
+					Type:           types.GuardrailContentFilterType("SEXUAL"),
+					InputStrength:  types.GuardrailFilterStrength("NONE"),
+					OutputStrength: types.GuardrailFilterStrength("NONE"),
+				},
+				{
+					Type:           types.GuardrailContentFilterType("SEXUAL"),
+					InputStrength:  types.GuardrailFilterStrength("NONE"),
+					OutputStrength: types.GuardrailFilterStrength("NONE"),
+				},
+			},
+		},
+		WordPolicyConfig: &types.AIGuardrailWordPolicyConfig{
+			WordsConfig: []types.GuardrailWordConfig{
+				{
+					Text: ptr.String("__Text__"),
+				},
+				{
+					Text: ptr.String("__Text__"),
+				},
+			},
+			ManagedWordListsConfig: []types.GuardrailManagedWordsConfig{
+				{
+					Type: types.GuardrailManagedWordsType("PROFANITY"),
+				},
+				{
+					Type: types.GuardrailManagedWordsType("PROFANITY"),
+				},
+			},
+		},
+		SensitiveInformationPolicyConfig: &types.AIGuardrailSensitiveInformationPolicyConfig{
+			PiiEntitiesConfig: []types.GuardrailPiiEntityConfig{
+				{
+					Type:   types.GuardrailPiiEntityType("ADDRESS"),
+					Action: types.GuardrailSensitiveInformationAction("BLOCK"),
+				},
+				{
+					Type:   types.GuardrailPiiEntityType("ADDRESS"),
+					Action: types.GuardrailSensitiveInformationAction("BLOCK"),
+				},
+			},
+			RegexesConfig: []types.GuardrailRegexConfig{
+				{
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+					Pattern:     ptr.String("__Pattern__"),
+					Action:      types.GuardrailSensitiveInformationAction("BLOCK"),
+				},
+				{
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+					Pattern:     ptr.String("__Pattern__"),
+					Action:      types.GuardrailSensitiveInformationAction("BLOCK"),
+				},
+			},
+		},
+		ContextualGroundingPolicyConfig: &types.AIGuardrailContextualGroundingPolicyConfig{
+			FiltersConfig: []types.GuardrailContextualGroundingFilterConfig{
+				{
+					Type:      types.GuardrailContextualGroundingFilterType("GROUNDING"),
+					Threshold: 1.0,
+				},
+				{
+					Type:      types.GuardrailContextualGroundingFilterType("GROUNDING"),
+					Threshold: 1.0,
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -533,7 +697,12 @@ func TestCheckResponseSnapshot_CreateAIGuardrailVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAIGuardrailVersion(context.Background(), &CreateAIGuardrailVersionInput{})
+	got, err := svc.CreateAIGuardrailVersion(context.Background(), &CreateAIGuardrailVersionInput{
+		AssistantId:   ptr.String("__AssistantId__"),
+		AiGuardrailId: ptr.String("__AiGuardrailId__"),
+		ModifiedTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -583,7 +752,31 @@ func TestCheckResponseSnapshot_CreateAIPrompt(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAIPrompt(context.Background(), &CreateAIPromptInput{})
+	got, err := svc.CreateAIPrompt(context.Background(), &CreateAIPromptInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		AssistantId: ptr.String("__AssistantId__"),
+		Name:        ptr.String("__Name__"),
+		Type:        types.AIPromptType("ANSWER_GENERATION"),
+		TemplateConfiguration: &types.AIPromptTemplateConfigurationMemberTextFullAIPromptEditTemplateConfiguration{
+			Value: types.TextFullAIPromptEditTemplateConfiguration{
+				Text: ptr.String("__Text__"),
+			},
+		},
+		VisibilityStatus: types.VisibilityStatus("SAVED"),
+		TemplateType:     types.AIPromptTemplateType("TEXT"),
+		ModelId:          ptr.String("__ModelId__"),
+		ApiFormat:        types.AIPromptAPIFormat("ANTHROPIC_CLAUDE_MESSAGES"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Description: ptr.String("__Description__"),
+		InferenceConfiguration: &types.AIPromptInferenceConfiguration{
+			Temperature:       ptr.Float32(1.0),
+			TopP:              ptr.Float32(1.0),
+			TopK:              ptr.Int32(1),
+			MaxTokensToSample: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -634,7 +827,12 @@ func TestCheckResponseSnapshot_CreateAIPromptVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAIPromptVersion(context.Background(), &CreateAIPromptVersionInput{})
+	got, err := svc.CreateAIPromptVersion(context.Background(), &CreateAIPromptVersionInput{
+		AssistantId:  ptr.String("__AssistantId__"),
+		AiPromptId:   ptr.String("__AiPromptId__"),
+		ModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -689,7 +887,18 @@ func TestCheckResponseSnapshot_CreateAssistant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAssistant(context.Background(), &CreateAssistantInput{})
+	got, err := svc.CreateAssistant(context.Background(), &CreateAssistantInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Name:        ptr.String("__Name__"),
+		Type:        types.AssistantType("AGENT"),
+		Description: ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -725,7 +934,17 @@ func TestCheckResponseSnapshot_CreateAssistantAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAssistantAssociation(context.Background(), &CreateAssistantAssociationInput{})
+	got, err := svc.CreateAssistantAssociation(context.Background(), &CreateAssistantAssociationInput{
+		AssistantId:     ptr.String("__AssistantId__"),
+		AssociationType: types.AssociationType("KNOWLEDGE_BASE"),
+		Association: &types.AssistantAssociationInputDataMemberKnowledgeBaseId{
+			Value: "__AssistantAssociationInputDataMemberKnowledgeBaseId__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -765,7 +984,20 @@ func TestCheckResponseSnapshot_CreateContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateContent(context.Background(), &CreateContentInput{})
+	got, err := svc.CreateContent(context.Background(), &CreateContentInput{
+		KnowledgeBaseId:    ptr.String("__KnowledgeBaseId__"),
+		Name:               ptr.String("__Name__"),
+		Title:              ptr.String("__Title__"),
+		OverrideLinkOutUri: ptr.String("__OverrideLinkOutUri__"),
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
+		UploadId:    ptr.String("__UploadId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -802,7 +1034,20 @@ func TestCheckResponseSnapshot_CreateContentAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateContentAssociation(context.Background(), &CreateContentAssociationInput{})
+	got, err := svc.CreateContentAssociation(context.Background(), &CreateContentAssociationInput{
+		ClientToken:     ptr.String("__ClientToken__"),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		ContentId:       ptr.String("__ContentId__"),
+		AssociationType: types.ContentAssociationType("AMAZON_CONNECT_GUIDE"),
+		Association: &types.ContentAssociationContentsMemberAmazonConnectGuideAssociation{
+			Value: types.AmazonConnectGuideAssociationData{
+				FlowId: ptr.String("__FlowId__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -888,7 +1133,64 @@ func TestCheckResponseSnapshot_CreateKnowledgeBase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateKnowledgeBase(context.Background(), &CreateKnowledgeBaseInput{})
+	got, err := svc.CreateKnowledgeBase(context.Background(), &CreateKnowledgeBaseInput{
+		ClientToken:       ptr.String("__ClientToken__"),
+		Name:              ptr.String("__Name__"),
+		KnowledgeBaseType: types.KnowledgeBaseType("EXTERNAL"),
+		SourceConfiguration: &types.SourceConfigurationMemberAppIntegrations{
+			Value: types.AppIntegrationsConfiguration{
+				AppIntegrationArn: ptr.String("__AppIntegrationArn__"),
+				ObjectFields: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		RenderingConfiguration: &types.RenderingConfiguration{
+			TemplateUri: ptr.String("__TemplateUri__"),
+		},
+		VectorIngestionConfiguration: &types.VectorIngestionConfiguration{
+			ChunkingConfiguration: &types.ChunkingConfiguration{
+				ChunkingStrategy: types.ChunkingStrategy("FIXED_SIZE"),
+				FixedSizeChunkingConfiguration: &types.FixedSizeChunkingConfiguration{
+					MaxTokens:         ptr.Int32(1),
+					OverlapPercentage: ptr.Int32(1),
+				},
+				HierarchicalChunkingConfiguration: &types.HierarchicalChunkingConfiguration{
+					LevelConfigurations: []types.HierarchicalChunkingLevelConfiguration{
+						{
+							MaxTokens: ptr.Int32(1),
+						},
+						{
+							MaxTokens: ptr.Int32(1),
+						},
+					},
+					OverlapTokens: ptr.Int32(1),
+				},
+				SemanticChunkingConfiguration: &types.SemanticChunkingConfiguration{
+					MaxTokens:                     ptr.Int32(1),
+					BufferSize:                    ptr.Int32(1),
+					BreakpointPercentileThreshold: ptr.Int32(1),
+				},
+			},
+			ParsingConfiguration: &types.ParsingConfiguration{
+				ParsingStrategy: types.ParsingStrategy("BEDROCK_FOUNDATION_MODEL"),
+				BedrockFoundationModelConfiguration: &types.BedrockFoundationModelConfigurationForParsing{
+					ModelArn: ptr.String("__ModelArn__"),
+					ParsingPrompt: &types.ParsingPrompt{
+						ParsingPromptText: ptr.String("__ParsingPromptText__"),
+					},
+				},
+			},
+		},
+		ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+		Description: ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1054,7 +1356,137 @@ func TestCheckResponseSnapshot_CreateMessageTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMessageTemplate(context.Background(), &CreateMessageTemplateInput{})
+	got, err := svc.CreateMessageTemplate(context.Background(), &CreateMessageTemplateInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		Name:            ptr.String("__Name__"),
+		Content: &types.MessageTemplateContentProviderMemberEmail{
+			Value: types.EmailMessageTemplateContent{
+				Subject: ptr.String("__Subject__"),
+				Body: &types.EmailMessageTemplateContentBody{
+					PlainText: &types.MessageTemplateBodyContentProviderMemberContent{
+						Value: "__MessageTemplateBodyContentProviderMemberContent__",
+					},
+					Html: &types.MessageTemplateBodyContentProviderMemberContent{
+						Value: "__MessageTemplateBodyContentProviderMemberContent__",
+					},
+				},
+				Headers: []types.EmailHeader{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		Description:    ptr.String("__Description__"),
+		ChannelSubtype: types.ChannelSubtype("EMAIL"),
+		Language:       ptr.String("__Language__"),
+		SourceConfiguration: &types.MessageTemplateSourceConfigurationMemberWhatsApp{
+			Value: types.WhatsAppMessageTemplateSourceConfiguration{
+				BusinessAccountId: ptr.String("__BusinessAccountId__"),
+				TemplateId:        ptr.String("__TemplateId__"),
+				Components: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		DefaultAttributes: &types.MessageTemplateAttributes{
+			SystemAttributes: &types.SystemAttributes{
+				Name: ptr.String("__Name__"),
+				CustomerEndpoint: &types.SystemEndpointAttributes{
+					Address: ptr.String("__Address__"),
+				},
+				SystemEndpoint: &types.SystemEndpointAttributes{
+					Address: ptr.String("__Address__"),
+				},
+			},
+			AgentAttributes: &types.AgentAttributes{
+				FirstName: ptr.String("__FirstName__"),
+				LastName:  ptr.String("__LastName__"),
+			},
+			CustomerProfileAttributes: &types.CustomerProfileAttributes{
+				ProfileId:             ptr.String("__ProfileId__"),
+				ProfileARN:            ptr.String("__ProfileARN__"),
+				FirstName:             ptr.String("__FirstName__"),
+				MiddleName:            ptr.String("__MiddleName__"),
+				LastName:              ptr.String("__LastName__"),
+				AccountNumber:         ptr.String("__AccountNumber__"),
+				EmailAddress:          ptr.String("__EmailAddress__"),
+				PhoneNumber:           ptr.String("__PhoneNumber__"),
+				AdditionalInformation: ptr.String("__AdditionalInformation__"),
+				PartyType:             ptr.String("__PartyType__"),
+				BusinessName:          ptr.String("__BusinessName__"),
+				BirthDate:             ptr.String("__BirthDate__"),
+				Gender:                ptr.String("__Gender__"),
+				MobilePhoneNumber:     ptr.String("__MobilePhoneNumber__"),
+				HomePhoneNumber:       ptr.String("__HomePhoneNumber__"),
+				BusinessPhoneNumber:   ptr.String("__BusinessPhoneNumber__"),
+				BusinessEmailAddress:  ptr.String("__BusinessEmailAddress__"),
+				Address1:              ptr.String("__Address1__"),
+				Address2:              ptr.String("__Address2__"),
+				Address3:              ptr.String("__Address3__"),
+				Address4:              ptr.String("__Address4__"),
+				City:                  ptr.String("__City__"),
+				County:                ptr.String("__County__"),
+				Country:               ptr.String("__Country__"),
+				PostalCode:            ptr.String("__PostalCode__"),
+				Province:              ptr.String("__Province__"),
+				State:                 ptr.String("__State__"),
+				ShippingAddress1:      ptr.String("__ShippingAddress1__"),
+				ShippingAddress2:      ptr.String("__ShippingAddress2__"),
+				ShippingAddress3:      ptr.String("__ShippingAddress3__"),
+				ShippingAddress4:      ptr.String("__ShippingAddress4__"),
+				ShippingCity:          ptr.String("__ShippingCity__"),
+				ShippingCounty:        ptr.String("__ShippingCounty__"),
+				ShippingCountry:       ptr.String("__ShippingCountry__"),
+				ShippingPostalCode:    ptr.String("__ShippingPostalCode__"),
+				ShippingProvince:      ptr.String("__ShippingProvince__"),
+				ShippingState:         ptr.String("__ShippingState__"),
+				MailingAddress1:       ptr.String("__MailingAddress1__"),
+				MailingAddress2:       ptr.String("__MailingAddress2__"),
+				MailingAddress3:       ptr.String("__MailingAddress3__"),
+				MailingAddress4:       ptr.String("__MailingAddress4__"),
+				MailingCity:           ptr.String("__MailingCity__"),
+				MailingCounty:         ptr.String("__MailingCounty__"),
+				MailingCountry:        ptr.String("__MailingCountry__"),
+				MailingPostalCode:     ptr.String("__MailingPostalCode__"),
+				MailingProvince:       ptr.String("__MailingProvince__"),
+				MailingState:          ptr.String("__MailingState__"),
+				BillingAddress1:       ptr.String("__BillingAddress1__"),
+				BillingAddress2:       ptr.String("__BillingAddress2__"),
+				BillingAddress3:       ptr.String("__BillingAddress3__"),
+				BillingAddress4:       ptr.String("__BillingAddress4__"),
+				BillingCity:           ptr.String("__BillingCity__"),
+				BillingCounty:         ptr.String("__BillingCounty__"),
+				BillingCountry:        ptr.String("__BillingCountry__"),
+				BillingPostalCode:     ptr.String("__BillingPostalCode__"),
+				BillingProvince:       ptr.String("__BillingProvince__"),
+				BillingState:          ptr.String("__BillingState__"),
+				Custom: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			CustomAttributes: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		GroupingConfiguration: &types.GroupingConfiguration{
+			Criteria: ptr.String("__Criteria__"),
+			Values: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1082,7 +1514,14 @@ func TestCheckResponseSnapshot_CreateMessageTemplateAttachment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMessageTemplateAttachment(context.Background(), &CreateMessageTemplateAttachmentInput{})
+	got, err := svc.CreateMessageTemplateAttachment(context.Background(), &CreateMessageTemplateAttachmentInput{
+		KnowledgeBaseId:    ptr.String("__KnowledgeBaseId__"),
+		MessageTemplateId:  ptr.String("__MessageTemplateId__"),
+		ContentDisposition: types.ContentDisposition("ATTACHMENT"),
+		Name:               ptr.String("__Name__"),
+		Body:               ptr.String("__Body__"),
+		ClientToken:        ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1268,7 +1707,11 @@ func TestCheckResponseSnapshot_CreateMessageTemplateVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMessageTemplateVersion(context.Background(), &CreateMessageTemplateVersionInput{})
+	got, err := svc.CreateMessageTemplateVersion(context.Background(), &CreateMessageTemplateVersionInput{
+		KnowledgeBaseId:              ptr.String("__KnowledgeBaseId__"),
+		MessageTemplateId:            ptr.String("__MessageTemplateId__"),
+		MessageTemplateContentSha256: ptr.String("__MessageTemplateContentSha256__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1326,7 +1769,33 @@ func TestCheckResponseSnapshot_CreateQuickResponse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateQuickResponse(context.Background(), &CreateQuickResponseInput{})
+	got, err := svc.CreateQuickResponse(context.Background(), &CreateQuickResponseInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		Name:            ptr.String("__Name__"),
+		Content: &types.QuickResponseDataProviderMemberContent{
+			Value: "__QuickResponseDataProviderMemberContent__",
+		},
+		ContentType: ptr.String("__ContentType__"),
+		GroupingConfiguration: &types.GroupingConfiguration{
+			Criteria: ptr.String("__Criteria__"),
+			Values: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Description: ptr.String("__Description__"),
+		ShortcutKey: ptr.String("__ShortcutKey__"),
+		IsActive:    ptr.Bool(true),
+		Channels: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Language:    ptr.String("__Language__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1380,7 +1849,38 @@ func TestCheckResponseSnapshot_CreateSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSession(context.Background(), &CreateSessionInput{})
+	got, err := svc.CreateSession(context.Background(), &CreateSessionInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		AssistantId: ptr.String("__AssistantId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TagFilter: &types.TagFilterMemberTagCondition{
+			Value: types.TagCondition{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AiAgentConfiguration: map[string]types.AIAgentConfigurationData{
+			"key0": {
+				AiAgentId: ptr.String("__AiAgentId__"),
+			},
+		},
+		ContactArn: ptr.String("__ContactArn__"),
+		OrchestratorConfigurationList: []types.OrchestratorConfigurationEntry{
+			{
+				AiAgentId:           ptr.String("__AiAgentId__"),
+				OrchestratorUseCase: ptr.String("__OrchestratorUseCase__"),
+			},
+			{
+				AiAgentId:           ptr.String("__AiAgentId__"),
+				OrchestratorUseCase: ptr.String("__OrchestratorUseCase__"),
+			},
+		},
+		RemoveOrchestratorConfigurationList: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1403,7 +1903,11 @@ func TestCheckResponseSnapshot_DeactivateMessageTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeactivateMessageTemplate(context.Background(), &DeactivateMessageTemplateInput{})
+	got, err := svc.DeactivateMessageTemplate(context.Background(), &DeactivateMessageTemplateInput{
+		KnowledgeBaseId:   ptr.String("__KnowledgeBaseId__"),
+		MessageTemplateId: ptr.String("__MessageTemplateId__"),
+		VersionNumber:     ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1422,7 +1926,10 @@ func TestCheckResponseSnapshot_DeleteAIAgent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAIAgent(context.Background(), &DeleteAIAgentInput{})
+	got, err := svc.DeleteAIAgent(context.Background(), &DeleteAIAgentInput{
+		AssistantId: ptr.String("__AssistantId__"),
+		AiAgentId:   ptr.String("__AiAgentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1441,7 +1948,11 @@ func TestCheckResponseSnapshot_DeleteAIAgentVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAIAgentVersion(context.Background(), &DeleteAIAgentVersionInput{})
+	got, err := svc.DeleteAIAgentVersion(context.Background(), &DeleteAIAgentVersionInput{
+		AssistantId:   ptr.String("__AssistantId__"),
+		AiAgentId:     ptr.String("__AiAgentId__"),
+		VersionNumber: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1460,7 +1971,10 @@ func TestCheckResponseSnapshot_DeleteAIGuardrail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAIGuardrail(context.Background(), &DeleteAIGuardrailInput{})
+	got, err := svc.DeleteAIGuardrail(context.Background(), &DeleteAIGuardrailInput{
+		AssistantId:   ptr.String("__AssistantId__"),
+		AiGuardrailId: ptr.String("__AiGuardrailId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1479,7 +1993,11 @@ func TestCheckResponseSnapshot_DeleteAIGuardrailVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAIGuardrailVersion(context.Background(), &DeleteAIGuardrailVersionInput{})
+	got, err := svc.DeleteAIGuardrailVersion(context.Background(), &DeleteAIGuardrailVersionInput{
+		AssistantId:   ptr.String("__AssistantId__"),
+		AiGuardrailId: ptr.String("__AiGuardrailId__"),
+		VersionNumber: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1498,7 +2016,10 @@ func TestCheckResponseSnapshot_DeleteAIPrompt(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAIPrompt(context.Background(), &DeleteAIPromptInput{})
+	got, err := svc.DeleteAIPrompt(context.Background(), &DeleteAIPromptInput{
+		AssistantId: ptr.String("__AssistantId__"),
+		AiPromptId:  ptr.String("__AiPromptId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1517,7 +2038,11 @@ func TestCheckResponseSnapshot_DeleteAIPromptVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAIPromptVersion(context.Background(), &DeleteAIPromptVersionInput{})
+	got, err := svc.DeleteAIPromptVersion(context.Background(), &DeleteAIPromptVersionInput{
+		AssistantId:   ptr.String("__AssistantId__"),
+		AiPromptId:    ptr.String("__AiPromptId__"),
+		VersionNumber: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1536,7 +2061,9 @@ func TestCheckResponseSnapshot_DeleteAssistant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAssistant(context.Background(), &DeleteAssistantInput{})
+	got, err := svc.DeleteAssistant(context.Background(), &DeleteAssistantInput{
+		AssistantId: ptr.String("__AssistantId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1555,7 +2082,10 @@ func TestCheckResponseSnapshot_DeleteAssistantAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAssistantAssociation(context.Background(), &DeleteAssistantAssociationInput{})
+	got, err := svc.DeleteAssistantAssociation(context.Background(), &DeleteAssistantAssociationInput{
+		AssistantAssociationId: ptr.String("__AssistantAssociationId__"),
+		AssistantId:            ptr.String("__AssistantId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1574,7 +2104,10 @@ func TestCheckResponseSnapshot_DeleteContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteContent(context.Background(), &DeleteContentInput{})
+	got, err := svc.DeleteContent(context.Background(), &DeleteContentInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		ContentId:       ptr.String("__ContentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1593,7 +2126,11 @@ func TestCheckResponseSnapshot_DeleteContentAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteContentAssociation(context.Background(), &DeleteContentAssociationInput{})
+	got, err := svc.DeleteContentAssociation(context.Background(), &DeleteContentAssociationInput{
+		KnowledgeBaseId:      ptr.String("__KnowledgeBaseId__"),
+		ContentId:            ptr.String("__ContentId__"),
+		ContentAssociationId: ptr.String("__ContentAssociationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1612,7 +2149,10 @@ func TestCheckResponseSnapshot_DeleteImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteImportJob(context.Background(), &DeleteImportJobInput{})
+	got, err := svc.DeleteImportJob(context.Background(), &DeleteImportJobInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		ImportJobId:     ptr.String("__ImportJobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1631,7 +2171,9 @@ func TestCheckResponseSnapshot_DeleteKnowledgeBase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteKnowledgeBase(context.Background(), &DeleteKnowledgeBaseInput{})
+	got, err := svc.DeleteKnowledgeBase(context.Background(), &DeleteKnowledgeBaseInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1650,7 +2192,10 @@ func TestCheckResponseSnapshot_DeleteMessageTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMessageTemplate(context.Background(), &DeleteMessageTemplateInput{})
+	got, err := svc.DeleteMessageTemplate(context.Background(), &DeleteMessageTemplateInput{
+		KnowledgeBaseId:   ptr.String("__KnowledgeBaseId__"),
+		MessageTemplateId: ptr.String("__MessageTemplateId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1669,7 +2214,11 @@ func TestCheckResponseSnapshot_DeleteMessageTemplateAttachment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMessageTemplateAttachment(context.Background(), &DeleteMessageTemplateAttachmentInput{})
+	got, err := svc.DeleteMessageTemplateAttachment(context.Background(), &DeleteMessageTemplateAttachmentInput{
+		KnowledgeBaseId:   ptr.String("__KnowledgeBaseId__"),
+		MessageTemplateId: ptr.String("__MessageTemplateId__"),
+		AttachmentId:      ptr.String("__AttachmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1688,7 +2237,10 @@ func TestCheckResponseSnapshot_DeleteQuickResponse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteQuickResponse(context.Background(), &DeleteQuickResponseInput{})
+	got, err := svc.DeleteQuickResponse(context.Background(), &DeleteQuickResponseInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		QuickResponseId: ptr.String("__QuickResponseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1766,7 +2318,10 @@ func TestCheckResponseSnapshot_GetAIAgent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAIAgent(context.Background(), &GetAIAgentInput{})
+	got, err := svc.GetAIAgent(context.Background(), &GetAIAgentInput{
+		AssistantId: ptr.String("__AssistantId__"),
+		AiAgentId:   ptr.String("__AiAgentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1895,7 +2450,10 @@ func TestCheckResponseSnapshot_GetAIGuardrail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAIGuardrail(context.Background(), &GetAIGuardrailInput{})
+	got, err := svc.GetAIGuardrail(context.Background(), &GetAIGuardrailInput{
+		AssistantId:   ptr.String("__AssistantId__"),
+		AiGuardrailId: ptr.String("__AiGuardrailId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1946,7 +2504,10 @@ func TestCheckResponseSnapshot_GetAIPrompt(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAIPrompt(context.Background(), &GetAIPromptInput{})
+	got, err := svc.GetAIPrompt(context.Background(), &GetAIPromptInput{
+		AssistantId: ptr.String("__AssistantId__"),
+		AiPromptId:  ptr.String("__AiPromptId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2001,7 +2562,9 @@ func TestCheckResponseSnapshot_GetAssistant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAssistant(context.Background(), &GetAssistantInput{})
+	got, err := svc.GetAssistant(context.Background(), &GetAssistantInput{
+		AssistantId: ptr.String("__AssistantId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2037,7 +2600,10 @@ func TestCheckResponseSnapshot_GetAssistantAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAssistantAssociation(context.Background(), &GetAssistantAssociationInput{})
+	got, err := svc.GetAssistantAssociation(context.Background(), &GetAssistantAssociationInput{
+		AssistantAssociationId: ptr.String("__AssistantAssociationId__"),
+		AssistantId:            ptr.String("__AssistantId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2077,7 +2643,10 @@ func TestCheckResponseSnapshot_GetContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetContent(context.Background(), &GetContentInput{})
+	got, err := svc.GetContent(context.Background(), &GetContentInput{
+		ContentId:       ptr.String("__ContentId__"),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2114,7 +2683,11 @@ func TestCheckResponseSnapshot_GetContentAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetContentAssociation(context.Background(), &GetContentAssociationInput{})
+	got, err := svc.GetContentAssociation(context.Background(), &GetContentAssociationInput{
+		KnowledgeBaseId:      ptr.String("__KnowledgeBaseId__"),
+		ContentId:            ptr.String("__ContentId__"),
+		ContentAssociationId: ptr.String("__ContentAssociationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2151,7 +2724,10 @@ func TestCheckResponseSnapshot_GetContentSummary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetContentSummary(context.Background(), &GetContentSummaryInput{})
+	got, err := svc.GetContentSummary(context.Background(), &GetContentSummaryInput{
+		ContentId:       ptr.String("__ContentId__"),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2195,7 +2771,10 @@ func TestCheckResponseSnapshot_GetImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetImportJob(context.Background(), &GetImportJobInput{})
+	got, err := svc.GetImportJob(context.Background(), &GetImportJobInput{
+		ImportJobId:     ptr.String("__ImportJobId__"),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2281,7 +2860,9 @@ func TestCheckResponseSnapshot_GetKnowledgeBase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetKnowledgeBase(context.Background(), &GetKnowledgeBaseInput{})
+	got, err := svc.GetKnowledgeBase(context.Background(), &GetKnowledgeBaseInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2467,7 +3048,10 @@ func TestCheckResponseSnapshot_GetMessageTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMessageTemplate(context.Background(), &GetMessageTemplateInput{})
+	got, err := svc.GetMessageTemplate(context.Background(), &GetMessageTemplateInput{
+		MessageTemplateId: ptr.String("__MessageTemplateId__"),
+		KnowledgeBaseId:   ptr.String("__KnowledgeBaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2546,7 +3130,11 @@ func TestCheckResponseSnapshot_GetNextMessage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetNextMessage(context.Background(), &GetNextMessageInput{})
+	got, err := svc.GetNextMessage(context.Background(), &GetNextMessageInput{
+		AssistantId:      ptr.String("__AssistantId__"),
+		SessionId:        ptr.String("__SessionId__"),
+		NextMessageToken: ptr.String("__NextMessageToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2604,7 +3192,10 @@ func TestCheckResponseSnapshot_GetQuickResponse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQuickResponse(context.Background(), &GetQuickResponseInput{})
+	got, err := svc.GetQuickResponse(context.Background(), &GetQuickResponseInput{
+		QuickResponseId: ptr.String("__QuickResponseId__"),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2836,7 +3427,14 @@ func TestCheckResponseSnapshot_GetRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRecommendations(context.Background(), &GetRecommendationsInput{})
+	got, err := svc.GetRecommendations(context.Background(), &GetRecommendationsInput{
+		AssistantId:        ptr.String("__AssistantId__"),
+		SessionId:          ptr.String("__SessionId__"),
+		MaxResults:         ptr.Int32(1),
+		WaitTimeSeconds:    1,
+		NextChunkToken:     ptr.String("__NextChunkToken__"),
+		RecommendationType: types.RecommendationType("KNOWLEDGE_CONTENT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2890,7 +3488,10 @@ func TestCheckResponseSnapshot_GetSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSession(context.Background(), &GetSessionInput{})
+	got, err := svc.GetSession(context.Background(), &GetSessionInput{
+		AssistantId: ptr.String("__AssistantId__"),
+		SessionId:   ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3033,7 +3634,13 @@ func TestCheckResponseSnapshot_ListAIAgentVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAIAgentVersions(context.Background(), &ListAIAgentVersionsInput{})
+	got, err := svc.ListAIAgentVersions(context.Background(), &ListAIAgentVersionsInput{
+		AssistantId: ptr.String("__AssistantId__"),
+		AiAgentId:   ptr.String("__AiAgentId__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		Origin:      types.Origin("SYSTEM"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3170,7 +3777,12 @@ func TestCheckResponseSnapshot_ListAIAgents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAIAgents(context.Background(), &ListAIAgentsInput{})
+	got, err := svc.ListAIAgents(context.Background(), &ListAIAgentsInput{
+		AssistantId: ptr.String("__AssistantId__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		Origin:      types.Origin("SYSTEM"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3227,7 +3839,12 @@ func TestCheckResponseSnapshot_ListAIGuardrailVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAIGuardrailVersions(context.Background(), &ListAIGuardrailVersionsInput{})
+	got, err := svc.ListAIGuardrailVersions(context.Background(), &ListAIGuardrailVersionsInput{
+		AssistantId:   ptr.String("__AssistantId__"),
+		AiGuardrailId: ptr.String("__AiGuardrailId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3278,7 +3895,11 @@ func TestCheckResponseSnapshot_ListAIGuardrails(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAIGuardrails(context.Background(), &ListAIGuardrailsInput{})
+	got, err := svc.ListAIGuardrails(context.Background(), &ListAIGuardrailsInput{
+		AssistantId: ptr.String("__AssistantId__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3345,7 +3966,13 @@ func TestCheckResponseSnapshot_ListAIPromptVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAIPromptVersions(context.Background(), &ListAIPromptVersionsInput{})
+	got, err := svc.ListAIPromptVersions(context.Background(), &ListAIPromptVersionsInput{
+		AssistantId: ptr.String("__AssistantId__"),
+		AiPromptId:  ptr.String("__AiPromptId__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		Origin:      types.Origin("SYSTEM"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3406,7 +4033,12 @@ func TestCheckResponseSnapshot_ListAIPrompts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAIPrompts(context.Background(), &ListAIPromptsInput{})
+	got, err := svc.ListAIPrompts(context.Background(), &ListAIPromptsInput{
+		AssistantId: ptr.String("__AssistantId__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		Origin:      types.Origin("SYSTEM"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3461,7 +4093,11 @@ func TestCheckResponseSnapshot_ListAssistantAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssistantAssociations(context.Background(), &ListAssistantAssociationsInput{})
+	got, err := svc.ListAssistantAssociations(context.Background(), &ListAssistantAssociationsInput{
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		AssistantId: ptr.String("__AssistantId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3554,7 +4190,10 @@ func TestCheckResponseSnapshot_ListAssistants(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssistants(context.Background(), &ListAssistantsInput{})
+	got, err := svc.ListAssistants(context.Background(), &ListAssistantsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3611,7 +4250,12 @@ func TestCheckResponseSnapshot_ListContentAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListContentAssociations(context.Background(), &ListContentAssociationsInput{})
+	got, err := svc.ListContentAssociations(context.Background(), &ListContentAssociationsInput{
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		ContentId:       ptr.String("__ContentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3668,7 +4312,11 @@ func TestCheckResponseSnapshot_ListContents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListContents(context.Background(), &ListContentsInput{})
+	got, err := svc.ListContents(context.Background(), &ListContentsInput{
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3733,7 +4381,11 @@ func TestCheckResponseSnapshot_ListImportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListImportJobs(context.Background(), &ListImportJobsInput{})
+	got, err := svc.ListImportJobs(context.Background(), &ListImportJobsInput{
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3876,7 +4528,10 @@ func TestCheckResponseSnapshot_ListKnowledgeBases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListKnowledgeBases(context.Background(), &ListKnowledgeBasesInput{})
+	got, err := svc.ListKnowledgeBases(context.Background(), &ListKnowledgeBasesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3921,7 +4576,12 @@ func TestCheckResponseSnapshot_ListMessageTemplateVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMessageTemplateVersions(context.Background(), &ListMessageTemplateVersionsInput{})
+	got, err := svc.ListMessageTemplateVersions(context.Background(), &ListMessageTemplateVersionsInput{
+		KnowledgeBaseId:   ptr.String("__KnowledgeBaseId__"),
+		MessageTemplateId: ptr.String("__MessageTemplateId__"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3998,7 +4658,11 @@ func TestCheckResponseSnapshot_ListMessageTemplates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMessageTemplates(context.Background(), &ListMessageTemplatesInput{})
+	got, err := svc.ListMessageTemplates(context.Background(), &ListMessageTemplatesInput{
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4095,7 +4759,13 @@ func TestCheckResponseSnapshot_ListMessages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMessages(context.Background(), &ListMessagesInput{})
+	got, err := svc.ListMessages(context.Background(), &ListMessagesInput{
+		AssistantId: ptr.String("__AssistantId__"),
+		SessionId:   ptr.String("__SessionId__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		Filter:      types.MessageFilterType("ALL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4144,7 +4814,13 @@ func TestCheckResponseSnapshot_ListModels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListModels(context.Background(), &ListModelsInput{})
+	got, err := svc.ListModels(context.Background(), &ListModelsInput{
+		AssistantId:    ptr.String("__AssistantId__"),
+		AiPromptType:   types.AIPromptType("ANSWER_GENERATION"),
+		ModelLifecycle: types.ModelLifecycle("ACTIVE"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4209,7 +4885,11 @@ func TestCheckResponseSnapshot_ListQuickResponses(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListQuickResponses(context.Background(), &ListQuickResponsesInput{})
+	got, err := svc.ListQuickResponses(context.Background(), &ListQuickResponsesInput{
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4918,7 +5598,12 @@ func TestCheckResponseSnapshot_ListSpans(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSpans(context.Background(), &ListSpansInput{})
+	got, err := svc.ListSpans(context.Background(), &ListSpansInput{
+		AssistantId: ptr.String("__AssistantId__"),
+		SessionId:   ptr.String("__SessionId__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4941,7 +5626,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4975,7 +5662,14 @@ func TestCheckResponseSnapshot_NotifyRecommendationsReceived(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.NotifyRecommendationsReceived(context.Background(), &NotifyRecommendationsReceivedInput{})
+	got, err := svc.NotifyRecommendationsReceived(context.Background(), &NotifyRecommendationsReceivedInput{
+		AssistantId: ptr.String("__AssistantId__"),
+		SessionId:   ptr.String("__SessionId__"),
+		RecommendationIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5004,7 +5698,16 @@ func TestCheckResponseSnapshot_PutFeedback(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutFeedback(context.Background(), &PutFeedbackInput{})
+	got, err := svc.PutFeedback(context.Background(), &PutFeedbackInput{
+		AssistantId: ptr.String("__AssistantId__"),
+		TargetId:    ptr.String("__TargetId__"),
+		TargetType:  types.TargetType("RECOMMENDATION"),
+		ContentFeedback: &types.ContentFeedbackDataMemberGenerativeContentFeedbackData{
+			Value: types.GenerativeContentFeedbackData{
+				Relevance: types.Relevance("HELPFUL"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5205,7 +5908,35 @@ func TestCheckResponseSnapshot_QueryAssistant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.QueryAssistant(context.Background(), &QueryAssistantInput{})
+	got, err := svc.QueryAssistant(context.Background(), &QueryAssistantInput{
+		AssistantId: ptr.String("__AssistantId__"),
+		QueryText:   ptr.String("__QueryText__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		SessionId:   ptr.String("__SessionId__"),
+		QueryCondition: []types.QueryCondition{
+			&types.QueryConditionMemberSingle{
+				Value: types.QueryConditionItem{
+					Field:      types.QueryConditionFieldName("RESULT_TYPE"),
+					Comparator: types.QueryConditionComparisonOperator("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			&types.QueryConditionMemberSingle{
+				Value: types.QueryConditionItem{
+					Field:      types.QueryConditionFieldName("RESULT_TYPE"),
+					Comparator: types.QueryConditionComparisonOperator("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+		},
+		QueryInputData: &types.QueryInputDataMemberQueryTextInputData{
+			Value: types.QueryTextInputData{
+				Text: ptr.String("__Text__"),
+			},
+		},
+		OverrideKnowledgeBaseSearchType: types.KnowledgeBaseSearchType("HYBRID"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5224,7 +5955,11 @@ func TestCheckResponseSnapshot_RemoveAssistantAIAgent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveAssistantAIAgent(context.Background(), &RemoveAssistantAIAgentInput{})
+	got, err := svc.RemoveAssistantAIAgent(context.Background(), &RemoveAssistantAIAgentInput{
+		AssistantId:         ptr.String("__AssistantId__"),
+		AiAgentType:         types.AIAgentType("MANUAL_SEARCH"),
+		OrchestratorUseCase: ptr.String("__OrchestratorUseCase__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5243,7 +5978,9 @@ func TestCheckResponseSnapshot_RemoveKnowledgeBaseTemplateUri(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveKnowledgeBaseTemplateUri(context.Background(), &RemoveKnowledgeBaseTemplateUriInput{})
+	got, err := svc.RemoveKnowledgeBaseTemplateUri(context.Background(), &RemoveKnowledgeBaseTemplateUriInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5322,7 +6059,90 @@ func TestCheckResponseSnapshot_RenderMessageTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RenderMessageTemplate(context.Background(), &RenderMessageTemplateInput{})
+	got, err := svc.RenderMessageTemplate(context.Background(), &RenderMessageTemplateInput{
+		KnowledgeBaseId:   ptr.String("__KnowledgeBaseId__"),
+		MessageTemplateId: ptr.String("__MessageTemplateId__"),
+		Attributes: &types.MessageTemplateAttributes{
+			SystemAttributes: &types.SystemAttributes{
+				Name: ptr.String("__Name__"),
+				CustomerEndpoint: &types.SystemEndpointAttributes{
+					Address: ptr.String("__Address__"),
+				},
+				SystemEndpoint: &types.SystemEndpointAttributes{
+					Address: ptr.String("__Address__"),
+				},
+			},
+			AgentAttributes: &types.AgentAttributes{
+				FirstName: ptr.String("__FirstName__"),
+				LastName:  ptr.String("__LastName__"),
+			},
+			CustomerProfileAttributes: &types.CustomerProfileAttributes{
+				ProfileId:             ptr.String("__ProfileId__"),
+				ProfileARN:            ptr.String("__ProfileARN__"),
+				FirstName:             ptr.String("__FirstName__"),
+				MiddleName:            ptr.String("__MiddleName__"),
+				LastName:              ptr.String("__LastName__"),
+				AccountNumber:         ptr.String("__AccountNumber__"),
+				EmailAddress:          ptr.String("__EmailAddress__"),
+				PhoneNumber:           ptr.String("__PhoneNumber__"),
+				AdditionalInformation: ptr.String("__AdditionalInformation__"),
+				PartyType:             ptr.String("__PartyType__"),
+				BusinessName:          ptr.String("__BusinessName__"),
+				BirthDate:             ptr.String("__BirthDate__"),
+				Gender:                ptr.String("__Gender__"),
+				MobilePhoneNumber:     ptr.String("__MobilePhoneNumber__"),
+				HomePhoneNumber:       ptr.String("__HomePhoneNumber__"),
+				BusinessPhoneNumber:   ptr.String("__BusinessPhoneNumber__"),
+				BusinessEmailAddress:  ptr.String("__BusinessEmailAddress__"),
+				Address1:              ptr.String("__Address1__"),
+				Address2:              ptr.String("__Address2__"),
+				Address3:              ptr.String("__Address3__"),
+				Address4:              ptr.String("__Address4__"),
+				City:                  ptr.String("__City__"),
+				County:                ptr.String("__County__"),
+				Country:               ptr.String("__Country__"),
+				PostalCode:            ptr.String("__PostalCode__"),
+				Province:              ptr.String("__Province__"),
+				State:                 ptr.String("__State__"),
+				ShippingAddress1:      ptr.String("__ShippingAddress1__"),
+				ShippingAddress2:      ptr.String("__ShippingAddress2__"),
+				ShippingAddress3:      ptr.String("__ShippingAddress3__"),
+				ShippingAddress4:      ptr.String("__ShippingAddress4__"),
+				ShippingCity:          ptr.String("__ShippingCity__"),
+				ShippingCounty:        ptr.String("__ShippingCounty__"),
+				ShippingCountry:       ptr.String("__ShippingCountry__"),
+				ShippingPostalCode:    ptr.String("__ShippingPostalCode__"),
+				ShippingProvince:      ptr.String("__ShippingProvince__"),
+				ShippingState:         ptr.String("__ShippingState__"),
+				MailingAddress1:       ptr.String("__MailingAddress1__"),
+				MailingAddress2:       ptr.String("__MailingAddress2__"),
+				MailingAddress3:       ptr.String("__MailingAddress3__"),
+				MailingAddress4:       ptr.String("__MailingAddress4__"),
+				MailingCity:           ptr.String("__MailingCity__"),
+				MailingCounty:         ptr.String("__MailingCounty__"),
+				MailingCountry:        ptr.String("__MailingCountry__"),
+				MailingPostalCode:     ptr.String("__MailingPostalCode__"),
+				MailingProvince:       ptr.String("__MailingProvince__"),
+				MailingState:          ptr.String("__MailingState__"),
+				BillingAddress1:       ptr.String("__BillingAddress1__"),
+				BillingAddress2:       ptr.String("__BillingAddress2__"),
+				BillingAddress3:       ptr.String("__BillingAddress3__"),
+				BillingAddress4:       ptr.String("__BillingAddress4__"),
+				BillingCity:           ptr.String("__BillingCity__"),
+				BillingCounty:         ptr.String("__BillingCounty__"),
+				BillingCountry:        ptr.String("__BillingCountry__"),
+				BillingPostalCode:     ptr.String("__BillingPostalCode__"),
+				BillingProvince:       ptr.String("__BillingProvince__"),
+				BillingState:          ptr.String("__BillingState__"),
+				Custom: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			CustomAttributes: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5356,7 +6176,36 @@ func TestCheckResponseSnapshot_Retrieve(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Retrieve(context.Background(), &RetrieveInput{})
+	got, err := svc.Retrieve(context.Background(), &RetrieveInput{
+		AssistantId: ptr.String("__AssistantId__"),
+		RetrievalConfiguration: &types.RetrievalConfiguration{
+			KnowledgeSource: &types.KnowledgeSourceMemberAssistantAssociationIds{
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Filter: &types.RetrievalFilterConfigurationMemberAndAll{
+				Value: []types.RetrievalFilterConfiguration{
+					&types.RetrievalFilterConfigurationMemberEquals{
+						Value: types.FilterAttribute{
+							Key:   ptr.String("__Key__"),
+							Value: document.NewLazyDocument("__Document__"),
+						},
+					},
+					&types.RetrievalFilterConfigurationMemberEquals{
+						Value: types.FilterAttribute{
+							Key:   ptr.String("__Key__"),
+							Value: document.NewLazyDocument("__Document__"),
+						},
+					},
+				},
+			},
+			NumberOfResults:                 ptr.Int32(1),
+			OverrideKnowledgeBaseSearchType: types.KnowledgeBaseSearchType("HYBRID"),
+		},
+		RetrievalQuery: ptr.String("__RetrievalQuery__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5413,7 +6262,25 @@ func TestCheckResponseSnapshot_SearchContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchContent(context.Background(), &SearchContentInput{})
+	got, err := svc.SearchContent(context.Background(), &SearchContentInput{
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		SearchExpression: &types.SearchExpression{
+			Filters: []types.Filter{
+				{
+					Field:    types.FilterField("NAME"),
+					Operator: types.FilterOperator("EQUALS"),
+					Value:    ptr.String("__Value__"),
+				},
+				{
+					Field:    types.FilterField("NAME"),
+					Operator: types.FilterOperator("EQUALS"),
+					Value:    ptr.String("__Value__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5516,7 +6383,59 @@ func TestCheckResponseSnapshot_SearchMessageTemplates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchMessageTemplates(context.Background(), &SearchMessageTemplatesInput{})
+	got, err := svc.SearchMessageTemplates(context.Background(), &SearchMessageTemplatesInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		SearchExpression: &types.MessageTemplateSearchExpression{
+			Queries: []types.MessageTemplateQueryField{
+				{
+					Name: ptr.String("__Name__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Operator:       types.MessageTemplateQueryOperator("CONTAINS"),
+					AllowFuzziness: ptr.Bool(true),
+					Priority:       types.Priority("HIGH"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Operator:       types.MessageTemplateQueryOperator("CONTAINS"),
+					AllowFuzziness: ptr.Bool(true),
+					Priority:       types.Priority("HIGH"),
+				},
+			},
+			Filters: []types.MessageTemplateFilterField{
+				{
+					Name: ptr.String("__Name__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Operator:           types.MessageTemplateFilterOperator("EQUALS"),
+					IncludeNoExistence: ptr.Bool(true),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Operator:           types.MessageTemplateFilterOperator("EQUALS"),
+					IncludeNoExistence: ptr.Bool(true),
+				},
+			},
+			OrderOnField: &types.MessageTemplateOrderField{
+				Name:  ptr.String("__Name__"),
+				Order: types.Order("ASC"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5631,7 +6550,62 @@ func TestCheckResponseSnapshot_SearchQuickResponses(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchQuickResponses(context.Background(), &SearchQuickResponsesInput{})
+	got, err := svc.SearchQuickResponses(context.Background(), &SearchQuickResponsesInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		SearchExpression: &types.QuickResponseSearchExpression{
+			Queries: []types.QuickResponseQueryField{
+				{
+					Name: ptr.String("__Name__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Operator:       types.QuickResponseQueryOperator("CONTAINS"),
+					AllowFuzziness: ptr.Bool(true),
+					Priority:       types.Priority("HIGH"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Operator:       types.QuickResponseQueryOperator("CONTAINS"),
+					AllowFuzziness: ptr.Bool(true),
+					Priority:       types.Priority("HIGH"),
+				},
+			},
+			Filters: []types.QuickResponseFilterField{
+				{
+					Name: ptr.String("__Name__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Operator:           types.QuickResponseFilterOperator("EQUALS"),
+					IncludeNoExistence: ptr.Bool(true),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Operator:           types.QuickResponseFilterOperator("EQUALS"),
+					IncludeNoExistence: ptr.Bool(true),
+				},
+			},
+			OrderOnField: &types.QuickResponseOrderField{
+				Name:  ptr.String("__Name__"),
+				Order: types.Order("ASC"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5666,7 +6640,25 @@ func TestCheckResponseSnapshot_SearchSessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchSessions(context.Background(), &SearchSessionsInput{})
+	got, err := svc.SearchSessions(context.Background(), &SearchSessionsInput{
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		AssistantId: ptr.String("__AssistantId__"),
+		SearchExpression: &types.SearchExpression{
+			Filters: []types.Filter{
+				{
+					Field:    types.FilterField("NAME"),
+					Operator: types.FilterOperator("EQUALS"),
+					Value:    ptr.String("__Value__"),
+				},
+				{
+					Field:    types.FilterField("NAME"),
+					Operator: types.FilterOperator("EQUALS"),
+					Value:    ptr.String("__Value__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5692,7 +6684,72 @@ func TestCheckResponseSnapshot_SendMessage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendMessage(context.Background(), &SendMessageInput{})
+	got, err := svc.SendMessage(context.Background(), &SendMessageInput{
+		AssistantId: ptr.String("__AssistantId__"),
+		SessionId:   ptr.String("__SessionId__"),
+		Type:        types.MessageType("TEXT"),
+		Message: &types.MessageInput{
+			Value: &types.MessageDataMemberText{
+				Value: types.TextMessage{
+					Value: ptr.String("__Value__"),
+					Citations: []types.Citation{
+						{
+							ContentId:       ptr.String("__ContentId__"),
+							Title:           ptr.String("__Title__"),
+							KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+							CitationSpan: &types.CitationSpan{
+								BeginOffsetInclusive: 1,
+								EndOffsetExclusive:   1,
+							},
+							SourceURL:     ptr.String("__SourceURL__"),
+							ReferenceType: types.ReferenceType("WEB_CRAWLER"),
+						},
+						{
+							ContentId:       ptr.String("__ContentId__"),
+							Title:           ptr.String("__Title__"),
+							KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+							CitationSpan: &types.CitationSpan{
+								BeginOffsetInclusive: 1,
+								EndOffsetExclusive:   1,
+							},
+							SourceURL:     ptr.String("__SourceURL__"),
+							ReferenceType: types.ReferenceType("WEB_CRAWLER"),
+						},
+					},
+					AiGuardrailAssessment: &types.AIGuardrailAssessment{
+						Blocked: ptr.Bool(true),
+					},
+				},
+			},
+		},
+		AiAgentId: ptr.String("__AiAgentId__"),
+		ConversationContext: &types.ConversationContext{
+			SelfServiceConversationHistory: []types.SelfServiceConversationHistory{
+				{
+					TurnNumber:      ptr.Int32(1),
+					InputTranscript: ptr.String("__InputTranscript__"),
+					BotResponse:     ptr.String("__BotResponse__"),
+					Timestamp:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				{
+					TurnNumber:      ptr.Int32(1),
+					InputTranscript: ptr.String("__InputTranscript__"),
+					BotResponse:     ptr.String("__BotResponse__"),
+					Timestamp:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+		},
+		Configuration: &types.MessageConfiguration{
+			GenerateFillerMessage:  ptr.Bool(true),
+			GenerateChunkedMessage: ptr.Bool(true),
+		},
+		ClientToken:         ptr.String("__ClientToken__"),
+		OrchestratorUseCase: ptr.String("__OrchestratorUseCase__"),
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
+		OriginRequestId: ptr.String("__OriginRequestId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5718,7 +6775,11 @@ func TestCheckResponseSnapshot_StartContentUpload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartContentUpload(context.Background(), &StartContentUploadInput{})
+	got, err := svc.StartContentUpload(context.Background(), &StartContentUploadInput{
+		KnowledgeBaseId:        ptr.String("__KnowledgeBaseId__"),
+		ContentType:            ptr.String("__ContentType__"),
+		PresignedUrlTimeToLive: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5762,7 +6823,23 @@ func TestCheckResponseSnapshot_StartImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartImportJob(context.Background(), &StartImportJobInput{})
+	got, err := svc.StartImportJob(context.Background(), &StartImportJobInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		ImportJobType:   types.ImportJobType("QUICK_RESPONSES"),
+		UploadId:        ptr.String("__UploadId__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
+		ExternalSourceConfiguration: &types.ExternalSourceConfiguration{
+			Source: types.ExternalSource("AMAZON_CONNECT"),
+			Configuration: &types.ConfigurationMemberConnectConfiguration{
+				Value: types.ConnectConfiguration{
+					InstanceId: ptr.String("__InstanceId__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5781,7 +6858,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5800,7 +6882,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5877,7 +6965,54 @@ func TestCheckResponseSnapshot_UpdateAIAgent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAIAgent(context.Background(), &UpdateAIAgentInput{})
+	got, err := svc.UpdateAIAgent(context.Background(), &UpdateAIAgentInput{
+		ClientToken:      ptr.String("__ClientToken__"),
+		AssistantId:      ptr.String("__AssistantId__"),
+		AiAgentId:        ptr.String("__AiAgentId__"),
+		VisibilityStatus: types.VisibilityStatus("SAVED"),
+		Configuration: &types.AIAgentConfigurationMemberManualSearchAIAgentConfiguration{
+			Value: types.ManualSearchAIAgentConfiguration{
+				AnswerGenerationAIPromptId:    ptr.String("__AnswerGenerationAIPromptId__"),
+				AnswerGenerationAIGuardrailId: ptr.String("__AnswerGenerationAIGuardrailId__"),
+				AssociationConfigurations: []types.AssociationConfiguration{
+					{
+						AssociationId:   ptr.String("__AssociationId__"),
+						AssociationType: types.AIAgentAssociationConfigurationType("KNOWLEDGE_BASE"),
+						AssociationConfigurationData: &types.AssociationConfigurationDataMemberKnowledgeBaseAssociationConfigurationData{
+							Value: types.KnowledgeBaseAssociationConfigurationData{
+								ContentTagFilter: &types.TagFilterMemberTagCondition{
+									Value: types.TagCondition{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								MaxResults:                      ptr.Int32(1),
+								OverrideKnowledgeBaseSearchType: types.KnowledgeBaseSearchType("HYBRID"),
+							},
+						},
+					},
+					{
+						AssociationId:   ptr.String("__AssociationId__"),
+						AssociationType: types.AIAgentAssociationConfigurationType("KNOWLEDGE_BASE"),
+						AssociationConfigurationData: &types.AssociationConfigurationDataMemberKnowledgeBaseAssociationConfigurationData{
+							Value: types.KnowledgeBaseAssociationConfigurationData{
+								ContentTagFilter: &types.TagFilterMemberTagCondition{
+									Value: types.TagCondition{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								MaxResults:                      ptr.Int32(1),
+								OverrideKnowledgeBaseSearchType: types.KnowledgeBaseSearchType("HYBRID"),
+							},
+						},
+					},
+				},
+				Locale: ptr.String("__Locale__"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6005,7 +7140,107 @@ func TestCheckResponseSnapshot_UpdateAIGuardrail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAIGuardrail(context.Background(), &UpdateAIGuardrailInput{})
+	got, err := svc.UpdateAIGuardrail(context.Background(), &UpdateAIGuardrailInput{
+		ClientToken:             ptr.String("__ClientToken__"),
+		AssistantId:             ptr.String("__AssistantId__"),
+		AiGuardrailId:           ptr.String("__AiGuardrailId__"),
+		VisibilityStatus:        types.VisibilityStatus("SAVED"),
+		BlockedInputMessaging:   ptr.String("__BlockedInputMessaging__"),
+		BlockedOutputsMessaging: ptr.String("__BlockedOutputsMessaging__"),
+		Description:             ptr.String("__Description__"),
+		TopicPolicyConfig: &types.AIGuardrailTopicPolicyConfig{
+			TopicsConfig: []types.GuardrailTopicConfig{
+				{
+					Name:       ptr.String("__Name__"),
+					Definition: ptr.String("__Definition__"),
+					Examples: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Type: types.GuardrailTopicType("DENY"),
+				},
+				{
+					Name:       ptr.String("__Name__"),
+					Definition: ptr.String("__Definition__"),
+					Examples: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Type: types.GuardrailTopicType("DENY"),
+				},
+			},
+		},
+		ContentPolicyConfig: &types.AIGuardrailContentPolicyConfig{
+			FiltersConfig: []types.GuardrailContentFilterConfig{
+				{
+					Type:           types.GuardrailContentFilterType("SEXUAL"),
+					InputStrength:  types.GuardrailFilterStrength("NONE"),
+					OutputStrength: types.GuardrailFilterStrength("NONE"),
+				},
+				{
+					Type:           types.GuardrailContentFilterType("SEXUAL"),
+					InputStrength:  types.GuardrailFilterStrength("NONE"),
+					OutputStrength: types.GuardrailFilterStrength("NONE"),
+				},
+			},
+		},
+		WordPolicyConfig: &types.AIGuardrailWordPolicyConfig{
+			WordsConfig: []types.GuardrailWordConfig{
+				{
+					Text: ptr.String("__Text__"),
+				},
+				{
+					Text: ptr.String("__Text__"),
+				},
+			},
+			ManagedWordListsConfig: []types.GuardrailManagedWordsConfig{
+				{
+					Type: types.GuardrailManagedWordsType("PROFANITY"),
+				},
+				{
+					Type: types.GuardrailManagedWordsType("PROFANITY"),
+				},
+			},
+		},
+		SensitiveInformationPolicyConfig: &types.AIGuardrailSensitiveInformationPolicyConfig{
+			PiiEntitiesConfig: []types.GuardrailPiiEntityConfig{
+				{
+					Type:   types.GuardrailPiiEntityType("ADDRESS"),
+					Action: types.GuardrailSensitiveInformationAction("BLOCK"),
+				},
+				{
+					Type:   types.GuardrailPiiEntityType("ADDRESS"),
+					Action: types.GuardrailSensitiveInformationAction("BLOCK"),
+				},
+			},
+			RegexesConfig: []types.GuardrailRegexConfig{
+				{
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+					Pattern:     ptr.String("__Pattern__"),
+					Action:      types.GuardrailSensitiveInformationAction("BLOCK"),
+				},
+				{
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+					Pattern:     ptr.String("__Pattern__"),
+					Action:      types.GuardrailSensitiveInformationAction("BLOCK"),
+				},
+			},
+		},
+		ContextualGroundingPolicyConfig: &types.AIGuardrailContextualGroundingPolicyConfig{
+			FiltersConfig: []types.GuardrailContextualGroundingFilterConfig{
+				{
+					Type:      types.GuardrailContextualGroundingFilterType("GROUNDING"),
+					Threshold: 1.0,
+				},
+				{
+					Type:      types.GuardrailContextualGroundingFilterType("GROUNDING"),
+					Threshold: 1.0,
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6055,7 +7290,25 @@ func TestCheckResponseSnapshot_UpdateAIPrompt(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAIPrompt(context.Background(), &UpdateAIPromptInput{})
+	got, err := svc.UpdateAIPrompt(context.Background(), &UpdateAIPromptInput{
+		ClientToken:      ptr.String("__ClientToken__"),
+		AssistantId:      ptr.String("__AssistantId__"),
+		AiPromptId:       ptr.String("__AiPromptId__"),
+		VisibilityStatus: types.VisibilityStatus("SAVED"),
+		TemplateConfiguration: &types.AIPromptTemplateConfigurationMemberTextFullAIPromptEditTemplateConfiguration{
+			Value: types.TextFullAIPromptEditTemplateConfiguration{
+				Text: ptr.String("__Text__"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+		ModelId:     ptr.String("__ModelId__"),
+		InferenceConfiguration: &types.AIPromptInferenceConfiguration{
+			Temperature:       ptr.Float32(1.0),
+			TopP:              ptr.Float32(1.0),
+			TopK:              ptr.Int32(1),
+			MaxTokensToSample: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6110,7 +7363,14 @@ func TestCheckResponseSnapshot_UpdateAssistantAIAgent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAssistantAIAgent(context.Background(), &UpdateAssistantAIAgentInput{})
+	got, err := svc.UpdateAssistantAIAgent(context.Background(), &UpdateAssistantAIAgentInput{
+		AssistantId: ptr.String("__AssistantId__"),
+		AiAgentType: types.AIAgentType("MANUAL_SEARCH"),
+		Configuration: &types.AIAgentConfigurationData{
+			AiAgentId: ptr.String("__AiAgentId__"),
+		},
+		OrchestratorUseCase: ptr.String("__OrchestratorUseCase__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6150,7 +7410,18 @@ func TestCheckResponseSnapshot_UpdateContent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateContent(context.Background(), &UpdateContentInput{})
+	got, err := svc.UpdateContent(context.Background(), &UpdateContentInput{
+		KnowledgeBaseId:          ptr.String("__KnowledgeBaseId__"),
+		ContentId:                ptr.String("__ContentId__"),
+		RevisionId:               ptr.String("__RevisionId__"),
+		Title:                    ptr.String("__Title__"),
+		OverrideLinkOutUri:       ptr.String("__OverrideLinkOutUri__"),
+		RemoveOverrideLinkOutUri: ptr.Bool(true),
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
+		UploadId: ptr.String("__UploadId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6236,7 +7507,10 @@ func TestCheckResponseSnapshot_UpdateKnowledgeBaseTemplateUri(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateKnowledgeBaseTemplateUri(context.Background(), &UpdateKnowledgeBaseTemplateUriInput{})
+	got, err := svc.UpdateKnowledgeBaseTemplateUri(context.Background(), &UpdateKnowledgeBaseTemplateUriInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		TemplateUri:     ptr.String("__TemplateUri__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6402,7 +7676,124 @@ func TestCheckResponseSnapshot_UpdateMessageTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMessageTemplate(context.Background(), &UpdateMessageTemplateInput{})
+	got, err := svc.UpdateMessageTemplate(context.Background(), &UpdateMessageTemplateInput{
+		KnowledgeBaseId:   ptr.String("__KnowledgeBaseId__"),
+		MessageTemplateId: ptr.String("__MessageTemplateId__"),
+		Content: &types.MessageTemplateContentProviderMemberEmail{
+			Value: types.EmailMessageTemplateContent{
+				Subject: ptr.String("__Subject__"),
+				Body: &types.EmailMessageTemplateContentBody{
+					PlainText: &types.MessageTemplateBodyContentProviderMemberContent{
+						Value: "__MessageTemplateBodyContentProviderMemberContent__",
+					},
+					Html: &types.MessageTemplateBodyContentProviderMemberContent{
+						Value: "__MessageTemplateBodyContentProviderMemberContent__",
+					},
+				},
+				Headers: []types.EmailHeader{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		Language: ptr.String("__Language__"),
+		SourceConfiguration: &types.MessageTemplateSourceConfigurationMemberWhatsApp{
+			Value: types.WhatsAppMessageTemplateSourceConfiguration{
+				BusinessAccountId: ptr.String("__BusinessAccountId__"),
+				TemplateId:        ptr.String("__TemplateId__"),
+				Components: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		DefaultAttributes: &types.MessageTemplateAttributes{
+			SystemAttributes: &types.SystemAttributes{
+				Name: ptr.String("__Name__"),
+				CustomerEndpoint: &types.SystemEndpointAttributes{
+					Address: ptr.String("__Address__"),
+				},
+				SystemEndpoint: &types.SystemEndpointAttributes{
+					Address: ptr.String("__Address__"),
+				},
+			},
+			AgentAttributes: &types.AgentAttributes{
+				FirstName: ptr.String("__FirstName__"),
+				LastName:  ptr.String("__LastName__"),
+			},
+			CustomerProfileAttributes: &types.CustomerProfileAttributes{
+				ProfileId:             ptr.String("__ProfileId__"),
+				ProfileARN:            ptr.String("__ProfileARN__"),
+				FirstName:             ptr.String("__FirstName__"),
+				MiddleName:            ptr.String("__MiddleName__"),
+				LastName:              ptr.String("__LastName__"),
+				AccountNumber:         ptr.String("__AccountNumber__"),
+				EmailAddress:          ptr.String("__EmailAddress__"),
+				PhoneNumber:           ptr.String("__PhoneNumber__"),
+				AdditionalInformation: ptr.String("__AdditionalInformation__"),
+				PartyType:             ptr.String("__PartyType__"),
+				BusinessName:          ptr.String("__BusinessName__"),
+				BirthDate:             ptr.String("__BirthDate__"),
+				Gender:                ptr.String("__Gender__"),
+				MobilePhoneNumber:     ptr.String("__MobilePhoneNumber__"),
+				HomePhoneNumber:       ptr.String("__HomePhoneNumber__"),
+				BusinessPhoneNumber:   ptr.String("__BusinessPhoneNumber__"),
+				BusinessEmailAddress:  ptr.String("__BusinessEmailAddress__"),
+				Address1:              ptr.String("__Address1__"),
+				Address2:              ptr.String("__Address2__"),
+				Address3:              ptr.String("__Address3__"),
+				Address4:              ptr.String("__Address4__"),
+				City:                  ptr.String("__City__"),
+				County:                ptr.String("__County__"),
+				Country:               ptr.String("__Country__"),
+				PostalCode:            ptr.String("__PostalCode__"),
+				Province:              ptr.String("__Province__"),
+				State:                 ptr.String("__State__"),
+				ShippingAddress1:      ptr.String("__ShippingAddress1__"),
+				ShippingAddress2:      ptr.String("__ShippingAddress2__"),
+				ShippingAddress3:      ptr.String("__ShippingAddress3__"),
+				ShippingAddress4:      ptr.String("__ShippingAddress4__"),
+				ShippingCity:          ptr.String("__ShippingCity__"),
+				ShippingCounty:        ptr.String("__ShippingCounty__"),
+				ShippingCountry:       ptr.String("__ShippingCountry__"),
+				ShippingPostalCode:    ptr.String("__ShippingPostalCode__"),
+				ShippingProvince:      ptr.String("__ShippingProvince__"),
+				ShippingState:         ptr.String("__ShippingState__"),
+				MailingAddress1:       ptr.String("__MailingAddress1__"),
+				MailingAddress2:       ptr.String("__MailingAddress2__"),
+				MailingAddress3:       ptr.String("__MailingAddress3__"),
+				MailingAddress4:       ptr.String("__MailingAddress4__"),
+				MailingCity:           ptr.String("__MailingCity__"),
+				MailingCounty:         ptr.String("__MailingCounty__"),
+				MailingCountry:        ptr.String("__MailingCountry__"),
+				MailingPostalCode:     ptr.String("__MailingPostalCode__"),
+				MailingProvince:       ptr.String("__MailingProvince__"),
+				MailingState:          ptr.String("__MailingState__"),
+				BillingAddress1:       ptr.String("__BillingAddress1__"),
+				BillingAddress2:       ptr.String("__BillingAddress2__"),
+				BillingAddress3:       ptr.String("__BillingAddress3__"),
+				BillingAddress4:       ptr.String("__BillingAddress4__"),
+				BillingCity:           ptr.String("__BillingCity__"),
+				BillingCounty:         ptr.String("__BillingCounty__"),
+				BillingCountry:        ptr.String("__BillingCountry__"),
+				BillingPostalCode:     ptr.String("__BillingPostalCode__"),
+				BillingProvince:       ptr.String("__BillingProvince__"),
+				BillingState:          ptr.String("__BillingState__"),
+				Custom: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			CustomAttributes: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6568,7 +7959,19 @@ func TestCheckResponseSnapshot_UpdateMessageTemplateMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMessageTemplateMetadata(context.Background(), &UpdateMessageTemplateMetadataInput{})
+	got, err := svc.UpdateMessageTemplateMetadata(context.Background(), &UpdateMessageTemplateMetadataInput{
+		KnowledgeBaseId:   ptr.String("__KnowledgeBaseId__"),
+		MessageTemplateId: ptr.String("__MessageTemplateId__"),
+		Name:              ptr.String("__Name__"),
+		Description:       ptr.String("__Description__"),
+		GroupingConfiguration: &types.GroupingConfiguration{
+			Criteria: ptr.String("__Criteria__"),
+			Values: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6626,7 +8029,33 @@ func TestCheckResponseSnapshot_UpdateQuickResponse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateQuickResponse(context.Background(), &UpdateQuickResponseInput{})
+	got, err := svc.UpdateQuickResponse(context.Background(), &UpdateQuickResponseInput{
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		QuickResponseId: ptr.String("__QuickResponseId__"),
+		Name:            ptr.String("__Name__"),
+		Content: &types.QuickResponseDataProviderMemberContent{
+			Value: "__QuickResponseDataProviderMemberContent__",
+		},
+		ContentType: ptr.String("__ContentType__"),
+		GroupingConfiguration: &types.GroupingConfiguration{
+			Criteria: ptr.String("__Criteria__"),
+			Values: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		RemoveGroupingConfiguration: ptr.Bool(true),
+		Description:                 ptr.String("__Description__"),
+		RemoveDescription:           ptr.Bool(true),
+		ShortcutKey:                 ptr.String("__ShortcutKey__"),
+		RemoveShortcutKey:           ptr.Bool(true),
+		IsActive:                    ptr.Bool(true),
+		Channels: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Language: ptr.String("__Language__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6680,7 +8109,33 @@ func TestCheckResponseSnapshot_UpdateSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSession(context.Background(), &UpdateSessionInput{})
+	got, err := svc.UpdateSession(context.Background(), &UpdateSessionInput{
+		AssistantId: ptr.String("__AssistantId__"),
+		SessionId:   ptr.String("__SessionId__"),
+		Description: ptr.String("__Description__"),
+		TagFilter: &types.TagFilterMemberTagCondition{
+			Value: types.TagCondition{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AiAgentConfiguration: map[string]types.AIAgentConfigurationData{
+			"key0": {
+				AiAgentId: ptr.String("__AiAgentId__"),
+			},
+		},
+		OrchestratorConfigurationList: []types.OrchestratorConfigurationEntry{
+			{
+				AiAgentId:           ptr.String("__AiAgentId__"),
+				OrchestratorUseCase: ptr.String("__OrchestratorUseCase__"),
+			},
+			{
+				AiAgentId:           ptr.String("__AiAgentId__"),
+				OrchestratorUseCase: ptr.String("__OrchestratorUseCase__"),
+			},
+		},
+		RemoveOrchestratorConfigurationList: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6717,7 +8172,25 @@ func TestCheckResponseSnapshot_UpdateSessionData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSessionData(context.Background(), &UpdateSessionDataInput{})
+	got, err := svc.UpdateSessionData(context.Background(), &UpdateSessionDataInput{
+		AssistantId: ptr.String("__AssistantId__"),
+		SessionId:   ptr.String("__SessionId__"),
+		Namespace:   types.SessionDataNamespace("Custom"),
+		Data: []types.RuntimeSessionData{
+			{
+				Key: ptr.String("__Key__"),
+				Value: &types.RuntimeSessionDataValueMemberStringValue{
+					Value: "__RuntimeSessionDataValueMemberStringValue__",
+				},
+			},
+			{
+				Key: ptr.String("__Key__"),
+				Value: &types.RuntimeSessionDataValueMemberStringValue{
+					Value: "__RuntimeSessionDataValueMemberStringValue__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6738,7 +8211,11 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateMessageTemplate(context.Background(), &ActivateMessageTemplateInput{})
+	_, opErr := svc.ActivateMessageTemplate(context.Background(), &ActivateMessageTemplateInput{
+		KnowledgeBaseId:   ptr.String("__KnowledgeBaseId__"),
+		MessageTemplateId: ptr.String("__MessageTemplateId__"),
+		VersionNumber:     ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6763,7 +8240,11 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateMessageTemplate(context.Background(), &ActivateMessageTemplateInput{})
+	_, opErr := svc.ActivateMessageTemplate(context.Background(), &ActivateMessageTemplateInput{
+		KnowledgeBaseId:   ptr.String("__KnowledgeBaseId__"),
+		MessageTemplateId: ptr.String("__MessageTemplateId__"),
+		VersionNumber:     ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6788,7 +8269,38 @@ func TestCheckResponseSnapshot_Error_DependencyFailedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSession(context.Background(), &CreateSessionInput{})
+	_, opErr := svc.CreateSession(context.Background(), &CreateSessionInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		AssistantId: ptr.String("__AssistantId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TagFilter: &types.TagFilterMemberTagCondition{
+			Value: types.TagCondition{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AiAgentConfiguration: map[string]types.AIAgentConfigurationData{
+			"key0": {
+				AiAgentId: ptr.String("__AiAgentId__"),
+			},
+		},
+		ContactArn: ptr.String("__ContactArn__"),
+		OrchestratorConfigurationList: []types.OrchestratorConfigurationEntry{
+			{
+				AiAgentId:           ptr.String("__AiAgentId__"),
+				OrchestratorUseCase: ptr.String("__OrchestratorUseCase__"),
+			},
+			{
+				AiAgentId:           ptr.String("__AiAgentId__"),
+				OrchestratorUseCase: ptr.String("__OrchestratorUseCase__"),
+			},
+		},
+		RemoveOrchestratorConfigurationList: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6813,7 +8325,18 @@ func TestCheckResponseSnapshot_Error_PreconditionFailedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateContent(context.Background(), &UpdateContentInput{})
+	_, opErr := svc.UpdateContent(context.Background(), &UpdateContentInput{
+		KnowledgeBaseId:          ptr.String("__KnowledgeBaseId__"),
+		ContentId:                ptr.String("__ContentId__"),
+		RevisionId:               ptr.String("__RevisionId__"),
+		Title:                    ptr.String("__Title__"),
+		OverrideLinkOutUri:       ptr.String("__OverrideLinkOutUri__"),
+		RemoveOverrideLinkOutUri: ptr.Bool(true),
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
+		UploadId: ptr.String("__UploadId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6838,7 +8361,35 @@ func TestCheckResponseSnapshot_Error_RequestTimeoutException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.QueryAssistant(context.Background(), &QueryAssistantInput{})
+	_, opErr := svc.QueryAssistant(context.Background(), &QueryAssistantInput{
+		AssistantId: ptr.String("__AssistantId__"),
+		QueryText:   ptr.String("__QueryText__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		SessionId:   ptr.String("__SessionId__"),
+		QueryCondition: []types.QueryCondition{
+			&types.QueryConditionMemberSingle{
+				Value: types.QueryConditionItem{
+					Field:      types.QueryConditionFieldName("RESULT_TYPE"),
+					Comparator: types.QueryConditionComparisonOperator("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			&types.QueryConditionMemberSingle{
+				Value: types.QueryConditionItem{
+					Field:      types.QueryConditionFieldName("RESULT_TYPE"),
+					Comparator: types.QueryConditionComparisonOperator("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+		},
+		QueryInputData: &types.QueryInputDataMemberQueryTextInputData{
+			Value: types.QueryTextInputData{
+				Text: ptr.String("__Text__"),
+			},
+		},
+		OverrideKnowledgeBaseSearchType: types.KnowledgeBaseSearchType("HYBRID"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6864,7 +8415,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateMessageTemplate(context.Background(), &ActivateMessageTemplateInput{})
+	_, opErr := svc.ActivateMessageTemplate(context.Background(), &ActivateMessageTemplateInput{
+		KnowledgeBaseId:   ptr.String("__KnowledgeBaseId__"),
+		MessageTemplateId: ptr.String("__MessageTemplateId__"),
+		VersionNumber:     ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6889,7 +8444,58 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAIAgent(context.Background(), &CreateAIAgentInput{})
+	_, opErr := svc.CreateAIAgent(context.Background(), &CreateAIAgentInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		AssistantId: ptr.String("__AssistantId__"),
+		Name:        ptr.String("__Name__"),
+		Type:        types.AIAgentType("MANUAL_SEARCH"),
+		Configuration: &types.AIAgentConfigurationMemberManualSearchAIAgentConfiguration{
+			Value: types.ManualSearchAIAgentConfiguration{
+				AnswerGenerationAIPromptId:    ptr.String("__AnswerGenerationAIPromptId__"),
+				AnswerGenerationAIGuardrailId: ptr.String("__AnswerGenerationAIGuardrailId__"),
+				AssociationConfigurations: []types.AssociationConfiguration{
+					{
+						AssociationId:   ptr.String("__AssociationId__"),
+						AssociationType: types.AIAgentAssociationConfigurationType("KNOWLEDGE_BASE"),
+						AssociationConfigurationData: &types.AssociationConfigurationDataMemberKnowledgeBaseAssociationConfigurationData{
+							Value: types.KnowledgeBaseAssociationConfigurationData{
+								ContentTagFilter: &types.TagFilterMemberTagCondition{
+									Value: types.TagCondition{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								MaxResults:                      ptr.Int32(1),
+								OverrideKnowledgeBaseSearchType: types.KnowledgeBaseSearchType("HYBRID"),
+							},
+						},
+					},
+					{
+						AssociationId:   ptr.String("__AssociationId__"),
+						AssociationType: types.AIAgentAssociationConfigurationType("KNOWLEDGE_BASE"),
+						AssociationConfigurationData: &types.AssociationConfigurationDataMemberKnowledgeBaseAssociationConfigurationData{
+							Value: types.KnowledgeBaseAssociationConfigurationData{
+								ContentTagFilter: &types.TagFilterMemberTagCondition{
+									Value: types.TagCondition{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								MaxResults:                      ptr.Int32(1),
+								OverrideKnowledgeBaseSearchType: types.KnowledgeBaseSearchType("HYBRID"),
+							},
+						},
+					},
+				},
+				Locale: ptr.String("__Locale__"),
+			},
+		},
+		VisibilityStatus: types.VisibilityStatus("SAVED"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Description: ptr.String("__Description__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6914,7 +8520,11 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateMessageTemplate(context.Background(), &ActivateMessageTemplateInput{})
+	_, opErr := svc.ActivateMessageTemplate(context.Background(), &ActivateMessageTemplateInput{
+		KnowledgeBaseId:   ptr.String("__KnowledgeBaseId__"),
+		MessageTemplateId: ptr.String("__MessageTemplateId__"),
+		VersionNumber:     ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6940,7 +8550,12 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6965,7 +8580,58 @@ func TestCheckResponseSnapshot_Error_UnauthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAIAgent(context.Background(), &CreateAIAgentInput{})
+	_, opErr := svc.CreateAIAgent(context.Background(), &CreateAIAgentInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		AssistantId: ptr.String("__AssistantId__"),
+		Name:        ptr.String("__Name__"),
+		Type:        types.AIAgentType("MANUAL_SEARCH"),
+		Configuration: &types.AIAgentConfigurationMemberManualSearchAIAgentConfiguration{
+			Value: types.ManualSearchAIAgentConfiguration{
+				AnswerGenerationAIPromptId:    ptr.String("__AnswerGenerationAIPromptId__"),
+				AnswerGenerationAIGuardrailId: ptr.String("__AnswerGenerationAIGuardrailId__"),
+				AssociationConfigurations: []types.AssociationConfiguration{
+					{
+						AssociationId:   ptr.String("__AssociationId__"),
+						AssociationType: types.AIAgentAssociationConfigurationType("KNOWLEDGE_BASE"),
+						AssociationConfigurationData: &types.AssociationConfigurationDataMemberKnowledgeBaseAssociationConfigurationData{
+							Value: types.KnowledgeBaseAssociationConfigurationData{
+								ContentTagFilter: &types.TagFilterMemberTagCondition{
+									Value: types.TagCondition{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								MaxResults:                      ptr.Int32(1),
+								OverrideKnowledgeBaseSearchType: types.KnowledgeBaseSearchType("HYBRID"),
+							},
+						},
+					},
+					{
+						AssociationId:   ptr.String("__AssociationId__"),
+						AssociationType: types.AIAgentAssociationConfigurationType("KNOWLEDGE_BASE"),
+						AssociationConfigurationData: &types.AssociationConfigurationDataMemberKnowledgeBaseAssociationConfigurationData{
+							Value: types.KnowledgeBaseAssociationConfigurationData{
+								ContentTagFilter: &types.TagFilterMemberTagCondition{
+									Value: types.TagCondition{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								MaxResults:                      ptr.Int32(1),
+								OverrideKnowledgeBaseSearchType: types.KnowledgeBaseSearchType("HYBRID"),
+							},
+						},
+					},
+				},
+				Locale: ptr.String("__Locale__"),
+			},
+		},
+		VisibilityStatus: types.VisibilityStatus("SAVED"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Description: ptr.String("__Description__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6990,7 +8656,11 @@ func TestCheckResponseSnapshot_Error_UnprocessableContentException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetNextMessage(context.Background(), &GetNextMessageInput{})
+	_, opErr := svc.GetNextMessage(context.Background(), &GetNextMessageInput{
+		AssistantId:      ptr.String("__AssistantId__"),
+		SessionId:        ptr.String("__SessionId__"),
+		NextMessageToken: ptr.String("__NextMessageToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7015,7 +8685,11 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ActivateMessageTemplate(context.Background(), &ActivateMessageTemplateInput{})
+	_, opErr := svc.ActivateMessageTemplate(context.Background(), &ActivateMessageTemplateInput{
+		KnowledgeBaseId:   ptr.String("__KnowledgeBaseId__"),
+		MessageTemplateId: ptr.String("__MessageTemplateId__"),
+		VersionNumber:     ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

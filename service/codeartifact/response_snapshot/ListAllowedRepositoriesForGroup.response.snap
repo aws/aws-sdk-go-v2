@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"allowedRepositories":["__Member__","__Member__"],"nextToken":"__NextToken__"}

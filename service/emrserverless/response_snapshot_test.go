@@ -120,7 +120,11 @@ func TestCheckResponseSnapshot_CancelJobRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelJobRun(context.Background(), &CancelJobRunInput{})
+	got, err := svc.CancelJobRun(context.Background(), &CancelJobRunInput{
+		ApplicationId:                ptr.String("__ApplicationId__"),
+		JobRunId:                     ptr.String("__JobRunId__"),
+		ShutdownGracePeriodInSeconds: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -143,7 +147,130 @@ func TestCheckResponseSnapshot_CreateApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Name:         ptr.String("__Name__"),
+		ReleaseLabel: ptr.String("__ReleaseLabel__"),
+		Type:         ptr.String("__Type__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+		InitialCapacity: map[string]types.InitialCapacityConfig{
+			"key0": {
+				WorkerCount: ptr.Int64(1),
+				WorkerConfiguration: &types.WorkerResourceConfig{
+					Cpu:      ptr.String("__Cpu__"),
+					Memory:   ptr.String("__Memory__"),
+					Disk:     ptr.String("__Disk__"),
+					DiskType: ptr.String("__DiskType__"),
+				},
+			},
+		},
+		MaximumCapacity: &types.MaximumAllowedResources{
+			Cpu:    ptr.String("__Cpu__"),
+			Memory: ptr.String("__Memory__"),
+			Disk:   ptr.String("__Disk__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		AutoStartConfiguration: &types.AutoStartConfig{
+			Enabled: ptr.Bool(true),
+		},
+		AutoStopConfiguration: &types.AutoStopConfig{
+			Enabled:            ptr.Bool(true),
+			IdleTimeoutMinutes: ptr.Int32(1),
+		},
+		NetworkConfiguration: &types.NetworkConfiguration{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Architecture: types.Architecture("ARM64"),
+		ImageConfiguration: &types.ImageConfigurationInput{
+			ImageUri:                         ptr.String("__ImageUri__"),
+			ApplicationLevelDigestResolution: ptr.Bool(true),
+		},
+		WorkerTypeSpecifications: map[string]types.WorkerTypeSpecificationInput{
+			"key0": {
+				ImageConfiguration: &types.ImageConfigurationInput{
+					ImageUri:                         ptr.String("__ImageUri__"),
+					ApplicationLevelDigestResolution: ptr.Bool(true),
+				},
+			},
+		},
+		RuntimeConfiguration: []types.Configuration{
+			{
+				Classification: ptr.String("__Classification__"),
+				Properties: map[string]string{
+					"key0": "__Value__",
+				},
+				Configurations: []types.Configuration{
+					{},
+					{},
+				},
+			},
+			{
+				Classification: ptr.String("__Classification__"),
+				Properties: map[string]string{
+					"key0": "__Value__",
+				},
+				Configurations: []types.Configuration{
+					{},
+					{},
+				},
+			},
+		},
+		MonitoringConfiguration: &types.MonitoringConfiguration{
+			S3MonitoringConfiguration: &types.S3MonitoringConfiguration{
+				LogUri:           ptr.String("__LogUri__"),
+				EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+			},
+			ManagedPersistenceMonitoringConfiguration: &types.ManagedPersistenceMonitoringConfiguration{
+				Enabled:          ptr.Bool(true),
+				EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+			},
+			CloudWatchLoggingConfiguration: &types.CloudWatchLoggingConfiguration{
+				Enabled:             ptr.Bool(true),
+				LogGroupName:        ptr.String("__LogGroupName__"),
+				LogStreamNamePrefix: ptr.String("__LogStreamNamePrefix__"),
+				EncryptionKeyArn:    ptr.String("__EncryptionKeyArn__"),
+				LogTypes: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			PrometheusMonitoringConfiguration: &types.PrometheusMonitoringConfiguration{
+				RemoteWriteUrl: ptr.String("__RemoteWriteUrl__"),
+			},
+		},
+		DiskEncryptionConfiguration: &types.DiskEncryptionConfiguration{
+			EncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+			EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+		},
+		InteractiveConfiguration: &types.InteractiveConfiguration{
+			StudioEnabled:       ptr.Bool(true),
+			LivyEndpointEnabled: ptr.Bool(true),
+			SessionEnabled:      ptr.Bool(true),
+		},
+		SchedulerConfiguration: &types.SchedulerConfiguration{
+			QueueTimeoutMinutes: ptr.Int32(1),
+			MaxConcurrentRuns:   ptr.Int32(1),
+		},
+		IdentityCenterConfiguration: &types.IdentityCenterConfigurationInput{
+			IdentityCenterInstanceArn:     ptr.String("__IdentityCenterInstanceArn__"),
+			UserBackgroundSessionsEnabled: ptr.Bool(true),
+		},
+		JobLevelCostAllocationConfiguration: &types.JobLevelCostAllocationConfiguration{
+			Enabled: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -162,7 +289,9 @@ func TestCheckResponseSnapshot_DeleteApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{})
+	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -314,7 +443,9 @@ func TestCheckResponseSnapshot_GetApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApplication(context.Background(), &GetApplicationInput{})
+	got, err := svc.GetApplication(context.Background(), &GetApplicationInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -335,7 +466,12 @@ func TestCheckResponseSnapshot_GetDashboardForJobRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDashboardForJobRun(context.Background(), &GetDashboardForJobRunInput{})
+	got, err := svc.GetDashboardForJobRun(context.Background(), &GetDashboardForJobRunInput{
+		ApplicationId:           ptr.String("__ApplicationId__"),
+		JobRunId:                ptr.String("__JobRunId__"),
+		Attempt:                 ptr.Int32(1),
+		AccessSystemProfileLogs: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -490,7 +626,11 @@ func TestCheckResponseSnapshot_GetJobRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetJobRun(context.Background(), &GetJobRunInput{})
+	got, err := svc.GetJobRun(context.Background(), &GetJobRunInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		JobRunId:      ptr.String("__JobRunId__"),
+		Attempt:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -511,7 +651,11 @@ func TestCheckResponseSnapshot_GetResourceDashboard(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourceDashboard(context.Background(), &GetResourceDashboardInput{})
+	got, err := svc.GetResourceDashboard(context.Background(), &GetResourceDashboardInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		ResourceId:    ptr.String("__ResourceId__"),
+		ResourceType:  types.ResourceType("SESSION"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -596,7 +740,10 @@ func TestCheckResponseSnapshot_GetSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSession(context.Background(), &GetSessionInput{})
+	got, err := svc.GetSession(context.Background(), &GetSessionInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		SessionId:     ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -621,7 +768,10 @@ func TestCheckResponseSnapshot_GetSessionEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSessionEndpoint(context.Background(), &GetSessionEndpointInput{})
+	got, err := svc.GetSessionEndpoint(context.Background(), &GetSessionEndpointInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		SessionId:     ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -668,7 +818,14 @@ func TestCheckResponseSnapshot_ListApplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplications(context.Background(), &ListApplicationsInput{})
+	got, err := svc.ListApplications(context.Background(), &ListApplicationsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		States: []types.ApplicationState{
+			types.ApplicationState("CREATING"),
+			types.ApplicationState("CREATING"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -725,7 +882,12 @@ func TestCheckResponseSnapshot_ListJobRunAttempts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListJobRunAttempts(context.Background(), &ListJobRunAttemptsInput{})
+	got, err := svc.ListJobRunAttempts(context.Background(), &ListJobRunAttemptsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		JobRunId:      ptr.String("__JobRunId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -784,7 +946,18 @@ func TestCheckResponseSnapshot_ListJobRuns(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListJobRuns(context.Background(), &ListJobRunsInput{})
+	got, err := svc.ListJobRuns(context.Background(), &ListJobRunsInput{
+		ApplicationId:   ptr.String("__ApplicationId__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		CreatedAtAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedAtBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		States: []types.JobRunState{
+			types.JobRunState("SUBMITTED"),
+			types.JobRunState("SUBMITTED"),
+		},
+		Mode: types.JobRunMode("BATCH"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -833,7 +1006,17 @@ func TestCheckResponseSnapshot_ListSessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSessions(context.Background(), &ListSessionsInput{})
+	got, err := svc.ListSessions(context.Background(), &ListSessionsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+		States: []types.SessionState{
+			types.SessionState("SUBMITTED"),
+			types.SessionState("SUBMITTED"),
+		},
+		CreatedAtAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedAtBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -856,7 +1039,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -875,7 +1060,9 @@ func TestCheckResponseSnapshot_StartApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartApplication(context.Background(), &StartApplicationInput{})
+	got, err := svc.StartApplication(context.Background(), &StartApplicationInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -898,7 +1085,93 @@ func TestCheckResponseSnapshot_StartJobRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartJobRun(context.Background(), &StartJobRunInput{})
+	got, err := svc.StartJobRun(context.Background(), &StartJobRunInput{
+		ApplicationId:    ptr.String("__ApplicationId__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		ExecutionIamPolicy: &types.JobRunExecutionIamPolicy{
+			Policy: ptr.String("__Policy__"),
+			PolicyArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		JobDriver: &types.JobDriverMemberSparkSubmit{
+			Value: types.SparkSubmit{
+				EntryPoint: ptr.String("__EntryPoint__"),
+				EntryPointArguments: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SparkSubmitParameters: ptr.String("__SparkSubmitParameters__"),
+			},
+		},
+		ConfigurationOverrides: &types.ConfigurationOverrides{
+			ApplicationConfiguration: []types.Configuration{
+				{
+					Classification: ptr.String("__Classification__"),
+					Properties: map[string]string{
+						"key0": "__Value__",
+					},
+					Configurations: []types.Configuration{
+						{},
+						{},
+					},
+				},
+				{
+					Classification: ptr.String("__Classification__"),
+					Properties: map[string]string{
+						"key0": "__Value__",
+					},
+					Configurations: []types.Configuration{
+						{},
+						{},
+					},
+				},
+			},
+			MonitoringConfiguration: &types.MonitoringConfiguration{
+				S3MonitoringConfiguration: &types.S3MonitoringConfiguration{
+					LogUri:           ptr.String("__LogUri__"),
+					EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+				},
+				ManagedPersistenceMonitoringConfiguration: &types.ManagedPersistenceMonitoringConfiguration{
+					Enabled:          ptr.Bool(true),
+					EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+				},
+				CloudWatchLoggingConfiguration: &types.CloudWatchLoggingConfiguration{
+					Enabled:             ptr.Bool(true),
+					LogGroupName:        ptr.String("__LogGroupName__"),
+					LogStreamNamePrefix: ptr.String("__LogStreamNamePrefix__"),
+					EncryptionKeyArn:    ptr.String("__EncryptionKeyArn__"),
+					LogTypes: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				PrometheusMonitoringConfiguration: &types.PrometheusMonitoringConfiguration{
+					RemoteWriteUrl: ptr.String("__RemoteWriteUrl__"),
+				},
+			},
+			DiskEncryptionConfiguration: &types.DiskEncryptionConfiguration{
+				EncryptionContext: map[string]string{
+					"key0": "__Value__",
+				},
+				EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ExecutionTimeoutMinutes: ptr.Int64(1),
+		Name:                    ptr.String("__Name__"),
+		Mode:                    types.JobRunMode("BATCH"),
+		RetryPolicy: &types.RetryPolicy{
+			MaxAttempts:              ptr.Int32(1),
+			MaxFailedAttemptsPerHour: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -921,7 +1194,40 @@ func TestCheckResponseSnapshot_StartSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartSession(context.Background(), &StartSessionInput{})
+	got, err := svc.StartSession(context.Background(), &StartSessionInput{
+		ApplicationId:    ptr.String("__ApplicationId__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		ConfigurationOverrides: &types.SessionConfigurationOverrides{
+			RuntimeConfiguration: []types.Configuration{
+				{
+					Classification: ptr.String("__Classification__"),
+					Properties: map[string]string{
+						"key0": "__Value__",
+					},
+					Configurations: []types.Configuration{
+						{},
+						{},
+					},
+				},
+				{
+					Classification: ptr.String("__Classification__"),
+					Properties: map[string]string{
+						"key0": "__Value__",
+					},
+					Configurations: []types.Configuration{
+						{},
+						{},
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		IdleTimeoutMinutes: ptr.Int64(1),
+		Name:               ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -940,7 +1246,9 @@ func TestCheckResponseSnapshot_StopApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopApplication(context.Background(), &StopApplicationInput{})
+	got, err := svc.StopApplication(context.Background(), &StopApplicationInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -959,7 +1267,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -981,7 +1294,10 @@ func TestCheckResponseSnapshot_TerminateSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TerminateSession(context.Background(), &TerminateSessionInput{})
+	got, err := svc.TerminateSession(context.Background(), &TerminateSessionInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		SessionId:     ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1000,7 +1316,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1152,7 +1474,126 @@ func TestCheckResponseSnapshot_UpdateApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApplication(context.Background(), &UpdateApplicationInput{})
+	got, err := svc.UpdateApplication(context.Background(), &UpdateApplicationInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		InitialCapacity: map[string]types.InitialCapacityConfig{
+			"key0": {
+				WorkerCount: ptr.Int64(1),
+				WorkerConfiguration: &types.WorkerResourceConfig{
+					Cpu:      ptr.String("__Cpu__"),
+					Memory:   ptr.String("__Memory__"),
+					Disk:     ptr.String("__Disk__"),
+					DiskType: ptr.String("__DiskType__"),
+				},
+			},
+		},
+		MaximumCapacity: &types.MaximumAllowedResources{
+			Cpu:    ptr.String("__Cpu__"),
+			Memory: ptr.String("__Memory__"),
+			Disk:   ptr.String("__Disk__"),
+		},
+		AutoStartConfiguration: &types.AutoStartConfig{
+			Enabled: ptr.Bool(true),
+		},
+		AutoStopConfiguration: &types.AutoStopConfig{
+			Enabled:            ptr.Bool(true),
+			IdleTimeoutMinutes: ptr.Int32(1),
+		},
+		NetworkConfiguration: &types.NetworkConfiguration{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Architecture: types.Architecture("ARM64"),
+		ImageConfiguration: &types.ImageConfigurationInput{
+			ImageUri:                         ptr.String("__ImageUri__"),
+			ApplicationLevelDigestResolution: ptr.Bool(true),
+		},
+		WorkerTypeSpecifications: map[string]types.WorkerTypeSpecificationInput{
+			"key0": {
+				ImageConfiguration: &types.ImageConfigurationInput{
+					ImageUri:                         ptr.String("__ImageUri__"),
+					ApplicationLevelDigestResolution: ptr.Bool(true),
+				},
+			},
+		},
+		InteractiveConfiguration: &types.InteractiveConfiguration{
+			StudioEnabled:       ptr.Bool(true),
+			LivyEndpointEnabled: ptr.Bool(true),
+			SessionEnabled:      ptr.Bool(true),
+		},
+		ReleaseLabel: ptr.String("__ReleaseLabel__"),
+		RuntimeConfiguration: []types.Configuration{
+			{
+				Classification: ptr.String("__Classification__"),
+				Properties: map[string]string{
+					"key0": "__Value__",
+				},
+				Configurations: []types.Configuration{
+					{},
+					{},
+				},
+			},
+			{
+				Classification: ptr.String("__Classification__"),
+				Properties: map[string]string{
+					"key0": "__Value__",
+				},
+				Configurations: []types.Configuration{
+					{},
+					{},
+				},
+			},
+		},
+		MonitoringConfiguration: &types.MonitoringConfiguration{
+			S3MonitoringConfiguration: &types.S3MonitoringConfiguration{
+				LogUri:           ptr.String("__LogUri__"),
+				EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+			},
+			ManagedPersistenceMonitoringConfiguration: &types.ManagedPersistenceMonitoringConfiguration{
+				Enabled:          ptr.Bool(true),
+				EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+			},
+			CloudWatchLoggingConfiguration: &types.CloudWatchLoggingConfiguration{
+				Enabled:             ptr.Bool(true),
+				LogGroupName:        ptr.String("__LogGroupName__"),
+				LogStreamNamePrefix: ptr.String("__LogStreamNamePrefix__"),
+				EncryptionKeyArn:    ptr.String("__EncryptionKeyArn__"),
+				LogTypes: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			PrometheusMonitoringConfiguration: &types.PrometheusMonitoringConfiguration{
+				RemoteWriteUrl: ptr.String("__RemoteWriteUrl__"),
+			},
+		},
+		DiskEncryptionConfiguration: &types.DiskEncryptionConfiguration{
+			EncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+			EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+		},
+		SchedulerConfiguration: &types.SchedulerConfiguration{
+			QueueTimeoutMinutes: ptr.Int32(1),
+			MaxConcurrentRuns:   ptr.Int32(1),
+		},
+		IdentityCenterConfiguration: &types.IdentityCenterConfigurationInput{
+			IdentityCenterInstanceArn:     ptr.String("__IdentityCenterInstanceArn__"),
+			UserBackgroundSessionsEnabled: ptr.Bool(true),
+		},
+		JobLevelCostAllocationConfiguration: &types.JobLevelCostAllocationConfiguration{
+			Enabled: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1173,7 +1614,130 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Name:         ptr.String("__Name__"),
+		ReleaseLabel: ptr.String("__ReleaseLabel__"),
+		Type:         ptr.String("__Type__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+		InitialCapacity: map[string]types.InitialCapacityConfig{
+			"key0": {
+				WorkerCount: ptr.Int64(1),
+				WorkerConfiguration: &types.WorkerResourceConfig{
+					Cpu:      ptr.String("__Cpu__"),
+					Memory:   ptr.String("__Memory__"),
+					Disk:     ptr.String("__Disk__"),
+					DiskType: ptr.String("__DiskType__"),
+				},
+			},
+		},
+		MaximumCapacity: &types.MaximumAllowedResources{
+			Cpu:    ptr.String("__Cpu__"),
+			Memory: ptr.String("__Memory__"),
+			Disk:   ptr.String("__Disk__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		AutoStartConfiguration: &types.AutoStartConfig{
+			Enabled: ptr.Bool(true),
+		},
+		AutoStopConfiguration: &types.AutoStopConfig{
+			Enabled:            ptr.Bool(true),
+			IdleTimeoutMinutes: ptr.Int32(1),
+		},
+		NetworkConfiguration: &types.NetworkConfiguration{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Architecture: types.Architecture("ARM64"),
+		ImageConfiguration: &types.ImageConfigurationInput{
+			ImageUri:                         ptr.String("__ImageUri__"),
+			ApplicationLevelDigestResolution: ptr.Bool(true),
+		},
+		WorkerTypeSpecifications: map[string]types.WorkerTypeSpecificationInput{
+			"key0": {
+				ImageConfiguration: &types.ImageConfigurationInput{
+					ImageUri:                         ptr.String("__ImageUri__"),
+					ApplicationLevelDigestResolution: ptr.Bool(true),
+				},
+			},
+		},
+		RuntimeConfiguration: []types.Configuration{
+			{
+				Classification: ptr.String("__Classification__"),
+				Properties: map[string]string{
+					"key0": "__Value__",
+				},
+				Configurations: []types.Configuration{
+					{},
+					{},
+				},
+			},
+			{
+				Classification: ptr.String("__Classification__"),
+				Properties: map[string]string{
+					"key0": "__Value__",
+				},
+				Configurations: []types.Configuration{
+					{},
+					{},
+				},
+			},
+		},
+		MonitoringConfiguration: &types.MonitoringConfiguration{
+			S3MonitoringConfiguration: &types.S3MonitoringConfiguration{
+				LogUri:           ptr.String("__LogUri__"),
+				EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+			},
+			ManagedPersistenceMonitoringConfiguration: &types.ManagedPersistenceMonitoringConfiguration{
+				Enabled:          ptr.Bool(true),
+				EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+			},
+			CloudWatchLoggingConfiguration: &types.CloudWatchLoggingConfiguration{
+				Enabled:             ptr.Bool(true),
+				LogGroupName:        ptr.String("__LogGroupName__"),
+				LogStreamNamePrefix: ptr.String("__LogStreamNamePrefix__"),
+				EncryptionKeyArn:    ptr.String("__EncryptionKeyArn__"),
+				LogTypes: map[string][]string{
+					"key0": {
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			PrometheusMonitoringConfiguration: &types.PrometheusMonitoringConfiguration{
+				RemoteWriteUrl: ptr.String("__RemoteWriteUrl__"),
+			},
+		},
+		DiskEncryptionConfiguration: &types.DiskEncryptionConfiguration{
+			EncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+			EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+		},
+		InteractiveConfiguration: &types.InteractiveConfiguration{
+			StudioEnabled:       ptr.Bool(true),
+			LivyEndpointEnabled: ptr.Bool(true),
+			SessionEnabled:      ptr.Bool(true),
+		},
+		SchedulerConfiguration: &types.SchedulerConfiguration{
+			QueueTimeoutMinutes: ptr.Int32(1),
+			MaxConcurrentRuns:   ptr.Int32(1),
+		},
+		IdentityCenterConfiguration: &types.IdentityCenterConfigurationInput{
+			IdentityCenterInstanceArn:     ptr.String("__IdentityCenterInstanceArn__"),
+			UserBackgroundSessionsEnabled: ptr.Bool(true),
+		},
+		JobLevelCostAllocationConfiguration: &types.JobLevelCostAllocationConfiguration{
+			Enabled: ptr.Bool(true),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1198,7 +1762,11 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelJobRun(context.Background(), &CancelJobRunInput{})
+	_, opErr := svc.CancelJobRun(context.Background(), &CancelJobRunInput{
+		ApplicationId:                ptr.String("__ApplicationId__"),
+		JobRunId:                     ptr.String("__JobRunId__"),
+		ShutdownGracePeriodInSeconds: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1223,7 +1791,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelJobRun(context.Background(), &CancelJobRunInput{})
+	_, opErr := svc.CancelJobRun(context.Background(), &CancelJobRunInput{
+		ApplicationId:                ptr.String("__ApplicationId__"),
+		JobRunId:                     ptr.String("__JobRunId__"),
+		ShutdownGracePeriodInSeconds: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1248,7 +1820,9 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartApplication(context.Background(), &StartApplicationInput{})
+	_, opErr := svc.StartApplication(context.Background(), &StartApplicationInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1273,7 +1847,11 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelJobRun(context.Background(), &CancelJobRunInput{})
+	_, opErr := svc.CancelJobRun(context.Background(), &CancelJobRunInput{
+		ApplicationId:                ptr.String("__ApplicationId__"),
+		JobRunId:                     ptr.String("__JobRunId__"),
+		ShutdownGracePeriodInSeconds: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

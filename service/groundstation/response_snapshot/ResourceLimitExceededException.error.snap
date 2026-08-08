@@ -1,0 +1,4 @@
+429
+Content-Type: application/json
+
+{"__type":"ResourceLimitExceededException","message":"__Message__","parameterName":"__ParameterName__"}

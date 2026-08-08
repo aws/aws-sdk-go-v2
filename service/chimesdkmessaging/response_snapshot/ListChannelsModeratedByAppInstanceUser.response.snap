@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Channels":[{"ChannelSummary":{"ChannelArn":"__ChannelArn__","LastMessageTimestamp":946684800,"Metadata":"__Metadata__","Mode":"UNRESTRICTED","Name":"__Name__","Privacy":"PUBLIC"}},{"ChannelSummary":{"ChannelArn":"__ChannelArn__","LastMessageTimestamp":946684800,"Metadata":"__Metadata__","Mode":"UNRESTRICTED","Name":"__Name__","Privacy":"PUBLIC"}}],"NextToken":"__NextToken__"}

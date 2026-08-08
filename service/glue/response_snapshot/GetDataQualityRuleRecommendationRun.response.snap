@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.GetDataQualityRuleRecommendationRun
+
+{"AdditionalRunOptions":{"CustomLogGroupPrefix":"__CustomLogGroupPrefix__"},"CompletedOn":946684800,"CreatedRulesetName":"__CreatedRulesetName__","DataQualitySecurityConfiguration":"__DataQualitySecurityConfiguration__","DataSource":{"DataQualityGlueTable":{"AdditionalOptions":{"key0":"__Value__"},"CatalogId":"__CatalogId__","ConnectionName":"__ConnectionName__","DatabaseName":"__DatabaseName__","PreProcessingQuery":"__PreProcessingQuery__","TableName":"__TableName__"},"GlueTable":{"AdditionalOptions":{"key0":"__Value__"},"CatalogId":"__CatalogId__","ConnectionName":"__ConnectionName__","DatabaseName":"__DatabaseName__","TableName":"__TableName__"}},"ErrorString":"__ErrorString__","ExecutionTime":1,"LastModifiedOn":946684800,"NumberOfWorkers":1,"RecommendedRuleset":"__RecommendedRuleset__","Role":"__Role__","RunId":"__RunId__","StartedOn":946684800,"Status":"STARTING","Timeout":1}

@@ -126,7 +126,19 @@ func TestCheckResponseSnapshot_CreateContainer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateContainer(context.Background(), &CreateContainerInput{})
+	got, err := svc.CreateContainer(context.Background(), &CreateContainerInput{
+		ContainerName: ptr.String("__ContainerName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -145,7 +157,9 @@ func TestCheckResponseSnapshot_DeleteContainer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteContainer(context.Background(), &DeleteContainerInput{})
+	got, err := svc.DeleteContainer(context.Background(), &DeleteContainerInput{
+		ContainerName: ptr.String("__ContainerName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -164,7 +178,9 @@ func TestCheckResponseSnapshot_DeleteContainerPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteContainerPolicy(context.Background(), &DeleteContainerPolicyInput{})
+	got, err := svc.DeleteContainerPolicy(context.Background(), &DeleteContainerPolicyInput{
+		ContainerName: ptr.String("__ContainerName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -183,7 +199,9 @@ func TestCheckResponseSnapshot_DeleteCorsPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCorsPolicy(context.Background(), &DeleteCorsPolicyInput{})
+	got, err := svc.DeleteCorsPolicy(context.Background(), &DeleteCorsPolicyInput{
+		ContainerName: ptr.String("__ContainerName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -202,7 +220,9 @@ func TestCheckResponseSnapshot_DeleteLifecyclePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLifecyclePolicy(context.Background(), &DeleteLifecyclePolicyInput{})
+	got, err := svc.DeleteLifecyclePolicy(context.Background(), &DeleteLifecyclePolicyInput{
+		ContainerName: ptr.String("__ContainerName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -221,7 +241,9 @@ func TestCheckResponseSnapshot_DeleteMetricPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMetricPolicy(context.Background(), &DeleteMetricPolicyInput{})
+	got, err := svc.DeleteMetricPolicy(context.Background(), &DeleteMetricPolicyInput{
+		ContainerName: ptr.String("__ContainerName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -249,7 +271,9 @@ func TestCheckResponseSnapshot_DescribeContainer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeContainer(context.Background(), &DescribeContainerInput{})
+	got, err := svc.DescribeContainer(context.Background(), &DescribeContainerInput{
+		ContainerName: ptr.String("__ContainerName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -270,7 +294,9 @@ func TestCheckResponseSnapshot_GetContainerPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetContainerPolicy(context.Background(), &GetContainerPolicyInput{})
+	got, err := svc.GetContainerPolicy(context.Background(), &GetContainerPolicyInput{
+		ContainerName: ptr.String("__ContainerName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -330,7 +356,9 @@ func TestCheckResponseSnapshot_GetCorsPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCorsPolicy(context.Background(), &GetCorsPolicyInput{})
+	got, err := svc.GetCorsPolicy(context.Background(), &GetCorsPolicyInput{
+		ContainerName: ptr.String("__ContainerName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -351,7 +379,9 @@ func TestCheckResponseSnapshot_GetLifecyclePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLifecyclePolicy(context.Background(), &GetLifecyclePolicyInput{})
+	got, err := svc.GetLifecyclePolicy(context.Background(), &GetLifecyclePolicyInput{
+		ContainerName: ptr.String("__ContainerName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -384,7 +414,9 @@ func TestCheckResponseSnapshot_GetMetricPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMetricPolicy(context.Background(), &GetMetricPolicyInput{})
+	got, err := svc.GetMetricPolicy(context.Background(), &GetMetricPolicyInput{
+		ContainerName: ptr.String("__ContainerName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -423,7 +455,10 @@ func TestCheckResponseSnapshot_ListContainers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListContainers(context.Background(), &ListContainersInput{})
+	got, err := svc.ListContainers(context.Background(), &ListContainersInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -453,7 +488,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		Resource: ptr.String("__Resource__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -472,7 +509,10 @@ func TestCheckResponseSnapshot_PutContainerPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutContainerPolicy(context.Background(), &PutContainerPolicyInput{})
+	got, err := svc.PutContainerPolicy(context.Background(), &PutContainerPolicyInput{
+		ContainerName: ptr.String("__ContainerName__"),
+		Policy:        ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -491,7 +531,49 @@ func TestCheckResponseSnapshot_PutCorsPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutCorsPolicy(context.Background(), &PutCorsPolicyInput{})
+	got, err := svc.PutCorsPolicy(context.Background(), &PutCorsPolicyInput{
+		ContainerName: ptr.String("__ContainerName__"),
+		CorsPolicy: []types.CorsRule{
+			{
+				AllowedOrigins: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AllowedMethods: []types.MethodName{
+					types.MethodName("PUT"),
+					types.MethodName("PUT"),
+				},
+				AllowedHeaders: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MaxAgeSeconds: 1,
+				ExposeHeaders: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				AllowedOrigins: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AllowedMethods: []types.MethodName{
+					types.MethodName("PUT"),
+					types.MethodName("PUT"),
+				},
+				AllowedHeaders: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MaxAgeSeconds: 1,
+				ExposeHeaders: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -510,7 +592,10 @@ func TestCheckResponseSnapshot_PutLifecyclePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutLifecyclePolicy(context.Background(), &PutLifecyclePolicyInput{})
+	got, err := svc.PutLifecyclePolicy(context.Background(), &PutLifecyclePolicyInput{
+		ContainerName:   ptr.String("__ContainerName__"),
+		LifecyclePolicy: ptr.String("__LifecyclePolicy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -529,7 +614,22 @@ func TestCheckResponseSnapshot_PutMetricPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutMetricPolicy(context.Background(), &PutMetricPolicyInput{})
+	got, err := svc.PutMetricPolicy(context.Background(), &PutMetricPolicyInput{
+		ContainerName: ptr.String("__ContainerName__"),
+		MetricPolicy: &types.MetricPolicy{
+			ContainerLevelMetrics: types.ContainerLevelMetrics("ENABLED"),
+			MetricPolicyRules: []types.MetricPolicyRule{
+				{
+					ObjectGroup:     ptr.String("__ObjectGroup__"),
+					ObjectGroupName: ptr.String("__ObjectGroupName__"),
+				},
+				{
+					ObjectGroup:     ptr.String("__ObjectGroup__"),
+					ObjectGroupName: ptr.String("__ObjectGroupName__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -548,7 +648,9 @@ func TestCheckResponseSnapshot_StartAccessLogging(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartAccessLogging(context.Background(), &StartAccessLoggingInput{})
+	got, err := svc.StartAccessLogging(context.Background(), &StartAccessLoggingInput{
+		ContainerName: ptr.String("__ContainerName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -567,7 +669,9 @@ func TestCheckResponseSnapshot_StopAccessLogging(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopAccessLogging(context.Background(), &StopAccessLoggingInput{})
+	got, err := svc.StopAccessLogging(context.Background(), &StopAccessLoggingInput{
+		ContainerName: ptr.String("__ContainerName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -586,7 +690,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		Resource: ptr.String("__Resource__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -605,7 +721,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		Resource: ptr.String("__Resource__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -626,7 +748,19 @@ func TestCheckResponseSnapshot_Error_ContainerInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateContainer(context.Background(), &CreateContainerInput{})
+	_, opErr := svc.CreateContainer(context.Background(), &CreateContainerInput{
+		ContainerName: ptr.String("__ContainerName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -651,7 +785,9 @@ func TestCheckResponseSnapshot_Error_ContainerNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteContainer(context.Background(), &DeleteContainerInput{})
+	_, opErr := svc.DeleteContainer(context.Background(), &DeleteContainerInput{
+		ContainerName: ptr.String("__ContainerName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -676,7 +812,9 @@ func TestCheckResponseSnapshot_Error_CorsPolicyNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteCorsPolicy(context.Background(), &DeleteCorsPolicyInput{})
+	_, opErr := svc.DeleteCorsPolicy(context.Background(), &DeleteCorsPolicyInput{
+		ContainerName: ptr.String("__ContainerName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -701,7 +839,19 @@ func TestCheckResponseSnapshot_Error_InternalServerError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateContainer(context.Background(), &CreateContainerInput{})
+	_, opErr := svc.CreateContainer(context.Background(), &CreateContainerInput{
+		ContainerName: ptr.String("__ContainerName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -726,7 +876,19 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateContainer(context.Background(), &CreateContainerInput{})
+	_, opErr := svc.CreateContainer(context.Background(), &CreateContainerInput{
+		ContainerName: ptr.String("__ContainerName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -751,7 +913,9 @@ func TestCheckResponseSnapshot_Error_PolicyNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteContainerPolicy(context.Background(), &DeleteContainerPolicyInput{})
+	_, opErr := svc.DeleteContainerPolicy(context.Background(), &DeleteContainerPolicyInput{
+		ContainerName: ptr.String("__ContainerName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

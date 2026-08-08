@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/document"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -807,7 +808,32 @@ func TestCheckResponseSnapshot_ApplyGuardrail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ApplyGuardrail(context.Background(), &ApplyGuardrailInput{})
+	got, err := svc.ApplyGuardrail(context.Background(), &ApplyGuardrailInput{
+		GuardrailIdentifier: ptr.String("__GuardrailIdentifier__"),
+		GuardrailVersion:    ptr.String("__GuardrailVersion__"),
+		Source:              types.GuardrailContentSource("INPUT"),
+		Content: []types.GuardrailContentBlock{
+			&types.GuardrailContentBlockMemberText{
+				Value: types.GuardrailTextBlock{
+					Text: ptr.String("__Text__"),
+					Qualifiers: []types.GuardrailContentQualifier{
+						types.GuardrailContentQualifier("grounding_source"),
+						types.GuardrailContentQualifier("grounding_source"),
+					},
+				},
+			},
+			&types.GuardrailContentBlockMemberText{
+				Value: types.GuardrailTextBlock{
+					Text: ptr.String("__Text__"),
+					Qualifiers: []types.GuardrailContentQualifier{
+						types.GuardrailContentQualifier("grounding_source"),
+						types.GuardrailContentQualifier("grounding_source"),
+					},
+				},
+			},
+		},
+		OutputScope: types.GuardrailOutputScope("INTERVENTIONS"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -852,7 +878,7 @@ func TestCheckResponseSnapshot_Converse(t *testing.T) {
 		Metrics: &types.ConverseMetrics{
 			LatencyMs: ptr.Int64(1),
 		},
-		AdditionalModelResponseFields: nil,
+		AdditionalModelResponseFields: document.NewLazyDocument("__Document__"),
 		Trace: &types.ConverseTrace{
 			Guardrail: &types.GuardrailTraceAssessment{
 				ModelOutput: []string{
@@ -1870,13 +1896,124 @@ func TestCheckResponseSnapshot_Converse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Converse(context.Background(), &ConverseInput{})
+	got, err := svc.Converse(context.Background(), &ConverseInput{
+		ModelId: ptr.String("__ModelId__"),
+		Messages: []types.Message{
+			{
+				Role: types.ConversationRole("user"),
+				Content: []types.ContentBlock{
+					&types.ContentBlockMemberText{
+						Value: "__ContentBlockMemberText__",
+					},
+					&types.ContentBlockMemberText{
+						Value: "__ContentBlockMemberText__",
+					},
+				},
+			},
+			{
+				Role: types.ConversationRole("user"),
+				Content: []types.ContentBlock{
+					&types.ContentBlockMemberText{
+						Value: "__ContentBlockMemberText__",
+					},
+					&types.ContentBlockMemberText{
+						Value: "__ContentBlockMemberText__",
+					},
+				},
+			},
+		},
+		System: []types.SystemContentBlock{
+			&types.SystemContentBlockMemberText{
+				Value: "__SystemContentBlockMemberText__",
+			},
+			&types.SystemContentBlockMemberText{
+				Value: "__SystemContentBlockMemberText__",
+			},
+		},
+		InferenceConfig: &types.InferenceConfiguration{
+			MaxTokens:   ptr.Int32(1),
+			Temperature: ptr.Float32(1.0),
+			TopP:        ptr.Float32(1.0),
+			StopSequences: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ToolConfig: &types.ToolConfiguration{
+			Tools: []types.Tool{
+				&types.ToolMemberToolSpec{
+					Value: types.ToolSpecification{
+						Name:        ptr.String("__Name__"),
+						Description: ptr.String("__Description__"),
+						InputSchema: &types.ToolInputSchemaMemberJson{
+							Value: document.NewLazyDocument("__Document__"),
+						},
+						Strict: ptr.Bool(true),
+					},
+				},
+				&types.ToolMemberToolSpec{
+					Value: types.ToolSpecification{
+						Name:        ptr.String("__Name__"),
+						Description: ptr.String("__Description__"),
+						InputSchema: &types.ToolInputSchemaMemberJson{
+							Value: document.NewLazyDocument("__Document__"),
+						},
+						Strict: ptr.Bool(true),
+					},
+				},
+			},
+			ToolChoice: &types.ToolChoiceMemberAuto{
+				Value: types.AutoToolChoice{},
+			},
+		},
+		GuardrailConfig: &types.GuardrailConfiguration{
+			GuardrailIdentifier: ptr.String("__GuardrailIdentifier__"),
+			GuardrailVersion:    ptr.String("__GuardrailVersion__"),
+			Trace:               types.GuardrailTrace("enabled"),
+		},
+		AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
+		PromptVariables: map[string]types.PromptVariableValues{
+			"key0": &types.PromptVariableValuesMemberText{
+				Value: "__PromptVariableValuesMemberText__",
+			},
+		},
+		AdditionalModelResponseFieldPaths: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RequestMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+		PerformanceConfig: &types.PerformanceConfiguration{
+			Latency: types.PerformanceConfigLatency("standard"),
+		},
+		ServiceTier: &types.ServiceTier{
+			Type: types.ServiceTierType("priority"),
+		},
+		OutputConfig: &types.OutputConfig{
+			TextFormat: &types.OutputFormat{
+				Type: types.OutputFormatType("json_schema"),
+				Structure: &types.OutputFormatStructureMemberJsonSchema{
+					Value: types.JsonSchemaDefinition{
+						Schema:      ptr.String("__Schema__"),
+						Name:        ptr.String("__Name__"),
+						Description: ptr.String("__Description__"),
+					},
+				},
+			},
+			Effort: ptr.String("__Effort__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "Converse.response", err)
 	}
+}
+
+func TestCheckResponseSnapshot_ConverseStream(t *testing.T) {
+	t.Skip("event stream operation")
 }
 
 func TestCheckResponseSnapshot_CountTokens(t *testing.T) {
@@ -1891,7 +2028,14 @@ func TestCheckResponseSnapshot_CountTokens(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CountTokens(context.Background(), &CountTokensInput{})
+	got, err := svc.CountTokens(context.Background(), &CountTokensInput{
+		ModelId: ptr.String("__ModelId__"),
+		Input: &types.CountTokensInputMemberInvokeModel{
+			Value: types.InvokeModelTokensRequest{
+				Body: []byte("blob"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1926,7 +2070,9 @@ func TestCheckResponseSnapshot_GetAsyncInvoke(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAsyncInvoke(context.Background(), &GetAsyncInvokeInput{})
+	got, err := svc.GetAsyncInvoke(context.Background(), &GetAsyncInvokeInput{
+		InvocationArn: ptr.String("__InvocationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2004,7 +2150,64 @@ func TestCheckResponseSnapshot_InvokeGuardrailChecks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InvokeGuardrailChecks(context.Background(), &InvokeGuardrailChecksInput{})
+	got, err := svc.InvokeGuardrailChecks(context.Background(), &InvokeGuardrailChecksInput{
+		Messages: []types.GuardrailChecksMessage{
+			{
+				Role: types.GuardrailChecksRole("user"),
+				Content: []types.GuardrailChecksContentBlock{
+					&types.GuardrailChecksContentBlockMemberText{
+						Value: "__GuardrailChecksContentBlockMemberText__",
+					},
+					&types.GuardrailChecksContentBlockMemberText{
+						Value: "__GuardrailChecksContentBlockMemberText__",
+					},
+				},
+			},
+			{
+				Role: types.GuardrailChecksRole("user"),
+				Content: []types.GuardrailChecksContentBlock{
+					&types.GuardrailChecksContentBlockMemberText{
+						Value: "__GuardrailChecksContentBlockMemberText__",
+					},
+					&types.GuardrailChecksContentBlockMemberText{
+						Value: "__GuardrailChecksContentBlockMemberText__",
+					},
+				},
+			},
+		},
+		Checks: &types.GuardrailChecksConfig{
+			ContentFilter: &types.GuardrailChecksContentFilterConfig{
+				Categories: []types.GuardrailChecksContentFilterCategoryConfig{
+					{
+						Category: types.GuardrailChecksContentFilterCategory("VIOLENCE"),
+					},
+					{
+						Category: types.GuardrailChecksContentFilterCategory("VIOLENCE"),
+					},
+				},
+			},
+			PromptAttack: &types.GuardrailChecksPromptAttackConfig{
+				Categories: []types.GuardrailChecksPromptAttackCategoryConfig{
+					{
+						Category: types.GuardrailChecksPromptAttackCategory("JAILBREAK"),
+					},
+					{
+						Category: types.GuardrailChecksPromptAttackCategory("JAILBREAK"),
+					},
+				},
+			},
+			SensitiveInformation: &types.GuardrailChecksSensitiveInformationConfig{
+				Entities: []types.GuardrailChecksSensitiveInformationEntityConfig{
+					{
+						Type: types.GuardrailChecksSensitiveInformationEntityType("ADDRESS"),
+					},
+					{
+						Type: types.GuardrailChecksSensitiveInformationEntityType("ADDRESS"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2028,13 +2231,32 @@ func TestCheckResponseSnapshot_InvokeModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InvokeModel(context.Background(), &InvokeModelInput{})
+	got, err := svc.InvokeModel(context.Background(), &InvokeModelInput{
+		Body:                     []byte("blob"),
+		ContentType:              ptr.String("__ContentType__"),
+		Accept:                   ptr.String("__Accept__"),
+		ModelId:                  ptr.String("__ModelId__"),
+		Trace:                    types.Trace("ENABLED"),
+		GuardrailIdentifier:      ptr.String("__GuardrailIdentifier__"),
+		GuardrailVersion:         ptr.String("__GuardrailVersion__"),
+		PerformanceConfigLatency: types.PerformanceConfigLatency("standard"),
+		ServiceTier:              types.ServiceTierType("priority"),
+		RequestMetadata:          ptr.String("__RequestMetadata__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "InvokeModel.response", err)
 	}
+}
+
+func TestCheckResponseSnapshot_InvokeModelWithBidirectionalStream(t *testing.T) {
+	t.Skip("event stream operation")
+}
+
+func TestCheckResponseSnapshot_InvokeModelWithResponseStream(t *testing.T) {
+	t.Skip("event stream operation")
 }
 
 func TestCheckResponseSnapshot_ListAsyncInvokes(t *testing.T) {
@@ -2085,7 +2307,15 @@ func TestCheckResponseSnapshot_ListAsyncInvokes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAsyncInvokes(context.Background(), &ListAsyncInvokesInput{})
+	got, err := svc.ListAsyncInvokes(context.Background(), &ListAsyncInvokesInput{
+		SubmitTimeAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SubmitTimeBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StatusEquals:     types.AsyncInvokeStatus("InProgress"),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+		SortBy:           types.SortAsyncInvocationBy("SubmissionTime"),
+		SortOrder:        types.SortOrder("Ascending"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2106,7 +2336,28 @@ func TestCheckResponseSnapshot_StartAsyncInvoke(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartAsyncInvoke(context.Background(), &StartAsyncInvokeInput{})
+	got, err := svc.StartAsyncInvoke(context.Background(), &StartAsyncInvokeInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ModelId:            ptr.String("__ModelId__"),
+		ModelInput:         document.NewLazyDocument("__Document__"),
+		OutputDataConfig: &types.AsyncInvokeOutputDataConfigMemberS3OutputDataConfig{
+			Value: types.AsyncInvokeS3OutputDataConfig{
+				S3Uri:       ptr.String("__S3Uri__"),
+				KmsKeyId:    ptr.String("__KmsKeyId__"),
+				BucketOwner: ptr.String("__BucketOwner__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2127,7 +2378,32 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApplyGuardrail(context.Background(), &ApplyGuardrailInput{})
+	_, opErr := svc.ApplyGuardrail(context.Background(), &ApplyGuardrailInput{
+		GuardrailIdentifier: ptr.String("__GuardrailIdentifier__"),
+		GuardrailVersion:    ptr.String("__GuardrailVersion__"),
+		Source:              types.GuardrailContentSource("INPUT"),
+		Content: []types.GuardrailContentBlock{
+			&types.GuardrailContentBlockMemberText{
+				Value: types.GuardrailTextBlock{
+					Text: ptr.String("__Text__"),
+					Qualifiers: []types.GuardrailContentQualifier{
+						types.GuardrailContentQualifier("grounding_source"),
+						types.GuardrailContentQualifier("grounding_source"),
+					},
+				},
+			},
+			&types.GuardrailContentBlockMemberText{
+				Value: types.GuardrailTextBlock{
+					Text: ptr.String("__Text__"),
+					Qualifiers: []types.GuardrailContentQualifier{
+						types.GuardrailContentQualifier("grounding_source"),
+						types.GuardrailContentQualifier("grounding_source"),
+					},
+				},
+			},
+		},
+		OutputScope: types.GuardrailOutputScope("INTERVENTIONS"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2152,7 +2428,28 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartAsyncInvoke(context.Background(), &StartAsyncInvokeInput{})
+	_, opErr := svc.StartAsyncInvoke(context.Background(), &StartAsyncInvokeInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ModelId:            ptr.String("__ModelId__"),
+		ModelInput:         document.NewLazyDocument("__Document__"),
+		OutputDataConfig: &types.AsyncInvokeOutputDataConfigMemberS3OutputDataConfig{
+			Value: types.AsyncInvokeS3OutputDataConfig{
+				S3Uri:       ptr.String("__S3Uri__"),
+				KmsKeyId:    ptr.String("__KmsKeyId__"),
+				BucketOwner: ptr.String("__BucketOwner__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2177,7 +2474,32 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApplyGuardrail(context.Background(), &ApplyGuardrailInput{})
+	_, opErr := svc.ApplyGuardrail(context.Background(), &ApplyGuardrailInput{
+		GuardrailIdentifier: ptr.String("__GuardrailIdentifier__"),
+		GuardrailVersion:    ptr.String("__GuardrailVersion__"),
+		Source:              types.GuardrailContentSource("INPUT"),
+		Content: []types.GuardrailContentBlock{
+			&types.GuardrailContentBlockMemberText{
+				Value: types.GuardrailTextBlock{
+					Text: ptr.String("__Text__"),
+					Qualifiers: []types.GuardrailContentQualifier{
+						types.GuardrailContentQualifier("grounding_source"),
+						types.GuardrailContentQualifier("grounding_source"),
+					},
+				},
+			},
+			&types.GuardrailContentBlockMemberText{
+				Value: types.GuardrailTextBlock{
+					Text: ptr.String("__Text__"),
+					Qualifiers: []types.GuardrailContentQualifier{
+						types.GuardrailContentQualifier("grounding_source"),
+						types.GuardrailContentQualifier("grounding_source"),
+					},
+				},
+			},
+		},
+		OutputScope: types.GuardrailOutputScope("INTERVENTIONS"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2204,7 +2526,114 @@ func TestCheckResponseSnapshot_Error_ModelErrorException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Converse(context.Background(), &ConverseInput{})
+	_, opErr := svc.Converse(context.Background(), &ConverseInput{
+		ModelId: ptr.String("__ModelId__"),
+		Messages: []types.Message{
+			{
+				Role: types.ConversationRole("user"),
+				Content: []types.ContentBlock{
+					&types.ContentBlockMemberText{
+						Value: "__ContentBlockMemberText__",
+					},
+					&types.ContentBlockMemberText{
+						Value: "__ContentBlockMemberText__",
+					},
+				},
+			},
+			{
+				Role: types.ConversationRole("user"),
+				Content: []types.ContentBlock{
+					&types.ContentBlockMemberText{
+						Value: "__ContentBlockMemberText__",
+					},
+					&types.ContentBlockMemberText{
+						Value: "__ContentBlockMemberText__",
+					},
+				},
+			},
+		},
+		System: []types.SystemContentBlock{
+			&types.SystemContentBlockMemberText{
+				Value: "__SystemContentBlockMemberText__",
+			},
+			&types.SystemContentBlockMemberText{
+				Value: "__SystemContentBlockMemberText__",
+			},
+		},
+		InferenceConfig: &types.InferenceConfiguration{
+			MaxTokens:   ptr.Int32(1),
+			Temperature: ptr.Float32(1.0),
+			TopP:        ptr.Float32(1.0),
+			StopSequences: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ToolConfig: &types.ToolConfiguration{
+			Tools: []types.Tool{
+				&types.ToolMemberToolSpec{
+					Value: types.ToolSpecification{
+						Name:        ptr.String("__Name__"),
+						Description: ptr.String("__Description__"),
+						InputSchema: &types.ToolInputSchemaMemberJson{
+							Value: document.NewLazyDocument("__Document__"),
+						},
+						Strict: ptr.Bool(true),
+					},
+				},
+				&types.ToolMemberToolSpec{
+					Value: types.ToolSpecification{
+						Name:        ptr.String("__Name__"),
+						Description: ptr.String("__Description__"),
+						InputSchema: &types.ToolInputSchemaMemberJson{
+							Value: document.NewLazyDocument("__Document__"),
+						},
+						Strict: ptr.Bool(true),
+					},
+				},
+			},
+			ToolChoice: &types.ToolChoiceMemberAuto{
+				Value: types.AutoToolChoice{},
+			},
+		},
+		GuardrailConfig: &types.GuardrailConfiguration{
+			GuardrailIdentifier: ptr.String("__GuardrailIdentifier__"),
+			GuardrailVersion:    ptr.String("__GuardrailVersion__"),
+			Trace:               types.GuardrailTrace("enabled"),
+		},
+		AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
+		PromptVariables: map[string]types.PromptVariableValues{
+			"key0": &types.PromptVariableValuesMemberText{
+				Value: "__PromptVariableValuesMemberText__",
+			},
+		},
+		AdditionalModelResponseFieldPaths: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RequestMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+		PerformanceConfig: &types.PerformanceConfiguration{
+			Latency: types.PerformanceConfigLatency("standard"),
+		},
+		ServiceTier: &types.ServiceTier{
+			Type: types.ServiceTierType("priority"),
+		},
+		OutputConfig: &types.OutputConfig{
+			TextFormat: &types.OutputFormat{
+				Type: types.OutputFormatType("json_schema"),
+				Structure: &types.OutputFormatStructureMemberJsonSchema{
+					Value: types.JsonSchemaDefinition{
+						Schema:      ptr.String("__Schema__"),
+						Name:        ptr.String("__Name__"),
+						Description: ptr.String("__Description__"),
+					},
+				},
+			},
+			Effort: ptr.String("__Effort__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2229,7 +2658,114 @@ func TestCheckResponseSnapshot_Error_ModelNotReadyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Converse(context.Background(), &ConverseInput{})
+	_, opErr := svc.Converse(context.Background(), &ConverseInput{
+		ModelId: ptr.String("__ModelId__"),
+		Messages: []types.Message{
+			{
+				Role: types.ConversationRole("user"),
+				Content: []types.ContentBlock{
+					&types.ContentBlockMemberText{
+						Value: "__ContentBlockMemberText__",
+					},
+					&types.ContentBlockMemberText{
+						Value: "__ContentBlockMemberText__",
+					},
+				},
+			},
+			{
+				Role: types.ConversationRole("user"),
+				Content: []types.ContentBlock{
+					&types.ContentBlockMemberText{
+						Value: "__ContentBlockMemberText__",
+					},
+					&types.ContentBlockMemberText{
+						Value: "__ContentBlockMemberText__",
+					},
+				},
+			},
+		},
+		System: []types.SystemContentBlock{
+			&types.SystemContentBlockMemberText{
+				Value: "__SystemContentBlockMemberText__",
+			},
+			&types.SystemContentBlockMemberText{
+				Value: "__SystemContentBlockMemberText__",
+			},
+		},
+		InferenceConfig: &types.InferenceConfiguration{
+			MaxTokens:   ptr.Int32(1),
+			Temperature: ptr.Float32(1.0),
+			TopP:        ptr.Float32(1.0),
+			StopSequences: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ToolConfig: &types.ToolConfiguration{
+			Tools: []types.Tool{
+				&types.ToolMemberToolSpec{
+					Value: types.ToolSpecification{
+						Name:        ptr.String("__Name__"),
+						Description: ptr.String("__Description__"),
+						InputSchema: &types.ToolInputSchemaMemberJson{
+							Value: document.NewLazyDocument("__Document__"),
+						},
+						Strict: ptr.Bool(true),
+					},
+				},
+				&types.ToolMemberToolSpec{
+					Value: types.ToolSpecification{
+						Name:        ptr.String("__Name__"),
+						Description: ptr.String("__Description__"),
+						InputSchema: &types.ToolInputSchemaMemberJson{
+							Value: document.NewLazyDocument("__Document__"),
+						},
+						Strict: ptr.Bool(true),
+					},
+				},
+			},
+			ToolChoice: &types.ToolChoiceMemberAuto{
+				Value: types.AutoToolChoice{},
+			},
+		},
+		GuardrailConfig: &types.GuardrailConfiguration{
+			GuardrailIdentifier: ptr.String("__GuardrailIdentifier__"),
+			GuardrailVersion:    ptr.String("__GuardrailVersion__"),
+			Trace:               types.GuardrailTrace("enabled"),
+		},
+		AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
+		PromptVariables: map[string]types.PromptVariableValues{
+			"key0": &types.PromptVariableValuesMemberText{
+				Value: "__PromptVariableValuesMemberText__",
+			},
+		},
+		AdditionalModelResponseFieldPaths: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RequestMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+		PerformanceConfig: &types.PerformanceConfiguration{
+			Latency: types.PerformanceConfigLatency("standard"),
+		},
+		ServiceTier: &types.ServiceTier{
+			Type: types.ServiceTierType("priority"),
+		},
+		OutputConfig: &types.OutputConfig{
+			TextFormat: &types.OutputFormat{
+				Type: types.OutputFormatType("json_schema"),
+				Structure: &types.OutputFormatStructureMemberJsonSchema{
+					Value: types.JsonSchemaDefinition{
+						Schema:      ptr.String("__Schema__"),
+						Name:        ptr.String("__Name__"),
+						Description: ptr.String("__Description__"),
+					},
+				},
+			},
+			Effort: ptr.String("__Effort__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2254,7 +2790,114 @@ func TestCheckResponseSnapshot_Error_ModelTimeoutException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Converse(context.Background(), &ConverseInput{})
+	_, opErr := svc.Converse(context.Background(), &ConverseInput{
+		ModelId: ptr.String("__ModelId__"),
+		Messages: []types.Message{
+			{
+				Role: types.ConversationRole("user"),
+				Content: []types.ContentBlock{
+					&types.ContentBlockMemberText{
+						Value: "__ContentBlockMemberText__",
+					},
+					&types.ContentBlockMemberText{
+						Value: "__ContentBlockMemberText__",
+					},
+				},
+			},
+			{
+				Role: types.ConversationRole("user"),
+				Content: []types.ContentBlock{
+					&types.ContentBlockMemberText{
+						Value: "__ContentBlockMemberText__",
+					},
+					&types.ContentBlockMemberText{
+						Value: "__ContentBlockMemberText__",
+					},
+				},
+			},
+		},
+		System: []types.SystemContentBlock{
+			&types.SystemContentBlockMemberText{
+				Value: "__SystemContentBlockMemberText__",
+			},
+			&types.SystemContentBlockMemberText{
+				Value: "__SystemContentBlockMemberText__",
+			},
+		},
+		InferenceConfig: &types.InferenceConfiguration{
+			MaxTokens:   ptr.Int32(1),
+			Temperature: ptr.Float32(1.0),
+			TopP:        ptr.Float32(1.0),
+			StopSequences: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ToolConfig: &types.ToolConfiguration{
+			Tools: []types.Tool{
+				&types.ToolMemberToolSpec{
+					Value: types.ToolSpecification{
+						Name:        ptr.String("__Name__"),
+						Description: ptr.String("__Description__"),
+						InputSchema: &types.ToolInputSchemaMemberJson{
+							Value: document.NewLazyDocument("__Document__"),
+						},
+						Strict: ptr.Bool(true),
+					},
+				},
+				&types.ToolMemberToolSpec{
+					Value: types.ToolSpecification{
+						Name:        ptr.String("__Name__"),
+						Description: ptr.String("__Description__"),
+						InputSchema: &types.ToolInputSchemaMemberJson{
+							Value: document.NewLazyDocument("__Document__"),
+						},
+						Strict: ptr.Bool(true),
+					},
+				},
+			},
+			ToolChoice: &types.ToolChoiceMemberAuto{
+				Value: types.AutoToolChoice{},
+			},
+		},
+		GuardrailConfig: &types.GuardrailConfiguration{
+			GuardrailIdentifier: ptr.String("__GuardrailIdentifier__"),
+			GuardrailVersion:    ptr.String("__GuardrailVersion__"),
+			Trace:               types.GuardrailTrace("enabled"),
+		},
+		AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
+		PromptVariables: map[string]types.PromptVariableValues{
+			"key0": &types.PromptVariableValuesMemberText{
+				Value: "__PromptVariableValuesMemberText__",
+			},
+		},
+		AdditionalModelResponseFieldPaths: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RequestMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+		PerformanceConfig: &types.PerformanceConfiguration{
+			Latency: types.PerformanceConfigLatency("standard"),
+		},
+		ServiceTier: &types.ServiceTier{
+			Type: types.ServiceTierType("priority"),
+		},
+		OutputConfig: &types.OutputConfig{
+			TextFormat: &types.OutputFormat{
+				Type: types.OutputFormatType("json_schema"),
+				Structure: &types.OutputFormatStructureMemberJsonSchema{
+					Value: types.JsonSchemaDefinition{
+						Schema:      ptr.String("__Schema__"),
+						Name:        ptr.String("__Name__"),
+						Description: ptr.String("__Description__"),
+					},
+				},
+			},
+			Effort: ptr.String("__Effort__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2279,7 +2922,32 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApplyGuardrail(context.Background(), &ApplyGuardrailInput{})
+	_, opErr := svc.ApplyGuardrail(context.Background(), &ApplyGuardrailInput{
+		GuardrailIdentifier: ptr.String("__GuardrailIdentifier__"),
+		GuardrailVersion:    ptr.String("__GuardrailVersion__"),
+		Source:              types.GuardrailContentSource("INPUT"),
+		Content: []types.GuardrailContentBlock{
+			&types.GuardrailContentBlockMemberText{
+				Value: types.GuardrailTextBlock{
+					Text: ptr.String("__Text__"),
+					Qualifiers: []types.GuardrailContentQualifier{
+						types.GuardrailContentQualifier("grounding_source"),
+						types.GuardrailContentQualifier("grounding_source"),
+					},
+				},
+			},
+			&types.GuardrailContentBlockMemberText{
+				Value: types.GuardrailTextBlock{
+					Text: ptr.String("__Text__"),
+					Qualifiers: []types.GuardrailContentQualifier{
+						types.GuardrailContentQualifier("grounding_source"),
+						types.GuardrailContentQualifier("grounding_source"),
+					},
+				},
+			},
+		},
+		OutputScope: types.GuardrailOutputScope("INTERVENTIONS"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2304,7 +2972,32 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApplyGuardrail(context.Background(), &ApplyGuardrailInput{})
+	_, opErr := svc.ApplyGuardrail(context.Background(), &ApplyGuardrailInput{
+		GuardrailIdentifier: ptr.String("__GuardrailIdentifier__"),
+		GuardrailVersion:    ptr.String("__GuardrailVersion__"),
+		Source:              types.GuardrailContentSource("INPUT"),
+		Content: []types.GuardrailContentBlock{
+			&types.GuardrailContentBlockMemberText{
+				Value: types.GuardrailTextBlock{
+					Text: ptr.String("__Text__"),
+					Qualifiers: []types.GuardrailContentQualifier{
+						types.GuardrailContentQualifier("grounding_source"),
+						types.GuardrailContentQualifier("grounding_source"),
+					},
+				},
+			},
+			&types.GuardrailContentBlockMemberText{
+				Value: types.GuardrailTextBlock{
+					Text: ptr.String("__Text__"),
+					Qualifiers: []types.GuardrailContentQualifier{
+						types.GuardrailContentQualifier("grounding_source"),
+						types.GuardrailContentQualifier("grounding_source"),
+					},
+				},
+			},
+		},
+		OutputScope: types.GuardrailOutputScope("INTERVENTIONS"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2329,7 +3022,32 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApplyGuardrail(context.Background(), &ApplyGuardrailInput{})
+	_, opErr := svc.ApplyGuardrail(context.Background(), &ApplyGuardrailInput{
+		GuardrailIdentifier: ptr.String("__GuardrailIdentifier__"),
+		GuardrailVersion:    ptr.String("__GuardrailVersion__"),
+		Source:              types.GuardrailContentSource("INPUT"),
+		Content: []types.GuardrailContentBlock{
+			&types.GuardrailContentBlockMemberText{
+				Value: types.GuardrailTextBlock{
+					Text: ptr.String("__Text__"),
+					Qualifiers: []types.GuardrailContentQualifier{
+						types.GuardrailContentQualifier("grounding_source"),
+						types.GuardrailContentQualifier("grounding_source"),
+					},
+				},
+			},
+			&types.GuardrailContentBlockMemberText{
+				Value: types.GuardrailTextBlock{
+					Text: ptr.String("__Text__"),
+					Qualifiers: []types.GuardrailContentQualifier{
+						types.GuardrailContentQualifier("grounding_source"),
+						types.GuardrailContentQualifier("grounding_source"),
+					},
+				},
+			},
+		},
+		OutputScope: types.GuardrailOutputScope("INTERVENTIONS"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2354,7 +3072,32 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApplyGuardrail(context.Background(), &ApplyGuardrailInput{})
+	_, opErr := svc.ApplyGuardrail(context.Background(), &ApplyGuardrailInput{
+		GuardrailIdentifier: ptr.String("__GuardrailIdentifier__"),
+		GuardrailVersion:    ptr.String("__GuardrailVersion__"),
+		Source:              types.GuardrailContentSource("INPUT"),
+		Content: []types.GuardrailContentBlock{
+			&types.GuardrailContentBlockMemberText{
+				Value: types.GuardrailTextBlock{
+					Text: ptr.String("__Text__"),
+					Qualifiers: []types.GuardrailContentQualifier{
+						types.GuardrailContentQualifier("grounding_source"),
+						types.GuardrailContentQualifier("grounding_source"),
+					},
+				},
+			},
+			&types.GuardrailContentBlockMemberText{
+				Value: types.GuardrailTextBlock{
+					Text: ptr.String("__Text__"),
+					Qualifiers: []types.GuardrailContentQualifier{
+						types.GuardrailContentQualifier("grounding_source"),
+						types.GuardrailContentQualifier("grounding_source"),
+					},
+				},
+			},
+		},
+		OutputScope: types.GuardrailOutputScope("INTERVENTIONS"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2379,7 +3122,32 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApplyGuardrail(context.Background(), &ApplyGuardrailInput{})
+	_, opErr := svc.ApplyGuardrail(context.Background(), &ApplyGuardrailInput{
+		GuardrailIdentifier: ptr.String("__GuardrailIdentifier__"),
+		GuardrailVersion:    ptr.String("__GuardrailVersion__"),
+		Source:              types.GuardrailContentSource("INPUT"),
+		Content: []types.GuardrailContentBlock{
+			&types.GuardrailContentBlockMemberText{
+				Value: types.GuardrailTextBlock{
+					Text: ptr.String("__Text__"),
+					Qualifiers: []types.GuardrailContentQualifier{
+						types.GuardrailContentQualifier("grounding_source"),
+						types.GuardrailContentQualifier("grounding_source"),
+					},
+				},
+			},
+			&types.GuardrailContentBlockMemberText{
+				Value: types.GuardrailTextBlock{
+					Text: ptr.String("__Text__"),
+					Qualifiers: []types.GuardrailContentQualifier{
+						types.GuardrailContentQualifier("grounding_source"),
+						types.GuardrailContentQualifier("grounding_source"),
+					},
+				},
+			},
+		},
+		OutputScope: types.GuardrailOutputScope("INTERVENTIONS"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"headCommitId":"__HeadCommitId__","lastUpdatedTime":"2000-01-01T00:00:00Z","name":"__Name__","ref":"__Ref__"}

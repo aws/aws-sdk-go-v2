@@ -1,0 +1,4 @@
+409
+Content-Type: application/json
+
+{"__type":"ConflictException","Message":"__Message__","Reason":"RESOURCE_NAME_CONFLICT","ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","NotificationSummaries":[{"LensUpgradeSummary":{"CurrentLensVersion":"__CurrentLensVersion__","LatestLensVersion":"__LatestLensVersion__","LensAlias":"__LensAlias__","LensArn":"__LensArn__","ResourceArn":"__ResourceArn__","ResourceName":"__ResourceName__","WorkloadId":"__WorkloadId__","WorkloadName":"__WorkloadName__"},"Type":"LENS_VERSION_UPGRADED"},{"LensUpgradeSummary":{"CurrentLensVersion":"__CurrentLensVersion__","LatestLensVersion":"__LatestLensVersion__","LensAlias":"__LensAlias__","LensArn":"__LensArn__","ResourceArn":"__ResourceArn__","ResourceName":"__ResourceName__","WorkloadId":"__WorkloadId__","WorkloadName":"__WorkloadName__"},"Type":"LENS_VERSION_UPGRADED"}]}

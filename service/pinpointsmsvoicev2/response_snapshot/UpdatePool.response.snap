@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.UpdatePool
+
+{"CreatedTimestamp":946684800,"DeletionProtectionEnabled":true,"MessageType":"TRANSACTIONAL","OptOutListName":"__OptOutListName__","PoolArn":"__PoolArn__","PoolId":"__PoolId__","SelfManagedOptOutsEnabled":true,"SharedRoutesEnabled":true,"Status":"CREATING","TwoWayChannelArn":"__TwoWayChannelArn__","TwoWayChannelRole":"__TwoWayChannelRole__","TwoWayEnabled":true}

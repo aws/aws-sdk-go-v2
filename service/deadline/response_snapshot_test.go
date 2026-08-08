@@ -118,7 +118,14 @@ func TestCheckResponseSnapshot_AssociateMemberToFarm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateMemberToFarm(context.Background(), &AssociateMemberToFarmInput{})
+	got, err := svc.AssociateMemberToFarm(context.Background(), &AssociateMemberToFarmInput{
+		FarmId:               ptr.String("__FarmId__"),
+		PrincipalType:        types.DeadlinePrincipalType("USER"),
+		IdentityStoreId:      ptr.String("__IdentityStoreId__"),
+		MembershipLevel:      types.MembershipLevel("VIEWER"),
+		PrincipalId:          ptr.String("__PrincipalId__"),
+		IdentityCenterRegion: ptr.String("__IdentityCenterRegion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -137,7 +144,15 @@ func TestCheckResponseSnapshot_AssociateMemberToFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateMemberToFleet(context.Background(), &AssociateMemberToFleetInput{})
+	got, err := svc.AssociateMemberToFleet(context.Background(), &AssociateMemberToFleetInput{
+		FarmId:               ptr.String("__FarmId__"),
+		FleetId:              ptr.String("__FleetId__"),
+		PrincipalType:        types.DeadlinePrincipalType("USER"),
+		IdentityStoreId:      ptr.String("__IdentityStoreId__"),
+		MembershipLevel:      types.MembershipLevel("VIEWER"),
+		PrincipalId:          ptr.String("__PrincipalId__"),
+		IdentityCenterRegion: ptr.String("__IdentityCenterRegion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -156,7 +171,16 @@ func TestCheckResponseSnapshot_AssociateMemberToJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateMemberToJob(context.Background(), &AssociateMemberToJobInput{})
+	got, err := svc.AssociateMemberToJob(context.Background(), &AssociateMemberToJobInput{
+		FarmId:               ptr.String("__FarmId__"),
+		QueueId:              ptr.String("__QueueId__"),
+		JobId:                ptr.String("__JobId__"),
+		PrincipalType:        types.DeadlinePrincipalType("USER"),
+		IdentityStoreId:      ptr.String("__IdentityStoreId__"),
+		MembershipLevel:      types.MembershipLevel("VIEWER"),
+		PrincipalId:          ptr.String("__PrincipalId__"),
+		IdentityCenterRegion: ptr.String("__IdentityCenterRegion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -175,7 +199,15 @@ func TestCheckResponseSnapshot_AssociateMemberToQueue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateMemberToQueue(context.Background(), &AssociateMemberToQueueInput{})
+	got, err := svc.AssociateMemberToQueue(context.Background(), &AssociateMemberToQueueInput{
+		FarmId:               ptr.String("__FarmId__"),
+		QueueId:              ptr.String("__QueueId__"),
+		PrincipalType:        types.DeadlinePrincipalType("USER"),
+		IdentityStoreId:      ptr.String("__IdentityStoreId__"),
+		MembershipLevel:      types.MembershipLevel("VIEWER"),
+		PrincipalId:          ptr.String("__PrincipalId__"),
+		IdentityCenterRegion: ptr.String("__IdentityCenterRegion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -201,7 +233,10 @@ func TestCheckResponseSnapshot_AssumeFleetRoleForRead(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssumeFleetRoleForRead(context.Background(), &AssumeFleetRoleForReadInput{})
+	got, err := svc.AssumeFleetRoleForRead(context.Background(), &AssumeFleetRoleForReadInput{
+		FarmId:  ptr.String("__FarmId__"),
+		FleetId: ptr.String("__FleetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -227,7 +262,11 @@ func TestCheckResponseSnapshot_AssumeFleetRoleForWorker(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssumeFleetRoleForWorker(context.Background(), &AssumeFleetRoleForWorkerInput{})
+	got, err := svc.AssumeFleetRoleForWorker(context.Background(), &AssumeFleetRoleForWorkerInput{
+		FarmId:   ptr.String("__FarmId__"),
+		FleetId:  ptr.String("__FleetId__"),
+		WorkerId: ptr.String("__WorkerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -253,7 +292,10 @@ func TestCheckResponseSnapshot_AssumeQueueRoleForRead(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssumeQueueRoleForRead(context.Background(), &AssumeQueueRoleForReadInput{})
+	got, err := svc.AssumeQueueRoleForRead(context.Background(), &AssumeQueueRoleForReadInput{
+		FarmId:  ptr.String("__FarmId__"),
+		QueueId: ptr.String("__QueueId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -279,7 +321,10 @@ func TestCheckResponseSnapshot_AssumeQueueRoleForUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssumeQueueRoleForUser(context.Background(), &AssumeQueueRoleForUserInput{})
+	got, err := svc.AssumeQueueRoleForUser(context.Background(), &AssumeQueueRoleForUserInput{
+		FarmId:  ptr.String("__FarmId__"),
+		QueueId: ptr.String("__QueueId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -305,7 +350,12 @@ func TestCheckResponseSnapshot_AssumeQueueRoleForWorker(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssumeQueueRoleForWorker(context.Background(), &AssumeQueueRoleForWorkerInput{})
+	got, err := svc.AssumeQueueRoleForWorker(context.Background(), &AssumeQueueRoleForWorkerInput{
+		FarmId:   ptr.String("__FarmId__"),
+		FleetId:  ptr.String("__FleetId__"),
+		WorkerId: ptr.String("__WorkerId__"),
+		QueueId:  ptr.String("__QueueId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -461,7 +511,20 @@ func TestCheckResponseSnapshot_BatchGetJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetJob(context.Background(), &BatchGetJobInput{})
+	got, err := svc.BatchGetJob(context.Background(), &BatchGetJobInput{
+		Identifiers: []types.BatchGetJobIdentifier{
+			{
+				FarmId:  ptr.String("__FarmId__"),
+				QueueId: ptr.String("__QueueId__"),
+				JobId:   ptr.String("__JobId__"),
+			},
+			{
+				FarmId:  ptr.String("__FarmId__"),
+				QueueId: ptr.String("__QueueId__"),
+				JobId:   ptr.String("__JobId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -579,7 +642,23 @@ func TestCheckResponseSnapshot_BatchGetJobEntity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetJobEntity(context.Background(), &BatchGetJobEntityInput{})
+	got, err := svc.BatchGetJobEntity(context.Background(), &BatchGetJobEntityInput{
+		FarmId:   ptr.String("__FarmId__"),
+		FleetId:  ptr.String("__FleetId__"),
+		WorkerId: ptr.String("__WorkerId__"),
+		Identifiers: []types.JobEntityIdentifiersUnion{
+			&types.JobEntityIdentifiersUnionMemberJobDetails{
+				Value: types.JobDetailsIdentifiers{
+					JobId: ptr.String("__JobId__"),
+				},
+			},
+			&types.JobEntityIdentifiersUnionMemberJobDetails{
+				Value: types.JobDetailsIdentifiers{
+					JobId: ptr.String("__JobId__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -717,7 +796,22 @@ func TestCheckResponseSnapshot_BatchGetSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetSession(context.Background(), &BatchGetSessionInput{})
+	got, err := svc.BatchGetSession(context.Background(), &BatchGetSessionInput{
+		Identifiers: []types.BatchGetSessionIdentifier{
+			{
+				FarmId:    ptr.String("__FarmId__"),
+				QueueId:   ptr.String("__QueueId__"),
+				JobId:     ptr.String("__JobId__"),
+				SessionId: ptr.String("__SessionId__"),
+			},
+			{
+				FarmId:    ptr.String("__FarmId__"),
+				QueueId:   ptr.String("__QueueId__"),
+				JobId:     ptr.String("__JobId__"),
+				SessionId: ptr.String("__SessionId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -835,7 +929,22 @@ func TestCheckResponseSnapshot_BatchGetSessionAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetSessionAction(context.Background(), &BatchGetSessionActionInput{})
+	got, err := svc.BatchGetSessionAction(context.Background(), &BatchGetSessionActionInput{
+		Identifiers: []types.BatchGetSessionActionIdentifier{
+			{
+				FarmId:          ptr.String("__FarmId__"),
+				QueueId:         ptr.String("__QueueId__"),
+				JobId:           ptr.String("__JobId__"),
+				SessionActionId: ptr.String("__SessionActionId__"),
+			},
+			{
+				FarmId:          ptr.String("__FarmId__"),
+				QueueId:         ptr.String("__QueueId__"),
+				JobId:           ptr.String("__JobId__"),
+				SessionActionId: ptr.String("__SessionActionId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1057,7 +1166,22 @@ func TestCheckResponseSnapshot_BatchGetStep(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetStep(context.Background(), &BatchGetStepInput{})
+	got, err := svc.BatchGetStep(context.Background(), &BatchGetStepInput{
+		Identifiers: []types.BatchGetStepIdentifier{
+			{
+				FarmId:  ptr.String("__FarmId__"),
+				QueueId: ptr.String("__QueueId__"),
+				JobId:   ptr.String("__JobId__"),
+				StepId:  ptr.String("__StepId__"),
+			},
+			{
+				FarmId:  ptr.String("__FarmId__"),
+				QueueId: ptr.String("__QueueId__"),
+				JobId:   ptr.String("__JobId__"),
+				StepId:  ptr.String("__StepId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1143,7 +1267,24 @@ func TestCheckResponseSnapshot_BatchGetTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetTask(context.Background(), &BatchGetTaskInput{})
+	got, err := svc.BatchGetTask(context.Background(), &BatchGetTaskInput{
+		Identifiers: []types.BatchGetTaskIdentifier{
+			{
+				FarmId:  ptr.String("__FarmId__"),
+				QueueId: ptr.String("__QueueId__"),
+				JobId:   ptr.String("__JobId__"),
+				StepId:  ptr.String("__StepId__"),
+				TaskId:  ptr.String("__TaskId__"),
+			},
+			{
+				FarmId:  ptr.String("__FarmId__"),
+				QueueId: ptr.String("__QueueId__"),
+				JobId:   ptr.String("__JobId__"),
+				StepId:  ptr.String("__StepId__"),
+				TaskId:  ptr.String("__TaskId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1251,7 +1392,20 @@ func TestCheckResponseSnapshot_BatchGetWorker(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetWorker(context.Background(), &BatchGetWorkerInput{})
+	got, err := svc.BatchGetWorker(context.Background(), &BatchGetWorkerInput{
+		Identifiers: []types.BatchGetWorkerIdentifier{
+			{
+				FarmId:   ptr.String("__FarmId__"),
+				FleetId:  ptr.String("__FleetId__"),
+				WorkerId: ptr.String("__WorkerId__"),
+			},
+			{
+				FarmId:   ptr.String("__FarmId__"),
+				FleetId:  ptr.String("__FleetId__"),
+				WorkerId: ptr.String("__WorkerId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1287,7 +1441,37 @@ func TestCheckResponseSnapshot_BatchUpdateJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchUpdateJob(context.Background(), &BatchUpdateJobInput{})
+	got, err := svc.BatchUpdateJob(context.Background(), &BatchUpdateJobInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Jobs: []types.BatchUpdateJobItem{
+			{
+				FarmId:              ptr.String("__FarmId__"),
+				QueueId:             ptr.String("__QueueId__"),
+				JobId:               ptr.String("__JobId__"),
+				TargetTaskRunStatus: types.JobTargetTaskRunStatus("READY"),
+				Priority:            ptr.Int32(1),
+				MaxFailedTasksCount: ptr.Int32(1),
+				MaxRetriesPerTask:   ptr.Int32(1),
+				LifecycleStatus:     types.UpdateJobLifecycleStatus("ARCHIVED"),
+				MaxWorkerCount:      ptr.Int32(1),
+				Name:                ptr.String("__Name__"),
+				Description:         ptr.String("__Description__"),
+			},
+			{
+				FarmId:              ptr.String("__FarmId__"),
+				QueueId:             ptr.String("__QueueId__"),
+				JobId:               ptr.String("__JobId__"),
+				TargetTaskRunStatus: types.JobTargetTaskRunStatus("READY"),
+				Priority:            ptr.Int32(1),
+				MaxFailedTasksCount: ptr.Int32(1),
+				MaxRetriesPerTask:   ptr.Int32(1),
+				LifecycleStatus:     types.UpdateJobLifecycleStatus("ARCHIVED"),
+				MaxWorkerCount:      ptr.Int32(1),
+				Name:                ptr.String("__Name__"),
+				Description:         ptr.String("__Description__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1327,7 +1511,27 @@ func TestCheckResponseSnapshot_BatchUpdateTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchUpdateTask(context.Background(), &BatchUpdateTaskInput{})
+	got, err := svc.BatchUpdateTask(context.Background(), &BatchUpdateTaskInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Tasks: []types.BatchUpdateTaskItem{
+			{
+				FarmId:          ptr.String("__FarmId__"),
+				QueueId:         ptr.String("__QueueId__"),
+				JobId:           ptr.String("__JobId__"),
+				StepId:          ptr.String("__StepId__"),
+				TaskId:          ptr.String("__TaskId__"),
+				TargetRunStatus: types.TaskTargetRunStatus("READY"),
+			},
+			{
+				FarmId:          ptr.String("__FarmId__"),
+				QueueId:         ptr.String("__QueueId__"),
+				JobId:           ptr.String("__JobId__"),
+				StepId:          ptr.String("__StepId__"),
+				TaskId:          ptr.String("__TaskId__"),
+				TargetRunStatus: types.TaskTargetRunStatus("READY"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1348,7 +1552,15 @@ func TestCheckResponseSnapshot_CopyJobTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CopyJobTemplate(context.Background(), &CopyJobTemplateInput{})
+	got, err := svc.CopyJobTemplate(context.Background(), &CopyJobTemplateInput{
+		FarmId:  ptr.String("__FarmId__"),
+		QueueId: ptr.String("__QueueId__"),
+		JobId:   ptr.String("__JobId__"),
+		TargetS3Location: &types.S3Location{
+			BucketName: ptr.String("__BucketName__"),
+			Key:        ptr.String("__Key__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1369,7 +1581,37 @@ func TestCheckResponseSnapshot_CreateBudget(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBudget(context.Background(), &CreateBudgetInput{})
+	got, err := svc.CreateBudget(context.Background(), &CreateBudgetInput{
+		FarmId:      ptr.String("__FarmId__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		Description: ptr.String("__Description__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		UsageTrackingResource: &types.UsageTrackingResourceMemberQueueId{
+			Value: "__UsageTrackingResourceMemberQueueId__",
+		},
+		ApproximateDollarLimit: ptr.Float32(1.0),
+		Actions: []types.BudgetActionToAdd{
+			{
+				Type:                types.BudgetActionType("STOP_SCHEDULING_AND_COMPLETE_TASKS"),
+				ThresholdPercentage: ptr.Float32(1.0),
+				Description:         ptr.String("__Description__"),
+			},
+			{
+				Type:                types.BudgetActionType("STOP_SCHEDULING_AND_COMPLETE_TASKS"),
+				ThresholdPercentage: ptr.Float32(1.0),
+				Description:         ptr.String("__Description__"),
+			},
+		},
+		Schedule: &types.BudgetScheduleMemberFixed{
+			Value: types.FixedBudgetSchedule{
+				StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1390,7 +1632,16 @@ func TestCheckResponseSnapshot_CreateFarm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFarm(context.Background(), &CreateFarmInput{})
+	got, err := svc.CreateFarm(context.Background(), &CreateFarmInput{
+		ClientToken:     ptr.String("__ClientToken__"),
+		DisplayName:     ptr.String("__DisplayName__"),
+		Description:     ptr.String("__Description__"),
+		KmsKeyArn:       ptr.String("__KmsKeyArn__"),
+		CostScaleFactor: ptr.Float32(1.0),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1411,7 +1662,86 @@ func TestCheckResponseSnapshot_CreateFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFleet(context.Background(), &CreateFleetInput{})
+	got, err := svc.CreateFleet(context.Background(), &CreateFleetInput{
+		FarmId:         ptr.String("__FarmId__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+		DisplayName:    ptr.String("__DisplayName__"),
+		Description:    ptr.String("__Description__"),
+		RoleArn:        ptr.String("__RoleArn__"),
+		MinWorkerCount: 1,
+		MaxWorkerCount: ptr.Int32(1),
+		Configuration: &types.FleetConfigurationMemberCustomerManaged{
+			Value: types.CustomerManagedFleetConfiguration{
+				Mode: types.AutoScalingMode("NO_SCALING"),
+				AutoScalingConfiguration: &types.CustomerManagedAutoScalingConfiguration{
+					StandbyWorkerCount:        ptr.Int32(1),
+					WorkerIdleDurationSeconds: ptr.Int32(1),
+					ScaleOutWorkersPerMinute:  ptr.Int32(1),
+				},
+				WorkerCapabilities: &types.CustomerManagedWorkerCapabilities{
+					VCpuCount: &types.VCpuCountRange{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					MemoryMiB: &types.MemoryMiBRange{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					AcceleratorTypes: []types.AcceleratorType{
+						types.AcceleratorType("gpu"),
+						types.AcceleratorType("gpu"),
+					},
+					AcceleratorCount: &types.AcceleratorCountRange{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					AcceleratorTotalMemoryMiB: &types.AcceleratorTotalMemoryMiBRange{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					OsFamily:            types.CustomerManagedFleetOperatingSystemFamily("WINDOWS"),
+					CpuArchitectureType: types.CpuArchitectureType("x86_64"),
+					CustomAmounts: []types.FleetAmountCapability{
+						{
+							Name: ptr.String("__Name__"),
+							Min:  ptr.Float32(1.0),
+							Max:  ptr.Float32(1.0),
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Min:  ptr.Float32(1.0),
+							Max:  ptr.Float32(1.0),
+						},
+					},
+					CustomAttributes: []types.FleetAttributeCapability{
+						{
+							Name: ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				StorageProfileId:   ptr.String("__StorageProfileId__"),
+				TagPropagationMode: types.TagPropagationMode("NO_PROPAGATION"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		HostConfiguration: &types.HostConfiguration{
+			ScriptBody:           ptr.String("__ScriptBody__"),
+			ScriptTimeoutSeconds: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1432,7 +1762,57 @@ func TestCheckResponseSnapshot_CreateJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateJob(context.Background(), &CreateJobInput{})
+	got, err := svc.CreateJob(context.Background(), &CreateJobInput{
+		FarmId:       ptr.String("__FarmId__"),
+		QueueId:      ptr.String("__QueueId__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+		Template:     ptr.String("__Template__"),
+		TemplateType: types.JobTemplateType("JSON"),
+		Priority:     ptr.Int32(1),
+		Parameters: map[string]types.JobParameter{
+			"key0": &types.JobParameterMemberInt{
+				Value: "__JobParameterMemberInt__",
+			},
+		},
+		Attachments: &types.Attachments{
+			Manifests: []types.ManifestProperties{
+				{
+					FileSystemLocationName: ptr.String("__FileSystemLocationName__"),
+					RootPath:               ptr.String("__RootPath__"),
+					RootPathFormat:         types.PathFormat("windows"),
+					OutputRelativeDirectories: []string{
+						"__Member__",
+						"__Member__",
+					},
+					InputManifestPath: ptr.String("__InputManifestPath__"),
+					InputManifestHash: ptr.String("__InputManifestHash__"),
+				},
+				{
+					FileSystemLocationName: ptr.String("__FileSystemLocationName__"),
+					RootPath:               ptr.String("__RootPath__"),
+					RootPathFormat:         types.PathFormat("windows"),
+					OutputRelativeDirectories: []string{
+						"__Member__",
+						"__Member__",
+					},
+					InputManifestPath: ptr.String("__InputManifestPath__"),
+					InputManifestHash: ptr.String("__InputManifestHash__"),
+				},
+			},
+			FileSystem: types.JobAttachmentsFileSystem("COPIED"),
+		},
+		StorageProfileId:    ptr.String("__StorageProfileId__"),
+		TargetTaskRunStatus: types.CreateJobTargetTaskRunStatus("READY"),
+		MaxFailedTasksCount: ptr.Int32(1),
+		MaxRetriesPerTask:   ptr.Int32(1),
+		MaxWorkerCount:      ptr.Int32(1),
+		SourceJobId:         ptr.String("__SourceJobId__"),
+		NameOverride:        ptr.String("__NameOverride__"),
+		DescriptionOverride: ptr.String("__DescriptionOverride__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1453,7 +1833,21 @@ func TestCheckResponseSnapshot_CreateLicenseEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLicenseEndpoint(context.Background(), &CreateLicenseEndpointInput{})
+	got, err := svc.CreateLicenseEndpoint(context.Background(), &CreateLicenseEndpointInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		VpcId:       ptr.String("__VpcId__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1474,7 +1868,14 @@ func TestCheckResponseSnapshot_CreateLimit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLimit(context.Background(), &CreateLimitInput{})
+	got, err := svc.CreateLimit(context.Background(), &CreateLimitInput{
+		FarmId:                ptr.String("__FarmId__"),
+		ClientToken:           ptr.String("__ClientToken__"),
+		DisplayName:           ptr.String("__DisplayName__"),
+		AmountRequirementName: ptr.String("__AmountRequirementName__"),
+		MaxCount:              ptr.Int32(1),
+		Description:           ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1496,7 +1897,17 @@ func TestCheckResponseSnapshot_CreateMonitor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMonitor(context.Background(), &CreateMonitorInput{})
+	got, err := svc.CreateMonitor(context.Background(), &CreateMonitorInput{
+		ClientToken:               ptr.String("__ClientToken__"),
+		DisplayName:               ptr.String("__DisplayName__"),
+		IdentityCenterInstanceArn: ptr.String("__IdentityCenterInstanceArn__"),
+		IdentityCenterRegion:      ptr.String("__IdentityCenterRegion__"),
+		Subdomain:                 ptr.String("__Subdomain__"),
+		RoleArn:                   ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1517,7 +1928,43 @@ func TestCheckResponseSnapshot_CreateQueue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateQueue(context.Background(), &CreateQueueInput{})
+	got, err := svc.CreateQueue(context.Background(), &CreateQueueInput{
+		FarmId:              ptr.String("__FarmId__"),
+		ClientToken:         ptr.String("__ClientToken__"),
+		DisplayName:         ptr.String("__DisplayName__"),
+		Description:         ptr.String("__Description__"),
+		DefaultBudgetAction: types.DefaultQueueBudgetAction("NONE"),
+		JobAttachmentSettings: &types.JobAttachmentSettings{
+			S3BucketName: ptr.String("__S3BucketName__"),
+			RootPrefix:   ptr.String("__RootPrefix__"),
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		JobRunAsUser: &types.JobRunAsUser{
+			Posix: &types.PosixUser{
+				User:  ptr.String("__User__"),
+				Group: ptr.String("__Group__"),
+			},
+			Windows: &types.WindowsUser{
+				User:        ptr.String("__User__"),
+				PasswordArn: ptr.String("__PasswordArn__"),
+			},
+			RunAs: types.RunAs("QUEUE_CONFIGURED_USER"),
+		},
+		RequiredFileSystemLocationNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AllowedStorageProfileIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		SchedulingConfiguration: &types.SchedulingConfigurationMemberPriorityFifo{
+			Value: types.PriorityFifoSchedulingConfiguration{},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1538,7 +1985,14 @@ func TestCheckResponseSnapshot_CreateQueueEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateQueueEnvironment(context.Background(), &CreateQueueEnvironmentInput{})
+	got, err := svc.CreateQueueEnvironment(context.Background(), &CreateQueueEnvironmentInput{
+		FarmId:       ptr.String("__FarmId__"),
+		QueueId:      ptr.String("__QueueId__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+		Priority:     ptr.Int32(1),
+		TemplateType: types.EnvironmentTemplateType("JSON"),
+		Template:     ptr.String("__Template__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1557,7 +2011,11 @@ func TestCheckResponseSnapshot_CreateQueueFleetAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateQueueFleetAssociation(context.Background(), &CreateQueueFleetAssociationInput{})
+	got, err := svc.CreateQueueFleetAssociation(context.Background(), &CreateQueueFleetAssociationInput{
+		FarmId:  ptr.String("__FarmId__"),
+		QueueId: ptr.String("__QueueId__"),
+		FleetId: ptr.String("__FleetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1576,7 +2034,11 @@ func TestCheckResponseSnapshot_CreateQueueLimitAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateQueueLimitAssociation(context.Background(), &CreateQueueLimitAssociationInput{})
+	got, err := svc.CreateQueueLimitAssociation(context.Background(), &CreateQueueLimitAssociationInput{
+		FarmId:  ptr.String("__FarmId__"),
+		QueueId: ptr.String("__QueueId__"),
+		LimitId: ptr.String("__LimitId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1597,7 +2059,24 @@ func TestCheckResponseSnapshot_CreateStorageProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStorageProfile(context.Background(), &CreateStorageProfileInput{})
+	got, err := svc.CreateStorageProfile(context.Background(), &CreateStorageProfileInput{
+		FarmId:      ptr.String("__FarmId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		OsFamily:    types.StorageProfileOperatingSystemFamily("WINDOWS"),
+		FileSystemLocations: []types.FileSystemLocation{
+			{
+				Name: ptr.String("__Name__"),
+				Path: ptr.String("__Path__"),
+				Type: types.FileSystemLocationType("SHARED"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Path: ptr.String("__Path__"),
+				Type: types.FileSystemLocationType("SHARED"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1618,7 +2097,27 @@ func TestCheckResponseSnapshot_CreateWorker(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWorker(context.Background(), &CreateWorkerInput{})
+	got, err := svc.CreateWorker(context.Background(), &CreateWorkerInput{
+		FarmId:  ptr.String("__FarmId__"),
+		FleetId: ptr.String("__FleetId__"),
+		HostProperties: &types.HostPropertiesRequest{
+			IpAddresses: &types.IpAddresses{
+				IpV4Addresses: []string{
+					"__Member__",
+					"__Member__",
+				},
+				IpV6Addresses: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			HostName: ptr.String("__HostName__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1637,7 +2136,10 @@ func TestCheckResponseSnapshot_DeleteBudget(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBudget(context.Background(), &DeleteBudgetInput{})
+	got, err := svc.DeleteBudget(context.Background(), &DeleteBudgetInput{
+		FarmId:   ptr.String("__FarmId__"),
+		BudgetId: ptr.String("__BudgetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1656,7 +2158,9 @@ func TestCheckResponseSnapshot_DeleteFarm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFarm(context.Background(), &DeleteFarmInput{})
+	got, err := svc.DeleteFarm(context.Background(), &DeleteFarmInput{
+		FarmId: ptr.String("__FarmId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1675,7 +2179,11 @@ func TestCheckResponseSnapshot_DeleteFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFleet(context.Background(), &DeleteFleetInput{})
+	got, err := svc.DeleteFleet(context.Background(), &DeleteFleetInput{
+		FarmId:      ptr.String("__FarmId__"),
+		FleetId:     ptr.String("__FleetId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1694,7 +2202,9 @@ func TestCheckResponseSnapshot_DeleteLicenseEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLicenseEndpoint(context.Background(), &DeleteLicenseEndpointInput{})
+	got, err := svc.DeleteLicenseEndpoint(context.Background(), &DeleteLicenseEndpointInput{
+		LicenseEndpointId: ptr.String("__LicenseEndpointId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1713,7 +2223,10 @@ func TestCheckResponseSnapshot_DeleteLimit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLimit(context.Background(), &DeleteLimitInput{})
+	got, err := svc.DeleteLimit(context.Background(), &DeleteLimitInput{
+		FarmId:  ptr.String("__FarmId__"),
+		LimitId: ptr.String("__LimitId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1732,7 +2245,10 @@ func TestCheckResponseSnapshot_DeleteMeteredProduct(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMeteredProduct(context.Background(), &DeleteMeteredProductInput{})
+	got, err := svc.DeleteMeteredProduct(context.Background(), &DeleteMeteredProductInput{
+		LicenseEndpointId: ptr.String("__LicenseEndpointId__"),
+		ProductId:         ptr.String("__ProductId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1751,7 +2267,9 @@ func TestCheckResponseSnapshot_DeleteMonitor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMonitor(context.Background(), &DeleteMonitorInput{})
+	got, err := svc.DeleteMonitor(context.Background(), &DeleteMonitorInput{
+		MonitorId: ptr.String("__MonitorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1770,7 +2288,10 @@ func TestCheckResponseSnapshot_DeleteQueue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteQueue(context.Background(), &DeleteQueueInput{})
+	got, err := svc.DeleteQueue(context.Background(), &DeleteQueueInput{
+		FarmId:  ptr.String("__FarmId__"),
+		QueueId: ptr.String("__QueueId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1789,7 +2310,11 @@ func TestCheckResponseSnapshot_DeleteQueueEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteQueueEnvironment(context.Background(), &DeleteQueueEnvironmentInput{})
+	got, err := svc.DeleteQueueEnvironment(context.Background(), &DeleteQueueEnvironmentInput{
+		FarmId:             ptr.String("__FarmId__"),
+		QueueId:            ptr.String("__QueueId__"),
+		QueueEnvironmentId: ptr.String("__QueueEnvironmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1808,7 +2333,11 @@ func TestCheckResponseSnapshot_DeleteQueueFleetAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteQueueFleetAssociation(context.Background(), &DeleteQueueFleetAssociationInput{})
+	got, err := svc.DeleteQueueFleetAssociation(context.Background(), &DeleteQueueFleetAssociationInput{
+		FarmId:  ptr.String("__FarmId__"),
+		QueueId: ptr.String("__QueueId__"),
+		FleetId: ptr.String("__FleetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1827,7 +2356,11 @@ func TestCheckResponseSnapshot_DeleteQueueLimitAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteQueueLimitAssociation(context.Background(), &DeleteQueueLimitAssociationInput{})
+	got, err := svc.DeleteQueueLimitAssociation(context.Background(), &DeleteQueueLimitAssociationInput{
+		FarmId:  ptr.String("__FarmId__"),
+		QueueId: ptr.String("__QueueId__"),
+		LimitId: ptr.String("__LimitId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1846,7 +2379,10 @@ func TestCheckResponseSnapshot_DeleteStorageProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteStorageProfile(context.Background(), &DeleteStorageProfileInput{})
+	got, err := svc.DeleteStorageProfile(context.Background(), &DeleteStorageProfileInput{
+		FarmId:           ptr.String("__FarmId__"),
+		StorageProfileId: ptr.String("__StorageProfileId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1865,7 +2401,11 @@ func TestCheckResponseSnapshot_DeleteVolume(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVolume(context.Background(), &DeleteVolumeInput{})
+	got, err := svc.DeleteVolume(context.Background(), &DeleteVolumeInput{
+		FarmId:   ptr.String("__FarmId__"),
+		FleetId:  ptr.String("__FleetId__"),
+		VolumeId: ptr.String("__VolumeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1884,7 +2424,11 @@ func TestCheckResponseSnapshot_DeleteWorker(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorker(context.Background(), &DeleteWorkerInput{})
+	got, err := svc.DeleteWorker(context.Background(), &DeleteWorkerInput{
+		FarmId:   ptr.String("__FarmId__"),
+		FleetId:  ptr.String("__FleetId__"),
+		WorkerId: ptr.String("__WorkerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1903,7 +2447,10 @@ func TestCheckResponseSnapshot_DisassociateMemberFromFarm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateMemberFromFarm(context.Background(), &DisassociateMemberFromFarmInput{})
+	got, err := svc.DisassociateMemberFromFarm(context.Background(), &DisassociateMemberFromFarmInput{
+		FarmId:      ptr.String("__FarmId__"),
+		PrincipalId: ptr.String("__PrincipalId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1922,7 +2469,11 @@ func TestCheckResponseSnapshot_DisassociateMemberFromFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateMemberFromFleet(context.Background(), &DisassociateMemberFromFleetInput{})
+	got, err := svc.DisassociateMemberFromFleet(context.Background(), &DisassociateMemberFromFleetInput{
+		FarmId:      ptr.String("__FarmId__"),
+		FleetId:     ptr.String("__FleetId__"),
+		PrincipalId: ptr.String("__PrincipalId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1941,7 +2492,12 @@ func TestCheckResponseSnapshot_DisassociateMemberFromJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateMemberFromJob(context.Background(), &DisassociateMemberFromJobInput{})
+	got, err := svc.DisassociateMemberFromJob(context.Background(), &DisassociateMemberFromJobInput{
+		FarmId:      ptr.String("__FarmId__"),
+		QueueId:     ptr.String("__QueueId__"),
+		JobId:       ptr.String("__JobId__"),
+		PrincipalId: ptr.String("__PrincipalId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1960,7 +2516,11 @@ func TestCheckResponseSnapshot_DisassociateMemberFromQueue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateMemberFromQueue(context.Background(), &DisassociateMemberFromQueueInput{})
+	got, err := svc.DisassociateMemberFromQueue(context.Background(), &DisassociateMemberFromQueueInput{
+		FarmId:      ptr.String("__FarmId__"),
+		QueueId:     ptr.String("__QueueId__"),
+		PrincipalId: ptr.String("__PrincipalId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2014,7 +2574,10 @@ func TestCheckResponseSnapshot_GetBudget(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBudget(context.Background(), &GetBudgetInput{})
+	got, err := svc.GetBudget(context.Background(), &GetBudgetInput{
+		FarmId:   ptr.String("__FarmId__"),
+		BudgetId: ptr.String("__BudgetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2043,7 +2606,9 @@ func TestCheckResponseSnapshot_GetFarm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFarm(context.Background(), &GetFarmInput{})
+	got, err := svc.GetFarm(context.Background(), &GetFarmInput{
+		FarmId: ptr.String("__FarmId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2177,7 +2742,10 @@ func TestCheckResponseSnapshot_GetFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFleet(context.Background(), &GetFleetInput{})
+	got, err := svc.GetFleet(context.Background(), &GetFleetInput{
+		FarmId:  ptr.String("__FarmId__"),
+		FleetId: ptr.String("__FleetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2252,7 +2820,11 @@ func TestCheckResponseSnapshot_GetJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetJob(context.Background(), &GetJobInput{})
+	got, err := svc.GetJob(context.Background(), &GetJobInput{
+		FarmId:  ptr.String("__FarmId__"),
+		QueueId: ptr.String("__QueueId__"),
+		JobId:   ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2285,7 +2857,9 @@ func TestCheckResponseSnapshot_GetLicenseEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLicenseEndpoint(context.Background(), &GetLicenseEndpointInput{})
+	got, err := svc.GetLicenseEndpoint(context.Background(), &GetLicenseEndpointInput{
+		LicenseEndpointId: ptr.String("__LicenseEndpointId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2316,7 +2890,10 @@ func TestCheckResponseSnapshot_GetLimit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLimit(context.Background(), &GetLimitInput{})
+	got, err := svc.GetLimit(context.Background(), &GetLimitInput{
+		FarmId:  ptr.String("__FarmId__"),
+		LimitId: ptr.String("__LimitId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2348,7 +2925,9 @@ func TestCheckResponseSnapshot_GetMonitor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMonitor(context.Background(), &GetMonitorInput{})
+	got, err := svc.GetMonitor(context.Background(), &GetMonitorInput{
+		MonitorId: ptr.String("__MonitorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2371,7 +2950,9 @@ func TestCheckResponseSnapshot_GetMonitorSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMonitorSettings(context.Background(), &GetMonitorSettingsInput{})
+	got, err := svc.GetMonitorSettings(context.Background(), &GetMonitorSettingsInput{
+		MonitorId: ptr.String("__MonitorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2429,7 +3010,10 @@ func TestCheckResponseSnapshot_GetQueue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQueue(context.Background(), &GetQueueInput{})
+	got, err := svc.GetQueue(context.Background(), &GetQueueInput{
+		FarmId:  ptr.String("__FarmId__"),
+		QueueId: ptr.String("__QueueId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2458,7 +3042,11 @@ func TestCheckResponseSnapshot_GetQueueEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQueueEnvironment(context.Background(), &GetQueueEnvironmentInput{})
+	got, err := svc.GetQueueEnvironment(context.Background(), &GetQueueEnvironmentInput{
+		FarmId:             ptr.String("__FarmId__"),
+		QueueId:            ptr.String("__QueueId__"),
+		QueueEnvironmentId: ptr.String("__QueueEnvironmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2485,7 +3073,11 @@ func TestCheckResponseSnapshot_GetQueueFleetAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQueueFleetAssociation(context.Background(), &GetQueueFleetAssociationInput{})
+	got, err := svc.GetQueueFleetAssociation(context.Background(), &GetQueueFleetAssociationInput{
+		FarmId:  ptr.String("__FarmId__"),
+		QueueId: ptr.String("__QueueId__"),
+		FleetId: ptr.String("__FleetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2512,7 +3104,11 @@ func TestCheckResponseSnapshot_GetQueueLimitAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQueueLimitAssociation(context.Background(), &GetQueueLimitAssociationInput{})
+	got, err := svc.GetQueueLimitAssociation(context.Background(), &GetQueueLimitAssociationInput{
+		FarmId:  ptr.String("__FarmId__"),
+		QueueId: ptr.String("__QueueId__"),
+		LimitId: ptr.String("__LimitId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2576,7 +3172,12 @@ func TestCheckResponseSnapshot_GetSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSession(context.Background(), &GetSessionInput{})
+	got, err := svc.GetSession(context.Background(), &GetSessionInput{
+		FarmId:    ptr.String("__FarmId__"),
+		QueueId:   ptr.String("__QueueId__"),
+		JobId:     ptr.String("__JobId__"),
+		SessionId: ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2630,7 +3231,12 @@ func TestCheckResponseSnapshot_GetSessionAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSessionAction(context.Background(), &GetSessionActionInput{})
+	got, err := svc.GetSessionAction(context.Background(), &GetSessionActionInput{
+		FarmId:          ptr.String("__FarmId__"),
+		QueueId:         ptr.String("__QueueId__"),
+		JobId:           ptr.String("__JobId__"),
+		SessionActionId: ptr.String("__SessionActionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2705,7 +3311,12 @@ func TestCheckResponseSnapshot_GetSessionsStatisticsAggregation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSessionsStatisticsAggregation(context.Background(), &GetSessionsStatisticsAggregationInput{})
+	got, err := svc.GetSessionsStatisticsAggregation(context.Background(), &GetSessionsStatisticsAggregationInput{
+		FarmId:        ptr.String("__FarmId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+		AggregationId: ptr.String("__AggregationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2811,7 +3422,12 @@ func TestCheckResponseSnapshot_GetStep(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStep(context.Background(), &GetStepInput{})
+	got, err := svc.GetStep(context.Background(), &GetStepInput{
+		FarmId:  ptr.String("__FarmId__"),
+		QueueId: ptr.String("__QueueId__"),
+		JobId:   ptr.String("__JobId__"),
+		StepId:  ptr.String("__StepId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2850,7 +3466,10 @@ func TestCheckResponseSnapshot_GetStorageProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStorageProfile(context.Background(), &GetStorageProfileInput{})
+	got, err := svc.GetStorageProfile(context.Background(), &GetStorageProfileInput{
+		FarmId:           ptr.String("__FarmId__"),
+		StorageProfileId: ptr.String("__StorageProfileId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2885,7 +3504,11 @@ func TestCheckResponseSnapshot_GetStorageProfileForQueue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStorageProfileForQueue(context.Background(), &GetStorageProfileForQueueInput{})
+	got, err := svc.GetStorageProfileForQueue(context.Background(), &GetStorageProfileForQueueInput{
+		FarmId:           ptr.String("__FarmId__"),
+		QueueId:          ptr.String("__QueueId__"),
+		StorageProfileId: ptr.String("__StorageProfileId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2921,7 +3544,13 @@ func TestCheckResponseSnapshot_GetTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTask(context.Background(), &GetTaskInput{})
+	got, err := svc.GetTask(context.Background(), &GetTaskInput{
+		FarmId:  ptr.String("__FarmId__"),
+		QueueId: ptr.String("__QueueId__"),
+		JobId:   ptr.String("__JobId__"),
+		StepId:  ptr.String("__StepId__"),
+		TaskId:  ptr.String("__TaskId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2955,7 +3584,11 @@ func TestCheckResponseSnapshot_GetVolume(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVolume(context.Background(), &GetVolumeInput{})
+	got, err := svc.GetVolume(context.Background(), &GetVolumeInput{
+		FarmId:   ptr.String("__FarmId__"),
+		FleetId:  ptr.String("__FleetId__"),
+		VolumeId: ptr.String("__VolumeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3008,7 +3641,11 @@ func TestCheckResponseSnapshot_GetWorker(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorker(context.Background(), &GetWorkerInput{})
+	got, err := svc.GetWorker(context.Background(), &GetWorkerInput{
+		FarmId:   ptr.String("__FarmId__"),
+		FleetId:  ptr.String("__FleetId__"),
+		WorkerId: ptr.String("__WorkerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3043,7 +3680,10 @@ func TestCheckResponseSnapshot_ListAvailableMeteredProducts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAvailableMeteredProducts(context.Background(), &ListAvailableMeteredProductsInput{})
+	got, err := svc.ListAvailableMeteredProducts(context.Background(), &ListAvailableMeteredProductsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3100,7 +3740,12 @@ func TestCheckResponseSnapshot_ListBudgets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBudgets(context.Background(), &ListBudgetsInput{})
+	got, err := svc.ListBudgets(context.Background(), &ListBudgetsInput{
+		FarmId:     ptr.String("__FarmId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Status:     types.BudgetStatus("ACTIVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3137,7 +3782,11 @@ func TestCheckResponseSnapshot_ListFarmMembers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFarmMembers(context.Background(), &ListFarmMembersInput{})
+	got, err := svc.ListFarmMembers(context.Background(), &ListFarmMembersInput{
+		FarmId:     ptr.String("__FarmId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3178,7 +3827,11 @@ func TestCheckResponseSnapshot_ListFarms(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFarms(context.Background(), &ListFarmsInput{})
+	got, err := svc.ListFarms(context.Background(), &ListFarmsInput{
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		PrincipalId: ptr.String("__PrincipalId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3217,7 +3870,12 @@ func TestCheckResponseSnapshot_ListFleetMembers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFleetMembers(context.Background(), &ListFleetMembersInput{})
+	got, err := svc.ListFleetMembers(context.Background(), &ListFleetMembersInput{
+		FarmId:     ptr.String("__FarmId__"),
+		FleetId:    ptr.String("__FleetId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3400,7 +4058,14 @@ func TestCheckResponseSnapshot_ListFleets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFleets(context.Background(), &ListFleetsInput{})
+	got, err := svc.ListFleets(context.Background(), &ListFleetsInput{
+		FarmId:      ptr.String("__FarmId__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		PrincipalId: ptr.String("__PrincipalId__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		Status:      types.FleetStatus("ACTIVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3441,7 +4106,13 @@ func TestCheckResponseSnapshot_ListJobMembers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListJobMembers(context.Background(), &ListJobMembersInput{})
+	got, err := svc.ListJobMembers(context.Background(), &ListJobMembersInput{
+		FarmId:     ptr.String("__FarmId__"),
+		QueueId:    ptr.String("__QueueId__"),
+		JobId:      ptr.String("__JobId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3453,8 +4124,8 @@ func TestCheckResponseSnapshot_ListJobMembers(t *testing.T) {
 func TestCheckResponseSnapshot_ListJobParameterDefinitions(t *testing.T) {
 	want := &ListJobParameterDefinitionsOutput{
 		JobParameterDefinitions: []document.Interface{
-			nil,
-			nil,
+			document.NewLazyDocument("__Document__"),
+			document.NewLazyDocument("__Document__"),
 		},
 		NextToken: ptr.String("__NextToken__"),
 	}
@@ -3466,7 +4137,13 @@ func TestCheckResponseSnapshot_ListJobParameterDefinitions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListJobParameterDefinitions(context.Background(), &ListJobParameterDefinitionsInput{})
+	got, err := svc.ListJobParameterDefinitions(context.Background(), &ListJobParameterDefinitionsInput{
+		FarmId:     ptr.String("__FarmId__"),
+		QueueId:    ptr.String("__QueueId__"),
+		JobId:      ptr.String("__JobId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3535,7 +4212,13 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListJobs(context.Background(), &ListJobsInput{})
+	got, err := svc.ListJobs(context.Background(), &ListJobsInput{
+		FarmId:      ptr.String("__FarmId__"),
+		QueueId:     ptr.String("__QueueId__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		PrincipalId: ptr.String("__PrincipalId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3570,7 +4253,10 @@ func TestCheckResponseSnapshot_ListLicenseEndpoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLicenseEndpoints(context.Background(), &ListLicenseEndpointsInput{})
+	got, err := svc.ListLicenseEndpoints(context.Background(), &ListLicenseEndpointsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3617,7 +4303,11 @@ func TestCheckResponseSnapshot_ListLimits(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLimits(context.Background(), &ListLimitsInput{})
+	got, err := svc.ListLimits(context.Background(), &ListLimitsInput{
+		FarmId:     ptr.String("__FarmId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3652,7 +4342,11 @@ func TestCheckResponseSnapshot_ListMeteredProducts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMeteredProducts(context.Background(), &ListMeteredProductsInput{})
+	got, err := svc.ListMeteredProducts(context.Background(), &ListMeteredProductsInput{
+		LicenseEndpointId: ptr.String("__LicenseEndpointId__"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3703,7 +4397,10 @@ func TestCheckResponseSnapshot_ListMonitors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMonitors(context.Background(), &ListMonitorsInput{})
+	got, err := svc.ListMonitors(context.Background(), &ListMonitorsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3736,7 +4433,12 @@ func TestCheckResponseSnapshot_ListQueueEnvironments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListQueueEnvironments(context.Background(), &ListQueueEnvironmentsInput{})
+	got, err := svc.ListQueueEnvironments(context.Background(), &ListQueueEnvironmentsInput{
+		FarmId:     ptr.String("__FarmId__"),
+		QueueId:    ptr.String("__QueueId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3777,7 +4479,13 @@ func TestCheckResponseSnapshot_ListQueueFleetAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListQueueFleetAssociations(context.Background(), &ListQueueFleetAssociationsInput{})
+	got, err := svc.ListQueueFleetAssociations(context.Background(), &ListQueueFleetAssociationsInput{
+		FarmId:     ptr.String("__FarmId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		QueueId:    ptr.String("__QueueId__"),
+		FleetId:    ptr.String("__FleetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3818,7 +4526,13 @@ func TestCheckResponseSnapshot_ListQueueLimitAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListQueueLimitAssociations(context.Background(), &ListQueueLimitAssociationsInput{})
+	got, err := svc.ListQueueLimitAssociations(context.Background(), &ListQueueLimitAssociationsInput{
+		FarmId:     ptr.String("__FarmId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		QueueId:    ptr.String("__QueueId__"),
+		LimitId:    ptr.String("__LimitId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3857,7 +4571,12 @@ func TestCheckResponseSnapshot_ListQueueMembers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListQueueMembers(context.Background(), &ListQueueMembersInput{})
+	got, err := svc.ListQueueMembers(context.Background(), &ListQueueMembersInput{
+		FarmId:     ptr.String("__FarmId__"),
+		QueueId:    ptr.String("__QueueId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3904,7 +4623,13 @@ func TestCheckResponseSnapshot_ListQueues(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListQueues(context.Background(), &ListQueuesInput{})
+	got, err := svc.ListQueues(context.Background(), &ListQueuesInput{
+		FarmId:      ptr.String("__FarmId__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		PrincipalId: ptr.String("__PrincipalId__"),
+		Status:      types.QueueStatus("IDLE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3973,7 +4698,15 @@ func TestCheckResponseSnapshot_ListSessionActions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSessionActions(context.Background(), &ListSessionActionsInput{})
+	got, err := svc.ListSessionActions(context.Background(), &ListSessionActionsInput{
+		FarmId:     ptr.String("__FarmId__"),
+		QueueId:    ptr.String("__QueueId__"),
+		JobId:      ptr.String("__JobId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		SessionId:  ptr.String("__SessionId__"),
+		TaskId:     ptr.String("__TaskId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4018,7 +4751,13 @@ func TestCheckResponseSnapshot_ListSessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSessions(context.Background(), &ListSessionsInput{})
+	got, err := svc.ListSessions(context.Background(), &ListSessionsInput{
+		FarmId:     ptr.String("__FarmId__"),
+		QueueId:    ptr.String("__QueueId__"),
+		JobId:      ptr.String("__JobId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4059,7 +4798,13 @@ func TestCheckResponseSnapshot_ListSessionsForWorker(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSessionsForWorker(context.Background(), &ListSessionsForWorkerInput{})
+	got, err := svc.ListSessionsForWorker(context.Background(), &ListSessionsForWorkerInput{
+		FarmId:     ptr.String("__FarmId__"),
+		FleetId:    ptr.String("__FleetId__"),
+		WorkerId:   ptr.String("__WorkerId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4090,7 +4835,14 @@ func TestCheckResponseSnapshot_ListStepConsumers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStepConsumers(context.Background(), &ListStepConsumersInput{})
+	got, err := svc.ListStepConsumers(context.Background(), &ListStepConsumersInput{
+		FarmId:     ptr.String("__FarmId__"),
+		QueueId:    ptr.String("__QueueId__"),
+		JobId:      ptr.String("__JobId__"),
+		StepId:     ptr.String("__StepId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4121,7 +4873,14 @@ func TestCheckResponseSnapshot_ListStepDependencies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStepDependencies(context.Background(), &ListStepDependenciesInput{})
+	got, err := svc.ListStepDependencies(context.Background(), &ListStepDependenciesInput{
+		FarmId:     ptr.String("__FarmId__"),
+		QueueId:    ptr.String("__QueueId__"),
+		JobId:      ptr.String("__JobId__"),
+		StepId:     ptr.String("__StepId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4192,7 +4951,13 @@ func TestCheckResponseSnapshot_ListSteps(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSteps(context.Background(), &ListStepsInput{})
+	got, err := svc.ListSteps(context.Background(), &ListStepsInput{
+		FarmId:     ptr.String("__FarmId__"),
+		QueueId:    ptr.String("__QueueId__"),
+		JobId:      ptr.String("__JobId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4225,7 +4990,11 @@ func TestCheckResponseSnapshot_ListStorageProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStorageProfiles(context.Background(), &ListStorageProfilesInput{})
+	got, err := svc.ListStorageProfiles(context.Background(), &ListStorageProfilesInput{
+		FarmId:     ptr.String("__FarmId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4258,7 +5027,12 @@ func TestCheckResponseSnapshot_ListStorageProfilesForQueue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStorageProfilesForQueue(context.Background(), &ListStorageProfilesForQueueInput{})
+	got, err := svc.ListStorageProfilesForQueue(context.Background(), &ListStorageProfilesForQueueInput{
+		FarmId:     ptr.String("__FarmId__"),
+		QueueId:    ptr.String("__QueueId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4281,7 +5055,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4340,7 +5116,14 @@ func TestCheckResponseSnapshot_ListTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTasks(context.Background(), &ListTasksInput{})
+	got, err := svc.ListTasks(context.Background(), &ListTasksInput{
+		FarmId:     ptr.String("__FarmId__"),
+		QueueId:    ptr.String("__QueueId__"),
+		JobId:      ptr.String("__JobId__"),
+		StepId:     ptr.String("__StepId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4381,7 +5164,12 @@ func TestCheckResponseSnapshot_ListVolumes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVolumes(context.Background(), &ListVolumesInput{})
+	got, err := svc.ListVolumes(context.Background(), &ListVolumesInput{
+		FarmId:     ptr.String("__FarmId__"),
+		FleetId:    ptr.String("__FleetId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4474,7 +5262,12 @@ func TestCheckResponseSnapshot_ListWorkers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkers(context.Background(), &ListWorkersInput{})
+	got, err := svc.ListWorkers(context.Background(), &ListWorkersInput{
+		FarmId:     ptr.String("__FarmId__"),
+		FleetId:    ptr.String("__FleetId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4493,7 +5286,10 @@ func TestCheckResponseSnapshot_PutMeteredProduct(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutMeteredProduct(context.Background(), &PutMeteredProductInput{})
+	got, err := svc.PutMeteredProduct(context.Background(), &PutMeteredProductInput{
+		LicenseEndpointId: ptr.String("__LicenseEndpointId__"),
+		ProductId:         ptr.String("__ProductId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4575,7 +5371,46 @@ func TestCheckResponseSnapshot_SearchJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchJobs(context.Background(), &SearchJobsInput{})
+	got, err := svc.SearchJobs(context.Background(), &SearchJobsInput{
+		FarmId: ptr.String("__FarmId__"),
+		FilterExpressions: &types.SearchGroupedFilterExpressions{
+			Filters: []types.SearchFilterExpression{
+				&types.SearchFilterExpressionMemberDateTimeFilter{
+					Value: types.DateTimeFilterExpression{
+						Name:     ptr.String("__Name__"),
+						Operator: types.ComparisonOperator("EQUAL"),
+						DateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				&types.SearchFilterExpressionMemberDateTimeFilter{
+					Value: types.DateTimeFilterExpression{
+						Name:     ptr.String("__Name__"),
+						Operator: types.ComparisonOperator("EQUAL"),
+						DateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
+			Operator: types.LogicalOperator("AND"),
+		},
+		SortExpressions: []types.SearchSortExpression{
+			&types.SearchSortExpressionMemberUserJobsFirst{
+				Value: types.UserJobsFirst{
+					UserIdentityId: ptr.String("__UserIdentityId__"),
+				},
+			},
+			&types.SearchSortExpressionMemberUserJobsFirst{
+				Value: types.UserJobsFirst{
+					UserIdentityId: ptr.String("__UserIdentityId__"),
+				},
+			},
+		},
+		ItemOffset: ptr.Int32(1),
+		PageSize:   ptr.Int32(1),
+		QueueIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4685,7 +5520,47 @@ func TestCheckResponseSnapshot_SearchSteps(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchSteps(context.Background(), &SearchStepsInput{})
+	got, err := svc.SearchSteps(context.Background(), &SearchStepsInput{
+		FarmId: ptr.String("__FarmId__"),
+		FilterExpressions: &types.SearchGroupedFilterExpressions{
+			Filters: []types.SearchFilterExpression{
+				&types.SearchFilterExpressionMemberDateTimeFilter{
+					Value: types.DateTimeFilterExpression{
+						Name:     ptr.String("__Name__"),
+						Operator: types.ComparisonOperator("EQUAL"),
+						DateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				&types.SearchFilterExpressionMemberDateTimeFilter{
+					Value: types.DateTimeFilterExpression{
+						Name:     ptr.String("__Name__"),
+						Operator: types.ComparisonOperator("EQUAL"),
+						DateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
+			Operator: types.LogicalOperator("AND"),
+		},
+		SortExpressions: []types.SearchSortExpression{
+			&types.SearchSortExpressionMemberUserJobsFirst{
+				Value: types.UserJobsFirst{
+					UserIdentityId: ptr.String("__UserIdentityId__"),
+				},
+			},
+			&types.SearchSortExpressionMemberUserJobsFirst{
+				Value: types.UserJobsFirst{
+					UserIdentityId: ptr.String("__UserIdentityId__"),
+				},
+			},
+		},
+		ItemOffset: ptr.Int32(1),
+		PageSize:   ptr.Int32(1),
+		QueueIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4747,7 +5622,47 @@ func TestCheckResponseSnapshot_SearchTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchTasks(context.Background(), &SearchTasksInput{})
+	got, err := svc.SearchTasks(context.Background(), &SearchTasksInput{
+		FarmId: ptr.String("__FarmId__"),
+		FilterExpressions: &types.SearchGroupedFilterExpressions{
+			Filters: []types.SearchFilterExpression{
+				&types.SearchFilterExpressionMemberDateTimeFilter{
+					Value: types.DateTimeFilterExpression{
+						Name:     ptr.String("__Name__"),
+						Operator: types.ComparisonOperator("EQUAL"),
+						DateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				&types.SearchFilterExpressionMemberDateTimeFilter{
+					Value: types.DateTimeFilterExpression{
+						Name:     ptr.String("__Name__"),
+						Operator: types.ComparisonOperator("EQUAL"),
+						DateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
+			Operator: types.LogicalOperator("AND"),
+		},
+		SortExpressions: []types.SearchSortExpression{
+			&types.SearchSortExpressionMemberUserJobsFirst{
+				Value: types.UserJobsFirst{
+					UserIdentityId: ptr.String("__UserIdentityId__"),
+				},
+			},
+			&types.SearchSortExpressionMemberUserJobsFirst{
+				Value: types.UserJobsFirst{
+					UserIdentityId: ptr.String("__UserIdentityId__"),
+				},
+			},
+		},
+		ItemOffset: ptr.Int32(1),
+		PageSize:   ptr.Int32(1),
+		QueueIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4819,7 +5734,46 @@ func TestCheckResponseSnapshot_SearchWorkers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchWorkers(context.Background(), &SearchWorkersInput{})
+	got, err := svc.SearchWorkers(context.Background(), &SearchWorkersInput{
+		FarmId: ptr.String("__FarmId__"),
+		FilterExpressions: &types.SearchGroupedFilterExpressions{
+			Filters: []types.SearchFilterExpression{
+				&types.SearchFilterExpressionMemberDateTimeFilter{
+					Value: types.DateTimeFilterExpression{
+						Name:     ptr.String("__Name__"),
+						Operator: types.ComparisonOperator("EQUAL"),
+						DateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				&types.SearchFilterExpressionMemberDateTimeFilter{
+					Value: types.DateTimeFilterExpression{
+						Name:     ptr.String("__Name__"),
+						Operator: types.ComparisonOperator("EQUAL"),
+						DateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
+			Operator: types.LogicalOperator("AND"),
+		},
+		SortExpressions: []types.SearchSortExpression{
+			&types.SearchSortExpressionMemberUserJobsFirst{
+				Value: types.UserJobsFirst{
+					UserIdentityId: ptr.String("__UserIdentityId__"),
+				},
+			},
+			&types.SearchSortExpressionMemberUserJobsFirst{
+				Value: types.UserJobsFirst{
+					UserIdentityId: ptr.String("__UserIdentityId__"),
+				},
+			},
+		},
+		ItemOffset: ptr.Int32(1),
+		PageSize:   ptr.Int32(1),
+		FleetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4840,7 +5794,27 @@ func TestCheckResponseSnapshot_StartSessionsStatisticsAggregation(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartSessionsStatisticsAggregation(context.Background(), &StartSessionsStatisticsAggregationInput{})
+	got, err := svc.StartSessionsStatisticsAggregation(context.Background(), &StartSessionsStatisticsAggregationInput{
+		FarmId: ptr.String("__FarmId__"),
+		ResourceIds: &types.SessionsStatisticsResourcesMemberQueueIds{
+			Value: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Timezone:  ptr.String("__Timezone__"),
+		Period:    types.Period("HOURLY"),
+		GroupBy: []types.UsageGroupByField{
+			types.UsageGroupByField("QUEUE_ID"),
+			types.UsageGroupByField("QUEUE_ID"),
+		},
+		Statistics: []types.UsageStatistic{
+			types.UsageStatistic("SUM"),
+			types.UsageStatistic("SUM"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4859,7 +5833,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4878,7 +5857,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4897,7 +5882,43 @@ func TestCheckResponseSnapshot_UpdateBudget(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBudget(context.Background(), &UpdateBudgetInput{})
+	got, err := svc.UpdateBudget(context.Background(), &UpdateBudgetInput{
+		FarmId:                 ptr.String("__FarmId__"),
+		BudgetId:               ptr.String("__BudgetId__"),
+		ClientToken:            ptr.String("__ClientToken__"),
+		DisplayName:            ptr.String("__DisplayName__"),
+		Description:            ptr.String("__Description__"),
+		Status:                 types.BudgetStatus("ACTIVE"),
+		ApproximateDollarLimit: ptr.Float32(1.0),
+		ActionsToAdd: []types.BudgetActionToAdd{
+			{
+				Type:                types.BudgetActionType("STOP_SCHEDULING_AND_COMPLETE_TASKS"),
+				ThresholdPercentage: ptr.Float32(1.0),
+				Description:         ptr.String("__Description__"),
+			},
+			{
+				Type:                types.BudgetActionType("STOP_SCHEDULING_AND_COMPLETE_TASKS"),
+				ThresholdPercentage: ptr.Float32(1.0),
+				Description:         ptr.String("__Description__"),
+			},
+		},
+		ActionsToRemove: []types.BudgetActionToRemove{
+			{
+				Type:                types.BudgetActionType("STOP_SCHEDULING_AND_COMPLETE_TASKS"),
+				ThresholdPercentage: ptr.Float32(1.0),
+			},
+			{
+				Type:                types.BudgetActionType("STOP_SCHEDULING_AND_COMPLETE_TASKS"),
+				ThresholdPercentage: ptr.Float32(1.0),
+			},
+		},
+		Schedule: &types.BudgetScheduleMemberFixed{
+			Value: types.FixedBudgetSchedule{
+				StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4916,7 +5937,12 @@ func TestCheckResponseSnapshot_UpdateFarm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFarm(context.Background(), &UpdateFarmInput{})
+	got, err := svc.UpdateFarm(context.Background(), &UpdateFarmInput{
+		FarmId:          ptr.String("__FarmId__"),
+		DisplayName:     ptr.String("__DisplayName__"),
+		Description:     ptr.String("__Description__"),
+		CostScaleFactor: ptr.Float32(1.0),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4935,7 +5961,84 @@ func TestCheckResponseSnapshot_UpdateFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFleet(context.Background(), &UpdateFleetInput{})
+	got, err := svc.UpdateFleet(context.Background(), &UpdateFleetInput{
+		FarmId:         ptr.String("__FarmId__"),
+		FleetId:        ptr.String("__FleetId__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+		DisplayName:    ptr.String("__DisplayName__"),
+		Description:    ptr.String("__Description__"),
+		RoleArn:        ptr.String("__RoleArn__"),
+		MinWorkerCount: ptr.Int32(1),
+		MaxWorkerCount: ptr.Int32(1),
+		Configuration: &types.FleetConfigurationMemberCustomerManaged{
+			Value: types.CustomerManagedFleetConfiguration{
+				Mode: types.AutoScalingMode("NO_SCALING"),
+				AutoScalingConfiguration: &types.CustomerManagedAutoScalingConfiguration{
+					StandbyWorkerCount:        ptr.Int32(1),
+					WorkerIdleDurationSeconds: ptr.Int32(1),
+					ScaleOutWorkersPerMinute:  ptr.Int32(1),
+				},
+				WorkerCapabilities: &types.CustomerManagedWorkerCapabilities{
+					VCpuCount: &types.VCpuCountRange{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					MemoryMiB: &types.MemoryMiBRange{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					AcceleratorTypes: []types.AcceleratorType{
+						types.AcceleratorType("gpu"),
+						types.AcceleratorType("gpu"),
+					},
+					AcceleratorCount: &types.AcceleratorCountRange{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					AcceleratorTotalMemoryMiB: &types.AcceleratorTotalMemoryMiBRange{
+						Min: ptr.Int32(1),
+						Max: ptr.Int32(1),
+					},
+					OsFamily:            types.CustomerManagedFleetOperatingSystemFamily("WINDOWS"),
+					CpuArchitectureType: types.CpuArchitectureType("x86_64"),
+					CustomAmounts: []types.FleetAmountCapability{
+						{
+							Name: ptr.String("__Name__"),
+							Min:  ptr.Float32(1.0),
+							Max:  ptr.Float32(1.0),
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Min:  ptr.Float32(1.0),
+							Max:  ptr.Float32(1.0),
+						},
+					},
+					CustomAttributes: []types.FleetAttributeCapability{
+						{
+							Name: ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				StorageProfileId:   ptr.String("__StorageProfileId__"),
+				TagPropagationMode: types.TagPropagationMode("NO_PROPAGATION"),
+			},
+		},
+		HostConfiguration: &types.HostConfiguration{
+			ScriptBody:           ptr.String("__ScriptBody__"),
+			ScriptTimeoutSeconds: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4954,7 +6057,20 @@ func TestCheckResponseSnapshot_UpdateJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateJob(context.Background(), &UpdateJobInput{})
+	got, err := svc.UpdateJob(context.Background(), &UpdateJobInput{
+		FarmId:              ptr.String("__FarmId__"),
+		QueueId:             ptr.String("__QueueId__"),
+		JobId:               ptr.String("__JobId__"),
+		ClientToken:         ptr.String("__ClientToken__"),
+		TargetTaskRunStatus: types.JobTargetTaskRunStatus("READY"),
+		Priority:            ptr.Int32(1),
+		MaxFailedTasksCount: ptr.Int32(1),
+		MaxRetriesPerTask:   ptr.Int32(1),
+		LifecycleStatus:     types.UpdateJobLifecycleStatus("ARCHIVED"),
+		MaxWorkerCount:      ptr.Int32(1),
+		Name:                ptr.String("__Name__"),
+		Description:         ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4973,7 +6089,13 @@ func TestCheckResponseSnapshot_UpdateLimit(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLimit(context.Background(), &UpdateLimitInput{})
+	got, err := svc.UpdateLimit(context.Background(), &UpdateLimitInput{
+		FarmId:      ptr.String("__FarmId__"),
+		LimitId:     ptr.String("__LimitId__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		Description: ptr.String("__Description__"),
+		MaxCount:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4992,7 +6114,12 @@ func TestCheckResponseSnapshot_UpdateMonitor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMonitor(context.Background(), &UpdateMonitorInput{})
+	got, err := svc.UpdateMonitor(context.Background(), &UpdateMonitorInput{
+		MonitorId:   ptr.String("__MonitorId__"),
+		Subdomain:   ptr.String("__Subdomain__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		RoleArn:     ptr.String("__RoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5011,7 +6138,12 @@ func TestCheckResponseSnapshot_UpdateMonitorSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMonitorSettings(context.Background(), &UpdateMonitorSettingsInput{})
+	got, err := svc.UpdateMonitorSettings(context.Background(), &UpdateMonitorSettingsInput{
+		MonitorId: ptr.String("__MonitorId__"),
+		Settings: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5030,7 +6162,49 @@ func TestCheckResponseSnapshot_UpdateQueue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateQueue(context.Background(), &UpdateQueueInput{})
+	got, err := svc.UpdateQueue(context.Background(), &UpdateQueueInput{
+		FarmId:              ptr.String("__FarmId__"),
+		QueueId:             ptr.String("__QueueId__"),
+		ClientToken:         ptr.String("__ClientToken__"),
+		DisplayName:         ptr.String("__DisplayName__"),
+		Description:         ptr.String("__Description__"),
+		DefaultBudgetAction: types.DefaultQueueBudgetAction("NONE"),
+		JobAttachmentSettings: &types.JobAttachmentSettings{
+			S3BucketName: ptr.String("__S3BucketName__"),
+			RootPrefix:   ptr.String("__RootPrefix__"),
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		JobRunAsUser: &types.JobRunAsUser{
+			Posix: &types.PosixUser{
+				User:  ptr.String("__User__"),
+				Group: ptr.String("__Group__"),
+			},
+			Windows: &types.WindowsUser{
+				User:        ptr.String("__User__"),
+				PasswordArn: ptr.String("__PasswordArn__"),
+			},
+			RunAs: types.RunAs("QUEUE_CONFIGURED_USER"),
+		},
+		RequiredFileSystemLocationNamesToAdd: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RequiredFileSystemLocationNamesToRemove: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AllowedStorageProfileIdsToAdd: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AllowedStorageProfileIdsToRemove: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SchedulingConfiguration: &types.SchedulingConfigurationMemberPriorityFifo{
+			Value: types.PriorityFifoSchedulingConfiguration{},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5049,7 +6223,15 @@ func TestCheckResponseSnapshot_UpdateQueueEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateQueueEnvironment(context.Background(), &UpdateQueueEnvironmentInput{})
+	got, err := svc.UpdateQueueEnvironment(context.Background(), &UpdateQueueEnvironmentInput{
+		FarmId:             ptr.String("__FarmId__"),
+		QueueId:            ptr.String("__QueueId__"),
+		QueueEnvironmentId: ptr.String("__QueueEnvironmentId__"),
+		ClientToken:        ptr.String("__ClientToken__"),
+		Priority:           ptr.Int32(1),
+		TemplateType:       types.EnvironmentTemplateType("JSON"),
+		Template:           ptr.String("__Template__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5068,7 +6250,12 @@ func TestCheckResponseSnapshot_UpdateQueueFleetAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateQueueFleetAssociation(context.Background(), &UpdateQueueFleetAssociationInput{})
+	got, err := svc.UpdateQueueFleetAssociation(context.Background(), &UpdateQueueFleetAssociationInput{
+		FarmId:  ptr.String("__FarmId__"),
+		QueueId: ptr.String("__QueueId__"),
+		FleetId: ptr.String("__FleetId__"),
+		Status:  types.UpdateQueueFleetAssociationStatus("ACTIVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5087,7 +6274,12 @@ func TestCheckResponseSnapshot_UpdateQueueLimitAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateQueueLimitAssociation(context.Background(), &UpdateQueueLimitAssociationInput{})
+	got, err := svc.UpdateQueueLimitAssociation(context.Background(), &UpdateQueueLimitAssociationInput{
+		FarmId:  ptr.String("__FarmId__"),
+		QueueId: ptr.String("__QueueId__"),
+		LimitId: ptr.String("__LimitId__"),
+		Status:  types.UpdateQueueLimitAssociationStatus("ACTIVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5106,7 +6298,14 @@ func TestCheckResponseSnapshot_UpdateSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSession(context.Background(), &UpdateSessionInput{})
+	got, err := svc.UpdateSession(context.Background(), &UpdateSessionInput{
+		FarmId:                ptr.String("__FarmId__"),
+		QueueId:               ptr.String("__QueueId__"),
+		JobId:                 ptr.String("__JobId__"),
+		SessionId:             ptr.String("__SessionId__"),
+		ClientToken:           ptr.String("__ClientToken__"),
+		TargetLifecycleStatus: types.SessionLifecycleTargetStatus("ENDED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5125,7 +6324,14 @@ func TestCheckResponseSnapshot_UpdateStep(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateStep(context.Background(), &UpdateStepInput{})
+	got, err := svc.UpdateStep(context.Background(), &UpdateStepInput{
+		FarmId:              ptr.String("__FarmId__"),
+		QueueId:             ptr.String("__QueueId__"),
+		JobId:               ptr.String("__JobId__"),
+		StepId:              ptr.String("__StepId__"),
+		ClientToken:         ptr.String("__ClientToken__"),
+		TargetTaskRunStatus: types.StepTargetTaskRunStatus("READY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5144,7 +6350,37 @@ func TestCheckResponseSnapshot_UpdateStorageProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateStorageProfile(context.Background(), &UpdateStorageProfileInput{})
+	got, err := svc.UpdateStorageProfile(context.Background(), &UpdateStorageProfileInput{
+		FarmId:           ptr.String("__FarmId__"),
+		StorageProfileId: ptr.String("__StorageProfileId__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+		DisplayName:      ptr.String("__DisplayName__"),
+		OsFamily:         types.StorageProfileOperatingSystemFamily("WINDOWS"),
+		FileSystemLocationsToAdd: []types.FileSystemLocation{
+			{
+				Name: ptr.String("__Name__"),
+				Path: ptr.String("__Path__"),
+				Type: types.FileSystemLocationType("SHARED"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Path: ptr.String("__Path__"),
+				Type: types.FileSystemLocationType("SHARED"),
+			},
+		},
+		FileSystemLocationsToRemove: []types.FileSystemLocation{
+			{
+				Name: ptr.String("__Name__"),
+				Path: ptr.String("__Path__"),
+				Type: types.FileSystemLocationType("SHARED"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Path: ptr.String("__Path__"),
+				Type: types.FileSystemLocationType("SHARED"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5163,7 +6399,15 @@ func TestCheckResponseSnapshot_UpdateTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTask(context.Background(), &UpdateTaskInput{})
+	got, err := svc.UpdateTask(context.Background(), &UpdateTaskInput{
+		FarmId:          ptr.String("__FarmId__"),
+		QueueId:         ptr.String("__QueueId__"),
+		JobId:           ptr.String("__JobId__"),
+		StepId:          ptr.String("__StepId__"),
+		TaskId:          ptr.String("__TaskId__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		TargetRunStatus: types.TaskTargetRunStatus("READY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5197,7 +6441,53 @@ func TestCheckResponseSnapshot_UpdateWorker(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWorker(context.Background(), &UpdateWorkerInput{})
+	got, err := svc.UpdateWorker(context.Background(), &UpdateWorkerInput{
+		FarmId:   ptr.String("__FarmId__"),
+		FleetId:  ptr.String("__FleetId__"),
+		WorkerId: ptr.String("__WorkerId__"),
+		Status:   types.UpdatedWorkerStatus("STARTED"),
+		Capabilities: &types.WorkerCapabilities{
+			Amounts: []types.WorkerAmountCapability{
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.Float32(1.0),
+				},
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.Float32(1.0),
+				},
+			},
+			Attributes: []types.WorkerAttributeCapability{
+				{
+					Name: ptr.String("__Name__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		HostProperties: &types.HostPropertiesRequest{
+			IpAddresses: &types.IpAddresses{
+				IpV4Addresses: []string{
+					"__Member__",
+					"__Member__",
+				},
+				IpV6Addresses: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			HostName: ptr.String("__HostName__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5259,7 +6549,32 @@ func TestCheckResponseSnapshot_UpdateWorkerSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWorkerSchedule(context.Background(), &UpdateWorkerScheduleInput{})
+	got, err := svc.UpdateWorkerSchedule(context.Background(), &UpdateWorkerScheduleInput{
+		FarmId:   ptr.String("__FarmId__"),
+		FleetId:  ptr.String("__FleetId__"),
+		WorkerId: ptr.String("__WorkerId__"),
+		UpdatedSessionActions: map[string]types.UpdatedSessionActionInfo{
+			"key0": {
+				CompletedStatus: types.CompletedStatus("SUCCEEDED"),
+				ProcessExitCode: ptr.Int32(1),
+				ProgressMessage: ptr.String("__ProgressMessage__"),
+				StartedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ProgressPercent: ptr.Float32(1.0),
+				Manifests: []types.TaskRunManifestPropertiesRequest{
+					{
+						OutputManifestPath: ptr.String("__OutputManifestPath__"),
+						OutputManifestHash: ptr.String("__OutputManifestHash__"),
+					},
+					{
+						OutputManifestPath: ptr.String("__OutputManifestPath__"),
+						OutputManifestHash: ptr.String("__OutputManifestHash__"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5283,7 +6598,14 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateMemberToFarm(context.Background(), &AssociateMemberToFarmInput{})
+	_, opErr := svc.AssociateMemberToFarm(context.Background(), &AssociateMemberToFarmInput{
+		FarmId:               ptr.String("__FarmId__"),
+		PrincipalType:        types.DeadlinePrincipalType("USER"),
+		IdentityStoreId:      ptr.String("__IdentityStoreId__"),
+		MembershipLevel:      types.MembershipLevel("VIEWER"),
+		PrincipalId:          ptr.String("__PrincipalId__"),
+		IdentityCenterRegion: ptr.String("__IdentityCenterRegion__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5314,7 +6636,11 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssumeFleetRoleForWorker(context.Background(), &AssumeFleetRoleForWorkerInput{})
+	_, opErr := svc.AssumeFleetRoleForWorker(context.Background(), &AssumeFleetRoleForWorkerInput{
+		FarmId:   ptr.String("__FarmId__"),
+		FleetId:  ptr.String("__FleetId__"),
+		WorkerId: ptr.String("__WorkerId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5340,7 +6666,14 @@ func TestCheckResponseSnapshot_Error_InternalServerErrorException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateMemberToFarm(context.Background(), &AssociateMemberToFarmInput{})
+	_, opErr := svc.AssociateMemberToFarm(context.Background(), &AssociateMemberToFarmInput{
+		FarmId:               ptr.String("__FarmId__"),
+		PrincipalType:        types.DeadlinePrincipalType("USER"),
+		IdentityStoreId:      ptr.String("__IdentityStoreId__"),
+		MembershipLevel:      types.MembershipLevel("VIEWER"),
+		PrincipalId:          ptr.String("__PrincipalId__"),
+		IdentityCenterRegion: ptr.String("__IdentityCenterRegion__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5370,7 +6703,14 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateMemberToFarm(context.Background(), &AssociateMemberToFarmInput{})
+	_, opErr := svc.AssociateMemberToFarm(context.Background(), &AssociateMemberToFarmInput{
+		FarmId:               ptr.String("__FarmId__"),
+		PrincipalType:        types.DeadlinePrincipalType("USER"),
+		IdentityStoreId:      ptr.String("__IdentityStoreId__"),
+		MembershipLevel:      types.MembershipLevel("VIEWER"),
+		PrincipalId:          ptr.String("__PrincipalId__"),
+		IdentityCenterRegion: ptr.String("__IdentityCenterRegion__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5403,7 +6743,14 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateMemberToFarm(context.Background(), &AssociateMemberToFarmInput{})
+	_, opErr := svc.AssociateMemberToFarm(context.Background(), &AssociateMemberToFarmInput{
+		FarmId:               ptr.String("__FarmId__"),
+		PrincipalType:        types.DeadlinePrincipalType("USER"),
+		IdentityStoreId:      ptr.String("__IdentityStoreId__"),
+		MembershipLevel:      types.MembershipLevel("VIEWER"),
+		PrincipalId:          ptr.String("__PrincipalId__"),
+		IdentityCenterRegion: ptr.String("__IdentityCenterRegion__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5434,7 +6781,14 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateMemberToFarm(context.Background(), &AssociateMemberToFarmInput{})
+	_, opErr := svc.AssociateMemberToFarm(context.Background(), &AssociateMemberToFarmInput{
+		FarmId:               ptr.String("__FarmId__"),
+		PrincipalType:        types.DeadlinePrincipalType("USER"),
+		IdentityStoreId:      ptr.String("__IdentityStoreId__"),
+		MembershipLevel:      types.MembershipLevel("VIEWER"),
+		PrincipalId:          ptr.String("__PrincipalId__"),
+		IdentityCenterRegion: ptr.String("__IdentityCenterRegion__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5473,7 +6827,14 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateMemberToFarm(context.Background(), &AssociateMemberToFarmInput{})
+	_, opErr := svc.AssociateMemberToFarm(context.Background(), &AssociateMemberToFarmInput{
+		FarmId:               ptr.String("__FarmId__"),
+		PrincipalType:        types.DeadlinePrincipalType("USER"),
+		IdentityStoreId:      ptr.String("__IdentityStoreId__"),
+		MembershipLevel:      types.MembershipLevel("VIEWER"),
+		PrincipalId:          ptr.String("__PrincipalId__"),
+		IdentityCenterRegion: ptr.String("__IdentityCenterRegion__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

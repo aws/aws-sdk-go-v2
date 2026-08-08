@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"VoiceProfileDomain":{"CreatedTimestamp":"2000-01-01T00:00:00Z","Description":"__Description__","Name":"__Name__","ServerSideEncryptionConfiguration":{"KmsKeyArn":"__KmsKeyArn__"},"UpdatedTimestamp":"2000-01-01T00:00:00Z","VoiceProfileDomainArn":"__VoiceProfileDomainArn__","VoiceProfileDomainId":"__VoiceProfileDomainId__"}}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","Results":[{"AllocationValues":{"key0":{"Unit":"m3","Value":1}},"DimensionsValues":{"key0":"__Value__"},"ModelVersion":"__ModelVersion__","TimePeriod":{"End":"2000-01-01T00:00:00Z","Start":"2000-01-01T00:00:00Z"}},{"AllocationValues":{"key0":{"Unit":"m3","Value":1}},"DimensionsValues":{"key0":"__Value__"},"ModelVersion":"__ModelVersion__","TimePeriod":{"End":"2000-01-01T00:00:00Z","Start":"2000-01-01T00:00:00Z"}}]}

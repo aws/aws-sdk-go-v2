@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: CodeConnections_20231201.ListHosts
+
+{"Hosts":[{"HostArn":"__HostArn__","Name":"__Name__","ProviderEndpoint":"__ProviderEndpoint__","ProviderType":"Bitbucket","Status":"__Status__","StatusMessage":"__StatusMessage__","VpcConfiguration":{"SecurityGroupIds":["__Member__","__Member__"],"SubnetIds":["__Member__","__Member__"],"TlsCertificate":"__TlsCertificate__","VpcId":"__VpcId__"}},{"HostArn":"__HostArn__","Name":"__Name__","ProviderEndpoint":"__ProviderEndpoint__","ProviderType":"Bitbucket","Status":"__Status__","StatusMessage":"__StatusMessage__","VpcConfiguration":{"SecurityGroupIds":["__Member__","__Member__"],"SubnetIds":["__Member__","__Member__"],"TlsCertificate":"__TlsCertificate__","VpcId":"__VpcId__"}}],"NextToken":"__NextToken__"}

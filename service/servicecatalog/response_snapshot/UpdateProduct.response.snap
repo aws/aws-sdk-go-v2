@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.UpdateProduct
+
+{"ProductViewDetail":{"CreatedTime":946684800,"ProductARN":"__ProductARN__","ProductViewSummary":{"Distributor":"__Distributor__","HasDefaultPath":true,"Id":"__Id__","Name":"__Name__","Owner":"__Owner__","ProductId":"__ProductId__","ShortDescription":"__ShortDescription__","SupportDescription":"__SupportDescription__","SupportEmail":"__SupportEmail__","SupportUrl":"__SupportUrl__","Type":"CLOUD_FORMATION_TEMPLATE"},"SourceConnection":{"ConnectionParameters":{"CodeStar":{"ArtifactPath":"__ArtifactPath__","Branch":"__Branch__","ConnectionArn":"__ConnectionArn__","Repository":"__Repository__"}},"LastSync":{"LastSuccessfulSyncProvisioningArtifactId":"__LastSuccessfulSyncProvisioningArtifactId__","LastSuccessfulSyncTime":946684800,"LastSyncStatus":"SUCCEEDED","LastSyncStatusMessage":"__LastSyncStatusMessage__","LastSyncTime":946684800},"Type":"CODESTAR"},"Status":"AVAILABLE"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

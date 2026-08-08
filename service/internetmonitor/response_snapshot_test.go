@@ -120,7 +120,40 @@ func TestCheckResponseSnapshot_CreateMonitor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMonitor(context.Background(), &CreateMonitorInput{})
+	got, err := svc.CreateMonitor(context.Background(), &CreateMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		Resources: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		MaxCityNetworksToMonitor: ptr.Int32(1),
+		InternetMeasurementsLogDelivery: &types.InternetMeasurementsLogDelivery{
+			S3Config: &types.S3Config{
+				BucketName:        ptr.String("__BucketName__"),
+				BucketPrefix:      ptr.String("__BucketPrefix__"),
+				LogDeliveryStatus: types.LogDeliveryStatus("ENABLED"),
+			},
+		},
+		TrafficPercentageToMonitor: ptr.Int32(1),
+		HealthEventsConfig: &types.HealthEventsConfig{
+			AvailabilityScoreThreshold: 1.0,
+			PerformanceScoreThreshold:  1.0,
+			AvailabilityLocalHealthEventsConfig: &types.LocalHealthEventsConfig{
+				Status:               types.LocalHealthEventsConfigStatus("ENABLED"),
+				HealthScoreThreshold: 1.0,
+				MinTrafficImpact:     1.0,
+			},
+			PerformanceLocalHealthEventsConfig: &types.LocalHealthEventsConfig{
+				Status:               types.LocalHealthEventsConfigStatus("ENABLED"),
+				HealthScoreThreshold: 1.0,
+				MinTrafficImpact:     1.0,
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -139,7 +172,9 @@ func TestCheckResponseSnapshot_DeleteMonitor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMonitor(context.Background(), &DeleteMonitorInput{})
+	got, err := svc.DeleteMonitor(context.Background(), &DeleteMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -287,7 +322,11 @@ func TestCheckResponseSnapshot_GetHealthEvent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetHealthEvent(context.Background(), &GetHealthEventInput{})
+	got, err := svc.GetHealthEvent(context.Background(), &GetHealthEventInput{
+		MonitorName:     ptr.String("__MonitorName__"),
+		EventId:         ptr.String("__EventId__"),
+		LinkedAccountId: ptr.String("__LinkedAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -323,7 +362,9 @@ func TestCheckResponseSnapshot_GetInternetEvent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetInternetEvent(context.Background(), &GetInternetEventInput{})
+	got, err := svc.GetInternetEvent(context.Background(), &GetInternetEventInput{
+		EventId: ptr.String("__EventId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -380,7 +421,10 @@ func TestCheckResponseSnapshot_GetMonitor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMonitor(context.Background(), &GetMonitorInput{})
+	got, err := svc.GetMonitor(context.Background(), &GetMonitorInput{
+		MonitorName:     ptr.String("__MonitorName__"),
+		LinkedAccountId: ptr.String("__LinkedAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -421,7 +465,12 @@ func TestCheckResponseSnapshot_GetQueryResults(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQueryResults(context.Background(), &GetQueryResultsInput{})
+	got, err := svc.GetQueryResults(context.Background(), &GetQueryResultsInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		QueryId:     ptr.String("__QueryId__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -442,7 +491,10 @@ func TestCheckResponseSnapshot_GetQueryStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQueryStatus(context.Background(), &GetQueryStatusInput{})
+	got, err := svc.GetQueryStatus(context.Background(), &GetQueryStatusInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		QueryId:     ptr.String("__QueryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -725,7 +777,15 @@ func TestCheckResponseSnapshot_ListHealthEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListHealthEvents(context.Background(), &ListHealthEventsInput{})
+	got, err := svc.ListHealthEvents(context.Background(), &ListHealthEventsInput{
+		MonitorName:     ptr.String("__MonitorName__"),
+		StartTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		EventStatus:     types.HealthEventStatus("ACTIVE"),
+		LinkedAccountId: ptr.String("__LinkedAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -784,7 +844,14 @@ func TestCheckResponseSnapshot_ListInternetEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInternetEvents(context.Background(), &ListInternetEventsInput{})
+	got, err := svc.ListInternetEvents(context.Background(), &ListInternetEventsInput{
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		StartTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EventStatus: ptr.String("__EventStatus__"),
+		EventType:   ptr.String("__EventType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -819,7 +886,12 @@ func TestCheckResponseSnapshot_ListMonitors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMonitors(context.Background(), &ListMonitorsInput{})
+	got, err := svc.ListMonitors(context.Background(), &ListMonitorsInput{
+		NextToken:             ptr.String("__NextToken__"),
+		MaxResults:            ptr.Int32(1),
+		MonitorStatus:         ptr.String("__MonitorStatus__"),
+		IncludeLinkedAccounts: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -842,7 +914,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -863,7 +937,31 @@ func TestCheckResponseSnapshot_StartQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartQuery(context.Background(), &StartQueryInput{})
+	got, err := svc.StartQuery(context.Background(), &StartQueryInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		StartTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		QueryType:   types.QueryType("MEASUREMENTS"),
+		FilterParameters: []types.FilterParameter{
+			{
+				Field:    ptr.String("__Field__"),
+				Operator: types.Operator("EQUALS"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Field:    ptr.String("__Field__"),
+				Operator: types.Operator("EQUALS"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		LinkedAccountId: ptr.String("__LinkedAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -882,7 +980,10 @@ func TestCheckResponseSnapshot_StopQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopQuery(context.Background(), &StopQueryInput{})
+	got, err := svc.StopQuery(context.Background(), &StopQueryInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		QueryId:     ptr.String("__QueryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -901,7 +1002,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -920,7 +1026,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -942,7 +1054,42 @@ func TestCheckResponseSnapshot_UpdateMonitor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMonitor(context.Background(), &UpdateMonitorInput{})
+	got, err := svc.UpdateMonitor(context.Background(), &UpdateMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		ResourcesToAdd: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResourcesToRemove: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Status:                   types.MonitorConfigState("PENDING"),
+		ClientToken:              ptr.String("__ClientToken__"),
+		MaxCityNetworksToMonitor: ptr.Int32(1),
+		InternetMeasurementsLogDelivery: &types.InternetMeasurementsLogDelivery{
+			S3Config: &types.S3Config{
+				BucketName:        ptr.String("__BucketName__"),
+				BucketPrefix:      ptr.String("__BucketPrefix__"),
+				LogDeliveryStatus: types.LogDeliveryStatus("ENABLED"),
+			},
+		},
+		TrafficPercentageToMonitor: ptr.Int32(1),
+		HealthEventsConfig: &types.HealthEventsConfig{
+			AvailabilityScoreThreshold: 1.0,
+			PerformanceScoreThreshold:  1.0,
+			AvailabilityLocalHealthEventsConfig: &types.LocalHealthEventsConfig{
+				Status:               types.LocalHealthEventsConfigStatus("ENABLED"),
+				HealthScoreThreshold: 1.0,
+				MinTrafficImpact:     1.0,
+			},
+			PerformanceLocalHealthEventsConfig: &types.LocalHealthEventsConfig{
+				Status:               types.LocalHealthEventsConfigStatus("ENABLED"),
+				HealthScoreThreshold: 1.0,
+				MinTrafficImpact:     1.0,
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -963,7 +1110,40 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{})
+	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		Resources: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		MaxCityNetworksToMonitor: ptr.Int32(1),
+		InternetMeasurementsLogDelivery: &types.InternetMeasurementsLogDelivery{
+			S3Config: &types.S3Config{
+				BucketName:        ptr.String("__BucketName__"),
+				BucketPrefix:      ptr.String("__BucketPrefix__"),
+				LogDeliveryStatus: types.LogDeliveryStatus("ENABLED"),
+			},
+		},
+		TrafficPercentageToMonitor: ptr.Int32(1),
+		HealthEventsConfig: &types.HealthEventsConfig{
+			AvailabilityScoreThreshold: 1.0,
+			PerformanceScoreThreshold:  1.0,
+			AvailabilityLocalHealthEventsConfig: &types.LocalHealthEventsConfig{
+				Status:               types.LocalHealthEventsConfigStatus("ENABLED"),
+				HealthScoreThreshold: 1.0,
+				MinTrafficImpact:     1.0,
+			},
+			PerformanceLocalHealthEventsConfig: &types.LocalHealthEventsConfig{
+				Status:               types.LocalHealthEventsConfigStatus("ENABLED"),
+				HealthScoreThreshold: 1.0,
+				MinTrafficImpact:     1.0,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -988,7 +1168,9 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1013,7 +1195,40 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{})
+	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		Resources: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		MaxCityNetworksToMonitor: ptr.Int32(1),
+		InternetMeasurementsLogDelivery: &types.InternetMeasurementsLogDelivery{
+			S3Config: &types.S3Config{
+				BucketName:        ptr.String("__BucketName__"),
+				BucketPrefix:      ptr.String("__BucketPrefix__"),
+				LogDeliveryStatus: types.LogDeliveryStatus("ENABLED"),
+			},
+		},
+		TrafficPercentageToMonitor: ptr.Int32(1),
+		HealthEventsConfig: &types.HealthEventsConfig{
+			AvailabilityScoreThreshold: 1.0,
+			PerformanceScoreThreshold:  1.0,
+			AvailabilityLocalHealthEventsConfig: &types.LocalHealthEventsConfig{
+				Status:               types.LocalHealthEventsConfigStatus("ENABLED"),
+				HealthScoreThreshold: 1.0,
+				MinTrafficImpact:     1.0,
+			},
+			PerformanceLocalHealthEventsConfig: &types.LocalHealthEventsConfig{
+				Status:               types.LocalHealthEventsConfigStatus("ENABLED"),
+				HealthScoreThreshold: 1.0,
+				MinTrafficImpact:     1.0,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1038,7 +1253,9 @@ func TestCheckResponseSnapshot_Error_InternalServerErrorException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1063,7 +1280,40 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{})
+	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		Resources: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		MaxCityNetworksToMonitor: ptr.Int32(1),
+		InternetMeasurementsLogDelivery: &types.InternetMeasurementsLogDelivery{
+			S3Config: &types.S3Config{
+				BucketName:        ptr.String("__BucketName__"),
+				BucketPrefix:      ptr.String("__BucketPrefix__"),
+				LogDeliveryStatus: types.LogDeliveryStatus("ENABLED"),
+			},
+		},
+		TrafficPercentageToMonitor: ptr.Int32(1),
+		HealthEventsConfig: &types.HealthEventsConfig{
+			AvailabilityScoreThreshold: 1.0,
+			PerformanceScoreThreshold:  1.0,
+			AvailabilityLocalHealthEventsConfig: &types.LocalHealthEventsConfig{
+				Status:               types.LocalHealthEventsConfigStatus("ENABLED"),
+				HealthScoreThreshold: 1.0,
+				MinTrafficImpact:     1.0,
+			},
+			PerformanceLocalHealthEventsConfig: &types.LocalHealthEventsConfig{
+				Status:               types.LocalHealthEventsConfigStatus("ENABLED"),
+				HealthScoreThreshold: 1.0,
+				MinTrafficImpact:     1.0,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1088,7 +1338,40 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{})
+	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		Resources: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		MaxCityNetworksToMonitor: ptr.Int32(1),
+		InternetMeasurementsLogDelivery: &types.InternetMeasurementsLogDelivery{
+			S3Config: &types.S3Config{
+				BucketName:        ptr.String("__BucketName__"),
+				BucketPrefix:      ptr.String("__BucketPrefix__"),
+				LogDeliveryStatus: types.LogDeliveryStatus("ENABLED"),
+			},
+		},
+		TrafficPercentageToMonitor: ptr.Int32(1),
+		HealthEventsConfig: &types.HealthEventsConfig{
+			AvailabilityScoreThreshold: 1.0,
+			PerformanceScoreThreshold:  1.0,
+			AvailabilityLocalHealthEventsConfig: &types.LocalHealthEventsConfig{
+				Status:               types.LocalHealthEventsConfigStatus("ENABLED"),
+				HealthScoreThreshold: 1.0,
+				MinTrafficImpact:     1.0,
+			},
+			PerformanceLocalHealthEventsConfig: &types.LocalHealthEventsConfig{
+				Status:               types.LocalHealthEventsConfigStatus("ENABLED"),
+				HealthScoreThreshold: 1.0,
+				MinTrafficImpact:     1.0,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1113,7 +1396,9 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1138,7 +1423,42 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateMonitor(context.Background(), &UpdateMonitorInput{})
+	_, opErr := svc.UpdateMonitor(context.Background(), &UpdateMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		ResourcesToAdd: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResourcesToRemove: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Status:                   types.MonitorConfigState("PENDING"),
+		ClientToken:              ptr.String("__ClientToken__"),
+		MaxCityNetworksToMonitor: ptr.Int32(1),
+		InternetMeasurementsLogDelivery: &types.InternetMeasurementsLogDelivery{
+			S3Config: &types.S3Config{
+				BucketName:        ptr.String("__BucketName__"),
+				BucketPrefix:      ptr.String("__BucketPrefix__"),
+				LogDeliveryStatus: types.LogDeliveryStatus("ENABLED"),
+			},
+		},
+		TrafficPercentageToMonitor: ptr.Int32(1),
+		HealthEventsConfig: &types.HealthEventsConfig{
+			AvailabilityScoreThreshold: 1.0,
+			PerformanceScoreThreshold:  1.0,
+			AvailabilityLocalHealthEventsConfig: &types.LocalHealthEventsConfig{
+				Status:               types.LocalHealthEventsConfigStatus("ENABLED"),
+				HealthScoreThreshold: 1.0,
+				MinTrafficImpact:     1.0,
+			},
+			PerformanceLocalHealthEventsConfig: &types.LocalHealthEventsConfig{
+				Status:               types.LocalHealthEventsConfigStatus("ENABLED"),
+				HealthScoreThreshold: 1.0,
+				MinTrafficImpact:     1.0,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1163,7 +1483,40 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{})
+	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		Resources: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		MaxCityNetworksToMonitor: ptr.Int32(1),
+		InternetMeasurementsLogDelivery: &types.InternetMeasurementsLogDelivery{
+			S3Config: &types.S3Config{
+				BucketName:        ptr.String("__BucketName__"),
+				BucketPrefix:      ptr.String("__BucketPrefix__"),
+				LogDeliveryStatus: types.LogDeliveryStatus("ENABLED"),
+			},
+		},
+		TrafficPercentageToMonitor: ptr.Int32(1),
+		HealthEventsConfig: &types.HealthEventsConfig{
+			AvailabilityScoreThreshold: 1.0,
+			PerformanceScoreThreshold:  1.0,
+			AvailabilityLocalHealthEventsConfig: &types.LocalHealthEventsConfig{
+				Status:               types.LocalHealthEventsConfigStatus("ENABLED"),
+				HealthScoreThreshold: 1.0,
+				MinTrafficImpact:     1.0,
+			},
+			PerformanceLocalHealthEventsConfig: &types.LocalHealthEventsConfig{
+				Status:               types.LocalHealthEventsConfigStatus("ENABLED"),
+				HealthScoreThreshold: 1.0,
+				MinTrafficImpact:     1.0,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1188,7 +1541,9 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1213,7 +1568,40 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{})
+	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		Resources: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		MaxCityNetworksToMonitor: ptr.Int32(1),
+		InternetMeasurementsLogDelivery: &types.InternetMeasurementsLogDelivery{
+			S3Config: &types.S3Config{
+				BucketName:        ptr.String("__BucketName__"),
+				BucketPrefix:      ptr.String("__BucketPrefix__"),
+				LogDeliveryStatus: types.LogDeliveryStatus("ENABLED"),
+			},
+		},
+		TrafficPercentageToMonitor: ptr.Int32(1),
+		HealthEventsConfig: &types.HealthEventsConfig{
+			AvailabilityScoreThreshold: 1.0,
+			PerformanceScoreThreshold:  1.0,
+			AvailabilityLocalHealthEventsConfig: &types.LocalHealthEventsConfig{
+				Status:               types.LocalHealthEventsConfigStatus("ENABLED"),
+				HealthScoreThreshold: 1.0,
+				MinTrafficImpact:     1.0,
+			},
+			PerformanceLocalHealthEventsConfig: &types.LocalHealthEventsConfig{
+				Status:               types.LocalHealthEventsConfigStatus("ENABLED"),
+				HealthScoreThreshold: 1.0,
+				MinTrafficImpact:     1.0,
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"GroupIdentifiers":[{"Criticality":1,"Description":"__Description__","DisplayName":"__DisplayName__","GroupArn":"__GroupArn__","GroupName":"__GroupName__","Owner":"__Owner__"},{"Criticality":1,"Description":"__Description__","DisplayName":"__DisplayName__","GroupArn":"__GroupArn__","GroupName":"__GroupName__","Owner":"__Owner__"}],"Groups":[{"ApplicationTag":{"key0":"__Value__"},"Criticality":1,"Description":"__Description__","DisplayName":"__DisplayName__","GroupArn":"__GroupArn__","Name":"__Name__","Owner":"__Owner__"},{"ApplicationTag":{"key0":"__Value__"},"Criticality":1,"Description":"__Description__","DisplayName":"__DisplayName__","GroupArn":"__GroupArn__","Name":"__Name__","Owner":"__Owner__"}],"NextToken":"__NextToken__"}

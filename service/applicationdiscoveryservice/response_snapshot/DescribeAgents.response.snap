@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSPoseidonService_V2015_11_01.DescribeAgents
+
+{"agentsInfo":[{"agentId":"__AgentId__","agentNetworkInfoList":[{"ipAddress":"__IpAddress__","macAddress":"__MacAddress__"},{"ipAddress":"__IpAddress__","macAddress":"__MacAddress__"}],"agentType":"__AgentType__","collectionStatus":"__CollectionStatus__","connectorId":"__ConnectorId__","health":"HEALTHY","hostName":"__HostName__","lastHealthPingTime":"__LastHealthPingTime__","registeredTime":"__RegisteredTime__","version":"__Version__"},{"agentId":"__AgentId__","agentNetworkInfoList":[{"ipAddress":"__IpAddress__","macAddress":"__MacAddress__"},{"ipAddress":"__IpAddress__","macAddress":"__MacAddress__"}],"agentType":"__AgentType__","collectionStatus":"__CollectionStatus__","connectorId":"__ConnectorId__","health":"HEALTHY","hostName":"__HostName__","lastHealthPingTime":"__LastHealthPingTime__","registeredTime":"__RegisteredTime__","version":"__Version__"}],"nextToken":"__NextToken__"}

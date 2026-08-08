@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"BackupPlanTemplatesList":[{"BackupPlanTemplateId":"__BackupPlanTemplateId__","BackupPlanTemplateName":"__BackupPlanTemplateName__"},{"BackupPlanTemplateId":"__BackupPlanTemplateId__","BackupPlanTemplateName":"__BackupPlanTemplateName__"}],"NextToken":"__NextToken__"}

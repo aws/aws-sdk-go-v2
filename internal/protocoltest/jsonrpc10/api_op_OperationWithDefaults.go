@@ -145,10 +145,18 @@ func (v *OperationWithDefaultsOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.DefaultByte != nil {
 		s.WriteInt8(schemas.OperationWithDefaultsOutput_defaultByte, *v.DefaultByte)
 	}
-	s.WriteDocument(schemas.OperationWithDefaultsOutput_defaultDocumentBoolean, &smithydocument.Opaque{Value: v.DefaultDocumentBoolean})
-	s.WriteDocument(schemas.OperationWithDefaultsOutput_defaultDocumentList, &smithydocument.Opaque{Value: v.DefaultDocumentList})
-	s.WriteDocument(schemas.OperationWithDefaultsOutput_defaultDocumentMap, &smithydocument.Opaque{Value: v.DefaultDocumentMap})
-	s.WriteDocument(schemas.OperationWithDefaultsOutput_defaultDocumentString, &smithydocument.Opaque{Value: v.DefaultDocumentString})
+	if v.DefaultDocumentBoolean != nil {
+		s.WriteDocument(schemas.OperationWithDefaultsOutput_defaultDocumentBoolean, &smithydocument.Opaque{Value: v.DefaultDocumentBoolean})
+	}
+	if v.DefaultDocumentList != nil {
+		s.WriteDocument(schemas.OperationWithDefaultsOutput_defaultDocumentList, &smithydocument.Opaque{Value: v.DefaultDocumentList})
+	}
+	if v.DefaultDocumentMap != nil {
+		s.WriteDocument(schemas.OperationWithDefaultsOutput_defaultDocumentMap, &smithydocument.Opaque{Value: v.DefaultDocumentMap})
+	}
+	if v.DefaultDocumentString != nil {
+		s.WriteDocument(schemas.OperationWithDefaultsOutput_defaultDocumentString, &smithydocument.Opaque{Value: v.DefaultDocumentString})
+	}
 	if v.DefaultDouble != nil {
 		s.WriteFloat64(schemas.OperationWithDefaultsOutput_defaultDouble, *v.DefaultDouble)
 	}
@@ -169,7 +177,9 @@ func (v *OperationWithDefaultsOutput) SerializeMembers(s smithy.ShapeSerializer)
 		s.WriteInt64(schemas.OperationWithDefaultsOutput_defaultLong, *v.DefaultLong)
 	}
 	serializeTestStringMap(s, schemas.OperationWithDefaultsOutput_defaultMap, v.DefaultMap)
-	s.WriteDocument(schemas.OperationWithDefaultsOutput_defaultNullDocument, &smithydocument.Opaque{Value: v.DefaultNullDocument})
+	if v.DefaultNullDocument != nil {
+		s.WriteDocument(schemas.OperationWithDefaultsOutput_defaultNullDocument, &smithydocument.Opaque{Value: v.DefaultNullDocument})
+	}
 	if v.DefaultShort != nil {
 		s.WriteInt16(schemas.OperationWithDefaultsOutput_defaultShort, *v.DefaultShort)
 	}

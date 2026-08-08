@@ -121,7 +121,18 @@ func TestCheckResponseSnapshot_CreateChatToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateChatToken(context.Background(), &CreateChatTokenInput{})
+	got, err := svc.CreateChatToken(context.Background(), &CreateChatTokenInput{
+		RoomIdentifier: ptr.String("__RoomIdentifier__"),
+		UserId:         ptr.String("__UserId__"),
+		Capabilities: []types.ChatTokenCapability{
+			types.ChatTokenCapability("SEND_MESSAGE"),
+			types.ChatTokenCapability("SEND_MESSAGE"),
+		},
+		SessionDurationInMinutes: ptr.Int32(1),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -155,7 +166,17 @@ func TestCheckResponseSnapshot_CreateLoggingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLoggingConfiguration(context.Background(), &CreateLoggingConfigurationInput{})
+	got, err := svc.CreateLoggingConfiguration(context.Background(), &CreateLoggingConfigurationInput{
+		Name: ptr.String("__Name__"),
+		DestinationConfiguration: &types.DestinationConfigurationMemberS3{
+			Value: types.S3DestinationConfiguration{
+				BucketName: ptr.String("__BucketName__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -193,7 +214,22 @@ func TestCheckResponseSnapshot_CreateRoom(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRoom(context.Background(), &CreateRoomInput{})
+	got, err := svc.CreateRoom(context.Background(), &CreateRoomInput{
+		Name:                        ptr.String("__Name__"),
+		MaximumMessageRatePerSecond: ptr.Int32(1),
+		MaximumMessageLength:        ptr.Int32(1),
+		MessageReviewHandler: &types.MessageReviewHandler{
+			Uri:            ptr.String("__Uri__"),
+			FallbackResult: types.FallbackResult("ALLOW"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LoggingConfigurationIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -212,7 +248,9 @@ func TestCheckResponseSnapshot_DeleteLoggingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLoggingConfiguration(context.Background(), &DeleteLoggingConfigurationInput{})
+	got, err := svc.DeleteLoggingConfiguration(context.Background(), &DeleteLoggingConfigurationInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -233,7 +271,11 @@ func TestCheckResponseSnapshot_DeleteMessage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMessage(context.Background(), &DeleteMessageInput{})
+	got, err := svc.DeleteMessage(context.Background(), &DeleteMessageInput{
+		RoomIdentifier: ptr.String("__RoomIdentifier__"),
+		Id:             ptr.String("__Id__"),
+		Reason:         ptr.String("__Reason__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -252,7 +294,9 @@ func TestCheckResponseSnapshot_DeleteRoom(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRoom(context.Background(), &DeleteRoomInput{})
+	got, err := svc.DeleteRoom(context.Background(), &DeleteRoomInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -271,7 +315,11 @@ func TestCheckResponseSnapshot_DisconnectUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisconnectUser(context.Background(), &DisconnectUserInput{})
+	got, err := svc.DisconnectUser(context.Background(), &DisconnectUserInput{
+		RoomIdentifier: ptr.String("__RoomIdentifier__"),
+		UserId:         ptr.String("__UserId__"),
+		Reason:         ptr.String("__Reason__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -305,7 +353,9 @@ func TestCheckResponseSnapshot_GetLoggingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLoggingConfiguration(context.Background(), &GetLoggingConfigurationInput{})
+	got, err := svc.GetLoggingConfiguration(context.Background(), &GetLoggingConfigurationInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -343,7 +393,9 @@ func TestCheckResponseSnapshot_GetRoom(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRoom(context.Background(), &GetRoomInput{})
+	got, err := svc.GetRoom(context.Background(), &GetRoomInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -398,7 +450,10 @@ func TestCheckResponseSnapshot_ListLoggingConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLoggingConfigurations(context.Background(), &ListLoggingConfigurationsInput{})
+	got, err := svc.ListLoggingConfigurations(context.Background(), &ListLoggingConfigurationsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -457,7 +512,13 @@ func TestCheckResponseSnapshot_ListRooms(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRooms(context.Background(), &ListRoomsInput{})
+	got, err := svc.ListRooms(context.Background(), &ListRoomsInput{
+		Name:                           ptr.String("__Name__"),
+		NextToken:                      ptr.String("__NextToken__"),
+		MaxResults:                     ptr.Int32(1),
+		MessageReviewHandlerUri:        ptr.String("__MessageReviewHandlerUri__"),
+		LoggingConfigurationIdentifier: ptr.String("__LoggingConfigurationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -480,7 +541,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -501,7 +564,13 @@ func TestCheckResponseSnapshot_SendEvent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendEvent(context.Background(), &SendEventInput{})
+	got, err := svc.SendEvent(context.Background(), &SendEventInput{
+		RoomIdentifier: ptr.String("__RoomIdentifier__"),
+		EventName:      ptr.String("__EventName__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -520,7 +589,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -539,7 +613,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -573,7 +653,15 @@ func TestCheckResponseSnapshot_UpdateLoggingConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLoggingConfiguration(context.Background(), &UpdateLoggingConfigurationInput{})
+	got, err := svc.UpdateLoggingConfiguration(context.Background(), &UpdateLoggingConfigurationInput{
+		Identifier: ptr.String("__Identifier__"),
+		Name:       ptr.String("__Name__"),
+		DestinationConfiguration: &types.DestinationConfigurationMemberS3{
+			Value: types.S3DestinationConfiguration{
+				BucketName: ptr.String("__BucketName__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -611,7 +699,20 @@ func TestCheckResponseSnapshot_UpdateRoom(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRoom(context.Background(), &UpdateRoomInput{})
+	got, err := svc.UpdateRoom(context.Background(), &UpdateRoomInput{
+		Identifier:                  ptr.String("__Identifier__"),
+		Name:                        ptr.String("__Name__"),
+		MaximumMessageRatePerSecond: ptr.Int32(1),
+		MaximumMessageLength:        ptr.Int32(1),
+		MessageReviewHandler: &types.MessageReviewHandler{
+			Uri:            ptr.String("__Uri__"),
+			FallbackResult: types.FallbackResult("ALLOW"),
+		},
+		LoggingConfigurationIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -632,7 +733,18 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChatToken(context.Background(), &CreateChatTokenInput{})
+	_, opErr := svc.CreateChatToken(context.Background(), &CreateChatTokenInput{
+		RoomIdentifier: ptr.String("__RoomIdentifier__"),
+		UserId:         ptr.String("__UserId__"),
+		Capabilities: []types.ChatTokenCapability{
+			types.ChatTokenCapability("SEND_MESSAGE"),
+			types.ChatTokenCapability("SEND_MESSAGE"),
+		},
+		SessionDurationInMinutes: ptr.Int32(1),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -659,7 +771,17 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLoggingConfiguration(context.Background(), &CreateLoggingConfigurationInput{})
+	_, opErr := svc.CreateLoggingConfiguration(context.Background(), &CreateLoggingConfigurationInput{
+		Name: ptr.String("__Name__"),
+		DestinationConfiguration: &types.DestinationConfigurationMemberS3{
+			Value: types.S3DestinationConfiguration{
+				BucketName: ptr.String("__BucketName__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -684,7 +806,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -709,7 +833,18 @@ func TestCheckResponseSnapshot_Error_PendingVerification(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChatToken(context.Background(), &CreateChatTokenInput{})
+	_, opErr := svc.CreateChatToken(context.Background(), &CreateChatTokenInput{
+		RoomIdentifier: ptr.String("__RoomIdentifier__"),
+		UserId:         ptr.String("__UserId__"),
+		Capabilities: []types.ChatTokenCapability{
+			types.ChatTokenCapability("SEND_MESSAGE"),
+			types.ChatTokenCapability("SEND_MESSAGE"),
+		},
+		SessionDurationInMinutes: ptr.Int32(1),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -736,7 +871,18 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChatToken(context.Background(), &CreateChatTokenInput{})
+	_, opErr := svc.CreateChatToken(context.Background(), &CreateChatTokenInput{
+		RoomIdentifier: ptr.String("__RoomIdentifier__"),
+		UserId:         ptr.String("__UserId__"),
+		Capabilities: []types.ChatTokenCapability{
+			types.ChatTokenCapability("SEND_MESSAGE"),
+			types.ChatTokenCapability("SEND_MESSAGE"),
+		},
+		SessionDurationInMinutes: ptr.Int32(1),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -764,7 +910,17 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLoggingConfiguration(context.Background(), &CreateLoggingConfigurationInput{})
+	_, opErr := svc.CreateLoggingConfiguration(context.Background(), &CreateLoggingConfigurationInput{
+		Name: ptr.String("__Name__"),
+		DestinationConfiguration: &types.DestinationConfigurationMemberS3{
+			Value: types.S3DestinationConfiguration{
+				BucketName: ptr.String("__BucketName__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -792,7 +948,11 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteMessage(context.Background(), &DeleteMessageInput{})
+	_, opErr := svc.DeleteMessage(context.Background(), &DeleteMessageInput{
+		RoomIdentifier: ptr.String("__RoomIdentifier__"),
+		Id:             ptr.String("__Id__"),
+		Reason:         ptr.String("__Reason__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -828,7 +988,18 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChatToken(context.Background(), &CreateChatTokenInput{})
+	_, opErr := svc.CreateChatToken(context.Background(), &CreateChatTokenInput{
+		RoomIdentifier: ptr.String("__RoomIdentifier__"),
+		UserId:         ptr.String("__UserId__"),
+		Capabilities: []types.ChatTokenCapability{
+			types.ChatTokenCapability("SEND_MESSAGE"),
+			types.ChatTokenCapability("SEND_MESSAGE"),
+		},
+		SessionDurationInMinutes: ptr.Int32(1),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

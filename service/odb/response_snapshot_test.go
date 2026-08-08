@@ -117,7 +117,9 @@ func TestCheckResponseSnapshot_AcceptMarketplaceRegistration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptMarketplaceRegistration(context.Background(), &AcceptMarketplaceRegistrationInput{})
+	got, err := svc.AcceptMarketplaceRegistration(context.Background(), &AcceptMarketplaceRegistrationInput{
+		MarketplaceRegistrationToken: ptr.String("__MarketplaceRegistrationToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -136,7 +138,11 @@ func TestCheckResponseSnapshot_AssociateIamRoleToResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateIamRoleToResource(context.Background(), &AssociateIamRoleToResourceInput{})
+	got, err := svc.AssociateIamRoleToResource(context.Background(), &AssociateIamRoleToResourceInput{
+		IamRoleArn:     ptr.String("__IamRoleArn__"),
+		AwsIntegration: types.SupportedAwsIntegration("KmsTde"),
+		ResourceArn:    ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -160,7 +166,118 @@ func TestCheckResponseSnapshot_CreateAutonomousDatabase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAutonomousDatabase(context.Background(), &CreateAutonomousDatabaseInput{})
+	got, err := svc.CreateAutonomousDatabase(context.Background(), &CreateAutonomousDatabaseInput{
+		OdbNetworkId:                      ptr.String("__OdbNetworkId__"),
+		DisplayName:                       ptr.String("__DisplayName__"),
+		DbName:                            ptr.String("__DbName__"),
+		AdminPassword:                     ptr.String("__AdminPassword__"),
+		ComputeCount:                      ptr.Float64(1.0),
+		DataStorageSizeInTBs:              ptr.Int32(1),
+		DataStorageSizeInGBs:              ptr.Int32(1),
+		DbWorkload:                        types.DbWorkload("OLTP"),
+		IsAutoScalingEnabled:              ptr.Bool(true),
+		IsAutoScalingForStorageEnabled:    ptr.Bool(true),
+		LicenseModel:                      types.LicenseModel("BRING_YOUR_OWN_LICENSE"),
+		CharacterSet:                      ptr.String("__CharacterSet__"),
+		NcharacterSet:                     ptr.String("__NcharacterSet__"),
+		DbVersion:                         ptr.String("__DbVersion__"),
+		DatabaseEdition:                   types.DatabaseEdition("STANDARD_EDITION"),
+		StandbyAllowlistedIpsSource:       types.StandbyAllowlistedIpsSource("PRIMARY"),
+		AutonomousMaintenanceScheduleType: types.AutonomousMaintenanceScheduleType("EARLY"),
+		BackupRetentionPeriodInDays:       ptr.Int32(1),
+		ByolComputeCountLimit:             ptr.Float64(1.0),
+		CpuCoreCount:                      ptr.Int32(1),
+		CustomerContactsToSendToOCI: []types.CustomerContact{
+			{
+				Email: ptr.String("__Email__"),
+			},
+			{
+				Email: ptr.String("__Email__"),
+			},
+		},
+		PrivateEndpointIp:    ptr.String("__PrivateEndpointIp__"),
+		PrivateEndpointLabel: ptr.String("__PrivateEndpointLabel__"),
+		ResourcePoolLeaderId: ptr.String("__ResourcePoolLeaderId__"),
+		ResourcePoolSummary: &types.ResourcePoolSummary{
+			IsDisabled:                    ptr.Bool(true),
+			PoolSize:                      ptr.Int32(1),
+			PoolStorageSizeInTBs:          ptr.Int32(1),
+			AvailableStorageCapacityInTBs: ptr.Float64(1.0),
+			TotalComputeCapacity:          ptr.Int32(1),
+			AvailableComputeCapacity:      ptr.Int32(1),
+		},
+		ScheduledOperations: []types.ScheduledOperationDetails{
+			{
+				DayOfWeek: &types.DayOfWeek{
+					Name: types.DayOfWeekName("MONDAY"),
+				},
+				ScheduledStartTime: ptr.String("__ScheduledStartTime__"),
+				ScheduledStopTime:  ptr.String("__ScheduledStopTime__"),
+			},
+			{
+				DayOfWeek: &types.DayOfWeek{
+					Name: types.DayOfWeekName("MONDAY"),
+				},
+				ScheduledStartTime: ptr.String("__ScheduledStartTime__"),
+				ScheduledStopTime:  ptr.String("__ScheduledStopTime__"),
+			},
+		},
+		StandbyAllowlistedIps: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AllowlistedIps: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TransportableTablespace: &types.TransportableTablespace{
+			TtsBundleUrl: ptr.String("__TtsBundleUrl__"),
+		},
+		IsBackupRetentionLocked:  ptr.Bool(true),
+		IsLocalDataGuardEnabled:  ptr.Bool(true),
+		IsMtlsConnectionRequired: ptr.Bool(true),
+		DbToolsDetails: []types.DatabaseTool{
+			{
+				IsEnabled:            ptr.Bool(true),
+				Name:                 ptr.String("__Name__"),
+				ComputeCount:         ptr.Float64(1.0),
+				MaxIdleTimeInMinutes: ptr.Int32(1),
+			},
+			{
+				IsEnabled:            ptr.Bool(true),
+				Name:                 ptr.String("__Name__"),
+				ComputeCount:         ptr.Float64(1.0),
+				MaxIdleTimeInMinutes: ptr.Int32(1),
+			},
+		},
+		Source: types.SourceType("NONE"),
+		SourceConfiguration: &types.SourceConfigurationMemberDatabaseClone{
+			Value: types.DatabaseCloneConfiguration{
+				SourceAutonomousDatabaseId: ptr.String("__SourceAutonomousDatabaseId__"),
+				CloneType:                  types.CloneType("FULL"),
+			},
+		},
+		EncryptionKeyProvider: types.EncryptionKeyProviderInput("ORACLE_MANAGED"),
+		EncryptionKeyConfiguration: &types.EncryptionKeyConfigurationInputMemberAwsEncryptionKey{
+			Value: types.AwsEncryptionKeyConfigurationInput{
+				IamRoleArn:     ptr.String("__IamRoleArn__"),
+				ExternalIdType: types.ExternalIdType("database_ocid"),
+				KmsKeyId:       ptr.String("__KmsKeyId__"),
+			},
+		},
+		AdminPasswordSource: types.AdminPasswordSource("CUSTOMER_MANAGED_AWS_SECRET"),
+		AdminPasswordSourceConfiguration: &types.AdminPasswordSourceConfigurationInputMemberCustomerManagedAwsSecret{
+			Value: types.CustomerManagedAwsSecretConfigurationInput{
+				SecretId:       ptr.String("__SecretId__"),
+				IamRoleArn:     ptr.String("__IamRoleArn__"),
+				ExternalIdType: types.ExternalIdType("database_ocid"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -184,7 +301,15 @@ func TestCheckResponseSnapshot_CreateAutonomousDatabaseBackup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAutonomousDatabaseBackup(context.Background(), &CreateAutonomousDatabaseBackupInput{})
+	got, err := svc.CreateAutonomousDatabaseBackup(context.Background(), &CreateAutonomousDatabaseBackupInput{
+		AutonomousDatabaseId:  ptr.String("__AutonomousDatabaseId__"),
+		DisplayName:           ptr.String("__DisplayName__"),
+		RetentionPeriodInDays: ptr.Int32(1),
+		ClientToken:           ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -205,7 +330,20 @@ func TestCheckResponseSnapshot_CreateAutonomousDatabaseWallet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAutonomousDatabaseWallet(context.Background(), &CreateAutonomousDatabaseWalletInput{})
+	got, err := svc.CreateAutonomousDatabaseWallet(context.Background(), &CreateAutonomousDatabaseWalletInput{
+		AutonomousDatabaseId: ptr.String("__AutonomousDatabaseId__"),
+		WalletType:           types.WalletType("REGIONAL"),
+		Password:             ptr.String("__Password__"),
+		PasswordSource:       types.WalletPasswordSource("CUSTOMER_MANAGED_AWS_SECRET"),
+		PasswordSourceConfiguration: &types.WalletPasswordSourceConfigurationInputMemberCustomerManagedAwsSecret{
+			Value: types.CustomerManagedAwsSecretConfigurationInput{
+				SecretId:       ptr.String("__SecretId__"),
+				IamRoleArn:     ptr.String("__IamRoleArn__"),
+				ExternalIdType: types.ExternalIdType("database_ocid"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -229,7 +367,61 @@ func TestCheckResponseSnapshot_CreateCloudAutonomousVmCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCloudAutonomousVmCluster(context.Background(), &CreateCloudAutonomousVmClusterInput{})
+	got, err := svc.CreateCloudAutonomousVmCluster(context.Background(), &CreateCloudAutonomousVmClusterInput{
+		CloudExadataInfrastructureId:   ptr.String("__CloudExadataInfrastructureId__"),
+		OdbNetworkId:                   ptr.String("__OdbNetworkId__"),
+		DisplayName:                    ptr.String("__DisplayName__"),
+		ClientToken:                    ptr.String("__ClientToken__"),
+		AutonomousDataStorageSizeInTBs: ptr.Float64(1.0),
+		CpuCoreCountPerNode:            ptr.Int32(1),
+		DbServers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Description:            ptr.String("__Description__"),
+		IsMtlsEnabledVmCluster: ptr.Bool(true),
+		LicenseModel:           types.LicenseModel("BRING_YOUR_OWN_LICENSE"),
+		MaintenanceWindow: &types.MaintenanceWindow{
+			CustomActionTimeoutInMins: ptr.Int32(1),
+			DaysOfWeek: []types.DayOfWeek{
+				{
+					Name: types.DayOfWeekName("MONDAY"),
+				},
+				{
+					Name: types.DayOfWeekName("MONDAY"),
+				},
+			},
+			HoursOfDay: []int32{
+				1,
+				1,
+			},
+			IsCustomActionTimeoutEnabled: ptr.Bool(true),
+			LeadTimeInWeeks:              ptr.Int32(1),
+			Months: []types.Month{
+				{
+					Name: types.MonthName("JANUARY"),
+				},
+				{
+					Name: types.MonthName("JANUARY"),
+				},
+			},
+			PatchingMode: types.PatchingModeType("ROLLING"),
+			Preference:   types.PreferenceType("NO_PREFERENCE"),
+			SkipRu:       ptr.Bool(true),
+			WeeksOfMonth: []int32{
+				1,
+				1,
+			},
+		},
+		MemoryPerOracleComputeUnitInGBs: ptr.Int32(1),
+		ScanListenerPortNonTls:          ptr.Int32(1),
+		ScanListenerPortTls:             ptr.Int32(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TimeZone:                ptr.String("__TimeZone__"),
+		TotalContainerDatabases: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -253,7 +445,60 @@ func TestCheckResponseSnapshot_CreateCloudExadataInfrastructure(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCloudExadataInfrastructure(context.Background(), &CreateCloudExadataInfrastructureInput{})
+	got, err := svc.CreateCloudExadataInfrastructure(context.Background(), &CreateCloudExadataInfrastructureInput{
+		DisplayName:        ptr.String("__DisplayName__"),
+		Shape:              ptr.String("__Shape__"),
+		AvailabilityZone:   ptr.String("__AvailabilityZone__"),
+		AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ComputeCount: ptr.Int32(1),
+		CustomerContactsToSendToOCI: []types.CustomerContact{
+			{
+				Email: ptr.String("__Email__"),
+			},
+			{
+				Email: ptr.String("__Email__"),
+			},
+		},
+		MaintenanceWindow: &types.MaintenanceWindow{
+			CustomActionTimeoutInMins: ptr.Int32(1),
+			DaysOfWeek: []types.DayOfWeek{
+				{
+					Name: types.DayOfWeekName("MONDAY"),
+				},
+				{
+					Name: types.DayOfWeekName("MONDAY"),
+				},
+			},
+			HoursOfDay: []int32{
+				1,
+				1,
+			},
+			IsCustomActionTimeoutEnabled: ptr.Bool(true),
+			LeadTimeInWeeks:              ptr.Int32(1),
+			Months: []types.Month{
+				{
+					Name: types.MonthName("JANUARY"),
+				},
+				{
+					Name: types.MonthName("JANUARY"),
+				},
+			},
+			PatchingMode: types.PatchingModeType("ROLLING"),
+			Preference:   types.PreferenceType("NO_PREFERENCE"),
+			SkipRu:       ptr.Bool(true),
+			WeeksOfMonth: []int32{
+				1,
+				1,
+			},
+		},
+		StorageCount:       ptr.Int32(1),
+		ClientToken:        ptr.String("__ClientToken__"),
+		DatabaseServerType: ptr.String("__DatabaseServerType__"),
+		StorageServerType:  ptr.String("__StorageServerType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -277,7 +522,41 @@ func TestCheckResponseSnapshot_CreateCloudVmCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCloudVmCluster(context.Background(), &CreateCloudVmClusterInput{})
+	got, err := svc.CreateCloudVmCluster(context.Background(), &CreateCloudVmClusterInput{
+		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
+		CpuCoreCount:                 ptr.Int32(1),
+		DisplayName:                  ptr.String("__DisplayName__"),
+		GiVersion:                    ptr.String("__GiVersion__"),
+		Hostname:                     ptr.String("__Hostname__"),
+		SshPublicKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OdbNetworkId: ptr.String("__OdbNetworkId__"),
+		ClusterName:  ptr.String("__ClusterName__"),
+		DataCollectionOptions: &types.DataCollectionOptions{
+			IsDiagnosticsEventsEnabled: ptr.Bool(true),
+			IsHealthMonitoringEnabled:  ptr.Bool(true),
+			IsIncidentLogsEnabled:      ptr.Bool(true),
+		},
+		DataStorageSizeInTBs:   ptr.Float64(1.0),
+		DbNodeStorageSizeInGBs: ptr.Int32(1),
+		DbServers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		IsLocalBackupEnabled:     ptr.Bool(true),
+		IsSparseDiskgroupEnabled: ptr.Bool(true),
+		LicenseModel:             types.LicenseModel("BRING_YOUR_OWN_LICENSE"),
+		MemorySizeInGBs:          ptr.Int32(1),
+		SystemVersion:            ptr.String("__SystemVersion__"),
+		TimeZone:                 ptr.String("__TimeZone__"),
+		ClientToken:              ptr.String("__ClientToken__"),
+		ScanListenerPortTcp:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -301,7 +580,30 @@ func TestCheckResponseSnapshot_CreateOdbNetwork(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateOdbNetwork(context.Background(), &CreateOdbNetworkInput{})
+	got, err := svc.CreateOdbNetwork(context.Background(), &CreateOdbNetworkInput{
+		DisplayName:        ptr.String("__DisplayName__"),
+		AvailabilityZone:   ptr.String("__AvailabilityZone__"),
+		AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+		ClientSubnetCidr:   ptr.String("__ClientSubnetCidr__"),
+		BackupSubnetCidr:   ptr.String("__BackupSubnetCidr__"),
+		CustomDomainName:   ptr.String("__CustomDomainName__"),
+		DefaultDnsPrefix:   ptr.String("__DefaultDnsPrefix__"),
+		ClientToken:        ptr.String("__ClientToken__"),
+		S3Access:           types.Access("ENABLED"),
+		ZeroEtlAccess:      types.Access("ENABLED"),
+		StsAccess:          types.Access("ENABLED"),
+		KmsAccess:          types.Access("ENABLED"),
+		S3PolicyDocument:   ptr.String("__S3PolicyDocument__"),
+		StsPolicyDocument:  ptr.String("__StsPolicyDocument__"),
+		KmsPolicyDocument:  ptr.String("__KmsPolicyDocument__"),
+		CrossRegionS3RestoreSourcesToEnable: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -325,7 +627,23 @@ func TestCheckResponseSnapshot_CreateOdbPeeringConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateOdbPeeringConnection(context.Background(), &CreateOdbPeeringConnectionInput{})
+	got, err := svc.CreateOdbPeeringConnection(context.Background(), &CreateOdbPeeringConnectionInput{
+		OdbNetworkId:  ptr.String("__OdbNetworkId__"),
+		PeerNetworkId: ptr.String("__PeerNetworkId__"),
+		DisplayName:   ptr.String("__DisplayName__"),
+		PeerNetworkCidrsToBeAdded: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PeerNetworkRouteTableIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -344,7 +662,9 @@ func TestCheckResponseSnapshot_DeleteAutonomousDatabase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAutonomousDatabase(context.Background(), &DeleteAutonomousDatabaseInput{})
+	got, err := svc.DeleteAutonomousDatabase(context.Background(), &DeleteAutonomousDatabaseInput{
+		AutonomousDatabaseId: ptr.String("__AutonomousDatabaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -363,7 +683,9 @@ func TestCheckResponseSnapshot_DeleteAutonomousDatabaseBackup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAutonomousDatabaseBackup(context.Background(), &DeleteAutonomousDatabaseBackupInput{})
+	got, err := svc.DeleteAutonomousDatabaseBackup(context.Background(), &DeleteAutonomousDatabaseBackupInput{
+		AutonomousDatabaseBackupId: ptr.String("__AutonomousDatabaseBackupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -382,7 +704,9 @@ func TestCheckResponseSnapshot_DeleteCloudAutonomousVmCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCloudAutonomousVmCluster(context.Background(), &DeleteCloudAutonomousVmClusterInput{})
+	got, err := svc.DeleteCloudAutonomousVmCluster(context.Background(), &DeleteCloudAutonomousVmClusterInput{
+		CloudAutonomousVmClusterId: ptr.String("__CloudAutonomousVmClusterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -401,7 +725,9 @@ func TestCheckResponseSnapshot_DeleteCloudExadataInfrastructure(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCloudExadataInfrastructure(context.Background(), &DeleteCloudExadataInfrastructureInput{})
+	got, err := svc.DeleteCloudExadataInfrastructure(context.Background(), &DeleteCloudExadataInfrastructureInput{
+		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -420,7 +746,9 @@ func TestCheckResponseSnapshot_DeleteCloudVmCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCloudVmCluster(context.Background(), &DeleteCloudVmClusterInput{})
+	got, err := svc.DeleteCloudVmCluster(context.Background(), &DeleteCloudVmClusterInput{
+		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -439,7 +767,10 @@ func TestCheckResponseSnapshot_DeleteOdbNetwork(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteOdbNetwork(context.Background(), &DeleteOdbNetworkInput{})
+	got, err := svc.DeleteOdbNetwork(context.Background(), &DeleteOdbNetworkInput{
+		OdbNetworkId:              ptr.String("__OdbNetworkId__"),
+		DeleteAssociatedResources: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -458,7 +789,9 @@ func TestCheckResponseSnapshot_DeleteOdbPeeringConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteOdbPeeringConnection(context.Background(), &DeleteOdbPeeringConnectionInput{})
+	got, err := svc.DeleteOdbPeeringConnection(context.Background(), &DeleteOdbPeeringConnectionInput{
+		OdbPeeringConnectionId: ptr.String("__OdbPeeringConnectionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -477,7 +810,11 @@ func TestCheckResponseSnapshot_DisassociateIamRoleFromResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateIamRoleFromResource(context.Background(), &DisassociateIamRoleFromResourceInput{})
+	got, err := svc.DisassociateIamRoleFromResource(context.Background(), &DisassociateIamRoleFromResourceInput{
+		IamRoleArn:     ptr.String("__IamRoleArn__"),
+		AwsIntegration: types.SupportedAwsIntegration("KmsTde"),
+		ResourceArn:    ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -501,7 +838,10 @@ func TestCheckResponseSnapshot_FailoverAutonomousDatabase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.FailoverAutonomousDatabase(context.Background(), &FailoverAutonomousDatabaseInput{})
+	got, err := svc.FailoverAutonomousDatabase(context.Background(), &FailoverAutonomousDatabaseInput{
+		AutonomousDatabaseId: ptr.String("__AutonomousDatabaseId__"),
+		PeerDbArn:            ptr.String("__PeerDbArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -780,7 +1120,9 @@ func TestCheckResponseSnapshot_GetAutonomousDatabase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAutonomousDatabase(context.Background(), &GetAutonomousDatabaseInput{})
+	got, err := svc.GetAutonomousDatabase(context.Background(), &GetAutonomousDatabaseInput{
+		AutonomousDatabaseId: ptr.String("__AutonomousDatabaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -817,7 +1159,9 @@ func TestCheckResponseSnapshot_GetAutonomousDatabaseBackup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAutonomousDatabaseBackup(context.Background(), &GetAutonomousDatabaseBackupInput{})
+	got, err := svc.GetAutonomousDatabaseBackup(context.Background(), &GetAutonomousDatabaseBackupInput{
+		AutonomousDatabaseBackupId: ptr.String("__AutonomousDatabaseBackupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -851,7 +1195,9 @@ func TestCheckResponseSnapshot_GetAutonomousDatabaseWalletDetails(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAutonomousDatabaseWalletDetails(context.Background(), &GetAutonomousDatabaseWalletDetailsInput{})
+	got, err := svc.GetAutonomousDatabaseWalletDetails(context.Background(), &GetAutonomousDatabaseWalletDetailsInput{
+		AutonomousDatabaseId: ptr.String("__AutonomousDatabaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -972,7 +1318,9 @@ func TestCheckResponseSnapshot_GetCloudAutonomousVmCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCloudAutonomousVmCluster(context.Background(), &GetCloudAutonomousVmClusterInput{})
+	got, err := svc.GetCloudAutonomousVmCluster(context.Background(), &GetCloudAutonomousVmClusterInput{
+		CloudAutonomousVmClusterId: ptr.String("__CloudAutonomousVmClusterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1070,7 +1418,9 @@ func TestCheckResponseSnapshot_GetCloudExadataInfrastructure(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCloudExadataInfrastructure(context.Background(), &GetCloudExadataInfrastructureInput{})
+	got, err := svc.GetCloudExadataInfrastructure(context.Background(), &GetCloudExadataInfrastructureInput{
+		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1108,7 +1458,13 @@ func TestCheckResponseSnapshot_GetCloudExadataInfrastructureUnallocatedResources
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCloudExadataInfrastructureUnallocatedResources(context.Background(), &GetCloudExadataInfrastructureUnallocatedResourcesInput{})
+	got, err := svc.GetCloudExadataInfrastructureUnallocatedResources(context.Background(), &GetCloudExadataInfrastructureUnallocatedResourcesInput{
+		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
+		DbServers: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1218,7 +1574,9 @@ func TestCheckResponseSnapshot_GetCloudVmCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCloudVmCluster(context.Background(), &GetCloudVmClusterInput{})
+	got, err := svc.GetCloudVmCluster(context.Background(), &GetCloudVmClusterInput{
+		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1268,7 +1626,10 @@ func TestCheckResponseSnapshot_GetDbNode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDbNode(context.Background(), &GetDbNodeInput{})
+	got, err := svc.GetDbNode(context.Background(), &GetDbNodeInput{
+		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+		DbNodeId:         ptr.String("__DbNodeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1324,7 +1685,10 @@ func TestCheckResponseSnapshot_GetDbServer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDbServer(context.Background(), &GetDbServerInput{})
+	got, err := svc.GetDbServer(context.Background(), &GetDbServerInput{
+		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
+		DbServerId:                   ptr.String("__DbServerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1505,7 +1869,9 @@ func TestCheckResponseSnapshot_GetOdbNetwork(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOdbNetwork(context.Background(), &GetOdbNetworkInput{})
+	got, err := svc.GetOdbNetwork(context.Background(), &GetOdbNetworkInput{
+		OdbNetworkId: ptr.String("__OdbNetworkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1541,7 +1907,9 @@ func TestCheckResponseSnapshot_GetOdbPeeringConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOdbPeeringConnection(context.Background(), &GetOdbPeeringConnectionInput{})
+	got, err := svc.GetOdbPeeringConnection(context.Background(), &GetOdbPeeringConnectionInput{
+		OdbPeeringConnectionId: ptr.String("__OdbPeeringConnectionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1560,7 +1928,10 @@ func TestCheckResponseSnapshot_InitializeService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InitializeService(context.Background(), &InitializeServiceInput{})
+	got, err := svc.InitializeService(context.Background(), &InitializeServiceInput{
+		OciIdentityDomain: ptr.Bool(true),
+		AutonomousDatabaseOciAwsSecretsManagerIntegration: types.Access("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1617,7 +1988,13 @@ func TestCheckResponseSnapshot_ListAutonomousDatabaseBackups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAutonomousDatabaseBackups(context.Background(), &ListAutonomousDatabaseBackupsInput{})
+	got, err := svc.ListAutonomousDatabaseBackups(context.Background(), &ListAutonomousDatabaseBackupsInput{
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+		AutonomousDatabaseId: ptr.String("__AutonomousDatabaseId__"),
+		Status:               types.AutonomousDatabaseBackupStatus("ACTIVE"),
+		Type:                 types.AutonomousDatabaseBackupType("INCREMENTAL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1646,7 +2023,11 @@ func TestCheckResponseSnapshot_ListAutonomousDatabaseCharacterSets(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAutonomousDatabaseCharacterSets(context.Background(), &ListAutonomousDatabaseCharacterSetsInput{})
+	got, err := svc.ListAutonomousDatabaseCharacterSets(context.Background(), &ListAutonomousDatabaseCharacterSetsInput{
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+		CharacterSetType: types.CharacterSetType("DATABASE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2187,7 +2568,11 @@ func TestCheckResponseSnapshot_ListAutonomousDatabaseClones(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAutonomousDatabaseClones(context.Background(), &ListAutonomousDatabaseClonesInput{})
+	got, err := svc.ListAutonomousDatabaseClones(context.Background(), &ListAutonomousDatabaseClonesInput{
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+		AutonomousDatabaseId: ptr.String("__AutonomousDatabaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2222,7 +2607,11 @@ func TestCheckResponseSnapshot_ListAutonomousDatabasePeers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAutonomousDatabasePeers(context.Background(), &ListAutonomousDatabasePeersInput{})
+	got, err := svc.ListAutonomousDatabasePeers(context.Background(), &ListAutonomousDatabasePeersInput{
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+		AutonomousDatabaseId: ptr.String("__AutonomousDatabaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2255,7 +2644,11 @@ func TestCheckResponseSnapshot_ListAutonomousDatabaseVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAutonomousDatabaseVersions(context.Background(), &ListAutonomousDatabaseVersionsInput{})
+	got, err := svc.ListAutonomousDatabaseVersions(context.Background(), &ListAutonomousDatabaseVersionsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		DbWorkload: types.DbWorkload("OLTP"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2796,7 +3189,10 @@ func TestCheckResponseSnapshot_ListAutonomousDatabases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAutonomousDatabases(context.Background(), &ListAutonomousDatabasesInput{})
+	got, err := svc.ListAutonomousDatabases(context.Background(), &ListAutonomousDatabasesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2849,7 +3245,11 @@ func TestCheckResponseSnapshot_ListAutonomousVirtualMachines(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAutonomousVirtualMachines(context.Background(), &ListAutonomousVirtualMachinesInput{})
+	got, err := svc.ListAutonomousVirtualMachines(context.Background(), &ListAutonomousVirtualMachinesInput{
+		MaxResults:                 ptr.Int32(1),
+		NextToken:                  ptr.String("__NextToken__"),
+		CloudAutonomousVmClusterId: ptr.String("__CloudAutonomousVmClusterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3074,7 +3474,11 @@ func TestCheckResponseSnapshot_ListCloudAutonomousVmClusters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCloudAutonomousVmClusters(context.Background(), &ListCloudAutonomousVmClustersInput{})
+	got, err := svc.ListCloudAutonomousVmClusters(context.Background(), &ListCloudAutonomousVmClustersInput{
+		MaxResults:                   ptr.Int32(1),
+		NextToken:                    ptr.String("__NextToken__"),
+		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3253,7 +3657,10 @@ func TestCheckResponseSnapshot_ListCloudExadataInfrastructures(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCloudExadataInfrastructures(context.Background(), &ListCloudExadataInfrastructuresInput{})
+	got, err := svc.ListCloudExadataInfrastructures(context.Background(), &ListCloudExadataInfrastructuresInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3456,7 +3863,11 @@ func TestCheckResponseSnapshot_ListCloudVmClusters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCloudVmClusters(context.Background(), &ListCloudVmClustersInput{})
+	got, err := svc.ListCloudVmClusters(context.Background(), &ListCloudVmClustersInput{
+		MaxResults:                   ptr.Int32(1),
+		NextToken:                    ptr.String("__NextToken__"),
+		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3535,7 +3946,11 @@ func TestCheckResponseSnapshot_ListDbNodes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDbNodes(context.Background(), &ListDbNodesInput{})
+	got, err := svc.ListDbNodes(context.Background(), &ListDbNodesInput{
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3630,7 +4045,11 @@ func TestCheckResponseSnapshot_ListDbServers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDbServers(context.Background(), &ListDbServersInput{})
+	got, err := svc.ListDbServers(context.Background(), &ListDbServersInput{
+		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
+		MaxResults:                   ptr.Int32(1),
+		NextToken:                    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3705,7 +4124,12 @@ func TestCheckResponseSnapshot_ListDbSystemShapes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDbSystemShapes(context.Background(), &ListDbSystemShapesInput{})
+	got, err := svc.ListDbSystemShapes(context.Background(), &ListDbSystemShapesInput{
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+		AvailabilityZone:   ptr.String("__AvailabilityZone__"),
+		AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3734,7 +4158,11 @@ func TestCheckResponseSnapshot_ListGiVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGiVersions(context.Background(), &ListGiVersionsInput{})
+	got, err := svc.ListGiVersions(context.Background(), &ListGiVersionsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Shape:      ptr.String("__Shape__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3969,7 +4397,10 @@ func TestCheckResponseSnapshot_ListOdbNetworks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOdbNetworks(context.Background(), &ListOdbNetworksInput{})
+	got, err := svc.ListOdbNetworks(context.Background(), &ListOdbNetworksInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4024,7 +4455,11 @@ func TestCheckResponseSnapshot_ListOdbPeeringConnections(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOdbPeeringConnections(context.Background(), &ListOdbPeeringConnectionsInput{})
+	got, err := svc.ListOdbPeeringConnections(context.Background(), &ListOdbPeeringConnectionsInput{
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		OdbNetworkId: ptr.String("__OdbNetworkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4063,7 +4498,12 @@ func TestCheckResponseSnapshot_ListSystemVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSystemVersions(context.Background(), &ListSystemVersionsInput{})
+	got, err := svc.ListSystemVersions(context.Background(), &ListSystemVersionsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		GiVersion:  ptr.String("__GiVersion__"),
+		Shape:      ptr.String("__Shape__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4086,7 +4526,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4110,7 +4552,10 @@ func TestCheckResponseSnapshot_RebootAutonomousDatabase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RebootAutonomousDatabase(context.Background(), &RebootAutonomousDatabaseInput{})
+	got, err := svc.RebootAutonomousDatabase(context.Background(), &RebootAutonomousDatabaseInput{
+		AutonomousDatabaseId: ptr.String("__AutonomousDatabaseId__"),
+		IsOnlineReboot:       ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4133,7 +4578,10 @@ func TestCheckResponseSnapshot_RebootDbNode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RebootDbNode(context.Background(), &RebootDbNodeInput{})
+	got, err := svc.RebootDbNode(context.Background(), &RebootDbNodeInput{
+		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+		DbNodeId:         ptr.String("__DbNodeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4157,7 +4605,10 @@ func TestCheckResponseSnapshot_RestoreAutonomousDatabase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RestoreAutonomousDatabase(context.Background(), &RestoreAutonomousDatabaseInput{})
+	got, err := svc.RestoreAutonomousDatabase(context.Background(), &RestoreAutonomousDatabaseInput{
+		AutonomousDatabaseId: ptr.String("__AutonomousDatabaseId__"),
+		Timestamp:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4181,7 +4632,9 @@ func TestCheckResponseSnapshot_ShrinkAutonomousDatabase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ShrinkAutonomousDatabase(context.Background(), &ShrinkAutonomousDatabaseInput{})
+	got, err := svc.ShrinkAutonomousDatabase(context.Background(), &ShrinkAutonomousDatabaseInput{
+		AutonomousDatabaseId: ptr.String("__AutonomousDatabaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4205,7 +4658,9 @@ func TestCheckResponseSnapshot_StartAutonomousDatabase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartAutonomousDatabase(context.Background(), &StartAutonomousDatabaseInput{})
+	got, err := svc.StartAutonomousDatabase(context.Background(), &StartAutonomousDatabaseInput{
+		AutonomousDatabaseId: ptr.String("__AutonomousDatabaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4228,7 +4683,10 @@ func TestCheckResponseSnapshot_StartDbNode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartDbNode(context.Background(), &StartDbNodeInput{})
+	got, err := svc.StartDbNode(context.Background(), &StartDbNodeInput{
+		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+		DbNodeId:         ptr.String("__DbNodeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4252,7 +4710,9 @@ func TestCheckResponseSnapshot_StopAutonomousDatabase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopAutonomousDatabase(context.Background(), &StopAutonomousDatabaseInput{})
+	got, err := svc.StopAutonomousDatabase(context.Background(), &StopAutonomousDatabaseInput{
+		AutonomousDatabaseId: ptr.String("__AutonomousDatabaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4275,7 +4735,10 @@ func TestCheckResponseSnapshot_StopDbNode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopDbNode(context.Background(), &StopDbNodeInput{})
+	got, err := svc.StopDbNode(context.Background(), &StopDbNodeInput{
+		CloudVmClusterId: ptr.String("__CloudVmClusterId__"),
+		DbNodeId:         ptr.String("__DbNodeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4299,7 +4762,10 @@ func TestCheckResponseSnapshot_SwitchoverAutonomousDatabase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SwitchoverAutonomousDatabase(context.Background(), &SwitchoverAutonomousDatabaseInput{})
+	got, err := svc.SwitchoverAutonomousDatabase(context.Background(), &SwitchoverAutonomousDatabaseInput{
+		AutonomousDatabaseId: ptr.String("__AutonomousDatabaseId__"),
+		PeerDbArn:            ptr.String("__PeerDbArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4318,7 +4784,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4337,7 +4808,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4361,7 +4838,118 @@ func TestCheckResponseSnapshot_UpdateAutonomousDatabase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAutonomousDatabase(context.Background(), &UpdateAutonomousDatabaseInput{})
+	got, err := svc.UpdateAutonomousDatabase(context.Background(), &UpdateAutonomousDatabaseInput{
+		AutonomousDatabaseId: ptr.String("__AutonomousDatabaseId__"),
+		AdminPassword:        ptr.String("__AdminPassword__"),
+		ComputeCount:         ptr.Float64(1.0),
+		CpuCoreCount:         ptr.Int32(1),
+		DataStorageSizeInTBs: ptr.Int32(1),
+		DataStorageSizeInGBs: ptr.Int32(1),
+		DisplayName:          ptr.String("__DisplayName__"),
+		DbName:               ptr.String("__DbName__"),
+		DbVersion:            ptr.String("__DbVersion__"),
+		DbWorkload:           types.DbWorkload("OLTP"),
+		DbToolsDetails: []types.DatabaseTool{
+			{
+				IsEnabled:            ptr.Bool(true),
+				Name:                 ptr.String("__Name__"),
+				ComputeCount:         ptr.Float64(1.0),
+				MaxIdleTimeInMinutes: ptr.Int32(1),
+			},
+			{
+				IsEnabled:            ptr.Bool(true),
+				Name:                 ptr.String("__Name__"),
+				ComputeCount:         ptr.Float64(1.0),
+				MaxIdleTimeInMinutes: ptr.Int32(1),
+			},
+		},
+		DatabaseEdition:                      types.DatabaseEdition("STANDARD_EDITION"),
+		LicenseModel:                         types.LicenseModel("BRING_YOUR_OWN_LICENSE"),
+		IsAutoScalingEnabled:                 ptr.Bool(true),
+		IsAutoScalingForStorageEnabled:       ptr.Bool(true),
+		IsBackupRetentionLocked:              ptr.Bool(true),
+		IsLocalDataGuardEnabled:              ptr.Bool(true),
+		IsMtlsConnectionRequired:             ptr.Bool(true),
+		IsRefreshableClone:                   ptr.Bool(true),
+		IsDisconnectPeer:                     ptr.Bool(true),
+		BackupRetentionPeriodInDays:          ptr.Int32(1),
+		ByolComputeCountLimit:                ptr.Float64(1.0),
+		LocalAdgAutoFailoverMaxDataLossLimit: ptr.Int32(1),
+		AutonomousMaintenanceScheduleType:    types.AutonomousMaintenanceScheduleType("EARLY"),
+		CustomerContactsToSendToOCI: []types.CustomerContact{
+			{
+				Email: ptr.String("__Email__"),
+			},
+			{
+				Email: ptr.String("__Email__"),
+			},
+		},
+		ScheduledOperations: []types.ScheduledOperationDetails{
+			{
+				DayOfWeek: &types.DayOfWeek{
+					Name: types.DayOfWeekName("MONDAY"),
+				},
+				ScheduledStartTime: ptr.String("__ScheduledStartTime__"),
+				ScheduledStopTime:  ptr.String("__ScheduledStopTime__"),
+			},
+			{
+				DayOfWeek: &types.DayOfWeek{
+					Name: types.DayOfWeekName("MONDAY"),
+				},
+				ScheduledStartTime: ptr.String("__ScheduledStartTime__"),
+				ScheduledStopTime:  ptr.String("__ScheduledStopTime__"),
+			},
+		},
+		LongTermBackupSchedule: &types.LongTermBackupSchedule{
+			IsDisabled:            ptr.Bool(true),
+			RepeatCadence:         types.RepeatCadence("ONE_TIME"),
+			RetentionPeriodInDays: ptr.Int32(1),
+			TimeOfBackup:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		OpenMode:             types.OpenMode("READ_ONLY"),
+		PermissionLevel:      types.PermissionLevel("RESTRICTED"),
+		RefreshableMode:      types.RefreshableMode("AUTOMATIC"),
+		PrivateEndpointIp:    ptr.String("__PrivateEndpointIp__"),
+		PrivateEndpointLabel: ptr.String("__PrivateEndpointLabel__"),
+		PeerDbId:             ptr.String("__PeerDbId__"),
+		ResourcePoolLeaderId: ptr.String("__ResourcePoolLeaderId__"),
+		ResourcePoolSummary: &types.ResourcePoolSummary{
+			IsDisabled:                    ptr.Bool(true),
+			PoolSize:                      ptr.Int32(1),
+			PoolStorageSizeInTBs:          ptr.Int32(1),
+			AvailableStorageCapacityInTBs: ptr.Float64(1.0),
+			TotalComputeCapacity:          ptr.Int32(1),
+			AvailableComputeCapacity:      ptr.Int32(1),
+		},
+		StandbyAllowlistedIpsSource: types.StandbyAllowlistedIpsSource("PRIMARY"),
+		StandbyAllowlistedIps: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AllowlistedIps: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AutoRefreshFrequencyInSeconds: ptr.Int32(1),
+		AutoRefreshPointLagInSeconds:  ptr.Int32(1),
+		TimeOfAutoRefreshStart:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EncryptionKeyProvider:         types.EncryptionKeyProviderInput("ORACLE_MANAGED"),
+		EncryptionKeyConfiguration: &types.EncryptionKeyConfigurationInputMemberAwsEncryptionKey{
+			Value: types.AwsEncryptionKeyConfigurationInput{
+				IamRoleArn:     ptr.String("__IamRoleArn__"),
+				ExternalIdType: types.ExternalIdType("database_ocid"),
+				KmsKeyId:       ptr.String("__KmsKeyId__"),
+			},
+		},
+		AdminPasswordSource: types.AdminPasswordSource("CUSTOMER_MANAGED_AWS_SECRET"),
+		AdminPasswordSourceConfiguration: &types.AdminPasswordSourceConfigurationInputMemberCustomerManagedAwsSecret{
+			Value: types.CustomerManagedAwsSecretConfigurationInput{
+				SecretId:       ptr.String("__SecretId__"),
+				IamRoleArn:     ptr.String("__IamRoleArn__"),
+				ExternalIdType: types.ExternalIdType("database_ocid"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4385,7 +4973,10 @@ func TestCheckResponseSnapshot_UpdateAutonomousDatabaseBackup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAutonomousDatabaseBackup(context.Background(), &UpdateAutonomousDatabaseBackupInput{})
+	got, err := svc.UpdateAutonomousDatabaseBackup(context.Background(), &UpdateAutonomousDatabaseBackupInput{
+		AutonomousDatabaseBackupId: ptr.String("__AutonomousDatabaseBackupId__"),
+		RetentionPeriodInDays:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4409,7 +5000,41 @@ func TestCheckResponseSnapshot_UpdateCloudExadataInfrastructure(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCloudExadataInfrastructure(context.Background(), &UpdateCloudExadataInfrastructureInput{})
+	got, err := svc.UpdateCloudExadataInfrastructure(context.Background(), &UpdateCloudExadataInfrastructureInput{
+		CloudExadataInfrastructureId: ptr.String("__CloudExadataInfrastructureId__"),
+		MaintenanceWindow: &types.MaintenanceWindow{
+			CustomActionTimeoutInMins: ptr.Int32(1),
+			DaysOfWeek: []types.DayOfWeek{
+				{
+					Name: types.DayOfWeekName("MONDAY"),
+				},
+				{
+					Name: types.DayOfWeekName("MONDAY"),
+				},
+			},
+			HoursOfDay: []int32{
+				1,
+				1,
+			},
+			IsCustomActionTimeoutEnabled: ptr.Bool(true),
+			LeadTimeInWeeks:              ptr.Int32(1),
+			Months: []types.Month{
+				{
+					Name: types.MonthName("JANUARY"),
+				},
+				{
+					Name: types.MonthName("JANUARY"),
+				},
+			},
+			PatchingMode: types.PatchingModeType("ROLLING"),
+			Preference:   types.PreferenceType("NO_PREFERENCE"),
+			SkipRu:       ptr.Bool(true),
+			WeeksOfMonth: []int32{
+				1,
+				1,
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4433,7 +5058,33 @@ func TestCheckResponseSnapshot_UpdateOdbNetwork(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateOdbNetwork(context.Background(), &UpdateOdbNetworkInput{})
+	got, err := svc.UpdateOdbNetwork(context.Background(), &UpdateOdbNetworkInput{
+		OdbNetworkId: ptr.String("__OdbNetworkId__"),
+		DisplayName:  ptr.String("__DisplayName__"),
+		PeeredCidrsToBeAdded: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PeeredCidrsToBeRemoved: []string{
+			"__Member__",
+			"__Member__",
+		},
+		S3Access:          types.Access("ENABLED"),
+		ZeroEtlAccess:     types.Access("ENABLED"),
+		StsAccess:         types.Access("ENABLED"),
+		KmsAccess:         types.Access("ENABLED"),
+		S3PolicyDocument:  ptr.String("__S3PolicyDocument__"),
+		StsPolicyDocument: ptr.String("__StsPolicyDocument__"),
+		KmsPolicyDocument: ptr.String("__KmsPolicyDocument__"),
+		CrossRegionS3RestoreSourcesToEnable: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CrossRegionS3RestoreSourcesToDisable: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4457,7 +5108,18 @@ func TestCheckResponseSnapshot_UpdateOdbPeeringConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateOdbPeeringConnection(context.Background(), &UpdateOdbPeeringConnectionInput{})
+	got, err := svc.UpdateOdbPeeringConnection(context.Background(), &UpdateOdbPeeringConnectionInput{
+		OdbPeeringConnectionId: ptr.String("__OdbPeeringConnectionId__"),
+		DisplayName:            ptr.String("__DisplayName__"),
+		PeerNetworkCidrsToBeAdded: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PeerNetworkCidrsToBeRemoved: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4478,7 +5140,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptMarketplaceRegistration(context.Background(), &AcceptMarketplaceRegistrationInput{})
+	_, opErr := svc.AcceptMarketplaceRegistration(context.Background(), &AcceptMarketplaceRegistrationInput{
+		MarketplaceRegistrationToken: ptr.String("__MarketplaceRegistrationToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4505,7 +5169,9 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptMarketplaceRegistration(context.Background(), &AcceptMarketplaceRegistrationInput{})
+	_, opErr := svc.AcceptMarketplaceRegistration(context.Background(), &AcceptMarketplaceRegistrationInput{
+		MarketplaceRegistrationToken: ptr.String("__MarketplaceRegistrationToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4531,7 +5197,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptMarketplaceRegistration(context.Background(), &AcceptMarketplaceRegistrationInput{})
+	_, opErr := svc.AcceptMarketplaceRegistration(context.Background(), &AcceptMarketplaceRegistrationInput{
+		MarketplaceRegistrationToken: ptr.String("__MarketplaceRegistrationToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4558,7 +5226,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateIamRoleToResource(context.Background(), &AssociateIamRoleToResourceInput{})
+	_, opErr := svc.AssociateIamRoleToResource(context.Background(), &AssociateIamRoleToResourceInput{
+		IamRoleArn:     ptr.String("__IamRoleArn__"),
+		AwsIntegration: types.SupportedAwsIntegration("KmsTde"),
+		ResourceArn:    ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4586,7 +5258,118 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAutonomousDatabase(context.Background(), &CreateAutonomousDatabaseInput{})
+	_, opErr := svc.CreateAutonomousDatabase(context.Background(), &CreateAutonomousDatabaseInput{
+		OdbNetworkId:                      ptr.String("__OdbNetworkId__"),
+		DisplayName:                       ptr.String("__DisplayName__"),
+		DbName:                            ptr.String("__DbName__"),
+		AdminPassword:                     ptr.String("__AdminPassword__"),
+		ComputeCount:                      ptr.Float64(1.0),
+		DataStorageSizeInTBs:              ptr.Int32(1),
+		DataStorageSizeInGBs:              ptr.Int32(1),
+		DbWorkload:                        types.DbWorkload("OLTP"),
+		IsAutoScalingEnabled:              ptr.Bool(true),
+		IsAutoScalingForStorageEnabled:    ptr.Bool(true),
+		LicenseModel:                      types.LicenseModel("BRING_YOUR_OWN_LICENSE"),
+		CharacterSet:                      ptr.String("__CharacterSet__"),
+		NcharacterSet:                     ptr.String("__NcharacterSet__"),
+		DbVersion:                         ptr.String("__DbVersion__"),
+		DatabaseEdition:                   types.DatabaseEdition("STANDARD_EDITION"),
+		StandbyAllowlistedIpsSource:       types.StandbyAllowlistedIpsSource("PRIMARY"),
+		AutonomousMaintenanceScheduleType: types.AutonomousMaintenanceScheduleType("EARLY"),
+		BackupRetentionPeriodInDays:       ptr.Int32(1),
+		ByolComputeCountLimit:             ptr.Float64(1.0),
+		CpuCoreCount:                      ptr.Int32(1),
+		CustomerContactsToSendToOCI: []types.CustomerContact{
+			{
+				Email: ptr.String("__Email__"),
+			},
+			{
+				Email: ptr.String("__Email__"),
+			},
+		},
+		PrivateEndpointIp:    ptr.String("__PrivateEndpointIp__"),
+		PrivateEndpointLabel: ptr.String("__PrivateEndpointLabel__"),
+		ResourcePoolLeaderId: ptr.String("__ResourcePoolLeaderId__"),
+		ResourcePoolSummary: &types.ResourcePoolSummary{
+			IsDisabled:                    ptr.Bool(true),
+			PoolSize:                      ptr.Int32(1),
+			PoolStorageSizeInTBs:          ptr.Int32(1),
+			AvailableStorageCapacityInTBs: ptr.Float64(1.0),
+			TotalComputeCapacity:          ptr.Int32(1),
+			AvailableComputeCapacity:      ptr.Int32(1),
+		},
+		ScheduledOperations: []types.ScheduledOperationDetails{
+			{
+				DayOfWeek: &types.DayOfWeek{
+					Name: types.DayOfWeekName("MONDAY"),
+				},
+				ScheduledStartTime: ptr.String("__ScheduledStartTime__"),
+				ScheduledStopTime:  ptr.String("__ScheduledStopTime__"),
+			},
+			{
+				DayOfWeek: &types.DayOfWeek{
+					Name: types.DayOfWeekName("MONDAY"),
+				},
+				ScheduledStartTime: ptr.String("__ScheduledStartTime__"),
+				ScheduledStopTime:  ptr.String("__ScheduledStopTime__"),
+			},
+		},
+		StandbyAllowlistedIps: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AllowlistedIps: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TransportableTablespace: &types.TransportableTablespace{
+			TtsBundleUrl: ptr.String("__TtsBundleUrl__"),
+		},
+		IsBackupRetentionLocked:  ptr.Bool(true),
+		IsLocalDataGuardEnabled:  ptr.Bool(true),
+		IsMtlsConnectionRequired: ptr.Bool(true),
+		DbToolsDetails: []types.DatabaseTool{
+			{
+				IsEnabled:            ptr.Bool(true),
+				Name:                 ptr.String("__Name__"),
+				ComputeCount:         ptr.Float64(1.0),
+				MaxIdleTimeInMinutes: ptr.Int32(1),
+			},
+			{
+				IsEnabled:            ptr.Bool(true),
+				Name:                 ptr.String("__Name__"),
+				ComputeCount:         ptr.Float64(1.0),
+				MaxIdleTimeInMinutes: ptr.Int32(1),
+			},
+		},
+		Source: types.SourceType("NONE"),
+		SourceConfiguration: &types.SourceConfigurationMemberDatabaseClone{
+			Value: types.DatabaseCloneConfiguration{
+				SourceAutonomousDatabaseId: ptr.String("__SourceAutonomousDatabaseId__"),
+				CloneType:                  types.CloneType("FULL"),
+			},
+		},
+		EncryptionKeyProvider: types.EncryptionKeyProviderInput("ORACLE_MANAGED"),
+		EncryptionKeyConfiguration: &types.EncryptionKeyConfigurationInputMemberAwsEncryptionKey{
+			Value: types.AwsEncryptionKeyConfigurationInput{
+				IamRoleArn:     ptr.String("__IamRoleArn__"),
+				ExternalIdType: types.ExternalIdType("database_ocid"),
+				KmsKeyId:       ptr.String("__KmsKeyId__"),
+			},
+		},
+		AdminPasswordSource: types.AdminPasswordSource("CUSTOMER_MANAGED_AWS_SECRET"),
+		AdminPasswordSourceConfiguration: &types.AdminPasswordSourceConfigurationInputMemberCustomerManagedAwsSecret{
+			Value: types.CustomerManagedAwsSecretConfigurationInput{
+				SecretId:       ptr.String("__SecretId__"),
+				IamRoleArn:     ptr.String("__IamRoleArn__"),
+				ExternalIdType: types.ExternalIdType("database_ocid"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4612,7 +5395,9 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptMarketplaceRegistration(context.Background(), &AcceptMarketplaceRegistrationInput{})
+	_, opErr := svc.AcceptMarketplaceRegistration(context.Background(), &AcceptMarketplaceRegistrationInput{
+		MarketplaceRegistrationToken: ptr.String("__MarketplaceRegistrationToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4648,7 +5433,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptMarketplaceRegistration(context.Background(), &AcceptMarketplaceRegistrationInput{})
+	_, opErr := svc.AcceptMarketplaceRegistration(context.Background(), &AcceptMarketplaceRegistrationInput{
+		MarketplaceRegistrationToken: ptr.String("__MarketplaceRegistrationToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

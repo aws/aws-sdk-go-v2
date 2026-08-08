@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"DirectoryId":"__DirectoryId__","NextToken":"__NextToken__","Realm":"__Realm__","Users":[{"DistinguishedName":"__DistinguishedName__","EmailAddress":"__EmailAddress__","Enabled":true,"GivenName":"__GivenName__","OtherAttributes":{"key0":{"S":"__AttributeValueMemberS__"}},"SAMAccountName":"__SAMAccountName__","SID":"__SID__","Surname":"__Surname__","UserPrincipalName":"__UserPrincipalName__"},{"DistinguishedName":"__DistinguishedName__","EmailAddress":"__EmailAddress__","Enabled":true,"GivenName":"__GivenName__","OtherAttributes":{"key0":{"S":"__AttributeValueMemberS__"}},"SAMAccountName":"__SAMAccountName__","SID":"__SID__","Surname":"__Surname__","UserPrincipalName":"__UserPrincipalName__"}]}

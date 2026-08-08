@@ -117,7 +117,13 @@ func TestCheckResponseSnapshot_CancelHarvestJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelHarvestJob(context.Background(), &CancelHarvestJobInput{})
+	got, err := svc.CancelHarvestJob(context.Background(), &CancelHarvestJobInput{
+		ChannelGroupName:   ptr.String("__ChannelGroupName__"),
+		ChannelName:        ptr.String("__ChannelName__"),
+		OriginEndpointName: ptr.String("__OriginEndpointName__"),
+		HarvestJobName:     ptr.String("__HarvestJobName__"),
+		ETag:               ptr.String("__ETag__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -166,7 +172,24 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateChannel(context.Background(), &CreateChannelInput{})
+	got, err := svc.CreateChannel(context.Background(), &CreateChannelInput{
+		ChannelGroupName: ptr.String("__ChannelGroupName__"),
+		ChannelName:      ptr.String("__ChannelName__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+		InputType:        types.InputType("HLS"),
+		Description:      ptr.String("__Description__"),
+		InputSwitchConfiguration: &types.InputSwitchConfiguration{
+			MQCSInputSwitching: ptr.Bool(true),
+			PreferredInput:     ptr.Int32(1),
+		},
+		OutputHeaderConfiguration: &types.OutputHeaderConfiguration{
+			PublishMQCS: ptr.Bool(true),
+		},
+		OutputLockingMode: types.OutputLockingMode("EPOCH_LOCKED"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -196,7 +219,14 @@ func TestCheckResponseSnapshot_CreateChannelGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateChannelGroup(context.Background(), &CreateChannelGroupInput{})
+	got, err := svc.CreateChannelGroup(context.Background(), &CreateChannelGroupInput{
+		ChannelGroupName: ptr.String("__ChannelGroupName__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+		Description:      ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -266,7 +296,53 @@ func TestCheckResponseSnapshot_CreateHarvestJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateHarvestJob(context.Background(), &CreateHarvestJobInput{})
+	got, err := svc.CreateHarvestJob(context.Background(), &CreateHarvestJobInput{
+		ChannelGroupName:   ptr.String("__ChannelGroupName__"),
+		ChannelName:        ptr.String("__ChannelName__"),
+		OriginEndpointName: ptr.String("__OriginEndpointName__"),
+		Description:        ptr.String("__Description__"),
+		HarvestedManifests: &types.HarvestedManifests{
+			HlsManifests: []types.HarvestedHlsManifest{
+				{
+					ManifestName: ptr.String("__ManifestName__"),
+				},
+				{
+					ManifestName: ptr.String("__ManifestName__"),
+				},
+			},
+			DashManifests: []types.HarvestedDashManifest{
+				{
+					ManifestName: ptr.String("__ManifestName__"),
+				},
+				{
+					ManifestName: ptr.String("__ManifestName__"),
+				},
+			},
+			LowLatencyHlsManifests: []types.HarvestedLowLatencyHlsManifest{
+				{
+					ManifestName: ptr.String("__ManifestName__"),
+				},
+				{
+					ManifestName: ptr.String("__ManifestName__"),
+				},
+			},
+		},
+		ScheduleConfiguration: &types.HarvesterScheduleConfiguration{
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		Destination: &types.Destination{
+			S3Destination: &types.S3DestinationConfig{
+				BucketName:      ptr.String("__BucketName__"),
+				DestinationPath: ptr.String("__DestinationPath__"),
+			},
+		},
+		ClientToken:    ptr.String("__ClientToken__"),
+		HarvestJobName: ptr.String("__HarvestJobName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -652,7 +728,363 @@ func TestCheckResponseSnapshot_CreateOriginEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateOriginEndpoint(context.Background(), &CreateOriginEndpointInput{})
+	got, err := svc.CreateOriginEndpoint(context.Background(), &CreateOriginEndpointInput{
+		ChannelGroupName:   ptr.String("__ChannelGroupName__"),
+		ChannelName:        ptr.String("__ChannelName__"),
+		OriginEndpointName: ptr.String("__OriginEndpointName__"),
+		ContainerType:      types.ContainerType("TS"),
+		Segment: &types.Segment{
+			SegmentDurationSeconds:   ptr.Int32(1),
+			SegmentName:              ptr.String("__SegmentName__"),
+			TsUseAudioRenditionGroup: ptr.Bool(true),
+			IncludeIframeOnlyStreams: ptr.Bool(true),
+			TsIncludeDvbSubtitles:    ptr.Bool(true),
+			Scte: &types.Scte{
+				ScteFilter: []types.ScteFilter{
+					types.ScteFilter("SPLICE_INSERT"),
+					types.ScteFilter("SPLICE_INSERT"),
+				},
+				ScteInSegments: types.ScteInSegments("NONE"),
+				CustomAdTypes: []types.CustomAdType{
+					types.CustomAdType("PROGRAM"),
+					types.CustomAdType("PROGRAM"),
+				},
+			},
+			Encryption: &types.Encryption{
+				ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+				EncryptionMethod: &types.EncryptionMethod{
+					TsEncryptionMethod:   types.TsEncryptionMethod("AES_128"),
+					CmafEncryptionMethod: types.CmafEncryptionMethod("CENC"),
+					IsmEncryptionMethod:  types.IsmEncryptionMethod("CENC"),
+				},
+				KeyRotationIntervalSeconds:    ptr.Int32(1),
+				CmafExcludeSegmentDrmMetadata: ptr.Bool(true),
+				SpekeKeyProvider: &types.SpekeKeyProvider{
+					EncryptionContractConfiguration: &types.EncryptionContractConfiguration{
+						PresetSpeke20Audio: types.PresetSpeke20Audio("PRESET_AUDIO_1"),
+						PresetSpeke20Video: types.PresetSpeke20Video("PRESET_VIDEO_1"),
+					},
+					ResourceId: ptr.String("__ResourceId__"),
+					DrmSystems: []types.DrmSystem{
+						types.DrmSystem("CLEAR_KEY_AES_128"),
+						types.DrmSystem("CLEAR_KEY_AES_128"),
+					},
+					RoleArn:        ptr.String("__RoleArn__"),
+					Url:            ptr.String("__Url__"),
+					CertificateArn: ptr.String("__CertificateArn__"),
+				},
+			},
+			OutputTimestampMode: types.OutputTimestampMode("PASSTHROUGH"),
+		},
+		ClientToken:            ptr.String("__ClientToken__"),
+		Description:            ptr.String("__Description__"),
+		StartoverWindowSeconds: ptr.Int32(1),
+		HlsManifests: []types.CreateHlsManifestConfiguration{
+			{
+				ManifestName:      ptr.String("__ManifestName__"),
+				ChildManifestName: ptr.String("__ChildManifestName__"),
+				ScteHls: &types.ScteHls{
+					AdMarkerHls:     types.AdMarkerHls("DATERANGE"),
+					ScteInManifests: types.ScteInManifests("ALL"),
+				},
+				StartTag: &types.StartTag{
+					TimeOffset: ptr.Float32(1.0),
+					Precise:    ptr.Bool(true),
+				},
+				ManifestWindowSeconds:          ptr.Int32(1),
+				ProgramDateTimeIntervalSeconds: ptr.Int32(1),
+				FilterConfiguration: &types.FilterConfiguration{
+					ManifestFilter:   ptr.String("__ManifestFilter__"),
+					DrmSettings:      ptr.String("__DrmSettings__"),
+					Start:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					TimeDelaySeconds: ptr.Int32(1),
+					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				UrlEncodeChildManifest: ptr.Bool(true),
+				UriPathType:            types.UriPathType("LEAF"),
+			},
+			{
+				ManifestName:      ptr.String("__ManifestName__"),
+				ChildManifestName: ptr.String("__ChildManifestName__"),
+				ScteHls: &types.ScteHls{
+					AdMarkerHls:     types.AdMarkerHls("DATERANGE"),
+					ScteInManifests: types.ScteInManifests("ALL"),
+				},
+				StartTag: &types.StartTag{
+					TimeOffset: ptr.Float32(1.0),
+					Precise:    ptr.Bool(true),
+				},
+				ManifestWindowSeconds:          ptr.Int32(1),
+				ProgramDateTimeIntervalSeconds: ptr.Int32(1),
+				FilterConfiguration: &types.FilterConfiguration{
+					ManifestFilter:   ptr.String("__ManifestFilter__"),
+					DrmSettings:      ptr.String("__DrmSettings__"),
+					Start:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					TimeDelaySeconds: ptr.Int32(1),
+					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				UrlEncodeChildManifest: ptr.Bool(true),
+				UriPathType:            types.UriPathType("LEAF"),
+			},
+		},
+		LowLatencyHlsManifests: []types.CreateLowLatencyHlsManifestConfiguration{
+			{
+				ManifestName:      ptr.String("__ManifestName__"),
+				ChildManifestName: ptr.String("__ChildManifestName__"),
+				ScteHls: &types.ScteHls{
+					AdMarkerHls:     types.AdMarkerHls("DATERANGE"),
+					ScteInManifests: types.ScteInManifests("ALL"),
+				},
+				StartTag: &types.StartTag{
+					TimeOffset: ptr.Float32(1.0),
+					Precise:    ptr.Bool(true),
+				},
+				ManifestWindowSeconds:          ptr.Int32(1),
+				ProgramDateTimeIntervalSeconds: ptr.Int32(1),
+				FilterConfiguration: &types.FilterConfiguration{
+					ManifestFilter:   ptr.String("__ManifestFilter__"),
+					DrmSettings:      ptr.String("__DrmSettings__"),
+					Start:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					TimeDelaySeconds: ptr.Int32(1),
+					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				UrlEncodeChildManifest: ptr.Bool(true),
+				UriPathType:            types.UriPathType("LEAF"),
+			},
+			{
+				ManifestName:      ptr.String("__ManifestName__"),
+				ChildManifestName: ptr.String("__ChildManifestName__"),
+				ScteHls: &types.ScteHls{
+					AdMarkerHls:     types.AdMarkerHls("DATERANGE"),
+					ScteInManifests: types.ScteInManifests("ALL"),
+				},
+				StartTag: &types.StartTag{
+					TimeOffset: ptr.Float32(1.0),
+					Precise:    ptr.Bool(true),
+				},
+				ManifestWindowSeconds:          ptr.Int32(1),
+				ProgramDateTimeIntervalSeconds: ptr.Int32(1),
+				FilterConfiguration: &types.FilterConfiguration{
+					ManifestFilter:   ptr.String("__ManifestFilter__"),
+					DrmSettings:      ptr.String("__DrmSettings__"),
+					Start:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					TimeDelaySeconds: ptr.Int32(1),
+					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				UrlEncodeChildManifest: ptr.Bool(true),
+				UriPathType:            types.UriPathType("LEAF"),
+			},
+		},
+		DashManifests: []types.CreateDashManifestConfiguration{
+			{
+				ManifestName:          ptr.String("__ManifestName__"),
+				ManifestWindowSeconds: ptr.Int32(1),
+				FilterConfiguration: &types.FilterConfiguration{
+					ManifestFilter:   ptr.String("__ManifestFilter__"),
+					DrmSettings:      ptr.String("__DrmSettings__"),
+					Start:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					TimeDelaySeconds: ptr.Int32(1),
+					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				MinUpdatePeriodSeconds:            ptr.Int32(1),
+				MinBufferTimeSeconds:              ptr.Int32(1),
+				SuggestedPresentationDelaySeconds: ptr.Int32(1),
+				SegmentTemplateFormat:             types.DashSegmentTemplateFormat("NUMBER_WITH_TIMELINE"),
+				PeriodTriggers: []types.DashPeriodTrigger{
+					types.DashPeriodTrigger("AVAILS"),
+					types.DashPeriodTrigger("AVAILS"),
+				},
+				ScteDash: &types.ScteDash{
+					AdMarkerDash:    types.AdMarkerDash("BINARY"),
+					ScteInManifests: types.ScteInManifests("ALL"),
+				},
+				DrmSignaling: types.DashDrmSignaling("INDIVIDUAL"),
+				UtcTiming: &types.DashUtcTiming{
+					TimingMode:   types.DashUtcTimingMode("HTTP_HEAD"),
+					TimingSource: ptr.String("__TimingSource__"),
+				},
+				Profiles: []types.DashProfile{
+					types.DashProfile("DVB_DASH"),
+					types.DashProfile("DVB_DASH"),
+				},
+				BaseUrls: []types.DashBaseUrl{
+					{
+						Url:             ptr.String("__Url__"),
+						ServiceLocation: ptr.String("__ServiceLocation__"),
+						DvbPriority:     ptr.Int32(1),
+						DvbWeight:       ptr.Int32(1),
+					},
+					{
+						Url:             ptr.String("__Url__"),
+						ServiceLocation: ptr.String("__ServiceLocation__"),
+						DvbPriority:     ptr.Int32(1),
+						DvbWeight:       ptr.Int32(1),
+					},
+				},
+				ProgramInformation: &types.DashProgramInformation{
+					Title:              ptr.String("__Title__"),
+					Source:             ptr.String("__Source__"),
+					Copyright:          ptr.String("__Copyright__"),
+					LanguageCode:       ptr.String("__LanguageCode__"),
+					MoreInformationUrl: ptr.String("__MoreInformationUrl__"),
+				},
+				DvbSettings: &types.DashDvbSettings{
+					FontDownload: &types.DashDvbFontDownload{
+						Url:        ptr.String("__Url__"),
+						MimeType:   ptr.String("__MimeType__"),
+						FontFamily: ptr.String("__FontFamily__"),
+					},
+					ErrorMetrics: []types.DashDvbMetricsReporting{
+						{
+							ReportingUrl: ptr.String("__ReportingUrl__"),
+							Probability:  ptr.Int32(1),
+						},
+						{
+							ReportingUrl: ptr.String("__ReportingUrl__"),
+							Probability:  ptr.Int32(1),
+						},
+					},
+				},
+				Compactness:          types.DashCompactness("STANDARD"),
+				AudioTimelinePattern: types.DashAudioTimelinePattern("NONE"),
+				SubtitleConfiguration: &types.DashSubtitleConfiguration{
+					TtmlConfiguration: &types.DashTtmlConfiguration{
+						TtmlProfile: types.DashTtmlProfile("IMSC_1"),
+					},
+				},
+				UriPathType: types.UriPathType("LEAF"),
+				AvailabilityStartTimeConfiguration: &types.DashAvailabilityStartTimeConfigurationMemberFixedAvailabilityStartTime{
+					Value: time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+				},
+			},
+			{
+				ManifestName:          ptr.String("__ManifestName__"),
+				ManifestWindowSeconds: ptr.Int32(1),
+				FilterConfiguration: &types.FilterConfiguration{
+					ManifestFilter:   ptr.String("__ManifestFilter__"),
+					DrmSettings:      ptr.String("__DrmSettings__"),
+					Start:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					TimeDelaySeconds: ptr.Int32(1),
+					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				MinUpdatePeriodSeconds:            ptr.Int32(1),
+				MinBufferTimeSeconds:              ptr.Int32(1),
+				SuggestedPresentationDelaySeconds: ptr.Int32(1),
+				SegmentTemplateFormat:             types.DashSegmentTemplateFormat("NUMBER_WITH_TIMELINE"),
+				PeriodTriggers: []types.DashPeriodTrigger{
+					types.DashPeriodTrigger("AVAILS"),
+					types.DashPeriodTrigger("AVAILS"),
+				},
+				ScteDash: &types.ScteDash{
+					AdMarkerDash:    types.AdMarkerDash("BINARY"),
+					ScteInManifests: types.ScteInManifests("ALL"),
+				},
+				DrmSignaling: types.DashDrmSignaling("INDIVIDUAL"),
+				UtcTiming: &types.DashUtcTiming{
+					TimingMode:   types.DashUtcTimingMode("HTTP_HEAD"),
+					TimingSource: ptr.String("__TimingSource__"),
+				},
+				Profiles: []types.DashProfile{
+					types.DashProfile("DVB_DASH"),
+					types.DashProfile("DVB_DASH"),
+				},
+				BaseUrls: []types.DashBaseUrl{
+					{
+						Url:             ptr.String("__Url__"),
+						ServiceLocation: ptr.String("__ServiceLocation__"),
+						DvbPriority:     ptr.Int32(1),
+						DvbWeight:       ptr.Int32(1),
+					},
+					{
+						Url:             ptr.String("__Url__"),
+						ServiceLocation: ptr.String("__ServiceLocation__"),
+						DvbPriority:     ptr.Int32(1),
+						DvbWeight:       ptr.Int32(1),
+					},
+				},
+				ProgramInformation: &types.DashProgramInformation{
+					Title:              ptr.String("__Title__"),
+					Source:             ptr.String("__Source__"),
+					Copyright:          ptr.String("__Copyright__"),
+					LanguageCode:       ptr.String("__LanguageCode__"),
+					MoreInformationUrl: ptr.String("__MoreInformationUrl__"),
+				},
+				DvbSettings: &types.DashDvbSettings{
+					FontDownload: &types.DashDvbFontDownload{
+						Url:        ptr.String("__Url__"),
+						MimeType:   ptr.String("__MimeType__"),
+						FontFamily: ptr.String("__FontFamily__"),
+					},
+					ErrorMetrics: []types.DashDvbMetricsReporting{
+						{
+							ReportingUrl: ptr.String("__ReportingUrl__"),
+							Probability:  ptr.Int32(1),
+						},
+						{
+							ReportingUrl: ptr.String("__ReportingUrl__"),
+							Probability:  ptr.Int32(1),
+						},
+					},
+				},
+				Compactness:          types.DashCompactness("STANDARD"),
+				AudioTimelinePattern: types.DashAudioTimelinePattern("NONE"),
+				SubtitleConfiguration: &types.DashSubtitleConfiguration{
+					TtmlConfiguration: &types.DashTtmlConfiguration{
+						TtmlProfile: types.DashTtmlProfile("IMSC_1"),
+					},
+				},
+				UriPathType: types.UriPathType("LEAF"),
+				AvailabilityStartTimeConfiguration: &types.DashAvailabilityStartTimeConfigurationMemberFixedAvailabilityStartTime{
+					Value: time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+				},
+			},
+		},
+		MssManifests: []types.CreateMssManifestConfiguration{
+			{
+				ManifestName:          ptr.String("__ManifestName__"),
+				ManifestWindowSeconds: ptr.Int32(1),
+				FilterConfiguration: &types.FilterConfiguration{
+					ManifestFilter:   ptr.String("__ManifestFilter__"),
+					DrmSettings:      ptr.String("__DrmSettings__"),
+					Start:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					TimeDelaySeconds: ptr.Int32(1),
+					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				ManifestLayout: types.MssManifestLayout("FULL"),
+			},
+			{
+				ManifestName:          ptr.String("__ManifestName__"),
+				ManifestWindowSeconds: ptr.Int32(1),
+				FilterConfiguration: &types.FilterConfiguration{
+					ManifestFilter:   ptr.String("__ManifestFilter__"),
+					DrmSettings:      ptr.String("__DrmSettings__"),
+					Start:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					TimeDelaySeconds: ptr.Int32(1),
+					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				ManifestLayout: types.MssManifestLayout("FULL"),
+			},
+		},
+		ForceEndpointErrorConfiguration: &types.ForceEndpointErrorConfiguration{
+			EndpointErrorConditions: []types.EndpointErrorCondition{
+				types.EndpointErrorCondition("STALE_MANIFEST"),
+				types.EndpointErrorCondition("STALE_MANIFEST"),
+			},
+		},
+		UriSeparator:         types.UriSeparator("UNDERSCORE"),
+		StreamNameOutputMode: types.StreamNameOutputMode("INDEX"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -671,7 +1103,10 @@ func TestCheckResponseSnapshot_DeleteChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteChannel(context.Background(), &DeleteChannelInput{})
+	got, err := svc.DeleteChannel(context.Background(), &DeleteChannelInput{
+		ChannelGroupName: ptr.String("__ChannelGroupName__"),
+		ChannelName:      ptr.String("__ChannelName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -690,7 +1125,9 @@ func TestCheckResponseSnapshot_DeleteChannelGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteChannelGroup(context.Background(), &DeleteChannelGroupInput{})
+	got, err := svc.DeleteChannelGroup(context.Background(), &DeleteChannelGroupInput{
+		ChannelGroupName: ptr.String("__ChannelGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -709,7 +1146,10 @@ func TestCheckResponseSnapshot_DeleteChannelPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteChannelPolicy(context.Background(), &DeleteChannelPolicyInput{})
+	got, err := svc.DeleteChannelPolicy(context.Background(), &DeleteChannelPolicyInput{
+		ChannelGroupName: ptr.String("__ChannelGroupName__"),
+		ChannelName:      ptr.String("__ChannelName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -728,7 +1168,11 @@ func TestCheckResponseSnapshot_DeleteOriginEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteOriginEndpoint(context.Background(), &DeleteOriginEndpointInput{})
+	got, err := svc.DeleteOriginEndpoint(context.Background(), &DeleteOriginEndpointInput{
+		ChannelGroupName:   ptr.String("__ChannelGroupName__"),
+		ChannelName:        ptr.String("__ChannelName__"),
+		OriginEndpointName: ptr.String("__OriginEndpointName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -747,7 +1191,11 @@ func TestCheckResponseSnapshot_DeleteOriginEndpointPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteOriginEndpointPolicy(context.Background(), &DeleteOriginEndpointPolicyInput{})
+	got, err := svc.DeleteOriginEndpointPolicy(context.Background(), &DeleteOriginEndpointPolicyInput{
+		ChannelGroupName:   ptr.String("__ChannelGroupName__"),
+		ChannelName:        ptr.String("__ChannelName__"),
+		OriginEndpointName: ptr.String("__OriginEndpointName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -797,7 +1245,10 @@ func TestCheckResponseSnapshot_GetChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetChannel(context.Background(), &GetChannelInput{})
+	got, err := svc.GetChannel(context.Background(), &GetChannelInput{
+		ChannelGroupName: ptr.String("__ChannelGroupName__"),
+		ChannelName:      ptr.String("__ChannelName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -827,7 +1278,9 @@ func TestCheckResponseSnapshot_GetChannelGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetChannelGroup(context.Background(), &GetChannelGroupInput{})
+	got, err := svc.GetChannelGroup(context.Background(), &GetChannelGroupInput{
+		ChannelGroupName: ptr.String("__ChannelGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -850,7 +1303,10 @@ func TestCheckResponseSnapshot_GetChannelPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetChannelPolicy(context.Background(), &GetChannelPolicyInput{})
+	got, err := svc.GetChannelPolicy(context.Background(), &GetChannelPolicyInput{
+		ChannelGroupName: ptr.String("__ChannelGroupName__"),
+		ChannelName:      ptr.String("__ChannelName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -920,7 +1376,12 @@ func TestCheckResponseSnapshot_GetHarvestJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetHarvestJob(context.Background(), &GetHarvestJobInput{})
+	got, err := svc.GetHarvestJob(context.Background(), &GetHarvestJobInput{
+		ChannelGroupName:   ptr.String("__ChannelGroupName__"),
+		ChannelName:        ptr.String("__ChannelName__"),
+		OriginEndpointName: ptr.String("__OriginEndpointName__"),
+		HarvestJobName:     ptr.String("__HarvestJobName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1307,7 +1768,11 @@ func TestCheckResponseSnapshot_GetOriginEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOriginEndpoint(context.Background(), &GetOriginEndpointInput{})
+	got, err := svc.GetOriginEndpoint(context.Background(), &GetOriginEndpointInput{
+		ChannelGroupName:   ptr.String("__ChannelGroupName__"),
+		ChannelName:        ptr.String("__ChannelName__"),
+		OriginEndpointName: ptr.String("__OriginEndpointName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1338,7 +1803,11 @@ func TestCheckResponseSnapshot_GetOriginEndpointPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOriginEndpointPolicy(context.Background(), &GetOriginEndpointPolicyInput{})
+	got, err := svc.GetOriginEndpointPolicy(context.Background(), &GetOriginEndpointPolicyInput{
+		ChannelGroupName:   ptr.String("__ChannelGroupName__"),
+		ChannelName:        ptr.String("__ChannelName__"),
+		OriginEndpointName: ptr.String("__OriginEndpointName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1375,7 +1844,10 @@ func TestCheckResponseSnapshot_ListChannelGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListChannelGroups(context.Background(), &ListChannelGroupsInput{})
+	got, err := svc.ListChannelGroups(context.Background(), &ListChannelGroupsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1418,7 +1890,11 @@ func TestCheckResponseSnapshot_ListChannels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListChannels(context.Background(), &ListChannelsInput{})
+	got, err := svc.ListChannels(context.Background(), &ListChannelsInput{
+		ChannelGroupName: ptr.String("__ChannelGroupName__"),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1539,7 +2015,14 @@ func TestCheckResponseSnapshot_ListHarvestJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListHarvestJobs(context.Background(), &ListHarvestJobsInput{})
+	got, err := svc.ListHarvestJobs(context.Background(), &ListHarvestJobsInput{
+		ChannelGroupName:   ptr.String("__ChannelGroupName__"),
+		ChannelName:        ptr.String("__ChannelName__"),
+		OriginEndpointName: ptr.String("__OriginEndpointName__"),
+		Status:             types.HarvestJobStatus("QUEUED"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1686,7 +2169,12 @@ func TestCheckResponseSnapshot_ListOriginEndpoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOriginEndpoints(context.Background(), &ListOriginEndpointsInput{})
+	got, err := svc.ListOriginEndpoints(context.Background(), &ListOriginEndpointsInput{
+		ChannelGroupName: ptr.String("__ChannelGroupName__"),
+		ChannelName:      ptr.String("__ChannelName__"),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1709,7 +2197,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1728,7 +2218,11 @@ func TestCheckResponseSnapshot_PutChannelPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutChannelPolicy(context.Background(), &PutChannelPolicyInput{})
+	got, err := svc.PutChannelPolicy(context.Background(), &PutChannelPolicyInput{
+		ChannelGroupName: ptr.String("__ChannelGroupName__"),
+		ChannelName:      ptr.String("__ChannelName__"),
+		Policy:           ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1747,7 +2241,19 @@ func TestCheckResponseSnapshot_PutOriginEndpointPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutOriginEndpointPolicy(context.Background(), &PutOriginEndpointPolicyInput{})
+	got, err := svc.PutOriginEndpointPolicy(context.Background(), &PutOriginEndpointPolicyInput{
+		ChannelGroupName:   ptr.String("__ChannelGroupName__"),
+		ChannelName:        ptr.String("__ChannelName__"),
+		OriginEndpointName: ptr.String("__OriginEndpointName__"),
+		Policy:             ptr.String("__Policy__"),
+		CdnAuthConfiguration: &types.CdnAuthConfiguration{
+			CdnIdentifierSecretArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecretsRoleArn: ptr.String("__SecretsRoleArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1771,7 +2277,10 @@ func TestCheckResponseSnapshot_ResetChannelState(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResetChannelState(context.Background(), &ResetChannelStateInput{})
+	got, err := svc.ResetChannelState(context.Background(), &ResetChannelStateInput{
+		ChannelGroupName: ptr.String("__ChannelGroupName__"),
+		ChannelName:      ptr.String("__ChannelName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1796,7 +2305,11 @@ func TestCheckResponseSnapshot_ResetOriginEndpointState(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResetOriginEndpointState(context.Background(), &ResetOriginEndpointStateInput{})
+	got, err := svc.ResetOriginEndpointState(context.Background(), &ResetOriginEndpointStateInput{
+		ChannelGroupName:   ptr.String("__ChannelGroupName__"),
+		ChannelName:        ptr.String("__ChannelName__"),
+		OriginEndpointName: ptr.String("__OriginEndpointName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1815,7 +2328,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1834,7 +2352,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1883,7 +2407,19 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateChannel(context.Background(), &UpdateChannelInput{})
+	got, err := svc.UpdateChannel(context.Background(), &UpdateChannelInput{
+		ChannelGroupName: ptr.String("__ChannelGroupName__"),
+		ChannelName:      ptr.String("__ChannelName__"),
+		ETag:             ptr.String("__ETag__"),
+		Description:      ptr.String("__Description__"),
+		InputSwitchConfiguration: &types.InputSwitchConfiguration{
+			MQCSInputSwitching: ptr.Bool(true),
+			PreferredInput:     ptr.Int32(1),
+		},
+		OutputHeaderConfiguration: &types.OutputHeaderConfiguration{
+			PublishMQCS: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1913,7 +2449,11 @@ func TestCheckResponseSnapshot_UpdateChannelGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateChannelGroup(context.Background(), &UpdateChannelGroupInput{})
+	got, err := svc.UpdateChannelGroup(context.Background(), &UpdateChannelGroupInput{
+		ChannelGroupName: ptr.String("__ChannelGroupName__"),
+		ETag:             ptr.String("__ETag__"),
+		Description:      ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2299,7 +2839,360 @@ func TestCheckResponseSnapshot_UpdateOriginEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateOriginEndpoint(context.Background(), &UpdateOriginEndpointInput{})
+	got, err := svc.UpdateOriginEndpoint(context.Background(), &UpdateOriginEndpointInput{
+		ChannelGroupName:   ptr.String("__ChannelGroupName__"),
+		ChannelName:        ptr.String("__ChannelName__"),
+		OriginEndpointName: ptr.String("__OriginEndpointName__"),
+		ContainerType:      types.ContainerType("TS"),
+		Segment: &types.Segment{
+			SegmentDurationSeconds:   ptr.Int32(1),
+			SegmentName:              ptr.String("__SegmentName__"),
+			TsUseAudioRenditionGroup: ptr.Bool(true),
+			IncludeIframeOnlyStreams: ptr.Bool(true),
+			TsIncludeDvbSubtitles:    ptr.Bool(true),
+			Scte: &types.Scte{
+				ScteFilter: []types.ScteFilter{
+					types.ScteFilter("SPLICE_INSERT"),
+					types.ScteFilter("SPLICE_INSERT"),
+				},
+				ScteInSegments: types.ScteInSegments("NONE"),
+				CustomAdTypes: []types.CustomAdType{
+					types.CustomAdType("PROGRAM"),
+					types.CustomAdType("PROGRAM"),
+				},
+			},
+			Encryption: &types.Encryption{
+				ConstantInitializationVector: ptr.String("__ConstantInitializationVector__"),
+				EncryptionMethod: &types.EncryptionMethod{
+					TsEncryptionMethod:   types.TsEncryptionMethod("AES_128"),
+					CmafEncryptionMethod: types.CmafEncryptionMethod("CENC"),
+					IsmEncryptionMethod:  types.IsmEncryptionMethod("CENC"),
+				},
+				KeyRotationIntervalSeconds:    ptr.Int32(1),
+				CmafExcludeSegmentDrmMetadata: ptr.Bool(true),
+				SpekeKeyProvider: &types.SpekeKeyProvider{
+					EncryptionContractConfiguration: &types.EncryptionContractConfiguration{
+						PresetSpeke20Audio: types.PresetSpeke20Audio("PRESET_AUDIO_1"),
+						PresetSpeke20Video: types.PresetSpeke20Video("PRESET_VIDEO_1"),
+					},
+					ResourceId: ptr.String("__ResourceId__"),
+					DrmSystems: []types.DrmSystem{
+						types.DrmSystem("CLEAR_KEY_AES_128"),
+						types.DrmSystem("CLEAR_KEY_AES_128"),
+					},
+					RoleArn:        ptr.String("__RoleArn__"),
+					Url:            ptr.String("__Url__"),
+					CertificateArn: ptr.String("__CertificateArn__"),
+				},
+			},
+			OutputTimestampMode: types.OutputTimestampMode("PASSTHROUGH"),
+		},
+		Description:            ptr.String("__Description__"),
+		StartoverWindowSeconds: ptr.Int32(1),
+		HlsManifests: []types.CreateHlsManifestConfiguration{
+			{
+				ManifestName:      ptr.String("__ManifestName__"),
+				ChildManifestName: ptr.String("__ChildManifestName__"),
+				ScteHls: &types.ScteHls{
+					AdMarkerHls:     types.AdMarkerHls("DATERANGE"),
+					ScteInManifests: types.ScteInManifests("ALL"),
+				},
+				StartTag: &types.StartTag{
+					TimeOffset: ptr.Float32(1.0),
+					Precise:    ptr.Bool(true),
+				},
+				ManifestWindowSeconds:          ptr.Int32(1),
+				ProgramDateTimeIntervalSeconds: ptr.Int32(1),
+				FilterConfiguration: &types.FilterConfiguration{
+					ManifestFilter:   ptr.String("__ManifestFilter__"),
+					DrmSettings:      ptr.String("__DrmSettings__"),
+					Start:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					TimeDelaySeconds: ptr.Int32(1),
+					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				UrlEncodeChildManifest: ptr.Bool(true),
+				UriPathType:            types.UriPathType("LEAF"),
+			},
+			{
+				ManifestName:      ptr.String("__ManifestName__"),
+				ChildManifestName: ptr.String("__ChildManifestName__"),
+				ScteHls: &types.ScteHls{
+					AdMarkerHls:     types.AdMarkerHls("DATERANGE"),
+					ScteInManifests: types.ScteInManifests("ALL"),
+				},
+				StartTag: &types.StartTag{
+					TimeOffset: ptr.Float32(1.0),
+					Precise:    ptr.Bool(true),
+				},
+				ManifestWindowSeconds:          ptr.Int32(1),
+				ProgramDateTimeIntervalSeconds: ptr.Int32(1),
+				FilterConfiguration: &types.FilterConfiguration{
+					ManifestFilter:   ptr.String("__ManifestFilter__"),
+					DrmSettings:      ptr.String("__DrmSettings__"),
+					Start:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					TimeDelaySeconds: ptr.Int32(1),
+					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				UrlEncodeChildManifest: ptr.Bool(true),
+				UriPathType:            types.UriPathType("LEAF"),
+			},
+		},
+		LowLatencyHlsManifests: []types.CreateLowLatencyHlsManifestConfiguration{
+			{
+				ManifestName:      ptr.String("__ManifestName__"),
+				ChildManifestName: ptr.String("__ChildManifestName__"),
+				ScteHls: &types.ScteHls{
+					AdMarkerHls:     types.AdMarkerHls("DATERANGE"),
+					ScteInManifests: types.ScteInManifests("ALL"),
+				},
+				StartTag: &types.StartTag{
+					TimeOffset: ptr.Float32(1.0),
+					Precise:    ptr.Bool(true),
+				},
+				ManifestWindowSeconds:          ptr.Int32(1),
+				ProgramDateTimeIntervalSeconds: ptr.Int32(1),
+				FilterConfiguration: &types.FilterConfiguration{
+					ManifestFilter:   ptr.String("__ManifestFilter__"),
+					DrmSettings:      ptr.String("__DrmSettings__"),
+					Start:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					TimeDelaySeconds: ptr.Int32(1),
+					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				UrlEncodeChildManifest: ptr.Bool(true),
+				UriPathType:            types.UriPathType("LEAF"),
+			},
+			{
+				ManifestName:      ptr.String("__ManifestName__"),
+				ChildManifestName: ptr.String("__ChildManifestName__"),
+				ScteHls: &types.ScteHls{
+					AdMarkerHls:     types.AdMarkerHls("DATERANGE"),
+					ScteInManifests: types.ScteInManifests("ALL"),
+				},
+				StartTag: &types.StartTag{
+					TimeOffset: ptr.Float32(1.0),
+					Precise:    ptr.Bool(true),
+				},
+				ManifestWindowSeconds:          ptr.Int32(1),
+				ProgramDateTimeIntervalSeconds: ptr.Int32(1),
+				FilterConfiguration: &types.FilterConfiguration{
+					ManifestFilter:   ptr.String("__ManifestFilter__"),
+					DrmSettings:      ptr.String("__DrmSettings__"),
+					Start:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					TimeDelaySeconds: ptr.Int32(1),
+					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				UrlEncodeChildManifest: ptr.Bool(true),
+				UriPathType:            types.UriPathType("LEAF"),
+			},
+		},
+		DashManifests: []types.CreateDashManifestConfiguration{
+			{
+				ManifestName:          ptr.String("__ManifestName__"),
+				ManifestWindowSeconds: ptr.Int32(1),
+				FilterConfiguration: &types.FilterConfiguration{
+					ManifestFilter:   ptr.String("__ManifestFilter__"),
+					DrmSettings:      ptr.String("__DrmSettings__"),
+					Start:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					TimeDelaySeconds: ptr.Int32(1),
+					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				MinUpdatePeriodSeconds:            ptr.Int32(1),
+				MinBufferTimeSeconds:              ptr.Int32(1),
+				SuggestedPresentationDelaySeconds: ptr.Int32(1),
+				SegmentTemplateFormat:             types.DashSegmentTemplateFormat("NUMBER_WITH_TIMELINE"),
+				PeriodTriggers: []types.DashPeriodTrigger{
+					types.DashPeriodTrigger("AVAILS"),
+					types.DashPeriodTrigger("AVAILS"),
+				},
+				ScteDash: &types.ScteDash{
+					AdMarkerDash:    types.AdMarkerDash("BINARY"),
+					ScteInManifests: types.ScteInManifests("ALL"),
+				},
+				DrmSignaling: types.DashDrmSignaling("INDIVIDUAL"),
+				UtcTiming: &types.DashUtcTiming{
+					TimingMode:   types.DashUtcTimingMode("HTTP_HEAD"),
+					TimingSource: ptr.String("__TimingSource__"),
+				},
+				Profiles: []types.DashProfile{
+					types.DashProfile("DVB_DASH"),
+					types.DashProfile("DVB_DASH"),
+				},
+				BaseUrls: []types.DashBaseUrl{
+					{
+						Url:             ptr.String("__Url__"),
+						ServiceLocation: ptr.String("__ServiceLocation__"),
+						DvbPriority:     ptr.Int32(1),
+						DvbWeight:       ptr.Int32(1),
+					},
+					{
+						Url:             ptr.String("__Url__"),
+						ServiceLocation: ptr.String("__ServiceLocation__"),
+						DvbPriority:     ptr.Int32(1),
+						DvbWeight:       ptr.Int32(1),
+					},
+				},
+				ProgramInformation: &types.DashProgramInformation{
+					Title:              ptr.String("__Title__"),
+					Source:             ptr.String("__Source__"),
+					Copyright:          ptr.String("__Copyright__"),
+					LanguageCode:       ptr.String("__LanguageCode__"),
+					MoreInformationUrl: ptr.String("__MoreInformationUrl__"),
+				},
+				DvbSettings: &types.DashDvbSettings{
+					FontDownload: &types.DashDvbFontDownload{
+						Url:        ptr.String("__Url__"),
+						MimeType:   ptr.String("__MimeType__"),
+						FontFamily: ptr.String("__FontFamily__"),
+					},
+					ErrorMetrics: []types.DashDvbMetricsReporting{
+						{
+							ReportingUrl: ptr.String("__ReportingUrl__"),
+							Probability:  ptr.Int32(1),
+						},
+						{
+							ReportingUrl: ptr.String("__ReportingUrl__"),
+							Probability:  ptr.Int32(1),
+						},
+					},
+				},
+				Compactness:          types.DashCompactness("STANDARD"),
+				AudioTimelinePattern: types.DashAudioTimelinePattern("NONE"),
+				SubtitleConfiguration: &types.DashSubtitleConfiguration{
+					TtmlConfiguration: &types.DashTtmlConfiguration{
+						TtmlProfile: types.DashTtmlProfile("IMSC_1"),
+					},
+				},
+				UriPathType: types.UriPathType("LEAF"),
+				AvailabilityStartTimeConfiguration: &types.DashAvailabilityStartTimeConfigurationMemberFixedAvailabilityStartTime{
+					Value: time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+				},
+			},
+			{
+				ManifestName:          ptr.String("__ManifestName__"),
+				ManifestWindowSeconds: ptr.Int32(1),
+				FilterConfiguration: &types.FilterConfiguration{
+					ManifestFilter:   ptr.String("__ManifestFilter__"),
+					DrmSettings:      ptr.String("__DrmSettings__"),
+					Start:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					TimeDelaySeconds: ptr.Int32(1),
+					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				MinUpdatePeriodSeconds:            ptr.Int32(1),
+				MinBufferTimeSeconds:              ptr.Int32(1),
+				SuggestedPresentationDelaySeconds: ptr.Int32(1),
+				SegmentTemplateFormat:             types.DashSegmentTemplateFormat("NUMBER_WITH_TIMELINE"),
+				PeriodTriggers: []types.DashPeriodTrigger{
+					types.DashPeriodTrigger("AVAILS"),
+					types.DashPeriodTrigger("AVAILS"),
+				},
+				ScteDash: &types.ScteDash{
+					AdMarkerDash:    types.AdMarkerDash("BINARY"),
+					ScteInManifests: types.ScteInManifests("ALL"),
+				},
+				DrmSignaling: types.DashDrmSignaling("INDIVIDUAL"),
+				UtcTiming: &types.DashUtcTiming{
+					TimingMode:   types.DashUtcTimingMode("HTTP_HEAD"),
+					TimingSource: ptr.String("__TimingSource__"),
+				},
+				Profiles: []types.DashProfile{
+					types.DashProfile("DVB_DASH"),
+					types.DashProfile("DVB_DASH"),
+				},
+				BaseUrls: []types.DashBaseUrl{
+					{
+						Url:             ptr.String("__Url__"),
+						ServiceLocation: ptr.String("__ServiceLocation__"),
+						DvbPriority:     ptr.Int32(1),
+						DvbWeight:       ptr.Int32(1),
+					},
+					{
+						Url:             ptr.String("__Url__"),
+						ServiceLocation: ptr.String("__ServiceLocation__"),
+						DvbPriority:     ptr.Int32(1),
+						DvbWeight:       ptr.Int32(1),
+					},
+				},
+				ProgramInformation: &types.DashProgramInformation{
+					Title:              ptr.String("__Title__"),
+					Source:             ptr.String("__Source__"),
+					Copyright:          ptr.String("__Copyright__"),
+					LanguageCode:       ptr.String("__LanguageCode__"),
+					MoreInformationUrl: ptr.String("__MoreInformationUrl__"),
+				},
+				DvbSettings: &types.DashDvbSettings{
+					FontDownload: &types.DashDvbFontDownload{
+						Url:        ptr.String("__Url__"),
+						MimeType:   ptr.String("__MimeType__"),
+						FontFamily: ptr.String("__FontFamily__"),
+					},
+					ErrorMetrics: []types.DashDvbMetricsReporting{
+						{
+							ReportingUrl: ptr.String("__ReportingUrl__"),
+							Probability:  ptr.Int32(1),
+						},
+						{
+							ReportingUrl: ptr.String("__ReportingUrl__"),
+							Probability:  ptr.Int32(1),
+						},
+					},
+				},
+				Compactness:          types.DashCompactness("STANDARD"),
+				AudioTimelinePattern: types.DashAudioTimelinePattern("NONE"),
+				SubtitleConfiguration: &types.DashSubtitleConfiguration{
+					TtmlConfiguration: &types.DashTtmlConfiguration{
+						TtmlProfile: types.DashTtmlProfile("IMSC_1"),
+					},
+				},
+				UriPathType: types.UriPathType("LEAF"),
+				AvailabilityStartTimeConfiguration: &types.DashAvailabilityStartTimeConfigurationMemberFixedAvailabilityStartTime{
+					Value: time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+				},
+			},
+		},
+		MssManifests: []types.CreateMssManifestConfiguration{
+			{
+				ManifestName:          ptr.String("__ManifestName__"),
+				ManifestWindowSeconds: ptr.Int32(1),
+				FilterConfiguration: &types.FilterConfiguration{
+					ManifestFilter:   ptr.String("__ManifestFilter__"),
+					DrmSettings:      ptr.String("__DrmSettings__"),
+					Start:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					TimeDelaySeconds: ptr.Int32(1),
+					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				ManifestLayout: types.MssManifestLayout("FULL"),
+			},
+			{
+				ManifestName:          ptr.String("__ManifestName__"),
+				ManifestWindowSeconds: ptr.Int32(1),
+				FilterConfiguration: &types.FilterConfiguration{
+					ManifestFilter:   ptr.String("__ManifestFilter__"),
+					DrmSettings:      ptr.String("__DrmSettings__"),
+					Start:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					End:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					TimeDelaySeconds: ptr.Int32(1),
+					ClipStartTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				ManifestLayout: types.MssManifestLayout("FULL"),
+			},
+		},
+		ForceEndpointErrorConfiguration: &types.ForceEndpointErrorConfiguration{
+			EndpointErrorConditions: []types.EndpointErrorCondition{
+				types.EndpointErrorCondition("STALE_MANIFEST"),
+				types.EndpointErrorCondition("STALE_MANIFEST"),
+			},
+		},
+		UriSeparator:         types.UriSeparator("UNDERSCORE"),
+		StreamNameOutputMode: types.StreamNameOutputMode("INDEX"),
+		ETag:                 ptr.String("__ETag__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2320,7 +3213,13 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelHarvestJob(context.Background(), &CancelHarvestJobInput{})
+	_, opErr := svc.CancelHarvestJob(context.Background(), &CancelHarvestJobInput{
+		ChannelGroupName:   ptr.String("__ChannelGroupName__"),
+		ChannelName:        ptr.String("__ChannelName__"),
+		OriginEndpointName: ptr.String("__OriginEndpointName__"),
+		HarvestJobName:     ptr.String("__HarvestJobName__"),
+		ETag:               ptr.String("__ETag__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2346,7 +3245,13 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelHarvestJob(context.Background(), &CancelHarvestJobInput{})
+	_, opErr := svc.CancelHarvestJob(context.Background(), &CancelHarvestJobInput{
+		ChannelGroupName:   ptr.String("__ChannelGroupName__"),
+		ChannelName:        ptr.String("__ChannelName__"),
+		OriginEndpointName: ptr.String("__OriginEndpointName__"),
+		HarvestJobName:     ptr.String("__HarvestJobName__"),
+		ETag:               ptr.String("__ETag__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2371,7 +3276,13 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelHarvestJob(context.Background(), &CancelHarvestJobInput{})
+	_, opErr := svc.CancelHarvestJob(context.Background(), &CancelHarvestJobInput{
+		ChannelGroupName:   ptr.String("__ChannelGroupName__"),
+		ChannelName:        ptr.String("__ChannelName__"),
+		OriginEndpointName: ptr.String("__OriginEndpointName__"),
+		HarvestJobName:     ptr.String("__HarvestJobName__"),
+		ETag:               ptr.String("__ETag__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2397,7 +3308,13 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelHarvestJob(context.Background(), &CancelHarvestJobInput{})
+	_, opErr := svc.CancelHarvestJob(context.Background(), &CancelHarvestJobInput{
+		ChannelGroupName:   ptr.String("__ChannelGroupName__"),
+		ChannelName:        ptr.String("__ChannelName__"),
+		OriginEndpointName: ptr.String("__OriginEndpointName__"),
+		HarvestJobName:     ptr.String("__HarvestJobName__"),
+		ETag:               ptr.String("__ETag__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2422,7 +3339,24 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChannel(context.Background(), &CreateChannelInput{})
+	_, opErr := svc.CreateChannel(context.Background(), &CreateChannelInput{
+		ChannelGroupName: ptr.String("__ChannelGroupName__"),
+		ChannelName:      ptr.String("__ChannelName__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+		InputType:        types.InputType("HLS"),
+		Description:      ptr.String("__Description__"),
+		InputSwitchConfiguration: &types.InputSwitchConfiguration{
+			MQCSInputSwitching: ptr.Bool(true),
+			PreferredInput:     ptr.Int32(1),
+		},
+		OutputHeaderConfiguration: &types.OutputHeaderConfiguration{
+			PublishMQCS: ptr.Bool(true),
+		},
+		OutputLockingMode: types.OutputLockingMode("EPOCH_LOCKED"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2447,7 +3381,13 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelHarvestJob(context.Background(), &CancelHarvestJobInput{})
+	_, opErr := svc.CancelHarvestJob(context.Background(), &CancelHarvestJobInput{
+		ChannelGroupName:   ptr.String("__ChannelGroupName__"),
+		ChannelName:        ptr.String("__ChannelName__"),
+		OriginEndpointName: ptr.String("__OriginEndpointName__"),
+		HarvestJobName:     ptr.String("__HarvestJobName__"),
+		ETag:               ptr.String("__ETag__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2473,7 +3413,13 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelHarvestJob(context.Background(), &CancelHarvestJobInput{})
+	_, opErr := svc.CancelHarvestJob(context.Background(), &CancelHarvestJobInput{
+		ChannelGroupName:   ptr.String("__ChannelGroupName__"),
+		ChannelName:        ptr.String("__ChannelName__"),
+		OriginEndpointName: ptr.String("__OriginEndpointName__"),
+		HarvestJobName:     ptr.String("__HarvestJobName__"),
+		ETag:               ptr.String("__ETag__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

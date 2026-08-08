@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"RequestId":"__RequestId__","Status":200,"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

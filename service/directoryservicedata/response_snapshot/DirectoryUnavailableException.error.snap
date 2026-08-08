@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"DirectoryUnavailableException","Message":"__Message__","Reason":"INVALID_DIRECTORY_STATE"}

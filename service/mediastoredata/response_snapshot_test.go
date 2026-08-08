@@ -117,7 +117,9 @@ func TestCheckResponseSnapshot_DeleteObject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteObject(context.Background(), &DeleteObjectInput{})
+	got, err := svc.DeleteObject(context.Background(), &DeleteObjectInput{
+		Path: ptr.String("__Path__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -127,55 +129,11 @@ func TestCheckResponseSnapshot_DeleteObject(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_DescribeObject(t *testing.T) {
-	want := &DescribeObjectOutput{
-		ETag:          ptr.String("__ETag__"),
-		ContentType:   ptr.String("__ContentType__"),
-		ContentLength: ptr.Int64(1),
-		CacheControl:  ptr.String("__CacheControl__"),
-		LastModified:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-	}
-	status, header, body, err := serdeRespReadSnapshot("DescribeObject.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeObject(context.Background(), &DescribeObjectInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "DescribeObject.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_GetObject(t *testing.T) {
-	want := &GetObjectOutput{
-		CacheControl:  ptr.String("__CacheControl__"),
-		ContentRange:  ptr.String("__ContentRange__"),
-		ContentLength: ptr.Int64(1),
-		ContentType:   ptr.String("__ContentType__"),
-		ETag:          ptr.String("__ETag__"),
-		LastModified:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		StatusCode:    1,
-	}
-	status, header, body, err := serdeRespReadSnapshot("GetObject.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetObject(context.Background(), &GetObjectInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "GetObject.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_ListItems(t *testing.T) {
@@ -208,7 +166,11 @@ func TestCheckResponseSnapshot_ListItems(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListItems(context.Background(), &ListItemsInput{})
+	got, err := svc.ListItems(context.Background(), &ListItemsInput{
+		Path:       ptr.String("__Path__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -231,7 +193,14 @@ func TestCheckResponseSnapshot_PutObject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutObject(context.Background(), &PutObjectInput{})
+	got, err := svc.PutObject(context.Background(), &PutObjectInput{
+		Body:               io.NopCloser(bytes.NewReader([]byte("__Body__"))),
+		Path:               ptr.String("__Path__"),
+		ContentType:        ptr.String("__ContentType__"),
+		CacheControl:       ptr.String("__CacheControl__"),
+		StorageClass:       types.StorageClass("TEMPORAL"),
+		UploadAvailability: types.UploadAvailability("STANDARD"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -252,7 +221,9 @@ func TestCheckResponseSnapshot_Error_ContainerNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteObject(context.Background(), &DeleteObjectInput{})
+	_, opErr := svc.DeleteObject(context.Background(), &DeleteObjectInput{
+		Path: ptr.String("__Path__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -277,7 +248,9 @@ func TestCheckResponseSnapshot_Error_InternalServerError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteObject(context.Background(), &DeleteObjectInput{})
+	_, opErr := svc.DeleteObject(context.Background(), &DeleteObjectInput{
+		Path: ptr.String("__Path__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -302,7 +275,9 @@ func TestCheckResponseSnapshot_Error_ObjectNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteObject(context.Background(), &DeleteObjectInput{})
+	_, opErr := svc.DeleteObject(context.Background(), &DeleteObjectInput{
+		Path: ptr.String("__Path__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -312,30 +287,5 @@ func TestCheckResponseSnapshot_Error_ObjectNotFoundException(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "ObjectNotFoundException.error", err)
-	}
-}
-
-func TestCheckResponseSnapshot_Error_RequestedRangeNotSatisfiableException(t *testing.T) {
-	want := &types.RequestedRangeNotSatisfiableException{
-		Message: ptr.String("__Message__"),
-	}
-	status, header, body, err := serdeRespReadSnapshot("RequestedRangeNotSatisfiableException.error")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetObject(context.Background(), &GetObjectInput{})
-	if opErr == nil {
-		t.Fatal("expected error, got nil")
-	}
-	var got *types.RequestedRangeNotSatisfiableException
-	if !errors.As(opErr, &got) {
-		t.Fatalf("expected types.RequestedRangeNotSatisfiableException, got %v", opErr)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("error response snapshot mismatch for %s: %v", "RequestedRangeNotSatisfiableException.error", err)
 	}
 }

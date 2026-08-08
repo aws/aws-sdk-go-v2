@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Granularity":"Daily","NextToken":"__NextToken__","TrendsMetrics":[{"Timestamp":"2000-01-01T00:00:00Z","TrendsValues":{"ResourcesCount":{"AllResources":1}}},{"Timestamp":"2000-01-01T00:00:00Z","TrendsValues":{"ResourcesCount":{"AllResources":1}}}]}

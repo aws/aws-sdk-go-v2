@@ -153,9 +153,10 @@ func TestDeserdClient_GetItem_(t *testing.T) {
 			for i := 0; i < benchmarkIterations; i++ {
 				resp := &smithyhttp.Response{
 					Response: &http.Response{
-						StatusCode: c.StatusCode,
-						Header:     c.Header.Clone(),
-						Body:       io.NopCloser(bytes.NewReader(c.Body)),
+						StatusCode:    c.StatusCode,
+						Header:        c.Header.Clone(),
+						ContentLength: int64(len(c.Body)),
+						Body:          io.NopCloser(bytes.NewReader(c.Body)),
 					},
 				}
 				output := &GetItemOutput{}

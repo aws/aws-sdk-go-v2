@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"modelSummaries":[{"baseModelArn":"__BaseModelArn__","baseModelName":"__BaseModelName__","creationTime":"2000-01-01T00:00:00Z","customizationType":"FINE_TUNING","modelArn":"__ModelArn__","modelName":"__ModelName__","modelStatus":"Active","ownerAccountId":"__OwnerAccountId__"},{"baseModelArn":"__BaseModelArn__","baseModelName":"__BaseModelName__","creationTime":"2000-01-01T00:00:00Z","customizationType":"FINE_TUNING","modelArn":"__ModelArn__","modelName":"__ModelName__","modelStatus":"Active","ownerAccountId":"__OwnerAccountId__"}],"nextToken":"__NextToken__"}

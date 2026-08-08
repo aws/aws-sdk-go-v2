@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AccountAssociationId":"__AccountAssociationId__","Arn":"__Arn__","AssociationState":"ASSOCIATION_IN_PROGRESS","OAuthAuthorizationUrl":"__OAuthAuthorizationUrl__"}

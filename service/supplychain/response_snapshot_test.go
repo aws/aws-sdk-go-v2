@@ -119,7 +119,11 @@ func TestCheckResponseSnapshot_CreateBillOfMaterialsImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBillOfMaterialsImportJob(context.Background(), &CreateBillOfMaterialsImportJobInput{})
+	got, err := svc.CreateBillOfMaterialsImportJob(context.Background(), &CreateBillOfMaterialsImportJobInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		S3uri:       ptr.String("__S3uri__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -141,7 +145,119 @@ func TestCheckResponseSnapshot_CreateDataIntegrationFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataIntegrationFlow(context.Background(), &CreateDataIntegrationFlowInput{})
+	got, err := svc.CreateDataIntegrationFlow(context.Background(), &CreateDataIntegrationFlowInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Name:       ptr.String("__Name__"),
+		Sources: []types.DataIntegrationFlowSource{
+			{
+				SourceType: types.DataIntegrationFlowSourceType("S3"),
+				SourceName: ptr.String("__SourceName__"),
+				S3Source: &types.DataIntegrationFlowS3SourceConfiguration{
+					BucketName: ptr.String("__BucketName__"),
+					Prefix:     ptr.String("__Prefix__"),
+					Options: &types.DataIntegrationFlowS3Options{
+						FileType: types.DataIntegrationFlowFileType("CSV"),
+					},
+				},
+				DatasetSource: &types.DataIntegrationFlowDatasetSourceConfiguration{
+					DatasetIdentifier: ptr.String("__DatasetIdentifier__"),
+					Options: &types.DataIntegrationFlowDatasetOptions{
+						LoadType:      types.DataIntegrationFlowLoadType("INCREMENTAL"),
+						DedupeRecords: ptr.Bool(true),
+						DedupeStrategy: &types.DataIntegrationFlowDedupeStrategy{
+							Type: types.DataIntegrationFlowDedupeStrategyType("FIELD_PRIORITY"),
+							FieldPriority: &types.DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration{
+								Fields: []types.DataIntegrationFlowFieldPriorityDedupeField{
+									{
+										Name:      ptr.String("__Name__"),
+										SortOrder: types.DataIntegrationFlowFieldPriorityDedupeSortOrder("ASC"),
+									},
+									{
+										Name:      ptr.String("__Name__"),
+										SortOrder: types.DataIntegrationFlowFieldPriorityDedupeSortOrder("ASC"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			{
+				SourceType: types.DataIntegrationFlowSourceType("S3"),
+				SourceName: ptr.String("__SourceName__"),
+				S3Source: &types.DataIntegrationFlowS3SourceConfiguration{
+					BucketName: ptr.String("__BucketName__"),
+					Prefix:     ptr.String("__Prefix__"),
+					Options: &types.DataIntegrationFlowS3Options{
+						FileType: types.DataIntegrationFlowFileType("CSV"),
+					},
+				},
+				DatasetSource: &types.DataIntegrationFlowDatasetSourceConfiguration{
+					DatasetIdentifier: ptr.String("__DatasetIdentifier__"),
+					Options: &types.DataIntegrationFlowDatasetOptions{
+						LoadType:      types.DataIntegrationFlowLoadType("INCREMENTAL"),
+						DedupeRecords: ptr.Bool(true),
+						DedupeStrategy: &types.DataIntegrationFlowDedupeStrategy{
+							Type: types.DataIntegrationFlowDedupeStrategyType("FIELD_PRIORITY"),
+							FieldPriority: &types.DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration{
+								Fields: []types.DataIntegrationFlowFieldPriorityDedupeField{
+									{
+										Name:      ptr.String("__Name__"),
+										SortOrder: types.DataIntegrationFlowFieldPriorityDedupeSortOrder("ASC"),
+									},
+									{
+										Name:      ptr.String("__Name__"),
+										SortOrder: types.DataIntegrationFlowFieldPriorityDedupeSortOrder("ASC"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Transformation: &types.DataIntegrationFlowTransformation{
+			TransformationType: types.DataIntegrationFlowTransformationType("SQL"),
+			SqlTransformation: &types.DataIntegrationFlowSQLTransformationConfiguration{
+				Query: ptr.String("__Query__"),
+			},
+		},
+		Target: &types.DataIntegrationFlowTarget{
+			TargetType: types.DataIntegrationFlowTargetType("S3"),
+			S3Target: &types.DataIntegrationFlowS3TargetConfiguration{
+				BucketName: ptr.String("__BucketName__"),
+				Prefix:     ptr.String("__Prefix__"),
+				Options: &types.DataIntegrationFlowS3Options{
+					FileType: types.DataIntegrationFlowFileType("CSV"),
+				},
+			},
+			DatasetTarget: &types.DataIntegrationFlowDatasetTargetConfiguration{
+				DatasetIdentifier: ptr.String("__DatasetIdentifier__"),
+				Options: &types.DataIntegrationFlowDatasetOptions{
+					LoadType:      types.DataIntegrationFlowLoadType("INCREMENTAL"),
+					DedupeRecords: ptr.Bool(true),
+					DedupeStrategy: &types.DataIntegrationFlowDedupeStrategy{
+						Type: types.DataIntegrationFlowDedupeStrategyType("FIELD_PRIORITY"),
+						FieldPriority: &types.DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration{
+							Fields: []types.DataIntegrationFlowFieldPriorityDedupeField{
+								{
+									Name:      ptr.String("__Name__"),
+									SortOrder: types.DataIntegrationFlowFieldPriorityDedupeSortOrder("ASC"),
+								},
+								{
+									Name:      ptr.String("__Name__"),
+									SortOrder: types.DataIntegrationFlowFieldPriorityDedupeSortOrder("ASC"),
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -209,7 +325,54 @@ func TestCheckResponseSnapshot_CreateDataLakeDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataLakeDataset(context.Background(), &CreateDataLakeDatasetInput{})
+	got, err := svc.CreateDataLakeDataset(context.Background(), &CreateDataLakeDatasetInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Namespace:  ptr.String("__Namespace__"),
+		Name:       ptr.String("__Name__"),
+		Schema: &types.DataLakeDatasetSchema{
+			Name: ptr.String("__Name__"),
+			Fields: []types.DataLakeDatasetSchemaField{
+				{
+					Name:       ptr.String("__Name__"),
+					Type:       types.DataLakeDatasetSchemaFieldType("INT"),
+					IsRequired: ptr.Bool(true),
+				},
+				{
+					Name:       ptr.String("__Name__"),
+					Type:       types.DataLakeDatasetSchemaFieldType("INT"),
+					IsRequired: ptr.Bool(true),
+				},
+			},
+			PrimaryKeys: []types.DataLakeDatasetPrimaryKeyField{
+				{
+					Name: ptr.String("__Name__"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		Description: ptr.String("__Description__"),
+		PartitionSpec: &types.DataLakeDatasetPartitionSpec{
+			Fields: []types.DataLakeDatasetPartitionField{
+				{
+					Name: ptr.String("__Name__"),
+					Transform: &types.DataLakeDatasetPartitionFieldTransform{
+						Type: types.DataLakeDatasetPartitionTransformType("YEAR"),
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Transform: &types.DataLakeDatasetPartitionFieldTransform{
+						Type: types.DataLakeDatasetPartitionTransformType("YEAR"),
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -237,7 +400,14 @@ func TestCheckResponseSnapshot_CreateDataLakeNamespace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataLakeNamespace(context.Background(), &CreateDataLakeNamespaceInput{})
+	got, err := svc.CreateDataLakeNamespace(context.Background(), &CreateDataLakeNamespaceInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -270,7 +440,16 @@ func TestCheckResponseSnapshot_CreateInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateInstance(context.Background(), &CreateInstanceInput{})
+	got, err := svc.CreateInstance(context.Background(), &CreateInstanceInput{
+		InstanceName:        ptr.String("__InstanceName__"),
+		InstanceDescription: ptr.String("__InstanceDescription__"),
+		KmsKeyArn:           ptr.String("__KmsKeyArn__"),
+		WebAppDnsDomain:     ptr.String("__WebAppDnsDomain__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -292,7 +471,10 @@ func TestCheckResponseSnapshot_DeleteDataIntegrationFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataIntegrationFlow(context.Background(), &DeleteDataIntegrationFlowInput{})
+	got, err := svc.DeleteDataIntegrationFlow(context.Background(), &DeleteDataIntegrationFlowInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Name:       ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -315,7 +497,11 @@ func TestCheckResponseSnapshot_DeleteDataLakeDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataLakeDataset(context.Background(), &DeleteDataLakeDatasetInput{})
+	got, err := svc.DeleteDataLakeDataset(context.Background(), &DeleteDataLakeDatasetInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Namespace:  ptr.String("__Namespace__"),
+		Name:       ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -337,7 +523,10 @@ func TestCheckResponseSnapshot_DeleteDataLakeNamespace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataLakeNamespace(context.Background(), &DeleteDataLakeNamespaceInput{})
+	got, err := svc.DeleteDataLakeNamespace(context.Background(), &DeleteDataLakeNamespaceInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Name:       ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -370,7 +559,9 @@ func TestCheckResponseSnapshot_DeleteInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteInstance(context.Background(), &DeleteInstanceInput{})
+	got, err := svc.DeleteInstance(context.Background(), &DeleteInstanceInput{
+		InstanceId: ptr.String("__InstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -397,7 +588,10 @@ func TestCheckResponseSnapshot_GetBillOfMaterialsImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBillOfMaterialsImportJob(context.Background(), &GetBillOfMaterialsImportJobInput{})
+	got, err := svc.GetBillOfMaterialsImportJob(context.Background(), &GetBillOfMaterialsImportJobInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		JobId:      ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -432,7 +626,10 @@ func TestCheckResponseSnapshot_GetDataIntegrationEvent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataIntegrationEvent(context.Background(), &GetDataIntegrationEventInput{})
+	got, err := svc.GetDataIntegrationEvent(context.Background(), &GetDataIntegrationEventInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		EventId:    ptr.String("__EventId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -564,7 +761,10 @@ func TestCheckResponseSnapshot_GetDataIntegrationFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataIntegrationFlow(context.Background(), &GetDataIntegrationFlowInput{})
+	got, err := svc.GetDataIntegrationFlow(context.Background(), &GetDataIntegrationFlowInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Name:       ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -606,7 +806,11 @@ func TestCheckResponseSnapshot_GetDataIntegrationFlowExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataIntegrationFlowExecution(context.Background(), &GetDataIntegrationFlowExecutionInput{})
+	got, err := svc.GetDataIntegrationFlowExecution(context.Background(), &GetDataIntegrationFlowExecutionInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		FlowName:    ptr.String("__FlowName__"),
+		ExecutionId: ptr.String("__ExecutionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -674,7 +878,11 @@ func TestCheckResponseSnapshot_GetDataLakeDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataLakeDataset(context.Background(), &GetDataLakeDatasetInput{})
+	got, err := svc.GetDataLakeDataset(context.Background(), &GetDataLakeDatasetInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Namespace:  ptr.String("__Namespace__"),
+		Name:       ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -702,7 +910,10 @@ func TestCheckResponseSnapshot_GetDataLakeNamespace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataLakeNamespace(context.Background(), &GetDataLakeNamespaceInput{})
+	got, err := svc.GetDataLakeNamespace(context.Background(), &GetDataLakeNamespaceInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Name:       ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -735,7 +946,9 @@ func TestCheckResponseSnapshot_GetInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetInstance(context.Background(), &GetInstanceInput{})
+	got, err := svc.GetInstance(context.Background(), &GetInstanceInput{
+		InstanceId: ptr.String("__InstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -788,7 +1001,12 @@ func TestCheckResponseSnapshot_ListDataIntegrationEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataIntegrationEvents(context.Background(), &ListDataIntegrationEventsInput{})
+	got, err := svc.ListDataIntegrationEvents(context.Background(), &ListDataIntegrationEventsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		EventType:  types.DataIntegrationEventType("scn.data.forecast"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -855,7 +1073,12 @@ func TestCheckResponseSnapshot_ListDataIntegrationFlowExecutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataIntegrationFlowExecutions(context.Background(), &ListDataIntegrationFlowExecutionsInput{})
+	got, err := svc.ListDataIntegrationFlowExecutions(context.Background(), &ListDataIntegrationFlowExecutionsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		FlowName:   ptr.String("__FlowName__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1102,7 +1325,11 @@ func TestCheckResponseSnapshot_ListDataIntegrationFlows(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataIntegrationFlows(context.Background(), &ListDataIntegrationFlowsInput{})
+	got, err := svc.ListDataIntegrationFlows(context.Background(), &ListDataIntegrationFlowsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1221,7 +1448,12 @@ func TestCheckResponseSnapshot_ListDataLakeDatasets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataLakeDatasets(context.Background(), &ListDataLakeDatasetsInput{})
+	got, err := svc.ListDataLakeDatasets(context.Background(), &ListDataLakeDatasetsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Namespace:  ptr.String("__Namespace__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1260,7 +1492,11 @@ func TestCheckResponseSnapshot_ListDataLakeNamespaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataLakeNamespaces(context.Background(), &ListDataLakeNamespacesInput{})
+	got, err := svc.ListDataLakeNamespaces(context.Background(), &ListDataLakeNamespacesInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1309,7 +1545,18 @@ func TestCheckResponseSnapshot_ListInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInstances(context.Background(), &ListInstancesInput{})
+	got, err := svc.ListInstances(context.Background(), &ListInstancesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		InstanceNameFilter: []string{
+			"__Member__",
+			"__Member__",
+		},
+		InstanceStateFilter: []types.InstanceState{
+			types.InstanceState("Initializing"),
+			types.InstanceState("Initializing"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1332,7 +1579,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1353,7 +1602,18 @@ func TestCheckResponseSnapshot_SendDataIntegrationEvent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendDataIntegrationEvent(context.Background(), &SendDataIntegrationEventInput{})
+	got, err := svc.SendDataIntegrationEvent(context.Background(), &SendDataIntegrationEventInput{
+		InstanceId:     ptr.String("__InstanceId__"),
+		EventType:      types.DataIntegrationEventType("scn.data.forecast"),
+		Data:           ptr.String("__Data__"),
+		EventGroupId:   ptr.String("__EventGroupId__"),
+		EventTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ClientToken:    ptr.String("__ClientToken__"),
+		DatasetTarget: &types.DataIntegrationEventDatasetTargetConfiguration{
+			DatasetIdentifier: ptr.String("__DatasetIdentifier__"),
+			OperationType:     types.DataIntegrationEventDatasetOperationType("APPEND"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1372,7 +1632,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1391,7 +1656,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1523,7 +1794,116 @@ func TestCheckResponseSnapshot_UpdateDataIntegrationFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataIntegrationFlow(context.Background(), &UpdateDataIntegrationFlowInput{})
+	got, err := svc.UpdateDataIntegrationFlow(context.Background(), &UpdateDataIntegrationFlowInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		Name:       ptr.String("__Name__"),
+		Sources: []types.DataIntegrationFlowSource{
+			{
+				SourceType: types.DataIntegrationFlowSourceType("S3"),
+				SourceName: ptr.String("__SourceName__"),
+				S3Source: &types.DataIntegrationFlowS3SourceConfiguration{
+					BucketName: ptr.String("__BucketName__"),
+					Prefix:     ptr.String("__Prefix__"),
+					Options: &types.DataIntegrationFlowS3Options{
+						FileType: types.DataIntegrationFlowFileType("CSV"),
+					},
+				},
+				DatasetSource: &types.DataIntegrationFlowDatasetSourceConfiguration{
+					DatasetIdentifier: ptr.String("__DatasetIdentifier__"),
+					Options: &types.DataIntegrationFlowDatasetOptions{
+						LoadType:      types.DataIntegrationFlowLoadType("INCREMENTAL"),
+						DedupeRecords: ptr.Bool(true),
+						DedupeStrategy: &types.DataIntegrationFlowDedupeStrategy{
+							Type: types.DataIntegrationFlowDedupeStrategyType("FIELD_PRIORITY"),
+							FieldPriority: &types.DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration{
+								Fields: []types.DataIntegrationFlowFieldPriorityDedupeField{
+									{
+										Name:      ptr.String("__Name__"),
+										SortOrder: types.DataIntegrationFlowFieldPriorityDedupeSortOrder("ASC"),
+									},
+									{
+										Name:      ptr.String("__Name__"),
+										SortOrder: types.DataIntegrationFlowFieldPriorityDedupeSortOrder("ASC"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			{
+				SourceType: types.DataIntegrationFlowSourceType("S3"),
+				SourceName: ptr.String("__SourceName__"),
+				S3Source: &types.DataIntegrationFlowS3SourceConfiguration{
+					BucketName: ptr.String("__BucketName__"),
+					Prefix:     ptr.String("__Prefix__"),
+					Options: &types.DataIntegrationFlowS3Options{
+						FileType: types.DataIntegrationFlowFileType("CSV"),
+					},
+				},
+				DatasetSource: &types.DataIntegrationFlowDatasetSourceConfiguration{
+					DatasetIdentifier: ptr.String("__DatasetIdentifier__"),
+					Options: &types.DataIntegrationFlowDatasetOptions{
+						LoadType:      types.DataIntegrationFlowLoadType("INCREMENTAL"),
+						DedupeRecords: ptr.Bool(true),
+						DedupeStrategy: &types.DataIntegrationFlowDedupeStrategy{
+							Type: types.DataIntegrationFlowDedupeStrategyType("FIELD_PRIORITY"),
+							FieldPriority: &types.DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration{
+								Fields: []types.DataIntegrationFlowFieldPriorityDedupeField{
+									{
+										Name:      ptr.String("__Name__"),
+										SortOrder: types.DataIntegrationFlowFieldPriorityDedupeSortOrder("ASC"),
+									},
+									{
+										Name:      ptr.String("__Name__"),
+										SortOrder: types.DataIntegrationFlowFieldPriorityDedupeSortOrder("ASC"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Transformation: &types.DataIntegrationFlowTransformation{
+			TransformationType: types.DataIntegrationFlowTransformationType("SQL"),
+			SqlTransformation: &types.DataIntegrationFlowSQLTransformationConfiguration{
+				Query: ptr.String("__Query__"),
+			},
+		},
+		Target: &types.DataIntegrationFlowTarget{
+			TargetType: types.DataIntegrationFlowTargetType("S3"),
+			S3Target: &types.DataIntegrationFlowS3TargetConfiguration{
+				BucketName: ptr.String("__BucketName__"),
+				Prefix:     ptr.String("__Prefix__"),
+				Options: &types.DataIntegrationFlowS3Options{
+					FileType: types.DataIntegrationFlowFileType("CSV"),
+				},
+			},
+			DatasetTarget: &types.DataIntegrationFlowDatasetTargetConfiguration{
+				DatasetIdentifier: ptr.String("__DatasetIdentifier__"),
+				Options: &types.DataIntegrationFlowDatasetOptions{
+					LoadType:      types.DataIntegrationFlowLoadType("INCREMENTAL"),
+					DedupeRecords: ptr.Bool(true),
+					DedupeStrategy: &types.DataIntegrationFlowDedupeStrategy{
+						Type: types.DataIntegrationFlowDedupeStrategyType("FIELD_PRIORITY"),
+						FieldPriority: &types.DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration{
+							Fields: []types.DataIntegrationFlowFieldPriorityDedupeField{
+								{
+									Name:      ptr.String("__Name__"),
+									SortOrder: types.DataIntegrationFlowFieldPriorityDedupeSortOrder("ASC"),
+								},
+								{
+									Name:      ptr.String("__Name__"),
+									SortOrder: types.DataIntegrationFlowFieldPriorityDedupeSortOrder("ASC"),
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1591,7 +1971,12 @@ func TestCheckResponseSnapshot_UpdateDataLakeDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataLakeDataset(context.Background(), &UpdateDataLakeDatasetInput{})
+	got, err := svc.UpdateDataLakeDataset(context.Background(), &UpdateDataLakeDatasetInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		Namespace:   ptr.String("__Namespace__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1619,7 +2004,11 @@ func TestCheckResponseSnapshot_UpdateDataLakeNamespace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataLakeNamespace(context.Background(), &UpdateDataLakeNamespaceInput{})
+	got, err := svc.UpdateDataLakeNamespace(context.Background(), &UpdateDataLakeNamespaceInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1652,7 +2041,11 @@ func TestCheckResponseSnapshot_UpdateInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateInstance(context.Background(), &UpdateInstanceInput{})
+	got, err := svc.UpdateInstance(context.Background(), &UpdateInstanceInput{
+		InstanceId:          ptr.String("__InstanceId__"),
+		InstanceName:        ptr.String("__InstanceName__"),
+		InstanceDescription: ptr.String("__InstanceDescription__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1673,7 +2066,11 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBillOfMaterialsImportJob(context.Background(), &CreateBillOfMaterialsImportJobInput{})
+	_, opErr := svc.CreateBillOfMaterialsImportJob(context.Background(), &CreateBillOfMaterialsImportJobInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		S3uri:       ptr.String("__S3uri__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1698,7 +2095,11 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBillOfMaterialsImportJob(context.Background(), &CreateBillOfMaterialsImportJobInput{})
+	_, opErr := svc.CreateBillOfMaterialsImportJob(context.Background(), &CreateBillOfMaterialsImportJobInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		S3uri:       ptr.String("__S3uri__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1723,7 +2124,11 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBillOfMaterialsImportJob(context.Background(), &CreateBillOfMaterialsImportJobInput{})
+	_, opErr := svc.CreateBillOfMaterialsImportJob(context.Background(), &CreateBillOfMaterialsImportJobInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		S3uri:       ptr.String("__S3uri__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1748,7 +2153,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBillOfMaterialsImportJob(context.Background(), &CreateBillOfMaterialsImportJobInput{})
+	_, opErr := svc.CreateBillOfMaterialsImportJob(context.Background(), &CreateBillOfMaterialsImportJobInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		S3uri:       ptr.String("__S3uri__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1773,7 +2182,11 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBillOfMaterialsImportJob(context.Background(), &CreateBillOfMaterialsImportJobInput{})
+	_, opErr := svc.CreateBillOfMaterialsImportJob(context.Background(), &CreateBillOfMaterialsImportJobInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		S3uri:       ptr.String("__S3uri__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1798,7 +2211,11 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBillOfMaterialsImportJob(context.Background(), &CreateBillOfMaterialsImportJobInput{})
+	_, opErr := svc.CreateBillOfMaterialsImportJob(context.Background(), &CreateBillOfMaterialsImportJobInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		S3uri:       ptr.String("__S3uri__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1823,7 +2240,11 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBillOfMaterialsImportJob(context.Background(), &CreateBillOfMaterialsImportJobInput{})
+	_, opErr := svc.CreateBillOfMaterialsImportJob(context.Background(), &CreateBillOfMaterialsImportJobInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		S3uri:       ptr.String("__S3uri__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

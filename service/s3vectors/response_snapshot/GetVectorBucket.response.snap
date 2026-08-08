@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"vectorBucket":{"creationTime":946684800,"encryptionConfiguration":{"kmsKeyArn":"__KmsKeyArn__","sseType":"AES256"},"vectorBucketArn":"__VectorBucketArn__","vectorBucketName":"__VectorBucketName__"}}

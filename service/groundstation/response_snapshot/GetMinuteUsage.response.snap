@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"estimatedMinutesRemaining":1,"isReservedMinutesCustomer":true,"totalReservedMinuteAllocation":1,"totalScheduledMinutes":1,"upcomingMinutesScheduled":1}

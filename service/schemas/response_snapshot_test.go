@@ -127,7 +127,14 @@ func TestCheckResponseSnapshot_CreateDiscoverer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDiscoverer(context.Background(), &CreateDiscovererInput{})
+	got, err := svc.CreateDiscoverer(context.Background(), &CreateDiscovererInput{
+		Description:  ptr.String("__Description__"),
+		SourceArn:    ptr.String("__SourceArn__"),
+		CrossAccount: ptr.Bool(true),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -153,7 +160,13 @@ func TestCheckResponseSnapshot_CreateRegistry(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRegistry(context.Background(), &CreateRegistryInput{})
+	got, err := svc.CreateRegistry(context.Background(), &CreateRegistryInput{
+		Description:  ptr.String("__Description__"),
+		RegistryName: ptr.String("__RegistryName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -183,7 +196,16 @@ func TestCheckResponseSnapshot_CreateSchema(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSchema(context.Background(), &CreateSchemaInput{})
+	got, err := svc.CreateSchema(context.Background(), &CreateSchemaInput{
+		Content:      ptr.String("__Content__"),
+		Description:  ptr.String("__Description__"),
+		RegistryName: ptr.String("__RegistryName__"),
+		SchemaName:   ptr.String("__SchemaName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Type: types.Type("OpenApi3"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -202,7 +224,9 @@ func TestCheckResponseSnapshot_DeleteDiscoverer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDiscoverer(context.Background(), &DeleteDiscovererInput{})
+	got, err := svc.DeleteDiscoverer(context.Background(), &DeleteDiscovererInput{
+		DiscovererId: ptr.String("__DiscovererId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -221,7 +245,9 @@ func TestCheckResponseSnapshot_DeleteRegistry(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRegistry(context.Background(), &DeleteRegistryInput{})
+	got, err := svc.DeleteRegistry(context.Background(), &DeleteRegistryInput{
+		RegistryName: ptr.String("__RegistryName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -240,7 +266,9 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		RegistryName: ptr.String("__RegistryName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -259,7 +287,10 @@ func TestCheckResponseSnapshot_DeleteSchema(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSchema(context.Background(), &DeleteSchemaInput{})
+	got, err := svc.DeleteSchema(context.Background(), &DeleteSchemaInput{
+		RegistryName: ptr.String("__RegistryName__"),
+		SchemaName:   ptr.String("__SchemaName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -278,7 +309,11 @@ func TestCheckResponseSnapshot_DeleteSchemaVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSchemaVersion(context.Background(), &DeleteSchemaVersionInput{})
+	got, err := svc.DeleteSchemaVersion(context.Background(), &DeleteSchemaVersionInput{
+		RegistryName:  ptr.String("__RegistryName__"),
+		SchemaName:    ptr.String("__SchemaName__"),
+		SchemaVersion: ptr.String("__SchemaVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -302,7 +337,12 @@ func TestCheckResponseSnapshot_DescribeCodeBinding(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCodeBinding(context.Background(), &DescribeCodeBindingInput{})
+	got, err := svc.DescribeCodeBinding(context.Background(), &DescribeCodeBindingInput{
+		Language:      ptr.String("__Language__"),
+		RegistryName:  ptr.String("__RegistryName__"),
+		SchemaName:    ptr.String("__SchemaName__"),
+		SchemaVersion: ptr.String("__SchemaVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -331,7 +371,9 @@ func TestCheckResponseSnapshot_DescribeDiscoverer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDiscoverer(context.Background(), &DescribeDiscovererInput{})
+	got, err := svc.DescribeDiscoverer(context.Background(), &DescribeDiscovererInput{
+		DiscovererId: ptr.String("__DiscovererId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -357,7 +399,9 @@ func TestCheckResponseSnapshot_DescribeRegistry(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRegistry(context.Background(), &DescribeRegistryInput{})
+	got, err := svc.DescribeRegistry(context.Background(), &DescribeRegistryInput{
+		RegistryName: ptr.String("__RegistryName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -388,7 +432,11 @@ func TestCheckResponseSnapshot_DescribeSchema(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSchema(context.Background(), &DescribeSchemaInput{})
+	got, err := svc.DescribeSchema(context.Background(), &DescribeSchemaInput{
+		RegistryName:  ptr.String("__RegistryName__"),
+		SchemaName:    ptr.String("__SchemaName__"),
+		SchemaVersion: ptr.String("__SchemaVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -413,7 +461,12 @@ func TestCheckResponseSnapshot_ExportSchema(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExportSchema(context.Background(), &ExportSchemaInput{})
+	got, err := svc.ExportSchema(context.Background(), &ExportSchemaInput{
+		RegistryName:  ptr.String("__RegistryName__"),
+		SchemaName:    ptr.String("__SchemaName__"),
+		SchemaVersion: ptr.String("__SchemaVersion__"),
+		Type:          ptr.String("__Type__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -434,7 +487,12 @@ func TestCheckResponseSnapshot_GetCodeBindingSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCodeBindingSource(context.Background(), &GetCodeBindingSourceInput{})
+	got, err := svc.GetCodeBindingSource(context.Background(), &GetCodeBindingSourceInput{
+		Language:      ptr.String("__Language__"),
+		RegistryName:  ptr.String("__RegistryName__"),
+		SchemaName:    ptr.String("__SchemaName__"),
+		SchemaVersion: ptr.String("__SchemaVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -455,7 +513,13 @@ func TestCheckResponseSnapshot_GetDiscoveredSchema(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDiscoveredSchema(context.Background(), &GetDiscoveredSchemaInput{})
+	got, err := svc.GetDiscoveredSchema(context.Background(), &GetDiscoveredSchemaInput{
+		Events: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Type: types.Type("OpenApi3"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -477,7 +541,9 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{})
+	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{
+		RegistryName: ptr.String("__RegistryName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -520,7 +586,12 @@ func TestCheckResponseSnapshot_ListDiscoverers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDiscoverers(context.Background(), &ListDiscoverersInput{})
+	got, err := svc.ListDiscoverers(context.Background(), &ListDiscoverersInput{
+		DiscovererIdPrefix: ptr.String("__DiscovererIdPrefix__"),
+		Limit:              ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+		SourceArnPrefix:    ptr.String("__SourceArnPrefix__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -557,7 +628,12 @@ func TestCheckResponseSnapshot_ListRegistries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRegistries(context.Background(), &ListRegistriesInput{})
+	got, err := svc.ListRegistries(context.Background(), &ListRegistriesInput{
+		Limit:              ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+		RegistryNamePrefix: ptr.String("__RegistryNamePrefix__"),
+		Scope:              ptr.String("__Scope__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -592,7 +668,12 @@ func TestCheckResponseSnapshot_ListSchemaVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSchemaVersions(context.Background(), &ListSchemaVersionsInput{})
+	got, err := svc.ListSchemaVersions(context.Background(), &ListSchemaVersionsInput{
+		Limit:        ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		RegistryName: ptr.String("__RegistryName__"),
+		SchemaName:   ptr.String("__SchemaName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -633,7 +714,12 @@ func TestCheckResponseSnapshot_ListSchemas(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSchemas(context.Background(), &ListSchemasInput{})
+	got, err := svc.ListSchemas(context.Background(), &ListSchemasInput{
+		Limit:            ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+		RegistryName:     ptr.String("__RegistryName__"),
+		SchemaNamePrefix: ptr.String("__SchemaNamePrefix__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -656,7 +742,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -680,7 +768,12 @@ func TestCheckResponseSnapshot_PutCodeBinding(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutCodeBinding(context.Background(), &PutCodeBindingInput{})
+	got, err := svc.PutCodeBinding(context.Background(), &PutCodeBindingInput{
+		Language:      ptr.String("__Language__"),
+		RegistryName:  ptr.String("__RegistryName__"),
+		SchemaName:    ptr.String("__SchemaName__"),
+		SchemaVersion: ptr.String("__SchemaVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -702,7 +795,11 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		Policy:       ptr.String("__Policy__"),
+		RegistryName: ptr.String("__RegistryName__"),
+		RevisionId:   ptr.String("__RevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -759,7 +856,12 @@ func TestCheckResponseSnapshot_SearchSchemas(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchSchemas(context.Background(), &SearchSchemasInput{})
+	got, err := svc.SearchSchemas(context.Background(), &SearchSchemasInput{
+		Keywords:     ptr.String("__Keywords__"),
+		Limit:        ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		RegistryName: ptr.String("__RegistryName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -781,7 +883,9 @@ func TestCheckResponseSnapshot_StartDiscoverer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartDiscoverer(context.Background(), &StartDiscovererInput{})
+	got, err := svc.StartDiscoverer(context.Background(), &StartDiscovererInput{
+		DiscovererId: ptr.String("__DiscovererId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -803,7 +907,9 @@ func TestCheckResponseSnapshot_StopDiscoverer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopDiscoverer(context.Background(), &StopDiscovererInput{})
+	got, err := svc.StopDiscoverer(context.Background(), &StopDiscovererInput{
+		DiscovererId: ptr.String("__DiscovererId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -822,7 +928,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -841,7 +952,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -870,7 +987,11 @@ func TestCheckResponseSnapshot_UpdateDiscoverer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDiscoverer(context.Background(), &UpdateDiscovererInput{})
+	got, err := svc.UpdateDiscoverer(context.Background(), &UpdateDiscovererInput{
+		Description:  ptr.String("__Description__"),
+		DiscovererId: ptr.String("__DiscovererId__"),
+		CrossAccount: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -896,7 +1017,10 @@ func TestCheckResponseSnapshot_UpdateRegistry(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRegistry(context.Background(), &UpdateRegistryInput{})
+	got, err := svc.UpdateRegistry(context.Background(), &UpdateRegistryInput{
+		Description:  ptr.String("__Description__"),
+		RegistryName: ptr.String("__RegistryName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -926,7 +1050,14 @@ func TestCheckResponseSnapshot_UpdateSchema(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSchema(context.Background(), &UpdateSchemaInput{})
+	got, err := svc.UpdateSchema(context.Background(), &UpdateSchemaInput{
+		ClientTokenId: ptr.String("__ClientTokenId__"),
+		Content:       ptr.String("__Content__"),
+		Description:   ptr.String("__Description__"),
+		RegistryName:  ptr.String("__RegistryName__"),
+		SchemaName:    ptr.String("__SchemaName__"),
+		Type:          types.Type("OpenApi3"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -937,7 +1068,7 @@ func TestCheckResponseSnapshot_UpdateSchema(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 	want := &types.BadRequestException{
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("BadRequestException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("BadRequestException.error")
@@ -948,7 +1079,14 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDiscoverer(context.Background(), &CreateDiscovererInput{})
+	_, opErr := svc.CreateDiscoverer(context.Background(), &CreateDiscovererInput{
+		Description:  ptr.String("__Description__"),
+		SourceArn:    ptr.String("__SourceArn__"),
+		CrossAccount: ptr.Bool(true),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -963,7 +1101,7 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 	want := &types.ConflictException{
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("ConflictException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ConflictException.error")
@@ -974,7 +1112,14 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDiscoverer(context.Background(), &CreateDiscovererInput{})
+	_, opErr := svc.CreateDiscoverer(context.Background(), &CreateDiscovererInput{
+		Description:  ptr.String("__Description__"),
+		SourceArn:    ptr.String("__SourceArn__"),
+		CrossAccount: ptr.Bool(true),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -989,7 +1134,7 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 	want := &types.ForbiddenException{
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("ForbiddenException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ForbiddenException.error")
@@ -1000,7 +1145,14 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDiscoverer(context.Background(), &CreateDiscovererInput{})
+	_, opErr := svc.CreateDiscoverer(context.Background(), &CreateDiscovererInput{
+		Description:  ptr.String("__Description__"),
+		SourceArn:    ptr.String("__SourceArn__"),
+		CrossAccount: ptr.Bool(true),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1015,7 +1167,7 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_GoneException(t *testing.T) {
 	want := &types.GoneException{
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("GoneException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GoneException.error")
@@ -1026,7 +1178,12 @@ func TestCheckResponseSnapshot_Error_GoneException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutCodeBinding(context.Background(), &PutCodeBindingInput{})
+	_, opErr := svc.PutCodeBinding(context.Background(), &PutCodeBindingInput{
+		Language:      ptr.String("__Language__"),
+		RegistryName:  ptr.String("__RegistryName__"),
+		SchemaName:    ptr.String("__SchemaName__"),
+		SchemaVersion: ptr.String("__SchemaVersion__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1041,7 +1198,7 @@ func TestCheckResponseSnapshot_Error_GoneException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_InternalServerErrorException(t *testing.T) {
 	want := &types.InternalServerErrorException{
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("InternalServerErrorException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InternalServerErrorException.error")
@@ -1052,7 +1209,14 @@ func TestCheckResponseSnapshot_Error_InternalServerErrorException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDiscoverer(context.Background(), &CreateDiscovererInput{})
+	_, opErr := svc.CreateDiscoverer(context.Background(), &CreateDiscovererInput{
+		Description:  ptr.String("__Description__"),
+		SourceArn:    ptr.String("__SourceArn__"),
+		CrossAccount: ptr.Bool(true),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1067,7 +1231,7 @@ func TestCheckResponseSnapshot_Error_InternalServerErrorException(t *testing.T) 
 
 func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 	want := &types.NotFoundException{
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("NotFoundException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("NotFoundException.error")
@@ -1078,7 +1242,9 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteDiscoverer(context.Background(), &DeleteDiscovererInput{})
+	_, opErr := svc.DeleteDiscoverer(context.Background(), &DeleteDiscovererInput{
+		DiscovererId: ptr.String("__DiscovererId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1093,7 +1259,7 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_PreconditionFailedException(t *testing.T) {
 	want := &types.PreconditionFailedException{
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("PreconditionFailedException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("PreconditionFailedException.error")
@@ -1104,7 +1270,11 @@ func TestCheckResponseSnapshot_Error_PreconditionFailedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	_, opErr := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		Policy:       ptr.String("__Policy__"),
+		RegistryName: ptr.String("__RegistryName__"),
+		RevisionId:   ptr.String("__RevisionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1119,7 +1289,7 @@ func TestCheckResponseSnapshot_Error_PreconditionFailedException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 	want := &types.ServiceUnavailableException{
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("ServiceUnavailableException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ServiceUnavailableException.error")
@@ -1130,7 +1300,14 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDiscoverer(context.Background(), &CreateDiscovererInput{})
+	_, opErr := svc.CreateDiscoverer(context.Background(), &CreateDiscovererInput{
+		Description:  ptr.String("__Description__"),
+		SourceArn:    ptr.String("__SourceArn__"),
+		CrossAccount: ptr.Bool(true),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1145,7 +1322,7 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 	want := &types.TooManyRequestsException{
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("TooManyRequestsException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("TooManyRequestsException.error")
@@ -1156,7 +1333,12 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeCodeBinding(context.Background(), &DescribeCodeBindingInput{})
+	_, opErr := svc.DescribeCodeBinding(context.Background(), &DescribeCodeBindingInput{
+		Language:      ptr.String("__Language__"),
+		RegistryName:  ptr.String("__RegistryName__"),
+		SchemaName:    ptr.String("__SchemaName__"),
+		SchemaVersion: ptr.String("__SchemaVersion__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1171,7 +1353,7 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_UnauthorizedException(t *testing.T) {
 	want := &types.UnauthorizedException{
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("UnauthorizedException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UnauthorizedException.error")
@@ -1182,7 +1364,14 @@ func TestCheckResponseSnapshot_Error_UnauthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDiscoverer(context.Background(), &CreateDiscovererInput{})
+	_, opErr := svc.CreateDiscoverer(context.Background(), &CreateDiscovererInput{
+		Description:  ptr.String("__Description__"),
+		SourceArn:    ptr.String("__SourceArn__"),
+		CrossAccount: ptr.Bool(true),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

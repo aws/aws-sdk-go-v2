@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSPoseidonService_V2015_11_01.DescribeTags
+
+{"nextToken":"__NextToken__","tags":[{"configurationId":"__ConfigurationId__","configurationType":"SERVER","key":"__Key__","timeOfCreation":946684800,"value":"__Value__"},{"configurationId":"__ConfigurationId__","configurationType":"SERVER","key":"__Key__","timeOfCreation":946684800,"value":"__Value__"}]}

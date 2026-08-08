@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Account":"__Account__","ConfigurationDefinitionId":"__ConfigurationDefinitionId__","CreatedAt":"2000-01-01T00:00:00Z","Id":"__Id__","LastModifiedAt":"2000-01-01T00:00:00Z","ManagerArn":"__ManagerArn__","Parameters":{"key0":"__Value__"},"Region":"__Region__","StatusSummaries":[{"LastUpdatedAt":"2000-01-01T00:00:00Z","Status":"INITIALIZING","StatusDetails":{"key0":"__Value__"},"StatusMessage":"__StatusMessage__","StatusType":"Deployment"},{"LastUpdatedAt":"2000-01-01T00:00:00Z","Status":"INITIALIZING","StatusDetails":{"key0":"__Value__"},"StatusMessage":"__StatusMessage__","StatusType":"Deployment"}],"Type":"__Type__","TypeVersion":"__TypeVersion__"}

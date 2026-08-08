@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: AWSIdentityStore.UpdateUser
 
-{"IdentityStoreId":"__IdentityStoreId__","Operations":[{"AttributePath":"__AttributePath__"},{"AttributePath":"__AttributePath__"}],"UserId":"__UserId__"}
+{"IdentityStoreId":"__IdentityStoreId__","Operations":[{"AttributePath":"__AttributePath__","AttributeValue":"__Document__"},{"AttributePath":"__AttributePath__","AttributeValue":"__Document__"}],"UserId":"__UserId__"}

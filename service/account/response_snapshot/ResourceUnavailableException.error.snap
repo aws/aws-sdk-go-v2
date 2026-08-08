@@ -1,0 +1,5 @@
+424
+Content-Type: application/json
+X-Amzn-Errortype: ResourceUnavailableException
+
+{"__type":"ResourceUnavailableException","message":"__Message__"}

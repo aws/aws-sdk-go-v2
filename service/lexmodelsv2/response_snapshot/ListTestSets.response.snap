@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","testSets":[{"creationDateTime":946684800,"description":"__Description__","lastUpdatedDateTime":946684800,"modality":"Text","numTurns":1,"roleArn":"__RoleArn__","status":"Importing","storageLocation":{"kmsKeyArn":"__KmsKeyArn__","s3BucketName":"__S3BucketName__","s3Path":"__S3Path__"},"testSetId":"__TestSetId__","testSetName":"__TestSetName__"},{"creationDateTime":946684800,"description":"__Description__","lastUpdatedDateTime":946684800,"modality":"Text","numTurns":1,"roleArn":"__RoleArn__","status":"Importing","storageLocation":{"kmsKeyArn":"__KmsKeyArn__","s3BucketName":"__S3BucketName__","s3Path":"__S3Path__"},"testSetId":"__TestSetId__","testSetName":"__TestSetName__"}]}

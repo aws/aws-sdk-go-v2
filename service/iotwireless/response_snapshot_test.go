@@ -123,7 +123,23 @@ func TestCheckResponseSnapshot_AssociateAwsAccountWithPartnerAccount(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateAwsAccountWithPartnerAccount(context.Background(), &AssociateAwsAccountWithPartnerAccountInput{})
+	got, err := svc.AssociateAwsAccountWithPartnerAccount(context.Background(), &AssociateAwsAccountWithPartnerAccountInput{
+		Sidewalk: &types.SidewalkAccountInfo{
+			AmazonId:            ptr.String("__AmazonId__"),
+			AppServerPrivateKey: ptr.String("__AppServerPrivateKey__"),
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -142,7 +158,10 @@ func TestCheckResponseSnapshot_AssociateMulticastGroupWithFuotaTask(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateMulticastGroupWithFuotaTask(context.Background(), &AssociateMulticastGroupWithFuotaTaskInput{})
+	got, err := svc.AssociateMulticastGroupWithFuotaTask(context.Background(), &AssociateMulticastGroupWithFuotaTaskInput{
+		Id:               ptr.String("__Id__"),
+		MulticastGroupId: ptr.String("__MulticastGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -161,7 +180,10 @@ func TestCheckResponseSnapshot_AssociateWirelessDeviceWithFuotaTask(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateWirelessDeviceWithFuotaTask(context.Background(), &AssociateWirelessDeviceWithFuotaTaskInput{})
+	got, err := svc.AssociateWirelessDeviceWithFuotaTask(context.Background(), &AssociateWirelessDeviceWithFuotaTaskInput{
+		Id:               ptr.String("__Id__"),
+		WirelessDeviceId: ptr.String("__WirelessDeviceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -180,7 +202,10 @@ func TestCheckResponseSnapshot_AssociateWirelessDeviceWithMulticastGroup(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateWirelessDeviceWithMulticastGroup(context.Background(), &AssociateWirelessDeviceWithMulticastGroupInput{})
+	got, err := svc.AssociateWirelessDeviceWithMulticastGroup(context.Background(), &AssociateWirelessDeviceWithMulticastGroupInput{
+		Id:               ptr.String("__Id__"),
+		WirelessDeviceId: ptr.String("__WirelessDeviceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -199,7 +224,10 @@ func TestCheckResponseSnapshot_AssociateWirelessDeviceWithThing(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateWirelessDeviceWithThing(context.Background(), &AssociateWirelessDeviceWithThingInput{})
+	got, err := svc.AssociateWirelessDeviceWithThing(context.Background(), &AssociateWirelessDeviceWithThingInput{
+		Id:       ptr.String("__Id__"),
+		ThingArn: ptr.String("__ThingArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -220,7 +248,10 @@ func TestCheckResponseSnapshot_AssociateWirelessGatewayWithCertificate(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateWirelessGatewayWithCertificate(context.Background(), &AssociateWirelessGatewayWithCertificateInput{})
+	got, err := svc.AssociateWirelessGatewayWithCertificate(context.Background(), &AssociateWirelessGatewayWithCertificateInput{
+		Id:               ptr.String("__Id__"),
+		IotCertificateId: ptr.String("__IotCertificateId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -239,7 +270,10 @@ func TestCheckResponseSnapshot_AssociateWirelessGatewayWithThing(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateWirelessGatewayWithThing(context.Background(), &AssociateWirelessGatewayWithThingInput{})
+	got, err := svc.AssociateWirelessGatewayWithThing(context.Background(), &AssociateWirelessGatewayWithThingInput{
+		Id:       ptr.String("__Id__"),
+		ThingArn: ptr.String("__ThingArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -258,7 +292,9 @@ func TestCheckResponseSnapshot_CancelMulticastGroupSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelMulticastGroupSession(context.Background(), &CancelMulticastGroupSessionInput{})
+	got, err := svc.CancelMulticastGroupSession(context.Background(), &CancelMulticastGroupSessionInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -280,7 +316,24 @@ func TestCheckResponseSnapshot_CreateDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDestination(context.Background(), &CreateDestinationInput{})
+	got, err := svc.CreateDestination(context.Background(), &CreateDestinationInput{
+		Name:           ptr.String("__Name__"),
+		ExpressionType: types.ExpressionType("RuleName"),
+		Expression:     ptr.String("__Expression__"),
+		Description:    ptr.String("__Description__"),
+		RoleArn:        ptr.String("__RoleArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -302,7 +355,45 @@ func TestCheckResponseSnapshot_CreateDeviceProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDeviceProfile(context.Background(), &CreateDeviceProfileInput{})
+	got, err := svc.CreateDeviceProfile(context.Background(), &CreateDeviceProfileInput{
+		Name: ptr.String("__Name__"),
+		LoRaWAN: &types.LoRaWANDeviceProfile{
+			SupportsClassB:    true,
+			ClassBTimeout:     ptr.Int32(1),
+			PingSlotPeriod:    ptr.Int32(1),
+			PingSlotDr:        ptr.Int32(1),
+			PingSlotFreq:      ptr.Int32(1),
+			SupportsClassC:    true,
+			ClassCTimeout:     ptr.Int32(1),
+			MacVersion:        ptr.String("__MacVersion__"),
+			RegParamsRevision: ptr.String("__RegParamsRevision__"),
+			RxDelay1:          ptr.Int32(1),
+			RxDrOffset1:       ptr.Int32(1),
+			RxDataRate2:       ptr.Int32(1),
+			RxFreq2:           ptr.Int32(1),
+			FactoryPresetFreqsList: []int32{
+				1,
+				1,
+			},
+			MaxEirp:           ptr.Int32(1),
+			MaxDutyCycle:      ptr.Int32(1),
+			RfRegion:          ptr.String("__RfRegion__"),
+			SupportsJoin:      ptr.Bool(true),
+			Supports32BitFCnt: true,
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Sidewalk:           &types.SidewalkCreateDeviceProfile{},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -324,7 +415,30 @@ func TestCheckResponseSnapshot_CreateFuotaTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFuotaTask(context.Background(), &CreateFuotaTaskInput{})
+	got, err := svc.CreateFuotaTask(context.Background(), &CreateFuotaTaskInput{
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		LoRaWAN: &types.LoRaWANFuotaTask{
+			RfRegion: types.SupportedRfRegion("EU868"),
+		},
+		FirmwareUpdateImage: ptr.String("__FirmwareUpdateImage__"),
+		FirmwareUpdateRole:  ptr.String("__FirmwareUpdateRole__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		RedundancyPercent:  ptr.Int32(1),
+		FragmentSizeBytes:  ptr.Int32(1),
+		FragmentIntervalMS: ptr.Int32(1),
+		Descriptor:         ptr.String("__Descriptor__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -346,7 +460,36 @@ func TestCheckResponseSnapshot_CreateMulticastGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMulticastGroup(context.Background(), &CreateMulticastGroupInput{})
+	got, err := svc.CreateMulticastGroup(context.Background(), &CreateMulticastGroupInput{
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		LoRaWAN: &types.LoRaWANMulticast{
+			RfRegion: types.SupportedRfRegion("EU868"),
+			DlClass:  types.DlClass("ClassB"),
+			ParticipatingGateways: &types.ParticipatingGatewaysMulticast{
+				GatewayList: []string{
+					"__Member__",
+					"__Member__",
+				},
+				TransmissionInterval: ptr.Int32(1),
+			},
+			DefaultSessionParameters: &types.DefaultSessionParametersMulticast{
+				DlDr:   ptr.Int32(1),
+				DlFreq: ptr.Int32(1),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -368,7 +511,38 @@ func TestCheckResponseSnapshot_CreateNetworkAnalyzerConfiguration(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateNetworkAnalyzerConfiguration(context.Background(), &CreateNetworkAnalyzerConfigurationInput{})
+	got, err := svc.CreateNetworkAnalyzerConfiguration(context.Background(), &CreateNetworkAnalyzerConfigurationInput{
+		Name: ptr.String("__Name__"),
+		TraceContent: &types.TraceContent{
+			WirelessDeviceFrameInfo: types.WirelessDeviceFrameInfo("ENABLED"),
+			LogLevel:                types.LogLevel("INFO"),
+			MulticastFrameInfo:      types.MulticastFrameInfo("ENABLED"),
+		},
+		WirelessDevices: []string{
+			"__Member__",
+			"__Member__",
+		},
+		WirelessGateways: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Description: ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		MulticastGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -390,7 +564,31 @@ func TestCheckResponseSnapshot_CreateServiceProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateServiceProfile(context.Background(), &CreateServiceProfileInput{})
+	got, err := svc.CreateServiceProfile(context.Background(), &CreateServiceProfileInput{
+		Name: ptr.String("__Name__"),
+		LoRaWAN: &types.LoRaWANServiceProfile{
+			AddGwMetadata:   true,
+			DrMin:           ptr.Int32(1),
+			DrMax:           ptr.Int32(1),
+			PrAllowed:       true,
+			RaAllowed:       true,
+			TxPowerIndexMin: ptr.Int32(1),
+			TxPowerIndexMax: ptr.Int32(1),
+			NbTransMin:      ptr.Int32(1),
+			NbTransMax:      ptr.Int32(1),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -412,7 +610,87 @@ func TestCheckResponseSnapshot_CreateWirelessDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWirelessDevice(context.Background(), &CreateWirelessDeviceInput{})
+	got, err := svc.CreateWirelessDevice(context.Background(), &CreateWirelessDeviceInput{
+		Type:               types.WirelessDeviceType("Sidewalk"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		DestinationName:    ptr.String("__DestinationName__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		LoRaWAN: &types.LoRaWANDevice{
+			DevEui:           ptr.String("__DevEui__"),
+			DeviceProfileId:  ptr.String("__DeviceProfileId__"),
+			ServiceProfileId: ptr.String("__ServiceProfileId__"),
+			OtaaV1_1: &types.OtaaV1_1{
+				AppKey:  ptr.String("__AppKey__"),
+				NwkKey:  ptr.String("__NwkKey__"),
+				JoinEui: ptr.String("__JoinEui__"),
+			},
+			OtaaV1_0_x: &types.OtaaV1_0_x{
+				AppKey:    ptr.String("__AppKey__"),
+				AppEui:    ptr.String("__AppEui__"),
+				JoinEui:   ptr.String("__JoinEui__"),
+				GenAppKey: ptr.String("__GenAppKey__"),
+			},
+			AbpV1_1: &types.AbpV1_1{
+				DevAddr: ptr.String("__DevAddr__"),
+				SessionKeys: &types.SessionKeysAbpV1_1{
+					FNwkSIntKey: ptr.String("__FNwkSIntKey__"),
+					SNwkSIntKey: ptr.String("__SNwkSIntKey__"),
+					NwkSEncKey:  ptr.String("__NwkSEncKey__"),
+					AppSKey:     ptr.String("__AppSKey__"),
+				},
+				FCntStart: ptr.Int32(1),
+			},
+			AbpV1_0_x: &types.AbpV1_0_x{
+				DevAddr: ptr.String("__DevAddr__"),
+				SessionKeys: &types.SessionKeysAbpV1_0_x{
+					NwkSKey: ptr.String("__NwkSKey__"),
+					AppSKey: ptr.String("__AppSKey__"),
+				},
+				FCntStart: ptr.Int32(1),
+			},
+			FPorts: &types.FPorts{
+				Fuota:     ptr.Int32(1),
+				Multicast: ptr.Int32(1),
+				ClockSync: ptr.Int32(1),
+				Positioning: &types.Positioning{
+					ClockSync: ptr.Int32(1),
+					Stream:    ptr.Int32(1),
+					Gnss:      ptr.Int32(1),
+				},
+				Applications: []types.ApplicationConfig{
+					{
+						FPort:           ptr.Int32(1),
+						Type:            types.ApplicationConfigType("SemtechGeolocation"),
+						DestinationName: ptr.String("__DestinationName__"),
+					},
+					{
+						FPort:           ptr.Int32(1),
+						Type:            types.ApplicationConfigType("SemtechGeolocation"),
+						DestinationName: ptr.String("__DestinationName__"),
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Positioning: types.PositioningConfigStatus("Enabled"),
+		Sidewalk: &types.SidewalkCreateWirelessDevice{
+			DeviceProfileId: ptr.String("__DeviceProfileId__"),
+			Positioning: &types.SidewalkPositioning{
+				DestinationName: ptr.String("__DestinationName__"),
+			},
+			SidewalkManufacturingSn: ptr.String("__SidewalkManufacturingSn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -434,7 +712,51 @@ func TestCheckResponseSnapshot_CreateWirelessGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWirelessGateway(context.Background(), &CreateWirelessGatewayInput{})
+	got, err := svc.CreateWirelessGateway(context.Background(), &CreateWirelessGatewayInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		LoRaWAN: &types.LoRaWANGateway{
+			GatewayEui: ptr.String("__GatewayEui__"),
+			RfRegion:   ptr.String("__RfRegion__"),
+			JoinEuiFilters: [][]string{
+				{
+					"__Member__",
+					"__Member__",
+				},
+				{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			NetIdFilters: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SubBands: []int32{
+				1,
+				1,
+			},
+			Beaconing: &types.Beaconing{
+				DataRate: ptr.Int32(1),
+				Frequencies: []int32{
+					1,
+					1,
+				},
+			},
+			MaxEirp: ptr.Float32(1.0),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -456,7 +778,10 @@ func TestCheckResponseSnapshot_CreateWirelessGatewayTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWirelessGatewayTask(context.Background(), &CreateWirelessGatewayTaskInput{})
+	got, err := svc.CreateWirelessGatewayTask(context.Background(), &CreateWirelessGatewayTaskInput{
+		Id:                              ptr.String("__Id__"),
+		WirelessGatewayTaskDefinitionId: ptr.String("__WirelessGatewayTaskDefinitionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -478,7 +803,39 @@ func TestCheckResponseSnapshot_CreateWirelessGatewayTaskDefinition(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWirelessGatewayTaskDefinition(context.Background(), &CreateWirelessGatewayTaskDefinitionInput{})
+	got, err := svc.CreateWirelessGatewayTaskDefinition(context.Background(), &CreateWirelessGatewayTaskDefinitionInput{
+		AutoCreateTasks: true,
+		Name:            ptr.String("__Name__"),
+		Update: &types.UpdateWirelessGatewayTaskCreate{
+			UpdateDataSource: ptr.String("__UpdateDataSource__"),
+			UpdateDataRole:   ptr.String("__UpdateDataRole__"),
+			LoRaWAN: &types.LoRaWANUpdateGatewayTaskCreate{
+				UpdateSignature: ptr.String("__UpdateSignature__"),
+				SigKeyCrc:       ptr.Int64(1),
+				CurrentVersion: &types.LoRaWANGatewayVersion{
+					PackageVersion: ptr.String("__PackageVersion__"),
+					Model:          ptr.String("__Model__"),
+					Station:        ptr.String("__Station__"),
+				},
+				UpdateVersion: &types.LoRaWANGatewayVersion{
+					PackageVersion: ptr.String("__PackageVersion__"),
+					Model:          ptr.String("__Model__"),
+					Station:        ptr.String("__Station__"),
+				},
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -497,7 +854,9 @@ func TestCheckResponseSnapshot_DeleteDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDestination(context.Background(), &DeleteDestinationInput{})
+	got, err := svc.DeleteDestination(context.Background(), &DeleteDestinationInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -516,7 +875,9 @@ func TestCheckResponseSnapshot_DeleteDeviceProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDeviceProfile(context.Background(), &DeleteDeviceProfileInput{})
+	got, err := svc.DeleteDeviceProfile(context.Background(), &DeleteDeviceProfileInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -535,7 +896,9 @@ func TestCheckResponseSnapshot_DeleteFuotaTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFuotaTask(context.Background(), &DeleteFuotaTaskInput{})
+	got, err := svc.DeleteFuotaTask(context.Background(), &DeleteFuotaTaskInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -554,7 +917,9 @@ func TestCheckResponseSnapshot_DeleteMulticastGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMulticastGroup(context.Background(), &DeleteMulticastGroupInput{})
+	got, err := svc.DeleteMulticastGroup(context.Background(), &DeleteMulticastGroupInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -573,7 +938,9 @@ func TestCheckResponseSnapshot_DeleteNetworkAnalyzerConfiguration(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteNetworkAnalyzerConfiguration(context.Background(), &DeleteNetworkAnalyzerConfigurationInput{})
+	got, err := svc.DeleteNetworkAnalyzerConfiguration(context.Background(), &DeleteNetworkAnalyzerConfigurationInput{
+		ConfigurationName: ptr.String("__ConfigurationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -592,7 +959,11 @@ func TestCheckResponseSnapshot_DeleteQueuedMessages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteQueuedMessages(context.Background(), &DeleteQueuedMessagesInput{})
+	got, err := svc.DeleteQueuedMessages(context.Background(), &DeleteQueuedMessagesInput{
+		Id:                 ptr.String("__Id__"),
+		MessageId:          ptr.String("__MessageId__"),
+		WirelessDeviceType: types.WirelessDeviceType("Sidewalk"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -611,7 +982,9 @@ func TestCheckResponseSnapshot_DeleteServiceProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteServiceProfile(context.Background(), &DeleteServiceProfileInput{})
+	got, err := svc.DeleteServiceProfile(context.Background(), &DeleteServiceProfileInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -630,7 +1003,9 @@ func TestCheckResponseSnapshot_DeleteWirelessDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWirelessDevice(context.Background(), &DeleteWirelessDeviceInput{})
+	got, err := svc.DeleteWirelessDevice(context.Background(), &DeleteWirelessDeviceInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -649,7 +1024,9 @@ func TestCheckResponseSnapshot_DeleteWirelessDeviceImportTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWirelessDeviceImportTask(context.Background(), &DeleteWirelessDeviceImportTaskInput{})
+	got, err := svc.DeleteWirelessDeviceImportTask(context.Background(), &DeleteWirelessDeviceImportTaskInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -668,7 +1045,9 @@ func TestCheckResponseSnapshot_DeleteWirelessGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWirelessGateway(context.Background(), &DeleteWirelessGatewayInput{})
+	got, err := svc.DeleteWirelessGateway(context.Background(), &DeleteWirelessGatewayInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -687,7 +1066,9 @@ func TestCheckResponseSnapshot_DeleteWirelessGatewayTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWirelessGatewayTask(context.Background(), &DeleteWirelessGatewayTaskInput{})
+	got, err := svc.DeleteWirelessGatewayTask(context.Background(), &DeleteWirelessGatewayTaskInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -706,7 +1087,9 @@ func TestCheckResponseSnapshot_DeleteWirelessGatewayTaskDefinition(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWirelessGatewayTaskDefinition(context.Background(), &DeleteWirelessGatewayTaskDefinitionInput{})
+	got, err := svc.DeleteWirelessGatewayTaskDefinition(context.Background(), &DeleteWirelessGatewayTaskDefinitionInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -725,7 +1108,10 @@ func TestCheckResponseSnapshot_DeregisterWirelessDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterWirelessDevice(context.Background(), &DeregisterWirelessDeviceInput{})
+	got, err := svc.DeregisterWirelessDevice(context.Background(), &DeregisterWirelessDeviceInput{
+		Identifier:         ptr.String("__Identifier__"),
+		WirelessDeviceType: types.WirelessDeviceType("Sidewalk"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -744,7 +1130,10 @@ func TestCheckResponseSnapshot_DisassociateAwsAccountFromPartnerAccount(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateAwsAccountFromPartnerAccount(context.Background(), &DisassociateAwsAccountFromPartnerAccountInput{})
+	got, err := svc.DisassociateAwsAccountFromPartnerAccount(context.Background(), &DisassociateAwsAccountFromPartnerAccountInput{
+		PartnerAccountId: ptr.String("__PartnerAccountId__"),
+		PartnerType:      types.PartnerType("Sidewalk"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -763,7 +1152,10 @@ func TestCheckResponseSnapshot_DisassociateMulticastGroupFromFuotaTask(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateMulticastGroupFromFuotaTask(context.Background(), &DisassociateMulticastGroupFromFuotaTaskInput{})
+	got, err := svc.DisassociateMulticastGroupFromFuotaTask(context.Background(), &DisassociateMulticastGroupFromFuotaTaskInput{
+		Id:               ptr.String("__Id__"),
+		MulticastGroupId: ptr.String("__MulticastGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -782,7 +1174,10 @@ func TestCheckResponseSnapshot_DisassociateWirelessDeviceFromFuotaTask(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateWirelessDeviceFromFuotaTask(context.Background(), &DisassociateWirelessDeviceFromFuotaTaskInput{})
+	got, err := svc.DisassociateWirelessDeviceFromFuotaTask(context.Background(), &DisassociateWirelessDeviceFromFuotaTaskInput{
+		Id:               ptr.String("__Id__"),
+		WirelessDeviceId: ptr.String("__WirelessDeviceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -801,7 +1196,10 @@ func TestCheckResponseSnapshot_DisassociateWirelessDeviceFromMulticastGroup(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateWirelessDeviceFromMulticastGroup(context.Background(), &DisassociateWirelessDeviceFromMulticastGroupInput{})
+	got, err := svc.DisassociateWirelessDeviceFromMulticastGroup(context.Background(), &DisassociateWirelessDeviceFromMulticastGroupInput{
+		Id:               ptr.String("__Id__"),
+		WirelessDeviceId: ptr.String("__WirelessDeviceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -820,7 +1218,9 @@ func TestCheckResponseSnapshot_DisassociateWirelessDeviceFromThing(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateWirelessDeviceFromThing(context.Background(), &DisassociateWirelessDeviceFromThingInput{})
+	got, err := svc.DisassociateWirelessDeviceFromThing(context.Background(), &DisassociateWirelessDeviceFromThingInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -839,7 +1239,9 @@ func TestCheckResponseSnapshot_DisassociateWirelessGatewayFromCertificate(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateWirelessGatewayFromCertificate(context.Background(), &DisassociateWirelessGatewayFromCertificateInput{})
+	got, err := svc.DisassociateWirelessGatewayFromCertificate(context.Background(), &DisassociateWirelessGatewayFromCertificateInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -858,7 +1260,9 @@ func TestCheckResponseSnapshot_DisassociateWirelessGatewayFromThing(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateWirelessGatewayFromThing(context.Background(), &DisassociateWirelessGatewayFromThingInput{})
+	got, err := svc.DisassociateWirelessGatewayFromThing(context.Background(), &DisassociateWirelessGatewayFromThingInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -884,7 +1288,9 @@ func TestCheckResponseSnapshot_GetDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDestination(context.Background(), &GetDestinationInput{})
+	got, err := svc.GetDestination(context.Background(), &GetDestinationInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -951,7 +1357,9 @@ func TestCheckResponseSnapshot_GetDeviceProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDeviceProfile(context.Background(), &GetDeviceProfileInput{})
+	got, err := svc.GetDeviceProfile(context.Background(), &GetDeviceProfileInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1032,7 +1440,9 @@ func TestCheckResponseSnapshot_GetFuotaTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFuotaTask(context.Background(), &GetFuotaTaskInput{})
+	got, err := svc.GetFuotaTask(context.Background(), &GetFuotaTaskInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1272,7 +1682,44 @@ func TestCheckResponseSnapshot_GetMetrics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMetrics(context.Background(), &GetMetricsInput{})
+	got, err := svc.GetMetrics(context.Background(), &GetMetricsInput{
+		SummaryMetricQueries: []types.SummaryMetricQuery{
+			{
+				QueryId:    ptr.String("__QueryId__"),
+				MetricName: types.MetricName("DeviceRSSI"),
+				Dimensions: []types.Dimension{
+					{
+						Name:  types.DimensionName("DeviceId"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  types.DimensionName("DeviceId"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				AggregationPeriod: types.AggregationPeriod("OneHour"),
+				StartTimestamp:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				QueryId:    ptr.String("__QueryId__"),
+				MetricName: types.MetricName("DeviceRSSI"),
+				Dimensions: []types.Dimension{
+					{
+						Name:  types.DimensionName("DeviceId"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  types.DimensionName("DeviceId"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				AggregationPeriod: types.AggregationPeriod("OneHour"),
+				StartTimestamp:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1315,7 +1762,9 @@ func TestCheckResponseSnapshot_GetMulticastGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMulticastGroup(context.Background(), &GetMulticastGroupInput{})
+	got, err := svc.GetMulticastGroup(context.Background(), &GetMulticastGroupInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1342,7 +1791,9 @@ func TestCheckResponseSnapshot_GetMulticastGroupSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMulticastGroupSession(context.Background(), &GetMulticastGroupSessionInput{})
+	got, err := svc.GetMulticastGroupSession(context.Background(), &GetMulticastGroupSessionInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1382,7 +1833,9 @@ func TestCheckResponseSnapshot_GetNetworkAnalyzerConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetNetworkAnalyzerConfiguration(context.Background(), &GetNetworkAnalyzerConfigurationInput{})
+	got, err := svc.GetNetworkAnalyzerConfiguration(context.Background(), &GetNetworkAnalyzerConfigurationInput{
+		ConfigurationName: ptr.String("__ConfigurationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1408,7 +1861,10 @@ func TestCheckResponseSnapshot_GetPartnerAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPartnerAccount(context.Background(), &GetPartnerAccountInput{})
+	got, err := svc.GetPartnerAccount(context.Background(), &GetPartnerAccountInput{
+		PartnerAccountId: ptr.String("__PartnerAccountId__"),
+		PartnerType:      types.PartnerType("Sidewalk"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1440,7 +1896,10 @@ func TestCheckResponseSnapshot_GetPosition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPosition(context.Background(), &GetPositionInput{})
+	got, err := svc.GetPosition(context.Background(), &GetPositionInput{
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+		ResourceType:       types.PositionResourceType("WirelessDevice"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1469,7 +1928,10 @@ func TestCheckResponseSnapshot_GetPositionConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPositionConfiguration(context.Background(), &GetPositionConfigurationInput{})
+	got, err := svc.GetPositionConfiguration(context.Background(), &GetPositionConfigurationInput{
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+		ResourceType:       types.PositionResourceType("WirelessDevice"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1490,7 +1952,342 @@ func TestCheckResponseSnapshot_GetPositionEstimate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPositionEstimate(context.Background(), &GetPositionEstimateInput{})
+	got, err := svc.GetPositionEstimate(context.Background(), &GetPositionEstimateInput{
+		WiFiAccessPoints: []types.WiFiAccessPoint{
+			{
+				MacAddress: ptr.String("__MacAddress__"),
+				Rss:        ptr.Int32(1),
+			},
+			{
+				MacAddress: ptr.String("__MacAddress__"),
+				Rss:        ptr.Int32(1),
+			},
+		},
+		CellTowers: &types.CellTowers{
+			Gsm: []types.GsmObj{
+				{
+					Mcc:      ptr.Int32(1),
+					Mnc:      ptr.Int32(1),
+					Lac:      ptr.Int32(1),
+					GeranCid: ptr.Int32(1),
+					GsmLocalId: &types.GsmLocalId{
+						Bsic: ptr.Int32(1),
+						Bcch: ptr.Int32(1),
+					},
+					GsmTimingAdvance: ptr.Int32(1),
+					RxLevel:          ptr.Int32(1),
+					GsmNmr: []types.GsmNmrObj{
+						{
+							Bsic:    ptr.Int32(1),
+							Bcch:    ptr.Int32(1),
+							RxLevel: ptr.Int32(1),
+							GlobalIdentity: &types.GlobalIdentity{
+								Lac:      ptr.Int32(1),
+								GeranCid: ptr.Int32(1),
+							},
+						},
+						{
+							Bsic:    ptr.Int32(1),
+							Bcch:    ptr.Int32(1),
+							RxLevel: ptr.Int32(1),
+							GlobalIdentity: &types.GlobalIdentity{
+								Lac:      ptr.Int32(1),
+								GeranCid: ptr.Int32(1),
+							},
+						},
+					},
+				},
+				{
+					Mcc:      ptr.Int32(1),
+					Mnc:      ptr.Int32(1),
+					Lac:      ptr.Int32(1),
+					GeranCid: ptr.Int32(1),
+					GsmLocalId: &types.GsmLocalId{
+						Bsic: ptr.Int32(1),
+						Bcch: ptr.Int32(1),
+					},
+					GsmTimingAdvance: ptr.Int32(1),
+					RxLevel:          ptr.Int32(1),
+					GsmNmr: []types.GsmNmrObj{
+						{
+							Bsic:    ptr.Int32(1),
+							Bcch:    ptr.Int32(1),
+							RxLevel: ptr.Int32(1),
+							GlobalIdentity: &types.GlobalIdentity{
+								Lac:      ptr.Int32(1),
+								GeranCid: ptr.Int32(1),
+							},
+						},
+						{
+							Bsic:    ptr.Int32(1),
+							Bcch:    ptr.Int32(1),
+							RxLevel: ptr.Int32(1),
+							GlobalIdentity: &types.GlobalIdentity{
+								Lac:      ptr.Int32(1),
+								GeranCid: ptr.Int32(1),
+							},
+						},
+					},
+				},
+			},
+			Wcdma: []types.WcdmaObj{
+				{
+					Mcc:      ptr.Int32(1),
+					Mnc:      ptr.Int32(1),
+					Lac:      ptr.Int32(1),
+					UtranCid: ptr.Int32(1),
+					WcdmaLocalId: &types.WcdmaLocalId{
+						Uarfcndl: ptr.Int32(1),
+						Psc:      ptr.Int32(1),
+					},
+					Rscp:     ptr.Int32(1),
+					PathLoss: ptr.Int32(1),
+					WcdmaNmr: []types.WcdmaNmrObj{
+						{
+							Uarfcndl: ptr.Int32(1),
+							Psc:      ptr.Int32(1),
+							UtranCid: ptr.Int32(1),
+							Rscp:     ptr.Int32(1),
+							PathLoss: ptr.Int32(1),
+						},
+						{
+							Uarfcndl: ptr.Int32(1),
+							Psc:      ptr.Int32(1),
+							UtranCid: ptr.Int32(1),
+							Rscp:     ptr.Int32(1),
+							PathLoss: ptr.Int32(1),
+						},
+					},
+				},
+				{
+					Mcc:      ptr.Int32(1),
+					Mnc:      ptr.Int32(1),
+					Lac:      ptr.Int32(1),
+					UtranCid: ptr.Int32(1),
+					WcdmaLocalId: &types.WcdmaLocalId{
+						Uarfcndl: ptr.Int32(1),
+						Psc:      ptr.Int32(1),
+					},
+					Rscp:     ptr.Int32(1),
+					PathLoss: ptr.Int32(1),
+					WcdmaNmr: []types.WcdmaNmrObj{
+						{
+							Uarfcndl: ptr.Int32(1),
+							Psc:      ptr.Int32(1),
+							UtranCid: ptr.Int32(1),
+							Rscp:     ptr.Int32(1),
+							PathLoss: ptr.Int32(1),
+						},
+						{
+							Uarfcndl: ptr.Int32(1),
+							Psc:      ptr.Int32(1),
+							UtranCid: ptr.Int32(1),
+							Rscp:     ptr.Int32(1),
+							PathLoss: ptr.Int32(1),
+						},
+					},
+				},
+			},
+			Tdscdma: []types.TdscdmaObj{
+				{
+					Mcc:      ptr.Int32(1),
+					Mnc:      ptr.Int32(1),
+					Lac:      ptr.Int32(1),
+					UtranCid: ptr.Int32(1),
+					TdscdmaLocalId: &types.TdscdmaLocalId{
+						Uarfcn:     ptr.Int32(1),
+						CellParams: ptr.Int32(1),
+					},
+					TdscdmaTimingAdvance: ptr.Int32(1),
+					Rscp:                 ptr.Int32(1),
+					PathLoss:             ptr.Int32(1),
+					TdscdmaNmr: []types.TdscdmaNmrObj{
+						{
+							Uarfcn:     ptr.Int32(1),
+							CellParams: ptr.Int32(1),
+							UtranCid:   ptr.Int32(1),
+							Rscp:       ptr.Int32(1),
+							PathLoss:   ptr.Int32(1),
+						},
+						{
+							Uarfcn:     ptr.Int32(1),
+							CellParams: ptr.Int32(1),
+							UtranCid:   ptr.Int32(1),
+							Rscp:       ptr.Int32(1),
+							PathLoss:   ptr.Int32(1),
+						},
+					},
+				},
+				{
+					Mcc:      ptr.Int32(1),
+					Mnc:      ptr.Int32(1),
+					Lac:      ptr.Int32(1),
+					UtranCid: ptr.Int32(1),
+					TdscdmaLocalId: &types.TdscdmaLocalId{
+						Uarfcn:     ptr.Int32(1),
+						CellParams: ptr.Int32(1),
+					},
+					TdscdmaTimingAdvance: ptr.Int32(1),
+					Rscp:                 ptr.Int32(1),
+					PathLoss:             ptr.Int32(1),
+					TdscdmaNmr: []types.TdscdmaNmrObj{
+						{
+							Uarfcn:     ptr.Int32(1),
+							CellParams: ptr.Int32(1),
+							UtranCid:   ptr.Int32(1),
+							Rscp:       ptr.Int32(1),
+							PathLoss:   ptr.Int32(1),
+						},
+						{
+							Uarfcn:     ptr.Int32(1),
+							CellParams: ptr.Int32(1),
+							UtranCid:   ptr.Int32(1),
+							Rscp:       ptr.Int32(1),
+							PathLoss:   ptr.Int32(1),
+						},
+					},
+				},
+			},
+			Lte: []types.LteObj{
+				{
+					Mcc:       ptr.Int32(1),
+					Mnc:       ptr.Int32(1),
+					EutranCid: ptr.Int32(1),
+					Tac:       ptr.Int32(1),
+					LteLocalId: &types.LteLocalId{
+						Pci:    ptr.Int32(1),
+						Earfcn: ptr.Int32(1),
+					},
+					LteTimingAdvance: ptr.Int32(1),
+					Rsrp:             ptr.Int32(1),
+					Rsrq:             ptr.Float32(1.0),
+					NrCapable:        true,
+					LteNmr: []types.LteNmrObj{
+						{
+							Pci:       ptr.Int32(1),
+							Earfcn:    ptr.Int32(1),
+							EutranCid: ptr.Int32(1),
+							Rsrp:      ptr.Int32(1),
+							Rsrq:      ptr.Float32(1.0),
+						},
+						{
+							Pci:       ptr.Int32(1),
+							Earfcn:    ptr.Int32(1),
+							EutranCid: ptr.Int32(1),
+							Rsrp:      ptr.Int32(1),
+							Rsrq:      ptr.Float32(1.0),
+						},
+					},
+				},
+				{
+					Mcc:       ptr.Int32(1),
+					Mnc:       ptr.Int32(1),
+					EutranCid: ptr.Int32(1),
+					Tac:       ptr.Int32(1),
+					LteLocalId: &types.LteLocalId{
+						Pci:    ptr.Int32(1),
+						Earfcn: ptr.Int32(1),
+					},
+					LteTimingAdvance: ptr.Int32(1),
+					Rsrp:             ptr.Int32(1),
+					Rsrq:             ptr.Float32(1.0),
+					NrCapable:        true,
+					LteNmr: []types.LteNmrObj{
+						{
+							Pci:       ptr.Int32(1),
+							Earfcn:    ptr.Int32(1),
+							EutranCid: ptr.Int32(1),
+							Rsrp:      ptr.Int32(1),
+							Rsrq:      ptr.Float32(1.0),
+						},
+						{
+							Pci:       ptr.Int32(1),
+							Earfcn:    ptr.Int32(1),
+							EutranCid: ptr.Int32(1),
+							Rsrp:      ptr.Int32(1),
+							Rsrq:      ptr.Float32(1.0),
+						},
+					},
+				},
+			},
+			Cdma: []types.CdmaObj{
+				{
+					SystemId:         ptr.Int32(1),
+					NetworkId:        ptr.Int32(1),
+					BaseStationId:    ptr.Int32(1),
+					RegistrationZone: ptr.Int32(1),
+					CdmaLocalId: &types.CdmaLocalId{
+						PnOffset:    ptr.Int32(1),
+						CdmaChannel: ptr.Int32(1),
+					},
+					PilotPower: ptr.Int32(1),
+					BaseLat:    ptr.Float32(1.0),
+					BaseLng:    ptr.Float32(1.0),
+					CdmaNmr: []types.CdmaNmrObj{
+						{
+							PnOffset:      ptr.Int32(1),
+							CdmaChannel:   ptr.Int32(1),
+							PilotPower:    ptr.Int32(1),
+							BaseStationId: ptr.Int32(1),
+						},
+						{
+							PnOffset:      ptr.Int32(1),
+							CdmaChannel:   ptr.Int32(1),
+							PilotPower:    ptr.Int32(1),
+							BaseStationId: ptr.Int32(1),
+						},
+					},
+				},
+				{
+					SystemId:         ptr.Int32(1),
+					NetworkId:        ptr.Int32(1),
+					BaseStationId:    ptr.Int32(1),
+					RegistrationZone: ptr.Int32(1),
+					CdmaLocalId: &types.CdmaLocalId{
+						PnOffset:    ptr.Int32(1),
+						CdmaChannel: ptr.Int32(1),
+					},
+					PilotPower: ptr.Int32(1),
+					BaseLat:    ptr.Float32(1.0),
+					BaseLng:    ptr.Float32(1.0),
+					CdmaNmr: []types.CdmaNmrObj{
+						{
+							PnOffset:      ptr.Int32(1),
+							CdmaChannel:   ptr.Int32(1),
+							PilotPower:    ptr.Int32(1),
+							BaseStationId: ptr.Int32(1),
+						},
+						{
+							PnOffset:      ptr.Int32(1),
+							CdmaChannel:   ptr.Int32(1),
+							PilotPower:    ptr.Int32(1),
+							BaseStationId: ptr.Int32(1),
+						},
+					},
+				},
+			},
+		},
+		Ip: &types.Ip{
+			IpAddress: ptr.String("__IpAddress__"),
+		},
+		Gnss: &types.Gnss{
+			Payload:             ptr.String("__Payload__"),
+			CaptureTime:         ptr.Float32(1.0),
+			CaptureTimeAccuracy: ptr.Float32(1.0),
+			AssistPosition: []float32{
+				1.0,
+				1.0,
+			},
+			AssistAltitude: ptr.Float32(1.0),
+			Use2DSolver:    true,
+		},
+		Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		AdvancedConfiguration: &types.AdvancedConfiguration{
+			WiFiCellular: &types.WiFiCellular{
+				ConfidencePercent: ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1540,7 +2337,11 @@ func TestCheckResponseSnapshot_GetResourceEventConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourceEventConfiguration(context.Background(), &GetResourceEventConfigurationInput{})
+	got, err := svc.GetResourceEventConfiguration(context.Background(), &GetResourceEventConfigurationInput{
+		Identifier:     ptr.String("__Identifier__"),
+		IdentifierType: types.IdentifierType("PartnerAccountId"),
+		PartnerType:    types.EventNotificationPartnerType("Sidewalk"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1561,7 +2362,10 @@ func TestCheckResponseSnapshot_GetResourceLogLevel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourceLogLevel(context.Background(), &GetResourceLogLevelInput{})
+	got, err := svc.GetResourceLogLevel(context.Background(), &GetResourceLogLevelInput{
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+		ResourceType:       ptr.String("__ResourceType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1582,7 +2386,10 @@ func TestCheckResponseSnapshot_GetResourcePosition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourcePosition(context.Background(), &GetResourcePositionInput{})
+	got, err := svc.GetResourcePosition(context.Background(), &GetResourcePositionInput{
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+		ResourceType:       types.PositionResourceType("WirelessDevice"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1605,7 +2412,9 @@ func TestCheckResponseSnapshot_GetServiceEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetServiceEndpoint(context.Background(), &GetServiceEndpointInput{})
+	got, err := svc.GetServiceEndpoint(context.Background(), &GetServiceEndpointInput{
+		ServiceType: types.WirelessGatewayServiceType("CUPS"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1653,7 +2462,9 @@ func TestCheckResponseSnapshot_GetServiceProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetServiceProfile(context.Background(), &GetServiceProfileInput{})
+	got, err := svc.GetServiceProfile(context.Background(), &GetServiceProfileInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1769,7 +2580,10 @@ func TestCheckResponseSnapshot_GetWirelessDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWirelessDevice(context.Background(), &GetWirelessDeviceInput{})
+	got, err := svc.GetWirelessDevice(context.Background(), &GetWirelessDeviceInput{
+		Identifier:     ptr.String("__Identifier__"),
+		IdentifierType: types.WirelessDeviceIdType("WirelessDeviceId"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1810,7 +2624,9 @@ func TestCheckResponseSnapshot_GetWirelessDeviceImportTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWirelessDeviceImportTask(context.Background(), &GetWirelessDeviceImportTaskInput{})
+	got, err := svc.GetWirelessDeviceImportTask(context.Background(), &GetWirelessDeviceImportTaskInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1875,7 +2691,9 @@ func TestCheckResponseSnapshot_GetWirelessDeviceStatistics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWirelessDeviceStatistics(context.Background(), &GetWirelessDeviceStatisticsInput{})
+	got, err := svc.GetWirelessDeviceStatistics(context.Background(), &GetWirelessDeviceStatisticsInput{
+		WirelessDeviceId: ptr.String("__WirelessDeviceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1931,7 +2749,10 @@ func TestCheckResponseSnapshot_GetWirelessGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWirelessGateway(context.Background(), &GetWirelessGatewayInput{})
+	got, err := svc.GetWirelessGateway(context.Background(), &GetWirelessGatewayInput{
+		Identifier:     ptr.String("__Identifier__"),
+		IdentifierType: types.WirelessGatewayIdType("GatewayEui"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1953,7 +2774,9 @@ func TestCheckResponseSnapshot_GetWirelessGatewayCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWirelessGatewayCertificate(context.Background(), &GetWirelessGatewayCertificateInput{})
+	got, err := svc.GetWirelessGatewayCertificate(context.Background(), &GetWirelessGatewayCertificateInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1980,7 +2803,9 @@ func TestCheckResponseSnapshot_GetWirelessGatewayFirmwareInformation(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWirelessGatewayFirmwareInformation(context.Background(), &GetWirelessGatewayFirmwareInformationInput{})
+	got, err := svc.GetWirelessGatewayFirmwareInformation(context.Background(), &GetWirelessGatewayFirmwareInformationInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2003,7 +2828,9 @@ func TestCheckResponseSnapshot_GetWirelessGatewayStatistics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWirelessGatewayStatistics(context.Background(), &GetWirelessGatewayStatisticsInput{})
+	got, err := svc.GetWirelessGatewayStatistics(context.Background(), &GetWirelessGatewayStatisticsInput{
+		WirelessGatewayId: ptr.String("__WirelessGatewayId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2028,7 +2855,9 @@ func TestCheckResponseSnapshot_GetWirelessGatewayTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWirelessGatewayTask(context.Background(), &GetWirelessGatewayTaskInput{})
+	got, err := svc.GetWirelessGatewayTask(context.Background(), &GetWirelessGatewayTaskInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2069,7 +2898,9 @@ func TestCheckResponseSnapshot_GetWirelessGatewayTaskDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWirelessGatewayTaskDefinition(context.Background(), &GetWirelessGatewayTaskDefinitionInput{})
+	got, err := svc.GetWirelessGatewayTaskDefinition(context.Background(), &GetWirelessGatewayTaskDefinitionInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2108,7 +2939,10 @@ func TestCheckResponseSnapshot_ListDestinations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDestinations(context.Background(), &ListDestinationsInput{})
+	got, err := svc.ListDestinations(context.Background(), &ListDestinationsInput{
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2141,7 +2975,11 @@ func TestCheckResponseSnapshot_ListDeviceProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDeviceProfiles(context.Background(), &ListDeviceProfilesInput{})
+	got, err := svc.ListDeviceProfiles(context.Background(), &ListDeviceProfilesInput{
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        1,
+		DeviceProfileType: types.DeviceProfileType("Sidewalk"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2187,7 +3025,12 @@ func TestCheckResponseSnapshot_ListDevicesForWirelessDeviceImportTask(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDevicesForWirelessDeviceImportTask(context.Background(), &ListDevicesForWirelessDeviceImportTaskInput{})
+	got, err := svc.ListDevicesForWirelessDeviceImportTask(context.Background(), &ListDevicesForWirelessDeviceImportTaskInput{
+		Id:         ptr.String("__Id__"),
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+		Status:     types.OnboardStatus("INITIALIZED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2284,7 +3127,11 @@ func TestCheckResponseSnapshot_ListEventConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEventConfigurations(context.Background(), &ListEventConfigurationsInput{})
+	got, err := svc.ListEventConfigurations(context.Background(), &ListEventConfigurationsInput{
+		ResourceType: types.EventNotificationResourceType("SidewalkAccount"),
+		MaxResults:   1,
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2317,7 +3164,10 @@ func TestCheckResponseSnapshot_ListFuotaTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFuotaTasks(context.Background(), &ListFuotaTasksInput{})
+	got, err := svc.ListFuotaTasks(context.Background(), &ListFuotaTasksInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2350,7 +3200,10 @@ func TestCheckResponseSnapshot_ListMulticastGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMulticastGroups(context.Background(), &ListMulticastGroupsInput{})
+	got, err := svc.ListMulticastGroups(context.Background(), &ListMulticastGroupsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2379,7 +3232,11 @@ func TestCheckResponseSnapshot_ListMulticastGroupsByFuotaTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMulticastGroupsByFuotaTask(context.Background(), &ListMulticastGroupsByFuotaTaskInput{})
+	got, err := svc.ListMulticastGroupsByFuotaTask(context.Background(), &ListMulticastGroupsByFuotaTaskInput{
+		Id:         ptr.String("__Id__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2410,7 +3267,10 @@ func TestCheckResponseSnapshot_ListNetworkAnalyzerConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListNetworkAnalyzerConfigurations(context.Background(), &ListNetworkAnalyzerConfigurationsInput{})
+	got, err := svc.ListNetworkAnalyzerConfigurations(context.Background(), &ListNetworkAnalyzerConfigurationsInput{
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2443,7 +3303,10 @@ func TestCheckResponseSnapshot_ListPartnerAccounts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPartnerAccounts(context.Background(), &ListPartnerAccountsInput{})
+	got, err := svc.ListPartnerAccounts(context.Background(), &ListPartnerAccountsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2492,7 +3355,11 @@ func TestCheckResponseSnapshot_ListPositionConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPositionConfigurations(context.Background(), &ListPositionConfigurationsInput{})
+	got, err := svc.ListPositionConfigurations(context.Background(), &ListPositionConfigurationsInput{
+		ResourceType: types.PositionResourceType("WirelessDevice"),
+		MaxResults:   1,
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2559,7 +3426,12 @@ func TestCheckResponseSnapshot_ListQueuedMessages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListQueuedMessages(context.Background(), &ListQueuedMessagesInput{})
+	got, err := svc.ListQueuedMessages(context.Background(), &ListQueuedMessagesInput{
+		Id:                 ptr.String("__Id__"),
+		NextToken:          ptr.String("__NextToken__"),
+		MaxResults:         1,
+		WirelessDeviceType: types.WirelessDeviceType("Sidewalk"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2592,7 +3464,10 @@ func TestCheckResponseSnapshot_ListServiceProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServiceProfiles(context.Background(), &ListServiceProfilesInput{})
+	got, err := svc.ListServiceProfiles(context.Background(), &ListServiceProfilesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2622,7 +3497,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2691,7 +3568,10 @@ func TestCheckResponseSnapshot_ListWirelessDeviceImportTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWirelessDeviceImportTasks(context.Background(), &ListWirelessDeviceImportTasksInput{})
+	got, err := svc.ListWirelessDeviceImportTasks(context.Background(), &ListWirelessDeviceImportTasksInput{
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2784,7 +3664,16 @@ func TestCheckResponseSnapshot_ListWirelessDevices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWirelessDevices(context.Background(), &ListWirelessDevicesInput{})
+	got, err := svc.ListWirelessDevices(context.Background(), &ListWirelessDevicesInput{
+		MaxResults:         1,
+		NextToken:          ptr.String("__NextToken__"),
+		DestinationName:    ptr.String("__DestinationName__"),
+		DeviceProfileId:    ptr.String("__DeviceProfileId__"),
+		ServiceProfileId:   ptr.String("__ServiceProfileId__"),
+		WirelessDeviceType: types.WirelessDeviceType("Sidewalk"),
+		FuotaTaskId:        ptr.String("__FuotaTaskId__"),
+		MulticastGroupId:   ptr.String("__MulticastGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2839,7 +3728,11 @@ func TestCheckResponseSnapshot_ListWirelessGatewayTaskDefinitions(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWirelessGatewayTaskDefinitions(context.Background(), &ListWirelessGatewayTaskDefinitionsInput{})
+	got, err := svc.ListWirelessGatewayTaskDefinitions(context.Background(), &ListWirelessGatewayTaskDefinitionsInput{
+		MaxResults:         1,
+		NextToken:          ptr.String("__NextToken__"),
+		TaskDefinitionType: types.WirelessGatewayTaskDefinitionType("UPDATE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2936,7 +3829,10 @@ func TestCheckResponseSnapshot_ListWirelessGateways(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWirelessGateways(context.Background(), &ListWirelessGatewaysInput{})
+	got, err := svc.ListWirelessGateways(context.Background(), &ListWirelessGatewaysInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2955,7 +3851,17 @@ func TestCheckResponseSnapshot_PutPositionConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutPositionConfiguration(context.Background(), &PutPositionConfigurationInput{})
+	got, err := svc.PutPositionConfiguration(context.Background(), &PutPositionConfigurationInput{
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+		ResourceType:       types.PositionResourceType("WirelessDevice"),
+		Solvers: &types.PositionSolverConfigurations{
+			SemtechGnss: &types.SemtechGnssConfiguration{
+				Status: types.PositionConfigurationStatus("Enabled"),
+				Fec:    types.PositionConfigurationFec("ROSE"),
+			},
+		},
+		Destination: ptr.String("__Destination__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2974,7 +3880,11 @@ func TestCheckResponseSnapshot_PutResourceLogLevel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResourceLogLevel(context.Background(), &PutResourceLogLevelInput{})
+	got, err := svc.PutResourceLogLevel(context.Background(), &PutResourceLogLevelInput{
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+		ResourceType:       ptr.String("__ResourceType__"),
+		LogLevel:           types.LogLevel("INFO"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3012,7 +3922,10 @@ func TestCheckResponseSnapshot_ResetResourceLogLevel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResetResourceLogLevel(context.Background(), &ResetResourceLogLevelInput{})
+	got, err := svc.ResetResourceLogLevel(context.Background(), &ResetResourceLogLevelInput{
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+		ResourceType:       ptr.String("__ResourceType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3033,7 +3946,15 @@ func TestCheckResponseSnapshot_SendDataToMulticastGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendDataToMulticastGroup(context.Background(), &SendDataToMulticastGroupInput{})
+	got, err := svc.SendDataToMulticastGroup(context.Background(), &SendDataToMulticastGroupInput{
+		Id:          ptr.String("__Id__"),
+		PayloadData: ptr.String("__PayloadData__"),
+		WirelessMetadata: &types.MulticastWirelessMetadata{
+			LoRaWAN: &types.LoRaWANMulticastMetadata{
+				FPort: ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3054,7 +3975,35 @@ func TestCheckResponseSnapshot_SendDataToWirelessDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendDataToWirelessDevice(context.Background(), &SendDataToWirelessDeviceInput{})
+	got, err := svc.SendDataToWirelessDevice(context.Background(), &SendDataToWirelessDeviceInput{
+		Id:           ptr.String("__Id__"),
+		TransmitMode: ptr.Int32(1),
+		PayloadData:  ptr.String("__PayloadData__"),
+		WirelessMetadata: &types.WirelessMetadata{
+			LoRaWAN: &types.LoRaWANSendDataToDevice{
+				FPort: ptr.Int32(1),
+				ParticipatingGateways: &types.ParticipatingGateways{
+					DownlinkMode: types.DownlinkMode("SEQUENTIAL"),
+					GatewayList: []types.GatewayListItem{
+						{
+							GatewayId:         ptr.String("__GatewayId__"),
+							DownlinkFrequency: ptr.Int32(1),
+						},
+						{
+							GatewayId:         ptr.String("__GatewayId__"),
+							DownlinkFrequency: ptr.Int32(1),
+						},
+					},
+					TransmissionInterval: ptr.Int32(1),
+				},
+			},
+			Sidewalk: &types.SidewalkSendDataToDevice{
+				Seq:                      ptr.Int32(1),
+				MessageType:              types.MessageType("CUSTOM_COMMAND_ID_NOTIFY"),
+				AckModeRetryDurationSecs: ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3073,7 +4022,20 @@ func TestCheckResponseSnapshot_StartBulkAssociateWirelessDeviceWithMulticastGrou
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartBulkAssociateWirelessDeviceWithMulticastGroup(context.Background(), &StartBulkAssociateWirelessDeviceWithMulticastGroupInput{})
+	got, err := svc.StartBulkAssociateWirelessDeviceWithMulticastGroup(context.Background(), &StartBulkAssociateWirelessDeviceWithMulticastGroupInput{
+		Id:          ptr.String("__Id__"),
+		QueryString: ptr.String("__QueryString__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3092,7 +4054,20 @@ func TestCheckResponseSnapshot_StartBulkDisassociateWirelessDeviceFromMulticastG
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartBulkDisassociateWirelessDeviceFromMulticastGroup(context.Background(), &StartBulkDisassociateWirelessDeviceFromMulticastGroupInput{})
+	got, err := svc.StartBulkDisassociateWirelessDeviceFromMulticastGroup(context.Background(), &StartBulkDisassociateWirelessDeviceFromMulticastGroupInput{
+		Id:          ptr.String("__Id__"),
+		QueryString: ptr.String("__QueryString__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3111,7 +4086,12 @@ func TestCheckResponseSnapshot_StartFuotaTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartFuotaTask(context.Background(), &StartFuotaTaskInput{})
+	got, err := svc.StartFuotaTask(context.Background(), &StartFuotaTaskInput{
+		Id: ptr.String("__Id__"),
+		LoRaWAN: &types.LoRaWANStartFuotaTask{
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3130,7 +4110,16 @@ func TestCheckResponseSnapshot_StartMulticastGroupSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMulticastGroupSession(context.Background(), &StartMulticastGroupSessionInput{})
+	got, err := svc.StartMulticastGroupSession(context.Background(), &StartMulticastGroupSessionInput{
+		Id: ptr.String("__Id__"),
+		LoRaWAN: &types.LoRaWANMulticastSession{
+			DlDr:             ptr.Int32(1),
+			DlFreq:           ptr.Int32(1),
+			SessionStartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SessionTimeout:   ptr.Int32(1),
+			PingSlotPeriod:   ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3152,7 +4141,28 @@ func TestCheckResponseSnapshot_StartSingleWirelessDeviceImportTask(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartSingleWirelessDeviceImportTask(context.Background(), &StartSingleWirelessDeviceImportTaskInput{})
+	got, err := svc.StartSingleWirelessDeviceImportTask(context.Background(), &StartSingleWirelessDeviceImportTaskInput{
+		DestinationName:    ptr.String("__DestinationName__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		DeviceName:         ptr.String("__DeviceName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Positioning: types.PositioningConfigStatus("Enabled"),
+		Sidewalk: &types.SidewalkSingleStartImportInfo{
+			SidewalkManufacturingSn: ptr.String("__SidewalkManufacturingSn__"),
+			Positioning: &types.SidewalkPositioning{
+				DestinationName: ptr.String("__DestinationName__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3174,7 +4184,28 @@ func TestCheckResponseSnapshot_StartWirelessDeviceImportTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartWirelessDeviceImportTask(context.Background(), &StartWirelessDeviceImportTaskInput{})
+	got, err := svc.StartWirelessDeviceImportTask(context.Background(), &StartWirelessDeviceImportTaskInput{
+		DestinationName:    ptr.String("__DestinationName__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Positioning: types.PositioningConfigStatus("Enabled"),
+		Sidewalk: &types.SidewalkStartImportInfo{
+			DeviceCreationFile: ptr.String("__DeviceCreationFile__"),
+			Role:               ptr.String("__Role__"),
+			Positioning: &types.SidewalkPositioning{
+				DestinationName: ptr.String("__DestinationName__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3193,7 +4224,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3214,7 +4257,9 @@ func TestCheckResponseSnapshot_TestWirelessDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TestWirelessDevice(context.Background(), &TestWirelessDeviceInput{})
+	got, err := svc.TestWirelessDevice(context.Background(), &TestWirelessDeviceInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3233,7 +4278,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3252,7 +4303,13 @@ func TestCheckResponseSnapshot_UpdateDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDestination(context.Background(), &UpdateDestinationInput{})
+	got, err := svc.UpdateDestination(context.Background(), &UpdateDestinationInput{
+		Name:           ptr.String("__Name__"),
+		ExpressionType: types.ExpressionType("RuleName"),
+		Expression:     ptr.String("__Expression__"),
+		Description:    ptr.String("__Description__"),
+		RoleArn:        ptr.String("__RoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3271,7 +4328,33 @@ func TestCheckResponseSnapshot_UpdateEventConfigurationByResourceTypes(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEventConfigurationByResourceTypes(context.Background(), &UpdateEventConfigurationByResourceTypesInput{})
+	got, err := svc.UpdateEventConfigurationByResourceTypes(context.Background(), &UpdateEventConfigurationByResourceTypesInput{
+		DeviceRegistrationState: &types.DeviceRegistrationStateResourceTypeEventConfiguration{
+			Sidewalk: &types.SidewalkResourceTypeEventConfiguration{
+				WirelessDeviceEventTopic: types.EventNotificationTopicStatus("Enabled"),
+			},
+		},
+		Proximity: &types.ProximityResourceTypeEventConfiguration{
+			Sidewalk: &types.SidewalkResourceTypeEventConfiguration{
+				WirelessDeviceEventTopic: types.EventNotificationTopicStatus("Enabled"),
+			},
+		},
+		Join: &types.JoinResourceTypeEventConfiguration{
+			LoRaWAN: &types.LoRaWANJoinResourceTypeEventConfiguration{
+				WirelessDeviceEventTopic: types.EventNotificationTopicStatus("Enabled"),
+			},
+		},
+		ConnectionStatus: &types.ConnectionStatusResourceTypeEventConfiguration{
+			LoRaWAN: &types.LoRaWANConnectionStatusResourceTypeEventConfiguration{
+				WirelessGatewayEventTopic: types.EventNotificationTopicStatus("Enabled"),
+			},
+		},
+		MessageDeliveryStatus: &types.MessageDeliveryStatusResourceTypeEventConfiguration{
+			Sidewalk: &types.SidewalkResourceTypeEventConfiguration{
+				WirelessDeviceEventTopic: types.EventNotificationTopicStatus("Enabled"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3290,7 +4373,20 @@ func TestCheckResponseSnapshot_UpdateFuotaTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFuotaTask(context.Background(), &UpdateFuotaTaskInput{})
+	got, err := svc.UpdateFuotaTask(context.Background(), &UpdateFuotaTaskInput{
+		Id:          ptr.String("__Id__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		LoRaWAN: &types.LoRaWANFuotaTask{
+			RfRegion: types.SupportedRfRegion("EU868"),
+		},
+		FirmwareUpdateImage: ptr.String("__FirmwareUpdateImage__"),
+		FirmwareUpdateRole:  ptr.String("__FirmwareUpdateRole__"),
+		RedundancyPercent:   ptr.Int32(1),
+		FragmentSizeBytes:   ptr.Int32(1),
+		FragmentIntervalMS:  ptr.Int32(1),
+		Descriptor:          ptr.String("__Descriptor__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3309,7 +4405,99 @@ func TestCheckResponseSnapshot_UpdateLogLevelsByResourceTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLogLevelsByResourceTypes(context.Background(), &UpdateLogLevelsByResourceTypesInput{})
+	got, err := svc.UpdateLogLevelsByResourceTypes(context.Background(), &UpdateLogLevelsByResourceTypesInput{
+		DefaultLogLevel: types.LogLevel("INFO"),
+		FuotaTaskLogOptions: []types.FuotaTaskLogOption{
+			{
+				Type:     types.FuotaTaskType("LoRaWAN"),
+				LogLevel: types.LogLevel("INFO"),
+				Events: []types.FuotaTaskEventLogOption{
+					{
+						Event:    types.FuotaTaskEvent("Fuota"),
+						LogLevel: types.LogLevel("INFO"),
+					},
+					{
+						Event:    types.FuotaTaskEvent("Fuota"),
+						LogLevel: types.LogLevel("INFO"),
+					},
+				},
+			},
+			{
+				Type:     types.FuotaTaskType("LoRaWAN"),
+				LogLevel: types.LogLevel("INFO"),
+				Events: []types.FuotaTaskEventLogOption{
+					{
+						Event:    types.FuotaTaskEvent("Fuota"),
+						LogLevel: types.LogLevel("INFO"),
+					},
+					{
+						Event:    types.FuotaTaskEvent("Fuota"),
+						LogLevel: types.LogLevel("INFO"),
+					},
+				},
+			},
+		},
+		WirelessDeviceLogOptions: []types.WirelessDeviceLogOption{
+			{
+				Type:     types.WirelessDeviceType("Sidewalk"),
+				LogLevel: types.LogLevel("INFO"),
+				Events: []types.WirelessDeviceEventLogOption{
+					{
+						Event:    types.WirelessDeviceEvent("Join"),
+						LogLevel: types.LogLevel("INFO"),
+					},
+					{
+						Event:    types.WirelessDeviceEvent("Join"),
+						LogLevel: types.LogLevel("INFO"),
+					},
+				},
+			},
+			{
+				Type:     types.WirelessDeviceType("Sidewalk"),
+				LogLevel: types.LogLevel("INFO"),
+				Events: []types.WirelessDeviceEventLogOption{
+					{
+						Event:    types.WirelessDeviceEvent("Join"),
+						LogLevel: types.LogLevel("INFO"),
+					},
+					{
+						Event:    types.WirelessDeviceEvent("Join"),
+						LogLevel: types.LogLevel("INFO"),
+					},
+				},
+			},
+		},
+		WirelessGatewayLogOptions: []types.WirelessGatewayLogOption{
+			{
+				Type:     types.WirelessGatewayType("LoRaWAN"),
+				LogLevel: types.LogLevel("INFO"),
+				Events: []types.WirelessGatewayEventLogOption{
+					{
+						Event:    types.WirelessGatewayEvent("CUPS_Request"),
+						LogLevel: types.LogLevel("INFO"),
+					},
+					{
+						Event:    types.WirelessGatewayEvent("CUPS_Request"),
+						LogLevel: types.LogLevel("INFO"),
+					},
+				},
+			},
+			{
+				Type:     types.WirelessGatewayType("LoRaWAN"),
+				LogLevel: types.LogLevel("INFO"),
+				Events: []types.WirelessGatewayEventLogOption{
+					{
+						Event:    types.WirelessGatewayEvent("CUPS_Request"),
+						LogLevel: types.LogLevel("INFO"),
+					},
+					{
+						Event:    types.WirelessGatewayEvent("CUPS_Request"),
+						LogLevel: types.LogLevel("INFO"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3328,7 +4516,11 @@ func TestCheckResponseSnapshot_UpdateMetricConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMetricConfiguration(context.Background(), &UpdateMetricConfigurationInput{})
+	got, err := svc.UpdateMetricConfiguration(context.Background(), &UpdateMetricConfigurationInput{
+		SummaryMetric: &types.SummaryMetricConfiguration{
+			Status: types.SummaryMetricConfigurationStatus("Enabled"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3347,7 +4539,26 @@ func TestCheckResponseSnapshot_UpdateMulticastGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMulticastGroup(context.Background(), &UpdateMulticastGroupInput{})
+	got, err := svc.UpdateMulticastGroup(context.Background(), &UpdateMulticastGroupInput{
+		Id:          ptr.String("__Id__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		LoRaWAN: &types.LoRaWANMulticast{
+			RfRegion: types.SupportedRfRegion("EU868"),
+			DlClass:  types.DlClass("ClassB"),
+			ParticipatingGateways: &types.ParticipatingGatewaysMulticast{
+				GatewayList: []string{
+					"__Member__",
+					"__Member__",
+				},
+				TransmissionInterval: ptr.Int32(1),
+			},
+			DefaultSessionParameters: &types.DefaultSessionParametersMulticast{
+				DlDr:   ptr.Int32(1),
+				DlFreq: ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3366,7 +4577,39 @@ func TestCheckResponseSnapshot_UpdateNetworkAnalyzerConfiguration(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateNetworkAnalyzerConfiguration(context.Background(), &UpdateNetworkAnalyzerConfigurationInput{})
+	got, err := svc.UpdateNetworkAnalyzerConfiguration(context.Background(), &UpdateNetworkAnalyzerConfigurationInput{
+		ConfigurationName: ptr.String("__ConfigurationName__"),
+		TraceContent: &types.TraceContent{
+			WirelessDeviceFrameInfo: types.WirelessDeviceFrameInfo("ENABLED"),
+			LogLevel:                types.LogLevel("INFO"),
+			MulticastFrameInfo:      types.MulticastFrameInfo("ENABLED"),
+		},
+		WirelessDevicesToAdd: []string{
+			"__Member__",
+			"__Member__",
+		},
+		WirelessDevicesToRemove: []string{
+			"__Member__",
+			"__Member__",
+		},
+		WirelessGatewaysToAdd: []string{
+			"__Member__",
+			"__Member__",
+		},
+		WirelessGatewaysToRemove: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Description: ptr.String("__Description__"),
+		MulticastGroupsToAdd: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MulticastGroupsToRemove: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3385,7 +4628,13 @@ func TestCheckResponseSnapshot_UpdatePartnerAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePartnerAccount(context.Background(), &UpdatePartnerAccountInput{})
+	got, err := svc.UpdatePartnerAccount(context.Background(), &UpdatePartnerAccountInput{
+		Sidewalk: &types.SidewalkUpdateAccount{
+			AppServerPrivateKey: ptr.String("__AppServerPrivateKey__"),
+		},
+		PartnerAccountId: ptr.String("__PartnerAccountId__"),
+		PartnerType:      types.PartnerType("Sidewalk"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3404,7 +4653,14 @@ func TestCheckResponseSnapshot_UpdatePosition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePosition(context.Background(), &UpdatePositionInput{})
+	got, err := svc.UpdatePosition(context.Background(), &UpdatePositionInput{
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+		ResourceType:       types.PositionResourceType("WirelessDevice"),
+		Position: []float32{
+			1.0,
+			1.0,
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3423,7 +4679,41 @@ func TestCheckResponseSnapshot_UpdateResourceEventConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateResourceEventConfiguration(context.Background(), &UpdateResourceEventConfigurationInput{})
+	got, err := svc.UpdateResourceEventConfiguration(context.Background(), &UpdateResourceEventConfigurationInput{
+		Identifier:     ptr.String("__Identifier__"),
+		IdentifierType: types.IdentifierType("PartnerAccountId"),
+		PartnerType:    types.EventNotificationPartnerType("Sidewalk"),
+		DeviceRegistrationState: &types.DeviceRegistrationStateEventConfiguration{
+			Sidewalk: &types.SidewalkEventNotificationConfigurations{
+				AmazonIdEventTopic: types.EventNotificationTopicStatus("Enabled"),
+			},
+			WirelessDeviceIdEventTopic: types.EventNotificationTopicStatus("Enabled"),
+		},
+		Proximity: &types.ProximityEventConfiguration{
+			Sidewalk: &types.SidewalkEventNotificationConfigurations{
+				AmazonIdEventTopic: types.EventNotificationTopicStatus("Enabled"),
+			},
+			WirelessDeviceIdEventTopic: types.EventNotificationTopicStatus("Enabled"),
+		},
+		Join: &types.JoinEventConfiguration{
+			LoRaWAN: &types.LoRaWANJoinEventNotificationConfigurations{
+				DevEuiEventTopic: types.EventNotificationTopicStatus("Enabled"),
+			},
+			WirelessDeviceIdEventTopic: types.EventNotificationTopicStatus("Enabled"),
+		},
+		ConnectionStatus: &types.ConnectionStatusEventConfiguration{
+			LoRaWAN: &types.LoRaWANConnectionStatusEventNotificationConfigurations{
+				GatewayEuiEventTopic: types.EventNotificationTopicStatus("Enabled"),
+			},
+			WirelessGatewayIdEventTopic: types.EventNotificationTopicStatus("Enabled"),
+		},
+		MessageDeliveryStatus: &types.MessageDeliveryStatusEventConfiguration{
+			Sidewalk: &types.SidewalkEventNotificationConfigurations{
+				AmazonIdEventTopic: types.EventNotificationTopicStatus("Enabled"),
+			},
+			WirelessDeviceIdEventTopic: types.EventNotificationTopicStatus("Enabled"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3442,7 +4732,11 @@ func TestCheckResponseSnapshot_UpdateResourcePosition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateResourcePosition(context.Background(), &UpdateResourcePositionInput{})
+	got, err := svc.UpdateResourcePosition(context.Background(), &UpdateResourcePositionInput{
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+		ResourceType:       types.PositionResourceType("WirelessDevice"),
+		GeoJsonPayload:     []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3461,7 +4755,47 @@ func TestCheckResponseSnapshot_UpdateWirelessDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWirelessDevice(context.Background(), &UpdateWirelessDeviceInput{})
+	got, err := svc.UpdateWirelessDevice(context.Background(), &UpdateWirelessDeviceInput{
+		Id:              ptr.String("__Id__"),
+		DestinationName: ptr.String("__DestinationName__"),
+		Name:            ptr.String("__Name__"),
+		Description:     ptr.String("__Description__"),
+		LoRaWAN: &types.LoRaWANUpdateDevice{
+			DeviceProfileId:  ptr.String("__DeviceProfileId__"),
+			ServiceProfileId: ptr.String("__ServiceProfileId__"),
+			AbpV1_1: &types.UpdateAbpV1_1{
+				FCntStart: ptr.Int32(1),
+			},
+			AbpV1_0_x: &types.UpdateAbpV1_0_x{
+				FCntStart: ptr.Int32(1),
+			},
+			FPorts: &types.UpdateFPorts{
+				Positioning: &types.Positioning{
+					ClockSync: ptr.Int32(1),
+					Stream:    ptr.Int32(1),
+					Gnss:      ptr.Int32(1),
+				},
+				Applications: []types.ApplicationConfig{
+					{
+						FPort:           ptr.Int32(1),
+						Type:            types.ApplicationConfigType("SemtechGeolocation"),
+						DestinationName: ptr.String("__DestinationName__"),
+					},
+					{
+						FPort:           ptr.Int32(1),
+						Type:            types.ApplicationConfigType("SemtechGeolocation"),
+						DestinationName: ptr.String("__DestinationName__"),
+					},
+				},
+			},
+		},
+		Positioning: types.PositioningConfigStatus("Enabled"),
+		Sidewalk: &types.SidewalkUpdateWirelessDevice{
+			Positioning: &types.SidewalkPositioning{
+				DestinationName: ptr.String("__DestinationName__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3480,7 +4814,12 @@ func TestCheckResponseSnapshot_UpdateWirelessDeviceImportTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWirelessDeviceImportTask(context.Background(), &UpdateWirelessDeviceImportTaskInput{})
+	got, err := svc.UpdateWirelessDeviceImportTask(context.Background(), &UpdateWirelessDeviceImportTaskInput{
+		Id: ptr.String("__Id__"),
+		Sidewalk: &types.SidewalkUpdateImportInfo{
+			DeviceCreationFile: ptr.String("__DeviceCreationFile__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3499,7 +4838,26 @@ func TestCheckResponseSnapshot_UpdateWirelessGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWirelessGateway(context.Background(), &UpdateWirelessGatewayInput{})
+	got, err := svc.UpdateWirelessGateway(context.Background(), &UpdateWirelessGatewayInput{
+		Id:          ptr.String("__Id__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		JoinEuiFilters: [][]string{
+			{
+				"__Member__",
+				"__Member__",
+			},
+			{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		NetIdFilters: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxEirp: ptr.Float32(1.0),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3520,7 +4878,23 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAwsAccountWithPartnerAccount(context.Background(), &AssociateAwsAccountWithPartnerAccountInput{})
+	_, opErr := svc.AssociateAwsAccountWithPartnerAccount(context.Background(), &AssociateAwsAccountWithPartnerAccountInput{
+		Sidewalk: &types.SidewalkAccountInfo{
+			AmazonId:            ptr.String("__AmazonId__"),
+			AppServerPrivateKey: ptr.String("__AppServerPrivateKey__"),
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3547,7 +4921,23 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAwsAccountWithPartnerAccount(context.Background(), &AssociateAwsAccountWithPartnerAccountInput{})
+	_, opErr := svc.AssociateAwsAccountWithPartnerAccount(context.Background(), &AssociateAwsAccountWithPartnerAccountInput{
+		Sidewalk: &types.SidewalkAccountInfo{
+			AmazonId:            ptr.String("__AmazonId__"),
+			AppServerPrivateKey: ptr.String("__AppServerPrivateKey__"),
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3572,7 +4962,23 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAwsAccountWithPartnerAccount(context.Background(), &AssociateAwsAccountWithPartnerAccountInput{})
+	_, opErr := svc.AssociateAwsAccountWithPartnerAccount(context.Background(), &AssociateAwsAccountWithPartnerAccountInput{
+		Sidewalk: &types.SidewalkAccountInfo{
+			AmazonId:            ptr.String("__AmazonId__"),
+			AppServerPrivateKey: ptr.String("__AppServerPrivateKey__"),
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3599,7 +5005,23 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAwsAccountWithPartnerAccount(context.Background(), &AssociateAwsAccountWithPartnerAccountInput{})
+	_, opErr := svc.AssociateAwsAccountWithPartnerAccount(context.Background(), &AssociateAwsAccountWithPartnerAccountInput{
+		Sidewalk: &types.SidewalkAccountInfo{
+			AmazonId:            ptr.String("__AmazonId__"),
+			AppServerPrivateKey: ptr.String("__AppServerPrivateKey__"),
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3624,7 +5046,23 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAwsAccountWithPartnerAccount(context.Background(), &AssociateAwsAccountWithPartnerAccountInput{})
+	_, opErr := svc.AssociateAwsAccountWithPartnerAccount(context.Background(), &AssociateAwsAccountWithPartnerAccountInput{
+		Sidewalk: &types.SidewalkAccountInfo{
+			AmazonId:            ptr.String("__AmazonId__"),
+			AppServerPrivateKey: ptr.String("__AppServerPrivateKey__"),
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3650,7 +5088,19 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3675,7 +5125,23 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateAwsAccountWithPartnerAccount(context.Background(), &AssociateAwsAccountWithPartnerAccountInput{})
+	_, opErr := svc.AssociateAwsAccountWithPartnerAccount(context.Background(), &AssociateAwsAccountWithPartnerAccountInput{
+		Sidewalk: &types.SidewalkAccountInfo{
+			AmazonId:            ptr.String("__AmazonId__"),
+			AppServerPrivateKey: ptr.String("__AppServerPrivateKey__"),
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","revisions":[{"creationTime":"2000-01-01T00:00:00Z","description":"__Description__","revision":1},{"creationTime":"2000-01-01T00:00:00Z","description":"__Description__","revision":1}]}

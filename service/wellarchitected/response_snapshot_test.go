@@ -117,7 +117,13 @@ func TestCheckResponseSnapshot_AssociateLenses(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateLenses(context.Background(), &AssociateLensesInput{})
+	got, err := svc.AssociateLenses(context.Background(), &AssociateLensesInput{
+		WorkloadId: ptr.String("__WorkloadId__"),
+		LensAliases: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -136,7 +142,13 @@ func TestCheckResponseSnapshot_AssociateProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateProfiles(context.Background(), &AssociateProfilesInput{})
+	got, err := svc.AssociateProfiles(context.Background(), &AssociateProfilesInput{
+		WorkloadId: ptr.String("__WorkloadId__"),
+		ProfileArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -157,7 +169,11 @@ func TestCheckResponseSnapshot_CreateLensShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLensShare(context.Background(), &CreateLensShareInput{})
+	got, err := svc.CreateLensShare(context.Background(), &CreateLensShareInput{
+		LensAlias:          ptr.String("__LensAlias__"),
+		SharedWith:         ptr.String("__SharedWith__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -179,7 +195,12 @@ func TestCheckResponseSnapshot_CreateLensVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLensVersion(context.Background(), &CreateLensVersionInput{})
+	got, err := svc.CreateLensVersion(context.Background(), &CreateLensVersionInput{
+		LensAlias:          ptr.String("__LensAlias__"),
+		LensVersion:        ptr.String("__LensVersion__"),
+		IsMajorVersion:     ptr.Bool(true),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -201,7 +222,11 @@ func TestCheckResponseSnapshot_CreateMilestone(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMilestone(context.Background(), &CreateMilestoneInput{})
+	got, err := svc.CreateMilestone(context.Background(), &CreateMilestoneInput{
+		WorkloadId:         ptr.String("__WorkloadId__"),
+		MilestoneName:      ptr.String("__MilestoneName__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -223,7 +248,30 @@ func TestCheckResponseSnapshot_CreateProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProfile(context.Background(), &CreateProfileInput{})
+	got, err := svc.CreateProfile(context.Background(), &CreateProfileInput{
+		ProfileName:        ptr.String("__ProfileName__"),
+		ProfileDescription: ptr.String("__ProfileDescription__"),
+		ProfileQuestions: []types.ProfileQuestionUpdate{
+			{
+				QuestionId: ptr.String("__QuestionId__"),
+				SelectedChoiceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				QuestionId: ptr.String("__QuestionId__"),
+				SelectedChoiceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -245,7 +293,11 @@ func TestCheckResponseSnapshot_CreateProfileShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProfileShare(context.Background(), &CreateProfileShareInput{})
+	got, err := svc.CreateProfileShare(context.Background(), &CreateProfileShareInput{
+		ProfileArn:         ptr.String("__ProfileArn__"),
+		SharedWith:         ptr.String("__SharedWith__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -266,7 +318,19 @@ func TestCheckResponseSnapshot_CreateReviewTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateReviewTemplate(context.Background(), &CreateReviewTemplateInput{})
+	got, err := svc.CreateReviewTemplate(context.Background(), &CreateReviewTemplateInput{
+		TemplateName: ptr.String("__TemplateName__"),
+		Description:  ptr.String("__Description__"),
+		Lenses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Notes: ptr.String("__Notes__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -288,7 +352,11 @@ func TestCheckResponseSnapshot_CreateTemplateShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTemplateShare(context.Background(), &CreateTemplateShareInput{})
+	got, err := svc.CreateTemplateShare(context.Background(), &CreateTemplateShareInput{
+		TemplateArn:        ptr.String("__TemplateArn__"),
+		SharedWith:         ptr.String("__SharedWith__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -310,7 +378,64 @@ func TestCheckResponseSnapshot_CreateWorkload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWorkload(context.Background(), &CreateWorkloadInput{})
+	got, err := svc.CreateWorkload(context.Background(), &CreateWorkloadInput{
+		WorkloadName: ptr.String("__WorkloadName__"),
+		Description:  ptr.String("__Description__"),
+		Environment:  types.WorkloadEnvironment("PRODUCTION"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AwsRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NonAwsRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PillarPriorities: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ArchitecturalDesign: ptr.String("__ArchitecturalDesign__"),
+		ReviewOwner:         ptr.String("__ReviewOwner__"),
+		IndustryType:        ptr.String("__IndustryType__"),
+		Industry:            ptr.String("__Industry__"),
+		Lenses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Notes:              ptr.String("__Notes__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		DiscoveryConfig: &types.WorkloadDiscoveryConfig{
+			TrustedAdvisorIntegrationStatus: types.TrustedAdvisorIntegrationStatus("ENABLED"),
+			WorkloadResourceDefinition: []types.DefinitionType{
+				types.DefinitionType("WORKLOAD_METADATA"),
+				types.DefinitionType("WORKLOAD_METADATA"),
+			},
+		},
+		Applications: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ProfileArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ReviewTemplateArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		JiraConfiguration: &types.WorkloadJiraConfigurationInput{
+			IssueManagementStatus: types.WorkloadIssueManagementStatus("ENABLED"),
+			IssueManagementType:   types.IssueManagementType("AUTO"),
+			JiraProjectKey:        ptr.String("__JiraProjectKey__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -332,7 +457,12 @@ func TestCheckResponseSnapshot_CreateWorkloadShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWorkloadShare(context.Background(), &CreateWorkloadShareInput{})
+	got, err := svc.CreateWorkloadShare(context.Background(), &CreateWorkloadShareInput{
+		WorkloadId:         ptr.String("__WorkloadId__"),
+		SharedWith:         ptr.String("__SharedWith__"),
+		PermissionType:     types.PermissionType("READONLY"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -351,7 +481,11 @@ func TestCheckResponseSnapshot_DeleteLens(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLens(context.Background(), &DeleteLensInput{})
+	got, err := svc.DeleteLens(context.Background(), &DeleteLensInput{
+		LensAlias:          ptr.String("__LensAlias__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		LensStatus:         types.LensStatusType("ALL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -370,7 +504,11 @@ func TestCheckResponseSnapshot_DeleteLensShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLensShare(context.Background(), &DeleteLensShareInput{})
+	got, err := svc.DeleteLensShare(context.Background(), &DeleteLensShareInput{
+		ShareId:            ptr.String("__ShareId__"),
+		LensAlias:          ptr.String("__LensAlias__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -389,7 +527,10 @@ func TestCheckResponseSnapshot_DeleteProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProfile(context.Background(), &DeleteProfileInput{})
+	got, err := svc.DeleteProfile(context.Background(), &DeleteProfileInput{
+		ProfileArn:         ptr.String("__ProfileArn__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -408,7 +549,11 @@ func TestCheckResponseSnapshot_DeleteProfileShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProfileShare(context.Background(), &DeleteProfileShareInput{})
+	got, err := svc.DeleteProfileShare(context.Background(), &DeleteProfileShareInput{
+		ShareId:            ptr.String("__ShareId__"),
+		ProfileArn:         ptr.String("__ProfileArn__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -427,7 +572,10 @@ func TestCheckResponseSnapshot_DeleteReviewTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteReviewTemplate(context.Background(), &DeleteReviewTemplateInput{})
+	got, err := svc.DeleteReviewTemplate(context.Background(), &DeleteReviewTemplateInput{
+		TemplateArn:        ptr.String("__TemplateArn__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -446,7 +594,11 @@ func TestCheckResponseSnapshot_DeleteTemplateShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTemplateShare(context.Background(), &DeleteTemplateShareInput{})
+	got, err := svc.DeleteTemplateShare(context.Background(), &DeleteTemplateShareInput{
+		ShareId:            ptr.String("__ShareId__"),
+		TemplateArn:        ptr.String("__TemplateArn__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -465,7 +617,10 @@ func TestCheckResponseSnapshot_DeleteWorkload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorkload(context.Background(), &DeleteWorkloadInput{})
+	got, err := svc.DeleteWorkload(context.Background(), &DeleteWorkloadInput{
+		WorkloadId:         ptr.String("__WorkloadId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -484,7 +639,11 @@ func TestCheckResponseSnapshot_DeleteWorkloadShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorkloadShare(context.Background(), &DeleteWorkloadShareInput{})
+	got, err := svc.DeleteWorkloadShare(context.Background(), &DeleteWorkloadShareInput{
+		ShareId:            ptr.String("__ShareId__"),
+		WorkloadId:         ptr.String("__WorkloadId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -503,7 +662,13 @@ func TestCheckResponseSnapshot_DisassociateLenses(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateLenses(context.Background(), &DisassociateLensesInput{})
+	got, err := svc.DisassociateLenses(context.Background(), &DisassociateLensesInput{
+		WorkloadId: ptr.String("__WorkloadId__"),
+		LensAliases: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -522,7 +687,13 @@ func TestCheckResponseSnapshot_DisassociateProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateProfiles(context.Background(), &DisassociateProfilesInput{})
+	got, err := svc.DisassociateProfiles(context.Background(), &DisassociateProfilesInput{
+		WorkloadId: ptr.String("__WorkloadId__"),
+		ProfileArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -543,7 +714,10 @@ func TestCheckResponseSnapshot_ExportLens(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExportLens(context.Background(), &ExportLensInput{})
+	got, err := svc.ExportLens(context.Background(), &ExportLensInput{
+		LensAlias:   ptr.String("__LensAlias__"),
+		LensVersion: ptr.String("__LensVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -686,7 +860,12 @@ func TestCheckResponseSnapshot_GetAnswer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAnswer(context.Background(), &GetAnswerInput{})
+	got, err := svc.GetAnswer(context.Background(), &GetAnswerInput{
+		WorkloadId:      ptr.String("__WorkloadId__"),
+		LensAlias:       ptr.String("__LensAlias__"),
+		QuestionId:      ptr.String("__QuestionId__"),
+		MilestoneNumber: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1056,7 +1235,12 @@ func TestCheckResponseSnapshot_GetConsolidatedReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConsolidatedReport(context.Background(), &GetConsolidatedReportInput{})
+	got, err := svc.GetConsolidatedReport(context.Background(), &GetConsolidatedReportInput{
+		Format:                 types.ReportFormat("PDF"),
+		IncludeSharedResources: ptr.Bool(true),
+		NextToken:              ptr.String("__NextToken__"),
+		MaxResults:             ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1117,7 +1301,10 @@ func TestCheckResponseSnapshot_GetLens(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLens(context.Background(), &GetLensInput{})
+	got, err := svc.GetLens(context.Background(), &GetLensInput{
+		LensAlias:   ptr.String("__LensAlias__"),
+		LensVersion: ptr.String("__LensVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1207,7 +1394,11 @@ func TestCheckResponseSnapshot_GetLensReview(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLensReview(context.Background(), &GetLensReviewInput{})
+	got, err := svc.GetLensReview(context.Background(), &GetLensReviewInput{
+		WorkloadId:      ptr.String("__WorkloadId__"),
+		LensAlias:       ptr.String("__LensAlias__"),
+		MilestoneNumber: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1234,7 +1425,11 @@ func TestCheckResponseSnapshot_GetLensReviewReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLensReviewReport(context.Background(), &GetLensReviewReportInput{})
+	got, err := svc.GetLensReviewReport(context.Background(), &GetLensReviewReportInput{
+		WorkloadId:      ptr.String("__WorkloadId__"),
+		LensAlias:       ptr.String("__LensAlias__"),
+		MilestoneNumber: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1297,7 +1492,11 @@ func TestCheckResponseSnapshot_GetLensVersionDifference(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLensVersionDifference(context.Background(), &GetLensVersionDifferenceInput{})
+	got, err := svc.GetLensVersionDifference(context.Background(), &GetLensVersionDifferenceInput{
+		LensAlias:         ptr.String("__LensAlias__"),
+		BaseLensVersion:   ptr.String("__BaseLensVersion__"),
+		TargetLensVersion: ptr.String("__TargetLensVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1397,7 +1596,10 @@ func TestCheckResponseSnapshot_GetMilestone(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMilestone(context.Background(), &GetMilestoneInput{})
+	got, err := svc.GetMilestone(context.Background(), &GetMilestoneInput{
+		WorkloadId:      ptr.String("__WorkloadId__"),
+		MilestoneNumber: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1478,7 +1680,10 @@ func TestCheckResponseSnapshot_GetProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProfile(context.Background(), &GetProfileInput{})
+	got, err := svc.GetProfile(context.Background(), &GetProfileInput{
+		ProfileArn:     ptr.String("__ProfileArn__"),
+		ProfileVersion: ptr.String("__ProfileVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1583,7 +1788,9 @@ func TestCheckResponseSnapshot_GetReviewTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetReviewTemplate(context.Background(), &GetReviewTemplateInput{})
+	got, err := svc.GetReviewTemplate(context.Background(), &GetReviewTemplateInput{
+		TemplateArn: ptr.String("__TemplateArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1720,7 +1927,11 @@ func TestCheckResponseSnapshot_GetReviewTemplateAnswer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetReviewTemplateAnswer(context.Background(), &GetReviewTemplateAnswerInput{})
+	got, err := svc.GetReviewTemplateAnswer(context.Background(), &GetReviewTemplateAnswerInput{
+		TemplateArn: ptr.String("__TemplateArn__"),
+		LensAlias:   ptr.String("__LensAlias__"),
+		QuestionId:  ptr.String("__QuestionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1772,7 +1983,10 @@ func TestCheckResponseSnapshot_GetReviewTemplateLensReview(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetReviewTemplateLensReview(context.Background(), &GetReviewTemplateLensReviewInput{})
+	got, err := svc.GetReviewTemplateLensReview(context.Background(), &GetReviewTemplateLensReviewInput{
+		TemplateArn: ptr.String("__TemplateArn__"),
+		LensAlias:   ptr.String("__LensAlias__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1866,7 +2080,9 @@ func TestCheckResponseSnapshot_GetWorkload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorkload(context.Background(), &GetWorkloadInput{})
+	got, err := svc.GetWorkload(context.Background(), &GetWorkloadInput{
+		WorkloadId: ptr.String("__WorkloadId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1888,7 +2104,14 @@ func TestCheckResponseSnapshot_ImportLens(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportLens(context.Background(), &ImportLensInput{})
+	got, err := svc.ImportLens(context.Background(), &ImportLensInput{
+		LensAlias:          ptr.String("__LensAlias__"),
+		JSONString:         ptr.String("__JSONString__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2141,7 +2364,15 @@ func TestCheckResponseSnapshot_ListAnswers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAnswers(context.Background(), &ListAnswersInput{})
+	got, err := svc.ListAnswers(context.Background(), &ListAnswersInput{
+		WorkloadId:       ptr.String("__WorkloadId__"),
+		LensAlias:        ptr.String("__LensAlias__"),
+		PillarId:         ptr.String("__PillarId__"),
+		MilestoneNumber:  ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+		QuestionPriority: types.QuestionPriority("PRIORITIZED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2194,7 +2425,15 @@ func TestCheckResponseSnapshot_ListCheckDetails(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCheckDetails(context.Background(), &ListCheckDetailsInput{})
+	got, err := svc.ListCheckDetails(context.Background(), &ListCheckDetailsInput{
+		WorkloadId: ptr.String("__WorkloadId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		LensArn:    ptr.String("__LensArn__"),
+		PillarId:   ptr.String("__PillarId__"),
+		QuestionId: ptr.String("__QuestionId__"),
+		ChoiceId:   ptr.String("__ChoiceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2247,7 +2486,15 @@ func TestCheckResponseSnapshot_ListCheckSummaries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCheckSummaries(context.Background(), &ListCheckSummariesInput{})
+	got, err := svc.ListCheckSummaries(context.Background(), &ListCheckSummariesInput{
+		WorkloadId: ptr.String("__WorkloadId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		LensArn:    ptr.String("__LensArn__"),
+		PillarId:   ptr.String("__PillarId__"),
+		QuestionId: ptr.String("__QuestionId__"),
+		ChoiceId:   ptr.String("__ChoiceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2320,7 +2567,15 @@ func TestCheckResponseSnapshot_ListLensReviewImprovements(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLensReviewImprovements(context.Background(), &ListLensReviewImprovementsInput{})
+	got, err := svc.ListLensReviewImprovements(context.Background(), &ListLensReviewImprovementsInput{
+		WorkloadId:       ptr.String("__WorkloadId__"),
+		LensAlias:        ptr.String("__LensAlias__"),
+		PillarId:         ptr.String("__PillarId__"),
+		MilestoneNumber:  ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+		QuestionPriority: types.QuestionPriority("PRIORITIZED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2393,7 +2648,12 @@ func TestCheckResponseSnapshot_ListLensReviews(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLensReviews(context.Background(), &ListLensReviewsInput{})
+	got, err := svc.ListLensReviews(context.Background(), &ListLensReviewsInput{
+		WorkloadId:      ptr.String("__WorkloadId__"),
+		MilestoneNumber: ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2428,7 +2688,13 @@ func TestCheckResponseSnapshot_ListLensShares(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLensShares(context.Background(), &ListLensSharesInput{})
+	got, err := svc.ListLensShares(context.Background(), &ListLensSharesInput{
+		LensAlias:        ptr.String("__LensAlias__"),
+		SharedWithPrefix: ptr.String("__SharedWithPrefix__"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+		Status:           types.ShareStatus("ACCEPTED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2475,7 +2741,13 @@ func TestCheckResponseSnapshot_ListLenses(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLenses(context.Background(), &ListLensesInput{})
+	got, err := svc.ListLenses(context.Background(), &ListLensesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		LensType:   types.LensType("AWS_OFFICIAL"),
+		LensStatus: types.LensStatusType("ALL"),
+		LensName:   ptr.String("__LensName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2565,7 +2837,11 @@ func TestCheckResponseSnapshot_ListMilestones(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMilestones(context.Background(), &ListMilestonesInput{})
+	got, err := svc.ListMilestones(context.Background(), &ListMilestonesInput{
+		WorkloadId: ptr.String("__WorkloadId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2614,7 +2890,12 @@ func TestCheckResponseSnapshot_ListNotifications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListNotifications(context.Background(), &ListNotificationsInput{})
+	got, err := svc.ListNotifications(context.Background(), &ListNotificationsInput{
+		WorkloadId:  ptr.String("__WorkloadId__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2655,7 +2936,11 @@ func TestCheckResponseSnapshot_ListProfileNotifications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProfileNotifications(context.Background(), &ListProfileNotificationsInput{})
+	got, err := svc.ListProfileNotifications(context.Background(), &ListProfileNotificationsInput{
+		WorkloadId: ptr.String("__WorkloadId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2690,7 +2975,13 @@ func TestCheckResponseSnapshot_ListProfileShares(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProfileShares(context.Background(), &ListProfileSharesInput{})
+	got, err := svc.ListProfileShares(context.Background(), &ListProfileSharesInput{
+		ProfileArn:       ptr.String("__ProfileArn__"),
+		SharedWithPrefix: ptr.String("__SharedWithPrefix__"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+		Status:           types.ShareStatus("ACCEPTED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2731,7 +3022,12 @@ func TestCheckResponseSnapshot_ListProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProfiles(context.Background(), &ListProfilesInput{})
+	got, err := svc.ListProfiles(context.Background(), &ListProfilesInput{
+		ProfileNamePrefix: ptr.String("__ProfileNamePrefix__"),
+		ProfileOwnerType:  types.ProfileOwnerType("SELF"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2974,7 +3270,13 @@ func TestCheckResponseSnapshot_ListReviewTemplateAnswers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReviewTemplateAnswers(context.Background(), &ListReviewTemplateAnswersInput{})
+	got, err := svc.ListReviewTemplateAnswers(context.Background(), &ListReviewTemplateAnswersInput{
+		TemplateArn: ptr.String("__TemplateArn__"),
+		LensAlias:   ptr.String("__LensAlias__"),
+		PillarId:    ptr.String("__PillarId__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3021,7 +3323,10 @@ func TestCheckResponseSnapshot_ListReviewTemplates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReviewTemplates(context.Background(), &ListReviewTemplatesInput{})
+	got, err := svc.ListReviewTemplates(context.Background(), &ListReviewTemplatesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3074,7 +3379,15 @@ func TestCheckResponseSnapshot_ListShareInvitations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListShareInvitations(context.Background(), &ListShareInvitationsInput{})
+	got, err := svc.ListShareInvitations(context.Background(), &ListShareInvitationsInput{
+		WorkloadNamePrefix: ptr.String("__WorkloadNamePrefix__"),
+		LensNamePrefix:     ptr.String("__LensNamePrefix__"),
+		ShareResourceType:  types.ShareResourceType("WORKLOAD"),
+		NextToken:          ptr.String("__NextToken__"),
+		MaxResults:         ptr.Int32(1),
+		ProfileNamePrefix:  ptr.String("__ProfileNamePrefix__"),
+		TemplateNamePrefix: ptr.String("__TemplateNamePrefix__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3097,7 +3410,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		WorkloadArn: ptr.String("__WorkloadArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3133,7 +3448,13 @@ func TestCheckResponseSnapshot_ListTemplateShares(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTemplateShares(context.Background(), &ListTemplateSharesInput{})
+	got, err := svc.ListTemplateShares(context.Background(), &ListTemplateSharesInput{
+		TemplateArn:      ptr.String("__TemplateArn__"),
+		SharedWithPrefix: ptr.String("__SharedWithPrefix__"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+		Status:           types.ShareStatus("ACCEPTED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3171,7 +3492,13 @@ func TestCheckResponseSnapshot_ListWorkloadShares(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkloadShares(context.Background(), &ListWorkloadSharesInput{})
+	got, err := svc.ListWorkloadShares(context.Background(), &ListWorkloadSharesInput{
+		WorkloadId:       ptr.String("__WorkloadId__"),
+		SharedWithPrefix: ptr.String("__SharedWithPrefix__"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+		Status:           types.ShareStatus("ACCEPTED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3250,7 +3577,11 @@ func TestCheckResponseSnapshot_ListWorkloads(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkloads(context.Background(), &ListWorkloadsInput{})
+	got, err := svc.ListWorkloads(context.Background(), &ListWorkloadsInput{
+		WorkloadNamePrefix: ptr.String("__WorkloadNamePrefix__"),
+		NextToken:          ptr.String("__NextToken__"),
+		MaxResults:         ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3269,7 +3600,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		WorkloadArn: ptr.String("__WorkloadArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3288,7 +3624,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		WorkloadArn: ptr.String("__WorkloadArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3430,7 +3772,25 @@ func TestCheckResponseSnapshot_UpdateAnswer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAnswer(context.Background(), &UpdateAnswerInput{})
+	got, err := svc.UpdateAnswer(context.Background(), &UpdateAnswerInput{
+		WorkloadId: ptr.String("__WorkloadId__"),
+		LensAlias:  ptr.String("__LensAlias__"),
+		QuestionId: ptr.String("__QuestionId__"),
+		SelectedChoices: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ChoiceUpdates: map[string]types.ChoiceUpdate{
+			"key0": {
+				Status: types.ChoiceStatus("SELECTED"),
+				Reason: types.ChoiceReason("OUT_OF_SCOPE"),
+				Notes:  ptr.String("__Notes__"),
+			},
+		},
+		Notes:        ptr.String("__Notes__"),
+		IsApplicable: ptr.Bool(true),
+		Reason:       types.AnswerReason("OUT_OF_SCOPE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3449,7 +3809,16 @@ func TestCheckResponseSnapshot_UpdateGlobalSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGlobalSettings(context.Background(), &UpdateGlobalSettingsInput{})
+	got, err := svc.UpdateGlobalSettings(context.Background(), &UpdateGlobalSettingsInput{
+		OrganizationSharingStatus:  types.OrganizationSharingStatus("ENABLED"),
+		DiscoveryIntegrationStatus: types.DiscoveryIntegrationStatus("ENABLED"),
+		JiraConfiguration: &types.AccountJiraConfigurationInput{
+			IssueManagementStatus: types.AccountJiraIssueManagementStatus("ENABLED"),
+			IssueManagementType:   types.IssueManagementType("AUTO"),
+			JiraProjectKey:        ptr.String("__JiraProjectKey__"),
+			IntegrationStatus:     types.IntegrationStatusInput("NOT_CONFIGURED"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3468,7 +3837,11 @@ func TestCheckResponseSnapshot_UpdateIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIntegration(context.Background(), &UpdateIntegrationInput{})
+	got, err := svc.UpdateIntegration(context.Background(), &UpdateIntegrationInput{
+		WorkloadId:         ptr.String("__WorkloadId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		IntegratingService: types.IntegratingService("JIRA"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3557,7 +3930,32 @@ func TestCheckResponseSnapshot_UpdateLensReview(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLensReview(context.Background(), &UpdateLensReviewInput{})
+	got, err := svc.UpdateLensReview(context.Background(), &UpdateLensReviewInput{
+		WorkloadId: ptr.String("__WorkloadId__"),
+		LensAlias:  ptr.String("__LensAlias__"),
+		LensNotes:  ptr.String("__LensNotes__"),
+		PillarNotes: map[string]string{
+			"key0": "__Value__",
+		},
+		JiraConfiguration: &types.JiraSelectedQuestionConfiguration{
+			SelectedPillars: []types.SelectedPillar{
+				{
+					PillarId: ptr.String("__PillarId__"),
+					SelectedQuestionIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					PillarId: ptr.String("__PillarId__"),
+					SelectedQuestionIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3638,7 +4036,26 @@ func TestCheckResponseSnapshot_UpdateProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProfile(context.Background(), &UpdateProfileInput{})
+	got, err := svc.UpdateProfile(context.Background(), &UpdateProfileInput{
+		ProfileArn:         ptr.String("__ProfileArn__"),
+		ProfileDescription: ptr.String("__ProfileDescription__"),
+		ProfileQuestions: []types.ProfileQuestionUpdate{
+			{
+				QuestionId: ptr.String("__QuestionId__"),
+				SelectedChoiceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				QuestionId: ptr.String("__QuestionId__"),
+				SelectedChoiceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3678,7 +4095,20 @@ func TestCheckResponseSnapshot_UpdateReviewTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateReviewTemplate(context.Background(), &UpdateReviewTemplateInput{})
+	got, err := svc.UpdateReviewTemplate(context.Background(), &UpdateReviewTemplateInput{
+		TemplateArn:  ptr.String("__TemplateArn__"),
+		TemplateName: ptr.String("__TemplateName__"),
+		Description:  ptr.String("__Description__"),
+		Notes:        ptr.String("__Notes__"),
+		LensesToAssociate: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LensesToDisassociate: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3815,7 +4245,25 @@ func TestCheckResponseSnapshot_UpdateReviewTemplateAnswer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateReviewTemplateAnswer(context.Background(), &UpdateReviewTemplateAnswerInput{})
+	got, err := svc.UpdateReviewTemplateAnswer(context.Background(), &UpdateReviewTemplateAnswerInput{
+		TemplateArn: ptr.String("__TemplateArn__"),
+		LensAlias:   ptr.String("__LensAlias__"),
+		QuestionId:  ptr.String("__QuestionId__"),
+		SelectedChoices: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ChoiceUpdates: map[string]types.ChoiceUpdate{
+			"key0": {
+				Status: types.ChoiceStatus("SELECTED"),
+				Reason: types.ChoiceReason("OUT_OF_SCOPE"),
+				Notes:  ptr.String("__Notes__"),
+			},
+		},
+		Notes:        ptr.String("__Notes__"),
+		IsApplicable: ptr.Bool(true),
+		Reason:       types.AnswerReason("OUT_OF_SCOPE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3867,7 +4315,14 @@ func TestCheckResponseSnapshot_UpdateReviewTemplateLensReview(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateReviewTemplateLensReview(context.Background(), &UpdateReviewTemplateLensReviewInput{})
+	got, err := svc.UpdateReviewTemplateLensReview(context.Background(), &UpdateReviewTemplateLensReviewInput{
+		TemplateArn: ptr.String("__TemplateArn__"),
+		LensAlias:   ptr.String("__LensAlias__"),
+		LensNotes:   ptr.String("__LensNotes__"),
+		PillarNotes: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3896,7 +4351,10 @@ func TestCheckResponseSnapshot_UpdateShareInvitation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateShareInvitation(context.Background(), &UpdateShareInvitationInput{})
+	got, err := svc.UpdateShareInvitation(context.Background(), &UpdateShareInvitationInput{
+		ShareInvitationId:     ptr.String("__ShareInvitationId__"),
+		ShareInvitationAction: types.ShareInvitationAction("ACCEPT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3990,7 +4448,51 @@ func TestCheckResponseSnapshot_UpdateWorkload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWorkload(context.Background(), &UpdateWorkloadInput{})
+	got, err := svc.UpdateWorkload(context.Background(), &UpdateWorkloadInput{
+		WorkloadId:   ptr.String("__WorkloadId__"),
+		WorkloadName: ptr.String("__WorkloadName__"),
+		Description:  ptr.String("__Description__"),
+		Environment:  types.WorkloadEnvironment("PRODUCTION"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AwsRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NonAwsRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PillarPriorities: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ArchitecturalDesign:             ptr.String("__ArchitecturalDesign__"),
+		ReviewOwner:                     ptr.String("__ReviewOwner__"),
+		IsReviewOwnerUpdateAcknowledged: ptr.Bool(true),
+		IndustryType:                    ptr.String("__IndustryType__"),
+		Industry:                        ptr.String("__Industry__"),
+		Notes:                           ptr.String("__Notes__"),
+		ImprovementStatus:               types.WorkloadImprovementStatus("NOT_APPLICABLE"),
+		DiscoveryConfig: &types.WorkloadDiscoveryConfig{
+			TrustedAdvisorIntegrationStatus: types.TrustedAdvisorIntegrationStatus("ENABLED"),
+			WorkloadResourceDefinition: []types.DefinitionType{
+				types.DefinitionType("WORKLOAD_METADATA"),
+				types.DefinitionType("WORKLOAD_METADATA"),
+			},
+		},
+		Applications: []string{
+			"__Member__",
+			"__Member__",
+		},
+		JiraConfiguration: &types.WorkloadJiraConfigurationInput{
+			IssueManagementStatus: types.WorkloadIssueManagementStatus("ENABLED"),
+			IssueManagementType:   types.IssueManagementType("AUTO"),
+			JiraProjectKey:        ptr.String("__JiraProjectKey__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4020,7 +4522,11 @@ func TestCheckResponseSnapshot_UpdateWorkloadShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWorkloadShare(context.Background(), &UpdateWorkloadShareInput{})
+	got, err := svc.UpdateWorkloadShare(context.Background(), &UpdateWorkloadShareInput{
+		ShareId:        ptr.String("__ShareId__"),
+		WorkloadId:     ptr.String("__WorkloadId__"),
+		PermissionType: types.PermissionType("READONLY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4039,7 +4545,12 @@ func TestCheckResponseSnapshot_UpgradeLensReview(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpgradeLensReview(context.Background(), &UpgradeLensReviewInput{})
+	got, err := svc.UpgradeLensReview(context.Background(), &UpgradeLensReviewInput{
+		WorkloadId:         ptr.String("__WorkloadId__"),
+		LensAlias:          ptr.String("__LensAlias__"),
+		MilestoneName:      ptr.String("__MilestoneName__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4058,7 +4569,12 @@ func TestCheckResponseSnapshot_UpgradeProfileVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpgradeProfileVersion(context.Background(), &UpgradeProfileVersionInput{})
+	got, err := svc.UpgradeProfileVersion(context.Background(), &UpgradeProfileVersionInput{
+		WorkloadId:         ptr.String("__WorkloadId__"),
+		ProfileArn:         ptr.String("__ProfileArn__"),
+		MilestoneName:      ptr.String("__MilestoneName__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4077,7 +4593,11 @@ func TestCheckResponseSnapshot_UpgradeReviewTemplateLensReview(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpgradeReviewTemplateLensReview(context.Background(), &UpgradeReviewTemplateLensReviewInput{})
+	got, err := svc.UpgradeReviewTemplateLensReview(context.Background(), &UpgradeReviewTemplateLensReviewInput{
+		TemplateArn:        ptr.String("__TemplateArn__"),
+		LensAlias:          ptr.String("__LensAlias__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4098,7 +4618,13 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateLenses(context.Background(), &AssociateLensesInput{})
+	_, opErr := svc.AssociateLenses(context.Background(), &AssociateLensesInput{
+		WorkloadId: ptr.String("__WorkloadId__"),
+		LensAliases: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4125,7 +4651,13 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateLenses(context.Background(), &AssociateLensesInput{})
+	_, opErr := svc.AssociateLenses(context.Background(), &AssociateLensesInput{
+		WorkloadId: ptr.String("__WorkloadId__"),
+		LensAliases: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4150,7 +4682,13 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateLenses(context.Background(), &AssociateLensesInput{})
+	_, opErr := svc.AssociateLenses(context.Background(), &AssociateLensesInput{
+		WorkloadId: ptr.String("__WorkloadId__"),
+		LensAliases: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4177,7 +4715,13 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateLenses(context.Background(), &AssociateLensesInput{})
+	_, opErr := svc.AssociateLenses(context.Background(), &AssociateLensesInput{
+		WorkloadId: ptr.String("__WorkloadId__"),
+		LensAliases: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4206,7 +4750,11 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLensShare(context.Background(), &CreateLensShareInput{})
+	_, opErr := svc.CreateLensShare(context.Background(), &CreateLensShareInput{
+		LensAlias:          ptr.String("__LensAlias__"),
+		SharedWith:         ptr.String("__SharedWith__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4233,7 +4781,13 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateLenses(context.Background(), &AssociateLensesInput{})
+	_, opErr := svc.AssociateLenses(context.Background(), &AssociateLensesInput{
+		WorkloadId: ptr.String("__WorkloadId__"),
+		LensAliases: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4269,7 +4823,13 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateLenses(context.Background(), &AssociateLensesInput{})
+	_, opErr := svc.AssociateLenses(context.Background(), &AssociateLensesInput{
+		WorkloadId: ptr.String("__WorkloadId__"),
+		LensAliases: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

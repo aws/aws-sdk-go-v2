@@ -5,7 +5,9 @@
 package cloudwatch
 
 import (
+	"bytes"
 	"context"
+	"encoding/json"
 	"errors"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
@@ -33,6 +35,11 @@ func serdeRespCreatePath(path string) (*os.File, error) {
 }
 
 func serdeRespWriteSnapshot(op string, status int, header http.Header, body []byte) error {
+	if es, eh, eb, err := serdeRespReadSnapshot(op); err == nil &&
+		es == status && serdeRespHeaderEqual(eh, header) && bytes.Equal(body, eb) {
+		return nil
+	}
+
 	f, err := serdeRespCreatePath(serdeRespSSPath(op))
 	if err != nil {
 		return err
@@ -61,11 +68,64 @@ func serdeRespWriteSnapshot(op string, status int, header http.Header, body []by
 	return err
 }
 
-// serdeRespXMLErrorEnvelope wraps serialized error members in the XML
-// error envelope the restXml/query deserializers parse:
-// <ErrorResponse><Error><Code>CODE</Code>MEMBERS</Error></ErrorResponse>.
-// It strips the serialized body's outer root element and re-parents the
-// members under <Error>.
+func serdeRespHeaderEqual(a, b http.Header) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	for k, av := range a {
+		bv, ok := b[k]
+		if !ok || !slices.Equal(av, bv) {
+			return false
+		}
+	}
+	return true
+}
+
+// inject __type into cbor since our error "serializers" don't like a real response would have
+func serdeRespSpliceCBORType(t *testing.T, body []byte, code string) []byte {
+	pair := append(
+		smithycbor.Encode(smithycbor.String("__type")),
+		smithycbor.Encode(smithycbor.String(code))...,
+	)
+	if len(body) == 0 {
+		return append(append([]byte{0xbf}, pair...), 0xff)
+	}
+
+	if body[0] != 0xbf {
+		t.Fatalf("expected cbor indefinite map header, got %#x", body[0])
+	}
+
+	out := make([]byte, 0, len(body)+len(pair))
+	out = append(out, 0xbf)
+	out = append(out, pair...)
+	return append(out, body[1:]...)
+}
+
+// inject __type into json since our error "serializers" don't like a real response would have
+func serdeRespSpliceJSONType(t *testing.T, body []byte, code string) []byte {
+	quoted, err := json.Marshal(code)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	entry := append([]byte(`"__type":`), quoted...)
+	trimmed := bytes.TrimLeft(body, " \t\r\n")
+	if len(trimmed) == 0 {
+		return append(append([]byte{'{'}, entry...), '}')
+	}
+	if trimmed[0] != '{' {
+		t.Fatalf("expected json object body, got %q", trimmed[0])
+	}
+
+	rest := bytes.TrimLeft(trimmed[1:], " \t\r\n")
+	out := append([]byte{'{'}, entry...)
+	if len(rest) > 0 && rest[0] != '}' {
+		out = append(out, ',')
+	}
+	return append(out, rest...)
+}
+
+// inject the xml envelope since our error "serializers" don't like a real response woul have
 func serdeRespXMLErrorEnvelope(body []byte, code string) []byte {
 	inner := ""
 	s := strings.TrimSpace(string(body))
@@ -2601,24 +2661,7 @@ func TestUpdateResponseSnapshot_Error_ConcurrentModificationException(t *testing
 		}
 		body = b
 	}
-	// Inject the CBOR error discriminator into the body map so the deserializer routes to the
-	// modeled error type.
-	var m smithycbor.Map
-	if len(body) > 0 {
-		v, err := smithycbor.Decode(body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		mm, ok := v.(smithycbor.Map)
-		if !ok {
-			t.Fatalf("expected cbor map body, got %T", v)
-		}
-		m = mm
-	} else {
-		m = smithycbor.Map{}
-	}
-	m["__type"] = smithycbor.String(want.ErrorCode())
-	body = smithycbor.Encode(m)
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ConcurrentModificationException.error", 429, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -2643,24 +2686,7 @@ func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 		}
 		body = b
 	}
-	// Inject the CBOR error discriminator into the body map so the deserializer routes to the
-	// modeled error type.
-	var m smithycbor.Map
-	if len(body) > 0 {
-		v, err := smithycbor.Decode(body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		mm, ok := v.(smithycbor.Map)
-		if !ok {
-			t.Fatalf("expected cbor map body, got %T", v)
-		}
-		m = mm
-	} else {
-		m = smithycbor.Map{}
-	}
-	m["__type"] = smithycbor.String(want.ErrorCode())
-	body = smithycbor.Encode(m)
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ConflictException.error", 409, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -2695,24 +2721,7 @@ func TestUpdateResponseSnapshot_Error_DashboardInvalidInputError(t *testing.T) {
 		}
 		body = b
 	}
-	// Inject the CBOR error discriminator into the body map so the deserializer routes to the
-	// modeled error type.
-	var m smithycbor.Map
-	if len(body) > 0 {
-		v, err := smithycbor.Decode(body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		mm, ok := v.(smithycbor.Map)
-		if !ok {
-			t.Fatalf("expected cbor map body, got %T", v)
-		}
-		m = mm
-	} else {
-		m = smithycbor.Map{}
-	}
-	m["__type"] = smithycbor.String(want.ErrorCode())
-	body = smithycbor.Encode(m)
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("DashboardInvalidInputError.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -2737,24 +2746,7 @@ func TestUpdateResponseSnapshot_Error_DashboardNotFoundError(t *testing.T) {
 		}
 		body = b
 	}
-	// Inject the CBOR error discriminator into the body map so the deserializer routes to the
-	// modeled error type.
-	var m smithycbor.Map
-	if len(body) > 0 {
-		v, err := smithycbor.Decode(body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		mm, ok := v.(smithycbor.Map)
-		if !ok {
-			t.Fatalf("expected cbor map body, got %T", v)
-		}
-		m = mm
-	} else {
-		m = smithycbor.Map{}
-	}
-	m["__type"] = smithycbor.String(want.ErrorCode())
-	body = smithycbor.Encode(m)
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("DashboardNotFoundError.error", 404, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -2779,24 +2771,7 @@ func TestUpdateResponseSnapshot_Error_InternalServiceFault(t *testing.T) {
 		}
 		body = b
 	}
-	// Inject the CBOR error discriminator into the body map so the deserializer routes to the
-	// modeled error type.
-	var m smithycbor.Map
-	if len(body) > 0 {
-		v, err := smithycbor.Decode(body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		mm, ok := v.(smithycbor.Map)
-		if !ok {
-			t.Fatalf("expected cbor map body, got %T", v)
-		}
-		m = mm
-	} else {
-		m = smithycbor.Map{}
-	}
-	m["__type"] = smithycbor.String(want.ErrorCode())
-	body = smithycbor.Encode(m)
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InternalServiceFault.error", 500, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -2821,24 +2796,7 @@ func TestUpdateResponseSnapshot_Error_InvalidFormatFault(t *testing.T) {
 		}
 		body = b
 	}
-	// Inject the CBOR error discriminator into the body map so the deserializer routes to the
-	// modeled error type.
-	var m smithycbor.Map
-	if len(body) > 0 {
-		v, err := smithycbor.Decode(body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		mm, ok := v.(smithycbor.Map)
-		if !ok {
-			t.Fatalf("expected cbor map body, got %T", v)
-		}
-		m = mm
-	} else {
-		m = smithycbor.Map{}
-	}
-	m["__type"] = smithycbor.String(want.ErrorCode())
-	body = smithycbor.Encode(m)
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidFormatFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -2863,24 +2821,7 @@ func TestUpdateResponseSnapshot_Error_InvalidNextToken(t *testing.T) {
 		}
 		body = b
 	}
-	// Inject the CBOR error discriminator into the body map so the deserializer routes to the
-	// modeled error type.
-	var m smithycbor.Map
-	if len(body) > 0 {
-		v, err := smithycbor.Decode(body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		mm, ok := v.(smithycbor.Map)
-		if !ok {
-			t.Fatalf("expected cbor map body, got %T", v)
-		}
-		m = mm
-	} else {
-		m = smithycbor.Map{}
-	}
-	m["__type"] = smithycbor.String(want.ErrorCode())
-	body = smithycbor.Encode(m)
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidNextToken.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -2905,24 +2846,7 @@ func TestUpdateResponseSnapshot_Error_InvalidParameterCombinationException(t *te
 		}
 		body = b
 	}
-	// Inject the CBOR error discriminator into the body map so the deserializer routes to the
-	// modeled error type.
-	var m smithycbor.Map
-	if len(body) > 0 {
-		v, err := smithycbor.Decode(body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		mm, ok := v.(smithycbor.Map)
-		if !ok {
-			t.Fatalf("expected cbor map body, got %T", v)
-		}
-		m = mm
-	} else {
-		m = smithycbor.Map{}
-	}
-	m["__type"] = smithycbor.String(want.ErrorCode())
-	body = smithycbor.Encode(m)
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidParameterCombinationException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -2947,24 +2871,7 @@ func TestUpdateResponseSnapshot_Error_InvalidParameterValueException(t *testing.
 		}
 		body = b
 	}
-	// Inject the CBOR error discriminator into the body map so the deserializer routes to the
-	// modeled error type.
-	var m smithycbor.Map
-	if len(body) > 0 {
-		v, err := smithycbor.Decode(body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		mm, ok := v.(smithycbor.Map)
-		if !ok {
-			t.Fatalf("expected cbor map body, got %T", v)
-		}
-		m = mm
-	} else {
-		m = smithycbor.Map{}
-	}
-	m["__type"] = smithycbor.String(want.ErrorCode())
-	body = smithycbor.Encode(m)
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidParameterValueException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -2989,24 +2896,7 @@ func TestUpdateResponseSnapshot_Error_KmsAccessDeniedException(t *testing.T) {
 		}
 		body = b
 	}
-	// Inject the CBOR error discriminator into the body map so the deserializer routes to the
-	// modeled error type.
-	var m smithycbor.Map
-	if len(body) > 0 {
-		v, err := smithycbor.Decode(body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		mm, ok := v.(smithycbor.Map)
-		if !ok {
-			t.Fatalf("expected cbor map body, got %T", v)
-		}
-		m = mm
-	} else {
-		m = smithycbor.Map{}
-	}
-	m["__type"] = smithycbor.String(want.ErrorCode())
-	body = smithycbor.Encode(m)
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("KmsAccessDeniedException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3031,24 +2921,7 @@ func TestUpdateResponseSnapshot_Error_KmsKeyDisabledException(t *testing.T) {
 		}
 		body = b
 	}
-	// Inject the CBOR error discriminator into the body map so the deserializer routes to the
-	// modeled error type.
-	var m smithycbor.Map
-	if len(body) > 0 {
-		v, err := smithycbor.Decode(body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		mm, ok := v.(smithycbor.Map)
-		if !ok {
-			t.Fatalf("expected cbor map body, got %T", v)
-		}
-		m = mm
-	} else {
-		m = smithycbor.Map{}
-	}
-	m["__type"] = smithycbor.String(want.ErrorCode())
-	body = smithycbor.Encode(m)
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("KmsKeyDisabledException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3073,24 +2946,7 @@ func TestUpdateResponseSnapshot_Error_KmsKeyNotFoundException(t *testing.T) {
 		}
 		body = b
 	}
-	// Inject the CBOR error discriminator into the body map so the deserializer routes to the
-	// modeled error type.
-	var m smithycbor.Map
-	if len(body) > 0 {
-		v, err := smithycbor.Decode(body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		mm, ok := v.(smithycbor.Map)
-		if !ok {
-			t.Fatalf("expected cbor map body, got %T", v)
-		}
-		m = mm
-	} else {
-		m = smithycbor.Map{}
-	}
-	m["__type"] = smithycbor.String(want.ErrorCode())
-	body = smithycbor.Encode(m)
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("KmsKeyNotFoundException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3115,24 +2971,7 @@ func TestUpdateResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		}
 		body = b
 	}
-	// Inject the CBOR error discriminator into the body map so the deserializer routes to the
-	// modeled error type.
-	var m smithycbor.Map
-	if len(body) > 0 {
-		v, err := smithycbor.Decode(body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		mm, ok := v.(smithycbor.Map)
-		if !ok {
-			t.Fatalf("expected cbor map body, got %T", v)
-		}
-		m = mm
-	} else {
-		m = smithycbor.Map{}
-	}
-	m["__type"] = smithycbor.String(want.ErrorCode())
-	body = smithycbor.Encode(m)
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("LimitExceededException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3157,24 +2996,7 @@ func TestUpdateResponseSnapshot_Error_LimitExceededFault(t *testing.T) {
 		}
 		body = b
 	}
-	// Inject the CBOR error discriminator into the body map so the deserializer routes to the
-	// modeled error type.
-	var m smithycbor.Map
-	if len(body) > 0 {
-		v, err := smithycbor.Decode(body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		mm, ok := v.(smithycbor.Map)
-		if !ok {
-			t.Fatalf("expected cbor map body, got %T", v)
-		}
-		m = mm
-	} else {
-		m = smithycbor.Map{}
-	}
-	m["__type"] = smithycbor.String(want.ErrorCode())
-	body = smithycbor.Encode(m)
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("LimitExceededFault.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3199,24 +3021,7 @@ func TestUpdateResponseSnapshot_Error_MissingRequiredParameterException(t *testi
 		}
 		body = b
 	}
-	// Inject the CBOR error discriminator into the body map so the deserializer routes to the
-	// modeled error type.
-	var m smithycbor.Map
-	if len(body) > 0 {
-		v, err := smithycbor.Decode(body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		mm, ok := v.(smithycbor.Map)
-		if !ok {
-			t.Fatalf("expected cbor map body, got %T", v)
-		}
-		m = mm
-	} else {
-		m = smithycbor.Map{}
-	}
-	m["__type"] = smithycbor.String(want.ErrorCode())
-	body = smithycbor.Encode(m)
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("MissingRequiredParameterException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3241,24 +3046,7 @@ func TestUpdateResponseSnapshot_Error_ResourceConflict(t *testing.T) {
 		}
 		body = b
 	}
-	// Inject the CBOR error discriminator into the body map so the deserializer routes to the
-	// modeled error type.
-	var m smithycbor.Map
-	if len(body) > 0 {
-		v, err := smithycbor.Decode(body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		mm, ok := v.(smithycbor.Map)
-		if !ok {
-			t.Fatalf("expected cbor map body, got %T", v)
-		}
-		m = mm
-	} else {
-		m = smithycbor.Map{}
-	}
-	m["__type"] = smithycbor.String(want.ErrorCode())
-	body = smithycbor.Encode(m)
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ResourceConflict.error", 409, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3283,24 +3071,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFound(t *testing.T) {
 		}
 		body = b
 	}
-	// Inject the CBOR error discriminator into the body map so the deserializer routes to the
-	// modeled error type.
-	var m smithycbor.Map
-	if len(body) > 0 {
-		v, err := smithycbor.Decode(body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		mm, ok := v.(smithycbor.Map)
-		if !ok {
-			t.Fatalf("expected cbor map body, got %T", v)
-		}
-		m = mm
-	} else {
-		m = smithycbor.Map{}
-	}
-	m["__type"] = smithycbor.String(want.ErrorCode())
-	body = smithycbor.Encode(m)
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ResourceNotFound.error", 404, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -3327,24 +3098,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		}
 		body = b
 	}
-	// Inject the CBOR error discriminator into the body map so the deserializer routes to the
-	// modeled error type.
-	var m smithycbor.Map
-	if len(body) > 0 {
-		v, err := smithycbor.Decode(body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		mm, ok := v.(smithycbor.Map)
-		if !ok {
-			t.Fatalf("expected cbor map body, got %T", v)
-		}
-		m = mm
-	} else {
-		m = smithycbor.Map{}
-	}
-	m["__type"] = smithycbor.String(want.ErrorCode())
-	body = smithycbor.Encode(m)
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ResourceNotFoundException.error", 404, built.Header, body); err != nil {
 		t.Fatal(err)
 	}

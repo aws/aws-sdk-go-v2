@@ -144,7 +144,35 @@ func TestCheckResponseSnapshot_AssociateRepository(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateRepository(context.Background(), &AssociateRepositoryInput{})
+	got, err := svc.AssociateRepository(context.Background(), &AssociateRepositoryInput{
+		Repository: &types.Repository{
+			CodeCommit: &types.CodeCommitRepository{
+				Name: ptr.String("__Name__"),
+			},
+			Bitbucket: &types.ThirdPartySourceRepository{
+				Name:          ptr.String("__Name__"),
+				ConnectionArn: ptr.String("__ConnectionArn__"),
+				Owner:         ptr.String("__Owner__"),
+			},
+			GitHubEnterpriseServer: &types.ThirdPartySourceRepository{
+				Name:          ptr.String("__Name__"),
+				ConnectionArn: ptr.String("__ConnectionArn__"),
+				Owner:         ptr.String("__Owner__"),
+			},
+			S3Bucket: &types.S3Repository{
+				Name:       ptr.String("__Name__"),
+				BucketName: ptr.String("__BucketName__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		KMSKeyDetails: &types.KMSKeyDetails{
+			KMSKeyId:         ptr.String("__KMSKeyId__"),
+			EncryptionOption: types.EncryptionOption("AWS_OWNED_CMK"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -221,7 +249,55 @@ func TestCheckResponseSnapshot_CreateCodeReview(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCodeReview(context.Background(), &CreateCodeReviewInput{})
+	got, err := svc.CreateCodeReview(context.Background(), &CreateCodeReviewInput{
+		Name:                     ptr.String("__Name__"),
+		RepositoryAssociationArn: ptr.String("__RepositoryAssociationArn__"),
+		Type: &types.CodeReviewType{
+			RepositoryAnalysis: &types.RepositoryAnalysis{
+				RepositoryHead: &types.RepositoryHeadSourceCodeType{
+					BranchName: ptr.String("__BranchName__"),
+				},
+				SourceCodeType: &types.SourceCodeType{
+					CommitDiff: &types.CommitDiffSourceCodeType{
+						SourceCommit:      ptr.String("__SourceCommit__"),
+						DestinationCommit: ptr.String("__DestinationCommit__"),
+						MergeBaseCommit:   ptr.String("__MergeBaseCommit__"),
+					},
+					RepositoryHead: &types.RepositoryHeadSourceCodeType{
+						BranchName: ptr.String("__BranchName__"),
+					},
+					BranchDiff: &types.BranchDiffSourceCodeType{
+						SourceBranchName:      ptr.String("__SourceBranchName__"),
+						DestinationBranchName: ptr.String("__DestinationBranchName__"),
+					},
+					S3BucketRepository: &types.S3BucketRepository{
+						Name: ptr.String("__Name__"),
+						Details: &types.S3RepositoryDetails{
+							BucketName: ptr.String("__BucketName__"),
+							CodeArtifacts: &types.CodeArtifacts{
+								SourceCodeArtifactsObjectKey: ptr.String("__SourceCodeArtifactsObjectKey__"),
+								BuildArtifactsObjectKey:      ptr.String("__BuildArtifactsObjectKey__"),
+							},
+						},
+					},
+					RequestMetadata: &types.RequestMetadata{
+						RequestId: ptr.String("__RequestId__"),
+						Requester: ptr.String("__Requester__"),
+						EventInfo: &types.EventInfo{
+							Name:  ptr.String("__Name__"),
+							State: ptr.String("__State__"),
+						},
+						VendorName: types.VendorName("GitHub"),
+					},
+				},
+			},
+			AnalysisTypes: []types.AnalysisType{
+				types.AnalysisType("Security"),
+				types.AnalysisType("Security"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -298,7 +374,9 @@ func TestCheckResponseSnapshot_DescribeCodeReview(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCodeReview(context.Background(), &DescribeCodeReviewInput{})
+	got, err := svc.DescribeCodeReview(context.Background(), &DescribeCodeReviewInput{
+		CodeReviewArn: ptr.String("__CodeReviewArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -329,7 +407,11 @@ func TestCheckResponseSnapshot_DescribeRecommendationFeedback(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRecommendationFeedback(context.Background(), &DescribeRecommendationFeedbackInput{})
+	got, err := svc.DescribeRecommendationFeedback(context.Background(), &DescribeRecommendationFeedbackInput{
+		CodeReviewArn:    ptr.String("__CodeReviewArn__"),
+		RecommendationId: ptr.String("__RecommendationId__"),
+		UserId:           ptr.String("__UserId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -375,7 +457,9 @@ func TestCheckResponseSnapshot_DescribeRepositoryAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRepositoryAssociation(context.Background(), &DescribeRepositoryAssociationInput{})
+	got, err := svc.DescribeRepositoryAssociation(context.Background(), &DescribeRepositoryAssociationInput{
+		AssociationArn: ptr.String("__AssociationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -421,7 +505,9 @@ func TestCheckResponseSnapshot_DisassociateRepository(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateRepository(context.Background(), &DisassociateRepositoryInput{})
+	got, err := svc.DisassociateRepository(context.Background(), &DisassociateRepositoryInput{
+		AssociationArn: ptr.String("__AssociationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -544,7 +630,23 @@ func TestCheckResponseSnapshot_ListCodeReviews(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCodeReviews(context.Background(), &ListCodeReviewsInput{})
+	got, err := svc.ListCodeReviews(context.Background(), &ListCodeReviewsInput{
+		ProviderTypes: []types.ProviderType{
+			types.ProviderType("CodeCommit"),
+			types.ProviderType("CodeCommit"),
+		},
+		States: []types.JobState{
+			types.JobState("Completed"),
+			types.JobState("Completed"),
+		},
+		RepositoryNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Type:       types.Type("PullRequest"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -583,7 +685,19 @@ func TestCheckResponseSnapshot_ListRecommendationFeedback(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRecommendationFeedback(context.Background(), &ListRecommendationFeedbackInput{})
+	got, err := svc.ListRecommendationFeedback(context.Background(), &ListRecommendationFeedbackInput{
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+		CodeReviewArn: ptr.String("__CodeReviewArn__"),
+		UserIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RecommendationIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -644,7 +758,11 @@ func TestCheckResponseSnapshot_ListRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRecommendations(context.Background(), &ListRecommendationsInput{})
+	got, err := svc.ListRecommendations(context.Background(), &ListRecommendationsInput{
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+		CodeReviewArn: ptr.String("__CodeReviewArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -687,7 +805,26 @@ func TestCheckResponseSnapshot_ListRepositoryAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRepositoryAssociations(context.Background(), &ListRepositoryAssociationsInput{})
+	got, err := svc.ListRepositoryAssociations(context.Background(), &ListRepositoryAssociationsInput{
+		ProviderTypes: []types.ProviderType{
+			types.ProviderType("CodeCommit"),
+			types.ProviderType("CodeCommit"),
+		},
+		States: []types.RepositoryAssociationState{
+			types.RepositoryAssociationState("Associated"),
+			types.RepositoryAssociationState("Associated"),
+		},
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Owners: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -710,7 +847,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -729,7 +868,14 @@ func TestCheckResponseSnapshot_PutRecommendationFeedback(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutRecommendationFeedback(context.Background(), &PutRecommendationFeedbackInput{})
+	got, err := svc.PutRecommendationFeedback(context.Background(), &PutRecommendationFeedbackInput{
+		CodeReviewArn:    ptr.String("__CodeReviewArn__"),
+		RecommendationId: ptr.String("__RecommendationId__"),
+		Reactions: []types.Reaction{
+			types.Reaction("ThumbsUp"),
+			types.Reaction("ThumbsUp"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -748,7 +894,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -767,7 +918,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -788,7 +945,35 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateRepository(context.Background(), &AssociateRepositoryInput{})
+	_, opErr := svc.AssociateRepository(context.Background(), &AssociateRepositoryInput{
+		Repository: &types.Repository{
+			CodeCommit: &types.CodeCommitRepository{
+				Name: ptr.String("__Name__"),
+			},
+			Bitbucket: &types.ThirdPartySourceRepository{
+				Name:          ptr.String("__Name__"),
+				ConnectionArn: ptr.String("__ConnectionArn__"),
+				Owner:         ptr.String("__Owner__"),
+			},
+			GitHubEnterpriseServer: &types.ThirdPartySourceRepository{
+				Name:          ptr.String("__Name__"),
+				ConnectionArn: ptr.String("__ConnectionArn__"),
+				Owner:         ptr.String("__Owner__"),
+			},
+			S3Bucket: &types.S3Repository{
+				Name:       ptr.String("__Name__"),
+				BucketName: ptr.String("__BucketName__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		KMSKeyDetails: &types.KMSKeyDetails{
+			KMSKeyId:         ptr.String("__KMSKeyId__"),
+			EncryptionOption: types.EncryptionOption("AWS_OWNED_CMK"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -813,7 +998,35 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateRepository(context.Background(), &AssociateRepositoryInput{})
+	_, opErr := svc.AssociateRepository(context.Background(), &AssociateRepositoryInput{
+		Repository: &types.Repository{
+			CodeCommit: &types.CodeCommitRepository{
+				Name: ptr.String("__Name__"),
+			},
+			Bitbucket: &types.ThirdPartySourceRepository{
+				Name:          ptr.String("__Name__"),
+				ConnectionArn: ptr.String("__ConnectionArn__"),
+				Owner:         ptr.String("__Owner__"),
+			},
+			GitHubEnterpriseServer: &types.ThirdPartySourceRepository{
+				Name:          ptr.String("__Name__"),
+				ConnectionArn: ptr.String("__ConnectionArn__"),
+				Owner:         ptr.String("__Owner__"),
+			},
+			S3Bucket: &types.S3Repository{
+				Name:       ptr.String("__Name__"),
+				BucketName: ptr.String("__BucketName__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		KMSKeyDetails: &types.KMSKeyDetails{
+			KMSKeyId:         ptr.String("__KMSKeyId__"),
+			EncryptionOption: types.EncryptionOption("AWS_OWNED_CMK"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -838,7 +1051,35 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateRepository(context.Background(), &AssociateRepositoryInput{})
+	_, opErr := svc.AssociateRepository(context.Background(), &AssociateRepositoryInput{
+		Repository: &types.Repository{
+			CodeCommit: &types.CodeCommitRepository{
+				Name: ptr.String("__Name__"),
+			},
+			Bitbucket: &types.ThirdPartySourceRepository{
+				Name:          ptr.String("__Name__"),
+				ConnectionArn: ptr.String("__ConnectionArn__"),
+				Owner:         ptr.String("__Owner__"),
+			},
+			GitHubEnterpriseServer: &types.ThirdPartySourceRepository{
+				Name:          ptr.String("__Name__"),
+				ConnectionArn: ptr.String("__ConnectionArn__"),
+				Owner:         ptr.String("__Owner__"),
+			},
+			S3Bucket: &types.S3Repository{
+				Name:       ptr.String("__Name__"),
+				BucketName: ptr.String("__BucketName__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		KMSKeyDetails: &types.KMSKeyDetails{
+			KMSKeyId:         ptr.String("__KMSKeyId__"),
+			EncryptionOption: types.EncryptionOption("AWS_OWNED_CMK"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -863,7 +1104,9 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeRepositoryAssociation(context.Background(), &DescribeRepositoryAssociationInput{})
+	_, opErr := svc.DescribeRepositoryAssociation(context.Background(), &DescribeRepositoryAssociationInput{
+		AssociationArn: ptr.String("__AssociationArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -888,7 +1131,55 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCodeReview(context.Background(), &CreateCodeReviewInput{})
+	_, opErr := svc.CreateCodeReview(context.Background(), &CreateCodeReviewInput{
+		Name:                     ptr.String("__Name__"),
+		RepositoryAssociationArn: ptr.String("__RepositoryAssociationArn__"),
+		Type: &types.CodeReviewType{
+			RepositoryAnalysis: &types.RepositoryAnalysis{
+				RepositoryHead: &types.RepositoryHeadSourceCodeType{
+					BranchName: ptr.String("__BranchName__"),
+				},
+				SourceCodeType: &types.SourceCodeType{
+					CommitDiff: &types.CommitDiffSourceCodeType{
+						SourceCommit:      ptr.String("__SourceCommit__"),
+						DestinationCommit: ptr.String("__DestinationCommit__"),
+						MergeBaseCommit:   ptr.String("__MergeBaseCommit__"),
+					},
+					RepositoryHead: &types.RepositoryHeadSourceCodeType{
+						BranchName: ptr.String("__BranchName__"),
+					},
+					BranchDiff: &types.BranchDiffSourceCodeType{
+						SourceBranchName:      ptr.String("__SourceBranchName__"),
+						DestinationBranchName: ptr.String("__DestinationBranchName__"),
+					},
+					S3BucketRepository: &types.S3BucketRepository{
+						Name: ptr.String("__Name__"),
+						Details: &types.S3RepositoryDetails{
+							BucketName: ptr.String("__BucketName__"),
+							CodeArtifacts: &types.CodeArtifacts{
+								SourceCodeArtifactsObjectKey: ptr.String("__SourceCodeArtifactsObjectKey__"),
+								BuildArtifactsObjectKey:      ptr.String("__BuildArtifactsObjectKey__"),
+							},
+						},
+					},
+					RequestMetadata: &types.RequestMetadata{
+						RequestId: ptr.String("__RequestId__"),
+						Requester: ptr.String("__Requester__"),
+						EventInfo: &types.EventInfo{
+							Name:  ptr.String("__Name__"),
+							State: ptr.String("__State__"),
+						},
+						VendorName: types.VendorName("GitHub"),
+					},
+				},
+			},
+			AnalysisTypes: []types.AnalysisType{
+				types.AnalysisType("Security"),
+				types.AnalysisType("Security"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -913,7 +1204,35 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateRepository(context.Background(), &AssociateRepositoryInput{})
+	_, opErr := svc.AssociateRepository(context.Background(), &AssociateRepositoryInput{
+		Repository: &types.Repository{
+			CodeCommit: &types.CodeCommitRepository{
+				Name: ptr.String("__Name__"),
+			},
+			Bitbucket: &types.ThirdPartySourceRepository{
+				Name:          ptr.String("__Name__"),
+				ConnectionArn: ptr.String("__ConnectionArn__"),
+				Owner:         ptr.String("__Owner__"),
+			},
+			GitHubEnterpriseServer: &types.ThirdPartySourceRepository{
+				Name:          ptr.String("__Name__"),
+				ConnectionArn: ptr.String("__ConnectionArn__"),
+				Owner:         ptr.String("__Owner__"),
+			},
+			S3Bucket: &types.S3Repository{
+				Name:       ptr.String("__Name__"),
+				BucketName: ptr.String("__BucketName__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		KMSKeyDetails: &types.KMSKeyDetails{
+			KMSKeyId:         ptr.String("__KMSKeyId__"),
+			EncryptionOption: types.EncryptionOption("AWS_OWNED_CMK"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -938,7 +1257,35 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateRepository(context.Background(), &AssociateRepositoryInput{})
+	_, opErr := svc.AssociateRepository(context.Background(), &AssociateRepositoryInput{
+		Repository: &types.Repository{
+			CodeCommit: &types.CodeCommitRepository{
+				Name: ptr.String("__Name__"),
+			},
+			Bitbucket: &types.ThirdPartySourceRepository{
+				Name:          ptr.String("__Name__"),
+				ConnectionArn: ptr.String("__ConnectionArn__"),
+				Owner:         ptr.String("__Owner__"),
+			},
+			GitHubEnterpriseServer: &types.ThirdPartySourceRepository{
+				Name:          ptr.String("__Name__"),
+				ConnectionArn: ptr.String("__ConnectionArn__"),
+				Owner:         ptr.String("__Owner__"),
+			},
+			S3Bucket: &types.S3Repository{
+				Name:       ptr.String("__Name__"),
+				BucketName: ptr.String("__BucketName__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		KMSKeyDetails: &types.KMSKeyDetails{
+			KMSKeyId:         ptr.String("__KMSKeyId__"),
+			EncryptionOption: types.EncryptionOption("AWS_OWNED_CMK"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

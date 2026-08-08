@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","Results":[{"Dimension":"USAGE_ACCOUNT_ID","Value":"__Value__"},{"Dimension":"USAGE_ACCOUNT_ID","Value":"__Value__"}]}

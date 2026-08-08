@@ -117,7 +117,11 @@ func TestCheckResponseSnapshot_AbortDocumentVersionUpload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AbortDocumentVersionUpload(context.Background(), &AbortDocumentVersionUploadInput{})
+	got, err := svc.AbortDocumentVersionUpload(context.Background(), &AbortDocumentVersionUploadInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		DocumentId:          ptr.String("__DocumentId__"),
+		VersionId:           ptr.String("__VersionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -160,7 +164,10 @@ func TestCheckResponseSnapshot_ActivateUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ActivateUser(context.Background(), &ActivateUserInput{})
+	got, err := svc.ActivateUser(context.Background(), &ActivateUserInput{
+		UserId:              ptr.String("__UserId__"),
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -198,7 +205,26 @@ func TestCheckResponseSnapshot_AddResourcePermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddResourcePermissions(context.Background(), &AddResourcePermissionsInput{})
+	got, err := svc.AddResourcePermissions(context.Background(), &AddResourcePermissionsInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		ResourceId:          ptr.String("__ResourceId__"),
+		Principals: []types.SharePrincipal{
+			{
+				Id:   ptr.String("__Id__"),
+				Type: types.PrincipalType("USER"),
+				Role: types.RoleType("VIEWER"),
+			},
+			{
+				Id:   ptr.String("__Id__"),
+				Type: types.PrincipalType("USER"),
+				Role: types.RoleType("VIEWER"),
+			},
+		},
+		NotificationOptions: &types.NotificationOptions{
+			SendEmail:    true,
+			EmailMessage: ptr.String("__EmailMessage__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -251,7 +277,16 @@ func TestCheckResponseSnapshot_CreateComment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateComment(context.Background(), &CreateCommentInput{})
+	got, err := svc.CreateComment(context.Background(), &CreateCommentInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		DocumentId:          ptr.String("__DocumentId__"),
+		VersionId:           ptr.String("__VersionId__"),
+		ParentId:            ptr.String("__ParentId__"),
+		ThreadId:            ptr.String("__ThreadId__"),
+		Text:                ptr.String("__Text__"),
+		Visibility:          types.CommentVisibilityType("PUBLIC"),
+		NotifyCollaborators: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -270,7 +305,14 @@ func TestCheckResponseSnapshot_CreateCustomMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCustomMetadata(context.Background(), &CreateCustomMetadataInput{})
+	got, err := svc.CreateCustomMetadata(context.Background(), &CreateCustomMetadataInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		ResourceId:          ptr.String("__ResourceId__"),
+		VersionId:           ptr.String("__VersionId__"),
+		CustomMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -306,7 +348,11 @@ func TestCheckResponseSnapshot_CreateFolder(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFolder(context.Background(), &CreateFolderInput{})
+	got, err := svc.CreateFolder(context.Background(), &CreateFolderInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		Name:                ptr.String("__Name__"),
+		ParentFolderId:      ptr.String("__ParentFolderId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -325,7 +371,14 @@ func TestCheckResponseSnapshot_CreateLabels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLabels(context.Background(), &CreateLabelsInput{})
+	got, err := svc.CreateLabels(context.Background(), &CreateLabelsInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		Labels: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -350,7 +403,12 @@ func TestCheckResponseSnapshot_CreateNotificationSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateNotificationSubscription(context.Background(), &CreateNotificationSubscriptionInput{})
+	got, err := svc.CreateNotificationSubscription(context.Background(), &CreateNotificationSubscriptionInput{
+		OrganizationId:   ptr.String("__OrganizationId__"),
+		Endpoint:         ptr.String("__Endpoint__"),
+		Protocol:         types.SubscriptionProtocolType("HTTPS"),
+		SubscriptionType: types.SubscriptionType("ALL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -393,7 +451,20 @@ func TestCheckResponseSnapshot_CreateUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUser(context.Background(), &CreateUserInput{})
+	got, err := svc.CreateUser(context.Background(), &CreateUserInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		Username:       ptr.String("__Username__"),
+		EmailAddress:   ptr.String("__EmailAddress__"),
+		GivenName:      ptr.String("__GivenName__"),
+		Surname:        ptr.String("__Surname__"),
+		Password:       ptr.String("__Password__"),
+		TimeZoneId:     ptr.String("__TimeZoneId__"),
+		StorageRule: &types.StorageRuleType{
+			StorageAllocatedInBytes: ptr.Int64(1),
+			StorageType:             types.StorageType("UNLIMITED"),
+		},
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -412,7 +483,10 @@ func TestCheckResponseSnapshot_DeactivateUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeactivateUser(context.Background(), &DeactivateUserInput{})
+	got, err := svc.DeactivateUser(context.Background(), &DeactivateUserInput{
+		UserId:              ptr.String("__UserId__"),
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -431,7 +505,12 @@ func TestCheckResponseSnapshot_DeleteComment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteComment(context.Background(), &DeleteCommentInput{})
+	got, err := svc.DeleteComment(context.Background(), &DeleteCommentInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		DocumentId:          ptr.String("__DocumentId__"),
+		VersionId:           ptr.String("__VersionId__"),
+		CommentId:           ptr.String("__CommentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -450,7 +529,16 @@ func TestCheckResponseSnapshot_DeleteCustomMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCustomMetadata(context.Background(), &DeleteCustomMetadataInput{})
+	got, err := svc.DeleteCustomMetadata(context.Background(), &DeleteCustomMetadataInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		ResourceId:          ptr.String("__ResourceId__"),
+		VersionId:           ptr.String("__VersionId__"),
+		Keys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DeleteAll: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -469,7 +557,10 @@ func TestCheckResponseSnapshot_DeleteDocument(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDocument(context.Background(), &DeleteDocumentInput{})
+	got, err := svc.DeleteDocument(context.Background(), &DeleteDocumentInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		DocumentId:          ptr.String("__DocumentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -488,7 +579,12 @@ func TestCheckResponseSnapshot_DeleteDocumentVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDocumentVersion(context.Background(), &DeleteDocumentVersionInput{})
+	got, err := svc.DeleteDocumentVersion(context.Background(), &DeleteDocumentVersionInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		DocumentId:          ptr.String("__DocumentId__"),
+		VersionId:           ptr.String("__VersionId__"),
+		DeletePriorVersions: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -507,7 +603,10 @@ func TestCheckResponseSnapshot_DeleteFolder(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFolder(context.Background(), &DeleteFolderInput{})
+	got, err := svc.DeleteFolder(context.Background(), &DeleteFolderInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		FolderId:            ptr.String("__FolderId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -526,7 +625,10 @@ func TestCheckResponseSnapshot_DeleteFolderContents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFolderContents(context.Background(), &DeleteFolderContentsInput{})
+	got, err := svc.DeleteFolderContents(context.Background(), &DeleteFolderContentsInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		FolderId:            ptr.String("__FolderId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -545,7 +647,15 @@ func TestCheckResponseSnapshot_DeleteLabels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLabels(context.Background(), &DeleteLabelsInput{})
+	got, err := svc.DeleteLabels(context.Background(), &DeleteLabelsInput{
+		ResourceId:          ptr.String("__ResourceId__"),
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		Labels: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DeleteAll: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -564,7 +674,10 @@ func TestCheckResponseSnapshot_DeleteNotificationSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteNotificationSubscription(context.Background(), &DeleteNotificationSubscriptionInput{})
+	got, err := svc.DeleteNotificationSubscription(context.Background(), &DeleteNotificationSubscriptionInput{
+		SubscriptionId: ptr.String("__SubscriptionId__"),
+		OrganizationId: ptr.String("__OrganizationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -583,7 +696,10 @@ func TestCheckResponseSnapshot_DeleteUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteUser(context.Background(), &DeleteUserInput{})
+	got, err := svc.DeleteUser(context.Background(), &DeleteUserInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		UserId:              ptr.String("__UserId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -808,7 +924,18 @@ func TestCheckResponseSnapshot_DescribeActivities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeActivities(context.Background(), &DescribeActivitiesInput{})
+	got, err := svc.DescribeActivities(context.Background(), &DescribeActivitiesInput{
+		AuthenticationToken:       ptr.String("__AuthenticationToken__"),
+		StartTime:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:                   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		OrganizationId:            ptr.String("__OrganizationId__"),
+		ActivityTypes:             ptr.String("__ActivityTypes__"),
+		ResourceId:                ptr.String("__ResourceId__"),
+		UserId:                    ptr.String("__UserId__"),
+		IncludeIndirectActivities: true,
+		Limit:                     ptr.Int32(1),
+		Marker:                    ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -897,7 +1024,13 @@ func TestCheckResponseSnapshot_DescribeComments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeComments(context.Background(), &DescribeCommentsInput{})
+	got, err := svc.DescribeComments(context.Background(), &DescribeCommentsInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		DocumentId:          ptr.String("__DocumentId__"),
+		VersionId:           ptr.String("__VersionId__"),
+		Limit:               ptr.Int32(1),
+		Marker:              ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -958,7 +1091,14 @@ func TestCheckResponseSnapshot_DescribeDocumentVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDocumentVersions(context.Background(), &DescribeDocumentVersionsInput{})
+	got, err := svc.DescribeDocumentVersions(context.Background(), &DescribeDocumentVersionsInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		DocumentId:          ptr.String("__DocumentId__"),
+		Marker:              ptr.String("__Marker__"),
+		Limit:               ptr.Int32(1),
+		Include:             ptr.String("__Include__"),
+		Fields:              ptr.String("__Fields__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1077,7 +1217,16 @@ func TestCheckResponseSnapshot_DescribeFolderContents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFolderContents(context.Background(), &DescribeFolderContentsInput{})
+	got, err := svc.DescribeFolderContents(context.Background(), &DescribeFolderContentsInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		FolderId:            ptr.String("__FolderId__"),
+		Sort:                types.ResourceSortType("DATE"),
+		Order:               types.OrderType("ASCENDING"),
+		Limit:               ptr.Int32(1),
+		Marker:              ptr.String("__Marker__"),
+		Type:                types.FolderContentType("ALL"),
+		Include:             ptr.String("__Include__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1108,7 +1257,13 @@ func TestCheckResponseSnapshot_DescribeGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeGroups(context.Background(), &DescribeGroupsInput{})
+	got, err := svc.DescribeGroups(context.Background(), &DescribeGroupsInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		SearchQuery:         ptr.String("__SearchQuery__"),
+		OrganizationId:      ptr.String("__OrganizationId__"),
+		Marker:              ptr.String("__Marker__"),
+		Limit:               ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1141,7 +1296,11 @@ func TestCheckResponseSnapshot_DescribeNotificationSubscriptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeNotificationSubscriptions(context.Background(), &DescribeNotificationSubscriptionsInput{})
+	got, err := svc.DescribeNotificationSubscriptions(context.Background(), &DescribeNotificationSubscriptionsInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		Marker:         ptr.String("__Marker__"),
+		Limit:          ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1192,7 +1351,13 @@ func TestCheckResponseSnapshot_DescribeResourcePermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeResourcePermissions(context.Background(), &DescribeResourcePermissionsInput{})
+	got, err := svc.DescribeResourcePermissions(context.Background(), &DescribeResourcePermissionsInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		ResourceId:          ptr.String("__ResourceId__"),
+		PrincipalId:         ptr.String("__PrincipalId__"),
+		Limit:               ptr.Int32(1),
+		Marker:              ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1247,7 +1412,11 @@ func TestCheckResponseSnapshot_DescribeRootFolders(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRootFolders(context.Background(), &DescribeRootFoldersInput{})
+	got, err := svc.DescribeRootFolders(context.Background(), &DescribeRootFoldersInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		Limit:               ptr.Int32(1),
+		Marker:              ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1317,7 +1486,18 @@ func TestCheckResponseSnapshot_DescribeUsers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeUsers(context.Background(), &DescribeUsersInput{})
+	got, err := svc.DescribeUsers(context.Background(), &DescribeUsersInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		OrganizationId:      ptr.String("__OrganizationId__"),
+		UserIds:             ptr.String("__UserIds__"),
+		Query:               ptr.String("__Query__"),
+		Include:             types.UserFilterType("ALL"),
+		Order:               types.OrderType("ASCENDING"),
+		Sort:                types.UserSortType("USER_NAME"),
+		Marker:              ptr.String("__Marker__"),
+		Limit:               ptr.Int32(1),
+		Fields:              ptr.String("__Fields__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1360,7 +1540,9 @@ func TestCheckResponseSnapshot_GetCurrentUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCurrentUser(context.Background(), &GetCurrentUserInput{})
+	got, err := svc.GetCurrentUser(context.Background(), &GetCurrentUserInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1414,7 +1596,11 @@ func TestCheckResponseSnapshot_GetDocument(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDocument(context.Background(), &GetDocumentInput{})
+	got, err := svc.GetDocument(context.Background(), &GetDocumentInput{
+		AuthenticationToken:   ptr.String("__AuthenticationToken__"),
+		DocumentId:            ptr.String("__DocumentId__"),
+		IncludeCustomMetadata: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1446,7 +1632,13 @@ func TestCheckResponseSnapshot_GetDocumentPath(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDocumentPath(context.Background(), &GetDocumentPathInput{})
+	got, err := svc.GetDocumentPath(context.Background(), &GetDocumentPathInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		DocumentId:          ptr.String("__DocumentId__"),
+		Limit:               ptr.Int32(1),
+		Fields:              ptr.String("__Fields__"),
+		Marker:              ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1488,7 +1680,13 @@ func TestCheckResponseSnapshot_GetDocumentVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDocumentVersion(context.Background(), &GetDocumentVersionInput{})
+	got, err := svc.GetDocumentVersion(context.Background(), &GetDocumentVersionInput{
+		AuthenticationToken:   ptr.String("__AuthenticationToken__"),
+		DocumentId:            ptr.String("__DocumentId__"),
+		VersionId:             ptr.String("__VersionId__"),
+		Fields:                ptr.String("__Fields__"),
+		IncludeCustomMetadata: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1527,7 +1725,11 @@ func TestCheckResponseSnapshot_GetFolder(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFolder(context.Background(), &GetFolderInput{})
+	got, err := svc.GetFolder(context.Background(), &GetFolderInput{
+		AuthenticationToken:   ptr.String("__AuthenticationToken__"),
+		FolderId:              ptr.String("__FolderId__"),
+		IncludeCustomMetadata: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1559,7 +1761,13 @@ func TestCheckResponseSnapshot_GetFolderPath(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFolderPath(context.Background(), &GetFolderPathInput{})
+	got, err := svc.GetFolderPath(context.Background(), &GetFolderPathInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		FolderId:            ptr.String("__FolderId__"),
+		Limit:               ptr.Int32(1),
+		Fields:              ptr.String("__Fields__"),
+		Marker:              ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1678,7 +1886,13 @@ func TestCheckResponseSnapshot_GetResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResources(context.Background(), &GetResourcesInput{})
+	got, err := svc.GetResources(context.Background(), &GetResourcesInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		UserId:              ptr.String("__UserId__"),
+		CollectionType:      types.ResourceCollectionType("SHARED_WITH_ME"),
+		Limit:               ptr.Int32(1),
+		Marker:              ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1735,7 +1949,16 @@ func TestCheckResponseSnapshot_InitiateDocumentVersionUpload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InitiateDocumentVersionUpload(context.Background(), &InitiateDocumentVersionUploadInput{})
+	got, err := svc.InitiateDocumentVersionUpload(context.Background(), &InitiateDocumentVersionUploadInput{
+		AuthenticationToken:      ptr.String("__AuthenticationToken__"),
+		Id:                       ptr.String("__Id__"),
+		Name:                     ptr.String("__Name__"),
+		ContentCreatedTimestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ContentModifiedTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ContentType:              ptr.String("__ContentType__"),
+		DocumentSizeInBytes:      ptr.Int64(1),
+		ParentFolderId:           ptr.String("__ParentFolderId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1754,7 +1977,10 @@ func TestCheckResponseSnapshot_RemoveAllResourcePermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveAllResourcePermissions(context.Background(), &RemoveAllResourcePermissionsInput{})
+	got, err := svc.RemoveAllResourcePermissions(context.Background(), &RemoveAllResourcePermissionsInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		ResourceId:          ptr.String("__ResourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1773,7 +1999,12 @@ func TestCheckResponseSnapshot_RemoveResourcePermission(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveResourcePermission(context.Background(), &RemoveResourcePermissionInput{})
+	got, err := svc.RemoveResourcePermission(context.Background(), &RemoveResourcePermissionInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		ResourceId:          ptr.String("__ResourceId__"),
+		PrincipalId:         ptr.String("__PrincipalId__"),
+		PrincipalType:       types.PrincipalType("USER"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1792,7 +2023,10 @@ func TestCheckResponseSnapshot_RestoreDocumentVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RestoreDocumentVersions(context.Background(), &RestoreDocumentVersionsInput{})
+	got, err := svc.RestoreDocumentVersions(context.Background(), &RestoreDocumentVersionsInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		DocumentId:          ptr.String("__DocumentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2015,7 +2249,85 @@ func TestCheckResponseSnapshot_SearchResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchResources(context.Background(), &SearchResourcesInput{})
+	got, err := svc.SearchResources(context.Background(), &SearchResourcesInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		QueryText:           ptr.String("__QueryText__"),
+		QueryScopes: []types.SearchQueryScopeType{
+			types.SearchQueryScopeType("NAME"),
+			types.SearchQueryScopeType("NAME"),
+		},
+		OrganizationId: ptr.String("__OrganizationId__"),
+		AdditionalResponseFields: []types.AdditionalResponseFieldType{
+			types.AdditionalResponseFieldType("WEBURL"),
+			types.AdditionalResponseFieldType("WEBURL"),
+		},
+		Filters: &types.Filters{
+			TextLocales: []types.LanguageCodeType{
+				types.LanguageCodeType("AR"),
+				types.LanguageCodeType("AR"),
+			},
+			ContentCategories: []types.ContentCategoryType{
+				types.ContentCategoryType("IMAGE"),
+				types.ContentCategoryType("IMAGE"),
+			},
+			ResourceTypes: []types.SearchResourceType{
+				types.SearchResourceType("FOLDER"),
+				types.SearchResourceType("FOLDER"),
+			},
+			Labels: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Principals: []types.SearchPrincipalType{
+				{
+					Id: ptr.String("__Id__"),
+					Roles: []types.PrincipalRoleType{
+						types.PrincipalRoleType("VIEWER"),
+						types.PrincipalRoleType("VIEWER"),
+					},
+				},
+				{
+					Id: ptr.String("__Id__"),
+					Roles: []types.PrincipalRoleType{
+						types.PrincipalRoleType("VIEWER"),
+						types.PrincipalRoleType("VIEWER"),
+					},
+				},
+			},
+			AncestorIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SearchCollectionTypes: []types.SearchCollectionType{
+				types.SearchCollectionType("OWNED"),
+				types.SearchCollectionType("OWNED"),
+			},
+			SizeRange: &types.LongRangeType{
+				StartValue: ptr.Int64(1),
+				EndValue:   ptr.Int64(1),
+			},
+			CreatedRange: &types.DateRangeType{
+				StartValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndValue:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			ModifiedRange: &types.DateRangeType{
+				StartValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndValue:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		OrderBy: []types.SearchSortResult{
+			{
+				Field: types.OrderByFieldType("RELEVANCE"),
+				Order: types.SortOrder("ASC"),
+			},
+			{
+				Field: types.OrderByFieldType("RELEVANCE"),
+				Order: types.SortOrder("ASC"),
+			},
+		},
+		Limit:  ptr.Int32(1),
+		Marker: ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2034,7 +2346,13 @@ func TestCheckResponseSnapshot_UpdateDocument(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDocument(context.Background(), &UpdateDocumentInput{})
+	got, err := svc.UpdateDocument(context.Background(), &UpdateDocumentInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		DocumentId:          ptr.String("__DocumentId__"),
+		Name:                ptr.String("__Name__"),
+		ParentFolderId:      ptr.String("__ParentFolderId__"),
+		ResourceState:       types.ResourceStateType("ACTIVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2053,7 +2371,12 @@ func TestCheckResponseSnapshot_UpdateDocumentVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDocumentVersion(context.Background(), &UpdateDocumentVersionInput{})
+	got, err := svc.UpdateDocumentVersion(context.Background(), &UpdateDocumentVersionInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		DocumentId:          ptr.String("__DocumentId__"),
+		VersionId:           ptr.String("__VersionId__"),
+		VersionStatus:       types.DocumentVersionStatus("ACTIVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2072,7 +2395,13 @@ func TestCheckResponseSnapshot_UpdateFolder(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFolder(context.Background(), &UpdateFolderInput{})
+	got, err := svc.UpdateFolder(context.Background(), &UpdateFolderInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		FolderId:            ptr.String("__FolderId__"),
+		Name:                ptr.String("__Name__"),
+		ParentFolderId:      ptr.String("__ParentFolderId__"),
+		ResourceState:       types.ResourceStateType("ACTIVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2115,7 +2444,20 @@ func TestCheckResponseSnapshot_UpdateUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUser(context.Background(), &UpdateUserInput{})
+	got, err := svc.UpdateUser(context.Background(), &UpdateUserInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		UserId:              ptr.String("__UserId__"),
+		GivenName:           ptr.String("__GivenName__"),
+		Surname:             ptr.String("__Surname__"),
+		Type:                types.UserType("USER"),
+		StorageRule: &types.StorageRuleType{
+			StorageAllocatedInBytes: ptr.Int64(1),
+			StorageType:             types.StorageType("UNLIMITED"),
+		},
+		TimeZoneId:               ptr.String("__TimeZoneId__"),
+		Locale:                   types.LocaleType("en"),
+		GrantPoweruserPrivileges: types.BooleanEnumType("TRUE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2136,7 +2478,11 @@ func TestCheckResponseSnapshot_Error_ConcurrentModificationException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AbortDocumentVersionUpload(context.Background(), &AbortDocumentVersionUploadInput{})
+	_, opErr := svc.AbortDocumentVersionUpload(context.Background(), &AbortDocumentVersionUploadInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		DocumentId:          ptr.String("__DocumentId__"),
+		VersionId:           ptr.String("__VersionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2161,7 +2507,11 @@ func TestCheckResponseSnapshot_Error_ConflictingOperationException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFolder(context.Background(), &CreateFolderInput{})
+	_, opErr := svc.CreateFolder(context.Background(), &CreateFolderInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		Name:                ptr.String("__Name__"),
+		ParentFolderId:      ptr.String("__ParentFolderId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2186,7 +2536,14 @@ func TestCheckResponseSnapshot_Error_CustomMetadataLimitExceededException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCustomMetadata(context.Background(), &CreateCustomMetadataInput{})
+	_, opErr := svc.CreateCustomMetadata(context.Background(), &CreateCustomMetadataInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		ResourceId:          ptr.String("__ResourceId__"),
+		VersionId:           ptr.String("__VersionId__"),
+		CustomMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2202,7 +2559,7 @@ func TestCheckResponseSnapshot_Error_CustomMetadataLimitExceededException(t *tes
 func TestCheckResponseSnapshot_Error_DeactivatingLastSystemUserException(t *testing.T) {
 	want := &types.DeactivatingLastSystemUserException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("DeactivatingLastSystemUserException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeactivatingLastSystemUserException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2212,7 +2569,20 @@ func TestCheckResponseSnapshot_Error_DeactivatingLastSystemUserException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateUser(context.Background(), &UpdateUserInput{})
+	_, opErr := svc.UpdateUser(context.Background(), &UpdateUserInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		UserId:              ptr.String("__UserId__"),
+		GivenName:           ptr.String("__GivenName__"),
+		Surname:             ptr.String("__Surname__"),
+		Type:                types.UserType("USER"),
+		StorageRule: &types.StorageRuleType{
+			StorageAllocatedInBytes: ptr.Int64(1),
+			StorageType:             types.StorageType("UNLIMITED"),
+		},
+		TimeZoneId:               ptr.String("__TimeZoneId__"),
+		Locale:                   types.LocaleType("en"),
+		GrantPoweruserPrivileges: types.BooleanEnumType("TRUE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2237,7 +2607,16 @@ func TestCheckResponseSnapshot_Error_DocumentLockedForCommentsException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateComment(context.Background(), &CreateCommentInput{})
+	_, opErr := svc.CreateComment(context.Background(), &CreateCommentInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		DocumentId:          ptr.String("__DocumentId__"),
+		VersionId:           ptr.String("__VersionId__"),
+		ParentId:            ptr.String("__ParentId__"),
+		ThreadId:            ptr.String("__ThreadId__"),
+		Text:                ptr.String("__Text__"),
+		Visibility:          types.CommentVisibilityType("PUBLIC"),
+		NotifyCollaborators: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2262,7 +2641,16 @@ func TestCheckResponseSnapshot_Error_DraftUploadOutOfSyncException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.InitiateDocumentVersionUpload(context.Background(), &InitiateDocumentVersionUploadInput{})
+	_, opErr := svc.InitiateDocumentVersionUpload(context.Background(), &InitiateDocumentVersionUploadInput{
+		AuthenticationToken:      ptr.String("__AuthenticationToken__"),
+		Id:                       ptr.String("__Id__"),
+		Name:                     ptr.String("__Name__"),
+		ContentCreatedTimestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ContentModifiedTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ContentType:              ptr.String("__ContentType__"),
+		DocumentSizeInBytes:      ptr.Int64(1),
+		ParentFolderId:           ptr.String("__ParentFolderId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2287,7 +2675,11 @@ func TestCheckResponseSnapshot_Error_EntityAlreadyExistsException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFolder(context.Background(), &CreateFolderInput{})
+	_, opErr := svc.CreateFolder(context.Background(), &CreateFolderInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		Name:                ptr.String("__Name__"),
+		ParentFolderId:      ptr.String("__ParentFolderId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2316,7 +2708,11 @@ func TestCheckResponseSnapshot_Error_EntityNotExistsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AbortDocumentVersionUpload(context.Background(), &AbortDocumentVersionUploadInput{})
+	_, opErr := svc.AbortDocumentVersionUpload(context.Background(), &AbortDocumentVersionUploadInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		DocumentId:          ptr.String("__DocumentId__"),
+		VersionId:           ptr.String("__VersionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2341,7 +2737,11 @@ func TestCheckResponseSnapshot_Error_FailedDependencyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AbortDocumentVersionUpload(context.Background(), &AbortDocumentVersionUploadInput{})
+	_, opErr := svc.AbortDocumentVersionUpload(context.Background(), &AbortDocumentVersionUploadInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		DocumentId:          ptr.String("__DocumentId__"),
+		VersionId:           ptr.String("__VersionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2366,7 +2766,20 @@ func TestCheckResponseSnapshot_Error_IllegalUserStateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateUser(context.Background(), &UpdateUserInput{})
+	_, opErr := svc.UpdateUser(context.Background(), &UpdateUserInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		UserId:              ptr.String("__UserId__"),
+		GivenName:           ptr.String("__GivenName__"),
+		Surname:             ptr.String("__Surname__"),
+		Type:                types.UserType("USER"),
+		StorageRule: &types.StorageRuleType{
+			StorageAllocatedInBytes: ptr.Int64(1),
+			StorageType:             types.StorageType("UNLIMITED"),
+		},
+		TimeZoneId:               ptr.String("__TimeZoneId__"),
+		Locale:                   types.LocaleType("en"),
+		GrantPoweruserPrivileges: types.BooleanEnumType("TRUE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2391,7 +2804,12 @@ func TestCheckResponseSnapshot_Error_InvalidArgumentException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateNotificationSubscription(context.Background(), &CreateNotificationSubscriptionInput{})
+	_, opErr := svc.CreateNotificationSubscription(context.Background(), &CreateNotificationSubscriptionInput{
+		OrganizationId:   ptr.String("__OrganizationId__"),
+		Endpoint:         ptr.String("__Endpoint__"),
+		Protocol:         types.SubscriptionProtocolType("HTTPS"),
+		SubscriptionType: types.SubscriptionType("ALL"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2416,7 +2834,16 @@ func TestCheckResponseSnapshot_Error_InvalidCommentOperationException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateComment(context.Background(), &CreateCommentInput{})
+	_, opErr := svc.CreateComment(context.Background(), &CreateCommentInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		DocumentId:          ptr.String("__DocumentId__"),
+		VersionId:           ptr.String("__VersionId__"),
+		ParentId:            ptr.String("__ParentId__"),
+		ThreadId:            ptr.String("__ThreadId__"),
+		Text:                ptr.String("__Text__"),
+		Visibility:          types.CommentVisibilityType("PUBLIC"),
+		NotifyCollaborators: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2441,7 +2868,12 @@ func TestCheckResponseSnapshot_Error_InvalidOperationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteDocumentVersion(context.Background(), &DeleteDocumentVersionInput{})
+	_, opErr := svc.DeleteDocumentVersion(context.Background(), &DeleteDocumentVersionInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		DocumentId:          ptr.String("__DocumentId__"),
+		VersionId:           ptr.String("__VersionId__"),
+		DeletePriorVersions: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2466,7 +2898,14 @@ func TestCheckResponseSnapshot_Error_InvalidPasswordException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeDocumentVersions(context.Background(), &DescribeDocumentVersionsInput{})
+	_, opErr := svc.DescribeDocumentVersions(context.Background(), &DescribeDocumentVersionsInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		DocumentId:          ptr.String("__DocumentId__"),
+		Marker:              ptr.String("__Marker__"),
+		Limit:               ptr.Int32(1),
+		Include:             ptr.String("__Include__"),
+		Fields:              ptr.String("__Fields__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2491,7 +2930,11 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFolder(context.Background(), &CreateFolderInput{})
+	_, opErr := svc.CreateFolder(context.Background(), &CreateFolderInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		Name:                ptr.String("__Name__"),
+		ParentFolderId:      ptr.String("__ParentFolderId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2516,7 +2959,11 @@ func TestCheckResponseSnapshot_Error_ProhibitedStateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AbortDocumentVersionUpload(context.Background(), &AbortDocumentVersionUploadInput{})
+	_, opErr := svc.AbortDocumentVersionUpload(context.Background(), &AbortDocumentVersionUploadInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		DocumentId:          ptr.String("__DocumentId__"),
+		VersionId:           ptr.String("__VersionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2541,7 +2988,18 @@ func TestCheckResponseSnapshot_Error_RequestedEntityTooLargeException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeUsers(context.Background(), &DescribeUsersInput{})
+	_, opErr := svc.DescribeUsers(context.Background(), &DescribeUsersInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		OrganizationId:      ptr.String("__OrganizationId__"),
+		UserIds:             ptr.String("__UserIds__"),
+		Query:               ptr.String("__Query__"),
+		Include:             types.UserFilterType("ALL"),
+		Order:               types.OrderType("ASCENDING"),
+		Sort:                types.UserSortType("USER_NAME"),
+		Marker:              ptr.String("__Marker__"),
+		Limit:               ptr.Int32(1),
+		Fields:              ptr.String("__Fields__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2566,7 +3024,16 @@ func TestCheckResponseSnapshot_Error_ResourceAlreadyCheckedOutException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.InitiateDocumentVersionUpload(context.Background(), &InitiateDocumentVersionUploadInput{})
+	_, opErr := svc.InitiateDocumentVersionUpload(context.Background(), &InitiateDocumentVersionUploadInput{
+		AuthenticationToken:      ptr.String("__AuthenticationToken__"),
+		Id:                       ptr.String("__Id__"),
+		Name:                     ptr.String("__Name__"),
+		ContentCreatedTimestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ContentModifiedTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ContentType:              ptr.String("__ContentType__"),
+		DocumentSizeInBytes:      ptr.Int64(1),
+		ParentFolderId:           ptr.String("__ParentFolderId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2591,7 +3058,11 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AbortDocumentVersionUpload(context.Background(), &AbortDocumentVersionUploadInput{})
+	_, opErr := svc.AbortDocumentVersionUpload(context.Background(), &AbortDocumentVersionUploadInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		DocumentId:          ptr.String("__DocumentId__"),
+		VersionId:           ptr.String("__VersionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2616,7 +3087,16 @@ func TestCheckResponseSnapshot_Error_StorageLimitExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.InitiateDocumentVersionUpload(context.Background(), &InitiateDocumentVersionUploadInput{})
+	_, opErr := svc.InitiateDocumentVersionUpload(context.Background(), &InitiateDocumentVersionUploadInput{
+		AuthenticationToken:      ptr.String("__AuthenticationToken__"),
+		Id:                       ptr.String("__Id__"),
+		Name:                     ptr.String("__Name__"),
+		ContentCreatedTimestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ContentModifiedTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ContentType:              ptr.String("__ContentType__"),
+		DocumentSizeInBytes:      ptr.Int64(1),
+		ParentFolderId:           ptr.String("__ParentFolderId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2641,7 +3121,16 @@ func TestCheckResponseSnapshot_Error_StorageLimitWillExceedException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.InitiateDocumentVersionUpload(context.Background(), &InitiateDocumentVersionUploadInput{})
+	_, opErr := svc.InitiateDocumentVersionUpload(context.Background(), &InitiateDocumentVersionUploadInput{
+		AuthenticationToken:      ptr.String("__AuthenticationToken__"),
+		Id:                       ptr.String("__Id__"),
+		Name:                     ptr.String("__Name__"),
+		ContentCreatedTimestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ContentModifiedTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ContentType:              ptr.String("__ContentType__"),
+		DocumentSizeInBytes:      ptr.Int64(1),
+		ParentFolderId:           ptr.String("__ParentFolderId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2666,7 +3155,14 @@ func TestCheckResponseSnapshot_Error_TooManyLabelsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLabels(context.Background(), &CreateLabelsInput{})
+	_, opErr := svc.CreateLabels(context.Background(), &CreateLabelsInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		Labels: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2691,7 +3187,12 @@ func TestCheckResponseSnapshot_Error_TooManySubscriptionsException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateNotificationSubscription(context.Background(), &CreateNotificationSubscriptionInput{})
+	_, opErr := svc.CreateNotificationSubscription(context.Background(), &CreateNotificationSubscriptionInput{
+		OrganizationId:   ptr.String("__OrganizationId__"),
+		Endpoint:         ptr.String("__Endpoint__"),
+		Protocol:         types.SubscriptionProtocolType("HTTPS"),
+		SubscriptionType: types.SubscriptionType("ALL"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2707,7 +3208,7 @@ func TestCheckResponseSnapshot_Error_TooManySubscriptionsException(t *testing.T)
 func TestCheckResponseSnapshot_Error_UnauthorizedOperationException(t *testing.T) {
 	want := &types.UnauthorizedOperationException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("UnauthorizedOperationException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UnauthorizedOperationException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2717,7 +3218,11 @@ func TestCheckResponseSnapshot_Error_UnauthorizedOperationException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AbortDocumentVersionUpload(context.Background(), &AbortDocumentVersionUploadInput{})
+	_, opErr := svc.AbortDocumentVersionUpload(context.Background(), &AbortDocumentVersionUploadInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		DocumentId:          ptr.String("__DocumentId__"),
+		VersionId:           ptr.String("__VersionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2742,7 +3247,11 @@ func TestCheckResponseSnapshot_Error_UnauthorizedResourceAccessException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AbortDocumentVersionUpload(context.Background(), &AbortDocumentVersionUploadInput{})
+	_, opErr := svc.AbortDocumentVersionUpload(context.Background(), &AbortDocumentVersionUploadInput{
+		AuthenticationToken: ptr.String("__AuthenticationToken__"),
+		DocumentId:          ptr.String("__DocumentId__"),
+		VersionId:           ptr.String("__VersionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

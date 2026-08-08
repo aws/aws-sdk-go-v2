@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.DescribeOrderableReplicationInstances
+
+{"Marker":"__Marker__","OrderableReplicationInstances":[{"AvailabilityZones":["__Member__","__Member__"],"DefaultAllocatedStorage":1,"EngineVersion":"__EngineVersion__","IncludedAllocatedStorage":1,"MaxAllocatedStorage":1,"MinAllocatedStorage":1,"ReleaseStatus":"beta","ReplicationInstanceClass":"__ReplicationInstanceClass__","StorageType":"__StorageType__"},{"AvailabilityZones":["__Member__","__Member__"],"DefaultAllocatedStorage":1,"EngineVersion":"__EngineVersion__","IncludedAllocatedStorage":1,"MaxAllocatedStorage":1,"MinAllocatedStorage":1,"ReleaseStatus":"beta","ReplicationInstanceClass":"__ReplicationInstanceClass__","StorageType":"__StorageType__"}]}

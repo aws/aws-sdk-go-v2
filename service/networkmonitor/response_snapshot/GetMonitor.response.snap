@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"aggregationPeriod":1,"createdAt":946684800,"modifiedAt":946684800,"monitorArn":"__MonitorArn__","monitorName":"__MonitorName__","probes":[{"addressFamily":"IPV4","createdAt":946684800,"destination":"__Destination__","destinationPort":1,"modifiedAt":946684800,"packetSize":1,"probeArn":"__ProbeArn__","probeId":"__ProbeId__","protocol":"TCP","sourceArn":"__SourceArn__","state":"PENDING","tags":{"key0":"__Value__"},"vpcId":"__VpcId__"},{"addressFamily":"IPV4","createdAt":946684800,"destination":"__Destination__","destinationPort":1,"modifiedAt":946684800,"packetSize":1,"probeArn":"__ProbeArn__","probeId":"__ProbeId__","protocol":"TCP","sourceArn":"__SourceArn__","state":"PENDING","tags":{"key0":"__Value__"},"vpcId":"__VpcId__"}],"state":"PENDING","tags":{"key0":"__Value__"}}

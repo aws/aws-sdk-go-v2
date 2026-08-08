@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSIdentityStore.DescribeGroupMembership
+
+{"CreatedAt":946684800,"CreatedBy":"__CreatedBy__","GroupId":"__GroupId__","IdentityStoreId":"__IdentityStoreId__","MemberId":{"UserId":"__MemberIdMemberUserId__"},"MembershipId":"__MembershipId__","UpdatedAt":946684800,"UpdatedBy":"__UpdatedBy__"}

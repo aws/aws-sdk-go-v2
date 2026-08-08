@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/inspectorscan/document"
 	"github.com/aws/aws-sdk-go-v2/service/inspectorscan/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -108,7 +109,7 @@ func serdeRespClient(status int, header http.Header, body []byte) *Client {
 }
 func TestCheckResponseSnapshot_ScanSbom(t *testing.T) {
 	want := &ScanSbomOutput{
-		Sbom: nil,
+		Sbom: document.NewLazyDocument("__Document__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ScanSbom.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -118,7 +119,10 @@ func TestCheckResponseSnapshot_ScanSbom(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ScanSbom(context.Background(), &ScanSbomInput{})
+	got, err := svc.ScanSbom(context.Background(), &ScanSbomInput{
+		Sbom:         document.NewLazyDocument("__Document__"),
+		OutputFormat: types.OutputFormat("CYCLONE_DX_1_5"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -139,7 +143,10 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ScanSbom(context.Background(), &ScanSbomInput{})
+	_, opErr := svc.ScanSbom(context.Background(), &ScanSbomInput{
+		Sbom:         document.NewLazyDocument("__Document__"),
+		OutputFormat: types.OutputFormat("CYCLONE_DX_1_5"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -166,7 +173,10 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ScanSbom(context.Background(), &ScanSbomInput{})
+	_, opErr := svc.ScanSbom(context.Background(), &ScanSbomInput{
+		Sbom:         document.NewLazyDocument("__Document__"),
+		OutputFormat: types.OutputFormat("CYCLONE_DX_1_5"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -192,7 +202,10 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ScanSbom(context.Background(), &ScanSbomInput{})
+	_, opErr := svc.ScanSbom(context.Background(), &ScanSbomInput{
+		Sbom:         document.NewLazyDocument("__Document__"),
+		OutputFormat: types.OutputFormat("CYCLONE_DX_1_5"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -228,7 +241,10 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ScanSbom(context.Background(), &ScanSbomInput{})
+	_, opErr := svc.ScanSbom(context.Background(), &ScanSbomInput{
+		Sbom:         document.NewLazyDocument("__Document__"),
+		OutputFormat: types.OutputFormat("CYCLONE_DX_1_5"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

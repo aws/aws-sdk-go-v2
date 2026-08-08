@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"session":{"clientIpAddresses":["__Member__","__Member__"],"endTime":946684800,"portalArn":"__PortalArn__","sessionId":"__SessionId__","startTime":946684800,"status":"Active","username":"__Username__"}}

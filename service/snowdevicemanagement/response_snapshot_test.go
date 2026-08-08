@@ -119,7 +119,9 @@ func TestCheckResponseSnapshot_CancelTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelTask(context.Background(), &CancelTaskInput{})
+	got, err := svc.CancelTask(context.Background(), &CancelTaskInput{
+		TaskId: ptr.String("__TaskId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -141,7 +143,20 @@ func TestCheckResponseSnapshot_CreateTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTask(context.Background(), &CreateTaskInput{})
+	got, err := svc.CreateTask(context.Background(), &CreateTaskInput{
+		Targets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Command: &types.CommandMemberUnlock{
+			Value: types.Unlock{},
+		},
+		Description: ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -212,7 +227,9 @@ func TestCheckResponseSnapshot_DescribeDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDevice(context.Background(), &DescribeDeviceInput{})
+	got, err := svc.DescribeDevice(context.Background(), &DescribeDeviceInput{
+		ManagedDeviceId: ptr.String("__ManagedDeviceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -338,7 +355,13 @@ func TestCheckResponseSnapshot_DescribeDeviceEc2Instances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDeviceEc2Instances(context.Background(), &DescribeDeviceEc2InstancesInput{})
+	got, err := svc.DescribeDeviceEc2Instances(context.Background(), &DescribeDeviceEc2InstancesInput{
+		ManagedDeviceId: ptr.String("__ManagedDeviceId__"),
+		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -364,7 +387,10 @@ func TestCheckResponseSnapshot_DescribeExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeExecution(context.Background(), &DescribeExecutionInput{})
+	got, err := svc.DescribeExecution(context.Background(), &DescribeExecutionInput{
+		TaskId:          ptr.String("__TaskId__"),
+		ManagedDeviceId: ptr.String("__ManagedDeviceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -398,7 +424,9 @@ func TestCheckResponseSnapshot_DescribeTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTask(context.Background(), &DescribeTaskInput{})
+	got, err := svc.DescribeTask(context.Background(), &DescribeTaskInput{
+		TaskId: ptr.String("__TaskId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -431,7 +459,12 @@ func TestCheckResponseSnapshot_ListDeviceResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDeviceResources(context.Background(), &ListDeviceResourcesInput{})
+	got, err := svc.ListDeviceResources(context.Background(), &ListDeviceResourcesInput{
+		ManagedDeviceId: ptr.String("__ManagedDeviceId__"),
+		Type:            ptr.String("__Type__"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -470,7 +503,11 @@ func TestCheckResponseSnapshot_ListDevices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDevices(context.Background(), &ListDevicesInput{})
+	got, err := svc.ListDevices(context.Background(), &ListDevicesInput{
+		JobId:      ptr.String("__JobId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -505,7 +542,12 @@ func TestCheckResponseSnapshot_ListExecutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListExecutions(context.Background(), &ListExecutionsInput{})
+	got, err := svc.ListExecutions(context.Background(), &ListExecutionsInput{
+		TaskId:     ptr.String("__TaskId__"),
+		State:      types.ExecutionState("QUEUED"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -528,7 +570,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -567,7 +611,11 @@ func TestCheckResponseSnapshot_ListTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTasks(context.Background(), &ListTasksInput{})
+	got, err := svc.ListTasks(context.Background(), &ListTasksInput{
+		State:      types.TaskState("IN_PROGRESS"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -586,7 +634,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -605,7 +658,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -626,7 +685,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelTask(context.Background(), &CancelTaskInput{})
+	_, opErr := svc.CancelTask(context.Background(), &CancelTaskInput{
+		TaskId: ptr.String("__TaskId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -651,7 +712,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelTask(context.Background(), &CancelTaskInput{})
+	_, opErr := svc.CancelTask(context.Background(), &CancelTaskInput{
+		TaskId: ptr.String("__TaskId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -676,7 +739,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelTask(context.Background(), &CancelTaskInput{})
+	_, opErr := svc.CancelTask(context.Background(), &CancelTaskInput{
+		TaskId: ptr.String("__TaskId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -701,7 +766,20 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTask(context.Background(), &CreateTaskInput{})
+	_, opErr := svc.CreateTask(context.Background(), &CreateTaskInput{
+		Targets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Command: &types.CommandMemberUnlock{
+			Value: types.Unlock{},
+		},
+		Description: ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -726,7 +804,9 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelTask(context.Background(), &CancelTaskInput{})
+	_, opErr := svc.CancelTask(context.Background(), &CancelTaskInput{
+		TaskId: ptr.String("__TaskId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -751,7 +831,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelTask(context.Background(), &CancelTaskInput{})
+	_, opErr := svc.CancelTask(context.Background(), &CancelTaskInput{
+		TaskId: ptr.String("__TaskId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBCMPricingCalculator.ListBillEstimateCommitments
+
+{"items":[{"id":"__Id__","monthlyPayment":{"amount":1,"currency":"USD"},"offeringId":"__OfferingId__","paymentOption":"__PaymentOption__","purchaseAgreementType":"SAVINGS_PLANS","region":"__Region__","termLength":"__TermLength__","upfrontPayment":{"amount":1,"currency":"USD"},"usageAccountId":"__UsageAccountId__"},{"id":"__Id__","monthlyPayment":{"amount":1,"currency":"USD"},"offeringId":"__OfferingId__","paymentOption":"__PaymentOption__","purchaseAgreementType":"SAVINGS_PLANS","region":"__Region__","termLength":"__TermLength__","upfrontPayment":{"amount":1,"currency":"USD"},"usageAccountId":"__UsageAccountId__"}],"nextToken":"__NextToken__"}

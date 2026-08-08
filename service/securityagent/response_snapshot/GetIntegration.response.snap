@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"displayName":"__DisplayName__","installationId":"__InstallationId__","integrationId":"__IntegrationId__","kmsKeyId":"__KmsKeyId__","privateConnectionName":"__PrivateConnectionName__","provider":"GITHUB","providerType":"SOURCE_CODE","targetUrl":"__TargetUrl__"}

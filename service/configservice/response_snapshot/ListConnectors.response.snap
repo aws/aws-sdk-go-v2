@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.ListConnectors
+
+{"ConnectorSummaries":[{"arn":"__Arn__","createdTime":946684800,"name":"__Name__","provider":"AZURE","tenantIdentifier":"__TenantIdentifier__"},{"arn":"__Arn__","createdTime":946684800,"name":"__Name__","provider":"AZURE","tenantIdentifier":"__TenantIdentifier__"}],"NextToken":"__NextToken__"}

@@ -2,4 +2,4 @@ POST /scan/sbom
 
 Content-Type: application/json
 
-{"outputFormat":"CYCLONE_DX_1_5"}
+{"outputFormat":"CYCLONE_DX_1_5","sbom":"__Document__"}

@@ -1,0 +1,5 @@
+500
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSIdentityStore.CreateGroup
+
+{"__type":"InternalServerException","Message":"__Message__","RequestId":"__RequestId__","RetryAfterSeconds":1}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.GetCommandInvocation
+
+{"CloudWatchOutputConfig":{"CloudWatchLogGroupName":"__CloudWatchLogGroupName__","CloudWatchOutputEnabled":true},"CommandId":"__CommandId__","Comment":"__Comment__","DocumentName":"__DocumentName__","DocumentVersion":"__DocumentVersion__","ExecutionElapsedTime":"__ExecutionElapsedTime__","ExecutionEndDateTime":"__ExecutionEndDateTime__","ExecutionStartDateTime":"__ExecutionStartDateTime__","InstanceId":"__InstanceId__","PluginName":"__PluginName__","ResponseCode":1,"StandardErrorContent":"__StandardErrorContent__","StandardErrorUrl":"__StandardErrorUrl__","StandardOutputContent":"__StandardOutputContent__","StandardOutputUrl":"__StandardOutputUrl__","Status":"Pending","StatusDetails":"__StatusDetails__"}

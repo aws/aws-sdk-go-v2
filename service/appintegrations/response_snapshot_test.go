@@ -120,7 +120,68 @@ func TestCheckResponseSnapshot_CreateApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Name:        ptr.String("__Name__"),
+		Namespace:   ptr.String("__Namespace__"),
+		Description: ptr.String("__Description__"),
+		ApplicationSourceConfig: &types.ApplicationSourceConfig{
+			ExternalUrlConfig: &types.ExternalUrlConfig{
+				AccessUrl: ptr.String("__AccessUrl__"),
+				ApprovedOrigins: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Subscriptions: []types.Subscription{
+			{
+				Event:       ptr.String("__Event__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Event:       ptr.String("__Event__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		Publications: []types.Publication{
+			{
+				Event:       ptr.String("__Event__"),
+				Schema:      ptr.String("__Schema__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Event:       ptr.String("__Event__"),
+				Schema:      ptr.String("__Schema__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Permissions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IsService:             true,
+		InitializationTimeout: ptr.Int32(1),
+		ApplicationConfig: &types.ApplicationConfig{
+			ContactHandling: &types.ContactHandling{
+				Scope: types.ContactHandlingScope("CROSS_CONTACTS"),
+			},
+		},
+		IframeConfig: &types.IframeConfig{
+			Allow: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Sandbox: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ApplicationType: types.ApplicationType("STANDARD"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -175,7 +236,41 @@ func TestCheckResponseSnapshot_CreateDataIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataIntegration(context.Background(), &CreateDataIntegrationInput{})
+	got, err := svc.CreateDataIntegration(context.Background(), &CreateDataIntegrationInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		KmsKey:      ptr.String("__KmsKey__"),
+		SourceURI:   ptr.String("__SourceURI__"),
+		ScheduleConfig: &types.ScheduleConfiguration{
+			FirstExecutionFrom: ptr.String("__FirstExecutionFrom__"),
+			Object:             ptr.String("__Object__"),
+			ScheduleExpression: ptr.String("__ScheduleExpression__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		FileConfiguration: &types.FileConfiguration{
+			Folders: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Filters: map[string][]string{
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ObjectConfiguration: map[string]map[string][]string{
+			"key0": {
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -197,7 +292,35 @@ func TestCheckResponseSnapshot_CreateDataIntegrationAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataIntegrationAssociation(context.Background(), &CreateDataIntegrationAssociationInput{})
+	got, err := svc.CreateDataIntegrationAssociation(context.Background(), &CreateDataIntegrationAssociationInput{
+		DataIntegrationIdentifier: ptr.String("__DataIntegrationIdentifier__"),
+		ClientId:                  ptr.String("__ClientId__"),
+		ObjectConfiguration: map[string]map[string][]string{
+			"key0": {
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		DestinationURI: ptr.String("__DestinationURI__"),
+		ClientAssociationMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		ExecutionConfiguration: &types.ExecutionConfiguration{
+			ExecutionMode: types.ExecutionMode("ON_DEMAND"),
+			OnDemandConfiguration: &types.OnDemandConfiguration{
+				StartTime: ptr.String("__StartTime__"),
+				EndTime:   ptr.String("__EndTime__"),
+			},
+			ScheduleConfiguration: &types.ScheduleConfiguration{
+				FirstExecutionFrom: ptr.String("__FirstExecutionFrom__"),
+				Object:             ptr.String("__Object__"),
+				ScheduleExpression: ptr.String("__ScheduleExpression__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -218,7 +341,18 @@ func TestCheckResponseSnapshot_CreateEventIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEventIntegration(context.Background(), &CreateEventIntegrationInput{})
+	got, err := svc.CreateEventIntegration(context.Background(), &CreateEventIntegrationInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		EventFilter: &types.EventFilter{
+			Source: ptr.String("__Source__"),
+		},
+		EventBridgeBus: ptr.String("__EventBridgeBus__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -237,7 +371,9 @@ func TestCheckResponseSnapshot_DeleteApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{})
+	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -256,7 +392,9 @@ func TestCheckResponseSnapshot_DeleteDataIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataIntegration(context.Background(), &DeleteDataIntegrationInput{})
+	got, err := svc.DeleteDataIntegration(context.Background(), &DeleteDataIntegrationInput{
+		DataIntegrationIdentifier: ptr.String("__DataIntegrationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -275,7 +413,9 @@ func TestCheckResponseSnapshot_DeleteEventIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEventIntegration(context.Background(), &DeleteEventIntegrationInput{})
+	got, err := svc.DeleteEventIntegration(context.Background(), &DeleteEventIntegrationInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -358,7 +498,9 @@ func TestCheckResponseSnapshot_GetApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApplication(context.Background(), &GetApplicationInput{})
+	got, err := svc.GetApplication(context.Background(), &GetApplicationInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -412,7 +554,9 @@ func TestCheckResponseSnapshot_GetDataIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataIntegration(context.Background(), &GetDataIntegrationInput{})
+	got, err := svc.GetDataIntegration(context.Background(), &GetDataIntegrationInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -442,7 +586,9 @@ func TestCheckResponseSnapshot_GetEventIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEventIntegration(context.Background(), &GetEventIntegrationInput{})
+	got, err := svc.GetEventIntegration(context.Background(), &GetEventIntegrationInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -475,7 +621,11 @@ func TestCheckResponseSnapshot_ListApplicationAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplicationAssociations(context.Background(), &ListApplicationAssociationsInput{})
+	got, err := svc.ListApplicationAssociations(context.Background(), &ListApplicationAssociationsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -518,7 +668,11 @@ func TestCheckResponseSnapshot_ListApplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplications(context.Background(), &ListApplicationsInput{})
+	got, err := svc.ListApplications(context.Background(), &ListApplicationsInput{
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		ApplicationType: types.ApplicationType("STANDARD"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -585,7 +739,11 @@ func TestCheckResponseSnapshot_ListDataIntegrationAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataIntegrationAssociations(context.Background(), &ListDataIntegrationAssociationsInput{})
+	got, err := svc.ListDataIntegrationAssociations(context.Background(), &ListDataIntegrationAssociationsInput{
+		DataIntegrationIdentifier: ptr.String("__DataIntegrationIdentifier__"),
+		NextToken:                 ptr.String("__NextToken__"),
+		MaxResults:                ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -618,7 +776,10 @@ func TestCheckResponseSnapshot_ListDataIntegrations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataIntegrations(context.Background(), &ListDataIntegrationsInput{})
+	got, err := svc.ListDataIntegrations(context.Background(), &ListDataIntegrationsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -661,7 +822,11 @@ func TestCheckResponseSnapshot_ListEventIntegrationAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEventIntegrationAssociations(context.Background(), &ListEventIntegrationAssociationsInput{})
+	got, err := svc.ListEventIntegrationAssociations(context.Background(), &ListEventIntegrationAssociationsInput{
+		EventIntegrationName: ptr.String("__EventIntegrationName__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -708,7 +873,10 @@ func TestCheckResponseSnapshot_ListEventIntegrations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEventIntegrations(context.Background(), &ListEventIntegrationsInput{})
+	got, err := svc.ListEventIntegrations(context.Background(), &ListEventIntegrationsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -731,7 +899,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -750,7 +920,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -769,7 +944,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -788,7 +969,64 @@ func TestCheckResponseSnapshot_UpdateApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApplication(context.Background(), &UpdateApplicationInput{})
+	got, err := svc.UpdateApplication(context.Background(), &UpdateApplicationInput{
+		Arn:         ptr.String("__Arn__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ApplicationSourceConfig: &types.ApplicationSourceConfig{
+			ExternalUrlConfig: &types.ExternalUrlConfig{
+				AccessUrl: ptr.String("__AccessUrl__"),
+				ApprovedOrigins: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Subscriptions: []types.Subscription{
+			{
+				Event:       ptr.String("__Event__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Event:       ptr.String("__Event__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		Publications: []types.Publication{
+			{
+				Event:       ptr.String("__Event__"),
+				Schema:      ptr.String("__Schema__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Event:       ptr.String("__Event__"),
+				Schema:      ptr.String("__Schema__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		Permissions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IsService:             ptr.Bool(true),
+		InitializationTimeout: ptr.Int32(1),
+		ApplicationConfig: &types.ApplicationConfig{
+			ContactHandling: &types.ContactHandling{
+				Scope: types.ContactHandlingScope("CROSS_CONTACTS"),
+			},
+		},
+		IframeConfig: &types.IframeConfig{
+			Allow: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Sandbox: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ApplicationType: types.ApplicationType("STANDARD"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -807,7 +1045,11 @@ func TestCheckResponseSnapshot_UpdateDataIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataIntegration(context.Background(), &UpdateDataIntegrationInput{})
+	got, err := svc.UpdateDataIntegration(context.Background(), &UpdateDataIntegrationInput{
+		Identifier:  ptr.String("__Identifier__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -826,7 +1068,22 @@ func TestCheckResponseSnapshot_UpdateDataIntegrationAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataIntegrationAssociation(context.Background(), &UpdateDataIntegrationAssociationInput{})
+	got, err := svc.UpdateDataIntegrationAssociation(context.Background(), &UpdateDataIntegrationAssociationInput{
+		DataIntegrationIdentifier:            ptr.String("__DataIntegrationIdentifier__"),
+		DataIntegrationAssociationIdentifier: ptr.String("__DataIntegrationAssociationIdentifier__"),
+		ExecutionConfiguration: &types.ExecutionConfiguration{
+			ExecutionMode: types.ExecutionMode("ON_DEMAND"),
+			OnDemandConfiguration: &types.OnDemandConfiguration{
+				StartTime: ptr.String("__StartTime__"),
+				EndTime:   ptr.String("__EndTime__"),
+			},
+			ScheduleConfiguration: &types.ScheduleConfiguration{
+				FirstExecutionFrom: ptr.String("__FirstExecutionFrom__"),
+				Object:             ptr.String("__Object__"),
+				ScheduleExpression: ptr.String("__ScheduleExpression__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -845,7 +1102,10 @@ func TestCheckResponseSnapshot_UpdateEventIntegration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEventIntegration(context.Background(), &UpdateEventIntegrationInput{})
+	got, err := svc.UpdateEventIntegration(context.Background(), &UpdateEventIntegrationInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -866,7 +1126,68 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Name:        ptr.String("__Name__"),
+		Namespace:   ptr.String("__Namespace__"),
+		Description: ptr.String("__Description__"),
+		ApplicationSourceConfig: &types.ApplicationSourceConfig{
+			ExternalUrlConfig: &types.ExternalUrlConfig{
+				AccessUrl: ptr.String("__AccessUrl__"),
+				ApprovedOrigins: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Subscriptions: []types.Subscription{
+			{
+				Event:       ptr.String("__Event__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Event:       ptr.String("__Event__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		Publications: []types.Publication{
+			{
+				Event:       ptr.String("__Event__"),
+				Schema:      ptr.String("__Schema__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Event:       ptr.String("__Event__"),
+				Schema:      ptr.String("__Schema__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Permissions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IsService:             true,
+		InitializationTimeout: ptr.Int32(1),
+		ApplicationConfig: &types.ApplicationConfig{
+			ContactHandling: &types.ContactHandling{
+				Scope: types.ContactHandlingScope("CROSS_CONTACTS"),
+			},
+		},
+		IframeConfig: &types.IframeConfig{
+			Allow: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Sandbox: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ApplicationType: types.ApplicationType("STANDARD"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -891,7 +1212,68 @@ func TestCheckResponseSnapshot_Error_DuplicateResourceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Name:        ptr.String("__Name__"),
+		Namespace:   ptr.String("__Namespace__"),
+		Description: ptr.String("__Description__"),
+		ApplicationSourceConfig: &types.ApplicationSourceConfig{
+			ExternalUrlConfig: &types.ExternalUrlConfig{
+				AccessUrl: ptr.String("__AccessUrl__"),
+				ApprovedOrigins: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Subscriptions: []types.Subscription{
+			{
+				Event:       ptr.String("__Event__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Event:       ptr.String("__Event__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		Publications: []types.Publication{
+			{
+				Event:       ptr.String("__Event__"),
+				Schema:      ptr.String("__Schema__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Event:       ptr.String("__Event__"),
+				Schema:      ptr.String("__Schema__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Permissions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IsService:             true,
+		InitializationTimeout: ptr.Int32(1),
+		ApplicationConfig: &types.ApplicationConfig{
+			ContactHandling: &types.ContactHandling{
+				Scope: types.ContactHandlingScope("CROSS_CONTACTS"),
+			},
+		},
+		IframeConfig: &types.IframeConfig{
+			Allow: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Sandbox: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ApplicationType: types.ApplicationType("STANDARD"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -916,7 +1298,68 @@ func TestCheckResponseSnapshot_Error_InternalServiceError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Name:        ptr.String("__Name__"),
+		Namespace:   ptr.String("__Namespace__"),
+		Description: ptr.String("__Description__"),
+		ApplicationSourceConfig: &types.ApplicationSourceConfig{
+			ExternalUrlConfig: &types.ExternalUrlConfig{
+				AccessUrl: ptr.String("__AccessUrl__"),
+				ApprovedOrigins: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Subscriptions: []types.Subscription{
+			{
+				Event:       ptr.String("__Event__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Event:       ptr.String("__Event__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		Publications: []types.Publication{
+			{
+				Event:       ptr.String("__Event__"),
+				Schema:      ptr.String("__Schema__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Event:       ptr.String("__Event__"),
+				Schema:      ptr.String("__Schema__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Permissions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IsService:             true,
+		InitializationTimeout: ptr.Int32(1),
+		ApplicationConfig: &types.ApplicationConfig{
+			ContactHandling: &types.ContactHandling{
+				Scope: types.ContactHandlingScope("CROSS_CONTACTS"),
+			},
+		},
+		IframeConfig: &types.IframeConfig{
+			Allow: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Sandbox: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ApplicationType: types.ApplicationType("STANDARD"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -941,7 +1384,68 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Name:        ptr.String("__Name__"),
+		Namespace:   ptr.String("__Namespace__"),
+		Description: ptr.String("__Description__"),
+		ApplicationSourceConfig: &types.ApplicationSourceConfig{
+			ExternalUrlConfig: &types.ExternalUrlConfig{
+				AccessUrl: ptr.String("__AccessUrl__"),
+				ApprovedOrigins: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Subscriptions: []types.Subscription{
+			{
+				Event:       ptr.String("__Event__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Event:       ptr.String("__Event__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		Publications: []types.Publication{
+			{
+				Event:       ptr.String("__Event__"),
+				Schema:      ptr.String("__Schema__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Event:       ptr.String("__Event__"),
+				Schema:      ptr.String("__Schema__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Permissions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IsService:             true,
+		InitializationTimeout: ptr.Int32(1),
+		ApplicationConfig: &types.ApplicationConfig{
+			ContactHandling: &types.ContactHandling{
+				Scope: types.ContactHandlingScope("CROSS_CONTACTS"),
+			},
+		},
+		IframeConfig: &types.IframeConfig{
+			Allow: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Sandbox: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ApplicationType: types.ApplicationType("STANDARD"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -966,7 +1470,35 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataIntegrationAssociation(context.Background(), &CreateDataIntegrationAssociationInput{})
+	_, opErr := svc.CreateDataIntegrationAssociation(context.Background(), &CreateDataIntegrationAssociationInput{
+		DataIntegrationIdentifier: ptr.String("__DataIntegrationIdentifier__"),
+		ClientId:                  ptr.String("__ClientId__"),
+		ObjectConfiguration: map[string]map[string][]string{
+			"key0": {
+				"key0": {
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		DestinationURI: ptr.String("__DestinationURI__"),
+		ClientAssociationMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		ExecutionConfiguration: &types.ExecutionConfiguration{
+			ExecutionMode: types.ExecutionMode("ON_DEMAND"),
+			OnDemandConfiguration: &types.OnDemandConfiguration{
+				StartTime: ptr.String("__StartTime__"),
+				EndTime:   ptr.String("__EndTime__"),
+			},
+			ScheduleConfiguration: &types.ScheduleConfiguration{
+				FirstExecutionFrom: ptr.String("__FirstExecutionFrom__"),
+				Object:             ptr.String("__Object__"),
+				ScheduleExpression: ptr.String("__ScheduleExpression__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -991,7 +1523,68 @@ func TestCheckResponseSnapshot_Error_ResourceQuotaExceededException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Name:        ptr.String("__Name__"),
+		Namespace:   ptr.String("__Namespace__"),
+		Description: ptr.String("__Description__"),
+		ApplicationSourceConfig: &types.ApplicationSourceConfig{
+			ExternalUrlConfig: &types.ExternalUrlConfig{
+				AccessUrl: ptr.String("__AccessUrl__"),
+				ApprovedOrigins: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Subscriptions: []types.Subscription{
+			{
+				Event:       ptr.String("__Event__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Event:       ptr.String("__Event__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		Publications: []types.Publication{
+			{
+				Event:       ptr.String("__Event__"),
+				Schema:      ptr.String("__Schema__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Event:       ptr.String("__Event__"),
+				Schema:      ptr.String("__Schema__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Permissions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IsService:             true,
+		InitializationTimeout: ptr.Int32(1),
+		ApplicationConfig: &types.ApplicationConfig{
+			ContactHandling: &types.ContactHandling{
+				Scope: types.ContactHandlingScope("CROSS_CONTACTS"),
+			},
+		},
+		IframeConfig: &types.IframeConfig{
+			Allow: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Sandbox: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ApplicationType: types.ApplicationType("STANDARD"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1016,7 +1609,68 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Name:        ptr.String("__Name__"),
+		Namespace:   ptr.String("__Namespace__"),
+		Description: ptr.String("__Description__"),
+		ApplicationSourceConfig: &types.ApplicationSourceConfig{
+			ExternalUrlConfig: &types.ExternalUrlConfig{
+				AccessUrl: ptr.String("__AccessUrl__"),
+				ApprovedOrigins: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Subscriptions: []types.Subscription{
+			{
+				Event:       ptr.String("__Event__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Event:       ptr.String("__Event__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		Publications: []types.Publication{
+			{
+				Event:       ptr.String("__Event__"),
+				Schema:      ptr.String("__Schema__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Event:       ptr.String("__Event__"),
+				Schema:      ptr.String("__Schema__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Permissions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IsService:             true,
+		InitializationTimeout: ptr.Int32(1),
+		ApplicationConfig: &types.ApplicationConfig{
+			ContactHandling: &types.ContactHandling{
+				Scope: types.ContactHandlingScope("CROSS_CONTACTS"),
+			},
+		},
+		IframeConfig: &types.IframeConfig{
+			Allow: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Sandbox: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ApplicationType: types.ApplicationType("STANDARD"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1041,7 +1695,68 @@ func TestCheckResponseSnapshot_Error_UnsupportedOperationException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Name:        ptr.String("__Name__"),
+		Namespace:   ptr.String("__Namespace__"),
+		Description: ptr.String("__Description__"),
+		ApplicationSourceConfig: &types.ApplicationSourceConfig{
+			ExternalUrlConfig: &types.ExternalUrlConfig{
+				AccessUrl: ptr.String("__AccessUrl__"),
+				ApprovedOrigins: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Subscriptions: []types.Subscription{
+			{
+				Event:       ptr.String("__Event__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Event:       ptr.String("__Event__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		Publications: []types.Publication{
+			{
+				Event:       ptr.String("__Event__"),
+				Schema:      ptr.String("__Schema__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Event:       ptr.String("__Event__"),
+				Schema:      ptr.String("__Schema__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Permissions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IsService:             true,
+		InitializationTimeout: ptr.Int32(1),
+		ApplicationConfig: &types.ApplicationConfig{
+			ContactHandling: &types.ContactHandling{
+				Scope: types.ContactHandlingScope("CROSS_CONTACTS"),
+			},
+		},
+		IframeConfig: &types.IframeConfig{
+			Allow: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Sandbox: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ApplicationType: types.ApplicationType("STANDARD"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

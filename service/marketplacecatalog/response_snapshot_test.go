@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/document"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -114,7 +115,7 @@ func TestCheckResponseSnapshot_BatchDescribeEntities(t *testing.T) {
 				EntityArn:        ptr.String("__EntityArn__"),
 				EntityIdentifier: ptr.String("__EntityIdentifier__"),
 				LastModifiedDate: ptr.String("__LastModifiedDate__"),
-				DetailsDocument:  nil,
+				DetailsDocument:  document.NewLazyDocument("__Document__"),
 			},
 		},
 		Errors: map[string]types.BatchDescribeErrorDetail{
@@ -132,7 +133,18 @@ func TestCheckResponseSnapshot_BatchDescribeEntities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDescribeEntities(context.Background(), &BatchDescribeEntitiesInput{})
+	got, err := svc.BatchDescribeEntities(context.Background(), &BatchDescribeEntitiesInput{
+		EntityRequestList: []types.EntityRequest{
+			{
+				Catalog:  ptr.String("__Catalog__"),
+				EntityId: ptr.String("__EntityId__"),
+			},
+			{
+				Catalog:  ptr.String("__Catalog__"),
+				EntityId: ptr.String("__EntityId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -154,7 +166,10 @@ func TestCheckResponseSnapshot_CancelChangeSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelChangeSet(context.Background(), &CancelChangeSetInput{})
+	got, err := svc.CancelChangeSet(context.Background(), &CancelChangeSetInput{
+		Catalog:     ptr.String("__Catalog__"),
+		ChangeSetId: ptr.String("__ChangeSetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -173,7 +188,9 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -201,7 +218,7 @@ func TestCheckResponseSnapshot_DescribeChangeSet(t *testing.T) {
 					Identifier: ptr.String("__Identifier__"),
 				},
 				Details:         ptr.String("__Details__"),
-				DetailsDocument: nil,
+				DetailsDocument: document.NewLazyDocument("__Document__"),
 				ErrorDetailList: []types.ErrorDetail{
 					{
 						ErrorCode:    ptr.String("__ErrorCode__"),
@@ -221,7 +238,7 @@ func TestCheckResponseSnapshot_DescribeChangeSet(t *testing.T) {
 					Identifier: ptr.String("__Identifier__"),
 				},
 				Details:         ptr.String("__Details__"),
-				DetailsDocument: nil,
+				DetailsDocument: document.NewLazyDocument("__Document__"),
 				ErrorDetailList: []types.ErrorDetail{
 					{
 						ErrorCode:    ptr.String("__ErrorCode__"),
@@ -244,7 +261,10 @@ func TestCheckResponseSnapshot_DescribeChangeSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeChangeSet(context.Background(), &DescribeChangeSetInput{})
+	got, err := svc.DescribeChangeSet(context.Background(), &DescribeChangeSetInput{
+		Catalog:     ptr.String("__Catalog__"),
+		ChangeSetId: ptr.String("__ChangeSetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -260,7 +280,7 @@ func TestCheckResponseSnapshot_DescribeEntity(t *testing.T) {
 		EntityArn:        ptr.String("__EntityArn__"),
 		LastModifiedDate: ptr.String("__LastModifiedDate__"),
 		Details:          ptr.String("__Details__"),
-		DetailsDocument:  nil,
+		DetailsDocument:  document.NewLazyDocument("__Document__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeEntity.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -270,7 +290,10 @@ func TestCheckResponseSnapshot_DescribeEntity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEntity(context.Background(), &DescribeEntityInput{})
+	got, err := svc.DescribeEntity(context.Background(), &DescribeEntityInput{
+		Catalog:  ptr.String("__Catalog__"),
+		EntityId: ptr.String("__EntityId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -291,7 +314,9 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{})
+	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -340,7 +365,31 @@ func TestCheckResponseSnapshot_ListChangeSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListChangeSets(context.Background(), &ListChangeSetsInput{})
+	got, err := svc.ListChangeSets(context.Background(), &ListChangeSetsInput{
+		Catalog: ptr.String("__Catalog__"),
+		FilterList: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				ValueList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				ValueList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Sort: &types.Sort{
+			SortBy:    ptr.String("__SortBy__"),
+			SortOrder: types.SortOrder("ASCENDING"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -507,7 +556,68 @@ func TestCheckResponseSnapshot_ListEntities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEntities(context.Background(), &ListEntitiesInput{})
+	got, err := svc.ListEntities(context.Background(), &ListEntitiesInput{
+		Catalog:    ptr.String("__Catalog__"),
+		EntityType: ptr.String("__EntityType__"),
+		FilterList: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				ValueList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				ValueList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Sort: &types.Sort{
+			SortBy:    ptr.String("__SortBy__"),
+			SortOrder: types.SortOrder("ASCENDING"),
+		},
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+		OwnershipType: types.OwnershipType("SELF"),
+		EntityTypeFilters: &types.EntityTypeFiltersMemberDataProductFilters{
+			Value: types.DataProductFilters{
+				EntityId: &types.DataProductEntityIdFilter{
+					ValueList: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ProductTitle: &types.DataProductTitleFilter{
+					ValueList: []string{
+						"__Member__",
+						"__Member__",
+					},
+					WildCardValue: ptr.String("__WildCardValue__"),
+				},
+				Visibility: &types.DataProductVisibilityFilter{
+					ValueList: []types.DataProductVisibilityString{
+						types.DataProductVisibilityString("Limited"),
+						types.DataProductVisibilityString("Limited"),
+					},
+				},
+				LastModifiedDate: &types.DataProductLastModifiedDateFilter{
+					DateRange: &types.DataProductLastModifiedDateFilterDateRange{
+						AfterValue:  ptr.String("__AfterValue__"),
+						BeforeValue: ptr.String("__BeforeValue__"),
+					},
+				},
+			},
+		},
+		EntityTypeSort: &types.EntityTypeSortMemberDataProductSort{
+			Value: types.DataProductSort{
+				SortBy:    types.DataProductSortBy("EntityId"),
+				SortOrder: types.SortOrder("ASCENDING"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -538,7 +648,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -557,7 +669,10 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Policy:      ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -579,7 +694,64 @@ func TestCheckResponseSnapshot_StartChangeSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartChangeSet(context.Background(), &StartChangeSetInput{})
+	got, err := svc.StartChangeSet(context.Background(), &StartChangeSetInput{
+		Catalog: ptr.String("__Catalog__"),
+		ChangeSet: []types.Change{
+			{
+				ChangeType: ptr.String("__ChangeType__"),
+				Entity: &types.Entity{
+					Type:       ptr.String("__Type__"),
+					Identifier: ptr.String("__Identifier__"),
+				},
+				EntityTags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Details:         ptr.String("__Details__"),
+				DetailsDocument: document.NewLazyDocument("__Document__"),
+				ChangeName:      ptr.String("__ChangeName__"),
+			},
+			{
+				ChangeType: ptr.String("__ChangeType__"),
+				Entity: &types.Entity{
+					Type:       ptr.String("__Type__"),
+					Identifier: ptr.String("__Identifier__"),
+				},
+				EntityTags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Details:         ptr.String("__Details__"),
+				DetailsDocument: document.NewLazyDocument("__Document__"),
+				ChangeName:      ptr.String("__ChangeName__"),
+			},
+		},
+		ChangeSetName:      ptr.String("__ChangeSetName__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ChangeSetTags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Intent: types.Intent("VALIDATE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -598,7 +770,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -617,7 +801,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -638,7 +828,18 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDescribeEntities(context.Background(), &BatchDescribeEntitiesInput{})
+	_, opErr := svc.BatchDescribeEntities(context.Background(), &BatchDescribeEntitiesInput{
+		EntityRequestList: []types.EntityRequest{
+			{
+				Catalog:  ptr.String("__Catalog__"),
+				EntityId: ptr.String("__EntityId__"),
+			},
+			{
+				Catalog:  ptr.String("__Catalog__"),
+				EntityId: ptr.String("__EntityId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -663,7 +864,18 @@ func TestCheckResponseSnapshot_Error_InternalServiceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDescribeEntities(context.Background(), &BatchDescribeEntitiesInput{})
+	_, opErr := svc.BatchDescribeEntities(context.Background(), &BatchDescribeEntitiesInput{
+		EntityRequestList: []types.EntityRequest{
+			{
+				Catalog:  ptr.String("__Catalog__"),
+				EntityId: ptr.String("__EntityId__"),
+			},
+			{
+				Catalog:  ptr.String("__Catalog__"),
+				EntityId: ptr.String("__EntityId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -688,7 +900,10 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelChangeSet(context.Background(), &CancelChangeSetInput{})
+	_, opErr := svc.CancelChangeSet(context.Background(), &CancelChangeSetInput{
+		Catalog:     ptr.String("__Catalog__"),
+		ChangeSetId: ptr.String("__ChangeSetId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -713,7 +928,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelChangeSet(context.Background(), &CancelChangeSetInput{})
+	_, opErr := svc.CancelChangeSet(context.Background(), &CancelChangeSetInput{
+		Catalog:     ptr.String("__Catalog__"),
+		ChangeSetId: ptr.String("__ChangeSetId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -738,7 +956,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotSupportedException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeEntity(context.Background(), &DescribeEntityInput{})
+	_, opErr := svc.DescribeEntity(context.Background(), &DescribeEntityInput{
+		Catalog:  ptr.String("__Catalog__"),
+		EntityId: ptr.String("__EntityId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -763,7 +984,64 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartChangeSet(context.Background(), &StartChangeSetInput{})
+	_, opErr := svc.StartChangeSet(context.Background(), &StartChangeSetInput{
+		Catalog: ptr.String("__Catalog__"),
+		ChangeSet: []types.Change{
+			{
+				ChangeType: ptr.String("__ChangeType__"),
+				Entity: &types.Entity{
+					Type:       ptr.String("__Type__"),
+					Identifier: ptr.String("__Identifier__"),
+				},
+				EntityTags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Details:         ptr.String("__Details__"),
+				DetailsDocument: document.NewLazyDocument("__Document__"),
+				ChangeName:      ptr.String("__ChangeName__"),
+			},
+			{
+				ChangeType: ptr.String("__ChangeType__"),
+				Entity: &types.Entity{
+					Type:       ptr.String("__Type__"),
+					Identifier: ptr.String("__Identifier__"),
+				},
+				EntityTags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Details:         ptr.String("__Details__"),
+				DetailsDocument: document.NewLazyDocument("__Document__"),
+				ChangeName:      ptr.String("__ChangeName__"),
+			},
+		},
+		ChangeSetName:      ptr.String("__ChangeSetName__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ChangeSetTags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Intent: types.Intent("VALIDATE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -788,7 +1066,18 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDescribeEntities(context.Background(), &BatchDescribeEntitiesInput{})
+	_, opErr := svc.BatchDescribeEntities(context.Background(), &BatchDescribeEntitiesInput{
+		EntityRequestList: []types.EntityRequest{
+			{
+				Catalog:  ptr.String("__Catalog__"),
+				EntityId: ptr.String("__EntityId__"),
+			},
+			{
+				Catalog:  ptr.String("__Catalog__"),
+				EntityId: ptr.String("__EntityId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -813,7 +1102,18 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDescribeEntities(context.Background(), &BatchDescribeEntitiesInput{})
+	_, opErr := svc.BatchDescribeEntities(context.Background(), &BatchDescribeEntitiesInput{
+		EntityRequestList: []types.EntityRequest{
+			{
+				Catalog:  ptr.String("__Catalog__"),
+				EntityId: ptr.String("__EntityId__"),
+			},
+			{
+				Catalog:  ptr.String("__Catalog__"),
+				EntityId: ptr.String("__EntityId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

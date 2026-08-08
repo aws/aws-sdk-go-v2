@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<PutResourcePolicyResult xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><ResourceArn>__ResourceArn__</ResourceArn></PutResourcePolicyResult>

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"HubTokenTimerExpirySettingInSeconds":1,"UpdatedAt":946684800}

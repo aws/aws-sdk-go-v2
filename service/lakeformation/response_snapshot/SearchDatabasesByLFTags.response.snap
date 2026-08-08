@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"DatabaseList":[{"Database":{"CatalogId":"__CatalogId__","Name":"__Name__"},"LFTags":[{"CatalogId":"__CatalogId__","TagKey":"__TagKey__","TagValues":["__Member__","__Member__"]},{"CatalogId":"__CatalogId__","TagKey":"__TagKey__","TagValues":["__Member__","__Member__"]}]},{"Database":{"CatalogId":"__CatalogId__","Name":"__Name__"},"LFTags":[{"CatalogId":"__CatalogId__","TagKey":"__TagKey__","TagValues":["__Member__","__Member__"]},{"CatalogId":"__CatalogId__","TagKey":"__TagKey__","TagValues":["__Member__","__Member__"]}]}],"NextToken":"__NextToken__"}

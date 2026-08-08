@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"BulkDeploymentArn":"__BulkDeploymentArn__","BulkDeploymentId":"__BulkDeploymentId__"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","services":[{"accessibleResources":["__Document__","__Document__"],"additionalServiceDetails":{"github":{"owner":"__Owner__","ownerType":"organization","targetUrl":"__TargetUrl__"}},"kmsKeyArn":"__KmsKeyArn__","name":"__Name__","privateConnectionName":"__PrivateConnectionName__","serviceId":"__ServiceId__","serviceType":"github"},{"accessibleResources":["__Document__","__Document__"],"additionalServiceDetails":{"github":{"owner":"__Owner__","ownerType":"organization","targetUrl":"__TargetUrl__"}},"kmsKeyArn":"__KmsKeyArn__","name":"__Name__","privateConnectionName":"__PrivateConnectionName__","serviceId":"__ServiceId__","serviceType":"github"}]}

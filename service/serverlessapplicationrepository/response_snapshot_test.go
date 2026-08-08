@@ -189,7 +189,26 @@ func TestCheckResponseSnapshot_CreateApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Author:      ptr.String("__Author__"),
+		Description: ptr.String("__Description__"),
+		HomePageUrl: ptr.String("__HomePageUrl__"),
+		Labels: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LicenseBody:          ptr.String("__LicenseBody__"),
+		LicenseUrl:           ptr.String("__LicenseUrl__"),
+		Name:                 ptr.String("__Name__"),
+		ReadmeBody:           ptr.String("__ReadmeBody__"),
+		ReadmeUrl:            ptr.String("__ReadmeUrl__"),
+		SemanticVersion:      ptr.String("__SemanticVersion__"),
+		SourceCodeArchiveUrl: ptr.String("__SourceCodeArchiveUrl__"),
+		SourceCodeUrl:        ptr.String("__SourceCodeUrl__"),
+		SpdxLicenseId:        ptr.String("__SpdxLicenseId__"),
+		TemplateBody:         ptr.String("__TemplateBody__"),
+		TemplateUrl:          ptr.String("__TemplateUrl__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -264,7 +283,14 @@ func TestCheckResponseSnapshot_CreateApplicationVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApplicationVersion(context.Background(), &CreateApplicationVersionInput{})
+	got, err := svc.CreateApplicationVersion(context.Background(), &CreateApplicationVersionInput{
+		ApplicationId:        ptr.String("__ApplicationId__"),
+		SemanticVersion:      ptr.String("__SemanticVersion__"),
+		SourceCodeArchiveUrl: ptr.String("__SourceCodeArchiveUrl__"),
+		SourceCodeUrl:        ptr.String("__SourceCodeUrl__"),
+		TemplateBody:         ptr.String("__TemplateBody__"),
+		TemplateUrl:          ptr.String("__TemplateUrl__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -288,7 +314,60 @@ func TestCheckResponseSnapshot_CreateCloudFormationChangeSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCloudFormationChangeSet(context.Background(), &CreateCloudFormationChangeSetInput{})
+	got, err := svc.CreateCloudFormationChangeSet(context.Background(), &CreateCloudFormationChangeSetInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		Capabilities: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ChangeSetName: ptr.String("__ChangeSetName__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		Description:   ptr.String("__Description__"),
+		NotificationArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ParameterOverrides: []types.ParameterValue{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ResourceTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RollbackConfiguration: &types.RollbackConfiguration{
+			MonitoringTimeInMinutes: ptr.Int32(1),
+			RollbackTriggers: []types.RollbackTrigger{
+				{
+					Arn:  ptr.String("__Arn__"),
+					Type: ptr.String("__Type__"),
+				},
+				{
+					Arn:  ptr.String("__Arn__"),
+					Type: ptr.String("__Type__"),
+				},
+			},
+		},
+		SemanticVersion: ptr.String("__SemanticVersion__"),
+		StackName:       ptr.String("__StackName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TemplateId: ptr.String("__TemplateId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -315,7 +394,10 @@ func TestCheckResponseSnapshot_CreateCloudFormationTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCloudFormationTemplate(context.Background(), &CreateCloudFormationTemplateInput{})
+	got, err := svc.CreateCloudFormationTemplate(context.Background(), &CreateCloudFormationTemplateInput{
+		ApplicationId:   ptr.String("__ApplicationId__"),
+		SemanticVersion: ptr.String("__SemanticVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -334,7 +416,9 @@ func TestCheckResponseSnapshot_DeleteApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{})
+	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -426,7 +510,10 @@ func TestCheckResponseSnapshot_GetApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApplication(context.Background(), &GetApplicationInput{})
+	got, err := svc.GetApplication(context.Background(), &GetApplicationInput{
+		ApplicationId:   ptr.String("__ApplicationId__"),
+		SemanticVersion: ptr.String("__SemanticVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -478,7 +565,9 @@ func TestCheckResponseSnapshot_GetApplicationPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApplicationPolicy(context.Background(), &GetApplicationPolicyInput{})
+	got, err := svc.GetApplicationPolicy(context.Background(), &GetApplicationPolicyInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -505,7 +594,10 @@ func TestCheckResponseSnapshot_GetCloudFormationTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCloudFormationTemplate(context.Background(), &GetCloudFormationTemplateInput{})
+	got, err := svc.GetCloudFormationTemplate(context.Background(), &GetCloudFormationTemplateInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		TemplateId:    ptr.String("__TemplateId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -536,7 +628,12 @@ func TestCheckResponseSnapshot_ListApplicationDependencies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplicationDependencies(context.Background(), &ListApplicationDependenciesInput{})
+	got, err := svc.ListApplicationDependencies(context.Background(), &ListApplicationDependenciesInput{
+		ApplicationId:   ptr.String("__ApplicationId__"),
+		MaxItems:        ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+		SemanticVersion: ptr.String("__SemanticVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -571,7 +668,11 @@ func TestCheckResponseSnapshot_ListApplicationVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplicationVersions(context.Background(), &ListApplicationVersionsInput{})
+	got, err := svc.ListApplicationVersions(context.Background(), &ListApplicationVersionsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		MaxItems:      ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -620,7 +721,10 @@ func TestCheckResponseSnapshot_ListApplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplications(context.Background(), &ListApplicationsInput{})
+	got, err := svc.ListApplications(context.Background(), &ListApplicationsInput{
+		MaxItems:  ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -672,7 +776,41 @@ func TestCheckResponseSnapshot_PutApplicationPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutApplicationPolicy(context.Background(), &PutApplicationPolicyInput{})
+	got, err := svc.PutApplicationPolicy(context.Background(), &PutApplicationPolicyInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		Statements: []types.ApplicationPolicyStatement{
+			{
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PrincipalOrgIDs: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Principals: []string{
+					"__Member__",
+					"__Member__",
+				},
+				StatementId: ptr.String("__StatementId__"),
+			},
+			{
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PrincipalOrgIDs: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Principals: []string{
+					"__Member__",
+					"__Member__",
+				},
+				StatementId: ptr.String("__StatementId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -691,7 +829,10 @@ func TestCheckResponseSnapshot_UnshareApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UnshareApplication(context.Background(), &UnshareApplicationInput{})
+	got, err := svc.UnshareApplication(context.Background(), &UnshareApplicationInput{
+		ApplicationId:  ptr.String("__ApplicationId__"),
+		OrganizationId: ptr.String("__OrganizationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -783,7 +924,18 @@ func TestCheckResponseSnapshot_UpdateApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApplication(context.Background(), &UpdateApplicationInput{})
+	got, err := svc.UpdateApplication(context.Background(), &UpdateApplicationInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		Author:        ptr.String("__Author__"),
+		Description:   ptr.String("__Description__"),
+		HomePageUrl:   ptr.String("__HomePageUrl__"),
+		Labels: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ReadmeBody: ptr.String("__ReadmeBody__"),
+		ReadmeUrl:  ptr.String("__ReadmeUrl__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -805,7 +957,26 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Author:      ptr.String("__Author__"),
+		Description: ptr.String("__Description__"),
+		HomePageUrl: ptr.String("__HomePageUrl__"),
+		Labels: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LicenseBody:          ptr.String("__LicenseBody__"),
+		LicenseUrl:           ptr.String("__LicenseUrl__"),
+		Name:                 ptr.String("__Name__"),
+		ReadmeBody:           ptr.String("__ReadmeBody__"),
+		ReadmeUrl:            ptr.String("__ReadmeUrl__"),
+		SemanticVersion:      ptr.String("__SemanticVersion__"),
+		SourceCodeArchiveUrl: ptr.String("__SourceCodeArchiveUrl__"),
+		SourceCodeUrl:        ptr.String("__SourceCodeUrl__"),
+		SpdxLicenseId:        ptr.String("__SpdxLicenseId__"),
+		TemplateBody:         ptr.String("__TemplateBody__"),
+		TemplateUrl:          ptr.String("__TemplateUrl__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -831,7 +1002,26 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Author:      ptr.String("__Author__"),
+		Description: ptr.String("__Description__"),
+		HomePageUrl: ptr.String("__HomePageUrl__"),
+		Labels: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LicenseBody:          ptr.String("__LicenseBody__"),
+		LicenseUrl:           ptr.String("__LicenseUrl__"),
+		Name:                 ptr.String("__Name__"),
+		ReadmeBody:           ptr.String("__ReadmeBody__"),
+		ReadmeUrl:            ptr.String("__ReadmeUrl__"),
+		SemanticVersion:      ptr.String("__SemanticVersion__"),
+		SourceCodeArchiveUrl: ptr.String("__SourceCodeArchiveUrl__"),
+		SourceCodeUrl:        ptr.String("__SourceCodeUrl__"),
+		SpdxLicenseId:        ptr.String("__SpdxLicenseId__"),
+		TemplateBody:         ptr.String("__TemplateBody__"),
+		TemplateUrl:          ptr.String("__TemplateUrl__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -857,7 +1047,26 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Author:      ptr.String("__Author__"),
+		Description: ptr.String("__Description__"),
+		HomePageUrl: ptr.String("__HomePageUrl__"),
+		Labels: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LicenseBody:          ptr.String("__LicenseBody__"),
+		LicenseUrl:           ptr.String("__LicenseUrl__"),
+		Name:                 ptr.String("__Name__"),
+		ReadmeBody:           ptr.String("__ReadmeBody__"),
+		ReadmeUrl:            ptr.String("__ReadmeUrl__"),
+		SemanticVersion:      ptr.String("__SemanticVersion__"),
+		SourceCodeArchiveUrl: ptr.String("__SourceCodeArchiveUrl__"),
+		SourceCodeUrl:        ptr.String("__SourceCodeUrl__"),
+		SpdxLicenseId:        ptr.String("__SpdxLicenseId__"),
+		TemplateBody:         ptr.String("__TemplateBody__"),
+		TemplateUrl:          ptr.String("__TemplateUrl__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -883,7 +1092,26 @@ func TestCheckResponseSnapshot_Error_InternalServerErrorException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Author:      ptr.String("__Author__"),
+		Description: ptr.String("__Description__"),
+		HomePageUrl: ptr.String("__HomePageUrl__"),
+		Labels: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LicenseBody:          ptr.String("__LicenseBody__"),
+		LicenseUrl:           ptr.String("__LicenseUrl__"),
+		Name:                 ptr.String("__Name__"),
+		ReadmeBody:           ptr.String("__ReadmeBody__"),
+		ReadmeUrl:            ptr.String("__ReadmeUrl__"),
+		SemanticVersion:      ptr.String("__SemanticVersion__"),
+		SourceCodeArchiveUrl: ptr.String("__SourceCodeArchiveUrl__"),
+		SourceCodeUrl:        ptr.String("__SourceCodeUrl__"),
+		SpdxLicenseId:        ptr.String("__SpdxLicenseId__"),
+		TemplateBody:         ptr.String("__TemplateBody__"),
+		TemplateUrl:          ptr.String("__TemplateUrl__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -909,7 +1137,10 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCloudFormationTemplate(context.Background(), &CreateCloudFormationTemplateInput{})
+	_, opErr := svc.CreateCloudFormationTemplate(context.Background(), &CreateCloudFormationTemplateInput{
+		ApplicationId:   ptr.String("__ApplicationId__"),
+		SemanticVersion: ptr.String("__SemanticVersion__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -935,7 +1166,26 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Author:      ptr.String("__Author__"),
+		Description: ptr.String("__Description__"),
+		HomePageUrl: ptr.String("__HomePageUrl__"),
+		Labels: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LicenseBody:          ptr.String("__LicenseBody__"),
+		LicenseUrl:           ptr.String("__LicenseUrl__"),
+		Name:                 ptr.String("__Name__"),
+		ReadmeBody:           ptr.String("__ReadmeBody__"),
+		ReadmeUrl:            ptr.String("__ReadmeUrl__"),
+		SemanticVersion:      ptr.String("__SemanticVersion__"),
+		SourceCodeArchiveUrl: ptr.String("__SourceCodeArchiveUrl__"),
+		SourceCodeUrl:        ptr.String("__SourceCodeUrl__"),
+		SpdxLicenseId:        ptr.String("__SpdxLicenseId__"),
+		TemplateBody:         ptr.String("__TemplateBody__"),
+		TemplateUrl:          ptr.String("__TemplateUrl__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

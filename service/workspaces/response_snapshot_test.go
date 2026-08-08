@@ -124,7 +124,10 @@ func TestCheckResponseSnapshot_AcceptAccountLinkInvitation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptAccountLinkInvitation(context.Background(), &AcceptAccountLinkInvitationInput{})
+	got, err := svc.AcceptAccountLinkInvitation(context.Background(), &AcceptAccountLinkInvitationInput{
+		LinkId:      ptr.String("__LinkId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -145,7 +148,10 @@ func TestCheckResponseSnapshot_AssociateConnectionAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateConnectionAlias(context.Background(), &AssociateConnectionAliasInput{})
+	got, err := svc.AssociateConnectionAlias(context.Background(), &AssociateConnectionAliasInput{
+		AliasId:    ptr.String("__AliasId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -164,7 +170,13 @@ func TestCheckResponseSnapshot_AssociateIpGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateIpGroups(context.Background(), &AssociateIpGroupsInput{})
+	got, err := svc.AssociateIpGroups(context.Background(), &AssociateIpGroupsInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		GroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -196,7 +208,10 @@ func TestCheckResponseSnapshot_AssociateWorkspaceApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateWorkspaceApplication(context.Background(), &AssociateWorkspaceApplicationInput{})
+	got, err := svc.AssociateWorkspaceApplication(context.Background(), &AssociateWorkspaceApplicationInput{
+		WorkspaceId:   ptr.String("__WorkspaceId__"),
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -215,7 +230,19 @@ func TestCheckResponseSnapshot_AuthorizeIpRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AuthorizeIpRules(context.Background(), &AuthorizeIpRulesInput{})
+	got, err := svc.AuthorizeIpRules(context.Background(), &AuthorizeIpRulesInput{
+		GroupId: ptr.String("__GroupId__"),
+		UserRules: []types.IpRuleItem{
+			{
+				IpRule:   ptr.String("__IpRule__"),
+				RuleDesc: ptr.String("__RuleDesc__"),
+			},
+			{
+				IpRule:   ptr.String("__IpRule__"),
+				RuleDesc: ptr.String("__RuleDesc__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -236,7 +263,22 @@ func TestCheckResponseSnapshot_CopyWorkspaceImage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CopyWorkspaceImage(context.Background(), &CopyWorkspaceImageInput{})
+	got, err := svc.CopyWorkspaceImage(context.Background(), &CopyWorkspaceImageInput{
+		Name:          ptr.String("__Name__"),
+		Description:   ptr.String("__Description__"),
+		SourceImageId: ptr.String("__SourceImageId__"),
+		SourceRegion:  ptr.String("__SourceRegion__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -262,7 +304,10 @@ func TestCheckResponseSnapshot_CreateAccountLinkInvitation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAccountLinkInvitation(context.Background(), &CreateAccountLinkInvitationInput{})
+	got, err := svc.CreateAccountLinkInvitation(context.Background(), &CreateAccountLinkInvitationInput{
+		TargetAccountId: ptr.String("__TargetAccountId__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -283,7 +328,11 @@ func TestCheckResponseSnapshot_CreateConnectClientAddIn(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConnectClientAddIn(context.Background(), &CreateConnectClientAddInInput{})
+	got, err := svc.CreateConnectClientAddIn(context.Background(), &CreateConnectClientAddInInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		Name:       ptr.String("__Name__"),
+		URL:        ptr.String("__URL__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -304,7 +353,19 @@ func TestCheckResponseSnapshot_CreateConnectionAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConnectionAlias(context.Background(), &CreateConnectionAliasInput{})
+	got, err := svc.CreateConnectionAlias(context.Background(), &CreateConnectionAliasInput{
+		ConnectionString: ptr.String("__ConnectionString__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -325,7 +386,30 @@ func TestCheckResponseSnapshot_CreateIpGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIpGroup(context.Background(), &CreateIpGroupInput{})
+	got, err := svc.CreateIpGroup(context.Background(), &CreateIpGroupInput{
+		GroupName: ptr.String("__GroupName__"),
+		GroupDesc: ptr.String("__GroupDesc__"),
+		UserRules: []types.IpRuleItem{
+			{
+				IpRule:   ptr.String("__IpRule__"),
+				RuleDesc: ptr.String("__RuleDesc__"),
+			},
+			{
+				IpRule:   ptr.String("__IpRule__"),
+				RuleDesc: ptr.String("__RuleDesc__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -401,7 +485,43 @@ func TestCheckResponseSnapshot_CreateStandbyWorkspaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStandbyWorkspaces(context.Background(), &CreateStandbyWorkspacesInput{})
+	got, err := svc.CreateStandbyWorkspaces(context.Background(), &CreateStandbyWorkspacesInput{
+		PrimaryRegion: ptr.String("__PrimaryRegion__"),
+		StandbyWorkspaces: []types.StandbyWorkspace{
+			{
+				PrimaryWorkspaceId:  ptr.String("__PrimaryWorkspaceId__"),
+				VolumeEncryptionKey: ptr.String("__VolumeEncryptionKey__"),
+				DirectoryId:         ptr.String("__DirectoryId__"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				DataReplication: types.DataReplication("NO_REPLICATION"),
+			},
+			{
+				PrimaryWorkspaceId:  ptr.String("__PrimaryWorkspaceId__"),
+				VolumeEncryptionKey: ptr.String("__VolumeEncryptionKey__"),
+				DirectoryId:         ptr.String("__DirectoryId__"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				DataReplication: types.DataReplication("NO_REPLICATION"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -420,7 +540,19 @@ func TestCheckResponseSnapshot_CreateTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTags(context.Background(), &CreateTagsInput{})
+	got, err := svc.CreateTags(context.Background(), &CreateTagsInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -441,7 +573,21 @@ func TestCheckResponseSnapshot_CreateUpdatedWorkspaceImage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUpdatedWorkspaceImage(context.Background(), &CreateUpdatedWorkspaceImageInput{})
+	got, err := svc.CreateUpdatedWorkspaceImage(context.Background(), &CreateUpdatedWorkspaceImageInput{
+		Name:          ptr.String("__Name__"),
+		Description:   ptr.String("__Description__"),
+		SourceImageId: ptr.String("__SourceImageId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -481,7 +627,30 @@ func TestCheckResponseSnapshot_CreateWorkspaceBundle(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWorkspaceBundle(context.Background(), &CreateWorkspaceBundleInput{})
+	got, err := svc.CreateWorkspaceBundle(context.Background(), &CreateWorkspaceBundleInput{
+		BundleName:        ptr.String("__BundleName__"),
+		BundleDescription: ptr.String("__BundleDescription__"),
+		ImageId:           ptr.String("__ImageId__"),
+		ComputeType: &types.ComputeType{
+			Name: types.Compute("VALUE"),
+		},
+		UserStorage: &types.UserStorage{
+			Capacity: ptr.String("__Capacity__"),
+		},
+		RootStorage: &types.RootStorage{
+			Capacity: ptr.String("__Capacity__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -511,7 +680,21 @@ func TestCheckResponseSnapshot_CreateWorkspaceImage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWorkspaceImage(context.Background(), &CreateWorkspaceImageInput{})
+	got, err := svc.CreateWorkspaceImage(context.Background(), &CreateWorkspaceImageInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -761,7 +944,82 @@ func TestCheckResponseSnapshot_CreateWorkspaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWorkspaces(context.Background(), &CreateWorkspacesInput{})
+	got, err := svc.CreateWorkspaces(context.Background(), &CreateWorkspacesInput{
+		Workspaces: []types.WorkspaceRequest{
+			{
+				DirectoryId:                 ptr.String("__DirectoryId__"),
+				UserName:                    ptr.String("__UserName__"),
+				BundleId:                    ptr.String("__BundleId__"),
+				VolumeEncryptionKey:         ptr.String("__VolumeEncryptionKey__"),
+				UserVolumeEncryptionEnabled: ptr.Bool(true),
+				RootVolumeEncryptionEnabled: ptr.Bool(true),
+				WorkspaceProperties: &types.WorkspaceProperties{
+					RunningMode:                         types.RunningMode("AUTO_STOP"),
+					RunningModeAutoStopTimeoutInMinutes: ptr.Int32(1),
+					RootVolumeSizeGib:                   ptr.Int32(1),
+					UserVolumeSizeGib:                   ptr.Int32(1),
+					ComputeTypeName:                     types.Compute("VALUE"),
+					Protocols: []types.Protocol{
+						types.Protocol("PCOIP"),
+						types.Protocol("PCOIP"),
+					},
+					OperatingSystemName: types.OperatingSystemName("AMAZON_LINUX_2"),
+					GlobalAccelerator: &types.GlobalAcceleratorForWorkSpace{
+						Mode:              types.AGAModeForWorkSpaceEnum("ENABLED_AUTO"),
+						PreferredProtocol: types.AGAPreferredProtocolForWorkSpace("TCP"),
+					},
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				WorkspaceName: ptr.String("__WorkspaceName__"),
+				Ipv6Address:   ptr.String("__Ipv6Address__"),
+			},
+			{
+				DirectoryId:                 ptr.String("__DirectoryId__"),
+				UserName:                    ptr.String("__UserName__"),
+				BundleId:                    ptr.String("__BundleId__"),
+				VolumeEncryptionKey:         ptr.String("__VolumeEncryptionKey__"),
+				UserVolumeEncryptionEnabled: ptr.Bool(true),
+				RootVolumeEncryptionEnabled: ptr.Bool(true),
+				WorkspaceProperties: &types.WorkspaceProperties{
+					RunningMode:                         types.RunningMode("AUTO_STOP"),
+					RunningModeAutoStopTimeoutInMinutes: ptr.Int32(1),
+					RootVolumeSizeGib:                   ptr.Int32(1),
+					UserVolumeSizeGib:                   ptr.Int32(1),
+					ComputeTypeName:                     types.Compute("VALUE"),
+					Protocols: []types.Protocol{
+						types.Protocol("PCOIP"),
+						types.Protocol("PCOIP"),
+					},
+					OperatingSystemName: types.OperatingSystemName("AMAZON_LINUX_2"),
+					GlobalAccelerator: &types.GlobalAcceleratorForWorkSpace{
+						Mode:              types.AGAModeForWorkSpaceEnum("ENABLED_AUTO"),
+						PreferredProtocol: types.AGAPreferredProtocolForWorkSpace("TCP"),
+					},
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				WorkspaceName: ptr.String("__WorkspaceName__"),
+				Ipv6Address:   ptr.String("__Ipv6Address__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -818,7 +1076,35 @@ func TestCheckResponseSnapshot_CreateWorkspacesPool(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWorkspacesPool(context.Background(), &CreateWorkspacesPoolInput{})
+	got, err := svc.CreateWorkspacesPool(context.Background(), &CreateWorkspacesPoolInput{
+		PoolName:    ptr.String("__PoolName__"),
+		Description: ptr.String("__Description__"),
+		BundleId:    ptr.String("__BundleId__"),
+		DirectoryId: ptr.String("__DirectoryId__"),
+		Capacity: &types.Capacity{
+			DesiredUserSessions: ptr.Int32(1),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ApplicationSettings: &types.ApplicationSettingsRequest{
+			Status:        types.ApplicationSettingsStatusEnum("DISABLED"),
+			SettingsGroup: ptr.String("__SettingsGroup__"),
+		},
+		TimeoutSettings: &types.TimeoutSettings{
+			DisconnectTimeoutInSeconds:     ptr.Int32(1),
+			IdleDisconnectTimeoutInSeconds: ptr.Int32(1),
+			MaxUserDurationInSeconds:       ptr.Int32(1),
+		},
+		RunningMode: types.PoolsRunningMode("AUTO_STOP"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -844,7 +1130,10 @@ func TestCheckResponseSnapshot_DeleteAccountLinkInvitation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAccountLinkInvitation(context.Background(), &DeleteAccountLinkInvitationInput{})
+	got, err := svc.DeleteAccountLinkInvitation(context.Background(), &DeleteAccountLinkInvitationInput{
+		LinkId:      ptr.String("__LinkId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -863,7 +1152,13 @@ func TestCheckResponseSnapshot_DeleteClientBranding(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteClientBranding(context.Background(), &DeleteClientBrandingInput{})
+	got, err := svc.DeleteClientBranding(context.Background(), &DeleteClientBrandingInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		Platforms: []types.ClientDeviceType{
+			types.ClientDeviceType("DeviceTypeWindows"),
+			types.ClientDeviceType("DeviceTypeWindows"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -882,7 +1177,10 @@ func TestCheckResponseSnapshot_DeleteConnectClientAddIn(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConnectClientAddIn(context.Background(), &DeleteConnectClientAddInInput{})
+	got, err := svc.DeleteConnectClientAddIn(context.Background(), &DeleteConnectClientAddInInput{
+		AddInId:    ptr.String("__AddInId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -901,7 +1199,9 @@ func TestCheckResponseSnapshot_DeleteConnectionAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConnectionAlias(context.Background(), &DeleteConnectionAliasInput{})
+	got, err := svc.DeleteConnectionAlias(context.Background(), &DeleteConnectionAliasInput{
+		AliasId: ptr.String("__AliasId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -920,7 +1220,9 @@ func TestCheckResponseSnapshot_DeleteIpGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIpGroup(context.Background(), &DeleteIpGroupInput{})
+	got, err := svc.DeleteIpGroup(context.Background(), &DeleteIpGroupInput{
+		GroupId: ptr.String("__GroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -939,7 +1241,13 @@ func TestCheckResponseSnapshot_DeleteTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTags(context.Background(), &DeleteTagsInput{})
+	got, err := svc.DeleteTags(context.Background(), &DeleteTagsInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -958,7 +1266,9 @@ func TestCheckResponseSnapshot_DeleteWorkspaceBundle(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorkspaceBundle(context.Background(), &DeleteWorkspaceBundleInput{})
+	got, err := svc.DeleteWorkspaceBundle(context.Background(), &DeleteWorkspaceBundleInput{
+		BundleId: ptr.String("__BundleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -977,7 +1287,9 @@ func TestCheckResponseSnapshot_DeleteWorkspaceImage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorkspaceImage(context.Background(), &DeleteWorkspaceImageInput{})
+	got, err := svc.DeleteWorkspaceImage(context.Background(), &DeleteWorkspaceImageInput{
+		ImageId: ptr.String("__ImageId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1025,7 +1337,10 @@ func TestCheckResponseSnapshot_DeployWorkspaceApplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeployWorkspaceApplications(context.Background(), &DeployWorkspaceApplicationsInput{})
+	got, err := svc.DeployWorkspaceApplications(context.Background(), &DeployWorkspaceApplicationsInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		Force:       ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1044,7 +1359,9 @@ func TestCheckResponseSnapshot_DeregisterWorkspaceDirectory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterWorkspaceDirectory(context.Background(), &DeregisterWorkspaceDirectoryInput{})
+	got, err := svc.DeregisterWorkspaceDirectory(context.Background(), &DeregisterWorkspaceDirectoryInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1107,7 +1424,9 @@ func TestCheckResponseSnapshot_DescribeAccountModifications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAccountModifications(context.Background(), &DescribeAccountModificationsInput{})
+	got, err := svc.DescribeAccountModifications(context.Background(), &DescribeAccountModificationsInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1154,7 +1473,15 @@ func TestCheckResponseSnapshot_DescribeApplicationAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeApplicationAssociations(context.Background(), &DescribeApplicationAssociationsInput{})
+	got, err := svc.DescribeApplicationAssociations(context.Background(), &DescribeApplicationAssociationsInput{
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		ApplicationId: ptr.String("__ApplicationId__"),
+		AssociatedResourceTypes: []types.ApplicationAssociatedResourceType{
+			types.ApplicationAssociatedResourceType("WORKSPACE"),
+			types.ApplicationAssociatedResourceType("WORKSPACE"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1211,7 +1538,24 @@ func TestCheckResponseSnapshot_DescribeApplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeApplications(context.Background(), &DescribeApplicationsInput{})
+	got, err := svc.DescribeApplications(context.Background(), &DescribeApplicationsInput{
+		ApplicationIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ComputeTypeNames: []types.Compute{
+			types.Compute("VALUE"),
+			types.Compute("VALUE"),
+		},
+		LicenseType: types.WorkSpaceApplicationLicenseType("LICENSED"),
+		OperatingSystemNames: []types.OperatingSystemName{
+			types.OperatingSystemName("AMAZON_LINUX_2"),
+			types.OperatingSystemName("AMAZON_LINUX_2"),
+		},
+		Owner:      ptr.String("__Owner__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1257,7 +1601,13 @@ func TestCheckResponseSnapshot_DescribeBundleAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBundleAssociations(context.Background(), &DescribeBundleAssociationsInput{})
+	got, err := svc.DescribeBundleAssociations(context.Background(), &DescribeBundleAssociationsInput{
+		BundleId: ptr.String("__BundleId__"),
+		AssociatedResourceTypes: []types.BundleAssociatedResourceType{
+			types.BundleAssociatedResourceType("APPLICATION"),
+			types.BundleAssociatedResourceType("APPLICATION"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1333,7 +1683,9 @@ func TestCheckResponseSnapshot_DescribeClientBranding(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeClientBranding(context.Background(), &DescribeClientBrandingInput{})
+	got, err := svc.DescribeClientBranding(context.Background(), &DescribeClientBrandingInput{
+		ResourceId: ptr.String("__ResourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1371,7 +1723,12 @@ func TestCheckResponseSnapshot_DescribeClientProperties(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeClientProperties(context.Background(), &DescribeClientPropertiesInput{})
+	got, err := svc.DescribeClientProperties(context.Background(), &DescribeClientPropertiesInput{
+		ResourceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1406,7 +1763,11 @@ func TestCheckResponseSnapshot_DescribeConnectClientAddIns(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConnectClientAddIns(context.Background(), &DescribeConnectClientAddInsInput{})
+	got, err := svc.DescribeConnectClientAddIns(context.Background(), &DescribeConnectClientAddInsInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1438,7 +1799,11 @@ func TestCheckResponseSnapshot_DescribeConnectionAliasPermissions(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConnectionAliasPermissions(context.Background(), &DescribeConnectionAliasPermissionsInput{})
+	got, err := svc.DescribeConnectionAliasPermissions(context.Background(), &DescribeConnectionAliasPermissionsInput{
+		AliasId:    ptr.String("__AliasId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1501,7 +1866,15 @@ func TestCheckResponseSnapshot_DescribeConnectionAliases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConnectionAliases(context.Background(), &DescribeConnectionAliasesInput{})
+	got, err := svc.DescribeConnectionAliases(context.Background(), &DescribeConnectionAliasesInput{
+		AliasIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResourceId: ptr.String("__ResourceId__"),
+		Limit:      ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1542,7 +1915,9 @@ func TestCheckResponseSnapshot_DescribeCustomWorkspaceImageImport(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCustomWorkspaceImageImport(context.Background(), &DescribeCustomWorkspaceImageImportInput{})
+	got, err := svc.DescribeCustomWorkspaceImageImport(context.Background(), &DescribeCustomWorkspaceImageImportInput{
+		ImageId: ptr.String("__ImageId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1588,7 +1963,13 @@ func TestCheckResponseSnapshot_DescribeImageAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeImageAssociations(context.Background(), &DescribeImageAssociationsInput{})
+	got, err := svc.DescribeImageAssociations(context.Background(), &DescribeImageAssociationsInput{
+		ImageId: ptr.String("__ImageId__"),
+		AssociatedResourceTypes: []types.ImageAssociatedResourceType{
+			types.ImageAssociatedResourceType("APPLICATION"),
+			types.ImageAssociatedResourceType("APPLICATION"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1641,7 +2022,14 @@ func TestCheckResponseSnapshot_DescribeIpGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeIpGroups(context.Background(), &DescribeIpGroupsInput{})
+	got, err := svc.DescribeIpGroups(context.Background(), &DescribeIpGroupsInput{
+		GroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1671,7 +2059,9 @@ func TestCheckResponseSnapshot_DescribeTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTags(context.Background(), &DescribeTagsInput{})
+	got, err := svc.DescribeTags(context.Background(), &DescribeTagsInput{
+		ResourceId: ptr.String("__ResourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1717,7 +2107,13 @@ func TestCheckResponseSnapshot_DescribeWorkspaceAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeWorkspaceAssociations(context.Background(), &DescribeWorkspaceAssociationsInput{})
+	got, err := svc.DescribeWorkspaceAssociations(context.Background(), &DescribeWorkspaceAssociationsInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		AssociatedResourceTypes: []types.WorkSpaceAssociatedResourceType{
+			types.WorkSpaceAssociatedResourceType("APPLICATION"),
+			types.WorkSpaceAssociatedResourceType("APPLICATION"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1780,7 +2176,14 @@ func TestCheckResponseSnapshot_DescribeWorkspaceBundles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeWorkspaceBundles(context.Background(), &DescribeWorkspaceBundlesInput{})
+	got, err := svc.DescribeWorkspaceBundles(context.Background(), &DescribeWorkspaceBundlesInput{
+		BundleIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Owner:     ptr.String("__Owner__"),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2055,7 +2458,34 @@ func TestCheckResponseSnapshot_DescribeWorkspaceDirectories(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeWorkspaceDirectories(context.Background(), &DescribeWorkspaceDirectoriesInput{})
+	got, err := svc.DescribeWorkspaceDirectories(context.Background(), &DescribeWorkspaceDirectoriesInput{
+		DirectoryIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		WorkspaceDirectoryNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Limit:     ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+		Filters: []types.DescribeWorkspaceDirectoriesFilter{
+			{
+				Name: types.DescribeWorkspaceDirectoriesFilterName("USER_IDENTITY_TYPE"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.DescribeWorkspaceDirectoriesFilterName("USER_IDENTITY_TYPE"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2085,7 +2515,11 @@ func TestCheckResponseSnapshot_DescribeWorkspaceImagePermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeWorkspaceImagePermissions(context.Background(), &DescribeWorkspaceImagePermissionsInput{})
+	got, err := svc.DescribeWorkspaceImagePermissions(context.Background(), &DescribeWorkspaceImagePermissionsInput{
+		ImageId:    ptr.String("__ImageId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2164,7 +2598,15 @@ func TestCheckResponseSnapshot_DescribeWorkspaceImages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeWorkspaceImages(context.Background(), &DescribeWorkspaceImagesInput{})
+	got, err := svc.DescribeWorkspaceImages(context.Background(), &DescribeWorkspaceImagesInput{
+		ImageIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ImageType:  types.ImageType("OWNED"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2200,7 +2642,9 @@ func TestCheckResponseSnapshot_DescribeWorkspaceSnapshots(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeWorkspaceSnapshots(context.Background(), &DescribeWorkspaceSnapshotsInput{})
+	got, err := svc.DescribeWorkspaceSnapshots(context.Background(), &DescribeWorkspaceSnapshotsInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2369,7 +2813,18 @@ func TestCheckResponseSnapshot_DescribeWorkspaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeWorkspaces(context.Background(), &DescribeWorkspacesInput{})
+	got, err := svc.DescribeWorkspaces(context.Background(), &DescribeWorkspacesInput{
+		WorkspaceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DirectoryId:   ptr.String("__DirectoryId__"),
+		UserName:      ptr.String("__UserName__"),
+		BundleId:      ptr.String("__BundleId__"),
+		Limit:         ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		WorkspaceName: ptr.String("__WorkspaceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2404,7 +2859,13 @@ func TestCheckResponseSnapshot_DescribeWorkspacesConnectionStatus(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeWorkspacesConnectionStatus(context.Background(), &DescribeWorkspacesConnectionStatusInput{})
+	got, err := svc.DescribeWorkspacesConnectionStatus(context.Background(), &DescribeWorkspacesConnectionStatusInput{
+		WorkspaceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2455,7 +2916,12 @@ func TestCheckResponseSnapshot_DescribeWorkspacesPoolSessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeWorkspacesPoolSessions(context.Background(), &DescribeWorkspacesPoolSessionsInput{})
+	got, err := svc.DescribeWorkspacesPoolSessions(context.Background(), &DescribeWorkspacesPoolSessionsInput{
+		PoolId:    ptr.String("__PoolId__"),
+		UserId:    ptr.String("__UserId__"),
+		Limit:     ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2552,7 +3018,32 @@ func TestCheckResponseSnapshot_DescribeWorkspacesPools(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeWorkspacesPools(context.Background(), &DescribeWorkspacesPoolsInput{})
+	got, err := svc.DescribeWorkspacesPools(context.Background(), &DescribeWorkspacesPoolsInput{
+		PoolIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.DescribeWorkspacesPoolsFilter{
+			{
+				Name: types.DescribeWorkspacesPoolsFilterName("PoolName"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.DescribeWorkspacesPoolsFilterOperator("EQUALS"),
+			},
+			{
+				Name: types.DescribeWorkspacesPoolsFilterName("PoolName"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.DescribeWorkspacesPoolsFilterOperator("EQUALS"),
+			},
+		},
+		Limit:     ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2571,7 +3062,9 @@ func TestCheckResponseSnapshot_DisassociateConnectionAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateConnectionAlias(context.Background(), &DisassociateConnectionAliasInput{})
+	got, err := svc.DisassociateConnectionAlias(context.Background(), &DisassociateConnectionAliasInput{
+		AliasId: ptr.String("__AliasId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2590,7 +3083,13 @@ func TestCheckResponseSnapshot_DisassociateIpGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateIpGroups(context.Background(), &DisassociateIpGroupsInput{})
+	got, err := svc.DisassociateIpGroups(context.Background(), &DisassociateIpGroupsInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		GroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2622,7 +3121,10 @@ func TestCheckResponseSnapshot_DisassociateWorkspaceApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateWorkspaceApplication(context.Background(), &DisassociateWorkspaceApplicationInput{})
+	got, err := svc.DisassociateWorkspaceApplication(context.Background(), &DisassociateWorkspaceApplicationInput{
+		WorkspaceId:   ptr.String("__WorkspaceId__"),
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2648,7 +3150,10 @@ func TestCheckResponseSnapshot_GetAccountLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAccountLink(context.Background(), &GetAccountLinkInput{})
+	got, err := svc.GetAccountLink(context.Background(), &GetAccountLinkInput{
+		LinkId:          ptr.String("__LinkId__"),
+		LinkedAccountId: ptr.String("__LinkedAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2724,7 +3229,65 @@ func TestCheckResponseSnapshot_ImportClientBranding(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportClientBranding(context.Background(), &ImportClientBrandingInput{})
+	got, err := svc.ImportClientBranding(context.Background(), &ImportClientBrandingInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		DeviceTypeWindows: &types.DefaultImportClientBrandingAttributes{
+			Logo:               []byte("blob"),
+			SupportEmail:       ptr.String("__SupportEmail__"),
+			SupportLink:        ptr.String("__SupportLink__"),
+			ForgotPasswordLink: ptr.String("__ForgotPasswordLink__"),
+			LoginMessage: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		DeviceTypeOsx: &types.DefaultImportClientBrandingAttributes{
+			Logo:               []byte("blob"),
+			SupportEmail:       ptr.String("__SupportEmail__"),
+			SupportLink:        ptr.String("__SupportLink__"),
+			ForgotPasswordLink: ptr.String("__ForgotPasswordLink__"),
+			LoginMessage: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		DeviceTypeAndroid: &types.DefaultImportClientBrandingAttributes{
+			Logo:               []byte("blob"),
+			SupportEmail:       ptr.String("__SupportEmail__"),
+			SupportLink:        ptr.String("__SupportLink__"),
+			ForgotPasswordLink: ptr.String("__ForgotPasswordLink__"),
+			LoginMessage: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		DeviceTypeIos: &types.IosImportClientBrandingAttributes{
+			Logo:               []byte("blob"),
+			Logo2x:             []byte("blob"),
+			Logo3x:             []byte("blob"),
+			SupportEmail:       ptr.String("__SupportEmail__"),
+			SupportLink:        ptr.String("__SupportLink__"),
+			ForgotPasswordLink: ptr.String("__ForgotPasswordLink__"),
+			LoginMessage: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		DeviceTypeLinux: &types.DefaultImportClientBrandingAttributes{
+			Logo:               []byte("blob"),
+			SupportEmail:       ptr.String("__SupportEmail__"),
+			SupportLink:        ptr.String("__SupportLink__"),
+			ForgotPasswordLink: ptr.String("__ForgotPasswordLink__"),
+			LoginMessage: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		DeviceTypeWeb: &types.DefaultImportClientBrandingAttributes{
+			Logo:               []byte("blob"),
+			SupportEmail:       ptr.String("__SupportEmail__"),
+			SupportLink:        ptr.String("__SupportLink__"),
+			ForgotPasswordLink: ptr.String("__ForgotPasswordLink__"),
+			LoginMessage: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2746,7 +3309,28 @@ func TestCheckResponseSnapshot_ImportCustomWorkspaceImage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportCustomWorkspaceImage(context.Background(), &ImportCustomWorkspaceImageInput{})
+	got, err := svc.ImportCustomWorkspaceImage(context.Background(), &ImportCustomWorkspaceImageInput{
+		ImageName:        ptr.String("__ImageName__"),
+		ImageDescription: ptr.String("__ImageDescription__"),
+		ComputeType:      types.ImageComputeType("BASE"),
+		Protocol:         types.CustomImageProtocol("PCOIP"),
+		ImageSource: &types.ImageSourceIdentifierMemberEc2ImportTaskId{
+			Value: "__ImageSourceIdentifierMemberEc2ImportTaskId__",
+		},
+		InfrastructureConfigurationArn: ptr.String("__InfrastructureConfigurationArn__"),
+		Platform:                       types.Platform("WINDOWS"),
+		OsVersion:                      types.OSVersion("Windows_10"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2767,7 +3351,26 @@ func TestCheckResponseSnapshot_ImportWorkspaceImage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportWorkspaceImage(context.Background(), &ImportWorkspaceImageInput{})
+	got, err := svc.ImportWorkspaceImage(context.Background(), &ImportWorkspaceImageInput{
+		Ec2ImageId:       ptr.String("__Ec2ImageId__"),
+		IngestionProcess: types.WorkspaceImageIngestionProcess("BYOL_REGULAR"),
+		ImageName:        ptr.String("__ImageName__"),
+		ImageDescription: ptr.String("__ImageDescription__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Applications: []types.Application{
+			types.Application("Microsoft_Office_2016"),
+			types.Application("Microsoft_Office_2016"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2802,7 +3405,14 @@ func TestCheckResponseSnapshot_ListAccountLinks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccountLinks(context.Background(), &ListAccountLinksInput{})
+	got, err := svc.ListAccountLinks(context.Background(), &ListAccountLinksInput{
+		LinkStatusFilter: []types.AccountLinkStatusEnum{
+			types.AccountLinkStatusEnum("LINKED"),
+			types.AccountLinkStatusEnum("LINKED"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2827,7 +3437,11 @@ func TestCheckResponseSnapshot_ListAvailableManagementCidrRanges(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAvailableManagementCidrRanges(context.Background(), &ListAvailableManagementCidrRangesInput{})
+	got, err := svc.ListAvailableManagementCidrRanges(context.Background(), &ListAvailableManagementCidrRangesInput{
+		ManagementCidrRangeConstraint: ptr.String("__ManagementCidrRangeConstraint__"),
+		MaxResults:                    ptr.Int32(1),
+		NextToken:                     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2849,7 +3463,10 @@ func TestCheckResponseSnapshot_MigrateWorkspace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MigrateWorkspace(context.Background(), &MigrateWorkspaceInput{})
+	got, err := svc.MigrateWorkspace(context.Background(), &MigrateWorkspaceInput{
+		SourceWorkspaceId: ptr.String("__SourceWorkspaceId__"),
+		BundleId:          ptr.String("__BundleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2870,7 +3487,10 @@ func TestCheckResponseSnapshot_ModifyAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyAccount(context.Background(), &ModifyAccountInput{})
+	got, err := svc.ModifyAccount(context.Background(), &ModifyAccountInput{
+		DedicatedTenancySupport:             types.DedicatedTenancySupportEnum("ENABLED"),
+		DedicatedTenancyManagementCidrRange: ptr.String("__DedicatedTenancyManagementCidrRange__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2889,7 +3509,17 @@ func TestCheckResponseSnapshot_ModifyCertificateBasedAuthProperties(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyCertificateBasedAuthProperties(context.Background(), &ModifyCertificateBasedAuthPropertiesInput{})
+	got, err := svc.ModifyCertificateBasedAuthProperties(context.Background(), &ModifyCertificateBasedAuthPropertiesInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		CertificateBasedAuthProperties: &types.CertificateBasedAuthProperties{
+			Status:                  types.CertificateBasedAuthStatusEnum("DISABLED"),
+			CertificateAuthorityArn: ptr.String("__CertificateAuthorityArn__"),
+		},
+		PropertiesToDelete: []types.DeletableCertificateBasedAuthProperty{
+			types.DeletableCertificateBasedAuthProperty("CERTIFICATE_BASED_AUTH_PROPERTIES_CERTIFICATE_AUTHORITY_ARN"),
+			types.DeletableCertificateBasedAuthProperty("CERTIFICATE_BASED_AUTH_PROPERTIES_CERTIFICATE_AUTHORITY_ARN"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2908,7 +3538,14 @@ func TestCheckResponseSnapshot_ModifyClientProperties(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyClientProperties(context.Background(), &ModifyClientPropertiesInput{})
+	got, err := svc.ModifyClientProperties(context.Background(), &ModifyClientPropertiesInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		ClientProperties: &types.ClientProperties{
+			ReconnectEnabled:       types.ReconnectEnum("ENABLED"),
+			LogUploadEnabled:       types.LogUploadEnum("ENABLED"),
+			ClientExperiencePolicy: ptr.String("__ClientExperiencePolicy__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2927,7 +3564,10 @@ func TestCheckResponseSnapshot_ModifyEndpointEncryptionMode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyEndpointEncryptionMode(context.Background(), &ModifyEndpointEncryptionModeInput{})
+	got, err := svc.ModifyEndpointEncryptionMode(context.Background(), &ModifyEndpointEncryptionModeInput{
+		DirectoryId:            ptr.String("__DirectoryId__"),
+		EndpointEncryptionMode: types.EndpointEncryptionMode("STANDARD_TLS"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2946,7 +3586,18 @@ func TestCheckResponseSnapshot_ModifySamlProperties(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifySamlProperties(context.Background(), &ModifySamlPropertiesInput{})
+	got, err := svc.ModifySamlProperties(context.Background(), &ModifySamlPropertiesInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		SamlProperties: &types.SamlProperties{
+			Status:                  types.SamlStatusEnum("DISABLED"),
+			UserAccessUrl:           ptr.String("__UserAccessUrl__"),
+			RelayStateParameterName: ptr.String("__RelayStateParameterName__"),
+		},
+		PropertiesToDelete: []types.DeletableSamlProperty{
+			types.DeletableSamlProperty("SAML_PROPERTIES_USER_ACCESS_URL"),
+			types.DeletableSamlProperty("SAML_PROPERTIES_USER_ACCESS_URL"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2965,7 +3616,16 @@ func TestCheckResponseSnapshot_ModifySelfservicePermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifySelfservicePermissions(context.Background(), &ModifySelfservicePermissionsInput{})
+	got, err := svc.ModifySelfservicePermissions(context.Background(), &ModifySelfservicePermissionsInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		SelfservicePermissions: &types.SelfservicePermissions{
+			RestartWorkspace:   types.ReconnectEnum("ENABLED"),
+			IncreaseVolumeSize: types.ReconnectEnum("ENABLED"),
+			ChangeComputeType:  types.ReconnectEnum("ENABLED"),
+			SwitchRunningMode:  types.ReconnectEnum("ENABLED"),
+			RebuildWorkspace:   types.ReconnectEnum("ENABLED"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2984,7 +3644,38 @@ func TestCheckResponseSnapshot_ModifyStreamingProperties(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyStreamingProperties(context.Background(), &ModifyStreamingPropertiesInput{})
+	got, err := svc.ModifyStreamingProperties(context.Background(), &ModifyStreamingPropertiesInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		StreamingProperties: &types.StreamingProperties{
+			StreamingExperiencePreferredProtocol: types.StreamingExperiencePreferredProtocolEnum("TCP"),
+			UserSettings: []types.UserSetting{
+				{
+					Action:        types.UserSettingActionEnum("CLIPBOARD_COPY_FROM_LOCAL_DEVICE"),
+					Permission:    types.UserSettingPermissionEnum("ENABLED"),
+					MaximumLength: ptr.Int32(1),
+				},
+				{
+					Action:        types.UserSettingActionEnum("CLIPBOARD_COPY_FROM_LOCAL_DEVICE"),
+					Permission:    types.UserSettingPermissionEnum("ENABLED"),
+					MaximumLength: ptr.Int32(1),
+				},
+			},
+			StorageConnectors: []types.StorageConnector{
+				{
+					ConnectorType: types.StorageConnectorTypeEnum("HOME_FOLDER"),
+					Status:        types.StorageConnectorStatusEnum("ENABLED"),
+				},
+				{
+					ConnectorType: types.StorageConnectorTypeEnum("HOME_FOLDER"),
+					Status:        types.StorageConnectorStatusEnum("ENABLED"),
+				},
+			},
+			GlobalAccelerator: &types.GlobalAcceleratorForDirectory{
+				Mode:              types.AGAModeForDirectoryEnum("ENABLED_AUTO"),
+				PreferredProtocol: types.AGAPreferredProtocolForDirectory("TCP"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3003,7 +3694,36 @@ func TestCheckResponseSnapshot_ModifyWorkspaceAccessProperties(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyWorkspaceAccessProperties(context.Background(), &ModifyWorkspaceAccessPropertiesInput{})
+	got, err := svc.ModifyWorkspaceAccessProperties(context.Background(), &ModifyWorkspaceAccessPropertiesInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		WorkspaceAccessProperties: &types.WorkspaceAccessProperties{
+			DeviceTypeWindows:              types.AccessPropertyValue("ALLOW"),
+			DeviceTypeOsx:                  types.AccessPropertyValue("ALLOW"),
+			DeviceTypeWeb:                  types.AccessPropertyValue("ALLOW"),
+			DeviceTypeIos:                  types.AccessPropertyValue("ALLOW"),
+			DeviceTypeAndroid:              types.AccessPropertyValue("ALLOW"),
+			DeviceTypeChromeOs:             types.AccessPropertyValue("ALLOW"),
+			DeviceTypeZeroClient:           types.AccessPropertyValue("ALLOW"),
+			DeviceTypeLinux:                types.AccessPropertyValue("ALLOW"),
+			DeviceTypeWorkSpacesThinClient: types.AccessPropertyValue("ALLOW"),
+			AccessEndpointConfig: &types.AccessEndpointConfig{
+				AccessEndpoints: []types.AccessEndpoint{
+					{
+						AccessEndpointType: types.AccessEndpointType("STREAMING_WSP"),
+						VpcEndpointId:      ptr.String("__VpcEndpointId__"),
+					},
+					{
+						AccessEndpointType: types.AccessEndpointType("STREAMING_WSP"),
+						VpcEndpointId:      ptr.String("__VpcEndpointId__"),
+					},
+				},
+				InternetFallbackProtocols: []types.InternetFallbackProtocol{
+					types.InternetFallbackProtocol("PCOIP"),
+					types.InternetFallbackProtocol("PCOIP"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3022,7 +3742,17 @@ func TestCheckResponseSnapshot_ModifyWorkspaceCreationProperties(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyWorkspaceCreationProperties(context.Background(), &ModifyWorkspaceCreationPropertiesInput{})
+	got, err := svc.ModifyWorkspaceCreationProperties(context.Background(), &ModifyWorkspaceCreationPropertiesInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		WorkspaceCreationProperties: &types.WorkspaceCreationProperties{
+			EnableInternetAccess:            ptr.Bool(true),
+			DefaultOu:                       ptr.String("__DefaultOu__"),
+			CustomSecurityGroupId:           ptr.String("__CustomSecurityGroupId__"),
+			UserEnabledAsLocalAdministrator: ptr.Bool(true),
+			EnableMaintenanceMode:           ptr.Bool(true),
+			InstanceIamRoleArn:              ptr.String("__InstanceIamRoleArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3041,7 +3771,26 @@ func TestCheckResponseSnapshot_ModifyWorkspaceProperties(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyWorkspaceProperties(context.Background(), &ModifyWorkspacePropertiesInput{})
+	got, err := svc.ModifyWorkspaceProperties(context.Background(), &ModifyWorkspacePropertiesInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		WorkspaceProperties: &types.WorkspaceProperties{
+			RunningMode:                         types.RunningMode("AUTO_STOP"),
+			RunningModeAutoStopTimeoutInMinutes: ptr.Int32(1),
+			RootVolumeSizeGib:                   ptr.Int32(1),
+			UserVolumeSizeGib:                   ptr.Int32(1),
+			ComputeTypeName:                     types.Compute("VALUE"),
+			Protocols: []types.Protocol{
+				types.Protocol("PCOIP"),
+				types.Protocol("PCOIP"),
+			},
+			OperatingSystemName: types.OperatingSystemName("AMAZON_LINUX_2"),
+			GlobalAccelerator: &types.GlobalAcceleratorForWorkSpace{
+				Mode:              types.AGAModeForWorkSpaceEnum("ENABLED_AUTO"),
+				PreferredProtocol: types.AGAPreferredProtocolForWorkSpace("TCP"),
+			},
+		},
+		DataReplication: types.DataReplication("NO_REPLICATION"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3060,7 +3809,10 @@ func TestCheckResponseSnapshot_ModifyWorkspaceState(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyWorkspaceState(context.Background(), &ModifyWorkspaceStateInput{})
+	got, err := svc.ModifyWorkspaceState(context.Background(), &ModifyWorkspaceStateInput{
+		WorkspaceId:    ptr.String("__WorkspaceId__"),
+		WorkspaceState: types.TargetWorkspaceState("AVAILABLE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3092,7 +3844,16 @@ func TestCheckResponseSnapshot_RebootWorkspaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RebootWorkspaces(context.Background(), &RebootWorkspacesInput{})
+	got, err := svc.RebootWorkspaces(context.Background(), &RebootWorkspacesInput{
+		RebootWorkspaceRequests: []types.RebootRequest{
+			{
+				WorkspaceId: ptr.String("__WorkspaceId__"),
+			},
+			{
+				WorkspaceId: ptr.String("__WorkspaceId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3124,7 +3885,16 @@ func TestCheckResponseSnapshot_RebuildWorkspaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RebuildWorkspaces(context.Background(), &RebuildWorkspacesInput{})
+	got, err := svc.RebuildWorkspaces(context.Background(), &RebuildWorkspacesInput{
+		RebuildWorkspaceRequests: []types.RebuildRequest{
+			{
+				WorkspaceId: ptr.String("__WorkspaceId__"),
+			},
+			{
+				WorkspaceId: ptr.String("__WorkspaceId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3146,7 +3916,38 @@ func TestCheckResponseSnapshot_RegisterWorkspaceDirectory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterWorkspaceDirectory(context.Background(), &RegisterWorkspaceDirectoryInput{})
+	got, err := svc.RegisterWorkspaceDirectory(context.Background(), &RegisterWorkspaceDirectoryInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EnableSelfService: ptr.Bool(true),
+		Tenancy:           types.Tenancy("DEDICATED"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		WorkspaceDirectoryName:        ptr.String("__WorkspaceDirectoryName__"),
+		WorkspaceDirectoryDescription: ptr.String("__WorkspaceDirectoryDescription__"),
+		UserIdentityType:              types.UserIdentityType("CUSTOMER_MANAGED"),
+		IdcInstanceArn:                ptr.String("__IdcInstanceArn__"),
+		MicrosoftEntraConfig: &types.MicrosoftEntraConfig{
+			TenantId:                   ptr.String("__TenantId__"),
+			ApplicationConfigSecretArn: ptr.String("__ApplicationConfigSecretArn__"),
+		},
+		WorkspaceType: types.WorkspaceType("PERSONAL"),
+		ActiveDirectoryConfig: &types.ActiveDirectoryConfig{
+			DomainName:              ptr.String("__DomainName__"),
+			ServiceAccountSecretArn: ptr.String("__ServiceAccountSecretArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3172,7 +3973,10 @@ func TestCheckResponseSnapshot_RejectAccountLinkInvitation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RejectAccountLinkInvitation(context.Background(), &RejectAccountLinkInvitationInput{})
+	got, err := svc.RejectAccountLinkInvitation(context.Background(), &RejectAccountLinkInvitationInput{
+		LinkId:      ptr.String("__LinkId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3191,7 +3995,9 @@ func TestCheckResponseSnapshot_RestoreWorkspace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RestoreWorkspace(context.Background(), &RestoreWorkspaceInput{})
+	got, err := svc.RestoreWorkspace(context.Background(), &RestoreWorkspaceInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3210,7 +4016,13 @@ func TestCheckResponseSnapshot_RevokeIpRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RevokeIpRules(context.Background(), &RevokeIpRulesInput{})
+	got, err := svc.RevokeIpRules(context.Background(), &RevokeIpRulesInput{
+		GroupId: ptr.String("__GroupId__"),
+		UserRules: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3242,7 +4054,16 @@ func TestCheckResponseSnapshot_StartWorkspaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartWorkspaces(context.Background(), &StartWorkspacesInput{})
+	got, err := svc.StartWorkspaces(context.Background(), &StartWorkspacesInput{
+		StartWorkspaceRequests: []types.StartRequest{
+			{
+				WorkspaceId: ptr.String("__WorkspaceId__"),
+			},
+			{
+				WorkspaceId: ptr.String("__WorkspaceId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3261,7 +4082,9 @@ func TestCheckResponseSnapshot_StartWorkspacesPool(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartWorkspacesPool(context.Background(), &StartWorkspacesPoolInput{})
+	got, err := svc.StartWorkspacesPool(context.Background(), &StartWorkspacesPoolInput{
+		PoolId: ptr.String("__PoolId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3293,7 +4116,16 @@ func TestCheckResponseSnapshot_StopWorkspaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopWorkspaces(context.Background(), &StopWorkspacesInput{})
+	got, err := svc.StopWorkspaces(context.Background(), &StopWorkspacesInput{
+		StopWorkspaceRequests: []types.StopRequest{
+			{
+				WorkspaceId: ptr.String("__WorkspaceId__"),
+			},
+			{
+				WorkspaceId: ptr.String("__WorkspaceId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3312,7 +4144,9 @@ func TestCheckResponseSnapshot_StopWorkspacesPool(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopWorkspacesPool(context.Background(), &StopWorkspacesPoolInput{})
+	got, err := svc.StopWorkspacesPool(context.Background(), &StopWorkspacesPoolInput{
+		PoolId: ptr.String("__PoolId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3344,7 +4178,16 @@ func TestCheckResponseSnapshot_TerminateWorkspaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TerminateWorkspaces(context.Background(), &TerminateWorkspacesInput{})
+	got, err := svc.TerminateWorkspaces(context.Background(), &TerminateWorkspacesInput{
+		TerminateWorkspaceRequests: []types.TerminateRequest{
+			{
+				WorkspaceId: ptr.String("__WorkspaceId__"),
+			},
+			{
+				WorkspaceId: ptr.String("__WorkspaceId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3363,7 +4206,9 @@ func TestCheckResponseSnapshot_TerminateWorkspacesPool(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TerminateWorkspacesPool(context.Background(), &TerminateWorkspacesPoolInput{})
+	got, err := svc.TerminateWorkspacesPool(context.Background(), &TerminateWorkspacesPoolInput{
+		PoolId: ptr.String("__PoolId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3382,7 +4227,9 @@ func TestCheckResponseSnapshot_TerminateWorkspacesPoolSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TerminateWorkspacesPoolSession(context.Background(), &TerminateWorkspacesPoolSessionInput{})
+	got, err := svc.TerminateWorkspacesPoolSession(context.Background(), &TerminateWorkspacesPoolSessionInput{
+		SessionId: ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3401,7 +4248,12 @@ func TestCheckResponseSnapshot_UpdateConnectClientAddIn(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConnectClientAddIn(context.Background(), &UpdateConnectClientAddInInput{})
+	got, err := svc.UpdateConnectClientAddIn(context.Background(), &UpdateConnectClientAddInInput{
+		AddInId:    ptr.String("__AddInId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+		Name:       ptr.String("__Name__"),
+		URL:        ptr.String("__URL__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3420,7 +4272,13 @@ func TestCheckResponseSnapshot_UpdateConnectionAliasPermission(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConnectionAliasPermission(context.Background(), &UpdateConnectionAliasPermissionInput{})
+	got, err := svc.UpdateConnectionAliasPermission(context.Background(), &UpdateConnectionAliasPermissionInput{
+		AliasId: ptr.String("__AliasId__"),
+		ConnectionAliasPermission: &types.ConnectionAliasPermission{
+			SharedAccountId:  ptr.String("__SharedAccountId__"),
+			AllowAssociation: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3439,7 +4297,19 @@ func TestCheckResponseSnapshot_UpdateRulesOfIpGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRulesOfIpGroup(context.Background(), &UpdateRulesOfIpGroupInput{})
+	got, err := svc.UpdateRulesOfIpGroup(context.Background(), &UpdateRulesOfIpGroupInput{
+		GroupId: ptr.String("__GroupId__"),
+		UserRules: []types.IpRuleItem{
+			{
+				IpRule:   ptr.String("__IpRule__"),
+				RuleDesc: ptr.String("__RuleDesc__"),
+			},
+			{
+				IpRule:   ptr.String("__IpRule__"),
+				RuleDesc: ptr.String("__RuleDesc__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3458,7 +4328,10 @@ func TestCheckResponseSnapshot_UpdateWorkspaceBundle(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWorkspaceBundle(context.Background(), &UpdateWorkspaceBundleInput{})
+	got, err := svc.UpdateWorkspaceBundle(context.Background(), &UpdateWorkspaceBundleInput{
+		BundleId: ptr.String("__BundleId__"),
+		ImageId:  ptr.String("__ImageId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3477,7 +4350,11 @@ func TestCheckResponseSnapshot_UpdateWorkspaceImagePermission(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWorkspaceImagePermission(context.Background(), &UpdateWorkspaceImagePermissionInput{})
+	got, err := svc.UpdateWorkspaceImagePermission(context.Background(), &UpdateWorkspaceImagePermissionInput{
+		ImageId:         ptr.String("__ImageId__"),
+		AllowCopyImage:  ptr.Bool(true),
+		SharedAccountId: ptr.String("__SharedAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3534,7 +4411,25 @@ func TestCheckResponseSnapshot_UpdateWorkspacesPool(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWorkspacesPool(context.Background(), &UpdateWorkspacesPoolInput{})
+	got, err := svc.UpdateWorkspacesPool(context.Background(), &UpdateWorkspacesPoolInput{
+		PoolId:      ptr.String("__PoolId__"),
+		Description: ptr.String("__Description__"),
+		BundleId:    ptr.String("__BundleId__"),
+		DirectoryId: ptr.String("__DirectoryId__"),
+		Capacity: &types.Capacity{
+			DesiredUserSessions: ptr.Int32(1),
+		},
+		ApplicationSettings: &types.ApplicationSettingsRequest{
+			Status:        types.ApplicationSettingsStatusEnum("DISABLED"),
+			SettingsGroup: ptr.String("__SettingsGroup__"),
+		},
+		TimeoutSettings: &types.TimeoutSettings{
+			DisconnectTimeoutInSeconds:     ptr.Int32(1),
+			IdleDisconnectTimeoutInSeconds: ptr.Int32(1),
+			MaxUserDurationInSeconds:       ptr.Int32(1),
+		},
+		RunningMode: types.PoolsRunningMode("AUTO_STOP"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3555,7 +4450,10 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptAccountLinkInvitation(context.Background(), &AcceptAccountLinkInvitationInput{})
+	_, opErr := svc.AcceptAccountLinkInvitation(context.Background(), &AcceptAccountLinkInvitationInput{
+		LinkId:      ptr.String("__LinkId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3578,7 +4476,10 @@ func TestCheckResponseSnapshot_Error_ApplicationNotSupportedException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateWorkspaceApplication(context.Background(), &AssociateWorkspaceApplicationInput{})
+	_, opErr := svc.AssociateWorkspaceApplication(context.Background(), &AssociateWorkspaceApplicationInput{
+		WorkspaceId:   ptr.String("__WorkspaceId__"),
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3601,7 +4502,10 @@ func TestCheckResponseSnapshot_Error_ComputeNotCompatibleException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateWorkspaceApplication(context.Background(), &AssociateWorkspaceApplicationInput{})
+	_, opErr := svc.AssociateWorkspaceApplication(context.Background(), &AssociateWorkspaceApplicationInput{
+		WorkspaceId:   ptr.String("__WorkspaceId__"),
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3626,7 +4530,10 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptAccountLinkInvitation(context.Background(), &AcceptAccountLinkInvitationInput{})
+	_, opErr := svc.AcceptAccountLinkInvitation(context.Background(), &AcceptAccountLinkInvitationInput{
+		LinkId:      ptr.String("__LinkId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3649,7 +4556,10 @@ func TestCheckResponseSnapshot_Error_IncompatibleApplicationsException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateWorkspaceApplication(context.Background(), &AssociateWorkspaceApplicationInput{})
+	_, opErr := svc.AssociateWorkspaceApplication(context.Background(), &AssociateWorkspaceApplicationInput{
+		WorkspaceId:   ptr.String("__WorkspaceId__"),
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3674,7 +4584,10 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptAccountLinkInvitation(context.Background(), &AcceptAccountLinkInvitationInput{})
+	_, opErr := svc.AcceptAccountLinkInvitation(context.Background(), &AcceptAccountLinkInvitationInput{
+		LinkId:      ptr.String("__LinkId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3699,7 +4612,36 @@ func TestCheckResponseSnapshot_Error_InvalidParameterCombinationException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ModifyWorkspaceAccessProperties(context.Background(), &ModifyWorkspaceAccessPropertiesInput{})
+	_, opErr := svc.ModifyWorkspaceAccessProperties(context.Background(), &ModifyWorkspaceAccessPropertiesInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		WorkspaceAccessProperties: &types.WorkspaceAccessProperties{
+			DeviceTypeWindows:              types.AccessPropertyValue("ALLOW"),
+			DeviceTypeOsx:                  types.AccessPropertyValue("ALLOW"),
+			DeviceTypeWeb:                  types.AccessPropertyValue("ALLOW"),
+			DeviceTypeIos:                  types.AccessPropertyValue("ALLOW"),
+			DeviceTypeAndroid:              types.AccessPropertyValue("ALLOW"),
+			DeviceTypeChromeOs:             types.AccessPropertyValue("ALLOW"),
+			DeviceTypeZeroClient:           types.AccessPropertyValue("ALLOW"),
+			DeviceTypeLinux:                types.AccessPropertyValue("ALLOW"),
+			DeviceTypeWorkSpacesThinClient: types.AccessPropertyValue("ALLOW"),
+			AccessEndpointConfig: &types.AccessEndpointConfig{
+				AccessEndpoints: []types.AccessEndpoint{
+					{
+						AccessEndpointType: types.AccessEndpointType("STREAMING_WSP"),
+						VpcEndpointId:      ptr.String("__VpcEndpointId__"),
+					},
+					{
+						AccessEndpointType: types.AccessEndpointType("STREAMING_WSP"),
+						VpcEndpointId:      ptr.String("__VpcEndpointId__"),
+					},
+				},
+				InternetFallbackProtocols: []types.InternetFallbackProtocol{
+					types.InternetFallbackProtocol("PCOIP"),
+					types.InternetFallbackProtocol("PCOIP"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3724,7 +4666,10 @@ func TestCheckResponseSnapshot_Error_InvalidParameterValuesException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateConnectionAlias(context.Background(), &AssociateConnectionAliasInput{})
+	_, opErr := svc.AssociateConnectionAlias(context.Background(), &AssociateConnectionAliasInput{
+		AliasId:    ptr.String("__AliasId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3749,7 +4694,10 @@ func TestCheckResponseSnapshot_Error_InvalidResourceStateException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateConnectionAlias(context.Background(), &AssociateConnectionAliasInput{})
+	_, opErr := svc.AssociateConnectionAlias(context.Background(), &AssociateConnectionAliasInput{
+		AliasId:    ptr.String("__AliasId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3772,7 +4720,10 @@ func TestCheckResponseSnapshot_Error_OperatingSystemNotCompatibleException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateWorkspaceApplication(context.Background(), &AssociateWorkspaceApplicationInput{})
+	_, opErr := svc.AssociateWorkspaceApplication(context.Background(), &AssociateWorkspaceApplicationInput{
+		WorkspaceId:   ptr.String("__WorkspaceId__"),
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3797,7 +4748,10 @@ func TestCheckResponseSnapshot_Error_OperationInProgressException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.MigrateWorkspace(context.Background(), &MigrateWorkspaceInput{})
+	_, opErr := svc.MigrateWorkspace(context.Background(), &MigrateWorkspaceInput{
+		SourceWorkspaceId: ptr.String("__SourceWorkspaceId__"),
+		BundleId:          ptr.String("__BundleId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3823,7 +4777,10 @@ func TestCheckResponseSnapshot_Error_OperationNotSupportedException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateConnectionAlias(context.Background(), &AssociateConnectionAliasInput{})
+	_, opErr := svc.AssociateConnectionAlias(context.Background(), &AssociateConnectionAliasInput{
+		AliasId:    ptr.String("__AliasId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3848,7 +4805,10 @@ func TestCheckResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateWorkspaceApplication(context.Background(), &AssociateWorkspaceApplicationInput{})
+	_, opErr := svc.AssociateWorkspaceApplication(context.Background(), &AssociateWorkspaceApplicationInput{
+		WorkspaceId:   ptr.String("__WorkspaceId__"),
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3873,7 +4833,10 @@ func TestCheckResponseSnapshot_Error_ResourceAssociatedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateConnectionAlias(context.Background(), &AssociateConnectionAliasInput{})
+	_, opErr := svc.AssociateConnectionAlias(context.Background(), &AssociateConnectionAliasInput{
+		AliasId:    ptr.String("__AliasId__"),
+		ResourceId: ptr.String("__ResourceId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3898,7 +4861,11 @@ func TestCheckResponseSnapshot_Error_ResourceCreationFailedException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConnectClientAddIn(context.Background(), &CreateConnectClientAddInInput{})
+	_, opErr := svc.CreateConnectClientAddIn(context.Background(), &CreateConnectClientAddInInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		Name:       ptr.String("__Name__"),
+		URL:        ptr.String("__URL__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3924,7 +4891,10 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateWorkspaceApplication(context.Background(), &AssociateWorkspaceApplicationInput{})
+	_, opErr := svc.AssociateWorkspaceApplication(context.Background(), &AssociateWorkspaceApplicationInput{
+		WorkspaceId:   ptr.String("__WorkspaceId__"),
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3949,7 +4919,13 @@ func TestCheckResponseSnapshot_Error_ResourceLimitExceededException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateIpGroups(context.Background(), &AssociateIpGroupsInput{})
+	_, opErr := svc.AssociateIpGroups(context.Background(), &AssociateIpGroupsInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		GroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3975,7 +4951,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptAccountLinkInvitation(context.Background(), &AcceptAccountLinkInvitationInput{})
+	_, opErr := svc.AcceptAccountLinkInvitation(context.Background(), &AcceptAccountLinkInvitationInput{
+		LinkId:      ptr.String("__LinkId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4001,7 +4980,22 @@ func TestCheckResponseSnapshot_Error_ResourceUnavailableException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyWorkspaceImage(context.Background(), &CopyWorkspaceImageInput{})
+	_, opErr := svc.CopyWorkspaceImage(context.Background(), &CopyWorkspaceImageInput{
+		Name:          ptr.String("__Name__"),
+		Description:   ptr.String("__Description__"),
+		SourceImageId: ptr.String("__SourceImageId__"),
+		SourceRegion:  ptr.String("__SourceRegion__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4026,7 +5020,38 @@ func TestCheckResponseSnapshot_Error_UnsupportedNetworkConfigurationException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RegisterWorkspaceDirectory(context.Background(), &RegisterWorkspaceDirectoryInput{})
+	_, opErr := svc.RegisterWorkspaceDirectory(context.Background(), &RegisterWorkspaceDirectoryInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EnableSelfService: ptr.Bool(true),
+		Tenancy:           types.Tenancy("DEDICATED"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		WorkspaceDirectoryName:        ptr.String("__WorkspaceDirectoryName__"),
+		WorkspaceDirectoryDescription: ptr.String("__WorkspaceDirectoryDescription__"),
+		UserIdentityType:              types.UserIdentityType("CUSTOMER_MANAGED"),
+		IdcInstanceArn:                ptr.String("__IdcInstanceArn__"),
+		MicrosoftEntraConfig: &types.MicrosoftEntraConfig{
+			TenantId:                   ptr.String("__TenantId__"),
+			ApplicationConfigSecretArn: ptr.String("__ApplicationConfigSecretArn__"),
+		},
+		WorkspaceType: types.WorkspaceType("PERSONAL"),
+		ActiveDirectoryConfig: &types.ActiveDirectoryConfig{
+			DomainName:              ptr.String("__DomainName__"),
+			ServiceAccountSecretArn: ptr.String("__ServiceAccountSecretArn__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4051,7 +5076,26 @@ func TestCheckResponseSnapshot_Error_UnsupportedWorkspaceConfigurationException(
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ModifyWorkspaceProperties(context.Background(), &ModifyWorkspacePropertiesInput{})
+	_, opErr := svc.ModifyWorkspaceProperties(context.Background(), &ModifyWorkspacePropertiesInput{
+		WorkspaceId: ptr.String("__WorkspaceId__"),
+		WorkspaceProperties: &types.WorkspaceProperties{
+			RunningMode:                         types.RunningMode("AUTO_STOP"),
+			RunningModeAutoStopTimeoutInMinutes: ptr.Int32(1),
+			RootVolumeSizeGib:                   ptr.Int32(1),
+			UserVolumeSizeGib:                   ptr.Int32(1),
+			ComputeTypeName:                     types.Compute("VALUE"),
+			Protocols: []types.Protocol{
+				types.Protocol("PCOIP"),
+				types.Protocol("PCOIP"),
+			},
+			OperatingSystemName: types.OperatingSystemName("AMAZON_LINUX_2"),
+			GlobalAccelerator: &types.GlobalAcceleratorForWorkSpace{
+				Mode:              types.AGAModeForWorkSpaceEnum("ENABLED_AUTO"),
+				PreferredProtocol: types.AGAPreferredProtocolForWorkSpace("TCP"),
+			},
+		},
+		DataReplication: types.DataReplication("NO_REPLICATION"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4076,7 +5120,10 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptAccountLinkInvitation(context.Background(), &AcceptAccountLinkInvitationInput{})
+	_, opErr := svc.AcceptAccountLinkInvitation(context.Background(), &AcceptAccountLinkInvitationInput{
+		LinkId:      ptr.String("__LinkId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4101,7 +5148,38 @@ func TestCheckResponseSnapshot_Error_WorkspacesDefaultRoleNotFoundException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RegisterWorkspaceDirectory(context.Background(), &RegisterWorkspaceDirectoryInput{})
+	_, opErr := svc.RegisterWorkspaceDirectory(context.Background(), &RegisterWorkspaceDirectoryInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EnableSelfService: ptr.Bool(true),
+		Tenancy:           types.Tenancy("DEDICATED"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		WorkspaceDirectoryName:        ptr.String("__WorkspaceDirectoryName__"),
+		WorkspaceDirectoryDescription: ptr.String("__WorkspaceDirectoryDescription__"),
+		UserIdentityType:              types.UserIdentityType("CUSTOMER_MANAGED"),
+		IdcInstanceArn:                ptr.String("__IdcInstanceArn__"),
+		MicrosoftEntraConfig: &types.MicrosoftEntraConfig{
+			TenantId:                   ptr.String("__TenantId__"),
+			ApplicationConfigSecretArn: ptr.String("__ApplicationConfigSecretArn__"),
+		},
+		WorkspaceType: types.WorkspaceType("PERSONAL"),
+		ActiveDirectoryConfig: &types.ActiveDirectoryConfig{
+			DomainName:              ptr.String("__DomainName__"),
+			ServiceAccountSecretArn: ptr.String("__ServiceAccountSecretArn__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -131,7 +131,15 @@ func TestCheckResponseSnapshot_QueryForecast(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.QueryForecast(context.Background(), &QueryForecastInput{})
+	got, err := svc.QueryForecast(context.Background(), &QueryForecastInput{
+		ForecastArn: ptr.String("__ForecastArn__"),
+		StartDate:   ptr.String("__StartDate__"),
+		EndDate:     ptr.String("__EndDate__"),
+		Filters: map[string]string{
+			"key0": "__Value__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -165,7 +173,15 @@ func TestCheckResponseSnapshot_QueryWhatIfForecast(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.QueryWhatIfForecast(context.Background(), &QueryWhatIfForecastInput{})
+	got, err := svc.QueryWhatIfForecast(context.Background(), &QueryWhatIfForecastInput{
+		WhatIfForecastArn: ptr.String("__WhatIfForecastArn__"),
+		StartDate:         ptr.String("__StartDate__"),
+		EndDate:           ptr.String("__EndDate__"),
+		Filters: map[string]string{
+			"key0": "__Value__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -186,7 +202,15 @@ func TestCheckResponseSnapshot_Error_InvalidInputException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.QueryForecast(context.Background(), &QueryForecastInput{})
+	_, opErr := svc.QueryForecast(context.Background(), &QueryForecastInput{
+		ForecastArn: ptr.String("__ForecastArn__"),
+		StartDate:   ptr.String("__StartDate__"),
+		EndDate:     ptr.String("__EndDate__"),
+		Filters: map[string]string{
+			"key0": "__Value__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -211,7 +235,15 @@ func TestCheckResponseSnapshot_Error_InvalidNextTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.QueryForecast(context.Background(), &QueryForecastInput{})
+	_, opErr := svc.QueryForecast(context.Background(), &QueryForecastInput{
+		ForecastArn: ptr.String("__ForecastArn__"),
+		StartDate:   ptr.String("__StartDate__"),
+		EndDate:     ptr.String("__EndDate__"),
+		Filters: map[string]string{
+			"key0": "__Value__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -236,7 +268,15 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.QueryForecast(context.Background(), &QueryForecastInput{})
+	_, opErr := svc.QueryForecast(context.Background(), &QueryForecastInput{
+		ForecastArn: ptr.String("__ForecastArn__"),
+		StartDate:   ptr.String("__StartDate__"),
+		EndDate:     ptr.String("__EndDate__"),
+		Filters: map[string]string{
+			"key0": "__Value__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -261,7 +301,15 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.QueryForecast(context.Background(), &QueryForecastInput{})
+	_, opErr := svc.QueryForecast(context.Background(), &QueryForecastInput{
+		ForecastArn: ptr.String("__ForecastArn__"),
+		StartDate:   ptr.String("__StartDate__"),
+		EndDate:     ptr.String("__EndDate__"),
+		Filters: map[string]string{
+			"key0": "__Value__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -286,7 +334,15 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.QueryForecast(context.Background(), &QueryForecastInput{})
+	_, opErr := svc.QueryForecast(context.Background(), &QueryForecastInput{
+		ForecastArn: ptr.String("__ForecastArn__"),
+		StartDate:   ptr.String("__StartDate__"),
+		EndDate:     ptr.String("__EndDate__"),
+		Filters: map[string]string{
+			"key0": "__Value__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

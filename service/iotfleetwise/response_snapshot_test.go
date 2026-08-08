@@ -117,7 +117,10 @@ func TestCheckResponseSnapshot_AssociateVehicleFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateVehicleFleet(context.Background(), &AssociateVehicleFleetInput{})
+	got, err := svc.AssociateVehicleFleet(context.Background(), &AssociateVehicleFleetInput{
+		VehicleName: ptr.String("__VehicleName__"),
+		FleetId:     ptr.String("__FleetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -161,7 +164,96 @@ func TestCheckResponseSnapshot_BatchCreateVehicle(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchCreateVehicle(context.Background(), &BatchCreateVehicleInput{})
+	got, err := svc.BatchCreateVehicle(context.Background(), &BatchCreateVehicleInput{
+		Vehicles: []types.CreateVehicleRequestItem{
+			{
+				VehicleName:        ptr.String("__VehicleName__"),
+				ModelManifestArn:   ptr.String("__ModelManifestArn__"),
+				DecoderManifestArn: ptr.String("__DecoderManifestArn__"),
+				Attributes: map[string]string{
+					"key0": "__Value__",
+				},
+				AssociationBehavior: types.VehicleAssociationBehavior("CreateIotThing"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				StateTemplates: []types.StateTemplateAssociation{
+					{
+						Identifier: ptr.String("__Identifier__"),
+						StateTemplateUpdateStrategy: &types.StateTemplateUpdateStrategyMemberPeriodic{
+							Value: types.PeriodicStateTemplateUpdateStrategy{
+								StateTemplateUpdateRate: &types.TimePeriod{
+									Unit:  types.TimeUnit("MILLISECOND"),
+									Value: ptr.Int32(1),
+								},
+							},
+						},
+					},
+					{
+						Identifier: ptr.String("__Identifier__"),
+						StateTemplateUpdateStrategy: &types.StateTemplateUpdateStrategyMemberPeriodic{
+							Value: types.PeriodicStateTemplateUpdateStrategy{
+								StateTemplateUpdateRate: &types.TimePeriod{
+									Unit:  types.TimeUnit("MILLISECOND"),
+									Value: ptr.Int32(1),
+								},
+							},
+						},
+					},
+				},
+			},
+			{
+				VehicleName:        ptr.String("__VehicleName__"),
+				ModelManifestArn:   ptr.String("__ModelManifestArn__"),
+				DecoderManifestArn: ptr.String("__DecoderManifestArn__"),
+				Attributes: map[string]string{
+					"key0": "__Value__",
+				},
+				AssociationBehavior: types.VehicleAssociationBehavior("CreateIotThing"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				StateTemplates: []types.StateTemplateAssociation{
+					{
+						Identifier: ptr.String("__Identifier__"),
+						StateTemplateUpdateStrategy: &types.StateTemplateUpdateStrategyMemberPeriodic{
+							Value: types.PeriodicStateTemplateUpdateStrategy{
+								StateTemplateUpdateRate: &types.TimePeriod{
+									Unit:  types.TimeUnit("MILLISECOND"),
+									Value: ptr.Int32(1),
+								},
+							},
+						},
+					},
+					{
+						Identifier: ptr.String("__Identifier__"),
+						StateTemplateUpdateStrategy: &types.StateTemplateUpdateStrategyMemberPeriodic{
+							Value: types.PeriodicStateTemplateUpdateStrategy{
+								StateTemplateUpdateRate: &types.TimePeriod{
+									Unit:  types.TimeUnit("MILLISECOND"),
+									Value: ptr.Int32(1),
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -203,7 +295,132 @@ func TestCheckResponseSnapshot_BatchUpdateVehicle(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchUpdateVehicle(context.Background(), &BatchUpdateVehicleInput{})
+	got, err := svc.BatchUpdateVehicle(context.Background(), &BatchUpdateVehicleInput{
+		Vehicles: []types.UpdateVehicleRequestItem{
+			{
+				VehicleName:        ptr.String("__VehicleName__"),
+				ModelManifestArn:   ptr.String("__ModelManifestArn__"),
+				DecoderManifestArn: ptr.String("__DecoderManifestArn__"),
+				Attributes: map[string]string{
+					"key0": "__Value__",
+				},
+				AttributeUpdateMode: types.UpdateMode("Overwrite"),
+				StateTemplatesToAdd: []types.StateTemplateAssociation{
+					{
+						Identifier: ptr.String("__Identifier__"),
+						StateTemplateUpdateStrategy: &types.StateTemplateUpdateStrategyMemberPeriodic{
+							Value: types.PeriodicStateTemplateUpdateStrategy{
+								StateTemplateUpdateRate: &types.TimePeriod{
+									Unit:  types.TimeUnit("MILLISECOND"),
+									Value: ptr.Int32(1),
+								},
+							},
+						},
+					},
+					{
+						Identifier: ptr.String("__Identifier__"),
+						StateTemplateUpdateStrategy: &types.StateTemplateUpdateStrategyMemberPeriodic{
+							Value: types.PeriodicStateTemplateUpdateStrategy{
+								StateTemplateUpdateRate: &types.TimePeriod{
+									Unit:  types.TimeUnit("MILLISECOND"),
+									Value: ptr.Int32(1),
+								},
+							},
+						},
+					},
+				},
+				StateTemplatesToRemove: []string{
+					"__Member__",
+					"__Member__",
+				},
+				StateTemplatesToUpdate: []types.StateTemplateAssociation{
+					{
+						Identifier: ptr.String("__Identifier__"),
+						StateTemplateUpdateStrategy: &types.StateTemplateUpdateStrategyMemberPeriodic{
+							Value: types.PeriodicStateTemplateUpdateStrategy{
+								StateTemplateUpdateRate: &types.TimePeriod{
+									Unit:  types.TimeUnit("MILLISECOND"),
+									Value: ptr.Int32(1),
+								},
+							},
+						},
+					},
+					{
+						Identifier: ptr.String("__Identifier__"),
+						StateTemplateUpdateStrategy: &types.StateTemplateUpdateStrategyMemberPeriodic{
+							Value: types.PeriodicStateTemplateUpdateStrategy{
+								StateTemplateUpdateRate: &types.TimePeriod{
+									Unit:  types.TimeUnit("MILLISECOND"),
+									Value: ptr.Int32(1),
+								},
+							},
+						},
+					},
+				},
+			},
+			{
+				VehicleName:        ptr.String("__VehicleName__"),
+				ModelManifestArn:   ptr.String("__ModelManifestArn__"),
+				DecoderManifestArn: ptr.String("__DecoderManifestArn__"),
+				Attributes: map[string]string{
+					"key0": "__Value__",
+				},
+				AttributeUpdateMode: types.UpdateMode("Overwrite"),
+				StateTemplatesToAdd: []types.StateTemplateAssociation{
+					{
+						Identifier: ptr.String("__Identifier__"),
+						StateTemplateUpdateStrategy: &types.StateTemplateUpdateStrategyMemberPeriodic{
+							Value: types.PeriodicStateTemplateUpdateStrategy{
+								StateTemplateUpdateRate: &types.TimePeriod{
+									Unit:  types.TimeUnit("MILLISECOND"),
+									Value: ptr.Int32(1),
+								},
+							},
+						},
+					},
+					{
+						Identifier: ptr.String("__Identifier__"),
+						StateTemplateUpdateStrategy: &types.StateTemplateUpdateStrategyMemberPeriodic{
+							Value: types.PeriodicStateTemplateUpdateStrategy{
+								StateTemplateUpdateRate: &types.TimePeriod{
+									Unit:  types.TimeUnit("MILLISECOND"),
+									Value: ptr.Int32(1),
+								},
+							},
+						},
+					},
+				},
+				StateTemplatesToRemove: []string{
+					"__Member__",
+					"__Member__",
+				},
+				StateTemplatesToUpdate: []types.StateTemplateAssociation{
+					{
+						Identifier: ptr.String("__Identifier__"),
+						StateTemplateUpdateStrategy: &types.StateTemplateUpdateStrategyMemberPeriodic{
+							Value: types.PeriodicStateTemplateUpdateStrategy{
+								StateTemplateUpdateRate: &types.TimePeriod{
+									Unit:  types.TimeUnit("MILLISECOND"),
+									Value: ptr.Int32(1),
+								},
+							},
+						},
+					},
+					{
+						Identifier: ptr.String("__Identifier__"),
+						StateTemplateUpdateStrategy: &types.StateTemplateUpdateStrategyMemberPeriodic{
+							Value: types.PeriodicStateTemplateUpdateStrategy{
+								StateTemplateUpdateRate: &types.TimePeriod{
+									Unit:  types.TimeUnit("MILLISECOND"),
+									Value: ptr.Int32(1),
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -225,7 +442,136 @@ func TestCheckResponseSnapshot_CreateCampaign(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCampaign(context.Background(), &CreateCampaignInput{})
+	got, err := svc.CreateCampaign(context.Background(), &CreateCampaignInput{
+		Name:                          ptr.String("__Name__"),
+		Description:                   ptr.String("__Description__"),
+		SignalCatalogArn:              ptr.String("__SignalCatalogArn__"),
+		TargetArn:                     ptr.String("__TargetArn__"),
+		StartTime:                     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ExpiryTime:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		PostTriggerCollectionDuration: ptr.Int64(1),
+		DiagnosticsMode:               types.DiagnosticsMode("OFF"),
+		SpoolingMode:                  types.SpoolingMode("OFF"),
+		Compression:                   types.Compression("OFF"),
+		Priority:                      ptr.Int32(1),
+		SignalsToCollect: []types.SignalInformation{
+			{
+				Name:                      ptr.String("__Name__"),
+				MaxSampleCount:            ptr.Int64(1),
+				MinimumSamplingIntervalMs: ptr.Int64(1),
+				DataPartitionId:           ptr.String("__DataPartitionId__"),
+			},
+			{
+				Name:                      ptr.String("__Name__"),
+				MaxSampleCount:            ptr.Int64(1),
+				MinimumSamplingIntervalMs: ptr.Int64(1),
+				DataPartitionId:           ptr.String("__DataPartitionId__"),
+			},
+		},
+		CollectionScheme: &types.CollectionSchemeMemberTimeBasedCollectionScheme{
+			Value: types.TimeBasedCollectionScheme{
+				PeriodMs: ptr.Int64(1),
+			},
+		},
+		DataExtraDimensions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DataDestinationConfigs: []types.DataDestinationConfig{
+			&types.DataDestinationConfigMemberS3Config{
+				Value: types.S3Config{
+					BucketArn:                ptr.String("__BucketArn__"),
+					DataFormat:               types.DataFormat("JSON"),
+					StorageCompressionFormat: types.StorageCompressionFormat("NONE"),
+					Prefix:                   ptr.String("__Prefix__"),
+				},
+			},
+			&types.DataDestinationConfigMemberS3Config{
+				Value: types.S3Config{
+					BucketArn:                ptr.String("__BucketArn__"),
+					DataFormat:               types.DataFormat("JSON"),
+					StorageCompressionFormat: types.StorageCompressionFormat("NONE"),
+					Prefix:                   ptr.String("__Prefix__"),
+				},
+			},
+		},
+		DataPartitions: []types.DataPartition{
+			{
+				Id: ptr.String("__Id__"),
+				StorageOptions: &types.DataPartitionStorageOptions{
+					MaximumSize: &types.StorageMaximumSize{
+						Unit:  types.StorageMaximumSizeUnit("MB"),
+						Value: ptr.Int32(1),
+					},
+					StorageLocation: ptr.String("__StorageLocation__"),
+					MinimumTimeToLive: &types.StorageMinimumTimeToLive{
+						Unit:  types.StorageMinimumTimeToLiveUnit("HOURS"),
+						Value: ptr.Int32(1),
+					},
+				},
+				UploadOptions: &types.DataPartitionUploadOptions{
+					Expression:               ptr.String("__Expression__"),
+					ConditionLanguageVersion: ptr.Int32(1),
+				},
+			},
+			{
+				Id: ptr.String("__Id__"),
+				StorageOptions: &types.DataPartitionStorageOptions{
+					MaximumSize: &types.StorageMaximumSize{
+						Unit:  types.StorageMaximumSizeUnit("MB"),
+						Value: ptr.Int32(1),
+					},
+					StorageLocation: ptr.String("__StorageLocation__"),
+					MinimumTimeToLive: &types.StorageMinimumTimeToLive{
+						Unit:  types.StorageMinimumTimeToLiveUnit("HOURS"),
+						Value: ptr.Int32(1),
+					},
+				},
+				UploadOptions: &types.DataPartitionUploadOptions{
+					Expression:               ptr.String("__Expression__"),
+					ConditionLanguageVersion: ptr.Int32(1),
+				},
+			},
+		},
+		SignalsToFetch: []types.SignalFetchInformation{
+			{
+				FullyQualifiedName: ptr.String("__FullyQualifiedName__"),
+				SignalFetchConfig: &types.SignalFetchConfigMemberTimeBased{
+					Value: types.TimeBasedSignalFetchConfig{
+						ExecutionFrequencyMs: ptr.Int64(1),
+					},
+				},
+				ConditionLanguageVersion: ptr.Int32(1),
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				FullyQualifiedName: ptr.String("__FullyQualifiedName__"),
+				SignalFetchConfig: &types.SignalFetchConfigMemberTimeBased{
+					Value: types.TimeBasedSignalFetchConfig{
+						ExecutionFrequencyMs: ptr.Int64(1),
+					},
+				},
+				ConditionLanguageVersion: ptr.Int32(1),
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -247,7 +593,166 @@ func TestCheckResponseSnapshot_CreateDecoderManifest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDecoderManifest(context.Background(), &CreateDecoderManifestInput{})
+	got, err := svc.CreateDecoderManifest(context.Background(), &CreateDecoderManifestInput{
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		ModelManifestArn: ptr.String("__ModelManifestArn__"),
+		SignalDecoders: []types.SignalDecoder{
+			{
+				FullyQualifiedName: ptr.String("__FullyQualifiedName__"),
+				Type:               types.SignalDecoderType("CAN_SIGNAL"),
+				InterfaceId:        ptr.String("__InterfaceId__"),
+				CanSignal: &types.CanSignal{
+					MessageId:       1,
+					IsBigEndian:     true,
+					IsSigned:        true,
+					StartBit:        1,
+					Offset:          ptr.Float64(1.0),
+					Factor:          ptr.Float64(1.0),
+					Length:          1,
+					Name:            ptr.String("__Name__"),
+					SignalValueType: types.SignalValueType("INTEGER"),
+				},
+				ObdSignal: &types.ObdSignal{
+					PidResponseLength: ptr.Int32(1),
+					ServiceMode:       1,
+					Pid:               1,
+					Scaling:           ptr.Float64(1.0),
+					Offset:            ptr.Float64(1.0),
+					StartByte:         1,
+					ByteLength:        ptr.Int32(1),
+					BitRightShift:     1,
+					BitMaskLength:     ptr.Int32(1),
+					IsSigned:          ptr.Bool(true),
+					SignalValueType:   types.SignalValueType("INTEGER"),
+				},
+				MessageSignal: &types.MessageSignal{
+					TopicName: ptr.String("__TopicName__"),
+					StructuredMessage: &types.StructuredMessageMemberPrimitiveMessageDefinition{
+						Value: &types.PrimitiveMessageDefinitionMemberRos2PrimitiveMessageDefinition{
+							Value: types.ROS2PrimitiveMessageDefinition{
+								PrimitiveType: types.ROS2PrimitiveType("BOOL"),
+								Offset:        ptr.Float64(1.0),
+								Scaling:       ptr.Float64(1.0),
+								UpperBound:    ptr.Int64(1),
+							},
+						},
+					},
+				},
+				CustomDecodingSignal: &types.CustomDecodingSignal{
+					Id: ptr.String("__Id__"),
+				},
+			},
+			{
+				FullyQualifiedName: ptr.String("__FullyQualifiedName__"),
+				Type:               types.SignalDecoderType("CAN_SIGNAL"),
+				InterfaceId:        ptr.String("__InterfaceId__"),
+				CanSignal: &types.CanSignal{
+					MessageId:       1,
+					IsBigEndian:     true,
+					IsSigned:        true,
+					StartBit:        1,
+					Offset:          ptr.Float64(1.0),
+					Factor:          ptr.Float64(1.0),
+					Length:          1,
+					Name:            ptr.String("__Name__"),
+					SignalValueType: types.SignalValueType("INTEGER"),
+				},
+				ObdSignal: &types.ObdSignal{
+					PidResponseLength: ptr.Int32(1),
+					ServiceMode:       1,
+					Pid:               1,
+					Scaling:           ptr.Float64(1.0),
+					Offset:            ptr.Float64(1.0),
+					StartByte:         1,
+					ByteLength:        ptr.Int32(1),
+					BitRightShift:     1,
+					BitMaskLength:     ptr.Int32(1),
+					IsSigned:          ptr.Bool(true),
+					SignalValueType:   types.SignalValueType("INTEGER"),
+				},
+				MessageSignal: &types.MessageSignal{
+					TopicName: ptr.String("__TopicName__"),
+					StructuredMessage: &types.StructuredMessageMemberPrimitiveMessageDefinition{
+						Value: &types.PrimitiveMessageDefinitionMemberRos2PrimitiveMessageDefinition{
+							Value: types.ROS2PrimitiveMessageDefinition{
+								PrimitiveType: types.ROS2PrimitiveType("BOOL"),
+								Offset:        ptr.Float64(1.0),
+								Scaling:       ptr.Float64(1.0),
+								UpperBound:    ptr.Int64(1),
+							},
+						},
+					},
+				},
+				CustomDecodingSignal: &types.CustomDecodingSignal{
+					Id: ptr.String("__Id__"),
+				},
+			},
+		},
+		NetworkInterfaces: []types.NetworkInterface{
+			{
+				InterfaceId: ptr.String("__InterfaceId__"),
+				Type:        types.NetworkInterfaceType("CAN_INTERFACE"),
+				CanInterface: &types.CanInterface{
+					Name:            ptr.String("__Name__"),
+					ProtocolName:    ptr.String("__ProtocolName__"),
+					ProtocolVersion: ptr.String("__ProtocolVersion__"),
+				},
+				ObdInterface: &types.ObdInterface{
+					Name:                      ptr.String("__Name__"),
+					RequestMessageId:          1,
+					ObdStandard:               ptr.String("__ObdStandard__"),
+					PidRequestIntervalSeconds: 1,
+					DtcRequestIntervalSeconds: 1,
+					UseExtendedIds:            true,
+					HasTransmissionEcu:        true,
+				},
+				VehicleMiddleware: &types.VehicleMiddleware{
+					Name:         ptr.String("__Name__"),
+					ProtocolName: types.VehicleMiddlewareProtocol("ROS_2"),
+				},
+				CustomDecodingInterface: &types.CustomDecodingInterface{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			{
+				InterfaceId: ptr.String("__InterfaceId__"),
+				Type:        types.NetworkInterfaceType("CAN_INTERFACE"),
+				CanInterface: &types.CanInterface{
+					Name:            ptr.String("__Name__"),
+					ProtocolName:    ptr.String("__ProtocolName__"),
+					ProtocolVersion: ptr.String("__ProtocolVersion__"),
+				},
+				ObdInterface: &types.ObdInterface{
+					Name:                      ptr.String("__Name__"),
+					RequestMessageId:          1,
+					ObdStandard:               ptr.String("__ObdStandard__"),
+					PidRequestIntervalSeconds: 1,
+					DtcRequestIntervalSeconds: 1,
+					UseExtendedIds:            true,
+					HasTransmissionEcu:        true,
+				},
+				VehicleMiddleware: &types.VehicleMiddleware{
+					Name:         ptr.String("__Name__"),
+					ProtocolName: types.VehicleMiddlewareProtocol("ROS_2"),
+				},
+				CustomDecodingInterface: &types.CustomDecodingInterface{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		DefaultForUnmappedSignals: types.DefaultForUnmappedSignalsType("CUSTOM_DECODING"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -269,7 +774,21 @@ func TestCheckResponseSnapshot_CreateFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFleet(context.Background(), &CreateFleetInput{})
+	got, err := svc.CreateFleet(context.Background(), &CreateFleetInput{
+		FleetId:          ptr.String("__FleetId__"),
+		Description:      ptr.String("__Description__"),
+		SignalCatalogArn: ptr.String("__SignalCatalogArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -291,7 +810,25 @@ func TestCheckResponseSnapshot_CreateModelManifest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateModelManifest(context.Background(), &CreateModelManifestInput{})
+	got, err := svc.CreateModelManifest(context.Background(), &CreateModelManifestInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Nodes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SignalCatalogArn: ptr.String("__SignalCatalogArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -313,7 +850,38 @@ func TestCheckResponseSnapshot_CreateSignalCatalog(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSignalCatalog(context.Background(), &CreateSignalCatalogInput{})
+	got, err := svc.CreateSignalCatalog(context.Background(), &CreateSignalCatalogInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Nodes: []types.Node{
+			&types.NodeMemberBranch{
+				Value: types.Branch{
+					FullyQualifiedName: ptr.String("__FullyQualifiedName__"),
+					Description:        ptr.String("__Description__"),
+					DeprecationMessage: ptr.String("__DeprecationMessage__"),
+					Comment:            ptr.String("__Comment__"),
+				},
+			},
+			&types.NodeMemberBranch{
+				Value: types.Branch{
+					FullyQualifiedName: ptr.String("__FullyQualifiedName__"),
+					Description:        ptr.String("__Description__"),
+					DeprecationMessage: ptr.String("__DeprecationMessage__"),
+					Comment:            ptr.String("__Comment__"),
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -336,7 +904,33 @@ func TestCheckResponseSnapshot_CreateStateTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStateTemplate(context.Background(), &CreateStateTemplateInput{})
+	got, err := svc.CreateStateTemplate(context.Background(), &CreateStateTemplateInput{
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		SignalCatalogArn: ptr.String("__SignalCatalogArn__"),
+		StateTemplateProperties: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DataExtraDimensions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MetadataExtraDimensions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -359,7 +953,49 @@ func TestCheckResponseSnapshot_CreateVehicle(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVehicle(context.Background(), &CreateVehicleInput{})
+	got, err := svc.CreateVehicle(context.Background(), &CreateVehicleInput{
+		VehicleName:        ptr.String("__VehicleName__"),
+		ModelManifestArn:   ptr.String("__ModelManifestArn__"),
+		DecoderManifestArn: ptr.String("__DecoderManifestArn__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		AssociationBehavior: types.VehicleAssociationBehavior("CreateIotThing"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		StateTemplates: []types.StateTemplateAssociation{
+			{
+				Identifier: ptr.String("__Identifier__"),
+				StateTemplateUpdateStrategy: &types.StateTemplateUpdateStrategyMemberPeriodic{
+					Value: types.PeriodicStateTemplateUpdateStrategy{
+						StateTemplateUpdateRate: &types.TimePeriod{
+							Unit:  types.TimeUnit("MILLISECOND"),
+							Value: ptr.Int32(1),
+						},
+					},
+				},
+			},
+			{
+				Identifier: ptr.String("__Identifier__"),
+				StateTemplateUpdateStrategy: &types.StateTemplateUpdateStrategyMemberPeriodic{
+					Value: types.PeriodicStateTemplateUpdateStrategy{
+						StateTemplateUpdateRate: &types.TimePeriod{
+							Unit:  types.TimeUnit("MILLISECOND"),
+							Value: ptr.Int32(1),
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -381,7 +1017,9 @@ func TestCheckResponseSnapshot_DeleteCampaign(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCampaign(context.Background(), &DeleteCampaignInput{})
+	got, err := svc.DeleteCampaign(context.Background(), &DeleteCampaignInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -403,7 +1041,9 @@ func TestCheckResponseSnapshot_DeleteDecoderManifest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDecoderManifest(context.Background(), &DeleteDecoderManifestInput{})
+	got, err := svc.DeleteDecoderManifest(context.Background(), &DeleteDecoderManifestInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -425,7 +1065,9 @@ func TestCheckResponseSnapshot_DeleteFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFleet(context.Background(), &DeleteFleetInput{})
+	got, err := svc.DeleteFleet(context.Background(), &DeleteFleetInput{
+		FleetId: ptr.String("__FleetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -447,7 +1089,9 @@ func TestCheckResponseSnapshot_DeleteModelManifest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteModelManifest(context.Background(), &DeleteModelManifestInput{})
+	got, err := svc.DeleteModelManifest(context.Background(), &DeleteModelManifestInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -469,7 +1113,9 @@ func TestCheckResponseSnapshot_DeleteSignalCatalog(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSignalCatalog(context.Background(), &DeleteSignalCatalogInput{})
+	got, err := svc.DeleteSignalCatalog(context.Background(), &DeleteSignalCatalogInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -492,7 +1138,9 @@ func TestCheckResponseSnapshot_DeleteStateTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteStateTemplate(context.Background(), &DeleteStateTemplateInput{})
+	got, err := svc.DeleteStateTemplate(context.Background(), &DeleteStateTemplateInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -514,7 +1162,9 @@ func TestCheckResponseSnapshot_DeleteVehicle(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVehicle(context.Background(), &DeleteVehicleInput{})
+	got, err := svc.DeleteVehicle(context.Background(), &DeleteVehicleInput{
+		VehicleName: ptr.String("__VehicleName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -533,7 +1183,10 @@ func TestCheckResponseSnapshot_DisassociateVehicleFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateVehicleFleet(context.Background(), &DisassociateVehicleFleetInput{})
+	got, err := svc.DisassociateVehicleFleet(context.Background(), &DisassociateVehicleFleetInput{
+		VehicleName: ptr.String("__VehicleName__"),
+		FleetId:     ptr.String("__FleetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -675,7 +1328,9 @@ func TestCheckResponseSnapshot_GetCampaign(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCampaign(context.Background(), &GetCampaignInput{})
+	got, err := svc.GetCampaign(context.Background(), &GetCampaignInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -703,7 +1358,9 @@ func TestCheckResponseSnapshot_GetDecoderManifest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDecoderManifest(context.Background(), &GetDecoderManifestInput{})
+	got, err := svc.GetDecoderManifest(context.Background(), &GetDecoderManifestInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -755,7 +1412,9 @@ func TestCheckResponseSnapshot_GetFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFleet(context.Background(), &GetFleetInput{})
+	got, err := svc.GetFleet(context.Background(), &GetFleetInput{
+		FleetId: ptr.String("__FleetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -806,7 +1465,9 @@ func TestCheckResponseSnapshot_GetModelManifest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetModelManifest(context.Background(), &GetModelManifestInput{})
+	got, err := svc.GetModelManifest(context.Background(), &GetModelManifestInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -877,7 +1538,9 @@ func TestCheckResponseSnapshot_GetSignalCatalog(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSignalCatalog(context.Background(), &GetSignalCatalogInput{})
+	got, err := svc.GetSignalCatalog(context.Background(), &GetSignalCatalogInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -916,7 +1579,9 @@ func TestCheckResponseSnapshot_GetStateTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStateTemplate(context.Background(), &GetStateTemplateInput{})
+	got, err := svc.GetStateTemplate(context.Background(), &GetStateTemplateInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -969,7 +1634,9 @@ func TestCheckResponseSnapshot_GetVehicle(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVehicle(context.Background(), &GetVehicleInput{})
+	got, err := svc.GetVehicle(context.Background(), &GetVehicleInput{
+		VehicleName: ptr.String("__VehicleName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1002,7 +1669,11 @@ func TestCheckResponseSnapshot_GetVehicleStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVehicleStatus(context.Background(), &GetVehicleStatusInput{})
+	got, err := svc.GetVehicleStatus(context.Background(), &GetVehicleStatusInput{
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		VehicleName: ptr.String("__VehicleName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1024,7 +1695,35 @@ func TestCheckResponseSnapshot_ImportDecoderManifest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportDecoderManifest(context.Background(), &ImportDecoderManifestInput{})
+	got, err := svc.ImportDecoderManifest(context.Background(), &ImportDecoderManifestInput{
+		Name: ptr.String("__Name__"),
+		NetworkFileDefinitions: []types.NetworkFileDefinition{
+			&types.NetworkFileDefinitionMemberCanDbc{
+				Value: types.CanDbcDefinition{
+					NetworkInterface: ptr.String("__NetworkInterface__"),
+					CanDbcFiles: [][]byte{
+						[]byte("blob"),
+						[]byte("blob"),
+					},
+					SignalsMap: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+			&types.NetworkFileDefinitionMemberCanDbc{
+				Value: types.CanDbcDefinition{
+					NetworkInterface: ptr.String("__NetworkInterface__"),
+					CanDbcFiles: [][]byte{
+						[]byte("blob"),
+						[]byte("blob"),
+					},
+					SignalsMap: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1046,7 +1745,23 @@ func TestCheckResponseSnapshot_ImportSignalCatalog(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportSignalCatalog(context.Background(), &ImportSignalCatalogInput{})
+	got, err := svc.ImportSignalCatalog(context.Background(), &ImportSignalCatalogInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Vss: &types.FormattedVssMemberVssJson{
+			Value: "__FormattedVssMemberVssJson__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1089,7 +1804,12 @@ func TestCheckResponseSnapshot_ListCampaigns(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCampaigns(context.Background(), &ListCampaignsInput{})
+	got, err := svc.ListCampaigns(context.Background(), &ListCampaignsInput{
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+		Status:            ptr.String("__Status__"),
+		ListResponseScope: types.ListResponseScope("METADATA_ONLY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1162,7 +1882,11 @@ func TestCheckResponseSnapshot_ListDecoderManifestNetworkInterfaces(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDecoderManifestNetworkInterfaces(context.Background(), &ListDecoderManifestNetworkInterfacesInput{})
+	got, err := svc.ListDecoderManifestNetworkInterfaces(context.Background(), &ListDecoderManifestNetworkInterfacesInput{
+		Name:       ptr.String("__Name__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1275,7 +1999,11 @@ func TestCheckResponseSnapshot_ListDecoderManifestSignals(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDecoderManifestSignals(context.Background(), &ListDecoderManifestSignalsInput{})
+	got, err := svc.ListDecoderManifestSignals(context.Background(), &ListDecoderManifestSignalsInput{
+		Name:       ptr.String("__Name__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1318,7 +2046,12 @@ func TestCheckResponseSnapshot_ListDecoderManifests(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDecoderManifests(context.Background(), &ListDecoderManifestsInput{})
+	got, err := svc.ListDecoderManifests(context.Background(), &ListDecoderManifestsInput{
+		ModelManifestArn:  ptr.String("__ModelManifestArn__"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+		ListResponseScope: types.ListResponseScope("METADATA_ONLY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1357,7 +2090,11 @@ func TestCheckResponseSnapshot_ListFleets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFleets(context.Background(), &ListFleetsInput{})
+	got, err := svc.ListFleets(context.Background(), &ListFleetsInput{
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+		ListResponseScope: types.ListResponseScope("METADATA_ONLY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1382,7 +2119,11 @@ func TestCheckResponseSnapshot_ListFleetsForVehicle(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFleetsForVehicle(context.Background(), &ListFleetsForVehicleInput{})
+	got, err := svc.ListFleetsForVehicle(context.Background(), &ListFleetsForVehicleInput{
+		VehicleName: ptr.String("__VehicleName__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1421,7 +2162,11 @@ func TestCheckResponseSnapshot_ListModelManifestNodes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListModelManifestNodes(context.Background(), &ListModelManifestNodesInput{})
+	got, err := svc.ListModelManifestNodes(context.Background(), &ListModelManifestNodesInput{
+		Name:       ptr.String("__Name__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1462,7 +2207,12 @@ func TestCheckResponseSnapshot_ListModelManifests(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListModelManifests(context.Background(), &ListModelManifestsInput{})
+	got, err := svc.ListModelManifests(context.Background(), &ListModelManifestsInput{
+		SignalCatalogArn:  ptr.String("__SignalCatalogArn__"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+		ListResponseScope: types.ListResponseScope("METADATA_ONLY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1501,7 +2251,12 @@ func TestCheckResponseSnapshot_ListSignalCatalogNodes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSignalCatalogNodes(context.Background(), &ListSignalCatalogNodesInput{})
+	got, err := svc.ListSignalCatalogNodes(context.Background(), &ListSignalCatalogNodesInput{
+		Name:           ptr.String("__Name__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+		SignalNodeType: types.SignalNodeType("SENSOR"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1536,7 +2291,10 @@ func TestCheckResponseSnapshot_ListSignalCatalogs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSignalCatalogs(context.Background(), &ListSignalCatalogsInput{})
+	got, err := svc.ListSignalCatalogs(context.Background(), &ListSignalCatalogsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1577,7 +2335,11 @@ func TestCheckResponseSnapshot_ListStateTemplates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStateTemplates(context.Background(), &ListStateTemplatesInput{})
+	got, err := svc.ListStateTemplates(context.Background(), &ListStateTemplatesInput{
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+		ListResponseScope: types.ListResponseScope("METADATA_ONLY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1607,7 +2369,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1652,7 +2416,20 @@ func TestCheckResponseSnapshot_ListVehicles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVehicles(context.Background(), &ListVehiclesInput{})
+	got, err := svc.ListVehicles(context.Background(), &ListVehiclesInput{
+		ModelManifestArn: ptr.String("__ModelManifestArn__"),
+		AttributeNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AttributeValues: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+		ListResponseScope: types.ListResponseScope("METADATA_ONLY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1677,7 +2454,11 @@ func TestCheckResponseSnapshot_ListVehiclesInFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVehiclesInFleet(context.Background(), &ListVehiclesInFleetInput{})
+	got, err := svc.ListVehiclesInFleet(context.Background(), &ListVehiclesInFleetInput{
+		FleetId:    ptr.String("__FleetId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1700,7 +2481,10 @@ func TestCheckResponseSnapshot_PutEncryptionConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutEncryptionConfiguration(context.Background(), &PutEncryptionConfigurationInput{})
+	got, err := svc.PutEncryptionConfiguration(context.Background(), &PutEncryptionConfigurationInput{
+		KmsKeyId:       ptr.String("__KmsKeyId__"),
+		EncryptionType: types.EncryptionType("KMS_BASED_ENCRYPTION"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1719,7 +2503,12 @@ func TestCheckResponseSnapshot_PutLoggingOptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutLoggingOptions(context.Background(), &PutLoggingOptionsInput{})
+	got, err := svc.PutLoggingOptions(context.Background(), &PutLoggingOptionsInput{
+		CloudWatchLogDelivery: &types.CloudWatchLogDeliveryOptions{
+			LogType:      types.LogType("OFF"),
+			LogGroupName: ptr.String("__LogGroupName__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1749,7 +2538,15 @@ func TestCheckResponseSnapshot_RegisterAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterAccount(context.Background(), &RegisterAccountInput{})
+	got, err := svc.RegisterAccount(context.Background(), &RegisterAccountInput{
+		TimestreamResources: &types.TimestreamResources{
+			TimestreamDatabaseName: ptr.String("__TimestreamDatabaseName__"),
+			TimestreamTableName:    ptr.String("__TimestreamTableName__"),
+		},
+		IamResources: &types.IamResources{
+			RoleArn: ptr.String("__RoleArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1768,7 +2565,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1787,7 +2596,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1810,7 +2625,15 @@ func TestCheckResponseSnapshot_UpdateCampaign(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCampaign(context.Background(), &UpdateCampaignInput{})
+	got, err := svc.UpdateCampaign(context.Background(), &UpdateCampaignInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		DataExtraDimensions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Action: types.UpdateCampaignAction("APPROVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1832,7 +2655,308 @@ func TestCheckResponseSnapshot_UpdateDecoderManifest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDecoderManifest(context.Background(), &UpdateDecoderManifestInput{})
+	got, err := svc.UpdateDecoderManifest(context.Background(), &UpdateDecoderManifestInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		SignalDecodersToAdd: []types.SignalDecoder{
+			{
+				FullyQualifiedName: ptr.String("__FullyQualifiedName__"),
+				Type:               types.SignalDecoderType("CAN_SIGNAL"),
+				InterfaceId:        ptr.String("__InterfaceId__"),
+				CanSignal: &types.CanSignal{
+					MessageId:       1,
+					IsBigEndian:     true,
+					IsSigned:        true,
+					StartBit:        1,
+					Offset:          ptr.Float64(1.0),
+					Factor:          ptr.Float64(1.0),
+					Length:          1,
+					Name:            ptr.String("__Name__"),
+					SignalValueType: types.SignalValueType("INTEGER"),
+				},
+				ObdSignal: &types.ObdSignal{
+					PidResponseLength: ptr.Int32(1),
+					ServiceMode:       1,
+					Pid:               1,
+					Scaling:           ptr.Float64(1.0),
+					Offset:            ptr.Float64(1.0),
+					StartByte:         1,
+					ByteLength:        ptr.Int32(1),
+					BitRightShift:     1,
+					BitMaskLength:     ptr.Int32(1),
+					IsSigned:          ptr.Bool(true),
+					SignalValueType:   types.SignalValueType("INTEGER"),
+				},
+				MessageSignal: &types.MessageSignal{
+					TopicName: ptr.String("__TopicName__"),
+					StructuredMessage: &types.StructuredMessageMemberPrimitiveMessageDefinition{
+						Value: &types.PrimitiveMessageDefinitionMemberRos2PrimitiveMessageDefinition{
+							Value: types.ROS2PrimitiveMessageDefinition{
+								PrimitiveType: types.ROS2PrimitiveType("BOOL"),
+								Offset:        ptr.Float64(1.0),
+								Scaling:       ptr.Float64(1.0),
+								UpperBound:    ptr.Int64(1),
+							},
+						},
+					},
+				},
+				CustomDecodingSignal: &types.CustomDecodingSignal{
+					Id: ptr.String("__Id__"),
+				},
+			},
+			{
+				FullyQualifiedName: ptr.String("__FullyQualifiedName__"),
+				Type:               types.SignalDecoderType("CAN_SIGNAL"),
+				InterfaceId:        ptr.String("__InterfaceId__"),
+				CanSignal: &types.CanSignal{
+					MessageId:       1,
+					IsBigEndian:     true,
+					IsSigned:        true,
+					StartBit:        1,
+					Offset:          ptr.Float64(1.0),
+					Factor:          ptr.Float64(1.0),
+					Length:          1,
+					Name:            ptr.String("__Name__"),
+					SignalValueType: types.SignalValueType("INTEGER"),
+				},
+				ObdSignal: &types.ObdSignal{
+					PidResponseLength: ptr.Int32(1),
+					ServiceMode:       1,
+					Pid:               1,
+					Scaling:           ptr.Float64(1.0),
+					Offset:            ptr.Float64(1.0),
+					StartByte:         1,
+					ByteLength:        ptr.Int32(1),
+					BitRightShift:     1,
+					BitMaskLength:     ptr.Int32(1),
+					IsSigned:          ptr.Bool(true),
+					SignalValueType:   types.SignalValueType("INTEGER"),
+				},
+				MessageSignal: &types.MessageSignal{
+					TopicName: ptr.String("__TopicName__"),
+					StructuredMessage: &types.StructuredMessageMemberPrimitiveMessageDefinition{
+						Value: &types.PrimitiveMessageDefinitionMemberRos2PrimitiveMessageDefinition{
+							Value: types.ROS2PrimitiveMessageDefinition{
+								PrimitiveType: types.ROS2PrimitiveType("BOOL"),
+								Offset:        ptr.Float64(1.0),
+								Scaling:       ptr.Float64(1.0),
+								UpperBound:    ptr.Int64(1),
+							},
+						},
+					},
+				},
+				CustomDecodingSignal: &types.CustomDecodingSignal{
+					Id: ptr.String("__Id__"),
+				},
+			},
+		},
+		SignalDecodersToUpdate: []types.SignalDecoder{
+			{
+				FullyQualifiedName: ptr.String("__FullyQualifiedName__"),
+				Type:               types.SignalDecoderType("CAN_SIGNAL"),
+				InterfaceId:        ptr.String("__InterfaceId__"),
+				CanSignal: &types.CanSignal{
+					MessageId:       1,
+					IsBigEndian:     true,
+					IsSigned:        true,
+					StartBit:        1,
+					Offset:          ptr.Float64(1.0),
+					Factor:          ptr.Float64(1.0),
+					Length:          1,
+					Name:            ptr.String("__Name__"),
+					SignalValueType: types.SignalValueType("INTEGER"),
+				},
+				ObdSignal: &types.ObdSignal{
+					PidResponseLength: ptr.Int32(1),
+					ServiceMode:       1,
+					Pid:               1,
+					Scaling:           ptr.Float64(1.0),
+					Offset:            ptr.Float64(1.0),
+					StartByte:         1,
+					ByteLength:        ptr.Int32(1),
+					BitRightShift:     1,
+					BitMaskLength:     ptr.Int32(1),
+					IsSigned:          ptr.Bool(true),
+					SignalValueType:   types.SignalValueType("INTEGER"),
+				},
+				MessageSignal: &types.MessageSignal{
+					TopicName: ptr.String("__TopicName__"),
+					StructuredMessage: &types.StructuredMessageMemberPrimitiveMessageDefinition{
+						Value: &types.PrimitiveMessageDefinitionMemberRos2PrimitiveMessageDefinition{
+							Value: types.ROS2PrimitiveMessageDefinition{
+								PrimitiveType: types.ROS2PrimitiveType("BOOL"),
+								Offset:        ptr.Float64(1.0),
+								Scaling:       ptr.Float64(1.0),
+								UpperBound:    ptr.Int64(1),
+							},
+						},
+					},
+				},
+				CustomDecodingSignal: &types.CustomDecodingSignal{
+					Id: ptr.String("__Id__"),
+				},
+			},
+			{
+				FullyQualifiedName: ptr.String("__FullyQualifiedName__"),
+				Type:               types.SignalDecoderType("CAN_SIGNAL"),
+				InterfaceId:        ptr.String("__InterfaceId__"),
+				CanSignal: &types.CanSignal{
+					MessageId:       1,
+					IsBigEndian:     true,
+					IsSigned:        true,
+					StartBit:        1,
+					Offset:          ptr.Float64(1.0),
+					Factor:          ptr.Float64(1.0),
+					Length:          1,
+					Name:            ptr.String("__Name__"),
+					SignalValueType: types.SignalValueType("INTEGER"),
+				},
+				ObdSignal: &types.ObdSignal{
+					PidResponseLength: ptr.Int32(1),
+					ServiceMode:       1,
+					Pid:               1,
+					Scaling:           ptr.Float64(1.0),
+					Offset:            ptr.Float64(1.0),
+					StartByte:         1,
+					ByteLength:        ptr.Int32(1),
+					BitRightShift:     1,
+					BitMaskLength:     ptr.Int32(1),
+					IsSigned:          ptr.Bool(true),
+					SignalValueType:   types.SignalValueType("INTEGER"),
+				},
+				MessageSignal: &types.MessageSignal{
+					TopicName: ptr.String("__TopicName__"),
+					StructuredMessage: &types.StructuredMessageMemberPrimitiveMessageDefinition{
+						Value: &types.PrimitiveMessageDefinitionMemberRos2PrimitiveMessageDefinition{
+							Value: types.ROS2PrimitiveMessageDefinition{
+								PrimitiveType: types.ROS2PrimitiveType("BOOL"),
+								Offset:        ptr.Float64(1.0),
+								Scaling:       ptr.Float64(1.0),
+								UpperBound:    ptr.Int64(1),
+							},
+						},
+					},
+				},
+				CustomDecodingSignal: &types.CustomDecodingSignal{
+					Id: ptr.String("__Id__"),
+				},
+			},
+		},
+		SignalDecodersToRemove: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NetworkInterfacesToAdd: []types.NetworkInterface{
+			{
+				InterfaceId: ptr.String("__InterfaceId__"),
+				Type:        types.NetworkInterfaceType("CAN_INTERFACE"),
+				CanInterface: &types.CanInterface{
+					Name:            ptr.String("__Name__"),
+					ProtocolName:    ptr.String("__ProtocolName__"),
+					ProtocolVersion: ptr.String("__ProtocolVersion__"),
+				},
+				ObdInterface: &types.ObdInterface{
+					Name:                      ptr.String("__Name__"),
+					RequestMessageId:          1,
+					ObdStandard:               ptr.String("__ObdStandard__"),
+					PidRequestIntervalSeconds: 1,
+					DtcRequestIntervalSeconds: 1,
+					UseExtendedIds:            true,
+					HasTransmissionEcu:        true,
+				},
+				VehicleMiddleware: &types.VehicleMiddleware{
+					Name:         ptr.String("__Name__"),
+					ProtocolName: types.VehicleMiddlewareProtocol("ROS_2"),
+				},
+				CustomDecodingInterface: &types.CustomDecodingInterface{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			{
+				InterfaceId: ptr.String("__InterfaceId__"),
+				Type:        types.NetworkInterfaceType("CAN_INTERFACE"),
+				CanInterface: &types.CanInterface{
+					Name:            ptr.String("__Name__"),
+					ProtocolName:    ptr.String("__ProtocolName__"),
+					ProtocolVersion: ptr.String("__ProtocolVersion__"),
+				},
+				ObdInterface: &types.ObdInterface{
+					Name:                      ptr.String("__Name__"),
+					RequestMessageId:          1,
+					ObdStandard:               ptr.String("__ObdStandard__"),
+					PidRequestIntervalSeconds: 1,
+					DtcRequestIntervalSeconds: 1,
+					UseExtendedIds:            true,
+					HasTransmissionEcu:        true,
+				},
+				VehicleMiddleware: &types.VehicleMiddleware{
+					Name:         ptr.String("__Name__"),
+					ProtocolName: types.VehicleMiddlewareProtocol("ROS_2"),
+				},
+				CustomDecodingInterface: &types.CustomDecodingInterface{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		NetworkInterfacesToUpdate: []types.NetworkInterface{
+			{
+				InterfaceId: ptr.String("__InterfaceId__"),
+				Type:        types.NetworkInterfaceType("CAN_INTERFACE"),
+				CanInterface: &types.CanInterface{
+					Name:            ptr.String("__Name__"),
+					ProtocolName:    ptr.String("__ProtocolName__"),
+					ProtocolVersion: ptr.String("__ProtocolVersion__"),
+				},
+				ObdInterface: &types.ObdInterface{
+					Name:                      ptr.String("__Name__"),
+					RequestMessageId:          1,
+					ObdStandard:               ptr.String("__ObdStandard__"),
+					PidRequestIntervalSeconds: 1,
+					DtcRequestIntervalSeconds: 1,
+					UseExtendedIds:            true,
+					HasTransmissionEcu:        true,
+				},
+				VehicleMiddleware: &types.VehicleMiddleware{
+					Name:         ptr.String("__Name__"),
+					ProtocolName: types.VehicleMiddlewareProtocol("ROS_2"),
+				},
+				CustomDecodingInterface: &types.CustomDecodingInterface{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			{
+				InterfaceId: ptr.String("__InterfaceId__"),
+				Type:        types.NetworkInterfaceType("CAN_INTERFACE"),
+				CanInterface: &types.CanInterface{
+					Name:            ptr.String("__Name__"),
+					ProtocolName:    ptr.String("__ProtocolName__"),
+					ProtocolVersion: ptr.String("__ProtocolVersion__"),
+				},
+				ObdInterface: &types.ObdInterface{
+					Name:                      ptr.String("__Name__"),
+					RequestMessageId:          1,
+					ObdStandard:               ptr.String("__ObdStandard__"),
+					PidRequestIntervalSeconds: 1,
+					DtcRequestIntervalSeconds: 1,
+					UseExtendedIds:            true,
+					HasTransmissionEcu:        true,
+				},
+				VehicleMiddleware: &types.VehicleMiddleware{
+					Name:         ptr.String("__Name__"),
+					ProtocolName: types.VehicleMiddlewareProtocol("ROS_2"),
+				},
+				CustomDecodingInterface: &types.CustomDecodingInterface{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		NetworkInterfacesToRemove: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Status:                    types.ManifestStatus("ACTIVE"),
+		DefaultForUnmappedSignals: types.DefaultForUnmappedSignalsType("CUSTOM_DECODING"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1854,7 +2978,10 @@ func TestCheckResponseSnapshot_UpdateFleet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFleet(context.Background(), &UpdateFleetInput{})
+	got, err := svc.UpdateFleet(context.Background(), &UpdateFleetInput{
+		FleetId:     ptr.String("__FleetId__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1876,7 +3003,19 @@ func TestCheckResponseSnapshot_UpdateModelManifest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateModelManifest(context.Background(), &UpdateModelManifestInput{})
+	got, err := svc.UpdateModelManifest(context.Background(), &UpdateModelManifestInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		NodesToAdd: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NodesToRemove: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Status: types.ManifestStatus("ACTIVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1898,7 +3037,50 @@ func TestCheckResponseSnapshot_UpdateSignalCatalog(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSignalCatalog(context.Background(), &UpdateSignalCatalogInput{})
+	got, err := svc.UpdateSignalCatalog(context.Background(), &UpdateSignalCatalogInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		NodesToAdd: []types.Node{
+			&types.NodeMemberBranch{
+				Value: types.Branch{
+					FullyQualifiedName: ptr.String("__FullyQualifiedName__"),
+					Description:        ptr.String("__Description__"),
+					DeprecationMessage: ptr.String("__DeprecationMessage__"),
+					Comment:            ptr.String("__Comment__"),
+				},
+			},
+			&types.NodeMemberBranch{
+				Value: types.Branch{
+					FullyQualifiedName: ptr.String("__FullyQualifiedName__"),
+					Description:        ptr.String("__Description__"),
+					DeprecationMessage: ptr.String("__DeprecationMessage__"),
+					Comment:            ptr.String("__Comment__"),
+				},
+			},
+		},
+		NodesToUpdate: []types.Node{
+			&types.NodeMemberBranch{
+				Value: types.Branch{
+					FullyQualifiedName: ptr.String("__FullyQualifiedName__"),
+					Description:        ptr.String("__Description__"),
+					DeprecationMessage: ptr.String("__DeprecationMessage__"),
+					Comment:            ptr.String("__Comment__"),
+				},
+			},
+			&types.NodeMemberBranch{
+				Value: types.Branch{
+					FullyQualifiedName: ptr.String("__FullyQualifiedName__"),
+					Description:        ptr.String("__Description__"),
+					DeprecationMessage: ptr.String("__DeprecationMessage__"),
+					Comment:            ptr.String("__Comment__"),
+				},
+			},
+		},
+		NodesToRemove: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1921,7 +3103,26 @@ func TestCheckResponseSnapshot_UpdateStateTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateStateTemplate(context.Background(), &UpdateStateTemplateInput{})
+	got, err := svc.UpdateStateTemplate(context.Background(), &UpdateStateTemplateInput{
+		Identifier:  ptr.String("__Identifier__"),
+		Description: ptr.String("__Description__"),
+		StateTemplatePropertiesToAdd: []string{
+			"__Member__",
+			"__Member__",
+		},
+		StateTemplatePropertiesToRemove: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DataExtraDimensions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MetadataExtraDimensions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1943,7 +3144,67 @@ func TestCheckResponseSnapshot_UpdateVehicle(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateVehicle(context.Background(), &UpdateVehicleInput{})
+	got, err := svc.UpdateVehicle(context.Background(), &UpdateVehicleInput{
+		VehicleName:        ptr.String("__VehicleName__"),
+		ModelManifestArn:   ptr.String("__ModelManifestArn__"),
+		DecoderManifestArn: ptr.String("__DecoderManifestArn__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+		AttributeUpdateMode: types.UpdateMode("Overwrite"),
+		StateTemplatesToAdd: []types.StateTemplateAssociation{
+			{
+				Identifier: ptr.String("__Identifier__"),
+				StateTemplateUpdateStrategy: &types.StateTemplateUpdateStrategyMemberPeriodic{
+					Value: types.PeriodicStateTemplateUpdateStrategy{
+						StateTemplateUpdateRate: &types.TimePeriod{
+							Unit:  types.TimeUnit("MILLISECOND"),
+							Value: ptr.Int32(1),
+						},
+					},
+				},
+			},
+			{
+				Identifier: ptr.String("__Identifier__"),
+				StateTemplateUpdateStrategy: &types.StateTemplateUpdateStrategyMemberPeriodic{
+					Value: types.PeriodicStateTemplateUpdateStrategy{
+						StateTemplateUpdateRate: &types.TimePeriod{
+							Unit:  types.TimeUnit("MILLISECOND"),
+							Value: ptr.Int32(1),
+						},
+					},
+				},
+			},
+		},
+		StateTemplatesToRemove: []string{
+			"__Member__",
+			"__Member__",
+		},
+		StateTemplatesToUpdate: []types.StateTemplateAssociation{
+			{
+				Identifier: ptr.String("__Identifier__"),
+				StateTemplateUpdateStrategy: &types.StateTemplateUpdateStrategyMemberPeriodic{
+					Value: types.PeriodicStateTemplateUpdateStrategy{
+						StateTemplateUpdateRate: &types.TimePeriod{
+							Unit:  types.TimeUnit("MILLISECOND"),
+							Value: ptr.Int32(1),
+						},
+					},
+				},
+			},
+			{
+				Identifier: ptr.String("__Identifier__"),
+				StateTemplateUpdateStrategy: &types.StateTemplateUpdateStrategyMemberPeriodic{
+					Value: types.PeriodicStateTemplateUpdateStrategy{
+						StateTemplateUpdateRate: &types.TimePeriod{
+							Unit:  types.TimeUnit("MILLISECOND"),
+							Value: ptr.Int32(1),
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1964,7 +3225,10 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateVehicleFleet(context.Background(), &AssociateVehicleFleetInput{})
+	_, opErr := svc.AssociateVehicleFleet(context.Background(), &AssociateVehicleFleetInput{
+		VehicleName: ptr.String("__VehicleName__"),
+		FleetId:     ptr.String("__FleetId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1991,7 +3255,136 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCampaign(context.Background(), &CreateCampaignInput{})
+	_, opErr := svc.CreateCampaign(context.Background(), &CreateCampaignInput{
+		Name:                          ptr.String("__Name__"),
+		Description:                   ptr.String("__Description__"),
+		SignalCatalogArn:              ptr.String("__SignalCatalogArn__"),
+		TargetArn:                     ptr.String("__TargetArn__"),
+		StartTime:                     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ExpiryTime:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		PostTriggerCollectionDuration: ptr.Int64(1),
+		DiagnosticsMode:               types.DiagnosticsMode("OFF"),
+		SpoolingMode:                  types.SpoolingMode("OFF"),
+		Compression:                   types.Compression("OFF"),
+		Priority:                      ptr.Int32(1),
+		SignalsToCollect: []types.SignalInformation{
+			{
+				Name:                      ptr.String("__Name__"),
+				MaxSampleCount:            ptr.Int64(1),
+				MinimumSamplingIntervalMs: ptr.Int64(1),
+				DataPartitionId:           ptr.String("__DataPartitionId__"),
+			},
+			{
+				Name:                      ptr.String("__Name__"),
+				MaxSampleCount:            ptr.Int64(1),
+				MinimumSamplingIntervalMs: ptr.Int64(1),
+				DataPartitionId:           ptr.String("__DataPartitionId__"),
+			},
+		},
+		CollectionScheme: &types.CollectionSchemeMemberTimeBasedCollectionScheme{
+			Value: types.TimeBasedCollectionScheme{
+				PeriodMs: ptr.Int64(1),
+			},
+		},
+		DataExtraDimensions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DataDestinationConfigs: []types.DataDestinationConfig{
+			&types.DataDestinationConfigMemberS3Config{
+				Value: types.S3Config{
+					BucketArn:                ptr.String("__BucketArn__"),
+					DataFormat:               types.DataFormat("JSON"),
+					StorageCompressionFormat: types.StorageCompressionFormat("NONE"),
+					Prefix:                   ptr.String("__Prefix__"),
+				},
+			},
+			&types.DataDestinationConfigMemberS3Config{
+				Value: types.S3Config{
+					BucketArn:                ptr.String("__BucketArn__"),
+					DataFormat:               types.DataFormat("JSON"),
+					StorageCompressionFormat: types.StorageCompressionFormat("NONE"),
+					Prefix:                   ptr.String("__Prefix__"),
+				},
+			},
+		},
+		DataPartitions: []types.DataPartition{
+			{
+				Id: ptr.String("__Id__"),
+				StorageOptions: &types.DataPartitionStorageOptions{
+					MaximumSize: &types.StorageMaximumSize{
+						Unit:  types.StorageMaximumSizeUnit("MB"),
+						Value: ptr.Int32(1),
+					},
+					StorageLocation: ptr.String("__StorageLocation__"),
+					MinimumTimeToLive: &types.StorageMinimumTimeToLive{
+						Unit:  types.StorageMinimumTimeToLiveUnit("HOURS"),
+						Value: ptr.Int32(1),
+					},
+				},
+				UploadOptions: &types.DataPartitionUploadOptions{
+					Expression:               ptr.String("__Expression__"),
+					ConditionLanguageVersion: ptr.Int32(1),
+				},
+			},
+			{
+				Id: ptr.String("__Id__"),
+				StorageOptions: &types.DataPartitionStorageOptions{
+					MaximumSize: &types.StorageMaximumSize{
+						Unit:  types.StorageMaximumSizeUnit("MB"),
+						Value: ptr.Int32(1),
+					},
+					StorageLocation: ptr.String("__StorageLocation__"),
+					MinimumTimeToLive: &types.StorageMinimumTimeToLive{
+						Unit:  types.StorageMinimumTimeToLiveUnit("HOURS"),
+						Value: ptr.Int32(1),
+					},
+				},
+				UploadOptions: &types.DataPartitionUploadOptions{
+					Expression:               ptr.String("__Expression__"),
+					ConditionLanguageVersion: ptr.Int32(1),
+				},
+			},
+		},
+		SignalsToFetch: []types.SignalFetchInformation{
+			{
+				FullyQualifiedName: ptr.String("__FullyQualifiedName__"),
+				SignalFetchConfig: &types.SignalFetchConfigMemberTimeBased{
+					Value: types.TimeBasedSignalFetchConfig{
+						ExecutionFrequencyMs: ptr.Int64(1),
+					},
+				},
+				ConditionLanguageVersion: ptr.Int32(1),
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				FullyQualifiedName: ptr.String("__FullyQualifiedName__"),
+				SignalFetchConfig: &types.SignalFetchConfigMemberTimeBased{
+					Value: types.TimeBasedSignalFetchConfig{
+						ExecutionFrequencyMs: ptr.Int64(1),
+					},
+				},
+				ConditionLanguageVersion: ptr.Int32(1),
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2038,7 +3431,166 @@ func TestCheckResponseSnapshot_Error_DecoderManifestValidationException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDecoderManifest(context.Background(), &CreateDecoderManifestInput{})
+	_, opErr := svc.CreateDecoderManifest(context.Background(), &CreateDecoderManifestInput{
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		ModelManifestArn: ptr.String("__ModelManifestArn__"),
+		SignalDecoders: []types.SignalDecoder{
+			{
+				FullyQualifiedName: ptr.String("__FullyQualifiedName__"),
+				Type:               types.SignalDecoderType("CAN_SIGNAL"),
+				InterfaceId:        ptr.String("__InterfaceId__"),
+				CanSignal: &types.CanSignal{
+					MessageId:       1,
+					IsBigEndian:     true,
+					IsSigned:        true,
+					StartBit:        1,
+					Offset:          ptr.Float64(1.0),
+					Factor:          ptr.Float64(1.0),
+					Length:          1,
+					Name:            ptr.String("__Name__"),
+					SignalValueType: types.SignalValueType("INTEGER"),
+				},
+				ObdSignal: &types.ObdSignal{
+					PidResponseLength: ptr.Int32(1),
+					ServiceMode:       1,
+					Pid:               1,
+					Scaling:           ptr.Float64(1.0),
+					Offset:            ptr.Float64(1.0),
+					StartByte:         1,
+					ByteLength:        ptr.Int32(1),
+					BitRightShift:     1,
+					BitMaskLength:     ptr.Int32(1),
+					IsSigned:          ptr.Bool(true),
+					SignalValueType:   types.SignalValueType("INTEGER"),
+				},
+				MessageSignal: &types.MessageSignal{
+					TopicName: ptr.String("__TopicName__"),
+					StructuredMessage: &types.StructuredMessageMemberPrimitiveMessageDefinition{
+						Value: &types.PrimitiveMessageDefinitionMemberRos2PrimitiveMessageDefinition{
+							Value: types.ROS2PrimitiveMessageDefinition{
+								PrimitiveType: types.ROS2PrimitiveType("BOOL"),
+								Offset:        ptr.Float64(1.0),
+								Scaling:       ptr.Float64(1.0),
+								UpperBound:    ptr.Int64(1),
+							},
+						},
+					},
+				},
+				CustomDecodingSignal: &types.CustomDecodingSignal{
+					Id: ptr.String("__Id__"),
+				},
+			},
+			{
+				FullyQualifiedName: ptr.String("__FullyQualifiedName__"),
+				Type:               types.SignalDecoderType("CAN_SIGNAL"),
+				InterfaceId:        ptr.String("__InterfaceId__"),
+				CanSignal: &types.CanSignal{
+					MessageId:       1,
+					IsBigEndian:     true,
+					IsSigned:        true,
+					StartBit:        1,
+					Offset:          ptr.Float64(1.0),
+					Factor:          ptr.Float64(1.0),
+					Length:          1,
+					Name:            ptr.String("__Name__"),
+					SignalValueType: types.SignalValueType("INTEGER"),
+				},
+				ObdSignal: &types.ObdSignal{
+					PidResponseLength: ptr.Int32(1),
+					ServiceMode:       1,
+					Pid:               1,
+					Scaling:           ptr.Float64(1.0),
+					Offset:            ptr.Float64(1.0),
+					StartByte:         1,
+					ByteLength:        ptr.Int32(1),
+					BitRightShift:     1,
+					BitMaskLength:     ptr.Int32(1),
+					IsSigned:          ptr.Bool(true),
+					SignalValueType:   types.SignalValueType("INTEGER"),
+				},
+				MessageSignal: &types.MessageSignal{
+					TopicName: ptr.String("__TopicName__"),
+					StructuredMessage: &types.StructuredMessageMemberPrimitiveMessageDefinition{
+						Value: &types.PrimitiveMessageDefinitionMemberRos2PrimitiveMessageDefinition{
+							Value: types.ROS2PrimitiveMessageDefinition{
+								PrimitiveType: types.ROS2PrimitiveType("BOOL"),
+								Offset:        ptr.Float64(1.0),
+								Scaling:       ptr.Float64(1.0),
+								UpperBound:    ptr.Int64(1),
+							},
+						},
+					},
+				},
+				CustomDecodingSignal: &types.CustomDecodingSignal{
+					Id: ptr.String("__Id__"),
+				},
+			},
+		},
+		NetworkInterfaces: []types.NetworkInterface{
+			{
+				InterfaceId: ptr.String("__InterfaceId__"),
+				Type:        types.NetworkInterfaceType("CAN_INTERFACE"),
+				CanInterface: &types.CanInterface{
+					Name:            ptr.String("__Name__"),
+					ProtocolName:    ptr.String("__ProtocolName__"),
+					ProtocolVersion: ptr.String("__ProtocolVersion__"),
+				},
+				ObdInterface: &types.ObdInterface{
+					Name:                      ptr.String("__Name__"),
+					RequestMessageId:          1,
+					ObdStandard:               ptr.String("__ObdStandard__"),
+					PidRequestIntervalSeconds: 1,
+					DtcRequestIntervalSeconds: 1,
+					UseExtendedIds:            true,
+					HasTransmissionEcu:        true,
+				},
+				VehicleMiddleware: &types.VehicleMiddleware{
+					Name:         ptr.String("__Name__"),
+					ProtocolName: types.VehicleMiddlewareProtocol("ROS_2"),
+				},
+				CustomDecodingInterface: &types.CustomDecodingInterface{
+					Name: ptr.String("__Name__"),
+				},
+			},
+			{
+				InterfaceId: ptr.String("__InterfaceId__"),
+				Type:        types.NetworkInterfaceType("CAN_INTERFACE"),
+				CanInterface: &types.CanInterface{
+					Name:            ptr.String("__Name__"),
+					ProtocolName:    ptr.String("__ProtocolName__"),
+					ProtocolVersion: ptr.String("__ProtocolVersion__"),
+				},
+				ObdInterface: &types.ObdInterface{
+					Name:                      ptr.String("__Name__"),
+					RequestMessageId:          1,
+					ObdStandard:               ptr.String("__ObdStandard__"),
+					PidRequestIntervalSeconds: 1,
+					DtcRequestIntervalSeconds: 1,
+					UseExtendedIds:            true,
+					HasTransmissionEcu:        true,
+				},
+				VehicleMiddleware: &types.VehicleMiddleware{
+					Name:         ptr.String("__Name__"),
+					ProtocolName: types.VehicleMiddlewareProtocol("ROS_2"),
+				},
+				CustomDecodingInterface: &types.CustomDecodingInterface{
+					Name: ptr.String("__Name__"),
+				},
+			},
+		},
+		DefaultForUnmappedSignals: types.DefaultForUnmappedSignalsType("CUSTOM_DECODING"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2064,7 +3616,10 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateVehicleFleet(context.Background(), &AssociateVehicleFleetInput{})
+	_, opErr := svc.AssociateVehicleFleet(context.Background(), &AssociateVehicleFleetInput{
+		VehicleName: ptr.String("__VehicleName__"),
+		FleetId:     ptr.String("__FleetId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2108,7 +3663,38 @@ func TestCheckResponseSnapshot_Error_InvalidNodeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSignalCatalog(context.Background(), &CreateSignalCatalogInput{})
+	_, opErr := svc.CreateSignalCatalog(context.Background(), &CreateSignalCatalogInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Nodes: []types.Node{
+			&types.NodeMemberBranch{
+				Value: types.Branch{
+					FullyQualifiedName: ptr.String("__FullyQualifiedName__"),
+					Description:        ptr.String("__Description__"),
+					DeprecationMessage: ptr.String("__DeprecationMessage__"),
+					Comment:            ptr.String("__Comment__"),
+				},
+			},
+			&types.NodeMemberBranch{
+				Value: types.Branch{
+					FullyQualifiedName: ptr.String("__FullyQualifiedName__"),
+					Description:        ptr.String("__Description__"),
+					DeprecationMessage: ptr.String("__DeprecationMessage__"),
+					Comment:            ptr.String("__Comment__"),
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2143,7 +3729,25 @@ func TestCheckResponseSnapshot_Error_InvalidSignalsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateModelManifest(context.Background(), &CreateModelManifestInput{})
+	_, opErr := svc.CreateModelManifest(context.Background(), &CreateModelManifestInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Nodes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SignalCatalogArn: ptr.String("__SignalCatalogArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2170,7 +3774,10 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateVehicleFleet(context.Background(), &AssociateVehicleFleetInput{})
+	_, opErr := svc.AssociateVehicleFleet(context.Background(), &AssociateVehicleFleetInput{
+		VehicleName: ptr.String("__VehicleName__"),
+		FleetId:     ptr.String("__FleetId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2197,7 +3804,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateVehicleFleet(context.Background(), &AssociateVehicleFleetInput{})
+	_, opErr := svc.AssociateVehicleFleet(context.Background(), &AssociateVehicleFleetInput{
+		VehicleName: ptr.String("__VehicleName__"),
+		FleetId:     ptr.String("__FleetId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2225,7 +3835,10 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateVehicleFleet(context.Background(), &AssociateVehicleFleetInput{})
+	_, opErr := svc.AssociateVehicleFleet(context.Background(), &AssociateVehicleFleetInput{
+		VehicleName: ptr.String("__VehicleName__"),
+		FleetId:     ptr.String("__FleetId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2261,7 +3874,10 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateVehicleFleet(context.Background(), &AssociateVehicleFleetInput{})
+	_, opErr := svc.AssociateVehicleFleet(context.Background(), &AssociateVehicleFleetInput{
+		VehicleName: ptr.String("__VehicleName__"),
+		FleetId:     ptr.String("__FleetId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

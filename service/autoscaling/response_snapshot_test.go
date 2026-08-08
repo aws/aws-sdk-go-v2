@@ -117,7 +117,13 @@ func TestCheckResponseSnapshot_AttachInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AttachInstances(context.Background(), &AttachInstancesInput{})
+	got, err := svc.AttachInstances(context.Background(), &AttachInstancesInput{
+		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -136,7 +142,13 @@ func TestCheckResponseSnapshot_AttachLoadBalancerTargetGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AttachLoadBalancerTargetGroups(context.Background(), &AttachLoadBalancerTargetGroupsInput{})
+	got, err := svc.AttachLoadBalancerTargetGroups(context.Background(), &AttachLoadBalancerTargetGroupsInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		TargetGroupARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -155,7 +167,13 @@ func TestCheckResponseSnapshot_AttachLoadBalancers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AttachLoadBalancers(context.Background(), &AttachLoadBalancersInput{})
+	got, err := svc.AttachLoadBalancers(context.Background(), &AttachLoadBalancersInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		LoadBalancerNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -174,7 +192,20 @@ func TestCheckResponseSnapshot_AttachTrafficSources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AttachTrafficSources(context.Background(), &AttachTrafficSourcesInput{})
+	got, err := svc.AttachTrafficSources(context.Background(), &AttachTrafficSourcesInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		TrafficSources: []types.TrafficSourceIdentifier{
+			{
+				Identifier: ptr.String("__Identifier__"),
+				Type:       ptr.String("__Type__"),
+			},
+			{
+				Identifier: ptr.String("__Identifier__"),
+				Type:       ptr.String("__Type__"),
+			},
+		},
+		SkipZonalShiftValidation: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -206,7 +237,13 @@ func TestCheckResponseSnapshot_BatchDeleteScheduledAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDeleteScheduledAction(context.Background(), &BatchDeleteScheduledActionInput{})
+	got, err := svc.BatchDeleteScheduledAction(context.Background(), &BatchDeleteScheduledActionInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		ScheduledActionNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -238,7 +275,31 @@ func TestCheckResponseSnapshot_BatchPutScheduledUpdateGroupAction(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchPutScheduledUpdateGroupAction(context.Background(), &BatchPutScheduledUpdateGroupActionInput{})
+	got, err := svc.BatchPutScheduledUpdateGroupAction(context.Background(), &BatchPutScheduledUpdateGroupActionInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		ScheduledUpdateGroupActions: []types.ScheduledUpdateGroupActionRequest{
+			{
+				ScheduledActionName: ptr.String("__ScheduledActionName__"),
+				StartTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Recurrence:          ptr.String("__Recurrence__"),
+				MinSize:             ptr.Int32(1),
+				MaxSize:             ptr.Int32(1),
+				DesiredCapacity:     ptr.Int32(1),
+				TimeZone:            ptr.String("__TimeZone__"),
+			},
+			{
+				ScheduledActionName: ptr.String("__ScheduledActionName__"),
+				StartTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Recurrence:          ptr.String("__Recurrence__"),
+				MinSize:             ptr.Int32(1),
+				MaxSize:             ptr.Int32(1),
+				DesiredCapacity:     ptr.Int32(1),
+				TimeZone:            ptr.String("__TimeZone__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -259,7 +320,10 @@ func TestCheckResponseSnapshot_CancelInstanceRefresh(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelInstanceRefresh(context.Background(), &CancelInstanceRefreshInput{})
+	got, err := svc.CancelInstanceRefresh(context.Background(), &CancelInstanceRefreshInput{
+		AutoScalingGroupName:          ptr.String("__AutoScalingGroupName__"),
+		WaitForTransitioningInstances: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -278,7 +342,13 @@ func TestCheckResponseSnapshot_CompleteLifecycleAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CompleteLifecycleAction(context.Background(), &CompleteLifecycleActionInput{})
+	got, err := svc.CompleteLifecycleAction(context.Background(), &CompleteLifecycleActionInput{
+		LifecycleHookName:     ptr.String("__LifecycleHookName__"),
+		AutoScalingGroupName:  ptr.String("__AutoScalingGroupName__"),
+		LifecycleActionToken:  ptr.String("__LifecycleActionToken__"),
+		LifecycleActionResult: ptr.String("__LifecycleActionResult__"),
+		InstanceId:            ptr.String("__InstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -297,7 +367,348 @@ func TestCheckResponseSnapshot_CreateAutoScalingGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAutoScalingGroup(context.Background(), &CreateAutoScalingGroupInput{})
+	got, err := svc.CreateAutoScalingGroup(context.Background(), &CreateAutoScalingGroupInput{
+		AutoScalingGroupName:    ptr.String("__AutoScalingGroupName__"),
+		LaunchConfigurationName: ptr.String("__LaunchConfigurationName__"),
+		LaunchTemplate: &types.LaunchTemplateSpecification{
+			LaunchTemplateId:   ptr.String("__LaunchTemplateId__"),
+			LaunchTemplateName: ptr.String("__LaunchTemplateName__"),
+			Version:            ptr.String("__Version__"),
+		},
+		MixedInstancesPolicy: &types.MixedInstancesPolicy{
+			LaunchTemplate: &types.LaunchTemplate{
+				LaunchTemplateSpecification: &types.LaunchTemplateSpecification{
+					LaunchTemplateId:   ptr.String("__LaunchTemplateId__"),
+					LaunchTemplateName: ptr.String("__LaunchTemplateName__"),
+					Version:            ptr.String("__Version__"),
+				},
+				Overrides: []types.LaunchTemplateOverrides{
+					{
+						InstanceType:     ptr.String("__InstanceType__"),
+						WeightedCapacity: ptr.String("__WeightedCapacity__"),
+						LaunchTemplateSpecification: &types.LaunchTemplateSpecification{
+							LaunchTemplateId:   ptr.String("__LaunchTemplateId__"),
+							LaunchTemplateName: ptr.String("__LaunchTemplateName__"),
+							Version:            ptr.String("__Version__"),
+						},
+						InstanceRequirements: &types.InstanceRequirements{
+							VCpuCount: &types.VCpuCountRequest{
+								Min: ptr.Int32(1),
+								Max: ptr.Int32(1),
+							},
+							MemoryMiB: &types.MemoryMiBRequest{
+								Min: ptr.Int32(1),
+								Max: ptr.Int32(1),
+							},
+							CpuManufacturers: []types.CpuManufacturer{
+								types.CpuManufacturer("intel"),
+								types.CpuManufacturer("intel"),
+							},
+							MemoryGiBPerVCpu: &types.MemoryGiBPerVCpuRequest{
+								Min: ptr.Float64(1.0),
+								Max: ptr.Float64(1.0),
+							},
+							ExcludedInstanceTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+							InstanceGenerations: []types.InstanceGeneration{
+								types.InstanceGeneration("current"),
+								types.InstanceGeneration("current"),
+							},
+							SpotMaxPricePercentageOverLowestPrice:          ptr.Int32(1),
+							MaxSpotPriceAsPercentageOfOptimalOnDemandPrice: ptr.Int32(1),
+							OnDemandMaxPricePercentageOverLowestPrice:      ptr.Int32(1),
+							BareMetal:               types.BareMetal("included"),
+							BurstablePerformance:    types.BurstablePerformance("included"),
+							RequireHibernateSupport: ptr.Bool(true),
+							NetworkInterfaceCount: &types.NetworkInterfaceCountRequest{
+								Min: ptr.Int32(1),
+								Max: ptr.Int32(1),
+							},
+							LocalStorage: types.LocalStorage("included"),
+							LocalStorageTypes: []types.LocalStorageType{
+								types.LocalStorageType("hdd"),
+								types.LocalStorageType("hdd"),
+							},
+							TotalLocalStorageGB: &types.TotalLocalStorageGBRequest{
+								Min: ptr.Float64(1.0),
+								Max: ptr.Float64(1.0),
+							},
+							BaselineEbsBandwidthMbps: &types.BaselineEbsBandwidthMbpsRequest{
+								Min: ptr.Int32(1),
+								Max: ptr.Int32(1),
+							},
+							AcceleratorTypes: []types.AcceleratorType{
+								types.AcceleratorType("gpu"),
+								types.AcceleratorType("gpu"),
+							},
+							AcceleratorCount: &types.AcceleratorCountRequest{
+								Min: ptr.Int32(1),
+								Max: ptr.Int32(1),
+							},
+							AcceleratorManufacturers: []types.AcceleratorManufacturer{
+								types.AcceleratorManufacturer("nvidia"),
+								types.AcceleratorManufacturer("nvidia"),
+							},
+							AcceleratorNames: []types.AcceleratorName{
+								types.AcceleratorName("a100"),
+								types.AcceleratorName("a100"),
+							},
+							AcceleratorTotalMemoryMiB: &types.AcceleratorTotalMemoryMiBRequest{
+								Min: ptr.Int32(1),
+								Max: ptr.Int32(1),
+							},
+							NetworkBandwidthGbps: &types.NetworkBandwidthGbpsRequest{
+								Min: ptr.Float64(1.0),
+								Max: ptr.Float64(1.0),
+							},
+							AllowedInstanceTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+							BaselinePerformanceFactors: &types.BaselinePerformanceFactorsRequest{
+								Cpu: &types.CpuPerformanceFactorRequest{
+									References: []types.PerformanceFactorReferenceRequest{
+										{
+											InstanceFamily: ptr.String("__InstanceFamily__"),
+										},
+										{
+											InstanceFamily: ptr.String("__InstanceFamily__"),
+										},
+									},
+								},
+							},
+						},
+						ImageId: ptr.String("__ImageId__"),
+					},
+					{
+						InstanceType:     ptr.String("__InstanceType__"),
+						WeightedCapacity: ptr.String("__WeightedCapacity__"),
+						LaunchTemplateSpecification: &types.LaunchTemplateSpecification{
+							LaunchTemplateId:   ptr.String("__LaunchTemplateId__"),
+							LaunchTemplateName: ptr.String("__LaunchTemplateName__"),
+							Version:            ptr.String("__Version__"),
+						},
+						InstanceRequirements: &types.InstanceRequirements{
+							VCpuCount: &types.VCpuCountRequest{
+								Min: ptr.Int32(1),
+								Max: ptr.Int32(1),
+							},
+							MemoryMiB: &types.MemoryMiBRequest{
+								Min: ptr.Int32(1),
+								Max: ptr.Int32(1),
+							},
+							CpuManufacturers: []types.CpuManufacturer{
+								types.CpuManufacturer("intel"),
+								types.CpuManufacturer("intel"),
+							},
+							MemoryGiBPerVCpu: &types.MemoryGiBPerVCpuRequest{
+								Min: ptr.Float64(1.0),
+								Max: ptr.Float64(1.0),
+							},
+							ExcludedInstanceTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+							InstanceGenerations: []types.InstanceGeneration{
+								types.InstanceGeneration("current"),
+								types.InstanceGeneration("current"),
+							},
+							SpotMaxPricePercentageOverLowestPrice:          ptr.Int32(1),
+							MaxSpotPriceAsPercentageOfOptimalOnDemandPrice: ptr.Int32(1),
+							OnDemandMaxPricePercentageOverLowestPrice:      ptr.Int32(1),
+							BareMetal:               types.BareMetal("included"),
+							BurstablePerformance:    types.BurstablePerformance("included"),
+							RequireHibernateSupport: ptr.Bool(true),
+							NetworkInterfaceCount: &types.NetworkInterfaceCountRequest{
+								Min: ptr.Int32(1),
+								Max: ptr.Int32(1),
+							},
+							LocalStorage: types.LocalStorage("included"),
+							LocalStorageTypes: []types.LocalStorageType{
+								types.LocalStorageType("hdd"),
+								types.LocalStorageType("hdd"),
+							},
+							TotalLocalStorageGB: &types.TotalLocalStorageGBRequest{
+								Min: ptr.Float64(1.0),
+								Max: ptr.Float64(1.0),
+							},
+							BaselineEbsBandwidthMbps: &types.BaselineEbsBandwidthMbpsRequest{
+								Min: ptr.Int32(1),
+								Max: ptr.Int32(1),
+							},
+							AcceleratorTypes: []types.AcceleratorType{
+								types.AcceleratorType("gpu"),
+								types.AcceleratorType("gpu"),
+							},
+							AcceleratorCount: &types.AcceleratorCountRequest{
+								Min: ptr.Int32(1),
+								Max: ptr.Int32(1),
+							},
+							AcceleratorManufacturers: []types.AcceleratorManufacturer{
+								types.AcceleratorManufacturer("nvidia"),
+								types.AcceleratorManufacturer("nvidia"),
+							},
+							AcceleratorNames: []types.AcceleratorName{
+								types.AcceleratorName("a100"),
+								types.AcceleratorName("a100"),
+							},
+							AcceleratorTotalMemoryMiB: &types.AcceleratorTotalMemoryMiBRequest{
+								Min: ptr.Int32(1),
+								Max: ptr.Int32(1),
+							},
+							NetworkBandwidthGbps: &types.NetworkBandwidthGbpsRequest{
+								Min: ptr.Float64(1.0),
+								Max: ptr.Float64(1.0),
+							},
+							AllowedInstanceTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+							BaselinePerformanceFactors: &types.BaselinePerformanceFactorsRequest{
+								Cpu: &types.CpuPerformanceFactorRequest{
+									References: []types.PerformanceFactorReferenceRequest{
+										{
+											InstanceFamily: ptr.String("__InstanceFamily__"),
+										},
+										{
+											InstanceFamily: ptr.String("__InstanceFamily__"),
+										},
+									},
+								},
+							},
+						},
+						ImageId: ptr.String("__ImageId__"),
+					},
+				},
+			},
+			InstancesDistribution: &types.InstancesDistribution{
+				OnDemandAllocationStrategy:          ptr.String("__OnDemandAllocationStrategy__"),
+				OnDemandBaseCapacity:                ptr.Int32(1),
+				OnDemandPercentageAboveBaseCapacity: ptr.Int32(1),
+				SpotAllocationStrategy:              ptr.String("__SpotAllocationStrategy__"),
+				SpotInstancePools:                   ptr.Int32(1),
+				SpotMaxPrice:                        ptr.String("__SpotMaxPrice__"),
+			},
+		},
+		InstanceId:      ptr.String("__InstanceId__"),
+		MinSize:         ptr.Int32(1),
+		MaxSize:         ptr.Int32(1),
+		DesiredCapacity: ptr.Int32(1),
+		DefaultCooldown: ptr.Int32(1),
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AvailabilityZoneIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LoadBalancerNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TargetGroupARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		HealthCheckType:        ptr.String("__HealthCheckType__"),
+		HealthCheckGracePeriod: ptr.Int32(1),
+		PlacementGroup:         ptr.String("__PlacementGroup__"),
+		VPCZoneIdentifier:      ptr.String("__VPCZoneIdentifier__"),
+		TerminationPolicies: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NewInstancesProtectedFromScaleIn: ptr.Bool(true),
+		CapacityRebalance:                ptr.Bool(true),
+		LifecycleHookSpecificationList: []types.LifecycleHookSpecification{
+			{
+				LifecycleHookName:     ptr.String("__LifecycleHookName__"),
+				LifecycleTransition:   ptr.String("__LifecycleTransition__"),
+				NotificationMetadata:  ptr.String("__NotificationMetadata__"),
+				HeartbeatTimeout:      ptr.Int32(1),
+				DefaultResult:         ptr.String("__DefaultResult__"),
+				NotificationTargetARN: ptr.String("__NotificationTargetARN__"),
+				RoleARN:               ptr.String("__RoleARN__"),
+			},
+			{
+				LifecycleHookName:     ptr.String("__LifecycleHookName__"),
+				LifecycleTransition:   ptr.String("__LifecycleTransition__"),
+				NotificationMetadata:  ptr.String("__NotificationMetadata__"),
+				HeartbeatTimeout:      ptr.Int32(1),
+				DefaultResult:         ptr.String("__DefaultResult__"),
+				NotificationTargetARN: ptr.String("__NotificationTargetARN__"),
+				RoleARN:               ptr.String("__RoleARN__"),
+			},
+		},
+		DeletionProtection: types.DeletionProtection("none"),
+		Tags: []types.Tag{
+			{
+				ResourceId:        ptr.String("__ResourceId__"),
+				ResourceType:      ptr.String("__ResourceType__"),
+				Key:               ptr.String("__Key__"),
+				Value:             ptr.String("__Value__"),
+				PropagateAtLaunch: ptr.Bool(true),
+			},
+			{
+				ResourceId:        ptr.String("__ResourceId__"),
+				ResourceType:      ptr.String("__ResourceType__"),
+				Key:               ptr.String("__Key__"),
+				Value:             ptr.String("__Value__"),
+				PropagateAtLaunch: ptr.Bool(true),
+			},
+		},
+		ServiceLinkedRoleARN:  ptr.String("__ServiceLinkedRoleARN__"),
+		MaxInstanceLifetime:   ptr.Int32(1),
+		Context:               ptr.String("__Context__"),
+		DesiredCapacityType:   ptr.String("__DesiredCapacityType__"),
+		DefaultInstanceWarmup: ptr.Int32(1),
+		TrafficSources: []types.TrafficSourceIdentifier{
+			{
+				Identifier: ptr.String("__Identifier__"),
+				Type:       ptr.String("__Type__"),
+			},
+			{
+				Identifier: ptr.String("__Identifier__"),
+				Type:       ptr.String("__Type__"),
+			},
+		},
+		InstanceMaintenancePolicy: &types.InstanceMaintenancePolicy{
+			MinHealthyPercentage: ptr.Int32(1),
+			MaxHealthyPercentage: ptr.Int32(1),
+		},
+		AvailabilityZoneDistribution: &types.AvailabilityZoneDistribution{
+			CapacityDistributionStrategy: types.CapacityDistributionStrategy("balanced-only"),
+		},
+		AvailabilityZoneImpairmentPolicy: &types.AvailabilityZoneImpairmentPolicy{
+			ZonalShiftEnabled:               ptr.Bool(true),
+			ImpairedZoneHealthCheckBehavior: types.ImpairedZoneHealthCheckBehavior("ReplaceUnhealthy"),
+		},
+		SkipZonalShiftValidation: ptr.Bool(true),
+		CapacityReservationSpecification: &types.CapacityReservationSpecification{
+			CapacityReservationPreference: types.CapacityReservationPreference("capacity-reservations-only"),
+			CapacityReservationTarget: &types.CapacityReservationTarget{
+				CapacityReservationIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				CapacityReservationResourceGroupArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		InstanceLifecyclePolicy: &types.InstanceLifecyclePolicy{
+			RetentionTriggers: &types.RetentionTriggers{
+				TerminateHookAbandon: types.RetentionAction("retain"),
+			},
+		},
+		Operator: &types.Operator{
+			Principal: ptr.String("__Principal__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -316,7 +727,68 @@ func TestCheckResponseSnapshot_CreateLaunchConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLaunchConfiguration(context.Background(), &CreateLaunchConfigurationInput{})
+	got, err := svc.CreateLaunchConfiguration(context.Background(), &CreateLaunchConfigurationInput{
+		LaunchConfigurationName: ptr.String("__LaunchConfigurationName__"),
+		ImageId:                 ptr.String("__ImageId__"),
+		KeyName:                 ptr.String("__KeyName__"),
+		SecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClassicLinkVPCId: ptr.String("__ClassicLinkVPCId__"),
+		ClassicLinkVPCSecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UserData:     ptr.String("__UserData__"),
+		InstanceId:   ptr.String("__InstanceId__"),
+		InstanceType: ptr.String("__InstanceType__"),
+		KernelId:     ptr.String("__KernelId__"),
+		RamdiskId:    ptr.String("__RamdiskId__"),
+		BlockDeviceMappings: []types.BlockDeviceMapping{
+			{
+				VirtualName: ptr.String("__VirtualName__"),
+				DeviceName:  ptr.String("__DeviceName__"),
+				Ebs: &types.Ebs{
+					SnapshotId:          ptr.String("__SnapshotId__"),
+					VolumeSize:          ptr.Int32(1),
+					VolumeType:          ptr.String("__VolumeType__"),
+					DeleteOnTermination: ptr.Bool(true),
+					Iops:                ptr.Int32(1),
+					Encrypted:           ptr.Bool(true),
+					Throughput:          ptr.Int32(1),
+				},
+				NoDevice: ptr.Bool(true),
+			},
+			{
+				VirtualName: ptr.String("__VirtualName__"),
+				DeviceName:  ptr.String("__DeviceName__"),
+				Ebs: &types.Ebs{
+					SnapshotId:          ptr.String("__SnapshotId__"),
+					VolumeSize:          ptr.Int32(1),
+					VolumeType:          ptr.String("__VolumeType__"),
+					DeleteOnTermination: ptr.Bool(true),
+					Iops:                ptr.Int32(1),
+					Encrypted:           ptr.Bool(true),
+					Throughput:          ptr.Int32(1),
+				},
+				NoDevice: ptr.Bool(true),
+			},
+		},
+		InstanceMonitoring: &types.InstanceMonitoring{
+			Enabled: ptr.Bool(true),
+		},
+		SpotPrice:                ptr.String("__SpotPrice__"),
+		IamInstanceProfile:       ptr.String("__IamInstanceProfile__"),
+		EbsOptimized:             ptr.Bool(true),
+		AssociatePublicIpAddress: ptr.Bool(true),
+		PlacementTenancy:         ptr.String("__PlacementTenancy__"),
+		MetadataOptions: &types.InstanceMetadataOptions{
+			HttpTokens:              types.InstanceMetadataHttpTokensState("optional"),
+			HttpPutResponseHopLimit: ptr.Int32(1),
+			HttpEndpoint:            types.InstanceMetadataEndpointState("disabled"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -335,7 +807,24 @@ func TestCheckResponseSnapshot_CreateOrUpdateTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateOrUpdateTags(context.Background(), &CreateOrUpdateTagsInput{})
+	got, err := svc.CreateOrUpdateTags(context.Background(), &CreateOrUpdateTagsInput{
+		Tags: []types.Tag{
+			{
+				ResourceId:        ptr.String("__ResourceId__"),
+				ResourceType:      ptr.String("__ResourceType__"),
+				Key:               ptr.String("__Key__"),
+				Value:             ptr.String("__Value__"),
+				PropagateAtLaunch: ptr.Bool(true),
+			},
+			{
+				ResourceId:        ptr.String("__ResourceId__"),
+				ResourceType:      ptr.String("__ResourceType__"),
+				Key:               ptr.String("__Key__"),
+				Value:             ptr.String("__Value__"),
+				PropagateAtLaunch: ptr.Bool(true),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -354,7 +843,10 @@ func TestCheckResponseSnapshot_DeleteAutoScalingGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAutoScalingGroup(context.Background(), &DeleteAutoScalingGroupInput{})
+	got, err := svc.DeleteAutoScalingGroup(context.Background(), &DeleteAutoScalingGroupInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		ForceDelete:          ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -373,7 +865,9 @@ func TestCheckResponseSnapshot_DeleteLaunchConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLaunchConfiguration(context.Background(), &DeleteLaunchConfigurationInput{})
+	got, err := svc.DeleteLaunchConfiguration(context.Background(), &DeleteLaunchConfigurationInput{
+		LaunchConfigurationName: ptr.String("__LaunchConfigurationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -392,7 +886,10 @@ func TestCheckResponseSnapshot_DeleteLifecycleHook(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLifecycleHook(context.Background(), &DeleteLifecycleHookInput{})
+	got, err := svc.DeleteLifecycleHook(context.Background(), &DeleteLifecycleHookInput{
+		LifecycleHookName:    ptr.String("__LifecycleHookName__"),
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -411,7 +908,10 @@ func TestCheckResponseSnapshot_DeleteNotificationConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteNotificationConfiguration(context.Background(), &DeleteNotificationConfigurationInput{})
+	got, err := svc.DeleteNotificationConfiguration(context.Background(), &DeleteNotificationConfigurationInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		TopicARN:             ptr.String("__TopicARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -430,7 +930,10 @@ func TestCheckResponseSnapshot_DeletePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePolicy(context.Background(), &DeletePolicyInput{})
+	got, err := svc.DeletePolicy(context.Background(), &DeletePolicyInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		PolicyName:           ptr.String("__PolicyName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -449,7 +952,10 @@ func TestCheckResponseSnapshot_DeleteScheduledAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteScheduledAction(context.Background(), &DeleteScheduledActionInput{})
+	got, err := svc.DeleteScheduledAction(context.Background(), &DeleteScheduledActionInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		ScheduledActionName:  ptr.String("__ScheduledActionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -468,7 +974,24 @@ func TestCheckResponseSnapshot_DeleteTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTags(context.Background(), &DeleteTagsInput{})
+	got, err := svc.DeleteTags(context.Background(), &DeleteTagsInput{
+		Tags: []types.Tag{
+			{
+				ResourceId:        ptr.String("__ResourceId__"),
+				ResourceType:      ptr.String("__ResourceType__"),
+				Key:               ptr.String("__Key__"),
+				Value:             ptr.String("__Value__"),
+				PropagateAtLaunch: ptr.Bool(true),
+			},
+			{
+				ResourceId:        ptr.String("__ResourceId__"),
+				ResourceType:      ptr.String("__ResourceType__"),
+				Key:               ptr.String("__Key__"),
+				Value:             ptr.String("__Value__"),
+				PropagateAtLaunch: ptr.Bool(true),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -487,7 +1010,10 @@ func TestCheckResponseSnapshot_DeleteWarmPool(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWarmPool(context.Background(), &DeleteWarmPoolInput{})
+	got, err := svc.DeleteWarmPool(context.Background(), &DeleteWarmPoolInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		ForceDelete:          ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1342,7 +1868,31 @@ func TestCheckResponseSnapshot_DescribeAutoScalingGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAutoScalingGroups(context.Background(), &DescribeAutoScalingGroupsInput{})
+	got, err := svc.DescribeAutoScalingGroups(context.Background(), &DescribeAutoScalingGroupsInput{
+		AutoScalingGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IncludeInstances: ptr.Bool(true),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxRecords:       ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1401,7 +1951,14 @@ func TestCheckResponseSnapshot_DescribeAutoScalingInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAutoScalingInstances(context.Background(), &DescribeAutoScalingInstancesInput{})
+	got, err := svc.DescribeAutoScalingInstances(context.Background(), &DescribeAutoScalingInstancesInput{
+		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxRecords: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2012,7 +2569,15 @@ func TestCheckResponseSnapshot_DescribeInstanceRefreshes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeInstanceRefreshes(context.Background(), &DescribeInstanceRefreshesInput{})
+	got, err := svc.DescribeInstanceRefreshes(context.Background(), &DescribeInstanceRefreshesInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		InstanceRefreshIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxRecords: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2161,7 +2726,14 @@ func TestCheckResponseSnapshot_DescribeLaunchConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLaunchConfigurations(context.Background(), &DescribeLaunchConfigurationsInput{})
+	got, err := svc.DescribeLaunchConfigurations(context.Background(), &DescribeLaunchConfigurationsInput{
+		LaunchConfigurationNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxRecords: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2229,7 +2801,13 @@ func TestCheckResponseSnapshot_DescribeLifecycleHooks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLifecycleHooks(context.Background(), &DescribeLifecycleHooksInput{})
+	got, err := svc.DescribeLifecycleHooks(context.Background(), &DescribeLifecycleHooksInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		LifecycleHookNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2260,7 +2838,11 @@ func TestCheckResponseSnapshot_DescribeLoadBalancerTargetGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLoadBalancerTargetGroups(context.Background(), &DescribeLoadBalancerTargetGroupsInput{})
+	got, err := svc.DescribeLoadBalancerTargetGroups(context.Background(), &DescribeLoadBalancerTargetGroupsInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxRecords:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2291,7 +2873,11 @@ func TestCheckResponseSnapshot_DescribeLoadBalancers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLoadBalancers(context.Background(), &DescribeLoadBalancersInput{})
+	got, err := svc.DescribeLoadBalancers(context.Background(), &DescribeLoadBalancersInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxRecords:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2360,7 +2946,14 @@ func TestCheckResponseSnapshot_DescribeNotificationConfigurations(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeNotificationConfigurations(context.Background(), &DescribeNotificationConfigurationsInput{})
+	got, err := svc.DescribeNotificationConfigurations(context.Background(), &DescribeNotificationConfigurationsInput{
+		AutoScalingGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxRecords: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3313,7 +3906,19 @@ func TestCheckResponseSnapshot_DescribePolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePolicies(context.Background(), &DescribePoliciesInput{})
+	got, err := svc.DescribePolicies(context.Background(), &DescribePoliciesInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		PolicyNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PolicyTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxRecords: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3364,7 +3969,32 @@ func TestCheckResponseSnapshot_DescribeScalingActivities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeScalingActivities(context.Background(), &DescribeScalingActivitiesInput{})
+	got, err := svc.DescribeScalingActivities(context.Background(), &DescribeScalingActivitiesInput{
+		ActivityIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		IncludeDeletedGroups: ptr.Bool(true),
+		MaxRecords:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3441,7 +4071,17 @@ func TestCheckResponseSnapshot_DescribeScheduledActions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeScheduledActions(context.Background(), &DescribeScheduledActionsInput{})
+	got, err := svc.DescribeScheduledActions(context.Background(), &DescribeScheduledActionsInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		ScheduledActionNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxRecords: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3478,7 +4118,26 @@ func TestCheckResponseSnapshot_DescribeTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTags(context.Background(), &DescribeTagsInput{})
+	got, err := svc.DescribeTags(context.Background(), &DescribeTagsInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxRecords: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3537,7 +4196,12 @@ func TestCheckResponseSnapshot_DescribeTrafficSources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTrafficSources(context.Background(), &DescribeTrafficSourcesInput{})
+	got, err := svc.DescribeTrafficSources(context.Background(), &DescribeTrafficSourcesInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		TrafficSourceType:    ptr.String("__TrafficSourceType__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxRecords:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3603,7 +4267,11 @@ func TestCheckResponseSnapshot_DescribeWarmPool(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeWarmPool(context.Background(), &DescribeWarmPoolInput{})
+	got, err := svc.DescribeWarmPool(context.Background(), &DescribeWarmPoolInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		MaxRecords:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3653,7 +4321,14 @@ func TestCheckResponseSnapshot_DetachInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetachInstances(context.Background(), &DetachInstancesInput{})
+	got, err := svc.DetachInstances(context.Background(), &DetachInstancesInput{
+		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AutoScalingGroupName:           ptr.String("__AutoScalingGroupName__"),
+		ShouldDecrementDesiredCapacity: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3672,7 +4347,13 @@ func TestCheckResponseSnapshot_DetachLoadBalancerTargetGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetachLoadBalancerTargetGroups(context.Background(), &DetachLoadBalancerTargetGroupsInput{})
+	got, err := svc.DetachLoadBalancerTargetGroups(context.Background(), &DetachLoadBalancerTargetGroupsInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		TargetGroupARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3691,7 +4372,13 @@ func TestCheckResponseSnapshot_DetachLoadBalancers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetachLoadBalancers(context.Background(), &DetachLoadBalancersInput{})
+	got, err := svc.DetachLoadBalancers(context.Background(), &DetachLoadBalancersInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		LoadBalancerNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3710,7 +4397,19 @@ func TestCheckResponseSnapshot_DetachTrafficSources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetachTrafficSources(context.Background(), &DetachTrafficSourcesInput{})
+	got, err := svc.DetachTrafficSources(context.Background(), &DetachTrafficSourcesInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		TrafficSources: []types.TrafficSourceIdentifier{
+			{
+				Identifier: ptr.String("__Identifier__"),
+				Type:       ptr.String("__Type__"),
+			},
+			{
+				Identifier: ptr.String("__Identifier__"),
+				Type:       ptr.String("__Type__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3729,7 +4428,13 @@ func TestCheckResponseSnapshot_DisableMetricsCollection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableMetricsCollection(context.Background(), &DisableMetricsCollectionInput{})
+	got, err := svc.DisableMetricsCollection(context.Background(), &DisableMetricsCollectionInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		Metrics: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3748,7 +4453,14 @@ func TestCheckResponseSnapshot_EnableMetricsCollection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableMetricsCollection(context.Background(), &EnableMetricsCollectionInput{})
+	got, err := svc.EnableMetricsCollection(context.Background(), &EnableMetricsCollectionInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		Metrics: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Granularity: ptr.String("__Granularity__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3798,7 +4510,14 @@ func TestCheckResponseSnapshot_EnterStandby(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnterStandby(context.Background(), &EnterStandbyInput{})
+	got, err := svc.EnterStandby(context.Background(), &EnterStandbyInput{
+		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AutoScalingGroupName:           ptr.String("__AutoScalingGroupName__"),
+		ShouldDecrementDesiredCapacity: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3817,7 +4536,13 @@ func TestCheckResponseSnapshot_ExecutePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExecutePolicy(context.Background(), &ExecutePolicyInput{})
+	got, err := svc.ExecutePolicy(context.Background(), &ExecutePolicyInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		PolicyName:           ptr.String("__PolicyName__"),
+		HonorCooldown:        ptr.Bool(true),
+		MetricValue:          ptr.Float64(1.0),
+		BreachThreshold:      ptr.Float64(1.0),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3867,7 +4592,13 @@ func TestCheckResponseSnapshot_ExitStandby(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExitStandby(context.Background(), &ExitStandbyInput{})
+	got, err := svc.ExitStandby(context.Background(), &ExitStandbyInput{
+		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4262,7 +4993,12 @@ func TestCheckResponseSnapshot_GetPredictiveScalingForecast(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPredictiveScalingForecast(context.Background(), &GetPredictiveScalingForecastInput{})
+	got, err := svc.GetPredictiveScalingForecast(context.Background(), &GetPredictiveScalingForecastInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		PolicyName:           ptr.String("__PolicyName__"),
+		StartTime:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4328,7 +5064,24 @@ func TestCheckResponseSnapshot_LaunchInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.LaunchInstances(context.Background(), &LaunchInstancesInput{})
+	got, err := svc.LaunchInstances(context.Background(), &LaunchInstancesInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		RequestedCapacity:    ptr.Int32(1),
+		ClientToken:          ptr.String("__ClientToken__"),
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AvailabilityZoneIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RetryStrategy: types.RetryStrategy("retry-with-group-configuration"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4347,7 +5100,16 @@ func TestCheckResponseSnapshot_PutLifecycleHook(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutLifecycleHook(context.Background(), &PutLifecycleHookInput{})
+	got, err := svc.PutLifecycleHook(context.Background(), &PutLifecycleHookInput{
+		LifecycleHookName:     ptr.String("__LifecycleHookName__"),
+		AutoScalingGroupName:  ptr.String("__AutoScalingGroupName__"),
+		LifecycleTransition:   ptr.String("__LifecycleTransition__"),
+		RoleARN:               ptr.String("__RoleARN__"),
+		NotificationTargetARN: ptr.String("__NotificationTargetARN__"),
+		NotificationMetadata:  ptr.String("__NotificationMetadata__"),
+		HeartbeatTimeout:      ptr.Int32(1),
+		DefaultResult:         ptr.String("__DefaultResult__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4366,7 +5128,14 @@ func TestCheckResponseSnapshot_PutNotificationConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutNotificationConfiguration(context.Background(), &PutNotificationConfigurationInput{})
+	got, err := svc.PutNotificationConfiguration(context.Background(), &PutNotificationConfigurationInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		TopicARN:             ptr.String("__TopicARN__"),
+		NotificationTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4397,7 +5166,460 @@ func TestCheckResponseSnapshot_PutScalingPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutScalingPolicy(context.Background(), &PutScalingPolicyInput{})
+	got, err := svc.PutScalingPolicy(context.Background(), &PutScalingPolicyInput{
+		AutoScalingGroupName:   ptr.String("__AutoScalingGroupName__"),
+		PolicyName:             ptr.String("__PolicyName__"),
+		PolicyType:             ptr.String("__PolicyType__"),
+		AdjustmentType:         ptr.String("__AdjustmentType__"),
+		MinAdjustmentStep:      ptr.Int32(1),
+		MinAdjustmentMagnitude: ptr.Int32(1),
+		ScalingAdjustment:      ptr.Int32(1),
+		Cooldown:               ptr.Int32(1),
+		MetricAggregationType:  ptr.String("__MetricAggregationType__"),
+		StepAdjustments: []types.StepAdjustment{
+			{
+				MetricIntervalLowerBound: ptr.Float64(1.0),
+				MetricIntervalUpperBound: ptr.Float64(1.0),
+				ScalingAdjustment:        ptr.Int32(1),
+			},
+			{
+				MetricIntervalLowerBound: ptr.Float64(1.0),
+				MetricIntervalUpperBound: ptr.Float64(1.0),
+				ScalingAdjustment:        ptr.Int32(1),
+			},
+		},
+		EstimatedInstanceWarmup: ptr.Int32(1),
+		TargetTrackingConfiguration: &types.TargetTrackingConfiguration{
+			PredefinedMetricSpecification: &types.PredefinedMetricSpecification{
+				PredefinedMetricType: types.MetricType("ASGAverageCPUUtilization"),
+				ResourceLabel:        ptr.String("__ResourceLabel__"),
+			},
+			CustomizedMetricSpecification: &types.CustomizedMetricSpecification{
+				MetricName: ptr.String("__MetricName__"),
+				Namespace:  ptr.String("__Namespace__"),
+				Dimensions: []types.MetricDimension{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Statistic: types.MetricStatistic("Average"),
+				Unit:      ptr.String("__Unit__"),
+				Period:    ptr.Int32(1),
+				Metrics: []types.TargetTrackingMetricDataQuery{
+					{
+						Id:         ptr.String("__Id__"),
+						Expression: ptr.String("__Expression__"),
+						MetricStat: &types.TargetTrackingMetricStat{
+							Metric: &types.Metric{
+								Namespace:  ptr.String("__Namespace__"),
+								MetricName: ptr.String("__MetricName__"),
+								Dimensions: []types.MetricDimension{
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+							Stat:   ptr.String("__Stat__"),
+							Unit:   ptr.String("__Unit__"),
+							Period: ptr.Int32(1),
+						},
+						Label:      ptr.String("__Label__"),
+						Period:     ptr.Int32(1),
+						ReturnData: ptr.Bool(true),
+					},
+					{
+						Id:         ptr.String("__Id__"),
+						Expression: ptr.String("__Expression__"),
+						MetricStat: &types.TargetTrackingMetricStat{
+							Metric: &types.Metric{
+								Namespace:  ptr.String("__Namespace__"),
+								MetricName: ptr.String("__MetricName__"),
+								Dimensions: []types.MetricDimension{
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Name:  ptr.String("__Name__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+							Stat:   ptr.String("__Stat__"),
+							Unit:   ptr.String("__Unit__"),
+							Period: ptr.Int32(1),
+						},
+						Label:      ptr.String("__Label__"),
+						Period:     ptr.Int32(1),
+						ReturnData: ptr.Bool(true),
+					},
+				},
+			},
+			TargetValue:    ptr.Float64(1.0),
+			DisableScaleIn: ptr.Bool(true),
+		},
+		Enabled: ptr.Bool(true),
+		PredictiveScalingConfiguration: &types.PredictiveScalingConfiguration{
+			MetricSpecifications: []types.PredictiveScalingMetricSpecification{
+				{
+					TargetValue: ptr.Float64(1.0),
+					PredefinedMetricPairSpecification: &types.PredictiveScalingPredefinedMetricPair{
+						PredefinedMetricType: types.PredefinedMetricPairType("ASGCPUUtilization"),
+						ResourceLabel:        ptr.String("__ResourceLabel__"),
+					},
+					PredefinedScalingMetricSpecification: &types.PredictiveScalingPredefinedScalingMetric{
+						PredefinedMetricType: types.PredefinedScalingMetricType("ASGAverageCPUUtilization"),
+						ResourceLabel:        ptr.String("__ResourceLabel__"),
+					},
+					PredefinedLoadMetricSpecification: &types.PredictiveScalingPredefinedLoadMetric{
+						PredefinedMetricType: types.PredefinedLoadMetricType("ASGTotalCPUUtilization"),
+						ResourceLabel:        ptr.String("__ResourceLabel__"),
+					},
+					CustomizedScalingMetricSpecification: &types.PredictiveScalingCustomizedScalingMetric{
+						MetricDataQueries: []types.MetricDataQuery{
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.MetricStat{
+									Metric: &types.Metric{
+										Namespace:  ptr.String("__Namespace__"),
+										MetricName: ptr.String("__MetricName__"),
+										Dimensions: []types.MetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.MetricStat{
+									Metric: &types.Metric{
+										Namespace:  ptr.String("__Namespace__"),
+										MetricName: ptr.String("__MetricName__"),
+										Dimensions: []types.MetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+						},
+					},
+					CustomizedLoadMetricSpecification: &types.PredictiveScalingCustomizedLoadMetric{
+						MetricDataQueries: []types.MetricDataQuery{
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.MetricStat{
+									Metric: &types.Metric{
+										Namespace:  ptr.String("__Namespace__"),
+										MetricName: ptr.String("__MetricName__"),
+										Dimensions: []types.MetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.MetricStat{
+									Metric: &types.Metric{
+										Namespace:  ptr.String("__Namespace__"),
+										MetricName: ptr.String("__MetricName__"),
+										Dimensions: []types.MetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+						},
+					},
+					CustomizedCapacityMetricSpecification: &types.PredictiveScalingCustomizedCapacityMetric{
+						MetricDataQueries: []types.MetricDataQuery{
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.MetricStat{
+									Metric: &types.Metric{
+										Namespace:  ptr.String("__Namespace__"),
+										MetricName: ptr.String("__MetricName__"),
+										Dimensions: []types.MetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.MetricStat{
+									Metric: &types.Metric{
+										Namespace:  ptr.String("__Namespace__"),
+										MetricName: ptr.String("__MetricName__"),
+										Dimensions: []types.MetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+						},
+					},
+				},
+				{
+					TargetValue: ptr.Float64(1.0),
+					PredefinedMetricPairSpecification: &types.PredictiveScalingPredefinedMetricPair{
+						PredefinedMetricType: types.PredefinedMetricPairType("ASGCPUUtilization"),
+						ResourceLabel:        ptr.String("__ResourceLabel__"),
+					},
+					PredefinedScalingMetricSpecification: &types.PredictiveScalingPredefinedScalingMetric{
+						PredefinedMetricType: types.PredefinedScalingMetricType("ASGAverageCPUUtilization"),
+						ResourceLabel:        ptr.String("__ResourceLabel__"),
+					},
+					PredefinedLoadMetricSpecification: &types.PredictiveScalingPredefinedLoadMetric{
+						PredefinedMetricType: types.PredefinedLoadMetricType("ASGTotalCPUUtilization"),
+						ResourceLabel:        ptr.String("__ResourceLabel__"),
+					},
+					CustomizedScalingMetricSpecification: &types.PredictiveScalingCustomizedScalingMetric{
+						MetricDataQueries: []types.MetricDataQuery{
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.MetricStat{
+									Metric: &types.Metric{
+										Namespace:  ptr.String("__Namespace__"),
+										MetricName: ptr.String("__MetricName__"),
+										Dimensions: []types.MetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.MetricStat{
+									Metric: &types.Metric{
+										Namespace:  ptr.String("__Namespace__"),
+										MetricName: ptr.String("__MetricName__"),
+										Dimensions: []types.MetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+						},
+					},
+					CustomizedLoadMetricSpecification: &types.PredictiveScalingCustomizedLoadMetric{
+						MetricDataQueries: []types.MetricDataQuery{
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.MetricStat{
+									Metric: &types.Metric{
+										Namespace:  ptr.String("__Namespace__"),
+										MetricName: ptr.String("__MetricName__"),
+										Dimensions: []types.MetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.MetricStat{
+									Metric: &types.Metric{
+										Namespace:  ptr.String("__Namespace__"),
+										MetricName: ptr.String("__MetricName__"),
+										Dimensions: []types.MetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+						},
+					},
+					CustomizedCapacityMetricSpecification: &types.PredictiveScalingCustomizedCapacityMetric{
+						MetricDataQueries: []types.MetricDataQuery{
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.MetricStat{
+									Metric: &types.Metric{
+										Namespace:  ptr.String("__Namespace__"),
+										MetricName: ptr.String("__MetricName__"),
+										Dimensions: []types.MetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+							{
+								Id:         ptr.String("__Id__"),
+								Expression: ptr.String("__Expression__"),
+								MetricStat: &types.MetricStat{
+									Metric: &types.Metric{
+										Namespace:  ptr.String("__Namespace__"),
+										MetricName: ptr.String("__MetricName__"),
+										Dimensions: []types.MetricDimension{
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+											{
+												Name:  ptr.String("__Name__"),
+												Value: ptr.String("__Value__"),
+											},
+										},
+									},
+									Stat: ptr.String("__Stat__"),
+									Unit: ptr.String("__Unit__"),
+								},
+								Label:      ptr.String("__Label__"),
+								ReturnData: ptr.Bool(true),
+							},
+						},
+					},
+				},
+			},
+			Mode:                      types.PredictiveScalingMode("ForecastAndScale"),
+			SchedulingBufferTime:      ptr.Int32(1),
+			MaxCapacityBreachBehavior: types.PredictiveScalingMaxCapacityBreachBehavior("HonorMaxCapacity"),
+			MaxCapacityBuffer:         ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4416,7 +5638,18 @@ func TestCheckResponseSnapshot_PutScheduledUpdateGroupAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutScheduledUpdateGroupAction(context.Background(), &PutScheduledUpdateGroupActionInput{})
+	got, err := svc.PutScheduledUpdateGroupAction(context.Background(), &PutScheduledUpdateGroupActionInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		ScheduledActionName:  ptr.String("__ScheduledActionName__"),
+		Time:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StartTime:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Recurrence:           ptr.String("__Recurrence__"),
+		MinSize:              ptr.Int32(1),
+		MaxSize:              ptr.Int32(1),
+		DesiredCapacity:      ptr.Int32(1),
+		TimeZone:             ptr.String("__TimeZone__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4435,7 +5668,15 @@ func TestCheckResponseSnapshot_PutWarmPool(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutWarmPool(context.Background(), &PutWarmPoolInput{})
+	got, err := svc.PutWarmPool(context.Background(), &PutWarmPoolInput{
+		AutoScalingGroupName:     ptr.String("__AutoScalingGroupName__"),
+		MaxGroupPreparedCapacity: ptr.Int32(1),
+		MinSize:                  ptr.Int32(1),
+		PoolState:                types.WarmPoolState("Stopped"),
+		InstanceReusePolicy: &types.InstanceReusePolicy{
+			ReuseOnScaleIn: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4454,7 +5695,12 @@ func TestCheckResponseSnapshot_RecordLifecycleActionHeartbeat(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RecordLifecycleActionHeartbeat(context.Background(), &RecordLifecycleActionHeartbeatInput{})
+	got, err := svc.RecordLifecycleActionHeartbeat(context.Background(), &RecordLifecycleActionHeartbeatInput{
+		LifecycleHookName:    ptr.String("__LifecycleHookName__"),
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		LifecycleActionToken: ptr.String("__LifecycleActionToken__"),
+		InstanceId:           ptr.String("__InstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4473,7 +5719,13 @@ func TestCheckResponseSnapshot_ResumeProcesses(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResumeProcesses(context.Background(), &ResumeProcessesInput{})
+	got, err := svc.ResumeProcesses(context.Background(), &ResumeProcessesInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		ScalingProcesses: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4494,7 +5746,9 @@ func TestCheckResponseSnapshot_RollbackInstanceRefresh(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RollbackInstanceRefresh(context.Background(), &RollbackInstanceRefreshInput{})
+	got, err := svc.RollbackInstanceRefresh(context.Background(), &RollbackInstanceRefreshInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4513,7 +5767,11 @@ func TestCheckResponseSnapshot_SetDesiredCapacity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetDesiredCapacity(context.Background(), &SetDesiredCapacityInput{})
+	got, err := svc.SetDesiredCapacity(context.Background(), &SetDesiredCapacityInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		DesiredCapacity:      ptr.Int32(1),
+		HonorCooldown:        ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4532,7 +5790,11 @@ func TestCheckResponseSnapshot_SetInstanceHealth(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetInstanceHealth(context.Background(), &SetInstanceHealthInput{})
+	got, err := svc.SetInstanceHealth(context.Background(), &SetInstanceHealthInput{
+		InstanceId:               ptr.String("__InstanceId__"),
+		HealthStatus:             ptr.String("__HealthStatus__"),
+		ShouldRespectGracePeriod: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4551,7 +5813,14 @@ func TestCheckResponseSnapshot_SetInstanceProtection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetInstanceProtection(context.Background(), &SetInstanceProtectionInput{})
+	got, err := svc.SetInstanceProtection(context.Background(), &SetInstanceProtectionInput{
+		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		ProtectedFromScaleIn: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4572,7 +5841,255 @@ func TestCheckResponseSnapshot_StartInstanceRefresh(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartInstanceRefresh(context.Background(), &StartInstanceRefreshInput{})
+	got, err := svc.StartInstanceRefresh(context.Background(), &StartInstanceRefreshInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		Strategy:             types.RefreshStrategy("Rolling"),
+		DesiredConfiguration: &types.DesiredConfiguration{
+			LaunchTemplate: &types.LaunchTemplateSpecification{
+				LaunchTemplateId:   ptr.String("__LaunchTemplateId__"),
+				LaunchTemplateName: ptr.String("__LaunchTemplateName__"),
+				Version:            ptr.String("__Version__"),
+			},
+			MixedInstancesPolicy: &types.MixedInstancesPolicy{
+				LaunchTemplate: &types.LaunchTemplate{
+					LaunchTemplateSpecification: &types.LaunchTemplateSpecification{
+						LaunchTemplateId:   ptr.String("__LaunchTemplateId__"),
+						LaunchTemplateName: ptr.String("__LaunchTemplateName__"),
+						Version:            ptr.String("__Version__"),
+					},
+					Overrides: []types.LaunchTemplateOverrides{
+						{
+							InstanceType:     ptr.String("__InstanceType__"),
+							WeightedCapacity: ptr.String("__WeightedCapacity__"),
+							LaunchTemplateSpecification: &types.LaunchTemplateSpecification{
+								LaunchTemplateId:   ptr.String("__LaunchTemplateId__"),
+								LaunchTemplateName: ptr.String("__LaunchTemplateName__"),
+								Version:            ptr.String("__Version__"),
+							},
+							InstanceRequirements: &types.InstanceRequirements{
+								VCpuCount: &types.VCpuCountRequest{
+									Min: ptr.Int32(1),
+									Max: ptr.Int32(1),
+								},
+								MemoryMiB: &types.MemoryMiBRequest{
+									Min: ptr.Int32(1),
+									Max: ptr.Int32(1),
+								},
+								CpuManufacturers: []types.CpuManufacturer{
+									types.CpuManufacturer("intel"),
+									types.CpuManufacturer("intel"),
+								},
+								MemoryGiBPerVCpu: &types.MemoryGiBPerVCpuRequest{
+									Min: ptr.Float64(1.0),
+									Max: ptr.Float64(1.0),
+								},
+								ExcludedInstanceTypes: []string{
+									"__Member__",
+									"__Member__",
+								},
+								InstanceGenerations: []types.InstanceGeneration{
+									types.InstanceGeneration("current"),
+									types.InstanceGeneration("current"),
+								},
+								SpotMaxPricePercentageOverLowestPrice:          ptr.Int32(1),
+								MaxSpotPriceAsPercentageOfOptimalOnDemandPrice: ptr.Int32(1),
+								OnDemandMaxPricePercentageOverLowestPrice:      ptr.Int32(1),
+								BareMetal:               types.BareMetal("included"),
+								BurstablePerformance:    types.BurstablePerformance("included"),
+								RequireHibernateSupport: ptr.Bool(true),
+								NetworkInterfaceCount: &types.NetworkInterfaceCountRequest{
+									Min: ptr.Int32(1),
+									Max: ptr.Int32(1),
+								},
+								LocalStorage: types.LocalStorage("included"),
+								LocalStorageTypes: []types.LocalStorageType{
+									types.LocalStorageType("hdd"),
+									types.LocalStorageType("hdd"),
+								},
+								TotalLocalStorageGB: &types.TotalLocalStorageGBRequest{
+									Min: ptr.Float64(1.0),
+									Max: ptr.Float64(1.0),
+								},
+								BaselineEbsBandwidthMbps: &types.BaselineEbsBandwidthMbpsRequest{
+									Min: ptr.Int32(1),
+									Max: ptr.Int32(1),
+								},
+								AcceleratorTypes: []types.AcceleratorType{
+									types.AcceleratorType("gpu"),
+									types.AcceleratorType("gpu"),
+								},
+								AcceleratorCount: &types.AcceleratorCountRequest{
+									Min: ptr.Int32(1),
+									Max: ptr.Int32(1),
+								},
+								AcceleratorManufacturers: []types.AcceleratorManufacturer{
+									types.AcceleratorManufacturer("nvidia"),
+									types.AcceleratorManufacturer("nvidia"),
+								},
+								AcceleratorNames: []types.AcceleratorName{
+									types.AcceleratorName("a100"),
+									types.AcceleratorName("a100"),
+								},
+								AcceleratorTotalMemoryMiB: &types.AcceleratorTotalMemoryMiBRequest{
+									Min: ptr.Int32(1),
+									Max: ptr.Int32(1),
+								},
+								NetworkBandwidthGbps: &types.NetworkBandwidthGbpsRequest{
+									Min: ptr.Float64(1.0),
+									Max: ptr.Float64(1.0),
+								},
+								AllowedInstanceTypes: []string{
+									"__Member__",
+									"__Member__",
+								},
+								BaselinePerformanceFactors: &types.BaselinePerformanceFactorsRequest{
+									Cpu: &types.CpuPerformanceFactorRequest{
+										References: []types.PerformanceFactorReferenceRequest{
+											{
+												InstanceFamily: ptr.String("__InstanceFamily__"),
+											},
+											{
+												InstanceFamily: ptr.String("__InstanceFamily__"),
+											},
+										},
+									},
+								},
+							},
+							ImageId: ptr.String("__ImageId__"),
+						},
+						{
+							InstanceType:     ptr.String("__InstanceType__"),
+							WeightedCapacity: ptr.String("__WeightedCapacity__"),
+							LaunchTemplateSpecification: &types.LaunchTemplateSpecification{
+								LaunchTemplateId:   ptr.String("__LaunchTemplateId__"),
+								LaunchTemplateName: ptr.String("__LaunchTemplateName__"),
+								Version:            ptr.String("__Version__"),
+							},
+							InstanceRequirements: &types.InstanceRequirements{
+								VCpuCount: &types.VCpuCountRequest{
+									Min: ptr.Int32(1),
+									Max: ptr.Int32(1),
+								},
+								MemoryMiB: &types.MemoryMiBRequest{
+									Min: ptr.Int32(1),
+									Max: ptr.Int32(1),
+								},
+								CpuManufacturers: []types.CpuManufacturer{
+									types.CpuManufacturer("intel"),
+									types.CpuManufacturer("intel"),
+								},
+								MemoryGiBPerVCpu: &types.MemoryGiBPerVCpuRequest{
+									Min: ptr.Float64(1.0),
+									Max: ptr.Float64(1.0),
+								},
+								ExcludedInstanceTypes: []string{
+									"__Member__",
+									"__Member__",
+								},
+								InstanceGenerations: []types.InstanceGeneration{
+									types.InstanceGeneration("current"),
+									types.InstanceGeneration("current"),
+								},
+								SpotMaxPricePercentageOverLowestPrice:          ptr.Int32(1),
+								MaxSpotPriceAsPercentageOfOptimalOnDemandPrice: ptr.Int32(1),
+								OnDemandMaxPricePercentageOverLowestPrice:      ptr.Int32(1),
+								BareMetal:               types.BareMetal("included"),
+								BurstablePerformance:    types.BurstablePerformance("included"),
+								RequireHibernateSupport: ptr.Bool(true),
+								NetworkInterfaceCount: &types.NetworkInterfaceCountRequest{
+									Min: ptr.Int32(1),
+									Max: ptr.Int32(1),
+								},
+								LocalStorage: types.LocalStorage("included"),
+								LocalStorageTypes: []types.LocalStorageType{
+									types.LocalStorageType("hdd"),
+									types.LocalStorageType("hdd"),
+								},
+								TotalLocalStorageGB: &types.TotalLocalStorageGBRequest{
+									Min: ptr.Float64(1.0),
+									Max: ptr.Float64(1.0),
+								},
+								BaselineEbsBandwidthMbps: &types.BaselineEbsBandwidthMbpsRequest{
+									Min: ptr.Int32(1),
+									Max: ptr.Int32(1),
+								},
+								AcceleratorTypes: []types.AcceleratorType{
+									types.AcceleratorType("gpu"),
+									types.AcceleratorType("gpu"),
+								},
+								AcceleratorCount: &types.AcceleratorCountRequest{
+									Min: ptr.Int32(1),
+									Max: ptr.Int32(1),
+								},
+								AcceleratorManufacturers: []types.AcceleratorManufacturer{
+									types.AcceleratorManufacturer("nvidia"),
+									types.AcceleratorManufacturer("nvidia"),
+								},
+								AcceleratorNames: []types.AcceleratorName{
+									types.AcceleratorName("a100"),
+									types.AcceleratorName("a100"),
+								},
+								AcceleratorTotalMemoryMiB: &types.AcceleratorTotalMemoryMiBRequest{
+									Min: ptr.Int32(1),
+									Max: ptr.Int32(1),
+								},
+								NetworkBandwidthGbps: &types.NetworkBandwidthGbpsRequest{
+									Min: ptr.Float64(1.0),
+									Max: ptr.Float64(1.0),
+								},
+								AllowedInstanceTypes: []string{
+									"__Member__",
+									"__Member__",
+								},
+								BaselinePerformanceFactors: &types.BaselinePerformanceFactorsRequest{
+									Cpu: &types.CpuPerformanceFactorRequest{
+										References: []types.PerformanceFactorReferenceRequest{
+											{
+												InstanceFamily: ptr.String("__InstanceFamily__"),
+											},
+											{
+												InstanceFamily: ptr.String("__InstanceFamily__"),
+											},
+										},
+									},
+								},
+							},
+							ImageId: ptr.String("__ImageId__"),
+						},
+					},
+				},
+				InstancesDistribution: &types.InstancesDistribution{
+					OnDemandAllocationStrategy:          ptr.String("__OnDemandAllocationStrategy__"),
+					OnDemandBaseCapacity:                ptr.Int32(1),
+					OnDemandPercentageAboveBaseCapacity: ptr.Int32(1),
+					SpotAllocationStrategy:              ptr.String("__SpotAllocationStrategy__"),
+					SpotInstancePools:                   ptr.Int32(1),
+					SpotMaxPrice:                        ptr.String("__SpotMaxPrice__"),
+				},
+			},
+		},
+		Preferences: &types.RefreshPreferences{
+			MinHealthyPercentage: ptr.Int32(1),
+			InstanceWarmup:       ptr.Int32(1),
+			CheckpointPercentages: []int32{
+				1,
+				1,
+			},
+			CheckpointDelay:           ptr.Int32(1),
+			SkipMatching:              ptr.Bool(true),
+			AutoRollback:              ptr.Bool(true),
+			ScaleInProtectedInstances: types.ScaleInProtectedInstances("Refresh"),
+			StandbyInstances:          types.StandbyInstances("Terminate"),
+			AlarmSpecification: &types.AlarmSpecification{
+				Alarms: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			MaxHealthyPercentage: ptr.Int32(1),
+			BakeTime:             ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4591,7 +6108,13 @@ func TestCheckResponseSnapshot_SuspendProcesses(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SuspendProcesses(context.Background(), &SuspendProcessesInput{})
+	got, err := svc.SuspendProcesses(context.Background(), &SuspendProcessesInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		ScalingProcesses: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4625,7 +6148,10 @@ func TestCheckResponseSnapshot_TerminateInstanceInAutoScalingGroup(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TerminateInstanceInAutoScalingGroup(context.Background(), &TerminateInstanceInAutoScalingGroupInput{})
+	got, err := svc.TerminateInstanceInAutoScalingGroup(context.Background(), &TerminateInstanceInAutoScalingGroupInput{
+		InstanceId:                     ptr.String("__InstanceId__"),
+		ShouldDecrementDesiredCapacity: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4644,7 +6170,290 @@ func TestCheckResponseSnapshot_UpdateAutoScalingGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAutoScalingGroup(context.Background(), &UpdateAutoScalingGroupInput{})
+	got, err := svc.UpdateAutoScalingGroup(context.Background(), &UpdateAutoScalingGroupInput{
+		AutoScalingGroupName:    ptr.String("__AutoScalingGroupName__"),
+		LaunchConfigurationName: ptr.String("__LaunchConfigurationName__"),
+		LaunchTemplate: &types.LaunchTemplateSpecification{
+			LaunchTemplateId:   ptr.String("__LaunchTemplateId__"),
+			LaunchTemplateName: ptr.String("__LaunchTemplateName__"),
+			Version:            ptr.String("__Version__"),
+		},
+		MixedInstancesPolicy: &types.MixedInstancesPolicy{
+			LaunchTemplate: &types.LaunchTemplate{
+				LaunchTemplateSpecification: &types.LaunchTemplateSpecification{
+					LaunchTemplateId:   ptr.String("__LaunchTemplateId__"),
+					LaunchTemplateName: ptr.String("__LaunchTemplateName__"),
+					Version:            ptr.String("__Version__"),
+				},
+				Overrides: []types.LaunchTemplateOverrides{
+					{
+						InstanceType:     ptr.String("__InstanceType__"),
+						WeightedCapacity: ptr.String("__WeightedCapacity__"),
+						LaunchTemplateSpecification: &types.LaunchTemplateSpecification{
+							LaunchTemplateId:   ptr.String("__LaunchTemplateId__"),
+							LaunchTemplateName: ptr.String("__LaunchTemplateName__"),
+							Version:            ptr.String("__Version__"),
+						},
+						InstanceRequirements: &types.InstanceRequirements{
+							VCpuCount: &types.VCpuCountRequest{
+								Min: ptr.Int32(1),
+								Max: ptr.Int32(1),
+							},
+							MemoryMiB: &types.MemoryMiBRequest{
+								Min: ptr.Int32(1),
+								Max: ptr.Int32(1),
+							},
+							CpuManufacturers: []types.CpuManufacturer{
+								types.CpuManufacturer("intel"),
+								types.CpuManufacturer("intel"),
+							},
+							MemoryGiBPerVCpu: &types.MemoryGiBPerVCpuRequest{
+								Min: ptr.Float64(1.0),
+								Max: ptr.Float64(1.0),
+							},
+							ExcludedInstanceTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+							InstanceGenerations: []types.InstanceGeneration{
+								types.InstanceGeneration("current"),
+								types.InstanceGeneration("current"),
+							},
+							SpotMaxPricePercentageOverLowestPrice:          ptr.Int32(1),
+							MaxSpotPriceAsPercentageOfOptimalOnDemandPrice: ptr.Int32(1),
+							OnDemandMaxPricePercentageOverLowestPrice:      ptr.Int32(1),
+							BareMetal:               types.BareMetal("included"),
+							BurstablePerformance:    types.BurstablePerformance("included"),
+							RequireHibernateSupport: ptr.Bool(true),
+							NetworkInterfaceCount: &types.NetworkInterfaceCountRequest{
+								Min: ptr.Int32(1),
+								Max: ptr.Int32(1),
+							},
+							LocalStorage: types.LocalStorage("included"),
+							LocalStorageTypes: []types.LocalStorageType{
+								types.LocalStorageType("hdd"),
+								types.LocalStorageType("hdd"),
+							},
+							TotalLocalStorageGB: &types.TotalLocalStorageGBRequest{
+								Min: ptr.Float64(1.0),
+								Max: ptr.Float64(1.0),
+							},
+							BaselineEbsBandwidthMbps: &types.BaselineEbsBandwidthMbpsRequest{
+								Min: ptr.Int32(1),
+								Max: ptr.Int32(1),
+							},
+							AcceleratorTypes: []types.AcceleratorType{
+								types.AcceleratorType("gpu"),
+								types.AcceleratorType("gpu"),
+							},
+							AcceleratorCount: &types.AcceleratorCountRequest{
+								Min: ptr.Int32(1),
+								Max: ptr.Int32(1),
+							},
+							AcceleratorManufacturers: []types.AcceleratorManufacturer{
+								types.AcceleratorManufacturer("nvidia"),
+								types.AcceleratorManufacturer("nvidia"),
+							},
+							AcceleratorNames: []types.AcceleratorName{
+								types.AcceleratorName("a100"),
+								types.AcceleratorName("a100"),
+							},
+							AcceleratorTotalMemoryMiB: &types.AcceleratorTotalMemoryMiBRequest{
+								Min: ptr.Int32(1),
+								Max: ptr.Int32(1),
+							},
+							NetworkBandwidthGbps: &types.NetworkBandwidthGbpsRequest{
+								Min: ptr.Float64(1.0),
+								Max: ptr.Float64(1.0),
+							},
+							AllowedInstanceTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+							BaselinePerformanceFactors: &types.BaselinePerformanceFactorsRequest{
+								Cpu: &types.CpuPerformanceFactorRequest{
+									References: []types.PerformanceFactorReferenceRequest{
+										{
+											InstanceFamily: ptr.String("__InstanceFamily__"),
+										},
+										{
+											InstanceFamily: ptr.String("__InstanceFamily__"),
+										},
+									},
+								},
+							},
+						},
+						ImageId: ptr.String("__ImageId__"),
+					},
+					{
+						InstanceType:     ptr.String("__InstanceType__"),
+						WeightedCapacity: ptr.String("__WeightedCapacity__"),
+						LaunchTemplateSpecification: &types.LaunchTemplateSpecification{
+							LaunchTemplateId:   ptr.String("__LaunchTemplateId__"),
+							LaunchTemplateName: ptr.String("__LaunchTemplateName__"),
+							Version:            ptr.String("__Version__"),
+						},
+						InstanceRequirements: &types.InstanceRequirements{
+							VCpuCount: &types.VCpuCountRequest{
+								Min: ptr.Int32(1),
+								Max: ptr.Int32(1),
+							},
+							MemoryMiB: &types.MemoryMiBRequest{
+								Min: ptr.Int32(1),
+								Max: ptr.Int32(1),
+							},
+							CpuManufacturers: []types.CpuManufacturer{
+								types.CpuManufacturer("intel"),
+								types.CpuManufacturer("intel"),
+							},
+							MemoryGiBPerVCpu: &types.MemoryGiBPerVCpuRequest{
+								Min: ptr.Float64(1.0),
+								Max: ptr.Float64(1.0),
+							},
+							ExcludedInstanceTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+							InstanceGenerations: []types.InstanceGeneration{
+								types.InstanceGeneration("current"),
+								types.InstanceGeneration("current"),
+							},
+							SpotMaxPricePercentageOverLowestPrice:          ptr.Int32(1),
+							MaxSpotPriceAsPercentageOfOptimalOnDemandPrice: ptr.Int32(1),
+							OnDemandMaxPricePercentageOverLowestPrice:      ptr.Int32(1),
+							BareMetal:               types.BareMetal("included"),
+							BurstablePerformance:    types.BurstablePerformance("included"),
+							RequireHibernateSupport: ptr.Bool(true),
+							NetworkInterfaceCount: &types.NetworkInterfaceCountRequest{
+								Min: ptr.Int32(1),
+								Max: ptr.Int32(1),
+							},
+							LocalStorage: types.LocalStorage("included"),
+							LocalStorageTypes: []types.LocalStorageType{
+								types.LocalStorageType("hdd"),
+								types.LocalStorageType("hdd"),
+							},
+							TotalLocalStorageGB: &types.TotalLocalStorageGBRequest{
+								Min: ptr.Float64(1.0),
+								Max: ptr.Float64(1.0),
+							},
+							BaselineEbsBandwidthMbps: &types.BaselineEbsBandwidthMbpsRequest{
+								Min: ptr.Int32(1),
+								Max: ptr.Int32(1),
+							},
+							AcceleratorTypes: []types.AcceleratorType{
+								types.AcceleratorType("gpu"),
+								types.AcceleratorType("gpu"),
+							},
+							AcceleratorCount: &types.AcceleratorCountRequest{
+								Min: ptr.Int32(1),
+								Max: ptr.Int32(1),
+							},
+							AcceleratorManufacturers: []types.AcceleratorManufacturer{
+								types.AcceleratorManufacturer("nvidia"),
+								types.AcceleratorManufacturer("nvidia"),
+							},
+							AcceleratorNames: []types.AcceleratorName{
+								types.AcceleratorName("a100"),
+								types.AcceleratorName("a100"),
+							},
+							AcceleratorTotalMemoryMiB: &types.AcceleratorTotalMemoryMiBRequest{
+								Min: ptr.Int32(1),
+								Max: ptr.Int32(1),
+							},
+							NetworkBandwidthGbps: &types.NetworkBandwidthGbpsRequest{
+								Min: ptr.Float64(1.0),
+								Max: ptr.Float64(1.0),
+							},
+							AllowedInstanceTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+							BaselinePerformanceFactors: &types.BaselinePerformanceFactorsRequest{
+								Cpu: &types.CpuPerformanceFactorRequest{
+									References: []types.PerformanceFactorReferenceRequest{
+										{
+											InstanceFamily: ptr.String("__InstanceFamily__"),
+										},
+										{
+											InstanceFamily: ptr.String("__InstanceFamily__"),
+										},
+									},
+								},
+							},
+						},
+						ImageId: ptr.String("__ImageId__"),
+					},
+				},
+			},
+			InstancesDistribution: &types.InstancesDistribution{
+				OnDemandAllocationStrategy:          ptr.String("__OnDemandAllocationStrategy__"),
+				OnDemandBaseCapacity:                ptr.Int32(1),
+				OnDemandPercentageAboveBaseCapacity: ptr.Int32(1),
+				SpotAllocationStrategy:              ptr.String("__SpotAllocationStrategy__"),
+				SpotInstancePools:                   ptr.Int32(1),
+				SpotMaxPrice:                        ptr.String("__SpotMaxPrice__"),
+			},
+		},
+		MinSize:         ptr.Int32(1),
+		MaxSize:         ptr.Int32(1),
+		DesiredCapacity: ptr.Int32(1),
+		DefaultCooldown: ptr.Int32(1),
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AvailabilityZoneIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		HealthCheckType:        ptr.String("__HealthCheckType__"),
+		HealthCheckGracePeriod: ptr.Int32(1),
+		PlacementGroup:         ptr.String("__PlacementGroup__"),
+		VPCZoneIdentifier:      ptr.String("__VPCZoneIdentifier__"),
+		TerminationPolicies: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NewInstancesProtectedFromScaleIn: ptr.Bool(true),
+		ServiceLinkedRoleARN:             ptr.String("__ServiceLinkedRoleARN__"),
+		MaxInstanceLifetime:              ptr.Int32(1),
+		CapacityRebalance:                ptr.Bool(true),
+		Context:                          ptr.String("__Context__"),
+		DesiredCapacityType:              ptr.String("__DesiredCapacityType__"),
+		DefaultInstanceWarmup:            ptr.Int32(1),
+		InstanceMaintenancePolicy: &types.InstanceMaintenancePolicy{
+			MinHealthyPercentage: ptr.Int32(1),
+			MaxHealthyPercentage: ptr.Int32(1),
+		},
+		AvailabilityZoneDistribution: &types.AvailabilityZoneDistribution{
+			CapacityDistributionStrategy: types.CapacityDistributionStrategy("balanced-only"),
+		},
+		AvailabilityZoneImpairmentPolicy: &types.AvailabilityZoneImpairmentPolicy{
+			ZonalShiftEnabled:               ptr.Bool(true),
+			ImpairedZoneHealthCheckBehavior: types.ImpairedZoneHealthCheckBehavior("ReplaceUnhealthy"),
+		},
+		SkipZonalShiftValidation: ptr.Bool(true),
+		CapacityReservationSpecification: &types.CapacityReservationSpecification{
+			CapacityReservationPreference: types.CapacityReservationPreference("capacity-reservations-only"),
+			CapacityReservationTarget: &types.CapacityReservationTarget{
+				CapacityReservationIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				CapacityReservationResourceGroupArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		InstanceLifecyclePolicy: &types.InstanceLifecyclePolicy{
+			RetentionTriggers: &types.RetentionTriggers{
+				TerminateHookAbandon: types.RetentionAction("retain"),
+			},
+		},
+		DeletionProtection: types.DeletionProtection("none"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4665,7 +6474,10 @@ func TestCheckResponseSnapshot_Error_ActiveInstanceRefreshNotFoundFault(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelInstanceRefresh(context.Background(), &CancelInstanceRefreshInput{})
+	_, opErr := svc.CancelInstanceRefresh(context.Background(), &CancelInstanceRefreshInput{
+		AutoScalingGroupName:          ptr.String("__AutoScalingGroupName__"),
+		WaitForTransitioningInstances: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4690,7 +6502,31 @@ func TestCheckResponseSnapshot_Error_AlreadyExistsFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchPutScheduledUpdateGroupAction(context.Background(), &BatchPutScheduledUpdateGroupActionInput{})
+	_, opErr := svc.BatchPutScheduledUpdateGroupAction(context.Background(), &BatchPutScheduledUpdateGroupActionInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		ScheduledUpdateGroupActions: []types.ScheduledUpdateGroupActionRequest{
+			{
+				ScheduledActionName: ptr.String("__ScheduledActionName__"),
+				StartTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Recurrence:          ptr.String("__Recurrence__"),
+				MinSize:             ptr.Int32(1),
+				MaxSize:             ptr.Int32(1),
+				DesiredCapacity:     ptr.Int32(1),
+				TimeZone:            ptr.String("__TimeZone__"),
+			},
+			{
+				ScheduledActionName: ptr.String("__ScheduledActionName__"),
+				StartTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Recurrence:          ptr.String("__Recurrence__"),
+				MinSize:             ptr.Int32(1),
+				MaxSize:             ptr.Int32(1),
+				DesiredCapacity:     ptr.Int32(1),
+				TimeZone:            ptr.String("__TimeZone__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4715,7 +6551,24 @@ func TestCheckResponseSnapshot_Error_IdempotentParameterMismatchError(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.LaunchInstances(context.Background(), &LaunchInstancesInput{})
+	_, opErr := svc.LaunchInstances(context.Background(), &LaunchInstancesInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		RequestedCapacity:    ptr.Int32(1),
+		ClientToken:          ptr.String("__ClientToken__"),
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AvailabilityZoneIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RetryStrategy: types.RetryStrategy("retry-with-group-configuration"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4740,7 +6593,13 @@ func TestCheckResponseSnapshot_Error_InstanceRefreshInProgressFault(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AttachLoadBalancerTargetGroups(context.Background(), &AttachLoadBalancerTargetGroupsInput{})
+	_, opErr := svc.AttachLoadBalancerTargetGroups(context.Background(), &AttachLoadBalancerTargetGroupsInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		TargetGroupARNs: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4765,7 +6624,31 @@ func TestCheckResponseSnapshot_Error_InvalidNextToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeAutoScalingGroups(context.Background(), &DescribeAutoScalingGroupsInput{})
+	_, opErr := svc.DescribeAutoScalingGroups(context.Background(), &DescribeAutoScalingGroupsInput{
+		AutoScalingGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		IncludeInstances: ptr.Bool(true),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxRecords:       ptr.Int32(1),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4790,7 +6673,9 @@ func TestCheckResponseSnapshot_Error_IrreversibleInstanceRefreshFault(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RollbackInstanceRefresh(context.Background(), &RollbackInstanceRefreshInput{})
+	_, opErr := svc.RollbackInstanceRefresh(context.Background(), &RollbackInstanceRefreshInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4815,7 +6700,31 @@ func TestCheckResponseSnapshot_Error_LimitExceededFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchPutScheduledUpdateGroupAction(context.Background(), &BatchPutScheduledUpdateGroupActionInput{})
+	_, opErr := svc.BatchPutScheduledUpdateGroupAction(context.Background(), &BatchPutScheduledUpdateGroupActionInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		ScheduledUpdateGroupActions: []types.ScheduledUpdateGroupActionRequest{
+			{
+				ScheduledActionName: ptr.String("__ScheduledActionName__"),
+				StartTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Recurrence:          ptr.String("__Recurrence__"),
+				MinSize:             ptr.Int32(1),
+				MaxSize:             ptr.Int32(1),
+				DesiredCapacity:     ptr.Int32(1),
+				TimeZone:            ptr.String("__TimeZone__"),
+			},
+			{
+				ScheduledActionName: ptr.String("__ScheduledActionName__"),
+				StartTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Recurrence:          ptr.String("__Recurrence__"),
+				MinSize:             ptr.Int32(1),
+				MaxSize:             ptr.Int32(1),
+				DesiredCapacity:     ptr.Int32(1),
+				TimeZone:            ptr.String("__TimeZone__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4840,7 +6749,13 @@ func TestCheckResponseSnapshot_Error_ResourceContentionFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AttachInstances(context.Background(), &AttachInstancesInput{})
+	_, opErr := svc.AttachInstances(context.Background(), &AttachInstancesInput{
+		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4865,7 +6780,24 @@ func TestCheckResponseSnapshot_Error_ResourceInUseFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateOrUpdateTags(context.Background(), &CreateOrUpdateTagsInput{})
+	_, opErr := svc.CreateOrUpdateTags(context.Background(), &CreateOrUpdateTagsInput{
+		Tags: []types.Tag{
+			{
+				ResourceId:        ptr.String("__ResourceId__"),
+				ResourceType:      ptr.String("__ResourceType__"),
+				Key:               ptr.String("__Key__"),
+				Value:             ptr.String("__Value__"),
+				PropagateAtLaunch: ptr.Bool(true),
+			},
+			{
+				ResourceId:        ptr.String("__ResourceId__"),
+				ResourceType:      ptr.String("__ResourceType__"),
+				Key:               ptr.String("__Key__"),
+				Value:             ptr.String("__Value__"),
+				PropagateAtLaunch: ptr.Bool(true),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4890,7 +6822,10 @@ func TestCheckResponseSnapshot_Error_ScalingActivityInProgressFault(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteAutoScalingGroup(context.Background(), &DeleteAutoScalingGroupInput{})
+	_, opErr := svc.DeleteAutoScalingGroup(context.Background(), &DeleteAutoScalingGroupInput{
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+		ForceDelete:          ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4915,7 +6850,13 @@ func TestCheckResponseSnapshot_Error_ServiceLinkedRoleFailure(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AttachInstances(context.Background(), &AttachInstancesInput{})
+	_, opErr := svc.AttachInstances(context.Background(), &AttachInstancesInput{
+		InstanceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AutoScalingGroupName: ptr.String("__AutoScalingGroupName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

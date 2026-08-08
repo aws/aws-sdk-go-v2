@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.DescribeImageVersion
+
+{"BaseImage":"__BaseImage__","ContainerImage":"__ContainerImage__","CreationTime":946684800,"FailureReason":"__FailureReason__","Horovod":true,"ImageArn":"__ImageArn__","ImageVersionArn":"__ImageVersionArn__","ImageVersionStatus":"CREATING","JobType":"TRAINING","LastModifiedTime":946684800,"MLFramework":"__MLFramework__","Processor":"CPU","ProgrammingLang":"__ProgrammingLang__","ReleaseNotes":"__ReleaseNotes__","VendorGuidance":"NOT_PROVIDED","Version":1}

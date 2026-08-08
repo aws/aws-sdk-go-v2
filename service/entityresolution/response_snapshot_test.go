@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/entityresolution/document"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -121,7 +122,20 @@ func TestCheckResponseSnapshot_AddPolicyStatement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddPolicyStatement(context.Background(), &AddPolicyStatementInput{})
+	got, err := svc.AddPolicyStatement(context.Background(), &AddPolicyStatementInput{
+		Arn:         ptr.String("__Arn__"),
+		StatementId: ptr.String("__StatementId__"),
+		Effect:      types.StatementEffect("Allow"),
+		Action: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Principal: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Condition: ptr.String("__Condition__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -164,7 +178,14 @@ func TestCheckResponseSnapshot_BatchDeleteUniqueId(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDeleteUniqueId(context.Background(), &BatchDeleteUniqueIdInput{})
+	got, err := svc.BatchDeleteUniqueId(context.Background(), &BatchDeleteUniqueIdInput{
+		WorkflowName: ptr.String("__WorkflowName__"),
+		InputSource:  ptr.String("__InputSource__"),
+		UniqueIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -225,7 +246,7 @@ func TestCheckResponseSnapshot_CreateIdMappingWorkflow(t *testing.T) {
 			},
 			ProviderProperties: &types.ProviderProperties{
 				ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
-				ProviderConfiguration: nil,
+				ProviderConfiguration: document.NewLazyDocument("__Document__"),
 				IntermediateSourceConfiguration: &types.IntermediateSourceConfiguration{
 					IntermediateS3Path: ptr.String("__IntermediateS3Path__"),
 				},
@@ -244,7 +265,70 @@ func TestCheckResponseSnapshot_CreateIdMappingWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIdMappingWorkflow(context.Background(), &CreateIdMappingWorkflowInput{})
+	got, err := svc.CreateIdMappingWorkflow(context.Background(), &CreateIdMappingWorkflowInput{
+		WorkflowName: ptr.String("__WorkflowName__"),
+		Description:  ptr.String("__Description__"),
+		InputSourceConfig: []types.IdMappingWorkflowInputSource{
+			{
+				InputSourceARN: ptr.String("__InputSourceARN__"),
+				SchemaName:     ptr.String("__SchemaName__"),
+				Type:           types.IdNamespaceType("SOURCE"),
+			},
+			{
+				InputSourceARN: ptr.String("__InputSourceARN__"),
+				SchemaName:     ptr.String("__SchemaName__"),
+				Type:           types.IdNamespaceType("SOURCE"),
+			},
+		},
+		OutputSourceConfig: []types.IdMappingWorkflowOutputSource{
+			{
+				KMSArn:       ptr.String("__KMSArn__"),
+				OutputS3Path: ptr.String("__OutputS3Path__"),
+			},
+			{
+				KMSArn:       ptr.String("__KMSArn__"),
+				OutputS3Path: ptr.String("__OutputS3Path__"),
+			},
+		},
+		IdMappingTechniques: &types.IdMappingTechniques{
+			IdMappingType: types.IdMappingType("PROVIDER"),
+			RuleBasedProperties: &types.IdMappingRuleBasedProperties{
+				Rules: []types.Rule{
+					{
+						RuleName: ptr.String("__RuleName__"),
+						MatchingKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						RuleName: ptr.String("__RuleName__"),
+						MatchingKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				RuleDefinitionType:     types.IdMappingWorkflowRuleDefinitionType("SOURCE"),
+				AttributeMatchingModel: types.AttributeMatchingModel("ONE_TO_ONE"),
+				RecordMatchingModel:    types.RecordMatchingModel("ONE_SOURCE_TO_ONE_TARGET"),
+			},
+			ProviderProperties: &types.ProviderProperties{
+				ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
+				ProviderConfiguration: document.NewLazyDocument("__Document__"),
+				IntermediateSourceConfiguration: &types.IntermediateSourceConfiguration{
+					IntermediateS3Path: ptr.String("__IntermediateS3Path__"),
+				},
+			},
+		},
+		IncrementalRunConfig: &types.IdMappingIncrementalRunConfig{
+			IncrementalRunType: types.IdMappingIncrementalRunType("ON_DEMAND"),
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -300,7 +384,7 @@ func TestCheckResponseSnapshot_CreateIdNamespace(t *testing.T) {
 				},
 				ProviderProperties: &types.NamespaceProviderProperties{
 					ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
-					ProviderConfiguration: nil,
+					ProviderConfiguration: document.NewLazyDocument("__Document__"),
 				},
 			},
 			{
@@ -334,7 +418,7 @@ func TestCheckResponseSnapshot_CreateIdNamespace(t *testing.T) {
 				},
 				ProviderProperties: &types.NamespaceProviderProperties{
 					ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
-					ProviderConfiguration: nil,
+					ProviderConfiguration: document.NewLazyDocument("__Document__"),
 				},
 			},
 		},
@@ -354,7 +438,95 @@ func TestCheckResponseSnapshot_CreateIdNamespace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIdNamespace(context.Background(), &CreateIdNamespaceInput{})
+	got, err := svc.CreateIdNamespace(context.Background(), &CreateIdNamespaceInput{
+		IdNamespaceName: ptr.String("__IdNamespaceName__"),
+		Description:     ptr.String("__Description__"),
+		InputSourceConfig: []types.IdNamespaceInputSource{
+			{
+				InputSourceARN: ptr.String("__InputSourceARN__"),
+				SchemaName:     ptr.String("__SchemaName__"),
+			},
+			{
+				InputSourceARN: ptr.String("__InputSourceARN__"),
+				SchemaName:     ptr.String("__SchemaName__"),
+			},
+		},
+		IdMappingWorkflowProperties: []types.IdNamespaceIdMappingWorkflowProperties{
+			{
+				IdMappingType: types.IdMappingType("PROVIDER"),
+				RuleBasedProperties: &types.NamespaceRuleBasedProperties{
+					Rules: []types.Rule{
+						{
+							RuleName: ptr.String("__RuleName__"),
+							MatchingKeys: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							RuleName: ptr.String("__RuleName__"),
+							MatchingKeys: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					RuleDefinitionTypes: []types.IdMappingWorkflowRuleDefinitionType{
+						types.IdMappingWorkflowRuleDefinitionType("SOURCE"),
+						types.IdMappingWorkflowRuleDefinitionType("SOURCE"),
+					},
+					AttributeMatchingModel: types.AttributeMatchingModel("ONE_TO_ONE"),
+					RecordMatchingModels: []types.RecordMatchingModel{
+						types.RecordMatchingModel("ONE_SOURCE_TO_ONE_TARGET"),
+						types.RecordMatchingModel("ONE_SOURCE_TO_ONE_TARGET"),
+					},
+				},
+				ProviderProperties: &types.NamespaceProviderProperties{
+					ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
+					ProviderConfiguration: document.NewLazyDocument("__Document__"),
+				},
+			},
+			{
+				IdMappingType: types.IdMappingType("PROVIDER"),
+				RuleBasedProperties: &types.NamespaceRuleBasedProperties{
+					Rules: []types.Rule{
+						{
+							RuleName: ptr.String("__RuleName__"),
+							MatchingKeys: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							RuleName: ptr.String("__RuleName__"),
+							MatchingKeys: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					RuleDefinitionTypes: []types.IdMappingWorkflowRuleDefinitionType{
+						types.IdMappingWorkflowRuleDefinitionType("SOURCE"),
+						types.IdMappingWorkflowRuleDefinitionType("SOURCE"),
+					},
+					AttributeMatchingModel: types.AttributeMatchingModel("ONE_TO_ONE"),
+					RecordMatchingModels: []types.RecordMatchingModel{
+						types.RecordMatchingModel("ONE_SOURCE_TO_ONE_TARGET"),
+						types.RecordMatchingModel("ONE_SOURCE_TO_ONE_TARGET"),
+					},
+				},
+				ProviderProperties: &types.NamespaceProviderProperties{
+					ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
+					ProviderConfiguration: document.NewLazyDocument("__Document__"),
+				},
+			},
+		},
+		Type:    types.IdNamespaceType("SOURCE"),
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -460,7 +632,7 @@ func TestCheckResponseSnapshot_CreateMatchingWorkflow(t *testing.T) {
 			EnableRealTimeMatching: ptr.Bool(true),
 			ProviderProperties: &types.ProviderProperties{
 				ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
-				ProviderConfiguration: nil,
+				ProviderConfiguration: document.NewLazyDocument("__Document__"),
 				IntermediateSourceConfiguration: &types.IntermediateSourceConfiguration{
 					IntermediateS3Path: ptr.String("__IntermediateS3Path__"),
 				},
@@ -479,7 +651,115 @@ func TestCheckResponseSnapshot_CreateMatchingWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMatchingWorkflow(context.Background(), &CreateMatchingWorkflowInput{})
+	got, err := svc.CreateMatchingWorkflow(context.Background(), &CreateMatchingWorkflowInput{
+		WorkflowName: ptr.String("__WorkflowName__"),
+		Description:  ptr.String("__Description__"),
+		InputSourceConfig: []types.InputSource{
+			{
+				InputSourceARN:     ptr.String("__InputSourceARN__"),
+				SchemaName:         ptr.String("__SchemaName__"),
+				ApplyNormalization: ptr.Bool(true),
+			},
+			{
+				InputSourceARN:     ptr.String("__InputSourceARN__"),
+				SchemaName:         ptr.String("__SchemaName__"),
+				ApplyNormalization: ptr.Bool(true),
+			},
+		},
+		OutputSourceConfig: []types.OutputSource{
+			{
+				KMSArn:       ptr.String("__KMSArn__"),
+				OutputS3Path: ptr.String("__OutputS3Path__"),
+				Output: []types.OutputAttribute{
+					{
+						Name:   ptr.String("__Name__"),
+						Hashed: ptr.Bool(true),
+					},
+					{
+						Name:   ptr.String("__Name__"),
+						Hashed: ptr.Bool(true),
+					},
+				},
+				ApplyNormalization: ptr.Bool(true),
+				CustomerProfilesIntegrationConfig: &types.CustomerProfilesIntegrationConfig{
+					DomainArn:     ptr.String("__DomainArn__"),
+					ObjectTypeArn: ptr.String("__ObjectTypeArn__"),
+				},
+			},
+			{
+				KMSArn:       ptr.String("__KMSArn__"),
+				OutputS3Path: ptr.String("__OutputS3Path__"),
+				Output: []types.OutputAttribute{
+					{
+						Name:   ptr.String("__Name__"),
+						Hashed: ptr.Bool(true),
+					},
+					{
+						Name:   ptr.String("__Name__"),
+						Hashed: ptr.Bool(true),
+					},
+				},
+				ApplyNormalization: ptr.Bool(true),
+				CustomerProfilesIntegrationConfig: &types.CustomerProfilesIntegrationConfig{
+					DomainArn:     ptr.String("__DomainArn__"),
+					ObjectTypeArn: ptr.String("__ObjectTypeArn__"),
+				},
+			},
+		},
+		ResolutionTechniques: &types.ResolutionTechniques{
+			ResolutionType: types.ResolutionType("RULE_MATCHING"),
+			RuleBasedProperties: &types.RuleBasedProperties{
+				Rules: []types.Rule{
+					{
+						RuleName: ptr.String("__RuleName__"),
+						MatchingKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						RuleName: ptr.String("__RuleName__"),
+						MatchingKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				AttributeMatchingModel: types.AttributeMatchingModel("ONE_TO_ONE"),
+				MatchPurpose:           types.MatchPurpose("IDENTIFIER_GENERATION"),
+			},
+			RuleConditionProperties: &types.RuleConditionProperties{
+				Rules: []types.RuleCondition{
+					{
+						RuleName:  ptr.String("__RuleName__"),
+						Condition: ptr.String("__Condition__"),
+					},
+					{
+						RuleName:  ptr.String("__RuleName__"),
+						Condition: ptr.String("__Condition__"),
+					},
+				},
+				MatchingConfig: &types.MatchingConfig{
+					EnableTransitiveMatching: ptr.Bool(true),
+				},
+			},
+			EnableRealTimeMatching: ptr.Bool(true),
+			ProviderProperties: &types.ProviderProperties{
+				ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
+				ProviderConfiguration: document.NewLazyDocument("__Document__"),
+				IntermediateSourceConfiguration: &types.IntermediateSourceConfiguration{
+					IntermediateS3Path: ptr.String("__IntermediateS3Path__"),
+				},
+			},
+		},
+		IncrementalRunConfig: &types.IncrementalRunConfig{
+			IncrementalRunType: types.IncrementalRunType("IMMEDIATE"),
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -520,7 +800,31 @@ func TestCheckResponseSnapshot_CreateSchemaMapping(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSchemaMapping(context.Background(), &CreateSchemaMappingInput{})
+	got, err := svc.CreateSchemaMapping(context.Background(), &CreateSchemaMappingInput{
+		SchemaName:  ptr.String("__SchemaName__"),
+		Description: ptr.String("__Description__"),
+		MappedInputFields: []types.SchemaInputAttribute{
+			{
+				FieldName: ptr.String("__FieldName__"),
+				Type:      types.SchemaAttributeType("NAME"),
+				GroupName: ptr.String("__GroupName__"),
+				MatchKey:  ptr.String("__MatchKey__"),
+				SubType:   ptr.String("__SubType__"),
+				Hashed:    ptr.Bool(true),
+			},
+			{
+				FieldName: ptr.String("__FieldName__"),
+				Type:      types.SchemaAttributeType("NAME"),
+				GroupName: ptr.String("__GroupName__"),
+				MatchKey:  ptr.String("__MatchKey__"),
+				SubType:   ptr.String("__SubType__"),
+				Hashed:    ptr.Bool(true),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -541,7 +845,9 @@ func TestCheckResponseSnapshot_DeleteIdMappingWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIdMappingWorkflow(context.Background(), &DeleteIdMappingWorkflowInput{})
+	got, err := svc.DeleteIdMappingWorkflow(context.Background(), &DeleteIdMappingWorkflowInput{
+		WorkflowName: ptr.String("__WorkflowName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -562,7 +868,9 @@ func TestCheckResponseSnapshot_DeleteIdNamespace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIdNamespace(context.Background(), &DeleteIdNamespaceInput{})
+	got, err := svc.DeleteIdNamespace(context.Background(), &DeleteIdNamespaceInput{
+		IdNamespaceName: ptr.String("__IdNamespaceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -583,7 +891,9 @@ func TestCheckResponseSnapshot_DeleteMatchingWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMatchingWorkflow(context.Background(), &DeleteMatchingWorkflowInput{})
+	got, err := svc.DeleteMatchingWorkflow(context.Background(), &DeleteMatchingWorkflowInput{
+		WorkflowName: ptr.String("__WorkflowName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -606,7 +916,10 @@ func TestCheckResponseSnapshot_DeletePolicyStatement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePolicyStatement(context.Background(), &DeletePolicyStatementInput{})
+	got, err := svc.DeletePolicyStatement(context.Background(), &DeletePolicyStatementInput{
+		Arn:         ptr.String("__Arn__"),
+		StatementId: ptr.String("__StatementId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -627,7 +940,9 @@ func TestCheckResponseSnapshot_DeleteSchemaMapping(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSchemaMapping(context.Background(), &DeleteSchemaMappingInput{})
+	got, err := svc.DeleteSchemaMapping(context.Background(), &DeleteSchemaMappingInput{
+		SchemaName: ptr.String("__SchemaName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -689,7 +1004,26 @@ func TestCheckResponseSnapshot_GenerateMatchId(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GenerateMatchId(context.Background(), &GenerateMatchIdInput{})
+	got, err := svc.GenerateMatchId(context.Background(), &GenerateMatchIdInput{
+		WorkflowName: ptr.String("__WorkflowName__"),
+		Records: []types.Record{
+			{
+				InputSourceARN: ptr.String("__InputSourceARN__"),
+				UniqueId:       ptr.String("__UniqueId__"),
+				RecordAttributeMap: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				InputSourceARN: ptr.String("__InputSourceARN__"),
+				UniqueId:       ptr.String("__UniqueId__"),
+				RecordAttributeMap: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		ProcessingType: types.ProcessingType("CONSISTENT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -746,7 +1080,10 @@ func TestCheckResponseSnapshot_GetIdMappingJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIdMappingJob(context.Background(), &GetIdMappingJobInput{})
+	got, err := svc.GetIdMappingJob(context.Background(), &GetIdMappingJobInput{
+		WorkflowName: ptr.String("__WorkflowName__"),
+		JobId:        ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -807,7 +1144,7 @@ func TestCheckResponseSnapshot_GetIdMappingWorkflow(t *testing.T) {
 			},
 			ProviderProperties: &types.ProviderProperties{
 				ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
-				ProviderConfiguration: nil,
+				ProviderConfiguration: document.NewLazyDocument("__Document__"),
 				IntermediateSourceConfiguration: &types.IntermediateSourceConfiguration{
 					IntermediateS3Path: ptr.String("__IntermediateS3Path__"),
 				},
@@ -831,7 +1168,9 @@ func TestCheckResponseSnapshot_GetIdMappingWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIdMappingWorkflow(context.Background(), &GetIdMappingWorkflowInput{})
+	got, err := svc.GetIdMappingWorkflow(context.Background(), &GetIdMappingWorkflowInput{
+		WorkflowName: ptr.String("__WorkflowName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -887,7 +1226,7 @@ func TestCheckResponseSnapshot_GetIdNamespace(t *testing.T) {
 				},
 				ProviderProperties: &types.NamespaceProviderProperties{
 					ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
-					ProviderConfiguration: nil,
+					ProviderConfiguration: document.NewLazyDocument("__Document__"),
 				},
 			},
 			{
@@ -921,7 +1260,7 @@ func TestCheckResponseSnapshot_GetIdNamespace(t *testing.T) {
 				},
 				ProviderProperties: &types.NamespaceProviderProperties{
 					ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
-					ProviderConfiguration: nil,
+					ProviderConfiguration: document.NewLazyDocument("__Document__"),
 				},
 			},
 		},
@@ -941,7 +1280,9 @@ func TestCheckResponseSnapshot_GetIdNamespace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIdNamespace(context.Background(), &GetIdNamespaceInput{})
+	got, err := svc.GetIdNamespace(context.Background(), &GetIdNamespaceInput{
+		IdNamespaceName: ptr.String("__IdNamespaceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -963,7 +1304,13 @@ func TestCheckResponseSnapshot_GetMatchId(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMatchId(context.Background(), &GetMatchIdInput{})
+	got, err := svc.GetMatchId(context.Background(), &GetMatchIdInput{
+		WorkflowName: ptr.String("__WorkflowName__"),
+		Record: map[string]string{
+			"key0": "__Value__",
+		},
+		ApplyNormalization: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1009,7 +1356,10 @@ func TestCheckResponseSnapshot_GetMatchingJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMatchingJob(context.Background(), &GetMatchingJobInput{})
+	got, err := svc.GetMatchingJob(context.Background(), &GetMatchingJobInput{
+		WorkflowName: ptr.String("__WorkflowName__"),
+		JobId:        ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1115,7 +1465,7 @@ func TestCheckResponseSnapshot_GetMatchingWorkflow(t *testing.T) {
 			EnableRealTimeMatching: ptr.Bool(true),
 			ProviderProperties: &types.ProviderProperties{
 				ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
-				ProviderConfiguration: nil,
+				ProviderConfiguration: document.NewLazyDocument("__Document__"),
 				IntermediateSourceConfiguration: &types.IntermediateSourceConfiguration{
 					IntermediateS3Path: ptr.String("__IntermediateS3Path__"),
 				},
@@ -1139,7 +1489,9 @@ func TestCheckResponseSnapshot_GetMatchingWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMatchingWorkflow(context.Background(), &GetMatchingWorkflowInput{})
+	got, err := svc.GetMatchingWorkflow(context.Background(), &GetMatchingWorkflowInput{
+		WorkflowName: ptr.String("__WorkflowName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1162,7 +1514,9 @@ func TestCheckResponseSnapshot_GetPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPolicy(context.Background(), &GetPolicyInput{})
+	got, err := svc.GetPolicy(context.Background(), &GetPolicyInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1178,13 +1532,13 @@ func TestCheckResponseSnapshot_GetProviderService(t *testing.T) {
 		ProviderServiceDisplayName:      ptr.String("__ProviderServiceDisplayName__"),
 		ProviderServiceType:             types.ServiceType("ASSIGNMENT"),
 		ProviderServiceArn:              ptr.String("__ProviderServiceArn__"),
-		ProviderConfigurationDefinition: nil,
+		ProviderConfigurationDefinition: document.NewLazyDocument("__Document__"),
 		ProviderIdNameSpaceConfiguration: &types.ProviderIdNameSpaceConfiguration{
 			Description:                           ptr.String("__Description__"),
-			ProviderTargetConfigurationDefinition: nil,
-			ProviderSourceConfigurationDefinition: nil,
+			ProviderTargetConfigurationDefinition: document.NewLazyDocument("__Document__"),
+			ProviderSourceConfigurationDefinition: document.NewLazyDocument("__Document__"),
 		},
-		ProviderJobConfiguration: nil,
+		ProviderJobConfiguration: document.NewLazyDocument("__Document__"),
 		ProviderEndpointConfiguration: &types.ProviderEndpointConfigurationMemberMarketplaceConfiguration{
 			Value: types.ProviderMarketplaceConfiguration{
 				DataSetId:  ptr.String("__DataSetId__"),
@@ -1194,7 +1548,7 @@ func TestCheckResponseSnapshot_GetProviderService(t *testing.T) {
 			},
 		},
 		AnonymizedOutput:               ptr.Bool(true),
-		ProviderEntityOutputDefinition: nil,
+		ProviderEntityOutputDefinition: document.NewLazyDocument("__Document__"),
 		ProviderIntermediateDataAccessConfiguration: &types.ProviderIntermediateDataAccessConfiguration{
 			AwsAccountIds: []string{
 				"__Member__",
@@ -1240,7 +1594,10 @@ func TestCheckResponseSnapshot_GetProviderService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProviderService(context.Background(), &GetProviderServiceInput{})
+	got, err := svc.GetProviderService(context.Background(), &GetProviderServiceInput{
+		ProviderName:        ptr.String("__ProviderName__"),
+		ProviderServiceName: ptr.String("__ProviderServiceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1287,7 +1644,9 @@ func TestCheckResponseSnapshot_GetSchemaMapping(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSchemaMapping(context.Background(), &GetSchemaMappingInput{})
+	got, err := svc.GetSchemaMapping(context.Background(), &GetSchemaMappingInput{
+		SchemaName: ptr.String("__SchemaName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1322,7 +1681,11 @@ func TestCheckResponseSnapshot_ListIdMappingJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIdMappingJobs(context.Background(), &ListIdMappingJobsInput{})
+	got, err := svc.ListIdMappingJobs(context.Background(), &ListIdMappingJobsInput{
+		WorkflowName: ptr.String("__WorkflowName__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1357,7 +1720,10 @@ func TestCheckResponseSnapshot_ListIdMappingWorkflows(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIdMappingWorkflows(context.Background(), &ListIdMappingWorkflowsInput{})
+	got, err := svc.ListIdMappingWorkflows(context.Background(), &ListIdMappingWorkflowsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1412,7 +1778,10 @@ func TestCheckResponseSnapshot_ListIdNamespaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIdNamespaces(context.Background(), &ListIdNamespacesInput{})
+	got, err := svc.ListIdNamespaces(context.Background(), &ListIdNamespacesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1447,7 +1816,11 @@ func TestCheckResponseSnapshot_ListMatchingJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMatchingJobs(context.Background(), &ListMatchingJobsInput{})
+	got, err := svc.ListMatchingJobs(context.Background(), &ListMatchingJobsInput{
+		WorkflowName: ptr.String("__WorkflowName__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1484,7 +1857,10 @@ func TestCheckResponseSnapshot_ListMatchingWorkflows(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMatchingWorkflows(context.Background(), &ListMatchingWorkflowsInput{})
+	got, err := svc.ListMatchingWorkflows(context.Background(), &ListMatchingWorkflowsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1521,7 +1897,11 @@ func TestCheckResponseSnapshot_ListProviderServices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProviderServices(context.Background(), &ListProviderServicesInput{})
+	got, err := svc.ListProviderServices(context.Background(), &ListProviderServicesInput{
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		ProviderName: ptr.String("__ProviderName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1558,7 +1938,10 @@ func TestCheckResponseSnapshot_ListSchemaMappings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSchemaMappings(context.Background(), &ListSchemaMappingsInput{})
+	got, err := svc.ListSchemaMappings(context.Background(), &ListSchemaMappingsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1581,7 +1964,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1604,7 +1989,11 @@ func TestCheckResponseSnapshot_PutPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutPolicy(context.Background(), &PutPolicyInput{})
+	got, err := svc.PutPolicy(context.Background(), &PutPolicyInput{
+		Arn:    ptr.String("__Arn__"),
+		Token:  ptr.String("__Token__"),
+		Policy: ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1638,7 +2027,22 @@ func TestCheckResponseSnapshot_StartIdMappingJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartIdMappingJob(context.Background(), &StartIdMappingJobInput{})
+	got, err := svc.StartIdMappingJob(context.Background(), &StartIdMappingJobInput{
+		WorkflowName: ptr.String("__WorkflowName__"),
+		OutputSourceConfig: []types.IdMappingJobOutputSource{
+			{
+				RoleArn:      ptr.String("__RoleArn__"),
+				OutputS3Path: ptr.String("__OutputS3Path__"),
+				KMSArn:       ptr.String("__KMSArn__"),
+			},
+			{
+				RoleArn:      ptr.String("__RoleArn__"),
+				OutputS3Path: ptr.String("__OutputS3Path__"),
+				KMSArn:       ptr.String("__KMSArn__"),
+			},
+		},
+		JobType: types.JobType("BATCH"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1659,7 +2063,9 @@ func TestCheckResponseSnapshot_StartMatchingJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMatchingJob(context.Background(), &StartMatchingJobInput{})
+	got, err := svc.StartMatchingJob(context.Background(), &StartMatchingJobInput{
+		WorkflowName: ptr.String("__WorkflowName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1678,7 +2084,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1697,7 +2108,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1758,7 +2175,7 @@ func TestCheckResponseSnapshot_UpdateIdMappingWorkflow(t *testing.T) {
 			},
 			ProviderProperties: &types.ProviderProperties{
 				ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
-				ProviderConfiguration: nil,
+				ProviderConfiguration: document.NewLazyDocument("__Document__"),
 				IntermediateSourceConfiguration: &types.IntermediateSourceConfiguration{
 					IntermediateS3Path: ptr.String("__IntermediateS3Path__"),
 				},
@@ -1777,7 +2194,67 @@ func TestCheckResponseSnapshot_UpdateIdMappingWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIdMappingWorkflow(context.Background(), &UpdateIdMappingWorkflowInput{})
+	got, err := svc.UpdateIdMappingWorkflow(context.Background(), &UpdateIdMappingWorkflowInput{
+		WorkflowName: ptr.String("__WorkflowName__"),
+		Description:  ptr.String("__Description__"),
+		InputSourceConfig: []types.IdMappingWorkflowInputSource{
+			{
+				InputSourceARN: ptr.String("__InputSourceARN__"),
+				SchemaName:     ptr.String("__SchemaName__"),
+				Type:           types.IdNamespaceType("SOURCE"),
+			},
+			{
+				InputSourceARN: ptr.String("__InputSourceARN__"),
+				SchemaName:     ptr.String("__SchemaName__"),
+				Type:           types.IdNamespaceType("SOURCE"),
+			},
+		},
+		OutputSourceConfig: []types.IdMappingWorkflowOutputSource{
+			{
+				KMSArn:       ptr.String("__KMSArn__"),
+				OutputS3Path: ptr.String("__OutputS3Path__"),
+			},
+			{
+				KMSArn:       ptr.String("__KMSArn__"),
+				OutputS3Path: ptr.String("__OutputS3Path__"),
+			},
+		},
+		IdMappingTechniques: &types.IdMappingTechniques{
+			IdMappingType: types.IdMappingType("PROVIDER"),
+			RuleBasedProperties: &types.IdMappingRuleBasedProperties{
+				Rules: []types.Rule{
+					{
+						RuleName: ptr.String("__RuleName__"),
+						MatchingKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						RuleName: ptr.String("__RuleName__"),
+						MatchingKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				RuleDefinitionType:     types.IdMappingWorkflowRuleDefinitionType("SOURCE"),
+				AttributeMatchingModel: types.AttributeMatchingModel("ONE_TO_ONE"),
+				RecordMatchingModel:    types.RecordMatchingModel("ONE_SOURCE_TO_ONE_TARGET"),
+			},
+			ProviderProperties: &types.ProviderProperties{
+				ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
+				ProviderConfiguration: document.NewLazyDocument("__Document__"),
+				IntermediateSourceConfiguration: &types.IntermediateSourceConfiguration{
+					IntermediateS3Path: ptr.String("__IntermediateS3Path__"),
+				},
+			},
+		},
+		IncrementalRunConfig: &types.IdMappingIncrementalRunConfig{
+			IncrementalRunType: types.IdMappingIncrementalRunType("ON_DEMAND"),
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1833,7 +2310,7 @@ func TestCheckResponseSnapshot_UpdateIdNamespace(t *testing.T) {
 				},
 				ProviderProperties: &types.NamespaceProviderProperties{
 					ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
-					ProviderConfiguration: nil,
+					ProviderConfiguration: document.NewLazyDocument("__Document__"),
 				},
 			},
 			{
@@ -1867,7 +2344,7 @@ func TestCheckResponseSnapshot_UpdateIdNamespace(t *testing.T) {
 				},
 				ProviderProperties: &types.NamespaceProviderProperties{
 					ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
-					ProviderConfiguration: nil,
+					ProviderConfiguration: document.NewLazyDocument("__Document__"),
 				},
 			},
 		},
@@ -1884,7 +2361,91 @@ func TestCheckResponseSnapshot_UpdateIdNamespace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIdNamespace(context.Background(), &UpdateIdNamespaceInput{})
+	got, err := svc.UpdateIdNamespace(context.Background(), &UpdateIdNamespaceInput{
+		IdNamespaceName: ptr.String("__IdNamespaceName__"),
+		Description:     ptr.String("__Description__"),
+		InputSourceConfig: []types.IdNamespaceInputSource{
+			{
+				InputSourceARN: ptr.String("__InputSourceARN__"),
+				SchemaName:     ptr.String("__SchemaName__"),
+			},
+			{
+				InputSourceARN: ptr.String("__InputSourceARN__"),
+				SchemaName:     ptr.String("__SchemaName__"),
+			},
+		},
+		IdMappingWorkflowProperties: []types.IdNamespaceIdMappingWorkflowProperties{
+			{
+				IdMappingType: types.IdMappingType("PROVIDER"),
+				RuleBasedProperties: &types.NamespaceRuleBasedProperties{
+					Rules: []types.Rule{
+						{
+							RuleName: ptr.String("__RuleName__"),
+							MatchingKeys: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							RuleName: ptr.String("__RuleName__"),
+							MatchingKeys: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					RuleDefinitionTypes: []types.IdMappingWorkflowRuleDefinitionType{
+						types.IdMappingWorkflowRuleDefinitionType("SOURCE"),
+						types.IdMappingWorkflowRuleDefinitionType("SOURCE"),
+					},
+					AttributeMatchingModel: types.AttributeMatchingModel("ONE_TO_ONE"),
+					RecordMatchingModels: []types.RecordMatchingModel{
+						types.RecordMatchingModel("ONE_SOURCE_TO_ONE_TARGET"),
+						types.RecordMatchingModel("ONE_SOURCE_TO_ONE_TARGET"),
+					},
+				},
+				ProviderProperties: &types.NamespaceProviderProperties{
+					ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
+					ProviderConfiguration: document.NewLazyDocument("__Document__"),
+				},
+			},
+			{
+				IdMappingType: types.IdMappingType("PROVIDER"),
+				RuleBasedProperties: &types.NamespaceRuleBasedProperties{
+					Rules: []types.Rule{
+						{
+							RuleName: ptr.String("__RuleName__"),
+							MatchingKeys: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							RuleName: ptr.String("__RuleName__"),
+							MatchingKeys: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					RuleDefinitionTypes: []types.IdMappingWorkflowRuleDefinitionType{
+						types.IdMappingWorkflowRuleDefinitionType("SOURCE"),
+						types.IdMappingWorkflowRuleDefinitionType("SOURCE"),
+					},
+					AttributeMatchingModel: types.AttributeMatchingModel("ONE_TO_ONE"),
+					RecordMatchingModels: []types.RecordMatchingModel{
+						types.RecordMatchingModel("ONE_SOURCE_TO_ONE_TARGET"),
+						types.RecordMatchingModel("ONE_SOURCE_TO_ONE_TARGET"),
+					},
+				},
+				ProviderProperties: &types.NamespaceProviderProperties{
+					ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
+					ProviderConfiguration: document.NewLazyDocument("__Document__"),
+				},
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1989,7 +2550,7 @@ func TestCheckResponseSnapshot_UpdateMatchingWorkflow(t *testing.T) {
 			EnableRealTimeMatching: ptr.Bool(true),
 			ProviderProperties: &types.ProviderProperties{
 				ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
-				ProviderConfiguration: nil,
+				ProviderConfiguration: document.NewLazyDocument("__Document__"),
 				IntermediateSourceConfiguration: &types.IntermediateSourceConfiguration{
 					IntermediateS3Path: ptr.String("__IntermediateS3Path__"),
 				},
@@ -2008,7 +2569,112 @@ func TestCheckResponseSnapshot_UpdateMatchingWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMatchingWorkflow(context.Background(), &UpdateMatchingWorkflowInput{})
+	got, err := svc.UpdateMatchingWorkflow(context.Background(), &UpdateMatchingWorkflowInput{
+		WorkflowName: ptr.String("__WorkflowName__"),
+		Description:  ptr.String("__Description__"),
+		InputSourceConfig: []types.InputSource{
+			{
+				InputSourceARN:     ptr.String("__InputSourceARN__"),
+				SchemaName:         ptr.String("__SchemaName__"),
+				ApplyNormalization: ptr.Bool(true),
+			},
+			{
+				InputSourceARN:     ptr.String("__InputSourceARN__"),
+				SchemaName:         ptr.String("__SchemaName__"),
+				ApplyNormalization: ptr.Bool(true),
+			},
+		},
+		OutputSourceConfig: []types.OutputSource{
+			{
+				KMSArn:       ptr.String("__KMSArn__"),
+				OutputS3Path: ptr.String("__OutputS3Path__"),
+				Output: []types.OutputAttribute{
+					{
+						Name:   ptr.String("__Name__"),
+						Hashed: ptr.Bool(true),
+					},
+					{
+						Name:   ptr.String("__Name__"),
+						Hashed: ptr.Bool(true),
+					},
+				},
+				ApplyNormalization: ptr.Bool(true),
+				CustomerProfilesIntegrationConfig: &types.CustomerProfilesIntegrationConfig{
+					DomainArn:     ptr.String("__DomainArn__"),
+					ObjectTypeArn: ptr.String("__ObjectTypeArn__"),
+				},
+			},
+			{
+				KMSArn:       ptr.String("__KMSArn__"),
+				OutputS3Path: ptr.String("__OutputS3Path__"),
+				Output: []types.OutputAttribute{
+					{
+						Name:   ptr.String("__Name__"),
+						Hashed: ptr.Bool(true),
+					},
+					{
+						Name:   ptr.String("__Name__"),
+						Hashed: ptr.Bool(true),
+					},
+				},
+				ApplyNormalization: ptr.Bool(true),
+				CustomerProfilesIntegrationConfig: &types.CustomerProfilesIntegrationConfig{
+					DomainArn:     ptr.String("__DomainArn__"),
+					ObjectTypeArn: ptr.String("__ObjectTypeArn__"),
+				},
+			},
+		},
+		ResolutionTechniques: &types.ResolutionTechniques{
+			ResolutionType: types.ResolutionType("RULE_MATCHING"),
+			RuleBasedProperties: &types.RuleBasedProperties{
+				Rules: []types.Rule{
+					{
+						RuleName: ptr.String("__RuleName__"),
+						MatchingKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						RuleName: ptr.String("__RuleName__"),
+						MatchingKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				AttributeMatchingModel: types.AttributeMatchingModel("ONE_TO_ONE"),
+				MatchPurpose:           types.MatchPurpose("IDENTIFIER_GENERATION"),
+			},
+			RuleConditionProperties: &types.RuleConditionProperties{
+				Rules: []types.RuleCondition{
+					{
+						RuleName:  ptr.String("__RuleName__"),
+						Condition: ptr.String("__Condition__"),
+					},
+					{
+						RuleName:  ptr.String("__RuleName__"),
+						Condition: ptr.String("__Condition__"),
+					},
+				},
+				MatchingConfig: &types.MatchingConfig{
+					EnableTransitiveMatching: ptr.Bool(true),
+				},
+			},
+			EnableRealTimeMatching: ptr.Bool(true),
+			ProviderProperties: &types.ProviderProperties{
+				ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
+				ProviderConfiguration: document.NewLazyDocument("__Document__"),
+				IntermediateSourceConfiguration: &types.IntermediateSourceConfiguration{
+					IntermediateS3Path: ptr.String("__IntermediateS3Path__"),
+				},
+			},
+		},
+		IncrementalRunConfig: &types.IncrementalRunConfig{
+			IncrementalRunType: types.IncrementalRunType("IMMEDIATE"),
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2049,7 +2715,28 @@ func TestCheckResponseSnapshot_UpdateSchemaMapping(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSchemaMapping(context.Background(), &UpdateSchemaMappingInput{})
+	got, err := svc.UpdateSchemaMapping(context.Background(), &UpdateSchemaMappingInput{
+		SchemaName:  ptr.String("__SchemaName__"),
+		Description: ptr.String("__Description__"),
+		MappedInputFields: []types.SchemaInputAttribute{
+			{
+				FieldName: ptr.String("__FieldName__"),
+				Type:      types.SchemaAttributeType("NAME"),
+				GroupName: ptr.String("__GroupName__"),
+				MatchKey:  ptr.String("__MatchKey__"),
+				SubType:   ptr.String("__SubType__"),
+				Hashed:    ptr.Bool(true),
+			},
+			{
+				FieldName: ptr.String("__FieldName__"),
+				Type:      types.SchemaAttributeType("NAME"),
+				GroupName: ptr.String("__GroupName__"),
+				MatchKey:  ptr.String("__MatchKey__"),
+				SubType:   ptr.String("__SubType__"),
+				Hashed:    ptr.Bool(true),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2070,7 +2757,20 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddPolicyStatement(context.Background(), &AddPolicyStatementInput{})
+	_, opErr := svc.AddPolicyStatement(context.Background(), &AddPolicyStatementInput{
+		Arn:         ptr.String("__Arn__"),
+		StatementId: ptr.String("__StatementId__"),
+		Effect:      types.StatementEffect("Allow"),
+		Action: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Principal: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Condition: ptr.String("__Condition__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2095,7 +2795,20 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddPolicyStatement(context.Background(), &AddPolicyStatementInput{})
+	_, opErr := svc.AddPolicyStatement(context.Background(), &AddPolicyStatementInput{
+		Arn:         ptr.String("__Arn__"),
+		StatementId: ptr.String("__StatementId__"),
+		Effect:      types.StatementEffect("Allow"),
+		Action: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Principal: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Condition: ptr.String("__Condition__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2122,7 +2835,70 @@ func TestCheckResponseSnapshot_Error_ExceedsLimitException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateIdMappingWorkflow(context.Background(), &CreateIdMappingWorkflowInput{})
+	_, opErr := svc.CreateIdMappingWorkflow(context.Background(), &CreateIdMappingWorkflowInput{
+		WorkflowName: ptr.String("__WorkflowName__"),
+		Description:  ptr.String("__Description__"),
+		InputSourceConfig: []types.IdMappingWorkflowInputSource{
+			{
+				InputSourceARN: ptr.String("__InputSourceARN__"),
+				SchemaName:     ptr.String("__SchemaName__"),
+				Type:           types.IdNamespaceType("SOURCE"),
+			},
+			{
+				InputSourceARN: ptr.String("__InputSourceARN__"),
+				SchemaName:     ptr.String("__SchemaName__"),
+				Type:           types.IdNamespaceType("SOURCE"),
+			},
+		},
+		OutputSourceConfig: []types.IdMappingWorkflowOutputSource{
+			{
+				KMSArn:       ptr.String("__KMSArn__"),
+				OutputS3Path: ptr.String("__OutputS3Path__"),
+			},
+			{
+				KMSArn:       ptr.String("__KMSArn__"),
+				OutputS3Path: ptr.String("__OutputS3Path__"),
+			},
+		},
+		IdMappingTechniques: &types.IdMappingTechniques{
+			IdMappingType: types.IdMappingType("PROVIDER"),
+			RuleBasedProperties: &types.IdMappingRuleBasedProperties{
+				Rules: []types.Rule{
+					{
+						RuleName: ptr.String("__RuleName__"),
+						MatchingKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						RuleName: ptr.String("__RuleName__"),
+						MatchingKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				RuleDefinitionType:     types.IdMappingWorkflowRuleDefinitionType("SOURCE"),
+				AttributeMatchingModel: types.AttributeMatchingModel("ONE_TO_ONE"),
+				RecordMatchingModel:    types.RecordMatchingModel("ONE_SOURCE_TO_ONE_TARGET"),
+			},
+			ProviderProperties: &types.ProviderProperties{
+				ProviderServiceArn:    ptr.String("__ProviderServiceArn__"),
+				ProviderConfiguration: document.NewLazyDocument("__Document__"),
+				IntermediateSourceConfiguration: &types.IntermediateSourceConfiguration{
+					IntermediateS3Path: ptr.String("__IntermediateS3Path__"),
+				},
+			},
+		},
+		IncrementalRunConfig: &types.IdMappingIncrementalRunConfig{
+			IncrementalRunType: types.IdMappingIncrementalRunType("ON_DEMAND"),
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2147,7 +2923,20 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddPolicyStatement(context.Background(), &AddPolicyStatementInput{})
+	_, opErr := svc.AddPolicyStatement(context.Background(), &AddPolicyStatementInput{
+		Arn:         ptr.String("__Arn__"),
+		StatementId: ptr.String("__StatementId__"),
+		Effect:      types.StatementEffect("Allow"),
+		Action: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Principal: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Condition: ptr.String("__Condition__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2172,7 +2961,20 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddPolicyStatement(context.Background(), &AddPolicyStatementInput{})
+	_, opErr := svc.AddPolicyStatement(context.Background(), &AddPolicyStatementInput{
+		Arn:         ptr.String("__Arn__"),
+		StatementId: ptr.String("__StatementId__"),
+		Effect:      types.StatementEffect("Allow"),
+		Action: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Principal: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Condition: ptr.String("__Condition__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2197,7 +2999,20 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddPolicyStatement(context.Background(), &AddPolicyStatementInput{})
+	_, opErr := svc.AddPolicyStatement(context.Background(), &AddPolicyStatementInput{
+		Arn:         ptr.String("__Arn__"),
+		StatementId: ptr.String("__StatementId__"),
+		Effect:      types.StatementEffect("Allow"),
+		Action: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Principal: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Condition: ptr.String("__Condition__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2222,7 +3037,20 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddPolicyStatement(context.Background(), &AddPolicyStatementInput{})
+	_, opErr := svc.AddPolicyStatement(context.Background(), &AddPolicyStatementInput{
+		Arn:         ptr.String("__Arn__"),
+		StatementId: ptr.String("__StatementId__"),
+		Effect:      types.StatementEffect("Allow"),
+		Action: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Principal: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Condition: ptr.String("__Condition__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

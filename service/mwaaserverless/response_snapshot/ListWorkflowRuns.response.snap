@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonMWAAServerless.ListWorkflowRuns
+
+{"NextToken":"__NextToken__","WorkflowRuns":[{"RunDetailSummary":{"CreatedOn":"2000-01-01T00:00:00Z","EndedAt":"2000-01-01T00:00:00Z","StartedAt":"2000-01-01T00:00:00Z","Status":"STARTING"},"RunId":"__RunId__","RunType":"ON_DEMAND","WorkflowArn":"__WorkflowArn__","WorkflowVersion":"__WorkflowVersion__"},{"RunDetailSummary":{"CreatedOn":"2000-01-01T00:00:00Z","EndedAt":"2000-01-01T00:00:00Z","StartedAt":"2000-01-01T00:00:00Z","Status":"STARTING"},"RunId":"__RunId__","RunType":"ON_DEMAND","WorkflowArn":"__WorkflowArn__","WorkflowVersion":"__WorkflowVersion__"}]}

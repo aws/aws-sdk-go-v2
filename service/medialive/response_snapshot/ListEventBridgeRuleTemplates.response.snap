@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"eventBridgeRuleTemplates":[{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","description":"__Description__","eventTargetCount":1,"eventType":"MEDIALIVE_MULTIPLEX_ALERT","groupId":"__GroupId__","id":"__Id__","modifiedAt":"2000-01-01T00:00:00Z","name":"__Name__","tags":{"key0":"__Value__"}},{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","description":"__Description__","eventTargetCount":1,"eventType":"MEDIALIVE_MULTIPLEX_ALERT","groupId":"__GroupId__","id":"__Id__","modifiedAt":"2000-01-01T00:00:00Z","name":"__Name__","tags":{"key0":"__Value__"}}],"nextToken":"__NextToken__"}

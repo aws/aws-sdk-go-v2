@@ -118,7 +118,9 @@ func TestCheckResponseSnapshot_GetResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResource(context.Background(), &GetResourceInput{})
+	got, err := svc.GetResource(context.Background(), &GetResourceInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -128,7 +130,9 @@ func TestCheckResponseSnapshot_GetResource(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_GetStreamingResource(t *testing.T) {
-	want := &GetStreamingResourceOutput{}
+	want := &GetStreamingResourceOutput{
+		Body: io.NopCloser(bytes.NewReader([]byte("__Body__"))),
+	}
 	status, header, body, err := serdeRespReadSnapshot("GetStreamingResource.response")
 	if errors.Is(err, fs.ErrNotExist) {
 		t.Skip("no response snapshot fixture")
@@ -137,7 +141,9 @@ func TestCheckResponseSnapshot_GetStreamingResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStreamingResource(context.Background(), &GetStreamingResourceInput{})
+	got, err := svc.GetStreamingResource(context.Background(), &GetStreamingResourceInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -156,13 +162,19 @@ func TestCheckResponseSnapshot_PutCompressedData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutCompressedData(context.Background(), &PutCompressedDataInput{})
+	got, err := svc.PutCompressedData(context.Background(), &PutCompressedDataInput{
+		Data: ptr.String("__Data__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "PutCompressedData.response", err)
 	}
+}
+
+func TestCheckResponseSnapshot_SubscribeEvents(t *testing.T) {
+	t.Skip("event stream operation")
 }
 
 func TestCheckResponseSnapshot_Error_ResourceNotFound(t *testing.T) {
@@ -175,7 +187,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetResource(context.Background(), &GetResourceInput{})
+	_, opErr := svc.GetResource(context.Background(), &GetResourceInput{
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -41,7 +41,9 @@ func (v *DocumentTypeAsPayloadInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DocumentTypeAsPayloadInput) SerializeMembers(s smithy.ShapeSerializer) {
-	s.WriteDocument(schemas.DocumentTypeAsPayloadInputOutput_documentValue, &smithydocument.Opaque{Value: v.DocumentValue})
+	if v.DocumentValue != nil {
+		s.WriteDocument(schemas.DocumentTypeAsPayloadInputOutput_documentValue, &smithydocument.Opaque{Value: v.DocumentValue})
+	}
 }
 func (v *DocumentTypeAsPayloadInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DocumentTypeAsPayloadInputOutput, func(s *smithy.Schema) error {
@@ -76,7 +78,9 @@ func (v *DocumentTypeAsPayloadOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DocumentTypeAsPayloadOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	s.WriteDocument(schemas.DocumentTypeAsPayloadInputOutput_documentValue, &smithydocument.Opaque{Value: v.DocumentValue})
+	if v.DocumentValue != nil {
+		s.WriteDocument(schemas.DocumentTypeAsPayloadInputOutput_documentValue, &smithydocument.Opaque{Value: v.DocumentValue})
+	}
 }
 func (v *DocumentTypeAsPayloadOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DocumentTypeAsPayloadInputOutput, func(s *smithy.Schema) error {

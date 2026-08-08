@@ -129,7 +129,24 @@ func TestCheckResponseSnapshot_GetItem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetItem(context.Background(), &GetItemInput{})
+	got, err := svc.GetItem(context.Background(), &GetItemInput{
+		TableName: ptr.String("__TableName__"),
+		Key: map[string]types.AttributeValue{
+			"key0": &types.AttributeValueMemberS{
+				Value: "__AttributeValueMemberS__",
+			},
+		},
+		AttributesToGet: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ConsistentRead:         ptr.Bool(true),
+		ReturnConsumedCapacity: ptr.String("__ReturnConsumedCapacity__"),
+		ProjectionExpression:   ptr.String("__ProjectionExpression__"),
+		ExpressionAttributeNames: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -208,7 +225,72 @@ func TestCheckResponseSnapshot_GetMetricData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMetricData(context.Background(), &GetMetricDataInput{})
+	got, err := svc.GetMetricData(context.Background(), &GetMetricDataInput{
+		MetricDataQueries: []types.MetricDataQuery{
+			{
+				Id: ptr.String("__Id__"),
+				MetricStat: &types.MetricStat{
+					Metric: &types.Metric{
+						Namespace:  ptr.String("__Namespace__"),
+						MetricName: ptr.String("__MetricName__"),
+						Dimensions: []types.Dimension{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					Period: ptr.Int32(1),
+					Stat:   ptr.String("__Stat__"),
+					Unit:   types.StandardUnit("Seconds"),
+				},
+				Expression: ptr.String("__Expression__"),
+				Label:      ptr.String("__Label__"),
+				ReturnData: ptr.Bool(true),
+				Period:     ptr.Int32(1),
+				AccountId:  ptr.String("__AccountId__"),
+			},
+			{
+				Id: ptr.String("__Id__"),
+				MetricStat: &types.MetricStat{
+					Metric: &types.Metric{
+						Namespace:  ptr.String("__Namespace__"),
+						MetricName: ptr.String("__MetricName__"),
+						Dimensions: []types.Dimension{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					Period: ptr.Int32(1),
+					Stat:   ptr.String("__Stat__"),
+					Unit:   types.StandardUnit("Seconds"),
+				},
+				Expression: ptr.String("__Expression__"),
+				Label:      ptr.String("__Label__"),
+				ReturnData: ptr.Bool(true),
+				Period:     ptr.Int32(1),
+				AccountId:  ptr.String("__AccountId__"),
+			},
+		},
+		StartTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NextToken:     ptr.String("__NextToken__"),
+		ScanBy:        types.ScanBy("TimestampDescending"),
+		MaxDatapoints: ptr.Int32(1),
+		LabelOptions: &types.LabelOptions{
+			Timezone: ptr.String("__Timezone__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -271,7 +353,45 @@ func TestCheckResponseSnapshot_PutItem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutItem(context.Background(), &PutItemInput{})
+	got, err := svc.PutItem(context.Background(), &PutItemInput{
+		TableName: ptr.String("__TableName__"),
+		Item: map[string]types.AttributeValue{
+			"key0": &types.AttributeValueMemberS{
+				Value: "__AttributeValueMemberS__",
+			},
+		},
+		Expected: map[string]types.ExpectedAttributeValue{
+			"key0": {
+				Value: &types.AttributeValueMemberS{
+					Value: "__AttributeValueMemberS__",
+				},
+				Exists:             ptr.Bool(true),
+				ComparisonOperator: ptr.String("__ComparisonOperator__"),
+				AttributeValueList: []types.AttributeValue{
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+					&types.AttributeValueMemberS{
+						Value: "__AttributeValueMemberS__",
+					},
+				},
+			},
+		},
+		ReturnValues:                ptr.String("__ReturnValues__"),
+		ReturnConsumedCapacity:      ptr.String("__ReturnConsumedCapacity__"),
+		ReturnItemCollectionMetrics: ptr.String("__ReturnItemCollectionMetrics__"),
+		ConditionalOperator:         ptr.String("__ConditionalOperator__"),
+		ConditionExpression:         ptr.String("__ConditionExpression__"),
+		ExpressionAttributeNames: map[string]string{
+			"key0": "__Value__",
+		},
+		ExpressionAttributeValues: map[string]types.AttributeValue{
+			"key0": &types.AttributeValueMemberS{
+				Value: "__AttributeValueMemberS__",
+			},
+		},
+		ReturnValuesOnConditionCheckFailure: ptr.String("__ReturnValuesOnConditionCheckFailure__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -290,7 +410,224 @@ func TestCheckResponseSnapshot_PutMetricData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutMetricData(context.Background(), &PutMetricDataInput{})
+	got, err := svc.PutMetricData(context.Background(), &PutMetricDataInput{
+		Namespace: ptr.String("__Namespace__"),
+		MetricData: []types.MetricDatum{
+			{
+				MetricName: ptr.String("__MetricName__"),
+				Dimensions: []types.Dimension{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Value:     ptr.Float64(1.0),
+				StatisticValues: &types.StatisticSet{
+					SampleCount: ptr.Float64(1.0),
+					Sum:         ptr.Float64(1.0),
+					Minimum:     ptr.Float64(1.0),
+					Maximum:     ptr.Float64(1.0),
+				},
+				Values: []float64{
+					1.0,
+					1.0,
+				},
+				Counts: []float64{
+					1.0,
+					1.0,
+				},
+				Unit:              types.StandardUnit("Seconds"),
+				StorageResolution: ptr.Int32(1),
+			},
+			{
+				MetricName: ptr.String("__MetricName__"),
+				Dimensions: []types.Dimension{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Value:     ptr.Float64(1.0),
+				StatisticValues: &types.StatisticSet{
+					SampleCount: ptr.Float64(1.0),
+					Sum:         ptr.Float64(1.0),
+					Minimum:     ptr.Float64(1.0),
+					Maximum:     ptr.Float64(1.0),
+				},
+				Values: []float64{
+					1.0,
+					1.0,
+				},
+				Counts: []float64{
+					1.0,
+					1.0,
+				},
+				Unit:              types.StandardUnit("Seconds"),
+				StorageResolution: ptr.Int32(1),
+			},
+		},
+		EntityMetricData: []types.EntityMetricDatum{
+			{
+				Entity: &types.Entity{
+					KeyAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+					Attributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				MetricData: []types.MetricDatum{
+					{
+						MetricName: ptr.String("__MetricName__"),
+						Dimensions: []types.Dimension{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value:     ptr.Float64(1.0),
+						StatisticValues: &types.StatisticSet{
+							SampleCount: ptr.Float64(1.0),
+							Sum:         ptr.Float64(1.0),
+							Minimum:     ptr.Float64(1.0),
+							Maximum:     ptr.Float64(1.0),
+						},
+						Values: []float64{
+							1.0,
+							1.0,
+						},
+						Counts: []float64{
+							1.0,
+							1.0,
+						},
+						Unit:              types.StandardUnit("Seconds"),
+						StorageResolution: ptr.Int32(1),
+					},
+					{
+						MetricName: ptr.String("__MetricName__"),
+						Dimensions: []types.Dimension{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value:     ptr.Float64(1.0),
+						StatisticValues: &types.StatisticSet{
+							SampleCount: ptr.Float64(1.0),
+							Sum:         ptr.Float64(1.0),
+							Minimum:     ptr.Float64(1.0),
+							Maximum:     ptr.Float64(1.0),
+						},
+						Values: []float64{
+							1.0,
+							1.0,
+						},
+						Counts: []float64{
+							1.0,
+							1.0,
+						},
+						Unit:              types.StandardUnit("Seconds"),
+						StorageResolution: ptr.Int32(1),
+					},
+				},
+			},
+			{
+				Entity: &types.Entity{
+					KeyAttributes: map[string]string{
+						"key0": "__Value__",
+					},
+					Attributes: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				MetricData: []types.MetricDatum{
+					{
+						MetricName: ptr.String("__MetricName__"),
+						Dimensions: []types.Dimension{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value:     ptr.Float64(1.0),
+						StatisticValues: &types.StatisticSet{
+							SampleCount: ptr.Float64(1.0),
+							Sum:         ptr.Float64(1.0),
+							Minimum:     ptr.Float64(1.0),
+							Maximum:     ptr.Float64(1.0),
+						},
+						Values: []float64{
+							1.0,
+							1.0,
+						},
+						Counts: []float64{
+							1.0,
+							1.0,
+						},
+						Unit:              types.StandardUnit("Seconds"),
+						StorageResolution: ptr.Int32(1),
+					},
+					{
+						MetricName: ptr.String("__MetricName__"),
+						Dimensions: []types.Dimension{
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Name:  ptr.String("__Name__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+						Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Value:     ptr.Float64(1.0),
+						StatisticValues: &types.StatisticSet{
+							SampleCount: ptr.Float64(1.0),
+							Sum:         ptr.Float64(1.0),
+							Minimum:     ptr.Float64(1.0),
+							Maximum:     ptr.Float64(1.0),
+						},
+						Values: []float64{
+							1.0,
+							1.0,
+						},
+						Counts: []float64{
+							1.0,
+							1.0,
+						},
+						Unit:              types.StandardUnit("Seconds"),
+						StorageResolution: ptr.Int32(1),
+					},
+				},
+			},
+		},
+		StrictEntityValidation: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}

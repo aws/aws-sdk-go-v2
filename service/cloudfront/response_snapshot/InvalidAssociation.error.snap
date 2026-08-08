@@ -1,0 +1,4 @@
+409
+Content-Type: application/xml
+
+<ErrorResponse><Error><Code>InvalidAssociation</Code><Message>__Message__</Message></Error></ErrorResponse>

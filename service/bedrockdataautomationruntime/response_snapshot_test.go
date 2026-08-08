@@ -127,7 +127,9 @@ func TestCheckResponseSnapshot_GetDataAutomationStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataAutomationStatus(context.Background(), &GetDataAutomationStatusInput{})
+	got, err := svc.GetDataAutomationStatus(context.Background(), &GetDataAutomationStatusInput{
+		InvocationArn: ptr.String("__InvocationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -163,7 +165,38 @@ func TestCheckResponseSnapshot_InvokeDataAutomation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InvokeDataAutomation(context.Background(), &InvokeDataAutomationInput{})
+	got, err := svc.InvokeDataAutomation(context.Background(), &InvokeDataAutomationInput{
+		InputConfiguration: &types.SyncInputConfiguration{
+			Bytes: []byte("blob"),
+			S3Uri: ptr.String("__S3Uri__"),
+		},
+		DataAutomationConfiguration: &types.DataAutomationConfiguration{
+			DataAutomationProjectArn: ptr.String("__DataAutomationProjectArn__"),
+			Stage:                    types.DataAutomationStage("LIVE"),
+		},
+		Blueprints: []types.Blueprint{
+			{
+				BlueprintArn: ptr.String("__BlueprintArn__"),
+				Version:      ptr.String("__Version__"),
+				Stage:        types.BlueprintStage("DEVELOPMENT"),
+			},
+			{
+				BlueprintArn: ptr.String("__BlueprintArn__"),
+				Version:      ptr.String("__Version__"),
+				Stage:        types.BlueprintStage("DEVELOPMENT"),
+			},
+		},
+		DataAutomationProfileArn: ptr.String("__DataAutomationProfileArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			KmsEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		OutputConfiguration: &types.OutputConfiguration{
+			S3Uri: ptr.String("__S3Uri__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -184,7 +217,63 @@ func TestCheckResponseSnapshot_InvokeDataAutomationAsync(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InvokeDataAutomationAsync(context.Background(), &InvokeDataAutomationAsyncInput{})
+	got, err := svc.InvokeDataAutomationAsync(context.Background(), &InvokeDataAutomationAsyncInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		InputConfiguration: &types.InputConfiguration{
+			S3Uri: ptr.String("__S3Uri__"),
+			AssetProcessingConfiguration: &types.AssetProcessingConfiguration{
+				Video: &types.VideoAssetProcessingConfiguration{
+					SegmentConfiguration: &types.VideoSegmentConfigurationMemberTimestampSegment{
+						Value: types.TimestampSegment{
+							StartTimeMillis: ptr.Int64(1),
+							EndTimeMillis:   ptr.Int64(1),
+						},
+					},
+				},
+			},
+		},
+		OutputConfiguration: &types.OutputConfiguration{
+			S3Uri: ptr.String("__S3Uri__"),
+		},
+		DataAutomationConfiguration: &types.DataAutomationConfiguration{
+			DataAutomationProjectArn: ptr.String("__DataAutomationProjectArn__"),
+			Stage:                    types.DataAutomationStage("LIVE"),
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			KmsEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		NotificationConfiguration: &types.NotificationConfiguration{
+			EventBridgeConfiguration: &types.EventBridgeConfiguration{
+				EventBridgeEnabled: ptr.Bool(true),
+			},
+		},
+		Blueprints: []types.Blueprint{
+			{
+				BlueprintArn: ptr.String("__BlueprintArn__"),
+				Version:      ptr.String("__Version__"),
+				Stage:        types.BlueprintStage("DEVELOPMENT"),
+			},
+			{
+				BlueprintArn: ptr.String("__BlueprintArn__"),
+				Version:      ptr.String("__Version__"),
+				Stage:        types.BlueprintStage("DEVELOPMENT"),
+			},
+		},
+		DataAutomationProfileArn: ptr.String("__DataAutomationProfileArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -214,7 +303,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -233,7 +324,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -252,7 +355,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -273,7 +382,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetDataAutomationStatus(context.Background(), &GetDataAutomationStatusInput{})
+	_, opErr := svc.GetDataAutomationStatus(context.Background(), &GetDataAutomationStatusInput{
+		InvocationArn: ptr.String("__InvocationArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -298,7 +409,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetDataAutomationStatus(context.Background(), &GetDataAutomationStatusInput{})
+	_, opErr := svc.GetDataAutomationStatus(context.Background(), &GetDataAutomationStatusInput{
+		InvocationArn: ptr.String("__InvocationArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -323,7 +436,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetDataAutomationStatus(context.Background(), &GetDataAutomationStatusInput{})
+	_, opErr := svc.GetDataAutomationStatus(context.Background(), &GetDataAutomationStatusInput{
+		InvocationArn: ptr.String("__InvocationArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -348,7 +463,63 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.InvokeDataAutomationAsync(context.Background(), &InvokeDataAutomationAsyncInput{})
+	_, opErr := svc.InvokeDataAutomationAsync(context.Background(), &InvokeDataAutomationAsyncInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		InputConfiguration: &types.InputConfiguration{
+			S3Uri: ptr.String("__S3Uri__"),
+			AssetProcessingConfiguration: &types.AssetProcessingConfiguration{
+				Video: &types.VideoAssetProcessingConfiguration{
+					SegmentConfiguration: &types.VideoSegmentConfigurationMemberTimestampSegment{
+						Value: types.TimestampSegment{
+							StartTimeMillis: ptr.Int64(1),
+							EndTimeMillis:   ptr.Int64(1),
+						},
+					},
+				},
+			},
+		},
+		OutputConfiguration: &types.OutputConfiguration{
+			S3Uri: ptr.String("__S3Uri__"),
+		},
+		DataAutomationConfiguration: &types.DataAutomationConfiguration{
+			DataAutomationProjectArn: ptr.String("__DataAutomationProjectArn__"),
+			Stage:                    types.DataAutomationStage("LIVE"),
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			KmsEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		NotificationConfiguration: &types.NotificationConfiguration{
+			EventBridgeConfiguration: &types.EventBridgeConfiguration{
+				EventBridgeEnabled: ptr.Bool(true),
+			},
+		},
+		Blueprints: []types.Blueprint{
+			{
+				BlueprintArn: ptr.String("__BlueprintArn__"),
+				Version:      ptr.String("__Version__"),
+				Stage:        types.BlueprintStage("DEVELOPMENT"),
+			},
+			{
+				BlueprintArn: ptr.String("__BlueprintArn__"),
+				Version:      ptr.String("__Version__"),
+				Stage:        types.BlueprintStage("DEVELOPMENT"),
+			},
+		},
+		DataAutomationProfileArn: ptr.String("__DataAutomationProfileArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -373,7 +544,38 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.InvokeDataAutomation(context.Background(), &InvokeDataAutomationInput{})
+	_, opErr := svc.InvokeDataAutomation(context.Background(), &InvokeDataAutomationInput{
+		InputConfiguration: &types.SyncInputConfiguration{
+			Bytes: []byte("blob"),
+			S3Uri: ptr.String("__S3Uri__"),
+		},
+		DataAutomationConfiguration: &types.DataAutomationConfiguration{
+			DataAutomationProjectArn: ptr.String("__DataAutomationProjectArn__"),
+			Stage:                    types.DataAutomationStage("LIVE"),
+		},
+		Blueprints: []types.Blueprint{
+			{
+				BlueprintArn: ptr.String("__BlueprintArn__"),
+				Version:      ptr.String("__Version__"),
+				Stage:        types.BlueprintStage("DEVELOPMENT"),
+			},
+			{
+				BlueprintArn: ptr.String("__BlueprintArn__"),
+				Version:      ptr.String("__Version__"),
+				Stage:        types.BlueprintStage("DEVELOPMENT"),
+			},
+		},
+		DataAutomationProfileArn: ptr.String("__DataAutomationProfileArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			KmsEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		OutputConfiguration: &types.OutputConfiguration{
+			S3Uri: ptr.String("__S3Uri__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -398,7 +600,9 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetDataAutomationStatus(context.Background(), &GetDataAutomationStatusInput{})
+	_, opErr := svc.GetDataAutomationStatus(context.Background(), &GetDataAutomationStatusInput{
+		InvocationArn: ptr.String("__InvocationArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -423,7 +627,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetDataAutomationStatus(context.Background(), &GetDataAutomationStatusInput{})
+	_, opErr := svc.GetDataAutomationStatus(context.Background(), &GetDataAutomationStatusInput{
+		InvocationArn: ptr.String("__InvocationArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

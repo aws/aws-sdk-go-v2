@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.DescribeFeatureMetadata
+
+{"CreationTime":946684800,"Description":"__Description__","FeatureGroupArn":"__FeatureGroupArn__","FeatureGroupName":"__FeatureGroupName__","FeatureName":"__FeatureName__","FeatureType":"Integral","LastModifiedTime":946684800,"Parameters":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

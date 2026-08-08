@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"applications":[{"architecture":"ARM64","arn":"__Arn__","createdAt":946684800,"id":"__Id__","name":"__Name__","releaseLabel":"__ReleaseLabel__","state":"CREATING","stateDetails":"__StateDetails__","type":"__Type__","updatedAt":946684800},{"architecture":"ARM64","arn":"__Arn__","createdAt":946684800,"id":"__Id__","name":"__Name__","releaseLabel":"__ReleaseLabel__","state":"CREATING","stateDetails":"__StateDetails__","type":"__Type__","updatedAt":946684800}],"nextToken":"__NextToken__"}

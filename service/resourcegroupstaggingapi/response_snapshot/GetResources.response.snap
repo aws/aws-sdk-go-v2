@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: ResourceGroupsTaggingAPI_20170126.GetResources
+
+{"PaginationToken":"__PaginationToken__","ResourceTagMappingList":[{"ComplianceDetails":{"ComplianceStatus":true,"KeysWithNoncompliantValues":["__Member__","__Member__"],"MissingTagKeys":["__Member__","__Member__"],"NoncompliantKeys":["__Member__","__Member__"]},"ResourceARN":"__ResourceARN__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]},{"ComplianceDetails":{"ComplianceStatus":true,"KeysWithNoncompliantValues":["__Member__","__Member__"],"MissingTagKeys":["__Member__","__Member__"],"NoncompliantKeys":["__Member__","__Member__"]},"ResourceARN":"__ResourceARN__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}]}

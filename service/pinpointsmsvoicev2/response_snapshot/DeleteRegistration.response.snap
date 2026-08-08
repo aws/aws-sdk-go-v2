@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.DeleteRegistration
+
+{"AdditionalAttributes":{"key0":"__Value__"},"ApprovedVersionNumber":1,"CreatedTimestamp":946684800,"CurrentVersionNumber":1,"LatestDeniedVersionNumber":1,"RegistrationArn":"__RegistrationArn__","RegistrationId":"__RegistrationId__","RegistrationStatus":"CREATED","RegistrationType":"__RegistrationType__"}

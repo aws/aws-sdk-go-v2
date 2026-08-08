@@ -147,7 +147,12 @@ func TestCheckResponseSnapshot_AssociateExternalConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateExternalConnection(context.Background(), &AssociateExternalConnectionInput{})
+	got, err := svc.AssociateExternalConnection(context.Background(), &AssociateExternalConnectionInput{
+		Domain:             ptr.String("__Domain__"),
+		DomainOwner:        ptr.String("__DomainOwner__"),
+		Repository:         ptr.String("__Repository__"),
+		ExternalConnection: ptr.String("__ExternalConnection__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -179,7 +184,24 @@ func TestCheckResponseSnapshot_CopyPackageVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CopyPackageVersions(context.Background(), &CopyPackageVersionsInput{})
+	got, err := svc.CopyPackageVersions(context.Background(), &CopyPackageVersionsInput{
+		Domain:                ptr.String("__Domain__"),
+		DomainOwner:           ptr.String("__DomainOwner__"),
+		SourceRepository:      ptr.String("__SourceRepository__"),
+		DestinationRepository: ptr.String("__DestinationRepository__"),
+		Format:                types.PackageFormat("npm"),
+		Namespace:             ptr.String("__Namespace__"),
+		Package:               ptr.String("__Package__"),
+		Versions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		VersionRevisions: map[string]string{
+			"key0": "__Value__",
+		},
+		AllowOverwrite:      ptr.Bool(true),
+		IncludeFromUpstream: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -210,7 +232,20 @@ func TestCheckResponseSnapshot_CreateDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDomain(context.Background(), &CreateDomainInput{})
+	got, err := svc.CreateDomain(context.Background(), &CreateDomainInput{
+		Domain:        ptr.String("__Domain__"),
+		EncryptionKey: ptr.String("__EncryptionKey__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -256,7 +291,23 @@ func TestCheckResponseSnapshot_CreatePackageGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePackageGroup(context.Background(), &CreatePackageGroupInput{})
+	got, err := svc.CreatePackageGroup(context.Background(), &CreatePackageGroupInput{
+		Domain:       ptr.String("__Domain__"),
+		DomainOwner:  ptr.String("__DomainOwner__"),
+		PackageGroup: ptr.String("__PackageGroup__"),
+		ContactInfo:  ptr.String("__ContactInfo__"),
+		Description:  ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -305,7 +356,30 @@ func TestCheckResponseSnapshot_CreateRepository(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRepository(context.Background(), &CreateRepositoryInput{})
+	got, err := svc.CreateRepository(context.Background(), &CreateRepositoryInput{
+		Domain:      ptr.String("__Domain__"),
+		DomainOwner: ptr.String("__DomainOwner__"),
+		Repository:  ptr.String("__Repository__"),
+		Description: ptr.String("__Description__"),
+		Upstreams: []types.UpstreamRepository{
+			{
+				RepositoryName: ptr.String("__RepositoryName__"),
+			},
+			{
+				RepositoryName: ptr.String("__RepositoryName__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -336,7 +410,10 @@ func TestCheckResponseSnapshot_DeleteDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDomain(context.Background(), &DeleteDomainInput{})
+	got, err := svc.DeleteDomain(context.Background(), &DeleteDomainInput{
+		Domain:      ptr.String("__Domain__"),
+		DomainOwner: ptr.String("__DomainOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -361,7 +438,11 @@ func TestCheckResponseSnapshot_DeleteDomainPermissionsPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDomainPermissionsPolicy(context.Background(), &DeleteDomainPermissionsPolicyInput{})
+	got, err := svc.DeleteDomainPermissionsPolicy(context.Background(), &DeleteDomainPermissionsPolicyInput{
+		Domain:         ptr.String("__Domain__"),
+		DomainOwner:    ptr.String("__DomainOwner__"),
+		PolicyRevision: ptr.String("__PolicyRevision__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -392,7 +473,14 @@ func TestCheckResponseSnapshot_DeletePackage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePackage(context.Background(), &DeletePackageInput{})
+	got, err := svc.DeletePackage(context.Background(), &DeletePackageInput{
+		Domain:      ptr.String("__Domain__"),
+		DomainOwner: ptr.String("__DomainOwner__"),
+		Repository:  ptr.String("__Repository__"),
+		Format:      types.PackageFormat("npm"),
+		Namespace:   ptr.String("__Namespace__"),
+		Package:     ptr.String("__Package__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -438,7 +526,11 @@ func TestCheckResponseSnapshot_DeletePackageGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePackageGroup(context.Background(), &DeletePackageGroupInput{})
+	got, err := svc.DeletePackageGroup(context.Background(), &DeletePackageGroupInput{
+		Domain:       ptr.String("__Domain__"),
+		DomainOwner:  ptr.String("__DomainOwner__"),
+		PackageGroup: ptr.String("__PackageGroup__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -470,7 +562,19 @@ func TestCheckResponseSnapshot_DeletePackageVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePackageVersions(context.Background(), &DeletePackageVersionsInput{})
+	got, err := svc.DeletePackageVersions(context.Background(), &DeletePackageVersionsInput{
+		Domain:      ptr.String("__Domain__"),
+		DomainOwner: ptr.String("__DomainOwner__"),
+		Repository:  ptr.String("__Repository__"),
+		Format:      types.PackageFormat("npm"),
+		Namespace:   ptr.String("__Namespace__"),
+		Package:     ptr.String("__Package__"),
+		Versions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ExpectedStatus: types.PackageVersionStatus("Published"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -519,7 +623,11 @@ func TestCheckResponseSnapshot_DeleteRepository(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRepository(context.Background(), &DeleteRepositoryInput{})
+	got, err := svc.DeleteRepository(context.Background(), &DeleteRepositoryInput{
+		Domain:      ptr.String("__Domain__"),
+		DomainOwner: ptr.String("__DomainOwner__"),
+		Repository:  ptr.String("__Repository__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -544,7 +652,12 @@ func TestCheckResponseSnapshot_DeleteRepositoryPermissionsPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRepositoryPermissionsPolicy(context.Background(), &DeleteRepositoryPermissionsPolicyInput{})
+	got, err := svc.DeleteRepositoryPermissionsPolicy(context.Background(), &DeleteRepositoryPermissionsPolicyInput{
+		Domain:         ptr.String("__Domain__"),
+		DomainOwner:    ptr.String("__DomainOwner__"),
+		Repository:     ptr.String("__Repository__"),
+		PolicyRevision: ptr.String("__PolicyRevision__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -575,7 +688,10 @@ func TestCheckResponseSnapshot_DescribeDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDomain(context.Background(), &DescribeDomainInput{})
+	got, err := svc.DescribeDomain(context.Background(), &DescribeDomainInput{
+		Domain:      ptr.String("__Domain__"),
+		DomainOwner: ptr.String("__DomainOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -606,7 +722,14 @@ func TestCheckResponseSnapshot_DescribePackage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePackage(context.Background(), &DescribePackageInput{})
+	got, err := svc.DescribePackage(context.Background(), &DescribePackageInput{
+		Domain:      ptr.String("__Domain__"),
+		DomainOwner: ptr.String("__DomainOwner__"),
+		Repository:  ptr.String("__Repository__"),
+		Format:      types.PackageFormat("npm"),
+		Namespace:   ptr.String("__Namespace__"),
+		Package:     ptr.String("__Package__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -652,7 +775,11 @@ func TestCheckResponseSnapshot_DescribePackageGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePackageGroup(context.Background(), &DescribePackageGroupInput{})
+	got, err := svc.DescribePackageGroup(context.Background(), &DescribePackageGroupInput{
+		Domain:       ptr.String("__Domain__"),
+		DomainOwner:  ptr.String("__DomainOwner__"),
+		PackageGroup: ptr.String("__PackageGroup__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -702,7 +829,15 @@ func TestCheckResponseSnapshot_DescribePackageVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePackageVersion(context.Background(), &DescribePackageVersionInput{})
+	got, err := svc.DescribePackageVersion(context.Background(), &DescribePackageVersionInput{
+		Domain:         ptr.String("__Domain__"),
+		DomainOwner:    ptr.String("__DomainOwner__"),
+		Repository:     ptr.String("__Repository__"),
+		Format:         types.PackageFormat("npm"),
+		Namespace:      ptr.String("__Namespace__"),
+		Package:        ptr.String("__Package__"),
+		PackageVersion: ptr.String("__PackageVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -751,7 +886,11 @@ func TestCheckResponseSnapshot_DescribeRepository(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRepository(context.Background(), &DescribeRepositoryInput{})
+	got, err := svc.DescribeRepository(context.Background(), &DescribeRepositoryInput{
+		Domain:      ptr.String("__Domain__"),
+		DomainOwner: ptr.String("__DomainOwner__"),
+		Repository:  ptr.String("__Repository__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -800,7 +939,12 @@ func TestCheckResponseSnapshot_DisassociateExternalConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateExternalConnection(context.Background(), &DisassociateExternalConnectionInput{})
+	got, err := svc.DisassociateExternalConnection(context.Background(), &DisassociateExternalConnectionInput{
+		Domain:             ptr.String("__Domain__"),
+		DomainOwner:        ptr.String("__DomainOwner__"),
+		Repository:         ptr.String("__Repository__"),
+		ExternalConnection: ptr.String("__ExternalConnection__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -832,7 +976,22 @@ func TestCheckResponseSnapshot_DisposePackageVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisposePackageVersions(context.Background(), &DisposePackageVersionsInput{})
+	got, err := svc.DisposePackageVersions(context.Background(), &DisposePackageVersionsInput{
+		Domain:      ptr.String("__Domain__"),
+		DomainOwner: ptr.String("__DomainOwner__"),
+		Repository:  ptr.String("__Repository__"),
+		Format:      types.PackageFormat("npm"),
+		Namespace:   ptr.String("__Namespace__"),
+		Package:     ptr.String("__Package__"),
+		Versions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		VersionRevisions: map[string]string{
+			"key0": "__Value__",
+		},
+		ExpectedStatus: types.PackageVersionStatus("Published"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -879,7 +1038,13 @@ func TestCheckResponseSnapshot_GetAssociatedPackageGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAssociatedPackageGroup(context.Background(), &GetAssociatedPackageGroupInput{})
+	got, err := svc.GetAssociatedPackageGroup(context.Background(), &GetAssociatedPackageGroupInput{
+		Domain:      ptr.String("__Domain__"),
+		DomainOwner: ptr.String("__DomainOwner__"),
+		Format:      types.PackageFormat("npm"),
+		Namespace:   ptr.String("__Namespace__"),
+		Package:     ptr.String("__Package__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -901,7 +1066,11 @@ func TestCheckResponseSnapshot_GetAuthorizationToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAuthorizationToken(context.Background(), &GetAuthorizationTokenInput{})
+	got, err := svc.GetAuthorizationToken(context.Background(), &GetAuthorizationTokenInput{
+		Domain:          ptr.String("__Domain__"),
+		DomainOwner:     ptr.String("__DomainOwner__"),
+		DurationSeconds: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -926,7 +1095,10 @@ func TestCheckResponseSnapshot_GetDomainPermissionsPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDomainPermissionsPolicy(context.Background(), &GetDomainPermissionsPolicyInput{})
+	got, err := svc.GetDomainPermissionsPolicy(context.Background(), &GetDomainPermissionsPolicyInput{
+		Domain:      ptr.String("__Domain__"),
+		DomainOwner: ptr.String("__DomainOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -937,6 +1109,7 @@ func TestCheckResponseSnapshot_GetDomainPermissionsPolicy(t *testing.T) {
 
 func TestCheckResponseSnapshot_GetPackageVersionAsset(t *testing.T) {
 	want := &GetPackageVersionAssetOutput{
+		Asset:                  io.NopCloser(bytes.NewReader([]byte("__Asset__"))),
 		AssetName:              ptr.String("__AssetName__"),
 		PackageVersion:         ptr.String("__PackageVersion__"),
 		PackageVersionRevision: ptr.String("__PackageVersionRevision__"),
@@ -949,7 +1122,17 @@ func TestCheckResponseSnapshot_GetPackageVersionAsset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPackageVersionAsset(context.Background(), &GetPackageVersionAssetInput{})
+	got, err := svc.GetPackageVersionAsset(context.Background(), &GetPackageVersionAssetInput{
+		Domain:                 ptr.String("__Domain__"),
+		DomainOwner:            ptr.String("__DomainOwner__"),
+		Repository:             ptr.String("__Repository__"),
+		Format:                 types.PackageFormat("npm"),
+		Namespace:              ptr.String("__Namespace__"),
+		Package:                ptr.String("__Package__"),
+		PackageVersion:         ptr.String("__PackageVersion__"),
+		Asset:                  ptr.String("__Asset__"),
+		PackageVersionRevision: ptr.String("__PackageVersionRevision__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -975,7 +1158,15 @@ func TestCheckResponseSnapshot_GetPackageVersionReadme(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPackageVersionReadme(context.Background(), &GetPackageVersionReadmeInput{})
+	got, err := svc.GetPackageVersionReadme(context.Background(), &GetPackageVersionReadmeInput{
+		Domain:         ptr.String("__Domain__"),
+		DomainOwner:    ptr.String("__DomainOwner__"),
+		Repository:     ptr.String("__Repository__"),
+		Format:         types.PackageFormat("npm"),
+		Namespace:      ptr.String("__Namespace__"),
+		Package:        ptr.String("__Package__"),
+		PackageVersion: ptr.String("__PackageVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -996,7 +1187,13 @@ func TestCheckResponseSnapshot_GetRepositoryEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRepositoryEndpoint(context.Background(), &GetRepositoryEndpointInput{})
+	got, err := svc.GetRepositoryEndpoint(context.Background(), &GetRepositoryEndpointInput{
+		Domain:       ptr.String("__Domain__"),
+		DomainOwner:  ptr.String("__DomainOwner__"),
+		Repository:   ptr.String("__Repository__"),
+		Format:       types.PackageFormat("npm"),
+		EndpointType: types.EndpointType("dualstack"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1021,7 +1218,11 @@ func TestCheckResponseSnapshot_GetRepositoryPermissionsPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRepositoryPermissionsPolicy(context.Background(), &GetRepositoryPermissionsPolicyInput{})
+	got, err := svc.GetRepositoryPermissionsPolicy(context.Background(), &GetRepositoryPermissionsPolicyInput{
+		Domain:      ptr.String("__Domain__"),
+		DomainOwner: ptr.String("__DomainOwner__"),
+		Repository:  ptr.String("__Repository__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1046,7 +1247,14 @@ func TestCheckResponseSnapshot_ListAllowedRepositoriesForGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAllowedRepositoriesForGroup(context.Background(), &ListAllowedRepositoriesForGroupInput{})
+	got, err := svc.ListAllowedRepositoriesForGroup(context.Background(), &ListAllowedRepositoriesForGroupInput{
+		Domain:                ptr.String("__Domain__"),
+		DomainOwner:           ptr.String("__DomainOwner__"),
+		PackageGroup:          ptr.String("__PackageGroup__"),
+		OriginRestrictionType: types.PackageGroupOriginRestrictionType("EXTERNAL_UPSTREAM"),
+		MaxResults:            ptr.Int32(1),
+		NextToken:             ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1081,7 +1289,14 @@ func TestCheckResponseSnapshot_ListAssociatedPackages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssociatedPackages(context.Background(), &ListAssociatedPackagesInput{})
+	got, err := svc.ListAssociatedPackages(context.Background(), &ListAssociatedPackagesInput{
+		Domain:       ptr.String("__Domain__"),
+		DomainOwner:  ptr.String("__DomainOwner__"),
+		PackageGroup: ptr.String("__PackageGroup__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		Preview:      ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1120,7 +1335,10 @@ func TestCheckResponseSnapshot_ListDomains(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDomains(context.Background(), &ListDomainsInput{})
+	got, err := svc.ListDomains(context.Background(), &ListDomainsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1195,7 +1413,13 @@ func TestCheckResponseSnapshot_ListPackageGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPackageGroups(context.Background(), &ListPackageGroupsInput{})
+	got, err := svc.ListPackageGroups(context.Background(), &ListPackageGroupsInput{
+		Domain:      ptr.String("__Domain__"),
+		DomainOwner: ptr.String("__DomainOwner__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+		Prefix:      ptr.String("__Prefix__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1237,7 +1461,17 @@ func TestCheckResponseSnapshot_ListPackageVersionAssets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPackageVersionAssets(context.Background(), &ListPackageVersionAssetsInput{})
+	got, err := svc.ListPackageVersionAssets(context.Background(), &ListPackageVersionAssetsInput{
+		Domain:         ptr.String("__Domain__"),
+		DomainOwner:    ptr.String("__DomainOwner__"),
+		Repository:     ptr.String("__Repository__"),
+		Format:         types.PackageFormat("npm"),
+		Namespace:      ptr.String("__Namespace__"),
+		Package:        ptr.String("__Package__"),
+		PackageVersion: ptr.String("__PackageVersion__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1277,7 +1511,16 @@ func TestCheckResponseSnapshot_ListPackageVersionDependencies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPackageVersionDependencies(context.Background(), &ListPackageVersionDependenciesInput{})
+	got, err := svc.ListPackageVersionDependencies(context.Background(), &ListPackageVersionDependenciesInput{
+		Domain:         ptr.String("__Domain__"),
+		DomainOwner:    ptr.String("__DomainOwner__"),
+		Repository:     ptr.String("__Repository__"),
+		Format:         types.PackageFormat("npm"),
+		Namespace:      ptr.String("__Namespace__"),
+		Package:        ptr.String("__Package__"),
+		PackageVersion: ptr.String("__PackageVersion__"),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1328,7 +1571,19 @@ func TestCheckResponseSnapshot_ListPackageVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPackageVersions(context.Background(), &ListPackageVersionsInput{})
+	got, err := svc.ListPackageVersions(context.Background(), &ListPackageVersionsInput{
+		Domain:      ptr.String("__Domain__"),
+		DomainOwner: ptr.String("__DomainOwner__"),
+		Repository:  ptr.String("__Repository__"),
+		Format:      types.PackageFormat("npm"),
+		Namespace:   ptr.String("__Namespace__"),
+		Package:     ptr.String("__Package__"),
+		Status:      types.PackageVersionStatus("Published"),
+		SortBy:      types.PackageVersionSortType("PUBLISHED_TIME"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+		OriginType:  types.PackageVersionOriginType("INTERNAL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1373,7 +1628,18 @@ func TestCheckResponseSnapshot_ListPackages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPackages(context.Background(), &ListPackagesInput{})
+	got, err := svc.ListPackages(context.Background(), &ListPackagesInput{
+		Domain:        ptr.String("__Domain__"),
+		DomainOwner:   ptr.String("__DomainOwner__"),
+		Repository:    ptr.String("__Repository__"),
+		Format:        types.PackageFormat("npm"),
+		Namespace:     ptr.String("__Namespace__"),
+		PackagePrefix: ptr.String("__PackagePrefix__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		Publish:       types.AllowPublish("ALLOW"),
+		Upstream:      types.AllowUpstream("ALLOW"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1414,7 +1680,11 @@ func TestCheckResponseSnapshot_ListRepositories(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRepositories(context.Background(), &ListRepositoriesInput{})
+	got, err := svc.ListRepositories(context.Background(), &ListRepositoriesInput{
+		RepositoryPrefix: ptr.String("__RepositoryPrefix__"),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1455,7 +1725,14 @@ func TestCheckResponseSnapshot_ListRepositoriesInDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRepositoriesInDomain(context.Background(), &ListRepositoriesInDomainInput{})
+	got, err := svc.ListRepositoriesInDomain(context.Background(), &ListRepositoriesInDomainInput{
+		Domain:               ptr.String("__Domain__"),
+		DomainOwner:          ptr.String("__DomainOwner__"),
+		AdministratorAccount: ptr.String("__AdministratorAccount__"),
+		RepositoryPrefix:     ptr.String("__RepositoryPrefix__"),
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1530,7 +1807,13 @@ func TestCheckResponseSnapshot_ListSubPackageGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSubPackageGroups(context.Background(), &ListSubPackageGroupsInput{})
+	got, err := svc.ListSubPackageGroups(context.Background(), &ListSubPackageGroupsInput{
+		Domain:       ptr.String("__Domain__"),
+		DomainOwner:  ptr.String("__DomainOwner__"),
+		PackageGroup: ptr.String("__PackageGroup__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1560,7 +1843,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1593,7 +1878,19 @@ func TestCheckResponseSnapshot_PublishPackageVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PublishPackageVersion(context.Background(), &PublishPackageVersionInput{})
+	got, err := svc.PublishPackageVersion(context.Background(), &PublishPackageVersionInput{
+		Domain:         ptr.String("__Domain__"),
+		DomainOwner:    ptr.String("__DomainOwner__"),
+		Repository:     ptr.String("__Repository__"),
+		Format:         types.PackageFormat("npm"),
+		Namespace:      ptr.String("__Namespace__"),
+		Package:        ptr.String("__Package__"),
+		PackageVersion: ptr.String("__PackageVersion__"),
+		AssetContent:   io.NopCloser(bytes.NewReader([]byte("__AssetContent__"))),
+		AssetName:      ptr.String("__AssetName__"),
+		AssetSHA256:    ptr.String("__AssetSHA256__"),
+		Unfinished:     ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1618,7 +1915,12 @@ func TestCheckResponseSnapshot_PutDomainPermissionsPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutDomainPermissionsPolicy(context.Background(), &PutDomainPermissionsPolicyInput{})
+	got, err := svc.PutDomainPermissionsPolicy(context.Background(), &PutDomainPermissionsPolicyInput{
+		Domain:         ptr.String("__Domain__"),
+		DomainOwner:    ptr.String("__DomainOwner__"),
+		PolicyRevision: ptr.String("__PolicyRevision__"),
+		PolicyDocument: ptr.String("__PolicyDocument__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1644,7 +1946,18 @@ func TestCheckResponseSnapshot_PutPackageOriginConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutPackageOriginConfiguration(context.Background(), &PutPackageOriginConfigurationInput{})
+	got, err := svc.PutPackageOriginConfiguration(context.Background(), &PutPackageOriginConfigurationInput{
+		Domain:      ptr.String("__Domain__"),
+		DomainOwner: ptr.String("__DomainOwner__"),
+		Repository:  ptr.String("__Repository__"),
+		Format:      types.PackageFormat("npm"),
+		Namespace:   ptr.String("__Namespace__"),
+		Package:     ptr.String("__Package__"),
+		Restrictions: &types.PackageOriginRestrictions{
+			Publish:  types.AllowPublish("ALLOW"),
+			Upstream: types.AllowUpstream("ALLOW"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1669,7 +1982,13 @@ func TestCheckResponseSnapshot_PutRepositoryPermissionsPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutRepositoryPermissionsPolicy(context.Background(), &PutRepositoryPermissionsPolicyInput{})
+	got, err := svc.PutRepositoryPermissionsPolicy(context.Background(), &PutRepositoryPermissionsPolicyInput{
+		Domain:         ptr.String("__Domain__"),
+		DomainOwner:    ptr.String("__DomainOwner__"),
+		Repository:     ptr.String("__Repository__"),
+		PolicyRevision: ptr.String("__PolicyRevision__"),
+		PolicyDocument: ptr.String("__PolicyDocument__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1688,7 +2007,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1707,7 +2038,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1753,7 +2090,13 @@ func TestCheckResponseSnapshot_UpdatePackageGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePackageGroup(context.Background(), &UpdatePackageGroupInput{})
+	got, err := svc.UpdatePackageGroup(context.Background(), &UpdatePackageGroupInput{
+		Domain:       ptr.String("__Domain__"),
+		DomainOwner:  ptr.String("__DomainOwner__"),
+		PackageGroup: ptr.String("__PackageGroup__"),
+		ContactInfo:  ptr.String("__ContactInfo__"),
+		Description:  ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1807,7 +2150,34 @@ func TestCheckResponseSnapshot_UpdatePackageGroupOriginConfiguration(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePackageGroupOriginConfiguration(context.Background(), &UpdatePackageGroupOriginConfigurationInput{})
+	got, err := svc.UpdatePackageGroupOriginConfiguration(context.Background(), &UpdatePackageGroupOriginConfigurationInput{
+		Domain:       ptr.String("__Domain__"),
+		DomainOwner:  ptr.String("__DomainOwner__"),
+		PackageGroup: ptr.String("__PackageGroup__"),
+		Restrictions: map[string]types.PackageGroupOriginRestrictionMode{
+			"key0": types.PackageGroupOriginRestrictionMode("ALLOW"),
+		},
+		AddAllowedRepositories: []types.PackageGroupAllowedRepository{
+			{
+				RepositoryName:        ptr.String("__RepositoryName__"),
+				OriginRestrictionType: types.PackageGroupOriginRestrictionType("EXTERNAL_UPSTREAM"),
+			},
+			{
+				RepositoryName:        ptr.String("__RepositoryName__"),
+				OriginRestrictionType: types.PackageGroupOriginRestrictionType("EXTERNAL_UPSTREAM"),
+			},
+		},
+		RemoveAllowedRepositories: []types.PackageGroupAllowedRepository{
+			{
+				RepositoryName:        ptr.String("__RepositoryName__"),
+				OriginRestrictionType: types.PackageGroupOriginRestrictionType("EXTERNAL_UPSTREAM"),
+			},
+			{
+				RepositoryName:        ptr.String("__RepositoryName__"),
+				OriginRestrictionType: types.PackageGroupOriginRestrictionType("EXTERNAL_UPSTREAM"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1839,7 +2209,23 @@ func TestCheckResponseSnapshot_UpdatePackageVersionsStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePackageVersionsStatus(context.Background(), &UpdatePackageVersionsStatusInput{})
+	got, err := svc.UpdatePackageVersionsStatus(context.Background(), &UpdatePackageVersionsStatusInput{
+		Domain:      ptr.String("__Domain__"),
+		DomainOwner: ptr.String("__DomainOwner__"),
+		Repository:  ptr.String("__Repository__"),
+		Format:      types.PackageFormat("npm"),
+		Namespace:   ptr.String("__Namespace__"),
+		Package:     ptr.String("__Package__"),
+		Versions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		VersionRevisions: map[string]string{
+			"key0": "__Value__",
+		},
+		ExpectedStatus: types.PackageVersionStatus("Published"),
+		TargetStatus:   types.PackageVersionStatus("Published"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1888,7 +2274,20 @@ func TestCheckResponseSnapshot_UpdateRepository(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRepository(context.Background(), &UpdateRepositoryInput{})
+	got, err := svc.UpdateRepository(context.Background(), &UpdateRepositoryInput{
+		Domain:      ptr.String("__Domain__"),
+		DomainOwner: ptr.String("__DomainOwner__"),
+		Repository:  ptr.String("__Repository__"),
+		Description: ptr.String("__Description__"),
+		Upstreams: []types.UpstreamRepository{
+			{
+				RepositoryName: ptr.String("__RepositoryName__"),
+			},
+			{
+				RepositoryName: ptr.String("__RepositoryName__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1909,7 +2308,12 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateExternalConnection(context.Background(), &AssociateExternalConnectionInput{})
+	_, opErr := svc.AssociateExternalConnection(context.Background(), &AssociateExternalConnectionInput{
+		Domain:             ptr.String("__Domain__"),
+		DomainOwner:        ptr.String("__DomainOwner__"),
+		Repository:         ptr.String("__Repository__"),
+		ExternalConnection: ptr.String("__ExternalConnection__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1936,7 +2340,12 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateExternalConnection(context.Background(), &AssociateExternalConnectionInput{})
+	_, opErr := svc.AssociateExternalConnection(context.Background(), &AssociateExternalConnectionInput{
+		Domain:             ptr.String("__Domain__"),
+		DomainOwner:        ptr.String("__DomainOwner__"),
+		Repository:         ptr.String("__Repository__"),
+		ExternalConnection: ptr.String("__ExternalConnection__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1961,7 +2370,12 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateExternalConnection(context.Background(), &AssociateExternalConnectionInput{})
+	_, opErr := svc.AssociateExternalConnection(context.Background(), &AssociateExternalConnectionInput{
+		Domain:             ptr.String("__Domain__"),
+		DomainOwner:        ptr.String("__DomainOwner__"),
+		Repository:         ptr.String("__Repository__"),
+		ExternalConnection: ptr.String("__ExternalConnection__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1988,7 +2402,12 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateExternalConnection(context.Background(), &AssociateExternalConnectionInput{})
+	_, opErr := svc.AssociateExternalConnection(context.Background(), &AssociateExternalConnectionInput{
+		Domain:             ptr.String("__Domain__"),
+		DomainOwner:        ptr.String("__DomainOwner__"),
+		Repository:         ptr.String("__Repository__"),
+		ExternalConnection: ptr.String("__ExternalConnection__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2015,7 +2434,12 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateExternalConnection(context.Background(), &AssociateExternalConnectionInput{})
+	_, opErr := svc.AssociateExternalConnection(context.Background(), &AssociateExternalConnectionInput{
+		Domain:             ptr.String("__Domain__"),
+		DomainOwner:        ptr.String("__DomainOwner__"),
+		Repository:         ptr.String("__Repository__"),
+		ExternalConnection: ptr.String("__ExternalConnection__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2041,7 +2465,12 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateExternalConnection(context.Background(), &AssociateExternalConnectionInput{})
+	_, opErr := svc.AssociateExternalConnection(context.Background(), &AssociateExternalConnectionInput{
+		Domain:             ptr.String("__Domain__"),
+		DomainOwner:        ptr.String("__DomainOwner__"),
+		Repository:         ptr.String("__Repository__"),
+		ExternalConnection: ptr.String("__ExternalConnection__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2067,7 +2496,12 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateExternalConnection(context.Background(), &AssociateExternalConnectionInput{})
+	_, opErr := svc.AssociateExternalConnection(context.Background(), &AssociateExternalConnectionInput{
+		Domain:             ptr.String("__Domain__"),
+		DomainOwner:        ptr.String("__DomainOwner__"),
+		Repository:         ptr.String("__Repository__"),
+		ExternalConnection: ptr.String("__ExternalConnection__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

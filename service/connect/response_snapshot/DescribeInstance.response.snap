@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Instance":{"Arn":"__Arn__","CreatedTime":946684800,"Id":"__Id__","IdentityManagementType":"SAML","InboundCallsEnabled":true,"InstanceAccessUrl":"__InstanceAccessUrl__","InstanceAlias":"__InstanceAlias__","InstanceStatus":"CREATION_IN_PROGRESS","OutboundCallsEnabled":true,"ServiceRole":"__ServiceRole__","StatusReason":{"Message":"__Message__"},"Tags":{"key0":"__Value__"}},"ReplicationConfiguration":{"GlobalSignInEndpoint":"__GlobalSignInEndpoint__","ReplicationStatusSummaryList":[{"Region":"__Region__","ReplicationStatus":"INSTANCE_REPLICATION_COMPLETE","ReplicationStatusReason":"__ReplicationStatusReason__"},{"Region":"__Region__","ReplicationStatus":"INSTANCE_REPLICATION_COMPLETE","ReplicationStatusReason":"__ReplicationStatusReason__"}],"SourceRegion":"__SourceRegion__"}}

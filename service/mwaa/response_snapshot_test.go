@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mwaa/document"
 	"github.com/aws/aws-sdk-go-v2/service/mwaa/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -120,7 +121,9 @@ func TestCheckResponseSnapshot_CreateCliToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCliToken(context.Background(), &CreateCliTokenInput{})
+	got, err := svc.CreateCliToken(context.Background(), &CreateCliTokenInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -141,7 +144,67 @@ func TestCheckResponseSnapshot_CreateEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{})
+	got, err := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{
+		Name:             ptr.String("__Name__"),
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		SourceBucketArn:  ptr.String("__SourceBucketArn__"),
+		DagS3Path:        ptr.String("__DagS3Path__"),
+		NetworkConfiguration: &types.NetworkConfiguration{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		PluginsS3Path:                ptr.String("__PluginsS3Path__"),
+		PluginsS3ObjectVersion:       ptr.String("__PluginsS3ObjectVersion__"),
+		RequirementsS3Path:           ptr.String("__RequirementsS3Path__"),
+		RequirementsS3ObjectVersion:  ptr.String("__RequirementsS3ObjectVersion__"),
+		StartupScriptS3Path:          ptr.String("__StartupScriptS3Path__"),
+		StartupScriptS3ObjectVersion: ptr.String("__StartupScriptS3ObjectVersion__"),
+		AirflowConfigurationOptions: map[string]string{
+			"key0": "__Value__",
+		},
+		EnvironmentClass: ptr.String("__EnvironmentClass__"),
+		MaxWorkers:       ptr.Int32(1),
+		KmsKey:           ptr.String("__KmsKey__"),
+		AirflowVersion:   ptr.String("__AirflowVersion__"),
+		LoggingConfiguration: &types.LoggingConfigurationInput{
+			DagProcessingLogs: &types.ModuleLoggingConfigurationInput{
+				Enabled:  ptr.Bool(true),
+				LogLevel: types.LoggingLevel("CRITICAL"),
+			},
+			SchedulerLogs: &types.ModuleLoggingConfigurationInput{
+				Enabled:  ptr.Bool(true),
+				LogLevel: types.LoggingLevel("CRITICAL"),
+			},
+			WebserverLogs: &types.ModuleLoggingConfigurationInput{
+				Enabled:  ptr.Bool(true),
+				LogLevel: types.LoggingLevel("CRITICAL"),
+			},
+			WorkerLogs: &types.ModuleLoggingConfigurationInput{
+				Enabled:  ptr.Bool(true),
+				LogLevel: types.LoggingLevel("CRITICAL"),
+			},
+			TaskLogs: &types.ModuleLoggingConfigurationInput{
+				Enabled:  ptr.Bool(true),
+				LogLevel: types.LoggingLevel("CRITICAL"),
+			},
+		},
+		WeeklyMaintenanceWindowStart: ptr.String("__WeeklyMaintenanceWindowStart__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		WebserverAccessMode: types.WebserverAccessMode("PRIVATE_ONLY"),
+		MinWorkers:          ptr.Int32(1),
+		Schedulers:          ptr.Int32(1),
+		EndpointManagement:  types.EndpointManagement("CUSTOMER"),
+		MinWebservers:       ptr.Int32(1),
+		MaxWebservers:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -165,7 +228,9 @@ func TestCheckResponseSnapshot_CreateWebLoginToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWebLoginToken(context.Background(), &CreateWebLoginTokenInput{})
+	got, err := svc.CreateWebLoginToken(context.Background(), &CreateWebLoginTokenInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -184,7 +249,9 @@ func TestCheckResponseSnapshot_DeleteEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEnvironment(context.Background(), &DeleteEnvironmentInput{})
+	got, err := svc.DeleteEnvironment(context.Background(), &DeleteEnvironmentInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -288,7 +355,9 @@ func TestCheckResponseSnapshot_GetEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEnvironment(context.Background(), &GetEnvironmentInput{})
+	got, err := svc.GetEnvironment(context.Background(), &GetEnvironmentInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -300,7 +369,7 @@ func TestCheckResponseSnapshot_GetEnvironment(t *testing.T) {
 func TestCheckResponseSnapshot_InvokeRestApi(t *testing.T) {
 	want := &InvokeRestApiOutput{
 		RestApiStatusCode: ptr.Int32(1),
-		RestApiResponse:   nil,
+		RestApiResponse:   document.NewLazyDocument("__Document__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InvokeRestApi.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -310,7 +379,13 @@ func TestCheckResponseSnapshot_InvokeRestApi(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InvokeRestApi(context.Background(), &InvokeRestApiInput{})
+	got, err := svc.InvokeRestApi(context.Background(), &InvokeRestApiInput{
+		Name:            ptr.String("__Name__"),
+		Path:            ptr.String("__Path__"),
+		Method:          types.RestApiMethod("GET"),
+		QueryParameters: document.NewLazyDocument("__Document__"),
+		Body:            document.NewLazyDocument("__Document__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -335,7 +410,10 @@ func TestCheckResponseSnapshot_ListEnvironments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEnvironments(context.Background(), &ListEnvironmentsInput{})
+	got, err := svc.ListEnvironments(context.Background(), &ListEnvironmentsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -358,7 +436,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -377,7 +457,55 @@ func TestCheckResponseSnapshot_PublishMetrics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PublishMetrics(context.Background(), &PublishMetricsInput{})
+	got, err := svc.PublishMetrics(context.Background(), &PublishMetricsInput{
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		MetricData: []types.MetricDatum{
+			{
+				MetricName: ptr.String("__MetricName__"),
+				Timestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Dimensions: []types.Dimension{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Value: ptr.Float64(1.0),
+				Unit:  types.Unit("Seconds"),
+				StatisticValues: &types.StatisticSet{
+					SampleCount: ptr.Int32(1),
+					Sum:         ptr.Float64(1.0),
+					Minimum:     ptr.Float64(1.0),
+					Maximum:     ptr.Float64(1.0),
+				},
+			},
+			{
+				MetricName: ptr.String("__MetricName__"),
+				Timestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Dimensions: []types.Dimension{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Value: ptr.Float64(1.0),
+				Unit:  types.Unit("Seconds"),
+				StatisticValues: &types.StatisticSet{
+					SampleCount: ptr.Int32(1),
+					Sum:         ptr.Float64(1.0),
+					Minimum:     ptr.Float64(1.0),
+					Maximum:     ptr.Float64(1.0),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -396,7 +524,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -415,7 +548,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -436,7 +575,59 @@ func TestCheckResponseSnapshot_UpdateEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEnvironment(context.Background(), &UpdateEnvironmentInput{})
+	got, err := svc.UpdateEnvironment(context.Background(), &UpdateEnvironmentInput{
+		Name:             ptr.String("__Name__"),
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		AirflowConfigurationOptions: map[string]string{
+			"key0": "__Value__",
+		},
+		AirflowVersion:   ptr.String("__AirflowVersion__"),
+		DagS3Path:        ptr.String("__DagS3Path__"),
+		EnvironmentClass: ptr.String("__EnvironmentClass__"),
+		LoggingConfiguration: &types.LoggingConfigurationInput{
+			DagProcessingLogs: &types.ModuleLoggingConfigurationInput{
+				Enabled:  ptr.Bool(true),
+				LogLevel: types.LoggingLevel("CRITICAL"),
+			},
+			SchedulerLogs: &types.ModuleLoggingConfigurationInput{
+				Enabled:  ptr.Bool(true),
+				LogLevel: types.LoggingLevel("CRITICAL"),
+			},
+			WebserverLogs: &types.ModuleLoggingConfigurationInput{
+				Enabled:  ptr.Bool(true),
+				LogLevel: types.LoggingLevel("CRITICAL"),
+			},
+			WorkerLogs: &types.ModuleLoggingConfigurationInput{
+				Enabled:  ptr.Bool(true),
+				LogLevel: types.LoggingLevel("CRITICAL"),
+			},
+			TaskLogs: &types.ModuleLoggingConfigurationInput{
+				Enabled:  ptr.Bool(true),
+				LogLevel: types.LoggingLevel("CRITICAL"),
+			},
+		},
+		MaxWorkers:                ptr.Int32(1),
+		MinWorkers:                ptr.Int32(1),
+		MaxWebservers:             ptr.Int32(1),
+		MinWebservers:             ptr.Int32(1),
+		WorkerReplacementStrategy: types.WorkerReplacementStrategy("FORCED"),
+		NetworkConfiguration: &types.UpdateNetworkConfigurationInput{
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		PluginsS3Path:                ptr.String("__PluginsS3Path__"),
+		PluginsS3ObjectVersion:       ptr.String("__PluginsS3ObjectVersion__"),
+		RequirementsS3Path:           ptr.String("__RequirementsS3Path__"),
+		RequirementsS3ObjectVersion:  ptr.String("__RequirementsS3ObjectVersion__"),
+		Schedulers:                   ptr.Int32(1),
+		SourceBucketArn:              ptr.String("__SourceBucketArn__"),
+		StartupScriptS3Path:          ptr.String("__StartupScriptS3Path__"),
+		StartupScriptS3ObjectVersion: ptr.String("__StartupScriptS3ObjectVersion__"),
+		WebserverAccessMode:          types.WebserverAccessMode("PRIVATE_ONLY"),
+		WeeklyMaintenanceWindowStart: ptr.String("__WeeklyMaintenanceWindowStart__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -457,7 +648,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateWebLoginToken(context.Background(), &CreateWebLoginTokenInput{})
+	_, opErr := svc.CreateWebLoginToken(context.Background(), &CreateWebLoginTokenInput{
+		Name: ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -482,7 +675,67 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{})
+	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{
+		Name:             ptr.String("__Name__"),
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		SourceBucketArn:  ptr.String("__SourceBucketArn__"),
+		DagS3Path:        ptr.String("__DagS3Path__"),
+		NetworkConfiguration: &types.NetworkConfiguration{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		PluginsS3Path:                ptr.String("__PluginsS3Path__"),
+		PluginsS3ObjectVersion:       ptr.String("__PluginsS3ObjectVersion__"),
+		RequirementsS3Path:           ptr.String("__RequirementsS3Path__"),
+		RequirementsS3ObjectVersion:  ptr.String("__RequirementsS3ObjectVersion__"),
+		StartupScriptS3Path:          ptr.String("__StartupScriptS3Path__"),
+		StartupScriptS3ObjectVersion: ptr.String("__StartupScriptS3ObjectVersion__"),
+		AirflowConfigurationOptions: map[string]string{
+			"key0": "__Value__",
+		},
+		EnvironmentClass: ptr.String("__EnvironmentClass__"),
+		MaxWorkers:       ptr.Int32(1),
+		KmsKey:           ptr.String("__KmsKey__"),
+		AirflowVersion:   ptr.String("__AirflowVersion__"),
+		LoggingConfiguration: &types.LoggingConfigurationInput{
+			DagProcessingLogs: &types.ModuleLoggingConfigurationInput{
+				Enabled:  ptr.Bool(true),
+				LogLevel: types.LoggingLevel("CRITICAL"),
+			},
+			SchedulerLogs: &types.ModuleLoggingConfigurationInput{
+				Enabled:  ptr.Bool(true),
+				LogLevel: types.LoggingLevel("CRITICAL"),
+			},
+			WebserverLogs: &types.ModuleLoggingConfigurationInput{
+				Enabled:  ptr.Bool(true),
+				LogLevel: types.LoggingLevel("CRITICAL"),
+			},
+			WorkerLogs: &types.ModuleLoggingConfigurationInput{
+				Enabled:  ptr.Bool(true),
+				LogLevel: types.LoggingLevel("CRITICAL"),
+			},
+			TaskLogs: &types.ModuleLoggingConfigurationInput{
+				Enabled:  ptr.Bool(true),
+				LogLevel: types.LoggingLevel("CRITICAL"),
+			},
+		},
+		WeeklyMaintenanceWindowStart: ptr.String("__WeeklyMaintenanceWindowStart__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		WebserverAccessMode: types.WebserverAccessMode("PRIVATE_ONLY"),
+		MinWorkers:          ptr.Int32(1),
+		Schedulers:          ptr.Int32(1),
+		EndpointManagement:  types.EndpointManagement("CUSTOMER"),
+		MinWebservers:       ptr.Int32(1),
+		MaxWebservers:       ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -507,7 +760,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCliToken(context.Background(), &CreateCliTokenInput{})
+	_, opErr := svc.CreateCliToken(context.Background(), &CreateCliTokenInput{
+		Name: ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -523,7 +778,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_RestApiClientException(t *testing.T) {
 	want := &types.RestApiClientException{
 		RestApiStatusCode: ptr.Int32(1),
-		RestApiResponse:   nil,
+		RestApiResponse:   document.NewLazyDocument("__Document__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("RestApiClientException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -533,7 +788,13 @@ func TestCheckResponseSnapshot_Error_RestApiClientException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.InvokeRestApi(context.Background(), &InvokeRestApiInput{})
+	_, opErr := svc.InvokeRestApi(context.Background(), &InvokeRestApiInput{
+		Name:            ptr.String("__Name__"),
+		Path:            ptr.String("__Path__"),
+		Method:          types.RestApiMethod("GET"),
+		QueryParameters: document.NewLazyDocument("__Document__"),
+		Body:            document.NewLazyDocument("__Document__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -549,7 +810,7 @@ func TestCheckResponseSnapshot_Error_RestApiClientException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_RestApiServerException(t *testing.T) {
 	want := &types.RestApiServerException{
 		RestApiStatusCode: ptr.Int32(1),
-		RestApiResponse:   nil,
+		RestApiResponse:   document.NewLazyDocument("__Document__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("RestApiServerException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -559,7 +820,13 @@ func TestCheckResponseSnapshot_Error_RestApiServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.InvokeRestApi(context.Background(), &InvokeRestApiInput{})
+	_, opErr := svc.InvokeRestApi(context.Background(), &InvokeRestApiInput{
+		Name:            ptr.String("__Name__"),
+		Path:            ptr.String("__Path__"),
+		Method:          types.RestApiMethod("GET"),
+		QueryParameters: document.NewLazyDocument("__Document__"),
+		Body:            document.NewLazyDocument("__Document__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -584,7 +851,67 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{})
+	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{
+		Name:             ptr.String("__Name__"),
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		SourceBucketArn:  ptr.String("__SourceBucketArn__"),
+		DagS3Path:        ptr.String("__DagS3Path__"),
+		NetworkConfiguration: &types.NetworkConfiguration{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		PluginsS3Path:                ptr.String("__PluginsS3Path__"),
+		PluginsS3ObjectVersion:       ptr.String("__PluginsS3ObjectVersion__"),
+		RequirementsS3Path:           ptr.String("__RequirementsS3Path__"),
+		RequirementsS3ObjectVersion:  ptr.String("__RequirementsS3ObjectVersion__"),
+		StartupScriptS3Path:          ptr.String("__StartupScriptS3Path__"),
+		StartupScriptS3ObjectVersion: ptr.String("__StartupScriptS3ObjectVersion__"),
+		AirflowConfigurationOptions: map[string]string{
+			"key0": "__Value__",
+		},
+		EnvironmentClass: ptr.String("__EnvironmentClass__"),
+		MaxWorkers:       ptr.Int32(1),
+		KmsKey:           ptr.String("__KmsKey__"),
+		AirflowVersion:   ptr.String("__AirflowVersion__"),
+		LoggingConfiguration: &types.LoggingConfigurationInput{
+			DagProcessingLogs: &types.ModuleLoggingConfigurationInput{
+				Enabled:  ptr.Bool(true),
+				LogLevel: types.LoggingLevel("CRITICAL"),
+			},
+			SchedulerLogs: &types.ModuleLoggingConfigurationInput{
+				Enabled:  ptr.Bool(true),
+				LogLevel: types.LoggingLevel("CRITICAL"),
+			},
+			WebserverLogs: &types.ModuleLoggingConfigurationInput{
+				Enabled:  ptr.Bool(true),
+				LogLevel: types.LoggingLevel("CRITICAL"),
+			},
+			WorkerLogs: &types.ModuleLoggingConfigurationInput{
+				Enabled:  ptr.Bool(true),
+				LogLevel: types.LoggingLevel("CRITICAL"),
+			},
+			TaskLogs: &types.ModuleLoggingConfigurationInput{
+				Enabled:  ptr.Bool(true),
+				LogLevel: types.LoggingLevel("CRITICAL"),
+			},
+		},
+		WeeklyMaintenanceWindowStart: ptr.String("__WeeklyMaintenanceWindowStart__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		WebserverAccessMode: types.WebserverAccessMode("PRIVATE_ONLY"),
+		MinWorkers:          ptr.Int32(1),
+		Schedulers:          ptr.Int32(1),
+		EndpointManagement:  types.EndpointManagement("CUSTOMER"),
+		MinWebservers:       ptr.Int32(1),
+		MaxWebservers:       ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -609,7 +936,67 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{})
+	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{
+		Name:             ptr.String("__Name__"),
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		SourceBucketArn:  ptr.String("__SourceBucketArn__"),
+		DagS3Path:        ptr.String("__DagS3Path__"),
+		NetworkConfiguration: &types.NetworkConfiguration{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		PluginsS3Path:                ptr.String("__PluginsS3Path__"),
+		PluginsS3ObjectVersion:       ptr.String("__PluginsS3ObjectVersion__"),
+		RequirementsS3Path:           ptr.String("__RequirementsS3Path__"),
+		RequirementsS3ObjectVersion:  ptr.String("__RequirementsS3ObjectVersion__"),
+		StartupScriptS3Path:          ptr.String("__StartupScriptS3Path__"),
+		StartupScriptS3ObjectVersion: ptr.String("__StartupScriptS3ObjectVersion__"),
+		AirflowConfigurationOptions: map[string]string{
+			"key0": "__Value__",
+		},
+		EnvironmentClass: ptr.String("__EnvironmentClass__"),
+		MaxWorkers:       ptr.Int32(1),
+		KmsKey:           ptr.String("__KmsKey__"),
+		AirflowVersion:   ptr.String("__AirflowVersion__"),
+		LoggingConfiguration: &types.LoggingConfigurationInput{
+			DagProcessingLogs: &types.ModuleLoggingConfigurationInput{
+				Enabled:  ptr.Bool(true),
+				LogLevel: types.LoggingLevel("CRITICAL"),
+			},
+			SchedulerLogs: &types.ModuleLoggingConfigurationInput{
+				Enabled:  ptr.Bool(true),
+				LogLevel: types.LoggingLevel("CRITICAL"),
+			},
+			WebserverLogs: &types.ModuleLoggingConfigurationInput{
+				Enabled:  ptr.Bool(true),
+				LogLevel: types.LoggingLevel("CRITICAL"),
+			},
+			WorkerLogs: &types.ModuleLoggingConfigurationInput{
+				Enabled:  ptr.Bool(true),
+				LogLevel: types.LoggingLevel("CRITICAL"),
+			},
+			TaskLogs: &types.ModuleLoggingConfigurationInput{
+				Enabled:  ptr.Bool(true),
+				LogLevel: types.LoggingLevel("CRITICAL"),
+			},
+		},
+		WeeklyMaintenanceWindowStart: ptr.String("__WeeklyMaintenanceWindowStart__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		WebserverAccessMode: types.WebserverAccessMode("PRIVATE_ONLY"),
+		MinWorkers:          ptr.Int32(1),
+		Schedulers:          ptr.Int32(1),
+		EndpointManagement:  types.EndpointManagement("CUSTOMER"),
+		MinWebservers:       ptr.Int32(1),
+		MaxWebservers:       ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

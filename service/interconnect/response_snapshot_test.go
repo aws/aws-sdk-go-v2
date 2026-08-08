@@ -140,7 +140,17 @@ func TestCheckResponseSnapshot_AcceptConnectionProposal(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptConnectionProposal(context.Background(), &AcceptConnectionProposalInput{})
+	got, err := svc.AcceptConnectionProposal(context.Background(), &AcceptConnectionProposalInput{
+		AttachPoint: &types.AttachPointMemberDirectConnectGateway{
+			Value: "__AttachPointMemberDirectConnectGateway__",
+		},
+		ActivationKey: ptr.String("__ActivationKey__"),
+		Description:   ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -183,7 +193,21 @@ func TestCheckResponseSnapshot_CreateConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConnection(context.Background(), &CreateConnectionInput{})
+	got, err := svc.CreateConnection(context.Background(), &CreateConnectionInput{
+		Description: ptr.String("__Description__"),
+		Bandwidth:   ptr.String("__Bandwidth__"),
+		AttachPoint: &types.AttachPointMemberDirectConnectGateway{
+			Value: "__AttachPointMemberDirectConnectGateway__",
+		},
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		RemoteAccount: &types.RemoteAccountIdentifierMemberIdentifier{
+			Value: "__RemoteAccountIdentifierMemberIdentifier__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -226,7 +250,10 @@ func TestCheckResponseSnapshot_DeleteConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{})
+	got, err := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{
+		Identifier:  ptr.String("__Identifier__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -252,7 +279,9 @@ func TestCheckResponseSnapshot_DescribeConnectionProposal(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConnectionProposal(context.Background(), &DescribeConnectionProposalInput{})
+	got, err := svc.DescribeConnectionProposal(context.Background(), &DescribeConnectionProposalInput{
+		ActivationKey: ptr.String("__ActivationKey__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -295,7 +324,9 @@ func TestCheckResponseSnapshot_GetConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConnection(context.Background(), &GetConnectionInput{})
+	got, err := svc.GetConnection(context.Background(), &GetConnectionInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -336,7 +367,9 @@ func TestCheckResponseSnapshot_GetEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEnvironment(context.Background(), &GetEnvironmentInput{})
+	got, err := svc.GetEnvironment(context.Background(), &GetEnvironmentInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -369,7 +402,11 @@ func TestCheckResponseSnapshot_ListAttachPoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAttachPoints(context.Background(), &ListAttachPointsInput{})
+	got, err := svc.ListAttachPoints(context.Background(), &ListAttachPointsInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -428,7 +465,18 @@ func TestCheckResponseSnapshot_ListConnections(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConnections(context.Background(), &ListConnectionsInput{})
+	got, err := svc.ListConnections(context.Background(), &ListConnectionsInput{
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		State:         types.ConnectionState("available"),
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		Provider: &types.ProviderMemberCloudServiceProvider{
+			Value: "__ProviderMemberCloudServiceProvider__",
+		},
+		AttachPoint: &types.AttachPointMemberDirectConnectGateway{
+			Value: "__AttachPointMemberDirectConnectGateway__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -493,7 +541,14 @@ func TestCheckResponseSnapshot_ListEnvironments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEnvironments(context.Background(), &ListEnvironmentsInput{})
+	got, err := svc.ListEnvironments(context.Background(), &ListEnvironmentsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Provider: &types.ProviderMemberCloudServiceProvider{
+			Value: "__ProviderMemberCloudServiceProvider__",
+		},
+		Location: ptr.String("__Location__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -516,7 +571,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -535,7 +592,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		Arn: ptr.String("__Arn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -554,7 +616,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		Arn: ptr.String("__Arn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -597,7 +665,12 @@ func TestCheckResponseSnapshot_UpdateConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConnection(context.Background(), &UpdateConnectionInput{})
+	got, err := svc.UpdateConnection(context.Background(), &UpdateConnectionInput{
+		Identifier:  ptr.String("__Identifier__"),
+		Description: ptr.String("__Description__"),
+		Bandwidth:   ptr.String("__Bandwidth__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -618,7 +691,17 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptConnectionProposal(context.Background(), &AcceptConnectionProposalInput{})
+	_, opErr := svc.AcceptConnectionProposal(context.Background(), &AcceptConnectionProposalInput{
+		AttachPoint: &types.AttachPointMemberDirectConnectGateway{
+			Value: "__AttachPointMemberDirectConnectGateway__",
+		},
+		ActivationKey: ptr.String("__ActivationKey__"),
+		Description:   ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -643,7 +726,17 @@ func TestCheckResponseSnapshot_Error_InterconnectClientException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptConnectionProposal(context.Background(), &AcceptConnectionProposalInput{})
+	_, opErr := svc.AcceptConnectionProposal(context.Background(), &AcceptConnectionProposalInput{
+		AttachPoint: &types.AttachPointMemberDirectConnectGateway{
+			Value: "__AttachPointMemberDirectConnectGateway__",
+		},
+		ActivationKey: ptr.String("__ActivationKey__"),
+		Description:   ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -668,7 +761,17 @@ func TestCheckResponseSnapshot_Error_InterconnectServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptConnectionProposal(context.Background(), &AcceptConnectionProposalInput{})
+	_, opErr := svc.AcceptConnectionProposal(context.Background(), &AcceptConnectionProposalInput{
+		AttachPoint: &types.AttachPointMemberDirectConnectGateway{
+			Value: "__AttachPointMemberDirectConnectGateway__",
+		},
+		ActivationKey: ptr.String("__ActivationKey__"),
+		Description:   ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -693,7 +796,17 @@ func TestCheckResponseSnapshot_Error_InterconnectValidationException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptConnectionProposal(context.Background(), &AcceptConnectionProposalInput{})
+	_, opErr := svc.AcceptConnectionProposal(context.Background(), &AcceptConnectionProposalInput{
+		AttachPoint: &types.AttachPointMemberDirectConnectGateway{
+			Value: "__AttachPointMemberDirectConnectGateway__",
+		},
+		ActivationKey: ptr.String("__ActivationKey__"),
+		Description:   ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -718,7 +831,17 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptConnectionProposal(context.Background(), &AcceptConnectionProposalInput{})
+	_, opErr := svc.AcceptConnectionProposal(context.Background(), &AcceptConnectionProposalInput{
+		AttachPoint: &types.AttachPointMemberDirectConnectGateway{
+			Value: "__AttachPointMemberDirectConnectGateway__",
+		},
+		ActivationKey: ptr.String("__ActivationKey__"),
+		Description:   ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -743,7 +866,17 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptConnectionProposal(context.Background(), &AcceptConnectionProposalInput{})
+	_, opErr := svc.AcceptConnectionProposal(context.Background(), &AcceptConnectionProposalInput{
+		AttachPoint: &types.AttachPointMemberDirectConnectGateway{
+			Value: "__AttachPointMemberDirectConnectGateway__",
+		},
+		ActivationKey: ptr.String("__ActivationKey__"),
+		Description:   ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -768,7 +901,17 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptConnectionProposal(context.Background(), &AcceptConnectionProposalInput{})
+	_, opErr := svc.AcceptConnectionProposal(context.Background(), &AcceptConnectionProposalInput{
+		AttachPoint: &types.AttachPointMemberDirectConnectGateway{
+			Value: "__AttachPointMemberDirectConnectGateway__",
+		},
+		ActivationKey: ptr.String("__ActivationKey__"),
+		Description:   ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

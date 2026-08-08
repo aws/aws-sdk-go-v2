@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"policy":{"document":"__Document__","resourceArn":"__ResourceArn__","revision":"__Revision__"}}

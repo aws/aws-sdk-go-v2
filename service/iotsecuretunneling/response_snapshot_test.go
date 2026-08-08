@@ -117,7 +117,10 @@ func TestCheckResponseSnapshot_CloseTunnel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CloseTunnel(context.Background(), &CloseTunnelInput{})
+	got, err := svc.CloseTunnel(context.Background(), &CloseTunnelInput{
+		TunnelId: ptr.String("__TunnelId__"),
+		Delete:   ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -173,7 +176,9 @@ func TestCheckResponseSnapshot_DescribeTunnel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTunnel(context.Background(), &DescribeTunnelInput{})
+	got, err := svc.DescribeTunnel(context.Background(), &DescribeTunnelInput{
+		TunnelId: ptr.String("__TunnelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -203,7 +208,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -242,7 +249,11 @@ func TestCheckResponseSnapshot_ListTunnels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTunnels(context.Background(), &ListTunnelsInput{})
+	got, err := svc.ListTunnels(context.Background(), &ListTunnelsInput{
+		ThingName:  ptr.String("__ThingName__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -266,7 +277,29 @@ func TestCheckResponseSnapshot_OpenTunnel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.OpenTunnel(context.Background(), &OpenTunnelInput{})
+	got, err := svc.OpenTunnel(context.Background(), &OpenTunnelInput{
+		Description: ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DestinationConfig: &types.DestinationConfig{
+			ThingName: ptr.String("__ThingName__"),
+			Services: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		TimeoutConfig: &types.TimeoutConfig{
+			MaxLifetimeTimeoutMinutes: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -289,7 +322,17 @@ func TestCheckResponseSnapshot_RotateTunnelAccessToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RotateTunnelAccessToken(context.Background(), &RotateTunnelAccessTokenInput{})
+	got, err := svc.RotateTunnelAccessToken(context.Background(), &RotateTunnelAccessTokenInput{
+		TunnelId:   ptr.String("__TunnelId__"),
+		ClientMode: types.ClientMode("SOURCE"),
+		DestinationConfig: &types.DestinationConfig{
+			ThingName: ptr.String("__ThingName__"),
+			Services: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -308,7 +351,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -327,7 +382,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -348,7 +409,29 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.OpenTunnel(context.Background(), &OpenTunnelInput{})
+	_, opErr := svc.OpenTunnel(context.Background(), &OpenTunnelInput{
+		Description: ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DestinationConfig: &types.DestinationConfig{
+			ThingName: ptr.String("__ThingName__"),
+			Services: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		TimeoutConfig: &types.TimeoutConfig{
+			MaxLifetimeTimeoutMinutes: ptr.Int32(1),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -373,7 +456,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CloseTunnel(context.Background(), &CloseTunnelInput{})
+	_, opErr := svc.CloseTunnel(context.Background(), &CloseTunnelInput{
+		TunnelId: ptr.String("__TunnelId__"),
+		Delete:   ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

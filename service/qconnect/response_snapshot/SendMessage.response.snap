@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"configuration":{"generateChunkedMessage":true,"generateFillerMessage":true},"nextMessageToken":"__NextMessageToken__","requestMessageId":"__RequestMessageId__"}

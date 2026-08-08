@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"createdAt":946684800,"createdBy":"__CreatedBy__","domainId":"__DomainId__","id":"__Id__","owningProjectId":"__OwningProjectId__","status":"SUBMITTED","target":{"identifier":"__Identifier__","revision":"__Revision__","type":"ASSET"},"type":"BUSINESS_DESCRIPTIONS","types":["BUSINESS_DESCRIPTIONS","BUSINESS_DESCRIPTIONS"]},{"createdAt":946684800,"createdBy":"__CreatedBy__","domainId":"__DomainId__","id":"__Id__","owningProjectId":"__OwningProjectId__","status":"SUBMITTED","target":{"identifier":"__Identifier__","revision":"__Revision__","type":"ASSET"},"type":"BUSINESS_DESCRIPTIONS","types":["BUSINESS_DESCRIPTIONS","BUSINESS_DESCRIPTIONS"]}],"nextToken":"__NextToken__"}

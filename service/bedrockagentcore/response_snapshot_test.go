@@ -151,7 +151,46 @@ func TestCheckResponseSnapshot_BatchCreateMemoryRecords(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchCreateMemoryRecords(context.Background(), &BatchCreateMemoryRecordsInput{})
+	got, err := svc.BatchCreateMemoryRecords(context.Background(), &BatchCreateMemoryRecordsInput{
+		MemoryId: ptr.String("__MemoryId__"),
+		Records: []types.MemoryRecordCreateInput{
+			{
+				RequestIdentifier: ptr.String("__RequestIdentifier__"),
+				Namespaces: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Content: &types.MemoryContentMemberText{
+					Value: "__MemoryContentMemberText__",
+				},
+				Timestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				MemoryStrategyId: ptr.String("__MemoryStrategyId__"),
+				Metadata: map[string]types.MemoryRecordMetadataValue{
+					"key0": &types.MemoryRecordMetadataValueMemberStringValue{
+						Value: "__MemoryRecordMetadataValueMemberStringValue__",
+					},
+				},
+			},
+			{
+				RequestIdentifier: ptr.String("__RequestIdentifier__"),
+				Namespaces: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Content: &types.MemoryContentMemberText{
+					Value: "__MemoryContentMemberText__",
+				},
+				Timestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				MemoryStrategyId: ptr.String("__MemoryStrategyId__"),
+				Metadata: map[string]types.MemoryRecordMetadataValue{
+					"key0": &types.MemoryRecordMetadataValueMemberStringValue{
+						Value: "__MemoryRecordMetadataValueMemberStringValue__",
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -203,7 +242,17 @@ func TestCheckResponseSnapshot_BatchDeleteMemoryRecords(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDeleteMemoryRecords(context.Background(), &BatchDeleteMemoryRecordsInput{})
+	got, err := svc.BatchDeleteMemoryRecords(context.Background(), &BatchDeleteMemoryRecordsInput{
+		MemoryId: ptr.String("__MemoryId__"),
+		Records: []types.MemoryRecordDeleteInput{
+			{
+				MemoryRecordId: ptr.String("__MemoryRecordId__"),
+			},
+			{
+				MemoryRecordId: ptr.String("__MemoryRecordId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -255,7 +304,45 @@ func TestCheckResponseSnapshot_BatchUpdateMemoryRecords(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchUpdateMemoryRecords(context.Background(), &BatchUpdateMemoryRecordsInput{})
+	got, err := svc.BatchUpdateMemoryRecords(context.Background(), &BatchUpdateMemoryRecordsInput{
+		MemoryId: ptr.String("__MemoryId__"),
+		Records: []types.MemoryRecordUpdateInput{
+			{
+				MemoryRecordId: ptr.String("__MemoryRecordId__"),
+				Timestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Content: &types.MemoryContentMemberText{
+					Value: "__MemoryContentMemberText__",
+				},
+				Namespaces: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MemoryStrategyId: ptr.String("__MemoryStrategyId__"),
+				Metadata: map[string]types.MemoryRecordMetadataValue{
+					"key0": &types.MemoryRecordMetadataValueMemberStringValue{
+						Value: "__MemoryRecordMetadataValueMemberStringValue__",
+					},
+				},
+			},
+			{
+				MemoryRecordId: ptr.String("__MemoryRecordId__"),
+				Timestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Content: &types.MemoryContentMemberText{
+					Value: "__MemoryContentMemberText__",
+				},
+				Namespaces: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MemoryStrategyId: ptr.String("__MemoryStrategyId__"),
+				Metadata: map[string]types.MemoryRecordMetadataValue{
+					"key0": &types.MemoryRecordMetadataValueMemberStringValue{
+						Value: "__MemoryRecordMetadataValueMemberStringValue__",
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -274,7 +361,12 @@ func TestCheckResponseSnapshot_CompleteResourceTokenAuth(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CompleteResourceTokenAuth(context.Background(), &CompleteResourceTokenAuthInput{})
+	got, err := svc.CompleteResourceTokenAuth(context.Background(), &CompleteResourceTokenAuthInput{
+		UserIdentifier: &types.UserIdentifierMemberUserToken{
+			Value: "__UserIdentifierMemberUserToken__",
+		},
+		SessionUri: ptr.String("__SessionUri__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -300,7 +392,54 @@ func TestCheckResponseSnapshot_CreateABTest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateABTest(context.Background(), &CreateABTestInput{})
+	got, err := svc.CreateABTest(context.Background(), &CreateABTestInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		GatewayArn:  ptr.String("__GatewayArn__"),
+		Variants: []types.Variant{
+			{
+				Name:   ptr.String("__Name__"),
+				Weight: ptr.Int32(1),
+				VariantConfiguration: &types.VariantConfiguration{
+					ConfigurationBundle: &types.ConfigurationBundleRef{
+						BundleArn:     ptr.String("__BundleArn__"),
+						BundleVersion: ptr.String("__BundleVersion__"),
+					},
+					Target: &types.TargetRef{
+						Name: ptr.String("__Name__"),
+					},
+				},
+			},
+			{
+				Name:   ptr.String("__Name__"),
+				Weight: ptr.Int32(1),
+				VariantConfiguration: &types.VariantConfiguration{
+					ConfigurationBundle: &types.ConfigurationBundleRef{
+						BundleArn:     ptr.String("__BundleArn__"),
+						BundleVersion: ptr.String("__BundleVersion__"),
+					},
+					Target: &types.TargetRef{
+						Name: ptr.String("__Name__"),
+					},
+				},
+			},
+		},
+		GatewayFilter: &types.GatewayFilter{
+			TargetPaths: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		EvaluationConfig: &types.ABTestEvaluationConfigMemberOnlineEvaluationConfigArn{
+			Value: "__ABTestEvaluationConfigMemberOnlineEvaluationConfigArn__",
+		},
+		RoleArn:        ptr.String("__RoleArn__"),
+		EnableOnCreate: ptr.Bool(true),
+		ClientToken:    ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -354,7 +493,41 @@ func TestCheckResponseSnapshot_CreateEvent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEvent(context.Background(), &CreateEventInput{})
+	got, err := svc.CreateEvent(context.Background(), &CreateEventInput{
+		MemoryId:       ptr.String("__MemoryId__"),
+		ActorId:        ptr.String("__ActorId__"),
+		SessionId:      ptr.String("__SessionId__"),
+		EventTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Payload: []types.PayloadType{
+			&types.PayloadTypeMemberConversational{
+				Value: types.Conversational{
+					Content: &types.ContentMemberText{
+						Value: "__ContentMemberText__",
+					},
+					Role: types.Role("ASSISTANT"),
+				},
+			},
+			&types.PayloadTypeMemberConversational{
+				Value: types.Conversational{
+					Content: &types.ContentMemberText{
+						Value: "__ContentMemberText__",
+					},
+					Role: types.Role("ASSISTANT"),
+				},
+			},
+		},
+		Branch: &types.Branch{
+			RootEventId: ptr.String("__RootEventId__"),
+			Name:        ptr.String("__Name__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Metadata: map[string]types.MetadataValue{
+			"key0": &types.MetadataValueMemberStringValue{
+				Value: "__MetadataValueMemberStringValue__",
+			},
+		},
+		ExtractionMode: types.ExtractionMode("SKIP"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -403,7 +576,33 @@ func TestCheckResponseSnapshot_CreatePaymentInstrument(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePaymentInstrument(context.Background(), &CreatePaymentInstrumentInput{})
+	got, err := svc.CreatePaymentInstrument(context.Background(), &CreatePaymentInstrumentInput{
+		UserId:                ptr.String("__UserId__"),
+		AgentName:             ptr.String("__AgentName__"),
+		PaymentManagerArn:     ptr.String("__PaymentManagerArn__"),
+		PaymentConnectorId:    ptr.String("__PaymentConnectorId__"),
+		PaymentInstrumentType: types.PaymentInstrumentType("EMBEDDED_CRYPTO_WALLET"),
+		PaymentInstrumentDetails: &types.PaymentInstrumentDetailsMemberEmbeddedCryptoWallet{
+			Value: types.EmbeddedCryptoWallet{
+				Network: types.CryptoWalletNetwork("ETHEREUM"),
+				LinkedAccounts: []types.LinkedAccount{
+					&types.LinkedAccountMemberEmail{
+						Value: types.LinkedAccountEmail{
+							EmailAddress: ptr.String("__EmailAddress__"),
+						},
+					},
+					&types.LinkedAccountMemberEmail{
+						Value: types.LinkedAccountEmail{
+							EmailAddress: ptr.String("__EmailAddress__"),
+						},
+					},
+				},
+				WalletAddress: ptr.String("__WalletAddress__"),
+				RedirectUrl:   ptr.String("__RedirectUrl__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -444,7 +643,19 @@ func TestCheckResponseSnapshot_CreatePaymentSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePaymentSession(context.Background(), &CreatePaymentSessionInput{})
+	got, err := svc.CreatePaymentSession(context.Background(), &CreatePaymentSessionInput{
+		UserId:            ptr.String("__UserId__"),
+		AgentName:         ptr.String("__AgentName__"),
+		PaymentManagerArn: ptr.String("__PaymentManagerArn__"),
+		Limits: &types.SessionLimits{
+			MaxSpendAmount: &types.Amount{
+				Value:    ptr.String("__Value__"),
+				Currency: types.Currency("USD"),
+			},
+		},
+		ExpiryTimeInMinutes: ptr.Int32(1),
+		ClientToken:         ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -467,7 +678,9 @@ func TestCheckResponseSnapshot_DeleteABTest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteABTest(context.Background(), &DeleteABTestInput{})
+	got, err := svc.DeleteABTest(context.Background(), &DeleteABTestInput{
+		AbTestId: ptr.String("__AbTestId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -490,7 +703,9 @@ func TestCheckResponseSnapshot_DeleteBatchEvaluation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBatchEvaluation(context.Background(), &DeleteBatchEvaluationInput{})
+	got, err := svc.DeleteBatchEvaluation(context.Background(), &DeleteBatchEvaluationInput{
+		BatchEvaluationId: ptr.String("__BatchEvaluationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -513,7 +728,10 @@ func TestCheckResponseSnapshot_DeleteCapacityProviderSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCapacityProviderSession(context.Background(), &DeleteCapacityProviderSessionInput{})
+	got, err := svc.DeleteCapacityProviderSession(context.Background(), &DeleteCapacityProviderSessionInput{
+		CapacityProviderId: ptr.String("__CapacityProviderId__"),
+		SessionId:          ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -534,7 +752,12 @@ func TestCheckResponseSnapshot_DeleteEvent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEvent(context.Background(), &DeleteEventInput{})
+	got, err := svc.DeleteEvent(context.Background(), &DeleteEventInput{
+		MemoryId:  ptr.String("__MemoryId__"),
+		SessionId: ptr.String("__SessionId__"),
+		EventId:   ptr.String("__EventId__"),
+		ActorId:   ptr.String("__ActorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -555,7 +778,10 @@ func TestCheckResponseSnapshot_DeleteMemoryRecord(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMemoryRecord(context.Background(), &DeleteMemoryRecordInput{})
+	got, err := svc.DeleteMemoryRecord(context.Background(), &DeleteMemoryRecordInput{
+		MemoryId:       ptr.String("__MemoryId__"),
+		MemoryRecordId: ptr.String("__MemoryRecordId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -576,7 +802,12 @@ func TestCheckResponseSnapshot_DeletePaymentInstrument(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePaymentInstrument(context.Background(), &DeletePaymentInstrumentInput{})
+	got, err := svc.DeletePaymentInstrument(context.Background(), &DeletePaymentInstrumentInput{
+		UserId:              ptr.String("__UserId__"),
+		PaymentManagerArn:   ptr.String("__PaymentManagerArn__"),
+		PaymentConnectorId:  ptr.String("__PaymentConnectorId__"),
+		PaymentInstrumentId: ptr.String("__PaymentInstrumentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -597,7 +828,11 @@ func TestCheckResponseSnapshot_DeletePaymentSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePaymentSession(context.Background(), &DeletePaymentSessionInput{})
+	got, err := svc.DeletePaymentSession(context.Background(), &DeletePaymentSessionInput{
+		UserId:            ptr.String("__UserId__"),
+		PaymentManagerArn: ptr.String("__PaymentManagerArn__"),
+		PaymentSessionId:  ptr.String("__PaymentSessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -619,7 +854,9 @@ func TestCheckResponseSnapshot_DeleteRecommendation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRecommendation(context.Background(), &DeleteRecommendationInput{})
+	got, err := svc.DeleteRecommendation(context.Background(), &DeleteRecommendationInput{
+		RecommendationId: ptr.String("__RecommendationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -693,7 +930,75 @@ func TestCheckResponseSnapshot_Evaluate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Evaluate(context.Background(), &EvaluateInput{})
+	got, err := svc.Evaluate(context.Background(), &EvaluateInput{
+		EvaluatorId: ptr.String("__EvaluatorId__"),
+		EvaluationInput: &types.EvaluationInputMemberSessionSpans{
+			Value: []document.Interface{
+				document.NewLazyDocument("__Document__"),
+				document.NewLazyDocument("__Document__"),
+			},
+		},
+		EvaluationTarget: &types.EvaluationTargetMemberSpanIds{
+			Value: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		EvaluationReferenceInputs: []types.EvaluationReferenceInput{
+			{
+				Context: &types.ContextMemberSpanContext{
+					Value: types.SpanContext{
+						SessionId: ptr.String("__SessionId__"),
+						TraceId:   ptr.String("__TraceId__"),
+						SpanId:    ptr.String("__SpanId__"),
+					},
+				},
+				ExpectedResponse: &types.EvaluationContentMemberText{
+					Value: "__EvaluationContentMemberText__",
+				},
+				Assertions: []types.EvaluationContent{
+					&types.EvaluationContentMemberText{
+						Value: "__EvaluationContentMemberText__",
+					},
+					&types.EvaluationContentMemberText{
+						Value: "__EvaluationContentMemberText__",
+					},
+				},
+				ExpectedTrajectory: &types.EvaluationExpectedTrajectory{
+					ToolNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				Context: &types.ContextMemberSpanContext{
+					Value: types.SpanContext{
+						SessionId: ptr.String("__SessionId__"),
+						TraceId:   ptr.String("__TraceId__"),
+						SpanId:    ptr.String("__SpanId__"),
+					},
+				},
+				ExpectedResponse: &types.EvaluationContentMemberText{
+					Value: "__EvaluationContentMemberText__",
+				},
+				Assertions: []types.EvaluationContent{
+					&types.EvaluationContentMemberText{
+						Value: "__EvaluationContentMemberText__",
+					},
+					&types.EvaluationContentMemberText{
+						Value: "__EvaluationContentMemberText__",
+					},
+				},
+				ExpectedTrajectory: &types.EvaluationExpectedTrajectory{
+					ToolNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -845,7 +1150,9 @@ func TestCheckResponseSnapshot_GetABTest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetABTest(context.Background(), &GetABTestInput{})
+	got, err := svc.GetABTest(context.Background(), &GetABTestInput{
+		AbTestId: ptr.String("__AbTestId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -857,8 +1164,8 @@ func TestCheckResponseSnapshot_GetABTest(t *testing.T) {
 func TestCheckResponseSnapshot_GetAgentCard(t *testing.T) {
 	want := &GetAgentCardOutput{
 		RuntimeSessionId: ptr.String("__RuntimeSessionId__"),
-		AgentCard:        nil,
-		StatusCode:       ptr.Int32(1),
+		AgentCard:        document.NewLazyDocument("__Document__"),
+		StatusCode:       ptr.Int32(200),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetAgentCard.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -868,7 +1175,11 @@ func TestCheckResponseSnapshot_GetAgentCard(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAgentCard(context.Background(), &GetAgentCardInput{})
+	got, err := svc.GetAgentCard(context.Background(), &GetAgentCardInput{
+		RuntimeSessionId: ptr.String("__RuntimeSessionId__"),
+		AgentRuntimeArn:  ptr.String("__AgentRuntimeArn__"),
+		Qualifier:        ptr.String("__Qualifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1821,7 +2132,9 @@ func TestCheckResponseSnapshot_GetBatchEvaluation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBatchEvaluation(context.Background(), &GetBatchEvaluationInput{})
+	got, err := svc.GetBatchEvaluation(context.Background(), &GetBatchEvaluationInput{
+		BatchEvaluationId: ptr.String("__BatchEvaluationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1979,7 +2292,10 @@ func TestCheckResponseSnapshot_GetBrowserSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBrowserSession(context.Background(), &GetBrowserSessionInput{})
+	got, err := svc.GetBrowserSession(context.Background(), &GetBrowserSessionInput{
+		BrowserIdentifier: ptr.String("__BrowserIdentifier__"),
+		SessionId:         ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2037,7 +2353,10 @@ func TestCheckResponseSnapshot_GetCodeInterpreterSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCodeInterpreterSession(context.Background(), &GetCodeInterpreterSessionInput{})
+	got, err := svc.GetCodeInterpreterSession(context.Background(), &GetCodeInterpreterSessionInput{
+		CodeInterpreterIdentifier: ptr.String("__CodeInterpreterIdentifier__"),
+		SessionId:                 ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2091,7 +2410,12 @@ func TestCheckResponseSnapshot_GetEvent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEvent(context.Background(), &GetEventInput{})
+	got, err := svc.GetEvent(context.Background(), &GetEventInput{
+		MemoryId:  ptr.String("__MemoryId__"),
+		SessionId: ptr.String("__SessionId__"),
+		ActorId:   ptr.String("__ActorId__"),
+		EventId:   ptr.String("__EventId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2128,7 +2452,10 @@ func TestCheckResponseSnapshot_GetMemoryRecord(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMemoryRecord(context.Background(), &GetMemoryRecordInput{})
+	got, err := svc.GetMemoryRecord(context.Background(), &GetMemoryRecordInput{
+		MemoryId:       ptr.String("__MemoryId__"),
+		MemoryRecordId: ptr.String("__MemoryRecordId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2177,7 +2504,13 @@ func TestCheckResponseSnapshot_GetPaymentInstrument(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPaymentInstrument(context.Background(), &GetPaymentInstrumentInput{})
+	got, err := svc.GetPaymentInstrument(context.Background(), &GetPaymentInstrumentInput{
+		UserId:              ptr.String("__UserId__"),
+		AgentName:           ptr.String("__AgentName__"),
+		PaymentManagerArn:   ptr.String("__PaymentManagerArn__"),
+		PaymentConnectorId:  ptr.String("__PaymentConnectorId__"),
+		PaymentInstrumentId: ptr.String("__PaymentInstrumentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2205,7 +2538,15 @@ func TestCheckResponseSnapshot_GetPaymentInstrumentBalance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPaymentInstrumentBalance(context.Background(), &GetPaymentInstrumentBalanceInput{})
+	got, err := svc.GetPaymentInstrumentBalance(context.Background(), &GetPaymentInstrumentBalanceInput{
+		UserId:              ptr.String("__UserId__"),
+		AgentName:           ptr.String("__AgentName__"),
+		PaymentManagerArn:   ptr.String("__PaymentManagerArn__"),
+		PaymentConnectorId:  ptr.String("__PaymentConnectorId__"),
+		PaymentInstrumentId: ptr.String("__PaymentInstrumentId__"),
+		Chain:               types.BlockchainChainId("BASE"),
+		Token:               types.InstrumentBalanceToken("USDC"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2246,7 +2587,12 @@ func TestCheckResponseSnapshot_GetPaymentSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPaymentSession(context.Background(), &GetPaymentSessionInput{})
+	got, err := svc.GetPaymentSession(context.Background(), &GetPaymentSessionInput{
+		UserId:            ptr.String("__UserId__"),
+		AgentName:         ptr.String("__AgentName__"),
+		PaymentManagerArn: ptr.String("__PaymentManagerArn__"),
+		PaymentSessionId:  ptr.String("__PaymentSessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2269,8 +2615,8 @@ func TestCheckResponseSnapshot_GetRecommendation(t *testing.T) {
 				},
 				AgentTraces: &types.AgentTracesConfigMemberSessionSpans{
 					Value: []document.Interface{
-						nil,
-						nil,
+						document.NewLazyDocument("__Document__"),
+						document.NewLazyDocument("__Document__"),
 					},
 				},
 				EvaluationConfig: &types.RecommendationEvaluationConfig{
@@ -2310,7 +2656,9 @@ func TestCheckResponseSnapshot_GetRecommendation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRecommendation(context.Background(), &GetRecommendationInput{})
+	got, err := svc.GetRecommendation(context.Background(), &GetRecommendationInput{
+		RecommendationId: ptr.String("__RecommendationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2331,7 +2679,10 @@ func TestCheckResponseSnapshot_GetResourceApiKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourceApiKey(context.Background(), &GetResourceApiKeyInput{})
+	got, err := svc.GetResourceApiKey(context.Background(), &GetResourceApiKeyInput{
+		WorkloadIdentityToken:          ptr.String("__WorkloadIdentityToken__"),
+		ResourceCredentialProviderName: ptr.String("__ResourceCredentialProviderName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2355,7 +2706,30 @@ func TestCheckResponseSnapshot_GetResourceOauth2Token(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourceOauth2Token(context.Background(), &GetResourceOauth2TokenInput{})
+	got, err := svc.GetResourceOauth2Token(context.Background(), &GetResourceOauth2TokenInput{
+		WorkloadIdentityToken:          ptr.String("__WorkloadIdentityToken__"),
+		ResourceCredentialProviderName: ptr.String("__ResourceCredentialProviderName__"),
+		Scopes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Oauth2Flow:              types.Oauth2FlowType("USER_FEDERATION"),
+		SessionUri:              ptr.String("__SessionUri__"),
+		ResourceOauth2ReturnUrl: ptr.String("__ResourceOauth2ReturnUrl__"),
+		ForceAuthentication:     ptr.Bool(true),
+		CustomParameters: map[string]string{
+			"key0": "__Value__",
+		},
+		CustomState: ptr.String("__CustomState__"),
+		Resources: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Audiences: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2381,7 +2755,19 @@ func TestCheckResponseSnapshot_GetResourcePaymentToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourcePaymentToken(context.Background(), &GetResourcePaymentTokenInput{})
+	got, err := svc.GetResourcePaymentToken(context.Background(), &GetResourcePaymentTokenInput{
+		WorkloadIdentityToken:          ptr.String("__WorkloadIdentityToken__"),
+		ResourceCredentialProviderName: ptr.String("__ResourceCredentialProviderName__"),
+		PaymentTokenRequest: &types.PaymentTokenRequestInputMemberCoinbaseCdpTokenRequest{
+			Value: types.CoinbaseCdpTokenRequestInput{
+				RequestMethod:          types.PaymentHttpMethodType("GET"),
+				RequestHost:            ptr.String("__RequestHost__"),
+				RequestPath:            ptr.String("__RequestPath__"),
+				IncludeWalletAuthToken: true,
+				RequestBody:            ptr.String("__RequestBody__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2402,7 +2788,9 @@ func TestCheckResponseSnapshot_GetWorkloadAccessToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorkloadAccessToken(context.Background(), &GetWorkloadAccessTokenInput{})
+	got, err := svc.GetWorkloadAccessToken(context.Background(), &GetWorkloadAccessTokenInput{
+		WorkloadName: ptr.String("__WorkloadName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2423,7 +2811,10 @@ func TestCheckResponseSnapshot_GetWorkloadAccessTokenForJWT(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorkloadAccessTokenForJWT(context.Background(), &GetWorkloadAccessTokenForJWTInput{})
+	got, err := svc.GetWorkloadAccessTokenForJWT(context.Background(), &GetWorkloadAccessTokenForJWTInput{
+		WorkloadName: ptr.String("__WorkloadName__"),
+		UserToken:    ptr.String("__UserToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2444,7 +2835,10 @@ func TestCheckResponseSnapshot_GetWorkloadAccessTokenForUserId(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorkloadAccessTokenForUserId(context.Background(), &GetWorkloadAccessTokenForUserIdInput{})
+	got, err := svc.GetWorkloadAccessTokenForUserId(context.Background(), &GetWorkloadAccessTokenForUserIdInput{
+		WorkloadName: ptr.String("__WorkloadName__"),
+		UserId:       ptr.String("__UserId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2463,7 +2857,8 @@ func TestCheckResponseSnapshot_InvokeAgentRuntime(t *testing.T) {
 		TraceState:         ptr.String("__TraceState__"),
 		Baggage:            ptr.String("__Baggage__"),
 		ContentType:        ptr.String("__ContentType__"),
-		StatusCode:         ptr.Int32(1),
+		Response:           io.NopCloser(bytes.NewReader([]byte("__Response__"))),
+		StatusCode:         ptr.Int32(200),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InvokeAgentRuntime.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2473,13 +2868,34 @@ func TestCheckResponseSnapshot_InvokeAgentRuntime(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InvokeAgentRuntime(context.Background(), &InvokeAgentRuntimeInput{})
+	got, err := svc.InvokeAgentRuntime(context.Background(), &InvokeAgentRuntimeInput{
+		ContentType:        ptr.String("__ContentType__"),
+		Accept:             ptr.String("__Accept__"),
+		McpSessionId:       ptr.String("__McpSessionId__"),
+		RuntimeSessionId:   ptr.String("__RuntimeSessionId__"),
+		McpProtocolVersion: ptr.String("__McpProtocolVersion__"),
+		McpMethod:          ptr.String("__McpMethod__"),
+		McpName:            ptr.String("__McpName__"),
+		RuntimeUserId:      ptr.String("__RuntimeUserId__"),
+		TraceId:            ptr.String("__TraceId__"),
+		TraceParent:        ptr.String("__TraceParent__"),
+		TraceState:         ptr.String("__TraceState__"),
+		Baggage:            ptr.String("__Baggage__"),
+		AgentRuntimeArn:    ptr.String("__AgentRuntimeArn__"),
+		Qualifier:          ptr.String("__Qualifier__"),
+		AccountId:          ptr.String("__AccountId__"),
+		Payload:            []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "InvokeAgentRuntime.response", err)
 	}
+}
+
+func TestCheckResponseSnapshot_InvokeAgentRuntimeCommand(t *testing.T) {
+	t.Skip("event stream operation")
 }
 
 func TestCheckResponseSnapshot_InvokeBrowser(t *testing.T) {
@@ -2500,13 +2916,32 @@ func TestCheckResponseSnapshot_InvokeBrowser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InvokeBrowser(context.Background(), &InvokeBrowserInput{})
+	got, err := svc.InvokeBrowser(context.Background(), &InvokeBrowserInput{
+		BrowserIdentifier: ptr.String("__BrowserIdentifier__"),
+		SessionId:         ptr.String("__SessionId__"),
+		Action: &types.BrowserActionMemberMouseClick{
+			Value: types.MouseClickArguments{
+				X:          ptr.Int32(1),
+				Y:          ptr.Int32(1),
+				Button:     types.MouseButton("LEFT"),
+				ClickCount: ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "InvokeBrowser.response", err)
 	}
+}
+
+func TestCheckResponseSnapshot_InvokeCodeInterpreter(t *testing.T) {
+	t.Skip("event stream operation")
+}
+
+func TestCheckResponseSnapshot_InvokeHarness(t *testing.T) {
+	t.Skip("event stream operation")
 }
 
 func TestCheckResponseSnapshot_ListABTests(t *testing.T) {
@@ -2545,7 +2980,10 @@ func TestCheckResponseSnapshot_ListABTests(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListABTests(context.Background(), &ListABTestsInput{})
+	got, err := svc.ListABTests(context.Background(), &ListABTestsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2574,7 +3012,11 @@ func TestCheckResponseSnapshot_ListActors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListActors(context.Background(), &ListActorsInput{})
+	got, err := svc.ListActors(context.Background(), &ListActorsInput{
+		MemoryId:   ptr.String("__MemoryId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2707,7 +3149,10 @@ func TestCheckResponseSnapshot_ListBatchEvaluations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBatchEvaluations(context.Background(), &ListBatchEvaluationsInput{})
+	got, err := svc.ListBatchEvaluations(context.Background(), &ListBatchEvaluationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2746,7 +3191,12 @@ func TestCheckResponseSnapshot_ListBrowserSessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBrowserSessions(context.Background(), &ListBrowserSessionsInput{})
+	got, err := svc.ListBrowserSessions(context.Background(), &ListBrowserSessionsInput{
+		BrowserIdentifier: ptr.String("__BrowserIdentifier__"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+		Status:            types.BrowserSessionStatus("READY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2785,7 +3235,12 @@ func TestCheckResponseSnapshot_ListCodeInterpreterSessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCodeInterpreterSessions(context.Background(), &ListCodeInterpreterSessionsInput{})
+	got, err := svc.ListCodeInterpreterSessions(context.Background(), &ListCodeInterpreterSessionsInput{
+		CodeInterpreterIdentifier: ptr.String("__CodeInterpreterIdentifier__"),
+		MaxResults:                ptr.Int32(1),
+		NextToken:                 ptr.String("__NextToken__"),
+		Status:                    types.CodeInterpreterSessionStatus("READY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2876,7 +3331,44 @@ func TestCheckResponseSnapshot_ListEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEvents(context.Background(), &ListEventsInput{})
+	got, err := svc.ListEvents(context.Background(), &ListEventsInput{
+		MemoryId:        ptr.String("__MemoryId__"),
+		SessionId:       ptr.String("__SessionId__"),
+		ActorId:         ptr.String("__ActorId__"),
+		IncludePayloads: ptr.Bool(true),
+		Filter: &types.FilterInput{
+			Branch: &types.BranchFilter{
+				Name:                  ptr.String("__Name__"),
+				IncludeParentBranches: ptr.Bool(true),
+			},
+			EventMetadata: []types.EventMetadataFilterExpression{
+				{
+					Left: &types.LeftExpressionMemberMetadataKey{
+						Value: "__LeftExpressionMemberMetadataKey__",
+					},
+					Operator: types.OperatorType("EQUALS_TO"),
+					Right: &types.RightExpressionMemberMetadataValue{
+						Value: &types.MetadataValueMemberStringValue{
+							Value: "__MetadataValueMemberStringValue__",
+						},
+					},
+				},
+				{
+					Left: &types.LeftExpressionMemberMetadataKey{
+						Value: "__LeftExpressionMemberMetadataKey__",
+					},
+					Operator: types.OperatorType("EQUALS_TO"),
+					Right: &types.RightExpressionMemberMetadataValue{
+						Value: &types.MetadataValueMemberStringValue{
+							Value: "__MetadataValueMemberStringValue__",
+						},
+					},
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2939,7 +3431,17 @@ func TestCheckResponseSnapshot_ListMemoryExtractionJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMemoryExtractionJobs(context.Background(), &ListMemoryExtractionJobsInput{})
+	got, err := svc.ListMemoryExtractionJobs(context.Background(), &ListMemoryExtractionJobsInput{
+		MemoryId:   ptr.String("__MemoryId__"),
+		MaxResults: ptr.Int32(1),
+		Filter: &types.ExtractionJobFilterInput{
+			StrategyId: ptr.String("__StrategyId__"),
+			SessionId:  ptr.String("__SessionId__"),
+			ActorId:    ptr.String("__ActorId__"),
+			Status:     types.ExtractionJobStatus("FAILED"),
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2998,7 +3500,38 @@ func TestCheckResponseSnapshot_ListMemoryRecords(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMemoryRecords(context.Background(), &ListMemoryRecordsInput{})
+	got, err := svc.ListMemoryRecords(context.Background(), &ListMemoryRecordsInput{
+		MemoryId:         ptr.String("__MemoryId__"),
+		Namespace:        ptr.String("__Namespace__"),
+		NamespacePath:    ptr.String("__NamespacePath__"),
+		MemoryStrategyId: ptr.String("__MemoryStrategyId__"),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+		MetadataFilters: []types.MemoryMetadataFilterExpression{
+			{
+				Left: &types.MemoryRecordLeftExpressionMemberMetadataKey{
+					Value: "__MemoryRecordLeftExpressionMemberMetadataKey__",
+				},
+				Operator: types.MemoryRecordOperatorType("EQUALS_TO"),
+				Right: &types.MemoryRecordRightExpressionMemberMetadataValue{
+					Value: &types.MemoryRecordMetadataValueMemberStringValue{
+						Value: "__MemoryRecordMetadataValueMemberStringValue__",
+					},
+				},
+			},
+			{
+				Left: &types.MemoryRecordLeftExpressionMemberMetadataKey{
+					Value: "__MemoryRecordLeftExpressionMemberMetadataKey__",
+				},
+				Operator: types.MemoryRecordOperatorType("EQUALS_TO"),
+				Right: &types.MemoryRecordRightExpressionMemberMetadataValue{
+					Value: &types.MemoryRecordMetadataValueMemberStringValue{
+						Value: "__MemoryRecordMetadataValueMemberStringValue__",
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3041,7 +3574,14 @@ func TestCheckResponseSnapshot_ListPaymentInstruments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPaymentInstruments(context.Background(), &ListPaymentInstrumentsInput{})
+	got, err := svc.ListPaymentInstruments(context.Background(), &ListPaymentInstrumentsInput{
+		UserId:             ptr.String("__UserId__"),
+		AgentName:          ptr.String("__AgentName__"),
+		PaymentManagerArn:  ptr.String("__PaymentManagerArn__"),
+		PaymentConnectorId: ptr.String("__PaymentConnectorId__"),
+		NextToken:          ptr.String("__NextToken__"),
+		MaxResults:         ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3080,7 +3620,13 @@ func TestCheckResponseSnapshot_ListPaymentSessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPaymentSessions(context.Background(), &ListPaymentSessionsInput{})
+	got, err := svc.ListPaymentSessions(context.Background(), &ListPaymentSessionsInput{
+		UserId:            ptr.String("__UserId__"),
+		AgentName:         ptr.String("__AgentName__"),
+		PaymentManagerArn: ptr.String("__PaymentManagerArn__"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3123,7 +3669,11 @@ func TestCheckResponseSnapshot_ListRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRecommendations(context.Background(), &ListRecommendationsInput{})
+	got, err := svc.ListRecommendations(context.Background(), &ListRecommendationsInput{
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		StatusFilter: types.RecommendationStatus("PENDING"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3156,7 +3706,15 @@ func TestCheckResponseSnapshot_ListSessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSessions(context.Background(), &ListSessionsInput{})
+	got, err := svc.ListSessions(context.Background(), &ListSessionsInput{
+		MemoryId:   ptr.String("__MemoryId__"),
+		ActorId:    ptr.String("__ActorId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filter: &types.SessionFilter{
+			EventFilter: types.EventFilterCondition("HAS_EVENTS"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3176,7 +3734,7 @@ func TestCheckResponseSnapshot_ProcessPayment(t *testing.T) {
 		PaymentOutput: &types.PaymentOutputMemberCryptoX402{
 			Value: types.CryptoX402PaymentOutput{
 				Version: ptr.String("__Version__"),
-				Payload: nil,
+				Payload: document.NewLazyDocument("__Document__"),
 			},
 		},
 		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -3190,7 +3748,21 @@ func TestCheckResponseSnapshot_ProcessPayment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ProcessPayment(context.Background(), &ProcessPaymentInput{})
+	got, err := svc.ProcessPayment(context.Background(), &ProcessPaymentInput{
+		UserId:              ptr.String("__UserId__"),
+		AgentName:           ptr.String("__AgentName__"),
+		PaymentManagerArn:   ptr.String("__PaymentManagerArn__"),
+		PaymentSessionId:    ptr.String("__PaymentSessionId__"),
+		PaymentInstrumentId: ptr.String("__PaymentInstrumentId__"),
+		PaymentType:         types.PaymentType("CRYPTO_X402"),
+		PaymentInput: &types.PaymentInputMemberCryptoX402{
+			Value: types.CryptoX402PaymentInput{
+				Version: ptr.String("__Version__"),
+				Payload: document.NewLazyDocument("__Document__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3249,7 +3821,42 @@ func TestCheckResponseSnapshot_RetrieveMemoryRecords(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RetrieveMemoryRecords(context.Background(), &RetrieveMemoryRecordsInput{})
+	got, err := svc.RetrieveMemoryRecords(context.Background(), &RetrieveMemoryRecordsInput{
+		MemoryId:      ptr.String("__MemoryId__"),
+		Namespace:     ptr.String("__Namespace__"),
+		NamespacePath: ptr.String("__NamespacePath__"),
+		SearchCriteria: &types.SearchCriteria{
+			SearchQuery:      ptr.String("__SearchQuery__"),
+			MemoryStrategyId: ptr.String("__MemoryStrategyId__"),
+			TopK:             ptr.Int32(1),
+			MetadataFilters: []types.MemoryMetadataFilterExpression{
+				{
+					Left: &types.MemoryRecordLeftExpressionMemberMetadataKey{
+						Value: "__MemoryRecordLeftExpressionMemberMetadataKey__",
+					},
+					Operator: types.MemoryRecordOperatorType("EQUALS_TO"),
+					Right: &types.MemoryRecordRightExpressionMemberMetadataValue{
+						Value: &types.MemoryRecordMetadataValueMemberStringValue{
+							Value: "__MemoryRecordMetadataValueMemberStringValue__",
+						},
+					},
+				},
+				{
+					Left: &types.MemoryRecordLeftExpressionMemberMetadataKey{
+						Value: "__MemoryRecordLeftExpressionMemberMetadataKey__",
+					},
+					Operator: types.MemoryRecordOperatorType("EQUALS_TO"),
+					Right: &types.MemoryRecordRightExpressionMemberMetadataValue{
+						Value: &types.MemoryRecordMetadataValueMemberStringValue{
+							Value: "__MemoryRecordMetadataValueMemberStringValue__",
+						},
+					},
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3273,7 +3880,14 @@ func TestCheckResponseSnapshot_SaveBrowserSessionProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SaveBrowserSessionProfile(context.Background(), &SaveBrowserSessionProfileInput{})
+	got, err := svc.SaveBrowserSessionProfile(context.Background(), &SaveBrowserSessionProfileInput{
+		TraceId:           ptr.String("__TraceId__"),
+		TraceParent:       ptr.String("__TraceParent__"),
+		ProfileIdentifier: ptr.String("__ProfileIdentifier__"),
+		BrowserIdentifier: ptr.String("__BrowserIdentifier__"),
+		SessionId:         ptr.String("__SessionId__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3379,7 +3993,15 @@ func TestCheckResponseSnapshot_SearchRegistryRecords(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchRegistryRecords(context.Background(), &SearchRegistryRecordsInput{})
+	got, err := svc.SearchRegistryRecords(context.Background(), &SearchRegistryRecordsInput{
+		SearchQuery: ptr.String("__SearchQuery__"),
+		RegistryIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		Filters:    document.NewLazyDocument("__Document__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3431,7 +4053,143 @@ func TestCheckResponseSnapshot_StartBatchEvaluation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartBatchEvaluation(context.Background(), &StartBatchEvaluationInput{})
+	got, err := svc.StartBatchEvaluation(context.Background(), &StartBatchEvaluationInput{
+		BatchEvaluationName: ptr.String("__BatchEvaluationName__"),
+		Evaluators: []types.Evaluator{
+			{
+				EvaluatorId: ptr.String("__EvaluatorId__"),
+			},
+			{
+				EvaluatorId: ptr.String("__EvaluatorId__"),
+			},
+		},
+		Insights: []types.Insight{
+			{
+				InsightId: ptr.String("__InsightId__"),
+			},
+			{
+				InsightId: ptr.String("__InsightId__"),
+			},
+		},
+		DataSourceConfig: &types.DataSourceConfigMemberCloudWatchLogs{
+			Value: types.CloudWatchLogsSource{
+				ServiceNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				LogGroupNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				FilterConfig: &types.CloudWatchFilterConfig{
+					SessionIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TimeRange: &types.SessionFilterConfig{
+						StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		EvaluationMetadata: &types.EvaluationMetadataMemberSessionMetadata{
+			Value: []types.SessionMetadataShape{
+				{
+					SessionId:      ptr.String("__SessionId__"),
+					TestScenarioId: ptr.String("__TestScenarioId__"),
+					GroundTruth: &types.GroundTruthSourceMemberInline{
+						Value: types.InlineGroundTruth{
+							Assertions: []types.EvaluationContent{
+								&types.EvaluationContentMemberText{
+									Value: "__EvaluationContentMemberText__",
+								},
+								&types.EvaluationContentMemberText{
+									Value: "__EvaluationContentMemberText__",
+								},
+							},
+							ExpectedTrajectory: &types.EvaluationExpectedTrajectory{
+								ToolNames: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							Turns: []types.GroundTruthTurn{
+								{
+									Input: &types.GroundTruthTurnInputMemberPrompt{
+										Value: "__GroundTruthTurnInputMemberPrompt__",
+									},
+									ExpectedResponse: &types.EvaluationContentMemberText{
+										Value: "__EvaluationContentMemberText__",
+									},
+								},
+								{
+									Input: &types.GroundTruthTurnInputMemberPrompt{
+										Value: "__GroundTruthTurnInputMemberPrompt__",
+									},
+									ExpectedResponse: &types.EvaluationContentMemberText{
+										Value: "__EvaluationContentMemberText__",
+									},
+								},
+							},
+						},
+					},
+					Metadata: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				{
+					SessionId:      ptr.String("__SessionId__"),
+					TestScenarioId: ptr.String("__TestScenarioId__"),
+					GroundTruth: &types.GroundTruthSourceMemberInline{
+						Value: types.InlineGroundTruth{
+							Assertions: []types.EvaluationContent{
+								&types.EvaluationContentMemberText{
+									Value: "__EvaluationContentMemberText__",
+								},
+								&types.EvaluationContentMemberText{
+									Value: "__EvaluationContentMemberText__",
+								},
+							},
+							ExpectedTrajectory: &types.EvaluationExpectedTrajectory{
+								ToolNames: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							Turns: []types.GroundTruthTurn{
+								{
+									Input: &types.GroundTruthTurnInputMemberPrompt{
+										Value: "__GroundTruthTurnInputMemberPrompt__",
+									},
+									ExpectedResponse: &types.EvaluationContentMemberText{
+										Value: "__EvaluationContentMemberText__",
+									},
+								},
+								{
+									Input: &types.GroundTruthTurnInputMemberPrompt{
+										Value: "__GroundTruthTurnInputMemberPrompt__",
+									},
+									ExpectedResponse: &types.EvaluationContentMemberText{
+										Value: "__EvaluationContentMemberText__",
+									},
+								},
+							},
+						},
+					},
+					Metadata: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		KmsKeyArn:   ptr.String("__KmsKeyArn__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3463,7 +4221,135 @@ func TestCheckResponseSnapshot_StartBrowserSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartBrowserSession(context.Background(), &StartBrowserSessionInput{})
+	got, err := svc.StartBrowserSession(context.Background(), &StartBrowserSessionInput{
+		TraceId:               ptr.String("__TraceId__"),
+		TraceParent:           ptr.String("__TraceParent__"),
+		BrowserIdentifier:     ptr.String("__BrowserIdentifier__"),
+		Name:                  ptr.String("__Name__"),
+		SessionTimeoutSeconds: ptr.Int32(1),
+		ViewPort: &types.ViewPort{
+			Width:  ptr.Int32(1),
+			Height: ptr.Int32(1),
+		},
+		Extensions: []types.BrowserExtension{
+			{
+				Location: &types.ResourceLocationMemberS3{
+					Value: types.S3Location{
+						Bucket:    ptr.String("__Bucket__"),
+						Prefix:    ptr.String("__Prefix__"),
+						VersionId: ptr.String("__VersionId__"),
+					},
+				},
+			},
+			{
+				Location: &types.ResourceLocationMemberS3{
+					Value: types.S3Location{
+						Bucket:    ptr.String("__Bucket__"),
+						Prefix:    ptr.String("__Prefix__"),
+						VersionId: ptr.String("__VersionId__"),
+					},
+				},
+			},
+		},
+		ProfileConfiguration: &types.BrowserProfileConfiguration{
+			ProfileIdentifier: ptr.String("__ProfileIdentifier__"),
+		},
+		ProxyConfiguration: &types.ProxyConfiguration{
+			Proxies: []types.Proxy{
+				&types.ProxyMemberExternalProxy{
+					Value: types.ExternalProxy{
+						Server: ptr.String("__Server__"),
+						Port:   ptr.Int32(1),
+						DomainPatterns: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Credentials: &types.ProxyCredentialsMemberBasicAuth{
+							Value: types.BasicAuth{
+								SecretArn: ptr.String("__SecretArn__"),
+							},
+						},
+					},
+				},
+				&types.ProxyMemberExternalProxy{
+					Value: types.ExternalProxy{
+						Server: ptr.String("__Server__"),
+						Port:   ptr.Int32(1),
+						DomainPatterns: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Credentials: &types.ProxyCredentialsMemberBasicAuth{
+							Value: types.BasicAuth{
+								SecretArn: ptr.String("__SecretArn__"),
+							},
+						},
+					},
+				},
+			},
+			Bypass: &types.ProxyBypass{
+				DomainPatterns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		EnterprisePolicies: []types.BrowserEnterprisePolicy{
+			{
+				Location: &types.ResourceLocationMemberS3{
+					Value: types.S3Location{
+						Bucket:    ptr.String("__Bucket__"),
+						Prefix:    ptr.String("__Prefix__"),
+						VersionId: ptr.String("__VersionId__"),
+					},
+				},
+				Type: types.BrowserEnterprisePolicyType("MANAGED"),
+			},
+			{
+				Location: &types.ResourceLocationMemberS3{
+					Value: types.S3Location{
+						Bucket:    ptr.String("__Bucket__"),
+						Prefix:    ptr.String("__Prefix__"),
+						VersionId: ptr.String("__VersionId__"),
+					},
+				},
+				Type: types.BrowserEnterprisePolicyType("MANAGED"),
+			},
+		},
+		Certificates: []types.Certificate{
+			{
+				Location: &types.CertificateLocationMemberSecretsManager{
+					Value: types.SecretsManagerLocation{
+						SecretArn: ptr.String("__SecretArn__"),
+					},
+				},
+			},
+			{
+				Location: &types.CertificateLocationMemberSecretsManager{
+					Value: types.SecretsManagerLocation{
+						SecretArn: ptr.String("__SecretArn__"),
+					},
+				},
+			},
+		},
+		FilesystemConfigurations: []types.ToolsFileSystemConfiguration{
+			&types.ToolsFileSystemConfigurationMemberS3FilesConfiguration{
+				Value: types.S3FilesConfiguration{
+					AccessPointArn: ptr.String("__AccessPointArn__"),
+					MountPath:      ptr.String("__MountPath__"),
+					FileSystemArn:  ptr.String("__FileSystemArn__"),
+				},
+			},
+			&types.ToolsFileSystemConfigurationMemberS3FilesConfiguration{
+				Value: types.S3FilesConfiguration{
+					AccessPointArn: ptr.String("__AccessPointArn__"),
+					MountPath:      ptr.String("__MountPath__"),
+					FileSystemArn:  ptr.String("__FileSystemArn__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3486,7 +4372,46 @@ func TestCheckResponseSnapshot_StartCodeInterpreterSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartCodeInterpreterSession(context.Background(), &StartCodeInterpreterSessionInput{})
+	got, err := svc.StartCodeInterpreterSession(context.Background(), &StartCodeInterpreterSessionInput{
+		TraceId:                   ptr.String("__TraceId__"),
+		TraceParent:               ptr.String("__TraceParent__"),
+		CodeInterpreterIdentifier: ptr.String("__CodeInterpreterIdentifier__"),
+		Name:                      ptr.String("__Name__"),
+		SessionTimeoutSeconds:     ptr.Int32(1),
+		Certificates: []types.Certificate{
+			{
+				Location: &types.CertificateLocationMemberSecretsManager{
+					Value: types.SecretsManagerLocation{
+						SecretArn: ptr.String("__SecretArn__"),
+					},
+				},
+			},
+			{
+				Location: &types.CertificateLocationMemberSecretsManager{
+					Value: types.SecretsManagerLocation{
+						SecretArn: ptr.String("__SecretArn__"),
+					},
+				},
+			},
+		},
+		FilesystemConfigurations: []types.ToolsFileSystemConfiguration{
+			&types.ToolsFileSystemConfigurationMemberS3FilesConfiguration{
+				Value: types.S3FilesConfiguration{
+					AccessPointArn: ptr.String("__AccessPointArn__"),
+					MountPath:      ptr.String("__MountPath__"),
+					FileSystemArn:  ptr.String("__FileSystemArn__"),
+				},
+			},
+			&types.ToolsFileSystemConfigurationMemberS3FilesConfiguration{
+				Value: types.S3FilesConfiguration{
+					AccessPointArn: ptr.String("__AccessPointArn__"),
+					MountPath:      ptr.String("__MountPath__"),
+					FileSystemArn:  ptr.String("__FileSystemArn__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3507,7 +4432,13 @@ func TestCheckResponseSnapshot_StartMemoryExtractionJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMemoryExtractionJob(context.Background(), &StartMemoryExtractionJobInput{})
+	got, err := svc.StartMemoryExtractionJob(context.Background(), &StartMemoryExtractionJobInput{
+		MemoryId: ptr.String("__MemoryId__"),
+		ExtractionJob: &types.ExtractionJob{
+			JobId: ptr.String("__JobId__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3530,8 +4461,8 @@ func TestCheckResponseSnapshot_StartRecommendation(t *testing.T) {
 				},
 				AgentTraces: &types.AgentTracesConfigMemberSessionSpans{
 					Value: []document.Interface{
-						nil,
-						nil,
+						document.NewLazyDocument("__Document__"),
+						document.NewLazyDocument("__Document__"),
 					},
 				},
 				EvaluationConfig: &types.RecommendationEvaluationConfig{
@@ -3558,7 +4489,39 @@ func TestCheckResponseSnapshot_StartRecommendation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartRecommendation(context.Background(), &StartRecommendationInput{})
+	got, err := svc.StartRecommendation(context.Background(), &StartRecommendationInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Type:        types.RecommendationType("SYSTEM_PROMPT_RECOMMENDATION"),
+		RecommendationConfig: &types.RecommendationConfigMemberSystemPromptRecommendationConfig{
+			Value: types.SystemPromptRecommendationConfig{
+				SystemPrompt: &types.SystemPromptConfigMemberText{
+					Value: "__SystemPromptConfigMemberText__",
+				},
+				AgentTraces: &types.AgentTracesConfigMemberSessionSpans{
+					Value: []document.Interface{
+						document.NewLazyDocument("__Document__"),
+						document.NewLazyDocument("__Document__"),
+					},
+				},
+				EvaluationConfig: &types.RecommendationEvaluationConfig{
+					Evaluators: []types.RecommendationEvaluatorReference{
+						{
+							EvaluatorArn: ptr.String("__EvaluatorArn__"),
+						},
+						{
+							EvaluatorArn: ptr.String("__EvaluatorArn__"),
+						},
+					},
+				},
+			},
+		},
+		KmsKeyArn:   ptr.String("__KmsKeyArn__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3582,7 +4545,9 @@ func TestCheckResponseSnapshot_StopBatchEvaluation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopBatchEvaluation(context.Background(), &StopBatchEvaluationInput{})
+	got, err := svc.StopBatchEvaluation(context.Background(), &StopBatchEvaluationInput{
+		BatchEvaluationId: ptr.String("__BatchEvaluationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3605,7 +4570,13 @@ func TestCheckResponseSnapshot_StopBrowserSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopBrowserSession(context.Background(), &StopBrowserSessionInput{})
+	got, err := svc.StopBrowserSession(context.Background(), &StopBrowserSessionInput{
+		TraceId:           ptr.String("__TraceId__"),
+		TraceParent:       ptr.String("__TraceParent__"),
+		BrowserIdentifier: ptr.String("__BrowserIdentifier__"),
+		SessionId:         ptr.String("__SessionId__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3628,7 +4599,13 @@ func TestCheckResponseSnapshot_StopCodeInterpreterSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopCodeInterpreterSession(context.Background(), &StopCodeInterpreterSessionInput{})
+	got, err := svc.StopCodeInterpreterSession(context.Background(), &StopCodeInterpreterSessionInput{
+		TraceId:                   ptr.String("__TraceId__"),
+		TraceParent:               ptr.String("__TraceParent__"),
+		CodeInterpreterIdentifier: ptr.String("__CodeInterpreterIdentifier__"),
+		SessionId:                 ptr.String("__SessionId__"),
+		ClientToken:               ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3640,7 +4617,7 @@ func TestCheckResponseSnapshot_StopCodeInterpreterSession(t *testing.T) {
 func TestCheckResponseSnapshot_StopRuntimeSession(t *testing.T) {
 	want := &StopRuntimeSessionOutput{
 		RuntimeSessionId: ptr.String("__RuntimeSessionId__"),
-		StatusCode:       ptr.Int32(1),
+		StatusCode:       ptr.Int32(200),
 	}
 	status, header, body, err := serdeRespReadSnapshot("StopRuntimeSession.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -3650,7 +4627,12 @@ func TestCheckResponseSnapshot_StopRuntimeSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopRuntimeSession(context.Background(), &StopRuntimeSessionInput{})
+	got, err := svc.StopRuntimeSession(context.Background(), &StopRuntimeSessionInput{
+		RuntimeSessionId: ptr.String("__RuntimeSessionId__"),
+		AgentRuntimeArn:  ptr.String("__AgentRuntimeArn__"),
+		Qualifier:        ptr.String("__Qualifier__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3675,7 +4657,51 @@ func TestCheckResponseSnapshot_UpdateABTest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateABTest(context.Background(), &UpdateABTestInput{})
+	got, err := svc.UpdateABTest(context.Background(), &UpdateABTestInput{
+		AbTestId:    ptr.String("__AbTestId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Variants: []types.Variant{
+			{
+				Name:   ptr.String("__Name__"),
+				Weight: ptr.Int32(1),
+				VariantConfiguration: &types.VariantConfiguration{
+					ConfigurationBundle: &types.ConfigurationBundleRef{
+						BundleArn:     ptr.String("__BundleArn__"),
+						BundleVersion: ptr.String("__BundleVersion__"),
+					},
+					Target: &types.TargetRef{
+						Name: ptr.String("__Name__"),
+					},
+				},
+			},
+			{
+				Name:   ptr.String("__Name__"),
+				Weight: ptr.Int32(1),
+				VariantConfiguration: &types.VariantConfiguration{
+					ConfigurationBundle: &types.ConfigurationBundleRef{
+						BundleArn:     ptr.String("__BundleArn__"),
+						BundleVersion: ptr.String("__BundleVersion__"),
+					},
+					Target: &types.TargetRef{
+						Name: ptr.String("__Name__"),
+					},
+				},
+			},
+		},
+		GatewayFilter: &types.GatewayFilter{
+			TargetPaths: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		EvaluationConfig: &types.ABTestEvaluationConfigMemberOnlineEvaluationConfigArn{
+			Value: "__ABTestEvaluationConfigMemberOnlineEvaluationConfigArn__",
+		},
+		RoleArn:         ptr.String("__RoleArn__"),
+		ExecutionStatus: types.ABTestExecutionStatus("PAUSED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3707,7 +4733,16 @@ func TestCheckResponseSnapshot_UpdateBrowserStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBrowserStream(context.Background(), &UpdateBrowserStreamInput{})
+	got, err := svc.UpdateBrowserStream(context.Background(), &UpdateBrowserStreamInput{
+		BrowserIdentifier: ptr.String("__BrowserIdentifier__"),
+		SessionId:         ptr.String("__SessionId__"),
+		StreamUpdate: &types.StreamUpdateMemberAutomationStreamUpdate{
+			Value: types.AutomationStreamUpdate{
+				StreamStatus: types.AutomationStreamStatus("ENABLED"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3728,7 +4763,46 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateMemoryRecords(context.Background(), &BatchCreateMemoryRecordsInput{})
+	_, opErr := svc.BatchCreateMemoryRecords(context.Background(), &BatchCreateMemoryRecordsInput{
+		MemoryId: ptr.String("__MemoryId__"),
+		Records: []types.MemoryRecordCreateInput{
+			{
+				RequestIdentifier: ptr.String("__RequestIdentifier__"),
+				Namespaces: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Content: &types.MemoryContentMemberText{
+					Value: "__MemoryContentMemberText__",
+				},
+				Timestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				MemoryStrategyId: ptr.String("__MemoryStrategyId__"),
+				Metadata: map[string]types.MemoryRecordMetadataValue{
+					"key0": &types.MemoryRecordMetadataValueMemberStringValue{
+						Value: "__MemoryRecordMetadataValueMemberStringValue__",
+					},
+				},
+			},
+			{
+				RequestIdentifier: ptr.String("__RequestIdentifier__"),
+				Namespaces: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Content: &types.MemoryContentMemberText{
+					Value: "__MemoryContentMemberText__",
+				},
+				Timestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				MemoryStrategyId: ptr.String("__MemoryStrategyId__"),
+				Metadata: map[string]types.MemoryRecordMetadataValue{
+					"key0": &types.MemoryRecordMetadataValueMemberStringValue{
+						Value: "__MemoryRecordMetadataValueMemberStringValue__",
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3753,7 +4827,54 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateABTest(context.Background(), &CreateABTestInput{})
+	_, opErr := svc.CreateABTest(context.Background(), &CreateABTestInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		GatewayArn:  ptr.String("__GatewayArn__"),
+		Variants: []types.Variant{
+			{
+				Name:   ptr.String("__Name__"),
+				Weight: ptr.Int32(1),
+				VariantConfiguration: &types.VariantConfiguration{
+					ConfigurationBundle: &types.ConfigurationBundleRef{
+						BundleArn:     ptr.String("__BundleArn__"),
+						BundleVersion: ptr.String("__BundleVersion__"),
+					},
+					Target: &types.TargetRef{
+						Name: ptr.String("__Name__"),
+					},
+				},
+			},
+			{
+				Name:   ptr.String("__Name__"),
+				Weight: ptr.Int32(1),
+				VariantConfiguration: &types.VariantConfiguration{
+					ConfigurationBundle: &types.ConfigurationBundleRef{
+						BundleArn:     ptr.String("__BundleArn__"),
+						BundleVersion: ptr.String("__BundleVersion__"),
+					},
+					Target: &types.TargetRef{
+						Name: ptr.String("__Name__"),
+					},
+				},
+			},
+		},
+		GatewayFilter: &types.GatewayFilter{
+			TargetPaths: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		EvaluationConfig: &types.ABTestEvaluationConfigMemberOnlineEvaluationConfigArn{
+			Value: "__ABTestEvaluationConfigMemberOnlineEvaluationConfigArn__",
+		},
+		RoleArn:        ptr.String("__RoleArn__"),
+		EnableOnCreate: ptr.Bool(true),
+		ClientToken:    ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3778,7 +4899,75 @@ func TestCheckResponseSnapshot_Error_DuplicateIdException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Evaluate(context.Background(), &EvaluateInput{})
+	_, opErr := svc.Evaluate(context.Background(), &EvaluateInput{
+		EvaluatorId: ptr.String("__EvaluatorId__"),
+		EvaluationInput: &types.EvaluationInputMemberSessionSpans{
+			Value: []document.Interface{
+				document.NewLazyDocument("__Document__"),
+				document.NewLazyDocument("__Document__"),
+			},
+		},
+		EvaluationTarget: &types.EvaluationTargetMemberSpanIds{
+			Value: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		EvaluationReferenceInputs: []types.EvaluationReferenceInput{
+			{
+				Context: &types.ContextMemberSpanContext{
+					Value: types.SpanContext{
+						SessionId: ptr.String("__SessionId__"),
+						TraceId:   ptr.String("__TraceId__"),
+						SpanId:    ptr.String("__SpanId__"),
+					},
+				},
+				ExpectedResponse: &types.EvaluationContentMemberText{
+					Value: "__EvaluationContentMemberText__",
+				},
+				Assertions: []types.EvaluationContent{
+					&types.EvaluationContentMemberText{
+						Value: "__EvaluationContentMemberText__",
+					},
+					&types.EvaluationContentMemberText{
+						Value: "__EvaluationContentMemberText__",
+					},
+				},
+				ExpectedTrajectory: &types.EvaluationExpectedTrajectory{
+					ToolNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				Context: &types.ContextMemberSpanContext{
+					Value: types.SpanContext{
+						SessionId: ptr.String("__SessionId__"),
+						TraceId:   ptr.String("__TraceId__"),
+						SpanId:    ptr.String("__SpanId__"),
+					},
+				},
+				ExpectedResponse: &types.EvaluationContentMemberText{
+					Value: "__EvaluationContentMemberText__",
+				},
+				Assertions: []types.EvaluationContent{
+					&types.EvaluationContentMemberText{
+						Value: "__EvaluationContentMemberText__",
+					},
+					&types.EvaluationContentMemberText{
+						Value: "__EvaluationContentMemberText__",
+					},
+				},
+				ExpectedTrajectory: &types.EvaluationExpectedTrajectory{
+					ToolNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3803,7 +4992,12 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompleteResourceTokenAuth(context.Background(), &CompleteResourceTokenAuthInput{})
+	_, opErr := svc.CompleteResourceTokenAuth(context.Background(), &CompleteResourceTokenAuthInput{
+		UserIdentifier: &types.UserIdentifierMemberUserToken{
+			Value: "__UserIdentifierMemberUserToken__",
+		},
+		SessionUri: ptr.String("__SessionUri__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3828,7 +5022,41 @@ func TestCheckResponseSnapshot_Error_InvalidInputException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEvent(context.Background(), &CreateEventInput{})
+	_, opErr := svc.CreateEvent(context.Background(), &CreateEventInput{
+		MemoryId:       ptr.String("__MemoryId__"),
+		ActorId:        ptr.String("__ActorId__"),
+		SessionId:      ptr.String("__SessionId__"),
+		EventTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Payload: []types.PayloadType{
+			&types.PayloadTypeMemberConversational{
+				Value: types.Conversational{
+					Content: &types.ContentMemberText{
+						Value: "__ContentMemberText__",
+					},
+					Role: types.Role("ASSISTANT"),
+				},
+			},
+			&types.PayloadTypeMemberConversational{
+				Value: types.Conversational{
+					Content: &types.ContentMemberText{
+						Value: "__ContentMemberText__",
+					},
+					Role: types.Role("ASSISTANT"),
+				},
+			},
+		},
+		Branch: &types.Branch{
+			RootEventId: ptr.String("__RootEventId__"),
+			Name:        ptr.String("__Name__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Metadata: map[string]types.MetadataValue{
+			"key0": &types.MetadataValueMemberStringValue{
+				Value: "__MetadataValueMemberStringValue__",
+			},
+		},
+		ExtractionMode: types.ExtractionMode("SKIP"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3853,7 +5081,46 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateMemoryRecords(context.Background(), &BatchCreateMemoryRecordsInput{})
+	_, opErr := svc.BatchCreateMemoryRecords(context.Background(), &BatchCreateMemoryRecordsInput{
+		MemoryId: ptr.String("__MemoryId__"),
+		Records: []types.MemoryRecordCreateInput{
+			{
+				RequestIdentifier: ptr.String("__RequestIdentifier__"),
+				Namespaces: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Content: &types.MemoryContentMemberText{
+					Value: "__MemoryContentMemberText__",
+				},
+				Timestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				MemoryStrategyId: ptr.String("__MemoryStrategyId__"),
+				Metadata: map[string]types.MemoryRecordMetadataValue{
+					"key0": &types.MemoryRecordMetadataValueMemberStringValue{
+						Value: "__MemoryRecordMetadataValueMemberStringValue__",
+					},
+				},
+			},
+			{
+				RequestIdentifier: ptr.String("__RequestIdentifier__"),
+				Namespaces: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Content: &types.MemoryContentMemberText{
+					Value: "__MemoryContentMemberText__",
+				},
+				Timestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				MemoryStrategyId: ptr.String("__MemoryStrategyId__"),
+				Metadata: map[string]types.MemoryRecordMetadataValue{
+					"key0": &types.MemoryRecordMetadataValueMemberStringValue{
+						Value: "__MemoryRecordMetadataValueMemberStringValue__",
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3878,7 +5145,41 @@ func TestCheckResponseSnapshot_Error_RetryableConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEvent(context.Background(), &CreateEventInput{})
+	_, opErr := svc.CreateEvent(context.Background(), &CreateEventInput{
+		MemoryId:       ptr.String("__MemoryId__"),
+		ActorId:        ptr.String("__ActorId__"),
+		SessionId:      ptr.String("__SessionId__"),
+		EventTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Payload: []types.PayloadType{
+			&types.PayloadTypeMemberConversational{
+				Value: types.Conversational{
+					Content: &types.ContentMemberText{
+						Value: "__ContentMemberText__",
+					},
+					Role: types.Role("ASSISTANT"),
+				},
+			},
+			&types.PayloadTypeMemberConversational{
+				Value: types.Conversational{
+					Content: &types.ContentMemberText{
+						Value: "__ContentMemberText__",
+					},
+					Role: types.Role("ASSISTANT"),
+				},
+			},
+		},
+		Branch: &types.Branch{
+			RootEventId: ptr.String("__RootEventId__"),
+			Name:        ptr.String("__Name__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Metadata: map[string]types.MetadataValue{
+			"key0": &types.MetadataValueMemberStringValue{
+				Value: "__MetadataValueMemberStringValue__",
+			},
+		},
+		ExtractionMode: types.ExtractionMode("SKIP"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3903,7 +5204,11 @@ func TestCheckResponseSnapshot_Error_RuntimeClientError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetAgentCard(context.Background(), &GetAgentCardInput{})
+	_, opErr := svc.GetAgentCard(context.Background(), &GetAgentCardInput{
+		RuntimeSessionId: ptr.String("__RuntimeSessionId__"),
+		AgentRuntimeArn:  ptr.String("__AgentRuntimeArn__"),
+		Qualifier:        ptr.String("__Qualifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3928,7 +5233,46 @@ func TestCheckResponseSnapshot_Error_ServiceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateMemoryRecords(context.Background(), &BatchCreateMemoryRecordsInput{})
+	_, opErr := svc.BatchCreateMemoryRecords(context.Background(), &BatchCreateMemoryRecordsInput{
+		MemoryId: ptr.String("__MemoryId__"),
+		Records: []types.MemoryRecordCreateInput{
+			{
+				RequestIdentifier: ptr.String("__RequestIdentifier__"),
+				Namespaces: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Content: &types.MemoryContentMemberText{
+					Value: "__MemoryContentMemberText__",
+				},
+				Timestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				MemoryStrategyId: ptr.String("__MemoryStrategyId__"),
+				Metadata: map[string]types.MemoryRecordMetadataValue{
+					"key0": &types.MemoryRecordMetadataValueMemberStringValue{
+						Value: "__MemoryRecordMetadataValueMemberStringValue__",
+					},
+				},
+			},
+			{
+				RequestIdentifier: ptr.String("__RequestIdentifier__"),
+				Namespaces: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Content: &types.MemoryContentMemberText{
+					Value: "__MemoryContentMemberText__",
+				},
+				Timestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				MemoryStrategyId: ptr.String("__MemoryStrategyId__"),
+				Metadata: map[string]types.MemoryRecordMetadataValue{
+					"key0": &types.MemoryRecordMetadataValueMemberStringValue{
+						Value: "__MemoryRecordMetadataValueMemberStringValue__",
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3953,7 +5297,46 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateMemoryRecords(context.Background(), &BatchCreateMemoryRecordsInput{})
+	_, opErr := svc.BatchCreateMemoryRecords(context.Background(), &BatchCreateMemoryRecordsInput{
+		MemoryId: ptr.String("__MemoryId__"),
+		Records: []types.MemoryRecordCreateInput{
+			{
+				RequestIdentifier: ptr.String("__RequestIdentifier__"),
+				Namespaces: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Content: &types.MemoryContentMemberText{
+					Value: "__MemoryContentMemberText__",
+				},
+				Timestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				MemoryStrategyId: ptr.String("__MemoryStrategyId__"),
+				Metadata: map[string]types.MemoryRecordMetadataValue{
+					"key0": &types.MemoryRecordMetadataValueMemberStringValue{
+						Value: "__MemoryRecordMetadataValueMemberStringValue__",
+					},
+				},
+			},
+			{
+				RequestIdentifier: ptr.String("__RequestIdentifier__"),
+				Namespaces: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Content: &types.MemoryContentMemberText{
+					Value: "__MemoryContentMemberText__",
+				},
+				Timestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				MemoryStrategyId: ptr.String("__MemoryStrategyId__"),
+				Metadata: map[string]types.MemoryRecordMetadataValue{
+					"key0": &types.MemoryRecordMetadataValueMemberStringValue{
+						Value: "__MemoryRecordMetadataValueMemberStringValue__",
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3978,7 +5361,46 @@ func TestCheckResponseSnapshot_Error_ThrottledException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateMemoryRecords(context.Background(), &BatchCreateMemoryRecordsInput{})
+	_, opErr := svc.BatchCreateMemoryRecords(context.Background(), &BatchCreateMemoryRecordsInput{
+		MemoryId: ptr.String("__MemoryId__"),
+		Records: []types.MemoryRecordCreateInput{
+			{
+				RequestIdentifier: ptr.String("__RequestIdentifier__"),
+				Namespaces: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Content: &types.MemoryContentMemberText{
+					Value: "__MemoryContentMemberText__",
+				},
+				Timestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				MemoryStrategyId: ptr.String("__MemoryStrategyId__"),
+				Metadata: map[string]types.MemoryRecordMetadataValue{
+					"key0": &types.MemoryRecordMetadataValueMemberStringValue{
+						Value: "__MemoryRecordMetadataValueMemberStringValue__",
+					},
+				},
+			},
+			{
+				RequestIdentifier: ptr.String("__RequestIdentifier__"),
+				Namespaces: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Content: &types.MemoryContentMemberText{
+					Value: "__MemoryContentMemberText__",
+				},
+				Timestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				MemoryStrategyId: ptr.String("__MemoryStrategyId__"),
+				Metadata: map[string]types.MemoryRecordMetadataValue{
+					"key0": &types.MemoryRecordMetadataValueMemberStringValue{
+						Value: "__MemoryRecordMetadataValueMemberStringValue__",
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4003,7 +5425,12 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompleteResourceTokenAuth(context.Background(), &CompleteResourceTokenAuthInput{})
+	_, opErr := svc.CompleteResourceTokenAuth(context.Background(), &CompleteResourceTokenAuthInput{
+		UserIdentifier: &types.UserIdentifierMemberUserToken{
+			Value: "__UserIdentifierMemberUserToken__",
+		},
+		SessionUri: ptr.String("__SessionUri__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4028,7 +5455,12 @@ func TestCheckResponseSnapshot_Error_UnauthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompleteResourceTokenAuth(context.Background(), &CompleteResourceTokenAuthInput{})
+	_, opErr := svc.CompleteResourceTokenAuth(context.Background(), &CompleteResourceTokenAuthInput{
+		UserIdentifier: &types.UserIdentifierMemberUserToken{
+			Value: "__UserIdentifierMemberUserToken__",
+		},
+		SessionUri: ptr.String("__SessionUri__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4064,7 +5496,46 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateMemoryRecords(context.Background(), &BatchCreateMemoryRecordsInput{})
+	_, opErr := svc.BatchCreateMemoryRecords(context.Background(), &BatchCreateMemoryRecordsInput{
+		MemoryId: ptr.String("__MemoryId__"),
+		Records: []types.MemoryRecordCreateInput{
+			{
+				RequestIdentifier: ptr.String("__RequestIdentifier__"),
+				Namespaces: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Content: &types.MemoryContentMemberText{
+					Value: "__MemoryContentMemberText__",
+				},
+				Timestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				MemoryStrategyId: ptr.String("__MemoryStrategyId__"),
+				Metadata: map[string]types.MemoryRecordMetadataValue{
+					"key0": &types.MemoryRecordMetadataValueMemberStringValue{
+						Value: "__MemoryRecordMetadataValueMemberStringValue__",
+					},
+				},
+			},
+			{
+				RequestIdentifier: ptr.String("__RequestIdentifier__"),
+				Namespaces: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Content: &types.MemoryContentMemberText{
+					Value: "__MemoryContentMemberText__",
+				},
+				Timestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				MemoryStrategyId: ptr.String("__MemoryStrategyId__"),
+				Metadata: map[string]types.MemoryRecordMetadataValue{
+					"key0": &types.MemoryRecordMetadataValueMemberStringValue{
+						Value: "__MemoryRecordMetadataValueMemberStringValue__",
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"configArn":"__ConfigArn__","configId":"__ConfigId__","configType":"antenna-downlink"}

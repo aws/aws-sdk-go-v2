@@ -117,7 +117,11 @@ func TestCheckResponseSnapshot_AcceptAdministratorInvitation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptAdministratorInvitation(context.Background(), &AcceptAdministratorInvitationInput{})
+	got, err := svc.AcceptAdministratorInvitation(context.Background(), &AcceptAdministratorInvitationInput{
+		DetectorId:      ptr.String("__DetectorId__"),
+		AdministratorId: ptr.String("__AdministratorId__"),
+		InvitationId:    ptr.String("__InvitationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -136,7 +140,11 @@ func TestCheckResponseSnapshot_AcceptInvitation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptInvitation(context.Background(), &AcceptInvitationInput{})
+	got, err := svc.AcceptInvitation(context.Background(), &AcceptInvitationInput{
+		DetectorId:   ptr.String("__DetectorId__"),
+		MasterId:     ptr.String("__MasterId__"),
+		InvitationId: ptr.String("__InvitationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -155,7 +163,13 @@ func TestCheckResponseSnapshot_ArchiveFindings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ArchiveFindings(context.Background(), &ArchiveFindingsInput{})
+	got, err := svc.ArchiveFindings(context.Background(), &ArchiveFindingsInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		FindingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -187,7 +201,59 @@ func TestCheckResponseSnapshot_CreateDetector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDetector(context.Background(), &CreateDetectorInput{})
+	got, err := svc.CreateDetector(context.Background(), &CreateDetectorInput{
+		Enable:                     ptr.Bool(true),
+		ClientToken:                ptr.String("__ClientToken__"),
+		FindingPublishingFrequency: types.FindingPublishingFrequency("FIFTEEN_MINUTES"),
+		DataSources: &types.DataSourceConfigurations{
+			S3Logs: &types.S3LogsConfiguration{
+				Enable: ptr.Bool(true),
+			},
+			Kubernetes: &types.KubernetesConfiguration{
+				AuditLogs: &types.KubernetesAuditLogsConfiguration{
+					Enable: ptr.Bool(true),
+				},
+			},
+			MalwareProtection: &types.MalwareProtectionConfiguration{
+				ScanEc2InstanceWithFindings: &types.ScanEc2InstanceWithFindings{
+					EbsVolumes: ptr.Bool(true),
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Features: []types.DetectorFeatureConfiguration{
+			{
+				Name:   types.DetectorFeature("S3_DATA_EVENTS"),
+				Status: types.FeatureStatus("ENABLED"),
+				AdditionalConfiguration: []types.DetectorAdditionalConfiguration{
+					{
+						Name:   types.FeatureAdditionalConfiguration("EKS_ADDON_MANAGEMENT"),
+						Status: types.FeatureStatus("ENABLED"),
+					},
+					{
+						Name:   types.FeatureAdditionalConfiguration("EKS_ADDON_MANAGEMENT"),
+						Status: types.FeatureStatus("ENABLED"),
+					},
+				},
+			},
+			{
+				Name:   types.DetectorFeature("S3_DATA_EVENTS"),
+				Status: types.FeatureStatus("ENABLED"),
+				AdditionalConfiguration: []types.DetectorAdditionalConfiguration{
+					{
+						Name:   types.FeatureAdditionalConfiguration("EKS_ADDON_MANAGEMENT"),
+						Status: types.FeatureStatus("ENABLED"),
+					},
+					{
+						Name:   types.FeatureAdditionalConfiguration("EKS_ADDON_MANAGEMENT"),
+						Status: types.FeatureStatus("ENABLED"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -208,7 +274,55 @@ func TestCheckResponseSnapshot_CreateFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFilter(context.Background(), &CreateFilterInput{})
+	got, err := svc.CreateFilter(context.Background(), &CreateFilterInput{
+		DetectorId:  ptr.String("__DetectorId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Action:      types.FilterAction("NOOP"),
+		Rank:        ptr.Int32(1),
+		FindingCriteria: &types.FindingCriteria{
+			Criterion: map[string]types.Condition{
+				"key0": {
+					Eq: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Neq: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Gt:  ptr.Int32(1),
+					Gte: ptr.Int32(1),
+					Lt:  ptr.Int32(1),
+					Lte: ptr.Int32(1),
+					Equals: []string{
+						"__Member__",
+						"__Member__",
+					},
+					NotEquals: []string{
+						"__Member__",
+						"__Member__",
+					},
+					GreaterThan:        ptr.Int64(1),
+					GreaterThanOrEqual: ptr.Int64(1),
+					LessThan:           ptr.Int64(1),
+					LessThanOrEqual:    ptr.Int64(1),
+					Matches: []string{
+						"__Member__",
+						"__Member__",
+					},
+					NotMatches: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -229,7 +343,18 @@ func TestCheckResponseSnapshot_CreateIPSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIPSet(context.Background(), &CreateIPSetInput{})
+	got, err := svc.CreateIPSet(context.Background(), &CreateIPSetInput{
+		DetectorId:  ptr.String("__DetectorId__"),
+		Name:        ptr.String("__Name__"),
+		Format:      types.IpSetFormat("TXT"),
+		Location:    ptr.String("__Location__"),
+		Activate:    ptr.Bool(true),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -250,7 +375,11 @@ func TestCheckResponseSnapshot_CreateInvestigation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateInvestigation(context.Background(), &CreateInvestigationInput{})
+	got, err := svc.CreateInvestigation(context.Background(), &CreateInvestigationInput{
+		DetectorId:    ptr.String("__DetectorId__"),
+		TriggerPrompt: ptr.String("__TriggerPrompt__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -271,7 +400,27 @@ func TestCheckResponseSnapshot_CreateMalwareProtectionPlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMalwareProtectionPlan(context.Background(), &CreateMalwareProtectionPlanInput{})
+	got, err := svc.CreateMalwareProtectionPlan(context.Background(), &CreateMalwareProtectionPlanInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Role:        ptr.String("__Role__"),
+		ProtectedResource: &types.CreateProtectedResource{
+			S3Bucket: &types.CreateS3BucketResource{
+				BucketName: ptr.String("__BucketName__"),
+				ObjectPrefixes: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Actions: &types.MalwareProtectionPlanActions{
+			Tagging: &types.MalwareProtectionPlanTaggingAction{
+				Status: types.MalwareProtectionPlanTaggingActionStatus("ENABLED"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -301,7 +450,19 @@ func TestCheckResponseSnapshot_CreateMembers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMembers(context.Background(), &CreateMembersInput{})
+	got, err := svc.CreateMembers(context.Background(), &CreateMembersInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		AccountDetails: []types.AccountDetail{
+			{
+				AccountId: ptr.String("__AccountId__"),
+				Email:     ptr.String("__Email__"),
+			},
+			{
+				AccountId: ptr.String("__AccountId__"),
+				Email:     ptr.String("__Email__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -322,7 +483,18 @@ func TestCheckResponseSnapshot_CreatePublishingDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePublishingDestination(context.Background(), &CreatePublishingDestinationInput{})
+	got, err := svc.CreatePublishingDestination(context.Background(), &CreatePublishingDestinationInput{
+		DetectorId:      ptr.String("__DetectorId__"),
+		DestinationType: types.DestinationType("S3"),
+		DestinationProperties: &types.DestinationProperties{
+			DestinationArn: ptr.String("__DestinationArn__"),
+			KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -341,7 +513,13 @@ func TestCheckResponseSnapshot_CreateSampleFindings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSampleFindings(context.Background(), &CreateSampleFindingsInput{})
+	got, err := svc.CreateSampleFindings(context.Background(), &CreateSampleFindingsInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		FindingTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -362,7 +540,18 @@ func TestCheckResponseSnapshot_CreateThreatEntitySet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateThreatEntitySet(context.Background(), &CreateThreatEntitySetInput{})
+	got, err := svc.CreateThreatEntitySet(context.Background(), &CreateThreatEntitySetInput{
+		DetectorId:          ptr.String("__DetectorId__"),
+		Name:                ptr.String("__Name__"),
+		Format:              types.ThreatEntitySetFormat("TXT"),
+		Location:            ptr.String("__Location__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+		Activate:            ptr.Bool(true),
+		ClientToken:         ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -383,7 +572,18 @@ func TestCheckResponseSnapshot_CreateThreatIntelSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateThreatIntelSet(context.Background(), &CreateThreatIntelSetInput{})
+	got, err := svc.CreateThreatIntelSet(context.Background(), &CreateThreatIntelSetInput{
+		DetectorId:  ptr.String("__DetectorId__"),
+		Name:        ptr.String("__Name__"),
+		Format:      types.ThreatIntelSetFormat("TXT"),
+		Location:    ptr.String("__Location__"),
+		Activate:    ptr.Bool(true),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -404,7 +604,18 @@ func TestCheckResponseSnapshot_CreateTrustedEntitySet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTrustedEntitySet(context.Background(), &CreateTrustedEntitySetInput{})
+	got, err := svc.CreateTrustedEntitySet(context.Background(), &CreateTrustedEntitySetInput{
+		DetectorId:          ptr.String("__DetectorId__"),
+		Name:                ptr.String("__Name__"),
+		Format:              types.TrustedEntitySetFormat("TXT"),
+		Location:            ptr.String("__Location__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+		Activate:            ptr.Bool(true),
+		ClientToken:         ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -434,7 +645,12 @@ func TestCheckResponseSnapshot_DeclineInvitations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeclineInvitations(context.Background(), &DeclineInvitationsInput{})
+	got, err := svc.DeclineInvitations(context.Background(), &DeclineInvitationsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -453,7 +669,9 @@ func TestCheckResponseSnapshot_DeleteDetector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDetector(context.Background(), &DeleteDetectorInput{})
+	got, err := svc.DeleteDetector(context.Background(), &DeleteDetectorInput{
+		DetectorId: ptr.String("__DetectorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -472,7 +690,10 @@ func TestCheckResponseSnapshot_DeleteFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFilter(context.Background(), &DeleteFilterInput{})
+	got, err := svc.DeleteFilter(context.Background(), &DeleteFilterInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		FilterName: ptr.String("__FilterName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -491,7 +712,10 @@ func TestCheckResponseSnapshot_DeleteIPSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIPSet(context.Background(), &DeleteIPSetInput{})
+	got, err := svc.DeleteIPSet(context.Background(), &DeleteIPSetInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		IpSetId:    ptr.String("__IpSetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -521,7 +745,12 @@ func TestCheckResponseSnapshot_DeleteInvitations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteInvitations(context.Background(), &DeleteInvitationsInput{})
+	got, err := svc.DeleteInvitations(context.Background(), &DeleteInvitationsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -540,7 +769,9 @@ func TestCheckResponseSnapshot_DeleteMalwareProtectionPlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMalwareProtectionPlan(context.Background(), &DeleteMalwareProtectionPlanInput{})
+	got, err := svc.DeleteMalwareProtectionPlan(context.Background(), &DeleteMalwareProtectionPlanInput{
+		MalwareProtectionPlanId: ptr.String("__MalwareProtectionPlanId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -570,7 +801,13 @@ func TestCheckResponseSnapshot_DeleteMembers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMembers(context.Background(), &DeleteMembersInput{})
+	got, err := svc.DeleteMembers(context.Background(), &DeleteMembersInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -589,7 +826,10 @@ func TestCheckResponseSnapshot_DeletePublishingDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePublishingDestination(context.Background(), &DeletePublishingDestinationInput{})
+	got, err := svc.DeletePublishingDestination(context.Background(), &DeletePublishingDestinationInput{
+		DetectorId:    ptr.String("__DetectorId__"),
+		DestinationId: ptr.String("__DestinationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -608,7 +848,10 @@ func TestCheckResponseSnapshot_DeleteThreatEntitySet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteThreatEntitySet(context.Background(), &DeleteThreatEntitySetInput{})
+	got, err := svc.DeleteThreatEntitySet(context.Background(), &DeleteThreatEntitySetInput{
+		DetectorId:        ptr.String("__DetectorId__"),
+		ThreatEntitySetId: ptr.String("__ThreatEntitySetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -627,7 +870,10 @@ func TestCheckResponseSnapshot_DeleteThreatIntelSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteThreatIntelSet(context.Background(), &DeleteThreatIntelSetInput{})
+	got, err := svc.DeleteThreatIntelSet(context.Background(), &DeleteThreatIntelSetInput{
+		DetectorId:       ptr.String("__DetectorId__"),
+		ThreatIntelSetId: ptr.String("__ThreatIntelSetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -646,7 +892,10 @@ func TestCheckResponseSnapshot_DeleteTrustedEntitySet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTrustedEntitySet(context.Background(), &DeleteTrustedEntitySetInput{})
+	got, err := svc.DeleteTrustedEntitySet(context.Background(), &DeleteTrustedEntitySetInput{
+		DetectorId:         ptr.String("__DetectorId__"),
+		TrustedEntitySetId: ptr.String("__TrustedEntitySetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -757,7 +1006,35 @@ func TestCheckResponseSnapshot_DescribeMalwareScans(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMalwareScans(context.Background(), &DescribeMalwareScansInput{})
+	got, err := svc.DescribeMalwareScans(context.Background(), &DescribeMalwareScansInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		FilterCriteria: &types.FilterCriteria{
+			FilterCriterion: []types.FilterCriterion{
+				{
+					CriterionKey: types.CriterionKey("EC2_INSTANCE_ARN"),
+					FilterCondition: &types.FilterCondition{
+						EqualsValue: ptr.String("__EqualsValue__"),
+						GreaterThan: ptr.Int64(1),
+						LessThan:    ptr.Int64(1),
+					},
+				},
+				{
+					CriterionKey: types.CriterionKey("EC2_INSTANCE_ARN"),
+					FilterCondition: &types.FilterCondition{
+						EqualsValue: ptr.String("__EqualsValue__"),
+						GreaterThan: ptr.Int64(1),
+						LessThan:    ptr.Int64(1),
+					},
+				},
+			},
+		},
+		SortCriteria: &types.SortCriteria{
+			AttributeName: ptr.String("__AttributeName__"),
+			OrderBy:       types.OrderBy("ASC"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -828,7 +1105,11 @@ func TestCheckResponseSnapshot_DescribeOrganizationConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeOrganizationConfiguration(context.Background(), &DescribeOrganizationConfigurationInput{})
+	got, err := svc.DescribeOrganizationConfiguration(context.Background(), &DescribeOrganizationConfigurationInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -859,7 +1140,10 @@ func TestCheckResponseSnapshot_DescribePublishingDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePublishingDestination(context.Background(), &DescribePublishingDestinationInput{})
+	got, err := svc.DescribePublishingDestination(context.Background(), &DescribePublishingDestinationInput{
+		DetectorId:    ptr.String("__DetectorId__"),
+		DestinationId: ptr.String("__DestinationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -878,7 +1162,9 @@ func TestCheckResponseSnapshot_DisableOrganizationAdminAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableOrganizationAdminAccount(context.Background(), &DisableOrganizationAdminAccountInput{})
+	got, err := svc.DisableOrganizationAdminAccount(context.Background(), &DisableOrganizationAdminAccountInput{
+		AdminAccountId: ptr.String("__AdminAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -897,7 +1183,9 @@ func TestCheckResponseSnapshot_DisassociateFromAdministratorAccount(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateFromAdministratorAccount(context.Background(), &DisassociateFromAdministratorAccountInput{})
+	got, err := svc.DisassociateFromAdministratorAccount(context.Background(), &DisassociateFromAdministratorAccountInput{
+		DetectorId: ptr.String("__DetectorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -916,7 +1204,9 @@ func TestCheckResponseSnapshot_DisassociateFromMasterAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateFromMasterAccount(context.Background(), &DisassociateFromMasterAccountInput{})
+	got, err := svc.DisassociateFromMasterAccount(context.Background(), &DisassociateFromMasterAccountInput{
+		DetectorId: ptr.String("__DetectorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -946,7 +1236,13 @@ func TestCheckResponseSnapshot_DisassociateMembers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateMembers(context.Background(), &DisassociateMembersInput{})
+	got, err := svc.DisassociateMembers(context.Background(), &DisassociateMembersInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -965,7 +1261,9 @@ func TestCheckResponseSnapshot_EnableOrganizationAdminAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableOrganizationAdminAccount(context.Background(), &EnableOrganizationAdminAccountInput{})
+	got, err := svc.EnableOrganizationAdminAccount(context.Background(), &EnableOrganizationAdminAccountInput{
+		AdminAccountId: ptr.String("__AdminAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -991,7 +1289,9 @@ func TestCheckResponseSnapshot_GetAdministratorAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAdministratorAccount(context.Background(), &GetAdministratorAccountInput{})
+	got, err := svc.GetAdministratorAccount(context.Background(), &GetAdministratorAccountInput{
+		DetectorId: ptr.String("__DetectorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1019,7 +1319,43 @@ func TestCheckResponseSnapshot_GetCoverageStatistics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCoverageStatistics(context.Background(), &GetCoverageStatisticsInput{})
+	got, err := svc.GetCoverageStatistics(context.Background(), &GetCoverageStatisticsInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		FilterCriteria: &types.CoverageFilterCriteria{
+			FilterCriterion: []types.CoverageFilterCriterion{
+				{
+					CriterionKey: types.CoverageFilterCriterionKey("ACCOUNT_ID"),
+					FilterCondition: &types.CoverageFilterCondition{
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					CriterionKey: types.CoverageFilterCriterionKey("ACCOUNT_ID"),
+					FilterCondition: &types.CoverageFilterCondition{
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		StatisticsType: []types.CoverageStatisticsType{
+			types.CoverageStatisticsType("COUNT_BY_RESOURCE_TYPE"),
+			types.CoverageStatisticsType("COUNT_BY_RESOURCE_TYPE"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1111,7 +1447,9 @@ func TestCheckResponseSnapshot_GetDetector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDetector(context.Background(), &GetDetectorInput{})
+	got, err := svc.GetDetector(context.Background(), &GetDetectorInput{
+		DetectorId: ptr.String("__DetectorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1179,7 +1517,10 @@ func TestCheckResponseSnapshot_GetFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFilter(context.Background(), &GetFilterInput{})
+	got, err := svc.GetFilter(context.Background(), &GetFilterInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		FilterName: ptr.String("__FilterName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4969,7 +5310,17 @@ func TestCheckResponseSnapshot_GetFindings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFindings(context.Background(), &GetFindingsInput{})
+	got, err := svc.GetFindings(context.Background(), &GetFindingsInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		FindingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SortCriteria: &types.SortCriteria{
+			AttributeName: ptr.String("__AttributeName__"),
+			OrderBy:       types.OrderBy("ASC"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5061,7 +5412,54 @@ func TestCheckResponseSnapshot_GetFindingsStatistics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFindingsStatistics(context.Background(), &GetFindingsStatisticsInput{})
+	got, err := svc.GetFindingsStatistics(context.Background(), &GetFindingsStatisticsInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		FindingStatisticTypes: []types.FindingStatisticType{
+			types.FindingStatisticType("COUNT_BY_SEVERITY"),
+			types.FindingStatisticType("COUNT_BY_SEVERITY"),
+		},
+		FindingCriteria: &types.FindingCriteria{
+			Criterion: map[string]types.Condition{
+				"key0": {
+					Eq: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Neq: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Gt:  ptr.Int32(1),
+					Gte: ptr.Int32(1),
+					Lt:  ptr.Int32(1),
+					Lte: ptr.Int32(1),
+					Equals: []string{
+						"__Member__",
+						"__Member__",
+					},
+					NotEquals: []string{
+						"__Member__",
+						"__Member__",
+					},
+					GreaterThan:        ptr.Int64(1),
+					GreaterThanOrEqual: ptr.Int64(1),
+					LessThan:           ptr.Int64(1),
+					LessThanOrEqual:    ptr.Int64(1),
+					Matches: []string{
+						"__Member__",
+						"__Member__",
+					},
+					NotMatches: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		GroupBy:    types.GroupByType("ACCOUNT"),
+		OrderBy:    types.OrderBy("ASC"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5089,7 +5487,10 @@ func TestCheckResponseSnapshot_GetIPSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIPSet(context.Background(), &GetIPSetInput{})
+	got, err := svc.GetIPSet(context.Background(), &GetIPSetInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		IpSetId:    ptr.String("__IpSetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5134,7 +5535,10 @@ func TestCheckResponseSnapshot_GetInvestigation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetInvestigation(context.Background(), &GetInvestigationInput{})
+	got, err := svc.GetInvestigation(context.Background(), &GetInvestigationInput{
+		DetectorId:      ptr.String("__DetectorId__"),
+		InvestigationId: ptr.String("__InvestigationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5206,7 +5610,9 @@ func TestCheckResponseSnapshot_GetMalwareProtectionPlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMalwareProtectionPlan(context.Background(), &GetMalwareProtectionPlanInput{})
+	got, err := svc.GetMalwareProtectionPlan(context.Background(), &GetMalwareProtectionPlanInput{
+		MalwareProtectionPlanId: ptr.String("__MalwareProtectionPlanId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5363,7 +5769,9 @@ func TestCheckResponseSnapshot_GetMalwareScan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMalwareScan(context.Background(), &GetMalwareScanInput{})
+	got, err := svc.GetMalwareScan(context.Background(), &GetMalwareScanInput{
+		ScanId: ptr.String("__ScanId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5414,7 +5822,9 @@ func TestCheckResponseSnapshot_GetMalwareScanSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMalwareScanSettings(context.Background(), &GetMalwareScanSettingsInput{})
+	got, err := svc.GetMalwareScanSettings(context.Background(), &GetMalwareScanSettingsInput{
+		DetectorId: ptr.String("__DetectorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5440,7 +5850,9 @@ func TestCheckResponseSnapshot_GetMasterAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMasterAccount(context.Background(), &GetMasterAccountInput{})
+	got, err := svc.GetMasterAccount(context.Background(), &GetMasterAccountInput{
+		DetectorId: ptr.String("__DetectorId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5606,7 +6018,13 @@ func TestCheckResponseSnapshot_GetMemberDetectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMemberDetectors(context.Background(), &GetMemberDetectorsInput{})
+	got, err := svc.GetMemberDetectors(context.Background(), &GetMemberDetectorsInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5658,7 +6076,13 @@ func TestCheckResponseSnapshot_GetMembers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMembers(context.Background(), &GetMembersInput{})
+	got, err := svc.GetMembers(context.Background(), &GetMembersInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5823,7 +6247,13 @@ func TestCheckResponseSnapshot_GetRemainingFreeTrialDays(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRemainingFreeTrialDays(context.Background(), &GetRemainingFreeTrialDaysInput{})
+	got, err := svc.GetRemainingFreeTrialDays(context.Background(), &GetRemainingFreeTrialDaysInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5854,7 +6284,10 @@ func TestCheckResponseSnapshot_GetThreatEntitySet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetThreatEntitySet(context.Background(), &GetThreatEntitySetInput{})
+	got, err := svc.GetThreatEntitySet(context.Background(), &GetThreatEntitySetInput{
+		DetectorId:        ptr.String("__DetectorId__"),
+		ThreatEntitySetId: ptr.String("__ThreatEntitySetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5882,7 +6315,10 @@ func TestCheckResponseSnapshot_GetThreatIntelSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetThreatIntelSet(context.Background(), &GetThreatIntelSetInput{})
+	got, err := svc.GetThreatIntelSet(context.Background(), &GetThreatIntelSetInput{
+		DetectorId:       ptr.String("__DetectorId__"),
+		ThreatIntelSetId: ptr.String("__ThreatIntelSetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5913,7 +6349,10 @@ func TestCheckResponseSnapshot_GetTrustedEntitySet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTrustedEntitySet(context.Background(), &GetTrustedEntitySetInput{})
+	got, err := svc.GetTrustedEntitySet(context.Background(), &GetTrustedEntitySetInput{
+		DetectorId:         ptr.String("__DetectorId__"),
+		TrustedEntitySetId: ptr.String("__TrustedEntitySetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6056,7 +6495,31 @@ func TestCheckResponseSnapshot_GetUsageStatistics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUsageStatistics(context.Background(), &GetUsageStatisticsInput{})
+	got, err := svc.GetUsageStatistics(context.Background(), &GetUsageStatisticsInput{
+		DetectorId:         ptr.String("__DetectorId__"),
+		UsageStatisticType: types.UsageStatisticType("SUM_BY_ACCOUNT"),
+		UsageCriteria: &types.UsageCriteria{
+			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			DataSources: []types.DataSource{
+				types.DataSource("FLOW_LOGS"),
+				types.DataSource("FLOW_LOGS"),
+			},
+			Resources: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Features: []types.UsageFeature{
+				types.UsageFeature("FLOW_LOGS"),
+				types.UsageFeature("FLOW_LOGS"),
+			},
+		},
+		Unit:       ptr.String("__Unit__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6086,7 +6549,15 @@ func TestCheckResponseSnapshot_InviteMembers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InviteMembers(context.Background(), &InviteMembersInput{})
+	got, err := svc.InviteMembers(context.Background(), &InviteMembersInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DisableEmailNotification: ptr.Bool(true),
+		Message:                  ptr.String("__Message__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6197,7 +6668,45 @@ func TestCheckResponseSnapshot_ListCoverage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCoverage(context.Background(), &ListCoverageInput{})
+	got, err := svc.ListCoverage(context.Background(), &ListCoverageInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		FilterCriteria: &types.CoverageFilterCriteria{
+			FilterCriterion: []types.CoverageFilterCriterion{
+				{
+					CriterionKey: types.CoverageFilterCriterionKey("ACCOUNT_ID"),
+					FilterCondition: &types.CoverageFilterCondition{
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					CriterionKey: types.CoverageFilterCriterionKey("ACCOUNT_ID"),
+					FilterCondition: &types.CoverageFilterCondition{
+						Equals: []string{
+							"__Member__",
+							"__Member__",
+						},
+						NotEquals: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		SortCriteria: &types.CoverageSortCriteria{
+			AttributeName: types.CoverageSortKey("ACCOUNT_ID"),
+			OrderBy:       types.OrderBy("ASC"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6222,7 +6731,10 @@ func TestCheckResponseSnapshot_ListDetectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDetectors(context.Background(), &ListDetectorsInput{})
+	got, err := svc.ListDetectors(context.Background(), &ListDetectorsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6247,7 +6759,11 @@ func TestCheckResponseSnapshot_ListFilters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFilters(context.Background(), &ListFiltersInput{})
+	got, err := svc.ListFilters(context.Background(), &ListFiltersInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6272,7 +6788,53 @@ func TestCheckResponseSnapshot_ListFindings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFindings(context.Background(), &ListFindingsInput{})
+	got, err := svc.ListFindings(context.Background(), &ListFindingsInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		FindingCriteria: &types.FindingCriteria{
+			Criterion: map[string]types.Condition{
+				"key0": {
+					Eq: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Neq: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Gt:  ptr.Int32(1),
+					Gte: ptr.Int32(1),
+					Lt:  ptr.Int32(1),
+					Lte: ptr.Int32(1),
+					Equals: []string{
+						"__Member__",
+						"__Member__",
+					},
+					NotEquals: []string{
+						"__Member__",
+						"__Member__",
+					},
+					GreaterThan:        ptr.Int64(1),
+					GreaterThanOrEqual: ptr.Int64(1),
+					LessThan:           ptr.Int64(1),
+					LessThanOrEqual:    ptr.Int64(1),
+					Matches: []string{
+						"__Member__",
+						"__Member__",
+					},
+					NotMatches: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		SortCriteria: &types.SortCriteria{
+			AttributeName: ptr.String("__AttributeName__"),
+			OrderBy:       types.OrderBy("ASC"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6297,7 +6859,11 @@ func TestCheckResponseSnapshot_ListIPSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIPSets(context.Background(), &ListIPSetsInput{})
+	got, err := svc.ListIPSets(context.Background(), &ListIPSetsInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6342,7 +6908,15 @@ func TestCheckResponseSnapshot_ListInvestigations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInvestigations(context.Background(), &ListInvestigationsInput{})
+	got, err := svc.ListInvestigations(context.Background(), &ListInvestigationsInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		SortCriteria: &types.InvestigationSortCriteria{
+			AttributeName: types.InvestigationSortField("START_TIME"),
+			OrderBy:       types.OrderBy("ASC"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6377,7 +6951,10 @@ func TestCheckResponseSnapshot_ListInvitations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInvitations(context.Background(), &ListInvitationsInput{})
+	got, err := svc.ListInvitations(context.Background(), &ListInvitationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6406,7 +6983,9 @@ func TestCheckResponseSnapshot_ListMalwareProtectionPlans(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMalwareProtectionPlans(context.Background(), &ListMalwareProtectionPlansInput{})
+	got, err := svc.ListMalwareProtectionPlans(context.Background(), &ListMalwareProtectionPlansInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6449,7 +7028,34 @@ func TestCheckResponseSnapshot_ListMalwareScans(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMalwareScans(context.Background(), &ListMalwareScansInput{})
+	got, err := svc.ListMalwareScans(context.Background(), &ListMalwareScansInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		FilterCriteria: &types.ListMalwareScansFilterCriteria{
+			ListMalwareScansFilterCriterion: []types.ListMalwareScansFilterCriterion{
+				{
+					ListMalwareScansCriterionKey: types.ListMalwareScansCriterionKey("RESOURCE_ARN"),
+					FilterCondition: &types.FilterCondition{
+						EqualsValue: ptr.String("__EqualsValue__"),
+						GreaterThan: ptr.Int64(1),
+						LessThan:    ptr.Int64(1),
+					},
+				},
+				{
+					ListMalwareScansCriterionKey: types.ListMalwareScansCriterionKey("RESOURCE_ARN"),
+					FilterCondition: &types.FilterCondition{
+						EqualsValue: ptr.String("__EqualsValue__"),
+						GreaterThan: ptr.Int64(1),
+						LessThan:    ptr.Int64(1),
+					},
+				},
+			},
+		},
+		SortCriteria: &types.SortCriteria{
+			AttributeName: ptr.String("__AttributeName__"),
+			OrderBy:       types.OrderBy("ASC"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6492,7 +7098,12 @@ func TestCheckResponseSnapshot_ListMembers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMembers(context.Background(), &ListMembersInput{})
+	got, err := svc.ListMembers(context.Background(), &ListMembersInput{
+		DetectorId:     ptr.String("__DetectorId__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+		OnlyAssociated: ptr.String("__OnlyAssociated__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6523,7 +7134,10 @@ func TestCheckResponseSnapshot_ListOrganizationAdminAccounts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOrganizationAdminAccounts(context.Background(), &ListOrganizationAdminAccountsInput{})
+	got, err := svc.ListOrganizationAdminAccounts(context.Background(), &ListOrganizationAdminAccountsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6556,7 +7170,11 @@ func TestCheckResponseSnapshot_ListPublishingDestinations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPublishingDestinations(context.Background(), &ListPublishingDestinationsInput{})
+	got, err := svc.ListPublishingDestinations(context.Background(), &ListPublishingDestinationsInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6579,7 +7197,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6604,7 +7224,11 @@ func TestCheckResponseSnapshot_ListThreatEntitySets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListThreatEntitySets(context.Background(), &ListThreatEntitySetsInput{})
+	got, err := svc.ListThreatEntitySets(context.Background(), &ListThreatEntitySetsInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6629,7 +7253,11 @@ func TestCheckResponseSnapshot_ListThreatIntelSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListThreatIntelSets(context.Background(), &ListThreatIntelSetsInput{})
+	got, err := svc.ListThreatIntelSets(context.Background(), &ListThreatIntelSetsInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6654,7 +7282,11 @@ func TestCheckResponseSnapshot_ListTrustedEntitySets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTrustedEntitySets(context.Background(), &ListTrustedEntitySetsInput{})
+	got, err := svc.ListTrustedEntitySets(context.Background(), &ListTrustedEntitySetsInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6673,7 +7305,13 @@ func TestCheckResponseSnapshot_SendObjectMalwareScan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendObjectMalwareScan(context.Background(), &SendObjectMalwareScanInput{})
+	got, err := svc.SendObjectMalwareScan(context.Background(), &SendObjectMalwareScanInput{
+		S3Object: &types.S3ObjectForSendObjectMalwareScan{
+			Bucket:    ptr.String("__Bucket__"),
+			Key:       ptr.String("__Key__"),
+			VersionId: ptr.String("__VersionId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6694,7 +7332,23 @@ func TestCheckResponseSnapshot_StartMalwareScan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMalwareScan(context.Background(), &StartMalwareScanInput{})
+	got, err := svc.StartMalwareScan(context.Background(), &StartMalwareScanInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		ScanConfiguration: &types.StartMalwareScanConfiguration{
+			Role: ptr.String("__Role__"),
+			IncrementalScanDetails: &types.IncrementalScanDetails{
+				BaselineResourceArn: ptr.String("__BaselineResourceArn__"),
+			},
+			RecoveryPoint: &types.RecoveryPoint{
+				BackupVaultName: ptr.String("__BackupVaultName__"),
+				ContinuousScanDetails: &types.ContinuousScanDetails{
+					StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6724,7 +7378,13 @@ func TestCheckResponseSnapshot_StartMonitoringMembers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMonitoringMembers(context.Background(), &StartMonitoringMembersInput{})
+	got, err := svc.StartMonitoringMembers(context.Background(), &StartMonitoringMembersInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6754,7 +7414,13 @@ func TestCheckResponseSnapshot_StopMonitoringMembers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopMonitoringMembers(context.Background(), &StopMonitoringMembersInput{})
+	got, err := svc.StopMonitoringMembers(context.Background(), &StopMonitoringMembersInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6773,7 +7439,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6792,7 +7463,13 @@ func TestCheckResponseSnapshot_UnarchiveFindings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UnarchiveFindings(context.Background(), &UnarchiveFindingsInput{})
+	got, err := svc.UnarchiveFindings(context.Background(), &UnarchiveFindingsInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		FindingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6811,7 +7488,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6830,7 +7513,56 @@ func TestCheckResponseSnapshot_UpdateDetector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDetector(context.Background(), &UpdateDetectorInput{})
+	got, err := svc.UpdateDetector(context.Background(), &UpdateDetectorInput{
+		DetectorId:                 ptr.String("__DetectorId__"),
+		Enable:                     ptr.Bool(true),
+		FindingPublishingFrequency: types.FindingPublishingFrequency("FIFTEEN_MINUTES"),
+		DataSources: &types.DataSourceConfigurations{
+			S3Logs: &types.S3LogsConfiguration{
+				Enable: ptr.Bool(true),
+			},
+			Kubernetes: &types.KubernetesConfiguration{
+				AuditLogs: &types.KubernetesAuditLogsConfiguration{
+					Enable: ptr.Bool(true),
+				},
+			},
+			MalwareProtection: &types.MalwareProtectionConfiguration{
+				ScanEc2InstanceWithFindings: &types.ScanEc2InstanceWithFindings{
+					EbsVolumes: ptr.Bool(true),
+				},
+			},
+		},
+		Features: []types.DetectorFeatureConfiguration{
+			{
+				Name:   types.DetectorFeature("S3_DATA_EVENTS"),
+				Status: types.FeatureStatus("ENABLED"),
+				AdditionalConfiguration: []types.DetectorAdditionalConfiguration{
+					{
+						Name:   types.FeatureAdditionalConfiguration("EKS_ADDON_MANAGEMENT"),
+						Status: types.FeatureStatus("ENABLED"),
+					},
+					{
+						Name:   types.FeatureAdditionalConfiguration("EKS_ADDON_MANAGEMENT"),
+						Status: types.FeatureStatus("ENABLED"),
+					},
+				},
+			},
+			{
+				Name:   types.DetectorFeature("S3_DATA_EVENTS"),
+				Status: types.FeatureStatus("ENABLED"),
+				AdditionalConfiguration: []types.DetectorAdditionalConfiguration{
+					{
+						Name:   types.FeatureAdditionalConfiguration("EKS_ADDON_MANAGEMENT"),
+						Status: types.FeatureStatus("ENABLED"),
+					},
+					{
+						Name:   types.FeatureAdditionalConfiguration("EKS_ADDON_MANAGEMENT"),
+						Status: types.FeatureStatus("ENABLED"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6851,7 +7583,51 @@ func TestCheckResponseSnapshot_UpdateFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFilter(context.Background(), &UpdateFilterInput{})
+	got, err := svc.UpdateFilter(context.Background(), &UpdateFilterInput{
+		DetectorId:  ptr.String("__DetectorId__"),
+		FilterName:  ptr.String("__FilterName__"),
+		Description: ptr.String("__Description__"),
+		Action:      types.FilterAction("NOOP"),
+		Rank:        ptr.Int32(1),
+		FindingCriteria: &types.FindingCriteria{
+			Criterion: map[string]types.Condition{
+				"key0": {
+					Eq: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Neq: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Gt:  ptr.Int32(1),
+					Gte: ptr.Int32(1),
+					Lt:  ptr.Int32(1),
+					Lte: ptr.Int32(1),
+					Equals: []string{
+						"__Member__",
+						"__Member__",
+					},
+					NotEquals: []string{
+						"__Member__",
+						"__Member__",
+					},
+					GreaterThan:        ptr.Int64(1),
+					GreaterThanOrEqual: ptr.Int64(1),
+					LessThan:           ptr.Int64(1),
+					LessThanOrEqual:    ptr.Int64(1),
+					Matches: []string{
+						"__Member__",
+						"__Member__",
+					},
+					NotMatches: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6870,7 +7646,15 @@ func TestCheckResponseSnapshot_UpdateFindingsFeedback(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFindingsFeedback(context.Background(), &UpdateFindingsFeedbackInput{})
+	got, err := svc.UpdateFindingsFeedback(context.Background(), &UpdateFindingsFeedbackInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		FindingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Feedback: types.Feedback("USEFUL"),
+		Comments: ptr.String("__Comments__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6889,7 +7673,14 @@ func TestCheckResponseSnapshot_UpdateIPSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIPSet(context.Background(), &UpdateIPSetInput{})
+	got, err := svc.UpdateIPSet(context.Background(), &UpdateIPSetInput{
+		DetectorId:          ptr.String("__DetectorId__"),
+		IpSetId:             ptr.String("__IpSetId__"),
+		Name:                ptr.String("__Name__"),
+		Location:            ptr.String("__Location__"),
+		Activate:            ptr.Bool(true),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6908,7 +7699,23 @@ func TestCheckResponseSnapshot_UpdateMalwareProtectionPlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMalwareProtectionPlan(context.Background(), &UpdateMalwareProtectionPlanInput{})
+	got, err := svc.UpdateMalwareProtectionPlan(context.Background(), &UpdateMalwareProtectionPlanInput{
+		MalwareProtectionPlanId: ptr.String("__MalwareProtectionPlanId__"),
+		Role:                    ptr.String("__Role__"),
+		Actions: &types.MalwareProtectionPlanActions{
+			Tagging: &types.MalwareProtectionPlanTaggingAction{
+				Status: types.MalwareProtectionPlanTaggingActionStatus("ENABLED"),
+			},
+		},
+		ProtectedResource: &types.UpdateProtectedResource{
+			S3Bucket: &types.UpdateS3BucketResource{
+				ObjectPrefixes: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6927,7 +7734,40 @@ func TestCheckResponseSnapshot_UpdateMalwareScanSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMalwareScanSettings(context.Background(), &UpdateMalwareScanSettingsInput{})
+	got, err := svc.UpdateMalwareScanSettings(context.Background(), &UpdateMalwareScanSettingsInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		ScanResourceCriteria: &types.ScanResourceCriteria{
+			Include: map[string]types.ScanCondition{
+				"key0": {
+					MapEquals: []types.ScanConditionPair{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+			},
+			Exclude: map[string]types.ScanCondition{
+				"key0": {
+					MapEquals: []types.ScanConditionPair{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+			},
+		},
+		EbsSnapshotPreservation: types.EbsSnapshotPreservation("NO_RETENTION"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6957,7 +7797,58 @@ func TestCheckResponseSnapshot_UpdateMemberDetectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMemberDetectors(context.Background(), &UpdateMemberDetectorsInput{})
+	got, err := svc.UpdateMemberDetectors(context.Background(), &UpdateMemberDetectorsInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DataSources: &types.DataSourceConfigurations{
+			S3Logs: &types.S3LogsConfiguration{
+				Enable: ptr.Bool(true),
+			},
+			Kubernetes: &types.KubernetesConfiguration{
+				AuditLogs: &types.KubernetesAuditLogsConfiguration{
+					Enable: ptr.Bool(true),
+				},
+			},
+			MalwareProtection: &types.MalwareProtectionConfiguration{
+				ScanEc2InstanceWithFindings: &types.ScanEc2InstanceWithFindings{
+					EbsVolumes: ptr.Bool(true),
+				},
+			},
+		},
+		Features: []types.MemberFeaturesConfiguration{
+			{
+				Name:   types.OrgFeature("S3_DATA_EVENTS"),
+				Status: types.FeatureStatus("ENABLED"),
+				AdditionalConfiguration: []types.MemberAdditionalConfiguration{
+					{
+						Name:   types.OrgFeatureAdditionalConfiguration("EKS_ADDON_MANAGEMENT"),
+						Status: types.FeatureStatus("ENABLED"),
+					},
+					{
+						Name:   types.OrgFeatureAdditionalConfiguration("EKS_ADDON_MANAGEMENT"),
+						Status: types.FeatureStatus("ENABLED"),
+					},
+				},
+			},
+			{
+				Name:   types.OrgFeature("S3_DATA_EVENTS"),
+				Status: types.FeatureStatus("ENABLED"),
+				AdditionalConfiguration: []types.MemberAdditionalConfiguration{
+					{
+						Name:   types.OrgFeatureAdditionalConfiguration("EKS_ADDON_MANAGEMENT"),
+						Status: types.FeatureStatus("ENABLED"),
+					},
+					{
+						Name:   types.OrgFeatureAdditionalConfiguration("EKS_ADDON_MANAGEMENT"),
+						Status: types.FeatureStatus("ENABLED"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6976,7 +7867,58 @@ func TestCheckResponseSnapshot_UpdateOrganizationConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateOrganizationConfiguration(context.Background(), &UpdateOrganizationConfigurationInput{})
+	got, err := svc.UpdateOrganizationConfiguration(context.Background(), &UpdateOrganizationConfigurationInput{
+		DetectorId: ptr.String("__DetectorId__"),
+		AutoEnable: ptr.Bool(true),
+		DataSources: &types.OrganizationDataSourceConfigurations{
+			S3Logs: &types.OrganizationS3LogsConfiguration{
+				AutoEnable: ptr.Bool(true),
+			},
+			Kubernetes: &types.OrganizationKubernetesConfiguration{
+				AuditLogs: &types.OrganizationKubernetesAuditLogsConfiguration{
+					AutoEnable: ptr.Bool(true),
+				},
+			},
+			MalwareProtection: &types.OrganizationMalwareProtectionConfiguration{
+				ScanEc2InstanceWithFindings: &types.OrganizationScanEc2InstanceWithFindings{
+					EbsVolumes: &types.OrganizationEbsVolumes{
+						AutoEnable: ptr.Bool(true),
+					},
+				},
+			},
+		},
+		Features: []types.OrganizationFeatureConfiguration{
+			{
+				Name:       types.OrgFeature("S3_DATA_EVENTS"),
+				AutoEnable: types.OrgFeatureStatus("NEW"),
+				AdditionalConfiguration: []types.OrganizationAdditionalConfiguration{
+					{
+						Name:       types.OrgFeatureAdditionalConfiguration("EKS_ADDON_MANAGEMENT"),
+						AutoEnable: types.OrgFeatureStatus("NEW"),
+					},
+					{
+						Name:       types.OrgFeatureAdditionalConfiguration("EKS_ADDON_MANAGEMENT"),
+						AutoEnable: types.OrgFeatureStatus("NEW"),
+					},
+				},
+			},
+			{
+				Name:       types.OrgFeature("S3_DATA_EVENTS"),
+				AutoEnable: types.OrgFeatureStatus("NEW"),
+				AdditionalConfiguration: []types.OrganizationAdditionalConfiguration{
+					{
+						Name:       types.OrgFeatureAdditionalConfiguration("EKS_ADDON_MANAGEMENT"),
+						AutoEnable: types.OrgFeatureStatus("NEW"),
+					},
+					{
+						Name:       types.OrgFeatureAdditionalConfiguration("EKS_ADDON_MANAGEMENT"),
+						AutoEnable: types.OrgFeatureStatus("NEW"),
+					},
+				},
+			},
+		},
+		AutoEnableOrganizationMembers: types.AutoEnableMembers("NEW"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6995,7 +7937,14 @@ func TestCheckResponseSnapshot_UpdatePublishingDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePublishingDestination(context.Background(), &UpdatePublishingDestinationInput{})
+	got, err := svc.UpdatePublishingDestination(context.Background(), &UpdatePublishingDestinationInput{
+		DetectorId:    ptr.String("__DetectorId__"),
+		DestinationId: ptr.String("__DestinationId__"),
+		DestinationProperties: &types.DestinationProperties{
+			DestinationArn: ptr.String("__DestinationArn__"),
+			KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7014,7 +7963,14 @@ func TestCheckResponseSnapshot_UpdateThreatEntitySet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateThreatEntitySet(context.Background(), &UpdateThreatEntitySetInput{})
+	got, err := svc.UpdateThreatEntitySet(context.Background(), &UpdateThreatEntitySetInput{
+		DetectorId:          ptr.String("__DetectorId__"),
+		ThreatEntitySetId:   ptr.String("__ThreatEntitySetId__"),
+		Name:                ptr.String("__Name__"),
+		Location:            ptr.String("__Location__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+		Activate:            ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7033,7 +7989,14 @@ func TestCheckResponseSnapshot_UpdateThreatIntelSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateThreatIntelSet(context.Background(), &UpdateThreatIntelSetInput{})
+	got, err := svc.UpdateThreatIntelSet(context.Background(), &UpdateThreatIntelSetInput{
+		DetectorId:          ptr.String("__DetectorId__"),
+		ThreatIntelSetId:    ptr.String("__ThreatIntelSetId__"),
+		Name:                ptr.String("__Name__"),
+		Location:            ptr.String("__Location__"),
+		Activate:            ptr.Bool(true),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7052,7 +8015,14 @@ func TestCheckResponseSnapshot_UpdateTrustedEntitySet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTrustedEntitySet(context.Background(), &UpdateTrustedEntitySetInput{})
+	got, err := svc.UpdateTrustedEntitySet(context.Background(), &UpdateTrustedEntitySetInput{
+		DetectorId:          ptr.String("__DetectorId__"),
+		TrustedEntitySetId:  ptr.String("__TrustedEntitySetId__"),
+		Name:                ptr.String("__Name__"),
+		Location:            ptr.String("__Location__"),
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+		Activate:            ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7074,7 +8044,18 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateIPSet(context.Background(), &CreateIPSetInput{})
+	_, opErr := svc.CreateIPSet(context.Background(), &CreateIPSetInput{
+		DetectorId:  ptr.String("__DetectorId__"),
+		Name:        ptr.String("__Name__"),
+		Format:      types.IpSetFormat("TXT"),
+		Location:    ptr.String("__Location__"),
+		Activate:    ptr.Bool(true),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7100,7 +8081,11 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptAdministratorInvitation(context.Background(), &AcceptAdministratorInvitationInput{})
+	_, opErr := svc.AcceptAdministratorInvitation(context.Background(), &AcceptAdministratorInvitationInput{
+		DetectorId:      ptr.String("__DetectorId__"),
+		AdministratorId: ptr.String("__AdministratorId__"),
+		InvitationId:    ptr.String("__InvitationId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7126,7 +8111,27 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMalwareProtectionPlan(context.Background(), &CreateMalwareProtectionPlanInput{})
+	_, opErr := svc.CreateMalwareProtectionPlan(context.Background(), &CreateMalwareProtectionPlanInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Role:        ptr.String("__Role__"),
+		ProtectedResource: &types.CreateProtectedResource{
+			S3Bucket: &types.CreateS3BucketResource{
+				BucketName: ptr.String("__BucketName__"),
+				ObjectPrefixes: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Actions: &types.MalwareProtectionPlanActions{
+			Tagging: &types.MalwareProtectionPlanTaggingAction{
+				Status: types.MalwareProtectionPlanTaggingActionStatus("ENABLED"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7152,7 +8157,11 @@ func TestCheckResponseSnapshot_Error_InternalServerErrorException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptAdministratorInvitation(context.Background(), &AcceptAdministratorInvitationInput{})
+	_, opErr := svc.AcceptAdministratorInvitation(context.Background(), &AcceptAdministratorInvitationInput{
+		DetectorId:      ptr.String("__DetectorId__"),
+		AdministratorId: ptr.String("__AdministratorId__"),
+		InvitationId:    ptr.String("__InvitationId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -7178,7 +8187,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteMalwareProtectionPlan(context.Background(), &DeleteMalwareProtectionPlanInput{})
+	_, opErr := svc.DeleteMalwareProtectionPlan(context.Background(), &DeleteMalwareProtectionPlanInput{
+		MalwareProtectionPlanId: ptr.String("__MalwareProtectionPlanId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

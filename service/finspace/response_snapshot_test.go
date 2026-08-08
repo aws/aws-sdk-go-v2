@@ -121,7 +121,34 @@ func TestCheckResponseSnapshot_CreateEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{})
+	got, err := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		KmsKeyId:    ptr.String("__KmsKeyId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		FederationMode: types.FederationMode("FEDERATED"),
+		FederationParameters: &types.FederationParameters{
+			SamlMetadataDocument:   ptr.String("__SamlMetadataDocument__"),
+			SamlMetadataURL:        ptr.String("__SamlMetadataURL__"),
+			ApplicationCallBackURL: ptr.String("__ApplicationCallBackURL__"),
+			FederationURN:          ptr.String("__FederationURN__"),
+			FederationProviderName: ptr.String("__FederationProviderName__"),
+			AttributeMap: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		SuperuserParameters: &types.SuperuserParameters{
+			EmailAddress: ptr.String("__EmailAddress__"),
+			FirstName:    ptr.String("__FirstName__"),
+			LastName:     ptr.String("__LastName__"),
+		},
+		DataBundles: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -163,7 +190,23 @@ func TestCheckResponseSnapshot_CreateKxChangeset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateKxChangeset(context.Background(), &CreateKxChangesetInput{})
+	got, err := svc.CreateKxChangeset(context.Background(), &CreateKxChangesetInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		DatabaseName:  ptr.String("__DatabaseName__"),
+		ChangeRequests: []types.ChangeRequest{
+			{
+				ChangeType: types.ChangeType("PUT"),
+				S3Path:     ptr.String("__S3Path__"),
+				DbPath:     ptr.String("__DbPath__"),
+			},
+			{
+				ChangeType: types.ChangeType("PUT"),
+				S3Path:     ptr.String("__S3Path__"),
+				DbPath:     ptr.String("__DbPath__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -367,7 +410,182 @@ func TestCheckResponseSnapshot_CreateKxCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateKxCluster(context.Background(), &CreateKxClusterInput{})
+	got, err := svc.CreateKxCluster(context.Background(), &CreateKxClusterInput{
+		ClientToken:   ptr.String("__ClientToken__"),
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		ClusterName:   ptr.String("__ClusterName__"),
+		ClusterType:   types.KxClusterType("HDB"),
+		TickerplantLogConfiguration: &types.TickerplantLogConfiguration{
+			TickerplantLogVolumes: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Databases: []types.KxDatabaseConfiguration{
+			{
+				DatabaseName: ptr.String("__DatabaseName__"),
+				CacheConfigurations: []types.KxDatabaseCacheConfiguration{
+					{
+						CacheType: ptr.String("__CacheType__"),
+						DbPaths: []string{
+							"__Member__",
+							"__Member__",
+						},
+						DataviewName: ptr.String("__DataviewName__"),
+					},
+					{
+						CacheType: ptr.String("__CacheType__"),
+						DbPaths: []string{
+							"__Member__",
+							"__Member__",
+						},
+						DataviewName: ptr.String("__DataviewName__"),
+					},
+				},
+				ChangesetId:  ptr.String("__ChangesetId__"),
+				DataviewName: ptr.String("__DataviewName__"),
+				DataviewConfiguration: &types.KxDataviewConfiguration{
+					DataviewName:      ptr.String("__DataviewName__"),
+					DataviewVersionId: ptr.String("__DataviewVersionId__"),
+					ChangesetId:       ptr.String("__ChangesetId__"),
+					SegmentConfigurations: []types.KxDataviewSegmentConfiguration{
+						{
+							DbPaths: []string{
+								"__Member__",
+								"__Member__",
+							},
+							VolumeName: ptr.String("__VolumeName__"),
+							OnDemand:   true,
+						},
+						{
+							DbPaths: []string{
+								"__Member__",
+								"__Member__",
+							},
+							VolumeName: ptr.String("__VolumeName__"),
+							OnDemand:   true,
+						},
+					},
+				},
+			},
+			{
+				DatabaseName: ptr.String("__DatabaseName__"),
+				CacheConfigurations: []types.KxDatabaseCacheConfiguration{
+					{
+						CacheType: ptr.String("__CacheType__"),
+						DbPaths: []string{
+							"__Member__",
+							"__Member__",
+						},
+						DataviewName: ptr.String("__DataviewName__"),
+					},
+					{
+						CacheType: ptr.String("__CacheType__"),
+						DbPaths: []string{
+							"__Member__",
+							"__Member__",
+						},
+						DataviewName: ptr.String("__DataviewName__"),
+					},
+				},
+				ChangesetId:  ptr.String("__ChangesetId__"),
+				DataviewName: ptr.String("__DataviewName__"),
+				DataviewConfiguration: &types.KxDataviewConfiguration{
+					DataviewName:      ptr.String("__DataviewName__"),
+					DataviewVersionId: ptr.String("__DataviewVersionId__"),
+					ChangesetId:       ptr.String("__ChangesetId__"),
+					SegmentConfigurations: []types.KxDataviewSegmentConfiguration{
+						{
+							DbPaths: []string{
+								"__Member__",
+								"__Member__",
+							},
+							VolumeName: ptr.String("__VolumeName__"),
+							OnDemand:   true,
+						},
+						{
+							DbPaths: []string{
+								"__Member__",
+								"__Member__",
+							},
+							VolumeName: ptr.String("__VolumeName__"),
+							OnDemand:   true,
+						},
+					},
+				},
+			},
+		},
+		CacheStorageConfigurations: []types.KxCacheStorageConfiguration{
+			{
+				Type: ptr.String("__Type__"),
+				Size: ptr.Int32(1),
+			},
+			{
+				Type: ptr.String("__Type__"),
+				Size: ptr.Int32(1),
+			},
+		},
+		AutoScalingConfiguration: &types.AutoScalingConfiguration{
+			MinNodeCount:            ptr.Int32(1),
+			MaxNodeCount:            ptr.Int32(1),
+			AutoScalingMetric:       types.AutoScalingMetric("CPU_UTILIZATION_PERCENTAGE"),
+			MetricTarget:            ptr.Float64(1.0),
+			ScaleInCooldownSeconds:  ptr.Float64(1.0),
+			ScaleOutCooldownSeconds: ptr.Float64(1.0),
+		},
+		ClusterDescription: ptr.String("__ClusterDescription__"),
+		CapacityConfiguration: &types.CapacityConfiguration{
+			NodeType:  ptr.String("__NodeType__"),
+			NodeCount: ptr.Int32(1),
+		},
+		ReleaseLabel: ptr.String("__ReleaseLabel__"),
+		VpcConfiguration: &types.VpcConfiguration{
+			VpcId: ptr.String("__VpcId__"),
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			IpAddressType: types.IPAddressType("IP_V4"),
+		},
+		InitializationScript: ptr.String("__InitializationScript__"),
+		CommandLineArguments: []types.KxCommandLineArgument{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Code: &types.CodeConfiguration{
+			S3Bucket:        ptr.String("__S3Bucket__"),
+			S3Key:           ptr.String("__S3Key__"),
+			S3ObjectVersion: ptr.String("__S3ObjectVersion__"),
+		},
+		ExecutionRole: ptr.String("__ExecutionRole__"),
+		SavedownStorageConfiguration: &types.KxSavedownStorageConfiguration{
+			Type:       types.KxSavedownStorageType("SDS01"),
+			Size:       ptr.Int32(1),
+			VolumeName: ptr.String("__VolumeName__"),
+		},
+		AzMode:             types.KxAzMode("SINGLE"),
+		AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ScalingGroupConfiguration: &types.KxScalingGroupConfiguration{
+			ScalingGroupName:  ptr.String("__ScalingGroupName__"),
+			MemoryLimit:       ptr.Int32(1),
+			MemoryReservation: ptr.Int32(1),
+			NodeCount:         ptr.Int32(1),
+			Cpu:               ptr.Float64(1.0),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -393,7 +611,15 @@ func TestCheckResponseSnapshot_CreateKxDatabase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateKxDatabase(context.Background(), &CreateKxDatabaseInput{})
+	got, err := svc.CreateKxDatabase(context.Background(), &CreateKxDatabaseInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		DatabaseName:  ptr.String("__DatabaseName__"),
+		Description:   ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -443,7 +669,39 @@ func TestCheckResponseSnapshot_CreateKxDataview(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateKxDataview(context.Background(), &CreateKxDataviewInput{})
+	got, err := svc.CreateKxDataview(context.Background(), &CreateKxDataviewInput{
+		EnvironmentId:      ptr.String("__EnvironmentId__"),
+		DatabaseName:       ptr.String("__DatabaseName__"),
+		DataviewName:       ptr.String("__DataviewName__"),
+		AzMode:             types.KxAzMode("SINGLE"),
+		AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+		ChangesetId:        ptr.String("__ChangesetId__"),
+		SegmentConfigurations: []types.KxDataviewSegmentConfiguration{
+			{
+				DbPaths: []string{
+					"__Member__",
+					"__Member__",
+				},
+				VolumeName: ptr.String("__VolumeName__"),
+				OnDemand:   true,
+			},
+			{
+				DbPaths: []string{
+					"__Member__",
+					"__Member__",
+				},
+				VolumeName: ptr.String("__VolumeName__"),
+				OnDemand:   true,
+			},
+		},
+		AutoUpdate:  true,
+		ReadWrite:   true,
+		Description: ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -470,7 +728,15 @@ func TestCheckResponseSnapshot_CreateKxEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateKxEnvironment(context.Background(), &CreateKxEnvironmentInput{})
+	got, err := svc.CreateKxEnvironment(context.Background(), &CreateKxEnvironmentInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		KmsKeyId:    ptr.String("__KmsKeyId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -497,7 +763,16 @@ func TestCheckResponseSnapshot_CreateKxScalingGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateKxScalingGroup(context.Background(), &CreateKxScalingGroupInput{})
+	got, err := svc.CreateKxScalingGroup(context.Background(), &CreateKxScalingGroupInput{
+		ClientToken:        ptr.String("__ClientToken__"),
+		EnvironmentId:      ptr.String("__EnvironmentId__"),
+		ScalingGroupName:   ptr.String("__ScalingGroupName__"),
+		HostType:           ptr.String("__HostType__"),
+		AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -521,7 +796,15 @@ func TestCheckResponseSnapshot_CreateKxUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateKxUser(context.Background(), &CreateKxUserInput{})
+	got, err := svc.CreateKxUser(context.Background(), &CreateKxUserInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		UserName:      ptr.String("__UserName__"),
+		IamRole:       ptr.String("__IamRole__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -558,7 +841,25 @@ func TestCheckResponseSnapshot_CreateKxVolume(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateKxVolume(context.Background(), &CreateKxVolumeInput{})
+	got, err := svc.CreateKxVolume(context.Background(), &CreateKxVolumeInput{
+		ClientToken:   ptr.String("__ClientToken__"),
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		VolumeType:    types.KxVolumeType("NAS_1"),
+		VolumeName:    ptr.String("__VolumeName__"),
+		Description:   ptr.String("__Description__"),
+		Nas1Configuration: &types.KxNAS1Configuration{
+			Type: types.KxNAS1Type("SSD_1000"),
+			Size: ptr.Int32(1),
+		},
+		AzMode: types.KxAzMode("SINGLE"),
+		AvailabilityZoneIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -577,7 +878,9 @@ func TestCheckResponseSnapshot_DeleteEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEnvironment(context.Background(), &DeleteEnvironmentInput{})
+	got, err := svc.DeleteEnvironment(context.Background(), &DeleteEnvironmentInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -596,7 +899,11 @@ func TestCheckResponseSnapshot_DeleteKxCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteKxCluster(context.Background(), &DeleteKxClusterInput{})
+	got, err := svc.DeleteKxCluster(context.Background(), &DeleteKxClusterInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		ClusterName:   ptr.String("__ClusterName__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -615,7 +922,11 @@ func TestCheckResponseSnapshot_DeleteKxClusterNode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteKxClusterNode(context.Background(), &DeleteKxClusterNodeInput{})
+	got, err := svc.DeleteKxClusterNode(context.Background(), &DeleteKxClusterNodeInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		ClusterName:   ptr.String("__ClusterName__"),
+		NodeId:        ptr.String("__NodeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -634,7 +945,11 @@ func TestCheckResponseSnapshot_DeleteKxDatabase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteKxDatabase(context.Background(), &DeleteKxDatabaseInput{})
+	got, err := svc.DeleteKxDatabase(context.Background(), &DeleteKxDatabaseInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		DatabaseName:  ptr.String("__DatabaseName__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -653,7 +968,12 @@ func TestCheckResponseSnapshot_DeleteKxDataview(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteKxDataview(context.Background(), &DeleteKxDataviewInput{})
+	got, err := svc.DeleteKxDataview(context.Background(), &DeleteKxDataviewInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		DatabaseName:  ptr.String("__DatabaseName__"),
+		DataviewName:  ptr.String("__DataviewName__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -672,7 +992,10 @@ func TestCheckResponseSnapshot_DeleteKxEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteKxEnvironment(context.Background(), &DeleteKxEnvironmentInput{})
+	got, err := svc.DeleteKxEnvironment(context.Background(), &DeleteKxEnvironmentInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -691,7 +1014,11 @@ func TestCheckResponseSnapshot_DeleteKxScalingGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteKxScalingGroup(context.Background(), &DeleteKxScalingGroupInput{})
+	got, err := svc.DeleteKxScalingGroup(context.Background(), &DeleteKxScalingGroupInput{
+		EnvironmentId:    ptr.String("__EnvironmentId__"),
+		ScalingGroupName: ptr.String("__ScalingGroupName__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -710,7 +1037,11 @@ func TestCheckResponseSnapshot_DeleteKxUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteKxUser(context.Background(), &DeleteKxUserInput{})
+	got, err := svc.DeleteKxUser(context.Background(), &DeleteKxUserInput{
+		UserName:      ptr.String("__UserName__"),
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -729,7 +1060,11 @@ func TestCheckResponseSnapshot_DeleteKxVolume(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteKxVolume(context.Background(), &DeleteKxVolumeInput{})
+	got, err := svc.DeleteKxVolume(context.Background(), &DeleteKxVolumeInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		VolumeName:    ptr.String("__VolumeName__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -772,7 +1107,9 @@ func TestCheckResponseSnapshot_GetEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEnvironment(context.Background(), &GetEnvironmentInput{})
+	got, err := svc.GetEnvironment(context.Background(), &GetEnvironmentInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -815,7 +1152,11 @@ func TestCheckResponseSnapshot_GetKxChangeset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetKxChangeset(context.Background(), &GetKxChangesetInput{})
+	got, err := svc.GetKxChangeset(context.Background(), &GetKxChangesetInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		DatabaseName:  ptr.String("__DatabaseName__"),
+		ChangesetId:   ptr.String("__ChangesetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1018,7 +1359,10 @@ func TestCheckResponseSnapshot_GetKxCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetKxCluster(context.Background(), &GetKxClusterInput{})
+	got, err := svc.GetKxCluster(context.Background(), &GetKxClusterInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		ClusterName:   ptr.String("__ClusterName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1039,7 +1383,11 @@ func TestCheckResponseSnapshot_GetKxConnectionString(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetKxConnectionString(context.Background(), &GetKxConnectionStringInput{})
+	got, err := svc.GetKxConnectionString(context.Background(), &GetKxConnectionStringInput{
+		UserArn:       ptr.String("__UserArn__"),
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		ClusterName:   ptr.String("__ClusterName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1069,7 +1417,10 @@ func TestCheckResponseSnapshot_GetKxDatabase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetKxDatabase(context.Background(), &GetKxDatabaseInput{})
+	got, err := svc.GetKxDatabase(context.Background(), &GetKxDatabaseInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		DatabaseName:  ptr.String("__DatabaseName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1176,7 +1527,11 @@ func TestCheckResponseSnapshot_GetKxDataview(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetKxDataview(context.Background(), &GetKxDataviewInput{})
+	got, err := svc.GetKxDataview(context.Background(), &GetKxDataviewInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		DatabaseName:  ptr.String("__DatabaseName__"),
+		DataviewName:  ptr.String("__DataviewName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1258,7 +1613,9 @@ func TestCheckResponseSnapshot_GetKxEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetKxEnvironment(context.Background(), &GetKxEnvironmentInput{})
+	got, err := svc.GetKxEnvironment(context.Background(), &GetKxEnvironmentInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1290,7 +1647,10 @@ func TestCheckResponseSnapshot_GetKxScalingGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetKxScalingGroup(context.Background(), &GetKxScalingGroupInput{})
+	got, err := svc.GetKxScalingGroup(context.Background(), &GetKxScalingGroupInput{
+		EnvironmentId:    ptr.String("__EnvironmentId__"),
+		ScalingGroupName: ptr.String("__ScalingGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1314,7 +1674,10 @@ func TestCheckResponseSnapshot_GetKxUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetKxUser(context.Background(), &GetKxUserInput{})
+	got, err := svc.GetKxUser(context.Background(), &GetKxUserInput{
+		UserName:      ptr.String("__UserName__"),
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1364,7 +1727,10 @@ func TestCheckResponseSnapshot_GetKxVolume(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetKxVolume(context.Background(), &GetKxVolumeInput{})
+	got, err := svc.GetKxVolume(context.Background(), &GetKxVolumeInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		VolumeName:    ptr.String("__VolumeName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1433,7 +1799,10 @@ func TestCheckResponseSnapshot_ListEnvironments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEnvironments(context.Background(), &ListEnvironmentsInput{})
+	got, err := svc.ListEnvironments(context.Background(), &ListEnvironmentsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1470,7 +1839,12 @@ func TestCheckResponseSnapshot_ListKxChangesets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListKxChangesets(context.Background(), &ListKxChangesetsInput{})
+	got, err := svc.ListKxChangesets(context.Background(), &ListKxChangesetsInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		DatabaseName:  ptr.String("__DatabaseName__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1505,7 +1879,12 @@ func TestCheckResponseSnapshot_ListKxClusterNodes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListKxClusterNodes(context.Background(), &ListKxClusterNodesInput{})
+	got, err := svc.ListKxClusterNodes(context.Background(), &ListKxClusterNodesInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		ClusterName:   ptr.String("__ClusterName__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1576,7 +1955,12 @@ func TestCheckResponseSnapshot_ListKxClusters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListKxClusters(context.Background(), &ListKxClustersInput{})
+	got, err := svc.ListKxClusters(context.Background(), &ListKxClustersInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		ClusterType:   types.KxClusterType("HDB"),
+		MaxResults:    1,
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1609,7 +1993,11 @@ func TestCheckResponseSnapshot_ListKxDatabases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListKxDatabases(context.Background(), &ListKxDatabasesInput{})
+	got, err := svc.ListKxDatabases(context.Background(), &ListKxDatabasesInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1810,7 +2198,12 @@ func TestCheckResponseSnapshot_ListKxDataviews(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListKxDataviews(context.Background(), &ListKxDataviewsInput{})
+	got, err := svc.ListKxDataviews(context.Background(), &ListKxDataviewsInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		DatabaseName:  ptr.String("__DatabaseName__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1961,7 +2354,10 @@ func TestCheckResponseSnapshot_ListKxEnvironments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListKxEnvironments(context.Background(), &ListKxEnvironmentsInput{})
+	got, err := svc.ListKxEnvironments(context.Background(), &ListKxEnvironmentsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2010,7 +2406,11 @@ func TestCheckResponseSnapshot_ListKxScalingGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListKxScalingGroups(context.Background(), &ListKxScalingGroupsInput{})
+	got, err := svc.ListKxScalingGroups(context.Background(), &ListKxScalingGroupsInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		MaxResults:    1,
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2047,7 +2447,11 @@ func TestCheckResponseSnapshot_ListKxUsers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListKxUsers(context.Background(), &ListKxUsersInput{})
+	got, err := svc.ListKxUsers(context.Background(), &ListKxUsersInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2098,7 +2502,12 @@ func TestCheckResponseSnapshot_ListKxVolumes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListKxVolumes(context.Background(), &ListKxVolumesInput{})
+	got, err := svc.ListKxVolumes(context.Background(), &ListKxVolumesInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		MaxResults:    1,
+		NextToken:     ptr.String("__NextToken__"),
+		VolumeType:    types.KxVolumeType("NAS_1"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2121,7 +2530,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2140,7 +2551,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2159,7 +2575,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2202,7 +2624,22 @@ func TestCheckResponseSnapshot_UpdateEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEnvironment(context.Background(), &UpdateEnvironmentInput{})
+	got, err := svc.UpdateEnvironment(context.Background(), &UpdateEnvironmentInput{
+		EnvironmentId:  ptr.String("__EnvironmentId__"),
+		Name:           ptr.String("__Name__"),
+		Description:    ptr.String("__Description__"),
+		FederationMode: types.FederationMode("FEDERATED"),
+		FederationParameters: &types.FederationParameters{
+			SamlMetadataDocument:   ptr.String("__SamlMetadataDocument__"),
+			SamlMetadataURL:        ptr.String("__SamlMetadataURL__"),
+			ApplicationCallBackURL: ptr.String("__ApplicationCallBackURL__"),
+			FederationURN:          ptr.String("__FederationURN__"),
+			FederationProviderName: ptr.String("__FederationProviderName__"),
+			AttributeMap: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2221,7 +2658,30 @@ func TestCheckResponseSnapshot_UpdateKxClusterCodeConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateKxClusterCodeConfiguration(context.Background(), &UpdateKxClusterCodeConfigurationInput{})
+	got, err := svc.UpdateKxClusterCodeConfiguration(context.Background(), &UpdateKxClusterCodeConfigurationInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		ClusterName:   ptr.String("__ClusterName__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		Code: &types.CodeConfiguration{
+			S3Bucket:        ptr.String("__S3Bucket__"),
+			S3Key:           ptr.String("__S3Key__"),
+			S3ObjectVersion: ptr.String("__S3ObjectVersion__"),
+		},
+		InitializationScript: ptr.String("__InitializationScript__"),
+		CommandLineArguments: []types.KxCommandLineArgument{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DeploymentConfiguration: &types.KxClusterCodeDeploymentConfiguration{
+			DeploymentStrategy: types.KxClusterCodeDeploymentStrategy("NO_RESTART"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2240,7 +2700,108 @@ func TestCheckResponseSnapshot_UpdateKxClusterDatabases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateKxClusterDatabases(context.Background(), &UpdateKxClusterDatabasesInput{})
+	got, err := svc.UpdateKxClusterDatabases(context.Background(), &UpdateKxClusterDatabasesInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		ClusterName:   ptr.String("__ClusterName__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		Databases: []types.KxDatabaseConfiguration{
+			{
+				DatabaseName: ptr.String("__DatabaseName__"),
+				CacheConfigurations: []types.KxDatabaseCacheConfiguration{
+					{
+						CacheType: ptr.String("__CacheType__"),
+						DbPaths: []string{
+							"__Member__",
+							"__Member__",
+						},
+						DataviewName: ptr.String("__DataviewName__"),
+					},
+					{
+						CacheType: ptr.String("__CacheType__"),
+						DbPaths: []string{
+							"__Member__",
+							"__Member__",
+						},
+						DataviewName: ptr.String("__DataviewName__"),
+					},
+				},
+				ChangesetId:  ptr.String("__ChangesetId__"),
+				DataviewName: ptr.String("__DataviewName__"),
+				DataviewConfiguration: &types.KxDataviewConfiguration{
+					DataviewName:      ptr.String("__DataviewName__"),
+					DataviewVersionId: ptr.String("__DataviewVersionId__"),
+					ChangesetId:       ptr.String("__ChangesetId__"),
+					SegmentConfigurations: []types.KxDataviewSegmentConfiguration{
+						{
+							DbPaths: []string{
+								"__Member__",
+								"__Member__",
+							},
+							VolumeName: ptr.String("__VolumeName__"),
+							OnDemand:   true,
+						},
+						{
+							DbPaths: []string{
+								"__Member__",
+								"__Member__",
+							},
+							VolumeName: ptr.String("__VolumeName__"),
+							OnDemand:   true,
+						},
+					},
+				},
+			},
+			{
+				DatabaseName: ptr.String("__DatabaseName__"),
+				CacheConfigurations: []types.KxDatabaseCacheConfiguration{
+					{
+						CacheType: ptr.String("__CacheType__"),
+						DbPaths: []string{
+							"__Member__",
+							"__Member__",
+						},
+						DataviewName: ptr.String("__DataviewName__"),
+					},
+					{
+						CacheType: ptr.String("__CacheType__"),
+						DbPaths: []string{
+							"__Member__",
+							"__Member__",
+						},
+						DataviewName: ptr.String("__DataviewName__"),
+					},
+				},
+				ChangesetId:  ptr.String("__ChangesetId__"),
+				DataviewName: ptr.String("__DataviewName__"),
+				DataviewConfiguration: &types.KxDataviewConfiguration{
+					DataviewName:      ptr.String("__DataviewName__"),
+					DataviewVersionId: ptr.String("__DataviewVersionId__"),
+					ChangesetId:       ptr.String("__ChangesetId__"),
+					SegmentConfigurations: []types.KxDataviewSegmentConfiguration{
+						{
+							DbPaths: []string{
+								"__Member__",
+								"__Member__",
+							},
+							VolumeName: ptr.String("__VolumeName__"),
+							OnDemand:   true,
+						},
+						{
+							DbPaths: []string{
+								"__Member__",
+								"__Member__",
+							},
+							VolumeName: ptr.String("__VolumeName__"),
+							OnDemand:   true,
+						},
+					},
+				},
+			},
+		},
+		DeploymentConfiguration: &types.KxDeploymentConfiguration{
+			DeploymentStrategy: types.KxDeploymentStrategy("NO_RESTART"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2264,7 +2825,12 @@ func TestCheckResponseSnapshot_UpdateKxDatabase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateKxDatabase(context.Background(), &UpdateKxDatabaseInput{})
+	got, err := svc.UpdateKxDatabase(context.Background(), &UpdateKxDatabaseInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		DatabaseName:  ptr.String("__DatabaseName__"),
+		Description:   ptr.String("__Description__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2370,7 +2936,32 @@ func TestCheckResponseSnapshot_UpdateKxDataview(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateKxDataview(context.Background(), &UpdateKxDataviewInput{})
+	got, err := svc.UpdateKxDataview(context.Background(), &UpdateKxDataviewInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		DatabaseName:  ptr.String("__DatabaseName__"),
+		DataviewName:  ptr.String("__DataviewName__"),
+		Description:   ptr.String("__Description__"),
+		ChangesetId:   ptr.String("__ChangesetId__"),
+		SegmentConfigurations: []types.KxDataviewSegmentConfiguration{
+			{
+				DbPaths: []string{
+					"__Member__",
+					"__Member__",
+				},
+				VolumeName: ptr.String("__VolumeName__"),
+				OnDemand:   true,
+			},
+			{
+				DbPaths: []string{
+					"__Member__",
+					"__Member__",
+				},
+				VolumeName: ptr.String("__VolumeName__"),
+				OnDemand:   true,
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2451,7 +3042,12 @@ func TestCheckResponseSnapshot_UpdateKxEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateKxEnvironment(context.Background(), &UpdateKxEnvironmentInput{})
+	got, err := svc.UpdateKxEnvironment(context.Background(), &UpdateKxEnvironmentInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		Name:          ptr.String("__Name__"),
+		Description:   ptr.String("__Description__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2532,7 +3128,54 @@ func TestCheckResponseSnapshot_UpdateKxEnvironmentNetwork(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateKxEnvironmentNetwork(context.Background(), &UpdateKxEnvironmentNetworkInput{})
+	got, err := svc.UpdateKxEnvironmentNetwork(context.Background(), &UpdateKxEnvironmentNetworkInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		TransitGatewayConfiguration: &types.TransitGatewayConfiguration{
+			TransitGatewayID:  ptr.String("__TransitGatewayID__"),
+			RoutableCIDRSpace: ptr.String("__RoutableCIDRSpace__"),
+			AttachmentNetworkAclConfiguration: []types.NetworkACLEntry{
+				{
+					RuleNumber: ptr.Int32(1),
+					Protocol:   ptr.String("__Protocol__"),
+					RuleAction: types.RuleAction("allow"),
+					PortRange: &types.PortRange{
+						From: 1,
+						To:   1,
+					},
+					IcmpTypeCode: &types.IcmpTypeCode{
+						Type: 1,
+						Code: 1,
+					},
+					CidrBlock: ptr.String("__CidrBlock__"),
+				},
+				{
+					RuleNumber: ptr.Int32(1),
+					Protocol:   ptr.String("__Protocol__"),
+					RuleAction: types.RuleAction("allow"),
+					PortRange: &types.PortRange{
+						From: 1,
+						To:   1,
+					},
+					IcmpTypeCode: &types.IcmpTypeCode{
+						Type: 1,
+						Code: 1,
+					},
+					CidrBlock: ptr.String("__CidrBlock__"),
+				},
+			},
+		},
+		CustomDNSConfiguration: []types.CustomDNSServer{
+			{
+				CustomDNSServerName: ptr.String("__CustomDNSServerName__"),
+				CustomDNSServerIP:   ptr.String("__CustomDNSServerIP__"),
+			},
+			{
+				CustomDNSServerName: ptr.String("__CustomDNSServerName__"),
+				CustomDNSServerIP:   ptr.String("__CustomDNSServerIP__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2556,7 +3199,12 @@ func TestCheckResponseSnapshot_UpdateKxUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateKxUser(context.Background(), &UpdateKxUserInput{})
+	got, err := svc.UpdateKxUser(context.Background(), &UpdateKxUserInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		UserName:      ptr.String("__UserName__"),
+		IamRole:       ptr.String("__IamRole__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2606,7 +3254,16 @@ func TestCheckResponseSnapshot_UpdateKxVolume(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateKxVolume(context.Background(), &UpdateKxVolumeInput{})
+	got, err := svc.UpdateKxVolume(context.Background(), &UpdateKxVolumeInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		VolumeName:    ptr.String("__VolumeName__"),
+		Description:   ptr.String("__Description__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		Nas1Configuration: &types.KxNAS1Configuration{
+			Type: types.KxNAS1Type("SSD_1000"),
+			Size: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2627,7 +3284,34 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{})
+	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		KmsKeyId:    ptr.String("__KmsKeyId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		FederationMode: types.FederationMode("FEDERATED"),
+		FederationParameters: &types.FederationParameters{
+			SamlMetadataDocument:   ptr.String("__SamlMetadataDocument__"),
+			SamlMetadataURL:        ptr.String("__SamlMetadataURL__"),
+			ApplicationCallBackURL: ptr.String("__ApplicationCallBackURL__"),
+			FederationURN:          ptr.String("__FederationURN__"),
+			FederationProviderName: ptr.String("__FederationProviderName__"),
+			AttributeMap: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		SuperuserParameters: &types.SuperuserParameters{
+			EmailAddress: ptr.String("__EmailAddress__"),
+			FirstName:    ptr.String("__FirstName__"),
+			LastName:     ptr.String("__LastName__"),
+		},
+		DataBundles: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2653,7 +3337,23 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateKxChangeset(context.Background(), &CreateKxChangesetInput{})
+	_, opErr := svc.CreateKxChangeset(context.Background(), &CreateKxChangesetInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		DatabaseName:  ptr.String("__DatabaseName__"),
+		ChangeRequests: []types.ChangeRequest{
+			{
+				ChangeType: types.ChangeType("PUT"),
+				S3Path:     ptr.String("__S3Path__"),
+				DbPath:     ptr.String("__DbPath__"),
+			},
+			{
+				ChangeType: types.ChangeType("PUT"),
+				S3Path:     ptr.String("__S3Path__"),
+				DbPath:     ptr.String("__DbPath__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2678,7 +3378,34 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{})
+	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		KmsKeyId:    ptr.String("__KmsKeyId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		FederationMode: types.FederationMode("FEDERATED"),
+		FederationParameters: &types.FederationParameters{
+			SamlMetadataDocument:   ptr.String("__SamlMetadataDocument__"),
+			SamlMetadataURL:        ptr.String("__SamlMetadataURL__"),
+			ApplicationCallBackURL: ptr.String("__ApplicationCallBackURL__"),
+			FederationURN:          ptr.String("__FederationURN__"),
+			FederationProviderName: ptr.String("__FederationProviderName__"),
+			AttributeMap: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		SuperuserParameters: &types.SuperuserParameters{
+			EmailAddress: ptr.String("__EmailAddress__"),
+			FirstName:    ptr.String("__FirstName__"),
+			LastName:     ptr.String("__LastName__"),
+		},
+		DataBundles: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2703,7 +3430,9 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2728,7 +3457,34 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{})
+	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		KmsKeyId:    ptr.String("__KmsKeyId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		FederationMode: types.FederationMode("FEDERATED"),
+		FederationParameters: &types.FederationParameters{
+			SamlMetadataDocument:   ptr.String("__SamlMetadataDocument__"),
+			SamlMetadataURL:        ptr.String("__SamlMetadataURL__"),
+			ApplicationCallBackURL: ptr.String("__ApplicationCallBackURL__"),
+			FederationURN:          ptr.String("__FederationURN__"),
+			FederationProviderName: ptr.String("__FederationProviderName__"),
+			AttributeMap: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		SuperuserParameters: &types.SuperuserParameters{
+			EmailAddress: ptr.String("__EmailAddress__"),
+			FirstName:    ptr.String("__FirstName__"),
+			LastName:     ptr.String("__LastName__"),
+		},
+		DataBundles: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2753,7 +3509,15 @@ func TestCheckResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateKxDatabase(context.Background(), &CreateKxDatabaseInput{})
+	_, opErr := svc.CreateKxDatabase(context.Background(), &CreateKxDatabaseInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		DatabaseName:  ptr.String("__DatabaseName__"),
+		Description:   ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2778,7 +3542,23 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateKxChangeset(context.Background(), &CreateKxChangesetInput{})
+	_, opErr := svc.CreateKxChangeset(context.Background(), &CreateKxChangesetInput{
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		DatabaseName:  ptr.String("__DatabaseName__"),
+		ChangeRequests: []types.ChangeRequest{
+			{
+				ChangeType: types.ChangeType("PUT"),
+				S3Path:     ptr.String("__S3Path__"),
+				DbPath:     ptr.String("__DbPath__"),
+			},
+			{
+				ChangeType: types.ChangeType("PUT"),
+				S3Path:     ptr.String("__S3Path__"),
+				DbPath:     ptr.String("__DbPath__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2803,7 +3583,34 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{})
+	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		KmsKeyId:    ptr.String("__KmsKeyId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		FederationMode: types.FederationMode("FEDERATED"),
+		FederationParameters: &types.FederationParameters{
+			SamlMetadataDocument:   ptr.String("__SamlMetadataDocument__"),
+			SamlMetadataURL:        ptr.String("__SamlMetadataURL__"),
+			ApplicationCallBackURL: ptr.String("__ApplicationCallBackURL__"),
+			FederationURN:          ptr.String("__FederationURN__"),
+			FederationProviderName: ptr.String("__FederationProviderName__"),
+			AttributeMap: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		SuperuserParameters: &types.SuperuserParameters{
+			EmailAddress: ptr.String("__EmailAddress__"),
+			FirstName:    ptr.String("__FirstName__"),
+			LastName:     ptr.String("__LastName__"),
+		},
+		DataBundles: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2828,7 +3635,34 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{})
+	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		KmsKeyId:    ptr.String("__KmsKeyId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		FederationMode: types.FederationMode("FEDERATED"),
+		FederationParameters: &types.FederationParameters{
+			SamlMetadataDocument:   ptr.String("__SamlMetadataDocument__"),
+			SamlMetadataURL:        ptr.String("__SamlMetadataURL__"),
+			ApplicationCallBackURL: ptr.String("__ApplicationCallBackURL__"),
+			FederationURN:          ptr.String("__FederationURN__"),
+			FederationProviderName: ptr.String("__FederationProviderName__"),
+			AttributeMap: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		SuperuserParameters: &types.SuperuserParameters{
+			EmailAddress: ptr.String("__EmailAddress__"),
+			FirstName:    ptr.String("__FirstName__"),
+			LastName:     ptr.String("__LastName__"),
+		},
+		DataBundles: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2853,7 +3687,34 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{})
+	_, opErr := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		KmsKeyId:    ptr.String("__KmsKeyId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		FederationMode: types.FederationMode("FEDERATED"),
+		FederationParameters: &types.FederationParameters{
+			SamlMetadataDocument:   ptr.String("__SamlMetadataDocument__"),
+			SamlMetadataURL:        ptr.String("__SamlMetadataURL__"),
+			ApplicationCallBackURL: ptr.String("__ApplicationCallBackURL__"),
+			FederationURN:          ptr.String("__FederationURN__"),
+			FederationProviderName: ptr.String("__FederationProviderName__"),
+			AttributeMap: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		SuperuserParameters: &types.SuperuserParameters{
+			EmailAddress: ptr.String("__EmailAddress__"),
+			FirstName:    ptr.String("__FirstName__"),
+			LastName:     ptr.String("__LastName__"),
+		},
+		DataBundles: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

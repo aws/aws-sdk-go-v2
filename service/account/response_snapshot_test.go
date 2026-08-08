@@ -119,7 +119,11 @@ func TestCheckResponseSnapshot_AcceptPrimaryEmailUpdate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptPrimaryEmailUpdate(context.Background(), &AcceptPrimaryEmailUpdateInput{})
+	got, err := svc.AcceptPrimaryEmailUpdate(context.Background(), &AcceptPrimaryEmailUpdateInput{
+		AccountId:    ptr.String("__AccountId__"),
+		PrimaryEmail: ptr.String("__PrimaryEmail__"),
+		Otp:          ptr.String("__Otp__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -138,7 +142,10 @@ func TestCheckResponseSnapshot_DeleteAlternateContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAlternateContact(context.Background(), &DeleteAlternateContactInput{})
+	got, err := svc.DeleteAlternateContact(context.Background(), &DeleteAlternateContactInput{
+		AlternateContactType: types.AlternateContactType("BILLING"),
+		AccountId:            ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -157,7 +164,10 @@ func TestCheckResponseSnapshot_DisableRegion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableRegion(context.Background(), &DisableRegionInput{})
+	got, err := svc.DisableRegion(context.Background(), &DisableRegionInput{
+		AccountId:  ptr.String("__AccountId__"),
+		RegionName: ptr.String("__RegionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -176,7 +186,10 @@ func TestCheckResponseSnapshot_EnableRegion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableRegion(context.Background(), &EnableRegionInput{})
+	got, err := svc.EnableRegion(context.Background(), &EnableRegionInput{
+		AccountId:  ptr.String("__AccountId__"),
+		RegionName: ptr.String("__RegionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -200,7 +213,9 @@ func TestCheckResponseSnapshot_GetAccountInformation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAccountInformation(context.Background(), &GetAccountInformationInput{})
+	got, err := svc.GetAccountInformation(context.Background(), &GetAccountInformationInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -227,7 +242,10 @@ func TestCheckResponseSnapshot_GetAlternateContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAlternateContact(context.Background(), &GetAlternateContactInput{})
+	got, err := svc.GetAlternateContact(context.Background(), &GetAlternateContactInput{
+		AlternateContactType: types.AlternateContactType("BILLING"),
+		AccountId:            ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -261,7 +279,9 @@ func TestCheckResponseSnapshot_GetContactInformation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetContactInformation(context.Background(), &GetContactInformationInput{})
+	got, err := svc.GetContactInformation(context.Background(), &GetContactInformationInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -283,7 +303,9 @@ func TestCheckResponseSnapshot_GetGovCloudAccountInformation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGovCloudAccountInformation(context.Background(), &GetGovCloudAccountInformationInput{})
+	got, err := svc.GetGovCloudAccountInformation(context.Background(), &GetGovCloudAccountInformationInput{
+		StandardAccountId: ptr.String("__StandardAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -304,7 +326,9 @@ func TestCheckResponseSnapshot_GetPrimaryEmail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPrimaryEmail(context.Background(), &GetPrimaryEmailInput{})
+	got, err := svc.GetPrimaryEmail(context.Background(), &GetPrimaryEmailInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -326,7 +350,9 @@ func TestCheckResponseSnapshot_GetPrimaryEmailUpdateStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPrimaryEmailUpdateStatus(context.Background(), &GetPrimaryEmailUpdateStatusInput{})
+	got, err := svc.GetPrimaryEmailUpdateStatus(context.Background(), &GetPrimaryEmailUpdateStatusInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -348,7 +374,10 @@ func TestCheckResponseSnapshot_GetRegionOptStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRegionOptStatus(context.Background(), &GetRegionOptStatusInput{})
+	got, err := svc.GetRegionOptStatus(context.Background(), &GetRegionOptStatusInput{
+		AccountId:  ptr.String("__AccountId__"),
+		RegionName: ptr.String("__RegionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -379,7 +408,15 @@ func TestCheckResponseSnapshot_ListRegions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRegions(context.Background(), &ListRegionsInput{})
+	got, err := svc.ListRegions(context.Background(), &ListRegionsInput{
+		AccountId:  ptr.String("__AccountId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		RegionOptStatusContains: []types.RegionOptStatus{
+			types.RegionOptStatus("ENABLED"),
+			types.RegionOptStatus("ENABLED"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -398,7 +435,10 @@ func TestCheckResponseSnapshot_PutAccountName(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAccountName(context.Background(), &PutAccountNameInput{})
+	got, err := svc.PutAccountName(context.Background(), &PutAccountNameInput{
+		AccountName: ptr.String("__AccountName__"),
+		AccountId:   ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -417,7 +457,14 @@ func TestCheckResponseSnapshot_PutAlternateContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAlternateContact(context.Background(), &PutAlternateContactInput{})
+	got, err := svc.PutAlternateContact(context.Background(), &PutAlternateContactInput{
+		Name:                 ptr.String("__Name__"),
+		Title:                ptr.String("__Title__"),
+		EmailAddress:         ptr.String("__EmailAddress__"),
+		PhoneNumber:          ptr.String("__PhoneNumber__"),
+		AlternateContactType: types.AlternateContactType("BILLING"),
+		AccountId:            ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -436,7 +483,23 @@ func TestCheckResponseSnapshot_PutContactInformation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutContactInformation(context.Background(), &PutContactInformationInput{})
+	got, err := svc.PutContactInformation(context.Background(), &PutContactInformationInput{
+		ContactInformation: &types.ContactInformation{
+			FullName:         ptr.String("__FullName__"),
+			AddressLine1:     ptr.String("__AddressLine1__"),
+			AddressLine2:     ptr.String("__AddressLine2__"),
+			AddressLine3:     ptr.String("__AddressLine3__"),
+			City:             ptr.String("__City__"),
+			StateOrRegion:    ptr.String("__StateOrRegion__"),
+			DistrictOrCounty: ptr.String("__DistrictOrCounty__"),
+			PostalCode:       ptr.String("__PostalCode__"),
+			CountryCode:      ptr.String("__CountryCode__"),
+			PhoneNumber:      ptr.String("__PhoneNumber__"),
+			CompanyName:      ptr.String("__CompanyName__"),
+			WebsiteUrl:       ptr.String("__WebsiteUrl__"),
+		},
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -457,7 +520,10 @@ func TestCheckResponseSnapshot_StartPrimaryEmailUpdate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartPrimaryEmailUpdate(context.Background(), &StartPrimaryEmailUpdateInput{})
+	got, err := svc.StartPrimaryEmailUpdate(context.Background(), &StartPrimaryEmailUpdateInput{
+		AccountId:    ptr.String("__AccountId__"),
+		PrimaryEmail: ptr.String("__PrimaryEmail__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -469,7 +535,7 @@ func TestCheckResponseSnapshot_StartPrimaryEmailUpdate(t *testing.T) {
 func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	want := &types.AccessDeniedException{
 		Message:   ptr.String("__Message__"),
-		ErrorType: ptr.String("__ErrorType__"),
+		ErrorType: ptr.String("AccessDeniedException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AccessDeniedException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -479,7 +545,11 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptPrimaryEmailUpdate(context.Background(), &AcceptPrimaryEmailUpdateInput{})
+	_, opErr := svc.AcceptPrimaryEmailUpdate(context.Background(), &AcceptPrimaryEmailUpdateInput{
+		AccountId:    ptr.String("__AccountId__"),
+		PrimaryEmail: ptr.String("__PrimaryEmail__"),
+		Otp:          ptr.String("__Otp__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -495,7 +565,7 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 	want := &types.ConflictException{
 		Message:   ptr.String("__Message__"),
-		ErrorType: ptr.String("__ErrorType__"),
+		ErrorType: ptr.String("ConflictException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ConflictException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -505,7 +575,11 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptPrimaryEmailUpdate(context.Background(), &AcceptPrimaryEmailUpdateInput{})
+	_, opErr := svc.AcceptPrimaryEmailUpdate(context.Background(), &AcceptPrimaryEmailUpdateInput{
+		AccountId:    ptr.String("__AccountId__"),
+		PrimaryEmail: ptr.String("__PrimaryEmail__"),
+		Otp:          ptr.String("__Otp__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -521,7 +595,7 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 	want := &types.InternalServerException{
 		Message:   ptr.String("__Message__"),
-		ErrorType: ptr.String("__ErrorType__"),
+		ErrorType: ptr.String("InternalServerException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InternalServerException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -531,7 +605,11 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptPrimaryEmailUpdate(context.Background(), &AcceptPrimaryEmailUpdateInput{})
+	_, opErr := svc.AcceptPrimaryEmailUpdate(context.Background(), &AcceptPrimaryEmailUpdateInput{
+		AccountId:    ptr.String("__AccountId__"),
+		PrimaryEmail: ptr.String("__PrimaryEmail__"),
+		Otp:          ptr.String("__Otp__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -547,7 +625,7 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 	want := &types.ResourceNotFoundException{
 		Message:   ptr.String("__Message__"),
-		ErrorType: ptr.String("__ErrorType__"),
+		ErrorType: ptr.String("ResourceNotFoundException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ResourceNotFoundException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -557,7 +635,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptPrimaryEmailUpdate(context.Background(), &AcceptPrimaryEmailUpdateInput{})
+	_, opErr := svc.AcceptPrimaryEmailUpdate(context.Background(), &AcceptPrimaryEmailUpdateInput{
+		AccountId:    ptr.String("__AccountId__"),
+		PrimaryEmail: ptr.String("__PrimaryEmail__"),
+		Otp:          ptr.String("__Otp__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -573,7 +655,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ResourceUnavailableException(t *testing.T) {
 	want := &types.ResourceUnavailableException{
 		Message:   ptr.String("__Message__"),
-		ErrorType: ptr.String("__ErrorType__"),
+		ErrorType: ptr.String("ResourceUnavailableException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ResourceUnavailableException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -583,7 +665,9 @@ func TestCheckResponseSnapshot_Error_ResourceUnavailableException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetGovCloudAccountInformation(context.Background(), &GetGovCloudAccountInformationInput{})
+	_, opErr := svc.GetGovCloudAccountInformation(context.Background(), &GetGovCloudAccountInformationInput{
+		StandardAccountId: ptr.String("__StandardAccountId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -599,7 +683,7 @@ func TestCheckResponseSnapshot_Error_ResourceUnavailableException(t *testing.T) 
 func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 	want := &types.TooManyRequestsException{
 		Message:   ptr.String("__Message__"),
-		ErrorType: ptr.String("__ErrorType__"),
+		ErrorType: ptr.String("TooManyRequestsException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("TooManyRequestsException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -609,7 +693,11 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptPrimaryEmailUpdate(context.Background(), &AcceptPrimaryEmailUpdateInput{})
+	_, opErr := svc.AcceptPrimaryEmailUpdate(context.Background(), &AcceptPrimaryEmailUpdateInput{
+		AccountId:    ptr.String("__AccountId__"),
+		PrimaryEmail: ptr.String("__PrimaryEmail__"),
+		Otp:          ptr.String("__Otp__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -645,7 +733,11 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptPrimaryEmailUpdate(context.Background(), &AcceptPrimaryEmailUpdateInput{})
+	_, opErr := svc.AcceptPrimaryEmailUpdate(context.Background(), &AcceptPrimaryEmailUpdateInput{
+		AccountId:    ptr.String("__AccountId__"),
+		PrimaryEmail: ptr.String("__PrimaryEmail__"),
+		Otp:          ptr.String("__Otp__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"id":"__Id__","metadata":{"vnfd":{"overrides":[{"defaultValue":"__DefaultValue__","name":"__Name__"},{"defaultValue":"__DefaultValue__","name":"__Name__"}]}},"vnfProductName":"__VnfProductName__","vnfProvider":"__VnfProvider__","vnfdId":"__VnfdId__","vnfdVersion":"__VnfdVersion__"}

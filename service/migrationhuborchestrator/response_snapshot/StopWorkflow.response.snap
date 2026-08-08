@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","id":"__Id__","lastStopTime":946684800,"status":"CREATING","statusMessage":"__StatusMessage__"}

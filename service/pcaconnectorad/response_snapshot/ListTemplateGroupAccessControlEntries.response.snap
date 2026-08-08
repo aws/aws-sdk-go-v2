@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AccessControlEntries":[{"AccessRights":{"AutoEnroll":"ALLOW","Enroll":"ALLOW"},"CreatedAt":946684800,"GroupDisplayName":"__GroupDisplayName__","GroupSecurityIdentifier":"__GroupSecurityIdentifier__","TemplateArn":"__TemplateArn__","UpdatedAt":946684800},{"AccessRights":{"AutoEnroll":"ALLOW","Enroll":"ALLOW"},"CreatedAt":946684800,"GroupDisplayName":"__GroupDisplayName__","GroupSecurityIdentifier":"__GroupSecurityIdentifier__","TemplateArn":"__TemplateArn__","UpdatedAt":946684800}],"NextToken":"__NextToken__"}

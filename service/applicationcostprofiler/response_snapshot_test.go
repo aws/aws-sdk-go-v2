@@ -119,7 +119,9 @@ func TestCheckResponseSnapshot_DeleteReportDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteReportDefinition(context.Background(), &DeleteReportDefinitionInput{})
+	got, err := svc.DeleteReportDefinition(context.Background(), &DeleteReportDefinitionInput{
+		ReportId: ptr.String("__ReportId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -149,7 +151,9 @@ func TestCheckResponseSnapshot_GetReportDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetReportDefinition(context.Background(), &GetReportDefinitionInput{})
+	got, err := svc.GetReportDefinition(context.Background(), &GetReportDefinitionInput{
+		ReportId: ptr.String("__ReportId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -170,7 +174,13 @@ func TestCheckResponseSnapshot_ImportApplicationUsage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportApplicationUsage(context.Background(), &ImportApplicationUsageInput{})
+	got, err := svc.ImportApplicationUsage(context.Background(), &ImportApplicationUsageInput{
+		SourceS3Location: &types.SourceS3Location{
+			Bucket: ptr.String("__Bucket__"),
+			Key:    ptr.String("__Key__"),
+			Region: types.S3BucketRegion("ap-east-1"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -217,7 +227,10 @@ func TestCheckResponseSnapshot_ListReportDefinitions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReportDefinitions(context.Background(), &ListReportDefinitionsInput{})
+	got, err := svc.ListReportDefinitions(context.Background(), &ListReportDefinitionsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -238,7 +251,16 @@ func TestCheckResponseSnapshot_PutReportDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutReportDefinition(context.Background(), &PutReportDefinitionInput{})
+	got, err := svc.PutReportDefinition(context.Background(), &PutReportDefinitionInput{
+		ReportId:          ptr.String("__ReportId__"),
+		ReportDescription: ptr.String("__ReportDescription__"),
+		ReportFrequency:   types.ReportFrequency("MONTHLY"),
+		Format:            types.Format("CSV"),
+		DestinationS3Location: &types.S3Location{
+			Bucket: ptr.String("__Bucket__"),
+			Prefix: ptr.String("__Prefix__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -259,7 +281,16 @@ func TestCheckResponseSnapshot_UpdateReportDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateReportDefinition(context.Background(), &UpdateReportDefinitionInput{})
+	got, err := svc.UpdateReportDefinition(context.Background(), &UpdateReportDefinitionInput{
+		ReportId:          ptr.String("__ReportId__"),
+		ReportDescription: ptr.String("__ReportDescription__"),
+		ReportFrequency:   types.ReportFrequency("MONTHLY"),
+		Format:            types.Format("CSV"),
+		DestinationS3Location: &types.S3Location{
+			Bucket: ptr.String("__Bucket__"),
+			Prefix: ptr.String("__Prefix__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -280,7 +311,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteReportDefinition(context.Background(), &DeleteReportDefinitionInput{})
+	_, opErr := svc.DeleteReportDefinition(context.Background(), &DeleteReportDefinitionInput{
+		ReportId: ptr.String("__ReportId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -305,7 +338,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteReportDefinition(context.Background(), &DeleteReportDefinitionInput{})
+	_, opErr := svc.DeleteReportDefinition(context.Background(), &DeleteReportDefinitionInput{
+		ReportId: ptr.String("__ReportId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -330,7 +365,16 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutReportDefinition(context.Background(), &PutReportDefinitionInput{})
+	_, opErr := svc.PutReportDefinition(context.Background(), &PutReportDefinitionInput{
+		ReportId:          ptr.String("__ReportId__"),
+		ReportDescription: ptr.String("__ReportDescription__"),
+		ReportFrequency:   types.ReportFrequency("MONTHLY"),
+		Format:            types.Format("CSV"),
+		DestinationS3Location: &types.S3Location{
+			Bucket: ptr.String("__Bucket__"),
+			Prefix: ptr.String("__Prefix__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -355,7 +399,9 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteReportDefinition(context.Background(), &DeleteReportDefinitionInput{})
+	_, opErr := svc.DeleteReportDefinition(context.Background(), &DeleteReportDefinitionInput{
+		ReportId: ptr.String("__ReportId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -380,7 +426,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteReportDefinition(context.Background(), &DeleteReportDefinitionInput{})
+	_, opErr := svc.DeleteReportDefinition(context.Background(), &DeleteReportDefinitionInput{
+		ReportId: ptr.String("__ReportId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -147,7 +147,16 @@ func TestCheckResponseSnapshot_AssociateFaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateFaces(context.Background(), &AssociateFacesInput{})
+	got, err := svc.AssociateFaces(context.Background(), &AssociateFacesInput{
+		CollectionId: ptr.String("__CollectionId__"),
+		UserId:       ptr.String("__UserId__"),
+		FaceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UserMatchThreshold: ptr.Float32(1.0),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -364,7 +373,26 @@ func TestCheckResponseSnapshot_CompareFaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CompareFaces(context.Background(), &CompareFacesInput{})
+	got, err := svc.CompareFaces(context.Background(), &CompareFacesInput{
+		SourceImage: &types.Image{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		TargetImage: &types.Image{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		SimilarityThreshold: ptr.Float32(1.0),
+		QualityFilter:       types.QualityFilter("NONE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -385,7 +413,20 @@ func TestCheckResponseSnapshot_CopyProjectVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CopyProjectVersion(context.Background(), &CopyProjectVersionInput{})
+	got, err := svc.CopyProjectVersion(context.Background(), &CopyProjectVersionInput{
+		SourceProjectArn:        ptr.String("__SourceProjectArn__"),
+		SourceProjectVersionArn: ptr.String("__SourceProjectVersionArn__"),
+		DestinationProjectArn:   ptr.String("__DestinationProjectArn__"),
+		VersionName:             ptr.String("__VersionName__"),
+		OutputConfig: &types.OutputConfig{
+			S3Bucket:    ptr.String("__S3Bucket__"),
+			S3KeyPrefix: ptr.String("__S3KeyPrefix__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -408,7 +449,12 @@ func TestCheckResponseSnapshot_CreateCollection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCollection(context.Background(), &CreateCollectionInput{})
+	got, err := svc.CreateCollection(context.Background(), &CreateCollectionInput{
+		CollectionId: ptr.String("__CollectionId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -429,7 +475,23 @@ func TestCheckResponseSnapshot_CreateDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataset(context.Background(), &CreateDatasetInput{})
+	got, err := svc.CreateDataset(context.Background(), &CreateDatasetInput{
+		DatasetSource: &types.DatasetSource{
+			GroundTruthManifest: &types.GroundTruthManifest{
+				S3Object: &types.S3Object{
+					Bucket:  ptr.String("__Bucket__"),
+					Name:    ptr.String("__Name__"),
+					Version: ptr.String("__Version__"),
+				},
+			},
+			DatasetArn: ptr.String("__DatasetArn__"),
+		},
+		DatasetType: types.DatasetType("TRAIN"),
+		ProjectArn:  ptr.String("__ProjectArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -450,7 +512,33 @@ func TestCheckResponseSnapshot_CreateFaceLivenessSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFaceLivenessSession(context.Background(), &CreateFaceLivenessSessionInput{})
+	got, err := svc.CreateFaceLivenessSession(context.Background(), &CreateFaceLivenessSessionInput{
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+		Settings: &types.CreateFaceLivenessSessionRequestSettings{
+			OutputConfig: &types.LivenessOutputConfig{
+				S3Bucket:    ptr.String("__S3Bucket__"),
+				S3KeyPrefix: ptr.String("__S3KeyPrefix__"),
+			},
+			AuditImagesLimit: ptr.Int32(1),
+			ChallengePreferences: []types.ChallengePreference{
+				{
+					Type: types.ChallengeType("FaceMovementAndLightChallenge"),
+					Versions: &types.Versions{
+						Minimum: ptr.String("__Minimum__"),
+						Maximum: ptr.String("__Maximum__"),
+					},
+				},
+				{
+					Type: types.ChallengeType("FaceMovementAndLightChallenge"),
+					Versions: &types.Versions{
+						Minimum: ptr.String("__Minimum__"),
+						Maximum: ptr.String("__Maximum__"),
+					},
+				},
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -471,7 +559,14 @@ func TestCheckResponseSnapshot_CreateProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProject(context.Background(), &CreateProjectInput{})
+	got, err := svc.CreateProject(context.Background(), &CreateProjectInput{
+		ProjectName: ptr.String("__ProjectName__"),
+		Feature:     types.CustomizationFeature("CONTENT_MODERATION"),
+		AutoUpdate:  types.ProjectAutoUpdate("ENABLED"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -492,7 +587,69 @@ func TestCheckResponseSnapshot_CreateProjectVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProjectVersion(context.Background(), &CreateProjectVersionInput{})
+	got, err := svc.CreateProjectVersion(context.Background(), &CreateProjectVersionInput{
+		ProjectArn:  ptr.String("__ProjectArn__"),
+		VersionName: ptr.String("__VersionName__"),
+		OutputConfig: &types.OutputConfig{
+			S3Bucket:    ptr.String("__S3Bucket__"),
+			S3KeyPrefix: ptr.String("__S3KeyPrefix__"),
+		},
+		TrainingData: &types.TrainingData{
+			Assets: []types.Asset{
+				{
+					GroundTruthManifest: &types.GroundTruthManifest{
+						S3Object: &types.S3Object{
+							Bucket:  ptr.String("__Bucket__"),
+							Name:    ptr.String("__Name__"),
+							Version: ptr.String("__Version__"),
+						},
+					},
+				},
+				{
+					GroundTruthManifest: &types.GroundTruthManifest{
+						S3Object: &types.S3Object{
+							Bucket:  ptr.String("__Bucket__"),
+							Name:    ptr.String("__Name__"),
+							Version: ptr.String("__Version__"),
+						},
+					},
+				},
+			},
+		},
+		TestingData: &types.TestingData{
+			Assets: []types.Asset{
+				{
+					GroundTruthManifest: &types.GroundTruthManifest{
+						S3Object: &types.S3Object{
+							Bucket:  ptr.String("__Bucket__"),
+							Name:    ptr.String("__Name__"),
+							Version: ptr.String("__Version__"),
+						},
+					},
+				},
+				{
+					GroundTruthManifest: &types.GroundTruthManifest{
+						S3Object: &types.S3Object{
+							Bucket:  ptr.String("__Bucket__"),
+							Name:    ptr.String("__Name__"),
+							Version: ptr.String("__Version__"),
+						},
+					},
+				},
+			},
+			AutoCreate: true,
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		VersionDescription: ptr.String("__VersionDescription__"),
+		FeatureConfig: &types.CustomizationFeatureConfig{
+			ContentModeration: &types.CustomizationFeatureContentModerationConfig{
+				ConfidenceThreshold: ptr.Float32(1.0),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -513,7 +670,85 @@ func TestCheckResponseSnapshot_CreateStreamProcessor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStreamProcessor(context.Background(), &CreateStreamProcessorInput{})
+	got, err := svc.CreateStreamProcessor(context.Background(), &CreateStreamProcessorInput{
+		Input: &types.StreamProcessorInput{
+			KinesisVideoStream: &types.KinesisVideoStream{
+				Arn: ptr.String("__Arn__"),
+			},
+		},
+		Output: &types.StreamProcessorOutput{
+			KinesisDataStream: &types.KinesisDataStream{
+				Arn: ptr.String("__Arn__"),
+			},
+			S3Destination: &types.S3Destination{
+				Bucket:    ptr.String("__Bucket__"),
+				KeyPrefix: ptr.String("__KeyPrefix__"),
+			},
+		},
+		Name: ptr.String("__Name__"),
+		Settings: &types.StreamProcessorSettings{
+			FaceSearch: &types.FaceSearchSettings{
+				CollectionId:       ptr.String("__CollectionId__"),
+				FaceMatchThreshold: ptr.Float32(1.0),
+			},
+			ConnectedHome: &types.ConnectedHomeSettings{
+				Labels: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MinConfidence: ptr.Float32(1.0),
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		NotificationChannel: &types.StreamProcessorNotificationChannel{
+			SNSTopicArn: ptr.String("__SNSTopicArn__"),
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+		RegionsOfInterest: []types.RegionOfInterest{
+			{
+				BoundingBox: &types.BoundingBox{
+					Width:  ptr.Float32(1.0),
+					Height: ptr.Float32(1.0),
+					Left:   ptr.Float32(1.0),
+					Top:    ptr.Float32(1.0),
+				},
+				Polygon: []types.Point{
+					{
+						X: ptr.Float32(1.0),
+						Y: ptr.Float32(1.0),
+					},
+					{
+						X: ptr.Float32(1.0),
+						Y: ptr.Float32(1.0),
+					},
+				},
+			},
+			{
+				BoundingBox: &types.BoundingBox{
+					Width:  ptr.Float32(1.0),
+					Height: ptr.Float32(1.0),
+					Left:   ptr.Float32(1.0),
+					Top:    ptr.Float32(1.0),
+				},
+				Polygon: []types.Point{
+					{
+						X: ptr.Float32(1.0),
+						Y: ptr.Float32(1.0),
+					},
+					{
+						X: ptr.Float32(1.0),
+						Y: ptr.Float32(1.0),
+					},
+				},
+			},
+		},
+		DataSharingPreference: &types.StreamProcessorDataSharingPreference{
+			OptIn: true,
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -532,7 +767,11 @@ func TestCheckResponseSnapshot_CreateUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUser(context.Background(), &CreateUserInput{})
+	got, err := svc.CreateUser(context.Background(), &CreateUserInput{
+		CollectionId:       ptr.String("__CollectionId__"),
+		UserId:             ptr.String("__UserId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -553,7 +792,9 @@ func TestCheckResponseSnapshot_DeleteCollection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCollection(context.Background(), &DeleteCollectionInput{})
+	got, err := svc.DeleteCollection(context.Background(), &DeleteCollectionInput{
+		CollectionId: ptr.String("__CollectionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -572,7 +813,9 @@ func TestCheckResponseSnapshot_DeleteDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataset(context.Background(), &DeleteDatasetInput{})
+	got, err := svc.DeleteDataset(context.Background(), &DeleteDatasetInput{
+		DatasetArn: ptr.String("__DatasetArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -614,7 +857,13 @@ func TestCheckResponseSnapshot_DeleteFaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFaces(context.Background(), &DeleteFacesInput{})
+	got, err := svc.DeleteFaces(context.Background(), &DeleteFacesInput{
+		CollectionId: ptr.String("__CollectionId__"),
+		FaceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -635,7 +884,9 @@ func TestCheckResponseSnapshot_DeleteProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProject(context.Background(), &DeleteProjectInput{})
+	got, err := svc.DeleteProject(context.Background(), &DeleteProjectInput{
+		ProjectArn: ptr.String("__ProjectArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -654,7 +905,11 @@ func TestCheckResponseSnapshot_DeleteProjectPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProjectPolicy(context.Background(), &DeleteProjectPolicyInput{})
+	got, err := svc.DeleteProjectPolicy(context.Background(), &DeleteProjectPolicyInput{
+		ProjectArn:       ptr.String("__ProjectArn__"),
+		PolicyName:       ptr.String("__PolicyName__"),
+		PolicyRevisionId: ptr.String("__PolicyRevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -675,7 +930,9 @@ func TestCheckResponseSnapshot_DeleteProjectVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProjectVersion(context.Background(), &DeleteProjectVersionInput{})
+	got, err := svc.DeleteProjectVersion(context.Background(), &DeleteProjectVersionInput{
+		ProjectVersionArn: ptr.String("__ProjectVersionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -694,7 +951,9 @@ func TestCheckResponseSnapshot_DeleteStreamProcessor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteStreamProcessor(context.Background(), &DeleteStreamProcessorInput{})
+	got, err := svc.DeleteStreamProcessor(context.Background(), &DeleteStreamProcessorInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -713,7 +972,11 @@ func TestCheckResponseSnapshot_DeleteUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteUser(context.Background(), &DeleteUserInput{})
+	got, err := svc.DeleteUser(context.Background(), &DeleteUserInput{
+		CollectionId:       ptr.String("__CollectionId__"),
+		UserId:             ptr.String("__UserId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -738,7 +1001,9 @@ func TestCheckResponseSnapshot_DescribeCollection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCollection(context.Background(), &DescribeCollectionInput{})
+	got, err := svc.DescribeCollection(context.Background(), &DescribeCollectionInput{
+		CollectionId: ptr.String("__CollectionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -771,7 +1036,9 @@ func TestCheckResponseSnapshot_DescribeDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDataset(context.Background(), &DescribeDatasetInput{})
+	got, err := svc.DescribeDataset(context.Background(), &DescribeDatasetInput{
+		DatasetArn: ptr.String("__DatasetArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1152,7 +1419,15 @@ func TestCheckResponseSnapshot_DescribeProjectVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeProjectVersions(context.Background(), &DescribeProjectVersionsInput{})
+	got, err := svc.DescribeProjectVersions(context.Background(), &DescribeProjectVersionsInput{
+		ProjectArn: ptr.String("__ProjectArn__"),
+		VersionNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1225,7 +1500,18 @@ func TestCheckResponseSnapshot_DescribeProjects(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeProjects(context.Background(), &DescribeProjectsInput{})
+	got, err := svc.DescribeProjects(context.Background(), &DescribeProjectsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		ProjectNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Features: []types.CustomizationFeature{
+			types.CustomizationFeature("CONTENT_MODERATION"),
+			types.CustomizationFeature("CONTENT_MODERATION"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1324,7 +1610,9 @@ func TestCheckResponseSnapshot_DescribeStreamProcessor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeStreamProcessor(context.Background(), &DescribeStreamProcessorInput{})
+	got, err := svc.DescribeStreamProcessor(context.Background(), &DescribeStreamProcessorInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1390,7 +1678,19 @@ func TestCheckResponseSnapshot_DetectCustomLabels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetectCustomLabels(context.Background(), &DetectCustomLabelsInput{})
+	got, err := svc.DetectCustomLabels(context.Background(), &DetectCustomLabelsInput{
+		ProjectVersionArn: ptr.String("__ProjectVersionArn__"),
+		Image: &types.Image{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		MaxResults:    ptr.Int32(1),
+		MinConfidence: ptr.Float32(1.0),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1583,7 +1883,20 @@ func TestCheckResponseSnapshot_DetectFaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetectFaces(context.Background(), &DetectFacesInput{})
+	got, err := svc.DetectFaces(context.Background(), &DetectFacesInput{
+		Image: &types.Image{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		Attributes: []types.Attribute{
+			types.Attribute("DEFAULT"),
+			types.Attribute("DEFAULT"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1864,7 +2177,45 @@ func TestCheckResponseSnapshot_DetectLabels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetectLabels(context.Background(), &DetectLabelsInput{})
+	got, err := svc.DetectLabels(context.Background(), &DetectLabelsInput{
+		Image: &types.Image{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		MaxLabels:     ptr.Int32(1),
+		MinConfidence: ptr.Float32(1.0),
+		Features: []types.DetectLabelsFeatureName{
+			types.DetectLabelsFeatureName("GENERAL_LABELS"),
+			types.DetectLabelsFeatureName("GENERAL_LABELS"),
+		},
+		Settings: &types.DetectLabelsSettings{
+			GeneralLabels: &types.GeneralLabelsSettings{
+				LabelInclusionFilters: []string{
+					"__Member__",
+					"__Member__",
+				},
+				LabelExclusionFilters: []string{
+					"__Member__",
+					"__Member__",
+				},
+				LabelCategoryInclusionFilters: []string{
+					"__Member__",
+					"__Member__",
+				},
+				LabelCategoryExclusionFilters: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			ImageProperties: &types.DetectLabelsImagePropertiesSettings{
+				MaxDominantColors: 1,
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1918,7 +2269,28 @@ func TestCheckResponseSnapshot_DetectModerationLabels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetectModerationLabels(context.Background(), &DetectModerationLabelsInput{})
+	got, err := svc.DetectModerationLabels(context.Background(), &DetectModerationLabelsInput{
+		Image: &types.Image{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		MinConfidence: ptr.Float32(1.0),
+		HumanLoopConfig: &types.HumanLoopConfig{
+			HumanLoopName:     ptr.String("__HumanLoopName__"),
+			FlowDefinitionArn: ptr.String("__FlowDefinitionArn__"),
+			DataAttributes: &types.HumanLoopDataAttributes{
+				ContentClassifiers: []types.ContentClassifier{
+					types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+					types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+				},
+			},
+		},
+		ProjectVersion: ptr.String("__ProjectVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2115,7 +2487,23 @@ func TestCheckResponseSnapshot_DetectProtectiveEquipment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetectProtectiveEquipment(context.Background(), &DetectProtectiveEquipmentInput{})
+	got, err := svc.DetectProtectiveEquipment(context.Background(), &DetectProtectiveEquipmentInput{
+		Image: &types.Image{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		SummarizationAttributes: &types.ProtectiveEquipmentSummarizationAttributes{
+			MinConfidence: ptr.Float32(1.0),
+			RequiredEquipmentTypes: []types.ProtectiveEquipmentType{
+				types.ProtectiveEquipmentType("FACE_COVER"),
+				types.ProtectiveEquipmentType("FACE_COVER"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2188,7 +2576,61 @@ func TestCheckResponseSnapshot_DetectText(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetectText(context.Background(), &DetectTextInput{})
+	got, err := svc.DetectText(context.Background(), &DetectTextInput{
+		Image: &types.Image{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		Filters: &types.DetectTextFilters{
+			WordFilter: &types.DetectionFilter{
+				MinConfidence:        ptr.Float32(1.0),
+				MinBoundingBoxHeight: ptr.Float32(1.0),
+				MinBoundingBoxWidth:  ptr.Float32(1.0),
+			},
+			RegionsOfInterest: []types.RegionOfInterest{
+				{
+					BoundingBox: &types.BoundingBox{
+						Width:  ptr.Float32(1.0),
+						Height: ptr.Float32(1.0),
+						Left:   ptr.Float32(1.0),
+						Top:    ptr.Float32(1.0),
+					},
+					Polygon: []types.Point{
+						{
+							X: ptr.Float32(1.0),
+							Y: ptr.Float32(1.0),
+						},
+						{
+							X: ptr.Float32(1.0),
+							Y: ptr.Float32(1.0),
+						},
+					},
+				},
+				{
+					BoundingBox: &types.BoundingBox{
+						Width:  ptr.Float32(1.0),
+						Height: ptr.Float32(1.0),
+						Left:   ptr.Float32(1.0),
+						Top:    ptr.Float32(1.0),
+					},
+					Polygon: []types.Point{
+						{
+							X: ptr.Float32(1.0),
+							Y: ptr.Float32(1.0),
+						},
+						{
+							X: ptr.Float32(1.0),
+							Y: ptr.Float32(1.0),
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2235,7 +2677,15 @@ func TestCheckResponseSnapshot_DisassociateFaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateFaces(context.Background(), &DisassociateFacesInput{})
+	got, err := svc.DisassociateFaces(context.Background(), &DisassociateFacesInput{
+		CollectionId:       ptr.String("__CollectionId__"),
+		UserId:             ptr.String("__UserId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		FaceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2254,7 +2704,16 @@ func TestCheckResponseSnapshot_DistributeDatasetEntries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DistributeDatasetEntries(context.Background(), &DistributeDatasetEntriesInput{})
+	got, err := svc.DistributeDatasetEntries(context.Background(), &DistributeDatasetEntriesInput{
+		Datasets: []types.DistributeDataset{
+			{
+				Arn: ptr.String("__Arn__"),
+			},
+			{
+				Arn: ptr.String("__Arn__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2282,7 +2741,9 @@ func TestCheckResponseSnapshot_GetCelebrityInfo(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCelebrityInfo(context.Background(), &GetCelebrityInfoInput{})
+	got, err := svc.GetCelebrityInfo(context.Background(), &GetCelebrityInfoInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2537,7 +2998,12 @@ func TestCheckResponseSnapshot_GetCelebrityRecognition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCelebrityRecognition(context.Background(), &GetCelebrityRecognitionInput{})
+	got, err := svc.GetCelebrityRecognition(context.Background(), &GetCelebrityRecognitionInput{
+		JobId:      ptr.String("__JobId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		SortBy:     types.CelebrityRecognitionSortBy("ID"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2629,7 +3095,13 @@ func TestCheckResponseSnapshot_GetContentModeration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetContentModeration(context.Background(), &GetContentModerationInput{})
+	got, err := svc.GetContentModeration(context.Background(), &GetContentModerationInput{
+		JobId:       ptr.String("__JobId__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+		SortBy:      types.ContentModerationSortBy("NAME"),
+		AggregateBy: types.ContentModerationAggregateBy("TIMESTAMPS"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2848,7 +3320,11 @@ func TestCheckResponseSnapshot_GetFaceDetection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFaceDetection(context.Background(), &GetFaceDetectionInput{})
+	got, err := svc.GetFaceDetection(context.Background(), &GetFaceDetectionInput{
+		JobId:      ptr.String("__JobId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2919,7 +3395,9 @@ func TestCheckResponseSnapshot_GetFaceLivenessSessionResults(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFaceLivenessSessionResults(context.Background(), &GetFaceLivenessSessionResultsInput{})
+	got, err := svc.GetFaceLivenessSessionResults(context.Background(), &GetFaceLivenessSessionResultsInput{
+		SessionId: ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3228,7 +3706,12 @@ func TestCheckResponseSnapshot_GetFaceSearch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFaceSearch(context.Background(), &GetFaceSearchInput{})
+	got, err := svc.GetFaceSearch(context.Background(), &GetFaceSearchInput{
+		JobId:      ptr.String("__JobId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		SortBy:     types.FaceSearchSortBy("INDEX"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3464,7 +3947,13 @@ func TestCheckResponseSnapshot_GetLabelDetection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLabelDetection(context.Background(), &GetLabelDetectionInput{})
+	got, err := svc.GetLabelDetection(context.Background(), &GetLabelDetectionInput{
+		JobId:       ptr.String("__JobId__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+		SortBy:      types.LabelDetectionSortBy("NAME"),
+		AggregateBy: types.LabelDetectionAggregateBy("TIMESTAMPS"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3528,7 +4017,9 @@ func TestCheckResponseSnapshot_GetMediaAnalysisJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMediaAnalysisJob(context.Background(), &GetMediaAnalysisJobInput{})
+	got, err := svc.GetMediaAnalysisJob(context.Background(), &GetMediaAnalysisJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3765,7 +4256,12 @@ func TestCheckResponseSnapshot_GetPersonTracking(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPersonTracking(context.Background(), &GetPersonTrackingInput{})
+	got, err := svc.GetPersonTracking(context.Background(), &GetPersonTrackingInput{
+		JobId:      ptr.String("__JobId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		SortBy:     types.PersonTrackingSortBy("INDEX"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3883,7 +4379,11 @@ func TestCheckResponseSnapshot_GetSegmentDetection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSegmentDetection(context.Background(), &GetSegmentDetectionInput{})
+	got, err := svc.GetSegmentDetection(context.Background(), &GetSegmentDetectionInput{
+		JobId:      ptr.String("__JobId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3983,7 +4483,11 @@ func TestCheckResponseSnapshot_GetTextDetection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTextDetection(context.Background(), &GetTextDetectionInput{})
+	got, err := svc.GetTextDetection(context.Background(), &GetTextDetectionInput{
+		JobId:      ptr.String("__JobId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4393,7 +4897,24 @@ func TestCheckResponseSnapshot_IndexFaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.IndexFaces(context.Background(), &IndexFacesInput{})
+	got, err := svc.IndexFaces(context.Background(), &IndexFacesInput{
+		CollectionId: ptr.String("__CollectionId__"),
+		Image: &types.Image{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		ExternalImageId: ptr.String("__ExternalImageId__"),
+		DetectionAttributes: []types.Attribute{
+			types.Attribute("DEFAULT"),
+			types.Attribute("DEFAULT"),
+		},
+		MaxFaces:      ptr.Int32(1),
+		QualityFilter: types.QualityFilter("NONE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4422,7 +4943,10 @@ func TestCheckResponseSnapshot_ListCollections(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCollections(context.Background(), &ListCollectionsInput{})
+	got, err := svc.ListCollections(context.Background(), &ListCollectionsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4447,7 +4971,18 @@ func TestCheckResponseSnapshot_ListDatasetEntries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDatasetEntries(context.Background(), &ListDatasetEntriesInput{})
+	got, err := svc.ListDatasetEntries(context.Background(), &ListDatasetEntriesInput{
+		DatasetArn: ptr.String("__DatasetArn__"),
+		ContainsLabels: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Labeled:           ptr.Bool(true),
+		SourceRefContains: ptr.String("__SourceRefContains__"),
+		HasErrors:         ptr.Bool(true),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4484,7 +5019,11 @@ func TestCheckResponseSnapshot_ListDatasetLabels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDatasetLabels(context.Background(), &ListDatasetLabelsInput{})
+	got, err := svc.ListDatasetLabels(context.Background(), &ListDatasetLabelsInput{
+		DatasetArn: ptr.String("__DatasetArn__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4536,7 +5075,16 @@ func TestCheckResponseSnapshot_ListFaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFaces(context.Background(), &ListFacesInput{})
+	got, err := svc.ListFaces(context.Background(), &ListFacesInput{
+		CollectionId: ptr.String("__CollectionId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		UserId:       ptr.String("__UserId__"),
+		FaceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4651,7 +5199,10 @@ func TestCheckResponseSnapshot_ListMediaAnalysisJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMediaAnalysisJobs(context.Background(), &ListMediaAnalysisJobsInput{})
+	got, err := svc.ListMediaAnalysisJobs(context.Background(), &ListMediaAnalysisJobsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4690,7 +5241,11 @@ func TestCheckResponseSnapshot_ListProjectPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProjectPolicies(context.Background(), &ListProjectPoliciesInput{})
+	got, err := svc.ListProjectPolicies(context.Background(), &ListProjectPoliciesInput{
+		ProjectArn: ptr.String("__ProjectArn__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4721,7 +5276,10 @@ func TestCheckResponseSnapshot_ListStreamProcessors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStreamProcessors(context.Background(), &ListStreamProcessorsInput{})
+	got, err := svc.ListStreamProcessors(context.Background(), &ListStreamProcessorsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4744,7 +5302,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4775,7 +5335,11 @@ func TestCheckResponseSnapshot_ListUsers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUsers(context.Background(), &ListUsersInput{})
+	got, err := svc.ListUsers(context.Background(), &ListUsersInput{
+		CollectionId: ptr.String("__CollectionId__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4796,7 +5360,12 @@ func TestCheckResponseSnapshot_PutProjectPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutProjectPolicy(context.Background(), &PutProjectPolicyInput{})
+	got, err := svc.PutProjectPolicy(context.Background(), &PutProjectPolicyInput{
+		ProjectArn:       ptr.String("__ProjectArn__"),
+		PolicyName:       ptr.String("__PolicyName__"),
+		PolicyRevisionId: ptr.String("__PolicyRevisionId__"),
+		PolicyDocument:   ptr.String("__PolicyDocument__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5021,7 +5590,16 @@ func TestCheckResponseSnapshot_RecognizeCelebrities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RecognizeCelebrities(context.Background(), &RecognizeCelebritiesInput{})
+	got, err := svc.RecognizeCelebrities(context.Background(), &RecognizeCelebritiesInput{
+		Image: &types.Image{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5079,7 +5657,12 @@ func TestCheckResponseSnapshot_SearchFaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchFaces(context.Background(), &SearchFacesInput{})
+	got, err := svc.SearchFaces(context.Background(), &SearchFacesInput{
+		CollectionId:       ptr.String("__CollectionId__"),
+		FaceId:             ptr.String("__FaceId__"),
+		MaxFaces:           ptr.Int32(1),
+		FaceMatchThreshold: ptr.Float32(1.0),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5143,7 +5726,20 @@ func TestCheckResponseSnapshot_SearchFacesByImage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchFacesByImage(context.Background(), &SearchFacesByImageInput{})
+	got, err := svc.SearchFacesByImage(context.Background(), &SearchFacesByImageInput{
+		CollectionId: ptr.String("__CollectionId__"),
+		Image: &types.Image{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		MaxFaces:           ptr.Int32(1),
+		FaceMatchThreshold: ptr.Float32(1.0),
+		QualityFilter:      types.QualityFilter("NONE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5186,7 +5782,13 @@ func TestCheckResponseSnapshot_SearchUsers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchUsers(context.Background(), &SearchUsersInput{})
+	got, err := svc.SearchUsers(context.Background(), &SearchUsersInput{
+		CollectionId:       ptr.String("__CollectionId__"),
+		UserId:             ptr.String("__UserId__"),
+		FaceId:             ptr.String("__FaceId__"),
+		UserMatchThreshold: ptr.Float32(1.0),
+		MaxUsers:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5494,7 +6096,20 @@ func TestCheckResponseSnapshot_SearchUsersByImage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchUsersByImage(context.Background(), &SearchUsersByImageInput{})
+	got, err := svc.SearchUsersByImage(context.Background(), &SearchUsersByImageInput{
+		CollectionId: ptr.String("__CollectionId__"),
+		Image: &types.Image{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		UserMatchThreshold: ptr.Float32(1.0),
+		MaxUsers:           ptr.Int32(1),
+		QualityFilter:      types.QualityFilter("NONE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5515,7 +6130,21 @@ func TestCheckResponseSnapshot_StartCelebrityRecognition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartCelebrityRecognition(context.Background(), &StartCelebrityRecognitionInput{})
+	got, err := svc.StartCelebrityRecognition(context.Background(), &StartCelebrityRecognitionInput{
+		Video: &types.Video{
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		NotificationChannel: &types.NotificationChannel{
+			SNSTopicArn: ptr.String("__SNSTopicArn__"),
+			RoleArn:     ptr.String("__RoleArn__"),
+		},
+		JobTag: ptr.String("__JobTag__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5536,7 +6165,22 @@ func TestCheckResponseSnapshot_StartContentModeration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartContentModeration(context.Background(), &StartContentModerationInput{})
+	got, err := svc.StartContentModeration(context.Background(), &StartContentModerationInput{
+		Video: &types.Video{
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		MinConfidence:      ptr.Float32(1.0),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		NotificationChannel: &types.NotificationChannel{
+			SNSTopicArn: ptr.String("__SNSTopicArn__"),
+			RoleArn:     ptr.String("__RoleArn__"),
+		},
+		JobTag: ptr.String("__JobTag__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5557,7 +6201,22 @@ func TestCheckResponseSnapshot_StartFaceDetection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartFaceDetection(context.Background(), &StartFaceDetectionInput{})
+	got, err := svc.StartFaceDetection(context.Background(), &StartFaceDetectionInput{
+		Video: &types.Video{
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		NotificationChannel: &types.NotificationChannel{
+			SNSTopicArn: ptr.String("__SNSTopicArn__"),
+			RoleArn:     ptr.String("__RoleArn__"),
+		},
+		FaceAttributes: types.FaceAttributes("DEFAULT"),
+		JobTag:         ptr.String("__JobTag__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5578,7 +6237,23 @@ func TestCheckResponseSnapshot_StartFaceSearch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartFaceSearch(context.Background(), &StartFaceSearchInput{})
+	got, err := svc.StartFaceSearch(context.Background(), &StartFaceSearchInput{
+		Video: &types.Video{
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		FaceMatchThreshold: ptr.Float32(1.0),
+		CollectionId:       ptr.String("__CollectionId__"),
+		NotificationChannel: &types.NotificationChannel{
+			SNSTopicArn: ptr.String("__SNSTopicArn__"),
+			RoleArn:     ptr.String("__RoleArn__"),
+		},
+		JobTag: ptr.String("__JobTag__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5599,7 +6274,46 @@ func TestCheckResponseSnapshot_StartLabelDetection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartLabelDetection(context.Background(), &StartLabelDetectionInput{})
+	got, err := svc.StartLabelDetection(context.Background(), &StartLabelDetectionInput{
+		Video: &types.Video{
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		MinConfidence:      ptr.Float32(1.0),
+		NotificationChannel: &types.NotificationChannel{
+			SNSTopicArn: ptr.String("__SNSTopicArn__"),
+			RoleArn:     ptr.String("__RoleArn__"),
+		},
+		JobTag: ptr.String("__JobTag__"),
+		Features: []types.LabelDetectionFeatureName{
+			types.LabelDetectionFeatureName("GENERAL_LABELS"),
+			types.LabelDetectionFeatureName("GENERAL_LABELS"),
+		},
+		Settings: &types.LabelDetectionSettings{
+			GeneralLabels: &types.GeneralLabelsSettings{
+				LabelInclusionFilters: []string{
+					"__Member__",
+					"__Member__",
+				},
+				LabelExclusionFilters: []string{
+					"__Member__",
+					"__Member__",
+				},
+				LabelCategoryInclusionFilters: []string{
+					"__Member__",
+					"__Member__",
+				},
+				LabelCategoryExclusionFilters: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5620,7 +6334,28 @@ func TestCheckResponseSnapshot_StartMediaAnalysisJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMediaAnalysisJob(context.Background(), &StartMediaAnalysisJobInput{})
+	got, err := svc.StartMediaAnalysisJob(context.Background(), &StartMediaAnalysisJobInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		JobName:            ptr.String("__JobName__"),
+		OperationsConfig: &types.MediaAnalysisOperationsConfig{
+			DetectModerationLabels: &types.MediaAnalysisDetectModerationLabelsConfig{
+				MinConfidence:  ptr.Float32(1.0),
+				ProjectVersion: ptr.String("__ProjectVersion__"),
+			},
+		},
+		Input: &types.MediaAnalysisInput{
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		OutputConfig: &types.MediaAnalysisOutputConfig{
+			S3Bucket:    ptr.String("__S3Bucket__"),
+			S3KeyPrefix: ptr.String("__S3KeyPrefix__"),
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5641,7 +6376,21 @@ func TestCheckResponseSnapshot_StartPersonTracking(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartPersonTracking(context.Background(), &StartPersonTrackingInput{})
+	got, err := svc.StartPersonTracking(context.Background(), &StartPersonTrackingInput{
+		Video: &types.Video{
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		NotificationChannel: &types.NotificationChannel{
+			SNSTopicArn: ptr.String("__SNSTopicArn__"),
+			RoleArn:     ptr.String("__RoleArn__"),
+		},
+		JobTag: ptr.String("__JobTag__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5662,7 +6411,11 @@ func TestCheckResponseSnapshot_StartProjectVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartProjectVersion(context.Background(), &StartProjectVersionInput{})
+	got, err := svc.StartProjectVersion(context.Background(), &StartProjectVersionInput{
+		ProjectVersionArn: ptr.String("__ProjectVersionArn__"),
+		MinInferenceUnits: ptr.Int32(1),
+		MaxInferenceUnits: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5683,7 +6436,37 @@ func TestCheckResponseSnapshot_StartSegmentDetection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartSegmentDetection(context.Background(), &StartSegmentDetectionInput{})
+	got, err := svc.StartSegmentDetection(context.Background(), &StartSegmentDetectionInput{
+		Video: &types.Video{
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		NotificationChannel: &types.NotificationChannel{
+			SNSTopicArn: ptr.String("__SNSTopicArn__"),
+			RoleArn:     ptr.String("__RoleArn__"),
+		},
+		JobTag: ptr.String("__JobTag__"),
+		Filters: &types.StartSegmentDetectionFilters{
+			TechnicalCueFilter: &types.StartTechnicalCueDetectionFilter{
+				MinSegmentConfidence: ptr.Float32(1.0),
+				BlackFrame: &types.BlackFrame{
+					MaxPixelThreshold:     ptr.Float32(1.0),
+					MinCoveragePercentage: ptr.Float32(1.0),
+				},
+			},
+			ShotFilter: &types.StartShotDetectionFilter{
+				MinSegmentConfidence: ptr.Float32(1.0),
+			},
+		},
+		SegmentTypes: []types.SegmentType{
+			types.SegmentType("TECHNICAL_CUE"),
+			types.SegmentType("TECHNICAL_CUE"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5704,7 +6487,18 @@ func TestCheckResponseSnapshot_StartStreamProcessor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartStreamProcessor(context.Background(), &StartStreamProcessorInput{})
+	got, err := svc.StartStreamProcessor(context.Background(), &StartStreamProcessorInput{
+		Name: ptr.String("__Name__"),
+		StartSelector: &types.StreamProcessingStartSelector{
+			KVSStreamStartSelector: &types.KinesisVideoStreamStartSelector{
+				ProducerTimestamp: ptr.Int64(1),
+				FragmentNumber:    ptr.String("__FragmentNumber__"),
+			},
+		},
+		StopSelector: &types.StreamProcessingStopSelector{
+			MaxDurationInSeconds: ptr.Int64(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5725,7 +6519,66 @@ func TestCheckResponseSnapshot_StartTextDetection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartTextDetection(context.Background(), &StartTextDetectionInput{})
+	got, err := svc.StartTextDetection(context.Background(), &StartTextDetectionInput{
+		Video: &types.Video{
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		NotificationChannel: &types.NotificationChannel{
+			SNSTopicArn: ptr.String("__SNSTopicArn__"),
+			RoleArn:     ptr.String("__RoleArn__"),
+		},
+		JobTag: ptr.String("__JobTag__"),
+		Filters: &types.StartTextDetectionFilters{
+			WordFilter: &types.DetectionFilter{
+				MinConfidence:        ptr.Float32(1.0),
+				MinBoundingBoxHeight: ptr.Float32(1.0),
+				MinBoundingBoxWidth:  ptr.Float32(1.0),
+			},
+			RegionsOfInterest: []types.RegionOfInterest{
+				{
+					BoundingBox: &types.BoundingBox{
+						Width:  ptr.Float32(1.0),
+						Height: ptr.Float32(1.0),
+						Left:   ptr.Float32(1.0),
+						Top:    ptr.Float32(1.0),
+					},
+					Polygon: []types.Point{
+						{
+							X: ptr.Float32(1.0),
+							Y: ptr.Float32(1.0),
+						},
+						{
+							X: ptr.Float32(1.0),
+							Y: ptr.Float32(1.0),
+						},
+					},
+				},
+				{
+					BoundingBox: &types.BoundingBox{
+						Width:  ptr.Float32(1.0),
+						Height: ptr.Float32(1.0),
+						Left:   ptr.Float32(1.0),
+						Top:    ptr.Float32(1.0),
+					},
+					Polygon: []types.Point{
+						{
+							X: ptr.Float32(1.0),
+							Y: ptr.Float32(1.0),
+						},
+						{
+							X: ptr.Float32(1.0),
+							Y: ptr.Float32(1.0),
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5746,7 +6599,9 @@ func TestCheckResponseSnapshot_StopProjectVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopProjectVersion(context.Background(), &StopProjectVersionInput{})
+	got, err := svc.StopProjectVersion(context.Background(), &StopProjectVersionInput{
+		ProjectVersionArn: ptr.String("__ProjectVersionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5765,7 +6620,9 @@ func TestCheckResponseSnapshot_StopStreamProcessor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopStreamProcessor(context.Background(), &StopStreamProcessorInput{})
+	got, err := svc.StopStreamProcessor(context.Background(), &StopStreamProcessorInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5784,7 +6641,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5803,7 +6665,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5822,7 +6690,12 @@ func TestCheckResponseSnapshot_UpdateDatasetEntries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDatasetEntries(context.Background(), &UpdateDatasetEntriesInput{})
+	got, err := svc.UpdateDatasetEntries(context.Background(), &UpdateDatasetEntriesInput{
+		DatasetArn: ptr.String("__DatasetArn__"),
+		Changes: &types.DatasetChanges{
+			GroundTruth: []byte("blob"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5841,7 +6714,63 @@ func TestCheckResponseSnapshot_UpdateStreamProcessor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateStreamProcessor(context.Background(), &UpdateStreamProcessorInput{})
+	got, err := svc.UpdateStreamProcessor(context.Background(), &UpdateStreamProcessorInput{
+		Name: ptr.String("__Name__"),
+		SettingsForUpdate: &types.StreamProcessorSettingsForUpdate{
+			ConnectedHomeForUpdate: &types.ConnectedHomeSettingsForUpdate{
+				Labels: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MinConfidence: ptr.Float32(1.0),
+			},
+		},
+		RegionsOfInterestForUpdate: []types.RegionOfInterest{
+			{
+				BoundingBox: &types.BoundingBox{
+					Width:  ptr.Float32(1.0),
+					Height: ptr.Float32(1.0),
+					Left:   ptr.Float32(1.0),
+					Top:    ptr.Float32(1.0),
+				},
+				Polygon: []types.Point{
+					{
+						X: ptr.Float32(1.0),
+						Y: ptr.Float32(1.0),
+					},
+					{
+						X: ptr.Float32(1.0),
+						Y: ptr.Float32(1.0),
+					},
+				},
+			},
+			{
+				BoundingBox: &types.BoundingBox{
+					Width:  ptr.Float32(1.0),
+					Height: ptr.Float32(1.0),
+					Left:   ptr.Float32(1.0),
+					Top:    ptr.Float32(1.0),
+				},
+				Polygon: []types.Point{
+					{
+						X: ptr.Float32(1.0),
+						Y: ptr.Float32(1.0),
+					},
+					{
+						X: ptr.Float32(1.0),
+						Y: ptr.Float32(1.0),
+					},
+				},
+			},
+		},
+		DataSharingPreferenceForUpdate: &types.StreamProcessorDataSharingPreference{
+			OptIn: true,
+		},
+		ParametersToDelete: []types.StreamProcessorParameterToDelete{
+			types.StreamProcessorParameterToDelete("ConnectedHomeMinConfidence"),
+			types.StreamProcessorParameterToDelete("ConnectedHomeMinConfidence"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5853,7 +6782,7 @@ func TestCheckResponseSnapshot_UpdateStreamProcessor(t *testing.T) {
 func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	want := &types.AccessDeniedException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("AccessDeniedException"),
 		Logref:  ptr.String("__Logref__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AccessDeniedException.error")
@@ -5864,7 +6793,16 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFaces(context.Background(), &AssociateFacesInput{})
+	_, opErr := svc.AssociateFaces(context.Background(), &AssociateFacesInput{
+		CollectionId: ptr.String("__CollectionId__"),
+		UserId:       ptr.String("__UserId__"),
+		FaceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UserMatchThreshold: ptr.Float32(1.0),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5880,7 +6818,7 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 	want := &types.ConflictException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("ConflictException"),
 		Logref:  ptr.String("__Logref__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ConflictException.error")
@@ -5891,7 +6829,16 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFaces(context.Background(), &AssociateFacesInput{})
+	_, opErr := svc.AssociateFaces(context.Background(), &AssociateFacesInput{
+		CollectionId: ptr.String("__CollectionId__"),
+		UserId:       ptr.String("__UserId__"),
+		FaceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UserMatchThreshold: ptr.Float32(1.0),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5910,7 +6857,7 @@ func TestCheckResponseSnapshot_Error_HumanLoopQuotaExceededException(t *testing.
 		QuotaCode:    ptr.String("__QuotaCode__"),
 		ServiceCode:  ptr.String("__ServiceCode__"),
 		Message:      ptr.String("__Message__"),
-		Code:         ptr.String("__Code__"),
+		Code:         ptr.String("HumanLoopQuotaExceededException"),
 		Logref:       ptr.String("__Logref__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("HumanLoopQuotaExceededException.error")
@@ -5921,7 +6868,28 @@ func TestCheckResponseSnapshot_Error_HumanLoopQuotaExceededException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DetectModerationLabels(context.Background(), &DetectModerationLabelsInput{})
+	_, opErr := svc.DetectModerationLabels(context.Background(), &DetectModerationLabelsInput{
+		Image: &types.Image{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		MinConfidence: ptr.Float32(1.0),
+		HumanLoopConfig: &types.HumanLoopConfig{
+			HumanLoopName:     ptr.String("__HumanLoopName__"),
+			FlowDefinitionArn: ptr.String("__FlowDefinitionArn__"),
+			DataAttributes: &types.HumanLoopDataAttributes{
+				ContentClassifiers: []types.ContentClassifier{
+					types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+					types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+				},
+			},
+		},
+		ProjectVersion: ptr.String("__ProjectVersion__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5937,7 +6905,7 @@ func TestCheckResponseSnapshot_Error_HumanLoopQuotaExceededException(t *testing.
 func TestCheckResponseSnapshot_Error_IdempotentParameterMismatchException(t *testing.T) {
 	want := &types.IdempotentParameterMismatchException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("IdempotentParameterMismatchException"),
 		Logref:  ptr.String("__Logref__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("IdempotentParameterMismatchException.error")
@@ -5948,7 +6916,16 @@ func TestCheckResponseSnapshot_Error_IdempotentParameterMismatchException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFaces(context.Background(), &AssociateFacesInput{})
+	_, opErr := svc.AssociateFaces(context.Background(), &AssociateFacesInput{
+		CollectionId: ptr.String("__CollectionId__"),
+		UserId:       ptr.String("__UserId__"),
+		FaceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UserMatchThreshold: ptr.Float32(1.0),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5964,7 +6941,7 @@ func TestCheckResponseSnapshot_Error_IdempotentParameterMismatchException(t *tes
 func TestCheckResponseSnapshot_Error_ImageTooLargeException(t *testing.T) {
 	want := &types.ImageTooLargeException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("ImageTooLargeException"),
 		Logref:  ptr.String("__Logref__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ImageTooLargeException.error")
@@ -5975,7 +6952,26 @@ func TestCheckResponseSnapshot_Error_ImageTooLargeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompareFaces(context.Background(), &CompareFacesInput{})
+	_, opErr := svc.CompareFaces(context.Background(), &CompareFacesInput{
+		SourceImage: &types.Image{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		TargetImage: &types.Image{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		SimilarityThreshold: ptr.Float32(1.0),
+		QualityFilter:       types.QualityFilter("NONE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5991,7 +6987,7 @@ func TestCheckResponseSnapshot_Error_ImageTooLargeException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_InternalServerError(t *testing.T) {
 	want := &types.InternalServerError{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("InternalServerError"),
 		Logref:  ptr.String("__Logref__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InternalServerError.error")
@@ -6002,7 +6998,16 @@ func TestCheckResponseSnapshot_Error_InternalServerError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFaces(context.Background(), &AssociateFacesInput{})
+	_, opErr := svc.AssociateFaces(context.Background(), &AssociateFacesInput{
+		CollectionId: ptr.String("__CollectionId__"),
+		UserId:       ptr.String("__UserId__"),
+		FaceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UserMatchThreshold: ptr.Float32(1.0),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6018,7 +7023,7 @@ func TestCheckResponseSnapshot_Error_InternalServerError(t *testing.T) {
 func TestCheckResponseSnapshot_Error_InvalidImageFormatException(t *testing.T) {
 	want := &types.InvalidImageFormatException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("InvalidImageFormatException"),
 		Logref:  ptr.String("__Logref__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InvalidImageFormatException.error")
@@ -6029,7 +7034,26 @@ func TestCheckResponseSnapshot_Error_InvalidImageFormatException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompareFaces(context.Background(), &CompareFacesInput{})
+	_, opErr := svc.CompareFaces(context.Background(), &CompareFacesInput{
+		SourceImage: &types.Image{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		TargetImage: &types.Image{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		SimilarityThreshold: ptr.Float32(1.0),
+		QualityFilter:       types.QualityFilter("NONE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6045,7 +7069,7 @@ func TestCheckResponseSnapshot_Error_InvalidImageFormatException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_InvalidManifestException(t *testing.T) {
 	want := &types.InvalidManifestException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("InvalidManifestException"),
 		Logref:  ptr.String("__Logref__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InvalidManifestException.error")
@@ -6056,7 +7080,28 @@ func TestCheckResponseSnapshot_Error_InvalidManifestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartMediaAnalysisJob(context.Background(), &StartMediaAnalysisJobInput{})
+	_, opErr := svc.StartMediaAnalysisJob(context.Background(), &StartMediaAnalysisJobInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		JobName:            ptr.String("__JobName__"),
+		OperationsConfig: &types.MediaAnalysisOperationsConfig{
+			DetectModerationLabels: &types.MediaAnalysisDetectModerationLabelsConfig{
+				MinConfidence:  ptr.Float32(1.0),
+				ProjectVersion: ptr.String("__ProjectVersion__"),
+			},
+		},
+		Input: &types.MediaAnalysisInput{
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		OutputConfig: &types.MediaAnalysisOutputConfig{
+			S3Bucket:    ptr.String("__S3Bucket__"),
+			S3KeyPrefix: ptr.String("__S3KeyPrefix__"),
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6072,7 +7117,7 @@ func TestCheckResponseSnapshot_Error_InvalidManifestException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_InvalidPaginationTokenException(t *testing.T) {
 	want := &types.InvalidPaginationTokenException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("InvalidPaginationTokenException"),
 		Logref:  ptr.String("__Logref__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InvalidPaginationTokenException.error")
@@ -6083,7 +7128,15 @@ func TestCheckResponseSnapshot_Error_InvalidPaginationTokenException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeProjectVersions(context.Background(), &DescribeProjectVersionsInput{})
+	_, opErr := svc.DescribeProjectVersions(context.Background(), &DescribeProjectVersionsInput{
+		ProjectArn: ptr.String("__ProjectArn__"),
+		VersionNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6099,7 +7152,7 @@ func TestCheckResponseSnapshot_Error_InvalidPaginationTokenException(t *testing.
 func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 	want := &types.InvalidParameterException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("InvalidParameterException"),
 		Logref:  ptr.String("__Logref__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InvalidParameterException.error")
@@ -6110,7 +7163,16 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFaces(context.Background(), &AssociateFacesInput{})
+	_, opErr := svc.AssociateFaces(context.Background(), &AssociateFacesInput{
+		CollectionId: ptr.String("__CollectionId__"),
+		UserId:       ptr.String("__UserId__"),
+		FaceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UserMatchThreshold: ptr.Float32(1.0),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6126,7 +7188,7 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_InvalidPolicyRevisionIdException(t *testing.T) {
 	want := &types.InvalidPolicyRevisionIdException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("InvalidPolicyRevisionIdException"),
 		Logref:  ptr.String("__Logref__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InvalidPolicyRevisionIdException.error")
@@ -6137,7 +7199,11 @@ func TestCheckResponseSnapshot_Error_InvalidPolicyRevisionIdException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteProjectPolicy(context.Background(), &DeleteProjectPolicyInput{})
+	_, opErr := svc.DeleteProjectPolicy(context.Background(), &DeleteProjectPolicyInput{
+		ProjectArn:       ptr.String("__ProjectArn__"),
+		PolicyName:       ptr.String("__PolicyName__"),
+		PolicyRevisionId: ptr.String("__PolicyRevisionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6153,7 +7219,7 @@ func TestCheckResponseSnapshot_Error_InvalidPolicyRevisionIdException(t *testing
 func TestCheckResponseSnapshot_Error_InvalidS3ObjectException(t *testing.T) {
 	want := &types.InvalidS3ObjectException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("InvalidS3ObjectException"),
 		Logref:  ptr.String("__Logref__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InvalidS3ObjectException.error")
@@ -6164,7 +7230,26 @@ func TestCheckResponseSnapshot_Error_InvalidS3ObjectException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompareFaces(context.Background(), &CompareFacesInput{})
+	_, opErr := svc.CompareFaces(context.Background(), &CompareFacesInput{
+		SourceImage: &types.Image{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		TargetImage: &types.Image{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		SimilarityThreshold: ptr.Float32(1.0),
+		QualityFilter:       types.QualityFilter("NONE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6180,7 +7265,7 @@ func TestCheckResponseSnapshot_Error_InvalidS3ObjectException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 	want := &types.LimitExceededException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("LimitExceededException"),
 		Logref:  ptr.String("__Logref__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("LimitExceededException.error")
@@ -6191,7 +7276,20 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyProjectVersion(context.Background(), &CopyProjectVersionInput{})
+	_, opErr := svc.CopyProjectVersion(context.Background(), &CopyProjectVersionInput{
+		SourceProjectArn:        ptr.String("__SourceProjectArn__"),
+		SourceProjectVersionArn: ptr.String("__SourceProjectVersionArn__"),
+		DestinationProjectArn:   ptr.String("__DestinationProjectArn__"),
+		VersionName:             ptr.String("__VersionName__"),
+		OutputConfig: &types.OutputConfig{
+			S3Bucket:    ptr.String("__S3Bucket__"),
+			S3KeyPrefix: ptr.String("__S3KeyPrefix__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6207,7 +7305,7 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_MalformedPolicyDocumentException(t *testing.T) {
 	want := &types.MalformedPolicyDocumentException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("MalformedPolicyDocumentException"),
 		Logref:  ptr.String("__Logref__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("MalformedPolicyDocumentException.error")
@@ -6218,7 +7316,12 @@ func TestCheckResponseSnapshot_Error_MalformedPolicyDocumentException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutProjectPolicy(context.Background(), &PutProjectPolicyInput{})
+	_, opErr := svc.PutProjectPolicy(context.Background(), &PutProjectPolicyInput{
+		ProjectArn:       ptr.String("__ProjectArn__"),
+		PolicyName:       ptr.String("__PolicyName__"),
+		PolicyRevisionId: ptr.String("__PolicyRevisionId__"),
+		PolicyDocument:   ptr.String("__PolicyDocument__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6234,7 +7337,7 @@ func TestCheckResponseSnapshot_Error_MalformedPolicyDocumentException(t *testing
 func TestCheckResponseSnapshot_Error_ProvisionedThroughputExceededException(t *testing.T) {
 	want := &types.ProvisionedThroughputExceededException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("ProvisionedThroughputExceededException"),
 		Logref:  ptr.String("__Logref__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ProvisionedThroughputExceededException.error")
@@ -6245,7 +7348,16 @@ func TestCheckResponseSnapshot_Error_ProvisionedThroughputExceededException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFaces(context.Background(), &AssociateFacesInput{})
+	_, opErr := svc.AssociateFaces(context.Background(), &AssociateFacesInput{
+		CollectionId: ptr.String("__CollectionId__"),
+		UserId:       ptr.String("__UserId__"),
+		FaceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UserMatchThreshold: ptr.Float32(1.0),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6261,7 +7373,7 @@ func TestCheckResponseSnapshot_Error_ProvisionedThroughputExceededException(t *t
 func TestCheckResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.T) {
 	want := &types.ResourceAlreadyExistsException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("ResourceAlreadyExistsException"),
 		Logref:  ptr.String("__Logref__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ResourceAlreadyExistsException.error")
@@ -6272,7 +7384,12 @@ func TestCheckResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCollection(context.Background(), &CreateCollectionInput{})
+	_, opErr := svc.CreateCollection(context.Background(), &CreateCollectionInput{
+		CollectionId: ptr.String("__CollectionId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6288,7 +7405,7 @@ func TestCheckResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.T
 func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 	want := &types.ResourceInUseException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("ResourceInUseException"),
 		Logref:  ptr.String("__Logref__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ResourceInUseException.error")
@@ -6299,7 +7416,20 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyProjectVersion(context.Background(), &CopyProjectVersionInput{})
+	_, opErr := svc.CopyProjectVersion(context.Background(), &CopyProjectVersionInput{
+		SourceProjectArn:        ptr.String("__SourceProjectArn__"),
+		SourceProjectVersionArn: ptr.String("__SourceProjectVersionArn__"),
+		DestinationProjectArn:   ptr.String("__DestinationProjectArn__"),
+		VersionName:             ptr.String("__VersionName__"),
+		OutputConfig: &types.OutputConfig{
+			S3Bucket:    ptr.String("__S3Bucket__"),
+			S3KeyPrefix: ptr.String("__S3KeyPrefix__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6315,7 +7445,7 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 	want := &types.ResourceNotFoundException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("ResourceNotFoundException"),
 		Logref:  ptr.String("__Logref__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ResourceNotFoundException.error")
@@ -6326,7 +7456,16 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFaces(context.Background(), &AssociateFacesInput{})
+	_, opErr := svc.AssociateFaces(context.Background(), &AssociateFacesInput{
+		CollectionId: ptr.String("__CollectionId__"),
+		UserId:       ptr.String("__UserId__"),
+		FaceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UserMatchThreshold: ptr.Float32(1.0),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6342,7 +7481,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ResourceNotReadyException(t *testing.T) {
 	want := &types.ResourceNotReadyException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("ResourceNotReadyException"),
 		Logref:  ptr.String("__Logref__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ResourceNotReadyException.error")
@@ -6353,7 +7492,19 @@ func TestCheckResponseSnapshot_Error_ResourceNotReadyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DetectCustomLabels(context.Background(), &DetectCustomLabelsInput{})
+	_, opErr := svc.DetectCustomLabels(context.Background(), &DetectCustomLabelsInput{
+		ProjectVersionArn: ptr.String("__ProjectVersionArn__"),
+		Image: &types.Image{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		MaxResults:    ptr.Int32(1),
+		MinConfidence: ptr.Float32(1.0),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6369,7 +7520,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotReadyException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T) {
 	want := &types.ServiceQuotaExceededException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("ServiceQuotaExceededException"),
 		Logref:  ptr.String("__Logref__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ServiceQuotaExceededException.error")
@@ -6380,7 +7531,16 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFaces(context.Background(), &AssociateFacesInput{})
+	_, opErr := svc.AssociateFaces(context.Background(), &AssociateFacesInput{
+		CollectionId: ptr.String("__CollectionId__"),
+		UserId:       ptr.String("__UserId__"),
+		FaceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UserMatchThreshold: ptr.Float32(1.0),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6396,7 +7556,7 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 func TestCheckResponseSnapshot_Error_SessionNotFoundException(t *testing.T) {
 	want := &types.SessionNotFoundException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("SessionNotFoundException"),
 		Logref:  ptr.String("__Logref__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("SessionNotFoundException.error")
@@ -6407,7 +7567,9 @@ func TestCheckResponseSnapshot_Error_SessionNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetFaceLivenessSessionResults(context.Background(), &GetFaceLivenessSessionResultsInput{})
+	_, opErr := svc.GetFaceLivenessSessionResults(context.Background(), &GetFaceLivenessSessionResultsInput{
+		SessionId: ptr.String("__SessionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6423,7 +7585,7 @@ func TestCheckResponseSnapshot_Error_SessionNotFoundException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 	want := &types.ThrottlingException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("ThrottlingException"),
 		Logref:  ptr.String("__Logref__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ThrottlingException.error")
@@ -6434,7 +7596,16 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFaces(context.Background(), &AssociateFacesInput{})
+	_, opErr := svc.AssociateFaces(context.Background(), &AssociateFacesInput{
+		CollectionId: ptr.String("__CollectionId__"),
+		UserId:       ptr.String("__UserId__"),
+		FaceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UserMatchThreshold: ptr.Float32(1.0),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -6450,7 +7621,7 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_VideoTooLargeException(t *testing.T) {
 	want := &types.VideoTooLargeException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("VideoTooLargeException"),
 		Logref:  ptr.String("__Logref__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("VideoTooLargeException.error")
@@ -6461,7 +7632,21 @@ func TestCheckResponseSnapshot_Error_VideoTooLargeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartCelebrityRecognition(context.Background(), &StartCelebrityRecognitionInput{})
+	_, opErr := svc.StartCelebrityRecognition(context.Background(), &StartCelebrityRecognitionInput{
+		Video: &types.Video{
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		NotificationChannel: &types.NotificationChannel{
+			SNSTopicArn: ptr.String("__SNSTopicArn__"),
+			RoleArn:     ptr.String("__RoleArn__"),
+		},
+		JobTag: ptr.String("__JobTag__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

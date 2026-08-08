@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Items":[{"AccountAssociationId":"__AccountAssociationId__","Arn":"__Arn__","AssociationState":"ASSOCIATION_IN_PROGRESS","ConnectorDestinationId":"__ConnectorDestinationId__","Description":"__Description__","ErrorMessage":"__ErrorMessage__","Name":"__Name__"},{"AccountAssociationId":"__AccountAssociationId__","Arn":"__Arn__","AssociationState":"ASSOCIATION_IN_PROGRESS","ConnectorDestinationId":"__ConnectorDestinationId__","Description":"__Description__","ErrorMessage":"__ErrorMessage__","Name":"__Name__"}],"NextToken":"__NextToken__"}

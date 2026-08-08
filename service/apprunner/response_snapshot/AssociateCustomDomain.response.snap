@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AppRunner.AssociateCustomDomain
+
+{"CustomDomain":{"CertificateValidationRecords":[{"Name":"__Name__","Status":"PENDING_VALIDATION","Type":"__Type__","Value":"__Value__"},{"Name":"__Name__","Status":"PENDING_VALIDATION","Type":"__Type__","Value":"__Value__"}],"DomainName":"__DomainName__","EnableWWWSubdomain":true,"Status":"CREATING"},"DNSTarget":"__DNSTarget__","ServiceArn":"__ServiceArn__","VpcDNSTargets":[{"DomainName":"__DomainName__","VpcId":"__VpcId__","VpcIngressConnectionArn":"__VpcIngressConnectionArn__"},{"DomainName":"__DomainName__","VpcId":"__VpcId__","VpcIngressConnectionArn":"__VpcIngressConnectionArn__"}]}

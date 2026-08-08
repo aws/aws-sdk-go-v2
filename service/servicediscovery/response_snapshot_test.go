@@ -119,7 +119,21 @@ func TestCheckResponseSnapshot_CreateHttpNamespace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateHttpNamespace(context.Background(), &CreateHttpNamespaceInput{})
+	got, err := svc.CreateHttpNamespace(context.Background(), &CreateHttpNamespaceInput{
+		Name:             ptr.String("__Name__"),
+		CreatorRequestId: ptr.String("__CreatorRequestId__"),
+		Description:      ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -140,7 +154,29 @@ func TestCheckResponseSnapshot_CreatePrivateDnsNamespace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePrivateDnsNamespace(context.Background(), &CreatePrivateDnsNamespaceInput{})
+	got, err := svc.CreatePrivateDnsNamespace(context.Background(), &CreatePrivateDnsNamespaceInput{
+		Name:             ptr.String("__Name__"),
+		CreatorRequestId: ptr.String("__CreatorRequestId__"),
+		Description:      ptr.String("__Description__"),
+		Vpc:              ptr.String("__Vpc__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Properties: &types.PrivateDnsNamespaceProperties{
+			DnsProperties: &types.PrivateDnsPropertiesMutable{
+				SOA: &types.SOA{
+					TTL: ptr.Int64(1),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -161,7 +197,28 @@ func TestCheckResponseSnapshot_CreatePublicDnsNamespace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePublicDnsNamespace(context.Background(), &CreatePublicDnsNamespaceInput{})
+	got, err := svc.CreatePublicDnsNamespace(context.Background(), &CreatePublicDnsNamespaceInput{
+		Name:             ptr.String("__Name__"),
+		CreatorRequestId: ptr.String("__CreatorRequestId__"),
+		Description:      ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Properties: &types.PublicDnsNamespaceProperties{
+			DnsProperties: &types.PublicDnsPropertiesMutable{
+				SOA: &types.SOA{
+					TTL: ptr.Int64(1),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -216,7 +273,45 @@ func TestCheckResponseSnapshot_CreateService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateService(context.Background(), &CreateServiceInput{})
+	got, err := svc.CreateService(context.Background(), &CreateServiceInput{
+		Name:             ptr.String("__Name__"),
+		NamespaceId:      ptr.String("__NamespaceId__"),
+		CreatorRequestId: ptr.String("__CreatorRequestId__"),
+		Description:      ptr.String("__Description__"),
+		DnsConfig: &types.DnsConfig{
+			NamespaceId:   ptr.String("__NamespaceId__"),
+			RoutingPolicy: types.RoutingPolicy("MULTIVALUE"),
+			DnsRecords: []types.DnsRecord{
+				{
+					Type: types.RecordType("SRV"),
+					TTL:  ptr.Int64(1),
+				},
+				{
+					Type: types.RecordType("SRV"),
+					TTL:  ptr.Int64(1),
+				},
+			},
+		},
+		HealthCheckConfig: &types.HealthCheckConfig{
+			Type:             types.HealthCheckType("HTTP"),
+			ResourcePath:     ptr.String("__ResourcePath__"),
+			FailureThreshold: ptr.Int32(1),
+		},
+		HealthCheckCustomConfig: &types.HealthCheckCustomConfig{
+			FailureThreshold: ptr.Int32(1),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Type: types.ServiceTypeOption("HTTP"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -237,7 +332,9 @@ func TestCheckResponseSnapshot_DeleteNamespace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteNamespace(context.Background(), &DeleteNamespaceInput{})
+	got, err := svc.DeleteNamespace(context.Background(), &DeleteNamespaceInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -256,7 +353,9 @@ func TestCheckResponseSnapshot_DeleteService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteService(context.Background(), &DeleteServiceInput{})
+	got, err := svc.DeleteService(context.Background(), &DeleteServiceInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -275,7 +374,13 @@ func TestCheckResponseSnapshot_DeleteServiceAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteServiceAttributes(context.Background(), &DeleteServiceAttributesInput{})
+	got, err := svc.DeleteServiceAttributes(context.Background(), &DeleteServiceAttributesInput{
+		ServiceId: ptr.String("__ServiceId__"),
+		Attributes: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -296,7 +401,10 @@ func TestCheckResponseSnapshot_DeregisterInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterInstance(context.Background(), &DeregisterInstanceInput{})
+	got, err := svc.DeregisterInstance(context.Background(), &DeregisterInstanceInput{
+		ServiceId:  ptr.String("__ServiceId__"),
+		InstanceId: ptr.String("__InstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -337,7 +445,19 @@ func TestCheckResponseSnapshot_DiscoverInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DiscoverInstances(context.Background(), &DiscoverInstancesInput{})
+	got, err := svc.DiscoverInstances(context.Background(), &DiscoverInstancesInput{
+		NamespaceName: ptr.String("__NamespaceName__"),
+		ServiceName:   ptr.String("__ServiceName__"),
+		MaxResults:    ptr.Int32(1),
+		QueryParameters: map[string]string{
+			"key0": "__Value__",
+		},
+		OptionalParameters: map[string]string{
+			"key0": "__Value__",
+		},
+		HealthStatus: types.HealthStatusFilter("HEALTHY"),
+		OwnerAccount: ptr.String("__OwnerAccount__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -358,7 +478,11 @@ func TestCheckResponseSnapshot_DiscoverInstancesRevision(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DiscoverInstancesRevision(context.Background(), &DiscoverInstancesRevisionInput{})
+	got, err := svc.DiscoverInstancesRevision(context.Background(), &DiscoverInstancesRevisionInput{
+		NamespaceName: ptr.String("__NamespaceName__"),
+		ServiceName:   ptr.String("__ServiceName__"),
+		OwnerAccount:  ptr.String("__OwnerAccount__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -387,7 +511,10 @@ func TestCheckResponseSnapshot_GetInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetInstance(context.Background(), &GetInstanceInput{})
+	got, err := svc.GetInstance(context.Background(), &GetInstanceInput{
+		ServiceId:  ptr.String("__ServiceId__"),
+		InstanceId: ptr.String("__InstanceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -411,7 +538,15 @@ func TestCheckResponseSnapshot_GetInstancesHealthStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetInstancesHealthStatus(context.Background(), &GetInstancesHealthStatusInput{})
+	got, err := svc.GetInstancesHealthStatus(context.Background(), &GetInstancesHealthStatusInput{
+		ServiceId: ptr.String("__ServiceId__"),
+		Instances: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -453,7 +588,9 @@ func TestCheckResponseSnapshot_GetNamespace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetNamespace(context.Background(), &GetNamespaceInput{})
+	got, err := svc.GetNamespace(context.Background(), &GetNamespaceInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -486,7 +623,10 @@ func TestCheckResponseSnapshot_GetOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOperation(context.Background(), &GetOperationInput{})
+	got, err := svc.GetOperation(context.Background(), &GetOperationInput{
+		OperationId:  ptr.String("__OperationId__"),
+		OwnerAccount: ptr.String("__OwnerAccount__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -541,7 +681,9 @@ func TestCheckResponseSnapshot_GetService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetService(context.Background(), &GetServiceInput{})
+	got, err := svc.GetService(context.Background(), &GetServiceInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -568,7 +710,9 @@ func TestCheckResponseSnapshot_GetServiceAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetServiceAttributes(context.Background(), &GetServiceAttributesInput{})
+	got, err := svc.GetServiceAttributes(context.Background(), &GetServiceAttributesInput{
+		ServiceId: ptr.String("__ServiceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -606,7 +750,11 @@ func TestCheckResponseSnapshot_ListInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInstances(context.Background(), &ListInstancesInput{})
+	got, err := svc.ListInstances(context.Background(), &ListInstancesInput{
+		ServiceId:  ptr.String("__ServiceId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -671,7 +819,28 @@ func TestCheckResponseSnapshot_ListNamespaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListNamespaces(context.Background(), &ListNamespacesInput{})
+	got, err := svc.ListNamespaces(context.Background(), &ListNamespacesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filters: []types.NamespaceFilter{
+			{
+				Name: types.NamespaceFilterName("TYPE"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Condition: types.FilterCondition("EQ"),
+			},
+			{
+				Name: types.NamespaceFilterName("TYPE"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Condition: types.FilterCondition("EQ"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -702,7 +871,28 @@ func TestCheckResponseSnapshot_ListOperations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOperations(context.Background(), &ListOperationsInput{})
+	got, err := svc.ListOperations(context.Background(), &ListOperationsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filters: []types.OperationFilter{
+			{
+				Name: types.OperationFilterName("NAMESPACE_ID"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Condition: types.FilterCondition("EQ"),
+			},
+			{
+				Name: types.OperationFilterName("NAMESPACE_ID"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Condition: types.FilterCondition("EQ"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -791,7 +981,28 @@ func TestCheckResponseSnapshot_ListServices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServices(context.Background(), &ListServicesInput{})
+	got, err := svc.ListServices(context.Background(), &ListServicesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filters: []types.ServiceFilter{
+			{
+				Name: types.ServiceFilterName("NAMESPACE_ID"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Condition: types.FilterCondition("EQ"),
+			},
+			{
+				Name: types.ServiceFilterName("NAMESPACE_ID"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Condition: types.FilterCondition("EQ"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -821,7 +1032,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -842,7 +1055,14 @@ func TestCheckResponseSnapshot_RegisterInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterInstance(context.Background(), &RegisterInstanceInput{})
+	got, err := svc.RegisterInstance(context.Background(), &RegisterInstanceInput{
+		ServiceId:        ptr.String("__ServiceId__"),
+		InstanceId:       ptr.String("__InstanceId__"),
+		CreatorRequestId: ptr.String("__CreatorRequestId__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -861,7 +1081,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -880,7 +1112,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -901,7 +1139,13 @@ func TestCheckResponseSnapshot_UpdateHttpNamespace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateHttpNamespace(context.Background(), &UpdateHttpNamespaceInput{})
+	got, err := svc.UpdateHttpNamespace(context.Background(), &UpdateHttpNamespaceInput{
+		Id:               ptr.String("__Id__"),
+		UpdaterRequestId: ptr.String("__UpdaterRequestId__"),
+		Namespace: &types.HttpNamespaceChange{
+			Description: ptr.String("__Description__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -920,7 +1164,11 @@ func TestCheckResponseSnapshot_UpdateInstanceCustomHealthStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateInstanceCustomHealthStatus(context.Background(), &UpdateInstanceCustomHealthStatusInput{})
+	got, err := svc.UpdateInstanceCustomHealthStatus(context.Background(), &UpdateInstanceCustomHealthStatusInput{
+		ServiceId:  ptr.String("__ServiceId__"),
+		InstanceId: ptr.String("__InstanceId__"),
+		Status:     types.CustomHealthStatus("HEALTHY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -941,7 +1189,20 @@ func TestCheckResponseSnapshot_UpdatePrivateDnsNamespace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePrivateDnsNamespace(context.Background(), &UpdatePrivateDnsNamespaceInput{})
+	got, err := svc.UpdatePrivateDnsNamespace(context.Background(), &UpdatePrivateDnsNamespaceInput{
+		Id:               ptr.String("__Id__"),
+		UpdaterRequestId: ptr.String("__UpdaterRequestId__"),
+		Namespace: &types.PrivateDnsNamespaceChange{
+			Description: ptr.String("__Description__"),
+			Properties: &types.PrivateDnsNamespacePropertiesChange{
+				DnsProperties: &types.PrivateDnsPropertiesMutableChange{
+					SOA: &types.SOAChange{
+						TTL: ptr.Int64(1),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -962,7 +1223,20 @@ func TestCheckResponseSnapshot_UpdatePublicDnsNamespace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePublicDnsNamespace(context.Background(), &UpdatePublicDnsNamespaceInput{})
+	got, err := svc.UpdatePublicDnsNamespace(context.Background(), &UpdatePublicDnsNamespaceInput{
+		Id:               ptr.String("__Id__"),
+		UpdaterRequestId: ptr.String("__UpdaterRequestId__"),
+		Namespace: &types.PublicDnsNamespaceChange{
+			Description: ptr.String("__Description__"),
+			Properties: &types.PublicDnsNamespacePropertiesChange{
+				DnsProperties: &types.PublicDnsPropertiesMutableChange{
+					SOA: &types.SOAChange{
+						TTL: ptr.Int64(1),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -983,7 +1257,29 @@ func TestCheckResponseSnapshot_UpdateService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateService(context.Background(), &UpdateServiceInput{})
+	got, err := svc.UpdateService(context.Background(), &UpdateServiceInput{
+		Id: ptr.String("__Id__"),
+		Service: &types.ServiceChange{
+			Description: ptr.String("__Description__"),
+			DnsConfig: &types.DnsConfigChange{
+				DnsRecords: []types.DnsRecord{
+					{
+						Type: types.RecordType("SRV"),
+						TTL:  ptr.Int64(1),
+					},
+					{
+						Type: types.RecordType("SRV"),
+						TTL:  ptr.Int64(1),
+					},
+				},
+			},
+			HealthCheckConfig: &types.HealthCheckConfig{
+				Type:             types.HealthCheckType("HTTP"),
+				ResourcePath:     ptr.String("__ResourcePath__"),
+				FailureThreshold: ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1002,7 +1298,12 @@ func TestCheckResponseSnapshot_UpdateServiceAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateServiceAttributes(context.Background(), &UpdateServiceAttributesInput{})
+	got, err := svc.UpdateServiceAttributes(context.Background(), &UpdateServiceAttributesInput{
+		ServiceId: ptr.String("__ServiceId__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1023,7 +1324,11 @@ func TestCheckResponseSnapshot_Error_CustomHealthNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateInstanceCustomHealthStatus(context.Background(), &UpdateInstanceCustomHealthStatusInput{})
+	_, opErr := svc.UpdateInstanceCustomHealthStatus(context.Background(), &UpdateInstanceCustomHealthStatusInput{
+		ServiceId:  ptr.String("__ServiceId__"),
+		InstanceId: ptr.String("__InstanceId__"),
+		Status:     types.CustomHealthStatus("HEALTHY"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1049,7 +1354,21 @@ func TestCheckResponseSnapshot_Error_DuplicateRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateHttpNamespace(context.Background(), &CreateHttpNamespaceInput{})
+	_, opErr := svc.CreateHttpNamespace(context.Background(), &CreateHttpNamespaceInput{
+		Name:             ptr.String("__Name__"),
+		CreatorRequestId: ptr.String("__CreatorRequestId__"),
+		Description:      ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1074,7 +1393,10 @@ func TestCheckResponseSnapshot_Error_InstanceNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeregisterInstance(context.Background(), &DeregisterInstanceInput{})
+	_, opErr := svc.DeregisterInstance(context.Background(), &DeregisterInstanceInput{
+		ServiceId:  ptr.String("__ServiceId__"),
+		InstanceId: ptr.String("__InstanceId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1099,7 +1421,21 @@ func TestCheckResponseSnapshot_Error_InvalidInput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateHttpNamespace(context.Background(), &CreateHttpNamespaceInput{})
+	_, opErr := svc.CreateHttpNamespace(context.Background(), &CreateHttpNamespaceInput{
+		Name:             ptr.String("__Name__"),
+		CreatorRequestId: ptr.String("__CreatorRequestId__"),
+		Description:      ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1126,7 +1462,21 @@ func TestCheckResponseSnapshot_Error_NamespaceAlreadyExists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateHttpNamespace(context.Background(), &CreateHttpNamespaceInput{})
+	_, opErr := svc.CreateHttpNamespace(context.Background(), &CreateHttpNamespaceInput{
+		Name:             ptr.String("__Name__"),
+		CreatorRequestId: ptr.String("__CreatorRequestId__"),
+		Description:      ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1151,7 +1501,45 @@ func TestCheckResponseSnapshot_Error_NamespaceNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateService(context.Background(), &CreateServiceInput{})
+	_, opErr := svc.CreateService(context.Background(), &CreateServiceInput{
+		Name:             ptr.String("__Name__"),
+		NamespaceId:      ptr.String("__NamespaceId__"),
+		CreatorRequestId: ptr.String("__CreatorRequestId__"),
+		Description:      ptr.String("__Description__"),
+		DnsConfig: &types.DnsConfig{
+			NamespaceId:   ptr.String("__NamespaceId__"),
+			RoutingPolicy: types.RoutingPolicy("MULTIVALUE"),
+			DnsRecords: []types.DnsRecord{
+				{
+					Type: types.RecordType("SRV"),
+					TTL:  ptr.Int64(1),
+				},
+				{
+					Type: types.RecordType("SRV"),
+					TTL:  ptr.Int64(1),
+				},
+			},
+		},
+		HealthCheckConfig: &types.HealthCheckConfig{
+			Type:             types.HealthCheckType("HTTP"),
+			ResourcePath:     ptr.String("__ResourcePath__"),
+			FailureThreshold: ptr.Int32(1),
+		},
+		HealthCheckCustomConfig: &types.HealthCheckCustomConfig{
+			FailureThreshold: ptr.Int32(1),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Type: types.ServiceTypeOption("HTTP"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1176,7 +1564,10 @@ func TestCheckResponseSnapshot_Error_OperationNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetOperation(context.Background(), &GetOperationInput{})
+	_, opErr := svc.GetOperation(context.Background(), &GetOperationInput{
+		OperationId:  ptr.String("__OperationId__"),
+		OwnerAccount: ptr.String("__OwnerAccount__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1201,7 +1592,19 @@ func TestCheckResponseSnapshot_Error_RequestLimitExceeded(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DiscoverInstances(context.Background(), &DiscoverInstancesInput{})
+	_, opErr := svc.DiscoverInstances(context.Background(), &DiscoverInstancesInput{
+		NamespaceName: ptr.String("__NamespaceName__"),
+		ServiceName:   ptr.String("__ServiceName__"),
+		MaxResults:    ptr.Int32(1),
+		QueryParameters: map[string]string{
+			"key0": "__Value__",
+		},
+		OptionalParameters: map[string]string{
+			"key0": "__Value__",
+		},
+		HealthStatus: types.HealthStatusFilter("HEALTHY"),
+		OwnerAccount: ptr.String("__OwnerAccount__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1226,7 +1629,9 @@ func TestCheckResponseSnapshot_Error_ResourceInUse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteNamespace(context.Background(), &DeleteNamespaceInput{})
+	_, opErr := svc.DeleteNamespace(context.Background(), &DeleteNamespaceInput{
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1251,7 +1656,21 @@ func TestCheckResponseSnapshot_Error_ResourceLimitExceeded(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateHttpNamespace(context.Background(), &CreateHttpNamespaceInput{})
+	_, opErr := svc.CreateHttpNamespace(context.Background(), &CreateHttpNamespaceInput{
+		Name:             ptr.String("__Name__"),
+		CreatorRequestId: ptr.String("__CreatorRequestId__"),
+		Description:      ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1276,7 +1695,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1304,7 +1725,45 @@ func TestCheckResponseSnapshot_Error_ServiceAlreadyExists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateService(context.Background(), &CreateServiceInput{})
+	_, opErr := svc.CreateService(context.Background(), &CreateServiceInput{
+		Name:             ptr.String("__Name__"),
+		NamespaceId:      ptr.String("__NamespaceId__"),
+		CreatorRequestId: ptr.String("__CreatorRequestId__"),
+		Description:      ptr.String("__Description__"),
+		DnsConfig: &types.DnsConfig{
+			NamespaceId:   ptr.String("__NamespaceId__"),
+			RoutingPolicy: types.RoutingPolicy("MULTIVALUE"),
+			DnsRecords: []types.DnsRecord{
+				{
+					Type: types.RecordType("SRV"),
+					TTL:  ptr.Int64(1),
+				},
+				{
+					Type: types.RecordType("SRV"),
+					TTL:  ptr.Int64(1),
+				},
+			},
+		},
+		HealthCheckConfig: &types.HealthCheckConfig{
+			Type:             types.HealthCheckType("HTTP"),
+			ResourcePath:     ptr.String("__ResourcePath__"),
+			FailureThreshold: ptr.Int32(1),
+		},
+		HealthCheckCustomConfig: &types.HealthCheckCustomConfig{
+			FailureThreshold: ptr.Int32(1),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Type: types.ServiceTypeOption("HTTP"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1329,7 +1788,12 @@ func TestCheckResponseSnapshot_Error_ServiceAttributesLimitExceededException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateServiceAttributes(context.Background(), &UpdateServiceAttributesInput{})
+	_, opErr := svc.UpdateServiceAttributes(context.Background(), &UpdateServiceAttributesInput{
+		ServiceId: ptr.String("__ServiceId__"),
+		Attributes: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1354,7 +1818,9 @@ func TestCheckResponseSnapshot_Error_ServiceNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteService(context.Background(), &DeleteServiceInput{})
+	_, opErr := svc.DeleteService(context.Background(), &DeleteServiceInput{
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1380,7 +1846,21 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateHttpNamespace(context.Background(), &CreateHttpNamespaceInput{})
+	_, opErr := svc.CreateHttpNamespace(context.Background(), &CreateHttpNamespaceInput{
+		Name:             ptr.String("__Name__"),
+		CreatorRequestId: ptr.String("__CreatorRequestId__"),
+		Description:      ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

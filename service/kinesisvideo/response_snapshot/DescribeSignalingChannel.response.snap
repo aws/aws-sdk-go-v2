@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ChannelInfo":{"ChannelARN":"__ChannelARN__","ChannelName":"__ChannelName__","ChannelStatus":"CREATING","ChannelType":"SINGLE_MASTER","CreationTime":946684800,"SingleMasterConfiguration":{"MessageTtlSeconds":1},"Version":"__Version__"}}

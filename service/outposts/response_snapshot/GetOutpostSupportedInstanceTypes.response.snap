@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"InstanceTypes":[{"InstanceType":"__InstanceType__","VCPUs":1},{"InstanceType":"__InstanceType__","VCPUs":1}],"NextToken":"__NextToken__"}

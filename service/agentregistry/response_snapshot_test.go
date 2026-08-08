@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/agentregistry/document"
 	"github.com/aws/aws-sdk-go-v2/service/agentregistry/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -248,7 +249,24 @@ func TestCheckResponseSnapshot_BatchGetDiscoverableRegistryRecord(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetDiscoverableRegistryRecord(context.Background(), &BatchGetDiscoverableRegistryRecordInput{})
+	got, err := svc.BatchGetDiscoverableRegistryRecord(context.Background(), &BatchGetDiscoverableRegistryRecordInput{
+		Entries: []types.RegistryRecordsEntry{
+			{
+				RegistryId: ptr.String("__RegistryId__"),
+				RecordIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				RegistryId: ptr.String("__RegistryId__"),
+				RecordIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -297,7 +315,27 @@ func TestCheckResponseSnapshot_ListDiscoverableRegistryRecords(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDiscoverableRegistryRecords(context.Background(), &ListDiscoverableRegistryRecordsInput{})
+	got, err := svc.ListDiscoverableRegistryRecords(context.Background(), &ListDiscoverableRegistryRecordsInput{
+		RegistryId: ptr.String("__RegistryId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.RegistryRecordFilter{
+			{
+				Name: types.RegistryRecordFilterName("recordType"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.RegistryRecordFilterName("recordType"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -433,7 +471,15 @@ func TestCheckResponseSnapshot_SearchDiscoverableRegistryRecords(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchDiscoverableRegistryRecords(context.Background(), &SearchDiscoverableRegistryRecordsInput{})
+	got, err := svc.SearchDiscoverableRegistryRecords(context.Background(), &SearchDiscoverableRegistryRecordsInput{
+		SearchQuery: ptr.String("__SearchQuery__"),
+		RegistryIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		Filters:    document.NewLazyDocument("__Document__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -454,7 +500,24 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetDiscoverableRegistryRecord(context.Background(), &BatchGetDiscoverableRegistryRecordInput{})
+	_, opErr := svc.BatchGetDiscoverableRegistryRecord(context.Background(), &BatchGetDiscoverableRegistryRecordInput{
+		Entries: []types.RegistryRecordsEntry{
+			{
+				RegistryId: ptr.String("__RegistryId__"),
+				RecordIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				RegistryId: ptr.String("__RegistryId__"),
+				RecordIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -479,7 +542,24 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetDiscoverableRegistryRecord(context.Background(), &BatchGetDiscoverableRegistryRecordInput{})
+	_, opErr := svc.BatchGetDiscoverableRegistryRecord(context.Background(), &BatchGetDiscoverableRegistryRecordInput{
+		Entries: []types.RegistryRecordsEntry{
+			{
+				RegistryId: ptr.String("__RegistryId__"),
+				RecordIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				RegistryId: ptr.String("__RegistryId__"),
+				RecordIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -504,7 +584,24 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetDiscoverableRegistryRecord(context.Background(), &BatchGetDiscoverableRegistryRecordInput{})
+	_, opErr := svc.BatchGetDiscoverableRegistryRecord(context.Background(), &BatchGetDiscoverableRegistryRecordInput{
+		Entries: []types.RegistryRecordsEntry{
+			{
+				RegistryId: ptr.String("__RegistryId__"),
+				RecordIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				RegistryId: ptr.String("__RegistryId__"),
+				RecordIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -529,7 +626,24 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetDiscoverableRegistryRecord(context.Background(), &BatchGetDiscoverableRegistryRecordInput{})
+	_, opErr := svc.BatchGetDiscoverableRegistryRecord(context.Background(), &BatchGetDiscoverableRegistryRecordInput{
+		Entries: []types.RegistryRecordsEntry{
+			{
+				RegistryId: ptr.String("__RegistryId__"),
+				RecordIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				RegistryId: ptr.String("__RegistryId__"),
+				RecordIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -554,7 +668,24 @@ func TestCheckResponseSnapshot_Error_UnauthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetDiscoverableRegistryRecord(context.Background(), &BatchGetDiscoverableRegistryRecordInput{})
+	_, opErr := svc.BatchGetDiscoverableRegistryRecord(context.Background(), &BatchGetDiscoverableRegistryRecordInput{
+		Entries: []types.RegistryRecordsEntry{
+			{
+				RegistryId: ptr.String("__RegistryId__"),
+				RecordIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				RegistryId: ptr.String("__RegistryId__"),
+				RecordIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -590,7 +721,24 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetDiscoverableRegistryRecord(context.Background(), &BatchGetDiscoverableRegistryRecordInput{})
+	_, opErr := svc.BatchGetDiscoverableRegistryRecord(context.Background(), &BatchGetDiscoverableRegistryRecordInput{
+		Entries: []types.RegistryRecordsEntry{
+			{
+				RegistryId: ptr.String("__RegistryId__"),
+				RecordIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				RegistryId: ptr.String("__RegistryId__"),
+				RecordIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

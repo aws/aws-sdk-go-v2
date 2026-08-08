@@ -24,6 +24,7 @@ import (
 	"strconv"
 	"strings"
 	"testing"
+	"time"
 )
 
 const serdeRespSSPrefix = "response_snapshot"
@@ -169,7 +170,10 @@ func TestCheckResponseSnapshot_GetDeployments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDeployments(context.Background(), &GetDeploymentsInput{})
+	got, err := svc.GetDeployments(context.Background(), &GetDeploymentsInput{
+		DeviceName:      ptr.String("__DeviceName__"),
+		DeviceFleetName: ptr.String("__DeviceFleetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -191,7 +195,10 @@ func TestCheckResponseSnapshot_GetDeviceRegistration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDeviceRegistration(context.Background(), &GetDeviceRegistrationInput{})
+	got, err := svc.GetDeviceRegistration(context.Background(), &GetDeviceRegistrationInput{
+		DeviceName:      ptr.String("__DeviceName__"),
+		DeviceFleetName: ptr.String("__DeviceFleetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -210,7 +217,96 @@ func TestCheckResponseSnapshot_SendHeartbeat(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendHeartbeat(context.Background(), &SendHeartbeatInput{})
+	got, err := svc.SendHeartbeat(context.Background(), &SendHeartbeatInput{
+		AgentMetrics: []types.EdgeMetric{
+			{
+				Dimension:  ptr.String("__Dimension__"),
+				MetricName: ptr.String("__MetricName__"),
+				Value:      ptr.Float64(1.0),
+				Timestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Dimension:  ptr.String("__Dimension__"),
+				MetricName: ptr.String("__MetricName__"),
+				Value:      ptr.Float64(1.0),
+				Timestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		Models: []types.Model{
+			{
+				ModelName:        ptr.String("__ModelName__"),
+				ModelVersion:     ptr.String("__ModelVersion__"),
+				LatestSampleTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LatestInference:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ModelMetrics: []types.EdgeMetric{
+					{
+						Dimension:  ptr.String("__Dimension__"),
+						MetricName: ptr.String("__MetricName__"),
+						Value:      ptr.Float64(1.0),
+						Timestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						Dimension:  ptr.String("__Dimension__"),
+						MetricName: ptr.String("__MetricName__"),
+						Value:      ptr.Float64(1.0),
+						Timestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
+			{
+				ModelName:        ptr.String("__ModelName__"),
+				ModelVersion:     ptr.String("__ModelVersion__"),
+				LatestSampleTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LatestInference:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ModelMetrics: []types.EdgeMetric{
+					{
+						Dimension:  ptr.String("__Dimension__"),
+						MetricName: ptr.String("__MetricName__"),
+						Value:      ptr.Float64(1.0),
+						Timestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						Dimension:  ptr.String("__Dimension__"),
+						MetricName: ptr.String("__MetricName__"),
+						Value:      ptr.Float64(1.0),
+						Timestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
+		},
+		AgentVersion:    ptr.String("__AgentVersion__"),
+		DeviceName:      ptr.String("__DeviceName__"),
+		DeviceFleetName: ptr.String("__DeviceFleetName__"),
+		DeploymentResult: &types.DeploymentResult{
+			DeploymentName:          ptr.String("__DeploymentName__"),
+			DeploymentStatus:        ptr.String("__DeploymentStatus__"),
+			DeploymentStatusMessage: ptr.String("__DeploymentStatusMessage__"),
+			DeploymentStartTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			DeploymentEndTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			DeploymentModels: []types.DeploymentModel{
+				{
+					ModelHandle:           ptr.String("__ModelHandle__"),
+					ModelName:             ptr.String("__ModelName__"),
+					ModelVersion:          ptr.String("__ModelVersion__"),
+					DesiredState:          types.ModelState("DEPLOY"),
+					State:                 types.ModelState("DEPLOY"),
+					Status:                types.DeploymentStatus("SUCCESS"),
+					StatusReason:          ptr.String("__StatusReason__"),
+					RollbackFailureReason: ptr.String("__RollbackFailureReason__"),
+				},
+				{
+					ModelHandle:           ptr.String("__ModelHandle__"),
+					ModelName:             ptr.String("__ModelName__"),
+					ModelVersion:          ptr.String("__ModelVersion__"),
+					DesiredState:          types.ModelState("DEPLOY"),
+					State:                 types.ModelState("DEPLOY"),
+					Status:                types.DeploymentStatus("SUCCESS"),
+					StatusReason:          ptr.String("__StatusReason__"),
+					RollbackFailureReason: ptr.String("__RollbackFailureReason__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -231,7 +327,10 @@ func TestCheckResponseSnapshot_Error_InternalServiceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetDeployments(context.Background(), &GetDeploymentsInput{})
+	_, opErr := svc.GetDeployments(context.Background(), &GetDeploymentsInput{
+		DeviceName:      ptr.String("__DeviceName__"),
+		DeviceFleetName: ptr.String("__DeviceFleetName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

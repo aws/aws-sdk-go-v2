@@ -117,7 +117,9 @@ func TestCheckResponseSnapshot_AcceptInputDeviceTransfer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptInputDeviceTransfer(context.Background(), &AcceptInputDeviceTransferInput{})
+	got, err := svc.AcceptInputDeviceTransfer(context.Background(), &AcceptInputDeviceTransferInput{
+		InputDeviceId: ptr.String("__InputDeviceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -163,7 +165,24 @@ func TestCheckResponseSnapshot_BatchDelete(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDelete(context.Background(), &BatchDeleteInput{})
+	got, err := svc.BatchDelete(context.Background(), &BatchDeleteInput{
+		ChannelIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		InputIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		InputSecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MultiplexIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -209,7 +228,16 @@ func TestCheckResponseSnapshot_BatchStart(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchStart(context.Background(), &BatchStartInput{})
+	got, err := svc.BatchStart(context.Background(), &BatchStartInput{
+		ChannelIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MultiplexIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -255,7 +283,16 @@ func TestCheckResponseSnapshot_BatchStop(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchStop(context.Background(), &BatchStopInput{})
+	got, err := svc.BatchStop(context.Background(), &BatchStopInput{
+		ChannelIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MultiplexIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1031,7 +1068,393 @@ func TestCheckResponseSnapshot_BatchUpdateSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchUpdateSchedule(context.Background(), &BatchUpdateScheduleInput{})
+	got, err := svc.BatchUpdateSchedule(context.Background(), &BatchUpdateScheduleInput{
+		ChannelId: ptr.String("__ChannelId__"),
+		Creates: &types.BatchScheduleActionCreateRequest{
+			ScheduleActions: []types.ScheduleAction{
+				{
+					ActionName: ptr.String("__ActionName__"),
+					ScheduleActionSettings: &types.ScheduleActionSettings{
+						HlsId3SegmentTaggingSettings: &types.HlsId3SegmentTaggingScheduleActionSettings{
+							Tag: ptr.String("__Tag__"),
+							Id3: ptr.String("__Id3__"),
+						},
+						HlsTimedMetadataSettings: &types.HlsTimedMetadataScheduleActionSettings{
+							Id3: ptr.String("__Id3__"),
+						},
+						InputPrepareSettings: &types.InputPrepareScheduleActionSettings{
+							InputAttachmentNameReference: ptr.String("__InputAttachmentNameReference__"),
+							InputClippingSettings: &types.InputClippingSettings{
+								InputTimecodeSource: types.InputTimecodeSource("ZEROBASED"),
+								StartTimecode: &types.StartTimecode{
+									Timecode: ptr.String("__Timecode__"),
+								},
+								StopTimecode: &types.StopTimecode{
+									LastFrameClippingBehavior: types.LastFrameClippingBehavior("EXCLUDE_LAST_FRAME"),
+									Timecode:                  ptr.String("__Timecode__"),
+								},
+							},
+							UrlPath: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						InputSwitchSettings: &types.InputSwitchScheduleActionSettings{
+							InputAttachmentNameReference: ptr.String("__InputAttachmentNameReference__"),
+							InputClippingSettings: &types.InputClippingSettings{
+								InputTimecodeSource: types.InputTimecodeSource("ZEROBASED"),
+								StartTimecode: &types.StartTimecode{
+									Timecode: ptr.String("__Timecode__"),
+								},
+								StopTimecode: &types.StopTimecode{
+									LastFrameClippingBehavior: types.LastFrameClippingBehavior("EXCLUDE_LAST_FRAME"),
+									Timecode:                  ptr.String("__Timecode__"),
+								},
+							},
+							UrlPath: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						MotionGraphicsImageActivateSettings: &types.MotionGraphicsActivateScheduleActionSettings{
+							Duration:      ptr.Int64(1),
+							PasswordParam: ptr.String("__PasswordParam__"),
+							Url:           ptr.String("__Url__"),
+							Username:      ptr.String("__Username__"),
+						},
+						MotionGraphicsImageDeactivateSettings: &types.MotionGraphicsDeactivateScheduleActionSettings{},
+						PauseStateSettings: &types.PauseStateScheduleActionSettings{
+							Pipelines: []types.PipelinePauseStateSettings{
+								{
+									PipelineId: types.PipelineId("PIPELINE_0"),
+								},
+								{
+									PipelineId: types.PipelineId("PIPELINE_0"),
+								},
+							},
+						},
+						Scte35InputSettings: &types.Scte35InputScheduleActionSettings{
+							InputAttachmentNameReference: ptr.String("__InputAttachmentNameReference__"),
+							Mode:                         types.Scte35InputMode("FIXED"),
+						},
+						Scte35ReturnToNetworkSettings: &types.Scte35ReturnToNetworkScheduleActionSettings{
+							SpliceEventId: ptr.Int64(1),
+						},
+						Scte35SpliceInsertSettings: &types.Scte35SpliceInsertScheduleActionSettings{
+							Duration:      ptr.Int64(1),
+							SpliceEventId: ptr.Int64(1),
+						},
+						Scte35TimeSignalSettings: &types.Scte35TimeSignalScheduleActionSettings{
+							Scte35Descriptors: []types.Scte35Descriptor{
+								{
+									Scte35DescriptorSettings: &types.Scte35DescriptorSettings{
+										SegmentationDescriptorScte35DescriptorSettings: &types.Scte35SegmentationDescriptor{
+											DeliveryRestrictions: &types.Scte35DeliveryRestrictions{
+												ArchiveAllowedFlag:     types.Scte35ArchiveAllowedFlag("ARCHIVE_NOT_ALLOWED"),
+												DeviceRestrictions:     types.Scte35DeviceRestrictions("NONE"),
+												NoRegionalBlackoutFlag: types.Scte35NoRegionalBlackoutFlag("REGIONAL_BLACKOUT"),
+												WebDeliveryAllowedFlag: types.Scte35WebDeliveryAllowedFlag("WEB_DELIVERY_NOT_ALLOWED"),
+											},
+											SegmentNum:                  ptr.Int32(1),
+											SegmentationCancelIndicator: types.Scte35SegmentationCancelIndicator("SEGMENTATION_EVENT_NOT_CANCELED"),
+											SegmentationDuration:        ptr.Int64(1),
+											SegmentationEventId:         ptr.Int64(1),
+											SegmentationTypeId:          ptr.Int32(1),
+											SegmentationUpid:            ptr.String("__SegmentationUpid__"),
+											SegmentationUpidType:        ptr.Int32(1),
+											SegmentsExpected:            ptr.Int32(1),
+											SubSegmentNum:               ptr.Int32(1),
+											SubSegmentsExpected:         ptr.Int32(1),
+										},
+									},
+								},
+								{
+									Scte35DescriptorSettings: &types.Scte35DescriptorSettings{
+										SegmentationDescriptorScte35DescriptorSettings: &types.Scte35SegmentationDescriptor{
+											DeliveryRestrictions: &types.Scte35DeliveryRestrictions{
+												ArchiveAllowedFlag:     types.Scte35ArchiveAllowedFlag("ARCHIVE_NOT_ALLOWED"),
+												DeviceRestrictions:     types.Scte35DeviceRestrictions("NONE"),
+												NoRegionalBlackoutFlag: types.Scte35NoRegionalBlackoutFlag("REGIONAL_BLACKOUT"),
+												WebDeliveryAllowedFlag: types.Scte35WebDeliveryAllowedFlag("WEB_DELIVERY_NOT_ALLOWED"),
+											},
+											SegmentNum:                  ptr.Int32(1),
+											SegmentationCancelIndicator: types.Scte35SegmentationCancelIndicator("SEGMENTATION_EVENT_NOT_CANCELED"),
+											SegmentationDuration:        ptr.Int64(1),
+											SegmentationEventId:         ptr.Int64(1),
+											SegmentationTypeId:          ptr.Int32(1),
+											SegmentationUpid:            ptr.String("__SegmentationUpid__"),
+											SegmentationUpidType:        ptr.Int32(1),
+											SegmentsExpected:            ptr.Int32(1),
+											SubSegmentNum:               ptr.Int32(1),
+											SubSegmentsExpected:         ptr.Int32(1),
+										},
+									},
+								},
+							},
+						},
+						StaticImageActivateSettings: &types.StaticImageActivateScheduleActionSettings{
+							Duration: ptr.Int32(1),
+							FadeIn:   ptr.Int32(1),
+							FadeOut:  ptr.Int32(1),
+							Height:   ptr.Int32(1),
+							Image: &types.InputLocation{
+								PasswordParam: ptr.String("__PasswordParam__"),
+								Uri:           ptr.String("__Uri__"),
+								Username:      ptr.String("__Username__"),
+							},
+							ImageX:  ptr.Int32(1),
+							ImageY:  ptr.Int32(1),
+							Layer:   ptr.Int32(1),
+							Opacity: ptr.Int32(1),
+							Width:   ptr.Int32(1),
+						},
+						StaticImageDeactivateSettings: &types.StaticImageDeactivateScheduleActionSettings{
+							FadeOut: ptr.Int32(1),
+							Layer:   ptr.Int32(1),
+						},
+						StaticImageOutputActivateSettings: &types.StaticImageOutputActivateScheduleActionSettings{
+							Duration: ptr.Int32(1),
+							FadeIn:   ptr.Int32(1),
+							FadeOut:  ptr.Int32(1),
+							Height:   ptr.Int32(1),
+							Image: &types.InputLocation{
+								PasswordParam: ptr.String("__PasswordParam__"),
+								Uri:           ptr.String("__Uri__"),
+								Username:      ptr.String("__Username__"),
+							},
+							ImageX:  ptr.Int32(1),
+							ImageY:  ptr.Int32(1),
+							Layer:   ptr.Int32(1),
+							Opacity: ptr.Int32(1),
+							OutputNames: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Width: ptr.Int32(1),
+						},
+						StaticImageOutputDeactivateSettings: &types.StaticImageOutputDeactivateScheduleActionSettings{
+							FadeOut: ptr.Int32(1),
+							Layer:   ptr.Int32(1),
+							OutputNames: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Id3SegmentTaggingSettings: &types.Id3SegmentTaggingScheduleActionSettings{
+							Id3: ptr.String("__Id3__"),
+							Tag: ptr.String("__Tag__"),
+						},
+						TimedMetadataSettings: &types.TimedMetadataScheduleActionSettings{
+							Id3: ptr.String("__Id3__"),
+						},
+					},
+					ScheduleActionStartSettings: &types.ScheduleActionStartSettings{
+						FixedModeScheduleActionStartSettings: &types.FixedModeScheduleActionStartSettings{
+							Time: ptr.String("__Time__"),
+						},
+						FollowModeScheduleActionStartSettings: &types.FollowModeScheduleActionStartSettings{
+							FollowPoint:         types.FollowPoint("END"),
+							ReferenceActionName: ptr.String("__ReferenceActionName__"),
+						},
+						ImmediateModeScheduleActionStartSettings: &types.ImmediateModeScheduleActionStartSettings{},
+					},
+				},
+				{
+					ActionName: ptr.String("__ActionName__"),
+					ScheduleActionSettings: &types.ScheduleActionSettings{
+						HlsId3SegmentTaggingSettings: &types.HlsId3SegmentTaggingScheduleActionSettings{
+							Tag: ptr.String("__Tag__"),
+							Id3: ptr.String("__Id3__"),
+						},
+						HlsTimedMetadataSettings: &types.HlsTimedMetadataScheduleActionSettings{
+							Id3: ptr.String("__Id3__"),
+						},
+						InputPrepareSettings: &types.InputPrepareScheduleActionSettings{
+							InputAttachmentNameReference: ptr.String("__InputAttachmentNameReference__"),
+							InputClippingSettings: &types.InputClippingSettings{
+								InputTimecodeSource: types.InputTimecodeSource("ZEROBASED"),
+								StartTimecode: &types.StartTimecode{
+									Timecode: ptr.String("__Timecode__"),
+								},
+								StopTimecode: &types.StopTimecode{
+									LastFrameClippingBehavior: types.LastFrameClippingBehavior("EXCLUDE_LAST_FRAME"),
+									Timecode:                  ptr.String("__Timecode__"),
+								},
+							},
+							UrlPath: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						InputSwitchSettings: &types.InputSwitchScheduleActionSettings{
+							InputAttachmentNameReference: ptr.String("__InputAttachmentNameReference__"),
+							InputClippingSettings: &types.InputClippingSettings{
+								InputTimecodeSource: types.InputTimecodeSource("ZEROBASED"),
+								StartTimecode: &types.StartTimecode{
+									Timecode: ptr.String("__Timecode__"),
+								},
+								StopTimecode: &types.StopTimecode{
+									LastFrameClippingBehavior: types.LastFrameClippingBehavior("EXCLUDE_LAST_FRAME"),
+									Timecode:                  ptr.String("__Timecode__"),
+								},
+							},
+							UrlPath: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						MotionGraphicsImageActivateSettings: &types.MotionGraphicsActivateScheduleActionSettings{
+							Duration:      ptr.Int64(1),
+							PasswordParam: ptr.String("__PasswordParam__"),
+							Url:           ptr.String("__Url__"),
+							Username:      ptr.String("__Username__"),
+						},
+						MotionGraphicsImageDeactivateSettings: &types.MotionGraphicsDeactivateScheduleActionSettings{},
+						PauseStateSettings: &types.PauseStateScheduleActionSettings{
+							Pipelines: []types.PipelinePauseStateSettings{
+								{
+									PipelineId: types.PipelineId("PIPELINE_0"),
+								},
+								{
+									PipelineId: types.PipelineId("PIPELINE_0"),
+								},
+							},
+						},
+						Scte35InputSettings: &types.Scte35InputScheduleActionSettings{
+							InputAttachmentNameReference: ptr.String("__InputAttachmentNameReference__"),
+							Mode:                         types.Scte35InputMode("FIXED"),
+						},
+						Scte35ReturnToNetworkSettings: &types.Scte35ReturnToNetworkScheduleActionSettings{
+							SpliceEventId: ptr.Int64(1),
+						},
+						Scte35SpliceInsertSettings: &types.Scte35SpliceInsertScheduleActionSettings{
+							Duration:      ptr.Int64(1),
+							SpliceEventId: ptr.Int64(1),
+						},
+						Scte35TimeSignalSettings: &types.Scte35TimeSignalScheduleActionSettings{
+							Scte35Descriptors: []types.Scte35Descriptor{
+								{
+									Scte35DescriptorSettings: &types.Scte35DescriptorSettings{
+										SegmentationDescriptorScte35DescriptorSettings: &types.Scte35SegmentationDescriptor{
+											DeliveryRestrictions: &types.Scte35DeliveryRestrictions{
+												ArchiveAllowedFlag:     types.Scte35ArchiveAllowedFlag("ARCHIVE_NOT_ALLOWED"),
+												DeviceRestrictions:     types.Scte35DeviceRestrictions("NONE"),
+												NoRegionalBlackoutFlag: types.Scte35NoRegionalBlackoutFlag("REGIONAL_BLACKOUT"),
+												WebDeliveryAllowedFlag: types.Scte35WebDeliveryAllowedFlag("WEB_DELIVERY_NOT_ALLOWED"),
+											},
+											SegmentNum:                  ptr.Int32(1),
+											SegmentationCancelIndicator: types.Scte35SegmentationCancelIndicator("SEGMENTATION_EVENT_NOT_CANCELED"),
+											SegmentationDuration:        ptr.Int64(1),
+											SegmentationEventId:         ptr.Int64(1),
+											SegmentationTypeId:          ptr.Int32(1),
+											SegmentationUpid:            ptr.String("__SegmentationUpid__"),
+											SegmentationUpidType:        ptr.Int32(1),
+											SegmentsExpected:            ptr.Int32(1),
+											SubSegmentNum:               ptr.Int32(1),
+											SubSegmentsExpected:         ptr.Int32(1),
+										},
+									},
+								},
+								{
+									Scte35DescriptorSettings: &types.Scte35DescriptorSettings{
+										SegmentationDescriptorScte35DescriptorSettings: &types.Scte35SegmentationDescriptor{
+											DeliveryRestrictions: &types.Scte35DeliveryRestrictions{
+												ArchiveAllowedFlag:     types.Scte35ArchiveAllowedFlag("ARCHIVE_NOT_ALLOWED"),
+												DeviceRestrictions:     types.Scte35DeviceRestrictions("NONE"),
+												NoRegionalBlackoutFlag: types.Scte35NoRegionalBlackoutFlag("REGIONAL_BLACKOUT"),
+												WebDeliveryAllowedFlag: types.Scte35WebDeliveryAllowedFlag("WEB_DELIVERY_NOT_ALLOWED"),
+											},
+											SegmentNum:                  ptr.Int32(1),
+											SegmentationCancelIndicator: types.Scte35SegmentationCancelIndicator("SEGMENTATION_EVENT_NOT_CANCELED"),
+											SegmentationDuration:        ptr.Int64(1),
+											SegmentationEventId:         ptr.Int64(1),
+											SegmentationTypeId:          ptr.Int32(1),
+											SegmentationUpid:            ptr.String("__SegmentationUpid__"),
+											SegmentationUpidType:        ptr.Int32(1),
+											SegmentsExpected:            ptr.Int32(1),
+											SubSegmentNum:               ptr.Int32(1),
+											SubSegmentsExpected:         ptr.Int32(1),
+										},
+									},
+								},
+							},
+						},
+						StaticImageActivateSettings: &types.StaticImageActivateScheduleActionSettings{
+							Duration: ptr.Int32(1),
+							FadeIn:   ptr.Int32(1),
+							FadeOut:  ptr.Int32(1),
+							Height:   ptr.Int32(1),
+							Image: &types.InputLocation{
+								PasswordParam: ptr.String("__PasswordParam__"),
+								Uri:           ptr.String("__Uri__"),
+								Username:      ptr.String("__Username__"),
+							},
+							ImageX:  ptr.Int32(1),
+							ImageY:  ptr.Int32(1),
+							Layer:   ptr.Int32(1),
+							Opacity: ptr.Int32(1),
+							Width:   ptr.Int32(1),
+						},
+						StaticImageDeactivateSettings: &types.StaticImageDeactivateScheduleActionSettings{
+							FadeOut: ptr.Int32(1),
+							Layer:   ptr.Int32(1),
+						},
+						StaticImageOutputActivateSettings: &types.StaticImageOutputActivateScheduleActionSettings{
+							Duration: ptr.Int32(1),
+							FadeIn:   ptr.Int32(1),
+							FadeOut:  ptr.Int32(1),
+							Height:   ptr.Int32(1),
+							Image: &types.InputLocation{
+								PasswordParam: ptr.String("__PasswordParam__"),
+								Uri:           ptr.String("__Uri__"),
+								Username:      ptr.String("__Username__"),
+							},
+							ImageX:  ptr.Int32(1),
+							ImageY:  ptr.Int32(1),
+							Layer:   ptr.Int32(1),
+							Opacity: ptr.Int32(1),
+							OutputNames: []string{
+								"__Member__",
+								"__Member__",
+							},
+							Width: ptr.Int32(1),
+						},
+						StaticImageOutputDeactivateSettings: &types.StaticImageOutputDeactivateScheduleActionSettings{
+							FadeOut: ptr.Int32(1),
+							Layer:   ptr.Int32(1),
+							OutputNames: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						Id3SegmentTaggingSettings: &types.Id3SegmentTaggingScheduleActionSettings{
+							Id3: ptr.String("__Id3__"),
+							Tag: ptr.String("__Tag__"),
+						},
+						TimedMetadataSettings: &types.TimedMetadataScheduleActionSettings{
+							Id3: ptr.String("__Id3__"),
+						},
+					},
+					ScheduleActionStartSettings: &types.ScheduleActionStartSettings{
+						FixedModeScheduleActionStartSettings: &types.FixedModeScheduleActionStartSettings{
+							Time: ptr.String("__Time__"),
+						},
+						FollowModeScheduleActionStartSettings: &types.FollowModeScheduleActionStartSettings{
+							FollowPoint:         types.FollowPoint("END"),
+							ReferenceActionName: ptr.String("__ReferenceActionName__"),
+						},
+						ImmediateModeScheduleActionStartSettings: &types.ImmediateModeScheduleActionStartSettings{},
+					},
+				},
+			},
+		},
+		Deletes: &types.BatchScheduleActionDeleteRequest{
+			ActionNames: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1050,7 +1473,9 @@ func TestCheckResponseSnapshot_CancelInputDeviceTransfer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelInputDeviceTransfer(context.Background(), &CancelInputDeviceTransferInput{})
+	got, err := svc.CancelInputDeviceTransfer(context.Background(), &CancelInputDeviceTransferInput{
+		InputDeviceId: ptr.String("__InputDeviceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1069,7 +1494,9 @@ func TestCheckResponseSnapshot_ClaimDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ClaimDevice(context.Background(), &ClaimDeviceInput{})
+	got, err := svc.ClaimDevice(context.Background(), &ClaimDeviceInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4489,7 +4916,3399 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateChannel(context.Background(), &CreateChannelInput{})
+	got, err := svc.CreateChannel(context.Background(), &CreateChannelInput{
+		CdiInputSpecification: &types.CdiInputSpecification{
+			Resolution: types.CdiInputResolution("SD"),
+		},
+		ChannelClass: types.ChannelClass("STANDARD"),
+		Destinations: []types.OutputDestination{
+			{
+				Id: ptr.String("__Id__"),
+				MediaPackageSettings: []types.MediaPackageOutputDestinationSettings{
+					{
+						ChannelId:              ptr.String("__ChannelId__"),
+						ChannelGroup:           ptr.String("__ChannelGroup__"),
+						ChannelName:            ptr.String("__ChannelName__"),
+						ChannelEndpointId:      ptr.String("__ChannelEndpointId__"),
+						MediaPackageRegionName: ptr.String("__MediaPackageRegionName__"),
+					},
+					{
+						ChannelId:              ptr.String("__ChannelId__"),
+						ChannelGroup:           ptr.String("__ChannelGroup__"),
+						ChannelName:            ptr.String("__ChannelName__"),
+						ChannelEndpointId:      ptr.String("__ChannelEndpointId__"),
+						MediaPackageRegionName: ptr.String("__MediaPackageRegionName__"),
+					},
+				},
+				MultiplexSettings: &types.MultiplexProgramChannelDestinationSettings{
+					MultiplexId: ptr.String("__MultiplexId__"),
+					ProgramName: ptr.String("__ProgramName__"),
+				},
+				Settings: []types.OutputDestinationSettings{
+					{
+						PasswordParam: ptr.String("__PasswordParam__"),
+						StreamName:    ptr.String("__StreamName__"),
+						Url:           ptr.String("__Url__"),
+						Username:      ptr.String("__Username__"),
+					},
+					{
+						PasswordParam: ptr.String("__PasswordParam__"),
+						StreamName:    ptr.String("__StreamName__"),
+						Url:           ptr.String("__Url__"),
+						Username:      ptr.String("__Username__"),
+					},
+				},
+				SrtSettings: []types.SrtOutputDestinationSettings{
+					{
+						EncryptionPassphraseSecretArn: ptr.String("__EncryptionPassphraseSecretArn__"),
+						StreamId:                      ptr.String("__StreamId__"),
+						Url:                           ptr.String("__Url__"),
+						ConnectionMode:                types.ConnectionMode("CALLER"),
+						ListenerPort:                  ptr.Int32(1),
+					},
+					{
+						EncryptionPassphraseSecretArn: ptr.String("__EncryptionPassphraseSecretArn__"),
+						StreamId:                      ptr.String("__StreamId__"),
+						Url:                           ptr.String("__Url__"),
+						ConnectionMode:                types.ConnectionMode("CALLER"),
+						ListenerPort:                  ptr.Int32(1),
+					},
+				},
+				LogicalInterfaceNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MediaConnectRouterSettings: []types.MediaConnectRouterOutputDestinationSettings{
+					{
+						EncryptionType: types.MediaConnectRouterOutputEncryptionType("AUTOMATIC"),
+						SecretArn:      ptr.String("__SecretArn__"),
+					},
+					{
+						EncryptionType: types.MediaConnectRouterOutputEncryptionType("AUTOMATIC"),
+						SecretArn:      ptr.String("__SecretArn__"),
+					},
+				},
+			},
+			{
+				Id: ptr.String("__Id__"),
+				MediaPackageSettings: []types.MediaPackageOutputDestinationSettings{
+					{
+						ChannelId:              ptr.String("__ChannelId__"),
+						ChannelGroup:           ptr.String("__ChannelGroup__"),
+						ChannelName:            ptr.String("__ChannelName__"),
+						ChannelEndpointId:      ptr.String("__ChannelEndpointId__"),
+						MediaPackageRegionName: ptr.String("__MediaPackageRegionName__"),
+					},
+					{
+						ChannelId:              ptr.String("__ChannelId__"),
+						ChannelGroup:           ptr.String("__ChannelGroup__"),
+						ChannelName:            ptr.String("__ChannelName__"),
+						ChannelEndpointId:      ptr.String("__ChannelEndpointId__"),
+						MediaPackageRegionName: ptr.String("__MediaPackageRegionName__"),
+					},
+				},
+				MultiplexSettings: &types.MultiplexProgramChannelDestinationSettings{
+					MultiplexId: ptr.String("__MultiplexId__"),
+					ProgramName: ptr.String("__ProgramName__"),
+				},
+				Settings: []types.OutputDestinationSettings{
+					{
+						PasswordParam: ptr.String("__PasswordParam__"),
+						StreamName:    ptr.String("__StreamName__"),
+						Url:           ptr.String("__Url__"),
+						Username:      ptr.String("__Username__"),
+					},
+					{
+						PasswordParam: ptr.String("__PasswordParam__"),
+						StreamName:    ptr.String("__StreamName__"),
+						Url:           ptr.String("__Url__"),
+						Username:      ptr.String("__Username__"),
+					},
+				},
+				SrtSettings: []types.SrtOutputDestinationSettings{
+					{
+						EncryptionPassphraseSecretArn: ptr.String("__EncryptionPassphraseSecretArn__"),
+						StreamId:                      ptr.String("__StreamId__"),
+						Url:                           ptr.String("__Url__"),
+						ConnectionMode:                types.ConnectionMode("CALLER"),
+						ListenerPort:                  ptr.Int32(1),
+					},
+					{
+						EncryptionPassphraseSecretArn: ptr.String("__EncryptionPassphraseSecretArn__"),
+						StreamId:                      ptr.String("__StreamId__"),
+						Url:                           ptr.String("__Url__"),
+						ConnectionMode:                types.ConnectionMode("CALLER"),
+						ListenerPort:                  ptr.Int32(1),
+					},
+				},
+				LogicalInterfaceNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MediaConnectRouterSettings: []types.MediaConnectRouterOutputDestinationSettings{
+					{
+						EncryptionType: types.MediaConnectRouterOutputEncryptionType("AUTOMATIC"),
+						SecretArn:      ptr.String("__SecretArn__"),
+					},
+					{
+						EncryptionType: types.MediaConnectRouterOutputEncryptionType("AUTOMATIC"),
+						SecretArn:      ptr.String("__SecretArn__"),
+					},
+				},
+			},
+		},
+		EncoderSettings: &types.EncoderSettings{
+			AudioDescriptions: []types.AudioDescription{
+				{
+					AudioNormalizationSettings: &types.AudioNormalizationSettings{
+						Algorithm:            types.AudioNormalizationAlgorithm("ITU_1770_1"),
+						AlgorithmControl:     types.AudioNormalizationAlgorithmControl("CORRECT_AUDIO"),
+						TargetLkfs:           ptr.Float64(1.0),
+						PeakCalculation:      types.AudioNormalizationPeakCalculation("NONE"),
+						PeakLimiterThreshold: ptr.Float64(1.0),
+					},
+					AudioSelectorName: ptr.String("__AudioSelectorName__"),
+					AudioType:         types.AudioType("CLEAN_EFFECTS"),
+					AudioTypeControl:  types.AudioDescriptionAudioTypeControl("FOLLOW_INPUT"),
+					AudioWatermarkingSettings: &types.AudioWatermarkSettings{
+						NielsenWatermarksSettings: &types.NielsenWatermarksSettings{
+							NielsenCbetSettings: &types.NielsenCBET{
+								CbetCheckDigitString: ptr.String("__CbetCheckDigitString__"),
+								CbetStepaside:        types.NielsenWatermarksCbetStepaside("DISABLED"),
+								Csid:                 ptr.String("__Csid__"),
+							},
+							NielsenDistributionType: types.NielsenWatermarksDistributionTypes("FINAL_DISTRIBUTOR"),
+							NielsenNaesIiNwSettings: &types.NielsenNaesIiNw{
+								CheckDigitString: ptr.String("__CheckDigitString__"),
+								Sid:              ptr.Float64(1.0),
+								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
+							},
+						},
+					},
+					CodecSettings: &types.AudioCodecSettings{
+						AacSettings: &types.AacSettings{
+							Bitrate:         ptr.Float64(1.0),
+							CodingMode:      types.AacCodingMode("AD_RECEIVER_MIX"),
+							InputType:       types.AacInputType("BROADCASTER_MIXED_AD"),
+							Profile:         types.AacProfile("HEV1"),
+							RateControlMode: types.AacRateControlMode("CBR"),
+							RawFormat:       types.AacRawFormat("LATM_LOAS"),
+							SampleRate:      ptr.Float64(1.0),
+							Spec:            types.AacSpec("MPEG2"),
+							VbrQuality:      types.AacVbrQuality("HIGH"),
+						},
+						Ac3Settings: &types.Ac3Settings{
+							Bitrate:            ptr.Float64(1.0),
+							BitstreamMode:      types.Ac3BitstreamMode("COMMENTARY"),
+							CodingMode:         types.Ac3CodingMode("CODING_MODE_1_0"),
+							Dialnorm:           ptr.Int32(1),
+							DrcProfile:         types.Ac3DrcProfile("FILM_STANDARD"),
+							LfeFilter:          types.Ac3LfeFilter("DISABLED"),
+							MetadataControl:    types.Ac3MetadataControl("FOLLOW_INPUT"),
+							AttenuationControl: types.Ac3AttenuationControl("ATTENUATE_3_DB"),
+						},
+						Eac3AtmosSettings: &types.Eac3AtmosSettings{
+							Bitrate:      ptr.Float64(1.0),
+							CodingMode:   types.Eac3AtmosCodingMode("CODING_MODE_5_1_4"),
+							Dialnorm:     ptr.Int32(1),
+							DrcLine:      types.Eac3AtmosDrcLine("FILM_LIGHT"),
+							DrcRf:        types.Eac3AtmosDrcRf("FILM_LIGHT"),
+							HeightTrim:   ptr.Float64(1.0),
+							SurroundTrim: ptr.Float64(1.0),
+						},
+						Eac3Settings: &types.Eac3Settings{
+							AttenuationControl:   types.Eac3AttenuationControl("ATTENUATE_3_DB"),
+							Bitrate:              ptr.Float64(1.0),
+							BitstreamMode:        types.Eac3BitstreamMode("COMMENTARY"),
+							CodingMode:           types.Eac3CodingMode("CODING_MODE_1_0"),
+							DcFilter:             types.Eac3DcFilter("DISABLED"),
+							Dialnorm:             ptr.Int32(1),
+							DrcLine:              types.Eac3DrcLine("FILM_LIGHT"),
+							DrcRf:                types.Eac3DrcRf("FILM_LIGHT"),
+							LfeControl:           types.Eac3LfeControl("LFE"),
+							LfeFilter:            types.Eac3LfeFilter("DISABLED"),
+							LoRoCenterMixLevel:   ptr.Float64(1.0),
+							LoRoSurroundMixLevel: ptr.Float64(1.0),
+							LtRtCenterMixLevel:   ptr.Float64(1.0),
+							LtRtSurroundMixLevel: ptr.Float64(1.0),
+							MetadataControl:      types.Eac3MetadataControl("FOLLOW_INPUT"),
+							PassthroughControl:   types.Eac3PassthroughControl("NO_PASSTHROUGH"),
+							PhaseControl:         types.Eac3PhaseControl("NO_SHIFT"),
+							StereoDownmix:        types.Eac3StereoDownmix("DPL2"),
+							SurroundExMode:       types.Eac3SurroundExMode("DISABLED"),
+							SurroundMode:         types.Eac3SurroundMode("DISABLED"),
+						},
+						Mp2Settings: &types.Mp2Settings{
+							Bitrate:    ptr.Float64(1.0),
+							CodingMode: types.Mp2CodingMode("CODING_MODE_1_0"),
+							SampleRate: ptr.Float64(1.0),
+						},
+						PassThroughSettings: &types.PassThroughSettings{},
+						WavSettings: &types.WavSettings{
+							BitDepth:   ptr.Float64(1.0),
+							CodingMode: types.WavCodingMode("CODING_MODE_1_0"),
+							SampleRate: ptr.Float64(1.0),
+						},
+					},
+					LanguageCode:        ptr.String("__LanguageCode__"),
+					LanguageCodeControl: types.AudioDescriptionLanguageCodeControl("FOLLOW_INPUT"),
+					Name:                ptr.String("__Name__"),
+					RemixSettings: &types.RemixSettings{
+						ChannelMappings: []types.AudioChannelMapping{
+							{
+								InputChannelLevels: []types.InputChannelLevel{
+									{
+										Gain:         ptr.Int32(1),
+										InputChannel: ptr.Int32(1),
+									},
+									{
+										Gain:         ptr.Int32(1),
+										InputChannel: ptr.Int32(1),
+									},
+								},
+								OutputChannel: ptr.Int32(1),
+							},
+							{
+								InputChannelLevels: []types.InputChannelLevel{
+									{
+										Gain:         ptr.Int32(1),
+										InputChannel: ptr.Int32(1),
+									},
+									{
+										Gain:         ptr.Int32(1),
+										InputChannel: ptr.Int32(1),
+									},
+								},
+								OutputChannel: ptr.Int32(1),
+							},
+						},
+						ChannelsIn:  ptr.Int32(1),
+						ChannelsOut: ptr.Int32(1),
+					},
+					StreamName: ptr.String("__StreamName__"),
+					AudioDashRoles: []types.DashRoleAudio{
+						types.DashRoleAudio("ALTERNATE"),
+						types.DashRoleAudio("ALTERNATE"),
+					},
+					DvbDashAccessibility: types.DvbDashAccessibility("DVBDASH_1_VISUALLY_IMPAIRED"),
+				},
+				{
+					AudioNormalizationSettings: &types.AudioNormalizationSettings{
+						Algorithm:            types.AudioNormalizationAlgorithm("ITU_1770_1"),
+						AlgorithmControl:     types.AudioNormalizationAlgorithmControl("CORRECT_AUDIO"),
+						TargetLkfs:           ptr.Float64(1.0),
+						PeakCalculation:      types.AudioNormalizationPeakCalculation("NONE"),
+						PeakLimiterThreshold: ptr.Float64(1.0),
+					},
+					AudioSelectorName: ptr.String("__AudioSelectorName__"),
+					AudioType:         types.AudioType("CLEAN_EFFECTS"),
+					AudioTypeControl:  types.AudioDescriptionAudioTypeControl("FOLLOW_INPUT"),
+					AudioWatermarkingSettings: &types.AudioWatermarkSettings{
+						NielsenWatermarksSettings: &types.NielsenWatermarksSettings{
+							NielsenCbetSettings: &types.NielsenCBET{
+								CbetCheckDigitString: ptr.String("__CbetCheckDigitString__"),
+								CbetStepaside:        types.NielsenWatermarksCbetStepaside("DISABLED"),
+								Csid:                 ptr.String("__Csid__"),
+							},
+							NielsenDistributionType: types.NielsenWatermarksDistributionTypes("FINAL_DISTRIBUTOR"),
+							NielsenNaesIiNwSettings: &types.NielsenNaesIiNw{
+								CheckDigitString: ptr.String("__CheckDigitString__"),
+								Sid:              ptr.Float64(1.0),
+								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
+							},
+						},
+					},
+					CodecSettings: &types.AudioCodecSettings{
+						AacSettings: &types.AacSettings{
+							Bitrate:         ptr.Float64(1.0),
+							CodingMode:      types.AacCodingMode("AD_RECEIVER_MIX"),
+							InputType:       types.AacInputType("BROADCASTER_MIXED_AD"),
+							Profile:         types.AacProfile("HEV1"),
+							RateControlMode: types.AacRateControlMode("CBR"),
+							RawFormat:       types.AacRawFormat("LATM_LOAS"),
+							SampleRate:      ptr.Float64(1.0),
+							Spec:            types.AacSpec("MPEG2"),
+							VbrQuality:      types.AacVbrQuality("HIGH"),
+						},
+						Ac3Settings: &types.Ac3Settings{
+							Bitrate:            ptr.Float64(1.0),
+							BitstreamMode:      types.Ac3BitstreamMode("COMMENTARY"),
+							CodingMode:         types.Ac3CodingMode("CODING_MODE_1_0"),
+							Dialnorm:           ptr.Int32(1),
+							DrcProfile:         types.Ac3DrcProfile("FILM_STANDARD"),
+							LfeFilter:          types.Ac3LfeFilter("DISABLED"),
+							MetadataControl:    types.Ac3MetadataControl("FOLLOW_INPUT"),
+							AttenuationControl: types.Ac3AttenuationControl("ATTENUATE_3_DB"),
+						},
+						Eac3AtmosSettings: &types.Eac3AtmosSettings{
+							Bitrate:      ptr.Float64(1.0),
+							CodingMode:   types.Eac3AtmosCodingMode("CODING_MODE_5_1_4"),
+							Dialnorm:     ptr.Int32(1),
+							DrcLine:      types.Eac3AtmosDrcLine("FILM_LIGHT"),
+							DrcRf:        types.Eac3AtmosDrcRf("FILM_LIGHT"),
+							HeightTrim:   ptr.Float64(1.0),
+							SurroundTrim: ptr.Float64(1.0),
+						},
+						Eac3Settings: &types.Eac3Settings{
+							AttenuationControl:   types.Eac3AttenuationControl("ATTENUATE_3_DB"),
+							Bitrate:              ptr.Float64(1.0),
+							BitstreamMode:        types.Eac3BitstreamMode("COMMENTARY"),
+							CodingMode:           types.Eac3CodingMode("CODING_MODE_1_0"),
+							DcFilter:             types.Eac3DcFilter("DISABLED"),
+							Dialnorm:             ptr.Int32(1),
+							DrcLine:              types.Eac3DrcLine("FILM_LIGHT"),
+							DrcRf:                types.Eac3DrcRf("FILM_LIGHT"),
+							LfeControl:           types.Eac3LfeControl("LFE"),
+							LfeFilter:            types.Eac3LfeFilter("DISABLED"),
+							LoRoCenterMixLevel:   ptr.Float64(1.0),
+							LoRoSurroundMixLevel: ptr.Float64(1.0),
+							LtRtCenterMixLevel:   ptr.Float64(1.0),
+							LtRtSurroundMixLevel: ptr.Float64(1.0),
+							MetadataControl:      types.Eac3MetadataControl("FOLLOW_INPUT"),
+							PassthroughControl:   types.Eac3PassthroughControl("NO_PASSTHROUGH"),
+							PhaseControl:         types.Eac3PhaseControl("NO_SHIFT"),
+							StereoDownmix:        types.Eac3StereoDownmix("DPL2"),
+							SurroundExMode:       types.Eac3SurroundExMode("DISABLED"),
+							SurroundMode:         types.Eac3SurroundMode("DISABLED"),
+						},
+						Mp2Settings: &types.Mp2Settings{
+							Bitrate:    ptr.Float64(1.0),
+							CodingMode: types.Mp2CodingMode("CODING_MODE_1_0"),
+							SampleRate: ptr.Float64(1.0),
+						},
+						PassThroughSettings: &types.PassThroughSettings{},
+						WavSettings: &types.WavSettings{
+							BitDepth:   ptr.Float64(1.0),
+							CodingMode: types.WavCodingMode("CODING_MODE_1_0"),
+							SampleRate: ptr.Float64(1.0),
+						},
+					},
+					LanguageCode:        ptr.String("__LanguageCode__"),
+					LanguageCodeControl: types.AudioDescriptionLanguageCodeControl("FOLLOW_INPUT"),
+					Name:                ptr.String("__Name__"),
+					RemixSettings: &types.RemixSettings{
+						ChannelMappings: []types.AudioChannelMapping{
+							{
+								InputChannelLevels: []types.InputChannelLevel{
+									{
+										Gain:         ptr.Int32(1),
+										InputChannel: ptr.Int32(1),
+									},
+									{
+										Gain:         ptr.Int32(1),
+										InputChannel: ptr.Int32(1),
+									},
+								},
+								OutputChannel: ptr.Int32(1),
+							},
+							{
+								InputChannelLevels: []types.InputChannelLevel{
+									{
+										Gain:         ptr.Int32(1),
+										InputChannel: ptr.Int32(1),
+									},
+									{
+										Gain:         ptr.Int32(1),
+										InputChannel: ptr.Int32(1),
+									},
+								},
+								OutputChannel: ptr.Int32(1),
+							},
+						},
+						ChannelsIn:  ptr.Int32(1),
+						ChannelsOut: ptr.Int32(1),
+					},
+					StreamName: ptr.String("__StreamName__"),
+					AudioDashRoles: []types.DashRoleAudio{
+						types.DashRoleAudio("ALTERNATE"),
+						types.DashRoleAudio("ALTERNATE"),
+					},
+					DvbDashAccessibility: types.DvbDashAccessibility("DVBDASH_1_VISUALLY_IMPAIRED"),
+				},
+			},
+			AvailBlanking: &types.AvailBlanking{
+				AvailBlankingImage: &types.InputLocation{
+					PasswordParam: ptr.String("__PasswordParam__"),
+					Uri:           ptr.String("__Uri__"),
+					Username:      ptr.String("__Username__"),
+				},
+				State: types.AvailBlankingState("DISABLED"),
+			},
+			AvailConfiguration: &types.AvailConfiguration{
+				AvailSettings: &types.AvailSettings{
+					Esam: &types.Esam{
+						AcquisitionPointId: ptr.String("__AcquisitionPointId__"),
+						AdAvailOffset:      ptr.Int32(1),
+						PasswordParam:      ptr.String("__PasswordParam__"),
+						PoisEndpoint:       ptr.String("__PoisEndpoint__"),
+						Username:           ptr.String("__Username__"),
+						ZoneIdentity:       ptr.String("__ZoneIdentity__"),
+					},
+					Scte35SpliceInsert: &types.Scte35SpliceInsert{
+						AdAvailOffset:          ptr.Int32(1),
+						NoRegionalBlackoutFlag: types.Scte35SpliceInsertNoRegionalBlackoutBehavior("FOLLOW"),
+						WebDeliveryAllowedFlag: types.Scte35SpliceInsertWebDeliveryAllowedBehavior("FOLLOW"),
+					},
+					Scte35TimeSignalApos: &types.Scte35TimeSignalApos{
+						AdAvailOffset:          ptr.Int32(1),
+						NoRegionalBlackoutFlag: types.Scte35AposNoRegionalBlackoutBehavior("FOLLOW"),
+						WebDeliveryAllowedFlag: types.Scte35AposWebDeliveryAllowedBehavior("FOLLOW"),
+					},
+				},
+				Scte35SegmentationScope: types.Scte35SegmentationScope("ALL_OUTPUT_GROUPS"),
+			},
+			BlackoutSlate: &types.BlackoutSlate{
+				BlackoutSlateImage: &types.InputLocation{
+					PasswordParam: ptr.String("__PasswordParam__"),
+					Uri:           ptr.String("__Uri__"),
+					Username:      ptr.String("__Username__"),
+				},
+				NetworkEndBlackout: types.BlackoutSlateNetworkEndBlackout("DISABLED"),
+				NetworkEndBlackoutImage: &types.InputLocation{
+					PasswordParam: ptr.String("__PasswordParam__"),
+					Uri:           ptr.String("__Uri__"),
+					Username:      ptr.String("__Username__"),
+				},
+				NetworkId: ptr.String("__NetworkId__"),
+				State:     types.BlackoutSlateState("DISABLED"),
+			},
+			CaptionDescriptions: []types.CaptionDescription{
+				{
+					Accessibility:       types.AccessibilityType("DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES"),
+					CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
+					DestinationSettings: &types.CaptionDestinationSettings{
+						AribDestinationSettings: &types.AribDestinationSettings{},
+						BurnInDestinationSettings: &types.BurnInDestinationSettings{
+							Alignment:         types.BurnInAlignment("CENTERED"),
+							BackgroundColor:   types.BurnInBackgroundColor("BLACK"),
+							BackgroundOpacity: ptr.Int32(1),
+							Font: &types.InputLocation{
+								PasswordParam: ptr.String("__PasswordParam__"),
+								Uri:           ptr.String("__Uri__"),
+								Username:      ptr.String("__Username__"),
+							},
+							FontColor:           types.BurnInFontColor("BLACK"),
+							FontOpacity:         ptr.Int32(1),
+							FontResolution:      ptr.Int32(1),
+							FontSize:            ptr.String("__FontSize__"),
+							OutlineColor:        types.BurnInOutlineColor("BLACK"),
+							OutlineSize:         ptr.Int32(1),
+							ShadowColor:         types.BurnInShadowColor("BLACK"),
+							ShadowOpacity:       ptr.Int32(1),
+							ShadowXOffset:       ptr.Int32(1),
+							ShadowYOffset:       ptr.Int32(1),
+							TeletextGridControl: types.BurnInTeletextGridControl("FIXED"),
+							XPosition:           ptr.Int32(1),
+							YPosition:           ptr.Int32(1),
+							SubtitleRows:        types.BurnInDestinationSubtitleRows("ROWS_16"),
+						},
+						DvbSubDestinationSettings: &types.DvbSubDestinationSettings{
+							Alignment:         types.DvbSubDestinationAlignment("CENTERED"),
+							BackgroundColor:   types.DvbSubDestinationBackgroundColor("BLACK"),
+							BackgroundOpacity: ptr.Int32(1),
+							Font: &types.InputLocation{
+								PasswordParam: ptr.String("__PasswordParam__"),
+								Uri:           ptr.String("__Uri__"),
+								Username:      ptr.String("__Username__"),
+							},
+							FontColor:           types.DvbSubDestinationFontColor("BLACK"),
+							FontOpacity:         ptr.Int32(1),
+							FontResolution:      ptr.Int32(1),
+							FontSize:            ptr.String("__FontSize__"),
+							OutlineColor:        types.DvbSubDestinationOutlineColor("BLACK"),
+							OutlineSize:         ptr.Int32(1),
+							ShadowColor:         types.DvbSubDestinationShadowColor("BLACK"),
+							ShadowOpacity:       ptr.Int32(1),
+							ShadowXOffset:       ptr.Int32(1),
+							ShadowYOffset:       ptr.Int32(1),
+							TeletextGridControl: types.DvbSubDestinationTeletextGridControl("FIXED"),
+							XPosition:           ptr.Int32(1),
+							YPosition:           ptr.Int32(1),
+							SubtitleRows:        types.DvbSubDestinationSubtitleRows("ROWS_16"),
+						},
+						EbuTtDDestinationSettings: &types.EbuTtDDestinationSettings{
+							CopyrightHolder:   ptr.String("__CopyrightHolder__"),
+							FillLineGap:       types.EbuTtDFillLineGapControl("DISABLED"),
+							FontFamily:        ptr.String("__FontFamily__"),
+							StyleControl:      types.EbuTtDDestinationStyleControl("EXCLUDE"),
+							DefaultFontSize:   ptr.Int32(1),
+							DefaultLineHeight: ptr.Int32(1),
+						},
+						EmbeddedDestinationSettings:           &types.EmbeddedDestinationSettings{},
+						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
+						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
+						Scte20PlusEmbeddedDestinationSettings: &types.Scte20PlusEmbeddedDestinationSettings{},
+						Scte27DestinationSettings:             &types.Scte27DestinationSettings{},
+						SmpteTtDestinationSettings:            &types.SmpteTtDestinationSettings{},
+						TeletextDestinationSettings:           &types.TeletextDestinationSettings{},
+						TtmlDestinationSettings: &types.TtmlDestinationSettings{
+							StyleControl: types.TtmlDestinationStyleControl("PASSTHROUGH"),
+						},
+						WebvttDestinationSettings: &types.WebvttDestinationSettings{
+							StyleControl: types.WebvttDestinationStyleControl("NO_STYLE_DATA"),
+						},
+					},
+					LanguageCode:        ptr.String("__LanguageCode__"),
+					LanguageDescription: ptr.String("__LanguageDescription__"),
+					Name:                ptr.String("__Name__"),
+					CaptionDashRoles: []types.DashRoleCaption{
+						types.DashRoleCaption("ALTERNATE"),
+						types.DashRoleCaption("ALTERNATE"),
+					},
+					DvbDashAccessibility: types.DvbDashAccessibility("DVBDASH_1_VISUALLY_IMPAIRED"),
+				},
+				{
+					Accessibility:       types.AccessibilityType("DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES"),
+					CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
+					DestinationSettings: &types.CaptionDestinationSettings{
+						AribDestinationSettings: &types.AribDestinationSettings{},
+						BurnInDestinationSettings: &types.BurnInDestinationSettings{
+							Alignment:         types.BurnInAlignment("CENTERED"),
+							BackgroundColor:   types.BurnInBackgroundColor("BLACK"),
+							BackgroundOpacity: ptr.Int32(1),
+							Font: &types.InputLocation{
+								PasswordParam: ptr.String("__PasswordParam__"),
+								Uri:           ptr.String("__Uri__"),
+								Username:      ptr.String("__Username__"),
+							},
+							FontColor:           types.BurnInFontColor("BLACK"),
+							FontOpacity:         ptr.Int32(1),
+							FontResolution:      ptr.Int32(1),
+							FontSize:            ptr.String("__FontSize__"),
+							OutlineColor:        types.BurnInOutlineColor("BLACK"),
+							OutlineSize:         ptr.Int32(1),
+							ShadowColor:         types.BurnInShadowColor("BLACK"),
+							ShadowOpacity:       ptr.Int32(1),
+							ShadowXOffset:       ptr.Int32(1),
+							ShadowYOffset:       ptr.Int32(1),
+							TeletextGridControl: types.BurnInTeletextGridControl("FIXED"),
+							XPosition:           ptr.Int32(1),
+							YPosition:           ptr.Int32(1),
+							SubtitleRows:        types.BurnInDestinationSubtitleRows("ROWS_16"),
+						},
+						DvbSubDestinationSettings: &types.DvbSubDestinationSettings{
+							Alignment:         types.DvbSubDestinationAlignment("CENTERED"),
+							BackgroundColor:   types.DvbSubDestinationBackgroundColor("BLACK"),
+							BackgroundOpacity: ptr.Int32(1),
+							Font: &types.InputLocation{
+								PasswordParam: ptr.String("__PasswordParam__"),
+								Uri:           ptr.String("__Uri__"),
+								Username:      ptr.String("__Username__"),
+							},
+							FontColor:           types.DvbSubDestinationFontColor("BLACK"),
+							FontOpacity:         ptr.Int32(1),
+							FontResolution:      ptr.Int32(1),
+							FontSize:            ptr.String("__FontSize__"),
+							OutlineColor:        types.DvbSubDestinationOutlineColor("BLACK"),
+							OutlineSize:         ptr.Int32(1),
+							ShadowColor:         types.DvbSubDestinationShadowColor("BLACK"),
+							ShadowOpacity:       ptr.Int32(1),
+							ShadowXOffset:       ptr.Int32(1),
+							ShadowYOffset:       ptr.Int32(1),
+							TeletextGridControl: types.DvbSubDestinationTeletextGridControl("FIXED"),
+							XPosition:           ptr.Int32(1),
+							YPosition:           ptr.Int32(1),
+							SubtitleRows:        types.DvbSubDestinationSubtitleRows("ROWS_16"),
+						},
+						EbuTtDDestinationSettings: &types.EbuTtDDestinationSettings{
+							CopyrightHolder:   ptr.String("__CopyrightHolder__"),
+							FillLineGap:       types.EbuTtDFillLineGapControl("DISABLED"),
+							FontFamily:        ptr.String("__FontFamily__"),
+							StyleControl:      types.EbuTtDDestinationStyleControl("EXCLUDE"),
+							DefaultFontSize:   ptr.Int32(1),
+							DefaultLineHeight: ptr.Int32(1),
+						},
+						EmbeddedDestinationSettings:           &types.EmbeddedDestinationSettings{},
+						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
+						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
+						Scte20PlusEmbeddedDestinationSettings: &types.Scte20PlusEmbeddedDestinationSettings{},
+						Scte27DestinationSettings:             &types.Scte27DestinationSettings{},
+						SmpteTtDestinationSettings:            &types.SmpteTtDestinationSettings{},
+						TeletextDestinationSettings:           &types.TeletextDestinationSettings{},
+						TtmlDestinationSettings: &types.TtmlDestinationSettings{
+							StyleControl: types.TtmlDestinationStyleControl("PASSTHROUGH"),
+						},
+						WebvttDestinationSettings: &types.WebvttDestinationSettings{
+							StyleControl: types.WebvttDestinationStyleControl("NO_STYLE_DATA"),
+						},
+					},
+					LanguageCode:        ptr.String("__LanguageCode__"),
+					LanguageDescription: ptr.String("__LanguageDescription__"),
+					Name:                ptr.String("__Name__"),
+					CaptionDashRoles: []types.DashRoleCaption{
+						types.DashRoleCaption("ALTERNATE"),
+						types.DashRoleCaption("ALTERNATE"),
+					},
+					DvbDashAccessibility: types.DvbDashAccessibility("DVBDASH_1_VISUALLY_IMPAIRED"),
+				},
+			},
+			FeatureActivations: &types.FeatureActivations{
+				InputPrepareScheduleActions:             types.FeatureActivationsInputPrepareScheduleActions("DISABLED"),
+				OutputStaticImageOverlayScheduleActions: types.FeatureActivationsOutputStaticImageOverlayScheduleActions("DISABLED"),
+			},
+			GlobalConfiguration: &types.GlobalConfiguration{
+				InitialAudioGain: ptr.Int32(1),
+				InputEndAction:   types.GlobalConfigurationInputEndAction("NONE"),
+				InputLossBehavior: &types.InputLossBehavior{
+					BlackFrameMsec:      ptr.Int32(1),
+					InputLossImageColor: ptr.String("__InputLossImageColor__"),
+					InputLossImageSlate: &types.InputLocation{
+						PasswordParam: ptr.String("__PasswordParam__"),
+						Uri:           ptr.String("__Uri__"),
+						Username:      ptr.String("__Username__"),
+					},
+					InputLossImageType: types.InputLossImageType("COLOR"),
+					RepeatFrameMsec:    ptr.Int32(1),
+				},
+				OutputLockingMode:         types.GlobalConfigurationOutputLockingMode("EPOCH_LOCKING"),
+				OutputTimingSource:        types.GlobalConfigurationOutputTimingSource("INPUT_CLOCK"),
+				SupportLowFramerateInputs: types.GlobalConfigurationLowFramerateInputs("DISABLED"),
+				OutputLockingSettings: &types.OutputLockingSettings{
+					EpochLockingSettings: &types.EpochLockingSettings{
+						CustomEpoch: ptr.String("__CustomEpoch__"),
+						JamSyncTime: ptr.String("__JamSyncTime__"),
+					},
+					PipelineLockingSettings: &types.PipelineLockingSettings{
+						PipelineLockingMethod: types.PipelineLockingMethod("SOURCE_TIMECODE"),
+						CustomEpoch:           ptr.String("__CustomEpoch__"),
+					},
+					DisabledLockingSettings: &types.DisabledLockingSettings{
+						CustomEpoch: ptr.String("__CustomEpoch__"),
+					},
+				},
+			},
+			MotionGraphicsConfiguration: &types.MotionGraphicsConfiguration{
+				MotionGraphicsInsertion: types.MotionGraphicsInsertion("DISABLED"),
+				MotionGraphicsSettings: &types.MotionGraphicsSettings{
+					HtmlMotionGraphicsSettings: &types.HtmlMotionGraphicsSettings{},
+				},
+			},
+			NielsenConfiguration: &types.NielsenConfiguration{
+				DistributorId:          ptr.String("__DistributorId__"),
+				NielsenPcmToId3Tagging: types.NielsenPcmToId3TaggingState("DISABLED"),
+			},
+			OutputGroups: []types.OutputGroup{
+				{
+					Name: ptr.String("__Name__"),
+					OutputGroupSettings: &types.OutputGroupSettings{
+						ArchiveGroupSettings: &types.ArchiveGroupSettings{
+							ArchiveCdnSettings: &types.ArchiveCdnSettings{
+								ArchiveS3Settings: &types.ArchiveS3Settings{
+									CannedAcl: types.S3CannedAcl("AUTHENTICATED_READ"),
+								},
+							},
+							Destination: &types.OutputLocationRef{
+								DestinationRefId: ptr.String("__DestinationRefId__"),
+							},
+							RolloverInterval: ptr.Int32(1),
+						},
+						FrameCaptureGroupSettings: &types.FrameCaptureGroupSettings{
+							Destination: &types.OutputLocationRef{
+								DestinationRefId: ptr.String("__DestinationRefId__"),
+							},
+							FrameCaptureCdnSettings: &types.FrameCaptureCdnSettings{
+								FrameCaptureS3Settings: &types.FrameCaptureS3Settings{
+									CannedAcl: types.S3CannedAcl("AUTHENTICATED_READ"),
+								},
+							},
+						},
+						HlsGroupSettings: &types.HlsGroupSettings{
+							AdMarkers: []types.HlsAdMarkers{
+								types.HlsAdMarkers("ADOBE"),
+								types.HlsAdMarkers("ADOBE"),
+							},
+							BaseUrlContent:   ptr.String("__BaseUrlContent__"),
+							BaseUrlContent1:  ptr.String("__BaseUrlContent1__"),
+							BaseUrlManifest:  ptr.String("__BaseUrlManifest__"),
+							BaseUrlManifest1: ptr.String("__BaseUrlManifest1__"),
+							CaptionLanguageMappings: []types.CaptionLanguageMapping{
+								{
+									CaptionChannel:      ptr.Int32(1),
+									LanguageCode:        ptr.String("__LanguageCode__"),
+									LanguageDescription: ptr.String("__LanguageDescription__"),
+								},
+								{
+									CaptionChannel:      ptr.Int32(1),
+									LanguageCode:        ptr.String("__LanguageCode__"),
+									LanguageDescription: ptr.String("__LanguageDescription__"),
+								},
+							},
+							CaptionLanguageSetting: types.HlsCaptionLanguageSetting("INSERT"),
+							ClientCache:            types.HlsClientCache("DISABLED"),
+							CodecSpecification:     types.HlsCodecSpecification("RFC_4281"),
+							ConstantIv:             ptr.String("__ConstantIv__"),
+							Destination: &types.OutputLocationRef{
+								DestinationRefId: ptr.String("__DestinationRefId__"),
+							},
+							DirectoryStructure: types.HlsDirectoryStructure("SINGLE_DIRECTORY"),
+							DiscontinuityTags:  types.HlsDiscontinuityTags("INSERT"),
+							EncryptionType:     types.HlsEncryptionType("AES128"),
+							HlsCdnSettings: &types.HlsCdnSettings{
+								HlsAkamaiSettings: &types.HlsAkamaiSettings{
+									ConnectionRetryInterval: ptr.Int32(1),
+									FilecacheDuration:       ptr.Int32(1),
+									HttpTransferMode:        types.HlsAkamaiHttpTransferMode("CHUNKED"),
+									NumRetries:              ptr.Int32(1),
+									RestartDelay:            ptr.Int32(1),
+									Salt:                    ptr.String("__Salt__"),
+									Token:                   ptr.String("__Token__"),
+								},
+								HlsBasicPutSettings: &types.HlsBasicPutSettings{
+									ConnectionRetryInterval: ptr.Int32(1),
+									FilecacheDuration:       ptr.Int32(1),
+									NumRetries:              ptr.Int32(1),
+									RestartDelay:            ptr.Int32(1),
+								},
+								HlsMediaStoreSettings: &types.HlsMediaStoreSettings{
+									ConnectionRetryInterval: ptr.Int32(1),
+									FilecacheDuration:       ptr.Int32(1),
+									MediaStoreStorageClass:  types.HlsMediaStoreStorageClass("TEMPORAL"),
+									NumRetries:              ptr.Int32(1),
+									RestartDelay:            ptr.Int32(1),
+								},
+								HlsS3Settings: &types.HlsS3Settings{
+									CannedAcl: types.S3CannedAcl("AUTHENTICATED_READ"),
+								},
+								HlsWebdavSettings: &types.HlsWebdavSettings{
+									ConnectionRetryInterval: ptr.Int32(1),
+									FilecacheDuration:       ptr.Int32(1),
+									HttpTransferMode:        types.HlsWebdavHttpTransferMode("CHUNKED"),
+									NumRetries:              ptr.Int32(1),
+									RestartDelay:            ptr.Int32(1),
+								},
+							},
+							HlsId3SegmentTagging:      types.HlsId3SegmentTaggingState("DISABLED"),
+							IFrameOnlyPlaylists:       types.IFrameOnlyPlaylistType("DISABLED"),
+							IncompleteSegmentBehavior: types.HlsIncompleteSegmentBehavior("AUTO"),
+							IndexNSegments:            ptr.Int32(1),
+							InputLossAction:           types.InputLossActionForHlsOut("EMIT_OUTPUT"),
+							IvInManifest:              types.HlsIvInManifest("EXCLUDE"),
+							IvSource:                  types.HlsIvSource("EXPLICIT"),
+							KeepSegments:              ptr.Int32(1),
+							KeyFormat:                 ptr.String("__KeyFormat__"),
+							KeyFormatVersions:         ptr.String("__KeyFormatVersions__"),
+							KeyProviderSettings: &types.KeyProviderSettings{
+								StaticKeySettings: &types.StaticKeySettings{
+									KeyProviderServer: &types.InputLocation{
+										PasswordParam: ptr.String("__PasswordParam__"),
+										Uri:           ptr.String("__Uri__"),
+										Username:      ptr.String("__Username__"),
+									},
+									StaticKeyValue: ptr.String("__StaticKeyValue__"),
+								},
+							},
+							ManifestCompression:        types.HlsManifestCompression("GZIP"),
+							ManifestDurationFormat:     types.HlsManifestDurationFormat("FLOATING_POINT"),
+							MinSegmentLength:           ptr.Int32(1),
+							Mode:                       types.HlsMode("LIVE"),
+							OutputSelection:            types.HlsOutputSelection("MANIFESTS_AND_SEGMENTS"),
+							ProgramDateTime:            types.HlsProgramDateTime("EXCLUDE"),
+							ProgramDateTimeClock:       types.HlsProgramDateTimeClock("INITIALIZE_FROM_OUTPUT_TIMECODE"),
+							ProgramDateTimePeriod:      ptr.Int32(1),
+							RedundantManifest:          types.HlsRedundantManifest("DISABLED"),
+							SegmentLength:              ptr.Int32(1),
+							SegmentationMode:           types.HlsSegmentationMode("USE_INPUT_SEGMENTATION"),
+							SegmentsPerSubdirectory:    ptr.Int32(1),
+							StreamInfResolution:        types.HlsStreamInfResolution("EXCLUDE"),
+							TimedMetadataId3Frame:      types.HlsTimedMetadataId3Frame("NONE"),
+							TimedMetadataId3Period:     ptr.Int32(1),
+							TimestampDeltaMilliseconds: ptr.Int32(1),
+							TsFileMode:                 types.HlsTsFileMode("SEGMENTED_FILES"),
+						},
+						MediaPackageGroupSettings: &types.MediaPackageGroupSettings{
+							Destination: &types.OutputLocationRef{
+								DestinationRefId: ptr.String("__DestinationRefId__"),
+							},
+							MediapackageV2GroupSettings: &types.MediaPackageV2GroupSettings{
+								CaptionLanguageMappings: []types.CaptionLanguageMapping{
+									{
+										CaptionChannel:      ptr.Int32(1),
+										LanguageCode:        ptr.String("__LanguageCode__"),
+										LanguageDescription: ptr.String("__LanguageDescription__"),
+									},
+									{
+										CaptionChannel:      ptr.Int32(1),
+										LanguageCode:        ptr.String("__LanguageCode__"),
+										LanguageDescription: ptr.String("__LanguageDescription__"),
+									},
+								},
+								Id3Behavior:              types.CmafId3Behavior("DISABLED"),
+								KlvBehavior:              types.CmafKLVBehavior("NO_PASSTHROUGH"),
+								NielsenId3Behavior:       types.CmafNielsenId3Behavior("NO_PASSTHROUGH"),
+								Scte35Type:               types.Scte35Type("NONE"),
+								SegmentLength:            ptr.Int32(1),
+								SegmentLengthUnits:       types.CmafIngestSegmentLengthUnits("MILLISECONDS"),
+								TimedMetadataId3Frame:    types.CmafTimedMetadataId3Frame("NONE"),
+								TimedMetadataId3Period:   ptr.Int32(1),
+								TimedMetadataPassthrough: types.CmafTimedMetadataPassthrough("DISABLED"),
+								AdditionalDestinations: []types.MediaPackageAdditionalDestinations{
+									{
+										Destination: &types.OutputLocationRef{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+									},
+									{
+										Destination: &types.OutputLocationRef{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+									},
+								},
+							},
+						},
+						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
+							AcquisitionPointId:       ptr.String("__AcquisitionPointId__"),
+							AudioOnlyTimecodeControl: types.SmoothGroupAudioOnlyTimecodeControl("PASSTHROUGH"),
+							CertificateMode:          types.SmoothGroupCertificateMode("SELF_SIGNED"),
+							ConnectionRetryInterval:  ptr.Int32(1),
+							Destination: &types.OutputLocationRef{
+								DestinationRefId: ptr.String("__DestinationRefId__"),
+							},
+							EventId:                ptr.String("__EventId__"),
+							EventIdMode:            types.SmoothGroupEventIdMode("NO_EVENT_ID"),
+							EventStopBehavior:      types.SmoothGroupEventStopBehavior("NONE"),
+							FilecacheDuration:      ptr.Int32(1),
+							FragmentLength:         ptr.Int32(1),
+							InputLossAction:        types.InputLossActionForMsSmoothOut("EMIT_OUTPUT"),
+							NumRetries:             ptr.Int32(1),
+							RestartDelay:           ptr.Int32(1),
+							SegmentationMode:       types.SmoothGroupSegmentationMode("USE_INPUT_SEGMENTATION"),
+							SendDelayMs:            ptr.Int32(1),
+							SparseTrackType:        types.SmoothGroupSparseTrackType("NONE"),
+							StreamManifestBehavior: types.SmoothGroupStreamManifestBehavior("DO_NOT_SEND"),
+							TimestampOffset:        ptr.String("__TimestampOffset__"),
+							TimestampOffsetMode:    types.SmoothGroupTimestampOffsetMode("USE_CONFIGURED_OFFSET"),
+						},
+						MultiplexGroupSettings: &types.MultiplexGroupSettings{},
+						RtmpGroupSettings: &types.RtmpGroupSettings{
+							AdMarkers: []types.RtmpAdMarkers{
+								types.RtmpAdMarkers("ON_CUE_POINT_SCTE35"),
+								types.RtmpAdMarkers("ON_CUE_POINT_SCTE35"),
+							},
+							AuthenticationScheme:  types.AuthenticationScheme("AKAMAI"),
+							CacheFullBehavior:     types.RtmpCacheFullBehavior("DISCONNECT_IMMEDIATELY"),
+							CacheLength:           ptr.Int32(1),
+							CaptionData:           types.RtmpCaptionData("ALL"),
+							InputLossAction:       types.InputLossActionForRtmpOut("EMIT_OUTPUT"),
+							RestartDelay:          ptr.Int32(1),
+							IncludeFillerNalUnits: types.IncludeFillerNalUnits("AUTO"),
+						},
+						UdpGroupSettings: &types.UdpGroupSettings{
+							InputLossAction:        types.InputLossActionForUdpOut("DROP_PROGRAM"),
+							TimedMetadataId3Frame:  types.UdpTimedMetadataId3Frame("NONE"),
+							TimedMetadataId3Period: ptr.Int32(1),
+						},
+						CmafIngestGroupSettings: &types.CmafIngestGroupSettings{
+							Destination: &types.OutputLocationRef{
+								DestinationRefId: ptr.String("__DestinationRefId__"),
+							},
+							NielsenId3Behavior:     types.CmafNielsenId3Behavior("NO_PASSTHROUGH"),
+							Scte35Type:             types.Scte35Type("NONE"),
+							SegmentLength:          ptr.Int32(1),
+							SegmentLengthUnits:     types.CmafIngestSegmentLengthUnits("MILLISECONDS"),
+							SendDelayMs:            ptr.Int32(1),
+							KlvBehavior:            types.CmafKLVBehavior("NO_PASSTHROUGH"),
+							KlvNameModifier:        ptr.String("__KlvNameModifier__"),
+							NielsenId3NameModifier: ptr.String("__NielsenId3NameModifier__"),
+							Scte35NameModifier:     ptr.String("__Scte35NameModifier__"),
+							Id3Behavior:            types.CmafId3Behavior("DISABLED"),
+							Id3NameModifier:        ptr.String("__Id3NameModifier__"),
+							CaptionLanguageMappings: []types.CmafIngestCaptionLanguageMapping{
+								{
+									CaptionChannel: ptr.Int32(1),
+									LanguageCode:   ptr.String("__LanguageCode__"),
+								},
+								{
+									CaptionChannel: ptr.Int32(1),
+									LanguageCode:   ptr.String("__LanguageCode__"),
+								},
+							},
+							TimedMetadataId3Frame:    types.CmafTimedMetadataId3Frame("NONE"),
+							TimedMetadataId3Period:   ptr.Int32(1),
+							TimedMetadataPassthrough: types.CmafTimedMetadataPassthrough("DISABLED"),
+							AdditionalDestinations: []types.AdditionalDestinations{
+								{
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+								},
+								{
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+								},
+							},
+						},
+						SrtGroupSettings: &types.SrtGroupSettings{
+							InputLossAction: types.InputLossActionForUdpOut("DROP_PROGRAM"),
+						},
+						MediaConnectRouterGroupSettings: &types.MediaConnectRouterGroupSettings{
+							AvailabilityZones: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					Outputs: []types.Output{
+						{
+							AudioDescriptionNames: []string{
+								"__Member__",
+								"__Member__",
+							},
+							CaptionDescriptionNames: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputName: ptr.String("__OutputName__"),
+							OutputSettings: &types.OutputSettings{
+								ArchiveOutputSettings: &types.ArchiveOutputSettings{
+									ContainerSettings: &types.ArchiveContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+										RawSettings: &types.RawSettings{},
+									},
+									Extension:    ptr.String("__Extension__"),
+									NameModifier: ptr.String("__NameModifier__"),
+								},
+								FrameCaptureOutputSettings: &types.FrameCaptureOutputSettings{
+									NameModifier: ptr.String("__NameModifier__"),
+								},
+								HlsOutputSettings: &types.HlsOutputSettings{
+									H265PackagingType: types.HlsH265PackagingType("HEV1"),
+									HlsSettings: &types.HlsSettings{
+										AudioOnlyHlsSettings: &types.AudioOnlyHlsSettings{
+											AudioGroupId: ptr.String("__AudioGroupId__"),
+											AudioOnlyImage: &types.InputLocation{
+												PasswordParam: ptr.String("__PasswordParam__"),
+												Uri:           ptr.String("__Uri__"),
+												Username:      ptr.String("__Username__"),
+											},
+											AudioTrackType: types.AudioOnlyHlsTrackType("ALTERNATE_AUDIO_AUTO_SELECT"),
+											SegmentType:    types.AudioOnlyHlsSegmentType("AAC"),
+										},
+										Fmp4HlsSettings: &types.Fmp4HlsSettings{
+											AudioRenditionSets:    ptr.String("__AudioRenditionSets__"),
+											NielsenId3Behavior:    types.Fmp4NielsenId3Behavior("NO_PASSTHROUGH"),
+											TimedMetadataBehavior: types.Fmp4TimedMetadataBehavior("NO_PASSTHROUGH"),
+										},
+										FrameCaptureHlsSettings: &types.FrameCaptureHlsSettings{},
+										StandardHlsSettings: &types.StandardHlsSettings{
+											AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
+											M3u8Settings: &types.M3u8Settings{
+												AudioFramesPerPes:     ptr.Int32(1),
+												AudioPids:             ptr.String("__AudioPids__"),
+												EcmPid:                ptr.String("__EcmPid__"),
+												NielsenId3Behavior:    types.M3u8NielsenId3Behavior("NO_PASSTHROUGH"),
+												PatInterval:           ptr.Int32(1),
+												PcrControl:            types.M3u8PcrControl("CONFIGURED_PCR_PERIOD"),
+												PcrPeriod:             ptr.Int32(1),
+												PcrPid:                ptr.String("__PcrPid__"),
+												PmtInterval:           ptr.Int32(1),
+												PmtPid:                ptr.String("__PmtPid__"),
+												ProgramNum:            ptr.Int32(1),
+												Scte35Behavior:        types.M3u8Scte35Behavior("NO_PASSTHROUGH"),
+												Scte35Pid:             ptr.String("__Scte35Pid__"),
+												TimedMetadataBehavior: types.M3u8TimedMetadataBehavior("NO_PASSTHROUGH"),
+												TimedMetadataPid:      ptr.String("__TimedMetadataPid__"),
+												TransportStreamId:     ptr.Int32(1),
+												VideoPid:              ptr.String("__VideoPid__"),
+												KlvBehavior:           types.M3u8KlvBehavior("NO_PASSTHROUGH"),
+												KlvDataPids:           ptr.String("__KlvDataPids__"),
+											},
+										},
+									},
+									NameModifier:    ptr.String("__NameModifier__"),
+									SegmentModifier: ptr.String("__SegmentModifier__"),
+								},
+								MediaPackageOutputSettings: &types.MediaPackageOutputSettings{
+									MediaPackageV2DestinationSettings: &types.MediaPackageV2DestinationSettings{
+										AudioGroupId:       ptr.String("__AudioGroupId__"),
+										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
+										HlsAutoSelect:      types.HlsAutoSelect("NO"),
+										HlsDefault:         types.HlsDefault("NO"),
+									},
+								},
+								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
+									H265PackagingType: types.MsSmoothH265PackagingType("HEV1"),
+									NameModifier:      ptr.String("__NameModifier__"),
+								},
+								MultiplexOutputSettings: &types.MultiplexOutputSettings{
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									ContainerSettings: &types.MultiplexContainerSettings{
+										MultiplexM2tsSettings: &types.MultiplexM2tsSettings{
+											AbsentInputAudioBehavior:        types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                            types.M2tsArib("DISABLED"),
+											AudioBufferModel:                types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:               ptr.Int32(1),
+											AudioStreamType:                 types.M2tsAudioStreamType("ATSC"),
+											CcDescriptor:                    types.M2tsCcDescriptor("DISABLED"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											Klv:                             types.M2tsKlv("NONE"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+								},
+								RtmpOutputSettings: &types.RtmpOutputSettings{
+									CertificateMode:         types.RtmpOutputCertificateMode("SELF_SIGNED"),
+									ConnectionRetryInterval: ptr.Int32(1),
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									NumRetries: ptr.Int32(1),
+								},
+								UdpOutputSettings: &types.UdpOutputSettings{
+									BufferMsec: ptr.Int32(1),
+									ContainerSettings: &types.UdpContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									FecOutputSettings: &types.FecOutputSettings{
+										ColumnDepth: ptr.Int32(1),
+										IncludeFec:  types.FecOutputIncludeFec("COLUMN"),
+										RowLength:   ptr.Int32(1),
+									},
+								},
+								CmafIngestOutputSettings: &types.CmafIngestOutputSettings{
+									NameModifier: ptr.String("__NameModifier__"),
+								},
+								SrtOutputSettings: &types.SrtOutputSettings{
+									BufferMsec: ptr.Int32(1),
+									ContainerSettings: &types.UdpContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									EncryptionType: types.SrtEncryptionType("AES128"),
+									Latency:        ptr.Int32(1),
+								},
+								MediaConnectRouterOutputSettings: &types.MediaConnectRouterOutputSettings{
+									ConnectedRouterInputs: &types.MediaConnectRouterOutputConnectionMap{
+										Pipeline0: ptr.String("__Pipeline0__"),
+										Pipeline1: ptr.String("__Pipeline1__"),
+									},
+									ContainerSettings: &types.MediaConnectRouterContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+								},
+							},
+							VideoDescriptionName: ptr.String("__VideoDescriptionName__"),
+						},
+						{
+							AudioDescriptionNames: []string{
+								"__Member__",
+								"__Member__",
+							},
+							CaptionDescriptionNames: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputName: ptr.String("__OutputName__"),
+							OutputSettings: &types.OutputSettings{
+								ArchiveOutputSettings: &types.ArchiveOutputSettings{
+									ContainerSettings: &types.ArchiveContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+										RawSettings: &types.RawSettings{},
+									},
+									Extension:    ptr.String("__Extension__"),
+									NameModifier: ptr.String("__NameModifier__"),
+								},
+								FrameCaptureOutputSettings: &types.FrameCaptureOutputSettings{
+									NameModifier: ptr.String("__NameModifier__"),
+								},
+								HlsOutputSettings: &types.HlsOutputSettings{
+									H265PackagingType: types.HlsH265PackagingType("HEV1"),
+									HlsSettings: &types.HlsSettings{
+										AudioOnlyHlsSettings: &types.AudioOnlyHlsSettings{
+											AudioGroupId: ptr.String("__AudioGroupId__"),
+											AudioOnlyImage: &types.InputLocation{
+												PasswordParam: ptr.String("__PasswordParam__"),
+												Uri:           ptr.String("__Uri__"),
+												Username:      ptr.String("__Username__"),
+											},
+											AudioTrackType: types.AudioOnlyHlsTrackType("ALTERNATE_AUDIO_AUTO_SELECT"),
+											SegmentType:    types.AudioOnlyHlsSegmentType("AAC"),
+										},
+										Fmp4HlsSettings: &types.Fmp4HlsSettings{
+											AudioRenditionSets:    ptr.String("__AudioRenditionSets__"),
+											NielsenId3Behavior:    types.Fmp4NielsenId3Behavior("NO_PASSTHROUGH"),
+											TimedMetadataBehavior: types.Fmp4TimedMetadataBehavior("NO_PASSTHROUGH"),
+										},
+										FrameCaptureHlsSettings: &types.FrameCaptureHlsSettings{},
+										StandardHlsSettings: &types.StandardHlsSettings{
+											AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
+											M3u8Settings: &types.M3u8Settings{
+												AudioFramesPerPes:     ptr.Int32(1),
+												AudioPids:             ptr.String("__AudioPids__"),
+												EcmPid:                ptr.String("__EcmPid__"),
+												NielsenId3Behavior:    types.M3u8NielsenId3Behavior("NO_PASSTHROUGH"),
+												PatInterval:           ptr.Int32(1),
+												PcrControl:            types.M3u8PcrControl("CONFIGURED_PCR_PERIOD"),
+												PcrPeriod:             ptr.Int32(1),
+												PcrPid:                ptr.String("__PcrPid__"),
+												PmtInterval:           ptr.Int32(1),
+												PmtPid:                ptr.String("__PmtPid__"),
+												ProgramNum:            ptr.Int32(1),
+												Scte35Behavior:        types.M3u8Scte35Behavior("NO_PASSTHROUGH"),
+												Scte35Pid:             ptr.String("__Scte35Pid__"),
+												TimedMetadataBehavior: types.M3u8TimedMetadataBehavior("NO_PASSTHROUGH"),
+												TimedMetadataPid:      ptr.String("__TimedMetadataPid__"),
+												TransportStreamId:     ptr.Int32(1),
+												VideoPid:              ptr.String("__VideoPid__"),
+												KlvBehavior:           types.M3u8KlvBehavior("NO_PASSTHROUGH"),
+												KlvDataPids:           ptr.String("__KlvDataPids__"),
+											},
+										},
+									},
+									NameModifier:    ptr.String("__NameModifier__"),
+									SegmentModifier: ptr.String("__SegmentModifier__"),
+								},
+								MediaPackageOutputSettings: &types.MediaPackageOutputSettings{
+									MediaPackageV2DestinationSettings: &types.MediaPackageV2DestinationSettings{
+										AudioGroupId:       ptr.String("__AudioGroupId__"),
+										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
+										HlsAutoSelect:      types.HlsAutoSelect("NO"),
+										HlsDefault:         types.HlsDefault("NO"),
+									},
+								},
+								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
+									H265PackagingType: types.MsSmoothH265PackagingType("HEV1"),
+									NameModifier:      ptr.String("__NameModifier__"),
+								},
+								MultiplexOutputSettings: &types.MultiplexOutputSettings{
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									ContainerSettings: &types.MultiplexContainerSettings{
+										MultiplexM2tsSettings: &types.MultiplexM2tsSettings{
+											AbsentInputAudioBehavior:        types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                            types.M2tsArib("DISABLED"),
+											AudioBufferModel:                types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:               ptr.Int32(1),
+											AudioStreamType:                 types.M2tsAudioStreamType("ATSC"),
+											CcDescriptor:                    types.M2tsCcDescriptor("DISABLED"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											Klv:                             types.M2tsKlv("NONE"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+								},
+								RtmpOutputSettings: &types.RtmpOutputSettings{
+									CertificateMode:         types.RtmpOutputCertificateMode("SELF_SIGNED"),
+									ConnectionRetryInterval: ptr.Int32(1),
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									NumRetries: ptr.Int32(1),
+								},
+								UdpOutputSettings: &types.UdpOutputSettings{
+									BufferMsec: ptr.Int32(1),
+									ContainerSettings: &types.UdpContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									FecOutputSettings: &types.FecOutputSettings{
+										ColumnDepth: ptr.Int32(1),
+										IncludeFec:  types.FecOutputIncludeFec("COLUMN"),
+										RowLength:   ptr.Int32(1),
+									},
+								},
+								CmafIngestOutputSettings: &types.CmafIngestOutputSettings{
+									NameModifier: ptr.String("__NameModifier__"),
+								},
+								SrtOutputSettings: &types.SrtOutputSettings{
+									BufferMsec: ptr.Int32(1),
+									ContainerSettings: &types.UdpContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									EncryptionType: types.SrtEncryptionType("AES128"),
+									Latency:        ptr.Int32(1),
+								},
+								MediaConnectRouterOutputSettings: &types.MediaConnectRouterOutputSettings{
+									ConnectedRouterInputs: &types.MediaConnectRouterOutputConnectionMap{
+										Pipeline0: ptr.String("__Pipeline0__"),
+										Pipeline1: ptr.String("__Pipeline1__"),
+									},
+									ContainerSettings: &types.MediaConnectRouterContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+								},
+							},
+							VideoDescriptionName: ptr.String("__VideoDescriptionName__"),
+						},
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					OutputGroupSettings: &types.OutputGroupSettings{
+						ArchiveGroupSettings: &types.ArchiveGroupSettings{
+							ArchiveCdnSettings: &types.ArchiveCdnSettings{
+								ArchiveS3Settings: &types.ArchiveS3Settings{
+									CannedAcl: types.S3CannedAcl("AUTHENTICATED_READ"),
+								},
+							},
+							Destination: &types.OutputLocationRef{
+								DestinationRefId: ptr.String("__DestinationRefId__"),
+							},
+							RolloverInterval: ptr.Int32(1),
+						},
+						FrameCaptureGroupSettings: &types.FrameCaptureGroupSettings{
+							Destination: &types.OutputLocationRef{
+								DestinationRefId: ptr.String("__DestinationRefId__"),
+							},
+							FrameCaptureCdnSettings: &types.FrameCaptureCdnSettings{
+								FrameCaptureS3Settings: &types.FrameCaptureS3Settings{
+									CannedAcl: types.S3CannedAcl("AUTHENTICATED_READ"),
+								},
+							},
+						},
+						HlsGroupSettings: &types.HlsGroupSettings{
+							AdMarkers: []types.HlsAdMarkers{
+								types.HlsAdMarkers("ADOBE"),
+								types.HlsAdMarkers("ADOBE"),
+							},
+							BaseUrlContent:   ptr.String("__BaseUrlContent__"),
+							BaseUrlContent1:  ptr.String("__BaseUrlContent1__"),
+							BaseUrlManifest:  ptr.String("__BaseUrlManifest__"),
+							BaseUrlManifest1: ptr.String("__BaseUrlManifest1__"),
+							CaptionLanguageMappings: []types.CaptionLanguageMapping{
+								{
+									CaptionChannel:      ptr.Int32(1),
+									LanguageCode:        ptr.String("__LanguageCode__"),
+									LanguageDescription: ptr.String("__LanguageDescription__"),
+								},
+								{
+									CaptionChannel:      ptr.Int32(1),
+									LanguageCode:        ptr.String("__LanguageCode__"),
+									LanguageDescription: ptr.String("__LanguageDescription__"),
+								},
+							},
+							CaptionLanguageSetting: types.HlsCaptionLanguageSetting("INSERT"),
+							ClientCache:            types.HlsClientCache("DISABLED"),
+							CodecSpecification:     types.HlsCodecSpecification("RFC_4281"),
+							ConstantIv:             ptr.String("__ConstantIv__"),
+							Destination: &types.OutputLocationRef{
+								DestinationRefId: ptr.String("__DestinationRefId__"),
+							},
+							DirectoryStructure: types.HlsDirectoryStructure("SINGLE_DIRECTORY"),
+							DiscontinuityTags:  types.HlsDiscontinuityTags("INSERT"),
+							EncryptionType:     types.HlsEncryptionType("AES128"),
+							HlsCdnSettings: &types.HlsCdnSettings{
+								HlsAkamaiSettings: &types.HlsAkamaiSettings{
+									ConnectionRetryInterval: ptr.Int32(1),
+									FilecacheDuration:       ptr.Int32(1),
+									HttpTransferMode:        types.HlsAkamaiHttpTransferMode("CHUNKED"),
+									NumRetries:              ptr.Int32(1),
+									RestartDelay:            ptr.Int32(1),
+									Salt:                    ptr.String("__Salt__"),
+									Token:                   ptr.String("__Token__"),
+								},
+								HlsBasicPutSettings: &types.HlsBasicPutSettings{
+									ConnectionRetryInterval: ptr.Int32(1),
+									FilecacheDuration:       ptr.Int32(1),
+									NumRetries:              ptr.Int32(1),
+									RestartDelay:            ptr.Int32(1),
+								},
+								HlsMediaStoreSettings: &types.HlsMediaStoreSettings{
+									ConnectionRetryInterval: ptr.Int32(1),
+									FilecacheDuration:       ptr.Int32(1),
+									MediaStoreStorageClass:  types.HlsMediaStoreStorageClass("TEMPORAL"),
+									NumRetries:              ptr.Int32(1),
+									RestartDelay:            ptr.Int32(1),
+								},
+								HlsS3Settings: &types.HlsS3Settings{
+									CannedAcl: types.S3CannedAcl("AUTHENTICATED_READ"),
+								},
+								HlsWebdavSettings: &types.HlsWebdavSettings{
+									ConnectionRetryInterval: ptr.Int32(1),
+									FilecacheDuration:       ptr.Int32(1),
+									HttpTransferMode:        types.HlsWebdavHttpTransferMode("CHUNKED"),
+									NumRetries:              ptr.Int32(1),
+									RestartDelay:            ptr.Int32(1),
+								},
+							},
+							HlsId3SegmentTagging:      types.HlsId3SegmentTaggingState("DISABLED"),
+							IFrameOnlyPlaylists:       types.IFrameOnlyPlaylistType("DISABLED"),
+							IncompleteSegmentBehavior: types.HlsIncompleteSegmentBehavior("AUTO"),
+							IndexNSegments:            ptr.Int32(1),
+							InputLossAction:           types.InputLossActionForHlsOut("EMIT_OUTPUT"),
+							IvInManifest:              types.HlsIvInManifest("EXCLUDE"),
+							IvSource:                  types.HlsIvSource("EXPLICIT"),
+							KeepSegments:              ptr.Int32(1),
+							KeyFormat:                 ptr.String("__KeyFormat__"),
+							KeyFormatVersions:         ptr.String("__KeyFormatVersions__"),
+							KeyProviderSettings: &types.KeyProviderSettings{
+								StaticKeySettings: &types.StaticKeySettings{
+									KeyProviderServer: &types.InputLocation{
+										PasswordParam: ptr.String("__PasswordParam__"),
+										Uri:           ptr.String("__Uri__"),
+										Username:      ptr.String("__Username__"),
+									},
+									StaticKeyValue: ptr.String("__StaticKeyValue__"),
+								},
+							},
+							ManifestCompression:        types.HlsManifestCompression("GZIP"),
+							ManifestDurationFormat:     types.HlsManifestDurationFormat("FLOATING_POINT"),
+							MinSegmentLength:           ptr.Int32(1),
+							Mode:                       types.HlsMode("LIVE"),
+							OutputSelection:            types.HlsOutputSelection("MANIFESTS_AND_SEGMENTS"),
+							ProgramDateTime:            types.HlsProgramDateTime("EXCLUDE"),
+							ProgramDateTimeClock:       types.HlsProgramDateTimeClock("INITIALIZE_FROM_OUTPUT_TIMECODE"),
+							ProgramDateTimePeriod:      ptr.Int32(1),
+							RedundantManifest:          types.HlsRedundantManifest("DISABLED"),
+							SegmentLength:              ptr.Int32(1),
+							SegmentationMode:           types.HlsSegmentationMode("USE_INPUT_SEGMENTATION"),
+							SegmentsPerSubdirectory:    ptr.Int32(1),
+							StreamInfResolution:        types.HlsStreamInfResolution("EXCLUDE"),
+							TimedMetadataId3Frame:      types.HlsTimedMetadataId3Frame("NONE"),
+							TimedMetadataId3Period:     ptr.Int32(1),
+							TimestampDeltaMilliseconds: ptr.Int32(1),
+							TsFileMode:                 types.HlsTsFileMode("SEGMENTED_FILES"),
+						},
+						MediaPackageGroupSettings: &types.MediaPackageGroupSettings{
+							Destination: &types.OutputLocationRef{
+								DestinationRefId: ptr.String("__DestinationRefId__"),
+							},
+							MediapackageV2GroupSettings: &types.MediaPackageV2GroupSettings{
+								CaptionLanguageMappings: []types.CaptionLanguageMapping{
+									{
+										CaptionChannel:      ptr.Int32(1),
+										LanguageCode:        ptr.String("__LanguageCode__"),
+										LanguageDescription: ptr.String("__LanguageDescription__"),
+									},
+									{
+										CaptionChannel:      ptr.Int32(1),
+										LanguageCode:        ptr.String("__LanguageCode__"),
+										LanguageDescription: ptr.String("__LanguageDescription__"),
+									},
+								},
+								Id3Behavior:              types.CmafId3Behavior("DISABLED"),
+								KlvBehavior:              types.CmafKLVBehavior("NO_PASSTHROUGH"),
+								NielsenId3Behavior:       types.CmafNielsenId3Behavior("NO_PASSTHROUGH"),
+								Scte35Type:               types.Scte35Type("NONE"),
+								SegmentLength:            ptr.Int32(1),
+								SegmentLengthUnits:       types.CmafIngestSegmentLengthUnits("MILLISECONDS"),
+								TimedMetadataId3Frame:    types.CmafTimedMetadataId3Frame("NONE"),
+								TimedMetadataId3Period:   ptr.Int32(1),
+								TimedMetadataPassthrough: types.CmafTimedMetadataPassthrough("DISABLED"),
+								AdditionalDestinations: []types.MediaPackageAdditionalDestinations{
+									{
+										Destination: &types.OutputLocationRef{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+									},
+									{
+										Destination: &types.OutputLocationRef{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+									},
+								},
+							},
+						},
+						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
+							AcquisitionPointId:       ptr.String("__AcquisitionPointId__"),
+							AudioOnlyTimecodeControl: types.SmoothGroupAudioOnlyTimecodeControl("PASSTHROUGH"),
+							CertificateMode:          types.SmoothGroupCertificateMode("SELF_SIGNED"),
+							ConnectionRetryInterval:  ptr.Int32(1),
+							Destination: &types.OutputLocationRef{
+								DestinationRefId: ptr.String("__DestinationRefId__"),
+							},
+							EventId:                ptr.String("__EventId__"),
+							EventIdMode:            types.SmoothGroupEventIdMode("NO_EVENT_ID"),
+							EventStopBehavior:      types.SmoothGroupEventStopBehavior("NONE"),
+							FilecacheDuration:      ptr.Int32(1),
+							FragmentLength:         ptr.Int32(1),
+							InputLossAction:        types.InputLossActionForMsSmoothOut("EMIT_OUTPUT"),
+							NumRetries:             ptr.Int32(1),
+							RestartDelay:           ptr.Int32(1),
+							SegmentationMode:       types.SmoothGroupSegmentationMode("USE_INPUT_SEGMENTATION"),
+							SendDelayMs:            ptr.Int32(1),
+							SparseTrackType:        types.SmoothGroupSparseTrackType("NONE"),
+							StreamManifestBehavior: types.SmoothGroupStreamManifestBehavior("DO_NOT_SEND"),
+							TimestampOffset:        ptr.String("__TimestampOffset__"),
+							TimestampOffsetMode:    types.SmoothGroupTimestampOffsetMode("USE_CONFIGURED_OFFSET"),
+						},
+						MultiplexGroupSettings: &types.MultiplexGroupSettings{},
+						RtmpGroupSettings: &types.RtmpGroupSettings{
+							AdMarkers: []types.RtmpAdMarkers{
+								types.RtmpAdMarkers("ON_CUE_POINT_SCTE35"),
+								types.RtmpAdMarkers("ON_CUE_POINT_SCTE35"),
+							},
+							AuthenticationScheme:  types.AuthenticationScheme("AKAMAI"),
+							CacheFullBehavior:     types.RtmpCacheFullBehavior("DISCONNECT_IMMEDIATELY"),
+							CacheLength:           ptr.Int32(1),
+							CaptionData:           types.RtmpCaptionData("ALL"),
+							InputLossAction:       types.InputLossActionForRtmpOut("EMIT_OUTPUT"),
+							RestartDelay:          ptr.Int32(1),
+							IncludeFillerNalUnits: types.IncludeFillerNalUnits("AUTO"),
+						},
+						UdpGroupSettings: &types.UdpGroupSettings{
+							InputLossAction:        types.InputLossActionForUdpOut("DROP_PROGRAM"),
+							TimedMetadataId3Frame:  types.UdpTimedMetadataId3Frame("NONE"),
+							TimedMetadataId3Period: ptr.Int32(1),
+						},
+						CmafIngestGroupSettings: &types.CmafIngestGroupSettings{
+							Destination: &types.OutputLocationRef{
+								DestinationRefId: ptr.String("__DestinationRefId__"),
+							},
+							NielsenId3Behavior:     types.CmafNielsenId3Behavior("NO_PASSTHROUGH"),
+							Scte35Type:             types.Scte35Type("NONE"),
+							SegmentLength:          ptr.Int32(1),
+							SegmentLengthUnits:     types.CmafIngestSegmentLengthUnits("MILLISECONDS"),
+							SendDelayMs:            ptr.Int32(1),
+							KlvBehavior:            types.CmafKLVBehavior("NO_PASSTHROUGH"),
+							KlvNameModifier:        ptr.String("__KlvNameModifier__"),
+							NielsenId3NameModifier: ptr.String("__NielsenId3NameModifier__"),
+							Scte35NameModifier:     ptr.String("__Scte35NameModifier__"),
+							Id3Behavior:            types.CmafId3Behavior("DISABLED"),
+							Id3NameModifier:        ptr.String("__Id3NameModifier__"),
+							CaptionLanguageMappings: []types.CmafIngestCaptionLanguageMapping{
+								{
+									CaptionChannel: ptr.Int32(1),
+									LanguageCode:   ptr.String("__LanguageCode__"),
+								},
+								{
+									CaptionChannel: ptr.Int32(1),
+									LanguageCode:   ptr.String("__LanguageCode__"),
+								},
+							},
+							TimedMetadataId3Frame:    types.CmafTimedMetadataId3Frame("NONE"),
+							TimedMetadataId3Period:   ptr.Int32(1),
+							TimedMetadataPassthrough: types.CmafTimedMetadataPassthrough("DISABLED"),
+							AdditionalDestinations: []types.AdditionalDestinations{
+								{
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+								},
+								{
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+								},
+							},
+						},
+						SrtGroupSettings: &types.SrtGroupSettings{
+							InputLossAction: types.InputLossActionForUdpOut("DROP_PROGRAM"),
+						},
+						MediaConnectRouterGroupSettings: &types.MediaConnectRouterGroupSettings{
+							AvailabilityZones: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					Outputs: []types.Output{
+						{
+							AudioDescriptionNames: []string{
+								"__Member__",
+								"__Member__",
+							},
+							CaptionDescriptionNames: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputName: ptr.String("__OutputName__"),
+							OutputSettings: &types.OutputSettings{
+								ArchiveOutputSettings: &types.ArchiveOutputSettings{
+									ContainerSettings: &types.ArchiveContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+										RawSettings: &types.RawSettings{},
+									},
+									Extension:    ptr.String("__Extension__"),
+									NameModifier: ptr.String("__NameModifier__"),
+								},
+								FrameCaptureOutputSettings: &types.FrameCaptureOutputSettings{
+									NameModifier: ptr.String("__NameModifier__"),
+								},
+								HlsOutputSettings: &types.HlsOutputSettings{
+									H265PackagingType: types.HlsH265PackagingType("HEV1"),
+									HlsSettings: &types.HlsSettings{
+										AudioOnlyHlsSettings: &types.AudioOnlyHlsSettings{
+											AudioGroupId: ptr.String("__AudioGroupId__"),
+											AudioOnlyImage: &types.InputLocation{
+												PasswordParam: ptr.String("__PasswordParam__"),
+												Uri:           ptr.String("__Uri__"),
+												Username:      ptr.String("__Username__"),
+											},
+											AudioTrackType: types.AudioOnlyHlsTrackType("ALTERNATE_AUDIO_AUTO_SELECT"),
+											SegmentType:    types.AudioOnlyHlsSegmentType("AAC"),
+										},
+										Fmp4HlsSettings: &types.Fmp4HlsSettings{
+											AudioRenditionSets:    ptr.String("__AudioRenditionSets__"),
+											NielsenId3Behavior:    types.Fmp4NielsenId3Behavior("NO_PASSTHROUGH"),
+											TimedMetadataBehavior: types.Fmp4TimedMetadataBehavior("NO_PASSTHROUGH"),
+										},
+										FrameCaptureHlsSettings: &types.FrameCaptureHlsSettings{},
+										StandardHlsSettings: &types.StandardHlsSettings{
+											AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
+											M3u8Settings: &types.M3u8Settings{
+												AudioFramesPerPes:     ptr.Int32(1),
+												AudioPids:             ptr.String("__AudioPids__"),
+												EcmPid:                ptr.String("__EcmPid__"),
+												NielsenId3Behavior:    types.M3u8NielsenId3Behavior("NO_PASSTHROUGH"),
+												PatInterval:           ptr.Int32(1),
+												PcrControl:            types.M3u8PcrControl("CONFIGURED_PCR_PERIOD"),
+												PcrPeriod:             ptr.Int32(1),
+												PcrPid:                ptr.String("__PcrPid__"),
+												PmtInterval:           ptr.Int32(1),
+												PmtPid:                ptr.String("__PmtPid__"),
+												ProgramNum:            ptr.Int32(1),
+												Scte35Behavior:        types.M3u8Scte35Behavior("NO_PASSTHROUGH"),
+												Scte35Pid:             ptr.String("__Scte35Pid__"),
+												TimedMetadataBehavior: types.M3u8TimedMetadataBehavior("NO_PASSTHROUGH"),
+												TimedMetadataPid:      ptr.String("__TimedMetadataPid__"),
+												TransportStreamId:     ptr.Int32(1),
+												VideoPid:              ptr.String("__VideoPid__"),
+												KlvBehavior:           types.M3u8KlvBehavior("NO_PASSTHROUGH"),
+												KlvDataPids:           ptr.String("__KlvDataPids__"),
+											},
+										},
+									},
+									NameModifier:    ptr.String("__NameModifier__"),
+									SegmentModifier: ptr.String("__SegmentModifier__"),
+								},
+								MediaPackageOutputSettings: &types.MediaPackageOutputSettings{
+									MediaPackageV2DestinationSettings: &types.MediaPackageV2DestinationSettings{
+										AudioGroupId:       ptr.String("__AudioGroupId__"),
+										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
+										HlsAutoSelect:      types.HlsAutoSelect("NO"),
+										HlsDefault:         types.HlsDefault("NO"),
+									},
+								},
+								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
+									H265PackagingType: types.MsSmoothH265PackagingType("HEV1"),
+									NameModifier:      ptr.String("__NameModifier__"),
+								},
+								MultiplexOutputSettings: &types.MultiplexOutputSettings{
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									ContainerSettings: &types.MultiplexContainerSettings{
+										MultiplexM2tsSettings: &types.MultiplexM2tsSettings{
+											AbsentInputAudioBehavior:        types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                            types.M2tsArib("DISABLED"),
+											AudioBufferModel:                types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:               ptr.Int32(1),
+											AudioStreamType:                 types.M2tsAudioStreamType("ATSC"),
+											CcDescriptor:                    types.M2tsCcDescriptor("DISABLED"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											Klv:                             types.M2tsKlv("NONE"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+								},
+								RtmpOutputSettings: &types.RtmpOutputSettings{
+									CertificateMode:         types.RtmpOutputCertificateMode("SELF_SIGNED"),
+									ConnectionRetryInterval: ptr.Int32(1),
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									NumRetries: ptr.Int32(1),
+								},
+								UdpOutputSettings: &types.UdpOutputSettings{
+									BufferMsec: ptr.Int32(1),
+									ContainerSettings: &types.UdpContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									FecOutputSettings: &types.FecOutputSettings{
+										ColumnDepth: ptr.Int32(1),
+										IncludeFec:  types.FecOutputIncludeFec("COLUMN"),
+										RowLength:   ptr.Int32(1),
+									},
+								},
+								CmafIngestOutputSettings: &types.CmafIngestOutputSettings{
+									NameModifier: ptr.String("__NameModifier__"),
+								},
+								SrtOutputSettings: &types.SrtOutputSettings{
+									BufferMsec: ptr.Int32(1),
+									ContainerSettings: &types.UdpContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									EncryptionType: types.SrtEncryptionType("AES128"),
+									Latency:        ptr.Int32(1),
+								},
+								MediaConnectRouterOutputSettings: &types.MediaConnectRouterOutputSettings{
+									ConnectedRouterInputs: &types.MediaConnectRouterOutputConnectionMap{
+										Pipeline0: ptr.String("__Pipeline0__"),
+										Pipeline1: ptr.String("__Pipeline1__"),
+									},
+									ContainerSettings: &types.MediaConnectRouterContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+								},
+							},
+							VideoDescriptionName: ptr.String("__VideoDescriptionName__"),
+						},
+						{
+							AudioDescriptionNames: []string{
+								"__Member__",
+								"__Member__",
+							},
+							CaptionDescriptionNames: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputName: ptr.String("__OutputName__"),
+							OutputSettings: &types.OutputSettings{
+								ArchiveOutputSettings: &types.ArchiveOutputSettings{
+									ContainerSettings: &types.ArchiveContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+										RawSettings: &types.RawSettings{},
+									},
+									Extension:    ptr.String("__Extension__"),
+									NameModifier: ptr.String("__NameModifier__"),
+								},
+								FrameCaptureOutputSettings: &types.FrameCaptureOutputSettings{
+									NameModifier: ptr.String("__NameModifier__"),
+								},
+								HlsOutputSettings: &types.HlsOutputSettings{
+									H265PackagingType: types.HlsH265PackagingType("HEV1"),
+									HlsSettings: &types.HlsSettings{
+										AudioOnlyHlsSettings: &types.AudioOnlyHlsSettings{
+											AudioGroupId: ptr.String("__AudioGroupId__"),
+											AudioOnlyImage: &types.InputLocation{
+												PasswordParam: ptr.String("__PasswordParam__"),
+												Uri:           ptr.String("__Uri__"),
+												Username:      ptr.String("__Username__"),
+											},
+											AudioTrackType: types.AudioOnlyHlsTrackType("ALTERNATE_AUDIO_AUTO_SELECT"),
+											SegmentType:    types.AudioOnlyHlsSegmentType("AAC"),
+										},
+										Fmp4HlsSettings: &types.Fmp4HlsSettings{
+											AudioRenditionSets:    ptr.String("__AudioRenditionSets__"),
+											NielsenId3Behavior:    types.Fmp4NielsenId3Behavior("NO_PASSTHROUGH"),
+											TimedMetadataBehavior: types.Fmp4TimedMetadataBehavior("NO_PASSTHROUGH"),
+										},
+										FrameCaptureHlsSettings: &types.FrameCaptureHlsSettings{},
+										StandardHlsSettings: &types.StandardHlsSettings{
+											AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
+											M3u8Settings: &types.M3u8Settings{
+												AudioFramesPerPes:     ptr.Int32(1),
+												AudioPids:             ptr.String("__AudioPids__"),
+												EcmPid:                ptr.String("__EcmPid__"),
+												NielsenId3Behavior:    types.M3u8NielsenId3Behavior("NO_PASSTHROUGH"),
+												PatInterval:           ptr.Int32(1),
+												PcrControl:            types.M3u8PcrControl("CONFIGURED_PCR_PERIOD"),
+												PcrPeriod:             ptr.Int32(1),
+												PcrPid:                ptr.String("__PcrPid__"),
+												PmtInterval:           ptr.Int32(1),
+												PmtPid:                ptr.String("__PmtPid__"),
+												ProgramNum:            ptr.Int32(1),
+												Scte35Behavior:        types.M3u8Scte35Behavior("NO_PASSTHROUGH"),
+												Scte35Pid:             ptr.String("__Scte35Pid__"),
+												TimedMetadataBehavior: types.M3u8TimedMetadataBehavior("NO_PASSTHROUGH"),
+												TimedMetadataPid:      ptr.String("__TimedMetadataPid__"),
+												TransportStreamId:     ptr.Int32(1),
+												VideoPid:              ptr.String("__VideoPid__"),
+												KlvBehavior:           types.M3u8KlvBehavior("NO_PASSTHROUGH"),
+												KlvDataPids:           ptr.String("__KlvDataPids__"),
+											},
+										},
+									},
+									NameModifier:    ptr.String("__NameModifier__"),
+									SegmentModifier: ptr.String("__SegmentModifier__"),
+								},
+								MediaPackageOutputSettings: &types.MediaPackageOutputSettings{
+									MediaPackageV2DestinationSettings: &types.MediaPackageV2DestinationSettings{
+										AudioGroupId:       ptr.String("__AudioGroupId__"),
+										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
+										HlsAutoSelect:      types.HlsAutoSelect("NO"),
+										HlsDefault:         types.HlsDefault("NO"),
+									},
+								},
+								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
+									H265PackagingType: types.MsSmoothH265PackagingType("HEV1"),
+									NameModifier:      ptr.String("__NameModifier__"),
+								},
+								MultiplexOutputSettings: &types.MultiplexOutputSettings{
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									ContainerSettings: &types.MultiplexContainerSettings{
+										MultiplexM2tsSettings: &types.MultiplexM2tsSettings{
+											AbsentInputAudioBehavior:        types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                            types.M2tsArib("DISABLED"),
+											AudioBufferModel:                types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:               ptr.Int32(1),
+											AudioStreamType:                 types.M2tsAudioStreamType("ATSC"),
+											CcDescriptor:                    types.M2tsCcDescriptor("DISABLED"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											Klv:                             types.M2tsKlv("NONE"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+								},
+								RtmpOutputSettings: &types.RtmpOutputSettings{
+									CertificateMode:         types.RtmpOutputCertificateMode("SELF_SIGNED"),
+									ConnectionRetryInterval: ptr.Int32(1),
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									NumRetries: ptr.Int32(1),
+								},
+								UdpOutputSettings: &types.UdpOutputSettings{
+									BufferMsec: ptr.Int32(1),
+									ContainerSettings: &types.UdpContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									FecOutputSettings: &types.FecOutputSettings{
+										ColumnDepth: ptr.Int32(1),
+										IncludeFec:  types.FecOutputIncludeFec("COLUMN"),
+										RowLength:   ptr.Int32(1),
+									},
+								},
+								CmafIngestOutputSettings: &types.CmafIngestOutputSettings{
+									NameModifier: ptr.String("__NameModifier__"),
+								},
+								SrtOutputSettings: &types.SrtOutputSettings{
+									BufferMsec: ptr.Int32(1),
+									ContainerSettings: &types.UdpContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									EncryptionType: types.SrtEncryptionType("AES128"),
+									Latency:        ptr.Int32(1),
+								},
+								MediaConnectRouterOutputSettings: &types.MediaConnectRouterOutputSettings{
+									ConnectedRouterInputs: &types.MediaConnectRouterOutputConnectionMap{
+										Pipeline0: ptr.String("__Pipeline0__"),
+										Pipeline1: ptr.String("__Pipeline1__"),
+									},
+									ContainerSettings: &types.MediaConnectRouterContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+								},
+							},
+							VideoDescriptionName: ptr.String("__VideoDescriptionName__"),
+						},
+					},
+				},
+			},
+			TimecodeConfig: &types.TimecodeConfig{
+				Source:        types.TimecodeConfigSource("EMBEDDED"),
+				SyncThreshold: ptr.Int32(1),
+			},
+			VideoDescriptions: []types.VideoDescription{
+				{
+					CodecSettings: &types.VideoCodecSettings{
+						FrameCaptureSettings: &types.FrameCaptureSettings{
+							CaptureInterval:      ptr.Int32(1),
+							CaptureIntervalUnits: types.FrameCaptureIntervalUnit("MILLISECONDS"),
+							TimecodeBurninSettings: &types.TimecodeBurninSettings{
+								FontSize: types.TimecodeBurninFontSize("EXTRA_SMALL_10"),
+								Position: types.TimecodeBurninPosition("BOTTOM_CENTER"),
+								Prefix:   ptr.String("__Prefix__"),
+							},
+						},
+						H264Settings: &types.H264Settings{
+							AdaptiveQuantization: types.H264AdaptiveQuantization("AUTO"),
+							AfdSignaling:         types.AfdSignaling("AUTO"),
+							Bitrate:              ptr.Int32(1),
+							BufFillPct:           ptr.Int32(1),
+							BufSize:              ptr.Int32(1),
+							ColorMetadata:        types.H264ColorMetadata("IGNORE"),
+							ColorSpaceSettings: &types.H264ColorSpaceSettings{
+								ColorSpacePassthroughSettings: &types.ColorSpacePassthroughSettings{},
+								Rec601Settings:                &types.Rec601Settings{},
+								Rec709Settings:                &types.Rec709Settings{},
+							},
+							EntropyEncoding: types.H264EntropyEncoding("CABAC"),
+							FilterSettings: &types.H264FilterSettings{
+								TemporalFilterSettings: &types.TemporalFilterSettings{
+									PostFilterSharpening: types.TemporalFilterPostFilterSharpening("AUTO"),
+									Strength:             types.TemporalFilterStrength("AUTO"),
+								},
+								BandwidthReductionFilterSettings: &types.BandwidthReductionFilterSettings{
+									PostFilterSharpening: types.BandwidthReductionPostFilterSharpening("DISABLED"),
+									Strength:             types.BandwidthReductionFilterStrength("AUTO"),
+								},
+							},
+							FixedAfd:             types.FixedAfd("AFD_0000"),
+							FlickerAq:            types.H264FlickerAq("DISABLED"),
+							ForceFieldPictures:   types.H264ForceFieldPictures("DISABLED"),
+							FramerateControl:     types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
+							FramerateDenominator: ptr.Int32(1),
+							FramerateNumerator:   ptr.Int32(1),
+							GopBReference:        types.H264GopBReference("DISABLED"),
+							GopClosedCadence:     ptr.Int32(1),
+							GopNumBFrames:        ptr.Int32(1),
+							GopSize:              ptr.Float64(1.0),
+							GopSizeUnits:         types.H264GopSizeUnits("FRAMES"),
+							Level:                types.H264Level("H264_LEVEL_1"),
+							LookAheadRateControl: types.H264LookAheadRateControl("HIGH"),
+							MaxBitrate:           ptr.Int32(1),
+							MinIInterval:         ptr.Int32(1),
+							NumRefFrames:         ptr.Int32(1),
+							ParControl:           types.H264ParControl("INITIALIZE_FROM_SOURCE"),
+							ParDenominator:       ptr.Int32(1),
+							ParNumerator:         ptr.Int32(1),
+							Profile:              types.H264Profile("BASELINE"),
+							QualityLevel:         types.H264QualityLevel("ENHANCED_QUALITY"),
+							QvbrQualityLevel:     ptr.Int32(1),
+							RateControlMode:      types.H264RateControlMode("CBR"),
+							ScanType:             types.H264ScanType("INTERLACED"),
+							SceneChangeDetect:    types.H264SceneChangeDetect("DISABLED"),
+							Slices:               ptr.Int32(1),
+							Softness:             ptr.Int32(1),
+							SpatialAq:            types.H264SpatialAq("DISABLED"),
+							SubgopLength:         types.H264SubGopLength("DYNAMIC"),
+							Syntax:               types.H264Syntax("DEFAULT"),
+							TemporalAq:           types.H264TemporalAq("DISABLED"),
+							TimecodeInsertion:    types.H264TimecodeInsertionBehavior("DISABLED"),
+							TimecodeBurninSettings: &types.TimecodeBurninSettings{
+								FontSize: types.TimecodeBurninFontSize("EXTRA_SMALL_10"),
+								Position: types.TimecodeBurninPosition("BOTTOM_CENTER"),
+								Prefix:   ptr.String("__Prefix__"),
+							},
+							MinQp:      ptr.Int32(1),
+							MinBitrate: ptr.Int32(1),
+						},
+						H265Settings: &types.H265Settings{
+							AdaptiveQuantization:        types.H265AdaptiveQuantization("AUTO"),
+							AfdSignaling:                types.AfdSignaling("AUTO"),
+							AlternativeTransferFunction: types.H265AlternativeTransferFunction("INSERT"),
+							Bitrate:                     ptr.Int32(1),
+							BufSize:                     ptr.Int32(1),
+							ColorMetadata:               types.H265ColorMetadata("IGNORE"),
+							ColorSpaceSettings: &types.H265ColorSpaceSettings{
+								ColorSpacePassthroughSettings: &types.ColorSpacePassthroughSettings{},
+								DolbyVision81Settings:         &types.DolbyVision81Settings{},
+								Hdr10Settings: &types.Hdr10Settings{
+									MaxCll:  ptr.Int32(1),
+									MaxFall: ptr.Int32(1),
+								},
+								Rec601Settings:  &types.Rec601Settings{},
+								Rec709Settings:  &types.Rec709Settings{},
+								Hlg2020Settings: &types.Hlg2020Settings{},
+							},
+							FilterSettings: &types.H265FilterSettings{
+								TemporalFilterSettings: &types.TemporalFilterSettings{
+									PostFilterSharpening: types.TemporalFilterPostFilterSharpening("AUTO"),
+									Strength:             types.TemporalFilterStrength("AUTO"),
+								},
+								BandwidthReductionFilterSettings: &types.BandwidthReductionFilterSettings{
+									PostFilterSharpening: types.BandwidthReductionPostFilterSharpening("DISABLED"),
+									Strength:             types.BandwidthReductionFilterStrength("AUTO"),
+								},
+							},
+							FixedAfd:             types.FixedAfd("AFD_0000"),
+							FlickerAq:            types.H265FlickerAq("DISABLED"),
+							FramerateDenominator: ptr.Int32(1),
+							FramerateNumerator:   ptr.Int32(1),
+							GopClosedCadence:     ptr.Int32(1),
+							GopSize:              ptr.Float64(1.0),
+							GopSizeUnits:         types.H265GopSizeUnits("FRAMES"),
+							Level:                types.H265Level("H265_LEVEL_1"),
+							LookAheadRateControl: types.H265LookAheadRateControl("HIGH"),
+							MaxBitrate:           ptr.Int32(1),
+							MinIInterval:         ptr.Int32(1),
+							ParDenominator:       ptr.Int32(1),
+							ParNumerator:         ptr.Int32(1),
+							Profile:              types.H265Profile("MAIN"),
+							QvbrQualityLevel:     ptr.Int32(1),
+							RateControlMode:      types.H265RateControlMode("CBR"),
+							ScanType:             types.H265ScanType("INTERLACED"),
+							SceneChangeDetect:    types.H265SceneChangeDetect("DISABLED"),
+							Slices:               ptr.Int32(1),
+							Tier:                 types.H265Tier("HIGH"),
+							TimecodeInsertion:    types.H265TimecodeInsertionBehavior("DISABLED"),
+							TimecodeBurninSettings: &types.TimecodeBurninSettings{
+								FontSize: types.TimecodeBurninFontSize("EXTRA_SMALL_10"),
+								Position: types.TimecodeBurninPosition("BOTTOM_CENTER"),
+								Prefix:   ptr.String("__Prefix__"),
+							},
+							MvOverPictureBoundaries: types.H265MvOverPictureBoundaries("DISABLED"),
+							MvTemporalPredictor:     types.H265MvTemporalPredictor("DISABLED"),
+							TileHeight:              ptr.Int32(1),
+							TilePadding:             types.H265TilePadding("NONE"),
+							TileWidth:               ptr.Int32(1),
+							TreeblockSize:           types.H265TreeblockSize("AUTO"),
+							MinQp:                   ptr.Int32(1),
+							Deblocking:              types.H265Deblocking("DISABLED"),
+							GopBReference:           types.H265GopBReference("DISABLED"),
+							GopNumBFrames:           ptr.Int32(1),
+							MinBitrate:              ptr.Int32(1),
+							SubgopLength:            types.H265SubGopLength("DYNAMIC"),
+						},
+						Mpeg2Settings: &types.Mpeg2Settings{
+							AdaptiveQuantization: types.Mpeg2AdaptiveQuantization("AUTO"),
+							AfdSignaling:         types.AfdSignaling("AUTO"),
+							ColorMetadata:        types.Mpeg2ColorMetadata("IGNORE"),
+							ColorSpace:           types.Mpeg2ColorSpace("AUTO"),
+							DisplayAspectRatio:   types.Mpeg2DisplayRatio("DISPLAYRATIO16X9"),
+							FilterSettings: &types.Mpeg2FilterSettings{
+								TemporalFilterSettings: &types.TemporalFilterSettings{
+									PostFilterSharpening: types.TemporalFilterPostFilterSharpening("AUTO"),
+									Strength:             types.TemporalFilterStrength("AUTO"),
+								},
+							},
+							FixedAfd:             types.FixedAfd("AFD_0000"),
+							FramerateDenominator: ptr.Int32(1),
+							FramerateNumerator:   ptr.Int32(1),
+							GopClosedCadence:     ptr.Int32(1),
+							GopNumBFrames:        ptr.Int32(1),
+							GopSize:              ptr.Float64(1.0),
+							GopSizeUnits:         types.Mpeg2GopSizeUnits("FRAMES"),
+							ScanType:             types.Mpeg2ScanType("INTERLACED"),
+							SubgopLength:         types.Mpeg2SubGopLength("DYNAMIC"),
+							TimecodeInsertion:    types.Mpeg2TimecodeInsertionBehavior("DISABLED"),
+							TimecodeBurninSettings: &types.TimecodeBurninSettings{
+								FontSize: types.TimecodeBurninFontSize("EXTRA_SMALL_10"),
+								Position: types.TimecodeBurninPosition("BOTTOM_CENTER"),
+								Prefix:   ptr.String("__Prefix__"),
+							},
+						},
+						Av1Settings: &types.Av1Settings{
+							AfdSignaling: types.AfdSignaling("AUTO"),
+							BufSize:      ptr.Int32(1),
+							ColorSpaceSettings: &types.Av1ColorSpaceSettings{
+								ColorSpacePassthroughSettings: &types.ColorSpacePassthroughSettings{},
+								Hdr10Settings: &types.Hdr10Settings{
+									MaxCll:  ptr.Int32(1),
+									MaxFall: ptr.Int32(1),
+								},
+								Rec601Settings:  &types.Rec601Settings{},
+								Rec709Settings:  &types.Rec709Settings{},
+								Hlg2020Settings: &types.Hlg2020Settings{},
+							},
+							FixedAfd:             types.FixedAfd("AFD_0000"),
+							FramerateDenominator: ptr.Int32(1),
+							FramerateNumerator:   ptr.Int32(1),
+							GopSize:              ptr.Float64(1.0),
+							GopSizeUnits:         types.Av1GopSizeUnits("FRAMES"),
+							Level:                types.Av1Level("AV1_LEVEL_2"),
+							LookAheadRateControl: types.Av1LookAheadRateControl("HIGH"),
+							MaxBitrate:           ptr.Int32(1),
+							MinIInterval:         ptr.Int32(1),
+							ParDenominator:       ptr.Int32(1),
+							ParNumerator:         ptr.Int32(1),
+							QvbrQualityLevel:     ptr.Int32(1),
+							SceneChangeDetect:    types.Av1SceneChangeDetect("DISABLED"),
+							TimecodeBurninSettings: &types.TimecodeBurninSettings{
+								FontSize: types.TimecodeBurninFontSize("EXTRA_SMALL_10"),
+								Position: types.TimecodeBurninPosition("BOTTOM_CENTER"),
+								Prefix:   ptr.String("__Prefix__"),
+							},
+							Bitrate:           ptr.Int32(1),
+							RateControlMode:   types.Av1RateControlMode("CBR"),
+							MinBitrate:        ptr.Int32(1),
+							SpatialAq:         types.Av1SpatialAq("DISABLED"),
+							TemporalAq:        types.Av1TemporalAq("DISABLED"),
+							TimecodeInsertion: types.Av1TimecodeInsertionBehavior("DISABLED"),
+							BitDepth:          types.Av1BitDepth("DEPTH_10"),
+						},
+					},
+					Height:          ptr.Int32(1),
+					Name:            ptr.String("__Name__"),
+					RespondToAfd:    types.VideoDescriptionRespondToAfd("NONE"),
+					ScalingBehavior: types.VideoDescriptionScalingBehavior("DEFAULT"),
+					Sharpness:       ptr.Int32(1),
+					Width:           ptr.Int32(1),
+				},
+				{
+					CodecSettings: &types.VideoCodecSettings{
+						FrameCaptureSettings: &types.FrameCaptureSettings{
+							CaptureInterval:      ptr.Int32(1),
+							CaptureIntervalUnits: types.FrameCaptureIntervalUnit("MILLISECONDS"),
+							TimecodeBurninSettings: &types.TimecodeBurninSettings{
+								FontSize: types.TimecodeBurninFontSize("EXTRA_SMALL_10"),
+								Position: types.TimecodeBurninPosition("BOTTOM_CENTER"),
+								Prefix:   ptr.String("__Prefix__"),
+							},
+						},
+						H264Settings: &types.H264Settings{
+							AdaptiveQuantization: types.H264AdaptiveQuantization("AUTO"),
+							AfdSignaling:         types.AfdSignaling("AUTO"),
+							Bitrate:              ptr.Int32(1),
+							BufFillPct:           ptr.Int32(1),
+							BufSize:              ptr.Int32(1),
+							ColorMetadata:        types.H264ColorMetadata("IGNORE"),
+							ColorSpaceSettings: &types.H264ColorSpaceSettings{
+								ColorSpacePassthroughSettings: &types.ColorSpacePassthroughSettings{},
+								Rec601Settings:                &types.Rec601Settings{},
+								Rec709Settings:                &types.Rec709Settings{},
+							},
+							EntropyEncoding: types.H264EntropyEncoding("CABAC"),
+							FilterSettings: &types.H264FilterSettings{
+								TemporalFilterSettings: &types.TemporalFilterSettings{
+									PostFilterSharpening: types.TemporalFilterPostFilterSharpening("AUTO"),
+									Strength:             types.TemporalFilterStrength("AUTO"),
+								},
+								BandwidthReductionFilterSettings: &types.BandwidthReductionFilterSettings{
+									PostFilterSharpening: types.BandwidthReductionPostFilterSharpening("DISABLED"),
+									Strength:             types.BandwidthReductionFilterStrength("AUTO"),
+								},
+							},
+							FixedAfd:             types.FixedAfd("AFD_0000"),
+							FlickerAq:            types.H264FlickerAq("DISABLED"),
+							ForceFieldPictures:   types.H264ForceFieldPictures("DISABLED"),
+							FramerateControl:     types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
+							FramerateDenominator: ptr.Int32(1),
+							FramerateNumerator:   ptr.Int32(1),
+							GopBReference:        types.H264GopBReference("DISABLED"),
+							GopClosedCadence:     ptr.Int32(1),
+							GopNumBFrames:        ptr.Int32(1),
+							GopSize:              ptr.Float64(1.0),
+							GopSizeUnits:         types.H264GopSizeUnits("FRAMES"),
+							Level:                types.H264Level("H264_LEVEL_1"),
+							LookAheadRateControl: types.H264LookAheadRateControl("HIGH"),
+							MaxBitrate:           ptr.Int32(1),
+							MinIInterval:         ptr.Int32(1),
+							NumRefFrames:         ptr.Int32(1),
+							ParControl:           types.H264ParControl("INITIALIZE_FROM_SOURCE"),
+							ParDenominator:       ptr.Int32(1),
+							ParNumerator:         ptr.Int32(1),
+							Profile:              types.H264Profile("BASELINE"),
+							QualityLevel:         types.H264QualityLevel("ENHANCED_QUALITY"),
+							QvbrQualityLevel:     ptr.Int32(1),
+							RateControlMode:      types.H264RateControlMode("CBR"),
+							ScanType:             types.H264ScanType("INTERLACED"),
+							SceneChangeDetect:    types.H264SceneChangeDetect("DISABLED"),
+							Slices:               ptr.Int32(1),
+							Softness:             ptr.Int32(1),
+							SpatialAq:            types.H264SpatialAq("DISABLED"),
+							SubgopLength:         types.H264SubGopLength("DYNAMIC"),
+							Syntax:               types.H264Syntax("DEFAULT"),
+							TemporalAq:           types.H264TemporalAq("DISABLED"),
+							TimecodeInsertion:    types.H264TimecodeInsertionBehavior("DISABLED"),
+							TimecodeBurninSettings: &types.TimecodeBurninSettings{
+								FontSize: types.TimecodeBurninFontSize("EXTRA_SMALL_10"),
+								Position: types.TimecodeBurninPosition("BOTTOM_CENTER"),
+								Prefix:   ptr.String("__Prefix__"),
+							},
+							MinQp:      ptr.Int32(1),
+							MinBitrate: ptr.Int32(1),
+						},
+						H265Settings: &types.H265Settings{
+							AdaptiveQuantization:        types.H265AdaptiveQuantization("AUTO"),
+							AfdSignaling:                types.AfdSignaling("AUTO"),
+							AlternativeTransferFunction: types.H265AlternativeTransferFunction("INSERT"),
+							Bitrate:                     ptr.Int32(1),
+							BufSize:                     ptr.Int32(1),
+							ColorMetadata:               types.H265ColorMetadata("IGNORE"),
+							ColorSpaceSettings: &types.H265ColorSpaceSettings{
+								ColorSpacePassthroughSettings: &types.ColorSpacePassthroughSettings{},
+								DolbyVision81Settings:         &types.DolbyVision81Settings{},
+								Hdr10Settings: &types.Hdr10Settings{
+									MaxCll:  ptr.Int32(1),
+									MaxFall: ptr.Int32(1),
+								},
+								Rec601Settings:  &types.Rec601Settings{},
+								Rec709Settings:  &types.Rec709Settings{},
+								Hlg2020Settings: &types.Hlg2020Settings{},
+							},
+							FilterSettings: &types.H265FilterSettings{
+								TemporalFilterSettings: &types.TemporalFilterSettings{
+									PostFilterSharpening: types.TemporalFilterPostFilterSharpening("AUTO"),
+									Strength:             types.TemporalFilterStrength("AUTO"),
+								},
+								BandwidthReductionFilterSettings: &types.BandwidthReductionFilterSettings{
+									PostFilterSharpening: types.BandwidthReductionPostFilterSharpening("DISABLED"),
+									Strength:             types.BandwidthReductionFilterStrength("AUTO"),
+								},
+							},
+							FixedAfd:             types.FixedAfd("AFD_0000"),
+							FlickerAq:            types.H265FlickerAq("DISABLED"),
+							FramerateDenominator: ptr.Int32(1),
+							FramerateNumerator:   ptr.Int32(1),
+							GopClosedCadence:     ptr.Int32(1),
+							GopSize:              ptr.Float64(1.0),
+							GopSizeUnits:         types.H265GopSizeUnits("FRAMES"),
+							Level:                types.H265Level("H265_LEVEL_1"),
+							LookAheadRateControl: types.H265LookAheadRateControl("HIGH"),
+							MaxBitrate:           ptr.Int32(1),
+							MinIInterval:         ptr.Int32(1),
+							ParDenominator:       ptr.Int32(1),
+							ParNumerator:         ptr.Int32(1),
+							Profile:              types.H265Profile("MAIN"),
+							QvbrQualityLevel:     ptr.Int32(1),
+							RateControlMode:      types.H265RateControlMode("CBR"),
+							ScanType:             types.H265ScanType("INTERLACED"),
+							SceneChangeDetect:    types.H265SceneChangeDetect("DISABLED"),
+							Slices:               ptr.Int32(1),
+							Tier:                 types.H265Tier("HIGH"),
+							TimecodeInsertion:    types.H265TimecodeInsertionBehavior("DISABLED"),
+							TimecodeBurninSettings: &types.TimecodeBurninSettings{
+								FontSize: types.TimecodeBurninFontSize("EXTRA_SMALL_10"),
+								Position: types.TimecodeBurninPosition("BOTTOM_CENTER"),
+								Prefix:   ptr.String("__Prefix__"),
+							},
+							MvOverPictureBoundaries: types.H265MvOverPictureBoundaries("DISABLED"),
+							MvTemporalPredictor:     types.H265MvTemporalPredictor("DISABLED"),
+							TileHeight:              ptr.Int32(1),
+							TilePadding:             types.H265TilePadding("NONE"),
+							TileWidth:               ptr.Int32(1),
+							TreeblockSize:           types.H265TreeblockSize("AUTO"),
+							MinQp:                   ptr.Int32(1),
+							Deblocking:              types.H265Deblocking("DISABLED"),
+							GopBReference:           types.H265GopBReference("DISABLED"),
+							GopNumBFrames:           ptr.Int32(1),
+							MinBitrate:              ptr.Int32(1),
+							SubgopLength:            types.H265SubGopLength("DYNAMIC"),
+						},
+						Mpeg2Settings: &types.Mpeg2Settings{
+							AdaptiveQuantization: types.Mpeg2AdaptiveQuantization("AUTO"),
+							AfdSignaling:         types.AfdSignaling("AUTO"),
+							ColorMetadata:        types.Mpeg2ColorMetadata("IGNORE"),
+							ColorSpace:           types.Mpeg2ColorSpace("AUTO"),
+							DisplayAspectRatio:   types.Mpeg2DisplayRatio("DISPLAYRATIO16X9"),
+							FilterSettings: &types.Mpeg2FilterSettings{
+								TemporalFilterSettings: &types.TemporalFilterSettings{
+									PostFilterSharpening: types.TemporalFilterPostFilterSharpening("AUTO"),
+									Strength:             types.TemporalFilterStrength("AUTO"),
+								},
+							},
+							FixedAfd:             types.FixedAfd("AFD_0000"),
+							FramerateDenominator: ptr.Int32(1),
+							FramerateNumerator:   ptr.Int32(1),
+							GopClosedCadence:     ptr.Int32(1),
+							GopNumBFrames:        ptr.Int32(1),
+							GopSize:              ptr.Float64(1.0),
+							GopSizeUnits:         types.Mpeg2GopSizeUnits("FRAMES"),
+							ScanType:             types.Mpeg2ScanType("INTERLACED"),
+							SubgopLength:         types.Mpeg2SubGopLength("DYNAMIC"),
+							TimecodeInsertion:    types.Mpeg2TimecodeInsertionBehavior("DISABLED"),
+							TimecodeBurninSettings: &types.TimecodeBurninSettings{
+								FontSize: types.TimecodeBurninFontSize("EXTRA_SMALL_10"),
+								Position: types.TimecodeBurninPosition("BOTTOM_CENTER"),
+								Prefix:   ptr.String("__Prefix__"),
+							},
+						},
+						Av1Settings: &types.Av1Settings{
+							AfdSignaling: types.AfdSignaling("AUTO"),
+							BufSize:      ptr.Int32(1),
+							ColorSpaceSettings: &types.Av1ColorSpaceSettings{
+								ColorSpacePassthroughSettings: &types.ColorSpacePassthroughSettings{},
+								Hdr10Settings: &types.Hdr10Settings{
+									MaxCll:  ptr.Int32(1),
+									MaxFall: ptr.Int32(1),
+								},
+								Rec601Settings:  &types.Rec601Settings{},
+								Rec709Settings:  &types.Rec709Settings{},
+								Hlg2020Settings: &types.Hlg2020Settings{},
+							},
+							FixedAfd:             types.FixedAfd("AFD_0000"),
+							FramerateDenominator: ptr.Int32(1),
+							FramerateNumerator:   ptr.Int32(1),
+							GopSize:              ptr.Float64(1.0),
+							GopSizeUnits:         types.Av1GopSizeUnits("FRAMES"),
+							Level:                types.Av1Level("AV1_LEVEL_2"),
+							LookAheadRateControl: types.Av1LookAheadRateControl("HIGH"),
+							MaxBitrate:           ptr.Int32(1),
+							MinIInterval:         ptr.Int32(1),
+							ParDenominator:       ptr.Int32(1),
+							ParNumerator:         ptr.Int32(1),
+							QvbrQualityLevel:     ptr.Int32(1),
+							SceneChangeDetect:    types.Av1SceneChangeDetect("DISABLED"),
+							TimecodeBurninSettings: &types.TimecodeBurninSettings{
+								FontSize: types.TimecodeBurninFontSize("EXTRA_SMALL_10"),
+								Position: types.TimecodeBurninPosition("BOTTOM_CENTER"),
+								Prefix:   ptr.String("__Prefix__"),
+							},
+							Bitrate:           ptr.Int32(1),
+							RateControlMode:   types.Av1RateControlMode("CBR"),
+							MinBitrate:        ptr.Int32(1),
+							SpatialAq:         types.Av1SpatialAq("DISABLED"),
+							TemporalAq:        types.Av1TemporalAq("DISABLED"),
+							TimecodeInsertion: types.Av1TimecodeInsertionBehavior("DISABLED"),
+							BitDepth:          types.Av1BitDepth("DEPTH_10"),
+						},
+					},
+					Height:          ptr.Int32(1),
+					Name:            ptr.String("__Name__"),
+					RespondToAfd:    types.VideoDescriptionRespondToAfd("NONE"),
+					ScalingBehavior: types.VideoDescriptionScalingBehavior("DEFAULT"),
+					Sharpness:       ptr.Int32(1),
+					Width:           ptr.Int32(1),
+				},
+			},
+			ThumbnailConfiguration: &types.ThumbnailConfiguration{
+				State: types.ThumbnailState("AUTO"),
+			},
+			ColorCorrectionSettings: &types.ColorCorrectionSettings{
+				GlobalColorCorrections: []types.ColorCorrection{
+					{
+						InputColorSpace:  types.ColorSpace("HDR10"),
+						OutputColorSpace: types.ColorSpace("HDR10"),
+						Uri:              ptr.String("__Uri__"),
+					},
+					{
+						InputColorSpace:  types.ColorSpace("HDR10"),
+						OutputColorSpace: types.ColorSpace("HDR10"),
+						Uri:              ptr.String("__Uri__"),
+					},
+				},
+			},
+		},
+		InputAttachments: []types.InputAttachment{
+			{
+				AutomaticInputFailoverSettings: &types.AutomaticInputFailoverSettings{
+					ErrorClearTimeMsec: ptr.Int32(1),
+					FailoverConditions: []types.FailoverCondition{
+						{
+							FailoverConditionSettings: &types.FailoverConditionSettings{
+								AudioSilenceSettings: &types.AudioSilenceFailoverSettings{
+									AudioSelectorName:         ptr.String("__AudioSelectorName__"),
+									AudioSilenceThresholdMsec: ptr.Int32(1),
+								},
+								InputLossSettings: &types.InputLossFailoverSettings{
+									InputLossThresholdMsec: ptr.Int32(1),
+								},
+								VideoBlackSettings: &types.VideoBlackFailoverSettings{
+									BlackDetectThreshold:    ptr.Float64(1.0),
+									VideoBlackThresholdMsec: ptr.Int32(1),
+								},
+							},
+						},
+						{
+							FailoverConditionSettings: &types.FailoverConditionSettings{
+								AudioSilenceSettings: &types.AudioSilenceFailoverSettings{
+									AudioSelectorName:         ptr.String("__AudioSelectorName__"),
+									AudioSilenceThresholdMsec: ptr.Int32(1),
+								},
+								InputLossSettings: &types.InputLossFailoverSettings{
+									InputLossThresholdMsec: ptr.Int32(1),
+								},
+								VideoBlackSettings: &types.VideoBlackFailoverSettings{
+									BlackDetectThreshold:    ptr.Float64(1.0),
+									VideoBlackThresholdMsec: ptr.Int32(1),
+								},
+							},
+						},
+					},
+					InputPreference:  types.InputPreference("EQUAL_INPUT_PREFERENCE"),
+					SecondaryInputId: ptr.String("__SecondaryInputId__"),
+				},
+				InputAttachmentName: ptr.String("__InputAttachmentName__"),
+				InputId:             ptr.String("__InputId__"),
+				InputSettings: &types.InputSettings{
+					AudioSelectors: []types.AudioSelector{
+						{
+							Name: ptr.String("__Name__"),
+							SelectorSettings: &types.AudioSelectorSettings{
+								AudioHlsRenditionSelection: &types.AudioHlsRenditionSelection{
+									GroupId: ptr.String("__GroupId__"),
+									Name:    ptr.String("__Name__"),
+								},
+								AudioLanguageSelection: &types.AudioLanguageSelection{
+									LanguageCode:            ptr.String("__LanguageCode__"),
+									LanguageSelectionPolicy: types.AudioLanguageSelectionPolicy("LOOSE"),
+								},
+								AudioPidSelection: &types.AudioPidSelection{
+									Pid: ptr.Int32(1),
+									Pids: []types.AudioPid{
+										{
+											DolbyEDecode: &types.AudioDolbyEDecode{
+												ProgramSelection: types.DolbyEProgramSelection("ALL_CHANNELS"),
+											},
+											Pid: ptr.Int32(1),
+											PremixSettings: &types.AudioPreMixerSettings{
+												AudioNormalizationSettings: &types.AudioNormalizationSettings{
+													Algorithm:            types.AudioNormalizationAlgorithm("ITU_1770_1"),
+													AlgorithmControl:     types.AudioNormalizationAlgorithmControl("CORRECT_AUDIO"),
+													TargetLkfs:           ptr.Float64(1.0),
+													PeakCalculation:      types.AudioNormalizationPeakCalculation("NONE"),
+													PeakLimiterThreshold: ptr.Float64(1.0),
+												},
+												Channels: ptr.Int32(1),
+												GainDb:   ptr.Float64(1.0),
+												RemixSettings: &types.RemixSettings{
+													ChannelMappings: []types.AudioChannelMapping{
+														{
+															InputChannelLevels: []types.InputChannelLevel{
+																{},
+																{},
+															},
+															OutputChannel: ptr.Int32(1),
+														},
+														{},
+													},
+													ChannelsIn:  ptr.Int32(1),
+													ChannelsOut: ptr.Int32(1),
+												},
+											},
+										},
+										{
+											DolbyEDecode: &types.AudioDolbyEDecode{
+												ProgramSelection: types.DolbyEProgramSelection("ALL_CHANNELS"),
+											},
+											Pid: ptr.Int32(1),
+											PremixSettings: &types.AudioPreMixerSettings{
+												AudioNormalizationSettings: nil,
+												Channels:                   ptr.Int32(1),
+												GainDb:                     ptr.Float64(1.0),
+												RemixSettings:              nil,
+											},
+										},
+									},
+								},
+								AudioTrackSelection: &types.AudioTrackSelection{
+									Tracks: []types.AudioTrack{
+										{},
+										{},
+									},
+									DolbyEDecode: nil,
+								},
+							},
+						},
+						{
+							Name:             ptr.String("__Name__"),
+							SelectorSettings: nil,
+						},
+					},
+					CaptionSelectors: []types.CaptionSelector{
+						{},
+						{},
+					},
+					DeblockFilter:           types.InputDeblockFilter("DISABLED"),
+					DenoiseFilter:           types.InputDenoiseFilter("DISABLED"),
+					FilterStrength:          ptr.Int32(1),
+					InputFilter:             types.InputFilter("AUTO"),
+					NetworkInputSettings:    nil,
+					Scte35Pid:               ptr.Int32(1),
+					Smpte2038DataPreference: types.Smpte2038DataPreference("IGNORE"),
+					SourceEndBehavior:       types.InputSourceEndBehavior("CONTINUE"),
+					VideoSelector:           nil,
+				},
+				LogicalInterfaceNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{},
+		},
+		InputSpecification: nil,
+		LogLevel:           types.LogLevel("ERROR"),
+		Maintenance:        nil,
+		Name:               ptr.String("__Name__"),
+		RequestId:          ptr.String("__RequestId__"),
+		Reserved:           ptr.String("__Reserved__"),
+		RoleArn:            ptr.String("__RoleArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Vpc:                   nil,
+		AnywhereSettings:      nil,
+		ChannelEngineVersion:  nil,
+		DryRun:                ptr.Bool(true),
+		LinkedChannelSettings: nil,
+		ChannelSecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		InferenceSettings: nil,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4522,7 +8341,18 @@ func TestCheckResponseSnapshot_CreateChannelPlacementGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateChannelPlacementGroup(context.Background(), &CreateChannelPlacementGroupInput{})
+	got, err := svc.CreateChannelPlacementGroup(context.Background(), &CreateChannelPlacementGroupInput{
+		ClusterId: ptr.String("__ClusterId__"),
+		Name:      ptr.String("__Name__"),
+		Nodes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RequestId: ptr.String("__RequestId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4561,7 +8391,24 @@ func TestCheckResponseSnapshot_CreateCloudWatchAlarmTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCloudWatchAlarmTemplate(context.Background(), &CreateCloudWatchAlarmTemplateInput{})
+	got, err := svc.CreateCloudWatchAlarmTemplate(context.Background(), &CreateCloudWatchAlarmTemplateInput{
+		ComparisonOperator: types.CloudWatchAlarmTemplateComparisonOperator("GreaterThanOrEqualToThreshold"),
+		DatapointsToAlarm:  ptr.Int32(1),
+		Description:        ptr.String("__Description__"),
+		EvaluationPeriods:  ptr.Int32(1),
+		GroupIdentifier:    ptr.String("__GroupIdentifier__"),
+		MetricName:         ptr.String("__MetricName__"),
+		Name:               ptr.String("__Name__"),
+		Period:             ptr.Int32(1),
+		Statistic:          types.CloudWatchAlarmTemplateStatistic("SampleCount"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		TargetResourceType: types.CloudWatchAlarmTemplateTargetResourceType("CLOUDFRONT_DISTRIBUTION"),
+		Threshold:          ptr.Float64(1.0),
+		TreatMissingData:   types.CloudWatchAlarmTemplateTreatMissingData("notBreaching"),
+		RequestId:          ptr.String("__RequestId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4590,7 +8437,14 @@ func TestCheckResponseSnapshot_CreateCloudWatchAlarmTemplateGroup(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCloudWatchAlarmTemplateGroup(context.Background(), &CreateCloudWatchAlarmTemplateGroupInput{})
+	got, err := svc.CreateCloudWatchAlarmTemplateGroup(context.Background(), &CreateCloudWatchAlarmTemplateGroupInput{
+		Description: ptr.String("__Description__"),
+		Name:        ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		RequestId: ptr.String("__RequestId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4633,7 +8487,28 @@ func TestCheckResponseSnapshot_CreateCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCluster(context.Background(), &CreateClusterInput{})
+	got, err := svc.CreateCluster(context.Background(), &CreateClusterInput{
+		ClusterType:     types.ClusterType("ON_PREMISES"),
+		InstanceRoleArn: ptr.String("__InstanceRoleArn__"),
+		Name:            ptr.String("__Name__"),
+		NetworkSettings: &types.ClusterNetworkSettingsCreateRequest{
+			DefaultRoute: ptr.String("__DefaultRoute__"),
+			InterfaceMappings: []types.InterfaceMappingCreateRequest{
+				{
+					LogicalInterfaceName: ptr.String("__LogicalInterfaceName__"),
+					NetworkId:            ptr.String("__NetworkId__"),
+				},
+				{
+					LogicalInterfaceName: ptr.String("__LogicalInterfaceName__"),
+					NetworkId:            ptr.String("__NetworkId__"),
+				},
+			},
+		},
+		RequestId: ptr.String("__RequestId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4672,7 +8547,24 @@ func TestCheckResponseSnapshot_CreateEventBridgeRuleTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEventBridgeRuleTemplate(context.Background(), &CreateEventBridgeRuleTemplateInput{})
+	got, err := svc.CreateEventBridgeRuleTemplate(context.Background(), &CreateEventBridgeRuleTemplateInput{
+		Description: ptr.String("__Description__"),
+		EventTargets: []types.EventBridgeRuleTemplateTarget{
+			{
+				Arn: ptr.String("__Arn__"),
+			},
+			{
+				Arn: ptr.String("__Arn__"),
+			},
+		},
+		EventType:       types.EventBridgeRuleTemplateEventType("MEDIALIVE_MULTIPLEX_ALERT"),
+		GroupIdentifier: ptr.String("__GroupIdentifier__"),
+		Name:            ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		RequestId: ptr.String("__RequestId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4701,7 +8593,14 @@ func TestCheckResponseSnapshot_CreateEventBridgeRuleTemplateGroup(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEventBridgeRuleTemplateGroup(context.Background(), &CreateEventBridgeRuleTemplateGroupInput{})
+	got, err := svc.CreateEventBridgeRuleTemplateGroup(context.Background(), &CreateEventBridgeRuleTemplateGroupInput{
+		Description: ptr.String("__Description__"),
+		Name:        ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		RequestId: ptr.String("__RequestId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4939,7 +8838,210 @@ func TestCheckResponseSnapshot_CreateInput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateInput(context.Background(), &CreateInputInput{})
+	got, err := svc.CreateInput(context.Background(), &CreateInputInput{
+		Destinations: []types.InputDestinationRequest{
+			{
+				StreamName: ptr.String("__StreamName__"),
+				Network:    ptr.String("__Network__"),
+				NetworkRoutes: []types.InputRequestDestinationRoute{
+					{
+						Cidr:    ptr.String("__Cidr__"),
+						Gateway: ptr.String("__Gateway__"),
+					},
+					{
+						Cidr:    ptr.String("__Cidr__"),
+						Gateway: ptr.String("__Gateway__"),
+					},
+				},
+				StaticIpAddress: ptr.String("__StaticIpAddress__"),
+			},
+			{
+				StreamName: ptr.String("__StreamName__"),
+				Network:    ptr.String("__Network__"),
+				NetworkRoutes: []types.InputRequestDestinationRoute{
+					{
+						Cidr:    ptr.String("__Cidr__"),
+						Gateway: ptr.String("__Gateway__"),
+					},
+					{
+						Cidr:    ptr.String("__Cidr__"),
+						Gateway: ptr.String("__Gateway__"),
+					},
+				},
+				StaticIpAddress: ptr.String("__StaticIpAddress__"),
+			},
+		},
+		InputDevices: []types.InputDeviceSettings{
+			{
+				Id: ptr.String("__Id__"),
+			},
+			{
+				Id: ptr.String("__Id__"),
+			},
+		},
+		InputSecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MediaConnectFlows: []types.MediaConnectFlowRequest{
+			{
+				FlowArn: ptr.String("__FlowArn__"),
+			},
+			{
+				FlowArn: ptr.String("__FlowArn__"),
+			},
+		},
+		Name:      ptr.String("__Name__"),
+		RequestId: ptr.String("__RequestId__"),
+		RoleArn:   ptr.String("__RoleArn__"),
+		Sources: []types.InputSourceRequest{
+			{
+				PasswordParam: ptr.String("__PasswordParam__"),
+				Url:           ptr.String("__Url__"),
+				Username:      ptr.String("__Username__"),
+			},
+			{
+				PasswordParam: ptr.String("__PasswordParam__"),
+				Url:           ptr.String("__Url__"),
+				Username:      ptr.String("__Username__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Type: types.InputType("UDP_PUSH"),
+		Vpc: &types.InputVpcRequest{
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		SrtSettings: &types.SrtSettingsRequest{
+			SrtCallerSources: []types.SrtCallerSourceRequest{
+				{
+					Decryption: &types.SrtCallerDecryptionRequest{
+						Algorithm:           types.Algorithm("AES128"),
+						PassphraseSecretArn: ptr.String("__PassphraseSecretArn__"),
+					},
+					MinimumLatency:     ptr.Int32(1),
+					SrtListenerAddress: ptr.String("__SrtListenerAddress__"),
+					SrtListenerPort:    ptr.String("__SrtListenerPort__"),
+					StreamId:           ptr.String("__StreamId__"),
+				},
+				{
+					Decryption: &types.SrtCallerDecryptionRequest{
+						Algorithm:           types.Algorithm("AES128"),
+						PassphraseSecretArn: ptr.String("__PassphraseSecretArn__"),
+					},
+					MinimumLatency:     ptr.Int32(1),
+					SrtListenerAddress: ptr.String("__SrtListenerAddress__"),
+					SrtListenerPort:    ptr.String("__SrtListenerPort__"),
+					StreamId:           ptr.String("__StreamId__"),
+				},
+			},
+			SrtListenerSettings: &types.SrtListenerSettingsRequest{
+				Decryption: &types.SrtListenerDecryptionRequest{
+					Algorithm:           types.Algorithm("AES128"),
+					PassphraseSecretArn: ptr.String("__PassphraseSecretArn__"),
+				},
+				MinimumLatency: ptr.Int32(1),
+				StreamId:       ptr.String("__StreamId__"),
+			},
+		},
+		InputNetworkLocation: types.InputNetworkLocation("AWS"),
+		MulticastSettings: &types.MulticastSettingsCreateRequest{
+			Sources: []types.MulticastSourceCreateRequest{
+				{
+					SourceIp: ptr.String("__SourceIp__"),
+					Url:      ptr.String("__Url__"),
+				},
+				{
+					SourceIp: ptr.String("__SourceIp__"),
+					Url:      ptr.String("__Url__"),
+				},
+			},
+		},
+		Smpte2110ReceiverGroupSettings: &types.Smpte2110ReceiverGroupSettings{
+			Smpte2110ReceiverGroups: []types.Smpte2110ReceiverGroup{
+				{
+					SdpSettings: &types.Smpte2110ReceiverGroupSdpSettings{
+						AncillarySdps: []types.InputSdpLocation{
+							{
+								MediaIndex: ptr.Int32(1),
+								SdpUrl:     ptr.String("__SdpUrl__"),
+							},
+							{
+								MediaIndex: ptr.Int32(1),
+								SdpUrl:     ptr.String("__SdpUrl__"),
+							},
+						},
+						AudioSdps: []types.InputSdpLocation{
+							{
+								MediaIndex: ptr.Int32(1),
+								SdpUrl:     ptr.String("__SdpUrl__"),
+							},
+							{
+								MediaIndex: ptr.Int32(1),
+								SdpUrl:     ptr.String("__SdpUrl__"),
+							},
+						},
+						VideoSdp: &types.InputSdpLocation{
+							MediaIndex: ptr.Int32(1),
+							SdpUrl:     ptr.String("__SdpUrl__"),
+						},
+					},
+				},
+				{
+					SdpSettings: &types.Smpte2110ReceiverGroupSdpSettings{
+						AncillarySdps: []types.InputSdpLocation{
+							{
+								MediaIndex: ptr.Int32(1),
+								SdpUrl:     ptr.String("__SdpUrl__"),
+							},
+							{
+								MediaIndex: ptr.Int32(1),
+								SdpUrl:     ptr.String("__SdpUrl__"),
+							},
+						},
+						AudioSdps: []types.InputSdpLocation{
+							{
+								MediaIndex: ptr.Int32(1),
+								SdpUrl:     ptr.String("__SdpUrl__"),
+							},
+							{
+								MediaIndex: ptr.Int32(1),
+								SdpUrl:     ptr.String("__SdpUrl__"),
+							},
+						},
+						VideoSdp: &types.InputSdpLocation{
+							MediaIndex: ptr.Int32(1),
+							SdpUrl:     ptr.String("__SdpUrl__"),
+						},
+					},
+				},
+			},
+		},
+		SdiSources: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RouterSettings: &types.RouterSettings{
+			Destinations: []types.RouterDestinationSettings{
+				{
+					AvailabilityZoneName: ptr.String("__AvailabilityZoneName__"),
+				},
+				{
+					AvailabilityZoneName: ptr.String("__AvailabilityZoneName__"),
+				},
+			},
+			EncryptionType: types.RouterEncryptionType("AUTOMATIC"),
+			SecretArn:      ptr.String("__SecretArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4983,7 +9085,19 @@ func TestCheckResponseSnapshot_CreateInputSecurityGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateInputSecurityGroup(context.Background(), &CreateInputSecurityGroupInput{})
+	got, err := svc.CreateInputSecurityGroup(context.Background(), &CreateInputSecurityGroupInput{
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		WhitelistRules: []types.InputWhitelistRuleCidr{
+			{
+				Cidr: ptr.String("__Cidr__"),
+			},
+			{
+				Cidr: ptr.String("__Cidr__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5036,7 +9150,23 @@ func TestCheckResponseSnapshot_CreateMultiplex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMultiplex(context.Background(), &CreateMultiplexInput{})
+	got, err := svc.CreateMultiplex(context.Background(), &CreateMultiplexInput{
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MultiplexSettings: &types.MultiplexSettings{
+			MaximumVideoBufferDelayMilliseconds: ptr.Int32(1),
+			TransportStreamBitrate:              ptr.Int32(1),
+			TransportStreamId:                   ptr.Int32(1),
+			TransportStreamReservedBitrate:      ptr.Int32(1),
+		},
+		Name:      ptr.String("__Name__"),
+		RequestId: ptr.String("__RequestId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5120,7 +9250,27 @@ func TestCheckResponseSnapshot_CreateMultiplexProgram(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMultiplexProgram(context.Background(), &CreateMultiplexProgramInput{})
+	got, err := svc.CreateMultiplexProgram(context.Background(), &CreateMultiplexProgramInput{
+		MultiplexId: ptr.String("__MultiplexId__"),
+		MultiplexProgramSettings: &types.MultiplexProgramSettings{
+			PreferredChannelPipeline: types.PreferredChannelPipeline("CURRENTLY_ACTIVE"),
+			ProgramNumber:            ptr.Int32(1),
+			ServiceDescriptor: &types.MultiplexProgramServiceDescriptor{
+				ProviderName: ptr.String("__ProviderName__"),
+				ServiceName:  ptr.String("__ServiceName__"),
+			},
+			VideoSettings: &types.MultiplexVideoSettings{
+				ConstantBitrate: ptr.Int32(1),
+				StatmuxSettings: &types.MultiplexStatmuxVideoSettings{
+					MaximumBitrate: ptr.Int32(1),
+					MinimumBitrate: ptr.Int32(1),
+					Priority:       ptr.Int32(1),
+				},
+			},
+		},
+		ProgramName: ptr.String("__ProgramName__"),
+		RequestId:   ptr.String("__RequestId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5166,7 +9316,31 @@ func TestCheckResponseSnapshot_CreateNetwork(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateNetwork(context.Background(), &CreateNetworkInput{})
+	got, err := svc.CreateNetwork(context.Background(), &CreateNetworkInput{
+		IpPools: []types.IpPoolCreateRequest{
+			{
+				Cidr: ptr.String("__Cidr__"),
+			},
+			{
+				Cidr: ptr.String("__Cidr__"),
+			},
+		},
+		Name:      ptr.String("__Name__"),
+		RequestId: ptr.String("__RequestId__"),
+		Routes: []types.RouteCreateRequest{
+			{
+				Cidr:    ptr.String("__Cidr__"),
+				Gateway: ptr.String("__Gateway__"),
+			},
+			{
+				Cidr:    ptr.String("__Cidr__"),
+				Gateway: ptr.String("__Gateway__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5230,7 +9404,27 @@ func TestCheckResponseSnapshot_CreateNode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateNode(context.Background(), &CreateNodeInput{})
+	got, err := svc.CreateNode(context.Background(), &CreateNodeInput{
+		ClusterId: ptr.String("__ClusterId__"),
+		Name:      ptr.String("__Name__"),
+		NodeInterfaceMappings: []types.NodeInterfaceMappingCreateRequest{
+			{
+				LogicalInterfaceName:  ptr.String("__LogicalInterfaceName__"),
+				NetworkInterfaceMode:  types.NetworkInterfaceMode("NAT"),
+				PhysicalInterfaceName: ptr.String("__PhysicalInterfaceName__"),
+			},
+			{
+				LogicalInterfaceName:  ptr.String("__LogicalInterfaceName__"),
+				NetworkInterfaceMode:  types.NetworkInterfaceMode("NAT"),
+				PhysicalInterfaceName: ptr.String("__PhysicalInterfaceName__"),
+			},
+		},
+		RequestId: ptr.String("__RequestId__"),
+		Role:      types.NodeRole("BACKUP"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5251,7 +9445,33 @@ func TestCheckResponseSnapshot_CreateNodeRegistrationScript(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateNodeRegistrationScript(context.Background(), &CreateNodeRegistrationScriptInput{})
+	got, err := svc.CreateNodeRegistrationScript(context.Background(), &CreateNodeRegistrationScriptInput{
+		ClusterId: ptr.String("__ClusterId__"),
+		Id:        ptr.String("__Id__"),
+		Name:      ptr.String("__Name__"),
+		NodeInterfaceMappings: []types.NodeInterfaceMapping{
+			{
+				LogicalInterfaceName:  ptr.String("__LogicalInterfaceName__"),
+				NetworkInterfaceMode:  types.NetworkInterfaceMode("NAT"),
+				PhysicalInterfaceName: ptr.String("__PhysicalInterfaceName__"),
+				PhysicalInterfaceIpAddresses: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				LogicalInterfaceName:  ptr.String("__LogicalInterfaceName__"),
+				NetworkInterfaceMode:  types.NetworkInterfaceMode("NAT"),
+				PhysicalInterfaceName: ptr.String("__PhysicalInterfaceName__"),
+				PhysicalInterfaceIpAddresses: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		RequestId: ptr.String("__RequestId__"),
+		Role:      types.NodeRole("BACKUP"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5489,7 +9709,13 @@ func TestCheckResponseSnapshot_CreatePartnerInput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePartnerInput(context.Background(), &CreatePartnerInputInput{})
+	got, err := svc.CreatePartnerInput(context.Background(), &CreatePartnerInputInput{
+		InputId:   ptr.String("__InputId__"),
+		RequestId: ptr.String("__RequestId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5521,7 +9747,15 @@ func TestCheckResponseSnapshot_CreateSdiSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSdiSource(context.Background(), &CreateSdiSourceInput{})
+	got, err := svc.CreateSdiSource(context.Background(), &CreateSdiSourceInput{
+		Mode:      types.SdiSourceMode("QUADRANT"),
+		Name:      ptr.String("__Name__"),
+		RequestId: ptr.String("__RequestId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Type: types.SdiSourceType("SINGLE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5622,7 +9856,23 @@ func TestCheckResponseSnapshot_CreateSignalMap(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSignalMap(context.Background(), &CreateSignalMapInput{})
+	got, err := svc.CreateSignalMap(context.Background(), &CreateSignalMapInput{
+		CloudWatchAlarmTemplateGroupIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Description:            ptr.String("__Description__"),
+		DiscoveryEntryPointArn: ptr.String("__DiscoveryEntryPointArn__"),
+		EventBridgeRuleTemplateGroupIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Name: ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		RequestId: ptr.String("__RequestId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5641,7 +9891,12 @@ func TestCheckResponseSnapshot_CreateTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTags(context.Background(), &CreateTagsInput{})
+	got, err := svc.CreateTags(context.Background(), &CreateTagsInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9065,7 +13320,9 @@ func TestCheckResponseSnapshot_DeleteChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteChannel(context.Background(), &DeleteChannelInput{})
+	got, err := svc.DeleteChannel(context.Background(), &DeleteChannelInput{
+		ChannelId: ptr.String("__ChannelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9098,7 +13355,10 @@ func TestCheckResponseSnapshot_DeleteChannelPlacementGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteChannelPlacementGroup(context.Background(), &DeleteChannelPlacementGroupInput{})
+	got, err := svc.DeleteChannelPlacementGroup(context.Background(), &DeleteChannelPlacementGroupInput{
+		ChannelPlacementGroupId: ptr.String("__ChannelPlacementGroupId__"),
+		ClusterId:               ptr.String("__ClusterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9117,7 +13377,9 @@ func TestCheckResponseSnapshot_DeleteCloudWatchAlarmTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCloudWatchAlarmTemplate(context.Background(), &DeleteCloudWatchAlarmTemplateInput{})
+	got, err := svc.DeleteCloudWatchAlarmTemplate(context.Background(), &DeleteCloudWatchAlarmTemplateInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9136,7 +13398,9 @@ func TestCheckResponseSnapshot_DeleteCloudWatchAlarmTemplateGroup(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCloudWatchAlarmTemplateGroup(context.Background(), &DeleteCloudWatchAlarmTemplateGroupInput{})
+	got, err := svc.DeleteCloudWatchAlarmTemplateGroup(context.Background(), &DeleteCloudWatchAlarmTemplateGroupInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9179,7 +13443,9 @@ func TestCheckResponseSnapshot_DeleteCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCluster(context.Background(), &DeleteClusterInput{})
+	got, err := svc.DeleteCluster(context.Background(), &DeleteClusterInput{
+		ClusterId: ptr.String("__ClusterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9198,7 +13464,9 @@ func TestCheckResponseSnapshot_DeleteEventBridgeRuleTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEventBridgeRuleTemplate(context.Background(), &DeleteEventBridgeRuleTemplateInput{})
+	got, err := svc.DeleteEventBridgeRuleTemplate(context.Background(), &DeleteEventBridgeRuleTemplateInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9217,7 +13485,9 @@ func TestCheckResponseSnapshot_DeleteEventBridgeRuleTemplateGroup(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEventBridgeRuleTemplateGroup(context.Background(), &DeleteEventBridgeRuleTemplateGroupInput{})
+	got, err := svc.DeleteEventBridgeRuleTemplateGroup(context.Background(), &DeleteEventBridgeRuleTemplateGroupInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9236,7 +13506,9 @@ func TestCheckResponseSnapshot_DeleteInput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteInput(context.Background(), &DeleteInputInput{})
+	got, err := svc.DeleteInput(context.Background(), &DeleteInputInput{
+		InputId: ptr.String("__InputId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9255,7 +13527,9 @@ func TestCheckResponseSnapshot_DeleteInputSecurityGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteInputSecurityGroup(context.Background(), &DeleteInputSecurityGroupInput{})
+	got, err := svc.DeleteInputSecurityGroup(context.Background(), &DeleteInputSecurityGroupInput{
+		InputSecurityGroupId: ptr.String("__InputSecurityGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9306,7 +13580,9 @@ func TestCheckResponseSnapshot_DeleteMultiplex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMultiplex(context.Background(), &DeleteMultiplexInput{})
+	got, err := svc.DeleteMultiplex(context.Background(), &DeleteMultiplexInput{
+		MultiplexId: ptr.String("__MultiplexId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9388,7 +13664,10 @@ func TestCheckResponseSnapshot_DeleteMultiplexProgram(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMultiplexProgram(context.Background(), &DeleteMultiplexProgramInput{})
+	got, err := svc.DeleteMultiplexProgram(context.Background(), &DeleteMultiplexProgramInput{
+		MultiplexId: ptr.String("__MultiplexId__"),
+		ProgramName: ptr.String("__ProgramName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9434,7 +13713,9 @@ func TestCheckResponseSnapshot_DeleteNetwork(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteNetwork(context.Background(), &DeleteNetworkInput{})
+	got, err := svc.DeleteNetwork(context.Background(), &DeleteNetworkInput{
+		NetworkId: ptr.String("__NetworkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9498,7 +13779,10 @@ func TestCheckResponseSnapshot_DeleteNode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteNode(context.Background(), &DeleteNodeInput{})
+	got, err := svc.DeleteNode(context.Background(), &DeleteNodeInput{
+		ClusterId: ptr.String("__ClusterId__"),
+		NodeId:    ptr.String("__NodeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9551,7 +13835,9 @@ func TestCheckResponseSnapshot_DeleteReservation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteReservation(context.Background(), &DeleteReservationInput{})
+	got, err := svc.DeleteReservation(context.Background(), &DeleteReservationInput{
+		ReservationId: ptr.String("__ReservationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9570,7 +13856,9 @@ func TestCheckResponseSnapshot_DeleteSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSchedule(context.Background(), &DeleteScheduleInput{})
+	got, err := svc.DeleteSchedule(context.Background(), &DeleteScheduleInput{
+		ChannelId: ptr.String("__ChannelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9602,7 +13890,9 @@ func TestCheckResponseSnapshot_DeleteSdiSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSdiSource(context.Background(), &DeleteSdiSourceInput{})
+	got, err := svc.DeleteSdiSource(context.Background(), &DeleteSdiSourceInput{
+		SdiSourceId: ptr.String("__SdiSourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9621,7 +13911,9 @@ func TestCheckResponseSnapshot_DeleteSignalMap(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSignalMap(context.Background(), &DeleteSignalMapInput{})
+	got, err := svc.DeleteSignalMap(context.Background(), &DeleteSignalMapInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9640,7 +13932,13 @@ func TestCheckResponseSnapshot_DeleteTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTags(context.Background(), &DeleteTagsInput{})
+	got, err := svc.DeleteTags(context.Background(), &DeleteTagsInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13087,7 +17385,9 @@ func TestCheckResponseSnapshot_DescribeChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeChannel(context.Background(), &DescribeChannelInput{})
+	got, err := svc.DescribeChannel(context.Background(), &DescribeChannelInput{
+		ChannelId: ptr.String("__ChannelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13120,7 +17420,10 @@ func TestCheckResponseSnapshot_DescribeChannelPlacementGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeChannelPlacementGroup(context.Background(), &DescribeChannelPlacementGroupInput{})
+	got, err := svc.DescribeChannelPlacementGroup(context.Background(), &DescribeChannelPlacementGroupInput{
+		ChannelPlacementGroupId: ptr.String("__ChannelPlacementGroupId__"),
+		ClusterId:               ptr.String("__ClusterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13163,7 +17466,9 @@ func TestCheckResponseSnapshot_DescribeCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCluster(context.Background(), &DescribeClusterInput{})
+	got, err := svc.DescribeCluster(context.Background(), &DescribeClusterInput{
+		ClusterId: ptr.String("__ClusterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13399,7 +17704,9 @@ func TestCheckResponseSnapshot_DescribeInput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeInput(context.Background(), &DescribeInputInput{})
+	got, err := svc.DescribeInput(context.Background(), &DescribeInputInput{
+		InputId: ptr.String("__InputId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13487,7 +17794,9 @@ func TestCheckResponseSnapshot_DescribeInputDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeInputDevice(context.Background(), &DescribeInputDeviceInput{})
+	got, err := svc.DescribeInputDevice(context.Background(), &DescribeInputDeviceInput{
+		InputDeviceId: ptr.String("__InputDeviceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13497,27 +17806,7 @@ func TestCheckResponseSnapshot_DescribeInputDevice(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_DescribeInputDeviceThumbnail(t *testing.T) {
-	want := &DescribeInputDeviceThumbnailOutput{
-		ContentType:   types.ContentType("image/jpeg"),
-		ContentLength: ptr.Int64(1),
-		ETag:          ptr.String("__ETag__"),
-		LastModified:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-	}
-	status, header, body, err := serdeRespReadSnapshot("DescribeInputDeviceThumbnail.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeInputDeviceThumbnail(context.Background(), &DescribeInputDeviceThumbnailInput{})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "DescribeInputDeviceThumbnail.response", err)
-	}
+	t.Skip("asymmetric")
 }
 
 func TestCheckResponseSnapshot_DescribeInputSecurityGroup(t *testing.T) {
@@ -13553,7 +17842,9 @@ func TestCheckResponseSnapshot_DescribeInputSecurityGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeInputSecurityGroup(context.Background(), &DescribeInputSecurityGroupInput{})
+	got, err := svc.DescribeInputSecurityGroup(context.Background(), &DescribeInputSecurityGroupInput{
+		InputSecurityGroupId: ptr.String("__InputSecurityGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13604,7 +17895,9 @@ func TestCheckResponseSnapshot_DescribeMultiplex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMultiplex(context.Background(), &DescribeMultiplexInput{})
+	got, err := svc.DescribeMultiplex(context.Background(), &DescribeMultiplexInput{
+		MultiplexId: ptr.String("__MultiplexId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13686,7 +17979,10 @@ func TestCheckResponseSnapshot_DescribeMultiplexProgram(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMultiplexProgram(context.Background(), &DescribeMultiplexProgramInput{})
+	got, err := svc.DescribeMultiplexProgram(context.Background(), &DescribeMultiplexProgramInput{
+		MultiplexId: ptr.String("__MultiplexId__"),
+		ProgramName: ptr.String("__ProgramName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13732,7 +18028,9 @@ func TestCheckResponseSnapshot_DescribeNetwork(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeNetwork(context.Background(), &DescribeNetworkInput{})
+	got, err := svc.DescribeNetwork(context.Background(), &DescribeNetworkInput{
+		NetworkId: ptr.String("__NetworkId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13796,7 +18094,10 @@ func TestCheckResponseSnapshot_DescribeNode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeNode(context.Background(), &DescribeNodeInput{})
+	got, err := svc.DescribeNode(context.Background(), &DescribeNodeInput{
+		ClusterId: ptr.String("__ClusterId__"),
+		NodeId:    ptr.String("__NodeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13836,7 +18137,9 @@ func TestCheckResponseSnapshot_DescribeOffering(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeOffering(context.Background(), &DescribeOfferingInput{})
+	got, err := svc.DescribeOffering(context.Background(), &DescribeOfferingInput{
+		OfferingId: ptr.String("__OfferingId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -13889,7 +18192,9 @@ func TestCheckResponseSnapshot_DescribeReservation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeReservation(context.Background(), &DescribeReservationInput{})
+	got, err := svc.DescribeReservation(context.Background(), &DescribeReservationInput{
+		ReservationId: ptr.String("__ReservationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14286,7 +18591,11 @@ func TestCheckResponseSnapshot_DescribeSchedule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSchedule(context.Background(), &DescribeScheduleInput{})
+	got, err := svc.DescribeSchedule(context.Background(), &DescribeScheduleInput{
+		ChannelId:  ptr.String("__ChannelId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14318,7 +18627,9 @@ func TestCheckResponseSnapshot_DescribeSdiSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSdiSource(context.Background(), &DescribeSdiSourceInput{})
+	got, err := svc.DescribeSdiSource(context.Background(), &DescribeSdiSourceInput{
+		SdiSourceId: ptr.String("__SdiSourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14374,7 +18685,11 @@ func TestCheckResponseSnapshot_DescribeThumbnails(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeThumbnails(context.Background(), &DescribeThumbnailsInput{})
+	got, err := svc.DescribeThumbnails(context.Background(), &DescribeThumbnailsInput{
+		ChannelId:     ptr.String("__ChannelId__"),
+		PipelineId:    ptr.String("__PipelineId__"),
+		ThumbnailType: ptr.String("__ThumbnailType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14413,7 +18728,9 @@ func TestCheckResponseSnapshot_GetCloudWatchAlarmTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCloudWatchAlarmTemplate(context.Background(), &GetCloudWatchAlarmTemplateInput{})
+	got, err := svc.GetCloudWatchAlarmTemplate(context.Background(), &GetCloudWatchAlarmTemplateInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14442,7 +18759,9 @@ func TestCheckResponseSnapshot_GetCloudWatchAlarmTemplateGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCloudWatchAlarmTemplateGroup(context.Background(), &GetCloudWatchAlarmTemplateGroupInput{})
+	got, err := svc.GetCloudWatchAlarmTemplateGroup(context.Background(), &GetCloudWatchAlarmTemplateGroupInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14481,7 +18800,9 @@ func TestCheckResponseSnapshot_GetEventBridgeRuleTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEventBridgeRuleTemplate(context.Background(), &GetEventBridgeRuleTemplateInput{})
+	got, err := svc.GetEventBridgeRuleTemplate(context.Background(), &GetEventBridgeRuleTemplateInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14510,7 +18831,9 @@ func TestCheckResponseSnapshot_GetEventBridgeRuleTemplateGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEventBridgeRuleTemplateGroup(context.Background(), &GetEventBridgeRuleTemplateGroupInput{})
+	got, err := svc.GetEventBridgeRuleTemplateGroup(context.Background(), &GetEventBridgeRuleTemplateGroupInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14611,7 +18934,9 @@ func TestCheckResponseSnapshot_GetSignalMap(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSignalMap(context.Background(), &GetSignalMapInput{})
+	got, err := svc.GetSignalMap(context.Background(), &GetSignalMapInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14652,7 +18977,12 @@ func TestCheckResponseSnapshot_ListAlerts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAlerts(context.Background(), &ListAlertsInput{})
+	got, err := svc.ListAlerts(context.Background(), &ListAlertsInput{
+		ChannelId:   ptr.String("__ChannelId__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+		StateFilter: ptr.String("__StateFilter__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -14705,7 +19035,11 @@ func TestCheckResponseSnapshot_ListChannelPlacementGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListChannelPlacementGroups(context.Background(), &ListChannelPlacementGroupsInput{})
+	got, err := svc.ListChannelPlacementGroups(context.Background(), &ListChannelPlacementGroupsInput{
+		ClusterId:  ptr.String("__ClusterId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15035,7 +19369,10 @@ func TestCheckResponseSnapshot_ListChannels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListChannels(context.Background(), &ListChannelsInput{})
+	got, err := svc.ListChannels(context.Background(), &ListChannelsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15082,7 +19419,12 @@ func TestCheckResponseSnapshot_ListCloudWatchAlarmTemplateGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCloudWatchAlarmTemplateGroups(context.Background(), &ListCloudWatchAlarmTemplateGroupsInput{})
+	got, err := svc.ListCloudWatchAlarmTemplateGroups(context.Background(), &ListCloudWatchAlarmTemplateGroupsInput{
+		MaxResults:          ptr.Int32(1),
+		NextToken:           ptr.String("__NextToken__"),
+		Scope:               ptr.String("__Scope__"),
+		SignalMapIdentifier: ptr.String("__SignalMapIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15147,7 +19489,13 @@ func TestCheckResponseSnapshot_ListCloudWatchAlarmTemplates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCloudWatchAlarmTemplates(context.Background(), &ListCloudWatchAlarmTemplatesInput{})
+	got, err := svc.ListCloudWatchAlarmTemplates(context.Background(), &ListCloudWatchAlarmTemplatesInput{
+		GroupIdentifier:     ptr.String("__GroupIdentifier__"),
+		MaxResults:          ptr.Int32(1),
+		NextToken:           ptr.String("__NextToken__"),
+		Scope:               ptr.String("__Scope__"),
+		SignalMapIdentifier: ptr.String("__SignalMapIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15190,7 +19538,12 @@ func TestCheckResponseSnapshot_ListClusterAlerts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListClusterAlerts(context.Background(), &ListClusterAlertsInput{})
+	got, err := svc.ListClusterAlerts(context.Background(), &ListClusterAlertsInput{
+		ClusterId:   ptr.String("__ClusterId__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+		StateFilter: ptr.String("__StateFilter__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15263,7 +19616,10 @@ func TestCheckResponseSnapshot_ListClusters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListClusters(context.Background(), &ListClustersInput{})
+	got, err := svc.ListClusters(context.Background(), &ListClustersInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15310,7 +19666,11 @@ func TestCheckResponseSnapshot_ListEventBridgeRuleTemplateGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEventBridgeRuleTemplateGroups(context.Background(), &ListEventBridgeRuleTemplateGroupsInput{})
+	got, err := svc.ListEventBridgeRuleTemplateGroups(context.Background(), &ListEventBridgeRuleTemplateGroupsInput{
+		MaxResults:          ptr.Int32(1),
+		NextToken:           ptr.String("__NextToken__"),
+		SignalMapIdentifier: ptr.String("__SignalMapIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15361,7 +19721,12 @@ func TestCheckResponseSnapshot_ListEventBridgeRuleTemplates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEventBridgeRuleTemplates(context.Background(), &ListEventBridgeRuleTemplatesInput{})
+	got, err := svc.ListEventBridgeRuleTemplates(context.Background(), &ListEventBridgeRuleTemplatesInput{
+		GroupIdentifier:     ptr.String("__GroupIdentifier__"),
+		MaxResults:          ptr.Int32(1),
+		NextToken:           ptr.String("__NextToken__"),
+		SignalMapIdentifier: ptr.String("__SignalMapIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15396,7 +19761,11 @@ func TestCheckResponseSnapshot_ListInputDeviceTransfers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInputDeviceTransfers(context.Background(), &ListInputDeviceTransfersInput{})
+	got, err := svc.ListInputDeviceTransfers(context.Background(), &ListInputDeviceTransfersInput{
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		TransferType: ptr.String("__TransferType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15559,7 +19928,10 @@ func TestCheckResponseSnapshot_ListInputDevices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInputDevices(context.Background(), &ListInputDevicesInput{})
+	got, err := svc.ListInputDevices(context.Background(), &ListInputDevicesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -15630,7 +20002,10 @@ func TestCheckResponseSnapshot_ListInputSecurityGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInputSecurityGroups(context.Background(), &ListInputSecurityGroupsInput{})
+	got, err := svc.ListInputSecurityGroups(context.Background(), &ListInputSecurityGroupsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16089,7 +20464,10 @@ func TestCheckResponseSnapshot_ListInputs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInputs(context.Background(), &ListInputsInput{})
+	got, err := svc.ListInputs(context.Background(), &ListInputsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16130,7 +20508,12 @@ func TestCheckResponseSnapshot_ListMultiplexAlerts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMultiplexAlerts(context.Background(), &ListMultiplexAlertsInput{})
+	got, err := svc.ListMultiplexAlerts(context.Background(), &ListMultiplexAlertsInput{
+		MaxResults:  ptr.Int32(1),
+		MultiplexId: ptr.String("__MultiplexId__"),
+		NextToken:   ptr.String("__NextToken__"),
+		StateFilter: ptr.String("__StateFilter__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16161,7 +20544,11 @@ func TestCheckResponseSnapshot_ListMultiplexPrograms(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMultiplexPrograms(context.Background(), &ListMultiplexProgramsInput{})
+	got, err := svc.ListMultiplexPrograms(context.Background(), &ListMultiplexProgramsInput{
+		MaxResults:  ptr.Int32(1),
+		MultiplexId: ptr.String("__MultiplexId__"),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16220,7 +20607,10 @@ func TestCheckResponseSnapshot_ListMultiplexes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMultiplexes(context.Background(), &ListMultiplexesInput{})
+	got, err := svc.ListMultiplexes(context.Background(), &ListMultiplexesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16299,7 +20689,10 @@ func TestCheckResponseSnapshot_ListNetworks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListNetworks(context.Background(), &ListNetworksInput{})
+	got, err := svc.ListNetworks(context.Background(), &ListNetworksInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16416,7 +20809,11 @@ func TestCheckResponseSnapshot_ListNodes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListNodes(context.Background(), &ListNodesInput{})
+	got, err := svc.ListNodes(context.Background(), &ListNodesInput{
+		ClusterId:  ptr.String("__ClusterId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16483,7 +20880,20 @@ func TestCheckResponseSnapshot_ListOfferings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOfferings(context.Background(), &ListOfferingsInput{})
+	got, err := svc.ListOfferings(context.Background(), &ListOfferingsInput{
+		ChannelClass:         ptr.String("__ChannelClass__"),
+		ChannelConfiguration: ptr.String("__ChannelConfiguration__"),
+		Codec:                ptr.String("__Codec__"),
+		Duration:             ptr.String("__Duration__"),
+		MaxResults:           ptr.Int32(1),
+		MaximumBitrate:       ptr.String("__MaximumBitrate__"),
+		MaximumFramerate:     ptr.String("__MaximumFramerate__"),
+		NextToken:            ptr.String("__NextToken__"),
+		Resolution:           ptr.String("__Resolution__"),
+		ResourceType:         ptr.String("__ResourceType__"),
+		SpecialFeature:       ptr.String("__SpecialFeature__"),
+		VideoQuality:         ptr.String("__VideoQuality__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16576,7 +20986,18 @@ func TestCheckResponseSnapshot_ListReservations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReservations(context.Background(), &ListReservationsInput{})
+	got, err := svc.ListReservations(context.Background(), &ListReservationsInput{
+		ChannelClass:     ptr.String("__ChannelClass__"),
+		Codec:            ptr.String("__Codec__"),
+		MaxResults:       ptr.Int32(1),
+		MaximumBitrate:   ptr.String("__MaximumBitrate__"),
+		MaximumFramerate: ptr.String("__MaximumFramerate__"),
+		NextToken:        ptr.String("__NextToken__"),
+		Resolution:       ptr.String("__Resolution__"),
+		ResourceType:     ptr.String("__ResourceType__"),
+		SpecialFeature:   ptr.String("__SpecialFeature__"),
+		VideoQuality:     ptr.String("__VideoQuality__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16623,7 +21044,10 @@ func TestCheckResponseSnapshot_ListSdiSources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSdiSources(context.Background(), &ListSdiSourcesInput{})
+	got, err := svc.ListSdiSources(context.Background(), &ListSdiSourcesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16672,7 +21096,12 @@ func TestCheckResponseSnapshot_ListSignalMaps(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSignalMaps(context.Background(), &ListSignalMapsInput{})
+	got, err := svc.ListSignalMaps(context.Background(), &ListSignalMapsInput{
+		CloudWatchAlarmTemplateGroupIdentifier: ptr.String("__CloudWatchAlarmTemplateGroupIdentifier__"),
+		EventBridgeRuleTemplateGroupIdentifier: ptr.String("__EventBridgeRuleTemplateGroupIdentifier__"),
+		MaxResults:                             ptr.Int32(1),
+		NextToken:                              ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16695,7 +21124,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16780,7 +21211,20 @@ func TestCheckResponseSnapshot_PurchaseOffering(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PurchaseOffering(context.Background(), &PurchaseOfferingInput{})
+	got, err := svc.PurchaseOffering(context.Background(), &PurchaseOfferingInput{
+		Count:      ptr.Int32(1),
+		Name:       ptr.String("__Name__"),
+		OfferingId: ptr.String("__OfferingId__"),
+		RenewalSettings: &types.RenewalSettings{
+			AutomaticRenewal: types.ReservationAutomaticRenewal("DISABLED"),
+			RenewalCount:     ptr.Int32(1),
+		},
+		RequestId: ptr.String("__RequestId__"),
+		Start:     ptr.String("__Start__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16799,7 +21243,10 @@ func TestCheckResponseSnapshot_RebootInputDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RebootInputDevice(context.Background(), &RebootInputDeviceInput{})
+	got, err := svc.RebootInputDevice(context.Background(), &RebootInputDeviceInput{
+		Force:         types.RebootInputDeviceForce("NO"),
+		InputDeviceId: ptr.String("__InputDeviceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -16818,7 +21265,9 @@ func TestCheckResponseSnapshot_RejectInputDeviceTransfer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RejectInputDeviceTransfer(context.Background(), &RejectInputDeviceTransferInput{})
+	got, err := svc.RejectInputDeviceTransfer(context.Background(), &RejectInputDeviceTransferInput{
+		InputDeviceId: ptr.String("__InputDeviceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -20243,7 +24692,13 @@ func TestCheckResponseSnapshot_RestartChannelPipelines(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RestartChannelPipelines(context.Background(), &RestartChannelPipelinesInput{})
+	got, err := svc.RestartChannelPipelines(context.Background(), &RestartChannelPipelinesInput{
+		ChannelId: ptr.String("__ChannelId__"),
+		PipelineIds: []types.ChannelPipelineIdToRestart{
+			types.ChannelPipelineIdToRestart("PIPELINE_0"),
+			types.ChannelPipelineIdToRestart("PIPELINE_0"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -23667,7 +28122,9 @@ func TestCheckResponseSnapshot_StartChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartChannel(context.Background(), &StartChannelInput{})
+	got, err := svc.StartChannel(context.Background(), &StartChannelInput{
+		ChannelId: ptr.String("__ChannelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -23768,7 +28225,9 @@ func TestCheckResponseSnapshot_StartDeleteMonitorDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartDeleteMonitorDeployment(context.Background(), &StartDeleteMonitorDeploymentInput{})
+	got, err := svc.StartDeleteMonitorDeployment(context.Background(), &StartDeleteMonitorDeploymentInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -23787,7 +28246,9 @@ func TestCheckResponseSnapshot_StartInputDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartInputDevice(context.Background(), &StartInputDeviceInput{})
+	got, err := svc.StartInputDevice(context.Background(), &StartInputDeviceInput{
+		InputDeviceId: ptr.String("__InputDeviceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -23806,7 +28267,9 @@ func TestCheckResponseSnapshot_StartInputDeviceMaintenanceWindow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartInputDeviceMaintenanceWindow(context.Background(), &StartInputDeviceMaintenanceWindowInput{})
+	got, err := svc.StartInputDeviceMaintenanceWindow(context.Background(), &StartInputDeviceMaintenanceWindowInput{
+		InputDeviceId: ptr.String("__InputDeviceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -23907,7 +28370,10 @@ func TestCheckResponseSnapshot_StartMonitorDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMonitorDeployment(context.Background(), &StartMonitorDeploymentInput{})
+	got, err := svc.StartMonitorDeployment(context.Background(), &StartMonitorDeploymentInput{
+		DryRun:     ptr.Bool(true),
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -23958,7 +28424,9 @@ func TestCheckResponseSnapshot_StartMultiplex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMultiplex(context.Background(), &StartMultiplexInput{})
+	got, err := svc.StartMultiplex(context.Background(), &StartMultiplexInput{
+		MultiplexId: ptr.String("__MultiplexId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -24059,7 +28527,21 @@ func TestCheckResponseSnapshot_StartUpdateSignalMap(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartUpdateSignalMap(context.Background(), &StartUpdateSignalMapInput{})
+	got, err := svc.StartUpdateSignalMap(context.Background(), &StartUpdateSignalMapInput{
+		CloudWatchAlarmTemplateGroupIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Description:            ptr.String("__Description__"),
+		DiscoveryEntryPointArn: ptr.String("__DiscoveryEntryPointArn__"),
+		EventBridgeRuleTemplateGroupIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ForceRediscovery: ptr.Bool(true),
+		Identifier:       ptr.String("__Identifier__"),
+		Name:             ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -27483,7 +31965,9 @@ func TestCheckResponseSnapshot_StopChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopChannel(context.Background(), &StopChannelInput{})
+	got, err := svc.StopChannel(context.Background(), &StopChannelInput{
+		ChannelId: ptr.String("__ChannelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -27502,7 +31986,9 @@ func TestCheckResponseSnapshot_StopInputDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopInputDevice(context.Background(), &StopInputDeviceInput{})
+	got, err := svc.StopInputDevice(context.Background(), &StopInputDeviceInput{
+		InputDeviceId: ptr.String("__InputDeviceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -27553,7 +32039,9 @@ func TestCheckResponseSnapshot_StopMultiplex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopMultiplex(context.Background(), &StopMultiplexInput{})
+	got, err := svc.StopMultiplex(context.Background(), &StopMultiplexInput{
+		MultiplexId: ptr.String("__MultiplexId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -27572,7 +32060,12 @@ func TestCheckResponseSnapshot_TransferInputDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TransferInputDevice(context.Background(), &TransferInputDeviceInput{})
+	got, err := svc.TransferInputDevice(context.Background(), &TransferInputDeviceInput{
+		InputDeviceId:    ptr.String("__InputDeviceId__"),
+		TargetCustomerId: ptr.String("__TargetCustomerId__"),
+		TargetRegion:     ptr.String("__TargetRegion__"),
+		TransferMessage:  ptr.String("__TransferMessage__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -27595,7 +32088,11 @@ func TestCheckResponseSnapshot_UpdateAccountConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAccountConfiguration(context.Background(), &UpdateAccountConfigurationInput{})
+	got, err := svc.UpdateAccountConfiguration(context.Background(), &UpdateAccountConfigurationInput{
+		AccountConfiguration: &types.AccountConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -31015,7 +35512,3394 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateChannel(context.Background(), &UpdateChannelInput{})
+	got, err := svc.UpdateChannel(context.Background(), &UpdateChannelInput{
+		CdiInputSpecification: &types.CdiInputSpecification{
+			Resolution: types.CdiInputResolution("SD"),
+		},
+		ChannelId: ptr.String("__ChannelId__"),
+		Destinations: []types.OutputDestination{
+			{
+				Id: ptr.String("__Id__"),
+				MediaPackageSettings: []types.MediaPackageOutputDestinationSettings{
+					{
+						ChannelId:              ptr.String("__ChannelId__"),
+						ChannelGroup:           ptr.String("__ChannelGroup__"),
+						ChannelName:            ptr.String("__ChannelName__"),
+						ChannelEndpointId:      ptr.String("__ChannelEndpointId__"),
+						MediaPackageRegionName: ptr.String("__MediaPackageRegionName__"),
+					},
+					{
+						ChannelId:              ptr.String("__ChannelId__"),
+						ChannelGroup:           ptr.String("__ChannelGroup__"),
+						ChannelName:            ptr.String("__ChannelName__"),
+						ChannelEndpointId:      ptr.String("__ChannelEndpointId__"),
+						MediaPackageRegionName: ptr.String("__MediaPackageRegionName__"),
+					},
+				},
+				MultiplexSettings: &types.MultiplexProgramChannelDestinationSettings{
+					MultiplexId: ptr.String("__MultiplexId__"),
+					ProgramName: ptr.String("__ProgramName__"),
+				},
+				Settings: []types.OutputDestinationSettings{
+					{
+						PasswordParam: ptr.String("__PasswordParam__"),
+						StreamName:    ptr.String("__StreamName__"),
+						Url:           ptr.String("__Url__"),
+						Username:      ptr.String("__Username__"),
+					},
+					{
+						PasswordParam: ptr.String("__PasswordParam__"),
+						StreamName:    ptr.String("__StreamName__"),
+						Url:           ptr.String("__Url__"),
+						Username:      ptr.String("__Username__"),
+					},
+				},
+				SrtSettings: []types.SrtOutputDestinationSettings{
+					{
+						EncryptionPassphraseSecretArn: ptr.String("__EncryptionPassphraseSecretArn__"),
+						StreamId:                      ptr.String("__StreamId__"),
+						Url:                           ptr.String("__Url__"),
+						ConnectionMode:                types.ConnectionMode("CALLER"),
+						ListenerPort:                  ptr.Int32(1),
+					},
+					{
+						EncryptionPassphraseSecretArn: ptr.String("__EncryptionPassphraseSecretArn__"),
+						StreamId:                      ptr.String("__StreamId__"),
+						Url:                           ptr.String("__Url__"),
+						ConnectionMode:                types.ConnectionMode("CALLER"),
+						ListenerPort:                  ptr.Int32(1),
+					},
+				},
+				LogicalInterfaceNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MediaConnectRouterSettings: []types.MediaConnectRouterOutputDestinationSettings{
+					{
+						EncryptionType: types.MediaConnectRouterOutputEncryptionType("AUTOMATIC"),
+						SecretArn:      ptr.String("__SecretArn__"),
+					},
+					{
+						EncryptionType: types.MediaConnectRouterOutputEncryptionType("AUTOMATIC"),
+						SecretArn:      ptr.String("__SecretArn__"),
+					},
+				},
+			},
+			{
+				Id: ptr.String("__Id__"),
+				MediaPackageSettings: []types.MediaPackageOutputDestinationSettings{
+					{
+						ChannelId:              ptr.String("__ChannelId__"),
+						ChannelGroup:           ptr.String("__ChannelGroup__"),
+						ChannelName:            ptr.String("__ChannelName__"),
+						ChannelEndpointId:      ptr.String("__ChannelEndpointId__"),
+						MediaPackageRegionName: ptr.String("__MediaPackageRegionName__"),
+					},
+					{
+						ChannelId:              ptr.String("__ChannelId__"),
+						ChannelGroup:           ptr.String("__ChannelGroup__"),
+						ChannelName:            ptr.String("__ChannelName__"),
+						ChannelEndpointId:      ptr.String("__ChannelEndpointId__"),
+						MediaPackageRegionName: ptr.String("__MediaPackageRegionName__"),
+					},
+				},
+				MultiplexSettings: &types.MultiplexProgramChannelDestinationSettings{
+					MultiplexId: ptr.String("__MultiplexId__"),
+					ProgramName: ptr.String("__ProgramName__"),
+				},
+				Settings: []types.OutputDestinationSettings{
+					{
+						PasswordParam: ptr.String("__PasswordParam__"),
+						StreamName:    ptr.String("__StreamName__"),
+						Url:           ptr.String("__Url__"),
+						Username:      ptr.String("__Username__"),
+					},
+					{
+						PasswordParam: ptr.String("__PasswordParam__"),
+						StreamName:    ptr.String("__StreamName__"),
+						Url:           ptr.String("__Url__"),
+						Username:      ptr.String("__Username__"),
+					},
+				},
+				SrtSettings: []types.SrtOutputDestinationSettings{
+					{
+						EncryptionPassphraseSecretArn: ptr.String("__EncryptionPassphraseSecretArn__"),
+						StreamId:                      ptr.String("__StreamId__"),
+						Url:                           ptr.String("__Url__"),
+						ConnectionMode:                types.ConnectionMode("CALLER"),
+						ListenerPort:                  ptr.Int32(1),
+					},
+					{
+						EncryptionPassphraseSecretArn: ptr.String("__EncryptionPassphraseSecretArn__"),
+						StreamId:                      ptr.String("__StreamId__"),
+						Url:                           ptr.String("__Url__"),
+						ConnectionMode:                types.ConnectionMode("CALLER"),
+						ListenerPort:                  ptr.Int32(1),
+					},
+				},
+				LogicalInterfaceNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MediaConnectRouterSettings: []types.MediaConnectRouterOutputDestinationSettings{
+					{
+						EncryptionType: types.MediaConnectRouterOutputEncryptionType("AUTOMATIC"),
+						SecretArn:      ptr.String("__SecretArn__"),
+					},
+					{
+						EncryptionType: types.MediaConnectRouterOutputEncryptionType("AUTOMATIC"),
+						SecretArn:      ptr.String("__SecretArn__"),
+					},
+				},
+			},
+		},
+		EncoderSettings: &types.EncoderSettings{
+			AudioDescriptions: []types.AudioDescription{
+				{
+					AudioNormalizationSettings: &types.AudioNormalizationSettings{
+						Algorithm:            types.AudioNormalizationAlgorithm("ITU_1770_1"),
+						AlgorithmControl:     types.AudioNormalizationAlgorithmControl("CORRECT_AUDIO"),
+						TargetLkfs:           ptr.Float64(1.0),
+						PeakCalculation:      types.AudioNormalizationPeakCalculation("NONE"),
+						PeakLimiterThreshold: ptr.Float64(1.0),
+					},
+					AudioSelectorName: ptr.String("__AudioSelectorName__"),
+					AudioType:         types.AudioType("CLEAN_EFFECTS"),
+					AudioTypeControl:  types.AudioDescriptionAudioTypeControl("FOLLOW_INPUT"),
+					AudioWatermarkingSettings: &types.AudioWatermarkSettings{
+						NielsenWatermarksSettings: &types.NielsenWatermarksSettings{
+							NielsenCbetSettings: &types.NielsenCBET{
+								CbetCheckDigitString: ptr.String("__CbetCheckDigitString__"),
+								CbetStepaside:        types.NielsenWatermarksCbetStepaside("DISABLED"),
+								Csid:                 ptr.String("__Csid__"),
+							},
+							NielsenDistributionType: types.NielsenWatermarksDistributionTypes("FINAL_DISTRIBUTOR"),
+							NielsenNaesIiNwSettings: &types.NielsenNaesIiNw{
+								CheckDigitString: ptr.String("__CheckDigitString__"),
+								Sid:              ptr.Float64(1.0),
+								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
+							},
+						},
+					},
+					CodecSettings: &types.AudioCodecSettings{
+						AacSettings: &types.AacSettings{
+							Bitrate:         ptr.Float64(1.0),
+							CodingMode:      types.AacCodingMode("AD_RECEIVER_MIX"),
+							InputType:       types.AacInputType("BROADCASTER_MIXED_AD"),
+							Profile:         types.AacProfile("HEV1"),
+							RateControlMode: types.AacRateControlMode("CBR"),
+							RawFormat:       types.AacRawFormat("LATM_LOAS"),
+							SampleRate:      ptr.Float64(1.0),
+							Spec:            types.AacSpec("MPEG2"),
+							VbrQuality:      types.AacVbrQuality("HIGH"),
+						},
+						Ac3Settings: &types.Ac3Settings{
+							Bitrate:            ptr.Float64(1.0),
+							BitstreamMode:      types.Ac3BitstreamMode("COMMENTARY"),
+							CodingMode:         types.Ac3CodingMode("CODING_MODE_1_0"),
+							Dialnorm:           ptr.Int32(1),
+							DrcProfile:         types.Ac3DrcProfile("FILM_STANDARD"),
+							LfeFilter:          types.Ac3LfeFilter("DISABLED"),
+							MetadataControl:    types.Ac3MetadataControl("FOLLOW_INPUT"),
+							AttenuationControl: types.Ac3AttenuationControl("ATTENUATE_3_DB"),
+						},
+						Eac3AtmosSettings: &types.Eac3AtmosSettings{
+							Bitrate:      ptr.Float64(1.0),
+							CodingMode:   types.Eac3AtmosCodingMode("CODING_MODE_5_1_4"),
+							Dialnorm:     ptr.Int32(1),
+							DrcLine:      types.Eac3AtmosDrcLine("FILM_LIGHT"),
+							DrcRf:        types.Eac3AtmosDrcRf("FILM_LIGHT"),
+							HeightTrim:   ptr.Float64(1.0),
+							SurroundTrim: ptr.Float64(1.0),
+						},
+						Eac3Settings: &types.Eac3Settings{
+							AttenuationControl:   types.Eac3AttenuationControl("ATTENUATE_3_DB"),
+							Bitrate:              ptr.Float64(1.0),
+							BitstreamMode:        types.Eac3BitstreamMode("COMMENTARY"),
+							CodingMode:           types.Eac3CodingMode("CODING_MODE_1_0"),
+							DcFilter:             types.Eac3DcFilter("DISABLED"),
+							Dialnorm:             ptr.Int32(1),
+							DrcLine:              types.Eac3DrcLine("FILM_LIGHT"),
+							DrcRf:                types.Eac3DrcRf("FILM_LIGHT"),
+							LfeControl:           types.Eac3LfeControl("LFE"),
+							LfeFilter:            types.Eac3LfeFilter("DISABLED"),
+							LoRoCenterMixLevel:   ptr.Float64(1.0),
+							LoRoSurroundMixLevel: ptr.Float64(1.0),
+							LtRtCenterMixLevel:   ptr.Float64(1.0),
+							LtRtSurroundMixLevel: ptr.Float64(1.0),
+							MetadataControl:      types.Eac3MetadataControl("FOLLOW_INPUT"),
+							PassthroughControl:   types.Eac3PassthroughControl("NO_PASSTHROUGH"),
+							PhaseControl:         types.Eac3PhaseControl("NO_SHIFT"),
+							StereoDownmix:        types.Eac3StereoDownmix("DPL2"),
+							SurroundExMode:       types.Eac3SurroundExMode("DISABLED"),
+							SurroundMode:         types.Eac3SurroundMode("DISABLED"),
+						},
+						Mp2Settings: &types.Mp2Settings{
+							Bitrate:    ptr.Float64(1.0),
+							CodingMode: types.Mp2CodingMode("CODING_MODE_1_0"),
+							SampleRate: ptr.Float64(1.0),
+						},
+						PassThroughSettings: &types.PassThroughSettings{},
+						WavSettings: &types.WavSettings{
+							BitDepth:   ptr.Float64(1.0),
+							CodingMode: types.WavCodingMode("CODING_MODE_1_0"),
+							SampleRate: ptr.Float64(1.0),
+						},
+					},
+					LanguageCode:        ptr.String("__LanguageCode__"),
+					LanguageCodeControl: types.AudioDescriptionLanguageCodeControl("FOLLOW_INPUT"),
+					Name:                ptr.String("__Name__"),
+					RemixSettings: &types.RemixSettings{
+						ChannelMappings: []types.AudioChannelMapping{
+							{
+								InputChannelLevels: []types.InputChannelLevel{
+									{
+										Gain:         ptr.Int32(1),
+										InputChannel: ptr.Int32(1),
+									},
+									{
+										Gain:         ptr.Int32(1),
+										InputChannel: ptr.Int32(1),
+									},
+								},
+								OutputChannel: ptr.Int32(1),
+							},
+							{
+								InputChannelLevels: []types.InputChannelLevel{
+									{
+										Gain:         ptr.Int32(1),
+										InputChannel: ptr.Int32(1),
+									},
+									{
+										Gain:         ptr.Int32(1),
+										InputChannel: ptr.Int32(1),
+									},
+								},
+								OutputChannel: ptr.Int32(1),
+							},
+						},
+						ChannelsIn:  ptr.Int32(1),
+						ChannelsOut: ptr.Int32(1),
+					},
+					StreamName: ptr.String("__StreamName__"),
+					AudioDashRoles: []types.DashRoleAudio{
+						types.DashRoleAudio("ALTERNATE"),
+						types.DashRoleAudio("ALTERNATE"),
+					},
+					DvbDashAccessibility: types.DvbDashAccessibility("DVBDASH_1_VISUALLY_IMPAIRED"),
+				},
+				{
+					AudioNormalizationSettings: &types.AudioNormalizationSettings{
+						Algorithm:            types.AudioNormalizationAlgorithm("ITU_1770_1"),
+						AlgorithmControl:     types.AudioNormalizationAlgorithmControl("CORRECT_AUDIO"),
+						TargetLkfs:           ptr.Float64(1.0),
+						PeakCalculation:      types.AudioNormalizationPeakCalculation("NONE"),
+						PeakLimiterThreshold: ptr.Float64(1.0),
+					},
+					AudioSelectorName: ptr.String("__AudioSelectorName__"),
+					AudioType:         types.AudioType("CLEAN_EFFECTS"),
+					AudioTypeControl:  types.AudioDescriptionAudioTypeControl("FOLLOW_INPUT"),
+					AudioWatermarkingSettings: &types.AudioWatermarkSettings{
+						NielsenWatermarksSettings: &types.NielsenWatermarksSettings{
+							NielsenCbetSettings: &types.NielsenCBET{
+								CbetCheckDigitString: ptr.String("__CbetCheckDigitString__"),
+								CbetStepaside:        types.NielsenWatermarksCbetStepaside("DISABLED"),
+								Csid:                 ptr.String("__Csid__"),
+							},
+							NielsenDistributionType: types.NielsenWatermarksDistributionTypes("FINAL_DISTRIBUTOR"),
+							NielsenNaesIiNwSettings: &types.NielsenNaesIiNw{
+								CheckDigitString: ptr.String("__CheckDigitString__"),
+								Sid:              ptr.Float64(1.0),
+								Timezone:         types.NielsenWatermarkTimezones("AMERICA_PUERTO_RICO"),
+							},
+						},
+					},
+					CodecSettings: &types.AudioCodecSettings{
+						AacSettings: &types.AacSettings{
+							Bitrate:         ptr.Float64(1.0),
+							CodingMode:      types.AacCodingMode("AD_RECEIVER_MIX"),
+							InputType:       types.AacInputType("BROADCASTER_MIXED_AD"),
+							Profile:         types.AacProfile("HEV1"),
+							RateControlMode: types.AacRateControlMode("CBR"),
+							RawFormat:       types.AacRawFormat("LATM_LOAS"),
+							SampleRate:      ptr.Float64(1.0),
+							Spec:            types.AacSpec("MPEG2"),
+							VbrQuality:      types.AacVbrQuality("HIGH"),
+						},
+						Ac3Settings: &types.Ac3Settings{
+							Bitrate:            ptr.Float64(1.0),
+							BitstreamMode:      types.Ac3BitstreamMode("COMMENTARY"),
+							CodingMode:         types.Ac3CodingMode("CODING_MODE_1_0"),
+							Dialnorm:           ptr.Int32(1),
+							DrcProfile:         types.Ac3DrcProfile("FILM_STANDARD"),
+							LfeFilter:          types.Ac3LfeFilter("DISABLED"),
+							MetadataControl:    types.Ac3MetadataControl("FOLLOW_INPUT"),
+							AttenuationControl: types.Ac3AttenuationControl("ATTENUATE_3_DB"),
+						},
+						Eac3AtmosSettings: &types.Eac3AtmosSettings{
+							Bitrate:      ptr.Float64(1.0),
+							CodingMode:   types.Eac3AtmosCodingMode("CODING_MODE_5_1_4"),
+							Dialnorm:     ptr.Int32(1),
+							DrcLine:      types.Eac3AtmosDrcLine("FILM_LIGHT"),
+							DrcRf:        types.Eac3AtmosDrcRf("FILM_LIGHT"),
+							HeightTrim:   ptr.Float64(1.0),
+							SurroundTrim: ptr.Float64(1.0),
+						},
+						Eac3Settings: &types.Eac3Settings{
+							AttenuationControl:   types.Eac3AttenuationControl("ATTENUATE_3_DB"),
+							Bitrate:              ptr.Float64(1.0),
+							BitstreamMode:        types.Eac3BitstreamMode("COMMENTARY"),
+							CodingMode:           types.Eac3CodingMode("CODING_MODE_1_0"),
+							DcFilter:             types.Eac3DcFilter("DISABLED"),
+							Dialnorm:             ptr.Int32(1),
+							DrcLine:              types.Eac3DrcLine("FILM_LIGHT"),
+							DrcRf:                types.Eac3DrcRf("FILM_LIGHT"),
+							LfeControl:           types.Eac3LfeControl("LFE"),
+							LfeFilter:            types.Eac3LfeFilter("DISABLED"),
+							LoRoCenterMixLevel:   ptr.Float64(1.0),
+							LoRoSurroundMixLevel: ptr.Float64(1.0),
+							LtRtCenterMixLevel:   ptr.Float64(1.0),
+							LtRtSurroundMixLevel: ptr.Float64(1.0),
+							MetadataControl:      types.Eac3MetadataControl("FOLLOW_INPUT"),
+							PassthroughControl:   types.Eac3PassthroughControl("NO_PASSTHROUGH"),
+							PhaseControl:         types.Eac3PhaseControl("NO_SHIFT"),
+							StereoDownmix:        types.Eac3StereoDownmix("DPL2"),
+							SurroundExMode:       types.Eac3SurroundExMode("DISABLED"),
+							SurroundMode:         types.Eac3SurroundMode("DISABLED"),
+						},
+						Mp2Settings: &types.Mp2Settings{
+							Bitrate:    ptr.Float64(1.0),
+							CodingMode: types.Mp2CodingMode("CODING_MODE_1_0"),
+							SampleRate: ptr.Float64(1.0),
+						},
+						PassThroughSettings: &types.PassThroughSettings{},
+						WavSettings: &types.WavSettings{
+							BitDepth:   ptr.Float64(1.0),
+							CodingMode: types.WavCodingMode("CODING_MODE_1_0"),
+							SampleRate: ptr.Float64(1.0),
+						},
+					},
+					LanguageCode:        ptr.String("__LanguageCode__"),
+					LanguageCodeControl: types.AudioDescriptionLanguageCodeControl("FOLLOW_INPUT"),
+					Name:                ptr.String("__Name__"),
+					RemixSettings: &types.RemixSettings{
+						ChannelMappings: []types.AudioChannelMapping{
+							{
+								InputChannelLevels: []types.InputChannelLevel{
+									{
+										Gain:         ptr.Int32(1),
+										InputChannel: ptr.Int32(1),
+									},
+									{
+										Gain:         ptr.Int32(1),
+										InputChannel: ptr.Int32(1),
+									},
+								},
+								OutputChannel: ptr.Int32(1),
+							},
+							{
+								InputChannelLevels: []types.InputChannelLevel{
+									{
+										Gain:         ptr.Int32(1),
+										InputChannel: ptr.Int32(1),
+									},
+									{
+										Gain:         ptr.Int32(1),
+										InputChannel: ptr.Int32(1),
+									},
+								},
+								OutputChannel: ptr.Int32(1),
+							},
+						},
+						ChannelsIn:  ptr.Int32(1),
+						ChannelsOut: ptr.Int32(1),
+					},
+					StreamName: ptr.String("__StreamName__"),
+					AudioDashRoles: []types.DashRoleAudio{
+						types.DashRoleAudio("ALTERNATE"),
+						types.DashRoleAudio("ALTERNATE"),
+					},
+					DvbDashAccessibility: types.DvbDashAccessibility("DVBDASH_1_VISUALLY_IMPAIRED"),
+				},
+			},
+			AvailBlanking: &types.AvailBlanking{
+				AvailBlankingImage: &types.InputLocation{
+					PasswordParam: ptr.String("__PasswordParam__"),
+					Uri:           ptr.String("__Uri__"),
+					Username:      ptr.String("__Username__"),
+				},
+				State: types.AvailBlankingState("DISABLED"),
+			},
+			AvailConfiguration: &types.AvailConfiguration{
+				AvailSettings: &types.AvailSettings{
+					Esam: &types.Esam{
+						AcquisitionPointId: ptr.String("__AcquisitionPointId__"),
+						AdAvailOffset:      ptr.Int32(1),
+						PasswordParam:      ptr.String("__PasswordParam__"),
+						PoisEndpoint:       ptr.String("__PoisEndpoint__"),
+						Username:           ptr.String("__Username__"),
+						ZoneIdentity:       ptr.String("__ZoneIdentity__"),
+					},
+					Scte35SpliceInsert: &types.Scte35SpliceInsert{
+						AdAvailOffset:          ptr.Int32(1),
+						NoRegionalBlackoutFlag: types.Scte35SpliceInsertNoRegionalBlackoutBehavior("FOLLOW"),
+						WebDeliveryAllowedFlag: types.Scte35SpliceInsertWebDeliveryAllowedBehavior("FOLLOW"),
+					},
+					Scte35TimeSignalApos: &types.Scte35TimeSignalApos{
+						AdAvailOffset:          ptr.Int32(1),
+						NoRegionalBlackoutFlag: types.Scte35AposNoRegionalBlackoutBehavior("FOLLOW"),
+						WebDeliveryAllowedFlag: types.Scte35AposWebDeliveryAllowedBehavior("FOLLOW"),
+					},
+				},
+				Scte35SegmentationScope: types.Scte35SegmentationScope("ALL_OUTPUT_GROUPS"),
+			},
+			BlackoutSlate: &types.BlackoutSlate{
+				BlackoutSlateImage: &types.InputLocation{
+					PasswordParam: ptr.String("__PasswordParam__"),
+					Uri:           ptr.String("__Uri__"),
+					Username:      ptr.String("__Username__"),
+				},
+				NetworkEndBlackout: types.BlackoutSlateNetworkEndBlackout("DISABLED"),
+				NetworkEndBlackoutImage: &types.InputLocation{
+					PasswordParam: ptr.String("__PasswordParam__"),
+					Uri:           ptr.String("__Uri__"),
+					Username:      ptr.String("__Username__"),
+				},
+				NetworkId: ptr.String("__NetworkId__"),
+				State:     types.BlackoutSlateState("DISABLED"),
+			},
+			CaptionDescriptions: []types.CaptionDescription{
+				{
+					Accessibility:       types.AccessibilityType("DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES"),
+					CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
+					DestinationSettings: &types.CaptionDestinationSettings{
+						AribDestinationSettings: &types.AribDestinationSettings{},
+						BurnInDestinationSettings: &types.BurnInDestinationSettings{
+							Alignment:         types.BurnInAlignment("CENTERED"),
+							BackgroundColor:   types.BurnInBackgroundColor("BLACK"),
+							BackgroundOpacity: ptr.Int32(1),
+							Font: &types.InputLocation{
+								PasswordParam: ptr.String("__PasswordParam__"),
+								Uri:           ptr.String("__Uri__"),
+								Username:      ptr.String("__Username__"),
+							},
+							FontColor:           types.BurnInFontColor("BLACK"),
+							FontOpacity:         ptr.Int32(1),
+							FontResolution:      ptr.Int32(1),
+							FontSize:            ptr.String("__FontSize__"),
+							OutlineColor:        types.BurnInOutlineColor("BLACK"),
+							OutlineSize:         ptr.Int32(1),
+							ShadowColor:         types.BurnInShadowColor("BLACK"),
+							ShadowOpacity:       ptr.Int32(1),
+							ShadowXOffset:       ptr.Int32(1),
+							ShadowYOffset:       ptr.Int32(1),
+							TeletextGridControl: types.BurnInTeletextGridControl("FIXED"),
+							XPosition:           ptr.Int32(1),
+							YPosition:           ptr.Int32(1),
+							SubtitleRows:        types.BurnInDestinationSubtitleRows("ROWS_16"),
+						},
+						DvbSubDestinationSettings: &types.DvbSubDestinationSettings{
+							Alignment:         types.DvbSubDestinationAlignment("CENTERED"),
+							BackgroundColor:   types.DvbSubDestinationBackgroundColor("BLACK"),
+							BackgroundOpacity: ptr.Int32(1),
+							Font: &types.InputLocation{
+								PasswordParam: ptr.String("__PasswordParam__"),
+								Uri:           ptr.String("__Uri__"),
+								Username:      ptr.String("__Username__"),
+							},
+							FontColor:           types.DvbSubDestinationFontColor("BLACK"),
+							FontOpacity:         ptr.Int32(1),
+							FontResolution:      ptr.Int32(1),
+							FontSize:            ptr.String("__FontSize__"),
+							OutlineColor:        types.DvbSubDestinationOutlineColor("BLACK"),
+							OutlineSize:         ptr.Int32(1),
+							ShadowColor:         types.DvbSubDestinationShadowColor("BLACK"),
+							ShadowOpacity:       ptr.Int32(1),
+							ShadowXOffset:       ptr.Int32(1),
+							ShadowYOffset:       ptr.Int32(1),
+							TeletextGridControl: types.DvbSubDestinationTeletextGridControl("FIXED"),
+							XPosition:           ptr.Int32(1),
+							YPosition:           ptr.Int32(1),
+							SubtitleRows:        types.DvbSubDestinationSubtitleRows("ROWS_16"),
+						},
+						EbuTtDDestinationSettings: &types.EbuTtDDestinationSettings{
+							CopyrightHolder:   ptr.String("__CopyrightHolder__"),
+							FillLineGap:       types.EbuTtDFillLineGapControl("DISABLED"),
+							FontFamily:        ptr.String("__FontFamily__"),
+							StyleControl:      types.EbuTtDDestinationStyleControl("EXCLUDE"),
+							DefaultFontSize:   ptr.Int32(1),
+							DefaultLineHeight: ptr.Int32(1),
+						},
+						EmbeddedDestinationSettings:           &types.EmbeddedDestinationSettings{},
+						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
+						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
+						Scte20PlusEmbeddedDestinationSettings: &types.Scte20PlusEmbeddedDestinationSettings{},
+						Scte27DestinationSettings:             &types.Scte27DestinationSettings{},
+						SmpteTtDestinationSettings:            &types.SmpteTtDestinationSettings{},
+						TeletextDestinationSettings:           &types.TeletextDestinationSettings{},
+						TtmlDestinationSettings: &types.TtmlDestinationSettings{
+							StyleControl: types.TtmlDestinationStyleControl("PASSTHROUGH"),
+						},
+						WebvttDestinationSettings: &types.WebvttDestinationSettings{
+							StyleControl: types.WebvttDestinationStyleControl("NO_STYLE_DATA"),
+						},
+					},
+					LanguageCode:        ptr.String("__LanguageCode__"),
+					LanguageDescription: ptr.String("__LanguageDescription__"),
+					Name:                ptr.String("__Name__"),
+					CaptionDashRoles: []types.DashRoleCaption{
+						types.DashRoleCaption("ALTERNATE"),
+						types.DashRoleCaption("ALTERNATE"),
+					},
+					DvbDashAccessibility: types.DvbDashAccessibility("DVBDASH_1_VISUALLY_IMPAIRED"),
+				},
+				{
+					Accessibility:       types.AccessibilityType("DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES"),
+					CaptionSelectorName: ptr.String("__CaptionSelectorName__"),
+					DestinationSettings: &types.CaptionDestinationSettings{
+						AribDestinationSettings: &types.AribDestinationSettings{},
+						BurnInDestinationSettings: &types.BurnInDestinationSettings{
+							Alignment:         types.BurnInAlignment("CENTERED"),
+							BackgroundColor:   types.BurnInBackgroundColor("BLACK"),
+							BackgroundOpacity: ptr.Int32(1),
+							Font: &types.InputLocation{
+								PasswordParam: ptr.String("__PasswordParam__"),
+								Uri:           ptr.String("__Uri__"),
+								Username:      ptr.String("__Username__"),
+							},
+							FontColor:           types.BurnInFontColor("BLACK"),
+							FontOpacity:         ptr.Int32(1),
+							FontResolution:      ptr.Int32(1),
+							FontSize:            ptr.String("__FontSize__"),
+							OutlineColor:        types.BurnInOutlineColor("BLACK"),
+							OutlineSize:         ptr.Int32(1),
+							ShadowColor:         types.BurnInShadowColor("BLACK"),
+							ShadowOpacity:       ptr.Int32(1),
+							ShadowXOffset:       ptr.Int32(1),
+							ShadowYOffset:       ptr.Int32(1),
+							TeletextGridControl: types.BurnInTeletextGridControl("FIXED"),
+							XPosition:           ptr.Int32(1),
+							YPosition:           ptr.Int32(1),
+							SubtitleRows:        types.BurnInDestinationSubtitleRows("ROWS_16"),
+						},
+						DvbSubDestinationSettings: &types.DvbSubDestinationSettings{
+							Alignment:         types.DvbSubDestinationAlignment("CENTERED"),
+							BackgroundColor:   types.DvbSubDestinationBackgroundColor("BLACK"),
+							BackgroundOpacity: ptr.Int32(1),
+							Font: &types.InputLocation{
+								PasswordParam: ptr.String("__PasswordParam__"),
+								Uri:           ptr.String("__Uri__"),
+								Username:      ptr.String("__Username__"),
+							},
+							FontColor:           types.DvbSubDestinationFontColor("BLACK"),
+							FontOpacity:         ptr.Int32(1),
+							FontResolution:      ptr.Int32(1),
+							FontSize:            ptr.String("__FontSize__"),
+							OutlineColor:        types.DvbSubDestinationOutlineColor("BLACK"),
+							OutlineSize:         ptr.Int32(1),
+							ShadowColor:         types.DvbSubDestinationShadowColor("BLACK"),
+							ShadowOpacity:       ptr.Int32(1),
+							ShadowXOffset:       ptr.Int32(1),
+							ShadowYOffset:       ptr.Int32(1),
+							TeletextGridControl: types.DvbSubDestinationTeletextGridControl("FIXED"),
+							XPosition:           ptr.Int32(1),
+							YPosition:           ptr.Int32(1),
+							SubtitleRows:        types.DvbSubDestinationSubtitleRows("ROWS_16"),
+						},
+						EbuTtDDestinationSettings: &types.EbuTtDDestinationSettings{
+							CopyrightHolder:   ptr.String("__CopyrightHolder__"),
+							FillLineGap:       types.EbuTtDFillLineGapControl("DISABLED"),
+							FontFamily:        ptr.String("__FontFamily__"),
+							StyleControl:      types.EbuTtDDestinationStyleControl("EXCLUDE"),
+							DefaultFontSize:   ptr.Int32(1),
+							DefaultLineHeight: ptr.Int32(1),
+						},
+						EmbeddedDestinationSettings:           &types.EmbeddedDestinationSettings{},
+						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
+						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
+						Scte20PlusEmbeddedDestinationSettings: &types.Scte20PlusEmbeddedDestinationSettings{},
+						Scte27DestinationSettings:             &types.Scte27DestinationSettings{},
+						SmpteTtDestinationSettings:            &types.SmpteTtDestinationSettings{},
+						TeletextDestinationSettings:           &types.TeletextDestinationSettings{},
+						TtmlDestinationSettings: &types.TtmlDestinationSettings{
+							StyleControl: types.TtmlDestinationStyleControl("PASSTHROUGH"),
+						},
+						WebvttDestinationSettings: &types.WebvttDestinationSettings{
+							StyleControl: types.WebvttDestinationStyleControl("NO_STYLE_DATA"),
+						},
+					},
+					LanguageCode:        ptr.String("__LanguageCode__"),
+					LanguageDescription: ptr.String("__LanguageDescription__"),
+					Name:                ptr.String("__Name__"),
+					CaptionDashRoles: []types.DashRoleCaption{
+						types.DashRoleCaption("ALTERNATE"),
+						types.DashRoleCaption("ALTERNATE"),
+					},
+					DvbDashAccessibility: types.DvbDashAccessibility("DVBDASH_1_VISUALLY_IMPAIRED"),
+				},
+			},
+			FeatureActivations: &types.FeatureActivations{
+				InputPrepareScheduleActions:             types.FeatureActivationsInputPrepareScheduleActions("DISABLED"),
+				OutputStaticImageOverlayScheduleActions: types.FeatureActivationsOutputStaticImageOverlayScheduleActions("DISABLED"),
+			},
+			GlobalConfiguration: &types.GlobalConfiguration{
+				InitialAudioGain: ptr.Int32(1),
+				InputEndAction:   types.GlobalConfigurationInputEndAction("NONE"),
+				InputLossBehavior: &types.InputLossBehavior{
+					BlackFrameMsec:      ptr.Int32(1),
+					InputLossImageColor: ptr.String("__InputLossImageColor__"),
+					InputLossImageSlate: &types.InputLocation{
+						PasswordParam: ptr.String("__PasswordParam__"),
+						Uri:           ptr.String("__Uri__"),
+						Username:      ptr.String("__Username__"),
+					},
+					InputLossImageType: types.InputLossImageType("COLOR"),
+					RepeatFrameMsec:    ptr.Int32(1),
+				},
+				OutputLockingMode:         types.GlobalConfigurationOutputLockingMode("EPOCH_LOCKING"),
+				OutputTimingSource:        types.GlobalConfigurationOutputTimingSource("INPUT_CLOCK"),
+				SupportLowFramerateInputs: types.GlobalConfigurationLowFramerateInputs("DISABLED"),
+				OutputLockingSettings: &types.OutputLockingSettings{
+					EpochLockingSettings: &types.EpochLockingSettings{
+						CustomEpoch: ptr.String("__CustomEpoch__"),
+						JamSyncTime: ptr.String("__JamSyncTime__"),
+					},
+					PipelineLockingSettings: &types.PipelineLockingSettings{
+						PipelineLockingMethod: types.PipelineLockingMethod("SOURCE_TIMECODE"),
+						CustomEpoch:           ptr.String("__CustomEpoch__"),
+					},
+					DisabledLockingSettings: &types.DisabledLockingSettings{
+						CustomEpoch: ptr.String("__CustomEpoch__"),
+					},
+				},
+			},
+			MotionGraphicsConfiguration: &types.MotionGraphicsConfiguration{
+				MotionGraphicsInsertion: types.MotionGraphicsInsertion("DISABLED"),
+				MotionGraphicsSettings: &types.MotionGraphicsSettings{
+					HtmlMotionGraphicsSettings: &types.HtmlMotionGraphicsSettings{},
+				},
+			},
+			NielsenConfiguration: &types.NielsenConfiguration{
+				DistributorId:          ptr.String("__DistributorId__"),
+				NielsenPcmToId3Tagging: types.NielsenPcmToId3TaggingState("DISABLED"),
+			},
+			OutputGroups: []types.OutputGroup{
+				{
+					Name: ptr.String("__Name__"),
+					OutputGroupSettings: &types.OutputGroupSettings{
+						ArchiveGroupSettings: &types.ArchiveGroupSettings{
+							ArchiveCdnSettings: &types.ArchiveCdnSettings{
+								ArchiveS3Settings: &types.ArchiveS3Settings{
+									CannedAcl: types.S3CannedAcl("AUTHENTICATED_READ"),
+								},
+							},
+							Destination: &types.OutputLocationRef{
+								DestinationRefId: ptr.String("__DestinationRefId__"),
+							},
+							RolloverInterval: ptr.Int32(1),
+						},
+						FrameCaptureGroupSettings: &types.FrameCaptureGroupSettings{
+							Destination: &types.OutputLocationRef{
+								DestinationRefId: ptr.String("__DestinationRefId__"),
+							},
+							FrameCaptureCdnSettings: &types.FrameCaptureCdnSettings{
+								FrameCaptureS3Settings: &types.FrameCaptureS3Settings{
+									CannedAcl: types.S3CannedAcl("AUTHENTICATED_READ"),
+								},
+							},
+						},
+						HlsGroupSettings: &types.HlsGroupSettings{
+							AdMarkers: []types.HlsAdMarkers{
+								types.HlsAdMarkers("ADOBE"),
+								types.HlsAdMarkers("ADOBE"),
+							},
+							BaseUrlContent:   ptr.String("__BaseUrlContent__"),
+							BaseUrlContent1:  ptr.String("__BaseUrlContent1__"),
+							BaseUrlManifest:  ptr.String("__BaseUrlManifest__"),
+							BaseUrlManifest1: ptr.String("__BaseUrlManifest1__"),
+							CaptionLanguageMappings: []types.CaptionLanguageMapping{
+								{
+									CaptionChannel:      ptr.Int32(1),
+									LanguageCode:        ptr.String("__LanguageCode__"),
+									LanguageDescription: ptr.String("__LanguageDescription__"),
+								},
+								{
+									CaptionChannel:      ptr.Int32(1),
+									LanguageCode:        ptr.String("__LanguageCode__"),
+									LanguageDescription: ptr.String("__LanguageDescription__"),
+								},
+							},
+							CaptionLanguageSetting: types.HlsCaptionLanguageSetting("INSERT"),
+							ClientCache:            types.HlsClientCache("DISABLED"),
+							CodecSpecification:     types.HlsCodecSpecification("RFC_4281"),
+							ConstantIv:             ptr.String("__ConstantIv__"),
+							Destination: &types.OutputLocationRef{
+								DestinationRefId: ptr.String("__DestinationRefId__"),
+							},
+							DirectoryStructure: types.HlsDirectoryStructure("SINGLE_DIRECTORY"),
+							DiscontinuityTags:  types.HlsDiscontinuityTags("INSERT"),
+							EncryptionType:     types.HlsEncryptionType("AES128"),
+							HlsCdnSettings: &types.HlsCdnSettings{
+								HlsAkamaiSettings: &types.HlsAkamaiSettings{
+									ConnectionRetryInterval: ptr.Int32(1),
+									FilecacheDuration:       ptr.Int32(1),
+									HttpTransferMode:        types.HlsAkamaiHttpTransferMode("CHUNKED"),
+									NumRetries:              ptr.Int32(1),
+									RestartDelay:            ptr.Int32(1),
+									Salt:                    ptr.String("__Salt__"),
+									Token:                   ptr.String("__Token__"),
+								},
+								HlsBasicPutSettings: &types.HlsBasicPutSettings{
+									ConnectionRetryInterval: ptr.Int32(1),
+									FilecacheDuration:       ptr.Int32(1),
+									NumRetries:              ptr.Int32(1),
+									RestartDelay:            ptr.Int32(1),
+								},
+								HlsMediaStoreSettings: &types.HlsMediaStoreSettings{
+									ConnectionRetryInterval: ptr.Int32(1),
+									FilecacheDuration:       ptr.Int32(1),
+									MediaStoreStorageClass:  types.HlsMediaStoreStorageClass("TEMPORAL"),
+									NumRetries:              ptr.Int32(1),
+									RestartDelay:            ptr.Int32(1),
+								},
+								HlsS3Settings: &types.HlsS3Settings{
+									CannedAcl: types.S3CannedAcl("AUTHENTICATED_READ"),
+								},
+								HlsWebdavSettings: &types.HlsWebdavSettings{
+									ConnectionRetryInterval: ptr.Int32(1),
+									FilecacheDuration:       ptr.Int32(1),
+									HttpTransferMode:        types.HlsWebdavHttpTransferMode("CHUNKED"),
+									NumRetries:              ptr.Int32(1),
+									RestartDelay:            ptr.Int32(1),
+								},
+							},
+							HlsId3SegmentTagging:      types.HlsId3SegmentTaggingState("DISABLED"),
+							IFrameOnlyPlaylists:       types.IFrameOnlyPlaylistType("DISABLED"),
+							IncompleteSegmentBehavior: types.HlsIncompleteSegmentBehavior("AUTO"),
+							IndexNSegments:            ptr.Int32(1),
+							InputLossAction:           types.InputLossActionForHlsOut("EMIT_OUTPUT"),
+							IvInManifest:              types.HlsIvInManifest("EXCLUDE"),
+							IvSource:                  types.HlsIvSource("EXPLICIT"),
+							KeepSegments:              ptr.Int32(1),
+							KeyFormat:                 ptr.String("__KeyFormat__"),
+							KeyFormatVersions:         ptr.String("__KeyFormatVersions__"),
+							KeyProviderSettings: &types.KeyProviderSettings{
+								StaticKeySettings: &types.StaticKeySettings{
+									KeyProviderServer: &types.InputLocation{
+										PasswordParam: ptr.String("__PasswordParam__"),
+										Uri:           ptr.String("__Uri__"),
+										Username:      ptr.String("__Username__"),
+									},
+									StaticKeyValue: ptr.String("__StaticKeyValue__"),
+								},
+							},
+							ManifestCompression:        types.HlsManifestCompression("GZIP"),
+							ManifestDurationFormat:     types.HlsManifestDurationFormat("FLOATING_POINT"),
+							MinSegmentLength:           ptr.Int32(1),
+							Mode:                       types.HlsMode("LIVE"),
+							OutputSelection:            types.HlsOutputSelection("MANIFESTS_AND_SEGMENTS"),
+							ProgramDateTime:            types.HlsProgramDateTime("EXCLUDE"),
+							ProgramDateTimeClock:       types.HlsProgramDateTimeClock("INITIALIZE_FROM_OUTPUT_TIMECODE"),
+							ProgramDateTimePeriod:      ptr.Int32(1),
+							RedundantManifest:          types.HlsRedundantManifest("DISABLED"),
+							SegmentLength:              ptr.Int32(1),
+							SegmentationMode:           types.HlsSegmentationMode("USE_INPUT_SEGMENTATION"),
+							SegmentsPerSubdirectory:    ptr.Int32(1),
+							StreamInfResolution:        types.HlsStreamInfResolution("EXCLUDE"),
+							TimedMetadataId3Frame:      types.HlsTimedMetadataId3Frame("NONE"),
+							TimedMetadataId3Period:     ptr.Int32(1),
+							TimestampDeltaMilliseconds: ptr.Int32(1),
+							TsFileMode:                 types.HlsTsFileMode("SEGMENTED_FILES"),
+						},
+						MediaPackageGroupSettings: &types.MediaPackageGroupSettings{
+							Destination: &types.OutputLocationRef{
+								DestinationRefId: ptr.String("__DestinationRefId__"),
+							},
+							MediapackageV2GroupSettings: &types.MediaPackageV2GroupSettings{
+								CaptionLanguageMappings: []types.CaptionLanguageMapping{
+									{
+										CaptionChannel:      ptr.Int32(1),
+										LanguageCode:        ptr.String("__LanguageCode__"),
+										LanguageDescription: ptr.String("__LanguageDescription__"),
+									},
+									{
+										CaptionChannel:      ptr.Int32(1),
+										LanguageCode:        ptr.String("__LanguageCode__"),
+										LanguageDescription: ptr.String("__LanguageDescription__"),
+									},
+								},
+								Id3Behavior:              types.CmafId3Behavior("DISABLED"),
+								KlvBehavior:              types.CmafKLVBehavior("NO_PASSTHROUGH"),
+								NielsenId3Behavior:       types.CmafNielsenId3Behavior("NO_PASSTHROUGH"),
+								Scte35Type:               types.Scte35Type("NONE"),
+								SegmentLength:            ptr.Int32(1),
+								SegmentLengthUnits:       types.CmafIngestSegmentLengthUnits("MILLISECONDS"),
+								TimedMetadataId3Frame:    types.CmafTimedMetadataId3Frame("NONE"),
+								TimedMetadataId3Period:   ptr.Int32(1),
+								TimedMetadataPassthrough: types.CmafTimedMetadataPassthrough("DISABLED"),
+								AdditionalDestinations: []types.MediaPackageAdditionalDestinations{
+									{
+										Destination: &types.OutputLocationRef{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+									},
+									{
+										Destination: &types.OutputLocationRef{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+									},
+								},
+							},
+						},
+						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
+							AcquisitionPointId:       ptr.String("__AcquisitionPointId__"),
+							AudioOnlyTimecodeControl: types.SmoothGroupAudioOnlyTimecodeControl("PASSTHROUGH"),
+							CertificateMode:          types.SmoothGroupCertificateMode("SELF_SIGNED"),
+							ConnectionRetryInterval:  ptr.Int32(1),
+							Destination: &types.OutputLocationRef{
+								DestinationRefId: ptr.String("__DestinationRefId__"),
+							},
+							EventId:                ptr.String("__EventId__"),
+							EventIdMode:            types.SmoothGroupEventIdMode("NO_EVENT_ID"),
+							EventStopBehavior:      types.SmoothGroupEventStopBehavior("NONE"),
+							FilecacheDuration:      ptr.Int32(1),
+							FragmentLength:         ptr.Int32(1),
+							InputLossAction:        types.InputLossActionForMsSmoothOut("EMIT_OUTPUT"),
+							NumRetries:             ptr.Int32(1),
+							RestartDelay:           ptr.Int32(1),
+							SegmentationMode:       types.SmoothGroupSegmentationMode("USE_INPUT_SEGMENTATION"),
+							SendDelayMs:            ptr.Int32(1),
+							SparseTrackType:        types.SmoothGroupSparseTrackType("NONE"),
+							StreamManifestBehavior: types.SmoothGroupStreamManifestBehavior("DO_NOT_SEND"),
+							TimestampOffset:        ptr.String("__TimestampOffset__"),
+							TimestampOffsetMode:    types.SmoothGroupTimestampOffsetMode("USE_CONFIGURED_OFFSET"),
+						},
+						MultiplexGroupSettings: &types.MultiplexGroupSettings{},
+						RtmpGroupSettings: &types.RtmpGroupSettings{
+							AdMarkers: []types.RtmpAdMarkers{
+								types.RtmpAdMarkers("ON_CUE_POINT_SCTE35"),
+								types.RtmpAdMarkers("ON_CUE_POINT_SCTE35"),
+							},
+							AuthenticationScheme:  types.AuthenticationScheme("AKAMAI"),
+							CacheFullBehavior:     types.RtmpCacheFullBehavior("DISCONNECT_IMMEDIATELY"),
+							CacheLength:           ptr.Int32(1),
+							CaptionData:           types.RtmpCaptionData("ALL"),
+							InputLossAction:       types.InputLossActionForRtmpOut("EMIT_OUTPUT"),
+							RestartDelay:          ptr.Int32(1),
+							IncludeFillerNalUnits: types.IncludeFillerNalUnits("AUTO"),
+						},
+						UdpGroupSettings: &types.UdpGroupSettings{
+							InputLossAction:        types.InputLossActionForUdpOut("DROP_PROGRAM"),
+							TimedMetadataId3Frame:  types.UdpTimedMetadataId3Frame("NONE"),
+							TimedMetadataId3Period: ptr.Int32(1),
+						},
+						CmafIngestGroupSettings: &types.CmafIngestGroupSettings{
+							Destination: &types.OutputLocationRef{
+								DestinationRefId: ptr.String("__DestinationRefId__"),
+							},
+							NielsenId3Behavior:     types.CmafNielsenId3Behavior("NO_PASSTHROUGH"),
+							Scte35Type:             types.Scte35Type("NONE"),
+							SegmentLength:          ptr.Int32(1),
+							SegmentLengthUnits:     types.CmafIngestSegmentLengthUnits("MILLISECONDS"),
+							SendDelayMs:            ptr.Int32(1),
+							KlvBehavior:            types.CmafKLVBehavior("NO_PASSTHROUGH"),
+							KlvNameModifier:        ptr.String("__KlvNameModifier__"),
+							NielsenId3NameModifier: ptr.String("__NielsenId3NameModifier__"),
+							Scte35NameModifier:     ptr.String("__Scte35NameModifier__"),
+							Id3Behavior:            types.CmafId3Behavior("DISABLED"),
+							Id3NameModifier:        ptr.String("__Id3NameModifier__"),
+							CaptionLanguageMappings: []types.CmafIngestCaptionLanguageMapping{
+								{
+									CaptionChannel: ptr.Int32(1),
+									LanguageCode:   ptr.String("__LanguageCode__"),
+								},
+								{
+									CaptionChannel: ptr.Int32(1),
+									LanguageCode:   ptr.String("__LanguageCode__"),
+								},
+							},
+							TimedMetadataId3Frame:    types.CmafTimedMetadataId3Frame("NONE"),
+							TimedMetadataId3Period:   ptr.Int32(1),
+							TimedMetadataPassthrough: types.CmafTimedMetadataPassthrough("DISABLED"),
+							AdditionalDestinations: []types.AdditionalDestinations{
+								{
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+								},
+								{
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+								},
+							},
+						},
+						SrtGroupSettings: &types.SrtGroupSettings{
+							InputLossAction: types.InputLossActionForUdpOut("DROP_PROGRAM"),
+						},
+						MediaConnectRouterGroupSettings: &types.MediaConnectRouterGroupSettings{
+							AvailabilityZones: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					Outputs: []types.Output{
+						{
+							AudioDescriptionNames: []string{
+								"__Member__",
+								"__Member__",
+							},
+							CaptionDescriptionNames: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputName: ptr.String("__OutputName__"),
+							OutputSettings: &types.OutputSettings{
+								ArchiveOutputSettings: &types.ArchiveOutputSettings{
+									ContainerSettings: &types.ArchiveContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+										RawSettings: &types.RawSettings{},
+									},
+									Extension:    ptr.String("__Extension__"),
+									NameModifier: ptr.String("__NameModifier__"),
+								},
+								FrameCaptureOutputSettings: &types.FrameCaptureOutputSettings{
+									NameModifier: ptr.String("__NameModifier__"),
+								},
+								HlsOutputSettings: &types.HlsOutputSettings{
+									H265PackagingType: types.HlsH265PackagingType("HEV1"),
+									HlsSettings: &types.HlsSettings{
+										AudioOnlyHlsSettings: &types.AudioOnlyHlsSettings{
+											AudioGroupId: ptr.String("__AudioGroupId__"),
+											AudioOnlyImage: &types.InputLocation{
+												PasswordParam: ptr.String("__PasswordParam__"),
+												Uri:           ptr.String("__Uri__"),
+												Username:      ptr.String("__Username__"),
+											},
+											AudioTrackType: types.AudioOnlyHlsTrackType("ALTERNATE_AUDIO_AUTO_SELECT"),
+											SegmentType:    types.AudioOnlyHlsSegmentType("AAC"),
+										},
+										Fmp4HlsSettings: &types.Fmp4HlsSettings{
+											AudioRenditionSets:    ptr.String("__AudioRenditionSets__"),
+											NielsenId3Behavior:    types.Fmp4NielsenId3Behavior("NO_PASSTHROUGH"),
+											TimedMetadataBehavior: types.Fmp4TimedMetadataBehavior("NO_PASSTHROUGH"),
+										},
+										FrameCaptureHlsSettings: &types.FrameCaptureHlsSettings{},
+										StandardHlsSettings: &types.StandardHlsSettings{
+											AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
+											M3u8Settings: &types.M3u8Settings{
+												AudioFramesPerPes:     ptr.Int32(1),
+												AudioPids:             ptr.String("__AudioPids__"),
+												EcmPid:                ptr.String("__EcmPid__"),
+												NielsenId3Behavior:    types.M3u8NielsenId3Behavior("NO_PASSTHROUGH"),
+												PatInterval:           ptr.Int32(1),
+												PcrControl:            types.M3u8PcrControl("CONFIGURED_PCR_PERIOD"),
+												PcrPeriod:             ptr.Int32(1),
+												PcrPid:                ptr.String("__PcrPid__"),
+												PmtInterval:           ptr.Int32(1),
+												PmtPid:                ptr.String("__PmtPid__"),
+												ProgramNum:            ptr.Int32(1),
+												Scte35Behavior:        types.M3u8Scte35Behavior("NO_PASSTHROUGH"),
+												Scte35Pid:             ptr.String("__Scte35Pid__"),
+												TimedMetadataBehavior: types.M3u8TimedMetadataBehavior("NO_PASSTHROUGH"),
+												TimedMetadataPid:      ptr.String("__TimedMetadataPid__"),
+												TransportStreamId:     ptr.Int32(1),
+												VideoPid:              ptr.String("__VideoPid__"),
+												KlvBehavior:           types.M3u8KlvBehavior("NO_PASSTHROUGH"),
+												KlvDataPids:           ptr.String("__KlvDataPids__"),
+											},
+										},
+									},
+									NameModifier:    ptr.String("__NameModifier__"),
+									SegmentModifier: ptr.String("__SegmentModifier__"),
+								},
+								MediaPackageOutputSettings: &types.MediaPackageOutputSettings{
+									MediaPackageV2DestinationSettings: &types.MediaPackageV2DestinationSettings{
+										AudioGroupId:       ptr.String("__AudioGroupId__"),
+										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
+										HlsAutoSelect:      types.HlsAutoSelect("NO"),
+										HlsDefault:         types.HlsDefault("NO"),
+									},
+								},
+								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
+									H265PackagingType: types.MsSmoothH265PackagingType("HEV1"),
+									NameModifier:      ptr.String("__NameModifier__"),
+								},
+								MultiplexOutputSettings: &types.MultiplexOutputSettings{
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									ContainerSettings: &types.MultiplexContainerSettings{
+										MultiplexM2tsSettings: &types.MultiplexM2tsSettings{
+											AbsentInputAudioBehavior:        types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                            types.M2tsArib("DISABLED"),
+											AudioBufferModel:                types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:               ptr.Int32(1),
+											AudioStreamType:                 types.M2tsAudioStreamType("ATSC"),
+											CcDescriptor:                    types.M2tsCcDescriptor("DISABLED"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											Klv:                             types.M2tsKlv("NONE"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+								},
+								RtmpOutputSettings: &types.RtmpOutputSettings{
+									CertificateMode:         types.RtmpOutputCertificateMode("SELF_SIGNED"),
+									ConnectionRetryInterval: ptr.Int32(1),
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									NumRetries: ptr.Int32(1),
+								},
+								UdpOutputSettings: &types.UdpOutputSettings{
+									BufferMsec: ptr.Int32(1),
+									ContainerSettings: &types.UdpContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									FecOutputSettings: &types.FecOutputSettings{
+										ColumnDepth: ptr.Int32(1),
+										IncludeFec:  types.FecOutputIncludeFec("COLUMN"),
+										RowLength:   ptr.Int32(1),
+									},
+								},
+								CmafIngestOutputSettings: &types.CmafIngestOutputSettings{
+									NameModifier: ptr.String("__NameModifier__"),
+								},
+								SrtOutputSettings: &types.SrtOutputSettings{
+									BufferMsec: ptr.Int32(1),
+									ContainerSettings: &types.UdpContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									EncryptionType: types.SrtEncryptionType("AES128"),
+									Latency:        ptr.Int32(1),
+								},
+								MediaConnectRouterOutputSettings: &types.MediaConnectRouterOutputSettings{
+									ConnectedRouterInputs: &types.MediaConnectRouterOutputConnectionMap{
+										Pipeline0: ptr.String("__Pipeline0__"),
+										Pipeline1: ptr.String("__Pipeline1__"),
+									},
+									ContainerSettings: &types.MediaConnectRouterContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+								},
+							},
+							VideoDescriptionName: ptr.String("__VideoDescriptionName__"),
+						},
+						{
+							AudioDescriptionNames: []string{
+								"__Member__",
+								"__Member__",
+							},
+							CaptionDescriptionNames: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputName: ptr.String("__OutputName__"),
+							OutputSettings: &types.OutputSettings{
+								ArchiveOutputSettings: &types.ArchiveOutputSettings{
+									ContainerSettings: &types.ArchiveContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+										RawSettings: &types.RawSettings{},
+									},
+									Extension:    ptr.String("__Extension__"),
+									NameModifier: ptr.String("__NameModifier__"),
+								},
+								FrameCaptureOutputSettings: &types.FrameCaptureOutputSettings{
+									NameModifier: ptr.String("__NameModifier__"),
+								},
+								HlsOutputSettings: &types.HlsOutputSettings{
+									H265PackagingType: types.HlsH265PackagingType("HEV1"),
+									HlsSettings: &types.HlsSettings{
+										AudioOnlyHlsSettings: &types.AudioOnlyHlsSettings{
+											AudioGroupId: ptr.String("__AudioGroupId__"),
+											AudioOnlyImage: &types.InputLocation{
+												PasswordParam: ptr.String("__PasswordParam__"),
+												Uri:           ptr.String("__Uri__"),
+												Username:      ptr.String("__Username__"),
+											},
+											AudioTrackType: types.AudioOnlyHlsTrackType("ALTERNATE_AUDIO_AUTO_SELECT"),
+											SegmentType:    types.AudioOnlyHlsSegmentType("AAC"),
+										},
+										Fmp4HlsSettings: &types.Fmp4HlsSettings{
+											AudioRenditionSets:    ptr.String("__AudioRenditionSets__"),
+											NielsenId3Behavior:    types.Fmp4NielsenId3Behavior("NO_PASSTHROUGH"),
+											TimedMetadataBehavior: types.Fmp4TimedMetadataBehavior("NO_PASSTHROUGH"),
+										},
+										FrameCaptureHlsSettings: &types.FrameCaptureHlsSettings{},
+										StandardHlsSettings: &types.StandardHlsSettings{
+											AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
+											M3u8Settings: &types.M3u8Settings{
+												AudioFramesPerPes:     ptr.Int32(1),
+												AudioPids:             ptr.String("__AudioPids__"),
+												EcmPid:                ptr.String("__EcmPid__"),
+												NielsenId3Behavior:    types.M3u8NielsenId3Behavior("NO_PASSTHROUGH"),
+												PatInterval:           ptr.Int32(1),
+												PcrControl:            types.M3u8PcrControl("CONFIGURED_PCR_PERIOD"),
+												PcrPeriod:             ptr.Int32(1),
+												PcrPid:                ptr.String("__PcrPid__"),
+												PmtInterval:           ptr.Int32(1),
+												PmtPid:                ptr.String("__PmtPid__"),
+												ProgramNum:            ptr.Int32(1),
+												Scte35Behavior:        types.M3u8Scte35Behavior("NO_PASSTHROUGH"),
+												Scte35Pid:             ptr.String("__Scte35Pid__"),
+												TimedMetadataBehavior: types.M3u8TimedMetadataBehavior("NO_PASSTHROUGH"),
+												TimedMetadataPid:      ptr.String("__TimedMetadataPid__"),
+												TransportStreamId:     ptr.Int32(1),
+												VideoPid:              ptr.String("__VideoPid__"),
+												KlvBehavior:           types.M3u8KlvBehavior("NO_PASSTHROUGH"),
+												KlvDataPids:           ptr.String("__KlvDataPids__"),
+											},
+										},
+									},
+									NameModifier:    ptr.String("__NameModifier__"),
+									SegmentModifier: ptr.String("__SegmentModifier__"),
+								},
+								MediaPackageOutputSettings: &types.MediaPackageOutputSettings{
+									MediaPackageV2DestinationSettings: &types.MediaPackageV2DestinationSettings{
+										AudioGroupId:       ptr.String("__AudioGroupId__"),
+										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
+										HlsAutoSelect:      types.HlsAutoSelect("NO"),
+										HlsDefault:         types.HlsDefault("NO"),
+									},
+								},
+								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
+									H265PackagingType: types.MsSmoothH265PackagingType("HEV1"),
+									NameModifier:      ptr.String("__NameModifier__"),
+								},
+								MultiplexOutputSettings: &types.MultiplexOutputSettings{
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									ContainerSettings: &types.MultiplexContainerSettings{
+										MultiplexM2tsSettings: &types.MultiplexM2tsSettings{
+											AbsentInputAudioBehavior:        types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                            types.M2tsArib("DISABLED"),
+											AudioBufferModel:                types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:               ptr.Int32(1),
+											AudioStreamType:                 types.M2tsAudioStreamType("ATSC"),
+											CcDescriptor:                    types.M2tsCcDescriptor("DISABLED"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											Klv:                             types.M2tsKlv("NONE"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+								},
+								RtmpOutputSettings: &types.RtmpOutputSettings{
+									CertificateMode:         types.RtmpOutputCertificateMode("SELF_SIGNED"),
+									ConnectionRetryInterval: ptr.Int32(1),
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									NumRetries: ptr.Int32(1),
+								},
+								UdpOutputSettings: &types.UdpOutputSettings{
+									BufferMsec: ptr.Int32(1),
+									ContainerSettings: &types.UdpContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									FecOutputSettings: &types.FecOutputSettings{
+										ColumnDepth: ptr.Int32(1),
+										IncludeFec:  types.FecOutputIncludeFec("COLUMN"),
+										RowLength:   ptr.Int32(1),
+									},
+								},
+								CmafIngestOutputSettings: &types.CmafIngestOutputSettings{
+									NameModifier: ptr.String("__NameModifier__"),
+								},
+								SrtOutputSettings: &types.SrtOutputSettings{
+									BufferMsec: ptr.Int32(1),
+									ContainerSettings: &types.UdpContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									EncryptionType: types.SrtEncryptionType("AES128"),
+									Latency:        ptr.Int32(1),
+								},
+								MediaConnectRouterOutputSettings: &types.MediaConnectRouterOutputSettings{
+									ConnectedRouterInputs: &types.MediaConnectRouterOutputConnectionMap{
+										Pipeline0: ptr.String("__Pipeline0__"),
+										Pipeline1: ptr.String("__Pipeline1__"),
+									},
+									ContainerSettings: &types.MediaConnectRouterContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+								},
+							},
+							VideoDescriptionName: ptr.String("__VideoDescriptionName__"),
+						},
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					OutputGroupSettings: &types.OutputGroupSettings{
+						ArchiveGroupSettings: &types.ArchiveGroupSettings{
+							ArchiveCdnSettings: &types.ArchiveCdnSettings{
+								ArchiveS3Settings: &types.ArchiveS3Settings{
+									CannedAcl: types.S3CannedAcl("AUTHENTICATED_READ"),
+								},
+							},
+							Destination: &types.OutputLocationRef{
+								DestinationRefId: ptr.String("__DestinationRefId__"),
+							},
+							RolloverInterval: ptr.Int32(1),
+						},
+						FrameCaptureGroupSettings: &types.FrameCaptureGroupSettings{
+							Destination: &types.OutputLocationRef{
+								DestinationRefId: ptr.String("__DestinationRefId__"),
+							},
+							FrameCaptureCdnSettings: &types.FrameCaptureCdnSettings{
+								FrameCaptureS3Settings: &types.FrameCaptureS3Settings{
+									CannedAcl: types.S3CannedAcl("AUTHENTICATED_READ"),
+								},
+							},
+						},
+						HlsGroupSettings: &types.HlsGroupSettings{
+							AdMarkers: []types.HlsAdMarkers{
+								types.HlsAdMarkers("ADOBE"),
+								types.HlsAdMarkers("ADOBE"),
+							},
+							BaseUrlContent:   ptr.String("__BaseUrlContent__"),
+							BaseUrlContent1:  ptr.String("__BaseUrlContent1__"),
+							BaseUrlManifest:  ptr.String("__BaseUrlManifest__"),
+							BaseUrlManifest1: ptr.String("__BaseUrlManifest1__"),
+							CaptionLanguageMappings: []types.CaptionLanguageMapping{
+								{
+									CaptionChannel:      ptr.Int32(1),
+									LanguageCode:        ptr.String("__LanguageCode__"),
+									LanguageDescription: ptr.String("__LanguageDescription__"),
+								},
+								{
+									CaptionChannel:      ptr.Int32(1),
+									LanguageCode:        ptr.String("__LanguageCode__"),
+									LanguageDescription: ptr.String("__LanguageDescription__"),
+								},
+							},
+							CaptionLanguageSetting: types.HlsCaptionLanguageSetting("INSERT"),
+							ClientCache:            types.HlsClientCache("DISABLED"),
+							CodecSpecification:     types.HlsCodecSpecification("RFC_4281"),
+							ConstantIv:             ptr.String("__ConstantIv__"),
+							Destination: &types.OutputLocationRef{
+								DestinationRefId: ptr.String("__DestinationRefId__"),
+							},
+							DirectoryStructure: types.HlsDirectoryStructure("SINGLE_DIRECTORY"),
+							DiscontinuityTags:  types.HlsDiscontinuityTags("INSERT"),
+							EncryptionType:     types.HlsEncryptionType("AES128"),
+							HlsCdnSettings: &types.HlsCdnSettings{
+								HlsAkamaiSettings: &types.HlsAkamaiSettings{
+									ConnectionRetryInterval: ptr.Int32(1),
+									FilecacheDuration:       ptr.Int32(1),
+									HttpTransferMode:        types.HlsAkamaiHttpTransferMode("CHUNKED"),
+									NumRetries:              ptr.Int32(1),
+									RestartDelay:            ptr.Int32(1),
+									Salt:                    ptr.String("__Salt__"),
+									Token:                   ptr.String("__Token__"),
+								},
+								HlsBasicPutSettings: &types.HlsBasicPutSettings{
+									ConnectionRetryInterval: ptr.Int32(1),
+									FilecacheDuration:       ptr.Int32(1),
+									NumRetries:              ptr.Int32(1),
+									RestartDelay:            ptr.Int32(1),
+								},
+								HlsMediaStoreSettings: &types.HlsMediaStoreSettings{
+									ConnectionRetryInterval: ptr.Int32(1),
+									FilecacheDuration:       ptr.Int32(1),
+									MediaStoreStorageClass:  types.HlsMediaStoreStorageClass("TEMPORAL"),
+									NumRetries:              ptr.Int32(1),
+									RestartDelay:            ptr.Int32(1),
+								},
+								HlsS3Settings: &types.HlsS3Settings{
+									CannedAcl: types.S3CannedAcl("AUTHENTICATED_READ"),
+								},
+								HlsWebdavSettings: &types.HlsWebdavSettings{
+									ConnectionRetryInterval: ptr.Int32(1),
+									FilecacheDuration:       ptr.Int32(1),
+									HttpTransferMode:        types.HlsWebdavHttpTransferMode("CHUNKED"),
+									NumRetries:              ptr.Int32(1),
+									RestartDelay:            ptr.Int32(1),
+								},
+							},
+							HlsId3SegmentTagging:      types.HlsId3SegmentTaggingState("DISABLED"),
+							IFrameOnlyPlaylists:       types.IFrameOnlyPlaylistType("DISABLED"),
+							IncompleteSegmentBehavior: types.HlsIncompleteSegmentBehavior("AUTO"),
+							IndexNSegments:            ptr.Int32(1),
+							InputLossAction:           types.InputLossActionForHlsOut("EMIT_OUTPUT"),
+							IvInManifest:              types.HlsIvInManifest("EXCLUDE"),
+							IvSource:                  types.HlsIvSource("EXPLICIT"),
+							KeepSegments:              ptr.Int32(1),
+							KeyFormat:                 ptr.String("__KeyFormat__"),
+							KeyFormatVersions:         ptr.String("__KeyFormatVersions__"),
+							KeyProviderSettings: &types.KeyProviderSettings{
+								StaticKeySettings: &types.StaticKeySettings{
+									KeyProviderServer: &types.InputLocation{
+										PasswordParam: ptr.String("__PasswordParam__"),
+										Uri:           ptr.String("__Uri__"),
+										Username:      ptr.String("__Username__"),
+									},
+									StaticKeyValue: ptr.String("__StaticKeyValue__"),
+								},
+							},
+							ManifestCompression:        types.HlsManifestCompression("GZIP"),
+							ManifestDurationFormat:     types.HlsManifestDurationFormat("FLOATING_POINT"),
+							MinSegmentLength:           ptr.Int32(1),
+							Mode:                       types.HlsMode("LIVE"),
+							OutputSelection:            types.HlsOutputSelection("MANIFESTS_AND_SEGMENTS"),
+							ProgramDateTime:            types.HlsProgramDateTime("EXCLUDE"),
+							ProgramDateTimeClock:       types.HlsProgramDateTimeClock("INITIALIZE_FROM_OUTPUT_TIMECODE"),
+							ProgramDateTimePeriod:      ptr.Int32(1),
+							RedundantManifest:          types.HlsRedundantManifest("DISABLED"),
+							SegmentLength:              ptr.Int32(1),
+							SegmentationMode:           types.HlsSegmentationMode("USE_INPUT_SEGMENTATION"),
+							SegmentsPerSubdirectory:    ptr.Int32(1),
+							StreamInfResolution:        types.HlsStreamInfResolution("EXCLUDE"),
+							TimedMetadataId3Frame:      types.HlsTimedMetadataId3Frame("NONE"),
+							TimedMetadataId3Period:     ptr.Int32(1),
+							TimestampDeltaMilliseconds: ptr.Int32(1),
+							TsFileMode:                 types.HlsTsFileMode("SEGMENTED_FILES"),
+						},
+						MediaPackageGroupSettings: &types.MediaPackageGroupSettings{
+							Destination: &types.OutputLocationRef{
+								DestinationRefId: ptr.String("__DestinationRefId__"),
+							},
+							MediapackageV2GroupSettings: &types.MediaPackageV2GroupSettings{
+								CaptionLanguageMappings: []types.CaptionLanguageMapping{
+									{
+										CaptionChannel:      ptr.Int32(1),
+										LanguageCode:        ptr.String("__LanguageCode__"),
+										LanguageDescription: ptr.String("__LanguageDescription__"),
+									},
+									{
+										CaptionChannel:      ptr.Int32(1),
+										LanguageCode:        ptr.String("__LanguageCode__"),
+										LanguageDescription: ptr.String("__LanguageDescription__"),
+									},
+								},
+								Id3Behavior:              types.CmafId3Behavior("DISABLED"),
+								KlvBehavior:              types.CmafKLVBehavior("NO_PASSTHROUGH"),
+								NielsenId3Behavior:       types.CmafNielsenId3Behavior("NO_PASSTHROUGH"),
+								Scte35Type:               types.Scte35Type("NONE"),
+								SegmentLength:            ptr.Int32(1),
+								SegmentLengthUnits:       types.CmafIngestSegmentLengthUnits("MILLISECONDS"),
+								TimedMetadataId3Frame:    types.CmafTimedMetadataId3Frame("NONE"),
+								TimedMetadataId3Period:   ptr.Int32(1),
+								TimedMetadataPassthrough: types.CmafTimedMetadataPassthrough("DISABLED"),
+								AdditionalDestinations: []types.MediaPackageAdditionalDestinations{
+									{
+										Destination: &types.OutputLocationRef{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+									},
+									{
+										Destination: &types.OutputLocationRef{
+											DestinationRefId: ptr.String("__DestinationRefId__"),
+										},
+									},
+								},
+							},
+						},
+						MsSmoothGroupSettings: &types.MsSmoothGroupSettings{
+							AcquisitionPointId:       ptr.String("__AcquisitionPointId__"),
+							AudioOnlyTimecodeControl: types.SmoothGroupAudioOnlyTimecodeControl("PASSTHROUGH"),
+							CertificateMode:          types.SmoothGroupCertificateMode("SELF_SIGNED"),
+							ConnectionRetryInterval:  ptr.Int32(1),
+							Destination: &types.OutputLocationRef{
+								DestinationRefId: ptr.String("__DestinationRefId__"),
+							},
+							EventId:                ptr.String("__EventId__"),
+							EventIdMode:            types.SmoothGroupEventIdMode("NO_EVENT_ID"),
+							EventStopBehavior:      types.SmoothGroupEventStopBehavior("NONE"),
+							FilecacheDuration:      ptr.Int32(1),
+							FragmentLength:         ptr.Int32(1),
+							InputLossAction:        types.InputLossActionForMsSmoothOut("EMIT_OUTPUT"),
+							NumRetries:             ptr.Int32(1),
+							RestartDelay:           ptr.Int32(1),
+							SegmentationMode:       types.SmoothGroupSegmentationMode("USE_INPUT_SEGMENTATION"),
+							SendDelayMs:            ptr.Int32(1),
+							SparseTrackType:        types.SmoothGroupSparseTrackType("NONE"),
+							StreamManifestBehavior: types.SmoothGroupStreamManifestBehavior("DO_NOT_SEND"),
+							TimestampOffset:        ptr.String("__TimestampOffset__"),
+							TimestampOffsetMode:    types.SmoothGroupTimestampOffsetMode("USE_CONFIGURED_OFFSET"),
+						},
+						MultiplexGroupSettings: &types.MultiplexGroupSettings{},
+						RtmpGroupSettings: &types.RtmpGroupSettings{
+							AdMarkers: []types.RtmpAdMarkers{
+								types.RtmpAdMarkers("ON_CUE_POINT_SCTE35"),
+								types.RtmpAdMarkers("ON_CUE_POINT_SCTE35"),
+							},
+							AuthenticationScheme:  types.AuthenticationScheme("AKAMAI"),
+							CacheFullBehavior:     types.RtmpCacheFullBehavior("DISCONNECT_IMMEDIATELY"),
+							CacheLength:           ptr.Int32(1),
+							CaptionData:           types.RtmpCaptionData("ALL"),
+							InputLossAction:       types.InputLossActionForRtmpOut("EMIT_OUTPUT"),
+							RestartDelay:          ptr.Int32(1),
+							IncludeFillerNalUnits: types.IncludeFillerNalUnits("AUTO"),
+						},
+						UdpGroupSettings: &types.UdpGroupSettings{
+							InputLossAction:        types.InputLossActionForUdpOut("DROP_PROGRAM"),
+							TimedMetadataId3Frame:  types.UdpTimedMetadataId3Frame("NONE"),
+							TimedMetadataId3Period: ptr.Int32(1),
+						},
+						CmafIngestGroupSettings: &types.CmafIngestGroupSettings{
+							Destination: &types.OutputLocationRef{
+								DestinationRefId: ptr.String("__DestinationRefId__"),
+							},
+							NielsenId3Behavior:     types.CmafNielsenId3Behavior("NO_PASSTHROUGH"),
+							Scte35Type:             types.Scte35Type("NONE"),
+							SegmentLength:          ptr.Int32(1),
+							SegmentLengthUnits:     types.CmafIngestSegmentLengthUnits("MILLISECONDS"),
+							SendDelayMs:            ptr.Int32(1),
+							KlvBehavior:            types.CmafKLVBehavior("NO_PASSTHROUGH"),
+							KlvNameModifier:        ptr.String("__KlvNameModifier__"),
+							NielsenId3NameModifier: ptr.String("__NielsenId3NameModifier__"),
+							Scte35NameModifier:     ptr.String("__Scte35NameModifier__"),
+							Id3Behavior:            types.CmafId3Behavior("DISABLED"),
+							Id3NameModifier:        ptr.String("__Id3NameModifier__"),
+							CaptionLanguageMappings: []types.CmafIngestCaptionLanguageMapping{
+								{
+									CaptionChannel: ptr.Int32(1),
+									LanguageCode:   ptr.String("__LanguageCode__"),
+								},
+								{
+									CaptionChannel: ptr.Int32(1),
+									LanguageCode:   ptr.String("__LanguageCode__"),
+								},
+							},
+							TimedMetadataId3Frame:    types.CmafTimedMetadataId3Frame("NONE"),
+							TimedMetadataId3Period:   ptr.Int32(1),
+							TimedMetadataPassthrough: types.CmafTimedMetadataPassthrough("DISABLED"),
+							AdditionalDestinations: []types.AdditionalDestinations{
+								{
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+								},
+								{
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+								},
+							},
+						},
+						SrtGroupSettings: &types.SrtGroupSettings{
+							InputLossAction: types.InputLossActionForUdpOut("DROP_PROGRAM"),
+						},
+						MediaConnectRouterGroupSettings: &types.MediaConnectRouterGroupSettings{
+							AvailabilityZones: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					Outputs: []types.Output{
+						{
+							AudioDescriptionNames: []string{
+								"__Member__",
+								"__Member__",
+							},
+							CaptionDescriptionNames: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputName: ptr.String("__OutputName__"),
+							OutputSettings: &types.OutputSettings{
+								ArchiveOutputSettings: &types.ArchiveOutputSettings{
+									ContainerSettings: &types.ArchiveContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+										RawSettings: &types.RawSettings{},
+									},
+									Extension:    ptr.String("__Extension__"),
+									NameModifier: ptr.String("__NameModifier__"),
+								},
+								FrameCaptureOutputSettings: &types.FrameCaptureOutputSettings{
+									NameModifier: ptr.String("__NameModifier__"),
+								},
+								HlsOutputSettings: &types.HlsOutputSettings{
+									H265PackagingType: types.HlsH265PackagingType("HEV1"),
+									HlsSettings: &types.HlsSettings{
+										AudioOnlyHlsSettings: &types.AudioOnlyHlsSettings{
+											AudioGroupId: ptr.String("__AudioGroupId__"),
+											AudioOnlyImage: &types.InputLocation{
+												PasswordParam: ptr.String("__PasswordParam__"),
+												Uri:           ptr.String("__Uri__"),
+												Username:      ptr.String("__Username__"),
+											},
+											AudioTrackType: types.AudioOnlyHlsTrackType("ALTERNATE_AUDIO_AUTO_SELECT"),
+											SegmentType:    types.AudioOnlyHlsSegmentType("AAC"),
+										},
+										Fmp4HlsSettings: &types.Fmp4HlsSettings{
+											AudioRenditionSets:    ptr.String("__AudioRenditionSets__"),
+											NielsenId3Behavior:    types.Fmp4NielsenId3Behavior("NO_PASSTHROUGH"),
+											TimedMetadataBehavior: types.Fmp4TimedMetadataBehavior("NO_PASSTHROUGH"),
+										},
+										FrameCaptureHlsSettings: &types.FrameCaptureHlsSettings{},
+										StandardHlsSettings: &types.StandardHlsSettings{
+											AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
+											M3u8Settings: &types.M3u8Settings{
+												AudioFramesPerPes:     ptr.Int32(1),
+												AudioPids:             ptr.String("__AudioPids__"),
+												EcmPid:                ptr.String("__EcmPid__"),
+												NielsenId3Behavior:    types.M3u8NielsenId3Behavior("NO_PASSTHROUGH"),
+												PatInterval:           ptr.Int32(1),
+												PcrControl:            types.M3u8PcrControl("CONFIGURED_PCR_PERIOD"),
+												PcrPeriod:             ptr.Int32(1),
+												PcrPid:                ptr.String("__PcrPid__"),
+												PmtInterval:           ptr.Int32(1),
+												PmtPid:                ptr.String("__PmtPid__"),
+												ProgramNum:            ptr.Int32(1),
+												Scte35Behavior:        types.M3u8Scte35Behavior("NO_PASSTHROUGH"),
+												Scte35Pid:             ptr.String("__Scte35Pid__"),
+												TimedMetadataBehavior: types.M3u8TimedMetadataBehavior("NO_PASSTHROUGH"),
+												TimedMetadataPid:      ptr.String("__TimedMetadataPid__"),
+												TransportStreamId:     ptr.Int32(1),
+												VideoPid:              ptr.String("__VideoPid__"),
+												KlvBehavior:           types.M3u8KlvBehavior("NO_PASSTHROUGH"),
+												KlvDataPids:           ptr.String("__KlvDataPids__"),
+											},
+										},
+									},
+									NameModifier:    ptr.String("__NameModifier__"),
+									SegmentModifier: ptr.String("__SegmentModifier__"),
+								},
+								MediaPackageOutputSettings: &types.MediaPackageOutputSettings{
+									MediaPackageV2DestinationSettings: &types.MediaPackageV2DestinationSettings{
+										AudioGroupId:       ptr.String("__AudioGroupId__"),
+										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
+										HlsAutoSelect:      types.HlsAutoSelect("NO"),
+										HlsDefault:         types.HlsDefault("NO"),
+									},
+								},
+								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
+									H265PackagingType: types.MsSmoothH265PackagingType("HEV1"),
+									NameModifier:      ptr.String("__NameModifier__"),
+								},
+								MultiplexOutputSettings: &types.MultiplexOutputSettings{
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									ContainerSettings: &types.MultiplexContainerSettings{
+										MultiplexM2tsSettings: &types.MultiplexM2tsSettings{
+											AbsentInputAudioBehavior:        types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                            types.M2tsArib("DISABLED"),
+											AudioBufferModel:                types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:               ptr.Int32(1),
+											AudioStreamType:                 types.M2tsAudioStreamType("ATSC"),
+											CcDescriptor:                    types.M2tsCcDescriptor("DISABLED"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											Klv:                             types.M2tsKlv("NONE"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+								},
+								RtmpOutputSettings: &types.RtmpOutputSettings{
+									CertificateMode:         types.RtmpOutputCertificateMode("SELF_SIGNED"),
+									ConnectionRetryInterval: ptr.Int32(1),
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									NumRetries: ptr.Int32(1),
+								},
+								UdpOutputSettings: &types.UdpOutputSettings{
+									BufferMsec: ptr.Int32(1),
+									ContainerSettings: &types.UdpContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									FecOutputSettings: &types.FecOutputSettings{
+										ColumnDepth: ptr.Int32(1),
+										IncludeFec:  types.FecOutputIncludeFec("COLUMN"),
+										RowLength:   ptr.Int32(1),
+									},
+								},
+								CmafIngestOutputSettings: &types.CmafIngestOutputSettings{
+									NameModifier: ptr.String("__NameModifier__"),
+								},
+								SrtOutputSettings: &types.SrtOutputSettings{
+									BufferMsec: ptr.Int32(1),
+									ContainerSettings: &types.UdpContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									EncryptionType: types.SrtEncryptionType("AES128"),
+									Latency:        ptr.Int32(1),
+								},
+								MediaConnectRouterOutputSettings: &types.MediaConnectRouterOutputSettings{
+									ConnectedRouterInputs: &types.MediaConnectRouterOutputConnectionMap{
+										Pipeline0: ptr.String("__Pipeline0__"),
+										Pipeline1: ptr.String("__Pipeline1__"),
+									},
+									ContainerSettings: &types.MediaConnectRouterContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+								},
+							},
+							VideoDescriptionName: ptr.String("__VideoDescriptionName__"),
+						},
+						{
+							AudioDescriptionNames: []string{
+								"__Member__",
+								"__Member__",
+							},
+							CaptionDescriptionNames: []string{
+								"__Member__",
+								"__Member__",
+							},
+							OutputName: ptr.String("__OutputName__"),
+							OutputSettings: &types.OutputSettings{
+								ArchiveOutputSettings: &types.ArchiveOutputSettings{
+									ContainerSettings: &types.ArchiveContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+										RawSettings: &types.RawSettings{},
+									},
+									Extension:    ptr.String("__Extension__"),
+									NameModifier: ptr.String("__NameModifier__"),
+								},
+								FrameCaptureOutputSettings: &types.FrameCaptureOutputSettings{
+									NameModifier: ptr.String("__NameModifier__"),
+								},
+								HlsOutputSettings: &types.HlsOutputSettings{
+									H265PackagingType: types.HlsH265PackagingType("HEV1"),
+									HlsSettings: &types.HlsSettings{
+										AudioOnlyHlsSettings: &types.AudioOnlyHlsSettings{
+											AudioGroupId: ptr.String("__AudioGroupId__"),
+											AudioOnlyImage: &types.InputLocation{
+												PasswordParam: ptr.String("__PasswordParam__"),
+												Uri:           ptr.String("__Uri__"),
+												Username:      ptr.String("__Username__"),
+											},
+											AudioTrackType: types.AudioOnlyHlsTrackType("ALTERNATE_AUDIO_AUTO_SELECT"),
+											SegmentType:    types.AudioOnlyHlsSegmentType("AAC"),
+										},
+										Fmp4HlsSettings: &types.Fmp4HlsSettings{
+											AudioRenditionSets:    ptr.String("__AudioRenditionSets__"),
+											NielsenId3Behavior:    types.Fmp4NielsenId3Behavior("NO_PASSTHROUGH"),
+											TimedMetadataBehavior: types.Fmp4TimedMetadataBehavior("NO_PASSTHROUGH"),
+										},
+										FrameCaptureHlsSettings: &types.FrameCaptureHlsSettings{},
+										StandardHlsSettings: &types.StandardHlsSettings{
+											AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
+											M3u8Settings: &types.M3u8Settings{
+												AudioFramesPerPes:     ptr.Int32(1),
+												AudioPids:             ptr.String("__AudioPids__"),
+												EcmPid:                ptr.String("__EcmPid__"),
+												NielsenId3Behavior:    types.M3u8NielsenId3Behavior("NO_PASSTHROUGH"),
+												PatInterval:           ptr.Int32(1),
+												PcrControl:            types.M3u8PcrControl("CONFIGURED_PCR_PERIOD"),
+												PcrPeriod:             ptr.Int32(1),
+												PcrPid:                ptr.String("__PcrPid__"),
+												PmtInterval:           ptr.Int32(1),
+												PmtPid:                ptr.String("__PmtPid__"),
+												ProgramNum:            ptr.Int32(1),
+												Scte35Behavior:        types.M3u8Scte35Behavior("NO_PASSTHROUGH"),
+												Scte35Pid:             ptr.String("__Scte35Pid__"),
+												TimedMetadataBehavior: types.M3u8TimedMetadataBehavior("NO_PASSTHROUGH"),
+												TimedMetadataPid:      ptr.String("__TimedMetadataPid__"),
+												TransportStreamId:     ptr.Int32(1),
+												VideoPid:              ptr.String("__VideoPid__"),
+												KlvBehavior:           types.M3u8KlvBehavior("NO_PASSTHROUGH"),
+												KlvDataPids:           ptr.String("__KlvDataPids__"),
+											},
+										},
+									},
+									NameModifier:    ptr.String("__NameModifier__"),
+									SegmentModifier: ptr.String("__SegmentModifier__"),
+								},
+								MediaPackageOutputSettings: &types.MediaPackageOutputSettings{
+									MediaPackageV2DestinationSettings: &types.MediaPackageV2DestinationSettings{
+										AudioGroupId:       ptr.String("__AudioGroupId__"),
+										AudioRenditionSets: ptr.String("__AudioRenditionSets__"),
+										HlsAutoSelect:      types.HlsAutoSelect("NO"),
+										HlsDefault:         types.HlsDefault("NO"),
+									},
+								},
+								MsSmoothOutputSettings: &types.MsSmoothOutputSettings{
+									H265PackagingType: types.MsSmoothH265PackagingType("HEV1"),
+									NameModifier:      ptr.String("__NameModifier__"),
+								},
+								MultiplexOutputSettings: &types.MultiplexOutputSettings{
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									ContainerSettings: &types.MultiplexContainerSettings{
+										MultiplexM2tsSettings: &types.MultiplexM2tsSettings{
+											AbsentInputAudioBehavior:        types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                            types.M2tsArib("DISABLED"),
+											AudioBufferModel:                types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:               ptr.Int32(1),
+											AudioStreamType:                 types.M2tsAudioStreamType("ATSC"),
+											CcDescriptor:                    types.M2tsCcDescriptor("DISABLED"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											Klv:                             types.M2tsKlv("NONE"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+								},
+								RtmpOutputSettings: &types.RtmpOutputSettings{
+									CertificateMode:         types.RtmpOutputCertificateMode("SELF_SIGNED"),
+									ConnectionRetryInterval: ptr.Int32(1),
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									NumRetries: ptr.Int32(1),
+								},
+								UdpOutputSettings: &types.UdpOutputSettings{
+									BufferMsec: ptr.Int32(1),
+									ContainerSettings: &types.UdpContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									FecOutputSettings: &types.FecOutputSettings{
+										ColumnDepth: ptr.Int32(1),
+										IncludeFec:  types.FecOutputIncludeFec("COLUMN"),
+										RowLength:   ptr.Int32(1),
+									},
+								},
+								CmafIngestOutputSettings: &types.CmafIngestOutputSettings{
+									NameModifier: ptr.String("__NameModifier__"),
+								},
+								SrtOutputSettings: &types.SrtOutputSettings{
+									BufferMsec: ptr.Int32(1),
+									ContainerSettings: &types.UdpContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+									EncryptionType: types.SrtEncryptionType("AES128"),
+									Latency:        ptr.Int32(1),
+								},
+								MediaConnectRouterOutputSettings: &types.MediaConnectRouterOutputSettings{
+									ConnectedRouterInputs: &types.MediaConnectRouterOutputConnectionMap{
+										Pipeline0: ptr.String("__Pipeline0__"),
+										Pipeline1: ptr.String("__Pipeline1__"),
+									},
+									ContainerSettings: &types.MediaConnectRouterContainerSettings{
+										M2tsSettings: &types.M2tsSettings{
+											AbsentInputAudioBehavior: types.M2tsAbsentInputAudioBehavior("DROP"),
+											Arib:                     types.M2tsArib("DISABLED"),
+											AribCaptionsPid:          ptr.String("__AribCaptionsPid__"),
+											AribCaptionsPidControl:   types.M2tsAribCaptionsPidControl("AUTO"),
+											AudioBufferModel:         types.M2tsAudioBufferModel("ATSC"),
+											AudioFramesPerPes:        ptr.Int32(1),
+											AudioPids:                ptr.String("__AudioPids__"),
+											AudioStreamType:          types.M2tsAudioStreamType("ATSC"),
+											Bitrate:                  ptr.Int32(1),
+											BufferModel:              types.M2tsBufferModel("MULTIPLEX"),
+											CcDescriptor:             types.M2tsCcDescriptor("DISABLED"),
+											DvbNitSettings: &types.DvbNitSettings{
+												NetworkId:   ptr.Int32(1),
+												NetworkName: ptr.String("__NetworkName__"),
+												RepInterval: ptr.Int32(1),
+											},
+											DvbSdtSettings: &types.DvbSdtSettings{
+												OutputSdt:           types.DvbSdtOutputSdt("SDT_FOLLOW"),
+												RepInterval:         ptr.Int32(1),
+												ServiceName:         ptr.String("__ServiceName__"),
+												ServiceProviderName: ptr.String("__ServiceProviderName__"),
+											},
+											DvbSubPids: ptr.String("__DvbSubPids__"),
+											DvbTdtSettings: &types.DvbTdtSettings{
+												RepInterval: ptr.Int32(1),
+											},
+											DvbTeletextPid:                  ptr.String("__DvbTeletextPid__"),
+											Ebif:                            types.M2tsEbifControl("NONE"),
+											EbpAudioInterval:                types.M2tsAudioInterval("VIDEO_AND_FIXED_INTERVALS"),
+											EbpLookaheadMs:                  ptr.Int32(1),
+											EbpPlacement:                    types.M2tsEbpPlacement("VIDEO_AND_AUDIO_PIDS"),
+											EcmPid:                          ptr.String("__EcmPid__"),
+											EsRateInPes:                     types.M2tsEsRateInPes("EXCLUDE"),
+											EtvPlatformPid:                  ptr.String("__EtvPlatformPid__"),
+											EtvSignalPid:                    ptr.String("__EtvSignalPid__"),
+											FragmentTime:                    ptr.Float64(1.0),
+											Klv:                             types.M2tsKlv("NONE"),
+											KlvDataPids:                     ptr.String("__KlvDataPids__"),
+											NielsenId3Behavior:              types.M2tsNielsenId3Behavior("NO_PASSTHROUGH"),
+											NullPacketBitrate:               ptr.Float64(1.0),
+											PatInterval:                     ptr.Int32(1),
+											PcrControl:                      types.M2tsPcrControl("CONFIGURED_PCR_PERIOD"),
+											PcrPeriod:                       ptr.Int32(1),
+											PcrPid:                          ptr.String("__PcrPid__"),
+											PmtInterval:                     ptr.Int32(1),
+											PmtPid:                          ptr.String("__PmtPid__"),
+											ProgramNum:                      ptr.Int32(1),
+											RateMode:                        types.M2tsRateMode("CBR"),
+											Scte27Pids:                      ptr.String("__Scte27Pids__"),
+											Scte35Control:                   types.M2tsScte35Control("NONE"),
+											Scte35Pid:                       ptr.String("__Scte35Pid__"),
+											SegmentationMarkers:             types.M2tsSegmentationMarkers("EBP"),
+											SegmentationStyle:               types.M2tsSegmentationStyle("MAINTAIN_CADENCE"),
+											SegmentationTime:                ptr.Float64(1.0),
+											TimedMetadataBehavior:           types.M2tsTimedMetadataBehavior("NO_PASSTHROUGH"),
+											TimedMetadataPid:                ptr.String("__TimedMetadataPid__"),
+											TransportStreamId:               ptr.Int32(1),
+											VideoPid:                        ptr.String("__VideoPid__"),
+											Scte35PrerollPullupMilliseconds: ptr.Float64(1.0),
+										},
+									},
+									Destination: &types.OutputLocationRef{
+										DestinationRefId: ptr.String("__DestinationRefId__"),
+									},
+								},
+							},
+							VideoDescriptionName: ptr.String("__VideoDescriptionName__"),
+						},
+					},
+				},
+			},
+			TimecodeConfig: &types.TimecodeConfig{
+				Source:        types.TimecodeConfigSource("EMBEDDED"),
+				SyncThreshold: ptr.Int32(1),
+			},
+			VideoDescriptions: []types.VideoDescription{
+				{
+					CodecSettings: &types.VideoCodecSettings{
+						FrameCaptureSettings: &types.FrameCaptureSettings{
+							CaptureInterval:      ptr.Int32(1),
+							CaptureIntervalUnits: types.FrameCaptureIntervalUnit("MILLISECONDS"),
+							TimecodeBurninSettings: &types.TimecodeBurninSettings{
+								FontSize: types.TimecodeBurninFontSize("EXTRA_SMALL_10"),
+								Position: types.TimecodeBurninPosition("BOTTOM_CENTER"),
+								Prefix:   ptr.String("__Prefix__"),
+							},
+						},
+						H264Settings: &types.H264Settings{
+							AdaptiveQuantization: types.H264AdaptiveQuantization("AUTO"),
+							AfdSignaling:         types.AfdSignaling("AUTO"),
+							Bitrate:              ptr.Int32(1),
+							BufFillPct:           ptr.Int32(1),
+							BufSize:              ptr.Int32(1),
+							ColorMetadata:        types.H264ColorMetadata("IGNORE"),
+							ColorSpaceSettings: &types.H264ColorSpaceSettings{
+								ColorSpacePassthroughSettings: &types.ColorSpacePassthroughSettings{},
+								Rec601Settings:                &types.Rec601Settings{},
+								Rec709Settings:                &types.Rec709Settings{},
+							},
+							EntropyEncoding: types.H264EntropyEncoding("CABAC"),
+							FilterSettings: &types.H264FilterSettings{
+								TemporalFilterSettings: &types.TemporalFilterSettings{
+									PostFilterSharpening: types.TemporalFilterPostFilterSharpening("AUTO"),
+									Strength:             types.TemporalFilterStrength("AUTO"),
+								},
+								BandwidthReductionFilterSettings: &types.BandwidthReductionFilterSettings{
+									PostFilterSharpening: types.BandwidthReductionPostFilterSharpening("DISABLED"),
+									Strength:             types.BandwidthReductionFilterStrength("AUTO"),
+								},
+							},
+							FixedAfd:             types.FixedAfd("AFD_0000"),
+							FlickerAq:            types.H264FlickerAq("DISABLED"),
+							ForceFieldPictures:   types.H264ForceFieldPictures("DISABLED"),
+							FramerateControl:     types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
+							FramerateDenominator: ptr.Int32(1),
+							FramerateNumerator:   ptr.Int32(1),
+							GopBReference:        types.H264GopBReference("DISABLED"),
+							GopClosedCadence:     ptr.Int32(1),
+							GopNumBFrames:        ptr.Int32(1),
+							GopSize:              ptr.Float64(1.0),
+							GopSizeUnits:         types.H264GopSizeUnits("FRAMES"),
+							Level:                types.H264Level("H264_LEVEL_1"),
+							LookAheadRateControl: types.H264LookAheadRateControl("HIGH"),
+							MaxBitrate:           ptr.Int32(1),
+							MinIInterval:         ptr.Int32(1),
+							NumRefFrames:         ptr.Int32(1),
+							ParControl:           types.H264ParControl("INITIALIZE_FROM_SOURCE"),
+							ParDenominator:       ptr.Int32(1),
+							ParNumerator:         ptr.Int32(1),
+							Profile:              types.H264Profile("BASELINE"),
+							QualityLevel:         types.H264QualityLevel("ENHANCED_QUALITY"),
+							QvbrQualityLevel:     ptr.Int32(1),
+							RateControlMode:      types.H264RateControlMode("CBR"),
+							ScanType:             types.H264ScanType("INTERLACED"),
+							SceneChangeDetect:    types.H264SceneChangeDetect("DISABLED"),
+							Slices:               ptr.Int32(1),
+							Softness:             ptr.Int32(1),
+							SpatialAq:            types.H264SpatialAq("DISABLED"),
+							SubgopLength:         types.H264SubGopLength("DYNAMIC"),
+							Syntax:               types.H264Syntax("DEFAULT"),
+							TemporalAq:           types.H264TemporalAq("DISABLED"),
+							TimecodeInsertion:    types.H264TimecodeInsertionBehavior("DISABLED"),
+							TimecodeBurninSettings: &types.TimecodeBurninSettings{
+								FontSize: types.TimecodeBurninFontSize("EXTRA_SMALL_10"),
+								Position: types.TimecodeBurninPosition("BOTTOM_CENTER"),
+								Prefix:   ptr.String("__Prefix__"),
+							},
+							MinQp:      ptr.Int32(1),
+							MinBitrate: ptr.Int32(1),
+						},
+						H265Settings: &types.H265Settings{
+							AdaptiveQuantization:        types.H265AdaptiveQuantization("AUTO"),
+							AfdSignaling:                types.AfdSignaling("AUTO"),
+							AlternativeTransferFunction: types.H265AlternativeTransferFunction("INSERT"),
+							Bitrate:                     ptr.Int32(1),
+							BufSize:                     ptr.Int32(1),
+							ColorMetadata:               types.H265ColorMetadata("IGNORE"),
+							ColorSpaceSettings: &types.H265ColorSpaceSettings{
+								ColorSpacePassthroughSettings: &types.ColorSpacePassthroughSettings{},
+								DolbyVision81Settings:         &types.DolbyVision81Settings{},
+								Hdr10Settings: &types.Hdr10Settings{
+									MaxCll:  ptr.Int32(1),
+									MaxFall: ptr.Int32(1),
+								},
+								Rec601Settings:  &types.Rec601Settings{},
+								Rec709Settings:  &types.Rec709Settings{},
+								Hlg2020Settings: &types.Hlg2020Settings{},
+							},
+							FilterSettings: &types.H265FilterSettings{
+								TemporalFilterSettings: &types.TemporalFilterSettings{
+									PostFilterSharpening: types.TemporalFilterPostFilterSharpening("AUTO"),
+									Strength:             types.TemporalFilterStrength("AUTO"),
+								},
+								BandwidthReductionFilterSettings: &types.BandwidthReductionFilterSettings{
+									PostFilterSharpening: types.BandwidthReductionPostFilterSharpening("DISABLED"),
+									Strength:             types.BandwidthReductionFilterStrength("AUTO"),
+								},
+							},
+							FixedAfd:             types.FixedAfd("AFD_0000"),
+							FlickerAq:            types.H265FlickerAq("DISABLED"),
+							FramerateDenominator: ptr.Int32(1),
+							FramerateNumerator:   ptr.Int32(1),
+							GopClosedCadence:     ptr.Int32(1),
+							GopSize:              ptr.Float64(1.0),
+							GopSizeUnits:         types.H265GopSizeUnits("FRAMES"),
+							Level:                types.H265Level("H265_LEVEL_1"),
+							LookAheadRateControl: types.H265LookAheadRateControl("HIGH"),
+							MaxBitrate:           ptr.Int32(1),
+							MinIInterval:         ptr.Int32(1),
+							ParDenominator:       ptr.Int32(1),
+							ParNumerator:         ptr.Int32(1),
+							Profile:              types.H265Profile("MAIN"),
+							QvbrQualityLevel:     ptr.Int32(1),
+							RateControlMode:      types.H265RateControlMode("CBR"),
+							ScanType:             types.H265ScanType("INTERLACED"),
+							SceneChangeDetect:    types.H265SceneChangeDetect("DISABLED"),
+							Slices:               ptr.Int32(1),
+							Tier:                 types.H265Tier("HIGH"),
+							TimecodeInsertion:    types.H265TimecodeInsertionBehavior("DISABLED"),
+							TimecodeBurninSettings: &types.TimecodeBurninSettings{
+								FontSize: types.TimecodeBurninFontSize("EXTRA_SMALL_10"),
+								Position: types.TimecodeBurninPosition("BOTTOM_CENTER"),
+								Prefix:   ptr.String("__Prefix__"),
+							},
+							MvOverPictureBoundaries: types.H265MvOverPictureBoundaries("DISABLED"),
+							MvTemporalPredictor:     types.H265MvTemporalPredictor("DISABLED"),
+							TileHeight:              ptr.Int32(1),
+							TilePadding:             types.H265TilePadding("NONE"),
+							TileWidth:               ptr.Int32(1),
+							TreeblockSize:           types.H265TreeblockSize("AUTO"),
+							MinQp:                   ptr.Int32(1),
+							Deblocking:              types.H265Deblocking("DISABLED"),
+							GopBReference:           types.H265GopBReference("DISABLED"),
+							GopNumBFrames:           ptr.Int32(1),
+							MinBitrate:              ptr.Int32(1),
+							SubgopLength:            types.H265SubGopLength("DYNAMIC"),
+						},
+						Mpeg2Settings: &types.Mpeg2Settings{
+							AdaptiveQuantization: types.Mpeg2AdaptiveQuantization("AUTO"),
+							AfdSignaling:         types.AfdSignaling("AUTO"),
+							ColorMetadata:        types.Mpeg2ColorMetadata("IGNORE"),
+							ColorSpace:           types.Mpeg2ColorSpace("AUTO"),
+							DisplayAspectRatio:   types.Mpeg2DisplayRatio("DISPLAYRATIO16X9"),
+							FilterSettings: &types.Mpeg2FilterSettings{
+								TemporalFilterSettings: &types.TemporalFilterSettings{
+									PostFilterSharpening: types.TemporalFilterPostFilterSharpening("AUTO"),
+									Strength:             types.TemporalFilterStrength("AUTO"),
+								},
+							},
+							FixedAfd:             types.FixedAfd("AFD_0000"),
+							FramerateDenominator: ptr.Int32(1),
+							FramerateNumerator:   ptr.Int32(1),
+							GopClosedCadence:     ptr.Int32(1),
+							GopNumBFrames:        ptr.Int32(1),
+							GopSize:              ptr.Float64(1.0),
+							GopSizeUnits:         types.Mpeg2GopSizeUnits("FRAMES"),
+							ScanType:             types.Mpeg2ScanType("INTERLACED"),
+							SubgopLength:         types.Mpeg2SubGopLength("DYNAMIC"),
+							TimecodeInsertion:    types.Mpeg2TimecodeInsertionBehavior("DISABLED"),
+							TimecodeBurninSettings: &types.TimecodeBurninSettings{
+								FontSize: types.TimecodeBurninFontSize("EXTRA_SMALL_10"),
+								Position: types.TimecodeBurninPosition("BOTTOM_CENTER"),
+								Prefix:   ptr.String("__Prefix__"),
+							},
+						},
+						Av1Settings: &types.Av1Settings{
+							AfdSignaling: types.AfdSignaling("AUTO"),
+							BufSize:      ptr.Int32(1),
+							ColorSpaceSettings: &types.Av1ColorSpaceSettings{
+								ColorSpacePassthroughSettings: &types.ColorSpacePassthroughSettings{},
+								Hdr10Settings: &types.Hdr10Settings{
+									MaxCll:  ptr.Int32(1),
+									MaxFall: ptr.Int32(1),
+								},
+								Rec601Settings:  &types.Rec601Settings{},
+								Rec709Settings:  &types.Rec709Settings{},
+								Hlg2020Settings: &types.Hlg2020Settings{},
+							},
+							FixedAfd:             types.FixedAfd("AFD_0000"),
+							FramerateDenominator: ptr.Int32(1),
+							FramerateNumerator:   ptr.Int32(1),
+							GopSize:              ptr.Float64(1.0),
+							GopSizeUnits:         types.Av1GopSizeUnits("FRAMES"),
+							Level:                types.Av1Level("AV1_LEVEL_2"),
+							LookAheadRateControl: types.Av1LookAheadRateControl("HIGH"),
+							MaxBitrate:           ptr.Int32(1),
+							MinIInterval:         ptr.Int32(1),
+							ParDenominator:       ptr.Int32(1),
+							ParNumerator:         ptr.Int32(1),
+							QvbrQualityLevel:     ptr.Int32(1),
+							SceneChangeDetect:    types.Av1SceneChangeDetect("DISABLED"),
+							TimecodeBurninSettings: &types.TimecodeBurninSettings{
+								FontSize: types.TimecodeBurninFontSize("EXTRA_SMALL_10"),
+								Position: types.TimecodeBurninPosition("BOTTOM_CENTER"),
+								Prefix:   ptr.String("__Prefix__"),
+							},
+							Bitrate:           ptr.Int32(1),
+							RateControlMode:   types.Av1RateControlMode("CBR"),
+							MinBitrate:        ptr.Int32(1),
+							SpatialAq:         types.Av1SpatialAq("DISABLED"),
+							TemporalAq:        types.Av1TemporalAq("DISABLED"),
+							TimecodeInsertion: types.Av1TimecodeInsertionBehavior("DISABLED"),
+							BitDepth:          types.Av1BitDepth("DEPTH_10"),
+						},
+					},
+					Height:          ptr.Int32(1),
+					Name:            ptr.String("__Name__"),
+					RespondToAfd:    types.VideoDescriptionRespondToAfd("NONE"),
+					ScalingBehavior: types.VideoDescriptionScalingBehavior("DEFAULT"),
+					Sharpness:       ptr.Int32(1),
+					Width:           ptr.Int32(1),
+				},
+				{
+					CodecSettings: &types.VideoCodecSettings{
+						FrameCaptureSettings: &types.FrameCaptureSettings{
+							CaptureInterval:      ptr.Int32(1),
+							CaptureIntervalUnits: types.FrameCaptureIntervalUnit("MILLISECONDS"),
+							TimecodeBurninSettings: &types.TimecodeBurninSettings{
+								FontSize: types.TimecodeBurninFontSize("EXTRA_SMALL_10"),
+								Position: types.TimecodeBurninPosition("BOTTOM_CENTER"),
+								Prefix:   ptr.String("__Prefix__"),
+							},
+						},
+						H264Settings: &types.H264Settings{
+							AdaptiveQuantization: types.H264AdaptiveQuantization("AUTO"),
+							AfdSignaling:         types.AfdSignaling("AUTO"),
+							Bitrate:              ptr.Int32(1),
+							BufFillPct:           ptr.Int32(1),
+							BufSize:              ptr.Int32(1),
+							ColorMetadata:        types.H264ColorMetadata("IGNORE"),
+							ColorSpaceSettings: &types.H264ColorSpaceSettings{
+								ColorSpacePassthroughSettings: &types.ColorSpacePassthroughSettings{},
+								Rec601Settings:                &types.Rec601Settings{},
+								Rec709Settings:                &types.Rec709Settings{},
+							},
+							EntropyEncoding: types.H264EntropyEncoding("CABAC"),
+							FilterSettings: &types.H264FilterSettings{
+								TemporalFilterSettings: &types.TemporalFilterSettings{
+									PostFilterSharpening: types.TemporalFilterPostFilterSharpening("AUTO"),
+									Strength:             types.TemporalFilterStrength("AUTO"),
+								},
+								BandwidthReductionFilterSettings: &types.BandwidthReductionFilterSettings{
+									PostFilterSharpening: types.BandwidthReductionPostFilterSharpening("DISABLED"),
+									Strength:             types.BandwidthReductionFilterStrength("AUTO"),
+								},
+							},
+							FixedAfd:             types.FixedAfd("AFD_0000"),
+							FlickerAq:            types.H264FlickerAq("DISABLED"),
+							ForceFieldPictures:   types.H264ForceFieldPictures("DISABLED"),
+							FramerateControl:     types.H264FramerateControl("INITIALIZE_FROM_SOURCE"),
+							FramerateDenominator: ptr.Int32(1),
+							FramerateNumerator:   ptr.Int32(1),
+							GopBReference:        types.H264GopBReference("DISABLED"),
+							GopClosedCadence:     ptr.Int32(1),
+							GopNumBFrames:        ptr.Int32(1),
+							GopSize:              ptr.Float64(1.0),
+							GopSizeUnits:         types.H264GopSizeUnits("FRAMES"),
+							Level:                types.H264Level("H264_LEVEL_1"),
+							LookAheadRateControl: types.H264LookAheadRateControl("HIGH"),
+							MaxBitrate:           ptr.Int32(1),
+							MinIInterval:         ptr.Int32(1),
+							NumRefFrames:         ptr.Int32(1),
+							ParControl:           types.H264ParControl("INITIALIZE_FROM_SOURCE"),
+							ParDenominator:       ptr.Int32(1),
+							ParNumerator:         ptr.Int32(1),
+							Profile:              types.H264Profile("BASELINE"),
+							QualityLevel:         types.H264QualityLevel("ENHANCED_QUALITY"),
+							QvbrQualityLevel:     ptr.Int32(1),
+							RateControlMode:      types.H264RateControlMode("CBR"),
+							ScanType:             types.H264ScanType("INTERLACED"),
+							SceneChangeDetect:    types.H264SceneChangeDetect("DISABLED"),
+							Slices:               ptr.Int32(1),
+							Softness:             ptr.Int32(1),
+							SpatialAq:            types.H264SpatialAq("DISABLED"),
+							SubgopLength:         types.H264SubGopLength("DYNAMIC"),
+							Syntax:               types.H264Syntax("DEFAULT"),
+							TemporalAq:           types.H264TemporalAq("DISABLED"),
+							TimecodeInsertion:    types.H264TimecodeInsertionBehavior("DISABLED"),
+							TimecodeBurninSettings: &types.TimecodeBurninSettings{
+								FontSize: types.TimecodeBurninFontSize("EXTRA_SMALL_10"),
+								Position: types.TimecodeBurninPosition("BOTTOM_CENTER"),
+								Prefix:   ptr.String("__Prefix__"),
+							},
+							MinQp:      ptr.Int32(1),
+							MinBitrate: ptr.Int32(1),
+						},
+						H265Settings: &types.H265Settings{
+							AdaptiveQuantization:        types.H265AdaptiveQuantization("AUTO"),
+							AfdSignaling:                types.AfdSignaling("AUTO"),
+							AlternativeTransferFunction: types.H265AlternativeTransferFunction("INSERT"),
+							Bitrate:                     ptr.Int32(1),
+							BufSize:                     ptr.Int32(1),
+							ColorMetadata:               types.H265ColorMetadata("IGNORE"),
+							ColorSpaceSettings: &types.H265ColorSpaceSettings{
+								ColorSpacePassthroughSettings: &types.ColorSpacePassthroughSettings{},
+								DolbyVision81Settings:         &types.DolbyVision81Settings{},
+								Hdr10Settings: &types.Hdr10Settings{
+									MaxCll:  ptr.Int32(1),
+									MaxFall: ptr.Int32(1),
+								},
+								Rec601Settings:  &types.Rec601Settings{},
+								Rec709Settings:  &types.Rec709Settings{},
+								Hlg2020Settings: &types.Hlg2020Settings{},
+							},
+							FilterSettings: &types.H265FilterSettings{
+								TemporalFilterSettings: &types.TemporalFilterSettings{
+									PostFilterSharpening: types.TemporalFilterPostFilterSharpening("AUTO"),
+									Strength:             types.TemporalFilterStrength("AUTO"),
+								},
+								BandwidthReductionFilterSettings: &types.BandwidthReductionFilterSettings{
+									PostFilterSharpening: types.BandwidthReductionPostFilterSharpening("DISABLED"),
+									Strength:             types.BandwidthReductionFilterStrength("AUTO"),
+								},
+							},
+							FixedAfd:             types.FixedAfd("AFD_0000"),
+							FlickerAq:            types.H265FlickerAq("DISABLED"),
+							FramerateDenominator: ptr.Int32(1),
+							FramerateNumerator:   ptr.Int32(1),
+							GopClosedCadence:     ptr.Int32(1),
+							GopSize:              ptr.Float64(1.0),
+							GopSizeUnits:         types.H265GopSizeUnits("FRAMES"),
+							Level:                types.H265Level("H265_LEVEL_1"),
+							LookAheadRateControl: types.H265LookAheadRateControl("HIGH"),
+							MaxBitrate:           ptr.Int32(1),
+							MinIInterval:         ptr.Int32(1),
+							ParDenominator:       ptr.Int32(1),
+							ParNumerator:         ptr.Int32(1),
+							Profile:              types.H265Profile("MAIN"),
+							QvbrQualityLevel:     ptr.Int32(1),
+							RateControlMode:      types.H265RateControlMode("CBR"),
+							ScanType:             types.H265ScanType("INTERLACED"),
+							SceneChangeDetect:    types.H265SceneChangeDetect("DISABLED"),
+							Slices:               ptr.Int32(1),
+							Tier:                 types.H265Tier("HIGH"),
+							TimecodeInsertion:    types.H265TimecodeInsertionBehavior("DISABLED"),
+							TimecodeBurninSettings: &types.TimecodeBurninSettings{
+								FontSize: types.TimecodeBurninFontSize("EXTRA_SMALL_10"),
+								Position: types.TimecodeBurninPosition("BOTTOM_CENTER"),
+								Prefix:   ptr.String("__Prefix__"),
+							},
+							MvOverPictureBoundaries: types.H265MvOverPictureBoundaries("DISABLED"),
+							MvTemporalPredictor:     types.H265MvTemporalPredictor("DISABLED"),
+							TileHeight:              ptr.Int32(1),
+							TilePadding:             types.H265TilePadding("NONE"),
+							TileWidth:               ptr.Int32(1),
+							TreeblockSize:           types.H265TreeblockSize("AUTO"),
+							MinQp:                   ptr.Int32(1),
+							Deblocking:              types.H265Deblocking("DISABLED"),
+							GopBReference:           types.H265GopBReference("DISABLED"),
+							GopNumBFrames:           ptr.Int32(1),
+							MinBitrate:              ptr.Int32(1),
+							SubgopLength:            types.H265SubGopLength("DYNAMIC"),
+						},
+						Mpeg2Settings: &types.Mpeg2Settings{
+							AdaptiveQuantization: types.Mpeg2AdaptiveQuantization("AUTO"),
+							AfdSignaling:         types.AfdSignaling("AUTO"),
+							ColorMetadata:        types.Mpeg2ColorMetadata("IGNORE"),
+							ColorSpace:           types.Mpeg2ColorSpace("AUTO"),
+							DisplayAspectRatio:   types.Mpeg2DisplayRatio("DISPLAYRATIO16X9"),
+							FilterSettings: &types.Mpeg2FilterSettings{
+								TemporalFilterSettings: &types.TemporalFilterSettings{
+									PostFilterSharpening: types.TemporalFilterPostFilterSharpening("AUTO"),
+									Strength:             types.TemporalFilterStrength("AUTO"),
+								},
+							},
+							FixedAfd:             types.FixedAfd("AFD_0000"),
+							FramerateDenominator: ptr.Int32(1),
+							FramerateNumerator:   ptr.Int32(1),
+							GopClosedCadence:     ptr.Int32(1),
+							GopNumBFrames:        ptr.Int32(1),
+							GopSize:              ptr.Float64(1.0),
+							GopSizeUnits:         types.Mpeg2GopSizeUnits("FRAMES"),
+							ScanType:             types.Mpeg2ScanType("INTERLACED"),
+							SubgopLength:         types.Mpeg2SubGopLength("DYNAMIC"),
+							TimecodeInsertion:    types.Mpeg2TimecodeInsertionBehavior("DISABLED"),
+							TimecodeBurninSettings: &types.TimecodeBurninSettings{
+								FontSize: types.TimecodeBurninFontSize("EXTRA_SMALL_10"),
+								Position: types.TimecodeBurninPosition("BOTTOM_CENTER"),
+								Prefix:   ptr.String("__Prefix__"),
+							},
+						},
+						Av1Settings: &types.Av1Settings{
+							AfdSignaling: types.AfdSignaling("AUTO"),
+							BufSize:      ptr.Int32(1),
+							ColorSpaceSettings: &types.Av1ColorSpaceSettings{
+								ColorSpacePassthroughSettings: &types.ColorSpacePassthroughSettings{},
+								Hdr10Settings: &types.Hdr10Settings{
+									MaxCll:  ptr.Int32(1),
+									MaxFall: ptr.Int32(1),
+								},
+								Rec601Settings:  &types.Rec601Settings{},
+								Rec709Settings:  &types.Rec709Settings{},
+								Hlg2020Settings: &types.Hlg2020Settings{},
+							},
+							FixedAfd:             types.FixedAfd("AFD_0000"),
+							FramerateDenominator: ptr.Int32(1),
+							FramerateNumerator:   ptr.Int32(1),
+							GopSize:              ptr.Float64(1.0),
+							GopSizeUnits:         types.Av1GopSizeUnits("FRAMES"),
+							Level:                types.Av1Level("AV1_LEVEL_2"),
+							LookAheadRateControl: types.Av1LookAheadRateControl("HIGH"),
+							MaxBitrate:           ptr.Int32(1),
+							MinIInterval:         ptr.Int32(1),
+							ParDenominator:       ptr.Int32(1),
+							ParNumerator:         ptr.Int32(1),
+							QvbrQualityLevel:     ptr.Int32(1),
+							SceneChangeDetect:    types.Av1SceneChangeDetect("DISABLED"),
+							TimecodeBurninSettings: &types.TimecodeBurninSettings{
+								FontSize: types.TimecodeBurninFontSize("EXTRA_SMALL_10"),
+								Position: types.TimecodeBurninPosition("BOTTOM_CENTER"),
+								Prefix:   ptr.String("__Prefix__"),
+							},
+							Bitrate:           ptr.Int32(1),
+							RateControlMode:   types.Av1RateControlMode("CBR"),
+							MinBitrate:        ptr.Int32(1),
+							SpatialAq:         types.Av1SpatialAq("DISABLED"),
+							TemporalAq:        types.Av1TemporalAq("DISABLED"),
+							TimecodeInsertion: types.Av1TimecodeInsertionBehavior("DISABLED"),
+							BitDepth:          types.Av1BitDepth("DEPTH_10"),
+						},
+					},
+					Height:          ptr.Int32(1),
+					Name:            ptr.String("__Name__"),
+					RespondToAfd:    types.VideoDescriptionRespondToAfd("NONE"),
+					ScalingBehavior: types.VideoDescriptionScalingBehavior("DEFAULT"),
+					Sharpness:       ptr.Int32(1),
+					Width:           ptr.Int32(1),
+				},
+			},
+			ThumbnailConfiguration: &types.ThumbnailConfiguration{
+				State: types.ThumbnailState("AUTO"),
+			},
+			ColorCorrectionSettings: &types.ColorCorrectionSettings{
+				GlobalColorCorrections: []types.ColorCorrection{
+					{
+						InputColorSpace:  types.ColorSpace("HDR10"),
+						OutputColorSpace: types.ColorSpace("HDR10"),
+						Uri:              ptr.String("__Uri__"),
+					},
+					{
+						InputColorSpace:  types.ColorSpace("HDR10"),
+						OutputColorSpace: types.ColorSpace("HDR10"),
+						Uri:              ptr.String("__Uri__"),
+					},
+				},
+			},
+		},
+		InputAttachments: []types.InputAttachment{
+			{
+				AutomaticInputFailoverSettings: &types.AutomaticInputFailoverSettings{
+					ErrorClearTimeMsec: ptr.Int32(1),
+					FailoverConditions: []types.FailoverCondition{
+						{
+							FailoverConditionSettings: &types.FailoverConditionSettings{
+								AudioSilenceSettings: &types.AudioSilenceFailoverSettings{
+									AudioSelectorName:         ptr.String("__AudioSelectorName__"),
+									AudioSilenceThresholdMsec: ptr.Int32(1),
+								},
+								InputLossSettings: &types.InputLossFailoverSettings{
+									InputLossThresholdMsec: ptr.Int32(1),
+								},
+								VideoBlackSettings: &types.VideoBlackFailoverSettings{
+									BlackDetectThreshold:    ptr.Float64(1.0),
+									VideoBlackThresholdMsec: ptr.Int32(1),
+								},
+							},
+						},
+						{
+							FailoverConditionSettings: &types.FailoverConditionSettings{
+								AudioSilenceSettings: &types.AudioSilenceFailoverSettings{
+									AudioSelectorName:         ptr.String("__AudioSelectorName__"),
+									AudioSilenceThresholdMsec: ptr.Int32(1),
+								},
+								InputLossSettings: &types.InputLossFailoverSettings{
+									InputLossThresholdMsec: ptr.Int32(1),
+								},
+								VideoBlackSettings: &types.VideoBlackFailoverSettings{
+									BlackDetectThreshold:    ptr.Float64(1.0),
+									VideoBlackThresholdMsec: ptr.Int32(1),
+								},
+							},
+						},
+					},
+					InputPreference:  types.InputPreference("EQUAL_INPUT_PREFERENCE"),
+					SecondaryInputId: ptr.String("__SecondaryInputId__"),
+				},
+				InputAttachmentName: ptr.String("__InputAttachmentName__"),
+				InputId:             ptr.String("__InputId__"),
+				InputSettings: &types.InputSettings{
+					AudioSelectors: []types.AudioSelector{
+						{
+							Name: ptr.String("__Name__"),
+							SelectorSettings: &types.AudioSelectorSettings{
+								AudioHlsRenditionSelection: &types.AudioHlsRenditionSelection{
+									GroupId: ptr.String("__GroupId__"),
+									Name:    ptr.String("__Name__"),
+								},
+								AudioLanguageSelection: &types.AudioLanguageSelection{
+									LanguageCode:            ptr.String("__LanguageCode__"),
+									LanguageSelectionPolicy: types.AudioLanguageSelectionPolicy("LOOSE"),
+								},
+								AudioPidSelection: &types.AudioPidSelection{
+									Pid: ptr.Int32(1),
+									Pids: []types.AudioPid{
+										{
+											DolbyEDecode: &types.AudioDolbyEDecode{
+												ProgramSelection: types.DolbyEProgramSelection("ALL_CHANNELS"),
+											},
+											Pid: ptr.Int32(1),
+											PremixSettings: &types.AudioPreMixerSettings{
+												AudioNormalizationSettings: &types.AudioNormalizationSettings{
+													Algorithm:            types.AudioNormalizationAlgorithm("ITU_1770_1"),
+													AlgorithmControl:     types.AudioNormalizationAlgorithmControl("CORRECT_AUDIO"),
+													TargetLkfs:           ptr.Float64(1.0),
+													PeakCalculation:      types.AudioNormalizationPeakCalculation("NONE"),
+													PeakLimiterThreshold: ptr.Float64(1.0),
+												},
+												Channels: ptr.Int32(1),
+												GainDb:   ptr.Float64(1.0),
+												RemixSettings: &types.RemixSettings{
+													ChannelMappings: []types.AudioChannelMapping{
+														{
+															InputChannelLevels: []types.InputChannelLevel{
+																{},
+																{},
+															},
+															OutputChannel: ptr.Int32(1),
+														},
+														{},
+													},
+													ChannelsIn:  ptr.Int32(1),
+													ChannelsOut: ptr.Int32(1),
+												},
+											},
+										},
+										{
+											DolbyEDecode: &types.AudioDolbyEDecode{
+												ProgramSelection: types.DolbyEProgramSelection("ALL_CHANNELS"),
+											},
+											Pid: ptr.Int32(1),
+											PremixSettings: &types.AudioPreMixerSettings{
+												AudioNormalizationSettings: nil,
+												Channels:                   ptr.Int32(1),
+												GainDb:                     ptr.Float64(1.0),
+												RemixSettings:              nil,
+											},
+										},
+									},
+								},
+								AudioTrackSelection: &types.AudioTrackSelection{
+									Tracks: []types.AudioTrack{
+										{},
+										{},
+									},
+									DolbyEDecode: nil,
+								},
+							},
+						},
+						{
+							Name:             ptr.String("__Name__"),
+							SelectorSettings: nil,
+						},
+					},
+					CaptionSelectors: []types.CaptionSelector{
+						{},
+						{},
+					},
+					DeblockFilter:           types.InputDeblockFilter("DISABLED"),
+					DenoiseFilter:           types.InputDenoiseFilter("DISABLED"),
+					FilterStrength:          ptr.Int32(1),
+					InputFilter:             types.InputFilter("AUTO"),
+					NetworkInputSettings:    nil,
+					Scte35Pid:               ptr.Int32(1),
+					Smpte2038DataPreference: types.Smpte2038DataPreference("IGNORE"),
+					SourceEndBehavior:       types.InputSourceEndBehavior("CONTINUE"),
+					VideoSelector:           nil,
+				},
+				LogicalInterfaceNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{},
+		},
+		InputSpecification:    nil,
+		LogLevel:              types.LogLevel("ERROR"),
+		Maintenance:           nil,
+		Name:                  ptr.String("__Name__"),
+		RoleArn:               ptr.String("__RoleArn__"),
+		ChannelEngineVersion:  nil,
+		DryRun:                ptr.Bool(true),
+		AnywhereSettings:      nil,
+		LinkedChannelSettings: nil,
+		ChannelSecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		InferenceSettings:     nil,
+		SpecialRouterSettings: nil,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -34435,7 +42319,146 @@ func TestCheckResponseSnapshot_UpdateChannelClass(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateChannelClass(context.Background(), &UpdateChannelClassInput{})
+	got, err := svc.UpdateChannelClass(context.Background(), &UpdateChannelClassInput{
+		ChannelClass: types.ChannelClass("STANDARD"),
+		ChannelId:    ptr.String("__ChannelId__"),
+		Destinations: []types.OutputDestination{
+			{
+				Id: ptr.String("__Id__"),
+				MediaPackageSettings: []types.MediaPackageOutputDestinationSettings{
+					{
+						ChannelId:              ptr.String("__ChannelId__"),
+						ChannelGroup:           ptr.String("__ChannelGroup__"),
+						ChannelName:            ptr.String("__ChannelName__"),
+						ChannelEndpointId:      ptr.String("__ChannelEndpointId__"),
+						MediaPackageRegionName: ptr.String("__MediaPackageRegionName__"),
+					},
+					{
+						ChannelId:              ptr.String("__ChannelId__"),
+						ChannelGroup:           ptr.String("__ChannelGroup__"),
+						ChannelName:            ptr.String("__ChannelName__"),
+						ChannelEndpointId:      ptr.String("__ChannelEndpointId__"),
+						MediaPackageRegionName: ptr.String("__MediaPackageRegionName__"),
+					},
+				},
+				MultiplexSettings: &types.MultiplexProgramChannelDestinationSettings{
+					MultiplexId: ptr.String("__MultiplexId__"),
+					ProgramName: ptr.String("__ProgramName__"),
+				},
+				Settings: []types.OutputDestinationSettings{
+					{
+						PasswordParam: ptr.String("__PasswordParam__"),
+						StreamName:    ptr.String("__StreamName__"),
+						Url:           ptr.String("__Url__"),
+						Username:      ptr.String("__Username__"),
+					},
+					{
+						PasswordParam: ptr.String("__PasswordParam__"),
+						StreamName:    ptr.String("__StreamName__"),
+						Url:           ptr.String("__Url__"),
+						Username:      ptr.String("__Username__"),
+					},
+				},
+				SrtSettings: []types.SrtOutputDestinationSettings{
+					{
+						EncryptionPassphraseSecretArn: ptr.String("__EncryptionPassphraseSecretArn__"),
+						StreamId:                      ptr.String("__StreamId__"),
+						Url:                           ptr.String("__Url__"),
+						ConnectionMode:                types.ConnectionMode("CALLER"),
+						ListenerPort:                  ptr.Int32(1),
+					},
+					{
+						EncryptionPassphraseSecretArn: ptr.String("__EncryptionPassphraseSecretArn__"),
+						StreamId:                      ptr.String("__StreamId__"),
+						Url:                           ptr.String("__Url__"),
+						ConnectionMode:                types.ConnectionMode("CALLER"),
+						ListenerPort:                  ptr.Int32(1),
+					},
+				},
+				LogicalInterfaceNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MediaConnectRouterSettings: []types.MediaConnectRouterOutputDestinationSettings{
+					{
+						EncryptionType: types.MediaConnectRouterOutputEncryptionType("AUTOMATIC"),
+						SecretArn:      ptr.String("__SecretArn__"),
+					},
+					{
+						EncryptionType: types.MediaConnectRouterOutputEncryptionType("AUTOMATIC"),
+						SecretArn:      ptr.String("__SecretArn__"),
+					},
+				},
+			},
+			{
+				Id: ptr.String("__Id__"),
+				MediaPackageSettings: []types.MediaPackageOutputDestinationSettings{
+					{
+						ChannelId:              ptr.String("__ChannelId__"),
+						ChannelGroup:           ptr.String("__ChannelGroup__"),
+						ChannelName:            ptr.String("__ChannelName__"),
+						ChannelEndpointId:      ptr.String("__ChannelEndpointId__"),
+						MediaPackageRegionName: ptr.String("__MediaPackageRegionName__"),
+					},
+					{
+						ChannelId:              ptr.String("__ChannelId__"),
+						ChannelGroup:           ptr.String("__ChannelGroup__"),
+						ChannelName:            ptr.String("__ChannelName__"),
+						ChannelEndpointId:      ptr.String("__ChannelEndpointId__"),
+						MediaPackageRegionName: ptr.String("__MediaPackageRegionName__"),
+					},
+				},
+				MultiplexSettings: &types.MultiplexProgramChannelDestinationSettings{
+					MultiplexId: ptr.String("__MultiplexId__"),
+					ProgramName: ptr.String("__ProgramName__"),
+				},
+				Settings: []types.OutputDestinationSettings{
+					{
+						PasswordParam: ptr.String("__PasswordParam__"),
+						StreamName:    ptr.String("__StreamName__"),
+						Url:           ptr.String("__Url__"),
+						Username:      ptr.String("__Username__"),
+					},
+					{
+						PasswordParam: ptr.String("__PasswordParam__"),
+						StreamName:    ptr.String("__StreamName__"),
+						Url:           ptr.String("__Url__"),
+						Username:      ptr.String("__Username__"),
+					},
+				},
+				SrtSettings: []types.SrtOutputDestinationSettings{
+					{
+						EncryptionPassphraseSecretArn: ptr.String("__EncryptionPassphraseSecretArn__"),
+						StreamId:                      ptr.String("__StreamId__"),
+						Url:                           ptr.String("__Url__"),
+						ConnectionMode:                types.ConnectionMode("CALLER"),
+						ListenerPort:                  ptr.Int32(1),
+					},
+					{
+						EncryptionPassphraseSecretArn: ptr.String("__EncryptionPassphraseSecretArn__"),
+						StreamId:                      ptr.String("__StreamId__"),
+						Url:                           ptr.String("__Url__"),
+						ConnectionMode:                types.ConnectionMode("CALLER"),
+						ListenerPort:                  ptr.Int32(1),
+					},
+				},
+				LogicalInterfaceNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MediaConnectRouterSettings: []types.MediaConnectRouterOutputDestinationSettings{
+					{
+						EncryptionType: types.MediaConnectRouterOutputEncryptionType("AUTOMATIC"),
+						SecretArn:      ptr.String("__SecretArn__"),
+					},
+					{
+						EncryptionType: types.MediaConnectRouterOutputEncryptionType("AUTOMATIC"),
+						SecretArn:      ptr.String("__SecretArn__"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -34468,7 +42491,15 @@ func TestCheckResponseSnapshot_UpdateChannelPlacementGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateChannelPlacementGroup(context.Background(), &UpdateChannelPlacementGroupInput{})
+	got, err := svc.UpdateChannelPlacementGroup(context.Background(), &UpdateChannelPlacementGroupInput{
+		ChannelPlacementGroupId: ptr.String("__ChannelPlacementGroupId__"),
+		ClusterId:               ptr.String("__ClusterId__"),
+		Name:                    ptr.String("__Name__"),
+		Nodes: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -34507,7 +42538,21 @@ func TestCheckResponseSnapshot_UpdateCloudWatchAlarmTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCloudWatchAlarmTemplate(context.Background(), &UpdateCloudWatchAlarmTemplateInput{})
+	got, err := svc.UpdateCloudWatchAlarmTemplate(context.Background(), &UpdateCloudWatchAlarmTemplateInput{
+		ComparisonOperator: types.CloudWatchAlarmTemplateComparisonOperator("GreaterThanOrEqualToThreshold"),
+		DatapointsToAlarm:  ptr.Int32(1),
+		Description:        ptr.String("__Description__"),
+		EvaluationPeriods:  ptr.Int32(1),
+		GroupIdentifier:    ptr.String("__GroupIdentifier__"),
+		Identifier:         ptr.String("__Identifier__"),
+		MetricName:         ptr.String("__MetricName__"),
+		Name:               ptr.String("__Name__"),
+		Period:             ptr.Int32(1),
+		Statistic:          types.CloudWatchAlarmTemplateStatistic("SampleCount"),
+		TargetResourceType: types.CloudWatchAlarmTemplateTargetResourceType("CLOUDFRONT_DISTRIBUTION"),
+		Threshold:          ptr.Float64(1.0),
+		TreatMissingData:   types.CloudWatchAlarmTemplateTreatMissingData("notBreaching"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -34536,7 +42581,10 @@ func TestCheckResponseSnapshot_UpdateCloudWatchAlarmTemplateGroup(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCloudWatchAlarmTemplateGroup(context.Background(), &UpdateCloudWatchAlarmTemplateGroupInput{})
+	got, err := svc.UpdateCloudWatchAlarmTemplateGroup(context.Background(), &UpdateCloudWatchAlarmTemplateGroupInput{
+		Description: ptr.String("__Description__"),
+		Identifier:  ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -34578,7 +42626,23 @@ func TestCheckResponseSnapshot_UpdateCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCluster(context.Background(), &UpdateClusterInput{})
+	got, err := svc.UpdateCluster(context.Background(), &UpdateClusterInput{
+		ClusterId: ptr.String("__ClusterId__"),
+		Name:      ptr.String("__Name__"),
+		NetworkSettings: &types.ClusterNetworkSettingsUpdateRequest{
+			DefaultRoute: ptr.String("__DefaultRoute__"),
+			InterfaceMappings: []types.InterfaceMappingUpdateRequest{
+				{
+					LogicalInterfaceName: ptr.String("__LogicalInterfaceName__"),
+					NetworkId:            ptr.String("__NetworkId__"),
+				},
+				{
+					LogicalInterfaceName: ptr.String("__LogicalInterfaceName__"),
+					NetworkId:            ptr.String("__NetworkId__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -34617,7 +42681,21 @@ func TestCheckResponseSnapshot_UpdateEventBridgeRuleTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEventBridgeRuleTemplate(context.Background(), &UpdateEventBridgeRuleTemplateInput{})
+	got, err := svc.UpdateEventBridgeRuleTemplate(context.Background(), &UpdateEventBridgeRuleTemplateInput{
+		Description: ptr.String("__Description__"),
+		EventTargets: []types.EventBridgeRuleTemplateTarget{
+			{
+				Arn: ptr.String("__Arn__"),
+			},
+			{
+				Arn: ptr.String("__Arn__"),
+			},
+		},
+		EventType:       types.EventBridgeRuleTemplateEventType("MEDIALIVE_MULTIPLEX_ALERT"),
+		GroupIdentifier: ptr.String("__GroupIdentifier__"),
+		Identifier:      ptr.String("__Identifier__"),
+		Name:            ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -34646,7 +42724,10 @@ func TestCheckResponseSnapshot_UpdateEventBridgeRuleTemplateGroup(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEventBridgeRuleTemplateGroup(context.Background(), &UpdateEventBridgeRuleTemplateGroupInput{})
+	got, err := svc.UpdateEventBridgeRuleTemplateGroup(context.Background(), &UpdateEventBridgeRuleTemplateGroupInput{
+		Description: ptr.String("__Description__"),
+		Identifier:  ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -34884,7 +42965,186 @@ func TestCheckResponseSnapshot_UpdateInput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateInput(context.Background(), &UpdateInputInput{})
+	got, err := svc.UpdateInput(context.Background(), &UpdateInputInput{
+		Destinations: []types.InputDestinationRequest{
+			{
+				StreamName: ptr.String("__StreamName__"),
+				Network:    ptr.String("__Network__"),
+				NetworkRoutes: []types.InputRequestDestinationRoute{
+					{
+						Cidr:    ptr.String("__Cidr__"),
+						Gateway: ptr.String("__Gateway__"),
+					},
+					{
+						Cidr:    ptr.String("__Cidr__"),
+						Gateway: ptr.String("__Gateway__"),
+					},
+				},
+				StaticIpAddress: ptr.String("__StaticIpAddress__"),
+			},
+			{
+				StreamName: ptr.String("__StreamName__"),
+				Network:    ptr.String("__Network__"),
+				NetworkRoutes: []types.InputRequestDestinationRoute{
+					{
+						Cidr:    ptr.String("__Cidr__"),
+						Gateway: ptr.String("__Gateway__"),
+					},
+					{
+						Cidr:    ptr.String("__Cidr__"),
+						Gateway: ptr.String("__Gateway__"),
+					},
+				},
+				StaticIpAddress: ptr.String("__StaticIpAddress__"),
+			},
+		},
+		InputDevices: []types.InputDeviceRequest{
+			{
+				Id: ptr.String("__Id__"),
+			},
+			{
+				Id: ptr.String("__Id__"),
+			},
+		},
+		InputId: ptr.String("__InputId__"),
+		InputSecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MediaConnectFlows: []types.MediaConnectFlowRequest{
+			{
+				FlowArn: ptr.String("__FlowArn__"),
+			},
+			{
+				FlowArn: ptr.String("__FlowArn__"),
+			},
+		},
+		Name:    ptr.String("__Name__"),
+		RoleArn: ptr.String("__RoleArn__"),
+		Sources: []types.InputSourceRequest{
+			{
+				PasswordParam: ptr.String("__PasswordParam__"),
+				Url:           ptr.String("__Url__"),
+				Username:      ptr.String("__Username__"),
+			},
+			{
+				PasswordParam: ptr.String("__PasswordParam__"),
+				Url:           ptr.String("__Url__"),
+				Username:      ptr.String("__Username__"),
+			},
+		},
+		SrtSettings: &types.SrtSettingsRequest{
+			SrtCallerSources: []types.SrtCallerSourceRequest{
+				{
+					Decryption: &types.SrtCallerDecryptionRequest{
+						Algorithm:           types.Algorithm("AES128"),
+						PassphraseSecretArn: ptr.String("__PassphraseSecretArn__"),
+					},
+					MinimumLatency:     ptr.Int32(1),
+					SrtListenerAddress: ptr.String("__SrtListenerAddress__"),
+					SrtListenerPort:    ptr.String("__SrtListenerPort__"),
+					StreamId:           ptr.String("__StreamId__"),
+				},
+				{
+					Decryption: &types.SrtCallerDecryptionRequest{
+						Algorithm:           types.Algorithm("AES128"),
+						PassphraseSecretArn: ptr.String("__PassphraseSecretArn__"),
+					},
+					MinimumLatency:     ptr.Int32(1),
+					SrtListenerAddress: ptr.String("__SrtListenerAddress__"),
+					SrtListenerPort:    ptr.String("__SrtListenerPort__"),
+					StreamId:           ptr.String("__StreamId__"),
+				},
+			},
+			SrtListenerSettings: &types.SrtListenerSettingsRequest{
+				Decryption: &types.SrtListenerDecryptionRequest{
+					Algorithm:           types.Algorithm("AES128"),
+					PassphraseSecretArn: ptr.String("__PassphraseSecretArn__"),
+				},
+				MinimumLatency: ptr.Int32(1),
+				StreamId:       ptr.String("__StreamId__"),
+			},
+		},
+		MulticastSettings: &types.MulticastSettingsUpdateRequest{
+			Sources: []types.MulticastSourceUpdateRequest{
+				{
+					SourceIp: ptr.String("__SourceIp__"),
+					Url:      ptr.String("__Url__"),
+				},
+				{
+					SourceIp: ptr.String("__SourceIp__"),
+					Url:      ptr.String("__Url__"),
+				},
+			},
+		},
+		Smpte2110ReceiverGroupSettings: &types.Smpte2110ReceiverGroupSettings{
+			Smpte2110ReceiverGroups: []types.Smpte2110ReceiverGroup{
+				{
+					SdpSettings: &types.Smpte2110ReceiverGroupSdpSettings{
+						AncillarySdps: []types.InputSdpLocation{
+							{
+								MediaIndex: ptr.Int32(1),
+								SdpUrl:     ptr.String("__SdpUrl__"),
+							},
+							{
+								MediaIndex: ptr.Int32(1),
+								SdpUrl:     ptr.String("__SdpUrl__"),
+							},
+						},
+						AudioSdps: []types.InputSdpLocation{
+							{
+								MediaIndex: ptr.Int32(1),
+								SdpUrl:     ptr.String("__SdpUrl__"),
+							},
+							{
+								MediaIndex: ptr.Int32(1),
+								SdpUrl:     ptr.String("__SdpUrl__"),
+							},
+						},
+						VideoSdp: &types.InputSdpLocation{
+							MediaIndex: ptr.Int32(1),
+							SdpUrl:     ptr.String("__SdpUrl__"),
+						},
+					},
+				},
+				{
+					SdpSettings: &types.Smpte2110ReceiverGroupSdpSettings{
+						AncillarySdps: []types.InputSdpLocation{
+							{
+								MediaIndex: ptr.Int32(1),
+								SdpUrl:     ptr.String("__SdpUrl__"),
+							},
+							{
+								MediaIndex: ptr.Int32(1),
+								SdpUrl:     ptr.String("__SdpUrl__"),
+							},
+						},
+						AudioSdps: []types.InputSdpLocation{
+							{
+								MediaIndex: ptr.Int32(1),
+								SdpUrl:     ptr.String("__SdpUrl__"),
+							},
+							{
+								MediaIndex: ptr.Int32(1),
+								SdpUrl:     ptr.String("__SdpUrl__"),
+							},
+						},
+						VideoSdp: &types.InputSdpLocation{
+							MediaIndex: ptr.Int32(1),
+							SdpUrl:     ptr.String("__SdpUrl__"),
+						},
+					},
+				},
+			},
+		},
+		SdiSources: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SpecialRouterSettings: &types.SpecialRouterSettings{
+			RouterArn: ptr.String("__RouterArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -34972,7 +43232,57 @@ func TestCheckResponseSnapshot_UpdateInputDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateInputDevice(context.Background(), &UpdateInputDeviceInput{})
+	got, err := svc.UpdateInputDevice(context.Background(), &UpdateInputDeviceInput{
+		HdDeviceSettings: &types.InputDeviceConfigurableSettings{
+			ConfiguredInput: types.InputDeviceConfiguredInput("AUTO"),
+			MaxBitrate:      ptr.Int32(1),
+			LatencyMs:       ptr.Int32(1),
+			Codec:           types.InputDeviceCodec("HEVC"),
+			MediaconnectSettings: &types.InputDeviceMediaConnectConfigurableSettings{
+				FlowArn:    ptr.String("__FlowArn__"),
+				RoleArn:    ptr.String("__RoleArn__"),
+				SecretArn:  ptr.String("__SecretArn__"),
+				SourceName: ptr.String("__SourceName__"),
+			},
+			AudioChannelPairs: []types.InputDeviceConfigurableAudioChannelPairConfig{
+				{
+					Id:      ptr.Int32(1),
+					Profile: types.InputDeviceConfigurableAudioChannelPairProfile("DISABLED"),
+				},
+				{
+					Id:      ptr.Int32(1),
+					Profile: types.InputDeviceConfigurableAudioChannelPairProfile("DISABLED"),
+				},
+			},
+			InputResolution: ptr.String("__InputResolution__"),
+		},
+		InputDeviceId: ptr.String("__InputDeviceId__"),
+		Name:          ptr.String("__Name__"),
+		UhdDeviceSettings: &types.InputDeviceConfigurableSettings{
+			ConfiguredInput: types.InputDeviceConfiguredInput("AUTO"),
+			MaxBitrate:      ptr.Int32(1),
+			LatencyMs:       ptr.Int32(1),
+			Codec:           types.InputDeviceCodec("HEVC"),
+			MediaconnectSettings: &types.InputDeviceMediaConnectConfigurableSettings{
+				FlowArn:    ptr.String("__FlowArn__"),
+				RoleArn:    ptr.String("__RoleArn__"),
+				SecretArn:  ptr.String("__SecretArn__"),
+				SourceName: ptr.String("__SourceName__"),
+			},
+			AudioChannelPairs: []types.InputDeviceConfigurableAudioChannelPairConfig{
+				{
+					Id:      ptr.Int32(1),
+					Profile: types.InputDeviceConfigurableAudioChannelPairProfile("DISABLED"),
+				},
+				{
+					Id:      ptr.Int32(1),
+					Profile: types.InputDeviceConfigurableAudioChannelPairProfile("DISABLED"),
+				},
+			},
+			InputResolution: ptr.String("__InputResolution__"),
+		},
+		AvailabilityZone: ptr.String("__AvailabilityZone__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -35016,7 +43326,20 @@ func TestCheckResponseSnapshot_UpdateInputSecurityGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateInputSecurityGroup(context.Background(), &UpdateInputSecurityGroupInput{})
+	got, err := svc.UpdateInputSecurityGroup(context.Background(), &UpdateInputSecurityGroupInput{
+		InputSecurityGroupId: ptr.String("__InputSecurityGroupId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		WhitelistRules: []types.InputWhitelistRuleCidr{
+			{
+				Cidr: ptr.String("__Cidr__"),
+			},
+			{
+				Cidr: ptr.String("__Cidr__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -35069,7 +43392,52 @@ func TestCheckResponseSnapshot_UpdateMultiplex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMultiplex(context.Background(), &UpdateMultiplexInput{})
+	got, err := svc.UpdateMultiplex(context.Background(), &UpdateMultiplexInput{
+		MultiplexId: ptr.String("__MultiplexId__"),
+		MultiplexSettings: &types.MultiplexSettings{
+			MaximumVideoBufferDelayMilliseconds: ptr.Int32(1),
+			TransportStreamBitrate:              ptr.Int32(1),
+			TransportStreamId:                   ptr.Int32(1),
+			TransportStreamReservedBitrate:      ptr.Int32(1),
+		},
+		Name: ptr.String("__Name__"),
+		PacketIdentifiersMapping: map[string]types.MultiplexProgramPacketIdentifiersMap{
+			"key0": {
+				AudioPids: []int32{
+					1,
+					1,
+				},
+				DvbSubPids: []int32{
+					1,
+					1,
+				},
+				DvbTeletextPid: ptr.Int32(1),
+				EtvPlatformPid: ptr.Int32(1),
+				EtvSignalPid:   ptr.Int32(1),
+				KlvDataPids: []int32{
+					1,
+					1,
+				},
+				PcrPid:             ptr.Int32(1),
+				PmtPid:             ptr.Int32(1),
+				PrivateMetadataPid: ptr.Int32(1),
+				Scte27Pids: []int32{
+					1,
+					1,
+				},
+				Scte35Pid:        ptr.Int32(1),
+				TimedMetadataPid: ptr.Int32(1),
+				VideoPid:         ptr.Int32(1),
+				AribCaptionsPid:  ptr.Int32(1),
+				DvbTeletextPids: []int32{
+					1,
+					1,
+				},
+				EcmPid:       ptr.Int32(1),
+				Smpte2038Pid: ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -35153,7 +43521,26 @@ func TestCheckResponseSnapshot_UpdateMultiplexProgram(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMultiplexProgram(context.Background(), &UpdateMultiplexProgramInput{})
+	got, err := svc.UpdateMultiplexProgram(context.Background(), &UpdateMultiplexProgramInput{
+		MultiplexId: ptr.String("__MultiplexId__"),
+		MultiplexProgramSettings: &types.MultiplexProgramSettings{
+			PreferredChannelPipeline: types.PreferredChannelPipeline("CURRENTLY_ACTIVE"),
+			ProgramNumber:            ptr.Int32(1),
+			ServiceDescriptor: &types.MultiplexProgramServiceDescriptor{
+				ProviderName: ptr.String("__ProviderName__"),
+				ServiceName:  ptr.String("__ServiceName__"),
+			},
+			VideoSettings: &types.MultiplexVideoSettings{
+				ConstantBitrate: ptr.Int32(1),
+				StatmuxSettings: &types.MultiplexStatmuxVideoSettings{
+					MaximumBitrate: ptr.Int32(1),
+					MinimumBitrate: ptr.Int32(1),
+					Priority:       ptr.Int32(1),
+				},
+			},
+		},
+		ProgramName: ptr.String("__ProgramName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -35199,7 +43586,28 @@ func TestCheckResponseSnapshot_UpdateNetwork(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateNetwork(context.Background(), &UpdateNetworkInput{})
+	got, err := svc.UpdateNetwork(context.Background(), &UpdateNetworkInput{
+		IpPools: []types.IpPoolUpdateRequest{
+			{
+				Cidr: ptr.String("__Cidr__"),
+			},
+			{
+				Cidr: ptr.String("__Cidr__"),
+			},
+		},
+		Name:      ptr.String("__Name__"),
+		NetworkId: ptr.String("__NetworkId__"),
+		Routes: []types.RouteUpdateRequest{
+			{
+				Cidr:    ptr.String("__Cidr__"),
+				Gateway: ptr.String("__Gateway__"),
+			},
+			{
+				Cidr:    ptr.String("__Cidr__"),
+				Gateway: ptr.String("__Gateway__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -35263,7 +43671,24 @@ func TestCheckResponseSnapshot_UpdateNode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateNode(context.Background(), &UpdateNodeInput{})
+	got, err := svc.UpdateNode(context.Background(), &UpdateNodeInput{
+		ClusterId: ptr.String("__ClusterId__"),
+		Name:      ptr.String("__Name__"),
+		NodeId:    ptr.String("__NodeId__"),
+		Role:      types.NodeRole("BACKUP"),
+		SdiSourceMappings: []types.SdiSourceMappingUpdateRequest{
+			{
+				CardNumber:    ptr.Int32(1),
+				ChannelNumber: ptr.Int32(1),
+				SdiSource:     ptr.String("__SdiSource__"),
+			},
+			{
+				CardNumber:    ptr.Int32(1),
+				ChannelNumber: ptr.Int32(1),
+				SdiSource:     ptr.String("__SdiSource__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -35327,7 +43752,11 @@ func TestCheckResponseSnapshot_UpdateNodeState(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateNodeState(context.Background(), &UpdateNodeStateInput{})
+	got, err := svc.UpdateNodeState(context.Background(), &UpdateNodeStateInput{
+		ClusterId: ptr.String("__ClusterId__"),
+		NodeId:    ptr.String("__NodeId__"),
+		State:     types.UpdateNodeStateShape("ACTIVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -35382,7 +43811,14 @@ func TestCheckResponseSnapshot_UpdateReservation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateReservation(context.Background(), &UpdateReservationInput{})
+	got, err := svc.UpdateReservation(context.Background(), &UpdateReservationInput{
+		Name: ptr.String("__Name__"),
+		RenewalSettings: &types.RenewalSettings{
+			AutomaticRenewal: types.ReservationAutomaticRenewal("DISABLED"),
+			RenewalCount:     ptr.Int32(1),
+		},
+		ReservationId: ptr.String("__ReservationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -35414,7 +43850,12 @@ func TestCheckResponseSnapshot_UpdateSdiSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSdiSource(context.Background(), &UpdateSdiSourceInput{})
+	got, err := svc.UpdateSdiSource(context.Background(), &UpdateSdiSourceInput{
+		Mode:        types.SdiSourceMode("QUADRANT"),
+		Name:        ptr.String("__Name__"),
+		SdiSourceId: ptr.String("__SdiSourceId__"),
+		Type:        types.SdiSourceType("SINGLE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -35435,7 +43876,9 @@ func TestCheckResponseSnapshot_Error_BadGatewayException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptInputDeviceTransfer(context.Background(), &AcceptInputDeviceTransferInput{})
+	_, opErr := svc.AcceptInputDeviceTransfer(context.Background(), &AcceptInputDeviceTransferInput{
+		InputDeviceId: ptr.String("__InputDeviceId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -35460,7 +43903,9 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptInputDeviceTransfer(context.Background(), &AcceptInputDeviceTransferInput{})
+	_, opErr := svc.AcceptInputDeviceTransfer(context.Background(), &AcceptInputDeviceTransferInput{
+		InputDeviceId: ptr.String("__InputDeviceId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -35485,7 +43930,9 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptInputDeviceTransfer(context.Background(), &AcceptInputDeviceTransferInput{})
+	_, opErr := svc.AcceptInputDeviceTransfer(context.Background(), &AcceptInputDeviceTransferInput{
+		InputDeviceId: ptr.String("__InputDeviceId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -35510,7 +43957,9 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptInputDeviceTransfer(context.Background(), &AcceptInputDeviceTransferInput{})
+	_, opErr := svc.AcceptInputDeviceTransfer(context.Background(), &AcceptInputDeviceTransferInput{
+		InputDeviceId: ptr.String("__InputDeviceId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -35535,7 +43984,9 @@ func TestCheckResponseSnapshot_Error_GatewayTimeoutException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptInputDeviceTransfer(context.Background(), &AcceptInputDeviceTransferInput{})
+	_, opErr := svc.AcceptInputDeviceTransfer(context.Background(), &AcceptInputDeviceTransferInput{
+		InputDeviceId: ptr.String("__InputDeviceId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -35560,7 +44011,9 @@ func TestCheckResponseSnapshot_Error_InternalServerErrorException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptInputDeviceTransfer(context.Background(), &AcceptInputDeviceTransferInput{})
+	_, opErr := svc.AcceptInputDeviceTransfer(context.Background(), &AcceptInputDeviceTransferInput{
+		InputDeviceId: ptr.String("__InputDeviceId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -35585,7 +44038,9 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptInputDeviceTransfer(context.Background(), &AcceptInputDeviceTransferInput{})
+	_, opErr := svc.AcceptInputDeviceTransfer(context.Background(), &AcceptInputDeviceTransferInput{
+		InputDeviceId: ptr.String("__InputDeviceId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -35610,7 +44065,9 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptInputDeviceTransfer(context.Background(), &AcceptInputDeviceTransferInput{})
+	_, opErr := svc.AcceptInputDeviceTransfer(context.Background(), &AcceptInputDeviceTransferInput{
+		InputDeviceId: ptr.String("__InputDeviceId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -35645,7 +44102,9 @@ func TestCheckResponseSnapshot_Error_UnprocessableEntityException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptInputDeviceTransfer(context.Background(), &AcceptInputDeviceTransferInput{})
+	_, opErr := svc.AcceptInputDeviceTransfer(context.Background(), &AcceptInputDeviceTransferInput{
+		InputDeviceId: ptr.String("__InputDeviceId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

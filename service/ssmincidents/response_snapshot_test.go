@@ -158,7 +158,13 @@ func TestCheckResponseSnapshot_BatchGetIncidentFindings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetIncidentFindings(context.Background(), &BatchGetIncidentFindingsInput{})
+	got, err := svc.BatchGetIncidentFindings(context.Background(), &BatchGetIncidentFindingsInput{
+		IncidentRecordArn: ptr.String("__IncidentRecordArn__"),
+		FindingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -179,7 +185,17 @@ func TestCheckResponseSnapshot_CreateReplicationSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateReplicationSet(context.Background(), &CreateReplicationSetInput{})
+	got, err := svc.CreateReplicationSet(context.Background(), &CreateReplicationSetInput{
+		Regions: map[string]types.RegionMapInputValue{
+			"key0": {
+				SseKmsKeyId: ptr.String("__SseKmsKeyId__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -200,7 +216,98 @@ func TestCheckResponseSnapshot_CreateResponsePlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateResponsePlan(context.Background(), &CreateResponsePlanInput{})
+	got, err := svc.CreateResponsePlan(context.Background(), &CreateResponsePlanInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Name:        ptr.String("__Name__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		IncidentTemplate: &types.IncidentTemplate{
+			Title:        ptr.String("__Title__"),
+			Impact:       ptr.Int32(1),
+			Summary:      ptr.String("__Summary__"),
+			DedupeString: ptr.String("__DedupeString__"),
+			NotificationTargets: []types.NotificationTargetItem{
+				&types.NotificationTargetItemMemberSnsTopicArn{
+					Value: "__NotificationTargetItemMemberSnsTopicArn__",
+				},
+				&types.NotificationTargetItemMemberSnsTopicArn{
+					Value: "__NotificationTargetItemMemberSnsTopicArn__",
+				},
+			},
+			IncidentTags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		ChatChannel: &types.ChatChannelMemberEmpty{
+			Value: types.EmptyChatChannel{},
+		},
+		Engagements: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Actions: []types.Action{
+			&types.ActionMemberSsmAutomation{
+				Value: types.SsmAutomation{
+					RoleArn:         ptr.String("__RoleArn__"),
+					DocumentName:    ptr.String("__DocumentName__"),
+					DocumentVersion: ptr.String("__DocumentVersion__"),
+					TargetAccount:   types.SsmTargetAccount("RESPONSE_PLAN_OWNER_ACCOUNT"),
+					Parameters: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+					DynamicParameters: map[string]types.DynamicSsmParameterValue{
+						"key0": &types.DynamicSsmParameterValueMemberVariable{
+							Value: types.VariableType("INCIDENT_RECORD_ARN"),
+						},
+					},
+				},
+			},
+			&types.ActionMemberSsmAutomation{
+				Value: types.SsmAutomation{
+					RoleArn:         ptr.String("__RoleArn__"),
+					DocumentName:    ptr.String("__DocumentName__"),
+					DocumentVersion: ptr.String("__DocumentVersion__"),
+					TargetAccount:   types.SsmTargetAccount("RESPONSE_PLAN_OWNER_ACCOUNT"),
+					Parameters: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+					DynamicParameters: map[string]types.DynamicSsmParameterValue{
+						"key0": &types.DynamicSsmParameterValueMemberVariable{
+							Value: types.VariableType("INCIDENT_RECORD_ARN"),
+						},
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Integrations: []types.Integration{
+			&types.IntegrationMemberPagerDutyConfiguration{
+				Value: types.PagerDutyConfiguration{
+					Name:     ptr.String("__Name__"),
+					SecretId: ptr.String("__SecretId__"),
+					PagerDutyIncidentConfiguration: &types.PagerDutyIncidentConfiguration{
+						ServiceId: ptr.String("__ServiceId__"),
+					},
+				},
+			},
+			&types.IntegrationMemberPagerDutyConfiguration{
+				Value: types.PagerDutyConfiguration{
+					Name:     ptr.String("__Name__"),
+					SecretId: ptr.String("__SecretId__"),
+					PagerDutyIncidentConfiguration: &types.PagerDutyIncidentConfiguration{
+						ServiceId: ptr.String("__ServiceId__"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -222,7 +329,21 @@ func TestCheckResponseSnapshot_CreateTimelineEvent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTimelineEvent(context.Background(), &CreateTimelineEventInput{})
+	got, err := svc.CreateTimelineEvent(context.Background(), &CreateTimelineEventInput{
+		ClientToken:       ptr.String("__ClientToken__"),
+		IncidentRecordArn: ptr.String("__IncidentRecordArn__"),
+		EventTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EventType:         ptr.String("__EventType__"),
+		EventData:         ptr.String("__EventData__"),
+		EventReferences: []types.EventReference{
+			&types.EventReferenceMemberResource{
+				Value: "__EventReferenceMemberResource__",
+			},
+			&types.EventReferenceMemberResource{
+				Value: "__EventReferenceMemberResource__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -241,7 +362,9 @@ func TestCheckResponseSnapshot_DeleteIncidentRecord(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIncidentRecord(context.Background(), &DeleteIncidentRecordInput{})
+	got, err := svc.DeleteIncidentRecord(context.Background(), &DeleteIncidentRecordInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -260,7 +383,9 @@ func TestCheckResponseSnapshot_DeleteReplicationSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteReplicationSet(context.Background(), &DeleteReplicationSetInput{})
+	got, err := svc.DeleteReplicationSet(context.Background(), &DeleteReplicationSetInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -279,7 +404,10 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		PolicyId:    ptr.String("__PolicyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -298,7 +426,9 @@ func TestCheckResponseSnapshot_DeleteResponsePlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResponsePlan(context.Background(), &DeleteResponsePlanInput{})
+	got, err := svc.DeleteResponsePlan(context.Background(), &DeleteResponsePlanInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -317,7 +447,10 @@ func TestCheckResponseSnapshot_DeleteTimelineEvent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTimelineEvent(context.Background(), &DeleteTimelineEventInput{})
+	got, err := svc.DeleteTimelineEvent(context.Background(), &DeleteTimelineEventInput{
+		IncidentRecordArn: ptr.String("__IncidentRecordArn__"),
+		EventId:           ptr.String("__EventId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -374,7 +507,9 @@ func TestCheckResponseSnapshot_GetIncidentRecord(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIncidentRecord(context.Background(), &GetIncidentRecordInput{})
+	got, err := svc.GetIncidentRecord(context.Background(), &GetIncidentRecordInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -411,7 +546,9 @@ func TestCheckResponseSnapshot_GetReplicationSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetReplicationSet(context.Background(), &GetReplicationSetInput{})
+	got, err := svc.GetReplicationSet(context.Background(), &GetReplicationSetInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -444,7 +581,11 @@ func TestCheckResponseSnapshot_GetResourcePolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourcePolicies(context.Background(), &GetResourcePoliciesInput{})
+	got, err := svc.GetResourcePolicies(context.Background(), &GetResourcePoliciesInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -551,7 +692,9 @@ func TestCheckResponseSnapshot_GetResponsePlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResponsePlan(context.Background(), &GetResponsePlanInput{})
+	got, err := svc.GetResponsePlan(context.Background(), &GetResponsePlanInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -587,7 +730,10 @@ func TestCheckResponseSnapshot_GetTimelineEvent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTimelineEvent(context.Background(), &GetTimelineEventInput{})
+	got, err := svc.GetTimelineEvent(context.Background(), &GetTimelineEventInput{
+		IncidentRecordArn: ptr.String("__IncidentRecordArn__"),
+		EventId:           ptr.String("__EventId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -618,7 +764,11 @@ func TestCheckResponseSnapshot_ListIncidentFindings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIncidentFindings(context.Background(), &ListIncidentFindingsInput{})
+	got, err := svc.ListIncidentFindings(context.Background(), &ListIncidentFindingsInput{
+		IncidentRecordArn: ptr.String("__IncidentRecordArn__"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -669,7 +819,24 @@ func TestCheckResponseSnapshot_ListIncidentRecords(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIncidentRecords(context.Background(), &ListIncidentRecordsInput{})
+	got, err := svc.ListIncidentRecords(context.Background(), &ListIncidentRecordsInput{
+		Filters: []types.Filter{
+			{
+				Key: ptr.String("__Key__"),
+				Condition: &types.ConditionMemberBefore{
+					Value: time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+				},
+			},
+			{
+				Key: ptr.String("__Key__"),
+				Condition: &types.ConditionMemberBefore{
+					Value: time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -712,7 +879,11 @@ func TestCheckResponseSnapshot_ListRelatedItems(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRelatedItems(context.Background(), &ListRelatedItemsInput{})
+	got, err := svc.ListRelatedItems(context.Background(), &ListRelatedItemsInput{
+		IncidentRecordArn: ptr.String("__IncidentRecordArn__"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -737,7 +908,10 @@ func TestCheckResponseSnapshot_ListReplicationSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReplicationSets(context.Background(), &ListReplicationSetsInput{})
+	got, err := svc.ListReplicationSets(context.Background(), &ListReplicationSetsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -770,7 +944,10 @@ func TestCheckResponseSnapshot_ListResponsePlans(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResponsePlans(context.Background(), &ListResponsePlansInput{})
+	got, err := svc.ListResponsePlans(context.Background(), &ListResponsePlansInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -793,7 +970,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -846,7 +1025,27 @@ func TestCheckResponseSnapshot_ListTimelineEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTimelineEvents(context.Background(), &ListTimelineEventsInput{})
+	got, err := svc.ListTimelineEvents(context.Background(), &ListTimelineEventsInput{
+		IncidentRecordArn: ptr.String("__IncidentRecordArn__"),
+		Filters: []types.Filter{
+			{
+				Key: ptr.String("__Key__"),
+				Condition: &types.ConditionMemberBefore{
+					Value: time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+				},
+			},
+			{
+				Key: ptr.String("__Key__"),
+				Condition: &types.ConditionMemberBefore{
+					Value: time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC),
+				},
+			},
+		},
+		SortBy:     types.TimelineEventSort("EVENT_TIME"),
+		SortOrder:  types.SortOrder("ASCENDING"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -867,7 +1066,10 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Policy:      ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -888,7 +1090,40 @@ func TestCheckResponseSnapshot_StartIncident(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartIncident(context.Background(), &StartIncidentInput{})
+	got, err := svc.StartIncident(context.Background(), &StartIncidentInput{
+		ClientToken:     ptr.String("__ClientToken__"),
+		ResponsePlanArn: ptr.String("__ResponsePlanArn__"),
+		Title:           ptr.String("__Title__"),
+		Impact:          ptr.Int32(1),
+		TriggerDetails: &types.TriggerDetails{
+			Source:     ptr.String("__Source__"),
+			TriggerArn: ptr.String("__TriggerArn__"),
+			Timestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			RawData:    ptr.String("__RawData__"),
+		},
+		RelatedItems: []types.RelatedItem{
+			{
+				Identifier: &types.ItemIdentifier{
+					Value: &types.ItemValueMemberArn{
+						Value: "__ItemValueMemberArn__",
+					},
+					Type: types.ItemType("ANALYSIS"),
+				},
+				Title:       ptr.String("__Title__"),
+				GeneratedId: ptr.String("__GeneratedId__"),
+			},
+			{
+				Identifier: &types.ItemIdentifier{
+					Value: &types.ItemValueMemberArn{
+						Value: "__ItemValueMemberArn__",
+					},
+					Type: types.ItemType("ANALYSIS"),
+				},
+				Title:       ptr.String("__Title__"),
+				GeneratedId: ptr.String("__GeneratedId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -907,7 +1142,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -926,7 +1166,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -945,7 +1191,11 @@ func TestCheckResponseSnapshot_UpdateDeletionProtection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDeletionProtection(context.Background(), &UpdateDeletionProtectionInput{})
+	got, err := svc.UpdateDeletionProtection(context.Background(), &UpdateDeletionProtectionInput{
+		Arn:               ptr.String("__Arn__"),
+		DeletionProtected: ptr.Bool(true),
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -964,7 +1214,25 @@ func TestCheckResponseSnapshot_UpdateIncidentRecord(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIncidentRecord(context.Background(), &UpdateIncidentRecordInput{})
+	got, err := svc.UpdateIncidentRecord(context.Background(), &UpdateIncidentRecordInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Arn:         ptr.String("__Arn__"),
+		Title:       ptr.String("__Title__"),
+		Summary:     ptr.String("__Summary__"),
+		Impact:      ptr.Int32(1),
+		Status:      types.IncidentRecordStatus("OPEN"),
+		ChatChannel: &types.ChatChannelMemberEmpty{
+			Value: types.EmptyChatChannel{},
+		},
+		NotificationTargets: []types.NotificationTargetItem{
+			&types.NotificationTargetItemMemberSnsTopicArn{
+				Value: "__NotificationTargetItemMemberSnsTopicArn__",
+			},
+			&types.NotificationTargetItemMemberSnsTopicArn{
+				Value: "__NotificationTargetItemMemberSnsTopicArn__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -983,7 +1251,22 @@ func TestCheckResponseSnapshot_UpdateRelatedItems(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRelatedItems(context.Background(), &UpdateRelatedItemsInput{})
+	got, err := svc.UpdateRelatedItems(context.Background(), &UpdateRelatedItemsInput{
+		ClientToken:       ptr.String("__ClientToken__"),
+		IncidentRecordArn: ptr.String("__IncidentRecordArn__"),
+		RelatedItemsUpdate: &types.RelatedItemsUpdateMemberItemToAdd{
+			Value: types.RelatedItem{
+				Identifier: &types.ItemIdentifier{
+					Value: &types.ItemValueMemberArn{
+						Value: "__ItemValueMemberArn__",
+					},
+					Type: types.ItemType("ANALYSIS"),
+				},
+				Title:       ptr.String("__Title__"),
+				GeneratedId: ptr.String("__GeneratedId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1002,7 +1285,24 @@ func TestCheckResponseSnapshot_UpdateReplicationSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateReplicationSet(context.Background(), &UpdateReplicationSetInput{})
+	got, err := svc.UpdateReplicationSet(context.Background(), &UpdateReplicationSetInput{
+		Arn: ptr.String("__Arn__"),
+		Actions: []types.UpdateReplicationSetAction{
+			&types.UpdateReplicationSetActionMemberAddRegionAction{
+				Value: types.AddRegionAction{
+					RegionName:  ptr.String("__RegionName__"),
+					SseKmsKeyId: ptr.String("__SseKmsKeyId__"),
+				},
+			},
+			&types.UpdateReplicationSetActionMemberAddRegionAction{
+				Value: types.AddRegionAction{
+					RegionName:  ptr.String("__RegionName__"),
+					SseKmsKeyId: ptr.String("__SseKmsKeyId__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1021,7 +1321,93 @@ func TestCheckResponseSnapshot_UpdateResponsePlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateResponsePlan(context.Background(), &UpdateResponsePlanInput{})
+	got, err := svc.UpdateResponsePlan(context.Background(), &UpdateResponsePlanInput{
+		ClientToken:                  ptr.String("__ClientToken__"),
+		Arn:                          ptr.String("__Arn__"),
+		DisplayName:                  ptr.String("__DisplayName__"),
+		IncidentTemplateTitle:        ptr.String("__IncidentTemplateTitle__"),
+		IncidentTemplateImpact:       ptr.Int32(1),
+		IncidentTemplateSummary:      ptr.String("__IncidentTemplateSummary__"),
+		IncidentTemplateDedupeString: ptr.String("__IncidentTemplateDedupeString__"),
+		IncidentTemplateNotificationTargets: []types.NotificationTargetItem{
+			&types.NotificationTargetItemMemberSnsTopicArn{
+				Value: "__NotificationTargetItemMemberSnsTopicArn__",
+			},
+			&types.NotificationTargetItemMemberSnsTopicArn{
+				Value: "__NotificationTargetItemMemberSnsTopicArn__",
+			},
+		},
+		ChatChannel: &types.ChatChannelMemberEmpty{
+			Value: types.EmptyChatChannel{},
+		},
+		Engagements: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Actions: []types.Action{
+			&types.ActionMemberSsmAutomation{
+				Value: types.SsmAutomation{
+					RoleArn:         ptr.String("__RoleArn__"),
+					DocumentName:    ptr.String("__DocumentName__"),
+					DocumentVersion: ptr.String("__DocumentVersion__"),
+					TargetAccount:   types.SsmTargetAccount("RESPONSE_PLAN_OWNER_ACCOUNT"),
+					Parameters: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+					DynamicParameters: map[string]types.DynamicSsmParameterValue{
+						"key0": &types.DynamicSsmParameterValueMemberVariable{
+							Value: types.VariableType("INCIDENT_RECORD_ARN"),
+						},
+					},
+				},
+			},
+			&types.ActionMemberSsmAutomation{
+				Value: types.SsmAutomation{
+					RoleArn:         ptr.String("__RoleArn__"),
+					DocumentName:    ptr.String("__DocumentName__"),
+					DocumentVersion: ptr.String("__DocumentVersion__"),
+					TargetAccount:   types.SsmTargetAccount("RESPONSE_PLAN_OWNER_ACCOUNT"),
+					Parameters: map[string][]string{
+						"key0": {
+							"__Member__",
+							"__Member__",
+						},
+					},
+					DynamicParameters: map[string]types.DynamicSsmParameterValue{
+						"key0": &types.DynamicSsmParameterValueMemberVariable{
+							Value: types.VariableType("INCIDENT_RECORD_ARN"),
+						},
+					},
+				},
+			},
+		},
+		IncidentTemplateTags: map[string]string{
+			"key0": "__Value__",
+		},
+		Integrations: []types.Integration{
+			&types.IntegrationMemberPagerDutyConfiguration{
+				Value: types.PagerDutyConfiguration{
+					Name:     ptr.String("__Name__"),
+					SecretId: ptr.String("__SecretId__"),
+					PagerDutyIncidentConfiguration: &types.PagerDutyIncidentConfiguration{
+						ServiceId: ptr.String("__ServiceId__"),
+					},
+				},
+			},
+			&types.IntegrationMemberPagerDutyConfiguration{
+				Value: types.PagerDutyConfiguration{
+					Name:     ptr.String("__Name__"),
+					SecretId: ptr.String("__SecretId__"),
+					PagerDutyIncidentConfiguration: &types.PagerDutyIncidentConfiguration{
+						ServiceId: ptr.String("__ServiceId__"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1040,7 +1426,22 @@ func TestCheckResponseSnapshot_UpdateTimelineEvent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTimelineEvent(context.Background(), &UpdateTimelineEventInput{})
+	got, err := svc.UpdateTimelineEvent(context.Background(), &UpdateTimelineEventInput{
+		ClientToken:       ptr.String("__ClientToken__"),
+		IncidentRecordArn: ptr.String("__IncidentRecordArn__"),
+		EventId:           ptr.String("__EventId__"),
+		EventTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EventType:         ptr.String("__EventType__"),
+		EventData:         ptr.String("__EventData__"),
+		EventReferences: []types.EventReference{
+			&types.EventReferenceMemberResource{
+				Value: "__EventReferenceMemberResource__",
+			},
+			&types.EventReferenceMemberResource{
+				Value: "__EventReferenceMemberResource__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1061,7 +1462,13 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetIncidentFindings(context.Background(), &BatchGetIncidentFindingsInput{})
+	_, opErr := svc.BatchGetIncidentFindings(context.Background(), &BatchGetIncidentFindingsInput{
+		IncidentRecordArn: ptr.String("__IncidentRecordArn__"),
+		FindingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1089,7 +1496,17 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateReplicationSet(context.Background(), &CreateReplicationSetInput{})
+	_, opErr := svc.CreateReplicationSet(context.Background(), &CreateReplicationSetInput{
+		Regions: map[string]types.RegionMapInputValue{
+			"key0": {
+				SseKmsKeyId: ptr.String("__SseKmsKeyId__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1114,7 +1531,13 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetIncidentFindings(context.Background(), &BatchGetIncidentFindingsInput{})
+	_, opErr := svc.BatchGetIncidentFindings(context.Background(), &BatchGetIncidentFindingsInput{
+		IncidentRecordArn: ptr.String("__IncidentRecordArn__"),
+		FindingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1141,7 +1564,13 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetIncidentFindings(context.Background(), &BatchGetIncidentFindingsInput{})
+	_, opErr := svc.BatchGetIncidentFindings(context.Background(), &BatchGetIncidentFindingsInput{
+		IncidentRecordArn: ptr.String("__IncidentRecordArn__"),
+		FindingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1170,7 +1599,17 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateReplicationSet(context.Background(), &CreateReplicationSetInput{})
+	_, opErr := svc.CreateReplicationSet(context.Background(), &CreateReplicationSetInput{
+		Regions: map[string]types.RegionMapInputValue{
+			"key0": {
+				SseKmsKeyId: ptr.String("__SseKmsKeyId__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1197,7 +1636,13 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetIncidentFindings(context.Background(), &BatchGetIncidentFindingsInput{})
+	_, opErr := svc.BatchGetIncidentFindings(context.Background(), &BatchGetIncidentFindingsInput{
+		IncidentRecordArn: ptr.String("__IncidentRecordArn__"),
+		FindingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1222,7 +1667,13 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetIncidentFindings(context.Background(), &BatchGetIncidentFindingsInput{})
+	_, opErr := svc.BatchGetIncidentFindings(context.Background(), &BatchGetIncidentFindingsInput{
+		IncidentRecordArn: ptr.String("__IncidentRecordArn__"),
+		FindingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

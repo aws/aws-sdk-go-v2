@@ -151,7 +151,27 @@ func TestCheckResponseSnapshot_BatchCreateAttendee(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchCreateAttendee(context.Background(), &BatchCreateAttendeeInput{})
+	got, err := svc.BatchCreateAttendee(context.Background(), &BatchCreateAttendeeInput{
+		MeetingId: ptr.String("__MeetingId__"),
+		Attendees: []types.CreateAttendeeRequestItem{
+			{
+				ExternalUserId: ptr.String("__ExternalUserId__"),
+				Capabilities: &types.AttendeeCapabilities{
+					Audio:   types.MediaCapabilities("SendReceive"),
+					Video:   types.MediaCapabilities("SendReceive"),
+					Content: types.MediaCapabilities("SendReceive"),
+				},
+			},
+			{
+				ExternalUserId: ptr.String("__ExternalUserId__"),
+				Capabilities: &types.AttendeeCapabilities{
+					Audio:   types.MediaCapabilities("SendReceive"),
+					Video:   types.MediaCapabilities("SendReceive"),
+					Content: types.MediaCapabilities("SendReceive"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -170,7 +190,22 @@ func TestCheckResponseSnapshot_BatchUpdateAttendeeCapabilitiesExcept(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchUpdateAttendeeCapabilitiesExcept(context.Background(), &BatchUpdateAttendeeCapabilitiesExceptInput{})
+	got, err := svc.BatchUpdateAttendeeCapabilitiesExcept(context.Background(), &BatchUpdateAttendeeCapabilitiesExceptInput{
+		MeetingId: ptr.String("__MeetingId__"),
+		ExcludedAttendeeIds: []types.AttendeeIdItem{
+			{
+				AttendeeId: ptr.String("__AttendeeId__"),
+			},
+			{
+				AttendeeId: ptr.String("__AttendeeId__"),
+			},
+		},
+		Capabilities: &types.AttendeeCapabilities{
+			Audio:   types.MediaCapabilities("SendReceive"),
+			Video:   types.MediaCapabilities("SendReceive"),
+			Content: types.MediaCapabilities("SendReceive"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -200,7 +235,15 @@ func TestCheckResponseSnapshot_CreateAttendee(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAttendee(context.Background(), &CreateAttendeeInput{})
+	got, err := svc.CreateAttendee(context.Background(), &CreateAttendeeInput{
+		MeetingId:      ptr.String("__MeetingId__"),
+		ExternalUserId: ptr.String("__ExternalUserId__"),
+		Capabilities: &types.AttendeeCapabilities{
+			Audio:   types.MediaCapabilities("SendReceive"),
+			Video:   types.MediaCapabilities("SendReceive"),
+			Content: types.MediaCapabilities("SendReceive"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -256,7 +299,47 @@ func TestCheckResponseSnapshot_CreateMeeting(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMeeting(context.Background(), &CreateMeetingInput{})
+	got, err := svc.CreateMeeting(context.Background(), &CreateMeetingInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		MediaRegion:        ptr.String("__MediaRegion__"),
+		MeetingHostId:      ptr.String("__MeetingHostId__"),
+		ExternalMeetingId:  ptr.String("__ExternalMeetingId__"),
+		NotificationsConfiguration: &types.NotificationsConfiguration{
+			LambdaFunctionArn: ptr.String("__LambdaFunctionArn__"),
+			SnsTopicArn:       ptr.String("__SnsTopicArn__"),
+			SqsQueueArn:       ptr.String("__SqsQueueArn__"),
+		},
+		MeetingFeatures: &types.MeetingFeaturesConfiguration{
+			Audio: &types.AudioFeatures{
+				EchoReduction: types.MeetingFeatureStatus("AVAILABLE"),
+			},
+			Video: &types.VideoFeatures{
+				MaxResolution: types.VideoResolution("None"),
+			},
+			Content: &types.ContentFeatures{
+				MaxResolution: types.ContentResolution("None"),
+			},
+			Attendee: &types.AttendeeFeatures{
+				MaxCount: ptr.Int32(1),
+			},
+		},
+		PrimaryMeetingId: ptr.String("__PrimaryMeetingId__"),
+		TenantIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		MediaPlacementNetworkType: types.MediaPlacementNetworkType("Ipv4Only"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -346,7 +429,65 @@ func TestCheckResponseSnapshot_CreateMeetingWithAttendees(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMeetingWithAttendees(context.Background(), &CreateMeetingWithAttendeesInput{})
+	got, err := svc.CreateMeetingWithAttendees(context.Background(), &CreateMeetingWithAttendeesInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		MediaRegion:        ptr.String("__MediaRegion__"),
+		MeetingHostId:      ptr.String("__MeetingHostId__"),
+		ExternalMeetingId:  ptr.String("__ExternalMeetingId__"),
+		MeetingFeatures: &types.MeetingFeaturesConfiguration{
+			Audio: &types.AudioFeatures{
+				EchoReduction: types.MeetingFeatureStatus("AVAILABLE"),
+			},
+			Video: &types.VideoFeatures{
+				MaxResolution: types.VideoResolution("None"),
+			},
+			Content: &types.ContentFeatures{
+				MaxResolution: types.ContentResolution("None"),
+			},
+			Attendee: &types.AttendeeFeatures{
+				MaxCount: ptr.Int32(1),
+			},
+		},
+		NotificationsConfiguration: &types.NotificationsConfiguration{
+			LambdaFunctionArn: ptr.String("__LambdaFunctionArn__"),
+			SnsTopicArn:       ptr.String("__SnsTopicArn__"),
+			SqsQueueArn:       ptr.String("__SqsQueueArn__"),
+		},
+		Attendees: []types.CreateAttendeeRequestItem{
+			{
+				ExternalUserId: ptr.String("__ExternalUserId__"),
+				Capabilities: &types.AttendeeCapabilities{
+					Audio:   types.MediaCapabilities("SendReceive"),
+					Video:   types.MediaCapabilities("SendReceive"),
+					Content: types.MediaCapabilities("SendReceive"),
+				},
+			},
+			{
+				ExternalUserId: ptr.String("__ExternalUserId__"),
+				Capabilities: &types.AttendeeCapabilities{
+					Audio:   types.MediaCapabilities("SendReceive"),
+					Video:   types.MediaCapabilities("SendReceive"),
+					Content: types.MediaCapabilities("SendReceive"),
+				},
+			},
+		},
+		PrimaryMeetingId: ptr.String("__PrimaryMeetingId__"),
+		TenantIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		MediaPlacementNetworkType: types.MediaPlacementNetworkType("Ipv4Only"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -365,7 +506,10 @@ func TestCheckResponseSnapshot_DeleteAttendee(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAttendee(context.Background(), &DeleteAttendeeInput{})
+	got, err := svc.DeleteAttendee(context.Background(), &DeleteAttendeeInput{
+		MeetingId:  ptr.String("__MeetingId__"),
+		AttendeeId: ptr.String("__AttendeeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -384,7 +528,9 @@ func TestCheckResponseSnapshot_DeleteMeeting(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMeeting(context.Background(), &DeleteMeetingInput{})
+	got, err := svc.DeleteMeeting(context.Background(), &DeleteMeetingInput{
+		MeetingId: ptr.String("__MeetingId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -414,7 +560,10 @@ func TestCheckResponseSnapshot_GetAttendee(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAttendee(context.Background(), &GetAttendeeInput{})
+	got, err := svc.GetAttendee(context.Background(), &GetAttendeeInput{
+		MeetingId:  ptr.String("__MeetingId__"),
+		AttendeeId: ptr.String("__AttendeeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -470,7 +619,9 @@ func TestCheckResponseSnapshot_GetMeeting(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMeeting(context.Background(), &GetMeetingInput{})
+	got, err := svc.GetMeeting(context.Background(), &GetMeetingInput{
+		MeetingId: ptr.String("__MeetingId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -513,7 +664,11 @@ func TestCheckResponseSnapshot_ListAttendees(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAttendees(context.Background(), &ListAttendeesInput{})
+	got, err := svc.ListAttendees(context.Background(), &ListAttendeesInput{
+		MeetingId:  ptr.String("__MeetingId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -543,7 +698,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -562,7 +719,37 @@ func TestCheckResponseSnapshot_StartMeetingTranscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMeetingTranscription(context.Background(), &StartMeetingTranscriptionInput{})
+	got, err := svc.StartMeetingTranscription(context.Background(), &StartMeetingTranscriptionInput{
+		MeetingId: ptr.String("__MeetingId__"),
+		TranscriptionConfiguration: &types.TranscriptionConfiguration{
+			EngineTranscribeSettings: &types.EngineTranscribeSettings{
+				LanguageCode:                      types.TranscribeLanguageCode("en-US"),
+				VocabularyFilterMethod:            types.TranscribeVocabularyFilterMethod("remove"),
+				VocabularyFilterName:              ptr.String("__VocabularyFilterName__"),
+				VocabularyName:                    ptr.String("__VocabularyName__"),
+				Region:                            types.TranscribeRegion("us-east-2"),
+				EnablePartialResultsStabilization: true,
+				PartialResultsStability:           types.TranscribePartialResultsStability("low"),
+				ContentIdentificationType:         types.TranscribeContentIdentificationType("PII"),
+				ContentRedactionType:              types.TranscribeContentRedactionType("PII"),
+				PiiEntityTypes:                    ptr.String("__PiiEntityTypes__"),
+				LanguageModelName:                 ptr.String("__LanguageModelName__"),
+				IdentifyLanguage:                  true,
+				LanguageOptions:                   ptr.String("__LanguageOptions__"),
+				PreferredLanguage:                 types.TranscribeLanguageCode("en-US"),
+				VocabularyNames:                   ptr.String("__VocabularyNames__"),
+				VocabularyFilterNames:             ptr.String("__VocabularyFilterNames__"),
+			},
+			EngineTranscribeMedicalSettings: &types.EngineTranscribeMedicalSettings{
+				LanguageCode:              types.TranscribeMedicalLanguageCode("en-US"),
+				Specialty:                 types.TranscribeMedicalSpecialty("PRIMARYCARE"),
+				Type:                      types.TranscribeMedicalType("CONVERSATION"),
+				VocabularyName:            ptr.String("__VocabularyName__"),
+				Region:                    types.TranscribeMedicalRegion("us-east-1"),
+				ContentIdentificationType: types.TranscribeMedicalContentIdentificationType("PHI"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -581,7 +768,9 @@ func TestCheckResponseSnapshot_StopMeetingTranscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopMeetingTranscription(context.Background(), &StopMeetingTranscriptionInput{})
+	got, err := svc.StopMeetingTranscription(context.Background(), &StopMeetingTranscriptionInput{
+		MeetingId: ptr.String("__MeetingId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -600,7 +789,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -619,7 +820,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -649,7 +856,15 @@ func TestCheckResponseSnapshot_UpdateAttendeeCapabilities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAttendeeCapabilities(context.Background(), &UpdateAttendeeCapabilitiesInput{})
+	got, err := svc.UpdateAttendeeCapabilities(context.Background(), &UpdateAttendeeCapabilitiesInput{
+		MeetingId:  ptr.String("__MeetingId__"),
+		AttendeeId: ptr.String("__AttendeeId__"),
+		Capabilities: &types.AttendeeCapabilities{
+			Audio:   types.MediaCapabilities("SendReceive"),
+			Video:   types.MediaCapabilities("SendReceive"),
+			Content: types.MediaCapabilities("SendReceive"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -660,7 +875,7 @@ func TestCheckResponseSnapshot_UpdateAttendeeCapabilities(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 	want := &types.BadRequestException{
-		Code:      ptr.String("__Code__"),
+		Code:      ptr.String("BadRequestException"),
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
@@ -672,7 +887,27 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateAttendee(context.Background(), &BatchCreateAttendeeInput{})
+	_, opErr := svc.BatchCreateAttendee(context.Background(), &BatchCreateAttendeeInput{
+		MeetingId: ptr.String("__MeetingId__"),
+		Attendees: []types.CreateAttendeeRequestItem{
+			{
+				ExternalUserId: ptr.String("__ExternalUserId__"),
+				Capabilities: &types.AttendeeCapabilities{
+					Audio:   types.MediaCapabilities("SendReceive"),
+					Video:   types.MediaCapabilities("SendReceive"),
+					Content: types.MediaCapabilities("SendReceive"),
+				},
+			},
+			{
+				ExternalUserId: ptr.String("__ExternalUserId__"),
+				Capabilities: &types.AttendeeCapabilities{
+					Audio:   types.MediaCapabilities("SendReceive"),
+					Video:   types.MediaCapabilities("SendReceive"),
+					Content: types.MediaCapabilities("SendReceive"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -687,7 +922,7 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 	want := &types.ConflictException{
-		Code:      ptr.String("__Code__"),
+		Code:      ptr.String("ConflictException"),
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
@@ -699,7 +934,22 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchUpdateAttendeeCapabilitiesExcept(context.Background(), &BatchUpdateAttendeeCapabilitiesExceptInput{})
+	_, opErr := svc.BatchUpdateAttendeeCapabilitiesExcept(context.Background(), &BatchUpdateAttendeeCapabilitiesExceptInput{
+		MeetingId: ptr.String("__MeetingId__"),
+		ExcludedAttendeeIds: []types.AttendeeIdItem{
+			{
+				AttendeeId: ptr.String("__AttendeeId__"),
+			},
+			{
+				AttendeeId: ptr.String("__AttendeeId__"),
+			},
+		},
+		Capabilities: &types.AttendeeCapabilities{
+			Audio:   types.MediaCapabilities("SendReceive"),
+			Video:   types.MediaCapabilities("SendReceive"),
+			Content: types.MediaCapabilities("SendReceive"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -714,7 +964,7 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 	want := &types.ForbiddenException{
-		Code:      ptr.String("__Code__"),
+		Code:      ptr.String("ForbiddenException"),
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
@@ -726,7 +976,27 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateAttendee(context.Background(), &BatchCreateAttendeeInput{})
+	_, opErr := svc.BatchCreateAttendee(context.Background(), &BatchCreateAttendeeInput{
+		MeetingId: ptr.String("__MeetingId__"),
+		Attendees: []types.CreateAttendeeRequestItem{
+			{
+				ExternalUserId: ptr.String("__ExternalUserId__"),
+				Capabilities: &types.AttendeeCapabilities{
+					Audio:   types.MediaCapabilities("SendReceive"),
+					Video:   types.MediaCapabilities("SendReceive"),
+					Content: types.MediaCapabilities("SendReceive"),
+				},
+			},
+			{
+				ExternalUserId: ptr.String("__ExternalUserId__"),
+				Capabilities: &types.AttendeeCapabilities{
+					Audio:   types.MediaCapabilities("SendReceive"),
+					Video:   types.MediaCapabilities("SendReceive"),
+					Content: types.MediaCapabilities("SendReceive"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -741,7 +1011,7 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 	want := &types.LimitExceededException{
-		Code:      ptr.String("__Code__"),
+		Code:      ptr.String("LimitExceededException"),
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
@@ -753,7 +1023,27 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateAttendee(context.Background(), &BatchCreateAttendeeInput{})
+	_, opErr := svc.BatchCreateAttendee(context.Background(), &BatchCreateAttendeeInput{
+		MeetingId: ptr.String("__MeetingId__"),
+		Attendees: []types.CreateAttendeeRequestItem{
+			{
+				ExternalUserId: ptr.String("__ExternalUserId__"),
+				Capabilities: &types.AttendeeCapabilities{
+					Audio:   types.MediaCapabilities("SendReceive"),
+					Video:   types.MediaCapabilities("SendReceive"),
+					Content: types.MediaCapabilities("SendReceive"),
+				},
+			},
+			{
+				ExternalUserId: ptr.String("__ExternalUserId__"),
+				Capabilities: &types.AttendeeCapabilities{
+					Audio:   types.MediaCapabilities("SendReceive"),
+					Video:   types.MediaCapabilities("SendReceive"),
+					Content: types.MediaCapabilities("SendReceive"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -768,7 +1058,7 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 	want := &types.NotFoundException{
-		Code:      ptr.String("__Code__"),
+		Code:      ptr.String("NotFoundException"),
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
@@ -780,7 +1070,27 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateAttendee(context.Background(), &BatchCreateAttendeeInput{})
+	_, opErr := svc.BatchCreateAttendee(context.Background(), &BatchCreateAttendeeInput{
+		MeetingId: ptr.String("__MeetingId__"),
+		Attendees: []types.CreateAttendeeRequestItem{
+			{
+				ExternalUserId: ptr.String("__ExternalUserId__"),
+				Capabilities: &types.AttendeeCapabilities{
+					Audio:   types.MediaCapabilities("SendReceive"),
+					Video:   types.MediaCapabilities("SendReceive"),
+					Content: types.MediaCapabilities("SendReceive"),
+				},
+			},
+			{
+				ExternalUserId: ptr.String("__ExternalUserId__"),
+				Capabilities: &types.AttendeeCapabilities{
+					Audio:   types.MediaCapabilities("SendReceive"),
+					Video:   types.MediaCapabilities("SendReceive"),
+					Content: types.MediaCapabilities("SendReceive"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -795,7 +1105,7 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 	want := &types.ResourceNotFoundException{
-		Code:         ptr.String("__Code__"),
+		Code:         ptr.String("ResourceNotFoundException"),
 		Message:      ptr.String("__Message__"),
 		RequestId:    ptr.String("__RequestId__"),
 		ResourceName: ptr.String("__ResourceName__"),
@@ -808,7 +1118,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -823,7 +1135,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ServiceFailureException(t *testing.T) {
 	want := &types.ServiceFailureException{
-		Code:      ptr.String("__Code__"),
+		Code:      ptr.String("ServiceFailureException"),
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
@@ -835,7 +1147,27 @@ func TestCheckResponseSnapshot_Error_ServiceFailureException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateAttendee(context.Background(), &BatchCreateAttendeeInput{})
+	_, opErr := svc.BatchCreateAttendee(context.Background(), &BatchCreateAttendeeInput{
+		MeetingId: ptr.String("__MeetingId__"),
+		Attendees: []types.CreateAttendeeRequestItem{
+			{
+				ExternalUserId: ptr.String("__ExternalUserId__"),
+				Capabilities: &types.AttendeeCapabilities{
+					Audio:   types.MediaCapabilities("SendReceive"),
+					Video:   types.MediaCapabilities("SendReceive"),
+					Content: types.MediaCapabilities("SendReceive"),
+				},
+			},
+			{
+				ExternalUserId: ptr.String("__ExternalUserId__"),
+				Capabilities: &types.AttendeeCapabilities{
+					Audio:   types.MediaCapabilities("SendReceive"),
+					Video:   types.MediaCapabilities("SendReceive"),
+					Content: types.MediaCapabilities("SendReceive"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -850,7 +1182,7 @@ func TestCheckResponseSnapshot_Error_ServiceFailureException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 	want := &types.ServiceUnavailableException{
-		Code:              ptr.String("__Code__"),
+		Code:              ptr.String("ServiceUnavailableException"),
 		Message:           ptr.String("__Message__"),
 		RequestId:         ptr.String("__RequestId__"),
 		RetryAfterSeconds: ptr.String("__RetryAfterSeconds__"),
@@ -863,7 +1195,27 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateAttendee(context.Background(), &BatchCreateAttendeeInput{})
+	_, opErr := svc.BatchCreateAttendee(context.Background(), &BatchCreateAttendeeInput{
+		MeetingId: ptr.String("__MeetingId__"),
+		Attendees: []types.CreateAttendeeRequestItem{
+			{
+				ExternalUserId: ptr.String("__ExternalUserId__"),
+				Capabilities: &types.AttendeeCapabilities{
+					Audio:   types.MediaCapabilities("SendReceive"),
+					Video:   types.MediaCapabilities("SendReceive"),
+					Content: types.MediaCapabilities("SendReceive"),
+				},
+			},
+			{
+				ExternalUserId: ptr.String("__ExternalUserId__"),
+				Capabilities: &types.AttendeeCapabilities{
+					Audio:   types.MediaCapabilities("SendReceive"),
+					Video:   types.MediaCapabilities("SendReceive"),
+					Content: types.MediaCapabilities("SendReceive"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -878,7 +1230,7 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 	want := &types.ThrottlingException{
-		Code:      ptr.String("__Code__"),
+		Code:      ptr.String("ThrottlingException"),
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
@@ -890,7 +1242,27 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateAttendee(context.Background(), &BatchCreateAttendeeInput{})
+	_, opErr := svc.BatchCreateAttendee(context.Background(), &BatchCreateAttendeeInput{
+		MeetingId: ptr.String("__MeetingId__"),
+		Attendees: []types.CreateAttendeeRequestItem{
+			{
+				ExternalUserId: ptr.String("__ExternalUserId__"),
+				Capabilities: &types.AttendeeCapabilities{
+					Audio:   types.MediaCapabilities("SendReceive"),
+					Video:   types.MediaCapabilities("SendReceive"),
+					Content: types.MediaCapabilities("SendReceive"),
+				},
+			},
+			{
+				ExternalUserId: ptr.String("__ExternalUserId__"),
+				Capabilities: &types.AttendeeCapabilities{
+					Audio:   types.MediaCapabilities("SendReceive"),
+					Video:   types.MediaCapabilities("SendReceive"),
+					Content: types.MediaCapabilities("SendReceive"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -905,7 +1277,7 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 	want := &types.TooManyTagsException{
-		Code:         ptr.String("__Code__"),
+		Code:         ptr.String("TooManyTagsException"),
 		Message:      ptr.String("__Message__"),
 		RequestId:    ptr.String("__RequestId__"),
 		ResourceName: ptr.String("__ResourceName__"),
@@ -918,7 +1290,19 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -933,7 +1317,7 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_UnauthorizedException(t *testing.T) {
 	want := &types.UnauthorizedException{
-		Code:      ptr.String("__Code__"),
+		Code:      ptr.String("UnauthorizedException"),
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
@@ -945,7 +1329,27 @@ func TestCheckResponseSnapshot_Error_UnauthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateAttendee(context.Background(), &BatchCreateAttendeeInput{})
+	_, opErr := svc.BatchCreateAttendee(context.Background(), &BatchCreateAttendeeInput{
+		MeetingId: ptr.String("__MeetingId__"),
+		Attendees: []types.CreateAttendeeRequestItem{
+			{
+				ExternalUserId: ptr.String("__ExternalUserId__"),
+				Capabilities: &types.AttendeeCapabilities{
+					Audio:   types.MediaCapabilities("SendReceive"),
+					Video:   types.MediaCapabilities("SendReceive"),
+					Content: types.MediaCapabilities("SendReceive"),
+				},
+			},
+			{
+				ExternalUserId: ptr.String("__ExternalUserId__"),
+				Capabilities: &types.AttendeeCapabilities{
+					Audio:   types.MediaCapabilities("SendReceive"),
+					Video:   types.MediaCapabilities("SendReceive"),
+					Content: types.MediaCapabilities("SendReceive"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -960,7 +1364,7 @@ func TestCheckResponseSnapshot_Error_UnauthorizedException(t *testing.T) {
 
 func TestCheckResponseSnapshot_Error_UnprocessableEntityException(t *testing.T) {
 	want := &types.UnprocessableEntityException{
-		Code:      ptr.String("__Code__"),
+		Code:      ptr.String("UnprocessableEntityException"),
 		Message:   ptr.String("__Message__"),
 		RequestId: ptr.String("__RequestId__"),
 	}
@@ -972,7 +1376,27 @@ func TestCheckResponseSnapshot_Error_UnprocessableEntityException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchCreateAttendee(context.Background(), &BatchCreateAttendeeInput{})
+	_, opErr := svc.BatchCreateAttendee(context.Background(), &BatchCreateAttendeeInput{
+		MeetingId: ptr.String("__MeetingId__"),
+		Attendees: []types.CreateAttendeeRequestItem{
+			{
+				ExternalUserId: ptr.String("__ExternalUserId__"),
+				Capabilities: &types.AttendeeCapabilities{
+					Audio:   types.MediaCapabilities("SendReceive"),
+					Video:   types.MediaCapabilities("SendReceive"),
+					Content: types.MediaCapabilities("SendReceive"),
+				},
+			},
+			{
+				ExternalUserId: ptr.String("__ExternalUserId__"),
+				Capabilities: &types.AttendeeCapabilities{
+					Audio:   types.MediaCapabilities("SendReceive"),
+					Video:   types.MediaCapabilities("SendReceive"),
+					Content: types.MediaCapabilities("SendReceive"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

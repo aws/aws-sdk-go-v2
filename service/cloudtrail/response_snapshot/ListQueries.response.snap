@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CloudTrail_20131101.ListQueries
+
+{"NextToken":"__NextToken__","Queries":[{"CreationTime":946684800,"QueryId":"__QueryId__","QueryStatus":"QUEUED"},{"CreationTime":946684800,"QueryId":"__QueryId__","QueryStatus":"QUEUED"}]}

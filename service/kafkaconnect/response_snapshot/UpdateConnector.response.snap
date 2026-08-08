@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"connectorArn":"__ConnectorArn__","connectorOperationArn":"__ConnectorOperationArn__","connectorState":"RUNNING"}

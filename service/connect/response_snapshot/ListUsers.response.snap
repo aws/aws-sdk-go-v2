@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","UserSummaryList":[{"Arn":"__Arn__","Id":"__Id__","LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"Username":"__Username__"},{"Arn":"__Arn__","Id":"__Id__","LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"Username":"__Username__"}]}

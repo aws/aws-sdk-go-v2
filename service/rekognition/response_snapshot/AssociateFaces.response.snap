@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RekognitionService.AssociateFaces
+
+{"AssociatedFaces":[{"FaceId":"__FaceId__"},{"FaceId":"__FaceId__"}],"UnsuccessfulFaceAssociations":[{"Confidence":1,"FaceId":"__FaceId__","Reasons":["FACE_NOT_FOUND","FACE_NOT_FOUND"],"UserId":"__UserId__"},{"Confidence":1,"FaceId":"__FaceId__","Reasons":["FACE_NOT_FOUND","FACE_NOT_FOUND"],"UserId":"__UserId__"}],"UserStatus":"ACTIVE"}

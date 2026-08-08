@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"PhoneNumberErrors":[{"ErrorCode":"BadRequest","ErrorMessage":"__ErrorMessage__","PhoneNumberId":"__PhoneNumberId__"},{"ErrorCode":"BadRequest","ErrorMessage":"__ErrorMessage__","PhoneNumberId":"__PhoneNumberId__"}]}

@@ -138,7 +138,27 @@ func TestCheckResponseSnapshot_AddNotificationChannels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddNotificationChannels(context.Background(), &AddNotificationChannelsInput{})
+	got, err := svc.AddNotificationChannels(context.Background(), &AddNotificationChannelsInput{
+		ProfilingGroupName: ptr.String("__ProfilingGroupName__"),
+		Channels: []types.Channel{
+			{
+				Id:  ptr.String("__Id__"),
+				Uri: ptr.String("__Uri__"),
+				EventPublishers: []types.EventPublisher{
+					types.EventPublisher("AnomalyDetection"),
+					types.EventPublisher("AnomalyDetection"),
+				},
+			},
+			{
+				Id:  ptr.String("__Id__"),
+				Uri: ptr.String("__Uri__"),
+				EventPublishers: []types.EventPublisher{
+					types.EventPublisher("AnomalyDetection"),
+					types.EventPublisher("AnomalyDetection"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -209,7 +229,31 @@ func TestCheckResponseSnapshot_BatchGetFrameMetricData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetFrameMetricData(context.Background(), &BatchGetFrameMetricDataInput{})
+	got, err := svc.BatchGetFrameMetricData(context.Background(), &BatchGetFrameMetricDataInput{
+		ProfilingGroupName: ptr.String("__ProfilingGroupName__"),
+		StartTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Period:             ptr.String("__Period__"),
+		TargetResolution:   types.AggregationPeriod("PT5M"),
+		FrameMetrics: []types.FrameMetric{
+			{
+				FrameName: ptr.String("__FrameName__"),
+				Type:      types.MetricType("AggregatedRelativeTotalTime"),
+				ThreadStates: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				FrameName: ptr.String("__FrameName__"),
+				Type:      types.MetricType("AggregatedRelativeTotalTime"),
+				ThreadStates: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -236,7 +280,13 @@ func TestCheckResponseSnapshot_ConfigureAgent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ConfigureAgent(context.Background(), &ConfigureAgentInput{})
+	got, err := svc.ConfigureAgent(context.Background(), &ConfigureAgentInput{
+		ProfilingGroupName: ptr.String("__ProfilingGroupName__"),
+		FleetInstanceId:    ptr.String("__FleetInstanceId__"),
+		Metadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -277,7 +327,17 @@ func TestCheckResponseSnapshot_CreateProfilingGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProfilingGroup(context.Background(), &CreateProfilingGroupInput{})
+	got, err := svc.CreateProfilingGroup(context.Background(), &CreateProfilingGroupInput{
+		ProfilingGroupName: ptr.String("__ProfilingGroupName__"),
+		ComputePlatform:    types.ComputePlatform("Default"),
+		ClientToken:        ptr.String("__ClientToken__"),
+		AgentOrchestrationConfig: &types.AgentOrchestrationConfig{
+			ProfilingEnabled: ptr.Bool(true),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -296,7 +356,9 @@ func TestCheckResponseSnapshot_DeleteProfilingGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProfilingGroup(context.Background(), &DeleteProfilingGroupInput{})
+	got, err := svc.DeleteProfilingGroup(context.Background(), &DeleteProfilingGroupInput{
+		ProfilingGroupName: ptr.String("__ProfilingGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -337,7 +399,9 @@ func TestCheckResponseSnapshot_DescribeProfilingGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeProfilingGroup(context.Background(), &DescribeProfilingGroupInput{})
+	got, err := svc.DescribeProfilingGroup(context.Background(), &DescribeProfilingGroupInput{
+		ProfilingGroupName: ptr.String("__ProfilingGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -374,7 +438,11 @@ func TestCheckResponseSnapshot_GetFindingsReportAccountSummary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFindingsReportAccountSummary(context.Background(), &GetFindingsReportAccountSummaryInput{})
+	got, err := svc.GetFindingsReportAccountSummary(context.Background(), &GetFindingsReportAccountSummaryInput{
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+		DailyReportsOnly: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -414,7 +482,9 @@ func TestCheckResponseSnapshot_GetNotificationConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetNotificationConfiguration(context.Background(), &GetNotificationConfigurationInput{})
+	got, err := svc.GetNotificationConfiguration(context.Background(), &GetNotificationConfigurationInput{
+		ProfilingGroupName: ptr.String("__ProfilingGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -436,7 +506,9 @@ func TestCheckResponseSnapshot_GetPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPolicy(context.Background(), &GetPolicyInput{})
+	got, err := svc.GetPolicy(context.Background(), &GetPolicyInput{
+		ProfilingGroupName: ptr.String("__ProfilingGroupName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -459,7 +531,14 @@ func TestCheckResponseSnapshot_GetProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProfile(context.Background(), &GetProfileInput{})
+	got, err := svc.GetProfile(context.Background(), &GetProfileInput{
+		ProfilingGroupName: ptr.String("__ProfilingGroupName__"),
+		StartTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Period:             ptr.String("__Period__"),
+		EndTime:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxDepth:           ptr.Int32(1),
+		Accept:             ptr.String("__Accept__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -622,7 +701,12 @@ func TestCheckResponseSnapshot_GetRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRecommendations(context.Background(), &GetRecommendationsInput{})
+	got, err := svc.GetRecommendations(context.Background(), &GetRecommendationsInput{
+		ProfilingGroupName: ptr.String("__ProfilingGroupName__"),
+		StartTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Locale:             ptr.String("__Locale__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -659,7 +743,14 @@ func TestCheckResponseSnapshot_ListFindingsReports(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFindingsReports(context.Background(), &ListFindingsReportsInput{})
+	got, err := svc.ListFindingsReports(context.Background(), &ListFindingsReportsInput{
+		ProfilingGroupName: ptr.String("__ProfilingGroupName__"),
+		StartTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NextToken:          ptr.String("__NextToken__"),
+		MaxResults:         ptr.Int32(1),
+		DailyReportsOnly:   ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -688,7 +779,15 @@ func TestCheckResponseSnapshot_ListProfileTimes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProfileTimes(context.Background(), &ListProfileTimesInput{})
+	got, err := svc.ListProfileTimes(context.Background(), &ListProfileTimesInput{
+		ProfilingGroupName: ptr.String("__ProfilingGroupName__"),
+		StartTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Period:             types.AggregationPeriod("PT5M"),
+		OrderBy:            types.OrderBy("TimestampDescending"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -757,7 +856,11 @@ func TestCheckResponseSnapshot_ListProfilingGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProfilingGroups(context.Background(), &ListProfilingGroupsInput{})
+	got, err := svc.ListProfilingGroups(context.Background(), &ListProfilingGroupsInput{
+		NextToken:          ptr.String("__NextToken__"),
+		MaxResults:         ptr.Int32(1),
+		IncludeDescription: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -780,7 +883,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -799,7 +904,12 @@ func TestCheckResponseSnapshot_PostAgentProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PostAgentProfile(context.Background(), &PostAgentProfileInput{})
+	got, err := svc.PostAgentProfile(context.Background(), &PostAgentProfileInput{
+		ProfilingGroupName: ptr.String("__ProfilingGroupName__"),
+		AgentProfile:       []byte("blob"),
+		ProfileToken:       ptr.String("__ProfileToken__"),
+		ContentType:        ptr.String("__ContentType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -821,7 +931,15 @@ func TestCheckResponseSnapshot_PutPermission(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutPermission(context.Background(), &PutPermissionInput{})
+	got, err := svc.PutPermission(context.Background(), &PutPermissionInput{
+		ProfilingGroupName: ptr.String("__ProfilingGroupName__"),
+		ActionGroup:        types.ActionGroup("agentPermissions"),
+		Principals: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RevisionId: ptr.String("__RevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -861,7 +979,10 @@ func TestCheckResponseSnapshot_RemoveNotificationChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveNotificationChannel(context.Background(), &RemoveNotificationChannelInput{})
+	got, err := svc.RemoveNotificationChannel(context.Background(), &RemoveNotificationChannelInput{
+		ProfilingGroupName: ptr.String("__ProfilingGroupName__"),
+		ChannelId:          ptr.String("__ChannelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -883,7 +1004,11 @@ func TestCheckResponseSnapshot_RemovePermission(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemovePermission(context.Background(), &RemovePermissionInput{})
+	got, err := svc.RemovePermission(context.Background(), &RemovePermissionInput{
+		ProfilingGroupName: ptr.String("__ProfilingGroupName__"),
+		ActionGroup:        types.ActionGroup("agentPermissions"),
+		RevisionId:         ptr.String("__RevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -902,7 +1027,12 @@ func TestCheckResponseSnapshot_SubmitFeedback(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SubmitFeedback(context.Background(), &SubmitFeedbackInput{})
+	got, err := svc.SubmitFeedback(context.Background(), &SubmitFeedbackInput{
+		ProfilingGroupName: ptr.String("__ProfilingGroupName__"),
+		AnomalyInstanceId:  ptr.String("__AnomalyInstanceId__"),
+		Type:               types.FeedbackType("Positive"),
+		Comment:            ptr.String("__Comment__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -921,7 +1051,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -940,7 +1075,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -981,7 +1122,12 @@ func TestCheckResponseSnapshot_UpdateProfilingGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProfilingGroup(context.Background(), &UpdateProfilingGroupInput{})
+	got, err := svc.UpdateProfilingGroup(context.Background(), &UpdateProfilingGroupInput{
+		ProfilingGroupName: ptr.String("__ProfilingGroupName__"),
+		AgentOrchestrationConfig: &types.AgentOrchestrationConfig{
+			ProfilingEnabled: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1002,7 +1148,27 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddNotificationChannels(context.Background(), &AddNotificationChannelsInput{})
+	_, opErr := svc.AddNotificationChannels(context.Background(), &AddNotificationChannelsInput{
+		ProfilingGroupName: ptr.String("__ProfilingGroupName__"),
+		Channels: []types.Channel{
+			{
+				Id:  ptr.String("__Id__"),
+				Uri: ptr.String("__Uri__"),
+				EventPublishers: []types.EventPublisher{
+					types.EventPublisher("AnomalyDetection"),
+					types.EventPublisher("AnomalyDetection"),
+				},
+			},
+			{
+				Id:  ptr.String("__Id__"),
+				Uri: ptr.String("__Uri__"),
+				EventPublishers: []types.EventPublisher{
+					types.EventPublisher("AnomalyDetection"),
+					types.EventPublisher("AnomalyDetection"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1027,7 +1193,27 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddNotificationChannels(context.Background(), &AddNotificationChannelsInput{})
+	_, opErr := svc.AddNotificationChannels(context.Background(), &AddNotificationChannelsInput{
+		ProfilingGroupName: ptr.String("__ProfilingGroupName__"),
+		Channels: []types.Channel{
+			{
+				Id:  ptr.String("__Id__"),
+				Uri: ptr.String("__Uri__"),
+				EventPublishers: []types.EventPublisher{
+					types.EventPublisher("AnomalyDetection"),
+					types.EventPublisher("AnomalyDetection"),
+				},
+			},
+			{
+				Id:  ptr.String("__Id__"),
+				Uri: ptr.String("__Uri__"),
+				EventPublishers: []types.EventPublisher{
+					types.EventPublisher("AnomalyDetection"),
+					types.EventPublisher("AnomalyDetection"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1052,7 +1238,27 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddNotificationChannels(context.Background(), &AddNotificationChannelsInput{})
+	_, opErr := svc.AddNotificationChannels(context.Background(), &AddNotificationChannelsInput{
+		ProfilingGroupName: ptr.String("__ProfilingGroupName__"),
+		Channels: []types.Channel{
+			{
+				Id:  ptr.String("__Id__"),
+				Uri: ptr.String("__Uri__"),
+				EventPublishers: []types.EventPublisher{
+					types.EventPublisher("AnomalyDetection"),
+					types.EventPublisher("AnomalyDetection"),
+				},
+			},
+			{
+				Id:  ptr.String("__Id__"),
+				Uri: ptr.String("__Uri__"),
+				EventPublishers: []types.EventPublisher{
+					types.EventPublisher("AnomalyDetection"),
+					types.EventPublisher("AnomalyDetection"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1077,7 +1283,27 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddNotificationChannels(context.Background(), &AddNotificationChannelsInput{})
+	_, opErr := svc.AddNotificationChannels(context.Background(), &AddNotificationChannelsInput{
+		ProfilingGroupName: ptr.String("__ProfilingGroupName__"),
+		Channels: []types.Channel{
+			{
+				Id:  ptr.String("__Id__"),
+				Uri: ptr.String("__Uri__"),
+				EventPublishers: []types.EventPublisher{
+					types.EventPublisher("AnomalyDetection"),
+					types.EventPublisher("AnomalyDetection"),
+				},
+			},
+			{
+				Id:  ptr.String("__Id__"),
+				Uri: ptr.String("__Uri__"),
+				EventPublishers: []types.EventPublisher{
+					types.EventPublisher("AnomalyDetection"),
+					types.EventPublisher("AnomalyDetection"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1102,7 +1328,27 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddNotificationChannels(context.Background(), &AddNotificationChannelsInput{})
+	_, opErr := svc.AddNotificationChannels(context.Background(), &AddNotificationChannelsInput{
+		ProfilingGroupName: ptr.String("__ProfilingGroupName__"),
+		Channels: []types.Channel{
+			{
+				Id:  ptr.String("__Id__"),
+				Uri: ptr.String("__Uri__"),
+				EventPublishers: []types.EventPublisher{
+					types.EventPublisher("AnomalyDetection"),
+					types.EventPublisher("AnomalyDetection"),
+				},
+			},
+			{
+				Id:  ptr.String("__Id__"),
+				Uri: ptr.String("__Uri__"),
+				EventPublishers: []types.EventPublisher{
+					types.EventPublisher("AnomalyDetection"),
+					types.EventPublisher("AnomalyDetection"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1127,7 +1373,27 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddNotificationChannels(context.Background(), &AddNotificationChannelsInput{})
+	_, opErr := svc.AddNotificationChannels(context.Background(), &AddNotificationChannelsInput{
+		ProfilingGroupName: ptr.String("__ProfilingGroupName__"),
+		Channels: []types.Channel{
+			{
+				Id:  ptr.String("__Id__"),
+				Uri: ptr.String("__Uri__"),
+				EventPublishers: []types.EventPublisher{
+					types.EventPublisher("AnomalyDetection"),
+					types.EventPublisher("AnomalyDetection"),
+				},
+			},
+			{
+				Id:  ptr.String("__Id__"),
+				Uri: ptr.String("__Uri__"),
+				EventPublishers: []types.EventPublisher{
+					types.EventPublisher("AnomalyDetection"),
+					types.EventPublisher("AnomalyDetection"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

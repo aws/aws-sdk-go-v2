@@ -108,7 +108,7 @@ func serdeRespClient(status int, header http.Header, body []byte) *Client {
 }
 func TestCheckResponseSnapshot_AssociateUserToPermissionGroup(t *testing.T) {
 	want := &AssociateUserToPermissionGroupOutput{
-		StatusCode: 1,
+		StatusCode: 200,
 	}
 	status, header, body, err := serdeRespReadSnapshot("AssociateUserToPermissionGroup.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -118,7 +118,11 @@ func TestCheckResponseSnapshot_AssociateUserToPermissionGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateUserToPermissionGroup(context.Background(), &AssociateUserToPermissionGroupInput{})
+	got, err := svc.AssociateUserToPermissionGroup(context.Background(), &AssociateUserToPermissionGroupInput{
+		PermissionGroupId: ptr.String("__PermissionGroupId__"),
+		UserId:            ptr.String("__UserId__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -140,7 +144,17 @@ func TestCheckResponseSnapshot_CreateChangeset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateChangeset(context.Background(), &CreateChangesetInput{})
+	got, err := svc.CreateChangeset(context.Background(), &CreateChangesetInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		DatasetId:   ptr.String("__DatasetId__"),
+		ChangeType:  types.ChangeType("REPLACE"),
+		SourceParams: map[string]string{
+			"key0": "__Value__",
+		},
+		FormatParams: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -162,7 +176,27 @@ func TestCheckResponseSnapshot_CreateDataView(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataView(context.Background(), &CreateDataViewInput{})
+	got, err := svc.CreateDataView(context.Background(), &CreateDataViewInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		DatasetId:   ptr.String("__DatasetId__"),
+		AutoUpdate:  true,
+		SortColumns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PartitionColumns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AsOfTimestamp: ptr.Int64(1),
+		DestinationTypeParams: &types.DataViewDestinationTypeParams{
+			DestinationType:               ptr.String("__DestinationType__"),
+			S3DestinationExportFileFormat: types.ExportFileFormat("PARQUET"),
+			S3DestinationExportFileFormatOptions: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -183,7 +217,49 @@ func TestCheckResponseSnapshot_CreateDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataset(context.Background(), &CreateDatasetInput{})
+	got, err := svc.CreateDataset(context.Background(), &CreateDatasetInput{
+		ClientToken:        ptr.String("__ClientToken__"),
+		DatasetTitle:       ptr.String("__DatasetTitle__"),
+		Kind:               types.DatasetKind("TABULAR"),
+		DatasetDescription: ptr.String("__DatasetDescription__"),
+		OwnerInfo: &types.DatasetOwnerInfo{
+			Name:        ptr.String("__Name__"),
+			PhoneNumber: ptr.String("__PhoneNumber__"),
+			Email:       ptr.String("__Email__"),
+		},
+		PermissionGroupParams: &types.PermissionGroupParams{
+			PermissionGroupId: ptr.String("__PermissionGroupId__"),
+			DatasetPermissions: []types.ResourcePermission{
+				{
+					Permission: ptr.String("__Permission__"),
+				},
+				{
+					Permission: ptr.String("__Permission__"),
+				},
+			},
+		},
+		Alias: ptr.String("__Alias__"),
+		SchemaDefinition: &types.SchemaUnion{
+			TabularSchemaConfig: &types.SchemaDefinition{
+				Columns: []types.ColumnDefinition{
+					{
+						DataType:          types.ColumnDataType("STRING"),
+						ColumnName:        ptr.String("__ColumnName__"),
+						ColumnDescription: ptr.String("__ColumnDescription__"),
+					},
+					{
+						DataType:          types.ColumnDataType("STRING"),
+						ColumnName:        ptr.String("__ColumnName__"),
+						ColumnDescription: ptr.String("__ColumnDescription__"),
+					},
+				},
+				PrimaryKeyColumns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -204,7 +280,15 @@ func TestCheckResponseSnapshot_CreatePermissionGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePermissionGroup(context.Background(), &CreatePermissionGroupInput{})
+	got, err := svc.CreatePermissionGroup(context.Background(), &CreatePermissionGroupInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		ApplicationPermissions: []types.ApplicationPermission{
+			types.ApplicationPermission("CreateDataset"),
+			types.ApplicationPermission("CreateDataset"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -225,7 +309,15 @@ func TestCheckResponseSnapshot_CreateUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUser(context.Background(), &CreateUserInput{})
+	got, err := svc.CreateUser(context.Background(), &CreateUserInput{
+		EmailAddress:          ptr.String("__EmailAddress__"),
+		Type:                  types.UserType("SUPER_USER"),
+		FirstName:             ptr.String("__FirstName__"),
+		LastName:              ptr.String("__LastName__"),
+		ApiAccess:             types.ApiAccess("ENABLED"),
+		ApiAccessPrincipalArn: ptr.String("__ApiAccessPrincipalArn__"),
+		ClientToken:           ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -246,7 +338,10 @@ func TestCheckResponseSnapshot_DeleteDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataset(context.Background(), &DeleteDatasetInput{})
+	got, err := svc.DeleteDataset(context.Background(), &DeleteDatasetInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		DatasetId:   ptr.String("__DatasetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -267,7 +362,10 @@ func TestCheckResponseSnapshot_DeletePermissionGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePermissionGroup(context.Background(), &DeletePermissionGroupInput{})
+	got, err := svc.DeletePermissionGroup(context.Background(), &DeletePermissionGroupInput{
+		PermissionGroupId: ptr.String("__PermissionGroupId__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -288,7 +386,10 @@ func TestCheckResponseSnapshot_DisableUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableUser(context.Background(), &DisableUserInput{})
+	got, err := svc.DisableUser(context.Background(), &DisableUserInput{
+		UserId:      ptr.String("__UserId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -299,7 +400,7 @@ func TestCheckResponseSnapshot_DisableUser(t *testing.T) {
 
 func TestCheckResponseSnapshot_DisassociateUserFromPermissionGroup(t *testing.T) {
 	want := &DisassociateUserFromPermissionGroupOutput{
-		StatusCode: 1,
+		StatusCode: 200,
 	}
 	status, header, body, err := serdeRespReadSnapshot("DisassociateUserFromPermissionGroup.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -309,7 +410,11 @@ func TestCheckResponseSnapshot_DisassociateUserFromPermissionGroup(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateUserFromPermissionGroup(context.Background(), &DisassociateUserFromPermissionGroupInput{})
+	got, err := svc.DisassociateUserFromPermissionGroup(context.Background(), &DisassociateUserFromPermissionGroupInput{
+		PermissionGroupId: ptr.String("__PermissionGroupId__"),
+		UserId:            ptr.String("__UserId__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -330,7 +435,10 @@ func TestCheckResponseSnapshot_EnableUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableUser(context.Background(), &EnableUserInput{})
+	got, err := svc.EnableUser(context.Background(), &EnableUserInput{
+		UserId:      ptr.String("__UserId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -370,7 +478,10 @@ func TestCheckResponseSnapshot_GetChangeset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetChangeset(context.Background(), &GetChangesetInput{})
+	got, err := svc.GetChangeset(context.Background(), &GetChangesetInput{
+		DatasetId:   ptr.String("__DatasetId__"),
+		ChangesetId: ptr.String("__ChangesetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -417,7 +528,10 @@ func TestCheckResponseSnapshot_GetDataView(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataView(context.Background(), &GetDataViewInput{})
+	got, err := svc.GetDataView(context.Background(), &GetDataViewInput{
+		DataViewId: ptr.String("__DataViewId__"),
+		DatasetId:  ptr.String("__DatasetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -466,7 +580,9 @@ func TestCheckResponseSnapshot_GetDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataset(context.Background(), &GetDatasetInput{})
+	got, err := svc.GetDataset(context.Background(), &GetDatasetInput{
+		DatasetId: ptr.String("__DatasetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -496,7 +612,10 @@ func TestCheckResponseSnapshot_GetExternalDataViewAccessDetails(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetExternalDataViewAccessDetails(context.Background(), &GetExternalDataViewAccessDetailsInput{})
+	got, err := svc.GetExternalDataViewAccessDetails(context.Background(), &GetExternalDataViewAccessDetailsInput{
+		DataViewId: ptr.String("__DataViewId__"),
+		DatasetId:  ptr.String("__DatasetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -528,7 +647,9 @@ func TestCheckResponseSnapshot_GetPermissionGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPermissionGroup(context.Background(), &GetPermissionGroupInput{})
+	got, err := svc.GetPermissionGroup(context.Background(), &GetPermissionGroupInput{
+		PermissionGroupId: ptr.String("__PermissionGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -554,7 +675,10 @@ func TestCheckResponseSnapshot_GetProgrammaticAccessCredentials(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProgrammaticAccessCredentials(context.Background(), &GetProgrammaticAccessCredentialsInput{})
+	got, err := svc.GetProgrammaticAccessCredentials(context.Background(), &GetProgrammaticAccessCredentialsInput{
+		DurationInMinutes: ptr.Int64(1),
+		EnvironmentId:     ptr.String("__EnvironmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -587,7 +711,9 @@ func TestCheckResponseSnapshot_GetUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUser(context.Background(), &GetUserInput{})
+	got, err := svc.GetUser(context.Background(), &GetUserInput{
+		UserId: ptr.String("__UserId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -610,7 +736,9 @@ func TestCheckResponseSnapshot_GetWorkingLocation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorkingLocation(context.Background(), &GetWorkingLocationInput{})
+	got, err := svc.GetWorkingLocation(context.Background(), &GetWorkingLocationInput{
+		LocationType: types.LocationType("INGESTION"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -677,7 +805,11 @@ func TestCheckResponseSnapshot_ListChangesets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListChangesets(context.Background(), &ListChangesetsInput{})
+	got, err := svc.ListChangesets(context.Background(), &ListChangesetsInput{
+		DatasetId:  ptr.String("__DatasetId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -758,7 +890,11 @@ func TestCheckResponseSnapshot_ListDataViews(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataViews(context.Background(), &ListDataViewsInput{})
+	got, err := svc.ListDataViews(context.Background(), &ListDataViewsInput{
+		DatasetId:  ptr.String("__DatasetId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -851,7 +987,10 @@ func TestCheckResponseSnapshot_ListDatasets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDatasets(context.Background(), &ListDatasetsInput{})
+	got, err := svc.ListDatasets(context.Background(), &ListDatasetsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -898,7 +1037,10 @@ func TestCheckResponseSnapshot_ListPermissionGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPermissionGroups(context.Background(), &ListPermissionGroupsInput{})
+	got, err := svc.ListPermissionGroups(context.Background(), &ListPermissionGroupsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -931,7 +1073,11 @@ func TestCheckResponseSnapshot_ListPermissionGroupsByUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPermissionGroupsByUser(context.Background(), &ListPermissionGroupsByUserInput{})
+	got, err := svc.ListPermissionGroupsByUser(context.Background(), &ListPermissionGroupsByUserInput{
+		UserId:     ptr.String("__UserId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -984,7 +1130,10 @@ func TestCheckResponseSnapshot_ListUsers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUsers(context.Background(), &ListUsersInput{})
+	got, err := svc.ListUsers(context.Background(), &ListUsersInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1029,7 +1178,11 @@ func TestCheckResponseSnapshot_ListUsersByPermissionGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUsersByPermissionGroup(context.Background(), &ListUsersByPermissionGroupInput{})
+	got, err := svc.ListUsersByPermissionGroup(context.Background(), &ListUsersByPermissionGroupInput{
+		PermissionGroupId: ptr.String("__PermissionGroupId__"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1051,7 +1204,10 @@ func TestCheckResponseSnapshot_ResetUserPassword(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResetUserPassword(context.Background(), &ResetUserPasswordInput{})
+	got, err := svc.ResetUserPassword(context.Background(), &ResetUserPasswordInput{
+		UserId:      ptr.String("__UserId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1073,7 +1229,17 @@ func TestCheckResponseSnapshot_UpdateChangeset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateChangeset(context.Background(), &UpdateChangesetInput{})
+	got, err := svc.UpdateChangeset(context.Background(), &UpdateChangesetInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		DatasetId:   ptr.String("__DatasetId__"),
+		ChangesetId: ptr.String("__ChangesetId__"),
+		SourceParams: map[string]string{
+			"key0": "__Value__",
+		},
+		FormatParams: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1094,7 +1260,34 @@ func TestCheckResponseSnapshot_UpdateDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataset(context.Background(), &UpdateDatasetInput{})
+	got, err := svc.UpdateDataset(context.Background(), &UpdateDatasetInput{
+		ClientToken:        ptr.String("__ClientToken__"),
+		DatasetId:          ptr.String("__DatasetId__"),
+		DatasetTitle:       ptr.String("__DatasetTitle__"),
+		Kind:               types.DatasetKind("TABULAR"),
+		DatasetDescription: ptr.String("__DatasetDescription__"),
+		Alias:              ptr.String("__Alias__"),
+		SchemaDefinition: &types.SchemaUnion{
+			TabularSchemaConfig: &types.SchemaDefinition{
+				Columns: []types.ColumnDefinition{
+					{
+						DataType:          types.ColumnDataType("STRING"),
+						ColumnName:        ptr.String("__ColumnName__"),
+						ColumnDescription: ptr.String("__ColumnDescription__"),
+					},
+					{
+						DataType:          types.ColumnDataType("STRING"),
+						ColumnName:        ptr.String("__ColumnName__"),
+						ColumnDescription: ptr.String("__ColumnDescription__"),
+					},
+				},
+				PrimaryKeyColumns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1115,7 +1308,16 @@ func TestCheckResponseSnapshot_UpdatePermissionGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePermissionGroup(context.Background(), &UpdatePermissionGroupInput{})
+	got, err := svc.UpdatePermissionGroup(context.Background(), &UpdatePermissionGroupInput{
+		PermissionGroupId: ptr.String("__PermissionGroupId__"),
+		Name:              ptr.String("__Name__"),
+		Description:       ptr.String("__Description__"),
+		ApplicationPermissions: []types.ApplicationPermission{
+			types.ApplicationPermission("CreateDataset"),
+			types.ApplicationPermission("CreateDataset"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1136,7 +1338,15 @@ func TestCheckResponseSnapshot_UpdateUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUser(context.Background(), &UpdateUserInput{})
+	got, err := svc.UpdateUser(context.Background(), &UpdateUserInput{
+		UserId:                ptr.String("__UserId__"),
+		Type:                  types.UserType("SUPER_USER"),
+		FirstName:             ptr.String("__FirstName__"),
+		LastName:              ptr.String("__LastName__"),
+		ApiAccess:             types.ApiAccess("ENABLED"),
+		ApiAccessPrincipalArn: ptr.String("__ApiAccessPrincipalArn__"),
+		ClientToken:           ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1157,7 +1367,11 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateUserToPermissionGroup(context.Background(), &AssociateUserToPermissionGroupInput{})
+	_, opErr := svc.AssociateUserToPermissionGroup(context.Background(), &AssociateUserToPermissionGroupInput{
+		PermissionGroupId: ptr.String("__PermissionGroupId__"),
+		UserId:            ptr.String("__UserId__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1183,7 +1397,11 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateUserToPermissionGroup(context.Background(), &AssociateUserToPermissionGroupInput{})
+	_, opErr := svc.AssociateUserToPermissionGroup(context.Background(), &AssociateUserToPermissionGroupInput{
+		PermissionGroupId: ptr.String("__PermissionGroupId__"),
+		UserId:            ptr.String("__UserId__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1208,7 +1426,11 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateUserToPermissionGroup(context.Background(), &AssociateUserToPermissionGroupInput{})
+	_, opErr := svc.AssociateUserToPermissionGroup(context.Background(), &AssociateUserToPermissionGroupInput{
+		PermissionGroupId: ptr.String("__PermissionGroupId__"),
+		UserId:            ptr.String("__UserId__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1233,7 +1455,17 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChangeset(context.Background(), &CreateChangesetInput{})
+	_, opErr := svc.CreateChangeset(context.Background(), &CreateChangesetInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		DatasetId:   ptr.String("__DatasetId__"),
+		ChangeType:  types.ChangeType("REPLACE"),
+		SourceParams: map[string]string{
+			"key0": "__Value__",
+		},
+		FormatParams: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1259,7 +1491,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateUserToPermissionGroup(context.Background(), &AssociateUserToPermissionGroupInput{})
+	_, opErr := svc.AssociateUserToPermissionGroup(context.Background(), &AssociateUserToPermissionGroupInput{
+		PermissionGroupId: ptr.String("__PermissionGroupId__"),
+		UserId:            ptr.String("__UserId__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1282,7 +1518,11 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateUserToPermissionGroup(context.Background(), &AssociateUserToPermissionGroupInput{})
+	_, opErr := svc.AssociateUserToPermissionGroup(context.Background(), &AssociateUserToPermissionGroupInput{
+		PermissionGroupId: ptr.String("__PermissionGroupId__"),
+		UserId:            ptr.String("__UserId__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1308,7 +1548,11 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateUserToPermissionGroup(context.Background(), &AssociateUserToPermissionGroupInput{})
+	_, opErr := svc.AssociateUserToPermissionGroup(context.Background(), &AssociateUserToPermissionGroupInput{
+		PermissionGroupId: ptr.String("__PermissionGroupId__"),
+		UserId:            ptr.String("__UserId__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

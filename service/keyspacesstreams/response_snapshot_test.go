@@ -268,7 +268,10 @@ func TestCheckResponseSnapshot_GetRecords(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRecords(context.Background(), &GetRecordsInput{})
+	got, err := svc.GetRecords(context.Background(), &GetRecordsInput{
+		ShardIterator: ptr.String("__ShardIterator__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -289,7 +292,12 @@ func TestCheckResponseSnapshot_GetShardIterator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetShardIterator(context.Background(), &GetShardIteratorInput{})
+	got, err := svc.GetShardIterator(context.Background(), &GetShardIteratorInput{
+		StreamArn:         ptr.String("__StreamArn__"),
+		ShardId:           ptr.String("__ShardId__"),
+		ShardIteratorType: types.ShardIteratorType("TRIM_HORIZON"),
+		SequenceNumber:    ptr.String("__SequenceNumber__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -341,7 +349,15 @@ func TestCheckResponseSnapshot_GetStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStream(context.Background(), &GetStreamInput{})
+	got, err := svc.GetStream(context.Background(), &GetStreamInput{
+		StreamArn:  ptr.String("__StreamArn__"),
+		MaxResults: ptr.Int32(1),
+		ShardFilter: &types.ShardFilter{
+			Type:    types.ShardFilterType("CHILD_SHARDS"),
+			ShardId: ptr.String("__ShardId__"),
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -376,7 +392,12 @@ func TestCheckResponseSnapshot_ListStreams(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStreams(context.Background(), &ListStreamsInput{})
+	got, err := svc.ListStreams(context.Background(), &ListStreamsInput{
+		KeyspaceName: ptr.String("__KeyspaceName__"),
+		TableName:    ptr.String("__TableName__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -397,7 +418,10 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{})
+	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{
+		ShardIterator: ptr.String("__ShardIterator__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -422,7 +446,10 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{})
+	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{
+		ShardIterator: ptr.String("__ShardIterator__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -447,7 +474,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{})
+	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{
+		ShardIterator: ptr.String("__ShardIterator__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -472,7 +502,10 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{})
+	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{
+		ShardIterator: ptr.String("__ShardIterator__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -498,7 +531,10 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{})
+	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{
+		ShardIterator: ptr.String("__ShardIterator__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

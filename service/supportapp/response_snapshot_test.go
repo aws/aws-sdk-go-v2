@@ -116,7 +116,16 @@ func TestCheckResponseSnapshot_CreateSlackChannelConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSlackChannelConfiguration(context.Background(), &CreateSlackChannelConfigurationInput{})
+	got, err := svc.CreateSlackChannelConfiguration(context.Background(), &CreateSlackChannelConfigurationInput{
+		TeamId:                          ptr.String("__TeamId__"),
+		ChannelId:                       ptr.String("__ChannelId__"),
+		ChannelName:                     ptr.String("__ChannelName__"),
+		NotifyOnCreateOrReopenCase:      ptr.Bool(true),
+		NotifyOnAddCorrespondenceToCase: ptr.Bool(true),
+		NotifyOnResolveCase:             ptr.Bool(true),
+		NotifyOnCaseSeverity:            types.NotificationSeverityLevel("none"),
+		ChannelRoleArn:                  ptr.String("__ChannelRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -154,7 +163,10 @@ func TestCheckResponseSnapshot_DeleteSlackChannelConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSlackChannelConfiguration(context.Background(), &DeleteSlackChannelConfigurationInput{})
+	got, err := svc.DeleteSlackChannelConfiguration(context.Background(), &DeleteSlackChannelConfigurationInput{
+		TeamId:    ptr.String("__TeamId__"),
+		ChannelId: ptr.String("__ChannelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -173,7 +185,9 @@ func TestCheckResponseSnapshot_DeleteSlackWorkspaceConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSlackWorkspaceConfiguration(context.Background(), &DeleteSlackWorkspaceConfigurationInput{})
+	got, err := svc.DeleteSlackWorkspaceConfiguration(context.Background(), &DeleteSlackWorkspaceConfigurationInput{
+		TeamId: ptr.String("__TeamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -237,7 +251,9 @@ func TestCheckResponseSnapshot_ListSlackChannelConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSlackChannelConfigurations(context.Background(), &ListSlackChannelConfigurationsInput{})
+	got, err := svc.ListSlackChannelConfigurations(context.Background(), &ListSlackChannelConfigurationsInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -270,7 +286,9 @@ func TestCheckResponseSnapshot_ListSlackWorkspaceConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSlackWorkspaceConfigurations(context.Background(), &ListSlackWorkspaceConfigurationsInput{})
+	got, err := svc.ListSlackWorkspaceConfigurations(context.Background(), &ListSlackWorkspaceConfigurationsInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -289,7 +307,9 @@ func TestCheckResponseSnapshot_PutAccountAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAccountAlias(context.Background(), &PutAccountAliasInput{})
+	got, err := svc.PutAccountAlias(context.Background(), &PutAccountAliasInput{
+		AccountAlias: ptr.String("__AccountAlias__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -312,7 +332,9 @@ func TestCheckResponseSnapshot_RegisterSlackWorkspaceForOrganization(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterSlackWorkspaceForOrganization(context.Background(), &RegisterSlackWorkspaceForOrganizationInput{})
+	got, err := svc.RegisterSlackWorkspaceForOrganization(context.Background(), &RegisterSlackWorkspaceForOrganizationInput{
+		TeamId: ptr.String("__TeamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -340,7 +362,16 @@ func TestCheckResponseSnapshot_UpdateSlackChannelConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSlackChannelConfiguration(context.Background(), &UpdateSlackChannelConfigurationInput{})
+	got, err := svc.UpdateSlackChannelConfiguration(context.Background(), &UpdateSlackChannelConfigurationInput{
+		TeamId:                          ptr.String("__TeamId__"),
+		ChannelId:                       ptr.String("__ChannelId__"),
+		ChannelName:                     ptr.String("__ChannelName__"),
+		NotifyOnCreateOrReopenCase:      ptr.Bool(true),
+		NotifyOnAddCorrespondenceToCase: ptr.Bool(true),
+		NotifyOnResolveCase:             ptr.Bool(true),
+		NotifyOnCaseSeverity:            types.NotificationSeverityLevel("none"),
+		ChannelRoleArn:                  ptr.String("__ChannelRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -361,7 +392,16 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSlackChannelConfiguration(context.Background(), &CreateSlackChannelConfigurationInput{})
+	_, opErr := svc.CreateSlackChannelConfiguration(context.Background(), &CreateSlackChannelConfigurationInput{
+		TeamId:                          ptr.String("__TeamId__"),
+		ChannelId:                       ptr.String("__ChannelId__"),
+		ChannelName:                     ptr.String("__ChannelName__"),
+		NotifyOnCreateOrReopenCase:      ptr.Bool(true),
+		NotifyOnAddCorrespondenceToCase: ptr.Bool(true),
+		NotifyOnResolveCase:             ptr.Bool(true),
+		NotifyOnCaseSeverity:            types.NotificationSeverityLevel("none"),
+		ChannelRoleArn:                  ptr.String("__ChannelRoleArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -386,7 +426,16 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSlackChannelConfiguration(context.Background(), &CreateSlackChannelConfigurationInput{})
+	_, opErr := svc.CreateSlackChannelConfiguration(context.Background(), &CreateSlackChannelConfigurationInput{
+		TeamId:                          ptr.String("__TeamId__"),
+		ChannelId:                       ptr.String("__ChannelId__"),
+		ChannelName:                     ptr.String("__ChannelName__"),
+		NotifyOnCreateOrReopenCase:      ptr.Bool(true),
+		NotifyOnAddCorrespondenceToCase: ptr.Bool(true),
+		NotifyOnResolveCase:             ptr.Bool(true),
+		NotifyOnCaseSeverity:            types.NotificationSeverityLevel("none"),
+		ChannelRoleArn:                  ptr.String("__ChannelRoleArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -411,7 +460,16 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSlackChannelConfiguration(context.Background(), &CreateSlackChannelConfigurationInput{})
+	_, opErr := svc.CreateSlackChannelConfiguration(context.Background(), &CreateSlackChannelConfigurationInput{
+		TeamId:                          ptr.String("__TeamId__"),
+		ChannelId:                       ptr.String("__ChannelId__"),
+		ChannelName:                     ptr.String("__ChannelName__"),
+		NotifyOnCreateOrReopenCase:      ptr.Bool(true),
+		NotifyOnAddCorrespondenceToCase: ptr.Bool(true),
+		NotifyOnResolveCase:             ptr.Bool(true),
+		NotifyOnCaseSeverity:            types.NotificationSeverityLevel("none"),
+		ChannelRoleArn:                  ptr.String("__ChannelRoleArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -461,7 +519,16 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSlackChannelConfiguration(context.Background(), &CreateSlackChannelConfigurationInput{})
+	_, opErr := svc.CreateSlackChannelConfiguration(context.Background(), &CreateSlackChannelConfigurationInput{
+		TeamId:                          ptr.String("__TeamId__"),
+		ChannelId:                       ptr.String("__ChannelId__"),
+		ChannelName:                     ptr.String("__ChannelName__"),
+		NotifyOnCreateOrReopenCase:      ptr.Bool(true),
+		NotifyOnAddCorrespondenceToCase: ptr.Bool(true),
+		NotifyOnResolveCase:             ptr.Bool(true),
+		NotifyOnCaseSeverity:            types.NotificationSeverityLevel("none"),
+		ChannelRoleArn:                  ptr.String("__ChannelRoleArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -486,7 +553,16 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSlackChannelConfiguration(context.Background(), &CreateSlackChannelConfigurationInput{})
+	_, opErr := svc.CreateSlackChannelConfiguration(context.Background(), &CreateSlackChannelConfigurationInput{
+		TeamId:                          ptr.String("__TeamId__"),
+		ChannelId:                       ptr.String("__ChannelId__"),
+		ChannelName:                     ptr.String("__ChannelName__"),
+		NotifyOnCreateOrReopenCase:      ptr.Bool(true),
+		NotifyOnAddCorrespondenceToCase: ptr.Bool(true),
+		NotifyOnResolveCase:             ptr.Bool(true),
+		NotifyOnCaseSeverity:            types.NotificationSeverityLevel("none"),
+		ChannelRoleArn:                  ptr.String("__ChannelRoleArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

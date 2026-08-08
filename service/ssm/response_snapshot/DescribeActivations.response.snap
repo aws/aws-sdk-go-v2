@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.DescribeActivations
+
+{"ActivationList":[{"ActivationId":"__ActivationId__","CreatedDate":946684800,"DefaultInstanceName":"__DefaultInstanceName__","Description":"__Description__","ExpirationDate":946684800,"Expired":true,"IamRole":"__IamRole__","RegistrationLimit":1,"RegistrationsCount":1,"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]},{"ActivationId":"__ActivationId__","CreatedDate":946684800,"DefaultInstanceName":"__DefaultInstanceName__","Description":"__Description__","ExpirationDate":946684800,"Expired":true,"IamRole":"__IamRole__","RegistrationLimit":1,"RegistrationsCount":1,"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}],"NextToken":"__NextToken__"}

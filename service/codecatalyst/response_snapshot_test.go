@@ -122,7 +122,10 @@ func TestCheckResponseSnapshot_CreateAccessToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAccessToken(context.Background(), &CreateAccessTokenInput{})
+	got, err := svc.CreateAccessToken(context.Background(), &CreateAccessTokenInput{
+		Name:        ptr.String("__Name__"),
+		ExpiresTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -146,7 +149,38 @@ func TestCheckResponseSnapshot_CreateDevEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDevEnvironment(context.Background(), &CreateDevEnvironmentInput{})
+	got, err := svc.CreateDevEnvironment(context.Background(), &CreateDevEnvironmentInput{
+		SpaceName:   ptr.String("__SpaceName__"),
+		ProjectName: ptr.String("__ProjectName__"),
+		Repositories: []types.RepositoryInput{
+			{
+				RepositoryName: ptr.String("__RepositoryName__"),
+				BranchName:     ptr.String("__BranchName__"),
+			},
+			{
+				RepositoryName: ptr.String("__RepositoryName__"),
+				BranchName:     ptr.String("__BranchName__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Alias:       ptr.String("__Alias__"),
+		Ides: []types.IdeConfiguration{
+			{
+				Runtime: ptr.String("__Runtime__"),
+				Name:    ptr.String("__Name__"),
+			},
+			{
+				Runtime: ptr.String("__Runtime__"),
+				Name:    ptr.String("__Name__"),
+			},
+		},
+		InstanceType:             types.InstanceType("dev.standard1.small"),
+		InactivityTimeoutMinutes: 1,
+		PersistentStorage: &types.PersistentStorageConfiguration{
+			SizeInGiB: ptr.Int32(1),
+		},
+		VpcConnectionName: ptr.String("__VpcConnectionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -170,7 +204,11 @@ func TestCheckResponseSnapshot_CreateProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProject(context.Background(), &CreateProjectInput{})
+	got, err := svc.CreateProject(context.Background(), &CreateProjectInput{
+		SpaceName:   ptr.String("__SpaceName__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -194,7 +232,12 @@ func TestCheckResponseSnapshot_CreateSourceRepository(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSourceRepository(context.Background(), &CreateSourceRepositoryInput{})
+	got, err := svc.CreateSourceRepository(context.Background(), &CreateSourceRepositoryInput{
+		SpaceName:   ptr.String("__SpaceName__"),
+		ProjectName: ptr.String("__ProjectName__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -218,7 +261,13 @@ func TestCheckResponseSnapshot_CreateSourceRepositoryBranch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSourceRepositoryBranch(context.Background(), &CreateSourceRepositoryBranchInput{})
+	got, err := svc.CreateSourceRepositoryBranch(context.Background(), &CreateSourceRepositoryBranchInput{
+		SpaceName:            ptr.String("__SpaceName__"),
+		ProjectName:          ptr.String("__ProjectName__"),
+		SourceRepositoryName: ptr.String("__SourceRepositoryName__"),
+		Name:                 ptr.String("__Name__"),
+		HeadCommitId:         ptr.String("__HeadCommitId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -237,7 +286,9 @@ func TestCheckResponseSnapshot_DeleteAccessToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAccessToken(context.Background(), &DeleteAccessTokenInput{})
+	got, err := svc.DeleteAccessToken(context.Background(), &DeleteAccessTokenInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -260,7 +311,11 @@ func TestCheckResponseSnapshot_DeleteDevEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDevEnvironment(context.Background(), &DeleteDevEnvironmentInput{})
+	got, err := svc.DeleteDevEnvironment(context.Background(), &DeleteDevEnvironmentInput{
+		SpaceName:   ptr.String("__SpaceName__"),
+		ProjectName: ptr.String("__ProjectName__"),
+		Id:          ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -283,7 +338,10 @@ func TestCheckResponseSnapshot_DeleteProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProject(context.Background(), &DeleteProjectInput{})
+	got, err := svc.DeleteProject(context.Background(), &DeleteProjectInput{
+		SpaceName: ptr.String("__SpaceName__"),
+		Name:      ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -306,7 +364,11 @@ func TestCheckResponseSnapshot_DeleteSourceRepository(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSourceRepository(context.Background(), &DeleteSourceRepositoryInput{})
+	got, err := svc.DeleteSourceRepository(context.Background(), &DeleteSourceRepositoryInput{
+		SpaceName:   ptr.String("__SpaceName__"),
+		ProjectName: ptr.String("__ProjectName__"),
+		Name:        ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -328,7 +390,9 @@ func TestCheckResponseSnapshot_DeleteSpace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSpace(context.Background(), &DeleteSpaceInput{})
+	got, err := svc.DeleteSpace(context.Background(), &DeleteSpaceInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -382,7 +446,11 @@ func TestCheckResponseSnapshot_GetDevEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDevEnvironment(context.Background(), &GetDevEnvironmentInput{})
+	got, err := svc.GetDevEnvironment(context.Background(), &GetDevEnvironmentInput{
+		SpaceName:   ptr.String("__SpaceName__"),
+		ProjectName: ptr.String("__ProjectName__"),
+		Id:          ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -406,7 +474,10 @@ func TestCheckResponseSnapshot_GetProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProject(context.Background(), &GetProjectInput{})
+	got, err := svc.GetProject(context.Background(), &GetProjectInput{
+		SpaceName: ptr.String("__SpaceName__"),
+		Name:      ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -432,7 +503,11 @@ func TestCheckResponseSnapshot_GetSourceRepository(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSourceRepository(context.Background(), &GetSourceRepositoryInput{})
+	got, err := svc.GetSourceRepository(context.Background(), &GetSourceRepositoryInput{
+		SpaceName:   ptr.String("__SpaceName__"),
+		ProjectName: ptr.String("__ProjectName__"),
+		Name:        ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -453,7 +528,11 @@ func TestCheckResponseSnapshot_GetSourceRepositoryCloneUrls(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSourceRepositoryCloneUrls(context.Background(), &GetSourceRepositoryCloneUrlsInput{})
+	got, err := svc.GetSourceRepositoryCloneUrls(context.Background(), &GetSourceRepositoryCloneUrlsInput{
+		SpaceName:            ptr.String("__SpaceName__"),
+		ProjectName:          ptr.String("__ProjectName__"),
+		SourceRepositoryName: ptr.String("__SourceRepositoryName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -477,7 +556,9 @@ func TestCheckResponseSnapshot_GetSpace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSpace(context.Background(), &GetSpaceInput{})
+	got, err := svc.GetSpace(context.Background(), &GetSpaceInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -501,7 +582,9 @@ func TestCheckResponseSnapshot_GetSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSubscription(context.Background(), &GetSubscriptionInput{})
+	got, err := svc.GetSubscription(context.Background(), &GetSubscriptionInput{
+		SpaceName: ptr.String("__SpaceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -529,7 +612,10 @@ func TestCheckResponseSnapshot_GetUserDetails(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUserDetails(context.Background(), &GetUserDetailsInput{})
+	got, err := svc.GetUserDetails(context.Background(), &GetUserDetailsInput{
+		Id:       ptr.String("__Id__"),
+		UserName: ptr.String("__UserName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -562,7 +648,11 @@ func TestCheckResponseSnapshot_GetWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorkflow(context.Background(), &GetWorkflowInput{})
+	got, err := svc.GetWorkflow(context.Background(), &GetWorkflowInput{
+		SpaceName:   ptr.String("__SpaceName__"),
+		Id:          ptr.String("__Id__"),
+		ProjectName: ptr.String("__ProjectName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -594,7 +684,11 @@ func TestCheckResponseSnapshot_GetWorkflowRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorkflowRun(context.Background(), &GetWorkflowRunInput{})
+	got, err := svc.GetWorkflowRun(context.Background(), &GetWorkflowRunInput{
+		SpaceName:   ptr.String("__SpaceName__"),
+		Id:          ptr.String("__Id__"),
+		ProjectName: ptr.String("__ProjectName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -627,7 +721,10 @@ func TestCheckResponseSnapshot_ListAccessTokens(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccessTokens(context.Background(), &ListAccessTokensInput{})
+	got, err := svc.ListAccessTokens(context.Background(), &ListAccessTokensInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -664,7 +761,13 @@ func TestCheckResponseSnapshot_ListDevEnvironmentSessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDevEnvironmentSessions(context.Background(), &ListDevEnvironmentSessionsInput{})
+	got, err := svc.ListDevEnvironmentSessions(context.Background(), &ListDevEnvironmentSessionsInput{
+		SpaceName:        ptr.String("__SpaceName__"),
+		ProjectName:      ptr.String("__ProjectName__"),
+		DevEnvironmentId: ptr.String("__DevEnvironmentId__"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -759,7 +862,30 @@ func TestCheckResponseSnapshot_ListDevEnvironments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDevEnvironments(context.Background(), &ListDevEnvironmentsInput{})
+	got, err := svc.ListDevEnvironments(context.Background(), &ListDevEnvironmentsInput{
+		SpaceName:   ptr.String("__SpaceName__"),
+		ProjectName: ptr.String("__ProjectName__"),
+		Filters: []types.Filter{
+			{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ComparisonOperator: ptr.String("__ComparisonOperator__"),
+			},
+			{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ComparisonOperator: ptr.String("__ComparisonOperator__"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -844,7 +970,14 @@ func TestCheckResponseSnapshot_ListEventLogs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEventLogs(context.Background(), &ListEventLogsInput{})
+	got, err := svc.ListEventLogs(context.Background(), &ListEventLogsInput{
+		SpaceName:  ptr.String("__SpaceName__"),
+		StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EventName:  ptr.String("__EventName__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -877,7 +1010,29 @@ func TestCheckResponseSnapshot_ListProjects(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProjects(context.Background(), &ListProjectsInput{})
+	got, err := svc.ListProjects(context.Background(), &ListProjectsInput{
+		SpaceName:  ptr.String("__SpaceName__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Filters: []types.ProjectListFilter{
+			{
+				Key: types.FilterKey("hasAccessTo"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ComparisonOperator: types.ComparisonOperator("EQ"),
+			},
+			{
+				Key: types.FilterKey("hasAccessTo"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ComparisonOperator: types.ComparisonOperator("EQ"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -914,7 +1069,12 @@ func TestCheckResponseSnapshot_ListSourceRepositories(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSourceRepositories(context.Background(), &ListSourceRepositoriesInput{})
+	got, err := svc.ListSourceRepositories(context.Background(), &ListSourceRepositoriesInput{
+		SpaceName:   ptr.String("__SpaceName__"),
+		ProjectName: ptr.String("__ProjectName__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -949,7 +1109,13 @@ func TestCheckResponseSnapshot_ListSourceRepositoryBranches(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSourceRepositoryBranches(context.Background(), &ListSourceRepositoryBranchesInput{})
+	got, err := svc.ListSourceRepositoryBranches(context.Background(), &ListSourceRepositoryBranchesInput{
+		SpaceName:            ptr.String("__SpaceName__"),
+		ProjectName:          ptr.String("__ProjectName__"),
+		SourceRepositoryName: ptr.String("__SourceRepositoryName__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -984,7 +1150,9 @@ func TestCheckResponseSnapshot_ListSpaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSpaces(context.Background(), &ListSpacesInput{})
+	got, err := svc.ListSpaces(context.Background(), &ListSpacesInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1033,7 +1201,17 @@ func TestCheckResponseSnapshot_ListWorkflowRuns(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkflowRuns(context.Background(), &ListWorkflowRunsInput{})
+	got, err := svc.ListWorkflowRuns(context.Background(), &ListWorkflowRunsInput{
+		SpaceName:   ptr.String("__SpaceName__"),
+		WorkflowId:  ptr.String("__WorkflowId__"),
+		ProjectName: ptr.String("__ProjectName__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		SortBy: []types.WorkflowRunSortCriteria{
+			{},
+			{},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1082,7 +1260,16 @@ func TestCheckResponseSnapshot_ListWorkflows(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkflows(context.Background(), &ListWorkflowsInput{})
+	got, err := svc.ListWorkflows(context.Background(), &ListWorkflowsInput{
+		SpaceName:   ptr.String("__SpaceName__"),
+		ProjectName: ptr.String("__ProjectName__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		SortBy: []types.WorkflowSortCriteria{
+			{},
+			{},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1106,7 +1293,23 @@ func TestCheckResponseSnapshot_StartDevEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartDevEnvironment(context.Background(), &StartDevEnvironmentInput{})
+	got, err := svc.StartDevEnvironment(context.Background(), &StartDevEnvironmentInput{
+		SpaceName:   ptr.String("__SpaceName__"),
+		ProjectName: ptr.String("__ProjectName__"),
+		Id:          ptr.String("__Id__"),
+		Ides: []types.IdeConfiguration{
+			{
+				Runtime: ptr.String("__Runtime__"),
+				Name:    ptr.String("__Name__"),
+			},
+			{
+				Runtime: ptr.String("__Runtime__"),
+				Name:    ptr.String("__Name__"),
+			},
+		},
+		InstanceType:             types.InstanceType("dev.standard1.small"),
+		InactivityTimeoutMinutes: 1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1134,7 +1337,21 @@ func TestCheckResponseSnapshot_StartDevEnvironmentSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartDevEnvironmentSession(context.Background(), &StartDevEnvironmentSessionInput{})
+	got, err := svc.StartDevEnvironmentSession(context.Background(), &StartDevEnvironmentSessionInput{
+		SpaceName:   ptr.String("__SpaceName__"),
+		ProjectName: ptr.String("__ProjectName__"),
+		Id:          ptr.String("__Id__"),
+		SessionConfiguration: &types.DevEnvironmentSessionConfiguration{
+			SessionType: types.DevEnvironmentSessionType("SSM"),
+			ExecuteCommandSessionConfiguration: &types.ExecuteCommandSessionConfiguration{
+				Command: ptr.String("__Command__"),
+				Arguments: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1158,7 +1375,12 @@ func TestCheckResponseSnapshot_StartWorkflowRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartWorkflowRun(context.Background(), &StartWorkflowRunInput{})
+	got, err := svc.StartWorkflowRun(context.Background(), &StartWorkflowRunInput{
+		SpaceName:   ptr.String("__SpaceName__"),
+		ProjectName: ptr.String("__ProjectName__"),
+		WorkflowId:  ptr.String("__WorkflowId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1182,7 +1404,11 @@ func TestCheckResponseSnapshot_StopDevEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopDevEnvironment(context.Background(), &StopDevEnvironmentInput{})
+	got, err := svc.StopDevEnvironment(context.Background(), &StopDevEnvironmentInput{
+		SpaceName:   ptr.String("__SpaceName__"),
+		ProjectName: ptr.String("__ProjectName__"),
+		Id:          ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1206,7 +1432,12 @@ func TestCheckResponseSnapshot_StopDevEnvironmentSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopDevEnvironmentSession(context.Background(), &StopDevEnvironmentSessionInput{})
+	got, err := svc.StopDevEnvironmentSession(context.Background(), &StopDevEnvironmentSessionInput{
+		SpaceName:   ptr.String("__SpaceName__"),
+		ProjectName: ptr.String("__ProjectName__"),
+		Id:          ptr.String("__Id__"),
+		SessionId:   ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1243,7 +1474,25 @@ func TestCheckResponseSnapshot_UpdateDevEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDevEnvironment(context.Background(), &UpdateDevEnvironmentInput{})
+	got, err := svc.UpdateDevEnvironment(context.Background(), &UpdateDevEnvironmentInput{
+		SpaceName:   ptr.String("__SpaceName__"),
+		ProjectName: ptr.String("__ProjectName__"),
+		Id:          ptr.String("__Id__"),
+		Alias:       ptr.String("__Alias__"),
+		Ides: []types.IdeConfiguration{
+			{
+				Runtime: ptr.String("__Runtime__"),
+				Name:    ptr.String("__Name__"),
+			},
+			{
+				Runtime: ptr.String("__Runtime__"),
+				Name:    ptr.String("__Name__"),
+			},
+		},
+		InstanceType:             types.InstanceType("dev.standard1.small"),
+		InactivityTimeoutMinutes: 1,
+		ClientToken:              ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1267,7 +1516,11 @@ func TestCheckResponseSnapshot_UpdateProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProject(context.Background(), &UpdateProjectInput{})
+	got, err := svc.UpdateProject(context.Background(), &UpdateProjectInput{
+		SpaceName:   ptr.String("__SpaceName__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1290,7 +1543,10 @@ func TestCheckResponseSnapshot_UpdateSpace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSpace(context.Background(), &UpdateSpaceInput{})
+	got, err := svc.UpdateSpace(context.Background(), &UpdateSpaceInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1332,7 +1588,10 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAccessToken(context.Background(), &CreateAccessTokenInput{})
+	_, opErr := svc.CreateAccessToken(context.Background(), &CreateAccessTokenInput{
+		Name:        ptr.String("__Name__"),
+		ExpiresTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1357,7 +1616,10 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAccessToken(context.Background(), &CreateAccessTokenInput{})
+	_, opErr := svc.CreateAccessToken(context.Background(), &CreateAccessTokenInput{
+		Name:        ptr.String("__Name__"),
+		ExpiresTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1382,7 +1644,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAccessToken(context.Background(), &CreateAccessTokenInput{})
+	_, opErr := svc.CreateAccessToken(context.Background(), &CreateAccessTokenInput{
+		Name:        ptr.String("__Name__"),
+		ExpiresTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1407,7 +1672,10 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAccessToken(context.Background(), &CreateAccessTokenInput{})
+	_, opErr := svc.CreateAccessToken(context.Background(), &CreateAccessTokenInput{
+		Name:        ptr.String("__Name__"),
+		ExpiresTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1432,7 +1700,10 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAccessToken(context.Background(), &CreateAccessTokenInput{})
+	_, opErr := svc.CreateAccessToken(context.Background(), &CreateAccessTokenInput{
+		Name:        ptr.String("__Name__"),
+		ExpiresTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1457,7 +1728,10 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAccessToken(context.Background(), &CreateAccessTokenInput{})
+	_, opErr := svc.CreateAccessToken(context.Background(), &CreateAccessTokenInput{
+		Name:        ptr.String("__Name__"),
+		ExpiresTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

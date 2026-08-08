@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","id":"__Id__","ipAddressType":"IPV4","ipv4AddressesPerEni":1,"lastUpdatedAt":"2000-01-01T00:00:00Z","managedBy":"__ManagedBy__","name":"__Name__","resourceConfigDnsResolution":"IN_VPC","securityGroupIds":["__Member__","__Member__"],"serviceManaged":true,"status":"ACTIVE","subnetIds":["__Member__","__Member__"],"vpcId":"__VpcId__"}

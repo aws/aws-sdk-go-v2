@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSPoseidonService_V2015_11_01.ListServerNeighbors
+
+{"knownDependencyCount":1,"neighbors":[{"connectionsCount":1,"destinationPort":1,"destinationServerId":"__DestinationServerId__","sourceServerId":"__SourceServerId__","transportProtocol":"__TransportProtocol__"},{"connectionsCount":1,"destinationPort":1,"destinationServerId":"__DestinationServerId__","sourceServerId":"__SourceServerId__","transportProtocol":"__TransportProtocol__"}],"nextToken":"__NextToken__"}

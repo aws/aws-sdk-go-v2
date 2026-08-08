@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Blueprints":[{"BlueprintName":"__BlueprintName__","DisplayDescription":"__DisplayDescription__","DisplayName":"__DisplayName__","Service":"__Service__","UseCase":"__UseCase__"},{"BlueprintName":"__BlueprintName__","DisplayDescription":"__DisplayDescription__","DisplayName":"__DisplayName__","Service":"__Service__","UseCase":"__UseCase__"}]}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"artifactSummaries":[{"artifactId":"__ArtifactId__","artifactType":"TXT","fileName":"__FileName__"},{"artifactId":"__ArtifactId__","artifactType":"TXT","fileName":"__FileName__"}],"nextToken":"__NextToken__"}

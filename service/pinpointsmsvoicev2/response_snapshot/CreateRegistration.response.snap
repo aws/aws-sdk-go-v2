@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.CreateRegistration
+
+{"AdditionalAttributes":{"key0":"__Value__"},"CreatedTimestamp":946684800,"CurrentVersionNumber":1,"RegistrationArn":"__RegistrationArn__","RegistrationId":"__RegistrationId__","RegistrationStatus":"CREATED","RegistrationType":"__RegistrationType__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

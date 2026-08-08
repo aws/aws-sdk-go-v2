@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"ResourceInUseException","exampleReference":{"name":"__Name__","version":"__Version__"},"referenceType":"Intent"}

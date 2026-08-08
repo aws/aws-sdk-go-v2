@@ -117,7 +117,11 @@ func TestCheckResponseSnapshot_AssociateDelegateToResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateDelegateToResource(context.Background(), &AssociateDelegateToResourceInput{})
+	got, err := svc.AssociateDelegateToResource(context.Background(), &AssociateDelegateToResourceInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		ResourceId:     ptr.String("__ResourceId__"),
+		EntityId:       ptr.String("__EntityId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -136,7 +140,11 @@ func TestCheckResponseSnapshot_AssociateMemberToGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateMemberToGroup(context.Background(), &AssociateMemberToGroupInput{})
+	got, err := svc.AssociateMemberToGroup(context.Background(), &AssociateMemberToGroupInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		GroupId:        ptr.String("__GroupId__"),
+		MemberId:       ptr.String("__MemberId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -158,7 +166,10 @@ func TestCheckResponseSnapshot_AssumeImpersonationRole(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssumeImpersonationRole(context.Background(), &AssumeImpersonationRoleInput{})
+	got, err := svc.AssumeImpersonationRole(context.Background(), &AssumeImpersonationRoleInput{
+		OrganizationId:      ptr.String("__OrganizationId__"),
+		ImpersonationRoleId: ptr.String("__ImpersonationRoleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -177,7 +188,11 @@ func TestCheckResponseSnapshot_CancelMailboxExportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelMailboxExportJob(context.Background(), &CancelMailboxExportJobInput{})
+	got, err := svc.CancelMailboxExportJob(context.Background(), &CancelMailboxExportJobInput{
+		ClientToken:    ptr.String("__ClientToken__"),
+		JobId:          ptr.String("__JobId__"),
+		OrganizationId: ptr.String("__OrganizationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -196,7 +211,11 @@ func TestCheckResponseSnapshot_CreateAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAlias(context.Background(), &CreateAliasInput{})
+	got, err := svc.CreateAlias(context.Background(), &CreateAliasInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		EntityId:       ptr.String("__EntityId__"),
+		Alias:          ptr.String("__Alias__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -215,7 +234,19 @@ func TestCheckResponseSnapshot_CreateAvailabilityConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAvailabilityConfiguration(context.Background(), &CreateAvailabilityConfigurationInput{})
+	got, err := svc.CreateAvailabilityConfiguration(context.Background(), &CreateAvailabilityConfigurationInput{
+		ClientToken:    ptr.String("__ClientToken__"),
+		OrganizationId: ptr.String("__OrganizationId__"),
+		DomainName:     ptr.String("__DomainName__"),
+		EwsProvider: &types.EwsAvailabilityProvider{
+			EwsEndpoint: ptr.String("__EwsEndpoint__"),
+			EwsUsername: ptr.String("__EwsUsername__"),
+			EwsPassword: ptr.String("__EwsPassword__"),
+		},
+		LambdaProvider: &types.LambdaAvailabilityProvider{
+			LambdaArn: ptr.String("__LambdaArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -236,7 +267,11 @@ func TestCheckResponseSnapshot_CreateGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGroup(context.Background(), &CreateGroupInput{})
+	got, err := svc.CreateGroup(context.Background(), &CreateGroupInput{
+		OrganizationId:              ptr.String("__OrganizationId__"),
+		Name:                        ptr.String("__Name__"),
+		HiddenFromGlobalAddressList: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -257,7 +292,11 @@ func TestCheckResponseSnapshot_CreateIdentityCenterApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIdentityCenterApplication(context.Background(), &CreateIdentityCenterApplicationInput{})
+	got, err := svc.CreateIdentityCenterApplication(context.Background(), &CreateIdentityCenterApplicationInput{
+		Name:        ptr.String("__Name__"),
+		InstanceArn: ptr.String("__InstanceArn__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -278,7 +317,43 @@ func TestCheckResponseSnapshot_CreateImpersonationRole(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateImpersonationRole(context.Background(), &CreateImpersonationRoleInput{})
+	got, err := svc.CreateImpersonationRole(context.Background(), &CreateImpersonationRoleInput{
+		ClientToken:    ptr.String("__ClientToken__"),
+		OrganizationId: ptr.String("__OrganizationId__"),
+		Name:           ptr.String("__Name__"),
+		Type:           types.ImpersonationRoleType("FULL_ACCESS"),
+		Description:    ptr.String("__Description__"),
+		Rules: []types.ImpersonationRule{
+			{
+				ImpersonationRuleId: ptr.String("__ImpersonationRuleId__"),
+				Name:                ptr.String("__Name__"),
+				Description:         ptr.String("__Description__"),
+				Effect:              types.AccessEffect("ALLOW"),
+				TargetUsers: []string{
+					"__Member__",
+					"__Member__",
+				},
+				NotTargetUsers: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				ImpersonationRuleId: ptr.String("__ImpersonationRuleId__"),
+				Name:                ptr.String("__Name__"),
+				Description:         ptr.String("__Description__"),
+				Effect:              types.AccessEffect("ALLOW"),
+				TargetUsers: []string{
+					"__Member__",
+					"__Member__",
+				},
+				NotTargetUsers: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -299,7 +374,45 @@ func TestCheckResponseSnapshot_CreateMobileDeviceAccessRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMobileDeviceAccessRule(context.Background(), &CreateMobileDeviceAccessRuleInput{})
+	got, err := svc.CreateMobileDeviceAccessRule(context.Background(), &CreateMobileDeviceAccessRuleInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+		Name:           ptr.String("__Name__"),
+		Description:    ptr.String("__Description__"),
+		Effect:         types.MobileDeviceAccessRuleEffect("ALLOW"),
+		DeviceTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NotDeviceTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DeviceModels: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NotDeviceModels: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DeviceOperatingSystems: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NotDeviceOperatingSystems: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DeviceUserAgents: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NotDeviceUserAgents: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -320,7 +433,23 @@ func TestCheckResponseSnapshot_CreateOrganization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateOrganization(context.Background(), &CreateOrganizationInput{})
+	got, err := svc.CreateOrganization(context.Background(), &CreateOrganizationInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		Alias:       ptr.String("__Alias__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Domains: []types.Domain{
+			{
+				DomainName:   ptr.String("__DomainName__"),
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
+			{
+				DomainName:   ptr.String("__DomainName__"),
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
+		},
+		KmsKeyArn:              ptr.String("__KmsKeyArn__"),
+		EnableInteroperability: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -341,7 +470,13 @@ func TestCheckResponseSnapshot_CreateResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateResource(context.Background(), &CreateResourceInput{})
+	got, err := svc.CreateResource(context.Background(), &CreateResourceInput{
+		OrganizationId:              ptr.String("__OrganizationId__"),
+		Name:                        ptr.String("__Name__"),
+		Type:                        types.ResourceType("ROOM"),
+		Description:                 ptr.String("__Description__"),
+		HiddenFromGlobalAddressList: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -362,7 +497,17 @@ func TestCheckResponseSnapshot_CreateUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateUser(context.Background(), &CreateUserInput{})
+	got, err := svc.CreateUser(context.Background(), &CreateUserInput{
+		OrganizationId:              ptr.String("__OrganizationId__"),
+		Name:                        ptr.String("__Name__"),
+		DisplayName:                 ptr.String("__DisplayName__"),
+		Password:                    ptr.String("__Password__"),
+		Role:                        types.UserRole("USER"),
+		FirstName:                   ptr.String("__FirstName__"),
+		LastName:                    ptr.String("__LastName__"),
+		HiddenFromGlobalAddressList: true,
+		IdentityProviderUserId:      ptr.String("__IdentityProviderUserId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -381,7 +526,10 @@ func TestCheckResponseSnapshot_DeleteAccessControlRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAccessControlRule(context.Background(), &DeleteAccessControlRuleInput{})
+	got, err := svc.DeleteAccessControlRule(context.Background(), &DeleteAccessControlRuleInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		Name:           ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -400,7 +548,11 @@ func TestCheckResponseSnapshot_DeleteAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAlias(context.Background(), &DeleteAliasInput{})
+	got, err := svc.DeleteAlias(context.Background(), &DeleteAliasInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		EntityId:       ptr.String("__EntityId__"),
+		Alias:          ptr.String("__Alias__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -419,7 +571,10 @@ func TestCheckResponseSnapshot_DeleteAvailabilityConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAvailabilityConfiguration(context.Background(), &DeleteAvailabilityConfigurationInput{})
+	got, err := svc.DeleteAvailabilityConfiguration(context.Background(), &DeleteAvailabilityConfigurationInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		DomainName:     ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -438,7 +593,9 @@ func TestCheckResponseSnapshot_DeleteEmailMonitoringConfiguration(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEmailMonitoringConfiguration(context.Background(), &DeleteEmailMonitoringConfigurationInput{})
+	got, err := svc.DeleteEmailMonitoringConfiguration(context.Background(), &DeleteEmailMonitoringConfigurationInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -457,7 +614,10 @@ func TestCheckResponseSnapshot_DeleteGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGroup(context.Background(), &DeleteGroupInput{})
+	got, err := svc.DeleteGroup(context.Background(), &DeleteGroupInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		GroupId:        ptr.String("__GroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -476,7 +636,9 @@ func TestCheckResponseSnapshot_DeleteIdentityCenterApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIdentityCenterApplication(context.Background(), &DeleteIdentityCenterApplicationInput{})
+	got, err := svc.DeleteIdentityCenterApplication(context.Background(), &DeleteIdentityCenterApplicationInput{
+		ApplicationArn: ptr.String("__ApplicationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -495,7 +657,9 @@ func TestCheckResponseSnapshot_DeleteIdentityProviderConfiguration(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIdentityProviderConfiguration(context.Background(), &DeleteIdentityProviderConfigurationInput{})
+	got, err := svc.DeleteIdentityProviderConfiguration(context.Background(), &DeleteIdentityProviderConfigurationInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -514,7 +678,10 @@ func TestCheckResponseSnapshot_DeleteImpersonationRole(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteImpersonationRole(context.Background(), &DeleteImpersonationRoleInput{})
+	got, err := svc.DeleteImpersonationRole(context.Background(), &DeleteImpersonationRoleInput{
+		OrganizationId:      ptr.String("__OrganizationId__"),
+		ImpersonationRoleId: ptr.String("__ImpersonationRoleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -533,7 +700,11 @@ func TestCheckResponseSnapshot_DeleteMailboxPermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMailboxPermissions(context.Background(), &DeleteMailboxPermissionsInput{})
+	got, err := svc.DeleteMailboxPermissions(context.Background(), &DeleteMailboxPermissionsInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		EntityId:       ptr.String("__EntityId__"),
+		GranteeId:      ptr.String("__GranteeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -552,7 +723,11 @@ func TestCheckResponseSnapshot_DeleteMobileDeviceAccessOverride(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMobileDeviceAccessOverride(context.Background(), &DeleteMobileDeviceAccessOverrideInput{})
+	got, err := svc.DeleteMobileDeviceAccessOverride(context.Background(), &DeleteMobileDeviceAccessOverrideInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		UserId:         ptr.String("__UserId__"),
+		DeviceId:       ptr.String("__DeviceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -571,7 +746,10 @@ func TestCheckResponseSnapshot_DeleteMobileDeviceAccessRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMobileDeviceAccessRule(context.Background(), &DeleteMobileDeviceAccessRuleInput{})
+	got, err := svc.DeleteMobileDeviceAccessRule(context.Background(), &DeleteMobileDeviceAccessRuleInput{
+		OrganizationId:           ptr.String("__OrganizationId__"),
+		MobileDeviceAccessRuleId: ptr.String("__MobileDeviceAccessRuleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -593,7 +771,13 @@ func TestCheckResponseSnapshot_DeleteOrganization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteOrganization(context.Background(), &DeleteOrganizationInput{})
+	got, err := svc.DeleteOrganization(context.Background(), &DeleteOrganizationInput{
+		ClientToken:                     ptr.String("__ClientToken__"),
+		OrganizationId:                  ptr.String("__OrganizationId__"),
+		DeleteDirectory:                 true,
+		ForceDelete:                     true,
+		DeleteIdentityCenterApplication: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -612,7 +796,10 @@ func TestCheckResponseSnapshot_DeletePersonalAccessToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePersonalAccessToken(context.Background(), &DeletePersonalAccessTokenInput{})
+	got, err := svc.DeletePersonalAccessToken(context.Background(), &DeletePersonalAccessTokenInput{
+		OrganizationId:        ptr.String("__OrganizationId__"),
+		PersonalAccessTokenId: ptr.String("__PersonalAccessTokenId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -631,7 +818,10 @@ func TestCheckResponseSnapshot_DeleteResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResource(context.Background(), &DeleteResourceInput{})
+	got, err := svc.DeleteResource(context.Background(), &DeleteResourceInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		ResourceId:     ptr.String("__ResourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -650,7 +840,10 @@ func TestCheckResponseSnapshot_DeleteRetentionPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRetentionPolicy(context.Background(), &DeleteRetentionPolicyInput{})
+	got, err := svc.DeleteRetentionPolicy(context.Background(), &DeleteRetentionPolicyInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		Id:             ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -669,7 +862,10 @@ func TestCheckResponseSnapshot_DeleteUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteUser(context.Background(), &DeleteUserInput{})
+	got, err := svc.DeleteUser(context.Background(), &DeleteUserInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		UserId:         ptr.String("__UserId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -688,7 +884,10 @@ func TestCheckResponseSnapshot_DeregisterFromWorkMail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterFromWorkMail(context.Background(), &DeregisterFromWorkMailInput{})
+	got, err := svc.DeregisterFromWorkMail(context.Background(), &DeregisterFromWorkMailInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		EntityId:       ptr.String("__EntityId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -707,7 +906,10 @@ func TestCheckResponseSnapshot_DeregisterMailDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterMailDomain(context.Background(), &DeregisterMailDomainInput{})
+	got, err := svc.DeregisterMailDomain(context.Background(), &DeregisterMailDomainInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		DomainName:     ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -729,7 +931,9 @@ func TestCheckResponseSnapshot_DescribeEmailMonitoringConfiguration(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEmailMonitoringConfiguration(context.Background(), &DescribeEmailMonitoringConfigurationInput{})
+	got, err := svc.DescribeEmailMonitoringConfiguration(context.Background(), &DescribeEmailMonitoringConfigurationInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -752,7 +956,10 @@ func TestCheckResponseSnapshot_DescribeEntity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEntity(context.Background(), &DescribeEntityInput{})
+	got, err := svc.DescribeEntity(context.Background(), &DescribeEntityInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		Email:          ptr.String("__Email__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -779,7 +986,10 @@ func TestCheckResponseSnapshot_DescribeGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeGroup(context.Background(), &DescribeGroupInput{})
+	got, err := svc.DescribeGroup(context.Background(), &DescribeGroupInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		GroupId:        ptr.String("__GroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -808,7 +1018,9 @@ func TestCheckResponseSnapshot_DescribeIdentityProviderConfiguration(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeIdentityProviderConfiguration(context.Background(), &DescribeIdentityProviderConfigurationInput{})
+	got, err := svc.DescribeIdentityProviderConfiguration(context.Background(), &DescribeIdentityProviderConfigurationInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -829,7 +1041,9 @@ func TestCheckResponseSnapshot_DescribeInboundDmarcSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeInboundDmarcSettings(context.Background(), &DescribeInboundDmarcSettingsInput{})
+	got, err := svc.DescribeInboundDmarcSettings(context.Background(), &DescribeInboundDmarcSettingsInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -861,7 +1075,10 @@ func TestCheckResponseSnapshot_DescribeMailboxExportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMailboxExportJob(context.Background(), &DescribeMailboxExportJobInput{})
+	got, err := svc.DescribeMailboxExportJob(context.Background(), &DescribeMailboxExportJobInput{
+		JobId:          ptr.String("__JobId__"),
+		OrganizationId: ptr.String("__OrganizationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -892,7 +1109,9 @@ func TestCheckResponseSnapshot_DescribeOrganization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeOrganization(context.Background(), &DescribeOrganizationInput{})
+	got, err := svc.DescribeOrganization(context.Background(), &DescribeOrganizationInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -926,7 +1145,10 @@ func TestCheckResponseSnapshot_DescribeResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeResource(context.Background(), &DescribeResourceInput{})
+	got, err := svc.DescribeResource(context.Background(), &DescribeResourceInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		ResourceId:     ptr.String("__ResourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -971,7 +1193,10 @@ func TestCheckResponseSnapshot_DescribeUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeUser(context.Background(), &DescribeUserInput{})
+	got, err := svc.DescribeUser(context.Background(), &DescribeUserInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		UserId:         ptr.String("__UserId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -990,7 +1215,11 @@ func TestCheckResponseSnapshot_DisassociateDelegateFromResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateDelegateFromResource(context.Background(), &DisassociateDelegateFromResourceInput{})
+	got, err := svc.DisassociateDelegateFromResource(context.Background(), &DisassociateDelegateFromResourceInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		ResourceId:     ptr.String("__ResourceId__"),
+		EntityId:       ptr.String("__EntityId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1009,7 +1238,11 @@ func TestCheckResponseSnapshot_DisassociateMemberFromGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateMemberFromGroup(context.Background(), &DisassociateMemberFromGroupInput{})
+	got, err := svc.DisassociateMemberFromGroup(context.Background(), &DisassociateMemberFromGroupInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		GroupId:        ptr.String("__GroupId__"),
+		MemberId:       ptr.String("__MemberId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1034,7 +1267,13 @@ func TestCheckResponseSnapshot_GetAccessControlEffect(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAccessControlEffect(context.Background(), &GetAccessControlEffectInput{})
+	got, err := svc.GetAccessControlEffect(context.Background(), &GetAccessControlEffectInput{
+		OrganizationId:      ptr.String("__OrganizationId__"),
+		IpAddress:           ptr.String("__IpAddress__"),
+		Action:              ptr.String("__Action__"),
+		UserId:              ptr.String("__UserId__"),
+		ImpersonationRoleId: ptr.String("__ImpersonationRoleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1069,7 +1308,9 @@ func TestCheckResponseSnapshot_GetDefaultRetentionPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDefaultRetentionPolicy(context.Background(), &GetDefaultRetentionPolicyInput{})
+	got, err := svc.GetDefaultRetentionPolicy(context.Background(), &GetDefaultRetentionPolicyInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1125,7 +1366,10 @@ func TestCheckResponseSnapshot_GetImpersonationRole(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetImpersonationRole(context.Background(), &GetImpersonationRoleInput{})
+	got, err := svc.GetImpersonationRole(context.Background(), &GetImpersonationRoleInput{
+		OrganizationId:      ptr.String("__OrganizationId__"),
+		ImpersonationRoleId: ptr.String("__ImpersonationRoleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1157,7 +1401,11 @@ func TestCheckResponseSnapshot_GetImpersonationRoleEffect(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetImpersonationRoleEffect(context.Background(), &GetImpersonationRoleEffectInput{})
+	got, err := svc.GetImpersonationRoleEffect(context.Background(), &GetImpersonationRoleEffectInput{
+		OrganizationId:      ptr.String("__OrganizationId__"),
+		ImpersonationRoleId: ptr.String("__ImpersonationRoleId__"),
+		TargetUser:          ptr.String("__TargetUser__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1193,7 +1441,10 @@ func TestCheckResponseSnapshot_GetMailDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMailDomain(context.Background(), &GetMailDomainInput{})
+	got, err := svc.GetMailDomain(context.Background(), &GetMailDomainInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		DomainName:     ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1215,7 +1466,10 @@ func TestCheckResponseSnapshot_GetMailboxDetails(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMailboxDetails(context.Background(), &GetMailboxDetailsInput{})
+	got, err := svc.GetMailboxDetails(context.Background(), &GetMailboxDetailsInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		UserId:         ptr.String("__UserId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1246,7 +1500,13 @@ func TestCheckResponseSnapshot_GetMobileDeviceAccessEffect(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMobileDeviceAccessEffect(context.Background(), &GetMobileDeviceAccessEffectInput{})
+	got, err := svc.GetMobileDeviceAccessEffect(context.Background(), &GetMobileDeviceAccessEffectInput{
+		OrganizationId:        ptr.String("__OrganizationId__"),
+		DeviceType:            ptr.String("__DeviceType__"),
+		DeviceModel:           ptr.String("__DeviceModel__"),
+		DeviceOperatingSystem: ptr.String("__DeviceOperatingSystem__"),
+		DeviceUserAgent:       ptr.String("__DeviceUserAgent__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1272,7 +1532,11 @@ func TestCheckResponseSnapshot_GetMobileDeviceAccessOverride(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMobileDeviceAccessOverride(context.Background(), &GetMobileDeviceAccessOverrideInput{})
+	got, err := svc.GetMobileDeviceAccessOverride(context.Background(), &GetMobileDeviceAccessOverrideInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		UserId:         ptr.String("__UserId__"),
+		DeviceId:       ptr.String("__DeviceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1302,7 +1566,10 @@ func TestCheckResponseSnapshot_GetPersonalAccessTokenMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPersonalAccessTokenMetadata(context.Background(), &GetPersonalAccessTokenMetadataInput{})
+	got, err := svc.GetPersonalAccessTokenMetadata(context.Background(), &GetPersonalAccessTokenMetadataInput{
+		OrganizationId:        ptr.String("__OrganizationId__"),
+		PersonalAccessTokenId: ptr.String("__PersonalAccessTokenId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1402,7 +1669,9 @@ func TestCheckResponseSnapshot_ListAccessControlRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccessControlRules(context.Background(), &ListAccessControlRulesInput{})
+	got, err := svc.ListAccessControlRules(context.Background(), &ListAccessControlRulesInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1427,7 +1696,12 @@ func TestCheckResponseSnapshot_ListAliases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAliases(context.Background(), &ListAliasesInput{})
+	got, err := svc.ListAliases(context.Background(), &ListAliasesInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		EntityId:       ptr.String("__EntityId__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1476,7 +1750,11 @@ func TestCheckResponseSnapshot_ListAvailabilityConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAvailabilityConfigurations(context.Background(), &ListAvailabilityConfigurationsInput{})
+	got, err := svc.ListAvailabilityConfigurations(context.Background(), &ListAvailabilityConfigurationsInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1515,7 +1793,12 @@ func TestCheckResponseSnapshot_ListGroupMembers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGroupMembers(context.Background(), &ListGroupMembersInput{})
+	got, err := svc.ListGroupMembers(context.Background(), &ListGroupMembersInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		GroupId:        ptr.String("__GroupId__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1554,7 +1837,16 @@ func TestCheckResponseSnapshot_ListGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGroups(context.Background(), &ListGroupsInput{})
+	got, err := svc.ListGroups(context.Background(), &ListGroupsInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+		Filters: &types.ListGroupsFilters{
+			NamePrefix:         ptr.String("__NamePrefix__"),
+			PrimaryEmailPrefix: ptr.String("__PrimaryEmailPrefix__"),
+			State:              types.EntityState("ENABLED"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1585,7 +1877,15 @@ func TestCheckResponseSnapshot_ListGroupsForEntity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGroupsForEntity(context.Background(), &ListGroupsForEntityInput{})
+	got, err := svc.ListGroupsForEntity(context.Background(), &ListGroupsForEntityInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		EntityId:       ptr.String("__EntityId__"),
+		Filters: &types.ListGroupsForEntityFilters{
+			GroupNamePrefix: ptr.String("__GroupNamePrefix__"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1622,7 +1922,11 @@ func TestCheckResponseSnapshot_ListImpersonationRoles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListImpersonationRoles(context.Background(), &ListImpersonationRolesInput{})
+	got, err := svc.ListImpersonationRoles(context.Background(), &ListImpersonationRolesInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1653,7 +1957,11 @@ func TestCheckResponseSnapshot_ListMailDomains(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMailDomains(context.Background(), &ListMailDomainsInput{})
+	got, err := svc.ListMailDomains(context.Background(), &ListMailDomainsInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1698,7 +2006,11 @@ func TestCheckResponseSnapshot_ListMailboxExportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMailboxExportJobs(context.Background(), &ListMailboxExportJobsInput{})
+	got, err := svc.ListMailboxExportJobs(context.Background(), &ListMailboxExportJobsInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1737,7 +2049,12 @@ func TestCheckResponseSnapshot_ListMailboxPermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMailboxPermissions(context.Background(), &ListMailboxPermissionsInput{})
+	got, err := svc.ListMailboxPermissions(context.Background(), &ListMailboxPermissionsInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		EntityId:       ptr.String("__EntityId__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1776,7 +2093,13 @@ func TestCheckResponseSnapshot_ListMobileDeviceAccessOverrides(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMobileDeviceAccessOverrides(context.Background(), &ListMobileDeviceAccessOverridesInput{})
+	got, err := svc.ListMobileDeviceAccessOverrides(context.Background(), &ListMobileDeviceAccessOverridesInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		UserId:         ptr.String("__UserId__"),
+		DeviceId:       ptr.String("__DeviceId__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1878,7 +2201,9 @@ func TestCheckResponseSnapshot_ListMobileDeviceAccessRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMobileDeviceAccessRules(context.Background(), &ListMobileDeviceAccessRulesInput{})
+	got, err := svc.ListMobileDeviceAccessRules(context.Background(), &ListMobileDeviceAccessRulesInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1915,7 +2240,10 @@ func TestCheckResponseSnapshot_ListOrganizations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOrganizations(context.Background(), &ListOrganizationsInput{})
+	got, err := svc.ListOrganizations(context.Background(), &ListOrganizationsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1962,7 +2290,12 @@ func TestCheckResponseSnapshot_ListPersonalAccessTokens(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPersonalAccessTokens(context.Background(), &ListPersonalAccessTokensInput{})
+	got, err := svc.ListPersonalAccessTokens(context.Background(), &ListPersonalAccessTokensInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		UserId:         ptr.String("__UserId__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1993,7 +2326,12 @@ func TestCheckResponseSnapshot_ListResourceDelegates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourceDelegates(context.Background(), &ListResourceDelegatesInput{})
+	got, err := svc.ListResourceDelegates(context.Background(), &ListResourceDelegatesInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		ResourceId:     ptr.String("__ResourceId__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2036,7 +2374,16 @@ func TestCheckResponseSnapshot_ListResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResources(context.Background(), &ListResourcesInput{})
+	got, err := svc.ListResources(context.Background(), &ListResourcesInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+		Filters: &types.ListResourcesFilters{
+			NamePrefix:         ptr.String("__NamePrefix__"),
+			PrimaryEmailPrefix: ptr.String("__PrimaryEmailPrefix__"),
+			State:              types.EntityState("ENABLED"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2066,7 +2413,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2113,7 +2462,18 @@ func TestCheckResponseSnapshot_ListUsers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUsers(context.Background(), &ListUsersInput{})
+	got, err := svc.ListUsers(context.Background(), &ListUsersInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+		Filters: &types.ListUsersFilters{
+			UsernamePrefix:               ptr.String("__UsernamePrefix__"),
+			DisplayNamePrefix:            ptr.String("__DisplayNamePrefix__"),
+			PrimaryEmailPrefix:           ptr.String("__PrimaryEmailPrefix__"),
+			State:                        types.EntityState("ENABLED"),
+			IdentityProviderUserIdPrefix: ptr.String("__IdentityProviderUserIdPrefix__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2132,7 +2492,44 @@ func TestCheckResponseSnapshot_PutAccessControlRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAccessControlRule(context.Background(), &PutAccessControlRuleInput{})
+	got, err := svc.PutAccessControlRule(context.Background(), &PutAccessControlRuleInput{
+		Name:        ptr.String("__Name__"),
+		Effect:      types.AccessControlRuleEffect("ALLOW"),
+		Description: ptr.String("__Description__"),
+		IpRanges: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NotIpRanges: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Actions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NotActions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UserIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NotUserIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OrganizationId: ptr.String("__OrganizationId__"),
+		ImpersonationRoleIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NotImpersonationRoleIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2151,7 +2548,11 @@ func TestCheckResponseSnapshot_PutEmailMonitoringConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutEmailMonitoringConfiguration(context.Background(), &PutEmailMonitoringConfigurationInput{})
+	got, err := svc.PutEmailMonitoringConfiguration(context.Background(), &PutEmailMonitoringConfigurationInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		RoleArn:        ptr.String("__RoleArn__"),
+		LogGroupArn:    ptr.String("__LogGroupArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2170,7 +2571,18 @@ func TestCheckResponseSnapshot_PutIdentityProviderConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutIdentityProviderConfiguration(context.Background(), &PutIdentityProviderConfigurationInput{})
+	got, err := svc.PutIdentityProviderConfiguration(context.Background(), &PutIdentityProviderConfigurationInput{
+		OrganizationId:     ptr.String("__OrganizationId__"),
+		AuthenticationMode: types.IdentityProviderAuthenticationMode("IDENTITY_PROVIDER_ONLY"),
+		IdentityCenterConfiguration: &types.IdentityCenterConfiguration{
+			InstanceArn:    ptr.String("__InstanceArn__"),
+			ApplicationArn: ptr.String("__ApplicationArn__"),
+		},
+		PersonalAccessTokenConfiguration: &types.PersonalAccessTokenConfiguration{
+			Status:         types.PersonalAccessTokenConfigurationStatus("ACTIVE"),
+			LifetimeInDays: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2189,7 +2601,10 @@ func TestCheckResponseSnapshot_PutInboundDmarcSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutInboundDmarcSettings(context.Background(), &PutInboundDmarcSettingsInput{})
+	got, err := svc.PutInboundDmarcSettings(context.Background(), &PutInboundDmarcSettingsInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		Enforced:       ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2208,7 +2623,15 @@ func TestCheckResponseSnapshot_PutMailboxPermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutMailboxPermissions(context.Background(), &PutMailboxPermissionsInput{})
+	got, err := svc.PutMailboxPermissions(context.Background(), &PutMailboxPermissionsInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		EntityId:       ptr.String("__EntityId__"),
+		GranteeId:      ptr.String("__GranteeId__"),
+		PermissionValues: []types.PermissionType{
+			types.PermissionType("FULL_ACCESS"),
+			types.PermissionType("FULL_ACCESS"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2227,7 +2650,13 @@ func TestCheckResponseSnapshot_PutMobileDeviceAccessOverride(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutMobileDeviceAccessOverride(context.Background(), &PutMobileDeviceAccessOverrideInput{})
+	got, err := svc.PutMobileDeviceAccessOverride(context.Background(), &PutMobileDeviceAccessOverrideInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		UserId:         ptr.String("__UserId__"),
+		DeviceId:       ptr.String("__DeviceId__"),
+		Effect:         types.MobileDeviceAccessRuleEffect("ALLOW"),
+		Description:    ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2246,7 +2675,24 @@ func TestCheckResponseSnapshot_PutRetentionPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutRetentionPolicy(context.Background(), &PutRetentionPolicyInput{})
+	got, err := svc.PutRetentionPolicy(context.Background(), &PutRetentionPolicyInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		Id:             ptr.String("__Id__"),
+		Name:           ptr.String("__Name__"),
+		Description:    ptr.String("__Description__"),
+		FolderConfigurations: []types.FolderConfiguration{
+			{
+				Name:   types.FolderName("INBOX"),
+				Action: types.RetentionAction("NONE"),
+				Period: ptr.Int32(1),
+			},
+			{
+				Name:   types.FolderName("INBOX"),
+				Action: types.RetentionAction("NONE"),
+				Period: ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2265,7 +2711,11 @@ func TestCheckResponseSnapshot_RegisterMailDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterMailDomain(context.Background(), &RegisterMailDomainInput{})
+	got, err := svc.RegisterMailDomain(context.Background(), &RegisterMailDomainInput{
+		ClientToken:    ptr.String("__ClientToken__"),
+		OrganizationId: ptr.String("__OrganizationId__"),
+		DomainName:     ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2284,7 +2734,11 @@ func TestCheckResponseSnapshot_RegisterToWorkMail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterToWorkMail(context.Background(), &RegisterToWorkMailInput{})
+	got, err := svc.RegisterToWorkMail(context.Background(), &RegisterToWorkMailInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		EntityId:       ptr.String("__EntityId__"),
+		Email:          ptr.String("__Email__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2303,7 +2757,11 @@ func TestCheckResponseSnapshot_ResetPassword(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResetPassword(context.Background(), &ResetPasswordInput{})
+	got, err := svc.ResetPassword(context.Background(), &ResetPasswordInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		UserId:         ptr.String("__UserId__"),
+		Password:       ptr.String("__Password__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2324,7 +2782,16 @@ func TestCheckResponseSnapshot_StartMailboxExportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMailboxExportJob(context.Background(), &StartMailboxExportJobInput{})
+	got, err := svc.StartMailboxExportJob(context.Background(), &StartMailboxExportJobInput{
+		ClientToken:    ptr.String("__ClientToken__"),
+		OrganizationId: ptr.String("__OrganizationId__"),
+		EntityId:       ptr.String("__EntityId__"),
+		Description:    ptr.String("__Description__"),
+		RoleArn:        ptr.String("__RoleArn__"),
+		KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+		S3BucketName:   ptr.String("__S3BucketName__"),
+		S3Prefix:       ptr.String("__S3Prefix__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2343,7 +2810,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2365,7 +2844,18 @@ func TestCheckResponseSnapshot_TestAvailabilityConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TestAvailabilityConfiguration(context.Background(), &TestAvailabilityConfigurationInput{})
+	got, err := svc.TestAvailabilityConfiguration(context.Background(), &TestAvailabilityConfigurationInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		DomainName:     ptr.String("__DomainName__"),
+		EwsProvider: &types.EwsAvailabilityProvider{
+			EwsEndpoint: ptr.String("__EwsEndpoint__"),
+			EwsUsername: ptr.String("__EwsUsername__"),
+			EwsPassword: ptr.String("__EwsPassword__"),
+		},
+		LambdaProvider: &types.LambdaAvailabilityProvider{
+			LambdaArn: ptr.String("__LambdaArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2384,7 +2874,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2403,7 +2899,18 @@ func TestCheckResponseSnapshot_UpdateAvailabilityConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAvailabilityConfiguration(context.Background(), &UpdateAvailabilityConfigurationInput{})
+	got, err := svc.UpdateAvailabilityConfiguration(context.Background(), &UpdateAvailabilityConfigurationInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		DomainName:     ptr.String("__DomainName__"),
+		EwsProvider: &types.EwsAvailabilityProvider{
+			EwsEndpoint: ptr.String("__EwsEndpoint__"),
+			EwsUsername: ptr.String("__EwsUsername__"),
+			EwsPassword: ptr.String("__EwsPassword__"),
+		},
+		LambdaProvider: &types.LambdaAvailabilityProvider{
+			LambdaArn: ptr.String("__LambdaArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2422,7 +2929,10 @@ func TestCheckResponseSnapshot_UpdateDefaultMailDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDefaultMailDomain(context.Background(), &UpdateDefaultMailDomainInput{})
+	got, err := svc.UpdateDefaultMailDomain(context.Background(), &UpdateDefaultMailDomainInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		DomainName:     ptr.String("__DomainName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2441,7 +2951,11 @@ func TestCheckResponseSnapshot_UpdateGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGroup(context.Background(), &UpdateGroupInput{})
+	got, err := svc.UpdateGroup(context.Background(), &UpdateGroupInput{
+		OrganizationId:              ptr.String("__OrganizationId__"),
+		GroupId:                     ptr.String("__GroupId__"),
+		HiddenFromGlobalAddressList: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2460,7 +2974,43 @@ func TestCheckResponseSnapshot_UpdateImpersonationRole(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateImpersonationRole(context.Background(), &UpdateImpersonationRoleInput{})
+	got, err := svc.UpdateImpersonationRole(context.Background(), &UpdateImpersonationRoleInput{
+		OrganizationId:      ptr.String("__OrganizationId__"),
+		ImpersonationRoleId: ptr.String("__ImpersonationRoleId__"),
+		Name:                ptr.String("__Name__"),
+		Type:                types.ImpersonationRoleType("FULL_ACCESS"),
+		Description:         ptr.String("__Description__"),
+		Rules: []types.ImpersonationRule{
+			{
+				ImpersonationRuleId: ptr.String("__ImpersonationRuleId__"),
+				Name:                ptr.String("__Name__"),
+				Description:         ptr.String("__Description__"),
+				Effect:              types.AccessEffect("ALLOW"),
+				TargetUsers: []string{
+					"__Member__",
+					"__Member__",
+				},
+				NotTargetUsers: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				ImpersonationRuleId: ptr.String("__ImpersonationRuleId__"),
+				Name:                ptr.String("__Name__"),
+				Description:         ptr.String("__Description__"),
+				Effect:              types.AccessEffect("ALLOW"),
+				TargetUsers: []string{
+					"__Member__",
+					"__Member__",
+				},
+				NotTargetUsers: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2479,7 +3029,11 @@ func TestCheckResponseSnapshot_UpdateMailboxQuota(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMailboxQuota(context.Background(), &UpdateMailboxQuotaInput{})
+	got, err := svc.UpdateMailboxQuota(context.Background(), &UpdateMailboxQuotaInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		UserId:         ptr.String("__UserId__"),
+		MailboxQuota:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2498,7 +3052,45 @@ func TestCheckResponseSnapshot_UpdateMobileDeviceAccessRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMobileDeviceAccessRule(context.Background(), &UpdateMobileDeviceAccessRuleInput{})
+	got, err := svc.UpdateMobileDeviceAccessRule(context.Background(), &UpdateMobileDeviceAccessRuleInput{
+		OrganizationId:           ptr.String("__OrganizationId__"),
+		MobileDeviceAccessRuleId: ptr.String("__MobileDeviceAccessRuleId__"),
+		Name:                     ptr.String("__Name__"),
+		Description:              ptr.String("__Description__"),
+		Effect:                   types.MobileDeviceAccessRuleEffect("ALLOW"),
+		DeviceTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NotDeviceTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DeviceModels: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NotDeviceModels: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DeviceOperatingSystems: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NotDeviceOperatingSystems: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DeviceUserAgents: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NotDeviceUserAgents: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2517,7 +3109,11 @@ func TestCheckResponseSnapshot_UpdatePrimaryEmailAddress(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePrimaryEmailAddress(context.Background(), &UpdatePrimaryEmailAddressInput{})
+	got, err := svc.UpdatePrimaryEmailAddress(context.Background(), &UpdatePrimaryEmailAddressInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		EntityId:       ptr.String("__EntityId__"),
+		Email:          ptr.String("__Email__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2536,7 +3132,19 @@ func TestCheckResponseSnapshot_UpdateResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateResource(context.Background(), &UpdateResourceInput{})
+	got, err := svc.UpdateResource(context.Background(), &UpdateResourceInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		ResourceId:     ptr.String("__ResourceId__"),
+		Name:           ptr.String("__Name__"),
+		BookingOptions: &types.BookingOptions{
+			AutoAcceptRequests:             true,
+			AutoDeclineRecurringRequests:   true,
+			AutoDeclineConflictingRequests: true,
+		},
+		Description:                 ptr.String("__Description__"),
+		Type:                        types.ResourceType("ROOM"),
+		HiddenFromGlobalAddressList: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2555,7 +3163,26 @@ func TestCheckResponseSnapshot_UpdateUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateUser(context.Background(), &UpdateUserInput{})
+	got, err := svc.UpdateUser(context.Background(), &UpdateUserInput{
+		OrganizationId:              ptr.String("__OrganizationId__"),
+		UserId:                      ptr.String("__UserId__"),
+		Role:                        types.UserRole("USER"),
+		DisplayName:                 ptr.String("__DisplayName__"),
+		FirstName:                   ptr.String("__FirstName__"),
+		LastName:                    ptr.String("__LastName__"),
+		HiddenFromGlobalAddressList: ptr.Bool(true),
+		Initials:                    ptr.String("__Initials__"),
+		Telephone:                   ptr.String("__Telephone__"),
+		Street:                      ptr.String("__Street__"),
+		JobTitle:                    ptr.String("__JobTitle__"),
+		City:                        ptr.String("__City__"),
+		Company:                     ptr.String("__Company__"),
+		ZipCode:                     ptr.String("__ZipCode__"),
+		Department:                  ptr.String("__Department__"),
+		Country:                     ptr.String("__Country__"),
+		Office:                      ptr.String("__Office__"),
+		IdentityProviderUserId:      ptr.String("__IdentityProviderUserId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2576,7 +3203,23 @@ func TestCheckResponseSnapshot_Error_DirectoryInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateOrganization(context.Background(), &CreateOrganizationInput{})
+	_, opErr := svc.CreateOrganization(context.Background(), &CreateOrganizationInput{
+		DirectoryId: ptr.String("__DirectoryId__"),
+		Alias:       ptr.String("__Alias__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Domains: []types.Domain{
+			{
+				DomainName:   ptr.String("__DomainName__"),
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
+			{
+				DomainName:   ptr.String("__DomainName__"),
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
+		},
+		KmsKeyArn:              ptr.String("__KmsKeyArn__"),
+		EnableInteroperability: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2601,7 +3244,11 @@ func TestCheckResponseSnapshot_Error_DirectoryServiceAuthenticationFailedExcepti
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateMemberToGroup(context.Background(), &AssociateMemberToGroupInput{})
+	_, opErr := svc.AssociateMemberToGroup(context.Background(), &AssociateMemberToGroupInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		GroupId:        ptr.String("__GroupId__"),
+		MemberId:       ptr.String("__MemberId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2626,7 +3273,11 @@ func TestCheckResponseSnapshot_Error_DirectoryUnavailableException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateMemberToGroup(context.Background(), &AssociateMemberToGroupInput{})
+	_, opErr := svc.AssociateMemberToGroup(context.Background(), &AssociateMemberToGroupInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		GroupId:        ptr.String("__GroupId__"),
+		MemberId:       ptr.String("__MemberId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2651,7 +3302,11 @@ func TestCheckResponseSnapshot_Error_EmailAddressInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAlias(context.Background(), &CreateAliasInput{})
+	_, opErr := svc.CreateAlias(context.Background(), &CreateAliasInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		EntityId:       ptr.String("__EntityId__"),
+		Alias:          ptr.String("__Alias__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2676,7 +3331,11 @@ func TestCheckResponseSnapshot_Error_EntityAlreadyRegisteredException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RegisterToWorkMail(context.Background(), &RegisterToWorkMailInput{})
+	_, opErr := svc.RegisterToWorkMail(context.Background(), &RegisterToWorkMailInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		EntityId:       ptr.String("__EntityId__"),
+		Email:          ptr.String("__Email__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2701,7 +3360,11 @@ func TestCheckResponseSnapshot_Error_EntityNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDelegateToResource(context.Background(), &AssociateDelegateToResourceInput{})
+	_, opErr := svc.AssociateDelegateToResource(context.Background(), &AssociateDelegateToResourceInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		ResourceId:     ptr.String("__ResourceId__"),
+		EntityId:       ptr.String("__EntityId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2726,7 +3389,11 @@ func TestCheckResponseSnapshot_Error_EntityStateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDelegateToResource(context.Background(), &AssociateDelegateToResourceInput{})
+	_, opErr := svc.AssociateDelegateToResource(context.Background(), &AssociateDelegateToResourceInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		ResourceId:     ptr.String("__ResourceId__"),
+		EntityId:       ptr.String("__EntityId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2751,7 +3418,19 @@ func TestCheckResponseSnapshot_Error_InvalidConfigurationException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateResource(context.Background(), &UpdateResourceInput{})
+	_, opErr := svc.UpdateResource(context.Background(), &UpdateResourceInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		ResourceId:     ptr.String("__ResourceId__"),
+		Name:           ptr.String("__Name__"),
+		BookingOptions: &types.BookingOptions{
+			AutoAcceptRequests:             true,
+			AutoDeclineRecurringRequests:   true,
+			AutoDeclineConflictingRequests: true,
+		},
+		Description:                 ptr.String("__Description__"),
+		Type:                        types.ResourceType("ROOM"),
+		HiddenFromGlobalAddressList: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2776,7 +3455,10 @@ func TestCheckResponseSnapshot_Error_InvalidCustomSesConfigurationException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeregisterMailDomain(context.Background(), &DeregisterMailDomainInput{})
+	_, opErr := svc.DeregisterMailDomain(context.Background(), &DeregisterMailDomainInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		DomainName:     ptr.String("__DomainName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2801,7 +3483,11 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDelegateToResource(context.Background(), &AssociateDelegateToResourceInput{})
+	_, opErr := svc.AssociateDelegateToResource(context.Background(), &AssociateDelegateToResourceInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		ResourceId:     ptr.String("__ResourceId__"),
+		EntityId:       ptr.String("__EntityId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2826,7 +3512,17 @@ func TestCheckResponseSnapshot_Error_InvalidPasswordException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateUser(context.Background(), &CreateUserInput{})
+	_, opErr := svc.CreateUser(context.Background(), &CreateUserInput{
+		OrganizationId:              ptr.String("__OrganizationId__"),
+		Name:                        ptr.String("__Name__"),
+		DisplayName:                 ptr.String("__DisplayName__"),
+		Password:                    ptr.String("__Password__"),
+		Role:                        types.UserRole("USER"),
+		FirstName:                   ptr.String("__FirstName__"),
+		LastName:                    ptr.String("__LastName__"),
+		HiddenFromGlobalAddressList: true,
+		IdentityProviderUserId:      ptr.String("__IdentityProviderUserId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2851,7 +3547,11 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAlias(context.Background(), &CreateAliasInput{})
+	_, opErr := svc.CreateAlias(context.Background(), &CreateAliasInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		EntityId:       ptr.String("__EntityId__"),
+		Alias:          ptr.String("__Alias__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2876,7 +3576,10 @@ func TestCheckResponseSnapshot_Error_MailDomainInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeregisterMailDomain(context.Background(), &DeregisterMailDomainInput{})
+	_, opErr := svc.DeregisterMailDomain(context.Background(), &DeregisterMailDomainInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		DomainName:     ptr.String("__DomainName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2901,7 +3604,11 @@ func TestCheckResponseSnapshot_Error_MailDomainNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAlias(context.Background(), &CreateAliasInput{})
+	_, opErr := svc.CreateAlias(context.Background(), &CreateAliasInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		EntityId:       ptr.String("__EntityId__"),
+		Alias:          ptr.String("__Alias__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2926,7 +3633,11 @@ func TestCheckResponseSnapshot_Error_MailDomainStateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAlias(context.Background(), &CreateAliasInput{})
+	_, opErr := svc.CreateAlias(context.Background(), &CreateAliasInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		EntityId:       ptr.String("__EntityId__"),
+		Alias:          ptr.String("__Alias__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2951,7 +3662,19 @@ func TestCheckResponseSnapshot_Error_NameAvailabilityException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAvailabilityConfiguration(context.Background(), &CreateAvailabilityConfigurationInput{})
+	_, opErr := svc.CreateAvailabilityConfiguration(context.Background(), &CreateAvailabilityConfigurationInput{
+		ClientToken:    ptr.String("__ClientToken__"),
+		OrganizationId: ptr.String("__OrganizationId__"),
+		DomainName:     ptr.String("__DomainName__"),
+		EwsProvider: &types.EwsAvailabilityProvider{
+			EwsEndpoint: ptr.String("__EwsEndpoint__"),
+			EwsUsername: ptr.String("__EwsUsername__"),
+			EwsPassword: ptr.String("__EwsPassword__"),
+		},
+		LambdaProvider: &types.LambdaAvailabilityProvider{
+			LambdaArn: ptr.String("__LambdaArn__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2976,7 +3699,11 @@ func TestCheckResponseSnapshot_Error_OrganizationNotFoundException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDelegateToResource(context.Background(), &AssociateDelegateToResourceInput{})
+	_, opErr := svc.AssociateDelegateToResource(context.Background(), &AssociateDelegateToResourceInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		ResourceId:     ptr.String("__ResourceId__"),
+		EntityId:       ptr.String("__EntityId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3001,7 +3728,11 @@ func TestCheckResponseSnapshot_Error_OrganizationStateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDelegateToResource(context.Background(), &AssociateDelegateToResourceInput{})
+	_, opErr := svc.AssociateDelegateToResource(context.Background(), &AssociateDelegateToResourceInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		ResourceId:     ptr.String("__ResourceId__"),
+		EntityId:       ptr.String("__EntityId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3026,7 +3757,11 @@ func TestCheckResponseSnapshot_Error_ReservedNameException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateGroup(context.Background(), &CreateGroupInput{})
+	_, opErr := svc.CreateGroup(context.Background(), &CreateGroupInput{
+		OrganizationId:              ptr.String("__OrganizationId__"),
+		Name:                        ptr.String("__Name__"),
+		HiddenFromGlobalAddressList: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3051,7 +3786,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssumeImpersonationRole(context.Background(), &AssumeImpersonationRoleInput{})
+	_, opErr := svc.AssumeImpersonationRole(context.Background(), &AssumeImpersonationRoleInput{
+		OrganizationId:      ptr.String("__OrganizationId__"),
+		ImpersonationRoleId: ptr.String("__ImpersonationRoleId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3076,7 +3814,19 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3101,7 +3851,11 @@ func TestCheckResponseSnapshot_Error_UnsupportedOperationException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDelegateToResource(context.Background(), &AssociateDelegateToResourceInput{})
+	_, opErr := svc.AssociateDelegateToResource(context.Background(), &AssociateDelegateToResourceInput{
+		OrganizationId: ptr.String("__OrganizationId__"),
+		ResourceId:     ptr.String("__ResourceId__"),
+		EntityId:       ptr.String("__EntityId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

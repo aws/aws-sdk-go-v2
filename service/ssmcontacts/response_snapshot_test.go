@@ -117,7 +117,14 @@ func TestCheckResponseSnapshot_AcceptPage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptPage(context.Background(), &AcceptPageInput{})
+	got, err := svc.AcceptPage(context.Background(), &AcceptPageInput{
+		PageId:               ptr.String("__PageId__"),
+		ContactChannelId:     ptr.String("__ContactChannelId__"),
+		AcceptType:           types.AcceptType("DELIVERED"),
+		Note:                 ptr.String("__Note__"),
+		AcceptCode:           ptr.String("__AcceptCode__"),
+		AcceptCodeValidation: types.AcceptCodeValidation("IGNORE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -136,7 +143,10 @@ func TestCheckResponseSnapshot_ActivateContactChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ActivateContactChannel(context.Background(), &ActivateContactChannelInput{})
+	got, err := svc.ActivateContactChannel(context.Background(), &ActivateContactChannelInput{
+		ContactChannelId: ptr.String("__ContactChannelId__"),
+		ActivationCode:   ptr.String("__ActivationCode__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -157,7 +167,80 @@ func TestCheckResponseSnapshot_CreateContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateContact(context.Background(), &CreateContactInput{})
+	got, err := svc.CreateContact(context.Background(), &CreateContactInput{
+		Alias:       ptr.String("__Alias__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		Type:        types.ContactType("PERSONAL"),
+		Plan: &types.Plan{
+			Stages: []types.Stage{
+				{
+					DurationInMinutes: ptr.Int32(1),
+					Targets: []types.Target{
+						{
+							ChannelTargetInfo: &types.ChannelTargetInfo{
+								ContactChannelId:       ptr.String("__ContactChannelId__"),
+								RetryIntervalInMinutes: ptr.Int32(1),
+							},
+							ContactTargetInfo: &types.ContactTargetInfo{
+								ContactId:   ptr.String("__ContactId__"),
+								IsEssential: ptr.Bool(true),
+							},
+						},
+						{
+							ChannelTargetInfo: &types.ChannelTargetInfo{
+								ContactChannelId:       ptr.String("__ContactChannelId__"),
+								RetryIntervalInMinutes: ptr.Int32(1),
+							},
+							ContactTargetInfo: &types.ContactTargetInfo{
+								ContactId:   ptr.String("__ContactId__"),
+								IsEssential: ptr.Bool(true),
+							},
+						},
+					},
+				},
+				{
+					DurationInMinutes: ptr.Int32(1),
+					Targets: []types.Target{
+						{
+							ChannelTargetInfo: &types.ChannelTargetInfo{
+								ContactChannelId:       ptr.String("__ContactChannelId__"),
+								RetryIntervalInMinutes: ptr.Int32(1),
+							},
+							ContactTargetInfo: &types.ContactTargetInfo{
+								ContactId:   ptr.String("__ContactId__"),
+								IsEssential: ptr.Bool(true),
+							},
+						},
+						{
+							ChannelTargetInfo: &types.ChannelTargetInfo{
+								ContactChannelId:       ptr.String("__ContactChannelId__"),
+								RetryIntervalInMinutes: ptr.Int32(1),
+							},
+							ContactTargetInfo: &types.ContactTargetInfo{
+								ContactId:   ptr.String("__ContactId__"),
+								IsEssential: ptr.Bool(true),
+							},
+						},
+					},
+				},
+			},
+			RotationIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -178,7 +261,16 @@ func TestCheckResponseSnapshot_CreateContactChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateContactChannel(context.Background(), &CreateContactChannelInput{})
+	got, err := svc.CreateContactChannel(context.Background(), &CreateContactChannelInput{
+		ContactId: ptr.String("__ContactId__"),
+		Name:      ptr.String("__Name__"),
+		Type:      types.ChannelType("SMS"),
+		DeliveryAddress: &types.ContactChannelAddress{
+			SimpleAddress: ptr.String("__SimpleAddress__"),
+		},
+		DeferActivation:  ptr.Bool(true),
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -199,7 +291,96 @@ func TestCheckResponseSnapshot_CreateRotation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRotation(context.Background(), &CreateRotationInput{})
+	got, err := svc.CreateRotation(context.Background(), &CreateRotationInput{
+		Name: ptr.String("__Name__"),
+		ContactIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		TimeZoneId: ptr.String("__TimeZoneId__"),
+		Recurrence: &types.RecurrenceSettings{
+			MonthlySettings: []types.MonthlySetting{
+				{
+					DayOfMonth: ptr.Int32(1),
+					HandOffTime: &types.HandOffTime{
+						HourOfDay:    1,
+						MinuteOfHour: 1,
+					},
+				},
+				{
+					DayOfMonth: ptr.Int32(1),
+					HandOffTime: &types.HandOffTime{
+						HourOfDay:    1,
+						MinuteOfHour: 1,
+					},
+				},
+			},
+			WeeklySettings: []types.WeeklySetting{
+				{
+					DayOfWeek: types.DayOfWeek("MON"),
+					HandOffTime: &types.HandOffTime{
+						HourOfDay:    1,
+						MinuteOfHour: 1,
+					},
+				},
+				{
+					DayOfWeek: types.DayOfWeek("MON"),
+					HandOffTime: &types.HandOffTime{
+						HourOfDay:    1,
+						MinuteOfHour: 1,
+					},
+				},
+			},
+			DailySettings: []types.HandOffTime{
+				{
+					HourOfDay:    1,
+					MinuteOfHour: 1,
+				},
+				{
+					HourOfDay:    1,
+					MinuteOfHour: 1,
+				},
+			},
+			NumberOfOnCalls: ptr.Int32(1),
+			ShiftCoverages: map[string][]types.CoverageTime{
+				"key0": {
+					{
+						Start: &types.HandOffTime{
+							HourOfDay:    1,
+							MinuteOfHour: 1,
+						},
+						End: &types.HandOffTime{
+							HourOfDay:    1,
+							MinuteOfHour: 1,
+						},
+					},
+					{
+						Start: &types.HandOffTime{
+							HourOfDay:    1,
+							MinuteOfHour: 1,
+						},
+						End: &types.HandOffTime{
+							HourOfDay:    1,
+							MinuteOfHour: 1,
+						},
+					},
+				},
+			},
+			RecurrenceMultiplier: ptr.Int32(1),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -220,7 +401,16 @@ func TestCheckResponseSnapshot_CreateRotationOverride(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRotationOverride(context.Background(), &CreateRotationOverrideInput{})
+	got, err := svc.CreateRotationOverride(context.Background(), &CreateRotationOverrideInput{
+		RotationId: ptr.String("__RotationId__"),
+		NewContactIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		StartTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -239,7 +429,9 @@ func TestCheckResponseSnapshot_DeactivateContactChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeactivateContactChannel(context.Background(), &DeactivateContactChannelInput{})
+	got, err := svc.DeactivateContactChannel(context.Background(), &DeactivateContactChannelInput{
+		ContactChannelId: ptr.String("__ContactChannelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -258,7 +450,9 @@ func TestCheckResponseSnapshot_DeleteContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteContact(context.Background(), &DeleteContactInput{})
+	got, err := svc.DeleteContact(context.Background(), &DeleteContactInput{
+		ContactId: ptr.String("__ContactId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -277,7 +471,9 @@ func TestCheckResponseSnapshot_DeleteContactChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteContactChannel(context.Background(), &DeleteContactChannelInput{})
+	got, err := svc.DeleteContactChannel(context.Background(), &DeleteContactChannelInput{
+		ContactChannelId: ptr.String("__ContactChannelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -296,7 +492,9 @@ func TestCheckResponseSnapshot_DeleteRotation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRotation(context.Background(), &DeleteRotationInput{})
+	got, err := svc.DeleteRotation(context.Background(), &DeleteRotationInput{
+		RotationId: ptr.String("__RotationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -315,7 +513,10 @@ func TestCheckResponseSnapshot_DeleteRotationOverride(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRotationOverride(context.Background(), &DeleteRotationOverrideInput{})
+	got, err := svc.DeleteRotationOverride(context.Background(), &DeleteRotationOverrideInput{
+		RotationId:         ptr.String("__RotationId__"),
+		RotationOverrideId: ptr.String("__RotationOverrideId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -345,7 +546,9 @@ func TestCheckResponseSnapshot_DescribeEngagement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEngagement(context.Background(), &DescribeEngagementInput{})
+	got, err := svc.DescribeEngagement(context.Background(), &DescribeEngagementInput{
+		EngagementId: ptr.String("__EngagementId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -377,7 +580,9 @@ func TestCheckResponseSnapshot_DescribePage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePage(context.Background(), &DescribePageInput{})
+	got, err := svc.DescribePage(context.Background(), &DescribePageInput{
+		PageId: ptr.String("__PageId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -459,7 +664,9 @@ func TestCheckResponseSnapshot_GetContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetContact(context.Background(), &GetContactInput{})
+	got, err := svc.GetContact(context.Background(), &GetContactInput{
+		ContactId: ptr.String("__ContactId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -487,7 +694,9 @@ func TestCheckResponseSnapshot_GetContactChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetContactChannel(context.Background(), &GetContactChannelInput{})
+	got, err := svc.GetContactChannel(context.Background(), &GetContactChannelInput{
+		ContactChannelId: ptr.String("__ContactChannelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -509,7 +718,9 @@ func TestCheckResponseSnapshot_GetContactPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetContactPolicy(context.Background(), &GetContactPolicyInput{})
+	got, err := svc.GetContactPolicy(context.Background(), &GetContactPolicyInput{
+		ContactArn: ptr.String("__ContactArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -607,7 +818,9 @@ func TestCheckResponseSnapshot_GetRotation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRotation(context.Background(), &GetRotationInput{})
+	got, err := svc.GetRotation(context.Background(), &GetRotationInput{
+		RotationId: ptr.String("__RotationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -636,7 +849,10 @@ func TestCheckResponseSnapshot_GetRotationOverride(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRotationOverride(context.Background(), &GetRotationOverrideInput{})
+	got, err := svc.GetRotationOverride(context.Background(), &GetRotationOverrideInput{
+		RotationId:         ptr.String("__RotationId__"),
+		RotationOverrideId: ptr.String("__RotationOverrideId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -679,7 +895,11 @@ func TestCheckResponseSnapshot_ListContactChannels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListContactChannels(context.Background(), &ListContactChannelsInput{})
+	got, err := svc.ListContactChannels(context.Background(), &ListContactChannelsInput{
+		ContactId:  ptr.String("__ContactId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -714,7 +934,12 @@ func TestCheckResponseSnapshot_ListContacts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListContacts(context.Background(), &ListContactsInput{})
+	got, err := svc.ListContacts(context.Background(), &ListContactsInput{
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		AliasPrefix: ptr.String("__AliasPrefix__"),
+		Type:        types.ContactType("PERSONAL"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -753,7 +978,15 @@ func TestCheckResponseSnapshot_ListEngagements(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEngagements(context.Background(), &ListEngagementsInput{})
+	got, err := svc.ListEngagements(context.Background(), &ListEngagementsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		IncidentId: ptr.String("__IncidentId__"),
+		TimeRangeValue: &types.TimeRange{
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -788,7 +1021,11 @@ func TestCheckResponseSnapshot_ListPageReceipts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPageReceipts(context.Background(), &ListPageReceiptsInput{})
+	got, err := svc.ListPageReceipts(context.Background(), &ListPageReceiptsInput{
+		PageId:     ptr.String("__PageId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -821,7 +1058,10 @@ func TestCheckResponseSnapshot_ListPageResolutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPageResolutions(context.Background(), &ListPageResolutionsInput{})
+	got, err := svc.ListPageResolutions(context.Background(), &ListPageResolutionsInput{
+		NextToken: ptr.String("__NextToken__"),
+		PageId:    ptr.String("__PageId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -864,7 +1104,11 @@ func TestCheckResponseSnapshot_ListPagesByContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPagesByContact(context.Background(), &ListPagesByContactInput{})
+	got, err := svc.ListPagesByContact(context.Background(), &ListPagesByContactInput{
+		ContactId:  ptr.String("__ContactId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -907,7 +1151,11 @@ func TestCheckResponseSnapshot_ListPagesByEngagement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPagesByEngagement(context.Background(), &ListPagesByEngagementInput{})
+	got, err := svc.ListPagesByEngagement(context.Background(), &ListPagesByEngagementInput{
+		EngagementId: ptr.String("__EngagementId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -960,7 +1208,106 @@ func TestCheckResponseSnapshot_ListPreviewRotationShifts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPreviewRotationShifts(context.Background(), &ListPreviewRotationShiftsInput{})
+	got, err := svc.ListPreviewRotationShifts(context.Background(), &ListPreviewRotationShiftsInput{
+		RotationStartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StartTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Members: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TimeZoneId: ptr.String("__TimeZoneId__"),
+		Recurrence: &types.RecurrenceSettings{
+			MonthlySettings: []types.MonthlySetting{
+				{
+					DayOfMonth: ptr.Int32(1),
+					HandOffTime: &types.HandOffTime{
+						HourOfDay:    1,
+						MinuteOfHour: 1,
+					},
+				},
+				{
+					DayOfMonth: ptr.Int32(1),
+					HandOffTime: &types.HandOffTime{
+						HourOfDay:    1,
+						MinuteOfHour: 1,
+					},
+				},
+			},
+			WeeklySettings: []types.WeeklySetting{
+				{
+					DayOfWeek: types.DayOfWeek("MON"),
+					HandOffTime: &types.HandOffTime{
+						HourOfDay:    1,
+						MinuteOfHour: 1,
+					},
+				},
+				{
+					DayOfWeek: types.DayOfWeek("MON"),
+					HandOffTime: &types.HandOffTime{
+						HourOfDay:    1,
+						MinuteOfHour: 1,
+					},
+				},
+			},
+			DailySettings: []types.HandOffTime{
+				{
+					HourOfDay:    1,
+					MinuteOfHour: 1,
+				},
+				{
+					HourOfDay:    1,
+					MinuteOfHour: 1,
+				},
+			},
+			NumberOfOnCalls: ptr.Int32(1),
+			ShiftCoverages: map[string][]types.CoverageTime{
+				"key0": {
+					{
+						Start: &types.HandOffTime{
+							HourOfDay:    1,
+							MinuteOfHour: 1,
+						},
+						End: &types.HandOffTime{
+							HourOfDay:    1,
+							MinuteOfHour: 1,
+						},
+					},
+					{
+						Start: &types.HandOffTime{
+							HourOfDay:    1,
+							MinuteOfHour: 1,
+						},
+						End: &types.HandOffTime{
+							HourOfDay:    1,
+							MinuteOfHour: 1,
+						},
+					},
+				},
+			},
+			RecurrenceMultiplier: ptr.Int32(1),
+		},
+		Overrides: []types.PreviewOverride{
+			{
+				NewMembers: []string{
+					"__Member__",
+					"__Member__",
+				},
+				StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				NewMembers: []string{
+					"__Member__",
+					"__Member__",
+				},
+				StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1003,7 +1350,13 @@ func TestCheckResponseSnapshot_ListRotationOverrides(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRotationOverrides(context.Background(), &ListRotationOverridesInput{})
+	got, err := svc.ListRotationOverrides(context.Background(), &ListRotationOverridesInput{
+		RotationId: ptr.String("__RotationId__"),
+		StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1056,7 +1409,13 @@ func TestCheckResponseSnapshot_ListRotationShifts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRotationShifts(context.Background(), &ListRotationShiftsInput{})
+	got, err := svc.ListRotationShifts(context.Background(), &ListRotationShiftsInput{
+		RotationId: ptr.String("__RotationId__"),
+		StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1239,7 +1598,11 @@ func TestCheckResponseSnapshot_ListRotations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRotations(context.Background(), &ListRotationsInput{})
+	got, err := svc.ListRotations(context.Background(), &ListRotationsInput{
+		RotationNamePrefix: ptr.String("__RotationNamePrefix__"),
+		NextToken:          ptr.String("__NextToken__"),
+		MaxResults:         ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1269,7 +1632,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1288,7 +1653,10 @@ func TestCheckResponseSnapshot_PutContactPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutContactPolicy(context.Background(), &PutContactPolicyInput{})
+	got, err := svc.PutContactPolicy(context.Background(), &PutContactPolicyInput{
+		ContactArn: ptr.String("__ContactArn__"),
+		Policy:     ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1307,7 +1675,9 @@ func TestCheckResponseSnapshot_SendActivationCode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendActivationCode(context.Background(), &SendActivationCodeInput{})
+	got, err := svc.SendActivationCode(context.Background(), &SendActivationCodeInput{
+		ContactChannelId: ptr.String("__ContactChannelId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1328,7 +1698,16 @@ func TestCheckResponseSnapshot_StartEngagement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartEngagement(context.Background(), &StartEngagementInput{})
+	got, err := svc.StartEngagement(context.Background(), &StartEngagementInput{
+		ContactId:        ptr.String("__ContactId__"),
+		Sender:           ptr.String("__Sender__"),
+		Subject:          ptr.String("__Subject__"),
+		Content:          ptr.String("__Content__"),
+		PublicSubject:    ptr.String("__PublicSubject__"),
+		PublicContent:    ptr.String("__PublicContent__"),
+		IncidentId:       ptr.String("__IncidentId__"),
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1347,7 +1726,10 @@ func TestCheckResponseSnapshot_StopEngagement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopEngagement(context.Background(), &StopEngagementInput{})
+	got, err := svc.StopEngagement(context.Background(), &StopEngagementInput{
+		EngagementId: ptr.String("__EngagementId__"),
+		Reason:       ptr.String("__Reason__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1366,7 +1748,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1385,7 +1779,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1404,7 +1804,68 @@ func TestCheckResponseSnapshot_UpdateContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateContact(context.Background(), &UpdateContactInput{})
+	got, err := svc.UpdateContact(context.Background(), &UpdateContactInput{
+		ContactId:   ptr.String("__ContactId__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		Plan: &types.Plan{
+			Stages: []types.Stage{
+				{
+					DurationInMinutes: ptr.Int32(1),
+					Targets: []types.Target{
+						{
+							ChannelTargetInfo: &types.ChannelTargetInfo{
+								ContactChannelId:       ptr.String("__ContactChannelId__"),
+								RetryIntervalInMinutes: ptr.Int32(1),
+							},
+							ContactTargetInfo: &types.ContactTargetInfo{
+								ContactId:   ptr.String("__ContactId__"),
+								IsEssential: ptr.Bool(true),
+							},
+						},
+						{
+							ChannelTargetInfo: &types.ChannelTargetInfo{
+								ContactChannelId:       ptr.String("__ContactChannelId__"),
+								RetryIntervalInMinutes: ptr.Int32(1),
+							},
+							ContactTargetInfo: &types.ContactTargetInfo{
+								ContactId:   ptr.String("__ContactId__"),
+								IsEssential: ptr.Bool(true),
+							},
+						},
+					},
+				},
+				{
+					DurationInMinutes: ptr.Int32(1),
+					Targets: []types.Target{
+						{
+							ChannelTargetInfo: &types.ChannelTargetInfo{
+								ContactChannelId:       ptr.String("__ContactChannelId__"),
+								RetryIntervalInMinutes: ptr.Int32(1),
+							},
+							ContactTargetInfo: &types.ContactTargetInfo{
+								ContactId:   ptr.String("__ContactId__"),
+								IsEssential: ptr.Bool(true),
+							},
+						},
+						{
+							ChannelTargetInfo: &types.ChannelTargetInfo{
+								ContactChannelId:       ptr.String("__ContactChannelId__"),
+								RetryIntervalInMinutes: ptr.Int32(1),
+							},
+							ContactTargetInfo: &types.ContactTargetInfo{
+								ContactId:   ptr.String("__ContactId__"),
+								IsEssential: ptr.Bool(true),
+							},
+						},
+					},
+				},
+			},
+			RotationIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1423,7 +1884,13 @@ func TestCheckResponseSnapshot_UpdateContactChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateContactChannel(context.Background(), &UpdateContactChannelInput{})
+	got, err := svc.UpdateContactChannel(context.Background(), &UpdateContactChannelInput{
+		ContactChannelId: ptr.String("__ContactChannelId__"),
+		Name:             ptr.String("__Name__"),
+		DeliveryAddress: &types.ContactChannelAddress{
+			SimpleAddress: ptr.String("__SimpleAddress__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1442,7 +1909,85 @@ func TestCheckResponseSnapshot_UpdateRotation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRotation(context.Background(), &UpdateRotationInput{})
+	got, err := svc.UpdateRotation(context.Background(), &UpdateRotationInput{
+		RotationId: ptr.String("__RotationId__"),
+		ContactIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		TimeZoneId: ptr.String("__TimeZoneId__"),
+		Recurrence: &types.RecurrenceSettings{
+			MonthlySettings: []types.MonthlySetting{
+				{
+					DayOfMonth: ptr.Int32(1),
+					HandOffTime: &types.HandOffTime{
+						HourOfDay:    1,
+						MinuteOfHour: 1,
+					},
+				},
+				{
+					DayOfMonth: ptr.Int32(1),
+					HandOffTime: &types.HandOffTime{
+						HourOfDay:    1,
+						MinuteOfHour: 1,
+					},
+				},
+			},
+			WeeklySettings: []types.WeeklySetting{
+				{
+					DayOfWeek: types.DayOfWeek("MON"),
+					HandOffTime: &types.HandOffTime{
+						HourOfDay:    1,
+						MinuteOfHour: 1,
+					},
+				},
+				{
+					DayOfWeek: types.DayOfWeek("MON"),
+					HandOffTime: &types.HandOffTime{
+						HourOfDay:    1,
+						MinuteOfHour: 1,
+					},
+				},
+			},
+			DailySettings: []types.HandOffTime{
+				{
+					HourOfDay:    1,
+					MinuteOfHour: 1,
+				},
+				{
+					HourOfDay:    1,
+					MinuteOfHour: 1,
+				},
+			},
+			NumberOfOnCalls: ptr.Int32(1),
+			ShiftCoverages: map[string][]types.CoverageTime{
+				"key0": {
+					{
+						Start: &types.HandOffTime{
+							HourOfDay:    1,
+							MinuteOfHour: 1,
+						},
+						End: &types.HandOffTime{
+							HourOfDay:    1,
+							MinuteOfHour: 1,
+						},
+					},
+					{
+						Start: &types.HandOffTime{
+							HourOfDay:    1,
+							MinuteOfHour: 1,
+						},
+						End: &types.HandOffTime{
+							HourOfDay:    1,
+							MinuteOfHour: 1,
+						},
+					},
+				},
+			},
+			RecurrenceMultiplier: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1463,7 +2008,14 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptPage(context.Background(), &AcceptPageInput{})
+	_, opErr := svc.AcceptPage(context.Background(), &AcceptPageInput{
+		PageId:               ptr.String("__PageId__"),
+		ContactChannelId:     ptr.String("__ContactChannelId__"),
+		AcceptType:           types.AcceptType("DELIVERED"),
+		Note:                 ptr.String("__Note__"),
+		AcceptCode:           ptr.String("__AcceptCode__"),
+		AcceptCodeValidation: types.AcceptCodeValidation("IGNORE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1506,7 +2058,80 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateContact(context.Background(), &CreateContactInput{})
+	_, opErr := svc.CreateContact(context.Background(), &CreateContactInput{
+		Alias:       ptr.String("__Alias__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		Type:        types.ContactType("PERSONAL"),
+		Plan: &types.Plan{
+			Stages: []types.Stage{
+				{
+					DurationInMinutes: ptr.Int32(1),
+					Targets: []types.Target{
+						{
+							ChannelTargetInfo: &types.ChannelTargetInfo{
+								ContactChannelId:       ptr.String("__ContactChannelId__"),
+								RetryIntervalInMinutes: ptr.Int32(1),
+							},
+							ContactTargetInfo: &types.ContactTargetInfo{
+								ContactId:   ptr.String("__ContactId__"),
+								IsEssential: ptr.Bool(true),
+							},
+						},
+						{
+							ChannelTargetInfo: &types.ChannelTargetInfo{
+								ContactChannelId:       ptr.String("__ContactChannelId__"),
+								RetryIntervalInMinutes: ptr.Int32(1),
+							},
+							ContactTargetInfo: &types.ContactTargetInfo{
+								ContactId:   ptr.String("__ContactId__"),
+								IsEssential: ptr.Bool(true),
+							},
+						},
+					},
+				},
+				{
+					DurationInMinutes: ptr.Int32(1),
+					Targets: []types.Target{
+						{
+							ChannelTargetInfo: &types.ChannelTargetInfo{
+								ContactChannelId:       ptr.String("__ContactChannelId__"),
+								RetryIntervalInMinutes: ptr.Int32(1),
+							},
+							ContactTargetInfo: &types.ContactTargetInfo{
+								ContactId:   ptr.String("__ContactId__"),
+								IsEssential: ptr.Bool(true),
+							},
+						},
+						{
+							ChannelTargetInfo: &types.ChannelTargetInfo{
+								ContactChannelId:       ptr.String("__ContactChannelId__"),
+								RetryIntervalInMinutes: ptr.Int32(1),
+							},
+							ContactTargetInfo: &types.ContactTargetInfo{
+								ContactId:   ptr.String("__ContactId__"),
+								IsEssential: ptr.Bool(true),
+							},
+						},
+					},
+				},
+			},
+			RotationIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1531,7 +2156,80 @@ func TestCheckResponseSnapshot_Error_DataEncryptionException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateContact(context.Background(), &CreateContactInput{})
+	_, opErr := svc.CreateContact(context.Background(), &CreateContactInput{
+		Alias:       ptr.String("__Alias__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		Type:        types.ContactType("PERSONAL"),
+		Plan: &types.Plan{
+			Stages: []types.Stage{
+				{
+					DurationInMinutes: ptr.Int32(1),
+					Targets: []types.Target{
+						{
+							ChannelTargetInfo: &types.ChannelTargetInfo{
+								ContactChannelId:       ptr.String("__ContactChannelId__"),
+								RetryIntervalInMinutes: ptr.Int32(1),
+							},
+							ContactTargetInfo: &types.ContactTargetInfo{
+								ContactId:   ptr.String("__ContactId__"),
+								IsEssential: ptr.Bool(true),
+							},
+						},
+						{
+							ChannelTargetInfo: &types.ChannelTargetInfo{
+								ContactChannelId:       ptr.String("__ContactChannelId__"),
+								RetryIntervalInMinutes: ptr.Int32(1),
+							},
+							ContactTargetInfo: &types.ContactTargetInfo{
+								ContactId:   ptr.String("__ContactId__"),
+								IsEssential: ptr.Bool(true),
+							},
+						},
+					},
+				},
+				{
+					DurationInMinutes: ptr.Int32(1),
+					Targets: []types.Target{
+						{
+							ChannelTargetInfo: &types.ChannelTargetInfo{
+								ContactChannelId:       ptr.String("__ContactChannelId__"),
+								RetryIntervalInMinutes: ptr.Int32(1),
+							},
+							ContactTargetInfo: &types.ContactTargetInfo{
+								ContactId:   ptr.String("__ContactId__"),
+								IsEssential: ptr.Bool(true),
+							},
+						},
+						{
+							ChannelTargetInfo: &types.ChannelTargetInfo{
+								ContactChannelId:       ptr.String("__ContactChannelId__"),
+								RetryIntervalInMinutes: ptr.Int32(1),
+							},
+							ContactTargetInfo: &types.ContactTargetInfo{
+								ContactId:   ptr.String("__ContactId__"),
+								IsEssential: ptr.Bool(true),
+							},
+						},
+					},
+				},
+			},
+			RotationIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1557,7 +2255,14 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptPage(context.Background(), &AcceptPageInput{})
+	_, opErr := svc.AcceptPage(context.Background(), &AcceptPageInput{
+		PageId:               ptr.String("__PageId__"),
+		ContactChannelId:     ptr.String("__ContactChannelId__"),
+		AcceptType:           types.AcceptType("DELIVERED"),
+		Note:                 ptr.String("__Note__"),
+		AcceptCode:           ptr.String("__AcceptCode__"),
+		AcceptCodeValidation: types.AcceptCodeValidation("IGNORE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1584,7 +2289,14 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptPage(context.Background(), &AcceptPageInput{})
+	_, opErr := svc.AcceptPage(context.Background(), &AcceptPageInput{
+		PageId:               ptr.String("__PageId__"),
+		ContactChannelId:     ptr.String("__ContactChannelId__"),
+		AcceptType:           types.AcceptType("DELIVERED"),
+		Note:                 ptr.String("__Note__"),
+		AcceptCode:           ptr.String("__AcceptCode__"),
+		AcceptCodeValidation: types.AcceptCodeValidation("IGNORE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1613,7 +2325,80 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateContact(context.Background(), &CreateContactInput{})
+	_, opErr := svc.CreateContact(context.Background(), &CreateContactInput{
+		Alias:       ptr.String("__Alias__"),
+		DisplayName: ptr.String("__DisplayName__"),
+		Type:        types.ContactType("PERSONAL"),
+		Plan: &types.Plan{
+			Stages: []types.Stage{
+				{
+					DurationInMinutes: ptr.Int32(1),
+					Targets: []types.Target{
+						{
+							ChannelTargetInfo: &types.ChannelTargetInfo{
+								ContactChannelId:       ptr.String("__ContactChannelId__"),
+								RetryIntervalInMinutes: ptr.Int32(1),
+							},
+							ContactTargetInfo: &types.ContactTargetInfo{
+								ContactId:   ptr.String("__ContactId__"),
+								IsEssential: ptr.Bool(true),
+							},
+						},
+						{
+							ChannelTargetInfo: &types.ChannelTargetInfo{
+								ContactChannelId:       ptr.String("__ContactChannelId__"),
+								RetryIntervalInMinutes: ptr.Int32(1),
+							},
+							ContactTargetInfo: &types.ContactTargetInfo{
+								ContactId:   ptr.String("__ContactId__"),
+								IsEssential: ptr.Bool(true),
+							},
+						},
+					},
+				},
+				{
+					DurationInMinutes: ptr.Int32(1),
+					Targets: []types.Target{
+						{
+							ChannelTargetInfo: &types.ChannelTargetInfo{
+								ContactChannelId:       ptr.String("__ContactChannelId__"),
+								RetryIntervalInMinutes: ptr.Int32(1),
+							},
+							ContactTargetInfo: &types.ContactTargetInfo{
+								ContactId:   ptr.String("__ContactId__"),
+								IsEssential: ptr.Bool(true),
+							},
+						},
+						{
+							ChannelTargetInfo: &types.ChannelTargetInfo{
+								ContactChannelId:       ptr.String("__ContactChannelId__"),
+								RetryIntervalInMinutes: ptr.Int32(1),
+							},
+							ContactTargetInfo: &types.ContactTargetInfo{
+								ContactId:   ptr.String("__ContactId__"),
+								IsEssential: ptr.Bool(true),
+							},
+						},
+					},
+				},
+			},
+			RotationIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1641,7 +2426,14 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptPage(context.Background(), &AcceptPageInput{})
+	_, opErr := svc.AcceptPage(context.Background(), &AcceptPageInput{
+		PageId:               ptr.String("__PageId__"),
+		ContactChannelId:     ptr.String("__ContactChannelId__"),
+		AcceptType:           types.AcceptType("DELIVERED"),
+		Note:                 ptr.String("__Note__"),
+		AcceptCode:           ptr.String("__AcceptCode__"),
+		AcceptCodeValidation: types.AcceptCodeValidation("IGNORE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1677,7 +2469,14 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptPage(context.Background(), &AcceptPageInput{})
+	_, opErr := svc.AcceptPage(context.Background(), &AcceptPageInput{
+		PageId:               ptr.String("__PageId__"),
+		ContactChannelId:     ptr.String("__ContactChannelId__"),
+		AcceptType:           types.AcceptType("DELIVERED"),
+		Note:                 ptr.String("__Note__"),
+		AcceptCode:           ptr.String("__AcceptCode__"),
+		AcceptCodeValidation: types.AcceptCodeValidation("IGNORE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

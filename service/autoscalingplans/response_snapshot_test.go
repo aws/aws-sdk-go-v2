@@ -119,7 +119,208 @@ func TestCheckResponseSnapshot_CreateScalingPlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateScalingPlan(context.Background(), &CreateScalingPlanInput{})
+	got, err := svc.CreateScalingPlan(context.Background(), &CreateScalingPlanInput{
+		ScalingPlanName: ptr.String("__ScalingPlanName__"),
+		ApplicationSource: &types.ApplicationSource{
+			CloudFormationStackARN: ptr.String("__CloudFormationStackARN__"),
+			TagFilters: []types.TagFilter{
+				{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		ScalingInstructions: []types.ScalingInstruction{
+			{
+				ServiceNamespace:  types.ServiceNamespace("autoscaling"),
+				ResourceId:        ptr.String("__ResourceId__"),
+				ScalableDimension: types.ScalableDimension("autoscaling:autoScalingGroup:DesiredCapacity"),
+				MinCapacity:       ptr.Int32(1),
+				MaxCapacity:       ptr.Int32(1),
+				TargetTrackingConfigurations: []types.TargetTrackingConfiguration{
+					{
+						PredefinedScalingMetricSpecification: &types.PredefinedScalingMetricSpecification{
+							PredefinedScalingMetricType: types.ScalingMetricType("ASGAverageCPUUtilization"),
+							ResourceLabel:               ptr.String("__ResourceLabel__"),
+						},
+						CustomizedScalingMetricSpecification: &types.CustomizedScalingMetricSpecification{
+							MetricName: ptr.String("__MetricName__"),
+							Namespace:  ptr.String("__Namespace__"),
+							Dimensions: []types.MetricDimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Statistic: types.MetricStatistic("Average"),
+							Unit:      ptr.String("__Unit__"),
+						},
+						TargetValue:             ptr.Float64(1.0),
+						DisableScaleIn:          ptr.Bool(true),
+						ScaleOutCooldown:        ptr.Int32(1),
+						ScaleInCooldown:         ptr.Int32(1),
+						EstimatedInstanceWarmup: ptr.Int32(1),
+					},
+					{
+						PredefinedScalingMetricSpecification: &types.PredefinedScalingMetricSpecification{
+							PredefinedScalingMetricType: types.ScalingMetricType("ASGAverageCPUUtilization"),
+							ResourceLabel:               ptr.String("__ResourceLabel__"),
+						},
+						CustomizedScalingMetricSpecification: &types.CustomizedScalingMetricSpecification{
+							MetricName: ptr.String("__MetricName__"),
+							Namespace:  ptr.String("__Namespace__"),
+							Dimensions: []types.MetricDimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Statistic: types.MetricStatistic("Average"),
+							Unit:      ptr.String("__Unit__"),
+						},
+						TargetValue:             ptr.Float64(1.0),
+						DisableScaleIn:          ptr.Bool(true),
+						ScaleOutCooldown:        ptr.Int32(1),
+						ScaleInCooldown:         ptr.Int32(1),
+						EstimatedInstanceWarmup: ptr.Int32(1),
+					},
+				},
+				PredefinedLoadMetricSpecification: &types.PredefinedLoadMetricSpecification{
+					PredefinedLoadMetricType: types.LoadMetricType("ASGTotalCPUUtilization"),
+					ResourceLabel:            ptr.String("__ResourceLabel__"),
+				},
+				CustomizedLoadMetricSpecification: &types.CustomizedLoadMetricSpecification{
+					MetricName: ptr.String("__MetricName__"),
+					Namespace:  ptr.String("__Namespace__"),
+					Dimensions: []types.MetricDimension{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					Statistic: types.MetricStatistic("Average"),
+					Unit:      ptr.String("__Unit__"),
+				},
+				ScheduledActionBufferTime:            ptr.Int32(1),
+				PredictiveScalingMaxCapacityBehavior: types.PredictiveScalingMaxCapacityBehavior("SetForecastCapacityToMaxCapacity"),
+				PredictiveScalingMaxCapacityBuffer:   ptr.Int32(1),
+				PredictiveScalingMode:                types.PredictiveScalingMode("ForecastAndScale"),
+				ScalingPolicyUpdateBehavior:          types.ScalingPolicyUpdateBehavior("KeepExternalPolicies"),
+				DisableDynamicScaling:                ptr.Bool(true),
+			},
+			{
+				ServiceNamespace:  types.ServiceNamespace("autoscaling"),
+				ResourceId:        ptr.String("__ResourceId__"),
+				ScalableDimension: types.ScalableDimension("autoscaling:autoScalingGroup:DesiredCapacity"),
+				MinCapacity:       ptr.Int32(1),
+				MaxCapacity:       ptr.Int32(1),
+				TargetTrackingConfigurations: []types.TargetTrackingConfiguration{
+					{
+						PredefinedScalingMetricSpecification: &types.PredefinedScalingMetricSpecification{
+							PredefinedScalingMetricType: types.ScalingMetricType("ASGAverageCPUUtilization"),
+							ResourceLabel:               ptr.String("__ResourceLabel__"),
+						},
+						CustomizedScalingMetricSpecification: &types.CustomizedScalingMetricSpecification{
+							MetricName: ptr.String("__MetricName__"),
+							Namespace:  ptr.String("__Namespace__"),
+							Dimensions: []types.MetricDimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Statistic: types.MetricStatistic("Average"),
+							Unit:      ptr.String("__Unit__"),
+						},
+						TargetValue:             ptr.Float64(1.0),
+						DisableScaleIn:          ptr.Bool(true),
+						ScaleOutCooldown:        ptr.Int32(1),
+						ScaleInCooldown:         ptr.Int32(1),
+						EstimatedInstanceWarmup: ptr.Int32(1),
+					},
+					{
+						PredefinedScalingMetricSpecification: &types.PredefinedScalingMetricSpecification{
+							PredefinedScalingMetricType: types.ScalingMetricType("ASGAverageCPUUtilization"),
+							ResourceLabel:               ptr.String("__ResourceLabel__"),
+						},
+						CustomizedScalingMetricSpecification: &types.CustomizedScalingMetricSpecification{
+							MetricName: ptr.String("__MetricName__"),
+							Namespace:  ptr.String("__Namespace__"),
+							Dimensions: []types.MetricDimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Statistic: types.MetricStatistic("Average"),
+							Unit:      ptr.String("__Unit__"),
+						},
+						TargetValue:             ptr.Float64(1.0),
+						DisableScaleIn:          ptr.Bool(true),
+						ScaleOutCooldown:        ptr.Int32(1),
+						ScaleInCooldown:         ptr.Int32(1),
+						EstimatedInstanceWarmup: ptr.Int32(1),
+					},
+				},
+				PredefinedLoadMetricSpecification: &types.PredefinedLoadMetricSpecification{
+					PredefinedLoadMetricType: types.LoadMetricType("ASGTotalCPUUtilization"),
+					ResourceLabel:            ptr.String("__ResourceLabel__"),
+				},
+				CustomizedLoadMetricSpecification: &types.CustomizedLoadMetricSpecification{
+					MetricName: ptr.String("__MetricName__"),
+					Namespace:  ptr.String("__Namespace__"),
+					Dimensions: []types.MetricDimension{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					Statistic: types.MetricStatistic("Average"),
+					Unit:      ptr.String("__Unit__"),
+				},
+				ScheduledActionBufferTime:            ptr.Int32(1),
+				PredictiveScalingMaxCapacityBehavior: types.PredictiveScalingMaxCapacityBehavior("SetForecastCapacityToMaxCapacity"),
+				PredictiveScalingMaxCapacityBuffer:   ptr.Int32(1),
+				PredictiveScalingMode:                types.PredictiveScalingMode("ForecastAndScale"),
+				ScalingPolicyUpdateBehavior:          types.ScalingPolicyUpdateBehavior("KeepExternalPolicies"),
+				DisableDynamicScaling:                ptr.Bool(true),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -138,7 +339,10 @@ func TestCheckResponseSnapshot_DeleteScalingPlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteScalingPlan(context.Background(), &DeleteScalingPlanInput{})
+	got, err := svc.DeleteScalingPlan(context.Background(), &DeleteScalingPlanInput{
+		ScalingPlanName:    ptr.String("__ScalingPlanName__"),
+		ScalingPlanVersion: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -307,7 +511,12 @@ func TestCheckResponseSnapshot_DescribeScalingPlanResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeScalingPlanResources(context.Background(), &DescribeScalingPlanResourcesInput{})
+	got, err := svc.DescribeScalingPlanResources(context.Background(), &DescribeScalingPlanResourcesInput{
+		ScalingPlanName:    ptr.String("__ScalingPlanName__"),
+		ScalingPlanVersion: ptr.Int64(1),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -744,7 +953,55 @@ func TestCheckResponseSnapshot_DescribeScalingPlans(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeScalingPlans(context.Background(), &DescribeScalingPlansInput{})
+	got, err := svc.DescribeScalingPlans(context.Background(), &DescribeScalingPlansInput{
+		ScalingPlanNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ScalingPlanVersion: ptr.Int64(1),
+		ApplicationSources: []types.ApplicationSource{
+			{
+				CloudFormationStackARN: ptr.String("__CloudFormationStackARN__"),
+				TagFilters: []types.TagFilter{
+					{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			{
+				CloudFormationStackARN: ptr.String("__CloudFormationStackARN__"),
+				TagFilters: []types.TagFilter{
+					{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Key: ptr.String("__Key__"),
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -774,7 +1031,16 @@ func TestCheckResponseSnapshot_GetScalingPlanResourceForecastData(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetScalingPlanResourceForecastData(context.Background(), &GetScalingPlanResourceForecastDataInput{})
+	got, err := svc.GetScalingPlanResourceForecastData(context.Background(), &GetScalingPlanResourceForecastDataInput{
+		ScalingPlanName:    ptr.String("__ScalingPlanName__"),
+		ScalingPlanVersion: ptr.Int64(1),
+		ServiceNamespace:   types.ServiceNamespace("autoscaling"),
+		ResourceId:         ptr.String("__ResourceId__"),
+		ScalableDimension:  types.ScalableDimension("autoscaling:autoScalingGroup:DesiredCapacity"),
+		ForecastDataType:   types.ForecastDataType("CapacityForecast"),
+		StartTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -793,7 +1059,209 @@ func TestCheckResponseSnapshot_UpdateScalingPlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateScalingPlan(context.Background(), &UpdateScalingPlanInput{})
+	got, err := svc.UpdateScalingPlan(context.Background(), &UpdateScalingPlanInput{
+		ScalingPlanName:    ptr.String("__ScalingPlanName__"),
+		ScalingPlanVersion: ptr.Int64(1),
+		ApplicationSource: &types.ApplicationSource{
+			CloudFormationStackARN: ptr.String("__CloudFormationStackARN__"),
+			TagFilters: []types.TagFilter{
+				{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		ScalingInstructions: []types.ScalingInstruction{
+			{
+				ServiceNamespace:  types.ServiceNamespace("autoscaling"),
+				ResourceId:        ptr.String("__ResourceId__"),
+				ScalableDimension: types.ScalableDimension("autoscaling:autoScalingGroup:DesiredCapacity"),
+				MinCapacity:       ptr.Int32(1),
+				MaxCapacity:       ptr.Int32(1),
+				TargetTrackingConfigurations: []types.TargetTrackingConfiguration{
+					{
+						PredefinedScalingMetricSpecification: &types.PredefinedScalingMetricSpecification{
+							PredefinedScalingMetricType: types.ScalingMetricType("ASGAverageCPUUtilization"),
+							ResourceLabel:               ptr.String("__ResourceLabel__"),
+						},
+						CustomizedScalingMetricSpecification: &types.CustomizedScalingMetricSpecification{
+							MetricName: ptr.String("__MetricName__"),
+							Namespace:  ptr.String("__Namespace__"),
+							Dimensions: []types.MetricDimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Statistic: types.MetricStatistic("Average"),
+							Unit:      ptr.String("__Unit__"),
+						},
+						TargetValue:             ptr.Float64(1.0),
+						DisableScaleIn:          ptr.Bool(true),
+						ScaleOutCooldown:        ptr.Int32(1),
+						ScaleInCooldown:         ptr.Int32(1),
+						EstimatedInstanceWarmup: ptr.Int32(1),
+					},
+					{
+						PredefinedScalingMetricSpecification: &types.PredefinedScalingMetricSpecification{
+							PredefinedScalingMetricType: types.ScalingMetricType("ASGAverageCPUUtilization"),
+							ResourceLabel:               ptr.String("__ResourceLabel__"),
+						},
+						CustomizedScalingMetricSpecification: &types.CustomizedScalingMetricSpecification{
+							MetricName: ptr.String("__MetricName__"),
+							Namespace:  ptr.String("__Namespace__"),
+							Dimensions: []types.MetricDimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Statistic: types.MetricStatistic("Average"),
+							Unit:      ptr.String("__Unit__"),
+						},
+						TargetValue:             ptr.Float64(1.0),
+						DisableScaleIn:          ptr.Bool(true),
+						ScaleOutCooldown:        ptr.Int32(1),
+						ScaleInCooldown:         ptr.Int32(1),
+						EstimatedInstanceWarmup: ptr.Int32(1),
+					},
+				},
+				PredefinedLoadMetricSpecification: &types.PredefinedLoadMetricSpecification{
+					PredefinedLoadMetricType: types.LoadMetricType("ASGTotalCPUUtilization"),
+					ResourceLabel:            ptr.String("__ResourceLabel__"),
+				},
+				CustomizedLoadMetricSpecification: &types.CustomizedLoadMetricSpecification{
+					MetricName: ptr.String("__MetricName__"),
+					Namespace:  ptr.String("__Namespace__"),
+					Dimensions: []types.MetricDimension{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					Statistic: types.MetricStatistic("Average"),
+					Unit:      ptr.String("__Unit__"),
+				},
+				ScheduledActionBufferTime:            ptr.Int32(1),
+				PredictiveScalingMaxCapacityBehavior: types.PredictiveScalingMaxCapacityBehavior("SetForecastCapacityToMaxCapacity"),
+				PredictiveScalingMaxCapacityBuffer:   ptr.Int32(1),
+				PredictiveScalingMode:                types.PredictiveScalingMode("ForecastAndScale"),
+				ScalingPolicyUpdateBehavior:          types.ScalingPolicyUpdateBehavior("KeepExternalPolicies"),
+				DisableDynamicScaling:                ptr.Bool(true),
+			},
+			{
+				ServiceNamespace:  types.ServiceNamespace("autoscaling"),
+				ResourceId:        ptr.String("__ResourceId__"),
+				ScalableDimension: types.ScalableDimension("autoscaling:autoScalingGroup:DesiredCapacity"),
+				MinCapacity:       ptr.Int32(1),
+				MaxCapacity:       ptr.Int32(1),
+				TargetTrackingConfigurations: []types.TargetTrackingConfiguration{
+					{
+						PredefinedScalingMetricSpecification: &types.PredefinedScalingMetricSpecification{
+							PredefinedScalingMetricType: types.ScalingMetricType("ASGAverageCPUUtilization"),
+							ResourceLabel:               ptr.String("__ResourceLabel__"),
+						},
+						CustomizedScalingMetricSpecification: &types.CustomizedScalingMetricSpecification{
+							MetricName: ptr.String("__MetricName__"),
+							Namespace:  ptr.String("__Namespace__"),
+							Dimensions: []types.MetricDimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Statistic: types.MetricStatistic("Average"),
+							Unit:      ptr.String("__Unit__"),
+						},
+						TargetValue:             ptr.Float64(1.0),
+						DisableScaleIn:          ptr.Bool(true),
+						ScaleOutCooldown:        ptr.Int32(1),
+						ScaleInCooldown:         ptr.Int32(1),
+						EstimatedInstanceWarmup: ptr.Int32(1),
+					},
+					{
+						PredefinedScalingMetricSpecification: &types.PredefinedScalingMetricSpecification{
+							PredefinedScalingMetricType: types.ScalingMetricType("ASGAverageCPUUtilization"),
+							ResourceLabel:               ptr.String("__ResourceLabel__"),
+						},
+						CustomizedScalingMetricSpecification: &types.CustomizedScalingMetricSpecification{
+							MetricName: ptr.String("__MetricName__"),
+							Namespace:  ptr.String("__Namespace__"),
+							Dimensions: []types.MetricDimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Statistic: types.MetricStatistic("Average"),
+							Unit:      ptr.String("__Unit__"),
+						},
+						TargetValue:             ptr.Float64(1.0),
+						DisableScaleIn:          ptr.Bool(true),
+						ScaleOutCooldown:        ptr.Int32(1),
+						ScaleInCooldown:         ptr.Int32(1),
+						EstimatedInstanceWarmup: ptr.Int32(1),
+					},
+				},
+				PredefinedLoadMetricSpecification: &types.PredefinedLoadMetricSpecification{
+					PredefinedLoadMetricType: types.LoadMetricType("ASGTotalCPUUtilization"),
+					ResourceLabel:            ptr.String("__ResourceLabel__"),
+				},
+				CustomizedLoadMetricSpecification: &types.CustomizedLoadMetricSpecification{
+					MetricName: ptr.String("__MetricName__"),
+					Namespace:  ptr.String("__Namespace__"),
+					Dimensions: []types.MetricDimension{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					Statistic: types.MetricStatistic("Average"),
+					Unit:      ptr.String("__Unit__"),
+				},
+				ScheduledActionBufferTime:            ptr.Int32(1),
+				PredictiveScalingMaxCapacityBehavior: types.PredictiveScalingMaxCapacityBehavior("SetForecastCapacityToMaxCapacity"),
+				PredictiveScalingMaxCapacityBuffer:   ptr.Int32(1),
+				PredictiveScalingMode:                types.PredictiveScalingMode("ForecastAndScale"),
+				ScalingPolicyUpdateBehavior:          types.ScalingPolicyUpdateBehavior("KeepExternalPolicies"),
+				DisableDynamicScaling:                ptr.Bool(true),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -814,7 +1282,208 @@ func TestCheckResponseSnapshot_Error_ConcurrentUpdateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateScalingPlan(context.Background(), &CreateScalingPlanInput{})
+	_, opErr := svc.CreateScalingPlan(context.Background(), &CreateScalingPlanInput{
+		ScalingPlanName: ptr.String("__ScalingPlanName__"),
+		ApplicationSource: &types.ApplicationSource{
+			CloudFormationStackARN: ptr.String("__CloudFormationStackARN__"),
+			TagFilters: []types.TagFilter{
+				{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		ScalingInstructions: []types.ScalingInstruction{
+			{
+				ServiceNamespace:  types.ServiceNamespace("autoscaling"),
+				ResourceId:        ptr.String("__ResourceId__"),
+				ScalableDimension: types.ScalableDimension("autoscaling:autoScalingGroup:DesiredCapacity"),
+				MinCapacity:       ptr.Int32(1),
+				MaxCapacity:       ptr.Int32(1),
+				TargetTrackingConfigurations: []types.TargetTrackingConfiguration{
+					{
+						PredefinedScalingMetricSpecification: &types.PredefinedScalingMetricSpecification{
+							PredefinedScalingMetricType: types.ScalingMetricType("ASGAverageCPUUtilization"),
+							ResourceLabel:               ptr.String("__ResourceLabel__"),
+						},
+						CustomizedScalingMetricSpecification: &types.CustomizedScalingMetricSpecification{
+							MetricName: ptr.String("__MetricName__"),
+							Namespace:  ptr.String("__Namespace__"),
+							Dimensions: []types.MetricDimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Statistic: types.MetricStatistic("Average"),
+							Unit:      ptr.String("__Unit__"),
+						},
+						TargetValue:             ptr.Float64(1.0),
+						DisableScaleIn:          ptr.Bool(true),
+						ScaleOutCooldown:        ptr.Int32(1),
+						ScaleInCooldown:         ptr.Int32(1),
+						EstimatedInstanceWarmup: ptr.Int32(1),
+					},
+					{
+						PredefinedScalingMetricSpecification: &types.PredefinedScalingMetricSpecification{
+							PredefinedScalingMetricType: types.ScalingMetricType("ASGAverageCPUUtilization"),
+							ResourceLabel:               ptr.String("__ResourceLabel__"),
+						},
+						CustomizedScalingMetricSpecification: &types.CustomizedScalingMetricSpecification{
+							MetricName: ptr.String("__MetricName__"),
+							Namespace:  ptr.String("__Namespace__"),
+							Dimensions: []types.MetricDimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Statistic: types.MetricStatistic("Average"),
+							Unit:      ptr.String("__Unit__"),
+						},
+						TargetValue:             ptr.Float64(1.0),
+						DisableScaleIn:          ptr.Bool(true),
+						ScaleOutCooldown:        ptr.Int32(1),
+						ScaleInCooldown:         ptr.Int32(1),
+						EstimatedInstanceWarmup: ptr.Int32(1),
+					},
+				},
+				PredefinedLoadMetricSpecification: &types.PredefinedLoadMetricSpecification{
+					PredefinedLoadMetricType: types.LoadMetricType("ASGTotalCPUUtilization"),
+					ResourceLabel:            ptr.String("__ResourceLabel__"),
+				},
+				CustomizedLoadMetricSpecification: &types.CustomizedLoadMetricSpecification{
+					MetricName: ptr.String("__MetricName__"),
+					Namespace:  ptr.String("__Namespace__"),
+					Dimensions: []types.MetricDimension{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					Statistic: types.MetricStatistic("Average"),
+					Unit:      ptr.String("__Unit__"),
+				},
+				ScheduledActionBufferTime:            ptr.Int32(1),
+				PredictiveScalingMaxCapacityBehavior: types.PredictiveScalingMaxCapacityBehavior("SetForecastCapacityToMaxCapacity"),
+				PredictiveScalingMaxCapacityBuffer:   ptr.Int32(1),
+				PredictiveScalingMode:                types.PredictiveScalingMode("ForecastAndScale"),
+				ScalingPolicyUpdateBehavior:          types.ScalingPolicyUpdateBehavior("KeepExternalPolicies"),
+				DisableDynamicScaling:                ptr.Bool(true),
+			},
+			{
+				ServiceNamespace:  types.ServiceNamespace("autoscaling"),
+				ResourceId:        ptr.String("__ResourceId__"),
+				ScalableDimension: types.ScalableDimension("autoscaling:autoScalingGroup:DesiredCapacity"),
+				MinCapacity:       ptr.Int32(1),
+				MaxCapacity:       ptr.Int32(1),
+				TargetTrackingConfigurations: []types.TargetTrackingConfiguration{
+					{
+						PredefinedScalingMetricSpecification: &types.PredefinedScalingMetricSpecification{
+							PredefinedScalingMetricType: types.ScalingMetricType("ASGAverageCPUUtilization"),
+							ResourceLabel:               ptr.String("__ResourceLabel__"),
+						},
+						CustomizedScalingMetricSpecification: &types.CustomizedScalingMetricSpecification{
+							MetricName: ptr.String("__MetricName__"),
+							Namespace:  ptr.String("__Namespace__"),
+							Dimensions: []types.MetricDimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Statistic: types.MetricStatistic("Average"),
+							Unit:      ptr.String("__Unit__"),
+						},
+						TargetValue:             ptr.Float64(1.0),
+						DisableScaleIn:          ptr.Bool(true),
+						ScaleOutCooldown:        ptr.Int32(1),
+						ScaleInCooldown:         ptr.Int32(1),
+						EstimatedInstanceWarmup: ptr.Int32(1),
+					},
+					{
+						PredefinedScalingMetricSpecification: &types.PredefinedScalingMetricSpecification{
+							PredefinedScalingMetricType: types.ScalingMetricType("ASGAverageCPUUtilization"),
+							ResourceLabel:               ptr.String("__ResourceLabel__"),
+						},
+						CustomizedScalingMetricSpecification: &types.CustomizedScalingMetricSpecification{
+							MetricName: ptr.String("__MetricName__"),
+							Namespace:  ptr.String("__Namespace__"),
+							Dimensions: []types.MetricDimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Statistic: types.MetricStatistic("Average"),
+							Unit:      ptr.String("__Unit__"),
+						},
+						TargetValue:             ptr.Float64(1.0),
+						DisableScaleIn:          ptr.Bool(true),
+						ScaleOutCooldown:        ptr.Int32(1),
+						ScaleInCooldown:         ptr.Int32(1),
+						EstimatedInstanceWarmup: ptr.Int32(1),
+					},
+				},
+				PredefinedLoadMetricSpecification: &types.PredefinedLoadMetricSpecification{
+					PredefinedLoadMetricType: types.LoadMetricType("ASGTotalCPUUtilization"),
+					ResourceLabel:            ptr.String("__ResourceLabel__"),
+				},
+				CustomizedLoadMetricSpecification: &types.CustomizedLoadMetricSpecification{
+					MetricName: ptr.String("__MetricName__"),
+					Namespace:  ptr.String("__Namespace__"),
+					Dimensions: []types.MetricDimension{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					Statistic: types.MetricStatistic("Average"),
+					Unit:      ptr.String("__Unit__"),
+				},
+				ScheduledActionBufferTime:            ptr.Int32(1),
+				PredictiveScalingMaxCapacityBehavior: types.PredictiveScalingMaxCapacityBehavior("SetForecastCapacityToMaxCapacity"),
+				PredictiveScalingMaxCapacityBuffer:   ptr.Int32(1),
+				PredictiveScalingMode:                types.PredictiveScalingMode("ForecastAndScale"),
+				ScalingPolicyUpdateBehavior:          types.ScalingPolicyUpdateBehavior("KeepExternalPolicies"),
+				DisableDynamicScaling:                ptr.Bool(true),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -839,7 +1508,208 @@ func TestCheckResponseSnapshot_Error_InternalServiceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateScalingPlan(context.Background(), &CreateScalingPlanInput{})
+	_, opErr := svc.CreateScalingPlan(context.Background(), &CreateScalingPlanInput{
+		ScalingPlanName: ptr.String("__ScalingPlanName__"),
+		ApplicationSource: &types.ApplicationSource{
+			CloudFormationStackARN: ptr.String("__CloudFormationStackARN__"),
+			TagFilters: []types.TagFilter{
+				{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		ScalingInstructions: []types.ScalingInstruction{
+			{
+				ServiceNamespace:  types.ServiceNamespace("autoscaling"),
+				ResourceId:        ptr.String("__ResourceId__"),
+				ScalableDimension: types.ScalableDimension("autoscaling:autoScalingGroup:DesiredCapacity"),
+				MinCapacity:       ptr.Int32(1),
+				MaxCapacity:       ptr.Int32(1),
+				TargetTrackingConfigurations: []types.TargetTrackingConfiguration{
+					{
+						PredefinedScalingMetricSpecification: &types.PredefinedScalingMetricSpecification{
+							PredefinedScalingMetricType: types.ScalingMetricType("ASGAverageCPUUtilization"),
+							ResourceLabel:               ptr.String("__ResourceLabel__"),
+						},
+						CustomizedScalingMetricSpecification: &types.CustomizedScalingMetricSpecification{
+							MetricName: ptr.String("__MetricName__"),
+							Namespace:  ptr.String("__Namespace__"),
+							Dimensions: []types.MetricDimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Statistic: types.MetricStatistic("Average"),
+							Unit:      ptr.String("__Unit__"),
+						},
+						TargetValue:             ptr.Float64(1.0),
+						DisableScaleIn:          ptr.Bool(true),
+						ScaleOutCooldown:        ptr.Int32(1),
+						ScaleInCooldown:         ptr.Int32(1),
+						EstimatedInstanceWarmup: ptr.Int32(1),
+					},
+					{
+						PredefinedScalingMetricSpecification: &types.PredefinedScalingMetricSpecification{
+							PredefinedScalingMetricType: types.ScalingMetricType("ASGAverageCPUUtilization"),
+							ResourceLabel:               ptr.String("__ResourceLabel__"),
+						},
+						CustomizedScalingMetricSpecification: &types.CustomizedScalingMetricSpecification{
+							MetricName: ptr.String("__MetricName__"),
+							Namespace:  ptr.String("__Namespace__"),
+							Dimensions: []types.MetricDimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Statistic: types.MetricStatistic("Average"),
+							Unit:      ptr.String("__Unit__"),
+						},
+						TargetValue:             ptr.Float64(1.0),
+						DisableScaleIn:          ptr.Bool(true),
+						ScaleOutCooldown:        ptr.Int32(1),
+						ScaleInCooldown:         ptr.Int32(1),
+						EstimatedInstanceWarmup: ptr.Int32(1),
+					},
+				},
+				PredefinedLoadMetricSpecification: &types.PredefinedLoadMetricSpecification{
+					PredefinedLoadMetricType: types.LoadMetricType("ASGTotalCPUUtilization"),
+					ResourceLabel:            ptr.String("__ResourceLabel__"),
+				},
+				CustomizedLoadMetricSpecification: &types.CustomizedLoadMetricSpecification{
+					MetricName: ptr.String("__MetricName__"),
+					Namespace:  ptr.String("__Namespace__"),
+					Dimensions: []types.MetricDimension{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					Statistic: types.MetricStatistic("Average"),
+					Unit:      ptr.String("__Unit__"),
+				},
+				ScheduledActionBufferTime:            ptr.Int32(1),
+				PredictiveScalingMaxCapacityBehavior: types.PredictiveScalingMaxCapacityBehavior("SetForecastCapacityToMaxCapacity"),
+				PredictiveScalingMaxCapacityBuffer:   ptr.Int32(1),
+				PredictiveScalingMode:                types.PredictiveScalingMode("ForecastAndScale"),
+				ScalingPolicyUpdateBehavior:          types.ScalingPolicyUpdateBehavior("KeepExternalPolicies"),
+				DisableDynamicScaling:                ptr.Bool(true),
+			},
+			{
+				ServiceNamespace:  types.ServiceNamespace("autoscaling"),
+				ResourceId:        ptr.String("__ResourceId__"),
+				ScalableDimension: types.ScalableDimension("autoscaling:autoScalingGroup:DesiredCapacity"),
+				MinCapacity:       ptr.Int32(1),
+				MaxCapacity:       ptr.Int32(1),
+				TargetTrackingConfigurations: []types.TargetTrackingConfiguration{
+					{
+						PredefinedScalingMetricSpecification: &types.PredefinedScalingMetricSpecification{
+							PredefinedScalingMetricType: types.ScalingMetricType("ASGAverageCPUUtilization"),
+							ResourceLabel:               ptr.String("__ResourceLabel__"),
+						},
+						CustomizedScalingMetricSpecification: &types.CustomizedScalingMetricSpecification{
+							MetricName: ptr.String("__MetricName__"),
+							Namespace:  ptr.String("__Namespace__"),
+							Dimensions: []types.MetricDimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Statistic: types.MetricStatistic("Average"),
+							Unit:      ptr.String("__Unit__"),
+						},
+						TargetValue:             ptr.Float64(1.0),
+						DisableScaleIn:          ptr.Bool(true),
+						ScaleOutCooldown:        ptr.Int32(1),
+						ScaleInCooldown:         ptr.Int32(1),
+						EstimatedInstanceWarmup: ptr.Int32(1),
+					},
+					{
+						PredefinedScalingMetricSpecification: &types.PredefinedScalingMetricSpecification{
+							PredefinedScalingMetricType: types.ScalingMetricType("ASGAverageCPUUtilization"),
+							ResourceLabel:               ptr.String("__ResourceLabel__"),
+						},
+						CustomizedScalingMetricSpecification: &types.CustomizedScalingMetricSpecification{
+							MetricName: ptr.String("__MetricName__"),
+							Namespace:  ptr.String("__Namespace__"),
+							Dimensions: []types.MetricDimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Statistic: types.MetricStatistic("Average"),
+							Unit:      ptr.String("__Unit__"),
+						},
+						TargetValue:             ptr.Float64(1.0),
+						DisableScaleIn:          ptr.Bool(true),
+						ScaleOutCooldown:        ptr.Int32(1),
+						ScaleInCooldown:         ptr.Int32(1),
+						EstimatedInstanceWarmup: ptr.Int32(1),
+					},
+				},
+				PredefinedLoadMetricSpecification: &types.PredefinedLoadMetricSpecification{
+					PredefinedLoadMetricType: types.LoadMetricType("ASGTotalCPUUtilization"),
+					ResourceLabel:            ptr.String("__ResourceLabel__"),
+				},
+				CustomizedLoadMetricSpecification: &types.CustomizedLoadMetricSpecification{
+					MetricName: ptr.String("__MetricName__"),
+					Namespace:  ptr.String("__Namespace__"),
+					Dimensions: []types.MetricDimension{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					Statistic: types.MetricStatistic("Average"),
+					Unit:      ptr.String("__Unit__"),
+				},
+				ScheduledActionBufferTime:            ptr.Int32(1),
+				PredictiveScalingMaxCapacityBehavior: types.PredictiveScalingMaxCapacityBehavior("SetForecastCapacityToMaxCapacity"),
+				PredictiveScalingMaxCapacityBuffer:   ptr.Int32(1),
+				PredictiveScalingMode:                types.PredictiveScalingMode("ForecastAndScale"),
+				ScalingPolicyUpdateBehavior:          types.ScalingPolicyUpdateBehavior("KeepExternalPolicies"),
+				DisableDynamicScaling:                ptr.Bool(true),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -864,7 +1734,12 @@ func TestCheckResponseSnapshot_Error_InvalidNextTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeScalingPlanResources(context.Background(), &DescribeScalingPlanResourcesInput{})
+	_, opErr := svc.DescribeScalingPlanResources(context.Background(), &DescribeScalingPlanResourcesInput{
+		ScalingPlanName:    ptr.String("__ScalingPlanName__"),
+		ScalingPlanVersion: ptr.Int64(1),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -889,7 +1764,208 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateScalingPlan(context.Background(), &CreateScalingPlanInput{})
+	_, opErr := svc.CreateScalingPlan(context.Background(), &CreateScalingPlanInput{
+		ScalingPlanName: ptr.String("__ScalingPlanName__"),
+		ApplicationSource: &types.ApplicationSource{
+			CloudFormationStackARN: ptr.String("__CloudFormationStackARN__"),
+			TagFilters: []types.TagFilter{
+				{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		ScalingInstructions: []types.ScalingInstruction{
+			{
+				ServiceNamespace:  types.ServiceNamespace("autoscaling"),
+				ResourceId:        ptr.String("__ResourceId__"),
+				ScalableDimension: types.ScalableDimension("autoscaling:autoScalingGroup:DesiredCapacity"),
+				MinCapacity:       ptr.Int32(1),
+				MaxCapacity:       ptr.Int32(1),
+				TargetTrackingConfigurations: []types.TargetTrackingConfiguration{
+					{
+						PredefinedScalingMetricSpecification: &types.PredefinedScalingMetricSpecification{
+							PredefinedScalingMetricType: types.ScalingMetricType("ASGAverageCPUUtilization"),
+							ResourceLabel:               ptr.String("__ResourceLabel__"),
+						},
+						CustomizedScalingMetricSpecification: &types.CustomizedScalingMetricSpecification{
+							MetricName: ptr.String("__MetricName__"),
+							Namespace:  ptr.String("__Namespace__"),
+							Dimensions: []types.MetricDimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Statistic: types.MetricStatistic("Average"),
+							Unit:      ptr.String("__Unit__"),
+						},
+						TargetValue:             ptr.Float64(1.0),
+						DisableScaleIn:          ptr.Bool(true),
+						ScaleOutCooldown:        ptr.Int32(1),
+						ScaleInCooldown:         ptr.Int32(1),
+						EstimatedInstanceWarmup: ptr.Int32(1),
+					},
+					{
+						PredefinedScalingMetricSpecification: &types.PredefinedScalingMetricSpecification{
+							PredefinedScalingMetricType: types.ScalingMetricType("ASGAverageCPUUtilization"),
+							ResourceLabel:               ptr.String("__ResourceLabel__"),
+						},
+						CustomizedScalingMetricSpecification: &types.CustomizedScalingMetricSpecification{
+							MetricName: ptr.String("__MetricName__"),
+							Namespace:  ptr.String("__Namespace__"),
+							Dimensions: []types.MetricDimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Statistic: types.MetricStatistic("Average"),
+							Unit:      ptr.String("__Unit__"),
+						},
+						TargetValue:             ptr.Float64(1.0),
+						DisableScaleIn:          ptr.Bool(true),
+						ScaleOutCooldown:        ptr.Int32(1),
+						ScaleInCooldown:         ptr.Int32(1),
+						EstimatedInstanceWarmup: ptr.Int32(1),
+					},
+				},
+				PredefinedLoadMetricSpecification: &types.PredefinedLoadMetricSpecification{
+					PredefinedLoadMetricType: types.LoadMetricType("ASGTotalCPUUtilization"),
+					ResourceLabel:            ptr.String("__ResourceLabel__"),
+				},
+				CustomizedLoadMetricSpecification: &types.CustomizedLoadMetricSpecification{
+					MetricName: ptr.String("__MetricName__"),
+					Namespace:  ptr.String("__Namespace__"),
+					Dimensions: []types.MetricDimension{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					Statistic: types.MetricStatistic("Average"),
+					Unit:      ptr.String("__Unit__"),
+				},
+				ScheduledActionBufferTime:            ptr.Int32(1),
+				PredictiveScalingMaxCapacityBehavior: types.PredictiveScalingMaxCapacityBehavior("SetForecastCapacityToMaxCapacity"),
+				PredictiveScalingMaxCapacityBuffer:   ptr.Int32(1),
+				PredictiveScalingMode:                types.PredictiveScalingMode("ForecastAndScale"),
+				ScalingPolicyUpdateBehavior:          types.ScalingPolicyUpdateBehavior("KeepExternalPolicies"),
+				DisableDynamicScaling:                ptr.Bool(true),
+			},
+			{
+				ServiceNamespace:  types.ServiceNamespace("autoscaling"),
+				ResourceId:        ptr.String("__ResourceId__"),
+				ScalableDimension: types.ScalableDimension("autoscaling:autoScalingGroup:DesiredCapacity"),
+				MinCapacity:       ptr.Int32(1),
+				MaxCapacity:       ptr.Int32(1),
+				TargetTrackingConfigurations: []types.TargetTrackingConfiguration{
+					{
+						PredefinedScalingMetricSpecification: &types.PredefinedScalingMetricSpecification{
+							PredefinedScalingMetricType: types.ScalingMetricType("ASGAverageCPUUtilization"),
+							ResourceLabel:               ptr.String("__ResourceLabel__"),
+						},
+						CustomizedScalingMetricSpecification: &types.CustomizedScalingMetricSpecification{
+							MetricName: ptr.String("__MetricName__"),
+							Namespace:  ptr.String("__Namespace__"),
+							Dimensions: []types.MetricDimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Statistic: types.MetricStatistic("Average"),
+							Unit:      ptr.String("__Unit__"),
+						},
+						TargetValue:             ptr.Float64(1.0),
+						DisableScaleIn:          ptr.Bool(true),
+						ScaleOutCooldown:        ptr.Int32(1),
+						ScaleInCooldown:         ptr.Int32(1),
+						EstimatedInstanceWarmup: ptr.Int32(1),
+					},
+					{
+						PredefinedScalingMetricSpecification: &types.PredefinedScalingMetricSpecification{
+							PredefinedScalingMetricType: types.ScalingMetricType("ASGAverageCPUUtilization"),
+							ResourceLabel:               ptr.String("__ResourceLabel__"),
+						},
+						CustomizedScalingMetricSpecification: &types.CustomizedScalingMetricSpecification{
+							MetricName: ptr.String("__MetricName__"),
+							Namespace:  ptr.String("__Namespace__"),
+							Dimensions: []types.MetricDimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Statistic: types.MetricStatistic("Average"),
+							Unit:      ptr.String("__Unit__"),
+						},
+						TargetValue:             ptr.Float64(1.0),
+						DisableScaleIn:          ptr.Bool(true),
+						ScaleOutCooldown:        ptr.Int32(1),
+						ScaleInCooldown:         ptr.Int32(1),
+						EstimatedInstanceWarmup: ptr.Int32(1),
+					},
+				},
+				PredefinedLoadMetricSpecification: &types.PredefinedLoadMetricSpecification{
+					PredefinedLoadMetricType: types.LoadMetricType("ASGTotalCPUUtilization"),
+					ResourceLabel:            ptr.String("__ResourceLabel__"),
+				},
+				CustomizedLoadMetricSpecification: &types.CustomizedLoadMetricSpecification{
+					MetricName: ptr.String("__MetricName__"),
+					Namespace:  ptr.String("__Namespace__"),
+					Dimensions: []types.MetricDimension{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					Statistic: types.MetricStatistic("Average"),
+					Unit:      ptr.String("__Unit__"),
+				},
+				ScheduledActionBufferTime:            ptr.Int32(1),
+				PredictiveScalingMaxCapacityBehavior: types.PredictiveScalingMaxCapacityBehavior("SetForecastCapacityToMaxCapacity"),
+				PredictiveScalingMaxCapacityBuffer:   ptr.Int32(1),
+				PredictiveScalingMode:                types.PredictiveScalingMode("ForecastAndScale"),
+				ScalingPolicyUpdateBehavior:          types.ScalingPolicyUpdateBehavior("KeepExternalPolicies"),
+				DisableDynamicScaling:                ptr.Bool(true),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -914,7 +1990,10 @@ func TestCheckResponseSnapshot_Error_ObjectNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteScalingPlan(context.Background(), &DeleteScalingPlanInput{})
+	_, opErr := svc.DeleteScalingPlan(context.Background(), &DeleteScalingPlanInput{
+		ScalingPlanName:    ptr.String("__ScalingPlanName__"),
+		ScalingPlanVersion: ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -939,7 +2018,208 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateScalingPlan(context.Background(), &CreateScalingPlanInput{})
+	_, opErr := svc.CreateScalingPlan(context.Background(), &CreateScalingPlanInput{
+		ScalingPlanName: ptr.String("__ScalingPlanName__"),
+		ApplicationSource: &types.ApplicationSource{
+			CloudFormationStackARN: ptr.String("__CloudFormationStackARN__"),
+			TagFilters: []types.TagFilter{
+				{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		ScalingInstructions: []types.ScalingInstruction{
+			{
+				ServiceNamespace:  types.ServiceNamespace("autoscaling"),
+				ResourceId:        ptr.String("__ResourceId__"),
+				ScalableDimension: types.ScalableDimension("autoscaling:autoScalingGroup:DesiredCapacity"),
+				MinCapacity:       ptr.Int32(1),
+				MaxCapacity:       ptr.Int32(1),
+				TargetTrackingConfigurations: []types.TargetTrackingConfiguration{
+					{
+						PredefinedScalingMetricSpecification: &types.PredefinedScalingMetricSpecification{
+							PredefinedScalingMetricType: types.ScalingMetricType("ASGAverageCPUUtilization"),
+							ResourceLabel:               ptr.String("__ResourceLabel__"),
+						},
+						CustomizedScalingMetricSpecification: &types.CustomizedScalingMetricSpecification{
+							MetricName: ptr.String("__MetricName__"),
+							Namespace:  ptr.String("__Namespace__"),
+							Dimensions: []types.MetricDimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Statistic: types.MetricStatistic("Average"),
+							Unit:      ptr.String("__Unit__"),
+						},
+						TargetValue:             ptr.Float64(1.0),
+						DisableScaleIn:          ptr.Bool(true),
+						ScaleOutCooldown:        ptr.Int32(1),
+						ScaleInCooldown:         ptr.Int32(1),
+						EstimatedInstanceWarmup: ptr.Int32(1),
+					},
+					{
+						PredefinedScalingMetricSpecification: &types.PredefinedScalingMetricSpecification{
+							PredefinedScalingMetricType: types.ScalingMetricType("ASGAverageCPUUtilization"),
+							ResourceLabel:               ptr.String("__ResourceLabel__"),
+						},
+						CustomizedScalingMetricSpecification: &types.CustomizedScalingMetricSpecification{
+							MetricName: ptr.String("__MetricName__"),
+							Namespace:  ptr.String("__Namespace__"),
+							Dimensions: []types.MetricDimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Statistic: types.MetricStatistic("Average"),
+							Unit:      ptr.String("__Unit__"),
+						},
+						TargetValue:             ptr.Float64(1.0),
+						DisableScaleIn:          ptr.Bool(true),
+						ScaleOutCooldown:        ptr.Int32(1),
+						ScaleInCooldown:         ptr.Int32(1),
+						EstimatedInstanceWarmup: ptr.Int32(1),
+					},
+				},
+				PredefinedLoadMetricSpecification: &types.PredefinedLoadMetricSpecification{
+					PredefinedLoadMetricType: types.LoadMetricType("ASGTotalCPUUtilization"),
+					ResourceLabel:            ptr.String("__ResourceLabel__"),
+				},
+				CustomizedLoadMetricSpecification: &types.CustomizedLoadMetricSpecification{
+					MetricName: ptr.String("__MetricName__"),
+					Namespace:  ptr.String("__Namespace__"),
+					Dimensions: []types.MetricDimension{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					Statistic: types.MetricStatistic("Average"),
+					Unit:      ptr.String("__Unit__"),
+				},
+				ScheduledActionBufferTime:            ptr.Int32(1),
+				PredictiveScalingMaxCapacityBehavior: types.PredictiveScalingMaxCapacityBehavior("SetForecastCapacityToMaxCapacity"),
+				PredictiveScalingMaxCapacityBuffer:   ptr.Int32(1),
+				PredictiveScalingMode:                types.PredictiveScalingMode("ForecastAndScale"),
+				ScalingPolicyUpdateBehavior:          types.ScalingPolicyUpdateBehavior("KeepExternalPolicies"),
+				DisableDynamicScaling:                ptr.Bool(true),
+			},
+			{
+				ServiceNamespace:  types.ServiceNamespace("autoscaling"),
+				ResourceId:        ptr.String("__ResourceId__"),
+				ScalableDimension: types.ScalableDimension("autoscaling:autoScalingGroup:DesiredCapacity"),
+				MinCapacity:       ptr.Int32(1),
+				MaxCapacity:       ptr.Int32(1),
+				TargetTrackingConfigurations: []types.TargetTrackingConfiguration{
+					{
+						PredefinedScalingMetricSpecification: &types.PredefinedScalingMetricSpecification{
+							PredefinedScalingMetricType: types.ScalingMetricType("ASGAverageCPUUtilization"),
+							ResourceLabel:               ptr.String("__ResourceLabel__"),
+						},
+						CustomizedScalingMetricSpecification: &types.CustomizedScalingMetricSpecification{
+							MetricName: ptr.String("__MetricName__"),
+							Namespace:  ptr.String("__Namespace__"),
+							Dimensions: []types.MetricDimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Statistic: types.MetricStatistic("Average"),
+							Unit:      ptr.String("__Unit__"),
+						},
+						TargetValue:             ptr.Float64(1.0),
+						DisableScaleIn:          ptr.Bool(true),
+						ScaleOutCooldown:        ptr.Int32(1),
+						ScaleInCooldown:         ptr.Int32(1),
+						EstimatedInstanceWarmup: ptr.Int32(1),
+					},
+					{
+						PredefinedScalingMetricSpecification: &types.PredefinedScalingMetricSpecification{
+							PredefinedScalingMetricType: types.ScalingMetricType("ASGAverageCPUUtilization"),
+							ResourceLabel:               ptr.String("__ResourceLabel__"),
+						},
+						CustomizedScalingMetricSpecification: &types.CustomizedScalingMetricSpecification{
+							MetricName: ptr.String("__MetricName__"),
+							Namespace:  ptr.String("__Namespace__"),
+							Dimensions: []types.MetricDimension{
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Name:  ptr.String("__Name__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+							Statistic: types.MetricStatistic("Average"),
+							Unit:      ptr.String("__Unit__"),
+						},
+						TargetValue:             ptr.Float64(1.0),
+						DisableScaleIn:          ptr.Bool(true),
+						ScaleOutCooldown:        ptr.Int32(1),
+						ScaleInCooldown:         ptr.Int32(1),
+						EstimatedInstanceWarmup: ptr.Int32(1),
+					},
+				},
+				PredefinedLoadMetricSpecification: &types.PredefinedLoadMetricSpecification{
+					PredefinedLoadMetricType: types.LoadMetricType("ASGTotalCPUUtilization"),
+					ResourceLabel:            ptr.String("__ResourceLabel__"),
+				},
+				CustomizedLoadMetricSpecification: &types.CustomizedLoadMetricSpecification{
+					MetricName: ptr.String("__MetricName__"),
+					Namespace:  ptr.String("__Namespace__"),
+					Dimensions: []types.MetricDimension{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+					Statistic: types.MetricStatistic("Average"),
+					Unit:      ptr.String("__Unit__"),
+				},
+				ScheduledActionBufferTime:            ptr.Int32(1),
+				PredictiveScalingMaxCapacityBehavior: types.PredictiveScalingMaxCapacityBehavior("SetForecastCapacityToMaxCapacity"),
+				PredictiveScalingMaxCapacityBuffer:   ptr.Int32(1),
+				PredictiveScalingMode:                types.PredictiveScalingMode("ForecastAndScale"),
+				ScalingPolicyUpdateBehavior:          types.ScalingPolicyUpdateBehavior("KeepExternalPolicies"),
+				DisableDynamicScaling:                ptr.Bool(true),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

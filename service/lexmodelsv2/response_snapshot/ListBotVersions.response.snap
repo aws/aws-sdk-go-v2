@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"botId":"__BotId__","botVersionSummaries":[{"botName":"__BotName__","botStatus":"Creating","botVersion":"__BotVersion__","creationDateTime":946684800,"description":"__Description__"},{"botName":"__BotName__","botStatus":"Creating","botVersion":"__BotVersion__","creationDateTime":946684800,"description":"__Description__"}],"nextToken":"__NextToken__"}

@@ -117,7 +117,11 @@ func TestCheckResponseSnapshot_ApplyArchiveRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ApplyArchiveRule(context.Background(), &ApplyArchiveRuleInput{})
+	got, err := svc.ApplyArchiveRule(context.Background(), &ApplyArchiveRuleInput{
+		AnalyzerArn: ptr.String("__AnalyzerArn__"),
+		RuleName:    ptr.String("__RuleName__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -136,7 +140,9 @@ func TestCheckResponseSnapshot_CancelPolicyGeneration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelPolicyGeneration(context.Background(), &CancelPolicyGenerationInput{})
+	got, err := svc.CancelPolicyGeneration(context.Background(), &CancelPolicyGenerationInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -170,7 +176,32 @@ func TestCheckResponseSnapshot_CheckAccessNotGranted(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CheckAccessNotGranted(context.Background(), &CheckAccessNotGrantedInput{})
+	got, err := svc.CheckAccessNotGranted(context.Background(), &CheckAccessNotGrantedInput{
+		PolicyDocument: ptr.String("__PolicyDocument__"),
+		Access: []types.Access{
+			{
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		PolicyType: types.AccessCheckPolicyType("IDENTITY_POLICY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -204,7 +235,11 @@ func TestCheckResponseSnapshot_CheckNoNewAccess(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CheckNoNewAccess(context.Background(), &CheckNoNewAccessInput{})
+	got, err := svc.CheckNoNewAccess(context.Background(), &CheckNoNewAccessInput{
+		NewPolicyDocument:      ptr.String("__NewPolicyDocument__"),
+		ExistingPolicyDocument: ptr.String("__ExistingPolicyDocument__"),
+		PolicyType:             types.AccessCheckPolicyType("IDENTITY_POLICY"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -238,7 +273,10 @@ func TestCheckResponseSnapshot_CheckNoPublicAccess(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CheckNoPublicAccess(context.Background(), &CheckNoPublicAccessInput{})
+	got, err := svc.CheckNoPublicAccess(context.Background(), &CheckNoPublicAccessInput{
+		PolicyDocument: ptr.String("__PolicyDocument__"),
+		ResourceType:   types.AccessCheckResourceType("AWS::DynamoDB::Table"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -259,7 +297,25 @@ func TestCheckResponseSnapshot_CreateAccessPreview(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAccessPreview(context.Background(), &CreateAccessPreviewInput{})
+	got, err := svc.CreateAccessPreview(context.Background(), &CreateAccessPreviewInput{
+		AnalyzerArn: ptr.String("__AnalyzerArn__"),
+		Configurations: map[string]types.Configuration{
+			"key0": &types.ConfigurationMemberEbsSnapshot{
+				Value: types.EbsSnapshotConfiguration{
+					UserIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Groups: []string{
+						"__Member__",
+						"__Member__",
+					},
+					KmsKeyId: ptr.String("__KmsKeyId__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -280,7 +336,93 @@ func TestCheckResponseSnapshot_CreateAnalyzer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAnalyzer(context.Background(), &CreateAnalyzerInput{})
+	got, err := svc.CreateAnalyzer(context.Background(), &CreateAnalyzerInput{
+		AnalyzerName: ptr.String("__AnalyzerName__"),
+		Type:         types.Type("ACCOUNT"),
+		ArchiveRules: []types.InlineArchiveRule{
+			{
+				RuleName: ptr.String("__RuleName__"),
+				Filter: map[string]types.Criterion{
+					"key0": {
+						Eq: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Neq: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Contains: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Exists: ptr.Bool(true),
+					},
+				},
+			},
+			{
+				RuleName: ptr.String("__RuleName__"),
+				Filter: map[string]types.Criterion{
+					"key0": {
+						Eq: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Neq: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Contains: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Exists: ptr.Bool(true),
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Configuration: &types.AnalyzerConfigurationMemberUnusedAccess{
+			Value: types.UnusedAccessConfiguration{
+				UnusedAccessAge: ptr.Int32(1),
+				AnalysisRule: &types.AnalysisRule{
+					Exclusions: []types.AnalysisRuleCriteria{
+						{
+							AccountIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ResourceTags: []map[string]string{
+								{
+									"key0": "__Value__",
+								},
+								{
+									"key0": "__Value__",
+								},
+							},
+						},
+						{
+							AccountIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ResourceTags: []map[string]string{
+								{
+									"key0": "__Value__",
+								},
+								{
+									"key0": "__Value__",
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -299,7 +441,28 @@ func TestCheckResponseSnapshot_CreateArchiveRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateArchiveRule(context.Background(), &CreateArchiveRuleInput{})
+	got, err := svc.CreateArchiveRule(context.Background(), &CreateArchiveRuleInput{
+		AnalyzerName: ptr.String("__AnalyzerName__"),
+		RuleName:     ptr.String("__RuleName__"),
+		Filter: map[string]types.Criterion{
+			"key0": {
+				Eq: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Neq: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Contains: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Exists: ptr.Bool(true),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -320,7 +483,89 @@ func TestCheckResponseSnapshot_CreateServiceLinkedAnalyzer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateServiceLinkedAnalyzer(context.Background(), &CreateServiceLinkedAnalyzerInput{})
+	got, err := svc.CreateServiceLinkedAnalyzer(context.Background(), &CreateServiceLinkedAnalyzerInput{
+		Type: types.Type("ACCOUNT"),
+		ArchiveRules: []types.InlineArchiveRule{
+			{
+				RuleName: ptr.String("__RuleName__"),
+				Filter: map[string]types.Criterion{
+					"key0": {
+						Eq: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Neq: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Contains: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Exists: ptr.Bool(true),
+					},
+				},
+			},
+			{
+				RuleName: ptr.String("__RuleName__"),
+				Filter: map[string]types.Criterion{
+					"key0": {
+						Eq: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Neq: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Contains: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Exists: ptr.Bool(true),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Configuration: &types.AnalyzerConfigurationMemberUnusedAccess{
+			Value: types.UnusedAccessConfiguration{
+				UnusedAccessAge: ptr.Int32(1),
+				AnalysisRule: &types.AnalysisRule{
+					Exclusions: []types.AnalysisRuleCriteria{
+						{
+							AccountIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ResourceTags: []map[string]string{
+								{
+									"key0": "__Value__",
+								},
+								{
+									"key0": "__Value__",
+								},
+							},
+						},
+						{
+							AccountIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ResourceTags: []map[string]string{
+								{
+									"key0": "__Value__",
+								},
+								{
+									"key0": "__Value__",
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -339,7 +584,10 @@ func TestCheckResponseSnapshot_DeleteAnalyzer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAnalyzer(context.Background(), &DeleteAnalyzerInput{})
+	got, err := svc.DeleteAnalyzer(context.Background(), &DeleteAnalyzerInput{
+		AnalyzerName: ptr.String("__AnalyzerName__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -358,7 +606,11 @@ func TestCheckResponseSnapshot_DeleteArchiveRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteArchiveRule(context.Background(), &DeleteArchiveRuleInput{})
+	got, err := svc.DeleteArchiveRule(context.Background(), &DeleteArchiveRuleInput{
+		AnalyzerName: ptr.String("__AnalyzerName__"),
+		RuleName:     ptr.String("__RuleName__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -377,7 +629,10 @@ func TestCheckResponseSnapshot_DeleteServiceLinkedAnalyzer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteServiceLinkedAnalyzer(context.Background(), &DeleteServiceLinkedAnalyzerInput{})
+	got, err := svc.DeleteServiceLinkedAnalyzer(context.Background(), &DeleteServiceLinkedAnalyzerInput{
+		AnalyzerName: ptr.String("__AnalyzerName__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -396,7 +651,10 @@ func TestCheckResponseSnapshot_GenerateFindingRecommendation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GenerateFindingRecommendation(context.Background(), &GenerateFindingRecommendationInput{})
+	got, err := svc.GenerateFindingRecommendation(context.Background(), &GenerateFindingRecommendationInput{
+		AnalyzerArn: ptr.String("__AnalyzerArn__"),
+		Id:          ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -440,7 +698,10 @@ func TestCheckResponseSnapshot_GetAccessPreview(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAccessPreview(context.Background(), &GetAccessPreviewInput{})
+	got, err := svc.GetAccessPreview(context.Background(), &GetAccessPreviewInput{
+		AccessPreviewId: ptr.String("__AccessPreviewId__"),
+		AnalyzerArn:     ptr.String("__AnalyzerArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -479,7 +740,10 @@ func TestCheckResponseSnapshot_GetAnalyzedResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAnalyzedResource(context.Background(), &GetAnalyzedResourceInput{})
+	got, err := svc.GetAnalyzedResource(context.Background(), &GetAnalyzedResourceInput{
+		AnalyzerArn: ptr.String("__AnalyzerArn__"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -552,7 +816,9 @@ func TestCheckResponseSnapshot_GetAnalyzer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAnalyzer(context.Background(), &GetAnalyzerInput{})
+	got, err := svc.GetAnalyzer(context.Background(), &GetAnalyzerInput{
+		AnalyzerName: ptr.String("__AnalyzerName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -594,7 +860,10 @@ func TestCheckResponseSnapshot_GetArchiveRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetArchiveRule(context.Background(), &GetArchiveRuleInput{})
+	got, err := svc.GetArchiveRule(context.Background(), &GetArchiveRuleInput{
+		AnalyzerName: ptr.String("__AnalyzerName__"),
+		RuleName:     ptr.String("__RuleName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -653,7 +922,10 @@ func TestCheckResponseSnapshot_GetFinding(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFinding(context.Background(), &GetFindingInput{})
+	got, err := svc.GetFinding(context.Background(), &GetFindingInput{
+		AnalyzerArn: ptr.String("__AnalyzerArn__"),
+		Id:          ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -701,7 +973,12 @@ func TestCheckResponseSnapshot_GetFindingRecommendation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFindingRecommendation(context.Background(), &GetFindingRecommendationInput{})
+	got, err := svc.GetFindingRecommendation(context.Background(), &GetFindingRecommendationInput{
+		AnalyzerArn: ptr.String("__AnalyzerArn__"),
+		Id:          ptr.String("__Id__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -804,7 +1081,12 @@ func TestCheckResponseSnapshot_GetFindingV2(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFindingV2(context.Background(), &GetFindingV2Input{})
+	got, err := svc.GetFindingV2(context.Background(), &GetFindingV2Input{
+		AnalyzerArn: ptr.String("__AnalyzerArn__"),
+		Id:          ptr.String("__Id__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -855,7 +1137,9 @@ func TestCheckResponseSnapshot_GetFindingsStatistics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFindingsStatistics(context.Background(), &GetFindingsStatisticsInput{})
+	got, err := svc.GetFindingsStatistics(context.Background(), &GetFindingsStatisticsInput{
+		AnalyzerArn: ptr.String("__AnalyzerArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -921,7 +1205,11 @@ func TestCheckResponseSnapshot_GetGeneratedPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGeneratedPolicy(context.Background(), &GetGeneratedPolicyInput{})
+	got, err := svc.GetGeneratedPolicy(context.Background(), &GetGeneratedPolicyInput{
+		JobId:                       ptr.String("__JobId__"),
+		IncludeResourcePlaceholders: ptr.Bool(true),
+		IncludeServiceLevelTemplate: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1024,7 +1312,29 @@ func TestCheckResponseSnapshot_ListAccessPreviewFindings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccessPreviewFindings(context.Background(), &ListAccessPreviewFindingsInput{})
+	got, err := svc.ListAccessPreviewFindings(context.Background(), &ListAccessPreviewFindingsInput{
+		AccessPreviewId: ptr.String("__AccessPreviewId__"),
+		AnalyzerArn:     ptr.String("__AnalyzerArn__"),
+		Filter: map[string]types.Criterion{
+			"key0": {
+				Eq: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Neq: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Contains: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Exists: ptr.Bool(true),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1065,7 +1375,11 @@ func TestCheckResponseSnapshot_ListAccessPreviews(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccessPreviews(context.Background(), &ListAccessPreviewsInput{})
+	got, err := svc.ListAccessPreviews(context.Background(), &ListAccessPreviewsInput{
+		AnalyzerArn: ptr.String("__AnalyzerArn__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1098,7 +1412,12 @@ func TestCheckResponseSnapshot_ListAnalyzedResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAnalyzedResources(context.Background(), &ListAnalyzedResourcesInput{})
+	got, err := svc.ListAnalyzedResources(context.Background(), &ListAnalyzedResourcesInput{
+		AnalyzerArn:  ptr.String("__AnalyzerArn__"),
+		ResourceType: types.ResourceType("AWS::S3::Bucket"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1227,7 +1546,11 @@ func TestCheckResponseSnapshot_ListAnalyzers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAnalyzers(context.Background(), &ListAnalyzersInput{})
+	got, err := svc.ListAnalyzers(context.Background(), &ListAnalyzersInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Type:       types.Type("ACCOUNT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1294,7 +1617,11 @@ func TestCheckResponseSnapshot_ListArchiveRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListArchiveRules(context.Background(), &ListArchiveRulesInput{})
+	got, err := svc.ListArchiveRules(context.Background(), &ListArchiveRulesInput{
+		AnalyzerName: ptr.String("__AnalyzerName__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1395,7 +1722,32 @@ func TestCheckResponseSnapshot_ListFindings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFindings(context.Background(), &ListFindingsInput{})
+	got, err := svc.ListFindings(context.Background(), &ListFindingsInput{
+		AnalyzerArn: ptr.String("__AnalyzerArn__"),
+		Filter: map[string]types.Criterion{
+			"key0": {
+				Eq: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Neq: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Contains: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Exists: ptr.Bool(true),
+			},
+		},
+		Sort: &types.SortCriteria{
+			AttributeName: ptr.String("__AttributeName__"),
+			OrderBy:       types.OrderBy("ASC"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1442,7 +1794,32 @@ func TestCheckResponseSnapshot_ListFindingsV2(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFindingsV2(context.Background(), &ListFindingsV2Input{})
+	got, err := svc.ListFindingsV2(context.Background(), &ListFindingsV2Input{
+		AnalyzerArn: ptr.String("__AnalyzerArn__"),
+		Filter: map[string]types.Criterion{
+			"key0": {
+				Eq: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Neq: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Contains: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Exists: ptr.Bool(true),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Sort: &types.SortCriteria{
+			AttributeName: ptr.String("__AttributeName__"),
+			OrderBy:       types.OrderBy("ASC"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1479,7 +1856,11 @@ func TestCheckResponseSnapshot_ListPolicyGenerations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPolicyGenerations(context.Background(), &ListPolicyGenerationsInput{})
+	got, err := svc.ListPolicyGenerations(context.Background(), &ListPolicyGenerationsInput{
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1502,7 +1883,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1523,7 +1906,35 @@ func TestCheckResponseSnapshot_StartPolicyGeneration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartPolicyGeneration(context.Background(), &StartPolicyGenerationInput{})
+	got, err := svc.StartPolicyGeneration(context.Background(), &StartPolicyGenerationInput{
+		PolicyGenerationDetails: &types.PolicyGenerationDetails{
+			PrincipalArn: ptr.String("__PrincipalArn__"),
+		},
+		CloudTrailDetails: &types.CloudTrailDetails{
+			Trails: []types.Trail{
+				{
+					CloudTrailArn: ptr.String("__CloudTrailArn__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllRegions: ptr.Bool(true),
+				},
+				{
+					CloudTrailArn: ptr.String("__CloudTrailArn__"),
+					Regions: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AllRegions: ptr.Bool(true),
+				},
+			},
+			AccessRole: ptr.String("__AccessRole__"),
+			StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1542,7 +1953,11 @@ func TestCheckResponseSnapshot_StartResourceScan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartResourceScan(context.Background(), &StartResourceScanInput{})
+	got, err := svc.StartResourceScan(context.Background(), &StartResourceScanInput{
+		AnalyzerArn:          ptr.String("__AnalyzerArn__"),
+		ResourceArn:          ptr.String("__ResourceArn__"),
+		ResourceOwnerAccount: ptr.String("__ResourceOwnerAccount__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1561,7 +1976,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1580,7 +2000,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1637,7 +2063,46 @@ func TestCheckResponseSnapshot_UpdateAnalyzer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAnalyzer(context.Background(), &UpdateAnalyzerInput{})
+	got, err := svc.UpdateAnalyzer(context.Background(), &UpdateAnalyzerInput{
+		AnalyzerName: ptr.String("__AnalyzerName__"),
+		Configuration: &types.AnalyzerConfigurationMemberUnusedAccess{
+			Value: types.UnusedAccessConfiguration{
+				UnusedAccessAge: ptr.Int32(1),
+				AnalysisRule: &types.AnalysisRule{
+					Exclusions: []types.AnalysisRuleCriteria{
+						{
+							AccountIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ResourceTags: []map[string]string{
+								{
+									"key0": "__Value__",
+								},
+								{
+									"key0": "__Value__",
+								},
+							},
+						},
+						{
+							AccountIds: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ResourceTags: []map[string]string{
+								{
+									"key0": "__Value__",
+								},
+								{
+									"key0": "__Value__",
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1656,7 +2121,28 @@ func TestCheckResponseSnapshot_UpdateArchiveRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateArchiveRule(context.Background(), &UpdateArchiveRuleInput{})
+	got, err := svc.UpdateArchiveRule(context.Background(), &UpdateArchiveRuleInput{
+		AnalyzerName: ptr.String("__AnalyzerName__"),
+		RuleName:     ptr.String("__RuleName__"),
+		Filter: map[string]types.Criterion{
+			"key0": {
+				Eq: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Neq: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Contains: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Exists: ptr.Bool(true),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1675,7 +2161,16 @@ func TestCheckResponseSnapshot_UpdateFindings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFindings(context.Background(), &UpdateFindingsInput{})
+	got, err := svc.UpdateFindings(context.Background(), &UpdateFindingsInput{
+		AnalyzerArn: ptr.String("__AnalyzerArn__"),
+		Status:      types.FindingStatusUpdate("ACTIVE"),
+		Ids: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResourceArn: ptr.String("__ResourceArn__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1802,7 +2297,14 @@ func TestCheckResponseSnapshot_ValidatePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ValidatePolicy(context.Background(), &ValidatePolicyInput{})
+	got, err := svc.ValidatePolicy(context.Background(), &ValidatePolicyInput{
+		Locale:                     types.Locale("DE"),
+		MaxResults:                 ptr.Int32(1),
+		NextToken:                  ptr.String("__NextToken__"),
+		PolicyDocument:             ptr.String("__PolicyDocument__"),
+		PolicyType:                 types.PolicyType("IDENTITY_POLICY"),
+		ValidatePolicyResourceType: types.ValidatePolicyResourceType("AWS::S3::Bucket"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1823,7 +2325,11 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApplyArchiveRule(context.Background(), &ApplyArchiveRuleInput{})
+	_, opErr := svc.ApplyArchiveRule(context.Background(), &ApplyArchiveRuleInput{
+		AnalyzerArn: ptr.String("__AnalyzerArn__"),
+		RuleName:    ptr.String("__RuleName__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1850,7 +2356,25 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAccessPreview(context.Background(), &CreateAccessPreviewInput{})
+	_, opErr := svc.CreateAccessPreview(context.Background(), &CreateAccessPreviewInput{
+		AnalyzerArn: ptr.String("__AnalyzerArn__"),
+		Configurations: map[string]types.Configuration{
+			"key0": &types.ConfigurationMemberEbsSnapshot{
+				Value: types.EbsSnapshotConfiguration{
+					UserIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Groups: []string{
+						"__Member__",
+						"__Member__",
+					},
+					KmsKeyId: ptr.String("__KmsKeyId__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1876,7 +2400,11 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApplyArchiveRule(context.Background(), &ApplyArchiveRuleInput{})
+	_, opErr := svc.ApplyArchiveRule(context.Background(), &ApplyArchiveRuleInput{
+		AnalyzerArn: ptr.String("__AnalyzerArn__"),
+		RuleName:    ptr.String("__RuleName__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1901,7 +2429,32 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CheckAccessNotGranted(context.Background(), &CheckAccessNotGrantedInput{})
+	_, opErr := svc.CheckAccessNotGranted(context.Background(), &CheckAccessNotGrantedInput{
+		PolicyDocument: ptr.String("__PolicyDocument__"),
+		Access: []types.Access{
+			{
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		PolicyType: types.AccessCheckPolicyType("IDENTITY_POLICY"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1928,7 +2481,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApplyArchiveRule(context.Background(), &ApplyArchiveRuleInput{})
+	_, opErr := svc.ApplyArchiveRule(context.Background(), &ApplyArchiveRuleInput{
+		AnalyzerArn: ptr.String("__AnalyzerArn__"),
+		RuleName:    ptr.String("__RuleName__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1955,7 +2512,25 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAccessPreview(context.Background(), &CreateAccessPreviewInput{})
+	_, opErr := svc.CreateAccessPreview(context.Background(), &CreateAccessPreviewInput{
+		AnalyzerArn: ptr.String("__AnalyzerArn__"),
+		Configurations: map[string]types.Configuration{
+			"key0": &types.ConfigurationMemberEbsSnapshot{
+				Value: types.EbsSnapshotConfiguration{
+					UserIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Groups: []string{
+						"__Member__",
+						"__Member__",
+					},
+					KmsKeyId: ptr.String("__KmsKeyId__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1981,7 +2556,11 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApplyArchiveRule(context.Background(), &ApplyArchiveRuleInput{})
+	_, opErr := svc.ApplyArchiveRule(context.Background(), &ApplyArchiveRuleInput{
+		AnalyzerArn: ptr.String("__AnalyzerArn__"),
+		RuleName:    ptr.String("__RuleName__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2006,7 +2585,32 @@ func TestCheckResponseSnapshot_Error_UnprocessableEntityException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CheckAccessNotGranted(context.Background(), &CheckAccessNotGrantedInput{})
+	_, opErr := svc.CheckAccessNotGranted(context.Background(), &CheckAccessNotGrantedInput{
+		PolicyDocument: ptr.String("__PolicyDocument__"),
+		Access: []types.Access{
+			{
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Resources: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		PolicyType: types.AccessCheckPolicyType("IDENTITY_POLICY"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2042,7 +2646,11 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApplyArchiveRule(context.Background(), &ApplyArchiveRuleInput{})
+	_, opErr := svc.ApplyArchiveRule(context.Background(), &ApplyArchiveRuleInput{
+		AnalyzerArn: ptr.String("__AnalyzerArn__"),
+		RuleName:    ptr.String("__RuleName__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

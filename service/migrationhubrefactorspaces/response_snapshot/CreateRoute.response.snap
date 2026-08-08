@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ApplicationId":"__ApplicationId__","Arn":"__Arn__","CreatedByAccountId":"__CreatedByAccountId__","CreatedTime":946684800,"LastUpdatedTime":946684800,"OwnerAccountId":"__OwnerAccountId__","RouteId":"__RouteId__","RouteType":"DEFAULT","ServiceId":"__ServiceId__","State":"CREATING","Tags":{"key0":"__Value__"},"UriPathRoute":{"ActivationState":"ACTIVE","AppendSourcePath":true,"IncludeChildPaths":true,"Methods":["DELETE","DELETE"],"SourcePath":"__SourcePath__"}}

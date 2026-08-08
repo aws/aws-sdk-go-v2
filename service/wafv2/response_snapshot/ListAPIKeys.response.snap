@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSWAF_20190729.ListAPIKeys
+
+{"APIKeySummaries":[{"APIKey":"__APIKey__","CreationTimestamp":946684800,"TokenDomains":["__Member__","__Member__"],"Version":1},{"APIKey":"__APIKey__","CreationTimestamp":946684800,"TokenDomains":["__Member__","__Member__"],"Version":1}],"ApplicationIntegrationURL":"__ApplicationIntegrationURL__","NextMarker":"__NextMarker__"}

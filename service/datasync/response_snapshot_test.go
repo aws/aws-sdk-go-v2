@@ -117,7 +117,9 @@ func TestCheckResponseSnapshot_CancelTaskExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelTaskExecution(context.Background(), &CancelTaskExecutionInput{})
+	got, err := svc.CancelTaskExecution(context.Background(), &CancelTaskExecutionInput{
+		TaskExecutionArn: ptr.String("__TaskExecutionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -138,7 +140,29 @@ func TestCheckResponseSnapshot_CreateAgent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAgent(context.Background(), &CreateAgentInput{})
+	got, err := svc.CreateAgent(context.Background(), &CreateAgentInput{
+		ActivationKey: ptr.String("__ActivationKey__"),
+		AgentName:     ptr.String("__AgentName__"),
+		Tags: []types.TagListEntry{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		VpcEndpointId: ptr.String("__VpcEndpointId__"),
+		SubnetArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -159,7 +183,38 @@ func TestCheckResponseSnapshot_CreateLocationAzureBlob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLocationAzureBlob(context.Background(), &CreateLocationAzureBlobInput{})
+	got, err := svc.CreateLocationAzureBlob(context.Background(), &CreateLocationAzureBlobInput{
+		ContainerUrl:       ptr.String("__ContainerUrl__"),
+		AuthenticationType: types.AzureBlobAuthenticationType("SAS"),
+		SasConfiguration: &types.AzureBlobSasConfiguration{
+			Token: ptr.String("__Token__"),
+		},
+		BlobType:     types.AzureBlobType("BLOCK"),
+		AccessTier:   types.AzureAccessTier("HOT"),
+		Subdirectory: ptr.String("__Subdirectory__"),
+		AgentArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.TagListEntry{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		CmkSecretConfig: &types.CmkSecretConfig{
+			SecretArn: ptr.String("__SecretArn__"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		CustomSecretConfig: &types.CustomSecretConfig{
+			SecretArn:           ptr.String("__SecretArn__"),
+			SecretAccessRoleArn: ptr.String("__SecretAccessRoleArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -180,7 +235,30 @@ func TestCheckResponseSnapshot_CreateLocationEfs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLocationEfs(context.Background(), &CreateLocationEfsInput{})
+	got, err := svc.CreateLocationEfs(context.Background(), &CreateLocationEfsInput{
+		Subdirectory:     ptr.String("__Subdirectory__"),
+		EfsFilesystemArn: ptr.String("__EfsFilesystemArn__"),
+		Ec2Config: &types.Ec2Config{
+			SubnetArn: ptr.String("__SubnetArn__"),
+			SecurityGroupArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Tags: []types.TagListEntry{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AccessPointArn:          ptr.String("__AccessPointArn__"),
+		FileSystemAccessRoleArn: ptr.String("__FileSystemAccessRoleArn__"),
+		InTransitEncryption:     types.EfsInTransitEncryption("NONE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -201,7 +279,24 @@ func TestCheckResponseSnapshot_CreateLocationFsxLustre(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLocationFsxLustre(context.Background(), &CreateLocationFsxLustreInput{})
+	got, err := svc.CreateLocationFsxLustre(context.Background(), &CreateLocationFsxLustreInput{
+		FsxFilesystemArn: ptr.String("__FsxFilesystemArn__"),
+		SecurityGroupArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Subdirectory: ptr.String("__Subdirectory__"),
+		Tags: []types.TagListEntry{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -222,7 +317,50 @@ func TestCheckResponseSnapshot_CreateLocationFsxOntap(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLocationFsxOntap(context.Background(), &CreateLocationFsxOntapInput{})
+	got, err := svc.CreateLocationFsxOntap(context.Background(), &CreateLocationFsxOntapInput{
+		Protocol: &types.FsxProtocol{
+			NFS: &types.FsxProtocolNfs{
+				MountOptions: &types.NfsMountOptions{
+					Version: types.NfsVersion("AUTOMATIC"),
+				},
+			},
+			SMB: &types.FsxProtocolSmb{
+				Domain: ptr.String("__Domain__"),
+				MountOptions: &types.SmbMountOptions{
+					Version: types.SmbVersion("AUTOMATIC"),
+				},
+				Password: ptr.String("__Password__"),
+				User:     ptr.String("__User__"),
+				ManagedSecretConfig: &types.ManagedSecretConfig{
+					SecretArn: ptr.String("__SecretArn__"),
+				},
+				CmkSecretConfig: &types.CmkSecretConfig{
+					SecretArn: ptr.String("__SecretArn__"),
+					KmsKeyArn: ptr.String("__KmsKeyArn__"),
+				},
+				CustomSecretConfig: &types.CustomSecretConfig{
+					SecretArn:           ptr.String("__SecretArn__"),
+					SecretAccessRoleArn: ptr.String("__SecretAccessRoleArn__"),
+				},
+			},
+		},
+		SecurityGroupArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		StorageVirtualMachineArn: ptr.String("__StorageVirtualMachineArn__"),
+		Subdirectory:             ptr.String("__Subdirectory__"),
+		Tags: []types.TagListEntry{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -243,7 +381,50 @@ func TestCheckResponseSnapshot_CreateLocationFsxOpenZfs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLocationFsxOpenZfs(context.Background(), &CreateLocationFsxOpenZfsInput{})
+	got, err := svc.CreateLocationFsxOpenZfs(context.Background(), &CreateLocationFsxOpenZfsInput{
+		FsxFilesystemArn: ptr.String("__FsxFilesystemArn__"),
+		Protocol: &types.FsxProtocol{
+			NFS: &types.FsxProtocolNfs{
+				MountOptions: &types.NfsMountOptions{
+					Version: types.NfsVersion("AUTOMATIC"),
+				},
+			},
+			SMB: &types.FsxProtocolSmb{
+				Domain: ptr.String("__Domain__"),
+				MountOptions: &types.SmbMountOptions{
+					Version: types.SmbVersion("AUTOMATIC"),
+				},
+				Password: ptr.String("__Password__"),
+				User:     ptr.String("__User__"),
+				ManagedSecretConfig: &types.ManagedSecretConfig{
+					SecretArn: ptr.String("__SecretArn__"),
+				},
+				CmkSecretConfig: &types.CmkSecretConfig{
+					SecretArn: ptr.String("__SecretArn__"),
+					KmsKeyArn: ptr.String("__KmsKeyArn__"),
+				},
+				CustomSecretConfig: &types.CustomSecretConfig{
+					SecretArn:           ptr.String("__SecretArn__"),
+					SecretAccessRoleArn: ptr.String("__SecretAccessRoleArn__"),
+				},
+			},
+		},
+		SecurityGroupArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Subdirectory: ptr.String("__Subdirectory__"),
+		Tags: []types.TagListEntry{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -264,7 +445,35 @@ func TestCheckResponseSnapshot_CreateLocationFsxWindows(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLocationFsxWindows(context.Background(), &CreateLocationFsxWindowsInput{})
+	got, err := svc.CreateLocationFsxWindows(context.Background(), &CreateLocationFsxWindowsInput{
+		Subdirectory:     ptr.String("__Subdirectory__"),
+		FsxFilesystemArn: ptr.String("__FsxFilesystemArn__"),
+		SecurityGroupArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.TagListEntry{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		User:     ptr.String("__User__"),
+		Domain:   ptr.String("__Domain__"),
+		Password: ptr.String("__Password__"),
+		CmkSecretConfig: &types.CmkSecretConfig{
+			SecretArn: ptr.String("__SecretArn__"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		CustomSecretConfig: &types.CustomSecretConfig{
+			SecretArn:           ptr.String("__SecretArn__"),
+			SecretAccessRoleArn: ptr.String("__SecretAccessRoleArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -285,7 +494,53 @@ func TestCheckResponseSnapshot_CreateLocationHdfs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLocationHdfs(context.Background(), &CreateLocationHdfsInput{})
+	got, err := svc.CreateLocationHdfs(context.Background(), &CreateLocationHdfsInput{
+		Subdirectory: ptr.String("__Subdirectory__"),
+		NameNodes: []types.HdfsNameNode{
+			{
+				Hostname: ptr.String("__Hostname__"),
+				Port:     ptr.Int32(1),
+			},
+			{
+				Hostname: ptr.String("__Hostname__"),
+				Port:     ptr.Int32(1),
+			},
+		},
+		BlockSize:         ptr.Int32(1),
+		ReplicationFactor: ptr.Int32(1),
+		KmsKeyProviderUri: ptr.String("__KmsKeyProviderUri__"),
+		QopConfiguration: &types.QopConfiguration{
+			RpcProtection:          types.HdfsRpcProtection("DISABLED"),
+			DataTransferProtection: types.HdfsDataTransferProtection("DISABLED"),
+		},
+		AuthenticationType: types.HdfsAuthenticationType("SIMPLE"),
+		SimpleUser:         ptr.String("__SimpleUser__"),
+		KerberosPrincipal:  ptr.String("__KerberosPrincipal__"),
+		KerberosKeytab:     []byte("blob"),
+		KerberosKrb5Conf:   []byte("blob"),
+		AgentArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.TagListEntry{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		CmkSecretConfig: &types.CmkSecretConfig{
+			SecretArn: ptr.String("__SecretArn__"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		CustomSecretConfig: &types.CustomSecretConfig{
+			SecretArn:           ptr.String("__SecretArn__"),
+			SecretAccessRoleArn: ptr.String("__SecretAccessRoleArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -306,7 +561,29 @@ func TestCheckResponseSnapshot_CreateLocationNfs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLocationNfs(context.Background(), &CreateLocationNfsInput{})
+	got, err := svc.CreateLocationNfs(context.Background(), &CreateLocationNfsInput{
+		Subdirectory:   ptr.String("__Subdirectory__"),
+		ServerHostname: ptr.String("__ServerHostname__"),
+		OnPremConfig: &types.OnPremConfig{
+			AgentArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		MountOptions: &types.NfsMountOptions{
+			Version: types.NfsVersion("AUTOMATIC"),
+		},
+		Tags: []types.TagListEntry{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -327,7 +604,38 @@ func TestCheckResponseSnapshot_CreateLocationObjectStorage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLocationObjectStorage(context.Background(), &CreateLocationObjectStorageInput{})
+	got, err := svc.CreateLocationObjectStorage(context.Background(), &CreateLocationObjectStorageInput{
+		ServerHostname: ptr.String("__ServerHostname__"),
+		ServerPort:     ptr.Int32(1),
+		ServerProtocol: types.ObjectStorageServerProtocol("HTTPS"),
+		Subdirectory:   ptr.String("__Subdirectory__"),
+		BucketName:     ptr.String("__BucketName__"),
+		AccessKey:      ptr.String("__AccessKey__"),
+		SecretKey:      ptr.String("__SecretKey__"),
+		AgentArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.TagListEntry{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ServerCertificate: []byte("blob"),
+		CmkSecretConfig: &types.CmkSecretConfig{
+			SecretArn: ptr.String("__SecretArn__"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		CustomSecretConfig: &types.CustomSecretConfig{
+			SecretArn:           ptr.String("__SecretArn__"),
+			SecretAccessRoleArn: ptr.String("__SecretAccessRoleArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -348,7 +656,28 @@ func TestCheckResponseSnapshot_CreateLocationS3(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLocationS3(context.Background(), &CreateLocationS3Input{})
+	got, err := svc.CreateLocationS3(context.Background(), &CreateLocationS3Input{
+		Subdirectory:   ptr.String("__Subdirectory__"),
+		S3BucketArn:    ptr.String("__S3BucketArn__"),
+		S3StorageClass: types.S3StorageClass("STANDARD"),
+		S3Config: &types.S3Config{
+			BucketAccessRoleArn: ptr.String("__BucketAccessRoleArn__"),
+		},
+		AgentArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.TagListEntry{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -369,7 +698,46 @@ func TestCheckResponseSnapshot_CreateLocationSmb(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLocationSmb(context.Background(), &CreateLocationSmbInput{})
+	got, err := svc.CreateLocationSmb(context.Background(), &CreateLocationSmbInput{
+		Subdirectory:   ptr.String("__Subdirectory__"),
+		ServerHostname: ptr.String("__ServerHostname__"),
+		User:           ptr.String("__User__"),
+		Domain:         ptr.String("__Domain__"),
+		Password:       ptr.String("__Password__"),
+		CmkSecretConfig: &types.CmkSecretConfig{
+			SecretArn: ptr.String("__SecretArn__"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		CustomSecretConfig: &types.CustomSecretConfig{
+			SecretArn:           ptr.String("__SecretArn__"),
+			SecretAccessRoleArn: ptr.String("__SecretAccessRoleArn__"),
+		},
+		AgentArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MountOptions: &types.SmbMountOptions{
+			Version: types.SmbVersion("AUTOMATIC"),
+		},
+		Tags: []types.TagListEntry{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AuthenticationType: types.SmbAuthenticationType("NTLM"),
+		DnsIpAddresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		KerberosPrincipal: ptr.String("__KerberosPrincipal__"),
+		KerberosKeytab:    []byte("blob"),
+		KerberosKrb5Conf:  []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -390,7 +758,102 @@ func TestCheckResponseSnapshot_CreateTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTask(context.Background(), &CreateTaskInput{})
+	got, err := svc.CreateTask(context.Background(), &CreateTaskInput{
+		SourceLocationArn:      ptr.String("__SourceLocationArn__"),
+		DestinationLocationArn: ptr.String("__DestinationLocationArn__"),
+		CloudWatchLogGroupArn:  ptr.String("__CloudWatchLogGroupArn__"),
+		Name:                   ptr.String("__Name__"),
+		Options: &types.Options{
+			VerifyMode:                  types.VerifyMode("POINT_IN_TIME_CONSISTENT"),
+			OverwriteMode:               types.OverwriteMode("ALWAYS"),
+			Atime:                       types.Atime("NONE"),
+			Mtime:                       types.Mtime("NONE"),
+			Uid:                         types.Uid("NONE"),
+			Gid:                         types.Gid("NONE"),
+			PreserveDeletedFiles:        types.PreserveDeletedFiles("PRESERVE"),
+			PreserveDevices:             types.PreserveDevices("NONE"),
+			PosixPermissions:            types.PosixPermissions("NONE"),
+			BytesPerSecond:              ptr.Int64(1),
+			TaskQueueing:                types.TaskQueueing("ENABLED"),
+			LogLevel:                    types.LogLevel("OFF"),
+			TransferMode:                types.TransferMode("CHANGED"),
+			SecurityDescriptorCopyFlags: types.SmbSecurityDescriptorCopyFlags("NONE"),
+			ObjectTags:                  types.ObjectTags("PRESERVE"),
+		},
+		Excludes: []types.FilterRule{
+			{
+				FilterType: types.FilterType("SIMPLE_PATTERN"),
+				Value:      ptr.String("__Value__"),
+			},
+			{
+				FilterType: types.FilterType("SIMPLE_PATTERN"),
+				Value:      ptr.String("__Value__"),
+			},
+		},
+		Schedule: &types.TaskSchedule{
+			ScheduleExpression: ptr.String("__ScheduleExpression__"),
+			Status:             types.ScheduleStatus("ENABLED"),
+		},
+		Tags: []types.TagListEntry{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Includes: []types.FilterRule{
+			{
+				FilterType: types.FilterType("SIMPLE_PATTERN"),
+				Value:      ptr.String("__Value__"),
+			},
+			{
+				FilterType: types.FilterType("SIMPLE_PATTERN"),
+				Value:      ptr.String("__Value__"),
+			},
+		},
+		ManifestConfig: &types.ManifestConfig{
+			Action: types.ManifestAction("TRANSFER"),
+			Format: types.ManifestFormat("CSV"),
+			Source: &types.SourceManifestConfig{
+				S3: &types.S3ManifestConfig{
+					ManifestObjectPath:      ptr.String("__ManifestObjectPath__"),
+					BucketAccessRoleArn:     ptr.String("__BucketAccessRoleArn__"),
+					S3BucketArn:             ptr.String("__S3BucketArn__"),
+					ManifestObjectVersionId: ptr.String("__ManifestObjectVersionId__"),
+				},
+			},
+		},
+		TaskReportConfig: &types.TaskReportConfig{
+			Destination: &types.ReportDestination{
+				S3: &types.ReportDestinationS3{
+					Subdirectory:        ptr.String("__Subdirectory__"),
+					S3BucketArn:         ptr.String("__S3BucketArn__"),
+					BucketAccessRoleArn: ptr.String("__BucketAccessRoleArn__"),
+				},
+			},
+			OutputType:       types.ReportOutputType("SUMMARY_ONLY"),
+			ReportLevel:      types.ReportLevel("ERRORS_ONLY"),
+			ObjectVersionIds: types.ObjectVersionIds("INCLUDE"),
+			Overrides: &types.ReportOverrides{
+				Transferred: &types.ReportOverride{
+					ReportLevel: types.ReportLevel("ERRORS_ONLY"),
+				},
+				Verified: &types.ReportOverride{
+					ReportLevel: types.ReportLevel("ERRORS_ONLY"),
+				},
+				Deleted: &types.ReportOverride{
+					ReportLevel: types.ReportLevel("ERRORS_ONLY"),
+				},
+				Skipped: &types.ReportOverride{
+					ReportLevel: types.ReportLevel("ERRORS_ONLY"),
+				},
+			},
+		},
+		TaskMode: types.TaskMode("BASIC"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -409,7 +872,9 @@ func TestCheckResponseSnapshot_DeleteAgent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAgent(context.Background(), &DeleteAgentInput{})
+	got, err := svc.DeleteAgent(context.Background(), &DeleteAgentInput{
+		AgentArn: ptr.String("__AgentArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -428,7 +893,9 @@ func TestCheckResponseSnapshot_DeleteLocation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLocation(context.Background(), &DeleteLocationInput{})
+	got, err := svc.DeleteLocation(context.Background(), &DeleteLocationInput{
+		LocationArn: ptr.String("__LocationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -447,7 +914,9 @@ func TestCheckResponseSnapshot_DeleteTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTask(context.Background(), &DeleteTaskInput{})
+	got, err := svc.DeleteTask(context.Background(), &DeleteTaskInput{
+		TaskArn: ptr.String("__TaskArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -488,7 +957,9 @@ func TestCheckResponseSnapshot_DescribeAgent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAgent(context.Background(), &DescribeAgentInput{})
+	got, err := svc.DescribeAgent(context.Background(), &DescribeAgentInput{
+		AgentArn: ptr.String("__AgentArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -529,7 +1000,9 @@ func TestCheckResponseSnapshot_DescribeLocationAzureBlob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLocationAzureBlob(context.Background(), &DescribeLocationAzureBlobInput{})
+	got, err := svc.DescribeLocationAzureBlob(context.Background(), &DescribeLocationAzureBlobInput{
+		LocationArn: ptr.String("__LocationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -562,7 +1035,9 @@ func TestCheckResponseSnapshot_DescribeLocationEfs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLocationEfs(context.Background(), &DescribeLocationEfsInput{})
+	got, err := svc.DescribeLocationEfs(context.Background(), &DescribeLocationEfsInput{
+		LocationArn: ptr.String("__LocationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -589,7 +1064,9 @@ func TestCheckResponseSnapshot_DescribeLocationFsxLustre(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLocationFsxLustre(context.Background(), &DescribeLocationFsxLustreInput{})
+	got, err := svc.DescribeLocationFsxLustre(context.Background(), &DescribeLocationFsxLustreInput{
+		LocationArn: ptr.String("__LocationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -644,7 +1121,9 @@ func TestCheckResponseSnapshot_DescribeLocationFsxOntap(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLocationFsxOntap(context.Background(), &DescribeLocationFsxOntapInput{})
+	got, err := svc.DescribeLocationFsxOntap(context.Background(), &DescribeLocationFsxOntapInput{
+		LocationArn: ptr.String("__LocationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -697,7 +1176,9 @@ func TestCheckResponseSnapshot_DescribeLocationFsxOpenZfs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLocationFsxOpenZfs(context.Background(), &DescribeLocationFsxOpenZfsInput{})
+	got, err := svc.DescribeLocationFsxOpenZfs(context.Background(), &DescribeLocationFsxOpenZfsInput{
+		LocationArn: ptr.String("__LocationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -737,7 +1218,9 @@ func TestCheckResponseSnapshot_DescribeLocationFsxWindows(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLocationFsxWindows(context.Background(), &DescribeLocationFsxWindowsInput{})
+	got, err := svc.DescribeLocationFsxWindows(context.Background(), &DescribeLocationFsxWindowsInput{
+		LocationArn: ptr.String("__LocationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -795,7 +1278,9 @@ func TestCheckResponseSnapshot_DescribeLocationHdfs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLocationHdfs(context.Background(), &DescribeLocationHdfsInput{})
+	got, err := svc.DescribeLocationHdfs(context.Background(), &DescribeLocationHdfsInput{
+		LocationArn: ptr.String("__LocationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -827,7 +1312,9 @@ func TestCheckResponseSnapshot_DescribeLocationNfs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLocationNfs(context.Background(), &DescribeLocationNfsInput{})
+	got, err := svc.DescribeLocationNfs(context.Background(), &DescribeLocationNfsInput{
+		LocationArn: ptr.String("__LocationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -869,7 +1356,9 @@ func TestCheckResponseSnapshot_DescribeLocationObjectStorage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLocationObjectStorage(context.Background(), &DescribeLocationObjectStorageInput{})
+	got, err := svc.DescribeLocationObjectStorage(context.Background(), &DescribeLocationObjectStorageInput{
+		LocationArn: ptr.String("__LocationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -900,7 +1389,9 @@ func TestCheckResponseSnapshot_DescribeLocationS3(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLocationS3(context.Background(), &DescribeLocationS3Input{})
+	got, err := svc.DescribeLocationS3(context.Background(), &DescribeLocationS3Input{
+		LocationArn: ptr.String("__LocationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -949,7 +1440,9 @@ func TestCheckResponseSnapshot_DescribeLocationSmb(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeLocationSmb(context.Background(), &DescribeLocationSmbInput{})
+	got, err := svc.DescribeLocationSmb(context.Background(), &DescribeLocationSmbInput{
+		LocationArn: ptr.String("__LocationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1072,7 +1565,9 @@ func TestCheckResponseSnapshot_DescribeTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTask(context.Background(), &DescribeTaskInput{})
+	got, err := svc.DescribeTask(context.Background(), &DescribeTaskInput{
+		TaskArn: ptr.String("__TaskArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1228,7 +1723,9 @@ func TestCheckResponseSnapshot_DescribeTaskExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTaskExecution(context.Background(), &DescribeTaskExecutionInput{})
+	got, err := svc.DescribeTaskExecution(context.Background(), &DescribeTaskExecutionInput{
+		TaskExecutionArn: ptr.String("__TaskExecutionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1267,7 +1764,10 @@ func TestCheckResponseSnapshot_ListAgents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAgents(context.Background(), &ListAgentsInput{})
+	got, err := svc.ListAgents(context.Background(), &ListAgentsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1298,7 +1798,28 @@ func TestCheckResponseSnapshot_ListLocations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLocations(context.Background(), &ListLocationsInput{})
+	got, err := svc.ListLocations(context.Background(), &ListLocationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.LocationFilter{
+			{
+				Name: types.LocationFilterName("LocationUri"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.Operator("Equals"),
+			},
+			{
+				Name: types.LocationFilterName("LocationUri"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.Operator("Equals"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1329,7 +1850,11 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1362,7 +1887,11 @@ func TestCheckResponseSnapshot_ListTaskExecutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTaskExecutions(context.Background(), &ListTaskExecutionsInput{})
+	got, err := svc.ListTaskExecutions(context.Background(), &ListTaskExecutionsInput{
+		TaskArn:    ptr.String("__TaskArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1397,7 +1926,28 @@ func TestCheckResponseSnapshot_ListTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTasks(context.Background(), &ListTasksInput{})
+	got, err := svc.ListTasks(context.Background(), &ListTasksInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.TaskFilter{
+			{
+				Name: types.TaskFilterName("LocationId"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.Operator("Equals"),
+			},
+			{
+				Name: types.TaskFilterName("LocationId"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operator: types.Operator("Equals"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1418,7 +1968,94 @@ func TestCheckResponseSnapshot_StartTaskExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartTaskExecution(context.Background(), &StartTaskExecutionInput{})
+	got, err := svc.StartTaskExecution(context.Background(), &StartTaskExecutionInput{
+		TaskArn: ptr.String("__TaskArn__"),
+		OverrideOptions: &types.Options{
+			VerifyMode:                  types.VerifyMode("POINT_IN_TIME_CONSISTENT"),
+			OverwriteMode:               types.OverwriteMode("ALWAYS"),
+			Atime:                       types.Atime("NONE"),
+			Mtime:                       types.Mtime("NONE"),
+			Uid:                         types.Uid("NONE"),
+			Gid:                         types.Gid("NONE"),
+			PreserveDeletedFiles:        types.PreserveDeletedFiles("PRESERVE"),
+			PreserveDevices:             types.PreserveDevices("NONE"),
+			PosixPermissions:            types.PosixPermissions("NONE"),
+			BytesPerSecond:              ptr.Int64(1),
+			TaskQueueing:                types.TaskQueueing("ENABLED"),
+			LogLevel:                    types.LogLevel("OFF"),
+			TransferMode:                types.TransferMode("CHANGED"),
+			SecurityDescriptorCopyFlags: types.SmbSecurityDescriptorCopyFlags("NONE"),
+			ObjectTags:                  types.ObjectTags("PRESERVE"),
+		},
+		Includes: []types.FilterRule{
+			{
+				FilterType: types.FilterType("SIMPLE_PATTERN"),
+				Value:      ptr.String("__Value__"),
+			},
+			{
+				FilterType: types.FilterType("SIMPLE_PATTERN"),
+				Value:      ptr.String("__Value__"),
+			},
+		},
+		Excludes: []types.FilterRule{
+			{
+				FilterType: types.FilterType("SIMPLE_PATTERN"),
+				Value:      ptr.String("__Value__"),
+			},
+			{
+				FilterType: types.FilterType("SIMPLE_PATTERN"),
+				Value:      ptr.String("__Value__"),
+			},
+		},
+		ManifestConfig: &types.ManifestConfig{
+			Action: types.ManifestAction("TRANSFER"),
+			Format: types.ManifestFormat("CSV"),
+			Source: &types.SourceManifestConfig{
+				S3: &types.S3ManifestConfig{
+					ManifestObjectPath:      ptr.String("__ManifestObjectPath__"),
+					BucketAccessRoleArn:     ptr.String("__BucketAccessRoleArn__"),
+					S3BucketArn:             ptr.String("__S3BucketArn__"),
+					ManifestObjectVersionId: ptr.String("__ManifestObjectVersionId__"),
+				},
+			},
+		},
+		TaskReportConfig: &types.TaskReportConfig{
+			Destination: &types.ReportDestination{
+				S3: &types.ReportDestinationS3{
+					Subdirectory:        ptr.String("__Subdirectory__"),
+					S3BucketArn:         ptr.String("__S3BucketArn__"),
+					BucketAccessRoleArn: ptr.String("__BucketAccessRoleArn__"),
+				},
+			},
+			OutputType:       types.ReportOutputType("SUMMARY_ONLY"),
+			ReportLevel:      types.ReportLevel("ERRORS_ONLY"),
+			ObjectVersionIds: types.ObjectVersionIds("INCLUDE"),
+			Overrides: &types.ReportOverrides{
+				Transferred: &types.ReportOverride{
+					ReportLevel: types.ReportLevel("ERRORS_ONLY"),
+				},
+				Verified: &types.ReportOverride{
+					ReportLevel: types.ReportLevel("ERRORS_ONLY"),
+				},
+				Deleted: &types.ReportOverride{
+					ReportLevel: types.ReportLevel("ERRORS_ONLY"),
+				},
+				Skipped: &types.ReportOverride{
+					ReportLevel: types.ReportLevel("ERRORS_ONLY"),
+				},
+			},
+		},
+		Tags: []types.TagListEntry{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1437,7 +2074,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.TagListEntry{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1456,7 +2105,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Keys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1475,7 +2130,10 @@ func TestCheckResponseSnapshot_UpdateAgent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAgent(context.Background(), &UpdateAgentInput{})
+	got, err := svc.UpdateAgent(context.Background(), &UpdateAgentInput{
+		AgentArn: ptr.String("__AgentArn__"),
+		Name:     ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1494,7 +2152,28 @@ func TestCheckResponseSnapshot_UpdateLocationAzureBlob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLocationAzureBlob(context.Background(), &UpdateLocationAzureBlobInput{})
+	got, err := svc.UpdateLocationAzureBlob(context.Background(), &UpdateLocationAzureBlobInput{
+		LocationArn:        ptr.String("__LocationArn__"),
+		Subdirectory:       ptr.String("__Subdirectory__"),
+		AuthenticationType: types.AzureBlobAuthenticationType("SAS"),
+		SasConfiguration: &types.AzureBlobSasConfiguration{
+			Token: ptr.String("__Token__"),
+		},
+		BlobType:   types.AzureBlobType("BLOCK"),
+		AccessTier: types.AzureAccessTier("HOT"),
+		AgentArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CmkSecretConfig: &types.CmkSecretConfig{
+			SecretArn: ptr.String("__SecretArn__"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		CustomSecretConfig: &types.CustomSecretConfig{
+			SecretArn:           ptr.String("__SecretArn__"),
+			SecretAccessRoleArn: ptr.String("__SecretAccessRoleArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1513,7 +2192,13 @@ func TestCheckResponseSnapshot_UpdateLocationEfs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLocationEfs(context.Background(), &UpdateLocationEfsInput{})
+	got, err := svc.UpdateLocationEfs(context.Background(), &UpdateLocationEfsInput{
+		LocationArn:             ptr.String("__LocationArn__"),
+		Subdirectory:            ptr.String("__Subdirectory__"),
+		AccessPointArn:          ptr.String("__AccessPointArn__"),
+		FileSystemAccessRoleArn: ptr.String("__FileSystemAccessRoleArn__"),
+		InTransitEncryption:     types.EfsInTransitEncryption("NONE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1532,7 +2217,10 @@ func TestCheckResponseSnapshot_UpdateLocationFsxLustre(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLocationFsxLustre(context.Background(), &UpdateLocationFsxLustreInput{})
+	got, err := svc.UpdateLocationFsxLustre(context.Background(), &UpdateLocationFsxLustreInput{
+		LocationArn:  ptr.String("__LocationArn__"),
+		Subdirectory: ptr.String("__Subdirectory__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1551,7 +2239,33 @@ func TestCheckResponseSnapshot_UpdateLocationFsxOntap(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLocationFsxOntap(context.Background(), &UpdateLocationFsxOntapInput{})
+	got, err := svc.UpdateLocationFsxOntap(context.Background(), &UpdateLocationFsxOntapInput{
+		LocationArn: ptr.String("__LocationArn__"),
+		Protocol: &types.FsxUpdateProtocol{
+			NFS: &types.FsxProtocolNfs{
+				MountOptions: &types.NfsMountOptions{
+					Version: types.NfsVersion("AUTOMATIC"),
+				},
+			},
+			SMB: &types.FsxUpdateProtocolSmb{
+				Domain: ptr.String("__Domain__"),
+				MountOptions: &types.SmbMountOptions{
+					Version: types.SmbVersion("AUTOMATIC"),
+				},
+				Password: ptr.String("__Password__"),
+				User:     ptr.String("__User__"),
+				CmkSecretConfig: &types.CmkSecretConfig{
+					SecretArn: ptr.String("__SecretArn__"),
+					KmsKeyArn: ptr.String("__KmsKeyArn__"),
+				},
+				CustomSecretConfig: &types.CustomSecretConfig{
+					SecretArn:           ptr.String("__SecretArn__"),
+					SecretAccessRoleArn: ptr.String("__SecretAccessRoleArn__"),
+				},
+			},
+		},
+		Subdirectory: ptr.String("__Subdirectory__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1570,7 +2284,36 @@ func TestCheckResponseSnapshot_UpdateLocationFsxOpenZfs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLocationFsxOpenZfs(context.Background(), &UpdateLocationFsxOpenZfsInput{})
+	got, err := svc.UpdateLocationFsxOpenZfs(context.Background(), &UpdateLocationFsxOpenZfsInput{
+		LocationArn: ptr.String("__LocationArn__"),
+		Protocol: &types.FsxProtocol{
+			NFS: &types.FsxProtocolNfs{
+				MountOptions: &types.NfsMountOptions{
+					Version: types.NfsVersion("AUTOMATIC"),
+				},
+			},
+			SMB: &types.FsxProtocolSmb{
+				Domain: ptr.String("__Domain__"),
+				MountOptions: &types.SmbMountOptions{
+					Version: types.SmbVersion("AUTOMATIC"),
+				},
+				Password: ptr.String("__Password__"),
+				User:     ptr.String("__User__"),
+				ManagedSecretConfig: &types.ManagedSecretConfig{
+					SecretArn: ptr.String("__SecretArn__"),
+				},
+				CmkSecretConfig: &types.CmkSecretConfig{
+					SecretArn: ptr.String("__SecretArn__"),
+					KmsKeyArn: ptr.String("__KmsKeyArn__"),
+				},
+				CustomSecretConfig: &types.CustomSecretConfig{
+					SecretArn:           ptr.String("__SecretArn__"),
+					SecretAccessRoleArn: ptr.String("__SecretAccessRoleArn__"),
+				},
+			},
+		},
+		Subdirectory: ptr.String("__Subdirectory__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1589,7 +2332,21 @@ func TestCheckResponseSnapshot_UpdateLocationFsxWindows(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLocationFsxWindows(context.Background(), &UpdateLocationFsxWindowsInput{})
+	got, err := svc.UpdateLocationFsxWindows(context.Background(), &UpdateLocationFsxWindowsInput{
+		LocationArn:  ptr.String("__LocationArn__"),
+		Subdirectory: ptr.String("__Subdirectory__"),
+		Domain:       ptr.String("__Domain__"),
+		User:         ptr.String("__User__"),
+		Password:     ptr.String("__Password__"),
+		CmkSecretConfig: &types.CmkSecretConfig{
+			SecretArn: ptr.String("__SecretArn__"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		CustomSecretConfig: &types.CustomSecretConfig{
+			SecretArn:           ptr.String("__SecretArn__"),
+			SecretAccessRoleArn: ptr.String("__SecretAccessRoleArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1608,7 +2365,44 @@ func TestCheckResponseSnapshot_UpdateLocationHdfs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLocationHdfs(context.Background(), &UpdateLocationHdfsInput{})
+	got, err := svc.UpdateLocationHdfs(context.Background(), &UpdateLocationHdfsInput{
+		LocationArn:  ptr.String("__LocationArn__"),
+		Subdirectory: ptr.String("__Subdirectory__"),
+		NameNodes: []types.HdfsNameNode{
+			{
+				Hostname: ptr.String("__Hostname__"),
+				Port:     ptr.Int32(1),
+			},
+			{
+				Hostname: ptr.String("__Hostname__"),
+				Port:     ptr.Int32(1),
+			},
+		},
+		BlockSize:         ptr.Int32(1),
+		ReplicationFactor: ptr.Int32(1),
+		KmsKeyProviderUri: ptr.String("__KmsKeyProviderUri__"),
+		QopConfiguration: &types.QopConfiguration{
+			RpcProtection:          types.HdfsRpcProtection("DISABLED"),
+			DataTransferProtection: types.HdfsDataTransferProtection("DISABLED"),
+		},
+		AuthenticationType: types.HdfsAuthenticationType("SIMPLE"),
+		SimpleUser:         ptr.String("__SimpleUser__"),
+		KerberosPrincipal:  ptr.String("__KerberosPrincipal__"),
+		KerberosKeytab:     []byte("blob"),
+		KerberosKrb5Conf:   []byte("blob"),
+		AgentArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CmkSecretConfig: &types.CmkSecretConfig{
+			SecretArn: ptr.String("__SecretArn__"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		CustomSecretConfig: &types.CustomSecretConfig{
+			SecretArn:           ptr.String("__SecretArn__"),
+			SecretAccessRoleArn: ptr.String("__SecretAccessRoleArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1627,7 +2421,20 @@ func TestCheckResponseSnapshot_UpdateLocationNfs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLocationNfs(context.Background(), &UpdateLocationNfsInput{})
+	got, err := svc.UpdateLocationNfs(context.Background(), &UpdateLocationNfsInput{
+		LocationArn:    ptr.String("__LocationArn__"),
+		Subdirectory:   ptr.String("__Subdirectory__"),
+		ServerHostname: ptr.String("__ServerHostname__"),
+		OnPremConfig: &types.OnPremConfig{
+			AgentArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		MountOptions: &types.NfsMountOptions{
+			Version: types.NfsVersion("AUTOMATIC"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1646,7 +2453,28 @@ func TestCheckResponseSnapshot_UpdateLocationObjectStorage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLocationObjectStorage(context.Background(), &UpdateLocationObjectStorageInput{})
+	got, err := svc.UpdateLocationObjectStorage(context.Background(), &UpdateLocationObjectStorageInput{
+		LocationArn:    ptr.String("__LocationArn__"),
+		ServerPort:     ptr.Int32(1),
+		ServerProtocol: types.ObjectStorageServerProtocol("HTTPS"),
+		Subdirectory:   ptr.String("__Subdirectory__"),
+		ServerHostname: ptr.String("__ServerHostname__"),
+		AccessKey:      ptr.String("__AccessKey__"),
+		SecretKey:      ptr.String("__SecretKey__"),
+		AgentArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServerCertificate: []byte("blob"),
+		CmkSecretConfig: &types.CmkSecretConfig{
+			SecretArn: ptr.String("__SecretArn__"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		CustomSecretConfig: &types.CustomSecretConfig{
+			SecretArn:           ptr.String("__SecretArn__"),
+			SecretAccessRoleArn: ptr.String("__SecretAccessRoleArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1665,7 +2493,14 @@ func TestCheckResponseSnapshot_UpdateLocationS3(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLocationS3(context.Background(), &UpdateLocationS3Input{})
+	got, err := svc.UpdateLocationS3(context.Background(), &UpdateLocationS3Input{
+		LocationArn:    ptr.String("__LocationArn__"),
+		Subdirectory:   ptr.String("__Subdirectory__"),
+		S3StorageClass: types.S3StorageClass("STANDARD"),
+		S3Config: &types.S3Config{
+			BucketAccessRoleArn: ptr.String("__BucketAccessRoleArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1684,7 +2519,37 @@ func TestCheckResponseSnapshot_UpdateLocationSmb(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLocationSmb(context.Background(), &UpdateLocationSmbInput{})
+	got, err := svc.UpdateLocationSmb(context.Background(), &UpdateLocationSmbInput{
+		LocationArn:    ptr.String("__LocationArn__"),
+		Subdirectory:   ptr.String("__Subdirectory__"),
+		ServerHostname: ptr.String("__ServerHostname__"),
+		User:           ptr.String("__User__"),
+		Domain:         ptr.String("__Domain__"),
+		Password:       ptr.String("__Password__"),
+		CmkSecretConfig: &types.CmkSecretConfig{
+			SecretArn: ptr.String("__SecretArn__"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		CustomSecretConfig: &types.CustomSecretConfig{
+			SecretArn:           ptr.String("__SecretArn__"),
+			SecretAccessRoleArn: ptr.String("__SecretAccessRoleArn__"),
+		},
+		AgentArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MountOptions: &types.SmbMountOptions{
+			Version: types.SmbVersion("AUTOMATIC"),
+		},
+		AuthenticationType: types.SmbAuthenticationType("NTLM"),
+		DnsIpAddresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		KerberosPrincipal: ptr.String("__KerberosPrincipal__"),
+		KerberosKeytab:    []byte("blob"),
+		KerberosKrb5Conf:  []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1703,7 +2568,90 @@ func TestCheckResponseSnapshot_UpdateTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTask(context.Background(), &UpdateTaskInput{})
+	got, err := svc.UpdateTask(context.Background(), &UpdateTaskInput{
+		TaskArn: ptr.String("__TaskArn__"),
+		Options: &types.Options{
+			VerifyMode:                  types.VerifyMode("POINT_IN_TIME_CONSISTENT"),
+			OverwriteMode:               types.OverwriteMode("ALWAYS"),
+			Atime:                       types.Atime("NONE"),
+			Mtime:                       types.Mtime("NONE"),
+			Uid:                         types.Uid("NONE"),
+			Gid:                         types.Gid("NONE"),
+			PreserveDeletedFiles:        types.PreserveDeletedFiles("PRESERVE"),
+			PreserveDevices:             types.PreserveDevices("NONE"),
+			PosixPermissions:            types.PosixPermissions("NONE"),
+			BytesPerSecond:              ptr.Int64(1),
+			TaskQueueing:                types.TaskQueueing("ENABLED"),
+			LogLevel:                    types.LogLevel("OFF"),
+			TransferMode:                types.TransferMode("CHANGED"),
+			SecurityDescriptorCopyFlags: types.SmbSecurityDescriptorCopyFlags("NONE"),
+			ObjectTags:                  types.ObjectTags("PRESERVE"),
+		},
+		Excludes: []types.FilterRule{
+			{
+				FilterType: types.FilterType("SIMPLE_PATTERN"),
+				Value:      ptr.String("__Value__"),
+			},
+			{
+				FilterType: types.FilterType("SIMPLE_PATTERN"),
+				Value:      ptr.String("__Value__"),
+			},
+		},
+		Schedule: &types.TaskSchedule{
+			ScheduleExpression: ptr.String("__ScheduleExpression__"),
+			Status:             types.ScheduleStatus("ENABLED"),
+		},
+		Name:                  ptr.String("__Name__"),
+		CloudWatchLogGroupArn: ptr.String("__CloudWatchLogGroupArn__"),
+		Includes: []types.FilterRule{
+			{
+				FilterType: types.FilterType("SIMPLE_PATTERN"),
+				Value:      ptr.String("__Value__"),
+			},
+			{
+				FilterType: types.FilterType("SIMPLE_PATTERN"),
+				Value:      ptr.String("__Value__"),
+			},
+		},
+		ManifestConfig: &types.ManifestConfig{
+			Action: types.ManifestAction("TRANSFER"),
+			Format: types.ManifestFormat("CSV"),
+			Source: &types.SourceManifestConfig{
+				S3: &types.S3ManifestConfig{
+					ManifestObjectPath:      ptr.String("__ManifestObjectPath__"),
+					BucketAccessRoleArn:     ptr.String("__BucketAccessRoleArn__"),
+					S3BucketArn:             ptr.String("__S3BucketArn__"),
+					ManifestObjectVersionId: ptr.String("__ManifestObjectVersionId__"),
+				},
+			},
+		},
+		TaskReportConfig: &types.TaskReportConfig{
+			Destination: &types.ReportDestination{
+				S3: &types.ReportDestinationS3{
+					Subdirectory:        ptr.String("__Subdirectory__"),
+					S3BucketArn:         ptr.String("__S3BucketArn__"),
+					BucketAccessRoleArn: ptr.String("__BucketAccessRoleArn__"),
+				},
+			},
+			OutputType:       types.ReportOutputType("SUMMARY_ONLY"),
+			ReportLevel:      types.ReportLevel("ERRORS_ONLY"),
+			ObjectVersionIds: types.ObjectVersionIds("INCLUDE"),
+			Overrides: &types.ReportOverrides{
+				Transferred: &types.ReportOverride{
+					ReportLevel: types.ReportLevel("ERRORS_ONLY"),
+				},
+				Verified: &types.ReportOverride{
+					ReportLevel: types.ReportLevel("ERRORS_ONLY"),
+				},
+				Deleted: &types.ReportOverride{
+					ReportLevel: types.ReportLevel("ERRORS_ONLY"),
+				},
+				Skipped: &types.ReportOverride{
+					ReportLevel: types.ReportLevel("ERRORS_ONLY"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1722,7 +2670,26 @@ func TestCheckResponseSnapshot_UpdateTaskExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTaskExecution(context.Background(), &UpdateTaskExecutionInput{})
+	got, err := svc.UpdateTaskExecution(context.Background(), &UpdateTaskExecutionInput{
+		TaskExecutionArn: ptr.String("__TaskExecutionArn__"),
+		Options: &types.Options{
+			VerifyMode:                  types.VerifyMode("POINT_IN_TIME_CONSISTENT"),
+			OverwriteMode:               types.OverwriteMode("ALWAYS"),
+			Atime:                       types.Atime("NONE"),
+			Mtime:                       types.Mtime("NONE"),
+			Uid:                         types.Uid("NONE"),
+			Gid:                         types.Gid("NONE"),
+			PreserveDeletedFiles:        types.PreserveDeletedFiles("PRESERVE"),
+			PreserveDevices:             types.PreserveDevices("NONE"),
+			PosixPermissions:            types.PosixPermissions("NONE"),
+			BytesPerSecond:              ptr.Int64(1),
+			TaskQueueing:                types.TaskQueueing("ENABLED"),
+			LogLevel:                    types.LogLevel("OFF"),
+			TransferMode:                types.TransferMode("CHANGED"),
+			SecurityDescriptorCopyFlags: types.SmbSecurityDescriptorCopyFlags("NONE"),
+			ObjectTags:                  types.ObjectTags("PRESERVE"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1744,7 +2711,9 @@ func TestCheckResponseSnapshot_Error_InternalException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelTaskExecution(context.Background(), &CancelTaskExecutionInput{})
+	_, opErr := svc.CancelTaskExecution(context.Background(), &CancelTaskExecutionInput{
+		TaskExecutionArn: ptr.String("__TaskExecutionArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1771,7 +2740,9 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelTaskExecution(context.Background(), &CancelTaskExecutionInput{})
+	_, opErr := svc.CancelTaskExecution(context.Background(), &CancelTaskExecutionInput{
+		TaskExecutionArn: ptr.String("__TaskExecutionArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

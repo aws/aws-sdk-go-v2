@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"indexes":[{"creationTime":946684800,"indexArn":"__IndexArn__","indexName":"__IndexName__","vectorBucketName":"__VectorBucketName__"},{"creationTime":946684800,"indexArn":"__IndexArn__","indexName":"__IndexName__","vectorBucketName":"__VectorBucketName__"}],"nextToken":"__NextToken__"}

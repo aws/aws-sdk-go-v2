@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkMailService.DescribeMailboxExportJob
+
+{"Description":"__Description__","EndTime":946684800,"EntityId":"__EntityId__","ErrorInfo":"__ErrorInfo__","EstimatedProgress":1,"KmsKeyArn":"__KmsKeyArn__","RoleArn":"__RoleArn__","S3BucketName":"__S3BucketName__","S3Path":"__S3Path__","S3Prefix":"__S3Prefix__","StartTime":946684800,"State":"RUNNING"}

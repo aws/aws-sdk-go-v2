@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"webhooks":[{"webhookId":"__WebhookId__","webhookType":"hmac","webhookUrl":"__WebhookUrl__"},{"webhookId":"__WebhookId__","webhookType":"hmac","webhookUrl":"__WebhookUrl__"}]}

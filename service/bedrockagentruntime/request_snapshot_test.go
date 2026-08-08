@@ -7,6 +7,7 @@ package bedrockagentruntime
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/document"
@@ -19,6 +20,7 @@ import (
 	"io/fs"
 	"net/url"
 	"os"
+	"reflect"
 	"slices"
 	"strings"
 	"testing"
@@ -182,7 +184,28 @@ func serdeNewClient() *Client {
 	})
 }
 func serdeBodyEqual(got, expected []byte) bool {
-	return bytes.Equal(got, expected)
+	if len(got) == 0 || len(expected) == 0 {
+		return bytes.Equal(got, expected)
+	}
+	gv, gok := serdeDecodeJSON(got)
+	ev, eok := serdeDecodeJSON(expected)
+	if !gok || !eok {
+		return bytes.Equal(got, expected)
+	}
+	return reflect.DeepEqual(gv, ev)
+}
+
+// serdeDecodeJSON decodes a body for structural comparison. Numbers are kept as
+// json.Number rather than float64 so a large int64 doesn't lose precision (which would
+// mask a real difference) and so numeric formatting differences still show up.
+func serdeDecodeJSON(b []byte) (any, bool) {
+	d := json.NewDecoder(bytes.NewReader(b))
+	d.UseNumber()
+	var v any
+	if err := d.Decode(&v); err != nil {
+		return nil, false
+	}
+	return v, true
 }
 func TestCheckRequestSnapshot_CreateInvocation(t *testing.T) {
 	input := &CreateInvocationInput{
@@ -788,7 +811,7 @@ func TestCheckRequestSnapshot_Rerank(t *testing.T) {
 					TextDocument: &types.RerankTextDocument{
 						Text: ptr.String("__Text__"),
 					},
-					JsonDocument: nil,
+					JsonDocument: document.NewLazyDocument("__Document__"),
 				},
 			},
 			{
@@ -798,7 +821,7 @@ func TestCheckRequestSnapshot_Rerank(t *testing.T) {
 					TextDocument: &types.RerankTextDocument{
 						Text: ptr.String("__Text__"),
 					},
-					JsonDocument: nil,
+					JsonDocument: document.NewLazyDocument("__Document__"),
 				},
 			},
 		},
@@ -809,7 +832,7 @@ func TestCheckRequestSnapshot_Rerank(t *testing.T) {
 				ModelConfiguration: &types.BedrockRerankingModelConfiguration{
 					ModelArn: ptr.String("__ModelArn__"),
 					AdditionalModelRequestFields: map[string]document.Interface{
-						"key0": nil,
+						"key0": document.NewLazyDocument("__Document__"),
 					},
 				},
 			},
@@ -857,7 +880,7 @@ func TestCheckRequestSnapshot_Retrieve(t *testing.T) {
 				Filter: &types.RetrievalFilterMemberEquals{
 					Value: types.FilterAttribute{
 						Key:   ptr.String("__Key__"),
-						Value: nil,
+						Value: document.NewLazyDocument("__Document__"),
 					},
 				},
 				RerankingConfiguration: &types.VectorSearchRerankingConfiguration{
@@ -866,7 +889,7 @@ func TestCheckRequestSnapshot_Retrieve(t *testing.T) {
 						ModelConfiguration: &types.VectorSearchBedrockRerankingModelConfiguration{
 							ModelArn: ptr.String("__ModelArn__"),
 							AdditionalModelRequestFields: map[string]document.Interface{
-								"key0": nil,
+								"key0": document.NewLazyDocument("__Document__"),
 							},
 						},
 						NumberOfRerankedResults: ptr.Int32(1),
@@ -906,7 +929,7 @@ func TestCheckRequestSnapshot_Retrieve(t *testing.T) {
 				Filter: &types.RetrievalFilterMemberEquals{
 					Value: types.FilterAttribute{
 						Key:   ptr.String("__Key__"),
-						Value: nil,
+						Value: document.NewLazyDocument("__Document__"),
 					},
 				},
 				RerankingModelType: types.RerankingModelType("CUSTOM"),
@@ -916,7 +939,7 @@ func TestCheckRequestSnapshot_Retrieve(t *testing.T) {
 						ModelConfiguration: &types.ManagedSearchBedrockRerankingModelConfiguration{
 							ModelArn: ptr.String("__ModelArn__"),
 							AdditionalModelRequestFields: map[string]document.Interface{
-								"key0": nil,
+								"key0": document.NewLazyDocument("__Document__"),
 							},
 						},
 						NumberOfRerankedResults: ptr.Int32(1),
@@ -987,7 +1010,7 @@ func TestCheckRequestSnapshot_RetrieveAndGenerate(t *testing.T) {
 						Filter: &types.RetrievalFilterMemberEquals{
 							Value: types.FilterAttribute{
 								Key:   ptr.String("__Key__"),
-								Value: nil,
+								Value: document.NewLazyDocument("__Document__"),
 							},
 						},
 						RerankingConfiguration: &types.VectorSearchRerankingConfiguration{
@@ -996,7 +1019,7 @@ func TestCheckRequestSnapshot_RetrieveAndGenerate(t *testing.T) {
 								ModelConfiguration: &types.VectorSearchBedrockRerankingModelConfiguration{
 									ModelArn: ptr.String("__ModelArn__"),
 									AdditionalModelRequestFields: map[string]document.Interface{
-										"key0": nil,
+										"key0": document.NewLazyDocument("__Document__"),
 									},
 								},
 								NumberOfRerankedResults: ptr.Int32(1),
@@ -1036,7 +1059,7 @@ func TestCheckRequestSnapshot_RetrieveAndGenerate(t *testing.T) {
 						Filter: &types.RetrievalFilterMemberEquals{
 							Value: types.FilterAttribute{
 								Key:   ptr.String("__Key__"),
-								Value: nil,
+								Value: document.NewLazyDocument("__Document__"),
 							},
 						},
 						RerankingModelType: types.RerankingModelType("CUSTOM"),
@@ -1046,7 +1069,7 @@ func TestCheckRequestSnapshot_RetrieveAndGenerate(t *testing.T) {
 								ModelConfiguration: &types.ManagedSearchBedrockRerankingModelConfiguration{
 									ModelArn: ptr.String("__ModelArn__"),
 									AdditionalModelRequestFields: map[string]document.Interface{
-										"key0": nil,
+										"key0": document.NewLazyDocument("__Document__"),
 									},
 								},
 								NumberOfRerankedResults: ptr.Int32(1),
@@ -1087,7 +1110,7 @@ func TestCheckRequestSnapshot_RetrieveAndGenerate(t *testing.T) {
 						},
 					},
 					AdditionalModelRequestFields: map[string]document.Interface{
-						"key0": nil,
+						"key0": document.NewLazyDocument("__Document__"),
 					},
 					PerformanceConfig: &types.PerformanceConfiguration{
 						Latency: types.PerformanceConfigLatency("standard"),
@@ -1109,7 +1132,7 @@ func TestCheckRequestSnapshot_RetrieveAndGenerate(t *testing.T) {
 						},
 					},
 					AdditionalModelRequestFields: map[string]document.Interface{
-						"key0": nil,
+						"key0": document.NewLazyDocument("__Document__"),
 					},
 					QueryTransformationConfiguration: &types.QueryTransformationConfiguration{
 						Type: types.QueryTransformationType("QUERY_DECOMPOSITION"),
@@ -1165,7 +1188,7 @@ func TestCheckRequestSnapshot_RetrieveAndGenerate(t *testing.T) {
 						},
 					},
 					AdditionalModelRequestFields: map[string]document.Interface{
-						"key0": nil,
+						"key0": document.NewLazyDocument("__Document__"),
 					},
 					PerformanceConfig: &types.PerformanceConfiguration{
 						Latency: types.PerformanceConfigLatency("standard"),
@@ -1213,7 +1236,7 @@ func TestCheckRequestSnapshot_StartFlowExecution(t *testing.T) {
 				NodeName:       ptr.String("__NodeName__"),
 				NodeOutputName: ptr.String("__NodeOutputName__"),
 				Content: &types.FlowInputContentMemberDocument{
-					Value: nil,
+					Value: document.NewLazyDocument("__Document__"),
 				},
 				NodeInputName: ptr.String("__NodeInputName__"),
 			},
@@ -1221,7 +1244,7 @@ func TestCheckRequestSnapshot_StartFlowExecution(t *testing.T) {
 				NodeName:       ptr.String("__NodeName__"),
 				NodeOutputName: ptr.String("__NodeOutputName__"),
 				Content: &types.FlowInputContentMemberDocument{
-					Value: nil,
+					Value: document.NewLazyDocument("__Document__"),
 				},
 				NodeInputName: ptr.String("__NodeInputName__"),
 			},
@@ -1978,7 +2001,7 @@ func TestUpdateRequestSnapshot_Rerank(t *testing.T) {
 					TextDocument: &types.RerankTextDocument{
 						Text: ptr.String("__Text__"),
 					},
-					JsonDocument: nil,
+					JsonDocument: document.NewLazyDocument("__Document__"),
 				},
 			},
 			{
@@ -1988,7 +2011,7 @@ func TestUpdateRequestSnapshot_Rerank(t *testing.T) {
 					TextDocument: &types.RerankTextDocument{
 						Text: ptr.String("__Text__"),
 					},
-					JsonDocument: nil,
+					JsonDocument: document.NewLazyDocument("__Document__"),
 				},
 			},
 		},
@@ -1999,7 +2022,7 @@ func TestUpdateRequestSnapshot_Rerank(t *testing.T) {
 				ModelConfiguration: &types.BedrockRerankingModelConfiguration{
 					ModelArn: ptr.String("__ModelArn__"),
 					AdditionalModelRequestFields: map[string]document.Interface{
-						"key0": nil,
+						"key0": document.NewLazyDocument("__Document__"),
 					},
 				},
 			},
@@ -2047,7 +2070,7 @@ func TestUpdateRequestSnapshot_Retrieve(t *testing.T) {
 				Filter: &types.RetrievalFilterMemberEquals{
 					Value: types.FilterAttribute{
 						Key:   ptr.String("__Key__"),
-						Value: nil,
+						Value: document.NewLazyDocument("__Document__"),
 					},
 				},
 				RerankingConfiguration: &types.VectorSearchRerankingConfiguration{
@@ -2056,7 +2079,7 @@ func TestUpdateRequestSnapshot_Retrieve(t *testing.T) {
 						ModelConfiguration: &types.VectorSearchBedrockRerankingModelConfiguration{
 							ModelArn: ptr.String("__ModelArn__"),
 							AdditionalModelRequestFields: map[string]document.Interface{
-								"key0": nil,
+								"key0": document.NewLazyDocument("__Document__"),
 							},
 						},
 						NumberOfRerankedResults: ptr.Int32(1),
@@ -2096,7 +2119,7 @@ func TestUpdateRequestSnapshot_Retrieve(t *testing.T) {
 				Filter: &types.RetrievalFilterMemberEquals{
 					Value: types.FilterAttribute{
 						Key:   ptr.String("__Key__"),
-						Value: nil,
+						Value: document.NewLazyDocument("__Document__"),
 					},
 				},
 				RerankingModelType: types.RerankingModelType("CUSTOM"),
@@ -2106,7 +2129,7 @@ func TestUpdateRequestSnapshot_Retrieve(t *testing.T) {
 						ModelConfiguration: &types.ManagedSearchBedrockRerankingModelConfiguration{
 							ModelArn: ptr.String("__ModelArn__"),
 							AdditionalModelRequestFields: map[string]document.Interface{
-								"key0": nil,
+								"key0": document.NewLazyDocument("__Document__"),
 							},
 						},
 						NumberOfRerankedResults: ptr.Int32(1),
@@ -2177,7 +2200,7 @@ func TestUpdateRequestSnapshot_RetrieveAndGenerate(t *testing.T) {
 						Filter: &types.RetrievalFilterMemberEquals{
 							Value: types.FilterAttribute{
 								Key:   ptr.String("__Key__"),
-								Value: nil,
+								Value: document.NewLazyDocument("__Document__"),
 							},
 						},
 						RerankingConfiguration: &types.VectorSearchRerankingConfiguration{
@@ -2186,7 +2209,7 @@ func TestUpdateRequestSnapshot_RetrieveAndGenerate(t *testing.T) {
 								ModelConfiguration: &types.VectorSearchBedrockRerankingModelConfiguration{
 									ModelArn: ptr.String("__ModelArn__"),
 									AdditionalModelRequestFields: map[string]document.Interface{
-										"key0": nil,
+										"key0": document.NewLazyDocument("__Document__"),
 									},
 								},
 								NumberOfRerankedResults: ptr.Int32(1),
@@ -2226,7 +2249,7 @@ func TestUpdateRequestSnapshot_RetrieveAndGenerate(t *testing.T) {
 						Filter: &types.RetrievalFilterMemberEquals{
 							Value: types.FilterAttribute{
 								Key:   ptr.String("__Key__"),
-								Value: nil,
+								Value: document.NewLazyDocument("__Document__"),
 							},
 						},
 						RerankingModelType: types.RerankingModelType("CUSTOM"),
@@ -2236,7 +2259,7 @@ func TestUpdateRequestSnapshot_RetrieveAndGenerate(t *testing.T) {
 								ModelConfiguration: &types.ManagedSearchBedrockRerankingModelConfiguration{
 									ModelArn: ptr.String("__ModelArn__"),
 									AdditionalModelRequestFields: map[string]document.Interface{
-										"key0": nil,
+										"key0": document.NewLazyDocument("__Document__"),
 									},
 								},
 								NumberOfRerankedResults: ptr.Int32(1),
@@ -2277,7 +2300,7 @@ func TestUpdateRequestSnapshot_RetrieveAndGenerate(t *testing.T) {
 						},
 					},
 					AdditionalModelRequestFields: map[string]document.Interface{
-						"key0": nil,
+						"key0": document.NewLazyDocument("__Document__"),
 					},
 					PerformanceConfig: &types.PerformanceConfiguration{
 						Latency: types.PerformanceConfigLatency("standard"),
@@ -2299,7 +2322,7 @@ func TestUpdateRequestSnapshot_RetrieveAndGenerate(t *testing.T) {
 						},
 					},
 					AdditionalModelRequestFields: map[string]document.Interface{
-						"key0": nil,
+						"key0": document.NewLazyDocument("__Document__"),
 					},
 					QueryTransformationConfiguration: &types.QueryTransformationConfiguration{
 						Type: types.QueryTransformationType("QUERY_DECOMPOSITION"),
@@ -2355,7 +2378,7 @@ func TestUpdateRequestSnapshot_RetrieveAndGenerate(t *testing.T) {
 						},
 					},
 					AdditionalModelRequestFields: map[string]document.Interface{
-						"key0": nil,
+						"key0": document.NewLazyDocument("__Document__"),
 					},
 					PerformanceConfig: &types.PerformanceConfiguration{
 						Latency: types.PerformanceConfigLatency("standard"),
@@ -2403,7 +2426,7 @@ func TestUpdateRequestSnapshot_StartFlowExecution(t *testing.T) {
 				NodeName:       ptr.String("__NodeName__"),
 				NodeOutputName: ptr.String("__NodeOutputName__"),
 				Content: &types.FlowInputContentMemberDocument{
-					Value: nil,
+					Value: document.NewLazyDocument("__Document__"),
 				},
 				NodeInputName: ptr.String("__NodeInputName__"),
 			},
@@ -2411,7 +2434,7 @@ func TestUpdateRequestSnapshot_StartFlowExecution(t *testing.T) {
 				NodeName:       ptr.String("__NodeName__"),
 				NodeOutputName: ptr.String("__NodeOutputName__"),
 				Content: &types.FlowInputContentMemberDocument{
-					Value: nil,
+					Value: document.NewLazyDocument("__Document__"),
 				},
 				NodeInputName: ptr.String("__NodeInputName__"),
 			},

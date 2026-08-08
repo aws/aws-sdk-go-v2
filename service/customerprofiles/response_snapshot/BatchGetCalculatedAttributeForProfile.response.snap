@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CalculatedAttributeValues":[{"CalculatedAttributeName":"__CalculatedAttributeName__","DisplayName":"__DisplayName__","IsDataPartial":"__IsDataPartial__","LastObjectTimestamp":946684800,"ProfileId":"__ProfileId__","Value":"__Value__"},{"CalculatedAttributeName":"__CalculatedAttributeName__","DisplayName":"__DisplayName__","IsDataPartial":"__IsDataPartial__","LastObjectTimestamp":946684800,"ProfileId":"__ProfileId__","Value":"__Value__"}],"ConditionOverrides":{"Range":{"End":1,"Start":1,"Unit":"DAYS"}},"Errors":[{"Code":"__Code__","Message":"__Message__","ProfileId":"__ProfileId__"},{"Code":"__Code__","Message":"__Message__","ProfileId":"__ProfileId__"}]}

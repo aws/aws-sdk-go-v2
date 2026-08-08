@@ -122,7 +122,13 @@ func TestCheckResponseSnapshot_CancelFlowExecutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelFlowExecutions(context.Background(), &CancelFlowExecutionsInput{})
+	got, err := svc.CancelFlowExecutions(context.Background(), &CancelFlowExecutionsInput{
+		FlowName: ptr.String("__FlowName__"),
+		ExecutionIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -143,7 +149,265 @@ func TestCheckResponseSnapshot_CreateConnectorProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConnectorProfile(context.Background(), &CreateConnectorProfileInput{})
+	got, err := svc.CreateConnectorProfile(context.Background(), &CreateConnectorProfileInput{
+		ConnectorProfileName: ptr.String("__ConnectorProfileName__"),
+		KmsArn:               ptr.String("__KmsArn__"),
+		ConnectorType:        types.ConnectorType("Salesforce"),
+		ConnectorLabel:       ptr.String("__ConnectorLabel__"),
+		ConnectionMode:       types.ConnectionMode("Public"),
+		ConnectorProfileConfig: &types.ConnectorProfileConfig{
+			ConnectorProfileProperties: &types.ConnectorProfileProperties{
+				Amplitude: &types.AmplitudeConnectorProfileProperties{},
+				Datadog: &types.DatadogConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				Dynatrace: &types.DynatraceConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				GoogleAnalytics: &types.GoogleAnalyticsConnectorProfileProperties{},
+				Honeycode:       &types.HoneycodeConnectorProfileProperties{},
+				InforNexus: &types.InforNexusConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				Marketo: &types.MarketoConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				Redshift: &types.RedshiftConnectorProfileProperties{
+					DatabaseUrl:          ptr.String("__DatabaseUrl__"),
+					BucketName:           ptr.String("__BucketName__"),
+					BucketPrefix:         ptr.String("__BucketPrefix__"),
+					RoleArn:              ptr.String("__RoleArn__"),
+					DataApiRoleArn:       ptr.String("__DataApiRoleArn__"),
+					IsRedshiftServerless: true,
+					ClusterIdentifier:    ptr.String("__ClusterIdentifier__"),
+					WorkgroupName:        ptr.String("__WorkgroupName__"),
+					DatabaseName:         ptr.String("__DatabaseName__"),
+				},
+				Salesforce: &types.SalesforceConnectorProfileProperties{
+					InstanceUrl:          ptr.String("__InstanceUrl__"),
+					IsSandboxEnvironment: true,
+					UsePrivateLinkForMetadataAndAuthorization: true,
+				},
+				ServiceNow: &types.ServiceNowConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				Singular: &types.SingularConnectorProfileProperties{},
+				Slack: &types.SlackConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				Snowflake: &types.SnowflakeConnectorProfileProperties{
+					Warehouse:              ptr.String("__Warehouse__"),
+					Stage:                  ptr.String("__Stage__"),
+					BucketName:             ptr.String("__BucketName__"),
+					BucketPrefix:           ptr.String("__BucketPrefix__"),
+					PrivateLinkServiceName: ptr.String("__PrivateLinkServiceName__"),
+					AccountName:            ptr.String("__AccountName__"),
+					Region:                 ptr.String("__Region__"),
+				},
+				Trendmicro: &types.TrendmicroConnectorProfileProperties{},
+				Veeva: &types.VeevaConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				Zendesk: &types.ZendeskConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				SAPOData: &types.SAPODataConnectorProfileProperties{
+					ApplicationHostUrl:     ptr.String("__ApplicationHostUrl__"),
+					ApplicationServicePath: ptr.String("__ApplicationServicePath__"),
+					PortNumber:             ptr.Int32(1),
+					ClientNumber:           ptr.String("__ClientNumber__"),
+					LogonLanguage:          ptr.String("__LogonLanguage__"),
+					PrivateLinkServiceName: ptr.String("__PrivateLinkServiceName__"),
+					OAuthProperties: &types.OAuthProperties{
+						TokenUrl:    ptr.String("__TokenUrl__"),
+						AuthCodeUrl: ptr.String("__AuthCodeUrl__"),
+						OAuthScopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					DisableSSO: true,
+				},
+				CustomConnector: &types.CustomConnectorProfileProperties{
+					ProfileProperties: map[string]string{
+						"key0": "__Value__",
+					},
+					OAuth2Properties: &types.OAuth2Properties{
+						TokenUrl:        ptr.String("__TokenUrl__"),
+						OAuth2GrantType: types.OAuth2GrantType("CLIENT_CREDENTIALS"),
+						TokenUrlCustomProperties: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+				Pardot: &types.PardotConnectorProfileProperties{
+					InstanceUrl:          ptr.String("__InstanceUrl__"),
+					IsSandboxEnvironment: true,
+					BusinessUnitId:       ptr.String("__BusinessUnitId__"),
+				},
+			},
+			ConnectorProfileCredentials: &types.ConnectorProfileCredentials{
+				Amplitude: &types.AmplitudeConnectorProfileCredentials{
+					ApiKey:    ptr.String("__ApiKey__"),
+					SecretKey: ptr.String("__SecretKey__"),
+				},
+				Datadog: &types.DatadogConnectorProfileCredentials{
+					ApiKey:         ptr.String("__ApiKey__"),
+					ApplicationKey: ptr.String("__ApplicationKey__"),
+				},
+				Dynatrace: &types.DynatraceConnectorProfileCredentials{
+					ApiToken: ptr.String("__ApiToken__"),
+				},
+				GoogleAnalytics: &types.GoogleAnalyticsConnectorProfileCredentials{
+					ClientId:     ptr.String("__ClientId__"),
+					ClientSecret: ptr.String("__ClientSecret__"),
+					AccessToken:  ptr.String("__AccessToken__"),
+					RefreshToken: ptr.String("__RefreshToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+				},
+				Honeycode: &types.HoneycodeConnectorProfileCredentials{
+					AccessToken:  ptr.String("__AccessToken__"),
+					RefreshToken: ptr.String("__RefreshToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+				},
+				InforNexus: &types.InforNexusConnectorProfileCredentials{
+					AccessKeyId:     ptr.String("__AccessKeyId__"),
+					UserId:          ptr.String("__UserId__"),
+					SecretAccessKey: ptr.String("__SecretAccessKey__"),
+					Datakey:         ptr.String("__Datakey__"),
+				},
+				Marketo: &types.MarketoConnectorProfileCredentials{
+					ClientId:     ptr.String("__ClientId__"),
+					ClientSecret: ptr.String("__ClientSecret__"),
+					AccessToken:  ptr.String("__AccessToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+				},
+				Redshift: &types.RedshiftConnectorProfileCredentials{
+					Username: ptr.String("__Username__"),
+					Password: ptr.String("__Password__"),
+				},
+				Salesforce: &types.SalesforceConnectorProfileCredentials{
+					AccessToken:  ptr.String("__AccessToken__"),
+					RefreshToken: ptr.String("__RefreshToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+					ClientCredentialsArn: ptr.String("__ClientCredentialsArn__"),
+					OAuth2GrantType:      types.OAuth2GrantType("CLIENT_CREDENTIALS"),
+					JwtToken:             ptr.String("__JwtToken__"),
+				},
+				ServiceNow: &types.ServiceNowConnectorProfileCredentials{
+					Username: ptr.String("__Username__"),
+					Password: ptr.String("__Password__"),
+					OAuth2Credentials: &types.OAuth2Credentials{
+						ClientId:     ptr.String("__ClientId__"),
+						ClientSecret: ptr.String("__ClientSecret__"),
+						AccessToken:  ptr.String("__AccessToken__"),
+						RefreshToken: ptr.String("__RefreshToken__"),
+						OAuthRequest: &types.ConnectorOAuthRequest{
+							AuthCode:    ptr.String("__AuthCode__"),
+							RedirectUri: ptr.String("__RedirectUri__"),
+						},
+					},
+				},
+				Singular: &types.SingularConnectorProfileCredentials{
+					ApiKey: ptr.String("__ApiKey__"),
+				},
+				Slack: &types.SlackConnectorProfileCredentials{
+					ClientId:     ptr.String("__ClientId__"),
+					ClientSecret: ptr.String("__ClientSecret__"),
+					AccessToken:  ptr.String("__AccessToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+				},
+				Snowflake: &types.SnowflakeConnectorProfileCredentials{
+					Username: ptr.String("__Username__"),
+					Password: ptr.String("__Password__"),
+				},
+				Trendmicro: &types.TrendmicroConnectorProfileCredentials{
+					ApiSecretKey: ptr.String("__ApiSecretKey__"),
+				},
+				Veeva: &types.VeevaConnectorProfileCredentials{
+					Username: ptr.String("__Username__"),
+					Password: ptr.String("__Password__"),
+				},
+				Zendesk: &types.ZendeskConnectorProfileCredentials{
+					ClientId:     ptr.String("__ClientId__"),
+					ClientSecret: ptr.String("__ClientSecret__"),
+					AccessToken:  ptr.String("__AccessToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+				},
+				SAPOData: &types.SAPODataConnectorProfileCredentials{
+					BasicAuthCredentials: &types.BasicAuthCredentials{
+						Username: ptr.String("__Username__"),
+						Password: ptr.String("__Password__"),
+					},
+					OAuthCredentials: &types.OAuthCredentials{
+						ClientId:     ptr.String("__ClientId__"),
+						ClientSecret: ptr.String("__ClientSecret__"),
+						AccessToken:  ptr.String("__AccessToken__"),
+						RefreshToken: ptr.String("__RefreshToken__"),
+						OAuthRequest: &types.ConnectorOAuthRequest{
+							AuthCode:    ptr.String("__AuthCode__"),
+							RedirectUri: ptr.String("__RedirectUri__"),
+						},
+					},
+				},
+				CustomConnector: &types.CustomConnectorProfileCredentials{
+					AuthenticationType: types.AuthenticationType("OAUTH2"),
+					Basic: &types.BasicAuthCredentials{
+						Username: ptr.String("__Username__"),
+						Password: ptr.String("__Password__"),
+					},
+					Oauth2: &types.OAuth2Credentials{
+						ClientId:     ptr.String("__ClientId__"),
+						ClientSecret: ptr.String("__ClientSecret__"),
+						AccessToken:  ptr.String("__AccessToken__"),
+						RefreshToken: ptr.String("__RefreshToken__"),
+						OAuthRequest: &types.ConnectorOAuthRequest{
+							AuthCode:    ptr.String("__AuthCode__"),
+							RedirectUri: ptr.String("__RedirectUri__"),
+						},
+					},
+					ApiKey: &types.ApiKeyCredentials{
+						ApiKey:       ptr.String("__ApiKey__"),
+						ApiSecretKey: ptr.String("__ApiSecretKey__"),
+					},
+					Custom: &types.CustomAuthCredentials{
+						CustomAuthenticationType: ptr.String("__CustomAuthenticationType__"),
+						CredentialsMap: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+				Pardot: &types.PardotConnectorProfileCredentials{
+					AccessToken:  ptr.String("__AccessToken__"),
+					RefreshToken: ptr.String("__RefreshToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+					ClientCredentialsArn: ptr.String("__ClientCredentialsArn__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -165,7 +429,496 @@ func TestCheckResponseSnapshot_CreateFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFlow(context.Background(), &CreateFlowInput{})
+	got, err := svc.CreateFlow(context.Background(), &CreateFlowInput{
+		FlowName:    ptr.String("__FlowName__"),
+		Description: ptr.String("__Description__"),
+		KmsArn:      ptr.String("__KmsArn__"),
+		TriggerConfig: &types.TriggerConfig{
+			TriggerType: types.TriggerType("Scheduled"),
+			TriggerProperties: &types.TriggerProperties{
+				Scheduled: &types.ScheduledTriggerProperties{
+					ScheduleExpression:             ptr.String("__ScheduleExpression__"),
+					DataPullMode:                   types.DataPullMode("Incremental"),
+					ScheduleStartTime:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					ScheduleEndTime:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Timezone:                       ptr.String("__Timezone__"),
+					ScheduleOffset:                 ptr.Int64(1),
+					FirstExecutionFrom:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					FlowErrorDeactivationThreshold: ptr.Int32(1),
+				},
+			},
+		},
+		SourceFlowConfig: &types.SourceFlowConfig{
+			ConnectorType:        types.ConnectorType("Salesforce"),
+			ApiVersion:           ptr.String("__ApiVersion__"),
+			ConnectorProfileName: ptr.String("__ConnectorProfileName__"),
+			SourceConnectorProperties: &types.SourceConnectorProperties{
+				Amplitude: &types.AmplitudeSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				Datadog: &types.DatadogSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				Dynatrace: &types.DynatraceSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				GoogleAnalytics: &types.GoogleAnalyticsSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				InforNexus: &types.InforNexusSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				Marketo: &types.MarketoSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				S3: &types.S3SourceProperties{
+					BucketName:   ptr.String("__BucketName__"),
+					BucketPrefix: ptr.String("__BucketPrefix__"),
+					S3InputFormatConfig: &types.S3InputFormatConfig{
+						S3InputFileType: types.S3InputFileType("CSV"),
+					},
+				},
+				Salesforce: &types.SalesforceSourceProperties{
+					Object:                   ptr.String("__Object__"),
+					EnableDynamicFieldUpdate: true,
+					IncludeDeletedRecords:    true,
+					DataTransferApi:          types.SalesforceDataTransferApi("AUTOMATIC"),
+				},
+				ServiceNow: &types.ServiceNowSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				Singular: &types.SingularSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				Slack: &types.SlackSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				Trendmicro: &types.TrendmicroSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				Veeva: &types.VeevaSourceProperties{
+					Object:             ptr.String("__Object__"),
+					DocumentType:       ptr.String("__DocumentType__"),
+					IncludeSourceFiles: true,
+					IncludeRenditions:  true,
+					IncludeAllVersions: true,
+				},
+				Zendesk: &types.ZendeskSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				SAPOData: &types.SAPODataSourceProperties{
+					ObjectPath: ptr.String("__ObjectPath__"),
+					ParallelismConfig: &types.SAPODataParallelismConfig{
+						MaxParallelism: ptr.Int32(1),
+					},
+					PaginationConfig: &types.SAPODataPaginationConfig{
+						MaxPageSize: ptr.Int32(1),
+					},
+				},
+				CustomConnector: &types.CustomConnectorSourceProperties{
+					EntityName: ptr.String("__EntityName__"),
+					CustomProperties: map[string]string{
+						"key0": "__Value__",
+					},
+					DataTransferApi: &types.DataTransferApi{
+						Name: ptr.String("__Name__"),
+						Type: types.DataTransferApiType("SYNC"),
+					},
+				},
+				Pardot: &types.PardotSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+			},
+			IncrementalPullConfig: &types.IncrementalPullConfig{
+				DatetimeTypeFieldName: ptr.String("__DatetimeTypeFieldName__"),
+			},
+		},
+		DestinationFlowConfigList: []types.DestinationFlowConfig{
+			{
+				ConnectorType:        types.ConnectorType("Salesforce"),
+				ApiVersion:           ptr.String("__ApiVersion__"),
+				ConnectorProfileName: ptr.String("__ConnectorProfileName__"),
+				DestinationConnectorProperties: &types.DestinationConnectorProperties{
+					Redshift: &types.RedshiftDestinationProperties{
+						Object:                 ptr.String("__Object__"),
+						IntermediateBucketName: ptr.String("__IntermediateBucketName__"),
+						BucketPrefix:           ptr.String("__BucketPrefix__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+					},
+					S3: &types.S3DestinationProperties{
+						BucketName:   ptr.String("__BucketName__"),
+						BucketPrefix: ptr.String("__BucketPrefix__"),
+						S3OutputFormatConfig: &types.S3OutputFormatConfig{
+							FileType: types.FileType("CSV"),
+							PrefixConfig: &types.PrefixConfig{
+								PrefixType:   types.PrefixType("FILENAME"),
+								PrefixFormat: types.PrefixFormat("YEAR"),
+								PathPrefixHierarchy: []types.PathPrefix{
+									types.PathPrefix("EXECUTION_ID"),
+									types.PathPrefix("EXECUTION_ID"),
+								},
+							},
+							AggregationConfig: &types.AggregationConfig{
+								AggregationType: types.AggregationType("None"),
+								TargetFileSize:  ptr.Int64(1),
+							},
+							PreserveSourceDataTyping: ptr.Bool(true),
+						},
+					},
+					Salesforce: &types.SalesforceDestinationProperties{
+						Object: ptr.String("__Object__"),
+						IdFieldNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+						WriteOperationType: types.WriteOperationType("INSERT"),
+						DataTransferApi:    types.SalesforceDataTransferApi("AUTOMATIC"),
+					},
+					Snowflake: &types.SnowflakeDestinationProperties{
+						Object:                 ptr.String("__Object__"),
+						IntermediateBucketName: ptr.String("__IntermediateBucketName__"),
+						BucketPrefix:           ptr.String("__BucketPrefix__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+					},
+					EventBridge: &types.EventBridgeDestinationProperties{
+						Object: ptr.String("__Object__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+					},
+					LookoutMetrics: &types.LookoutMetricsDestinationProperties{},
+					Upsolver: &types.UpsolverDestinationProperties{
+						BucketName:   ptr.String("__BucketName__"),
+						BucketPrefix: ptr.String("__BucketPrefix__"),
+						S3OutputFormatConfig: &types.UpsolverS3OutputFormatConfig{
+							FileType: types.FileType("CSV"),
+							PrefixConfig: &types.PrefixConfig{
+								PrefixType:   types.PrefixType("FILENAME"),
+								PrefixFormat: types.PrefixFormat("YEAR"),
+								PathPrefixHierarchy: []types.PathPrefix{
+									types.PathPrefix("EXECUTION_ID"),
+									types.PathPrefix("EXECUTION_ID"),
+								},
+							},
+							AggregationConfig: &types.AggregationConfig{
+								AggregationType: types.AggregationType("None"),
+								TargetFileSize:  ptr.Int64(1),
+							},
+						},
+					},
+					Honeycode: &types.HoneycodeDestinationProperties{
+						Object: ptr.String("__Object__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+					},
+					CustomerProfiles: &types.CustomerProfilesDestinationProperties{
+						DomainName:     ptr.String("__DomainName__"),
+						ObjectTypeName: ptr.String("__ObjectTypeName__"),
+					},
+					Zendesk: &types.ZendeskDestinationProperties{
+						Object: ptr.String("__Object__"),
+						IdFieldNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+						WriteOperationType: types.WriteOperationType("INSERT"),
+					},
+					Marketo: &types.MarketoDestinationProperties{
+						Object: ptr.String("__Object__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+					},
+					CustomConnector: &types.CustomConnectorDestinationProperties{
+						EntityName: ptr.String("__EntityName__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+						WriteOperationType: types.WriteOperationType("INSERT"),
+						IdFieldNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						CustomProperties: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					SAPOData: &types.SAPODataDestinationProperties{
+						ObjectPath: ptr.String("__ObjectPath__"),
+						SuccessResponseHandlingConfig: &types.SuccessResponseHandlingConfig{
+							BucketPrefix: ptr.String("__BucketPrefix__"),
+							BucketName:   ptr.String("__BucketName__"),
+						},
+						IdFieldNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+						WriteOperationType: types.WriteOperationType("INSERT"),
+					},
+				},
+			},
+			{
+				ConnectorType:        types.ConnectorType("Salesforce"),
+				ApiVersion:           ptr.String("__ApiVersion__"),
+				ConnectorProfileName: ptr.String("__ConnectorProfileName__"),
+				DestinationConnectorProperties: &types.DestinationConnectorProperties{
+					Redshift: &types.RedshiftDestinationProperties{
+						Object:                 ptr.String("__Object__"),
+						IntermediateBucketName: ptr.String("__IntermediateBucketName__"),
+						BucketPrefix:           ptr.String("__BucketPrefix__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+					},
+					S3: &types.S3DestinationProperties{
+						BucketName:   ptr.String("__BucketName__"),
+						BucketPrefix: ptr.String("__BucketPrefix__"),
+						S3OutputFormatConfig: &types.S3OutputFormatConfig{
+							FileType: types.FileType("CSV"),
+							PrefixConfig: &types.PrefixConfig{
+								PrefixType:   types.PrefixType("FILENAME"),
+								PrefixFormat: types.PrefixFormat("YEAR"),
+								PathPrefixHierarchy: []types.PathPrefix{
+									types.PathPrefix("EXECUTION_ID"),
+									types.PathPrefix("EXECUTION_ID"),
+								},
+							},
+							AggregationConfig: &types.AggregationConfig{
+								AggregationType: types.AggregationType("None"),
+								TargetFileSize:  ptr.Int64(1),
+							},
+							PreserveSourceDataTyping: ptr.Bool(true),
+						},
+					},
+					Salesforce: &types.SalesforceDestinationProperties{
+						Object: ptr.String("__Object__"),
+						IdFieldNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+						WriteOperationType: types.WriteOperationType("INSERT"),
+						DataTransferApi:    types.SalesforceDataTransferApi("AUTOMATIC"),
+					},
+					Snowflake: &types.SnowflakeDestinationProperties{
+						Object:                 ptr.String("__Object__"),
+						IntermediateBucketName: ptr.String("__IntermediateBucketName__"),
+						BucketPrefix:           ptr.String("__BucketPrefix__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+					},
+					EventBridge: &types.EventBridgeDestinationProperties{
+						Object: ptr.String("__Object__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+					},
+					LookoutMetrics: &types.LookoutMetricsDestinationProperties{},
+					Upsolver: &types.UpsolverDestinationProperties{
+						BucketName:   ptr.String("__BucketName__"),
+						BucketPrefix: ptr.String("__BucketPrefix__"),
+						S3OutputFormatConfig: &types.UpsolverS3OutputFormatConfig{
+							FileType: types.FileType("CSV"),
+							PrefixConfig: &types.PrefixConfig{
+								PrefixType:   types.PrefixType("FILENAME"),
+								PrefixFormat: types.PrefixFormat("YEAR"),
+								PathPrefixHierarchy: []types.PathPrefix{
+									types.PathPrefix("EXECUTION_ID"),
+									types.PathPrefix("EXECUTION_ID"),
+								},
+							},
+							AggregationConfig: &types.AggregationConfig{
+								AggregationType: types.AggregationType("None"),
+								TargetFileSize:  ptr.Int64(1),
+							},
+						},
+					},
+					Honeycode: &types.HoneycodeDestinationProperties{
+						Object: ptr.String("__Object__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+					},
+					CustomerProfiles: &types.CustomerProfilesDestinationProperties{
+						DomainName:     ptr.String("__DomainName__"),
+						ObjectTypeName: ptr.String("__ObjectTypeName__"),
+					},
+					Zendesk: &types.ZendeskDestinationProperties{
+						Object: ptr.String("__Object__"),
+						IdFieldNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+						WriteOperationType: types.WriteOperationType("INSERT"),
+					},
+					Marketo: &types.MarketoDestinationProperties{
+						Object: ptr.String("__Object__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+					},
+					CustomConnector: &types.CustomConnectorDestinationProperties{
+						EntityName: ptr.String("__EntityName__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+						WriteOperationType: types.WriteOperationType("INSERT"),
+						IdFieldNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						CustomProperties: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					SAPOData: &types.SAPODataDestinationProperties{
+						ObjectPath: ptr.String("__ObjectPath__"),
+						SuccessResponseHandlingConfig: &types.SuccessResponseHandlingConfig{
+							BucketPrefix: ptr.String("__BucketPrefix__"),
+							BucketName:   ptr.String("__BucketName__"),
+						},
+						IdFieldNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+						WriteOperationType: types.WriteOperationType("INSERT"),
+					},
+				},
+			},
+		},
+		Tasks: []types.Task{
+			{
+				SourceFields: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ConnectorOperator: &types.ConnectorOperator{
+					Amplitude:       types.AmplitudeConnectorOperator("BETWEEN"),
+					Datadog:         types.DatadogConnectorOperator("PROJECTION"),
+					Dynatrace:       types.DynatraceConnectorOperator("PROJECTION"),
+					GoogleAnalytics: types.GoogleAnalyticsConnectorOperator("PROJECTION"),
+					InforNexus:      types.InforNexusConnectorOperator("PROJECTION"),
+					Marketo:         types.MarketoConnectorOperator("PROJECTION"),
+					S3:              types.S3ConnectorOperator("PROJECTION"),
+					Salesforce:      types.SalesforceConnectorOperator("PROJECTION"),
+					ServiceNow:      types.ServiceNowConnectorOperator("PROJECTION"),
+					Singular:        types.SingularConnectorOperator("PROJECTION"),
+					Slack:           types.SlackConnectorOperator("PROJECTION"),
+					Trendmicro:      types.TrendmicroConnectorOperator("PROJECTION"),
+					Veeva:           types.VeevaConnectorOperator("PROJECTION"),
+					Zendesk:         types.ZendeskConnectorOperator("PROJECTION"),
+					SAPOData:        types.SAPODataConnectorOperator("PROJECTION"),
+					CustomConnector: types.Operator("PROJECTION"),
+					Pardot:          types.PardotConnectorOperator("PROJECTION"),
+				},
+				DestinationField: ptr.String("__DestinationField__"),
+				TaskType:         types.TaskType("Arithmetic"),
+				TaskProperties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				SourceFields: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ConnectorOperator: &types.ConnectorOperator{
+					Amplitude:       types.AmplitudeConnectorOperator("BETWEEN"),
+					Datadog:         types.DatadogConnectorOperator("PROJECTION"),
+					Dynatrace:       types.DynatraceConnectorOperator("PROJECTION"),
+					GoogleAnalytics: types.GoogleAnalyticsConnectorOperator("PROJECTION"),
+					InforNexus:      types.InforNexusConnectorOperator("PROJECTION"),
+					Marketo:         types.MarketoConnectorOperator("PROJECTION"),
+					S3:              types.S3ConnectorOperator("PROJECTION"),
+					Salesforce:      types.SalesforceConnectorOperator("PROJECTION"),
+					ServiceNow:      types.ServiceNowConnectorOperator("PROJECTION"),
+					Singular:        types.SingularConnectorOperator("PROJECTION"),
+					Slack:           types.SlackConnectorOperator("PROJECTION"),
+					Trendmicro:      types.TrendmicroConnectorOperator("PROJECTION"),
+					Veeva:           types.VeevaConnectorOperator("PROJECTION"),
+					Zendesk:         types.ZendeskConnectorOperator("PROJECTION"),
+					SAPOData:        types.SAPODataConnectorOperator("PROJECTION"),
+					CustomConnector: types.Operator("PROJECTION"),
+					Pardot:          types.PardotConnectorOperator("PROJECTION"),
+				},
+				DestinationField: ptr.String("__DestinationField__"),
+				TaskType:         types.TaskType("Arithmetic"),
+				TaskProperties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		MetadataCatalogConfig: &types.MetadataCatalogConfig{
+			GlueDataCatalog: &types.GlueDataCatalogConfig{
+				RoleArn:      ptr.String("__RoleArn__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				TablePrefix:  ptr.String("__TablePrefix__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -184,7 +937,10 @@ func TestCheckResponseSnapshot_DeleteConnectorProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConnectorProfile(context.Background(), &DeleteConnectorProfileInput{})
+	got, err := svc.DeleteConnectorProfile(context.Background(), &DeleteConnectorProfileInput{
+		ConnectorProfileName: ptr.String("__ConnectorProfileName__"),
+		ForceDelete:          true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -203,7 +959,10 @@ func TestCheckResponseSnapshot_DeleteFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFlow(context.Background(), &DeleteFlowInput{})
+	got, err := svc.DeleteFlow(context.Background(), &DeleteFlowInput{
+		FlowName:    ptr.String("__FlowName__"),
+		ForceDelete: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -481,7 +1240,10 @@ func TestCheckResponseSnapshot_DescribeConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConnector(context.Background(), &DescribeConnectorInput{})
+	got, err := svc.DescribeConnector(context.Background(), &DescribeConnectorInput{
+		ConnectorType:  types.ConnectorType("Salesforce"),
+		ConnectorLabel: ptr.String("__ConnectorLabel__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -605,7 +1367,12 @@ func TestCheckResponseSnapshot_DescribeConnectorEntity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConnectorEntity(context.Background(), &DescribeConnectorEntityInput{})
+	got, err := svc.DescribeConnectorEntity(context.Background(), &DescribeConnectorEntityInput{
+		ConnectorEntityName:  ptr.String("__ConnectorEntityName__"),
+		ConnectorType:        types.ConnectorType("Salesforce"),
+		ConnectorProfileName: ptr.String("__ConnectorProfileName__"),
+		ApiVersion:           ptr.String("__ApiVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -838,7 +1605,16 @@ func TestCheckResponseSnapshot_DescribeConnectorProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConnectorProfiles(context.Background(), &DescribeConnectorProfilesInput{})
+	got, err := svc.DescribeConnectorProfiles(context.Background(), &DescribeConnectorProfilesInput{
+		ConnectorProfileNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ConnectorType:  types.ConnectorType("Salesforce"),
+		ConnectorLabel: ptr.String("__ConnectorLabel__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1161,7 +1937,14 @@ func TestCheckResponseSnapshot_DescribeConnectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConnectors(context.Background(), &DescribeConnectorsInput{})
+	got, err := svc.DescribeConnectors(context.Background(), &DescribeConnectorsInput{
+		ConnectorTypes: []types.ConnectorType{
+			types.ConnectorType("Salesforce"),
+			types.ConnectorType("Salesforce"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1711,7 +2494,9 @@ func TestCheckResponseSnapshot_DescribeFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFlow(context.Background(), &DescribeFlowInput{})
+	got, err := svc.DescribeFlow(context.Background(), &DescribeFlowInput{
+		FlowName: ptr.String("__FlowName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1832,7 +2617,11 @@ func TestCheckResponseSnapshot_DescribeFlowExecutionRecords(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFlowExecutionRecords(context.Background(), &DescribeFlowExecutionRecordsInput{})
+	got, err := svc.DescribeFlowExecutionRecords(context.Background(), &DescribeFlowExecutionRecordsInput{
+		FlowName:   ptr.String("__FlowName__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1867,7 +2656,14 @@ func TestCheckResponseSnapshot_ListConnectorEntities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConnectorEntities(context.Background(), &ListConnectorEntitiesInput{})
+	got, err := svc.ListConnectorEntities(context.Background(), &ListConnectorEntitiesInput{
+		ConnectorProfileName: ptr.String("__ConnectorProfileName__"),
+		ConnectorType:        types.ConnectorType("Salesforce"),
+		EntitiesPath:         ptr.String("__EntitiesPath__"),
+		ApiVersion:           ptr.String("__ApiVersion__"),
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1930,7 +2726,10 @@ func TestCheckResponseSnapshot_ListConnectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConnectors(context.Background(), &ListConnectorsInput{})
+	got, err := svc.ListConnectors(context.Background(), &ListConnectorsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1999,7 +2798,10 @@ func TestCheckResponseSnapshot_ListFlows(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFlows(context.Background(), &ListFlowsInput{})
+	got, err := svc.ListFlows(context.Background(), &ListFlowsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2022,7 +2824,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2043,7 +2847,17 @@ func TestCheckResponseSnapshot_RegisterConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterConnector(context.Background(), &RegisterConnectorInput{})
+	got, err := svc.RegisterConnector(context.Background(), &RegisterConnectorInput{
+		ConnectorLabel:            ptr.String("__ConnectorLabel__"),
+		Description:               ptr.String("__Description__"),
+		ConnectorProvisioningType: types.ConnectorProvisioningType("LAMBDA"),
+		ConnectorProvisioningConfig: &types.ConnectorProvisioningConfig{
+			Lambda: &types.LambdaConnectorProvisioningConfig{
+				LambdaArn: ptr.String("__LambdaArn__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2062,7 +2876,13 @@ func TestCheckResponseSnapshot_ResetConnectorMetadataCache(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResetConnectorMetadataCache(context.Background(), &ResetConnectorMetadataCacheInput{})
+	got, err := svc.ResetConnectorMetadataCache(context.Background(), &ResetConnectorMetadataCacheInput{
+		ConnectorProfileName: ptr.String("__ConnectorProfileName__"),
+		ConnectorType:        types.ConnectorType("Salesforce"),
+		ConnectorEntityName:  ptr.String("__ConnectorEntityName__"),
+		EntitiesPath:         ptr.String("__EntitiesPath__"),
+		ApiVersion:           ptr.String("__ApiVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2085,7 +2905,10 @@ func TestCheckResponseSnapshot_StartFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartFlow(context.Background(), &StartFlowInput{})
+	got, err := svc.StartFlow(context.Background(), &StartFlowInput{
+		FlowName:    ptr.String("__FlowName__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2107,7 +2930,9 @@ func TestCheckResponseSnapshot_StopFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopFlow(context.Background(), &StopFlowInput{})
+	got, err := svc.StopFlow(context.Background(), &StopFlowInput{
+		FlowName: ptr.String("__FlowName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2126,7 +2951,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2145,7 +2975,10 @@ func TestCheckResponseSnapshot_UnregisterConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UnregisterConnector(context.Background(), &UnregisterConnectorInput{})
+	got, err := svc.UnregisterConnector(context.Background(), &UnregisterConnectorInput{
+		ConnectorLabel: ptr.String("__ConnectorLabel__"),
+		ForceDelete:    true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2164,7 +2997,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2185,7 +3024,262 @@ func TestCheckResponseSnapshot_UpdateConnectorProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConnectorProfile(context.Background(), &UpdateConnectorProfileInput{})
+	got, err := svc.UpdateConnectorProfile(context.Background(), &UpdateConnectorProfileInput{
+		ConnectorProfileName: ptr.String("__ConnectorProfileName__"),
+		ConnectionMode:       types.ConnectionMode("Public"),
+		ConnectorProfileConfig: &types.ConnectorProfileConfig{
+			ConnectorProfileProperties: &types.ConnectorProfileProperties{
+				Amplitude: &types.AmplitudeConnectorProfileProperties{},
+				Datadog: &types.DatadogConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				Dynatrace: &types.DynatraceConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				GoogleAnalytics: &types.GoogleAnalyticsConnectorProfileProperties{},
+				Honeycode:       &types.HoneycodeConnectorProfileProperties{},
+				InforNexus: &types.InforNexusConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				Marketo: &types.MarketoConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				Redshift: &types.RedshiftConnectorProfileProperties{
+					DatabaseUrl:          ptr.String("__DatabaseUrl__"),
+					BucketName:           ptr.String("__BucketName__"),
+					BucketPrefix:         ptr.String("__BucketPrefix__"),
+					RoleArn:              ptr.String("__RoleArn__"),
+					DataApiRoleArn:       ptr.String("__DataApiRoleArn__"),
+					IsRedshiftServerless: true,
+					ClusterIdentifier:    ptr.String("__ClusterIdentifier__"),
+					WorkgroupName:        ptr.String("__WorkgroupName__"),
+					DatabaseName:         ptr.String("__DatabaseName__"),
+				},
+				Salesforce: &types.SalesforceConnectorProfileProperties{
+					InstanceUrl:          ptr.String("__InstanceUrl__"),
+					IsSandboxEnvironment: true,
+					UsePrivateLinkForMetadataAndAuthorization: true,
+				},
+				ServiceNow: &types.ServiceNowConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				Singular: &types.SingularConnectorProfileProperties{},
+				Slack: &types.SlackConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				Snowflake: &types.SnowflakeConnectorProfileProperties{
+					Warehouse:              ptr.String("__Warehouse__"),
+					Stage:                  ptr.String("__Stage__"),
+					BucketName:             ptr.String("__BucketName__"),
+					BucketPrefix:           ptr.String("__BucketPrefix__"),
+					PrivateLinkServiceName: ptr.String("__PrivateLinkServiceName__"),
+					AccountName:            ptr.String("__AccountName__"),
+					Region:                 ptr.String("__Region__"),
+				},
+				Trendmicro: &types.TrendmicroConnectorProfileProperties{},
+				Veeva: &types.VeevaConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				Zendesk: &types.ZendeskConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				SAPOData: &types.SAPODataConnectorProfileProperties{
+					ApplicationHostUrl:     ptr.String("__ApplicationHostUrl__"),
+					ApplicationServicePath: ptr.String("__ApplicationServicePath__"),
+					PortNumber:             ptr.Int32(1),
+					ClientNumber:           ptr.String("__ClientNumber__"),
+					LogonLanguage:          ptr.String("__LogonLanguage__"),
+					PrivateLinkServiceName: ptr.String("__PrivateLinkServiceName__"),
+					OAuthProperties: &types.OAuthProperties{
+						TokenUrl:    ptr.String("__TokenUrl__"),
+						AuthCodeUrl: ptr.String("__AuthCodeUrl__"),
+						OAuthScopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					DisableSSO: true,
+				},
+				CustomConnector: &types.CustomConnectorProfileProperties{
+					ProfileProperties: map[string]string{
+						"key0": "__Value__",
+					},
+					OAuth2Properties: &types.OAuth2Properties{
+						TokenUrl:        ptr.String("__TokenUrl__"),
+						OAuth2GrantType: types.OAuth2GrantType("CLIENT_CREDENTIALS"),
+						TokenUrlCustomProperties: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+				Pardot: &types.PardotConnectorProfileProperties{
+					InstanceUrl:          ptr.String("__InstanceUrl__"),
+					IsSandboxEnvironment: true,
+					BusinessUnitId:       ptr.String("__BusinessUnitId__"),
+				},
+			},
+			ConnectorProfileCredentials: &types.ConnectorProfileCredentials{
+				Amplitude: &types.AmplitudeConnectorProfileCredentials{
+					ApiKey:    ptr.String("__ApiKey__"),
+					SecretKey: ptr.String("__SecretKey__"),
+				},
+				Datadog: &types.DatadogConnectorProfileCredentials{
+					ApiKey:         ptr.String("__ApiKey__"),
+					ApplicationKey: ptr.String("__ApplicationKey__"),
+				},
+				Dynatrace: &types.DynatraceConnectorProfileCredentials{
+					ApiToken: ptr.String("__ApiToken__"),
+				},
+				GoogleAnalytics: &types.GoogleAnalyticsConnectorProfileCredentials{
+					ClientId:     ptr.String("__ClientId__"),
+					ClientSecret: ptr.String("__ClientSecret__"),
+					AccessToken:  ptr.String("__AccessToken__"),
+					RefreshToken: ptr.String("__RefreshToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+				},
+				Honeycode: &types.HoneycodeConnectorProfileCredentials{
+					AccessToken:  ptr.String("__AccessToken__"),
+					RefreshToken: ptr.String("__RefreshToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+				},
+				InforNexus: &types.InforNexusConnectorProfileCredentials{
+					AccessKeyId:     ptr.String("__AccessKeyId__"),
+					UserId:          ptr.String("__UserId__"),
+					SecretAccessKey: ptr.String("__SecretAccessKey__"),
+					Datakey:         ptr.String("__Datakey__"),
+				},
+				Marketo: &types.MarketoConnectorProfileCredentials{
+					ClientId:     ptr.String("__ClientId__"),
+					ClientSecret: ptr.String("__ClientSecret__"),
+					AccessToken:  ptr.String("__AccessToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+				},
+				Redshift: &types.RedshiftConnectorProfileCredentials{
+					Username: ptr.String("__Username__"),
+					Password: ptr.String("__Password__"),
+				},
+				Salesforce: &types.SalesforceConnectorProfileCredentials{
+					AccessToken:  ptr.String("__AccessToken__"),
+					RefreshToken: ptr.String("__RefreshToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+					ClientCredentialsArn: ptr.String("__ClientCredentialsArn__"),
+					OAuth2GrantType:      types.OAuth2GrantType("CLIENT_CREDENTIALS"),
+					JwtToken:             ptr.String("__JwtToken__"),
+				},
+				ServiceNow: &types.ServiceNowConnectorProfileCredentials{
+					Username: ptr.String("__Username__"),
+					Password: ptr.String("__Password__"),
+					OAuth2Credentials: &types.OAuth2Credentials{
+						ClientId:     ptr.String("__ClientId__"),
+						ClientSecret: ptr.String("__ClientSecret__"),
+						AccessToken:  ptr.String("__AccessToken__"),
+						RefreshToken: ptr.String("__RefreshToken__"),
+						OAuthRequest: &types.ConnectorOAuthRequest{
+							AuthCode:    ptr.String("__AuthCode__"),
+							RedirectUri: ptr.String("__RedirectUri__"),
+						},
+					},
+				},
+				Singular: &types.SingularConnectorProfileCredentials{
+					ApiKey: ptr.String("__ApiKey__"),
+				},
+				Slack: &types.SlackConnectorProfileCredentials{
+					ClientId:     ptr.String("__ClientId__"),
+					ClientSecret: ptr.String("__ClientSecret__"),
+					AccessToken:  ptr.String("__AccessToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+				},
+				Snowflake: &types.SnowflakeConnectorProfileCredentials{
+					Username: ptr.String("__Username__"),
+					Password: ptr.String("__Password__"),
+				},
+				Trendmicro: &types.TrendmicroConnectorProfileCredentials{
+					ApiSecretKey: ptr.String("__ApiSecretKey__"),
+				},
+				Veeva: &types.VeevaConnectorProfileCredentials{
+					Username: ptr.String("__Username__"),
+					Password: ptr.String("__Password__"),
+				},
+				Zendesk: &types.ZendeskConnectorProfileCredentials{
+					ClientId:     ptr.String("__ClientId__"),
+					ClientSecret: ptr.String("__ClientSecret__"),
+					AccessToken:  ptr.String("__AccessToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+				},
+				SAPOData: &types.SAPODataConnectorProfileCredentials{
+					BasicAuthCredentials: &types.BasicAuthCredentials{
+						Username: ptr.String("__Username__"),
+						Password: ptr.String("__Password__"),
+					},
+					OAuthCredentials: &types.OAuthCredentials{
+						ClientId:     ptr.String("__ClientId__"),
+						ClientSecret: ptr.String("__ClientSecret__"),
+						AccessToken:  ptr.String("__AccessToken__"),
+						RefreshToken: ptr.String("__RefreshToken__"),
+						OAuthRequest: &types.ConnectorOAuthRequest{
+							AuthCode:    ptr.String("__AuthCode__"),
+							RedirectUri: ptr.String("__RedirectUri__"),
+						},
+					},
+				},
+				CustomConnector: &types.CustomConnectorProfileCredentials{
+					AuthenticationType: types.AuthenticationType("OAUTH2"),
+					Basic: &types.BasicAuthCredentials{
+						Username: ptr.String("__Username__"),
+						Password: ptr.String("__Password__"),
+					},
+					Oauth2: &types.OAuth2Credentials{
+						ClientId:     ptr.String("__ClientId__"),
+						ClientSecret: ptr.String("__ClientSecret__"),
+						AccessToken:  ptr.String("__AccessToken__"),
+						RefreshToken: ptr.String("__RefreshToken__"),
+						OAuthRequest: &types.ConnectorOAuthRequest{
+							AuthCode:    ptr.String("__AuthCode__"),
+							RedirectUri: ptr.String("__RedirectUri__"),
+						},
+					},
+					ApiKey: &types.ApiKeyCredentials{
+						ApiKey:       ptr.String("__ApiKey__"),
+						ApiSecretKey: ptr.String("__ApiSecretKey__"),
+					},
+					Custom: &types.CustomAuthCredentials{
+						CustomAuthenticationType: ptr.String("__CustomAuthenticationType__"),
+						CredentialsMap: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+				Pardot: &types.PardotConnectorProfileCredentials{
+					AccessToken:  ptr.String("__AccessToken__"),
+					RefreshToken: ptr.String("__RefreshToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+					ClientCredentialsArn: ptr.String("__ClientCredentialsArn__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2206,7 +3300,16 @@ func TestCheckResponseSnapshot_UpdateConnectorRegistration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConnectorRegistration(context.Background(), &UpdateConnectorRegistrationInput{})
+	got, err := svc.UpdateConnectorRegistration(context.Background(), &UpdateConnectorRegistrationInput{
+		ConnectorLabel: ptr.String("__ConnectorLabel__"),
+		Description:    ptr.String("__Description__"),
+		ConnectorProvisioningConfig: &types.ConnectorProvisioningConfig{
+			Lambda: &types.LambdaConnectorProvisioningConfig{
+				LambdaArn: ptr.String("__LambdaArn__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2227,7 +3330,492 @@ func TestCheckResponseSnapshot_UpdateFlow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFlow(context.Background(), &UpdateFlowInput{})
+	got, err := svc.UpdateFlow(context.Background(), &UpdateFlowInput{
+		FlowName:    ptr.String("__FlowName__"),
+		Description: ptr.String("__Description__"),
+		TriggerConfig: &types.TriggerConfig{
+			TriggerType: types.TriggerType("Scheduled"),
+			TriggerProperties: &types.TriggerProperties{
+				Scheduled: &types.ScheduledTriggerProperties{
+					ScheduleExpression:             ptr.String("__ScheduleExpression__"),
+					DataPullMode:                   types.DataPullMode("Incremental"),
+					ScheduleStartTime:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					ScheduleEndTime:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Timezone:                       ptr.String("__Timezone__"),
+					ScheduleOffset:                 ptr.Int64(1),
+					FirstExecutionFrom:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					FlowErrorDeactivationThreshold: ptr.Int32(1),
+				},
+			},
+		},
+		SourceFlowConfig: &types.SourceFlowConfig{
+			ConnectorType:        types.ConnectorType("Salesforce"),
+			ApiVersion:           ptr.String("__ApiVersion__"),
+			ConnectorProfileName: ptr.String("__ConnectorProfileName__"),
+			SourceConnectorProperties: &types.SourceConnectorProperties{
+				Amplitude: &types.AmplitudeSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				Datadog: &types.DatadogSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				Dynatrace: &types.DynatraceSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				GoogleAnalytics: &types.GoogleAnalyticsSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				InforNexus: &types.InforNexusSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				Marketo: &types.MarketoSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				S3: &types.S3SourceProperties{
+					BucketName:   ptr.String("__BucketName__"),
+					BucketPrefix: ptr.String("__BucketPrefix__"),
+					S3InputFormatConfig: &types.S3InputFormatConfig{
+						S3InputFileType: types.S3InputFileType("CSV"),
+					},
+				},
+				Salesforce: &types.SalesforceSourceProperties{
+					Object:                   ptr.String("__Object__"),
+					EnableDynamicFieldUpdate: true,
+					IncludeDeletedRecords:    true,
+					DataTransferApi:          types.SalesforceDataTransferApi("AUTOMATIC"),
+				},
+				ServiceNow: &types.ServiceNowSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				Singular: &types.SingularSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				Slack: &types.SlackSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				Trendmicro: &types.TrendmicroSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				Veeva: &types.VeevaSourceProperties{
+					Object:             ptr.String("__Object__"),
+					DocumentType:       ptr.String("__DocumentType__"),
+					IncludeSourceFiles: true,
+					IncludeRenditions:  true,
+					IncludeAllVersions: true,
+				},
+				Zendesk: &types.ZendeskSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				SAPOData: &types.SAPODataSourceProperties{
+					ObjectPath: ptr.String("__ObjectPath__"),
+					ParallelismConfig: &types.SAPODataParallelismConfig{
+						MaxParallelism: ptr.Int32(1),
+					},
+					PaginationConfig: &types.SAPODataPaginationConfig{
+						MaxPageSize: ptr.Int32(1),
+					},
+				},
+				CustomConnector: &types.CustomConnectorSourceProperties{
+					EntityName: ptr.String("__EntityName__"),
+					CustomProperties: map[string]string{
+						"key0": "__Value__",
+					},
+					DataTransferApi: &types.DataTransferApi{
+						Name: ptr.String("__Name__"),
+						Type: types.DataTransferApiType("SYNC"),
+					},
+				},
+				Pardot: &types.PardotSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+			},
+			IncrementalPullConfig: &types.IncrementalPullConfig{
+				DatetimeTypeFieldName: ptr.String("__DatetimeTypeFieldName__"),
+			},
+		},
+		DestinationFlowConfigList: []types.DestinationFlowConfig{
+			{
+				ConnectorType:        types.ConnectorType("Salesforce"),
+				ApiVersion:           ptr.String("__ApiVersion__"),
+				ConnectorProfileName: ptr.String("__ConnectorProfileName__"),
+				DestinationConnectorProperties: &types.DestinationConnectorProperties{
+					Redshift: &types.RedshiftDestinationProperties{
+						Object:                 ptr.String("__Object__"),
+						IntermediateBucketName: ptr.String("__IntermediateBucketName__"),
+						BucketPrefix:           ptr.String("__BucketPrefix__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+					},
+					S3: &types.S3DestinationProperties{
+						BucketName:   ptr.String("__BucketName__"),
+						BucketPrefix: ptr.String("__BucketPrefix__"),
+						S3OutputFormatConfig: &types.S3OutputFormatConfig{
+							FileType: types.FileType("CSV"),
+							PrefixConfig: &types.PrefixConfig{
+								PrefixType:   types.PrefixType("FILENAME"),
+								PrefixFormat: types.PrefixFormat("YEAR"),
+								PathPrefixHierarchy: []types.PathPrefix{
+									types.PathPrefix("EXECUTION_ID"),
+									types.PathPrefix("EXECUTION_ID"),
+								},
+							},
+							AggregationConfig: &types.AggregationConfig{
+								AggregationType: types.AggregationType("None"),
+								TargetFileSize:  ptr.Int64(1),
+							},
+							PreserveSourceDataTyping: ptr.Bool(true),
+						},
+					},
+					Salesforce: &types.SalesforceDestinationProperties{
+						Object: ptr.String("__Object__"),
+						IdFieldNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+						WriteOperationType: types.WriteOperationType("INSERT"),
+						DataTransferApi:    types.SalesforceDataTransferApi("AUTOMATIC"),
+					},
+					Snowflake: &types.SnowflakeDestinationProperties{
+						Object:                 ptr.String("__Object__"),
+						IntermediateBucketName: ptr.String("__IntermediateBucketName__"),
+						BucketPrefix:           ptr.String("__BucketPrefix__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+					},
+					EventBridge: &types.EventBridgeDestinationProperties{
+						Object: ptr.String("__Object__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+					},
+					LookoutMetrics: &types.LookoutMetricsDestinationProperties{},
+					Upsolver: &types.UpsolverDestinationProperties{
+						BucketName:   ptr.String("__BucketName__"),
+						BucketPrefix: ptr.String("__BucketPrefix__"),
+						S3OutputFormatConfig: &types.UpsolverS3OutputFormatConfig{
+							FileType: types.FileType("CSV"),
+							PrefixConfig: &types.PrefixConfig{
+								PrefixType:   types.PrefixType("FILENAME"),
+								PrefixFormat: types.PrefixFormat("YEAR"),
+								PathPrefixHierarchy: []types.PathPrefix{
+									types.PathPrefix("EXECUTION_ID"),
+									types.PathPrefix("EXECUTION_ID"),
+								},
+							},
+							AggregationConfig: &types.AggregationConfig{
+								AggregationType: types.AggregationType("None"),
+								TargetFileSize:  ptr.Int64(1),
+							},
+						},
+					},
+					Honeycode: &types.HoneycodeDestinationProperties{
+						Object: ptr.String("__Object__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+					},
+					CustomerProfiles: &types.CustomerProfilesDestinationProperties{
+						DomainName:     ptr.String("__DomainName__"),
+						ObjectTypeName: ptr.String("__ObjectTypeName__"),
+					},
+					Zendesk: &types.ZendeskDestinationProperties{
+						Object: ptr.String("__Object__"),
+						IdFieldNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+						WriteOperationType: types.WriteOperationType("INSERT"),
+					},
+					Marketo: &types.MarketoDestinationProperties{
+						Object: ptr.String("__Object__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+					},
+					CustomConnector: &types.CustomConnectorDestinationProperties{
+						EntityName: ptr.String("__EntityName__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+						WriteOperationType: types.WriteOperationType("INSERT"),
+						IdFieldNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						CustomProperties: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					SAPOData: &types.SAPODataDestinationProperties{
+						ObjectPath: ptr.String("__ObjectPath__"),
+						SuccessResponseHandlingConfig: &types.SuccessResponseHandlingConfig{
+							BucketPrefix: ptr.String("__BucketPrefix__"),
+							BucketName:   ptr.String("__BucketName__"),
+						},
+						IdFieldNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+						WriteOperationType: types.WriteOperationType("INSERT"),
+					},
+				},
+			},
+			{
+				ConnectorType:        types.ConnectorType("Salesforce"),
+				ApiVersion:           ptr.String("__ApiVersion__"),
+				ConnectorProfileName: ptr.String("__ConnectorProfileName__"),
+				DestinationConnectorProperties: &types.DestinationConnectorProperties{
+					Redshift: &types.RedshiftDestinationProperties{
+						Object:                 ptr.String("__Object__"),
+						IntermediateBucketName: ptr.String("__IntermediateBucketName__"),
+						BucketPrefix:           ptr.String("__BucketPrefix__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+					},
+					S3: &types.S3DestinationProperties{
+						BucketName:   ptr.String("__BucketName__"),
+						BucketPrefix: ptr.String("__BucketPrefix__"),
+						S3OutputFormatConfig: &types.S3OutputFormatConfig{
+							FileType: types.FileType("CSV"),
+							PrefixConfig: &types.PrefixConfig{
+								PrefixType:   types.PrefixType("FILENAME"),
+								PrefixFormat: types.PrefixFormat("YEAR"),
+								PathPrefixHierarchy: []types.PathPrefix{
+									types.PathPrefix("EXECUTION_ID"),
+									types.PathPrefix("EXECUTION_ID"),
+								},
+							},
+							AggregationConfig: &types.AggregationConfig{
+								AggregationType: types.AggregationType("None"),
+								TargetFileSize:  ptr.Int64(1),
+							},
+							PreserveSourceDataTyping: ptr.Bool(true),
+						},
+					},
+					Salesforce: &types.SalesforceDestinationProperties{
+						Object: ptr.String("__Object__"),
+						IdFieldNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+						WriteOperationType: types.WriteOperationType("INSERT"),
+						DataTransferApi:    types.SalesforceDataTransferApi("AUTOMATIC"),
+					},
+					Snowflake: &types.SnowflakeDestinationProperties{
+						Object:                 ptr.String("__Object__"),
+						IntermediateBucketName: ptr.String("__IntermediateBucketName__"),
+						BucketPrefix:           ptr.String("__BucketPrefix__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+					},
+					EventBridge: &types.EventBridgeDestinationProperties{
+						Object: ptr.String("__Object__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+					},
+					LookoutMetrics: &types.LookoutMetricsDestinationProperties{},
+					Upsolver: &types.UpsolverDestinationProperties{
+						BucketName:   ptr.String("__BucketName__"),
+						BucketPrefix: ptr.String("__BucketPrefix__"),
+						S3OutputFormatConfig: &types.UpsolverS3OutputFormatConfig{
+							FileType: types.FileType("CSV"),
+							PrefixConfig: &types.PrefixConfig{
+								PrefixType:   types.PrefixType("FILENAME"),
+								PrefixFormat: types.PrefixFormat("YEAR"),
+								PathPrefixHierarchy: []types.PathPrefix{
+									types.PathPrefix("EXECUTION_ID"),
+									types.PathPrefix("EXECUTION_ID"),
+								},
+							},
+							AggregationConfig: &types.AggregationConfig{
+								AggregationType: types.AggregationType("None"),
+								TargetFileSize:  ptr.Int64(1),
+							},
+						},
+					},
+					Honeycode: &types.HoneycodeDestinationProperties{
+						Object: ptr.String("__Object__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+					},
+					CustomerProfiles: &types.CustomerProfilesDestinationProperties{
+						DomainName:     ptr.String("__DomainName__"),
+						ObjectTypeName: ptr.String("__ObjectTypeName__"),
+					},
+					Zendesk: &types.ZendeskDestinationProperties{
+						Object: ptr.String("__Object__"),
+						IdFieldNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+						WriteOperationType: types.WriteOperationType("INSERT"),
+					},
+					Marketo: &types.MarketoDestinationProperties{
+						Object: ptr.String("__Object__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+					},
+					CustomConnector: &types.CustomConnectorDestinationProperties{
+						EntityName: ptr.String("__EntityName__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+						WriteOperationType: types.WriteOperationType("INSERT"),
+						IdFieldNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						CustomProperties: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					SAPOData: &types.SAPODataDestinationProperties{
+						ObjectPath: ptr.String("__ObjectPath__"),
+						SuccessResponseHandlingConfig: &types.SuccessResponseHandlingConfig{
+							BucketPrefix: ptr.String("__BucketPrefix__"),
+							BucketName:   ptr.String("__BucketName__"),
+						},
+						IdFieldNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+						WriteOperationType: types.WriteOperationType("INSERT"),
+					},
+				},
+			},
+		},
+		Tasks: []types.Task{
+			{
+				SourceFields: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ConnectorOperator: &types.ConnectorOperator{
+					Amplitude:       types.AmplitudeConnectorOperator("BETWEEN"),
+					Datadog:         types.DatadogConnectorOperator("PROJECTION"),
+					Dynatrace:       types.DynatraceConnectorOperator("PROJECTION"),
+					GoogleAnalytics: types.GoogleAnalyticsConnectorOperator("PROJECTION"),
+					InforNexus:      types.InforNexusConnectorOperator("PROJECTION"),
+					Marketo:         types.MarketoConnectorOperator("PROJECTION"),
+					S3:              types.S3ConnectorOperator("PROJECTION"),
+					Salesforce:      types.SalesforceConnectorOperator("PROJECTION"),
+					ServiceNow:      types.ServiceNowConnectorOperator("PROJECTION"),
+					Singular:        types.SingularConnectorOperator("PROJECTION"),
+					Slack:           types.SlackConnectorOperator("PROJECTION"),
+					Trendmicro:      types.TrendmicroConnectorOperator("PROJECTION"),
+					Veeva:           types.VeevaConnectorOperator("PROJECTION"),
+					Zendesk:         types.ZendeskConnectorOperator("PROJECTION"),
+					SAPOData:        types.SAPODataConnectorOperator("PROJECTION"),
+					CustomConnector: types.Operator("PROJECTION"),
+					Pardot:          types.PardotConnectorOperator("PROJECTION"),
+				},
+				DestinationField: ptr.String("__DestinationField__"),
+				TaskType:         types.TaskType("Arithmetic"),
+				TaskProperties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				SourceFields: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ConnectorOperator: &types.ConnectorOperator{
+					Amplitude:       types.AmplitudeConnectorOperator("BETWEEN"),
+					Datadog:         types.DatadogConnectorOperator("PROJECTION"),
+					Dynatrace:       types.DynatraceConnectorOperator("PROJECTION"),
+					GoogleAnalytics: types.GoogleAnalyticsConnectorOperator("PROJECTION"),
+					InforNexus:      types.InforNexusConnectorOperator("PROJECTION"),
+					Marketo:         types.MarketoConnectorOperator("PROJECTION"),
+					S3:              types.S3ConnectorOperator("PROJECTION"),
+					Salesforce:      types.SalesforceConnectorOperator("PROJECTION"),
+					ServiceNow:      types.ServiceNowConnectorOperator("PROJECTION"),
+					Singular:        types.SingularConnectorOperator("PROJECTION"),
+					Slack:           types.SlackConnectorOperator("PROJECTION"),
+					Trendmicro:      types.TrendmicroConnectorOperator("PROJECTION"),
+					Veeva:           types.VeevaConnectorOperator("PROJECTION"),
+					Zendesk:         types.ZendeskConnectorOperator("PROJECTION"),
+					SAPOData:        types.SAPODataConnectorOperator("PROJECTION"),
+					CustomConnector: types.Operator("PROJECTION"),
+					Pardot:          types.PardotConnectorOperator("PROJECTION"),
+				},
+				DestinationField: ptr.String("__DestinationField__"),
+				TaskType:         types.TaskType("Arithmetic"),
+				TaskProperties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		MetadataCatalogConfig: &types.MetadataCatalogConfig{
+			GlueDataCatalog: &types.GlueDataCatalogConfig{
+				RoleArn:      ptr.String("__RoleArn__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				TablePrefix:  ptr.String("__TablePrefix__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2248,7 +3836,13 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelFlowExecutions(context.Background(), &CancelFlowExecutionsInput{})
+	_, opErr := svc.CancelFlowExecutions(context.Background(), &CancelFlowExecutionsInput{
+		FlowName: ptr.String("__FlowName__"),
+		ExecutionIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2273,7 +3867,265 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConnectorProfile(context.Background(), &CreateConnectorProfileInput{})
+	_, opErr := svc.CreateConnectorProfile(context.Background(), &CreateConnectorProfileInput{
+		ConnectorProfileName: ptr.String("__ConnectorProfileName__"),
+		KmsArn:               ptr.String("__KmsArn__"),
+		ConnectorType:        types.ConnectorType("Salesforce"),
+		ConnectorLabel:       ptr.String("__ConnectorLabel__"),
+		ConnectionMode:       types.ConnectionMode("Public"),
+		ConnectorProfileConfig: &types.ConnectorProfileConfig{
+			ConnectorProfileProperties: &types.ConnectorProfileProperties{
+				Amplitude: &types.AmplitudeConnectorProfileProperties{},
+				Datadog: &types.DatadogConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				Dynatrace: &types.DynatraceConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				GoogleAnalytics: &types.GoogleAnalyticsConnectorProfileProperties{},
+				Honeycode:       &types.HoneycodeConnectorProfileProperties{},
+				InforNexus: &types.InforNexusConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				Marketo: &types.MarketoConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				Redshift: &types.RedshiftConnectorProfileProperties{
+					DatabaseUrl:          ptr.String("__DatabaseUrl__"),
+					BucketName:           ptr.String("__BucketName__"),
+					BucketPrefix:         ptr.String("__BucketPrefix__"),
+					RoleArn:              ptr.String("__RoleArn__"),
+					DataApiRoleArn:       ptr.String("__DataApiRoleArn__"),
+					IsRedshiftServerless: true,
+					ClusterIdentifier:    ptr.String("__ClusterIdentifier__"),
+					WorkgroupName:        ptr.String("__WorkgroupName__"),
+					DatabaseName:         ptr.String("__DatabaseName__"),
+				},
+				Salesforce: &types.SalesforceConnectorProfileProperties{
+					InstanceUrl:          ptr.String("__InstanceUrl__"),
+					IsSandboxEnvironment: true,
+					UsePrivateLinkForMetadataAndAuthorization: true,
+				},
+				ServiceNow: &types.ServiceNowConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				Singular: &types.SingularConnectorProfileProperties{},
+				Slack: &types.SlackConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				Snowflake: &types.SnowflakeConnectorProfileProperties{
+					Warehouse:              ptr.String("__Warehouse__"),
+					Stage:                  ptr.String("__Stage__"),
+					BucketName:             ptr.String("__BucketName__"),
+					BucketPrefix:           ptr.String("__BucketPrefix__"),
+					PrivateLinkServiceName: ptr.String("__PrivateLinkServiceName__"),
+					AccountName:            ptr.String("__AccountName__"),
+					Region:                 ptr.String("__Region__"),
+				},
+				Trendmicro: &types.TrendmicroConnectorProfileProperties{},
+				Veeva: &types.VeevaConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				Zendesk: &types.ZendeskConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				SAPOData: &types.SAPODataConnectorProfileProperties{
+					ApplicationHostUrl:     ptr.String("__ApplicationHostUrl__"),
+					ApplicationServicePath: ptr.String("__ApplicationServicePath__"),
+					PortNumber:             ptr.Int32(1),
+					ClientNumber:           ptr.String("__ClientNumber__"),
+					LogonLanguage:          ptr.String("__LogonLanguage__"),
+					PrivateLinkServiceName: ptr.String("__PrivateLinkServiceName__"),
+					OAuthProperties: &types.OAuthProperties{
+						TokenUrl:    ptr.String("__TokenUrl__"),
+						AuthCodeUrl: ptr.String("__AuthCodeUrl__"),
+						OAuthScopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					DisableSSO: true,
+				},
+				CustomConnector: &types.CustomConnectorProfileProperties{
+					ProfileProperties: map[string]string{
+						"key0": "__Value__",
+					},
+					OAuth2Properties: &types.OAuth2Properties{
+						TokenUrl:        ptr.String("__TokenUrl__"),
+						OAuth2GrantType: types.OAuth2GrantType("CLIENT_CREDENTIALS"),
+						TokenUrlCustomProperties: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+				Pardot: &types.PardotConnectorProfileProperties{
+					InstanceUrl:          ptr.String("__InstanceUrl__"),
+					IsSandboxEnvironment: true,
+					BusinessUnitId:       ptr.String("__BusinessUnitId__"),
+				},
+			},
+			ConnectorProfileCredentials: &types.ConnectorProfileCredentials{
+				Amplitude: &types.AmplitudeConnectorProfileCredentials{
+					ApiKey:    ptr.String("__ApiKey__"),
+					SecretKey: ptr.String("__SecretKey__"),
+				},
+				Datadog: &types.DatadogConnectorProfileCredentials{
+					ApiKey:         ptr.String("__ApiKey__"),
+					ApplicationKey: ptr.String("__ApplicationKey__"),
+				},
+				Dynatrace: &types.DynatraceConnectorProfileCredentials{
+					ApiToken: ptr.String("__ApiToken__"),
+				},
+				GoogleAnalytics: &types.GoogleAnalyticsConnectorProfileCredentials{
+					ClientId:     ptr.String("__ClientId__"),
+					ClientSecret: ptr.String("__ClientSecret__"),
+					AccessToken:  ptr.String("__AccessToken__"),
+					RefreshToken: ptr.String("__RefreshToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+				},
+				Honeycode: &types.HoneycodeConnectorProfileCredentials{
+					AccessToken:  ptr.String("__AccessToken__"),
+					RefreshToken: ptr.String("__RefreshToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+				},
+				InforNexus: &types.InforNexusConnectorProfileCredentials{
+					AccessKeyId:     ptr.String("__AccessKeyId__"),
+					UserId:          ptr.String("__UserId__"),
+					SecretAccessKey: ptr.String("__SecretAccessKey__"),
+					Datakey:         ptr.String("__Datakey__"),
+				},
+				Marketo: &types.MarketoConnectorProfileCredentials{
+					ClientId:     ptr.String("__ClientId__"),
+					ClientSecret: ptr.String("__ClientSecret__"),
+					AccessToken:  ptr.String("__AccessToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+				},
+				Redshift: &types.RedshiftConnectorProfileCredentials{
+					Username: ptr.String("__Username__"),
+					Password: ptr.String("__Password__"),
+				},
+				Salesforce: &types.SalesforceConnectorProfileCredentials{
+					AccessToken:  ptr.String("__AccessToken__"),
+					RefreshToken: ptr.String("__RefreshToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+					ClientCredentialsArn: ptr.String("__ClientCredentialsArn__"),
+					OAuth2GrantType:      types.OAuth2GrantType("CLIENT_CREDENTIALS"),
+					JwtToken:             ptr.String("__JwtToken__"),
+				},
+				ServiceNow: &types.ServiceNowConnectorProfileCredentials{
+					Username: ptr.String("__Username__"),
+					Password: ptr.String("__Password__"),
+					OAuth2Credentials: &types.OAuth2Credentials{
+						ClientId:     ptr.String("__ClientId__"),
+						ClientSecret: ptr.String("__ClientSecret__"),
+						AccessToken:  ptr.String("__AccessToken__"),
+						RefreshToken: ptr.String("__RefreshToken__"),
+						OAuthRequest: &types.ConnectorOAuthRequest{
+							AuthCode:    ptr.String("__AuthCode__"),
+							RedirectUri: ptr.String("__RedirectUri__"),
+						},
+					},
+				},
+				Singular: &types.SingularConnectorProfileCredentials{
+					ApiKey: ptr.String("__ApiKey__"),
+				},
+				Slack: &types.SlackConnectorProfileCredentials{
+					ClientId:     ptr.String("__ClientId__"),
+					ClientSecret: ptr.String("__ClientSecret__"),
+					AccessToken:  ptr.String("__AccessToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+				},
+				Snowflake: &types.SnowflakeConnectorProfileCredentials{
+					Username: ptr.String("__Username__"),
+					Password: ptr.String("__Password__"),
+				},
+				Trendmicro: &types.TrendmicroConnectorProfileCredentials{
+					ApiSecretKey: ptr.String("__ApiSecretKey__"),
+				},
+				Veeva: &types.VeevaConnectorProfileCredentials{
+					Username: ptr.String("__Username__"),
+					Password: ptr.String("__Password__"),
+				},
+				Zendesk: &types.ZendeskConnectorProfileCredentials{
+					ClientId:     ptr.String("__ClientId__"),
+					ClientSecret: ptr.String("__ClientSecret__"),
+					AccessToken:  ptr.String("__AccessToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+				},
+				SAPOData: &types.SAPODataConnectorProfileCredentials{
+					BasicAuthCredentials: &types.BasicAuthCredentials{
+						Username: ptr.String("__Username__"),
+						Password: ptr.String("__Password__"),
+					},
+					OAuthCredentials: &types.OAuthCredentials{
+						ClientId:     ptr.String("__ClientId__"),
+						ClientSecret: ptr.String("__ClientSecret__"),
+						AccessToken:  ptr.String("__AccessToken__"),
+						RefreshToken: ptr.String("__RefreshToken__"),
+						OAuthRequest: &types.ConnectorOAuthRequest{
+							AuthCode:    ptr.String("__AuthCode__"),
+							RedirectUri: ptr.String("__RedirectUri__"),
+						},
+					},
+				},
+				CustomConnector: &types.CustomConnectorProfileCredentials{
+					AuthenticationType: types.AuthenticationType("OAUTH2"),
+					Basic: &types.BasicAuthCredentials{
+						Username: ptr.String("__Username__"),
+						Password: ptr.String("__Password__"),
+					},
+					Oauth2: &types.OAuth2Credentials{
+						ClientId:     ptr.String("__ClientId__"),
+						ClientSecret: ptr.String("__ClientSecret__"),
+						AccessToken:  ptr.String("__AccessToken__"),
+						RefreshToken: ptr.String("__RefreshToken__"),
+						OAuthRequest: &types.ConnectorOAuthRequest{
+							AuthCode:    ptr.String("__AuthCode__"),
+							RedirectUri: ptr.String("__RedirectUri__"),
+						},
+					},
+					ApiKey: &types.ApiKeyCredentials{
+						ApiKey:       ptr.String("__ApiKey__"),
+						ApiSecretKey: ptr.String("__ApiSecretKey__"),
+					},
+					Custom: &types.CustomAuthCredentials{
+						CustomAuthenticationType: ptr.String("__CustomAuthenticationType__"),
+						CredentialsMap: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+				Pardot: &types.PardotConnectorProfileCredentials{
+					AccessToken:  ptr.String("__AccessToken__"),
+					RefreshToken: ptr.String("__RefreshToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+					ClientCredentialsArn: ptr.String("__ClientCredentialsArn__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2298,7 +4150,265 @@ func TestCheckResponseSnapshot_Error_ConnectorAuthenticationException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConnectorProfile(context.Background(), &CreateConnectorProfileInput{})
+	_, opErr := svc.CreateConnectorProfile(context.Background(), &CreateConnectorProfileInput{
+		ConnectorProfileName: ptr.String("__ConnectorProfileName__"),
+		KmsArn:               ptr.String("__KmsArn__"),
+		ConnectorType:        types.ConnectorType("Salesforce"),
+		ConnectorLabel:       ptr.String("__ConnectorLabel__"),
+		ConnectionMode:       types.ConnectionMode("Public"),
+		ConnectorProfileConfig: &types.ConnectorProfileConfig{
+			ConnectorProfileProperties: &types.ConnectorProfileProperties{
+				Amplitude: &types.AmplitudeConnectorProfileProperties{},
+				Datadog: &types.DatadogConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				Dynatrace: &types.DynatraceConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				GoogleAnalytics: &types.GoogleAnalyticsConnectorProfileProperties{},
+				Honeycode:       &types.HoneycodeConnectorProfileProperties{},
+				InforNexus: &types.InforNexusConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				Marketo: &types.MarketoConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				Redshift: &types.RedshiftConnectorProfileProperties{
+					DatabaseUrl:          ptr.String("__DatabaseUrl__"),
+					BucketName:           ptr.String("__BucketName__"),
+					BucketPrefix:         ptr.String("__BucketPrefix__"),
+					RoleArn:              ptr.String("__RoleArn__"),
+					DataApiRoleArn:       ptr.String("__DataApiRoleArn__"),
+					IsRedshiftServerless: true,
+					ClusterIdentifier:    ptr.String("__ClusterIdentifier__"),
+					WorkgroupName:        ptr.String("__WorkgroupName__"),
+					DatabaseName:         ptr.String("__DatabaseName__"),
+				},
+				Salesforce: &types.SalesforceConnectorProfileProperties{
+					InstanceUrl:          ptr.String("__InstanceUrl__"),
+					IsSandboxEnvironment: true,
+					UsePrivateLinkForMetadataAndAuthorization: true,
+				},
+				ServiceNow: &types.ServiceNowConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				Singular: &types.SingularConnectorProfileProperties{},
+				Slack: &types.SlackConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				Snowflake: &types.SnowflakeConnectorProfileProperties{
+					Warehouse:              ptr.String("__Warehouse__"),
+					Stage:                  ptr.String("__Stage__"),
+					BucketName:             ptr.String("__BucketName__"),
+					BucketPrefix:           ptr.String("__BucketPrefix__"),
+					PrivateLinkServiceName: ptr.String("__PrivateLinkServiceName__"),
+					AccountName:            ptr.String("__AccountName__"),
+					Region:                 ptr.String("__Region__"),
+				},
+				Trendmicro: &types.TrendmicroConnectorProfileProperties{},
+				Veeva: &types.VeevaConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				Zendesk: &types.ZendeskConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				SAPOData: &types.SAPODataConnectorProfileProperties{
+					ApplicationHostUrl:     ptr.String("__ApplicationHostUrl__"),
+					ApplicationServicePath: ptr.String("__ApplicationServicePath__"),
+					PortNumber:             ptr.Int32(1),
+					ClientNumber:           ptr.String("__ClientNumber__"),
+					LogonLanguage:          ptr.String("__LogonLanguage__"),
+					PrivateLinkServiceName: ptr.String("__PrivateLinkServiceName__"),
+					OAuthProperties: &types.OAuthProperties{
+						TokenUrl:    ptr.String("__TokenUrl__"),
+						AuthCodeUrl: ptr.String("__AuthCodeUrl__"),
+						OAuthScopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					DisableSSO: true,
+				},
+				CustomConnector: &types.CustomConnectorProfileProperties{
+					ProfileProperties: map[string]string{
+						"key0": "__Value__",
+					},
+					OAuth2Properties: &types.OAuth2Properties{
+						TokenUrl:        ptr.String("__TokenUrl__"),
+						OAuth2GrantType: types.OAuth2GrantType("CLIENT_CREDENTIALS"),
+						TokenUrlCustomProperties: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+				Pardot: &types.PardotConnectorProfileProperties{
+					InstanceUrl:          ptr.String("__InstanceUrl__"),
+					IsSandboxEnvironment: true,
+					BusinessUnitId:       ptr.String("__BusinessUnitId__"),
+				},
+			},
+			ConnectorProfileCredentials: &types.ConnectorProfileCredentials{
+				Amplitude: &types.AmplitudeConnectorProfileCredentials{
+					ApiKey:    ptr.String("__ApiKey__"),
+					SecretKey: ptr.String("__SecretKey__"),
+				},
+				Datadog: &types.DatadogConnectorProfileCredentials{
+					ApiKey:         ptr.String("__ApiKey__"),
+					ApplicationKey: ptr.String("__ApplicationKey__"),
+				},
+				Dynatrace: &types.DynatraceConnectorProfileCredentials{
+					ApiToken: ptr.String("__ApiToken__"),
+				},
+				GoogleAnalytics: &types.GoogleAnalyticsConnectorProfileCredentials{
+					ClientId:     ptr.String("__ClientId__"),
+					ClientSecret: ptr.String("__ClientSecret__"),
+					AccessToken:  ptr.String("__AccessToken__"),
+					RefreshToken: ptr.String("__RefreshToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+				},
+				Honeycode: &types.HoneycodeConnectorProfileCredentials{
+					AccessToken:  ptr.String("__AccessToken__"),
+					RefreshToken: ptr.String("__RefreshToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+				},
+				InforNexus: &types.InforNexusConnectorProfileCredentials{
+					AccessKeyId:     ptr.String("__AccessKeyId__"),
+					UserId:          ptr.String("__UserId__"),
+					SecretAccessKey: ptr.String("__SecretAccessKey__"),
+					Datakey:         ptr.String("__Datakey__"),
+				},
+				Marketo: &types.MarketoConnectorProfileCredentials{
+					ClientId:     ptr.String("__ClientId__"),
+					ClientSecret: ptr.String("__ClientSecret__"),
+					AccessToken:  ptr.String("__AccessToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+				},
+				Redshift: &types.RedshiftConnectorProfileCredentials{
+					Username: ptr.String("__Username__"),
+					Password: ptr.String("__Password__"),
+				},
+				Salesforce: &types.SalesforceConnectorProfileCredentials{
+					AccessToken:  ptr.String("__AccessToken__"),
+					RefreshToken: ptr.String("__RefreshToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+					ClientCredentialsArn: ptr.String("__ClientCredentialsArn__"),
+					OAuth2GrantType:      types.OAuth2GrantType("CLIENT_CREDENTIALS"),
+					JwtToken:             ptr.String("__JwtToken__"),
+				},
+				ServiceNow: &types.ServiceNowConnectorProfileCredentials{
+					Username: ptr.String("__Username__"),
+					Password: ptr.String("__Password__"),
+					OAuth2Credentials: &types.OAuth2Credentials{
+						ClientId:     ptr.String("__ClientId__"),
+						ClientSecret: ptr.String("__ClientSecret__"),
+						AccessToken:  ptr.String("__AccessToken__"),
+						RefreshToken: ptr.String("__RefreshToken__"),
+						OAuthRequest: &types.ConnectorOAuthRequest{
+							AuthCode:    ptr.String("__AuthCode__"),
+							RedirectUri: ptr.String("__RedirectUri__"),
+						},
+					},
+				},
+				Singular: &types.SingularConnectorProfileCredentials{
+					ApiKey: ptr.String("__ApiKey__"),
+				},
+				Slack: &types.SlackConnectorProfileCredentials{
+					ClientId:     ptr.String("__ClientId__"),
+					ClientSecret: ptr.String("__ClientSecret__"),
+					AccessToken:  ptr.String("__AccessToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+				},
+				Snowflake: &types.SnowflakeConnectorProfileCredentials{
+					Username: ptr.String("__Username__"),
+					Password: ptr.String("__Password__"),
+				},
+				Trendmicro: &types.TrendmicroConnectorProfileCredentials{
+					ApiSecretKey: ptr.String("__ApiSecretKey__"),
+				},
+				Veeva: &types.VeevaConnectorProfileCredentials{
+					Username: ptr.String("__Username__"),
+					Password: ptr.String("__Password__"),
+				},
+				Zendesk: &types.ZendeskConnectorProfileCredentials{
+					ClientId:     ptr.String("__ClientId__"),
+					ClientSecret: ptr.String("__ClientSecret__"),
+					AccessToken:  ptr.String("__AccessToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+				},
+				SAPOData: &types.SAPODataConnectorProfileCredentials{
+					BasicAuthCredentials: &types.BasicAuthCredentials{
+						Username: ptr.String("__Username__"),
+						Password: ptr.String("__Password__"),
+					},
+					OAuthCredentials: &types.OAuthCredentials{
+						ClientId:     ptr.String("__ClientId__"),
+						ClientSecret: ptr.String("__ClientSecret__"),
+						AccessToken:  ptr.String("__AccessToken__"),
+						RefreshToken: ptr.String("__RefreshToken__"),
+						OAuthRequest: &types.ConnectorOAuthRequest{
+							AuthCode:    ptr.String("__AuthCode__"),
+							RedirectUri: ptr.String("__RedirectUri__"),
+						},
+					},
+				},
+				CustomConnector: &types.CustomConnectorProfileCredentials{
+					AuthenticationType: types.AuthenticationType("OAUTH2"),
+					Basic: &types.BasicAuthCredentials{
+						Username: ptr.String("__Username__"),
+						Password: ptr.String("__Password__"),
+					},
+					Oauth2: &types.OAuth2Credentials{
+						ClientId:     ptr.String("__ClientId__"),
+						ClientSecret: ptr.String("__ClientSecret__"),
+						AccessToken:  ptr.String("__AccessToken__"),
+						RefreshToken: ptr.String("__RefreshToken__"),
+						OAuthRequest: &types.ConnectorOAuthRequest{
+							AuthCode:    ptr.String("__AuthCode__"),
+							RedirectUri: ptr.String("__RedirectUri__"),
+						},
+					},
+					ApiKey: &types.ApiKeyCredentials{
+						ApiKey:       ptr.String("__ApiKey__"),
+						ApiSecretKey: ptr.String("__ApiSecretKey__"),
+					},
+					Custom: &types.CustomAuthCredentials{
+						CustomAuthenticationType: ptr.String("__CustomAuthenticationType__"),
+						CredentialsMap: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+				Pardot: &types.PardotConnectorProfileCredentials{
+					AccessToken:  ptr.String("__AccessToken__"),
+					RefreshToken: ptr.String("__RefreshToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+					ClientCredentialsArn: ptr.String("__ClientCredentialsArn__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2323,7 +4433,496 @@ func TestCheckResponseSnapshot_Error_ConnectorServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFlow(context.Background(), &CreateFlowInput{})
+	_, opErr := svc.CreateFlow(context.Background(), &CreateFlowInput{
+		FlowName:    ptr.String("__FlowName__"),
+		Description: ptr.String("__Description__"),
+		KmsArn:      ptr.String("__KmsArn__"),
+		TriggerConfig: &types.TriggerConfig{
+			TriggerType: types.TriggerType("Scheduled"),
+			TriggerProperties: &types.TriggerProperties{
+				Scheduled: &types.ScheduledTriggerProperties{
+					ScheduleExpression:             ptr.String("__ScheduleExpression__"),
+					DataPullMode:                   types.DataPullMode("Incremental"),
+					ScheduleStartTime:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					ScheduleEndTime:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Timezone:                       ptr.String("__Timezone__"),
+					ScheduleOffset:                 ptr.Int64(1),
+					FirstExecutionFrom:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					FlowErrorDeactivationThreshold: ptr.Int32(1),
+				},
+			},
+		},
+		SourceFlowConfig: &types.SourceFlowConfig{
+			ConnectorType:        types.ConnectorType("Salesforce"),
+			ApiVersion:           ptr.String("__ApiVersion__"),
+			ConnectorProfileName: ptr.String("__ConnectorProfileName__"),
+			SourceConnectorProperties: &types.SourceConnectorProperties{
+				Amplitude: &types.AmplitudeSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				Datadog: &types.DatadogSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				Dynatrace: &types.DynatraceSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				GoogleAnalytics: &types.GoogleAnalyticsSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				InforNexus: &types.InforNexusSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				Marketo: &types.MarketoSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				S3: &types.S3SourceProperties{
+					BucketName:   ptr.String("__BucketName__"),
+					BucketPrefix: ptr.String("__BucketPrefix__"),
+					S3InputFormatConfig: &types.S3InputFormatConfig{
+						S3InputFileType: types.S3InputFileType("CSV"),
+					},
+				},
+				Salesforce: &types.SalesforceSourceProperties{
+					Object:                   ptr.String("__Object__"),
+					EnableDynamicFieldUpdate: true,
+					IncludeDeletedRecords:    true,
+					DataTransferApi:          types.SalesforceDataTransferApi("AUTOMATIC"),
+				},
+				ServiceNow: &types.ServiceNowSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				Singular: &types.SingularSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				Slack: &types.SlackSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				Trendmicro: &types.TrendmicroSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				Veeva: &types.VeevaSourceProperties{
+					Object:             ptr.String("__Object__"),
+					DocumentType:       ptr.String("__DocumentType__"),
+					IncludeSourceFiles: true,
+					IncludeRenditions:  true,
+					IncludeAllVersions: true,
+				},
+				Zendesk: &types.ZendeskSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+				SAPOData: &types.SAPODataSourceProperties{
+					ObjectPath: ptr.String("__ObjectPath__"),
+					ParallelismConfig: &types.SAPODataParallelismConfig{
+						MaxParallelism: ptr.Int32(1),
+					},
+					PaginationConfig: &types.SAPODataPaginationConfig{
+						MaxPageSize: ptr.Int32(1),
+					},
+				},
+				CustomConnector: &types.CustomConnectorSourceProperties{
+					EntityName: ptr.String("__EntityName__"),
+					CustomProperties: map[string]string{
+						"key0": "__Value__",
+					},
+					DataTransferApi: &types.DataTransferApi{
+						Name: ptr.String("__Name__"),
+						Type: types.DataTransferApiType("SYNC"),
+					},
+				},
+				Pardot: &types.PardotSourceProperties{
+					Object: ptr.String("__Object__"),
+				},
+			},
+			IncrementalPullConfig: &types.IncrementalPullConfig{
+				DatetimeTypeFieldName: ptr.String("__DatetimeTypeFieldName__"),
+			},
+		},
+		DestinationFlowConfigList: []types.DestinationFlowConfig{
+			{
+				ConnectorType:        types.ConnectorType("Salesforce"),
+				ApiVersion:           ptr.String("__ApiVersion__"),
+				ConnectorProfileName: ptr.String("__ConnectorProfileName__"),
+				DestinationConnectorProperties: &types.DestinationConnectorProperties{
+					Redshift: &types.RedshiftDestinationProperties{
+						Object:                 ptr.String("__Object__"),
+						IntermediateBucketName: ptr.String("__IntermediateBucketName__"),
+						BucketPrefix:           ptr.String("__BucketPrefix__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+					},
+					S3: &types.S3DestinationProperties{
+						BucketName:   ptr.String("__BucketName__"),
+						BucketPrefix: ptr.String("__BucketPrefix__"),
+						S3OutputFormatConfig: &types.S3OutputFormatConfig{
+							FileType: types.FileType("CSV"),
+							PrefixConfig: &types.PrefixConfig{
+								PrefixType:   types.PrefixType("FILENAME"),
+								PrefixFormat: types.PrefixFormat("YEAR"),
+								PathPrefixHierarchy: []types.PathPrefix{
+									types.PathPrefix("EXECUTION_ID"),
+									types.PathPrefix("EXECUTION_ID"),
+								},
+							},
+							AggregationConfig: &types.AggregationConfig{
+								AggregationType: types.AggregationType("None"),
+								TargetFileSize:  ptr.Int64(1),
+							},
+							PreserveSourceDataTyping: ptr.Bool(true),
+						},
+					},
+					Salesforce: &types.SalesforceDestinationProperties{
+						Object: ptr.String("__Object__"),
+						IdFieldNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+						WriteOperationType: types.WriteOperationType("INSERT"),
+						DataTransferApi:    types.SalesforceDataTransferApi("AUTOMATIC"),
+					},
+					Snowflake: &types.SnowflakeDestinationProperties{
+						Object:                 ptr.String("__Object__"),
+						IntermediateBucketName: ptr.String("__IntermediateBucketName__"),
+						BucketPrefix:           ptr.String("__BucketPrefix__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+					},
+					EventBridge: &types.EventBridgeDestinationProperties{
+						Object: ptr.String("__Object__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+					},
+					LookoutMetrics: &types.LookoutMetricsDestinationProperties{},
+					Upsolver: &types.UpsolverDestinationProperties{
+						BucketName:   ptr.String("__BucketName__"),
+						BucketPrefix: ptr.String("__BucketPrefix__"),
+						S3OutputFormatConfig: &types.UpsolverS3OutputFormatConfig{
+							FileType: types.FileType("CSV"),
+							PrefixConfig: &types.PrefixConfig{
+								PrefixType:   types.PrefixType("FILENAME"),
+								PrefixFormat: types.PrefixFormat("YEAR"),
+								PathPrefixHierarchy: []types.PathPrefix{
+									types.PathPrefix("EXECUTION_ID"),
+									types.PathPrefix("EXECUTION_ID"),
+								},
+							},
+							AggregationConfig: &types.AggregationConfig{
+								AggregationType: types.AggregationType("None"),
+								TargetFileSize:  ptr.Int64(1),
+							},
+						},
+					},
+					Honeycode: &types.HoneycodeDestinationProperties{
+						Object: ptr.String("__Object__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+					},
+					CustomerProfiles: &types.CustomerProfilesDestinationProperties{
+						DomainName:     ptr.String("__DomainName__"),
+						ObjectTypeName: ptr.String("__ObjectTypeName__"),
+					},
+					Zendesk: &types.ZendeskDestinationProperties{
+						Object: ptr.String("__Object__"),
+						IdFieldNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+						WriteOperationType: types.WriteOperationType("INSERT"),
+					},
+					Marketo: &types.MarketoDestinationProperties{
+						Object: ptr.String("__Object__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+					},
+					CustomConnector: &types.CustomConnectorDestinationProperties{
+						EntityName: ptr.String("__EntityName__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+						WriteOperationType: types.WriteOperationType("INSERT"),
+						IdFieldNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						CustomProperties: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					SAPOData: &types.SAPODataDestinationProperties{
+						ObjectPath: ptr.String("__ObjectPath__"),
+						SuccessResponseHandlingConfig: &types.SuccessResponseHandlingConfig{
+							BucketPrefix: ptr.String("__BucketPrefix__"),
+							BucketName:   ptr.String("__BucketName__"),
+						},
+						IdFieldNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+						WriteOperationType: types.WriteOperationType("INSERT"),
+					},
+				},
+			},
+			{
+				ConnectorType:        types.ConnectorType("Salesforce"),
+				ApiVersion:           ptr.String("__ApiVersion__"),
+				ConnectorProfileName: ptr.String("__ConnectorProfileName__"),
+				DestinationConnectorProperties: &types.DestinationConnectorProperties{
+					Redshift: &types.RedshiftDestinationProperties{
+						Object:                 ptr.String("__Object__"),
+						IntermediateBucketName: ptr.String("__IntermediateBucketName__"),
+						BucketPrefix:           ptr.String("__BucketPrefix__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+					},
+					S3: &types.S3DestinationProperties{
+						BucketName:   ptr.String("__BucketName__"),
+						BucketPrefix: ptr.String("__BucketPrefix__"),
+						S3OutputFormatConfig: &types.S3OutputFormatConfig{
+							FileType: types.FileType("CSV"),
+							PrefixConfig: &types.PrefixConfig{
+								PrefixType:   types.PrefixType("FILENAME"),
+								PrefixFormat: types.PrefixFormat("YEAR"),
+								PathPrefixHierarchy: []types.PathPrefix{
+									types.PathPrefix("EXECUTION_ID"),
+									types.PathPrefix("EXECUTION_ID"),
+								},
+							},
+							AggregationConfig: &types.AggregationConfig{
+								AggregationType: types.AggregationType("None"),
+								TargetFileSize:  ptr.Int64(1),
+							},
+							PreserveSourceDataTyping: ptr.Bool(true),
+						},
+					},
+					Salesforce: &types.SalesforceDestinationProperties{
+						Object: ptr.String("__Object__"),
+						IdFieldNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+						WriteOperationType: types.WriteOperationType("INSERT"),
+						DataTransferApi:    types.SalesforceDataTransferApi("AUTOMATIC"),
+					},
+					Snowflake: &types.SnowflakeDestinationProperties{
+						Object:                 ptr.String("__Object__"),
+						IntermediateBucketName: ptr.String("__IntermediateBucketName__"),
+						BucketPrefix:           ptr.String("__BucketPrefix__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+					},
+					EventBridge: &types.EventBridgeDestinationProperties{
+						Object: ptr.String("__Object__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+					},
+					LookoutMetrics: &types.LookoutMetricsDestinationProperties{},
+					Upsolver: &types.UpsolverDestinationProperties{
+						BucketName:   ptr.String("__BucketName__"),
+						BucketPrefix: ptr.String("__BucketPrefix__"),
+						S3OutputFormatConfig: &types.UpsolverS3OutputFormatConfig{
+							FileType: types.FileType("CSV"),
+							PrefixConfig: &types.PrefixConfig{
+								PrefixType:   types.PrefixType("FILENAME"),
+								PrefixFormat: types.PrefixFormat("YEAR"),
+								PathPrefixHierarchy: []types.PathPrefix{
+									types.PathPrefix("EXECUTION_ID"),
+									types.PathPrefix("EXECUTION_ID"),
+								},
+							},
+							AggregationConfig: &types.AggregationConfig{
+								AggregationType: types.AggregationType("None"),
+								TargetFileSize:  ptr.Int64(1),
+							},
+						},
+					},
+					Honeycode: &types.HoneycodeDestinationProperties{
+						Object: ptr.String("__Object__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+					},
+					CustomerProfiles: &types.CustomerProfilesDestinationProperties{
+						DomainName:     ptr.String("__DomainName__"),
+						ObjectTypeName: ptr.String("__ObjectTypeName__"),
+					},
+					Zendesk: &types.ZendeskDestinationProperties{
+						Object: ptr.String("__Object__"),
+						IdFieldNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+						WriteOperationType: types.WriteOperationType("INSERT"),
+					},
+					Marketo: &types.MarketoDestinationProperties{
+						Object: ptr.String("__Object__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+					},
+					CustomConnector: &types.CustomConnectorDestinationProperties{
+						EntityName: ptr.String("__EntityName__"),
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+						WriteOperationType: types.WriteOperationType("INSERT"),
+						IdFieldNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						CustomProperties: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					SAPOData: &types.SAPODataDestinationProperties{
+						ObjectPath: ptr.String("__ObjectPath__"),
+						SuccessResponseHandlingConfig: &types.SuccessResponseHandlingConfig{
+							BucketPrefix: ptr.String("__BucketPrefix__"),
+							BucketName:   ptr.String("__BucketName__"),
+						},
+						IdFieldNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ErrorHandlingConfig: &types.ErrorHandlingConfig{
+							FailOnFirstDestinationError: true,
+							BucketPrefix:                ptr.String("__BucketPrefix__"),
+							BucketName:                  ptr.String("__BucketName__"),
+						},
+						WriteOperationType: types.WriteOperationType("INSERT"),
+					},
+				},
+			},
+		},
+		Tasks: []types.Task{
+			{
+				SourceFields: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ConnectorOperator: &types.ConnectorOperator{
+					Amplitude:       types.AmplitudeConnectorOperator("BETWEEN"),
+					Datadog:         types.DatadogConnectorOperator("PROJECTION"),
+					Dynatrace:       types.DynatraceConnectorOperator("PROJECTION"),
+					GoogleAnalytics: types.GoogleAnalyticsConnectorOperator("PROJECTION"),
+					InforNexus:      types.InforNexusConnectorOperator("PROJECTION"),
+					Marketo:         types.MarketoConnectorOperator("PROJECTION"),
+					S3:              types.S3ConnectorOperator("PROJECTION"),
+					Salesforce:      types.SalesforceConnectorOperator("PROJECTION"),
+					ServiceNow:      types.ServiceNowConnectorOperator("PROJECTION"),
+					Singular:        types.SingularConnectorOperator("PROJECTION"),
+					Slack:           types.SlackConnectorOperator("PROJECTION"),
+					Trendmicro:      types.TrendmicroConnectorOperator("PROJECTION"),
+					Veeva:           types.VeevaConnectorOperator("PROJECTION"),
+					Zendesk:         types.ZendeskConnectorOperator("PROJECTION"),
+					SAPOData:        types.SAPODataConnectorOperator("PROJECTION"),
+					CustomConnector: types.Operator("PROJECTION"),
+					Pardot:          types.PardotConnectorOperator("PROJECTION"),
+				},
+				DestinationField: ptr.String("__DestinationField__"),
+				TaskType:         types.TaskType("Arithmetic"),
+				TaskProperties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				SourceFields: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ConnectorOperator: &types.ConnectorOperator{
+					Amplitude:       types.AmplitudeConnectorOperator("BETWEEN"),
+					Datadog:         types.DatadogConnectorOperator("PROJECTION"),
+					Dynatrace:       types.DynatraceConnectorOperator("PROJECTION"),
+					GoogleAnalytics: types.GoogleAnalyticsConnectorOperator("PROJECTION"),
+					InforNexus:      types.InforNexusConnectorOperator("PROJECTION"),
+					Marketo:         types.MarketoConnectorOperator("PROJECTION"),
+					S3:              types.S3ConnectorOperator("PROJECTION"),
+					Salesforce:      types.SalesforceConnectorOperator("PROJECTION"),
+					ServiceNow:      types.ServiceNowConnectorOperator("PROJECTION"),
+					Singular:        types.SingularConnectorOperator("PROJECTION"),
+					Slack:           types.SlackConnectorOperator("PROJECTION"),
+					Trendmicro:      types.TrendmicroConnectorOperator("PROJECTION"),
+					Veeva:           types.VeevaConnectorOperator("PROJECTION"),
+					Zendesk:         types.ZendeskConnectorOperator("PROJECTION"),
+					SAPOData:        types.SAPODataConnectorOperator("PROJECTION"),
+					CustomConnector: types.Operator("PROJECTION"),
+					Pardot:          types.PardotConnectorOperator("PROJECTION"),
+				},
+				DestinationField: ptr.String("__DestinationField__"),
+				TaskType:         types.TaskType("Arithmetic"),
+				TaskProperties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		MetadataCatalogConfig: &types.MetadataCatalogConfig{
+			GlueDataCatalog: &types.GlueDataCatalogConfig{
+				RoleArn:      ptr.String("__RoleArn__"),
+				DatabaseName: ptr.String("__DatabaseName__"),
+				TablePrefix:  ptr.String("__TablePrefix__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2348,7 +4947,13 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelFlowExecutions(context.Background(), &CancelFlowExecutionsInput{})
+	_, opErr := svc.CancelFlowExecutions(context.Background(), &CancelFlowExecutionsInput{
+		FlowName: ptr.String("__FlowName__"),
+		ExecutionIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2373,7 +4978,13 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelFlowExecutions(context.Background(), &CancelFlowExecutionsInput{})
+	_, opErr := svc.CancelFlowExecutions(context.Background(), &CancelFlowExecutionsInput{
+		FlowName: ptr.String("__FlowName__"),
+		ExecutionIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2398,7 +5009,265 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConnectorProfile(context.Background(), &CreateConnectorProfileInput{})
+	_, opErr := svc.CreateConnectorProfile(context.Background(), &CreateConnectorProfileInput{
+		ConnectorProfileName: ptr.String("__ConnectorProfileName__"),
+		KmsArn:               ptr.String("__KmsArn__"),
+		ConnectorType:        types.ConnectorType("Salesforce"),
+		ConnectorLabel:       ptr.String("__ConnectorLabel__"),
+		ConnectionMode:       types.ConnectionMode("Public"),
+		ConnectorProfileConfig: &types.ConnectorProfileConfig{
+			ConnectorProfileProperties: &types.ConnectorProfileProperties{
+				Amplitude: &types.AmplitudeConnectorProfileProperties{},
+				Datadog: &types.DatadogConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				Dynatrace: &types.DynatraceConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				GoogleAnalytics: &types.GoogleAnalyticsConnectorProfileProperties{},
+				Honeycode:       &types.HoneycodeConnectorProfileProperties{},
+				InforNexus: &types.InforNexusConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				Marketo: &types.MarketoConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				Redshift: &types.RedshiftConnectorProfileProperties{
+					DatabaseUrl:          ptr.String("__DatabaseUrl__"),
+					BucketName:           ptr.String("__BucketName__"),
+					BucketPrefix:         ptr.String("__BucketPrefix__"),
+					RoleArn:              ptr.String("__RoleArn__"),
+					DataApiRoleArn:       ptr.String("__DataApiRoleArn__"),
+					IsRedshiftServerless: true,
+					ClusterIdentifier:    ptr.String("__ClusterIdentifier__"),
+					WorkgroupName:        ptr.String("__WorkgroupName__"),
+					DatabaseName:         ptr.String("__DatabaseName__"),
+				},
+				Salesforce: &types.SalesforceConnectorProfileProperties{
+					InstanceUrl:          ptr.String("__InstanceUrl__"),
+					IsSandboxEnvironment: true,
+					UsePrivateLinkForMetadataAndAuthorization: true,
+				},
+				ServiceNow: &types.ServiceNowConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				Singular: &types.SingularConnectorProfileProperties{},
+				Slack: &types.SlackConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				Snowflake: &types.SnowflakeConnectorProfileProperties{
+					Warehouse:              ptr.String("__Warehouse__"),
+					Stage:                  ptr.String("__Stage__"),
+					BucketName:             ptr.String("__BucketName__"),
+					BucketPrefix:           ptr.String("__BucketPrefix__"),
+					PrivateLinkServiceName: ptr.String("__PrivateLinkServiceName__"),
+					AccountName:            ptr.String("__AccountName__"),
+					Region:                 ptr.String("__Region__"),
+				},
+				Trendmicro: &types.TrendmicroConnectorProfileProperties{},
+				Veeva: &types.VeevaConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				Zendesk: &types.ZendeskConnectorProfileProperties{
+					InstanceUrl: ptr.String("__InstanceUrl__"),
+				},
+				SAPOData: &types.SAPODataConnectorProfileProperties{
+					ApplicationHostUrl:     ptr.String("__ApplicationHostUrl__"),
+					ApplicationServicePath: ptr.String("__ApplicationServicePath__"),
+					PortNumber:             ptr.Int32(1),
+					ClientNumber:           ptr.String("__ClientNumber__"),
+					LogonLanguage:          ptr.String("__LogonLanguage__"),
+					PrivateLinkServiceName: ptr.String("__PrivateLinkServiceName__"),
+					OAuthProperties: &types.OAuthProperties{
+						TokenUrl:    ptr.String("__TokenUrl__"),
+						AuthCodeUrl: ptr.String("__AuthCodeUrl__"),
+						OAuthScopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					DisableSSO: true,
+				},
+				CustomConnector: &types.CustomConnectorProfileProperties{
+					ProfileProperties: map[string]string{
+						"key0": "__Value__",
+					},
+					OAuth2Properties: &types.OAuth2Properties{
+						TokenUrl:        ptr.String("__TokenUrl__"),
+						OAuth2GrantType: types.OAuth2GrantType("CLIENT_CREDENTIALS"),
+						TokenUrlCustomProperties: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+				Pardot: &types.PardotConnectorProfileProperties{
+					InstanceUrl:          ptr.String("__InstanceUrl__"),
+					IsSandboxEnvironment: true,
+					BusinessUnitId:       ptr.String("__BusinessUnitId__"),
+				},
+			},
+			ConnectorProfileCredentials: &types.ConnectorProfileCredentials{
+				Amplitude: &types.AmplitudeConnectorProfileCredentials{
+					ApiKey:    ptr.String("__ApiKey__"),
+					SecretKey: ptr.String("__SecretKey__"),
+				},
+				Datadog: &types.DatadogConnectorProfileCredentials{
+					ApiKey:         ptr.String("__ApiKey__"),
+					ApplicationKey: ptr.String("__ApplicationKey__"),
+				},
+				Dynatrace: &types.DynatraceConnectorProfileCredentials{
+					ApiToken: ptr.String("__ApiToken__"),
+				},
+				GoogleAnalytics: &types.GoogleAnalyticsConnectorProfileCredentials{
+					ClientId:     ptr.String("__ClientId__"),
+					ClientSecret: ptr.String("__ClientSecret__"),
+					AccessToken:  ptr.String("__AccessToken__"),
+					RefreshToken: ptr.String("__RefreshToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+				},
+				Honeycode: &types.HoneycodeConnectorProfileCredentials{
+					AccessToken:  ptr.String("__AccessToken__"),
+					RefreshToken: ptr.String("__RefreshToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+				},
+				InforNexus: &types.InforNexusConnectorProfileCredentials{
+					AccessKeyId:     ptr.String("__AccessKeyId__"),
+					UserId:          ptr.String("__UserId__"),
+					SecretAccessKey: ptr.String("__SecretAccessKey__"),
+					Datakey:         ptr.String("__Datakey__"),
+				},
+				Marketo: &types.MarketoConnectorProfileCredentials{
+					ClientId:     ptr.String("__ClientId__"),
+					ClientSecret: ptr.String("__ClientSecret__"),
+					AccessToken:  ptr.String("__AccessToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+				},
+				Redshift: &types.RedshiftConnectorProfileCredentials{
+					Username: ptr.String("__Username__"),
+					Password: ptr.String("__Password__"),
+				},
+				Salesforce: &types.SalesforceConnectorProfileCredentials{
+					AccessToken:  ptr.String("__AccessToken__"),
+					RefreshToken: ptr.String("__RefreshToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+					ClientCredentialsArn: ptr.String("__ClientCredentialsArn__"),
+					OAuth2GrantType:      types.OAuth2GrantType("CLIENT_CREDENTIALS"),
+					JwtToken:             ptr.String("__JwtToken__"),
+				},
+				ServiceNow: &types.ServiceNowConnectorProfileCredentials{
+					Username: ptr.String("__Username__"),
+					Password: ptr.String("__Password__"),
+					OAuth2Credentials: &types.OAuth2Credentials{
+						ClientId:     ptr.String("__ClientId__"),
+						ClientSecret: ptr.String("__ClientSecret__"),
+						AccessToken:  ptr.String("__AccessToken__"),
+						RefreshToken: ptr.String("__RefreshToken__"),
+						OAuthRequest: &types.ConnectorOAuthRequest{
+							AuthCode:    ptr.String("__AuthCode__"),
+							RedirectUri: ptr.String("__RedirectUri__"),
+						},
+					},
+				},
+				Singular: &types.SingularConnectorProfileCredentials{
+					ApiKey: ptr.String("__ApiKey__"),
+				},
+				Slack: &types.SlackConnectorProfileCredentials{
+					ClientId:     ptr.String("__ClientId__"),
+					ClientSecret: ptr.String("__ClientSecret__"),
+					AccessToken:  ptr.String("__AccessToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+				},
+				Snowflake: &types.SnowflakeConnectorProfileCredentials{
+					Username: ptr.String("__Username__"),
+					Password: ptr.String("__Password__"),
+				},
+				Trendmicro: &types.TrendmicroConnectorProfileCredentials{
+					ApiSecretKey: ptr.String("__ApiSecretKey__"),
+				},
+				Veeva: &types.VeevaConnectorProfileCredentials{
+					Username: ptr.String("__Username__"),
+					Password: ptr.String("__Password__"),
+				},
+				Zendesk: &types.ZendeskConnectorProfileCredentials{
+					ClientId:     ptr.String("__ClientId__"),
+					ClientSecret: ptr.String("__ClientSecret__"),
+					AccessToken:  ptr.String("__AccessToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+				},
+				SAPOData: &types.SAPODataConnectorProfileCredentials{
+					BasicAuthCredentials: &types.BasicAuthCredentials{
+						Username: ptr.String("__Username__"),
+						Password: ptr.String("__Password__"),
+					},
+					OAuthCredentials: &types.OAuthCredentials{
+						ClientId:     ptr.String("__ClientId__"),
+						ClientSecret: ptr.String("__ClientSecret__"),
+						AccessToken:  ptr.String("__AccessToken__"),
+						RefreshToken: ptr.String("__RefreshToken__"),
+						OAuthRequest: &types.ConnectorOAuthRequest{
+							AuthCode:    ptr.String("__AuthCode__"),
+							RedirectUri: ptr.String("__RedirectUri__"),
+						},
+					},
+				},
+				CustomConnector: &types.CustomConnectorProfileCredentials{
+					AuthenticationType: types.AuthenticationType("OAUTH2"),
+					Basic: &types.BasicAuthCredentials{
+						Username: ptr.String("__Username__"),
+						Password: ptr.String("__Password__"),
+					},
+					Oauth2: &types.OAuth2Credentials{
+						ClientId:     ptr.String("__ClientId__"),
+						ClientSecret: ptr.String("__ClientSecret__"),
+						AccessToken:  ptr.String("__AccessToken__"),
+						RefreshToken: ptr.String("__RefreshToken__"),
+						OAuthRequest: &types.ConnectorOAuthRequest{
+							AuthCode:    ptr.String("__AuthCode__"),
+							RedirectUri: ptr.String("__RedirectUri__"),
+						},
+					},
+					ApiKey: &types.ApiKeyCredentials{
+						ApiKey:       ptr.String("__ApiKey__"),
+						ApiSecretKey: ptr.String("__ApiSecretKey__"),
+					},
+					Custom: &types.CustomAuthCredentials{
+						CustomAuthenticationType: ptr.String("__CustomAuthenticationType__"),
+						CredentialsMap: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+				Pardot: &types.PardotConnectorProfileCredentials{
+					AccessToken:  ptr.String("__AccessToken__"),
+					RefreshToken: ptr.String("__RefreshToken__"),
+					OAuthRequest: &types.ConnectorOAuthRequest{
+						AuthCode:    ptr.String("__AuthCode__"),
+						RedirectUri: ptr.String("__RedirectUri__"),
+					},
+					ClientCredentialsArn: ptr.String("__ClientCredentialsArn__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2423,7 +5292,13 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelFlowExecutions(context.Background(), &CancelFlowExecutionsInput{})
+	_, opErr := svc.CancelFlowExecutions(context.Background(), &CancelFlowExecutionsInput{
+		FlowName: ptr.String("__FlowName__"),
+		ExecutionIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2448,7 +5323,9 @@ func TestCheckResponseSnapshot_Error_UnsupportedOperationException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StopFlow(context.Background(), &StopFlowInput{})
+	_, opErr := svc.StopFlow(context.Background(), &StopFlowInput{
+		FlowName: ptr.String("__FlowName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2473,7 +5350,13 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelFlowExecutions(context.Background(), &CancelFlowExecutionsInput{})
+	_, opErr := svc.CancelFlowExecutions(context.Background(), &CancelFlowExecutionsInput{
+		FlowName: ptr.String("__FlowName__"),
+		ExecutionIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

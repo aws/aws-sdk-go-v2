@@ -116,7 +116,11 @@ func TestCheckResponseSnapshot_DeleteConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{})
+	got, err := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{
+		ClientId:           ptr.String("__ClientId__"),
+		CleanSession:       true,
+		PreventWillMessage: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -137,7 +141,10 @@ func TestCheckResponseSnapshot_DeleteThingShadow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteThingShadow(context.Background(), &DeleteThingShadowInput{})
+	got, err := svc.DeleteThingShadow(context.Background(), &DeleteThingShadowInput{
+		ThingName:  ptr.String("__ThingName__"),
+		ShadowName: ptr.String("__ShadowName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -171,7 +178,10 @@ func TestCheckResponseSnapshot_GetConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConnection(context.Background(), &GetConnectionInput{})
+	got, err := svc.GetConnection(context.Background(), &GetConnectionInput{
+		ClientId:                 ptr.String("__ClientId__"),
+		IncludeSocketInformation: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -196,7 +206,9 @@ func TestCheckResponseSnapshot_GetRetainedMessage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRetainedMessage(context.Background(), &GetRetainedMessageInput{})
+	got, err := svc.GetRetainedMessage(context.Background(), &GetRetainedMessageInput{
+		Topic: ptr.String("__Topic__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -217,7 +229,10 @@ func TestCheckResponseSnapshot_GetThingShadow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetThingShadow(context.Background(), &GetThingShadowInput{})
+	got, err := svc.GetThingShadow(context.Background(), &GetThingShadowInput{
+		ThingName:  ptr.String("__ThingName__"),
+		ShadowName: ptr.String("__ShadowName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -243,7 +258,11 @@ func TestCheckResponseSnapshot_ListNamedShadowsForThing(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListNamedShadowsForThing(context.Background(), &ListNamedShadowsForThingInput{})
+	got, err := svc.ListNamedShadowsForThing(context.Background(), &ListNamedShadowsForThingInput{
+		ThingName: ptr.String("__ThingName__"),
+		NextToken: ptr.String("__NextToken__"),
+		PageSize:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -278,7 +297,10 @@ func TestCheckResponseSnapshot_ListRetainedMessages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRetainedMessages(context.Background(), &ListRetainedMessagesInput{})
+	got, err := svc.ListRetainedMessages(context.Background(), &ListRetainedMessagesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -309,7 +331,11 @@ func TestCheckResponseSnapshot_ListSubscriptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSubscriptions(context.Background(), &ListSubscriptionsInput{})
+	got, err := svc.ListSubscriptions(context.Background(), &ListSubscriptionsInput{
+		ClientId:   ptr.String("__ClientId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -328,7 +354,18 @@ func TestCheckResponseSnapshot_Publish(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Publish(context.Background(), &PublishInput{})
+	got, err := svc.Publish(context.Background(), &PublishInput{
+		Topic:                  ptr.String("__Topic__"),
+		Qos:                    1,
+		Retain:                 true,
+		Payload:                []byte("blob"),
+		UserProperties:         ptr.String("__UserProperties__"),
+		PayloadFormatIndicator: types.PayloadFormatIndicator("UNSPECIFIED_BYTES"),
+		ContentType:            ptr.String("__ContentType__"),
+		ResponseTopic:          ptr.String("__ResponseTopic__"),
+		CorrelationData:        ptr.String("__CorrelationData__"),
+		MessageExpiry:          1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -350,7 +387,18 @@ func TestCheckResponseSnapshot_SendDirectMessage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendDirectMessage(context.Background(), &SendDirectMessageInput{})
+	got, err := svc.SendDirectMessage(context.Background(), &SendDirectMessageInput{
+		ClientId:               ptr.String("__ClientId__"),
+		Topic:                  ptr.String("__Topic__"),
+		ContentType:            ptr.String("__ContentType__"),
+		ResponseTopic:          ptr.String("__ResponseTopic__"),
+		Confirmation:           true,
+		Timeout:                1,
+		Payload:                []byte("blob"),
+		UserProperties:         ptr.String("__UserProperties__"),
+		PayloadFormatIndicator: types.PayloadFormatIndicator("UNSPECIFIED_BYTES"),
+		CorrelationData:        ptr.String("__CorrelationData__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -371,7 +419,11 @@ func TestCheckResponseSnapshot_UpdateThingShadow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateThingShadow(context.Background(), &UpdateThingShadowInput{})
+	got, err := svc.UpdateThingShadow(context.Background(), &UpdateThingShadowInput{
+		ThingName:  ptr.String("__ThingName__"),
+		ShadowName: ptr.String("__ShadowName__"),
+		Payload:    []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -392,7 +444,11 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateThingShadow(context.Background(), &UpdateThingShadowInput{})
+	_, opErr := svc.UpdateThingShadow(context.Background(), &UpdateThingShadowInput{
+		ThingName:  ptr.String("__ThingName__"),
+		ShadowName: ptr.String("__ShadowName__"),
+		Payload:    []byte("blob"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -417,7 +473,11 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{})
+	_, opErr := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{
+		ClientId:           ptr.String("__ClientId__"),
+		CleanSession:       true,
+		PreventWillMessage: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -442,7 +502,18 @@ func TestCheckResponseSnapshot_Error_GatewayTimeoutException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SendDirectMessage(context.Background(), &SendDirectMessageInput{})
+	_, opErr := svc.SendDirectMessage(context.Background(), &SendDirectMessageInput{
+		ClientId:               ptr.String("__ClientId__"),
+		Topic:                  ptr.String("__Topic__"),
+		ContentType:            ptr.String("__ContentType__"),
+		ResponseTopic:          ptr.String("__ResponseTopic__"),
+		Confirmation:           true,
+		Timeout:                1,
+		Payload:                []byte("blob"),
+		UserProperties:         ptr.String("__UserProperties__"),
+		PayloadFormatIndicator: types.PayloadFormatIndicator("UNSPECIFIED_BYTES"),
+		CorrelationData:        ptr.String("__CorrelationData__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -467,7 +538,11 @@ func TestCheckResponseSnapshot_Error_InternalFailureException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{})
+	_, opErr := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{
+		ClientId:           ptr.String("__ClientId__"),
+		CleanSession:       true,
+		PreventWillMessage: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -492,7 +567,11 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{})
+	_, opErr := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{
+		ClientId:           ptr.String("__ClientId__"),
+		CleanSession:       true,
+		PreventWillMessage: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -517,7 +596,10 @@ func TestCheckResponseSnapshot_Error_MethodNotAllowedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteThingShadow(context.Background(), &DeleteThingShadowInput{})
+	_, opErr := svc.DeleteThingShadow(context.Background(), &DeleteThingShadowInput{
+		ThingName:  ptr.String("__ThingName__"),
+		ShadowName: ptr.String("__ShadowName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -542,7 +624,18 @@ func TestCheckResponseSnapshot_Error_RequestEntityTooLargeException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SendDirectMessage(context.Background(), &SendDirectMessageInput{})
+	_, opErr := svc.SendDirectMessage(context.Background(), &SendDirectMessageInput{
+		ClientId:               ptr.String("__ClientId__"),
+		Topic:                  ptr.String("__Topic__"),
+		ContentType:            ptr.String("__ContentType__"),
+		ResponseTopic:          ptr.String("__ResponseTopic__"),
+		Confirmation:           true,
+		Timeout:                1,
+		Payload:                []byte("blob"),
+		UserProperties:         ptr.String("__UserProperties__"),
+		PayloadFormatIndicator: types.PayloadFormatIndicator("UNSPECIFIED_BYTES"),
+		CorrelationData:        ptr.String("__CorrelationData__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -567,7 +660,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{})
+	_, opErr := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{
+		ClientId:           ptr.String("__ClientId__"),
+		CleanSession:       true,
+		PreventWillMessage: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -592,7 +689,10 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteThingShadow(context.Background(), &DeleteThingShadowInput{})
+	_, opErr := svc.DeleteThingShadow(context.Background(), &DeleteThingShadowInput{
+		ThingName:  ptr.String("__ThingName__"),
+		ShadowName: ptr.String("__ShadowName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -617,7 +717,11 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{})
+	_, opErr := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{
+		ClientId:           ptr.String("__ClientId__"),
+		CleanSession:       true,
+		PreventWillMessage: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -642,7 +746,10 @@ func TestCheckResponseSnapshot_Error_UnauthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteThingShadow(context.Background(), &DeleteThingShadowInput{})
+	_, opErr := svc.DeleteThingShadow(context.Background(), &DeleteThingShadowInput{
+		ThingName:  ptr.String("__ThingName__"),
+		ShadowName: ptr.String("__ShadowName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -667,7 +774,10 @@ func TestCheckResponseSnapshot_Error_UnsupportedDocumentEncodingException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteThingShadow(context.Background(), &DeleteThingShadowInput{})
+	_, opErr := svc.DeleteThingShadow(context.Background(), &DeleteThingShadowInput{
+		ThingName:  ptr.String("__ThingName__"),
+		ShadowName: ptr.String("__ShadowName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

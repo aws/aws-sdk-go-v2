@@ -119,7 +119,14 @@ func TestCheckResponseSnapshot_AddProfilePermission(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddProfilePermission(context.Background(), &AddProfilePermissionInput{})
+	got, err := svc.AddProfilePermission(context.Background(), &AddProfilePermissionInput{
+		ProfileName:    ptr.String("__ProfileName__"),
+		ProfileVersion: ptr.String("__ProfileVersion__"),
+		Action:         ptr.String("__Action__"),
+		Principal:      ptr.String("__Principal__"),
+		RevisionId:     ptr.String("__RevisionId__"),
+		StatementId:    ptr.String("__StatementId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -138,7 +145,9 @@ func TestCheckResponseSnapshot_CancelSigningProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelSigningProfile(context.Background(), &CancelSigningProfileInput{})
+	got, err := svc.CancelSigningProfile(context.Background(), &CancelSigningProfileInput{
+		ProfileName: ptr.String("__ProfileName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -202,7 +211,9 @@ func TestCheckResponseSnapshot_DescribeSigningJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSigningJob(context.Background(), &DescribeSigningJobInput{})
+	got, err := svc.DescribeSigningJob(context.Background(), &DescribeSigningJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -226,7 +237,16 @@ func TestCheckResponseSnapshot_GetRevocationStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRevocationStatus(context.Background(), &GetRevocationStatusInput{})
+	got, err := svc.GetRevocationStatus(context.Background(), &GetRevocationStatusInput{
+		SignatureTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		PlatformId:         ptr.String("__PlatformId__"),
+		ProfileVersionArn:  ptr.String("__ProfileVersionArn__"),
+		JobArn:             ptr.String("__JobArn__"),
+		CertificateHashes: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -276,7 +296,9 @@ func TestCheckResponseSnapshot_GetSigningPlatform(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSigningPlatform(context.Background(), &GetSigningPlatformInput{})
+	got, err := svc.GetSigningPlatform(context.Background(), &GetSigningPlatformInput{
+		PlatformId: ptr.String("__PlatformId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -329,7 +351,10 @@ func TestCheckResponseSnapshot_GetSigningProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSigningProfile(context.Background(), &GetSigningProfileInput{})
+	got, err := svc.GetSigningProfile(context.Background(), &GetSigningProfileInput{
+		ProfileName:  ptr.String("__ProfileName__"),
+		ProfileOwner: ptr.String("__ProfileOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -366,7 +391,10 @@ func TestCheckResponseSnapshot_ListProfilePermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProfilePermissions(context.Background(), &ListProfilePermissionsInput{})
+	got, err := svc.ListProfilePermissions(context.Background(), &ListProfilePermissionsInput{
+		ProfileName: ptr.String("__ProfileName__"),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -447,7 +475,17 @@ func TestCheckResponseSnapshot_ListSigningJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSigningJobs(context.Background(), &ListSigningJobsInput{})
+	got, err := svc.ListSigningJobs(context.Background(), &ListSigningJobsInput{
+		Status:                 types.SigningStatus("InProgress"),
+		PlatformId:             ptr.String("__PlatformId__"),
+		RequestedBy:            ptr.String("__RequestedBy__"),
+		MaxResults:             ptr.Int32(1),
+		NextToken:              ptr.String("__NextToken__"),
+		IsRevoked:              true,
+		SignatureExpiresBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SignatureExpiresAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		JobInvoker:             ptr.String("__JobInvoker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -534,7 +572,13 @@ func TestCheckResponseSnapshot_ListSigningPlatforms(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSigningPlatforms(context.Background(), &ListSigningPlatformsInput{})
+	got, err := svc.ListSigningPlatforms(context.Background(), &ListSigningPlatformsInput{
+		Category:   ptr.String("__Category__"),
+		Partner:    ptr.String("__Partner__"),
+		Target:     ptr.String("__Target__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -601,7 +645,16 @@ func TestCheckResponseSnapshot_ListSigningProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSigningProfiles(context.Background(), &ListSigningProfilesInput{})
+	got, err := svc.ListSigningProfiles(context.Background(), &ListSigningProfilesInput{
+		IncludeCanceled: true,
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+		PlatformId:      ptr.String("__PlatformId__"),
+		Statuses: []types.SigningProfileStatus{
+			types.SigningProfileStatus("Active"),
+			types.SigningProfileStatus("Active"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -624,7 +677,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -647,7 +702,30 @@ func TestCheckResponseSnapshot_PutSigningProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutSigningProfile(context.Background(), &PutSigningProfileInput{})
+	got, err := svc.PutSigningProfile(context.Background(), &PutSigningProfileInput{
+		ProfileName: ptr.String("__ProfileName__"),
+		SigningMaterial: &types.SigningMaterial{
+			CertificateArn: ptr.String("__CertificateArn__"),
+		},
+		SignatureValidityPeriod: &types.SignatureValidityPeriod{
+			Value: 1,
+			Type:  types.ValidityType("DAYS"),
+		},
+		PlatformId: ptr.String("__PlatformId__"),
+		Overrides: &types.SigningPlatformOverrides{
+			SigningConfiguration: &types.SigningConfigurationOverrides{
+				EncryptionAlgorithm: types.EncryptionAlgorithm("RSA"),
+				HashAlgorithm:       types.HashAlgorithm("SHA1"),
+			},
+			SigningImageFormat: types.ImageFormat("JSON"),
+		},
+		SigningParameters: map[string]string{
+			"key0": "__Value__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -668,7 +746,11 @@ func TestCheckResponseSnapshot_RemoveProfilePermission(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveProfilePermission(context.Background(), &RemoveProfilePermissionInput{})
+	got, err := svc.RemoveProfilePermission(context.Background(), &RemoveProfilePermissionInput{
+		ProfileName: ptr.String("__ProfileName__"),
+		RevisionId:  ptr.String("__RevisionId__"),
+		StatementId: ptr.String("__StatementId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -687,7 +769,11 @@ func TestCheckResponseSnapshot_RevokeSignature(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RevokeSignature(context.Background(), &RevokeSignatureInput{})
+	got, err := svc.RevokeSignature(context.Background(), &RevokeSignatureInput{
+		JobId:    ptr.String("__JobId__"),
+		JobOwner: ptr.String("__JobOwner__"),
+		Reason:   ptr.String("__Reason__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -706,7 +792,12 @@ func TestCheckResponseSnapshot_RevokeSigningProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RevokeSigningProfile(context.Background(), &RevokeSigningProfileInput{})
+	got, err := svc.RevokeSigningProfile(context.Background(), &RevokeSigningProfileInput{
+		ProfileName:    ptr.String("__ProfileName__"),
+		ProfileVersion: ptr.String("__ProfileVersion__"),
+		Reason:         ptr.String("__Reason__"),
+		EffectiveTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -732,7 +823,12 @@ func TestCheckResponseSnapshot_SignPayload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SignPayload(context.Background(), &SignPayloadInput{})
+	got, err := svc.SignPayload(context.Background(), &SignPayloadInput{
+		ProfileName:   ptr.String("__ProfileName__"),
+		ProfileOwner:  ptr.String("__ProfileOwner__"),
+		Payload:       []byte("blob"),
+		PayloadFormat: ptr.String("__PayloadFormat__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -754,7 +850,24 @@ func TestCheckResponseSnapshot_StartSigningJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartSigningJob(context.Background(), &StartSigningJobInput{})
+	got, err := svc.StartSigningJob(context.Background(), &StartSigningJobInput{
+		Source: &types.Source{
+			S3: &types.S3Source{
+				BucketName: ptr.String("__BucketName__"),
+				Key:        ptr.String("__Key__"),
+				Version:    ptr.String("__Version__"),
+			},
+		},
+		Destination: &types.Destination{
+			S3: &types.S3Destination{
+				BucketName: ptr.String("__BucketName__"),
+				Prefix:     ptr.String("__Prefix__"),
+			},
+		},
+		ProfileName:        ptr.String("__ProfileName__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ProfileOwner:       ptr.String("__ProfileOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -773,7 +886,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -792,7 +910,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -804,7 +928,7 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	want := &types.AccessDeniedException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("AccessDeniedException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AccessDeniedException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -814,7 +938,14 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddProfilePermission(context.Background(), &AddProfilePermissionInput{})
+	_, opErr := svc.AddProfilePermission(context.Background(), &AddProfilePermissionInput{
+		ProfileName:    ptr.String("__ProfileName__"),
+		ProfileVersion: ptr.String("__ProfileVersion__"),
+		Action:         ptr.String("__Action__"),
+		Principal:      ptr.String("__Principal__"),
+		RevisionId:     ptr.String("__RevisionId__"),
+		StatementId:    ptr.String("__StatementId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -830,7 +961,7 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 	want := &types.BadRequestException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("BadRequestException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("BadRequestException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -840,7 +971,9 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -856,7 +989,7 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 	want := &types.ConflictException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("ConflictException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ConflictException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -866,7 +999,14 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddProfilePermission(context.Background(), &AddProfilePermissionInput{})
+	_, opErr := svc.AddProfilePermission(context.Background(), &AddProfilePermissionInput{
+		ProfileName:    ptr.String("__ProfileName__"),
+		ProfileVersion: ptr.String("__ProfileVersion__"),
+		Action:         ptr.String("__Action__"),
+		Principal:      ptr.String("__Principal__"),
+		RevisionId:     ptr.String("__RevisionId__"),
+		StatementId:    ptr.String("__StatementId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -882,7 +1022,7 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_InternalServiceErrorException(t *testing.T) {
 	want := &types.InternalServiceErrorException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("InternalServiceErrorException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InternalServiceErrorException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -892,7 +1032,14 @@ func TestCheckResponseSnapshot_Error_InternalServiceErrorException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddProfilePermission(context.Background(), &AddProfilePermissionInput{})
+	_, opErr := svc.AddProfilePermission(context.Background(), &AddProfilePermissionInput{
+		ProfileName:    ptr.String("__ProfileName__"),
+		ProfileVersion: ptr.String("__ProfileVersion__"),
+		Action:         ptr.String("__Action__"),
+		Principal:      ptr.String("__Principal__"),
+		RevisionId:     ptr.String("__RevisionId__"),
+		StatementId:    ptr.String("__StatementId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -908,7 +1055,7 @@ func TestCheckResponseSnapshot_Error_InternalServiceErrorException(t *testing.T)
 func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 	want := &types.NotFoundException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("NotFoundException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("NotFoundException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -918,7 +1065,9 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -934,7 +1083,7 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 	want := &types.ResourceNotFoundException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("ResourceNotFoundException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ResourceNotFoundException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -944,7 +1093,14 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddProfilePermission(context.Background(), &AddProfilePermissionInput{})
+	_, opErr := svc.AddProfilePermission(context.Background(), &AddProfilePermissionInput{
+		ProfileName:    ptr.String("__ProfileName__"),
+		ProfileVersion: ptr.String("__ProfileVersion__"),
+		Action:         ptr.String("__Action__"),
+		Principal:      ptr.String("__Principal__"),
+		RevisionId:     ptr.String("__RevisionId__"),
+		StatementId:    ptr.String("__StatementId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -960,7 +1116,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ServiceLimitExceededException(t *testing.T) {
 	want := &types.ServiceLimitExceededException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("ServiceLimitExceededException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ServiceLimitExceededException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -970,7 +1126,14 @@ func TestCheckResponseSnapshot_Error_ServiceLimitExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddProfilePermission(context.Background(), &AddProfilePermissionInput{})
+	_, opErr := svc.AddProfilePermission(context.Background(), &AddProfilePermissionInput{
+		ProfileName:    ptr.String("__ProfileName__"),
+		ProfileVersion: ptr.String("__ProfileVersion__"),
+		Action:         ptr.String("__Action__"),
+		Principal:      ptr.String("__Principal__"),
+		RevisionId:     ptr.String("__RevisionId__"),
+		StatementId:    ptr.String("__StatementId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -986,7 +1149,7 @@ func TestCheckResponseSnapshot_Error_ServiceLimitExceededException(t *testing.T)
 func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 	want := &types.ThrottlingException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("ThrottlingException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ThrottlingException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -996,7 +1159,24 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartSigningJob(context.Background(), &StartSigningJobInput{})
+	_, opErr := svc.StartSigningJob(context.Background(), &StartSigningJobInput{
+		Source: &types.Source{
+			S3: &types.S3Source{
+				BucketName: ptr.String("__BucketName__"),
+				Key:        ptr.String("__Key__"),
+				Version:    ptr.String("__Version__"),
+			},
+		},
+		Destination: &types.Destination{
+			S3: &types.S3Destination{
+				BucketName: ptr.String("__BucketName__"),
+				Prefix:     ptr.String("__Prefix__"),
+			},
+		},
+		ProfileName:        ptr.String("__ProfileName__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ProfileOwner:       ptr.String("__ProfileOwner__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1012,7 +1192,7 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 	want := &types.TooManyRequestsException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("TooManyRequestsException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("TooManyRequestsException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1022,7 +1202,14 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddProfilePermission(context.Background(), &AddProfilePermissionInput{})
+	_, opErr := svc.AddProfilePermission(context.Background(), &AddProfilePermissionInput{
+		ProfileName:    ptr.String("__ProfileName__"),
+		ProfileVersion: ptr.String("__ProfileVersion__"),
+		Action:         ptr.String("__Action__"),
+		Principal:      ptr.String("__Principal__"),
+		RevisionId:     ptr.String("__RevisionId__"),
+		StatementId:    ptr.String("__StatementId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1038,7 +1225,7 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 	want := &types.ValidationException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("ValidationException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ValidationException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1048,7 +1235,14 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddProfilePermission(context.Background(), &AddProfilePermissionInput{})
+	_, opErr := svc.AddProfilePermission(context.Background(), &AddProfilePermissionInput{
+		ProfileName:    ptr.String("__ProfileName__"),
+		ProfileVersion: ptr.String("__ProfileVersion__"),
+		Action:         ptr.String("__Action__"),
+		Principal:      ptr.String("__Principal__"),
+		RevisionId:     ptr.String("__RevisionId__"),
+		StatementId:    ptr.String("__StatementId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

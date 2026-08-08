@@ -117,7 +117,21 @@ func TestCheckResponseSnapshot_AddTagsToResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{})
+	got, err := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -158,7 +172,11 @@ func TestCheckResponseSnapshot_ApplyPendingMaintenanceAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ApplyPendingMaintenanceAction(context.Background(), &ApplyPendingMaintenanceActionInput{})
+	got, err := svc.ApplyPendingMaintenanceAction(context.Background(), &ApplyPendingMaintenanceActionInput{
+		ReplicationInstanceArn: ptr.String("__ReplicationInstanceArn__"),
+		ApplyAction:            ptr.String("__ApplyAction__"),
+		OptInType:              ptr.String("__OptInType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -190,7 +208,24 @@ func TestCheckResponseSnapshot_BatchStartRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchStartRecommendations(context.Background(), &BatchStartRecommendationsInput{})
+	got, err := svc.BatchStartRecommendations(context.Background(), &BatchStartRecommendationsInput{
+		Data: []types.StartRecommendationsRequestEntry{
+			{
+				DatabaseId: ptr.String("__DatabaseId__"),
+				Settings: &types.RecommendationSettings{
+					InstanceSizingType: ptr.String("__InstanceSizingType__"),
+					WorkloadType:       ptr.String("__WorkloadType__"),
+				},
+			},
+			{
+				DatabaseId: ptr.String("__DatabaseId__"),
+				Settings: &types.RecommendationSettings{
+					InstanceSizingType: ptr.String("__InstanceSizingType__"),
+					WorkloadType:       ptr.String("__WorkloadType__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -234,7 +269,10 @@ func TestCheckResponseSnapshot_CancelMetadataModelConversion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelMetadataModelConversion(context.Background(), &CancelMetadataModelConversionInput{})
+	got, err := svc.CancelMetadataModelConversion(context.Background(), &CancelMetadataModelConversionInput{
+		MigrationProjectIdentifier: ptr.String("__MigrationProjectIdentifier__"),
+		RequestIdentifier:          ptr.String("__RequestIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -278,7 +316,10 @@ func TestCheckResponseSnapshot_CancelMetadataModelCreation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelMetadataModelCreation(context.Background(), &CancelMetadataModelCreationInput{})
+	got, err := svc.CancelMetadataModelCreation(context.Background(), &CancelMetadataModelCreationInput{
+		MigrationProjectIdentifier: ptr.String("__MigrationProjectIdentifier__"),
+		RequestIdentifier:          ptr.String("__RequestIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -324,7 +365,9 @@ func TestCheckResponseSnapshot_CancelReplicationTaskAssessmentRun(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelReplicationTaskAssessmentRun(context.Background(), &CancelReplicationTaskAssessmentRunInput{})
+	got, err := svc.CancelReplicationTaskAssessmentRun(context.Background(), &CancelReplicationTaskAssessmentRunInput{
+		ReplicationTaskAssessmentRunArn: ptr.String("__ReplicationTaskAssessmentRunArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -403,7 +446,49 @@ func TestCheckResponseSnapshot_CreateDataMigration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataMigration(context.Background(), &CreateDataMigrationInput{})
+	got, err := svc.CreateDataMigration(context.Background(), &CreateDataMigrationInput{
+		DataMigrationName:          ptr.String("__DataMigrationName__"),
+		MigrationProjectIdentifier: ptr.String("__MigrationProjectIdentifier__"),
+		DataMigrationType:          types.MigrationTypeValue("full-load"),
+		ServiceAccessRoleArn:       ptr.String("__ServiceAccessRoleArn__"),
+		EnableCloudwatchLogs:       ptr.Bool(true),
+		SourceDataSettings: []types.SourceDataSetting{
+			{
+				CDCStartPosition: ptr.String("__CDCStartPosition__"),
+				CDCStartTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CDCStopTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SlotName:         ptr.String("__SlotName__"),
+			},
+			{
+				CDCStartPosition: ptr.String("__CDCStartPosition__"),
+				CDCStartTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CDCStopTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SlotName:         ptr.String("__SlotName__"),
+			},
+		},
+		TargetDataSettings: []types.TargetDataSetting{
+			{
+				TablePreparationMode: types.TablePreparationMode("do-nothing"),
+			},
+			{
+				TablePreparationMode: types.TablePreparationMode("do-nothing"),
+			},
+		},
+		NumberOfJobs: ptr.Int32(1),
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+		SelectionRules: ptr.String("__SelectionRules__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -440,7 +525,33 @@ func TestCheckResponseSnapshot_CreateDataProvider(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataProvider(context.Background(), &CreateDataProviderInput{})
+	got, err := svc.CreateDataProvider(context.Background(), &CreateDataProviderInput{
+		DataProviderName: ptr.String("__DataProviderName__"),
+		Description:      ptr.String("__Description__"),
+		Engine:           ptr.String("__Engine__"),
+		Virtual:          ptr.Bool(true),
+		Settings: &types.DataProviderSettingsMemberRedshiftSettings{
+			Value: types.RedshiftDataProviderSettings{
+				ServerName:      ptr.String("__ServerName__"),
+				Port:            ptr.Int32(1),
+				DatabaseName:    ptr.String("__DatabaseName__"),
+				S3Path:          ptr.String("__S3Path__"),
+				S3AccessRoleArn: ptr.String("__S3AccessRoleArn__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -825,7 +936,377 @@ func TestCheckResponseSnapshot_CreateEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEndpoint(context.Background(), &CreateEndpointInput{})
+	got, err := svc.CreateEndpoint(context.Background(), &CreateEndpointInput{
+		EndpointIdentifier:        ptr.String("__EndpointIdentifier__"),
+		EndpointType:              types.ReplicationEndpointTypeValue("source"),
+		EngineName:                ptr.String("__EngineName__"),
+		Username:                  ptr.String("__Username__"),
+		Password:                  ptr.String("__Password__"),
+		ServerName:                ptr.String("__ServerName__"),
+		Port:                      ptr.Int32(1),
+		DatabaseName:              ptr.String("__DatabaseName__"),
+		ExtraConnectionAttributes: ptr.String("__ExtraConnectionAttributes__"),
+		KmsKeyId:                  ptr.String("__KmsKeyId__"),
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+		CertificateArn:          ptr.String("__CertificateArn__"),
+		SslMode:                 types.DmsSslModeValue("none"),
+		ServiceAccessRoleArn:    ptr.String("__ServiceAccessRoleArn__"),
+		ExternalTableDefinition: ptr.String("__ExternalTableDefinition__"),
+		DynamoDbSettings: &types.DynamoDbSettings{
+			ServiceAccessRoleArn: ptr.String("__ServiceAccessRoleArn__"),
+		},
+		S3Settings: &types.S3Settings{
+			ServiceAccessRoleArn:                 ptr.String("__ServiceAccessRoleArn__"),
+			ExternalTableDefinition:              ptr.String("__ExternalTableDefinition__"),
+			CsvRowDelimiter:                      ptr.String("__CsvRowDelimiter__"),
+			CsvDelimiter:                         ptr.String("__CsvDelimiter__"),
+			BucketFolder:                         ptr.String("__BucketFolder__"),
+			BucketName:                           ptr.String("__BucketName__"),
+			CompressionType:                      types.CompressionTypeValue("none"),
+			EncryptionMode:                       types.EncryptionModeValue("sse-s3"),
+			ServerSideEncryptionKmsKeyId:         ptr.String("__ServerSideEncryptionKmsKeyId__"),
+			DataFormat:                           types.DataFormatValue("csv"),
+			EncodingType:                         types.EncodingTypeValue("plain"),
+			DictPageSizeLimit:                    ptr.Int32(1),
+			RowGroupLength:                       ptr.Int32(1),
+			DataPageSize:                         ptr.Int32(1),
+			ParquetVersion:                       types.ParquetVersionValue("parquet-1-0"),
+			EnableStatistics:                     ptr.Bool(true),
+			IncludeOpForFullLoad:                 ptr.Bool(true),
+			CdcInsertsOnly:                       ptr.Bool(true),
+			TimestampColumnName:                  ptr.String("__TimestampColumnName__"),
+			ParquetTimestampInMillisecond:        ptr.Bool(true),
+			CdcInsertsAndUpdates:                 ptr.Bool(true),
+			DatePartitionEnabled:                 ptr.Bool(true),
+			DatePartitionSequence:                types.DatePartitionSequenceValue("YYYYMMDD"),
+			DatePartitionDelimiter:               types.DatePartitionDelimiterValue("SLASH"),
+			UseCsvNoSupValue:                     ptr.Bool(true),
+			CsvNoSupValue:                        ptr.String("__CsvNoSupValue__"),
+			PreserveTransactions:                 ptr.Bool(true),
+			CdcPath:                              ptr.String("__CdcPath__"),
+			UseTaskStartTimeForFullLoadTimestamp: ptr.Bool(true),
+			CannedAclForObjects:                  types.CannedAclForObjectsValue("none"),
+			AddColumnName:                        ptr.Bool(true),
+			CdcMaxBatchInterval:                  ptr.Int32(1),
+			CdcMinFileSize:                       ptr.Int32(1),
+			CsvNullValue:                         ptr.String("__CsvNullValue__"),
+			IgnoreHeaderRows:                     ptr.Int32(1),
+			MaxFileSize:                          ptr.Int32(1),
+			Rfc4180:                              ptr.Bool(true),
+			DatePartitionTimezone:                ptr.String("__DatePartitionTimezone__"),
+			AddTrailingPaddingCharacter:          ptr.Bool(true),
+			ExpectedBucketOwner:                  ptr.String("__ExpectedBucketOwner__"),
+			GlueCatalogGeneration:                ptr.Bool(true),
+		},
+		DmsTransferSettings: &types.DmsTransferSettings{
+			ServiceAccessRoleArn: ptr.String("__ServiceAccessRoleArn__"),
+			BucketName:           ptr.String("__BucketName__"),
+		},
+		MongoDbSettings: &types.MongoDbSettings{
+			Username:                    ptr.String("__Username__"),
+			Password:                    ptr.String("__Password__"),
+			ServerName:                  ptr.String("__ServerName__"),
+			Port:                        ptr.Int32(1),
+			DatabaseName:                ptr.String("__DatabaseName__"),
+			AuthType:                    types.AuthTypeValue("no"),
+			AuthMechanism:               types.AuthMechanismValue("default"),
+			NestingLevel:                types.NestingLevelValue("none"),
+			ExtractDocId:                ptr.String("__ExtractDocId__"),
+			DocsToInvestigate:           ptr.String("__DocsToInvestigate__"),
+			AuthSource:                  ptr.String("__AuthSource__"),
+			KmsKeyId:                    ptr.String("__KmsKeyId__"),
+			SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+			UseUpdateLookUp:             ptr.Bool(true),
+			ReplicateShardCollections:   ptr.Bool(true),
+		},
+		KinesisSettings: &types.KinesisSettings{
+			StreamArn:                   ptr.String("__StreamArn__"),
+			MessageFormat:               types.MessageFormatValue("json"),
+			ServiceAccessRoleArn:        ptr.String("__ServiceAccessRoleArn__"),
+			IncludeTransactionDetails:   ptr.Bool(true),
+			IncludePartitionValue:       ptr.Bool(true),
+			PartitionIncludeSchemaTable: ptr.Bool(true),
+			IncludeTableAlterOperations: ptr.Bool(true),
+			IncludeControlDetails:       ptr.Bool(true),
+			IncludeNullAndEmpty:         ptr.Bool(true),
+			NoHexPrefix:                 ptr.Bool(true),
+			UseLargeIntegerValue:        ptr.Bool(true),
+		},
+		KafkaSettings: &types.KafkaSettings{
+			Broker:                             ptr.String("__Broker__"),
+			Topic:                              ptr.String("__Topic__"),
+			MessageFormat:                      types.MessageFormatValue("json"),
+			IncludeTransactionDetails:          ptr.Bool(true),
+			IncludePartitionValue:              ptr.Bool(true),
+			PartitionIncludeSchemaTable:        ptr.Bool(true),
+			IncludeTableAlterOperations:        ptr.Bool(true),
+			IncludeControlDetails:              ptr.Bool(true),
+			MessageMaxBytes:                    ptr.Int32(1),
+			IncludeNullAndEmpty:                ptr.Bool(true),
+			SecurityProtocol:                   types.KafkaSecurityProtocol("plaintext"),
+			SslClientCertificateArn:            ptr.String("__SslClientCertificateArn__"),
+			SslClientKeyArn:                    ptr.String("__SslClientKeyArn__"),
+			SslClientKeyPassword:               ptr.String("__SslClientKeyPassword__"),
+			SslCaCertificateArn:                ptr.String("__SslCaCertificateArn__"),
+			SaslUsername:                       ptr.String("__SaslUsername__"),
+			SaslPassword:                       ptr.String("__SaslPassword__"),
+			NoHexPrefix:                        ptr.Bool(true),
+			SaslMechanism:                      types.KafkaSaslMechanism("scram-sha-512"),
+			SslEndpointIdentificationAlgorithm: types.KafkaSslEndpointIdentificationAlgorithm("none"),
+			UseLargeIntegerValue:               ptr.Bool(true),
+		},
+		ElasticsearchSettings: &types.ElasticsearchSettings{
+			ServiceAccessRoleArn:    ptr.String("__ServiceAccessRoleArn__"),
+			EndpointUri:             ptr.String("__EndpointUri__"),
+			FullLoadErrorPercentage: ptr.Int32(1),
+			ErrorRetryDuration:      ptr.Int32(1),
+			UseNewMappingType:       ptr.Bool(true),
+		},
+		NeptuneSettings: &types.NeptuneSettings{
+			ServiceAccessRoleArn: ptr.String("__ServiceAccessRoleArn__"),
+			S3BucketName:         ptr.String("__S3BucketName__"),
+			S3BucketFolder:       ptr.String("__S3BucketFolder__"),
+			ErrorRetryDuration:   ptr.Int32(1),
+			MaxFileSize:          ptr.Int32(1),
+			MaxRetryCount:        ptr.Int32(1),
+			IamAuthEnabled:       ptr.Bool(true),
+		},
+		RedshiftSettings: &types.RedshiftSettings{
+			AcceptAnyDate:                ptr.Bool(true),
+			AfterConnectScript:           ptr.String("__AfterConnectScript__"),
+			BucketFolder:                 ptr.String("__BucketFolder__"),
+			BucketName:                   ptr.String("__BucketName__"),
+			CaseSensitiveNames:           ptr.Bool(true),
+			CompUpdate:                   ptr.Bool(true),
+			ConnectionTimeout:            ptr.Int32(1),
+			DatabaseName:                 ptr.String("__DatabaseName__"),
+			DateFormat:                   ptr.String("__DateFormat__"),
+			EmptyAsNull:                  ptr.Bool(true),
+			EncryptionMode:               types.EncryptionModeValue("sse-s3"),
+			ExplicitIds:                  ptr.Bool(true),
+			FileTransferUploadStreams:    ptr.Int32(1),
+			LoadTimeout:                  ptr.Int32(1),
+			MaxFileSize:                  ptr.Int32(1),
+			Password:                     ptr.String("__Password__"),
+			Port:                         ptr.Int32(1),
+			RemoveQuotes:                 ptr.Bool(true),
+			ReplaceInvalidChars:          ptr.String("__ReplaceInvalidChars__"),
+			ReplaceChars:                 ptr.String("__ReplaceChars__"),
+			ServerName:                   ptr.String("__ServerName__"),
+			ServiceAccessRoleArn:         ptr.String("__ServiceAccessRoleArn__"),
+			ServerSideEncryptionKmsKeyId: ptr.String("__ServerSideEncryptionKmsKeyId__"),
+			TimeFormat:                   ptr.String("__TimeFormat__"),
+			TrimBlanks:                   ptr.Bool(true),
+			TruncateColumns:              ptr.Bool(true),
+			Username:                     ptr.String("__Username__"),
+			WriteBufferSize:              ptr.Int32(1),
+			SecretsManagerAccessRoleArn:  ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:       ptr.String("__SecretsManagerSecretId__"),
+			MapBooleanAsBoolean:          ptr.Bool(true),
+		},
+		PostgreSQLSettings: &types.PostgreSQLSettings{
+			AfterConnectScript:          ptr.String("__AfterConnectScript__"),
+			CaptureDdls:                 ptr.Bool(true),
+			MaxFileSize:                 ptr.Int32(1),
+			DatabaseName:                ptr.String("__DatabaseName__"),
+			DdlArtifactsSchema:          ptr.String("__DdlArtifactsSchema__"),
+			ExecuteTimeout:              ptr.Int32(1),
+			FailTasksOnLobTruncation:    ptr.Bool(true),
+			HeartbeatEnable:             ptr.Bool(true),
+			HeartbeatSchema:             ptr.String("__HeartbeatSchema__"),
+			HeartbeatFrequency:          ptr.Int32(1),
+			Password:                    ptr.String("__Password__"),
+			Port:                        ptr.Int32(1),
+			ServerName:                  ptr.String("__ServerName__"),
+			Username:                    ptr.String("__Username__"),
+			SlotName:                    ptr.String("__SlotName__"),
+			PluginName:                  types.PluginNameValue("no-preference"),
+			SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+			TrimSpaceInChar:             ptr.Bool(true),
+			MapBooleanAsBoolean:         ptr.Bool(true),
+			MapJsonbAsClob:              ptr.Bool(true),
+			MapLongVarcharAs:            types.LongVarcharMappingType("wstring"),
+			DatabaseMode:                types.DatabaseMode("default"),
+			BabelfishDatabaseName:       ptr.String("__BabelfishDatabaseName__"),
+			DisableUnicodeSourceFilter:  ptr.Bool(true),
+			ServiceAccessRoleArn:        ptr.String("__ServiceAccessRoleArn__"),
+			AuthenticationMethod:        types.PostgreSQLAuthenticationMethod("password"),
+		},
+		MySQLSettings: &types.MySQLSettings{
+			AfterConnectScript:            ptr.String("__AfterConnectScript__"),
+			CleanSourceMetadataOnMismatch: ptr.Bool(true),
+			DatabaseName:                  ptr.String("__DatabaseName__"),
+			EventsPollInterval:            ptr.Int32(1),
+			TargetDbType:                  types.TargetDbType("specific-database"),
+			MaxFileSize:                   ptr.Int32(1),
+			ParallelLoadThreads:           ptr.Int32(1),
+			Password:                      ptr.String("__Password__"),
+			Port:                          ptr.Int32(1),
+			ServerName:                    ptr.String("__ServerName__"),
+			ServerTimezone:                ptr.String("__ServerTimezone__"),
+			Username:                      ptr.String("__Username__"),
+			SecretsManagerAccessRoleArn:   ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:        ptr.String("__SecretsManagerSecretId__"),
+			ExecuteTimeout:                ptr.Int32(1),
+			ServiceAccessRoleArn:          ptr.String("__ServiceAccessRoleArn__"),
+			AuthenticationMethod:          types.MySQLAuthenticationMethod("password"),
+		},
+		OracleSettings: &types.OracleSettings{
+			AddSupplementalLogging:      ptr.Bool(true),
+			ArchivedLogDestId:           ptr.Int32(1),
+			AdditionalArchivedLogDestId: ptr.Int32(1),
+			ExtraArchivedLogDestIds: []int32{
+				1,
+				1,
+			},
+			AllowSelectNestedTables:                ptr.Bool(true),
+			ParallelAsmReadThreads:                 ptr.Int32(1),
+			ReadAheadBlocks:                        ptr.Int32(1),
+			AccessAlternateDirectly:                ptr.Bool(true),
+			UseAlternateFolderForOnline:            ptr.Bool(true),
+			OraclePathPrefix:                       ptr.String("__OraclePathPrefix__"),
+			UsePathPrefix:                          ptr.String("__UsePathPrefix__"),
+			ReplacePathPrefix:                      ptr.Bool(true),
+			EnableHomogenousTablespace:             ptr.Bool(true),
+			DirectPathNoLog:                        ptr.Bool(true),
+			ArchivedLogsOnly:                       ptr.Bool(true),
+			AsmPassword:                            ptr.String("__AsmPassword__"),
+			AsmServer:                              ptr.String("__AsmServer__"),
+			AsmUser:                                ptr.String("__AsmUser__"),
+			CharLengthSemantics:                    types.CharLengthSemantics("default"),
+			DatabaseName:                           ptr.String("__DatabaseName__"),
+			DirectPathParallelLoad:                 ptr.Bool(true),
+			FailTasksOnLobTruncation:               ptr.Bool(true),
+			NumberDatatypeScale:                    ptr.Int32(1),
+			Password:                               ptr.String("__Password__"),
+			Port:                                   ptr.Int32(1),
+			ReadTableSpaceName:                     ptr.Bool(true),
+			RetryInterval:                          ptr.Int32(1),
+			SecurityDbEncryption:                   ptr.String("__SecurityDbEncryption__"),
+			SecurityDbEncryptionName:               ptr.String("__SecurityDbEncryptionName__"),
+			ServerName:                             ptr.String("__ServerName__"),
+			SpatialDataOptionToGeoJsonFunctionName: ptr.String("__SpatialDataOptionToGeoJsonFunctionName__"),
+			StandbyDelayTime:                       ptr.Int32(1),
+			Username:                               ptr.String("__Username__"),
+			UseBFile:                               ptr.Bool(true),
+			UseDirectPathFullLoad:                  ptr.Bool(true),
+			UseLogminerReader:                      ptr.Bool(true),
+			SecretsManagerAccessRoleArn:            ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:                 ptr.String("__SecretsManagerSecretId__"),
+			SecretsManagerOracleAsmAccessRoleArn:   ptr.String("__SecretsManagerOracleAsmAccessRoleArn__"),
+			SecretsManagerOracleAsmSecretId:        ptr.String("__SecretsManagerOracleAsmSecretId__"),
+			TrimSpaceInChar:                        ptr.Bool(true),
+			ConvertTimestampWithZoneToUTC:          ptr.Bool(true),
+			OpenTransactionWindow:                  ptr.Int32(1),
+			AuthenticationMethod:                   types.OracleAuthenticationMethod("password"),
+		},
+		SybaseSettings: &types.SybaseSettings{
+			DatabaseName:                ptr.String("__DatabaseName__"),
+			Password:                    ptr.String("__Password__"),
+			Port:                        ptr.Int32(1),
+			ServerName:                  ptr.String("__ServerName__"),
+			Username:                    ptr.String("__Username__"),
+			SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+		},
+		MicrosoftSQLServerSettings: &types.MicrosoftSQLServerSettings{
+			Port:                        ptr.Int32(1),
+			BcpPacketSize:               ptr.Int32(1),
+			DatabaseName:                ptr.String("__DatabaseName__"),
+			ControlTablesFileGroup:      ptr.String("__ControlTablesFileGroup__"),
+			Password:                    ptr.String("__Password__"),
+			QuerySingleAlwaysOnNode:     ptr.Bool(true),
+			ReadBackupOnly:              ptr.Bool(true),
+			SafeguardPolicy:             types.SafeguardPolicy("rely-on-sql-server-replication-agent"),
+			ServerName:                  ptr.String("__ServerName__"),
+			Username:                    ptr.String("__Username__"),
+			UseBcpFullLoad:              ptr.Bool(true),
+			UseThirdPartyBackupDevice:   ptr.Bool(true),
+			SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+			TrimSpaceInChar:             ptr.Bool(true),
+			TlogAccessMode:              types.TlogAccessMode("BackupOnly"),
+			ForceLobLookup:              ptr.Bool(true),
+			AuthenticationMethod:        types.SqlServerAuthenticationMethod("password"),
+		},
+		IBMDb2Settings: &types.IBMDb2Settings{
+			DatabaseName:                ptr.String("__DatabaseName__"),
+			Password:                    ptr.String("__Password__"),
+			Port:                        ptr.Int32(1),
+			ServerName:                  ptr.String("__ServerName__"),
+			SetDataCaptureChanges:       ptr.Bool(true),
+			CurrentLsn:                  ptr.String("__CurrentLsn__"),
+			MaxKBytesPerRead:            ptr.Int32(1),
+			Username:                    ptr.String("__Username__"),
+			SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+			LoadTimeout:                 ptr.Int32(1),
+			WriteBufferSize:             ptr.Int32(1),
+			MaxFileSize:                 ptr.Int32(1),
+			KeepCsvFiles:                ptr.Bool(true),
+		},
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+		DocDbSettings: &types.DocDbSettings{
+			Username:                    ptr.String("__Username__"),
+			Password:                    ptr.String("__Password__"),
+			ServerName:                  ptr.String("__ServerName__"),
+			Port:                        ptr.Int32(1),
+			DatabaseName:                ptr.String("__DatabaseName__"),
+			NestingLevel:                types.NestingLevelValue("none"),
+			ExtractDocId:                ptr.Bool(true),
+			DocsToInvestigate:           ptr.Int32(1),
+			KmsKeyId:                    ptr.String("__KmsKeyId__"),
+			SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+			UseUpdateLookUp:             ptr.Bool(true),
+			ReplicateShardCollections:   ptr.Bool(true),
+		},
+		RedisSettings: &types.RedisSettings{
+			ServerName:          ptr.String("__ServerName__"),
+			Port:                1,
+			SslSecurityProtocol: types.SslSecurityProtocolValue("plaintext"),
+			AuthType:            types.RedisAuthTypeValue("none"),
+			AuthUserName:        ptr.String("__AuthUserName__"),
+			AuthPassword:        ptr.String("__AuthPassword__"),
+			SslCaCertificateArn: ptr.String("__SslCaCertificateArn__"),
+		},
+		GcpMySQLSettings: &types.GcpMySQLSettings{
+			AfterConnectScript:            ptr.String("__AfterConnectScript__"),
+			CleanSourceMetadataOnMismatch: ptr.Bool(true),
+			DatabaseName:                  ptr.String("__DatabaseName__"),
+			EventsPollInterval:            ptr.Int32(1),
+			TargetDbType:                  types.TargetDbType("specific-database"),
+			MaxFileSize:                   ptr.Int32(1),
+			ParallelLoadThreads:           ptr.Int32(1),
+			Password:                      ptr.String("__Password__"),
+			Port:                          ptr.Int32(1),
+			ServerName:                    ptr.String("__ServerName__"),
+			ServerTimezone:                ptr.String("__ServerTimezone__"),
+			Username:                      ptr.String("__Username__"),
+			SecretsManagerAccessRoleArn:   ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:        ptr.String("__SecretsManagerSecretId__"),
+		},
+		TimestreamSettings: &types.TimestreamSettings{
+			DatabaseName:              ptr.String("__DatabaseName__"),
+			MemoryDuration:            ptr.Int32(1),
+			MagneticDuration:          ptr.Int32(1),
+			CdcInsertsAndUpdates:      ptr.Bool(true),
+			EnableMagneticStoreWrites: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -862,7 +1343,32 @@ func TestCheckResponseSnapshot_CreateEventSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEventSubscription(context.Background(), &CreateEventSubscriptionInput{})
+	got, err := svc.CreateEventSubscription(context.Background(), &CreateEventSubscriptionInput{
+		SubscriptionName: ptr.String("__SubscriptionName__"),
+		SnsTopicArn:      ptr.String("__SnsTopicArn__"),
+		SourceType:       ptr.String("__SourceType__"),
+		EventCategories: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SourceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Enabled: ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -887,7 +1393,12 @@ func TestCheckResponseSnapshot_CreateFleetAdvisorCollector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFleetAdvisorCollector(context.Background(), &CreateFleetAdvisorCollectorInput{})
+	got, err := svc.CreateFleetAdvisorCollector(context.Background(), &CreateFleetAdvisorCollectorInput{
+		CollectorName:        ptr.String("__CollectorName__"),
+		Description:          ptr.String("__Description__"),
+		ServiceAccessRoleArn: ptr.String("__ServiceAccessRoleArn__"),
+		S3BucketName:         ptr.String("__S3BucketName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -922,7 +1433,31 @@ func TestCheckResponseSnapshot_CreateInstanceProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateInstanceProfile(context.Background(), &CreateInstanceProfileInput{})
+	got, err := svc.CreateInstanceProfile(context.Background(), &CreateInstanceProfileInput{
+		AvailabilityZone:   ptr.String("__AvailabilityZone__"),
+		KmsKeyArn:          ptr.String("__KmsKeyArn__"),
+		PubliclyAccessible: ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+		NetworkType:           ptr.String("__NetworkType__"),
+		InstanceProfileName:   ptr.String("__InstanceProfileName__"),
+		Description:           ptr.String("__Description__"),
+		SubnetGroupIdentifier: ptr.String("__SubnetGroupIdentifier__"),
+		VpcSecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -983,7 +1518,52 @@ func TestCheckResponseSnapshot_CreateMigrationProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMigrationProject(context.Background(), &CreateMigrationProjectInput{})
+	got, err := svc.CreateMigrationProject(context.Background(), &CreateMigrationProjectInput{
+		MigrationProjectName: ptr.String("__MigrationProjectName__"),
+		SourceDataProviderDescriptors: []types.DataProviderDescriptorDefinition{
+			{
+				DataProviderIdentifier:      ptr.String("__DataProviderIdentifier__"),
+				SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+				SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			},
+			{
+				DataProviderIdentifier:      ptr.String("__DataProviderIdentifier__"),
+				SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+				SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			},
+		},
+		TargetDataProviderDescriptors: []types.DataProviderDescriptorDefinition{
+			{
+				DataProviderIdentifier:      ptr.String("__DataProviderIdentifier__"),
+				SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+				SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			},
+			{
+				DataProviderIdentifier:      ptr.String("__DataProviderIdentifier__"),
+				SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+				SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			},
+		},
+		InstanceProfileIdentifier: ptr.String("__InstanceProfileIdentifier__"),
+		TransformationRules:       ptr.String("__TransformationRules__"),
+		Description:               ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+		SchemaConversionApplicationAttributes: &types.SCApplicationAttributes{
+			S3BucketPath:    ptr.String("__S3BucketPath__"),
+			S3BucketRoleArn: ptr.String("__S3BucketRoleArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1030,7 +1610,42 @@ func TestCheckResponseSnapshot_CreateReplicationConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateReplicationConfig(context.Background(), &CreateReplicationConfigInput{})
+	got, err := svc.CreateReplicationConfig(context.Background(), &CreateReplicationConfigInput{
+		ReplicationConfigIdentifier: ptr.String("__ReplicationConfigIdentifier__"),
+		SourceEndpointArn:           ptr.String("__SourceEndpointArn__"),
+		TargetEndpointArn:           ptr.String("__TargetEndpointArn__"),
+		ComputeConfig: &types.ComputeConfig{
+			AvailabilityZone:           ptr.String("__AvailabilityZone__"),
+			DnsNameServers:             ptr.String("__DnsNameServers__"),
+			KmsKeyId:                   ptr.String("__KmsKeyId__"),
+			MaxCapacityUnits:           ptr.Int32(1),
+			MinCapacityUnits:           ptr.Int32(1),
+			MultiAZ:                    ptr.Bool(true),
+			PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+			ReplicationSubnetGroupId:   ptr.String("__ReplicationSubnetGroupId__"),
+			VpcSecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ReplicationType:      types.MigrationTypeValue("full-load"),
+		TableMappings:        ptr.String("__TableMappings__"),
+		ReplicationSettings:  ptr.String("__ReplicationSettings__"),
+		SupplementalSettings: ptr.String("__SupplementalSettings__"),
+		ResourceIdentifier:   ptr.String("__ResourceIdentifier__"),
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1132,7 +1747,43 @@ func TestCheckResponseSnapshot_CreateReplicationInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateReplicationInstance(context.Background(), &CreateReplicationInstanceInput{})
+	got, err := svc.CreateReplicationInstance(context.Background(), &CreateReplicationInstanceInput{
+		ReplicationInstanceIdentifier: ptr.String("__ReplicationInstanceIdentifier__"),
+		AllocatedStorage:              ptr.Int32(1),
+		ReplicationInstanceClass:      ptr.String("__ReplicationInstanceClass__"),
+		VpcSecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AvailabilityZone:                 ptr.String("__AvailabilityZone__"),
+		ReplicationSubnetGroupIdentifier: ptr.String("__ReplicationSubnetGroupIdentifier__"),
+		PreferredMaintenanceWindow:       ptr.String("__PreferredMaintenanceWindow__"),
+		MultiAZ:                          ptr.Bool(true),
+		EngineVersion:                    ptr.String("__EngineVersion__"),
+		AutoMinorVersionUpgrade:          ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		PubliclyAccessible: ptr.Bool(true),
+		DnsNameServers:     ptr.String("__DnsNameServers__"),
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+		NetworkType:        ptr.String("__NetworkType__"),
+		KerberosAuthenticationSettings: &types.KerberosAuthenticationSettings{
+			KeyCacheSecretId:     ptr.String("__KeyCacheSecretId__"),
+			KeyCacheSecretIamArn: ptr.String("__KeyCacheSecretIamArn__"),
+			Krb5FileContents:     ptr.String("__Krb5FileContents__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1179,7 +1830,26 @@ func TestCheckResponseSnapshot_CreateReplicationSubnetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateReplicationSubnetGroup(context.Background(), &CreateReplicationSubnetGroupInput{})
+	got, err := svc.CreateReplicationSubnetGroup(context.Background(), &CreateReplicationSubnetGroupInput{
+		ReplicationSubnetGroupIdentifier:  ptr.String("__ReplicationSubnetGroupIdentifier__"),
+		ReplicationSubnetGroupDescription: ptr.String("__ReplicationSubnetGroupDescription__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1232,7 +1902,32 @@ func TestCheckResponseSnapshot_CreateReplicationTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateReplicationTask(context.Background(), &CreateReplicationTaskInput{})
+	got, err := svc.CreateReplicationTask(context.Background(), &CreateReplicationTaskInput{
+		ReplicationTaskIdentifier: ptr.String("__ReplicationTaskIdentifier__"),
+		SourceEndpointArn:         ptr.String("__SourceEndpointArn__"),
+		TargetEndpointArn:         ptr.String("__TargetEndpointArn__"),
+		ReplicationInstanceArn:    ptr.String("__ReplicationInstanceArn__"),
+		MigrationType:             types.MigrationTypeValue("full-load"),
+		TableMappings:             ptr.String("__TableMappings__"),
+		ReplicationTaskSettings:   ptr.String("__ReplicationTaskSettings__"),
+		CdcStartTime:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CdcStartPosition:          ptr.String("__CdcStartPosition__"),
+		CdcStopPosition:           ptr.String("__CdcStopPosition__"),
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+		TaskData:           ptr.String("__TaskData__"),
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1265,7 +1960,9 @@ func TestCheckResponseSnapshot_DeleteCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCertificate(context.Background(), &DeleteCertificateInput{})
+	got, err := svc.DeleteCertificate(context.Background(), &DeleteCertificateInput{
+		CertificateArn: ptr.String("__CertificateArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1293,7 +1990,10 @@ func TestCheckResponseSnapshot_DeleteConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{})
+	got, err := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{
+		EndpointArn:            ptr.String("__EndpointArn__"),
+		ReplicationInstanceArn: ptr.String("__ReplicationInstanceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1372,7 +2072,9 @@ func TestCheckResponseSnapshot_DeleteDataMigration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataMigration(context.Background(), &DeleteDataMigrationInput{})
+	got, err := svc.DeleteDataMigration(context.Background(), &DeleteDataMigrationInput{
+		DataMigrationIdentifier: ptr.String("__DataMigrationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1409,7 +2111,9 @@ func TestCheckResponseSnapshot_DeleteDataProvider(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataProvider(context.Background(), &DeleteDataProviderInput{})
+	got, err := svc.DeleteDataProvider(context.Background(), &DeleteDataProviderInput{
+		DataProviderIdentifier: ptr.String("__DataProviderIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1794,7 +2498,9 @@ func TestCheckResponseSnapshot_DeleteEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEndpoint(context.Background(), &DeleteEndpointInput{})
+	got, err := svc.DeleteEndpoint(context.Background(), &DeleteEndpointInput{
+		EndpointArn: ptr.String("__EndpointArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1831,7 +2537,9 @@ func TestCheckResponseSnapshot_DeleteEventSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEventSubscription(context.Background(), &DeleteEventSubscriptionInput{})
+	got, err := svc.DeleteEventSubscription(context.Background(), &DeleteEventSubscriptionInput{
+		SubscriptionName: ptr.String("__SubscriptionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1850,7 +2558,9 @@ func TestCheckResponseSnapshot_DeleteFleetAdvisorCollector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFleetAdvisorCollector(context.Background(), &DeleteFleetAdvisorCollectorInput{})
+	got, err := svc.DeleteFleetAdvisorCollector(context.Background(), &DeleteFleetAdvisorCollectorInput{
+		CollectorReferencedId: ptr.String("__CollectorReferencedId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1874,7 +2584,12 @@ func TestCheckResponseSnapshot_DeleteFleetAdvisorDatabases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFleetAdvisorDatabases(context.Background(), &DeleteFleetAdvisorDatabasesInput{})
+	got, err := svc.DeleteFleetAdvisorDatabases(context.Background(), &DeleteFleetAdvisorDatabasesInput{
+		DatabaseIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1909,7 +2624,9 @@ func TestCheckResponseSnapshot_DeleteInstanceProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteInstanceProfile(context.Background(), &DeleteInstanceProfileInput{})
+	got, err := svc.DeleteInstanceProfile(context.Background(), &DeleteInstanceProfileInput{
+		InstanceProfileIdentifier: ptr.String("__InstanceProfileIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1970,7 +2687,9 @@ func TestCheckResponseSnapshot_DeleteMigrationProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMigrationProject(context.Background(), &DeleteMigrationProjectInput{})
+	got, err := svc.DeleteMigrationProject(context.Background(), &DeleteMigrationProjectInput{
+		MigrationProjectIdentifier: ptr.String("__MigrationProjectIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2017,7 +2736,9 @@ func TestCheckResponseSnapshot_DeleteReplicationConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteReplicationConfig(context.Background(), &DeleteReplicationConfigInput{})
+	got, err := svc.DeleteReplicationConfig(context.Background(), &DeleteReplicationConfigInput{
+		ReplicationConfigArn: ptr.String("__ReplicationConfigArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2119,7 +2840,9 @@ func TestCheckResponseSnapshot_DeleteReplicationInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteReplicationInstance(context.Background(), &DeleteReplicationInstanceInput{})
+	got, err := svc.DeleteReplicationInstance(context.Background(), &DeleteReplicationInstanceInput{
+		ReplicationInstanceArn: ptr.String("__ReplicationInstanceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2138,7 +2861,9 @@ func TestCheckResponseSnapshot_DeleteReplicationSubnetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteReplicationSubnetGroup(context.Background(), &DeleteReplicationSubnetGroupInput{})
+	got, err := svc.DeleteReplicationSubnetGroup(context.Background(), &DeleteReplicationSubnetGroupInput{
+		ReplicationSubnetGroupIdentifier: ptr.String("__ReplicationSubnetGroupIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2191,7 +2916,9 @@ func TestCheckResponseSnapshot_DeleteReplicationTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteReplicationTask(context.Background(), &DeleteReplicationTaskInput{})
+	got, err := svc.DeleteReplicationTask(context.Background(), &DeleteReplicationTaskInput{
+		ReplicationTaskArn: ptr.String("__ReplicationTaskArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2237,7 +2964,9 @@ func TestCheckResponseSnapshot_DeleteReplicationTaskAssessmentRun(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteReplicationTaskAssessmentRun(context.Background(), &DeleteReplicationTaskAssessmentRunInput{})
+	got, err := svc.DeleteReplicationTaskAssessmentRun(context.Background(), &DeleteReplicationTaskAssessmentRunInput{
+		ReplicationTaskAssessmentRunArn: ptr.String("__ReplicationTaskAssessmentRunArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2295,7 +3024,16 @@ func TestCheckResponseSnapshot_DescribeApplicableIndividualAssessments(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeApplicableIndividualAssessments(context.Background(), &DescribeApplicableIndividualAssessmentsInput{})
+	got, err := svc.DescribeApplicableIndividualAssessments(context.Background(), &DescribeApplicableIndividualAssessmentsInput{
+		ReplicationTaskArn:     ptr.String("__ReplicationTaskArn__"),
+		ReplicationInstanceArn: ptr.String("__ReplicationInstanceArn__"),
+		ReplicationConfigArn:   ptr.String("__ReplicationConfigArn__"),
+		SourceEngineName:       ptr.String("__SourceEngineName__"),
+		TargetEngineName:       ptr.String("__TargetEngineName__"),
+		MigrationType:          types.MigrationTypeValue("full-load"),
+		MaxRecords:             ptr.Int32(1),
+		Marker:                 ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2344,7 +3082,26 @@ func TestCheckResponseSnapshot_DescribeCertificates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCertificates(context.Background(), &DescribeCertificatesInput{})
+	got, err := svc.DescribeCertificates(context.Background(), &DescribeCertificatesInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxRecords: ptr.Int32(1),
+		Marker:     ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2383,7 +3140,26 @@ func TestCheckResponseSnapshot_DescribeConnections(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConnections(context.Background(), &DescribeConnectionsInput{})
+	got, err := svc.DescribeConnections(context.Background(), &DescribeConnectionsInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxRecords: ptr.Int32(1),
+		Marker:     ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2405,7 +3181,9 @@ func TestCheckResponseSnapshot_DescribeConversionConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConversionConfiguration(context.Background(), &DescribeConversionConfigurationInput{})
+	got, err := svc.DescribeConversionConfiguration(context.Background(), &DescribeConversionConfigurationInput{
+		MigrationProjectIdentifier: ptr.String("__MigrationProjectIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2546,7 +3324,28 @@ func TestCheckResponseSnapshot_DescribeDataMigrations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDataMigrations(context.Background(), &DescribeDataMigrationsInput{})
+	got, err := svc.DescribeDataMigrations(context.Background(), &DescribeDataMigrationsInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxRecords:        ptr.Int32(1),
+		Marker:            ptr.String("__Marker__"),
+		WithoutSettings:   ptr.Bool(true),
+		WithoutStatistics: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2603,7 +3402,26 @@ func TestCheckResponseSnapshot_DescribeDataProviders(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDataProviders(context.Background(), &DescribeDataProvidersInput{})
+	got, err := svc.DescribeDataProviders(context.Background(), &DescribeDataProvidersInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxRecords: ptr.Int32(1),
+		Marker:     ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2654,7 +3472,11 @@ func TestCheckResponseSnapshot_DescribeEndpointSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEndpointSettings(context.Background(), &DescribeEndpointSettingsInput{})
+	got, err := svc.DescribeEndpointSettings(context.Background(), &DescribeEndpointSettingsInput{
+		EngineName: ptr.String("__EngineName__"),
+		MaxRecords: ptr.Int32(1),
+		Marker:     ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2691,7 +3513,26 @@ func TestCheckResponseSnapshot_DescribeEndpointTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEndpointTypes(context.Background(), &DescribeEndpointTypesInput{})
+	got, err := svc.DescribeEndpointTypes(context.Background(), &DescribeEndpointTypesInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxRecords: ptr.Int32(1),
+		Marker:     ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3444,7 +4285,26 @@ func TestCheckResponseSnapshot_DescribeEndpoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEndpoints(context.Background(), &DescribeEndpointsInput{})
+	got, err := svc.DescribeEndpoints(context.Background(), &DescribeEndpointsInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxRecords: ptr.Int32(1),
+		Marker:     ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3493,7 +4353,10 @@ func TestCheckResponseSnapshot_DescribeEngineVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEngineVersions(context.Background(), &DescribeEngineVersionsInput{})
+	got, err := svc.DescribeEngineVersions(context.Background(), &DescribeEngineVersionsInput{
+		MaxRecords: ptr.Int32(1),
+		Marker:     ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3529,7 +4392,25 @@ func TestCheckResponseSnapshot_DescribeEventCategories(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEventCategories(context.Background(), &DescribeEventCategoriesInput{})
+	got, err := svc.DescribeEventCategories(context.Background(), &DescribeEventCategoriesInput{
+		SourceType: ptr.String("__SourceType__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3586,7 +4467,27 @@ func TestCheckResponseSnapshot_DescribeEventSubscriptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEventSubscriptions(context.Background(), &DescribeEventSubscriptionsInput{})
+	got, err := svc.DescribeEventSubscriptions(context.Background(), &DescribeEventSubscriptionsInput{
+		SubscriptionName: ptr.String("__SubscriptionName__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxRecords: ptr.Int32(1),
+		Marker:     ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3629,7 +4530,35 @@ func TestCheckResponseSnapshot_DescribeEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeEvents(context.Background(), &DescribeEventsInput{})
+	got, err := svc.DescribeEvents(context.Background(), &DescribeEventsInput{
+		SourceIdentifier: ptr.String("__SourceIdentifier__"),
+		SourceType:       types.SourceType("replication-instance"),
+		StartTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Duration:         ptr.Int32(1),
+		EventCategories: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxRecords: ptr.Int32(1),
+		Marker:     ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3700,7 +4629,27 @@ func TestCheckResponseSnapshot_DescribeExtensionPackAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeExtensionPackAssociations(context.Background(), &DescribeExtensionPackAssociationsInput{})
+	got, err := svc.DescribeExtensionPackAssociations(context.Background(), &DescribeExtensionPackAssociationsInput{
+		MigrationProjectIdentifier: ptr.String("__MigrationProjectIdentifier__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Marker:     ptr.String("__Marker__"),
+		MaxRecords: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3769,7 +4718,26 @@ func TestCheckResponseSnapshot_DescribeFleetAdvisorCollectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFleetAdvisorCollectors(context.Background(), &DescribeFleetAdvisorCollectorsInput{})
+	got, err := svc.DescribeFleetAdvisorCollectors(context.Background(), &DescribeFleetAdvisorCollectorsInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxRecords: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3852,7 +4820,26 @@ func TestCheckResponseSnapshot_DescribeFleetAdvisorDatabases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFleetAdvisorDatabases(context.Background(), &DescribeFleetAdvisorDatabasesInput{})
+	got, err := svc.DescribeFleetAdvisorDatabases(context.Background(), &DescribeFleetAdvisorDatabasesInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxRecords: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3883,7 +4870,10 @@ func TestCheckResponseSnapshot_DescribeFleetAdvisorLsaAnalysis(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFleetAdvisorLsaAnalysis(context.Background(), &DescribeFleetAdvisorLsaAnalysisInput{})
+	got, err := svc.DescribeFleetAdvisorLsaAnalysis(context.Background(), &DescribeFleetAdvisorLsaAnalysisInput{
+		MaxRecords: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3920,7 +4910,26 @@ func TestCheckResponseSnapshot_DescribeFleetAdvisorSchemaObjectSummary(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFleetAdvisorSchemaObjectSummary(context.Background(), &DescribeFleetAdvisorSchemaObjectSummaryInput{})
+	got, err := svc.DescribeFleetAdvisorSchemaObjectSummary(context.Background(), &DescribeFleetAdvisorSchemaObjectSummaryInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxRecords: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3995,7 +5004,26 @@ func TestCheckResponseSnapshot_DescribeFleetAdvisorSchemas(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFleetAdvisorSchemas(context.Background(), &DescribeFleetAdvisorSchemasInput{})
+	got, err := svc.DescribeFleetAdvisorSchemas(context.Background(), &DescribeFleetAdvisorSchemasInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxRecords: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4048,7 +5076,26 @@ func TestCheckResponseSnapshot_DescribeInstanceProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeInstanceProfiles(context.Background(), &DescribeInstanceProfilesInput{})
+	got, err := svc.DescribeInstanceProfiles(context.Background(), &DescribeInstanceProfilesInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxRecords: ptr.Int32(1),
+		Marker:     ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4081,7 +5128,11 @@ func TestCheckResponseSnapshot_DescribeMetadataModel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMetadataModel(context.Background(), &DescribeMetadataModelInput{})
+	got, err := svc.DescribeMetadataModel(context.Background(), &DescribeMetadataModelInput{
+		SelectionRules:             ptr.String("__SelectionRules__"),
+		MigrationProjectIdentifier: ptr.String("__MigrationProjectIdentifier__"),
+		Origin:                     types.OriginTypeValue("SOURCE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4152,7 +5203,27 @@ func TestCheckResponseSnapshot_DescribeMetadataModelAssessments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMetadataModelAssessments(context.Background(), &DescribeMetadataModelAssessmentsInput{})
+	got, err := svc.DescribeMetadataModelAssessments(context.Background(), &DescribeMetadataModelAssessmentsInput{
+		MigrationProjectIdentifier: ptr.String("__MigrationProjectIdentifier__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Marker:     ptr.String("__Marker__"),
+		MaxRecords: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4183,7 +5254,13 @@ func TestCheckResponseSnapshot_DescribeMetadataModelChildren(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMetadataModelChildren(context.Background(), &DescribeMetadataModelChildrenInput{})
+	got, err := svc.DescribeMetadataModelChildren(context.Background(), &DescribeMetadataModelChildrenInput{
+		SelectionRules:             ptr.String("__SelectionRules__"),
+		MigrationProjectIdentifier: ptr.String("__MigrationProjectIdentifier__"),
+		Origin:                     types.OriginTypeValue("SOURCE"),
+		Marker:                     ptr.String("__Marker__"),
+		MaxRecords:                 ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4254,7 +5331,27 @@ func TestCheckResponseSnapshot_DescribeMetadataModelConversions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMetadataModelConversions(context.Background(), &DescribeMetadataModelConversionsInput{})
+	got, err := svc.DescribeMetadataModelConversions(context.Background(), &DescribeMetadataModelConversionsInput{
+		MigrationProjectIdentifier: ptr.String("__MigrationProjectIdentifier__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Marker:     ptr.String("__Marker__"),
+		MaxRecords: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4325,7 +5422,27 @@ func TestCheckResponseSnapshot_DescribeMetadataModelCreations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMetadataModelCreations(context.Background(), &DescribeMetadataModelCreationsInput{})
+	got, err := svc.DescribeMetadataModelCreations(context.Background(), &DescribeMetadataModelCreationsInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Marker:                     ptr.String("__Marker__"),
+		MaxRecords:                 ptr.Int32(1),
+		MigrationProjectIdentifier: ptr.String("__MigrationProjectIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4396,7 +5513,27 @@ func TestCheckResponseSnapshot_DescribeMetadataModelExportsAsScript(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMetadataModelExportsAsScript(context.Background(), &DescribeMetadataModelExportsAsScriptInput{})
+	got, err := svc.DescribeMetadataModelExportsAsScript(context.Background(), &DescribeMetadataModelExportsAsScriptInput{
+		MigrationProjectIdentifier: ptr.String("__MigrationProjectIdentifier__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Marker:     ptr.String("__Marker__"),
+		MaxRecords: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4467,7 +5604,27 @@ func TestCheckResponseSnapshot_DescribeMetadataModelExportsToTarget(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMetadataModelExportsToTarget(context.Background(), &DescribeMetadataModelExportsToTargetInput{})
+	got, err := svc.DescribeMetadataModelExportsToTarget(context.Background(), &DescribeMetadataModelExportsToTargetInput{
+		MigrationProjectIdentifier: ptr.String("__MigrationProjectIdentifier__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Marker:     ptr.String("__Marker__"),
+		MaxRecords: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4538,7 +5695,27 @@ func TestCheckResponseSnapshot_DescribeMetadataModelImports(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMetadataModelImports(context.Background(), &DescribeMetadataModelImportsInput{})
+	got, err := svc.DescribeMetadataModelImports(context.Background(), &DescribeMetadataModelImportsInput{
+		MigrationProjectIdentifier: ptr.String("__MigrationProjectIdentifier__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Marker:     ptr.String("__Marker__"),
+		MaxRecords: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4643,7 +5820,26 @@ func TestCheckResponseSnapshot_DescribeMigrationProjects(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMigrationProjects(context.Background(), &DescribeMigrationProjectsInput{})
+	got, err := svc.DescribeMigrationProjects(context.Background(), &DescribeMigrationProjectsInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxRecords: ptr.Int32(1),
+		Marker:     ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4694,7 +5890,10 @@ func TestCheckResponseSnapshot_DescribeOrderableReplicationInstances(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeOrderableReplicationInstances(context.Background(), &DescribeOrderableReplicationInstancesInput{})
+	got, err := svc.DescribeOrderableReplicationInstances(context.Background(), &DescribeOrderableReplicationInstancesInput{
+		MaxRecords: ptr.Int32(1),
+		Marker:     ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4759,7 +5958,27 @@ func TestCheckResponseSnapshot_DescribePendingMaintenanceActions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePendingMaintenanceActions(context.Background(), &DescribePendingMaintenanceActionsInput{})
+	got, err := svc.DescribePendingMaintenanceActions(context.Background(), &DescribePendingMaintenanceActionsInput{
+		ReplicationInstanceArn: ptr.String("__ReplicationInstanceArn__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Marker:     ptr.String("__Marker__"),
+		MaxRecords: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4798,7 +6017,26 @@ func TestCheckResponseSnapshot_DescribeRecommendationLimitations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRecommendationLimitations(context.Background(), &DescribeRecommendationLimitationsInput{})
+	got, err := svc.DescribeRecommendationLimitations(context.Background(), &DescribeRecommendationLimitationsInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxRecords: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4891,7 +6129,26 @@ func TestCheckResponseSnapshot_DescribeRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRecommendations(context.Background(), &DescribeRecommendationsInput{})
+	got, err := svc.DescribeRecommendations(context.Background(), &DescribeRecommendationsInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxRecords: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4918,7 +6175,9 @@ func TestCheckResponseSnapshot_DescribeRefreshSchemasStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRefreshSchemasStatus(context.Background(), &DescribeRefreshSchemasStatusInput{})
+	got, err := svc.DescribeRefreshSchemasStatus(context.Background(), &DescribeRefreshSchemasStatusInput{
+		EndpointArn: ptr.String("__EndpointArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4995,7 +6254,26 @@ func TestCheckResponseSnapshot_DescribeReplicationConfigs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeReplicationConfigs(context.Background(), &DescribeReplicationConfigsInput{})
+	got, err := svc.DescribeReplicationConfigs(context.Background(), &DescribeReplicationConfigsInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxRecords: ptr.Int32(1),
+		Marker:     ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5029,7 +6307,11 @@ func TestCheckResponseSnapshot_DescribeReplicationInstanceTaskLogs(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeReplicationInstanceTaskLogs(context.Background(), &DescribeReplicationInstanceTaskLogsInput{})
+	got, err := svc.DescribeReplicationInstanceTaskLogs(context.Background(), &DescribeReplicationInstanceTaskLogsInput{
+		ReplicationInstanceArn: ptr.String("__ReplicationInstanceArn__"),
+		MaxRecords:             ptr.Int32(1),
+		Marker:                 ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5216,7 +6498,26 @@ func TestCheckResponseSnapshot_DescribeReplicationInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeReplicationInstances(context.Background(), &DescribeReplicationInstancesInput{})
+	got, err := svc.DescribeReplicationInstances(context.Background(), &DescribeReplicationInstancesInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxRecords: ptr.Int32(1),
+		Marker:     ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5293,7 +6594,26 @@ func TestCheckResponseSnapshot_DescribeReplicationSubnetGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeReplicationSubnetGroups(context.Background(), &DescribeReplicationSubnetGroupsInput{})
+	got, err := svc.DescribeReplicationSubnetGroups(context.Background(), &DescribeReplicationSubnetGroupsInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxRecords: ptr.Int32(1),
+		Marker:     ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5377,7 +6697,27 @@ func TestCheckResponseSnapshot_DescribeReplicationTableStatistics(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeReplicationTableStatistics(context.Background(), &DescribeReplicationTableStatisticsInput{})
+	got, err := svc.DescribeReplicationTableStatistics(context.Background(), &DescribeReplicationTableStatisticsInput{
+		ReplicationConfigArn: ptr.String("__ReplicationConfigArn__"),
+		MaxRecords:           ptr.Int32(1),
+		Marker:               ptr.String("__Marker__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5419,7 +6759,11 @@ func TestCheckResponseSnapshot_DescribeReplicationTaskAssessmentResults(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeReplicationTaskAssessmentResults(context.Background(), &DescribeReplicationTaskAssessmentResultsInput{})
+	got, err := svc.DescribeReplicationTaskAssessmentResults(context.Background(), &DescribeReplicationTaskAssessmentResultsInput{
+		ReplicationTaskArn: ptr.String("__ReplicationTaskArn__"),
+		MaxRecords:         ptr.Int32(1),
+		Marker:             ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5494,7 +6838,26 @@ func TestCheckResponseSnapshot_DescribeReplicationTaskAssessmentRuns(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeReplicationTaskAssessmentRuns(context.Background(), &DescribeReplicationTaskAssessmentRunsInput{})
+	got, err := svc.DescribeReplicationTaskAssessmentRuns(context.Background(), &DescribeReplicationTaskAssessmentRunsInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxRecords: ptr.Int32(1),
+		Marker:     ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5531,7 +6894,26 @@ func TestCheckResponseSnapshot_DescribeReplicationTaskIndividualAssessments(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeReplicationTaskIndividualAssessments(context.Background(), &DescribeReplicationTaskIndividualAssessmentsInput{})
+	got, err := svc.DescribeReplicationTaskIndividualAssessments(context.Background(), &DescribeReplicationTaskIndividualAssessmentsInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxRecords: ptr.Int32(1),
+		Marker:     ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5620,7 +7002,27 @@ func TestCheckResponseSnapshot_DescribeReplicationTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeReplicationTasks(context.Background(), &DescribeReplicationTasksInput{})
+	got, err := svc.DescribeReplicationTasks(context.Background(), &DescribeReplicationTasksInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxRecords:      ptr.Int32(1),
+		Marker:          ptr.String("__Marker__"),
+		WithoutSettings: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5827,7 +7229,26 @@ func TestCheckResponseSnapshot_DescribeReplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeReplications(context.Background(), &DescribeReplicationsInput{})
+	got, err := svc.DescribeReplications(context.Background(), &DescribeReplicationsInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxRecords: ptr.Int32(1),
+		Marker:     ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5852,7 +7273,11 @@ func TestCheckResponseSnapshot_DescribeSchemas(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSchemas(context.Background(), &DescribeSchemasInput{})
+	got, err := svc.DescribeSchemas(context.Background(), &DescribeSchemasInput{
+		EndpointArn: ptr.String("__EndpointArn__"),
+		MaxRecords:  ptr.Int32(1),
+		Marker:      ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5936,7 +7361,27 @@ func TestCheckResponseSnapshot_DescribeTableStatistics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTableStatistics(context.Background(), &DescribeTableStatisticsInput{})
+	got, err := svc.DescribeTableStatistics(context.Background(), &DescribeTableStatisticsInput{
+		ReplicationTaskArn: ptr.String("__ReplicationTaskArn__"),
+		MaxRecords:         ptr.Int32(1),
+		Marker:             ptr.String("__Marker__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5964,7 +7409,15 @@ func TestCheckResponseSnapshot_ExportMetadataModelAssessment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExportMetadataModelAssessment(context.Background(), &ExportMetadataModelAssessmentInput{})
+	got, err := svc.ExportMetadataModelAssessment(context.Background(), &ExportMetadataModelAssessmentInput{
+		MigrationProjectIdentifier: ptr.String("__MigrationProjectIdentifier__"),
+		SelectionRules:             ptr.String("__SelectionRules__"),
+		FileName:                   ptr.String("__FileName__"),
+		AssessmentReportTypes: []types.AssessmentReportType{
+			types.AssessmentReportType("pdf"),
+			types.AssessmentReportType("pdf"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -5985,7 +7438,10 @@ func TestCheckResponseSnapshot_GetTargetSelectionRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTargetSelectionRules(context.Background(), &GetTargetSelectionRulesInput{})
+	got, err := svc.GetTargetSelectionRules(context.Background(), &GetTargetSelectionRulesInput{
+		MigrationProjectIdentifier: ptr.String("__MigrationProjectIdentifier__"),
+		SelectionRules:             ptr.String("__SelectionRules__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6018,7 +7474,24 @@ func TestCheckResponseSnapshot_ImportCertificate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportCertificate(context.Background(), &ImportCertificateInput{})
+	got, err := svc.ImportCertificate(context.Background(), &ImportCertificateInput{
+		CertificateIdentifier: ptr.String("__CertificateIdentifier__"),
+		CertificatePem:        ptr.String("__CertificatePem__"),
+		CertificateWallet:     []byte("blob"),
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6050,7 +7523,13 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		ResourceArnList: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6071,7 +7550,10 @@ func TestCheckResponseSnapshot_ModifyConversionConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyConversionConfiguration(context.Background(), &ModifyConversionConfigurationInput{})
+	got, err := svc.ModifyConversionConfiguration(context.Background(), &ModifyConversionConfigurationInput{
+		MigrationProjectIdentifier: ptr.String("__MigrationProjectIdentifier__"),
+		ConversionConfiguration:    ptr.String("__ConversionConfiguration__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6150,7 +7632,37 @@ func TestCheckResponseSnapshot_ModifyDataMigration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyDataMigration(context.Background(), &ModifyDataMigrationInput{})
+	got, err := svc.ModifyDataMigration(context.Background(), &ModifyDataMigrationInput{
+		DataMigrationIdentifier: ptr.String("__DataMigrationIdentifier__"),
+		DataMigrationName:       ptr.String("__DataMigrationName__"),
+		EnableCloudwatchLogs:    ptr.Bool(true),
+		ServiceAccessRoleArn:    ptr.String("__ServiceAccessRoleArn__"),
+		DataMigrationType:       types.MigrationTypeValue("full-load"),
+		SourceDataSettings: []types.SourceDataSetting{
+			{
+				CDCStartPosition: ptr.String("__CDCStartPosition__"),
+				CDCStartTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CDCStopTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SlotName:         ptr.String("__SlotName__"),
+			},
+			{
+				CDCStartPosition: ptr.String("__CDCStartPosition__"),
+				CDCStartTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CDCStopTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SlotName:         ptr.String("__SlotName__"),
+			},
+		},
+		TargetDataSettings: []types.TargetDataSetting{
+			{
+				TablePreparationMode: types.TablePreparationMode("do-nothing"),
+			},
+			{
+				TablePreparationMode: types.TablePreparationMode("do-nothing"),
+			},
+		},
+		NumberOfJobs:   ptr.Int32(1),
+		SelectionRules: ptr.String("__SelectionRules__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6187,7 +7699,23 @@ func TestCheckResponseSnapshot_ModifyDataProvider(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyDataProvider(context.Background(), &ModifyDataProviderInput{})
+	got, err := svc.ModifyDataProvider(context.Background(), &ModifyDataProviderInput{
+		DataProviderIdentifier: ptr.String("__DataProviderIdentifier__"),
+		DataProviderName:       ptr.String("__DataProviderName__"),
+		Description:            ptr.String("__Description__"),
+		Engine:                 ptr.String("__Engine__"),
+		Virtual:                ptr.Bool(true),
+		ExactSettings:          ptr.Bool(true),
+		Settings: &types.DataProviderSettingsMemberRedshiftSettings{
+			Value: types.RedshiftDataProviderSettings{
+				ServerName:      ptr.String("__ServerName__"),
+				Port:            ptr.Int32(1),
+				DatabaseName:    ptr.String("__DatabaseName__"),
+				S3Path:          ptr.String("__S3Path__"),
+				S3AccessRoleArn: ptr.String("__S3AccessRoleArn__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6572,7 +8100,365 @@ func TestCheckResponseSnapshot_ModifyEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyEndpoint(context.Background(), &ModifyEndpointInput{})
+	got, err := svc.ModifyEndpoint(context.Background(), &ModifyEndpointInput{
+		EndpointArn:               ptr.String("__EndpointArn__"),
+		EndpointIdentifier:        ptr.String("__EndpointIdentifier__"),
+		EndpointType:              types.ReplicationEndpointTypeValue("source"),
+		EngineName:                ptr.String("__EngineName__"),
+		Username:                  ptr.String("__Username__"),
+		Password:                  ptr.String("__Password__"),
+		ServerName:                ptr.String("__ServerName__"),
+		Port:                      ptr.Int32(1),
+		DatabaseName:              ptr.String("__DatabaseName__"),
+		ExtraConnectionAttributes: ptr.String("__ExtraConnectionAttributes__"),
+		CertificateArn:            ptr.String("__CertificateArn__"),
+		SslMode:                   types.DmsSslModeValue("none"),
+		ServiceAccessRoleArn:      ptr.String("__ServiceAccessRoleArn__"),
+		ExternalTableDefinition:   ptr.String("__ExternalTableDefinition__"),
+		DynamoDbSettings: &types.DynamoDbSettings{
+			ServiceAccessRoleArn: ptr.String("__ServiceAccessRoleArn__"),
+		},
+		S3Settings: &types.S3Settings{
+			ServiceAccessRoleArn:                 ptr.String("__ServiceAccessRoleArn__"),
+			ExternalTableDefinition:              ptr.String("__ExternalTableDefinition__"),
+			CsvRowDelimiter:                      ptr.String("__CsvRowDelimiter__"),
+			CsvDelimiter:                         ptr.String("__CsvDelimiter__"),
+			BucketFolder:                         ptr.String("__BucketFolder__"),
+			BucketName:                           ptr.String("__BucketName__"),
+			CompressionType:                      types.CompressionTypeValue("none"),
+			EncryptionMode:                       types.EncryptionModeValue("sse-s3"),
+			ServerSideEncryptionKmsKeyId:         ptr.String("__ServerSideEncryptionKmsKeyId__"),
+			DataFormat:                           types.DataFormatValue("csv"),
+			EncodingType:                         types.EncodingTypeValue("plain"),
+			DictPageSizeLimit:                    ptr.Int32(1),
+			RowGroupLength:                       ptr.Int32(1),
+			DataPageSize:                         ptr.Int32(1),
+			ParquetVersion:                       types.ParquetVersionValue("parquet-1-0"),
+			EnableStatistics:                     ptr.Bool(true),
+			IncludeOpForFullLoad:                 ptr.Bool(true),
+			CdcInsertsOnly:                       ptr.Bool(true),
+			TimestampColumnName:                  ptr.String("__TimestampColumnName__"),
+			ParquetTimestampInMillisecond:        ptr.Bool(true),
+			CdcInsertsAndUpdates:                 ptr.Bool(true),
+			DatePartitionEnabled:                 ptr.Bool(true),
+			DatePartitionSequence:                types.DatePartitionSequenceValue("YYYYMMDD"),
+			DatePartitionDelimiter:               types.DatePartitionDelimiterValue("SLASH"),
+			UseCsvNoSupValue:                     ptr.Bool(true),
+			CsvNoSupValue:                        ptr.String("__CsvNoSupValue__"),
+			PreserveTransactions:                 ptr.Bool(true),
+			CdcPath:                              ptr.String("__CdcPath__"),
+			UseTaskStartTimeForFullLoadTimestamp: ptr.Bool(true),
+			CannedAclForObjects:                  types.CannedAclForObjectsValue("none"),
+			AddColumnName:                        ptr.Bool(true),
+			CdcMaxBatchInterval:                  ptr.Int32(1),
+			CdcMinFileSize:                       ptr.Int32(1),
+			CsvNullValue:                         ptr.String("__CsvNullValue__"),
+			IgnoreHeaderRows:                     ptr.Int32(1),
+			MaxFileSize:                          ptr.Int32(1),
+			Rfc4180:                              ptr.Bool(true),
+			DatePartitionTimezone:                ptr.String("__DatePartitionTimezone__"),
+			AddTrailingPaddingCharacter:          ptr.Bool(true),
+			ExpectedBucketOwner:                  ptr.String("__ExpectedBucketOwner__"),
+			GlueCatalogGeneration:                ptr.Bool(true),
+		},
+		DmsTransferSettings: &types.DmsTransferSettings{
+			ServiceAccessRoleArn: ptr.String("__ServiceAccessRoleArn__"),
+			BucketName:           ptr.String("__BucketName__"),
+		},
+		MongoDbSettings: &types.MongoDbSettings{
+			Username:                    ptr.String("__Username__"),
+			Password:                    ptr.String("__Password__"),
+			ServerName:                  ptr.String("__ServerName__"),
+			Port:                        ptr.Int32(1),
+			DatabaseName:                ptr.String("__DatabaseName__"),
+			AuthType:                    types.AuthTypeValue("no"),
+			AuthMechanism:               types.AuthMechanismValue("default"),
+			NestingLevel:                types.NestingLevelValue("none"),
+			ExtractDocId:                ptr.String("__ExtractDocId__"),
+			DocsToInvestigate:           ptr.String("__DocsToInvestigate__"),
+			AuthSource:                  ptr.String("__AuthSource__"),
+			KmsKeyId:                    ptr.String("__KmsKeyId__"),
+			SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+			UseUpdateLookUp:             ptr.Bool(true),
+			ReplicateShardCollections:   ptr.Bool(true),
+		},
+		KinesisSettings: &types.KinesisSettings{
+			StreamArn:                   ptr.String("__StreamArn__"),
+			MessageFormat:               types.MessageFormatValue("json"),
+			ServiceAccessRoleArn:        ptr.String("__ServiceAccessRoleArn__"),
+			IncludeTransactionDetails:   ptr.Bool(true),
+			IncludePartitionValue:       ptr.Bool(true),
+			PartitionIncludeSchemaTable: ptr.Bool(true),
+			IncludeTableAlterOperations: ptr.Bool(true),
+			IncludeControlDetails:       ptr.Bool(true),
+			IncludeNullAndEmpty:         ptr.Bool(true),
+			NoHexPrefix:                 ptr.Bool(true),
+			UseLargeIntegerValue:        ptr.Bool(true),
+		},
+		KafkaSettings: &types.KafkaSettings{
+			Broker:                             ptr.String("__Broker__"),
+			Topic:                              ptr.String("__Topic__"),
+			MessageFormat:                      types.MessageFormatValue("json"),
+			IncludeTransactionDetails:          ptr.Bool(true),
+			IncludePartitionValue:              ptr.Bool(true),
+			PartitionIncludeSchemaTable:        ptr.Bool(true),
+			IncludeTableAlterOperations:        ptr.Bool(true),
+			IncludeControlDetails:              ptr.Bool(true),
+			MessageMaxBytes:                    ptr.Int32(1),
+			IncludeNullAndEmpty:                ptr.Bool(true),
+			SecurityProtocol:                   types.KafkaSecurityProtocol("plaintext"),
+			SslClientCertificateArn:            ptr.String("__SslClientCertificateArn__"),
+			SslClientKeyArn:                    ptr.String("__SslClientKeyArn__"),
+			SslClientKeyPassword:               ptr.String("__SslClientKeyPassword__"),
+			SslCaCertificateArn:                ptr.String("__SslCaCertificateArn__"),
+			SaslUsername:                       ptr.String("__SaslUsername__"),
+			SaslPassword:                       ptr.String("__SaslPassword__"),
+			NoHexPrefix:                        ptr.Bool(true),
+			SaslMechanism:                      types.KafkaSaslMechanism("scram-sha-512"),
+			SslEndpointIdentificationAlgorithm: types.KafkaSslEndpointIdentificationAlgorithm("none"),
+			UseLargeIntegerValue:               ptr.Bool(true),
+		},
+		ElasticsearchSettings: &types.ElasticsearchSettings{
+			ServiceAccessRoleArn:    ptr.String("__ServiceAccessRoleArn__"),
+			EndpointUri:             ptr.String("__EndpointUri__"),
+			FullLoadErrorPercentage: ptr.Int32(1),
+			ErrorRetryDuration:      ptr.Int32(1),
+			UseNewMappingType:       ptr.Bool(true),
+		},
+		NeptuneSettings: &types.NeptuneSettings{
+			ServiceAccessRoleArn: ptr.String("__ServiceAccessRoleArn__"),
+			S3BucketName:         ptr.String("__S3BucketName__"),
+			S3BucketFolder:       ptr.String("__S3BucketFolder__"),
+			ErrorRetryDuration:   ptr.Int32(1),
+			MaxFileSize:          ptr.Int32(1),
+			MaxRetryCount:        ptr.Int32(1),
+			IamAuthEnabled:       ptr.Bool(true),
+		},
+		RedshiftSettings: &types.RedshiftSettings{
+			AcceptAnyDate:                ptr.Bool(true),
+			AfterConnectScript:           ptr.String("__AfterConnectScript__"),
+			BucketFolder:                 ptr.String("__BucketFolder__"),
+			BucketName:                   ptr.String("__BucketName__"),
+			CaseSensitiveNames:           ptr.Bool(true),
+			CompUpdate:                   ptr.Bool(true),
+			ConnectionTimeout:            ptr.Int32(1),
+			DatabaseName:                 ptr.String("__DatabaseName__"),
+			DateFormat:                   ptr.String("__DateFormat__"),
+			EmptyAsNull:                  ptr.Bool(true),
+			EncryptionMode:               types.EncryptionModeValue("sse-s3"),
+			ExplicitIds:                  ptr.Bool(true),
+			FileTransferUploadStreams:    ptr.Int32(1),
+			LoadTimeout:                  ptr.Int32(1),
+			MaxFileSize:                  ptr.Int32(1),
+			Password:                     ptr.String("__Password__"),
+			Port:                         ptr.Int32(1),
+			RemoveQuotes:                 ptr.Bool(true),
+			ReplaceInvalidChars:          ptr.String("__ReplaceInvalidChars__"),
+			ReplaceChars:                 ptr.String("__ReplaceChars__"),
+			ServerName:                   ptr.String("__ServerName__"),
+			ServiceAccessRoleArn:         ptr.String("__ServiceAccessRoleArn__"),
+			ServerSideEncryptionKmsKeyId: ptr.String("__ServerSideEncryptionKmsKeyId__"),
+			TimeFormat:                   ptr.String("__TimeFormat__"),
+			TrimBlanks:                   ptr.Bool(true),
+			TruncateColumns:              ptr.Bool(true),
+			Username:                     ptr.String("__Username__"),
+			WriteBufferSize:              ptr.Int32(1),
+			SecretsManagerAccessRoleArn:  ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:       ptr.String("__SecretsManagerSecretId__"),
+			MapBooleanAsBoolean:          ptr.Bool(true),
+		},
+		PostgreSQLSettings: &types.PostgreSQLSettings{
+			AfterConnectScript:          ptr.String("__AfterConnectScript__"),
+			CaptureDdls:                 ptr.Bool(true),
+			MaxFileSize:                 ptr.Int32(1),
+			DatabaseName:                ptr.String("__DatabaseName__"),
+			DdlArtifactsSchema:          ptr.String("__DdlArtifactsSchema__"),
+			ExecuteTimeout:              ptr.Int32(1),
+			FailTasksOnLobTruncation:    ptr.Bool(true),
+			HeartbeatEnable:             ptr.Bool(true),
+			HeartbeatSchema:             ptr.String("__HeartbeatSchema__"),
+			HeartbeatFrequency:          ptr.Int32(1),
+			Password:                    ptr.String("__Password__"),
+			Port:                        ptr.Int32(1),
+			ServerName:                  ptr.String("__ServerName__"),
+			Username:                    ptr.String("__Username__"),
+			SlotName:                    ptr.String("__SlotName__"),
+			PluginName:                  types.PluginNameValue("no-preference"),
+			SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+			TrimSpaceInChar:             ptr.Bool(true),
+			MapBooleanAsBoolean:         ptr.Bool(true),
+			MapJsonbAsClob:              ptr.Bool(true),
+			MapLongVarcharAs:            types.LongVarcharMappingType("wstring"),
+			DatabaseMode:                types.DatabaseMode("default"),
+			BabelfishDatabaseName:       ptr.String("__BabelfishDatabaseName__"),
+			DisableUnicodeSourceFilter:  ptr.Bool(true),
+			ServiceAccessRoleArn:        ptr.String("__ServiceAccessRoleArn__"),
+			AuthenticationMethod:        types.PostgreSQLAuthenticationMethod("password"),
+		},
+		MySQLSettings: &types.MySQLSettings{
+			AfterConnectScript:            ptr.String("__AfterConnectScript__"),
+			CleanSourceMetadataOnMismatch: ptr.Bool(true),
+			DatabaseName:                  ptr.String("__DatabaseName__"),
+			EventsPollInterval:            ptr.Int32(1),
+			TargetDbType:                  types.TargetDbType("specific-database"),
+			MaxFileSize:                   ptr.Int32(1),
+			ParallelLoadThreads:           ptr.Int32(1),
+			Password:                      ptr.String("__Password__"),
+			Port:                          ptr.Int32(1),
+			ServerName:                    ptr.String("__ServerName__"),
+			ServerTimezone:                ptr.String("__ServerTimezone__"),
+			Username:                      ptr.String("__Username__"),
+			SecretsManagerAccessRoleArn:   ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:        ptr.String("__SecretsManagerSecretId__"),
+			ExecuteTimeout:                ptr.Int32(1),
+			ServiceAccessRoleArn:          ptr.String("__ServiceAccessRoleArn__"),
+			AuthenticationMethod:          types.MySQLAuthenticationMethod("password"),
+		},
+		OracleSettings: &types.OracleSettings{
+			AddSupplementalLogging:      ptr.Bool(true),
+			ArchivedLogDestId:           ptr.Int32(1),
+			AdditionalArchivedLogDestId: ptr.Int32(1),
+			ExtraArchivedLogDestIds: []int32{
+				1,
+				1,
+			},
+			AllowSelectNestedTables:                ptr.Bool(true),
+			ParallelAsmReadThreads:                 ptr.Int32(1),
+			ReadAheadBlocks:                        ptr.Int32(1),
+			AccessAlternateDirectly:                ptr.Bool(true),
+			UseAlternateFolderForOnline:            ptr.Bool(true),
+			OraclePathPrefix:                       ptr.String("__OraclePathPrefix__"),
+			UsePathPrefix:                          ptr.String("__UsePathPrefix__"),
+			ReplacePathPrefix:                      ptr.Bool(true),
+			EnableHomogenousTablespace:             ptr.Bool(true),
+			DirectPathNoLog:                        ptr.Bool(true),
+			ArchivedLogsOnly:                       ptr.Bool(true),
+			AsmPassword:                            ptr.String("__AsmPassword__"),
+			AsmServer:                              ptr.String("__AsmServer__"),
+			AsmUser:                                ptr.String("__AsmUser__"),
+			CharLengthSemantics:                    types.CharLengthSemantics("default"),
+			DatabaseName:                           ptr.String("__DatabaseName__"),
+			DirectPathParallelLoad:                 ptr.Bool(true),
+			FailTasksOnLobTruncation:               ptr.Bool(true),
+			NumberDatatypeScale:                    ptr.Int32(1),
+			Password:                               ptr.String("__Password__"),
+			Port:                                   ptr.Int32(1),
+			ReadTableSpaceName:                     ptr.Bool(true),
+			RetryInterval:                          ptr.Int32(1),
+			SecurityDbEncryption:                   ptr.String("__SecurityDbEncryption__"),
+			SecurityDbEncryptionName:               ptr.String("__SecurityDbEncryptionName__"),
+			ServerName:                             ptr.String("__ServerName__"),
+			SpatialDataOptionToGeoJsonFunctionName: ptr.String("__SpatialDataOptionToGeoJsonFunctionName__"),
+			StandbyDelayTime:                       ptr.Int32(1),
+			Username:                               ptr.String("__Username__"),
+			UseBFile:                               ptr.Bool(true),
+			UseDirectPathFullLoad:                  ptr.Bool(true),
+			UseLogminerReader:                      ptr.Bool(true),
+			SecretsManagerAccessRoleArn:            ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:                 ptr.String("__SecretsManagerSecretId__"),
+			SecretsManagerOracleAsmAccessRoleArn:   ptr.String("__SecretsManagerOracleAsmAccessRoleArn__"),
+			SecretsManagerOracleAsmSecretId:        ptr.String("__SecretsManagerOracleAsmSecretId__"),
+			TrimSpaceInChar:                        ptr.Bool(true),
+			ConvertTimestampWithZoneToUTC:          ptr.Bool(true),
+			OpenTransactionWindow:                  ptr.Int32(1),
+			AuthenticationMethod:                   types.OracleAuthenticationMethod("password"),
+		},
+		SybaseSettings: &types.SybaseSettings{
+			DatabaseName:                ptr.String("__DatabaseName__"),
+			Password:                    ptr.String("__Password__"),
+			Port:                        ptr.Int32(1),
+			ServerName:                  ptr.String("__ServerName__"),
+			Username:                    ptr.String("__Username__"),
+			SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+		},
+		MicrosoftSQLServerSettings: &types.MicrosoftSQLServerSettings{
+			Port:                        ptr.Int32(1),
+			BcpPacketSize:               ptr.Int32(1),
+			DatabaseName:                ptr.String("__DatabaseName__"),
+			ControlTablesFileGroup:      ptr.String("__ControlTablesFileGroup__"),
+			Password:                    ptr.String("__Password__"),
+			QuerySingleAlwaysOnNode:     ptr.Bool(true),
+			ReadBackupOnly:              ptr.Bool(true),
+			SafeguardPolicy:             types.SafeguardPolicy("rely-on-sql-server-replication-agent"),
+			ServerName:                  ptr.String("__ServerName__"),
+			Username:                    ptr.String("__Username__"),
+			UseBcpFullLoad:              ptr.Bool(true),
+			UseThirdPartyBackupDevice:   ptr.Bool(true),
+			SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+			TrimSpaceInChar:             ptr.Bool(true),
+			TlogAccessMode:              types.TlogAccessMode("BackupOnly"),
+			ForceLobLookup:              ptr.Bool(true),
+			AuthenticationMethod:        types.SqlServerAuthenticationMethod("password"),
+		},
+		IBMDb2Settings: &types.IBMDb2Settings{
+			DatabaseName:                ptr.String("__DatabaseName__"),
+			Password:                    ptr.String("__Password__"),
+			Port:                        ptr.Int32(1),
+			ServerName:                  ptr.String("__ServerName__"),
+			SetDataCaptureChanges:       ptr.Bool(true),
+			CurrentLsn:                  ptr.String("__CurrentLsn__"),
+			MaxKBytesPerRead:            ptr.Int32(1),
+			Username:                    ptr.String("__Username__"),
+			SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+			LoadTimeout:                 ptr.Int32(1),
+			WriteBufferSize:             ptr.Int32(1),
+			MaxFileSize:                 ptr.Int32(1),
+			KeepCsvFiles:                ptr.Bool(true),
+		},
+		DocDbSettings: &types.DocDbSettings{
+			Username:                    ptr.String("__Username__"),
+			Password:                    ptr.String("__Password__"),
+			ServerName:                  ptr.String("__ServerName__"),
+			Port:                        ptr.Int32(1),
+			DatabaseName:                ptr.String("__DatabaseName__"),
+			NestingLevel:                types.NestingLevelValue("none"),
+			ExtractDocId:                ptr.Bool(true),
+			DocsToInvestigate:           ptr.Int32(1),
+			KmsKeyId:                    ptr.String("__KmsKeyId__"),
+			SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+			UseUpdateLookUp:             ptr.Bool(true),
+			ReplicateShardCollections:   ptr.Bool(true),
+		},
+		RedisSettings: &types.RedisSettings{
+			ServerName:          ptr.String("__ServerName__"),
+			Port:                1,
+			SslSecurityProtocol: types.SslSecurityProtocolValue("plaintext"),
+			AuthType:            types.RedisAuthTypeValue("none"),
+			AuthUserName:        ptr.String("__AuthUserName__"),
+			AuthPassword:        ptr.String("__AuthPassword__"),
+			SslCaCertificateArn: ptr.String("__SslCaCertificateArn__"),
+		},
+		ExactSettings: ptr.Bool(true),
+		GcpMySQLSettings: &types.GcpMySQLSettings{
+			AfterConnectScript:            ptr.String("__AfterConnectScript__"),
+			CleanSourceMetadataOnMismatch: ptr.Bool(true),
+			DatabaseName:                  ptr.String("__DatabaseName__"),
+			EventsPollInterval:            ptr.Int32(1),
+			TargetDbType:                  types.TargetDbType("specific-database"),
+			MaxFileSize:                   ptr.Int32(1),
+			ParallelLoadThreads:           ptr.Int32(1),
+			Password:                      ptr.String("__Password__"),
+			Port:                          ptr.Int32(1),
+			ServerName:                    ptr.String("__ServerName__"),
+			ServerTimezone:                ptr.String("__ServerTimezone__"),
+			Username:                      ptr.String("__Username__"),
+			SecretsManagerAccessRoleArn:   ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:        ptr.String("__SecretsManagerSecretId__"),
+		},
+		TimestreamSettings: &types.TimestreamSettings{
+			DatabaseName:              ptr.String("__DatabaseName__"),
+			MemoryDuration:            ptr.Int32(1),
+			MagneticDuration:          ptr.Int32(1),
+			CdcInsertsAndUpdates:      ptr.Bool(true),
+			EnableMagneticStoreWrites: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6609,7 +8495,16 @@ func TestCheckResponseSnapshot_ModifyEventSubscription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyEventSubscription(context.Background(), &ModifyEventSubscriptionInput{})
+	got, err := svc.ModifyEventSubscription(context.Background(), &ModifyEventSubscriptionInput{
+		SubscriptionName: ptr.String("__SubscriptionName__"),
+		SnsTopicArn:      ptr.String("__SnsTopicArn__"),
+		SourceType:       ptr.String("__SourceType__"),
+		EventCategories: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Enabled: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6644,7 +8539,20 @@ func TestCheckResponseSnapshot_ModifyInstanceProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyInstanceProfile(context.Background(), &ModifyInstanceProfileInput{})
+	got, err := svc.ModifyInstanceProfile(context.Background(), &ModifyInstanceProfileInput{
+		InstanceProfileIdentifier: ptr.String("__InstanceProfileIdentifier__"),
+		AvailabilityZone:          ptr.String("__AvailabilityZone__"),
+		KmsKeyArn:                 ptr.String("__KmsKeyArn__"),
+		PubliclyAccessible:        ptr.Bool(true),
+		NetworkType:               ptr.String("__NetworkType__"),
+		InstanceProfileName:       ptr.String("__InstanceProfileName__"),
+		Description:               ptr.String("__Description__"),
+		SubnetGroupIdentifier:     ptr.String("__SubnetGroupIdentifier__"),
+		VpcSecurityGroups: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6705,7 +8613,41 @@ func TestCheckResponseSnapshot_ModifyMigrationProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyMigrationProject(context.Background(), &ModifyMigrationProjectInput{})
+	got, err := svc.ModifyMigrationProject(context.Background(), &ModifyMigrationProjectInput{
+		MigrationProjectIdentifier: ptr.String("__MigrationProjectIdentifier__"),
+		MigrationProjectName:       ptr.String("__MigrationProjectName__"),
+		SourceDataProviderDescriptors: []types.DataProviderDescriptorDefinition{
+			{
+				DataProviderIdentifier:      ptr.String("__DataProviderIdentifier__"),
+				SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+				SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			},
+			{
+				DataProviderIdentifier:      ptr.String("__DataProviderIdentifier__"),
+				SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+				SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			},
+		},
+		TargetDataProviderDescriptors: []types.DataProviderDescriptorDefinition{
+			{
+				DataProviderIdentifier:      ptr.String("__DataProviderIdentifier__"),
+				SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+				SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			},
+			{
+				DataProviderIdentifier:      ptr.String("__DataProviderIdentifier__"),
+				SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+				SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			},
+		},
+		InstanceProfileIdentifier: ptr.String("__InstanceProfileIdentifier__"),
+		TransformationRules:       ptr.String("__TransformationRules__"),
+		Description:               ptr.String("__Description__"),
+		SchemaConversionApplicationAttributes: &types.SCApplicationAttributes{
+			S3BucketPath:    ptr.String("__S3BucketPath__"),
+			S3BucketRoleArn: ptr.String("__S3BucketRoleArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6752,7 +8694,30 @@ func TestCheckResponseSnapshot_ModifyReplicationConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyReplicationConfig(context.Background(), &ModifyReplicationConfigInput{})
+	got, err := svc.ModifyReplicationConfig(context.Background(), &ModifyReplicationConfigInput{
+		ReplicationConfigArn:        ptr.String("__ReplicationConfigArn__"),
+		ReplicationConfigIdentifier: ptr.String("__ReplicationConfigIdentifier__"),
+		ReplicationType:             types.MigrationTypeValue("full-load"),
+		TableMappings:               ptr.String("__TableMappings__"),
+		ReplicationSettings:         ptr.String("__ReplicationSettings__"),
+		SupplementalSettings:        ptr.String("__SupplementalSettings__"),
+		ComputeConfig: &types.ComputeConfig{
+			AvailabilityZone:           ptr.String("__AvailabilityZone__"),
+			DnsNameServers:             ptr.String("__DnsNameServers__"),
+			KmsKeyId:                   ptr.String("__KmsKeyId__"),
+			MaxCapacityUnits:           ptr.Int32(1),
+			MinCapacityUnits:           ptr.Int32(1),
+			MultiAZ:                    ptr.Bool(true),
+			PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+			ReplicationSubnetGroupId:   ptr.String("__ReplicationSubnetGroupId__"),
+			VpcSecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		SourceEndpointArn: ptr.String("__SourceEndpointArn__"),
+		TargetEndpointArn: ptr.String("__TargetEndpointArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6854,7 +8819,28 @@ func TestCheckResponseSnapshot_ModifyReplicationInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyReplicationInstance(context.Background(), &ModifyReplicationInstanceInput{})
+	got, err := svc.ModifyReplicationInstance(context.Background(), &ModifyReplicationInstanceInput{
+		ReplicationInstanceArn:   ptr.String("__ReplicationInstanceArn__"),
+		AllocatedStorage:         ptr.Int32(1),
+		ApplyImmediately:         true,
+		ReplicationInstanceClass: ptr.String("__ReplicationInstanceClass__"),
+		VpcSecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PreferredMaintenanceWindow:    ptr.String("__PreferredMaintenanceWindow__"),
+		MultiAZ:                       ptr.Bool(true),
+		EngineVersion:                 ptr.String("__EngineVersion__"),
+		AllowMajorVersionUpgrade:      true,
+		AutoMinorVersionUpgrade:       ptr.Bool(true),
+		ReplicationInstanceIdentifier: ptr.String("__ReplicationInstanceIdentifier__"),
+		NetworkType:                   ptr.String("__NetworkType__"),
+		KerberosAuthenticationSettings: &types.KerberosAuthenticationSettings{
+			KeyCacheSecretId:     ptr.String("__KeyCacheSecretId__"),
+			KeyCacheSecretIamArn: ptr.String("__KeyCacheSecretIamArn__"),
+			Krb5FileContents:     ptr.String("__Krb5FileContents__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6901,7 +8887,14 @@ func TestCheckResponseSnapshot_ModifyReplicationSubnetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyReplicationSubnetGroup(context.Background(), &ModifyReplicationSubnetGroupInput{})
+	got, err := svc.ModifyReplicationSubnetGroup(context.Background(), &ModifyReplicationSubnetGroupInput{
+		ReplicationSubnetGroupIdentifier:  ptr.String("__ReplicationSubnetGroupIdentifier__"),
+		ReplicationSubnetGroupDescription: ptr.String("__ReplicationSubnetGroupDescription__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6954,7 +8947,17 @@ func TestCheckResponseSnapshot_ModifyReplicationTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ModifyReplicationTask(context.Background(), &ModifyReplicationTaskInput{})
+	got, err := svc.ModifyReplicationTask(context.Background(), &ModifyReplicationTaskInput{
+		ReplicationTaskArn:        ptr.String("__ReplicationTaskArn__"),
+		ReplicationTaskIdentifier: ptr.String("__ReplicationTaskIdentifier__"),
+		MigrationType:             types.MigrationTypeValue("full-load"),
+		TableMappings:             ptr.String("__TableMappings__"),
+		ReplicationTaskSettings:   ptr.String("__ReplicationTaskSettings__"),
+		CdcStartTime:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CdcStartPosition:          ptr.String("__CdcStartPosition__"),
+		CdcStopPosition:           ptr.String("__CdcStopPosition__"),
+		TaskData:                  ptr.String("__TaskData__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7007,7 +9010,10 @@ func TestCheckResponseSnapshot_MoveReplicationTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MoveReplicationTask(context.Background(), &MoveReplicationTaskInput{})
+	got, err := svc.MoveReplicationTask(context.Background(), &MoveReplicationTaskInput{
+		ReplicationTaskArn:           ptr.String("__ReplicationTaskArn__"),
+		TargetReplicationInstanceArn: ptr.String("__TargetReplicationInstanceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7109,7 +9115,11 @@ func TestCheckResponseSnapshot_RebootReplicationInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RebootReplicationInstance(context.Background(), &RebootReplicationInstanceInput{})
+	got, err := svc.RebootReplicationInstance(context.Background(), &RebootReplicationInstanceInput{
+		ReplicationInstanceArn: ptr.String("__ReplicationInstanceArn__"),
+		ForceFailover:          ptr.Bool(true),
+		ForcePlannedFailover:   ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7136,7 +9146,10 @@ func TestCheckResponseSnapshot_RefreshSchemas(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RefreshSchemas(context.Background(), &RefreshSchemasInput{})
+	got, err := svc.RefreshSchemas(context.Background(), &RefreshSchemasInput{
+		EndpointArn:            ptr.String("__EndpointArn__"),
+		ReplicationInstanceArn: ptr.String("__ReplicationInstanceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7157,7 +9170,20 @@ func TestCheckResponseSnapshot_ReloadReplicationTables(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ReloadReplicationTables(context.Background(), &ReloadReplicationTablesInput{})
+	got, err := svc.ReloadReplicationTables(context.Background(), &ReloadReplicationTablesInput{
+		ReplicationConfigArn: ptr.String("__ReplicationConfigArn__"),
+		TablesToReload: []types.TableToReload{
+			{
+				SchemaName: ptr.String("__SchemaName__"),
+				TableName:  ptr.String("__TableName__"),
+			},
+			{
+				SchemaName: ptr.String("__SchemaName__"),
+				TableName:  ptr.String("__TableName__"),
+			},
+		},
+		ReloadOption: types.ReloadOptionValue("data-reload"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7178,7 +9204,20 @@ func TestCheckResponseSnapshot_ReloadTables(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ReloadTables(context.Background(), &ReloadTablesInput{})
+	got, err := svc.ReloadTables(context.Background(), &ReloadTablesInput{
+		ReplicationTaskArn: ptr.String("__ReplicationTaskArn__"),
+		TablesToReload: []types.TableToReload{
+			{
+				SchemaName: ptr.String("__SchemaName__"),
+				TableName:  ptr.String("__TableName__"),
+			},
+			{
+				SchemaName: ptr.String("__SchemaName__"),
+				TableName:  ptr.String("__TableName__"),
+			},
+		},
+		ReloadOption: types.ReloadOptionValue("data-reload"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7197,7 +9236,13 @@ func TestCheckResponseSnapshot_RemoveTagsFromResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveTagsFromResource(context.Background(), &RemoveTagsFromResourceInput{})
+	got, err := svc.RemoveTagsFromResource(context.Background(), &RemoveTagsFromResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7298,7 +9343,10 @@ func TestCheckResponseSnapshot_StartDataMigration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartDataMigration(context.Background(), &StartDataMigrationInput{})
+	got, err := svc.StartDataMigration(context.Background(), &StartDataMigrationInput{
+		DataMigrationIdentifier: ptr.String("__DataMigrationIdentifier__"),
+		StartType:               types.StartReplicationMigrationTypeValue("reload-target"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7319,7 +9367,9 @@ func TestCheckResponseSnapshot_StartExtensionPackAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartExtensionPackAssociation(context.Background(), &StartExtensionPackAssociationInput{})
+	got, err := svc.StartExtensionPackAssociation(context.Background(), &StartExtensionPackAssociationInput{
+		MigrationProjectIdentifier: ptr.String("__MigrationProjectIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7340,7 +9390,10 @@ func TestCheckResponseSnapshot_StartMetadataModelAssessment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMetadataModelAssessment(context.Background(), &StartMetadataModelAssessmentInput{})
+	got, err := svc.StartMetadataModelAssessment(context.Background(), &StartMetadataModelAssessmentInput{
+		MigrationProjectIdentifier: ptr.String("__MigrationProjectIdentifier__"),
+		SelectionRules:             ptr.String("__SelectionRules__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7361,7 +9414,10 @@ func TestCheckResponseSnapshot_StartMetadataModelConversion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMetadataModelConversion(context.Background(), &StartMetadataModelConversionInput{})
+	got, err := svc.StartMetadataModelConversion(context.Background(), &StartMetadataModelConversionInput{
+		MigrationProjectIdentifier: ptr.String("__MigrationProjectIdentifier__"),
+		SelectionRules:             ptr.String("__SelectionRules__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7382,7 +9438,16 @@ func TestCheckResponseSnapshot_StartMetadataModelCreation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMetadataModelCreation(context.Background(), &StartMetadataModelCreationInput{})
+	got, err := svc.StartMetadataModelCreation(context.Background(), &StartMetadataModelCreationInput{
+		MigrationProjectIdentifier: ptr.String("__MigrationProjectIdentifier__"),
+		SelectionRules:             ptr.String("__SelectionRules__"),
+		MetadataModelName:          ptr.String("__MetadataModelName__"),
+		Properties: &types.MetadataModelPropertiesMemberStatementProperties{
+			Value: types.StatementProperties{
+				Definition: ptr.String("__Definition__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7403,7 +9468,12 @@ func TestCheckResponseSnapshot_StartMetadataModelExportAsScript(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMetadataModelExportAsScript(context.Background(), &StartMetadataModelExportAsScriptInput{})
+	got, err := svc.StartMetadataModelExportAsScript(context.Background(), &StartMetadataModelExportAsScriptInput{
+		MigrationProjectIdentifier: ptr.String("__MigrationProjectIdentifier__"),
+		SelectionRules:             ptr.String("__SelectionRules__"),
+		Origin:                     types.OriginTypeValue("SOURCE"),
+		FileName:                   ptr.String("__FileName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7424,7 +9494,11 @@ func TestCheckResponseSnapshot_StartMetadataModelExportToTarget(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMetadataModelExportToTarget(context.Background(), &StartMetadataModelExportToTargetInput{})
+	got, err := svc.StartMetadataModelExportToTarget(context.Background(), &StartMetadataModelExportToTargetInput{
+		MigrationProjectIdentifier: ptr.String("__MigrationProjectIdentifier__"),
+		SelectionRules:             ptr.String("__SelectionRules__"),
+		OverwriteExtensionPack:     ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7445,7 +9519,12 @@ func TestCheckResponseSnapshot_StartMetadataModelImport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMetadataModelImport(context.Background(), &StartMetadataModelImportInput{})
+	got, err := svc.StartMetadataModelImport(context.Background(), &StartMetadataModelImportInput{
+		MigrationProjectIdentifier: ptr.String("__MigrationProjectIdentifier__"),
+		SelectionRules:             ptr.String("__SelectionRules__"),
+		Origin:                     types.OriginTypeValue("SOURCE"),
+		Refresh:                    true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7464,7 +9543,13 @@ func TestCheckResponseSnapshot_StartRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartRecommendations(context.Background(), &StartRecommendationsInput{})
+	got, err := svc.StartRecommendations(context.Background(), &StartRecommendationsInput{
+		DatabaseId: ptr.String("__DatabaseId__"),
+		Settings: &types.RecommendationSettings{
+			InstanceSizingType: ptr.String("__InstanceSizingType__"),
+			WorkloadType:       ptr.String("__WorkloadType__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7576,7 +9661,14 @@ func TestCheckResponseSnapshot_StartReplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartReplication(context.Background(), &StartReplicationInput{})
+	got, err := svc.StartReplication(context.Background(), &StartReplicationInput{
+		ReplicationConfigArn:           ptr.String("__ReplicationConfigArn__"),
+		StartReplicationType:           ptr.String("__StartReplicationType__"),
+		PremigrationAssessmentSettings: ptr.String("__PremigrationAssessmentSettings__"),
+		CdcStartTime:                   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CdcStartPosition:               ptr.String("__CdcStartPosition__"),
+		CdcStopPosition:                ptr.String("__CdcStopPosition__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7629,7 +9721,13 @@ func TestCheckResponseSnapshot_StartReplicationTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartReplicationTask(context.Background(), &StartReplicationTaskInput{})
+	got, err := svc.StartReplicationTask(context.Background(), &StartReplicationTaskInput{
+		ReplicationTaskArn:       ptr.String("__ReplicationTaskArn__"),
+		StartReplicationTaskType: types.StartReplicationTaskTypeValue("start-replication"),
+		CdcStartTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CdcStartPosition:         ptr.String("__CdcStartPosition__"),
+		CdcStopPosition:          ptr.String("__CdcStopPosition__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7682,7 +9780,9 @@ func TestCheckResponseSnapshot_StartReplicationTaskAssessment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartReplicationTaskAssessment(context.Background(), &StartReplicationTaskAssessmentInput{})
+	got, err := svc.StartReplicationTaskAssessment(context.Background(), &StartReplicationTaskAssessmentInput{
+		ReplicationTaskArn: ptr.String("__ReplicationTaskArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7728,7 +9828,35 @@ func TestCheckResponseSnapshot_StartReplicationTaskAssessmentRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartReplicationTaskAssessmentRun(context.Background(), &StartReplicationTaskAssessmentRunInput{})
+	got, err := svc.StartReplicationTaskAssessmentRun(context.Background(), &StartReplicationTaskAssessmentRunInput{
+		ReplicationTaskArn:   ptr.String("__ReplicationTaskArn__"),
+		ServiceAccessRoleArn: ptr.String("__ServiceAccessRoleArn__"),
+		ResultLocationBucket: ptr.String("__ResultLocationBucket__"),
+		ResultLocationFolder: ptr.String("__ResultLocationFolder__"),
+		ResultEncryptionMode: ptr.String("__ResultEncryptionMode__"),
+		ResultKmsKeyArn:      ptr.String("__ResultKmsKeyArn__"),
+		AssessmentRunName:    ptr.String("__AssessmentRunName__"),
+		IncludeOnly: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Exclude: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7807,7 +9935,9 @@ func TestCheckResponseSnapshot_StopDataMigration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopDataMigration(context.Background(), &StopDataMigrationInput{})
+	got, err := svc.StopDataMigration(context.Background(), &StopDataMigrationInput{
+		DataMigrationIdentifier: ptr.String("__DataMigrationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7919,7 +10049,9 @@ func TestCheckResponseSnapshot_StopReplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopReplication(context.Background(), &StopReplicationInput{})
+	got, err := svc.StopReplication(context.Background(), &StopReplicationInput{
+		ReplicationConfigArn: ptr.String("__ReplicationConfigArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -7972,7 +10104,9 @@ func TestCheckResponseSnapshot_StopReplicationTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopReplicationTask(context.Background(), &StopReplicationTaskInput{})
+	got, err := svc.StopReplicationTask(context.Background(), &StopReplicationTaskInput{
+		ReplicationTaskArn: ptr.String("__ReplicationTaskArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8000,7 +10134,10 @@ func TestCheckResponseSnapshot_TestConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TestConnection(context.Background(), &TestConnectionInput{})
+	got, err := svc.TestConnection(context.Background(), &TestConnectionInput{
+		ReplicationInstanceArn: ptr.String("__ReplicationInstanceArn__"),
+		EndpointArn:            ptr.String("__EndpointArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8021,7 +10158,9 @@ func TestCheckResponseSnapshot_UpdateSubscriptionsToEventBridge(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSubscriptionsToEventBridge(context.Background(), &UpdateSubscriptionsToEventBridgeInput{})
+	got, err := svc.UpdateSubscriptionsToEventBridge(context.Background(), &UpdateSubscriptionsToEventBridgeInput{
+		ForceMove: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8042,7 +10181,24 @@ func TestCheckResponseSnapshot_Error_AccessDeniedFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchStartRecommendations(context.Background(), &BatchStartRecommendationsInput{})
+	_, opErr := svc.BatchStartRecommendations(context.Background(), &BatchStartRecommendationsInput{
+		Data: []types.StartRecommendationsRequestEntry{
+			{
+				DatabaseId: ptr.String("__DatabaseId__"),
+				Settings: &types.RecommendationSettings{
+					InstanceSizingType: ptr.String("__InstanceSizingType__"),
+					WorkloadType:       ptr.String("__WorkloadType__"),
+				},
+			},
+			{
+				DatabaseId: ptr.String("__DatabaseId__"),
+				Settings: &types.RecommendationSettings{
+					InstanceSizingType: ptr.String("__InstanceSizingType__"),
+					WorkloadType:       ptr.String("__WorkloadType__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8067,7 +10223,9 @@ func TestCheckResponseSnapshot_Error_CollectorNotFoundFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteFleetAdvisorCollector(context.Background(), &DeleteFleetAdvisorCollectorInput{})
+	_, opErr := svc.DeleteFleetAdvisorCollector(context.Background(), &DeleteFleetAdvisorCollectorInput{
+		CollectorReferencedId: ptr.String("__CollectorReferencedId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8092,7 +10250,49 @@ func TestCheckResponseSnapshot_Error_FailedDependencyFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataMigration(context.Background(), &CreateDataMigrationInput{})
+	_, opErr := svc.CreateDataMigration(context.Background(), &CreateDataMigrationInput{
+		DataMigrationName:          ptr.String("__DataMigrationName__"),
+		MigrationProjectIdentifier: ptr.String("__MigrationProjectIdentifier__"),
+		DataMigrationType:          types.MigrationTypeValue("full-load"),
+		ServiceAccessRoleArn:       ptr.String("__ServiceAccessRoleArn__"),
+		EnableCloudwatchLogs:       ptr.Bool(true),
+		SourceDataSettings: []types.SourceDataSetting{
+			{
+				CDCStartPosition: ptr.String("__CDCStartPosition__"),
+				CDCStartTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CDCStopTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SlotName:         ptr.String("__SlotName__"),
+			},
+			{
+				CDCStartPosition: ptr.String("__CDCStartPosition__"),
+				CDCStartTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CDCStopTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SlotName:         ptr.String("__SlotName__"),
+			},
+		},
+		TargetDataSettings: []types.TargetDataSetting{
+			{
+				TablePreparationMode: types.TablePreparationMode("do-nothing"),
+			},
+			{
+				TablePreparationMode: types.TablePreparationMode("do-nothing"),
+			},
+		},
+		NumberOfJobs: ptr.Int32(1),
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+		SelectionRules: ptr.String("__SelectionRules__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8117,7 +10317,43 @@ func TestCheckResponseSnapshot_Error_InsufficientResourceCapacityFault(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateReplicationInstance(context.Background(), &CreateReplicationInstanceInput{})
+	_, opErr := svc.CreateReplicationInstance(context.Background(), &CreateReplicationInstanceInput{
+		ReplicationInstanceIdentifier: ptr.String("__ReplicationInstanceIdentifier__"),
+		AllocatedStorage:              ptr.Int32(1),
+		ReplicationInstanceClass:      ptr.String("__ReplicationInstanceClass__"),
+		VpcSecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AvailabilityZone:                 ptr.String("__AvailabilityZone__"),
+		ReplicationSubnetGroupIdentifier: ptr.String("__ReplicationSubnetGroupIdentifier__"),
+		PreferredMaintenanceWindow:       ptr.String("__PreferredMaintenanceWindow__"),
+		MultiAZ:                          ptr.Bool(true),
+		EngineVersion:                    ptr.String("__EngineVersion__"),
+		AutoMinorVersionUpgrade:          ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		PubliclyAccessible: ptr.Bool(true),
+		DnsNameServers:     ptr.String("__DnsNameServers__"),
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+		NetworkType:        ptr.String("__NetworkType__"),
+		KerberosAuthenticationSettings: &types.KerberosAuthenticationSettings{
+			KeyCacheSecretId:     ptr.String("__KeyCacheSecretId__"),
+			KeyCacheSecretIamArn: ptr.String("__KeyCacheSecretIamArn__"),
+			Krb5FileContents:     ptr.String("__Krb5FileContents__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8142,7 +10378,24 @@ func TestCheckResponseSnapshot_Error_InvalidCertificateFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ImportCertificate(context.Background(), &ImportCertificateInput{})
+	_, opErr := svc.ImportCertificate(context.Background(), &ImportCertificateInput{
+		CertificateIdentifier: ptr.String("__CertificateIdentifier__"),
+		CertificatePem:        ptr.String("__CertificatePem__"),
+		CertificateWallet:     []byte("blob"),
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8167,7 +10420,49 @@ func TestCheckResponseSnapshot_Error_InvalidOperationFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataMigration(context.Background(), &CreateDataMigrationInput{})
+	_, opErr := svc.CreateDataMigration(context.Background(), &CreateDataMigrationInput{
+		DataMigrationName:          ptr.String("__DataMigrationName__"),
+		MigrationProjectIdentifier: ptr.String("__MigrationProjectIdentifier__"),
+		DataMigrationType:          types.MigrationTypeValue("full-load"),
+		ServiceAccessRoleArn:       ptr.String("__ServiceAccessRoleArn__"),
+		EnableCloudwatchLogs:       ptr.Bool(true),
+		SourceDataSettings: []types.SourceDataSetting{
+			{
+				CDCStartPosition: ptr.String("__CDCStartPosition__"),
+				CDCStartTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CDCStopTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SlotName:         ptr.String("__SlotName__"),
+			},
+			{
+				CDCStartPosition: ptr.String("__CDCStartPosition__"),
+				CDCStartTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CDCStopTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SlotName:         ptr.String("__SlotName__"),
+			},
+		},
+		TargetDataSettings: []types.TargetDataSetting{
+			{
+				TablePreparationMode: types.TablePreparationMode("do-nothing"),
+			},
+			{
+				TablePreparationMode: types.TablePreparationMode("do-nothing"),
+			},
+		},
+		NumberOfJobs: ptr.Int32(1),
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+		SelectionRules: ptr.String("__SelectionRules__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8192,7 +10487,21 @@ func TestCheckResponseSnapshot_Error_InvalidResourceStateFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{})
+	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8217,7 +10526,42 @@ func TestCheckResponseSnapshot_Error_InvalidSubnet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateReplicationConfig(context.Background(), &CreateReplicationConfigInput{})
+	_, opErr := svc.CreateReplicationConfig(context.Background(), &CreateReplicationConfigInput{
+		ReplicationConfigIdentifier: ptr.String("__ReplicationConfigIdentifier__"),
+		SourceEndpointArn:           ptr.String("__SourceEndpointArn__"),
+		TargetEndpointArn:           ptr.String("__TargetEndpointArn__"),
+		ComputeConfig: &types.ComputeConfig{
+			AvailabilityZone:           ptr.String("__AvailabilityZone__"),
+			DnsNameServers:             ptr.String("__DnsNameServers__"),
+			KmsKeyId:                   ptr.String("__KmsKeyId__"),
+			MaxCapacityUnits:           ptr.Int32(1),
+			MinCapacityUnits:           ptr.Int32(1),
+			MultiAZ:                    ptr.Bool(true),
+			PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+			ReplicationSubnetGroupId:   ptr.String("__ReplicationSubnetGroupId__"),
+			VpcSecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ReplicationType:      types.MigrationTypeValue("full-load"),
+		TableMappings:        ptr.String("__TableMappings__"),
+		ReplicationSettings:  ptr.String("__ReplicationSettings__"),
+		SupplementalSettings: ptr.String("__SupplementalSettings__"),
+		ResourceIdentifier:   ptr.String("__ResourceIdentifier__"),
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8242,7 +10586,32 @@ func TestCheckResponseSnapshot_Error_KMSAccessDeniedFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEventSubscription(context.Background(), &CreateEventSubscriptionInput{})
+	_, opErr := svc.CreateEventSubscription(context.Background(), &CreateEventSubscriptionInput{
+		SubscriptionName: ptr.String("__SubscriptionName__"),
+		SnsTopicArn:      ptr.String("__SnsTopicArn__"),
+		SourceType:       ptr.String("__SourceType__"),
+		EventCategories: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SourceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Enabled: ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8267,7 +10636,32 @@ func TestCheckResponseSnapshot_Error_KMSDisabledFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEventSubscription(context.Background(), &CreateEventSubscriptionInput{})
+	_, opErr := svc.CreateEventSubscription(context.Background(), &CreateEventSubscriptionInput{
+		SubscriptionName: ptr.String("__SubscriptionName__"),
+		SnsTopicArn:      ptr.String("__SnsTopicArn__"),
+		SourceType:       ptr.String("__SourceType__"),
+		EventCategories: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SourceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Enabled: ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8292,7 +10686,35 @@ func TestCheckResponseSnapshot_Error_KMSFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartReplicationTaskAssessmentRun(context.Background(), &StartReplicationTaskAssessmentRunInput{})
+	_, opErr := svc.StartReplicationTaskAssessmentRun(context.Background(), &StartReplicationTaskAssessmentRunInput{
+		ReplicationTaskArn:   ptr.String("__ReplicationTaskArn__"),
+		ServiceAccessRoleArn: ptr.String("__ServiceAccessRoleArn__"),
+		ResultLocationBucket: ptr.String("__ResultLocationBucket__"),
+		ResultLocationFolder: ptr.String("__ResultLocationFolder__"),
+		ResultEncryptionMode: ptr.String("__ResultEncryptionMode__"),
+		ResultKmsKeyArn:      ptr.String("__ResultKmsKeyArn__"),
+		AssessmentRunName:    ptr.String("__AssessmentRunName__"),
+		IncludeOnly: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Exclude: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8317,7 +10739,32 @@ func TestCheckResponseSnapshot_Error_KMSInvalidStateFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEventSubscription(context.Background(), &CreateEventSubscriptionInput{})
+	_, opErr := svc.CreateEventSubscription(context.Background(), &CreateEventSubscriptionInput{
+		SubscriptionName: ptr.String("__SubscriptionName__"),
+		SnsTopicArn:      ptr.String("__SnsTopicArn__"),
+		SourceType:       ptr.String("__SourceType__"),
+		EventCategories: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SourceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Enabled: ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8342,7 +10789,377 @@ func TestCheckResponseSnapshot_Error_KMSKeyNotAccessibleFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEndpoint(context.Background(), &CreateEndpointInput{})
+	_, opErr := svc.CreateEndpoint(context.Background(), &CreateEndpointInput{
+		EndpointIdentifier:        ptr.String("__EndpointIdentifier__"),
+		EndpointType:              types.ReplicationEndpointTypeValue("source"),
+		EngineName:                ptr.String("__EngineName__"),
+		Username:                  ptr.String("__Username__"),
+		Password:                  ptr.String("__Password__"),
+		ServerName:                ptr.String("__ServerName__"),
+		Port:                      ptr.Int32(1),
+		DatabaseName:              ptr.String("__DatabaseName__"),
+		ExtraConnectionAttributes: ptr.String("__ExtraConnectionAttributes__"),
+		KmsKeyId:                  ptr.String("__KmsKeyId__"),
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+		CertificateArn:          ptr.String("__CertificateArn__"),
+		SslMode:                 types.DmsSslModeValue("none"),
+		ServiceAccessRoleArn:    ptr.String("__ServiceAccessRoleArn__"),
+		ExternalTableDefinition: ptr.String("__ExternalTableDefinition__"),
+		DynamoDbSettings: &types.DynamoDbSettings{
+			ServiceAccessRoleArn: ptr.String("__ServiceAccessRoleArn__"),
+		},
+		S3Settings: &types.S3Settings{
+			ServiceAccessRoleArn:                 ptr.String("__ServiceAccessRoleArn__"),
+			ExternalTableDefinition:              ptr.String("__ExternalTableDefinition__"),
+			CsvRowDelimiter:                      ptr.String("__CsvRowDelimiter__"),
+			CsvDelimiter:                         ptr.String("__CsvDelimiter__"),
+			BucketFolder:                         ptr.String("__BucketFolder__"),
+			BucketName:                           ptr.String("__BucketName__"),
+			CompressionType:                      types.CompressionTypeValue("none"),
+			EncryptionMode:                       types.EncryptionModeValue("sse-s3"),
+			ServerSideEncryptionKmsKeyId:         ptr.String("__ServerSideEncryptionKmsKeyId__"),
+			DataFormat:                           types.DataFormatValue("csv"),
+			EncodingType:                         types.EncodingTypeValue("plain"),
+			DictPageSizeLimit:                    ptr.Int32(1),
+			RowGroupLength:                       ptr.Int32(1),
+			DataPageSize:                         ptr.Int32(1),
+			ParquetVersion:                       types.ParquetVersionValue("parquet-1-0"),
+			EnableStatistics:                     ptr.Bool(true),
+			IncludeOpForFullLoad:                 ptr.Bool(true),
+			CdcInsertsOnly:                       ptr.Bool(true),
+			TimestampColumnName:                  ptr.String("__TimestampColumnName__"),
+			ParquetTimestampInMillisecond:        ptr.Bool(true),
+			CdcInsertsAndUpdates:                 ptr.Bool(true),
+			DatePartitionEnabled:                 ptr.Bool(true),
+			DatePartitionSequence:                types.DatePartitionSequenceValue("YYYYMMDD"),
+			DatePartitionDelimiter:               types.DatePartitionDelimiterValue("SLASH"),
+			UseCsvNoSupValue:                     ptr.Bool(true),
+			CsvNoSupValue:                        ptr.String("__CsvNoSupValue__"),
+			PreserveTransactions:                 ptr.Bool(true),
+			CdcPath:                              ptr.String("__CdcPath__"),
+			UseTaskStartTimeForFullLoadTimestamp: ptr.Bool(true),
+			CannedAclForObjects:                  types.CannedAclForObjectsValue("none"),
+			AddColumnName:                        ptr.Bool(true),
+			CdcMaxBatchInterval:                  ptr.Int32(1),
+			CdcMinFileSize:                       ptr.Int32(1),
+			CsvNullValue:                         ptr.String("__CsvNullValue__"),
+			IgnoreHeaderRows:                     ptr.Int32(1),
+			MaxFileSize:                          ptr.Int32(1),
+			Rfc4180:                              ptr.Bool(true),
+			DatePartitionTimezone:                ptr.String("__DatePartitionTimezone__"),
+			AddTrailingPaddingCharacter:          ptr.Bool(true),
+			ExpectedBucketOwner:                  ptr.String("__ExpectedBucketOwner__"),
+			GlueCatalogGeneration:                ptr.Bool(true),
+		},
+		DmsTransferSettings: &types.DmsTransferSettings{
+			ServiceAccessRoleArn: ptr.String("__ServiceAccessRoleArn__"),
+			BucketName:           ptr.String("__BucketName__"),
+		},
+		MongoDbSettings: &types.MongoDbSettings{
+			Username:                    ptr.String("__Username__"),
+			Password:                    ptr.String("__Password__"),
+			ServerName:                  ptr.String("__ServerName__"),
+			Port:                        ptr.Int32(1),
+			DatabaseName:                ptr.String("__DatabaseName__"),
+			AuthType:                    types.AuthTypeValue("no"),
+			AuthMechanism:               types.AuthMechanismValue("default"),
+			NestingLevel:                types.NestingLevelValue("none"),
+			ExtractDocId:                ptr.String("__ExtractDocId__"),
+			DocsToInvestigate:           ptr.String("__DocsToInvestigate__"),
+			AuthSource:                  ptr.String("__AuthSource__"),
+			KmsKeyId:                    ptr.String("__KmsKeyId__"),
+			SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+			UseUpdateLookUp:             ptr.Bool(true),
+			ReplicateShardCollections:   ptr.Bool(true),
+		},
+		KinesisSettings: &types.KinesisSettings{
+			StreamArn:                   ptr.String("__StreamArn__"),
+			MessageFormat:               types.MessageFormatValue("json"),
+			ServiceAccessRoleArn:        ptr.String("__ServiceAccessRoleArn__"),
+			IncludeTransactionDetails:   ptr.Bool(true),
+			IncludePartitionValue:       ptr.Bool(true),
+			PartitionIncludeSchemaTable: ptr.Bool(true),
+			IncludeTableAlterOperations: ptr.Bool(true),
+			IncludeControlDetails:       ptr.Bool(true),
+			IncludeNullAndEmpty:         ptr.Bool(true),
+			NoHexPrefix:                 ptr.Bool(true),
+			UseLargeIntegerValue:        ptr.Bool(true),
+		},
+		KafkaSettings: &types.KafkaSettings{
+			Broker:                             ptr.String("__Broker__"),
+			Topic:                              ptr.String("__Topic__"),
+			MessageFormat:                      types.MessageFormatValue("json"),
+			IncludeTransactionDetails:          ptr.Bool(true),
+			IncludePartitionValue:              ptr.Bool(true),
+			PartitionIncludeSchemaTable:        ptr.Bool(true),
+			IncludeTableAlterOperations:        ptr.Bool(true),
+			IncludeControlDetails:              ptr.Bool(true),
+			MessageMaxBytes:                    ptr.Int32(1),
+			IncludeNullAndEmpty:                ptr.Bool(true),
+			SecurityProtocol:                   types.KafkaSecurityProtocol("plaintext"),
+			SslClientCertificateArn:            ptr.String("__SslClientCertificateArn__"),
+			SslClientKeyArn:                    ptr.String("__SslClientKeyArn__"),
+			SslClientKeyPassword:               ptr.String("__SslClientKeyPassword__"),
+			SslCaCertificateArn:                ptr.String("__SslCaCertificateArn__"),
+			SaslUsername:                       ptr.String("__SaslUsername__"),
+			SaslPassword:                       ptr.String("__SaslPassword__"),
+			NoHexPrefix:                        ptr.Bool(true),
+			SaslMechanism:                      types.KafkaSaslMechanism("scram-sha-512"),
+			SslEndpointIdentificationAlgorithm: types.KafkaSslEndpointIdentificationAlgorithm("none"),
+			UseLargeIntegerValue:               ptr.Bool(true),
+		},
+		ElasticsearchSettings: &types.ElasticsearchSettings{
+			ServiceAccessRoleArn:    ptr.String("__ServiceAccessRoleArn__"),
+			EndpointUri:             ptr.String("__EndpointUri__"),
+			FullLoadErrorPercentage: ptr.Int32(1),
+			ErrorRetryDuration:      ptr.Int32(1),
+			UseNewMappingType:       ptr.Bool(true),
+		},
+		NeptuneSettings: &types.NeptuneSettings{
+			ServiceAccessRoleArn: ptr.String("__ServiceAccessRoleArn__"),
+			S3BucketName:         ptr.String("__S3BucketName__"),
+			S3BucketFolder:       ptr.String("__S3BucketFolder__"),
+			ErrorRetryDuration:   ptr.Int32(1),
+			MaxFileSize:          ptr.Int32(1),
+			MaxRetryCount:        ptr.Int32(1),
+			IamAuthEnabled:       ptr.Bool(true),
+		},
+		RedshiftSettings: &types.RedshiftSettings{
+			AcceptAnyDate:                ptr.Bool(true),
+			AfterConnectScript:           ptr.String("__AfterConnectScript__"),
+			BucketFolder:                 ptr.String("__BucketFolder__"),
+			BucketName:                   ptr.String("__BucketName__"),
+			CaseSensitiveNames:           ptr.Bool(true),
+			CompUpdate:                   ptr.Bool(true),
+			ConnectionTimeout:            ptr.Int32(1),
+			DatabaseName:                 ptr.String("__DatabaseName__"),
+			DateFormat:                   ptr.String("__DateFormat__"),
+			EmptyAsNull:                  ptr.Bool(true),
+			EncryptionMode:               types.EncryptionModeValue("sse-s3"),
+			ExplicitIds:                  ptr.Bool(true),
+			FileTransferUploadStreams:    ptr.Int32(1),
+			LoadTimeout:                  ptr.Int32(1),
+			MaxFileSize:                  ptr.Int32(1),
+			Password:                     ptr.String("__Password__"),
+			Port:                         ptr.Int32(1),
+			RemoveQuotes:                 ptr.Bool(true),
+			ReplaceInvalidChars:          ptr.String("__ReplaceInvalidChars__"),
+			ReplaceChars:                 ptr.String("__ReplaceChars__"),
+			ServerName:                   ptr.String("__ServerName__"),
+			ServiceAccessRoleArn:         ptr.String("__ServiceAccessRoleArn__"),
+			ServerSideEncryptionKmsKeyId: ptr.String("__ServerSideEncryptionKmsKeyId__"),
+			TimeFormat:                   ptr.String("__TimeFormat__"),
+			TrimBlanks:                   ptr.Bool(true),
+			TruncateColumns:              ptr.Bool(true),
+			Username:                     ptr.String("__Username__"),
+			WriteBufferSize:              ptr.Int32(1),
+			SecretsManagerAccessRoleArn:  ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:       ptr.String("__SecretsManagerSecretId__"),
+			MapBooleanAsBoolean:          ptr.Bool(true),
+		},
+		PostgreSQLSettings: &types.PostgreSQLSettings{
+			AfterConnectScript:          ptr.String("__AfterConnectScript__"),
+			CaptureDdls:                 ptr.Bool(true),
+			MaxFileSize:                 ptr.Int32(1),
+			DatabaseName:                ptr.String("__DatabaseName__"),
+			DdlArtifactsSchema:          ptr.String("__DdlArtifactsSchema__"),
+			ExecuteTimeout:              ptr.Int32(1),
+			FailTasksOnLobTruncation:    ptr.Bool(true),
+			HeartbeatEnable:             ptr.Bool(true),
+			HeartbeatSchema:             ptr.String("__HeartbeatSchema__"),
+			HeartbeatFrequency:          ptr.Int32(1),
+			Password:                    ptr.String("__Password__"),
+			Port:                        ptr.Int32(1),
+			ServerName:                  ptr.String("__ServerName__"),
+			Username:                    ptr.String("__Username__"),
+			SlotName:                    ptr.String("__SlotName__"),
+			PluginName:                  types.PluginNameValue("no-preference"),
+			SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+			TrimSpaceInChar:             ptr.Bool(true),
+			MapBooleanAsBoolean:         ptr.Bool(true),
+			MapJsonbAsClob:              ptr.Bool(true),
+			MapLongVarcharAs:            types.LongVarcharMappingType("wstring"),
+			DatabaseMode:                types.DatabaseMode("default"),
+			BabelfishDatabaseName:       ptr.String("__BabelfishDatabaseName__"),
+			DisableUnicodeSourceFilter:  ptr.Bool(true),
+			ServiceAccessRoleArn:        ptr.String("__ServiceAccessRoleArn__"),
+			AuthenticationMethod:        types.PostgreSQLAuthenticationMethod("password"),
+		},
+		MySQLSettings: &types.MySQLSettings{
+			AfterConnectScript:            ptr.String("__AfterConnectScript__"),
+			CleanSourceMetadataOnMismatch: ptr.Bool(true),
+			DatabaseName:                  ptr.String("__DatabaseName__"),
+			EventsPollInterval:            ptr.Int32(1),
+			TargetDbType:                  types.TargetDbType("specific-database"),
+			MaxFileSize:                   ptr.Int32(1),
+			ParallelLoadThreads:           ptr.Int32(1),
+			Password:                      ptr.String("__Password__"),
+			Port:                          ptr.Int32(1),
+			ServerName:                    ptr.String("__ServerName__"),
+			ServerTimezone:                ptr.String("__ServerTimezone__"),
+			Username:                      ptr.String("__Username__"),
+			SecretsManagerAccessRoleArn:   ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:        ptr.String("__SecretsManagerSecretId__"),
+			ExecuteTimeout:                ptr.Int32(1),
+			ServiceAccessRoleArn:          ptr.String("__ServiceAccessRoleArn__"),
+			AuthenticationMethod:          types.MySQLAuthenticationMethod("password"),
+		},
+		OracleSettings: &types.OracleSettings{
+			AddSupplementalLogging:      ptr.Bool(true),
+			ArchivedLogDestId:           ptr.Int32(1),
+			AdditionalArchivedLogDestId: ptr.Int32(1),
+			ExtraArchivedLogDestIds: []int32{
+				1,
+				1,
+			},
+			AllowSelectNestedTables:                ptr.Bool(true),
+			ParallelAsmReadThreads:                 ptr.Int32(1),
+			ReadAheadBlocks:                        ptr.Int32(1),
+			AccessAlternateDirectly:                ptr.Bool(true),
+			UseAlternateFolderForOnline:            ptr.Bool(true),
+			OraclePathPrefix:                       ptr.String("__OraclePathPrefix__"),
+			UsePathPrefix:                          ptr.String("__UsePathPrefix__"),
+			ReplacePathPrefix:                      ptr.Bool(true),
+			EnableHomogenousTablespace:             ptr.Bool(true),
+			DirectPathNoLog:                        ptr.Bool(true),
+			ArchivedLogsOnly:                       ptr.Bool(true),
+			AsmPassword:                            ptr.String("__AsmPassword__"),
+			AsmServer:                              ptr.String("__AsmServer__"),
+			AsmUser:                                ptr.String("__AsmUser__"),
+			CharLengthSemantics:                    types.CharLengthSemantics("default"),
+			DatabaseName:                           ptr.String("__DatabaseName__"),
+			DirectPathParallelLoad:                 ptr.Bool(true),
+			FailTasksOnLobTruncation:               ptr.Bool(true),
+			NumberDatatypeScale:                    ptr.Int32(1),
+			Password:                               ptr.String("__Password__"),
+			Port:                                   ptr.Int32(1),
+			ReadTableSpaceName:                     ptr.Bool(true),
+			RetryInterval:                          ptr.Int32(1),
+			SecurityDbEncryption:                   ptr.String("__SecurityDbEncryption__"),
+			SecurityDbEncryptionName:               ptr.String("__SecurityDbEncryptionName__"),
+			ServerName:                             ptr.String("__ServerName__"),
+			SpatialDataOptionToGeoJsonFunctionName: ptr.String("__SpatialDataOptionToGeoJsonFunctionName__"),
+			StandbyDelayTime:                       ptr.Int32(1),
+			Username:                               ptr.String("__Username__"),
+			UseBFile:                               ptr.Bool(true),
+			UseDirectPathFullLoad:                  ptr.Bool(true),
+			UseLogminerReader:                      ptr.Bool(true),
+			SecretsManagerAccessRoleArn:            ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:                 ptr.String("__SecretsManagerSecretId__"),
+			SecretsManagerOracleAsmAccessRoleArn:   ptr.String("__SecretsManagerOracleAsmAccessRoleArn__"),
+			SecretsManagerOracleAsmSecretId:        ptr.String("__SecretsManagerOracleAsmSecretId__"),
+			TrimSpaceInChar:                        ptr.Bool(true),
+			ConvertTimestampWithZoneToUTC:          ptr.Bool(true),
+			OpenTransactionWindow:                  ptr.Int32(1),
+			AuthenticationMethod:                   types.OracleAuthenticationMethod("password"),
+		},
+		SybaseSettings: &types.SybaseSettings{
+			DatabaseName:                ptr.String("__DatabaseName__"),
+			Password:                    ptr.String("__Password__"),
+			Port:                        ptr.Int32(1),
+			ServerName:                  ptr.String("__ServerName__"),
+			Username:                    ptr.String("__Username__"),
+			SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+		},
+		MicrosoftSQLServerSettings: &types.MicrosoftSQLServerSettings{
+			Port:                        ptr.Int32(1),
+			BcpPacketSize:               ptr.Int32(1),
+			DatabaseName:                ptr.String("__DatabaseName__"),
+			ControlTablesFileGroup:      ptr.String("__ControlTablesFileGroup__"),
+			Password:                    ptr.String("__Password__"),
+			QuerySingleAlwaysOnNode:     ptr.Bool(true),
+			ReadBackupOnly:              ptr.Bool(true),
+			SafeguardPolicy:             types.SafeguardPolicy("rely-on-sql-server-replication-agent"),
+			ServerName:                  ptr.String("__ServerName__"),
+			Username:                    ptr.String("__Username__"),
+			UseBcpFullLoad:              ptr.Bool(true),
+			UseThirdPartyBackupDevice:   ptr.Bool(true),
+			SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+			TrimSpaceInChar:             ptr.Bool(true),
+			TlogAccessMode:              types.TlogAccessMode("BackupOnly"),
+			ForceLobLookup:              ptr.Bool(true),
+			AuthenticationMethod:        types.SqlServerAuthenticationMethod("password"),
+		},
+		IBMDb2Settings: &types.IBMDb2Settings{
+			DatabaseName:                ptr.String("__DatabaseName__"),
+			Password:                    ptr.String("__Password__"),
+			Port:                        ptr.Int32(1),
+			ServerName:                  ptr.String("__ServerName__"),
+			SetDataCaptureChanges:       ptr.Bool(true),
+			CurrentLsn:                  ptr.String("__CurrentLsn__"),
+			MaxKBytesPerRead:            ptr.Int32(1),
+			Username:                    ptr.String("__Username__"),
+			SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+			LoadTimeout:                 ptr.Int32(1),
+			WriteBufferSize:             ptr.Int32(1),
+			MaxFileSize:                 ptr.Int32(1),
+			KeepCsvFiles:                ptr.Bool(true),
+		},
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+		DocDbSettings: &types.DocDbSettings{
+			Username:                    ptr.String("__Username__"),
+			Password:                    ptr.String("__Password__"),
+			ServerName:                  ptr.String("__ServerName__"),
+			Port:                        ptr.Int32(1),
+			DatabaseName:                ptr.String("__DatabaseName__"),
+			NestingLevel:                types.NestingLevelValue("none"),
+			ExtractDocId:                ptr.Bool(true),
+			DocsToInvestigate:           ptr.Int32(1),
+			KmsKeyId:                    ptr.String("__KmsKeyId__"),
+			SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+			UseUpdateLookUp:             ptr.Bool(true),
+			ReplicateShardCollections:   ptr.Bool(true),
+		},
+		RedisSettings: &types.RedisSettings{
+			ServerName:          ptr.String("__ServerName__"),
+			Port:                1,
+			SslSecurityProtocol: types.SslSecurityProtocolValue("plaintext"),
+			AuthType:            types.RedisAuthTypeValue("none"),
+			AuthUserName:        ptr.String("__AuthUserName__"),
+			AuthPassword:        ptr.String("__AuthPassword__"),
+			SslCaCertificateArn: ptr.String("__SslCaCertificateArn__"),
+		},
+		GcpMySQLSettings: &types.GcpMySQLSettings{
+			AfterConnectScript:            ptr.String("__AfterConnectScript__"),
+			CleanSourceMetadataOnMismatch: ptr.Bool(true),
+			DatabaseName:                  ptr.String("__DatabaseName__"),
+			EventsPollInterval:            ptr.Int32(1),
+			TargetDbType:                  types.TargetDbType("specific-database"),
+			MaxFileSize:                   ptr.Int32(1),
+			ParallelLoadThreads:           ptr.Int32(1),
+			Password:                      ptr.String("__Password__"),
+			Port:                          ptr.Int32(1),
+			ServerName:                    ptr.String("__ServerName__"),
+			ServerTimezone:                ptr.String("__ServerTimezone__"),
+			Username:                      ptr.String("__Username__"),
+			SecretsManagerAccessRoleArn:   ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:        ptr.String("__SecretsManagerSecretId__"),
+		},
+		TimestreamSettings: &types.TimestreamSettings{
+			DatabaseName:              ptr.String("__DatabaseName__"),
+			MemoryDuration:            ptr.Int32(1),
+			MagneticDuration:          ptr.Int32(1),
+			CdcInsertsAndUpdates:      ptr.Bool(true),
+			EnableMagneticStoreWrites: ptr.Bool(true),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8367,7 +11184,32 @@ func TestCheckResponseSnapshot_Error_KMSNotFoundFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEventSubscription(context.Background(), &CreateEventSubscriptionInput{})
+	_, opErr := svc.CreateEventSubscription(context.Background(), &CreateEventSubscriptionInput{
+		SubscriptionName: ptr.String("__SubscriptionName__"),
+		SnsTopicArn:      ptr.String("__SnsTopicArn__"),
+		SourceType:       ptr.String("__SourceType__"),
+		EventCategories: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SourceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Enabled: ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8392,7 +11234,32 @@ func TestCheckResponseSnapshot_Error_KMSThrottlingFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEventSubscription(context.Background(), &CreateEventSubscriptionInput{})
+	_, opErr := svc.CreateEventSubscription(context.Background(), &CreateEventSubscriptionInput{
+		SubscriptionName: ptr.String("__SubscriptionName__"),
+		SnsTopicArn:      ptr.String("__SnsTopicArn__"),
+		SourceType:       ptr.String("__SourceType__"),
+		EventCategories: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SourceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Enabled: ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8417,7 +11284,42 @@ func TestCheckResponseSnapshot_Error_ReplicationSubnetGroupDoesNotCoverEnoughAZs
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateReplicationConfig(context.Background(), &CreateReplicationConfigInput{})
+	_, opErr := svc.CreateReplicationConfig(context.Background(), &CreateReplicationConfigInput{
+		ReplicationConfigIdentifier: ptr.String("__ReplicationConfigIdentifier__"),
+		SourceEndpointArn:           ptr.String("__SourceEndpointArn__"),
+		TargetEndpointArn:           ptr.String("__TargetEndpointArn__"),
+		ComputeConfig: &types.ComputeConfig{
+			AvailabilityZone:           ptr.String("__AvailabilityZone__"),
+			DnsNameServers:             ptr.String("__DnsNameServers__"),
+			KmsKeyId:                   ptr.String("__KmsKeyId__"),
+			MaxCapacityUnits:           ptr.Int32(1),
+			MinCapacityUnits:           ptr.Int32(1),
+			MultiAZ:                    ptr.Bool(true),
+			PreferredMaintenanceWindow: ptr.String("__PreferredMaintenanceWindow__"),
+			ReplicationSubnetGroupId:   ptr.String("__ReplicationSubnetGroupId__"),
+			VpcSecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ReplicationType:      types.MigrationTypeValue("full-load"),
+		TableMappings:        ptr.String("__TableMappings__"),
+		ReplicationSettings:  ptr.String("__ReplicationSettings__"),
+		SupplementalSettings: ptr.String("__SupplementalSettings__"),
+		ResourceIdentifier:   ptr.String("__ResourceIdentifier__"),
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8443,7 +11345,49 @@ func TestCheckResponseSnapshot_Error_ResourceAlreadyExistsFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataMigration(context.Background(), &CreateDataMigrationInput{})
+	_, opErr := svc.CreateDataMigration(context.Background(), &CreateDataMigrationInput{
+		DataMigrationName:          ptr.String("__DataMigrationName__"),
+		MigrationProjectIdentifier: ptr.String("__MigrationProjectIdentifier__"),
+		DataMigrationType:          types.MigrationTypeValue("full-load"),
+		ServiceAccessRoleArn:       ptr.String("__ServiceAccessRoleArn__"),
+		EnableCloudwatchLogs:       ptr.Bool(true),
+		SourceDataSettings: []types.SourceDataSetting{
+			{
+				CDCStartPosition: ptr.String("__CDCStartPosition__"),
+				CDCStartTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CDCStopTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SlotName:         ptr.String("__SlotName__"),
+			},
+			{
+				CDCStartPosition: ptr.String("__CDCStartPosition__"),
+				CDCStartTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CDCStopTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SlotName:         ptr.String("__SlotName__"),
+			},
+		},
+		TargetDataSettings: []types.TargetDataSetting{
+			{
+				TablePreparationMode: types.TablePreparationMode("do-nothing"),
+			},
+			{
+				TablePreparationMode: types.TablePreparationMode("do-nothing"),
+			},
+		},
+		NumberOfJobs: ptr.Int32(1),
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+		SelectionRules: ptr.String("__SelectionRules__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8468,7 +11412,21 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{})
+	_, opErr := svc.AddTagsToResource(context.Background(), &AddTagsToResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8493,7 +11451,49 @@ func TestCheckResponseSnapshot_Error_ResourceQuotaExceededFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataMigration(context.Background(), &CreateDataMigrationInput{})
+	_, opErr := svc.CreateDataMigration(context.Background(), &CreateDataMigrationInput{
+		DataMigrationName:          ptr.String("__DataMigrationName__"),
+		MigrationProjectIdentifier: ptr.String("__MigrationProjectIdentifier__"),
+		DataMigrationType:          types.MigrationTypeValue("full-load"),
+		ServiceAccessRoleArn:       ptr.String("__ServiceAccessRoleArn__"),
+		EnableCloudwatchLogs:       ptr.Bool(true),
+		SourceDataSettings: []types.SourceDataSetting{
+			{
+				CDCStartPosition: ptr.String("__CDCStartPosition__"),
+				CDCStartTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CDCStopTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SlotName:         ptr.String("__SlotName__"),
+			},
+			{
+				CDCStartPosition: ptr.String("__CDCStartPosition__"),
+				CDCStartTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CDCStopTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SlotName:         ptr.String("__SlotName__"),
+			},
+		},
+		TargetDataSettings: []types.TargetDataSetting{
+			{
+				TablePreparationMode: types.TablePreparationMode("do-nothing"),
+			},
+			{
+				TablePreparationMode: types.TablePreparationMode("do-nothing"),
+			},
+		},
+		NumberOfJobs: ptr.Int32(1),
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+		SelectionRules: ptr.String("__SelectionRules__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8518,7 +11518,377 @@ func TestCheckResponseSnapshot_Error_S3AccessDeniedFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEndpoint(context.Background(), &CreateEndpointInput{})
+	_, opErr := svc.CreateEndpoint(context.Background(), &CreateEndpointInput{
+		EndpointIdentifier:        ptr.String("__EndpointIdentifier__"),
+		EndpointType:              types.ReplicationEndpointTypeValue("source"),
+		EngineName:                ptr.String("__EngineName__"),
+		Username:                  ptr.String("__Username__"),
+		Password:                  ptr.String("__Password__"),
+		ServerName:                ptr.String("__ServerName__"),
+		Port:                      ptr.Int32(1),
+		DatabaseName:              ptr.String("__DatabaseName__"),
+		ExtraConnectionAttributes: ptr.String("__ExtraConnectionAttributes__"),
+		KmsKeyId:                  ptr.String("__KmsKeyId__"),
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+		CertificateArn:          ptr.String("__CertificateArn__"),
+		SslMode:                 types.DmsSslModeValue("none"),
+		ServiceAccessRoleArn:    ptr.String("__ServiceAccessRoleArn__"),
+		ExternalTableDefinition: ptr.String("__ExternalTableDefinition__"),
+		DynamoDbSettings: &types.DynamoDbSettings{
+			ServiceAccessRoleArn: ptr.String("__ServiceAccessRoleArn__"),
+		},
+		S3Settings: &types.S3Settings{
+			ServiceAccessRoleArn:                 ptr.String("__ServiceAccessRoleArn__"),
+			ExternalTableDefinition:              ptr.String("__ExternalTableDefinition__"),
+			CsvRowDelimiter:                      ptr.String("__CsvRowDelimiter__"),
+			CsvDelimiter:                         ptr.String("__CsvDelimiter__"),
+			BucketFolder:                         ptr.String("__BucketFolder__"),
+			BucketName:                           ptr.String("__BucketName__"),
+			CompressionType:                      types.CompressionTypeValue("none"),
+			EncryptionMode:                       types.EncryptionModeValue("sse-s3"),
+			ServerSideEncryptionKmsKeyId:         ptr.String("__ServerSideEncryptionKmsKeyId__"),
+			DataFormat:                           types.DataFormatValue("csv"),
+			EncodingType:                         types.EncodingTypeValue("plain"),
+			DictPageSizeLimit:                    ptr.Int32(1),
+			RowGroupLength:                       ptr.Int32(1),
+			DataPageSize:                         ptr.Int32(1),
+			ParquetVersion:                       types.ParquetVersionValue("parquet-1-0"),
+			EnableStatistics:                     ptr.Bool(true),
+			IncludeOpForFullLoad:                 ptr.Bool(true),
+			CdcInsertsOnly:                       ptr.Bool(true),
+			TimestampColumnName:                  ptr.String("__TimestampColumnName__"),
+			ParquetTimestampInMillisecond:        ptr.Bool(true),
+			CdcInsertsAndUpdates:                 ptr.Bool(true),
+			DatePartitionEnabled:                 ptr.Bool(true),
+			DatePartitionSequence:                types.DatePartitionSequenceValue("YYYYMMDD"),
+			DatePartitionDelimiter:               types.DatePartitionDelimiterValue("SLASH"),
+			UseCsvNoSupValue:                     ptr.Bool(true),
+			CsvNoSupValue:                        ptr.String("__CsvNoSupValue__"),
+			PreserveTransactions:                 ptr.Bool(true),
+			CdcPath:                              ptr.String("__CdcPath__"),
+			UseTaskStartTimeForFullLoadTimestamp: ptr.Bool(true),
+			CannedAclForObjects:                  types.CannedAclForObjectsValue("none"),
+			AddColumnName:                        ptr.Bool(true),
+			CdcMaxBatchInterval:                  ptr.Int32(1),
+			CdcMinFileSize:                       ptr.Int32(1),
+			CsvNullValue:                         ptr.String("__CsvNullValue__"),
+			IgnoreHeaderRows:                     ptr.Int32(1),
+			MaxFileSize:                          ptr.Int32(1),
+			Rfc4180:                              ptr.Bool(true),
+			DatePartitionTimezone:                ptr.String("__DatePartitionTimezone__"),
+			AddTrailingPaddingCharacter:          ptr.Bool(true),
+			ExpectedBucketOwner:                  ptr.String("__ExpectedBucketOwner__"),
+			GlueCatalogGeneration:                ptr.Bool(true),
+		},
+		DmsTransferSettings: &types.DmsTransferSettings{
+			ServiceAccessRoleArn: ptr.String("__ServiceAccessRoleArn__"),
+			BucketName:           ptr.String("__BucketName__"),
+		},
+		MongoDbSettings: &types.MongoDbSettings{
+			Username:                    ptr.String("__Username__"),
+			Password:                    ptr.String("__Password__"),
+			ServerName:                  ptr.String("__ServerName__"),
+			Port:                        ptr.Int32(1),
+			DatabaseName:                ptr.String("__DatabaseName__"),
+			AuthType:                    types.AuthTypeValue("no"),
+			AuthMechanism:               types.AuthMechanismValue("default"),
+			NestingLevel:                types.NestingLevelValue("none"),
+			ExtractDocId:                ptr.String("__ExtractDocId__"),
+			DocsToInvestigate:           ptr.String("__DocsToInvestigate__"),
+			AuthSource:                  ptr.String("__AuthSource__"),
+			KmsKeyId:                    ptr.String("__KmsKeyId__"),
+			SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+			UseUpdateLookUp:             ptr.Bool(true),
+			ReplicateShardCollections:   ptr.Bool(true),
+		},
+		KinesisSettings: &types.KinesisSettings{
+			StreamArn:                   ptr.String("__StreamArn__"),
+			MessageFormat:               types.MessageFormatValue("json"),
+			ServiceAccessRoleArn:        ptr.String("__ServiceAccessRoleArn__"),
+			IncludeTransactionDetails:   ptr.Bool(true),
+			IncludePartitionValue:       ptr.Bool(true),
+			PartitionIncludeSchemaTable: ptr.Bool(true),
+			IncludeTableAlterOperations: ptr.Bool(true),
+			IncludeControlDetails:       ptr.Bool(true),
+			IncludeNullAndEmpty:         ptr.Bool(true),
+			NoHexPrefix:                 ptr.Bool(true),
+			UseLargeIntegerValue:        ptr.Bool(true),
+		},
+		KafkaSettings: &types.KafkaSettings{
+			Broker:                             ptr.String("__Broker__"),
+			Topic:                              ptr.String("__Topic__"),
+			MessageFormat:                      types.MessageFormatValue("json"),
+			IncludeTransactionDetails:          ptr.Bool(true),
+			IncludePartitionValue:              ptr.Bool(true),
+			PartitionIncludeSchemaTable:        ptr.Bool(true),
+			IncludeTableAlterOperations:        ptr.Bool(true),
+			IncludeControlDetails:              ptr.Bool(true),
+			MessageMaxBytes:                    ptr.Int32(1),
+			IncludeNullAndEmpty:                ptr.Bool(true),
+			SecurityProtocol:                   types.KafkaSecurityProtocol("plaintext"),
+			SslClientCertificateArn:            ptr.String("__SslClientCertificateArn__"),
+			SslClientKeyArn:                    ptr.String("__SslClientKeyArn__"),
+			SslClientKeyPassword:               ptr.String("__SslClientKeyPassword__"),
+			SslCaCertificateArn:                ptr.String("__SslCaCertificateArn__"),
+			SaslUsername:                       ptr.String("__SaslUsername__"),
+			SaslPassword:                       ptr.String("__SaslPassword__"),
+			NoHexPrefix:                        ptr.Bool(true),
+			SaslMechanism:                      types.KafkaSaslMechanism("scram-sha-512"),
+			SslEndpointIdentificationAlgorithm: types.KafkaSslEndpointIdentificationAlgorithm("none"),
+			UseLargeIntegerValue:               ptr.Bool(true),
+		},
+		ElasticsearchSettings: &types.ElasticsearchSettings{
+			ServiceAccessRoleArn:    ptr.String("__ServiceAccessRoleArn__"),
+			EndpointUri:             ptr.String("__EndpointUri__"),
+			FullLoadErrorPercentage: ptr.Int32(1),
+			ErrorRetryDuration:      ptr.Int32(1),
+			UseNewMappingType:       ptr.Bool(true),
+		},
+		NeptuneSettings: &types.NeptuneSettings{
+			ServiceAccessRoleArn: ptr.String("__ServiceAccessRoleArn__"),
+			S3BucketName:         ptr.String("__S3BucketName__"),
+			S3BucketFolder:       ptr.String("__S3BucketFolder__"),
+			ErrorRetryDuration:   ptr.Int32(1),
+			MaxFileSize:          ptr.Int32(1),
+			MaxRetryCount:        ptr.Int32(1),
+			IamAuthEnabled:       ptr.Bool(true),
+		},
+		RedshiftSettings: &types.RedshiftSettings{
+			AcceptAnyDate:                ptr.Bool(true),
+			AfterConnectScript:           ptr.String("__AfterConnectScript__"),
+			BucketFolder:                 ptr.String("__BucketFolder__"),
+			BucketName:                   ptr.String("__BucketName__"),
+			CaseSensitiveNames:           ptr.Bool(true),
+			CompUpdate:                   ptr.Bool(true),
+			ConnectionTimeout:            ptr.Int32(1),
+			DatabaseName:                 ptr.String("__DatabaseName__"),
+			DateFormat:                   ptr.String("__DateFormat__"),
+			EmptyAsNull:                  ptr.Bool(true),
+			EncryptionMode:               types.EncryptionModeValue("sse-s3"),
+			ExplicitIds:                  ptr.Bool(true),
+			FileTransferUploadStreams:    ptr.Int32(1),
+			LoadTimeout:                  ptr.Int32(1),
+			MaxFileSize:                  ptr.Int32(1),
+			Password:                     ptr.String("__Password__"),
+			Port:                         ptr.Int32(1),
+			RemoveQuotes:                 ptr.Bool(true),
+			ReplaceInvalidChars:          ptr.String("__ReplaceInvalidChars__"),
+			ReplaceChars:                 ptr.String("__ReplaceChars__"),
+			ServerName:                   ptr.String("__ServerName__"),
+			ServiceAccessRoleArn:         ptr.String("__ServiceAccessRoleArn__"),
+			ServerSideEncryptionKmsKeyId: ptr.String("__ServerSideEncryptionKmsKeyId__"),
+			TimeFormat:                   ptr.String("__TimeFormat__"),
+			TrimBlanks:                   ptr.Bool(true),
+			TruncateColumns:              ptr.Bool(true),
+			Username:                     ptr.String("__Username__"),
+			WriteBufferSize:              ptr.Int32(1),
+			SecretsManagerAccessRoleArn:  ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:       ptr.String("__SecretsManagerSecretId__"),
+			MapBooleanAsBoolean:          ptr.Bool(true),
+		},
+		PostgreSQLSettings: &types.PostgreSQLSettings{
+			AfterConnectScript:          ptr.String("__AfterConnectScript__"),
+			CaptureDdls:                 ptr.Bool(true),
+			MaxFileSize:                 ptr.Int32(1),
+			DatabaseName:                ptr.String("__DatabaseName__"),
+			DdlArtifactsSchema:          ptr.String("__DdlArtifactsSchema__"),
+			ExecuteTimeout:              ptr.Int32(1),
+			FailTasksOnLobTruncation:    ptr.Bool(true),
+			HeartbeatEnable:             ptr.Bool(true),
+			HeartbeatSchema:             ptr.String("__HeartbeatSchema__"),
+			HeartbeatFrequency:          ptr.Int32(1),
+			Password:                    ptr.String("__Password__"),
+			Port:                        ptr.Int32(1),
+			ServerName:                  ptr.String("__ServerName__"),
+			Username:                    ptr.String("__Username__"),
+			SlotName:                    ptr.String("__SlotName__"),
+			PluginName:                  types.PluginNameValue("no-preference"),
+			SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+			TrimSpaceInChar:             ptr.Bool(true),
+			MapBooleanAsBoolean:         ptr.Bool(true),
+			MapJsonbAsClob:              ptr.Bool(true),
+			MapLongVarcharAs:            types.LongVarcharMappingType("wstring"),
+			DatabaseMode:                types.DatabaseMode("default"),
+			BabelfishDatabaseName:       ptr.String("__BabelfishDatabaseName__"),
+			DisableUnicodeSourceFilter:  ptr.Bool(true),
+			ServiceAccessRoleArn:        ptr.String("__ServiceAccessRoleArn__"),
+			AuthenticationMethod:        types.PostgreSQLAuthenticationMethod("password"),
+		},
+		MySQLSettings: &types.MySQLSettings{
+			AfterConnectScript:            ptr.String("__AfterConnectScript__"),
+			CleanSourceMetadataOnMismatch: ptr.Bool(true),
+			DatabaseName:                  ptr.String("__DatabaseName__"),
+			EventsPollInterval:            ptr.Int32(1),
+			TargetDbType:                  types.TargetDbType("specific-database"),
+			MaxFileSize:                   ptr.Int32(1),
+			ParallelLoadThreads:           ptr.Int32(1),
+			Password:                      ptr.String("__Password__"),
+			Port:                          ptr.Int32(1),
+			ServerName:                    ptr.String("__ServerName__"),
+			ServerTimezone:                ptr.String("__ServerTimezone__"),
+			Username:                      ptr.String("__Username__"),
+			SecretsManagerAccessRoleArn:   ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:        ptr.String("__SecretsManagerSecretId__"),
+			ExecuteTimeout:                ptr.Int32(1),
+			ServiceAccessRoleArn:          ptr.String("__ServiceAccessRoleArn__"),
+			AuthenticationMethod:          types.MySQLAuthenticationMethod("password"),
+		},
+		OracleSettings: &types.OracleSettings{
+			AddSupplementalLogging:      ptr.Bool(true),
+			ArchivedLogDestId:           ptr.Int32(1),
+			AdditionalArchivedLogDestId: ptr.Int32(1),
+			ExtraArchivedLogDestIds: []int32{
+				1,
+				1,
+			},
+			AllowSelectNestedTables:                ptr.Bool(true),
+			ParallelAsmReadThreads:                 ptr.Int32(1),
+			ReadAheadBlocks:                        ptr.Int32(1),
+			AccessAlternateDirectly:                ptr.Bool(true),
+			UseAlternateFolderForOnline:            ptr.Bool(true),
+			OraclePathPrefix:                       ptr.String("__OraclePathPrefix__"),
+			UsePathPrefix:                          ptr.String("__UsePathPrefix__"),
+			ReplacePathPrefix:                      ptr.Bool(true),
+			EnableHomogenousTablespace:             ptr.Bool(true),
+			DirectPathNoLog:                        ptr.Bool(true),
+			ArchivedLogsOnly:                       ptr.Bool(true),
+			AsmPassword:                            ptr.String("__AsmPassword__"),
+			AsmServer:                              ptr.String("__AsmServer__"),
+			AsmUser:                                ptr.String("__AsmUser__"),
+			CharLengthSemantics:                    types.CharLengthSemantics("default"),
+			DatabaseName:                           ptr.String("__DatabaseName__"),
+			DirectPathParallelLoad:                 ptr.Bool(true),
+			FailTasksOnLobTruncation:               ptr.Bool(true),
+			NumberDatatypeScale:                    ptr.Int32(1),
+			Password:                               ptr.String("__Password__"),
+			Port:                                   ptr.Int32(1),
+			ReadTableSpaceName:                     ptr.Bool(true),
+			RetryInterval:                          ptr.Int32(1),
+			SecurityDbEncryption:                   ptr.String("__SecurityDbEncryption__"),
+			SecurityDbEncryptionName:               ptr.String("__SecurityDbEncryptionName__"),
+			ServerName:                             ptr.String("__ServerName__"),
+			SpatialDataOptionToGeoJsonFunctionName: ptr.String("__SpatialDataOptionToGeoJsonFunctionName__"),
+			StandbyDelayTime:                       ptr.Int32(1),
+			Username:                               ptr.String("__Username__"),
+			UseBFile:                               ptr.Bool(true),
+			UseDirectPathFullLoad:                  ptr.Bool(true),
+			UseLogminerReader:                      ptr.Bool(true),
+			SecretsManagerAccessRoleArn:            ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:                 ptr.String("__SecretsManagerSecretId__"),
+			SecretsManagerOracleAsmAccessRoleArn:   ptr.String("__SecretsManagerOracleAsmAccessRoleArn__"),
+			SecretsManagerOracleAsmSecretId:        ptr.String("__SecretsManagerOracleAsmSecretId__"),
+			TrimSpaceInChar:                        ptr.Bool(true),
+			ConvertTimestampWithZoneToUTC:          ptr.Bool(true),
+			OpenTransactionWindow:                  ptr.Int32(1),
+			AuthenticationMethod:                   types.OracleAuthenticationMethod("password"),
+		},
+		SybaseSettings: &types.SybaseSettings{
+			DatabaseName:                ptr.String("__DatabaseName__"),
+			Password:                    ptr.String("__Password__"),
+			Port:                        ptr.Int32(1),
+			ServerName:                  ptr.String("__ServerName__"),
+			Username:                    ptr.String("__Username__"),
+			SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+		},
+		MicrosoftSQLServerSettings: &types.MicrosoftSQLServerSettings{
+			Port:                        ptr.Int32(1),
+			BcpPacketSize:               ptr.Int32(1),
+			DatabaseName:                ptr.String("__DatabaseName__"),
+			ControlTablesFileGroup:      ptr.String("__ControlTablesFileGroup__"),
+			Password:                    ptr.String("__Password__"),
+			QuerySingleAlwaysOnNode:     ptr.Bool(true),
+			ReadBackupOnly:              ptr.Bool(true),
+			SafeguardPolicy:             types.SafeguardPolicy("rely-on-sql-server-replication-agent"),
+			ServerName:                  ptr.String("__ServerName__"),
+			Username:                    ptr.String("__Username__"),
+			UseBcpFullLoad:              ptr.Bool(true),
+			UseThirdPartyBackupDevice:   ptr.Bool(true),
+			SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+			TrimSpaceInChar:             ptr.Bool(true),
+			TlogAccessMode:              types.TlogAccessMode("BackupOnly"),
+			ForceLobLookup:              ptr.Bool(true),
+			AuthenticationMethod:        types.SqlServerAuthenticationMethod("password"),
+		},
+		IBMDb2Settings: &types.IBMDb2Settings{
+			DatabaseName:                ptr.String("__DatabaseName__"),
+			Password:                    ptr.String("__Password__"),
+			Port:                        ptr.Int32(1),
+			ServerName:                  ptr.String("__ServerName__"),
+			SetDataCaptureChanges:       ptr.Bool(true),
+			CurrentLsn:                  ptr.String("__CurrentLsn__"),
+			MaxKBytesPerRead:            ptr.Int32(1),
+			Username:                    ptr.String("__Username__"),
+			SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+			LoadTimeout:                 ptr.Int32(1),
+			WriteBufferSize:             ptr.Int32(1),
+			MaxFileSize:                 ptr.Int32(1),
+			KeepCsvFiles:                ptr.Bool(true),
+		},
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+		DocDbSettings: &types.DocDbSettings{
+			Username:                    ptr.String("__Username__"),
+			Password:                    ptr.String("__Password__"),
+			ServerName:                  ptr.String("__ServerName__"),
+			Port:                        ptr.Int32(1),
+			DatabaseName:                ptr.String("__DatabaseName__"),
+			NestingLevel:                types.NestingLevelValue("none"),
+			ExtractDocId:                ptr.Bool(true),
+			DocsToInvestigate:           ptr.Int32(1),
+			KmsKeyId:                    ptr.String("__KmsKeyId__"),
+			SecretsManagerAccessRoleArn: ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:      ptr.String("__SecretsManagerSecretId__"),
+			UseUpdateLookUp:             ptr.Bool(true),
+			ReplicateShardCollections:   ptr.Bool(true),
+		},
+		RedisSettings: &types.RedisSettings{
+			ServerName:          ptr.String("__ServerName__"),
+			Port:                1,
+			SslSecurityProtocol: types.SslSecurityProtocolValue("plaintext"),
+			AuthType:            types.RedisAuthTypeValue("none"),
+			AuthUserName:        ptr.String("__AuthUserName__"),
+			AuthPassword:        ptr.String("__AuthPassword__"),
+			SslCaCertificateArn: ptr.String("__SslCaCertificateArn__"),
+		},
+		GcpMySQLSettings: &types.GcpMySQLSettings{
+			AfterConnectScript:            ptr.String("__AfterConnectScript__"),
+			CleanSourceMetadataOnMismatch: ptr.Bool(true),
+			DatabaseName:                  ptr.String("__DatabaseName__"),
+			EventsPollInterval:            ptr.Int32(1),
+			TargetDbType:                  types.TargetDbType("specific-database"),
+			MaxFileSize:                   ptr.Int32(1),
+			ParallelLoadThreads:           ptr.Int32(1),
+			Password:                      ptr.String("__Password__"),
+			Port:                          ptr.Int32(1),
+			ServerName:                    ptr.String("__ServerName__"),
+			ServerTimezone:                ptr.String("__ServerTimezone__"),
+			Username:                      ptr.String("__Username__"),
+			SecretsManagerAccessRoleArn:   ptr.String("__SecretsManagerAccessRoleArn__"),
+			SecretsManagerSecretId:        ptr.String("__SecretsManagerSecretId__"),
+		},
+		TimestreamSettings: &types.TimestreamSettings{
+			DatabaseName:              ptr.String("__DatabaseName__"),
+			MemoryDuration:            ptr.Int32(1),
+			MagneticDuration:          ptr.Int32(1),
+			CdcInsertsAndUpdates:      ptr.Bool(true),
+			EnableMagneticStoreWrites: ptr.Bool(true),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8543,7 +11913,12 @@ func TestCheckResponseSnapshot_Error_S3ResourceNotFoundFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFleetAdvisorCollector(context.Background(), &CreateFleetAdvisorCollectorInput{})
+	_, opErr := svc.CreateFleetAdvisorCollector(context.Background(), &CreateFleetAdvisorCollectorInput{
+		CollectorName:        ptr.String("__CollectorName__"),
+		Description:          ptr.String("__Description__"),
+		ServiceAccessRoleArn: ptr.String("__ServiceAccessRoleArn__"),
+		S3BucketName:         ptr.String("__S3BucketName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8568,7 +11943,32 @@ func TestCheckResponseSnapshot_Error_SNSInvalidTopicFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEventSubscription(context.Background(), &CreateEventSubscriptionInput{})
+	_, opErr := svc.CreateEventSubscription(context.Background(), &CreateEventSubscriptionInput{
+		SubscriptionName: ptr.String("__SubscriptionName__"),
+		SnsTopicArn:      ptr.String("__SnsTopicArn__"),
+		SourceType:       ptr.String("__SourceType__"),
+		EventCategories: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SourceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Enabled: ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8593,7 +11993,32 @@ func TestCheckResponseSnapshot_Error_SNSNoAuthorizationFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEventSubscription(context.Background(), &CreateEventSubscriptionInput{})
+	_, opErr := svc.CreateEventSubscription(context.Background(), &CreateEventSubscriptionInput{
+		SubscriptionName: ptr.String("__SubscriptionName__"),
+		SnsTopicArn:      ptr.String("__SnsTopicArn__"),
+		SourceType:       ptr.String("__SourceType__"),
+		EventCategories: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SourceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Enabled: ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8618,7 +12043,43 @@ func TestCheckResponseSnapshot_Error_StorageQuotaExceededFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateReplicationInstance(context.Background(), &CreateReplicationInstanceInput{})
+	_, opErr := svc.CreateReplicationInstance(context.Background(), &CreateReplicationInstanceInput{
+		ReplicationInstanceIdentifier: ptr.String("__ReplicationInstanceIdentifier__"),
+		AllocatedStorage:              ptr.Int32(1),
+		ReplicationInstanceClass:      ptr.String("__ReplicationInstanceClass__"),
+		VpcSecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AvailabilityZone:                 ptr.String("__AvailabilityZone__"),
+		ReplicationSubnetGroupIdentifier: ptr.String("__ReplicationSubnetGroupIdentifier__"),
+		PreferredMaintenanceWindow:       ptr.String("__PreferredMaintenanceWindow__"),
+		MultiAZ:                          ptr.Bool(true),
+		EngineVersion:                    ptr.String("__EngineVersion__"),
+		AutoMinorVersionUpgrade:          ptr.Bool(true),
+		Tags: []types.Tag{
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				Value:       ptr.String("__Value__"),
+				ResourceArn: ptr.String("__ResourceArn__"),
+			},
+		},
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		PubliclyAccessible: ptr.Bool(true),
+		DnsNameServers:     ptr.String("__DnsNameServers__"),
+		ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+		NetworkType:        ptr.String("__NetworkType__"),
+		KerberosAuthenticationSettings: &types.KerberosAuthenticationSettings{
+			KeyCacheSecretId:     ptr.String("__KeyCacheSecretId__"),
+			KeyCacheSecretIamArn: ptr.String("__KeyCacheSecretIamArn__"),
+			Krb5FileContents:     ptr.String("__Krb5FileContents__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8643,7 +12104,14 @@ func TestCheckResponseSnapshot_Error_SubnetAlreadyInUse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ModifyReplicationSubnetGroup(context.Background(), &ModifyReplicationSubnetGroupInput{})
+	_, opErr := svc.ModifyReplicationSubnetGroup(context.Background(), &ModifyReplicationSubnetGroupInput{
+		ReplicationSubnetGroupIdentifier:  ptr.String("__ReplicationSubnetGroupIdentifier__"),
+		ReplicationSubnetGroupDescription: ptr.String("__ReplicationSubnetGroupDescription__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8668,7 +12136,28 @@ func TestCheckResponseSnapshot_Error_UpgradeDependencyFailureFault(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ModifyReplicationInstance(context.Background(), &ModifyReplicationInstanceInput{})
+	_, opErr := svc.ModifyReplicationInstance(context.Background(), &ModifyReplicationInstanceInput{
+		ReplicationInstanceArn:   ptr.String("__ReplicationInstanceArn__"),
+		AllocatedStorage:         ptr.Int32(1),
+		ApplyImmediately:         true,
+		ReplicationInstanceClass: ptr.String("__ReplicationInstanceClass__"),
+		VpcSecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PreferredMaintenanceWindow:    ptr.String("__PreferredMaintenanceWindow__"),
+		MultiAZ:                       ptr.Bool(true),
+		EngineVersion:                 ptr.String("__EngineVersion__"),
+		AllowMajorVersionUpgrade:      true,
+		AutoMinorVersionUpgrade:       ptr.Bool(true),
+		ReplicationInstanceIdentifier: ptr.String("__ReplicationInstanceIdentifier__"),
+		NetworkType:                   ptr.String("__NetworkType__"),
+		KerberosAuthenticationSettings: &types.KerberosAuthenticationSettings{
+			KeyCacheSecretId:     ptr.String("__KeyCacheSecretId__"),
+			KeyCacheSecretIamArn: ptr.String("__KeyCacheSecretIamArn__"),
+			Krb5FileContents:     ptr.String("__Krb5FileContents__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

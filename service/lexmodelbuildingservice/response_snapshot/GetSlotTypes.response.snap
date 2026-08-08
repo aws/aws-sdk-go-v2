@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","slotTypes":[{"createdDate":946684800,"description":"__Description__","lastUpdatedDate":946684800,"name":"__Name__","version":"__Version__"},{"createdDate":946684800,"description":"__Description__","lastUpdatedDate":946684800,"name":"__Name__","version":"__Version__"}]}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Operation":{"EndTime":946684800,"Id":"__Id__","LastUpdatedTime":946684800,"Properties":{"key0":"__Value__"},"ResourceArn":"__ResourceArn__","ResourceId":"__ResourceId__","ResourceType":"__ResourceType__","StartTime":946684800,"Status":"INPROGRESS","StatusMessage":"__StatusMessage__","Type":"__Type__"}}

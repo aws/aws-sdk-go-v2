@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"guardrails":[{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","crossRegionDetails":{"guardrailProfileArn":"__GuardrailProfileArn__","guardrailProfileId":"__GuardrailProfileId__"},"description":"__Description__","id":"__Id__","name":"__Name__","status":"CREATING","updatedAt":"2000-01-01T00:00:00Z","version":"__Version__"},{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","crossRegionDetails":{"guardrailProfileArn":"__GuardrailProfileArn__","guardrailProfileId":"__GuardrailProfileId__"},"description":"__Description__","id":"__Id__","name":"__Name__","status":"CREATING","updatedAt":"2000-01-01T00:00:00Z","version":"__Version__"}],"nextToken":"__NextToken__"}

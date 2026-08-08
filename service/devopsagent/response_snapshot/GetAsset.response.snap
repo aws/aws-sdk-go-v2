@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"asset":{"assetId":"__AssetId__","assetType":"__AssetType__","createdAt":946684800,"metadata":"__Document__","updatedAt":946684800,"version":1}}

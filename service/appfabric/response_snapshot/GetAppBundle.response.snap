@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"appBundle":{"arn":"__Arn__","customerManagedKeyArn":"__CustomerManagedKeyArn__"}}

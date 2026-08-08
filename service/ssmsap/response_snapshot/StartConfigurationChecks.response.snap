@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ConfigurationCheckOperations":[{"ApplicationId":"__ApplicationId__","ConfigurationCheckDescription":"__ConfigurationCheckDescription__","ConfigurationCheckId":"SAP_CHECK_01","ConfigurationCheckName":"__ConfigurationCheckName__","EndTime":946684800,"Id":"__Id__","RuleStatusCounts":{"Failed":1,"Info":1,"Passed":1,"Unknown":1,"Warning":1},"StartTime":946684800,"Status":"INPROGRESS","StatusMessage":"__StatusMessage__"},{"ApplicationId":"__ApplicationId__","ConfigurationCheckDescription":"__ConfigurationCheckDescription__","ConfigurationCheckId":"SAP_CHECK_01","ConfigurationCheckName":"__ConfigurationCheckName__","EndTime":946684800,"Id":"__Id__","RuleStatusCounts":{"Failed":1,"Info":1,"Passed":1,"Unknown":1,"Warning":1},"StartTime":946684800,"Status":"INPROGRESS","StatusMessage":"__StatusMessage__"}]}

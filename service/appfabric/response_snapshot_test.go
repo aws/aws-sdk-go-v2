@@ -154,7 +154,13 @@ func TestCheckResponseSnapshot_BatchGetUserAccessTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetUserAccessTasks(context.Background(), &BatchGetUserAccessTasksInput{})
+	got, err := svc.BatchGetUserAccessTasks(context.Background(), &BatchGetUserAccessTasksInput{
+		AppBundleIdentifier: ptr.String("__AppBundleIdentifier__"),
+		TaskIdList: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -185,7 +191,14 @@ func TestCheckResponseSnapshot_ConnectAppAuthorization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ConnectAppAuthorization(context.Background(), &ConnectAppAuthorizationInput{})
+	got, err := svc.ConnectAppAuthorization(context.Background(), &ConnectAppAuthorizationInput{
+		AppBundleIdentifier:        ptr.String("__AppBundleIdentifier__"),
+		AppAuthorizationIdentifier: ptr.String("__AppAuthorizationIdentifier__"),
+		AuthRequest: &types.AuthRequest{
+			RedirectUri: ptr.String("__RedirectUri__"),
+			Code:        ptr.String("__Code__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -220,7 +233,32 @@ func TestCheckResponseSnapshot_CreateAppAuthorization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAppAuthorization(context.Background(), &CreateAppAuthorizationInput{})
+	got, err := svc.CreateAppAuthorization(context.Background(), &CreateAppAuthorizationInput{
+		AppBundleIdentifier: ptr.String("__AppBundleIdentifier__"),
+		App:                 ptr.String("__App__"),
+		Credential: &types.CredentialMemberOauth2Credential{
+			Value: types.Oauth2Credential{
+				ClientId:     ptr.String("__ClientId__"),
+				ClientSecret: ptr.String("__ClientSecret__"),
+			},
+		},
+		Tenant: &types.Tenant{
+			TenantIdentifier:  ptr.String("__TenantIdentifier__"),
+			TenantDisplayName: ptr.String("__TenantDisplayName__"),
+		},
+		AuthType:    types.AuthType("oauth2"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -244,7 +282,20 @@ func TestCheckResponseSnapshot_CreateAppBundle(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAppBundle(context.Background(), &CreateAppBundleInput{})
+	got, err := svc.CreateAppBundle(context.Background(), &CreateAppBundleInput{
+		ClientToken:                  ptr.String("__ClientToken__"),
+		CustomerManagedKeyIdentifier: ptr.String("__CustomerManagedKeyIdentifier__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -274,7 +325,23 @@ func TestCheckResponseSnapshot_CreateIngestion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIngestion(context.Background(), &CreateIngestionInput{})
+	got, err := svc.CreateIngestion(context.Background(), &CreateIngestionInput{
+		AppBundleIdentifier: ptr.String("__AppBundleIdentifier__"),
+		App:                 ptr.String("__App__"),
+		TenantId:            ptr.String("__TenantId__"),
+		IngestionType:       types.IngestionType("auditLog"),
+		ClientToken:         ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -318,7 +385,37 @@ func TestCheckResponseSnapshot_CreateIngestionDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIngestionDestination(context.Background(), &CreateIngestionDestinationInput{})
+	got, err := svc.CreateIngestionDestination(context.Background(), &CreateIngestionDestinationInput{
+		AppBundleIdentifier: ptr.String("__AppBundleIdentifier__"),
+		IngestionIdentifier: ptr.String("__IngestionIdentifier__"),
+		ProcessingConfiguration: &types.ProcessingConfigurationMemberAuditLog{
+			Value: types.AuditLogProcessingConfiguration{
+				Schema: types.Schema("ocsf"),
+				Format: types.Format("json"),
+			},
+		},
+		DestinationConfiguration: &types.DestinationConfigurationMemberAuditLog{
+			Value: types.AuditLogDestinationConfiguration{
+				Destination: &types.DestinationMemberS3Bucket{
+					Value: types.S3Bucket{
+						BucketName: ptr.String("__BucketName__"),
+						Prefix:     ptr.String("__Prefix__"),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -337,7 +434,10 @@ func TestCheckResponseSnapshot_DeleteAppAuthorization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAppAuthorization(context.Background(), &DeleteAppAuthorizationInput{})
+	got, err := svc.DeleteAppAuthorization(context.Background(), &DeleteAppAuthorizationInput{
+		AppBundleIdentifier:        ptr.String("__AppBundleIdentifier__"),
+		AppAuthorizationIdentifier: ptr.String("__AppAuthorizationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -356,7 +456,9 @@ func TestCheckResponseSnapshot_DeleteAppBundle(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAppBundle(context.Background(), &DeleteAppBundleInput{})
+	got, err := svc.DeleteAppBundle(context.Background(), &DeleteAppBundleInput{
+		AppBundleIdentifier: ptr.String("__AppBundleIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -375,7 +477,10 @@ func TestCheckResponseSnapshot_DeleteIngestion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIngestion(context.Background(), &DeleteIngestionInput{})
+	got, err := svc.DeleteIngestion(context.Background(), &DeleteIngestionInput{
+		AppBundleIdentifier: ptr.String("__AppBundleIdentifier__"),
+		IngestionIdentifier: ptr.String("__IngestionIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -394,7 +499,11 @@ func TestCheckResponseSnapshot_DeleteIngestionDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIngestionDestination(context.Background(), &DeleteIngestionDestinationInput{})
+	got, err := svc.DeleteIngestionDestination(context.Background(), &DeleteIngestionDestinationInput{
+		AppBundleIdentifier:            ptr.String("__AppBundleIdentifier__"),
+		IngestionIdentifier:            ptr.String("__IngestionIdentifier__"),
+		IngestionDestinationIdentifier: ptr.String("__IngestionDestinationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -429,7 +538,10 @@ func TestCheckResponseSnapshot_GetAppAuthorization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAppAuthorization(context.Background(), &GetAppAuthorizationInput{})
+	got, err := svc.GetAppAuthorization(context.Background(), &GetAppAuthorizationInput{
+		AppBundleIdentifier:        ptr.String("__AppBundleIdentifier__"),
+		AppAuthorizationIdentifier: ptr.String("__AppAuthorizationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -453,7 +565,9 @@ func TestCheckResponseSnapshot_GetAppBundle(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAppBundle(context.Background(), &GetAppBundleInput{})
+	got, err := svc.GetAppBundle(context.Background(), &GetAppBundleInput{
+		AppBundleIdentifier: ptr.String("__AppBundleIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -483,7 +597,10 @@ func TestCheckResponseSnapshot_GetIngestion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIngestion(context.Background(), &GetIngestionInput{})
+	got, err := svc.GetIngestion(context.Background(), &GetIngestionInput{
+		AppBundleIdentifier: ptr.String("__AppBundleIdentifier__"),
+		IngestionIdentifier: ptr.String("__IngestionIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -527,7 +644,11 @@ func TestCheckResponseSnapshot_GetIngestionDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIngestionDestination(context.Background(), &GetIngestionDestinationInput{})
+	got, err := svc.GetIngestionDestination(context.Background(), &GetIngestionDestinationInput{
+		AppBundleIdentifier:            ptr.String("__AppBundleIdentifier__"),
+		IngestionIdentifier:            ptr.String("__IngestionIdentifier__"),
+		IngestionDestinationIdentifier: ptr.String("__IngestionDestinationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -572,7 +693,11 @@ func TestCheckResponseSnapshot_ListAppAuthorizations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAppAuthorizations(context.Background(), &ListAppAuthorizationsInput{})
+	got, err := svc.ListAppAuthorizations(context.Background(), &ListAppAuthorizationsInput{
+		AppBundleIdentifier: ptr.String("__AppBundleIdentifier__"),
+		MaxResults:          ptr.Int32(1),
+		NextToken:           ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -601,7 +726,10 @@ func TestCheckResponseSnapshot_ListAppBundles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAppBundles(context.Background(), &ListAppBundlesInput{})
+	got, err := svc.ListAppBundles(context.Background(), &ListAppBundlesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -630,7 +758,12 @@ func TestCheckResponseSnapshot_ListIngestionDestinations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIngestionDestinations(context.Background(), &ListIngestionDestinationsInput{})
+	got, err := svc.ListIngestionDestinations(context.Background(), &ListIngestionDestinationsInput{
+		AppBundleIdentifier: ptr.String("__AppBundleIdentifier__"),
+		IngestionIdentifier: ptr.String("__IngestionIdentifier__"),
+		MaxResults:          ptr.Int32(1),
+		NextToken:           ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -665,7 +798,11 @@ func TestCheckResponseSnapshot_ListIngestions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIngestions(context.Background(), &ListIngestionsInput{})
+	got, err := svc.ListIngestions(context.Background(), &ListIngestionsInput{
+		AppBundleIdentifier: ptr.String("__AppBundleIdentifier__"),
+		MaxResults:          ptr.Int32(1),
+		NextToken:           ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -695,7 +832,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -714,7 +853,10 @@ func TestCheckResponseSnapshot_StartIngestion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartIngestion(context.Background(), &StartIngestionInput{})
+	got, err := svc.StartIngestion(context.Background(), &StartIngestionInput{
+		IngestionIdentifier: ptr.String("__IngestionIdentifier__"),
+		AppBundleIdentifier: ptr.String("__AppBundleIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -754,7 +896,10 @@ func TestCheckResponseSnapshot_StartUserAccessTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartUserAccessTasks(context.Background(), &StartUserAccessTasksInput{})
+	got, err := svc.StartUserAccessTasks(context.Background(), &StartUserAccessTasksInput{
+		AppBundleIdentifier: ptr.String("__AppBundleIdentifier__"),
+		Email:               ptr.String("__Email__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -773,7 +918,10 @@ func TestCheckResponseSnapshot_StopIngestion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopIngestion(context.Background(), &StopIngestionInput{})
+	got, err := svc.StopIngestion(context.Background(), &StopIngestionInput{
+		IngestionIdentifier: ptr.String("__IngestionIdentifier__"),
+		AppBundleIdentifier: ptr.String("__AppBundleIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -792,7 +940,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -811,7 +971,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -846,7 +1012,20 @@ func TestCheckResponseSnapshot_UpdateAppAuthorization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAppAuthorization(context.Background(), &UpdateAppAuthorizationInput{})
+	got, err := svc.UpdateAppAuthorization(context.Background(), &UpdateAppAuthorizationInput{
+		AppBundleIdentifier:        ptr.String("__AppBundleIdentifier__"),
+		AppAuthorizationIdentifier: ptr.String("__AppAuthorizationIdentifier__"),
+		Credential: &types.CredentialMemberOauth2Credential{
+			Value: types.Oauth2Credential{
+				ClientId:     ptr.String("__ClientId__"),
+				ClientSecret: ptr.String("__ClientSecret__"),
+			},
+		},
+		Tenant: &types.Tenant{
+			TenantIdentifier:  ptr.String("__TenantIdentifier__"),
+			TenantDisplayName: ptr.String("__TenantDisplayName__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -890,7 +1069,21 @@ func TestCheckResponseSnapshot_UpdateIngestionDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIngestionDestination(context.Background(), &UpdateIngestionDestinationInput{})
+	got, err := svc.UpdateIngestionDestination(context.Background(), &UpdateIngestionDestinationInput{
+		AppBundleIdentifier:            ptr.String("__AppBundleIdentifier__"),
+		IngestionIdentifier:            ptr.String("__IngestionIdentifier__"),
+		IngestionDestinationIdentifier: ptr.String("__IngestionDestinationIdentifier__"),
+		DestinationConfiguration: &types.DestinationConfigurationMemberAuditLog{
+			Value: types.AuditLogDestinationConfiguration{
+				Destination: &types.DestinationMemberS3Bucket{
+					Value: types.S3Bucket{
+						BucketName: ptr.String("__BucketName__"),
+						Prefix:     ptr.String("__Prefix__"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -911,7 +1104,13 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetUserAccessTasks(context.Background(), &BatchGetUserAccessTasksInput{})
+	_, opErr := svc.BatchGetUserAccessTasks(context.Background(), &BatchGetUserAccessTasksInput{
+		AppBundleIdentifier: ptr.String("__AppBundleIdentifier__"),
+		TaskIdList: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -938,7 +1137,32 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAppAuthorization(context.Background(), &CreateAppAuthorizationInput{})
+	_, opErr := svc.CreateAppAuthorization(context.Background(), &CreateAppAuthorizationInput{
+		AppBundleIdentifier: ptr.String("__AppBundleIdentifier__"),
+		App:                 ptr.String("__App__"),
+		Credential: &types.CredentialMemberOauth2Credential{
+			Value: types.Oauth2Credential{
+				ClientId:     ptr.String("__ClientId__"),
+				ClientSecret: ptr.String("__ClientSecret__"),
+			},
+		},
+		Tenant: &types.Tenant{
+			TenantIdentifier:  ptr.String("__TenantIdentifier__"),
+			TenantDisplayName: ptr.String("__TenantDisplayName__"),
+		},
+		AuthType:    types.AuthType("oauth2"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -964,7 +1188,13 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetUserAccessTasks(context.Background(), &BatchGetUserAccessTasksInput{})
+	_, opErr := svc.BatchGetUserAccessTasks(context.Background(), &BatchGetUserAccessTasksInput{
+		AppBundleIdentifier: ptr.String("__AppBundleIdentifier__"),
+		TaskIdList: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -991,7 +1221,13 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetUserAccessTasks(context.Background(), &BatchGetUserAccessTasksInput{})
+	_, opErr := svc.BatchGetUserAccessTasks(context.Background(), &BatchGetUserAccessTasksInput{
+		AppBundleIdentifier: ptr.String("__AppBundleIdentifier__"),
+		TaskIdList: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1020,7 +1256,32 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAppAuthorization(context.Background(), &CreateAppAuthorizationInput{})
+	_, opErr := svc.CreateAppAuthorization(context.Background(), &CreateAppAuthorizationInput{
+		AppBundleIdentifier: ptr.String("__AppBundleIdentifier__"),
+		App:                 ptr.String("__App__"),
+		Credential: &types.CredentialMemberOauth2Credential{
+			Value: types.Oauth2Credential{
+				ClientId:     ptr.String("__ClientId__"),
+				ClientSecret: ptr.String("__ClientSecret__"),
+			},
+		},
+		Tenant: &types.Tenant{
+			TenantIdentifier:  ptr.String("__TenantIdentifier__"),
+			TenantDisplayName: ptr.String("__TenantDisplayName__"),
+		},
+		AuthType:    types.AuthType("oauth2"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1048,7 +1309,13 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetUserAccessTasks(context.Background(), &BatchGetUserAccessTasksInput{})
+	_, opErr := svc.BatchGetUserAccessTasks(context.Background(), &BatchGetUserAccessTasksInput{
+		AppBundleIdentifier: ptr.String("__AppBundleIdentifier__"),
+		TaskIdList: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1084,7 +1351,13 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetUserAccessTasks(context.Background(), &BatchGetUserAccessTasksInput{})
+	_, opErr := svc.BatchGetUserAccessTasks(context.Background(), &BatchGetUserAccessTasksInput{
+		AppBundleIdentifier: ptr.String("__AppBundleIdentifier__"),
+		TaskIdList: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,5 +1,0 @@
-PUT /RecursiveShapes
-
-Content-Type: application/xml
-
-<RecursiveShapesRequest><nested><foo>__Foo__</foo><nested><bar>__Bar__</bar></nested></nested></RecursiveShapesRequest>

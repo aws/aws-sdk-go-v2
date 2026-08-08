@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSEvents.ListApiDestinations
+
+{"ApiDestinations":[{"ApiDestinationArn":"__ApiDestinationArn__","ApiDestinationState":"ACTIVE","ConnectionArn":"__ConnectionArn__","CreationTime":946684800,"HttpMethod":"POST","InvocationEndpoint":"__InvocationEndpoint__","InvocationRateLimitPerSecond":1,"LastModifiedTime":946684800,"Name":"__Name__"},{"ApiDestinationArn":"__ApiDestinationArn__","ApiDestinationState":"ACTIVE","ConnectionArn":"__ConnectionArn__","CreationTime":946684800,"HttpMethod":"POST","InvocationEndpoint":"__InvocationEndpoint__","InvocationRateLimitPerSecond":1,"LastModifiedTime":946684800,"Name":"__Name__"}],"NextToken":"__NextToken__"}

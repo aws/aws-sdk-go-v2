@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"intermediateTableSummaries":[{"analysisRuleTypes":["CUSTOM","CUSTOM"],"arn":"__Arn__","collaborationArn":"__CollaborationArn__","collaborationId":"__CollaborationId__","createTime":946684800,"description":"__Description__","id":"__Id__","membershipArn":"__MembershipArn__","membershipId":"__MembershipId__","name":"__Name__","retentionInDays":1,"status":"CREATED","updateTime":946684800},{"analysisRuleTypes":["CUSTOM","CUSTOM"],"arn":"__Arn__","collaborationArn":"__CollaborationArn__","collaborationId":"__CollaborationId__","createTime":946684800,"description":"__Description__","id":"__Id__","membershipArn":"__MembershipArn__","membershipId":"__MembershipId__","name":"__Name__","retentionInDays":1,"status":"CREATED","updateTime":946684800}],"nextToken":"__NextToken__"}

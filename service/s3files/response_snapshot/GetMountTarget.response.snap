@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"availabilityZoneId":"__AvailabilityZoneId__","fileSystemId":"__FileSystemId__","ipv4Address":"__Ipv4Address__","ipv6Address":"__Ipv6Address__","mountTargetId":"__MountTargetId__","networkInterfaceId":"__NetworkInterfaceId__","ownerId":"__OwnerId__","securityGroups":["__Member__","__Member__"],"status":"available","statusMessage":"__StatusMessage__","subnetId":"__SubnetId__","vpcId":"__VpcId__"}

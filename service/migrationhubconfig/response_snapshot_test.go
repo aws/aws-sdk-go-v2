@@ -127,7 +127,14 @@ func TestCheckResponseSnapshot_CreateHomeRegionControl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateHomeRegionControl(context.Background(), &CreateHomeRegionControlInput{})
+	got, err := svc.CreateHomeRegionControl(context.Background(), &CreateHomeRegionControlInput{
+		HomeRegion: ptr.String("__HomeRegion__"),
+		Target: &types.Target{
+			Type: types.TargetType("ACCOUNT"),
+			Id:   ptr.String("__Id__"),
+		},
+		DryRun: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -146,7 +153,9 @@ func TestCheckResponseSnapshot_DeleteHomeRegionControl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteHomeRegionControl(context.Background(), &DeleteHomeRegionControlInput{})
+	got, err := svc.DeleteHomeRegionControl(context.Background(), &DeleteHomeRegionControlInput{
+		ControlId: ptr.String("__ControlId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -187,7 +196,16 @@ func TestCheckResponseSnapshot_DescribeHomeRegionControls(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeHomeRegionControls(context.Background(), &DescribeHomeRegionControlsInput{})
+	got, err := svc.DescribeHomeRegionControls(context.Background(), &DescribeHomeRegionControlsInput{
+		ControlId:  ptr.String("__ControlId__"),
+		HomeRegion: ptr.String("__HomeRegion__"),
+		Target: &types.Target{
+			Type: types.TargetType("ACCOUNT"),
+			Id:   ptr.String("__Id__"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -229,7 +247,14 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateHomeRegionControl(context.Background(), &CreateHomeRegionControlInput{})
+	_, opErr := svc.CreateHomeRegionControl(context.Background(), &CreateHomeRegionControlInput{
+		HomeRegion: ptr.String("__HomeRegion__"),
+		Target: &types.Target{
+			Type: types.TargetType("ACCOUNT"),
+			Id:   ptr.String("__Id__"),
+		},
+		DryRun: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -254,7 +279,14 @@ func TestCheckResponseSnapshot_Error_DryRunOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateHomeRegionControl(context.Background(), &CreateHomeRegionControlInput{})
+	_, opErr := svc.CreateHomeRegionControl(context.Background(), &CreateHomeRegionControlInput{
+		HomeRegion: ptr.String("__HomeRegion__"),
+		Target: &types.Target{
+			Type: types.TargetType("ACCOUNT"),
+			Id:   ptr.String("__Id__"),
+		},
+		DryRun: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -279,7 +311,14 @@ func TestCheckResponseSnapshot_Error_InternalServerError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateHomeRegionControl(context.Background(), &CreateHomeRegionControlInput{})
+	_, opErr := svc.CreateHomeRegionControl(context.Background(), &CreateHomeRegionControlInput{
+		HomeRegion: ptr.String("__HomeRegion__"),
+		Target: &types.Target{
+			Type: types.TargetType("ACCOUNT"),
+			Id:   ptr.String("__Id__"),
+		},
+		DryRun: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -304,7 +343,14 @@ func TestCheckResponseSnapshot_Error_InvalidInputException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateHomeRegionControl(context.Background(), &CreateHomeRegionControlInput{})
+	_, opErr := svc.CreateHomeRegionControl(context.Background(), &CreateHomeRegionControlInput{
+		HomeRegion: ptr.String("__HomeRegion__"),
+		Target: &types.Target{
+			Type: types.TargetType("ACCOUNT"),
+			Id:   ptr.String("__Id__"),
+		},
+		DryRun: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -329,7 +375,14 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateHomeRegionControl(context.Background(), &CreateHomeRegionControlInput{})
+	_, opErr := svc.CreateHomeRegionControl(context.Background(), &CreateHomeRegionControlInput{
+		HomeRegion: ptr.String("__HomeRegion__"),
+		Target: &types.Target{
+			Type: types.TargetType("ACCOUNT"),
+			Id:   ptr.String("__Id__"),
+		},
+		DryRun: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -355,7 +408,14 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateHomeRegionControl(context.Background(), &CreateHomeRegionControlInput{})
+	_, opErr := svc.CreateHomeRegionControl(context.Background(), &CreateHomeRegionControlInput{
+		HomeRegion: ptr.String("__HomeRegion__"),
+		Target: &types.Target{
+			Type: types.TargetType("ACCOUNT"),
+			Id:   ptr.String("__Id__"),
+		},
+		DryRun: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

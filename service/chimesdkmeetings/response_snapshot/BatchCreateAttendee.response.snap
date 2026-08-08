@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Attendees":[{"AttendeeId":"__AttendeeId__","Capabilities":{"Audio":"SendReceive","Content":"SendReceive","Video":"SendReceive"},"ExternalUserId":"__ExternalUserId__","JoinToken":"__JoinToken__"},{"AttendeeId":"__AttendeeId__","Capabilities":{"Audio":"SendReceive","Content":"SendReceive","Video":"SendReceive"},"ExternalUserId":"__ExternalUserId__","JoinToken":"__JoinToken__"}],"Errors":[{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","ExternalUserId":"__ExternalUserId__"},{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","ExternalUserId":"__ExternalUserId__"}]}

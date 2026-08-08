@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"type":{"arn":"__Arn__","definition":"__Definition__","description":"__Description__","format":"SDL","name":"__Name__"}}

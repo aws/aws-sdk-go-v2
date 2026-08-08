@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"agentOrchestrationConfig":{"profilingEnabled":true},"arn":"__Arn__","computePlatform":"Default","createdAt":"2000-01-01T00:00:00Z","name":"__Name__","profilingStatus":{"latestAgentOrchestratedAt":"2000-01-01T00:00:00Z","latestAgentProfileReportedAt":"2000-01-01T00:00:00Z","latestAggregatedProfile":{"period":"PT5M","start":"2000-01-01T00:00:00Z"}},"tags":{"key0":"__Value__"},"updatedAt":"2000-01-01T00:00:00Z"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"notificationConfiguration":{"channels":[{"eventPublishers":["AnomalyDetection","AnomalyDetection"],"id":"__Id__","uri":"__Uri__"},{"eventPublishers":["AnomalyDetection","AnomalyDetection"],"id":"__Id__","uri":"__Uri__"}]}}

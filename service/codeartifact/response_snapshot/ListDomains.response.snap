@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"domains":[{"arn":"__Arn__","createdTime":946684800,"encryptionKey":"__EncryptionKey__","name":"__Name__","owner":"__Owner__","status":"Active"},{"arn":"__Arn__","createdTime":946684800,"encryptionKey":"__EncryptionKey__","name":"__Name__","owner":"__Owner__","status":"Active"}],"nextToken":"__NextToken__"}

@@ -117,7 +117,14 @@ func TestCheckResponseSnapshot_AddTagsToStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddTagsToStream(context.Background(), &AddTagsToStreamInput{})
+	got, err := svc.AddTagsToStream(context.Background(), &AddTagsToStreamInput{
+		StreamName: ptr.String("__StreamName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		StreamARN: ptr.String("__StreamARN__"),
+		StreamId:  ptr.String("__StreamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -136,7 +143,18 @@ func TestCheckResponseSnapshot_CreateStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateStream(context.Background(), &CreateStreamInput{})
+	got, err := svc.CreateStream(context.Background(), &CreateStreamInput{
+		StreamName: ptr.String("__StreamName__"),
+		ShardCount: ptr.Int32(1),
+		StreamModeDetails: &types.StreamModeDetails{
+			StreamMode: types.StreamMode("PROVISIONED"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		WarmThroughputMiBps: ptr.Int32(1),
+		MaxRecordSizeInKiB:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -155,7 +173,12 @@ func TestCheckResponseSnapshot_DecreaseStreamRetentionPeriod(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DecreaseStreamRetentionPeriod(context.Background(), &DecreaseStreamRetentionPeriodInput{})
+	got, err := svc.DecreaseStreamRetentionPeriod(context.Background(), &DecreaseStreamRetentionPeriodInput{
+		StreamName:           ptr.String("__StreamName__"),
+		RetentionPeriodHours: ptr.Int32(1),
+		StreamARN:            ptr.String("__StreamARN__"),
+		StreamId:             ptr.String("__StreamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -174,7 +197,10 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		StreamId:    ptr.String("__StreamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -193,7 +219,12 @@ func TestCheckResponseSnapshot_DeleteStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteStream(context.Background(), &DeleteStreamInput{})
+	got, err := svc.DeleteStream(context.Background(), &DeleteStreamInput{
+		StreamName:              ptr.String("__StreamName__"),
+		EnforceConsumerDeletion: ptr.Bool(true),
+		StreamARN:               ptr.String("__StreamARN__"),
+		StreamId:                ptr.String("__StreamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -212,7 +243,12 @@ func TestCheckResponseSnapshot_DeregisterStreamConsumer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeregisterStreamConsumer(context.Background(), &DeregisterStreamConsumerInput{})
+	got, err := svc.DeregisterStreamConsumer(context.Background(), &DeregisterStreamConsumerInput{
+		StreamARN:    ptr.String("__StreamARN__"),
+		ConsumerName: ptr.String("__ConsumerName__"),
+		ConsumerARN:  ptr.String("__ConsumerARN__"),
+		StreamId:     ptr.String("__StreamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -337,7 +373,13 @@ func TestCheckResponseSnapshot_DescribeStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeStream(context.Background(), &DescribeStreamInput{})
+	got, err := svc.DescribeStream(context.Background(), &DescribeStreamInput{
+		StreamName:            ptr.String("__StreamName__"),
+		Limit:                 ptr.Int32(1),
+		ExclusiveStartShardId: ptr.String("__ExclusiveStartShardId__"),
+		StreamARN:             ptr.String("__StreamARN__"),
+		StreamId:              ptr.String("__StreamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -364,7 +406,12 @@ func TestCheckResponseSnapshot_DescribeStreamConsumer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeStreamConsumer(context.Background(), &DescribeStreamConsumerInput{})
+	got, err := svc.DescribeStreamConsumer(context.Background(), &DescribeStreamConsumerInput{
+		StreamARN:    ptr.String("__StreamARN__"),
+		ConsumerName: ptr.String("__ConsumerName__"),
+		ConsumerARN:  ptr.String("__ConsumerARN__"),
+		StreamId:     ptr.String("__StreamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -418,7 +465,11 @@ func TestCheckResponseSnapshot_DescribeStreamSummary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeStreamSummary(context.Background(), &DescribeStreamSummaryInput{})
+	got, err := svc.DescribeStreamSummary(context.Background(), &DescribeStreamSummaryInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+		StreamId:   ptr.String("__StreamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -448,7 +499,15 @@ func TestCheckResponseSnapshot_DisableEnhancedMonitoring(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableEnhancedMonitoring(context.Background(), &DisableEnhancedMonitoringInput{})
+	got, err := svc.DisableEnhancedMonitoring(context.Background(), &DisableEnhancedMonitoringInput{
+		StreamName: ptr.String("__StreamName__"),
+		ShardLevelMetrics: []types.MetricsName{
+			types.MetricsName("IncomingBytes"),
+			types.MetricsName("IncomingBytes"),
+		},
+		StreamARN: ptr.String("__StreamARN__"),
+		StreamId:  ptr.String("__StreamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -478,7 +537,15 @@ func TestCheckResponseSnapshot_EnableEnhancedMonitoring(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableEnhancedMonitoring(context.Background(), &EnableEnhancedMonitoringInput{})
+	got, err := svc.EnableEnhancedMonitoring(context.Background(), &EnableEnhancedMonitoringInput{
+		StreamName: ptr.String("__StreamName__"),
+		ShardLevelMetrics: []types.MetricsName{
+			types.MetricsName("IncomingBytes"),
+			types.MetricsName("IncomingBytes"),
+		},
+		StreamARN: ptr.String("__StreamARN__"),
+		StreamId:  ptr.String("__StreamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -540,7 +607,12 @@ func TestCheckResponseSnapshot_GetRecords(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRecords(context.Background(), &GetRecordsInput{})
+	got, err := svc.GetRecords(context.Background(), &GetRecordsInput{
+		ShardIterator: ptr.String("__ShardIterator__"),
+		Limit:         ptr.Int32(1),
+		StreamARN:     ptr.String("__StreamARN__"),
+		StreamId:      ptr.String("__StreamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -561,7 +633,10 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{})
+	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		StreamId:    ptr.String("__StreamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -582,7 +657,15 @@ func TestCheckResponseSnapshot_GetShardIterator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetShardIterator(context.Background(), &GetShardIteratorInput{})
+	got, err := svc.GetShardIterator(context.Background(), &GetShardIteratorInput{
+		StreamName:             ptr.String("__StreamName__"),
+		ShardId:                ptr.String("__ShardId__"),
+		ShardIteratorType:      types.ShardIteratorType("AT_SEQUENCE_NUMBER"),
+		StartingSequenceNumber: ptr.String("__StartingSequenceNumber__"),
+		Timestamp:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StreamARN:              ptr.String("__StreamARN__"),
+		StreamId:               ptr.String("__StreamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -601,7 +684,12 @@ func TestCheckResponseSnapshot_IncreaseStreamRetentionPeriod(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.IncreaseStreamRetentionPeriod(context.Background(), &IncreaseStreamRetentionPeriodInput{})
+	got, err := svc.IncreaseStreamRetentionPeriod(context.Background(), &IncreaseStreamRetentionPeriodInput{
+		StreamName:           ptr.String("__StreamName__"),
+		RetentionPeriodHours: ptr.Int32(1),
+		StreamARN:            ptr.String("__StreamARN__"),
+		StreamId:             ptr.String("__StreamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -650,7 +738,20 @@ func TestCheckResponseSnapshot_ListShards(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListShards(context.Background(), &ListShardsInput{})
+	got, err := svc.ListShards(context.Background(), &ListShardsInput{
+		StreamName:              ptr.String("__StreamName__"),
+		NextToken:               ptr.String("__NextToken__"),
+		ExclusiveStartShardId:   ptr.String("__ExclusiveStartShardId__"),
+		MaxResults:              ptr.Int32(1),
+		StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ShardFilter: &types.ShardFilter{
+			Type:      types.ShardFilterType("AFTER_SHARD_ID"),
+			ShardId:   ptr.String("__ShardId__"),
+			Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		StreamARN: ptr.String("__StreamARN__"),
+		StreamId:  ptr.String("__StreamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -685,7 +786,13 @@ func TestCheckResponseSnapshot_ListStreamConsumers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStreamConsumers(context.Background(), &ListStreamConsumersInput{})
+	got, err := svc.ListStreamConsumers(context.Background(), &ListStreamConsumersInput{
+		StreamARN:               ptr.String("__StreamARN__"),
+		NextToken:               ptr.String("__NextToken__"),
+		MaxResults:              ptr.Int32(1),
+		StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StreamId:                ptr.String("__StreamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -731,7 +838,11 @@ func TestCheckResponseSnapshot_ListStreams(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStreams(context.Background(), &ListStreamsInput{})
+	got, err := svc.ListStreams(context.Background(), &ListStreamsInput{
+		Limit:                    ptr.Int32(1),
+		ExclusiveStartStreamName: ptr.String("__ExclusiveStartStreamName__"),
+		NextToken:                ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -761,7 +872,10 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		StreamId:    ptr.String("__StreamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -792,7 +906,13 @@ func TestCheckResponseSnapshot_ListTagsForStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForStream(context.Background(), &ListTagsForStreamInput{})
+	got, err := svc.ListTagsForStream(context.Background(), &ListTagsForStreamInput{
+		StreamName:           ptr.String("__StreamName__"),
+		ExclusiveStartTagKey: ptr.String("__ExclusiveStartTagKey__"),
+		Limit:                ptr.Int32(1),
+		StreamARN:            ptr.String("__StreamARN__"),
+		StreamId:             ptr.String("__StreamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -811,7 +931,13 @@ func TestCheckResponseSnapshot_MergeShards(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.MergeShards(context.Background(), &MergeShardsInput{})
+	got, err := svc.MergeShards(context.Background(), &MergeShardsInput{
+		StreamName:           ptr.String("__StreamName__"),
+		ShardToMerge:         ptr.String("__ShardToMerge__"),
+		AdjacentShardToMerge: ptr.String("__AdjacentShardToMerge__"),
+		StreamARN:            ptr.String("__StreamARN__"),
+		StreamId:             ptr.String("__StreamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -834,7 +960,15 @@ func TestCheckResponseSnapshot_PutRecord(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutRecord(context.Background(), &PutRecordInput{})
+	got, err := svc.PutRecord(context.Background(), &PutRecordInput{
+		StreamName:                ptr.String("__StreamName__"),
+		Data:                      []byte("blob"),
+		PartitionKey:              ptr.String("__PartitionKey__"),
+		ExplicitHashKey:           ptr.String("__ExplicitHashKey__"),
+		SequenceNumberForOrdering: ptr.String("__SequenceNumberForOrdering__"),
+		StreamARN:                 ptr.String("__StreamARN__"),
+		StreamId:                  ptr.String("__StreamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -870,7 +1004,23 @@ func TestCheckResponseSnapshot_PutRecords(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutRecords(context.Background(), &PutRecordsInput{})
+	got, err := svc.PutRecords(context.Background(), &PutRecordsInput{
+		Records: []types.PutRecordsRequestEntry{
+			{
+				Data:            []byte("blob"),
+				ExplicitHashKey: ptr.String("__ExplicitHashKey__"),
+				PartitionKey:    ptr.String("__PartitionKey__"),
+			},
+			{
+				Data:            []byte("blob"),
+				ExplicitHashKey: ptr.String("__ExplicitHashKey__"),
+				PartitionKey:    ptr.String("__PartitionKey__"),
+			},
+		},
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+		StreamId:   ptr.String("__StreamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -889,7 +1039,11 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		StreamId:    ptr.String("__StreamId__"),
+		Policy:      ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -915,7 +1069,14 @@ func TestCheckResponseSnapshot_RegisterStreamConsumer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterStreamConsumer(context.Background(), &RegisterStreamConsumerInput{})
+	got, err := svc.RegisterStreamConsumer(context.Background(), &RegisterStreamConsumerInput{
+		StreamARN:    ptr.String("__StreamARN__"),
+		ConsumerName: ptr.String("__ConsumerName__"),
+		StreamId:     ptr.String("__StreamId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -934,7 +1095,15 @@ func TestCheckResponseSnapshot_RemoveTagsFromStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveTagsFromStream(context.Background(), &RemoveTagsFromStreamInput{})
+	got, err := svc.RemoveTagsFromStream(context.Background(), &RemoveTagsFromStreamInput{
+		StreamName: ptr.String("__StreamName__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		StreamARN: ptr.String("__StreamARN__"),
+		StreamId:  ptr.String("__StreamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -953,7 +1122,13 @@ func TestCheckResponseSnapshot_SplitShard(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SplitShard(context.Background(), &SplitShardInput{})
+	got, err := svc.SplitShard(context.Background(), &SplitShardInput{
+		StreamName:         ptr.String("__StreamName__"),
+		ShardToSplit:       ptr.String("__ShardToSplit__"),
+		NewStartingHashKey: ptr.String("__NewStartingHashKey__"),
+		StreamARN:          ptr.String("__StreamARN__"),
+		StreamId:           ptr.String("__StreamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -972,7 +1147,13 @@ func TestCheckResponseSnapshot_StartStreamEncryption(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartStreamEncryption(context.Background(), &StartStreamEncryptionInput{})
+	got, err := svc.StartStreamEncryption(context.Background(), &StartStreamEncryptionInput{
+		StreamName:     ptr.String("__StreamName__"),
+		EncryptionType: types.EncryptionType("NONE"),
+		KeyId:          ptr.String("__KeyId__"),
+		StreamARN:      ptr.String("__StreamARN__"),
+		StreamId:       ptr.String("__StreamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -991,13 +1172,23 @@ func TestCheckResponseSnapshot_StopStreamEncryption(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopStreamEncryption(context.Background(), &StopStreamEncryptionInput{})
+	got, err := svc.StopStreamEncryption(context.Background(), &StopStreamEncryptionInput{
+		StreamName:     ptr.String("__StreamName__"),
+		EncryptionType: types.EncryptionType("NONE"),
+		KeyId:          ptr.String("__KeyId__"),
+		StreamARN:      ptr.String("__StreamARN__"),
+		StreamId:       ptr.String("__StreamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "StopStreamEncryption.response", err)
 	}
+}
+
+func TestCheckResponseSnapshot_SubscribeToShard(t *testing.T) {
+	t.Skip("event stream operation")
 }
 
 func TestCheckResponseSnapshot_TagResource(t *testing.T) {
@@ -1010,7 +1201,13 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ResourceARN: ptr.String("__ResourceARN__"),
+		StreamId:    ptr.String("__StreamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1029,7 +1226,14 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResourceARN: ptr.String("__ResourceARN__"),
+		StreamId:    ptr.String("__StreamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1055,7 +1259,11 @@ func TestCheckResponseSnapshot_UpdateAccountSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAccountSettings(context.Background(), &UpdateAccountSettingsInput{})
+	got, err := svc.UpdateAccountSettings(context.Background(), &UpdateAccountSettingsInput{
+		MinimumThroughputBillingCommitment: &types.MinimumThroughputBillingCommitmentInput{
+			Status: types.MinimumThroughputBillingCommitmentInputStatus("ENABLED"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1074,7 +1282,11 @@ func TestCheckResponseSnapshot_UpdateMaxRecordSize(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMaxRecordSize(context.Background(), &UpdateMaxRecordSizeInput{})
+	got, err := svc.UpdateMaxRecordSize(context.Background(), &UpdateMaxRecordSizeInput{
+		StreamARN:          ptr.String("__StreamARN__"),
+		StreamId:           ptr.String("__StreamId__"),
+		MaxRecordSizeInKiB: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1098,7 +1310,13 @@ func TestCheckResponseSnapshot_UpdateShardCount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateShardCount(context.Background(), &UpdateShardCountInput{})
+	got, err := svc.UpdateShardCount(context.Background(), &UpdateShardCountInput{
+		StreamName:       ptr.String("__StreamName__"),
+		TargetShardCount: ptr.Int32(1),
+		ScalingType:      types.ScalingType("UNIFORM_SCALING"),
+		StreamARN:        ptr.String("__StreamARN__"),
+		StreamId:         ptr.String("__StreamId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1117,7 +1335,14 @@ func TestCheckResponseSnapshot_UpdateStreamMode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateStreamMode(context.Background(), &UpdateStreamModeInput{})
+	got, err := svc.UpdateStreamMode(context.Background(), &UpdateStreamModeInput{
+		StreamARN: ptr.String("__StreamARN__"),
+		StreamId:  ptr.String("__StreamId__"),
+		StreamModeDetails: &types.StreamModeDetails{
+			StreamMode: types.StreamMode("PROVISIONED"),
+		},
+		WarmThroughputMiBps: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1143,7 +1368,12 @@ func TestCheckResponseSnapshot_UpdateStreamWarmThroughput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateStreamWarmThroughput(context.Background(), &UpdateStreamWarmThroughputInput{})
+	got, err := svc.UpdateStreamWarmThroughput(context.Background(), &UpdateStreamWarmThroughputInput{
+		StreamARN:           ptr.String("__StreamARN__"),
+		StreamName:          ptr.String("__StreamName__"),
+		StreamId:            ptr.String("__StreamId__"),
+		WarmThroughputMiBps: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1164,7 +1394,14 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToStream(context.Background(), &AddTagsToStreamInput{})
+	_, opErr := svc.AddTagsToStream(context.Background(), &AddTagsToStreamInput{
+		StreamName: ptr.String("__StreamName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		StreamARN: ptr.String("__StreamARN__"),
+		StreamId:  ptr.String("__StreamId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1189,7 +1426,12 @@ func TestCheckResponseSnapshot_Error_ExpiredIteratorException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{})
+	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{
+		ShardIterator: ptr.String("__ShardIterator__"),
+		Limit:         ptr.Int32(1),
+		StreamARN:     ptr.String("__StreamARN__"),
+		StreamId:      ptr.String("__StreamId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1214,7 +1456,20 @@ func TestCheckResponseSnapshot_Error_ExpiredNextTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListShards(context.Background(), &ListShardsInput{})
+	_, opErr := svc.ListShards(context.Background(), &ListShardsInput{
+		StreamName:              ptr.String("__StreamName__"),
+		NextToken:               ptr.String("__NextToken__"),
+		ExclusiveStartShardId:   ptr.String("__ExclusiveStartShardId__"),
+		MaxResults:              ptr.Int32(1),
+		StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ShardFilter: &types.ShardFilter{
+			Type:      types.ShardFilterType("AFTER_SHARD_ID"),
+			ShardId:   ptr.String("__ShardId__"),
+			Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		StreamARN: ptr.String("__StreamARN__"),
+		StreamId:  ptr.String("__StreamId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1239,7 +1494,12 @@ func TestCheckResponseSnapshot_Error_InternalFailureException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{})
+	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{
+		ShardIterator: ptr.String("__ShardIterator__"),
+		Limit:         ptr.Int32(1),
+		StreamARN:     ptr.String("__StreamARN__"),
+		StreamId:      ptr.String("__StreamId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1264,7 +1524,14 @@ func TestCheckResponseSnapshot_Error_InvalidArgumentException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToStream(context.Background(), &AddTagsToStreamInput{})
+	_, opErr := svc.AddTagsToStream(context.Background(), &AddTagsToStreamInput{
+		StreamName: ptr.String("__StreamName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		StreamARN: ptr.String("__StreamARN__"),
+		StreamId:  ptr.String("__StreamId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1289,7 +1556,12 @@ func TestCheckResponseSnapshot_Error_KMSAccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{})
+	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{
+		ShardIterator: ptr.String("__ShardIterator__"),
+		Limit:         ptr.Int32(1),
+		StreamARN:     ptr.String("__StreamARN__"),
+		StreamId:      ptr.String("__StreamId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1314,7 +1586,12 @@ func TestCheckResponseSnapshot_Error_KMSDisabledException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{})
+	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{
+		ShardIterator: ptr.String("__ShardIterator__"),
+		Limit:         ptr.Int32(1),
+		StreamARN:     ptr.String("__StreamARN__"),
+		StreamId:      ptr.String("__StreamId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1339,7 +1616,12 @@ func TestCheckResponseSnapshot_Error_KMSInvalidStateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{})
+	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{
+		ShardIterator: ptr.String("__ShardIterator__"),
+		Limit:         ptr.Int32(1),
+		StreamARN:     ptr.String("__StreamARN__"),
+		StreamId:      ptr.String("__StreamId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1364,7 +1646,12 @@ func TestCheckResponseSnapshot_Error_KMSNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{})
+	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{
+		ShardIterator: ptr.String("__ShardIterator__"),
+		Limit:         ptr.Int32(1),
+		StreamARN:     ptr.String("__StreamARN__"),
+		StreamId:      ptr.String("__StreamId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1389,7 +1676,12 @@ func TestCheckResponseSnapshot_Error_KMSOptInRequired(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{})
+	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{
+		ShardIterator: ptr.String("__ShardIterator__"),
+		Limit:         ptr.Int32(1),
+		StreamARN:     ptr.String("__StreamARN__"),
+		StreamId:      ptr.String("__StreamId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1414,7 +1706,12 @@ func TestCheckResponseSnapshot_Error_KMSThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{})
+	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{
+		ShardIterator: ptr.String("__ShardIterator__"),
+		Limit:         ptr.Int32(1),
+		StreamARN:     ptr.String("__StreamARN__"),
+		StreamId:      ptr.String("__StreamId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1439,7 +1736,14 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToStream(context.Background(), &AddTagsToStreamInput{})
+	_, opErr := svc.AddTagsToStream(context.Background(), &AddTagsToStreamInput{
+		StreamName: ptr.String("__StreamName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		StreamARN: ptr.String("__StreamARN__"),
+		StreamId:  ptr.String("__StreamId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1464,7 +1768,12 @@ func TestCheckResponseSnapshot_Error_ProvisionedThroughputExceededException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{})
+	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{
+		ShardIterator: ptr.String("__ShardIterator__"),
+		Limit:         ptr.Int32(1),
+		StreamARN:     ptr.String("__StreamARN__"),
+		StreamId:      ptr.String("__StreamId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1489,7 +1798,14 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToStream(context.Background(), &AddTagsToStreamInput{})
+	_, opErr := svc.AddTagsToStream(context.Background(), &AddTagsToStreamInput{
+		StreamName: ptr.String("__StreamName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		StreamARN: ptr.String("__StreamARN__"),
+		StreamId:  ptr.String("__StreamId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1514,7 +1830,14 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToStream(context.Background(), &AddTagsToStreamInput{})
+	_, opErr := svc.AddTagsToStream(context.Background(), &AddTagsToStreamInput{
+		StreamName: ptr.String("__StreamName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		StreamARN: ptr.String("__StreamARN__"),
+		StreamId:  ptr.String("__StreamId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1539,7 +1862,18 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateStream(context.Background(), &CreateStreamInput{})
+	_, opErr := svc.CreateStream(context.Background(), &CreateStreamInput{
+		StreamName: ptr.String("__StreamName__"),
+		ShardCount: ptr.Int32(1),
+		StreamModeDetails: &types.StreamModeDetails{
+			StreamMode: types.StreamMode("PROVISIONED"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		WarmThroughputMiBps: ptr.Int32(1),
+		MaxRecordSizeInKiB:  ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

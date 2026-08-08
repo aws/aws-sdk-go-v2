@@ -117,7 +117,38 @@ func TestCheckResponseSnapshot_AddFacetToObject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddFacetToObject(context.Background(), &AddFacetToObjectInput{})
+	got, err := svc.AddFacetToObject(context.Background(), &AddFacetToObjectInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		SchemaFacet: &types.SchemaFacet{
+			SchemaArn: ptr.String("__SchemaArn__"),
+			FacetName: ptr.String("__FacetName__"),
+		},
+		ObjectAttributeList: []types.AttributeKeyAndValue{
+			{
+				Key: &types.AttributeKey{
+					SchemaArn: ptr.String("__SchemaArn__"),
+					FacetName: ptr.String("__FacetName__"),
+					Name:      ptr.String("__Name__"),
+				},
+				Value: &types.TypedAttributeValueMemberStringValue{
+					Value: "__TypedAttributeValueMemberStringValue__",
+				},
+			},
+			{
+				Key: &types.AttributeKey{
+					SchemaArn: ptr.String("__SchemaArn__"),
+					FacetName: ptr.String("__FacetName__"),
+					Name:      ptr.String("__Name__"),
+				},
+				Value: &types.TypedAttributeValueMemberStringValue{
+					Value: "__TypedAttributeValueMemberStringValue__",
+				},
+			},
+		},
+		ObjectReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -139,7 +170,10 @@ func TestCheckResponseSnapshot_ApplySchema(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ApplySchema(context.Background(), &ApplySchemaInput{})
+	got, err := svc.ApplySchema(context.Background(), &ApplySchemaInput{
+		PublishedSchemaArn: ptr.String("__PublishedSchemaArn__"),
+		DirectoryArn:       ptr.String("__DirectoryArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -160,7 +194,16 @@ func TestCheckResponseSnapshot_AttachObject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AttachObject(context.Background(), &AttachObjectInput{})
+	got, err := svc.AttachObject(context.Background(), &AttachObjectInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		ParentReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		ChildReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		LinkName: ptr.String("__LinkName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -179,7 +222,15 @@ func TestCheckResponseSnapshot_AttachPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AttachPolicy(context.Background(), &AttachPolicyInput{})
+	got, err := svc.AttachPolicy(context.Background(), &AttachPolicyInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		PolicyReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		ObjectReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -200,7 +251,15 @@ func TestCheckResponseSnapshot_AttachToIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AttachToIndex(context.Background(), &AttachToIndexInput{})
+	got, err := svc.AttachToIndex(context.Background(), &AttachToIndexInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		IndexReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		TargetReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -246,7 +305,33 @@ func TestCheckResponseSnapshot_AttachTypedLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AttachTypedLink(context.Background(), &AttachTypedLinkInput{})
+	got, err := svc.AttachTypedLink(context.Background(), &AttachTypedLinkInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		SourceObjectReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		TargetObjectReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		TypedLinkFacet: &types.TypedLinkSchemaAndFacetName{
+			SchemaArn:     ptr.String("__SchemaArn__"),
+			TypedLinkName: ptr.String("__TypedLinkName__"),
+		},
+		Attributes: []types.AttributeNameAndValue{
+			{
+				AttributeName: ptr.String("__AttributeName__"),
+				Value: &types.TypedAttributeValueMemberStringValue{
+					Value: "__TypedAttributeValueMemberStringValue__",
+				},
+			},
+			{
+				AttributeName: ptr.String("__AttributeName__"),
+				Value: &types.TypedAttributeValueMemberStringValue{
+					Value: "__TypedAttributeValueMemberStringValue__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1078,7 +1163,478 @@ func TestCheckResponseSnapshot_BatchRead(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchRead(context.Background(), &BatchReadInput{})
+	got, err := svc.BatchRead(context.Background(), &BatchReadInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		Operations: []types.BatchReadOperation{
+			{
+				ListObjectAttributes: &types.BatchListObjectAttributes{
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					NextToken:  ptr.String("__NextToken__"),
+					MaxResults: ptr.Int32(1),
+					FacetFilter: &types.SchemaFacet{
+						SchemaArn: ptr.String("__SchemaArn__"),
+						FacetName: ptr.String("__FacetName__"),
+					},
+				},
+				ListObjectChildren: &types.BatchListObjectChildren{
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					NextToken:  ptr.String("__NextToken__"),
+					MaxResults: ptr.Int32(1),
+				},
+				ListAttachedIndices: &types.BatchListAttachedIndices{
+					TargetReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					NextToken:  ptr.String("__NextToken__"),
+					MaxResults: ptr.Int32(1),
+				},
+				ListObjectParentPaths: &types.BatchListObjectParentPaths{
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					NextToken:  ptr.String("__NextToken__"),
+					MaxResults: ptr.Int32(1),
+				},
+				GetObjectInformation: &types.BatchGetObjectInformation{
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+				},
+				GetObjectAttributes: &types.BatchGetObjectAttributes{
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					SchemaFacet: &types.SchemaFacet{
+						SchemaArn: ptr.String("__SchemaArn__"),
+						FacetName: ptr.String("__FacetName__"),
+					},
+					AttributeNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ListObjectParents: &types.BatchListObjectParents{
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					NextToken:  ptr.String("__NextToken__"),
+					MaxResults: ptr.Int32(1),
+				},
+				ListObjectPolicies: &types.BatchListObjectPolicies{
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					NextToken:  ptr.String("__NextToken__"),
+					MaxResults: ptr.Int32(1),
+				},
+				ListPolicyAttachments: &types.BatchListPolicyAttachments{
+					PolicyReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					NextToken:  ptr.String("__NextToken__"),
+					MaxResults: ptr.Int32(1),
+				},
+				LookupPolicy: &types.BatchLookupPolicy{
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					NextToken:  ptr.String("__NextToken__"),
+					MaxResults: ptr.Int32(1),
+				},
+				ListIndex: &types.BatchListIndex{
+					RangesOnIndexedValues: []types.ObjectAttributeRange{
+						{
+							AttributeKey: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							Range: &types.TypedAttributeValueRange{
+								StartMode: types.RangeMode("FIRST"),
+								StartValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+								EndMode: types.RangeMode("FIRST"),
+								EndValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+						{
+							AttributeKey: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							Range: &types.TypedAttributeValueRange{
+								StartMode: types.RangeMode("FIRST"),
+								StartValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+								EndMode: types.RangeMode("FIRST"),
+								EndValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+					},
+					IndexReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					MaxResults: ptr.Int32(1),
+					NextToken:  ptr.String("__NextToken__"),
+				},
+				ListOutgoingTypedLinks: &types.BatchListOutgoingTypedLinks{
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					FilterAttributeRanges: []types.TypedLinkAttributeRange{
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							Range: &types.TypedAttributeValueRange{
+								StartMode: types.RangeMode("FIRST"),
+								StartValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+								EndMode: types.RangeMode("FIRST"),
+								EndValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							Range: &types.TypedAttributeValueRange{
+								StartMode: types.RangeMode("FIRST"),
+								StartValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+								EndMode: types.RangeMode("FIRST"),
+								EndValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+					},
+					FilterTypedLink: &types.TypedLinkSchemaAndFacetName{
+						SchemaArn:     ptr.String("__SchemaArn__"),
+						TypedLinkName: ptr.String("__TypedLinkName__"),
+					},
+					NextToken:  ptr.String("__NextToken__"),
+					MaxResults: ptr.Int32(1),
+				},
+				ListIncomingTypedLinks: &types.BatchListIncomingTypedLinks{
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					FilterAttributeRanges: []types.TypedLinkAttributeRange{
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							Range: &types.TypedAttributeValueRange{
+								StartMode: types.RangeMode("FIRST"),
+								StartValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+								EndMode: types.RangeMode("FIRST"),
+								EndValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							Range: &types.TypedAttributeValueRange{
+								StartMode: types.RangeMode("FIRST"),
+								StartValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+								EndMode: types.RangeMode("FIRST"),
+								EndValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+					},
+					FilterTypedLink: &types.TypedLinkSchemaAndFacetName{
+						SchemaArn:     ptr.String("__SchemaArn__"),
+						TypedLinkName: ptr.String("__TypedLinkName__"),
+					},
+					NextToken:  ptr.String("__NextToken__"),
+					MaxResults: ptr.Int32(1),
+				},
+				GetLinkAttributes: &types.BatchGetLinkAttributes{
+					TypedLinkSpecifier: &types.TypedLinkSpecifier{
+						TypedLinkFacet: &types.TypedLinkSchemaAndFacetName{
+							SchemaArn:     ptr.String("__SchemaArn__"),
+							TypedLinkName: ptr.String("__TypedLinkName__"),
+						},
+						SourceObjectReference: &types.ObjectReference{
+							Selector: ptr.String("__Selector__"),
+						},
+						TargetObjectReference: &types.ObjectReference{
+							Selector: ptr.String("__Selector__"),
+						},
+						IdentityAttributeValues: []types.AttributeNameAndValue{
+							{
+								AttributeName: ptr.String("__AttributeName__"),
+								Value: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+							{
+								AttributeName: ptr.String("__AttributeName__"),
+								Value: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+					},
+					AttributeNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			{
+				ListObjectAttributes: &types.BatchListObjectAttributes{
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					NextToken:  ptr.String("__NextToken__"),
+					MaxResults: ptr.Int32(1),
+					FacetFilter: &types.SchemaFacet{
+						SchemaArn: ptr.String("__SchemaArn__"),
+						FacetName: ptr.String("__FacetName__"),
+					},
+				},
+				ListObjectChildren: &types.BatchListObjectChildren{
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					NextToken:  ptr.String("__NextToken__"),
+					MaxResults: ptr.Int32(1),
+				},
+				ListAttachedIndices: &types.BatchListAttachedIndices{
+					TargetReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					NextToken:  ptr.String("__NextToken__"),
+					MaxResults: ptr.Int32(1),
+				},
+				ListObjectParentPaths: &types.BatchListObjectParentPaths{
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					NextToken:  ptr.String("__NextToken__"),
+					MaxResults: ptr.Int32(1),
+				},
+				GetObjectInformation: &types.BatchGetObjectInformation{
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+				},
+				GetObjectAttributes: &types.BatchGetObjectAttributes{
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					SchemaFacet: &types.SchemaFacet{
+						SchemaArn: ptr.String("__SchemaArn__"),
+						FacetName: ptr.String("__FacetName__"),
+					},
+					AttributeNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ListObjectParents: &types.BatchListObjectParents{
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					NextToken:  ptr.String("__NextToken__"),
+					MaxResults: ptr.Int32(1),
+				},
+				ListObjectPolicies: &types.BatchListObjectPolicies{
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					NextToken:  ptr.String("__NextToken__"),
+					MaxResults: ptr.Int32(1),
+				},
+				ListPolicyAttachments: &types.BatchListPolicyAttachments{
+					PolicyReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					NextToken:  ptr.String("__NextToken__"),
+					MaxResults: ptr.Int32(1),
+				},
+				LookupPolicy: &types.BatchLookupPolicy{
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					NextToken:  ptr.String("__NextToken__"),
+					MaxResults: ptr.Int32(1),
+				},
+				ListIndex: &types.BatchListIndex{
+					RangesOnIndexedValues: []types.ObjectAttributeRange{
+						{
+							AttributeKey: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							Range: &types.TypedAttributeValueRange{
+								StartMode: types.RangeMode("FIRST"),
+								StartValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+								EndMode: types.RangeMode("FIRST"),
+								EndValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+						{
+							AttributeKey: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							Range: &types.TypedAttributeValueRange{
+								StartMode: types.RangeMode("FIRST"),
+								StartValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+								EndMode: types.RangeMode("FIRST"),
+								EndValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+					},
+					IndexReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					MaxResults: ptr.Int32(1),
+					NextToken:  ptr.String("__NextToken__"),
+				},
+				ListOutgoingTypedLinks: &types.BatchListOutgoingTypedLinks{
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					FilterAttributeRanges: []types.TypedLinkAttributeRange{
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							Range: &types.TypedAttributeValueRange{
+								StartMode: types.RangeMode("FIRST"),
+								StartValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+								EndMode: types.RangeMode("FIRST"),
+								EndValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							Range: &types.TypedAttributeValueRange{
+								StartMode: types.RangeMode("FIRST"),
+								StartValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+								EndMode: types.RangeMode("FIRST"),
+								EndValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+					},
+					FilterTypedLink: &types.TypedLinkSchemaAndFacetName{
+						SchemaArn:     ptr.String("__SchemaArn__"),
+						TypedLinkName: ptr.String("__TypedLinkName__"),
+					},
+					NextToken:  ptr.String("__NextToken__"),
+					MaxResults: ptr.Int32(1),
+				},
+				ListIncomingTypedLinks: &types.BatchListIncomingTypedLinks{
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					FilterAttributeRanges: []types.TypedLinkAttributeRange{
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							Range: &types.TypedAttributeValueRange{
+								StartMode: types.RangeMode("FIRST"),
+								StartValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+								EndMode: types.RangeMode("FIRST"),
+								EndValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							Range: &types.TypedAttributeValueRange{
+								StartMode: types.RangeMode("FIRST"),
+								StartValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+								EndMode: types.RangeMode("FIRST"),
+								EndValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+					},
+					FilterTypedLink: &types.TypedLinkSchemaAndFacetName{
+						SchemaArn:     ptr.String("__SchemaArn__"),
+						TypedLinkName: ptr.String("__TypedLinkName__"),
+					},
+					NextToken:  ptr.String("__NextToken__"),
+					MaxResults: ptr.Int32(1),
+				},
+				GetLinkAttributes: &types.BatchGetLinkAttributes{
+					TypedLinkSpecifier: &types.TypedLinkSpecifier{
+						TypedLinkFacet: &types.TypedLinkSchemaAndFacetName{
+							SchemaArn:     ptr.String("__SchemaArn__"),
+							TypedLinkName: ptr.String("__TypedLinkName__"),
+						},
+						SourceObjectReference: &types.ObjectReference{
+							Selector: ptr.String("__Selector__"),
+						},
+						TargetObjectReference: &types.ObjectReference{
+							Selector: ptr.String("__Selector__"),
+						},
+						IdentityAttributeValues: []types.AttributeNameAndValue{
+							{
+								AttributeName: ptr.String("__AttributeName__"),
+								Value: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+							{
+								AttributeName: ptr.String("__AttributeName__"),
+								Value: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+					},
+					AttributeNames: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		ConsistencyLevel: types.ConsistencyLevel("SERIALIZABLE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1216,7 +1772,605 @@ func TestCheckResponseSnapshot_BatchWrite(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchWrite(context.Background(), &BatchWriteInput{})
+	got, err := svc.BatchWrite(context.Background(), &BatchWriteInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		Operations: []types.BatchWriteOperation{
+			{
+				CreateObject: &types.BatchCreateObject{
+					SchemaFacet: []types.SchemaFacet{
+						{
+							SchemaArn: ptr.String("__SchemaArn__"),
+							FacetName: ptr.String("__FacetName__"),
+						},
+						{
+							SchemaArn: ptr.String("__SchemaArn__"),
+							FacetName: ptr.String("__FacetName__"),
+						},
+					},
+					ObjectAttributeList: []types.AttributeKeyAndValue{
+						{
+							Key: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							Value: &types.TypedAttributeValueMemberStringValue{
+								Value: "__TypedAttributeValueMemberStringValue__",
+							},
+						},
+						{
+							Key: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							Value: &types.TypedAttributeValueMemberStringValue{
+								Value: "__TypedAttributeValueMemberStringValue__",
+							},
+						},
+					},
+					ParentReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					LinkName:           ptr.String("__LinkName__"),
+					BatchReferenceName: ptr.String("__BatchReferenceName__"),
+				},
+				AttachObject: &types.BatchAttachObject{
+					ParentReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					ChildReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					LinkName: ptr.String("__LinkName__"),
+				},
+				DetachObject: &types.BatchDetachObject{
+					ParentReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					LinkName:           ptr.String("__LinkName__"),
+					BatchReferenceName: ptr.String("__BatchReferenceName__"),
+				},
+				UpdateObjectAttributes: &types.BatchUpdateObjectAttributes{
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					AttributeUpdates: []types.ObjectAttributeUpdate{
+						{
+							ObjectAttributeKey: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							ObjectAttributeAction: &types.ObjectAttributeAction{
+								ObjectAttributeActionType: types.UpdateActionType("CREATE_OR_UPDATE"),
+								ObjectAttributeUpdateValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+						{
+							ObjectAttributeKey: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							ObjectAttributeAction: &types.ObjectAttributeAction{
+								ObjectAttributeActionType: types.UpdateActionType("CREATE_OR_UPDATE"),
+								ObjectAttributeUpdateValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+					},
+				},
+				DeleteObject: &types.BatchDeleteObject{
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+				},
+				AddFacetToObject: &types.BatchAddFacetToObject{
+					SchemaFacet: &types.SchemaFacet{
+						SchemaArn: ptr.String("__SchemaArn__"),
+						FacetName: ptr.String("__FacetName__"),
+					},
+					ObjectAttributeList: []types.AttributeKeyAndValue{
+						{
+							Key: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							Value: &types.TypedAttributeValueMemberStringValue{
+								Value: "__TypedAttributeValueMemberStringValue__",
+							},
+						},
+						{
+							Key: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							Value: &types.TypedAttributeValueMemberStringValue{
+								Value: "__TypedAttributeValueMemberStringValue__",
+							},
+						},
+					},
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+				},
+				RemoveFacetFromObject: &types.BatchRemoveFacetFromObject{
+					SchemaFacet: &types.SchemaFacet{
+						SchemaArn: ptr.String("__SchemaArn__"),
+						FacetName: ptr.String("__FacetName__"),
+					},
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+				},
+				AttachPolicy: &types.BatchAttachPolicy{
+					PolicyReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+				},
+				DetachPolicy: &types.BatchDetachPolicy{
+					PolicyReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+				},
+				CreateIndex: &types.BatchCreateIndex{
+					OrderedIndexedAttributeList: []types.AttributeKey{
+						{
+							SchemaArn: ptr.String("__SchemaArn__"),
+							FacetName: ptr.String("__FacetName__"),
+							Name:      ptr.String("__Name__"),
+						},
+						{
+							SchemaArn: ptr.String("__SchemaArn__"),
+							FacetName: ptr.String("__FacetName__"),
+							Name:      ptr.String("__Name__"),
+						},
+					},
+					IsUnique: true,
+					ParentReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					LinkName:           ptr.String("__LinkName__"),
+					BatchReferenceName: ptr.String("__BatchReferenceName__"),
+				},
+				AttachToIndex: &types.BatchAttachToIndex{
+					IndexReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					TargetReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+				},
+				DetachFromIndex: &types.BatchDetachFromIndex{
+					IndexReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					TargetReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+				},
+				AttachTypedLink: &types.BatchAttachTypedLink{
+					SourceObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					TargetObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					TypedLinkFacet: &types.TypedLinkSchemaAndFacetName{
+						SchemaArn:     ptr.String("__SchemaArn__"),
+						TypedLinkName: ptr.String("__TypedLinkName__"),
+					},
+					Attributes: []types.AttributeNameAndValue{
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							Value: &types.TypedAttributeValueMemberStringValue{
+								Value: "__TypedAttributeValueMemberStringValue__",
+							},
+						},
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							Value: &types.TypedAttributeValueMemberStringValue{
+								Value: "__TypedAttributeValueMemberStringValue__",
+							},
+						},
+					},
+				},
+				DetachTypedLink: &types.BatchDetachTypedLink{
+					TypedLinkSpecifier: &types.TypedLinkSpecifier{
+						TypedLinkFacet: &types.TypedLinkSchemaAndFacetName{
+							SchemaArn:     ptr.String("__SchemaArn__"),
+							TypedLinkName: ptr.String("__TypedLinkName__"),
+						},
+						SourceObjectReference: &types.ObjectReference{
+							Selector: ptr.String("__Selector__"),
+						},
+						TargetObjectReference: &types.ObjectReference{
+							Selector: ptr.String("__Selector__"),
+						},
+						IdentityAttributeValues: []types.AttributeNameAndValue{
+							{
+								AttributeName: ptr.String("__AttributeName__"),
+								Value: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+							{
+								AttributeName: ptr.String("__AttributeName__"),
+								Value: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+					},
+				},
+				UpdateLinkAttributes: &types.BatchUpdateLinkAttributes{
+					TypedLinkSpecifier: &types.TypedLinkSpecifier{
+						TypedLinkFacet: &types.TypedLinkSchemaAndFacetName{
+							SchemaArn:     ptr.String("__SchemaArn__"),
+							TypedLinkName: ptr.String("__TypedLinkName__"),
+						},
+						SourceObjectReference: &types.ObjectReference{
+							Selector: ptr.String("__Selector__"),
+						},
+						TargetObjectReference: &types.ObjectReference{
+							Selector: ptr.String("__Selector__"),
+						},
+						IdentityAttributeValues: []types.AttributeNameAndValue{
+							{
+								AttributeName: ptr.String("__AttributeName__"),
+								Value: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+							{
+								AttributeName: ptr.String("__AttributeName__"),
+								Value: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+					},
+					AttributeUpdates: []types.LinkAttributeUpdate{
+						{
+							AttributeKey: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							AttributeAction: &types.LinkAttributeAction{
+								AttributeActionType: types.UpdateActionType("CREATE_OR_UPDATE"),
+								AttributeUpdateValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+						{
+							AttributeKey: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							AttributeAction: &types.LinkAttributeAction{
+								AttributeActionType: types.UpdateActionType("CREATE_OR_UPDATE"),
+								AttributeUpdateValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+					},
+				},
+			},
+			{
+				CreateObject: &types.BatchCreateObject{
+					SchemaFacet: []types.SchemaFacet{
+						{
+							SchemaArn: ptr.String("__SchemaArn__"),
+							FacetName: ptr.String("__FacetName__"),
+						},
+						{
+							SchemaArn: ptr.String("__SchemaArn__"),
+							FacetName: ptr.String("__FacetName__"),
+						},
+					},
+					ObjectAttributeList: []types.AttributeKeyAndValue{
+						{
+							Key: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							Value: &types.TypedAttributeValueMemberStringValue{
+								Value: "__TypedAttributeValueMemberStringValue__",
+							},
+						},
+						{
+							Key: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							Value: &types.TypedAttributeValueMemberStringValue{
+								Value: "__TypedAttributeValueMemberStringValue__",
+							},
+						},
+					},
+					ParentReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					LinkName:           ptr.String("__LinkName__"),
+					BatchReferenceName: ptr.String("__BatchReferenceName__"),
+				},
+				AttachObject: &types.BatchAttachObject{
+					ParentReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					ChildReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					LinkName: ptr.String("__LinkName__"),
+				},
+				DetachObject: &types.BatchDetachObject{
+					ParentReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					LinkName:           ptr.String("__LinkName__"),
+					BatchReferenceName: ptr.String("__BatchReferenceName__"),
+				},
+				UpdateObjectAttributes: &types.BatchUpdateObjectAttributes{
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					AttributeUpdates: []types.ObjectAttributeUpdate{
+						{
+							ObjectAttributeKey: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							ObjectAttributeAction: &types.ObjectAttributeAction{
+								ObjectAttributeActionType: types.UpdateActionType("CREATE_OR_UPDATE"),
+								ObjectAttributeUpdateValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+						{
+							ObjectAttributeKey: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							ObjectAttributeAction: &types.ObjectAttributeAction{
+								ObjectAttributeActionType: types.UpdateActionType("CREATE_OR_UPDATE"),
+								ObjectAttributeUpdateValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+					},
+				},
+				DeleteObject: &types.BatchDeleteObject{
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+				},
+				AddFacetToObject: &types.BatchAddFacetToObject{
+					SchemaFacet: &types.SchemaFacet{
+						SchemaArn: ptr.String("__SchemaArn__"),
+						FacetName: ptr.String("__FacetName__"),
+					},
+					ObjectAttributeList: []types.AttributeKeyAndValue{
+						{
+							Key: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							Value: &types.TypedAttributeValueMemberStringValue{
+								Value: "__TypedAttributeValueMemberStringValue__",
+							},
+						},
+						{
+							Key: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							Value: &types.TypedAttributeValueMemberStringValue{
+								Value: "__TypedAttributeValueMemberStringValue__",
+							},
+						},
+					},
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+				},
+				RemoveFacetFromObject: &types.BatchRemoveFacetFromObject{
+					SchemaFacet: &types.SchemaFacet{
+						SchemaArn: ptr.String("__SchemaArn__"),
+						FacetName: ptr.String("__FacetName__"),
+					},
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+				},
+				AttachPolicy: &types.BatchAttachPolicy{
+					PolicyReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+				},
+				DetachPolicy: &types.BatchDetachPolicy{
+					PolicyReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+				},
+				CreateIndex: &types.BatchCreateIndex{
+					OrderedIndexedAttributeList: []types.AttributeKey{
+						{
+							SchemaArn: ptr.String("__SchemaArn__"),
+							FacetName: ptr.String("__FacetName__"),
+							Name:      ptr.String("__Name__"),
+						},
+						{
+							SchemaArn: ptr.String("__SchemaArn__"),
+							FacetName: ptr.String("__FacetName__"),
+							Name:      ptr.String("__Name__"),
+						},
+					},
+					IsUnique: true,
+					ParentReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					LinkName:           ptr.String("__LinkName__"),
+					BatchReferenceName: ptr.String("__BatchReferenceName__"),
+				},
+				AttachToIndex: &types.BatchAttachToIndex{
+					IndexReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					TargetReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+				},
+				DetachFromIndex: &types.BatchDetachFromIndex{
+					IndexReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					TargetReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+				},
+				AttachTypedLink: &types.BatchAttachTypedLink{
+					SourceObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					TargetObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					TypedLinkFacet: &types.TypedLinkSchemaAndFacetName{
+						SchemaArn:     ptr.String("__SchemaArn__"),
+						TypedLinkName: ptr.String("__TypedLinkName__"),
+					},
+					Attributes: []types.AttributeNameAndValue{
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							Value: &types.TypedAttributeValueMemberStringValue{
+								Value: "__TypedAttributeValueMemberStringValue__",
+							},
+						},
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							Value: &types.TypedAttributeValueMemberStringValue{
+								Value: "__TypedAttributeValueMemberStringValue__",
+							},
+						},
+					},
+				},
+				DetachTypedLink: &types.BatchDetachTypedLink{
+					TypedLinkSpecifier: &types.TypedLinkSpecifier{
+						TypedLinkFacet: &types.TypedLinkSchemaAndFacetName{
+							SchemaArn:     ptr.String("__SchemaArn__"),
+							TypedLinkName: ptr.String("__TypedLinkName__"),
+						},
+						SourceObjectReference: &types.ObjectReference{
+							Selector: ptr.String("__Selector__"),
+						},
+						TargetObjectReference: &types.ObjectReference{
+							Selector: ptr.String("__Selector__"),
+						},
+						IdentityAttributeValues: []types.AttributeNameAndValue{
+							{
+								AttributeName: ptr.String("__AttributeName__"),
+								Value: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+							{
+								AttributeName: ptr.String("__AttributeName__"),
+								Value: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+					},
+				},
+				UpdateLinkAttributes: &types.BatchUpdateLinkAttributes{
+					TypedLinkSpecifier: &types.TypedLinkSpecifier{
+						TypedLinkFacet: &types.TypedLinkSchemaAndFacetName{
+							SchemaArn:     ptr.String("__SchemaArn__"),
+							TypedLinkName: ptr.String("__TypedLinkName__"),
+						},
+						SourceObjectReference: &types.ObjectReference{
+							Selector: ptr.String("__Selector__"),
+						},
+						TargetObjectReference: &types.ObjectReference{
+							Selector: ptr.String("__Selector__"),
+						},
+						IdentityAttributeValues: []types.AttributeNameAndValue{
+							{
+								AttributeName: ptr.String("__AttributeName__"),
+								Value: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+							{
+								AttributeName: ptr.String("__AttributeName__"),
+								Value: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+					},
+					AttributeUpdates: []types.LinkAttributeUpdate{
+						{
+							AttributeKey: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							AttributeAction: &types.LinkAttributeAction{
+								AttributeActionType: types.UpdateActionType("CREATE_OR_UPDATE"),
+								AttributeUpdateValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+						{
+							AttributeKey: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							AttributeAction: &types.LinkAttributeAction{
+								AttributeActionType: types.UpdateActionType("CREATE_OR_UPDATE"),
+								AttributeUpdateValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1240,7 +2394,10 @@ func TestCheckResponseSnapshot_CreateDirectory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDirectory(context.Background(), &CreateDirectoryInput{})
+	got, err := svc.CreateDirectory(context.Background(), &CreateDirectoryInput{
+		Name:      ptr.String("__Name__"),
+		SchemaArn: ptr.String("__SchemaArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1259,7 +2416,60 @@ func TestCheckResponseSnapshot_CreateFacet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFacet(context.Background(), &CreateFacetInput{})
+	got, err := svc.CreateFacet(context.Background(), &CreateFacetInput{
+		SchemaArn: ptr.String("__SchemaArn__"),
+		Name:      ptr.String("__Name__"),
+		Attributes: []types.FacetAttribute{
+			{
+				Name: ptr.String("__Name__"),
+				AttributeDefinition: &types.FacetAttributeDefinition{
+					Type: types.FacetAttributeType("STRING"),
+					DefaultValue: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+					IsImmutable: true,
+					Rules: map[string]types.Rule{
+						"key0": {
+							Type: types.RuleType("BINARY_LENGTH"),
+							Parameters: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+				},
+				AttributeReference: &types.FacetAttributeReference{
+					TargetFacetName:     ptr.String("__TargetFacetName__"),
+					TargetAttributeName: ptr.String("__TargetAttributeName__"),
+				},
+				RequiredBehavior: types.RequiredAttributeBehavior("REQUIRED_ALWAYS"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				AttributeDefinition: &types.FacetAttributeDefinition{
+					Type: types.FacetAttributeType("STRING"),
+					DefaultValue: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+					IsImmutable: true,
+					Rules: map[string]types.Rule{
+						"key0": {
+							Type: types.RuleType("BINARY_LENGTH"),
+							Parameters: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+				},
+				AttributeReference: &types.FacetAttributeReference{
+					TargetFacetName:     ptr.String("__TargetFacetName__"),
+					TargetAttributeName: ptr.String("__TargetAttributeName__"),
+				},
+				RequiredBehavior: types.RequiredAttributeBehavior("REQUIRED_ALWAYS"),
+			},
+		},
+		ObjectType: types.ObjectType("NODE"),
+		FacetStyle: types.FacetStyle("STATIC"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1280,7 +2490,26 @@ func TestCheckResponseSnapshot_CreateIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIndex(context.Background(), &CreateIndexInput{})
+	got, err := svc.CreateIndex(context.Background(), &CreateIndexInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		OrderedIndexedAttributeList: []types.AttributeKey{
+			{
+				SchemaArn: ptr.String("__SchemaArn__"),
+				FacetName: ptr.String("__FacetName__"),
+				Name:      ptr.String("__Name__"),
+			},
+			{
+				SchemaArn: ptr.String("__SchemaArn__"),
+				FacetName: ptr.String("__FacetName__"),
+				Name:      ptr.String("__Name__"),
+			},
+		},
+		IsUnique: true,
+		ParentReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		LinkName: ptr.String("__LinkName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1301,7 +2530,45 @@ func TestCheckResponseSnapshot_CreateObject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateObject(context.Background(), &CreateObjectInput{})
+	got, err := svc.CreateObject(context.Background(), &CreateObjectInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		SchemaFacets: []types.SchemaFacet{
+			{
+				SchemaArn: ptr.String("__SchemaArn__"),
+				FacetName: ptr.String("__FacetName__"),
+			},
+			{
+				SchemaArn: ptr.String("__SchemaArn__"),
+				FacetName: ptr.String("__FacetName__"),
+			},
+		},
+		ObjectAttributeList: []types.AttributeKeyAndValue{
+			{
+				Key: &types.AttributeKey{
+					SchemaArn: ptr.String("__SchemaArn__"),
+					FacetName: ptr.String("__FacetName__"),
+					Name:      ptr.String("__Name__"),
+				},
+				Value: &types.TypedAttributeValueMemberStringValue{
+					Value: "__TypedAttributeValueMemberStringValue__",
+				},
+			},
+			{
+				Key: &types.AttributeKey{
+					SchemaArn: ptr.String("__SchemaArn__"),
+					FacetName: ptr.String("__FacetName__"),
+					Name:      ptr.String("__Name__"),
+				},
+				Value: &types.TypedAttributeValueMemberStringValue{
+					Value: "__TypedAttributeValueMemberStringValue__",
+				},
+			},
+		},
+		ParentReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		LinkName: ptr.String("__LinkName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1322,7 +2589,9 @@ func TestCheckResponseSnapshot_CreateSchema(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSchema(context.Background(), &CreateSchemaInput{})
+	got, err := svc.CreateSchema(context.Background(), &CreateSchemaInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1341,7 +2610,52 @@ func TestCheckResponseSnapshot_CreateTypedLinkFacet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTypedLinkFacet(context.Background(), &CreateTypedLinkFacetInput{})
+	got, err := svc.CreateTypedLinkFacet(context.Background(), &CreateTypedLinkFacetInput{
+		SchemaArn: ptr.String("__SchemaArn__"),
+		Facet: &types.TypedLinkFacet{
+			Name: ptr.String("__Name__"),
+			Attributes: []types.TypedLinkAttributeDefinition{
+				{
+					Name: ptr.String("__Name__"),
+					Type: types.FacetAttributeType("STRING"),
+					DefaultValue: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+					IsImmutable: true,
+					Rules: map[string]types.Rule{
+						"key0": {
+							Type: types.RuleType("BINARY_LENGTH"),
+							Parameters: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+					RequiredBehavior: types.RequiredAttributeBehavior("REQUIRED_ALWAYS"),
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Type: types.FacetAttributeType("STRING"),
+					DefaultValue: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+					IsImmutable: true,
+					Rules: map[string]types.Rule{
+						"key0": {
+							Type: types.RuleType("BINARY_LENGTH"),
+							Parameters: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+					RequiredBehavior: types.RequiredAttributeBehavior("REQUIRED_ALWAYS"),
+				},
+			},
+			IdentityAttributeOrder: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1362,7 +2676,9 @@ func TestCheckResponseSnapshot_DeleteDirectory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDirectory(context.Background(), &DeleteDirectoryInput{})
+	got, err := svc.DeleteDirectory(context.Background(), &DeleteDirectoryInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1381,7 +2697,10 @@ func TestCheckResponseSnapshot_DeleteFacet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFacet(context.Background(), &DeleteFacetInput{})
+	got, err := svc.DeleteFacet(context.Background(), &DeleteFacetInput{
+		SchemaArn: ptr.String("__SchemaArn__"),
+		Name:      ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1400,7 +2719,12 @@ func TestCheckResponseSnapshot_DeleteObject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteObject(context.Background(), &DeleteObjectInput{})
+	got, err := svc.DeleteObject(context.Background(), &DeleteObjectInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		ObjectReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1421,7 +2745,9 @@ func TestCheckResponseSnapshot_DeleteSchema(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSchema(context.Background(), &DeleteSchemaInput{})
+	got, err := svc.DeleteSchema(context.Background(), &DeleteSchemaInput{
+		SchemaArn: ptr.String("__SchemaArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1440,7 +2766,10 @@ func TestCheckResponseSnapshot_DeleteTypedLinkFacet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTypedLinkFacet(context.Background(), &DeleteTypedLinkFacetInput{})
+	got, err := svc.DeleteTypedLinkFacet(context.Background(), &DeleteTypedLinkFacetInput{
+		SchemaArn: ptr.String("__SchemaArn__"),
+		Name:      ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1461,7 +2790,15 @@ func TestCheckResponseSnapshot_DetachFromIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetachFromIndex(context.Background(), &DetachFromIndexInput{})
+	got, err := svc.DetachFromIndex(context.Background(), &DetachFromIndexInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		IndexReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		TargetReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1482,7 +2819,13 @@ func TestCheckResponseSnapshot_DetachObject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetachObject(context.Background(), &DetachObjectInput{})
+	got, err := svc.DetachObject(context.Background(), &DetachObjectInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		ParentReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		LinkName: ptr.String("__LinkName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1501,7 +2844,15 @@ func TestCheckResponseSnapshot_DetachPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetachPolicy(context.Background(), &DetachPolicyInput{})
+	got, err := svc.DetachPolicy(context.Background(), &DetachPolicyInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		PolicyReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		ObjectReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1520,7 +2871,35 @@ func TestCheckResponseSnapshot_DetachTypedLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetachTypedLink(context.Background(), &DetachTypedLinkInput{})
+	got, err := svc.DetachTypedLink(context.Background(), &DetachTypedLinkInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		TypedLinkSpecifier: &types.TypedLinkSpecifier{
+			TypedLinkFacet: &types.TypedLinkSchemaAndFacetName{
+				SchemaArn:     ptr.String("__SchemaArn__"),
+				TypedLinkName: ptr.String("__TypedLinkName__"),
+			},
+			SourceObjectReference: &types.ObjectReference{
+				Selector: ptr.String("__Selector__"),
+			},
+			TargetObjectReference: &types.ObjectReference{
+				Selector: ptr.String("__Selector__"),
+			},
+			IdentityAttributeValues: []types.AttributeNameAndValue{
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					Value: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+				},
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					Value: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1541,7 +2920,9 @@ func TestCheckResponseSnapshot_DisableDirectory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableDirectory(context.Background(), &DisableDirectoryInput{})
+	got, err := svc.DisableDirectory(context.Background(), &DisableDirectoryInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1562,7 +2943,9 @@ func TestCheckResponseSnapshot_EnableDirectory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableDirectory(context.Background(), &EnableDirectoryInput{})
+	got, err := svc.EnableDirectory(context.Background(), &EnableDirectoryInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1583,7 +2966,9 @@ func TestCheckResponseSnapshot_GetAppliedSchemaVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAppliedSchemaVersion(context.Background(), &GetAppliedSchemaVersionInput{})
+	got, err := svc.GetAppliedSchemaVersion(context.Background(), &GetAppliedSchemaVersionInput{
+		SchemaArn: ptr.String("__SchemaArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1609,7 +2994,9 @@ func TestCheckResponseSnapshot_GetDirectory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDirectory(context.Background(), &GetDirectoryInput{})
+	got, err := svc.GetDirectory(context.Background(), &GetDirectoryInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1634,7 +3021,10 @@ func TestCheckResponseSnapshot_GetFacet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFacet(context.Background(), &GetFacetInput{})
+	got, err := svc.GetFacet(context.Background(), &GetFacetInput{
+		SchemaArn: ptr.String("__SchemaArn__"),
+		Name:      ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1676,7 +3066,40 @@ func TestCheckResponseSnapshot_GetLinkAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLinkAttributes(context.Background(), &GetLinkAttributesInput{})
+	got, err := svc.GetLinkAttributes(context.Background(), &GetLinkAttributesInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		TypedLinkSpecifier: &types.TypedLinkSpecifier{
+			TypedLinkFacet: &types.TypedLinkSchemaAndFacetName{
+				SchemaArn:     ptr.String("__SchemaArn__"),
+				TypedLinkName: ptr.String("__TypedLinkName__"),
+			},
+			SourceObjectReference: &types.ObjectReference{
+				Selector: ptr.String("__Selector__"),
+			},
+			TargetObjectReference: &types.ObjectReference{
+				Selector: ptr.String("__Selector__"),
+			},
+			IdentityAttributeValues: []types.AttributeNameAndValue{
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					Value: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+				},
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					Value: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+				},
+			},
+		},
+		AttributeNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ConsistencyLevel: types.ConsistencyLevel("SERIALIZABLE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1718,7 +3141,21 @@ func TestCheckResponseSnapshot_GetObjectAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetObjectAttributes(context.Background(), &GetObjectAttributesInput{})
+	got, err := svc.GetObjectAttributes(context.Background(), &GetObjectAttributesInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		ObjectReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		ConsistencyLevel: types.ConsistencyLevel("SERIALIZABLE"),
+		SchemaFacet: &types.SchemaFacet{
+			SchemaArn: ptr.String("__SchemaArn__"),
+			FacetName: ptr.String("__FacetName__"),
+		},
+		AttributeNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1749,7 +3186,13 @@ func TestCheckResponseSnapshot_GetObjectInformation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetObjectInformation(context.Background(), &GetObjectInformationInput{})
+	got, err := svc.GetObjectInformation(context.Background(), &GetObjectInformationInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		ObjectReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		ConsistencyLevel: types.ConsistencyLevel("SERIALIZABLE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1771,7 +3214,9 @@ func TestCheckResponseSnapshot_GetSchemaAsJson(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSchemaAsJson(context.Background(), &GetSchemaAsJsonInput{})
+	got, err := svc.GetSchemaAsJson(context.Background(), &GetSchemaAsJsonInput{
+		SchemaArn: ptr.String("__SchemaArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1795,7 +3240,10 @@ func TestCheckResponseSnapshot_GetTypedLinkFacetInformation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTypedLinkFacetInformation(context.Background(), &GetTypedLinkFacetInformationInput{})
+	got, err := svc.GetTypedLinkFacetInformation(context.Background(), &GetTypedLinkFacetInformationInput{
+		SchemaArn: ptr.String("__SchemaArn__"),
+		Name:      ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1820,7 +3268,12 @@ func TestCheckResponseSnapshot_ListAppliedSchemaArns(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAppliedSchemaArns(context.Background(), &ListAppliedSchemaArnsInput{})
+	got, err := svc.ListAppliedSchemaArns(context.Background(), &ListAppliedSchemaArnsInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		SchemaArn:    ptr.String("__SchemaArn__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1893,7 +3346,15 @@ func TestCheckResponseSnapshot_ListAttachedIndices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAttachedIndices(context.Background(), &ListAttachedIndicesInput{})
+	got, err := svc.ListAttachedIndices(context.Background(), &ListAttachedIndicesInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		TargetReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+		ConsistencyLevel: types.ConsistencyLevel("SERIALIZABLE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1918,7 +3379,10 @@ func TestCheckResponseSnapshot_ListDevelopmentSchemaArns(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDevelopmentSchemaArns(context.Background(), &ListDevelopmentSchemaArnsInput{})
+	got, err := svc.ListDevelopmentSchemaArns(context.Background(), &ListDevelopmentSchemaArnsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1953,7 +3417,11 @@ func TestCheckResponseSnapshot_ListDirectories(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDirectories(context.Background(), &ListDirectoriesInput{})
+	got, err := svc.ListDirectories(context.Background(), &ListDirectoriesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		State:      types.DirectoryState("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2022,7 +3490,12 @@ func TestCheckResponseSnapshot_ListFacetAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFacetAttributes(context.Background(), &ListFacetAttributesInput{})
+	got, err := svc.ListFacetAttributes(context.Background(), &ListFacetAttributesInput{
+		SchemaArn:  ptr.String("__SchemaArn__"),
+		Name:       ptr.String("__Name__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2047,7 +3520,11 @@ func TestCheckResponseSnapshot_ListFacetNames(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFacetNames(context.Background(), &ListFacetNamesInput{})
+	got, err := svc.ListFacetNames(context.Background(), &ListFacetNamesInput{
+		SchemaArn:  ptr.String("__SchemaArn__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2122,7 +3599,47 @@ func TestCheckResponseSnapshot_ListIncomingTypedLinks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIncomingTypedLinks(context.Background(), &ListIncomingTypedLinksInput{})
+	got, err := svc.ListIncomingTypedLinks(context.Background(), &ListIncomingTypedLinksInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		ObjectReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		FilterAttributeRanges: []types.TypedLinkAttributeRange{
+			{
+				AttributeName: ptr.String("__AttributeName__"),
+				Range: &types.TypedAttributeValueRange{
+					StartMode: types.RangeMode("FIRST"),
+					StartValue: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+					EndMode: types.RangeMode("FIRST"),
+					EndValue: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+				},
+			},
+			{
+				AttributeName: ptr.String("__AttributeName__"),
+				Range: &types.TypedAttributeValueRange{
+					StartMode: types.RangeMode("FIRST"),
+					StartValue: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+					EndMode: types.RangeMode("FIRST"),
+					EndValue: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+				},
+			},
+		},
+		FilterTypedLink: &types.TypedLinkSchemaAndFacetName{
+			SchemaArn:     ptr.String("__SchemaArn__"),
+			TypedLinkName: ptr.String("__TypedLinkName__"),
+		},
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+		ConsistencyLevel: types.ConsistencyLevel("SERIALIZABLE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2195,7 +3712,51 @@ func TestCheckResponseSnapshot_ListIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIndex(context.Background(), &ListIndexInput{})
+	got, err := svc.ListIndex(context.Background(), &ListIndexInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		RangesOnIndexedValues: []types.ObjectAttributeRange{
+			{
+				AttributeKey: &types.AttributeKey{
+					SchemaArn: ptr.String("__SchemaArn__"),
+					FacetName: ptr.String("__FacetName__"),
+					Name:      ptr.String("__Name__"),
+				},
+				Range: &types.TypedAttributeValueRange{
+					StartMode: types.RangeMode("FIRST"),
+					StartValue: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+					EndMode: types.RangeMode("FIRST"),
+					EndValue: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+				},
+			},
+			{
+				AttributeKey: &types.AttributeKey{
+					SchemaArn: ptr.String("__SchemaArn__"),
+					FacetName: ptr.String("__FacetName__"),
+					Name:      ptr.String("__Name__"),
+				},
+				Range: &types.TypedAttributeValueRange{
+					StartMode: types.RangeMode("FIRST"),
+					StartValue: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+					EndMode: types.RangeMode("FIRST"),
+					EndValue: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+				},
+			},
+		},
+		IndexReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+		ConsistencyLevel: types.ConsistencyLevel("SERIALIZABLE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2220,7 +3781,11 @@ func TestCheckResponseSnapshot_ListManagedSchemaArns(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListManagedSchemaArns(context.Background(), &ListManagedSchemaArnsInput{})
+	got, err := svc.ListManagedSchemaArns(context.Background(), &ListManagedSchemaArnsInput{
+		SchemaArn:  ptr.String("__SchemaArn__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2263,7 +3828,19 @@ func TestCheckResponseSnapshot_ListObjectAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListObjectAttributes(context.Background(), &ListObjectAttributesInput{})
+	got, err := svc.ListObjectAttributes(context.Background(), &ListObjectAttributesInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		ObjectReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+		ConsistencyLevel: types.ConsistencyLevel("SERIALIZABLE"),
+		FacetFilter: &types.SchemaFacet{
+			SchemaArn: ptr.String("__SchemaArn__"),
+			FacetName: ptr.String("__FacetName__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2287,7 +3864,15 @@ func TestCheckResponseSnapshot_ListObjectChildren(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListObjectChildren(context.Background(), &ListObjectChildrenInput{})
+	got, err := svc.ListObjectChildren(context.Background(), &ListObjectChildrenInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		ObjectReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+		ConsistencyLevel: types.ConsistencyLevel("SERIALIZABLE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2324,7 +3909,14 @@ func TestCheckResponseSnapshot_ListObjectParentPaths(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListObjectParentPaths(context.Background(), &ListObjectParentPathsInput{})
+	got, err := svc.ListObjectParentPaths(context.Background(), &ListObjectParentPathsInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		ObjectReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2358,7 +3950,16 @@ func TestCheckResponseSnapshot_ListObjectParents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListObjectParents(context.Background(), &ListObjectParentsInput{})
+	got, err := svc.ListObjectParents(context.Background(), &ListObjectParentsInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		ObjectReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		NextToken:                   ptr.String("__NextToken__"),
+		MaxResults:                  ptr.Int32(1),
+		ConsistencyLevel:            types.ConsistencyLevel("SERIALIZABLE"),
+		IncludeAllLinksToEachParent: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2383,7 +3984,15 @@ func TestCheckResponseSnapshot_ListObjectPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListObjectPolicies(context.Background(), &ListObjectPoliciesInput{})
+	got, err := svc.ListObjectPolicies(context.Background(), &ListObjectPoliciesInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		ObjectReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+		ConsistencyLevel: types.ConsistencyLevel("SERIALIZABLE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2458,7 +4067,47 @@ func TestCheckResponseSnapshot_ListOutgoingTypedLinks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOutgoingTypedLinks(context.Background(), &ListOutgoingTypedLinksInput{})
+	got, err := svc.ListOutgoingTypedLinks(context.Background(), &ListOutgoingTypedLinksInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		ObjectReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		FilterAttributeRanges: []types.TypedLinkAttributeRange{
+			{
+				AttributeName: ptr.String("__AttributeName__"),
+				Range: &types.TypedAttributeValueRange{
+					StartMode: types.RangeMode("FIRST"),
+					StartValue: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+					EndMode: types.RangeMode("FIRST"),
+					EndValue: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+				},
+			},
+			{
+				AttributeName: ptr.String("__AttributeName__"),
+				Range: &types.TypedAttributeValueRange{
+					StartMode: types.RangeMode("FIRST"),
+					StartValue: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+					EndMode: types.RangeMode("FIRST"),
+					EndValue: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+				},
+			},
+		},
+		FilterTypedLink: &types.TypedLinkSchemaAndFacetName{
+			SchemaArn:     ptr.String("__SchemaArn__"),
+			TypedLinkName: ptr.String("__TypedLinkName__"),
+		},
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+		ConsistencyLevel: types.ConsistencyLevel("SERIALIZABLE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2483,7 +4132,15 @@ func TestCheckResponseSnapshot_ListPolicyAttachments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPolicyAttachments(context.Background(), &ListPolicyAttachmentsInput{})
+	got, err := svc.ListPolicyAttachments(context.Background(), &ListPolicyAttachmentsInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		PolicyReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+		ConsistencyLevel: types.ConsistencyLevel("SERIALIZABLE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2508,7 +4165,11 @@ func TestCheckResponseSnapshot_ListPublishedSchemaArns(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPublishedSchemaArns(context.Background(), &ListPublishedSchemaArnsInput{})
+	got, err := svc.ListPublishedSchemaArns(context.Background(), &ListPublishedSchemaArnsInput{
+		SchemaArn:  ptr.String("__SchemaArn__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2539,7 +4200,11 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2596,7 +4261,12 @@ func TestCheckResponseSnapshot_ListTypedLinkFacetAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTypedLinkFacetAttributes(context.Background(), &ListTypedLinkFacetAttributesInput{})
+	got, err := svc.ListTypedLinkFacetAttributes(context.Background(), &ListTypedLinkFacetAttributesInput{
+		SchemaArn:  ptr.String("__SchemaArn__"),
+		Name:       ptr.String("__Name__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2621,7 +4291,11 @@ func TestCheckResponseSnapshot_ListTypedLinkFacetNames(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTypedLinkFacetNames(context.Background(), &ListTypedLinkFacetNamesInput{})
+	got, err := svc.ListTypedLinkFacetNames(context.Background(), &ListTypedLinkFacetNamesInput{
+		SchemaArn:  ptr.String("__SchemaArn__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2674,7 +4348,14 @@ func TestCheckResponseSnapshot_LookupPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.LookupPolicy(context.Background(), &LookupPolicyInput{})
+	got, err := svc.LookupPolicy(context.Background(), &LookupPolicyInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		ObjectReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2695,7 +4376,12 @@ func TestCheckResponseSnapshot_PublishSchema(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PublishSchema(context.Background(), &PublishSchemaInput{})
+	got, err := svc.PublishSchema(context.Background(), &PublishSchemaInput{
+		DevelopmentSchemaArn: ptr.String("__DevelopmentSchemaArn__"),
+		Version:              ptr.String("__Version__"),
+		MinorVersion:         ptr.String("__MinorVersion__"),
+		Name:                 ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2716,7 +4402,10 @@ func TestCheckResponseSnapshot_PutSchemaFromJson(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutSchemaFromJson(context.Background(), &PutSchemaFromJsonInput{})
+	got, err := svc.PutSchemaFromJson(context.Background(), &PutSchemaFromJsonInput{
+		SchemaArn: ptr.String("__SchemaArn__"),
+		Document:  ptr.String("__Document__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2735,7 +4424,16 @@ func TestCheckResponseSnapshot_RemoveFacetFromObject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveFacetFromObject(context.Background(), &RemoveFacetFromObjectInput{})
+	got, err := svc.RemoveFacetFromObject(context.Background(), &RemoveFacetFromObjectInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		SchemaFacet: &types.SchemaFacet{
+			SchemaArn: ptr.String("__SchemaArn__"),
+			FacetName: ptr.String("__FacetName__"),
+		},
+		ObjectReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2754,7 +4452,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2773,7 +4483,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2792,7 +4508,65 @@ func TestCheckResponseSnapshot_UpdateFacet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFacet(context.Background(), &UpdateFacetInput{})
+	got, err := svc.UpdateFacet(context.Background(), &UpdateFacetInput{
+		SchemaArn: ptr.String("__SchemaArn__"),
+		Name:      ptr.String("__Name__"),
+		AttributeUpdates: []types.FacetAttributeUpdate{
+			{
+				Attribute: &types.FacetAttribute{
+					Name: ptr.String("__Name__"),
+					AttributeDefinition: &types.FacetAttributeDefinition{
+						Type: types.FacetAttributeType("STRING"),
+						DefaultValue: &types.TypedAttributeValueMemberStringValue{
+							Value: "__TypedAttributeValueMemberStringValue__",
+						},
+						IsImmutable: true,
+						Rules: map[string]types.Rule{
+							"key0": {
+								Type: types.RuleType("BINARY_LENGTH"),
+								Parameters: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+						},
+					},
+					AttributeReference: &types.FacetAttributeReference{
+						TargetFacetName:     ptr.String("__TargetFacetName__"),
+						TargetAttributeName: ptr.String("__TargetAttributeName__"),
+					},
+					RequiredBehavior: types.RequiredAttributeBehavior("REQUIRED_ALWAYS"),
+				},
+				Action: types.UpdateActionType("CREATE_OR_UPDATE"),
+			},
+			{
+				Attribute: &types.FacetAttribute{
+					Name: ptr.String("__Name__"),
+					AttributeDefinition: &types.FacetAttributeDefinition{
+						Type: types.FacetAttributeType("STRING"),
+						DefaultValue: &types.TypedAttributeValueMemberStringValue{
+							Value: "__TypedAttributeValueMemberStringValue__",
+						},
+						IsImmutable: true,
+						Rules: map[string]types.Rule{
+							"key0": {
+								Type: types.RuleType("BINARY_LENGTH"),
+								Parameters: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+						},
+					},
+					AttributeReference: &types.FacetAttributeReference{
+						TargetFacetName:     ptr.String("__TargetFacetName__"),
+						TargetAttributeName: ptr.String("__TargetAttributeName__"),
+					},
+					RequiredBehavior: types.RequiredAttributeBehavior("REQUIRED_ALWAYS"),
+				},
+				Action: types.UpdateActionType("CREATE_OR_UPDATE"),
+			},
+		},
+		ObjectType: types.ObjectType("NODE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2811,7 +4585,63 @@ func TestCheckResponseSnapshot_UpdateLinkAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLinkAttributes(context.Background(), &UpdateLinkAttributesInput{})
+	got, err := svc.UpdateLinkAttributes(context.Background(), &UpdateLinkAttributesInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		TypedLinkSpecifier: &types.TypedLinkSpecifier{
+			TypedLinkFacet: &types.TypedLinkSchemaAndFacetName{
+				SchemaArn:     ptr.String("__SchemaArn__"),
+				TypedLinkName: ptr.String("__TypedLinkName__"),
+			},
+			SourceObjectReference: &types.ObjectReference{
+				Selector: ptr.String("__Selector__"),
+			},
+			TargetObjectReference: &types.ObjectReference{
+				Selector: ptr.String("__Selector__"),
+			},
+			IdentityAttributeValues: []types.AttributeNameAndValue{
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					Value: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+				},
+				{
+					AttributeName: ptr.String("__AttributeName__"),
+					Value: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+				},
+			},
+		},
+		AttributeUpdates: []types.LinkAttributeUpdate{
+			{
+				AttributeKey: &types.AttributeKey{
+					SchemaArn: ptr.String("__SchemaArn__"),
+					FacetName: ptr.String("__FacetName__"),
+					Name:      ptr.String("__Name__"),
+				},
+				AttributeAction: &types.LinkAttributeAction{
+					AttributeActionType: types.UpdateActionType("CREATE_OR_UPDATE"),
+					AttributeUpdateValue: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+				},
+			},
+			{
+				AttributeKey: &types.AttributeKey{
+					SchemaArn: ptr.String("__SchemaArn__"),
+					FacetName: ptr.String("__FacetName__"),
+					Name:      ptr.String("__Name__"),
+				},
+				AttributeAction: &types.LinkAttributeAction{
+					AttributeActionType: types.UpdateActionType("CREATE_OR_UPDATE"),
+					AttributeUpdateValue: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2832,7 +4662,40 @@ func TestCheckResponseSnapshot_UpdateObjectAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateObjectAttributes(context.Background(), &UpdateObjectAttributesInput{})
+	got, err := svc.UpdateObjectAttributes(context.Background(), &UpdateObjectAttributesInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		ObjectReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		AttributeUpdates: []types.ObjectAttributeUpdate{
+			{
+				ObjectAttributeKey: &types.AttributeKey{
+					SchemaArn: ptr.String("__SchemaArn__"),
+					FacetName: ptr.String("__FacetName__"),
+					Name:      ptr.String("__Name__"),
+				},
+				ObjectAttributeAction: &types.ObjectAttributeAction{
+					ObjectAttributeActionType: types.UpdateActionType("CREATE_OR_UPDATE"),
+					ObjectAttributeUpdateValue: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+				},
+			},
+			{
+				ObjectAttributeKey: &types.AttributeKey{
+					SchemaArn: ptr.String("__SchemaArn__"),
+					FacetName: ptr.String("__FacetName__"),
+					Name:      ptr.String("__Name__"),
+				},
+				ObjectAttributeAction: &types.ObjectAttributeAction{
+					ObjectAttributeActionType: types.UpdateActionType("CREATE_OR_UPDATE"),
+					ObjectAttributeUpdateValue: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2853,7 +4716,10 @@ func TestCheckResponseSnapshot_UpdateSchema(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSchema(context.Background(), &UpdateSchemaInput{})
+	got, err := svc.UpdateSchema(context.Background(), &UpdateSchemaInput{
+		SchemaArn: ptr.String("__SchemaArn__"),
+		Name:      ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2872,7 +4738,56 @@ func TestCheckResponseSnapshot_UpdateTypedLinkFacet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTypedLinkFacet(context.Background(), &UpdateTypedLinkFacetInput{})
+	got, err := svc.UpdateTypedLinkFacet(context.Background(), &UpdateTypedLinkFacetInput{
+		SchemaArn: ptr.String("__SchemaArn__"),
+		Name:      ptr.String("__Name__"),
+		AttributeUpdates: []types.TypedLinkFacetAttributeUpdate{
+			{
+				Attribute: &types.TypedLinkAttributeDefinition{
+					Name: ptr.String("__Name__"),
+					Type: types.FacetAttributeType("STRING"),
+					DefaultValue: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+					IsImmutable: true,
+					Rules: map[string]types.Rule{
+						"key0": {
+							Type: types.RuleType("BINARY_LENGTH"),
+							Parameters: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+					RequiredBehavior: types.RequiredAttributeBehavior("REQUIRED_ALWAYS"),
+				},
+				Action: types.UpdateActionType("CREATE_OR_UPDATE"),
+			},
+			{
+				Attribute: &types.TypedLinkAttributeDefinition{
+					Name: ptr.String("__Name__"),
+					Type: types.FacetAttributeType("STRING"),
+					DefaultValue: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+					IsImmutable: true,
+					Rules: map[string]types.Rule{
+						"key0": {
+							Type: types.RuleType("BINARY_LENGTH"),
+							Parameters: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+					RequiredBehavior: types.RequiredAttributeBehavior("REQUIRED_ALWAYS"),
+				},
+				Action: types.UpdateActionType("CREATE_OR_UPDATE"),
+			},
+		},
+		IdentityAttributeOrder: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2894,7 +4809,11 @@ func TestCheckResponseSnapshot_UpgradeAppliedSchema(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpgradeAppliedSchema(context.Background(), &UpgradeAppliedSchemaInput{})
+	got, err := svc.UpgradeAppliedSchema(context.Background(), &UpgradeAppliedSchemaInput{
+		PublishedSchemaArn: ptr.String("__PublishedSchemaArn__"),
+		DirectoryArn:       ptr.String("__DirectoryArn__"),
+		DryRun:             true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2915,7 +4834,12 @@ func TestCheckResponseSnapshot_UpgradePublishedSchema(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpgradePublishedSchema(context.Background(), &UpgradePublishedSchemaInput{})
+	got, err := svc.UpgradePublishedSchema(context.Background(), &UpgradePublishedSchemaInput{
+		DevelopmentSchemaArn: ptr.String("__DevelopmentSchemaArn__"),
+		PublishedSchemaArn:   ptr.String("__PublishedSchemaArn__"),
+		MinorVersion:         ptr.String("__MinorVersion__"),
+		DryRun:               true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2936,7 +4860,38 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddFacetToObject(context.Background(), &AddFacetToObjectInput{})
+	_, opErr := svc.AddFacetToObject(context.Background(), &AddFacetToObjectInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		SchemaFacet: &types.SchemaFacet{
+			SchemaArn: ptr.String("__SchemaArn__"),
+			FacetName: ptr.String("__FacetName__"),
+		},
+		ObjectAttributeList: []types.AttributeKeyAndValue{
+			{
+				Key: &types.AttributeKey{
+					SchemaArn: ptr.String("__SchemaArn__"),
+					FacetName: ptr.String("__FacetName__"),
+					Name:      ptr.String("__Name__"),
+				},
+				Value: &types.TypedAttributeValueMemberStringValue{
+					Value: "__TypedAttributeValueMemberStringValue__",
+				},
+			},
+			{
+				Key: &types.AttributeKey{
+					SchemaArn: ptr.String("__SchemaArn__"),
+					FacetName: ptr.String("__FacetName__"),
+					Name:      ptr.String("__Name__"),
+				},
+				Value: &types.TypedAttributeValueMemberStringValue{
+					Value: "__TypedAttributeValueMemberStringValue__",
+				},
+			},
+		},
+		ObjectReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2963,7 +4918,605 @@ func TestCheckResponseSnapshot_Error_BatchWriteException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchWrite(context.Background(), &BatchWriteInput{})
+	_, opErr := svc.BatchWrite(context.Background(), &BatchWriteInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		Operations: []types.BatchWriteOperation{
+			{
+				CreateObject: &types.BatchCreateObject{
+					SchemaFacet: []types.SchemaFacet{
+						{
+							SchemaArn: ptr.String("__SchemaArn__"),
+							FacetName: ptr.String("__FacetName__"),
+						},
+						{
+							SchemaArn: ptr.String("__SchemaArn__"),
+							FacetName: ptr.String("__FacetName__"),
+						},
+					},
+					ObjectAttributeList: []types.AttributeKeyAndValue{
+						{
+							Key: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							Value: &types.TypedAttributeValueMemberStringValue{
+								Value: "__TypedAttributeValueMemberStringValue__",
+							},
+						},
+						{
+							Key: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							Value: &types.TypedAttributeValueMemberStringValue{
+								Value: "__TypedAttributeValueMemberStringValue__",
+							},
+						},
+					},
+					ParentReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					LinkName:           ptr.String("__LinkName__"),
+					BatchReferenceName: ptr.String("__BatchReferenceName__"),
+				},
+				AttachObject: &types.BatchAttachObject{
+					ParentReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					ChildReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					LinkName: ptr.String("__LinkName__"),
+				},
+				DetachObject: &types.BatchDetachObject{
+					ParentReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					LinkName:           ptr.String("__LinkName__"),
+					BatchReferenceName: ptr.String("__BatchReferenceName__"),
+				},
+				UpdateObjectAttributes: &types.BatchUpdateObjectAttributes{
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					AttributeUpdates: []types.ObjectAttributeUpdate{
+						{
+							ObjectAttributeKey: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							ObjectAttributeAction: &types.ObjectAttributeAction{
+								ObjectAttributeActionType: types.UpdateActionType("CREATE_OR_UPDATE"),
+								ObjectAttributeUpdateValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+						{
+							ObjectAttributeKey: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							ObjectAttributeAction: &types.ObjectAttributeAction{
+								ObjectAttributeActionType: types.UpdateActionType("CREATE_OR_UPDATE"),
+								ObjectAttributeUpdateValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+					},
+				},
+				DeleteObject: &types.BatchDeleteObject{
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+				},
+				AddFacetToObject: &types.BatchAddFacetToObject{
+					SchemaFacet: &types.SchemaFacet{
+						SchemaArn: ptr.String("__SchemaArn__"),
+						FacetName: ptr.String("__FacetName__"),
+					},
+					ObjectAttributeList: []types.AttributeKeyAndValue{
+						{
+							Key: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							Value: &types.TypedAttributeValueMemberStringValue{
+								Value: "__TypedAttributeValueMemberStringValue__",
+							},
+						},
+						{
+							Key: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							Value: &types.TypedAttributeValueMemberStringValue{
+								Value: "__TypedAttributeValueMemberStringValue__",
+							},
+						},
+					},
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+				},
+				RemoveFacetFromObject: &types.BatchRemoveFacetFromObject{
+					SchemaFacet: &types.SchemaFacet{
+						SchemaArn: ptr.String("__SchemaArn__"),
+						FacetName: ptr.String("__FacetName__"),
+					},
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+				},
+				AttachPolicy: &types.BatchAttachPolicy{
+					PolicyReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+				},
+				DetachPolicy: &types.BatchDetachPolicy{
+					PolicyReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+				},
+				CreateIndex: &types.BatchCreateIndex{
+					OrderedIndexedAttributeList: []types.AttributeKey{
+						{
+							SchemaArn: ptr.String("__SchemaArn__"),
+							FacetName: ptr.String("__FacetName__"),
+							Name:      ptr.String("__Name__"),
+						},
+						{
+							SchemaArn: ptr.String("__SchemaArn__"),
+							FacetName: ptr.String("__FacetName__"),
+							Name:      ptr.String("__Name__"),
+						},
+					},
+					IsUnique: true,
+					ParentReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					LinkName:           ptr.String("__LinkName__"),
+					BatchReferenceName: ptr.String("__BatchReferenceName__"),
+				},
+				AttachToIndex: &types.BatchAttachToIndex{
+					IndexReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					TargetReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+				},
+				DetachFromIndex: &types.BatchDetachFromIndex{
+					IndexReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					TargetReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+				},
+				AttachTypedLink: &types.BatchAttachTypedLink{
+					SourceObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					TargetObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					TypedLinkFacet: &types.TypedLinkSchemaAndFacetName{
+						SchemaArn:     ptr.String("__SchemaArn__"),
+						TypedLinkName: ptr.String("__TypedLinkName__"),
+					},
+					Attributes: []types.AttributeNameAndValue{
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							Value: &types.TypedAttributeValueMemberStringValue{
+								Value: "__TypedAttributeValueMemberStringValue__",
+							},
+						},
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							Value: &types.TypedAttributeValueMemberStringValue{
+								Value: "__TypedAttributeValueMemberStringValue__",
+							},
+						},
+					},
+				},
+				DetachTypedLink: &types.BatchDetachTypedLink{
+					TypedLinkSpecifier: &types.TypedLinkSpecifier{
+						TypedLinkFacet: &types.TypedLinkSchemaAndFacetName{
+							SchemaArn:     ptr.String("__SchemaArn__"),
+							TypedLinkName: ptr.String("__TypedLinkName__"),
+						},
+						SourceObjectReference: &types.ObjectReference{
+							Selector: ptr.String("__Selector__"),
+						},
+						TargetObjectReference: &types.ObjectReference{
+							Selector: ptr.String("__Selector__"),
+						},
+						IdentityAttributeValues: []types.AttributeNameAndValue{
+							{
+								AttributeName: ptr.String("__AttributeName__"),
+								Value: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+							{
+								AttributeName: ptr.String("__AttributeName__"),
+								Value: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+					},
+				},
+				UpdateLinkAttributes: &types.BatchUpdateLinkAttributes{
+					TypedLinkSpecifier: &types.TypedLinkSpecifier{
+						TypedLinkFacet: &types.TypedLinkSchemaAndFacetName{
+							SchemaArn:     ptr.String("__SchemaArn__"),
+							TypedLinkName: ptr.String("__TypedLinkName__"),
+						},
+						SourceObjectReference: &types.ObjectReference{
+							Selector: ptr.String("__Selector__"),
+						},
+						TargetObjectReference: &types.ObjectReference{
+							Selector: ptr.String("__Selector__"),
+						},
+						IdentityAttributeValues: []types.AttributeNameAndValue{
+							{
+								AttributeName: ptr.String("__AttributeName__"),
+								Value: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+							{
+								AttributeName: ptr.String("__AttributeName__"),
+								Value: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+					},
+					AttributeUpdates: []types.LinkAttributeUpdate{
+						{
+							AttributeKey: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							AttributeAction: &types.LinkAttributeAction{
+								AttributeActionType: types.UpdateActionType("CREATE_OR_UPDATE"),
+								AttributeUpdateValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+						{
+							AttributeKey: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							AttributeAction: &types.LinkAttributeAction{
+								AttributeActionType: types.UpdateActionType("CREATE_OR_UPDATE"),
+								AttributeUpdateValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+					},
+				},
+			},
+			{
+				CreateObject: &types.BatchCreateObject{
+					SchemaFacet: []types.SchemaFacet{
+						{
+							SchemaArn: ptr.String("__SchemaArn__"),
+							FacetName: ptr.String("__FacetName__"),
+						},
+						{
+							SchemaArn: ptr.String("__SchemaArn__"),
+							FacetName: ptr.String("__FacetName__"),
+						},
+					},
+					ObjectAttributeList: []types.AttributeKeyAndValue{
+						{
+							Key: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							Value: &types.TypedAttributeValueMemberStringValue{
+								Value: "__TypedAttributeValueMemberStringValue__",
+							},
+						},
+						{
+							Key: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							Value: &types.TypedAttributeValueMemberStringValue{
+								Value: "__TypedAttributeValueMemberStringValue__",
+							},
+						},
+					},
+					ParentReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					LinkName:           ptr.String("__LinkName__"),
+					BatchReferenceName: ptr.String("__BatchReferenceName__"),
+				},
+				AttachObject: &types.BatchAttachObject{
+					ParentReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					ChildReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					LinkName: ptr.String("__LinkName__"),
+				},
+				DetachObject: &types.BatchDetachObject{
+					ParentReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					LinkName:           ptr.String("__LinkName__"),
+					BatchReferenceName: ptr.String("__BatchReferenceName__"),
+				},
+				UpdateObjectAttributes: &types.BatchUpdateObjectAttributes{
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					AttributeUpdates: []types.ObjectAttributeUpdate{
+						{
+							ObjectAttributeKey: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							ObjectAttributeAction: &types.ObjectAttributeAction{
+								ObjectAttributeActionType: types.UpdateActionType("CREATE_OR_UPDATE"),
+								ObjectAttributeUpdateValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+						{
+							ObjectAttributeKey: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							ObjectAttributeAction: &types.ObjectAttributeAction{
+								ObjectAttributeActionType: types.UpdateActionType("CREATE_OR_UPDATE"),
+								ObjectAttributeUpdateValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+					},
+				},
+				DeleteObject: &types.BatchDeleteObject{
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+				},
+				AddFacetToObject: &types.BatchAddFacetToObject{
+					SchemaFacet: &types.SchemaFacet{
+						SchemaArn: ptr.String("__SchemaArn__"),
+						FacetName: ptr.String("__FacetName__"),
+					},
+					ObjectAttributeList: []types.AttributeKeyAndValue{
+						{
+							Key: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							Value: &types.TypedAttributeValueMemberStringValue{
+								Value: "__TypedAttributeValueMemberStringValue__",
+							},
+						},
+						{
+							Key: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							Value: &types.TypedAttributeValueMemberStringValue{
+								Value: "__TypedAttributeValueMemberStringValue__",
+							},
+						},
+					},
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+				},
+				RemoveFacetFromObject: &types.BatchRemoveFacetFromObject{
+					SchemaFacet: &types.SchemaFacet{
+						SchemaArn: ptr.String("__SchemaArn__"),
+						FacetName: ptr.String("__FacetName__"),
+					},
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+				},
+				AttachPolicy: &types.BatchAttachPolicy{
+					PolicyReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+				},
+				DetachPolicy: &types.BatchDetachPolicy{
+					PolicyReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					ObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+				},
+				CreateIndex: &types.BatchCreateIndex{
+					OrderedIndexedAttributeList: []types.AttributeKey{
+						{
+							SchemaArn: ptr.String("__SchemaArn__"),
+							FacetName: ptr.String("__FacetName__"),
+							Name:      ptr.String("__Name__"),
+						},
+						{
+							SchemaArn: ptr.String("__SchemaArn__"),
+							FacetName: ptr.String("__FacetName__"),
+							Name:      ptr.String("__Name__"),
+						},
+					},
+					IsUnique: true,
+					ParentReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					LinkName:           ptr.String("__LinkName__"),
+					BatchReferenceName: ptr.String("__BatchReferenceName__"),
+				},
+				AttachToIndex: &types.BatchAttachToIndex{
+					IndexReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					TargetReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+				},
+				DetachFromIndex: &types.BatchDetachFromIndex{
+					IndexReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					TargetReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+				},
+				AttachTypedLink: &types.BatchAttachTypedLink{
+					SourceObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					TargetObjectReference: &types.ObjectReference{
+						Selector: ptr.String("__Selector__"),
+					},
+					TypedLinkFacet: &types.TypedLinkSchemaAndFacetName{
+						SchemaArn:     ptr.String("__SchemaArn__"),
+						TypedLinkName: ptr.String("__TypedLinkName__"),
+					},
+					Attributes: []types.AttributeNameAndValue{
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							Value: &types.TypedAttributeValueMemberStringValue{
+								Value: "__TypedAttributeValueMemberStringValue__",
+							},
+						},
+						{
+							AttributeName: ptr.String("__AttributeName__"),
+							Value: &types.TypedAttributeValueMemberStringValue{
+								Value: "__TypedAttributeValueMemberStringValue__",
+							},
+						},
+					},
+				},
+				DetachTypedLink: &types.BatchDetachTypedLink{
+					TypedLinkSpecifier: &types.TypedLinkSpecifier{
+						TypedLinkFacet: &types.TypedLinkSchemaAndFacetName{
+							SchemaArn:     ptr.String("__SchemaArn__"),
+							TypedLinkName: ptr.String("__TypedLinkName__"),
+						},
+						SourceObjectReference: &types.ObjectReference{
+							Selector: ptr.String("__Selector__"),
+						},
+						TargetObjectReference: &types.ObjectReference{
+							Selector: ptr.String("__Selector__"),
+						},
+						IdentityAttributeValues: []types.AttributeNameAndValue{
+							{
+								AttributeName: ptr.String("__AttributeName__"),
+								Value: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+							{
+								AttributeName: ptr.String("__AttributeName__"),
+								Value: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+					},
+				},
+				UpdateLinkAttributes: &types.BatchUpdateLinkAttributes{
+					TypedLinkSpecifier: &types.TypedLinkSpecifier{
+						TypedLinkFacet: &types.TypedLinkSchemaAndFacetName{
+							SchemaArn:     ptr.String("__SchemaArn__"),
+							TypedLinkName: ptr.String("__TypedLinkName__"),
+						},
+						SourceObjectReference: &types.ObjectReference{
+							Selector: ptr.String("__Selector__"),
+						},
+						TargetObjectReference: &types.ObjectReference{
+							Selector: ptr.String("__Selector__"),
+						},
+						IdentityAttributeValues: []types.AttributeNameAndValue{
+							{
+								AttributeName: ptr.String("__AttributeName__"),
+								Value: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+							{
+								AttributeName: ptr.String("__AttributeName__"),
+								Value: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+					},
+					AttributeUpdates: []types.LinkAttributeUpdate{
+						{
+							AttributeKey: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							AttributeAction: &types.LinkAttributeAction{
+								AttributeActionType: types.UpdateActionType("CREATE_OR_UPDATE"),
+								AttributeUpdateValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+						{
+							AttributeKey: &types.AttributeKey{
+								SchemaArn: ptr.String("__SchemaArn__"),
+								FacetName: ptr.String("__FacetName__"),
+								Name:      ptr.String("__Name__"),
+							},
+							AttributeAction: &types.LinkAttributeAction{
+								AttributeActionType: types.UpdateActionType("CREATE_OR_UPDATE"),
+								AttributeUpdateValue: &types.TypedAttributeValueMemberStringValue{
+									Value: "__TypedAttributeValueMemberStringValue__",
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2988,7 +5541,16 @@ func TestCheckResponseSnapshot_Error_CannotListParentOfRootException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListObjectParents(context.Background(), &ListObjectParentsInput{})
+	_, opErr := svc.ListObjectParents(context.Background(), &ListObjectParentsInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		ObjectReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		NextToken:                   ptr.String("__NextToken__"),
+		MaxResults:                  ptr.Int32(1),
+		ConsistencyLevel:            types.ConsistencyLevel("SERIALIZABLE"),
+		IncludeAllLinksToEachParent: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3013,7 +5575,10 @@ func TestCheckResponseSnapshot_Error_DirectoryAlreadyExistsException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDirectory(context.Background(), &CreateDirectoryInput{})
+	_, opErr := svc.CreateDirectory(context.Background(), &CreateDirectoryInput{
+		Name:      ptr.String("__Name__"),
+		SchemaArn: ptr.String("__SchemaArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3038,7 +5603,9 @@ func TestCheckResponseSnapshot_Error_DirectoryDeletedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteDirectory(context.Background(), &DeleteDirectoryInput{})
+	_, opErr := svc.DeleteDirectory(context.Background(), &DeleteDirectoryInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3063,7 +5630,9 @@ func TestCheckResponseSnapshot_Error_DirectoryNotDisabledException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteDirectory(context.Background(), &DeleteDirectoryInput{})
+	_, opErr := svc.DeleteDirectory(context.Background(), &DeleteDirectoryInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3088,7 +5657,38 @@ func TestCheckResponseSnapshot_Error_DirectoryNotEnabledException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddFacetToObject(context.Background(), &AddFacetToObjectInput{})
+	_, opErr := svc.AddFacetToObject(context.Background(), &AddFacetToObjectInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		SchemaFacet: &types.SchemaFacet{
+			SchemaArn: ptr.String("__SchemaArn__"),
+			FacetName: ptr.String("__FacetName__"),
+		},
+		ObjectAttributeList: []types.AttributeKeyAndValue{
+			{
+				Key: &types.AttributeKey{
+					SchemaArn: ptr.String("__SchemaArn__"),
+					FacetName: ptr.String("__FacetName__"),
+					Name:      ptr.String("__Name__"),
+				},
+				Value: &types.TypedAttributeValueMemberStringValue{
+					Value: "__TypedAttributeValueMemberStringValue__",
+				},
+			},
+			{
+				Key: &types.AttributeKey{
+					SchemaArn: ptr.String("__SchemaArn__"),
+					FacetName: ptr.String("__FacetName__"),
+					Name:      ptr.String("__Name__"),
+				},
+				Value: &types.TypedAttributeValueMemberStringValue{
+					Value: "__TypedAttributeValueMemberStringValue__",
+				},
+			},
+		},
+		ObjectReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3113,7 +5713,60 @@ func TestCheckResponseSnapshot_Error_FacetAlreadyExistsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFacet(context.Background(), &CreateFacetInput{})
+	_, opErr := svc.CreateFacet(context.Background(), &CreateFacetInput{
+		SchemaArn: ptr.String("__SchemaArn__"),
+		Name:      ptr.String("__Name__"),
+		Attributes: []types.FacetAttribute{
+			{
+				Name: ptr.String("__Name__"),
+				AttributeDefinition: &types.FacetAttributeDefinition{
+					Type: types.FacetAttributeType("STRING"),
+					DefaultValue: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+					IsImmutable: true,
+					Rules: map[string]types.Rule{
+						"key0": {
+							Type: types.RuleType("BINARY_LENGTH"),
+							Parameters: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+				},
+				AttributeReference: &types.FacetAttributeReference{
+					TargetFacetName:     ptr.String("__TargetFacetName__"),
+					TargetAttributeName: ptr.String("__TargetAttributeName__"),
+				},
+				RequiredBehavior: types.RequiredAttributeBehavior("REQUIRED_ALWAYS"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				AttributeDefinition: &types.FacetAttributeDefinition{
+					Type: types.FacetAttributeType("STRING"),
+					DefaultValue: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+					IsImmutable: true,
+					Rules: map[string]types.Rule{
+						"key0": {
+							Type: types.RuleType("BINARY_LENGTH"),
+							Parameters: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+				},
+				AttributeReference: &types.FacetAttributeReference{
+					TargetFacetName:     ptr.String("__TargetFacetName__"),
+					TargetAttributeName: ptr.String("__TargetAttributeName__"),
+				},
+				RequiredBehavior: types.RequiredAttributeBehavior("REQUIRED_ALWAYS"),
+			},
+		},
+		ObjectType: types.ObjectType("NODE"),
+		FacetStyle: types.FacetStyle("STATIC"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3138,7 +5791,10 @@ func TestCheckResponseSnapshot_Error_FacetInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteFacet(context.Background(), &DeleteFacetInput{})
+	_, opErr := svc.DeleteFacet(context.Background(), &DeleteFacetInput{
+		SchemaArn: ptr.String("__SchemaArn__"),
+		Name:      ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3163,7 +5819,10 @@ func TestCheckResponseSnapshot_Error_FacetNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteFacet(context.Background(), &DeleteFacetInput{})
+	_, opErr := svc.DeleteFacet(context.Background(), &DeleteFacetInput{
+		SchemaArn: ptr.String("__SchemaArn__"),
+		Name:      ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3188,7 +5847,38 @@ func TestCheckResponseSnapshot_Error_FacetValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddFacetToObject(context.Background(), &AddFacetToObjectInput{})
+	_, opErr := svc.AddFacetToObject(context.Background(), &AddFacetToObjectInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		SchemaFacet: &types.SchemaFacet{
+			SchemaArn: ptr.String("__SchemaArn__"),
+			FacetName: ptr.String("__FacetName__"),
+		},
+		ObjectAttributeList: []types.AttributeKeyAndValue{
+			{
+				Key: &types.AttributeKey{
+					SchemaArn: ptr.String("__SchemaArn__"),
+					FacetName: ptr.String("__FacetName__"),
+					Name:      ptr.String("__Name__"),
+				},
+				Value: &types.TypedAttributeValueMemberStringValue{
+					Value: "__TypedAttributeValueMemberStringValue__",
+				},
+			},
+			{
+				Key: &types.AttributeKey{
+					SchemaArn: ptr.String("__SchemaArn__"),
+					FacetName: ptr.String("__FacetName__"),
+					Name:      ptr.String("__Name__"),
+				},
+				Value: &types.TypedAttributeValueMemberStringValue{
+					Value: "__TypedAttributeValueMemberStringValue__",
+				},
+			},
+		},
+		ObjectReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3213,7 +5903,11 @@ func TestCheckResponseSnapshot_Error_IncompatibleSchemaException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpgradeAppliedSchema(context.Background(), &UpgradeAppliedSchemaInput{})
+	_, opErr := svc.UpgradeAppliedSchema(context.Background(), &UpgradeAppliedSchemaInput{
+		PublishedSchemaArn: ptr.String("__PublishedSchemaArn__"),
+		DirectoryArn:       ptr.String("__DirectoryArn__"),
+		DryRun:             true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3238,7 +5932,15 @@ func TestCheckResponseSnapshot_Error_IndexedAttributeMissingException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AttachToIndex(context.Background(), &AttachToIndexInput{})
+	_, opErr := svc.AttachToIndex(context.Background(), &AttachToIndexInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		IndexReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		TargetReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3263,7 +5965,38 @@ func TestCheckResponseSnapshot_Error_InternalServiceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddFacetToObject(context.Background(), &AddFacetToObjectInput{})
+	_, opErr := svc.AddFacetToObject(context.Background(), &AddFacetToObjectInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		SchemaFacet: &types.SchemaFacet{
+			SchemaArn: ptr.String("__SchemaArn__"),
+			FacetName: ptr.String("__FacetName__"),
+		},
+		ObjectAttributeList: []types.AttributeKeyAndValue{
+			{
+				Key: &types.AttributeKey{
+					SchemaArn: ptr.String("__SchemaArn__"),
+					FacetName: ptr.String("__FacetName__"),
+					Name:      ptr.String("__Name__"),
+				},
+				Value: &types.TypedAttributeValueMemberStringValue{
+					Value: "__TypedAttributeValueMemberStringValue__",
+				},
+			},
+			{
+				Key: &types.AttributeKey{
+					SchemaArn: ptr.String("__SchemaArn__"),
+					FacetName: ptr.String("__FacetName__"),
+					Name:      ptr.String("__Name__"),
+				},
+				Value: &types.TypedAttributeValueMemberStringValue{
+					Value: "__TypedAttributeValueMemberStringValue__",
+				},
+			},
+		},
+		ObjectReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3288,7 +6021,38 @@ func TestCheckResponseSnapshot_Error_InvalidArnException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddFacetToObject(context.Background(), &AddFacetToObjectInput{})
+	_, opErr := svc.AddFacetToObject(context.Background(), &AddFacetToObjectInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		SchemaFacet: &types.SchemaFacet{
+			SchemaArn: ptr.String("__SchemaArn__"),
+			FacetName: ptr.String("__FacetName__"),
+		},
+		ObjectAttributeList: []types.AttributeKeyAndValue{
+			{
+				Key: &types.AttributeKey{
+					SchemaArn: ptr.String("__SchemaArn__"),
+					FacetName: ptr.String("__FacetName__"),
+					Name:      ptr.String("__Name__"),
+				},
+				Value: &types.TypedAttributeValueMemberStringValue{
+					Value: "__TypedAttributeValueMemberStringValue__",
+				},
+			},
+			{
+				Key: &types.AttributeKey{
+					SchemaArn: ptr.String("__SchemaArn__"),
+					FacetName: ptr.String("__FacetName__"),
+					Name:      ptr.String("__Name__"),
+				},
+				Value: &types.TypedAttributeValueMemberStringValue{
+					Value: "__TypedAttributeValueMemberStringValue__",
+				},
+			},
+		},
+		ObjectReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3313,7 +6077,10 @@ func TestCheckResponseSnapshot_Error_InvalidAttachmentException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApplySchema(context.Background(), &ApplySchemaInput{})
+	_, opErr := svc.ApplySchema(context.Background(), &ApplySchemaInput{
+		PublishedSchemaArn: ptr.String("__PublishedSchemaArn__"),
+		DirectoryArn:       ptr.String("__DirectoryArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3338,7 +6105,65 @@ func TestCheckResponseSnapshot_Error_InvalidFacetUpdateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateFacet(context.Background(), &UpdateFacetInput{})
+	_, opErr := svc.UpdateFacet(context.Background(), &UpdateFacetInput{
+		SchemaArn: ptr.String("__SchemaArn__"),
+		Name:      ptr.String("__Name__"),
+		AttributeUpdates: []types.FacetAttributeUpdate{
+			{
+				Attribute: &types.FacetAttribute{
+					Name: ptr.String("__Name__"),
+					AttributeDefinition: &types.FacetAttributeDefinition{
+						Type: types.FacetAttributeType("STRING"),
+						DefaultValue: &types.TypedAttributeValueMemberStringValue{
+							Value: "__TypedAttributeValueMemberStringValue__",
+						},
+						IsImmutable: true,
+						Rules: map[string]types.Rule{
+							"key0": {
+								Type: types.RuleType("BINARY_LENGTH"),
+								Parameters: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+						},
+					},
+					AttributeReference: &types.FacetAttributeReference{
+						TargetFacetName:     ptr.String("__TargetFacetName__"),
+						TargetAttributeName: ptr.String("__TargetAttributeName__"),
+					},
+					RequiredBehavior: types.RequiredAttributeBehavior("REQUIRED_ALWAYS"),
+				},
+				Action: types.UpdateActionType("CREATE_OR_UPDATE"),
+			},
+			{
+				Attribute: &types.FacetAttribute{
+					Name: ptr.String("__Name__"),
+					AttributeDefinition: &types.FacetAttributeDefinition{
+						Type: types.FacetAttributeType("STRING"),
+						DefaultValue: &types.TypedAttributeValueMemberStringValue{
+							Value: "__TypedAttributeValueMemberStringValue__",
+						},
+						IsImmutable: true,
+						Rules: map[string]types.Rule{
+							"key0": {
+								Type: types.RuleType("BINARY_LENGTH"),
+								Parameters: map[string]string{
+									"key0": "__Value__",
+								},
+							},
+						},
+					},
+					AttributeReference: &types.FacetAttributeReference{
+						TargetFacetName:     ptr.String("__TargetFacetName__"),
+						TargetAttributeName: ptr.String("__TargetAttributeName__"),
+					},
+					RequiredBehavior: types.RequiredAttributeBehavior("REQUIRED_ALWAYS"),
+				},
+				Action: types.UpdateActionType("CREATE_OR_UPDATE"),
+			},
+		},
+		ObjectType: types.ObjectType("NODE"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3363,7 +6188,10 @@ func TestCheckResponseSnapshot_Error_InvalidNextTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetTypedLinkFacetInformation(context.Background(), &GetTypedLinkFacetInformationInput{})
+	_, opErr := svc.GetTypedLinkFacetInformation(context.Background(), &GetTypedLinkFacetInformationInput{
+		SchemaArn: ptr.String("__SchemaArn__"),
+		Name:      ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3388,7 +6216,60 @@ func TestCheckResponseSnapshot_Error_InvalidRuleException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFacet(context.Background(), &CreateFacetInput{})
+	_, opErr := svc.CreateFacet(context.Background(), &CreateFacetInput{
+		SchemaArn: ptr.String("__SchemaArn__"),
+		Name:      ptr.String("__Name__"),
+		Attributes: []types.FacetAttribute{
+			{
+				Name: ptr.String("__Name__"),
+				AttributeDefinition: &types.FacetAttributeDefinition{
+					Type: types.FacetAttributeType("STRING"),
+					DefaultValue: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+					IsImmutable: true,
+					Rules: map[string]types.Rule{
+						"key0": {
+							Type: types.RuleType("BINARY_LENGTH"),
+							Parameters: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+				},
+				AttributeReference: &types.FacetAttributeReference{
+					TargetFacetName:     ptr.String("__TargetFacetName__"),
+					TargetAttributeName: ptr.String("__TargetAttributeName__"),
+				},
+				RequiredBehavior: types.RequiredAttributeBehavior("REQUIRED_ALWAYS"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				AttributeDefinition: &types.FacetAttributeDefinition{
+					Type: types.FacetAttributeType("STRING"),
+					DefaultValue: &types.TypedAttributeValueMemberStringValue{
+						Value: "__TypedAttributeValueMemberStringValue__",
+					},
+					IsImmutable: true,
+					Rules: map[string]types.Rule{
+						"key0": {
+							Type: types.RuleType("BINARY_LENGTH"),
+							Parameters: map[string]string{
+								"key0": "__Value__",
+							},
+						},
+					},
+				},
+				AttributeReference: &types.FacetAttributeReference{
+					TargetFacetName:     ptr.String("__TargetFacetName__"),
+					TargetAttributeName: ptr.String("__TargetAttributeName__"),
+				},
+				RequiredBehavior: types.RequiredAttributeBehavior("REQUIRED_ALWAYS"),
+			},
+		},
+		ObjectType: types.ObjectType("NODE"),
+		FacetStyle: types.FacetStyle("STATIC"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3413,7 +6294,10 @@ func TestCheckResponseSnapshot_Error_InvalidSchemaDocException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutSchemaFromJson(context.Background(), &PutSchemaFromJsonInput{})
+	_, opErr := svc.PutSchemaFromJson(context.Background(), &PutSchemaFromJsonInput{
+		SchemaArn: ptr.String("__SchemaArn__"),
+		Document:  ptr.String("__Document__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3438,7 +6322,11 @@ func TestCheckResponseSnapshot_Error_InvalidTaggingRequestException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3463,7 +6351,38 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddFacetToObject(context.Background(), &AddFacetToObjectInput{})
+	_, opErr := svc.AddFacetToObject(context.Background(), &AddFacetToObjectInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		SchemaFacet: &types.SchemaFacet{
+			SchemaArn: ptr.String("__SchemaArn__"),
+			FacetName: ptr.String("__FacetName__"),
+		},
+		ObjectAttributeList: []types.AttributeKeyAndValue{
+			{
+				Key: &types.AttributeKey{
+					SchemaArn: ptr.String("__SchemaArn__"),
+					FacetName: ptr.String("__FacetName__"),
+					Name:      ptr.String("__Name__"),
+				},
+				Value: &types.TypedAttributeValueMemberStringValue{
+					Value: "__TypedAttributeValueMemberStringValue__",
+				},
+			},
+			{
+				Key: &types.AttributeKey{
+					SchemaArn: ptr.String("__SchemaArn__"),
+					FacetName: ptr.String("__FacetName__"),
+					Name:      ptr.String("__Name__"),
+				},
+				Value: &types.TypedAttributeValueMemberStringValue{
+					Value: "__TypedAttributeValueMemberStringValue__",
+				},
+			},
+		},
+		ObjectReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3488,7 +6407,16 @@ func TestCheckResponseSnapshot_Error_LinkNameAlreadyInUseException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AttachObject(context.Background(), &AttachObjectInput{})
+	_, opErr := svc.AttachObject(context.Background(), &AttachObjectInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		ParentReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		ChildReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		LinkName: ptr.String("__LinkName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3513,7 +6441,15 @@ func TestCheckResponseSnapshot_Error_NotIndexException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AttachToIndex(context.Background(), &AttachToIndexInput{})
+	_, opErr := svc.AttachToIndex(context.Background(), &AttachToIndexInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		IndexReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		TargetReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3538,7 +6474,13 @@ func TestCheckResponseSnapshot_Error_NotNodeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DetachObject(context.Background(), &DetachObjectInput{})
+	_, opErr := svc.DetachObject(context.Background(), &DetachObjectInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		ParentReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		LinkName: ptr.String("__LinkName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3563,7 +6505,15 @@ func TestCheckResponseSnapshot_Error_NotPolicyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AttachPolicy(context.Background(), &AttachPolicyInput{})
+	_, opErr := svc.AttachPolicy(context.Background(), &AttachPolicyInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		PolicyReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		ObjectReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3588,7 +6538,15 @@ func TestCheckResponseSnapshot_Error_ObjectAlreadyDetachedException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DetachFromIndex(context.Background(), &DetachFromIndexInput{})
+	_, opErr := svc.DetachFromIndex(context.Background(), &DetachFromIndexInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		IndexReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		TargetReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3613,7 +6571,12 @@ func TestCheckResponseSnapshot_Error_ObjectNotDetachedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteObject(context.Background(), &DeleteObjectInput{})
+	_, opErr := svc.DeleteObject(context.Background(), &DeleteObjectInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		ObjectReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3638,7 +6601,38 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddFacetToObject(context.Background(), &AddFacetToObjectInput{})
+	_, opErr := svc.AddFacetToObject(context.Background(), &AddFacetToObjectInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		SchemaFacet: &types.SchemaFacet{
+			SchemaArn: ptr.String("__SchemaArn__"),
+			FacetName: ptr.String("__FacetName__"),
+		},
+		ObjectAttributeList: []types.AttributeKeyAndValue{
+			{
+				Key: &types.AttributeKey{
+					SchemaArn: ptr.String("__SchemaArn__"),
+					FacetName: ptr.String("__FacetName__"),
+					Name:      ptr.String("__Name__"),
+				},
+				Value: &types.TypedAttributeValueMemberStringValue{
+					Value: "__TypedAttributeValueMemberStringValue__",
+				},
+			},
+			{
+				Key: &types.AttributeKey{
+					SchemaArn: ptr.String("__SchemaArn__"),
+					FacetName: ptr.String("__FacetName__"),
+					Name:      ptr.String("__Name__"),
+				},
+				Value: &types.TypedAttributeValueMemberStringValue{
+					Value: "__TypedAttributeValueMemberStringValue__",
+				},
+			},
+		},
+		ObjectReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3663,7 +6657,38 @@ func TestCheckResponseSnapshot_Error_RetryableConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddFacetToObject(context.Background(), &AddFacetToObjectInput{})
+	_, opErr := svc.AddFacetToObject(context.Background(), &AddFacetToObjectInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		SchemaFacet: &types.SchemaFacet{
+			SchemaArn: ptr.String("__SchemaArn__"),
+			FacetName: ptr.String("__FacetName__"),
+		},
+		ObjectAttributeList: []types.AttributeKeyAndValue{
+			{
+				Key: &types.AttributeKey{
+					SchemaArn: ptr.String("__SchemaArn__"),
+					FacetName: ptr.String("__FacetName__"),
+					Name:      ptr.String("__Name__"),
+				},
+				Value: &types.TypedAttributeValueMemberStringValue{
+					Value: "__TypedAttributeValueMemberStringValue__",
+				},
+			},
+			{
+				Key: &types.AttributeKey{
+					SchemaArn: ptr.String("__SchemaArn__"),
+					FacetName: ptr.String("__FacetName__"),
+					Name:      ptr.String("__Name__"),
+				},
+				Value: &types.TypedAttributeValueMemberStringValue{
+					Value: "__TypedAttributeValueMemberStringValue__",
+				},
+			},
+		},
+		ObjectReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3688,7 +6713,10 @@ func TestCheckResponseSnapshot_Error_SchemaAlreadyExistsException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ApplySchema(context.Background(), &ApplySchemaInput{})
+	_, opErr := svc.ApplySchema(context.Background(), &ApplySchemaInput{
+		PublishedSchemaArn: ptr.String("__PublishedSchemaArn__"),
+		DirectoryArn:       ptr.String("__DirectoryArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3713,7 +6741,12 @@ func TestCheckResponseSnapshot_Error_SchemaAlreadyPublishedException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PublishSchema(context.Background(), &PublishSchemaInput{})
+	_, opErr := svc.PublishSchema(context.Background(), &PublishSchemaInput{
+		DevelopmentSchemaArn: ptr.String("__DevelopmentSchemaArn__"),
+		Version:              ptr.String("__Version__"),
+		MinorVersion:         ptr.String("__MinorVersion__"),
+		Name:                 ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3738,7 +6771,9 @@ func TestCheckResponseSnapshot_Error_StillContainsLinksException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteSchema(context.Background(), &DeleteSchemaInput{})
+	_, opErr := svc.DeleteSchema(context.Background(), &DeleteSchemaInput{
+		SchemaArn: ptr.String("__SchemaArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3763,7 +6798,26 @@ func TestCheckResponseSnapshot_Error_UnsupportedIndexTypeException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateIndex(context.Background(), &CreateIndexInput{})
+	_, opErr := svc.CreateIndex(context.Background(), &CreateIndexInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		OrderedIndexedAttributeList: []types.AttributeKey{
+			{
+				SchemaArn: ptr.String("__SchemaArn__"),
+				FacetName: ptr.String("__FacetName__"),
+				Name:      ptr.String("__Name__"),
+			},
+			{
+				SchemaArn: ptr.String("__SchemaArn__"),
+				FacetName: ptr.String("__FacetName__"),
+				Name:      ptr.String("__Name__"),
+			},
+		},
+		IsUnique: true,
+		ParentReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+		LinkName: ptr.String("__LinkName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3788,7 +6842,38 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddFacetToObject(context.Background(), &AddFacetToObjectInput{})
+	_, opErr := svc.AddFacetToObject(context.Background(), &AddFacetToObjectInput{
+		DirectoryArn: ptr.String("__DirectoryArn__"),
+		SchemaFacet: &types.SchemaFacet{
+			SchemaArn: ptr.String("__SchemaArn__"),
+			FacetName: ptr.String("__FacetName__"),
+		},
+		ObjectAttributeList: []types.AttributeKeyAndValue{
+			{
+				Key: &types.AttributeKey{
+					SchemaArn: ptr.String("__SchemaArn__"),
+					FacetName: ptr.String("__FacetName__"),
+					Name:      ptr.String("__Name__"),
+				},
+				Value: &types.TypedAttributeValueMemberStringValue{
+					Value: "__TypedAttributeValueMemberStringValue__",
+				},
+			},
+			{
+				Key: &types.AttributeKey{
+					SchemaArn: ptr.String("__SchemaArn__"),
+					FacetName: ptr.String("__FacetName__"),
+					Name:      ptr.String("__Name__"),
+				},
+				Value: &types.TypedAttributeValueMemberStringValue{
+					Value: "__TypedAttributeValueMemberStringValue__",
+				},
+			},
+		},
+		ObjectReference: &types.ObjectReference{
+			Selector: ptr.String("__Selector__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

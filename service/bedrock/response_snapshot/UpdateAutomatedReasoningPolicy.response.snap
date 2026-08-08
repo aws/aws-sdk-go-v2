@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"definitionHash":"__DefinitionHash__","name":"__Name__","policyArn":"__PolicyArn__","updatedAt":"2000-01-01T00:00:00Z"}

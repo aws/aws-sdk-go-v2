@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Logs_20140328.DescribeImportTaskBatches
+
+{"importBatches":[{"batchId":"__BatchId__","errorMessage":"__ErrorMessage__","status":"IN_PROGRESS"},{"batchId":"__BatchId__","errorMessage":"__ErrorMessage__","status":"IN_PROGRESS"}],"importId":"__ImportId__","importSourceArn":"__ImportSourceArn__","nextToken":"__NextToken__"}

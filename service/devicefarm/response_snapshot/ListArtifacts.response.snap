@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DeviceFarm_20150623.ListArtifacts
+
+{"artifacts":[{"arn":"__Arn__","extension":"__Extension__","name":"__Name__","type":"UNKNOWN","url":"__Url__"},{"arn":"__Arn__","extension":"__Extension__","name":"__Name__","type":"UNKNOWN","url":"__Url__"}],"nextToken":"__NextToken__"}

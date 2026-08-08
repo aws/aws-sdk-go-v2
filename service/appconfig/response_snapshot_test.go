@@ -121,7 +121,13 @@ func TestCheckResponseSnapshot_CreateApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -160,7 +166,28 @@ func TestCheckResponseSnapshot_CreateConfigurationProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConfigurationProfile(context.Background(), &CreateConfigurationProfileInput{})
+	got, err := svc.CreateConfigurationProfile(context.Background(), &CreateConfigurationProfileInput{
+		ApplicationId:    ptr.String("__ApplicationId__"),
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		LocationUri:      ptr.String("__LocationUri__"),
+		RetrievalRoleArn: ptr.String("__RetrievalRoleArn__"),
+		Validators: []types.Validator{
+			{
+				Type:    types.ValidatorType("JSON_SCHEMA"),
+				Content: ptr.String("__Content__"),
+			},
+			{
+				Type:    types.ValidatorType("JSON_SCHEMA"),
+				Content: ptr.String("__Content__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Type:             ptr.String("__Type__"),
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -188,7 +215,18 @@ func TestCheckResponseSnapshot_CreateDeploymentStrategy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDeploymentStrategy(context.Background(), &CreateDeploymentStrategyInput{})
+	got, err := svc.CreateDeploymentStrategy(context.Background(), &CreateDeploymentStrategyInput{
+		Name:                        ptr.String("__Name__"),
+		Description:                 ptr.String("__Description__"),
+		DeploymentDurationInMinutes: ptr.Int32(1),
+		FinalBakeTimeInMinutes:      1,
+		GrowthFactor:                ptr.Float32(1.0),
+		GrowthType:                  types.GrowthType("LINEAR"),
+		ReplicateTo:                 types.ReplicateTo("NONE"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -223,7 +261,24 @@ func TestCheckResponseSnapshot_CreateEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{})
+	got, err := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		Name:          ptr.String("__Name__"),
+		Description:   ptr.String("__Description__"),
+		Monitors: []types.Monitor{
+			{
+				AlarmArn:     ptr.String("__AlarmArn__"),
+				AlarmRoleArn: ptr.String("__AlarmRoleArn__"),
+			},
+			{
+				AlarmArn:     ptr.String("__AlarmArn__"),
+				AlarmRoleArn: ptr.String("__AlarmRoleArn__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -298,7 +353,58 @@ func TestCheckResponseSnapshot_CreateExperimentDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateExperimentDefinition(context.Background(), &CreateExperimentDefinitionInput{})
+	got, err := svc.CreateExperimentDefinition(context.Background(), &CreateExperimentDefinitionInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		Name:                           ptr.String("__Name__"),
+		ConfigurationProfileIdentifier: ptr.String("__ConfigurationProfileIdentifier__"),
+		EnvironmentIdentifier:          ptr.String("__EnvironmentIdentifier__"),
+		FlagKey:                        ptr.String("__FlagKey__"),
+		Treatments: []types.TreatmentInput{
+			{
+				Weight:      1.0,
+				Description: ptr.String("__Description__"),
+				FlagValue: &types.FlagValue{
+					Enabled: true,
+					AttributeValues: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberStringValue{
+							Value: "__AttributeValueMemberStringValue__",
+						},
+					},
+				},
+			},
+			{
+				Weight:      1.0,
+				Description: ptr.String("__Description__"),
+				FlagValue: &types.FlagValue{
+					Enabled: true,
+					AttributeValues: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberStringValue{
+							Value: "__AttributeValueMemberStringValue__",
+						},
+					},
+				},
+			},
+		},
+		Control: &types.TreatmentInput{
+			Weight:      1.0,
+			Description: ptr.String("__Description__"),
+			FlagValue: &types.FlagValue{
+				Enabled: true,
+				AttributeValues: map[string]types.AttributeValue{
+					"key0": &types.AttributeValueMemberStringValue{
+						Value: "__AttributeValueMemberStringValue__",
+					},
+				},
+			},
+		},
+		AudienceRule:        ptr.String("__AudienceRule__"),
+		Hypothesis:          ptr.String("__Hypothesis__"),
+		AudienceDescription: ptr.String("__AudienceDescription__"),
+		LaunchCriteria:      ptr.String("__LaunchCriteria__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -346,7 +452,37 @@ func TestCheckResponseSnapshot_CreateExtension(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateExtension(context.Background(), &CreateExtensionInput{})
+	got, err := svc.CreateExtension(context.Background(), &CreateExtensionInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Actions: map[string][]types.Action{
+			"key0": {
+				{
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+					Uri:         ptr.String("__Uri__"),
+					RoleArn:     ptr.String("__RoleArn__"),
+				},
+				{
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+					Uri:         ptr.String("__Uri__"),
+					RoleArn:     ptr.String("__RoleArn__"),
+				},
+			},
+		},
+		Parameters: map[string]types.Parameter{
+			"key0": {
+				Description: ptr.String("__Description__"),
+				Required:    true,
+				Dynamic:     true,
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LatestVersionNumber: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -374,7 +510,17 @@ func TestCheckResponseSnapshot_CreateExtensionAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateExtensionAssociation(context.Background(), &CreateExtensionAssociationInput{})
+	got, err := svc.CreateExtensionAssociation(context.Background(), &CreateExtensionAssociationInput{
+		ExtensionIdentifier:    ptr.String("__ExtensionIdentifier__"),
+		ExtensionVersionNumber: ptr.Int32(1),
+		ResourceIdentifier:     ptr.String("__ResourceIdentifier__"),
+		Parameters: map[string]string{
+			"key0": "__Value__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -402,7 +548,15 @@ func TestCheckResponseSnapshot_CreateHostedConfigurationVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateHostedConfigurationVersion(context.Background(), &CreateHostedConfigurationVersionInput{})
+	got, err := svc.CreateHostedConfigurationVersion(context.Background(), &CreateHostedConfigurationVersionInput{
+		ApplicationId:          ptr.String("__ApplicationId__"),
+		ConfigurationProfileId: ptr.String("__ConfigurationProfileId__"),
+		Description:            ptr.String("__Description__"),
+		Content:                []byte("blob"),
+		ContentType:            ptr.String("__ContentType__"),
+		LatestVersionNumber:    ptr.Int32(1),
+		VersionLabel:           ptr.String("__VersionLabel__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -421,7 +575,9 @@ func TestCheckResponseSnapshot_DeleteApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{})
+	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -440,7 +596,11 @@ func TestCheckResponseSnapshot_DeleteConfigurationProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConfigurationProfile(context.Background(), &DeleteConfigurationProfileInput{})
+	got, err := svc.DeleteConfigurationProfile(context.Background(), &DeleteConfigurationProfileInput{
+		ApplicationId:           ptr.String("__ApplicationId__"),
+		ConfigurationProfileId:  ptr.String("__ConfigurationProfileId__"),
+		DeletionProtectionCheck: types.DeletionProtectionCheck("ACCOUNT_DEFAULT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -459,7 +619,9 @@ func TestCheckResponseSnapshot_DeleteDeploymentStrategy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDeploymentStrategy(context.Background(), &DeleteDeploymentStrategyInput{})
+	got, err := svc.DeleteDeploymentStrategy(context.Background(), &DeleteDeploymentStrategyInput{
+		DeploymentStrategyId: ptr.String("__DeploymentStrategyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -478,7 +640,11 @@ func TestCheckResponseSnapshot_DeleteEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEnvironment(context.Background(), &DeleteEnvironmentInput{})
+	got, err := svc.DeleteEnvironment(context.Background(), &DeleteEnvironmentInput{
+		EnvironmentId:           ptr.String("__EnvironmentId__"),
+		ApplicationId:           ptr.String("__ApplicationId__"),
+		DeletionProtectionCheck: types.DeletionProtectionCheck("ACCOUNT_DEFAULT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -497,7 +663,11 @@ func TestCheckResponseSnapshot_DeleteExperimentDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteExperimentDefinition(context.Background(), &DeleteExperimentDefinitionInput{})
+	got, err := svc.DeleteExperimentDefinition(context.Background(), &DeleteExperimentDefinitionInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		ExperimentDefinitionIdentifier: ptr.String("__ExperimentDefinitionIdentifier__"),
+		DeleteType:                     types.DeleteType("ARCHIVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -516,7 +686,10 @@ func TestCheckResponseSnapshot_DeleteExtension(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteExtension(context.Background(), &DeleteExtensionInput{})
+	got, err := svc.DeleteExtension(context.Background(), &DeleteExtensionInput{
+		ExtensionIdentifier: ptr.String("__ExtensionIdentifier__"),
+		VersionNumber:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -535,7 +708,9 @@ func TestCheckResponseSnapshot_DeleteExtensionAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteExtensionAssociation(context.Background(), &DeleteExtensionAssociationInput{})
+	got, err := svc.DeleteExtensionAssociation(context.Background(), &DeleteExtensionAssociationInput{
+		ExtensionAssociationId: ptr.String("__ExtensionAssociationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -554,7 +729,11 @@ func TestCheckResponseSnapshot_DeleteHostedConfigurationVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteHostedConfigurationVersion(context.Background(), &DeleteHostedConfigurationVersionInput{})
+	got, err := svc.DeleteHostedConfigurationVersion(context.Background(), &DeleteHostedConfigurationVersionInput{
+		ApplicationId:          ptr.String("__ApplicationId__"),
+		ConfigurationProfileId: ptr.String("__ConfigurationProfileId__"),
+		VersionNumber:          ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -604,7 +783,9 @@ func TestCheckResponseSnapshot_GetApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApplication(context.Background(), &GetApplicationInput{})
+	got, err := svc.GetApplication(context.Background(), &GetApplicationInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -627,7 +808,13 @@ func TestCheckResponseSnapshot_GetConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConfiguration(context.Background(), &GetConfigurationInput{})
+	got, err := svc.GetConfiguration(context.Background(), &GetConfigurationInput{
+		Application:                ptr.String("__Application__"),
+		Environment:                ptr.String("__Environment__"),
+		Configuration:              ptr.String("__Configuration__"),
+		ClientId:                   ptr.String("__ClientId__"),
+		ClientConfigurationVersion: ptr.String("__ClientConfigurationVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -666,7 +853,10 @@ func TestCheckResponseSnapshot_GetConfigurationProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConfigurationProfile(context.Background(), &GetConfigurationProfileInput{})
+	got, err := svc.GetConfigurationProfile(context.Background(), &GetConfigurationProfileInput{
+		ApplicationId:          ptr.String("__ApplicationId__"),
+		ConfigurationProfileId: ptr.String("__ConfigurationProfileId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -778,7 +968,11 @@ func TestCheckResponseSnapshot_GetDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDeployment(context.Background(), &GetDeploymentInput{})
+	got, err := svc.GetDeployment(context.Background(), &GetDeploymentInput{
+		ApplicationId:    ptr.String("__ApplicationId__"),
+		EnvironmentId:    ptr.String("__EnvironmentId__"),
+		DeploymentNumber: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -806,7 +1000,9 @@ func TestCheckResponseSnapshot_GetDeploymentStrategy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDeploymentStrategy(context.Background(), &GetDeploymentStrategyInput{})
+	got, err := svc.GetDeploymentStrategy(context.Background(), &GetDeploymentStrategyInput{
+		DeploymentStrategyId: ptr.String("__DeploymentStrategyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -841,7 +1037,10 @@ func TestCheckResponseSnapshot_GetEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEnvironment(context.Background(), &GetEnvironmentInput{})
+	got, err := svc.GetEnvironment(context.Background(), &GetEnvironmentInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -916,7 +1115,10 @@ func TestCheckResponseSnapshot_GetExperimentDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetExperimentDefinition(context.Background(), &GetExperimentDefinitionInput{})
+	got, err := svc.GetExperimentDefinition(context.Background(), &GetExperimentDefinitionInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		ExperimentDefinitionIdentifier: ptr.String("__ExperimentDefinitionIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1008,7 +1210,11 @@ func TestCheckResponseSnapshot_GetExperimentRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetExperimentRun(context.Background(), &GetExperimentRunInput{})
+	got, err := svc.GetExperimentRun(context.Background(), &GetExperimentRunInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		ExperimentDefinitionIdentifier: ptr.String("__ExperimentDefinitionIdentifier__"),
+		Run:                            ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1056,7 +1262,10 @@ func TestCheckResponseSnapshot_GetExtension(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetExtension(context.Background(), &GetExtensionInput{})
+	got, err := svc.GetExtension(context.Background(), &GetExtensionInput{
+		ExtensionIdentifier: ptr.String("__ExtensionIdentifier__"),
+		VersionNumber:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1084,7 +1293,9 @@ func TestCheckResponseSnapshot_GetExtensionAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetExtensionAssociation(context.Background(), &GetExtensionAssociationInput{})
+	got, err := svc.GetExtensionAssociation(context.Background(), &GetExtensionAssociationInput{
+		ExtensionAssociationId: ptr.String("__ExtensionAssociationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1112,7 +1323,11 @@ func TestCheckResponseSnapshot_GetHostedConfigurationVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetHostedConfigurationVersion(context.Background(), &GetHostedConfigurationVersionInput{})
+	got, err := svc.GetHostedConfigurationVersion(context.Background(), &GetHostedConfigurationVersionInput{
+		ApplicationId:          ptr.String("__ApplicationId__"),
+		ConfigurationProfileId: ptr.String("__ConfigurationProfileId__"),
+		VersionNumber:          ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1145,7 +1360,10 @@ func TestCheckResponseSnapshot_ListApplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplications(context.Background(), &ListApplicationsInput{})
+	got, err := svc.ListApplications(context.Background(), &ListApplicationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1190,7 +1408,12 @@ func TestCheckResponseSnapshot_ListConfigurationProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConfigurationProfiles(context.Background(), &ListConfigurationProfilesInput{})
+	got, err := svc.ListConfigurationProfiles(context.Background(), &ListConfigurationProfilesInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		Type:          ptr.String("__Type__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1233,7 +1456,10 @@ func TestCheckResponseSnapshot_ListDeploymentStrategies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDeploymentStrategies(context.Background(), &ListDeploymentStrategiesInput{})
+	got, err := svc.ListDeploymentStrategies(context.Background(), &ListDeploymentStrategiesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1288,7 +1514,12 @@ func TestCheckResponseSnapshot_ListDeployments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDeployments(context.Background(), &ListDeploymentsInput{})
+	got, err := svc.ListDeployments(context.Background(), &ListDeploymentsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1345,7 +1576,11 @@ func TestCheckResponseSnapshot_ListEnvironments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEnvironments(context.Background(), &ListEnvironmentsInput{})
+	got, err := svc.ListEnvironments(context.Background(), &ListEnvironmentsInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1392,7 +1627,14 @@ func TestCheckResponseSnapshot_ListExperimentDefinitions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListExperimentDefinitions(context.Background(), &ListExperimentDefinitionsInput{})
+	got, err := svc.ListExperimentDefinitions(context.Background(), &ListExperimentDefinitionsInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		ConfigurationProfileIdentifier: ptr.String("__ConfigurationProfileIdentifier__"),
+		EnvironmentIdentifier:          ptr.String("__EnvironmentIdentifier__"),
+		Status:                         types.ExperimentDefinitionStatus("ACTIVE"),
+		MaxResults:                     ptr.Int32(1),
+		NextToken:                      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1441,7 +1683,13 @@ func TestCheckResponseSnapshot_ListExperimentRunEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListExperimentRunEvents(context.Background(), &ListExperimentRunEventsInput{})
+	got, err := svc.ListExperimentRunEvents(context.Background(), &ListExperimentRunEventsInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		ExperimentDefinitionIdentifier: ptr.String("__ExperimentDefinitionIdentifier__"),
+		Run:                            ptr.Int32(1),
+		MaxResults:                     ptr.Int32(1),
+		NextToken:                      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1482,7 +1730,13 @@ func TestCheckResponseSnapshot_ListExperimentRuns(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListExperimentRuns(context.Background(), &ListExperimentRunsInput{})
+	got, err := svc.ListExperimentRuns(context.Background(), &ListExperimentRunsInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		ExperimentDefinitionIdentifier: ptr.String("__ExperimentDefinitionIdentifier__"),
+		MaxResults:                     ptr.Int32(1),
+		NextToken:                      ptr.String("__NextToken__"),
+		Status:                         types.ExperimentRunStatus("RUNNING"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1515,7 +1769,13 @@ func TestCheckResponseSnapshot_ListExtensionAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListExtensionAssociations(context.Background(), &ListExtensionAssociationsInput{})
+	got, err := svc.ListExtensionAssociations(context.Background(), &ListExtensionAssociationsInput{
+		ResourceIdentifier:     ptr.String("__ResourceIdentifier__"),
+		ExtensionIdentifier:    ptr.String("__ExtensionIdentifier__"),
+		ExtensionVersionNumber: ptr.Int32(1),
+		MaxResults:             ptr.Int32(1),
+		NextToken:              ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1552,7 +1812,11 @@ func TestCheckResponseSnapshot_ListExtensions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListExtensions(context.Background(), &ListExtensionsInput{})
+	got, err := svc.ListExtensions(context.Background(), &ListExtensionsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Name:       ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1593,7 +1857,13 @@ func TestCheckResponseSnapshot_ListHostedConfigurationVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListHostedConfigurationVersions(context.Background(), &ListHostedConfigurationVersionsInput{})
+	got, err := svc.ListHostedConfigurationVersions(context.Background(), &ListHostedConfigurationVersionsInput{
+		ApplicationId:          ptr.String("__ApplicationId__"),
+		ConfigurationProfileId: ptr.String("__ConfigurationProfileId__"),
+		MaxResults:             ptr.Int32(1),
+		NextToken:              ptr.String("__NextToken__"),
+		VersionLabel:           ptr.String("__VersionLabel__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1616,7 +1886,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1728,7 +2000,22 @@ func TestCheckResponseSnapshot_StartDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartDeployment(context.Background(), &StartDeploymentInput{})
+	got, err := svc.StartDeployment(context.Background(), &StartDeploymentInput{
+		ApplicationId:          ptr.String("__ApplicationId__"),
+		EnvironmentId:          ptr.String("__EnvironmentId__"),
+		DeploymentStrategyId:   ptr.String("__DeploymentStrategyId__"),
+		ConfigurationProfileId: ptr.String("__ConfigurationProfileId__"),
+		ConfigurationVersion:   ptr.String("__ConfigurationVersion__"),
+		Description:            ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+		DynamicExtensionParameters: map[string]string{
+			"key0": "__Value__",
+		},
+		LatestDeploymentNumber: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1820,7 +2107,28 @@ func TestCheckResponseSnapshot_StartExperimentRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartExperimentRun(context.Background(), &StartExperimentRunInput{})
+	got, err := svc.StartExperimentRun(context.Background(), &StartExperimentRunInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		ExperimentDefinitionIdentifier: ptr.String("__ExperimentDefinitionIdentifier__"),
+		Description:                    ptr.String("__Description__"),
+		ExposurePercentage:             ptr.Float32(1.0),
+		TreatmentOverrides: &types.TreatmentOverridesMemberInline{
+			Value: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		DeploymentParameters: &types.DeploymentParameters{
+			DynamicExtensionParameters: map[string]string{
+				"key0": "__Value__",
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1932,7 +2240,12 @@ func TestCheckResponseSnapshot_StopDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopDeployment(context.Background(), &StopDeploymentInput{})
+	got, err := svc.StopDeployment(context.Background(), &StopDeploymentInput{
+		ApplicationId:    ptr.String("__ApplicationId__"),
+		EnvironmentId:    ptr.String("__EnvironmentId__"),
+		DeploymentNumber: ptr.Int32(1),
+		AllowRevert:      ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2024,7 +2337,24 @@ func TestCheckResponseSnapshot_StopExperimentRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopExperimentRun(context.Background(), &StopExperimentRunInput{})
+	got, err := svc.StopExperimentRun(context.Background(), &StopExperimentRunInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		ExperimentDefinitionIdentifier: ptr.String("__ExperimentDefinitionIdentifier__"),
+		Run:                            ptr.Int32(1),
+		Result: &types.ExperimentRunResult{
+			ExecutiveSummary:   ptr.String("__ExecutiveSummary__"),
+			ReasonsToLaunch:    ptr.String("__ReasonsToLaunch__"),
+			ReasonsNotToLaunch: ptr.String("__ReasonsNotToLaunch__"),
+		},
+		DeploymentParameters: &types.DeploymentParameters{
+			DynamicExtensionParameters: map[string]string{
+				"key0": "__Value__",
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2043,7 +2373,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2062,7 +2397,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2089,7 +2430,15 @@ func TestCheckResponseSnapshot_UpdateAccountSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAccountSettings(context.Background(), &UpdateAccountSettingsInput{})
+	got, err := svc.UpdateAccountSettings(context.Background(), &UpdateAccountSettingsInput{
+		DeletionProtection: &types.DeletionProtectionSettings{
+			Enabled:                   ptr.Bool(true),
+			ProtectionPeriodInMinutes: ptr.Int32(1),
+		},
+		VendedMetrics: &types.VendedMetricsSettings{
+			Enabled: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2112,7 +2461,11 @@ func TestCheckResponseSnapshot_UpdateApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApplication(context.Background(), &UpdateApplicationInput{})
+	got, err := svc.UpdateApplication(context.Background(), &UpdateApplicationInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		Name:          ptr.String("__Name__"),
+		Description:   ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2151,7 +2504,24 @@ func TestCheckResponseSnapshot_UpdateConfigurationProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConfigurationProfile(context.Background(), &UpdateConfigurationProfileInput{})
+	got, err := svc.UpdateConfigurationProfile(context.Background(), &UpdateConfigurationProfileInput{
+		ApplicationId:          ptr.String("__ApplicationId__"),
+		ConfigurationProfileId: ptr.String("__ConfigurationProfileId__"),
+		Name:                   ptr.String("__Name__"),
+		Description:            ptr.String("__Description__"),
+		RetrievalRoleArn:       ptr.String("__RetrievalRoleArn__"),
+		Validators: []types.Validator{
+			{
+				Type:    types.ValidatorType("JSON_SCHEMA"),
+				Content: ptr.String("__Content__"),
+			},
+			{
+				Type:    types.ValidatorType("JSON_SCHEMA"),
+				Content: ptr.String("__Content__"),
+			},
+		},
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2179,7 +2549,14 @@ func TestCheckResponseSnapshot_UpdateDeploymentStrategy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDeploymentStrategy(context.Background(), &UpdateDeploymentStrategyInput{})
+	got, err := svc.UpdateDeploymentStrategy(context.Background(), &UpdateDeploymentStrategyInput{
+		DeploymentStrategyId:        ptr.String("__DeploymentStrategyId__"),
+		Description:                 ptr.String("__Description__"),
+		DeploymentDurationInMinutes: ptr.Int32(1),
+		FinalBakeTimeInMinutes:      ptr.Int32(1),
+		GrowthFactor:                ptr.Float32(1.0),
+		GrowthType:                  types.GrowthType("LINEAR"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2214,7 +2591,22 @@ func TestCheckResponseSnapshot_UpdateEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEnvironment(context.Background(), &UpdateEnvironmentInput{})
+	got, err := svc.UpdateEnvironment(context.Background(), &UpdateEnvironmentInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+		EnvironmentId: ptr.String("__EnvironmentId__"),
+		Name:          ptr.String("__Name__"),
+		Description:   ptr.String("__Description__"),
+		Monitors: []types.Monitor{
+			{
+				AlarmArn:     ptr.String("__AlarmArn__"),
+				AlarmRoleArn: ptr.String("__AlarmRoleArn__"),
+			},
+			{
+				AlarmArn:     ptr.String("__AlarmArn__"),
+				AlarmRoleArn: ptr.String("__AlarmRoleArn__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2289,7 +2681,52 @@ func TestCheckResponseSnapshot_UpdateExperimentDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateExperimentDefinition(context.Background(), &UpdateExperimentDefinitionInput{})
+	got, err := svc.UpdateExperimentDefinition(context.Background(), &UpdateExperimentDefinitionInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		ExperimentDefinitionIdentifier: ptr.String("__ExperimentDefinitionIdentifier__"),
+		Treatments: []types.TreatmentInput{
+			{
+				Weight:      1.0,
+				Description: ptr.String("__Description__"),
+				FlagValue: &types.FlagValue{
+					Enabled: true,
+					AttributeValues: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberStringValue{
+							Value: "__AttributeValueMemberStringValue__",
+						},
+					},
+				},
+			},
+			{
+				Weight:      1.0,
+				Description: ptr.String("__Description__"),
+				FlagValue: &types.FlagValue{
+					Enabled: true,
+					AttributeValues: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberStringValue{
+							Value: "__AttributeValueMemberStringValue__",
+						},
+					},
+				},
+			},
+		},
+		Control: &types.TreatmentInput{
+			Weight:      1.0,
+			Description: ptr.String("__Description__"),
+			FlagValue: &types.FlagValue{
+				Enabled: true,
+				AttributeValues: map[string]types.AttributeValue{
+					"key0": &types.AttributeValueMemberStringValue{
+						Value: "__AttributeValueMemberStringValue__",
+					},
+				},
+			},
+		},
+		Hypothesis:          ptr.String("__Hypothesis__"),
+		AudienceRule:        ptr.String("__AudienceRule__"),
+		AudienceDescription: ptr.String("__AudienceDescription__"),
+		LaunchCriteria:      ptr.String("__LaunchCriteria__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2381,7 +2818,26 @@ func TestCheckResponseSnapshot_UpdateExperimentRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateExperimentRun(context.Background(), &UpdateExperimentRunInput{})
+	got, err := svc.UpdateExperimentRun(context.Background(), &UpdateExperimentRunInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		ExperimentDefinitionIdentifier: ptr.String("__ExperimentDefinitionIdentifier__"),
+		Run:                            ptr.Int32(1),
+		Description:                    ptr.String("__Description__"),
+		ExposurePercentage:             ptr.Float32(1.0),
+		TreatmentOverrides: &types.TreatmentOverridesMemberInline{
+			Value: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		DeploymentParameters: &types.DeploymentParameters{
+			DynamicExtensionParameters: map[string]string{
+				"key0": "__Value__",
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2429,7 +2885,34 @@ func TestCheckResponseSnapshot_UpdateExtension(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateExtension(context.Background(), &UpdateExtensionInput{})
+	got, err := svc.UpdateExtension(context.Background(), &UpdateExtensionInput{
+		ExtensionIdentifier: ptr.String("__ExtensionIdentifier__"),
+		Description:         ptr.String("__Description__"),
+		Actions: map[string][]types.Action{
+			"key0": {
+				{
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+					Uri:         ptr.String("__Uri__"),
+					RoleArn:     ptr.String("__RoleArn__"),
+				},
+				{
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+					Uri:         ptr.String("__Uri__"),
+					RoleArn:     ptr.String("__RoleArn__"),
+				},
+			},
+		},
+		Parameters: map[string]types.Parameter{
+			"key0": {
+				Description: ptr.String("__Description__"),
+				Required:    true,
+				Dynamic:     true,
+			},
+		},
+		VersionNumber: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2457,7 +2940,12 @@ func TestCheckResponseSnapshot_UpdateExtensionAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateExtensionAssociation(context.Background(), &UpdateExtensionAssociationInput{})
+	got, err := svc.UpdateExtensionAssociation(context.Background(), &UpdateExtensionAssociationInput{
+		ExtensionAssociationId: ptr.String("__ExtensionAssociationId__"),
+		Parameters: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2476,7 +2964,11 @@ func TestCheckResponseSnapshot_ValidateConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ValidateConfiguration(context.Background(), &ValidateConfigurationInput{})
+	got, err := svc.ValidateConfiguration(context.Background(), &ValidateConfigurationInput{
+		ApplicationId:          ptr.String("__ApplicationId__"),
+		ConfigurationProfileId: ptr.String("__ConfigurationProfileId__"),
+		ConfigurationVersion:   ptr.String("__ConfigurationVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2516,7 +3008,13 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2541,7 +3039,58 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateExperimentDefinition(context.Background(), &CreateExperimentDefinitionInput{})
+	_, opErr := svc.CreateExperimentDefinition(context.Background(), &CreateExperimentDefinitionInput{
+		ApplicationIdentifier:          ptr.String("__ApplicationIdentifier__"),
+		Name:                           ptr.String("__Name__"),
+		ConfigurationProfileIdentifier: ptr.String("__ConfigurationProfileIdentifier__"),
+		EnvironmentIdentifier:          ptr.String("__EnvironmentIdentifier__"),
+		FlagKey:                        ptr.String("__FlagKey__"),
+		Treatments: []types.TreatmentInput{
+			{
+				Weight:      1.0,
+				Description: ptr.String("__Description__"),
+				FlagValue: &types.FlagValue{
+					Enabled: true,
+					AttributeValues: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberStringValue{
+							Value: "__AttributeValueMemberStringValue__",
+						},
+					},
+				},
+			},
+			{
+				Weight:      1.0,
+				Description: ptr.String("__Description__"),
+				FlagValue: &types.FlagValue{
+					Enabled: true,
+					AttributeValues: map[string]types.AttributeValue{
+						"key0": &types.AttributeValueMemberStringValue{
+							Value: "__AttributeValueMemberStringValue__",
+						},
+					},
+				},
+			},
+		},
+		Control: &types.TreatmentInput{
+			Weight:      1.0,
+			Description: ptr.String("__Description__"),
+			FlagValue: &types.FlagValue{
+				Enabled: true,
+				AttributeValues: map[string]types.AttributeValue{
+					"key0": &types.AttributeValueMemberStringValue{
+						Value: "__AttributeValueMemberStringValue__",
+					},
+				},
+			},
+		},
+		AudienceRule:        ptr.String("__AudienceRule__"),
+		Hypothesis:          ptr.String("__Hypothesis__"),
+		AudienceDescription: ptr.String("__AudienceDescription__"),
+		LaunchCriteria:      ptr.String("__LaunchCriteria__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2566,7 +3115,13 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2594,7 +3149,15 @@ func TestCheckResponseSnapshot_Error_PayloadTooLargeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateHostedConfigurationVersion(context.Background(), &CreateHostedConfigurationVersionInput{})
+	_, opErr := svc.CreateHostedConfigurationVersion(context.Background(), &CreateHostedConfigurationVersionInput{
+		ApplicationId:          ptr.String("__ApplicationId__"),
+		ConfigurationProfileId: ptr.String("__ConfigurationProfileId__"),
+		Description:            ptr.String("__Description__"),
+		Content:                []byte("blob"),
+		ContentType:            ptr.String("__ContentType__"),
+		LatestVersionNumber:    ptr.Int32(1),
+		VersionLabel:           ptr.String("__VersionLabel__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2620,7 +3183,28 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConfigurationProfile(context.Background(), &CreateConfigurationProfileInput{})
+	_, opErr := svc.CreateConfigurationProfile(context.Background(), &CreateConfigurationProfileInput{
+		ApplicationId:    ptr.String("__ApplicationId__"),
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		LocationUri:      ptr.String("__LocationUri__"),
+		RetrievalRoleArn: ptr.String("__RetrievalRoleArn__"),
+		Validators: []types.Validator{
+			{
+				Type:    types.ValidatorType("JSON_SCHEMA"),
+				Content: ptr.String("__Content__"),
+			},
+			{
+				Type:    types.ValidatorType("JSON_SCHEMA"),
+				Content: ptr.String("__Content__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Type:             ptr.String("__Type__"),
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2645,7 +3229,13 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

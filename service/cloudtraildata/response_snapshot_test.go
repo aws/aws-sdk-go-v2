@@ -139,7 +139,22 @@ func TestCheckResponseSnapshot_PutAuditEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAuditEvents(context.Background(), &PutAuditEventsInput{})
+	got, err := svc.PutAuditEvents(context.Background(), &PutAuditEventsInput{
+		AuditEvents: []types.AuditEvent{
+			{
+				Id:                ptr.String("__Id__"),
+				EventData:         ptr.String("__EventData__"),
+				EventDataChecksum: ptr.String("__EventDataChecksum__"),
+			},
+			{
+				Id:                ptr.String("__Id__"),
+				EventData:         ptr.String("__EventData__"),
+				EventDataChecksum: ptr.String("__EventDataChecksum__"),
+			},
+		},
+		ChannelArn: ptr.String("__ChannelArn__"),
+		ExternalId: ptr.String("__ExternalId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -160,7 +175,22 @@ func TestCheckResponseSnapshot_Error_ChannelInsufficientPermission(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutAuditEvents(context.Background(), &PutAuditEventsInput{})
+	_, opErr := svc.PutAuditEvents(context.Background(), &PutAuditEventsInput{
+		AuditEvents: []types.AuditEvent{
+			{
+				Id:                ptr.String("__Id__"),
+				EventData:         ptr.String("__EventData__"),
+				EventDataChecksum: ptr.String("__EventDataChecksum__"),
+			},
+			{
+				Id:                ptr.String("__Id__"),
+				EventData:         ptr.String("__EventData__"),
+				EventDataChecksum: ptr.String("__EventDataChecksum__"),
+			},
+		},
+		ChannelArn: ptr.String("__ChannelArn__"),
+		ExternalId: ptr.String("__ExternalId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -185,7 +215,22 @@ func TestCheckResponseSnapshot_Error_ChannelNotFound(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutAuditEvents(context.Background(), &PutAuditEventsInput{})
+	_, opErr := svc.PutAuditEvents(context.Background(), &PutAuditEventsInput{
+		AuditEvents: []types.AuditEvent{
+			{
+				Id:                ptr.String("__Id__"),
+				EventData:         ptr.String("__EventData__"),
+				EventDataChecksum: ptr.String("__EventDataChecksum__"),
+			},
+			{
+				Id:                ptr.String("__Id__"),
+				EventData:         ptr.String("__EventData__"),
+				EventDataChecksum: ptr.String("__EventDataChecksum__"),
+			},
+		},
+		ChannelArn: ptr.String("__ChannelArn__"),
+		ExternalId: ptr.String("__ExternalId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -210,7 +255,22 @@ func TestCheckResponseSnapshot_Error_ChannelUnsupportedSchema(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutAuditEvents(context.Background(), &PutAuditEventsInput{})
+	_, opErr := svc.PutAuditEvents(context.Background(), &PutAuditEventsInput{
+		AuditEvents: []types.AuditEvent{
+			{
+				Id:                ptr.String("__Id__"),
+				EventData:         ptr.String("__EventData__"),
+				EventDataChecksum: ptr.String("__EventDataChecksum__"),
+			},
+			{
+				Id:                ptr.String("__Id__"),
+				EventData:         ptr.String("__EventData__"),
+				EventDataChecksum: ptr.String("__EventDataChecksum__"),
+			},
+		},
+		ChannelArn: ptr.String("__ChannelArn__"),
+		ExternalId: ptr.String("__ExternalId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -235,7 +295,22 @@ func TestCheckResponseSnapshot_Error_DuplicatedAuditEventId(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutAuditEvents(context.Background(), &PutAuditEventsInput{})
+	_, opErr := svc.PutAuditEvents(context.Background(), &PutAuditEventsInput{
+		AuditEvents: []types.AuditEvent{
+			{
+				Id:                ptr.String("__Id__"),
+				EventData:         ptr.String("__EventData__"),
+				EventDataChecksum: ptr.String("__EventDataChecksum__"),
+			},
+			{
+				Id:                ptr.String("__Id__"),
+				EventData:         ptr.String("__EventData__"),
+				EventDataChecksum: ptr.String("__EventDataChecksum__"),
+			},
+		},
+		ChannelArn: ptr.String("__ChannelArn__"),
+		ExternalId: ptr.String("__ExternalId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -260,7 +335,22 @@ func TestCheckResponseSnapshot_Error_InvalidChannelARN(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutAuditEvents(context.Background(), &PutAuditEventsInput{})
+	_, opErr := svc.PutAuditEvents(context.Background(), &PutAuditEventsInput{
+		AuditEvents: []types.AuditEvent{
+			{
+				Id:                ptr.String("__Id__"),
+				EventData:         ptr.String("__EventData__"),
+				EventDataChecksum: ptr.String("__EventDataChecksum__"),
+			},
+			{
+				Id:                ptr.String("__Id__"),
+				EventData:         ptr.String("__EventData__"),
+				EventDataChecksum: ptr.String("__EventDataChecksum__"),
+			},
+		},
+		ChannelArn: ptr.String("__ChannelArn__"),
+		ExternalId: ptr.String("__ExternalId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -285,7 +375,22 @@ func TestCheckResponseSnapshot_Error_UnsupportedOperationException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutAuditEvents(context.Background(), &PutAuditEventsInput{})
+	_, opErr := svc.PutAuditEvents(context.Background(), &PutAuditEventsInput{
+		AuditEvents: []types.AuditEvent{
+			{
+				Id:                ptr.String("__Id__"),
+				EventData:         ptr.String("__EventData__"),
+				EventDataChecksum: ptr.String("__EventDataChecksum__"),
+			},
+			{
+				Id:                ptr.String("__Id__"),
+				EventData:         ptr.String("__EventData__"),
+				EventDataChecksum: ptr.String("__EventDataChecksum__"),
+			},
+		},
+		ChannelArn: ptr.String("__ChannelArn__"),
+		ExternalId: ptr.String("__ExternalId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

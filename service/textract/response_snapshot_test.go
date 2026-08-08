@@ -252,7 +252,70 @@ func TestCheckResponseSnapshot_AnalyzeDocument(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AnalyzeDocument(context.Background(), &AnalyzeDocumentInput{})
+	got, err := svc.AnalyzeDocument(context.Background(), &AnalyzeDocumentInput{
+		Document: &types.Document{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		FeatureTypes: []types.FeatureType{
+			types.FeatureType("TABLES"),
+			types.FeatureType("TABLES"),
+		},
+		HumanLoopConfig: &types.HumanLoopConfig{
+			HumanLoopName:     ptr.String("__HumanLoopName__"),
+			FlowDefinitionArn: ptr.String("__FlowDefinitionArn__"),
+			DataAttributes: &types.HumanLoopDataAttributes{
+				ContentClassifiers: []types.ContentClassifier{
+					types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+					types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+				},
+			},
+		},
+		QueriesConfig: &types.QueriesConfig{
+			Queries: []types.Query{
+				{
+					Text:  ptr.String("__Text__"),
+					Alias: ptr.String("__Alias__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Text:  ptr.String("__Text__"),
+					Alias: ptr.String("__Alias__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		AdaptersConfig: &types.AdaptersConfig{
+			Adapters: []types.Adapter{
+				{
+					AdapterId: ptr.String("__AdapterId__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Version: ptr.String("__Version__"),
+				},
+				{
+					AdapterId: ptr.String("__AdapterId__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Version: ptr.String("__Version__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2047,7 +2110,16 @@ func TestCheckResponseSnapshot_AnalyzeExpense(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AnalyzeExpense(context.Background(), &AnalyzeExpenseInput{})
+	got, err := svc.AnalyzeExpense(context.Background(), &AnalyzeExpenseInput{
+		Document: &types.Document{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2399,7 +2471,26 @@ func TestCheckResponseSnapshot_AnalyzeID(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AnalyzeID(context.Background(), &AnalyzeIDInput{})
+	got, err := svc.AnalyzeID(context.Background(), &AnalyzeIDInput{
+		DocumentPages: []types.Document{
+			{
+				Bytes: []byte("blob"),
+				S3Object: &types.S3Object{
+					Bucket:  ptr.String("__Bucket__"),
+					Name:    ptr.String("__Name__"),
+					Version: ptr.String("__Version__"),
+				},
+			},
+			{
+				Bytes: []byte("blob"),
+				S3Object: &types.S3Object{
+					Bucket:  ptr.String("__Bucket__"),
+					Name:    ptr.String("__Name__"),
+					Version: ptr.String("__Version__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2420,7 +2511,19 @@ func TestCheckResponseSnapshot_CreateAdapter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAdapter(context.Background(), &CreateAdapterInput{})
+	got, err := svc.CreateAdapter(context.Background(), &CreateAdapterInput{
+		AdapterName:        ptr.String("__AdapterName__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Description:        ptr.String("__Description__"),
+		FeatureTypes: []types.FeatureType{
+			types.FeatureType("TABLES"),
+			types.FeatureType("TABLES"),
+		},
+		AutoUpdate: types.AutoUpdate("ENABLED"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2442,7 +2545,25 @@ func TestCheckResponseSnapshot_CreateAdapterVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAdapterVersion(context.Background(), &CreateAdapterVersionInput{})
+	got, err := svc.CreateAdapterVersion(context.Background(), &CreateAdapterVersionInput{
+		AdapterId:          ptr.String("__AdapterId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		DatasetConfig: &types.AdapterVersionDatasetConfig{
+			ManifestS3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		KMSKeyId: ptr.String("__KMSKeyId__"),
+		OutputConfig: &types.OutputConfig{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Prefix: ptr.String("__S3Prefix__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2461,7 +2582,9 @@ func TestCheckResponseSnapshot_DeleteAdapter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAdapter(context.Background(), &DeleteAdapterInput{})
+	got, err := svc.DeleteAdapter(context.Background(), &DeleteAdapterInput{
+		AdapterId: ptr.String("__AdapterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2480,7 +2603,10 @@ func TestCheckResponseSnapshot_DeleteAdapterVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAdapterVersion(context.Background(), &DeleteAdapterVersionInput{})
+	got, err := svc.DeleteAdapterVersion(context.Background(), &DeleteAdapterVersionInput{
+		AdapterId:      ptr.String("__AdapterId__"),
+		AdapterVersion: ptr.String("__AdapterVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2626,7 +2752,16 @@ func TestCheckResponseSnapshot_DetectDocumentText(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetectDocumentText(context.Background(), &DetectDocumentTextInput{})
+	got, err := svc.DetectDocumentText(context.Background(), &DetectDocumentTextInput{
+		Document: &types.Document{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2658,7 +2793,9 @@ func TestCheckResponseSnapshot_GetAdapter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAdapter(context.Background(), &GetAdapterInput{})
+	got, err := svc.GetAdapter(context.Background(), &GetAdapterInput{
+		AdapterId: ptr.String("__AdapterId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2730,7 +2867,10 @@ func TestCheckResponseSnapshot_GetAdapterVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAdapterVersion(context.Background(), &GetAdapterVersionInput{})
+	got, err := svc.GetAdapterVersion(context.Background(), &GetAdapterVersionInput{
+		AdapterId:      ptr.String("__AdapterId__"),
+		AdapterVersion: ptr.String("__AdapterVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2895,7 +3035,11 @@ func TestCheckResponseSnapshot_GetDocumentAnalysis(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDocumentAnalysis(context.Background(), &GetDocumentAnalysisInput{})
+	got, err := svc.GetDocumentAnalysis(context.Background(), &GetDocumentAnalysisInput{
+		JobId:      ptr.String("__JobId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3060,7 +3204,11 @@ func TestCheckResponseSnapshot_GetDocumentTextDetection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDocumentTextDetection(context.Background(), &GetDocumentTextDetectionInput{})
+	got, err := svc.GetDocumentTextDetection(context.Background(), &GetDocumentTextDetectionInput{
+		JobId:      ptr.String("__JobId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4875,7 +5023,11 @@ func TestCheckResponseSnapshot_GetExpenseAnalysis(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetExpenseAnalysis(context.Background(), &GetExpenseAnalysisInput{})
+	got, err := svc.GetExpenseAnalysis(context.Background(), &GetExpenseAnalysisInput{
+		JobId:      ptr.String("__JobId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -9990,7 +10142,11 @@ func TestCheckResponseSnapshot_GetLendingAnalysis(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLendingAnalysis(context.Background(), &GetLendingAnalysisInput{})
+	got, err := svc.GetLendingAnalysis(context.Background(), &GetLendingAnalysisInput{
+		JobId:      ptr.String("__JobId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10110,7 +10266,9 @@ func TestCheckResponseSnapshot_GetLendingAnalysisSummary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLendingAnalysisSummary(context.Background(), &GetLendingAnalysisSummaryInput{})
+	got, err := svc.GetLendingAnalysisSummary(context.Background(), &GetLendingAnalysisSummaryInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10155,7 +10313,13 @@ func TestCheckResponseSnapshot_ListAdapterVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAdapterVersions(context.Background(), &ListAdapterVersionsInput{})
+	got, err := svc.ListAdapterVersions(context.Background(), &ListAdapterVersionsInput{
+		AdapterId:          ptr.String("__AdapterId__"),
+		AfterCreationTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		BeforeCreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10196,7 +10360,12 @@ func TestCheckResponseSnapshot_ListAdapters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAdapters(context.Background(), &ListAdaptersInput{})
+	got, err := svc.ListAdapters(context.Background(), &ListAdaptersInput{
+		AfterCreationTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		BeforeCreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10219,7 +10388,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10240,7 +10411,70 @@ func TestCheckResponseSnapshot_StartDocumentAnalysis(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartDocumentAnalysis(context.Background(), &StartDocumentAnalysisInput{})
+	got, err := svc.StartDocumentAnalysis(context.Background(), &StartDocumentAnalysisInput{
+		DocumentLocation: &types.DocumentLocation{
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		FeatureTypes: []types.FeatureType{
+			types.FeatureType("TABLES"),
+			types.FeatureType("TABLES"),
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		JobTag:             ptr.String("__JobTag__"),
+		NotificationChannel: &types.NotificationChannel{
+			SNSTopicArn: ptr.String("__SNSTopicArn__"),
+			RoleArn:     ptr.String("__RoleArn__"),
+		},
+		OutputConfig: &types.OutputConfig{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Prefix: ptr.String("__S3Prefix__"),
+		},
+		KMSKeyId: ptr.String("__KMSKeyId__"),
+		QueriesConfig: &types.QueriesConfig{
+			Queries: []types.Query{
+				{
+					Text:  ptr.String("__Text__"),
+					Alias: ptr.String("__Alias__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Text:  ptr.String("__Text__"),
+					Alias: ptr.String("__Alias__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		AdaptersConfig: &types.AdaptersConfig{
+			Adapters: []types.Adapter{
+				{
+					AdapterId: ptr.String("__AdapterId__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Version: ptr.String("__Version__"),
+				},
+				{
+					AdapterId: ptr.String("__AdapterId__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Version: ptr.String("__Version__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10261,7 +10495,26 @@ func TestCheckResponseSnapshot_StartDocumentTextDetection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartDocumentTextDetection(context.Background(), &StartDocumentTextDetectionInput{})
+	got, err := svc.StartDocumentTextDetection(context.Background(), &StartDocumentTextDetectionInput{
+		DocumentLocation: &types.DocumentLocation{
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		JobTag:             ptr.String("__JobTag__"),
+		NotificationChannel: &types.NotificationChannel{
+			SNSTopicArn: ptr.String("__SNSTopicArn__"),
+			RoleArn:     ptr.String("__RoleArn__"),
+		},
+		OutputConfig: &types.OutputConfig{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Prefix: ptr.String("__S3Prefix__"),
+		},
+		KMSKeyId: ptr.String("__KMSKeyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10282,7 +10535,26 @@ func TestCheckResponseSnapshot_StartExpenseAnalysis(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartExpenseAnalysis(context.Background(), &StartExpenseAnalysisInput{})
+	got, err := svc.StartExpenseAnalysis(context.Background(), &StartExpenseAnalysisInput{
+		DocumentLocation: &types.DocumentLocation{
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		JobTag:             ptr.String("__JobTag__"),
+		NotificationChannel: &types.NotificationChannel{
+			SNSTopicArn: ptr.String("__SNSTopicArn__"),
+			RoleArn:     ptr.String("__RoleArn__"),
+		},
+		OutputConfig: &types.OutputConfig{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Prefix: ptr.String("__S3Prefix__"),
+		},
+		KMSKeyId: ptr.String("__KMSKeyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10303,7 +10575,26 @@ func TestCheckResponseSnapshot_StartLendingAnalysis(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartLendingAnalysis(context.Background(), &StartLendingAnalysisInput{})
+	got, err := svc.StartLendingAnalysis(context.Background(), &StartLendingAnalysisInput{
+		DocumentLocation: &types.DocumentLocation{
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		JobTag:             ptr.String("__JobTag__"),
+		NotificationChannel: &types.NotificationChannel{
+			SNSTopicArn: ptr.String("__SNSTopicArn__"),
+			RoleArn:     ptr.String("__RoleArn__"),
+		},
+		OutputConfig: &types.OutputConfig{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Prefix: ptr.String("__S3Prefix__"),
+		},
+		KMSKeyId: ptr.String("__KMSKeyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10322,7 +10613,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10341,7 +10637,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10370,7 +10672,12 @@ func TestCheckResponseSnapshot_UpdateAdapter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAdapter(context.Background(), &UpdateAdapterInput{})
+	got, err := svc.UpdateAdapter(context.Background(), &UpdateAdapterInput{
+		AdapterId:   ptr.String("__AdapterId__"),
+		Description: ptr.String("__Description__"),
+		AdapterName: ptr.String("__AdapterName__"),
+		AutoUpdate:  types.AutoUpdate("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -10382,7 +10689,7 @@ func TestCheckResponseSnapshot_UpdateAdapter(t *testing.T) {
 func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	want := &types.AccessDeniedException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("AccessDeniedException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AccessDeniedException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -10392,7 +10699,70 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AnalyzeDocument(context.Background(), &AnalyzeDocumentInput{})
+	_, opErr := svc.AnalyzeDocument(context.Background(), &AnalyzeDocumentInput{
+		Document: &types.Document{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		FeatureTypes: []types.FeatureType{
+			types.FeatureType("TABLES"),
+			types.FeatureType("TABLES"),
+		},
+		HumanLoopConfig: &types.HumanLoopConfig{
+			HumanLoopName:     ptr.String("__HumanLoopName__"),
+			FlowDefinitionArn: ptr.String("__FlowDefinitionArn__"),
+			DataAttributes: &types.HumanLoopDataAttributes{
+				ContentClassifiers: []types.ContentClassifier{
+					types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+					types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+				},
+			},
+		},
+		QueriesConfig: &types.QueriesConfig{
+			Queries: []types.Query{
+				{
+					Text:  ptr.String("__Text__"),
+					Alias: ptr.String("__Alias__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Text:  ptr.String("__Text__"),
+					Alias: ptr.String("__Alias__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		AdaptersConfig: &types.AdaptersConfig{
+			Adapters: []types.Adapter{
+				{
+					AdapterId: ptr.String("__AdapterId__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Version: ptr.String("__Version__"),
+				},
+				{
+					AdapterId: ptr.String("__AdapterId__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Version: ptr.String("__Version__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -10408,7 +10778,7 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_BadDocumentException(t *testing.T) {
 	want := &types.BadDocumentException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("BadDocumentException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("BadDocumentException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -10418,7 +10788,70 @@ func TestCheckResponseSnapshot_Error_BadDocumentException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AnalyzeDocument(context.Background(), &AnalyzeDocumentInput{})
+	_, opErr := svc.AnalyzeDocument(context.Background(), &AnalyzeDocumentInput{
+		Document: &types.Document{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		FeatureTypes: []types.FeatureType{
+			types.FeatureType("TABLES"),
+			types.FeatureType("TABLES"),
+		},
+		HumanLoopConfig: &types.HumanLoopConfig{
+			HumanLoopName:     ptr.String("__HumanLoopName__"),
+			FlowDefinitionArn: ptr.String("__FlowDefinitionArn__"),
+			DataAttributes: &types.HumanLoopDataAttributes{
+				ContentClassifiers: []types.ContentClassifier{
+					types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+					types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+				},
+			},
+		},
+		QueriesConfig: &types.QueriesConfig{
+			Queries: []types.Query{
+				{
+					Text:  ptr.String("__Text__"),
+					Alias: ptr.String("__Alias__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Text:  ptr.String("__Text__"),
+					Alias: ptr.String("__Alias__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		AdaptersConfig: &types.AdaptersConfig{
+			Adapters: []types.Adapter{
+				{
+					AdapterId: ptr.String("__AdapterId__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Version: ptr.String("__Version__"),
+				},
+				{
+					AdapterId: ptr.String("__AdapterId__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Version: ptr.String("__Version__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -10434,7 +10867,7 @@ func TestCheckResponseSnapshot_Error_BadDocumentException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 	want := &types.ConflictException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("ConflictException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ConflictException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -10444,7 +10877,19 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAdapter(context.Background(), &CreateAdapterInput{})
+	_, opErr := svc.CreateAdapter(context.Background(), &CreateAdapterInput{
+		AdapterName:        ptr.String("__AdapterName__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Description:        ptr.String("__Description__"),
+		FeatureTypes: []types.FeatureType{
+			types.FeatureType("TABLES"),
+			types.FeatureType("TABLES"),
+		},
+		AutoUpdate: types.AutoUpdate("ENABLED"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -10460,7 +10905,7 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_DocumentTooLargeException(t *testing.T) {
 	want := &types.DocumentTooLargeException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("DocumentTooLargeException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("DocumentTooLargeException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -10470,7 +10915,70 @@ func TestCheckResponseSnapshot_Error_DocumentTooLargeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AnalyzeDocument(context.Background(), &AnalyzeDocumentInput{})
+	_, opErr := svc.AnalyzeDocument(context.Background(), &AnalyzeDocumentInput{
+		Document: &types.Document{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		FeatureTypes: []types.FeatureType{
+			types.FeatureType("TABLES"),
+			types.FeatureType("TABLES"),
+		},
+		HumanLoopConfig: &types.HumanLoopConfig{
+			HumanLoopName:     ptr.String("__HumanLoopName__"),
+			FlowDefinitionArn: ptr.String("__FlowDefinitionArn__"),
+			DataAttributes: &types.HumanLoopDataAttributes{
+				ContentClassifiers: []types.ContentClassifier{
+					types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+					types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+				},
+			},
+		},
+		QueriesConfig: &types.QueriesConfig{
+			Queries: []types.Query{
+				{
+					Text:  ptr.String("__Text__"),
+					Alias: ptr.String("__Alias__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Text:  ptr.String("__Text__"),
+					Alias: ptr.String("__Alias__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		AdaptersConfig: &types.AdaptersConfig{
+			Adapters: []types.Adapter{
+				{
+					AdapterId: ptr.String("__AdapterId__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Version: ptr.String("__Version__"),
+				},
+				{
+					AdapterId: ptr.String("__AdapterId__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Version: ptr.String("__Version__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -10489,7 +10997,7 @@ func TestCheckResponseSnapshot_Error_HumanLoopQuotaExceededException(t *testing.
 		QuotaCode:    ptr.String("__QuotaCode__"),
 		ServiceCode:  ptr.String("__ServiceCode__"),
 		Message:      ptr.String("__Message__"),
-		Code:         ptr.String("__Code__"),
+		Code:         ptr.String("HumanLoopQuotaExceededException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("HumanLoopQuotaExceededException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -10499,7 +11007,70 @@ func TestCheckResponseSnapshot_Error_HumanLoopQuotaExceededException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AnalyzeDocument(context.Background(), &AnalyzeDocumentInput{})
+	_, opErr := svc.AnalyzeDocument(context.Background(), &AnalyzeDocumentInput{
+		Document: &types.Document{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		FeatureTypes: []types.FeatureType{
+			types.FeatureType("TABLES"),
+			types.FeatureType("TABLES"),
+		},
+		HumanLoopConfig: &types.HumanLoopConfig{
+			HumanLoopName:     ptr.String("__HumanLoopName__"),
+			FlowDefinitionArn: ptr.String("__FlowDefinitionArn__"),
+			DataAttributes: &types.HumanLoopDataAttributes{
+				ContentClassifiers: []types.ContentClassifier{
+					types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+					types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+				},
+			},
+		},
+		QueriesConfig: &types.QueriesConfig{
+			Queries: []types.Query{
+				{
+					Text:  ptr.String("__Text__"),
+					Alias: ptr.String("__Alias__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Text:  ptr.String("__Text__"),
+					Alias: ptr.String("__Alias__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		AdaptersConfig: &types.AdaptersConfig{
+			Adapters: []types.Adapter{
+				{
+					AdapterId: ptr.String("__AdapterId__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Version: ptr.String("__Version__"),
+				},
+				{
+					AdapterId: ptr.String("__AdapterId__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Version: ptr.String("__Version__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -10515,7 +11086,7 @@ func TestCheckResponseSnapshot_Error_HumanLoopQuotaExceededException(t *testing.
 func TestCheckResponseSnapshot_Error_IdempotentParameterMismatchException(t *testing.T) {
 	want := &types.IdempotentParameterMismatchException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("IdempotentParameterMismatchException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("IdempotentParameterMismatchException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -10525,7 +11096,19 @@ func TestCheckResponseSnapshot_Error_IdempotentParameterMismatchException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAdapter(context.Background(), &CreateAdapterInput{})
+	_, opErr := svc.CreateAdapter(context.Background(), &CreateAdapterInput{
+		AdapterName:        ptr.String("__AdapterName__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Description:        ptr.String("__Description__"),
+		FeatureTypes: []types.FeatureType{
+			types.FeatureType("TABLES"),
+			types.FeatureType("TABLES"),
+		},
+		AutoUpdate: types.AutoUpdate("ENABLED"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -10541,7 +11124,7 @@ func TestCheckResponseSnapshot_Error_IdempotentParameterMismatchException(t *tes
 func TestCheckResponseSnapshot_Error_InternalServerError(t *testing.T) {
 	want := &types.InternalServerError{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("InternalServerError"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InternalServerError.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -10551,7 +11134,70 @@ func TestCheckResponseSnapshot_Error_InternalServerError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AnalyzeDocument(context.Background(), &AnalyzeDocumentInput{})
+	_, opErr := svc.AnalyzeDocument(context.Background(), &AnalyzeDocumentInput{
+		Document: &types.Document{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		FeatureTypes: []types.FeatureType{
+			types.FeatureType("TABLES"),
+			types.FeatureType("TABLES"),
+		},
+		HumanLoopConfig: &types.HumanLoopConfig{
+			HumanLoopName:     ptr.String("__HumanLoopName__"),
+			FlowDefinitionArn: ptr.String("__FlowDefinitionArn__"),
+			DataAttributes: &types.HumanLoopDataAttributes{
+				ContentClassifiers: []types.ContentClassifier{
+					types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+					types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+				},
+			},
+		},
+		QueriesConfig: &types.QueriesConfig{
+			Queries: []types.Query{
+				{
+					Text:  ptr.String("__Text__"),
+					Alias: ptr.String("__Alias__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Text:  ptr.String("__Text__"),
+					Alias: ptr.String("__Alias__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		AdaptersConfig: &types.AdaptersConfig{
+			Adapters: []types.Adapter{
+				{
+					AdapterId: ptr.String("__AdapterId__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Version: ptr.String("__Version__"),
+				},
+				{
+					AdapterId: ptr.String("__AdapterId__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Version: ptr.String("__Version__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -10567,7 +11213,7 @@ func TestCheckResponseSnapshot_Error_InternalServerError(t *testing.T) {
 func TestCheckResponseSnapshot_Error_InvalidJobIdException(t *testing.T) {
 	want := &types.InvalidJobIdException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("InvalidJobIdException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InvalidJobIdException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -10577,7 +11223,11 @@ func TestCheckResponseSnapshot_Error_InvalidJobIdException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetDocumentAnalysis(context.Background(), &GetDocumentAnalysisInput{})
+	_, opErr := svc.GetDocumentAnalysis(context.Background(), &GetDocumentAnalysisInput{
+		JobId:      ptr.String("__JobId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -10593,7 +11243,7 @@ func TestCheckResponseSnapshot_Error_InvalidJobIdException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_InvalidKMSKeyException(t *testing.T) {
 	want := &types.InvalidKMSKeyException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("InvalidKMSKeyException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InvalidKMSKeyException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -10603,7 +11253,25 @@ func TestCheckResponseSnapshot_Error_InvalidKMSKeyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAdapterVersion(context.Background(), &CreateAdapterVersionInput{})
+	_, opErr := svc.CreateAdapterVersion(context.Background(), &CreateAdapterVersionInput{
+		AdapterId:          ptr.String("__AdapterId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		DatasetConfig: &types.AdapterVersionDatasetConfig{
+			ManifestS3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		KMSKeyId: ptr.String("__KMSKeyId__"),
+		OutputConfig: &types.OutputConfig{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Prefix: ptr.String("__S3Prefix__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -10619,7 +11287,7 @@ func TestCheckResponseSnapshot_Error_InvalidKMSKeyException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 	want := &types.InvalidParameterException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("InvalidParameterException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InvalidParameterException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -10629,7 +11297,70 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AnalyzeDocument(context.Background(), &AnalyzeDocumentInput{})
+	_, opErr := svc.AnalyzeDocument(context.Background(), &AnalyzeDocumentInput{
+		Document: &types.Document{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		FeatureTypes: []types.FeatureType{
+			types.FeatureType("TABLES"),
+			types.FeatureType("TABLES"),
+		},
+		HumanLoopConfig: &types.HumanLoopConfig{
+			HumanLoopName:     ptr.String("__HumanLoopName__"),
+			FlowDefinitionArn: ptr.String("__FlowDefinitionArn__"),
+			DataAttributes: &types.HumanLoopDataAttributes{
+				ContentClassifiers: []types.ContentClassifier{
+					types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+					types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+				},
+			},
+		},
+		QueriesConfig: &types.QueriesConfig{
+			Queries: []types.Query{
+				{
+					Text:  ptr.String("__Text__"),
+					Alias: ptr.String("__Alias__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Text:  ptr.String("__Text__"),
+					Alias: ptr.String("__Alias__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		AdaptersConfig: &types.AdaptersConfig{
+			Adapters: []types.Adapter{
+				{
+					AdapterId: ptr.String("__AdapterId__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Version: ptr.String("__Version__"),
+				},
+				{
+					AdapterId: ptr.String("__AdapterId__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Version: ptr.String("__Version__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -10645,7 +11376,7 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_InvalidS3ObjectException(t *testing.T) {
 	want := &types.InvalidS3ObjectException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("InvalidS3ObjectException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InvalidS3ObjectException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -10655,7 +11386,70 @@ func TestCheckResponseSnapshot_Error_InvalidS3ObjectException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AnalyzeDocument(context.Background(), &AnalyzeDocumentInput{})
+	_, opErr := svc.AnalyzeDocument(context.Background(), &AnalyzeDocumentInput{
+		Document: &types.Document{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		FeatureTypes: []types.FeatureType{
+			types.FeatureType("TABLES"),
+			types.FeatureType("TABLES"),
+		},
+		HumanLoopConfig: &types.HumanLoopConfig{
+			HumanLoopName:     ptr.String("__HumanLoopName__"),
+			FlowDefinitionArn: ptr.String("__FlowDefinitionArn__"),
+			DataAttributes: &types.HumanLoopDataAttributes{
+				ContentClassifiers: []types.ContentClassifier{
+					types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+					types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+				},
+			},
+		},
+		QueriesConfig: &types.QueriesConfig{
+			Queries: []types.Query{
+				{
+					Text:  ptr.String("__Text__"),
+					Alias: ptr.String("__Alias__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Text:  ptr.String("__Text__"),
+					Alias: ptr.String("__Alias__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		AdaptersConfig: &types.AdaptersConfig{
+			Adapters: []types.Adapter{
+				{
+					AdapterId: ptr.String("__AdapterId__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Version: ptr.String("__Version__"),
+				},
+				{
+					AdapterId: ptr.String("__AdapterId__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Version: ptr.String("__Version__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -10671,7 +11465,7 @@ func TestCheckResponseSnapshot_Error_InvalidS3ObjectException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 	want := &types.LimitExceededException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("LimitExceededException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("LimitExceededException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -10681,7 +11475,19 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAdapter(context.Background(), &CreateAdapterInput{})
+	_, opErr := svc.CreateAdapter(context.Background(), &CreateAdapterInput{
+		AdapterName:        ptr.String("__AdapterName__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Description:        ptr.String("__Description__"),
+		FeatureTypes: []types.FeatureType{
+			types.FeatureType("TABLES"),
+			types.FeatureType("TABLES"),
+		},
+		AutoUpdate: types.AutoUpdate("ENABLED"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -10697,7 +11503,7 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ProvisionedThroughputExceededException(t *testing.T) {
 	want := &types.ProvisionedThroughputExceededException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("ProvisionedThroughputExceededException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ProvisionedThroughputExceededException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -10707,7 +11513,70 @@ func TestCheckResponseSnapshot_Error_ProvisionedThroughputExceededException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AnalyzeDocument(context.Background(), &AnalyzeDocumentInput{})
+	_, opErr := svc.AnalyzeDocument(context.Background(), &AnalyzeDocumentInput{
+		Document: &types.Document{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		FeatureTypes: []types.FeatureType{
+			types.FeatureType("TABLES"),
+			types.FeatureType("TABLES"),
+		},
+		HumanLoopConfig: &types.HumanLoopConfig{
+			HumanLoopName:     ptr.String("__HumanLoopName__"),
+			FlowDefinitionArn: ptr.String("__FlowDefinitionArn__"),
+			DataAttributes: &types.HumanLoopDataAttributes{
+				ContentClassifiers: []types.ContentClassifier{
+					types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+					types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+				},
+			},
+		},
+		QueriesConfig: &types.QueriesConfig{
+			Queries: []types.Query{
+				{
+					Text:  ptr.String("__Text__"),
+					Alias: ptr.String("__Alias__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Text:  ptr.String("__Text__"),
+					Alias: ptr.String("__Alias__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		AdaptersConfig: &types.AdaptersConfig{
+			Adapters: []types.Adapter{
+				{
+					AdapterId: ptr.String("__AdapterId__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Version: ptr.String("__Version__"),
+				},
+				{
+					AdapterId: ptr.String("__AdapterId__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Version: ptr.String("__Version__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -10723,7 +11592,7 @@ func TestCheckResponseSnapshot_Error_ProvisionedThroughputExceededException(t *t
 func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 	want := &types.ResourceNotFoundException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("ResourceNotFoundException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ResourceNotFoundException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -10733,7 +11602,25 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAdapterVersion(context.Background(), &CreateAdapterVersionInput{})
+	_, opErr := svc.CreateAdapterVersion(context.Background(), &CreateAdapterVersionInput{
+		AdapterId:          ptr.String("__AdapterId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		DatasetConfig: &types.AdapterVersionDatasetConfig{
+			ManifestS3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		KMSKeyId: ptr.String("__KMSKeyId__"),
+		OutputConfig: &types.OutputConfig{
+			S3Bucket: ptr.String("__S3Bucket__"),
+			S3Prefix: ptr.String("__S3Prefix__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -10749,7 +11636,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T) {
 	want := &types.ServiceQuotaExceededException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("ServiceQuotaExceededException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ServiceQuotaExceededException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -10759,7 +11646,19 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAdapter(context.Background(), &CreateAdapterInput{})
+	_, opErr := svc.CreateAdapter(context.Background(), &CreateAdapterInput{
+		AdapterName:        ptr.String("__AdapterName__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Description:        ptr.String("__Description__"),
+		FeatureTypes: []types.FeatureType{
+			types.FeatureType("TABLES"),
+			types.FeatureType("TABLES"),
+		},
+		AutoUpdate: types.AutoUpdate("ENABLED"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -10775,7 +11674,7 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 	want := &types.ThrottlingException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("ThrottlingException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ThrottlingException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -10785,7 +11684,70 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AnalyzeDocument(context.Background(), &AnalyzeDocumentInput{})
+	_, opErr := svc.AnalyzeDocument(context.Background(), &AnalyzeDocumentInput{
+		Document: &types.Document{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		FeatureTypes: []types.FeatureType{
+			types.FeatureType("TABLES"),
+			types.FeatureType("TABLES"),
+		},
+		HumanLoopConfig: &types.HumanLoopConfig{
+			HumanLoopName:     ptr.String("__HumanLoopName__"),
+			FlowDefinitionArn: ptr.String("__FlowDefinitionArn__"),
+			DataAttributes: &types.HumanLoopDataAttributes{
+				ContentClassifiers: []types.ContentClassifier{
+					types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+					types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+				},
+			},
+		},
+		QueriesConfig: &types.QueriesConfig{
+			Queries: []types.Query{
+				{
+					Text:  ptr.String("__Text__"),
+					Alias: ptr.String("__Alias__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Text:  ptr.String("__Text__"),
+					Alias: ptr.String("__Alias__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		AdaptersConfig: &types.AdaptersConfig{
+			Adapters: []types.Adapter{
+				{
+					AdapterId: ptr.String("__AdapterId__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Version: ptr.String("__Version__"),
+				},
+				{
+					AdapterId: ptr.String("__AdapterId__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Version: ptr.String("__Version__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -10801,7 +11763,7 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_UnsupportedDocumentException(t *testing.T) {
 	want := &types.UnsupportedDocumentException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("UnsupportedDocumentException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UnsupportedDocumentException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -10811,7 +11773,70 @@ func TestCheckResponseSnapshot_Error_UnsupportedDocumentException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AnalyzeDocument(context.Background(), &AnalyzeDocumentInput{})
+	_, opErr := svc.AnalyzeDocument(context.Background(), &AnalyzeDocumentInput{
+		Document: &types.Document{
+			Bytes: []byte("blob"),
+			S3Object: &types.S3Object{
+				Bucket:  ptr.String("__Bucket__"),
+				Name:    ptr.String("__Name__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		FeatureTypes: []types.FeatureType{
+			types.FeatureType("TABLES"),
+			types.FeatureType("TABLES"),
+		},
+		HumanLoopConfig: &types.HumanLoopConfig{
+			HumanLoopName:     ptr.String("__HumanLoopName__"),
+			FlowDefinitionArn: ptr.String("__FlowDefinitionArn__"),
+			DataAttributes: &types.HumanLoopDataAttributes{
+				ContentClassifiers: []types.ContentClassifier{
+					types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+					types.ContentClassifier("FreeOfPersonallyIdentifiableInformation"),
+				},
+			},
+		},
+		QueriesConfig: &types.QueriesConfig{
+			Queries: []types.Query{
+				{
+					Text:  ptr.String("__Text__"),
+					Alias: ptr.String("__Alias__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Text:  ptr.String("__Text__"),
+					Alias: ptr.String("__Alias__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		AdaptersConfig: &types.AdaptersConfig{
+			Adapters: []types.Adapter{
+				{
+					AdapterId: ptr.String("__AdapterId__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Version: ptr.String("__Version__"),
+				},
+				{
+					AdapterId: ptr.String("__AdapterId__"),
+					Pages: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Version: ptr.String("__Version__"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -10827,7 +11852,7 @@ func TestCheckResponseSnapshot_Error_UnsupportedDocumentException(t *testing.T) 
 func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 	want := &types.ValidationException{
 		Message: ptr.String("__Message__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("ValidationException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ValidationException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -10837,7 +11862,19 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAdapter(context.Background(), &CreateAdapterInput{})
+	_, opErr := svc.CreateAdapter(context.Background(), &CreateAdapterInput{
+		AdapterName:        ptr.String("__AdapterName__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Description:        ptr.String("__Description__"),
+		FeatureTypes: []types.FeatureType{
+			types.FeatureType("TABLES"),
+			types.FeatureType("TABLES"),
+		},
+		AutoUpdate: types.AutoUpdate("ENABLED"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

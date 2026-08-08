@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","scanConfigurations":[{"ownerId":"__OwnerId__","scanConfigurationArn":"__ScanConfigurationArn__","scanName":"__ScanName__","schedule":{"oneTime":{}},"securityLevel":"LEVEL_1","tags":{"key0":"__Value__"},"targets":{"accountIds":["__Member__","__Member__"],"targetResourceTags":{"key0":["__Member__","__Member__"]}}},{"ownerId":"__OwnerId__","scanConfigurationArn":"__ScanConfigurationArn__","scanName":"__ScanName__","schedule":{"oneTime":{}},"securityLevel":"LEVEL_1","tags":{"key0":"__Value__"},"targets":{"accountIds":["__Member__","__Member__"],"targetResourceTags":{"key0":["__Member__","__Member__"]}}}]}

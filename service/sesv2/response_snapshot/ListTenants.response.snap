@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","Tenants":[{"CreatedTimestamp":946684800,"TenantArn":"__TenantArn__","TenantId":"__TenantId__","TenantName":"__TenantName__"},{"CreatedTimestamp":946684800,"TenantArn":"__TenantArn__","TenantId":"__TenantId__","TenantName":"__TenantName__"}]}

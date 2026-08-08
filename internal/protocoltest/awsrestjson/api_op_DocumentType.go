@@ -43,7 +43,9 @@ func (v *DocumentTypeInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DocumentTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	s.WriteDocument(schemas.DocumentTypeInputOutput_documentValue, &smithydocument.Opaque{Value: v.DocumentValue})
+	if v.DocumentValue != nil {
+		s.WriteDocument(schemas.DocumentTypeInputOutput_documentValue, &smithydocument.Opaque{Value: v.DocumentValue})
+	}
 	if v.StringValue != nil {
 		s.WriteString(schemas.DocumentTypeInputOutput_stringValue, *v.StringValue)
 	}
@@ -86,7 +88,9 @@ func (v *DocumentTypeOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DocumentTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	s.WriteDocument(schemas.DocumentTypeInputOutput_documentValue, &smithydocument.Opaque{Value: v.DocumentValue})
+	if v.DocumentValue != nil {
+		s.WriteDocument(schemas.DocumentTypeInputOutput_documentValue, &smithydocument.Opaque{Value: v.DocumentValue})
+	}
 	if v.StringValue != nil {
 		s.WriteString(schemas.DocumentTypeInputOutput_stringValue, *v.StringValue)
 	}

@@ -137,7 +137,25 @@ func TestCheckResponseSnapshot_CreateLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLink(context.Background(), &CreateLinkInput{})
+	got, err := svc.CreateLink(context.Background(), &CreateLinkInput{
+		LabelTemplate: ptr.String("__LabelTemplate__"),
+		ResourceTypes: []types.ResourceType{
+			types.ResourceType("AWS::CloudWatch::Metric"),
+			types.ResourceType("AWS::CloudWatch::Metric"),
+		},
+		SinkIdentifier: ptr.String("__SinkIdentifier__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LinkConfiguration: &types.LinkConfiguration{
+			LogGroupConfiguration: &types.LogGroupConfiguration{
+				Filter: ptr.String("__Filter__"),
+			},
+			MetricConfiguration: &types.MetricConfiguration{
+				Filter: ptr.String("__Filter__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -163,7 +181,12 @@ func TestCheckResponseSnapshot_CreateSink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSink(context.Background(), &CreateSinkInput{})
+	got, err := svc.CreateSink(context.Background(), &CreateSinkInput{
+		Name: ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -182,7 +205,9 @@ func TestCheckResponseSnapshot_DeleteLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLink(context.Background(), &DeleteLinkInput{})
+	got, err := svc.DeleteLink(context.Background(), &DeleteLinkInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -201,7 +226,9 @@ func TestCheckResponseSnapshot_DeleteSink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSink(context.Background(), &DeleteSinkInput{})
+	got, err := svc.DeleteSink(context.Background(), &DeleteSinkInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -241,7 +268,10 @@ func TestCheckResponseSnapshot_GetLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLink(context.Background(), &GetLinkInput{})
+	got, err := svc.GetLink(context.Background(), &GetLinkInput{
+		Identifier:  ptr.String("__Identifier__"),
+		IncludeTags: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -267,7 +297,10 @@ func TestCheckResponseSnapshot_GetSink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSink(context.Background(), &GetSinkInput{})
+	got, err := svc.GetSink(context.Background(), &GetSinkInput{
+		Identifier:  ptr.String("__Identifier__"),
+		IncludeTags: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -290,7 +323,9 @@ func TestCheckResponseSnapshot_GetSinkPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSinkPolicy(context.Background(), &GetSinkPolicyInput{})
+	got, err := svc.GetSinkPolicy(context.Background(), &GetSinkPolicyInput{
+		SinkIdentifier: ptr.String("__SinkIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -329,7 +364,11 @@ func TestCheckResponseSnapshot_ListAttachedLinks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAttachedLinks(context.Background(), &ListAttachedLinksInput{})
+	got, err := svc.ListAttachedLinks(context.Background(), &ListAttachedLinksInput{
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+		SinkIdentifier: ptr.String("__SinkIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -372,7 +411,10 @@ func TestCheckResponseSnapshot_ListLinks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLinks(context.Background(), &ListLinksInput{})
+	got, err := svc.ListLinks(context.Background(), &ListLinksInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -405,7 +447,10 @@ func TestCheckResponseSnapshot_ListSinks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSinks(context.Background(), &ListSinksInput{})
+	got, err := svc.ListSinks(context.Background(), &ListSinksInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -428,7 +473,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -451,7 +498,10 @@ func TestCheckResponseSnapshot_PutSinkPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutSinkPolicy(context.Background(), &PutSinkPolicyInput{})
+	got, err := svc.PutSinkPolicy(context.Background(), &PutSinkPolicyInput{
+		SinkIdentifier: ptr.String("__SinkIdentifier__"),
+		Policy:         ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -470,7 +520,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -489,7 +544,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -529,7 +590,22 @@ func TestCheckResponseSnapshot_UpdateLink(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLink(context.Background(), &UpdateLinkInput{})
+	got, err := svc.UpdateLink(context.Background(), &UpdateLinkInput{
+		Identifier: ptr.String("__Identifier__"),
+		ResourceTypes: []types.ResourceType{
+			types.ResourceType("AWS::CloudWatch::Metric"),
+			types.ResourceType("AWS::CloudWatch::Metric"),
+		},
+		LinkConfiguration: &types.LinkConfiguration{
+			LogGroupConfiguration: &types.LogGroupConfiguration{
+				Filter: ptr.String("__Filter__"),
+			},
+			MetricConfiguration: &types.MetricConfiguration{
+				Filter: ptr.String("__Filter__"),
+			},
+		},
+		IncludeTags: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -541,7 +617,7 @@ func TestCheckResponseSnapshot_UpdateLink(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 	want := &types.ConflictException{
 		Message:       ptr.String("__Message__"),
-		AmznErrorType: ptr.String("__AmznErrorType__"),
+		AmznErrorType: ptr.String("ConflictException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ConflictException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -551,7 +627,25 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLink(context.Background(), &CreateLinkInput{})
+	_, opErr := svc.CreateLink(context.Background(), &CreateLinkInput{
+		LabelTemplate: ptr.String("__LabelTemplate__"),
+		ResourceTypes: []types.ResourceType{
+			types.ResourceType("AWS::CloudWatch::Metric"),
+			types.ResourceType("AWS::CloudWatch::Metric"),
+		},
+		SinkIdentifier: ptr.String("__SinkIdentifier__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LinkConfiguration: &types.LinkConfiguration{
+			LogGroupConfiguration: &types.LogGroupConfiguration{
+				Filter: ptr.String("__Filter__"),
+			},
+			MetricConfiguration: &types.MetricConfiguration{
+				Filter: ptr.String("__Filter__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -567,7 +661,7 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_InternalServiceFault(t *testing.T) {
 	want := &types.InternalServiceFault{
 		Message:       ptr.String("__Message__"),
-		AmznErrorType: ptr.String("__AmznErrorType__"),
+		AmznErrorType: ptr.String("InternalServiceFault"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InternalServiceFault.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -577,7 +671,25 @@ func TestCheckResponseSnapshot_Error_InternalServiceFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLink(context.Background(), &CreateLinkInput{})
+	_, opErr := svc.CreateLink(context.Background(), &CreateLinkInput{
+		LabelTemplate: ptr.String("__LabelTemplate__"),
+		ResourceTypes: []types.ResourceType{
+			types.ResourceType("AWS::CloudWatch::Metric"),
+			types.ResourceType("AWS::CloudWatch::Metric"),
+		},
+		SinkIdentifier: ptr.String("__SinkIdentifier__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LinkConfiguration: &types.LinkConfiguration{
+			LogGroupConfiguration: &types.LogGroupConfiguration{
+				Filter: ptr.String("__Filter__"),
+			},
+			MetricConfiguration: &types.MetricConfiguration{
+				Filter: ptr.String("__Filter__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -593,7 +705,7 @@ func TestCheckResponseSnapshot_Error_InternalServiceFault(t *testing.T) {
 func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 	want := &types.InvalidParameterException{
 		Message:       ptr.String("__Message__"),
-		AmznErrorType: ptr.String("__AmznErrorType__"),
+		AmznErrorType: ptr.String("InvalidParameterException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InvalidParameterException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -603,7 +715,25 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLink(context.Background(), &CreateLinkInput{})
+	_, opErr := svc.CreateLink(context.Background(), &CreateLinkInput{
+		LabelTemplate: ptr.String("__LabelTemplate__"),
+		ResourceTypes: []types.ResourceType{
+			types.ResourceType("AWS::CloudWatch::Metric"),
+			types.ResourceType("AWS::CloudWatch::Metric"),
+		},
+		SinkIdentifier: ptr.String("__SinkIdentifier__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LinkConfiguration: &types.LinkConfiguration{
+			LogGroupConfiguration: &types.LogGroupConfiguration{
+				Filter: ptr.String("__Filter__"),
+			},
+			MetricConfiguration: &types.MetricConfiguration{
+				Filter: ptr.String("__Filter__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -619,7 +749,7 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_MissingRequiredParameterException(t *testing.T) {
 	want := &types.MissingRequiredParameterException{
 		Message:       ptr.String("__Message__"),
-		AmznErrorType: ptr.String("__AmznErrorType__"),
+		AmznErrorType: ptr.String("MissingRequiredParameterException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("MissingRequiredParameterException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -629,7 +759,25 @@ func TestCheckResponseSnapshot_Error_MissingRequiredParameterException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLink(context.Background(), &CreateLinkInput{})
+	_, opErr := svc.CreateLink(context.Background(), &CreateLinkInput{
+		LabelTemplate: ptr.String("__LabelTemplate__"),
+		ResourceTypes: []types.ResourceType{
+			types.ResourceType("AWS::CloudWatch::Metric"),
+			types.ResourceType("AWS::CloudWatch::Metric"),
+		},
+		SinkIdentifier: ptr.String("__SinkIdentifier__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LinkConfiguration: &types.LinkConfiguration{
+			LogGroupConfiguration: &types.LogGroupConfiguration{
+				Filter: ptr.String("__Filter__"),
+			},
+			MetricConfiguration: &types.MetricConfiguration{
+				Filter: ptr.String("__Filter__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -645,7 +793,7 @@ func TestCheckResponseSnapshot_Error_MissingRequiredParameterException(t *testin
 func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 	want := &types.ResourceNotFoundException{
 		Message:       ptr.String("__Message__"),
-		AmznErrorType: ptr.String("__AmznErrorType__"),
+		AmznErrorType: ptr.String("ResourceNotFoundException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ResourceNotFoundException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -655,7 +803,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteLink(context.Background(), &DeleteLinkInput{})
+	_, opErr := svc.DeleteLink(context.Background(), &DeleteLinkInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -671,7 +821,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T) {
 	want := &types.ServiceQuotaExceededException{
 		Message:       ptr.String("__Message__"),
-		AmznErrorType: ptr.String("__AmznErrorType__"),
+		AmznErrorType: ptr.String("ServiceQuotaExceededException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ServiceQuotaExceededException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -681,7 +831,25 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLink(context.Background(), &CreateLinkInput{})
+	_, opErr := svc.CreateLink(context.Background(), &CreateLinkInput{
+		LabelTemplate: ptr.String("__LabelTemplate__"),
+		ResourceTypes: []types.ResourceType{
+			types.ResourceType("AWS::CloudWatch::Metric"),
+			types.ResourceType("AWS::CloudWatch::Metric"),
+		},
+		SinkIdentifier: ptr.String("__SinkIdentifier__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LinkConfiguration: &types.LinkConfiguration{
+			LogGroupConfiguration: &types.LogGroupConfiguration{
+				Filter: ptr.String("__Filter__"),
+			},
+			MetricConfiguration: &types.MetricConfiguration{
+				Filter: ptr.String("__Filter__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -706,7 +874,12 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -731,7 +904,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

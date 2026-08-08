@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: SWBExternalService.PutApplicationAuthenticationMethod
 
-{"ApplicationArn":"__ApplicationArn__","AuthenticationMethod":{"Iam":{}},"AuthenticationMethodType":"IAM"}
+{"ApplicationArn":"__ApplicationArn__","AuthenticationMethod":{"Iam":{"ActorPolicy":"__Document__"}},"AuthenticationMethodType":"IAM"}

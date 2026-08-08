@@ -137,7 +137,24 @@ func TestCheckResponseSnapshot_CopyImageSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CopyImageSet(context.Background(), &CopyImageSetInput{})
+	got, err := svc.CopyImageSet(context.Background(), &CopyImageSetInput{
+		DatastoreId:      ptr.String("__DatastoreId__"),
+		SourceImageSetId: ptr.String("__SourceImageSetId__"),
+		CopyImageSetInformation: &types.CopyImageSetInformation{
+			SourceImageSet: &types.CopySourceImageSetInformation{
+				LatestVersionId: ptr.String("__LatestVersionId__"),
+				DICOMCopies: &types.MetadataCopies{
+					CopiableAttributes: ptr.String("__CopiableAttributes__"),
+				},
+			},
+			DestinationImageSet: &types.CopyDestinationImageSet{
+				ImageSetId:      ptr.String("__ImageSetId__"),
+				LatestVersionId: ptr.String("__LatestVersionId__"),
+			},
+		},
+		Force:            ptr.Bool(true),
+		PromoteToPrimary: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -159,7 +176,16 @@ func TestCheckResponseSnapshot_CreateDatastore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDatastore(context.Background(), &CreateDatastoreInput{})
+	got, err := svc.CreateDatastore(context.Background(), &CreateDatastoreInput{
+		DatastoreName: ptr.String("__DatastoreName__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		KmsKeyArn:             ptr.String("__KmsKeyArn__"),
+		LambdaAuthorizerArn:   ptr.String("__LambdaAuthorizerArn__"),
+		LosslessStorageFormat: types.LosslessStorageFormat("HTJ2K"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -181,7 +207,9 @@ func TestCheckResponseSnapshot_DeleteDatastore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDatastore(context.Background(), &DeleteDatastoreInput{})
+	got, err := svc.DeleteDatastore(context.Background(), &DeleteDatastoreInput{
+		DatastoreId: ptr.String("__DatastoreId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -205,7 +233,10 @@ func TestCheckResponseSnapshot_DeleteImageSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteImageSet(context.Background(), &DeleteImageSetInput{})
+	got, err := svc.DeleteImageSet(context.Background(), &DeleteImageSetInput{
+		DatastoreId: ptr.String("__DatastoreId__"),
+		ImageSetId:  ptr.String("__ImageSetId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -253,7 +284,10 @@ func TestCheckResponseSnapshot_GetDICOMImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDICOMImportJob(context.Background(), &GetDICOMImportJobInput{})
+	got, err := svc.GetDICOMImportJob(context.Background(), &GetDICOMImportJobInput{
+		DatastoreId: ptr.String("__DatastoreId__"),
+		JobId:       ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -284,7 +318,9 @@ func TestCheckResponseSnapshot_GetDatastore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDatastore(context.Background(), &GetDatastoreInput{})
+	got, err := svc.GetDatastore(context.Background(), &GetDatastoreInput{
+		DatastoreId: ptr.String("__DatastoreId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -295,7 +331,8 @@ func TestCheckResponseSnapshot_GetDatastore(t *testing.T) {
 
 func TestCheckResponseSnapshot_GetImageFrame(t *testing.T) {
 	want := &GetImageFrameOutput{
-		ContentType: ptr.String("__ContentType__"),
+		ImageFrameBlob: io.NopCloser(bytes.NewReader([]byte("__ImageFrameBlob__"))),
+		ContentType:    ptr.String("__ContentType__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetImageFrame.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -305,7 +342,13 @@ func TestCheckResponseSnapshot_GetImageFrame(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetImageFrame(context.Background(), &GetImageFrameInput{})
+	got, err := svc.GetImageFrame(context.Background(), &GetImageFrameInput{
+		DatastoreId: ptr.String("__DatastoreId__"),
+		ImageSetId:  ptr.String("__ImageSetId__"),
+		ImageFrameInformation: &types.ImageFrameInformation{
+			ImageFrameId: ptr.String("__ImageFrameId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -341,7 +384,11 @@ func TestCheckResponseSnapshot_GetImageSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetImageSet(context.Background(), &GetImageSetInput{})
+	got, err := svc.GetImageSet(context.Background(), &GetImageSetInput{
+		DatastoreId: ptr.String("__DatastoreId__"),
+		ImageSetId:  ptr.String("__ImageSetId__"),
+		VersionId:   ptr.String("__VersionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -352,8 +399,9 @@ func TestCheckResponseSnapshot_GetImageSet(t *testing.T) {
 
 func TestCheckResponseSnapshot_GetImageSetMetadata(t *testing.T) {
 	want := &GetImageSetMetadataOutput{
-		ContentType:     ptr.String("__ContentType__"),
-		ContentEncoding: ptr.String("__ContentEncoding__"),
+		ImageSetMetadataBlob: io.NopCloser(bytes.NewReader([]byte("__ImageSetMetadataBlob__"))),
+		ContentType:          ptr.String("__ContentType__"),
+		ContentEncoding:      ptr.String("__ContentEncoding__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetImageSetMetadata.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -363,7 +411,11 @@ func TestCheckResponseSnapshot_GetImageSetMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetImageSetMetadata(context.Background(), &GetImageSetMetadataInput{})
+	got, err := svc.GetImageSetMetadata(context.Background(), &GetImageSetMetadataInput{
+		DatastoreId: ptr.String("__DatastoreId__"),
+		ImageSetId:  ptr.String("__ImageSetId__"),
+		VersionId:   ptr.String("__VersionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -406,7 +458,12 @@ func TestCheckResponseSnapshot_ListDICOMImportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDICOMImportJobs(context.Background(), &ListDICOMImportJobsInput{})
+	got, err := svc.ListDICOMImportJobs(context.Background(), &ListDICOMImportJobsInput{
+		DatastoreId: ptr.String("__DatastoreId__"),
+		JobStatus:   types.JobStatus("SUBMITTED"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -445,7 +502,11 @@ func TestCheckResponseSnapshot_ListDatastores(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDatastores(context.Background(), &ListDatastoresInput{})
+	got, err := svc.ListDatastores(context.Background(), &ListDatastoresInput{
+		DatastoreStatus: types.DatastoreStatus("CREATING"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -496,7 +557,12 @@ func TestCheckResponseSnapshot_ListImageSetVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListImageSetVersions(context.Background(), &ListImageSetVersionsInput{})
+	got, err := svc.ListImageSetVersions(context.Background(), &ListImageSetVersionsInput{
+		DatastoreId: ptr.String("__DatastoreId__"),
+		ImageSetId:  ptr.String("__ImageSetId__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -519,7 +585,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -600,7 +668,41 @@ func TestCheckResponseSnapshot_SearchImageSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchImageSets(context.Background(), &SearchImageSetsInput{})
+	got, err := svc.SearchImageSets(context.Background(), &SearchImageSetsInput{
+		DatastoreId: ptr.String("__DatastoreId__"),
+		SearchCriteria: &types.SearchCriteria{
+			Filters: []types.SearchFilter{
+				{
+					Values: []types.SearchByAttributeValue{
+						&types.SearchByAttributeValueMemberDICOMPatientId{
+							Value: "__SearchByAttributeValueMemberDICOMPatientId__",
+						},
+						&types.SearchByAttributeValueMemberDICOMPatientId{
+							Value: "__SearchByAttributeValueMemberDICOMPatientId__",
+						},
+					},
+					Operator: types.Operator("EQUAL"),
+				},
+				{
+					Values: []types.SearchByAttributeValue{
+						&types.SearchByAttributeValueMemberDICOMPatientId{
+							Value: "__SearchByAttributeValueMemberDICOMPatientId__",
+						},
+						&types.SearchByAttributeValueMemberDICOMPatientId{
+							Value: "__SearchByAttributeValueMemberDICOMPatientId__",
+						},
+					},
+					Operator: types.Operator("EQUAL"),
+				},
+			},
+			Sort: &types.Sort{
+				SortOrder: types.SortOrder("ASC"),
+				SortField: types.SortField("updatedAt"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -624,7 +726,31 @@ func TestCheckResponseSnapshot_StartDICOMImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartDICOMImportJob(context.Background(), &StartDICOMImportJobInput{})
+	got, err := svc.StartDICOMImportJob(context.Background(), &StartDICOMImportJobInput{
+		JobName:             ptr.String("__JobName__"),
+		DataAccessRoleArn:   ptr.String("__DataAccessRoleArn__"),
+		ClientToken:         ptr.String("__ClientToken__"),
+		DatastoreId:         ptr.String("__DatastoreId__"),
+		InputS3Uri:          ptr.String("__InputS3Uri__"),
+		OutputS3Uri:         ptr.String("__OutputS3Uri__"),
+		InputOwnerAccountId: ptr.String("__InputOwnerAccountId__"),
+		ImportConfiguration: &types.ImportConfigurationMemberDicomJsonMetadataImportConfiguration{
+			Value: types.DicomJsonMetadataImportConfiguration{
+				DicomMetadataMappings: []types.DicomMetadataMapping{
+					{
+						StudyInstanceUID:  ptr.String("__StudyInstanceUID__"),
+						SeriesInstanceUID: ptr.String("__SeriesInstanceUID__"),
+						MetadataFilePath:  ptr.String("__MetadataFilePath__"),
+					},
+					{
+						StudyInstanceUID:  ptr.String("__StudyInstanceUID__"),
+						SeriesInstanceUID: ptr.String("__SeriesInstanceUID__"),
+						MetadataFilePath:  ptr.String("__MetadataFilePath__"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -643,7 +769,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -662,7 +793,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -690,7 +827,19 @@ func TestCheckResponseSnapshot_UpdateImageSetMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateImageSetMetadata(context.Background(), &UpdateImageSetMetadataInput{})
+	got, err := svc.UpdateImageSetMetadata(context.Background(), &UpdateImageSetMetadataInput{
+		DatastoreId:           ptr.String("__DatastoreId__"),
+		ImageSetId:            ptr.String("__ImageSetId__"),
+		LatestVersionId:       ptr.String("__LatestVersionId__"),
+		Force:                 ptr.Bool(true),
+		IncludeStudyImageSets: ptr.Bool(true),
+		UpdateImageSetMetadataUpdates: &types.MetadataUpdatesMemberDICOMUpdates{
+			Value: types.DICOMUpdates{
+				RemovableAttributes: []byte("blob"),
+				UpdatableAttributes: []byte("blob"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -711,7 +860,24 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyImageSet(context.Background(), &CopyImageSetInput{})
+	_, opErr := svc.CopyImageSet(context.Background(), &CopyImageSetInput{
+		DatastoreId:      ptr.String("__DatastoreId__"),
+		SourceImageSetId: ptr.String("__SourceImageSetId__"),
+		CopyImageSetInformation: &types.CopyImageSetInformation{
+			SourceImageSet: &types.CopySourceImageSetInformation{
+				LatestVersionId: ptr.String("__LatestVersionId__"),
+				DICOMCopies: &types.MetadataCopies{
+					CopiableAttributes: ptr.String("__CopiableAttributes__"),
+				},
+			},
+			DestinationImageSet: &types.CopyDestinationImageSet{
+				ImageSetId:      ptr.String("__ImageSetId__"),
+				LatestVersionId: ptr.String("__LatestVersionId__"),
+			},
+		},
+		Force:            ptr.Bool(true),
+		PromoteToPrimary: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -736,7 +902,13 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetImageFrame(context.Background(), &GetImageFrameInput{})
+	_, opErr := svc.GetImageFrame(context.Background(), &GetImageFrameInput{
+		DatastoreId: ptr.String("__DatastoreId__"),
+		ImageSetId:  ptr.String("__ImageSetId__"),
+		ImageFrameInformation: &types.ImageFrameInformation{
+			ImageFrameId: ptr.String("__ImageFrameId__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -761,7 +933,24 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyImageSet(context.Background(), &CopyImageSetInput{})
+	_, opErr := svc.CopyImageSet(context.Background(), &CopyImageSetInput{
+		DatastoreId:      ptr.String("__DatastoreId__"),
+		SourceImageSetId: ptr.String("__SourceImageSetId__"),
+		CopyImageSetInformation: &types.CopyImageSetInformation{
+			SourceImageSet: &types.CopySourceImageSetInformation{
+				LatestVersionId: ptr.String("__LatestVersionId__"),
+				DICOMCopies: &types.MetadataCopies{
+					CopiableAttributes: ptr.String("__CopiableAttributes__"),
+				},
+			},
+			DestinationImageSet: &types.CopyDestinationImageSet{
+				ImageSetId:      ptr.String("__ImageSetId__"),
+				LatestVersionId: ptr.String("__LatestVersionId__"),
+			},
+		},
+		Force:            ptr.Bool(true),
+		PromoteToPrimary: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -786,7 +975,24 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyImageSet(context.Background(), &CopyImageSetInput{})
+	_, opErr := svc.CopyImageSet(context.Background(), &CopyImageSetInput{
+		DatastoreId:      ptr.String("__DatastoreId__"),
+		SourceImageSetId: ptr.String("__SourceImageSetId__"),
+		CopyImageSetInformation: &types.CopyImageSetInformation{
+			SourceImageSet: &types.CopySourceImageSetInformation{
+				LatestVersionId: ptr.String("__LatestVersionId__"),
+				DICOMCopies: &types.MetadataCopies{
+					CopiableAttributes: ptr.String("__CopiableAttributes__"),
+				},
+			},
+			DestinationImageSet: &types.CopyDestinationImageSet{
+				ImageSetId:      ptr.String("__ImageSetId__"),
+				LatestVersionId: ptr.String("__LatestVersionId__"),
+			},
+		},
+		Force:            ptr.Bool(true),
+		PromoteToPrimary: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -811,7 +1017,13 @@ func TestCheckResponseSnapshot_Error_NotAcceptableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetImageFrame(context.Background(), &GetImageFrameInput{})
+	_, opErr := svc.GetImageFrame(context.Background(), &GetImageFrameInput{
+		DatastoreId: ptr.String("__DatastoreId__"),
+		ImageSetId:  ptr.String("__ImageSetId__"),
+		ImageFrameInformation: &types.ImageFrameInformation{
+			ImageFrameId: ptr.String("__ImageFrameId__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -836,7 +1048,24 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyImageSet(context.Background(), &CopyImageSetInput{})
+	_, opErr := svc.CopyImageSet(context.Background(), &CopyImageSetInput{
+		DatastoreId:      ptr.String("__DatastoreId__"),
+		SourceImageSetId: ptr.String("__SourceImageSetId__"),
+		CopyImageSetInformation: &types.CopyImageSetInformation{
+			SourceImageSet: &types.CopySourceImageSetInformation{
+				LatestVersionId: ptr.String("__LatestVersionId__"),
+				DICOMCopies: &types.MetadataCopies{
+					CopiableAttributes: ptr.String("__CopiableAttributes__"),
+				},
+			},
+			DestinationImageSet: &types.CopyDestinationImageSet{
+				ImageSetId:      ptr.String("__ImageSetId__"),
+				LatestVersionId: ptr.String("__LatestVersionId__"),
+			},
+		},
+		Force:            ptr.Bool(true),
+		PromoteToPrimary: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -861,7 +1090,24 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyImageSet(context.Background(), &CopyImageSetInput{})
+	_, opErr := svc.CopyImageSet(context.Background(), &CopyImageSetInput{
+		DatastoreId:      ptr.String("__DatastoreId__"),
+		SourceImageSetId: ptr.String("__SourceImageSetId__"),
+		CopyImageSetInformation: &types.CopyImageSetInformation{
+			SourceImageSet: &types.CopySourceImageSetInformation{
+				LatestVersionId: ptr.String("__LatestVersionId__"),
+				DICOMCopies: &types.MetadataCopies{
+					CopiableAttributes: ptr.String("__CopiableAttributes__"),
+				},
+			},
+			DestinationImageSet: &types.CopyDestinationImageSet{
+				ImageSetId:      ptr.String("__ImageSetId__"),
+				LatestVersionId: ptr.String("__LatestVersionId__"),
+			},
+		},
+		Force:            ptr.Bool(true),
+		PromoteToPrimary: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -886,7 +1132,24 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyImageSet(context.Background(), &CopyImageSetInput{})
+	_, opErr := svc.CopyImageSet(context.Background(), &CopyImageSetInput{
+		DatastoreId:      ptr.String("__DatastoreId__"),
+		SourceImageSetId: ptr.String("__SourceImageSetId__"),
+		CopyImageSetInformation: &types.CopyImageSetInformation{
+			SourceImageSet: &types.CopySourceImageSetInformation{
+				LatestVersionId: ptr.String("__LatestVersionId__"),
+				DICOMCopies: &types.MetadataCopies{
+					CopiableAttributes: ptr.String("__CopiableAttributes__"),
+				},
+			},
+			DestinationImageSet: &types.CopyDestinationImageSet{
+				ImageSetId:      ptr.String("__ImageSetId__"),
+				LatestVersionId: ptr.String("__LatestVersionId__"),
+			},
+		},
+		Force:            ptr.Bool(true),
+		PromoteToPrimary: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -911,7 +1174,24 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyImageSet(context.Background(), &CopyImageSetInput{})
+	_, opErr := svc.CopyImageSet(context.Background(), &CopyImageSetInput{
+		DatastoreId:      ptr.String("__DatastoreId__"),
+		SourceImageSetId: ptr.String("__SourceImageSetId__"),
+		CopyImageSetInformation: &types.CopyImageSetInformation{
+			SourceImageSet: &types.CopySourceImageSetInformation{
+				LatestVersionId: ptr.String("__LatestVersionId__"),
+				DICOMCopies: &types.MetadataCopies{
+					CopiableAttributes: ptr.String("__CopiableAttributes__"),
+				},
+			},
+			DestinationImageSet: &types.CopyDestinationImageSet{
+				ImageSetId:      ptr.String("__ImageSetId__"),
+				LatestVersionId: ptr.String("__LatestVersionId__"),
+			},
+		},
+		Force:            ptr.Bool(true),
+		PromoteToPrimary: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

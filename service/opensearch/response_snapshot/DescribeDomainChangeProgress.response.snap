@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ChangeProgressStatus":{"ChangeId":"__ChangeId__","ChangeProgressStages":[{"Description":"__Description__","LastUpdated":946684800,"Name":"__Name__","Status":"__Status__"},{"Description":"__Description__","LastUpdated":946684800,"Name":"__Name__","Status":"__Status__"}],"CompletedProperties":["__Member__","__Member__"],"ConfigChangeStatus":"Pending","InitiatedBy":"CUSTOMER","LastUpdatedTime":946684800,"PendingProperties":["__Member__","__Member__"],"StartTime":946684800,"Status":"PENDING","TotalNumberOfStages":1}}

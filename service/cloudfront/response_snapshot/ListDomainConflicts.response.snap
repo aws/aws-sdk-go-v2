@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ListDomainConflictsResult xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><DomainConflicts><DomainConflicts><AccountId>__AccountId__</AccountId><Domain>__Domain__</Domain><ResourceId>__ResourceId__</ResourceId><ResourceType>distribution</ResourceType></DomainConflicts><DomainConflicts><AccountId>__AccountId__</AccountId><Domain>__Domain__</Domain><ResourceId>__ResourceId__</ResourceId><ResourceType>distribution</ResourceType></DomainConflicts></DomainConflicts><NextMarker>__NextMarker__</NextMarker></ListDomainConflictsResult>

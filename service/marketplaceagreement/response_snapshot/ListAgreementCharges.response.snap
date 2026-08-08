@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSMPCommerceService_v20200301.ListAgreementCharges
+
+{"items":[{"agreementId":"__AgreementId__","agreementType":"__AgreementType__","amount":"__Amount__","currencyCode":"__CurrencyCode__","id":"__Id__","purchaseOrderReference":"__PurchaseOrderReference__","revision":1,"time":946684800},{"agreementId":"__AgreementId__","agreementType":"__AgreementType__","amount":"__Amount__","currencyCode":"__CurrencyCode__","id":"__Id__","purchaseOrderReference":"__PurchaseOrderReference__","revision":1,"time":946684800}],"nextToken":"__NextToken__"}

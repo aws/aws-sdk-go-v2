@@ -129,7 +129,17 @@ func TestCheckResponseSnapshot_AcceptResourceGroupingRecommendations(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptResourceGroupingRecommendations(context.Background(), &AcceptResourceGroupingRecommendationsInput{})
+	got, err := svc.AcceptResourceGroupingRecommendations(context.Background(), &AcceptResourceGroupingRecommendationsInput{
+		AppArn: ptr.String("__AppArn__"),
+		Entries: []types.AcceptGroupingRecommendationEntry{
+			{
+				GroupingRecommendationId: ptr.String("__GroupingRecommendationId__"),
+			},
+			{
+				GroupingRecommendationId: ptr.String("__GroupingRecommendationId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -183,7 +193,41 @@ func TestCheckResponseSnapshot_AddDraftAppVersionResourceMappings(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddDraftAppVersionResourceMappings(context.Background(), &AddDraftAppVersionResourceMappingsInput{})
+	got, err := svc.AddDraftAppVersionResourceMappings(context.Background(), &AddDraftAppVersionResourceMappingsInput{
+		AppArn: ptr.String("__AppArn__"),
+		ResourceMappings: []types.ResourceMapping{
+			{
+				ResourceName:       ptr.String("__ResourceName__"),
+				LogicalStackName:   ptr.String("__LogicalStackName__"),
+				AppRegistryAppName: ptr.String("__AppRegistryAppName__"),
+				ResourceGroupName:  ptr.String("__ResourceGroupName__"),
+				MappingType:        types.ResourceMappingType("CfnStack"),
+				PhysicalResourceId: &types.PhysicalResourceId{
+					Identifier:   ptr.String("__Identifier__"),
+					Type:         types.PhysicalIdentifierType("Arn"),
+					AwsRegion:    ptr.String("__AwsRegion__"),
+					AwsAccountId: ptr.String("__AwsAccountId__"),
+				},
+				TerraformSourceName: ptr.String("__TerraformSourceName__"),
+				EksSourceName:       ptr.String("__EksSourceName__"),
+			},
+			{
+				ResourceName:       ptr.String("__ResourceName__"),
+				LogicalStackName:   ptr.String("__LogicalStackName__"),
+				AppRegistryAppName: ptr.String("__AppRegistryAppName__"),
+				ResourceGroupName:  ptr.String("__ResourceGroupName__"),
+				MappingType:        types.ResourceMappingType("CfnStack"),
+				PhysicalResourceId: &types.PhysicalResourceId{
+					Identifier:   ptr.String("__Identifier__"),
+					Type:         types.PhysicalIdentifierType("Arn"),
+					AwsRegion:    ptr.String("__AwsRegion__"),
+					AwsAccountId: ptr.String("__AwsAccountId__"),
+				},
+				TerraformSourceName: ptr.String("__TerraformSourceName__"),
+				EksSourceName:       ptr.String("__EksSourceName__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -240,7 +284,35 @@ func TestCheckResponseSnapshot_BatchUpdateRecommendationStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchUpdateRecommendationStatus(context.Background(), &BatchUpdateRecommendationStatusInput{})
+	got, err := svc.BatchUpdateRecommendationStatus(context.Background(), &BatchUpdateRecommendationStatusInput{
+		AppArn: ptr.String("__AppArn__"),
+		RequestEntries: []types.UpdateRecommendationStatusRequestEntry{
+			{
+				EntryId:     ptr.String("__EntryId__"),
+				ReferenceId: ptr.String("__ReferenceId__"),
+				Item: &types.UpdateRecommendationStatusItem{
+					ResourceId:      ptr.String("__ResourceId__"),
+					TargetAccountId: ptr.String("__TargetAccountId__"),
+					TargetRegion:    ptr.String("__TargetRegion__"),
+				},
+				Excluded:       ptr.Bool(true),
+				AppComponentId: ptr.String("__AppComponentId__"),
+				ExcludeReason:  types.ExcludeRecommendationReason("AlreadyImplemented"),
+			},
+			{
+				EntryId:     ptr.String("__EntryId__"),
+				ReferenceId: ptr.String("__ReferenceId__"),
+				Item: &types.UpdateRecommendationStatusItem{
+					ResourceId:      ptr.String("__ResourceId__"),
+					TargetAccountId: ptr.String("__TargetAccountId__"),
+					TargetRegion:    ptr.String("__TargetRegion__"),
+				},
+				Excluded:       ptr.Bool(true),
+				AppComponentId: ptr.String("__AppComponentId__"),
+				ExcludeReason:  types.ExcludeRecommendationReason("AlreadyImplemented"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -301,7 +373,37 @@ func TestCheckResponseSnapshot_CreateApp(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApp(context.Background(), &CreateAppInput{})
+	got, err := svc.CreateApp(context.Background(), &CreateAppInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		PolicyArn:   ptr.String("__PolicyArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken:        ptr.String("__ClientToken__"),
+		AssessmentSchedule: types.AppAssessmentScheduleType("Disabled"),
+		PermissionModel: &types.PermissionModel{
+			Type:            types.PermissionModelType("LegacyIAMUser"),
+			InvokerRoleName: ptr.String("__InvokerRoleName__"),
+			CrossAccountRoleArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		EventSubscriptions: []types.EventSubscription{
+			{
+				Name:        ptr.String("__Name__"),
+				EventType:   types.EventType("ScheduledAssessmentFailure"),
+				SnsTopicArn: ptr.String("__SnsTopicArn__"),
+			},
+			{
+				Name:        ptr.String("__Name__"),
+				EventType:   types.EventType("ScheduledAssessmentFailure"),
+				SnsTopicArn: ptr.String("__SnsTopicArn__"),
+			},
+		},
+		AwsApplicationArn: ptr.String("__AwsApplicationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -334,7 +436,19 @@ func TestCheckResponseSnapshot_CreateAppVersionAppComponent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAppVersionAppComponent(context.Background(), &CreateAppVersionAppComponentInput{})
+	got, err := svc.CreateAppVersionAppComponent(context.Background(), &CreateAppVersionAppComponentInput{
+		AppArn: ptr.String("__AppArn__"),
+		Id:     ptr.String("__Id__"),
+		Name:   ptr.String("__Name__"),
+		Type:   ptr.String("__Type__"),
+		AdditionalInfo: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -406,7 +520,32 @@ func TestCheckResponseSnapshot_CreateAppVersionResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAppVersionResource(context.Background(), &CreateAppVersionResourceInput{})
+	got, err := svc.CreateAppVersionResource(context.Background(), &CreateAppVersionResourceInput{
+		AppArn:       ptr.String("__AppArn__"),
+		ResourceName: ptr.String("__ResourceName__"),
+		LogicalResourceId: &types.LogicalResourceId{
+			Identifier:          ptr.String("__Identifier__"),
+			LogicalStackName:    ptr.String("__LogicalStackName__"),
+			ResourceGroupName:   ptr.String("__ResourceGroupName__"),
+			TerraformSourceName: ptr.String("__TerraformSourceName__"),
+			EksSourceName:       ptr.String("__EksSourceName__"),
+		},
+		PhysicalResourceId: ptr.String("__PhysicalResourceId__"),
+		AwsRegion:          ptr.String("__AwsRegion__"),
+		AwsAccountId:       ptr.String("__AwsAccountId__"),
+		ResourceType:       ptr.String("__ResourceType__"),
+		AppComponents: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AdditionalInfo: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -453,7 +592,24 @@ func TestCheckResponseSnapshot_CreateRecommendationTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRecommendationTemplate(context.Background(), &CreateRecommendationTemplateInput{})
+	got, err := svc.CreateRecommendationTemplate(context.Background(), &CreateRecommendationTemplateInput{
+		RecommendationIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Format: types.TemplateFormat("CfnYaml"),
+		RecommendationTypes: []types.RenderRecommendationType{
+			types.RenderRecommendationType("Alarm"),
+			types.RenderRecommendationType("Alarm"),
+		},
+		AssessmentArn: ptr.String("__AssessmentArn__"),
+		Name:          ptr.String("__Name__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		BucketName: ptr.String("__BucketName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -491,7 +647,22 @@ func TestCheckResponseSnapshot_CreateResiliencyPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateResiliencyPolicy(context.Background(), &CreateResiliencyPolicyInput{})
+	got, err := svc.CreateResiliencyPolicy(context.Background(), &CreateResiliencyPolicyInput{
+		PolicyName:             ptr.String("__PolicyName__"),
+		PolicyDescription:      ptr.String("__PolicyDescription__"),
+		DataLocationConstraint: types.DataLocationConstraint("AnyLocation"),
+		Tier:                   types.ResiliencyPolicyTier("MissionCritical"),
+		Policy: map[string]types.FailurePolicy{
+			"key0": {
+				RtoInSecs: 1,
+				RpoInSecs: 1,
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -512,7 +683,11 @@ func TestCheckResponseSnapshot_DeleteApp(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApp(context.Background(), &DeleteAppInput{})
+	got, err := svc.DeleteApp(context.Background(), &DeleteAppInput{
+		AppArn:      ptr.String("__AppArn__"),
+		ForceDelete: ptr.Bool(true),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -534,7 +709,10 @@ func TestCheckResponseSnapshot_DeleteAppAssessment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAppAssessment(context.Background(), &DeleteAppAssessmentInput{})
+	got, err := svc.DeleteAppAssessment(context.Background(), &DeleteAppAssessmentInput{
+		AssessmentArn: ptr.String("__AssessmentArn__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -568,7 +746,18 @@ func TestCheckResponseSnapshot_DeleteAppInputSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAppInputSource(context.Background(), &DeleteAppInputSourceInput{})
+	got, err := svc.DeleteAppInputSource(context.Background(), &DeleteAppInputSourceInput{
+		AppArn:    ptr.String("__AppArn__"),
+		SourceArn: ptr.String("__SourceArn__"),
+		TerraformSource: &types.TerraformSource{
+			S3StateFileUrl: ptr.String("__S3StateFileUrl__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		EksSourceClusterNamespace: &types.EksSourceClusterNamespace{
+			EksClusterArn: ptr.String("__EksClusterArn__"),
+			Namespace:     ptr.String("__Namespace__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -601,7 +790,11 @@ func TestCheckResponseSnapshot_DeleteAppVersionAppComponent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAppVersionAppComponent(context.Background(), &DeleteAppVersionAppComponentInput{})
+	got, err := svc.DeleteAppVersionAppComponent(context.Background(), &DeleteAppVersionAppComponentInput{
+		AppArn:      ptr.String("__AppArn__"),
+		Id:          ptr.String("__Id__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -673,7 +866,21 @@ func TestCheckResponseSnapshot_DeleteAppVersionResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAppVersionResource(context.Background(), &DeleteAppVersionResourceInput{})
+	got, err := svc.DeleteAppVersionResource(context.Background(), &DeleteAppVersionResourceInput{
+		AppArn:       ptr.String("__AppArn__"),
+		ResourceName: ptr.String("__ResourceName__"),
+		LogicalResourceId: &types.LogicalResourceId{
+			Identifier:          ptr.String("__Identifier__"),
+			LogicalStackName:    ptr.String("__LogicalStackName__"),
+			ResourceGroupName:   ptr.String("__ResourceGroupName__"),
+			TerraformSourceName: ptr.String("__TerraformSourceName__"),
+			EksSourceName:       ptr.String("__EksSourceName__"),
+		},
+		PhysicalResourceId: ptr.String("__PhysicalResourceId__"),
+		AwsRegion:          ptr.String("__AwsRegion__"),
+		AwsAccountId:       ptr.String("__AwsAccountId__"),
+		ClientToken:        ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -695,7 +902,10 @@ func TestCheckResponseSnapshot_DeleteRecommendationTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRecommendationTemplate(context.Background(), &DeleteRecommendationTemplateInput{})
+	got, err := svc.DeleteRecommendationTemplate(context.Background(), &DeleteRecommendationTemplateInput{
+		RecommendationTemplateArn: ptr.String("__RecommendationTemplateArn__"),
+		ClientToken:               ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -716,7 +926,10 @@ func TestCheckResponseSnapshot_DeleteResiliencyPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResiliencyPolicy(context.Background(), &DeleteResiliencyPolicyInput{})
+	got, err := svc.DeleteResiliencyPolicy(context.Background(), &DeleteResiliencyPolicyInput{
+		PolicyArn:   ptr.String("__PolicyArn__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -777,7 +990,9 @@ func TestCheckResponseSnapshot_DescribeApp(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeApp(context.Background(), &DescribeAppInput{})
+	got, err := svc.DescribeApp(context.Background(), &DescribeAppInput{
+		AppArn: ptr.String("__AppArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -901,7 +1116,9 @@ func TestCheckResponseSnapshot_DescribeAppAssessment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAppAssessment(context.Background(), &DescribeAppAssessmentInput{})
+	got, err := svc.DescribeAppAssessment(context.Background(), &DescribeAppAssessmentInput{
+		AssessmentArn: ptr.String("__AssessmentArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -929,7 +1146,10 @@ func TestCheckResponseSnapshot_DescribeAppVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAppVersion(context.Background(), &DescribeAppVersionInput{})
+	got, err := svc.DescribeAppVersion(context.Background(), &DescribeAppVersionInput{
+		AppArn:     ptr.String("__AppArn__"),
+		AppVersion: ptr.String("__AppVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -962,7 +1182,11 @@ func TestCheckResponseSnapshot_DescribeAppVersionAppComponent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAppVersionAppComponent(context.Background(), &DescribeAppVersionAppComponentInput{})
+	got, err := svc.DescribeAppVersionAppComponent(context.Background(), &DescribeAppVersionAppComponentInput{
+		AppArn:     ptr.String("__AppArn__"),
+		AppVersion: ptr.String("__AppVersion__"),
+		Id:         ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1034,7 +1258,21 @@ func TestCheckResponseSnapshot_DescribeAppVersionResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAppVersionResource(context.Background(), &DescribeAppVersionResourceInput{})
+	got, err := svc.DescribeAppVersionResource(context.Background(), &DescribeAppVersionResourceInput{
+		AppArn:       ptr.String("__AppArn__"),
+		AppVersion:   ptr.String("__AppVersion__"),
+		ResourceName: ptr.String("__ResourceName__"),
+		LogicalResourceId: &types.LogicalResourceId{
+			Identifier:          ptr.String("__Identifier__"),
+			LogicalStackName:    ptr.String("__LogicalStackName__"),
+			ResourceGroupName:   ptr.String("__ResourceGroupName__"),
+			TerraformSourceName: ptr.String("__TerraformSourceName__"),
+			EksSourceName:       ptr.String("__EksSourceName__"),
+		},
+		PhysicalResourceId: ptr.String("__PhysicalResourceId__"),
+		AwsRegion:          ptr.String("__AwsRegion__"),
+		AwsAccountId:       ptr.String("__AwsAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1059,7 +1297,11 @@ func TestCheckResponseSnapshot_DescribeAppVersionResourcesResolutionStatus(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAppVersionResourcesResolutionStatus(context.Background(), &DescribeAppVersionResourcesResolutionStatusInput{})
+	got, err := svc.DescribeAppVersionResourcesResolutionStatus(context.Background(), &DescribeAppVersionResourcesResolutionStatusInput{
+		AppArn:       ptr.String("__AppArn__"),
+		AppVersion:   ptr.String("__AppVersion__"),
+		ResolutionId: ptr.String("__ResolutionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1082,7 +1324,10 @@ func TestCheckResponseSnapshot_DescribeAppVersionTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAppVersionTemplate(context.Background(), &DescribeAppVersionTemplateInput{})
+	got, err := svc.DescribeAppVersionTemplate(context.Background(), &DescribeAppVersionTemplateInput{
+		AppArn:     ptr.String("__AppArn__"),
+		AppVersion: ptr.String("__AppVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1115,7 +1360,9 @@ func TestCheckResponseSnapshot_DescribeDraftAppVersionResourcesImportStatus(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDraftAppVersionResourcesImportStatus(context.Background(), &DescribeDraftAppVersionResourcesImportStatusInput{})
+	got, err := svc.DescribeDraftAppVersionResourcesImportStatus(context.Background(), &DescribeDraftAppVersionResourcesImportStatusInput{
+		AppArn: ptr.String("__AppArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1142,7 +1389,9 @@ func TestCheckResponseSnapshot_DescribeMetricsExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMetricsExport(context.Background(), &DescribeMetricsExportInput{})
+	got, err := svc.DescribeMetricsExport(context.Background(), &DescribeMetricsExportInput{
+		MetricsExportId: ptr.String("__MetricsExportId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1180,7 +1429,9 @@ func TestCheckResponseSnapshot_DescribeResiliencyPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeResiliencyPolicy(context.Background(), &DescribeResiliencyPolicyInput{})
+	got, err := svc.DescribeResiliencyPolicy(context.Background(), &DescribeResiliencyPolicyInput{
+		PolicyArn: ptr.String("__PolicyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1203,7 +1454,10 @@ func TestCheckResponseSnapshot_DescribeResourceGroupingRecommendationTask(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeResourceGroupingRecommendationTask(context.Background(), &DescribeResourceGroupingRecommendationTaskInput{})
+	got, err := svc.DescribeResourceGroupingRecommendationTask(context.Background(), &DescribeResourceGroupingRecommendationTaskInput{
+		AppArn:     ptr.String("__AppArn__"),
+		GroupingId: ptr.String("__GroupingId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1254,7 +1508,38 @@ func TestCheckResponseSnapshot_ImportResourcesToDraftAppVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportResourcesToDraftAppVersion(context.Background(), &ImportResourcesToDraftAppVersionInput{})
+	got, err := svc.ImportResourcesToDraftAppVersion(context.Background(), &ImportResourcesToDraftAppVersionInput{
+		AppArn: ptr.String("__AppArn__"),
+		SourceArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TerraformSources: []types.TerraformSource{
+			{
+				S3StateFileUrl: ptr.String("__S3StateFileUrl__"),
+			},
+			{
+				S3StateFileUrl: ptr.String("__S3StateFileUrl__"),
+			},
+		},
+		ImportStrategy: types.ResourceImportStrategyType("AddOnly"),
+		EksSources: []types.EksSource{
+			{
+				EksClusterArn: ptr.String("__EksClusterArn__"),
+				Namespaces: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				EksClusterArn: ptr.String("__EksClusterArn__"),
+				Namespaces: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1373,7 +1658,11 @@ func TestCheckResponseSnapshot_ListAlarmRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAlarmRecommendations(context.Background(), &ListAlarmRecommendationsInput{})
+	got, err := svc.ListAlarmRecommendations(context.Background(), &ListAlarmRecommendationsInput{
+		AssessmentArn: ptr.String("__AssessmentArn__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1472,7 +1761,11 @@ func TestCheckResponseSnapshot_ListAppAssessmentComplianceDrifts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAppAssessmentComplianceDrifts(context.Background(), &ListAppAssessmentComplianceDriftsInput{})
+	got, err := svc.ListAppAssessmentComplianceDrifts(context.Background(), &ListAppAssessmentComplianceDriftsInput{
+		AssessmentArn: ptr.String("__AssessmentArn__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1527,7 +1820,11 @@ func TestCheckResponseSnapshot_ListAppAssessmentResourceDrifts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAppAssessmentResourceDrifts(context.Background(), &ListAppAssessmentResourceDriftsInput{})
+	got, err := svc.ListAppAssessmentResourceDrifts(context.Background(), &ListAppAssessmentResourceDriftsInput{
+		AssessmentArn: ptr.String("__AssessmentArn__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1590,7 +1887,19 @@ func TestCheckResponseSnapshot_ListAppAssessments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAppAssessments(context.Background(), &ListAppAssessmentsInput{})
+	got, err := svc.ListAppAssessments(context.Background(), &ListAppAssessmentsInput{
+		AppArn:         ptr.String("__AppArn__"),
+		AssessmentName: ptr.String("__AssessmentName__"),
+		AssessmentStatus: []types.AssessmentStatus{
+			types.AssessmentStatus("Pending"),
+			types.AssessmentStatus("Pending"),
+		},
+		ComplianceStatus: types.ComplianceStatus("PolicyBreached"),
+		Invoker:          types.AssessmentInvoker("User"),
+		ReverseOrder:     ptr.Bool(true),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1689,7 +1998,11 @@ func TestCheckResponseSnapshot_ListAppComponentCompliances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAppComponentCompliances(context.Background(), &ListAppComponentCompliancesInput{})
+	got, err := svc.ListAppComponentCompliances(context.Background(), &ListAppComponentCompliancesInput{
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+		AssessmentArn: ptr.String("__AssessmentArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1884,7 +2197,11 @@ func TestCheckResponseSnapshot_ListAppComponentRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAppComponentRecommendations(context.Background(), &ListAppComponentRecommendationsInput{})
+	got, err := svc.ListAppComponentRecommendations(context.Background(), &ListAppComponentRecommendationsInput{
+		AssessmentArn: ptr.String("__AssessmentArn__"),
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1933,7 +2250,12 @@ func TestCheckResponseSnapshot_ListAppInputSources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAppInputSources(context.Background(), &ListAppInputSourcesInput{})
+	got, err := svc.ListAppInputSources(context.Background(), &ListAppInputSourcesInput{
+		AppArn:     ptr.String("__AppArn__"),
+		AppVersion: ptr.String("__AppVersion__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1980,7 +2302,12 @@ func TestCheckResponseSnapshot_ListAppVersionAppComponents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAppVersionAppComponents(context.Background(), &ListAppVersionAppComponentsInput{})
+	got, err := svc.ListAppVersionAppComponents(context.Background(), &ListAppVersionAppComponentsInput{
+		AppArn:     ptr.String("__AppArn__"),
+		AppVersion: ptr.String("__AppVersion__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2033,7 +2360,12 @@ func TestCheckResponseSnapshot_ListAppVersionResourceMappings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAppVersionResourceMappings(context.Background(), &ListAppVersionResourceMappingsInput{})
+	got, err := svc.ListAppVersionResourceMappings(context.Background(), &ListAppVersionResourceMappingsInput{
+		AppArn:     ptr.String("__AppArn__"),
+		AppVersion: ptr.String("__AppVersion__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2157,7 +2489,13 @@ func TestCheckResponseSnapshot_ListAppVersionResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAppVersionResources(context.Background(), &ListAppVersionResourcesInput{})
+	got, err := svc.ListAppVersionResources(context.Background(), &ListAppVersionResourcesInput{
+		AppArn:       ptr.String("__AppArn__"),
+		AppVersion:   ptr.String("__AppVersion__"),
+		ResolutionId: ptr.String("__ResolutionId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2192,7 +2530,13 @@ func TestCheckResponseSnapshot_ListAppVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAppVersions(context.Background(), &ListAppVersionsInput{})
+	got, err := svc.ListAppVersions(context.Background(), &ListAppVersionsInput{
+		AppArn:     ptr.String("__AppArn__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2245,7 +2589,16 @@ func TestCheckResponseSnapshot_ListApps(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApps(context.Background(), &ListAppsInput{})
+	got, err := svc.ListApps(context.Background(), &ListAppsInput{
+		NextToken:              ptr.String("__NextToken__"),
+		MaxResults:             ptr.Int32(1),
+		Name:                   ptr.String("__Name__"),
+		AppArn:                 ptr.String("__AppArn__"),
+		FromLastAssessmentTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ToLastAssessmentTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ReverseOrder:           ptr.Bool(true),
+		AwsApplicationArn:      ptr.String("__AwsApplicationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2276,7 +2629,43 @@ func TestCheckResponseSnapshot_ListMetrics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMetrics(context.Background(), &ListMetricsInput{})
+	got, err := svc.ListMetrics(context.Background(), &ListMetricsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		Fields: []types.Field{
+			{
+				Name:        ptr.String("__Name__"),
+				Aggregation: types.FieldAggregationType("Min"),
+			},
+			{
+				Name:        ptr.String("__Name__"),
+				Aggregation: types.FieldAggregationType("Min"),
+			},
+		},
+		DataSource: ptr.String("__DataSource__"),
+		Conditions: []types.Condition{
+			{
+				Field:    ptr.String("__Field__"),
+				Operator: types.ConditionOperatorType("Equals"),
+				Value:    ptr.String("__Value__"),
+			},
+			{
+				Field:    ptr.String("__Field__"),
+				Operator: types.ConditionOperatorType("Equals"),
+				Value:    ptr.String("__Value__"),
+			},
+		},
+		Sorts: []types.Sort{
+			{
+				Field:     ptr.String("__Field__"),
+				Ascending: ptr.Bool(true),
+			},
+			{
+				Field:     ptr.String("__Field__"),
+				Ascending: ptr.Bool(true),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2353,7 +2742,18 @@ func TestCheckResponseSnapshot_ListRecommendationTemplates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRecommendationTemplates(context.Background(), &ListRecommendationTemplatesInput{})
+	got, err := svc.ListRecommendationTemplates(context.Background(), &ListRecommendationTemplatesInput{
+		AssessmentArn: ptr.String("__AssessmentArn__"),
+		ReverseOrder:  ptr.Bool(true),
+		Status: []types.RecommendationTemplateStatus{
+			types.RecommendationTemplateStatus("Pending"),
+			types.RecommendationTemplateStatus("Pending"),
+		},
+		RecommendationTemplateArn: ptr.String("__RecommendationTemplateArn__"),
+		Name:                      ptr.String("__Name__"),
+		NextToken:                 ptr.String("__NextToken__"),
+		MaxResults:                ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2412,7 +2812,11 @@ func TestCheckResponseSnapshot_ListResiliencyPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResiliencyPolicies(context.Background(), &ListResiliencyPoliciesInput{})
+	got, err := svc.ListResiliencyPolicies(context.Background(), &ListResiliencyPoliciesInput{
+		PolicyName: ptr.String("__PolicyName__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2557,7 +2961,11 @@ func TestCheckResponseSnapshot_ListResourceGroupingRecommendations(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourceGroupingRecommendations(context.Background(), &ListResourceGroupingRecommendationsInput{})
+	got, err := svc.ListResourceGroupingRecommendations(context.Background(), &ListResourceGroupingRecommendationsInput{
+		AppArn:     ptr.String("__AppArn__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2668,7 +3076,11 @@ func TestCheckResponseSnapshot_ListSopRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSopRecommendations(context.Background(), &ListSopRecommendationsInput{})
+	got, err := svc.ListSopRecommendations(context.Background(), &ListSopRecommendationsInput{
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+		AssessmentArn: ptr.String("__AssessmentArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2727,7 +3139,10 @@ func TestCheckResponseSnapshot_ListSuggestedResiliencyPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSuggestedResiliencyPolicies(context.Background(), &ListSuggestedResiliencyPoliciesInput{})
+	got, err := svc.ListSuggestedResiliencyPolicies(context.Background(), &ListSuggestedResiliencyPoliciesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2750,7 +3165,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2875,7 +3292,11 @@ func TestCheckResponseSnapshot_ListTestRecommendations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTestRecommendations(context.Background(), &ListTestRecommendationsInput{})
+	got, err := svc.ListTestRecommendations(context.Background(), &ListTestRecommendationsInput{
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+		AssessmentArn: ptr.String("__AssessmentArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2933,7 +3354,13 @@ func TestCheckResponseSnapshot_ListUnsupportedAppVersionResources(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListUnsupportedAppVersionResources(context.Background(), &ListUnsupportedAppVersionResourcesInput{})
+	got, err := svc.ListUnsupportedAppVersionResources(context.Background(), &ListUnsupportedAppVersionResourcesInput{
+		AppArn:       ptr.String("__AppArn__"),
+		AppVersion:   ptr.String("__AppVersion__"),
+		ResolutionId: ptr.String("__ResolutionId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2957,7 +3384,10 @@ func TestCheckResponseSnapshot_PublishAppVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PublishAppVersion(context.Background(), &PublishAppVersionInput{})
+	got, err := svc.PublishAppVersion(context.Background(), &PublishAppVersionInput{
+		AppArn:      ptr.String("__AppArn__"),
+		VersionName: ptr.String("__VersionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2979,7 +3409,10 @@ func TestCheckResponseSnapshot_PutDraftAppVersionTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutDraftAppVersionTemplate(context.Background(), &PutDraftAppVersionTemplateInput{})
+	got, err := svc.PutDraftAppVersionTemplate(context.Background(), &PutDraftAppVersionTemplateInput{
+		AppArn:          ptr.String("__AppArn__"),
+		AppTemplateBody: ptr.String("__AppTemplateBody__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3010,7 +3443,19 @@ func TestCheckResponseSnapshot_RejectResourceGroupingRecommendations(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RejectResourceGroupingRecommendations(context.Background(), &RejectResourceGroupingRecommendationsInput{})
+	got, err := svc.RejectResourceGroupingRecommendations(context.Background(), &RejectResourceGroupingRecommendationsInput{
+		AppArn: ptr.String("__AppArn__"),
+		Entries: []types.RejectGroupingRecommendationEntry{
+			{
+				GroupingRecommendationId: ptr.String("__GroupingRecommendationId__"),
+				RejectionReason:          types.GroupingRecommendationRejectionReason("DistinctBusinessPurpose"),
+			},
+			{
+				GroupingRecommendationId: ptr.String("__GroupingRecommendationId__"),
+				RejectionReason:          types.GroupingRecommendationRejectionReason("DistinctBusinessPurpose"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3032,7 +3477,33 @@ func TestCheckResponseSnapshot_RemoveDraftAppVersionResourceMappings(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveDraftAppVersionResourceMappings(context.Background(), &RemoveDraftAppVersionResourceMappingsInput{})
+	got, err := svc.RemoveDraftAppVersionResourceMappings(context.Background(), &RemoveDraftAppVersionResourceMappingsInput{
+		AppArn: ptr.String("__AppArn__"),
+		ResourceNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		LogicalStackNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AppRegistryAppNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResourceGroupNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TerraformSourceNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EksSourceNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3056,7 +3527,10 @@ func TestCheckResponseSnapshot_ResolveAppVersionResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResolveAppVersionResources(context.Background(), &ResolveAppVersionResourcesInput{})
+	got, err := svc.ResolveAppVersionResources(context.Background(), &ResolveAppVersionResourcesInput{
+		AppArn:     ptr.String("__AppArn__"),
+		AppVersion: ptr.String("__AppVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3180,7 +3654,15 @@ func TestCheckResponseSnapshot_StartAppAssessment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartAppAssessment(context.Background(), &StartAppAssessmentInput{})
+	got, err := svc.StartAppAssessment(context.Background(), &StartAppAssessmentInput{
+		AppArn:         ptr.String("__AppArn__"),
+		AppVersion:     ptr.String("__AppVersion__"),
+		AssessmentName: ptr.String("__AssessmentName__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3202,7 +3684,10 @@ func TestCheckResponseSnapshot_StartMetricsExport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMetricsExport(context.Background(), &StartMetricsExportInput{})
+	got, err := svc.StartMetricsExport(context.Background(), &StartMetricsExportInput{
+		BucketName:  ptr.String("__BucketName__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3226,7 +3711,9 @@ func TestCheckResponseSnapshot_StartResourceGroupingRecommendationTask(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartResourceGroupingRecommendationTask(context.Background(), &StartResourceGroupingRecommendationTaskInput{})
+	got, err := svc.StartResourceGroupingRecommendationTask(context.Background(), &StartResourceGroupingRecommendationTaskInput{
+		AppArn: ptr.String("__AppArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3245,7 +3732,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3264,7 +3756,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3325,7 +3823,33 @@ func TestCheckResponseSnapshot_UpdateApp(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApp(context.Background(), &UpdateAppInput{})
+	got, err := svc.UpdateApp(context.Background(), &UpdateAppInput{
+		AppArn:                   ptr.String("__AppArn__"),
+		Description:              ptr.String("__Description__"),
+		PolicyArn:                ptr.String("__PolicyArn__"),
+		ClearResiliencyPolicyArn: ptr.Bool(true),
+		AssessmentSchedule:       types.AppAssessmentScheduleType("Disabled"),
+		PermissionModel: &types.PermissionModel{
+			Type:            types.PermissionModelType("LegacyIAMUser"),
+			InvokerRoleName: ptr.String("__InvokerRoleName__"),
+			CrossAccountRoleArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		EventSubscriptions: []types.EventSubscription{
+			{
+				Name:        ptr.String("__Name__"),
+				EventType:   types.EventType("ScheduledAssessmentFailure"),
+				SnsTopicArn: ptr.String("__SnsTopicArn__"),
+			},
+			{
+				Name:        ptr.String("__Name__"),
+				EventType:   types.EventType("ScheduledAssessmentFailure"),
+				SnsTopicArn: ptr.String("__SnsTopicArn__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3353,7 +3877,15 @@ func TestCheckResponseSnapshot_UpdateAppVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAppVersion(context.Background(), &UpdateAppVersionInput{})
+	got, err := svc.UpdateAppVersion(context.Background(), &UpdateAppVersionInput{
+		AppArn: ptr.String("__AppArn__"),
+		AdditionalInfo: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3386,7 +3918,18 @@ func TestCheckResponseSnapshot_UpdateAppVersionAppComponent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAppVersionAppComponent(context.Background(), &UpdateAppVersionAppComponentInput{})
+	got, err := svc.UpdateAppVersionAppComponent(context.Background(), &UpdateAppVersionAppComponentInput{
+		AppArn: ptr.String("__AppArn__"),
+		Id:     ptr.String("__Id__"),
+		Name:   ptr.String("__Name__"),
+		Type:   ptr.String("__Type__"),
+		AdditionalInfo: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3458,7 +4001,32 @@ func TestCheckResponseSnapshot_UpdateAppVersionResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAppVersionResource(context.Background(), &UpdateAppVersionResourceInput{})
+	got, err := svc.UpdateAppVersionResource(context.Background(), &UpdateAppVersionResourceInput{
+		AppArn:       ptr.String("__AppArn__"),
+		ResourceName: ptr.String("__ResourceName__"),
+		LogicalResourceId: &types.LogicalResourceId{
+			Identifier:          ptr.String("__Identifier__"),
+			LogicalStackName:    ptr.String("__LogicalStackName__"),
+			ResourceGroupName:   ptr.String("__ResourceGroupName__"),
+			TerraformSourceName: ptr.String("__TerraformSourceName__"),
+			EksSourceName:       ptr.String("__EksSourceName__"),
+		},
+		PhysicalResourceId: ptr.String("__PhysicalResourceId__"),
+		AwsRegion:          ptr.String("__AwsRegion__"),
+		AwsAccountId:       ptr.String("__AwsAccountId__"),
+		ResourceType:       ptr.String("__ResourceType__"),
+		AppComponents: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AdditionalInfo: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Excluded: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3496,7 +4064,19 @@ func TestCheckResponseSnapshot_UpdateResiliencyPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateResiliencyPolicy(context.Background(), &UpdateResiliencyPolicyInput{})
+	got, err := svc.UpdateResiliencyPolicy(context.Background(), &UpdateResiliencyPolicyInput{
+		PolicyArn:              ptr.String("__PolicyArn__"),
+		PolicyName:             ptr.String("__PolicyName__"),
+		PolicyDescription:      ptr.String("__PolicyDescription__"),
+		DataLocationConstraint: types.DataLocationConstraint("AnyLocation"),
+		Tier:                   types.ResiliencyPolicyTier("MissionCritical"),
+		Policy: map[string]types.FailurePolicy{
+			"key0": {
+				RtoInSecs: 1,
+				RpoInSecs: 1,
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3517,7 +4097,17 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptResourceGroupingRecommendations(context.Background(), &AcceptResourceGroupingRecommendationsInput{})
+	_, opErr := svc.AcceptResourceGroupingRecommendations(context.Background(), &AcceptResourceGroupingRecommendationsInput{
+		AppArn: ptr.String("__AppArn__"),
+		Entries: []types.AcceptGroupingRecommendationEntry{
+			{
+				GroupingRecommendationId: ptr.String("__GroupingRecommendationId__"),
+			},
+			{
+				GroupingRecommendationId: ptr.String("__GroupingRecommendationId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3544,7 +4134,41 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddDraftAppVersionResourceMappings(context.Background(), &AddDraftAppVersionResourceMappingsInput{})
+	_, opErr := svc.AddDraftAppVersionResourceMappings(context.Background(), &AddDraftAppVersionResourceMappingsInput{
+		AppArn: ptr.String("__AppArn__"),
+		ResourceMappings: []types.ResourceMapping{
+			{
+				ResourceName:       ptr.String("__ResourceName__"),
+				LogicalStackName:   ptr.String("__LogicalStackName__"),
+				AppRegistryAppName: ptr.String("__AppRegistryAppName__"),
+				ResourceGroupName:  ptr.String("__ResourceGroupName__"),
+				MappingType:        types.ResourceMappingType("CfnStack"),
+				PhysicalResourceId: &types.PhysicalResourceId{
+					Identifier:   ptr.String("__Identifier__"),
+					Type:         types.PhysicalIdentifierType("Arn"),
+					AwsRegion:    ptr.String("__AwsRegion__"),
+					AwsAccountId: ptr.String("__AwsAccountId__"),
+				},
+				TerraformSourceName: ptr.String("__TerraformSourceName__"),
+				EksSourceName:       ptr.String("__EksSourceName__"),
+			},
+			{
+				ResourceName:       ptr.String("__ResourceName__"),
+				LogicalStackName:   ptr.String("__LogicalStackName__"),
+				AppRegistryAppName: ptr.String("__AppRegistryAppName__"),
+				ResourceGroupName:  ptr.String("__ResourceGroupName__"),
+				MappingType:        types.ResourceMappingType("CfnStack"),
+				PhysicalResourceId: &types.PhysicalResourceId{
+					Identifier:   ptr.String("__Identifier__"),
+					Type:         types.PhysicalIdentifierType("Arn"),
+					AwsRegion:    ptr.String("__AwsRegion__"),
+					AwsAccountId: ptr.String("__AwsAccountId__"),
+				},
+				TerraformSourceName: ptr.String("__TerraformSourceName__"),
+				EksSourceName:       ptr.String("__EksSourceName__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3569,7 +4193,17 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptResourceGroupingRecommendations(context.Background(), &AcceptResourceGroupingRecommendationsInput{})
+	_, opErr := svc.AcceptResourceGroupingRecommendations(context.Background(), &AcceptResourceGroupingRecommendationsInput{
+		AppArn: ptr.String("__AppArn__"),
+		Entries: []types.AcceptGroupingRecommendationEntry{
+			{
+				GroupingRecommendationId: ptr.String("__GroupingRecommendationId__"),
+			},
+			{
+				GroupingRecommendationId: ptr.String("__GroupingRecommendationId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3596,7 +4230,17 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptResourceGroupingRecommendations(context.Background(), &AcceptResourceGroupingRecommendationsInput{})
+	_, opErr := svc.AcceptResourceGroupingRecommendations(context.Background(), &AcceptResourceGroupingRecommendationsInput{
+		AppArn: ptr.String("__AppArn__"),
+		Entries: []types.AcceptGroupingRecommendationEntry{
+			{
+				GroupingRecommendationId: ptr.String("__GroupingRecommendationId__"),
+			},
+			{
+				GroupingRecommendationId: ptr.String("__GroupingRecommendationId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3621,7 +4265,41 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddDraftAppVersionResourceMappings(context.Background(), &AddDraftAppVersionResourceMappingsInput{})
+	_, opErr := svc.AddDraftAppVersionResourceMappings(context.Background(), &AddDraftAppVersionResourceMappingsInput{
+		AppArn: ptr.String("__AppArn__"),
+		ResourceMappings: []types.ResourceMapping{
+			{
+				ResourceName:       ptr.String("__ResourceName__"),
+				LogicalStackName:   ptr.String("__LogicalStackName__"),
+				AppRegistryAppName: ptr.String("__AppRegistryAppName__"),
+				ResourceGroupName:  ptr.String("__ResourceGroupName__"),
+				MappingType:        types.ResourceMappingType("CfnStack"),
+				PhysicalResourceId: &types.PhysicalResourceId{
+					Identifier:   ptr.String("__Identifier__"),
+					Type:         types.PhysicalIdentifierType("Arn"),
+					AwsRegion:    ptr.String("__AwsRegion__"),
+					AwsAccountId: ptr.String("__AwsAccountId__"),
+				},
+				TerraformSourceName: ptr.String("__TerraformSourceName__"),
+				EksSourceName:       ptr.String("__EksSourceName__"),
+			},
+			{
+				ResourceName:       ptr.String("__ResourceName__"),
+				LogicalStackName:   ptr.String("__LogicalStackName__"),
+				AppRegistryAppName: ptr.String("__AppRegistryAppName__"),
+				ResourceGroupName:  ptr.String("__ResourceGroupName__"),
+				MappingType:        types.ResourceMappingType("CfnStack"),
+				PhysicalResourceId: &types.PhysicalResourceId{
+					Identifier:   ptr.String("__Identifier__"),
+					Type:         types.PhysicalIdentifierType("Arn"),
+					AwsRegion:    ptr.String("__AwsRegion__"),
+					AwsAccountId: ptr.String("__AwsAccountId__"),
+				},
+				TerraformSourceName: ptr.String("__TerraformSourceName__"),
+				EksSourceName:       ptr.String("__EksSourceName__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3647,7 +4325,17 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptResourceGroupingRecommendations(context.Background(), &AcceptResourceGroupingRecommendationsInput{})
+	_, opErr := svc.AcceptResourceGroupingRecommendations(context.Background(), &AcceptResourceGroupingRecommendationsInput{
+		AppArn: ptr.String("__AppArn__"),
+		Entries: []types.AcceptGroupingRecommendationEntry{
+			{
+				GroupingRecommendationId: ptr.String("__GroupingRecommendationId__"),
+			},
+			{
+				GroupingRecommendationId: ptr.String("__GroupingRecommendationId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3672,7 +4360,17 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptResourceGroupingRecommendations(context.Background(), &AcceptResourceGroupingRecommendationsInput{})
+	_, opErr := svc.AcceptResourceGroupingRecommendations(context.Background(), &AcceptResourceGroupingRecommendationsInput{
+		AppArn: ptr.String("__AppArn__"),
+		Entries: []types.AcceptGroupingRecommendationEntry{
+			{
+				GroupingRecommendationId: ptr.String("__GroupingRecommendationId__"),
+			},
+			{
+				GroupingRecommendationId: ptr.String("__GroupingRecommendationId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

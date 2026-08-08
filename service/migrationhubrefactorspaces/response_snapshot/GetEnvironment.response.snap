@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Arn":"__Arn__","CreatedTime":946684800,"Description":"__Description__","EnvironmentId":"__EnvironmentId__","Error":{"AccountId":"__AccountId__","AdditionalDetails":{"key0":"__Value__"},"Code":"INVALID_RESOURCE_STATE","Message":"__Message__","ResourceIdentifier":"__ResourceIdentifier__","ResourceType":"ENVIRONMENT"},"LastUpdatedTime":946684800,"Name":"__Name__","NetworkFabricType":"TRANSIT_GATEWAY","OwnerAccountId":"__OwnerAccountId__","State":"CREATING","Tags":{"key0":"__Value__"},"TransitGatewayId":"__TransitGatewayId__"}

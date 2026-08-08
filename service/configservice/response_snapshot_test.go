@@ -176,7 +176,13 @@ func TestCheckResponseSnapshot_AssociateResourceTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateResourceTypes(context.Background(), &AssociateResourceTypesInput{})
+	got, err := svc.AssociateResourceTypes(context.Background(), &AssociateResourceTypesInput{
+		ConfigurationRecorderArn: ptr.String("__ConfigurationRecorderArn__"),
+		ResourceTypes: []types.ResourceType{
+			types.ResourceType("AWS::EC2::CustomerGateway"),
+			types.ResourceType("AWS::EC2::CustomerGateway"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -254,7 +260,25 @@ func TestCheckResponseSnapshot_BatchGetAggregateResourceConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetAggregateResourceConfig(context.Background(), &BatchGetAggregateResourceConfigInput{})
+	got, err := svc.BatchGetAggregateResourceConfig(context.Background(), &BatchGetAggregateResourceConfigInput{
+		ConfigurationAggregatorName: ptr.String("__ConfigurationAggregatorName__"),
+		ResourceIdentifiers: []types.AggregateResourceIdentifier{
+			{
+				SourceAccountId: ptr.String("__SourceAccountId__"),
+				SourceRegion:    ptr.String("__SourceRegion__"),
+				ResourceId:      ptr.String("__ResourceId__"),
+				ResourceType:    types.ResourceType("AWS::EC2::CustomerGateway"),
+				ResourceName:    ptr.String("__ResourceName__"),
+			},
+			{
+				SourceAccountId: ptr.String("__SourceAccountId__"),
+				SourceRegion:    ptr.String("__SourceRegion__"),
+				ResourceId:      ptr.String("__ResourceId__"),
+				ResourceType:    types.ResourceType("AWS::EC2::CustomerGateway"),
+				ResourceName:    ptr.String("__ResourceName__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -326,7 +350,18 @@ func TestCheckResponseSnapshot_BatchGetResourceConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetResourceConfig(context.Background(), &BatchGetResourceConfigInput{})
+	got, err := svc.BatchGetResourceConfig(context.Background(), &BatchGetResourceConfigInput{
+		ResourceKeys: []types.ResourceKey{
+			{
+				ResourceType: types.ResourceType("AWS::EC2::CustomerGateway"),
+				ResourceId:   ptr.String("__ResourceId__"),
+			},
+			{
+				ResourceType: types.ResourceType("AWS::EC2::CustomerGateway"),
+				ResourceId:   ptr.String("__ResourceId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -345,7 +380,10 @@ func TestCheckResponseSnapshot_DeleteAggregationAuthorization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAggregationAuthorization(context.Background(), &DeleteAggregationAuthorizationInput{})
+	got, err := svc.DeleteAggregationAuthorization(context.Background(), &DeleteAggregationAuthorizationInput{
+		AuthorizedAccountId: ptr.String("__AuthorizedAccountId__"),
+		AuthorizedAwsRegion: ptr.String("__AuthorizedAwsRegion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -364,7 +402,9 @@ func TestCheckResponseSnapshot_DeleteConfigRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConfigRule(context.Background(), &DeleteConfigRuleInput{})
+	got, err := svc.DeleteConfigRule(context.Background(), &DeleteConfigRuleInput{
+		ConfigRuleName: ptr.String("__ConfigRuleName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -383,7 +423,9 @@ func TestCheckResponseSnapshot_DeleteConfigurationAggregator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConfigurationAggregator(context.Background(), &DeleteConfigurationAggregatorInput{})
+	got, err := svc.DeleteConfigurationAggregator(context.Background(), &DeleteConfigurationAggregatorInput{
+		ConfigurationAggregatorName: ptr.String("__ConfigurationAggregatorName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -402,7 +444,9 @@ func TestCheckResponseSnapshot_DeleteConfigurationRecorder(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConfigurationRecorder(context.Background(), &DeleteConfigurationRecorderInput{})
+	got, err := svc.DeleteConfigurationRecorder(context.Background(), &DeleteConfigurationRecorderInput{
+		ConfigurationRecorderName: ptr.String("__ConfigurationRecorderName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -421,7 +465,9 @@ func TestCheckResponseSnapshot_DeleteConformancePack(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConformancePack(context.Background(), &DeleteConformancePackInput{})
+	got, err := svc.DeleteConformancePack(context.Background(), &DeleteConformancePackInput{
+		ConformancePackName: ptr.String("__ConformancePackName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -440,7 +486,9 @@ func TestCheckResponseSnapshot_DeleteConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConnector(context.Background(), &DeleteConnectorInput{})
+	got, err := svc.DeleteConnector(context.Background(), &DeleteConnectorInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -459,7 +507,9 @@ func TestCheckResponseSnapshot_DeleteDeliveryChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDeliveryChannel(context.Background(), &DeleteDeliveryChannelInput{})
+	got, err := svc.DeleteDeliveryChannel(context.Background(), &DeleteDeliveryChannelInput{
+		DeliveryChannelName: ptr.String("__DeliveryChannelName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -478,7 +528,9 @@ func TestCheckResponseSnapshot_DeleteEvaluationResults(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEvaluationResults(context.Background(), &DeleteEvaluationResultsInput{})
+	got, err := svc.DeleteEvaluationResults(context.Background(), &DeleteEvaluationResultsInput{
+		ConfigRuleName: ptr.String("__ConfigRuleName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -497,7 +549,9 @@ func TestCheckResponseSnapshot_DeleteOrganizationConfigRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteOrganizationConfigRule(context.Background(), &DeleteOrganizationConfigRuleInput{})
+	got, err := svc.DeleteOrganizationConfigRule(context.Background(), &DeleteOrganizationConfigRuleInput{
+		OrganizationConfigRuleName: ptr.String("__OrganizationConfigRuleName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -516,7 +570,9 @@ func TestCheckResponseSnapshot_DeleteOrganizationConformancePack(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteOrganizationConformancePack(context.Background(), &DeleteOrganizationConformancePackInput{})
+	got, err := svc.DeleteOrganizationConformancePack(context.Background(), &DeleteOrganizationConformancePackInput{
+		OrganizationConformancePackName: ptr.String("__OrganizationConformancePackName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -535,7 +591,10 @@ func TestCheckResponseSnapshot_DeletePendingAggregationRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePendingAggregationRequest(context.Background(), &DeletePendingAggregationRequestInput{})
+	got, err := svc.DeletePendingAggregationRequest(context.Background(), &DeletePendingAggregationRequestInput{
+		RequesterAccountId: ptr.String("__RequesterAccountId__"),
+		RequesterAwsRegion: ptr.String("__RequesterAwsRegion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -554,7 +613,10 @@ func TestCheckResponseSnapshot_DeleteRemediationConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRemediationConfiguration(context.Background(), &DeleteRemediationConfigurationInput{})
+	got, err := svc.DeleteRemediationConfiguration(context.Background(), &DeleteRemediationConfigurationInput{
+		ConfigRuleName: ptr.String("__ConfigRuleName__"),
+		ResourceType:   ptr.String("__ResourceType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -602,7 +664,19 @@ func TestCheckResponseSnapshot_DeleteRemediationExceptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRemediationExceptions(context.Background(), &DeleteRemediationExceptionsInput{})
+	got, err := svc.DeleteRemediationExceptions(context.Background(), &DeleteRemediationExceptionsInput{
+		ConfigRuleName: ptr.String("__ConfigRuleName__"),
+		ResourceKeys: []types.RemediationExceptionResourceKey{
+			{
+				ResourceType: ptr.String("__ResourceType__"),
+				ResourceId:   ptr.String("__ResourceId__"),
+			},
+			{
+				ResourceType: ptr.String("__ResourceType__"),
+				ResourceId:   ptr.String("__ResourceId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -621,7 +695,10 @@ func TestCheckResponseSnapshot_DeleteResourceConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourceConfig(context.Background(), &DeleteResourceConfigInput{})
+	got, err := svc.DeleteResourceConfig(context.Background(), &DeleteResourceConfigInput{
+		ResourceType: ptr.String("__ResourceType__"),
+		ResourceId:   ptr.String("__ResourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -640,7 +717,9 @@ func TestCheckResponseSnapshot_DeleteRetentionConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRetentionConfiguration(context.Background(), &DeleteRetentionConfigurationInput{})
+	got, err := svc.DeleteRetentionConfiguration(context.Background(), &DeleteRetentionConfigurationInput{
+		RetentionConfigurationName: ptr.String("__RetentionConfigurationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -662,7 +741,10 @@ func TestCheckResponseSnapshot_DeleteServiceLinkedConfigurationRecorder(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteServiceLinkedConfigurationRecorder(context.Background(), &DeleteServiceLinkedConfigurationRecorderInput{})
+	got, err := svc.DeleteServiceLinkedConfigurationRecorder(context.Background(), &DeleteServiceLinkedConfigurationRecorderInput{
+		ServicePrincipal: ptr.String("__ServicePrincipal__"),
+		Arn:              ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -681,7 +763,9 @@ func TestCheckResponseSnapshot_DeleteStoredQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteStoredQuery(context.Background(), &DeleteStoredQueryInput{})
+	got, err := svc.DeleteStoredQuery(context.Background(), &DeleteStoredQueryInput{
+		QueryName: ptr.String("__QueryName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -702,7 +786,9 @@ func TestCheckResponseSnapshot_DeliverConfigSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeliverConfigSnapshot(context.Background(), &DeliverConfigSnapshotInput{})
+	got, err := svc.DeliverConfigSnapshot(context.Background(), &DeliverConfigSnapshotInput{
+		DeliveryChannelName: ptr.String("__DeliveryChannelName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -749,7 +835,17 @@ func TestCheckResponseSnapshot_DescribeAggregateComplianceByConfigRules(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAggregateComplianceByConfigRules(context.Background(), &DescribeAggregateComplianceByConfigRulesInput{})
+	got, err := svc.DescribeAggregateComplianceByConfigRules(context.Background(), &DescribeAggregateComplianceByConfigRulesInput{
+		ConfigurationAggregatorName: ptr.String("__ConfigurationAggregatorName__"),
+		Filters: &types.ConfigRuleComplianceFilters{
+			ConfigRuleName: ptr.String("__ConfigRuleName__"),
+			ComplianceType: types.ComplianceType("COMPLIANT"),
+			AccountId:      ptr.String("__AccountId__"),
+			AwsRegion:      ptr.String("__AwsRegion__"),
+		},
+		Limit:     1,
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -794,7 +890,17 @@ func TestCheckResponseSnapshot_DescribeAggregateComplianceByConformancePacks(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAggregateComplianceByConformancePacks(context.Background(), &DescribeAggregateComplianceByConformancePacksInput{})
+	got, err := svc.DescribeAggregateComplianceByConformancePacks(context.Background(), &DescribeAggregateComplianceByConformancePacksInput{
+		ConfigurationAggregatorName: ptr.String("__ConfigurationAggregatorName__"),
+		Filters: &types.AggregateConformancePackComplianceFilters{
+			ConformancePackName: ptr.String("__ConformancePackName__"),
+			ComplianceType:      types.ConformancePackComplianceType("COMPLIANT"),
+			AccountId:           ptr.String("__AccountId__"),
+			AwsRegion:           ptr.String("__AwsRegion__"),
+		},
+		Limit:     1,
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -829,7 +935,10 @@ func TestCheckResponseSnapshot_DescribeAggregationAuthorizations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAggregationAuthorizations(context.Background(), &DescribeAggregationAuthorizationsInput{})
+	got, err := svc.DescribeAggregationAuthorizations(context.Background(), &DescribeAggregationAuthorizationsInput{
+		Limit:     1,
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -872,7 +981,17 @@ func TestCheckResponseSnapshot_DescribeComplianceByConfigRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeComplianceByConfigRule(context.Background(), &DescribeComplianceByConfigRuleInput{})
+	got, err := svc.DescribeComplianceByConfigRule(context.Background(), &DescribeComplianceByConfigRuleInput{
+		ConfigRuleNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ComplianceTypes: []types.ComplianceType{
+			types.ComplianceType("COMPLIANT"),
+			types.ComplianceType("COMPLIANT"),
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -917,7 +1036,16 @@ func TestCheckResponseSnapshot_DescribeComplianceByResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeComplianceByResource(context.Background(), &DescribeComplianceByResourceInput{})
+	got, err := svc.DescribeComplianceByResource(context.Background(), &DescribeComplianceByResourceInput{
+		ResourceType: ptr.String("__ResourceType__"),
+		ResourceId:   ptr.String("__ResourceId__"),
+		ComplianceTypes: []types.ComplianceType{
+			types.ComplianceType("COMPLIANT"),
+			types.ComplianceType("COMPLIANT"),
+		},
+		Limit:     1,
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -974,7 +1102,14 @@ func TestCheckResponseSnapshot_DescribeConfigRuleEvaluationStatus(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConfigRuleEvaluationStatus(context.Background(), &DescribeConfigRuleEvaluationStatusInput{})
+	got, err := svc.DescribeConfigRuleEvaluationStatus(context.Background(), &DescribeConfigRuleEvaluationStatusInput{
+		ConfigRuleNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+		Limit:     1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1103,7 +1238,17 @@ func TestCheckResponseSnapshot_DescribeConfigRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConfigRules(context.Background(), &DescribeConfigRulesInput{})
+	got, err := svc.DescribeConfigRules(context.Background(), &DescribeConfigRulesInput{
+		ConfigRuleNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: &types.DescribeConfigRulesFilters{
+			EvaluationMode:           types.EvaluationMode("DETECTIVE"),
+			RuleEvaluationVisibility: types.RuleEvaluationVisibility("EXTERNAL"),
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1144,7 +1289,15 @@ func TestCheckResponseSnapshot_DescribeConfigurationAggregatorSourcesStatus(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConfigurationAggregatorSourcesStatus(context.Background(), &DescribeConfigurationAggregatorSourcesStatusInput{})
+	got, err := svc.DescribeConfigurationAggregatorSourcesStatus(context.Background(), &DescribeConfigurationAggregatorSourcesStatusInput{
+		ConfigurationAggregatorName: ptr.String("__ConfigurationAggregatorName__"),
+		UpdateStatus: []types.AggregatedSourceStatusType{
+			types.AggregatedSourceStatusType("FAILED"),
+			types.AggregatedSourceStatusType("FAILED"),
+		},
+		NextToken: ptr.String("__NextToken__"),
+		Limit:     1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1277,7 +1430,14 @@ func TestCheckResponseSnapshot_DescribeConfigurationAggregators(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConfigurationAggregators(context.Background(), &DescribeConfigurationAggregatorsInput{})
+	got, err := svc.DescribeConfigurationAggregators(context.Background(), &DescribeConfigurationAggregatorsInput{
+		ConfigurationAggregatorNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+		Limit:     1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1323,7 +1483,14 @@ func TestCheckResponseSnapshot_DescribeConfigurationRecorderStatus(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConfigurationRecorderStatus(context.Background(), &DescribeConfigurationRecorderStatusInput{})
+	got, err := svc.DescribeConfigurationRecorderStatus(context.Background(), &DescribeConfigurationRecorderStatusInput{
+		ConfigurationRecorderNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServicePrincipal: ptr.String("__ServicePrincipal__"),
+		Arn:              ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1461,7 +1628,14 @@ func TestCheckResponseSnapshot_DescribeConfigurationRecorders(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConfigurationRecorders(context.Background(), &DescribeConfigurationRecordersInput{})
+	got, err := svc.DescribeConfigurationRecorders(context.Background(), &DescribeConfigurationRecordersInput{
+		ConfigurationRecorderNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ServicePrincipal: ptr.String("__ServicePrincipal__"),
+		Arn:              ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1501,7 +1675,18 @@ func TestCheckResponseSnapshot_DescribeConformancePackCompliance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConformancePackCompliance(context.Background(), &DescribeConformancePackComplianceInput{})
+	got, err := svc.DescribeConformancePackCompliance(context.Background(), &DescribeConformancePackComplianceInput{
+		ConformancePackName: ptr.String("__ConformancePackName__"),
+		Filters: &types.ConformancePackComplianceFilters{
+			ConfigRuleNames: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ComplianceType: types.ConformancePackComplianceType("COMPLIANT"),
+		},
+		Limit:     1,
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1544,7 +1729,14 @@ func TestCheckResponseSnapshot_DescribeConformancePackStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConformancePackStatus(context.Background(), &DescribeConformancePackStatusInput{})
+	got, err := svc.DescribeConformancePackStatus(context.Background(), &DescribeConformancePackStatusInput{
+		ConformancePackNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Limit:     1,
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1613,7 +1805,14 @@ func TestCheckResponseSnapshot_DescribeConformancePacks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConformancePacks(context.Background(), &DescribeConformancePacksInput{})
+	got, err := svc.DescribeConformancePacks(context.Background(), &DescribeConformancePacksInput{
+		ConformancePackNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Limit:     1,
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1685,7 +1884,12 @@ func TestCheckResponseSnapshot_DescribeDeliveryChannelStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDeliveryChannelStatus(context.Background(), &DescribeDeliveryChannelStatusInput{})
+	got, err := svc.DescribeDeliveryChannelStatus(context.Background(), &DescribeDeliveryChannelStatusInput{
+		DeliveryChannelNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1727,7 +1931,12 @@ func TestCheckResponseSnapshot_DescribeDeliveryChannels(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDeliveryChannels(context.Background(), &DescribeDeliveryChannelsInput{})
+	got, err := svc.DescribeDeliveryChannels(context.Background(), &DescribeDeliveryChannelsInput{
+		DeliveryChannelNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1764,7 +1973,14 @@ func TestCheckResponseSnapshot_DescribeOrganizationConfigRuleStatuses(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeOrganizationConfigRuleStatuses(context.Background(), &DescribeOrganizationConfigRuleStatusesInput{})
+	got, err := svc.DescribeOrganizationConfigRuleStatuses(context.Background(), &DescribeOrganizationConfigRuleStatusesInput{
+		OrganizationConfigRuleNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Limit:     1,
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1907,7 +2123,14 @@ func TestCheckResponseSnapshot_DescribeOrganizationConfigRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeOrganizationConfigRules(context.Background(), &DescribeOrganizationConfigRulesInput{})
+	got, err := svc.DescribeOrganizationConfigRules(context.Background(), &DescribeOrganizationConfigRulesInput{
+		OrganizationConfigRuleNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Limit:     1,
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1944,7 +2167,14 @@ func TestCheckResponseSnapshot_DescribeOrganizationConformancePackStatuses(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeOrganizationConformancePackStatuses(context.Background(), &DescribeOrganizationConformancePackStatusesInput{})
+	got, err := svc.DescribeOrganizationConformancePackStatuses(context.Background(), &DescribeOrganizationConformancePackStatusesInput{
+		OrganizationConformancePackNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Limit:     1,
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2009,7 +2239,14 @@ func TestCheckResponseSnapshot_DescribeOrganizationConformancePacks(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeOrganizationConformancePacks(context.Background(), &DescribeOrganizationConformancePacksInput{})
+	got, err := svc.DescribeOrganizationConformancePacks(context.Background(), &DescribeOrganizationConformancePacksInput{
+		OrganizationConformancePackNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Limit:     1,
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2040,7 +2277,10 @@ func TestCheckResponseSnapshot_DescribePendingAggregationRequests(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePendingAggregationRequests(context.Background(), &DescribePendingAggregationRequestsInput{})
+	got, err := svc.DescribePendingAggregationRequests(context.Background(), &DescribePendingAggregationRequestsInput{
+		Limit:     1,
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2124,7 +2364,12 @@ func TestCheckResponseSnapshot_DescribeRemediationConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRemediationConfigurations(context.Background(), &DescribeRemediationConfigurationsInput{})
+	got, err := svc.DescribeRemediationConfigurations(context.Background(), &DescribeRemediationConfigurationsInput{
+		ConfigRuleNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2161,7 +2406,21 @@ func TestCheckResponseSnapshot_DescribeRemediationExceptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRemediationExceptions(context.Background(), &DescribeRemediationExceptionsInput{})
+	got, err := svc.DescribeRemediationExceptions(context.Background(), &DescribeRemediationExceptionsInput{
+		ConfigRuleName: ptr.String("__ConfigRuleName__"),
+		ResourceKeys: []types.RemediationExceptionResourceKey{
+			{
+				ResourceType: ptr.String("__ResourceType__"),
+				ResourceId:   ptr.String("__ResourceId__"),
+			},
+			{
+				ResourceType: ptr.String("__ResourceType__"),
+				ResourceId:   ptr.String("__ResourceId__"),
+			},
+		},
+		Limit:     1,
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2234,7 +2493,21 @@ func TestCheckResponseSnapshot_DescribeRemediationExecutionStatus(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRemediationExecutionStatus(context.Background(), &DescribeRemediationExecutionStatusInput{})
+	got, err := svc.DescribeRemediationExecutionStatus(context.Background(), &DescribeRemediationExecutionStatusInput{
+		ConfigRuleName: ptr.String("__ConfigRuleName__"),
+		ResourceKeys: []types.ResourceKey{
+			{
+				ResourceType: types.ResourceType("AWS::EC2::CustomerGateway"),
+				ResourceId:   ptr.String("__ResourceId__"),
+			},
+			{
+				ResourceType: types.ResourceType("AWS::EC2::CustomerGateway"),
+				ResourceId:   ptr.String("__ResourceId__"),
+			},
+		},
+		Limit:     1,
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2265,7 +2538,13 @@ func TestCheckResponseSnapshot_DescribeRetentionConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRetentionConfigurations(context.Background(), &DescribeRetentionConfigurationsInput{})
+	got, err := svc.DescribeRetentionConfigurations(context.Background(), &DescribeRetentionConfigurationsInput{
+		RetentionConfigurationNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2343,7 +2622,13 @@ func TestCheckResponseSnapshot_DisassociateResourceTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateResourceTypes(context.Background(), &DisassociateResourceTypesInput{})
+	got, err := svc.DisassociateResourceTypes(context.Background(), &DisassociateResourceTypesInput{
+		ConfigurationRecorderArn: ptr.String("__ConfigurationRecorderArn__"),
+		ResourceTypes: []types.ResourceType{
+			types.ResourceType("AWS::EC2::CustomerGateway"),
+			types.ResourceType("AWS::EC2::CustomerGateway"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2402,7 +2687,15 @@ func TestCheckResponseSnapshot_GetAggregateComplianceDetailsByConfigRule(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAggregateComplianceDetailsByConfigRule(context.Background(), &GetAggregateComplianceDetailsByConfigRuleInput{})
+	got, err := svc.GetAggregateComplianceDetailsByConfigRule(context.Background(), &GetAggregateComplianceDetailsByConfigRuleInput{
+		ConfigurationAggregatorName: ptr.String("__ConfigurationAggregatorName__"),
+		ConfigRuleName:              ptr.String("__ConfigRuleName__"),
+		AccountId:                   ptr.String("__AccountId__"),
+		AwsRegion:                   ptr.String("__AwsRegion__"),
+		ComplianceType:              types.ComplianceType("COMPLIANT"),
+		Limit:                       1,
+		NextToken:                   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2454,7 +2747,16 @@ func TestCheckResponseSnapshot_GetAggregateConfigRuleComplianceSummary(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAggregateConfigRuleComplianceSummary(context.Background(), &GetAggregateConfigRuleComplianceSummaryInput{})
+	got, err := svc.GetAggregateConfigRuleComplianceSummary(context.Background(), &GetAggregateConfigRuleComplianceSummaryInput{
+		ConfigurationAggregatorName: ptr.String("__ConfigurationAggregatorName__"),
+		Filters: &types.ConfigRuleComplianceSummaryFilters{
+			AccountId: ptr.String("__AccountId__"),
+			AwsRegion: ptr.String("__AwsRegion__"),
+		},
+		GroupByKey: types.ConfigRuleComplianceSummaryGroupKey("ACCOUNT_ID"),
+		Limit:      1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2492,7 +2794,16 @@ func TestCheckResponseSnapshot_GetAggregateConformancePackComplianceSummary(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAggregateConformancePackComplianceSummary(context.Background(), &GetAggregateConformancePackComplianceSummaryInput{})
+	got, err := svc.GetAggregateConformancePackComplianceSummary(context.Background(), &GetAggregateConformancePackComplianceSummaryInput{
+		ConfigurationAggregatorName: ptr.String("__ConfigurationAggregatorName__"),
+		Filters: &types.AggregateConformancePackComplianceSummaryFilters{
+			AccountId: ptr.String("__AccountId__"),
+			AwsRegion: ptr.String("__AwsRegion__"),
+		},
+		GroupByKey: types.AggregateConformancePackComplianceSummaryGroupKey("ACCOUNT_ID"),
+		Limit:      1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2525,7 +2836,17 @@ func TestCheckResponseSnapshot_GetAggregateDiscoveredResourceCounts(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAggregateDiscoveredResourceCounts(context.Background(), &GetAggregateDiscoveredResourceCountsInput{})
+	got, err := svc.GetAggregateDiscoveredResourceCounts(context.Background(), &GetAggregateDiscoveredResourceCountsInput{
+		ConfigurationAggregatorName: ptr.String("__ConfigurationAggregatorName__"),
+		Filters: &types.ResourceCountFilters{
+			ResourceType: types.ResourceType("AWS::EC2::CustomerGateway"),
+			AccountId:    ptr.String("__AccountId__"),
+			Region:       ptr.String("__Region__"),
+		},
+		GroupByKey: types.ResourceCountGroupKey("RESOURCE_TYPE"),
+		Limit:      1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2587,7 +2908,16 @@ func TestCheckResponseSnapshot_GetAggregateResourceConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAggregateResourceConfig(context.Background(), &GetAggregateResourceConfigInput{})
+	got, err := svc.GetAggregateResourceConfig(context.Background(), &GetAggregateResourceConfigInput{
+		ConfigurationAggregatorName: ptr.String("__ConfigurationAggregatorName__"),
+		ResourceIdentifier: &types.AggregateResourceIdentifier{
+			SourceAccountId: ptr.String("__SourceAccountId__"),
+			SourceRegion:    ptr.String("__SourceRegion__"),
+			ResourceId:      ptr.String("__ResourceId__"),
+			ResourceType:    types.ResourceType("AWS::EC2::CustomerGateway"),
+			ResourceName:    ptr.String("__ResourceName__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2644,7 +2974,15 @@ func TestCheckResponseSnapshot_GetComplianceDetailsByConfigRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetComplianceDetailsByConfigRule(context.Background(), &GetComplianceDetailsByConfigRuleInput{})
+	got, err := svc.GetComplianceDetailsByConfigRule(context.Background(), &GetComplianceDetailsByConfigRuleInput{
+		ConfigRuleName: ptr.String("__ConfigRuleName__"),
+		ComplianceTypes: []types.ComplianceType{
+			types.ComplianceType("COMPLIANT"),
+			types.ComplianceType("COMPLIANT"),
+		},
+		Limit:     1,
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2701,7 +3039,16 @@ func TestCheckResponseSnapshot_GetComplianceDetailsByResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetComplianceDetailsByResource(context.Background(), &GetComplianceDetailsByResourceInput{})
+	got, err := svc.GetComplianceDetailsByResource(context.Background(), &GetComplianceDetailsByResourceInput{
+		ResourceType: ptr.String("__ResourceType__"),
+		ResourceId:   ptr.String("__ResourceId__"),
+		ComplianceTypes: []types.ComplianceType{
+			types.ComplianceType("COMPLIANT"),
+			types.ComplianceType("COMPLIANT"),
+		},
+		NextToken:            ptr.String("__NextToken__"),
+		ResourceEvaluationId: ptr.String("__ResourceEvaluationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2782,7 +3129,12 @@ func TestCheckResponseSnapshot_GetComplianceSummaryByResourceType(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetComplianceSummaryByResourceType(context.Background(), &GetComplianceSummaryByResourceTypeInput{})
+	got, err := svc.GetComplianceSummaryByResourceType(context.Background(), &GetComplianceSummaryByResourceTypeInput{
+		ResourceTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2838,7 +3190,23 @@ func TestCheckResponseSnapshot_GetConformancePackComplianceDetails(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConformancePackComplianceDetails(context.Background(), &GetConformancePackComplianceDetailsInput{})
+	got, err := svc.GetConformancePackComplianceDetails(context.Background(), &GetConformancePackComplianceDetailsInput{
+		ConformancePackName: ptr.String("__ConformancePackName__"),
+		Filters: &types.ConformancePackEvaluationFilters{
+			ConfigRuleNames: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ComplianceType: types.ConformancePackComplianceType("COMPLIANT"),
+			ResourceType:   ptr.String("__ResourceType__"),
+			ResourceIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Limit:     1,
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2869,7 +3237,14 @@ func TestCheckResponseSnapshot_GetConformancePackComplianceSummary(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConformancePackComplianceSummary(context.Background(), &GetConformancePackComplianceSummaryInput{})
+	got, err := svc.GetConformancePackComplianceSummary(context.Background(), &GetConformancePackComplianceSummaryInput{
+		ConformancePackNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Limit:     1,
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2900,7 +3275,9 @@ func TestCheckResponseSnapshot_GetConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConnector(context.Background(), &GetConnectorInput{})
+	got, err := svc.GetConnector(context.Background(), &GetConnectorInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2921,7 +3298,9 @@ func TestCheckResponseSnapshot_GetCustomRulePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCustomRulePolicy(context.Background(), &GetCustomRulePolicyInput{})
+	got, err := svc.GetCustomRulePolicy(context.Background(), &GetCustomRulePolicyInput{
+		ConfigRuleName: ptr.String("__ConfigRuleName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2953,7 +3332,14 @@ func TestCheckResponseSnapshot_GetDiscoveredResourceCounts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDiscoveredResourceCounts(context.Background(), &GetDiscoveredResourceCountsInput{})
+	got, err := svc.GetDiscoveredResourceCounts(context.Background(), &GetDiscoveredResourceCountsInput{
+		ResourceTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Limit:     1,
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2992,7 +3378,15 @@ func TestCheckResponseSnapshot_GetOrganizationConfigRuleDetailedStatus(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOrganizationConfigRuleDetailedStatus(context.Background(), &GetOrganizationConfigRuleDetailedStatusInput{})
+	got, err := svc.GetOrganizationConfigRuleDetailedStatus(context.Background(), &GetOrganizationConfigRuleDetailedStatusInput{
+		OrganizationConfigRuleName: ptr.String("__OrganizationConfigRuleName__"),
+		Filters: &types.StatusDetailFilters{
+			AccountId:               ptr.String("__AccountId__"),
+			MemberAccountRuleStatus: types.MemberAccountRuleStatus("CREATE_SUCCESSFUL"),
+		},
+		Limit:     1,
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3031,7 +3425,15 @@ func TestCheckResponseSnapshot_GetOrganizationConformancePackDetailedStatus(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOrganizationConformancePackDetailedStatus(context.Background(), &GetOrganizationConformancePackDetailedStatusInput{})
+	got, err := svc.GetOrganizationConformancePackDetailedStatus(context.Background(), &GetOrganizationConformancePackDetailedStatusInput{
+		OrganizationConformancePackName: ptr.String("__OrganizationConformancePackName__"),
+		Filters: &types.OrganizationResourceDetailedStatusFilters{
+			AccountId: ptr.String("__AccountId__"),
+			Status:    types.OrganizationResourceDetailedStatus("CREATE_SUCCESSFUL"),
+		},
+		Limit:     1,
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3052,7 +3454,9 @@ func TestCheckResponseSnapshot_GetOrganizationCustomRulePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOrganizationCustomRulePolicy(context.Background(), &GetOrganizationCustomRulePolicyInput{})
+	got, err := svc.GetOrganizationCustomRulePolicy(context.Background(), &GetOrganizationCustomRulePolicyInput{
+		OrganizationConfigRuleName: ptr.String("__OrganizationConfigRuleName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3159,7 +3563,15 @@ func TestCheckResponseSnapshot_GetResourceConfigHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourceConfigHistory(context.Background(), &GetResourceConfigHistoryInput{})
+	got, err := svc.GetResourceConfigHistory(context.Background(), &GetResourceConfigHistoryInput{
+		ResourceType:       types.ResourceType("AWS::EC2::CustomerGateway"),
+		ResourceId:         ptr.String("__ResourceId__"),
+		LaterTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EarlierTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ChronologicalOrder: types.ChronologicalOrder("Reverse"),
+		Limit:              1,
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3196,7 +3608,9 @@ func TestCheckResponseSnapshot_GetResourceEvaluationSummary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourceEvaluationSummary(context.Background(), &GetResourceEvaluationSummaryInput{})
+	got, err := svc.GetResourceEvaluationSummary(context.Background(), &GetResourceEvaluationSummaryInput{
+		ResourceEvaluationId: ptr.String("__ResourceEvaluationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3223,7 +3637,9 @@ func TestCheckResponseSnapshot_GetStoredQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetStoredQuery(context.Background(), &GetStoredQueryInput{})
+	got, err := svc.GetStoredQuery(context.Background(), &GetStoredQueryInput{
+		QueryName: ptr.String("__QueryName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3260,7 +3676,18 @@ func TestCheckResponseSnapshot_ListAggregateDiscoveredResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAggregateDiscoveredResources(context.Background(), &ListAggregateDiscoveredResourcesInput{})
+	got, err := svc.ListAggregateDiscoveredResources(context.Background(), &ListAggregateDiscoveredResourcesInput{
+		ConfigurationAggregatorName: ptr.String("__ConfigurationAggregatorName__"),
+		ResourceType:                types.ResourceType("AWS::EC2::CustomerGateway"),
+		Filters: &types.ResourceFilters{
+			AccountId:    ptr.String("__AccountId__"),
+			ResourceId:   ptr.String("__ResourceId__"),
+			ResourceName: ptr.String("__ResourceName__"),
+			Region:       ptr.String("__Region__"),
+		},
+		Limit:     1,
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3297,7 +3724,26 @@ func TestCheckResponseSnapshot_ListConfigurationRecorders(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConfigurationRecorders(context.Background(), &ListConfigurationRecordersInput{})
+	got, err := svc.ListConfigurationRecorders(context.Background(), &ListConfigurationRecordersInput{
+		Filters: []types.ConfigurationRecorderFilter{
+			{
+				FilterName: types.ConfigurationRecorderFilterName("recordingScope"),
+				FilterValue: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				FilterName: types.ConfigurationRecorderFilterName("recordingScope"),
+				FilterValue: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3330,7 +3776,18 @@ func TestCheckResponseSnapshot_ListConformancePackComplianceScores(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConformancePackComplianceScores(context.Background(), &ListConformancePackComplianceScoresInput{})
+	got, err := svc.ListConformancePackComplianceScores(context.Background(), &ListConformancePackComplianceScoresInput{
+		Filters: &types.ConformancePackComplianceScoresFilters{
+			ConformancePackNames: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		SortOrder: types.SortOrder("ASCENDING"),
+		SortBy:    types.SortBy("SCORE"),
+		Limit:     1,
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3367,7 +3824,26 @@ func TestCheckResponseSnapshot_ListConnectors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConnectors(context.Background(), &ListConnectorsInput{})
+	got, err := svc.ListConnectors(context.Background(), &ListConnectorsInput{
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.ConnectorFilter{
+			{
+				FilterName: types.ConnectorFilterName("provider"),
+				FilterValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				FilterName: types.ConnectorFilterName("provider"),
+				FilterValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3402,7 +3878,17 @@ func TestCheckResponseSnapshot_ListDiscoveredResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDiscoveredResources(context.Background(), &ListDiscoveredResourcesInput{})
+	got, err := svc.ListDiscoveredResources(context.Background(), &ListDiscoveredResourcesInput{
+		ResourceType: types.ResourceType("AWS::EC2::CustomerGateway"),
+		ResourceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResourceName:            ptr.String("__ResourceName__"),
+		Limit:                   1,
+		IncludeDeletedResources: true,
+		NextToken:               ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3435,7 +3921,18 @@ func TestCheckResponseSnapshot_ListResourceEvaluations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourceEvaluations(context.Background(), &ListResourceEvaluationsInput{})
+	got, err := svc.ListResourceEvaluations(context.Background(), &ListResourceEvaluationsInput{
+		Filters: &types.ResourceEvaluationFilters{
+			EvaluationMode: types.EvaluationMode("DETECTIVE"),
+			TimeWindow: &types.TimeWindow{
+				StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			EvaluationContextIdentifier: ptr.String("__EvaluationContextIdentifier__"),
+		},
+		Limit:     1,
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3470,7 +3967,10 @@ func TestCheckResponseSnapshot_ListStoredQueries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStoredQueries(context.Background(), &ListStoredQueriesInput{})
+	got, err := svc.ListStoredQueries(context.Background(), &ListStoredQueriesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3501,7 +4001,11 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Limit:       1,
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3527,7 +4031,20 @@ func TestCheckResponseSnapshot_PutAggregationAuthorization(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAggregationAuthorization(context.Background(), &PutAggregationAuthorizationInput{})
+	got, err := svc.PutAggregationAuthorization(context.Background(), &PutAggregationAuthorizationInput{
+		AuthorizedAccountId: ptr.String("__AuthorizedAccountId__"),
+		AuthorizedAwsRegion: ptr.String("__AuthorizedAwsRegion__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3546,7 +4063,71 @@ func TestCheckResponseSnapshot_PutConfigRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutConfigRule(context.Background(), &PutConfigRuleInput{})
+	got, err := svc.PutConfigRule(context.Background(), &PutConfigRuleInput{
+		ConfigRule: &types.ConfigRule{
+			ConfigRuleName: ptr.String("__ConfigRuleName__"),
+			ConfigRuleArn:  ptr.String("__ConfigRuleArn__"),
+			ConfigRuleId:   ptr.String("__ConfigRuleId__"),
+			Description:    ptr.String("__Description__"),
+			Scope: &types.Scope{
+				ComplianceResourceTypes: []string{
+					"__Member__",
+					"__Member__",
+				},
+				TagKey:               ptr.String("__TagKey__"),
+				TagValue:             ptr.String("__TagValue__"),
+				ComplianceResourceId: ptr.String("__ComplianceResourceId__"),
+				ServicePrincipals: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Source: &types.Source{
+				Owner:            types.Owner("CUSTOM_LAMBDA"),
+				SourceIdentifier: ptr.String("__SourceIdentifier__"),
+				SourceDetails: []types.SourceDetail{
+					{
+						EventSource:               types.EventSource("aws.config"),
+						MessageType:               types.MessageType("ConfigurationItemChangeNotification"),
+						MaximumExecutionFrequency: types.MaximumExecutionFrequency("One_Hour"),
+					},
+					{
+						EventSource:               types.EventSource("aws.config"),
+						MessageType:               types.MessageType("ConfigurationItemChangeNotification"),
+						MaximumExecutionFrequency: types.MaximumExecutionFrequency("One_Hour"),
+					},
+				},
+				CustomPolicyDetails: &types.CustomPolicyDetails{
+					PolicyRuntime:          ptr.String("__PolicyRuntime__"),
+					PolicyText:             ptr.String("__PolicyText__"),
+					EnableDebugLogDelivery: true,
+				},
+			},
+			InputParameters:           ptr.String("__InputParameters__"),
+			MaximumExecutionFrequency: types.MaximumExecutionFrequency("One_Hour"),
+			ConfigRuleState:           types.ConfigRuleState("ACTIVE"),
+			CreatedBy:                 ptr.String("__CreatedBy__"),
+			EvaluationModes: []types.EvaluationModeConfiguration{
+				{
+					Mode: types.EvaluationMode("DETECTIVE"),
+				},
+				{
+					Mode: types.EvaluationMode("DETECTIVE"),
+				},
+			},
+			RuleEvaluationVisibility: types.RuleEvaluationVisibility("EXTERNAL"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3621,7 +4202,67 @@ func TestCheckResponseSnapshot_PutConfigurationAggregator(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutConfigurationAggregator(context.Background(), &PutConfigurationAggregatorInput{})
+	got, err := svc.PutConfigurationAggregator(context.Background(), &PutConfigurationAggregatorInput{
+		ConfigurationAggregatorName: ptr.String("__ConfigurationAggregatorName__"),
+		AccountAggregationSources: []types.AccountAggregationSource{
+			{
+				AccountIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AllAwsRegions: true,
+				AwsRegions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				AccountIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AllAwsRegions: true,
+				AwsRegions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		OrganizationAggregationSource: &types.OrganizationAggregationSource{
+			RoleArn: ptr.String("__RoleArn__"),
+			AwsRegions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllAwsRegions: true,
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AggregatorFilters: &types.AggregatorFilters{
+			ResourceType: &types.AggregatorFilterResourceType{
+				Type: types.AggregatorFilterType("INCLUDE"),
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			ServicePrincipal: &types.AggregatorFilterServicePrincipal{
+				Type: types.AggregatorFilterType("INCLUDE"),
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3640,7 +4281,76 @@ func TestCheckResponseSnapshot_PutConfigurationRecorder(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutConfigurationRecorder(context.Background(), &PutConfigurationRecorderInput{})
+	got, err := svc.PutConfigurationRecorder(context.Background(), &PutConfigurationRecorderInput{
+		ConfigurationRecorder: &types.ConfigurationRecorder{
+			Arn:     ptr.String("__Arn__"),
+			Name:    ptr.String("__Name__"),
+			RoleARN: ptr.String("__RoleARN__"),
+			RecordingGroup: &types.RecordingGroup{
+				AllSupported:               true,
+				IncludeGlobalResourceTypes: true,
+				ResourceTypes: []types.ResourceType{
+					types.ResourceType("AWS::EC2::CustomerGateway"),
+					types.ResourceType("AWS::EC2::CustomerGateway"),
+				},
+				ExclusionByResourceTypes: &types.ExclusionByResourceTypes{
+					ResourceTypes: []types.ResourceType{
+						types.ResourceType("AWS::EC2::CustomerGateway"),
+						types.ResourceType("AWS::EC2::CustomerGateway"),
+					},
+				},
+				RecordingStrategy: &types.RecordingStrategy{
+					UseOnly: types.RecordingStrategyType("ALL_SUPPORTED_RESOURCE_TYPES"),
+				},
+			},
+			RecordingMode: &types.RecordingMode{
+				RecordingFrequency: types.RecordingFrequency("CONTINUOUS"),
+				RecordingModeOverrides: []types.RecordingModeOverride{
+					{
+						Description: ptr.String("__Description__"),
+						ResourceTypes: []types.ResourceType{
+							types.ResourceType("AWS::EC2::CustomerGateway"),
+							types.ResourceType("AWS::EC2::CustomerGateway"),
+						},
+						RecordingFrequency: types.RecordingFrequency("CONTINUOUS"),
+					},
+					{
+						Description: ptr.String("__Description__"),
+						ResourceTypes: []types.ResourceType{
+							types.ResourceType("AWS::EC2::CustomerGateway"),
+							types.ResourceType("AWS::EC2::CustomerGateway"),
+						},
+						RecordingFrequency: types.RecordingFrequency("CONTINUOUS"),
+					},
+				},
+			},
+			RecordingScope:   types.RecordingScope("INTERNAL"),
+			ServicePrincipal: ptr.String("__ServicePrincipal__"),
+			ConnectorArn:     ptr.String("__ConnectorArn__"),
+			ScopeConfiguration: &types.ScopeConfiguration{
+				ScopeType: ptr.String("__ScopeType__"),
+				ScopeValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AllRegions: true,
+				IncludedRegions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3661,7 +4371,37 @@ func TestCheckResponseSnapshot_PutConformancePack(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutConformancePack(context.Background(), &PutConformancePackInput{})
+	got, err := svc.PutConformancePack(context.Background(), &PutConformancePackInput{
+		ConformancePackName: ptr.String("__ConformancePackName__"),
+		TemplateS3Uri:       ptr.String("__TemplateS3Uri__"),
+		TemplateBody:        ptr.String("__TemplateBody__"),
+		DeliveryS3Bucket:    ptr.String("__DeliveryS3Bucket__"),
+		DeliveryS3KeyPrefix: ptr.String("__DeliveryS3KeyPrefix__"),
+		ConformancePackInputParameters: []types.ConformancePackInputParameter{
+			{
+				ParameterName:  ptr.String("__ParameterName__"),
+				ParameterValue: ptr.String("__ParameterValue__"),
+			},
+			{
+				ParameterName:  ptr.String("__ParameterName__"),
+				ParameterValue: ptr.String("__ParameterValue__"),
+			},
+		},
+		TemplateSSMDocumentDetails: &types.TemplateSSMDocumentDetails{
+			DocumentName:    ptr.String("__DocumentName__"),
+			DocumentVersion: ptr.String("__DocumentVersion__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3682,7 +4422,24 @@ func TestCheckResponseSnapshot_PutConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutConnector(context.Background(), &PutConnectorInput{})
+	got, err := svc.PutConnector(context.Background(), &PutConnectorInput{
+		ConnectorConfiguration: &types.ConnectorConfiguration{
+			Azure: &types.AzureConnectorConfiguration{
+				TenantIdentifier: ptr.String("__TenantIdentifier__"),
+				ClientIdentifier: ptr.String("__ClientIdentifier__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3701,7 +4458,18 @@ func TestCheckResponseSnapshot_PutDeliveryChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutDeliveryChannel(context.Background(), &PutDeliveryChannelInput{})
+	got, err := svc.PutDeliveryChannel(context.Background(), &PutDeliveryChannelInput{
+		DeliveryChannel: &types.DeliveryChannel{
+			Name:         ptr.String("__Name__"),
+			S3BucketName: ptr.String("__S3BucketName__"),
+			S3KeyPrefix:  ptr.String("__S3KeyPrefix__"),
+			S3KmsKeyArn:  ptr.String("__S3KmsKeyArn__"),
+			SnsTopicARN:  ptr.String("__SnsTopicARN__"),
+			ConfigSnapshotDeliveryProperties: &types.ConfigSnapshotDeliveryProperties{
+				DeliveryFrequency: types.MaximumExecutionFrequency("One_Hour"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3737,7 +4505,26 @@ func TestCheckResponseSnapshot_PutEvaluations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutEvaluations(context.Background(), &PutEvaluationsInput{})
+	got, err := svc.PutEvaluations(context.Background(), &PutEvaluationsInput{
+		Evaluations: []types.Evaluation{
+			{
+				ComplianceResourceType: ptr.String("__ComplianceResourceType__"),
+				ComplianceResourceId:   ptr.String("__ComplianceResourceId__"),
+				ComplianceType:         types.ComplianceType("COMPLIANT"),
+				Annotation:             ptr.String("__Annotation__"),
+				OrderingTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				ComplianceResourceType: ptr.String("__ComplianceResourceType__"),
+				ComplianceResourceId:   ptr.String("__ComplianceResourceId__"),
+				ComplianceType:         types.ComplianceType("COMPLIANT"),
+				Annotation:             ptr.String("__Annotation__"),
+				OrderingTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		ResultToken: ptr.String("__ResultToken__"),
+		TestMode:    true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3756,7 +4543,16 @@ func TestCheckResponseSnapshot_PutExternalEvaluation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutExternalEvaluation(context.Background(), &PutExternalEvaluationInput{})
+	got, err := svc.PutExternalEvaluation(context.Background(), &PutExternalEvaluationInput{
+		ConfigRuleName: ptr.String("__ConfigRuleName__"),
+		ExternalEvaluation: &types.ExternalEvaluation{
+			ComplianceResourceType: ptr.String("__ComplianceResourceType__"),
+			ComplianceResourceId:   ptr.String("__ComplianceResourceId__"),
+			ComplianceType:         types.ComplianceType("COMPLIANT"),
+			Annotation:             ptr.String("__Annotation__"),
+			OrderingTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3777,7 +4573,75 @@ func TestCheckResponseSnapshot_PutOrganizationConfigRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutOrganizationConfigRule(context.Background(), &PutOrganizationConfigRuleInput{})
+	got, err := svc.PutOrganizationConfigRule(context.Background(), &PutOrganizationConfigRuleInput{
+		OrganizationConfigRuleName: ptr.String("__OrganizationConfigRuleName__"),
+		OrganizationManagedRuleMetadata: &types.OrganizationManagedRuleMetadata{
+			Description:               ptr.String("__Description__"),
+			RuleIdentifier:            ptr.String("__RuleIdentifier__"),
+			InputParameters:           ptr.String("__InputParameters__"),
+			MaximumExecutionFrequency: types.MaximumExecutionFrequency("One_Hour"),
+			ResourceTypesScope: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ResourceIdScope: ptr.String("__ResourceIdScope__"),
+			TagKeyScope:     ptr.String("__TagKeyScope__"),
+			TagValueScope:   ptr.String("__TagValueScope__"),
+		},
+		OrganizationCustomRuleMetadata: &types.OrganizationCustomRuleMetadata{
+			Description:       ptr.String("__Description__"),
+			LambdaFunctionArn: ptr.String("__LambdaFunctionArn__"),
+			OrganizationConfigRuleTriggerTypes: []types.OrganizationConfigRuleTriggerType{
+				types.OrganizationConfigRuleTriggerType("ConfigurationItemChangeNotification"),
+				types.OrganizationConfigRuleTriggerType("ConfigurationItemChangeNotification"),
+			},
+			InputParameters:           ptr.String("__InputParameters__"),
+			MaximumExecutionFrequency: types.MaximumExecutionFrequency("One_Hour"),
+			ResourceTypesScope: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ResourceIdScope: ptr.String("__ResourceIdScope__"),
+			TagKeyScope:     ptr.String("__TagKeyScope__"),
+			TagValueScope:   ptr.String("__TagValueScope__"),
+		},
+		ExcludedAccounts: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OrganizationCustomPolicyRuleMetadata: &types.OrganizationCustomPolicyRuleMetadata{
+			Description: ptr.String("__Description__"),
+			OrganizationConfigRuleTriggerTypes: []types.OrganizationConfigRuleTriggerTypeNoSN{
+				types.OrganizationConfigRuleTriggerTypeNoSN("ConfigurationItemChangeNotification"),
+				types.OrganizationConfigRuleTriggerTypeNoSN("ConfigurationItemChangeNotification"),
+			},
+			InputParameters:           ptr.String("__InputParameters__"),
+			MaximumExecutionFrequency: types.MaximumExecutionFrequency("One_Hour"),
+			ResourceTypesScope: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ResourceIdScope: ptr.String("__ResourceIdScope__"),
+			TagKeyScope:     ptr.String("__TagKeyScope__"),
+			TagValueScope:   ptr.String("__TagValueScope__"),
+			PolicyRuntime:   ptr.String("__PolicyRuntime__"),
+			PolicyText:      ptr.String("__PolicyText__"),
+			DebugLogDeliveryAccounts: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3798,7 +4662,37 @@ func TestCheckResponseSnapshot_PutOrganizationConformancePack(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutOrganizationConformancePack(context.Background(), &PutOrganizationConformancePackInput{})
+	got, err := svc.PutOrganizationConformancePack(context.Background(), &PutOrganizationConformancePackInput{
+		OrganizationConformancePackName: ptr.String("__OrganizationConformancePackName__"),
+		TemplateS3Uri:                   ptr.String("__TemplateS3Uri__"),
+		TemplateBody:                    ptr.String("__TemplateBody__"),
+		DeliveryS3Bucket:                ptr.String("__DeliveryS3Bucket__"),
+		DeliveryS3KeyPrefix:             ptr.String("__DeliveryS3KeyPrefix__"),
+		ConformancePackInputParameters: []types.ConformancePackInputParameter{
+			{
+				ParameterName:  ptr.String("__ParameterName__"),
+				ParameterValue: ptr.String("__ParameterValue__"),
+			},
+			{
+				ParameterName:  ptr.String("__ParameterName__"),
+				ParameterValue: ptr.String("__ParameterValue__"),
+			},
+		},
+		ExcludedAccounts: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3954,7 +4848,72 @@ func TestCheckResponseSnapshot_PutRemediationConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutRemediationConfigurations(context.Background(), &PutRemediationConfigurationsInput{})
+	got, err := svc.PutRemediationConfigurations(context.Background(), &PutRemediationConfigurationsInput{
+		RemediationConfigurations: []types.RemediationConfiguration{
+			{
+				ConfigRuleName: ptr.String("__ConfigRuleName__"),
+				TargetType:     types.RemediationTargetType("SSM_DOCUMENT"),
+				TargetId:       ptr.String("__TargetId__"),
+				TargetVersion:  ptr.String("__TargetVersion__"),
+				Parameters: map[string]types.RemediationParameterValue{
+					"key0": {
+						ResourceValue: &types.ResourceValue{
+							Value: types.ResourceValueType("RESOURCE_ID"),
+						},
+						StaticValue: &types.StaticValue{
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				ResourceType: ptr.String("__ResourceType__"),
+				Automatic:    true,
+				ExecutionControls: &types.ExecutionControls{
+					SsmControls: &types.SsmControls{
+						ConcurrentExecutionRatePercentage: ptr.Int32(1),
+						ErrorPercentage:                   ptr.Int32(1),
+					},
+				},
+				MaximumAutomaticAttempts: ptr.Int32(1),
+				RetryAttemptSeconds:      ptr.Int64(1),
+				Arn:                      ptr.String("__Arn__"),
+				CreatedByService:         ptr.String("__CreatedByService__"),
+			},
+			{
+				ConfigRuleName: ptr.String("__ConfigRuleName__"),
+				TargetType:     types.RemediationTargetType("SSM_DOCUMENT"),
+				TargetId:       ptr.String("__TargetId__"),
+				TargetVersion:  ptr.String("__TargetVersion__"),
+				Parameters: map[string]types.RemediationParameterValue{
+					"key0": {
+						ResourceValue: &types.ResourceValue{
+							Value: types.ResourceValueType("RESOURCE_ID"),
+						},
+						StaticValue: &types.StaticValue{
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				ResourceType: ptr.String("__ResourceType__"),
+				Automatic:    true,
+				ExecutionControls: &types.ExecutionControls{
+					SsmControls: &types.SsmControls{
+						ConcurrentExecutionRatePercentage: ptr.Int32(1),
+						ErrorPercentage:                   ptr.Int32(1),
+					},
+				},
+				MaximumAutomaticAttempts: ptr.Int32(1),
+				RetryAttemptSeconds:      ptr.Int64(1),
+				Arn:                      ptr.String("__Arn__"),
+				CreatedByService:         ptr.String("__CreatedByService__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4014,7 +4973,21 @@ func TestCheckResponseSnapshot_PutRemediationExceptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutRemediationExceptions(context.Background(), &PutRemediationExceptionsInput{})
+	got, err := svc.PutRemediationExceptions(context.Background(), &PutRemediationExceptionsInput{
+		ConfigRuleName: ptr.String("__ConfigRuleName__"),
+		ResourceKeys: []types.RemediationExceptionResourceKey{
+			{
+				ResourceType: ptr.String("__ResourceType__"),
+				ResourceId:   ptr.String("__ResourceId__"),
+			},
+			{
+				ResourceType: ptr.String("__ResourceType__"),
+				ResourceId:   ptr.String("__ResourceId__"),
+			},
+		},
+		Message:        ptr.String("__Message__"),
+		ExpirationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4033,7 +5006,16 @@ func TestCheckResponseSnapshot_PutResourceConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResourceConfig(context.Background(), &PutResourceConfigInput{})
+	got, err := svc.PutResourceConfig(context.Background(), &PutResourceConfigInput{
+		ResourceType:    ptr.String("__ResourceType__"),
+		SchemaVersionId: ptr.String("__SchemaVersionId__"),
+		ResourceId:      ptr.String("__ResourceId__"),
+		ResourceName:    ptr.String("__ResourceName__"),
+		Configuration:   ptr.String("__Configuration__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4057,7 +5039,9 @@ func TestCheckResponseSnapshot_PutRetentionConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutRetentionConfiguration(context.Background(), &PutRetentionConfigurationInput{})
+	got, err := svc.PutRetentionConfiguration(context.Background(), &PutRetentionConfigurationInput{
+		RetentionPeriodInDays: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4079,7 +5063,19 @@ func TestCheckResponseSnapshot_PutServiceLinkedConfigurationRecorder(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutServiceLinkedConfigurationRecorder(context.Background(), &PutServiceLinkedConfigurationRecorderInput{})
+	got, err := svc.PutServiceLinkedConfigurationRecorder(context.Background(), &PutServiceLinkedConfigurationRecorderInput{
+		ServicePrincipal: ptr.String("__ServicePrincipal__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4100,7 +5096,25 @@ func TestCheckResponseSnapshot_PutStoredQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutStoredQuery(context.Background(), &PutStoredQueryInput{})
+	got, err := svc.PutStoredQuery(context.Background(), &PutStoredQueryInput{
+		StoredQuery: &types.StoredQuery{
+			QueryId:     ptr.String("__QueryId__"),
+			QueryArn:    ptr.String("__QueryArn__"),
+			QueryName:   ptr.String("__QueryName__"),
+			Description: ptr.String("__Description__"),
+			Expression:  ptr.String("__Expression__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4122,7 +5136,32 @@ func TestCheckResponseSnapshot_PutThirdPartyServiceLinkedConfigurationRecorder(t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutThirdPartyServiceLinkedConfigurationRecorder(context.Background(), &PutThirdPartyServiceLinkedConfigurationRecorderInput{})
+	got, err := svc.PutThirdPartyServiceLinkedConfigurationRecorder(context.Background(), &PutThirdPartyServiceLinkedConfigurationRecorderInput{
+		ServicePrincipal: ptr.String("__ServicePrincipal__"),
+		ConnectorArn:     ptr.String("__ConnectorArn__"),
+		ScopeConfiguration: &types.ScopeConfiguration{
+			ScopeType: ptr.String("__ScopeType__"),
+			ScopeValues: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllRegions: true,
+			IncludedRegions: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4157,7 +5196,13 @@ func TestCheckResponseSnapshot_SelectAggregateResourceConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SelectAggregateResourceConfig(context.Background(), &SelectAggregateResourceConfigInput{})
+	got, err := svc.SelectAggregateResourceConfig(context.Background(), &SelectAggregateResourceConfigInput{
+		Expression:                  ptr.String("__Expression__"),
+		ConfigurationAggregatorName: ptr.String("__ConfigurationAggregatorName__"),
+		Limit:                       1,
+		MaxResults:                  1,
+		NextToken:                   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4192,7 +5237,11 @@ func TestCheckResponseSnapshot_SelectResourceConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SelectResourceConfig(context.Background(), &SelectResourceConfigInput{})
+	got, err := svc.SelectResourceConfig(context.Background(), &SelectResourceConfigInput{
+		Expression: ptr.String("__Expression__"),
+		Limit:      1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4211,7 +5260,12 @@ func TestCheckResponseSnapshot_StartConfigRulesEvaluation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartConfigRulesEvaluation(context.Background(), &StartConfigRulesEvaluationInput{})
+	got, err := svc.StartConfigRulesEvaluation(context.Background(), &StartConfigRulesEvaluationInput{
+		ConfigRuleNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4230,7 +5284,9 @@ func TestCheckResponseSnapshot_StartConfigurationRecorder(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartConfigurationRecorder(context.Background(), &StartConfigurationRecorderInput{})
+	got, err := svc.StartConfigurationRecorder(context.Background(), &StartConfigurationRecorderInput{
+		ConfigurationRecorderName: ptr.String("__ConfigurationRecorderName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4261,7 +5317,19 @@ func TestCheckResponseSnapshot_StartRemediationExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartRemediationExecution(context.Background(), &StartRemediationExecutionInput{})
+	got, err := svc.StartRemediationExecution(context.Background(), &StartRemediationExecutionInput{
+		ConfigRuleName: ptr.String("__ConfigRuleName__"),
+		ResourceKeys: []types.ResourceKey{
+			{
+				ResourceType: types.ResourceType("AWS::EC2::CustomerGateway"),
+				ResourceId:   ptr.String("__ResourceId__"),
+			},
+			{
+				ResourceType: types.ResourceType("AWS::EC2::CustomerGateway"),
+				ResourceId:   ptr.String("__ResourceId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4282,7 +5350,20 @@ func TestCheckResponseSnapshot_StartResourceEvaluation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartResourceEvaluation(context.Background(), &StartResourceEvaluationInput{})
+	got, err := svc.StartResourceEvaluation(context.Background(), &StartResourceEvaluationInput{
+		ResourceDetails: &types.ResourceDetails{
+			ResourceId:                      ptr.String("__ResourceId__"),
+			ResourceType:                    ptr.String("__ResourceType__"),
+			ResourceConfiguration:           ptr.String("__ResourceConfiguration__"),
+			ResourceConfigurationSchemaType: types.ResourceConfigurationSchemaType("CFN_RESOURCE_SCHEMA"),
+		},
+		EvaluationContext: &types.EvaluationContext{
+			EvaluationContextIdentifier: ptr.String("__EvaluationContextIdentifier__"),
+		},
+		EvaluationMode:    types.EvaluationMode("DETECTIVE"),
+		EvaluationTimeout: 1,
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4301,7 +5382,9 @@ func TestCheckResponseSnapshot_StopConfigurationRecorder(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopConfigurationRecorder(context.Background(), &StopConfigurationRecorderInput{})
+	got, err := svc.StopConfigurationRecorder(context.Background(), &StopConfigurationRecorderInput{
+		ConfigurationRecorderName: ptr.String("__ConfigurationRecorderName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4320,7 +5403,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4339,7 +5434,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4360,7 +5461,13 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateResourceTypes(context.Background(), &AssociateResourceTypesInput{})
+	_, opErr := svc.AssociateResourceTypes(context.Background(), &AssociateResourceTypesInput{
+		ConfigurationRecorderArn: ptr.String("__ConfigurationRecorderArn__"),
+		ResourceTypes: []types.ResourceType{
+			types.ResourceType("AWS::EC2::CustomerGateway"),
+			types.ResourceType("AWS::EC2::CustomerGateway"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4385,7 +5492,37 @@ func TestCheckResponseSnapshot_Error_ConformancePackTemplateValidationException(
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutConformancePack(context.Background(), &PutConformancePackInput{})
+	_, opErr := svc.PutConformancePack(context.Background(), &PutConformancePackInput{
+		ConformancePackName: ptr.String("__ConformancePackName__"),
+		TemplateS3Uri:       ptr.String("__TemplateS3Uri__"),
+		TemplateBody:        ptr.String("__TemplateBody__"),
+		DeliveryS3Bucket:    ptr.String("__DeliveryS3Bucket__"),
+		DeliveryS3KeyPrefix: ptr.String("__DeliveryS3KeyPrefix__"),
+		ConformancePackInputParameters: []types.ConformancePackInputParameter{
+			{
+				ParameterName:  ptr.String("__ParameterName__"),
+				ParameterValue: ptr.String("__ParameterValue__"),
+			},
+			{
+				ParameterName:  ptr.String("__ParameterName__"),
+				ParameterValue: ptr.String("__ParameterValue__"),
+			},
+		},
+		TemplateSSMDocumentDetails: &types.TemplateSSMDocumentDetails{
+			DocumentName:    ptr.String("__DocumentName__"),
+			DocumentVersion: ptr.String("__DocumentVersion__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4410,7 +5547,20 @@ func TestCheckResponseSnapshot_Error_IdempotentParameterMismatch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartResourceEvaluation(context.Background(), &StartResourceEvaluationInput{})
+	_, opErr := svc.StartResourceEvaluation(context.Background(), &StartResourceEvaluationInput{
+		ResourceDetails: &types.ResourceDetails{
+			ResourceId:                      ptr.String("__ResourceId__"),
+			ResourceType:                    ptr.String("__ResourceType__"),
+			ResourceConfiguration:           ptr.String("__ResourceConfiguration__"),
+			ResourceConfigurationSchemaType: types.ResourceConfigurationSchemaType("CFN_RESOURCE_SCHEMA"),
+		},
+		EvaluationContext: &types.EvaluationContext{
+			EvaluationContextIdentifier: ptr.String("__EvaluationContextIdentifier__"),
+		},
+		EvaluationMode:    types.EvaluationMode("DETECTIVE"),
+		EvaluationTimeout: 1,
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4435,7 +5585,18 @@ func TestCheckResponseSnapshot_Error_InsufficientDeliveryPolicyException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutDeliveryChannel(context.Background(), &PutDeliveryChannelInput{})
+	_, opErr := svc.PutDeliveryChannel(context.Background(), &PutDeliveryChannelInput{
+		DeliveryChannel: &types.DeliveryChannel{
+			Name:         ptr.String("__Name__"),
+			S3BucketName: ptr.String("__S3BucketName__"),
+			S3KeyPrefix:  ptr.String("__S3KeyPrefix__"),
+			S3KmsKeyArn:  ptr.String("__S3KmsKeyArn__"),
+			SnsTopicARN:  ptr.String("__SnsTopicARN__"),
+			ConfigSnapshotDeliveryProperties: &types.ConfigSnapshotDeliveryProperties{
+				DeliveryFrequency: types.MaximumExecutionFrequency("One_Hour"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4460,7 +5621,10 @@ func TestCheckResponseSnapshot_Error_InsufficientPermissionsException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteRemediationConfiguration(context.Background(), &DeleteRemediationConfigurationInput{})
+	_, opErr := svc.DeleteRemediationConfiguration(context.Background(), &DeleteRemediationConfigurationInput{
+		ConfigRuleName: ptr.String("__ConfigRuleName__"),
+		ResourceType:   ptr.String("__ResourceType__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4485,7 +5649,76 @@ func TestCheckResponseSnapshot_Error_InvalidConfigurationRecorderNameException(t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutConfigurationRecorder(context.Background(), &PutConfigurationRecorderInput{})
+	_, opErr := svc.PutConfigurationRecorder(context.Background(), &PutConfigurationRecorderInput{
+		ConfigurationRecorder: &types.ConfigurationRecorder{
+			Arn:     ptr.String("__Arn__"),
+			Name:    ptr.String("__Name__"),
+			RoleARN: ptr.String("__RoleARN__"),
+			RecordingGroup: &types.RecordingGroup{
+				AllSupported:               true,
+				IncludeGlobalResourceTypes: true,
+				ResourceTypes: []types.ResourceType{
+					types.ResourceType("AWS::EC2::CustomerGateway"),
+					types.ResourceType("AWS::EC2::CustomerGateway"),
+				},
+				ExclusionByResourceTypes: &types.ExclusionByResourceTypes{
+					ResourceTypes: []types.ResourceType{
+						types.ResourceType("AWS::EC2::CustomerGateway"),
+						types.ResourceType("AWS::EC2::CustomerGateway"),
+					},
+				},
+				RecordingStrategy: &types.RecordingStrategy{
+					UseOnly: types.RecordingStrategyType("ALL_SUPPORTED_RESOURCE_TYPES"),
+				},
+			},
+			RecordingMode: &types.RecordingMode{
+				RecordingFrequency: types.RecordingFrequency("CONTINUOUS"),
+				RecordingModeOverrides: []types.RecordingModeOverride{
+					{
+						Description: ptr.String("__Description__"),
+						ResourceTypes: []types.ResourceType{
+							types.ResourceType("AWS::EC2::CustomerGateway"),
+							types.ResourceType("AWS::EC2::CustomerGateway"),
+						},
+						RecordingFrequency: types.RecordingFrequency("CONTINUOUS"),
+					},
+					{
+						Description: ptr.String("__Description__"),
+						ResourceTypes: []types.ResourceType{
+							types.ResourceType("AWS::EC2::CustomerGateway"),
+							types.ResourceType("AWS::EC2::CustomerGateway"),
+						},
+						RecordingFrequency: types.RecordingFrequency("CONTINUOUS"),
+					},
+				},
+			},
+			RecordingScope:   types.RecordingScope("INTERNAL"),
+			ServicePrincipal: ptr.String("__ServicePrincipal__"),
+			ConnectorArn:     ptr.String("__ConnectorArn__"),
+			ScopeConfiguration: &types.ScopeConfiguration{
+				ScopeType: ptr.String("__ScopeType__"),
+				ScopeValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AllRegions: true,
+				IncludedRegions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4510,7 +5743,18 @@ func TestCheckResponseSnapshot_Error_InvalidDeliveryChannelNameException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutDeliveryChannel(context.Background(), &PutDeliveryChannelInput{})
+	_, opErr := svc.PutDeliveryChannel(context.Background(), &PutDeliveryChannelInput{
+		DeliveryChannel: &types.DeliveryChannel{
+			Name:         ptr.String("__Name__"),
+			S3BucketName: ptr.String("__S3BucketName__"),
+			S3KeyPrefix:  ptr.String("__S3KeyPrefix__"),
+			S3KmsKeyArn:  ptr.String("__S3KmsKeyArn__"),
+			SnsTopicARN:  ptr.String("__SnsTopicARN__"),
+			ConfigSnapshotDeliveryProperties: &types.ConfigSnapshotDeliveryProperties{
+				DeliveryFrequency: types.MaximumExecutionFrequency("One_Hour"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4535,7 +5779,13 @@ func TestCheckResponseSnapshot_Error_InvalidExpressionException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SelectAggregateResourceConfig(context.Background(), &SelectAggregateResourceConfigInput{})
+	_, opErr := svc.SelectAggregateResourceConfig(context.Background(), &SelectAggregateResourceConfigInput{
+		Expression:                  ptr.String("__Expression__"),
+		ConfigurationAggregatorName: ptr.String("__ConfigurationAggregatorName__"),
+		Limit:                       1,
+		MaxResults:                  1,
+		NextToken:                   ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4560,7 +5810,17 @@ func TestCheckResponseSnapshot_Error_InvalidLimitException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeAggregateComplianceByConfigRules(context.Background(), &DescribeAggregateComplianceByConfigRulesInput{})
+	_, opErr := svc.DescribeAggregateComplianceByConfigRules(context.Background(), &DescribeAggregateComplianceByConfigRulesInput{
+		ConfigurationAggregatorName: ptr.String("__ConfigurationAggregatorName__"),
+		Filters: &types.ConfigRuleComplianceFilters{
+			ConfigRuleName: ptr.String("__ConfigRuleName__"),
+			ComplianceType: types.ComplianceType("COMPLIANT"),
+			AccountId:      ptr.String("__AccountId__"),
+			AwsRegion:      ptr.String("__AwsRegion__"),
+		},
+		Limit:     1,
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4585,7 +5845,17 @@ func TestCheckResponseSnapshot_Error_InvalidNextTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeAggregateComplianceByConfigRules(context.Background(), &DescribeAggregateComplianceByConfigRulesInput{})
+	_, opErr := svc.DescribeAggregateComplianceByConfigRules(context.Background(), &DescribeAggregateComplianceByConfigRulesInput{
+		ConfigurationAggregatorName: ptr.String("__ConfigurationAggregatorName__"),
+		Filters: &types.ConfigRuleComplianceFilters{
+			ConfigRuleName: ptr.String("__ConfigRuleName__"),
+			ComplianceType: types.ComplianceType("COMPLIANT"),
+			AccountId:      ptr.String("__AccountId__"),
+			AwsRegion:      ptr.String("__AwsRegion__"),
+		},
+		Limit:     1,
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4610,7 +5880,10 @@ func TestCheckResponseSnapshot_Error_InvalidParameterValueException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteAggregationAuthorization(context.Background(), &DeleteAggregationAuthorizationInput{})
+	_, opErr := svc.DeleteAggregationAuthorization(context.Background(), &DeleteAggregationAuthorizationInput{
+		AuthorizedAccountId: ptr.String("__AuthorizedAccountId__"),
+		AuthorizedAwsRegion: ptr.String("__AuthorizedAwsRegion__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4635,7 +5908,76 @@ func TestCheckResponseSnapshot_Error_InvalidRecordingGroupException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutConfigurationRecorder(context.Background(), &PutConfigurationRecorderInput{})
+	_, opErr := svc.PutConfigurationRecorder(context.Background(), &PutConfigurationRecorderInput{
+		ConfigurationRecorder: &types.ConfigurationRecorder{
+			Arn:     ptr.String("__Arn__"),
+			Name:    ptr.String("__Name__"),
+			RoleARN: ptr.String("__RoleARN__"),
+			RecordingGroup: &types.RecordingGroup{
+				AllSupported:               true,
+				IncludeGlobalResourceTypes: true,
+				ResourceTypes: []types.ResourceType{
+					types.ResourceType("AWS::EC2::CustomerGateway"),
+					types.ResourceType("AWS::EC2::CustomerGateway"),
+				},
+				ExclusionByResourceTypes: &types.ExclusionByResourceTypes{
+					ResourceTypes: []types.ResourceType{
+						types.ResourceType("AWS::EC2::CustomerGateway"),
+						types.ResourceType("AWS::EC2::CustomerGateway"),
+					},
+				},
+				RecordingStrategy: &types.RecordingStrategy{
+					UseOnly: types.RecordingStrategyType("ALL_SUPPORTED_RESOURCE_TYPES"),
+				},
+			},
+			RecordingMode: &types.RecordingMode{
+				RecordingFrequency: types.RecordingFrequency("CONTINUOUS"),
+				RecordingModeOverrides: []types.RecordingModeOverride{
+					{
+						Description: ptr.String("__Description__"),
+						ResourceTypes: []types.ResourceType{
+							types.ResourceType("AWS::EC2::CustomerGateway"),
+							types.ResourceType("AWS::EC2::CustomerGateway"),
+						},
+						RecordingFrequency: types.RecordingFrequency("CONTINUOUS"),
+					},
+					{
+						Description: ptr.String("__Description__"),
+						ResourceTypes: []types.ResourceType{
+							types.ResourceType("AWS::EC2::CustomerGateway"),
+							types.ResourceType("AWS::EC2::CustomerGateway"),
+						},
+						RecordingFrequency: types.RecordingFrequency("CONTINUOUS"),
+					},
+				},
+			},
+			RecordingScope:   types.RecordingScope("INTERNAL"),
+			ServicePrincipal: ptr.String("__ServicePrincipal__"),
+			ConnectorArn:     ptr.String("__ConnectorArn__"),
+			ScopeConfiguration: &types.ScopeConfiguration{
+				ScopeType: ptr.String("__ScopeType__"),
+				ScopeValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AllRegions: true,
+				IncludedRegions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4660,7 +6002,26 @@ func TestCheckResponseSnapshot_Error_InvalidResultTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutEvaluations(context.Background(), &PutEvaluationsInput{})
+	_, opErr := svc.PutEvaluations(context.Background(), &PutEvaluationsInput{
+		Evaluations: []types.Evaluation{
+			{
+				ComplianceResourceType: ptr.String("__ComplianceResourceType__"),
+				ComplianceResourceId:   ptr.String("__ComplianceResourceId__"),
+				ComplianceType:         types.ComplianceType("COMPLIANT"),
+				Annotation:             ptr.String("__Annotation__"),
+				OrderingTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				ComplianceResourceType: ptr.String("__ComplianceResourceType__"),
+				ComplianceResourceId:   ptr.String("__ComplianceResourceId__"),
+				ComplianceType:         types.ComplianceType("COMPLIANT"),
+				Annotation:             ptr.String("__Annotation__"),
+				OrderingTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		ResultToken: ptr.String("__ResultToken__"),
+		TestMode:    true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4685,7 +6046,67 @@ func TestCheckResponseSnapshot_Error_InvalidRoleException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutConfigurationAggregator(context.Background(), &PutConfigurationAggregatorInput{})
+	_, opErr := svc.PutConfigurationAggregator(context.Background(), &PutConfigurationAggregatorInput{
+		ConfigurationAggregatorName: ptr.String("__ConfigurationAggregatorName__"),
+		AccountAggregationSources: []types.AccountAggregationSource{
+			{
+				AccountIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AllAwsRegions: true,
+				AwsRegions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				AccountIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AllAwsRegions: true,
+				AwsRegions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		OrganizationAggregationSource: &types.OrganizationAggregationSource{
+			RoleArn: ptr.String("__RoleArn__"),
+			AwsRegions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllAwsRegions: true,
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AggregatorFilters: &types.AggregatorFilters{
+			ResourceType: &types.AggregatorFilterResourceType{
+				Type: types.AggregatorFilterType("INCLUDE"),
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			ServicePrincipal: &types.AggregatorFilterServicePrincipal{
+				Type: types.AggregatorFilterType("INCLUDE"),
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4710,7 +6131,18 @@ func TestCheckResponseSnapshot_Error_InvalidS3KeyPrefixException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutDeliveryChannel(context.Background(), &PutDeliveryChannelInput{})
+	_, opErr := svc.PutDeliveryChannel(context.Background(), &PutDeliveryChannelInput{
+		DeliveryChannel: &types.DeliveryChannel{
+			Name:         ptr.String("__Name__"),
+			S3BucketName: ptr.String("__S3BucketName__"),
+			S3KeyPrefix:  ptr.String("__S3KeyPrefix__"),
+			S3KmsKeyArn:  ptr.String("__S3KmsKeyArn__"),
+			SnsTopicARN:  ptr.String("__SnsTopicARN__"),
+			ConfigSnapshotDeliveryProperties: &types.ConfigSnapshotDeliveryProperties{
+				DeliveryFrequency: types.MaximumExecutionFrequency("One_Hour"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4735,7 +6167,18 @@ func TestCheckResponseSnapshot_Error_InvalidS3KmsKeyArnException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutDeliveryChannel(context.Background(), &PutDeliveryChannelInput{})
+	_, opErr := svc.PutDeliveryChannel(context.Background(), &PutDeliveryChannelInput{
+		DeliveryChannel: &types.DeliveryChannel{
+			Name:         ptr.String("__Name__"),
+			S3BucketName: ptr.String("__S3BucketName__"),
+			S3KeyPrefix:  ptr.String("__S3KeyPrefix__"),
+			S3KmsKeyArn:  ptr.String("__S3KmsKeyArn__"),
+			SnsTopicARN:  ptr.String("__SnsTopicARN__"),
+			ConfigSnapshotDeliveryProperties: &types.ConfigSnapshotDeliveryProperties{
+				DeliveryFrequency: types.MaximumExecutionFrequency("One_Hour"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4760,7 +6203,18 @@ func TestCheckResponseSnapshot_Error_InvalidSNSTopicARNException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutDeliveryChannel(context.Background(), &PutDeliveryChannelInput{})
+	_, opErr := svc.PutDeliveryChannel(context.Background(), &PutDeliveryChannelInput{
+		DeliveryChannel: &types.DeliveryChannel{
+			Name:         ptr.String("__Name__"),
+			S3BucketName: ptr.String("__S3BucketName__"),
+			S3KeyPrefix:  ptr.String("__S3KeyPrefix__"),
+			S3KmsKeyArn:  ptr.String("__S3KmsKeyArn__"),
+			SnsTopicARN:  ptr.String("__SnsTopicARN__"),
+			ConfigSnapshotDeliveryProperties: &types.ConfigSnapshotDeliveryProperties{
+				DeliveryFrequency: types.MaximumExecutionFrequency("One_Hour"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4785,7 +6239,15 @@ func TestCheckResponseSnapshot_Error_InvalidTimeRangeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetResourceConfigHistory(context.Background(), &GetResourceConfigHistoryInput{})
+	_, opErr := svc.GetResourceConfigHistory(context.Background(), &GetResourceConfigHistoryInput{
+		ResourceType:       types.ResourceType("AWS::EC2::CustomerGateway"),
+		ResourceId:         ptr.String("__ResourceId__"),
+		LaterTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EarlierTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ChronologicalOrder: types.ChronologicalOrder("Reverse"),
+		Limit:              1,
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4810,7 +6272,9 @@ func TestCheckResponseSnapshot_Error_LastDeliveryChannelDeleteFailedException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteDeliveryChannel(context.Background(), &DeleteDeliveryChannelInput{})
+	_, opErr := svc.DeleteDeliveryChannel(context.Background(), &DeleteDeliveryChannelInput{
+		DeliveryChannelName: ptr.String("__DeliveryChannelName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4835,7 +6299,67 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutConfigurationAggregator(context.Background(), &PutConfigurationAggregatorInput{})
+	_, opErr := svc.PutConfigurationAggregator(context.Background(), &PutConfigurationAggregatorInput{
+		ConfigurationAggregatorName: ptr.String("__ConfigurationAggregatorName__"),
+		AccountAggregationSources: []types.AccountAggregationSource{
+			{
+				AccountIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AllAwsRegions: true,
+				AwsRegions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				AccountIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AllAwsRegions: true,
+				AwsRegions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		OrganizationAggregationSource: &types.OrganizationAggregationSource{
+			RoleArn: ptr.String("__RoleArn__"),
+			AwsRegions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllAwsRegions: true,
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AggregatorFilters: &types.AggregatorFilters{
+			ResourceType: &types.AggregatorFilterResourceType{
+				Type: types.AggregatorFilterType("INCLUDE"),
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			ServicePrincipal: &types.AggregatorFilterServicePrincipal{
+				Type: types.AggregatorFilterType("INCLUDE"),
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4860,7 +6384,16 @@ func TestCheckResponseSnapshot_Error_MaxActiveResourcesExceededException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutResourceConfig(context.Background(), &PutResourceConfigInput{})
+	_, opErr := svc.PutResourceConfig(context.Background(), &PutResourceConfigInput{
+		ResourceType:    ptr.String("__ResourceType__"),
+		SchemaVersionId: ptr.String("__SchemaVersionId__"),
+		ResourceId:      ptr.String("__ResourceId__"),
+		ResourceName:    ptr.String("__ResourceName__"),
+		Configuration:   ptr.String("__Configuration__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4885,7 +6418,71 @@ func TestCheckResponseSnapshot_Error_MaxNumberOfConfigRulesExceededException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutConfigRule(context.Background(), &PutConfigRuleInput{})
+	_, opErr := svc.PutConfigRule(context.Background(), &PutConfigRuleInput{
+		ConfigRule: &types.ConfigRule{
+			ConfigRuleName: ptr.String("__ConfigRuleName__"),
+			ConfigRuleArn:  ptr.String("__ConfigRuleArn__"),
+			ConfigRuleId:   ptr.String("__ConfigRuleId__"),
+			Description:    ptr.String("__Description__"),
+			Scope: &types.Scope{
+				ComplianceResourceTypes: []string{
+					"__Member__",
+					"__Member__",
+				},
+				TagKey:               ptr.String("__TagKey__"),
+				TagValue:             ptr.String("__TagValue__"),
+				ComplianceResourceId: ptr.String("__ComplianceResourceId__"),
+				ServicePrincipals: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Source: &types.Source{
+				Owner:            types.Owner("CUSTOM_LAMBDA"),
+				SourceIdentifier: ptr.String("__SourceIdentifier__"),
+				SourceDetails: []types.SourceDetail{
+					{
+						EventSource:               types.EventSource("aws.config"),
+						MessageType:               types.MessageType("ConfigurationItemChangeNotification"),
+						MaximumExecutionFrequency: types.MaximumExecutionFrequency("One_Hour"),
+					},
+					{
+						EventSource:               types.EventSource("aws.config"),
+						MessageType:               types.MessageType("ConfigurationItemChangeNotification"),
+						MaximumExecutionFrequency: types.MaximumExecutionFrequency("One_Hour"),
+					},
+				},
+				CustomPolicyDetails: &types.CustomPolicyDetails{
+					PolicyRuntime:          ptr.String("__PolicyRuntime__"),
+					PolicyText:             ptr.String("__PolicyText__"),
+					EnableDebugLogDelivery: true,
+				},
+			},
+			InputParameters:           ptr.String("__InputParameters__"),
+			MaximumExecutionFrequency: types.MaximumExecutionFrequency("One_Hour"),
+			ConfigRuleState:           types.ConfigRuleState("ACTIVE"),
+			CreatedBy:                 ptr.String("__CreatedBy__"),
+			EvaluationModes: []types.EvaluationModeConfiguration{
+				{
+					Mode: types.EvaluationMode("DETECTIVE"),
+				},
+				{
+					Mode: types.EvaluationMode("DETECTIVE"),
+				},
+			},
+			RuleEvaluationVisibility: types.RuleEvaluationVisibility("EXTERNAL"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4910,7 +6507,76 @@ func TestCheckResponseSnapshot_Error_MaxNumberOfConfigurationRecordersExceededEx
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutConfigurationRecorder(context.Background(), &PutConfigurationRecorderInput{})
+	_, opErr := svc.PutConfigurationRecorder(context.Background(), &PutConfigurationRecorderInput{
+		ConfigurationRecorder: &types.ConfigurationRecorder{
+			Arn:     ptr.String("__Arn__"),
+			Name:    ptr.String("__Name__"),
+			RoleARN: ptr.String("__RoleARN__"),
+			RecordingGroup: &types.RecordingGroup{
+				AllSupported:               true,
+				IncludeGlobalResourceTypes: true,
+				ResourceTypes: []types.ResourceType{
+					types.ResourceType("AWS::EC2::CustomerGateway"),
+					types.ResourceType("AWS::EC2::CustomerGateway"),
+				},
+				ExclusionByResourceTypes: &types.ExclusionByResourceTypes{
+					ResourceTypes: []types.ResourceType{
+						types.ResourceType("AWS::EC2::CustomerGateway"),
+						types.ResourceType("AWS::EC2::CustomerGateway"),
+					},
+				},
+				RecordingStrategy: &types.RecordingStrategy{
+					UseOnly: types.RecordingStrategyType("ALL_SUPPORTED_RESOURCE_TYPES"),
+				},
+			},
+			RecordingMode: &types.RecordingMode{
+				RecordingFrequency: types.RecordingFrequency("CONTINUOUS"),
+				RecordingModeOverrides: []types.RecordingModeOverride{
+					{
+						Description: ptr.String("__Description__"),
+						ResourceTypes: []types.ResourceType{
+							types.ResourceType("AWS::EC2::CustomerGateway"),
+							types.ResourceType("AWS::EC2::CustomerGateway"),
+						},
+						RecordingFrequency: types.RecordingFrequency("CONTINUOUS"),
+					},
+					{
+						Description: ptr.String("__Description__"),
+						ResourceTypes: []types.ResourceType{
+							types.ResourceType("AWS::EC2::CustomerGateway"),
+							types.ResourceType("AWS::EC2::CustomerGateway"),
+						},
+						RecordingFrequency: types.RecordingFrequency("CONTINUOUS"),
+					},
+				},
+			},
+			RecordingScope:   types.RecordingScope("INTERNAL"),
+			ServicePrincipal: ptr.String("__ServicePrincipal__"),
+			ConnectorArn:     ptr.String("__ConnectorArn__"),
+			ScopeConfiguration: &types.ScopeConfiguration{
+				ScopeType: ptr.String("__ScopeType__"),
+				ScopeValues: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AllRegions: true,
+				IncludedRegions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4935,7 +6601,37 @@ func TestCheckResponseSnapshot_Error_MaxNumberOfConformancePacksExceededExceptio
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutConformancePack(context.Background(), &PutConformancePackInput{})
+	_, opErr := svc.PutConformancePack(context.Background(), &PutConformancePackInput{
+		ConformancePackName: ptr.String("__ConformancePackName__"),
+		TemplateS3Uri:       ptr.String("__TemplateS3Uri__"),
+		TemplateBody:        ptr.String("__TemplateBody__"),
+		DeliveryS3Bucket:    ptr.String("__DeliveryS3Bucket__"),
+		DeliveryS3KeyPrefix: ptr.String("__DeliveryS3KeyPrefix__"),
+		ConformancePackInputParameters: []types.ConformancePackInputParameter{
+			{
+				ParameterName:  ptr.String("__ParameterName__"),
+				ParameterValue: ptr.String("__ParameterValue__"),
+			},
+			{
+				ParameterName:  ptr.String("__ParameterName__"),
+				ParameterValue: ptr.String("__ParameterValue__"),
+			},
+		},
+		TemplateSSMDocumentDetails: &types.TemplateSSMDocumentDetails{
+			DocumentName:    ptr.String("__DocumentName__"),
+			DocumentVersion: ptr.String("__DocumentVersion__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4960,7 +6656,24 @@ func TestCheckResponseSnapshot_Error_MaxNumberOfConnectorsExceededException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutConnector(context.Background(), &PutConnectorInput{})
+	_, opErr := svc.PutConnector(context.Background(), &PutConnectorInput{
+		ConnectorConfiguration: &types.ConnectorConfiguration{
+			Azure: &types.AzureConnectorConfiguration{
+				TenantIdentifier: ptr.String("__TenantIdentifier__"),
+				ClientIdentifier: ptr.String("__ClientIdentifier__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4985,7 +6698,18 @@ func TestCheckResponseSnapshot_Error_MaxNumberOfDeliveryChannelsExceededExceptio
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutDeliveryChannel(context.Background(), &PutDeliveryChannelInput{})
+	_, opErr := svc.PutDeliveryChannel(context.Background(), &PutDeliveryChannelInput{
+		DeliveryChannel: &types.DeliveryChannel{
+			Name:         ptr.String("__Name__"),
+			S3BucketName: ptr.String("__S3BucketName__"),
+			S3KeyPrefix:  ptr.String("__S3KeyPrefix__"),
+			S3KmsKeyArn:  ptr.String("__S3KmsKeyArn__"),
+			SnsTopicARN:  ptr.String("__SnsTopicARN__"),
+			ConfigSnapshotDeliveryProperties: &types.ConfigSnapshotDeliveryProperties{
+				DeliveryFrequency: types.MaximumExecutionFrequency("One_Hour"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5010,7 +6734,75 @@ func TestCheckResponseSnapshot_Error_MaxNumberOfOrganizationConfigRulesExceededE
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutOrganizationConfigRule(context.Background(), &PutOrganizationConfigRuleInput{})
+	_, opErr := svc.PutOrganizationConfigRule(context.Background(), &PutOrganizationConfigRuleInput{
+		OrganizationConfigRuleName: ptr.String("__OrganizationConfigRuleName__"),
+		OrganizationManagedRuleMetadata: &types.OrganizationManagedRuleMetadata{
+			Description:               ptr.String("__Description__"),
+			RuleIdentifier:            ptr.String("__RuleIdentifier__"),
+			InputParameters:           ptr.String("__InputParameters__"),
+			MaximumExecutionFrequency: types.MaximumExecutionFrequency("One_Hour"),
+			ResourceTypesScope: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ResourceIdScope: ptr.String("__ResourceIdScope__"),
+			TagKeyScope:     ptr.String("__TagKeyScope__"),
+			TagValueScope:   ptr.String("__TagValueScope__"),
+		},
+		OrganizationCustomRuleMetadata: &types.OrganizationCustomRuleMetadata{
+			Description:       ptr.String("__Description__"),
+			LambdaFunctionArn: ptr.String("__LambdaFunctionArn__"),
+			OrganizationConfigRuleTriggerTypes: []types.OrganizationConfigRuleTriggerType{
+				types.OrganizationConfigRuleTriggerType("ConfigurationItemChangeNotification"),
+				types.OrganizationConfigRuleTriggerType("ConfigurationItemChangeNotification"),
+			},
+			InputParameters:           ptr.String("__InputParameters__"),
+			MaximumExecutionFrequency: types.MaximumExecutionFrequency("One_Hour"),
+			ResourceTypesScope: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ResourceIdScope: ptr.String("__ResourceIdScope__"),
+			TagKeyScope:     ptr.String("__TagKeyScope__"),
+			TagValueScope:   ptr.String("__TagValueScope__"),
+		},
+		ExcludedAccounts: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OrganizationCustomPolicyRuleMetadata: &types.OrganizationCustomPolicyRuleMetadata{
+			Description: ptr.String("__Description__"),
+			OrganizationConfigRuleTriggerTypes: []types.OrganizationConfigRuleTriggerTypeNoSN{
+				types.OrganizationConfigRuleTriggerTypeNoSN("ConfigurationItemChangeNotification"),
+				types.OrganizationConfigRuleTriggerTypeNoSN("ConfigurationItemChangeNotification"),
+			},
+			InputParameters:           ptr.String("__InputParameters__"),
+			MaximumExecutionFrequency: types.MaximumExecutionFrequency("One_Hour"),
+			ResourceTypesScope: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ResourceIdScope: ptr.String("__ResourceIdScope__"),
+			TagKeyScope:     ptr.String("__TagKeyScope__"),
+			TagValueScope:   ptr.String("__TagValueScope__"),
+			PolicyRuntime:   ptr.String("__PolicyRuntime__"),
+			PolicyText:      ptr.String("__PolicyText__"),
+			DebugLogDeliveryAccounts: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5035,7 +6827,37 @@ func TestCheckResponseSnapshot_Error_MaxNumberOfOrganizationConformancePacksExce
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutOrganizationConformancePack(context.Background(), &PutOrganizationConformancePackInput{})
+	_, opErr := svc.PutOrganizationConformancePack(context.Background(), &PutOrganizationConformancePackInput{
+		OrganizationConformancePackName: ptr.String("__OrganizationConformancePackName__"),
+		TemplateS3Uri:                   ptr.String("__TemplateS3Uri__"),
+		TemplateBody:                    ptr.String("__TemplateBody__"),
+		DeliveryS3Bucket:                ptr.String("__DeliveryS3Bucket__"),
+		DeliveryS3KeyPrefix:             ptr.String("__DeliveryS3KeyPrefix__"),
+		ConformancePackInputParameters: []types.ConformancePackInputParameter{
+			{
+				ParameterName:  ptr.String("__ParameterName__"),
+				ParameterValue: ptr.String("__ParameterValue__"),
+			},
+			{
+				ParameterName:  ptr.String("__ParameterName__"),
+				ParameterValue: ptr.String("__ParameterValue__"),
+			},
+		},
+		ExcludedAccounts: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5060,7 +6882,9 @@ func TestCheckResponseSnapshot_Error_MaxNumberOfRetentionConfigurationsExceededE
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutRetentionConfiguration(context.Background(), &PutRetentionConfigurationInput{})
+	_, opErr := svc.PutRetentionConfiguration(context.Background(), &PutRetentionConfigurationInput{
+		RetentionPeriodInDays: ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5085,7 +6909,18 @@ func TestCheckResponseSnapshot_Error_NoAvailableConfigurationRecorderException(t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetResourceConfig(context.Background(), &BatchGetResourceConfigInput{})
+	_, opErr := svc.BatchGetResourceConfig(context.Background(), &BatchGetResourceConfigInput{
+		ResourceKeys: []types.ResourceKey{
+			{
+				ResourceType: types.ResourceType("AWS::EC2::CustomerGateway"),
+				ResourceId:   ptr.String("__ResourceId__"),
+			},
+			{
+				ResourceType: types.ResourceType("AWS::EC2::CustomerGateway"),
+				ResourceId:   ptr.String("__ResourceId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5110,7 +6945,9 @@ func TestCheckResponseSnapshot_Error_NoAvailableDeliveryChannelException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartConfigurationRecorder(context.Background(), &StartConfigurationRecorderInput{})
+	_, opErr := svc.StartConfigurationRecorder(context.Background(), &StartConfigurationRecorderInput{
+		ConfigurationRecorderName: ptr.String("__ConfigurationRecorderName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5135,7 +6972,67 @@ func TestCheckResponseSnapshot_Error_NoAvailableOrganizationException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutConfigurationAggregator(context.Background(), &PutConfigurationAggregatorInput{})
+	_, opErr := svc.PutConfigurationAggregator(context.Background(), &PutConfigurationAggregatorInput{
+		ConfigurationAggregatorName: ptr.String("__ConfigurationAggregatorName__"),
+		AccountAggregationSources: []types.AccountAggregationSource{
+			{
+				AccountIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AllAwsRegions: true,
+				AwsRegions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				AccountIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AllAwsRegions: true,
+				AwsRegions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		OrganizationAggregationSource: &types.OrganizationAggregationSource{
+			RoleArn: ptr.String("__RoleArn__"),
+			AwsRegions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllAwsRegions: true,
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AggregatorFilters: &types.AggregatorFilters{
+			ResourceType: &types.AggregatorFilterResourceType{
+				Type: types.AggregatorFilterType("INCLUDE"),
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			ServicePrincipal: &types.AggregatorFilterServicePrincipal{
+				Type: types.AggregatorFilterType("INCLUDE"),
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5160,7 +7057,10 @@ func TestCheckResponseSnapshot_Error_NoRunningConfigurationRecorderException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteResourceConfig(context.Background(), &DeleteResourceConfigInput{})
+	_, opErr := svc.DeleteResourceConfig(context.Background(), &DeleteResourceConfigInput{
+		ResourceType: ptr.String("__ResourceType__"),
+		ResourceId:   ptr.String("__ResourceId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5185,7 +7085,18 @@ func TestCheckResponseSnapshot_Error_NoSuchBucketException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutDeliveryChannel(context.Background(), &PutDeliveryChannelInput{})
+	_, opErr := svc.PutDeliveryChannel(context.Background(), &PutDeliveryChannelInput{
+		DeliveryChannel: &types.DeliveryChannel{
+			Name:         ptr.String("__Name__"),
+			S3BucketName: ptr.String("__S3BucketName__"),
+			S3KeyPrefix:  ptr.String("__S3KeyPrefix__"),
+			S3KmsKeyArn:  ptr.String("__S3KmsKeyArn__"),
+			SnsTopicARN:  ptr.String("__SnsTopicARN__"),
+			ConfigSnapshotDeliveryProperties: &types.ConfigSnapshotDeliveryProperties{
+				DeliveryFrequency: types.MaximumExecutionFrequency("One_Hour"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5210,7 +7121,9 @@ func TestCheckResponseSnapshot_Error_NoSuchConfigRuleException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteConfigRule(context.Background(), &DeleteConfigRuleInput{})
+	_, opErr := svc.DeleteConfigRule(context.Background(), &DeleteConfigRuleInput{
+		ConfigRuleName: ptr.String("__ConfigRuleName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5235,7 +7148,18 @@ func TestCheckResponseSnapshot_Error_NoSuchConfigRuleInConformancePackException(
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeConformancePackCompliance(context.Background(), &DescribeConformancePackComplianceInput{})
+	_, opErr := svc.DescribeConformancePackCompliance(context.Background(), &DescribeConformancePackComplianceInput{
+		ConformancePackName: ptr.String("__ConformancePackName__"),
+		Filters: &types.ConformancePackComplianceFilters{
+			ConfigRuleNames: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ComplianceType: types.ConformancePackComplianceType("COMPLIANT"),
+		},
+		Limit:     1,
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5260,7 +7184,25 @@ func TestCheckResponseSnapshot_Error_NoSuchConfigurationAggregatorException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetAggregateResourceConfig(context.Background(), &BatchGetAggregateResourceConfigInput{})
+	_, opErr := svc.BatchGetAggregateResourceConfig(context.Background(), &BatchGetAggregateResourceConfigInput{
+		ConfigurationAggregatorName: ptr.String("__ConfigurationAggregatorName__"),
+		ResourceIdentifiers: []types.AggregateResourceIdentifier{
+			{
+				SourceAccountId: ptr.String("__SourceAccountId__"),
+				SourceRegion:    ptr.String("__SourceRegion__"),
+				ResourceId:      ptr.String("__ResourceId__"),
+				ResourceType:    types.ResourceType("AWS::EC2::CustomerGateway"),
+				ResourceName:    ptr.String("__ResourceName__"),
+			},
+			{
+				SourceAccountId: ptr.String("__SourceAccountId__"),
+				SourceRegion:    ptr.String("__SourceRegion__"),
+				ResourceId:      ptr.String("__ResourceId__"),
+				ResourceType:    types.ResourceType("AWS::EC2::CustomerGateway"),
+				ResourceName:    ptr.String("__ResourceName__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5285,7 +7227,13 @@ func TestCheckResponseSnapshot_Error_NoSuchConfigurationRecorderException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateResourceTypes(context.Background(), &AssociateResourceTypesInput{})
+	_, opErr := svc.AssociateResourceTypes(context.Background(), &AssociateResourceTypesInput{
+		ConfigurationRecorderArn: ptr.String("__ConfigurationRecorderArn__"),
+		ResourceTypes: []types.ResourceType{
+			types.ResourceType("AWS::EC2::CustomerGateway"),
+			types.ResourceType("AWS::EC2::CustomerGateway"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5310,7 +7258,9 @@ func TestCheckResponseSnapshot_Error_NoSuchConformancePackException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteConformancePack(context.Background(), &DeleteConformancePackInput{})
+	_, opErr := svc.DeleteConformancePack(context.Background(), &DeleteConformancePackInput{
+		ConformancePackName: ptr.String("__ConformancePackName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5335,7 +7285,9 @@ func TestCheckResponseSnapshot_Error_NoSuchDeliveryChannelException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteDeliveryChannel(context.Background(), &DeleteDeliveryChannelInput{})
+	_, opErr := svc.DeleteDeliveryChannel(context.Background(), &DeleteDeliveryChannelInput{
+		DeliveryChannelName: ptr.String("__DeliveryChannelName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5360,7 +7312,9 @@ func TestCheckResponseSnapshot_Error_NoSuchOrganizationConfigRuleException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteOrganizationConfigRule(context.Background(), &DeleteOrganizationConfigRuleInput{})
+	_, opErr := svc.DeleteOrganizationConfigRule(context.Background(), &DeleteOrganizationConfigRuleInput{
+		OrganizationConfigRuleName: ptr.String("__OrganizationConfigRuleName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5385,7 +7339,9 @@ func TestCheckResponseSnapshot_Error_NoSuchOrganizationConformancePackException(
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteOrganizationConformancePack(context.Background(), &DeleteOrganizationConformancePackInput{})
+	_, opErr := svc.DeleteOrganizationConformancePack(context.Background(), &DeleteOrganizationConformancePackInput{
+		OrganizationConformancePackName: ptr.String("__OrganizationConformancePackName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5410,7 +7366,10 @@ func TestCheckResponseSnapshot_Error_NoSuchRemediationConfigurationException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteRemediationConfiguration(context.Background(), &DeleteRemediationConfigurationInput{})
+	_, opErr := svc.DeleteRemediationConfiguration(context.Background(), &DeleteRemediationConfigurationInput{
+		ConfigRuleName: ptr.String("__ConfigRuleName__"),
+		ResourceType:   ptr.String("__ResourceType__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5435,7 +7394,19 @@ func TestCheckResponseSnapshot_Error_NoSuchRemediationExceptionException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteRemediationExceptions(context.Background(), &DeleteRemediationExceptionsInput{})
+	_, opErr := svc.DeleteRemediationExceptions(context.Background(), &DeleteRemediationExceptionsInput{
+		ConfigRuleName: ptr.String("__ConfigRuleName__"),
+		ResourceKeys: []types.RemediationExceptionResourceKey{
+			{
+				ResourceType: ptr.String("__ResourceType__"),
+				ResourceId:   ptr.String("__ResourceId__"),
+			},
+			{
+				ResourceType: ptr.String("__ResourceType__"),
+				ResourceId:   ptr.String("__ResourceId__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5460,7 +7431,9 @@ func TestCheckResponseSnapshot_Error_NoSuchRetentionConfigurationException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteRetentionConfiguration(context.Background(), &DeleteRetentionConfigurationInput{})
+	_, opErr := svc.DeleteRetentionConfiguration(context.Background(), &DeleteRetentionConfigurationInput{
+		RetentionConfigurationName: ptr.String("__RetentionConfigurationName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5485,7 +7458,9 @@ func TestCheckResponseSnapshot_Error_OrganizationAccessDeniedException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteOrganizationConfigRule(context.Background(), &DeleteOrganizationConfigRuleInput{})
+	_, opErr := svc.DeleteOrganizationConfigRule(context.Background(), &DeleteOrganizationConfigRuleInput{
+		OrganizationConfigRuleName: ptr.String("__OrganizationConfigRuleName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5510,7 +7485,67 @@ func TestCheckResponseSnapshot_Error_OrganizationAllFeaturesNotEnabledException(
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutConfigurationAggregator(context.Background(), &PutConfigurationAggregatorInput{})
+	_, opErr := svc.PutConfigurationAggregator(context.Background(), &PutConfigurationAggregatorInput{
+		ConfigurationAggregatorName: ptr.String("__ConfigurationAggregatorName__"),
+		AccountAggregationSources: []types.AccountAggregationSource{
+			{
+				AccountIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AllAwsRegions: true,
+				AwsRegions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				AccountIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				AllAwsRegions: true,
+				AwsRegions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		OrganizationAggregationSource: &types.OrganizationAggregationSource{
+			RoleArn: ptr.String("__RoleArn__"),
+			AwsRegions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AllAwsRegions: true,
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AggregatorFilters: &types.AggregatorFilters{
+			ResourceType: &types.AggregatorFilterResourceType{
+				Type: types.AggregatorFilterType("INCLUDE"),
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			ServicePrincipal: &types.AggregatorFilterServicePrincipal{
+				Type: types.AggregatorFilterType("INCLUDE"),
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5535,7 +7570,37 @@ func TestCheckResponseSnapshot_Error_OrganizationConformancePackTemplateValidati
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutOrganizationConformancePack(context.Background(), &PutOrganizationConformancePackInput{})
+	_, opErr := svc.PutOrganizationConformancePack(context.Background(), &PutOrganizationConformancePackInput{
+		OrganizationConformancePackName: ptr.String("__OrganizationConformancePackName__"),
+		TemplateS3Uri:                   ptr.String("__TemplateS3Uri__"),
+		TemplateBody:                    ptr.String("__TemplateBody__"),
+		DeliveryS3Bucket:                ptr.String("__DeliveryS3Bucket__"),
+		DeliveryS3KeyPrefix:             ptr.String("__DeliveryS3KeyPrefix__"),
+		ConformancePackInputParameters: []types.ConformancePackInputParameter{
+			{
+				ParameterName:  ptr.String("__ParameterName__"),
+				ParameterValue: ptr.String("__ParameterValue__"),
+			},
+			{
+				ParameterName:  ptr.String("__ParameterName__"),
+				ParameterValue: ptr.String("__ParameterValue__"),
+			},
+		},
+		ExcludedAccounts: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5560,7 +7625,16 @@ func TestCheckResponseSnapshot_Error_OversizedConfigurationItemException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetAggregateResourceConfig(context.Background(), &GetAggregateResourceConfigInput{})
+	_, opErr := svc.GetAggregateResourceConfig(context.Background(), &GetAggregateResourceConfigInput{
+		ConfigurationAggregatorName: ptr.String("__ConfigurationAggregatorName__"),
+		ResourceIdentifier: &types.AggregateResourceIdentifier{
+			SourceAccountId: ptr.String("__SourceAccountId__"),
+			SourceRegion:    ptr.String("__SourceRegion__"),
+			ResourceId:      ptr.String("__ResourceId__"),
+			ResourceType:    types.ResourceType("AWS::EC2::CustomerGateway"),
+			ResourceName:    ptr.String("__ResourceName__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5585,7 +7659,10 @@ func TestCheckResponseSnapshot_Error_RemediationInProgressException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteRemediationConfiguration(context.Background(), &DeleteRemediationConfigurationInput{})
+	_, opErr := svc.DeleteRemediationConfiguration(context.Background(), &DeleteRemediationConfigurationInput{
+		ConfigRuleName: ptr.String("__ConfigRuleName__"),
+		ResourceType:   ptr.String("__ResourceType__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5610,7 +7687,25 @@ func TestCheckResponseSnapshot_Error_ResourceConcurrentModificationException(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutStoredQuery(context.Background(), &PutStoredQueryInput{})
+	_, opErr := svc.PutStoredQuery(context.Background(), &PutStoredQueryInput{
+		StoredQuery: &types.StoredQuery{
+			QueryId:     ptr.String("__QueryId__"),
+			QueryArn:    ptr.String("__QueryArn__"),
+			QueryName:   ptr.String("__QueryName__"),
+			Description: ptr.String("__Description__"),
+			Expression:  ptr.String("__Expression__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5635,7 +7730,9 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteConfigRule(context.Background(), &DeleteConfigRuleInput{})
+	_, opErr := svc.DeleteConfigRule(context.Background(), &DeleteConfigRuleInput{
+		ConfigRuleName: ptr.String("__ConfigRuleName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5660,7 +7757,16 @@ func TestCheckResponseSnapshot_Error_ResourceNotDiscoveredException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetAggregateResourceConfig(context.Background(), &GetAggregateResourceConfigInput{})
+	_, opErr := svc.GetAggregateResourceConfig(context.Background(), &GetAggregateResourceConfigInput{
+		ConfigurationAggregatorName: ptr.String("__ConfigurationAggregatorName__"),
+		ResourceIdentifier: &types.AggregateResourceIdentifier{
+			SourceAccountId: ptr.String("__SourceAccountId__"),
+			SourceRegion:    ptr.String("__SourceRegion__"),
+			ResourceId:      ptr.String("__ResourceId__"),
+			ResourceType:    types.ResourceType("AWS::EC2::CustomerGateway"),
+			ResourceName:    ptr.String("__ResourceName__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5685,7 +7791,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteConnector(context.Background(), &DeleteConnectorInput{})
+	_, opErr := svc.DeleteConnector(context.Background(), &DeleteConnectorInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5710,7 +7818,25 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutStoredQuery(context.Background(), &PutStoredQueryInput{})
+	_, opErr := svc.PutStoredQuery(context.Background(), &PutStoredQueryInput{
+		StoredQuery: &types.StoredQuery{
+			QueryId:     ptr.String("__QueryId__"),
+			QueryArn:    ptr.String("__QueryArn__"),
+			QueryName:   ptr.String("__QueryName__"),
+			Description: ptr.String("__Description__"),
+			Expression:  ptr.String("__Expression__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5735,7 +7861,9 @@ func TestCheckResponseSnapshot_Error_UnmodifiableEntityException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteConfigurationRecorder(context.Background(), &DeleteConfigurationRecorderInput{})
+	_, opErr := svc.DeleteConfigurationRecorder(context.Background(), &DeleteConfigurationRecorderInput{
+		ConfigurationRecorderName: ptr.String("__ConfigurationRecorderName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5760,7 +7888,13 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateResourceTypes(context.Background(), &AssociateResourceTypesInput{})
+	_, opErr := svc.AssociateResourceTypes(context.Background(), &AssociateResourceTypesInput{
+		ConfigurationRecorderArn: ptr.String("__ConfigurationRecorderArn__"),
+		ResourceTypes: []types.ResourceType{
+			types.ResourceType("AWS::EC2::CustomerGateway"),
+			types.ResourceType("AWS::EC2::CustomerGateway"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

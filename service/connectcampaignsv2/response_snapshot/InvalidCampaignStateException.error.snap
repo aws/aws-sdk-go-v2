@@ -1,0 +1,5 @@
+409
+Content-Type: application/json
+X-Amzn-Errortype: InvalidCampaignStateException
+
+{"__type":"InvalidCampaignStateException","message":"__Message__","state":"Initialized"}

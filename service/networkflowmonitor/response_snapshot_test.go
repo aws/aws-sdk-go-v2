@@ -146,7 +146,34 @@ func TestCheckResponseSnapshot_CreateMonitor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMonitor(context.Background(), &CreateMonitorInput{})
+	got, err := svc.CreateMonitor(context.Background(), &CreateMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		LocalResources: []types.MonitorLocalResource{
+			{
+				Type:       types.MonitorLocalResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.MonitorLocalResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		RemoteResources: []types.MonitorRemoteResource{
+			{
+				Type:       types.MonitorRemoteResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.MonitorRemoteResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		ScopeArn:    ptr.String("__ScopeArn__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -172,7 +199,32 @@ func TestCheckResponseSnapshot_CreateScope(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateScope(context.Background(), &CreateScopeInput{})
+	got, err := svc.CreateScope(context.Background(), &CreateScopeInput{
+		Targets: []types.TargetResource{
+			{
+				TargetIdentifier: &types.TargetIdentifier{
+					TargetId: &types.TargetIdMemberAccountId{
+						Value: "__TargetIdMemberAccountId__",
+					},
+					TargetType: types.TargetType("ACCOUNT"),
+				},
+				Region: ptr.String("__Region__"),
+			},
+			{
+				TargetIdentifier: &types.TargetIdentifier{
+					TargetId: &types.TargetIdMemberAccountId{
+						Value: "__TargetIdMemberAccountId__",
+					},
+					TargetType: types.TargetType("ACCOUNT"),
+				},
+				Region: ptr.String("__Region__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -191,7 +243,9 @@ func TestCheckResponseSnapshot_DeleteMonitor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMonitor(context.Background(), &DeleteMonitorInput{})
+	got, err := svc.DeleteMonitor(context.Background(), &DeleteMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -210,7 +264,9 @@ func TestCheckResponseSnapshot_DeleteScope(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteScope(context.Background(), &DeleteScopeInput{})
+	got, err := svc.DeleteScope(context.Background(), &DeleteScopeInput{
+		ScopeId: ptr.String("__ScopeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -258,7 +314,9 @@ func TestCheckResponseSnapshot_GetMonitor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMonitor(context.Background(), &GetMonitorInput{})
+	got, err := svc.GetMonitor(context.Background(), &GetMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -376,7 +434,12 @@ func TestCheckResponseSnapshot_GetQueryResultsMonitorTopContributors(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQueryResultsMonitorTopContributors(context.Background(), &GetQueryResultsMonitorTopContributorsInput{})
+	got, err := svc.GetQueryResultsMonitorTopContributors(context.Background(), &GetQueryResultsMonitorTopContributorsInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		QueryId:     ptr.String("__QueryId__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -421,7 +484,12 @@ func TestCheckResponseSnapshot_GetQueryResultsWorkloadInsightsTopContributors(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQueryResultsWorkloadInsightsTopContributors(context.Background(), &GetQueryResultsWorkloadInsightsTopContributorsInput{})
+	got, err := svc.GetQueryResultsWorkloadInsightsTopContributors(context.Background(), &GetQueryResultsWorkloadInsightsTopContributorsInput{
+		ScopeId:    ptr.String("__ScopeId__"),
+		QueryId:    ptr.String("__QueryId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -467,7 +535,12 @@ func TestCheckResponseSnapshot_GetQueryResultsWorkloadInsightsTopContributorsDat
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQueryResultsWorkloadInsightsTopContributorsData(context.Background(), &GetQueryResultsWorkloadInsightsTopContributorsDataInput{})
+	got, err := svc.GetQueryResultsWorkloadInsightsTopContributorsData(context.Background(), &GetQueryResultsWorkloadInsightsTopContributorsDataInput{
+		ScopeId:    ptr.String("__ScopeId__"),
+		QueryId:    ptr.String("__QueryId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -488,7 +561,10 @@ func TestCheckResponseSnapshot_GetQueryStatusMonitorTopContributors(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQueryStatusMonitorTopContributors(context.Background(), &GetQueryStatusMonitorTopContributorsInput{})
+	got, err := svc.GetQueryStatusMonitorTopContributors(context.Background(), &GetQueryStatusMonitorTopContributorsInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		QueryId:     ptr.String("__QueryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -509,7 +585,10 @@ func TestCheckResponseSnapshot_GetQueryStatusWorkloadInsightsTopContributors(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQueryStatusWorkloadInsightsTopContributors(context.Background(), &GetQueryStatusWorkloadInsightsTopContributorsInput{})
+	got, err := svc.GetQueryStatusWorkloadInsightsTopContributors(context.Background(), &GetQueryStatusWorkloadInsightsTopContributorsInput{
+		ScopeId: ptr.String("__ScopeId__"),
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -530,7 +609,10 @@ func TestCheckResponseSnapshot_GetQueryStatusWorkloadInsightsTopContributorsData
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQueryStatusWorkloadInsightsTopContributorsData(context.Background(), &GetQueryStatusWorkloadInsightsTopContributorsDataInput{})
+	got, err := svc.GetQueryStatusWorkloadInsightsTopContributorsData(context.Background(), &GetQueryStatusWorkloadInsightsTopContributorsDataInput{
+		ScopeId: ptr.String("__ScopeId__"),
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -576,7 +658,9 @@ func TestCheckResponseSnapshot_GetScope(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetScope(context.Background(), &GetScopeInput{})
+	got, err := svc.GetScope(context.Background(), &GetScopeInput{
+		ScopeId: ptr.String("__ScopeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -609,7 +693,11 @@ func TestCheckResponseSnapshot_ListMonitors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMonitors(context.Background(), &ListMonitorsInput{})
+	got, err := svc.ListMonitors(context.Background(), &ListMonitorsInput{
+		NextToken:     ptr.String("__NextToken__"),
+		MaxResults:    ptr.Int32(1),
+		MonitorStatus: types.MonitorStatus("PENDING"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -642,7 +730,10 @@ func TestCheckResponseSnapshot_ListScopes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListScopes(context.Background(), &ListScopesInput{})
+	got, err := svc.ListScopes(context.Background(), &ListScopesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -665,7 +756,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -686,7 +779,14 @@ func TestCheckResponseSnapshot_StartQueryMonitorTopContributors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartQueryMonitorTopContributors(context.Background(), &StartQueryMonitorTopContributorsInput{})
+	got, err := svc.StartQueryMonitorTopContributors(context.Background(), &StartQueryMonitorTopContributorsInput{
+		MonitorName:         ptr.String("__MonitorName__"),
+		StartTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MetricName:          types.MonitorMetric("ROUND_TRIP_TIME"),
+		DestinationCategory: types.DestinationCategory("INTRA_AZ"),
+		Limit:               ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -707,7 +807,14 @@ func TestCheckResponseSnapshot_StartQueryWorkloadInsightsTopContributors(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartQueryWorkloadInsightsTopContributors(context.Background(), &StartQueryWorkloadInsightsTopContributorsInput{})
+	got, err := svc.StartQueryWorkloadInsightsTopContributors(context.Background(), &StartQueryWorkloadInsightsTopContributorsInput{
+		ScopeId:             ptr.String("__ScopeId__"),
+		StartTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MetricName:          types.WorkloadInsightsMetric("TIMEOUTS"),
+		DestinationCategory: types.DestinationCategory("INTRA_AZ"),
+		Limit:               ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -728,7 +835,13 @@ func TestCheckResponseSnapshot_StartQueryWorkloadInsightsTopContributorsData(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartQueryWorkloadInsightsTopContributorsData(context.Background(), &StartQueryWorkloadInsightsTopContributorsDataInput{})
+	got, err := svc.StartQueryWorkloadInsightsTopContributorsData(context.Background(), &StartQueryWorkloadInsightsTopContributorsDataInput{
+		ScopeId:             ptr.String("__ScopeId__"),
+		StartTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MetricName:          types.WorkloadInsightsMetric("TIMEOUTS"),
+		DestinationCategory: types.DestinationCategory("INTRA_AZ"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -747,7 +860,10 @@ func TestCheckResponseSnapshot_StopQueryMonitorTopContributors(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopQueryMonitorTopContributors(context.Background(), &StopQueryMonitorTopContributorsInput{})
+	got, err := svc.StopQueryMonitorTopContributors(context.Background(), &StopQueryMonitorTopContributorsInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		QueryId:     ptr.String("__QueryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -766,7 +882,10 @@ func TestCheckResponseSnapshot_StopQueryWorkloadInsightsTopContributors(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopQueryWorkloadInsightsTopContributors(context.Background(), &StopQueryWorkloadInsightsTopContributorsInput{})
+	got, err := svc.StopQueryWorkloadInsightsTopContributors(context.Background(), &StopQueryWorkloadInsightsTopContributorsInput{
+		ScopeId: ptr.String("__ScopeId__"),
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -785,7 +904,10 @@ func TestCheckResponseSnapshot_StopQueryWorkloadInsightsTopContributorsData(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopQueryWorkloadInsightsTopContributorsData(context.Background(), &StopQueryWorkloadInsightsTopContributorsDataInput{})
+	got, err := svc.StopQueryWorkloadInsightsTopContributorsData(context.Background(), &StopQueryWorkloadInsightsTopContributorsDataInput{
+		ScopeId: ptr.String("__ScopeId__"),
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -804,7 +926,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -823,7 +950,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -871,7 +1004,50 @@ func TestCheckResponseSnapshot_UpdateMonitor(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMonitor(context.Background(), &UpdateMonitorInput{})
+	got, err := svc.UpdateMonitor(context.Background(), &UpdateMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		LocalResourcesToAdd: []types.MonitorLocalResource{
+			{
+				Type:       types.MonitorLocalResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.MonitorLocalResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		LocalResourcesToRemove: []types.MonitorLocalResource{
+			{
+				Type:       types.MonitorLocalResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.MonitorLocalResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		RemoteResourcesToAdd: []types.MonitorRemoteResource{
+			{
+				Type:       types.MonitorRemoteResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.MonitorRemoteResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		RemoteResourcesToRemove: []types.MonitorRemoteResource{
+			{
+				Type:       types.MonitorRemoteResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.MonitorRemoteResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -897,7 +1073,49 @@ func TestCheckResponseSnapshot_UpdateScope(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateScope(context.Background(), &UpdateScopeInput{})
+	got, err := svc.UpdateScope(context.Background(), &UpdateScopeInput{
+		ScopeId: ptr.String("__ScopeId__"),
+		ResourcesToAdd: []types.TargetResource{
+			{
+				TargetIdentifier: &types.TargetIdentifier{
+					TargetId: &types.TargetIdMemberAccountId{
+						Value: "__TargetIdMemberAccountId__",
+					},
+					TargetType: types.TargetType("ACCOUNT"),
+				},
+				Region: ptr.String("__Region__"),
+			},
+			{
+				TargetIdentifier: &types.TargetIdentifier{
+					TargetId: &types.TargetIdMemberAccountId{
+						Value: "__TargetIdMemberAccountId__",
+					},
+					TargetType: types.TargetType("ACCOUNT"),
+				},
+				Region: ptr.String("__Region__"),
+			},
+		},
+		ResourcesToDelete: []types.TargetResource{
+			{
+				TargetIdentifier: &types.TargetIdentifier{
+					TargetId: &types.TargetIdMemberAccountId{
+						Value: "__TargetIdMemberAccountId__",
+					},
+					TargetType: types.TargetType("ACCOUNT"),
+				},
+				Region: ptr.String("__Region__"),
+			},
+			{
+				TargetIdentifier: &types.TargetIdentifier{
+					TargetId: &types.TargetIdMemberAccountId{
+						Value: "__TargetIdMemberAccountId__",
+					},
+					TargetType: types.TargetType("ACCOUNT"),
+				},
+				Region: ptr.String("__Region__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -918,7 +1136,34 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{})
+	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		LocalResources: []types.MonitorLocalResource{
+			{
+				Type:       types.MonitorLocalResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.MonitorLocalResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		RemoteResources: []types.MonitorRemoteResource{
+			{
+				Type:       types.MonitorRemoteResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.MonitorRemoteResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		ScopeArn:    ptr.String("__ScopeArn__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -943,7 +1188,34 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{})
+	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		LocalResources: []types.MonitorLocalResource{
+			{
+				Type:       types.MonitorLocalResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.MonitorLocalResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		RemoteResources: []types.MonitorRemoteResource{
+			{
+				Type:       types.MonitorRemoteResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.MonitorRemoteResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		ScopeArn:    ptr.String("__ScopeArn__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -968,7 +1240,34 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{})
+	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		LocalResources: []types.MonitorLocalResource{
+			{
+				Type:       types.MonitorLocalResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.MonitorLocalResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		RemoteResources: []types.MonitorRemoteResource{
+			{
+				Type:       types.MonitorRemoteResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.MonitorRemoteResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		ScopeArn:    ptr.String("__ScopeArn__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -993,7 +1292,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteMonitor(context.Background(), &DeleteMonitorInput{})
+	_, opErr := svc.DeleteMonitor(context.Background(), &DeleteMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1018,7 +1319,34 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{})
+	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		LocalResources: []types.MonitorLocalResource{
+			{
+				Type:       types.MonitorLocalResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.MonitorLocalResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		RemoteResources: []types.MonitorRemoteResource{
+			{
+				Type:       types.MonitorRemoteResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.MonitorRemoteResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		ScopeArn:    ptr.String("__ScopeArn__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1043,7 +1371,34 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{})
+	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		LocalResources: []types.MonitorLocalResource{
+			{
+				Type:       types.MonitorLocalResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.MonitorLocalResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		RemoteResources: []types.MonitorRemoteResource{
+			{
+				Type:       types.MonitorRemoteResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.MonitorRemoteResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		ScopeArn:    ptr.String("__ScopeArn__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1068,7 +1423,34 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{})
+	_, opErr := svc.CreateMonitor(context.Background(), &CreateMonitorInput{
+		MonitorName: ptr.String("__MonitorName__"),
+		LocalResources: []types.MonitorLocalResource{
+			{
+				Type:       types.MonitorLocalResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.MonitorLocalResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		RemoteResources: []types.MonitorRemoteResource{
+			{
+				Type:       types.MonitorRemoteResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+			{
+				Type:       types.MonitorRemoteResourceType("AWS::EC2::VPC"),
+				Identifier: ptr.String("__Identifier__"),
+			},
+		},
+		ScopeArn:    ptr.String("__ScopeArn__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

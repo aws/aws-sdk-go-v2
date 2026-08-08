@@ -121,7 +121,10 @@ func TestCheckResponseSnapshot_CancelImageCreation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelImageCreation(context.Background(), &CancelImageCreationInput{})
+	got, err := svc.CancelImageCreation(context.Background(), &CancelImageCreationInput{
+		ImageBuildVersionArn: ptr.String("__ImageBuildVersionArn__"),
+		ClientToken:          ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -142,7 +145,10 @@ func TestCheckResponseSnapshot_CancelLifecycleExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelLifecycleExecution(context.Background(), &CancelLifecycleExecutionInput{})
+	got, err := svc.CancelLifecycleExecution(context.Background(), &CancelLifecycleExecutionInput{
+		LifecycleExecutionId: ptr.String("__LifecycleExecutionId__"),
+		ClientToken:          ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -171,7 +177,25 @@ func TestCheckResponseSnapshot_CreateComponent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateComponent(context.Background(), &CreateComponentInput{})
+	got, err := svc.CreateComponent(context.Background(), &CreateComponentInput{
+		Name:              ptr.String("__Name__"),
+		SemanticVersion:   ptr.String("__SemanticVersion__"),
+		Description:       ptr.String("__Description__"),
+		ChangeDescription: ptr.String("__ChangeDescription__"),
+		Platform:          types.Platform("Windows"),
+		SupportedOsVersions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Data:     ptr.String("__Data__"),
+		Uri:      ptr.String("__Uri__"),
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -200,7 +224,102 @@ func TestCheckResponseSnapshot_CreateContainerRecipe(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateContainerRecipe(context.Background(), &CreateContainerRecipeInput{})
+	got, err := svc.CreateContainerRecipe(context.Background(), &CreateContainerRecipeInput{
+		ContainerType:   types.ContainerType("DOCKER"),
+		Name:            ptr.String("__Name__"),
+		Description:     ptr.String("__Description__"),
+		SemanticVersion: ptr.String("__SemanticVersion__"),
+		Components: []types.ComponentConfiguration{
+			{
+				ComponentArn: ptr.String("__ComponentArn__"),
+				Parameters: []types.ComponentParameter{
+					{
+						Name: ptr.String("__Name__"),
+						Value: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Value: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			{
+				ComponentArn: ptr.String("__ComponentArn__"),
+				Parameters: []types.ComponentParameter{
+					{
+						Name: ptr.String("__Name__"),
+						Value: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Value: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		InstanceConfiguration: &types.InstanceConfiguration{
+			Image: ptr.String("__Image__"),
+			BlockDeviceMappings: []types.InstanceBlockDeviceMapping{
+				{
+					DeviceName: ptr.String("__DeviceName__"),
+					Ebs: &types.EbsInstanceBlockDeviceSpecification{
+						Encrypted:           ptr.Bool(true),
+						DeleteOnTermination: ptr.Bool(true),
+						Iops:                ptr.Int32(1),
+						KmsKeyId:            ptr.String("__KmsKeyId__"),
+						SnapshotId:          ptr.String("__SnapshotId__"),
+						VolumeSize:          ptr.Int32(1),
+						VolumeType:          types.EbsVolumeType("standard"),
+						Throughput:          ptr.Int32(1),
+					},
+					VirtualName: ptr.String("__VirtualName__"),
+					NoDevice:    ptr.String("__NoDevice__"),
+				},
+				{
+					DeviceName: ptr.String("__DeviceName__"),
+					Ebs: &types.EbsInstanceBlockDeviceSpecification{
+						Encrypted:           ptr.Bool(true),
+						DeleteOnTermination: ptr.Bool(true),
+						Iops:                ptr.Int32(1),
+						KmsKeyId:            ptr.String("__KmsKeyId__"),
+						SnapshotId:          ptr.String("__SnapshotId__"),
+						VolumeSize:          ptr.Int32(1),
+						VolumeType:          types.EbsVolumeType("standard"),
+						Throughput:          ptr.Int32(1),
+					},
+					VirtualName: ptr.String("__VirtualName__"),
+					NoDevice:    ptr.String("__NoDevice__"),
+				},
+			},
+		},
+		DockerfileTemplateData: ptr.String("__DockerfileTemplateData__"),
+		DockerfileTemplateUri:  ptr.String("__DockerfileTemplateUri__"),
+		PlatformOverride:       types.Platform("Windows"),
+		ImageOsVersionOverride: ptr.String("__ImageOsVersionOverride__"),
+		ParentImage:            ptr.String("__ParentImage__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		WorkingDirectory: ptr.String("__WorkingDirectory__"),
+		TargetRepository: &types.TargetContainerRepository{
+			Service:        types.ContainerRepositoryService("ECR"),
+			RepositoryName: ptr.String("__RepositoryName__"),
+		},
+		KmsKeyId:    ptr.String("__KmsKeyId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -223,7 +342,228 @@ func TestCheckResponseSnapshot_CreateDistributionConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDistributionConfiguration(context.Background(), &CreateDistributionConfigurationInput{})
+	got, err := svc.CreateDistributionConfiguration(context.Background(), &CreateDistributionConfigurationInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Distributions: []types.Distribution{
+			{
+				Region: ptr.String("__Region__"),
+				AmiDistributionConfiguration: &types.AmiDistributionConfiguration{
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+					TargetAccountIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AmiTags: map[string]string{
+						"key0": "__Value__",
+					},
+					KmsKeyId: ptr.String("__KmsKeyId__"),
+					LaunchPermission: &types.LaunchPermissionConfiguration{
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+						UserGroups: []string{
+							"__Member__",
+							"__Member__",
+						},
+						OrganizationArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+						OrganizationalUnitArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ContainerDistributionConfiguration: &types.ContainerDistributionConfiguration{
+					Description: ptr.String("__Description__"),
+					ContainerTags: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TargetRepository: &types.TargetContainerRepository{
+						Service:        types.ContainerRepositoryService("ECR"),
+						RepositoryName: ptr.String("__RepositoryName__"),
+					},
+				},
+				LicenseConfigurationArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				LaunchTemplateConfigurations: []types.LaunchTemplateConfiguration{
+					{
+						LaunchTemplateId:  ptr.String("__LaunchTemplateId__"),
+						AccountId:         ptr.String("__AccountId__"),
+						SetDefaultVersion: ptr.Bool(true),
+					},
+					{
+						LaunchTemplateId:  ptr.String("__LaunchTemplateId__"),
+						AccountId:         ptr.String("__AccountId__"),
+						SetDefaultVersion: ptr.Bool(true),
+					},
+				},
+				S3ExportConfiguration: &types.S3ExportConfiguration{
+					RoleName:        ptr.String("__RoleName__"),
+					DiskImageFormat: types.DiskImageFormat("VMDK"),
+					S3Bucket:        ptr.String("__S3Bucket__"),
+					S3Prefix:        ptr.String("__S3Prefix__"),
+				},
+				FastLaunchConfigurations: []types.FastLaunchConfiguration{
+					{
+						Enabled: true,
+						SnapshotConfiguration: &types.FastLaunchSnapshotConfiguration{
+							TargetResourceCount: ptr.Int32(1),
+						},
+						MaxParallelLaunches: ptr.Int32(1),
+						LaunchTemplate: &types.FastLaunchLaunchTemplateSpecification{
+							LaunchTemplateId:      ptr.String("__LaunchTemplateId__"),
+							LaunchTemplateName:    ptr.String("__LaunchTemplateName__"),
+							LaunchTemplateVersion: ptr.String("__LaunchTemplateVersion__"),
+						},
+						AccountId: ptr.String("__AccountId__"),
+					},
+					{
+						Enabled: true,
+						SnapshotConfiguration: &types.FastLaunchSnapshotConfiguration{
+							TargetResourceCount: ptr.Int32(1),
+						},
+						MaxParallelLaunches: ptr.Int32(1),
+						LaunchTemplate: &types.FastLaunchLaunchTemplateSpecification{
+							LaunchTemplateId:      ptr.String("__LaunchTemplateId__"),
+							LaunchTemplateName:    ptr.String("__LaunchTemplateName__"),
+							LaunchTemplateVersion: ptr.String("__LaunchTemplateVersion__"),
+						},
+						AccountId: ptr.String("__AccountId__"),
+					},
+				},
+				SsmParameterConfigurations: []types.SsmParameterConfiguration{
+					{
+						AmiAccountId:  ptr.String("__AmiAccountId__"),
+						ParameterName: ptr.String("__ParameterName__"),
+						DataType:      types.SsmParameterDataType("text"),
+					},
+					{
+						AmiAccountId:  ptr.String("__AmiAccountId__"),
+						ParameterName: ptr.String("__ParameterName__"),
+						DataType:      types.SsmParameterDataType("text"),
+					},
+				},
+			},
+			{
+				Region: ptr.String("__Region__"),
+				AmiDistributionConfiguration: &types.AmiDistributionConfiguration{
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+					TargetAccountIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AmiTags: map[string]string{
+						"key0": "__Value__",
+					},
+					KmsKeyId: ptr.String("__KmsKeyId__"),
+					LaunchPermission: &types.LaunchPermissionConfiguration{
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+						UserGroups: []string{
+							"__Member__",
+							"__Member__",
+						},
+						OrganizationArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+						OrganizationalUnitArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ContainerDistributionConfiguration: &types.ContainerDistributionConfiguration{
+					Description: ptr.String("__Description__"),
+					ContainerTags: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TargetRepository: &types.TargetContainerRepository{
+						Service:        types.ContainerRepositoryService("ECR"),
+						RepositoryName: ptr.String("__RepositoryName__"),
+					},
+				},
+				LicenseConfigurationArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				LaunchTemplateConfigurations: []types.LaunchTemplateConfiguration{
+					{
+						LaunchTemplateId:  ptr.String("__LaunchTemplateId__"),
+						AccountId:         ptr.String("__AccountId__"),
+						SetDefaultVersion: ptr.Bool(true),
+					},
+					{
+						LaunchTemplateId:  ptr.String("__LaunchTemplateId__"),
+						AccountId:         ptr.String("__AccountId__"),
+						SetDefaultVersion: ptr.Bool(true),
+					},
+				},
+				S3ExportConfiguration: &types.S3ExportConfiguration{
+					RoleName:        ptr.String("__RoleName__"),
+					DiskImageFormat: types.DiskImageFormat("VMDK"),
+					S3Bucket:        ptr.String("__S3Bucket__"),
+					S3Prefix:        ptr.String("__S3Prefix__"),
+				},
+				FastLaunchConfigurations: []types.FastLaunchConfiguration{
+					{
+						Enabled: true,
+						SnapshotConfiguration: &types.FastLaunchSnapshotConfiguration{
+							TargetResourceCount: ptr.Int32(1),
+						},
+						MaxParallelLaunches: ptr.Int32(1),
+						LaunchTemplate: &types.FastLaunchLaunchTemplateSpecification{
+							LaunchTemplateId:      ptr.String("__LaunchTemplateId__"),
+							LaunchTemplateName:    ptr.String("__LaunchTemplateName__"),
+							LaunchTemplateVersion: ptr.String("__LaunchTemplateVersion__"),
+						},
+						AccountId: ptr.String("__AccountId__"),
+					},
+					{
+						Enabled: true,
+						SnapshotConfiguration: &types.FastLaunchSnapshotConfiguration{
+							TargetResourceCount: ptr.Int32(1),
+						},
+						MaxParallelLaunches: ptr.Int32(1),
+						LaunchTemplate: &types.FastLaunchLaunchTemplateSpecification{
+							LaunchTemplateId:      ptr.String("__LaunchTemplateId__"),
+							LaunchTemplateName:    ptr.String("__LaunchTemplateName__"),
+							LaunchTemplateVersion: ptr.String("__LaunchTemplateVersion__"),
+						},
+						AccountId: ptr.String("__AccountId__"),
+					},
+				},
+				SsmParameterConfigurations: []types.SsmParameterConfiguration{
+					{
+						AmiAccountId:  ptr.String("__AmiAccountId__"),
+						ParameterName: ptr.String("__ParameterName__"),
+						DataType:      types.SsmParameterDataType("text"),
+					},
+					{
+						AmiAccountId:  ptr.String("__AmiAccountId__"),
+						ParameterName: ptr.String("__ParameterName__"),
+						DataType:      types.SsmParameterDataType("text"),
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -252,7 +592,79 @@ func TestCheckResponseSnapshot_CreateImage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateImage(context.Background(), &CreateImageInput{})
+	got, err := svc.CreateImage(context.Background(), &CreateImageInput{
+		ImageRecipeArn:                 ptr.String("__ImageRecipeArn__"),
+		ContainerRecipeArn:             ptr.String("__ContainerRecipeArn__"),
+		DistributionConfigurationArn:   ptr.String("__DistributionConfigurationArn__"),
+		InfrastructureConfigurationArn: ptr.String("__InfrastructureConfigurationArn__"),
+		ImageTestsConfiguration: &types.ImageTestsConfiguration{
+			ImageTestsEnabled: ptr.Bool(true),
+			TimeoutMinutes:    ptr.Int32(1),
+		},
+		EnhancedImageMetadataEnabled: ptr.Bool(true),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		ImageScanningConfiguration: &types.ImageScanningConfiguration{
+			ImageScanningEnabled: ptr.Bool(true),
+			EcrConfiguration: &types.EcrConfiguration{
+				RepositoryName: ptr.String("__RepositoryName__"),
+				ContainerTags: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Workflows: []types.WorkflowConfiguration{
+			{
+				WorkflowArn: ptr.String("__WorkflowArn__"),
+				Parameters: []types.WorkflowParameter{
+					{
+						Name: ptr.String("__Name__"),
+						Value: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Value: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ParallelGroup: ptr.String("__ParallelGroup__"),
+				OnFailure:     types.OnWorkflowFailure("CONTINUE"),
+			},
+			{
+				WorkflowArn: ptr.String("__WorkflowArn__"),
+				Parameters: []types.WorkflowParameter{
+					{
+						Name: ptr.String("__Name__"),
+						Value: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Value: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ParallelGroup: ptr.String("__ParallelGroup__"),
+				OnFailure:     types.OnWorkflowFailure("CONTINUE"),
+			},
+		},
+		ExecutionRole: ptr.String("__ExecutionRole__"),
+		LoggingConfiguration: &types.ImageLoggingConfiguration{
+			LogGroupName: ptr.String("__LogGroupName__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -275,7 +687,94 @@ func TestCheckResponseSnapshot_CreateImagePipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateImagePipeline(context.Background(), &CreateImagePipelineInput{})
+	got, err := svc.CreateImagePipeline(context.Background(), &CreateImagePipelineInput{
+		Name:                           ptr.String("__Name__"),
+		Description:                    ptr.String("__Description__"),
+		ImageRecipeArn:                 ptr.String("__ImageRecipeArn__"),
+		ContainerRecipeArn:             ptr.String("__ContainerRecipeArn__"),
+		InfrastructureConfigurationArn: ptr.String("__InfrastructureConfigurationArn__"),
+		DistributionConfigurationArn:   ptr.String("__DistributionConfigurationArn__"),
+		ImageTestsConfiguration: &types.ImageTestsConfiguration{
+			ImageTestsEnabled: ptr.Bool(true),
+			TimeoutMinutes:    ptr.Int32(1),
+		},
+		EnhancedImageMetadataEnabled: ptr.Bool(true),
+		Schedule: &types.Schedule{
+			ScheduleExpression:              ptr.String("__ScheduleExpression__"),
+			Timezone:                        ptr.String("__Timezone__"),
+			PipelineExecutionStartCondition: types.PipelineExecutionStartCondition("EXPRESSION_MATCH_ONLY"),
+			AutoDisablePolicy: &types.AutoDisablePolicy{
+				FailureCount: ptr.Int32(1),
+			},
+		},
+		Status: types.PipelineStatus("DISABLED"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ImageTags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		ImageScanningConfiguration: &types.ImageScanningConfiguration{
+			ImageScanningEnabled: ptr.Bool(true),
+			EcrConfiguration: &types.EcrConfiguration{
+				RepositoryName: ptr.String("__RepositoryName__"),
+				ContainerTags: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Workflows: []types.WorkflowConfiguration{
+			{
+				WorkflowArn: ptr.String("__WorkflowArn__"),
+				Parameters: []types.WorkflowParameter{
+					{
+						Name: ptr.String("__Name__"),
+						Value: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Value: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ParallelGroup: ptr.String("__ParallelGroup__"),
+				OnFailure:     types.OnWorkflowFailure("CONTINUE"),
+			},
+			{
+				WorkflowArn: ptr.String("__WorkflowArn__"),
+				Parameters: []types.WorkflowParameter{
+					{
+						Name: ptr.String("__Name__"),
+						Value: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Value: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ParallelGroup: ptr.String("__ParallelGroup__"),
+				OnFailure:     types.OnWorkflowFailure("CONTINUE"),
+			},
+		},
+		ExecutionRole: ptr.String("__ExecutionRole__"),
+		LoggingConfiguration: &types.PipelineLoggingConfiguration{
+			ImageLogGroupName:    ptr.String("__ImageLogGroupName__"),
+			PipelineLogGroupName: ptr.String("__PipelineLogGroupName__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -304,7 +803,102 @@ func TestCheckResponseSnapshot_CreateImageRecipe(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateImageRecipe(context.Background(), &CreateImageRecipeInput{})
+	got, err := svc.CreateImageRecipe(context.Background(), &CreateImageRecipeInput{
+		Name:            ptr.String("__Name__"),
+		Description:     ptr.String("__Description__"),
+		SemanticVersion: ptr.String("__SemanticVersion__"),
+		Components: []types.ComponentConfiguration{
+			{
+				ComponentArn: ptr.String("__ComponentArn__"),
+				Parameters: []types.ComponentParameter{
+					{
+						Name: ptr.String("__Name__"),
+						Value: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Value: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			{
+				ComponentArn: ptr.String("__ComponentArn__"),
+				Parameters: []types.ComponentParameter{
+					{
+						Name: ptr.String("__Name__"),
+						Value: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Value: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		ParentImage: ptr.String("__ParentImage__"),
+		BlockDeviceMappings: []types.InstanceBlockDeviceMapping{
+			{
+				DeviceName: ptr.String("__DeviceName__"),
+				Ebs: &types.EbsInstanceBlockDeviceSpecification{
+					Encrypted:           ptr.Bool(true),
+					DeleteOnTermination: ptr.Bool(true),
+					Iops:                ptr.Int32(1),
+					KmsKeyId:            ptr.String("__KmsKeyId__"),
+					SnapshotId:          ptr.String("__SnapshotId__"),
+					VolumeSize:          ptr.Int32(1),
+					VolumeType:          types.EbsVolumeType("standard"),
+					Throughput:          ptr.Int32(1),
+				},
+				VirtualName: ptr.String("__VirtualName__"),
+				NoDevice:    ptr.String("__NoDevice__"),
+			},
+			{
+				DeviceName: ptr.String("__DeviceName__"),
+				Ebs: &types.EbsInstanceBlockDeviceSpecification{
+					Encrypted:           ptr.Bool(true),
+					DeleteOnTermination: ptr.Bool(true),
+					Iops:                ptr.Int32(1),
+					KmsKeyId:            ptr.String("__KmsKeyId__"),
+					SnapshotId:          ptr.String("__SnapshotId__"),
+					VolumeSize:          ptr.Int32(1),
+					VolumeType:          types.EbsVolumeType("standard"),
+					Throughput:          ptr.Int32(1),
+				},
+				VirtualName: ptr.String("__VirtualName__"),
+				NoDevice:    ptr.String("__NoDevice__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		WorkingDirectory: ptr.String("__WorkingDirectory__"),
+		AdditionalInstanceConfiguration: &types.AdditionalInstanceConfiguration{
+			SystemsManagerAgent: &types.SystemsManagerAgent{
+				UninstallAfterBuild: ptr.Bool(true),
+			},
+			UserDataOverride: ptr.String("__UserDataOverride__"),
+		},
+		AmiTags: map[string]string{
+			"key0": "__Value__",
+		},
+		AmiWatermarks: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -327,7 +921,46 @@ func TestCheckResponseSnapshot_CreateInfrastructureConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateInfrastructureConfiguration(context.Background(), &CreateInfrastructureConfigurationInput{})
+	got, err := svc.CreateInfrastructureConfiguration(context.Background(), &CreateInfrastructureConfigurationInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		InstanceTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		InstanceProfileName: ptr.String("__InstanceProfileName__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetId: ptr.String("__SubnetId__"),
+		Logging: &types.Logging{
+			S3Logs: &types.S3Logs{
+				S3BucketName: ptr.String("__S3BucketName__"),
+				S3KeyPrefix:  ptr.String("__S3KeyPrefix__"),
+			},
+		},
+		KeyPair:                    ptr.String("__KeyPair__"),
+		TerminateInstanceOnFailure: ptr.Bool(true),
+		SnsTopicArn:                ptr.String("__SnsTopicArn__"),
+		ResourceTags: map[string]string{
+			"key0": "__Value__",
+		},
+		InstanceMetadataOptions: &types.InstanceMetadataOptions{
+			HttpTokens:              ptr.String("__HttpTokens__"),
+			HttpPutResponseHopLimit: ptr.Int32(1),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Placement: &types.Placement{
+			AvailabilityZone:     ptr.String("__AvailabilityZone__"),
+			Tenancy:              types.TenancyType("default"),
+			HostId:               ptr.String("__HostId__"),
+			HostResourceGroupArn: ptr.String("__HostResourceGroupArn__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -349,7 +982,112 @@ func TestCheckResponseSnapshot_CreateLifecyclePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLifecyclePolicy(context.Background(), &CreateLifecyclePolicyInput{})
+	got, err := svc.CreateLifecyclePolicy(context.Background(), &CreateLifecyclePolicyInput{
+		Name:          ptr.String("__Name__"),
+		Description:   ptr.String("__Description__"),
+		Status:        types.LifecyclePolicyStatus("DISABLED"),
+		ExecutionRole: ptr.String("__ExecutionRole__"),
+		ResourceType:  types.LifecyclePolicyResourceType("AMI_IMAGE"),
+		PolicyDetails: []types.LifecyclePolicyDetail{
+			{
+				Action: &types.LifecyclePolicyDetailAction{
+					Type: types.LifecyclePolicyDetailActionType("DELETE"),
+					IncludeResources: &types.LifecyclePolicyDetailActionIncludeResources{
+						Amis:       true,
+						Snapshots:  true,
+						Containers: true,
+					},
+				},
+				Filter: &types.LifecyclePolicyDetailFilter{
+					Type:          types.LifecyclePolicyDetailFilterType("AGE"),
+					Value:         ptr.Int32(1),
+					Unit:          types.LifecyclePolicyTimeUnit("DAYS"),
+					RetainAtLeast: ptr.Int32(1),
+				},
+				ExclusionRules: &types.LifecyclePolicyDetailExclusionRules{
+					TagMap: map[string]string{
+						"key0": "__Value__",
+					},
+					Amis: &types.LifecyclePolicyDetailExclusionRulesAmis{
+						IsPublic: true,
+						Regions: []string{
+							"__Member__",
+							"__Member__",
+						},
+						SharedAccounts: []string{
+							"__Member__",
+							"__Member__",
+						},
+						LastLaunched: &types.LifecyclePolicyDetailExclusionRulesAmisLastLaunched{
+							Value: ptr.Int32(1),
+							Unit:  types.LifecyclePolicyTimeUnit("DAYS"),
+						},
+						TagMap: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+			},
+			{
+				Action: &types.LifecyclePolicyDetailAction{
+					Type: types.LifecyclePolicyDetailActionType("DELETE"),
+					IncludeResources: &types.LifecyclePolicyDetailActionIncludeResources{
+						Amis:       true,
+						Snapshots:  true,
+						Containers: true,
+					},
+				},
+				Filter: &types.LifecyclePolicyDetailFilter{
+					Type:          types.LifecyclePolicyDetailFilterType("AGE"),
+					Value:         ptr.Int32(1),
+					Unit:          types.LifecyclePolicyTimeUnit("DAYS"),
+					RetainAtLeast: ptr.Int32(1),
+				},
+				ExclusionRules: &types.LifecyclePolicyDetailExclusionRules{
+					TagMap: map[string]string{
+						"key0": "__Value__",
+					},
+					Amis: &types.LifecyclePolicyDetailExclusionRulesAmis{
+						IsPublic: true,
+						Regions: []string{
+							"__Member__",
+							"__Member__",
+						},
+						SharedAccounts: []string{
+							"__Member__",
+							"__Member__",
+						},
+						LastLaunched: &types.LifecyclePolicyDetailExclusionRulesAmisLastLaunched{
+							Value: ptr.Int32(1),
+							Unit:  types.LifecyclePolicyTimeUnit("DAYS"),
+						},
+						TagMap: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+			},
+		},
+		ResourceSelection: &types.LifecyclePolicyResourceSelection{
+			Recipes: []types.LifecyclePolicyResourceSelectionRecipe{
+				{
+					Name:            ptr.String("__Name__"),
+					SemanticVersion: ptr.String("__SemanticVersion__"),
+				},
+				{
+					Name:            ptr.String("__Name__"),
+					SemanticVersion: ptr.String("__SemanticVersion__"),
+				},
+			},
+			TagMap: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -377,7 +1115,21 @@ func TestCheckResponseSnapshot_CreateWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWorkflow(context.Background(), &CreateWorkflowInput{})
+	got, err := svc.CreateWorkflow(context.Background(), &CreateWorkflowInput{
+		Name:              ptr.String("__Name__"),
+		SemanticVersion:   ptr.String("__SemanticVersion__"),
+		Description:       ptr.String("__Description__"),
+		ChangeDescription: ptr.String("__ChangeDescription__"),
+		Data:              ptr.String("__Data__"),
+		Uri:               ptr.String("__Uri__"),
+		KmsKeyId:          ptr.String("__KmsKeyId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Type:        types.WorkflowType("BUILD"),
+		DryRun:      true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -399,7 +1151,9 @@ func TestCheckResponseSnapshot_DeleteComponent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteComponent(context.Background(), &DeleteComponentInput{})
+	got, err := svc.DeleteComponent(context.Background(), &DeleteComponentInput{
+		ComponentBuildVersionArn: ptr.String("__ComponentBuildVersionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -421,7 +1175,9 @@ func TestCheckResponseSnapshot_DeleteContainerRecipe(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteContainerRecipe(context.Background(), &DeleteContainerRecipeInput{})
+	got, err := svc.DeleteContainerRecipe(context.Background(), &DeleteContainerRecipeInput{
+		ContainerRecipeArn: ptr.String("__ContainerRecipeArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -443,7 +1199,9 @@ func TestCheckResponseSnapshot_DeleteDistributionConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDistributionConfiguration(context.Background(), &DeleteDistributionConfigurationInput{})
+	got, err := svc.DeleteDistributionConfiguration(context.Background(), &DeleteDistributionConfigurationInput{
+		DistributionConfigurationArn: ptr.String("__DistributionConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -465,7 +1223,9 @@ func TestCheckResponseSnapshot_DeleteImage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteImage(context.Background(), &DeleteImageInput{})
+	got, err := svc.DeleteImage(context.Background(), &DeleteImageInput{
+		ImageBuildVersionArn: ptr.String("__ImageBuildVersionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -487,7 +1247,9 @@ func TestCheckResponseSnapshot_DeleteImagePipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteImagePipeline(context.Background(), &DeleteImagePipelineInput{})
+	got, err := svc.DeleteImagePipeline(context.Background(), &DeleteImagePipelineInput{
+		ImagePipelineArn: ptr.String("__ImagePipelineArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -509,7 +1271,9 @@ func TestCheckResponseSnapshot_DeleteImageRecipe(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteImageRecipe(context.Background(), &DeleteImageRecipeInput{})
+	got, err := svc.DeleteImageRecipe(context.Background(), &DeleteImageRecipeInput{
+		ImageRecipeArn: ptr.String("__ImageRecipeArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -531,7 +1295,9 @@ func TestCheckResponseSnapshot_DeleteInfrastructureConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteInfrastructureConfiguration(context.Background(), &DeleteInfrastructureConfigurationInput{})
+	got, err := svc.DeleteInfrastructureConfiguration(context.Background(), &DeleteInfrastructureConfigurationInput{
+		InfrastructureConfigurationArn: ptr.String("__InfrastructureConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -552,7 +1318,9 @@ func TestCheckResponseSnapshot_DeleteLifecyclePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLifecyclePolicy(context.Background(), &DeleteLifecyclePolicyInput{})
+	got, err := svc.DeleteLifecyclePolicy(context.Background(), &DeleteLifecyclePolicyInput{
+		LifecyclePolicyArn: ptr.String("__LifecyclePolicyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -573,7 +1341,9 @@ func TestCheckResponseSnapshot_DeleteWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorkflow(context.Background(), &DeleteWorkflowInput{})
+	got, err := svc.DeleteWorkflow(context.Background(), &DeleteWorkflowInput{
+		WorkflowBuildVersionArn: ptr.String("__WorkflowBuildVersionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -595,7 +1365,18 @@ func TestCheckResponseSnapshot_DistributeImage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DistributeImage(context.Background(), &DistributeImageInput{})
+	got, err := svc.DistributeImage(context.Background(), &DistributeImageInput{
+		SourceImage:                  ptr.String("__SourceImage__"),
+		DistributionConfigurationArn: ptr.String("__DistributionConfigurationArn__"),
+		ExecutionRole:                ptr.String("__ExecutionRole__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		LoggingConfiguration: &types.ImageLoggingConfiguration{
+			LogGroupName: ptr.String("__LogGroupName__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -679,7 +1460,9 @@ func TestCheckResponseSnapshot_GetComponent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetComponent(context.Background(), &GetComponentInput{})
+	got, err := svc.GetComponent(context.Background(), &GetComponentInput{
+		ComponentBuildVersionArn: ptr.String("__ComponentBuildVersionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -701,7 +1484,9 @@ func TestCheckResponseSnapshot_GetComponentPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetComponentPolicy(context.Background(), &GetComponentPolicyInput{})
+	got, err := svc.GetComponentPolicy(context.Background(), &GetComponentPolicyInput{
+		ComponentArn: ptr.String("__ComponentArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -825,7 +1610,9 @@ func TestCheckResponseSnapshot_GetContainerRecipe(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetContainerRecipe(context.Background(), &GetContainerRecipeInput{})
+	got, err := svc.GetContainerRecipe(context.Background(), &GetContainerRecipeInput{
+		ContainerRecipeArn: ptr.String("__ContainerRecipeArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -847,7 +1634,9 @@ func TestCheckResponseSnapshot_GetContainerRecipePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetContainerRecipePolicy(context.Background(), &GetContainerRecipePolicyInput{})
+	got, err := svc.GetContainerRecipePolicy(context.Background(), &GetContainerRecipePolicyInput{
+		ContainerRecipeArn: ptr.String("__ContainerRecipeArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1093,7 +1882,9 @@ func TestCheckResponseSnapshot_GetDistributionConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDistributionConfiguration(context.Background(), &GetDistributionConfigurationInput{})
+	got, err := svc.GetDistributionConfiguration(context.Background(), &GetDistributionConfigurationInput{
+		DistributionConfigurationArn: ptr.String("__DistributionConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1715,7 +2506,9 @@ func TestCheckResponseSnapshot_GetImage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetImage(context.Background(), &GetImageInput{})
+	got, err := svc.GetImage(context.Background(), &GetImageInput{
+		ImageBuildVersionArn: ptr.String("__ImageBuildVersionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1831,7 +2624,9 @@ func TestCheckResponseSnapshot_GetImagePipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetImagePipeline(context.Background(), &GetImagePipelineInput{})
+	got, err := svc.GetImagePipeline(context.Background(), &GetImagePipelineInput{
+		ImagePipelineArn: ptr.String("__ImagePipelineArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1853,7 +2648,9 @@ func TestCheckResponseSnapshot_GetImagePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetImagePolicy(context.Background(), &GetImagePolicyInput{})
+	got, err := svc.GetImagePolicy(context.Background(), &GetImagePolicyInput{
+		ImageArn: ptr.String("__ImageArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1980,7 +2777,9 @@ func TestCheckResponseSnapshot_GetImageRecipe(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetImageRecipe(context.Background(), &GetImageRecipeInput{})
+	got, err := svc.GetImageRecipe(context.Background(), &GetImageRecipeInput{
+		ImageRecipeArn: ptr.String("__ImageRecipeArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2002,7 +2801,9 @@ func TestCheckResponseSnapshot_GetImageRecipePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetImageRecipePolicy(context.Background(), &GetImageRecipePolicyInput{})
+	got, err := svc.GetImageRecipePolicy(context.Background(), &GetImageRecipePolicyInput{
+		ImageRecipeArn: ptr.String("__ImageRecipeArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2065,7 +2866,9 @@ func TestCheckResponseSnapshot_GetInfrastructureConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetInfrastructureConfiguration(context.Background(), &GetInfrastructureConfigurationInput{})
+	got, err := svc.GetInfrastructureConfiguration(context.Background(), &GetInfrastructureConfigurationInput{
+		InfrastructureConfigurationArn: ptr.String("__InfrastructureConfigurationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2098,7 +2901,9 @@ func TestCheckResponseSnapshot_GetLifecycleExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLifecycleExecution(context.Background(), &GetLifecycleExecutionInput{})
+	got, err := svc.GetLifecycleExecution(context.Background(), &GetLifecycleExecutionInput{
+		LifecycleExecutionId: ptr.String("__LifecycleExecutionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2227,7 +3032,9 @@ func TestCheckResponseSnapshot_GetLifecyclePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLifecyclePolicy(context.Background(), &GetLifecyclePolicyInput{})
+	got, err := svc.GetLifecyclePolicy(context.Background(), &GetLifecyclePolicyInput{
+		LifecyclePolicyArn: ptr.String("__LifecyclePolicyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2250,7 +3057,11 @@ func TestCheckResponseSnapshot_GetMarketplaceResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMarketplaceResource(context.Background(), &GetMarketplaceResourceInput{})
+	got, err := svc.GetMarketplaceResource(context.Background(), &GetMarketplaceResourceInput{
+		ResourceType:     types.MarketplaceResourceType("COMPONENT_DATA"),
+		ResourceArn:      ptr.String("__ResourceArn__"),
+		ResourceLocation: ptr.String("__ResourceLocation__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2315,7 +3126,9 @@ func TestCheckResponseSnapshot_GetWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorkflow(context.Background(), &GetWorkflowInput{})
+	got, err := svc.GetWorkflow(context.Background(), &GetWorkflowInput{
+		WorkflowBuildVersionArn: ptr.String("__WorkflowBuildVersionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2349,7 +3162,9 @@ func TestCheckResponseSnapshot_GetWorkflowExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorkflowExecution(context.Background(), &GetWorkflowExecutionInput{})
+	got, err := svc.GetWorkflowExecution(context.Background(), &GetWorkflowExecutionInput{
+		WorkflowExecutionId: ptr.String("__WorkflowExecutionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2386,7 +3201,9 @@ func TestCheckResponseSnapshot_GetWorkflowStepExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorkflowStepExecution(context.Background(), &GetWorkflowStepExecutionInput{})
+	got, err := svc.GetWorkflowStepExecution(context.Background(), &GetWorkflowStepExecutionInput{
+		StepExecutionId: ptr.String("__StepExecutionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2409,7 +3226,22 @@ func TestCheckResponseSnapshot_ImportComponent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportComponent(context.Background(), &ImportComponentInput{})
+	got, err := svc.ImportComponent(context.Background(), &ImportComponentInput{
+		Name:              ptr.String("__Name__"),
+		SemanticVersion:   ptr.String("__SemanticVersion__"),
+		Description:       ptr.String("__Description__"),
+		ChangeDescription: ptr.String("__ChangeDescription__"),
+		Type:              types.ComponentType("BUILD"),
+		Format:            types.ComponentFormat("SHELL"),
+		Platform:          types.Platform("Windows"),
+		Data:              ptr.String("__Data__"),
+		Uri:               ptr.String("__Uri__"),
+		KmsKeyId:          ptr.String("__KmsKeyId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2431,7 +3263,30 @@ func TestCheckResponseSnapshot_ImportDiskImage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportDiskImage(context.Background(), &ImportDiskImageInput{})
+	got, err := svc.ImportDiskImage(context.Background(), &ImportDiskImageInput{
+		Name:                           ptr.String("__Name__"),
+		SemanticVersion:                ptr.String("__SemanticVersion__"),
+		Description:                    ptr.String("__Description__"),
+		Platform:                       ptr.String("__Platform__"),
+		OsVersion:                      ptr.String("__OsVersion__"),
+		ExecutionRole:                  ptr.String("__ExecutionRole__"),
+		InfrastructureConfigurationArn: ptr.String("__InfrastructureConfigurationArn__"),
+		Uri:                            ptr.String("__Uri__"),
+		LoggingConfiguration: &types.ImageLoggingConfiguration{
+			LogGroupName: ptr.String("__LogGroupName__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		RegisterImageOptions: &types.RegisterImageOptions{
+			SecureBootEnabled: ptr.Bool(true),
+			UefiData:          ptr.String("__UefiData__"),
+		},
+		WindowsConfiguration: &types.WindowsConfiguration{
+			ImageIndex: ptr.Int64(1),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2454,7 +3309,21 @@ func TestCheckResponseSnapshot_ImportVmImage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportVmImage(context.Background(), &ImportVmImageInput{})
+	got, err := svc.ImportVmImage(context.Background(), &ImportVmImageInput{
+		Name:            ptr.String("__Name__"),
+		SemanticVersion: ptr.String("__SemanticVersion__"),
+		Description:     ptr.String("__Description__"),
+		Platform:        types.Platform("Windows"),
+		OsVersion:       ptr.String("__OsVersion__"),
+		VmImportTaskId:  ptr.String("__VmImportTaskId__"),
+		LoggingConfiguration: &types.ImageLoggingConfiguration{
+			LogGroupName: ptr.String("__LogGroupName__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2526,7 +3395,11 @@ func TestCheckResponseSnapshot_ListComponentBuildVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListComponentBuildVersions(context.Background(), &ListComponentBuildVersionsInput{})
+	got, err := svc.ListComponentBuildVersions(context.Background(), &ListComponentBuildVersionsInput{
+		ComponentVersionArn: ptr.String("__ComponentVersionArn__"),
+		MaxResults:          ptr.Int32(1),
+		NextToken:           ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2600,7 +3473,28 @@ func TestCheckResponseSnapshot_ListComponents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListComponents(context.Background(), &ListComponentsInput{})
+	got, err := svc.ListComponents(context.Background(), &ListComponentsInput{
+		Owner: types.Ownership("Self"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ByName:     true,
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2650,7 +3544,27 @@ func TestCheckResponseSnapshot_ListContainerRecipes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListContainerRecipes(context.Background(), &ListContainerRecipesInput{})
+	got, err := svc.ListContainerRecipes(context.Background(), &ListContainerRecipesInput{
+		Owner: types.Ownership("Self"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2702,7 +3616,26 @@ func TestCheckResponseSnapshot_ListDistributionConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDistributionConfigurations(context.Background(), &ListDistributionConfigurationsInput{})
+	got, err := svc.ListDistributionConfigurations(context.Background(), &ListDistributionConfigurationsInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2858,7 +3791,27 @@ func TestCheckResponseSnapshot_ListImageBuildVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListImageBuildVersions(context.Background(), &ListImageBuildVersionsInput{})
+	got, err := svc.ListImageBuildVersions(context.Background(), &ListImageBuildVersionsInput{
+		ImageVersionArn: ptr.String("__ImageVersionArn__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2890,7 +3843,11 @@ func TestCheckResponseSnapshot_ListImagePackages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListImagePackages(context.Background(), &ListImagePackagesInput{})
+	got, err := svc.ListImagePackages(context.Background(), &ListImagePackagesInput{
+		ImageBuildVersionArn: ptr.String("__ImageBuildVersionArn__"),
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3046,7 +4003,27 @@ func TestCheckResponseSnapshot_ListImagePipelineImages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListImagePipelineImages(context.Background(), &ListImagePipelineImagesInput{})
+	got, err := svc.ListImagePipelineImages(context.Background(), &ListImagePipelineImagesInput{
+		ImagePipelineArn: ptr.String("__ImagePipelineArn__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3260,7 +4237,26 @@ func TestCheckResponseSnapshot_ListImagePipelines(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListImagePipelines(context.Background(), &ListImagePipelinesInput{})
+	got, err := svc.ListImagePipelines(context.Background(), &ListImagePipelinesInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3306,7 +4302,27 @@ func TestCheckResponseSnapshot_ListImageRecipes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListImageRecipes(context.Background(), &ListImageRecipesInput{})
+	got, err := svc.ListImageRecipes(context.Background(), &ListImageRecipesInput{
+		Owner: types.Ownership("Self"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3407,7 +4423,16 @@ func TestCheckResponseSnapshot_ListImageScanFindingAggregations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListImageScanFindingAggregations(context.Background(), &ListImageScanFindingAggregationsInput{})
+	got, err := svc.ListImageScanFindingAggregations(context.Background(), &ListImageScanFindingAggregationsInput{
+		Filter: &types.Filter{
+			Name: ptr.String("__Name__"),
+			Values: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3619,7 +4644,26 @@ func TestCheckResponseSnapshot_ListImageScanFindings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListImageScanFindings(context.Background(), &ListImageScanFindingsInput{})
+	got, err := svc.ListImageScanFindings(context.Background(), &ListImageScanFindingsInput{
+		Filters: []types.ImageScanFindingsFilter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3667,7 +4711,29 @@ func TestCheckResponseSnapshot_ListImages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListImages(context.Background(), &ListImagesInput{})
+	got, err := svc.ListImages(context.Background(), &ListImagesInput{
+		Owner: types.Ownership("Self"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ByName:            true,
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+		IncludeDeprecated: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3739,7 +4805,26 @@ func TestCheckResponseSnapshot_ListInfrastructureConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInfrastructureConfigurations(context.Background(), &ListInfrastructureConfigurationsInput{})
+	got, err := svc.ListInfrastructureConfigurations(context.Background(), &ListInfrastructureConfigurationsInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3837,7 +4922,12 @@ func TestCheckResponseSnapshot_ListLifecycleExecutionResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLifecycleExecutionResources(context.Background(), &ListLifecycleExecutionResourcesInput{})
+	got, err := svc.ListLifecycleExecutionResources(context.Background(), &ListLifecycleExecutionResourcesInput{
+		LifecycleExecutionId: ptr.String("__LifecycleExecutionId__"),
+		ParentResourceId:     ptr.String("__ParentResourceId__"),
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3886,7 +4976,11 @@ func TestCheckResponseSnapshot_ListLifecycleExecutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLifecycleExecutions(context.Background(), &ListLifecycleExecutionsInput{})
+	got, err := svc.ListLifecycleExecutions(context.Background(), &ListLifecycleExecutionsInput{
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3937,7 +5031,26 @@ func TestCheckResponseSnapshot_ListLifecyclePolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLifecyclePolicies(context.Background(), &ListLifecyclePoliciesInput{})
+	got, err := svc.ListLifecyclePolicies(context.Background(), &ListLifecyclePoliciesInput{
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3960,7 +5073,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4001,7 +5116,10 @@ func TestCheckResponseSnapshot_ListWaitingWorkflowSteps(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWaitingWorkflowSteps(context.Background(), &ListWaitingWorkflowStepsInput{})
+	got, err := svc.ListWaitingWorkflowSteps(context.Background(), &ListWaitingWorkflowStepsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4058,7 +5176,11 @@ func TestCheckResponseSnapshot_ListWorkflowBuildVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkflowBuildVersions(context.Background(), &ListWorkflowBuildVersionsInput{})
+	got, err := svc.ListWorkflowBuildVersions(context.Background(), &ListWorkflowBuildVersionsInput{
+		WorkflowVersionArn: ptr.String("__WorkflowVersionArn__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4114,7 +5236,11 @@ func TestCheckResponseSnapshot_ListWorkflowExecutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkflowExecutions(context.Background(), &ListWorkflowExecutionsInput{})
+	got, err := svc.ListWorkflowExecutions(context.Background(), &ListWorkflowExecutionsInput{
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+		ImageBuildVersionArn: ptr.String("__ImageBuildVersionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4168,7 +5294,11 @@ func TestCheckResponseSnapshot_ListWorkflowStepExecutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkflowStepExecutions(context.Background(), &ListWorkflowStepExecutionsInput{})
+	got, err := svc.ListWorkflowStepExecutions(context.Background(), &ListWorkflowStepExecutionsInput{
+		MaxResults:          ptr.Int32(1),
+		NextToken:           ptr.String("__NextToken__"),
+		WorkflowExecutionId: ptr.String("__WorkflowExecutionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4209,7 +5339,28 @@ func TestCheckResponseSnapshot_ListWorkflows(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkflows(context.Background(), &ListWorkflowsInput{})
+	got, err := svc.ListWorkflows(context.Background(), &ListWorkflowsInput{
+		Owner: types.Ownership("Self"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ByName:     true,
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4231,7 +5382,10 @@ func TestCheckResponseSnapshot_PutComponentPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutComponentPolicy(context.Background(), &PutComponentPolicyInput{})
+	got, err := svc.PutComponentPolicy(context.Background(), &PutComponentPolicyInput{
+		ComponentArn: ptr.String("__ComponentArn__"),
+		Policy:       ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4253,7 +5407,10 @@ func TestCheckResponseSnapshot_PutContainerRecipePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutContainerRecipePolicy(context.Background(), &PutContainerRecipePolicyInput{})
+	got, err := svc.PutContainerRecipePolicy(context.Background(), &PutContainerRecipePolicyInput{
+		ContainerRecipeArn: ptr.String("__ContainerRecipeArn__"),
+		Policy:             ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4275,7 +5432,10 @@ func TestCheckResponseSnapshot_PutImagePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutImagePolicy(context.Background(), &PutImagePolicyInput{})
+	got, err := svc.PutImagePolicy(context.Background(), &PutImagePolicyInput{
+		ImageArn: ptr.String("__ImageArn__"),
+		Policy:   ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4297,7 +5457,10 @@ func TestCheckResponseSnapshot_PutImageRecipePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutImageRecipePolicy(context.Background(), &PutImageRecipePolicyInput{})
+	got, err := svc.PutImageRecipePolicy(context.Background(), &PutImageRecipePolicyInput{
+		ImageRecipeArn: ptr.String("__ImageRecipeArn__"),
+		Policy:         ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4319,7 +5482,10 @@ func TestCheckResponseSnapshot_RetryImage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RetryImage(context.Background(), &RetryImageInput{})
+	got, err := svc.RetryImage(context.Background(), &RetryImageInput{
+		ImageBuildVersionArn: ptr.String("__ImageBuildVersionArn__"),
+		ClientToken:          ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4342,7 +5508,13 @@ func TestCheckResponseSnapshot_SendWorkflowStepAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendWorkflowStepAction(context.Background(), &SendWorkflowStepActionInput{})
+	got, err := svc.SendWorkflowStepAction(context.Background(), &SendWorkflowStepActionInput{
+		StepExecutionId:      ptr.String("__StepExecutionId__"),
+		ImageBuildVersionArn: ptr.String("__ImageBuildVersionArn__"),
+		Action:               types.WorkflowStepActionType("RESUME"),
+		Reason:               ptr.String("__Reason__"),
+		ClientToken:          ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4365,7 +5537,13 @@ func TestCheckResponseSnapshot_StartImagePipelineExecution(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartImagePipelineExecution(context.Background(), &StartImagePipelineExecutionInput{})
+	got, err := svc.StartImagePipelineExecution(context.Background(), &StartImagePipelineExecutionInput{
+		ImagePipelineArn: ptr.String("__ImagePipelineArn__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4387,7 +5565,40 @@ func TestCheckResponseSnapshot_StartResourceStateUpdate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartResourceStateUpdate(context.Background(), &StartResourceStateUpdateInput{})
+	got, err := svc.StartResourceStateUpdate(context.Background(), &StartResourceStateUpdateInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		State: &types.ResourceState{
+			Status: types.ResourceStatus("AVAILABLE"),
+		},
+		ExecutionRole: ptr.String("__ExecutionRole__"),
+		IncludeResources: &types.ResourceStateUpdateIncludeResources{
+			Amis:       true,
+			Snapshots:  true,
+			Containers: true,
+		},
+		ExclusionRules: &types.ResourceStateUpdateExclusionRules{
+			Amis: &types.LifecyclePolicyDetailExclusionRulesAmis{
+				IsPublic: true,
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SharedAccounts: []string{
+					"__Member__",
+					"__Member__",
+				},
+				LastLaunched: &types.LifecyclePolicyDetailExclusionRulesAmisLastLaunched{
+					Value: ptr.Int32(1),
+					Unit:  types.LifecyclePolicyTimeUnit("DAYS"),
+				},
+				TagMap: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		UpdateAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4406,7 +5617,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4425,7 +5641,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4448,7 +5670,225 @@ func TestCheckResponseSnapshot_UpdateDistributionConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDistributionConfiguration(context.Background(), &UpdateDistributionConfigurationInput{})
+	got, err := svc.UpdateDistributionConfiguration(context.Background(), &UpdateDistributionConfigurationInput{
+		DistributionConfigurationArn: ptr.String("__DistributionConfigurationArn__"),
+		Description:                  ptr.String("__Description__"),
+		Distributions: []types.Distribution{
+			{
+				Region: ptr.String("__Region__"),
+				AmiDistributionConfiguration: &types.AmiDistributionConfiguration{
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+					TargetAccountIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AmiTags: map[string]string{
+						"key0": "__Value__",
+					},
+					KmsKeyId: ptr.String("__KmsKeyId__"),
+					LaunchPermission: &types.LaunchPermissionConfiguration{
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+						UserGroups: []string{
+							"__Member__",
+							"__Member__",
+						},
+						OrganizationArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+						OrganizationalUnitArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ContainerDistributionConfiguration: &types.ContainerDistributionConfiguration{
+					Description: ptr.String("__Description__"),
+					ContainerTags: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TargetRepository: &types.TargetContainerRepository{
+						Service:        types.ContainerRepositoryService("ECR"),
+						RepositoryName: ptr.String("__RepositoryName__"),
+					},
+				},
+				LicenseConfigurationArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				LaunchTemplateConfigurations: []types.LaunchTemplateConfiguration{
+					{
+						LaunchTemplateId:  ptr.String("__LaunchTemplateId__"),
+						AccountId:         ptr.String("__AccountId__"),
+						SetDefaultVersion: ptr.Bool(true),
+					},
+					{
+						LaunchTemplateId:  ptr.String("__LaunchTemplateId__"),
+						AccountId:         ptr.String("__AccountId__"),
+						SetDefaultVersion: ptr.Bool(true),
+					},
+				},
+				S3ExportConfiguration: &types.S3ExportConfiguration{
+					RoleName:        ptr.String("__RoleName__"),
+					DiskImageFormat: types.DiskImageFormat("VMDK"),
+					S3Bucket:        ptr.String("__S3Bucket__"),
+					S3Prefix:        ptr.String("__S3Prefix__"),
+				},
+				FastLaunchConfigurations: []types.FastLaunchConfiguration{
+					{
+						Enabled: true,
+						SnapshotConfiguration: &types.FastLaunchSnapshotConfiguration{
+							TargetResourceCount: ptr.Int32(1),
+						},
+						MaxParallelLaunches: ptr.Int32(1),
+						LaunchTemplate: &types.FastLaunchLaunchTemplateSpecification{
+							LaunchTemplateId:      ptr.String("__LaunchTemplateId__"),
+							LaunchTemplateName:    ptr.String("__LaunchTemplateName__"),
+							LaunchTemplateVersion: ptr.String("__LaunchTemplateVersion__"),
+						},
+						AccountId: ptr.String("__AccountId__"),
+					},
+					{
+						Enabled: true,
+						SnapshotConfiguration: &types.FastLaunchSnapshotConfiguration{
+							TargetResourceCount: ptr.Int32(1),
+						},
+						MaxParallelLaunches: ptr.Int32(1),
+						LaunchTemplate: &types.FastLaunchLaunchTemplateSpecification{
+							LaunchTemplateId:      ptr.String("__LaunchTemplateId__"),
+							LaunchTemplateName:    ptr.String("__LaunchTemplateName__"),
+							LaunchTemplateVersion: ptr.String("__LaunchTemplateVersion__"),
+						},
+						AccountId: ptr.String("__AccountId__"),
+					},
+				},
+				SsmParameterConfigurations: []types.SsmParameterConfiguration{
+					{
+						AmiAccountId:  ptr.String("__AmiAccountId__"),
+						ParameterName: ptr.String("__ParameterName__"),
+						DataType:      types.SsmParameterDataType("text"),
+					},
+					{
+						AmiAccountId:  ptr.String("__AmiAccountId__"),
+						ParameterName: ptr.String("__ParameterName__"),
+						DataType:      types.SsmParameterDataType("text"),
+					},
+				},
+			},
+			{
+				Region: ptr.String("__Region__"),
+				AmiDistributionConfiguration: &types.AmiDistributionConfiguration{
+					Name:        ptr.String("__Name__"),
+					Description: ptr.String("__Description__"),
+					TargetAccountIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AmiTags: map[string]string{
+						"key0": "__Value__",
+					},
+					KmsKeyId: ptr.String("__KmsKeyId__"),
+					LaunchPermission: &types.LaunchPermissionConfiguration{
+						UserIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+						UserGroups: []string{
+							"__Member__",
+							"__Member__",
+						},
+						OrganizationArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+						OrganizationalUnitArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ContainerDistributionConfiguration: &types.ContainerDistributionConfiguration{
+					Description: ptr.String("__Description__"),
+					ContainerTags: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TargetRepository: &types.TargetContainerRepository{
+						Service:        types.ContainerRepositoryService("ECR"),
+						RepositoryName: ptr.String("__RepositoryName__"),
+					},
+				},
+				LicenseConfigurationArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				LaunchTemplateConfigurations: []types.LaunchTemplateConfiguration{
+					{
+						LaunchTemplateId:  ptr.String("__LaunchTemplateId__"),
+						AccountId:         ptr.String("__AccountId__"),
+						SetDefaultVersion: ptr.Bool(true),
+					},
+					{
+						LaunchTemplateId:  ptr.String("__LaunchTemplateId__"),
+						AccountId:         ptr.String("__AccountId__"),
+						SetDefaultVersion: ptr.Bool(true),
+					},
+				},
+				S3ExportConfiguration: &types.S3ExportConfiguration{
+					RoleName:        ptr.String("__RoleName__"),
+					DiskImageFormat: types.DiskImageFormat("VMDK"),
+					S3Bucket:        ptr.String("__S3Bucket__"),
+					S3Prefix:        ptr.String("__S3Prefix__"),
+				},
+				FastLaunchConfigurations: []types.FastLaunchConfiguration{
+					{
+						Enabled: true,
+						SnapshotConfiguration: &types.FastLaunchSnapshotConfiguration{
+							TargetResourceCount: ptr.Int32(1),
+						},
+						MaxParallelLaunches: ptr.Int32(1),
+						LaunchTemplate: &types.FastLaunchLaunchTemplateSpecification{
+							LaunchTemplateId:      ptr.String("__LaunchTemplateId__"),
+							LaunchTemplateName:    ptr.String("__LaunchTemplateName__"),
+							LaunchTemplateVersion: ptr.String("__LaunchTemplateVersion__"),
+						},
+						AccountId: ptr.String("__AccountId__"),
+					},
+					{
+						Enabled: true,
+						SnapshotConfiguration: &types.FastLaunchSnapshotConfiguration{
+							TargetResourceCount: ptr.Int32(1),
+						},
+						MaxParallelLaunches: ptr.Int32(1),
+						LaunchTemplate: &types.FastLaunchLaunchTemplateSpecification{
+							LaunchTemplateId:      ptr.String("__LaunchTemplateId__"),
+							LaunchTemplateName:    ptr.String("__LaunchTemplateName__"),
+							LaunchTemplateVersion: ptr.String("__LaunchTemplateVersion__"),
+						},
+						AccountId: ptr.String("__AccountId__"),
+					},
+				},
+				SsmParameterConfigurations: []types.SsmParameterConfiguration{
+					{
+						AmiAccountId:  ptr.String("__AmiAccountId__"),
+						ParameterName: ptr.String("__ParameterName__"),
+						DataType:      types.SsmParameterDataType("text"),
+					},
+					{
+						AmiAccountId:  ptr.String("__AmiAccountId__"),
+						ParameterName: ptr.String("__ParameterName__"),
+						DataType:      types.SsmParameterDataType("text"),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4471,7 +5911,91 @@ func TestCheckResponseSnapshot_UpdateImagePipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateImagePipeline(context.Background(), &UpdateImagePipelineInput{})
+	got, err := svc.UpdateImagePipeline(context.Background(), &UpdateImagePipelineInput{
+		ImagePipelineArn:               ptr.String("__ImagePipelineArn__"),
+		Description:                    ptr.String("__Description__"),
+		ImageRecipeArn:                 ptr.String("__ImageRecipeArn__"),
+		ContainerRecipeArn:             ptr.String("__ContainerRecipeArn__"),
+		InfrastructureConfigurationArn: ptr.String("__InfrastructureConfigurationArn__"),
+		DistributionConfigurationArn:   ptr.String("__DistributionConfigurationArn__"),
+		ImageTestsConfiguration: &types.ImageTestsConfiguration{
+			ImageTestsEnabled: ptr.Bool(true),
+			TimeoutMinutes:    ptr.Int32(1),
+		},
+		EnhancedImageMetadataEnabled: ptr.Bool(true),
+		Schedule: &types.Schedule{
+			ScheduleExpression:              ptr.String("__ScheduleExpression__"),
+			Timezone:                        ptr.String("__Timezone__"),
+			PipelineExecutionStartCondition: types.PipelineExecutionStartCondition("EXPRESSION_MATCH_ONLY"),
+			AutoDisablePolicy: &types.AutoDisablePolicy{
+				FailureCount: ptr.Int32(1),
+			},
+		},
+		Status:      types.PipelineStatus("DISABLED"),
+		ClientToken: ptr.String("__ClientToken__"),
+		ImageScanningConfiguration: &types.ImageScanningConfiguration{
+			ImageScanningEnabled: ptr.Bool(true),
+			EcrConfiguration: &types.EcrConfiguration{
+				RepositoryName: ptr.String("__RepositoryName__"),
+				ContainerTags: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Workflows: []types.WorkflowConfiguration{
+			{
+				WorkflowArn: ptr.String("__WorkflowArn__"),
+				Parameters: []types.WorkflowParameter{
+					{
+						Name: ptr.String("__Name__"),
+						Value: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Value: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ParallelGroup: ptr.String("__ParallelGroup__"),
+				OnFailure:     types.OnWorkflowFailure("CONTINUE"),
+			},
+			{
+				WorkflowArn: ptr.String("__WorkflowArn__"),
+				Parameters: []types.WorkflowParameter{
+					{
+						Name: ptr.String("__Name__"),
+						Value: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Value: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				ParallelGroup: ptr.String("__ParallelGroup__"),
+				OnFailure:     types.OnWorkflowFailure("CONTINUE"),
+			},
+		},
+		LoggingConfiguration: &types.PipelineLoggingConfiguration{
+			ImageLogGroupName:    ptr.String("__ImageLogGroupName__"),
+			PipelineLogGroupName: ptr.String("__PipelineLogGroupName__"),
+		},
+		ExecutionRole: ptr.String("__ExecutionRole__"),
+		ImageTags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4494,7 +6018,43 @@ func TestCheckResponseSnapshot_UpdateInfrastructureConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateInfrastructureConfiguration(context.Background(), &UpdateInfrastructureConfigurationInput{})
+	got, err := svc.UpdateInfrastructureConfiguration(context.Background(), &UpdateInfrastructureConfigurationInput{
+		InfrastructureConfigurationArn: ptr.String("__InfrastructureConfigurationArn__"),
+		Description:                    ptr.String("__Description__"),
+		InstanceTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		InstanceProfileName: ptr.String("__InstanceProfileName__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SubnetId: ptr.String("__SubnetId__"),
+		Logging: &types.Logging{
+			S3Logs: &types.S3Logs{
+				S3BucketName: ptr.String("__S3BucketName__"),
+				S3KeyPrefix:  ptr.String("__S3KeyPrefix__"),
+			},
+		},
+		KeyPair:                    ptr.String("__KeyPair__"),
+		TerminateInstanceOnFailure: ptr.Bool(true),
+		SnsTopicArn:                ptr.String("__SnsTopicArn__"),
+		ResourceTags: map[string]string{
+			"key0": "__Value__",
+		},
+		InstanceMetadataOptions: &types.InstanceMetadataOptions{
+			HttpTokens:              ptr.String("__HttpTokens__"),
+			HttpPutResponseHopLimit: ptr.Int32(1),
+		},
+		Placement: &types.Placement{
+			AvailabilityZone:     ptr.String("__AvailabilityZone__"),
+			Tenancy:              types.TenancyType("default"),
+			HostId:               ptr.String("__HostId__"),
+			HostResourceGroupArn: ptr.String("__HostResourceGroupArn__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4515,7 +6075,109 @@ func TestCheckResponseSnapshot_UpdateLifecyclePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLifecyclePolicy(context.Background(), &UpdateLifecyclePolicyInput{})
+	got, err := svc.UpdateLifecyclePolicy(context.Background(), &UpdateLifecyclePolicyInput{
+		LifecyclePolicyArn: ptr.String("__LifecyclePolicyArn__"),
+		Description:        ptr.String("__Description__"),
+		Status:             types.LifecyclePolicyStatus("DISABLED"),
+		ExecutionRole:      ptr.String("__ExecutionRole__"),
+		ResourceType:       types.LifecyclePolicyResourceType("AMI_IMAGE"),
+		PolicyDetails: []types.LifecyclePolicyDetail{
+			{
+				Action: &types.LifecyclePolicyDetailAction{
+					Type: types.LifecyclePolicyDetailActionType("DELETE"),
+					IncludeResources: &types.LifecyclePolicyDetailActionIncludeResources{
+						Amis:       true,
+						Snapshots:  true,
+						Containers: true,
+					},
+				},
+				Filter: &types.LifecyclePolicyDetailFilter{
+					Type:          types.LifecyclePolicyDetailFilterType("AGE"),
+					Value:         ptr.Int32(1),
+					Unit:          types.LifecyclePolicyTimeUnit("DAYS"),
+					RetainAtLeast: ptr.Int32(1),
+				},
+				ExclusionRules: &types.LifecyclePolicyDetailExclusionRules{
+					TagMap: map[string]string{
+						"key0": "__Value__",
+					},
+					Amis: &types.LifecyclePolicyDetailExclusionRulesAmis{
+						IsPublic: true,
+						Regions: []string{
+							"__Member__",
+							"__Member__",
+						},
+						SharedAccounts: []string{
+							"__Member__",
+							"__Member__",
+						},
+						LastLaunched: &types.LifecyclePolicyDetailExclusionRulesAmisLastLaunched{
+							Value: ptr.Int32(1),
+							Unit:  types.LifecyclePolicyTimeUnit("DAYS"),
+						},
+						TagMap: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+			},
+			{
+				Action: &types.LifecyclePolicyDetailAction{
+					Type: types.LifecyclePolicyDetailActionType("DELETE"),
+					IncludeResources: &types.LifecyclePolicyDetailActionIncludeResources{
+						Amis:       true,
+						Snapshots:  true,
+						Containers: true,
+					},
+				},
+				Filter: &types.LifecyclePolicyDetailFilter{
+					Type:          types.LifecyclePolicyDetailFilterType("AGE"),
+					Value:         ptr.Int32(1),
+					Unit:          types.LifecyclePolicyTimeUnit("DAYS"),
+					RetainAtLeast: ptr.Int32(1),
+				},
+				ExclusionRules: &types.LifecyclePolicyDetailExclusionRules{
+					TagMap: map[string]string{
+						"key0": "__Value__",
+					},
+					Amis: &types.LifecyclePolicyDetailExclusionRulesAmis{
+						IsPublic: true,
+						Regions: []string{
+							"__Member__",
+							"__Member__",
+						},
+						SharedAccounts: []string{
+							"__Member__",
+							"__Member__",
+						},
+						LastLaunched: &types.LifecyclePolicyDetailExclusionRulesAmisLastLaunched{
+							Value: ptr.Int32(1),
+							Unit:  types.LifecyclePolicyTimeUnit("DAYS"),
+						},
+						TagMap: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+			},
+		},
+		ResourceSelection: &types.LifecyclePolicyResourceSelection{
+			Recipes: []types.LifecyclePolicyResourceSelectionRecipe{
+				{
+					Name:            ptr.String("__Name__"),
+					SemanticVersion: ptr.String("__SemanticVersion__"),
+				},
+				{
+					Name:            ptr.String("__Name__"),
+					SemanticVersion: ptr.String("__SemanticVersion__"),
+				},
+			},
+			TagMap: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4536,7 +6198,18 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DistributeImage(context.Background(), &DistributeImageInput{})
+	_, opErr := svc.DistributeImage(context.Background(), &DistributeImageInput{
+		SourceImage:                  ptr.String("__SourceImage__"),
+		DistributionConfigurationArn: ptr.String("__DistributionConfigurationArn__"),
+		ExecutionRole:                ptr.String("__ExecutionRole__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		LoggingConfiguration: &types.ImageLoggingConfiguration{
+			LogGroupName: ptr.String("__LogGroupName__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4561,7 +6234,10 @@ func TestCheckResponseSnapshot_Error_CallRateLimitExceededException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelImageCreation(context.Background(), &CancelImageCreationInput{})
+	_, opErr := svc.CancelImageCreation(context.Background(), &CancelImageCreationInput{
+		ImageBuildVersionArn: ptr.String("__ImageBuildVersionArn__"),
+		ClientToken:          ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4586,7 +6262,10 @@ func TestCheckResponseSnapshot_Error_ClientException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelImageCreation(context.Background(), &CancelImageCreationInput{})
+	_, opErr := svc.CancelImageCreation(context.Background(), &CancelImageCreationInput{
+		ImageBuildVersionArn: ptr.String("__ImageBuildVersionArn__"),
+		ClientToken:          ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4611,7 +6290,25 @@ func TestCheckResponseSnapshot_Error_DryRunOperationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateComponent(context.Background(), &CreateComponentInput{})
+	_, opErr := svc.CreateComponent(context.Background(), &CreateComponentInput{
+		Name:              ptr.String("__Name__"),
+		SemanticVersion:   ptr.String("__SemanticVersion__"),
+		Description:       ptr.String("__Description__"),
+		ChangeDescription: ptr.String("__ChangeDescription__"),
+		Platform:          types.Platform("Windows"),
+		SupportedOsVersions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Data:     ptr.String("__Data__"),
+		Uri:      ptr.String("__Uri__"),
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4636,7 +6333,10 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelImageCreation(context.Background(), &CancelImageCreationInput{})
+	_, opErr := svc.CancelImageCreation(context.Background(), &CancelImageCreationInput{
+		ImageBuildVersionArn: ptr.String("__ImageBuildVersionArn__"),
+		ClientToken:          ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4661,7 +6361,10 @@ func TestCheckResponseSnapshot_Error_IdempotentParameterMismatchException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelImageCreation(context.Background(), &CancelImageCreationInput{})
+	_, opErr := svc.CancelImageCreation(context.Background(), &CancelImageCreationInput{
+		ImageBuildVersionArn: ptr.String("__ImageBuildVersionArn__"),
+		ClientToken:          ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4686,7 +6389,11 @@ func TestCheckResponseSnapshot_Error_InvalidPaginationTokenException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListComponentBuildVersions(context.Background(), &ListComponentBuildVersionsInput{})
+	_, opErr := svc.ListComponentBuildVersions(context.Background(), &ListComponentBuildVersionsInput{
+		ComponentVersionArn: ptr.String("__ComponentVersionArn__"),
+		MaxResults:          ptr.Int32(1),
+		NextToken:           ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4711,7 +6418,25 @@ func TestCheckResponseSnapshot_Error_InvalidParameterCombinationException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateComponent(context.Background(), &CreateComponentInput{})
+	_, opErr := svc.CreateComponent(context.Background(), &CreateComponentInput{
+		Name:              ptr.String("__Name__"),
+		SemanticVersion:   ptr.String("__SemanticVersion__"),
+		Description:       ptr.String("__Description__"),
+		ChangeDescription: ptr.String("__ChangeDescription__"),
+		Platform:          types.Platform("Windows"),
+		SupportedOsVersions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Data:     ptr.String("__Data__"),
+		Uri:      ptr.String("__Uri__"),
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4736,7 +6461,9 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4761,7 +6488,10 @@ func TestCheckResponseSnapshot_Error_InvalidParameterValueException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutComponentPolicy(context.Background(), &PutComponentPolicyInput{})
+	_, opErr := svc.PutComponentPolicy(context.Background(), &PutComponentPolicyInput{
+		ComponentArn: ptr.String("__ComponentArn__"),
+		Policy:       ptr.String("__Policy__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4786,7 +6516,10 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelImageCreation(context.Background(), &CancelImageCreationInput{})
+	_, opErr := svc.CancelImageCreation(context.Background(), &CancelImageCreationInput{
+		ImageBuildVersionArn: ptr.String("__ImageBuildVersionArn__"),
+		ClientToken:          ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4811,7 +6544,25 @@ func TestCheckResponseSnapshot_Error_InvalidVersionNumberException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateComponent(context.Background(), &CreateComponentInput{})
+	_, opErr := svc.CreateComponent(context.Background(), &CreateComponentInput{
+		Name:              ptr.String("__Name__"),
+		SemanticVersion:   ptr.String("__SemanticVersion__"),
+		Description:       ptr.String("__Description__"),
+		ChangeDescription: ptr.String("__ChangeDescription__"),
+		Platform:          types.Platform("Windows"),
+		SupportedOsVersions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Data:     ptr.String("__Data__"),
+		Uri:      ptr.String("__Uri__"),
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4836,7 +6587,102 @@ func TestCheckResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateContainerRecipe(context.Background(), &CreateContainerRecipeInput{})
+	_, opErr := svc.CreateContainerRecipe(context.Background(), &CreateContainerRecipeInput{
+		ContainerType:   types.ContainerType("DOCKER"),
+		Name:            ptr.String("__Name__"),
+		Description:     ptr.String("__Description__"),
+		SemanticVersion: ptr.String("__SemanticVersion__"),
+		Components: []types.ComponentConfiguration{
+			{
+				ComponentArn: ptr.String("__ComponentArn__"),
+				Parameters: []types.ComponentParameter{
+					{
+						Name: ptr.String("__Name__"),
+						Value: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Value: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			{
+				ComponentArn: ptr.String("__ComponentArn__"),
+				Parameters: []types.ComponentParameter{
+					{
+						Name: ptr.String("__Name__"),
+						Value: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Value: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+		InstanceConfiguration: &types.InstanceConfiguration{
+			Image: ptr.String("__Image__"),
+			BlockDeviceMappings: []types.InstanceBlockDeviceMapping{
+				{
+					DeviceName: ptr.String("__DeviceName__"),
+					Ebs: &types.EbsInstanceBlockDeviceSpecification{
+						Encrypted:           ptr.Bool(true),
+						DeleteOnTermination: ptr.Bool(true),
+						Iops:                ptr.Int32(1),
+						KmsKeyId:            ptr.String("__KmsKeyId__"),
+						SnapshotId:          ptr.String("__SnapshotId__"),
+						VolumeSize:          ptr.Int32(1),
+						VolumeType:          types.EbsVolumeType("standard"),
+						Throughput:          ptr.Int32(1),
+					},
+					VirtualName: ptr.String("__VirtualName__"),
+					NoDevice:    ptr.String("__NoDevice__"),
+				},
+				{
+					DeviceName: ptr.String("__DeviceName__"),
+					Ebs: &types.EbsInstanceBlockDeviceSpecification{
+						Encrypted:           ptr.Bool(true),
+						DeleteOnTermination: ptr.Bool(true),
+						Iops:                ptr.Int32(1),
+						KmsKeyId:            ptr.String("__KmsKeyId__"),
+						SnapshotId:          ptr.String("__SnapshotId__"),
+						VolumeSize:          ptr.Int32(1),
+						VolumeType:          types.EbsVolumeType("standard"),
+						Throughput:          ptr.Int32(1),
+					},
+					VirtualName: ptr.String("__VirtualName__"),
+					NoDevice:    ptr.String("__NoDevice__"),
+				},
+			},
+		},
+		DockerfileTemplateData: ptr.String("__DockerfileTemplateData__"),
+		DockerfileTemplateUri:  ptr.String("__DockerfileTemplateUri__"),
+		PlatformOverride:       types.Platform("Windows"),
+		ImageOsVersionOverride: ptr.String("__ImageOsVersionOverride__"),
+		ParentImage:            ptr.String("__ParentImage__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		WorkingDirectory: ptr.String("__WorkingDirectory__"),
+		TargetRepository: &types.TargetContainerRepository{
+			Service:        types.ContainerRepositoryService("ECR"),
+			RepositoryName: ptr.String("__RepositoryName__"),
+		},
+		KmsKeyId:    ptr.String("__KmsKeyId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4861,7 +6707,9 @@ func TestCheckResponseSnapshot_Error_ResourceDependencyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteComponent(context.Background(), &DeleteComponentInput{})
+	_, opErr := svc.DeleteComponent(context.Background(), &DeleteComponentInput{
+		ComponentBuildVersionArn: ptr.String("__ComponentBuildVersionArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4886,7 +6734,10 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelImageCreation(context.Background(), &CancelImageCreationInput{})
+	_, opErr := svc.CancelImageCreation(context.Background(), &CancelImageCreationInput{
+		ImageBuildVersionArn: ptr.String("__ImageBuildVersionArn__"),
+		ClientToken:          ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4911,7 +6762,18 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DistributeImage(context.Background(), &DistributeImageInput{})
+	_, opErr := svc.DistributeImage(context.Background(), &DistributeImageInput{
+		SourceImage:                  ptr.String("__SourceImage__"),
+		DistributionConfigurationArn: ptr.String("__DistributionConfigurationArn__"),
+		ExecutionRole:                ptr.String("__ExecutionRole__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		LoggingConfiguration: &types.ImageLoggingConfiguration{
+			LogGroupName: ptr.String("__LogGroupName__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4936,7 +6798,10 @@ func TestCheckResponseSnapshot_Error_ServiceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelImageCreation(context.Background(), &CancelImageCreationInput{})
+	_, opErr := svc.CancelImageCreation(context.Background(), &CancelImageCreationInput{
+		ImageBuildVersionArn: ptr.String("__ImageBuildVersionArn__"),
+		ClientToken:          ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4961,7 +6826,25 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateComponent(context.Background(), &CreateComponentInput{})
+	_, opErr := svc.CreateComponent(context.Background(), &CreateComponentInput{
+		Name:              ptr.String("__Name__"),
+		SemanticVersion:   ptr.String("__SemanticVersion__"),
+		Description:       ptr.String("__Description__"),
+		ChangeDescription: ptr.String("__ChangeDescription__"),
+		Platform:          types.Platform("Windows"),
+		SupportedOsVersions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Data:     ptr.String("__Data__"),
+		Uri:      ptr.String("__Uri__"),
+		KmsKeyId: ptr.String("__KmsKeyId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4986,7 +6869,10 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelImageCreation(context.Background(), &CancelImageCreationInput{})
+	_, opErr := svc.CancelImageCreation(context.Background(), &CancelImageCreationInput{
+		ImageBuildVersionArn: ptr.String("__ImageBuildVersionArn__"),
+		ClientToken:          ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5011,7 +6897,18 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DistributeImage(context.Background(), &DistributeImageInput{})
+	_, opErr := svc.DistributeImage(context.Background(), &DistributeImageInput{
+		SourceImage:                  ptr.String("__SourceImage__"),
+		DistributionConfigurationArn: ptr.String("__DistributionConfigurationArn__"),
+		ExecutionRole:                ptr.String("__ExecutionRole__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		LoggingConfiguration: &types.ImageLoggingConfiguration{
+			LogGroupName: ptr.String("__LogGroupName__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

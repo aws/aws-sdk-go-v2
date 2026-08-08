@@ -117,7 +117,11 @@ func TestCheckResponseSnapshot_AcceptInvitation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptInvitation(context.Background(), &AcceptInvitationInput{})
+	got, err := svc.AcceptInvitation(context.Background(), &AcceptInvitationInput{
+		AdministratorAccountId: ptr.String("__AdministratorAccountId__"),
+		InvitationId:           ptr.String("__InvitationId__"),
+		MasterAccount:          ptr.String("__MasterAccount__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -159,7 +163,12 @@ func TestCheckResponseSnapshot_BatchGetCustomDataIdentifiers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetCustomDataIdentifiers(context.Background(), &BatchGetCustomDataIdentifiersInput{})
+	got, err := svc.BatchGetCustomDataIdentifiers(context.Background(), &BatchGetCustomDataIdentifiersInput{
+		Ids: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -189,7 +198,18 @@ func TestCheckResponseSnapshot_BatchUpdateAutomatedDiscoveryAccounts(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchUpdateAutomatedDiscoveryAccounts(context.Background(), &BatchUpdateAutomatedDiscoveryAccountsInput{})
+	got, err := svc.BatchUpdateAutomatedDiscoveryAccounts(context.Background(), &BatchUpdateAutomatedDiscoveryAccountsInput{
+		Accounts: []types.AutomatedDiscoveryAccountUpdate{
+			{
+				AccountId: ptr.String("__AccountId__"),
+				Status:    types.AutomatedDiscoveryAccountStatus("ENABLED"),
+			},
+			{
+				AccountId: ptr.String("__AccountId__"),
+				Status:    types.AutomatedDiscoveryAccountStatus("ENABLED"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -211,7 +231,21 @@ func TestCheckResponseSnapshot_CreateAllowList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAllowList(context.Background(), &CreateAllowListInput{})
+	got, err := svc.CreateAllowList(context.Background(), &CreateAllowListInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Criteria: &types.AllowListCriteria{
+			Regex: ptr.String("__Regex__"),
+			S3WordsList: &types.S3WordsList{
+				BucketName: ptr.String("__BucketName__"),
+				ObjectKey:  ptr.String("__ObjectKey__"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+		Name:        ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -233,7 +267,269 @@ func TestCheckResponseSnapshot_CreateClassificationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateClassificationJob(context.Background(), &CreateClassificationJobInput{})
+	got, err := svc.CreateClassificationJob(context.Background(), &CreateClassificationJobInput{
+		AllowListIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		CustomDataIdentifierIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Description: ptr.String("__Description__"),
+		InitialRun:  ptr.Bool(true),
+		JobType:     types.JobType("ONE_TIME"),
+		ManagedDataIdentifierIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ManagedDataIdentifierSelector: types.ManagedDataIdentifierSelector("ALL"),
+		Name:                          ptr.String("__Name__"),
+		S3JobDefinition: &types.S3JobDefinition{
+			BucketCriteria: &types.S3BucketCriteriaForJob{
+				Excludes: &types.CriteriaBlockForJob{
+					And: []types.CriteriaForJob{
+						{
+							SimpleCriterion: &types.SimpleCriterionForJob{
+								Comparator: types.JobComparator("EQ"),
+								Key:        types.SimpleCriterionKeyForJob("ACCOUNT_ID"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							TagCriterion: &types.TagCriterionForJob{
+								Comparator: types.JobComparator("EQ"),
+								TagValues: []types.TagCriterionPairForJob{
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+						{
+							SimpleCriterion: &types.SimpleCriterionForJob{
+								Comparator: types.JobComparator("EQ"),
+								Key:        types.SimpleCriterionKeyForJob("ACCOUNT_ID"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							TagCriterion: &types.TagCriterionForJob{
+								Comparator: types.JobComparator("EQ"),
+								TagValues: []types.TagCriterionPairForJob{
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Includes: &types.CriteriaBlockForJob{
+					And: []types.CriteriaForJob{
+						{
+							SimpleCriterion: &types.SimpleCriterionForJob{
+								Comparator: types.JobComparator("EQ"),
+								Key:        types.SimpleCriterionKeyForJob("ACCOUNT_ID"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							TagCriterion: &types.TagCriterionForJob{
+								Comparator: types.JobComparator("EQ"),
+								TagValues: []types.TagCriterionPairForJob{
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+						{
+							SimpleCriterion: &types.SimpleCriterionForJob{
+								Comparator: types.JobComparator("EQ"),
+								Key:        types.SimpleCriterionKeyForJob("ACCOUNT_ID"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							TagCriterion: &types.TagCriterionForJob{
+								Comparator: types.JobComparator("EQ"),
+								TagValues: []types.TagCriterionPairForJob{
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			BucketDefinitions: []types.S3BucketDefinitionForJob{
+				{
+					AccountId: ptr.String("__AccountId__"),
+					Buckets: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					AccountId: ptr.String("__AccountId__"),
+					Buckets: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			Scoping: &types.Scoping{
+				Excludes: &types.JobScopingBlock{
+					And: []types.JobScopeTerm{
+						{
+							SimpleScopeTerm: &types.SimpleScopeTerm{
+								Comparator: types.JobComparator("EQ"),
+								Key:        types.ScopeFilterKey("OBJECT_EXTENSION"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							TagScopeTerm: &types.TagScopeTerm{
+								Comparator: types.JobComparator("EQ"),
+								Key:        ptr.String("__Key__"),
+								TagValues: []types.TagValuePair{
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Target: types.TagTarget("S3_OBJECT"),
+							},
+						},
+						{
+							SimpleScopeTerm: &types.SimpleScopeTerm{
+								Comparator: types.JobComparator("EQ"),
+								Key:        types.ScopeFilterKey("OBJECT_EXTENSION"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							TagScopeTerm: &types.TagScopeTerm{
+								Comparator: types.JobComparator("EQ"),
+								Key:        ptr.String("__Key__"),
+								TagValues: []types.TagValuePair{
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Target: types.TagTarget("S3_OBJECT"),
+							},
+						},
+					},
+				},
+				Includes: &types.JobScopingBlock{
+					And: []types.JobScopeTerm{
+						{
+							SimpleScopeTerm: &types.SimpleScopeTerm{
+								Comparator: types.JobComparator("EQ"),
+								Key:        types.ScopeFilterKey("OBJECT_EXTENSION"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							TagScopeTerm: &types.TagScopeTerm{
+								Comparator: types.JobComparator("EQ"),
+								Key:        ptr.String("__Key__"),
+								TagValues: []types.TagValuePair{
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Target: types.TagTarget("S3_OBJECT"),
+							},
+						},
+						{
+							SimpleScopeTerm: &types.SimpleScopeTerm{
+								Comparator: types.JobComparator("EQ"),
+								Key:        types.ScopeFilterKey("OBJECT_EXTENSION"),
+								Values: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							TagScopeTerm: &types.TagScopeTerm{
+								Comparator: types.JobComparator("EQ"),
+								Key:        ptr.String("__Key__"),
+								TagValues: []types.TagValuePair{
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+								Target: types.TagTarget("S3_OBJECT"),
+							},
+						},
+					},
+				},
+			},
+		},
+		SamplingPercentage: ptr.Int32(1),
+		ScheduleFrequency: &types.JobScheduleFrequency{
+			DailySchedule: &types.DailySchedule{},
+			MonthlySchedule: &types.MonthlySchedule{
+				DayOfMonth: ptr.Int32(1),
+			},
+			WeeklySchedule: &types.WeeklySchedule{
+				DayOfWeek: types.DayOfWeek("SUNDAY"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -254,7 +550,34 @@ func TestCheckResponseSnapshot_CreateCustomDataIdentifier(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCustomDataIdentifier(context.Background(), &CreateCustomDataIdentifierInput{})
+	got, err := svc.CreateCustomDataIdentifier(context.Background(), &CreateCustomDataIdentifierInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Description: ptr.String("__Description__"),
+		IgnoreWords: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Keywords: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaximumMatchDistance: ptr.Int32(1),
+		Name:                 ptr.String("__Name__"),
+		Regex:                ptr.String("__Regex__"),
+		SeverityLevels: []types.SeverityLevel{
+			{
+				OccurrencesThreshold: ptr.Int64(1),
+				Severity:             types.DataIdentifierSeverity("LOW"),
+			},
+			{
+				OccurrencesThreshold: ptr.Int64(1),
+				Severity:             types.DataIdentifierSeverity("LOW"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -276,7 +599,38 @@ func TestCheckResponseSnapshot_CreateFindingsFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFindingsFilter(context.Background(), &CreateFindingsFilterInput{})
+	got, err := svc.CreateFindingsFilter(context.Background(), &CreateFindingsFilterInput{
+		Action:      types.FindingsFilterAction("ARCHIVE"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Description: ptr.String("__Description__"),
+		FindingCriteria: &types.FindingCriteria{
+			Criterion: map[string]types.CriterionAdditionalProperties{
+				"key0": {
+					Eq: []string{
+						"__Member__",
+						"__Member__",
+					},
+					EqExactMatch: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Gt:  ptr.Int64(1),
+					Gte: ptr.Int64(1),
+					Lt:  ptr.Int64(1),
+					Lte: ptr.Int64(1),
+					Neq: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Name:     ptr.String("__Name__"),
+		Position: ptr.Int32(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -308,7 +662,14 @@ func TestCheckResponseSnapshot_CreateInvitations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateInvitations(context.Background(), &CreateInvitationsInput{})
+	got, err := svc.CreateInvitations(context.Background(), &CreateInvitationsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DisableEmailNotification: ptr.Bool(true),
+		Message:                  ptr.String("__Message__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -329,7 +690,15 @@ func TestCheckResponseSnapshot_CreateMember(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMember(context.Background(), &CreateMemberInput{})
+	got, err := svc.CreateMember(context.Background(), &CreateMemberInput{
+		Account: &types.AccountDetail{
+			AccountId: ptr.String("__AccountId__"),
+			Email:     ptr.String("__Email__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -348,7 +717,12 @@ func TestCheckResponseSnapshot_CreateSampleFindings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSampleFindings(context.Background(), &CreateSampleFindingsInput{})
+	got, err := svc.CreateSampleFindings(context.Background(), &CreateSampleFindingsInput{
+		FindingTypes: []types.FindingType{
+			types.FindingType("SensitiveData:S3Object/Multiple"),
+			types.FindingType("SensitiveData:S3Object/Multiple"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -380,7 +754,12 @@ func TestCheckResponseSnapshot_DeclineInvitations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeclineInvitations(context.Background(), &DeclineInvitationsInput{})
+	got, err := svc.DeclineInvitations(context.Background(), &DeclineInvitationsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -399,7 +778,10 @@ func TestCheckResponseSnapshot_DeleteAllowList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAllowList(context.Background(), &DeleteAllowListInput{})
+	got, err := svc.DeleteAllowList(context.Background(), &DeleteAllowListInput{
+		Id:              ptr.String("__Id__"),
+		IgnoreJobChecks: ptr.String("__IgnoreJobChecks__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -418,7 +800,9 @@ func TestCheckResponseSnapshot_DeleteCustomDataIdentifier(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCustomDataIdentifier(context.Background(), &DeleteCustomDataIdentifierInput{})
+	got, err := svc.DeleteCustomDataIdentifier(context.Background(), &DeleteCustomDataIdentifierInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -437,7 +821,9 @@ func TestCheckResponseSnapshot_DeleteFindingsFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFindingsFilter(context.Background(), &DeleteFindingsFilterInput{})
+	got, err := svc.DeleteFindingsFilter(context.Background(), &DeleteFindingsFilterInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -469,7 +855,12 @@ func TestCheckResponseSnapshot_DeleteInvitations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteInvitations(context.Background(), &DeleteInvitationsInput{})
+	got, err := svc.DeleteInvitations(context.Background(), &DeleteInvitationsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -488,7 +879,9 @@ func TestCheckResponseSnapshot_DeleteMember(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMember(context.Background(), &DeleteMemberInput{})
+	got, err := svc.DeleteMember(context.Background(), &DeleteMemberInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -701,7 +1094,31 @@ func TestCheckResponseSnapshot_DescribeBuckets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeBuckets(context.Background(), &DescribeBucketsInput{})
+	got, err := svc.DescribeBuckets(context.Background(), &DescribeBucketsInput{
+		Criteria: map[string]types.BucketCriteriaAdditionalProperties{
+			"key0": {
+				Eq: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Gt:  ptr.Int64(1),
+				Gte: ptr.Int64(1),
+				Lt:  ptr.Int64(1),
+				Lte: ptr.Int64(1),
+				Neq: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Prefix: ptr.String("__Prefix__"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		SortCriteria: &types.BucketSortCriteria{
+			AttributeName: ptr.String("__AttributeName__"),
+			OrderBy:       types.OrderBy("ASC"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -999,7 +1416,9 @@ func TestCheckResponseSnapshot_DescribeClassificationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeClassificationJob(context.Background(), &DescribeClassificationJobInput{})
+	got, err := svc.DescribeClassificationJob(context.Background(), &DescribeClassificationJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1059,7 +1478,9 @@ func TestCheckResponseSnapshot_DisableOrganizationAdminAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableOrganizationAdminAccount(context.Background(), &DisableOrganizationAdminAccountInput{})
+	got, err := svc.DisableOrganizationAdminAccount(context.Background(), &DisableOrganizationAdminAccountInput{
+		AdminAccountId: ptr.String("__AdminAccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1116,7 +1537,9 @@ func TestCheckResponseSnapshot_DisassociateMember(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateMember(context.Background(), &DisassociateMemberInput{})
+	got, err := svc.DisassociateMember(context.Background(), &DisassociateMemberInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1135,7 +1558,11 @@ func TestCheckResponseSnapshot_EnableMacie(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableMacie(context.Background(), &EnableMacieInput{})
+	got, err := svc.EnableMacie(context.Background(), &EnableMacieInput{
+		ClientToken:                ptr.String("__ClientToken__"),
+		FindingPublishingFrequency: types.FindingPublishingFrequency("FIFTEEN_MINUTES"),
+		Status:                     types.MacieStatus("PAUSED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1154,7 +1581,10 @@ func TestCheckResponseSnapshot_EnableOrganizationAdminAccount(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableOrganizationAdminAccount(context.Background(), &EnableOrganizationAdminAccountInput{})
+	got, err := svc.EnableOrganizationAdminAccount(context.Background(), &EnableOrganizationAdminAccountInput{
+		AdminAccountId: ptr.String("__AdminAccountId__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1220,7 +1650,9 @@ func TestCheckResponseSnapshot_GetAllowList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAllowList(context.Background(), &GetAllowListInput{})
+	got, err := svc.GetAllowList(context.Background(), &GetAllowListInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1333,7 +1765,9 @@ func TestCheckResponseSnapshot_GetBucketStatistics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBucketStatistics(context.Background(), &GetBucketStatisticsInput{})
+	got, err := svc.GetBucketStatistics(context.Background(), &GetBucketStatisticsInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1391,7 +1825,9 @@ func TestCheckResponseSnapshot_GetClassificationScope(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetClassificationScope(context.Background(), &GetClassificationScopeInput{})
+	got, err := svc.GetClassificationScope(context.Background(), &GetClassificationScopeInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1440,7 +1876,9 @@ func TestCheckResponseSnapshot_GetCustomDataIdentifier(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCustomDataIdentifier(context.Background(), &GetCustomDataIdentifierInput{})
+	got, err := svc.GetCustomDataIdentifier(context.Background(), &GetCustomDataIdentifierInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1470,7 +1908,36 @@ func TestCheckResponseSnapshot_GetFindingStatistics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFindingStatistics(context.Background(), &GetFindingStatisticsInput{})
+	got, err := svc.GetFindingStatistics(context.Background(), &GetFindingStatisticsInput{
+		FindingCriteria: &types.FindingCriteria{
+			Criterion: map[string]types.CriterionAdditionalProperties{
+				"key0": {
+					Eq: []string{
+						"__Member__",
+						"__Member__",
+					},
+					EqExactMatch: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Gt:  ptr.Int64(1),
+					Gte: ptr.Int64(1),
+					Lt:  ptr.Int64(1),
+					Lte: ptr.Int64(1),
+					Neq: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		GroupBy: types.GroupBy("resourcesAffected.s3Bucket.name"),
+		Size:    ptr.Int32(1),
+		SortCriteria: &types.FindingStatisticsSortCriteria{
+			AttributeName: types.FindingStatisticsSortAttributeName("groupKey"),
+			OrderBy:       types.OrderBy("ASC"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2940,7 +3407,16 @@ func TestCheckResponseSnapshot_GetFindings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFindings(context.Background(), &GetFindingsInput{})
+	got, err := svc.GetFindings(context.Background(), &GetFindingsInput{
+		FindingIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SortCriteria: &types.SortCriteria{
+			AttributeName: ptr.String("__AttributeName__"),
+			OrderBy:       types.OrderBy("ASC"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2991,7 +3467,9 @@ func TestCheckResponseSnapshot_GetFindingsFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFindingsFilter(context.Background(), &GetFindingsFilterInput{})
+	got, err := svc.GetFindingsFilter(context.Background(), &GetFindingsFilterInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3118,7 +3596,9 @@ func TestCheckResponseSnapshot_GetMember(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMember(context.Background(), &GetMemberInput{})
+	got, err := svc.GetMember(context.Background(), &GetMemberInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3152,7 +3632,9 @@ func TestCheckResponseSnapshot_GetResourceProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourceProfile(context.Background(), &GetResourceProfileInput{})
+	got, err := svc.GetResourceProfile(context.Background(), &GetResourceProfileInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3213,7 +3695,9 @@ func TestCheckResponseSnapshot_GetSensitiveDataOccurrences(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSensitiveDataOccurrences(context.Background(), &GetSensitiveDataOccurrencesInput{})
+	got, err := svc.GetSensitiveDataOccurrences(context.Background(), &GetSensitiveDataOccurrencesInput{
+		FindingId: ptr.String("__FindingId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3238,7 +3722,9 @@ func TestCheckResponseSnapshot_GetSensitiveDataOccurrencesAvailability(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSensitiveDataOccurrencesAvailability(context.Background(), &GetSensitiveDataOccurrencesAvailabilityInput{})
+	got, err := svc.GetSensitiveDataOccurrencesAvailability(context.Background(), &GetSensitiveDataOccurrencesAvailabilityInput{
+		FindingId: ptr.String("__FindingId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3281,7 +3767,9 @@ func TestCheckResponseSnapshot_GetSensitivityInspectionTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSensitivityInspectionTemplate(context.Background(), &GetSensitivityInspectionTemplateInput{})
+	got, err := svc.GetSensitivityInspectionTemplate(context.Background(), &GetSensitivityInspectionTemplateInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3359,7 +3847,33 @@ func TestCheckResponseSnapshot_GetUsageStatistics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUsageStatistics(context.Background(), &GetUsageStatisticsInput{})
+	got, err := svc.GetUsageStatistics(context.Background(), &GetUsageStatisticsInput{
+		FilterBy: []types.UsageStatisticsFilter{
+			{
+				Comparator: types.UsageStatisticsFilterComparator("GT"),
+				Key:        types.UsageStatisticsFilterKey("accountId"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Comparator: types.UsageStatisticsFilterComparator("GT"),
+				Key:        types.UsageStatisticsFilterKey("accountId"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		SortBy: &types.UsageStatisticsSortBy{
+			Key:     types.UsageStatisticsSortKey("accountId"),
+			OrderBy: types.OrderBy("ASC"),
+		},
+		TimeRange: types.TimeRange("MONTH_TO_DATE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3392,7 +3906,9 @@ func TestCheckResponseSnapshot_GetUsageTotals(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUsageTotals(context.Background(), &GetUsageTotalsInput{})
+	got, err := svc.GetUsageTotals(context.Background(), &GetUsageTotalsInput{
+		TimeRange: ptr.String("__TimeRange__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3431,7 +3947,10 @@ func TestCheckResponseSnapshot_ListAllowLists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAllowLists(context.Background(), &ListAllowListsInput{})
+	got, err := svc.ListAllowLists(context.Background(), &ListAllowListsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3462,7 +3981,14 @@ func TestCheckResponseSnapshot_ListAutomatedDiscoveryAccounts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAutomatedDiscoveryAccounts(context.Background(), &ListAutomatedDiscoveryAccountsInput{})
+	got, err := svc.ListAutomatedDiscoveryAccounts(context.Background(), &ListAutomatedDiscoveryAccountsInput{
+		AccountIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3751,7 +4277,52 @@ func TestCheckResponseSnapshot_ListClassificationJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListClassificationJobs(context.Background(), &ListClassificationJobsInput{})
+	got, err := svc.ListClassificationJobs(context.Background(), &ListClassificationJobsInput{
+		FilterCriteria: &types.ListJobsFilterCriteria{
+			Excludes: []types.ListJobsFilterTerm{
+				{
+					Comparator: types.JobComparator("EQ"),
+					Key:        types.ListJobsFilterKey("jobType"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparator: types.JobComparator("EQ"),
+					Key:        types.ListJobsFilterKey("jobType"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			Includes: []types.ListJobsFilterTerm{
+				{
+					Comparator: types.JobComparator("EQ"),
+					Key:        types.ListJobsFilterKey("jobType"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Comparator: types.JobComparator("EQ"),
+					Key:        types.ListJobsFilterKey("jobType"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		SortCriteria: &types.ListJobsSortCriteria{
+			AttributeName: types.ListJobsSortAttributeName("createdAt"),
+			OrderBy:       types.OrderBy("ASC"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3782,7 +4353,10 @@ func TestCheckResponseSnapshot_ListClassificationScopes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListClassificationScopes(context.Background(), &ListClassificationScopesInput{})
+	got, err := svc.ListClassificationScopes(context.Background(), &ListClassificationScopesInput{
+		Name:      ptr.String("__Name__"),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3819,7 +4393,10 @@ func TestCheckResponseSnapshot_ListCustomDataIdentifiers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCustomDataIdentifiers(context.Background(), &ListCustomDataIdentifiersInput{})
+	got, err := svc.ListCustomDataIdentifiers(context.Background(), &ListCustomDataIdentifiersInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3844,7 +4421,36 @@ func TestCheckResponseSnapshot_ListFindings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFindings(context.Background(), &ListFindingsInput{})
+	got, err := svc.ListFindings(context.Background(), &ListFindingsInput{
+		FindingCriteria: &types.FindingCriteria{
+			Criterion: map[string]types.CriterionAdditionalProperties{
+				"key0": {
+					Eq: []string{
+						"__Member__",
+						"__Member__",
+					},
+					EqExactMatch: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Gt:  ptr.Int64(1),
+					Gte: ptr.Int64(1),
+					Lt:  ptr.Int64(1),
+					Lte: ptr.Int64(1),
+					Neq: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		SortCriteria: &types.SortCriteria{
+			AttributeName: ptr.String("__AttributeName__"),
+			OrderBy:       types.OrderBy("ASC"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3885,7 +4491,10 @@ func TestCheckResponseSnapshot_ListFindingsFilters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFindingsFilters(context.Background(), &ListFindingsFiltersInput{})
+	got, err := svc.ListFindingsFilters(context.Background(), &ListFindingsFiltersInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3920,7 +4529,10 @@ func TestCheckResponseSnapshot_ListInvitations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInvitations(context.Background(), &ListInvitationsInput{})
+	got, err := svc.ListInvitations(context.Background(), &ListInvitationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3951,7 +4563,9 @@ func TestCheckResponseSnapshot_ListManagedDataIdentifiers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListManagedDataIdentifiers(context.Background(), &ListManagedDataIdentifiersInput{})
+	got, err := svc.ListManagedDataIdentifiers(context.Background(), &ListManagedDataIdentifiersInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4000,7 +4614,11 @@ func TestCheckResponseSnapshot_ListMembers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMembers(context.Background(), &ListMembersInput{})
+	got, err := svc.ListMembers(context.Background(), &ListMembersInput{
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+		OnlyAssociated: ptr.String("__OnlyAssociated__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4031,7 +4649,10 @@ func TestCheckResponseSnapshot_ListOrganizationAdminAccounts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOrganizationAdminAccounts(context.Background(), &ListOrganizationAdminAccountsInput{})
+	got, err := svc.ListOrganizationAdminAccounts(context.Background(), &ListOrganizationAdminAccountsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4064,7 +4685,10 @@ func TestCheckResponseSnapshot_ListResourceProfileArtifacts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourceProfileArtifacts(context.Background(), &ListResourceProfileArtifactsInput{})
+	got, err := svc.ListResourceProfileArtifacts(context.Background(), &ListResourceProfileArtifactsInput{
+		NextToken:   ptr.String("__NextToken__"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4103,7 +4727,11 @@ func TestCheckResponseSnapshot_ListResourceProfileDetections(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourceProfileDetections(context.Background(), &ListResourceProfileDetectionsInput{})
+	got, err := svc.ListResourceProfileDetections(context.Background(), &ListResourceProfileDetectionsInput{
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4134,7 +4762,10 @@ func TestCheckResponseSnapshot_ListSensitivityInspectionTemplates(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSensitivityInspectionTemplates(context.Background(), &ListSensitivityInspectionTemplatesInput{})
+	got, err := svc.ListSensitivityInspectionTemplates(context.Background(), &ListSensitivityInspectionTemplatesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4157,7 +4788,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4185,7 +4818,16 @@ func TestCheckResponseSnapshot_PutClassificationExportConfiguration(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutClassificationExportConfiguration(context.Background(), &PutClassificationExportConfigurationInput{})
+	got, err := svc.PutClassificationExportConfiguration(context.Background(), &PutClassificationExportConfigurationInput{
+		Configuration: &types.ClassificationExportConfiguration{
+			S3Destination: &types.S3Destination{
+				BucketName:          ptr.String("__BucketName__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				KeyPrefix:           ptr.String("__KeyPrefix__"),
+				KmsKeyArn:           ptr.String("__KmsKeyArn__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4204,7 +4846,13 @@ func TestCheckResponseSnapshot_PutFindingsPublicationConfiguration(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutFindingsPublicationConfiguration(context.Background(), &PutFindingsPublicationConfigurationInput{})
+	got, err := svc.PutFindingsPublicationConfiguration(context.Background(), &PutFindingsPublicationConfigurationInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		SecurityHubConfiguration: &types.SecurityHubConfiguration{
+			PublishClassificationFindings: ptr.Bool(true),
+			PublishPolicyFindings:         ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4305,7 +4953,116 @@ func TestCheckResponseSnapshot_SearchResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchResources(context.Background(), &SearchResourcesInput{})
+	got, err := svc.SearchResources(context.Background(), &SearchResourcesInput{
+		BucketCriteria: &types.SearchResourcesBucketCriteria{
+			Excludes: &types.SearchResourcesCriteriaBlock{
+				And: []types.SearchResourcesCriteria{
+					{
+						SimpleCriterion: &types.SearchResourcesSimpleCriterion{
+							Comparator: types.SearchResourcesComparator("EQ"),
+							Key:        types.SearchResourcesSimpleCriterionKey("ACCOUNT_ID"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						TagCriterion: &types.SearchResourcesTagCriterion{
+							Comparator: types.SearchResourcesComparator("EQ"),
+							TagValues: []types.SearchResourcesTagCriterionPair{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					{
+						SimpleCriterion: &types.SearchResourcesSimpleCriterion{
+							Comparator: types.SearchResourcesComparator("EQ"),
+							Key:        types.SearchResourcesSimpleCriterionKey("ACCOUNT_ID"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						TagCriterion: &types.SearchResourcesTagCriterion{
+							Comparator: types.SearchResourcesComparator("EQ"),
+							TagValues: []types.SearchResourcesTagCriterionPair{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+				},
+			},
+			Includes: &types.SearchResourcesCriteriaBlock{
+				And: []types.SearchResourcesCriteria{
+					{
+						SimpleCriterion: &types.SearchResourcesSimpleCriterion{
+							Comparator: types.SearchResourcesComparator("EQ"),
+							Key:        types.SearchResourcesSimpleCriterionKey("ACCOUNT_ID"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						TagCriterion: &types.SearchResourcesTagCriterion{
+							Comparator: types.SearchResourcesComparator("EQ"),
+							TagValues: []types.SearchResourcesTagCriterionPair{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+					{
+						SimpleCriterion: &types.SearchResourcesSimpleCriterion{
+							Comparator: types.SearchResourcesComparator("EQ"),
+							Key:        types.SearchResourcesSimpleCriterionKey("ACCOUNT_ID"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						TagCriterion: &types.SearchResourcesTagCriterion{
+							Comparator: types.SearchResourcesComparator("EQ"),
+							TagValues: []types.SearchResourcesTagCriterionPair{
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		SortCriteria: &types.SearchResourcesSortCriteria{
+			AttributeName: types.SearchResourcesSortAttributeName("ACCOUNT_ID"),
+			OrderBy:       types.OrderBy("ASC"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4324,7 +5081,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4345,7 +5107,19 @@ func TestCheckResponseSnapshot_TestCustomDataIdentifier(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TestCustomDataIdentifier(context.Background(), &TestCustomDataIdentifierInput{})
+	got, err := svc.TestCustomDataIdentifier(context.Background(), &TestCustomDataIdentifierInput{
+		IgnoreWords: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Keywords: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaximumMatchDistance: ptr.Int32(1),
+		Regex:                ptr.String("__Regex__"),
+		SampleText:           ptr.String("__SampleText__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4364,7 +5138,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4386,7 +5166,18 @@ func TestCheckResponseSnapshot_UpdateAllowList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAllowList(context.Background(), &UpdateAllowListInput{})
+	got, err := svc.UpdateAllowList(context.Background(), &UpdateAllowListInput{
+		Criteria: &types.AllowListCriteria{
+			Regex: ptr.String("__Regex__"),
+			S3WordsList: &types.S3WordsList{
+				BucketName: ptr.String("__BucketName__"),
+				ObjectKey:  ptr.String("__ObjectKey__"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+		Id:          ptr.String("__Id__"),
+		Name:        ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4405,7 +5196,10 @@ func TestCheckResponseSnapshot_UpdateAutomatedDiscoveryConfiguration(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAutomatedDiscoveryConfiguration(context.Background(), &UpdateAutomatedDiscoveryConfigurationInput{})
+	got, err := svc.UpdateAutomatedDiscoveryConfiguration(context.Background(), &UpdateAutomatedDiscoveryConfigurationInput{
+		AutoEnableOrganizationMembers: types.AutoEnableMode("ALL"),
+		Status:                        types.AutomatedDiscoveryStatus("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4424,7 +5218,10 @@ func TestCheckResponseSnapshot_UpdateClassificationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateClassificationJob(context.Background(), &UpdateClassificationJobInput{})
+	got, err := svc.UpdateClassificationJob(context.Background(), &UpdateClassificationJobInput{
+		JobId:     ptr.String("__JobId__"),
+		JobStatus: types.JobStatus("RUNNING"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4443,7 +5240,18 @@ func TestCheckResponseSnapshot_UpdateClassificationScope(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateClassificationScope(context.Background(), &UpdateClassificationScopeInput{})
+	got, err := svc.UpdateClassificationScope(context.Background(), &UpdateClassificationScopeInput{
+		Id: ptr.String("__Id__"),
+		S3: &types.S3ClassificationScopeUpdate{
+			Excludes: &types.S3ClassificationScopeExclusionUpdate{
+				BucketNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Operation: types.ClassificationScopeUpdateOperation("ADD"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4465,7 +5273,36 @@ func TestCheckResponseSnapshot_UpdateFindingsFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFindingsFilter(context.Background(), &UpdateFindingsFilterInput{})
+	got, err := svc.UpdateFindingsFilter(context.Background(), &UpdateFindingsFilterInput{
+		Action:      types.FindingsFilterAction("ARCHIVE"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Description: ptr.String("__Description__"),
+		FindingCriteria: &types.FindingCriteria{
+			Criterion: map[string]types.CriterionAdditionalProperties{
+				"key0": {
+					Eq: []string{
+						"__Member__",
+						"__Member__",
+					},
+					EqExactMatch: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Gt:  ptr.Int64(1),
+					Gte: ptr.Int64(1),
+					Lt:  ptr.Int64(1),
+					Lte: ptr.Int64(1),
+					Neq: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Id:       ptr.String("__Id__"),
+		Name:     ptr.String("__Name__"),
+		Position: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4484,7 +5321,10 @@ func TestCheckResponseSnapshot_UpdateMacieSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMacieSession(context.Background(), &UpdateMacieSessionInput{})
+	got, err := svc.UpdateMacieSession(context.Background(), &UpdateMacieSessionInput{
+		FindingPublishingFrequency: types.FindingPublishingFrequency("FIFTEEN_MINUTES"),
+		Status:                     types.MacieStatus("PAUSED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4503,7 +5343,10 @@ func TestCheckResponseSnapshot_UpdateMemberSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMemberSession(context.Background(), &UpdateMemberSessionInput{})
+	got, err := svc.UpdateMemberSession(context.Background(), &UpdateMemberSessionInput{
+		Id:     ptr.String("__Id__"),
+		Status: types.MacieStatus("PAUSED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4522,7 +5365,9 @@ func TestCheckResponseSnapshot_UpdateOrganizationConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateOrganizationConfiguration(context.Background(), &UpdateOrganizationConfigurationInput{})
+	got, err := svc.UpdateOrganizationConfiguration(context.Background(), &UpdateOrganizationConfigurationInput{
+		AutoEnable: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4541,7 +5386,10 @@ func TestCheckResponseSnapshot_UpdateResourceProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateResourceProfile(context.Background(), &UpdateResourceProfileInput{})
+	got, err := svc.UpdateResourceProfile(context.Background(), &UpdateResourceProfileInput{
+		ResourceArn:              ptr.String("__ResourceArn__"),
+		SensitivityScoreOverride: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4560,7 +5408,19 @@ func TestCheckResponseSnapshot_UpdateResourceProfileDetections(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateResourceProfileDetections(context.Background(), &UpdateResourceProfileDetectionsInput{})
+	got, err := svc.UpdateResourceProfileDetections(context.Background(), &UpdateResourceProfileDetectionsInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		SuppressDataIdentifiers: []types.SuppressDataIdentifier{
+			{
+				Id:   ptr.String("__Id__"),
+				Type: types.DataIdentifierType("CUSTOM"),
+			},
+			{
+				Id:   ptr.String("__Id__"),
+				Type: types.DataIdentifierType("CUSTOM"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4589,7 +5449,16 @@ func TestCheckResponseSnapshot_UpdateRevealConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRevealConfiguration(context.Background(), &UpdateRevealConfigurationInput{})
+	got, err := svc.UpdateRevealConfiguration(context.Background(), &UpdateRevealConfigurationInput{
+		Configuration: &types.RevealConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			Status:   types.RevealStatus("ENABLED"),
+		},
+		RetrievalConfiguration: &types.UpdateRetrievalConfiguration{
+			RetrievalMode: types.RetrievalMode("CALLER_CREDENTIALS"),
+			RoleName:      ptr.String("__RoleName__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4608,7 +5477,30 @@ func TestCheckResponseSnapshot_UpdateSensitivityInspectionTemplate(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSensitivityInspectionTemplate(context.Background(), &UpdateSensitivityInspectionTemplateInput{})
+	got, err := svc.UpdateSensitivityInspectionTemplate(context.Background(), &UpdateSensitivityInspectionTemplateInput{
+		Description: ptr.String("__Description__"),
+		Excludes: &types.SensitivityInspectionTemplateExcludes{
+			ManagedDataIdentifierIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Id: ptr.String("__Id__"),
+		Includes: &types.SensitivityInspectionTemplateIncludes{
+			AllowListIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			CustomDataIdentifierIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ManagedDataIdentifierIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4629,7 +5521,11 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptInvitation(context.Background(), &AcceptInvitationInput{})
+	_, opErr := svc.AcceptInvitation(context.Background(), &AcceptInvitationInput{
+		AdministratorAccountId: ptr.String("__AdministratorAccountId__"),
+		InvitationId:           ptr.String("__InvitationId__"),
+		MasterAccount:          ptr.String("__MasterAccount__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4654,7 +5550,11 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptInvitation(context.Background(), &AcceptInvitationInput{})
+	_, opErr := svc.AcceptInvitation(context.Background(), &AcceptInvitationInput{
+		AdministratorAccountId: ptr.String("__AdministratorAccountId__"),
+		InvitationId:           ptr.String("__InvitationId__"),
+		MasterAccount:          ptr.String("__MasterAccount__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4679,7 +5579,11 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptInvitation(context.Background(), &AcceptInvitationInput{})
+	_, opErr := svc.AcceptInvitation(context.Background(), &AcceptInvitationInput{
+		AdministratorAccountId: ptr.String("__AdministratorAccountId__"),
+		InvitationId:           ptr.String("__InvitationId__"),
+		MasterAccount:          ptr.String("__MasterAccount__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4704,7 +5608,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptInvitation(context.Background(), &AcceptInvitationInput{})
+	_, opErr := svc.AcceptInvitation(context.Background(), &AcceptInvitationInput{
+		AdministratorAccountId: ptr.String("__AdministratorAccountId__"),
+		InvitationId:           ptr.String("__InvitationId__"),
+		MasterAccount:          ptr.String("__MasterAccount__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4729,7 +5637,11 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptInvitation(context.Background(), &AcceptInvitationInput{})
+	_, opErr := svc.AcceptInvitation(context.Background(), &AcceptInvitationInput{
+		AdministratorAccountId: ptr.String("__AdministratorAccountId__"),
+		InvitationId:           ptr.String("__InvitationId__"),
+		MasterAccount:          ptr.String("__MasterAccount__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4754,7 +5666,11 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptInvitation(context.Background(), &AcceptInvitationInput{})
+	_, opErr := svc.AcceptInvitation(context.Background(), &AcceptInvitationInput{
+		AdministratorAccountId: ptr.String("__AdministratorAccountId__"),
+		InvitationId:           ptr.String("__InvitationId__"),
+		MasterAccount:          ptr.String("__MasterAccount__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4779,7 +5695,9 @@ func TestCheckResponseSnapshot_Error_UnprocessableEntityException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetSensitiveDataOccurrences(context.Background(), &GetSensitiveDataOccurrencesInput{})
+	_, opErr := svc.GetSensitiveDataOccurrences(context.Background(), &GetSensitiveDataOccurrencesInput{
+		FindingId: ptr.String("__FindingId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4804,7 +5722,11 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptInvitation(context.Background(), &AcceptInvitationInput{})
+	_, opErr := svc.AcceptInvitation(context.Background(), &AcceptInvitationInput{
+		AdministratorAccountId: ptr.String("__AdministratorAccountId__"),
+		InvitationId:           ptr.String("__InvitationId__"),
+		MasterAccount:          ptr.String("__MasterAccount__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonMemoryDB.DeleteACL
+
+{"ACL":{"ARN":"__ARN__","Clusters":["__Member__","__Member__"],"MinimumEngineVersion":"__MinimumEngineVersion__","Name":"__Name__","PendingChanges":{"UserNamesToAdd":["__Member__","__Member__"],"UserNamesToRemove":["__Member__","__Member__"]},"Status":"__Status__","UserNames":["__Member__","__Member__"]}}

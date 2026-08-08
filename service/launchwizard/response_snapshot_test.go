@@ -119,7 +119,18 @@ func TestCheckResponseSnapshot_CreateDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{})
+	got, err := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		WorkloadName:          ptr.String("__WorkloadName__"),
+		DeploymentPatternName: ptr.String("__DeploymentPatternName__"),
+		Name:                  ptr.String("__Name__"),
+		Specifications: map[string]string{
+			"key0": "__Value__",
+		},
+		DryRun: true,
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -141,7 +152,9 @@ func TestCheckResponseSnapshot_DeleteDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDeployment(context.Background(), &DeleteDeploymentInput{})
+	got, err := svc.DeleteDeployment(context.Background(), &DeleteDeploymentInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -179,7 +192,9 @@ func TestCheckResponseSnapshot_GetDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDeployment(context.Background(), &GetDeploymentInput{})
+	got, err := svc.GetDeployment(context.Background(), &GetDeploymentInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -206,7 +221,11 @@ func TestCheckResponseSnapshot_GetDeploymentPatternVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDeploymentPatternVersion(context.Background(), &GetDeploymentPatternVersionInput{})
+	got, err := svc.GetDeploymentPatternVersion(context.Background(), &GetDeploymentPatternVersionInput{
+		WorkloadName:                 ptr.String("__WorkloadName__"),
+		DeploymentPatternName:        ptr.String("__DeploymentPatternName__"),
+		DeploymentPatternVersionName: ptr.String("__DeploymentPatternVersionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -235,7 +254,9 @@ func TestCheckResponseSnapshot_GetWorkload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorkload(context.Background(), &GetWorkloadInput{})
+	got, err := svc.GetWorkload(context.Background(), &GetWorkloadInput{
+		WorkloadName: ptr.String("__WorkloadName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -309,7 +330,10 @@ func TestCheckResponseSnapshot_GetWorkloadDeploymentPattern(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorkloadDeploymentPattern(context.Background(), &GetWorkloadDeploymentPatternInput{})
+	got, err := svc.GetWorkloadDeploymentPattern(context.Background(), &GetWorkloadDeploymentPatternInput{
+		WorkloadName:          ptr.String("__WorkloadName__"),
+		DeploymentPatternName: ptr.String("__DeploymentPatternName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -346,7 +370,11 @@ func TestCheckResponseSnapshot_ListDeploymentEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDeploymentEvents(context.Background(), &ListDeploymentEventsInput{})
+	got, err := svc.ListDeploymentEvents(context.Background(), &ListDeploymentEventsInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -383,7 +411,28 @@ func TestCheckResponseSnapshot_ListDeploymentPatternVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDeploymentPatternVersions(context.Background(), &ListDeploymentPatternVersionsInput{})
+	got, err := svc.ListDeploymentPatternVersions(context.Background(), &ListDeploymentPatternVersionsInput{
+		WorkloadName:          ptr.String("__WorkloadName__"),
+		DeploymentPatternName: ptr.String("__DeploymentPatternName__"),
+		MaxResults:            ptr.Int32(1),
+		NextToken:             ptr.String("__NextToken__"),
+		Filters: []types.DeploymentPatternVersionFilter{
+			{
+				Name: types.DeploymentPatternVersionFilterKey("updateFromVersion"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.DeploymentPatternVersionFilterKey("updateFromVersion"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -424,7 +473,26 @@ func TestCheckResponseSnapshot_ListDeployments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDeployments(context.Background(), &ListDeploymentsInput{})
+	got, err := svc.ListDeployments(context.Background(), &ListDeploymentsInput{
+		Filters: []types.DeploymentFilter{
+			{
+				Name: types.DeploymentFilterKey("WORKLOAD_NAME"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.DeploymentFilterKey("WORKLOAD_NAME"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -447,7 +515,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -490,7 +560,11 @@ func TestCheckResponseSnapshot_ListWorkloadDeploymentPatterns(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkloadDeploymentPatterns(context.Background(), &ListWorkloadDeploymentPatternsInput{})
+	got, err := svc.ListWorkloadDeploymentPatterns(context.Background(), &ListWorkloadDeploymentPatternsInput{
+		WorkloadName: ptr.String("__WorkloadName__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -523,7 +597,10 @@ func TestCheckResponseSnapshot_ListWorkloads(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkloads(context.Background(), &ListWorkloadsInput{})
+	got, err := svc.ListWorkloads(context.Background(), &ListWorkloadsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -542,7 +619,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -561,7 +643,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -590,7 +678,16 @@ func TestCheckResponseSnapshot_UpdateDeployment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDeployment(context.Background(), &UpdateDeploymentInput{})
+	got, err := svc.UpdateDeployment(context.Background(), &UpdateDeploymentInput{
+		DeploymentId: ptr.String("__DeploymentId__"),
+		Specifications: map[string]string{
+			"key0": "__Value__",
+		},
+		WorkloadVersionName:          ptr.String("__WorkloadVersionName__"),
+		DeploymentPatternVersionName: ptr.String("__DeploymentPatternVersionName__"),
+		DryRun:                       true,
+		Force:                        true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -611,7 +708,18 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{})
+	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		WorkloadName:          ptr.String("__WorkloadName__"),
+		DeploymentPatternName: ptr.String("__DeploymentPatternName__"),
+		Name:                  ptr.String("__Name__"),
+		Specifications: map[string]string{
+			"key0": "__Value__",
+		},
+		DryRun: true,
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -636,7 +744,18 @@ func TestCheckResponseSnapshot_Error_ResourceLimitException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{})
+	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		WorkloadName:          ptr.String("__WorkloadName__"),
+		DeploymentPatternName: ptr.String("__DeploymentPatternName__"),
+		Name:                  ptr.String("__Name__"),
+		Specifications: map[string]string{
+			"key0": "__Value__",
+		},
+		DryRun: true,
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -661,7 +780,18 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{})
+	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		WorkloadName:          ptr.String("__WorkloadName__"),
+		DeploymentPatternName: ptr.String("__DeploymentPatternName__"),
+		Name:                  ptr.String("__Name__"),
+		Specifications: map[string]string{
+			"key0": "__Value__",
+		},
+		DryRun: true,
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -686,7 +816,18 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{})
+	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		WorkloadName:          ptr.String("__WorkloadName__"),
+		DeploymentPatternName: ptr.String("__DeploymentPatternName__"),
+		Name:                  ptr.String("__Name__"),
+		Specifications: map[string]string{
+			"key0": "__Value__",
+		},
+		DryRun: true,
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"EventTypes":[{"EventTypeId":"__EventTypeId__","EventTypeName":"__EventTypeName__","ResourceType":"__ResourceType__","ServiceName":"__ServiceName__"},{"EventTypeId":"__EventTypeId__","EventTypeName":"__EventTypeName__","ResourceType":"__ResourceType__","ServiceName":"__ServiceName__"}],"NextToken":"__NextToken__"}

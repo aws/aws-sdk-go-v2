@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<ManagedCertificateDetails xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><CertificateArn>__CertificateArn__</CertificateArn><CertificateStatus>pending-validation</CertificateStatus><ValidationTokenDetails><member><Domain>__Domain__</Domain><RedirectFrom>__RedirectFrom__</RedirectFrom><RedirectTo>__RedirectTo__</RedirectTo></member><member><Domain>__Domain__</Domain><RedirectFrom>__RedirectFrom__</RedirectFrom><RedirectTo>__RedirectTo__</RedirectTo></member></ValidationTokenDetails><ValidationTokenHost>cloudfront</ValidationTokenHost></ManagedCertificateDetails>

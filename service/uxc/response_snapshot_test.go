@@ -151,7 +151,10 @@ func TestCheckResponseSnapshot_ListServices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServices(context.Background(), &ListServicesInput{})
+	got, err := svc.ListServices(context.Background(), &ListServicesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -180,7 +183,17 @@ func TestCheckResponseSnapshot_UpdateAccountCustomizations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAccountCustomizations(context.Background(), &UpdateAccountCustomizationsInput{})
+	got, err := svc.UpdateAccountCustomizations(context.Background(), &UpdateAccountCustomizationsInput{
+		AccountColor: types.AccountColor("none"),
+		VisibleServices: []string{
+			"__Member__",
+			"__Member__",
+		},
+		VisibleRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}

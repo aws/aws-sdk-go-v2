@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Textract.ListAdapterVersions
+
+{"AdapterVersions":[{"AdapterId":"__AdapterId__","AdapterVersion":"__AdapterVersion__","CreationTime":946684800,"FeatureTypes":["TABLES","TABLES"],"Status":"ACTIVE","StatusMessage":"__StatusMessage__"},{"AdapterId":"__AdapterId__","AdapterVersion":"__AdapterVersion__","CreationTime":946684800,"FeatureTypes":["TABLES","TABLES"],"Status":"ACTIVE","StatusMessage":"__StatusMessage__"}],"NextToken":"__NextToken__"}

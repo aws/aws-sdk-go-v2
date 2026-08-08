@@ -123,7 +123,11 @@ func TestCheckResponseSnapshot_GetRoleCredentials(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRoleCredentials(context.Background(), &GetRoleCredentialsInput{})
+	got, err := svc.GetRoleCredentials(context.Background(), &GetRoleCredentialsInput{
+		RoleName:    ptr.String("__RoleName__"),
+		AccountId:   ptr.String("__AccountId__"),
+		AccessToken: ptr.String("__AccessToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -154,7 +158,12 @@ func TestCheckResponseSnapshot_ListAccountRoles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccountRoles(context.Background(), &ListAccountRolesInput{})
+	got, err := svc.ListAccountRoles(context.Background(), &ListAccountRolesInput{
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		AccessToken: ptr.String("__AccessToken__"),
+		AccountId:   ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -187,7 +196,11 @@ func TestCheckResponseSnapshot_ListAccounts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccounts(context.Background(), &ListAccountsInput{})
+	got, err := svc.ListAccounts(context.Background(), &ListAccountsInput{
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		AccessToken: ptr.String("__AccessToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -206,7 +219,9 @@ func TestCheckResponseSnapshot_Logout(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Logout(context.Background(), &LogoutInput{})
+	got, err := svc.Logout(context.Background(), &LogoutInput{
+		AccessToken: ptr.String("__AccessToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -227,7 +242,11 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRoleCredentials(context.Background(), &GetRoleCredentialsInput{})
+	_, opErr := svc.GetRoleCredentials(context.Background(), &GetRoleCredentialsInput{
+		RoleName:    ptr.String("__RoleName__"),
+		AccountId:   ptr.String("__AccountId__"),
+		AccessToken: ptr.String("__AccessToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -252,7 +271,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRoleCredentials(context.Background(), &GetRoleCredentialsInput{})
+	_, opErr := svc.GetRoleCredentials(context.Background(), &GetRoleCredentialsInput{
+		RoleName:    ptr.String("__RoleName__"),
+		AccountId:   ptr.String("__AccountId__"),
+		AccessToken: ptr.String("__AccessToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -277,7 +300,11 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRoleCredentials(context.Background(), &GetRoleCredentialsInput{})
+	_, opErr := svc.GetRoleCredentials(context.Background(), &GetRoleCredentialsInput{
+		RoleName:    ptr.String("__RoleName__"),
+		AccountId:   ptr.String("__AccountId__"),
+		AccessToken: ptr.String("__AccessToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -302,7 +329,11 @@ func TestCheckResponseSnapshot_Error_UnauthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRoleCredentials(context.Background(), &GetRoleCredentialsInput{})
+	_, opErr := svc.GetRoleCredentials(context.Background(), &GetRoleCredentialsInput{
+		RoleName:    ptr.String("__RoleName__"),
+		AccountId:   ptr.String("__AccountId__"),
+		AccessToken: ptr.String("__AccessToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

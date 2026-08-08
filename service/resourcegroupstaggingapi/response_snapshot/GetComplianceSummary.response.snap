@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: ResourceGroupsTaggingAPI_20170126.GetComplianceSummary
+
+{"PaginationToken":"__PaginationToken__","SummaryList":[{"LastUpdated":"__LastUpdated__","NonCompliantResources":1,"Region":"__Region__","ResourceType":"__ResourceType__","TargetId":"__TargetId__","TargetIdType":"ACCOUNT"},{"LastUpdated":"__LastUpdated__","NonCompliantResources":1,"Region":"__Region__","ResourceType":"__ResourceType__","TargetId":"__TargetId__","TargetIdType":"ACCOUNT"}]}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"categories":[{"appCount":1,"color":"__Color__","id":"__Id__","title":"__Title__"},{"appCount":1,"color":"__Color__","id":"__Id__","title":"__Title__"}]}

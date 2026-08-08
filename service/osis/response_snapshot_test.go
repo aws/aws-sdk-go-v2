@@ -219,7 +219,50 @@ func TestCheckResponseSnapshot_CreatePipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePipeline(context.Background(), &CreatePipelineInput{})
+	got, err := svc.CreatePipeline(context.Background(), &CreatePipelineInput{
+		PipelineName:              ptr.String("__PipelineName__"),
+		MinUnits:                  ptr.Int32(1),
+		MaxUnits:                  ptr.Int32(1),
+		PipelineConfigurationBody: ptr.String("__PipelineConfigurationBody__"),
+		LogPublishingOptions: &types.LogPublishingOptions{
+			IsLoggingEnabled: ptr.Bool(true),
+			CloudWatchLogDestination: &types.CloudWatchLogDestination{
+				LogGroup: ptr.String("__LogGroup__"),
+			},
+		},
+		VpcOptions: &types.VpcOptions{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			VpcAttachmentOptions: &types.VpcAttachmentOptions{
+				AttachToVpc: ptr.Bool(true),
+				CidrBlock:   ptr.String("__CidrBlock__"),
+			},
+			VpcEndpointManagement: types.VpcEndpointManagement("CUSTOMER"),
+		},
+		BufferOptions: &types.BufferOptions{
+			PersistentBufferEnabled: ptr.Bool(true),
+		},
+		EncryptionAtRestOptions: &types.EncryptionAtRestOptions{
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		PipelineRoleArn: ptr.String("__PipelineRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -243,7 +286,19 @@ func TestCheckResponseSnapshot_CreatePipelineEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePipelineEndpoint(context.Background(), &CreatePipelineEndpointInput{})
+	got, err := svc.CreatePipelineEndpoint(context.Background(), &CreatePipelineEndpointInput{
+		PipelineArn: ptr.String("__PipelineArn__"),
+		VpcOptions: &types.PipelineEndpointVpcOptions{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -262,7 +317,9 @@ func TestCheckResponseSnapshot_DeletePipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePipeline(context.Background(), &DeletePipelineInput{})
+	got, err := svc.DeletePipeline(context.Background(), &DeletePipelineInput{
+		PipelineName: ptr.String("__PipelineName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -281,7 +338,9 @@ func TestCheckResponseSnapshot_DeletePipelineEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePipelineEndpoint(context.Background(), &DeletePipelineEndpointInput{})
+	got, err := svc.DeletePipelineEndpoint(context.Background(), &DeletePipelineEndpointInput{
+		EndpointId: ptr.String("__EndpointId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -300,7 +359,9 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -421,7 +482,9 @@ func TestCheckResponseSnapshot_GetPipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPipeline(context.Background(), &GetPipelineInput{})
+	got, err := svc.GetPipeline(context.Background(), &GetPipelineInput{
+		PipelineName: ptr.String("__PipelineName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -450,7 +513,10 @@ func TestCheckResponseSnapshot_GetPipelineBlueprint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPipelineBlueprint(context.Background(), &GetPipelineBlueprintInput{})
+	got, err := svc.GetPipelineBlueprint(context.Background(), &GetPipelineBlueprintInput{
+		BlueprintName: ptr.String("__BlueprintName__"),
+		Format:        ptr.String("__Format__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -510,7 +576,9 @@ func TestCheckResponseSnapshot_GetPipelineChangeProgress(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPipelineChangeProgress(context.Background(), &GetPipelineChangeProgressInput{})
+	got, err := svc.GetPipelineChangeProgress(context.Background(), &GetPipelineChangeProgressInput{
+		PipelineName: ptr.String("__PipelineName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -532,7 +600,9 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{})
+	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -603,7 +673,10 @@ func TestCheckResponseSnapshot_ListPipelineEndpointConnections(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPipelineEndpointConnections(context.Background(), &ListPipelineEndpointConnectionsInput{})
+	got, err := svc.ListPipelineEndpointConnections(context.Background(), &ListPipelineEndpointConnectionsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -660,7 +733,10 @@ func TestCheckResponseSnapshot_ListPipelineEndpoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPipelineEndpoints(context.Background(), &ListPipelineEndpointsInput{})
+	got, err := svc.ListPipelineEndpoints(context.Background(), &ListPipelineEndpointsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -747,7 +823,10 @@ func TestCheckResponseSnapshot_ListPipelines(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPipelines(context.Background(), &ListPipelinesInput{})
+	got, err := svc.ListPipelines(context.Background(), &ListPipelinesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -777,7 +856,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -799,7 +880,10 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Policy:      ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -820,7 +904,13 @@ func TestCheckResponseSnapshot_RevokePipelineEndpointConnections(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RevokePipelineEndpointConnections(context.Background(), &RevokePipelineEndpointConnectionsInput{})
+	got, err := svc.RevokePipelineEndpointConnections(context.Background(), &RevokePipelineEndpointConnectionsInput{
+		PipelineArn: ptr.String("__PipelineArn__"),
+		EndpointIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -941,7 +1031,9 @@ func TestCheckResponseSnapshot_StartPipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartPipeline(context.Background(), &StartPipelineInput{})
+	got, err := svc.StartPipeline(context.Background(), &StartPipelineInput{
+		PipelineName: ptr.String("__PipelineName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1062,7 +1154,9 @@ func TestCheckResponseSnapshot_StopPipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopPipeline(context.Background(), &StopPipelineInput{})
+	got, err := svc.StopPipeline(context.Background(), &StopPipelineInput{
+		PipelineName: ptr.String("__PipelineName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1081,7 +1175,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		Arn: ptr.String("__Arn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1100,7 +1206,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		Arn: ptr.String("__Arn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1221,7 +1333,25 @@ func TestCheckResponseSnapshot_UpdatePipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePipeline(context.Background(), &UpdatePipelineInput{})
+	got, err := svc.UpdatePipeline(context.Background(), &UpdatePipelineInput{
+		PipelineName:              ptr.String("__PipelineName__"),
+		MinUnits:                  ptr.Int32(1),
+		MaxUnits:                  ptr.Int32(1),
+		PipelineConfigurationBody: ptr.String("__PipelineConfigurationBody__"),
+		LogPublishingOptions: &types.LogPublishingOptions{
+			IsLoggingEnabled: ptr.Bool(true),
+			CloudWatchLogDestination: &types.CloudWatchLogDestination{
+				LogGroup: ptr.String("__LogGroup__"),
+			},
+		},
+		BufferOptions: &types.BufferOptions{
+			PersistentBufferEnabled: ptr.Bool(true),
+		},
+		EncryptionAtRestOptions: &types.EncryptionAtRestOptions{
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		PipelineRoleArn: ptr.String("__PipelineRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1250,7 +1380,9 @@ func TestCheckResponseSnapshot_ValidatePipeline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ValidatePipeline(context.Background(), &ValidatePipelineInput{})
+	got, err := svc.ValidatePipeline(context.Background(), &ValidatePipelineInput{
+		PipelineConfigurationBody: ptr.String("__PipelineConfigurationBody__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1271,7 +1403,50 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePipeline(context.Background(), &CreatePipelineInput{})
+	_, opErr := svc.CreatePipeline(context.Background(), &CreatePipelineInput{
+		PipelineName:              ptr.String("__PipelineName__"),
+		MinUnits:                  ptr.Int32(1),
+		MaxUnits:                  ptr.Int32(1),
+		PipelineConfigurationBody: ptr.String("__PipelineConfigurationBody__"),
+		LogPublishingOptions: &types.LogPublishingOptions{
+			IsLoggingEnabled: ptr.Bool(true),
+			CloudWatchLogDestination: &types.CloudWatchLogDestination{
+				LogGroup: ptr.String("__LogGroup__"),
+			},
+		},
+		VpcOptions: &types.VpcOptions{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			VpcAttachmentOptions: &types.VpcAttachmentOptions{
+				AttachToVpc: ptr.Bool(true),
+				CidrBlock:   ptr.String("__CidrBlock__"),
+			},
+			VpcEndpointManagement: types.VpcEndpointManagement("CUSTOMER"),
+		},
+		BufferOptions: &types.BufferOptions{
+			PersistentBufferEnabled: ptr.Bool(true),
+		},
+		EncryptionAtRestOptions: &types.EncryptionAtRestOptions{
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		PipelineRoleArn: ptr.String("__PipelineRoleArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1296,7 +1471,9 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeletePipeline(context.Background(), &DeletePipelineInput{})
+	_, opErr := svc.DeletePipeline(context.Background(), &DeletePipelineInput{
+		PipelineName: ptr.String("__PipelineName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1321,7 +1498,50 @@ func TestCheckResponseSnapshot_Error_DisabledOperationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePipeline(context.Background(), &CreatePipelineInput{})
+	_, opErr := svc.CreatePipeline(context.Background(), &CreatePipelineInput{
+		PipelineName:              ptr.String("__PipelineName__"),
+		MinUnits:                  ptr.Int32(1),
+		MaxUnits:                  ptr.Int32(1),
+		PipelineConfigurationBody: ptr.String("__PipelineConfigurationBody__"),
+		LogPublishingOptions: &types.LogPublishingOptions{
+			IsLoggingEnabled: ptr.Bool(true),
+			CloudWatchLogDestination: &types.CloudWatchLogDestination{
+				LogGroup: ptr.String("__LogGroup__"),
+			},
+		},
+		VpcOptions: &types.VpcOptions{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			VpcAttachmentOptions: &types.VpcAttachmentOptions{
+				AttachToVpc: ptr.Bool(true),
+				CidrBlock:   ptr.String("__CidrBlock__"),
+			},
+			VpcEndpointManagement: types.VpcEndpointManagement("CUSTOMER"),
+		},
+		BufferOptions: &types.BufferOptions{
+			PersistentBufferEnabled: ptr.Bool(true),
+		},
+		EncryptionAtRestOptions: &types.EncryptionAtRestOptions{
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		PipelineRoleArn: ptr.String("__PipelineRoleArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1346,7 +1566,50 @@ func TestCheckResponseSnapshot_Error_InternalException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePipeline(context.Background(), &CreatePipelineInput{})
+	_, opErr := svc.CreatePipeline(context.Background(), &CreatePipelineInput{
+		PipelineName:              ptr.String("__PipelineName__"),
+		MinUnits:                  ptr.Int32(1),
+		MaxUnits:                  ptr.Int32(1),
+		PipelineConfigurationBody: ptr.String("__PipelineConfigurationBody__"),
+		LogPublishingOptions: &types.LogPublishingOptions{
+			IsLoggingEnabled: ptr.Bool(true),
+			CloudWatchLogDestination: &types.CloudWatchLogDestination{
+				LogGroup: ptr.String("__LogGroup__"),
+			},
+		},
+		VpcOptions: &types.VpcOptions{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			VpcAttachmentOptions: &types.VpcAttachmentOptions{
+				AttachToVpc: ptr.Bool(true),
+				CidrBlock:   ptr.String("__CidrBlock__"),
+			},
+			VpcEndpointManagement: types.VpcEndpointManagement("CUSTOMER"),
+		},
+		BufferOptions: &types.BufferOptions{
+			PersistentBufferEnabled: ptr.Bool(true),
+		},
+		EncryptionAtRestOptions: &types.EncryptionAtRestOptions{
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		PipelineRoleArn: ptr.String("__PipelineRoleArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1396,7 +1659,50 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePipeline(context.Background(), &CreatePipelineInput{})
+	_, opErr := svc.CreatePipeline(context.Background(), &CreatePipelineInput{
+		PipelineName:              ptr.String("__PipelineName__"),
+		MinUnits:                  ptr.Int32(1),
+		MaxUnits:                  ptr.Int32(1),
+		PipelineConfigurationBody: ptr.String("__PipelineConfigurationBody__"),
+		LogPublishingOptions: &types.LogPublishingOptions{
+			IsLoggingEnabled: ptr.Bool(true),
+			CloudWatchLogDestination: &types.CloudWatchLogDestination{
+				LogGroup: ptr.String("__LogGroup__"),
+			},
+		},
+		VpcOptions: &types.VpcOptions{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			VpcAttachmentOptions: &types.VpcAttachmentOptions{
+				AttachToVpc: ptr.Bool(true),
+				CidrBlock:   ptr.String("__CidrBlock__"),
+			},
+			VpcEndpointManagement: types.VpcEndpointManagement("CUSTOMER"),
+		},
+		BufferOptions: &types.BufferOptions{
+			PersistentBufferEnabled: ptr.Bool(true),
+		},
+		EncryptionAtRestOptions: &types.EncryptionAtRestOptions{
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		PipelineRoleArn: ptr.String("__PipelineRoleArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1421,7 +1727,50 @@ func TestCheckResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePipeline(context.Background(), &CreatePipelineInput{})
+	_, opErr := svc.CreatePipeline(context.Background(), &CreatePipelineInput{
+		PipelineName:              ptr.String("__PipelineName__"),
+		MinUnits:                  ptr.Int32(1),
+		MaxUnits:                  ptr.Int32(1),
+		PipelineConfigurationBody: ptr.String("__PipelineConfigurationBody__"),
+		LogPublishingOptions: &types.LogPublishingOptions{
+			IsLoggingEnabled: ptr.Bool(true),
+			CloudWatchLogDestination: &types.CloudWatchLogDestination{
+				LogGroup: ptr.String("__LogGroup__"),
+			},
+		},
+		VpcOptions: &types.VpcOptions{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			VpcAttachmentOptions: &types.VpcAttachmentOptions{
+				AttachToVpc: ptr.Bool(true),
+				CidrBlock:   ptr.String("__CidrBlock__"),
+			},
+			VpcEndpointManagement: types.VpcEndpointManagement("CUSTOMER"),
+		},
+		BufferOptions: &types.BufferOptions{
+			PersistentBufferEnabled: ptr.Bool(true),
+		},
+		EncryptionAtRestOptions: &types.EncryptionAtRestOptions{
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		PipelineRoleArn: ptr.String("__PipelineRoleArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1446,7 +1795,50 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePipeline(context.Background(), &CreatePipelineInput{})
+	_, opErr := svc.CreatePipeline(context.Background(), &CreatePipelineInput{
+		PipelineName:              ptr.String("__PipelineName__"),
+		MinUnits:                  ptr.Int32(1),
+		MaxUnits:                  ptr.Int32(1),
+		PipelineConfigurationBody: ptr.String("__PipelineConfigurationBody__"),
+		LogPublishingOptions: &types.LogPublishingOptions{
+			IsLoggingEnabled: ptr.Bool(true),
+			CloudWatchLogDestination: &types.CloudWatchLogDestination{
+				LogGroup: ptr.String("__LogGroup__"),
+			},
+		},
+		VpcOptions: &types.VpcOptions{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			VpcAttachmentOptions: &types.VpcAttachmentOptions{
+				AttachToVpc: ptr.Bool(true),
+				CidrBlock:   ptr.String("__CidrBlock__"),
+			},
+			VpcEndpointManagement: types.VpcEndpointManagement("CUSTOMER"),
+		},
+		BufferOptions: &types.BufferOptions{
+			PersistentBufferEnabled: ptr.Bool(true),
+		},
+		EncryptionAtRestOptions: &types.EncryptionAtRestOptions{
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		PipelineRoleArn: ptr.String("__PipelineRoleArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1471,7 +1863,50 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePipeline(context.Background(), &CreatePipelineInput{})
+	_, opErr := svc.CreatePipeline(context.Background(), &CreatePipelineInput{
+		PipelineName:              ptr.String("__PipelineName__"),
+		MinUnits:                  ptr.Int32(1),
+		MaxUnits:                  ptr.Int32(1),
+		PipelineConfigurationBody: ptr.String("__PipelineConfigurationBody__"),
+		LogPublishingOptions: &types.LogPublishingOptions{
+			IsLoggingEnabled: ptr.Bool(true),
+			CloudWatchLogDestination: &types.CloudWatchLogDestination{
+				LogGroup: ptr.String("__LogGroup__"),
+			},
+		},
+		VpcOptions: &types.VpcOptions{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			VpcAttachmentOptions: &types.VpcAttachmentOptions{
+				AttachToVpc: ptr.Bool(true),
+				CidrBlock:   ptr.String("__CidrBlock__"),
+			},
+			VpcEndpointManagement: types.VpcEndpointManagement("CUSTOMER"),
+		},
+		BufferOptions: &types.BufferOptions{
+			PersistentBufferEnabled: ptr.Bool(true),
+		},
+		EncryptionAtRestOptions: &types.EncryptionAtRestOptions{
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		PipelineRoleArn: ptr.String("__PipelineRoleArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

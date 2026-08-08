@@ -119,7 +119,22 @@ func TestCheckResponseSnapshot_CreatePerformanceAnalysisReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePerformanceAnalysisReport(context.Background(), &CreatePerformanceAnalysisReportInput{})
+	got, err := svc.CreatePerformanceAnalysisReport(context.Background(), &CreatePerformanceAnalysisReportInput{
+		ServiceType: types.ServiceType("RDS"),
+		Identifier:  ptr.String("__Identifier__"),
+		StartTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -138,7 +153,11 @@ func TestCheckResponseSnapshot_DeletePerformanceAnalysisReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePerformanceAnalysisReport(context.Background(), &DeletePerformanceAnalysisReportInput{})
+	got, err := svc.DeletePerformanceAnalysisReport(context.Background(), &DeletePerformanceAnalysisReportInput{
+		ServiceType:      types.ServiceType("RDS"),
+		Identifier:       ptr.String("__Identifier__"),
+		AnalysisReportId: ptr.String("__AnalysisReportId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -201,7 +220,39 @@ func TestCheckResponseSnapshot_DescribeDimensionKeys(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDimensionKeys(context.Background(), &DescribeDimensionKeysInput{})
+	got, err := svc.DescribeDimensionKeys(context.Background(), &DescribeDimensionKeysInput{
+		ServiceType:     types.ServiceType("RDS"),
+		Identifier:      ptr.String("__Identifier__"),
+		StartTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Metric:          ptr.String("__Metric__"),
+		PeriodInSeconds: ptr.Int32(1),
+		GroupBy: &types.DimensionGroup{
+			Group: ptr.String("__Group__"),
+			Dimensions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Limit: ptr.Int32(1),
+		},
+		AdditionalMetrics: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PartitionBy: &types.DimensionGroup{
+			Group: ptr.String("__Group__"),
+			Dimensions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Limit: ptr.Int32(1),
+		},
+		Filter: map[string]string{
+			"key0": "__Value__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -233,7 +284,16 @@ func TestCheckResponseSnapshot_GetDimensionKeyDetails(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDimensionKeyDetails(context.Background(), &GetDimensionKeyDetailsInput{})
+	got, err := svc.GetDimensionKeyDetails(context.Background(), &GetDimensionKeyDetailsInput{
+		ServiceType:     types.ServiceType("RDS"),
+		Identifier:      ptr.String("__Identifier__"),
+		Group:           ptr.String("__Group__"),
+		GroupIdentifier: ptr.String("__GroupIdentifier__"),
+		RequestedDimensions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -426,7 +486,13 @@ func TestCheckResponseSnapshot_GetPerformanceAnalysisReport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPerformanceAnalysisReport(context.Background(), &GetPerformanceAnalysisReportInput{})
+	got, err := svc.GetPerformanceAnalysisReport(context.Background(), &GetPerformanceAnalysisReportInput{
+		ServiceType:      types.ServiceType("RDS"),
+		Identifier:       ptr.String("__Identifier__"),
+		AnalysisReportId: ptr.String("__AnalysisReportId__"),
+		TextFormat:       types.TextFormat("PLAIN_TEXT"),
+		AcceptLanguage:   types.AcceptLanguage("EN_US"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -452,7 +518,10 @@ func TestCheckResponseSnapshot_GetResourceMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourceMetadata(context.Background(), &GetResourceMetadataInput{})
+	got, err := svc.GetResourceMetadata(context.Background(), &GetResourceMetadataInput{
+		ServiceType: types.ServiceType("RDS"),
+		Identifier:  ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -514,7 +583,46 @@ func TestCheckResponseSnapshot_GetResourceMetrics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourceMetrics(context.Background(), &GetResourceMetricsInput{})
+	got, err := svc.GetResourceMetrics(context.Background(), &GetResourceMetricsInput{
+		ServiceType: types.ServiceType("RDS"),
+		Identifier:  ptr.String("__Identifier__"),
+		MetricQueries: []types.MetricQuery{
+			{
+				Metric: ptr.String("__Metric__"),
+				GroupBy: &types.DimensionGroup{
+					Group: ptr.String("__Group__"),
+					Dimensions: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Limit: ptr.Int32(1),
+				},
+				Filter: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				Metric: ptr.String("__Metric__"),
+				GroupBy: &types.DimensionGroup{
+					Group: ptr.String("__Group__"),
+					Dimensions: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Limit: ptr.Int32(1),
+				},
+				Filter: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		StartTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		PeriodInSeconds: ptr.Int32(1),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+		PeriodAlignment: types.PeriodAlignment("END_TIME"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -591,7 +699,20 @@ func TestCheckResponseSnapshot_ListAvailableResourceDimensions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAvailableResourceDimensions(context.Background(), &ListAvailableResourceDimensionsInput{})
+	got, err := svc.ListAvailableResourceDimensions(context.Background(), &ListAvailableResourceDimensionsInput{
+		ServiceType: types.ServiceType("RDS"),
+		Identifier:  ptr.String("__Identifier__"),
+		Metrics: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		AuthorizedActions: []types.FineGrainedAction{
+			types.FineGrainedAction("DescribeDimensionKeys"),
+			types.FineGrainedAction("DescribeDimensionKeys"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -624,7 +745,16 @@ func TestCheckResponseSnapshot_ListAvailableResourceMetrics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAvailableResourceMetrics(context.Background(), &ListAvailableResourceMetricsInput{})
+	got, err := svc.ListAvailableResourceMetrics(context.Background(), &ListAvailableResourceMetricsInput{
+		ServiceType: types.ServiceType("RDS"),
+		Identifier:  ptr.String("__Identifier__"),
+		MetricTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -657,7 +787,17 @@ func TestCheckResponseSnapshot_ListPerformanceAnalysisReportRecommendations(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPerformanceAnalysisReportRecommendations(context.Background(), &ListPerformanceAnalysisReportRecommendationsInput{})
+	got, err := svc.ListPerformanceAnalysisReportRecommendations(context.Background(), &ListPerformanceAnalysisReportRecommendationsInput{
+		ServiceType:      types.ServiceType("RDS"),
+		Identifier:       ptr.String("__Identifier__"),
+		AnalysisReportId: ptr.String("__AnalysisReportId__"),
+		RecommendationIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -714,7 +854,13 @@ func TestCheckResponseSnapshot_ListPerformanceAnalysisReports(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPerformanceAnalysisReports(context.Background(), &ListPerformanceAnalysisReportsInput{})
+	got, err := svc.ListPerformanceAnalysisReports(context.Background(), &ListPerformanceAnalysisReportsInput{
+		ServiceType: types.ServiceType("RDS"),
+		Identifier:  ptr.String("__Identifier__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		ListTags:    ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -744,7 +890,10 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ServiceType: types.ServiceType("RDS"),
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -763,7 +912,20 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ServiceType: types.ServiceType("RDS"),
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -782,7 +944,14 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ServiceType: types.ServiceType("RDS"),
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -803,7 +972,22 @@ func TestCheckResponseSnapshot_Error_InternalServiceError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePerformanceAnalysisReport(context.Background(), &CreatePerformanceAnalysisReportInput{})
+	_, opErr := svc.CreatePerformanceAnalysisReport(context.Background(), &CreatePerformanceAnalysisReportInput{
+		ServiceType: types.ServiceType("RDS"),
+		Identifier:  ptr.String("__Identifier__"),
+		StartTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -828,7 +1012,22 @@ func TestCheckResponseSnapshot_Error_InvalidArgumentException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePerformanceAnalysisReport(context.Background(), &CreatePerformanceAnalysisReportInput{})
+	_, opErr := svc.CreatePerformanceAnalysisReport(context.Background(), &CreatePerformanceAnalysisReportInput{
+		ServiceType: types.ServiceType("RDS"),
+		Identifier:  ptr.String("__Identifier__"),
+		StartTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -853,7 +1052,22 @@ func TestCheckResponseSnapshot_Error_NotAuthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePerformanceAnalysisReport(context.Background(), &CreatePerformanceAnalysisReportInput{})
+	_, opErr := svc.CreatePerformanceAnalysisReport(context.Background(), &CreatePerformanceAnalysisReportInput{
+		ServiceType: types.ServiceType("RDS"),
+		Identifier:  ptr.String("__Identifier__"),
+		StartTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

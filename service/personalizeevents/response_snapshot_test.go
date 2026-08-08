@@ -24,6 +24,7 @@ import (
 	"strconv"
 	"strings"
 	"testing"
+	"time"
 )
 
 const serdeRespSSPrefix = "response_snapshot"
@@ -116,7 +117,39 @@ func TestCheckResponseSnapshot_PutActionInteractions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutActionInteractions(context.Background(), &PutActionInteractionsInput{})
+	got, err := svc.PutActionInteractions(context.Background(), &PutActionInteractionsInput{
+		TrackingId: ptr.String("__TrackingId__"),
+		ActionInteractions: []types.ActionInteraction{
+			{
+				ActionId:         ptr.String("__ActionId__"),
+				UserId:           ptr.String("__UserId__"),
+				SessionId:        ptr.String("__SessionId__"),
+				Timestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EventType:        ptr.String("__EventType__"),
+				EventId:          ptr.String("__EventId__"),
+				RecommendationId: ptr.String("__RecommendationId__"),
+				Impression: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Properties: ptr.String("__Properties__"),
+			},
+			{
+				ActionId:         ptr.String("__ActionId__"),
+				UserId:           ptr.String("__UserId__"),
+				SessionId:        ptr.String("__SessionId__"),
+				Timestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EventType:        ptr.String("__EventType__"),
+				EventId:          ptr.String("__EventId__"),
+				RecommendationId: ptr.String("__RecommendationId__"),
+				Impression: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Properties: ptr.String("__Properties__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -135,7 +168,19 @@ func TestCheckResponseSnapshot_PutActions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutActions(context.Background(), &PutActionsInput{})
+	got, err := svc.PutActions(context.Background(), &PutActionsInput{
+		DatasetArn: ptr.String("__DatasetArn__"),
+		Actions: []types.Action{
+			{
+				ActionId:   ptr.String("__ActionId__"),
+				Properties: ptr.String("__Properties__"),
+			},
+			{
+				ActionId:   ptr.String("__ActionId__"),
+				Properties: ptr.String("__Properties__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -154,7 +199,45 @@ func TestCheckResponseSnapshot_PutEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutEvents(context.Background(), &PutEventsInput{})
+	got, err := svc.PutEvents(context.Background(), &PutEventsInput{
+		TrackingId: ptr.String("__TrackingId__"),
+		UserId:     ptr.String("__UserId__"),
+		SessionId:  ptr.String("__SessionId__"),
+		EventList: []types.Event{
+			{
+				EventId:          ptr.String("__EventId__"),
+				EventType:        ptr.String("__EventType__"),
+				EventValue:       ptr.Float32(1.0),
+				ItemId:           ptr.String("__ItemId__"),
+				Properties:       ptr.String("__Properties__"),
+				SentAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				RecommendationId: ptr.String("__RecommendationId__"),
+				Impression: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MetricAttribution: &types.MetricAttribution{
+					EventAttributionSource: ptr.String("__EventAttributionSource__"),
+				},
+			},
+			{
+				EventId:          ptr.String("__EventId__"),
+				EventType:        ptr.String("__EventType__"),
+				EventValue:       ptr.Float32(1.0),
+				ItemId:           ptr.String("__ItemId__"),
+				Properties:       ptr.String("__Properties__"),
+				SentAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				RecommendationId: ptr.String("__RecommendationId__"),
+				Impression: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MetricAttribution: &types.MetricAttribution{
+					EventAttributionSource: ptr.String("__EventAttributionSource__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -173,7 +256,19 @@ func TestCheckResponseSnapshot_PutItems(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutItems(context.Background(), &PutItemsInput{})
+	got, err := svc.PutItems(context.Background(), &PutItemsInput{
+		DatasetArn: ptr.String("__DatasetArn__"),
+		Items: []types.Item{
+			{
+				ItemId:     ptr.String("__ItemId__"),
+				Properties: ptr.String("__Properties__"),
+			},
+			{
+				ItemId:     ptr.String("__ItemId__"),
+				Properties: ptr.String("__Properties__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -192,7 +287,19 @@ func TestCheckResponseSnapshot_PutUsers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutUsers(context.Background(), &PutUsersInput{})
+	got, err := svc.PutUsers(context.Background(), &PutUsersInput{
+		DatasetArn: ptr.String("__DatasetArn__"),
+		Users: []types.User{
+			{
+				UserId:     ptr.String("__UserId__"),
+				Properties: ptr.String("__Properties__"),
+			},
+			{
+				UserId:     ptr.String("__UserId__"),
+				Properties: ptr.String("__Properties__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -213,7 +320,39 @@ func TestCheckResponseSnapshot_Error_InvalidInputException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutActionInteractions(context.Background(), &PutActionInteractionsInput{})
+	_, opErr := svc.PutActionInteractions(context.Background(), &PutActionInteractionsInput{
+		TrackingId: ptr.String("__TrackingId__"),
+		ActionInteractions: []types.ActionInteraction{
+			{
+				ActionId:         ptr.String("__ActionId__"),
+				UserId:           ptr.String("__UserId__"),
+				SessionId:        ptr.String("__SessionId__"),
+				Timestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EventType:        ptr.String("__EventType__"),
+				EventId:          ptr.String("__EventId__"),
+				RecommendationId: ptr.String("__RecommendationId__"),
+				Impression: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Properties: ptr.String("__Properties__"),
+			},
+			{
+				ActionId:         ptr.String("__ActionId__"),
+				UserId:           ptr.String("__UserId__"),
+				SessionId:        ptr.String("__SessionId__"),
+				Timestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EventType:        ptr.String("__EventType__"),
+				EventId:          ptr.String("__EventId__"),
+				RecommendationId: ptr.String("__RecommendationId__"),
+				Impression: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Properties: ptr.String("__Properties__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -238,7 +377,39 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutActionInteractions(context.Background(), &PutActionInteractionsInput{})
+	_, opErr := svc.PutActionInteractions(context.Background(), &PutActionInteractionsInput{
+		TrackingId: ptr.String("__TrackingId__"),
+		ActionInteractions: []types.ActionInteraction{
+			{
+				ActionId:         ptr.String("__ActionId__"),
+				UserId:           ptr.String("__UserId__"),
+				SessionId:        ptr.String("__SessionId__"),
+				Timestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EventType:        ptr.String("__EventType__"),
+				EventId:          ptr.String("__EventId__"),
+				RecommendationId: ptr.String("__RecommendationId__"),
+				Impression: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Properties: ptr.String("__Properties__"),
+			},
+			{
+				ActionId:         ptr.String("__ActionId__"),
+				UserId:           ptr.String("__UserId__"),
+				SessionId:        ptr.String("__SessionId__"),
+				Timestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EventType:        ptr.String("__EventType__"),
+				EventId:          ptr.String("__EventId__"),
+				RecommendationId: ptr.String("__RecommendationId__"),
+				Impression: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Properties: ptr.String("__Properties__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -263,7 +434,39 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutActionInteractions(context.Background(), &PutActionInteractionsInput{})
+	_, opErr := svc.PutActionInteractions(context.Background(), &PutActionInteractionsInput{
+		TrackingId: ptr.String("__TrackingId__"),
+		ActionInteractions: []types.ActionInteraction{
+			{
+				ActionId:         ptr.String("__ActionId__"),
+				UserId:           ptr.String("__UserId__"),
+				SessionId:        ptr.String("__SessionId__"),
+				Timestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EventType:        ptr.String("__EventType__"),
+				EventId:          ptr.String("__EventId__"),
+				RecommendationId: ptr.String("__RecommendationId__"),
+				Impression: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Properties: ptr.String("__Properties__"),
+			},
+			{
+				ActionId:         ptr.String("__ActionId__"),
+				UserId:           ptr.String("__UserId__"),
+				SessionId:        ptr.String("__SessionId__"),
+				Timestamp:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EventType:        ptr.String("__EventType__"),
+				EventId:          ptr.String("__EventId__"),
+				RecommendationId: ptr.String("__RecommendationId__"),
+				Impression: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Properties: ptr.String("__Properties__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

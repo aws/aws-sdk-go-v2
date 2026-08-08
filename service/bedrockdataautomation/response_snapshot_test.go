@@ -117,7 +117,12 @@ func TestCheckResponseSnapshot_CopyBlueprintStage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CopyBlueprintStage(context.Background(), &CopyBlueprintStageInput{})
+	got, err := svc.CopyBlueprintStage(context.Background(), &CopyBlueprintStageInput{
+		BlueprintArn: ptr.String("__BlueprintArn__"),
+		SourceStage:  types.BlueprintStage("DEVELOPMENT"),
+		TargetStage:  types.BlueprintStage("DEVELOPMENT"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -174,7 +179,29 @@ func TestCheckResponseSnapshot_CreateBlueprint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBlueprint(context.Background(), &CreateBlueprintInput{})
+	got, err := svc.CreateBlueprint(context.Background(), &CreateBlueprintInput{
+		BlueprintName:  ptr.String("__BlueprintName__"),
+		Type:           types.Type("DOCUMENT"),
+		BlueprintStage: types.BlueprintStage("DEVELOPMENT"),
+		Schema:         ptr.String("__Schema__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			KmsEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -231,7 +258,10 @@ func TestCheckResponseSnapshot_CreateBlueprintVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateBlueprintVersion(context.Background(), &CreateBlueprintVersionInput{})
+	got, err := svc.CreateBlueprintVersion(context.Background(), &CreateBlueprintVersionInput{
+		BlueprintArn: ptr.String("__BlueprintArn__"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -253,7 +283,27 @@ func TestCheckResponseSnapshot_CreateDataAutomationLibrary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataAutomationLibrary(context.Background(), &CreateDataAutomationLibraryInput{})
+	got, err := svc.CreateDataAutomationLibrary(context.Background(), &CreateDataAutomationLibraryInput{
+		LibraryName:        ptr.String("__LibraryName__"),
+		LibraryDescription: ptr.String("__LibraryDescription__"),
+		ClientToken:        ptr.String("__ClientToken__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			KmsEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -276,7 +326,261 @@ func TestCheckResponseSnapshot_CreateDataAutomationProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataAutomationProject(context.Background(), &CreateDataAutomationProjectInput{})
+	got, err := svc.CreateDataAutomationProject(context.Background(), &CreateDataAutomationProjectInput{
+		ProjectName:        ptr.String("__ProjectName__"),
+		ProjectDescription: ptr.String("__ProjectDescription__"),
+		ProjectStage:       types.DataAutomationProjectStage("DEVELOPMENT"),
+		ProjectType:        types.DataAutomationProjectType("ASYNC"),
+		StandardOutputConfiguration: &types.StandardOutputConfiguration{
+			Document: &types.DocumentStandardOutputConfiguration{
+				Extraction: &types.DocumentStandardExtraction{
+					Granularity: &types.DocumentExtractionGranularity{
+						Types: []types.DocumentExtractionGranularityType{
+							types.DocumentExtractionGranularityType("DOCUMENT"),
+							types.DocumentExtractionGranularityType("DOCUMENT"),
+						},
+					},
+					BoundingBox: &types.DocumentBoundingBox{
+						State: types.State("ENABLED"),
+					},
+				},
+				GenerativeField: &types.DocumentStandardGenerativeField{
+					State: types.State("ENABLED"),
+				},
+				OutputFormat: &types.DocumentOutputFormat{
+					TextFormat: &types.DocumentOutputTextFormat{
+						Types: []types.DocumentOutputTextFormatType{
+							types.DocumentOutputTextFormatType("PLAIN_TEXT"),
+							types.DocumentOutputTextFormatType("PLAIN_TEXT"),
+						},
+					},
+					AdditionalFileFormat: &types.DocumentOutputAdditionalFileFormat{
+						State: types.State("ENABLED"),
+					},
+				},
+			},
+			Image: &types.ImageStandardOutputConfiguration{
+				Extraction: &types.ImageStandardExtraction{
+					Category: &types.ImageExtractionCategory{
+						State: types.State("ENABLED"),
+						Types: []types.ImageExtractionCategoryType{
+							types.ImageExtractionCategoryType("CONTENT_MODERATION"),
+							types.ImageExtractionCategoryType("CONTENT_MODERATION"),
+						},
+					},
+					BoundingBox: &types.ImageBoundingBox{
+						State: types.State("ENABLED"),
+					},
+				},
+				GenerativeField: &types.ImageStandardGenerativeField{
+					State: types.State("ENABLED"),
+					Types: []types.ImageStandardGenerativeFieldType{
+						types.ImageStandardGenerativeFieldType("IMAGE_SUMMARY"),
+						types.ImageStandardGenerativeFieldType("IMAGE_SUMMARY"),
+					},
+				},
+			},
+			Video: &types.VideoStandardOutputConfiguration{
+				Extraction: &types.VideoStandardExtraction{
+					Category: &types.VideoExtractionCategory{
+						State: types.State("ENABLED"),
+						Types: []types.VideoExtractionCategoryType{
+							types.VideoExtractionCategoryType("CONTENT_MODERATION"),
+							types.VideoExtractionCategoryType("CONTENT_MODERATION"),
+						},
+					},
+					BoundingBox: &types.VideoBoundingBox{
+						State: types.State("ENABLED"),
+					},
+				},
+				GenerativeField: &types.VideoStandardGenerativeField{
+					State: types.State("ENABLED"),
+					Types: []types.VideoStandardGenerativeFieldType{
+						types.VideoStandardGenerativeFieldType("VIDEO_SUMMARY"),
+						types.VideoStandardGenerativeFieldType("VIDEO_SUMMARY"),
+					},
+				},
+			},
+			Audio: &types.AudioStandardOutputConfiguration{
+				Extraction: &types.AudioStandardExtraction{
+					Category: &types.AudioExtractionCategory{
+						State: types.State("ENABLED"),
+						Types: []types.AudioExtractionCategoryType{
+							types.AudioExtractionCategoryType("AUDIO_CONTENT_MODERATION"),
+							types.AudioExtractionCategoryType("AUDIO_CONTENT_MODERATION"),
+						},
+						TypeConfiguration: &types.AudioExtractionCategoryTypeConfiguration{
+							Transcript: &types.TranscriptConfiguration{
+								SpeakerLabeling: &types.SpeakerLabelingConfiguration{
+									State: types.State("ENABLED"),
+								},
+								ChannelLabeling: &types.ChannelLabelingConfiguration{
+									State: types.State("ENABLED"),
+								},
+							},
+						},
+					},
+				},
+				GenerativeField: &types.AudioStandardGenerativeField{
+					State: types.State("ENABLED"),
+					Types: []types.AudioStandardGenerativeFieldType{
+						types.AudioStandardGenerativeFieldType("AUDIO_SUMMARY"),
+						types.AudioStandardGenerativeFieldType("AUDIO_SUMMARY"),
+					},
+				},
+			},
+		},
+		CustomOutputConfiguration: &types.CustomOutputConfiguration{
+			Blueprints: []types.BlueprintItem{
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+					BlueprintStage:   types.BlueprintStage("DEVELOPMENT"),
+				},
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+					BlueprintStage:   types.BlueprintStage("DEVELOPMENT"),
+				},
+			},
+			Document: &types.DocumentCustomOutputConfiguration{
+				FallbackBlueprints: []types.BlueprintItem{
+					{
+						BlueprintArn:     ptr.String("__BlueprintArn__"),
+						BlueprintVersion: ptr.String("__BlueprintVersion__"),
+						BlueprintStage:   types.BlueprintStage("DEVELOPMENT"),
+					},
+					{
+						BlueprintArn:     ptr.String("__BlueprintArn__"),
+						BlueprintVersion: ptr.String("__BlueprintVersion__"),
+						BlueprintStage:   types.BlueprintStage("DEVELOPMENT"),
+					},
+				},
+			},
+		},
+		OverrideConfiguration: &types.OverrideConfiguration{
+			Document: &types.DocumentOverrideConfiguration{
+				Splitter: &types.SplitterConfiguration{
+					State: types.State("ENABLED"),
+				},
+				ModalityProcessing: &types.ModalityProcessingConfiguration{
+					State: types.State("ENABLED"),
+				},
+				SensitiveDataConfiguration: &types.SensitiveDataConfiguration{
+					DetectionMode: types.SensitiveDataDetectionMode("DETECTION"),
+					DetectionScope: []types.SensitiveDataDetectionScopeType{
+						types.SensitiveDataDetectionScopeType("STANDARD"),
+						types.SensitiveDataDetectionScopeType("STANDARD"),
+					},
+					PiiEntitiesConfiguration: &types.PIIEntitiesConfiguration{
+						PiiEntityTypes: []types.PIIEntityType{
+							types.PIIEntityType("ALL"),
+							types.PIIEntityType("ALL"),
+						},
+						RedactionMaskMode: types.PIIRedactionMaskMode("PII"),
+					},
+				},
+			},
+			Image: &types.ImageOverrideConfiguration{
+				ModalityProcessing: &types.ModalityProcessingConfiguration{
+					State: types.State("ENABLED"),
+				},
+				SensitiveDataConfiguration: &types.SensitiveDataConfiguration{
+					DetectionMode: types.SensitiveDataDetectionMode("DETECTION"),
+					DetectionScope: []types.SensitiveDataDetectionScopeType{
+						types.SensitiveDataDetectionScopeType("STANDARD"),
+						types.SensitiveDataDetectionScopeType("STANDARD"),
+					},
+					PiiEntitiesConfiguration: &types.PIIEntitiesConfiguration{
+						PiiEntityTypes: []types.PIIEntityType{
+							types.PIIEntityType("ALL"),
+							types.PIIEntityType("ALL"),
+						},
+						RedactionMaskMode: types.PIIRedactionMaskMode("PII"),
+					},
+				},
+			},
+			Video: &types.VideoOverrideConfiguration{
+				ModalityProcessing: &types.ModalityProcessingConfiguration{
+					State: types.State("ENABLED"),
+				},
+				SensitiveDataConfiguration: &types.SensitiveDataConfiguration{
+					DetectionMode: types.SensitiveDataDetectionMode("DETECTION"),
+					DetectionScope: []types.SensitiveDataDetectionScopeType{
+						types.SensitiveDataDetectionScopeType("STANDARD"),
+						types.SensitiveDataDetectionScopeType("STANDARD"),
+					},
+					PiiEntitiesConfiguration: &types.PIIEntitiesConfiguration{
+						PiiEntityTypes: []types.PIIEntityType{
+							types.PIIEntityType("ALL"),
+							types.PIIEntityType("ALL"),
+						},
+						RedactionMaskMode: types.PIIRedactionMaskMode("PII"),
+					},
+				},
+			},
+			Audio: &types.AudioOverrideConfiguration{
+				ModalityProcessing: &types.ModalityProcessingConfiguration{
+					State: types.State("ENABLED"),
+				},
+				LanguageConfiguration: &types.AudioLanguageConfiguration{
+					InputLanguages: []types.Language{
+						types.Language("EN"),
+						types.Language("EN"),
+					},
+					GenerativeOutputLanguage:  types.AudioGenerativeOutputLanguage("DEFAULT"),
+					IdentifyMultipleLanguages: ptr.Bool(true),
+				},
+				SensitiveDataConfiguration: &types.SensitiveDataConfiguration{
+					DetectionMode: types.SensitiveDataDetectionMode("DETECTION"),
+					DetectionScope: []types.SensitiveDataDetectionScopeType{
+						types.SensitiveDataDetectionScopeType("STANDARD"),
+						types.SensitiveDataDetectionScopeType("STANDARD"),
+					},
+					PiiEntitiesConfiguration: &types.PIIEntitiesConfiguration{
+						PiiEntityTypes: []types.PIIEntityType{
+							types.PIIEntityType("ALL"),
+							types.PIIEntityType("ALL"),
+						},
+						RedactionMaskMode: types.PIIRedactionMaskMode("PII"),
+					},
+				},
+			},
+			ModalityRouting: &types.ModalityRoutingConfiguration{
+				Jpeg: types.DesiredModality("IMAGE"),
+				Png:  types.DesiredModality("IMAGE"),
+				Mp4:  types.DesiredModality("IMAGE"),
+				Mov:  types.DesiredModality("IMAGE"),
+			},
+		},
+		DataAutomationLibraryConfiguration: &types.DataAutomationLibraryConfiguration{
+			Libraries: []types.DataAutomationLibraryItem{
+				{
+					LibraryArn: ptr.String("__LibraryArn__"),
+				},
+				{
+					LibraryArn: ptr.String("__LibraryArn__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			KmsEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -295,7 +599,10 @@ func TestCheckResponseSnapshot_DeleteBlueprint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBlueprint(context.Background(), &DeleteBlueprintInput{})
+	got, err := svc.DeleteBlueprint(context.Background(), &DeleteBlueprintInput{
+		BlueprintArn:     ptr.String("__BlueprintArn__"),
+		BlueprintVersion: ptr.String("__BlueprintVersion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -317,7 +624,9 @@ func TestCheckResponseSnapshot_DeleteDataAutomationLibrary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataAutomationLibrary(context.Background(), &DeleteDataAutomationLibraryInput{})
+	got, err := svc.DeleteDataAutomationLibrary(context.Background(), &DeleteDataAutomationLibraryInput{
+		LibraryArn: ptr.String("__LibraryArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -339,7 +648,9 @@ func TestCheckResponseSnapshot_DeleteDataAutomationProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataAutomationProject(context.Background(), &DeleteDataAutomationProjectInput{})
+	got, err := svc.DeleteDataAutomationProject(context.Background(), &DeleteDataAutomationProjectInput{
+		ProjectArn: ptr.String("__ProjectArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -396,7 +707,11 @@ func TestCheckResponseSnapshot_GetBlueprint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBlueprint(context.Background(), &GetBlueprintInput{})
+	got, err := svc.GetBlueprint(context.Background(), &GetBlueprintInput{
+		BlueprintArn:     ptr.String("__BlueprintArn__"),
+		BlueprintVersion: ptr.String("__BlueprintVersion__"),
+		BlueprintStage:   types.BlueprintStage("DEVELOPMENT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -425,7 +740,9 @@ func TestCheckResponseSnapshot_GetBlueprintOptimizationStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBlueprintOptimizationStatus(context.Background(), &GetBlueprintOptimizationStatusInput{})
+	got, err := svc.GetBlueprintOptimizationStatus(context.Background(), &GetBlueprintOptimizationStatusInput{
+		InvocationArn: ptr.String("__InvocationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -466,7 +783,9 @@ func TestCheckResponseSnapshot_GetDataAutomationLibrary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataAutomationLibrary(context.Background(), &GetDataAutomationLibraryInput{})
+	got, err := svc.GetDataAutomationLibrary(context.Background(), &GetDataAutomationLibraryInput{
+		LibraryArn: ptr.String("__LibraryArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -504,7 +823,11 @@ func TestCheckResponseSnapshot_GetDataAutomationLibraryEntity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataAutomationLibraryEntity(context.Background(), &GetDataAutomationLibraryEntityInput{})
+	got, err := svc.GetDataAutomationLibraryEntity(context.Background(), &GetDataAutomationLibraryEntityInput{
+		LibraryArn: ptr.String("__LibraryArn__"),
+		EntityType: types.EntityType("VOCABULARY"),
+		EntityId:   ptr.String("__EntityId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -537,7 +860,10 @@ func TestCheckResponseSnapshot_GetDataAutomationLibraryIngestionJob(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataAutomationLibraryIngestionJob(context.Background(), &GetDataAutomationLibraryIngestionJobInput{})
+	got, err := svc.GetDataAutomationLibraryIngestionJob(context.Background(), &GetDataAutomationLibraryIngestionJobInput{
+		LibraryArn: ptr.String("__LibraryArn__"),
+		JobArn:     ptr.String("__JobArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -803,7 +1129,10 @@ func TestCheckResponseSnapshot_GetDataAutomationProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataAutomationProject(context.Background(), &GetDataAutomationProjectInput{})
+	got, err := svc.GetDataAutomationProject(context.Background(), &GetDataAutomationProjectInput{
+		ProjectArn:   ptr.String("__ProjectArn__"),
+		ProjectStage: types.DataAutomationProjectStage("DEVELOPMENT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -824,7 +1153,57 @@ func TestCheckResponseSnapshot_InvokeBlueprintOptimizationAsync(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InvokeBlueprintOptimizationAsync(context.Background(), &InvokeBlueprintOptimizationAsyncInput{})
+	got, err := svc.InvokeBlueprintOptimizationAsync(context.Background(), &InvokeBlueprintOptimizationAsyncInput{
+		Blueprint: &types.BlueprintOptimizationObject{
+			BlueprintArn: ptr.String("__BlueprintArn__"),
+			Stage:        types.BlueprintStage("DEVELOPMENT"),
+		},
+		Samples: []types.BlueprintOptimizationSample{
+			{
+				AssetS3Object: &types.S3Object{
+					S3Uri:   ptr.String("__S3Uri__"),
+					Version: ptr.String("__Version__"),
+				},
+				GroundTruthS3Object: &types.S3Object{
+					S3Uri:   ptr.String("__S3Uri__"),
+					Version: ptr.String("__Version__"),
+				},
+			},
+			{
+				AssetS3Object: &types.S3Object{
+					S3Uri:   ptr.String("__S3Uri__"),
+					Version: ptr.String("__Version__"),
+				},
+				GroundTruthS3Object: &types.S3Object{
+					S3Uri:   ptr.String("__S3Uri__"),
+					Version: ptr.String("__Version__"),
+				},
+			},
+		},
+		OutputConfiguration: &types.BlueprintOptimizationOutputConfiguration{
+			S3Object: &types.S3Object{
+				S3Uri:   ptr.String("__S3Uri__"),
+				Version: ptr.String("__Version__"),
+			},
+		},
+		DataAutomationProfileArn: ptr.String("__DataAutomationProfileArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			KmsEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -845,7 +1224,74 @@ func TestCheckResponseSnapshot_InvokeDataAutomationLibraryIngestionJob(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InvokeDataAutomationLibraryIngestionJob(context.Background(), &InvokeDataAutomationLibraryIngestionJobInput{})
+	got, err := svc.InvokeDataAutomationLibraryIngestionJob(context.Background(), &InvokeDataAutomationLibraryIngestionJobInput{
+		LibraryArn:  ptr.String("__LibraryArn__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		InputConfiguration: &types.InputConfiguration{
+			S3Object: &types.S3Object{
+				S3Uri:   ptr.String("__S3Uri__"),
+				Version: ptr.String("__Version__"),
+			},
+			InlinePayload: &types.InlinePayloadMemberUpsertEntitiesInfo{
+				Value: []types.UpsertEntityInfo{
+					&types.UpsertEntityInfoMemberVocabulary{
+						Value: types.VocabularyEntityInfo{
+							EntityId:    ptr.String("__EntityId__"),
+							Description: ptr.String("__Description__"),
+							Language:    types.Language("EN"),
+							Phrases: []types.Phrase{
+								{
+									Text:          ptr.String("__Text__"),
+									DisplayAsText: ptr.String("__DisplayAsText__"),
+								},
+								{
+									Text:          ptr.String("__Text__"),
+									DisplayAsText: ptr.String("__DisplayAsText__"),
+								},
+							},
+						},
+					},
+					&types.UpsertEntityInfoMemberVocabulary{
+						Value: types.VocabularyEntityInfo{
+							EntityId:    ptr.String("__EntityId__"),
+							Description: ptr.String("__Description__"),
+							Language:    types.Language("EN"),
+							Phrases: []types.Phrase{
+								{
+									Text:          ptr.String("__Text__"),
+									DisplayAsText: ptr.String("__DisplayAsText__"),
+								},
+								{
+									Text:          ptr.String("__Text__"),
+									DisplayAsText: ptr.String("__DisplayAsText__"),
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		EntityType:    types.EntityType("VOCABULARY"),
+		OperationType: types.LibraryIngestionJobOperationType("UPSERT"),
+		OutputConfiguration: &types.OutputConfiguration{
+			S3Uri: ptr.String("__S3Uri__"),
+		},
+		NotificationConfiguration: &types.NotificationConfiguration{
+			EventBridgeConfiguration: &types.EventBridgeConfiguration{
+				EventBridgeEnabled: ptr.Bool(true),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -884,7 +1330,17 @@ func TestCheckResponseSnapshot_ListBlueprints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBlueprints(context.Background(), &ListBlueprintsInput{})
+	got, err := svc.ListBlueprints(context.Background(), &ListBlueprintsInput{
+		BlueprintArn:         ptr.String("__BlueprintArn__"),
+		ResourceOwner:        types.ResourceOwner("SERVICE"),
+		BlueprintStageFilter: types.BlueprintStageFilter("DEVELOPMENT"),
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+		ProjectFilter: &types.DataAutomationProjectFilter{
+			ProjectArn:   ptr.String("__ProjectArn__"),
+			ProjectStage: types.DataAutomationProjectStage("DEVELOPMENT"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -917,7 +1373,14 @@ func TestCheckResponseSnapshot_ListDataAutomationLibraries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataAutomationLibraries(context.Background(), &ListDataAutomationLibrariesInput{})
+	got, err := svc.ListDataAutomationLibraries(context.Background(), &ListDataAutomationLibrariesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		ProjectFilter: &types.DataAutomationProjectFilter{
+			ProjectArn:   ptr.String("__ProjectArn__"),
+			ProjectStage: types.DataAutomationProjectStage("DEVELOPMENT"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -958,7 +1421,12 @@ func TestCheckResponseSnapshot_ListDataAutomationLibraryEntities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataAutomationLibraryEntities(context.Background(), &ListDataAutomationLibraryEntitiesInput{})
+	got, err := svc.ListDataAutomationLibraryEntities(context.Background(), &ListDataAutomationLibraryEntitiesInput{
+		LibraryArn: ptr.String("__LibraryArn__"),
+		EntityType: types.EntityType("VOCABULARY"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -997,7 +1465,11 @@ func TestCheckResponseSnapshot_ListDataAutomationLibraryIngestionJobs(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataAutomationLibraryIngestionJobs(context.Background(), &ListDataAutomationLibraryIngestionJobsInput{})
+	got, err := svc.ListDataAutomationLibraryIngestionJobs(context.Background(), &ListDataAutomationLibraryIngestionJobsInput{
+		LibraryArn: ptr.String("__LibraryArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1034,7 +1506,20 @@ func TestCheckResponseSnapshot_ListDataAutomationProjects(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataAutomationProjects(context.Background(), &ListDataAutomationProjectsInput{})
+	got, err := svc.ListDataAutomationProjects(context.Background(), &ListDataAutomationProjectsInput{
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+		ProjectStageFilter: types.DataAutomationProjectStageFilter("DEVELOPMENT"),
+		BlueprintFilter: &types.BlueprintFilter{
+			BlueprintArn:     ptr.String("__BlueprintArn__"),
+			BlueprintVersion: ptr.String("__BlueprintVersion__"),
+			BlueprintStage:   types.BlueprintStage("DEVELOPMENT"),
+		},
+		ResourceOwner: types.ResourceOwner("SERVICE"),
+		LibraryFilter: &types.DataAutomationLibraryFilter{
+			LibraryArn: ptr.String("__LibraryArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1064,7 +1549,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1083,7 +1570,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1102,7 +1601,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1159,7 +1664,17 @@ func TestCheckResponseSnapshot_UpdateBlueprint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateBlueprint(context.Background(), &UpdateBlueprintInput{})
+	got, err := svc.UpdateBlueprint(context.Background(), &UpdateBlueprintInput{
+		BlueprintArn:   ptr.String("__BlueprintArn__"),
+		Schema:         ptr.String("__Schema__"),
+		BlueprintStage: types.BlueprintStage("DEVELOPMENT"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			KmsEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1181,7 +1696,11 @@ func TestCheckResponseSnapshot_UpdateDataAutomationLibrary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataAutomationLibrary(context.Background(), &UpdateDataAutomationLibraryInput{})
+	got, err := svc.UpdateDataAutomationLibrary(context.Background(), &UpdateDataAutomationLibraryInput{
+		LibraryArn:         ptr.String("__LibraryArn__"),
+		LibraryDescription: ptr.String("__LibraryDescription__"),
+		ClientToken:        ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1204,7 +1723,249 @@ func TestCheckResponseSnapshot_UpdateDataAutomationProject(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataAutomationProject(context.Background(), &UpdateDataAutomationProjectInput{})
+	got, err := svc.UpdateDataAutomationProject(context.Background(), &UpdateDataAutomationProjectInput{
+		ProjectArn:         ptr.String("__ProjectArn__"),
+		ProjectStage:       types.DataAutomationProjectStage("DEVELOPMENT"),
+		ProjectDescription: ptr.String("__ProjectDescription__"),
+		StandardOutputConfiguration: &types.StandardOutputConfiguration{
+			Document: &types.DocumentStandardOutputConfiguration{
+				Extraction: &types.DocumentStandardExtraction{
+					Granularity: &types.DocumentExtractionGranularity{
+						Types: []types.DocumentExtractionGranularityType{
+							types.DocumentExtractionGranularityType("DOCUMENT"),
+							types.DocumentExtractionGranularityType("DOCUMENT"),
+						},
+					},
+					BoundingBox: &types.DocumentBoundingBox{
+						State: types.State("ENABLED"),
+					},
+				},
+				GenerativeField: &types.DocumentStandardGenerativeField{
+					State: types.State("ENABLED"),
+				},
+				OutputFormat: &types.DocumentOutputFormat{
+					TextFormat: &types.DocumentOutputTextFormat{
+						Types: []types.DocumentOutputTextFormatType{
+							types.DocumentOutputTextFormatType("PLAIN_TEXT"),
+							types.DocumentOutputTextFormatType("PLAIN_TEXT"),
+						},
+					},
+					AdditionalFileFormat: &types.DocumentOutputAdditionalFileFormat{
+						State: types.State("ENABLED"),
+					},
+				},
+			},
+			Image: &types.ImageStandardOutputConfiguration{
+				Extraction: &types.ImageStandardExtraction{
+					Category: &types.ImageExtractionCategory{
+						State: types.State("ENABLED"),
+						Types: []types.ImageExtractionCategoryType{
+							types.ImageExtractionCategoryType("CONTENT_MODERATION"),
+							types.ImageExtractionCategoryType("CONTENT_MODERATION"),
+						},
+					},
+					BoundingBox: &types.ImageBoundingBox{
+						State: types.State("ENABLED"),
+					},
+				},
+				GenerativeField: &types.ImageStandardGenerativeField{
+					State: types.State("ENABLED"),
+					Types: []types.ImageStandardGenerativeFieldType{
+						types.ImageStandardGenerativeFieldType("IMAGE_SUMMARY"),
+						types.ImageStandardGenerativeFieldType("IMAGE_SUMMARY"),
+					},
+				},
+			},
+			Video: &types.VideoStandardOutputConfiguration{
+				Extraction: &types.VideoStandardExtraction{
+					Category: &types.VideoExtractionCategory{
+						State: types.State("ENABLED"),
+						Types: []types.VideoExtractionCategoryType{
+							types.VideoExtractionCategoryType("CONTENT_MODERATION"),
+							types.VideoExtractionCategoryType("CONTENT_MODERATION"),
+						},
+					},
+					BoundingBox: &types.VideoBoundingBox{
+						State: types.State("ENABLED"),
+					},
+				},
+				GenerativeField: &types.VideoStandardGenerativeField{
+					State: types.State("ENABLED"),
+					Types: []types.VideoStandardGenerativeFieldType{
+						types.VideoStandardGenerativeFieldType("VIDEO_SUMMARY"),
+						types.VideoStandardGenerativeFieldType("VIDEO_SUMMARY"),
+					},
+				},
+			},
+			Audio: &types.AudioStandardOutputConfiguration{
+				Extraction: &types.AudioStandardExtraction{
+					Category: &types.AudioExtractionCategory{
+						State: types.State("ENABLED"),
+						Types: []types.AudioExtractionCategoryType{
+							types.AudioExtractionCategoryType("AUDIO_CONTENT_MODERATION"),
+							types.AudioExtractionCategoryType("AUDIO_CONTENT_MODERATION"),
+						},
+						TypeConfiguration: &types.AudioExtractionCategoryTypeConfiguration{
+							Transcript: &types.TranscriptConfiguration{
+								SpeakerLabeling: &types.SpeakerLabelingConfiguration{
+									State: types.State("ENABLED"),
+								},
+								ChannelLabeling: &types.ChannelLabelingConfiguration{
+									State: types.State("ENABLED"),
+								},
+							},
+						},
+					},
+				},
+				GenerativeField: &types.AudioStandardGenerativeField{
+					State: types.State("ENABLED"),
+					Types: []types.AudioStandardGenerativeFieldType{
+						types.AudioStandardGenerativeFieldType("AUDIO_SUMMARY"),
+						types.AudioStandardGenerativeFieldType("AUDIO_SUMMARY"),
+					},
+				},
+			},
+		},
+		CustomOutputConfiguration: &types.CustomOutputConfiguration{
+			Blueprints: []types.BlueprintItem{
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+					BlueprintStage:   types.BlueprintStage("DEVELOPMENT"),
+				},
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+					BlueprintStage:   types.BlueprintStage("DEVELOPMENT"),
+				},
+			},
+			Document: &types.DocumentCustomOutputConfiguration{
+				FallbackBlueprints: []types.BlueprintItem{
+					{
+						BlueprintArn:     ptr.String("__BlueprintArn__"),
+						BlueprintVersion: ptr.String("__BlueprintVersion__"),
+						BlueprintStage:   types.BlueprintStage("DEVELOPMENT"),
+					},
+					{
+						BlueprintArn:     ptr.String("__BlueprintArn__"),
+						BlueprintVersion: ptr.String("__BlueprintVersion__"),
+						BlueprintStage:   types.BlueprintStage("DEVELOPMENT"),
+					},
+				},
+			},
+		},
+		OverrideConfiguration: &types.OverrideConfiguration{
+			Document: &types.DocumentOverrideConfiguration{
+				Splitter: &types.SplitterConfiguration{
+					State: types.State("ENABLED"),
+				},
+				ModalityProcessing: &types.ModalityProcessingConfiguration{
+					State: types.State("ENABLED"),
+				},
+				SensitiveDataConfiguration: &types.SensitiveDataConfiguration{
+					DetectionMode: types.SensitiveDataDetectionMode("DETECTION"),
+					DetectionScope: []types.SensitiveDataDetectionScopeType{
+						types.SensitiveDataDetectionScopeType("STANDARD"),
+						types.SensitiveDataDetectionScopeType("STANDARD"),
+					},
+					PiiEntitiesConfiguration: &types.PIIEntitiesConfiguration{
+						PiiEntityTypes: []types.PIIEntityType{
+							types.PIIEntityType("ALL"),
+							types.PIIEntityType("ALL"),
+						},
+						RedactionMaskMode: types.PIIRedactionMaskMode("PII"),
+					},
+				},
+			},
+			Image: &types.ImageOverrideConfiguration{
+				ModalityProcessing: &types.ModalityProcessingConfiguration{
+					State: types.State("ENABLED"),
+				},
+				SensitiveDataConfiguration: &types.SensitiveDataConfiguration{
+					DetectionMode: types.SensitiveDataDetectionMode("DETECTION"),
+					DetectionScope: []types.SensitiveDataDetectionScopeType{
+						types.SensitiveDataDetectionScopeType("STANDARD"),
+						types.SensitiveDataDetectionScopeType("STANDARD"),
+					},
+					PiiEntitiesConfiguration: &types.PIIEntitiesConfiguration{
+						PiiEntityTypes: []types.PIIEntityType{
+							types.PIIEntityType("ALL"),
+							types.PIIEntityType("ALL"),
+						},
+						RedactionMaskMode: types.PIIRedactionMaskMode("PII"),
+					},
+				},
+			},
+			Video: &types.VideoOverrideConfiguration{
+				ModalityProcessing: &types.ModalityProcessingConfiguration{
+					State: types.State("ENABLED"),
+				},
+				SensitiveDataConfiguration: &types.SensitiveDataConfiguration{
+					DetectionMode: types.SensitiveDataDetectionMode("DETECTION"),
+					DetectionScope: []types.SensitiveDataDetectionScopeType{
+						types.SensitiveDataDetectionScopeType("STANDARD"),
+						types.SensitiveDataDetectionScopeType("STANDARD"),
+					},
+					PiiEntitiesConfiguration: &types.PIIEntitiesConfiguration{
+						PiiEntityTypes: []types.PIIEntityType{
+							types.PIIEntityType("ALL"),
+							types.PIIEntityType("ALL"),
+						},
+						RedactionMaskMode: types.PIIRedactionMaskMode("PII"),
+					},
+				},
+			},
+			Audio: &types.AudioOverrideConfiguration{
+				ModalityProcessing: &types.ModalityProcessingConfiguration{
+					State: types.State("ENABLED"),
+				},
+				LanguageConfiguration: &types.AudioLanguageConfiguration{
+					InputLanguages: []types.Language{
+						types.Language("EN"),
+						types.Language("EN"),
+					},
+					GenerativeOutputLanguage:  types.AudioGenerativeOutputLanguage("DEFAULT"),
+					IdentifyMultipleLanguages: ptr.Bool(true),
+				},
+				SensitiveDataConfiguration: &types.SensitiveDataConfiguration{
+					DetectionMode: types.SensitiveDataDetectionMode("DETECTION"),
+					DetectionScope: []types.SensitiveDataDetectionScopeType{
+						types.SensitiveDataDetectionScopeType("STANDARD"),
+						types.SensitiveDataDetectionScopeType("STANDARD"),
+					},
+					PiiEntitiesConfiguration: &types.PIIEntitiesConfiguration{
+						PiiEntityTypes: []types.PIIEntityType{
+							types.PIIEntityType("ALL"),
+							types.PIIEntityType("ALL"),
+						},
+						RedactionMaskMode: types.PIIRedactionMaskMode("PII"),
+					},
+				},
+			},
+			ModalityRouting: &types.ModalityRoutingConfiguration{
+				Jpeg: types.DesiredModality("IMAGE"),
+				Png:  types.DesiredModality("IMAGE"),
+				Mp4:  types.DesiredModality("IMAGE"),
+				Mov:  types.DesiredModality("IMAGE"),
+			},
+		},
+		DataAutomationLibraryConfiguration: &types.DataAutomationLibraryConfiguration{
+			Libraries: []types.DataAutomationLibraryItem{
+				{
+					LibraryArn: ptr.String("__LibraryArn__"),
+				},
+				{
+					LibraryArn: ptr.String("__LibraryArn__"),
+				},
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			KmsEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1225,7 +1986,12 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyBlueprintStage(context.Background(), &CopyBlueprintStageInput{})
+	_, opErr := svc.CopyBlueprintStage(context.Background(), &CopyBlueprintStageInput{
+		BlueprintArn: ptr.String("__BlueprintArn__"),
+		SourceStage:  types.BlueprintStage("DEVELOPMENT"),
+		TargetStage:  types.BlueprintStage("DEVELOPMENT"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1250,7 +2016,29 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBlueprint(context.Background(), &CreateBlueprintInput{})
+	_, opErr := svc.CreateBlueprint(context.Background(), &CreateBlueprintInput{
+		BlueprintName:  ptr.String("__BlueprintName__"),
+		Type:           types.Type("DOCUMENT"),
+		BlueprintStage: types.BlueprintStage("DEVELOPMENT"),
+		Schema:         ptr.String("__Schema__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			KmsEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1275,7 +2063,12 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyBlueprintStage(context.Background(), &CopyBlueprintStageInput{})
+	_, opErr := svc.CopyBlueprintStage(context.Background(), &CopyBlueprintStageInput{
+		BlueprintArn: ptr.String("__BlueprintArn__"),
+		SourceStage:  types.BlueprintStage("DEVELOPMENT"),
+		TargetStage:  types.BlueprintStage("DEVELOPMENT"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1300,7 +2093,12 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyBlueprintStage(context.Background(), &CopyBlueprintStageInput{})
+	_, opErr := svc.CopyBlueprintStage(context.Background(), &CopyBlueprintStageInput{
+		BlueprintArn: ptr.String("__BlueprintArn__"),
+		SourceStage:  types.BlueprintStage("DEVELOPMENT"),
+		TargetStage:  types.BlueprintStage("DEVELOPMENT"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1325,7 +2123,29 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBlueprint(context.Background(), &CreateBlueprintInput{})
+	_, opErr := svc.CreateBlueprint(context.Background(), &CreateBlueprintInput{
+		BlueprintName:  ptr.String("__BlueprintName__"),
+		Type:           types.Type("DOCUMENT"),
+		BlueprintStage: types.BlueprintStage("DEVELOPMENT"),
+		Schema:         ptr.String("__Schema__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			KmsEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1350,7 +2170,12 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyBlueprintStage(context.Background(), &CopyBlueprintStageInput{})
+	_, opErr := svc.CopyBlueprintStage(context.Background(), &CopyBlueprintStageInput{
+		BlueprintArn: ptr.String("__BlueprintArn__"),
+		SourceStage:  types.BlueprintStage("DEVELOPMENT"),
+		TargetStage:  types.BlueprintStage("DEVELOPMENT"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1385,7 +2210,12 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CopyBlueprintStage(context.Background(), &CopyBlueprintStageInput{})
+	_, opErr := svc.CopyBlueprintStage(context.Background(), &CopyBlueprintStageInput{
+		BlueprintArn: ptr.String("__BlueprintArn__"),
+		SourceStage:  types.BlueprintStage("DEVELOPMENT"),
+		TargetStage:  types.BlueprintStage("DEVELOPMENT"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

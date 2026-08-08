@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"componentSummaryList":[{"arn":"__Arn__","changeDescription":"__ChangeDescription__","dateCreated":"__DateCreated__","description":"__Description__","name":"__Name__","obfuscate":true,"owner":"__Owner__","platform":"Windows","publisher":"__Publisher__","state":{"reason":"__Reason__","status":"DEPRECATED"},"supportedOsVersions":["__Member__","__Member__"],"tags":{"key0":"__Value__"},"type":"BUILD","version":"__Version__"},{"arn":"__Arn__","changeDescription":"__ChangeDescription__","dateCreated":"__DateCreated__","description":"__Description__","name":"__Name__","obfuscate":true,"owner":"__Owner__","platform":"Windows","publisher":"__Publisher__","state":{"reason":"__Reason__","status":"DEPRECATED"},"supportedOsVersions":["__Member__","__Member__"],"tags":{"key0":"__Value__"},"type":"BUILD","version":"__Version__"}],"nextToken":"__NextToken__","requestId":"__RequestId__"}

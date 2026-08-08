@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.ListConfigurationRecorders
+
+{"ConfigurationRecorderSummaries":[{"arn":"__Arn__","name":"__Name__","provider":"AZURE","recordingScope":"INTERNAL","servicePrincipal":"__ServicePrincipal__"},{"arn":"__Arn__","name":"__Name__","provider":"AZURE","recordingScope":"INTERNAL","servicePrincipal":"__ServicePrincipal__"}],"NextToken":"__NextToken__"}

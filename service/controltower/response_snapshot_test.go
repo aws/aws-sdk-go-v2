@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/controltower/document"
 	"github.com/aws/aws-sdk-go-v2/service/controltower/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -120,7 +121,17 @@ func TestCheckResponseSnapshot_CreateLandingZone(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLandingZone(context.Background(), &CreateLandingZoneInput{})
+	got, err := svc.CreateLandingZone(context.Background(), &CreateLandingZoneInput{
+		Version: ptr.String("__Version__"),
+		RemediationTypes: []types.RemediationType{
+			types.RemediationType("INHERITANCE_DRIFT"),
+			types.RemediationType("INHERITANCE_DRIFT"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Manifest: document.NewLazyDocument("__Document__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -141,7 +152,9 @@ func TestCheckResponseSnapshot_DeleteLandingZone(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLandingZone(context.Background(), &DeleteLandingZoneInput{})
+	got, err := svc.DeleteLandingZone(context.Background(), &DeleteLandingZoneInput{
+		LandingZoneIdentifier: ptr.String("__LandingZoneIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -162,7 +175,9 @@ func TestCheckResponseSnapshot_DisableBaseline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableBaseline(context.Background(), &DisableBaselineInput{})
+	got, err := svc.DisableBaseline(context.Background(), &DisableBaselineInput{
+		EnabledBaselineIdentifier: ptr.String("__EnabledBaselineIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -183,7 +198,11 @@ func TestCheckResponseSnapshot_DisableControl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableControl(context.Background(), &DisableControlInput{})
+	got, err := svc.DisableControl(context.Background(), &DisableControlInput{
+		ControlIdentifier:        ptr.String("__ControlIdentifier__"),
+		TargetIdentifier:         ptr.String("__TargetIdentifier__"),
+		EnabledControlIdentifier: ptr.String("__EnabledControlIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -205,7 +224,24 @@ func TestCheckResponseSnapshot_EnableBaseline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableBaseline(context.Background(), &EnableBaselineInput{})
+	got, err := svc.EnableBaseline(context.Background(), &EnableBaselineInput{
+		BaselineVersion: ptr.String("__BaselineVersion__"),
+		Parameters: []types.EnabledBaselineParameter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: document.NewLazyDocument("__Document__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: document.NewLazyDocument("__Document__"),
+			},
+		},
+		BaselineIdentifier: ptr.String("__BaselineIdentifier__"),
+		TargetIdentifier:   ptr.String("__TargetIdentifier__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -227,7 +263,23 @@ func TestCheckResponseSnapshot_EnableControl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableControl(context.Background(), &EnableControlInput{})
+	got, err := svc.EnableControl(context.Background(), &EnableControlInput{
+		ControlIdentifier: ptr.String("__ControlIdentifier__"),
+		TargetIdentifier:  ptr.String("__TargetIdentifier__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Parameters: []types.EnabledControlParameter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: document.NewLazyDocument("__Document__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: document.NewLazyDocument("__Document__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -250,7 +302,9 @@ func TestCheckResponseSnapshot_GetBaseline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBaseline(context.Background(), &GetBaselineInput{})
+	got, err := svc.GetBaseline(context.Background(), &GetBaselineInput{
+		BaselineIdentifier: ptr.String("__BaselineIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -278,7 +332,9 @@ func TestCheckResponseSnapshot_GetBaselineOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBaselineOperation(context.Background(), &GetBaselineOperationInput{})
+	got, err := svc.GetBaselineOperation(context.Background(), &GetBaselineOperationInput{
+		OperationIdentifier: ptr.String("__OperationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -309,7 +365,9 @@ func TestCheckResponseSnapshot_GetControlOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetControlOperation(context.Background(), &GetControlOperationInput{})
+	got, err := svc.GetControlOperation(context.Background(), &GetControlOperationInput{
+		OperationIdentifier: ptr.String("__OperationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -340,11 +398,11 @@ func TestCheckResponseSnapshot_GetEnabledBaseline(t *testing.T) {
 			Parameters: []types.EnabledBaselineParameterSummary{
 				{
 					Key:   ptr.String("__Key__"),
-					Value: nil,
+					Value: document.NewLazyDocument("__Document__"),
 				},
 				{
 					Key:   ptr.String("__Key__"),
-					Value: nil,
+					Value: document.NewLazyDocument("__Document__"),
 				},
 			},
 		},
@@ -357,7 +415,9 @@ func TestCheckResponseSnapshot_GetEnabledBaseline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEnabledBaseline(context.Background(), &GetEnabledBaselineInput{})
+	got, err := svc.GetEnabledBaseline(context.Background(), &GetEnabledBaselineInput{
+		EnabledBaselineIdentifier: ptr.String("__EnabledBaselineIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -399,11 +459,11 @@ func TestCheckResponseSnapshot_GetEnabledControl(t *testing.T) {
 			Parameters: []types.EnabledControlParameterSummary{
 				{
 					Key:   ptr.String("__Key__"),
-					Value: nil,
+					Value: document.NewLazyDocument("__Document__"),
 				},
 				{
 					Key:   ptr.String("__Key__"),
-					Value: nil,
+					Value: document.NewLazyDocument("__Document__"),
 				},
 			},
 		},
@@ -416,7 +476,9 @@ func TestCheckResponseSnapshot_GetEnabledControl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEnabledControl(context.Background(), &GetEnabledControlInput{})
+	got, err := svc.GetEnabledControl(context.Background(), &GetEnabledControlInput{
+		EnabledControlIdentifier: ptr.String("__EnabledControlIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -439,7 +501,7 @@ func TestCheckResponseSnapshot_GetLandingZone(t *testing.T) {
 			DriftStatus: &types.LandingZoneDriftStatusSummary{
 				Status: types.LandingZoneDriftStatus("DRIFTED"),
 			},
-			Manifest: nil,
+			Manifest: document.NewLazyDocument("__Document__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetLandingZone.response")
@@ -450,7 +512,9 @@ func TestCheckResponseSnapshot_GetLandingZone(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLandingZone(context.Background(), &GetLandingZoneInput{})
+	got, err := svc.GetLandingZone(context.Background(), &GetLandingZoneInput{
+		LandingZoneIdentifier: ptr.String("__LandingZoneIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -478,7 +542,9 @@ func TestCheckResponseSnapshot_GetLandingZoneOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLandingZoneOperation(context.Background(), &GetLandingZoneOperationInput{})
+	got, err := svc.GetLandingZoneOperation(context.Background(), &GetLandingZoneOperationInput{
+		OperationIdentifier: ptr.String("__OperationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -511,7 +577,10 @@ func TestCheckResponseSnapshot_ListBaselines(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBaselines(context.Background(), &ListBaselinesInput{})
+	got, err := svc.ListBaselines(context.Background(), &ListBaselinesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -556,7 +625,32 @@ func TestCheckResponseSnapshot_ListControlOperations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListControlOperations(context.Background(), &ListControlOperationsInput{})
+	got, err := svc.ListControlOperations(context.Background(), &ListControlOperationsInput{
+		Filter: &types.ControlOperationFilter{
+			ControlIdentifiers: []string{
+				"__Member__",
+				"__Member__",
+			},
+			TargetIdentifiers: []string{
+				"__Member__",
+				"__Member__",
+			},
+			EnabledControlIdentifiers: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Statuses: []types.ControlOperationStatus{
+				types.ControlOperationStatus("SUCCEEDED"),
+				types.ControlOperationStatus("SUCCEEDED"),
+			},
+			ControlOperationTypes: []types.ControlOperationType{
+				types.ControlOperationType("ENABLE_CONTROL"),
+				types.ControlOperationType("ENABLE_CONTROL"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -615,7 +709,33 @@ func TestCheckResponseSnapshot_ListEnabledBaselines(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEnabledBaselines(context.Background(), &ListEnabledBaselinesInput{})
+	got, err := svc.ListEnabledBaselines(context.Background(), &ListEnabledBaselinesInput{
+		Filter: &types.EnabledBaselineFilter{
+			TargetIdentifiers: []string{
+				"__Member__",
+				"__Member__",
+			},
+			BaselineIdentifiers: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ParentIdentifiers: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Statuses: []types.EnablementStatus{
+				types.EnablementStatus("SUCCEEDED"),
+				types.EnablementStatus("SUCCEEDED"),
+			},
+			InheritanceDriftStatuses: []types.EnabledBaselineDriftStatus{
+				types.EnabledBaselineDriftStatus("IN_SYNC"),
+				types.EnabledBaselineDriftStatus("IN_SYNC"),
+			},
+		},
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		IncludeChildren: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -680,7 +800,38 @@ func TestCheckResponseSnapshot_ListEnabledControls(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEnabledControls(context.Background(), &ListEnabledControlsInput{})
+	got, err := svc.ListEnabledControls(context.Background(), &ListEnabledControlsInput{
+		TargetIdentifier: ptr.String("__TargetIdentifier__"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+		Filter: &types.EnabledControlFilter{
+			ControlIdentifiers: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Statuses: []types.EnablementStatus{
+				types.EnablementStatus("SUCCEEDED"),
+				types.EnablementStatus("SUCCEEDED"),
+			},
+			DriftStatuses: []types.DriftStatus{
+				types.DriftStatus("DRIFTED"),
+				types.DriftStatus("DRIFTED"),
+			},
+			ParentIdentifiers: []string{
+				"__Member__",
+				"__Member__",
+			},
+			InheritanceDriftStatuses: []types.DriftStatus{
+				types.DriftStatus("DRIFTED"),
+				types.DriftStatus("DRIFTED"),
+			},
+			ResourceDriftStatuses: []types.DriftStatus{
+				types.DriftStatus("DRIFTED"),
+				types.DriftStatus("DRIFTED"),
+			},
+		},
+		IncludeChildren: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -713,7 +864,20 @@ func TestCheckResponseSnapshot_ListLandingZoneOperations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLandingZoneOperations(context.Background(), &ListLandingZoneOperationsInput{})
+	got, err := svc.ListLandingZoneOperations(context.Background(), &ListLandingZoneOperationsInput{
+		Filter: &types.LandingZoneOperationFilter{
+			Types: []types.LandingZoneOperationType{
+				types.LandingZoneOperationType("DELETE"),
+				types.LandingZoneOperationType("DELETE"),
+			},
+			Statuses: []types.LandingZoneOperationStatus{
+				types.LandingZoneOperationStatus("SUCCEEDED"),
+				types.LandingZoneOperationStatus("SUCCEEDED"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -742,7 +906,10 @@ func TestCheckResponseSnapshot_ListLandingZones(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLandingZones(context.Background(), &ListLandingZonesInput{})
+	got, err := svc.ListLandingZones(context.Background(), &ListLandingZonesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -765,7 +932,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -786,7 +955,9 @@ func TestCheckResponseSnapshot_ResetEnabledBaseline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResetEnabledBaseline(context.Background(), &ResetEnabledBaselineInput{})
+	got, err := svc.ResetEnabledBaseline(context.Background(), &ResetEnabledBaselineInput{
+		EnabledBaselineIdentifier: ptr.String("__EnabledBaselineIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -807,7 +978,9 @@ func TestCheckResponseSnapshot_ResetEnabledControl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResetEnabledControl(context.Background(), &ResetEnabledControlInput{})
+	got, err := svc.ResetEnabledControl(context.Background(), &ResetEnabledControlInput{
+		EnabledControlIdentifier: ptr.String("__EnabledControlIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -828,7 +1001,9 @@ func TestCheckResponseSnapshot_ResetLandingZone(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ResetLandingZone(context.Background(), &ResetLandingZoneInput{})
+	got, err := svc.ResetLandingZone(context.Background(), &ResetLandingZoneInput{
+		LandingZoneIdentifier: ptr.String("__LandingZoneIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -847,7 +1022,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -866,7 +1046,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -887,7 +1073,20 @@ func TestCheckResponseSnapshot_UpdateEnabledBaseline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEnabledBaseline(context.Background(), &UpdateEnabledBaselineInput{})
+	got, err := svc.UpdateEnabledBaseline(context.Background(), &UpdateEnabledBaselineInput{
+		BaselineVersion: ptr.String("__BaselineVersion__"),
+		Parameters: []types.EnabledBaselineParameter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: document.NewLazyDocument("__Document__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: document.NewLazyDocument("__Document__"),
+			},
+		},
+		EnabledBaselineIdentifier: ptr.String("__EnabledBaselineIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -908,7 +1107,19 @@ func TestCheckResponseSnapshot_UpdateEnabledControl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateEnabledControl(context.Background(), &UpdateEnabledControlInput{})
+	got, err := svc.UpdateEnabledControl(context.Background(), &UpdateEnabledControlInput{
+		Parameters: []types.EnabledControlParameter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: document.NewLazyDocument("__Document__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: document.NewLazyDocument("__Document__"),
+			},
+		},
+		EnabledControlIdentifier: ptr.String("__EnabledControlIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -929,7 +1140,15 @@ func TestCheckResponseSnapshot_UpdateLandingZone(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLandingZone(context.Background(), &UpdateLandingZoneInput{})
+	got, err := svc.UpdateLandingZone(context.Background(), &UpdateLandingZoneInput{
+		Version: ptr.String("__Version__"),
+		RemediationTypes: []types.RemediationType{
+			types.RemediationType("INHERITANCE_DRIFT"),
+			types.RemediationType("INHERITANCE_DRIFT"),
+		},
+		LandingZoneIdentifier: ptr.String("__LandingZoneIdentifier__"),
+		Manifest:              document.NewLazyDocument("__Document__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -950,7 +1169,17 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLandingZone(context.Background(), &CreateLandingZoneInput{})
+	_, opErr := svc.CreateLandingZone(context.Background(), &CreateLandingZoneInput{
+		Version: ptr.String("__Version__"),
+		RemediationTypes: []types.RemediationType{
+			types.RemediationType("INHERITANCE_DRIFT"),
+			types.RemediationType("INHERITANCE_DRIFT"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Manifest: document.NewLazyDocument("__Document__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -975,7 +1204,17 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLandingZone(context.Background(), &CreateLandingZoneInput{})
+	_, opErr := svc.CreateLandingZone(context.Background(), &CreateLandingZoneInput{
+		Version: ptr.String("__Version__"),
+		RemediationTypes: []types.RemediationType{
+			types.RemediationType("INHERITANCE_DRIFT"),
+			types.RemediationType("INHERITANCE_DRIFT"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Manifest: document.NewLazyDocument("__Document__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1000,7 +1239,17 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLandingZone(context.Background(), &CreateLandingZoneInput{})
+	_, opErr := svc.CreateLandingZone(context.Background(), &CreateLandingZoneInput{
+		Version: ptr.String("__Version__"),
+		RemediationTypes: []types.RemediationType{
+			types.RemediationType("INHERITANCE_DRIFT"),
+			types.RemediationType("INHERITANCE_DRIFT"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Manifest: document.NewLazyDocument("__Document__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1025,7 +1274,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteLandingZone(context.Background(), &DeleteLandingZoneInput{})
+	_, opErr := svc.DeleteLandingZone(context.Background(), &DeleteLandingZoneInput{
+		LandingZoneIdentifier: ptr.String("__LandingZoneIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1050,7 +1301,9 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DisableBaseline(context.Background(), &DisableBaselineInput{})
+	_, opErr := svc.DisableBaseline(context.Background(), &DisableBaselineInput{
+		EnabledBaselineIdentifier: ptr.String("__EnabledBaselineIdentifier__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1078,7 +1331,17 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLandingZone(context.Background(), &CreateLandingZoneInput{})
+	_, opErr := svc.CreateLandingZone(context.Background(), &CreateLandingZoneInput{
+		Version: ptr.String("__Version__"),
+		RemediationTypes: []types.RemediationType{
+			types.RemediationType("INHERITANCE_DRIFT"),
+			types.RemediationType("INHERITANCE_DRIFT"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Manifest: document.NewLazyDocument("__Document__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1103,7 +1366,17 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateLandingZone(context.Background(), &CreateLandingZoneInput{})
+	_, opErr := svc.CreateLandingZone(context.Background(), &CreateLandingZoneInput{
+		Version: ptr.String("__Version__"),
+		RemediationTypes: []types.RemediationType{
+			types.RemediationType("INHERITANCE_DRIFT"),
+			types.RemediationType("INHERITANCE_DRIFT"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		Manifest: document.NewLazyDocument("__Document__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

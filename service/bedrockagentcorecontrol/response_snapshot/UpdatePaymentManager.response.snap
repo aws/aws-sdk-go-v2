@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"authorizerType":"CUSTOM_JWT","lastUpdatedAt":"2000-01-01T00:00:00Z","name":"__Name__","paymentManagerArn":"__PaymentManagerArn__","paymentManagerId":"__PaymentManagerId__","roleArn":"__RoleArn__","status":"CREATING","workloadIdentityDetails":{"workloadIdentityArn":"__WorkloadIdentityArn__"}}

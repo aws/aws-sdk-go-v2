@@ -116,7 +116,10 @@ func TestCheckResponseSnapshot_CancelParticipantAuthentication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelParticipantAuthentication(context.Background(), &CancelParticipantAuthenticationInput{})
+	got, err := svc.CancelParticipantAuthentication(context.Background(), &CancelParticipantAuthenticationInput{
+		SessionId:       ptr.String("__SessionId__"),
+		ConnectionToken: ptr.String("__ConnectionToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -135,7 +138,14 @@ func TestCheckResponseSnapshot_CompleteAttachmentUpload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CompleteAttachmentUpload(context.Background(), &CompleteAttachmentUploadInput{})
+	got, err := svc.CompleteAttachmentUpload(context.Background(), &CompleteAttachmentUploadInput{
+		AttachmentIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken:     ptr.String("__ClientToken__"),
+		ConnectionToken: ptr.String("__ConnectionToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -183,7 +193,14 @@ func TestCheckResponseSnapshot_CreateParticipantConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateParticipantConnection(context.Background(), &CreateParticipantConnectionInput{})
+	got, err := svc.CreateParticipantConnection(context.Background(), &CreateParticipantConnectionInput{
+		Type: []types.ConnectionType{
+			types.ConnectionType("WEBSOCKET"),
+			types.ConnectionType("WEBSOCKET"),
+		},
+		ParticipantToken:   ptr.String("__ParticipantToken__"),
+		ConnectParticipant: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -217,7 +234,10 @@ func TestCheckResponseSnapshot_DescribeView(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeView(context.Background(), &DescribeViewInput{})
+	got, err := svc.DescribeView(context.Background(), &DescribeViewInput{
+		ViewToken:       ptr.String("__ViewToken__"),
+		ConnectionToken: ptr.String("__ConnectionToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -236,7 +256,10 @@ func TestCheckResponseSnapshot_DisconnectParticipant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisconnectParticipant(context.Background(), &DisconnectParticipantInput{})
+	got, err := svc.DisconnectParticipant(context.Background(), &DisconnectParticipantInput{
+		ClientToken:     ptr.String("__ClientToken__"),
+		ConnectionToken: ptr.String("__ConnectionToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -259,7 +282,11 @@ func TestCheckResponseSnapshot_GetAttachment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAttachment(context.Background(), &GetAttachmentInput{})
+	got, err := svc.GetAttachment(context.Background(), &GetAttachmentInput{
+		AttachmentId:       ptr.String("__AttachmentId__"),
+		ConnectionToken:    ptr.String("__ConnectionToken__"),
+		UrlExpiryInSeconds: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -280,7 +307,11 @@ func TestCheckResponseSnapshot_GetAuthenticationUrl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAuthenticationUrl(context.Background(), &GetAuthenticationUrlInput{})
+	got, err := svc.GetAuthenticationUrl(context.Background(), &GetAuthenticationUrlInput{
+		SessionId:       ptr.String("__SessionId__"),
+		RedirectUri:     ptr.String("__RedirectUri__"),
+		ConnectionToken: ptr.String("__ConnectionToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -388,7 +419,19 @@ func TestCheckResponseSnapshot_GetTranscript(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTranscript(context.Background(), &GetTranscriptInput{})
+	got, err := svc.GetTranscript(context.Background(), &GetTranscriptInput{
+		ContactId:     ptr.String("__ContactId__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		ScanDirection: types.ScanDirection("FORWARD"),
+		SortOrder:     types.SortKey("DESCENDING"),
+		StartPosition: &types.StartPosition{
+			Id:           ptr.String("__Id__"),
+			AbsoluteTime: ptr.String("__AbsoluteTime__"),
+			MostRecent:   1,
+		},
+		ConnectionToken: ptr.String("__ConnectionToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -410,7 +453,12 @@ func TestCheckResponseSnapshot_SendEvent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendEvent(context.Background(), &SendEventInput{})
+	got, err := svc.SendEvent(context.Background(), &SendEventInput{
+		ContentType:     ptr.String("__ContentType__"),
+		Content:         ptr.String("__Content__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		ConnectionToken: ptr.String("__ConnectionToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -435,7 +483,12 @@ func TestCheckResponseSnapshot_SendMessage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendMessage(context.Background(), &SendMessageInput{})
+	got, err := svc.SendMessage(context.Background(), &SendMessageInput{
+		ContentType:     ptr.String("__ContentType__"),
+		Content:         ptr.String("__Content__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		ConnectionToken: ptr.String("__ConnectionToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -463,7 +516,13 @@ func TestCheckResponseSnapshot_StartAttachmentUpload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartAttachmentUpload(context.Background(), &StartAttachmentUploadInput{})
+	got, err := svc.StartAttachmentUpload(context.Background(), &StartAttachmentUploadInput{
+		ContentType:           ptr.String("__ContentType__"),
+		AttachmentSizeInBytes: 1,
+		AttachmentName:        ptr.String("__AttachmentName__"),
+		ClientToken:           ptr.String("__ClientToken__"),
+		ConnectionToken:       ptr.String("__ConnectionToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -484,7 +543,10 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelParticipantAuthentication(context.Background(), &CancelParticipantAuthenticationInput{})
+	_, opErr := svc.CancelParticipantAuthentication(context.Background(), &CancelParticipantAuthenticationInput{
+		SessionId:       ptr.String("__SessionId__"),
+		ConnectionToken: ptr.String("__ConnectionToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -509,7 +571,14 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompleteAttachmentUpload(context.Background(), &CompleteAttachmentUploadInput{})
+	_, opErr := svc.CompleteAttachmentUpload(context.Background(), &CompleteAttachmentUploadInput{
+		AttachmentIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken:     ptr.String("__ClientToken__"),
+		ConnectionToken: ptr.String("__ConnectionToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -534,7 +603,10 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelParticipantAuthentication(context.Background(), &CancelParticipantAuthenticationInput{})
+	_, opErr := svc.CancelParticipantAuthentication(context.Background(), &CancelParticipantAuthenticationInput{
+		SessionId:       ptr.String("__SessionId__"),
+		ConnectionToken: ptr.String("__ConnectionToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -561,7 +633,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeView(context.Background(), &DescribeViewInput{})
+	_, opErr := svc.DescribeView(context.Background(), &DescribeViewInput{
+		ViewToken:       ptr.String("__ViewToken__"),
+		ConnectionToken: ptr.String("__ConnectionToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -586,7 +661,14 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CompleteAttachmentUpload(context.Background(), &CompleteAttachmentUploadInput{})
+	_, opErr := svc.CompleteAttachmentUpload(context.Background(), &CompleteAttachmentUploadInput{
+		AttachmentIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken:     ptr.String("__ClientToken__"),
+		ConnectionToken: ptr.String("__ConnectionToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -611,7 +693,10 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelParticipantAuthentication(context.Background(), &CancelParticipantAuthenticationInput{})
+	_, opErr := svc.CancelParticipantAuthentication(context.Background(), &CancelParticipantAuthenticationInput{
+		SessionId:       ptr.String("__SessionId__"),
+		ConnectionToken: ptr.String("__ConnectionToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -636,7 +721,10 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelParticipantAuthentication(context.Background(), &CancelParticipantAuthenticationInput{})
+	_, opErr := svc.CancelParticipantAuthentication(context.Background(), &CancelParticipantAuthenticationInput{
+		SessionId:       ptr.String("__SessionId__"),
+		ConnectionToken: ptr.String("__ConnectionToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

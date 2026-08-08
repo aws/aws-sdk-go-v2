@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"dashboardArn":"__DashboardArn__","dashboardId":"__DashboardId__"}

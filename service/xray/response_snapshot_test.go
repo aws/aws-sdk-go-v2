@@ -155,7 +155,13 @@ func TestCheckResponseSnapshot_BatchGetTraces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetTraces(context.Background(), &BatchGetTracesInput{})
+	got, err := svc.BatchGetTraces(context.Background(), &BatchGetTracesInput{
+		TraceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -174,7 +180,9 @@ func TestCheckResponseSnapshot_CancelTraceRetrieval(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelTraceRetrieval(context.Background(), &CancelTraceRetrievalInput{})
+	got, err := svc.CancelTraceRetrieval(context.Background(), &CancelTraceRetrievalInput{
+		RetrievalToken: ptr.String("__RetrievalToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -203,7 +211,24 @@ func TestCheckResponseSnapshot_CreateGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGroup(context.Background(), &CreateGroupInput{})
+	got, err := svc.CreateGroup(context.Background(), &CreateGroupInput{
+		GroupName:        ptr.String("__GroupName__"),
+		FilterExpression: ptr.String("__FilterExpression__"),
+		InsightsConfiguration: &types.InsightsConfiguration{
+			InsightsEnabled:      ptr.Bool(true),
+			NotificationsEnabled: ptr.Bool(true),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -248,7 +273,39 @@ func TestCheckResponseSnapshot_CreateSamplingRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSamplingRule(context.Background(), &CreateSamplingRuleInput{})
+	got, err := svc.CreateSamplingRule(context.Background(), &CreateSamplingRuleInput{
+		SamplingRule: &types.SamplingRule{
+			RuleName:      ptr.String("__RuleName__"),
+			RuleARN:       ptr.String("__RuleARN__"),
+			ResourceARN:   ptr.String("__ResourceARN__"),
+			Priority:      ptr.Int32(1),
+			FixedRate:     1.0,
+			ReservoirSize: 1,
+			ServiceName:   ptr.String("__ServiceName__"),
+			ServiceType:   ptr.String("__ServiceType__"),
+			Host:          ptr.String("__Host__"),
+			HTTPMethod:    ptr.String("__HTTPMethod__"),
+			URLPath:       ptr.String("__URLPath__"),
+			Version:       ptr.Int32(1),
+			Attributes: map[string]string{
+				"key0": "__Value__",
+			},
+			SamplingRateBoost: &types.SamplingRateBoost{
+				MaxRate:               1.0,
+				CooldownWindowMinutes: 1,
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -267,7 +324,10 @@ func TestCheckResponseSnapshot_DeleteGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGroup(context.Background(), &DeleteGroupInput{})
+	got, err := svc.DeleteGroup(context.Background(), &DeleteGroupInput{
+		GroupName: ptr.String("__GroupName__"),
+		GroupARN:  ptr.String("__GroupARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -286,7 +346,10 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		PolicyName:       ptr.String("__PolicyName__"),
+		PolicyRevisionId: ptr.String("__PolicyRevisionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -331,7 +394,10 @@ func TestCheckResponseSnapshot_DeleteSamplingRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSamplingRule(context.Background(), &DeleteSamplingRuleInput{})
+	got, err := svc.DeleteSamplingRule(context.Background(), &DeleteSamplingRuleInput{
+		RuleName: ptr.String("__RuleName__"),
+		RuleARN:  ptr.String("__RuleARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -385,7 +451,10 @@ func TestCheckResponseSnapshot_GetGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGroup(context.Background(), &GetGroupInput{})
+	got, err := svc.GetGroup(context.Background(), &GetGroupInput{
+		GroupName: ptr.String("__GroupName__"),
+		GroupARN:  ptr.String("__GroupARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -426,7 +495,9 @@ func TestCheckResponseSnapshot_GetGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGroups(context.Background(), &GetGroupsInput{})
+	got, err := svc.GetGroups(context.Background(), &GetGroupsInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -469,7 +540,9 @@ func TestCheckResponseSnapshot_GetIndexingRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIndexingRules(context.Background(), &GetIndexingRulesInput{})
+	got, err := svc.GetIndexingRules(context.Background(), &GetIndexingRulesInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -545,7 +618,9 @@ func TestCheckResponseSnapshot_GetInsight(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetInsight(context.Background(), &GetInsightInput{})
+	got, err := svc.GetInsight(context.Background(), &GetInsightInput{
+		InsightId: ptr.String("__InsightId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -644,7 +719,11 @@ func TestCheckResponseSnapshot_GetInsightEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetInsightEvents(context.Background(), &GetInsightEventsInput{})
+	got, err := svc.GetInsightEvents(context.Background(), &GetInsightEventsInput{
+		InsightId:  ptr.String("__InsightId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -708,7 +787,12 @@ func TestCheckResponseSnapshot_GetInsightImpactGraph(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetInsightImpactGraph(context.Background(), &GetInsightImpactGraphInput{})
+	got, err := svc.GetInsightImpactGraph(context.Background(), &GetInsightImpactGraphInput{
+		InsightId: ptr.String("__InsightId__"),
+		StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -845,7 +929,18 @@ func TestCheckResponseSnapshot_GetInsightSummaries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetInsightSummaries(context.Background(), &GetInsightSummariesInput{})
+	got, err := svc.GetInsightSummaries(context.Background(), &GetInsightSummariesInput{
+		States: []types.InsightState{
+			types.InsightState("ACTIVE"),
+			types.InsightState("ACTIVE"),
+		},
+		GroupARN:   ptr.String("__GroupARN__"),
+		GroupName:  ptr.String("__GroupName__"),
+		StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1241,7 +1336,10 @@ func TestCheckResponseSnapshot_GetRetrievedTracesGraph(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRetrievedTracesGraph(context.Background(), &GetRetrievedTracesGraphInput{})
+	got, err := svc.GetRetrievedTracesGraph(context.Background(), &GetRetrievedTracesGraphInput{
+		RetrievalToken: ptr.String("__RetrievalToken__"),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1314,7 +1412,9 @@ func TestCheckResponseSnapshot_GetSamplingRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSamplingRules(context.Background(), &GetSamplingRulesInput{})
+	got, err := svc.GetSamplingRules(context.Background(), &GetSamplingRulesInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1351,7 +1451,9 @@ func TestCheckResponseSnapshot_GetSamplingStatisticSummaries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSamplingStatisticSummaries(context.Background(), &GetSamplingStatisticSummariesInput{})
+	got, err := svc.GetSamplingStatisticSummaries(context.Background(), &GetSamplingStatisticSummariesInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1420,7 +1522,44 @@ func TestCheckResponseSnapshot_GetSamplingTargets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSamplingTargets(context.Background(), &GetSamplingTargetsInput{})
+	got, err := svc.GetSamplingTargets(context.Background(), &GetSamplingTargetsInput{
+		SamplingStatisticsDocuments: []types.SamplingStatisticsDocument{
+			{
+				RuleName:     ptr.String("__RuleName__"),
+				ClientID:     ptr.String("__ClientID__"),
+				Timestamp:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				RequestCount: 1,
+				SampledCount: 1,
+				BorrowCount:  1,
+			},
+			{
+				RuleName:     ptr.String("__RuleName__"),
+				ClientID:     ptr.String("__ClientID__"),
+				Timestamp:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				RequestCount: 1,
+				SampledCount: 1,
+				BorrowCount:  1,
+			},
+		},
+		SamplingBoostStatisticsDocuments: []types.SamplingBoostStatisticsDocument{
+			{
+				RuleName:            ptr.String("__RuleName__"),
+				ServiceName:         ptr.String("__ServiceName__"),
+				Timestamp:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AnomalyCount:        1,
+				TotalCount:          1,
+				SampledAnomalyCount: 1,
+			},
+			{
+				RuleName:            ptr.String("__RuleName__"),
+				ServiceName:         ptr.String("__ServiceName__"),
+				Timestamp:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AnomalyCount:        1,
+				TotalCount:          1,
+				SampledAnomalyCount: 1,
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1778,7 +1917,13 @@ func TestCheckResponseSnapshot_GetServiceGraph(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetServiceGraph(context.Background(), &GetServiceGraphInput{})
+	got, err := svc.GetServiceGraph(context.Background(), &GetServiceGraphInput{
+		StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		GroupName: ptr.String("__GroupName__"),
+		GroupARN:  ptr.String("__GroupARN__"),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1892,7 +2037,16 @@ func TestCheckResponseSnapshot_GetTimeSeriesServiceStatistics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTimeSeriesServiceStatistics(context.Background(), &GetTimeSeriesServiceStatisticsInput{})
+	got, err := svc.GetTimeSeriesServiceStatistics(context.Background(), &GetTimeSeriesServiceStatisticsInput{
+		StartTime:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		GroupName:                ptr.String("__GroupName__"),
+		GroupARN:                 ptr.String("__GroupARN__"),
+		EntitySelectorExpression: ptr.String("__EntitySelectorExpression__"),
+		Period:                   ptr.Int32(1),
+		ForecastStatistics:       ptr.Bool(true),
+		NextToken:                ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2247,7 +2401,13 @@ func TestCheckResponseSnapshot_GetTraceGraph(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTraceGraph(context.Background(), &GetTraceGraphInput{})
+	got, err := svc.GetTraceGraph(context.Background(), &GetTraceGraphInput{
+		TraceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3530,7 +3690,18 @@ func TestCheckResponseSnapshot_GetTraceSummaries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTraceSummaries(context.Background(), &GetTraceSummariesInput{})
+	got, err := svc.GetTraceSummaries(context.Background(), &GetTraceSummariesInput{
+		StartTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		TimeRangeType: types.TimeRangeType("TraceId"),
+		Sampling:      ptr.Bool(true),
+		SamplingStrategy: &types.SamplingStrategy{
+			Name:  types.SamplingStrategyName("PartialScan"),
+			Value: ptr.Float64(1.0),
+		},
+		FilterExpression: ptr.String("__FilterExpression__"),
+		NextToken:        ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3565,7 +3736,9 @@ func TestCheckResponseSnapshot_ListResourcePolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourcePolicies(context.Background(), &ListResourcePoliciesInput{})
+	got, err := svc.ListResourcePolicies(context.Background(), &ListResourcePoliciesInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3618,7 +3791,11 @@ func TestCheckResponseSnapshot_ListRetrievedTraces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRetrievedTraces(context.Background(), &ListRetrievedTracesInput{})
+	got, err := svc.ListRetrievedTraces(context.Background(), &ListRetrievedTracesInput{
+		RetrievalToken: ptr.String("__RetrievalToken__"),
+		TraceFormat:    types.TraceFormatType("XRAY"),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3649,7 +3826,10 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3674,7 +3854,10 @@ func TestCheckResponseSnapshot_PutEncryptionConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutEncryptionConfig(context.Background(), &PutEncryptionConfigInput{})
+	got, err := svc.PutEncryptionConfig(context.Background(), &PutEncryptionConfigInput{
+		KeyId: ptr.String("__KeyId__"),
+		Type:  types.EncryptionType("NONE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3700,7 +3883,12 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		PolicyName:               ptr.String("__PolicyName__"),
+		PolicyDocument:           ptr.String("__PolicyDocument__"),
+		PolicyRevisionId:         ptr.String("__PolicyRevisionId__"),
+		BypassPolicyLockoutCheck: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3719,7 +3907,43 @@ func TestCheckResponseSnapshot_PutTelemetryRecords(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutTelemetryRecords(context.Background(), &PutTelemetryRecordsInput{})
+	got, err := svc.PutTelemetryRecords(context.Background(), &PutTelemetryRecordsInput{
+		TelemetryRecords: []types.TelemetryRecord{
+			{
+				Timestamp:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SegmentsReceivedCount:  ptr.Int32(1),
+				SegmentsSentCount:      ptr.Int32(1),
+				SegmentsSpilloverCount: ptr.Int32(1),
+				SegmentsRejectedCount:  ptr.Int32(1),
+				BackendConnectionErrors: &types.BackendConnectionErrors{
+					TimeoutCount:           ptr.Int32(1),
+					ConnectionRefusedCount: ptr.Int32(1),
+					HTTPCode4XXCount:       ptr.Int32(1),
+					HTTPCode5XXCount:       ptr.Int32(1),
+					UnknownHostCount:       ptr.Int32(1),
+					OtherCount:             ptr.Int32(1),
+				},
+			},
+			{
+				Timestamp:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SegmentsReceivedCount:  ptr.Int32(1),
+				SegmentsSentCount:      ptr.Int32(1),
+				SegmentsSpilloverCount: ptr.Int32(1),
+				SegmentsRejectedCount:  ptr.Int32(1),
+				BackendConnectionErrors: &types.BackendConnectionErrors{
+					TimeoutCount:           ptr.Int32(1),
+					ConnectionRefusedCount: ptr.Int32(1),
+					HTTPCode4XXCount:       ptr.Int32(1),
+					HTTPCode5XXCount:       ptr.Int32(1),
+					UnknownHostCount:       ptr.Int32(1),
+					OtherCount:             ptr.Int32(1),
+				},
+			},
+		},
+		EC2InstanceId: ptr.String("__EC2InstanceId__"),
+		Hostname:      ptr.String("__Hostname__"),
+		ResourceARN:   ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3751,7 +3975,12 @@ func TestCheckResponseSnapshot_PutTraceSegments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutTraceSegments(context.Background(), &PutTraceSegmentsInput{})
+	got, err := svc.PutTraceSegments(context.Background(), &PutTraceSegmentsInput{
+		TraceSegmentDocuments: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3772,7 +4001,14 @@ func TestCheckResponseSnapshot_StartTraceRetrieval(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartTraceRetrieval(context.Background(), &StartTraceRetrievalInput{})
+	got, err := svc.StartTraceRetrieval(context.Background(), &StartTraceRetrievalInput{
+		TraceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3791,7 +4027,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3810,7 +4058,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3839,7 +4093,15 @@ func TestCheckResponseSnapshot_UpdateGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGroup(context.Background(), &UpdateGroupInput{})
+	got, err := svc.UpdateGroup(context.Background(), &UpdateGroupInput{
+		GroupName:        ptr.String("__GroupName__"),
+		GroupARN:         ptr.String("__GroupARN__"),
+		FilterExpression: ptr.String("__FilterExpression__"),
+		InsightsConfiguration: &types.InsightsConfiguration{
+			InsightsEnabled:      ptr.Bool(true),
+			NotificationsEnabled: ptr.Bool(true),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3869,7 +4131,14 @@ func TestCheckResponseSnapshot_UpdateIndexingRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIndexingRule(context.Background(), &UpdateIndexingRuleInput{})
+	got, err := svc.UpdateIndexingRule(context.Background(), &UpdateIndexingRuleInput{
+		Name: ptr.String("__Name__"),
+		Rule: &types.IndexingRuleValueUpdateMemberProbabilistic{
+			Value: types.ProbabilisticRuleValueUpdate{
+				DesiredSamplingPercentage: ptr.Float64(1.0),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3914,7 +4183,28 @@ func TestCheckResponseSnapshot_UpdateSamplingRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSamplingRule(context.Background(), &UpdateSamplingRuleInput{})
+	got, err := svc.UpdateSamplingRule(context.Background(), &UpdateSamplingRuleInput{
+		SamplingRuleUpdate: &types.SamplingRuleUpdate{
+			RuleName:      ptr.String("__RuleName__"),
+			RuleARN:       ptr.String("__RuleARN__"),
+			ResourceARN:   ptr.String("__ResourceARN__"),
+			Priority:      ptr.Int32(1),
+			FixedRate:     ptr.Float64(1.0),
+			ReservoirSize: ptr.Int32(1),
+			Host:          ptr.String("__Host__"),
+			ServiceName:   ptr.String("__ServiceName__"),
+			ServiceType:   ptr.String("__ServiceType__"),
+			HTTPMethod:    ptr.String("__HTTPMethod__"),
+			URLPath:       ptr.String("__URLPath__"),
+			Attributes: map[string]string{
+				"key0": "__Value__",
+			},
+			SamplingRateBoost: &types.SamplingRateBoost{
+				MaxRate:               1.0,
+				CooldownWindowMinutes: 1,
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3936,7 +4226,9 @@ func TestCheckResponseSnapshot_UpdateTraceSegmentDestination(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTraceSegmentDestination(context.Background(), &UpdateTraceSegmentDestinationInput{})
+	got, err := svc.UpdateTraceSegmentDestination(context.Background(), &UpdateTraceSegmentDestinationInput{
+		Destination: types.TraceSegmentDestination("XRay"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3957,7 +4249,10 @@ func TestCheckResponseSnapshot_Error_InvalidPolicyRevisionIdException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	_, opErr := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		PolicyName:       ptr.String("__PolicyName__"),
+		PolicyRevisionId: ptr.String("__PolicyRevisionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3982,7 +4277,13 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetTraces(context.Background(), &BatchGetTracesInput{})
+	_, opErr := svc.BatchGetTraces(context.Background(), &BatchGetTracesInput{
+		TraceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4007,7 +4308,12 @@ func TestCheckResponseSnapshot_Error_LockoutPreventionException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	_, opErr := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		PolicyName:               ptr.String("__PolicyName__"),
+		PolicyDocument:           ptr.String("__PolicyDocument__"),
+		PolicyRevisionId:         ptr.String("__PolicyRevisionId__"),
+		BypassPolicyLockoutCheck: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4032,7 +4338,12 @@ func TestCheckResponseSnapshot_Error_MalformedPolicyDocumentException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	_, opErr := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		PolicyName:               ptr.String("__PolicyName__"),
+		PolicyDocument:           ptr.String("__PolicyDocument__"),
+		PolicyRevisionId:         ptr.String("__PolicyRevisionId__"),
+		BypassPolicyLockoutCheck: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4057,7 +4368,12 @@ func TestCheckResponseSnapshot_Error_PolicyCountLimitExceededException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	_, opErr := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		PolicyName:               ptr.String("__PolicyName__"),
+		PolicyDocument:           ptr.String("__PolicyDocument__"),
+		PolicyRevisionId:         ptr.String("__PolicyRevisionId__"),
+		BypassPolicyLockoutCheck: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4082,7 +4398,12 @@ func TestCheckResponseSnapshot_Error_PolicySizeLimitExceededException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	_, opErr := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		PolicyName:               ptr.String("__PolicyName__"),
+		PolicyDocument:           ptr.String("__PolicyDocument__"),
+		PolicyRevisionId:         ptr.String("__PolicyRevisionId__"),
+		BypassPolicyLockoutCheck: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4108,7 +4429,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelTraceRetrieval(context.Background(), &CancelTraceRetrievalInput{})
+	_, opErr := svc.CancelTraceRetrieval(context.Background(), &CancelTraceRetrievalInput{
+		RetrievalToken: ptr.String("__RetrievalToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4133,7 +4456,39 @@ func TestCheckResponseSnapshot_Error_RuleLimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSamplingRule(context.Background(), &CreateSamplingRuleInput{})
+	_, opErr := svc.CreateSamplingRule(context.Background(), &CreateSamplingRuleInput{
+		SamplingRule: &types.SamplingRule{
+			RuleName:      ptr.String("__RuleName__"),
+			RuleARN:       ptr.String("__RuleARN__"),
+			ResourceARN:   ptr.String("__ResourceARN__"),
+			Priority:      ptr.Int32(1),
+			FixedRate:     1.0,
+			ReservoirSize: 1,
+			ServiceName:   ptr.String("__ServiceName__"),
+			ServiceType:   ptr.String("__ServiceType__"),
+			Host:          ptr.String("__Host__"),
+			HTTPMethod:    ptr.String("__HTTPMethod__"),
+			URLPath:       ptr.String("__URLPath__"),
+			Version:       ptr.Int32(1),
+			Attributes: map[string]string{
+				"key0": "__Value__",
+			},
+			SamplingRateBoost: &types.SamplingRateBoost{
+				MaxRate:               1.0,
+				CooldownWindowMinutes: 1,
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4158,7 +4513,13 @@ func TestCheckResponseSnapshot_Error_ThrottledException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetTraces(context.Background(), &BatchGetTracesInput{})
+	_, opErr := svc.BatchGetTraces(context.Background(), &BatchGetTracesInput{
+		TraceIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4184,7 +4545,19 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

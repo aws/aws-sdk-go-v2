@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"cancellationStatus":"CANCELLING","jobArn":"__JobArn__"}

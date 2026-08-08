@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"documentContentLength":1,"mimeType":"__MimeType__","presignedUrl":"__PresignedUrl__"}

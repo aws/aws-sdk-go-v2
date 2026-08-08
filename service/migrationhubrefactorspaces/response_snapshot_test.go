@@ -136,7 +136,20 @@ func TestCheckResponseSnapshot_CreateApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Name:                  ptr.String("__Name__"),
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		VpcId:                 ptr.String("__VpcId__"),
+		ProxyType:             types.ProxyType("API_GATEWAY"),
+		ApiGatewayProxy: &types.ApiGatewayProxyInput{
+			EndpointType: types.ApiGatewayEndpointType("REGIONAL"),
+			StageName:    ptr.String("__StageName__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -168,7 +181,15 @@ func TestCheckResponseSnapshot_CreateEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{})
+	got, err := svc.CreateEnvironment(context.Background(), &CreateEnvironmentInput{
+		Name:              ptr.String("__Name__"),
+		Description:       ptr.String("__Description__"),
+		NetworkFabricType: types.NetworkFabricType("TRANSIT_GATEWAY"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -211,7 +232,29 @@ func TestCheckResponseSnapshot_CreateRoute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRoute(context.Background(), &CreateRouteInput{})
+	got, err := svc.CreateRoute(context.Background(), &CreateRouteInput{
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		ApplicationIdentifier: ptr.String("__ApplicationIdentifier__"),
+		ServiceIdentifier:     ptr.String("__ServiceIdentifier__"),
+		RouteType:             types.RouteType("DEFAULT"),
+		DefaultRoute: &types.DefaultRouteInput{
+			ActivationState: types.RouteActivationState("ACTIVE"),
+		},
+		UriPathRoute: &types.UriPathRouteInput{
+			SourcePath:      ptr.String("__SourcePath__"),
+			ActivationState: types.RouteActivationState("ACTIVE"),
+			Methods: []types.HttpMethod{
+				types.HttpMethod("DELETE"),
+				types.HttpMethod("DELETE"),
+			},
+			IncludeChildPaths: ptr.Bool(true),
+			AppendSourcePath:  ptr.Bool(true),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -254,7 +297,25 @@ func TestCheckResponseSnapshot_CreateService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateService(context.Background(), &CreateServiceInput{})
+	got, err := svc.CreateService(context.Background(), &CreateServiceInput{
+		Name:                  ptr.String("__Name__"),
+		Description:           ptr.String("__Description__"),
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		ApplicationIdentifier: ptr.String("__ApplicationIdentifier__"),
+		VpcId:                 ptr.String("__VpcId__"),
+		EndpointType:          types.ServiceEndpointType("LAMBDA"),
+		UrlEndpoint: &types.UrlEndpointInput{
+			Url:       ptr.String("__Url__"),
+			HealthUrl: ptr.String("__HealthUrl__"),
+		},
+		LambdaEndpoint: &types.LambdaEndpointInput{
+			Arn: ptr.String("__Arn__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -280,7 +341,10 @@ func TestCheckResponseSnapshot_DeleteApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{})
+	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		ApplicationIdentifier: ptr.String("__ApplicationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -305,7 +369,9 @@ func TestCheckResponseSnapshot_DeleteEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteEnvironment(context.Background(), &DeleteEnvironmentInput{})
+	got, err := svc.DeleteEnvironment(context.Background(), &DeleteEnvironmentInput{
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -324,7 +390,9 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -350,7 +418,11 @@ func TestCheckResponseSnapshot_DeleteRoute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRoute(context.Background(), &DeleteRouteInput{})
+	got, err := svc.DeleteRoute(context.Background(), &DeleteRouteInput{
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		ApplicationIdentifier: ptr.String("__ApplicationIdentifier__"),
+		RouteIdentifier:       ptr.String("__RouteIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -377,7 +449,11 @@ func TestCheckResponseSnapshot_DeleteService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteService(context.Background(), &DeleteServiceInput{})
+	got, err := svc.DeleteService(context.Background(), &DeleteServiceInput{
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		ApplicationIdentifier: ptr.String("__ApplicationIdentifier__"),
+		ServiceIdentifier:     ptr.String("__ServiceIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -430,7 +506,10 @@ func TestCheckResponseSnapshot_GetApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApplication(context.Background(), &GetApplicationInput{})
+	got, err := svc.GetApplication(context.Background(), &GetApplicationInput{
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		ApplicationIdentifier: ptr.String("__ApplicationIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -473,7 +552,9 @@ func TestCheckResponseSnapshot_GetEnvironment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEnvironment(context.Background(), &GetEnvironmentInput{})
+	got, err := svc.GetEnvironment(context.Background(), &GetEnvironmentInput{
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -494,7 +575,9 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{})
+	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -548,7 +631,11 @@ func TestCheckResponseSnapshot_GetRoute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRoute(context.Background(), &GetRouteInput{})
+	got, err := svc.GetRoute(context.Background(), &GetRouteInput{
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		ApplicationIdentifier: ptr.String("__ApplicationIdentifier__"),
+		RouteIdentifier:       ptr.String("__RouteIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -601,7 +688,11 @@ func TestCheckResponseSnapshot_GetService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetService(context.Background(), &GetServiceInput{})
+	got, err := svc.GetService(context.Background(), &GetServiceInput{
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		ApplicationIdentifier: ptr.String("__ApplicationIdentifier__"),
+		ServiceIdentifier:     ptr.String("__ServiceIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -694,7 +785,11 @@ func TestCheckResponseSnapshot_ListApplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplications(context.Background(), &ListApplicationsInput{})
+	got, err := svc.ListApplications(context.Background(), &ListApplicationsInput{
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		NextToken:             ptr.String("__NextToken__"),
+		MaxResults:            ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -741,7 +836,11 @@ func TestCheckResponseSnapshot_ListEnvironmentVpcs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEnvironmentVpcs(context.Background(), &ListEnvironmentVpcsInput{})
+	got, err := svc.ListEnvironmentVpcs(context.Background(), &ListEnvironmentVpcsInput{
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		NextToken:             ptr.String("__NextToken__"),
+		MaxResults:            ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -814,7 +913,10 @@ func TestCheckResponseSnapshot_ListEnvironments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListEnvironments(context.Background(), &ListEnvironmentsInput{})
+	got, err := svc.ListEnvironments(context.Background(), &ListEnvironmentsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -909,7 +1011,12 @@ func TestCheckResponseSnapshot_ListRoutes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRoutes(context.Background(), &ListRoutesInput{})
+	got, err := svc.ListRoutes(context.Background(), &ListRoutesInput{
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		ApplicationIdentifier: ptr.String("__ApplicationIdentifier__"),
+		NextToken:             ptr.String("__NextToken__"),
+		MaxResults:            ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1002,7 +1109,12 @@ func TestCheckResponseSnapshot_ListServices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServices(context.Background(), &ListServicesInput{})
+	got, err := svc.ListServices(context.Background(), &ListServicesInput{
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		ApplicationIdentifier: ptr.String("__ApplicationIdentifier__"),
+		NextToken:             ptr.String("__NextToken__"),
+		MaxResults:            ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1025,7 +1137,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1044,7 +1158,10 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Policy:      ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1063,7 +1180,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1082,7 +1204,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1108,7 +1236,12 @@ func TestCheckResponseSnapshot_UpdateRoute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRoute(context.Background(), &UpdateRouteInput{})
+	got, err := svc.UpdateRoute(context.Background(), &UpdateRouteInput{
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		ApplicationIdentifier: ptr.String("__ApplicationIdentifier__"),
+		RouteIdentifier:       ptr.String("__RouteIdentifier__"),
+		ActivationState:       types.RouteActivationState("ACTIVE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1129,7 +1262,20 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Name:                  ptr.String("__Name__"),
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		VpcId:                 ptr.String("__VpcId__"),
+		ProxyType:             types.ProxyType("API_GATEWAY"),
+		ApiGatewayProxy: &types.ApiGatewayProxyInput{
+			EndpointType: types.ApiGatewayEndpointType("REGIONAL"),
+			StageName:    ptr.String("__StageName__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1156,7 +1302,20 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Name:                  ptr.String("__Name__"),
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		VpcId:                 ptr.String("__VpcId__"),
+		ProxyType:             types.ProxyType("API_GATEWAY"),
+		ApiGatewayProxy: &types.ApiGatewayProxyInput{
+			EndpointType: types.ApiGatewayEndpointType("REGIONAL"),
+			StageName:    ptr.String("__StageName__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1181,7 +1340,20 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Name:                  ptr.String("__Name__"),
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		VpcId:                 ptr.String("__VpcId__"),
+		ProxyType:             types.ProxyType("API_GATEWAY"),
+		ApiGatewayProxy: &types.ApiGatewayProxyInput{
+			EndpointType: types.ApiGatewayEndpointType("REGIONAL"),
+			StageName:    ptr.String("__StageName__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1206,7 +1378,10 @@ func TestCheckResponseSnapshot_Error_InvalidResourcePolicyException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	_, opErr := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Policy:      ptr.String("__Policy__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1233,7 +1408,20 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Name:                  ptr.String("__Name__"),
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		VpcId:                 ptr.String("__VpcId__"),
+		ProxyType:             types.ProxyType("API_GATEWAY"),
+		ApiGatewayProxy: &types.ApiGatewayProxyInput{
+			EndpointType: types.ApiGatewayEndpointType("REGIONAL"),
+			StageName:    ptr.String("__StageName__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1262,7 +1450,20 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Name:                  ptr.String("__Name__"),
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		VpcId:                 ptr.String("__VpcId__"),
+		ProxyType:             types.ProxyType("API_GATEWAY"),
+		ApiGatewayProxy: &types.ApiGatewayProxyInput{
+			EndpointType: types.ApiGatewayEndpointType("REGIONAL"),
+			StageName:    ptr.String("__StageName__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1290,7 +1491,20 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Name:                  ptr.String("__Name__"),
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		VpcId:                 ptr.String("__VpcId__"),
+		ProxyType:             types.ProxyType("API_GATEWAY"),
+		ApiGatewayProxy: &types.ApiGatewayProxyInput{
+			EndpointType: types.ApiGatewayEndpointType("REGIONAL"),
+			StageName:    ptr.String("__StageName__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1315,7 +1529,20 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		Name:                  ptr.String("__Name__"),
+		EnvironmentIdentifier: ptr.String("__EnvironmentIdentifier__"),
+		VpcId:                 ptr.String("__VpcId__"),
+		ProxyType:             types.ProxyType("API_GATEWAY"),
+		ApiGatewayProxy: &types.ApiGatewayProxyInput{
+			EndpointType: types.ApiGatewayEndpointType("REGIONAL"),
+			StageName:    ptr.String("__StageName__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

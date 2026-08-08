@@ -7,8 +7,10 @@ package devopsagent
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/document"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -18,6 +20,7 @@ import (
 	"io/fs"
 	"net/url"
 	"os"
+	"reflect"
 	"slices"
 	"strings"
 	"testing"
@@ -181,7 +184,28 @@ func serdeNewClient() *Client {
 	})
 }
 func serdeBodyEqual(got, expected []byte) bool {
-	return bytes.Equal(got, expected)
+	if len(got) == 0 || len(expected) == 0 {
+		return bytes.Equal(got, expected)
+	}
+	gv, gok := serdeDecodeJSON(got)
+	ev, eok := serdeDecodeJSON(expected)
+	if !gok || !eok {
+		return bytes.Equal(got, expected)
+	}
+	return reflect.DeepEqual(gv, ev)
+}
+
+// serdeDecodeJSON decodes a body for structural comparison. Numbers are kept as
+// json.Number rather than float64 so a large int64 doesn't lose precision (which would
+// mask a real difference) and so numeric formatting differences still show up.
+func serdeDecodeJSON(b []byte) (any, bool) {
+	d := json.NewDecoder(bytes.NewReader(b))
+	d.UseNumber()
+	var v any
+	if err := d.Decode(&v); err != nil {
+		return nil, false
+	}
+	return v, true
 }
 func TestCheckRequestSnapshot_AssociateService(t *testing.T) {
 	input := &AssociateServiceInput{
@@ -262,14 +286,14 @@ func TestCheckRequestSnapshot_CreateAsset(t *testing.T) {
 	input := &CreateAssetInput{
 		AgentSpaceId: ptr.String("__AgentSpaceId__"),
 		AssetType:    ptr.String("__AssetType__"),
-		Metadata:     nil,
+		Metadata:     document.NewLazyDocument("__Document__"),
 		Content: &types.AssetContentMemberFile{
 			Value: types.AssetFileContent{
 				Path: ptr.String("__Path__"),
 				Body: &types.AssetFileBodyMemberBytes{
 					Value: []byte("blob"),
 				},
-				Metadata: nil,
+				Metadata: document.NewLazyDocument("__Document__"),
 			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
@@ -305,7 +329,7 @@ func TestCheckRequestSnapshot_CreateAssetFile(t *testing.T) {
 		Content: &types.AssetFileBodyMemberBytes{
 			Value: []byte("blob"),
 		},
-		Metadata:    nil,
+		Metadata:    document.NewLazyDocument("__Document__"),
 		ClientToken: ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
@@ -460,7 +484,7 @@ func TestCheckRequestSnapshot_CreateTrigger(t *testing.T) {
 				Expression: ptr.String("__Expression__"),
 			},
 		},
-		Action:      nil,
+		Action:      document.NewLazyDocument("__Document__"),
 		Status:      ptr.String("__Status__"),
 		ClientToken: ptr.String("__ClientToken__"),
 	}
@@ -1772,14 +1796,14 @@ func TestCheckRequestSnapshot_UpdateAsset(t *testing.T) {
 	input := &UpdateAssetInput{
 		AgentSpaceId: ptr.String("__AgentSpaceId__"),
 		AssetId:      ptr.String("__AssetId__"),
-		Metadata:     nil,
+		Metadata:     document.NewLazyDocument("__Document__"),
 		Content: &types.AssetContentMemberFile{
 			Value: types.AssetFileContent{
 				Path: ptr.String("__Path__"),
 				Body: &types.AssetFileBodyMemberBytes{
 					Value: []byte("blob"),
 				},
-				Metadata: nil,
+				Metadata: document.NewLazyDocument("__Document__"),
 			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
@@ -1815,7 +1839,7 @@ func TestCheckRequestSnapshot_UpdateAssetFile(t *testing.T) {
 		Content: &types.AssetFileBodyMemberBytes{
 			Value: []byte("blob"),
 		},
-		Metadata:    nil,
+		Metadata:    document.NewLazyDocument("__Document__"),
 		ClientToken: ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
@@ -2166,14 +2190,14 @@ func TestUpdateRequestSnapshot_CreateAsset(t *testing.T) {
 	input := &CreateAssetInput{
 		AgentSpaceId: ptr.String("__AgentSpaceId__"),
 		AssetType:    ptr.String("__AssetType__"),
-		Metadata:     nil,
+		Metadata:     document.NewLazyDocument("__Document__"),
 		Content: &types.AssetContentMemberFile{
 			Value: types.AssetFileContent{
 				Path: ptr.String("__Path__"),
 				Body: &types.AssetFileBodyMemberBytes{
 					Value: []byte("blob"),
 				},
-				Metadata: nil,
+				Metadata: document.NewLazyDocument("__Document__"),
 			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
@@ -2209,7 +2233,7 @@ func TestUpdateRequestSnapshot_CreateAssetFile(t *testing.T) {
 		Content: &types.AssetFileBodyMemberBytes{
 			Value: []byte("blob"),
 		},
-		Metadata:    nil,
+		Metadata:    document.NewLazyDocument("__Document__"),
 		ClientToken: ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
@@ -2364,7 +2388,7 @@ func TestUpdateRequestSnapshot_CreateTrigger(t *testing.T) {
 				Expression: ptr.String("__Expression__"),
 			},
 		},
-		Action:      nil,
+		Action:      document.NewLazyDocument("__Document__"),
 		Status:      ptr.String("__Status__"),
 		ClientToken: ptr.String("__ClientToken__"),
 	}
@@ -3676,14 +3700,14 @@ func TestUpdateRequestSnapshot_UpdateAsset(t *testing.T) {
 	input := &UpdateAssetInput{
 		AgentSpaceId: ptr.String("__AgentSpaceId__"),
 		AssetId:      ptr.String("__AssetId__"),
-		Metadata:     nil,
+		Metadata:     document.NewLazyDocument("__Document__"),
 		Content: &types.AssetContentMemberFile{
 			Value: types.AssetFileContent{
 				Path: ptr.String("__Path__"),
 				Body: &types.AssetFileBodyMemberBytes{
 					Value: []byte("blob"),
 				},
-				Metadata: nil,
+				Metadata: document.NewLazyDocument("__Document__"),
 			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
@@ -3719,7 +3743,7 @@ func TestUpdateRequestSnapshot_UpdateAssetFile(t *testing.T) {
 		Content: &types.AssetFileBodyMemberBytes{
 			Value: []byte("blob"),
 		},
-		Metadata:    nil,
+		Metadata:    document.NewLazyDocument("__Document__"),
 		ClientToken: ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}

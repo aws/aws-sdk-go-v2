@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"contentType":"__ContentType__","description":"__Description__","modelId":"__ModelId__","name":"__Name__","schema":"__Schema__"},{"contentType":"__ContentType__","description":"__Description__","modelId":"__ModelId__","name":"__Name__","schema":"__Schema__"}],"nextToken":"__NextToken__"}

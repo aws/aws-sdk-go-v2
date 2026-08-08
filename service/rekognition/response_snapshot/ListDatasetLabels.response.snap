@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RekognitionService.ListDatasetLabels
+
+{"DatasetLabelDescriptions":[{"LabelName":"__LabelName__","LabelStats":{"BoundingBoxCount":1,"EntryCount":1}},{"LabelName":"__LabelName__","LabelStats":{"BoundingBoxCount":1,"EntryCount":1}}],"NextToken":"__NextToken__"}

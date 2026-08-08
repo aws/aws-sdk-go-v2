@@ -117,7 +117,9 @@ func TestCheckResponseSnapshot_CancelSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelSession(context.Background(), &CancelSessionInput{})
+	got, err := svc.CancelSession(context.Background(), &CancelSessionInput{
+		SessionArn: ptr.String("__SessionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -141,7 +143,37 @@ func TestCheckResponseSnapshot_CreateApprovalTeam(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApprovalTeam(context.Background(), &CreateApprovalTeamInput{})
+	got, err := svc.CreateApprovalTeam(context.Background(), &CreateApprovalTeamInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		ApprovalStrategy: &types.ApprovalStrategyMemberMofN{
+			Value: types.MofNApprovalStrategy{
+				MinApprovalsRequired: ptr.Int32(1),
+			},
+		},
+		Approvers: []types.ApprovalTeamRequestApprover{
+			{
+				PrimaryIdentityId:        ptr.String("__PrimaryIdentityId__"),
+				PrimaryIdentitySourceArn: ptr.String("__PrimaryIdentitySourceArn__"),
+			},
+			{
+				PrimaryIdentityId:        ptr.String("__PrimaryIdentityId__"),
+				PrimaryIdentitySourceArn: ptr.String("__PrimaryIdentitySourceArn__"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+		Policies: []types.PolicyReference{
+			{
+				PolicyArn: ptr.String("__PolicyArn__"),
+			},
+			{
+				PolicyArn: ptr.String("__PolicyArn__"),
+			},
+		},
+		Name: ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -164,7 +196,18 @@ func TestCheckResponseSnapshot_CreateIdentitySource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIdentitySource(context.Background(), &CreateIdentitySourceInput{})
+	got, err := svc.CreateIdentitySource(context.Background(), &CreateIdentitySourceInput{
+		IdentitySourceParameters: &types.IdentitySourceParameters{
+			IamIdentityCenter: &types.IamIdentityCenter{
+				InstanceArn: ptr.String("__InstanceArn__"),
+				Region:      ptr.String("__Region__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -183,7 +226,9 @@ func TestCheckResponseSnapshot_DeleteIdentitySource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIdentitySource(context.Background(), &DeleteIdentitySourceInput{})
+	got, err := svc.DeleteIdentitySource(context.Background(), &DeleteIdentitySourceInput{
+		IdentitySourceArn: ptr.String("__IdentitySourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -202,7 +247,10 @@ func TestCheckResponseSnapshot_DeleteInactiveApprovalTeamVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteInactiveApprovalTeamVersion(context.Background(), &DeleteInactiveApprovalTeamVersionInput{})
+	got, err := svc.DeleteInactiveApprovalTeamVersion(context.Background(), &DeleteInactiveApprovalTeamVersionInput{
+		Arn:       ptr.String("__Arn__"),
+		VersionId: ptr.String("__VersionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -344,7 +392,9 @@ func TestCheckResponseSnapshot_GetApprovalTeam(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApprovalTeam(context.Background(), &GetApprovalTeamInput{})
+	got, err := svc.GetApprovalTeam(context.Background(), &GetApprovalTeamInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -377,7 +427,9 @@ func TestCheckResponseSnapshot_GetIdentitySource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIdentitySource(context.Background(), &GetIdentitySourceInput{})
+	got, err := svc.GetIdentitySource(context.Background(), &GetIdentitySourceInput{
+		IdentitySourceArn: ptr.String("__IdentitySourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -409,7 +461,9 @@ func TestCheckResponseSnapshot_GetPolicyVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPolicyVersion(context.Background(), &GetPolicyVersionInput{})
+	got, err := svc.GetPolicyVersion(context.Background(), &GetPolicyVersionInput{
+		PolicyVersionArn: ptr.String("__PolicyVersionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -434,7 +488,11 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{})
+	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		PolicyName:  ptr.String("__PolicyName__"),
+		PolicyType:  types.PolicyType("AWS_MANAGED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -502,7 +560,9 @@ func TestCheckResponseSnapshot_GetSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSession(context.Background(), &GetSessionInput{})
+	got, err := svc.GetSession(context.Background(), &GetSessionInput{
+		SessionArn: ptr.String("__SessionArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -555,7 +615,10 @@ func TestCheckResponseSnapshot_ListApprovalTeams(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApprovalTeams(context.Background(), &ListApprovalTeamsInput{})
+	got, err := svc.ListApprovalTeams(context.Background(), &ListApprovalTeamsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -608,7 +671,10 @@ func TestCheckResponseSnapshot_ListIdentitySources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIdentitySources(context.Background(), &ListIdentitySourcesInput{})
+	got, err := svc.ListIdentitySources(context.Background(), &ListIdentitySourcesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -643,7 +709,10 @@ func TestCheckResponseSnapshot_ListPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPolicies(context.Background(), &ListPoliciesInput{})
+	got, err := svc.ListPolicies(context.Background(), &ListPoliciesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -688,7 +757,11 @@ func TestCheckResponseSnapshot_ListPolicyVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPolicyVersions(context.Background(), &ListPolicyVersionsInput{})
+	got, err := svc.ListPolicyVersions(context.Background(), &ListPolicyVersionsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		PolicyArn:  ptr.String("__PolicyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -721,7 +794,11 @@ func TestCheckResponseSnapshot_ListResourcePolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourcePolicies(context.Background(), &ListResourcePoliciesInput{})
+	got, err := svc.ListResourcePolicies(context.Background(), &ListResourcePoliciesInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -790,7 +867,23 @@ func TestCheckResponseSnapshot_ListSessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSessions(context.Background(), &ListSessionsInput{})
+	got, err := svc.ListSessions(context.Background(), &ListSessionsInput{
+		ApprovalTeamArn: ptr.String("__ApprovalTeamArn__"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+		Filters: []types.Filter{
+			{
+				FieldName: types.FilterField("ActionName"),
+				Operator:  types.Operator("EQ"),
+				Value:     ptr.String("__Value__"),
+			},
+			{
+				FieldName: types.FilterField("ActionName"),
+				Operator:  types.Operator("EQ"),
+				Value:     ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -813,7 +906,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -835,7 +930,10 @@ func TestCheckResponseSnapshot_StartActiveApprovalTeamDeletion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartActiveApprovalTeamDeletion(context.Background(), &StartActiveApprovalTeamDeletionInput{})
+	got, err := svc.StartActiveApprovalTeamDeletion(context.Background(), &StartActiveApprovalTeamDeletionInput{
+		PendingWindowDays: ptr.Int32(1),
+		Arn:               ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -856,7 +954,13 @@ func TestCheckResponseSnapshot_StartApprovalTeamBaseline(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartApprovalTeamBaseline(context.Background(), &StartApprovalTeamBaselineInput{})
+	got, err := svc.StartApprovalTeamBaseline(context.Background(), &StartApprovalTeamBaselineInput{
+		Arn: ptr.String("__Arn__"),
+		ApproverIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -875,7 +979,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -894,7 +1003,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -915,7 +1030,29 @@ func TestCheckResponseSnapshot_UpdateApprovalTeam(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApprovalTeam(context.Background(), &UpdateApprovalTeamInput{})
+	got, err := svc.UpdateApprovalTeam(context.Background(), &UpdateApprovalTeamInput{
+		ApprovalStrategy: &types.ApprovalStrategyMemberMofN{
+			Value: types.MofNApprovalStrategy{
+				MinApprovalsRequired: ptr.Int32(1),
+			},
+		},
+		Approvers: []types.ApprovalTeamRequestApprover{
+			{
+				PrimaryIdentityId:        ptr.String("__PrimaryIdentityId__"),
+				PrimaryIdentitySourceArn: ptr.String("__PrimaryIdentitySourceArn__"),
+			},
+			{
+				PrimaryIdentityId:        ptr.String("__PrimaryIdentityId__"),
+				PrimaryIdentitySourceArn: ptr.String("__PrimaryIdentitySourceArn__"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+		Arn:         ptr.String("__Arn__"),
+		UpdateActions: []types.UpdateAction{
+			types.UpdateAction("SYNCHRONIZE_MFA_DEVICES"),
+			types.UpdateAction("SYNCHRONIZE_MFA_DEVICES"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -936,7 +1073,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelSession(context.Background(), &CancelSessionInput{})
+	_, opErr := svc.CancelSession(context.Background(), &CancelSessionInput{
+		SessionArn: ptr.String("__SessionArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -961,7 +1100,9 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelSession(context.Background(), &CancelSessionInput{})
+	_, opErr := svc.CancelSession(context.Background(), &CancelSessionInput{
+		SessionArn: ptr.String("__SessionArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -986,7 +1127,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelSession(context.Background(), &CancelSessionInput{})
+	_, opErr := svc.CancelSession(context.Background(), &CancelSessionInput{
+		SessionArn: ptr.String("__SessionArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1011,7 +1154,11 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{})
+	_, opErr := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		PolicyName:  ptr.String("__PolicyName__"),
+		PolicyType:  types.PolicyType("AWS_MANAGED"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1036,7 +1183,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelSession(context.Background(), &CancelSessionInput{})
+	_, opErr := svc.CancelSession(context.Background(), &CancelSessionInput{
+		SessionArn: ptr.String("__SessionArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1061,7 +1210,37 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApprovalTeam(context.Background(), &CreateApprovalTeamInput{})
+	_, opErr := svc.CreateApprovalTeam(context.Background(), &CreateApprovalTeamInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		ApprovalStrategy: &types.ApprovalStrategyMemberMofN{
+			Value: types.MofNApprovalStrategy{
+				MinApprovalsRequired: ptr.Int32(1),
+			},
+		},
+		Approvers: []types.ApprovalTeamRequestApprover{
+			{
+				PrimaryIdentityId:        ptr.String("__PrimaryIdentityId__"),
+				PrimaryIdentitySourceArn: ptr.String("__PrimaryIdentitySourceArn__"),
+			},
+			{
+				PrimaryIdentityId:        ptr.String("__PrimaryIdentityId__"),
+				PrimaryIdentitySourceArn: ptr.String("__PrimaryIdentitySourceArn__"),
+			},
+		},
+		Description: ptr.String("__Description__"),
+		Policies: []types.PolicyReference{
+			{
+				PolicyArn: ptr.String("__PolicyArn__"),
+			},
+			{
+				PolicyArn: ptr.String("__PolicyArn__"),
+			},
+		},
+		Name: ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1086,7 +1265,9 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelSession(context.Background(), &CancelSessionInput{})
+	_, opErr := svc.CancelSession(context.Background(), &CancelSessionInput{
+		SessionArn: ptr.String("__SessionArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1112,7 +1293,12 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1137,7 +1323,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelSession(context.Background(), &CancelSessionInput{})
+	_, opErr := svc.CancelSession(context.Background(), &CancelSessionInput{
+		SessionArn: ptr.String("__SessionArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

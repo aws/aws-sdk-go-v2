@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSFMS_20180101.GetComplianceDetail
+
+{"PolicyComplianceDetail":{"EvaluationLimitExceeded":true,"ExpiredAt":946684800,"IssueInfoMap":{"key0":"__Value__"},"MemberAccount":"__MemberAccount__","PolicyId":"__PolicyId__","PolicyOwner":"__PolicyOwner__","Violators":[{"Metadata":{"key0":"__Value__"},"ResourceId":"__ResourceId__","ResourceType":"__ResourceType__","ViolationReason":"WEB_ACL_MISSING_RULE_GROUP"},{"Metadata":{"key0":"__Value__"},"ResourceId":"__ResourceId__","ResourceType":"__ResourceType__","ViolationReason":"WEB_ACL_MISSING_RULE_GROUP"}]}}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"imageBuildVersionArn":"__ImageBuildVersionArn__","message":"__Message__","nextToken":"__NextToken__","requestId":"__RequestId__","steps":[{"action":"__Action__","description":"__Description__","endTime":"__EndTime__","inputs":"__Inputs__","message":"__Message__","name":"__Name__","outputs":"__Outputs__","rollbackStatus":"RUNNING","startTime":"__StartTime__","status":"PENDING","stepExecutionId":"__StepExecutionId__"},{"action":"__Action__","description":"__Description__","endTime":"__EndTime__","inputs":"__Inputs__","message":"__Message__","name":"__Name__","outputs":"__Outputs__","rollbackStatus":"RUNNING","startTime":"__StartTime__","status":"PENDING","stepExecutionId":"__StepExecutionId__"}],"workflowBuildVersionArn":"__WorkflowBuildVersionArn__","workflowExecutionId":"__WorkflowExecutionId__"}

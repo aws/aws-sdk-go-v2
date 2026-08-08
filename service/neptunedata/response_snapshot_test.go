@@ -120,7 +120,9 @@ func TestCheckResponseSnapshot_CancelGremlinQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelGremlinQuery(context.Background(), &CancelGremlinQueryInput{})
+	got, err := svc.CancelGremlinQuery(context.Background(), &CancelGremlinQueryInput{
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -141,7 +143,9 @@ func TestCheckResponseSnapshot_CancelLoaderJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelLoaderJob(context.Background(), &CancelLoaderJobInput{})
+	got, err := svc.CancelLoaderJob(context.Background(), &CancelLoaderJobInput{
+		LoadId: ptr.String("__LoadId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -162,7 +166,11 @@ func TestCheckResponseSnapshot_CancelMLDataProcessingJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelMLDataProcessingJob(context.Background(), &CancelMLDataProcessingJobInput{})
+	got, err := svc.CancelMLDataProcessingJob(context.Background(), &CancelMLDataProcessingJobInput{
+		Id:                ptr.String("__Id__"),
+		NeptuneIamRoleArn: ptr.String("__NeptuneIamRoleArn__"),
+		Clean:             ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -183,7 +191,11 @@ func TestCheckResponseSnapshot_CancelMLModelTrainingJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelMLModelTrainingJob(context.Background(), &CancelMLModelTrainingJobInput{})
+	got, err := svc.CancelMLModelTrainingJob(context.Background(), &CancelMLModelTrainingJobInput{
+		Id:                ptr.String("__Id__"),
+		NeptuneIamRoleArn: ptr.String("__NeptuneIamRoleArn__"),
+		Clean:             ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -204,7 +216,11 @@ func TestCheckResponseSnapshot_CancelMLModelTransformJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelMLModelTransformJob(context.Background(), &CancelMLModelTransformJobInput{})
+	got, err := svc.CancelMLModelTransformJob(context.Background(), &CancelMLModelTransformJobInput{
+		Id:                ptr.String("__Id__"),
+		NeptuneIamRoleArn: ptr.String("__NeptuneIamRoleArn__"),
+		Clean:             ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -226,7 +242,10 @@ func TestCheckResponseSnapshot_CancelOpenCypherQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelOpenCypherQuery(context.Background(), &CancelOpenCypherQueryInput{})
+	got, err := svc.CancelOpenCypherQuery(context.Background(), &CancelOpenCypherQueryInput{
+		QueryId: ptr.String("__QueryId__"),
+		Silent:  ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -249,7 +268,17 @@ func TestCheckResponseSnapshot_CreateMLEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMLEndpoint(context.Background(), &CreateMLEndpointInput{})
+	got, err := svc.CreateMLEndpoint(context.Background(), &CreateMLEndpointInput{
+		Id:                     ptr.String("__Id__"),
+		MlModelTrainingJobId:   ptr.String("__MlModelTrainingJobId__"),
+		MlModelTransformJobId:  ptr.String("__MlModelTransformJobId__"),
+		Update:                 ptr.Bool(true),
+		NeptuneIamRoleArn:      ptr.String("__NeptuneIamRoleArn__"),
+		ModelName:              ptr.String("__ModelName__"),
+		InstanceType:           ptr.String("__InstanceType__"),
+		InstanceCount:          ptr.Int32(1),
+		VolumeEncryptionKMSKey: ptr.String("__VolumeEncryptionKMSKey__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -270,7 +299,11 @@ func TestCheckResponseSnapshot_DeleteMLEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMLEndpoint(context.Background(), &DeleteMLEndpointInput{})
+	got, err := svc.DeleteMLEndpoint(context.Background(), &DeleteMLEndpointInput{
+		Id:                ptr.String("__Id__"),
+		NeptuneIamRoleArn: ptr.String("__NeptuneIamRoleArn__"),
+		Clean:             ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -281,7 +314,7 @@ func TestCheckResponseSnapshot_DeleteMLEndpoint(t *testing.T) {
 
 func TestCheckResponseSnapshot_DeletePropertygraphStatistics(t *testing.T) {
 	want := &DeletePropertygraphStatisticsOutput{
-		StatusCode: ptr.Int32(1),
+		StatusCode: ptr.Int32(200),
 		Status:     ptr.String("__Status__"),
 		Payload: &types.DeleteStatisticsValueMap{
 			Active:       ptr.Bool(true),
@@ -307,7 +340,7 @@ func TestCheckResponseSnapshot_DeletePropertygraphStatistics(t *testing.T) {
 
 func TestCheckResponseSnapshot_DeleteSparqlStatistics(t *testing.T) {
 	want := &DeleteSparqlStatisticsOutput{
-		StatusCode: ptr.Int32(1),
+		StatusCode: ptr.Int32(200),
 		Status:     ptr.String("__Status__"),
 		Payload: &types.DeleteStatisticsValueMap{
 			Active:       ptr.Bool(true),
@@ -346,7 +379,10 @@ func TestCheckResponseSnapshot_ExecuteFastReset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExecuteFastReset(context.Background(), &ExecuteFastResetInput{})
+	got, err := svc.ExecuteFastReset(context.Background(), &ExecuteFastResetInput{
+		Action: types.Action("initiateDatabaseReset"),
+		Token:  ptr.String("__Token__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -367,7 +403,9 @@ func TestCheckResponseSnapshot_ExecuteGremlinExplainQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExecuteGremlinExplainQuery(context.Background(), &ExecuteGremlinExplainQueryInput{})
+	got, err := svc.ExecuteGremlinExplainQuery(context.Background(), &ExecuteGremlinExplainQueryInput{
+		GremlinQuery: ptr.String("__GremlinQuery__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -388,7 +426,13 @@ func TestCheckResponseSnapshot_ExecuteGremlinProfileQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExecuteGremlinProfileQuery(context.Background(), &ExecuteGremlinProfileQueryInput{})
+	got, err := svc.ExecuteGremlinProfileQuery(context.Background(), &ExecuteGremlinProfileQueryInput{
+		GremlinQuery: ptr.String("__GremlinQuery__"),
+		Results:      ptr.Bool(true),
+		Chop:         ptr.Int32(1),
+		Serializer:   ptr.String("__Serializer__"),
+		IndexOps:     ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -403,10 +447,10 @@ func TestCheckResponseSnapshot_ExecuteGremlinQuery(t *testing.T) {
 		Status: &types.GremlinQueryStatusAttributes{
 			Message:    ptr.String("__Message__"),
 			Code:       ptr.Int32(1),
-			Attributes: nil,
+			Attributes: document.NewLazyDocument("__Document__"),
 		},
-		Result: nil,
-		Meta:   nil,
+		Result: document.NewLazyDocument("__Document__"),
+		Meta:   document.NewLazyDocument("__Document__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ExecuteGremlinQuery.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -416,7 +460,10 @@ func TestCheckResponseSnapshot_ExecuteGremlinQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExecuteGremlinQuery(context.Background(), &ExecuteGremlinQueryInput{})
+	got, err := svc.ExecuteGremlinQuery(context.Background(), &ExecuteGremlinQueryInput{
+		GremlinQuery: ptr.String("__GremlinQuery__"),
+		Serializer:   ptr.String("__Serializer__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -437,7 +484,11 @@ func TestCheckResponseSnapshot_ExecuteOpenCypherExplainQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExecuteOpenCypherExplainQuery(context.Background(), &ExecuteOpenCypherExplainQueryInput{})
+	got, err := svc.ExecuteOpenCypherExplainQuery(context.Background(), &ExecuteOpenCypherExplainQueryInput{
+		OpenCypherQuery: ptr.String("__OpenCypherQuery__"),
+		Parameters:      ptr.String("__Parameters__"),
+		ExplainMode:     types.OpenCypherExplainMode("static"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -448,7 +499,7 @@ func TestCheckResponseSnapshot_ExecuteOpenCypherExplainQuery(t *testing.T) {
 
 func TestCheckResponseSnapshot_ExecuteOpenCypherQuery(t *testing.T) {
 	want := &ExecuteOpenCypherQueryOutput{
-		Results: nil,
+		Results: document.NewLazyDocument("__Document__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ExecuteOpenCypherQuery.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -458,7 +509,10 @@ func TestCheckResponseSnapshot_ExecuteOpenCypherQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExecuteOpenCypherQuery(context.Background(), &ExecuteOpenCypherQueryInput{})
+	got, err := svc.ExecuteOpenCypherQuery(context.Background(), &ExecuteOpenCypherQueryInput{
+		OpenCypherQuery: ptr.String("__OpenCypherQuery__"),
+		Parameters:      ptr.String("__Parameters__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -489,7 +543,7 @@ func TestCheckResponseSnapshot_GetEngineStatus(t *testing.T) {
 		RollingBackTrxCount:             ptr.Int32(1),
 		RollingBackTrxEarliestStartTime: ptr.String("__RollingBackTrxEarliestStartTime__"),
 		Features: map[string]document.Interface{
-			"key0": nil,
+			"key0": document.NewLazyDocument("__Document__"),
 		},
 		Settings: map[string]string{
 			"key0": "__Value__",
@@ -520,7 +574,7 @@ func TestCheckResponseSnapshot_GetGremlinQueryStatus(t *testing.T) {
 			Waited:     ptr.Int32(1),
 			Elapsed:    ptr.Int32(1),
 			Cancelled:  ptr.Bool(true),
-			Subqueries: nil,
+			Subqueries: document.NewLazyDocument("__Document__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetGremlinQueryStatus.response")
@@ -531,7 +585,9 @@ func TestCheckResponseSnapshot_GetGremlinQueryStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetGremlinQueryStatus(context.Background(), &GetGremlinQueryStatusInput{})
+	got, err := svc.GetGremlinQueryStatus(context.Background(), &GetGremlinQueryStatusInput{
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -543,7 +599,7 @@ func TestCheckResponseSnapshot_GetGremlinQueryStatus(t *testing.T) {
 func TestCheckResponseSnapshot_GetLoaderJobStatus(t *testing.T) {
 	want := &GetLoaderJobStatusOutput{
 		Status:  ptr.String("__Status__"),
-		Payload: nil,
+		Payload: document.NewLazyDocument("__Document__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetLoaderJobStatus.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -553,7 +609,13 @@ func TestCheckResponseSnapshot_GetLoaderJobStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLoaderJobStatus(context.Background(), &GetLoaderJobStatusInput{})
+	got, err := svc.GetLoaderJobStatus(context.Background(), &GetLoaderJobStatusInput{
+		LoadId:        ptr.String("__LoadId__"),
+		Details:       ptr.Bool(true),
+		Errors:        ptr.Bool(true),
+		Page:          ptr.Int32(1),
+		ErrorsPerPage: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -583,7 +645,10 @@ func TestCheckResponseSnapshot_GetMLDataProcessingJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMLDataProcessingJob(context.Background(), &GetMLDataProcessingJobInput{})
+	got, err := svc.GetMLDataProcessingJob(context.Background(), &GetMLDataProcessingJobInput{
+		Id:                ptr.String("__Id__"),
+		NeptuneIamRoleArn: ptr.String("__NeptuneIamRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -617,7 +682,10 @@ func TestCheckResponseSnapshot_GetMLEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMLEndpoint(context.Background(), &GetMLEndpointInput{})
+	got, err := svc.GetMLEndpoint(context.Background(), &GetMLEndpointInput{
+		Id:                ptr.String("__Id__"),
+		NeptuneIamRoleArn: ptr.String("__NeptuneIamRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -673,7 +741,10 @@ func TestCheckResponseSnapshot_GetMLModelTrainingJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMLModelTrainingJob(context.Background(), &GetMLModelTrainingJobInput{})
+	got, err := svc.GetMLModelTrainingJob(context.Background(), &GetMLModelTrainingJobInput{
+		Id:                ptr.String("__Id__"),
+		NeptuneIamRoleArn: ptr.String("__NeptuneIamRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -721,7 +792,10 @@ func TestCheckResponseSnapshot_GetMLModelTransformJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMLModelTransformJob(context.Background(), &GetMLModelTransformJobInput{})
+	got, err := svc.GetMLModelTransformJob(context.Background(), &GetMLModelTransformJobInput{
+		Id:                ptr.String("__Id__"),
+		NeptuneIamRoleArn: ptr.String("__NeptuneIamRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -738,7 +812,7 @@ func TestCheckResponseSnapshot_GetOpenCypherQueryStatus(t *testing.T) {
 			Waited:     ptr.Int32(1),
 			Elapsed:    ptr.Int32(1),
 			Cancelled:  ptr.Bool(true),
-			Subqueries: nil,
+			Subqueries: document.NewLazyDocument("__Document__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetOpenCypherQueryStatus.response")
@@ -749,7 +823,9 @@ func TestCheckResponseSnapshot_GetOpenCypherQueryStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOpenCypherQueryStatus(context.Background(), &GetOpenCypherQueryStatusInput{})
+	got, err := svc.GetOpenCypherQueryStatus(context.Background(), &GetOpenCypherQueryStatusInput{
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -808,7 +884,7 @@ func TestCheckResponseSnapshot_GetPropertygraphStream(t *testing.T) {
 					Id:    ptr.String("__Id__"),
 					Type:  ptr.String("__Type__"),
 					Key:   ptr.String("__Key__"),
-					Value: nil,
+					Value: document.NewLazyDocument("__Document__"),
 					From:  ptr.String("__From__"),
 					To:    ptr.String("__To__"),
 				},
@@ -824,7 +900,7 @@ func TestCheckResponseSnapshot_GetPropertygraphStream(t *testing.T) {
 					Id:    ptr.String("__Id__"),
 					Type:  ptr.String("__Type__"),
 					Key:   ptr.String("__Key__"),
-					Value: nil,
+					Value: document.NewLazyDocument("__Document__"),
 					From:  ptr.String("__From__"),
 					To:    ptr.String("__To__"),
 				},
@@ -842,7 +918,13 @@ func TestCheckResponseSnapshot_GetPropertygraphStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPropertygraphStream(context.Background(), &GetPropertygraphStreamInput{})
+	got, err := svc.GetPropertygraphStream(context.Background(), &GetPropertygraphStreamInput{
+		Limit:        ptr.Int64(1),
+		IteratorType: types.IteratorType("AT_SEQUENCE_NUMBER"),
+		CommitNum:    ptr.Int64(1),
+		OpNum:        ptr.Int64(1),
+		Encoding:     types.Encoding("gzip"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -853,7 +935,7 @@ func TestCheckResponseSnapshot_GetPropertygraphStream(t *testing.T) {
 
 func TestCheckResponseSnapshot_GetPropertygraphSummary(t *testing.T) {
 	want := &GetPropertygraphSummaryOutput{
-		StatusCode: ptr.Int32(1),
+		StatusCode: ptr.Int32(200),
 		Payload: &types.PropertygraphSummaryValueMap{
 			Version:                       ptr.String("__Version__"),
 			LastStatisticsComputationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -941,7 +1023,9 @@ func TestCheckResponseSnapshot_GetPropertygraphSummary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPropertygraphSummary(context.Background(), &GetPropertygraphSummaryInput{})
+	got, err := svc.GetPropertygraphSummary(context.Background(), &GetPropertygraphSummaryInput{
+		Mode: types.GraphSummaryType("basic"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -952,7 +1036,7 @@ func TestCheckResponseSnapshot_GetPropertygraphSummary(t *testing.T) {
 
 func TestCheckResponseSnapshot_GetRDFGraphSummary(t *testing.T) {
 	want := &GetRDFGraphSummaryOutput{
-		StatusCode: ptr.Int32(1),
+		StatusCode: ptr.Int32(200),
 		Payload: &types.RDFGraphSummaryValueMap{
 			Version:                       ptr.String("__Version__"),
 			LastStatisticsComputationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -1000,7 +1084,9 @@ func TestCheckResponseSnapshot_GetRDFGraphSummary(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRDFGraphSummary(context.Background(), &GetRDFGraphSummaryInput{})
+	got, err := svc.GetRDFGraphSummary(context.Background(), &GetRDFGraphSummaryInput{
+		Mode: types.GraphSummaryType("basic"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1083,7 +1169,13 @@ func TestCheckResponseSnapshot_GetSparqlStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSparqlStream(context.Background(), &GetSparqlStreamInput{})
+	got, err := svc.GetSparqlStream(context.Background(), &GetSparqlStreamInput{
+		Limit:        ptr.Int64(1),
+		IteratorType: types.IteratorType("AT_SEQUENCE_NUMBER"),
+		CommitNum:    ptr.Int64(1),
+		OpNum:        ptr.Int64(1),
+		Encoding:     types.Encoding("gzip"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1104,7 +1196,7 @@ func TestCheckResponseSnapshot_ListGremlinQueries(t *testing.T) {
 					Waited:     ptr.Int32(1),
 					Elapsed:    ptr.Int32(1),
 					Cancelled:  ptr.Bool(true),
-					Subqueries: nil,
+					Subqueries: document.NewLazyDocument("__Document__"),
 				},
 			},
 			{
@@ -1114,7 +1206,7 @@ func TestCheckResponseSnapshot_ListGremlinQueries(t *testing.T) {
 					Waited:     ptr.Int32(1),
 					Elapsed:    ptr.Int32(1),
 					Cancelled:  ptr.Bool(true),
-					Subqueries: nil,
+					Subqueries: document.NewLazyDocument("__Document__"),
 				},
 			},
 		},
@@ -1127,7 +1219,9 @@ func TestCheckResponseSnapshot_ListGremlinQueries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGremlinQueries(context.Background(), &ListGremlinQueriesInput{})
+	got, err := svc.ListGremlinQueries(context.Background(), &ListGremlinQueriesInput{
+		IncludeWaiting: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1154,7 +1248,10 @@ func TestCheckResponseSnapshot_ListLoaderJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLoaderJobs(context.Background(), &ListLoaderJobsInput{})
+	got, err := svc.ListLoaderJobs(context.Background(), &ListLoaderJobsInput{
+		Limit:              ptr.Int32(1),
+		IncludeQueuedLoads: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1178,7 +1275,10 @@ func TestCheckResponseSnapshot_ListMLDataProcessingJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMLDataProcessingJobs(context.Background(), &ListMLDataProcessingJobsInput{})
+	got, err := svc.ListMLDataProcessingJobs(context.Background(), &ListMLDataProcessingJobsInput{
+		MaxItems:          ptr.Int32(1),
+		NeptuneIamRoleArn: ptr.String("__NeptuneIamRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1202,7 +1302,10 @@ func TestCheckResponseSnapshot_ListMLEndpoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMLEndpoints(context.Background(), &ListMLEndpointsInput{})
+	got, err := svc.ListMLEndpoints(context.Background(), &ListMLEndpointsInput{
+		MaxItems:          ptr.Int32(1),
+		NeptuneIamRoleArn: ptr.String("__NeptuneIamRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1226,7 +1329,10 @@ func TestCheckResponseSnapshot_ListMLModelTrainingJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMLModelTrainingJobs(context.Background(), &ListMLModelTrainingJobsInput{})
+	got, err := svc.ListMLModelTrainingJobs(context.Background(), &ListMLModelTrainingJobsInput{
+		MaxItems:          ptr.Int32(1),
+		NeptuneIamRoleArn: ptr.String("__NeptuneIamRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1250,7 +1356,10 @@ func TestCheckResponseSnapshot_ListMLModelTransformJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMLModelTransformJobs(context.Background(), &ListMLModelTransformJobsInput{})
+	got, err := svc.ListMLModelTransformJobs(context.Background(), &ListMLModelTransformJobsInput{
+		MaxItems:          ptr.Int32(1),
+		NeptuneIamRoleArn: ptr.String("__NeptuneIamRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1271,7 +1380,7 @@ func TestCheckResponseSnapshot_ListOpenCypherQueries(t *testing.T) {
 					Waited:     ptr.Int32(1),
 					Elapsed:    ptr.Int32(1),
 					Cancelled:  ptr.Bool(true),
-					Subqueries: nil,
+					Subqueries: document.NewLazyDocument("__Document__"),
 				},
 			},
 			{
@@ -1281,7 +1390,7 @@ func TestCheckResponseSnapshot_ListOpenCypherQueries(t *testing.T) {
 					Waited:     ptr.Int32(1),
 					Elapsed:    ptr.Int32(1),
 					Cancelled:  ptr.Bool(true),
-					Subqueries: nil,
+					Subqueries: document.NewLazyDocument("__Document__"),
 				},
 			},
 		},
@@ -1294,7 +1403,9 @@ func TestCheckResponseSnapshot_ListOpenCypherQueries(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOpenCypherQueries(context.Background(), &ListOpenCypherQueriesInput{})
+	got, err := svc.ListOpenCypherQueries(context.Background(), &ListOpenCypherQueriesInput{
+		IncludeWaiting: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1318,7 +1429,9 @@ func TestCheckResponseSnapshot_ManagePropertygraphStatistics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ManagePropertygraphStatistics(context.Background(), &ManagePropertygraphStatisticsInput{})
+	got, err := svc.ManagePropertygraphStatistics(context.Background(), &ManagePropertygraphStatisticsInput{
+		Mode: types.StatisticsAutoGenerationMode("disableAutoCompute"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1342,7 +1455,9 @@ func TestCheckResponseSnapshot_ManageSparqlStatistics(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ManageSparqlStatistics(context.Background(), &ManageSparqlStatisticsInput{})
+	got, err := svc.ManageSparqlStatistics(context.Background(), &ManageSparqlStatisticsInput{
+		Mode: types.StatisticsAutoGenerationMode("disableAutoCompute"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1366,7 +1481,26 @@ func TestCheckResponseSnapshot_StartLoaderJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartLoaderJob(context.Background(), &StartLoaderJobInput{})
+	got, err := svc.StartLoaderJob(context.Background(), &StartLoaderJobInput{
+		Source:         ptr.String("__Source__"),
+		Format:         types.Format("csv"),
+		S3BucketRegion: types.S3BucketRegion("us-east-1"),
+		IamRoleArn:     ptr.String("__IamRoleArn__"),
+		Mode:           types.Mode("RESUME"),
+		FailOnError:    ptr.Bool(true),
+		Parallelism:    types.Parallelism("LOW"),
+		ParserConfiguration: map[string]string{
+			"key0": "__Value__",
+		},
+		UpdateSingleCardinalityProperties: ptr.Bool(true),
+		QueueRequest:                      ptr.Bool(true),
+		Dependencies: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UserProvidedEdgeIds: ptr.Bool(true),
+		EdgeOnlyLoad:        ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1389,7 +1523,29 @@ func TestCheckResponseSnapshot_StartMLDataProcessingJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMLDataProcessingJob(context.Background(), &StartMLDataProcessingJobInput{})
+	got, err := svc.StartMLDataProcessingJob(context.Background(), &StartMLDataProcessingJobInput{
+		Id:                               ptr.String("__Id__"),
+		PreviousDataProcessingJobId:      ptr.String("__PreviousDataProcessingJobId__"),
+		InputDataS3Location:              ptr.String("__InputDataS3Location__"),
+		ProcessedDataS3Location:          ptr.String("__ProcessedDataS3Location__"),
+		SagemakerIamRoleArn:              ptr.String("__SagemakerIamRoleArn__"),
+		NeptuneIamRoleArn:                ptr.String("__NeptuneIamRoleArn__"),
+		ProcessingInstanceType:           ptr.String("__ProcessingInstanceType__"),
+		ProcessingInstanceVolumeSizeInGB: ptr.Int32(1),
+		ProcessingTimeOutInSeconds:       ptr.Int32(1),
+		ModelType:                        ptr.String("__ModelType__"),
+		ConfigFileName:                   ptr.String("__ConfigFileName__"),
+		Subnets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		VolumeEncryptionKMSKey:   ptr.String("__VolumeEncryptionKMSKey__"),
+		S3OutputEncryptionKMSKey: ptr.String("__S3OutputEncryptionKMSKey__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1412,7 +1568,36 @@ func TestCheckResponseSnapshot_StartMLModelTrainingJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMLModelTrainingJob(context.Background(), &StartMLModelTrainingJobInput{})
+	got, err := svc.StartMLModelTrainingJob(context.Background(), &StartMLModelTrainingJobInput{
+		Id:                             ptr.String("__Id__"),
+		PreviousModelTrainingJobId:     ptr.String("__PreviousModelTrainingJobId__"),
+		DataProcessingJobId:            ptr.String("__DataProcessingJobId__"),
+		TrainModelS3Location:           ptr.String("__TrainModelS3Location__"),
+		SagemakerIamRoleArn:            ptr.String("__SagemakerIamRoleArn__"),
+		NeptuneIamRoleArn:              ptr.String("__NeptuneIamRoleArn__"),
+		BaseProcessingInstanceType:     ptr.String("__BaseProcessingInstanceType__"),
+		TrainingInstanceType:           ptr.String("__TrainingInstanceType__"),
+		TrainingInstanceVolumeSizeInGB: ptr.Int32(1),
+		TrainingTimeOutInSeconds:       ptr.Int32(1),
+		MaxHPONumberOfTrainingJobs:     ptr.Int32(1),
+		MaxHPOParallelTrainingJobs:     ptr.Int32(1),
+		Subnets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		VolumeEncryptionKMSKey:    ptr.String("__VolumeEncryptionKMSKey__"),
+		S3OutputEncryptionKMSKey:  ptr.String("__S3OutputEncryptionKMSKey__"),
+		EnableManagedSpotTraining: ptr.Bool(true),
+		CustomModelTrainingParameters: &types.CustomModelTrainingParameters{
+			SourceS3DirectoryPath:     ptr.String("__SourceS3DirectoryPath__"),
+			TrainingEntryPointScript:  ptr.String("__TrainingEntryPointScript__"),
+			TransformEntryPointScript: ptr.String("__TransformEntryPointScript__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1435,7 +1620,31 @@ func TestCheckResponseSnapshot_StartMLModelTransformJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartMLModelTransformJob(context.Background(), &StartMLModelTransformJobInput{})
+	got, err := svc.StartMLModelTransformJob(context.Background(), &StartMLModelTransformJobInput{
+		Id:                             ptr.String("__Id__"),
+		DataProcessingJobId:            ptr.String("__DataProcessingJobId__"),
+		MlModelTrainingJobId:           ptr.String("__MlModelTrainingJobId__"),
+		TrainingJobName:                ptr.String("__TrainingJobName__"),
+		ModelTransformOutputS3Location: ptr.String("__ModelTransformOutputS3Location__"),
+		SagemakerIamRoleArn:            ptr.String("__SagemakerIamRoleArn__"),
+		NeptuneIamRoleArn:              ptr.String("__NeptuneIamRoleArn__"),
+		CustomModelTransformParameters: &types.CustomModelTransformParameters{
+			SourceS3DirectoryPath:     ptr.String("__SourceS3DirectoryPath__"),
+			TransformEntryPointScript: ptr.String("__TransformEntryPointScript__"),
+		},
+		BaseProcessingInstanceType:           ptr.String("__BaseProcessingInstanceType__"),
+		BaseProcessingInstanceVolumeSizeInGB: ptr.Int32(1),
+		Subnets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		VolumeEncryptionKMSKey:   ptr.String("__VolumeEncryptionKMSKey__"),
+		S3OutputEncryptionKMSKey: ptr.String("__S3OutputEncryptionKMSKey__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1448,7 +1657,7 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	want := &types.AccessDeniedException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("AccessDeniedException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AccessDeniedException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1475,7 +1684,7 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 	want := &types.BadRequestException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("BadRequestException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("BadRequestException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1485,7 +1694,9 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelGremlinQuery(context.Background(), &CancelGremlinQueryInput{})
+	_, opErr := svc.CancelGremlinQuery(context.Background(), &CancelGremlinQueryInput{
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1502,7 +1713,7 @@ func TestCheckResponseSnapshot_Error_BulkLoadIdNotFoundException(t *testing.T) {
 	want := &types.BulkLoadIdNotFoundException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("BulkLoadIdNotFoundException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("BulkLoadIdNotFoundException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1512,7 +1723,9 @@ func TestCheckResponseSnapshot_Error_BulkLoadIdNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelLoaderJob(context.Background(), &CancelLoaderJobInput{})
+	_, opErr := svc.CancelLoaderJob(context.Background(), &CancelLoaderJobInput{
+		LoadId: ptr.String("__LoadId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1529,7 +1742,7 @@ func TestCheckResponseSnapshot_Error_CancelledByUserException(t *testing.T) {
 	want := &types.CancelledByUserException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("CancelledByUserException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("CancelledByUserException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1539,7 +1752,9 @@ func TestCheckResponseSnapshot_Error_CancelledByUserException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ExecuteGremlinExplainQuery(context.Background(), &ExecuteGremlinExplainQueryInput{})
+	_, opErr := svc.ExecuteGremlinExplainQuery(context.Background(), &ExecuteGremlinExplainQueryInput{
+		GremlinQuery: ptr.String("__GremlinQuery__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1556,7 +1771,7 @@ func TestCheckResponseSnapshot_Error_ClientTimeoutException(t *testing.T) {
 	want := &types.ClientTimeoutException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("ClientTimeoutException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ClientTimeoutException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1566,7 +1781,9 @@ func TestCheckResponseSnapshot_Error_ClientTimeoutException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelGremlinQuery(context.Background(), &CancelGremlinQueryInput{})
+	_, opErr := svc.CancelGremlinQuery(context.Background(), &CancelGremlinQueryInput{
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1583,7 +1800,7 @@ func TestCheckResponseSnapshot_Error_ConcurrentModificationException(t *testing.
 	want := &types.ConcurrentModificationException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("ConcurrentModificationException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ConcurrentModificationException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1593,7 +1810,9 @@ func TestCheckResponseSnapshot_Error_ConcurrentModificationException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelGremlinQuery(context.Background(), &CancelGremlinQueryInput{})
+	_, opErr := svc.CancelGremlinQuery(context.Background(), &CancelGremlinQueryInput{
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1610,7 +1829,7 @@ func TestCheckResponseSnapshot_Error_ConstraintViolationException(t *testing.T) 
 	want := &types.ConstraintViolationException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("ConstraintViolationException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ConstraintViolationException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1620,7 +1839,9 @@ func TestCheckResponseSnapshot_Error_ConstraintViolationException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelGremlinQuery(context.Background(), &CancelGremlinQueryInput{})
+	_, opErr := svc.CancelGremlinQuery(context.Background(), &CancelGremlinQueryInput{
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1637,7 +1858,7 @@ func TestCheckResponseSnapshot_Error_ExpiredStreamException(t *testing.T) {
 	want := &types.ExpiredStreamException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("ExpiredStreamException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ExpiredStreamException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1647,7 +1868,13 @@ func TestCheckResponseSnapshot_Error_ExpiredStreamException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetPropertygraphStream(context.Background(), &GetPropertygraphStreamInput{})
+	_, opErr := svc.GetPropertygraphStream(context.Background(), &GetPropertygraphStreamInput{
+		Limit:        ptr.Int64(1),
+		IteratorType: types.IteratorType("AT_SEQUENCE_NUMBER"),
+		CommitNum:    ptr.Int64(1),
+		OpNum:        ptr.Int64(1),
+		Encoding:     types.Encoding("gzip"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1664,7 +1891,7 @@ func TestCheckResponseSnapshot_Error_FailureByQueryException(t *testing.T) {
 	want := &types.FailureByQueryException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("FailureByQueryException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("FailureByQueryException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1674,7 +1901,9 @@ func TestCheckResponseSnapshot_Error_FailureByQueryException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelGremlinQuery(context.Background(), &CancelGremlinQueryInput{})
+	_, opErr := svc.CancelGremlinQuery(context.Background(), &CancelGremlinQueryInput{
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1691,7 +1920,7 @@ func TestCheckResponseSnapshot_Error_IllegalArgumentException(t *testing.T) {
 	want := &types.IllegalArgumentException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("IllegalArgumentException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("IllegalArgumentException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1701,7 +1930,9 @@ func TestCheckResponseSnapshot_Error_IllegalArgumentException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelGremlinQuery(context.Background(), &CancelGremlinQueryInput{})
+	_, opErr := svc.CancelGremlinQuery(context.Background(), &CancelGremlinQueryInput{
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1718,7 +1949,7 @@ func TestCheckResponseSnapshot_Error_InternalFailureException(t *testing.T) {
 	want := &types.InternalFailureException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("InternalFailureException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InternalFailureException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1728,7 +1959,9 @@ func TestCheckResponseSnapshot_Error_InternalFailureException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelLoaderJob(context.Background(), &CancelLoaderJobInput{})
+	_, opErr := svc.CancelLoaderJob(context.Background(), &CancelLoaderJobInput{
+		LoadId: ptr.String("__LoadId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1745,7 +1978,7 @@ func TestCheckResponseSnapshot_Error_InvalidArgumentException(t *testing.T) {
 	want := &types.InvalidArgumentException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("InvalidArgumentException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InvalidArgumentException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1755,7 +1988,9 @@ func TestCheckResponseSnapshot_Error_InvalidArgumentException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelGremlinQuery(context.Background(), &CancelGremlinQueryInput{})
+	_, opErr := svc.CancelGremlinQuery(context.Background(), &CancelGremlinQueryInput{
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1772,7 +2007,7 @@ func TestCheckResponseSnapshot_Error_InvalidNumericDataException(t *testing.T) {
 	want := &types.InvalidNumericDataException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("InvalidNumericDataException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InvalidNumericDataException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1782,7 +2017,10 @@ func TestCheckResponseSnapshot_Error_InvalidNumericDataException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelOpenCypherQuery(context.Background(), &CancelOpenCypherQueryInput{})
+	_, opErr := svc.CancelOpenCypherQuery(context.Background(), &CancelOpenCypherQueryInput{
+		QueryId: ptr.String("__QueryId__"),
+		Silent:  ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1799,7 +2037,7 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 	want := &types.InvalidParameterException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("InvalidParameterException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InvalidParameterException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1809,7 +2047,9 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelGremlinQuery(context.Background(), &CancelGremlinQueryInput{})
+	_, opErr := svc.CancelGremlinQuery(context.Background(), &CancelGremlinQueryInput{
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1826,7 +2066,7 @@ func TestCheckResponseSnapshot_Error_LoadUrlAccessDeniedException(t *testing.T) 
 	want := &types.LoadUrlAccessDeniedException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("LoadUrlAccessDeniedException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("LoadUrlAccessDeniedException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1836,7 +2076,9 @@ func TestCheckResponseSnapshot_Error_LoadUrlAccessDeniedException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelLoaderJob(context.Background(), &CancelLoaderJobInput{})
+	_, opErr := svc.CancelLoaderJob(context.Background(), &CancelLoaderJobInput{
+		LoadId: ptr.String("__LoadId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1853,7 +2095,7 @@ func TestCheckResponseSnapshot_Error_MLResourceNotFoundException(t *testing.T) {
 	want := &types.MLResourceNotFoundException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("MLResourceNotFoundException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("MLResourceNotFoundException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1863,7 +2105,11 @@ func TestCheckResponseSnapshot_Error_MLResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelMLDataProcessingJob(context.Background(), &CancelMLDataProcessingJobInput{})
+	_, opErr := svc.CancelMLDataProcessingJob(context.Background(), &CancelMLDataProcessingJobInput{
+		Id:                ptr.String("__Id__"),
+		NeptuneIamRoleArn: ptr.String("__NeptuneIamRoleArn__"),
+		Clean:             ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1880,7 +2126,7 @@ func TestCheckResponseSnapshot_Error_MalformedQueryException(t *testing.T) {
 	want := &types.MalformedQueryException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("MalformedQueryException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("MalformedQueryException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1890,7 +2136,9 @@ func TestCheckResponseSnapshot_Error_MalformedQueryException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ExecuteGremlinExplainQuery(context.Background(), &ExecuteGremlinExplainQueryInput{})
+	_, opErr := svc.ExecuteGremlinExplainQuery(context.Background(), &ExecuteGremlinExplainQueryInput{
+		GremlinQuery: ptr.String("__GremlinQuery__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1907,7 +2155,7 @@ func TestCheckResponseSnapshot_Error_MemoryLimitExceededException(t *testing.T) 
 	want := &types.MemoryLimitExceededException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("MemoryLimitExceededException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("MemoryLimitExceededException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1917,7 +2165,9 @@ func TestCheckResponseSnapshot_Error_MemoryLimitExceededException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ExecuteGremlinExplainQuery(context.Background(), &ExecuteGremlinExplainQueryInput{})
+	_, opErr := svc.ExecuteGremlinExplainQuery(context.Background(), &ExecuteGremlinExplainQueryInput{
+		GremlinQuery: ptr.String("__GremlinQuery__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1934,7 +2184,7 @@ func TestCheckResponseSnapshot_Error_MethodNotAllowedException(t *testing.T) {
 	want := &types.MethodNotAllowedException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("MethodNotAllowedException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("MethodNotAllowedException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1944,7 +2194,10 @@ func TestCheckResponseSnapshot_Error_MethodNotAllowedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ExecuteFastReset(context.Background(), &ExecuteFastResetInput{})
+	_, opErr := svc.ExecuteFastReset(context.Background(), &ExecuteFastResetInput{
+		Action: types.Action("initiateDatabaseReset"),
+		Token:  ptr.String("__Token__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1961,7 +2214,7 @@ func TestCheckResponseSnapshot_Error_MissingParameterException(t *testing.T) {
 	want := &types.MissingParameterException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("MissingParameterException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("MissingParameterException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1971,7 +2224,9 @@ func TestCheckResponseSnapshot_Error_MissingParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelGremlinQuery(context.Background(), &CancelGremlinQueryInput{})
+	_, opErr := svc.CancelGremlinQuery(context.Background(), &CancelGremlinQueryInput{
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1988,7 +2243,7 @@ func TestCheckResponseSnapshot_Error_ParsingException(t *testing.T) {
 	want := &types.ParsingException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("ParsingException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ParsingException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1998,7 +2253,9 @@ func TestCheckResponseSnapshot_Error_ParsingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelGremlinQuery(context.Background(), &CancelGremlinQueryInput{})
+	_, opErr := svc.CancelGremlinQuery(context.Background(), &CancelGremlinQueryInput{
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2015,7 +2272,7 @@ func TestCheckResponseSnapshot_Error_PreconditionsFailedException(t *testing.T) 
 	want := &types.PreconditionsFailedException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("PreconditionsFailedException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("PreconditionsFailedException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2025,7 +2282,9 @@ func TestCheckResponseSnapshot_Error_PreconditionsFailedException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelGremlinQuery(context.Background(), &CancelGremlinQueryInput{})
+	_, opErr := svc.CancelGremlinQuery(context.Background(), &CancelGremlinQueryInput{
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2042,7 +2301,7 @@ func TestCheckResponseSnapshot_Error_QueryLimitExceededException(t *testing.T) {
 	want := &types.QueryLimitExceededException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("QueryLimitExceededException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("QueryLimitExceededException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2052,7 +2311,9 @@ func TestCheckResponseSnapshot_Error_QueryLimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ExecuteGremlinExplainQuery(context.Background(), &ExecuteGremlinExplainQueryInput{})
+	_, opErr := svc.ExecuteGremlinExplainQuery(context.Background(), &ExecuteGremlinExplainQueryInput{
+		GremlinQuery: ptr.String("__GremlinQuery__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2069,7 +2330,7 @@ func TestCheckResponseSnapshot_Error_QueryLimitException(t *testing.T) {
 	want := &types.QueryLimitException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("QueryLimitException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("QueryLimitException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2079,7 +2340,9 @@ func TestCheckResponseSnapshot_Error_QueryLimitException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ExecuteGremlinExplainQuery(context.Background(), &ExecuteGremlinExplainQueryInput{})
+	_, opErr := svc.ExecuteGremlinExplainQuery(context.Background(), &ExecuteGremlinExplainQueryInput{
+		GremlinQuery: ptr.String("__GremlinQuery__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2096,7 +2359,7 @@ func TestCheckResponseSnapshot_Error_QueryTooLargeException(t *testing.T) {
 	want := &types.QueryTooLargeException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("QueryTooLargeException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("QueryTooLargeException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2106,7 +2369,9 @@ func TestCheckResponseSnapshot_Error_QueryTooLargeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ExecuteGremlinExplainQuery(context.Background(), &ExecuteGremlinExplainQueryInput{})
+	_, opErr := svc.ExecuteGremlinExplainQuery(context.Background(), &ExecuteGremlinExplainQueryInput{
+		GremlinQuery: ptr.String("__GremlinQuery__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2123,7 +2388,7 @@ func TestCheckResponseSnapshot_Error_ReadOnlyViolationException(t *testing.T) {
 	want := &types.ReadOnlyViolationException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("ReadOnlyViolationException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ReadOnlyViolationException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2150,7 +2415,7 @@ func TestCheckResponseSnapshot_Error_S3Exception(t *testing.T) {
 	want := &types.S3Exception{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("S3Exception"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("S3Exception.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2160,7 +2425,26 @@ func TestCheckResponseSnapshot_Error_S3Exception(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartLoaderJob(context.Background(), &StartLoaderJobInput{})
+	_, opErr := svc.StartLoaderJob(context.Background(), &StartLoaderJobInput{
+		Source:         ptr.String("__Source__"),
+		Format:         types.Format("csv"),
+		S3BucketRegion: types.S3BucketRegion("us-east-1"),
+		IamRoleArn:     ptr.String("__IamRoleArn__"),
+		Mode:           types.Mode("RESUME"),
+		FailOnError:    ptr.Bool(true),
+		Parallelism:    types.Parallelism("LOW"),
+		ParserConfiguration: map[string]string{
+			"key0": "__Value__",
+		},
+		UpdateSingleCardinalityProperties: ptr.Bool(true),
+		QueueRequest:                      ptr.Bool(true),
+		Dependencies: []string{
+			"__Member__",
+			"__Member__",
+		},
+		UserProvidedEdgeIds: ptr.Bool(true),
+		EdgeOnlyLoad:        ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2177,7 +2461,7 @@ func TestCheckResponseSnapshot_Error_ServerShutdownException(t *testing.T) {
 	want := &types.ServerShutdownException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("ServerShutdownException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ServerShutdownException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2187,7 +2471,10 @@ func TestCheckResponseSnapshot_Error_ServerShutdownException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ExecuteFastReset(context.Background(), &ExecuteFastResetInput{})
+	_, opErr := svc.ExecuteFastReset(context.Background(), &ExecuteFastResetInput{
+		Action: types.Action("initiateDatabaseReset"),
+		Token:  ptr.String("__Token__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2204,7 +2491,7 @@ func TestCheckResponseSnapshot_Error_StatisticsNotAvailableException(t *testing.
 	want := &types.StatisticsNotAvailableException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("StatisticsNotAvailableException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("StatisticsNotAvailableException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2231,7 +2518,7 @@ func TestCheckResponseSnapshot_Error_StreamRecordsNotFoundException(t *testing.T
 	want := &types.StreamRecordsNotFoundException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("StreamRecordsNotFoundException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("StreamRecordsNotFoundException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2241,7 +2528,13 @@ func TestCheckResponseSnapshot_Error_StreamRecordsNotFoundException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetPropertygraphStream(context.Background(), &GetPropertygraphStreamInput{})
+	_, opErr := svc.GetPropertygraphStream(context.Background(), &GetPropertygraphStreamInput{
+		Limit:        ptr.Int64(1),
+		IteratorType: types.IteratorType("AT_SEQUENCE_NUMBER"),
+		CommitNum:    ptr.Int64(1),
+		OpNum:        ptr.Int64(1),
+		Encoding:     types.Encoding("gzip"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2258,7 +2551,7 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 	want := &types.ThrottlingException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("ThrottlingException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ThrottlingException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2268,7 +2561,13 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetPropertygraphStream(context.Background(), &GetPropertygraphStreamInput{})
+	_, opErr := svc.GetPropertygraphStream(context.Background(), &GetPropertygraphStreamInput{
+		Limit:        ptr.Int64(1),
+		IteratorType: types.IteratorType("AT_SEQUENCE_NUMBER"),
+		CommitNum:    ptr.Int64(1),
+		OpNum:        ptr.Int64(1),
+		Encoding:     types.Encoding("gzip"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2285,7 +2584,7 @@ func TestCheckResponseSnapshot_Error_TimeLimitExceededException(t *testing.T) {
 	want := &types.TimeLimitExceededException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("TimeLimitExceededException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("TimeLimitExceededException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2295,7 +2594,9 @@ func TestCheckResponseSnapshot_Error_TimeLimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelGremlinQuery(context.Background(), &CancelGremlinQueryInput{})
+	_, opErr := svc.CancelGremlinQuery(context.Background(), &CancelGremlinQueryInput{
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2312,7 +2613,7 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 	want := &types.TooManyRequestsException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("TooManyRequestsException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("TooManyRequestsException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2322,7 +2623,9 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelGremlinQuery(context.Background(), &CancelGremlinQueryInput{})
+	_, opErr := svc.CancelGremlinQuery(context.Background(), &CancelGremlinQueryInput{
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2339,7 +2642,7 @@ func TestCheckResponseSnapshot_Error_UnsupportedOperationException(t *testing.T)
 	want := &types.UnsupportedOperationException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
 		RequestId:       ptr.String("__RequestId__"),
-		Code:            ptr.String("__Code__"),
+		Code:            ptr.String("UnsupportedOperationException"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UnsupportedOperationException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2349,7 +2652,9 @@ func TestCheckResponseSnapshot_Error_UnsupportedOperationException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelGremlinQuery(context.Background(), &CancelGremlinQueryInput{})
+	_, opErr := svc.CancelGremlinQuery(context.Background(), &CancelGremlinQueryInput{
+		QueryId: ptr.String("__QueryId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

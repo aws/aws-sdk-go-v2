@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"taxExemptionTypes":[{"applicableJurisdictions":[{"country":"__Country__","state":"__State__"},{"country":"__Country__","state":"__State__"}],"description":"__Description__","displayName":"__DisplayName__"},{"applicableJurisdictions":[{"country":"__Country__","state":"__State__"},{"country":"__Country__","state":"__State__"}],"description":"__Description__","displayName":"__DisplayName__"}]}

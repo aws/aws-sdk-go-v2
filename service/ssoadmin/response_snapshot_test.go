@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/document"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -119,7 +120,10 @@ func TestCheckResponseSnapshot_AddRegion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddRegion(context.Background(), &AddRegionInput{})
+	got, err := svc.AddRegion(context.Background(), &AddRegionInput{
+		InstanceArn: ptr.String("__InstanceArn__"),
+		RegionName:  ptr.String("__RegionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -138,7 +142,14 @@ func TestCheckResponseSnapshot_AttachCustomerManagedPolicyReferenceToPermissionS
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AttachCustomerManagedPolicyReferenceToPermissionSet(context.Background(), &AttachCustomerManagedPolicyReferenceToPermissionSetInput{})
+	got, err := svc.AttachCustomerManagedPolicyReferenceToPermissionSet(context.Background(), &AttachCustomerManagedPolicyReferenceToPermissionSetInput{
+		InstanceArn:      ptr.String("__InstanceArn__"),
+		PermissionSetArn: ptr.String("__PermissionSetArn__"),
+		CustomerManagedPolicyReference: &types.CustomerManagedPolicyReference{
+			Name: ptr.String("__Name__"),
+			Path: ptr.String("__Path__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -157,7 +168,11 @@ func TestCheckResponseSnapshot_AttachManagedPolicyToPermissionSet(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AttachManagedPolicyToPermissionSet(context.Background(), &AttachManagedPolicyToPermissionSetInput{})
+	got, err := svc.AttachManagedPolicyToPermissionSet(context.Background(), &AttachManagedPolicyToPermissionSetInput{
+		InstanceArn:      ptr.String("__InstanceArn__"),
+		PermissionSetArn: ptr.String("__PermissionSetArn__"),
+		ManagedPolicyArn: ptr.String("__ManagedPolicyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -188,7 +203,14 @@ func TestCheckResponseSnapshot_CreateAccountAssignment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAccountAssignment(context.Background(), &CreateAccountAssignmentInput{})
+	got, err := svc.CreateAccountAssignment(context.Background(), &CreateAccountAssignmentInput{
+		InstanceArn:      ptr.String("__InstanceArn__"),
+		TargetId:         ptr.String("__TargetId__"),
+		TargetType:       types.TargetType("AWS_ACCOUNT"),
+		PermissionSetArn: ptr.String("__PermissionSetArn__"),
+		PrincipalType:    types.PrincipalType("USER"),
+		PrincipalId:      ptr.String("__PrincipalId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -211,7 +233,31 @@ func TestCheckResponseSnapshot_CreateApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		InstanceArn:            ptr.String("__InstanceArn__"),
+		ApplicationProviderArn: ptr.String("__ApplicationProviderArn__"),
+		Name:                   ptr.String("__Name__"),
+		Description:            ptr.String("__Description__"),
+		PortalOptions: &types.PortalOptions{
+			SignInOptions: &types.SignInOptions{
+				Origin:         types.SignInOrigin("IDENTITY_CENTER"),
+				ApplicationUrl: ptr.String("__ApplicationUrl__"),
+			},
+			Visibility: types.ApplicationVisibility("ENABLED"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Status:      types.ApplicationStatus("ENABLED"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -230,7 +276,11 @@ func TestCheckResponseSnapshot_CreateApplicationAssignment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApplicationAssignment(context.Background(), &CreateApplicationAssignmentInput{})
+	got, err := svc.CreateApplicationAssignment(context.Background(), &CreateApplicationAssignmentInput{
+		ApplicationArn: ptr.String("__ApplicationArn__"),
+		PrincipalId:    ptr.String("__PrincipalId__"),
+		PrincipalType:  types.PrincipalType("USER"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -251,7 +301,20 @@ func TestCheckResponseSnapshot_CreateInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateInstance(context.Background(), &CreateInstanceInput{})
+	got, err := svc.CreateInstance(context.Background(), &CreateInstanceInput{
+		Name:        ptr.String("__Name__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -270,7 +333,31 @@ func TestCheckResponseSnapshot_CreateInstanceAccessControlAttributeConfiguration
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateInstanceAccessControlAttributeConfiguration(context.Background(), &CreateInstanceAccessControlAttributeConfigurationInput{})
+	got, err := svc.CreateInstanceAccessControlAttributeConfiguration(context.Background(), &CreateInstanceAccessControlAttributeConfigurationInput{
+		InstanceArn: ptr.String("__InstanceArn__"),
+		InstanceAccessControlAttributeConfiguration: &types.InstanceAccessControlAttributeConfiguration{
+			AccessControlAttributes: []types.AccessControlAttribute{
+				{
+					Key: ptr.String("__Key__"),
+					Value: &types.AccessControlAttributeValue{
+						Source: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					Key: ptr.String("__Key__"),
+					Value: &types.AccessControlAttributeValue{
+						Source: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -298,7 +385,23 @@ func TestCheckResponseSnapshot_CreatePermissionSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePermissionSet(context.Background(), &CreatePermissionSetInput{})
+	got, err := svc.CreatePermissionSet(context.Background(), &CreatePermissionSetInput{
+		Name:            ptr.String("__Name__"),
+		Description:     ptr.String("__Description__"),
+		InstanceArn:     ptr.String("__InstanceArn__"),
+		SessionDuration: ptr.String("__SessionDuration__"),
+		RelayState:      ptr.String("__RelayState__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -319,7 +422,30 @@ func TestCheckResponseSnapshot_CreateTrustedTokenIssuer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTrustedTokenIssuer(context.Background(), &CreateTrustedTokenIssuerInput{})
+	got, err := svc.CreateTrustedTokenIssuer(context.Background(), &CreateTrustedTokenIssuerInput{
+		InstanceArn:            ptr.String("__InstanceArn__"),
+		Name:                   ptr.String("__Name__"),
+		TrustedTokenIssuerType: types.TrustedTokenIssuerType("OIDC_JWT"),
+		TrustedTokenIssuerConfiguration: &types.TrustedTokenIssuerConfigurationMemberOidcJwtConfiguration{
+			Value: types.OidcJwtConfiguration{
+				IssuerUrl:                  ptr.String("__IssuerUrl__"),
+				ClaimAttributePath:         ptr.String("__ClaimAttributePath__"),
+				IdentityStoreAttributePath: ptr.String("__IdentityStoreAttributePath__"),
+				JwksRetrievalOption:        types.JwksRetrievalOption("OPEN_ID_DISCOVERY"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -350,7 +476,14 @@ func TestCheckResponseSnapshot_DeleteAccountAssignment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAccountAssignment(context.Background(), &DeleteAccountAssignmentInput{})
+	got, err := svc.DeleteAccountAssignment(context.Background(), &DeleteAccountAssignmentInput{
+		InstanceArn:      ptr.String("__InstanceArn__"),
+		TargetId:         ptr.String("__TargetId__"),
+		TargetType:       types.TargetType("AWS_ACCOUNT"),
+		PermissionSetArn: ptr.String("__PermissionSetArn__"),
+		PrincipalType:    types.PrincipalType("USER"),
+		PrincipalId:      ptr.String("__PrincipalId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -369,7 +502,9 @@ func TestCheckResponseSnapshot_DeleteApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{})
+	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{
+		ApplicationArn: ptr.String("__ApplicationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -388,7 +523,10 @@ func TestCheckResponseSnapshot_DeleteApplicationAccessScope(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApplicationAccessScope(context.Background(), &DeleteApplicationAccessScopeInput{})
+	got, err := svc.DeleteApplicationAccessScope(context.Background(), &DeleteApplicationAccessScopeInput{
+		ApplicationArn: ptr.String("__ApplicationArn__"),
+		Scope:          ptr.String("__Scope__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -407,7 +545,11 @@ func TestCheckResponseSnapshot_DeleteApplicationAssignment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApplicationAssignment(context.Background(), &DeleteApplicationAssignmentInput{})
+	got, err := svc.DeleteApplicationAssignment(context.Background(), &DeleteApplicationAssignmentInput{
+		ApplicationArn: ptr.String("__ApplicationArn__"),
+		PrincipalId:    ptr.String("__PrincipalId__"),
+		PrincipalType:  types.PrincipalType("USER"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -426,7 +568,10 @@ func TestCheckResponseSnapshot_DeleteApplicationAuthenticationMethod(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApplicationAuthenticationMethod(context.Background(), &DeleteApplicationAuthenticationMethodInput{})
+	got, err := svc.DeleteApplicationAuthenticationMethod(context.Background(), &DeleteApplicationAuthenticationMethodInput{
+		ApplicationArn:           ptr.String("__ApplicationArn__"),
+		AuthenticationMethodType: types.AuthenticationMethodType("IAM"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -445,7 +590,10 @@ func TestCheckResponseSnapshot_DeleteApplicationGrant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApplicationGrant(context.Background(), &DeleteApplicationGrantInput{})
+	got, err := svc.DeleteApplicationGrant(context.Background(), &DeleteApplicationGrantInput{
+		ApplicationArn: ptr.String("__ApplicationArn__"),
+		GrantType:      types.GrantType("authorization_code"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -464,7 +612,10 @@ func TestCheckResponseSnapshot_DeleteInlinePolicyFromPermissionSet(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteInlinePolicyFromPermissionSet(context.Background(), &DeleteInlinePolicyFromPermissionSetInput{})
+	got, err := svc.DeleteInlinePolicyFromPermissionSet(context.Background(), &DeleteInlinePolicyFromPermissionSetInput{
+		InstanceArn:      ptr.String("__InstanceArn__"),
+		PermissionSetArn: ptr.String("__PermissionSetArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -483,7 +634,9 @@ func TestCheckResponseSnapshot_DeleteInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteInstance(context.Background(), &DeleteInstanceInput{})
+	got, err := svc.DeleteInstance(context.Background(), &DeleteInstanceInput{
+		InstanceArn: ptr.String("__InstanceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -502,7 +655,9 @@ func TestCheckResponseSnapshot_DeleteInstanceAccessControlAttributeConfiguration
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteInstanceAccessControlAttributeConfiguration(context.Background(), &DeleteInstanceAccessControlAttributeConfigurationInput{})
+	got, err := svc.DeleteInstanceAccessControlAttributeConfiguration(context.Background(), &DeleteInstanceAccessControlAttributeConfigurationInput{
+		InstanceArn: ptr.String("__InstanceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -521,7 +676,10 @@ func TestCheckResponseSnapshot_DeletePermissionSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePermissionSet(context.Background(), &DeletePermissionSetInput{})
+	got, err := svc.DeletePermissionSet(context.Background(), &DeletePermissionSetInput{
+		InstanceArn:      ptr.String("__InstanceArn__"),
+		PermissionSetArn: ptr.String("__PermissionSetArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -540,7 +698,10 @@ func TestCheckResponseSnapshot_DeletePermissionsBoundaryFromPermissionSet(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePermissionsBoundaryFromPermissionSet(context.Background(), &DeletePermissionsBoundaryFromPermissionSetInput{})
+	got, err := svc.DeletePermissionsBoundaryFromPermissionSet(context.Background(), &DeletePermissionsBoundaryFromPermissionSetInput{
+		InstanceArn:      ptr.String("__InstanceArn__"),
+		PermissionSetArn: ptr.String("__PermissionSetArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -559,7 +720,9 @@ func TestCheckResponseSnapshot_DeleteTrustedTokenIssuer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTrustedTokenIssuer(context.Background(), &DeleteTrustedTokenIssuerInput{})
+	got, err := svc.DeleteTrustedTokenIssuer(context.Background(), &DeleteTrustedTokenIssuerInput{
+		TrustedTokenIssuerArn: ptr.String("__TrustedTokenIssuerArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -590,7 +753,10 @@ func TestCheckResponseSnapshot_DescribeAccountAssignmentCreationStatus(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAccountAssignmentCreationStatus(context.Background(), &DescribeAccountAssignmentCreationStatusInput{})
+	got, err := svc.DescribeAccountAssignmentCreationStatus(context.Background(), &DescribeAccountAssignmentCreationStatusInput{
+		InstanceArn:                        ptr.String("__InstanceArn__"),
+		AccountAssignmentCreationRequestId: ptr.String("__AccountAssignmentCreationRequestId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -621,7 +787,10 @@ func TestCheckResponseSnapshot_DescribeAccountAssignmentDeletionStatus(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAccountAssignmentDeletionStatus(context.Background(), &DescribeAccountAssignmentDeletionStatusInput{})
+	got, err := svc.DescribeAccountAssignmentDeletionStatus(context.Background(), &DescribeAccountAssignmentDeletionStatusInput{
+		InstanceArn:                        ptr.String("__InstanceArn__"),
+		AccountAssignmentDeletionRequestId: ptr.String("__AccountAssignmentDeletionRequestId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -658,7 +827,9 @@ func TestCheckResponseSnapshot_DescribeApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeApplication(context.Background(), &DescribeApplicationInput{})
+	got, err := svc.DescribeApplication(context.Background(), &DescribeApplicationInput{
+		ApplicationArn: ptr.String("__ApplicationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -681,7 +852,11 @@ func TestCheckResponseSnapshot_DescribeApplicationAssignment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeApplicationAssignment(context.Background(), &DescribeApplicationAssignmentInput{})
+	got, err := svc.DescribeApplicationAssignment(context.Background(), &DescribeApplicationAssignmentInput{
+		ApplicationArn: ptr.String("__ApplicationArn__"),
+		PrincipalId:    ptr.String("__PrincipalId__"),
+		PrincipalType:  types.PrincipalType("USER"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -716,7 +891,9 @@ func TestCheckResponseSnapshot_DescribeApplicationProvider(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeApplicationProvider(context.Background(), &DescribeApplicationProviderInput{})
+	got, err := svc.DescribeApplicationProvider(context.Background(), &DescribeApplicationProviderInput{
+		ApplicationProviderArn: ptr.String("__ApplicationProviderArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -750,7 +927,9 @@ func TestCheckResponseSnapshot_DescribeInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeInstance(context.Background(), &DescribeInstanceInput{})
+	got, err := svc.DescribeInstance(context.Background(), &DescribeInstanceInput{
+		InstanceArn: ptr.String("__InstanceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -794,7 +973,9 @@ func TestCheckResponseSnapshot_DescribeInstanceAccessControlAttributeConfigurati
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeInstanceAccessControlAttributeConfiguration(context.Background(), &DescribeInstanceAccessControlAttributeConfigurationInput{})
+	got, err := svc.DescribeInstanceAccessControlAttributeConfiguration(context.Background(), &DescribeInstanceAccessControlAttributeConfigurationInput{
+		InstanceArn: ptr.String("__InstanceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -822,7 +1003,10 @@ func TestCheckResponseSnapshot_DescribePermissionSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePermissionSet(context.Background(), &DescribePermissionSetInput{})
+	got, err := svc.DescribePermissionSet(context.Background(), &DescribePermissionSetInput{
+		InstanceArn:      ptr.String("__InstanceArn__"),
+		PermissionSetArn: ptr.String("__PermissionSetArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -850,7 +1034,10 @@ func TestCheckResponseSnapshot_DescribePermissionSetProvisioningStatus(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePermissionSetProvisioningStatus(context.Background(), &DescribePermissionSetProvisioningStatusInput{})
+	got, err := svc.DescribePermissionSetProvisioningStatus(context.Background(), &DescribePermissionSetProvisioningStatusInput{
+		InstanceArn:                     ptr.String("__InstanceArn__"),
+		ProvisionPermissionSetRequestId: ptr.String("__ProvisionPermissionSetRequestId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -874,7 +1061,10 @@ func TestCheckResponseSnapshot_DescribeRegion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRegion(context.Background(), &DescribeRegionInput{})
+	got, err := svc.DescribeRegion(context.Background(), &DescribeRegionInput{
+		InstanceArn: ptr.String("__InstanceArn__"),
+		RegionName:  ptr.String("__RegionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -905,7 +1095,9 @@ func TestCheckResponseSnapshot_DescribeTrustedTokenIssuer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTrustedTokenIssuer(context.Background(), &DescribeTrustedTokenIssuerInput{})
+	got, err := svc.DescribeTrustedTokenIssuer(context.Background(), &DescribeTrustedTokenIssuerInput{
+		TrustedTokenIssuerArn: ptr.String("__TrustedTokenIssuerArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -924,7 +1116,14 @@ func TestCheckResponseSnapshot_DetachCustomerManagedPolicyReferenceFromPermissio
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetachCustomerManagedPolicyReferenceFromPermissionSet(context.Background(), &DetachCustomerManagedPolicyReferenceFromPermissionSetInput{})
+	got, err := svc.DetachCustomerManagedPolicyReferenceFromPermissionSet(context.Background(), &DetachCustomerManagedPolicyReferenceFromPermissionSetInput{
+		InstanceArn:      ptr.String("__InstanceArn__"),
+		PermissionSetArn: ptr.String("__PermissionSetArn__"),
+		CustomerManagedPolicyReference: &types.CustomerManagedPolicyReference{
+			Name: ptr.String("__Name__"),
+			Path: ptr.String("__Path__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -943,7 +1142,11 @@ func TestCheckResponseSnapshot_DetachManagedPolicyFromPermissionSet(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DetachManagedPolicyFromPermissionSet(context.Background(), &DetachManagedPolicyFromPermissionSetInput{})
+	got, err := svc.DetachManagedPolicyFromPermissionSet(context.Background(), &DetachManagedPolicyFromPermissionSetInput{
+		InstanceArn:      ptr.String("__InstanceArn__"),
+		PermissionSetArn: ptr.String("__PermissionSetArn__"),
+		ManagedPolicyArn: ptr.String("__ManagedPolicyArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -968,7 +1171,10 @@ func TestCheckResponseSnapshot_GetApplicationAccessScope(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApplicationAccessScope(context.Background(), &GetApplicationAccessScopeInput{})
+	got, err := svc.GetApplicationAccessScope(context.Background(), &GetApplicationAccessScopeInput{
+		ApplicationArn: ptr.String("__ApplicationArn__"),
+		Scope:          ptr.String("__Scope__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -989,7 +1195,9 @@ func TestCheckResponseSnapshot_GetApplicationAssignmentConfiguration(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApplicationAssignmentConfiguration(context.Background(), &GetApplicationAssignmentConfigurationInput{})
+	got, err := svc.GetApplicationAssignmentConfiguration(context.Background(), &GetApplicationAssignmentConfigurationInput{
+		ApplicationArn: ptr.String("__ApplicationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1002,7 +1210,7 @@ func TestCheckResponseSnapshot_GetApplicationAuthenticationMethod(t *testing.T) 
 	want := &GetApplicationAuthenticationMethodOutput{
 		AuthenticationMethod: &types.AuthenticationMethodMemberIam{
 			Value: types.IamAuthenticationMethod{
-				ActorPolicy: nil,
+				ActorPolicy: document.NewLazyDocument("__Document__"),
 			},
 		},
 	}
@@ -1014,7 +1222,10 @@ func TestCheckResponseSnapshot_GetApplicationAuthenticationMethod(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApplicationAuthenticationMethod(context.Background(), &GetApplicationAuthenticationMethodInput{})
+	got, err := svc.GetApplicationAuthenticationMethod(context.Background(), &GetApplicationAuthenticationMethodInput{
+		ApplicationArn:           ptr.String("__ApplicationArn__"),
+		AuthenticationMethodType: types.AuthenticationMethodType("IAM"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1042,7 +1253,10 @@ func TestCheckResponseSnapshot_GetApplicationGrant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApplicationGrant(context.Background(), &GetApplicationGrantInput{})
+	got, err := svc.GetApplicationGrant(context.Background(), &GetApplicationGrantInput{
+		ApplicationArn: ptr.String("__ApplicationArn__"),
+		GrantType:      types.GrantType("authorization_code"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1063,7 +1277,9 @@ func TestCheckResponseSnapshot_GetApplicationSessionConfiguration(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetApplicationSessionConfiguration(context.Background(), &GetApplicationSessionConfigurationInput{})
+	got, err := svc.GetApplicationSessionConfiguration(context.Background(), &GetApplicationSessionConfigurationInput{
+		ApplicationArn: ptr.String("__ApplicationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1084,7 +1300,10 @@ func TestCheckResponseSnapshot_GetInlinePolicyForPermissionSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetInlinePolicyForPermissionSet(context.Background(), &GetInlinePolicyForPermissionSetInput{})
+	got, err := svc.GetInlinePolicyForPermissionSet(context.Background(), &GetInlinePolicyForPermissionSetInput{
+		InstanceArn:      ptr.String("__InstanceArn__"),
+		PermissionSetArn: ptr.String("__PermissionSetArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1111,7 +1330,10 @@ func TestCheckResponseSnapshot_GetPermissionsBoundaryForPermissionSet(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPermissionsBoundaryForPermissionSet(context.Background(), &GetPermissionsBoundaryForPermissionSetInput{})
+	got, err := svc.GetPermissionsBoundaryForPermissionSet(context.Background(), &GetPermissionsBoundaryForPermissionSetInput{
+		InstanceArn:      ptr.String("__InstanceArn__"),
+		PermissionSetArn: ptr.String("__PermissionSetArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1144,7 +1366,14 @@ func TestCheckResponseSnapshot_ListAccountAssignmentCreationStatus(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccountAssignmentCreationStatus(context.Background(), &ListAccountAssignmentCreationStatusInput{})
+	got, err := svc.ListAccountAssignmentCreationStatus(context.Background(), &ListAccountAssignmentCreationStatusInput{
+		InstanceArn: ptr.String("__InstanceArn__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+		Filter: &types.OperationStatusFilter{
+			Status: types.StatusValues("IN_PROGRESS"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1177,7 +1406,14 @@ func TestCheckResponseSnapshot_ListAccountAssignmentDeletionStatus(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccountAssignmentDeletionStatus(context.Background(), &ListAccountAssignmentDeletionStatusInput{})
+	got, err := svc.ListAccountAssignmentDeletionStatus(context.Background(), &ListAccountAssignmentDeletionStatusInput{
+		InstanceArn: ptr.String("__InstanceArn__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+		Filter: &types.OperationStatusFilter{
+			Status: types.StatusValues("IN_PROGRESS"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1212,7 +1448,13 @@ func TestCheckResponseSnapshot_ListAccountAssignments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccountAssignments(context.Background(), &ListAccountAssignmentsInput{})
+	got, err := svc.ListAccountAssignments(context.Background(), &ListAccountAssignmentsInput{
+		InstanceArn:      ptr.String("__InstanceArn__"),
+		AccountId:        ptr.String("__AccountId__"),
+		PermissionSetArn: ptr.String("__PermissionSetArn__"),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1247,7 +1489,16 @@ func TestCheckResponseSnapshot_ListAccountAssignmentsForPrincipal(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccountAssignmentsForPrincipal(context.Background(), &ListAccountAssignmentsForPrincipalInput{})
+	got, err := svc.ListAccountAssignmentsForPrincipal(context.Background(), &ListAccountAssignmentsForPrincipalInput{
+		InstanceArn:   ptr.String("__InstanceArn__"),
+		PrincipalId:   ptr.String("__PrincipalId__"),
+		PrincipalType: types.PrincipalType("USER"),
+		Filter: &types.ListAccountAssignmentsFilter{
+			AccountId: ptr.String("__AccountId__"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1272,7 +1523,13 @@ func TestCheckResponseSnapshot_ListAccountsForProvisionedPermissionSet(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccountsForProvisionedPermissionSet(context.Background(), &ListAccountsForProvisionedPermissionSetInput{})
+	got, err := svc.ListAccountsForProvisionedPermissionSet(context.Background(), &ListAccountsForProvisionedPermissionSetInput{
+		InstanceArn:        ptr.String("__InstanceArn__"),
+		PermissionSetArn:   ptr.String("__PermissionSetArn__"),
+		ProvisioningStatus: types.ProvisioningStatus("LATEST_PERMISSION_SET_PROVISIONED"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1309,7 +1566,11 @@ func TestCheckResponseSnapshot_ListApplicationAccessScopes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplicationAccessScopes(context.Background(), &ListApplicationAccessScopesInput{})
+	got, err := svc.ListApplicationAccessScopes(context.Background(), &ListApplicationAccessScopesInput{
+		ApplicationArn: ptr.String("__ApplicationArn__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1342,7 +1603,11 @@ func TestCheckResponseSnapshot_ListApplicationAssignments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplicationAssignments(context.Background(), &ListApplicationAssignmentsInput{})
+	got, err := svc.ListApplicationAssignments(context.Background(), &ListApplicationAssignmentsInput{
+		ApplicationArn: ptr.String("__ApplicationArn__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1375,7 +1640,16 @@ func TestCheckResponseSnapshot_ListApplicationAssignmentsForPrincipal(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplicationAssignmentsForPrincipal(context.Background(), &ListApplicationAssignmentsForPrincipalInput{})
+	got, err := svc.ListApplicationAssignmentsForPrincipal(context.Background(), &ListApplicationAssignmentsForPrincipalInput{
+		InstanceArn:   ptr.String("__InstanceArn__"),
+		PrincipalId:   ptr.String("__PrincipalId__"),
+		PrincipalType: types.PrincipalType("USER"),
+		Filter: &types.ListApplicationAssignmentsFilter{
+			ApplicationArn: ptr.String("__ApplicationArn__"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1391,7 +1665,7 @@ func TestCheckResponseSnapshot_ListApplicationAuthenticationMethods(t *testing.T
 				AuthenticationMethodType: types.AuthenticationMethodType("IAM"),
 				AuthenticationMethod: &types.AuthenticationMethodMemberIam{
 					Value: types.IamAuthenticationMethod{
-						ActorPolicy: nil,
+						ActorPolicy: document.NewLazyDocument("__Document__"),
 					},
 				},
 			},
@@ -1399,7 +1673,7 @@ func TestCheckResponseSnapshot_ListApplicationAuthenticationMethods(t *testing.T
 				AuthenticationMethodType: types.AuthenticationMethodType("IAM"),
 				AuthenticationMethod: &types.AuthenticationMethodMemberIam{
 					Value: types.IamAuthenticationMethod{
-						ActorPolicy: nil,
+						ActorPolicy: document.NewLazyDocument("__Document__"),
 					},
 				},
 			},
@@ -1414,7 +1688,10 @@ func TestCheckResponseSnapshot_ListApplicationAuthenticationMethods(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplicationAuthenticationMethods(context.Background(), &ListApplicationAuthenticationMethodsInput{})
+	got, err := svc.ListApplicationAuthenticationMethods(context.Background(), &ListApplicationAuthenticationMethodsInput{
+		ApplicationArn: ptr.String("__ApplicationArn__"),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1459,7 +1736,10 @@ func TestCheckResponseSnapshot_ListApplicationGrants(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplicationGrants(context.Background(), &ListApplicationGrantsInput{})
+	got, err := svc.ListApplicationGrants(context.Background(), &ListApplicationGrantsInput{
+		ApplicationArn: ptr.String("__ApplicationArn__"),
+		NextToken:      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1516,7 +1796,10 @@ func TestCheckResponseSnapshot_ListApplicationProviders(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplicationProviders(context.Background(), &ListApplicationProvidersInput{})
+	got, err := svc.ListApplicationProviders(context.Background(), &ListApplicationProvidersInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1577,7 +1860,15 @@ func TestCheckResponseSnapshot_ListApplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplications(context.Background(), &ListApplicationsInput{})
+	got, err := svc.ListApplications(context.Background(), &ListApplicationsInput{
+		InstanceArn: ptr.String("__InstanceArn__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+		Filter: &types.ListApplicationsFilter{
+			ApplicationAccount:  ptr.String("__ApplicationAccount__"),
+			ApplicationProvider: ptr.String("__ApplicationProvider__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1608,7 +1899,12 @@ func TestCheckResponseSnapshot_ListCustomerManagedPolicyReferencesInPermissionSe
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCustomerManagedPolicyReferencesInPermissionSet(context.Background(), &ListCustomerManagedPolicyReferencesInPermissionSetInput{})
+	got, err := svc.ListCustomerManagedPolicyReferencesInPermissionSet(context.Background(), &ListCustomerManagedPolicyReferencesInPermissionSetInput{
+		InstanceArn:      ptr.String("__InstanceArn__"),
+		PermissionSetArn: ptr.String("__PermissionSetArn__"),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1679,7 +1975,10 @@ func TestCheckResponseSnapshot_ListInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListInstances(context.Background(), &ListInstancesInput{})
+	got, err := svc.ListInstances(context.Background(), &ListInstancesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1710,7 +2009,12 @@ func TestCheckResponseSnapshot_ListManagedPoliciesInPermissionSet(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListManagedPoliciesInPermissionSet(context.Background(), &ListManagedPoliciesInPermissionSetInput{})
+	got, err := svc.ListManagedPoliciesInPermissionSet(context.Background(), &ListManagedPoliciesInPermissionSetInput{
+		InstanceArn:      ptr.String("__InstanceArn__"),
+		PermissionSetArn: ptr.String("__PermissionSetArn__"),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1743,7 +2047,14 @@ func TestCheckResponseSnapshot_ListPermissionSetProvisioningStatus(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPermissionSetProvisioningStatus(context.Background(), &ListPermissionSetProvisioningStatusInput{})
+	got, err := svc.ListPermissionSetProvisioningStatus(context.Background(), &ListPermissionSetProvisioningStatusInput{
+		InstanceArn: ptr.String("__InstanceArn__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+		Filter: &types.OperationStatusFilter{
+			Status: types.StatusValues("IN_PROGRESS"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1768,7 +2079,11 @@ func TestCheckResponseSnapshot_ListPermissionSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPermissionSets(context.Background(), &ListPermissionSetsInput{})
+	got, err := svc.ListPermissionSets(context.Background(), &ListPermissionSetsInput{
+		InstanceArn: ptr.String("__InstanceArn__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1793,7 +2108,13 @@ func TestCheckResponseSnapshot_ListPermissionSetsProvisionedToAccount(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPermissionSetsProvisionedToAccount(context.Background(), &ListPermissionSetsProvisionedToAccountInput{})
+	got, err := svc.ListPermissionSetsProvisionedToAccount(context.Background(), &ListPermissionSetsProvisionedToAccountInput{
+		InstanceArn:        ptr.String("__InstanceArn__"),
+		AccountId:          ptr.String("__AccountId__"),
+		ProvisioningStatus: types.ProvisioningStatus("LATEST_PERMISSION_SET_PROVISIONED"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1828,7 +2149,11 @@ func TestCheckResponseSnapshot_ListRegions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRegions(context.Background(), &ListRegionsInput{})
+	got, err := svc.ListRegions(context.Background(), &ListRegionsInput{
+		InstanceArn: ptr.String("__InstanceArn__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1859,7 +2184,11 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		InstanceArn: ptr.String("__InstanceArn__"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1892,7 +2221,11 @@ func TestCheckResponseSnapshot_ListTrustedTokenIssuers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTrustedTokenIssuers(context.Background(), &ListTrustedTokenIssuersInput{})
+	got, err := svc.ListTrustedTokenIssuers(context.Background(), &ListTrustedTokenIssuersInput{
+		InstanceArn: ptr.String("__InstanceArn__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1920,7 +2253,12 @@ func TestCheckResponseSnapshot_ProvisionPermissionSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ProvisionPermissionSet(context.Background(), &ProvisionPermissionSetInput{})
+	got, err := svc.ProvisionPermissionSet(context.Background(), &ProvisionPermissionSetInput{
+		InstanceArn:      ptr.String("__InstanceArn__"),
+		PermissionSetArn: ptr.String("__PermissionSetArn__"),
+		TargetId:         ptr.String("__TargetId__"),
+		TargetType:       types.ProvisionTargetType("AWS_ACCOUNT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1939,7 +2277,14 @@ func TestCheckResponseSnapshot_PutApplicationAccessScope(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutApplicationAccessScope(context.Background(), &PutApplicationAccessScopeInput{})
+	got, err := svc.PutApplicationAccessScope(context.Background(), &PutApplicationAccessScopeInput{
+		Scope: ptr.String("__Scope__"),
+		AuthorizedTargets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ApplicationArn: ptr.String("__ApplicationArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1958,7 +2303,10 @@ func TestCheckResponseSnapshot_PutApplicationAssignmentConfiguration(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutApplicationAssignmentConfiguration(context.Background(), &PutApplicationAssignmentConfigurationInput{})
+	got, err := svc.PutApplicationAssignmentConfiguration(context.Background(), &PutApplicationAssignmentConfigurationInput{
+		ApplicationArn:     ptr.String("__ApplicationArn__"),
+		AssignmentRequired: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1977,7 +2325,15 @@ func TestCheckResponseSnapshot_PutApplicationAuthenticationMethod(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutApplicationAuthenticationMethod(context.Background(), &PutApplicationAuthenticationMethodInput{})
+	got, err := svc.PutApplicationAuthenticationMethod(context.Background(), &PutApplicationAuthenticationMethodInput{
+		ApplicationArn:           ptr.String("__ApplicationArn__"),
+		AuthenticationMethodType: types.AuthenticationMethodType("IAM"),
+		AuthenticationMethod: &types.AuthenticationMethodMemberIam{
+			Value: types.IamAuthenticationMethod{
+				ActorPolicy: document.NewLazyDocument("__Document__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1996,7 +2352,18 @@ func TestCheckResponseSnapshot_PutApplicationGrant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutApplicationGrant(context.Background(), &PutApplicationGrantInput{})
+	got, err := svc.PutApplicationGrant(context.Background(), &PutApplicationGrantInput{
+		ApplicationArn: ptr.String("__ApplicationArn__"),
+		GrantType:      types.GrantType("authorization_code"),
+		Grant: &types.GrantMemberAuthorizationCode{
+			Value: types.AuthorizationCodeGrant{
+				RedirectUris: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2015,7 +2382,10 @@ func TestCheckResponseSnapshot_PutApplicationSessionConfiguration(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutApplicationSessionConfiguration(context.Background(), &PutApplicationSessionConfigurationInput{})
+	got, err := svc.PutApplicationSessionConfiguration(context.Background(), &PutApplicationSessionConfigurationInput{
+		ApplicationArn:                         ptr.String("__ApplicationArn__"),
+		UserBackgroundSessionApplicationStatus: types.UserBackgroundSessionApplicationStatus("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2034,7 +2404,11 @@ func TestCheckResponseSnapshot_PutInlinePolicyToPermissionSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutInlinePolicyToPermissionSet(context.Background(), &PutInlinePolicyToPermissionSetInput{})
+	got, err := svc.PutInlinePolicyToPermissionSet(context.Background(), &PutInlinePolicyToPermissionSetInput{
+		InstanceArn:      ptr.String("__InstanceArn__"),
+		PermissionSetArn: ptr.String("__PermissionSetArn__"),
+		InlinePolicy:     ptr.String("__InlinePolicy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2053,7 +2427,17 @@ func TestCheckResponseSnapshot_PutPermissionsBoundaryToPermissionSet(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutPermissionsBoundaryToPermissionSet(context.Background(), &PutPermissionsBoundaryToPermissionSetInput{})
+	got, err := svc.PutPermissionsBoundaryToPermissionSet(context.Background(), &PutPermissionsBoundaryToPermissionSetInput{
+		InstanceArn:      ptr.String("__InstanceArn__"),
+		PermissionSetArn: ptr.String("__PermissionSetArn__"),
+		PermissionsBoundary: &types.PermissionsBoundary{
+			CustomerManagedPolicyReference: &types.CustomerManagedPolicyReference{
+				Name: ptr.String("__Name__"),
+				Path: ptr.String("__Path__"),
+			},
+			ManagedPolicyArn: ptr.String("__ManagedPolicyArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2074,7 +2458,10 @@ func TestCheckResponseSnapshot_RemoveRegion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveRegion(context.Background(), &RemoveRegionInput{})
+	got, err := svc.RemoveRegion(context.Background(), &RemoveRegionInput{
+		InstanceArn: ptr.String("__InstanceArn__"),
+		RegionName:  ptr.String("__RegionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2093,7 +2480,20 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		InstanceArn: ptr.String("__InstanceArn__"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2112,7 +2512,14 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		InstanceArn: ptr.String("__InstanceArn__"),
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2131,7 +2538,18 @@ func TestCheckResponseSnapshot_UpdateApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApplication(context.Background(), &UpdateApplicationInput{})
+	got, err := svc.UpdateApplication(context.Background(), &UpdateApplicationInput{
+		ApplicationArn: ptr.String("__ApplicationArn__"),
+		Name:           ptr.String("__Name__"),
+		Description:    ptr.String("__Description__"),
+		Status:         types.ApplicationStatus("ENABLED"),
+		PortalOptions: &types.UpdateApplicationPortalOptions{
+			SignInOptions: &types.SignInOptions{
+				Origin:         types.SignInOrigin("IDENTITY_CENTER"),
+				ApplicationUrl: ptr.String("__ApplicationUrl__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2150,7 +2568,15 @@ func TestCheckResponseSnapshot_UpdateInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateInstance(context.Background(), &UpdateInstanceInput{})
+	got, err := svc.UpdateInstance(context.Background(), &UpdateInstanceInput{
+		Name:        ptr.String("__Name__"),
+		InstanceArn: ptr.String("__InstanceArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KeyType:   types.KmsKeyType("AWS_OWNED_KMS_KEY"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		PermissionSetsEnabled: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2169,7 +2595,31 @@ func TestCheckResponseSnapshot_UpdateInstanceAccessControlAttributeConfiguration
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateInstanceAccessControlAttributeConfiguration(context.Background(), &UpdateInstanceAccessControlAttributeConfigurationInput{})
+	got, err := svc.UpdateInstanceAccessControlAttributeConfiguration(context.Background(), &UpdateInstanceAccessControlAttributeConfigurationInput{
+		InstanceArn: ptr.String("__InstanceArn__"),
+		InstanceAccessControlAttributeConfiguration: &types.InstanceAccessControlAttributeConfiguration{
+			AccessControlAttributes: []types.AccessControlAttribute{
+				{
+					Key: ptr.String("__Key__"),
+					Value: &types.AccessControlAttributeValue{
+						Source: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				{
+					Key: ptr.String("__Key__"),
+					Value: &types.AccessControlAttributeValue{
+						Source: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2188,7 +2638,13 @@ func TestCheckResponseSnapshot_UpdatePermissionSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePermissionSet(context.Background(), &UpdatePermissionSetInput{})
+	got, err := svc.UpdatePermissionSet(context.Background(), &UpdatePermissionSetInput{
+		InstanceArn:      ptr.String("__InstanceArn__"),
+		PermissionSetArn: ptr.String("__PermissionSetArn__"),
+		Description:      ptr.String("__Description__"),
+		SessionDuration:  ptr.String("__SessionDuration__"),
+		RelayState:       ptr.String("__RelayState__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2207,7 +2663,17 @@ func TestCheckResponseSnapshot_UpdateTrustedTokenIssuer(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTrustedTokenIssuer(context.Background(), &UpdateTrustedTokenIssuerInput{})
+	got, err := svc.UpdateTrustedTokenIssuer(context.Background(), &UpdateTrustedTokenIssuerInput{
+		TrustedTokenIssuerArn: ptr.String("__TrustedTokenIssuerArn__"),
+		Name:                  ptr.String("__Name__"),
+		TrustedTokenIssuerConfiguration: &types.TrustedTokenIssuerUpdateConfigurationMemberOidcJwtConfiguration{
+			Value: types.OidcJwtUpdateConfiguration{
+				ClaimAttributePath:         ptr.String("__ClaimAttributePath__"),
+				IdentityStoreAttributePath: ptr.String("__IdentityStoreAttributePath__"),
+				JwksRetrievalOption:        types.JwksRetrievalOption("OPEN_ID_DISCOVERY"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2229,7 +2695,10 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddRegion(context.Background(), &AddRegionInput{})
+	_, opErr := svc.AddRegion(context.Background(), &AddRegionInput{
+		InstanceArn: ptr.String("__InstanceArn__"),
+		RegionName:  ptr.String("__RegionName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2254,7 +2723,10 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddRegion(context.Background(), &AddRegionInput{})
+	_, opErr := svc.AddRegion(context.Background(), &AddRegionInput{
+		InstanceArn: ptr.String("__InstanceArn__"),
+		RegionName:  ptr.String("__RegionName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2279,7 +2751,10 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddRegion(context.Background(), &AddRegionInput{})
+	_, opErr := svc.AddRegion(context.Background(), &AddRegionInput{
+		InstanceArn: ptr.String("__InstanceArn__"),
+		RegionName:  ptr.String("__RegionName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2305,7 +2780,14 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AttachCustomerManagedPolicyReferenceToPermissionSet(context.Background(), &AttachCustomerManagedPolicyReferenceToPermissionSetInput{})
+	_, opErr := svc.AttachCustomerManagedPolicyReferenceToPermissionSet(context.Background(), &AttachCustomerManagedPolicyReferenceToPermissionSetInput{
+		InstanceArn:      ptr.String("__InstanceArn__"),
+		PermissionSetArn: ptr.String("__PermissionSetArn__"),
+		CustomerManagedPolicyReference: &types.CustomerManagedPolicyReference{
+			Name: ptr.String("__Name__"),
+			Path: ptr.String("__Path__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2330,7 +2812,10 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddRegion(context.Background(), &AddRegionInput{})
+	_, opErr := svc.AddRegion(context.Background(), &AddRegionInput{
+		InstanceArn: ptr.String("__InstanceArn__"),
+		RegionName:  ptr.String("__RegionName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2356,7 +2841,10 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddRegion(context.Background(), &AddRegionInput{})
+	_, opErr := svc.AddRegion(context.Background(), &AddRegionInput{
+		InstanceArn: ptr.String("__InstanceArn__"),
+		RegionName:  ptr.String("__RegionName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2382,7 +2870,10 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddRegion(context.Background(), &AddRegionInput{})
+	_, opErr := svc.AddRegion(context.Background(), &AddRegionInput{
+		InstanceArn: ptr.String("__InstanceArn__"),
+		RegionName:  ptr.String("__RegionName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

@@ -307,7 +307,195 @@ func TestCheckResponseSnapshot_CreateGatewayRoute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGatewayRoute(context.Background(), &CreateGatewayRouteInput{})
+	got, err := svc.CreateGatewayRoute(context.Background(), &CreateGatewayRouteInput{
+		GatewayRouteName:   ptr.String("__GatewayRouteName__"),
+		MeshName:           ptr.String("__MeshName__"),
+		VirtualGatewayName: ptr.String("__VirtualGatewayName__"),
+		Spec: &types.GatewayRouteSpec{
+			Priority: ptr.Int32(1),
+			HttpRoute: &types.HttpGatewayRoute{
+				Match: &types.HttpGatewayRouteMatch{
+					Prefix: ptr.String("__Prefix__"),
+					Path: &types.HttpPathMatch{
+						Exact: ptr.String("__Exact__"),
+						Regex: ptr.String("__Regex__"),
+					},
+					QueryParameters: []types.HttpQueryParameter{
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+					},
+					Method: types.HttpMethod("GET"),
+					Hostname: &types.GatewayRouteHostnameMatch{
+						Exact:  ptr.String("__Exact__"),
+						Suffix: ptr.String("__Suffix__"),
+					},
+					Headers: []types.HttpGatewayRouteHeader{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.HttpGatewayRouteAction{
+					Target: &types.GatewayRouteTarget{
+						VirtualService: &types.GatewayRouteVirtualService{
+							VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						},
+						Port: ptr.Int32(1),
+					},
+					Rewrite: &types.HttpGatewayRouteRewrite{
+						Prefix: &types.HttpGatewayRoutePrefixRewrite{
+							DefaultPrefix: types.DefaultGatewayRouteRewrite("ENABLED"),
+							Value:         ptr.String("__Value__"),
+						},
+						Path: &types.HttpGatewayRoutePathRewrite{
+							Exact: ptr.String("__Exact__"),
+						},
+						Hostname: &types.GatewayRouteHostnameRewrite{
+							DefaultTargetHostname: types.DefaultGatewayRouteRewrite("ENABLED"),
+						},
+					},
+				},
+			},
+			Http2Route: &types.HttpGatewayRoute{
+				Match: &types.HttpGatewayRouteMatch{
+					Prefix: ptr.String("__Prefix__"),
+					Path: &types.HttpPathMatch{
+						Exact: ptr.String("__Exact__"),
+						Regex: ptr.String("__Regex__"),
+					},
+					QueryParameters: []types.HttpQueryParameter{
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+					},
+					Method: types.HttpMethod("GET"),
+					Hostname: &types.GatewayRouteHostnameMatch{
+						Exact:  ptr.String("__Exact__"),
+						Suffix: ptr.String("__Suffix__"),
+					},
+					Headers: []types.HttpGatewayRouteHeader{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.HttpGatewayRouteAction{
+					Target: &types.GatewayRouteTarget{
+						VirtualService: &types.GatewayRouteVirtualService{
+							VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						},
+						Port: ptr.Int32(1),
+					},
+					Rewrite: &types.HttpGatewayRouteRewrite{
+						Prefix: &types.HttpGatewayRoutePrefixRewrite{
+							DefaultPrefix: types.DefaultGatewayRouteRewrite("ENABLED"),
+							Value:         ptr.String("__Value__"),
+						},
+						Path: &types.HttpGatewayRoutePathRewrite{
+							Exact: ptr.String("__Exact__"),
+						},
+						Hostname: &types.GatewayRouteHostnameRewrite{
+							DefaultTargetHostname: types.DefaultGatewayRouteRewrite("ENABLED"),
+						},
+					},
+				},
+			},
+			GrpcRoute: &types.GrpcGatewayRoute{
+				Match: &types.GrpcGatewayRouteMatch{
+					ServiceName: ptr.String("__ServiceName__"),
+					Hostname: &types.GatewayRouteHostnameMatch{
+						Exact:  ptr.String("__Exact__"),
+						Suffix: ptr.String("__Suffix__"),
+					},
+					Metadata: []types.GrpcGatewayRouteMetadata{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.GrpcMetadataMatchMethodMemberExact{
+								Value: "__GrpcMetadataMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.GrpcMetadataMatchMethodMemberExact{
+								Value: "__GrpcMetadataMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.GrpcGatewayRouteAction{
+					Target: &types.GatewayRouteTarget{
+						VirtualService: &types.GatewayRouteVirtualService{
+							VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						},
+						Port: ptr.Int32(1),
+					},
+					Rewrite: &types.GrpcGatewayRouteRewrite{
+						Hostname: &types.GatewayRouteHostnameRewrite{
+							DefaultTargetHostname: types.DefaultGatewayRouteRewrite("ENABLED"),
+						},
+					},
+				},
+			},
+		},
+		Tags: []types.TagRef{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		MeshOwner:   ptr.String("__MeshOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -350,7 +538,28 @@ func TestCheckResponseSnapshot_CreateMesh(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMesh(context.Background(), &CreateMeshInput{})
+	got, err := svc.CreateMesh(context.Background(), &CreateMeshInput{
+		MeshName: ptr.String("__MeshName__"),
+		Spec: &types.MeshSpec{
+			EgressFilter: &types.EgressFilter{
+				Type: types.EgressFilterType("ALLOW_ALL"),
+			},
+			ServiceDiscovery: &types.MeshServiceDiscovery{
+				IpPreference: types.IpPreference("IPv6_PREFERRED"),
+			},
+		},
+		Tags: []types.TagRef{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -643,7 +852,279 @@ func TestCheckResponseSnapshot_CreateRoute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRoute(context.Background(), &CreateRouteInput{})
+	got, err := svc.CreateRoute(context.Background(), &CreateRouteInput{
+		RouteName:         ptr.String("__RouteName__"),
+		MeshName:          ptr.String("__MeshName__"),
+		VirtualRouterName: ptr.String("__VirtualRouterName__"),
+		Spec: &types.RouteSpec{
+			Priority: ptr.Int32(1),
+			HttpRoute: &types.HttpRoute{
+				Match: &types.HttpRouteMatch{
+					Prefix: ptr.String("__Prefix__"),
+					Path: &types.HttpPathMatch{
+						Exact: ptr.String("__Exact__"),
+						Regex: ptr.String("__Regex__"),
+					},
+					QueryParameters: []types.HttpQueryParameter{
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+					},
+					Method: types.HttpMethod("GET"),
+					Scheme: types.HttpScheme("http"),
+					Headers: []types.HttpRouteHeader{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.HttpRouteAction{
+					WeightedTargets: []types.WeightedTarget{
+						{
+							VirtualNode: ptr.String("__VirtualNode__"),
+							Weight:      1,
+							Port:        ptr.Int32(1),
+						},
+						{
+							VirtualNode: ptr.String("__VirtualNode__"),
+							Weight:      1,
+							Port:        ptr.Int32(1),
+						},
+					},
+				},
+				RetryPolicy: &types.HttpRetryPolicy{
+					PerRetryTimeout: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.DurationUnit("s"),
+					},
+					MaxRetries: ptr.Int64(1),
+					HttpRetryEvents: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TcpRetryEvents: []types.TcpRetryPolicyEvent{
+						types.TcpRetryPolicyEvent("connection-error"),
+						types.TcpRetryPolicyEvent("connection-error"),
+					},
+				},
+				Timeout: &types.HttpTimeout{
+					PerRequest: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.DurationUnit("s"),
+					},
+					Idle: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.DurationUnit("s"),
+					},
+				},
+			},
+			TcpRoute: &types.TcpRoute{
+				Action: &types.TcpRouteAction{
+					WeightedTargets: []types.WeightedTarget{
+						{
+							VirtualNode: ptr.String("__VirtualNode__"),
+							Weight:      1,
+							Port:        ptr.Int32(1),
+						},
+						{
+							VirtualNode: ptr.String("__VirtualNode__"),
+							Weight:      1,
+							Port:        ptr.Int32(1),
+						},
+					},
+				},
+				Timeout: &types.TcpTimeout{
+					Idle: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.DurationUnit("s"),
+					},
+				},
+				Match: &types.TcpRouteMatch{
+					Port: ptr.Int32(1),
+				},
+			},
+			Http2Route: &types.HttpRoute{
+				Match: &types.HttpRouteMatch{
+					Prefix: ptr.String("__Prefix__"),
+					Path: &types.HttpPathMatch{
+						Exact: ptr.String("__Exact__"),
+						Regex: ptr.String("__Regex__"),
+					},
+					QueryParameters: []types.HttpQueryParameter{
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+					},
+					Method: types.HttpMethod("GET"),
+					Scheme: types.HttpScheme("http"),
+					Headers: []types.HttpRouteHeader{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.HttpRouteAction{
+					WeightedTargets: []types.WeightedTarget{
+						{
+							VirtualNode: ptr.String("__VirtualNode__"),
+							Weight:      1,
+							Port:        ptr.Int32(1),
+						},
+						{
+							VirtualNode: ptr.String("__VirtualNode__"),
+							Weight:      1,
+							Port:        ptr.Int32(1),
+						},
+					},
+				},
+				RetryPolicy: &types.HttpRetryPolicy{
+					PerRetryTimeout: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.DurationUnit("s"),
+					},
+					MaxRetries: ptr.Int64(1),
+					HttpRetryEvents: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TcpRetryEvents: []types.TcpRetryPolicyEvent{
+						types.TcpRetryPolicyEvent("connection-error"),
+						types.TcpRetryPolicyEvent("connection-error"),
+					},
+				},
+				Timeout: &types.HttpTimeout{
+					PerRequest: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.DurationUnit("s"),
+					},
+					Idle: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.DurationUnit("s"),
+					},
+				},
+			},
+			GrpcRoute: &types.GrpcRoute{
+				Action: &types.GrpcRouteAction{
+					WeightedTargets: []types.WeightedTarget{
+						{
+							VirtualNode: ptr.String("__VirtualNode__"),
+							Weight:      1,
+							Port:        ptr.Int32(1),
+						},
+						{
+							VirtualNode: ptr.String("__VirtualNode__"),
+							Weight:      1,
+							Port:        ptr.Int32(1),
+						},
+					},
+				},
+				Match: &types.GrpcRouteMatch{
+					ServiceName: ptr.String("__ServiceName__"),
+					MethodName:  ptr.String("__MethodName__"),
+					Metadata: []types.GrpcRouteMetadata{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.GrpcRouteMetadataMatchMethodMemberExact{
+								Value: "__GrpcRouteMetadataMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.GrpcRouteMetadataMatchMethodMemberExact{
+								Value: "__GrpcRouteMetadataMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				RetryPolicy: &types.GrpcRetryPolicy{
+					PerRetryTimeout: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.DurationUnit("s"),
+					},
+					MaxRetries: ptr.Int64(1),
+					HttpRetryEvents: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TcpRetryEvents: []types.TcpRetryPolicyEvent{
+						types.TcpRetryPolicyEvent("connection-error"),
+						types.TcpRetryPolicyEvent("connection-error"),
+					},
+					GrpcRetryEvents: []types.GrpcRetryPolicyEvent{
+						types.GrpcRetryPolicyEvent("cancelled"),
+						types.GrpcRetryPolicyEvent("cancelled"),
+					},
+				},
+				Timeout: &types.GrpcTimeout{
+					PerRequest: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.DurationUnit("s"),
+					},
+					Idle: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.DurationUnit("s"),
+					},
+				},
+			},
+		},
+		Tags: []types.TagRef{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		MeshOwner:   ptr.String("__MeshOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -816,7 +1297,159 @@ func TestCheckResponseSnapshot_CreateVirtualGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVirtualGateway(context.Background(), &CreateVirtualGatewayInput{})
+	got, err := svc.CreateVirtualGateway(context.Background(), &CreateVirtualGatewayInput{
+		VirtualGatewayName: ptr.String("__VirtualGatewayName__"),
+		MeshName:           ptr.String("__MeshName__"),
+		Spec: &types.VirtualGatewaySpec{
+			BackendDefaults: &types.VirtualGatewayBackendDefaults{
+				ClientPolicy: &types.VirtualGatewayClientPolicy{
+					Tls: &types.VirtualGatewayClientPolicyTls{
+						Enforce: ptr.Bool(true),
+						Ports: []int32{
+							1,
+							1,
+						},
+						Certificate: &types.VirtualGatewayClientTlsCertificateMemberFile{
+							Value: types.VirtualGatewayListenerTlsFileCertificate{
+								CertificateChain: ptr.String("__CertificateChain__"),
+								PrivateKey:       ptr.String("__PrivateKey__"),
+							},
+						},
+						Validation: &types.VirtualGatewayTlsValidationContext{
+							Trust: &types.VirtualGatewayTlsValidationContextTrustMemberAcm{
+								Value: types.VirtualGatewayTlsValidationContextAcmTrust{
+									CertificateAuthorityArns: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							SubjectAlternativeNames: &types.SubjectAlternativeNames{
+								Match: &types.SubjectAlternativeNameMatchers{
+									Exact: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			Listeners: []types.VirtualGatewayListener{
+				{
+					HealthCheck: &types.VirtualGatewayHealthCheckPolicy{
+						TimeoutMillis:      ptr.Int64(1),
+						IntervalMillis:     ptr.Int64(1),
+						Protocol:           types.VirtualGatewayPortProtocol("http"),
+						Port:               ptr.Int32(1),
+						Path:               ptr.String("__Path__"),
+						HealthyThreshold:   ptr.Int32(1),
+						UnhealthyThreshold: ptr.Int32(1),
+					},
+					PortMapping: &types.VirtualGatewayPortMapping{
+						Port:     ptr.Int32(1),
+						Protocol: types.VirtualGatewayPortProtocol("http"),
+					},
+					Tls: &types.VirtualGatewayListenerTls{
+						Mode: types.VirtualGatewayListenerTlsMode("STRICT"),
+						Validation: &types.VirtualGatewayListenerTlsValidationContext{
+							Trust: &types.VirtualGatewayListenerTlsValidationContextTrustMemberFile{
+								Value: types.VirtualGatewayTlsValidationContextFileTrust{
+									CertificateChain: ptr.String("__CertificateChain__"),
+								},
+							},
+							SubjectAlternativeNames: &types.SubjectAlternativeNames{
+								Match: &types.SubjectAlternativeNameMatchers{
+									Exact: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						Certificate: &types.VirtualGatewayListenerTlsCertificateMemberAcm{
+							Value: types.VirtualGatewayListenerTlsAcmCertificate{
+								CertificateArn: ptr.String("__CertificateArn__"),
+							},
+						},
+					},
+					ConnectionPool: &types.VirtualGatewayConnectionPoolMemberHttp{
+						Value: types.VirtualGatewayHttpConnectionPool{
+							MaxConnections:     ptr.Int32(1),
+							MaxPendingRequests: ptr.Int32(1),
+						},
+					},
+				},
+				{
+					HealthCheck: &types.VirtualGatewayHealthCheckPolicy{
+						TimeoutMillis:      ptr.Int64(1),
+						IntervalMillis:     ptr.Int64(1),
+						Protocol:           types.VirtualGatewayPortProtocol("http"),
+						Port:               ptr.Int32(1),
+						Path:               ptr.String("__Path__"),
+						HealthyThreshold:   ptr.Int32(1),
+						UnhealthyThreshold: ptr.Int32(1),
+					},
+					PortMapping: &types.VirtualGatewayPortMapping{
+						Port:     ptr.Int32(1),
+						Protocol: types.VirtualGatewayPortProtocol("http"),
+					},
+					Tls: &types.VirtualGatewayListenerTls{
+						Mode: types.VirtualGatewayListenerTlsMode("STRICT"),
+						Validation: &types.VirtualGatewayListenerTlsValidationContext{
+							Trust: &types.VirtualGatewayListenerTlsValidationContextTrustMemberFile{
+								Value: types.VirtualGatewayTlsValidationContextFileTrust{
+									CertificateChain: ptr.String("__CertificateChain__"),
+								},
+							},
+							SubjectAlternativeNames: &types.SubjectAlternativeNames{
+								Match: &types.SubjectAlternativeNameMatchers{
+									Exact: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						Certificate: &types.VirtualGatewayListenerTlsCertificateMemberAcm{
+							Value: types.VirtualGatewayListenerTlsAcmCertificate{
+								CertificateArn: ptr.String("__CertificateArn__"),
+							},
+						},
+					},
+					ConnectionPool: &types.VirtualGatewayConnectionPoolMemberHttp{
+						Value: types.VirtualGatewayHttpConnectionPool{
+							MaxConnections:     ptr.Int32(1),
+							MaxPendingRequests: ptr.Int32(1),
+						},
+					},
+				},
+			},
+			Logging: &types.VirtualGatewayLogging{
+				AccessLog: &types.VirtualGatewayAccessLogMemberFile{
+					Value: types.VirtualGatewayFileAccessLog{
+						Path: ptr.String("__Path__"),
+						Format: &types.LoggingFormatMemberText{
+							Value: "__LoggingFormatMemberText__",
+						},
+					},
+				},
+			},
+		},
+		Tags: []types.TagRef{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		MeshOwner:   ptr.String("__MeshOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1112,7 +1745,282 @@ func TestCheckResponseSnapshot_CreateVirtualNode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVirtualNode(context.Background(), &CreateVirtualNodeInput{})
+	got, err := svc.CreateVirtualNode(context.Background(), &CreateVirtualNodeInput{
+		VirtualNodeName: ptr.String("__VirtualNodeName__"),
+		MeshName:        ptr.String("__MeshName__"),
+		Spec: &types.VirtualNodeSpec{
+			ServiceDiscovery: &types.ServiceDiscoveryMemberDns{
+				Value: types.DnsServiceDiscovery{
+					Hostname:     ptr.String("__Hostname__"),
+					ResponseType: types.DnsResponseType("LOADBALANCER"),
+					IpPreference: types.IpPreference("IPv6_PREFERRED"),
+				},
+			},
+			Listeners: []types.Listener{
+				{
+					PortMapping: &types.PortMapping{
+						Port:     ptr.Int32(1),
+						Protocol: types.PortProtocol("http"),
+					},
+					Tls: &types.ListenerTls{
+						Mode: types.ListenerTlsMode("STRICT"),
+						Certificate: &types.ListenerTlsCertificateMemberAcm{
+							Value: types.ListenerTlsAcmCertificate{
+								CertificateArn: ptr.String("__CertificateArn__"),
+							},
+						},
+						Validation: &types.ListenerTlsValidationContext{
+							Trust: &types.ListenerTlsValidationContextTrustMemberFile{
+								Value: types.TlsValidationContextFileTrust{
+									CertificateChain: ptr.String("__CertificateChain__"),
+								},
+							},
+							SubjectAlternativeNames: &types.SubjectAlternativeNames{
+								Match: &types.SubjectAlternativeNameMatchers{
+									Exact: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+					HealthCheck: &types.HealthCheckPolicy{
+						TimeoutMillis:      ptr.Int64(1),
+						IntervalMillis:     ptr.Int64(1),
+						Protocol:           types.PortProtocol("http"),
+						Port:               ptr.Int32(1),
+						Path:               ptr.String("__Path__"),
+						HealthyThreshold:   ptr.Int32(1),
+						UnhealthyThreshold: ptr.Int32(1),
+					},
+					Timeout: &types.ListenerTimeoutMemberTcp{
+						Value: types.TcpTimeout{
+							Idle: &types.Duration{
+								Value: ptr.Int64(1),
+								Unit:  types.DurationUnit("s"),
+							},
+						},
+					},
+					OutlierDetection: &types.OutlierDetection{
+						MaxServerErrors: ptr.Int64(1),
+						Interval: &types.Duration{
+							Value: ptr.Int64(1),
+							Unit:  types.DurationUnit("s"),
+						},
+						BaseEjectionDuration: &types.Duration{
+							Value: ptr.Int64(1),
+							Unit:  types.DurationUnit("s"),
+						},
+						MaxEjectionPercent: ptr.Int32(1),
+					},
+					ConnectionPool: &types.VirtualNodeConnectionPoolMemberTcp{
+						Value: types.VirtualNodeTcpConnectionPool{
+							MaxConnections: ptr.Int32(1),
+						},
+					},
+				},
+				{
+					PortMapping: &types.PortMapping{
+						Port:     ptr.Int32(1),
+						Protocol: types.PortProtocol("http"),
+					},
+					Tls: &types.ListenerTls{
+						Mode: types.ListenerTlsMode("STRICT"),
+						Certificate: &types.ListenerTlsCertificateMemberAcm{
+							Value: types.ListenerTlsAcmCertificate{
+								CertificateArn: ptr.String("__CertificateArn__"),
+							},
+						},
+						Validation: &types.ListenerTlsValidationContext{
+							Trust: &types.ListenerTlsValidationContextTrustMemberFile{
+								Value: types.TlsValidationContextFileTrust{
+									CertificateChain: ptr.String("__CertificateChain__"),
+								},
+							},
+							SubjectAlternativeNames: &types.SubjectAlternativeNames{
+								Match: &types.SubjectAlternativeNameMatchers{
+									Exact: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+					HealthCheck: &types.HealthCheckPolicy{
+						TimeoutMillis:      ptr.Int64(1),
+						IntervalMillis:     ptr.Int64(1),
+						Protocol:           types.PortProtocol("http"),
+						Port:               ptr.Int32(1),
+						Path:               ptr.String("__Path__"),
+						HealthyThreshold:   ptr.Int32(1),
+						UnhealthyThreshold: ptr.Int32(1),
+					},
+					Timeout: &types.ListenerTimeoutMemberTcp{
+						Value: types.TcpTimeout{
+							Idle: &types.Duration{
+								Value: ptr.Int64(1),
+								Unit:  types.DurationUnit("s"),
+							},
+						},
+					},
+					OutlierDetection: &types.OutlierDetection{
+						MaxServerErrors: ptr.Int64(1),
+						Interval: &types.Duration{
+							Value: ptr.Int64(1),
+							Unit:  types.DurationUnit("s"),
+						},
+						BaseEjectionDuration: &types.Duration{
+							Value: ptr.Int64(1),
+							Unit:  types.DurationUnit("s"),
+						},
+						MaxEjectionPercent: ptr.Int32(1),
+					},
+					ConnectionPool: &types.VirtualNodeConnectionPoolMemberTcp{
+						Value: types.VirtualNodeTcpConnectionPool{
+							MaxConnections: ptr.Int32(1),
+						},
+					},
+				},
+			},
+			Backends: []types.Backend{
+				&types.BackendMemberVirtualService{
+					Value: types.VirtualServiceBackend{
+						VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						ClientPolicy: &types.ClientPolicy{
+							Tls: &types.ClientPolicyTls{
+								Enforce: ptr.Bool(true),
+								Ports: []int32{
+									1,
+									1,
+								},
+								Certificate: &types.ClientTlsCertificateMemberFile{
+									Value: types.ListenerTlsFileCertificate{
+										CertificateChain: ptr.String("__CertificateChain__"),
+										PrivateKey:       ptr.String("__PrivateKey__"),
+									},
+								},
+								Validation: &types.TlsValidationContext{
+									Trust: &types.TlsValidationContextTrustMemberAcm{
+										Value: types.TlsValidationContextAcmTrust{
+											CertificateAuthorityArns: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									SubjectAlternativeNames: &types.SubjectAlternativeNames{
+										Match: &types.SubjectAlternativeNameMatchers{
+											Exact: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				&types.BackendMemberVirtualService{
+					Value: types.VirtualServiceBackend{
+						VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						ClientPolicy: &types.ClientPolicy{
+							Tls: &types.ClientPolicyTls{
+								Enforce: ptr.Bool(true),
+								Ports: []int32{
+									1,
+									1,
+								},
+								Certificate: &types.ClientTlsCertificateMemberFile{
+									Value: types.ListenerTlsFileCertificate{
+										CertificateChain: ptr.String("__CertificateChain__"),
+										PrivateKey:       ptr.String("__PrivateKey__"),
+									},
+								},
+								Validation: &types.TlsValidationContext{
+									Trust: &types.TlsValidationContextTrustMemberAcm{
+										Value: types.TlsValidationContextAcmTrust{
+											CertificateAuthorityArns: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									SubjectAlternativeNames: &types.SubjectAlternativeNames{
+										Match: &types.SubjectAlternativeNameMatchers{
+											Exact: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			BackendDefaults: &types.BackendDefaults{
+				ClientPolicy: &types.ClientPolicy{
+					Tls: &types.ClientPolicyTls{
+						Enforce: ptr.Bool(true),
+						Ports: []int32{
+							1,
+							1,
+						},
+						Certificate: &types.ClientTlsCertificateMemberFile{
+							Value: types.ListenerTlsFileCertificate{
+								CertificateChain: ptr.String("__CertificateChain__"),
+								PrivateKey:       ptr.String("__PrivateKey__"),
+							},
+						},
+						Validation: &types.TlsValidationContext{
+							Trust: &types.TlsValidationContextTrustMemberAcm{
+								Value: types.TlsValidationContextAcmTrust{
+									CertificateAuthorityArns: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							SubjectAlternativeNames: &types.SubjectAlternativeNames{
+								Match: &types.SubjectAlternativeNameMatchers{
+									Exact: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			Logging: &types.Logging{
+				AccessLog: &types.AccessLogMemberFile{
+					Value: types.FileAccessLog{
+						Path: ptr.String("__Path__"),
+						Format: &types.LoggingFormatMemberText{
+							Value: "__LoggingFormatMemberText__",
+						},
+					},
+				},
+			},
+		},
+		Tags: []types.TagRef{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		MeshOwner:   ptr.String("__MeshOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1164,7 +2072,38 @@ func TestCheckResponseSnapshot_CreateVirtualRouter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVirtualRouter(context.Background(), &CreateVirtualRouterInput{})
+	got, err := svc.CreateVirtualRouter(context.Background(), &CreateVirtualRouterInput{
+		VirtualRouterName: ptr.String("__VirtualRouterName__"),
+		MeshName:          ptr.String("__MeshName__"),
+		Spec: &types.VirtualRouterSpec{
+			Listeners: []types.VirtualRouterListener{
+				{
+					PortMapping: &types.PortMapping{
+						Port:     ptr.Int32(1),
+						Protocol: types.PortProtocol("http"),
+					},
+				},
+				{
+					PortMapping: &types.PortMapping{
+						Port:     ptr.Int32(1),
+						Protocol: types.PortProtocol("http"),
+					},
+				},
+			},
+		},
+		Tags: []types.TagRef{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		MeshOwner:   ptr.String("__MeshOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1207,7 +2146,29 @@ func TestCheckResponseSnapshot_CreateVirtualService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVirtualService(context.Background(), &CreateVirtualServiceInput{})
+	got, err := svc.CreateVirtualService(context.Background(), &CreateVirtualServiceInput{
+		VirtualServiceName: ptr.String("__VirtualServiceName__"),
+		MeshName:           ptr.String("__MeshName__"),
+		Spec: &types.VirtualServiceSpec{
+			Provider: &types.VirtualServiceProviderMemberVirtualNode{
+				Value: types.VirtualNodeServiceProvider{
+					VirtualNodeName: ptr.String("__VirtualNodeName__"),
+				},
+			},
+		},
+		Tags: []types.TagRef{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		MeshOwner:   ptr.String("__MeshOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1416,7 +2377,12 @@ func TestCheckResponseSnapshot_DeleteGatewayRoute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteGatewayRoute(context.Background(), &DeleteGatewayRouteInput{})
+	got, err := svc.DeleteGatewayRoute(context.Background(), &DeleteGatewayRouteInput{
+		GatewayRouteName:   ptr.String("__GatewayRouteName__"),
+		MeshName:           ptr.String("__MeshName__"),
+		VirtualGatewayName: ptr.String("__VirtualGatewayName__"),
+		MeshOwner:          ptr.String("__MeshOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1459,7 +2425,9 @@ func TestCheckResponseSnapshot_DeleteMesh(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteMesh(context.Background(), &DeleteMeshInput{})
+	got, err := svc.DeleteMesh(context.Background(), &DeleteMeshInput{
+		MeshName: ptr.String("__MeshName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1752,7 +2720,12 @@ func TestCheckResponseSnapshot_DeleteRoute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRoute(context.Background(), &DeleteRouteInput{})
+	got, err := svc.DeleteRoute(context.Background(), &DeleteRouteInput{
+		RouteName:         ptr.String("__RouteName__"),
+		MeshName:          ptr.String("__MeshName__"),
+		VirtualRouterName: ptr.String("__VirtualRouterName__"),
+		MeshOwner:         ptr.String("__MeshOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1925,7 +2898,11 @@ func TestCheckResponseSnapshot_DeleteVirtualGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVirtualGateway(context.Background(), &DeleteVirtualGatewayInput{})
+	got, err := svc.DeleteVirtualGateway(context.Background(), &DeleteVirtualGatewayInput{
+		VirtualGatewayName: ptr.String("__VirtualGatewayName__"),
+		MeshName:           ptr.String("__MeshName__"),
+		MeshOwner:          ptr.String("__MeshOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2221,7 +3198,11 @@ func TestCheckResponseSnapshot_DeleteVirtualNode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVirtualNode(context.Background(), &DeleteVirtualNodeInput{})
+	got, err := svc.DeleteVirtualNode(context.Background(), &DeleteVirtualNodeInput{
+		VirtualNodeName: ptr.String("__VirtualNodeName__"),
+		MeshName:        ptr.String("__MeshName__"),
+		MeshOwner:       ptr.String("__MeshOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2273,7 +3254,11 @@ func TestCheckResponseSnapshot_DeleteVirtualRouter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVirtualRouter(context.Background(), &DeleteVirtualRouterInput{})
+	got, err := svc.DeleteVirtualRouter(context.Background(), &DeleteVirtualRouterInput{
+		VirtualRouterName: ptr.String("__VirtualRouterName__"),
+		MeshName:          ptr.String("__MeshName__"),
+		MeshOwner:         ptr.String("__MeshOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2316,7 +3301,11 @@ func TestCheckResponseSnapshot_DeleteVirtualService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVirtualService(context.Background(), &DeleteVirtualServiceInput{})
+	got, err := svc.DeleteVirtualService(context.Background(), &DeleteVirtualServiceInput{
+		VirtualServiceName: ptr.String("__VirtualServiceName__"),
+		MeshName:           ptr.String("__MeshName__"),
+		MeshOwner:          ptr.String("__MeshOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2525,7 +3514,12 @@ func TestCheckResponseSnapshot_DescribeGatewayRoute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeGatewayRoute(context.Background(), &DescribeGatewayRouteInput{})
+	got, err := svc.DescribeGatewayRoute(context.Background(), &DescribeGatewayRouteInput{
+		GatewayRouteName:   ptr.String("__GatewayRouteName__"),
+		MeshName:           ptr.String("__MeshName__"),
+		VirtualGatewayName: ptr.String("__VirtualGatewayName__"),
+		MeshOwner:          ptr.String("__MeshOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2568,7 +3562,10 @@ func TestCheckResponseSnapshot_DescribeMesh(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMesh(context.Background(), &DescribeMeshInput{})
+	got, err := svc.DescribeMesh(context.Background(), &DescribeMeshInput{
+		MeshName:  ptr.String("__MeshName__"),
+		MeshOwner: ptr.String("__MeshOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2861,7 +3858,12 @@ func TestCheckResponseSnapshot_DescribeRoute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRoute(context.Background(), &DescribeRouteInput{})
+	got, err := svc.DescribeRoute(context.Background(), &DescribeRouteInput{
+		RouteName:         ptr.String("__RouteName__"),
+		MeshName:          ptr.String("__MeshName__"),
+		MeshOwner:         ptr.String("__MeshOwner__"),
+		VirtualRouterName: ptr.String("__VirtualRouterName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3034,7 +4036,11 @@ func TestCheckResponseSnapshot_DescribeVirtualGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeVirtualGateway(context.Background(), &DescribeVirtualGatewayInput{})
+	got, err := svc.DescribeVirtualGateway(context.Background(), &DescribeVirtualGatewayInput{
+		VirtualGatewayName: ptr.String("__VirtualGatewayName__"),
+		MeshName:           ptr.String("__MeshName__"),
+		MeshOwner:          ptr.String("__MeshOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3330,7 +4336,11 @@ func TestCheckResponseSnapshot_DescribeVirtualNode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeVirtualNode(context.Background(), &DescribeVirtualNodeInput{})
+	got, err := svc.DescribeVirtualNode(context.Background(), &DescribeVirtualNodeInput{
+		VirtualNodeName: ptr.String("__VirtualNodeName__"),
+		MeshName:        ptr.String("__MeshName__"),
+		MeshOwner:       ptr.String("__MeshOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3382,7 +4392,11 @@ func TestCheckResponseSnapshot_DescribeVirtualRouter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeVirtualRouter(context.Background(), &DescribeVirtualRouterInput{})
+	got, err := svc.DescribeVirtualRouter(context.Background(), &DescribeVirtualRouterInput{
+		VirtualRouterName: ptr.String("__VirtualRouterName__"),
+		MeshName:          ptr.String("__MeshName__"),
+		MeshOwner:         ptr.String("__MeshOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3425,7 +4439,11 @@ func TestCheckResponseSnapshot_DescribeVirtualService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeVirtualService(context.Background(), &DescribeVirtualServiceInput{})
+	got, err := svc.DescribeVirtualService(context.Background(), &DescribeVirtualServiceInput{
+		VirtualServiceName: ptr.String("__VirtualServiceName__"),
+		MeshName:           ptr.String("__MeshName__"),
+		MeshOwner:          ptr.String("__MeshOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3470,7 +4488,13 @@ func TestCheckResponseSnapshot_ListGatewayRoutes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGatewayRoutes(context.Background(), &ListGatewayRoutesInput{})
+	got, err := svc.ListGatewayRoutes(context.Background(), &ListGatewayRoutesInput{
+		MeshName:           ptr.String("__MeshName__"),
+		VirtualGatewayName: ptr.String("__VirtualGatewayName__"),
+		NextToken:          ptr.String("__NextToken__"),
+		Limit:              ptr.Int32(1),
+		MeshOwner:          ptr.String("__MeshOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3511,7 +4535,10 @@ func TestCheckResponseSnapshot_ListMeshes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMeshes(context.Background(), &ListMeshesInput{})
+	got, err := svc.ListMeshes(context.Background(), &ListMeshesInput{
+		NextToken: ptr.String("__NextToken__"),
+		Limit:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3556,7 +4583,13 @@ func TestCheckResponseSnapshot_ListRoutes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRoutes(context.Background(), &ListRoutesInput{})
+	got, err := svc.ListRoutes(context.Background(), &ListRoutesInput{
+		MeshName:          ptr.String("__MeshName__"),
+		VirtualRouterName: ptr.String("__VirtualRouterName__"),
+		NextToken:         ptr.String("__NextToken__"),
+		Limit:             ptr.Int32(1),
+		MeshOwner:         ptr.String("__MeshOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3587,7 +4620,11 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		NextToken:   ptr.String("__NextToken__"),
+		Limit:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3630,7 +4667,12 @@ func TestCheckResponseSnapshot_ListVirtualGateways(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVirtualGateways(context.Background(), &ListVirtualGatewaysInput{})
+	got, err := svc.ListVirtualGateways(context.Background(), &ListVirtualGatewaysInput{
+		MeshName:  ptr.String("__MeshName__"),
+		NextToken: ptr.String("__NextToken__"),
+		Limit:     ptr.Int32(1),
+		MeshOwner: ptr.String("__MeshOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3673,7 +4715,12 @@ func TestCheckResponseSnapshot_ListVirtualNodes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVirtualNodes(context.Background(), &ListVirtualNodesInput{})
+	got, err := svc.ListVirtualNodes(context.Background(), &ListVirtualNodesInput{
+		MeshName:  ptr.String("__MeshName__"),
+		NextToken: ptr.String("__NextToken__"),
+		Limit:     ptr.Int32(1),
+		MeshOwner: ptr.String("__MeshOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3716,7 +4763,12 @@ func TestCheckResponseSnapshot_ListVirtualRouters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVirtualRouters(context.Background(), &ListVirtualRoutersInput{})
+	got, err := svc.ListVirtualRouters(context.Background(), &ListVirtualRoutersInput{
+		MeshName:  ptr.String("__MeshName__"),
+		NextToken: ptr.String("__NextToken__"),
+		Limit:     ptr.Int32(1),
+		MeshOwner: ptr.String("__MeshOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3759,7 +4811,12 @@ func TestCheckResponseSnapshot_ListVirtualServices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVirtualServices(context.Background(), &ListVirtualServicesInput{})
+	got, err := svc.ListVirtualServices(context.Background(), &ListVirtualServicesInput{
+		MeshName:  ptr.String("__MeshName__"),
+		NextToken: ptr.String("__NextToken__"),
+		Limit:     ptr.Int32(1),
+		MeshOwner: ptr.String("__MeshOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3778,7 +4835,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.TagRef{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3797,7 +4866,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4006,7 +5081,185 @@ func TestCheckResponseSnapshot_UpdateGatewayRoute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateGatewayRoute(context.Background(), &UpdateGatewayRouteInput{})
+	got, err := svc.UpdateGatewayRoute(context.Background(), &UpdateGatewayRouteInput{
+		GatewayRouteName:   ptr.String("__GatewayRouteName__"),
+		MeshName:           ptr.String("__MeshName__"),
+		VirtualGatewayName: ptr.String("__VirtualGatewayName__"),
+		Spec: &types.GatewayRouteSpec{
+			Priority: ptr.Int32(1),
+			HttpRoute: &types.HttpGatewayRoute{
+				Match: &types.HttpGatewayRouteMatch{
+					Prefix: ptr.String("__Prefix__"),
+					Path: &types.HttpPathMatch{
+						Exact: ptr.String("__Exact__"),
+						Regex: ptr.String("__Regex__"),
+					},
+					QueryParameters: []types.HttpQueryParameter{
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+					},
+					Method: types.HttpMethod("GET"),
+					Hostname: &types.GatewayRouteHostnameMatch{
+						Exact:  ptr.String("__Exact__"),
+						Suffix: ptr.String("__Suffix__"),
+					},
+					Headers: []types.HttpGatewayRouteHeader{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.HttpGatewayRouteAction{
+					Target: &types.GatewayRouteTarget{
+						VirtualService: &types.GatewayRouteVirtualService{
+							VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						},
+						Port: ptr.Int32(1),
+					},
+					Rewrite: &types.HttpGatewayRouteRewrite{
+						Prefix: &types.HttpGatewayRoutePrefixRewrite{
+							DefaultPrefix: types.DefaultGatewayRouteRewrite("ENABLED"),
+							Value:         ptr.String("__Value__"),
+						},
+						Path: &types.HttpGatewayRoutePathRewrite{
+							Exact: ptr.String("__Exact__"),
+						},
+						Hostname: &types.GatewayRouteHostnameRewrite{
+							DefaultTargetHostname: types.DefaultGatewayRouteRewrite("ENABLED"),
+						},
+					},
+				},
+			},
+			Http2Route: &types.HttpGatewayRoute{
+				Match: &types.HttpGatewayRouteMatch{
+					Prefix: ptr.String("__Prefix__"),
+					Path: &types.HttpPathMatch{
+						Exact: ptr.String("__Exact__"),
+						Regex: ptr.String("__Regex__"),
+					},
+					QueryParameters: []types.HttpQueryParameter{
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+					},
+					Method: types.HttpMethod("GET"),
+					Hostname: &types.GatewayRouteHostnameMatch{
+						Exact:  ptr.String("__Exact__"),
+						Suffix: ptr.String("__Suffix__"),
+					},
+					Headers: []types.HttpGatewayRouteHeader{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.HttpGatewayRouteAction{
+					Target: &types.GatewayRouteTarget{
+						VirtualService: &types.GatewayRouteVirtualService{
+							VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						},
+						Port: ptr.Int32(1),
+					},
+					Rewrite: &types.HttpGatewayRouteRewrite{
+						Prefix: &types.HttpGatewayRoutePrefixRewrite{
+							DefaultPrefix: types.DefaultGatewayRouteRewrite("ENABLED"),
+							Value:         ptr.String("__Value__"),
+						},
+						Path: &types.HttpGatewayRoutePathRewrite{
+							Exact: ptr.String("__Exact__"),
+						},
+						Hostname: &types.GatewayRouteHostnameRewrite{
+							DefaultTargetHostname: types.DefaultGatewayRouteRewrite("ENABLED"),
+						},
+					},
+				},
+			},
+			GrpcRoute: &types.GrpcGatewayRoute{
+				Match: &types.GrpcGatewayRouteMatch{
+					ServiceName: ptr.String("__ServiceName__"),
+					Hostname: &types.GatewayRouteHostnameMatch{
+						Exact:  ptr.String("__Exact__"),
+						Suffix: ptr.String("__Suffix__"),
+					},
+					Metadata: []types.GrpcGatewayRouteMetadata{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.GrpcMetadataMatchMethodMemberExact{
+								Value: "__GrpcMetadataMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.GrpcMetadataMatchMethodMemberExact{
+								Value: "__GrpcMetadataMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.GrpcGatewayRouteAction{
+					Target: &types.GatewayRouteTarget{
+						VirtualService: &types.GatewayRouteVirtualService{
+							VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						},
+						Port: ptr.Int32(1),
+					},
+					Rewrite: &types.GrpcGatewayRouteRewrite{
+						Hostname: &types.GatewayRouteHostnameRewrite{
+							DefaultTargetHostname: types.DefaultGatewayRouteRewrite("ENABLED"),
+						},
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		MeshOwner:   ptr.String("__MeshOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4049,7 +5302,18 @@ func TestCheckResponseSnapshot_UpdateMesh(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateMesh(context.Background(), &UpdateMeshInput{})
+	got, err := svc.UpdateMesh(context.Background(), &UpdateMeshInput{
+		MeshName: ptr.String("__MeshName__"),
+		Spec: &types.MeshSpec{
+			EgressFilter: &types.EgressFilter{
+				Type: types.EgressFilterType("ALLOW_ALL"),
+			},
+			ServiceDiscovery: &types.MeshServiceDiscovery{
+				IpPreference: types.IpPreference("IPv6_PREFERRED"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4342,7 +5606,269 @@ func TestCheckResponseSnapshot_UpdateRoute(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRoute(context.Background(), &UpdateRouteInput{})
+	got, err := svc.UpdateRoute(context.Background(), &UpdateRouteInput{
+		RouteName:         ptr.String("__RouteName__"),
+		MeshName:          ptr.String("__MeshName__"),
+		VirtualRouterName: ptr.String("__VirtualRouterName__"),
+		Spec: &types.RouteSpec{
+			Priority: ptr.Int32(1),
+			HttpRoute: &types.HttpRoute{
+				Match: &types.HttpRouteMatch{
+					Prefix: ptr.String("__Prefix__"),
+					Path: &types.HttpPathMatch{
+						Exact: ptr.String("__Exact__"),
+						Regex: ptr.String("__Regex__"),
+					},
+					QueryParameters: []types.HttpQueryParameter{
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+					},
+					Method: types.HttpMethod("GET"),
+					Scheme: types.HttpScheme("http"),
+					Headers: []types.HttpRouteHeader{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.HttpRouteAction{
+					WeightedTargets: []types.WeightedTarget{
+						{
+							VirtualNode: ptr.String("__VirtualNode__"),
+							Weight:      1,
+							Port:        ptr.Int32(1),
+						},
+						{
+							VirtualNode: ptr.String("__VirtualNode__"),
+							Weight:      1,
+							Port:        ptr.Int32(1),
+						},
+					},
+				},
+				RetryPolicy: &types.HttpRetryPolicy{
+					PerRetryTimeout: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.DurationUnit("s"),
+					},
+					MaxRetries: ptr.Int64(1),
+					HttpRetryEvents: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TcpRetryEvents: []types.TcpRetryPolicyEvent{
+						types.TcpRetryPolicyEvent("connection-error"),
+						types.TcpRetryPolicyEvent("connection-error"),
+					},
+				},
+				Timeout: &types.HttpTimeout{
+					PerRequest: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.DurationUnit("s"),
+					},
+					Idle: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.DurationUnit("s"),
+					},
+				},
+			},
+			TcpRoute: &types.TcpRoute{
+				Action: &types.TcpRouteAction{
+					WeightedTargets: []types.WeightedTarget{
+						{
+							VirtualNode: ptr.String("__VirtualNode__"),
+							Weight:      1,
+							Port:        ptr.Int32(1),
+						},
+						{
+							VirtualNode: ptr.String("__VirtualNode__"),
+							Weight:      1,
+							Port:        ptr.Int32(1),
+						},
+					},
+				},
+				Timeout: &types.TcpTimeout{
+					Idle: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.DurationUnit("s"),
+					},
+				},
+				Match: &types.TcpRouteMatch{
+					Port: ptr.Int32(1),
+				},
+			},
+			Http2Route: &types.HttpRoute{
+				Match: &types.HttpRouteMatch{
+					Prefix: ptr.String("__Prefix__"),
+					Path: &types.HttpPathMatch{
+						Exact: ptr.String("__Exact__"),
+						Regex: ptr.String("__Regex__"),
+					},
+					QueryParameters: []types.HttpQueryParameter{
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+					},
+					Method: types.HttpMethod("GET"),
+					Scheme: types.HttpScheme("http"),
+					Headers: []types.HttpRouteHeader{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.HttpRouteAction{
+					WeightedTargets: []types.WeightedTarget{
+						{
+							VirtualNode: ptr.String("__VirtualNode__"),
+							Weight:      1,
+							Port:        ptr.Int32(1),
+						},
+						{
+							VirtualNode: ptr.String("__VirtualNode__"),
+							Weight:      1,
+							Port:        ptr.Int32(1),
+						},
+					},
+				},
+				RetryPolicy: &types.HttpRetryPolicy{
+					PerRetryTimeout: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.DurationUnit("s"),
+					},
+					MaxRetries: ptr.Int64(1),
+					HttpRetryEvents: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TcpRetryEvents: []types.TcpRetryPolicyEvent{
+						types.TcpRetryPolicyEvent("connection-error"),
+						types.TcpRetryPolicyEvent("connection-error"),
+					},
+				},
+				Timeout: &types.HttpTimeout{
+					PerRequest: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.DurationUnit("s"),
+					},
+					Idle: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.DurationUnit("s"),
+					},
+				},
+			},
+			GrpcRoute: &types.GrpcRoute{
+				Action: &types.GrpcRouteAction{
+					WeightedTargets: []types.WeightedTarget{
+						{
+							VirtualNode: ptr.String("__VirtualNode__"),
+							Weight:      1,
+							Port:        ptr.Int32(1),
+						},
+						{
+							VirtualNode: ptr.String("__VirtualNode__"),
+							Weight:      1,
+							Port:        ptr.Int32(1),
+						},
+					},
+				},
+				Match: &types.GrpcRouteMatch{
+					ServiceName: ptr.String("__ServiceName__"),
+					MethodName:  ptr.String("__MethodName__"),
+					Metadata: []types.GrpcRouteMetadata{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.GrpcRouteMetadataMatchMethodMemberExact{
+								Value: "__GrpcRouteMetadataMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.GrpcRouteMetadataMatchMethodMemberExact{
+								Value: "__GrpcRouteMetadataMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				RetryPolicy: &types.GrpcRetryPolicy{
+					PerRetryTimeout: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.DurationUnit("s"),
+					},
+					MaxRetries: ptr.Int64(1),
+					HttpRetryEvents: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TcpRetryEvents: []types.TcpRetryPolicyEvent{
+						types.TcpRetryPolicyEvent("connection-error"),
+						types.TcpRetryPolicyEvent("connection-error"),
+					},
+					GrpcRetryEvents: []types.GrpcRetryPolicyEvent{
+						types.GrpcRetryPolicyEvent("cancelled"),
+						types.GrpcRetryPolicyEvent("cancelled"),
+					},
+				},
+				Timeout: &types.GrpcTimeout{
+					PerRequest: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.DurationUnit("s"),
+					},
+					Idle: &types.Duration{
+						Value: ptr.Int64(1),
+						Unit:  types.DurationUnit("s"),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		MeshOwner:   ptr.String("__MeshOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4515,7 +6041,149 @@ func TestCheckResponseSnapshot_UpdateVirtualGateway(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateVirtualGateway(context.Background(), &UpdateVirtualGatewayInput{})
+	got, err := svc.UpdateVirtualGateway(context.Background(), &UpdateVirtualGatewayInput{
+		VirtualGatewayName: ptr.String("__VirtualGatewayName__"),
+		MeshName:           ptr.String("__MeshName__"),
+		Spec: &types.VirtualGatewaySpec{
+			BackendDefaults: &types.VirtualGatewayBackendDefaults{
+				ClientPolicy: &types.VirtualGatewayClientPolicy{
+					Tls: &types.VirtualGatewayClientPolicyTls{
+						Enforce: ptr.Bool(true),
+						Ports: []int32{
+							1,
+							1,
+						},
+						Certificate: &types.VirtualGatewayClientTlsCertificateMemberFile{
+							Value: types.VirtualGatewayListenerTlsFileCertificate{
+								CertificateChain: ptr.String("__CertificateChain__"),
+								PrivateKey:       ptr.String("__PrivateKey__"),
+							},
+						},
+						Validation: &types.VirtualGatewayTlsValidationContext{
+							Trust: &types.VirtualGatewayTlsValidationContextTrustMemberAcm{
+								Value: types.VirtualGatewayTlsValidationContextAcmTrust{
+									CertificateAuthorityArns: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							SubjectAlternativeNames: &types.SubjectAlternativeNames{
+								Match: &types.SubjectAlternativeNameMatchers{
+									Exact: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			Listeners: []types.VirtualGatewayListener{
+				{
+					HealthCheck: &types.VirtualGatewayHealthCheckPolicy{
+						TimeoutMillis:      ptr.Int64(1),
+						IntervalMillis:     ptr.Int64(1),
+						Protocol:           types.VirtualGatewayPortProtocol("http"),
+						Port:               ptr.Int32(1),
+						Path:               ptr.String("__Path__"),
+						HealthyThreshold:   ptr.Int32(1),
+						UnhealthyThreshold: ptr.Int32(1),
+					},
+					PortMapping: &types.VirtualGatewayPortMapping{
+						Port:     ptr.Int32(1),
+						Protocol: types.VirtualGatewayPortProtocol("http"),
+					},
+					Tls: &types.VirtualGatewayListenerTls{
+						Mode: types.VirtualGatewayListenerTlsMode("STRICT"),
+						Validation: &types.VirtualGatewayListenerTlsValidationContext{
+							Trust: &types.VirtualGatewayListenerTlsValidationContextTrustMemberFile{
+								Value: types.VirtualGatewayTlsValidationContextFileTrust{
+									CertificateChain: ptr.String("__CertificateChain__"),
+								},
+							},
+							SubjectAlternativeNames: &types.SubjectAlternativeNames{
+								Match: &types.SubjectAlternativeNameMatchers{
+									Exact: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						Certificate: &types.VirtualGatewayListenerTlsCertificateMemberAcm{
+							Value: types.VirtualGatewayListenerTlsAcmCertificate{
+								CertificateArn: ptr.String("__CertificateArn__"),
+							},
+						},
+					},
+					ConnectionPool: &types.VirtualGatewayConnectionPoolMemberHttp{
+						Value: types.VirtualGatewayHttpConnectionPool{
+							MaxConnections:     ptr.Int32(1),
+							MaxPendingRequests: ptr.Int32(1),
+						},
+					},
+				},
+				{
+					HealthCheck: &types.VirtualGatewayHealthCheckPolicy{
+						TimeoutMillis:      ptr.Int64(1),
+						IntervalMillis:     ptr.Int64(1),
+						Protocol:           types.VirtualGatewayPortProtocol("http"),
+						Port:               ptr.Int32(1),
+						Path:               ptr.String("__Path__"),
+						HealthyThreshold:   ptr.Int32(1),
+						UnhealthyThreshold: ptr.Int32(1),
+					},
+					PortMapping: &types.VirtualGatewayPortMapping{
+						Port:     ptr.Int32(1),
+						Protocol: types.VirtualGatewayPortProtocol("http"),
+					},
+					Tls: &types.VirtualGatewayListenerTls{
+						Mode: types.VirtualGatewayListenerTlsMode("STRICT"),
+						Validation: &types.VirtualGatewayListenerTlsValidationContext{
+							Trust: &types.VirtualGatewayListenerTlsValidationContextTrustMemberFile{
+								Value: types.VirtualGatewayTlsValidationContextFileTrust{
+									CertificateChain: ptr.String("__CertificateChain__"),
+								},
+							},
+							SubjectAlternativeNames: &types.SubjectAlternativeNames{
+								Match: &types.SubjectAlternativeNameMatchers{
+									Exact: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						Certificate: &types.VirtualGatewayListenerTlsCertificateMemberAcm{
+							Value: types.VirtualGatewayListenerTlsAcmCertificate{
+								CertificateArn: ptr.String("__CertificateArn__"),
+							},
+						},
+					},
+					ConnectionPool: &types.VirtualGatewayConnectionPoolMemberHttp{
+						Value: types.VirtualGatewayHttpConnectionPool{
+							MaxConnections:     ptr.Int32(1),
+							MaxPendingRequests: ptr.Int32(1),
+						},
+					},
+				},
+			},
+			Logging: &types.VirtualGatewayLogging{
+				AccessLog: &types.VirtualGatewayAccessLogMemberFile{
+					Value: types.VirtualGatewayFileAccessLog{
+						Path: ptr.String("__Path__"),
+						Format: &types.LoggingFormatMemberText{
+							Value: "__LoggingFormatMemberText__",
+						},
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		MeshOwner:   ptr.String("__MeshOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4811,7 +6479,272 @@ func TestCheckResponseSnapshot_UpdateVirtualNode(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateVirtualNode(context.Background(), &UpdateVirtualNodeInput{})
+	got, err := svc.UpdateVirtualNode(context.Background(), &UpdateVirtualNodeInput{
+		VirtualNodeName: ptr.String("__VirtualNodeName__"),
+		MeshName:        ptr.String("__MeshName__"),
+		Spec: &types.VirtualNodeSpec{
+			ServiceDiscovery: &types.ServiceDiscoveryMemberDns{
+				Value: types.DnsServiceDiscovery{
+					Hostname:     ptr.String("__Hostname__"),
+					ResponseType: types.DnsResponseType("LOADBALANCER"),
+					IpPreference: types.IpPreference("IPv6_PREFERRED"),
+				},
+			},
+			Listeners: []types.Listener{
+				{
+					PortMapping: &types.PortMapping{
+						Port:     ptr.Int32(1),
+						Protocol: types.PortProtocol("http"),
+					},
+					Tls: &types.ListenerTls{
+						Mode: types.ListenerTlsMode("STRICT"),
+						Certificate: &types.ListenerTlsCertificateMemberAcm{
+							Value: types.ListenerTlsAcmCertificate{
+								CertificateArn: ptr.String("__CertificateArn__"),
+							},
+						},
+						Validation: &types.ListenerTlsValidationContext{
+							Trust: &types.ListenerTlsValidationContextTrustMemberFile{
+								Value: types.TlsValidationContextFileTrust{
+									CertificateChain: ptr.String("__CertificateChain__"),
+								},
+							},
+							SubjectAlternativeNames: &types.SubjectAlternativeNames{
+								Match: &types.SubjectAlternativeNameMatchers{
+									Exact: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+					HealthCheck: &types.HealthCheckPolicy{
+						TimeoutMillis:      ptr.Int64(1),
+						IntervalMillis:     ptr.Int64(1),
+						Protocol:           types.PortProtocol("http"),
+						Port:               ptr.Int32(1),
+						Path:               ptr.String("__Path__"),
+						HealthyThreshold:   ptr.Int32(1),
+						UnhealthyThreshold: ptr.Int32(1),
+					},
+					Timeout: &types.ListenerTimeoutMemberTcp{
+						Value: types.TcpTimeout{
+							Idle: &types.Duration{
+								Value: ptr.Int64(1),
+								Unit:  types.DurationUnit("s"),
+							},
+						},
+					},
+					OutlierDetection: &types.OutlierDetection{
+						MaxServerErrors: ptr.Int64(1),
+						Interval: &types.Duration{
+							Value: ptr.Int64(1),
+							Unit:  types.DurationUnit("s"),
+						},
+						BaseEjectionDuration: &types.Duration{
+							Value: ptr.Int64(1),
+							Unit:  types.DurationUnit("s"),
+						},
+						MaxEjectionPercent: ptr.Int32(1),
+					},
+					ConnectionPool: &types.VirtualNodeConnectionPoolMemberTcp{
+						Value: types.VirtualNodeTcpConnectionPool{
+							MaxConnections: ptr.Int32(1),
+						},
+					},
+				},
+				{
+					PortMapping: &types.PortMapping{
+						Port:     ptr.Int32(1),
+						Protocol: types.PortProtocol("http"),
+					},
+					Tls: &types.ListenerTls{
+						Mode: types.ListenerTlsMode("STRICT"),
+						Certificate: &types.ListenerTlsCertificateMemberAcm{
+							Value: types.ListenerTlsAcmCertificate{
+								CertificateArn: ptr.String("__CertificateArn__"),
+							},
+						},
+						Validation: &types.ListenerTlsValidationContext{
+							Trust: &types.ListenerTlsValidationContextTrustMemberFile{
+								Value: types.TlsValidationContextFileTrust{
+									CertificateChain: ptr.String("__CertificateChain__"),
+								},
+							},
+							SubjectAlternativeNames: &types.SubjectAlternativeNames{
+								Match: &types.SubjectAlternativeNameMatchers{
+									Exact: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+					HealthCheck: &types.HealthCheckPolicy{
+						TimeoutMillis:      ptr.Int64(1),
+						IntervalMillis:     ptr.Int64(1),
+						Protocol:           types.PortProtocol("http"),
+						Port:               ptr.Int32(1),
+						Path:               ptr.String("__Path__"),
+						HealthyThreshold:   ptr.Int32(1),
+						UnhealthyThreshold: ptr.Int32(1),
+					},
+					Timeout: &types.ListenerTimeoutMemberTcp{
+						Value: types.TcpTimeout{
+							Idle: &types.Duration{
+								Value: ptr.Int64(1),
+								Unit:  types.DurationUnit("s"),
+							},
+						},
+					},
+					OutlierDetection: &types.OutlierDetection{
+						MaxServerErrors: ptr.Int64(1),
+						Interval: &types.Duration{
+							Value: ptr.Int64(1),
+							Unit:  types.DurationUnit("s"),
+						},
+						BaseEjectionDuration: &types.Duration{
+							Value: ptr.Int64(1),
+							Unit:  types.DurationUnit("s"),
+						},
+						MaxEjectionPercent: ptr.Int32(1),
+					},
+					ConnectionPool: &types.VirtualNodeConnectionPoolMemberTcp{
+						Value: types.VirtualNodeTcpConnectionPool{
+							MaxConnections: ptr.Int32(1),
+						},
+					},
+				},
+			},
+			Backends: []types.Backend{
+				&types.BackendMemberVirtualService{
+					Value: types.VirtualServiceBackend{
+						VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						ClientPolicy: &types.ClientPolicy{
+							Tls: &types.ClientPolicyTls{
+								Enforce: ptr.Bool(true),
+								Ports: []int32{
+									1,
+									1,
+								},
+								Certificate: &types.ClientTlsCertificateMemberFile{
+									Value: types.ListenerTlsFileCertificate{
+										CertificateChain: ptr.String("__CertificateChain__"),
+										PrivateKey:       ptr.String("__PrivateKey__"),
+									},
+								},
+								Validation: &types.TlsValidationContext{
+									Trust: &types.TlsValidationContextTrustMemberAcm{
+										Value: types.TlsValidationContextAcmTrust{
+											CertificateAuthorityArns: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									SubjectAlternativeNames: &types.SubjectAlternativeNames{
+										Match: &types.SubjectAlternativeNameMatchers{
+											Exact: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				&types.BackendMemberVirtualService{
+					Value: types.VirtualServiceBackend{
+						VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						ClientPolicy: &types.ClientPolicy{
+							Tls: &types.ClientPolicyTls{
+								Enforce: ptr.Bool(true),
+								Ports: []int32{
+									1,
+									1,
+								},
+								Certificate: &types.ClientTlsCertificateMemberFile{
+									Value: types.ListenerTlsFileCertificate{
+										CertificateChain: ptr.String("__CertificateChain__"),
+										PrivateKey:       ptr.String("__PrivateKey__"),
+									},
+								},
+								Validation: &types.TlsValidationContext{
+									Trust: &types.TlsValidationContextTrustMemberAcm{
+										Value: types.TlsValidationContextAcmTrust{
+											CertificateAuthorityArns: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+									SubjectAlternativeNames: &types.SubjectAlternativeNames{
+										Match: &types.SubjectAlternativeNameMatchers{
+											Exact: []string{
+												"__Member__",
+												"__Member__",
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			BackendDefaults: &types.BackendDefaults{
+				ClientPolicy: &types.ClientPolicy{
+					Tls: &types.ClientPolicyTls{
+						Enforce: ptr.Bool(true),
+						Ports: []int32{
+							1,
+							1,
+						},
+						Certificate: &types.ClientTlsCertificateMemberFile{
+							Value: types.ListenerTlsFileCertificate{
+								CertificateChain: ptr.String("__CertificateChain__"),
+								PrivateKey:       ptr.String("__PrivateKey__"),
+							},
+						},
+						Validation: &types.TlsValidationContext{
+							Trust: &types.TlsValidationContextTrustMemberAcm{
+								Value: types.TlsValidationContextAcmTrust{
+									CertificateAuthorityArns: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							SubjectAlternativeNames: &types.SubjectAlternativeNames{
+								Match: &types.SubjectAlternativeNameMatchers{
+									Exact: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			Logging: &types.Logging{
+				AccessLog: &types.AccessLogMemberFile{
+					Value: types.FileAccessLog{
+						Path: ptr.String("__Path__"),
+						Format: &types.LoggingFormatMemberText{
+							Value: "__LoggingFormatMemberText__",
+						},
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		MeshOwner:   ptr.String("__MeshOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4863,7 +6796,28 @@ func TestCheckResponseSnapshot_UpdateVirtualRouter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateVirtualRouter(context.Background(), &UpdateVirtualRouterInput{})
+	got, err := svc.UpdateVirtualRouter(context.Background(), &UpdateVirtualRouterInput{
+		VirtualRouterName: ptr.String("__VirtualRouterName__"),
+		MeshName:          ptr.String("__MeshName__"),
+		Spec: &types.VirtualRouterSpec{
+			Listeners: []types.VirtualRouterListener{
+				{
+					PortMapping: &types.PortMapping{
+						Port:     ptr.Int32(1),
+						Protocol: types.PortProtocol("http"),
+					},
+				},
+				{
+					PortMapping: &types.PortMapping{
+						Port:     ptr.Int32(1),
+						Protocol: types.PortProtocol("http"),
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		MeshOwner:   ptr.String("__MeshOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4906,7 +6860,19 @@ func TestCheckResponseSnapshot_UpdateVirtualService(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateVirtualService(context.Background(), &UpdateVirtualServiceInput{})
+	got, err := svc.UpdateVirtualService(context.Background(), &UpdateVirtualServiceInput{
+		VirtualServiceName: ptr.String("__VirtualServiceName__"),
+		MeshName:           ptr.String("__MeshName__"),
+		Spec: &types.VirtualServiceSpec{
+			Provider: &types.VirtualServiceProviderMemberVirtualNode{
+				Value: types.VirtualNodeServiceProvider{
+					VirtualNodeName: ptr.String("__VirtualNodeName__"),
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		MeshOwner:   ptr.String("__MeshOwner__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4927,7 +6893,195 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateGatewayRoute(context.Background(), &CreateGatewayRouteInput{})
+	_, opErr := svc.CreateGatewayRoute(context.Background(), &CreateGatewayRouteInput{
+		GatewayRouteName:   ptr.String("__GatewayRouteName__"),
+		MeshName:           ptr.String("__MeshName__"),
+		VirtualGatewayName: ptr.String("__VirtualGatewayName__"),
+		Spec: &types.GatewayRouteSpec{
+			Priority: ptr.Int32(1),
+			HttpRoute: &types.HttpGatewayRoute{
+				Match: &types.HttpGatewayRouteMatch{
+					Prefix: ptr.String("__Prefix__"),
+					Path: &types.HttpPathMatch{
+						Exact: ptr.String("__Exact__"),
+						Regex: ptr.String("__Regex__"),
+					},
+					QueryParameters: []types.HttpQueryParameter{
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+					},
+					Method: types.HttpMethod("GET"),
+					Hostname: &types.GatewayRouteHostnameMatch{
+						Exact:  ptr.String("__Exact__"),
+						Suffix: ptr.String("__Suffix__"),
+					},
+					Headers: []types.HttpGatewayRouteHeader{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.HttpGatewayRouteAction{
+					Target: &types.GatewayRouteTarget{
+						VirtualService: &types.GatewayRouteVirtualService{
+							VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						},
+						Port: ptr.Int32(1),
+					},
+					Rewrite: &types.HttpGatewayRouteRewrite{
+						Prefix: &types.HttpGatewayRoutePrefixRewrite{
+							DefaultPrefix: types.DefaultGatewayRouteRewrite("ENABLED"),
+							Value:         ptr.String("__Value__"),
+						},
+						Path: &types.HttpGatewayRoutePathRewrite{
+							Exact: ptr.String("__Exact__"),
+						},
+						Hostname: &types.GatewayRouteHostnameRewrite{
+							DefaultTargetHostname: types.DefaultGatewayRouteRewrite("ENABLED"),
+						},
+					},
+				},
+			},
+			Http2Route: &types.HttpGatewayRoute{
+				Match: &types.HttpGatewayRouteMatch{
+					Prefix: ptr.String("__Prefix__"),
+					Path: &types.HttpPathMatch{
+						Exact: ptr.String("__Exact__"),
+						Regex: ptr.String("__Regex__"),
+					},
+					QueryParameters: []types.HttpQueryParameter{
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+					},
+					Method: types.HttpMethod("GET"),
+					Hostname: &types.GatewayRouteHostnameMatch{
+						Exact:  ptr.String("__Exact__"),
+						Suffix: ptr.String("__Suffix__"),
+					},
+					Headers: []types.HttpGatewayRouteHeader{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.HttpGatewayRouteAction{
+					Target: &types.GatewayRouteTarget{
+						VirtualService: &types.GatewayRouteVirtualService{
+							VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						},
+						Port: ptr.Int32(1),
+					},
+					Rewrite: &types.HttpGatewayRouteRewrite{
+						Prefix: &types.HttpGatewayRoutePrefixRewrite{
+							DefaultPrefix: types.DefaultGatewayRouteRewrite("ENABLED"),
+							Value:         ptr.String("__Value__"),
+						},
+						Path: &types.HttpGatewayRoutePathRewrite{
+							Exact: ptr.String("__Exact__"),
+						},
+						Hostname: &types.GatewayRouteHostnameRewrite{
+							DefaultTargetHostname: types.DefaultGatewayRouteRewrite("ENABLED"),
+						},
+					},
+				},
+			},
+			GrpcRoute: &types.GrpcGatewayRoute{
+				Match: &types.GrpcGatewayRouteMatch{
+					ServiceName: ptr.String("__ServiceName__"),
+					Hostname: &types.GatewayRouteHostnameMatch{
+						Exact:  ptr.String("__Exact__"),
+						Suffix: ptr.String("__Suffix__"),
+					},
+					Metadata: []types.GrpcGatewayRouteMetadata{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.GrpcMetadataMatchMethodMemberExact{
+								Value: "__GrpcMetadataMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.GrpcMetadataMatchMethodMemberExact{
+								Value: "__GrpcMetadataMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.GrpcGatewayRouteAction{
+					Target: &types.GatewayRouteTarget{
+						VirtualService: &types.GatewayRouteVirtualService{
+							VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						},
+						Port: ptr.Int32(1),
+					},
+					Rewrite: &types.GrpcGatewayRouteRewrite{
+						Hostname: &types.GatewayRouteHostnameRewrite{
+							DefaultTargetHostname: types.DefaultGatewayRouteRewrite("ENABLED"),
+						},
+					},
+				},
+			},
+		},
+		Tags: []types.TagRef{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		MeshOwner:   ptr.String("__MeshOwner__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4952,7 +7106,195 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateGatewayRoute(context.Background(), &CreateGatewayRouteInput{})
+	_, opErr := svc.CreateGatewayRoute(context.Background(), &CreateGatewayRouteInput{
+		GatewayRouteName:   ptr.String("__GatewayRouteName__"),
+		MeshName:           ptr.String("__MeshName__"),
+		VirtualGatewayName: ptr.String("__VirtualGatewayName__"),
+		Spec: &types.GatewayRouteSpec{
+			Priority: ptr.Int32(1),
+			HttpRoute: &types.HttpGatewayRoute{
+				Match: &types.HttpGatewayRouteMatch{
+					Prefix: ptr.String("__Prefix__"),
+					Path: &types.HttpPathMatch{
+						Exact: ptr.String("__Exact__"),
+						Regex: ptr.String("__Regex__"),
+					},
+					QueryParameters: []types.HttpQueryParameter{
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+					},
+					Method: types.HttpMethod("GET"),
+					Hostname: &types.GatewayRouteHostnameMatch{
+						Exact:  ptr.String("__Exact__"),
+						Suffix: ptr.String("__Suffix__"),
+					},
+					Headers: []types.HttpGatewayRouteHeader{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.HttpGatewayRouteAction{
+					Target: &types.GatewayRouteTarget{
+						VirtualService: &types.GatewayRouteVirtualService{
+							VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						},
+						Port: ptr.Int32(1),
+					},
+					Rewrite: &types.HttpGatewayRouteRewrite{
+						Prefix: &types.HttpGatewayRoutePrefixRewrite{
+							DefaultPrefix: types.DefaultGatewayRouteRewrite("ENABLED"),
+							Value:         ptr.String("__Value__"),
+						},
+						Path: &types.HttpGatewayRoutePathRewrite{
+							Exact: ptr.String("__Exact__"),
+						},
+						Hostname: &types.GatewayRouteHostnameRewrite{
+							DefaultTargetHostname: types.DefaultGatewayRouteRewrite("ENABLED"),
+						},
+					},
+				},
+			},
+			Http2Route: &types.HttpGatewayRoute{
+				Match: &types.HttpGatewayRouteMatch{
+					Prefix: ptr.String("__Prefix__"),
+					Path: &types.HttpPathMatch{
+						Exact: ptr.String("__Exact__"),
+						Regex: ptr.String("__Regex__"),
+					},
+					QueryParameters: []types.HttpQueryParameter{
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+					},
+					Method: types.HttpMethod("GET"),
+					Hostname: &types.GatewayRouteHostnameMatch{
+						Exact:  ptr.String("__Exact__"),
+						Suffix: ptr.String("__Suffix__"),
+					},
+					Headers: []types.HttpGatewayRouteHeader{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.HttpGatewayRouteAction{
+					Target: &types.GatewayRouteTarget{
+						VirtualService: &types.GatewayRouteVirtualService{
+							VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						},
+						Port: ptr.Int32(1),
+					},
+					Rewrite: &types.HttpGatewayRouteRewrite{
+						Prefix: &types.HttpGatewayRoutePrefixRewrite{
+							DefaultPrefix: types.DefaultGatewayRouteRewrite("ENABLED"),
+							Value:         ptr.String("__Value__"),
+						},
+						Path: &types.HttpGatewayRoutePathRewrite{
+							Exact: ptr.String("__Exact__"),
+						},
+						Hostname: &types.GatewayRouteHostnameRewrite{
+							DefaultTargetHostname: types.DefaultGatewayRouteRewrite("ENABLED"),
+						},
+					},
+				},
+			},
+			GrpcRoute: &types.GrpcGatewayRoute{
+				Match: &types.GrpcGatewayRouteMatch{
+					ServiceName: ptr.String("__ServiceName__"),
+					Hostname: &types.GatewayRouteHostnameMatch{
+						Exact:  ptr.String("__Exact__"),
+						Suffix: ptr.String("__Suffix__"),
+					},
+					Metadata: []types.GrpcGatewayRouteMetadata{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.GrpcMetadataMatchMethodMemberExact{
+								Value: "__GrpcMetadataMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.GrpcMetadataMatchMethodMemberExact{
+								Value: "__GrpcMetadataMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.GrpcGatewayRouteAction{
+					Target: &types.GatewayRouteTarget{
+						VirtualService: &types.GatewayRouteVirtualService{
+							VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						},
+						Port: ptr.Int32(1),
+					},
+					Rewrite: &types.GrpcGatewayRouteRewrite{
+						Hostname: &types.GatewayRouteHostnameRewrite{
+							DefaultTargetHostname: types.DefaultGatewayRouteRewrite("ENABLED"),
+						},
+					},
+				},
+			},
+		},
+		Tags: []types.TagRef{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		MeshOwner:   ptr.String("__MeshOwner__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4977,7 +7319,195 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateGatewayRoute(context.Background(), &CreateGatewayRouteInput{})
+	_, opErr := svc.CreateGatewayRoute(context.Background(), &CreateGatewayRouteInput{
+		GatewayRouteName:   ptr.String("__GatewayRouteName__"),
+		MeshName:           ptr.String("__MeshName__"),
+		VirtualGatewayName: ptr.String("__VirtualGatewayName__"),
+		Spec: &types.GatewayRouteSpec{
+			Priority: ptr.Int32(1),
+			HttpRoute: &types.HttpGatewayRoute{
+				Match: &types.HttpGatewayRouteMatch{
+					Prefix: ptr.String("__Prefix__"),
+					Path: &types.HttpPathMatch{
+						Exact: ptr.String("__Exact__"),
+						Regex: ptr.String("__Regex__"),
+					},
+					QueryParameters: []types.HttpQueryParameter{
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+					},
+					Method: types.HttpMethod("GET"),
+					Hostname: &types.GatewayRouteHostnameMatch{
+						Exact:  ptr.String("__Exact__"),
+						Suffix: ptr.String("__Suffix__"),
+					},
+					Headers: []types.HttpGatewayRouteHeader{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.HttpGatewayRouteAction{
+					Target: &types.GatewayRouteTarget{
+						VirtualService: &types.GatewayRouteVirtualService{
+							VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						},
+						Port: ptr.Int32(1),
+					},
+					Rewrite: &types.HttpGatewayRouteRewrite{
+						Prefix: &types.HttpGatewayRoutePrefixRewrite{
+							DefaultPrefix: types.DefaultGatewayRouteRewrite("ENABLED"),
+							Value:         ptr.String("__Value__"),
+						},
+						Path: &types.HttpGatewayRoutePathRewrite{
+							Exact: ptr.String("__Exact__"),
+						},
+						Hostname: &types.GatewayRouteHostnameRewrite{
+							DefaultTargetHostname: types.DefaultGatewayRouteRewrite("ENABLED"),
+						},
+					},
+				},
+			},
+			Http2Route: &types.HttpGatewayRoute{
+				Match: &types.HttpGatewayRouteMatch{
+					Prefix: ptr.String("__Prefix__"),
+					Path: &types.HttpPathMatch{
+						Exact: ptr.String("__Exact__"),
+						Regex: ptr.String("__Regex__"),
+					},
+					QueryParameters: []types.HttpQueryParameter{
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+					},
+					Method: types.HttpMethod("GET"),
+					Hostname: &types.GatewayRouteHostnameMatch{
+						Exact:  ptr.String("__Exact__"),
+						Suffix: ptr.String("__Suffix__"),
+					},
+					Headers: []types.HttpGatewayRouteHeader{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.HttpGatewayRouteAction{
+					Target: &types.GatewayRouteTarget{
+						VirtualService: &types.GatewayRouteVirtualService{
+							VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						},
+						Port: ptr.Int32(1),
+					},
+					Rewrite: &types.HttpGatewayRouteRewrite{
+						Prefix: &types.HttpGatewayRoutePrefixRewrite{
+							DefaultPrefix: types.DefaultGatewayRouteRewrite("ENABLED"),
+							Value:         ptr.String("__Value__"),
+						},
+						Path: &types.HttpGatewayRoutePathRewrite{
+							Exact: ptr.String("__Exact__"),
+						},
+						Hostname: &types.GatewayRouteHostnameRewrite{
+							DefaultTargetHostname: types.DefaultGatewayRouteRewrite("ENABLED"),
+						},
+					},
+				},
+			},
+			GrpcRoute: &types.GrpcGatewayRoute{
+				Match: &types.GrpcGatewayRouteMatch{
+					ServiceName: ptr.String("__ServiceName__"),
+					Hostname: &types.GatewayRouteHostnameMatch{
+						Exact:  ptr.String("__Exact__"),
+						Suffix: ptr.String("__Suffix__"),
+					},
+					Metadata: []types.GrpcGatewayRouteMetadata{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.GrpcMetadataMatchMethodMemberExact{
+								Value: "__GrpcMetadataMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.GrpcMetadataMatchMethodMemberExact{
+								Value: "__GrpcMetadataMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.GrpcGatewayRouteAction{
+					Target: &types.GatewayRouteTarget{
+						VirtualService: &types.GatewayRouteVirtualService{
+							VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						},
+						Port: ptr.Int32(1),
+					},
+					Rewrite: &types.GrpcGatewayRouteRewrite{
+						Hostname: &types.GatewayRouteHostnameRewrite{
+							DefaultTargetHostname: types.DefaultGatewayRouteRewrite("ENABLED"),
+						},
+					},
+				},
+			},
+		},
+		Tags: []types.TagRef{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		MeshOwner:   ptr.String("__MeshOwner__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5002,7 +7532,195 @@ func TestCheckResponseSnapshot_Error_InternalServerErrorException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateGatewayRoute(context.Background(), &CreateGatewayRouteInput{})
+	_, opErr := svc.CreateGatewayRoute(context.Background(), &CreateGatewayRouteInput{
+		GatewayRouteName:   ptr.String("__GatewayRouteName__"),
+		MeshName:           ptr.String("__MeshName__"),
+		VirtualGatewayName: ptr.String("__VirtualGatewayName__"),
+		Spec: &types.GatewayRouteSpec{
+			Priority: ptr.Int32(1),
+			HttpRoute: &types.HttpGatewayRoute{
+				Match: &types.HttpGatewayRouteMatch{
+					Prefix: ptr.String("__Prefix__"),
+					Path: &types.HttpPathMatch{
+						Exact: ptr.String("__Exact__"),
+						Regex: ptr.String("__Regex__"),
+					},
+					QueryParameters: []types.HttpQueryParameter{
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+					},
+					Method: types.HttpMethod("GET"),
+					Hostname: &types.GatewayRouteHostnameMatch{
+						Exact:  ptr.String("__Exact__"),
+						Suffix: ptr.String("__Suffix__"),
+					},
+					Headers: []types.HttpGatewayRouteHeader{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.HttpGatewayRouteAction{
+					Target: &types.GatewayRouteTarget{
+						VirtualService: &types.GatewayRouteVirtualService{
+							VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						},
+						Port: ptr.Int32(1),
+					},
+					Rewrite: &types.HttpGatewayRouteRewrite{
+						Prefix: &types.HttpGatewayRoutePrefixRewrite{
+							DefaultPrefix: types.DefaultGatewayRouteRewrite("ENABLED"),
+							Value:         ptr.String("__Value__"),
+						},
+						Path: &types.HttpGatewayRoutePathRewrite{
+							Exact: ptr.String("__Exact__"),
+						},
+						Hostname: &types.GatewayRouteHostnameRewrite{
+							DefaultTargetHostname: types.DefaultGatewayRouteRewrite("ENABLED"),
+						},
+					},
+				},
+			},
+			Http2Route: &types.HttpGatewayRoute{
+				Match: &types.HttpGatewayRouteMatch{
+					Prefix: ptr.String("__Prefix__"),
+					Path: &types.HttpPathMatch{
+						Exact: ptr.String("__Exact__"),
+						Regex: ptr.String("__Regex__"),
+					},
+					QueryParameters: []types.HttpQueryParameter{
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+					},
+					Method: types.HttpMethod("GET"),
+					Hostname: &types.GatewayRouteHostnameMatch{
+						Exact:  ptr.String("__Exact__"),
+						Suffix: ptr.String("__Suffix__"),
+					},
+					Headers: []types.HttpGatewayRouteHeader{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.HttpGatewayRouteAction{
+					Target: &types.GatewayRouteTarget{
+						VirtualService: &types.GatewayRouteVirtualService{
+							VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						},
+						Port: ptr.Int32(1),
+					},
+					Rewrite: &types.HttpGatewayRouteRewrite{
+						Prefix: &types.HttpGatewayRoutePrefixRewrite{
+							DefaultPrefix: types.DefaultGatewayRouteRewrite("ENABLED"),
+							Value:         ptr.String("__Value__"),
+						},
+						Path: &types.HttpGatewayRoutePathRewrite{
+							Exact: ptr.String("__Exact__"),
+						},
+						Hostname: &types.GatewayRouteHostnameRewrite{
+							DefaultTargetHostname: types.DefaultGatewayRouteRewrite("ENABLED"),
+						},
+					},
+				},
+			},
+			GrpcRoute: &types.GrpcGatewayRoute{
+				Match: &types.GrpcGatewayRouteMatch{
+					ServiceName: ptr.String("__ServiceName__"),
+					Hostname: &types.GatewayRouteHostnameMatch{
+						Exact:  ptr.String("__Exact__"),
+						Suffix: ptr.String("__Suffix__"),
+					},
+					Metadata: []types.GrpcGatewayRouteMetadata{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.GrpcMetadataMatchMethodMemberExact{
+								Value: "__GrpcMetadataMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.GrpcMetadataMatchMethodMemberExact{
+								Value: "__GrpcMetadataMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.GrpcGatewayRouteAction{
+					Target: &types.GatewayRouteTarget{
+						VirtualService: &types.GatewayRouteVirtualService{
+							VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						},
+						Port: ptr.Int32(1),
+					},
+					Rewrite: &types.GrpcGatewayRouteRewrite{
+						Hostname: &types.GatewayRouteHostnameRewrite{
+							DefaultTargetHostname: types.DefaultGatewayRouteRewrite("ENABLED"),
+						},
+					},
+				},
+			},
+		},
+		Tags: []types.TagRef{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		MeshOwner:   ptr.String("__MeshOwner__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5027,7 +7745,195 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateGatewayRoute(context.Background(), &CreateGatewayRouteInput{})
+	_, opErr := svc.CreateGatewayRoute(context.Background(), &CreateGatewayRouteInput{
+		GatewayRouteName:   ptr.String("__GatewayRouteName__"),
+		MeshName:           ptr.String("__MeshName__"),
+		VirtualGatewayName: ptr.String("__VirtualGatewayName__"),
+		Spec: &types.GatewayRouteSpec{
+			Priority: ptr.Int32(1),
+			HttpRoute: &types.HttpGatewayRoute{
+				Match: &types.HttpGatewayRouteMatch{
+					Prefix: ptr.String("__Prefix__"),
+					Path: &types.HttpPathMatch{
+						Exact: ptr.String("__Exact__"),
+						Regex: ptr.String("__Regex__"),
+					},
+					QueryParameters: []types.HttpQueryParameter{
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+					},
+					Method: types.HttpMethod("GET"),
+					Hostname: &types.GatewayRouteHostnameMatch{
+						Exact:  ptr.String("__Exact__"),
+						Suffix: ptr.String("__Suffix__"),
+					},
+					Headers: []types.HttpGatewayRouteHeader{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.HttpGatewayRouteAction{
+					Target: &types.GatewayRouteTarget{
+						VirtualService: &types.GatewayRouteVirtualService{
+							VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						},
+						Port: ptr.Int32(1),
+					},
+					Rewrite: &types.HttpGatewayRouteRewrite{
+						Prefix: &types.HttpGatewayRoutePrefixRewrite{
+							DefaultPrefix: types.DefaultGatewayRouteRewrite("ENABLED"),
+							Value:         ptr.String("__Value__"),
+						},
+						Path: &types.HttpGatewayRoutePathRewrite{
+							Exact: ptr.String("__Exact__"),
+						},
+						Hostname: &types.GatewayRouteHostnameRewrite{
+							DefaultTargetHostname: types.DefaultGatewayRouteRewrite("ENABLED"),
+						},
+					},
+				},
+			},
+			Http2Route: &types.HttpGatewayRoute{
+				Match: &types.HttpGatewayRouteMatch{
+					Prefix: ptr.String("__Prefix__"),
+					Path: &types.HttpPathMatch{
+						Exact: ptr.String("__Exact__"),
+						Regex: ptr.String("__Regex__"),
+					},
+					QueryParameters: []types.HttpQueryParameter{
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+					},
+					Method: types.HttpMethod("GET"),
+					Hostname: &types.GatewayRouteHostnameMatch{
+						Exact:  ptr.String("__Exact__"),
+						Suffix: ptr.String("__Suffix__"),
+					},
+					Headers: []types.HttpGatewayRouteHeader{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.HttpGatewayRouteAction{
+					Target: &types.GatewayRouteTarget{
+						VirtualService: &types.GatewayRouteVirtualService{
+							VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						},
+						Port: ptr.Int32(1),
+					},
+					Rewrite: &types.HttpGatewayRouteRewrite{
+						Prefix: &types.HttpGatewayRoutePrefixRewrite{
+							DefaultPrefix: types.DefaultGatewayRouteRewrite("ENABLED"),
+							Value:         ptr.String("__Value__"),
+						},
+						Path: &types.HttpGatewayRoutePathRewrite{
+							Exact: ptr.String("__Exact__"),
+						},
+						Hostname: &types.GatewayRouteHostnameRewrite{
+							DefaultTargetHostname: types.DefaultGatewayRouteRewrite("ENABLED"),
+						},
+					},
+				},
+			},
+			GrpcRoute: &types.GrpcGatewayRoute{
+				Match: &types.GrpcGatewayRouteMatch{
+					ServiceName: ptr.String("__ServiceName__"),
+					Hostname: &types.GatewayRouteHostnameMatch{
+						Exact:  ptr.String("__Exact__"),
+						Suffix: ptr.String("__Suffix__"),
+					},
+					Metadata: []types.GrpcGatewayRouteMetadata{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.GrpcMetadataMatchMethodMemberExact{
+								Value: "__GrpcMetadataMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.GrpcMetadataMatchMethodMemberExact{
+								Value: "__GrpcMetadataMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.GrpcGatewayRouteAction{
+					Target: &types.GatewayRouteTarget{
+						VirtualService: &types.GatewayRouteVirtualService{
+							VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						},
+						Port: ptr.Int32(1),
+					},
+					Rewrite: &types.GrpcGatewayRouteRewrite{
+						Hostname: &types.GatewayRouteHostnameRewrite{
+							DefaultTargetHostname: types.DefaultGatewayRouteRewrite("ENABLED"),
+						},
+					},
+				},
+			},
+		},
+		Tags: []types.TagRef{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		MeshOwner:   ptr.String("__MeshOwner__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5052,7 +7958,195 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateGatewayRoute(context.Background(), &CreateGatewayRouteInput{})
+	_, opErr := svc.CreateGatewayRoute(context.Background(), &CreateGatewayRouteInput{
+		GatewayRouteName:   ptr.String("__GatewayRouteName__"),
+		MeshName:           ptr.String("__MeshName__"),
+		VirtualGatewayName: ptr.String("__VirtualGatewayName__"),
+		Spec: &types.GatewayRouteSpec{
+			Priority: ptr.Int32(1),
+			HttpRoute: &types.HttpGatewayRoute{
+				Match: &types.HttpGatewayRouteMatch{
+					Prefix: ptr.String("__Prefix__"),
+					Path: &types.HttpPathMatch{
+						Exact: ptr.String("__Exact__"),
+						Regex: ptr.String("__Regex__"),
+					},
+					QueryParameters: []types.HttpQueryParameter{
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+					},
+					Method: types.HttpMethod("GET"),
+					Hostname: &types.GatewayRouteHostnameMatch{
+						Exact:  ptr.String("__Exact__"),
+						Suffix: ptr.String("__Suffix__"),
+					},
+					Headers: []types.HttpGatewayRouteHeader{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.HttpGatewayRouteAction{
+					Target: &types.GatewayRouteTarget{
+						VirtualService: &types.GatewayRouteVirtualService{
+							VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						},
+						Port: ptr.Int32(1),
+					},
+					Rewrite: &types.HttpGatewayRouteRewrite{
+						Prefix: &types.HttpGatewayRoutePrefixRewrite{
+							DefaultPrefix: types.DefaultGatewayRouteRewrite("ENABLED"),
+							Value:         ptr.String("__Value__"),
+						},
+						Path: &types.HttpGatewayRoutePathRewrite{
+							Exact: ptr.String("__Exact__"),
+						},
+						Hostname: &types.GatewayRouteHostnameRewrite{
+							DefaultTargetHostname: types.DefaultGatewayRouteRewrite("ENABLED"),
+						},
+					},
+				},
+			},
+			Http2Route: &types.HttpGatewayRoute{
+				Match: &types.HttpGatewayRouteMatch{
+					Prefix: ptr.String("__Prefix__"),
+					Path: &types.HttpPathMatch{
+						Exact: ptr.String("__Exact__"),
+						Regex: ptr.String("__Regex__"),
+					},
+					QueryParameters: []types.HttpQueryParameter{
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+					},
+					Method: types.HttpMethod("GET"),
+					Hostname: &types.GatewayRouteHostnameMatch{
+						Exact:  ptr.String("__Exact__"),
+						Suffix: ptr.String("__Suffix__"),
+					},
+					Headers: []types.HttpGatewayRouteHeader{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.HttpGatewayRouteAction{
+					Target: &types.GatewayRouteTarget{
+						VirtualService: &types.GatewayRouteVirtualService{
+							VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						},
+						Port: ptr.Int32(1),
+					},
+					Rewrite: &types.HttpGatewayRouteRewrite{
+						Prefix: &types.HttpGatewayRoutePrefixRewrite{
+							DefaultPrefix: types.DefaultGatewayRouteRewrite("ENABLED"),
+							Value:         ptr.String("__Value__"),
+						},
+						Path: &types.HttpGatewayRoutePathRewrite{
+							Exact: ptr.String("__Exact__"),
+						},
+						Hostname: &types.GatewayRouteHostnameRewrite{
+							DefaultTargetHostname: types.DefaultGatewayRouteRewrite("ENABLED"),
+						},
+					},
+				},
+			},
+			GrpcRoute: &types.GrpcGatewayRoute{
+				Match: &types.GrpcGatewayRouteMatch{
+					ServiceName: ptr.String("__ServiceName__"),
+					Hostname: &types.GatewayRouteHostnameMatch{
+						Exact:  ptr.String("__Exact__"),
+						Suffix: ptr.String("__Suffix__"),
+					},
+					Metadata: []types.GrpcGatewayRouteMetadata{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.GrpcMetadataMatchMethodMemberExact{
+								Value: "__GrpcMetadataMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.GrpcMetadataMatchMethodMemberExact{
+								Value: "__GrpcMetadataMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.GrpcGatewayRouteAction{
+					Target: &types.GatewayRouteTarget{
+						VirtualService: &types.GatewayRouteVirtualService{
+							VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						},
+						Port: ptr.Int32(1),
+					},
+					Rewrite: &types.GrpcGatewayRouteRewrite{
+						Hostname: &types.GatewayRouteHostnameRewrite{
+							DefaultTargetHostname: types.DefaultGatewayRouteRewrite("ENABLED"),
+						},
+					},
+				},
+			},
+		},
+		Tags: []types.TagRef{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		MeshOwner:   ptr.String("__MeshOwner__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5077,7 +8171,12 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteGatewayRoute(context.Background(), &DeleteGatewayRouteInput{})
+	_, opErr := svc.DeleteGatewayRoute(context.Background(), &DeleteGatewayRouteInput{
+		GatewayRouteName:   ptr.String("__GatewayRouteName__"),
+		MeshName:           ptr.String("__MeshName__"),
+		VirtualGatewayName: ptr.String("__VirtualGatewayName__"),
+		MeshOwner:          ptr.String("__MeshOwner__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5102,7 +8201,195 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateGatewayRoute(context.Background(), &CreateGatewayRouteInput{})
+	_, opErr := svc.CreateGatewayRoute(context.Background(), &CreateGatewayRouteInput{
+		GatewayRouteName:   ptr.String("__GatewayRouteName__"),
+		MeshName:           ptr.String("__MeshName__"),
+		VirtualGatewayName: ptr.String("__VirtualGatewayName__"),
+		Spec: &types.GatewayRouteSpec{
+			Priority: ptr.Int32(1),
+			HttpRoute: &types.HttpGatewayRoute{
+				Match: &types.HttpGatewayRouteMatch{
+					Prefix: ptr.String("__Prefix__"),
+					Path: &types.HttpPathMatch{
+						Exact: ptr.String("__Exact__"),
+						Regex: ptr.String("__Regex__"),
+					},
+					QueryParameters: []types.HttpQueryParameter{
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+					},
+					Method: types.HttpMethod("GET"),
+					Hostname: &types.GatewayRouteHostnameMatch{
+						Exact:  ptr.String("__Exact__"),
+						Suffix: ptr.String("__Suffix__"),
+					},
+					Headers: []types.HttpGatewayRouteHeader{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.HttpGatewayRouteAction{
+					Target: &types.GatewayRouteTarget{
+						VirtualService: &types.GatewayRouteVirtualService{
+							VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						},
+						Port: ptr.Int32(1),
+					},
+					Rewrite: &types.HttpGatewayRouteRewrite{
+						Prefix: &types.HttpGatewayRoutePrefixRewrite{
+							DefaultPrefix: types.DefaultGatewayRouteRewrite("ENABLED"),
+							Value:         ptr.String("__Value__"),
+						},
+						Path: &types.HttpGatewayRoutePathRewrite{
+							Exact: ptr.String("__Exact__"),
+						},
+						Hostname: &types.GatewayRouteHostnameRewrite{
+							DefaultTargetHostname: types.DefaultGatewayRouteRewrite("ENABLED"),
+						},
+					},
+				},
+			},
+			Http2Route: &types.HttpGatewayRoute{
+				Match: &types.HttpGatewayRouteMatch{
+					Prefix: ptr.String("__Prefix__"),
+					Path: &types.HttpPathMatch{
+						Exact: ptr.String("__Exact__"),
+						Regex: ptr.String("__Regex__"),
+					},
+					QueryParameters: []types.HttpQueryParameter{
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+					},
+					Method: types.HttpMethod("GET"),
+					Hostname: &types.GatewayRouteHostnameMatch{
+						Exact:  ptr.String("__Exact__"),
+						Suffix: ptr.String("__Suffix__"),
+					},
+					Headers: []types.HttpGatewayRouteHeader{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.HttpGatewayRouteAction{
+					Target: &types.GatewayRouteTarget{
+						VirtualService: &types.GatewayRouteVirtualService{
+							VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						},
+						Port: ptr.Int32(1),
+					},
+					Rewrite: &types.HttpGatewayRouteRewrite{
+						Prefix: &types.HttpGatewayRoutePrefixRewrite{
+							DefaultPrefix: types.DefaultGatewayRouteRewrite("ENABLED"),
+							Value:         ptr.String("__Value__"),
+						},
+						Path: &types.HttpGatewayRoutePathRewrite{
+							Exact: ptr.String("__Exact__"),
+						},
+						Hostname: &types.GatewayRouteHostnameRewrite{
+							DefaultTargetHostname: types.DefaultGatewayRouteRewrite("ENABLED"),
+						},
+					},
+				},
+			},
+			GrpcRoute: &types.GrpcGatewayRoute{
+				Match: &types.GrpcGatewayRouteMatch{
+					ServiceName: ptr.String("__ServiceName__"),
+					Hostname: &types.GatewayRouteHostnameMatch{
+						Exact:  ptr.String("__Exact__"),
+						Suffix: ptr.String("__Suffix__"),
+					},
+					Metadata: []types.GrpcGatewayRouteMetadata{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.GrpcMetadataMatchMethodMemberExact{
+								Value: "__GrpcMetadataMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.GrpcMetadataMatchMethodMemberExact{
+								Value: "__GrpcMetadataMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.GrpcGatewayRouteAction{
+					Target: &types.GatewayRouteTarget{
+						VirtualService: &types.GatewayRouteVirtualService{
+							VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						},
+						Port: ptr.Int32(1),
+					},
+					Rewrite: &types.GrpcGatewayRouteRewrite{
+						Hostname: &types.GatewayRouteHostnameRewrite{
+							DefaultTargetHostname: types.DefaultGatewayRouteRewrite("ENABLED"),
+						},
+					},
+				},
+			},
+		},
+		Tags: []types.TagRef{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		MeshOwner:   ptr.String("__MeshOwner__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5127,7 +8414,195 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateGatewayRoute(context.Background(), &CreateGatewayRouteInput{})
+	_, opErr := svc.CreateGatewayRoute(context.Background(), &CreateGatewayRouteInput{
+		GatewayRouteName:   ptr.String("__GatewayRouteName__"),
+		MeshName:           ptr.String("__MeshName__"),
+		VirtualGatewayName: ptr.String("__VirtualGatewayName__"),
+		Spec: &types.GatewayRouteSpec{
+			Priority: ptr.Int32(1),
+			HttpRoute: &types.HttpGatewayRoute{
+				Match: &types.HttpGatewayRouteMatch{
+					Prefix: ptr.String("__Prefix__"),
+					Path: &types.HttpPathMatch{
+						Exact: ptr.String("__Exact__"),
+						Regex: ptr.String("__Regex__"),
+					},
+					QueryParameters: []types.HttpQueryParameter{
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+					},
+					Method: types.HttpMethod("GET"),
+					Hostname: &types.GatewayRouteHostnameMatch{
+						Exact:  ptr.String("__Exact__"),
+						Suffix: ptr.String("__Suffix__"),
+					},
+					Headers: []types.HttpGatewayRouteHeader{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.HttpGatewayRouteAction{
+					Target: &types.GatewayRouteTarget{
+						VirtualService: &types.GatewayRouteVirtualService{
+							VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						},
+						Port: ptr.Int32(1),
+					},
+					Rewrite: &types.HttpGatewayRouteRewrite{
+						Prefix: &types.HttpGatewayRoutePrefixRewrite{
+							DefaultPrefix: types.DefaultGatewayRouteRewrite("ENABLED"),
+							Value:         ptr.String("__Value__"),
+						},
+						Path: &types.HttpGatewayRoutePathRewrite{
+							Exact: ptr.String("__Exact__"),
+						},
+						Hostname: &types.GatewayRouteHostnameRewrite{
+							DefaultTargetHostname: types.DefaultGatewayRouteRewrite("ENABLED"),
+						},
+					},
+				},
+			},
+			Http2Route: &types.HttpGatewayRoute{
+				Match: &types.HttpGatewayRouteMatch{
+					Prefix: ptr.String("__Prefix__"),
+					Path: &types.HttpPathMatch{
+						Exact: ptr.String("__Exact__"),
+						Regex: ptr.String("__Regex__"),
+					},
+					QueryParameters: []types.HttpQueryParameter{
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Match: &types.QueryParameterMatch{
+								Exact: ptr.String("__Exact__"),
+							},
+						},
+					},
+					Method: types.HttpMethod("GET"),
+					Hostname: &types.GatewayRouteHostnameMatch{
+						Exact:  ptr.String("__Exact__"),
+						Suffix: ptr.String("__Suffix__"),
+					},
+					Headers: []types.HttpGatewayRouteHeader{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.HeaderMatchMethodMemberExact{
+								Value: "__HeaderMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.HttpGatewayRouteAction{
+					Target: &types.GatewayRouteTarget{
+						VirtualService: &types.GatewayRouteVirtualService{
+							VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						},
+						Port: ptr.Int32(1),
+					},
+					Rewrite: &types.HttpGatewayRouteRewrite{
+						Prefix: &types.HttpGatewayRoutePrefixRewrite{
+							DefaultPrefix: types.DefaultGatewayRouteRewrite("ENABLED"),
+							Value:         ptr.String("__Value__"),
+						},
+						Path: &types.HttpGatewayRoutePathRewrite{
+							Exact: ptr.String("__Exact__"),
+						},
+						Hostname: &types.GatewayRouteHostnameRewrite{
+							DefaultTargetHostname: types.DefaultGatewayRouteRewrite("ENABLED"),
+						},
+					},
+				},
+			},
+			GrpcRoute: &types.GrpcGatewayRoute{
+				Match: &types.GrpcGatewayRouteMatch{
+					ServiceName: ptr.String("__ServiceName__"),
+					Hostname: &types.GatewayRouteHostnameMatch{
+						Exact:  ptr.String("__Exact__"),
+						Suffix: ptr.String("__Suffix__"),
+					},
+					Metadata: []types.GrpcGatewayRouteMetadata{
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.GrpcMetadataMatchMethodMemberExact{
+								Value: "__GrpcMetadataMatchMethodMemberExact__",
+							},
+						},
+						{
+							Name:   ptr.String("__Name__"),
+							Invert: ptr.Bool(true),
+							Match: &types.GrpcMetadataMatchMethodMemberExact{
+								Value: "__GrpcMetadataMatchMethodMemberExact__",
+							},
+						},
+					},
+					Port: ptr.Int32(1),
+				},
+				Action: &types.GrpcGatewayRouteAction{
+					Target: &types.GatewayRouteTarget{
+						VirtualService: &types.GatewayRouteVirtualService{
+							VirtualServiceName: ptr.String("__VirtualServiceName__"),
+						},
+						Port: ptr.Int32(1),
+					},
+					Rewrite: &types.GrpcGatewayRouteRewrite{
+						Hostname: &types.GatewayRouteHostnameRewrite{
+							DefaultTargetHostname: types.DefaultGatewayRouteRewrite("ENABLED"),
+						},
+					},
+				},
+			},
+		},
+		Tags: []types.TagRef{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		MeshOwner:   ptr.String("__MeshOwner__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -5152,7 +8627,19 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.TagRef{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

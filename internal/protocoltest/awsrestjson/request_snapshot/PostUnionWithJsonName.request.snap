@@ -1,5 +1,0 @@
-POST /PostUnionWithJsonName
-
-Content-Type: application/json
-
-{"value":{"FOO":"__UnionWithJsonNameMemberFoo__"}}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Lightsail_20161128.GetRelationalDatabaseBlueprints
+
+{"blueprints":[{"blueprintId":"__BlueprintId__","engine":"mysql","engineDescription":"__EngineDescription__","engineVersion":"__EngineVersion__","engineVersionDescription":"__EngineVersionDescription__","isEngineDefault":true},{"blueprintId":"__BlueprintId__","engine":"mysql","engineDescription":"__EngineDescription__","engineVersion":"__EngineVersion__","engineVersionDescription":"__EngineVersionDescription__","isEngineDefault":true}],"nextPageToken":"__NextPageToken__"}

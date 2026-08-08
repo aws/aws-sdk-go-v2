@@ -1361,7 +1361,1249 @@ func TestCheckResponseSnapshot_CreateComponent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateComponent(context.Background(), &CreateComponentInput{})
+	got, err := svc.CreateComponent(context.Background(), &CreateComponentInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		ComponentToCreate: &types.CreateComponentData{
+			Name:          ptr.String("__Name__"),
+			SourceId:      ptr.String("__SourceId__"),
+			ComponentType: ptr.String("__ComponentType__"),
+			Properties: map[string]types.ComponentProperty{
+				"key0": {
+					Value: ptr.String("__Value__"),
+					BindingProperties: &types.ComponentPropertyBindingProperties{
+						Property: ptr.String("__Property__"),
+						Field:    ptr.String("__Field__"),
+					},
+					CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+						Property: ptr.String("__Property__"),
+						Field:    ptr.String("__Field__"),
+					},
+					DefaultValue: ptr.String("__DefaultValue__"),
+					Model:        ptr.String("__Model__"),
+					Bindings: map[string]types.FormBindingElement{
+						"key0": {
+							Element:  ptr.String("__Element__"),
+							Property: ptr.String("__Property__"),
+						},
+					},
+					Event:         ptr.String("__Event__"),
+					UserAttribute: ptr.String("__UserAttribute__"),
+					Concat: []types.ComponentProperty{
+						{},
+						{},
+					},
+					Condition: &types.ComponentConditionProperty{
+						Property:    ptr.String("__Property__"),
+						Field:       ptr.String("__Field__"),
+						Operator:    ptr.String("__Operator__"),
+						Operand:     ptr.String("__Operand__"),
+						Then:        nil,
+						Else:        nil,
+						OperandType: ptr.String("__OperandType__"),
+					},
+					Configured:    ptr.Bool(true),
+					Type:          ptr.String("__Type__"),
+					ImportedValue: ptr.String("__ImportedValue__"),
+					ComponentName: ptr.String("__ComponentName__"),
+					Property:      ptr.String("__Property__"),
+				},
+			},
+			Children: []types.ComponentChild{
+				{
+					ComponentType: ptr.String("__ComponentType__"),
+					Name:          ptr.String("__Name__"),
+					Properties: map[string]types.ComponentProperty{
+						"key0": {
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+					},
+					Children: []types.ComponentChild{
+						{},
+						{},
+					},
+					Events: map[string]types.ComponentEvent{
+						"key0": {
+							Action: ptr.String("__Action__"),
+							Parameters: &types.ActionParameters{
+								Type: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Url: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Anchor: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Target: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Global: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Model: ptr.String("__Model__"),
+								Id: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Fields: map[string]types.ComponentProperty{
+									"key0": {
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										DefaultValue: ptr.String("__DefaultValue__"),
+										Model:        ptr.String("__Model__"),
+										Bindings: map[string]types.FormBindingElement{
+											"key0": {
+												Element:  ptr.String("__Element__"),
+												Property: ptr.String("__Property__"),
+											},
+										},
+										Event:         ptr.String("__Event__"),
+										UserAttribute: ptr.String("__UserAttribute__"),
+										Concat: []types.ComponentProperty{
+											{},
+											{},
+										},
+										Condition: &types.ComponentConditionProperty{
+											Property:    ptr.String("__Property__"),
+											Field:       ptr.String("__Field__"),
+											Operator:    ptr.String("__Operator__"),
+											Operand:     ptr.String("__Operand__"),
+											Then:        nil,
+											Else:        nil,
+											OperandType: ptr.String("__OperandType__"),
+										},
+										Configured:    ptr.Bool(true),
+										Type:          ptr.String("__Type__"),
+										ImportedValue: ptr.String("__ImportedValue__"),
+										ComponentName: ptr.String("__ComponentName__"),
+										Property:      ptr.String("__Property__"),
+									},
+								},
+								State: &types.MutationActionSetStateParameter{
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+									Set: &types.ComponentProperty{
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										DefaultValue: ptr.String("__DefaultValue__"),
+										Model:        ptr.String("__Model__"),
+										Bindings: map[string]types.FormBindingElement{
+											"key0": {
+												Element:  ptr.String("__Element__"),
+												Property: ptr.String("__Property__"),
+											},
+										},
+										Event:         ptr.String("__Event__"),
+										UserAttribute: ptr.String("__UserAttribute__"),
+										Concat: []types.ComponentProperty{
+											{},
+											{},
+										},
+										Condition: &types.ComponentConditionProperty{
+											Property:    ptr.String("__Property__"),
+											Field:       ptr.String("__Field__"),
+											Operator:    ptr.String("__Operator__"),
+											Operand:     ptr.String("__Operand__"),
+											Then:        nil,
+											Else:        nil,
+											OperandType: ptr.String("__OperandType__"),
+										},
+										Configured:    ptr.Bool(true),
+										Type:          ptr.String("__Type__"),
+										ImportedValue: ptr.String("__ImportedValue__"),
+										ComponentName: ptr.String("__ComponentName__"),
+										Property:      ptr.String("__Property__"),
+									},
+								},
+							},
+							BindingEvent: ptr.String("__BindingEvent__"),
+						},
+					},
+					SourceId: ptr.String("__SourceId__"),
+				},
+				{
+					ComponentType: ptr.String("__ComponentType__"),
+					Name:          ptr.String("__Name__"),
+					Properties: map[string]types.ComponentProperty{
+						"key0": {
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+					},
+					Children: []types.ComponentChild{
+						{},
+						{},
+					},
+					Events: map[string]types.ComponentEvent{
+						"key0": {
+							Action: ptr.String("__Action__"),
+							Parameters: &types.ActionParameters{
+								Type: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Url: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Anchor: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Target: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Global: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Model: ptr.String("__Model__"),
+								Id: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Fields: map[string]types.ComponentProperty{
+									"key0": {
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										DefaultValue: ptr.String("__DefaultValue__"),
+										Model:        ptr.String("__Model__"),
+										Bindings: map[string]types.FormBindingElement{
+											"key0": {
+												Element:  ptr.String("__Element__"),
+												Property: ptr.String("__Property__"),
+											},
+										},
+										Event:         ptr.String("__Event__"),
+										UserAttribute: ptr.String("__UserAttribute__"),
+										Concat: []types.ComponentProperty{
+											{},
+											{},
+										},
+										Condition: &types.ComponentConditionProperty{
+											Property:    ptr.String("__Property__"),
+											Field:       ptr.String("__Field__"),
+											Operator:    ptr.String("__Operator__"),
+											Operand:     ptr.String("__Operand__"),
+											Then:        nil,
+											Else:        nil,
+											OperandType: ptr.String("__OperandType__"),
+										},
+										Configured:    ptr.Bool(true),
+										Type:          ptr.String("__Type__"),
+										ImportedValue: ptr.String("__ImportedValue__"),
+										ComponentName: ptr.String("__ComponentName__"),
+										Property:      ptr.String("__Property__"),
+									},
+								},
+								State: &types.MutationActionSetStateParameter{
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+									Set: &types.ComponentProperty{
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										DefaultValue: ptr.String("__DefaultValue__"),
+										Model:        ptr.String("__Model__"),
+										Bindings: map[string]types.FormBindingElement{
+											"key0": {
+												Element:  ptr.String("__Element__"),
+												Property: ptr.String("__Property__"),
+											},
+										},
+										Event:         ptr.String("__Event__"),
+										UserAttribute: ptr.String("__UserAttribute__"),
+										Concat: []types.ComponentProperty{
+											{},
+											{},
+										},
+										Condition: &types.ComponentConditionProperty{
+											Property:    ptr.String("__Property__"),
+											Field:       ptr.String("__Field__"),
+											Operator:    ptr.String("__Operator__"),
+											Operand:     ptr.String("__Operand__"),
+											Then:        nil,
+											Else:        nil,
+											OperandType: ptr.String("__OperandType__"),
+										},
+										Configured:    ptr.Bool(true),
+										Type:          ptr.String("__Type__"),
+										ImportedValue: ptr.String("__ImportedValue__"),
+										ComponentName: ptr.String("__ComponentName__"),
+										Property:      ptr.String("__Property__"),
+									},
+								},
+							},
+							BindingEvent: ptr.String("__BindingEvent__"),
+						},
+					},
+					SourceId: ptr.String("__SourceId__"),
+				},
+			},
+			Variants: []types.ComponentVariant{
+				{
+					VariantValues: map[string]string{
+						"key0": "__Value__",
+					},
+					Overrides: map[string]map[string]string{
+						"key0": {
+							"key0": "__Value__",
+						},
+					},
+				},
+				{
+					VariantValues: map[string]string{
+						"key0": "__Value__",
+					},
+					Overrides: map[string]map[string]string{
+						"key0": {
+							"key0": "__Value__",
+						},
+					},
+				},
+			},
+			Overrides: map[string]map[string]string{
+				"key0": {
+					"key0": "__Value__",
+				},
+			},
+			BindingProperties: map[string]types.ComponentBindingPropertiesValue{
+				"key0": {
+					Type: ptr.String("__Type__"),
+					BindingProperties: &types.ComponentBindingPropertiesValueProperties{
+						Model: ptr.String("__Model__"),
+						Field: ptr.String("__Field__"),
+						Predicates: []types.Predicate{
+							{
+								Or: []types.Predicate{
+									{},
+									{},
+								},
+								And: []types.Predicate{
+									{},
+									{},
+								},
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								OperandType: ptr.String("__OperandType__"),
+							},
+							{
+								Or: []types.Predicate{
+									{},
+									{},
+								},
+								And: []types.Predicate{
+									{},
+									{},
+								},
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								OperandType: ptr.String("__OperandType__"),
+							},
+						},
+						UserAttribute: ptr.String("__UserAttribute__"),
+						Bucket:        ptr.String("__Bucket__"),
+						Key:           ptr.String("__Key__"),
+						DefaultValue:  ptr.String("__DefaultValue__"),
+						SlotName:      ptr.String("__SlotName__"),
+					},
+					DefaultValue: ptr.String("__DefaultValue__"),
+				},
+			},
+			CollectionProperties: map[string]types.ComponentDataConfiguration{
+				"key0": {
+					Model: ptr.String("__Model__"),
+					Sort: []types.SortProperty{
+						{
+							Field:     ptr.String("__Field__"),
+							Direction: types.SortDirection("ASC"),
+						},
+						{
+							Field:     ptr.String("__Field__"),
+							Direction: types.SortDirection("ASC"),
+						},
+					},
+					Predicate: &types.Predicate{
+						Or: []types.Predicate{
+							{},
+							{},
+						},
+						And: []types.Predicate{
+							{},
+							{},
+						},
+						Field:       ptr.String("__Field__"),
+						Operator:    ptr.String("__Operator__"),
+						Operand:     ptr.String("__Operand__"),
+						OperandType: ptr.String("__OperandType__"),
+					},
+					Identifiers: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+			Events: map[string]types.ComponentEvent{
+				"key0": {
+					Action: ptr.String("__Action__"),
+					Parameters: &types.ActionParameters{
+						Type: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Url: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Anchor: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Target: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Global: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Model: ptr.String("__Model__"),
+						Id: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Fields: map[string]types.ComponentProperty{
+							"key0": {
+								Value: ptr.String("__Value__"),
+								BindingProperties: &types.ComponentPropertyBindingProperties{
+									Property: ptr.String("__Property__"),
+									Field:    ptr.String("__Field__"),
+								},
+								CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+									Property: ptr.String("__Property__"),
+									Field:    ptr.String("__Field__"),
+								},
+								DefaultValue: ptr.String("__DefaultValue__"),
+								Model:        ptr.String("__Model__"),
+								Bindings: map[string]types.FormBindingElement{
+									"key0": {
+										Element:  ptr.String("__Element__"),
+										Property: ptr.String("__Property__"),
+									},
+								},
+								Event:         ptr.String("__Event__"),
+								UserAttribute: ptr.String("__UserAttribute__"),
+								Concat: []types.ComponentProperty{
+									{},
+									{},
+								},
+								Condition: &types.ComponentConditionProperty{
+									Property:    ptr.String("__Property__"),
+									Field:       ptr.String("__Field__"),
+									Operator:    ptr.String("__Operator__"),
+									Operand:     ptr.String("__Operand__"),
+									Then:        nil,
+									Else:        nil,
+									OperandType: ptr.String("__OperandType__"),
+								},
+								Configured:    ptr.Bool(true),
+								Type:          ptr.String("__Type__"),
+								ImportedValue: ptr.String("__ImportedValue__"),
+								ComponentName: ptr.String("__ComponentName__"),
+								Property:      ptr.String("__Property__"),
+							},
+						},
+						State: &types.MutationActionSetStateParameter{
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+							Set: &types.ComponentProperty{
+								Value: ptr.String("__Value__"),
+								BindingProperties: &types.ComponentPropertyBindingProperties{
+									Property: ptr.String("__Property__"),
+									Field:    ptr.String("__Field__"),
+								},
+								CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+									Property: ptr.String("__Property__"),
+									Field:    ptr.String("__Field__"),
+								},
+								DefaultValue: ptr.String("__DefaultValue__"),
+								Model:        ptr.String("__Model__"),
+								Bindings: map[string]types.FormBindingElement{
+									"key0": {
+										Element:  ptr.String("__Element__"),
+										Property: ptr.String("__Property__"),
+									},
+								},
+								Event:         ptr.String("__Event__"),
+								UserAttribute: ptr.String("__UserAttribute__"),
+								Concat: []types.ComponentProperty{
+									{},
+									{},
+								},
+								Condition: &types.ComponentConditionProperty{
+									Property:    ptr.String("__Property__"),
+									Field:       ptr.String("__Field__"),
+									Operator:    ptr.String("__Operator__"),
+									Operand:     ptr.String("__Operand__"),
+									Then:        nil,
+									Else:        nil,
+									OperandType: ptr.String("__OperandType__"),
+								},
+								Configured:    ptr.Bool(true),
+								Type:          ptr.String("__Type__"),
+								ImportedValue: ptr.String("__ImportedValue__"),
+								ComponentName: ptr.String("__ComponentName__"),
+								Property:      ptr.String("__Property__"),
+							},
+						},
+					},
+					BindingEvent: ptr.String("__BindingEvent__"),
+				},
+			},
+			SchemaVersion: ptr.String("__SchemaVersion__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1566,7 +2808,193 @@ func TestCheckResponseSnapshot_CreateForm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateForm(context.Background(), &CreateFormInput{})
+	got, err := svc.CreateForm(context.Background(), &CreateFormInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		FormToCreate: &types.CreateFormData{
+			Name: ptr.String("__Name__"),
+			DataType: &types.FormDataTypeConfig{
+				DataSourceType: types.FormDataSourceType("DataStore"),
+				DataTypeName:   ptr.String("__DataTypeName__"),
+			},
+			FormActionType: types.FormActionType("create"),
+			Fields: map[string]types.FieldConfig{
+				"key0": {
+					Label: ptr.String("__Label__"),
+					Position: &types.FieldPositionMemberFixed{
+						Value: types.FixedPosition("first"),
+					},
+					Excluded: ptr.Bool(true),
+					InputType: &types.FieldInputConfig{
+						Type:               ptr.String("__Type__"),
+						Required:           ptr.Bool(true),
+						ReadOnly:           ptr.Bool(true),
+						Placeholder:        ptr.String("__Placeholder__"),
+						DefaultValue:       ptr.String("__DefaultValue__"),
+						DescriptiveText:    ptr.String("__DescriptiveText__"),
+						DefaultChecked:     ptr.Bool(true),
+						DefaultCountryCode: ptr.String("__DefaultCountryCode__"),
+						ValueMappings: &types.ValueMappings{
+							Values: []types.ValueMapping{
+								{
+									DisplayValue: &types.FormInputValueProperty{
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.FormInputValuePropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										Concat: []types.FormInputValueProperty{
+											{},
+											{},
+										},
+									},
+									Value: &types.FormInputValueProperty{
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.FormInputValuePropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										Concat: []types.FormInputValueProperty{
+											{},
+											{},
+										},
+									},
+								},
+								{
+									DisplayValue: &types.FormInputValueProperty{
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.FormInputValuePropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										Concat: []types.FormInputValueProperty{
+											{},
+											{},
+										},
+									},
+									Value: &types.FormInputValueProperty{
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.FormInputValuePropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										Concat: []types.FormInputValueProperty{
+											{},
+											{},
+										},
+									},
+								},
+							},
+							BindingProperties: map[string]types.FormInputBindingPropertiesValue{
+								"key0": {
+									Type: ptr.String("__Type__"),
+									BindingProperties: &types.FormInputBindingPropertiesValueProperties{
+										Model: ptr.String("__Model__"),
+									},
+								},
+							},
+						},
+						Name:     ptr.String("__Name__"),
+						MinValue: ptr.Float32(1.0),
+						MaxValue: ptr.Float32(1.0),
+						Step:     ptr.Float32(1.0),
+						Value:    ptr.String("__Value__"),
+						IsArray:  ptr.Bool(true),
+						FileUploaderConfig: &types.FileUploaderFieldConfig{
+							AccessLevel: types.StorageAccessLevel("public"),
+							AcceptedFileTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ShowThumbnails: ptr.Bool(true),
+							IsResumable:    ptr.Bool(true),
+							MaxFileCount:   ptr.Int32(1),
+							MaxSize:        ptr.Int32(1),
+						},
+					},
+					Validations: []types.FieldValidationConfiguration{
+						{
+							Type: ptr.String("__Type__"),
+							StrValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+							NumValues: []int32{
+								1,
+								1,
+							},
+							ValidationMessage: ptr.String("__ValidationMessage__"),
+						},
+						{
+							Type: ptr.String("__Type__"),
+							StrValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+							NumValues: []int32{
+								1,
+								1,
+							},
+							ValidationMessage: ptr.String("__ValidationMessage__"),
+						},
+					},
+				},
+			},
+			Style: &types.FormStyle{
+				HorizontalGap: &types.FormStyleConfigMemberTokenReference{
+					Value: "__FormStyleConfigMemberTokenReference__",
+				},
+				VerticalGap: &types.FormStyleConfigMemberTokenReference{
+					Value: "__FormStyleConfigMemberTokenReference__",
+				},
+				OuterPadding: &types.FormStyleConfigMemberTokenReference{
+					Value: "__FormStyleConfigMemberTokenReference__",
+				},
+			},
+			SectionalElements: map[string]types.SectionalElement{
+				"key0": {
+					Type: ptr.String("__Type__"),
+					Position: &types.FieldPositionMemberFixed{
+						Value: types.FixedPosition("first"),
+					},
+					Text:        ptr.String("__Text__"),
+					Level:       ptr.Int32(1),
+					Orientation: ptr.String("__Orientation__"),
+					Excluded:    ptr.Bool(true),
+				},
+			},
+			SchemaVersion: ptr.String("__SchemaVersion__"),
+			Cta: &types.FormCTA{
+				Position: types.FormButtonsPosition("top"),
+				Clear: &types.FormButton{
+					Excluded: ptr.Bool(true),
+					Children: ptr.String("__Children__"),
+					Position: &types.FieldPositionMemberFixed{
+						Value: types.FixedPosition("first"),
+					},
+				},
+				Cancel: &types.FormButton{
+					Excluded: ptr.Bool(true),
+					Children: ptr.String("__Children__"),
+					Position: &types.FieldPositionMemberFixed{
+						Value: types.FixedPosition("first"),
+					},
+				},
+				Submit: &types.FormButton{
+					Excluded: ptr.Bool(true),
+					Children: ptr.String("__Children__"),
+					Position: &types.FieldPositionMemberFixed{
+						Value: types.FixedPosition("first"),
+					},
+				},
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+			LabelDecorator: types.LabelDecorator("required"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1641,7 +3069,61 @@ func TestCheckResponseSnapshot_CreateTheme(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTheme(context.Background(), &CreateThemeInput{})
+	got, err := svc.CreateTheme(context.Background(), &CreateThemeInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		ThemeToCreate: &types.CreateThemeData{
+			Name: ptr.String("__Name__"),
+			Values: []types.ThemeValues{
+				{
+					Key: ptr.String("__Key__"),
+					Value: &types.ThemeValue{
+						Value: ptr.String("__Value__"),
+						Children: []types.ThemeValues{
+							{},
+							{},
+						},
+					},
+				},
+				{
+					Key: ptr.String("__Key__"),
+					Value: &types.ThemeValue{
+						Value: ptr.String("__Value__"),
+						Children: []types.ThemeValues{
+							{},
+							{},
+						},
+					},
+				},
+			},
+			Overrides: []types.ThemeValues{
+				{
+					Key: ptr.String("__Key__"),
+					Value: &types.ThemeValue{
+						Value: ptr.String("__Value__"),
+						Children: []types.ThemeValues{
+							{},
+							{},
+						},
+					},
+				},
+				{
+					Key: ptr.String("__Key__"),
+					Value: &types.ThemeValue{
+						Value: ptr.String("__Value__"),
+						Children: []types.ThemeValues{
+							{},
+							{},
+						},
+					},
+				},
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1660,7 +3142,11 @@ func TestCheckResponseSnapshot_DeleteComponent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteComponent(context.Background(), &DeleteComponentInput{})
+	got, err := svc.DeleteComponent(context.Background(), &DeleteComponentInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		Id:              ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1679,7 +3165,11 @@ func TestCheckResponseSnapshot_DeleteForm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteForm(context.Background(), &DeleteFormInput{})
+	got, err := svc.DeleteForm(context.Background(), &DeleteFormInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		Id:              ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1698,7 +3188,11 @@ func TestCheckResponseSnapshot_DeleteTheme(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTheme(context.Background(), &DeleteThemeInput{})
+	got, err := svc.DeleteTheme(context.Background(), &DeleteThemeInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		Id:              ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1721,7 +3215,14 @@ func TestCheckResponseSnapshot_ExchangeCodeForToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExchangeCodeForToken(context.Background(), &ExchangeCodeForTokenInput{})
+	got, err := svc.ExchangeCodeForToken(context.Background(), &ExchangeCodeForTokenInput{
+		Provider: types.TokenProviders("figma"),
+		Request: &types.ExchangeCodeForTokenRequestBody{
+			Code:        ptr.String("__Code__"),
+			RedirectUri: ptr.String("__RedirectUri__"),
+			ClientId:    ptr.String("__ClientId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4230,7 +5731,11 @@ func TestCheckResponseSnapshot_ExportComponents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExportComponents(context.Background(), &ExportComponentsInput{})
+	got, err := svc.ExportComponents(context.Background(), &ExportComponentsInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4623,7 +6128,11 @@ func TestCheckResponseSnapshot_ExportForms(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExportForms(context.Background(), &ExportFormsInput{})
+	got, err := svc.ExportForms(context.Background(), &ExportFormsInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4756,7 +6265,11 @@ func TestCheckResponseSnapshot_ExportThemes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExportThemes(context.Background(), &ExportThemesInput{})
+	got, err := svc.ExportThemes(context.Background(), &ExportThemesInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -4907,7 +6420,11 @@ func TestCheckResponseSnapshot_GetCodegenJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCodegenJob(context.Background(), &GetCodegenJobInput{})
+	got, err := svc.GetCodegenJob(context.Background(), &GetCodegenJobInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		Id:              ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6170,7 +7687,11 @@ func TestCheckResponseSnapshot_GetComponent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetComponent(context.Background(), &GetComponentInput{})
+	got, err := svc.GetComponent(context.Background(), &GetComponentInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		Id:              ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6375,7 +7896,11 @@ func TestCheckResponseSnapshot_GetForm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetForm(context.Background(), &GetFormInput{})
+	got, err := svc.GetForm(context.Background(), &GetFormInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		Id:              ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6398,7 +7923,10 @@ func TestCheckResponseSnapshot_GetMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMetadata(context.Background(), &GetMetadataInput{})
+	got, err := svc.GetMetadata(context.Background(), &GetMetadataInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6473,7 +8001,11 @@ func TestCheckResponseSnapshot_GetTheme(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTheme(context.Background(), &GetThemeInput{})
+	got, err := svc.GetTheme(context.Background(), &GetThemeInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		Id:              ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6510,7 +8042,12 @@ func TestCheckResponseSnapshot_ListCodegenJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCodegenJobs(context.Background(), &ListCodegenJobsInput{})
+	got, err := svc.ListCodegenJobs(context.Background(), &ListCodegenJobsInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6547,7 +8084,12 @@ func TestCheckResponseSnapshot_ListComponents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListComponents(context.Background(), &ListComponentsInput{})
+	got, err := svc.ListComponents(context.Background(), &ListComponentsInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6592,7 +8134,12 @@ func TestCheckResponseSnapshot_ListForms(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListForms(context.Background(), &ListFormsInput{})
+	got, err := svc.ListForms(context.Background(), &ListFormsInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6615,7 +8162,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6650,7 +8199,12 @@ func TestCheckResponseSnapshot_ListThemes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListThemes(context.Background(), &ListThemesInput{})
+	got, err := svc.ListThemes(context.Background(), &ListThemesInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6669,7 +8223,14 @@ func TestCheckResponseSnapshot_PutMetadataFlag(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutMetadataFlag(context.Background(), &PutMetadataFlagInput{})
+	got, err := svc.PutMetadataFlag(context.Background(), &PutMetadataFlagInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		FeatureName:     ptr.String("__FeatureName__"),
+		Body: &types.PutMetadataFlagBody{
+			NewValue: ptr.String("__NewValue__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6691,7 +8252,13 @@ func TestCheckResponseSnapshot_RefreshToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RefreshToken(context.Background(), &RefreshTokenInput{})
+	got, err := svc.RefreshToken(context.Background(), &RefreshTokenInput{
+		Provider: types.TokenProviders("figma"),
+		RefreshTokenBody: &types.RefreshTokenRequestBody{
+			Token:    ptr.String("__Token__"),
+			ClientId: ptr.String("__ClientId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6842,7 +8409,118 @@ func TestCheckResponseSnapshot_StartCodegenJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartCodegenJob(context.Background(), &StartCodegenJobInput{})
+	got, err := svc.StartCodegenJob(context.Background(), &StartCodegenJobInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		CodegenJobToCreate: &types.StartCodegenJobData{
+			RenderConfig: &types.CodegenJobRenderConfigMemberReact{
+				Value: types.ReactStartCodegenJobData{
+					Module:                 types.JSModule("es2020"),
+					Target:                 types.JSTarget("es2015"),
+					Script:                 types.JSScript("jsx"),
+					RenderTypeDeclarations: true,
+					InlineSourceMap:        true,
+					ApiConfiguration: &types.ApiConfigurationMemberGraphQLConfig{
+						Value: types.GraphQLRenderConfig{
+							TypesFilePath:         ptr.String("__TypesFilePath__"),
+							QueriesFilePath:       ptr.String("__QueriesFilePath__"),
+							MutationsFilePath:     ptr.String("__MutationsFilePath__"),
+							SubscriptionsFilePath: ptr.String("__SubscriptionsFilePath__"),
+							FragmentsFilePath:     ptr.String("__FragmentsFilePath__"),
+						},
+					},
+					Dependencies: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+			GenericDataSchema: &types.CodegenJobGenericDataSchema{
+				DataSourceType: types.CodegenJobGenericDataSourceType("DataStore"),
+				Models: map[string]types.CodegenGenericDataModel{
+					"key0": {
+						Fields: map[string]types.CodegenGenericDataField{
+							"key0": {
+								DataType:      types.CodegenGenericDataFieldDataType("ID"),
+								DataTypeValue: ptr.String("__DataTypeValue__"),
+								Required:      ptr.Bool(true),
+								ReadOnly:      ptr.Bool(true),
+								IsArray:       ptr.Bool(true),
+								Relationship: &types.CodegenGenericDataRelationshipType{
+									Type:             types.GenericDataRelationshipType("HAS_MANY"),
+									RelatedModelName: ptr.String("__RelatedModelName__"),
+									RelatedModelFields: []string{
+										"__Member__",
+										"__Member__",
+									},
+									CanUnlinkAssociatedModel:     ptr.Bool(true),
+									RelatedJoinFieldName:         ptr.String("__RelatedJoinFieldName__"),
+									RelatedJoinTableName:         ptr.String("__RelatedJoinTableName__"),
+									BelongsToFieldOnRelatedModel: ptr.String("__BelongsToFieldOnRelatedModel__"),
+									AssociatedFields: []string{
+										"__Member__",
+										"__Member__",
+									},
+									IsHasManyIndex: ptr.Bool(true),
+								},
+							},
+						},
+						IsJoinTable: ptr.Bool(true),
+						PrimaryKeys: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				Enums: map[string]types.CodegenGenericDataEnum{
+					"key0": {
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				NonModels: map[string]types.CodegenGenericDataNonModel{
+					"key0": {
+						Fields: map[string]types.CodegenGenericDataField{
+							"key0": {
+								DataType:      types.CodegenGenericDataFieldDataType("ID"),
+								DataTypeValue: ptr.String("__DataTypeValue__"),
+								Required:      ptr.Bool(true),
+								ReadOnly:      ptr.Bool(true),
+								IsArray:       ptr.Bool(true),
+								Relationship: &types.CodegenGenericDataRelationshipType{
+									Type:             types.GenericDataRelationshipType("HAS_MANY"),
+									RelatedModelName: ptr.String("__RelatedModelName__"),
+									RelatedModelFields: []string{
+										"__Member__",
+										"__Member__",
+									},
+									CanUnlinkAssociatedModel:     ptr.Bool(true),
+									RelatedJoinFieldName:         ptr.String("__RelatedJoinFieldName__"),
+									RelatedJoinTableName:         ptr.String("__RelatedJoinTableName__"),
+									BelongsToFieldOnRelatedModel: ptr.String("__BelongsToFieldOnRelatedModel__"),
+									AssociatedFields: []string{
+										"__Member__",
+										"__Member__",
+									},
+									IsHasManyIndex: ptr.Bool(true),
+								},
+							},
+						},
+					},
+				},
+			},
+			AutoGenerateForms: ptr.Bool(true),
+			Features: &types.CodegenFeatureFlags{
+				IsRelationshipSupported: ptr.Bool(true),
+				IsNonModelSupported:     ptr.Bool(true),
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6861,7 +8539,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -6880,7 +8563,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8143,7 +9832,1248 @@ func TestCheckResponseSnapshot_UpdateComponent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateComponent(context.Background(), &UpdateComponentInput{})
+	got, err := svc.UpdateComponent(context.Background(), &UpdateComponentInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		Id:              ptr.String("__Id__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		UpdatedComponent: &types.UpdateComponentData{
+			Id:            ptr.String("__Id__"),
+			Name:          ptr.String("__Name__"),
+			SourceId:      ptr.String("__SourceId__"),
+			ComponentType: ptr.String("__ComponentType__"),
+			Properties: map[string]types.ComponentProperty{
+				"key0": {
+					Value: ptr.String("__Value__"),
+					BindingProperties: &types.ComponentPropertyBindingProperties{
+						Property: ptr.String("__Property__"),
+						Field:    ptr.String("__Field__"),
+					},
+					CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+						Property: ptr.String("__Property__"),
+						Field:    ptr.String("__Field__"),
+					},
+					DefaultValue: ptr.String("__DefaultValue__"),
+					Model:        ptr.String("__Model__"),
+					Bindings: map[string]types.FormBindingElement{
+						"key0": {
+							Element:  ptr.String("__Element__"),
+							Property: ptr.String("__Property__"),
+						},
+					},
+					Event:         ptr.String("__Event__"),
+					UserAttribute: ptr.String("__UserAttribute__"),
+					Concat: []types.ComponentProperty{
+						{},
+						{},
+					},
+					Condition: &types.ComponentConditionProperty{
+						Property:    ptr.String("__Property__"),
+						Field:       ptr.String("__Field__"),
+						Operator:    ptr.String("__Operator__"),
+						Operand:     ptr.String("__Operand__"),
+						Then:        nil,
+						Else:        nil,
+						OperandType: ptr.String("__OperandType__"),
+					},
+					Configured:    ptr.Bool(true),
+					Type:          ptr.String("__Type__"),
+					ImportedValue: ptr.String("__ImportedValue__"),
+					ComponentName: ptr.String("__ComponentName__"),
+					Property:      ptr.String("__Property__"),
+				},
+			},
+			Children: []types.ComponentChild{
+				{
+					ComponentType: ptr.String("__ComponentType__"),
+					Name:          ptr.String("__Name__"),
+					Properties: map[string]types.ComponentProperty{
+						"key0": {
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+					},
+					Children: []types.ComponentChild{
+						{},
+						{},
+					},
+					Events: map[string]types.ComponentEvent{
+						"key0": {
+							Action: ptr.String("__Action__"),
+							Parameters: &types.ActionParameters{
+								Type: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Url: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Anchor: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Target: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Global: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Model: ptr.String("__Model__"),
+								Id: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Fields: map[string]types.ComponentProperty{
+									"key0": {
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										DefaultValue: ptr.String("__DefaultValue__"),
+										Model:        ptr.String("__Model__"),
+										Bindings: map[string]types.FormBindingElement{
+											"key0": {
+												Element:  ptr.String("__Element__"),
+												Property: ptr.String("__Property__"),
+											},
+										},
+										Event:         ptr.String("__Event__"),
+										UserAttribute: ptr.String("__UserAttribute__"),
+										Concat: []types.ComponentProperty{
+											{},
+											{},
+										},
+										Condition: &types.ComponentConditionProperty{
+											Property:    ptr.String("__Property__"),
+											Field:       ptr.String("__Field__"),
+											Operator:    ptr.String("__Operator__"),
+											Operand:     ptr.String("__Operand__"),
+											Then:        nil,
+											Else:        nil,
+											OperandType: ptr.String("__OperandType__"),
+										},
+										Configured:    ptr.Bool(true),
+										Type:          ptr.String("__Type__"),
+										ImportedValue: ptr.String("__ImportedValue__"),
+										ComponentName: ptr.String("__ComponentName__"),
+										Property:      ptr.String("__Property__"),
+									},
+								},
+								State: &types.MutationActionSetStateParameter{
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+									Set: &types.ComponentProperty{
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										DefaultValue: ptr.String("__DefaultValue__"),
+										Model:        ptr.String("__Model__"),
+										Bindings: map[string]types.FormBindingElement{
+											"key0": {
+												Element:  ptr.String("__Element__"),
+												Property: ptr.String("__Property__"),
+											},
+										},
+										Event:         ptr.String("__Event__"),
+										UserAttribute: ptr.String("__UserAttribute__"),
+										Concat: []types.ComponentProperty{
+											{},
+											{},
+										},
+										Condition: &types.ComponentConditionProperty{
+											Property:    ptr.String("__Property__"),
+											Field:       ptr.String("__Field__"),
+											Operator:    ptr.String("__Operator__"),
+											Operand:     ptr.String("__Operand__"),
+											Then:        nil,
+											Else:        nil,
+											OperandType: ptr.String("__OperandType__"),
+										},
+										Configured:    ptr.Bool(true),
+										Type:          ptr.String("__Type__"),
+										ImportedValue: ptr.String("__ImportedValue__"),
+										ComponentName: ptr.String("__ComponentName__"),
+										Property:      ptr.String("__Property__"),
+									},
+								},
+							},
+							BindingEvent: ptr.String("__BindingEvent__"),
+						},
+					},
+					SourceId: ptr.String("__SourceId__"),
+				},
+				{
+					ComponentType: ptr.String("__ComponentType__"),
+					Name:          ptr.String("__Name__"),
+					Properties: map[string]types.ComponentProperty{
+						"key0": {
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+					},
+					Children: []types.ComponentChild{
+						{},
+						{},
+					},
+					Events: map[string]types.ComponentEvent{
+						"key0": {
+							Action: ptr.String("__Action__"),
+							Parameters: &types.ActionParameters{
+								Type: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Url: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Anchor: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Target: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Global: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Model: ptr.String("__Model__"),
+								Id: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Fields: map[string]types.ComponentProperty{
+									"key0": {
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										DefaultValue: ptr.String("__DefaultValue__"),
+										Model:        ptr.String("__Model__"),
+										Bindings: map[string]types.FormBindingElement{
+											"key0": {
+												Element:  ptr.String("__Element__"),
+												Property: ptr.String("__Property__"),
+											},
+										},
+										Event:         ptr.String("__Event__"),
+										UserAttribute: ptr.String("__UserAttribute__"),
+										Concat: []types.ComponentProperty{
+											{},
+											{},
+										},
+										Condition: &types.ComponentConditionProperty{
+											Property:    ptr.String("__Property__"),
+											Field:       ptr.String("__Field__"),
+											Operator:    ptr.String("__Operator__"),
+											Operand:     ptr.String("__Operand__"),
+											Then:        nil,
+											Else:        nil,
+											OperandType: ptr.String("__OperandType__"),
+										},
+										Configured:    ptr.Bool(true),
+										Type:          ptr.String("__Type__"),
+										ImportedValue: ptr.String("__ImportedValue__"),
+										ComponentName: ptr.String("__ComponentName__"),
+										Property:      ptr.String("__Property__"),
+									},
+								},
+								State: &types.MutationActionSetStateParameter{
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+									Set: &types.ComponentProperty{
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										DefaultValue: ptr.String("__DefaultValue__"),
+										Model:        ptr.String("__Model__"),
+										Bindings: map[string]types.FormBindingElement{
+											"key0": {
+												Element:  ptr.String("__Element__"),
+												Property: ptr.String("__Property__"),
+											},
+										},
+										Event:         ptr.String("__Event__"),
+										UserAttribute: ptr.String("__UserAttribute__"),
+										Concat: []types.ComponentProperty{
+											{},
+											{},
+										},
+										Condition: &types.ComponentConditionProperty{
+											Property:    ptr.String("__Property__"),
+											Field:       ptr.String("__Field__"),
+											Operator:    ptr.String("__Operator__"),
+											Operand:     ptr.String("__Operand__"),
+											Then:        nil,
+											Else:        nil,
+											OperandType: ptr.String("__OperandType__"),
+										},
+										Configured:    ptr.Bool(true),
+										Type:          ptr.String("__Type__"),
+										ImportedValue: ptr.String("__ImportedValue__"),
+										ComponentName: ptr.String("__ComponentName__"),
+										Property:      ptr.String("__Property__"),
+									},
+								},
+							},
+							BindingEvent: ptr.String("__BindingEvent__"),
+						},
+					},
+					SourceId: ptr.String("__SourceId__"),
+				},
+			},
+			Variants: []types.ComponentVariant{
+				{
+					VariantValues: map[string]string{
+						"key0": "__Value__",
+					},
+					Overrides: map[string]map[string]string{
+						"key0": {
+							"key0": "__Value__",
+						},
+					},
+				},
+				{
+					VariantValues: map[string]string{
+						"key0": "__Value__",
+					},
+					Overrides: map[string]map[string]string{
+						"key0": {
+							"key0": "__Value__",
+						},
+					},
+				},
+			},
+			Overrides: map[string]map[string]string{
+				"key0": {
+					"key0": "__Value__",
+				},
+			},
+			BindingProperties: map[string]types.ComponentBindingPropertiesValue{
+				"key0": {
+					Type: ptr.String("__Type__"),
+					BindingProperties: &types.ComponentBindingPropertiesValueProperties{
+						Model: ptr.String("__Model__"),
+						Field: ptr.String("__Field__"),
+						Predicates: []types.Predicate{
+							{
+								Or: []types.Predicate{
+									{},
+									{},
+								},
+								And: []types.Predicate{
+									{},
+									{},
+								},
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								OperandType: ptr.String("__OperandType__"),
+							},
+							{
+								Or: []types.Predicate{
+									{},
+									{},
+								},
+								And: []types.Predicate{
+									{},
+									{},
+								},
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								OperandType: ptr.String("__OperandType__"),
+							},
+						},
+						UserAttribute: ptr.String("__UserAttribute__"),
+						Bucket:        ptr.String("__Bucket__"),
+						Key:           ptr.String("__Key__"),
+						DefaultValue:  ptr.String("__DefaultValue__"),
+						SlotName:      ptr.String("__SlotName__"),
+					},
+					DefaultValue: ptr.String("__DefaultValue__"),
+				},
+			},
+			CollectionProperties: map[string]types.ComponentDataConfiguration{
+				"key0": {
+					Model: ptr.String("__Model__"),
+					Sort: []types.SortProperty{
+						{
+							Field:     ptr.String("__Field__"),
+							Direction: types.SortDirection("ASC"),
+						},
+						{
+							Field:     ptr.String("__Field__"),
+							Direction: types.SortDirection("ASC"),
+						},
+					},
+					Predicate: &types.Predicate{
+						Or: []types.Predicate{
+							{},
+							{},
+						},
+						And: []types.Predicate{
+							{},
+							{},
+						},
+						Field:       ptr.String("__Field__"),
+						Operator:    ptr.String("__Operator__"),
+						Operand:     ptr.String("__Operand__"),
+						OperandType: ptr.String("__OperandType__"),
+					},
+					Identifiers: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			Events: map[string]types.ComponentEvent{
+				"key0": {
+					Action: ptr.String("__Action__"),
+					Parameters: &types.ActionParameters{
+						Type: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Url: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Anchor: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Target: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Global: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Model: ptr.String("__Model__"),
+						Id: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Fields: map[string]types.ComponentProperty{
+							"key0": {
+								Value: ptr.String("__Value__"),
+								BindingProperties: &types.ComponentPropertyBindingProperties{
+									Property: ptr.String("__Property__"),
+									Field:    ptr.String("__Field__"),
+								},
+								CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+									Property: ptr.String("__Property__"),
+									Field:    ptr.String("__Field__"),
+								},
+								DefaultValue: ptr.String("__DefaultValue__"),
+								Model:        ptr.String("__Model__"),
+								Bindings: map[string]types.FormBindingElement{
+									"key0": {
+										Element:  ptr.String("__Element__"),
+										Property: ptr.String("__Property__"),
+									},
+								},
+								Event:         ptr.String("__Event__"),
+								UserAttribute: ptr.String("__UserAttribute__"),
+								Concat: []types.ComponentProperty{
+									{},
+									{},
+								},
+								Condition: &types.ComponentConditionProperty{
+									Property:    ptr.String("__Property__"),
+									Field:       ptr.String("__Field__"),
+									Operator:    ptr.String("__Operator__"),
+									Operand:     ptr.String("__Operand__"),
+									Then:        nil,
+									Else:        nil,
+									OperandType: ptr.String("__OperandType__"),
+								},
+								Configured:    ptr.Bool(true),
+								Type:          ptr.String("__Type__"),
+								ImportedValue: ptr.String("__ImportedValue__"),
+								ComponentName: ptr.String("__ComponentName__"),
+								Property:      ptr.String("__Property__"),
+							},
+						},
+						State: &types.MutationActionSetStateParameter{
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+							Set: &types.ComponentProperty{
+								Value: ptr.String("__Value__"),
+								BindingProperties: &types.ComponentPropertyBindingProperties{
+									Property: ptr.String("__Property__"),
+									Field:    ptr.String("__Field__"),
+								},
+								CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+									Property: ptr.String("__Property__"),
+									Field:    ptr.String("__Field__"),
+								},
+								DefaultValue: ptr.String("__DefaultValue__"),
+								Model:        ptr.String("__Model__"),
+								Bindings: map[string]types.FormBindingElement{
+									"key0": {
+										Element:  ptr.String("__Element__"),
+										Property: ptr.String("__Property__"),
+									},
+								},
+								Event:         ptr.String("__Event__"),
+								UserAttribute: ptr.String("__UserAttribute__"),
+								Concat: []types.ComponentProperty{
+									{},
+									{},
+								},
+								Condition: &types.ComponentConditionProperty{
+									Property:    ptr.String("__Property__"),
+									Field:       ptr.String("__Field__"),
+									Operator:    ptr.String("__Operator__"),
+									Operand:     ptr.String("__Operand__"),
+									Then:        nil,
+									Else:        nil,
+									OperandType: ptr.String("__OperandType__"),
+								},
+								Configured:    ptr.Bool(true),
+								Type:          ptr.String("__Type__"),
+								ImportedValue: ptr.String("__ImportedValue__"),
+								ComponentName: ptr.String("__ComponentName__"),
+								Property:      ptr.String("__Property__"),
+							},
+						},
+					},
+					BindingEvent: ptr.String("__BindingEvent__"),
+				},
+			},
+			SchemaVersion: ptr.String("__SchemaVersion__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8348,7 +11278,191 @@ func TestCheckResponseSnapshot_UpdateForm(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateForm(context.Background(), &UpdateFormInput{})
+	got, err := svc.UpdateForm(context.Background(), &UpdateFormInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		Id:              ptr.String("__Id__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		UpdatedForm: &types.UpdateFormData{
+			Name: ptr.String("__Name__"),
+			DataType: &types.FormDataTypeConfig{
+				DataSourceType: types.FormDataSourceType("DataStore"),
+				DataTypeName:   ptr.String("__DataTypeName__"),
+			},
+			FormActionType: types.FormActionType("create"),
+			Fields: map[string]types.FieldConfig{
+				"key0": {
+					Label: ptr.String("__Label__"),
+					Position: &types.FieldPositionMemberFixed{
+						Value: types.FixedPosition("first"),
+					},
+					Excluded: ptr.Bool(true),
+					InputType: &types.FieldInputConfig{
+						Type:               ptr.String("__Type__"),
+						Required:           ptr.Bool(true),
+						ReadOnly:           ptr.Bool(true),
+						Placeholder:        ptr.String("__Placeholder__"),
+						DefaultValue:       ptr.String("__DefaultValue__"),
+						DescriptiveText:    ptr.String("__DescriptiveText__"),
+						DefaultChecked:     ptr.Bool(true),
+						DefaultCountryCode: ptr.String("__DefaultCountryCode__"),
+						ValueMappings: &types.ValueMappings{
+							Values: []types.ValueMapping{
+								{
+									DisplayValue: &types.FormInputValueProperty{
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.FormInputValuePropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										Concat: []types.FormInputValueProperty{
+											{},
+											{},
+										},
+									},
+									Value: &types.FormInputValueProperty{
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.FormInputValuePropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										Concat: []types.FormInputValueProperty{
+											{},
+											{},
+										},
+									},
+								},
+								{
+									DisplayValue: &types.FormInputValueProperty{
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.FormInputValuePropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										Concat: []types.FormInputValueProperty{
+											{},
+											{},
+										},
+									},
+									Value: &types.FormInputValueProperty{
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.FormInputValuePropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										Concat: []types.FormInputValueProperty{
+											{},
+											{},
+										},
+									},
+								},
+							},
+							BindingProperties: map[string]types.FormInputBindingPropertiesValue{
+								"key0": {
+									Type: ptr.String("__Type__"),
+									BindingProperties: &types.FormInputBindingPropertiesValueProperties{
+										Model: ptr.String("__Model__"),
+									},
+								},
+							},
+						},
+						Name:     ptr.String("__Name__"),
+						MinValue: ptr.Float32(1.0),
+						MaxValue: ptr.Float32(1.0),
+						Step:     ptr.Float32(1.0),
+						Value:    ptr.String("__Value__"),
+						IsArray:  ptr.Bool(true),
+						FileUploaderConfig: &types.FileUploaderFieldConfig{
+							AccessLevel: types.StorageAccessLevel("public"),
+							AcceptedFileTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ShowThumbnails: ptr.Bool(true),
+							IsResumable:    ptr.Bool(true),
+							MaxFileCount:   ptr.Int32(1),
+							MaxSize:        ptr.Int32(1),
+						},
+					},
+					Validations: []types.FieldValidationConfiguration{
+						{
+							Type: ptr.String("__Type__"),
+							StrValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+							NumValues: []int32{
+								1,
+								1,
+							},
+							ValidationMessage: ptr.String("__ValidationMessage__"),
+						},
+						{
+							Type: ptr.String("__Type__"),
+							StrValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+							NumValues: []int32{
+								1,
+								1,
+							},
+							ValidationMessage: ptr.String("__ValidationMessage__"),
+						},
+					},
+				},
+			},
+			Style: &types.FormStyle{
+				HorizontalGap: &types.FormStyleConfigMemberTokenReference{
+					Value: "__FormStyleConfigMemberTokenReference__",
+				},
+				VerticalGap: &types.FormStyleConfigMemberTokenReference{
+					Value: "__FormStyleConfigMemberTokenReference__",
+				},
+				OuterPadding: &types.FormStyleConfigMemberTokenReference{
+					Value: "__FormStyleConfigMemberTokenReference__",
+				},
+			},
+			SectionalElements: map[string]types.SectionalElement{
+				"key0": {
+					Type: ptr.String("__Type__"),
+					Position: &types.FieldPositionMemberFixed{
+						Value: types.FixedPosition("first"),
+					},
+					Text:        ptr.String("__Text__"),
+					Level:       ptr.Int32(1),
+					Orientation: ptr.String("__Orientation__"),
+					Excluded:    ptr.Bool(true),
+				},
+			},
+			SchemaVersion: ptr.String("__SchemaVersion__"),
+			Cta: &types.FormCTA{
+				Position: types.FormButtonsPosition("top"),
+				Clear: &types.FormButton{
+					Excluded: ptr.Bool(true),
+					Children: ptr.String("__Children__"),
+					Position: &types.FieldPositionMemberFixed{
+						Value: types.FixedPosition("first"),
+					},
+				},
+				Cancel: &types.FormButton{
+					Excluded: ptr.Bool(true),
+					Children: ptr.String("__Children__"),
+					Position: &types.FieldPositionMemberFixed{
+						Value: types.FixedPosition("first"),
+					},
+				},
+				Submit: &types.FormButton{
+					Excluded: ptr.Bool(true),
+					Children: ptr.String("__Children__"),
+					Position: &types.FieldPositionMemberFixed{
+						Value: types.FixedPosition("first"),
+					},
+				},
+			},
+			LabelDecorator: types.LabelDecorator("required"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8423,7 +11537,60 @@ func TestCheckResponseSnapshot_UpdateTheme(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTheme(context.Background(), &UpdateThemeInput{})
+	got, err := svc.UpdateTheme(context.Background(), &UpdateThemeInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		Id:              ptr.String("__Id__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		UpdatedTheme: &types.UpdateThemeData{
+			Id:   ptr.String("__Id__"),
+			Name: ptr.String("__Name__"),
+			Values: []types.ThemeValues{
+				{
+					Key: ptr.String("__Key__"),
+					Value: &types.ThemeValue{
+						Value: ptr.String("__Value__"),
+						Children: []types.ThemeValues{
+							{},
+							{},
+						},
+					},
+				},
+				{
+					Key: ptr.String("__Key__"),
+					Value: &types.ThemeValue{
+						Value: ptr.String("__Value__"),
+						Children: []types.ThemeValues{
+							{},
+							{},
+						},
+					},
+				},
+			},
+			Overrides: []types.ThemeValues{
+				{
+					Key: ptr.String("__Key__"),
+					Value: &types.ThemeValue{
+						Value: ptr.String("__Value__"),
+						Children: []types.ThemeValues{
+							{},
+							{},
+						},
+					},
+				},
+				{
+					Key: ptr.String("__Key__"),
+					Value: &types.ThemeValue{
+						Value: ptr.String("__Value__"),
+						Children: []types.ThemeValues{
+							{},
+							{},
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -8444,7 +11611,1249 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateComponent(context.Background(), &CreateComponentInput{})
+	_, opErr := svc.CreateComponent(context.Background(), &CreateComponentInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		ComponentToCreate: &types.CreateComponentData{
+			Name:          ptr.String("__Name__"),
+			SourceId:      ptr.String("__SourceId__"),
+			ComponentType: ptr.String("__ComponentType__"),
+			Properties: map[string]types.ComponentProperty{
+				"key0": {
+					Value: ptr.String("__Value__"),
+					BindingProperties: &types.ComponentPropertyBindingProperties{
+						Property: ptr.String("__Property__"),
+						Field:    ptr.String("__Field__"),
+					},
+					CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+						Property: ptr.String("__Property__"),
+						Field:    ptr.String("__Field__"),
+					},
+					DefaultValue: ptr.String("__DefaultValue__"),
+					Model:        ptr.String("__Model__"),
+					Bindings: map[string]types.FormBindingElement{
+						"key0": {
+							Element:  ptr.String("__Element__"),
+							Property: ptr.String("__Property__"),
+						},
+					},
+					Event:         ptr.String("__Event__"),
+					UserAttribute: ptr.String("__UserAttribute__"),
+					Concat: []types.ComponentProperty{
+						{},
+						{},
+					},
+					Condition: &types.ComponentConditionProperty{
+						Property:    ptr.String("__Property__"),
+						Field:       ptr.String("__Field__"),
+						Operator:    ptr.String("__Operator__"),
+						Operand:     ptr.String("__Operand__"),
+						Then:        nil,
+						Else:        nil,
+						OperandType: ptr.String("__OperandType__"),
+					},
+					Configured:    ptr.Bool(true),
+					Type:          ptr.String("__Type__"),
+					ImportedValue: ptr.String("__ImportedValue__"),
+					ComponentName: ptr.String("__ComponentName__"),
+					Property:      ptr.String("__Property__"),
+				},
+			},
+			Children: []types.ComponentChild{
+				{
+					ComponentType: ptr.String("__ComponentType__"),
+					Name:          ptr.String("__Name__"),
+					Properties: map[string]types.ComponentProperty{
+						"key0": {
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+					},
+					Children: []types.ComponentChild{
+						{},
+						{},
+					},
+					Events: map[string]types.ComponentEvent{
+						"key0": {
+							Action: ptr.String("__Action__"),
+							Parameters: &types.ActionParameters{
+								Type: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Url: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Anchor: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Target: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Global: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Model: ptr.String("__Model__"),
+								Id: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Fields: map[string]types.ComponentProperty{
+									"key0": {
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										DefaultValue: ptr.String("__DefaultValue__"),
+										Model:        ptr.String("__Model__"),
+										Bindings: map[string]types.FormBindingElement{
+											"key0": {
+												Element:  ptr.String("__Element__"),
+												Property: ptr.String("__Property__"),
+											},
+										},
+										Event:         ptr.String("__Event__"),
+										UserAttribute: ptr.String("__UserAttribute__"),
+										Concat: []types.ComponentProperty{
+											{},
+											{},
+										},
+										Condition: &types.ComponentConditionProperty{
+											Property:    ptr.String("__Property__"),
+											Field:       ptr.String("__Field__"),
+											Operator:    ptr.String("__Operator__"),
+											Operand:     ptr.String("__Operand__"),
+											Then:        nil,
+											Else:        nil,
+											OperandType: ptr.String("__OperandType__"),
+										},
+										Configured:    ptr.Bool(true),
+										Type:          ptr.String("__Type__"),
+										ImportedValue: ptr.String("__ImportedValue__"),
+										ComponentName: ptr.String("__ComponentName__"),
+										Property:      ptr.String("__Property__"),
+									},
+								},
+								State: &types.MutationActionSetStateParameter{
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+									Set: &types.ComponentProperty{
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										DefaultValue: ptr.String("__DefaultValue__"),
+										Model:        ptr.String("__Model__"),
+										Bindings: map[string]types.FormBindingElement{
+											"key0": {
+												Element:  ptr.String("__Element__"),
+												Property: ptr.String("__Property__"),
+											},
+										},
+										Event:         ptr.String("__Event__"),
+										UserAttribute: ptr.String("__UserAttribute__"),
+										Concat: []types.ComponentProperty{
+											{},
+											{},
+										},
+										Condition: &types.ComponentConditionProperty{
+											Property:    ptr.String("__Property__"),
+											Field:       ptr.String("__Field__"),
+											Operator:    ptr.String("__Operator__"),
+											Operand:     ptr.String("__Operand__"),
+											Then:        nil,
+											Else:        nil,
+											OperandType: ptr.String("__OperandType__"),
+										},
+										Configured:    ptr.Bool(true),
+										Type:          ptr.String("__Type__"),
+										ImportedValue: ptr.String("__ImportedValue__"),
+										ComponentName: ptr.String("__ComponentName__"),
+										Property:      ptr.String("__Property__"),
+									},
+								},
+							},
+							BindingEvent: ptr.String("__BindingEvent__"),
+						},
+					},
+					SourceId: ptr.String("__SourceId__"),
+				},
+				{
+					ComponentType: ptr.String("__ComponentType__"),
+					Name:          ptr.String("__Name__"),
+					Properties: map[string]types.ComponentProperty{
+						"key0": {
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+					},
+					Children: []types.ComponentChild{
+						{},
+						{},
+					},
+					Events: map[string]types.ComponentEvent{
+						"key0": {
+							Action: ptr.String("__Action__"),
+							Parameters: &types.ActionParameters{
+								Type: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Url: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Anchor: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Target: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Global: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Model: ptr.String("__Model__"),
+								Id: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Fields: map[string]types.ComponentProperty{
+									"key0": {
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										DefaultValue: ptr.String("__DefaultValue__"),
+										Model:        ptr.String("__Model__"),
+										Bindings: map[string]types.FormBindingElement{
+											"key0": {
+												Element:  ptr.String("__Element__"),
+												Property: ptr.String("__Property__"),
+											},
+										},
+										Event:         ptr.String("__Event__"),
+										UserAttribute: ptr.String("__UserAttribute__"),
+										Concat: []types.ComponentProperty{
+											{},
+											{},
+										},
+										Condition: &types.ComponentConditionProperty{
+											Property:    ptr.String("__Property__"),
+											Field:       ptr.String("__Field__"),
+											Operator:    ptr.String("__Operator__"),
+											Operand:     ptr.String("__Operand__"),
+											Then:        nil,
+											Else:        nil,
+											OperandType: ptr.String("__OperandType__"),
+										},
+										Configured:    ptr.Bool(true),
+										Type:          ptr.String("__Type__"),
+										ImportedValue: ptr.String("__ImportedValue__"),
+										ComponentName: ptr.String("__ComponentName__"),
+										Property:      ptr.String("__Property__"),
+									},
+								},
+								State: &types.MutationActionSetStateParameter{
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+									Set: &types.ComponentProperty{
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										DefaultValue: ptr.String("__DefaultValue__"),
+										Model:        ptr.String("__Model__"),
+										Bindings: map[string]types.FormBindingElement{
+											"key0": {
+												Element:  ptr.String("__Element__"),
+												Property: ptr.String("__Property__"),
+											},
+										},
+										Event:         ptr.String("__Event__"),
+										UserAttribute: ptr.String("__UserAttribute__"),
+										Concat: []types.ComponentProperty{
+											{},
+											{},
+										},
+										Condition: &types.ComponentConditionProperty{
+											Property:    ptr.String("__Property__"),
+											Field:       ptr.String("__Field__"),
+											Operator:    ptr.String("__Operator__"),
+											Operand:     ptr.String("__Operand__"),
+											Then:        nil,
+											Else:        nil,
+											OperandType: ptr.String("__OperandType__"),
+										},
+										Configured:    ptr.Bool(true),
+										Type:          ptr.String("__Type__"),
+										ImportedValue: ptr.String("__ImportedValue__"),
+										ComponentName: ptr.String("__ComponentName__"),
+										Property:      ptr.String("__Property__"),
+									},
+								},
+							},
+							BindingEvent: ptr.String("__BindingEvent__"),
+						},
+					},
+					SourceId: ptr.String("__SourceId__"),
+				},
+			},
+			Variants: []types.ComponentVariant{
+				{
+					VariantValues: map[string]string{
+						"key0": "__Value__",
+					},
+					Overrides: map[string]map[string]string{
+						"key0": {
+							"key0": "__Value__",
+						},
+					},
+				},
+				{
+					VariantValues: map[string]string{
+						"key0": "__Value__",
+					},
+					Overrides: map[string]map[string]string{
+						"key0": {
+							"key0": "__Value__",
+						},
+					},
+				},
+			},
+			Overrides: map[string]map[string]string{
+				"key0": {
+					"key0": "__Value__",
+				},
+			},
+			BindingProperties: map[string]types.ComponentBindingPropertiesValue{
+				"key0": {
+					Type: ptr.String("__Type__"),
+					BindingProperties: &types.ComponentBindingPropertiesValueProperties{
+						Model: ptr.String("__Model__"),
+						Field: ptr.String("__Field__"),
+						Predicates: []types.Predicate{
+							{
+								Or: []types.Predicate{
+									{},
+									{},
+								},
+								And: []types.Predicate{
+									{},
+									{},
+								},
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								OperandType: ptr.String("__OperandType__"),
+							},
+							{
+								Or: []types.Predicate{
+									{},
+									{},
+								},
+								And: []types.Predicate{
+									{},
+									{},
+								},
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								OperandType: ptr.String("__OperandType__"),
+							},
+						},
+						UserAttribute: ptr.String("__UserAttribute__"),
+						Bucket:        ptr.String("__Bucket__"),
+						Key:           ptr.String("__Key__"),
+						DefaultValue:  ptr.String("__DefaultValue__"),
+						SlotName:      ptr.String("__SlotName__"),
+					},
+					DefaultValue: ptr.String("__DefaultValue__"),
+				},
+			},
+			CollectionProperties: map[string]types.ComponentDataConfiguration{
+				"key0": {
+					Model: ptr.String("__Model__"),
+					Sort: []types.SortProperty{
+						{
+							Field:     ptr.String("__Field__"),
+							Direction: types.SortDirection("ASC"),
+						},
+						{
+							Field:     ptr.String("__Field__"),
+							Direction: types.SortDirection("ASC"),
+						},
+					},
+					Predicate: &types.Predicate{
+						Or: []types.Predicate{
+							{},
+							{},
+						},
+						And: []types.Predicate{
+							{},
+							{},
+						},
+						Field:       ptr.String("__Field__"),
+						Operator:    ptr.String("__Operator__"),
+						Operand:     ptr.String("__Operand__"),
+						OperandType: ptr.String("__OperandType__"),
+					},
+					Identifiers: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+			Events: map[string]types.ComponentEvent{
+				"key0": {
+					Action: ptr.String("__Action__"),
+					Parameters: &types.ActionParameters{
+						Type: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Url: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Anchor: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Target: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Global: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Model: ptr.String("__Model__"),
+						Id: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Fields: map[string]types.ComponentProperty{
+							"key0": {
+								Value: ptr.String("__Value__"),
+								BindingProperties: &types.ComponentPropertyBindingProperties{
+									Property: ptr.String("__Property__"),
+									Field:    ptr.String("__Field__"),
+								},
+								CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+									Property: ptr.String("__Property__"),
+									Field:    ptr.String("__Field__"),
+								},
+								DefaultValue: ptr.String("__DefaultValue__"),
+								Model:        ptr.String("__Model__"),
+								Bindings: map[string]types.FormBindingElement{
+									"key0": {
+										Element:  ptr.String("__Element__"),
+										Property: ptr.String("__Property__"),
+									},
+								},
+								Event:         ptr.String("__Event__"),
+								UserAttribute: ptr.String("__UserAttribute__"),
+								Concat: []types.ComponentProperty{
+									{},
+									{},
+								},
+								Condition: &types.ComponentConditionProperty{
+									Property:    ptr.String("__Property__"),
+									Field:       ptr.String("__Field__"),
+									Operator:    ptr.String("__Operator__"),
+									Operand:     ptr.String("__Operand__"),
+									Then:        nil,
+									Else:        nil,
+									OperandType: ptr.String("__OperandType__"),
+								},
+								Configured:    ptr.Bool(true),
+								Type:          ptr.String("__Type__"),
+								ImportedValue: ptr.String("__ImportedValue__"),
+								ComponentName: ptr.String("__ComponentName__"),
+								Property:      ptr.String("__Property__"),
+							},
+						},
+						State: &types.MutationActionSetStateParameter{
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+							Set: &types.ComponentProperty{
+								Value: ptr.String("__Value__"),
+								BindingProperties: &types.ComponentPropertyBindingProperties{
+									Property: ptr.String("__Property__"),
+									Field:    ptr.String("__Field__"),
+								},
+								CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+									Property: ptr.String("__Property__"),
+									Field:    ptr.String("__Field__"),
+								},
+								DefaultValue: ptr.String("__DefaultValue__"),
+								Model:        ptr.String("__Model__"),
+								Bindings: map[string]types.FormBindingElement{
+									"key0": {
+										Element:  ptr.String("__Element__"),
+										Property: ptr.String("__Property__"),
+									},
+								},
+								Event:         ptr.String("__Event__"),
+								UserAttribute: ptr.String("__UserAttribute__"),
+								Concat: []types.ComponentProperty{
+									{},
+									{},
+								},
+								Condition: &types.ComponentConditionProperty{
+									Property:    ptr.String("__Property__"),
+									Field:       ptr.String("__Field__"),
+									Operator:    ptr.String("__Operator__"),
+									Operand:     ptr.String("__Operand__"),
+									Then:        nil,
+									Else:        nil,
+									OperandType: ptr.String("__OperandType__"),
+								},
+								Configured:    ptr.Bool(true),
+								Type:          ptr.String("__Type__"),
+								ImportedValue: ptr.String("__ImportedValue__"),
+								ComponentName: ptr.String("__ComponentName__"),
+								Property:      ptr.String("__Property__"),
+							},
+						},
+					},
+					BindingEvent: ptr.String("__BindingEvent__"),
+				},
+			},
+			SchemaVersion: ptr.String("__SchemaVersion__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8469,7 +12878,1249 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateComponent(context.Background(), &CreateComponentInput{})
+	_, opErr := svc.CreateComponent(context.Background(), &CreateComponentInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		ComponentToCreate: &types.CreateComponentData{
+			Name:          ptr.String("__Name__"),
+			SourceId:      ptr.String("__SourceId__"),
+			ComponentType: ptr.String("__ComponentType__"),
+			Properties: map[string]types.ComponentProperty{
+				"key0": {
+					Value: ptr.String("__Value__"),
+					BindingProperties: &types.ComponentPropertyBindingProperties{
+						Property: ptr.String("__Property__"),
+						Field:    ptr.String("__Field__"),
+					},
+					CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+						Property: ptr.String("__Property__"),
+						Field:    ptr.String("__Field__"),
+					},
+					DefaultValue: ptr.String("__DefaultValue__"),
+					Model:        ptr.String("__Model__"),
+					Bindings: map[string]types.FormBindingElement{
+						"key0": {
+							Element:  ptr.String("__Element__"),
+							Property: ptr.String("__Property__"),
+						},
+					},
+					Event:         ptr.String("__Event__"),
+					UserAttribute: ptr.String("__UserAttribute__"),
+					Concat: []types.ComponentProperty{
+						{},
+						{},
+					},
+					Condition: &types.ComponentConditionProperty{
+						Property:    ptr.String("__Property__"),
+						Field:       ptr.String("__Field__"),
+						Operator:    ptr.String("__Operator__"),
+						Operand:     ptr.String("__Operand__"),
+						Then:        nil,
+						Else:        nil,
+						OperandType: ptr.String("__OperandType__"),
+					},
+					Configured:    ptr.Bool(true),
+					Type:          ptr.String("__Type__"),
+					ImportedValue: ptr.String("__ImportedValue__"),
+					ComponentName: ptr.String("__ComponentName__"),
+					Property:      ptr.String("__Property__"),
+				},
+			},
+			Children: []types.ComponentChild{
+				{
+					ComponentType: ptr.String("__ComponentType__"),
+					Name:          ptr.String("__Name__"),
+					Properties: map[string]types.ComponentProperty{
+						"key0": {
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+					},
+					Children: []types.ComponentChild{
+						{},
+						{},
+					},
+					Events: map[string]types.ComponentEvent{
+						"key0": {
+							Action: ptr.String("__Action__"),
+							Parameters: &types.ActionParameters{
+								Type: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Url: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Anchor: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Target: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Global: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Model: ptr.String("__Model__"),
+								Id: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Fields: map[string]types.ComponentProperty{
+									"key0": {
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										DefaultValue: ptr.String("__DefaultValue__"),
+										Model:        ptr.String("__Model__"),
+										Bindings: map[string]types.FormBindingElement{
+											"key0": {
+												Element:  ptr.String("__Element__"),
+												Property: ptr.String("__Property__"),
+											},
+										},
+										Event:         ptr.String("__Event__"),
+										UserAttribute: ptr.String("__UserAttribute__"),
+										Concat: []types.ComponentProperty{
+											{},
+											{},
+										},
+										Condition: &types.ComponentConditionProperty{
+											Property:    ptr.String("__Property__"),
+											Field:       ptr.String("__Field__"),
+											Operator:    ptr.String("__Operator__"),
+											Operand:     ptr.String("__Operand__"),
+											Then:        nil,
+											Else:        nil,
+											OperandType: ptr.String("__OperandType__"),
+										},
+										Configured:    ptr.Bool(true),
+										Type:          ptr.String("__Type__"),
+										ImportedValue: ptr.String("__ImportedValue__"),
+										ComponentName: ptr.String("__ComponentName__"),
+										Property:      ptr.String("__Property__"),
+									},
+								},
+								State: &types.MutationActionSetStateParameter{
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+									Set: &types.ComponentProperty{
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										DefaultValue: ptr.String("__DefaultValue__"),
+										Model:        ptr.String("__Model__"),
+										Bindings: map[string]types.FormBindingElement{
+											"key0": {
+												Element:  ptr.String("__Element__"),
+												Property: ptr.String("__Property__"),
+											},
+										},
+										Event:         ptr.String("__Event__"),
+										UserAttribute: ptr.String("__UserAttribute__"),
+										Concat: []types.ComponentProperty{
+											{},
+											{},
+										},
+										Condition: &types.ComponentConditionProperty{
+											Property:    ptr.String("__Property__"),
+											Field:       ptr.String("__Field__"),
+											Operator:    ptr.String("__Operator__"),
+											Operand:     ptr.String("__Operand__"),
+											Then:        nil,
+											Else:        nil,
+											OperandType: ptr.String("__OperandType__"),
+										},
+										Configured:    ptr.Bool(true),
+										Type:          ptr.String("__Type__"),
+										ImportedValue: ptr.String("__ImportedValue__"),
+										ComponentName: ptr.String("__ComponentName__"),
+										Property:      ptr.String("__Property__"),
+									},
+								},
+							},
+							BindingEvent: ptr.String("__BindingEvent__"),
+						},
+					},
+					SourceId: ptr.String("__SourceId__"),
+				},
+				{
+					ComponentType: ptr.String("__ComponentType__"),
+					Name:          ptr.String("__Name__"),
+					Properties: map[string]types.ComponentProperty{
+						"key0": {
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+					},
+					Children: []types.ComponentChild{
+						{},
+						{},
+					},
+					Events: map[string]types.ComponentEvent{
+						"key0": {
+							Action: ptr.String("__Action__"),
+							Parameters: &types.ActionParameters{
+								Type: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Url: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Anchor: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Target: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Global: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Model: ptr.String("__Model__"),
+								Id: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Fields: map[string]types.ComponentProperty{
+									"key0": {
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										DefaultValue: ptr.String("__DefaultValue__"),
+										Model:        ptr.String("__Model__"),
+										Bindings: map[string]types.FormBindingElement{
+											"key0": {
+												Element:  ptr.String("__Element__"),
+												Property: ptr.String("__Property__"),
+											},
+										},
+										Event:         ptr.String("__Event__"),
+										UserAttribute: ptr.String("__UserAttribute__"),
+										Concat: []types.ComponentProperty{
+											{},
+											{},
+										},
+										Condition: &types.ComponentConditionProperty{
+											Property:    ptr.String("__Property__"),
+											Field:       ptr.String("__Field__"),
+											Operator:    ptr.String("__Operator__"),
+											Operand:     ptr.String("__Operand__"),
+											Then:        nil,
+											Else:        nil,
+											OperandType: ptr.String("__OperandType__"),
+										},
+										Configured:    ptr.Bool(true),
+										Type:          ptr.String("__Type__"),
+										ImportedValue: ptr.String("__ImportedValue__"),
+										ComponentName: ptr.String("__ComponentName__"),
+										Property:      ptr.String("__Property__"),
+									},
+								},
+								State: &types.MutationActionSetStateParameter{
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+									Set: &types.ComponentProperty{
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										DefaultValue: ptr.String("__DefaultValue__"),
+										Model:        ptr.String("__Model__"),
+										Bindings: map[string]types.FormBindingElement{
+											"key0": {
+												Element:  ptr.String("__Element__"),
+												Property: ptr.String("__Property__"),
+											},
+										},
+										Event:         ptr.String("__Event__"),
+										UserAttribute: ptr.String("__UserAttribute__"),
+										Concat: []types.ComponentProperty{
+											{},
+											{},
+										},
+										Condition: &types.ComponentConditionProperty{
+											Property:    ptr.String("__Property__"),
+											Field:       ptr.String("__Field__"),
+											Operator:    ptr.String("__Operator__"),
+											Operand:     ptr.String("__Operand__"),
+											Then:        nil,
+											Else:        nil,
+											OperandType: ptr.String("__OperandType__"),
+										},
+										Configured:    ptr.Bool(true),
+										Type:          ptr.String("__Type__"),
+										ImportedValue: ptr.String("__ImportedValue__"),
+										ComponentName: ptr.String("__ComponentName__"),
+										Property:      ptr.String("__Property__"),
+									},
+								},
+							},
+							BindingEvent: ptr.String("__BindingEvent__"),
+						},
+					},
+					SourceId: ptr.String("__SourceId__"),
+				},
+			},
+			Variants: []types.ComponentVariant{
+				{
+					VariantValues: map[string]string{
+						"key0": "__Value__",
+					},
+					Overrides: map[string]map[string]string{
+						"key0": {
+							"key0": "__Value__",
+						},
+					},
+				},
+				{
+					VariantValues: map[string]string{
+						"key0": "__Value__",
+					},
+					Overrides: map[string]map[string]string{
+						"key0": {
+							"key0": "__Value__",
+						},
+					},
+				},
+			},
+			Overrides: map[string]map[string]string{
+				"key0": {
+					"key0": "__Value__",
+				},
+			},
+			BindingProperties: map[string]types.ComponentBindingPropertiesValue{
+				"key0": {
+					Type: ptr.String("__Type__"),
+					BindingProperties: &types.ComponentBindingPropertiesValueProperties{
+						Model: ptr.String("__Model__"),
+						Field: ptr.String("__Field__"),
+						Predicates: []types.Predicate{
+							{
+								Or: []types.Predicate{
+									{},
+									{},
+								},
+								And: []types.Predicate{
+									{},
+									{},
+								},
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								OperandType: ptr.String("__OperandType__"),
+							},
+							{
+								Or: []types.Predicate{
+									{},
+									{},
+								},
+								And: []types.Predicate{
+									{},
+									{},
+								},
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								OperandType: ptr.String("__OperandType__"),
+							},
+						},
+						UserAttribute: ptr.String("__UserAttribute__"),
+						Bucket:        ptr.String("__Bucket__"),
+						Key:           ptr.String("__Key__"),
+						DefaultValue:  ptr.String("__DefaultValue__"),
+						SlotName:      ptr.String("__SlotName__"),
+					},
+					DefaultValue: ptr.String("__DefaultValue__"),
+				},
+			},
+			CollectionProperties: map[string]types.ComponentDataConfiguration{
+				"key0": {
+					Model: ptr.String("__Model__"),
+					Sort: []types.SortProperty{
+						{
+							Field:     ptr.String("__Field__"),
+							Direction: types.SortDirection("ASC"),
+						},
+						{
+							Field:     ptr.String("__Field__"),
+							Direction: types.SortDirection("ASC"),
+						},
+					},
+					Predicate: &types.Predicate{
+						Or: []types.Predicate{
+							{},
+							{},
+						},
+						And: []types.Predicate{
+							{},
+							{},
+						},
+						Field:       ptr.String("__Field__"),
+						Operator:    ptr.String("__Operator__"),
+						Operand:     ptr.String("__Operand__"),
+						OperandType: ptr.String("__OperandType__"),
+					},
+					Identifiers: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+			Events: map[string]types.ComponentEvent{
+				"key0": {
+					Action: ptr.String("__Action__"),
+					Parameters: &types.ActionParameters{
+						Type: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Url: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Anchor: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Target: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Global: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Model: ptr.String("__Model__"),
+						Id: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Fields: map[string]types.ComponentProperty{
+							"key0": {
+								Value: ptr.String("__Value__"),
+								BindingProperties: &types.ComponentPropertyBindingProperties{
+									Property: ptr.String("__Property__"),
+									Field:    ptr.String("__Field__"),
+								},
+								CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+									Property: ptr.String("__Property__"),
+									Field:    ptr.String("__Field__"),
+								},
+								DefaultValue: ptr.String("__DefaultValue__"),
+								Model:        ptr.String("__Model__"),
+								Bindings: map[string]types.FormBindingElement{
+									"key0": {
+										Element:  ptr.String("__Element__"),
+										Property: ptr.String("__Property__"),
+									},
+								},
+								Event:         ptr.String("__Event__"),
+								UserAttribute: ptr.String("__UserAttribute__"),
+								Concat: []types.ComponentProperty{
+									{},
+									{},
+								},
+								Condition: &types.ComponentConditionProperty{
+									Property:    ptr.String("__Property__"),
+									Field:       ptr.String("__Field__"),
+									Operator:    ptr.String("__Operator__"),
+									Operand:     ptr.String("__Operand__"),
+									Then:        nil,
+									Else:        nil,
+									OperandType: ptr.String("__OperandType__"),
+								},
+								Configured:    ptr.Bool(true),
+								Type:          ptr.String("__Type__"),
+								ImportedValue: ptr.String("__ImportedValue__"),
+								ComponentName: ptr.String("__ComponentName__"),
+								Property:      ptr.String("__Property__"),
+							},
+						},
+						State: &types.MutationActionSetStateParameter{
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+							Set: &types.ComponentProperty{
+								Value: ptr.String("__Value__"),
+								BindingProperties: &types.ComponentPropertyBindingProperties{
+									Property: ptr.String("__Property__"),
+									Field:    ptr.String("__Field__"),
+								},
+								CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+									Property: ptr.String("__Property__"),
+									Field:    ptr.String("__Field__"),
+								},
+								DefaultValue: ptr.String("__DefaultValue__"),
+								Model:        ptr.String("__Model__"),
+								Bindings: map[string]types.FormBindingElement{
+									"key0": {
+										Element:  ptr.String("__Element__"),
+										Property: ptr.String("__Property__"),
+									},
+								},
+								Event:         ptr.String("__Event__"),
+								UserAttribute: ptr.String("__UserAttribute__"),
+								Concat: []types.ComponentProperty{
+									{},
+									{},
+								},
+								Condition: &types.ComponentConditionProperty{
+									Property:    ptr.String("__Property__"),
+									Field:       ptr.String("__Field__"),
+									Operator:    ptr.String("__Operator__"),
+									Operand:     ptr.String("__Operand__"),
+									Then:        nil,
+									Else:        nil,
+									OperandType: ptr.String("__OperandType__"),
+								},
+								Configured:    ptr.Bool(true),
+								Type:          ptr.String("__Type__"),
+								ImportedValue: ptr.String("__ImportedValue__"),
+								ComponentName: ptr.String("__ComponentName__"),
+								Property:      ptr.String("__Property__"),
+							},
+						},
+					},
+					BindingEvent: ptr.String("__BindingEvent__"),
+				},
+			},
+			SchemaVersion: ptr.String("__SchemaVersion__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8494,7 +14145,1249 @@ func TestCheckResponseSnapshot_Error_ResourceConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateComponent(context.Background(), &CreateComponentInput{})
+	_, opErr := svc.CreateComponent(context.Background(), &CreateComponentInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		ComponentToCreate: &types.CreateComponentData{
+			Name:          ptr.String("__Name__"),
+			SourceId:      ptr.String("__SourceId__"),
+			ComponentType: ptr.String("__ComponentType__"),
+			Properties: map[string]types.ComponentProperty{
+				"key0": {
+					Value: ptr.String("__Value__"),
+					BindingProperties: &types.ComponentPropertyBindingProperties{
+						Property: ptr.String("__Property__"),
+						Field:    ptr.String("__Field__"),
+					},
+					CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+						Property: ptr.String("__Property__"),
+						Field:    ptr.String("__Field__"),
+					},
+					DefaultValue: ptr.String("__DefaultValue__"),
+					Model:        ptr.String("__Model__"),
+					Bindings: map[string]types.FormBindingElement{
+						"key0": {
+							Element:  ptr.String("__Element__"),
+							Property: ptr.String("__Property__"),
+						},
+					},
+					Event:         ptr.String("__Event__"),
+					UserAttribute: ptr.String("__UserAttribute__"),
+					Concat: []types.ComponentProperty{
+						{},
+						{},
+					},
+					Condition: &types.ComponentConditionProperty{
+						Property:    ptr.String("__Property__"),
+						Field:       ptr.String("__Field__"),
+						Operator:    ptr.String("__Operator__"),
+						Operand:     ptr.String("__Operand__"),
+						Then:        nil,
+						Else:        nil,
+						OperandType: ptr.String("__OperandType__"),
+					},
+					Configured:    ptr.Bool(true),
+					Type:          ptr.String("__Type__"),
+					ImportedValue: ptr.String("__ImportedValue__"),
+					ComponentName: ptr.String("__ComponentName__"),
+					Property:      ptr.String("__Property__"),
+				},
+			},
+			Children: []types.ComponentChild{
+				{
+					ComponentType: ptr.String("__ComponentType__"),
+					Name:          ptr.String("__Name__"),
+					Properties: map[string]types.ComponentProperty{
+						"key0": {
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+					},
+					Children: []types.ComponentChild{
+						{},
+						{},
+					},
+					Events: map[string]types.ComponentEvent{
+						"key0": {
+							Action: ptr.String("__Action__"),
+							Parameters: &types.ActionParameters{
+								Type: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Url: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Anchor: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Target: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Global: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Model: ptr.String("__Model__"),
+								Id: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Fields: map[string]types.ComponentProperty{
+									"key0": {
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										DefaultValue: ptr.String("__DefaultValue__"),
+										Model:        ptr.String("__Model__"),
+										Bindings: map[string]types.FormBindingElement{
+											"key0": {
+												Element:  ptr.String("__Element__"),
+												Property: ptr.String("__Property__"),
+											},
+										},
+										Event:         ptr.String("__Event__"),
+										UserAttribute: ptr.String("__UserAttribute__"),
+										Concat: []types.ComponentProperty{
+											{},
+											{},
+										},
+										Condition: &types.ComponentConditionProperty{
+											Property:    ptr.String("__Property__"),
+											Field:       ptr.String("__Field__"),
+											Operator:    ptr.String("__Operator__"),
+											Operand:     ptr.String("__Operand__"),
+											Then:        nil,
+											Else:        nil,
+											OperandType: ptr.String("__OperandType__"),
+										},
+										Configured:    ptr.Bool(true),
+										Type:          ptr.String("__Type__"),
+										ImportedValue: ptr.String("__ImportedValue__"),
+										ComponentName: ptr.String("__ComponentName__"),
+										Property:      ptr.String("__Property__"),
+									},
+								},
+								State: &types.MutationActionSetStateParameter{
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+									Set: &types.ComponentProperty{
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										DefaultValue: ptr.String("__DefaultValue__"),
+										Model:        ptr.String("__Model__"),
+										Bindings: map[string]types.FormBindingElement{
+											"key0": {
+												Element:  ptr.String("__Element__"),
+												Property: ptr.String("__Property__"),
+											},
+										},
+										Event:         ptr.String("__Event__"),
+										UserAttribute: ptr.String("__UserAttribute__"),
+										Concat: []types.ComponentProperty{
+											{},
+											{},
+										},
+										Condition: &types.ComponentConditionProperty{
+											Property:    ptr.String("__Property__"),
+											Field:       ptr.String("__Field__"),
+											Operator:    ptr.String("__Operator__"),
+											Operand:     ptr.String("__Operand__"),
+											Then:        nil,
+											Else:        nil,
+											OperandType: ptr.String("__OperandType__"),
+										},
+										Configured:    ptr.Bool(true),
+										Type:          ptr.String("__Type__"),
+										ImportedValue: ptr.String("__ImportedValue__"),
+										ComponentName: ptr.String("__ComponentName__"),
+										Property:      ptr.String("__Property__"),
+									},
+								},
+							},
+							BindingEvent: ptr.String("__BindingEvent__"),
+						},
+					},
+					SourceId: ptr.String("__SourceId__"),
+				},
+				{
+					ComponentType: ptr.String("__ComponentType__"),
+					Name:          ptr.String("__Name__"),
+					Properties: map[string]types.ComponentProperty{
+						"key0": {
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+					},
+					Children: []types.ComponentChild{
+						{},
+						{},
+					},
+					Events: map[string]types.ComponentEvent{
+						"key0": {
+							Action: ptr.String("__Action__"),
+							Parameters: &types.ActionParameters{
+								Type: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Url: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Anchor: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Target: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Global: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Model: ptr.String("__Model__"),
+								Id: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Fields: map[string]types.ComponentProperty{
+									"key0": {
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										DefaultValue: ptr.String("__DefaultValue__"),
+										Model:        ptr.String("__Model__"),
+										Bindings: map[string]types.FormBindingElement{
+											"key0": {
+												Element:  ptr.String("__Element__"),
+												Property: ptr.String("__Property__"),
+											},
+										},
+										Event:         ptr.String("__Event__"),
+										UserAttribute: ptr.String("__UserAttribute__"),
+										Concat: []types.ComponentProperty{
+											{},
+											{},
+										},
+										Condition: &types.ComponentConditionProperty{
+											Property:    ptr.String("__Property__"),
+											Field:       ptr.String("__Field__"),
+											Operator:    ptr.String("__Operator__"),
+											Operand:     ptr.String("__Operand__"),
+											Then:        nil,
+											Else:        nil,
+											OperandType: ptr.String("__OperandType__"),
+										},
+										Configured:    ptr.Bool(true),
+										Type:          ptr.String("__Type__"),
+										ImportedValue: ptr.String("__ImportedValue__"),
+										ComponentName: ptr.String("__ComponentName__"),
+										Property:      ptr.String("__Property__"),
+									},
+								},
+								State: &types.MutationActionSetStateParameter{
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+									Set: &types.ComponentProperty{
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										DefaultValue: ptr.String("__DefaultValue__"),
+										Model:        ptr.String("__Model__"),
+										Bindings: map[string]types.FormBindingElement{
+											"key0": {
+												Element:  ptr.String("__Element__"),
+												Property: ptr.String("__Property__"),
+											},
+										},
+										Event:         ptr.String("__Event__"),
+										UserAttribute: ptr.String("__UserAttribute__"),
+										Concat: []types.ComponentProperty{
+											{},
+											{},
+										},
+										Condition: &types.ComponentConditionProperty{
+											Property:    ptr.String("__Property__"),
+											Field:       ptr.String("__Field__"),
+											Operator:    ptr.String("__Operator__"),
+											Operand:     ptr.String("__Operand__"),
+											Then:        nil,
+											Else:        nil,
+											OperandType: ptr.String("__OperandType__"),
+										},
+										Configured:    ptr.Bool(true),
+										Type:          ptr.String("__Type__"),
+										ImportedValue: ptr.String("__ImportedValue__"),
+										ComponentName: ptr.String("__ComponentName__"),
+										Property:      ptr.String("__Property__"),
+									},
+								},
+							},
+							BindingEvent: ptr.String("__BindingEvent__"),
+						},
+					},
+					SourceId: ptr.String("__SourceId__"),
+				},
+			},
+			Variants: []types.ComponentVariant{
+				{
+					VariantValues: map[string]string{
+						"key0": "__Value__",
+					},
+					Overrides: map[string]map[string]string{
+						"key0": {
+							"key0": "__Value__",
+						},
+					},
+				},
+				{
+					VariantValues: map[string]string{
+						"key0": "__Value__",
+					},
+					Overrides: map[string]map[string]string{
+						"key0": {
+							"key0": "__Value__",
+						},
+					},
+				},
+			},
+			Overrides: map[string]map[string]string{
+				"key0": {
+					"key0": "__Value__",
+				},
+			},
+			BindingProperties: map[string]types.ComponentBindingPropertiesValue{
+				"key0": {
+					Type: ptr.String("__Type__"),
+					BindingProperties: &types.ComponentBindingPropertiesValueProperties{
+						Model: ptr.String("__Model__"),
+						Field: ptr.String("__Field__"),
+						Predicates: []types.Predicate{
+							{
+								Or: []types.Predicate{
+									{},
+									{},
+								},
+								And: []types.Predicate{
+									{},
+									{},
+								},
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								OperandType: ptr.String("__OperandType__"),
+							},
+							{
+								Or: []types.Predicate{
+									{},
+									{},
+								},
+								And: []types.Predicate{
+									{},
+									{},
+								},
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								OperandType: ptr.String("__OperandType__"),
+							},
+						},
+						UserAttribute: ptr.String("__UserAttribute__"),
+						Bucket:        ptr.String("__Bucket__"),
+						Key:           ptr.String("__Key__"),
+						DefaultValue:  ptr.String("__DefaultValue__"),
+						SlotName:      ptr.String("__SlotName__"),
+					},
+					DefaultValue: ptr.String("__DefaultValue__"),
+				},
+			},
+			CollectionProperties: map[string]types.ComponentDataConfiguration{
+				"key0": {
+					Model: ptr.String("__Model__"),
+					Sort: []types.SortProperty{
+						{
+							Field:     ptr.String("__Field__"),
+							Direction: types.SortDirection("ASC"),
+						},
+						{
+							Field:     ptr.String("__Field__"),
+							Direction: types.SortDirection("ASC"),
+						},
+					},
+					Predicate: &types.Predicate{
+						Or: []types.Predicate{
+							{},
+							{},
+						},
+						And: []types.Predicate{
+							{},
+							{},
+						},
+						Field:       ptr.String("__Field__"),
+						Operator:    ptr.String("__Operator__"),
+						Operand:     ptr.String("__Operand__"),
+						OperandType: ptr.String("__OperandType__"),
+					},
+					Identifiers: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+			Events: map[string]types.ComponentEvent{
+				"key0": {
+					Action: ptr.String("__Action__"),
+					Parameters: &types.ActionParameters{
+						Type: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Url: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Anchor: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Target: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Global: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Model: ptr.String("__Model__"),
+						Id: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Fields: map[string]types.ComponentProperty{
+							"key0": {
+								Value: ptr.String("__Value__"),
+								BindingProperties: &types.ComponentPropertyBindingProperties{
+									Property: ptr.String("__Property__"),
+									Field:    ptr.String("__Field__"),
+								},
+								CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+									Property: ptr.String("__Property__"),
+									Field:    ptr.String("__Field__"),
+								},
+								DefaultValue: ptr.String("__DefaultValue__"),
+								Model:        ptr.String("__Model__"),
+								Bindings: map[string]types.FormBindingElement{
+									"key0": {
+										Element:  ptr.String("__Element__"),
+										Property: ptr.String("__Property__"),
+									},
+								},
+								Event:         ptr.String("__Event__"),
+								UserAttribute: ptr.String("__UserAttribute__"),
+								Concat: []types.ComponentProperty{
+									{},
+									{},
+								},
+								Condition: &types.ComponentConditionProperty{
+									Property:    ptr.String("__Property__"),
+									Field:       ptr.String("__Field__"),
+									Operator:    ptr.String("__Operator__"),
+									Operand:     ptr.String("__Operand__"),
+									Then:        nil,
+									Else:        nil,
+									OperandType: ptr.String("__OperandType__"),
+								},
+								Configured:    ptr.Bool(true),
+								Type:          ptr.String("__Type__"),
+								ImportedValue: ptr.String("__ImportedValue__"),
+								ComponentName: ptr.String("__ComponentName__"),
+								Property:      ptr.String("__Property__"),
+							},
+						},
+						State: &types.MutationActionSetStateParameter{
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+							Set: &types.ComponentProperty{
+								Value: ptr.String("__Value__"),
+								BindingProperties: &types.ComponentPropertyBindingProperties{
+									Property: ptr.String("__Property__"),
+									Field:    ptr.String("__Field__"),
+								},
+								CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+									Property: ptr.String("__Property__"),
+									Field:    ptr.String("__Field__"),
+								},
+								DefaultValue: ptr.String("__DefaultValue__"),
+								Model:        ptr.String("__Model__"),
+								Bindings: map[string]types.FormBindingElement{
+									"key0": {
+										Element:  ptr.String("__Element__"),
+										Property: ptr.String("__Property__"),
+									},
+								},
+								Event:         ptr.String("__Event__"),
+								UserAttribute: ptr.String("__UserAttribute__"),
+								Concat: []types.ComponentProperty{
+									{},
+									{},
+								},
+								Condition: &types.ComponentConditionProperty{
+									Property:    ptr.String("__Property__"),
+									Field:       ptr.String("__Field__"),
+									Operator:    ptr.String("__Operator__"),
+									Operand:     ptr.String("__Operand__"),
+									Then:        nil,
+									Else:        nil,
+									OperandType: ptr.String("__OperandType__"),
+								},
+								Configured:    ptr.Bool(true),
+								Type:          ptr.String("__Type__"),
+								ImportedValue: ptr.String("__ImportedValue__"),
+								ComponentName: ptr.String("__ComponentName__"),
+								Property:      ptr.String("__Property__"),
+							},
+						},
+					},
+					BindingEvent: ptr.String("__BindingEvent__"),
+				},
+			},
+			SchemaVersion: ptr.String("__SchemaVersion__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8519,7 +15412,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteComponent(context.Background(), &DeleteComponentInput{})
+	_, opErr := svc.DeleteComponent(context.Background(), &DeleteComponentInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		Id:              ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8544,7 +15441,1249 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateComponent(context.Background(), &CreateComponentInput{})
+	_, opErr := svc.CreateComponent(context.Background(), &CreateComponentInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		ComponentToCreate: &types.CreateComponentData{
+			Name:          ptr.String("__Name__"),
+			SourceId:      ptr.String("__SourceId__"),
+			ComponentType: ptr.String("__ComponentType__"),
+			Properties: map[string]types.ComponentProperty{
+				"key0": {
+					Value: ptr.String("__Value__"),
+					BindingProperties: &types.ComponentPropertyBindingProperties{
+						Property: ptr.String("__Property__"),
+						Field:    ptr.String("__Field__"),
+					},
+					CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+						Property: ptr.String("__Property__"),
+						Field:    ptr.String("__Field__"),
+					},
+					DefaultValue: ptr.String("__DefaultValue__"),
+					Model:        ptr.String("__Model__"),
+					Bindings: map[string]types.FormBindingElement{
+						"key0": {
+							Element:  ptr.String("__Element__"),
+							Property: ptr.String("__Property__"),
+						},
+					},
+					Event:         ptr.String("__Event__"),
+					UserAttribute: ptr.String("__UserAttribute__"),
+					Concat: []types.ComponentProperty{
+						{},
+						{},
+					},
+					Condition: &types.ComponentConditionProperty{
+						Property:    ptr.String("__Property__"),
+						Field:       ptr.String("__Field__"),
+						Operator:    ptr.String("__Operator__"),
+						Operand:     ptr.String("__Operand__"),
+						Then:        nil,
+						Else:        nil,
+						OperandType: ptr.String("__OperandType__"),
+					},
+					Configured:    ptr.Bool(true),
+					Type:          ptr.String("__Type__"),
+					ImportedValue: ptr.String("__ImportedValue__"),
+					ComponentName: ptr.String("__ComponentName__"),
+					Property:      ptr.String("__Property__"),
+				},
+			},
+			Children: []types.ComponentChild{
+				{
+					ComponentType: ptr.String("__ComponentType__"),
+					Name:          ptr.String("__Name__"),
+					Properties: map[string]types.ComponentProperty{
+						"key0": {
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+					},
+					Children: []types.ComponentChild{
+						{},
+						{},
+					},
+					Events: map[string]types.ComponentEvent{
+						"key0": {
+							Action: ptr.String("__Action__"),
+							Parameters: &types.ActionParameters{
+								Type: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Url: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Anchor: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Target: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Global: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Model: ptr.String("__Model__"),
+								Id: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Fields: map[string]types.ComponentProperty{
+									"key0": {
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										DefaultValue: ptr.String("__DefaultValue__"),
+										Model:        ptr.String("__Model__"),
+										Bindings: map[string]types.FormBindingElement{
+											"key0": {
+												Element:  ptr.String("__Element__"),
+												Property: ptr.String("__Property__"),
+											},
+										},
+										Event:         ptr.String("__Event__"),
+										UserAttribute: ptr.String("__UserAttribute__"),
+										Concat: []types.ComponentProperty{
+											{},
+											{},
+										},
+										Condition: &types.ComponentConditionProperty{
+											Property:    ptr.String("__Property__"),
+											Field:       ptr.String("__Field__"),
+											Operator:    ptr.String("__Operator__"),
+											Operand:     ptr.String("__Operand__"),
+											Then:        nil,
+											Else:        nil,
+											OperandType: ptr.String("__OperandType__"),
+										},
+										Configured:    ptr.Bool(true),
+										Type:          ptr.String("__Type__"),
+										ImportedValue: ptr.String("__ImportedValue__"),
+										ComponentName: ptr.String("__ComponentName__"),
+										Property:      ptr.String("__Property__"),
+									},
+								},
+								State: &types.MutationActionSetStateParameter{
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+									Set: &types.ComponentProperty{
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										DefaultValue: ptr.String("__DefaultValue__"),
+										Model:        ptr.String("__Model__"),
+										Bindings: map[string]types.FormBindingElement{
+											"key0": {
+												Element:  ptr.String("__Element__"),
+												Property: ptr.String("__Property__"),
+											},
+										},
+										Event:         ptr.String("__Event__"),
+										UserAttribute: ptr.String("__UserAttribute__"),
+										Concat: []types.ComponentProperty{
+											{},
+											{},
+										},
+										Condition: &types.ComponentConditionProperty{
+											Property:    ptr.String("__Property__"),
+											Field:       ptr.String("__Field__"),
+											Operator:    ptr.String("__Operator__"),
+											Operand:     ptr.String("__Operand__"),
+											Then:        nil,
+											Else:        nil,
+											OperandType: ptr.String("__OperandType__"),
+										},
+										Configured:    ptr.Bool(true),
+										Type:          ptr.String("__Type__"),
+										ImportedValue: ptr.String("__ImportedValue__"),
+										ComponentName: ptr.String("__ComponentName__"),
+										Property:      ptr.String("__Property__"),
+									},
+								},
+							},
+							BindingEvent: ptr.String("__BindingEvent__"),
+						},
+					},
+					SourceId: ptr.String("__SourceId__"),
+				},
+				{
+					ComponentType: ptr.String("__ComponentType__"),
+					Name:          ptr.String("__Name__"),
+					Properties: map[string]types.ComponentProperty{
+						"key0": {
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+					},
+					Children: []types.ComponentChild{
+						{},
+						{},
+					},
+					Events: map[string]types.ComponentEvent{
+						"key0": {
+							Action: ptr.String("__Action__"),
+							Parameters: &types.ActionParameters{
+								Type: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Url: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Anchor: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Target: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Global: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Model: ptr.String("__Model__"),
+								Id: &types.ComponentProperty{
+									Value: ptr.String("__Value__"),
+									BindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+										Property: ptr.String("__Property__"),
+										Field:    ptr.String("__Field__"),
+									},
+									DefaultValue: ptr.String("__DefaultValue__"),
+									Model:        ptr.String("__Model__"),
+									Bindings: map[string]types.FormBindingElement{
+										"key0": {
+											Element:  ptr.String("__Element__"),
+											Property: ptr.String("__Property__"),
+										},
+									},
+									Event:         ptr.String("__Event__"),
+									UserAttribute: ptr.String("__UserAttribute__"),
+									Concat: []types.ComponentProperty{
+										{},
+										{},
+									},
+									Condition: &types.ComponentConditionProperty{
+										Property:    ptr.String("__Property__"),
+										Field:       ptr.String("__Field__"),
+										Operator:    ptr.String("__Operator__"),
+										Operand:     ptr.String("__Operand__"),
+										Then:        nil,
+										Else:        nil,
+										OperandType: ptr.String("__OperandType__"),
+									},
+									Configured:    ptr.Bool(true),
+									Type:          ptr.String("__Type__"),
+									ImportedValue: ptr.String("__ImportedValue__"),
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+								},
+								Fields: map[string]types.ComponentProperty{
+									"key0": {
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										DefaultValue: ptr.String("__DefaultValue__"),
+										Model:        ptr.String("__Model__"),
+										Bindings: map[string]types.FormBindingElement{
+											"key0": {
+												Element:  ptr.String("__Element__"),
+												Property: ptr.String("__Property__"),
+											},
+										},
+										Event:         ptr.String("__Event__"),
+										UserAttribute: ptr.String("__UserAttribute__"),
+										Concat: []types.ComponentProperty{
+											{},
+											{},
+										},
+										Condition: &types.ComponentConditionProperty{
+											Property:    ptr.String("__Property__"),
+											Field:       ptr.String("__Field__"),
+											Operator:    ptr.String("__Operator__"),
+											Operand:     ptr.String("__Operand__"),
+											Then:        nil,
+											Else:        nil,
+											OperandType: ptr.String("__OperandType__"),
+										},
+										Configured:    ptr.Bool(true),
+										Type:          ptr.String("__Type__"),
+										ImportedValue: ptr.String("__ImportedValue__"),
+										ComponentName: ptr.String("__ComponentName__"),
+										Property:      ptr.String("__Property__"),
+									},
+								},
+								State: &types.MutationActionSetStateParameter{
+									ComponentName: ptr.String("__ComponentName__"),
+									Property:      ptr.String("__Property__"),
+									Set: &types.ComponentProperty{
+										Value: ptr.String("__Value__"),
+										BindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+											Property: ptr.String("__Property__"),
+											Field:    ptr.String("__Field__"),
+										},
+										DefaultValue: ptr.String("__DefaultValue__"),
+										Model:        ptr.String("__Model__"),
+										Bindings: map[string]types.FormBindingElement{
+											"key0": {
+												Element:  ptr.String("__Element__"),
+												Property: ptr.String("__Property__"),
+											},
+										},
+										Event:         ptr.String("__Event__"),
+										UserAttribute: ptr.String("__UserAttribute__"),
+										Concat: []types.ComponentProperty{
+											{},
+											{},
+										},
+										Condition: &types.ComponentConditionProperty{
+											Property:    ptr.String("__Property__"),
+											Field:       ptr.String("__Field__"),
+											Operator:    ptr.String("__Operator__"),
+											Operand:     ptr.String("__Operand__"),
+											Then:        nil,
+											Else:        nil,
+											OperandType: ptr.String("__OperandType__"),
+										},
+										Configured:    ptr.Bool(true),
+										Type:          ptr.String("__Type__"),
+										ImportedValue: ptr.String("__ImportedValue__"),
+										ComponentName: ptr.String("__ComponentName__"),
+										Property:      ptr.String("__Property__"),
+									},
+								},
+							},
+							BindingEvent: ptr.String("__BindingEvent__"),
+						},
+					},
+					SourceId: ptr.String("__SourceId__"),
+				},
+			},
+			Variants: []types.ComponentVariant{
+				{
+					VariantValues: map[string]string{
+						"key0": "__Value__",
+					},
+					Overrides: map[string]map[string]string{
+						"key0": {
+							"key0": "__Value__",
+						},
+					},
+				},
+				{
+					VariantValues: map[string]string{
+						"key0": "__Value__",
+					},
+					Overrides: map[string]map[string]string{
+						"key0": {
+							"key0": "__Value__",
+						},
+					},
+				},
+			},
+			Overrides: map[string]map[string]string{
+				"key0": {
+					"key0": "__Value__",
+				},
+			},
+			BindingProperties: map[string]types.ComponentBindingPropertiesValue{
+				"key0": {
+					Type: ptr.String("__Type__"),
+					BindingProperties: &types.ComponentBindingPropertiesValueProperties{
+						Model: ptr.String("__Model__"),
+						Field: ptr.String("__Field__"),
+						Predicates: []types.Predicate{
+							{
+								Or: []types.Predicate{
+									{},
+									{},
+								},
+								And: []types.Predicate{
+									{},
+									{},
+								},
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								OperandType: ptr.String("__OperandType__"),
+							},
+							{
+								Or: []types.Predicate{
+									{},
+									{},
+								},
+								And: []types.Predicate{
+									{},
+									{},
+								},
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								OperandType: ptr.String("__OperandType__"),
+							},
+						},
+						UserAttribute: ptr.String("__UserAttribute__"),
+						Bucket:        ptr.String("__Bucket__"),
+						Key:           ptr.String("__Key__"),
+						DefaultValue:  ptr.String("__DefaultValue__"),
+						SlotName:      ptr.String("__SlotName__"),
+					},
+					DefaultValue: ptr.String("__DefaultValue__"),
+				},
+			},
+			CollectionProperties: map[string]types.ComponentDataConfiguration{
+				"key0": {
+					Model: ptr.String("__Model__"),
+					Sort: []types.SortProperty{
+						{
+							Field:     ptr.String("__Field__"),
+							Direction: types.SortDirection("ASC"),
+						},
+						{
+							Field:     ptr.String("__Field__"),
+							Direction: types.SortDirection("ASC"),
+						},
+					},
+					Predicate: &types.Predicate{
+						Or: []types.Predicate{
+							{},
+							{},
+						},
+						And: []types.Predicate{
+							{},
+							{},
+						},
+						Field:       ptr.String("__Field__"),
+						Operator:    ptr.String("__Operator__"),
+						Operand:     ptr.String("__Operand__"),
+						OperandType: ptr.String("__OperandType__"),
+					},
+					Identifiers: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+			Events: map[string]types.ComponentEvent{
+				"key0": {
+					Action: ptr.String("__Action__"),
+					Parameters: &types.ActionParameters{
+						Type: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Url: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Anchor: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Target: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Global: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Model: ptr.String("__Model__"),
+						Id: &types.ComponentProperty{
+							Value: ptr.String("__Value__"),
+							BindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+								Property: ptr.String("__Property__"),
+								Field:    ptr.String("__Field__"),
+							},
+							DefaultValue: ptr.String("__DefaultValue__"),
+							Model:        ptr.String("__Model__"),
+							Bindings: map[string]types.FormBindingElement{
+								"key0": {
+									Element:  ptr.String("__Element__"),
+									Property: ptr.String("__Property__"),
+								},
+							},
+							Event:         ptr.String("__Event__"),
+							UserAttribute: ptr.String("__UserAttribute__"),
+							Concat: []types.ComponentProperty{
+								{},
+								{},
+							},
+							Condition: &types.ComponentConditionProperty{
+								Property:    ptr.String("__Property__"),
+								Field:       ptr.String("__Field__"),
+								Operator:    ptr.String("__Operator__"),
+								Operand:     ptr.String("__Operand__"),
+								Then:        nil,
+								Else:        nil,
+								OperandType: ptr.String("__OperandType__"),
+							},
+							Configured:    ptr.Bool(true),
+							Type:          ptr.String("__Type__"),
+							ImportedValue: ptr.String("__ImportedValue__"),
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+						},
+						Fields: map[string]types.ComponentProperty{
+							"key0": {
+								Value: ptr.String("__Value__"),
+								BindingProperties: &types.ComponentPropertyBindingProperties{
+									Property: ptr.String("__Property__"),
+									Field:    ptr.String("__Field__"),
+								},
+								CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+									Property: ptr.String("__Property__"),
+									Field:    ptr.String("__Field__"),
+								},
+								DefaultValue: ptr.String("__DefaultValue__"),
+								Model:        ptr.String("__Model__"),
+								Bindings: map[string]types.FormBindingElement{
+									"key0": {
+										Element:  ptr.String("__Element__"),
+										Property: ptr.String("__Property__"),
+									},
+								},
+								Event:         ptr.String("__Event__"),
+								UserAttribute: ptr.String("__UserAttribute__"),
+								Concat: []types.ComponentProperty{
+									{},
+									{},
+								},
+								Condition: &types.ComponentConditionProperty{
+									Property:    ptr.String("__Property__"),
+									Field:       ptr.String("__Field__"),
+									Operator:    ptr.String("__Operator__"),
+									Operand:     ptr.String("__Operand__"),
+									Then:        nil,
+									Else:        nil,
+									OperandType: ptr.String("__OperandType__"),
+								},
+								Configured:    ptr.Bool(true),
+								Type:          ptr.String("__Type__"),
+								ImportedValue: ptr.String("__ImportedValue__"),
+								ComponentName: ptr.String("__ComponentName__"),
+								Property:      ptr.String("__Property__"),
+							},
+						},
+						State: &types.MutationActionSetStateParameter{
+							ComponentName: ptr.String("__ComponentName__"),
+							Property:      ptr.String("__Property__"),
+							Set: &types.ComponentProperty{
+								Value: ptr.String("__Value__"),
+								BindingProperties: &types.ComponentPropertyBindingProperties{
+									Property: ptr.String("__Property__"),
+									Field:    ptr.String("__Field__"),
+								},
+								CollectionBindingProperties: &types.ComponentPropertyBindingProperties{
+									Property: ptr.String("__Property__"),
+									Field:    ptr.String("__Field__"),
+								},
+								DefaultValue: ptr.String("__DefaultValue__"),
+								Model:        ptr.String("__Model__"),
+								Bindings: map[string]types.FormBindingElement{
+									"key0": {
+										Element:  ptr.String("__Element__"),
+										Property: ptr.String("__Property__"),
+									},
+								},
+								Event:         ptr.String("__Event__"),
+								UserAttribute: ptr.String("__UserAttribute__"),
+								Concat: []types.ComponentProperty{
+									{},
+									{},
+								},
+								Condition: &types.ComponentConditionProperty{
+									Property:    ptr.String("__Property__"),
+									Field:       ptr.String("__Field__"),
+									Operator:    ptr.String("__Operator__"),
+									Operand:     ptr.String("__Operand__"),
+									Then:        nil,
+									Else:        nil,
+									OperandType: ptr.String("__OperandType__"),
+								},
+								Configured:    ptr.Bool(true),
+								Type:          ptr.String("__Type__"),
+								ImportedValue: ptr.String("__ImportedValue__"),
+								ComponentName: ptr.String("__ComponentName__"),
+								Property:      ptr.String("__Property__"),
+							},
+						},
+					},
+					BindingEvent: ptr.String("__BindingEvent__"),
+				},
+			},
+			SchemaVersion: ptr.String("__SchemaVersion__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8569,7 +16708,11 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetCodegenJob(context.Background(), &GetCodegenJobInput{})
+	_, opErr := svc.GetCodegenJob(context.Background(), &GetCodegenJobInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+		Id:              ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -8594,7 +16737,10 @@ func TestCheckResponseSnapshot_Error_UnauthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetMetadata(context.Background(), &GetMetadataInput{})
+	_, opErr := svc.GetMetadata(context.Background(), &GetMetadataInput{
+		AppId:           ptr.String("__AppId__"),
+		EnvironmentName: ptr.String("__EnvironmentName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

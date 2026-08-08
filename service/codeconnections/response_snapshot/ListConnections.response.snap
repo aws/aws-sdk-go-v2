@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: CodeConnections_20231201.ListConnections
+
+{"Connections":[{"ConnectionArn":"__ConnectionArn__","ConnectionName":"__ConnectionName__","ConnectionStatus":"PENDING","HostArn":"__HostArn__","OwnerAccountId":"__OwnerAccountId__","ProviderType":"Bitbucket"},{"ConnectionArn":"__ConnectionArn__","ConnectionName":"__ConnectionName__","ConnectionStatus":"PENDING","HostArn":"__HostArn__","OwnerAccountId":"__OwnerAccountId__","ProviderType":"Bitbucket"}],"NextToken":"__NextToken__"}

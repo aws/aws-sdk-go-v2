@@ -1,0 +1,5 @@
+200
+Content-Type: application/xml
+Etag: __ETag__
+
+<ConnectionGroup xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><AnycastIpListId>__AnycastIpListId__</AnycastIpListId><Arn>__Arn__</Arn><CreatedTime>2000-01-01T00:00:00Z</CreatedTime><Enabled>true</Enabled><Id>__Id__</Id><Ipv6Enabled>true</Ipv6Enabled><IsDefault>true</IsDefault><LastModifiedTime>2000-01-01T00:00:00Z</LastModifiedTime><Name>__Name__</Name><RoutingEndpoint>__RoutingEndpoint__</RoutingEndpoint><Status>__Status__</Status><Tags><Items><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag></Items></Tags></ConnectionGroup>

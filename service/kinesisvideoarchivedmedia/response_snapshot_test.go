@@ -110,6 +110,7 @@ func serdeRespClient(status int, header http.Header, body []byte) *Client {
 func TestCheckResponseSnapshot_GetClip(t *testing.T) {
 	want := &GetClipOutput{
 		ContentType: ptr.String("__ContentType__"),
+		Payload:     io.NopCloser(bytes.NewReader([]byte("__Payload__"))),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetClip.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -119,7 +120,17 @@ func TestCheckResponseSnapshot_GetClip(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetClip(context.Background(), &GetClipInput{})
+	got, err := svc.GetClip(context.Background(), &GetClipInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+		ClipFragmentSelector: &types.ClipFragmentSelector{
+			FragmentSelectorType: types.ClipFragmentSelectorType("PRODUCER_TIMESTAMP"),
+			TimestampRange: &types.ClipTimestampRange{
+				StartTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTimestamp:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -140,7 +151,22 @@ func TestCheckResponseSnapshot_GetDASHStreamingSessionURL(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDASHStreamingSessionURL(context.Background(), &GetDASHStreamingSessionURLInput{})
+	got, err := svc.GetDASHStreamingSessionURL(context.Background(), &GetDASHStreamingSessionURLInput{
+		StreamName:               ptr.String("__StreamName__"),
+		StreamARN:                ptr.String("__StreamARN__"),
+		PlaybackMode:             types.DASHPlaybackMode("LIVE"),
+		DisplayFragmentTimestamp: types.DASHDisplayFragmentTimestamp("ALWAYS"),
+		DisplayFragmentNumber:    types.DASHDisplayFragmentNumber("ALWAYS"),
+		DASHFragmentSelector: &types.DASHFragmentSelector{
+			FragmentSelectorType: types.DASHFragmentSelectorType("PRODUCER_TIMESTAMP"),
+			TimestampRange: &types.DASHTimestampRange{
+				StartTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTimestamp:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		Expires:                    ptr.Int32(1),
+		MaxManifestFragmentResults: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -161,7 +187,23 @@ func TestCheckResponseSnapshot_GetHLSStreamingSessionURL(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetHLSStreamingSessionURL(context.Background(), &GetHLSStreamingSessionURLInput{})
+	got, err := svc.GetHLSStreamingSessionURL(context.Background(), &GetHLSStreamingSessionURLInput{
+		StreamName:   ptr.String("__StreamName__"),
+		StreamARN:    ptr.String("__StreamARN__"),
+		PlaybackMode: types.HLSPlaybackMode("LIVE"),
+		HLSFragmentSelector: &types.HLSFragmentSelector{
+			FragmentSelectorType: types.HLSFragmentSelectorType("PRODUCER_TIMESTAMP"),
+			TimestampRange: &types.HLSTimestampRange{
+				StartTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTimestamp:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		ContainerFormat:                 types.ContainerFormat("FRAGMENTED_MP4"),
+		DiscontinuityMode:               types.HLSDiscontinuityMode("ALWAYS"),
+		DisplayFragmentTimestamp:        types.HLSDisplayFragmentTimestamp("ALWAYS"),
+		Expires:                         ptr.Int32(1),
+		MaxMediaPlaylistFragmentResults: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -194,7 +236,22 @@ func TestCheckResponseSnapshot_GetImages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetImages(context.Background(), &GetImagesInput{})
+	got, err := svc.GetImages(context.Background(), &GetImagesInput{
+		StreamName:        ptr.String("__StreamName__"),
+		StreamARN:         ptr.String("__StreamARN__"),
+		ImageSelectorType: types.ImageSelectorType("PRODUCER_TIMESTAMP"),
+		StartTimestamp:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SamplingInterval:  ptr.Int32(1),
+		Format:            types.Format("JPEG"),
+		FormatConfig: map[string]string{
+			"key0": "__Value__",
+		},
+		WidthPixels:  ptr.Int32(1),
+		HeightPixels: ptr.Int32(1),
+		MaxResults:   ptr.Int64(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -206,6 +263,7 @@ func TestCheckResponseSnapshot_GetImages(t *testing.T) {
 func TestCheckResponseSnapshot_GetMediaForFragmentList(t *testing.T) {
 	want := &GetMediaForFragmentListOutput{
 		ContentType: ptr.String("__ContentType__"),
+		Payload:     io.NopCloser(bytes.NewReader([]byte("__Payload__"))),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetMediaForFragmentList.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -215,7 +273,14 @@ func TestCheckResponseSnapshot_GetMediaForFragmentList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetMediaForFragmentList(context.Background(), &GetMediaForFragmentListInput{})
+	got, err := svc.GetMediaForFragmentList(context.Background(), &GetMediaForFragmentListInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+		Fragments: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -252,7 +317,19 @@ func TestCheckResponseSnapshot_ListFragments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFragments(context.Background(), &ListFragmentsInput{})
+	got, err := svc.ListFragments(context.Background(), &ListFragmentsInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+		MaxResults: ptr.Int64(1),
+		NextToken:  ptr.String("__NextToken__"),
+		FragmentSelector: &types.FragmentSelector{
+			FragmentSelectorType: types.FragmentSelectorType("PRODUCER_TIMESTAMP"),
+			TimestampRange: &types.TimestampRange{
+				StartTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTimestamp:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -273,7 +350,17 @@ func TestCheckResponseSnapshot_Error_ClientLimitExceededException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetClip(context.Background(), &GetClipInput{})
+	_, opErr := svc.GetClip(context.Background(), &GetClipInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+		ClipFragmentSelector: &types.ClipFragmentSelector{
+			FragmentSelectorType: types.ClipFragmentSelectorType("PRODUCER_TIMESTAMP"),
+			TimestampRange: &types.ClipTimestampRange{
+				StartTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTimestamp:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -298,7 +385,17 @@ func TestCheckResponseSnapshot_Error_InvalidArgumentException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetClip(context.Background(), &GetClipInput{})
+	_, opErr := svc.GetClip(context.Background(), &GetClipInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+		ClipFragmentSelector: &types.ClipFragmentSelector{
+			FragmentSelectorType: types.ClipFragmentSelectorType("PRODUCER_TIMESTAMP"),
+			TimestampRange: &types.ClipTimestampRange{
+				StartTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTimestamp:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -323,7 +420,17 @@ func TestCheckResponseSnapshot_Error_InvalidCodecPrivateDataException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetClip(context.Background(), &GetClipInput{})
+	_, opErr := svc.GetClip(context.Background(), &GetClipInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+		ClipFragmentSelector: &types.ClipFragmentSelector{
+			FragmentSelectorType: types.ClipFragmentSelectorType("PRODUCER_TIMESTAMP"),
+			TimestampRange: &types.ClipTimestampRange{
+				StartTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTimestamp:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -348,7 +455,17 @@ func TestCheckResponseSnapshot_Error_InvalidMediaFrameException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetClip(context.Background(), &GetClipInput{})
+	_, opErr := svc.GetClip(context.Background(), &GetClipInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+		ClipFragmentSelector: &types.ClipFragmentSelector{
+			FragmentSelectorType: types.ClipFragmentSelectorType("PRODUCER_TIMESTAMP"),
+			TimestampRange: &types.ClipTimestampRange{
+				StartTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTimestamp:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -373,7 +490,17 @@ func TestCheckResponseSnapshot_Error_MissingCodecPrivateDataException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetClip(context.Background(), &GetClipInput{})
+	_, opErr := svc.GetClip(context.Background(), &GetClipInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+		ClipFragmentSelector: &types.ClipFragmentSelector{
+			FragmentSelectorType: types.ClipFragmentSelectorType("PRODUCER_TIMESTAMP"),
+			TimestampRange: &types.ClipTimestampRange{
+				StartTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTimestamp:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -398,7 +525,17 @@ func TestCheckResponseSnapshot_Error_NoDataRetentionException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetClip(context.Background(), &GetClipInput{})
+	_, opErr := svc.GetClip(context.Background(), &GetClipInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+		ClipFragmentSelector: &types.ClipFragmentSelector{
+			FragmentSelectorType: types.ClipFragmentSelectorType("PRODUCER_TIMESTAMP"),
+			TimestampRange: &types.ClipTimestampRange{
+				StartTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTimestamp:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -423,7 +560,17 @@ func TestCheckResponseSnapshot_Error_NotAuthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetClip(context.Background(), &GetClipInput{})
+	_, opErr := svc.GetClip(context.Background(), &GetClipInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+		ClipFragmentSelector: &types.ClipFragmentSelector{
+			FragmentSelectorType: types.ClipFragmentSelectorType("PRODUCER_TIMESTAMP"),
+			TimestampRange: &types.ClipTimestampRange{
+				StartTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTimestamp:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -448,7 +595,17 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetClip(context.Background(), &GetClipInput{})
+	_, opErr := svc.GetClip(context.Background(), &GetClipInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+		ClipFragmentSelector: &types.ClipFragmentSelector{
+			FragmentSelectorType: types.ClipFragmentSelectorType("PRODUCER_TIMESTAMP"),
+			TimestampRange: &types.ClipTimestampRange{
+				StartTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTimestamp:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -473,7 +630,17 @@ func TestCheckResponseSnapshot_Error_UnsupportedStreamMediaTypeException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetClip(context.Background(), &GetClipInput{})
+	_, opErr := svc.GetClip(context.Background(), &GetClipInput{
+		StreamName: ptr.String("__StreamName__"),
+		StreamARN:  ptr.String("__StreamARN__"),
+		ClipFragmentSelector: &types.ClipFragmentSelector{
+			FragmentSelectorType: types.ClipFragmentSelectorType("PRODUCER_TIMESTAMP"),
+			TimestampRange: &types.ClipTimestampRange{
+				StartTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTimestamp:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

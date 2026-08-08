@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RedshiftData.ListStatements
+
+{"NextToken":"__NextToken__","Statements":[{"CreatedAt":946684800,"Id":"__Id__","IsBatchStatement":true,"QueryParameters":[{"name":"__Name__","value":"__Value__"},{"name":"__Name__","value":"__Value__"}],"QueryString":"__QueryString__","QueryStrings":["__Member__","__Member__"],"ResultFormat":"JSON","SecretArn":"__SecretArn__","SessionId":"__SessionId__","StatementName":"__StatementName__","Status":"SUBMITTED","UpdatedAt":946684800},{"CreatedAt":946684800,"Id":"__Id__","IsBatchStatement":true,"QueryParameters":[{"name":"__Name__","value":"__Value__"},{"name":"__Name__","value":"__Value__"}],"QueryString":"__QueryString__","QueryStrings":["__Member__","__Member__"],"ResultFormat":"JSON","SecretArn":"__SecretArn__","SessionId":"__SessionId__","StatementName":"__StatementName__","Status":"SUBMITTED","UpdatedAt":946684800}]}

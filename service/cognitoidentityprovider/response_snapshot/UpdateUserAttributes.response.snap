@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.UpdateUserAttributes
+
+{"CodeDeliveryDetailsList":[{"AttributeName":"__AttributeName__","DeliveryMedium":"SMS","Destination":"__Destination__"},{"AttributeName":"__AttributeName__","DeliveryMedium":"SMS","Destination":"__Destination__"}]}

@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/document"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -183,7 +184,16 @@ func TestCheckResponseSnapshot_BatchGetCollection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetCollection(context.Background(), &BatchGetCollectionInput{})
+	got, err := svc.BatchGetCollection(context.Background(), &BatchGetCollectionInput{
+		Ids: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -291,7 +301,16 @@ func TestCheckResponseSnapshot_BatchGetCollectionGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetCollectionGroup(context.Background(), &BatchGetCollectionGroupInput{})
+	got, err := svc.BatchGetCollectionGroup(context.Background(), &BatchGetCollectionGroupInput{
+		Ids: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -343,7 +362,18 @@ func TestCheckResponseSnapshot_BatchGetEffectiveLifecyclePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetEffectiveLifecyclePolicy(context.Background(), &BatchGetEffectiveLifecyclePolicyInput{})
+	got, err := svc.BatchGetEffectiveLifecyclePolicy(context.Background(), &BatchGetEffectiveLifecyclePolicyInput{
+		ResourceIdentifiers: []types.LifecyclePolicyResourceIdentifier{
+			{
+				Type:     types.LifecyclePolicyType("retention"),
+				Resource: ptr.String("__Resource__"),
+			},
+			{
+				Type:     types.LifecyclePolicyType("retention"),
+				Resource: ptr.String("__Resource__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -360,7 +390,7 @@ func TestCheckResponseSnapshot_BatchGetLifecyclePolicy(t *testing.T) {
 				Name:             ptr.String("__Name__"),
 				PolicyVersion:    ptr.String("__PolicyVersion__"),
 				Description:      ptr.String("__Description__"),
-				Policy:           nil,
+				Policy:           document.NewLazyDocument("__Document__"),
 				CreatedDate:      ptr.Int64(1),
 				LastModifiedDate: ptr.Int64(1),
 			},
@@ -369,7 +399,7 @@ func TestCheckResponseSnapshot_BatchGetLifecyclePolicy(t *testing.T) {
 				Name:             ptr.String("__Name__"),
 				PolicyVersion:    ptr.String("__PolicyVersion__"),
 				Description:      ptr.String("__Description__"),
-				Policy:           nil,
+				Policy:           document.NewLazyDocument("__Document__"),
 				CreatedDate:      ptr.Int64(1),
 				LastModifiedDate: ptr.Int64(1),
 			},
@@ -397,7 +427,18 @@ func TestCheckResponseSnapshot_BatchGetLifecyclePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetLifecyclePolicy(context.Background(), &BatchGetLifecyclePolicyInput{})
+	got, err := svc.BatchGetLifecyclePolicy(context.Background(), &BatchGetLifecyclePolicyInput{
+		Identifiers: []types.LifecyclePolicyIdentifier{
+			{
+				Type: types.LifecyclePolicyType("retention"),
+				Name: ptr.String("__Name__"),
+			},
+			{
+				Type: types.LifecyclePolicyType("retention"),
+				Name: ptr.String("__Name__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -465,7 +506,12 @@ func TestCheckResponseSnapshot_BatchGetVpcEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetVpcEndpoint(context.Background(), &BatchGetVpcEndpointInput{})
+	got, err := svc.BatchGetVpcEndpoint(context.Background(), &BatchGetVpcEndpointInput{
+		Ids: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -481,7 +527,7 @@ func TestCheckResponseSnapshot_CreateAccessPolicy(t *testing.T) {
 			Name:             ptr.String("__Name__"),
 			PolicyVersion:    ptr.String("__PolicyVersion__"),
 			Description:      ptr.String("__Description__"),
-			Policy:           nil,
+			Policy:           document.NewLazyDocument("__Document__"),
 			CreatedDate:      ptr.Int64(1),
 			LastModifiedDate: ptr.Int64(1),
 		},
@@ -494,7 +540,13 @@ func TestCheckResponseSnapshot_CreateAccessPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAccessPolicy(context.Background(), &CreateAccessPolicyInput{})
+	got, err := svc.CreateAccessPolicy(context.Background(), &CreateAccessPolicyInput{
+		Type:        types.AccessPolicyType("data"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Policy:      ptr.String("__Policy__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -531,7 +583,32 @@ func TestCheckResponseSnapshot_CreateCollection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCollection(context.Background(), &CreateCollectionInput{})
+	got, err := svc.CreateCollection(context.Background(), &CreateCollectionInput{
+		Name:        ptr.String("__Name__"),
+		Type:        types.CollectionType("SEARCH"),
+		Description: ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		StandbyReplicas: types.StandbyReplicas("ENABLED"),
+		VectorOptions: &types.VectorOptions{
+			ServerlessVectorAcceleration: types.ServerlessVectorAccelerationStatus("ENABLED"),
+		},
+		CollectionGroupName: ptr.String("__CollectionGroupName__"),
+		EncryptionConfig: &types.EncryptionConfig{
+			AWSOwnedKey: ptr.Bool(true),
+			KmsKeyArn:   ptr.String("__KmsKeyArn__"),
+		},
+		DeletionProtection: types.DeletionProtection("ENABLED"),
+		ClientToken:        ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -576,7 +653,29 @@ func TestCheckResponseSnapshot_CreateCollectionGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCollectionGroup(context.Background(), &CreateCollectionGroupInput{})
+	got, err := svc.CreateCollectionGroup(context.Background(), &CreateCollectionGroupInput{
+		Name:            ptr.String("__Name__"),
+		StandbyReplicas: types.StandbyReplicas("ENABLED"),
+		Description:     ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		CapacityLimits: &types.CollectionGroupCapacityLimits{
+			MaxIndexingCapacityInOCU: ptr.Float32(1.0),
+			MaxSearchCapacityInOCU:   ptr.Float32(1.0),
+			MinIndexingCapacityInOCU: ptr.Float32(1.0),
+			MinSearchCapacityInOCU:   ptr.Float32(1.0),
+		},
+		Generation:  types.ServerlessGeneration("CLASSIC"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -595,7 +694,11 @@ func TestCheckResponseSnapshot_CreateIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateIndex(context.Background(), &CreateIndexInput{})
+	got, err := svc.CreateIndex(context.Background(), &CreateIndexInput{
+		Id:          ptr.String("__Id__"),
+		IndexName:   ptr.String("__IndexName__"),
+		IndexSchema: document.NewLazyDocument("__Document__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -611,7 +714,7 @@ func TestCheckResponseSnapshot_CreateLifecyclePolicy(t *testing.T) {
 			Name:             ptr.String("__Name__"),
 			PolicyVersion:    ptr.String("__PolicyVersion__"),
 			Description:      ptr.String("__Description__"),
-			Policy:           nil,
+			Policy:           document.NewLazyDocument("__Document__"),
 			CreatedDate:      ptr.Int64(1),
 			LastModifiedDate: ptr.Int64(1),
 		},
@@ -624,7 +727,13 @@ func TestCheckResponseSnapshot_CreateLifecyclePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLifecyclePolicy(context.Background(), &CreateLifecyclePolicyInput{})
+	got, err := svc.CreateLifecyclePolicy(context.Background(), &CreateLifecyclePolicyInput{
+		Type:        types.LifecyclePolicyType("retention"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Policy:      ptr.String("__Policy__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -671,7 +780,28 @@ func TestCheckResponseSnapshot_CreateSecurityConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSecurityConfig(context.Background(), &CreateSecurityConfigInput{})
+	got, err := svc.CreateSecurityConfig(context.Background(), &CreateSecurityConfigInput{
+		Type:        types.SecurityConfigType("saml"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		SamlOptions: &types.SamlConfigOptions{
+			Metadata:                     ptr.String("__Metadata__"),
+			UserAttribute:                ptr.String("__UserAttribute__"),
+			GroupAttribute:               ptr.String("__GroupAttribute__"),
+			OpenSearchServerlessEntityId: ptr.String("__OpenSearchServerlessEntityId__"),
+			SessionTimeout:               ptr.Int32(1),
+		},
+		IamIdentityCenterOptions: &types.CreateIamIdentityCenterConfigOptions{
+			InstanceArn:    ptr.String("__InstanceArn__"),
+			UserAttribute:  types.IamIdentityCenterUserAttribute("UserId"),
+			GroupAttribute: types.IamIdentityCenterGroupAttribute("GroupId"),
+		},
+		IamFederationOptions: &types.IamFederationConfigOptions{
+			GroupAttribute: ptr.String("__GroupAttribute__"),
+			UserAttribute:  ptr.String("__UserAttribute__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -687,7 +817,7 @@ func TestCheckResponseSnapshot_CreateSecurityPolicy(t *testing.T) {
 			Name:             ptr.String("__Name__"),
 			PolicyVersion:    ptr.String("__PolicyVersion__"),
 			Description:      ptr.String("__Description__"),
-			Policy:           nil,
+			Policy:           document.NewLazyDocument("__Document__"),
 			CreatedDate:      ptr.Int64(1),
 			LastModifiedDate: ptr.Int64(1),
 		},
@@ -700,7 +830,13 @@ func TestCheckResponseSnapshot_CreateSecurityPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSecurityPolicy(context.Background(), &CreateSecurityPolicyInput{})
+	got, err := svc.CreateSecurityPolicy(context.Background(), &CreateSecurityPolicyInput{
+		Type:        types.SecurityPolicyType("encryption"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Policy:      ptr.String("__Policy__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -725,7 +861,19 @@ func TestCheckResponseSnapshot_CreateVpcEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVpcEndpoint(context.Background(), &CreateVpcEndpointInput{})
+	got, err := svc.CreateVpcEndpoint(context.Background(), &CreateVpcEndpointInput{
+		Name:  ptr.String("__Name__"),
+		VpcId: ptr.String("__VpcId__"),
+		SubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -744,7 +892,11 @@ func TestCheckResponseSnapshot_DeleteAccessPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAccessPolicy(context.Background(), &DeleteAccessPolicyInput{})
+	got, err := svc.DeleteAccessPolicy(context.Background(), &DeleteAccessPolicyInput{
+		Type:        types.AccessPolicyType("data"),
+		Name:        ptr.String("__Name__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -770,7 +922,10 @@ func TestCheckResponseSnapshot_DeleteCollection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCollection(context.Background(), &DeleteCollectionInput{})
+	got, err := svc.DeleteCollection(context.Background(), &DeleteCollectionInput{
+		Id:          ptr.String("__Id__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -789,7 +944,10 @@ func TestCheckResponseSnapshot_DeleteCollectionGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCollectionGroup(context.Background(), &DeleteCollectionGroupInput{})
+	got, err := svc.DeleteCollectionGroup(context.Background(), &DeleteCollectionGroupInput{
+		Id:          ptr.String("__Id__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -808,7 +966,10 @@ func TestCheckResponseSnapshot_DeleteIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIndex(context.Background(), &DeleteIndexInput{})
+	got, err := svc.DeleteIndex(context.Background(), &DeleteIndexInput{
+		Id:        ptr.String("__Id__"),
+		IndexName: ptr.String("__IndexName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -827,7 +988,11 @@ func TestCheckResponseSnapshot_DeleteLifecyclePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLifecyclePolicy(context.Background(), &DeleteLifecyclePolicyInput{})
+	got, err := svc.DeleteLifecyclePolicy(context.Background(), &DeleteLifecyclePolicyInput{
+		Type:        types.LifecyclePolicyType("retention"),
+		Name:        ptr.String("__Name__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -846,7 +1011,10 @@ func TestCheckResponseSnapshot_DeleteSecurityConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSecurityConfig(context.Background(), &DeleteSecurityConfigInput{})
+	got, err := svc.DeleteSecurityConfig(context.Background(), &DeleteSecurityConfigInput{
+		Id:          ptr.String("__Id__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -865,7 +1033,11 @@ func TestCheckResponseSnapshot_DeleteSecurityPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSecurityPolicy(context.Background(), &DeleteSecurityPolicyInput{})
+	got, err := svc.DeleteSecurityPolicy(context.Background(), &DeleteSecurityPolicyInput{
+		Type:        types.SecurityPolicyType("encryption"),
+		Name:        ptr.String("__Name__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -890,7 +1062,10 @@ func TestCheckResponseSnapshot_DeleteVpcEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVpcEndpoint(context.Background(), &DeleteVpcEndpointInput{})
+	got, err := svc.DeleteVpcEndpoint(context.Background(), &DeleteVpcEndpointInput{
+		Id:          ptr.String("__Id__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -906,7 +1081,7 @@ func TestCheckResponseSnapshot_GetAccessPolicy(t *testing.T) {
 			Name:             ptr.String("__Name__"),
 			PolicyVersion:    ptr.String("__PolicyVersion__"),
 			Description:      ptr.String("__Description__"),
-			Policy:           nil,
+			Policy:           document.NewLazyDocument("__Document__"),
 			CreatedDate:      ptr.Int64(1),
 			LastModifiedDate: ptr.Int64(1),
 		},
@@ -919,7 +1094,10 @@ func TestCheckResponseSnapshot_GetAccessPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAccessPolicy(context.Background(), &GetAccessPolicyInput{})
+	got, err := svc.GetAccessPolicy(context.Background(), &GetAccessPolicyInput{
+		Type: types.AccessPolicyType("data"),
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -956,7 +1134,7 @@ func TestCheckResponseSnapshot_GetAccountSettings(t *testing.T) {
 
 func TestCheckResponseSnapshot_GetIndex(t *testing.T) {
 	want := &GetIndexOutput{
-		IndexSchema: nil,
+		IndexSchema: document.NewLazyDocument("__Document__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetIndex.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -966,7 +1144,10 @@ func TestCheckResponseSnapshot_GetIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIndex(context.Background(), &GetIndexInput{})
+	got, err := svc.GetIndex(context.Background(), &GetIndexInput{
+		Id:        ptr.String("__Id__"),
+		IndexName: ptr.String("__IndexName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1047,7 +1228,9 @@ func TestCheckResponseSnapshot_GetSecurityConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSecurityConfig(context.Background(), &GetSecurityConfigInput{})
+	got, err := svc.GetSecurityConfig(context.Background(), &GetSecurityConfigInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1063,7 +1246,7 @@ func TestCheckResponseSnapshot_GetSecurityPolicy(t *testing.T) {
 			Name:             ptr.String("__Name__"),
 			PolicyVersion:    ptr.String("__PolicyVersion__"),
 			Description:      ptr.String("__Description__"),
-			Policy:           nil,
+			Policy:           document.NewLazyDocument("__Document__"),
 			CreatedDate:      ptr.Int64(1),
 			LastModifiedDate: ptr.Int64(1),
 		},
@@ -1076,7 +1259,10 @@ func TestCheckResponseSnapshot_GetSecurityPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSecurityPolicy(context.Background(), &GetSecurityPolicyInput{})
+	got, err := svc.GetSecurityPolicy(context.Background(), &GetSecurityPolicyInput{
+		Type: types.SecurityPolicyType("encryption"),
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1115,7 +1301,15 @@ func TestCheckResponseSnapshot_ListAccessPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAccessPolicies(context.Background(), &ListAccessPoliciesInput{})
+	got, err := svc.ListAccessPolicies(context.Background(), &ListAccessPoliciesInput{
+		Type: types.AccessPolicyType("data"),
+		Resource: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1166,7 +1360,10 @@ func TestCheckResponseSnapshot_ListCollectionGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCollectionGroups(context.Background(), &ListCollectionGroupsInput{})
+	got, err := svc.ListCollectionGroups(context.Background(), &ListCollectionGroupsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1205,7 +1402,15 @@ func TestCheckResponseSnapshot_ListCollections(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCollections(context.Background(), &ListCollectionsInput{})
+	got, err := svc.ListCollections(context.Background(), &ListCollectionsInput{
+		CollectionFilters: &types.CollectionFilters{
+			Name:                ptr.String("__Name__"),
+			Status:              types.CollectionStatus("CREATING"),
+			CollectionGroupName: ptr.String("__CollectionGroupName__"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1244,7 +1449,15 @@ func TestCheckResponseSnapshot_ListLifecyclePolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLifecyclePolicies(context.Background(), &ListLifecyclePoliciesInput{})
+	got, err := svc.ListLifecyclePolicies(context.Background(), &ListLifecyclePoliciesInput{
+		Type: types.LifecyclePolicyType("retention"),
+		Resources: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1283,7 +1496,11 @@ func TestCheckResponseSnapshot_ListSecurityConfigs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSecurityConfigs(context.Background(), &ListSecurityConfigsInput{})
+	got, err := svc.ListSecurityConfigs(context.Background(), &ListSecurityConfigsInput{
+		Type:       types.SecurityConfigType("saml"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1322,7 +1539,15 @@ func TestCheckResponseSnapshot_ListSecurityPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSecurityPolicies(context.Background(), &ListSecurityPoliciesInput{})
+	got, err := svc.ListSecurityPolicies(context.Background(), &ListSecurityPoliciesInput{
+		Type: types.SecurityPolicyType("encryption"),
+		Resource: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1352,7 +1577,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1385,7 +1612,13 @@ func TestCheckResponseSnapshot_ListVpcEndpoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVpcEndpoints(context.Background(), &ListVpcEndpointsInput{})
+	got, err := svc.ListVpcEndpoints(context.Background(), &ListVpcEndpointsInput{
+		VpcEndpointFilters: &types.VpcEndpointFilters{
+			Status: types.VpcEndpointStatus("PENDING"),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1404,7 +1637,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1423,7 +1668,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1439,7 +1690,7 @@ func TestCheckResponseSnapshot_UpdateAccessPolicy(t *testing.T) {
 			Name:             ptr.String("__Name__"),
 			PolicyVersion:    ptr.String("__PolicyVersion__"),
 			Description:      ptr.String("__Description__"),
-			Policy:           nil,
+			Policy:           document.NewLazyDocument("__Document__"),
 			CreatedDate:      ptr.Int64(1),
 			LastModifiedDate: ptr.Int64(1),
 		},
@@ -1452,7 +1703,14 @@ func TestCheckResponseSnapshot_UpdateAccessPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAccessPolicy(context.Background(), &UpdateAccessPolicyInput{})
+	got, err := svc.UpdateAccessPolicy(context.Background(), &UpdateAccessPolicyInput{
+		Type:          types.AccessPolicyType("data"),
+		Name:          ptr.String("__Name__"),
+		PolicyVersion: ptr.String("__PolicyVersion__"),
+		Description:   ptr.String("__Description__"),
+		Policy:        ptr.String("__Policy__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1478,7 +1736,12 @@ func TestCheckResponseSnapshot_UpdateAccountSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAccountSettings(context.Background(), &UpdateAccountSettingsInput{})
+	got, err := svc.UpdateAccountSettings(context.Background(), &UpdateAccountSettingsInput{
+		CapacityLimits: &types.CapacityLimits{
+			MaxIndexingCapacityInOCU: ptr.Int32(1),
+			MaxSearchCapacityInOCU:   ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1512,7 +1775,15 @@ func TestCheckResponseSnapshot_UpdateCollection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCollection(context.Background(), &UpdateCollectionInput{})
+	got, err := svc.UpdateCollection(context.Background(), &UpdateCollectionInput{
+		Id:          ptr.String("__Id__"),
+		Description: ptr.String("__Description__"),
+		VectorOptions: &types.VectorOptions{
+			ServerlessVectorAcceleration: types.ServerlessVectorAccelerationStatus("ENABLED"),
+		},
+		DeletionProtection: types.DeletionProtection("ENABLED"),
+		ClientToken:        ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1547,7 +1818,17 @@ func TestCheckResponseSnapshot_UpdateCollectionGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCollectionGroup(context.Background(), &UpdateCollectionGroupInput{})
+	got, err := svc.UpdateCollectionGroup(context.Background(), &UpdateCollectionGroupInput{
+		Id:          ptr.String("__Id__"),
+		Description: ptr.String("__Description__"),
+		CapacityLimits: &types.CollectionGroupCapacityLimits{
+			MaxIndexingCapacityInOCU: ptr.Float32(1.0),
+			MaxSearchCapacityInOCU:   ptr.Float32(1.0),
+			MinIndexingCapacityInOCU: ptr.Float32(1.0),
+			MinSearchCapacityInOCU:   ptr.Float32(1.0),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1566,7 +1847,11 @@ func TestCheckResponseSnapshot_UpdateIndex(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateIndex(context.Background(), &UpdateIndexInput{})
+	got, err := svc.UpdateIndex(context.Background(), &UpdateIndexInput{
+		Id:          ptr.String("__Id__"),
+		IndexName:   ptr.String("__IndexName__"),
+		IndexSchema: document.NewLazyDocument("__Document__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1582,7 +1867,7 @@ func TestCheckResponseSnapshot_UpdateLifecyclePolicy(t *testing.T) {
 			Name:             ptr.String("__Name__"),
 			PolicyVersion:    ptr.String("__PolicyVersion__"),
 			Description:      ptr.String("__Description__"),
-			Policy:           nil,
+			Policy:           document.NewLazyDocument("__Document__"),
 			CreatedDate:      ptr.Int64(1),
 			LastModifiedDate: ptr.Int64(1),
 		},
@@ -1595,7 +1880,14 @@ func TestCheckResponseSnapshot_UpdateLifecyclePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLifecyclePolicy(context.Background(), &UpdateLifecyclePolicyInput{})
+	got, err := svc.UpdateLifecyclePolicy(context.Background(), &UpdateLifecyclePolicyInput{
+		Type:          types.LifecyclePolicyType("retention"),
+		Name:          ptr.String("__Name__"),
+		PolicyVersion: ptr.String("__PolicyVersion__"),
+		Description:   ptr.String("__Description__"),
+		Policy:        ptr.String("__Policy__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1642,7 +1934,27 @@ func TestCheckResponseSnapshot_UpdateSecurityConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSecurityConfig(context.Background(), &UpdateSecurityConfigInput{})
+	got, err := svc.UpdateSecurityConfig(context.Background(), &UpdateSecurityConfigInput{
+		Id:            ptr.String("__Id__"),
+		ConfigVersion: ptr.String("__ConfigVersion__"),
+		Description:   ptr.String("__Description__"),
+		SamlOptions: &types.SamlConfigOptions{
+			Metadata:                     ptr.String("__Metadata__"),
+			UserAttribute:                ptr.String("__UserAttribute__"),
+			GroupAttribute:               ptr.String("__GroupAttribute__"),
+			OpenSearchServerlessEntityId: ptr.String("__OpenSearchServerlessEntityId__"),
+			SessionTimeout:               ptr.Int32(1),
+		},
+		IamIdentityCenterOptionsUpdates: &types.UpdateIamIdentityCenterConfigOptions{
+			UserAttribute:  types.IamIdentityCenterUserAttribute("UserId"),
+			GroupAttribute: types.IamIdentityCenterGroupAttribute("GroupId"),
+		},
+		IamFederationOptions: &types.IamFederationConfigOptions{
+			GroupAttribute: ptr.String("__GroupAttribute__"),
+			UserAttribute:  ptr.String("__UserAttribute__"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1658,7 +1970,7 @@ func TestCheckResponseSnapshot_UpdateSecurityPolicy(t *testing.T) {
 			Name:             ptr.String("__Name__"),
 			PolicyVersion:    ptr.String("__PolicyVersion__"),
 			Description:      ptr.String("__Description__"),
-			Policy:           nil,
+			Policy:           document.NewLazyDocument("__Document__"),
 			CreatedDate:      ptr.Int64(1),
 			LastModifiedDate: ptr.Int64(1),
 		},
@@ -1671,7 +1983,14 @@ func TestCheckResponseSnapshot_UpdateSecurityPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSecurityPolicy(context.Background(), &UpdateSecurityPolicyInput{})
+	got, err := svc.UpdateSecurityPolicy(context.Background(), &UpdateSecurityPolicyInput{
+		Type:          types.SecurityPolicyType("encryption"),
+		Name:          ptr.String("__Name__"),
+		PolicyVersion: ptr.String("__PolicyVersion__"),
+		Description:   ptr.String("__Description__"),
+		Policy:        ptr.String("__Policy__"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1705,7 +2024,26 @@ func TestCheckResponseSnapshot_UpdateVpcEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateVpcEndpoint(context.Background(), &UpdateVpcEndpointInput{})
+	got, err := svc.UpdateVpcEndpoint(context.Background(), &UpdateVpcEndpointInput{
+		Id: ptr.String("__Id__"),
+		AddSubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RemoveSubnetIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AddSecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RemoveSecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1726,7 +2064,13 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAccessPolicy(context.Background(), &CreateAccessPolicyInput{})
+	_, opErr := svc.CreateAccessPolicy(context.Background(), &CreateAccessPolicyInput{
+		Type:        types.AccessPolicyType("data"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Policy:      ptr.String("__Policy__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1751,7 +2095,16 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetCollection(context.Background(), &BatchGetCollectionInput{})
+	_, opErr := svc.BatchGetCollection(context.Background(), &BatchGetCollectionInput{
+		Ids: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1776,7 +2129,32 @@ func TestCheckResponseSnapshot_Error_OcuLimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCollection(context.Background(), &CreateCollectionInput{})
+	_, opErr := svc.CreateCollection(context.Background(), &CreateCollectionInput{
+		Name:        ptr.String("__Name__"),
+		Type:        types.CollectionType("SEARCH"),
+		Description: ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		StandbyReplicas: types.StandbyReplicas("ENABLED"),
+		VectorOptions: &types.VectorOptions{
+			ServerlessVectorAcceleration: types.ServerlessVectorAccelerationStatus("ENABLED"),
+		},
+		CollectionGroupName: ptr.String("__CollectionGroupName__"),
+		EncryptionConfig: &types.EncryptionConfig{
+			AWSOwnedKey: ptr.Bool(true),
+			KmsKeyArn:   ptr.String("__KmsKeyArn__"),
+		},
+		DeletionProtection: types.DeletionProtection("ENABLED"),
+		ClientToken:        ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1801,7 +2179,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateIndex(context.Background(), &CreateIndexInput{})
+	_, opErr := svc.CreateIndex(context.Background(), &CreateIndexInput{
+		Id:          ptr.String("__Id__"),
+		IndexName:   ptr.String("__IndexName__"),
+		IndexSchema: document.NewLazyDocument("__Document__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1830,7 +2212,13 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAccessPolicy(context.Background(), &CreateAccessPolicyInput{})
+	_, opErr := svc.CreateAccessPolicy(context.Background(), &CreateAccessPolicyInput{
+		Type:        types.AccessPolicyType("data"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Policy:      ptr.String("__Policy__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1855,7 +2243,16 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetCollection(context.Background(), &BatchGetCollectionInput{})
+	_, opErr := svc.BatchGetCollection(context.Background(), &BatchGetCollectionInput{
+		Ids: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Names: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

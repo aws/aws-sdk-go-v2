@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkMailService.DescribeUser
+
+{"City":"__City__","Company":"__Company__","Country":"__Country__","Department":"__Department__","DisabledDate":946684800,"DisplayName":"__DisplayName__","Email":"__Email__","EnabledDate":946684800,"FirstName":"__FirstName__","HiddenFromGlobalAddressList":true,"IdentityProviderIdentityStoreId":"__IdentityProviderIdentityStoreId__","IdentityProviderUserId":"__IdentityProviderUserId__","Initials":"__Initials__","JobTitle":"__JobTitle__","LastName":"__LastName__","MailboxDeprovisionedDate":946684800,"MailboxProvisionedDate":946684800,"Name":"__Name__","Office":"__Office__","State":"ENABLED","Street":"__Street__","Telephone":"__Telephone__","UserId":"__UserId__","UserRole":"USER","ZipCode":"__ZipCode__"}

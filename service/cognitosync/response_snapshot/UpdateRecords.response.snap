@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Records":[{"DeviceLastModifiedDate":946684800,"Key":"__Key__","LastModifiedBy":"__LastModifiedBy__","LastModifiedDate":946684800,"SyncCount":1,"Value":"__Value__"},{"DeviceLastModifiedDate":946684800,"Key":"__Key__","LastModifiedBy":"__LastModifiedBy__","LastModifiedDate":946684800,"SyncCount":1,"Value":"__Value__"}]}

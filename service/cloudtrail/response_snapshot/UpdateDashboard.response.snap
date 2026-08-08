@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CloudTrail_20131101.UpdateDashboard
+
+{"CreatedTimestamp":946684800,"DashboardArn":"__DashboardArn__","Name":"__Name__","RefreshSchedule":{"Frequency":{"Unit":"HOURS","Value":1},"Status":"ENABLED","TimeOfDay":"__TimeOfDay__"},"TerminationProtectionEnabled":true,"Type":"MANAGED","UpdatedTimestamp":946684800,"Widgets":[{"QueryAlias":"__QueryAlias__","QueryParameters":["__Member__","__Member__"],"QueryStatement":"__QueryStatement__","ViewProperties":{"key0":"__Value__"}},{"QueryAlias":"__QueryAlias__","QueryParameters":["__Member__","__Member__"],"QueryStatement":"__QueryStatement__","ViewProperties":{"key0":"__Value__"}}]}

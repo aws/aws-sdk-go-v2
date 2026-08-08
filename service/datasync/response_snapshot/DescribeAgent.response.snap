@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: FmrsService.DescribeAgent
+
+{"AgentArn":"__AgentArn__","CreationTime":946684800,"EndpointType":"PUBLIC","LastConnectionTime":946684800,"Name":"__Name__","Platform":{"Version":"__Version__"},"PrivateLinkConfig":{"PrivateLinkEndpoint":"__PrivateLinkEndpoint__","SecurityGroupArns":["__Member__","__Member__"],"SubnetArns":["__Member__","__Member__"],"VpcEndpointId":"__VpcEndpointId__"},"Status":"ONLINE"}

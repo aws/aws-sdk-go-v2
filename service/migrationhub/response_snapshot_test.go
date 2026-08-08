@@ -117,7 +117,15 @@ func TestCheckResponseSnapshot_AssociateCreatedArtifact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateCreatedArtifact(context.Background(), &AssociateCreatedArtifactInput{})
+	got, err := svc.AssociateCreatedArtifact(context.Background(), &AssociateCreatedArtifactInput{
+		ProgressUpdateStream: ptr.String("__ProgressUpdateStream__"),
+		MigrationTaskName:    ptr.String("__MigrationTaskName__"),
+		CreatedArtifact: &types.CreatedArtifact{
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+		},
+		DryRun: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -136,7 +144,15 @@ func TestCheckResponseSnapshot_AssociateDiscoveredResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateDiscoveredResource(context.Background(), &AssociateDiscoveredResourceInput{})
+	got, err := svc.AssociateDiscoveredResource(context.Background(), &AssociateDiscoveredResourceInput{
+		ProgressUpdateStream: ptr.String("__ProgressUpdateStream__"),
+		MigrationTaskName:    ptr.String("__MigrationTaskName__"),
+		DiscoveredResource: &types.DiscoveredResource{
+			ConfigurationId: ptr.String("__ConfigurationId__"),
+			Description:     ptr.String("__Description__"),
+		},
+		DryRun: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -155,7 +171,16 @@ func TestCheckResponseSnapshot_AssociateSourceResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateSourceResource(context.Background(), &AssociateSourceResourceInput{})
+	got, err := svc.AssociateSourceResource(context.Background(), &AssociateSourceResourceInput{
+		ProgressUpdateStream: ptr.String("__ProgressUpdateStream__"),
+		MigrationTaskName:    ptr.String("__MigrationTaskName__"),
+		SourceResource: &types.SourceResource{
+			Name:         ptr.String("__Name__"),
+			Description:  ptr.String("__Description__"),
+			StatusDetail: ptr.String("__StatusDetail__"),
+		},
+		DryRun: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -174,7 +199,10 @@ func TestCheckResponseSnapshot_CreateProgressUpdateStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProgressUpdateStream(context.Background(), &CreateProgressUpdateStreamInput{})
+	got, err := svc.CreateProgressUpdateStream(context.Background(), &CreateProgressUpdateStreamInput{
+		ProgressUpdateStreamName: ptr.String("__ProgressUpdateStreamName__"),
+		DryRun:                   true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -193,7 +221,10 @@ func TestCheckResponseSnapshot_DeleteProgressUpdateStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProgressUpdateStream(context.Background(), &DeleteProgressUpdateStreamInput{})
+	got, err := svc.DeleteProgressUpdateStream(context.Background(), &DeleteProgressUpdateStreamInput{
+		ProgressUpdateStreamName: ptr.String("__ProgressUpdateStreamName__"),
+		DryRun:                   true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -215,7 +246,9 @@ func TestCheckResponseSnapshot_DescribeApplicationState(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeApplicationState(context.Background(), &DescribeApplicationStateInput{})
+	got, err := svc.DescribeApplicationState(context.Background(), &DescribeApplicationStateInput{
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -255,7 +288,10 @@ func TestCheckResponseSnapshot_DescribeMigrationTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeMigrationTask(context.Background(), &DescribeMigrationTaskInput{})
+	got, err := svc.DescribeMigrationTask(context.Background(), &DescribeMigrationTaskInput{
+		ProgressUpdateStream: ptr.String("__ProgressUpdateStream__"),
+		MigrationTaskName:    ptr.String("__MigrationTaskName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -274,7 +310,12 @@ func TestCheckResponseSnapshot_DisassociateCreatedArtifact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateCreatedArtifact(context.Background(), &DisassociateCreatedArtifactInput{})
+	got, err := svc.DisassociateCreatedArtifact(context.Background(), &DisassociateCreatedArtifactInput{
+		ProgressUpdateStream: ptr.String("__ProgressUpdateStream__"),
+		MigrationTaskName:    ptr.String("__MigrationTaskName__"),
+		CreatedArtifactName:  ptr.String("__CreatedArtifactName__"),
+		DryRun:               true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -293,7 +334,12 @@ func TestCheckResponseSnapshot_DisassociateDiscoveredResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateDiscoveredResource(context.Background(), &DisassociateDiscoveredResourceInput{})
+	got, err := svc.DisassociateDiscoveredResource(context.Background(), &DisassociateDiscoveredResourceInput{
+		ProgressUpdateStream: ptr.String("__ProgressUpdateStream__"),
+		MigrationTaskName:    ptr.String("__MigrationTaskName__"),
+		ConfigurationId:      ptr.String("__ConfigurationId__"),
+		DryRun:               true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -312,7 +358,12 @@ func TestCheckResponseSnapshot_DisassociateSourceResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateSourceResource(context.Background(), &DisassociateSourceResourceInput{})
+	got, err := svc.DisassociateSourceResource(context.Background(), &DisassociateSourceResourceInput{
+		ProgressUpdateStream: ptr.String("__ProgressUpdateStream__"),
+		MigrationTaskName:    ptr.String("__MigrationTaskName__"),
+		SourceResourceName:   ptr.String("__SourceResourceName__"),
+		DryRun:               true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -331,7 +382,11 @@ func TestCheckResponseSnapshot_ImportMigrationTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportMigrationTask(context.Background(), &ImportMigrationTaskInput{})
+	got, err := svc.ImportMigrationTask(context.Background(), &ImportMigrationTaskInput{
+		ProgressUpdateStream: ptr.String("__ProgressUpdateStream__"),
+		MigrationTaskName:    ptr.String("__MigrationTaskName__"),
+		DryRun:               true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -364,7 +419,14 @@ func TestCheckResponseSnapshot_ListApplicationStates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplicationStates(context.Background(), &ListApplicationStatesInput{})
+	got, err := svc.ListApplicationStates(context.Background(), &ListApplicationStatesInput{
+		ApplicationIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -395,7 +457,12 @@ func TestCheckResponseSnapshot_ListCreatedArtifacts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCreatedArtifacts(context.Background(), &ListCreatedArtifactsInput{})
+	got, err := svc.ListCreatedArtifacts(context.Background(), &ListCreatedArtifactsInput{
+		ProgressUpdateStream: ptr.String("__ProgressUpdateStream__"),
+		MigrationTaskName:    ptr.String("__MigrationTaskName__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -426,7 +493,12 @@ func TestCheckResponseSnapshot_ListDiscoveredResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDiscoveredResources(context.Background(), &ListDiscoveredResourcesInput{})
+	got, err := svc.ListDiscoveredResources(context.Background(), &ListDiscoveredResourcesInput{
+		ProgressUpdateStream: ptr.String("__ProgressUpdateStream__"),
+		MigrationTaskName:    ptr.String("__MigrationTaskName__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -467,7 +539,12 @@ func TestCheckResponseSnapshot_ListMigrationTaskUpdates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMigrationTaskUpdates(context.Background(), &ListMigrationTaskUpdatesInput{})
+	got, err := svc.ListMigrationTaskUpdates(context.Background(), &ListMigrationTaskUpdatesInput{
+		ProgressUpdateStream: ptr.String("__ProgressUpdateStream__"),
+		MigrationTaskName:    ptr.String("__MigrationTaskName__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -506,7 +583,11 @@ func TestCheckResponseSnapshot_ListMigrationTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMigrationTasks(context.Background(), &ListMigrationTasksInput{})
+	got, err := svc.ListMigrationTasks(context.Background(), &ListMigrationTasksInput{
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		ResourceName: ptr.String("__ResourceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -535,7 +616,10 @@ func TestCheckResponseSnapshot_ListProgressUpdateStreams(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProgressUpdateStreams(context.Background(), &ListProgressUpdateStreamsInput{})
+	got, err := svc.ListProgressUpdateStreams(context.Background(), &ListProgressUpdateStreamsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -568,7 +652,12 @@ func TestCheckResponseSnapshot_ListSourceResources(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSourceResources(context.Background(), &ListSourceResourcesInput{})
+	got, err := svc.ListSourceResources(context.Background(), &ListSourceResourcesInput{
+		ProgressUpdateStream: ptr.String("__ProgressUpdateStream__"),
+		MigrationTaskName:    ptr.String("__MigrationTaskName__"),
+		NextToken:            ptr.String("__NextToken__"),
+		MaxResults:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -587,7 +676,12 @@ func TestCheckResponseSnapshot_NotifyApplicationState(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.NotifyApplicationState(context.Background(), &NotifyApplicationStateInput{})
+	got, err := svc.NotifyApplicationState(context.Background(), &NotifyApplicationStateInput{
+		ApplicationId:  ptr.String("__ApplicationId__"),
+		Status:         types.ApplicationStatus("NOT_STARTED"),
+		UpdateDateTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		DryRun:         true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -606,7 +700,18 @@ func TestCheckResponseSnapshot_NotifyMigrationTaskState(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.NotifyMigrationTaskState(context.Background(), &NotifyMigrationTaskStateInput{})
+	got, err := svc.NotifyMigrationTaskState(context.Background(), &NotifyMigrationTaskStateInput{
+		ProgressUpdateStream: ptr.String("__ProgressUpdateStream__"),
+		MigrationTaskName:    ptr.String("__MigrationTaskName__"),
+		Task: &types.Task{
+			Status:          types.Status("NOT_STARTED"),
+			StatusDetail:    ptr.String("__StatusDetail__"),
+			ProgressPercent: ptr.Int32(1),
+		},
+		UpdateDateTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NextUpdateSeconds: 1,
+		DryRun:            true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -625,7 +730,21 @@ func TestCheckResponseSnapshot_PutResourceAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResourceAttributes(context.Background(), &PutResourceAttributesInput{})
+	got, err := svc.PutResourceAttributes(context.Background(), &PutResourceAttributesInput{
+		ProgressUpdateStream: ptr.String("__ProgressUpdateStream__"),
+		MigrationTaskName:    ptr.String("__MigrationTaskName__"),
+		ResourceAttributeList: []types.ResourceAttribute{
+			{
+				Type:  types.ResourceAttributeType("IPV4_ADDRESS"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Type:  types.ResourceAttributeType("IPV4_ADDRESS"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DryRun: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -646,7 +765,15 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateCreatedArtifact(context.Background(), &AssociateCreatedArtifactInput{})
+	_, opErr := svc.AssociateCreatedArtifact(context.Background(), &AssociateCreatedArtifactInput{
+		ProgressUpdateStream: ptr.String("__ProgressUpdateStream__"),
+		MigrationTaskName:    ptr.String("__MigrationTaskName__"),
+		CreatedArtifact: &types.CreatedArtifact{
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+		},
+		DryRun: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -671,7 +798,15 @@ func TestCheckResponseSnapshot_Error_DryRunOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateCreatedArtifact(context.Background(), &AssociateCreatedArtifactInput{})
+	_, opErr := svc.AssociateCreatedArtifact(context.Background(), &AssociateCreatedArtifactInput{
+		ProgressUpdateStream: ptr.String("__ProgressUpdateStream__"),
+		MigrationTaskName:    ptr.String("__MigrationTaskName__"),
+		CreatedArtifact: &types.CreatedArtifact{
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+		},
+		DryRun: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -696,7 +831,15 @@ func TestCheckResponseSnapshot_Error_HomeRegionNotSetException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateCreatedArtifact(context.Background(), &AssociateCreatedArtifactInput{})
+	_, opErr := svc.AssociateCreatedArtifact(context.Background(), &AssociateCreatedArtifactInput{
+		ProgressUpdateStream: ptr.String("__ProgressUpdateStream__"),
+		MigrationTaskName:    ptr.String("__MigrationTaskName__"),
+		CreatedArtifact: &types.CreatedArtifact{
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+		},
+		DryRun: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -721,7 +864,15 @@ func TestCheckResponseSnapshot_Error_InternalServerError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateCreatedArtifact(context.Background(), &AssociateCreatedArtifactInput{})
+	_, opErr := svc.AssociateCreatedArtifact(context.Background(), &AssociateCreatedArtifactInput{
+		ProgressUpdateStream: ptr.String("__ProgressUpdateStream__"),
+		MigrationTaskName:    ptr.String("__MigrationTaskName__"),
+		CreatedArtifact: &types.CreatedArtifact{
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+		},
+		DryRun: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -746,7 +897,15 @@ func TestCheckResponseSnapshot_Error_InvalidInputException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateCreatedArtifact(context.Background(), &AssociateCreatedArtifactInput{})
+	_, opErr := svc.AssociateCreatedArtifact(context.Background(), &AssociateCreatedArtifactInput{
+		ProgressUpdateStream: ptr.String("__ProgressUpdateStream__"),
+		MigrationTaskName:    ptr.String("__MigrationTaskName__"),
+		CreatedArtifact: &types.CreatedArtifact{
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+		},
+		DryRun: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -771,7 +930,15 @@ func TestCheckResponseSnapshot_Error_PolicyErrorException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateDiscoveredResource(context.Background(), &AssociateDiscoveredResourceInput{})
+	_, opErr := svc.AssociateDiscoveredResource(context.Background(), &AssociateDiscoveredResourceInput{
+		ProgressUpdateStream: ptr.String("__ProgressUpdateStream__"),
+		MigrationTaskName:    ptr.String("__MigrationTaskName__"),
+		DiscoveredResource: &types.DiscoveredResource{
+			ConfigurationId: ptr.String("__ConfigurationId__"),
+			Description:     ptr.String("__Description__"),
+		},
+		DryRun: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -796,7 +963,15 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateCreatedArtifact(context.Background(), &AssociateCreatedArtifactInput{})
+	_, opErr := svc.AssociateCreatedArtifact(context.Background(), &AssociateCreatedArtifactInput{
+		ProgressUpdateStream: ptr.String("__ProgressUpdateStream__"),
+		MigrationTaskName:    ptr.String("__MigrationTaskName__"),
+		CreatedArtifact: &types.CreatedArtifact{
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+		},
+		DryRun: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -821,7 +996,15 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateCreatedArtifact(context.Background(), &AssociateCreatedArtifactInput{})
+	_, opErr := svc.AssociateCreatedArtifact(context.Background(), &AssociateCreatedArtifactInput{
+		ProgressUpdateStream: ptr.String("__ProgressUpdateStream__"),
+		MigrationTaskName:    ptr.String("__MigrationTaskName__"),
+		CreatedArtifact: &types.CreatedArtifact{
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+		},
+		DryRun: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -847,7 +1030,15 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateCreatedArtifact(context.Background(), &AssociateCreatedArtifactInput{})
+	_, opErr := svc.AssociateCreatedArtifact(context.Background(), &AssociateCreatedArtifactInput{
+		ProgressUpdateStream: ptr.String("__ProgressUpdateStream__"),
+		MigrationTaskName:    ptr.String("__MigrationTaskName__"),
+		CreatedArtifact: &types.CreatedArtifact{
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+		},
+		DryRun: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -872,7 +1063,15 @@ func TestCheckResponseSnapshot_Error_UnauthorizedOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateCreatedArtifact(context.Background(), &AssociateCreatedArtifactInput{})
+	_, opErr := svc.AssociateCreatedArtifact(context.Background(), &AssociateCreatedArtifactInput{
+		ProgressUpdateStream: ptr.String("__ProgressUpdateStream__"),
+		MigrationTaskName:    ptr.String("__MigrationTaskName__"),
+		CreatedArtifact: &types.CreatedArtifact{
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+		},
+		DryRun: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

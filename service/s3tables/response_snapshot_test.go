@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/document"
 	"github.com/aws/aws-sdk-go-v2/service/s3tables/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -123,7 +124,13 @@ func TestCheckResponseSnapshot_CreateNamespace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateNamespace(context.Background(), &CreateNamespaceInput{})
+	got, err := svc.CreateNamespace(context.Background(), &CreateNamespaceInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		Namespace: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -145,7 +152,103 @@ func TestCheckResponseSnapshot_CreateTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTable(context.Background(), &CreateTableInput{})
+	got, err := svc.CreateTable(context.Background(), &CreateTableInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		Namespace:      ptr.String("__Namespace__"),
+		Name:           ptr.String("__Name__"),
+		Format:         types.OpenTableFormat("ICEBERG"),
+		Metadata: &types.TableMetadataMemberIceberg{
+			Value: types.IcebergMetadata{
+				Schema: &types.IcebergSchema{
+					Fields: []types.SchemaField{
+						{
+							Id:       ptr.Int32(1),
+							Name:     ptr.String("__Name__"),
+							Type:     ptr.String("__Type__"),
+							Required: true,
+						},
+						{
+							Id:       ptr.Int32(1),
+							Name:     ptr.String("__Name__"),
+							Type:     ptr.String("__Type__"),
+							Required: true,
+						},
+					},
+				},
+				SchemaV2: &types.IcebergSchemaV2{
+					Type: types.SchemaV2FieldType("struct"),
+					Fields: []types.SchemaV2Field{
+						{
+							Id:       ptr.Int32(1),
+							Name:     ptr.String("__Name__"),
+							Type:     document.NewLazyDocument("__Document__"),
+							Required: ptr.Bool(true),
+							Doc:      ptr.String("__Doc__"),
+						},
+						{
+							Id:       ptr.Int32(1),
+							Name:     ptr.String("__Name__"),
+							Type:     document.NewLazyDocument("__Document__"),
+							Required: ptr.Bool(true),
+							Doc:      ptr.String("__Doc__"),
+						},
+					},
+					SchemaId: ptr.Int32(1),
+					IdentifierFieldIds: []int32{
+						1,
+						1,
+					},
+				},
+				PartitionSpec: &types.IcebergPartitionSpec{
+					Fields: []types.IcebergPartitionField{
+						{
+							SourceId:  ptr.Int32(1),
+							Transform: ptr.String("__Transform__"),
+							Name:      ptr.String("__Name__"),
+							FieldId:   ptr.Int32(1),
+						},
+						{
+							SourceId:  ptr.Int32(1),
+							Transform: ptr.String("__Transform__"),
+							Name:      ptr.String("__Name__"),
+							FieldId:   ptr.Int32(1),
+						},
+					},
+					SpecId: ptr.Int32(1),
+				},
+				WriteOrder: &types.IcebergSortOrder{
+					OrderId: ptr.Int32(1),
+					Fields: []types.IcebergSortField{
+						{
+							SourceId:  ptr.Int32(1),
+							Transform: ptr.String("__Transform__"),
+							Direction: types.IcebergSortDirection("asc"),
+							NullOrder: types.IcebergNullOrder("nulls-first"),
+						},
+						{
+							SourceId:  ptr.Int32(1),
+							Transform: ptr.String("__Transform__"),
+							Direction: types.IcebergSortDirection("asc"),
+							NullOrder: types.IcebergNullOrder("nulls-first"),
+						},
+					},
+				},
+				Properties: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			SseAlgorithm: types.SSEAlgorithm("AES256"),
+			KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+		},
+		StorageClassConfiguration: &types.StorageClassConfiguration{
+			StorageClass: types.StorageClass("STANDARD"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -166,7 +269,19 @@ func TestCheckResponseSnapshot_CreateTableBucket(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTableBucket(context.Background(), &CreateTableBucketInput{})
+	got, err := svc.CreateTableBucket(context.Background(), &CreateTableBucketInput{
+		Name: ptr.String("__Name__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			SseAlgorithm: types.SSEAlgorithm("AES256"),
+			KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+		},
+		StorageClassConfiguration: &types.StorageClassConfiguration{
+			StorageClass: types.StorageClass("STANDARD"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -185,7 +300,10 @@ func TestCheckResponseSnapshot_DeleteNamespace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteNamespace(context.Background(), &DeleteNamespaceInput{})
+	got, err := svc.DeleteNamespace(context.Background(), &DeleteNamespaceInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		Namespace:      ptr.String("__Namespace__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -204,7 +322,12 @@ func TestCheckResponseSnapshot_DeleteTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTable(context.Background(), &DeleteTableInput{})
+	got, err := svc.DeleteTable(context.Background(), &DeleteTableInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		Namespace:      ptr.String("__Namespace__"),
+		Name:           ptr.String("__Name__"),
+		VersionToken:   ptr.String("__VersionToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -223,7 +346,9 @@ func TestCheckResponseSnapshot_DeleteTableBucket(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTableBucket(context.Background(), &DeleteTableBucketInput{})
+	got, err := svc.DeleteTableBucket(context.Background(), &DeleteTableBucketInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -242,7 +367,9 @@ func TestCheckResponseSnapshot_DeleteTableBucketEncryption(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTableBucketEncryption(context.Background(), &DeleteTableBucketEncryptionInput{})
+	got, err := svc.DeleteTableBucketEncryption(context.Background(), &DeleteTableBucketEncryptionInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -261,7 +388,9 @@ func TestCheckResponseSnapshot_DeleteTableBucketMetricsConfiguration(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTableBucketMetricsConfiguration(context.Background(), &DeleteTableBucketMetricsConfigurationInput{})
+	got, err := svc.DeleteTableBucketMetricsConfiguration(context.Background(), &DeleteTableBucketMetricsConfigurationInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -280,7 +409,9 @@ func TestCheckResponseSnapshot_DeleteTableBucketPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTableBucketPolicy(context.Background(), &DeleteTableBucketPolicyInput{})
+	got, err := svc.DeleteTableBucketPolicy(context.Background(), &DeleteTableBucketPolicyInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -299,7 +430,10 @@ func TestCheckResponseSnapshot_DeleteTableBucketReplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTableBucketReplication(context.Background(), &DeleteTableBucketReplicationInput{})
+	got, err := svc.DeleteTableBucketReplication(context.Background(), &DeleteTableBucketReplicationInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		VersionToken:   ptr.String("__VersionToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -318,7 +452,11 @@ func TestCheckResponseSnapshot_DeleteTablePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTablePolicy(context.Background(), &DeleteTablePolicyInput{})
+	got, err := svc.DeleteTablePolicy(context.Background(), &DeleteTablePolicyInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		Namespace:      ptr.String("__Namespace__"),
+		Name:           ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -337,7 +475,10 @@ func TestCheckResponseSnapshot_DeleteTableReplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTableReplication(context.Background(), &DeleteTableReplicationInput{})
+	got, err := svc.DeleteTableReplication(context.Background(), &DeleteTableReplicationInput{
+		TableArn:     ptr.String("__TableArn__"),
+		VersionToken: ptr.String("__VersionToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -366,7 +507,10 @@ func TestCheckResponseSnapshot_GetNamespace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetNamespace(context.Background(), &GetNamespaceInput{})
+	got, err := svc.GetNamespace(context.Background(), &GetNamespaceInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		Namespace:      ptr.String("__Namespace__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -410,7 +554,12 @@ func TestCheckResponseSnapshot_GetTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTable(context.Background(), &GetTableInput{})
+	got, err := svc.GetTable(context.Background(), &GetTableInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		Namespace:      ptr.String("__Namespace__"),
+		Name:           ptr.String("__Name__"),
+		TableArn:       ptr.String("__TableArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -436,7 +585,9 @@ func TestCheckResponseSnapshot_GetTableBucket(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTableBucket(context.Background(), &GetTableBucketInput{})
+	got, err := svc.GetTableBucket(context.Background(), &GetTableBucketInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -460,7 +611,9 @@ func TestCheckResponseSnapshot_GetTableBucketEncryption(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTableBucketEncryption(context.Background(), &GetTableBucketEncryptionInput{})
+	got, err := svc.GetTableBucketEncryption(context.Background(), &GetTableBucketEncryptionInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -492,7 +645,9 @@ func TestCheckResponseSnapshot_GetTableBucketMaintenanceConfiguration(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTableBucketMaintenanceConfiguration(context.Background(), &GetTableBucketMaintenanceConfigurationInput{})
+	got, err := svc.GetTableBucketMaintenanceConfiguration(context.Background(), &GetTableBucketMaintenanceConfigurationInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -514,7 +669,9 @@ func TestCheckResponseSnapshot_GetTableBucketMetricsConfiguration(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTableBucketMetricsConfiguration(context.Background(), &GetTableBucketMetricsConfigurationInput{})
+	got, err := svc.GetTableBucketMetricsConfiguration(context.Background(), &GetTableBucketMetricsConfigurationInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -535,7 +692,9 @@ func TestCheckResponseSnapshot_GetTableBucketPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTableBucketPolicy(context.Background(), &GetTableBucketPolicyInput{})
+	got, err := svc.GetTableBucketPolicy(context.Background(), &GetTableBucketPolicyInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -581,7 +740,9 @@ func TestCheckResponseSnapshot_GetTableBucketReplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTableBucketReplication(context.Background(), &GetTableBucketReplicationInput{})
+	got, err := svc.GetTableBucketReplication(context.Background(), &GetTableBucketReplicationInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -604,7 +765,9 @@ func TestCheckResponseSnapshot_GetTableBucketStorageClass(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTableBucketStorageClass(context.Background(), &GetTableBucketStorageClassInput{})
+	got, err := svc.GetTableBucketStorageClass(context.Background(), &GetTableBucketStorageClassInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -628,7 +791,11 @@ func TestCheckResponseSnapshot_GetTableEncryption(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTableEncryption(context.Background(), &GetTableEncryptionInput{})
+	got, err := svc.GetTableEncryption(context.Background(), &GetTableEncryptionInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		Namespace:      ptr.String("__Namespace__"),
+		Name:           ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -660,7 +827,11 @@ func TestCheckResponseSnapshot_GetTableMaintenanceConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTableMaintenanceConfiguration(context.Background(), &GetTableMaintenanceConfigurationInput{})
+	got, err := svc.GetTableMaintenanceConfiguration(context.Background(), &GetTableMaintenanceConfigurationInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		Namespace:      ptr.String("__Namespace__"),
+		Name:           ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -688,7 +859,11 @@ func TestCheckResponseSnapshot_GetTableMaintenanceJobStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTableMaintenanceJobStatus(context.Background(), &GetTableMaintenanceJobStatusInput{})
+	got, err := svc.GetTableMaintenanceJobStatus(context.Background(), &GetTableMaintenanceJobStatusInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		Namespace:      ptr.String("__Namespace__"),
+		Name:           ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -711,7 +886,11 @@ func TestCheckResponseSnapshot_GetTableMetadataLocation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTableMetadataLocation(context.Background(), &GetTableMetadataLocationInput{})
+	got, err := svc.GetTableMetadataLocation(context.Background(), &GetTableMetadataLocationInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		Namespace:      ptr.String("__Namespace__"),
+		Name:           ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -732,7 +911,11 @@ func TestCheckResponseSnapshot_GetTablePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTablePolicy(context.Background(), &GetTablePolicyInput{})
+	got, err := svc.GetTablePolicy(context.Background(), &GetTablePolicyInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		Namespace:      ptr.String("__Namespace__"),
+		Name:           ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -758,7 +941,9 @@ func TestCheckResponseSnapshot_GetTableRecordExpirationConfiguration(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTableRecordExpirationConfiguration(context.Background(), &GetTableRecordExpirationConfigurationInput{})
+	got, err := svc.GetTableRecordExpirationConfiguration(context.Background(), &GetTableRecordExpirationConfigurationInput{
+		TableArn: ptr.String("__TableArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -786,7 +971,9 @@ func TestCheckResponseSnapshot_GetTableRecordExpirationJobStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTableRecordExpirationJobStatus(context.Background(), &GetTableRecordExpirationJobStatusInput{})
+	got, err := svc.GetTableRecordExpirationJobStatus(context.Background(), &GetTableRecordExpirationJobStatusInput{
+		TableArn: ptr.String("__TableArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -832,7 +1019,9 @@ func TestCheckResponseSnapshot_GetTableReplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTableReplication(context.Background(), &GetTableReplicationInput{})
+	got, err := svc.GetTableReplication(context.Background(), &GetTableReplicationInput{
+		TableArn: ptr.String("__TableArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -875,7 +1064,9 @@ func TestCheckResponseSnapshot_GetTableReplicationStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTableReplicationStatus(context.Background(), &GetTableReplicationStatusInput{})
+	got, err := svc.GetTableReplicationStatus(context.Background(), &GetTableReplicationStatusInput{
+		TableArn: ptr.String("__TableArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -898,7 +1089,11 @@ func TestCheckResponseSnapshot_GetTableStorageClass(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTableStorageClass(context.Background(), &GetTableStorageClassInput{})
+	got, err := svc.GetTableStorageClass(context.Background(), &GetTableStorageClassInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		Namespace:      ptr.String("__Namespace__"),
+		Name:           ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -943,7 +1138,12 @@ func TestCheckResponseSnapshot_ListNamespaces(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListNamespaces(context.Background(), &ListNamespacesInput{})
+	got, err := svc.ListNamespaces(context.Background(), &ListNamespacesInput{
+		TableBucketARN:    ptr.String("__TableBucketARN__"),
+		Prefix:            ptr.String("__Prefix__"),
+		ContinuationToken: ptr.String("__ContinuationToken__"),
+		MaxNamespaces:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -982,7 +1182,12 @@ func TestCheckResponseSnapshot_ListTableBuckets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTableBuckets(context.Background(), &ListTableBucketsInput{})
+	got, err := svc.ListTableBuckets(context.Background(), &ListTableBucketsInput{
+		Prefix:            ptr.String("__Prefix__"),
+		ContinuationToken: ptr.String("__ContinuationToken__"),
+		MaxBuckets:        ptr.Int32(1),
+		Type:              types.TableBucketType("customer"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1033,7 +1238,13 @@ func TestCheckResponseSnapshot_ListTables(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTables(context.Background(), &ListTablesInput{})
+	got, err := svc.ListTables(context.Background(), &ListTablesInput{
+		TableBucketARN:    ptr.String("__TableBucketARN__"),
+		Namespace:         ptr.String("__Namespace__"),
+		Prefix:            ptr.String("__Prefix__"),
+		ContinuationToken: ptr.String("__ContinuationToken__"),
+		MaxTables:         ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1056,7 +1267,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1075,7 +1288,13 @@ func TestCheckResponseSnapshot_PutTableBucketEncryption(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutTableBucketEncryption(context.Background(), &PutTableBucketEncryptionInput{})
+	got, err := svc.PutTableBucketEncryption(context.Background(), &PutTableBucketEncryptionInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			SseAlgorithm: types.SSEAlgorithm("AES256"),
+			KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1094,7 +1313,19 @@ func TestCheckResponseSnapshot_PutTableBucketMaintenanceConfiguration(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutTableBucketMaintenanceConfiguration(context.Background(), &PutTableBucketMaintenanceConfigurationInput{})
+	got, err := svc.PutTableBucketMaintenanceConfiguration(context.Background(), &PutTableBucketMaintenanceConfigurationInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		Type:           types.TableBucketMaintenanceType("icebergUnreferencedFileRemoval"),
+		Value: &types.TableBucketMaintenanceConfigurationValue{
+			Status: types.MaintenanceStatus("enabled"),
+			Settings: &types.TableBucketMaintenanceSettingsMemberIcebergUnreferencedFileRemoval{
+				Value: types.IcebergUnreferencedFileRemovalSettings{
+					UnreferencedDays: ptr.Int32(1),
+					NonCurrentDays:   ptr.Int32(1),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1113,7 +1344,9 @@ func TestCheckResponseSnapshot_PutTableBucketMetricsConfiguration(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutTableBucketMetricsConfiguration(context.Background(), &PutTableBucketMetricsConfigurationInput{})
+	got, err := svc.PutTableBucketMetricsConfiguration(context.Background(), &PutTableBucketMetricsConfigurationInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1132,7 +1365,10 @@ func TestCheckResponseSnapshot_PutTableBucketPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutTableBucketPolicy(context.Background(), &PutTableBucketPolicyInput{})
+	got, err := svc.PutTableBucketPolicy(context.Background(), &PutTableBucketPolicyInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		ResourcePolicy: ptr.String("__ResourcePolicy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1154,7 +1390,35 @@ func TestCheckResponseSnapshot_PutTableBucketReplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutTableBucketReplication(context.Background(), &PutTableBucketReplicationInput{})
+	got, err := svc.PutTableBucketReplication(context.Background(), &PutTableBucketReplicationInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		VersionToken:   ptr.String("__VersionToken__"),
+		Configuration: &types.TableBucketReplicationConfiguration{
+			Role: ptr.String("__Role__"),
+			Rules: []types.TableBucketReplicationRule{
+				{
+					Destinations: []types.ReplicationDestination{
+						{
+							DestinationTableBucketARN: ptr.String("__DestinationTableBucketARN__"),
+						},
+						{
+							DestinationTableBucketARN: ptr.String("__DestinationTableBucketARN__"),
+						},
+					},
+				},
+				{
+					Destinations: []types.ReplicationDestination{
+						{
+							DestinationTableBucketARN: ptr.String("__DestinationTableBucketARN__"),
+						},
+						{
+							DestinationTableBucketARN: ptr.String("__DestinationTableBucketARN__"),
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1173,7 +1437,12 @@ func TestCheckResponseSnapshot_PutTableBucketStorageClass(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutTableBucketStorageClass(context.Background(), &PutTableBucketStorageClassInput{})
+	got, err := svc.PutTableBucketStorageClass(context.Background(), &PutTableBucketStorageClassInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		StorageClassConfiguration: &types.StorageClassConfiguration{
+			StorageClass: types.StorageClass("STANDARD"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1192,7 +1461,21 @@ func TestCheckResponseSnapshot_PutTableMaintenanceConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutTableMaintenanceConfiguration(context.Background(), &PutTableMaintenanceConfigurationInput{})
+	got, err := svc.PutTableMaintenanceConfiguration(context.Background(), &PutTableMaintenanceConfigurationInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		Namespace:      ptr.String("__Namespace__"),
+		Name:           ptr.String("__Name__"),
+		Type:           types.TableMaintenanceType("icebergCompaction"),
+		Value: &types.TableMaintenanceConfigurationValue{
+			Status: types.MaintenanceStatus("enabled"),
+			Settings: &types.TableMaintenanceSettingsMemberIcebergCompaction{
+				Value: types.IcebergCompactionSettings{
+					TargetFileSizeMB: ptr.Int32(1),
+					Strategy:         types.IcebergCompactionStrategy("auto"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1211,7 +1494,12 @@ func TestCheckResponseSnapshot_PutTablePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutTablePolicy(context.Background(), &PutTablePolicyInput{})
+	got, err := svc.PutTablePolicy(context.Background(), &PutTablePolicyInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		Namespace:      ptr.String("__Namespace__"),
+		Name:           ptr.String("__Name__"),
+		ResourcePolicy: ptr.String("__ResourcePolicy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1230,7 +1518,15 @@ func TestCheckResponseSnapshot_PutTableRecordExpirationConfiguration(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutTableRecordExpirationConfiguration(context.Background(), &PutTableRecordExpirationConfigurationInput{})
+	got, err := svc.PutTableRecordExpirationConfiguration(context.Background(), &PutTableRecordExpirationConfigurationInput{
+		TableArn: ptr.String("__TableArn__"),
+		Value: &types.TableRecordExpirationConfigurationValue{
+			Status: types.TableRecordExpirationStatus("enabled"),
+			Settings: &types.TableRecordExpirationSettings{
+				Days: ptr.Int32(1),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1252,7 +1548,35 @@ func TestCheckResponseSnapshot_PutTableReplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutTableReplication(context.Background(), &PutTableReplicationInput{})
+	got, err := svc.PutTableReplication(context.Background(), &PutTableReplicationInput{
+		TableArn:     ptr.String("__TableArn__"),
+		VersionToken: ptr.String("__VersionToken__"),
+		Configuration: &types.TableReplicationConfiguration{
+			Role: ptr.String("__Role__"),
+			Rules: []types.TableReplicationRule{
+				{
+					Destinations: []types.ReplicationDestination{
+						{
+							DestinationTableBucketARN: ptr.String("__DestinationTableBucketARN__"),
+						},
+						{
+							DestinationTableBucketARN: ptr.String("__DestinationTableBucketARN__"),
+						},
+					},
+				},
+				{
+					Destinations: []types.ReplicationDestination{
+						{
+							DestinationTableBucketARN: ptr.String("__DestinationTableBucketARN__"),
+						},
+						{
+							DestinationTableBucketARN: ptr.String("__DestinationTableBucketARN__"),
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1271,7 +1595,14 @@ func TestCheckResponseSnapshot_RenameTable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RenameTable(context.Background(), &RenameTableInput{})
+	got, err := svc.RenameTable(context.Background(), &RenameTableInput{
+		TableBucketARN:   ptr.String("__TableBucketARN__"),
+		Namespace:        ptr.String("__Namespace__"),
+		Name:             ptr.String("__Name__"),
+		NewNamespaceName: ptr.String("__NewNamespaceName__"),
+		NewName:          ptr.String("__NewName__"),
+		VersionToken:     ptr.String("__VersionToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1290,7 +1621,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1309,7 +1645,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1337,7 +1679,13 @@ func TestCheckResponseSnapshot_UpdateTableMetadataLocation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTableMetadataLocation(context.Background(), &UpdateTableMetadataLocationInput{})
+	got, err := svc.UpdateTableMetadataLocation(context.Background(), &UpdateTableMetadataLocationInput{
+		TableBucketARN:   ptr.String("__TableBucketARN__"),
+		Namespace:        ptr.String("__Namespace__"),
+		Name:             ptr.String("__Name__"),
+		VersionToken:     ptr.String("__VersionToken__"),
+		MetadataLocation: ptr.String("__MetadataLocation__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1358,7 +1706,10 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteTableBucketReplication(context.Background(), &DeleteTableBucketReplicationInput{})
+	_, opErr := svc.DeleteTableBucketReplication(context.Background(), &DeleteTableBucketReplicationInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		VersionToken:   ptr.String("__VersionToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1383,7 +1734,13 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateNamespace(context.Background(), &CreateNamespaceInput{})
+	_, opErr := svc.CreateNamespace(context.Background(), &CreateNamespaceInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		Namespace: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1408,7 +1765,13 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateNamespace(context.Background(), &CreateNamespaceInput{})
+	_, opErr := svc.CreateNamespace(context.Background(), &CreateNamespaceInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		Namespace: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1433,7 +1796,13 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateNamespace(context.Background(), &CreateNamespaceInput{})
+	_, opErr := svc.CreateNamespace(context.Background(), &CreateNamespaceInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		Namespace: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1458,7 +1827,13 @@ func TestCheckResponseSnapshot_Error_InternalServerErrorException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateNamespace(context.Background(), &CreateNamespaceInput{})
+	_, opErr := svc.CreateNamespace(context.Background(), &CreateNamespaceInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		Namespace: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1483,7 +1858,9 @@ func TestCheckResponseSnapshot_Error_MethodNotAllowedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetTableRecordExpirationConfiguration(context.Background(), &GetTableRecordExpirationConfigurationInput{})
+	_, opErr := svc.GetTableRecordExpirationConfiguration(context.Background(), &GetTableRecordExpirationConfigurationInput{
+		TableArn: ptr.String("__TableArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1508,7 +1885,13 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateNamespace(context.Background(), &CreateNamespaceInput{})
+	_, opErr := svc.CreateNamespace(context.Background(), &CreateNamespaceInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		Namespace: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1533,7 +1916,13 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateNamespace(context.Background(), &CreateNamespaceInput{})
+	_, opErr := svc.CreateNamespace(context.Background(), &CreateNamespaceInput{
+		TableBucketARN: ptr.String("__TableBucketARN__"),
+		Namespace: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

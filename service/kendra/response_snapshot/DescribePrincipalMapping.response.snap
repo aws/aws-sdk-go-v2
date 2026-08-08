@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.DescribePrincipalMapping
+
+{"DataSourceId":"__DataSourceId__","GroupId":"__GroupId__","GroupOrderingIdSummaries":[{"FailureReason":"__FailureReason__","LastUpdatedAt":946684800,"OrderingId":1,"ReceivedAt":946684800,"Status":"FAILED"},{"FailureReason":"__FailureReason__","LastUpdatedAt":946684800,"OrderingId":1,"ReceivedAt":946684800,"Status":"FAILED"}],"IndexId":"__IndexId__"}

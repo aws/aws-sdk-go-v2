@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"queue":{"arn":"__Arn__","concurrentJobs":1,"createdAt":946684800,"description":"__Description__","lastUpdated":946684800,"maximumConcurrentFeeds":1,"name":"__Name__","pricingPlan":"ON_DEMAND","progressingJobsCount":1,"reservationPlan":{"commitment":"ONE_YEAR","expiresAt":946684800,"purchasedAt":946684800,"renewalType":"AUTO_RENEW","reservedSlots":1,"status":"ACTIVE"},"serviceOverrides":[{"message":"__Message__","name":"__Name__","overrideValue":"__OverrideValue__","value":"__Value__"},{"message":"__Message__","name":"__Name__","overrideValue":"__OverrideValue__","value":"__Value__"}],"status":"ACTIVE","submittedJobsCount":1,"type":"SYSTEM"}}

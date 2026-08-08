@@ -124,7 +124,21 @@ func TestCheckResponseSnapshot_CreateDataTransformationProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDataTransformationProfile(context.Background(), &CreateDataTransformationProfileInput{})
+	got, err := svc.CreateDataTransformationProfile(context.Background(), &CreateDataTransformationProfileInput{
+		SourceFormat: types.SourceFormat("CCDA"),
+		Source: &types.CreateDataTransformationProfileSourceMemberStarterProfile{
+			Value: types.StarterProfileSource{
+				StarterProfileName: ptr.String("__StarterProfileName__"),
+			},
+		},
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		ProfileDescription: ptr.String("__ProfileDescription__"),
+		ProfileName:        ptr.String("__ProfileName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -148,7 +162,48 @@ func TestCheckResponseSnapshot_CreateFHIRDatastore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFHIRDatastore(context.Background(), &CreateFHIRDatastoreInput{})
+	got, err := svc.CreateFHIRDatastore(context.Background(), &CreateFHIRDatastoreInput{
+		DatastoreName:        ptr.String("__DatastoreName__"),
+		DatastoreTypeVersion: types.FHIRVersion("R4"),
+		SseConfiguration: &types.SseConfiguration{
+			KmsEncryptionConfig: &types.KmsEncryptionConfig{
+				CmkType:  types.CmkType("CUSTOMER_MANAGED_KMS_KEY"),
+				KmsKeyId: ptr.String("__KmsKeyId__"),
+			},
+		},
+		PreloadDataConfig: &types.PreloadDataConfig{
+			PreloadDataType: types.PreloadDataType("SYNTHEA"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		IdentityProviderConfiguration: &types.IdentityProviderConfiguration{
+			AuthorizationStrategy:           types.AuthorizationStrategy("SMART_ON_FHIR_V1"),
+			FineGrainedAuthorizationEnabled: true,
+			Metadata:                        ptr.String("__Metadata__"),
+			IdpLambdaArn:                    ptr.String("__IdpLambdaArn__"),
+		},
+		AnalyticsConfiguration: &types.AnalyticsConfiguration{
+			Status: types.AnalyticsStatus("ENABLED"),
+		},
+		NlpConfiguration: &types.NlpConfiguration{
+			Status: types.NlpStatus("ENABLED"),
+		},
+		ProfileConfiguration: &types.ProfileConfiguration{
+			DefaultProfiles: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -171,7 +226,9 @@ func TestCheckResponseSnapshot_DeleteDataTransformationProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataTransformationProfile(context.Background(), &DeleteDataTransformationProfileInput{})
+	got, err := svc.DeleteDataTransformationProfile(context.Background(), &DeleteDataTransformationProfileInput{
+		ProfileId: ptr.String("__ProfileId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -195,7 +252,9 @@ func TestCheckResponseSnapshot_DeleteFHIRDatastore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFHIRDatastore(context.Background(), &DeleteFHIRDatastoreInput{})
+	got, err := svc.DeleteFHIRDatastore(context.Background(), &DeleteFHIRDatastoreInput{
+		DatastoreId: ptr.String("__DatastoreId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -245,7 +304,9 @@ func TestCheckResponseSnapshot_DescribeDataTransformationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDataTransformationJob(context.Background(), &DescribeDataTransformationJobInput{})
+	got, err := svc.DescribeDataTransformationJob(context.Background(), &DescribeDataTransformationJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -305,7 +366,9 @@ func TestCheckResponseSnapshot_DescribeFHIRDatastore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFHIRDatastore(context.Background(), &DescribeFHIRDatastoreInput{})
+	got, err := svc.DescribeFHIRDatastore(context.Background(), &DescribeFHIRDatastoreInput{
+		DatastoreId: ptr.String("__DatastoreId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -341,7 +404,10 @@ func TestCheckResponseSnapshot_DescribeFHIRExportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFHIRExportJob(context.Background(), &DescribeFHIRExportJobInput{})
+	got, err := svc.DescribeFHIRExportJob(context.Background(), &DescribeFHIRExportJobInput{
+		DatastoreId: ptr.String("__DatastoreId__"),
+		JobId:       ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -400,7 +466,10 @@ func TestCheckResponseSnapshot_DescribeFHIRImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeFHIRImportJob(context.Background(), &DescribeFHIRImportJobInput{})
+	got, err := svc.DescribeFHIRImportJob(context.Background(), &DescribeFHIRImportJobInput{
+		DatastoreId: ptr.String("__DatastoreId__"),
+		JobId:       ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -431,7 +500,10 @@ func TestCheckResponseSnapshot_GetDataTransformationProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataTransformationProfile(context.Background(), &GetDataTransformationProfileInput{})
+	got, err := svc.GetDataTransformationProfile(context.Background(), &GetDataTransformationProfileInput{
+		ProfileId:      ptr.String("__ProfileId__"),
+		ProfileVersion: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -470,7 +542,14 @@ func TestCheckResponseSnapshot_ListDataTransformationJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataTransformationJobs(context.Background(), &ListDataTransformationJobsInput{})
+	got, err := svc.ListDataTransformationJobs(context.Background(), &ListDataTransformationJobsInput{
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+		JobStatus:       types.TransformationJobStatus("SUBMITTED"),
+		JobName:         ptr.String("__JobName__"),
+		SubmittedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SubmittedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -511,7 +590,11 @@ func TestCheckResponseSnapshot_ListDataTransformationProfileVersions(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataTransformationProfileVersions(context.Background(), &ListDataTransformationProfileVersionsInput{})
+	got, err := svc.ListDataTransformationProfileVersions(context.Background(), &ListDataTransformationProfileVersionsInput{
+		ProfileId:  ptr.String("__ProfileId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -552,7 +635,11 @@ func TestCheckResponseSnapshot_ListDataTransformationProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDataTransformationProfiles(context.Background(), &ListDataTransformationProfilesInput{})
+	got, err := svc.ListDataTransformationProfiles(context.Background(), &ListDataTransformationProfilesInput{
+		SourceFormat: types.SourceFormat("CCDA"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -655,7 +742,16 @@ func TestCheckResponseSnapshot_ListFHIRDatastores(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFHIRDatastores(context.Background(), &ListFHIRDatastoresInput{})
+	got, err := svc.ListFHIRDatastores(context.Background(), &ListFHIRDatastoresInput{
+		Filter: &types.DatastoreFilter{
+			DatastoreName:   ptr.String("__DatastoreName__"),
+			DatastoreStatus: types.DatastoreStatus("CREATING"),
+			CreatedBefore:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CreatedAfter:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -710,7 +806,15 @@ func TestCheckResponseSnapshot_ListFHIRExportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFHIRExportJobs(context.Background(), &ListFHIRExportJobsInput{})
+	got, err := svc.ListFHIRExportJobs(context.Background(), &ListFHIRExportJobsInput{
+		DatastoreId:     ptr.String("__DatastoreId__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		JobName:         ptr.String("__JobName__"),
+		JobStatus:       types.JobStatus("SUBMITTED"),
+		SubmittedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SubmittedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -811,7 +915,15 @@ func TestCheckResponseSnapshot_ListFHIRImportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFHIRImportJobs(context.Background(), &ListFHIRImportJobsInput{})
+	got, err := svc.ListFHIRImportJobs(context.Background(), &ListFHIRImportJobsInput{
+		DatastoreId:     ptr.String("__DatastoreId__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+		JobName:         ptr.String("__JobName__"),
+		JobStatus:       types.JobStatus("SUBMITTED"),
+		SubmittedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SubmittedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -841,7 +953,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -867,7 +981,12 @@ func TestCheckResponseSnapshot_PublishDataTransformationProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PublishDataTransformationProfile(context.Background(), &PublishDataTransformationProfileInput{})
+	got, err := svc.PublishDataTransformationProfile(context.Background(), &PublishDataTransformationProfileInput{
+		ProfileId:           ptr.String("__ProfileId__"),
+		SourceFormat:        types.SourceFormat("CCDA"),
+		FromExistingVersion: ptr.Int32(1),
+		ChangeDescription:   ptr.String("__ChangeDescription__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -889,7 +1008,24 @@ func TestCheckResponseSnapshot_StartDataTransformationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartDataTransformationJob(context.Background(), &StartDataTransformationJobInput{})
+	got, err := svc.StartDataTransformationJob(context.Background(), &StartDataTransformationJobInput{
+		InputDataConfig: &types.TransformationInputDataConfig{
+			S3Uri:        ptr.String("__S3Uri__"),
+			SourceFormat: types.SourceFormat("CCDA"),
+		},
+		OutputDataConfig: &types.TransformationOutputDataConfig{
+			S3Configuration: &types.DataTransformationS3Configuration{
+				S3Uri:    ptr.String("__S3Uri__"),
+				KmsKeyId: ptr.String("__KmsKeyId__"),
+			},
+		},
+		DataAccessRoleArn:     ptr.String("__DataAccessRoleArn__"),
+		ClientToken:           ptr.String("__ClientToken__"),
+		JobName:               ptr.String("__JobName__"),
+		ProfileId:             ptr.String("__ProfileId__"),
+		DriftDetectionEnabled: ptr.Bool(true),
+		ProvenanceEnabled:     ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -912,7 +1048,18 @@ func TestCheckResponseSnapshot_StartFHIRExportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartFHIRExportJob(context.Background(), &StartFHIRExportJobInput{})
+	got, err := svc.StartFHIRExportJob(context.Background(), &StartFHIRExportJobInput{
+		JobName: ptr.String("__JobName__"),
+		OutputDataConfig: &types.OutputDataConfigMemberS3Configuration{
+			Value: types.S3Configuration{
+				S3Uri:    ptr.String("__S3Uri__"),
+				KmsKeyId: ptr.String("__KmsKeyId__"),
+			},
+		},
+		DatastoreId:       ptr.String("__DatastoreId__"),
+		DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -935,7 +1082,26 @@ func TestCheckResponseSnapshot_StartFHIRImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartFHIRImportJob(context.Background(), &StartFHIRImportJobInput{})
+	got, err := svc.StartFHIRImportJob(context.Background(), &StartFHIRImportJobInput{
+		JobName: ptr.String("__JobName__"),
+		InputDataConfig: &types.InputDataConfigMemberS3Uri{
+			Value: "__InputDataConfigMemberS3Uri__",
+		},
+		JobOutputDataConfig: &types.OutputDataConfigMemberS3Configuration{
+			Value: types.S3Configuration{
+				S3Uri:    ptr.String("__S3Uri__"),
+				KmsKeyId: ptr.String("__KmsKeyId__"),
+			},
+		},
+		DatastoreId:           ptr.String("__DatastoreId__"),
+		DataAccessRoleArn:     ptr.String("__DataAccessRoleArn__"),
+		ClientToken:           ptr.String("__ClientToken__"),
+		ValidationLevel:       types.ValidationLevel("strict"),
+		ProfileId:             ptr.String("__ProfileId__"),
+		InputFormat:           ptr.String("__InputFormat__"),
+		DriftDetectionEnabled: true,
+		ProvenanceEnabled:     ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -954,7 +1120,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -973,7 +1151,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -998,7 +1182,13 @@ func TestCheckResponseSnapshot_UpdateDataTransformationProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateDataTransformationProfile(context.Background(), &UpdateDataTransformationProfileInput{})
+	got, err := svc.UpdateDataTransformationProfile(context.Background(), &UpdateDataTransformationProfileInput{
+		ProfileId: ptr.String("__ProfileId__"),
+		ProfileMapping: map[string]string{
+			"key0": "__Value__",
+		},
+		ChangeDescription: ptr.String("__ChangeDescription__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1058,7 +1248,28 @@ func TestCheckResponseSnapshot_UpdateFHIRDatastore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFHIRDatastore(context.Background(), &UpdateFHIRDatastoreInput{})
+	got, err := svc.UpdateFHIRDatastore(context.Background(), &UpdateFHIRDatastoreInput{
+		DatastoreId:   ptr.String("__DatastoreId__"),
+		DatastoreName: ptr.String("__DatastoreName__"),
+		AnalyticsConfiguration: &types.AnalyticsConfiguration{
+			Status: types.AnalyticsStatus("ENABLED"),
+		},
+		NlpConfiguration: &types.NlpConfiguration{
+			Status: types.NlpStatus("ENABLED"),
+		},
+		ProfileConfiguration: &types.ProfileConfiguration{
+			DefaultProfiles: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		IdentityProviderConfiguration: &types.IdentityProviderConfiguration{
+			AuthorizationStrategy:           types.AuthorizationStrategy("SMART_ON_FHIR_V1"),
+			FineGrainedAuthorizationEnabled: true,
+			Metadata:                        ptr.String("__Metadata__"),
+			IdpLambdaArn:                    ptr.String("__IdpLambdaArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1087,7 +1298,15 @@ func TestCheckResponseSnapshot_UpdateProfileWithAgent(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProfileWithAgent(context.Background(), &UpdateProfileWithAgentInput{})
+	got, err := svc.UpdateProfileWithAgent(context.Background(), &UpdateProfileWithAgentInput{
+		ProfileId:    ptr.String("__ProfileId__"),
+		SourceFormat: types.SourceFormat("CCDA"),
+		InputMessage: &types.AgentInputMessage{
+			Body: ptr.String("__Body__"),
+			Type: types.AgentInputMessageType("normal"),
+		},
+		ConversationId: ptr.String("__ConversationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1108,7 +1327,21 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataTransformationProfile(context.Background(), &CreateDataTransformationProfileInput{})
+	_, opErr := svc.CreateDataTransformationProfile(context.Background(), &CreateDataTransformationProfileInput{
+		SourceFormat: types.SourceFormat("CCDA"),
+		Source: &types.CreateDataTransformationProfileSourceMemberStarterProfile{
+			Value: types.StarterProfileSource{
+				StarterProfileName: ptr.String("__StarterProfileName__"),
+			},
+		},
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		ProfileDescription: ptr.String("__ProfileDescription__"),
+		ProfileName:        ptr.String("__ProfileName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1133,7 +1366,15 @@ func TestCheckResponseSnapshot_Error_AgentMessageOutOfContextException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateProfileWithAgent(context.Background(), &UpdateProfileWithAgentInput{})
+	_, opErr := svc.UpdateProfileWithAgent(context.Background(), &UpdateProfileWithAgentInput{
+		ProfileId:    ptr.String("__ProfileId__"),
+		SourceFormat: types.SourceFormat("CCDA"),
+		InputMessage: &types.AgentInputMessage{
+			Body: ptr.String("__Body__"),
+			Type: types.AgentInputMessageType("normal"),
+		},
+		ConversationId: ptr.String("__ConversationId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1158,7 +1399,21 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataTransformationProfile(context.Background(), &CreateDataTransformationProfileInput{})
+	_, opErr := svc.CreateDataTransformationProfile(context.Background(), &CreateDataTransformationProfileInput{
+		SourceFormat: types.SourceFormat("CCDA"),
+		Source: &types.CreateDataTransformationProfileSourceMemberStarterProfile{
+			Value: types.StarterProfileSource{
+				StarterProfileName: ptr.String("__StarterProfileName__"),
+			},
+		},
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		ProfileDescription: ptr.String("__ProfileDescription__"),
+		ProfileName:        ptr.String("__ProfileName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1183,7 +1438,15 @@ func TestCheckResponseSnapshot_Error_ConversationNotFoundException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateProfileWithAgent(context.Background(), &UpdateProfileWithAgentInput{})
+	_, opErr := svc.UpdateProfileWithAgent(context.Background(), &UpdateProfileWithAgentInput{
+		ProfileId:    ptr.String("__ProfileId__"),
+		SourceFormat: types.SourceFormat("CCDA"),
+		InputMessage: &types.AgentInputMessage{
+			Body: ptr.String("__Body__"),
+			Type: types.AgentInputMessageType("normal"),
+		},
+		ConversationId: ptr.String("__ConversationId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1208,7 +1471,18 @@ func TestCheckResponseSnapshot_Error_FailedDependencyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartFHIRExportJob(context.Background(), &StartFHIRExportJobInput{})
+	_, opErr := svc.StartFHIRExportJob(context.Background(), &StartFHIRExportJobInput{
+		JobName: ptr.String("__JobName__"),
+		OutputDataConfig: &types.OutputDataConfigMemberS3Configuration{
+			Value: types.S3Configuration{
+				S3Uri:    ptr.String("__S3Uri__"),
+				KmsKeyId: ptr.String("__KmsKeyId__"),
+			},
+		},
+		DatastoreId:       ptr.String("__DatastoreId__"),
+		DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1233,7 +1507,21 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataTransformationProfile(context.Background(), &CreateDataTransformationProfileInput{})
+	_, opErr := svc.CreateDataTransformationProfile(context.Background(), &CreateDataTransformationProfileInput{
+		SourceFormat: types.SourceFormat("CCDA"),
+		Source: &types.CreateDataTransformationProfileSourceMemberStarterProfile{
+			Value: types.StarterProfileSource{
+				StarterProfileName: ptr.String("__StarterProfileName__"),
+			},
+		},
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		ProfileDescription: ptr.String("__ProfileDescription__"),
+		ProfileName:        ptr.String("__ProfileName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1258,7 +1546,15 @@ func TestCheckResponseSnapshot_Error_NotImplementedOperationException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateProfileWithAgent(context.Background(), &UpdateProfileWithAgentInput{})
+	_, opErr := svc.UpdateProfileWithAgent(context.Background(), &UpdateProfileWithAgentInput{
+		ProfileId:    ptr.String("__ProfileId__"),
+		SourceFormat: types.SourceFormat("CCDA"),
+		InputMessage: &types.AgentInputMessage{
+			Body: ptr.String("__Body__"),
+			Type: types.AgentInputMessageType("normal"),
+		},
+		ConversationId: ptr.String("__ConversationId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1283,7 +1579,21 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataTransformationProfile(context.Background(), &CreateDataTransformationProfileInput{})
+	_, opErr := svc.CreateDataTransformationProfile(context.Background(), &CreateDataTransformationProfileInput{
+		SourceFormat: types.SourceFormat("CCDA"),
+		Source: &types.CreateDataTransformationProfileSourceMemberStarterProfile{
+			Value: types.StarterProfileSource{
+				StarterProfileName: ptr.String("__StarterProfileName__"),
+			},
+		},
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		ProfileDescription: ptr.String("__ProfileDescription__"),
+		ProfileName:        ptr.String("__ProfileName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1308,7 +1618,21 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataTransformationProfile(context.Background(), &CreateDataTransformationProfileInput{})
+	_, opErr := svc.CreateDataTransformationProfile(context.Background(), &CreateDataTransformationProfileInput{
+		SourceFormat: types.SourceFormat("CCDA"),
+		Source: &types.CreateDataTransformationProfileSourceMemberStarterProfile{
+			Value: types.StarterProfileSource{
+				StarterProfileName: ptr.String("__StarterProfileName__"),
+			},
+		},
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		ProfileDescription: ptr.String("__ProfileDescription__"),
+		ProfileName:        ptr.String("__ProfileName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1333,7 +1657,21 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataTransformationProfile(context.Background(), &CreateDataTransformationProfileInput{})
+	_, opErr := svc.CreateDataTransformationProfile(context.Background(), &CreateDataTransformationProfileInput{
+		SourceFormat: types.SourceFormat("CCDA"),
+		Source: &types.CreateDataTransformationProfileSourceMemberStarterProfile{
+			Value: types.StarterProfileSource{
+				StarterProfileName: ptr.String("__StarterProfileName__"),
+			},
+		},
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		ProfileDescription: ptr.String("__ProfileDescription__"),
+		ProfileName:        ptr.String("__ProfileName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1358,7 +1696,15 @@ func TestCheckResponseSnapshot_Error_UnauthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateProfileWithAgent(context.Background(), &UpdateProfileWithAgentInput{})
+	_, opErr := svc.UpdateProfileWithAgent(context.Background(), &UpdateProfileWithAgentInput{
+		ProfileId:    ptr.String("__ProfileId__"),
+		SourceFormat: types.SourceFormat("CCDA"),
+		InputMessage: &types.AgentInputMessage{
+			Body: ptr.String("__Body__"),
+			Type: types.AgentInputMessageType("normal"),
+		},
+		ConversationId: ptr.String("__ConversationId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1383,7 +1729,15 @@ func TestCheckResponseSnapshot_Error_UnsupportedMIMETypeException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateProfileWithAgent(context.Background(), &UpdateProfileWithAgentInput{})
+	_, opErr := svc.UpdateProfileWithAgent(context.Background(), &UpdateProfileWithAgentInput{
+		ProfileId:    ptr.String("__ProfileId__"),
+		SourceFormat: types.SourceFormat("CCDA"),
+		InputMessage: &types.AgentInputMessage{
+			Body: ptr.String("__Body__"),
+			Type: types.AgentInputMessageType("normal"),
+		},
+		ConversationId: ptr.String("__ConversationId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1408,7 +1762,21 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDataTransformationProfile(context.Background(), &CreateDataTransformationProfileInput{})
+	_, opErr := svc.CreateDataTransformationProfile(context.Background(), &CreateDataTransformationProfileInput{
+		SourceFormat: types.SourceFormat("CCDA"),
+		Source: &types.CreateDataTransformationProfileSourceMemberStarterProfile{
+			Value: types.StarterProfileSource{
+				StarterProfileName: ptr.String("__StarterProfileName__"),
+			},
+		},
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		ProfileDescription: ptr.String("__ProfileDescription__"),
+		ProfileName:        ptr.String("__ProfileName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

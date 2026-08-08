@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"appConfigs":[{"key":"opensearchDashboards.dashboardAdmin.users","value":"__Value__"},{"key":"opensearchDashboards.dashboardAdmin.users","value":"__Value__"}],"arn":"__Arn__","createdAt":946684800,"dataSources":[{"dataSourceArn":"__DataSourceArn__","dataSourceDescription":"__DataSourceDescription__","iamRoleForDataSourceArn":"__IamRoleForDataSourceArn__"},{"dataSourceArn":"__DataSourceArn__","dataSourceDescription":"__DataSourceDescription__","iamRoleForDataSourceArn":"__IamRoleForDataSourceArn__"}],"endpoint":"__Endpoint__","iamIdentityCenterOptions":{"enabled":true,"iamIdentityCenterApplicationArn":"__IamIdentityCenterApplicationArn__","iamIdentityCenterInstanceArn":"__IamIdentityCenterInstanceArn__","iamRoleForIdentityCenterApplicationArn":"__IamRoleForIdentityCenterApplicationArn__"},"id":"__Id__","kmsKeyArn":"__KmsKeyArn__","lastUpdatedAt":946684800,"name":"__Name__","status":"CREATING"}

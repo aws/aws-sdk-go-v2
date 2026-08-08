@@ -2,4 +2,4 @@ POST /2021-01-01/opensearch/domain/__DomainName__/index
 
 Content-Type: application/json
 
-{"IndexName":"__IndexName__"}
+{"IndexName":"__IndexName__","IndexSchema":"__Document__"}

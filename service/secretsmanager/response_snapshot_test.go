@@ -157,7 +157,30 @@ func TestCheckResponseSnapshot_BatchGetSecretValue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetSecretValue(context.Background(), &BatchGetSecretValueInput{})
+	got, err := svc.BatchGetSecretValue(context.Background(), &BatchGetSecretValueInput{
+		SecretIdList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Key: types.FilterNameStringType("description"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Key: types.FilterNameStringType("description"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -180,7 +203,9 @@ func TestCheckResponseSnapshot_CancelRotateSecret(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelRotateSecret(context.Background(), &CancelRotateSecretInput{})
+	got, err := svc.CancelRotateSecret(context.Background(), &CancelRotateSecretInput{
+		SecretId: ptr.String("__SecretId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -219,7 +244,36 @@ func TestCheckResponseSnapshot_CreateSecret(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSecret(context.Background(), &CreateSecretInput{})
+	got, err := svc.CreateSecret(context.Background(), &CreateSecretInput{
+		Name:               ptr.String("__Name__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Description:        ptr.String("__Description__"),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		SecretBinary:       []byte("blob"),
+		SecretString:       ptr.String("__SecretString__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AddReplicaRegions: []types.ReplicaRegionType{
+			{
+				Region:   ptr.String("__Region__"),
+				KmsKeyId: ptr.String("__KmsKeyId__"),
+			},
+			{
+				Region:   ptr.String("__Region__"),
+				KmsKeyId: ptr.String("__KmsKeyId__"),
+			},
+		},
+		ForceOverwriteReplicaSecret: true,
+		Type:                        ptr.String("__Type__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -241,7 +295,9 @@ func TestCheckResponseSnapshot_DeleteResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{})
+	got, err := svc.DeleteResourcePolicy(context.Background(), &DeleteResourcePolicyInput{
+		SecretId: ptr.String("__SecretId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -264,7 +320,11 @@ func TestCheckResponseSnapshot_DeleteSecret(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSecret(context.Background(), &DeleteSecretInput{})
+	got, err := svc.DeleteSecret(context.Background(), &DeleteSecretInput{
+		SecretId:                   ptr.String("__SecretId__"),
+		RecoveryWindowInDays:       ptr.Int64(1),
+		ForceDeleteWithoutRecovery: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -347,7 +407,9 @@ func TestCheckResponseSnapshot_DescribeSecret(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeSecret(context.Background(), &DescribeSecretInput{})
+	got, err := svc.DescribeSecret(context.Background(), &DescribeSecretInput{
+		SecretId: ptr.String("__SecretId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -368,7 +430,16 @@ func TestCheckResponseSnapshot_GetRandomPassword(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRandomPassword(context.Background(), &GetRandomPasswordInput{})
+	got, err := svc.GetRandomPassword(context.Background(), &GetRandomPasswordInput{
+		PasswordLength:          ptr.Int64(1),
+		ExcludeCharacters:       ptr.String("__ExcludeCharacters__"),
+		ExcludeNumbers:          ptr.Bool(true),
+		ExcludePunctuation:      ptr.Bool(true),
+		ExcludeUppercase:        ptr.Bool(true),
+		ExcludeLowercase:        ptr.Bool(true),
+		IncludeSpace:            ptr.Bool(true),
+		RequireEachIncludedType: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -391,7 +462,9 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{})
+	got, err := svc.GetResourcePolicy(context.Background(), &GetResourcePolicyInput{
+		SecretId: ptr.String("__SecretId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -421,7 +494,11 @@ func TestCheckResponseSnapshot_GetSecretValue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSecretValue(context.Background(), &GetSecretValueInput{})
+	got, err := svc.GetSecretValue(context.Background(), &GetSecretValueInput{
+		SecretId:     ptr.String("__SecretId__"),
+		VersionId:    ptr.String("__VersionId__"),
+		VersionStage: ptr.String("__VersionStage__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -472,7 +549,12 @@ func TestCheckResponseSnapshot_ListSecretVersionIds(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSecretVersionIds(context.Background(), &ListSecretVersionIdsInput{})
+	got, err := svc.ListSecretVersionIds(context.Background(), &ListSecretVersionIdsInput{
+		SecretId:          ptr.String("__SecretId__"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+		IncludeDeprecated: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -593,7 +675,29 @@ func TestCheckResponseSnapshot_ListSecrets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSecrets(context.Background(), &ListSecretsInput{})
+	got, err := svc.ListSecrets(context.Background(), &ListSecretsInput{
+		IncludePlannedDeletion: ptr.Bool(true),
+		MaxResults:             ptr.Int32(1),
+		NextToken:              ptr.String("__NextToken__"),
+		Filters: []types.Filter{
+			{
+				Key: types.FilterNameStringType("description"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Key: types.FilterNameStringType("description"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		SortOrder: types.SortOrderType("asc"),
+		SortBy:    types.SortByType("created-date"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -615,7 +719,11 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	got, err := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		SecretId:          ptr.String("__SecretId__"),
+		ResourcePolicy:    ptr.String("__ResourcePolicy__"),
+		BlockPublicPolicy: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -642,7 +750,17 @@ func TestCheckResponseSnapshot_PutSecretValue(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutSecretValue(context.Background(), &PutSecretValueInput{})
+	got, err := svc.PutSecretValue(context.Background(), &PutSecretValueInput{
+		SecretId:           ptr.String("__SecretId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		SecretBinary:       []byte("blob"),
+		SecretString:       ptr.String("__SecretString__"),
+		VersionStages: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RotationToken: ptr.String("__RotationToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -679,7 +797,13 @@ func TestCheckResponseSnapshot_RemoveRegionsFromReplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveRegionsFromReplication(context.Background(), &RemoveRegionsFromReplicationInput{})
+	got, err := svc.RemoveRegionsFromReplication(context.Background(), &RemoveRegionsFromReplicationInput{
+		SecretId: ptr.String("__SecretId__"),
+		RemoveReplicaRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -716,7 +840,20 @@ func TestCheckResponseSnapshot_ReplicateSecretToRegions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ReplicateSecretToRegions(context.Background(), &ReplicateSecretToRegionsInput{})
+	got, err := svc.ReplicateSecretToRegions(context.Background(), &ReplicateSecretToRegionsInput{
+		SecretId: ptr.String("__SecretId__"),
+		AddReplicaRegions: []types.ReplicaRegionType{
+			{
+				Region:   ptr.String("__Region__"),
+				KmsKeyId: ptr.String("__KmsKeyId__"),
+			},
+			{
+				Region:   ptr.String("__Region__"),
+				KmsKeyId: ptr.String("__KmsKeyId__"),
+			},
+		},
+		ForceOverwriteReplicaSecret: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -738,7 +875,9 @@ func TestCheckResponseSnapshot_RestoreSecret(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RestoreSecret(context.Background(), &RestoreSecretInput{})
+	got, err := svc.RestoreSecret(context.Background(), &RestoreSecretInput{
+		SecretId: ptr.String("__SecretId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -761,7 +900,28 @@ func TestCheckResponseSnapshot_RotateSecret(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RotateSecret(context.Background(), &RotateSecretInput{})
+	got, err := svc.RotateSecret(context.Background(), &RotateSecretInput{
+		SecretId:           ptr.String("__SecretId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		RotationLambdaARN:  ptr.String("__RotationLambdaARN__"),
+		RotationRules: &types.RotationRulesType{
+			AutomaticallyAfterDays: ptr.Int64(1),
+			Duration:               ptr.String("__Duration__"),
+			ScheduleExpression:     ptr.String("__ScheduleExpression__"),
+		},
+		ExternalSecretRotationMetadata: []types.ExternalSecretRotationMetadataItem{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ExternalSecretRotationRoleArn: ptr.String("__ExternalSecretRotationRoleArn__"),
+		RotateImmediately:             ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -782,7 +942,9 @@ func TestCheckResponseSnapshot_StopReplicationToReplica(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopReplicationToReplica(context.Background(), &StopReplicationToReplicaInput{})
+	got, err := svc.StopReplicationToReplica(context.Background(), &StopReplicationToReplicaInput{
+		SecretId: ptr.String("__SecretId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -801,7 +963,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		SecretId: ptr.String("__SecretId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -820,7 +994,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		SecretId: ptr.String("__SecretId__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -843,7 +1023,15 @@ func TestCheckResponseSnapshot_UpdateSecret(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSecret(context.Background(), &UpdateSecretInput{})
+	got, err := svc.UpdateSecret(context.Background(), &UpdateSecretInput{
+		SecretId:           ptr.String("__SecretId__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Description:        ptr.String("__Description__"),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		SecretBinary:       []byte("blob"),
+		SecretString:       ptr.String("__SecretString__"),
+		Type:               ptr.String("__Type__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -865,7 +1053,12 @@ func TestCheckResponseSnapshot_UpdateSecretVersionStage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSecretVersionStage(context.Background(), &UpdateSecretVersionStageInput{})
+	got, err := svc.UpdateSecretVersionStage(context.Background(), &UpdateSecretVersionStageInput{
+		SecretId:            ptr.String("__SecretId__"),
+		VersionStage:        ptr.String("__VersionStage__"),
+		RemoveFromVersionId: ptr.String("__RemoveFromVersionId__"),
+		MoveToVersionId:     ptr.String("__MoveToVersionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -896,7 +1089,10 @@ func TestCheckResponseSnapshot_ValidateResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ValidateResourcePolicy(context.Background(), &ValidateResourcePolicyInput{})
+	got, err := svc.ValidateResourcePolicy(context.Background(), &ValidateResourcePolicyInput{
+		SecretId:       ptr.String("__SecretId__"),
+		ResourcePolicy: ptr.String("__ResourcePolicy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -917,7 +1113,30 @@ func TestCheckResponseSnapshot_Error_DecryptionFailure(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetSecretValue(context.Background(), &BatchGetSecretValueInput{})
+	_, opErr := svc.BatchGetSecretValue(context.Background(), &BatchGetSecretValueInput{
+		SecretIdList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Key: types.FilterNameStringType("description"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Key: types.FilterNameStringType("description"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -942,7 +1161,36 @@ func TestCheckResponseSnapshot_Error_EncryptionFailure(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSecret(context.Background(), &CreateSecretInput{})
+	_, opErr := svc.CreateSecret(context.Background(), &CreateSecretInput{
+		Name:               ptr.String("__Name__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Description:        ptr.String("__Description__"),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		SecretBinary:       []byte("blob"),
+		SecretString:       ptr.String("__SecretString__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AddReplicaRegions: []types.ReplicaRegionType{
+			{
+				Region:   ptr.String("__Region__"),
+				KmsKeyId: ptr.String("__KmsKeyId__"),
+			},
+			{
+				Region:   ptr.String("__Region__"),
+				KmsKeyId: ptr.String("__KmsKeyId__"),
+			},
+		},
+		ForceOverwriteReplicaSecret: true,
+		Type:                        ptr.String("__Type__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -967,7 +1215,30 @@ func TestCheckResponseSnapshot_Error_InternalServiceError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetSecretValue(context.Background(), &BatchGetSecretValueInput{})
+	_, opErr := svc.BatchGetSecretValue(context.Background(), &BatchGetSecretValueInput{
+		SecretIdList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Key: types.FilterNameStringType("description"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Key: types.FilterNameStringType("description"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -992,7 +1263,30 @@ func TestCheckResponseSnapshot_Error_InvalidNextTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetSecretValue(context.Background(), &BatchGetSecretValueInput{})
+	_, opErr := svc.BatchGetSecretValue(context.Background(), &BatchGetSecretValueInput{
+		SecretIdList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Key: types.FilterNameStringType("description"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Key: types.FilterNameStringType("description"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1017,7 +1311,30 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetSecretValue(context.Background(), &BatchGetSecretValueInput{})
+	_, opErr := svc.BatchGetSecretValue(context.Background(), &BatchGetSecretValueInput{
+		SecretIdList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Key: types.FilterNameStringType("description"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Key: types.FilterNameStringType("description"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1042,7 +1359,30 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetSecretValue(context.Background(), &BatchGetSecretValueInput{})
+	_, opErr := svc.BatchGetSecretValue(context.Background(), &BatchGetSecretValueInput{
+		SecretIdList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Key: types.FilterNameStringType("description"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Key: types.FilterNameStringType("description"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1067,7 +1407,36 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSecret(context.Background(), &CreateSecretInput{})
+	_, opErr := svc.CreateSecret(context.Background(), &CreateSecretInput{
+		Name:               ptr.String("__Name__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Description:        ptr.String("__Description__"),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		SecretBinary:       []byte("blob"),
+		SecretString:       ptr.String("__SecretString__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AddReplicaRegions: []types.ReplicaRegionType{
+			{
+				Region:   ptr.String("__Region__"),
+				KmsKeyId: ptr.String("__KmsKeyId__"),
+			},
+			{
+				Region:   ptr.String("__Region__"),
+				KmsKeyId: ptr.String("__KmsKeyId__"),
+			},
+		},
+		ForceOverwriteReplicaSecret: true,
+		Type:                        ptr.String("__Type__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1092,7 +1461,36 @@ func TestCheckResponseSnapshot_Error_MalformedPolicyDocumentException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSecret(context.Background(), &CreateSecretInput{})
+	_, opErr := svc.CreateSecret(context.Background(), &CreateSecretInput{
+		Name:               ptr.String("__Name__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Description:        ptr.String("__Description__"),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		SecretBinary:       []byte("blob"),
+		SecretString:       ptr.String("__SecretString__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AddReplicaRegions: []types.ReplicaRegionType{
+			{
+				Region:   ptr.String("__Region__"),
+				KmsKeyId: ptr.String("__KmsKeyId__"),
+			},
+			{
+				Region:   ptr.String("__Region__"),
+				KmsKeyId: ptr.String("__KmsKeyId__"),
+			},
+		},
+		ForceOverwriteReplicaSecret: true,
+		Type:                        ptr.String("__Type__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1117,7 +1515,36 @@ func TestCheckResponseSnapshot_Error_PreconditionNotMetException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSecret(context.Background(), &CreateSecretInput{})
+	_, opErr := svc.CreateSecret(context.Background(), &CreateSecretInput{
+		Name:               ptr.String("__Name__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Description:        ptr.String("__Description__"),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		SecretBinary:       []byte("blob"),
+		SecretString:       ptr.String("__SecretString__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AddReplicaRegions: []types.ReplicaRegionType{
+			{
+				Region:   ptr.String("__Region__"),
+				KmsKeyId: ptr.String("__KmsKeyId__"),
+			},
+			{
+				Region:   ptr.String("__Region__"),
+				KmsKeyId: ptr.String("__KmsKeyId__"),
+			},
+		},
+		ForceOverwriteReplicaSecret: true,
+		Type:                        ptr.String("__Type__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1142,7 +1569,11 @@ func TestCheckResponseSnapshot_Error_PublicPolicyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{})
+	_, opErr := svc.PutResourcePolicy(context.Background(), &PutResourcePolicyInput{
+		SecretId:          ptr.String("__SecretId__"),
+		ResourcePolicy:    ptr.String("__ResourcePolicy__"),
+		BlockPublicPolicy: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1167,7 +1598,36 @@ func TestCheckResponseSnapshot_Error_ResourceExistsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateSecret(context.Background(), &CreateSecretInput{})
+	_, opErr := svc.CreateSecret(context.Background(), &CreateSecretInput{
+		Name:               ptr.String("__Name__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Description:        ptr.String("__Description__"),
+		KmsKeyId:           ptr.String("__KmsKeyId__"),
+		SecretBinary:       []byte("blob"),
+		SecretString:       ptr.String("__SecretString__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		AddReplicaRegions: []types.ReplicaRegionType{
+			{
+				Region:   ptr.String("__Region__"),
+				KmsKeyId: ptr.String("__KmsKeyId__"),
+			},
+			{
+				Region:   ptr.String("__Region__"),
+				KmsKeyId: ptr.String("__KmsKeyId__"),
+			},
+		},
+		ForceOverwriteReplicaSecret: true,
+		Type:                        ptr.String("__Type__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1192,7 +1652,30 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetSecretValue(context.Background(), &BatchGetSecretValueInput{})
+	_, opErr := svc.BatchGetSecretValue(context.Background(), &BatchGetSecretValueInput{
+		SecretIdList: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Key: types.FilterNameStringType("description"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Key: types.FilterNameStringType("description"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

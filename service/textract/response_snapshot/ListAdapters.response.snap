@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Textract.ListAdapters
+
+{"Adapters":[{"AdapterId":"__AdapterId__","AdapterName":"__AdapterName__","CreationTime":946684800,"FeatureTypes":["TABLES","TABLES"]},{"AdapterId":"__AdapterId__","AdapterName":"__AdapterName__","CreationTime":946684800,"FeatureTypes":["TABLES","TABLES"]}],"NextToken":"__NextToken__"}

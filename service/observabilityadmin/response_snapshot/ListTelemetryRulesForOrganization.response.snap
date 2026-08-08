@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","TelemetryRuleSummaries":[{"CreatedTimeStamp":1,"LastUpdateTimeStamp":1,"ResourceType":"AWS::EC2::Instance","RuleArn":"__RuleArn__","RuleName":"__RuleName__","TelemetrySourceTypes":["VPC_FLOW_LOGS","VPC_FLOW_LOGS"],"TelemetryType":"Logs"},{"CreatedTimeStamp":1,"LastUpdateTimeStamp":1,"ResourceType":"AWS::EC2::Instance","RuleArn":"__RuleArn__","RuleName":"__RuleName__","TelemetrySourceTypes":["VPC_FLOW_LOGS","VPC_FLOW_LOGS"],"TelemetryType":"Logs"}]}

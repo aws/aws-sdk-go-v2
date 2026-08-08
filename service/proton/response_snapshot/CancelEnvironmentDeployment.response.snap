@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.CancelEnvironmentDeployment
+
+{"environment":{"arn":"__Arn__","codebuildRoleArn":"__CodebuildRoleArn__","componentRoleArn":"__ComponentRoleArn__","createdAt":946684800,"deploymentStatus":"IN_PROGRESS","deploymentStatusMessage":"__DeploymentStatusMessage__","description":"__Description__","environmentAccountConnectionId":"__EnvironmentAccountConnectionId__","environmentAccountId":"__EnvironmentAccountId__","lastAttemptedDeploymentId":"__LastAttemptedDeploymentId__","lastDeploymentAttemptedAt":946684800,"lastDeploymentSucceededAt":946684800,"lastSucceededDeploymentId":"__LastSucceededDeploymentId__","name":"__Name__","protonServiceRoleArn":"__ProtonServiceRoleArn__","provisioning":"CUSTOMER_MANAGED","provisioningRepository":{"arn":"__Arn__","branch":"__Branch__","name":"__Name__","provider":"GITHUB"},"spec":"__Spec__","templateMajorVersion":"__TemplateMajorVersion__","templateMinorVersion":"__TemplateMinorVersion__","templateName":"__TemplateName__"}}

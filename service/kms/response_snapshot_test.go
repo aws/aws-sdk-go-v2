@@ -119,7 +119,9 @@ func TestCheckResponseSnapshot_CancelKeyDeletion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelKeyDeletion(context.Background(), &CancelKeyDeletionInput{})
+	got, err := svc.CancelKeyDeletion(context.Background(), &CancelKeyDeletionInput{
+		KeyId: ptr.String("__KeyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -138,7 +140,9 @@ func TestCheckResponseSnapshot_ConnectCustomKeyStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ConnectCustomKeyStore(context.Background(), &ConnectCustomKeyStoreInput{})
+	got, err := svc.ConnectCustomKeyStore(context.Background(), &ConnectCustomKeyStoreInput{
+		CustomKeyStoreId: ptr.String("__CustomKeyStoreId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -157,7 +161,10 @@ func TestCheckResponseSnapshot_CreateAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAlias(context.Background(), &CreateAliasInput{})
+	got, err := svc.CreateAlias(context.Background(), &CreateAliasInput{
+		AliasName:   ptr.String("__AliasName__"),
+		TargetKeyId: ptr.String("__TargetKeyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -178,7 +185,22 @@ func TestCheckResponseSnapshot_CreateCustomKeyStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCustomKeyStore(context.Background(), &CreateCustomKeyStoreInput{})
+	got, err := svc.CreateCustomKeyStore(context.Background(), &CreateCustomKeyStoreInput{
+		CustomKeyStoreName:              ptr.String("__CustomKeyStoreName__"),
+		CloudHsmClusterId:               ptr.String("__CloudHsmClusterId__"),
+		TrustAnchorCertificate:          ptr.String("__TrustAnchorCertificate__"),
+		KeyStorePassword:                ptr.String("__KeyStorePassword__"),
+		CustomKeyStoreType:              types.CustomKeyStoreType("AWS_CLOUDHSM"),
+		XksProxyUriEndpoint:             ptr.String("__XksProxyUriEndpoint__"),
+		XksProxyUriPath:                 ptr.String("__XksProxyUriPath__"),
+		XksProxyVpcEndpointServiceName:  ptr.String("__XksProxyVpcEndpointServiceName__"),
+		XksProxyVpcEndpointServiceOwner: ptr.String("__XksProxyVpcEndpointServiceOwner__"),
+		XksProxyAuthenticationCredential: &types.XksProxyAuthenticationCredentialType{
+			AccessKeyId:        ptr.String("__AccessKeyId__"),
+			RawSecretAccessKey: ptr.String("__RawSecretAccessKey__"),
+		},
+		XksProxyConnectivity: types.XksProxyConnectivityType("PUBLIC_ENDPOINT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -200,7 +222,32 @@ func TestCheckResponseSnapshot_CreateGrant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateGrant(context.Background(), &CreateGrantInput{})
+	got, err := svc.CreateGrant(context.Background(), &CreateGrantInput{
+		KeyId:             ptr.String("__KeyId__"),
+		GranteePrincipal:  ptr.String("__GranteePrincipal__"),
+		RetiringPrincipal: ptr.String("__RetiringPrincipal__"),
+		Operations: []types.GrantOperation{
+			types.GrantOperation("Decrypt"),
+			types.GrantOperation("Decrypt"),
+		},
+		Constraints: &types.GrantConstraints{
+			EncryptionContextSubset: map[string]string{
+				"key0": "__Value__",
+			},
+			EncryptionContextEquals: map[string]string{
+				"key0": "__Value__",
+			},
+			SourceArn: ptr.String("__SourceArn__"),
+		},
+		GrantTokens: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Name:                     ptr.String("__Name__"),
+		DryRun:                   ptr.Bool(true),
+		GranteeServicePrincipal:  ptr.String("__GranteeServicePrincipal__"),
+		RetiringServicePrincipal: ptr.String("__RetiringServicePrincipal__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -278,7 +325,28 @@ func TestCheckResponseSnapshot_CreateKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateKey(context.Background(), &CreateKeyInput{})
+	got, err := svc.CreateKey(context.Background(), &CreateKeyInput{
+		Policy:                         ptr.String("__Policy__"),
+		Description:                    ptr.String("__Description__"),
+		KeyUsage:                       types.KeyUsageType("SIGN_VERIFY"),
+		CustomerMasterKeySpec:          types.CustomerMasterKeySpec("RSA_2048"),
+		KeySpec:                        types.KeySpec("RSA_2048"),
+		Origin:                         types.OriginType("AWS_KMS"),
+		CustomKeyStoreId:               ptr.String("__CustomKeyStoreId__"),
+		BypassPolicyLockoutSafetyCheck: true,
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+		MultiRegion: ptr.Bool(true),
+		XksKeyId:    ptr.String("__XksKeyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -303,7 +371,27 @@ func TestCheckResponseSnapshot_Decrypt(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Decrypt(context.Background(), &DecryptInput{})
+	got, err := svc.Decrypt(context.Background(), &DecryptInput{
+		CiphertextBlob: []byte("blob"),
+		EncryptionContext: map[string]string{
+			"key0": "__Value__",
+		},
+		GrantTokens: []string{
+			"__Member__",
+			"__Member__",
+		},
+		KeyId:               ptr.String("__KeyId__"),
+		EncryptionAlgorithm: types.EncryptionAlgorithmSpec("SYMMETRIC_DEFAULT"),
+		Recipient: &types.RecipientInfo{
+			KeyEncryptionAlgorithm: types.KeyEncryptionMechanism("RSAES_OAEP_SHA_256"),
+			AttestationDocument:    []byte("blob"),
+		},
+		DryRun: ptr.Bool(true),
+		DryRunModifiers: []types.DryRunModifierType{
+			types.DryRunModifierType("IGNORE_CIPHERTEXT"),
+			types.DryRunModifierType("IGNORE_CIPHERTEXT"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -322,7 +410,9 @@ func TestCheckResponseSnapshot_DeleteAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAlias(context.Background(), &DeleteAliasInput{})
+	got, err := svc.DeleteAlias(context.Background(), &DeleteAliasInput{
+		AliasName: ptr.String("__AliasName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -341,7 +431,9 @@ func TestCheckResponseSnapshot_DeleteCustomKeyStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCustomKeyStore(context.Background(), &DeleteCustomKeyStoreInput{})
+	got, err := svc.DeleteCustomKeyStore(context.Background(), &DeleteCustomKeyStoreInput{
+		CustomKeyStoreId: ptr.String("__CustomKeyStoreId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -363,7 +455,10 @@ func TestCheckResponseSnapshot_DeleteImportedKeyMaterial(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteImportedKeyMaterial(context.Background(), &DeleteImportedKeyMaterialInput{})
+	got, err := svc.DeleteImportedKeyMaterial(context.Background(), &DeleteImportedKeyMaterialInput{
+		KeyId:         ptr.String("__KeyId__"),
+		KeyMaterialId: ptr.String("__KeyMaterialId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -388,7 +483,20 @@ func TestCheckResponseSnapshot_DeriveSharedSecret(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeriveSharedSecret(context.Background(), &DeriveSharedSecretInput{})
+	got, err := svc.DeriveSharedSecret(context.Background(), &DeriveSharedSecretInput{
+		KeyId:                 ptr.String("__KeyId__"),
+		KeyAgreementAlgorithm: types.KeyAgreementAlgorithmSpec("ECDH"),
+		PublicKey:             []byte("blob"),
+		GrantTokens: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+		Recipient: &types.RecipientInfo{
+			KeyEncryptionAlgorithm: types.KeyEncryptionMechanism("RSAES_OAEP_SHA_256"),
+			AttestationDocument:    []byte("blob"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -448,7 +556,12 @@ func TestCheckResponseSnapshot_DescribeCustomKeyStores(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCustomKeyStores(context.Background(), &DescribeCustomKeyStoresInput{})
+	got, err := svc.DescribeCustomKeyStores(context.Background(), &DescribeCustomKeyStoresInput{
+		CustomKeyStoreId:   ptr.String("__CustomKeyStoreId__"),
+		CustomKeyStoreName: ptr.String("__CustomKeyStoreName__"),
+		Limit:              ptr.Int32(1),
+		Marker:             ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -526,7 +639,13 @@ func TestCheckResponseSnapshot_DescribeKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeKey(context.Background(), &DescribeKeyInput{})
+	got, err := svc.DescribeKey(context.Background(), &DescribeKeyInput{
+		KeyId: ptr.String("__KeyId__"),
+		GrantTokens: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -545,7 +664,9 @@ func TestCheckResponseSnapshot_DisableKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableKey(context.Background(), &DisableKeyInput{})
+	got, err := svc.DisableKey(context.Background(), &DisableKeyInput{
+		KeyId: ptr.String("__KeyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -564,7 +685,9 @@ func TestCheckResponseSnapshot_DisableKeyRotation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisableKeyRotation(context.Background(), &DisableKeyRotationInput{})
+	got, err := svc.DisableKeyRotation(context.Background(), &DisableKeyRotationInput{
+		KeyId: ptr.String("__KeyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -583,7 +706,9 @@ func TestCheckResponseSnapshot_DisconnectCustomKeyStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisconnectCustomKeyStore(context.Background(), &DisconnectCustomKeyStoreInput{})
+	got, err := svc.DisconnectCustomKeyStore(context.Background(), &DisconnectCustomKeyStoreInput{
+		CustomKeyStoreId: ptr.String("__CustomKeyStoreId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -602,7 +727,9 @@ func TestCheckResponseSnapshot_EnableKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableKey(context.Background(), &EnableKeyInput{})
+	got, err := svc.EnableKey(context.Background(), &EnableKeyInput{
+		KeyId: ptr.String("__KeyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -621,7 +748,10 @@ func TestCheckResponseSnapshot_EnableKeyRotation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EnableKeyRotation(context.Background(), &EnableKeyRotationInput{})
+	got, err := svc.EnableKeyRotation(context.Background(), &EnableKeyRotationInput{
+		KeyId:                ptr.String("__KeyId__"),
+		RotationPeriodInDays: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -644,7 +774,19 @@ func TestCheckResponseSnapshot_Encrypt(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Encrypt(context.Background(), &EncryptInput{})
+	got, err := svc.Encrypt(context.Background(), &EncryptInput{
+		KeyId:     ptr.String("__KeyId__"),
+		Plaintext: []byte("blob"),
+		EncryptionContext: map[string]string{
+			"key0": "__Value__",
+		},
+		GrantTokens: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EncryptionAlgorithm: types.EncryptionAlgorithmSpec("SYMMETRIC_DEFAULT"),
+		DryRun:              ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -669,7 +811,23 @@ func TestCheckResponseSnapshot_GenerateDataKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GenerateDataKey(context.Background(), &GenerateDataKeyInput{})
+	got, err := svc.GenerateDataKey(context.Background(), &GenerateDataKeyInput{
+		KeyId: ptr.String("__KeyId__"),
+		EncryptionContext: map[string]string{
+			"key0": "__Value__",
+		},
+		NumberOfBytes: ptr.Int32(1),
+		KeySpec:       types.DataKeySpec("AES_256"),
+		GrantTokens: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Recipient: &types.RecipientInfo{
+			KeyEncryptionAlgorithm: types.KeyEncryptionMechanism("RSAES_OAEP_SHA_256"),
+			AttestationDocument:    []byte("blob"),
+		},
+		DryRun: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -696,7 +854,22 @@ func TestCheckResponseSnapshot_GenerateDataKeyPair(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GenerateDataKeyPair(context.Background(), &GenerateDataKeyPairInput{})
+	got, err := svc.GenerateDataKeyPair(context.Background(), &GenerateDataKeyPairInput{
+		EncryptionContext: map[string]string{
+			"key0": "__Value__",
+		},
+		KeyId:       ptr.String("__KeyId__"),
+		KeyPairSpec: types.DataKeyPairSpec("RSA_2048"),
+		GrantTokens: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Recipient: &types.RecipientInfo{
+			KeyEncryptionAlgorithm: types.KeyEncryptionMechanism("RSAES_OAEP_SHA_256"),
+			AttestationDocument:    []byte("blob"),
+		},
+		DryRun: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -721,7 +894,18 @@ func TestCheckResponseSnapshot_GenerateDataKeyPairWithoutPlaintext(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GenerateDataKeyPairWithoutPlaintext(context.Background(), &GenerateDataKeyPairWithoutPlaintextInput{})
+	got, err := svc.GenerateDataKeyPairWithoutPlaintext(context.Background(), &GenerateDataKeyPairWithoutPlaintextInput{
+		EncryptionContext: map[string]string{
+			"key0": "__Value__",
+		},
+		KeyId:       ptr.String("__KeyId__"),
+		KeyPairSpec: types.DataKeyPairSpec("RSA_2048"),
+		GrantTokens: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -744,7 +928,19 @@ func TestCheckResponseSnapshot_GenerateDataKeyWithoutPlaintext(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GenerateDataKeyWithoutPlaintext(context.Background(), &GenerateDataKeyWithoutPlaintextInput{})
+	got, err := svc.GenerateDataKeyWithoutPlaintext(context.Background(), &GenerateDataKeyWithoutPlaintextInput{
+		KeyId: ptr.String("__KeyId__"),
+		EncryptionContext: map[string]string{
+			"key0": "__Value__",
+		},
+		KeySpec:       types.DataKeySpec("AES_256"),
+		NumberOfBytes: ptr.Int32(1),
+		GrantTokens: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -767,7 +963,16 @@ func TestCheckResponseSnapshot_GenerateMac(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GenerateMac(context.Background(), &GenerateMacInput{})
+	got, err := svc.GenerateMac(context.Background(), &GenerateMacInput{
+		Message:      []byte("blob"),
+		KeyId:        ptr.String("__KeyId__"),
+		MacAlgorithm: types.MacAlgorithmSpec("HMAC_SHA_224"),
+		GrantTokens: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -789,7 +994,14 @@ func TestCheckResponseSnapshot_GenerateRandom(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GenerateRandom(context.Background(), &GenerateRandomInput{})
+	got, err := svc.GenerateRandom(context.Background(), &GenerateRandomInput{
+		NumberOfBytes:    ptr.Int32(1),
+		CustomKeyStoreId: ptr.String("__CustomKeyStoreId__"),
+		Recipient: &types.RecipientInfo{
+			KeyEncryptionAlgorithm: types.KeyEncryptionMechanism("RSAES_OAEP_SHA_256"),
+			AttestationDocument:    []byte("blob"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -818,7 +1030,9 @@ func TestCheckResponseSnapshot_GetKeyLastUsage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetKeyLastUsage(context.Background(), &GetKeyLastUsageInput{})
+	got, err := svc.GetKeyLastUsage(context.Background(), &GetKeyLastUsageInput{
+		KeyId: ptr.String("__KeyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -840,7 +1054,10 @@ func TestCheckResponseSnapshot_GetKeyPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetKeyPolicy(context.Background(), &GetKeyPolicyInput{})
+	got, err := svc.GetKeyPolicy(context.Background(), &GetKeyPolicyInput{
+		KeyId:      ptr.String("__KeyId__"),
+		PolicyName: ptr.String("__PolicyName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -865,7 +1082,9 @@ func TestCheckResponseSnapshot_GetKeyRotationStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetKeyRotationStatus(context.Background(), &GetKeyRotationStatusInput{})
+	got, err := svc.GetKeyRotationStatus(context.Background(), &GetKeyRotationStatusInput{
+		KeyId: ptr.String("__KeyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -889,7 +1108,11 @@ func TestCheckResponseSnapshot_GetParametersForImport(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetParametersForImport(context.Background(), &GetParametersForImportInput{})
+	got, err := svc.GetParametersForImport(context.Background(), &GetParametersForImportInput{
+		KeyId:             ptr.String("__KeyId__"),
+		WrappingAlgorithm: types.AlgorithmSpec("RSAES_PKCS1_V1_5"),
+		WrappingKeySpec:   types.WrappingKeySpec("RSA_2048"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -926,7 +1149,13 @@ func TestCheckResponseSnapshot_GetPublicKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetPublicKey(context.Background(), &GetPublicKeyInput{})
+	got, err := svc.GetPublicKey(context.Background(), &GetPublicKeyInput{
+		KeyId: ptr.String("__KeyId__"),
+		GrantTokens: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -948,7 +1177,16 @@ func TestCheckResponseSnapshot_ImportKeyMaterial(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportKeyMaterial(context.Background(), &ImportKeyMaterialInput{})
+	got, err := svc.ImportKeyMaterial(context.Background(), &ImportKeyMaterialInput{
+		KeyId:                  ptr.String("__KeyId__"),
+		ImportToken:            []byte("blob"),
+		EncryptedKeyMaterial:   []byte("blob"),
+		ValidTo:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ExpirationModel:        types.ExpirationModelType("KEY_MATERIAL_EXPIRES"),
+		ImportType:             types.ImportType("NEW_KEY_MATERIAL"),
+		KeyMaterialDescription: ptr.String("__KeyMaterialDescription__"),
+		KeyMaterialId:          ptr.String("__KeyMaterialId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -986,7 +1224,11 @@ func TestCheckResponseSnapshot_ListAliases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAliases(context.Background(), &ListAliasesInput{})
+	got, err := svc.ListAliases(context.Background(), &ListAliasesInput{
+		KeyId:  ptr.String("__KeyId__"),
+		Limit:  ptr.Int32(1),
+		Marker: ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1058,7 +1300,14 @@ func TestCheckResponseSnapshot_ListGrants(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListGrants(context.Background(), &ListGrantsInput{})
+	got, err := svc.ListGrants(context.Background(), &ListGrantsInput{
+		Limit:                   ptr.Int32(1),
+		Marker:                  ptr.String("__Marker__"),
+		KeyId:                   ptr.String("__KeyId__"),
+		GrantId:                 ptr.String("__GrantId__"),
+		GranteePrincipal:        ptr.String("__GranteePrincipal__"),
+		GranteeServicePrincipal: ptr.String("__GranteeServicePrincipal__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1084,7 +1333,11 @@ func TestCheckResponseSnapshot_ListKeyPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListKeyPolicies(context.Background(), &ListKeyPoliciesInput{})
+	got, err := svc.ListKeyPolicies(context.Background(), &ListKeyPoliciesInput{
+		KeyId:  ptr.String("__KeyId__"),
+		Limit:  ptr.Int32(1),
+		Marker: ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1130,7 +1383,12 @@ func TestCheckResponseSnapshot_ListKeyRotations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListKeyRotations(context.Background(), &ListKeyRotationsInput{})
+	got, err := svc.ListKeyRotations(context.Background(), &ListKeyRotationsInput{
+		KeyId:              ptr.String("__KeyId__"),
+		IncludeKeyMaterial: types.IncludeKeyMaterial("ALL_KEY_MATERIAL"),
+		Limit:              ptr.Int32(1),
+		Marker:             ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1162,7 +1420,10 @@ func TestCheckResponseSnapshot_ListKeys(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListKeys(context.Background(), &ListKeysInput{})
+	got, err := svc.ListKeys(context.Background(), &ListKeysInput{
+		Limit:  ptr.Int32(1),
+		Marker: ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1194,7 +1455,11 @@ func TestCheckResponseSnapshot_ListResourceTags(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourceTags(context.Background(), &ListResourceTagsInput{})
+	got, err := svc.ListResourceTags(context.Background(), &ListResourceTagsInput{
+		KeyId:  ptr.String("__KeyId__"),
+		Limit:  ptr.Int32(1),
+		Marker: ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1266,7 +1531,12 @@ func TestCheckResponseSnapshot_ListRetirableGrants(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRetirableGrants(context.Background(), &ListRetirableGrantsInput{})
+	got, err := svc.ListRetirableGrants(context.Background(), &ListRetirableGrantsInput{
+		Limit:                    ptr.Int32(1),
+		Marker:                   ptr.String("__Marker__"),
+		RetiringPrincipal:        ptr.String("__RetiringPrincipal__"),
+		RetiringServicePrincipal: ptr.String("__RetiringServicePrincipal__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1285,7 +1555,12 @@ func TestCheckResponseSnapshot_PutKeyPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutKeyPolicy(context.Background(), &PutKeyPolicyInput{})
+	got, err := svc.PutKeyPolicy(context.Background(), &PutKeyPolicyInput{
+		KeyId:                          ptr.String("__KeyId__"),
+		PolicyName:                     ptr.String("__PolicyName__"),
+		Policy:                         ptr.String("__Policy__"),
+		BypassPolicyLockoutSafetyCheck: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1312,7 +1587,28 @@ func TestCheckResponseSnapshot_ReEncrypt(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ReEncrypt(context.Background(), &ReEncryptInput{})
+	got, err := svc.ReEncrypt(context.Background(), &ReEncryptInput{
+		CiphertextBlob: []byte("blob"),
+		SourceEncryptionContext: map[string]string{
+			"key0": "__Value__",
+		},
+		SourceKeyId:      ptr.String("__SourceKeyId__"),
+		DestinationKeyId: ptr.String("__DestinationKeyId__"),
+		DestinationEncryptionContext: map[string]string{
+			"key0": "__Value__",
+		},
+		SourceEncryptionAlgorithm:      types.EncryptionAlgorithmSpec("SYMMETRIC_DEFAULT"),
+		DestinationEncryptionAlgorithm: types.EncryptionAlgorithmSpec("SYMMETRIC_DEFAULT"),
+		GrantTokens: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+		DryRunModifiers: []types.DryRunModifierType{
+			types.DryRunModifierType("IGNORE_CIPHERTEXT"),
+			types.DryRunModifierType("IGNORE_CIPHERTEXT"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1401,7 +1697,23 @@ func TestCheckResponseSnapshot_ReplicateKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ReplicateKey(context.Background(), &ReplicateKeyInput{})
+	got, err := svc.ReplicateKey(context.Background(), &ReplicateKeyInput{
+		KeyId:                          ptr.String("__KeyId__"),
+		ReplicaRegion:                  ptr.String("__ReplicaRegion__"),
+		Policy:                         ptr.String("__Policy__"),
+		BypassPolicyLockoutSafetyCheck: true,
+		Description:                    ptr.String("__Description__"),
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1420,7 +1732,12 @@ func TestCheckResponseSnapshot_RetireGrant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RetireGrant(context.Background(), &RetireGrantInput{})
+	got, err := svc.RetireGrant(context.Background(), &RetireGrantInput{
+		GrantToken: ptr.String("__GrantToken__"),
+		KeyId:      ptr.String("__KeyId__"),
+		GrantId:    ptr.String("__GrantId__"),
+		DryRun:     ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1439,7 +1756,11 @@ func TestCheckResponseSnapshot_RevokeGrant(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RevokeGrant(context.Background(), &RevokeGrantInput{})
+	got, err := svc.RevokeGrant(context.Background(), &RevokeGrantInput{
+		KeyId:   ptr.String("__KeyId__"),
+		GrantId: ptr.String("__GrantId__"),
+		DryRun:  ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1460,7 +1781,9 @@ func TestCheckResponseSnapshot_RotateKeyOnDemand(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RotateKeyOnDemand(context.Background(), &RotateKeyOnDemandInput{})
+	got, err := svc.RotateKeyOnDemand(context.Background(), &RotateKeyOnDemandInput{
+		KeyId: ptr.String("__KeyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1484,7 +1807,10 @@ func TestCheckResponseSnapshot_ScheduleKeyDeletion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ScheduleKeyDeletion(context.Background(), &ScheduleKeyDeletionInput{})
+	got, err := svc.ScheduleKeyDeletion(context.Background(), &ScheduleKeyDeletionInput{
+		KeyId:               ptr.String("__KeyId__"),
+		PendingWindowInDays: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1507,7 +1833,17 @@ func TestCheckResponseSnapshot_Sign(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Sign(context.Background(), &SignInput{})
+	got, err := svc.Sign(context.Background(), &SignInput{
+		KeyId:       ptr.String("__KeyId__"),
+		Message:     []byte("blob"),
+		MessageType: types.MessageType("RAW"),
+		GrantTokens: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SigningAlgorithm: types.SigningAlgorithmSpec("RSASSA_PSS_SHA_256"),
+		DryRun:           ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1526,7 +1862,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		KeyId: ptr.String("__KeyId__"),
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1545,7 +1893,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		KeyId: ptr.String("__KeyId__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1564,7 +1918,10 @@ func TestCheckResponseSnapshot_UpdateAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAlias(context.Background(), &UpdateAliasInput{})
+	got, err := svc.UpdateAlias(context.Background(), &UpdateAliasInput{
+		AliasName:   ptr.String("__AliasName__"),
+		TargetKeyId: ptr.String("__TargetKeyId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1583,7 +1940,21 @@ func TestCheckResponseSnapshot_UpdateCustomKeyStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCustomKeyStore(context.Background(), &UpdateCustomKeyStoreInput{})
+	got, err := svc.UpdateCustomKeyStore(context.Background(), &UpdateCustomKeyStoreInput{
+		CustomKeyStoreId:                ptr.String("__CustomKeyStoreId__"),
+		NewCustomKeyStoreName:           ptr.String("__NewCustomKeyStoreName__"),
+		KeyStorePassword:                ptr.String("__KeyStorePassword__"),
+		CloudHsmClusterId:               ptr.String("__CloudHsmClusterId__"),
+		XksProxyUriEndpoint:             ptr.String("__XksProxyUriEndpoint__"),
+		XksProxyUriPath:                 ptr.String("__XksProxyUriPath__"),
+		XksProxyVpcEndpointServiceName:  ptr.String("__XksProxyVpcEndpointServiceName__"),
+		XksProxyVpcEndpointServiceOwner: ptr.String("__XksProxyVpcEndpointServiceOwner__"),
+		XksProxyAuthenticationCredential: &types.XksProxyAuthenticationCredentialType{
+			AccessKeyId:        ptr.String("__AccessKeyId__"),
+			RawSecretAccessKey: ptr.String("__RawSecretAccessKey__"),
+		},
+		XksProxyConnectivity: types.XksProxyConnectivityType("PUBLIC_ENDPOINT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1602,7 +1973,10 @@ func TestCheckResponseSnapshot_UpdateKeyDescription(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateKeyDescription(context.Background(), &UpdateKeyDescriptionInput{})
+	got, err := svc.UpdateKeyDescription(context.Background(), &UpdateKeyDescriptionInput{
+		KeyId:       ptr.String("__KeyId__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1621,7 +1995,10 @@ func TestCheckResponseSnapshot_UpdatePrimaryRegion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePrimaryRegion(context.Background(), &UpdatePrimaryRegionInput{})
+	got, err := svc.UpdatePrimaryRegion(context.Background(), &UpdatePrimaryRegionInput{
+		KeyId:         ptr.String("__KeyId__"),
+		PrimaryRegion: ptr.String("__PrimaryRegion__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1644,7 +2021,18 @@ func TestCheckResponseSnapshot_Verify(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Verify(context.Background(), &VerifyInput{})
+	got, err := svc.Verify(context.Background(), &VerifyInput{
+		KeyId:            ptr.String("__KeyId__"),
+		Message:          []byte("blob"),
+		MessageType:      types.MessageType("RAW"),
+		Signature:        []byte("blob"),
+		SigningAlgorithm: types.SigningAlgorithmSpec("RSASSA_PSS_SHA_256"),
+		GrantTokens: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1667,7 +2055,17 @@ func TestCheckResponseSnapshot_VerifyMac(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.VerifyMac(context.Background(), &VerifyMacInput{})
+	got, err := svc.VerifyMac(context.Background(), &VerifyMacInput{
+		Message:      []byte("blob"),
+		KeyId:        ptr.String("__KeyId__"),
+		MacAlgorithm: types.MacAlgorithmSpec("HMAC_SHA_224"),
+		Mac:          []byte("blob"),
+		GrantTokens: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1688,7 +2086,10 @@ func TestCheckResponseSnapshot_Error_AlreadyExistsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAlias(context.Background(), &CreateAliasInput{})
+	_, opErr := svc.CreateAlias(context.Background(), &CreateAliasInput{
+		AliasName:   ptr.String("__AliasName__"),
+		TargetKeyId: ptr.String("__TargetKeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1713,7 +2114,22 @@ func TestCheckResponseSnapshot_Error_CloudHsmClusterInUseException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCustomKeyStore(context.Background(), &CreateCustomKeyStoreInput{})
+	_, opErr := svc.CreateCustomKeyStore(context.Background(), &CreateCustomKeyStoreInput{
+		CustomKeyStoreName:              ptr.String("__CustomKeyStoreName__"),
+		CloudHsmClusterId:               ptr.String("__CloudHsmClusterId__"),
+		TrustAnchorCertificate:          ptr.String("__TrustAnchorCertificate__"),
+		KeyStorePassword:                ptr.String("__KeyStorePassword__"),
+		CustomKeyStoreType:              types.CustomKeyStoreType("AWS_CLOUDHSM"),
+		XksProxyUriEndpoint:             ptr.String("__XksProxyUriEndpoint__"),
+		XksProxyUriPath:                 ptr.String("__XksProxyUriPath__"),
+		XksProxyVpcEndpointServiceName:  ptr.String("__XksProxyVpcEndpointServiceName__"),
+		XksProxyVpcEndpointServiceOwner: ptr.String("__XksProxyVpcEndpointServiceOwner__"),
+		XksProxyAuthenticationCredential: &types.XksProxyAuthenticationCredentialType{
+			AccessKeyId:        ptr.String("__AccessKeyId__"),
+			RawSecretAccessKey: ptr.String("__RawSecretAccessKey__"),
+		},
+		XksProxyConnectivity: types.XksProxyConnectivityType("PUBLIC_ENDPOINT"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1738,7 +2154,9 @@ func TestCheckResponseSnapshot_Error_CloudHsmClusterInvalidConfigurationExceptio
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ConnectCustomKeyStore(context.Background(), &ConnectCustomKeyStoreInput{})
+	_, opErr := svc.ConnectCustomKeyStore(context.Background(), &ConnectCustomKeyStoreInput{
+		CustomKeyStoreId: ptr.String("__CustomKeyStoreId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1763,7 +2181,9 @@ func TestCheckResponseSnapshot_Error_CloudHsmClusterNotActiveException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ConnectCustomKeyStore(context.Background(), &ConnectCustomKeyStoreInput{})
+	_, opErr := svc.ConnectCustomKeyStore(context.Background(), &ConnectCustomKeyStoreInput{
+		CustomKeyStoreId: ptr.String("__CustomKeyStoreId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1788,7 +2208,22 @@ func TestCheckResponseSnapshot_Error_CloudHsmClusterNotFoundException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCustomKeyStore(context.Background(), &CreateCustomKeyStoreInput{})
+	_, opErr := svc.CreateCustomKeyStore(context.Background(), &CreateCustomKeyStoreInput{
+		CustomKeyStoreName:              ptr.String("__CustomKeyStoreName__"),
+		CloudHsmClusterId:               ptr.String("__CloudHsmClusterId__"),
+		TrustAnchorCertificate:          ptr.String("__TrustAnchorCertificate__"),
+		KeyStorePassword:                ptr.String("__KeyStorePassword__"),
+		CustomKeyStoreType:              types.CustomKeyStoreType("AWS_CLOUDHSM"),
+		XksProxyUriEndpoint:             ptr.String("__XksProxyUriEndpoint__"),
+		XksProxyUriPath:                 ptr.String("__XksProxyUriPath__"),
+		XksProxyVpcEndpointServiceName:  ptr.String("__XksProxyVpcEndpointServiceName__"),
+		XksProxyVpcEndpointServiceOwner: ptr.String("__XksProxyVpcEndpointServiceOwner__"),
+		XksProxyAuthenticationCredential: &types.XksProxyAuthenticationCredentialType{
+			AccessKeyId:        ptr.String("__AccessKeyId__"),
+			RawSecretAccessKey: ptr.String("__RawSecretAccessKey__"),
+		},
+		XksProxyConnectivity: types.XksProxyConnectivityType("PUBLIC_ENDPOINT"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1813,7 +2248,21 @@ func TestCheckResponseSnapshot_Error_CloudHsmClusterNotRelatedException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateCustomKeyStore(context.Background(), &UpdateCustomKeyStoreInput{})
+	_, opErr := svc.UpdateCustomKeyStore(context.Background(), &UpdateCustomKeyStoreInput{
+		CustomKeyStoreId:                ptr.String("__CustomKeyStoreId__"),
+		NewCustomKeyStoreName:           ptr.String("__NewCustomKeyStoreName__"),
+		KeyStorePassword:                ptr.String("__KeyStorePassword__"),
+		CloudHsmClusterId:               ptr.String("__CloudHsmClusterId__"),
+		XksProxyUriEndpoint:             ptr.String("__XksProxyUriEndpoint__"),
+		XksProxyUriPath:                 ptr.String("__XksProxyUriPath__"),
+		XksProxyVpcEndpointServiceName:  ptr.String("__XksProxyVpcEndpointServiceName__"),
+		XksProxyVpcEndpointServiceOwner: ptr.String("__XksProxyVpcEndpointServiceOwner__"),
+		XksProxyAuthenticationCredential: &types.XksProxyAuthenticationCredentialType{
+			AccessKeyId:        ptr.String("__AccessKeyId__"),
+			RawSecretAccessKey: ptr.String("__RawSecretAccessKey__"),
+		},
+		XksProxyConnectivity: types.XksProxyConnectivityType("PUBLIC_ENDPOINT"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1838,7 +2287,9 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RotateKeyOnDemand(context.Background(), &RotateKeyOnDemandInput{})
+	_, opErr := svc.RotateKeyOnDemand(context.Background(), &RotateKeyOnDemandInput{
+		KeyId: ptr.String("__KeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1863,7 +2314,9 @@ func TestCheckResponseSnapshot_Error_CustomKeyStoreHasCMKsException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteCustomKeyStore(context.Background(), &DeleteCustomKeyStoreInput{})
+	_, opErr := svc.DeleteCustomKeyStore(context.Background(), &DeleteCustomKeyStoreInput{
+		CustomKeyStoreId: ptr.String("__CustomKeyStoreId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1888,7 +2341,9 @@ func TestCheckResponseSnapshot_Error_CustomKeyStoreInvalidStateException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ConnectCustomKeyStore(context.Background(), &ConnectCustomKeyStoreInput{})
+	_, opErr := svc.ConnectCustomKeyStore(context.Background(), &ConnectCustomKeyStoreInput{
+		CustomKeyStoreId: ptr.String("__CustomKeyStoreId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1913,7 +2368,22 @@ func TestCheckResponseSnapshot_Error_CustomKeyStoreNameInUseException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCustomKeyStore(context.Background(), &CreateCustomKeyStoreInput{})
+	_, opErr := svc.CreateCustomKeyStore(context.Background(), &CreateCustomKeyStoreInput{
+		CustomKeyStoreName:              ptr.String("__CustomKeyStoreName__"),
+		CloudHsmClusterId:               ptr.String("__CloudHsmClusterId__"),
+		TrustAnchorCertificate:          ptr.String("__TrustAnchorCertificate__"),
+		KeyStorePassword:                ptr.String("__KeyStorePassword__"),
+		CustomKeyStoreType:              types.CustomKeyStoreType("AWS_CLOUDHSM"),
+		XksProxyUriEndpoint:             ptr.String("__XksProxyUriEndpoint__"),
+		XksProxyUriPath:                 ptr.String("__XksProxyUriPath__"),
+		XksProxyVpcEndpointServiceName:  ptr.String("__XksProxyVpcEndpointServiceName__"),
+		XksProxyVpcEndpointServiceOwner: ptr.String("__XksProxyVpcEndpointServiceOwner__"),
+		XksProxyAuthenticationCredential: &types.XksProxyAuthenticationCredentialType{
+			AccessKeyId:        ptr.String("__AccessKeyId__"),
+			RawSecretAccessKey: ptr.String("__RawSecretAccessKey__"),
+		},
+		XksProxyConnectivity: types.XksProxyConnectivityType("PUBLIC_ENDPOINT"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1938,7 +2408,9 @@ func TestCheckResponseSnapshot_Error_CustomKeyStoreNotFoundException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ConnectCustomKeyStore(context.Background(), &ConnectCustomKeyStoreInput{})
+	_, opErr := svc.ConnectCustomKeyStore(context.Background(), &ConnectCustomKeyStoreInput{
+		CustomKeyStoreId: ptr.String("__CustomKeyStoreId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1963,7 +2435,9 @@ func TestCheckResponseSnapshot_Error_DependencyTimeoutException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelKeyDeletion(context.Background(), &CancelKeyDeletionInput{})
+	_, opErr := svc.CancelKeyDeletion(context.Background(), &CancelKeyDeletionInput{
+		KeyId: ptr.String("__KeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1988,7 +2462,32 @@ func TestCheckResponseSnapshot_Error_DisabledException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateGrant(context.Background(), &CreateGrantInput{})
+	_, opErr := svc.CreateGrant(context.Background(), &CreateGrantInput{
+		KeyId:             ptr.String("__KeyId__"),
+		GranteePrincipal:  ptr.String("__GranteePrincipal__"),
+		RetiringPrincipal: ptr.String("__RetiringPrincipal__"),
+		Operations: []types.GrantOperation{
+			types.GrantOperation("Decrypt"),
+			types.GrantOperation("Decrypt"),
+		},
+		Constraints: &types.GrantConstraints{
+			EncryptionContextSubset: map[string]string{
+				"key0": "__Value__",
+			},
+			EncryptionContextEquals: map[string]string{
+				"key0": "__Value__",
+			},
+			SourceArn: ptr.String("__SourceArn__"),
+		},
+		GrantTokens: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Name:                     ptr.String("__Name__"),
+		DryRun:                   ptr.Bool(true),
+		GranteeServicePrincipal:  ptr.String("__GranteeServicePrincipal__"),
+		RetiringServicePrincipal: ptr.String("__RetiringServicePrincipal__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2013,7 +2512,32 @@ func TestCheckResponseSnapshot_Error_DryRunOperationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateGrant(context.Background(), &CreateGrantInput{})
+	_, opErr := svc.CreateGrant(context.Background(), &CreateGrantInput{
+		KeyId:             ptr.String("__KeyId__"),
+		GranteePrincipal:  ptr.String("__GranteePrincipal__"),
+		RetiringPrincipal: ptr.String("__RetiringPrincipal__"),
+		Operations: []types.GrantOperation{
+			types.GrantOperation("Decrypt"),
+			types.GrantOperation("Decrypt"),
+		},
+		Constraints: &types.GrantConstraints{
+			EncryptionContextSubset: map[string]string{
+				"key0": "__Value__",
+			},
+			EncryptionContextEquals: map[string]string{
+				"key0": "__Value__",
+			},
+			SourceArn: ptr.String("__SourceArn__"),
+		},
+		GrantTokens: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Name:                     ptr.String("__Name__"),
+		DryRun:                   ptr.Bool(true),
+		GranteeServicePrincipal:  ptr.String("__GranteeServicePrincipal__"),
+		RetiringServicePrincipal: ptr.String("__RetiringServicePrincipal__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2038,7 +2562,16 @@ func TestCheckResponseSnapshot_Error_ExpiredImportTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ImportKeyMaterial(context.Background(), &ImportKeyMaterialInput{})
+	_, opErr := svc.ImportKeyMaterial(context.Background(), &ImportKeyMaterialInput{
+		KeyId:                  ptr.String("__KeyId__"),
+		ImportToken:            []byte("blob"),
+		EncryptedKeyMaterial:   []byte("blob"),
+		ValidTo:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ExpirationModel:        types.ExpirationModelType("KEY_MATERIAL_EXPIRES"),
+		ImportType:             types.ImportType("NEW_KEY_MATERIAL"),
+		KeyMaterialDescription: ptr.String("__KeyMaterialDescription__"),
+		KeyMaterialId:          ptr.String("__KeyMaterialId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2063,7 +2596,27 @@ func TestCheckResponseSnapshot_Error_IncorrectKeyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Decrypt(context.Background(), &DecryptInput{})
+	_, opErr := svc.Decrypt(context.Background(), &DecryptInput{
+		CiphertextBlob: []byte("blob"),
+		EncryptionContext: map[string]string{
+			"key0": "__Value__",
+		},
+		GrantTokens: []string{
+			"__Member__",
+			"__Member__",
+		},
+		KeyId:               ptr.String("__KeyId__"),
+		EncryptionAlgorithm: types.EncryptionAlgorithmSpec("SYMMETRIC_DEFAULT"),
+		Recipient: &types.RecipientInfo{
+			KeyEncryptionAlgorithm: types.KeyEncryptionMechanism("RSAES_OAEP_SHA_256"),
+			AttestationDocument:    []byte("blob"),
+		},
+		DryRun: ptr.Bool(true),
+		DryRunModifiers: []types.DryRunModifierType{
+			types.DryRunModifierType("IGNORE_CIPHERTEXT"),
+			types.DryRunModifierType("IGNORE_CIPHERTEXT"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2088,7 +2641,16 @@ func TestCheckResponseSnapshot_Error_IncorrectKeyMaterialException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ImportKeyMaterial(context.Background(), &ImportKeyMaterialInput{})
+	_, opErr := svc.ImportKeyMaterial(context.Background(), &ImportKeyMaterialInput{
+		KeyId:                  ptr.String("__KeyId__"),
+		ImportToken:            []byte("blob"),
+		EncryptedKeyMaterial:   []byte("blob"),
+		ValidTo:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ExpirationModel:        types.ExpirationModelType("KEY_MATERIAL_EXPIRES"),
+		ImportType:             types.ImportType("NEW_KEY_MATERIAL"),
+		KeyMaterialDescription: ptr.String("__KeyMaterialDescription__"),
+		KeyMaterialId:          ptr.String("__KeyMaterialId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2113,7 +2675,22 @@ func TestCheckResponseSnapshot_Error_IncorrectTrustAnchorException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCustomKeyStore(context.Background(), &CreateCustomKeyStoreInput{})
+	_, opErr := svc.CreateCustomKeyStore(context.Background(), &CreateCustomKeyStoreInput{
+		CustomKeyStoreName:              ptr.String("__CustomKeyStoreName__"),
+		CloudHsmClusterId:               ptr.String("__CloudHsmClusterId__"),
+		TrustAnchorCertificate:          ptr.String("__TrustAnchorCertificate__"),
+		KeyStorePassword:                ptr.String("__KeyStorePassword__"),
+		CustomKeyStoreType:              types.CustomKeyStoreType("AWS_CLOUDHSM"),
+		XksProxyUriEndpoint:             ptr.String("__XksProxyUriEndpoint__"),
+		XksProxyUriPath:                 ptr.String("__XksProxyUriPath__"),
+		XksProxyVpcEndpointServiceName:  ptr.String("__XksProxyVpcEndpointServiceName__"),
+		XksProxyVpcEndpointServiceOwner: ptr.String("__XksProxyVpcEndpointServiceOwner__"),
+		XksProxyAuthenticationCredential: &types.XksProxyAuthenticationCredentialType{
+			AccessKeyId:        ptr.String("__AccessKeyId__"),
+			RawSecretAccessKey: ptr.String("__RawSecretAccessKey__"),
+		},
+		XksProxyConnectivity: types.XksProxyConnectivityType("PUBLIC_ENDPOINT"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2138,7 +2715,10 @@ func TestCheckResponseSnapshot_Error_InvalidAliasNameException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAlias(context.Background(), &CreateAliasInput{})
+	_, opErr := svc.CreateAlias(context.Background(), &CreateAliasInput{
+		AliasName:   ptr.String("__AliasName__"),
+		TargetKeyId: ptr.String("__TargetKeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2163,7 +2743,9 @@ func TestCheckResponseSnapshot_Error_InvalidArnException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelKeyDeletion(context.Background(), &CancelKeyDeletionInput{})
+	_, opErr := svc.CancelKeyDeletion(context.Background(), &CancelKeyDeletionInput{
+		KeyId: ptr.String("__KeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2188,7 +2770,27 @@ func TestCheckResponseSnapshot_Error_InvalidCiphertextException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Decrypt(context.Background(), &DecryptInput{})
+	_, opErr := svc.Decrypt(context.Background(), &DecryptInput{
+		CiphertextBlob: []byte("blob"),
+		EncryptionContext: map[string]string{
+			"key0": "__Value__",
+		},
+		GrantTokens: []string{
+			"__Member__",
+			"__Member__",
+		},
+		KeyId:               ptr.String("__KeyId__"),
+		EncryptionAlgorithm: types.EncryptionAlgorithmSpec("SYMMETRIC_DEFAULT"),
+		Recipient: &types.RecipientInfo{
+			KeyEncryptionAlgorithm: types.KeyEncryptionMechanism("RSAES_OAEP_SHA_256"),
+			AttestationDocument:    []byte("blob"),
+		},
+		DryRun: ptr.Bool(true),
+		DryRunModifiers: []types.DryRunModifierType{
+			types.DryRunModifierType("IGNORE_CIPHERTEXT"),
+			types.DryRunModifierType("IGNORE_CIPHERTEXT"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2213,7 +2815,14 @@ func TestCheckResponseSnapshot_Error_InvalidGrantIdException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListGrants(context.Background(), &ListGrantsInput{})
+	_, opErr := svc.ListGrants(context.Background(), &ListGrantsInput{
+		Limit:                   ptr.Int32(1),
+		Marker:                  ptr.String("__Marker__"),
+		KeyId:                   ptr.String("__KeyId__"),
+		GrantId:                 ptr.String("__GrantId__"),
+		GranteePrincipal:        ptr.String("__GranteePrincipal__"),
+		GranteeServicePrincipal: ptr.String("__GranteeServicePrincipal__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2238,7 +2847,32 @@ func TestCheckResponseSnapshot_Error_InvalidGrantTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateGrant(context.Background(), &CreateGrantInput{})
+	_, opErr := svc.CreateGrant(context.Background(), &CreateGrantInput{
+		KeyId:             ptr.String("__KeyId__"),
+		GranteePrincipal:  ptr.String("__GranteePrincipal__"),
+		RetiringPrincipal: ptr.String("__RetiringPrincipal__"),
+		Operations: []types.GrantOperation{
+			types.GrantOperation("Decrypt"),
+			types.GrantOperation("Decrypt"),
+		},
+		Constraints: &types.GrantConstraints{
+			EncryptionContextSubset: map[string]string{
+				"key0": "__Value__",
+			},
+			EncryptionContextEquals: map[string]string{
+				"key0": "__Value__",
+			},
+			SourceArn: ptr.String("__SourceArn__"),
+		},
+		GrantTokens: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Name:                     ptr.String("__Name__"),
+		DryRun:                   ptr.Bool(true),
+		GranteeServicePrincipal:  ptr.String("__GranteeServicePrincipal__"),
+		RetiringServicePrincipal: ptr.String("__RetiringServicePrincipal__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2263,7 +2897,16 @@ func TestCheckResponseSnapshot_Error_InvalidImportTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ImportKeyMaterial(context.Background(), &ImportKeyMaterialInput{})
+	_, opErr := svc.ImportKeyMaterial(context.Background(), &ImportKeyMaterialInput{
+		KeyId:                  ptr.String("__KeyId__"),
+		ImportToken:            []byte("blob"),
+		EncryptedKeyMaterial:   []byte("blob"),
+		ValidTo:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ExpirationModel:        types.ExpirationModelType("KEY_MATERIAL_EXPIRES"),
+		ImportType:             types.ImportType("NEW_KEY_MATERIAL"),
+		KeyMaterialDescription: ptr.String("__KeyMaterialDescription__"),
+		KeyMaterialId:          ptr.String("__KeyMaterialId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2288,7 +2931,27 @@ func TestCheckResponseSnapshot_Error_InvalidKeyUsageException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Decrypt(context.Background(), &DecryptInput{})
+	_, opErr := svc.Decrypt(context.Background(), &DecryptInput{
+		CiphertextBlob: []byte("blob"),
+		EncryptionContext: map[string]string{
+			"key0": "__Value__",
+		},
+		GrantTokens: []string{
+			"__Member__",
+			"__Member__",
+		},
+		KeyId:               ptr.String("__KeyId__"),
+		EncryptionAlgorithm: types.EncryptionAlgorithmSpec("SYMMETRIC_DEFAULT"),
+		Recipient: &types.RecipientInfo{
+			KeyEncryptionAlgorithm: types.KeyEncryptionMechanism("RSAES_OAEP_SHA_256"),
+			AttestationDocument:    []byte("blob"),
+		},
+		DryRun: ptr.Bool(true),
+		DryRunModifiers: []types.DryRunModifierType{
+			types.DryRunModifierType("IGNORE_CIPHERTEXT"),
+			types.DryRunModifierType("IGNORE_CIPHERTEXT"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2313,7 +2976,12 @@ func TestCheckResponseSnapshot_Error_InvalidMarkerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeCustomKeyStores(context.Background(), &DescribeCustomKeyStoresInput{})
+	_, opErr := svc.DescribeCustomKeyStores(context.Background(), &DescribeCustomKeyStoresInput{
+		CustomKeyStoreId:   ptr.String("__CustomKeyStoreId__"),
+		CustomKeyStoreName: ptr.String("__CustomKeyStoreName__"),
+		Limit:              ptr.Int32(1),
+		Marker:             ptr.String("__Marker__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2338,7 +3006,9 @@ func TestCheckResponseSnapshot_Error_KMSInternalException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelKeyDeletion(context.Background(), &CancelKeyDeletionInput{})
+	_, opErr := svc.CancelKeyDeletion(context.Background(), &CancelKeyDeletionInput{
+		KeyId: ptr.String("__KeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2363,7 +3033,17 @@ func TestCheckResponseSnapshot_Error_KMSInvalidMacException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.VerifyMac(context.Background(), &VerifyMacInput{})
+	_, opErr := svc.VerifyMac(context.Background(), &VerifyMacInput{
+		Message:      []byte("blob"),
+		KeyId:        ptr.String("__KeyId__"),
+		MacAlgorithm: types.MacAlgorithmSpec("HMAC_SHA_224"),
+		Mac:          []byte("blob"),
+		GrantTokens: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2388,7 +3068,18 @@ func TestCheckResponseSnapshot_Error_KMSInvalidSignatureException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Verify(context.Background(), &VerifyInput{})
+	_, opErr := svc.Verify(context.Background(), &VerifyInput{
+		KeyId:            ptr.String("__KeyId__"),
+		Message:          []byte("blob"),
+		MessageType:      types.MessageType("RAW"),
+		Signature:        []byte("blob"),
+		SigningAlgorithm: types.SigningAlgorithmSpec("RSASSA_PSS_SHA_256"),
+		GrantTokens: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2413,7 +3104,9 @@ func TestCheckResponseSnapshot_Error_KMSInvalidStateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelKeyDeletion(context.Background(), &CancelKeyDeletionInput{})
+	_, opErr := svc.CancelKeyDeletion(context.Background(), &CancelKeyDeletionInput{
+		KeyId: ptr.String("__KeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2438,7 +3131,27 @@ func TestCheckResponseSnapshot_Error_KeyUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.Decrypt(context.Background(), &DecryptInput{})
+	_, opErr := svc.Decrypt(context.Background(), &DecryptInput{
+		CiphertextBlob: []byte("blob"),
+		EncryptionContext: map[string]string{
+			"key0": "__Value__",
+		},
+		GrantTokens: []string{
+			"__Member__",
+			"__Member__",
+		},
+		KeyId:               ptr.String("__KeyId__"),
+		EncryptionAlgorithm: types.EncryptionAlgorithmSpec("SYMMETRIC_DEFAULT"),
+		Recipient: &types.RecipientInfo{
+			KeyEncryptionAlgorithm: types.KeyEncryptionMechanism("RSAES_OAEP_SHA_256"),
+			AttestationDocument:    []byte("blob"),
+		},
+		DryRun: ptr.Bool(true),
+		DryRunModifiers: []types.DryRunModifierType{
+			types.DryRunModifierType("IGNORE_CIPHERTEXT"),
+			types.DryRunModifierType("IGNORE_CIPHERTEXT"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2463,7 +3176,10 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAlias(context.Background(), &CreateAliasInput{})
+	_, opErr := svc.CreateAlias(context.Background(), &CreateAliasInput{
+		AliasName:   ptr.String("__AliasName__"),
+		TargetKeyId: ptr.String("__TargetKeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2488,7 +3204,28 @@ func TestCheckResponseSnapshot_Error_MalformedPolicyDocumentException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateKey(context.Background(), &CreateKeyInput{})
+	_, opErr := svc.CreateKey(context.Background(), &CreateKeyInput{
+		Policy:                         ptr.String("__Policy__"),
+		Description:                    ptr.String("__Description__"),
+		KeyUsage:                       types.KeyUsageType("SIGN_VERIFY"),
+		CustomerMasterKeySpec:          types.CustomerMasterKeySpec("RSA_2048"),
+		KeySpec:                        types.KeySpec("RSA_2048"),
+		Origin:                         types.OriginType("AWS_KMS"),
+		CustomKeyStoreId:               ptr.String("__CustomKeyStoreId__"),
+		BypassPolicyLockoutSafetyCheck: true,
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+		MultiRegion: ptr.Bool(true),
+		XksKeyId:    ptr.String("__XksKeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2513,7 +3250,9 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelKeyDeletion(context.Background(), &CancelKeyDeletionInput{})
+	_, opErr := svc.CancelKeyDeletion(context.Background(), &CancelKeyDeletionInput{
+		KeyId: ptr.String("__KeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2538,7 +3277,28 @@ func TestCheckResponseSnapshot_Error_TagException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateKey(context.Background(), &CreateKeyInput{})
+	_, opErr := svc.CreateKey(context.Background(), &CreateKeyInput{
+		Policy:                         ptr.String("__Policy__"),
+		Description:                    ptr.String("__Description__"),
+		KeyUsage:                       types.KeyUsageType("SIGN_VERIFY"),
+		CustomerMasterKeySpec:          types.CustomerMasterKeySpec("RSA_2048"),
+		KeySpec:                        types.KeySpec("RSA_2048"),
+		Origin:                         types.OriginType("AWS_KMS"),
+		CustomKeyStoreId:               ptr.String("__CustomKeyStoreId__"),
+		BypassPolicyLockoutSafetyCheck: true,
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+		MultiRegion: ptr.Bool(true),
+		XksKeyId:    ptr.String("__XksKeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2563,7 +3323,28 @@ func TestCheckResponseSnapshot_Error_UnsupportedOperationException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateKey(context.Background(), &CreateKeyInput{})
+	_, opErr := svc.CreateKey(context.Background(), &CreateKeyInput{
+		Policy:                         ptr.String("__Policy__"),
+		Description:                    ptr.String("__Description__"),
+		KeyUsage:                       types.KeyUsageType("SIGN_VERIFY"),
+		CustomerMasterKeySpec:          types.CustomerMasterKeySpec("RSA_2048"),
+		KeySpec:                        types.KeySpec("RSA_2048"),
+		Origin:                         types.OriginType("AWS_KMS"),
+		CustomKeyStoreId:               ptr.String("__CustomKeyStoreId__"),
+		BypassPolicyLockoutSafetyCheck: true,
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+		MultiRegion: ptr.Bool(true),
+		XksKeyId:    ptr.String("__XksKeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2588,7 +3369,28 @@ func TestCheckResponseSnapshot_Error_XksKeyAlreadyInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateKey(context.Background(), &CreateKeyInput{})
+	_, opErr := svc.CreateKey(context.Background(), &CreateKeyInput{
+		Policy:                         ptr.String("__Policy__"),
+		Description:                    ptr.String("__Description__"),
+		KeyUsage:                       types.KeyUsageType("SIGN_VERIFY"),
+		CustomerMasterKeySpec:          types.CustomerMasterKeySpec("RSA_2048"),
+		KeySpec:                        types.KeySpec("RSA_2048"),
+		Origin:                         types.OriginType("AWS_KMS"),
+		CustomKeyStoreId:               ptr.String("__CustomKeyStoreId__"),
+		BypassPolicyLockoutSafetyCheck: true,
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+		MultiRegion: ptr.Bool(true),
+		XksKeyId:    ptr.String("__XksKeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2613,7 +3415,28 @@ func TestCheckResponseSnapshot_Error_XksKeyInvalidConfigurationException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateKey(context.Background(), &CreateKeyInput{})
+	_, opErr := svc.CreateKey(context.Background(), &CreateKeyInput{
+		Policy:                         ptr.String("__Policy__"),
+		Description:                    ptr.String("__Description__"),
+		KeyUsage:                       types.KeyUsageType("SIGN_VERIFY"),
+		CustomerMasterKeySpec:          types.CustomerMasterKeySpec("RSA_2048"),
+		KeySpec:                        types.KeySpec("RSA_2048"),
+		Origin:                         types.OriginType("AWS_KMS"),
+		CustomKeyStoreId:               ptr.String("__CustomKeyStoreId__"),
+		BypassPolicyLockoutSafetyCheck: true,
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+		MultiRegion: ptr.Bool(true),
+		XksKeyId:    ptr.String("__XksKeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2638,7 +3461,28 @@ func TestCheckResponseSnapshot_Error_XksKeyNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateKey(context.Background(), &CreateKeyInput{})
+	_, opErr := svc.CreateKey(context.Background(), &CreateKeyInput{
+		Policy:                         ptr.String("__Policy__"),
+		Description:                    ptr.String("__Description__"),
+		KeyUsage:                       types.KeyUsageType("SIGN_VERIFY"),
+		CustomerMasterKeySpec:          types.CustomerMasterKeySpec("RSA_2048"),
+		KeySpec:                        types.KeySpec("RSA_2048"),
+		Origin:                         types.OriginType("AWS_KMS"),
+		CustomKeyStoreId:               ptr.String("__CustomKeyStoreId__"),
+		BypassPolicyLockoutSafetyCheck: true,
+		Tags: []types.Tag{
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+			{
+				TagKey:   ptr.String("__TagKey__"),
+				TagValue: ptr.String("__TagValue__"),
+			},
+		},
+		MultiRegion: ptr.Bool(true),
+		XksKeyId:    ptr.String("__XksKeyId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2663,7 +3507,22 @@ func TestCheckResponseSnapshot_Error_XksProxyIncorrectAuthenticationCredentialEx
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCustomKeyStore(context.Background(), &CreateCustomKeyStoreInput{})
+	_, opErr := svc.CreateCustomKeyStore(context.Background(), &CreateCustomKeyStoreInput{
+		CustomKeyStoreName:              ptr.String("__CustomKeyStoreName__"),
+		CloudHsmClusterId:               ptr.String("__CloudHsmClusterId__"),
+		TrustAnchorCertificate:          ptr.String("__TrustAnchorCertificate__"),
+		KeyStorePassword:                ptr.String("__KeyStorePassword__"),
+		CustomKeyStoreType:              types.CustomKeyStoreType("AWS_CLOUDHSM"),
+		XksProxyUriEndpoint:             ptr.String("__XksProxyUriEndpoint__"),
+		XksProxyUriPath:                 ptr.String("__XksProxyUriPath__"),
+		XksProxyVpcEndpointServiceName:  ptr.String("__XksProxyVpcEndpointServiceName__"),
+		XksProxyVpcEndpointServiceOwner: ptr.String("__XksProxyVpcEndpointServiceOwner__"),
+		XksProxyAuthenticationCredential: &types.XksProxyAuthenticationCredentialType{
+			AccessKeyId:        ptr.String("__AccessKeyId__"),
+			RawSecretAccessKey: ptr.String("__RawSecretAccessKey__"),
+		},
+		XksProxyConnectivity: types.XksProxyConnectivityType("PUBLIC_ENDPOINT"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2688,7 +3547,22 @@ func TestCheckResponseSnapshot_Error_XksProxyInvalidConfigurationException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCustomKeyStore(context.Background(), &CreateCustomKeyStoreInput{})
+	_, opErr := svc.CreateCustomKeyStore(context.Background(), &CreateCustomKeyStoreInput{
+		CustomKeyStoreName:              ptr.String("__CustomKeyStoreName__"),
+		CloudHsmClusterId:               ptr.String("__CloudHsmClusterId__"),
+		TrustAnchorCertificate:          ptr.String("__TrustAnchorCertificate__"),
+		KeyStorePassword:                ptr.String("__KeyStorePassword__"),
+		CustomKeyStoreType:              types.CustomKeyStoreType("AWS_CLOUDHSM"),
+		XksProxyUriEndpoint:             ptr.String("__XksProxyUriEndpoint__"),
+		XksProxyUriPath:                 ptr.String("__XksProxyUriPath__"),
+		XksProxyVpcEndpointServiceName:  ptr.String("__XksProxyVpcEndpointServiceName__"),
+		XksProxyVpcEndpointServiceOwner: ptr.String("__XksProxyVpcEndpointServiceOwner__"),
+		XksProxyAuthenticationCredential: &types.XksProxyAuthenticationCredentialType{
+			AccessKeyId:        ptr.String("__AccessKeyId__"),
+			RawSecretAccessKey: ptr.String("__RawSecretAccessKey__"),
+		},
+		XksProxyConnectivity: types.XksProxyConnectivityType("PUBLIC_ENDPOINT"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2713,7 +3587,22 @@ func TestCheckResponseSnapshot_Error_XksProxyInvalidResponseException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCustomKeyStore(context.Background(), &CreateCustomKeyStoreInput{})
+	_, opErr := svc.CreateCustomKeyStore(context.Background(), &CreateCustomKeyStoreInput{
+		CustomKeyStoreName:              ptr.String("__CustomKeyStoreName__"),
+		CloudHsmClusterId:               ptr.String("__CloudHsmClusterId__"),
+		TrustAnchorCertificate:          ptr.String("__TrustAnchorCertificate__"),
+		KeyStorePassword:                ptr.String("__KeyStorePassword__"),
+		CustomKeyStoreType:              types.CustomKeyStoreType("AWS_CLOUDHSM"),
+		XksProxyUriEndpoint:             ptr.String("__XksProxyUriEndpoint__"),
+		XksProxyUriPath:                 ptr.String("__XksProxyUriPath__"),
+		XksProxyVpcEndpointServiceName:  ptr.String("__XksProxyVpcEndpointServiceName__"),
+		XksProxyVpcEndpointServiceOwner: ptr.String("__XksProxyVpcEndpointServiceOwner__"),
+		XksProxyAuthenticationCredential: &types.XksProxyAuthenticationCredentialType{
+			AccessKeyId:        ptr.String("__AccessKeyId__"),
+			RawSecretAccessKey: ptr.String("__RawSecretAccessKey__"),
+		},
+		XksProxyConnectivity: types.XksProxyConnectivityType("PUBLIC_ENDPOINT"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2738,7 +3627,22 @@ func TestCheckResponseSnapshot_Error_XksProxyUriEndpointInUseException(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCustomKeyStore(context.Background(), &CreateCustomKeyStoreInput{})
+	_, opErr := svc.CreateCustomKeyStore(context.Background(), &CreateCustomKeyStoreInput{
+		CustomKeyStoreName:              ptr.String("__CustomKeyStoreName__"),
+		CloudHsmClusterId:               ptr.String("__CloudHsmClusterId__"),
+		TrustAnchorCertificate:          ptr.String("__TrustAnchorCertificate__"),
+		KeyStorePassword:                ptr.String("__KeyStorePassword__"),
+		CustomKeyStoreType:              types.CustomKeyStoreType("AWS_CLOUDHSM"),
+		XksProxyUriEndpoint:             ptr.String("__XksProxyUriEndpoint__"),
+		XksProxyUriPath:                 ptr.String("__XksProxyUriPath__"),
+		XksProxyVpcEndpointServiceName:  ptr.String("__XksProxyVpcEndpointServiceName__"),
+		XksProxyVpcEndpointServiceOwner: ptr.String("__XksProxyVpcEndpointServiceOwner__"),
+		XksProxyAuthenticationCredential: &types.XksProxyAuthenticationCredentialType{
+			AccessKeyId:        ptr.String("__AccessKeyId__"),
+			RawSecretAccessKey: ptr.String("__RawSecretAccessKey__"),
+		},
+		XksProxyConnectivity: types.XksProxyConnectivityType("PUBLIC_ENDPOINT"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2763,7 +3667,22 @@ func TestCheckResponseSnapshot_Error_XksProxyUriInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCustomKeyStore(context.Background(), &CreateCustomKeyStoreInput{})
+	_, opErr := svc.CreateCustomKeyStore(context.Background(), &CreateCustomKeyStoreInput{
+		CustomKeyStoreName:              ptr.String("__CustomKeyStoreName__"),
+		CloudHsmClusterId:               ptr.String("__CloudHsmClusterId__"),
+		TrustAnchorCertificate:          ptr.String("__TrustAnchorCertificate__"),
+		KeyStorePassword:                ptr.String("__KeyStorePassword__"),
+		CustomKeyStoreType:              types.CustomKeyStoreType("AWS_CLOUDHSM"),
+		XksProxyUriEndpoint:             ptr.String("__XksProxyUriEndpoint__"),
+		XksProxyUriPath:                 ptr.String("__XksProxyUriPath__"),
+		XksProxyVpcEndpointServiceName:  ptr.String("__XksProxyVpcEndpointServiceName__"),
+		XksProxyVpcEndpointServiceOwner: ptr.String("__XksProxyVpcEndpointServiceOwner__"),
+		XksProxyAuthenticationCredential: &types.XksProxyAuthenticationCredentialType{
+			AccessKeyId:        ptr.String("__AccessKeyId__"),
+			RawSecretAccessKey: ptr.String("__RawSecretAccessKey__"),
+		},
+		XksProxyConnectivity: types.XksProxyConnectivityType("PUBLIC_ENDPOINT"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2788,7 +3707,22 @@ func TestCheckResponseSnapshot_Error_XksProxyUriUnreachableException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCustomKeyStore(context.Background(), &CreateCustomKeyStoreInput{})
+	_, opErr := svc.CreateCustomKeyStore(context.Background(), &CreateCustomKeyStoreInput{
+		CustomKeyStoreName:              ptr.String("__CustomKeyStoreName__"),
+		CloudHsmClusterId:               ptr.String("__CloudHsmClusterId__"),
+		TrustAnchorCertificate:          ptr.String("__TrustAnchorCertificate__"),
+		KeyStorePassword:                ptr.String("__KeyStorePassword__"),
+		CustomKeyStoreType:              types.CustomKeyStoreType("AWS_CLOUDHSM"),
+		XksProxyUriEndpoint:             ptr.String("__XksProxyUriEndpoint__"),
+		XksProxyUriPath:                 ptr.String("__XksProxyUriPath__"),
+		XksProxyVpcEndpointServiceName:  ptr.String("__XksProxyVpcEndpointServiceName__"),
+		XksProxyVpcEndpointServiceOwner: ptr.String("__XksProxyVpcEndpointServiceOwner__"),
+		XksProxyAuthenticationCredential: &types.XksProxyAuthenticationCredentialType{
+			AccessKeyId:        ptr.String("__AccessKeyId__"),
+			RawSecretAccessKey: ptr.String("__RawSecretAccessKey__"),
+		},
+		XksProxyConnectivity: types.XksProxyConnectivityType("PUBLIC_ENDPOINT"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2813,7 +3747,22 @@ func TestCheckResponseSnapshot_Error_XksProxyVpcEndpointServiceInUseException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCustomKeyStore(context.Background(), &CreateCustomKeyStoreInput{})
+	_, opErr := svc.CreateCustomKeyStore(context.Background(), &CreateCustomKeyStoreInput{
+		CustomKeyStoreName:              ptr.String("__CustomKeyStoreName__"),
+		CloudHsmClusterId:               ptr.String("__CloudHsmClusterId__"),
+		TrustAnchorCertificate:          ptr.String("__TrustAnchorCertificate__"),
+		KeyStorePassword:                ptr.String("__KeyStorePassword__"),
+		CustomKeyStoreType:              types.CustomKeyStoreType("AWS_CLOUDHSM"),
+		XksProxyUriEndpoint:             ptr.String("__XksProxyUriEndpoint__"),
+		XksProxyUriPath:                 ptr.String("__XksProxyUriPath__"),
+		XksProxyVpcEndpointServiceName:  ptr.String("__XksProxyVpcEndpointServiceName__"),
+		XksProxyVpcEndpointServiceOwner: ptr.String("__XksProxyVpcEndpointServiceOwner__"),
+		XksProxyAuthenticationCredential: &types.XksProxyAuthenticationCredentialType{
+			AccessKeyId:        ptr.String("__AccessKeyId__"),
+			RawSecretAccessKey: ptr.String("__RawSecretAccessKey__"),
+		},
+		XksProxyConnectivity: types.XksProxyConnectivityType("PUBLIC_ENDPOINT"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2838,7 +3787,22 @@ func TestCheckResponseSnapshot_Error_XksProxyVpcEndpointServiceInvalidConfigurat
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCustomKeyStore(context.Background(), &CreateCustomKeyStoreInput{})
+	_, opErr := svc.CreateCustomKeyStore(context.Background(), &CreateCustomKeyStoreInput{
+		CustomKeyStoreName:              ptr.String("__CustomKeyStoreName__"),
+		CloudHsmClusterId:               ptr.String("__CloudHsmClusterId__"),
+		TrustAnchorCertificate:          ptr.String("__TrustAnchorCertificate__"),
+		KeyStorePassword:                ptr.String("__KeyStorePassword__"),
+		CustomKeyStoreType:              types.CustomKeyStoreType("AWS_CLOUDHSM"),
+		XksProxyUriEndpoint:             ptr.String("__XksProxyUriEndpoint__"),
+		XksProxyUriPath:                 ptr.String("__XksProxyUriPath__"),
+		XksProxyVpcEndpointServiceName:  ptr.String("__XksProxyVpcEndpointServiceName__"),
+		XksProxyVpcEndpointServiceOwner: ptr.String("__XksProxyVpcEndpointServiceOwner__"),
+		XksProxyAuthenticationCredential: &types.XksProxyAuthenticationCredentialType{
+			AccessKeyId:        ptr.String("__AccessKeyId__"),
+			RawSecretAccessKey: ptr.String("__RawSecretAccessKey__"),
+		},
+		XksProxyConnectivity: types.XksProxyConnectivityType("PUBLIC_ENDPOINT"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2863,7 +3827,22 @@ func TestCheckResponseSnapshot_Error_XksProxyVpcEndpointServiceNotFoundException
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCustomKeyStore(context.Background(), &CreateCustomKeyStoreInput{})
+	_, opErr := svc.CreateCustomKeyStore(context.Background(), &CreateCustomKeyStoreInput{
+		CustomKeyStoreName:              ptr.String("__CustomKeyStoreName__"),
+		CloudHsmClusterId:               ptr.String("__CloudHsmClusterId__"),
+		TrustAnchorCertificate:          ptr.String("__TrustAnchorCertificate__"),
+		KeyStorePassword:                ptr.String("__KeyStorePassword__"),
+		CustomKeyStoreType:              types.CustomKeyStoreType("AWS_CLOUDHSM"),
+		XksProxyUriEndpoint:             ptr.String("__XksProxyUriEndpoint__"),
+		XksProxyUriPath:                 ptr.String("__XksProxyUriPath__"),
+		XksProxyVpcEndpointServiceName:  ptr.String("__XksProxyVpcEndpointServiceName__"),
+		XksProxyVpcEndpointServiceOwner: ptr.String("__XksProxyVpcEndpointServiceOwner__"),
+		XksProxyAuthenticationCredential: &types.XksProxyAuthenticationCredentialType{
+			AccessKeyId:        ptr.String("__AccessKeyId__"),
+			RawSecretAccessKey: ptr.String("__RawSecretAccessKey__"),
+		},
+		XksProxyConnectivity: types.XksProxyConnectivityType("PUBLIC_ENDPOINT"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

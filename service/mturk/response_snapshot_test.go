@@ -117,7 +117,10 @@ func TestCheckResponseSnapshot_AcceptQualificationRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptQualificationRequest(context.Background(), &AcceptQualificationRequestInput{})
+	got, err := svc.AcceptQualificationRequest(context.Background(), &AcceptQualificationRequestInput{
+		QualificationRequestId: ptr.String("__QualificationRequestId__"),
+		IntegerValue:           ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -136,7 +139,11 @@ func TestCheckResponseSnapshot_ApproveAssignment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ApproveAssignment(context.Background(), &ApproveAssignmentInput{})
+	got, err := svc.ApproveAssignment(context.Background(), &ApproveAssignmentInput{
+		AssignmentId:      ptr.String("__AssignmentId__"),
+		RequesterFeedback: ptr.String("__RequesterFeedback__"),
+		OverrideRejection: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -155,7 +162,12 @@ func TestCheckResponseSnapshot_AssociateQualificationWithWorker(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateQualificationWithWorker(context.Background(), &AssociateQualificationWithWorkerInput{})
+	got, err := svc.AssociateQualificationWithWorker(context.Background(), &AssociateQualificationWithWorkerInput{
+		QualificationTypeId: ptr.String("__QualificationTypeId__"),
+		WorkerId:            ptr.String("__WorkerId__"),
+		IntegerValue:        ptr.Int32(1),
+		SendNotification:    ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -174,7 +186,11 @@ func TestCheckResponseSnapshot_CreateAdditionalAssignmentsForHIT(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAdditionalAssignmentsForHIT(context.Background(), &CreateAdditionalAssignmentsForHITInput{})
+	got, err := svc.CreateAdditionalAssignmentsForHIT(context.Background(), &CreateAdditionalAssignmentsForHITInput{
+		HITId:                         ptr.String("__HITId__"),
+		NumberOfAdditionalAssignments: ptr.Int32(1),
+		UniqueRequestToken:            ptr.String("__UniqueRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -258,7 +274,174 @@ func TestCheckResponseSnapshot_CreateHIT(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateHIT(context.Background(), &CreateHITInput{})
+	got, err := svc.CreateHIT(context.Background(), &CreateHITInput{
+		MaxAssignments:              ptr.Int32(1),
+		AutoApprovalDelayInSeconds:  ptr.Int64(1),
+		LifetimeInSeconds:           ptr.Int64(1),
+		AssignmentDurationInSeconds: ptr.Int64(1),
+		Reward:                      ptr.String("__Reward__"),
+		Title:                       ptr.String("__Title__"),
+		Keywords:                    ptr.String("__Keywords__"),
+		Description:                 ptr.String("__Description__"),
+		Question:                    ptr.String("__Question__"),
+		RequesterAnnotation:         ptr.String("__RequesterAnnotation__"),
+		QualificationRequirements: []types.QualificationRequirement{
+			{
+				QualificationTypeId: ptr.String("__QualificationTypeId__"),
+				Comparator:          types.Comparator("LessThan"),
+				IntegerValues: []int32{
+					1,
+					1,
+				},
+				LocaleValues: []types.Locale{
+					{
+						Country:     ptr.String("__Country__"),
+						Subdivision: ptr.String("__Subdivision__"),
+					},
+					{
+						Country:     ptr.String("__Country__"),
+						Subdivision: ptr.String("__Subdivision__"),
+					},
+				},
+				RequiredToPreview: ptr.Bool(true),
+				ActionsGuarded:    types.HITAccessActions("Accept"),
+			},
+			{
+				QualificationTypeId: ptr.String("__QualificationTypeId__"),
+				Comparator:          types.Comparator("LessThan"),
+				IntegerValues: []int32{
+					1,
+					1,
+				},
+				LocaleValues: []types.Locale{
+					{
+						Country:     ptr.String("__Country__"),
+						Subdivision: ptr.String("__Subdivision__"),
+					},
+					{
+						Country:     ptr.String("__Country__"),
+						Subdivision: ptr.String("__Subdivision__"),
+					},
+				},
+				RequiredToPreview: ptr.Bool(true),
+				ActionsGuarded:    types.HITAccessActions("Accept"),
+			},
+		},
+		UniqueRequestToken: ptr.String("__UniqueRequestToken__"),
+		AssignmentReviewPolicy: &types.ReviewPolicy{
+			PolicyName: ptr.String("__PolicyName__"),
+			Parameters: []types.PolicyParameter{
+				{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MapEntries: []types.ParameterMapEntry{
+						{
+							Key: ptr.String("__Key__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Key: ptr.String("__Key__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MapEntries: []types.ParameterMapEntry{
+						{
+							Key: ptr.String("__Key__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Key: ptr.String("__Key__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		HITReviewPolicy: &types.ReviewPolicy{
+			PolicyName: ptr.String("__PolicyName__"),
+			Parameters: []types.PolicyParameter{
+				{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MapEntries: []types.ParameterMapEntry{
+						{
+							Key: ptr.String("__Key__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Key: ptr.String("__Key__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MapEntries: []types.ParameterMapEntry{
+						{
+							Key: ptr.String("__Key__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Key: ptr.String("__Key__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		HITLayoutId: ptr.String("__HITLayoutId__"),
+		HITLayoutParameters: []types.HITLayoutParameter{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -279,7 +462,56 @@ func TestCheckResponseSnapshot_CreateHITType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateHITType(context.Background(), &CreateHITTypeInput{})
+	got, err := svc.CreateHITType(context.Background(), &CreateHITTypeInput{
+		AutoApprovalDelayInSeconds:  ptr.Int64(1),
+		AssignmentDurationInSeconds: ptr.Int64(1),
+		Reward:                      ptr.String("__Reward__"),
+		Title:                       ptr.String("__Title__"),
+		Keywords:                    ptr.String("__Keywords__"),
+		Description:                 ptr.String("__Description__"),
+		QualificationRequirements: []types.QualificationRequirement{
+			{
+				QualificationTypeId: ptr.String("__QualificationTypeId__"),
+				Comparator:          types.Comparator("LessThan"),
+				IntegerValues: []int32{
+					1,
+					1,
+				},
+				LocaleValues: []types.Locale{
+					{
+						Country:     ptr.String("__Country__"),
+						Subdivision: ptr.String("__Subdivision__"),
+					},
+					{
+						Country:     ptr.String("__Country__"),
+						Subdivision: ptr.String("__Subdivision__"),
+					},
+				},
+				RequiredToPreview: ptr.Bool(true),
+				ActionsGuarded:    types.HITAccessActions("Accept"),
+			},
+			{
+				QualificationTypeId: ptr.String("__QualificationTypeId__"),
+				Comparator:          types.Comparator("LessThan"),
+				IntegerValues: []int32{
+					1,
+					1,
+				},
+				LocaleValues: []types.Locale{
+					{
+						Country:     ptr.String("__Country__"),
+						Subdivision: ptr.String("__Subdivision__"),
+					},
+					{
+						Country:     ptr.String("__Country__"),
+						Subdivision: ptr.String("__Subdivision__"),
+					},
+				},
+				RequiredToPreview: ptr.Bool(true),
+				ActionsGuarded:    types.HITAccessActions("Accept"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -363,7 +595,127 @@ func TestCheckResponseSnapshot_CreateHITWithHITType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateHITWithHITType(context.Background(), &CreateHITWithHITTypeInput{})
+	got, err := svc.CreateHITWithHITType(context.Background(), &CreateHITWithHITTypeInput{
+		HITTypeId:           ptr.String("__HITTypeId__"),
+		MaxAssignments:      ptr.Int32(1),
+		LifetimeInSeconds:   ptr.Int64(1),
+		Question:            ptr.String("__Question__"),
+		RequesterAnnotation: ptr.String("__RequesterAnnotation__"),
+		UniqueRequestToken:  ptr.String("__UniqueRequestToken__"),
+		AssignmentReviewPolicy: &types.ReviewPolicy{
+			PolicyName: ptr.String("__PolicyName__"),
+			Parameters: []types.PolicyParameter{
+				{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MapEntries: []types.ParameterMapEntry{
+						{
+							Key: ptr.String("__Key__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Key: ptr.String("__Key__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MapEntries: []types.ParameterMapEntry{
+						{
+							Key: ptr.String("__Key__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Key: ptr.String("__Key__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		HITReviewPolicy: &types.ReviewPolicy{
+			PolicyName: ptr.String("__PolicyName__"),
+			Parameters: []types.PolicyParameter{
+				{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MapEntries: []types.ParameterMapEntry{
+						{
+							Key: ptr.String("__Key__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Key: ptr.String("__Key__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				{
+					Key: ptr.String("__Key__"),
+					Values: []string{
+						"__Member__",
+						"__Member__",
+					},
+					MapEntries: []types.ParameterMapEntry{
+						{
+							Key: ptr.String("__Key__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Key: ptr.String("__Key__"),
+							Values: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+		},
+		HITLayoutId: ptr.String("__HITLayoutId__"),
+		HITLayoutParameters: []types.HITLayoutParameter{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -398,7 +750,18 @@ func TestCheckResponseSnapshot_CreateQualificationType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateQualificationType(context.Background(), &CreateQualificationTypeInput{})
+	got, err := svc.CreateQualificationType(context.Background(), &CreateQualificationTypeInput{
+		Name:                    ptr.String("__Name__"),
+		Keywords:                ptr.String("__Keywords__"),
+		Description:             ptr.String("__Description__"),
+		QualificationTypeStatus: types.QualificationTypeStatus("Active"),
+		RetryDelayInSeconds:     ptr.Int64(1),
+		Test:                    ptr.String("__Test__"),
+		AnswerKey:               ptr.String("__AnswerKey__"),
+		TestDurationInSeconds:   ptr.Int64(1),
+		AutoGranted:             ptr.Bool(true),
+		AutoGrantedValue:        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -417,7 +780,10 @@ func TestCheckResponseSnapshot_CreateWorkerBlock(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWorkerBlock(context.Background(), &CreateWorkerBlockInput{})
+	got, err := svc.CreateWorkerBlock(context.Background(), &CreateWorkerBlockInput{
+		WorkerId: ptr.String("__WorkerId__"),
+		Reason:   ptr.String("__Reason__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -436,7 +802,9 @@ func TestCheckResponseSnapshot_DeleteHIT(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteHIT(context.Background(), &DeleteHITInput{})
+	got, err := svc.DeleteHIT(context.Background(), &DeleteHITInput{
+		HITId: ptr.String("__HITId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -455,7 +823,9 @@ func TestCheckResponseSnapshot_DeleteQualificationType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteQualificationType(context.Background(), &DeleteQualificationTypeInput{})
+	got, err := svc.DeleteQualificationType(context.Background(), &DeleteQualificationTypeInput{
+		QualificationTypeId: ptr.String("__QualificationTypeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -474,7 +844,10 @@ func TestCheckResponseSnapshot_DeleteWorkerBlock(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorkerBlock(context.Background(), &DeleteWorkerBlockInput{})
+	got, err := svc.DeleteWorkerBlock(context.Background(), &DeleteWorkerBlockInput{
+		WorkerId: ptr.String("__WorkerId__"),
+		Reason:   ptr.String("__Reason__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -493,7 +866,11 @@ func TestCheckResponseSnapshot_DisassociateQualificationFromWorker(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateQualificationFromWorker(context.Background(), &DisassociateQualificationFromWorkerInput{})
+	got, err := svc.DisassociateQualificationFromWorker(context.Background(), &DisassociateQualificationFromWorkerInput{
+		WorkerId:            ptr.String("__WorkerId__"),
+		QualificationTypeId: ptr.String("__QualificationTypeId__"),
+		Reason:              ptr.String("__Reason__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -613,7 +990,9 @@ func TestCheckResponseSnapshot_GetAssignment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAssignment(context.Background(), &GetAssignmentInput{})
+	got, err := svc.GetAssignment(context.Background(), &GetAssignmentInput{
+		AssignmentId: ptr.String("__AssignmentId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -634,7 +1013,10 @@ func TestCheckResponseSnapshot_GetFileUploadURL(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFileUploadURL(context.Background(), &GetFileUploadURLInput{})
+	got, err := svc.GetFileUploadURL(context.Background(), &GetFileUploadURLInput{
+		AssignmentId:       ptr.String("__AssignmentId__"),
+		QuestionIdentifier: ptr.String("__QuestionIdentifier__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -718,7 +1100,9 @@ func TestCheckResponseSnapshot_GetHIT(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetHIT(context.Background(), &GetHITInput{})
+	got, err := svc.GetHIT(context.Background(), &GetHITInput{
+		HITId: ptr.String("__HITId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -749,7 +1133,10 @@ func TestCheckResponseSnapshot_GetQualificationScore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQualificationScore(context.Background(), &GetQualificationScoreInput{})
+	got, err := svc.GetQualificationScore(context.Background(), &GetQualificationScoreInput{
+		QualificationTypeId: ptr.String("__QualificationTypeId__"),
+		WorkerId:            ptr.String("__WorkerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -784,7 +1171,9 @@ func TestCheckResponseSnapshot_GetQualificationType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetQualificationType(context.Background(), &GetQualificationTypeInput{})
+	got, err := svc.GetQualificationType(context.Background(), &GetQualificationTypeInput{
+		QualificationTypeId: ptr.String("__QualificationTypeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -836,7 +1225,15 @@ func TestCheckResponseSnapshot_ListAssignmentsForHIT(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAssignmentsForHIT(context.Background(), &ListAssignmentsForHITInput{})
+	got, err := svc.ListAssignmentsForHIT(context.Background(), &ListAssignmentsForHITInput{
+		HITId:      ptr.String("__HITId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+		AssignmentStatuses: []types.AssignmentStatus{
+			types.AssignmentStatus("Submitted"),
+			types.AssignmentStatus("Submitted"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -874,7 +1271,12 @@ func TestCheckResponseSnapshot_ListBonusPayments(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBonusPayments(context.Background(), &ListBonusPaymentsInput{})
+	got, err := svc.ListBonusPayments(context.Background(), &ListBonusPaymentsInput{
+		HITId:        ptr.String("__HITId__"),
+		AssignmentId: ptr.String("__AssignmentId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1026,7 +1428,10 @@ func TestCheckResponseSnapshot_ListHITs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListHITs(context.Background(), &ListHITsInput{})
+	got, err := svc.ListHITs(context.Background(), &ListHITsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1178,7 +1583,11 @@ func TestCheckResponseSnapshot_ListHITsForQualificationType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListHITsForQualificationType(context.Background(), &ListHITsForQualificationTypeInput{})
+	got, err := svc.ListHITsForQualificationType(context.Background(), &ListHITsForQualificationTypeInput{
+		QualificationTypeId: ptr.String("__QualificationTypeId__"),
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1218,7 +1627,11 @@ func TestCheckResponseSnapshot_ListQualificationRequests(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListQualificationRequests(context.Background(), &ListQualificationRequestsInput{})
+	got, err := svc.ListQualificationRequests(context.Background(), &ListQualificationRequestsInput{
+		QualificationTypeId: ptr.String("__QualificationTypeId__"),
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1272,7 +1685,13 @@ func TestCheckResponseSnapshot_ListQualificationTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListQualificationTypes(context.Background(), &ListQualificationTypesInput{})
+	got, err := svc.ListQualificationTypes(context.Background(), &ListQualificationTypesInput{
+		Query:               ptr.String("__Query__"),
+		MustBeRequestable:   ptr.Bool(true),
+		MustBeOwnedByCaller: ptr.Bool(true),
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1480,7 +1899,17 @@ func TestCheckResponseSnapshot_ListReviewPolicyResultsForHIT(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReviewPolicyResultsForHIT(context.Background(), &ListReviewPolicyResultsForHITInput{})
+	got, err := svc.ListReviewPolicyResultsForHIT(context.Background(), &ListReviewPolicyResultsForHITInput{
+		HITId: ptr.String("__HITId__"),
+		PolicyLevels: []types.ReviewPolicyLevel{
+			types.ReviewPolicyLevel("Assignment"),
+			types.ReviewPolicyLevel("Assignment"),
+		},
+		RetrieveActions: ptr.Bool(true),
+		RetrieveResults: ptr.Bool(true),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1632,7 +2061,12 @@ func TestCheckResponseSnapshot_ListReviewableHITs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReviewableHITs(context.Background(), &ListReviewableHITsInput{})
+	got, err := svc.ListReviewableHITs(context.Background(), &ListReviewableHITsInput{
+		HITTypeId:  ptr.String("__HITTypeId__"),
+		Status:     types.ReviewableHITStatus("Reviewable"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1664,7 +2098,10 @@ func TestCheckResponseSnapshot_ListWorkerBlocks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkerBlocks(context.Background(), &ListWorkerBlocksInput{})
+	got, err := svc.ListWorkerBlocks(context.Background(), &ListWorkerBlocksInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1710,7 +2147,12 @@ func TestCheckResponseSnapshot_ListWorkersWithQualificationType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkersWithQualificationType(context.Background(), &ListWorkersWithQualificationTypeInput{})
+	got, err := svc.ListWorkersWithQualificationType(context.Background(), &ListWorkersWithQualificationTypeInput{
+		QualificationTypeId: ptr.String("__QualificationTypeId__"),
+		Status:              types.QualificationStatus("Granted"),
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1742,7 +2184,14 @@ func TestCheckResponseSnapshot_NotifyWorkers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.NotifyWorkers(context.Background(), &NotifyWorkersInput{})
+	got, err := svc.NotifyWorkers(context.Background(), &NotifyWorkersInput{
+		Subject:     ptr.String("__Subject__"),
+		MessageText: ptr.String("__MessageText__"),
+		WorkerIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1761,7 +2210,10 @@ func TestCheckResponseSnapshot_RejectAssignment(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RejectAssignment(context.Background(), &RejectAssignmentInput{})
+	got, err := svc.RejectAssignment(context.Background(), &RejectAssignmentInput{
+		AssignmentId:      ptr.String("__AssignmentId__"),
+		RequesterFeedback: ptr.String("__RequesterFeedback__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1780,7 +2232,10 @@ func TestCheckResponseSnapshot_RejectQualificationRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RejectQualificationRequest(context.Background(), &RejectQualificationRequestInput{})
+	got, err := svc.RejectQualificationRequest(context.Background(), &RejectQualificationRequestInput{
+		QualificationRequestId: ptr.String("__QualificationRequestId__"),
+		Reason:                 ptr.String("__Reason__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1799,7 +2254,13 @@ func TestCheckResponseSnapshot_SendBonus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendBonus(context.Background(), &SendBonusInput{})
+	got, err := svc.SendBonus(context.Background(), &SendBonusInput{
+		WorkerId:           ptr.String("__WorkerId__"),
+		BonusAmount:        ptr.String("__BonusAmount__"),
+		AssignmentId:       ptr.String("__AssignmentId__"),
+		Reason:             ptr.String("__Reason__"),
+		UniqueRequestToken: ptr.String("__UniqueRequestToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1818,7 +2279,18 @@ func TestCheckResponseSnapshot_SendTestEventNotification(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendTestEventNotification(context.Background(), &SendTestEventNotificationInput{})
+	got, err := svc.SendTestEventNotification(context.Background(), &SendTestEventNotificationInput{
+		Notification: &types.NotificationSpecification{
+			Destination: ptr.String("__Destination__"),
+			Transport:   types.NotificationTransport("Email"),
+			Version:     ptr.String("__Version__"),
+			EventTypes: []types.EventType{
+				types.EventType("AssignmentAccepted"),
+				types.EventType("AssignmentAccepted"),
+			},
+		},
+		TestEventType: types.EventType("AssignmentAccepted"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1837,7 +2309,10 @@ func TestCheckResponseSnapshot_UpdateExpirationForHIT(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateExpirationForHIT(context.Background(), &UpdateExpirationForHITInput{})
+	got, err := svc.UpdateExpirationForHIT(context.Background(), &UpdateExpirationForHITInput{
+		HITId:    ptr.String("__HITId__"),
+		ExpireAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1856,7 +2331,10 @@ func TestCheckResponseSnapshot_UpdateHITReviewStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateHITReviewStatus(context.Background(), &UpdateHITReviewStatusInput{})
+	got, err := svc.UpdateHITReviewStatus(context.Background(), &UpdateHITReviewStatusInput{
+		HITId:  ptr.String("__HITId__"),
+		Revert: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1875,7 +2353,10 @@ func TestCheckResponseSnapshot_UpdateHITTypeOfHIT(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateHITTypeOfHIT(context.Background(), &UpdateHITTypeOfHITInput{})
+	got, err := svc.UpdateHITTypeOfHIT(context.Background(), &UpdateHITTypeOfHITInput{
+		HITId:     ptr.String("__HITId__"),
+		HITTypeId: ptr.String("__HITTypeId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1894,7 +2375,19 @@ func TestCheckResponseSnapshot_UpdateNotificationSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateNotificationSettings(context.Background(), &UpdateNotificationSettingsInput{})
+	got, err := svc.UpdateNotificationSettings(context.Background(), &UpdateNotificationSettingsInput{
+		HITTypeId: ptr.String("__HITTypeId__"),
+		Notification: &types.NotificationSpecification{
+			Destination: ptr.String("__Destination__"),
+			Transport:   types.NotificationTransport("Email"),
+			Version:     ptr.String("__Version__"),
+			EventTypes: []types.EventType{
+				types.EventType("AssignmentAccepted"),
+				types.EventType("AssignmentAccepted"),
+			},
+		},
+		Active: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1929,7 +2422,17 @@ func TestCheckResponseSnapshot_UpdateQualificationType(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateQualificationType(context.Background(), &UpdateQualificationTypeInput{})
+	got, err := svc.UpdateQualificationType(context.Background(), &UpdateQualificationTypeInput{
+		QualificationTypeId:     ptr.String("__QualificationTypeId__"),
+		Description:             ptr.String("__Description__"),
+		QualificationTypeStatus: types.QualificationTypeStatus("Active"),
+		Test:                    ptr.String("__Test__"),
+		AnswerKey:               ptr.String("__AnswerKey__"),
+		TestDurationInSeconds:   ptr.Int64(1),
+		RetryDelayInSeconds:     ptr.Int64(1),
+		AutoGranted:             ptr.Bool(true),
+		AutoGrantedValue:        ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1951,7 +2454,10 @@ func TestCheckResponseSnapshot_Error_RequestError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptQualificationRequest(context.Background(), &AcceptQualificationRequestInput{})
+	_, opErr := svc.AcceptQualificationRequest(context.Background(), &AcceptQualificationRequestInput{
+		QualificationRequestId: ptr.String("__QualificationRequestId__"),
+		IntegerValue:           ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1977,7 +2483,10 @@ func TestCheckResponseSnapshot_Error_ServiceFault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptQualificationRequest(context.Background(), &AcceptQualificationRequestInput{})
+	_, opErr := svc.AcceptQualificationRequest(context.Background(), &AcceptQualificationRequestInput{
+		QualificationRequestId: ptr.String("__QualificationRequestId__"),
+		IntegerValue:           ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

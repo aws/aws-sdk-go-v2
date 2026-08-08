@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","RuleResults":[{"Description":"__Description__","Id":"__Id__","Message":"__Message__","Metadata":{"key0":"__Value__"},"Status":"PASSED"},{"Description":"__Description__","Id":"__Id__","Message":"__Message__","Metadata":{"key0":"__Value__"},"Status":"PASSED"}]}

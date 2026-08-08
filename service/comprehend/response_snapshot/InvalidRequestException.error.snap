@@ -1,0 +1,5 @@
+400
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Comprehend_20171127.BatchDetectDominantLanguage
+
+{"__type":"InvalidRequestException","Detail":{"Reason":"DOCUMENT_SIZE_EXCEEDED"},"Message":"__Message__","Reason":"INVALID_DOCUMENT"}

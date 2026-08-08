@@ -5,11 +5,14 @@
 package agentregistrycontrol
 
 import (
+	"bytes"
 	"context"
+	"encoding/json"
 	"errors"
 	"github.com/aws/aws-sdk-go-v2/service/agentregistrycontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/agentregistrycontrol/types"
 	smithy "github.com/aws/smithy-go"
+	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"github.com/aws/smithy-go/transport/http/protocol/restjson1"
@@ -32,6 +35,11 @@ func serdeRespCreatePath(path string) (*os.File, error) {
 }
 
 func serdeRespWriteSnapshot(op string, status int, header http.Header, body []byte) error {
+	if es, eh, eb, err := serdeRespReadSnapshot(op); err == nil &&
+		es == status && serdeRespHeaderEqual(eh, header) && bytes.Equal(body, eb) {
+		return nil
+	}
+
 	f, err := serdeRespCreatePath(serdeRespSSPath(op))
 	if err != nil {
 		return err
@@ -60,11 +68,64 @@ func serdeRespWriteSnapshot(op string, status int, header http.Header, body []by
 	return err
 }
 
-// serdeRespXMLErrorEnvelope wraps serialized error members in the XML
-// error envelope the restXml/query deserializers parse:
-// <ErrorResponse><Error><Code>CODE</Code>MEMBERS</Error></ErrorResponse>.
-// It strips the serialized body's outer root element and re-parents the
-// members under <Error>.
+func serdeRespHeaderEqual(a, b http.Header) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	for k, av := range a {
+		bv, ok := b[k]
+		if !ok || !slices.Equal(av, bv) {
+			return false
+		}
+	}
+	return true
+}
+
+// inject __type into cbor since our error "serializers" don't like a real response would have
+func serdeRespSpliceCBORType(t *testing.T, body []byte, code string) []byte {
+	pair := append(
+		smithycbor.Encode(smithycbor.String("__type")),
+		smithycbor.Encode(smithycbor.String(code))...,
+	)
+	if len(body) == 0 {
+		return append(append([]byte{0xbf}, pair...), 0xff)
+	}
+
+	if body[0] != 0xbf {
+		t.Fatalf("expected cbor indefinite map header, got %#x", body[0])
+	}
+
+	out := make([]byte, 0, len(body)+len(pair))
+	out = append(out, 0xbf)
+	out = append(out, pair...)
+	return append(out, body[1:]...)
+}
+
+// inject __type into json since our error "serializers" don't like a real response would have
+func serdeRespSpliceJSONType(t *testing.T, body []byte, code string) []byte {
+	quoted, err := json.Marshal(code)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	entry := append([]byte(`"__type":`), quoted...)
+	trimmed := bytes.TrimLeft(body, " \t\r\n")
+	if len(trimmed) == 0 {
+		return append(append([]byte{'{'}, entry...), '}')
+	}
+	if trimmed[0] != '{' {
+		t.Fatalf("expected json object body, got %q", trimmed[0])
+	}
+
+	rest := bytes.TrimLeft(trimmed[1:], " \t\r\n")
+	out := append([]byte{'{'}, entry...)
+	if len(rest) > 0 && rest[0] != '}' {
+		out = append(out, ',')
+	}
+	return append(out, rest...)
+}
+
+// inject the xml envelope since our error "serializers" don't like a real response woul have
 func serdeRespXMLErrorEnvelope(body []byte, code string) []byte {
 	inner := ""
 	s := strings.TrimSpace(string(body))
@@ -1115,9 +1176,7 @@ func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		}
 		body = b
 	}
-	// Route to the modeled error via the standard error-type header; the serialized JSON members
-	// remain the body for the error deserializer.
-	built.Header.Set("X-Amzn-ErrorType", want.ErrorCode())
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("AccessDeniedException.error", 403, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1142,9 +1201,7 @@ func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 		}
 		body = b
 	}
-	// Route to the modeled error via the standard error-type header; the serialized JSON members
-	// remain the body for the error deserializer.
-	built.Header.Set("X-Amzn-ErrorType", want.ErrorCode())
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ConflictException.error", 409, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1169,9 +1226,7 @@ func TestUpdateResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		}
 		body = b
 	}
-	// Route to the modeled error via the standard error-type header; the serialized JSON members
-	// remain the body for the error deserializer.
-	built.Header.Set("X-Amzn-ErrorType", want.ErrorCode())
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InternalServerException.error", 500, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1196,9 +1251,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		}
 		body = b
 	}
-	// Route to the modeled error via the standard error-type header; the serialized JSON members
-	// remain the body for the error deserializer.
-	built.Header.Set("X-Amzn-ErrorType", want.ErrorCode())
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ResourceNotFoundException.error", 404, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1223,9 +1276,7 @@ func TestUpdateResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T
 		}
 		body = b
 	}
-	// Route to the modeled error via the standard error-type header; the serialized JSON members
-	// remain the body for the error deserializer.
-	built.Header.Set("X-Amzn-ErrorType", want.ErrorCode())
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ServiceQuotaExceededException.error", 402, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1250,9 +1301,7 @@ func TestUpdateResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		}
 		body = b
 	}
-	// Route to the modeled error via the standard error-type header; the serialized JSON members
-	// remain the body for the error deserializer.
-	built.Header.Set("X-Amzn-ErrorType", want.ErrorCode())
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ThrottlingException.error", 429, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
@@ -1288,9 +1337,7 @@ func TestUpdateResponseSnapshot_Error_ValidationException(t *testing.T) {
 		}
 		body = b
 	}
-	// Route to the modeled error via the standard error-type header; the serialized JSON members
-	// remain the body for the error deserializer.
-	built.Header.Set("X-Amzn-ErrorType", want.ErrorCode())
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ValidationException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}

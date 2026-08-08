@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"landingZones":[{"arn":"__Arn__"},{"arn":"__Arn__"}],"nextToken":"__NextToken__"}

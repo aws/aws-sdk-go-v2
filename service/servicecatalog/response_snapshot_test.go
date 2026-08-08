@@ -117,7 +117,11 @@ func TestCheckResponseSnapshot_AcceptPortfolioShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptPortfolioShare(context.Background(), &AcceptPortfolioShareInput{})
+	got, err := svc.AcceptPortfolioShare(context.Background(), &AcceptPortfolioShareInput{
+		AcceptLanguage:     ptr.String("__AcceptLanguage__"),
+		PortfolioId:        ptr.String("__PortfolioId__"),
+		PortfolioShareType: types.PortfolioShareType("IMPORTED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -136,7 +140,10 @@ func TestCheckResponseSnapshot_AssociateBudgetWithResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateBudgetWithResource(context.Background(), &AssociateBudgetWithResourceInput{})
+	got, err := svc.AssociateBudgetWithResource(context.Background(), &AssociateBudgetWithResourceInput{
+		BudgetName: ptr.String("__BudgetName__"),
+		ResourceId: ptr.String("__ResourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -155,7 +162,12 @@ func TestCheckResponseSnapshot_AssociatePrincipalWithPortfolio(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociatePrincipalWithPortfolio(context.Background(), &AssociatePrincipalWithPortfolioInput{})
+	got, err := svc.AssociatePrincipalWithPortfolio(context.Background(), &AssociatePrincipalWithPortfolioInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		PortfolioId:    ptr.String("__PortfolioId__"),
+		PrincipalARN:   ptr.String("__PrincipalARN__"),
+		PrincipalType:  types.PrincipalType("IAM"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -174,7 +186,12 @@ func TestCheckResponseSnapshot_AssociateProductWithPortfolio(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateProductWithPortfolio(context.Background(), &AssociateProductWithPortfolioInput{})
+	got, err := svc.AssociateProductWithPortfolio(context.Background(), &AssociateProductWithPortfolioInput{
+		AcceptLanguage:    ptr.String("__AcceptLanguage__"),
+		ProductId:         ptr.String("__ProductId__"),
+		PortfolioId:       ptr.String("__PortfolioId__"),
+		SourcePortfolioId: ptr.String("__SourcePortfolioId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -193,7 +210,13 @@ func TestCheckResponseSnapshot_AssociateServiceActionWithProvisioningArtifact(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateServiceActionWithProvisioningArtifact(context.Background(), &AssociateServiceActionWithProvisioningArtifactInput{})
+	got, err := svc.AssociateServiceActionWithProvisioningArtifact(context.Background(), &AssociateServiceActionWithProvisioningArtifactInput{
+		ProductId:              ptr.String("__ProductId__"),
+		ProvisioningArtifactId: ptr.String("__ProvisioningArtifactId__"),
+		ServiceActionId:        ptr.String("__ServiceActionId__"),
+		AcceptLanguage:         ptr.String("__AcceptLanguage__"),
+		IdempotencyToken:       ptr.String("__IdempotencyToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -212,7 +235,10 @@ func TestCheckResponseSnapshot_AssociateTagOptionWithResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateTagOptionWithResource(context.Background(), &AssociateTagOptionWithResourceInput{})
+	got, err := svc.AssociateTagOptionWithResource(context.Background(), &AssociateTagOptionWithResourceInput{
+		ResourceId:  ptr.String("__ResourceId__"),
+		TagOptionId: ptr.String("__TagOptionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -248,7 +274,21 @@ func TestCheckResponseSnapshot_BatchAssociateServiceActionWithProvisioningArtifa
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchAssociateServiceActionWithProvisioningArtifact(context.Background(), &BatchAssociateServiceActionWithProvisioningArtifactInput{})
+	got, err := svc.BatchAssociateServiceActionWithProvisioningArtifact(context.Background(), &BatchAssociateServiceActionWithProvisioningArtifactInput{
+		ServiceActionAssociations: []types.ServiceActionAssociation{
+			{
+				ServiceActionId:        ptr.String("__ServiceActionId__"),
+				ProductId:              ptr.String("__ProductId__"),
+				ProvisioningArtifactId: ptr.String("__ProvisioningArtifactId__"),
+			},
+			{
+				ServiceActionId:        ptr.String("__ServiceActionId__"),
+				ProductId:              ptr.String("__ProductId__"),
+				ProvisioningArtifactId: ptr.String("__ProvisioningArtifactId__"),
+			},
+		},
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -284,7 +324,21 @@ func TestCheckResponseSnapshot_BatchDisassociateServiceActionFromProvisioningArt
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDisassociateServiceActionFromProvisioningArtifact(context.Background(), &BatchDisassociateServiceActionFromProvisioningArtifactInput{})
+	got, err := svc.BatchDisassociateServiceActionFromProvisioningArtifact(context.Background(), &BatchDisassociateServiceActionFromProvisioningArtifactInput{
+		ServiceActionAssociations: []types.ServiceActionAssociation{
+			{
+				ServiceActionId:        ptr.String("__ServiceActionId__"),
+				ProductId:              ptr.String("__ProductId__"),
+				ProvisioningArtifactId: ptr.String("__ProvisioningArtifactId__"),
+			},
+			{
+				ServiceActionId:        ptr.String("__ServiceActionId__"),
+				ProductId:              ptr.String("__ProductId__"),
+				ProvisioningArtifactId: ptr.String("__ProvisioningArtifactId__"),
+			},
+		},
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -305,7 +359,25 @@ func TestCheckResponseSnapshot_CopyProduct(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CopyProduct(context.Background(), &CopyProductInput{})
+	got, err := svc.CopyProduct(context.Background(), &CopyProductInput{
+		AcceptLanguage:    ptr.String("__AcceptLanguage__"),
+		SourceProductArn:  ptr.String("__SourceProductArn__"),
+		TargetProductId:   ptr.String("__TargetProductId__"),
+		TargetProductName: ptr.String("__TargetProductName__"),
+		SourceProvisioningArtifactIdentifiers: []map[string]string{
+			{
+				"key0": "__Value__",
+			},
+			{
+				"key0": "__Value__",
+			},
+		},
+		CopyOptions: []types.CopyOption{
+			types.CopyOption("CopyTags"),
+			types.CopyOption("CopyTags"),
+		},
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -335,7 +407,15 @@ func TestCheckResponseSnapshot_CreateConstraint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConstraint(context.Background(), &CreateConstraintInput{})
+	got, err := svc.CreateConstraint(context.Background(), &CreateConstraintInput{
+		AcceptLanguage:   ptr.String("__AcceptLanguage__"),
+		PortfolioId:      ptr.String("__PortfolioId__"),
+		ProductId:        ptr.String("__ProductId__"),
+		Parameters:       ptr.String("__Parameters__"),
+		Type:             ptr.String("__Type__"),
+		Description:      ptr.String("__Description__"),
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -373,7 +453,23 @@ func TestCheckResponseSnapshot_CreatePortfolio(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePortfolio(context.Background(), &CreatePortfolioInput{})
+	got, err := svc.CreatePortfolio(context.Background(), &CreatePortfolioInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		DisplayName:    ptr.String("__DisplayName__"),
+		Description:    ptr.String("__Description__"),
+		ProviderName:   ptr.String("__ProviderName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -394,7 +490,17 @@ func TestCheckResponseSnapshot_CreatePortfolioShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreatePortfolioShare(context.Background(), &CreatePortfolioShareInput{})
+	got, err := svc.CreatePortfolioShare(context.Background(), &CreatePortfolioShareInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		PortfolioId:    ptr.String("__PortfolioId__"),
+		AccountId:      ptr.String("__AccountId__"),
+		OrganizationNode: &types.OrganizationNode{
+			Type:  types.OrganizationNodeType("ORGANIZATION"),
+			Value: ptr.String("__Value__"),
+		},
+		ShareTagOptions: true,
+		SharePrincipals: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -470,7 +576,48 @@ func TestCheckResponseSnapshot_CreateProduct(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProduct(context.Background(), &CreateProductInput{})
+	got, err := svc.CreateProduct(context.Background(), &CreateProductInput{
+		AcceptLanguage:     ptr.String("__AcceptLanguage__"),
+		Name:               ptr.String("__Name__"),
+		Owner:              ptr.String("__Owner__"),
+		Description:        ptr.String("__Description__"),
+		Distributor:        ptr.String("__Distributor__"),
+		SupportDescription: ptr.String("__SupportDescription__"),
+		SupportEmail:       ptr.String("__SupportEmail__"),
+		SupportUrl:         ptr.String("__SupportUrl__"),
+		ProductType:        types.ProductType("CLOUD_FORMATION_TEMPLATE"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ProvisioningArtifactParameters: &types.ProvisioningArtifactProperties{
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+			Info: map[string]string{
+				"key0": "__Value__",
+			},
+			Type:                      types.ProvisioningArtifactType("CLOUD_FORMATION_TEMPLATE"),
+			DisableTemplateValidation: true,
+		},
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+		SourceConnection: &types.SourceConnection{
+			Type: types.SourceType("CODESTAR"),
+			ConnectionParameters: &types.SourceConnectionParameters{
+				CodeStar: &types.CodeStarParameters{
+					ConnectionArn: ptr.String("__ConnectionArn__"),
+					Repository:    ptr.String("__Repository__"),
+					Branch:        ptr.String("__Branch__"),
+					ArtifactPath:  ptr.String("__ArtifactPath__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -495,7 +642,42 @@ func TestCheckResponseSnapshot_CreateProvisionedProductPlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProvisionedProductPlan(context.Background(), &CreateProvisionedProductPlanInput{})
+	got, err := svc.CreateProvisionedProductPlan(context.Background(), &CreateProvisionedProductPlanInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		PlanName:       ptr.String("__PlanName__"),
+		PlanType:       types.ProvisionedProductPlanType("CLOUDFORMATION"),
+		NotificationArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PathId:                 ptr.String("__PathId__"),
+		ProductId:              ptr.String("__ProductId__"),
+		ProvisionedProductName: ptr.String("__ProvisionedProductName__"),
+		ProvisioningArtifactId: ptr.String("__ProvisioningArtifactId__"),
+		ProvisioningParameters: []types.UpdateProvisioningParameter{
+			{
+				Key:              ptr.String("__Key__"),
+				Value:            ptr.String("__Value__"),
+				UsePreviousValue: true,
+			},
+			{
+				Key:              ptr.String("__Key__"),
+				Value:            ptr.String("__Value__"),
+				UsePreviousValue: true,
+			},
+		},
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -529,7 +711,20 @@ func TestCheckResponseSnapshot_CreateProvisioningArtifact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateProvisioningArtifact(context.Background(), &CreateProvisioningArtifactInput{})
+	got, err := svc.CreateProvisioningArtifact(context.Background(), &CreateProvisioningArtifactInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		ProductId:      ptr.String("__ProductId__"),
+		Parameters: &types.ProvisioningArtifactProperties{
+			Name:        ptr.String("__Name__"),
+			Description: ptr.String("__Description__"),
+			Info: map[string]string{
+				"key0": "__Value__",
+			},
+			Type:                      types.ProvisioningArtifactType("CLOUD_FORMATION_TEMPLATE"),
+			DisableTemplateValidation: true,
+		},
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -560,7 +755,16 @@ func TestCheckResponseSnapshot_CreateServiceAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateServiceAction(context.Background(), &CreateServiceActionInput{})
+	got, err := svc.CreateServiceAction(context.Background(), &CreateServiceActionInput{
+		Name:           ptr.String("__Name__"),
+		DefinitionType: types.ServiceActionDefinitionType("SSM_AUTOMATION"),
+		Definition: map[string]string{
+			"key0": "__Value__",
+		},
+		Description:      ptr.String("__Description__"),
+		AcceptLanguage:   ptr.String("__AcceptLanguage__"),
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -587,7 +791,10 @@ func TestCheckResponseSnapshot_CreateTagOption(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTagOption(context.Background(), &CreateTagOptionInput{})
+	got, err := svc.CreateTagOption(context.Background(), &CreateTagOptionInput{
+		Key:   ptr.String("__Key__"),
+		Value: ptr.String("__Value__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -606,7 +813,10 @@ func TestCheckResponseSnapshot_DeleteConstraint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConstraint(context.Background(), &DeleteConstraintInput{})
+	got, err := svc.DeleteConstraint(context.Background(), &DeleteConstraintInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		Id:             ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -625,7 +835,10 @@ func TestCheckResponseSnapshot_DeletePortfolio(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePortfolio(context.Background(), &DeletePortfolioInput{})
+	got, err := svc.DeletePortfolio(context.Background(), &DeletePortfolioInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		Id:             ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -646,7 +859,15 @@ func TestCheckResponseSnapshot_DeletePortfolioShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeletePortfolioShare(context.Background(), &DeletePortfolioShareInput{})
+	got, err := svc.DeletePortfolioShare(context.Background(), &DeletePortfolioShareInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		PortfolioId:    ptr.String("__PortfolioId__"),
+		AccountId:      ptr.String("__AccountId__"),
+		OrganizationNode: &types.OrganizationNode{
+			Type:  types.OrganizationNodeType("ORGANIZATION"),
+			Value: ptr.String("__Value__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -665,7 +886,10 @@ func TestCheckResponseSnapshot_DeleteProduct(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProduct(context.Background(), &DeleteProductInput{})
+	got, err := svc.DeleteProduct(context.Background(), &DeleteProductInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		Id:             ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -684,7 +908,11 @@ func TestCheckResponseSnapshot_DeleteProvisionedProductPlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProvisionedProductPlan(context.Background(), &DeleteProvisionedProductPlanInput{})
+	got, err := svc.DeleteProvisionedProductPlan(context.Background(), &DeleteProvisionedProductPlanInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		PlanId:         ptr.String("__PlanId__"),
+		IgnoreErrors:   true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -703,7 +931,11 @@ func TestCheckResponseSnapshot_DeleteProvisioningArtifact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteProvisioningArtifact(context.Background(), &DeleteProvisioningArtifactInput{})
+	got, err := svc.DeleteProvisioningArtifact(context.Background(), &DeleteProvisioningArtifactInput{
+		AcceptLanguage:         ptr.String("__AcceptLanguage__"),
+		ProductId:              ptr.String("__ProductId__"),
+		ProvisioningArtifactId: ptr.String("__ProvisioningArtifactId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -722,7 +954,11 @@ func TestCheckResponseSnapshot_DeleteServiceAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteServiceAction(context.Background(), &DeleteServiceActionInput{})
+	got, err := svc.DeleteServiceAction(context.Background(), &DeleteServiceActionInput{
+		Id:               ptr.String("__Id__"),
+		AcceptLanguage:   ptr.String("__AcceptLanguage__"),
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -741,7 +977,9 @@ func TestCheckResponseSnapshot_DeleteTagOption(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTagOption(context.Background(), &DeleteTagOptionInput{})
+	got, err := svc.DeleteTagOption(context.Background(), &DeleteTagOptionInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -771,7 +1009,10 @@ func TestCheckResponseSnapshot_DescribeConstraint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConstraint(context.Background(), &DescribeConstraintInput{})
+	got, err := svc.DescribeConstraint(context.Background(), &DescribeConstraintInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		Id:             ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -794,7 +1035,10 @@ func TestCheckResponseSnapshot_DescribeCopyProductStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeCopyProductStatus(context.Background(), &DescribeCopyProductStatusInput{})
+	got, err := svc.DescribeCopyProductStatus(context.Background(), &DescribeCopyProductStatusInput{
+		AcceptLanguage:   ptr.String("__AcceptLanguage__"),
+		CopyProductToken: ptr.String("__CopyProductToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -856,7 +1100,10 @@ func TestCheckResponseSnapshot_DescribePortfolio(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePortfolio(context.Background(), &DescribePortfolioInput{})
+	got, err := svc.DescribePortfolio(context.Background(), &DescribePortfolioInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		Id:             ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -904,7 +1151,9 @@ func TestCheckResponseSnapshot_DescribePortfolioShareStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePortfolioShareStatus(context.Background(), &DescribePortfolioShareStatusInput{})
+	got, err := svc.DescribePortfolioShareStatus(context.Background(), &DescribePortfolioShareStatusInput{
+		PortfolioShareToken: ptr.String("__PortfolioShareToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -941,7 +1190,12 @@ func TestCheckResponseSnapshot_DescribePortfolioShares(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribePortfolioShares(context.Background(), &DescribePortfolioSharesInput{})
+	got, err := svc.DescribePortfolioShares(context.Background(), &DescribePortfolioSharesInput{
+		PortfolioId: ptr.String("__PortfolioId__"),
+		Type:        types.DescribePortfolioShareType("ACCOUNT"),
+		PageToken:   ptr.String("__PageToken__"),
+		PageSize:    1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1008,7 +1262,11 @@ func TestCheckResponseSnapshot_DescribeProduct(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeProduct(context.Background(), &DescribeProductInput{})
+	got, err := svc.DescribeProduct(context.Background(), &DescribeProductInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		Id:             ptr.String("__Id__"),
+		Name:           ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1118,7 +1376,12 @@ func TestCheckResponseSnapshot_DescribeProductAsAdmin(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeProductAsAdmin(context.Background(), &DescribeProductAsAdminInput{})
+	got, err := svc.DescribeProductAsAdmin(context.Background(), &DescribeProductAsAdminInput{
+		AcceptLanguage:    ptr.String("__AcceptLanguage__"),
+		Id:                ptr.String("__Id__"),
+		Name:              ptr.String("__Name__"),
+		SourcePortfolioId: ptr.String("__SourcePortfolioId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1167,7 +1430,10 @@ func TestCheckResponseSnapshot_DescribeProductView(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeProductView(context.Background(), &DescribeProductViewInput{})
+	got, err := svc.DescribeProductView(context.Background(), &DescribeProductViewInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		Id:             ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1211,7 +1477,11 @@ func TestCheckResponseSnapshot_DescribeProvisionedProduct(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeProvisionedProduct(context.Background(), &DescribeProvisionedProductInput{})
+	got, err := svc.DescribeProvisionedProduct(context.Background(), &DescribeProvisionedProductInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		Id:             ptr.String("__Id__"),
+		Name:           ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1336,7 +1606,12 @@ func TestCheckResponseSnapshot_DescribeProvisionedProductPlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeProvisionedProductPlan(context.Background(), &DescribeProvisionedProductPlanInput{})
+	got, err := svc.DescribeProvisionedProductPlan(context.Background(), &DescribeProvisionedProductPlanInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		PlanId:         ptr.String("__PlanId__"),
+		PageSize:       1,
+		PageToken:      ptr.String("__PageToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1410,7 +1685,15 @@ func TestCheckResponseSnapshot_DescribeProvisioningArtifact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeProvisioningArtifact(context.Background(), &DescribeProvisioningArtifactInput{})
+	got, err := svc.DescribeProvisioningArtifact(context.Background(), &DescribeProvisioningArtifactInput{
+		AcceptLanguage:                        ptr.String("__AcceptLanguage__"),
+		ProvisioningArtifactId:                ptr.String("__ProvisioningArtifactId__"),
+		ProductId:                             ptr.String("__ProductId__"),
+		ProvisioningArtifactName:              ptr.String("__ProvisioningArtifactName__"),
+		ProductName:                           ptr.String("__ProductName__"),
+		Verbose:                               true,
+		IncludeProvisioningArtifactParameters: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1536,7 +1819,15 @@ func TestCheckResponseSnapshot_DescribeProvisioningParameters(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeProvisioningParameters(context.Background(), &DescribeProvisioningParametersInput{})
+	got, err := svc.DescribeProvisioningParameters(context.Background(), &DescribeProvisioningParametersInput{
+		AcceptLanguage:           ptr.String("__AcceptLanguage__"),
+		ProductId:                ptr.String("__ProductId__"),
+		ProductName:              ptr.String("__ProductName__"),
+		ProvisioningArtifactId:   ptr.String("__ProvisioningArtifactId__"),
+		ProvisioningArtifactName: ptr.String("__ProvisioningArtifactName__"),
+		PathId:                   ptr.String("__PathId__"),
+		PathName:                 ptr.String("__PathName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1603,7 +1894,12 @@ func TestCheckResponseSnapshot_DescribeRecord(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRecord(context.Background(), &DescribeRecordInput{})
+	got, err := svc.DescribeRecord(context.Background(), &DescribeRecordInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		Id:             ptr.String("__Id__"),
+		PageToken:      ptr.String("__PageToken__"),
+		PageSize:       1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1634,7 +1930,10 @@ func TestCheckResponseSnapshot_DescribeServiceAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeServiceAction(context.Background(), &DescribeServiceActionInput{})
+	got, err := svc.DescribeServiceAction(context.Background(), &DescribeServiceActionInput{
+		Id:             ptr.String("__Id__"),
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1672,7 +1971,11 @@ func TestCheckResponseSnapshot_DescribeServiceActionExecutionParameters(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeServiceActionExecutionParameters(context.Background(), &DescribeServiceActionExecutionParametersInput{})
+	got, err := svc.DescribeServiceActionExecutionParameters(context.Background(), &DescribeServiceActionExecutionParametersInput{
+		ProvisionedProductId: ptr.String("__ProvisionedProductId__"),
+		ServiceActionId:      ptr.String("__ServiceActionId__"),
+		AcceptLanguage:       ptr.String("__AcceptLanguage__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1699,7 +2002,9 @@ func TestCheckResponseSnapshot_DescribeTagOption(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeTagOption(context.Background(), &DescribeTagOptionInput{})
+	got, err := svc.DescribeTagOption(context.Background(), &DescribeTagOptionInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1737,7 +2042,10 @@ func TestCheckResponseSnapshot_DisassociateBudgetFromResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateBudgetFromResource(context.Background(), &DisassociateBudgetFromResourceInput{})
+	got, err := svc.DisassociateBudgetFromResource(context.Background(), &DisassociateBudgetFromResourceInput{
+		BudgetName: ptr.String("__BudgetName__"),
+		ResourceId: ptr.String("__ResourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1756,7 +2064,12 @@ func TestCheckResponseSnapshot_DisassociatePrincipalFromPortfolio(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociatePrincipalFromPortfolio(context.Background(), &DisassociatePrincipalFromPortfolioInput{})
+	got, err := svc.DisassociatePrincipalFromPortfolio(context.Background(), &DisassociatePrincipalFromPortfolioInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		PortfolioId:    ptr.String("__PortfolioId__"),
+		PrincipalARN:   ptr.String("__PrincipalARN__"),
+		PrincipalType:  types.PrincipalType("IAM"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1775,7 +2088,11 @@ func TestCheckResponseSnapshot_DisassociateProductFromPortfolio(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateProductFromPortfolio(context.Background(), &DisassociateProductFromPortfolioInput{})
+	got, err := svc.DisassociateProductFromPortfolio(context.Background(), &DisassociateProductFromPortfolioInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		ProductId:      ptr.String("__ProductId__"),
+		PortfolioId:    ptr.String("__PortfolioId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1794,7 +2111,13 @@ func TestCheckResponseSnapshot_DisassociateServiceActionFromProvisioningArtifact
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateServiceActionFromProvisioningArtifact(context.Background(), &DisassociateServiceActionFromProvisioningArtifactInput{})
+	got, err := svc.DisassociateServiceActionFromProvisioningArtifact(context.Background(), &DisassociateServiceActionFromProvisioningArtifactInput{
+		ProductId:              ptr.String("__ProductId__"),
+		ProvisioningArtifactId: ptr.String("__ProvisioningArtifactId__"),
+		ServiceActionId:        ptr.String("__ServiceActionId__"),
+		AcceptLanguage:         ptr.String("__AcceptLanguage__"),
+		IdempotencyToken:       ptr.String("__IdempotencyToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1813,7 +2136,10 @@ func TestCheckResponseSnapshot_DisassociateTagOptionFromResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateTagOptionFromResource(context.Background(), &DisassociateTagOptionFromResourceInput{})
+	got, err := svc.DisassociateTagOptionFromResource(context.Background(), &DisassociateTagOptionFromResourceInput{
+		ResourceId:  ptr.String("__ResourceId__"),
+		TagOptionId: ptr.String("__TagOptionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1886,7 +2212,11 @@ func TestCheckResponseSnapshot_ExecuteProvisionedProductPlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExecuteProvisionedProductPlan(context.Background(), &ExecuteProvisionedProductPlanInput{})
+	got, err := svc.ExecuteProvisionedProductPlan(context.Background(), &ExecuteProvisionedProductPlanInput{
+		AcceptLanguage:   ptr.String("__AcceptLanguage__"),
+		PlanId:           ptr.String("__PlanId__"),
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1940,7 +2270,18 @@ func TestCheckResponseSnapshot_ExecuteProvisionedProductServiceAction(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ExecuteProvisionedProductServiceAction(context.Background(), &ExecuteProvisionedProductServiceActionInput{})
+	got, err := svc.ExecuteProvisionedProductServiceAction(context.Background(), &ExecuteProvisionedProductServiceActionInput{
+		ProvisionedProductId: ptr.String("__ProvisionedProductId__"),
+		ServiceActionId:      ptr.String("__ServiceActionId__"),
+		ExecuteToken:         ptr.String("__ExecuteToken__"),
+		AcceptLanguage:       ptr.String("__AcceptLanguage__"),
+		Parameters: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1994,7 +2335,17 @@ func TestCheckResponseSnapshot_GetProvisionedProductOutputs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetProvisionedProductOutputs(context.Background(), &GetProvisionedProductOutputsInput{})
+	got, err := svc.GetProvisionedProductOutputs(context.Background(), &GetProvisionedProductOutputsInput{
+		AcceptLanguage:         ptr.String("__AcceptLanguage__"),
+		ProvisionedProductId:   ptr.String("__ProvisionedProductId__"),
+		ProvisionedProductName: ptr.String("__ProvisionedProductName__"),
+		OutputKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PageSize:  1,
+		PageToken: ptr.String("__PageToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2048,7 +2399,14 @@ func TestCheckResponseSnapshot_ImportAsProvisionedProduct(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportAsProvisionedProduct(context.Background(), &ImportAsProvisionedProductInput{})
+	got, err := svc.ImportAsProvisionedProduct(context.Background(), &ImportAsProvisionedProductInput{
+		AcceptLanguage:         ptr.String("__AcceptLanguage__"),
+		ProductId:              ptr.String("__ProductId__"),
+		ProvisioningArtifactId: ptr.String("__ProvisioningArtifactId__"),
+		ProvisionedProductName: ptr.String("__ProvisionedProductName__"),
+		PhysicalId:             ptr.String("__PhysicalId__"),
+		IdempotencyToken:       ptr.String("__IdempotencyToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2087,7 +2445,12 @@ func TestCheckResponseSnapshot_ListAcceptedPortfolioShares(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAcceptedPortfolioShares(context.Background(), &ListAcceptedPortfolioSharesInput{})
+	got, err := svc.ListAcceptedPortfolioShares(context.Background(), &ListAcceptedPortfolioSharesInput{
+		AcceptLanguage:     ptr.String("__AcceptLanguage__"),
+		PageToken:          ptr.String("__PageToken__"),
+		PageSize:           1,
+		PortfolioShareType: types.PortfolioShareType("IMPORTED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2116,7 +2479,12 @@ func TestCheckResponseSnapshot_ListBudgetsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBudgetsForResource(context.Background(), &ListBudgetsForResourceInput{})
+	got, err := svc.ListBudgetsForResource(context.Background(), &ListBudgetsForResourceInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		ResourceId:     ptr.String("__ResourceId__"),
+		PageSize:       1,
+		PageToken:      ptr.String("__PageToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2155,7 +2523,13 @@ func TestCheckResponseSnapshot_ListConstraintsForPortfolio(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConstraintsForPortfolio(context.Background(), &ListConstraintsForPortfolioInput{})
+	got, err := svc.ListConstraintsForPortfolio(context.Background(), &ListConstraintsForPortfolioInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		PortfolioId:    ptr.String("__PortfolioId__"),
+		ProductId:      ptr.String("__ProductId__"),
+		PageSize:       1,
+		PageToken:      ptr.String("__PageToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2226,7 +2600,12 @@ func TestCheckResponseSnapshot_ListLaunchPaths(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLaunchPaths(context.Background(), &ListLaunchPathsInput{})
+	got, err := svc.ListLaunchPaths(context.Background(), &ListLaunchPathsInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		ProductId:      ptr.String("__ProductId__"),
+		PageSize:       1,
+		PageToken:      ptr.String("__PageToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2257,7 +2636,13 @@ func TestCheckResponseSnapshot_ListOrganizationPortfolioAccess(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOrganizationPortfolioAccess(context.Background(), &ListOrganizationPortfolioAccessInput{})
+	got, err := svc.ListOrganizationPortfolioAccess(context.Background(), &ListOrganizationPortfolioAccessInput{
+		AcceptLanguage:       ptr.String("__AcceptLanguage__"),
+		PortfolioId:          ptr.String("__PortfolioId__"),
+		OrganizationNodeType: types.OrganizationNodeType("ORGANIZATION"),
+		PageToken:            ptr.String("__PageToken__"),
+		PageSize:             1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2282,7 +2667,13 @@ func TestCheckResponseSnapshot_ListPortfolioAccess(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPortfolioAccess(context.Background(), &ListPortfolioAccessInput{})
+	got, err := svc.ListPortfolioAccess(context.Background(), &ListPortfolioAccessInput{
+		AcceptLanguage:       ptr.String("__AcceptLanguage__"),
+		PortfolioId:          ptr.String("__PortfolioId__"),
+		OrganizationParentId: ptr.String("__OrganizationParentId__"),
+		PageToken:            ptr.String("__PageToken__"),
+		PageSize:             1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2321,7 +2712,11 @@ func TestCheckResponseSnapshot_ListPortfolios(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPortfolios(context.Background(), &ListPortfoliosInput{})
+	got, err := svc.ListPortfolios(context.Background(), &ListPortfoliosInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		PageToken:      ptr.String("__PageToken__"),
+		PageSize:       1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2360,7 +2755,12 @@ func TestCheckResponseSnapshot_ListPortfoliosForProduct(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPortfoliosForProduct(context.Background(), &ListPortfoliosForProductInput{})
+	got, err := svc.ListPortfoliosForProduct(context.Background(), &ListPortfoliosForProductInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		ProductId:      ptr.String("__ProductId__"),
+		PageToken:      ptr.String("__PageToken__"),
+		PageSize:       1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2391,7 +2791,12 @@ func TestCheckResponseSnapshot_ListPrincipalsForPortfolio(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPrincipalsForPortfolio(context.Background(), &ListPrincipalsForPortfolioInput{})
+	got, err := svc.ListPrincipalsForPortfolio(context.Background(), &ListPrincipalsForPortfolioInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		PortfolioId:    ptr.String("__PortfolioId__"),
+		PageSize:       1,
+		PageToken:      ptr.String("__PageToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2430,7 +2835,16 @@ func TestCheckResponseSnapshot_ListProvisionedProductPlans(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProvisionedProductPlans(context.Background(), &ListProvisionedProductPlansInput{})
+	got, err := svc.ListProvisionedProductPlans(context.Background(), &ListProvisionedProductPlansInput{
+		AcceptLanguage:     ptr.String("__AcceptLanguage__"),
+		ProvisionProductId: ptr.String("__ProvisionProductId__"),
+		PageSize:           1,
+		PageToken:          ptr.String("__PageToken__"),
+		AccessLevelFilter: &types.AccessLevelFilter{
+			Key:   types.AccessLevelFilterKey("Account"),
+			Value: ptr.String("__Value__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2473,7 +2887,10 @@ func TestCheckResponseSnapshot_ListProvisioningArtifacts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProvisioningArtifacts(context.Background(), &ListProvisioningArtifactsInput{})
+	got, err := svc.ListProvisioningArtifacts(context.Background(), &ListProvisioningArtifactsInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		ProductId:      ptr.String("__ProductId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2540,7 +2957,12 @@ func TestCheckResponseSnapshot_ListProvisioningArtifactsForServiceAction(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProvisioningArtifactsForServiceAction(context.Background(), &ListProvisioningArtifactsForServiceActionInput{})
+	got, err := svc.ListProvisioningArtifactsForServiceAction(context.Background(), &ListProvisioningArtifactsForServiceActionInput{
+		ServiceActionId: ptr.String("__ServiceActionId__"),
+		PageSize:        1,
+		PageToken:       ptr.String("__PageToken__"),
+		AcceptLanguage:  ptr.String("__AcceptLanguage__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2631,7 +3053,19 @@ func TestCheckResponseSnapshot_ListRecordHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRecordHistory(context.Background(), &ListRecordHistoryInput{})
+	got, err := svc.ListRecordHistory(context.Background(), &ListRecordHistoryInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		AccessLevelFilter: &types.AccessLevelFilter{
+			Key:   types.AccessLevelFilterKey("Account"),
+			Value: ptr.String("__Value__"),
+		},
+		SearchFilter: &types.ListRecordHistorySearchFilter{
+			Key:   ptr.String("__Key__"),
+			Value: ptr.String("__Value__"),
+		},
+		PageSize:  1,
+		PageToken: ptr.String("__PageToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2668,7 +3102,12 @@ func TestCheckResponseSnapshot_ListResourcesForTagOption(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResourcesForTagOption(context.Background(), &ListResourcesForTagOptionInput{})
+	got, err := svc.ListResourcesForTagOption(context.Background(), &ListResourcesForTagOptionInput{
+		TagOptionId:  ptr.String("__TagOptionId__"),
+		ResourceType: ptr.String("__ResourceType__"),
+		PageSize:     1,
+		PageToken:    ptr.String("__PageToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2703,7 +3142,11 @@ func TestCheckResponseSnapshot_ListServiceActions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServiceActions(context.Background(), &ListServiceActionsInput{})
+	got, err := svc.ListServiceActions(context.Background(), &ListServiceActionsInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		PageSize:       1,
+		PageToken:      ptr.String("__PageToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2738,7 +3181,13 @@ func TestCheckResponseSnapshot_ListServiceActionsForProvisioningArtifact(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListServiceActionsForProvisioningArtifact(context.Background(), &ListServiceActionsForProvisioningArtifactInput{})
+	got, err := svc.ListServiceActionsForProvisioningArtifact(context.Background(), &ListServiceActionsForProvisioningArtifactInput{
+		ProductId:              ptr.String("__ProductId__"),
+		ProvisioningArtifactId: ptr.String("__ProvisioningArtifactId__"),
+		PageSize:               1,
+		PageToken:              ptr.String("__PageToken__"),
+		AcceptLanguage:         ptr.String("__AcceptLanguage__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2771,7 +3220,12 @@ func TestCheckResponseSnapshot_ListStackInstancesForProvisionedProduct(t *testin
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListStackInstancesForProvisionedProduct(context.Background(), &ListStackInstancesForProvisionedProductInput{})
+	got, err := svc.ListStackInstancesForProvisionedProduct(context.Background(), &ListStackInstancesForProvisionedProductInput{
+		AcceptLanguage:       ptr.String("__AcceptLanguage__"),
+		ProvisionedProductId: ptr.String("__ProvisionedProductId__"),
+		PageToken:            ptr.String("__PageToken__"),
+		PageSize:             1,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2808,7 +3262,15 @@ func TestCheckResponseSnapshot_ListTagOptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagOptions(context.Background(), &ListTagOptionsInput{})
+	got, err := svc.ListTagOptions(context.Background(), &ListTagOptionsInput{
+		Filters: &types.ListTagOptionsFilters{
+			Key:    ptr.String("__Key__"),
+			Value:  ptr.String("__Value__"),
+			Active: ptr.Bool(true),
+		},
+		PageSize:  1,
+		PageToken: ptr.String("__PageToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2827,7 +3289,31 @@ func TestCheckResponseSnapshot_NotifyProvisionProductEngineWorkflowResult(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.NotifyProvisionProductEngineWorkflowResult(context.Background(), &NotifyProvisionProductEngineWorkflowResultInput{})
+	got, err := svc.NotifyProvisionProductEngineWorkflowResult(context.Background(), &NotifyProvisionProductEngineWorkflowResultInput{
+		WorkflowToken: ptr.String("__WorkflowToken__"),
+		RecordId:      ptr.String("__RecordId__"),
+		Status:        types.EngineWorkflowStatus("SUCCEEDED"),
+		FailureReason: ptr.String("__FailureReason__"),
+		ResourceIdentifier: &types.EngineWorkflowResourceIdentifier{
+			UniqueTag: &types.UniqueTagResourceIdentifier{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Outputs: []types.RecordOutput{
+			{
+				OutputKey:   ptr.String("__OutputKey__"),
+				OutputValue: ptr.String("__OutputValue__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				OutputKey:   ptr.String("__OutputKey__"),
+				OutputValue: ptr.String("__OutputValue__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2846,7 +3332,13 @@ func TestCheckResponseSnapshot_NotifyTerminateProvisionedProductEngineWorkflowRe
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.NotifyTerminateProvisionedProductEngineWorkflowResult(context.Background(), &NotifyTerminateProvisionedProductEngineWorkflowResultInput{})
+	got, err := svc.NotifyTerminateProvisionedProductEngineWorkflowResult(context.Background(), &NotifyTerminateProvisionedProductEngineWorkflowResultInput{
+		WorkflowToken:    ptr.String("__WorkflowToken__"),
+		RecordId:         ptr.String("__RecordId__"),
+		Status:           types.EngineWorkflowStatus("SUCCEEDED"),
+		FailureReason:    ptr.String("__FailureReason__"),
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2865,7 +3357,25 @@ func TestCheckResponseSnapshot_NotifyUpdateProvisionedProductEngineWorkflowResul
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.NotifyUpdateProvisionedProductEngineWorkflowResult(context.Background(), &NotifyUpdateProvisionedProductEngineWorkflowResultInput{})
+	got, err := svc.NotifyUpdateProvisionedProductEngineWorkflowResult(context.Background(), &NotifyUpdateProvisionedProductEngineWorkflowResultInput{
+		WorkflowToken: ptr.String("__WorkflowToken__"),
+		RecordId:      ptr.String("__RecordId__"),
+		Status:        types.EngineWorkflowStatus("SUCCEEDED"),
+		FailureReason: ptr.String("__FailureReason__"),
+		Outputs: []types.RecordOutput{
+			{
+				OutputKey:   ptr.String("__OutputKey__"),
+				OutputValue: ptr.String("__OutputValue__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				OutputKey:   ptr.String("__OutputKey__"),
+				OutputValue: ptr.String("__OutputValue__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2919,7 +3429,55 @@ func TestCheckResponseSnapshot_ProvisionProduct(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ProvisionProduct(context.Background(), &ProvisionProductInput{})
+	got, err := svc.ProvisionProduct(context.Background(), &ProvisionProductInput{
+		AcceptLanguage:           ptr.String("__AcceptLanguage__"),
+		ProductId:                ptr.String("__ProductId__"),
+		ProductName:              ptr.String("__ProductName__"),
+		ProvisioningArtifactId:   ptr.String("__ProvisioningArtifactId__"),
+		ProvisioningArtifactName: ptr.String("__ProvisioningArtifactName__"),
+		PathId:                   ptr.String("__PathId__"),
+		PathName:                 ptr.String("__PathName__"),
+		ProvisionedProductName:   ptr.String("__ProvisionedProductName__"),
+		ProvisioningParameters: []types.ProvisioningParameter{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ProvisioningPreferences: &types.ProvisioningPreferences{
+			StackSetAccounts: []string{
+				"__Member__",
+				"__Member__",
+			},
+			StackSetRegions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			StackSetFailureToleranceCount:      ptr.Int32(1),
+			StackSetFailureTolerancePercentage: ptr.Int32(1),
+			StackSetMaxConcurrencyCount:        ptr.Int32(1),
+			StackSetMaxConcurrencyPercentage:   ptr.Int32(1),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		NotificationArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ProvisionToken: ptr.String("__ProvisionToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2938,7 +3496,11 @@ func TestCheckResponseSnapshot_RejectPortfolioShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RejectPortfolioShare(context.Background(), &RejectPortfolioShareInput{})
+	got, err := svc.RejectPortfolioShare(context.Background(), &RejectPortfolioShareInput{
+		AcceptLanguage:     ptr.String("__AcceptLanguage__"),
+		PortfolioId:        ptr.String("__PortfolioId__"),
+		PortfolioShareType: types.PortfolioShareType("IMPORTED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2993,7 +3555,15 @@ func TestCheckResponseSnapshot_ScanProvisionedProducts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ScanProvisionedProducts(context.Background(), &ScanProvisionedProductsInput{})
+	got, err := svc.ScanProvisionedProducts(context.Background(), &ScanProvisionedProductsInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		AccessLevelFilter: &types.AccessLevelFilter{
+			Key:   types.AccessLevelFilterKey("Account"),
+			Value: ptr.String("__Value__"),
+		},
+		PageSize:  1,
+		PageToken: ptr.String("__PageToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3054,7 +3624,19 @@ func TestCheckResponseSnapshot_SearchProducts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchProducts(context.Background(), &SearchProductsInput{})
+	got, err := svc.SearchProducts(context.Background(), &SearchProductsInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		Filters: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		PageSize:  1,
+		SortBy:    types.ProductViewSortBy("Title"),
+		SortOrder: types.SortOrder("ASCENDING"),
+		PageToken: ptr.String("__PageToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3149,7 +3731,21 @@ func TestCheckResponseSnapshot_SearchProductsAsAdmin(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchProductsAsAdmin(context.Background(), &SearchProductsAsAdminInput{})
+	got, err := svc.SearchProductsAsAdmin(context.Background(), &SearchProductsAsAdminInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		PortfolioId:    ptr.String("__PortfolioId__"),
+		Filters: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		SortBy:        types.ProductViewSortBy("Title"),
+		SortOrder:     types.SortOrder("ASCENDING"),
+		PageToken:     ptr.String("__PageToken__"),
+		PageSize:      1,
+		ProductSource: types.ProductSource("ACCOUNT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3233,7 +3829,23 @@ func TestCheckResponseSnapshot_SearchProvisionedProducts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchProvisionedProducts(context.Background(), &SearchProvisionedProductsInput{})
+	got, err := svc.SearchProvisionedProducts(context.Background(), &SearchProvisionedProductsInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		AccessLevelFilter: &types.AccessLevelFilter{
+			Key:   types.AccessLevelFilterKey("Account"),
+			Value: ptr.String("__Value__"),
+		},
+		Filters: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+		SortBy:    ptr.String("__SortBy__"),
+		SortOrder: types.SortOrder("ASCENDING"),
+		PageSize:  1,
+		PageToken: ptr.String("__PageToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3287,7 +3899,14 @@ func TestCheckResponseSnapshot_TerminateProvisionedProduct(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TerminateProvisionedProduct(context.Background(), &TerminateProvisionedProductInput{})
+	got, err := svc.TerminateProvisionedProduct(context.Background(), &TerminateProvisionedProductInput{
+		ProvisionedProductName:  ptr.String("__ProvisionedProductName__"),
+		ProvisionedProductId:    ptr.String("__ProvisionedProductId__"),
+		TerminateToken:          ptr.String("__TerminateToken__"),
+		IgnoreErrors:            true,
+		AcceptLanguage:          ptr.String("__AcceptLanguage__"),
+		RetainPhysicalResources: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3317,7 +3936,12 @@ func TestCheckResponseSnapshot_UpdateConstraint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConstraint(context.Background(), &UpdateConstraintInput{})
+	got, err := svc.UpdateConstraint(context.Background(), &UpdateConstraintInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		Id:             ptr.String("__Id__"),
+		Description:    ptr.String("__Description__"),
+		Parameters:     ptr.String("__Parameters__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3355,7 +3979,27 @@ func TestCheckResponseSnapshot_UpdatePortfolio(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePortfolio(context.Background(), &UpdatePortfolioInput{})
+	got, err := svc.UpdatePortfolio(context.Background(), &UpdatePortfolioInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		Id:             ptr.String("__Id__"),
+		DisplayName:    ptr.String("__DisplayName__"),
+		Description:    ptr.String("__Description__"),
+		ProviderName:   ptr.String("__ProviderName__"),
+		AddTags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		RemoveTags: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3377,7 +4021,17 @@ func TestCheckResponseSnapshot_UpdatePortfolioShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePortfolioShare(context.Background(), &UpdatePortfolioShareInput{})
+	got, err := svc.UpdatePortfolioShare(context.Background(), &UpdatePortfolioShareInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		PortfolioId:    ptr.String("__PortfolioId__"),
+		AccountId:      ptr.String("__AccountId__"),
+		OrganizationNode: &types.OrganizationNode{
+			Type:  types.OrganizationNodeType("ORGANIZATION"),
+			Value: ptr.String("__Value__"),
+		},
+		ShareTagOptions: ptr.Bool(true),
+		SharePrincipals: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3443,7 +4097,42 @@ func TestCheckResponseSnapshot_UpdateProduct(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProduct(context.Background(), &UpdateProductInput{})
+	got, err := svc.UpdateProduct(context.Background(), &UpdateProductInput{
+		AcceptLanguage:     ptr.String("__AcceptLanguage__"),
+		Id:                 ptr.String("__Id__"),
+		Name:               ptr.String("__Name__"),
+		Owner:              ptr.String("__Owner__"),
+		Description:        ptr.String("__Description__"),
+		Distributor:        ptr.String("__Distributor__"),
+		SupportDescription: ptr.String("__SupportDescription__"),
+		SupportEmail:       ptr.String("__SupportEmail__"),
+		SupportUrl:         ptr.String("__SupportUrl__"),
+		AddTags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		RemoveTags: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SourceConnection: &types.SourceConnection{
+			Type: types.SourceType("CODESTAR"),
+			ConnectionParameters: &types.SourceConnectionParameters{
+				CodeStar: &types.CodeStarParameters{
+					ConnectionArn: ptr.String("__ConnectionArn__"),
+					Repository:    ptr.String("__Repository__"),
+					Branch:        ptr.String("__Branch__"),
+					ArtifactPath:  ptr.String("__ArtifactPath__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3497,7 +4186,55 @@ func TestCheckResponseSnapshot_UpdateProvisionedProduct(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProvisionedProduct(context.Background(), &UpdateProvisionedProductInput{})
+	got, err := svc.UpdateProvisionedProduct(context.Background(), &UpdateProvisionedProductInput{
+		AcceptLanguage:           ptr.String("__AcceptLanguage__"),
+		ProvisionedProductName:   ptr.String("__ProvisionedProductName__"),
+		ProvisionedProductId:     ptr.String("__ProvisionedProductId__"),
+		ProductId:                ptr.String("__ProductId__"),
+		ProductName:              ptr.String("__ProductName__"),
+		ProvisioningArtifactId:   ptr.String("__ProvisioningArtifactId__"),
+		ProvisioningArtifactName: ptr.String("__ProvisioningArtifactName__"),
+		PathId:                   ptr.String("__PathId__"),
+		PathName:                 ptr.String("__PathName__"),
+		ProvisioningParameters: []types.UpdateProvisioningParameter{
+			{
+				Key:              ptr.String("__Key__"),
+				Value:            ptr.String("__Value__"),
+				UsePreviousValue: true,
+			},
+			{
+				Key:              ptr.String("__Key__"),
+				Value:            ptr.String("__Value__"),
+				UsePreviousValue: true,
+			},
+		},
+		ProvisioningPreferences: &types.UpdateProvisioningPreferences{
+			StackSetAccounts: []string{
+				"__Member__",
+				"__Member__",
+			},
+			StackSetRegions: []string{
+				"__Member__",
+				"__Member__",
+			},
+			StackSetFailureToleranceCount:      ptr.Int32(1),
+			StackSetFailureTolerancePercentage: ptr.Int32(1),
+			StackSetMaxConcurrencyCount:        ptr.Int32(1),
+			StackSetMaxConcurrencyPercentage:   ptr.Int32(1),
+			StackSetOperationType:              types.StackSetOperationType("CREATE"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		UpdateToken: ptr.String("__UpdateToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3523,7 +4260,14 @@ func TestCheckResponseSnapshot_UpdateProvisionedProductProperties(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProvisionedProductProperties(context.Background(), &UpdateProvisionedProductPropertiesInput{})
+	got, err := svc.UpdateProvisionedProductProperties(context.Background(), &UpdateProvisionedProductPropertiesInput{
+		AcceptLanguage:       ptr.String("__AcceptLanguage__"),
+		ProvisionedProductId: ptr.String("__ProvisionedProductId__"),
+		ProvisionedProductProperties: map[string]string{
+			"key0": "__Value__",
+		},
+		IdempotencyToken: ptr.String("__IdempotencyToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3557,7 +4301,15 @@ func TestCheckResponseSnapshot_UpdateProvisioningArtifact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateProvisioningArtifact(context.Background(), &UpdateProvisioningArtifactInput{})
+	got, err := svc.UpdateProvisioningArtifact(context.Background(), &UpdateProvisioningArtifactInput{
+		AcceptLanguage:         ptr.String("__AcceptLanguage__"),
+		ProductId:              ptr.String("__ProductId__"),
+		ProvisioningArtifactId: ptr.String("__ProvisioningArtifactId__"),
+		Name:                   ptr.String("__Name__"),
+		Description:            ptr.String("__Description__"),
+		Active:                 ptr.Bool(true),
+		Guidance:               types.ProvisioningArtifactGuidance("DEFAULT"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3588,7 +4340,15 @@ func TestCheckResponseSnapshot_UpdateServiceAction(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateServiceAction(context.Background(), &UpdateServiceActionInput{})
+	got, err := svc.UpdateServiceAction(context.Background(), &UpdateServiceActionInput{
+		Id:   ptr.String("__Id__"),
+		Name: ptr.String("__Name__"),
+		Definition: map[string]string{
+			"key0": "__Value__",
+		},
+		Description:    ptr.String("__Description__"),
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3615,7 +4375,11 @@ func TestCheckResponseSnapshot_UpdateTagOption(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTagOption(context.Background(), &UpdateTagOptionInput{})
+	got, err := svc.UpdateTagOption(context.Background(), &UpdateTagOptionInput{
+		Id:     ptr.String("__Id__"),
+		Value:  ptr.String("__Value__"),
+		Active: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3636,7 +4400,10 @@ func TestCheckResponseSnapshot_Error_DuplicateResourceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateBudgetWithResource(context.Background(), &AssociateBudgetWithResourceInput{})
+	_, opErr := svc.AssociateBudgetWithResource(context.Background(), &AssociateBudgetWithResourceInput{
+		BudgetName: ptr.String("__BudgetName__"),
+		ResourceId: ptr.String("__ResourceId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3661,7 +4428,11 @@ func TestCheckResponseSnapshot_Error_InvalidParametersException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptPortfolioShare(context.Background(), &AcceptPortfolioShareInput{})
+	_, opErr := svc.AcceptPortfolioShare(context.Background(), &AcceptPortfolioShareInput{
+		AcceptLanguage:     ptr.String("__AcceptLanguage__"),
+		PortfolioId:        ptr.String("__PortfolioId__"),
+		PortfolioShareType: types.PortfolioShareType("IMPORTED"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3686,7 +4457,10 @@ func TestCheckResponseSnapshot_Error_InvalidStateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateTagOptionWithResource(context.Background(), &AssociateTagOptionWithResourceInput{})
+	_, opErr := svc.AssociateTagOptionWithResource(context.Background(), &AssociateTagOptionWithResourceInput{
+		ResourceId:  ptr.String("__ResourceId__"),
+		TagOptionId: ptr.String("__TagOptionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3711,7 +4485,11 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptPortfolioShare(context.Background(), &AcceptPortfolioShareInput{})
+	_, opErr := svc.AcceptPortfolioShare(context.Background(), &AcceptPortfolioShareInput{
+		AcceptLanguage:     ptr.String("__AcceptLanguage__"),
+		PortfolioId:        ptr.String("__PortfolioId__"),
+		PortfolioShareType: types.PortfolioShareType("IMPORTED"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3736,7 +4514,17 @@ func TestCheckResponseSnapshot_Error_OperationNotSupportedException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreatePortfolioShare(context.Background(), &CreatePortfolioShareInput{})
+	_, opErr := svc.CreatePortfolioShare(context.Background(), &CreatePortfolioShareInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		PortfolioId:    ptr.String("__PortfolioId__"),
+		AccountId:      ptr.String("__AccountId__"),
+		OrganizationNode: &types.OrganizationNode{
+			Type:  types.OrganizationNodeType("ORGANIZATION"),
+			Value: ptr.String("__Value__"),
+		},
+		ShareTagOptions: true,
+		SharePrincipals: true,
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3761,7 +4549,10 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeletePortfolio(context.Background(), &DeletePortfolioInput{})
+	_, opErr := svc.DeletePortfolio(context.Background(), &DeletePortfolioInput{
+		AcceptLanguage: ptr.String("__AcceptLanguage__"),
+		Id:             ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3786,7 +4577,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptPortfolioShare(context.Background(), &AcceptPortfolioShareInput{})
+	_, opErr := svc.AcceptPortfolioShare(context.Background(), &AcceptPortfolioShareInput{
+		AcceptLanguage:     ptr.String("__AcceptLanguage__"),
+		PortfolioId:        ptr.String("__PortfolioId__"),
+		PortfolioShareType: types.PortfolioShareType("IMPORTED"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3811,7 +4606,10 @@ func TestCheckResponseSnapshot_Error_TagOptionNotMigratedException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateTagOptionWithResource(context.Background(), &AssociateTagOptionWithResourceInput{})
+	_, opErr := svc.AssociateTagOptionWithResource(context.Background(), &AssociateTagOptionWithResourceInput{
+		ResourceId:  ptr.String("__ResourceId__"),
+		TagOptionId: ptr.String("__TagOptionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

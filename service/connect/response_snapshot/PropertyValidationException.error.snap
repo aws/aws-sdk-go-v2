@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"PropertyValidationException","Message":"__Message__","PropertyList":[{"Message":"__Message__","PropertyPath":"__PropertyPath__","Reason":"INVALID_FORMAT"},{"Message":"__Message__","PropertyPath":"__PropertyPath__","Reason":"INVALID_FORMAT"}]}

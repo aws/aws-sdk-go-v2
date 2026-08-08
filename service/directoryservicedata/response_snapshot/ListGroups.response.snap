@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"DirectoryId":"__DirectoryId__","Groups":[{"GroupScope":"DomainLocal","GroupType":"Distribution","SAMAccountName":"__SAMAccountName__","SID":"__SID__"},{"GroupScope":"DomainLocal","GroupType":"Distribution","SAMAccountName":"__SAMAccountName__","SID":"__SID__"}],"NextToken":"__NextToken__","Realm":"__Realm__"}

@@ -133,7 +133,14 @@ func TestCheckResponseSnapshot_AddApplicationCloudWatchLoggingOption(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddApplicationCloudWatchLoggingOption(context.Background(), &AddApplicationCloudWatchLoggingOptionInput{})
+	got, err := svc.AddApplicationCloudWatchLoggingOption(context.Background(), &AddApplicationCloudWatchLoggingOptionInput{
+		ApplicationName:             ptr.String("__ApplicationName__"),
+		CurrentApplicationVersionId: ptr.Int64(1),
+		CloudWatchLoggingOption: &types.CloudWatchLoggingOption{
+			LogStreamARN: ptr.String("__LogStreamARN__"),
+		},
+		ConditionalToken: ptr.String("__ConditionalToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -267,7 +274,54 @@ func TestCheckResponseSnapshot_AddApplicationInput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddApplicationInput(context.Background(), &AddApplicationInputInput{})
+	got, err := svc.AddApplicationInput(context.Background(), &AddApplicationInputInput{
+		ApplicationName:             ptr.String("__ApplicationName__"),
+		CurrentApplicationVersionId: ptr.Int64(1),
+		Input: &types.Input{
+			NamePrefix: ptr.String("__NamePrefix__"),
+			InputProcessingConfiguration: &types.InputProcessingConfiguration{
+				InputLambdaProcessor: &types.InputLambdaProcessor{
+					ResourceARN: ptr.String("__ResourceARN__"),
+				},
+			},
+			KinesisStreamsInput: &types.KinesisStreamsInput{
+				ResourceARN: ptr.String("__ResourceARN__"),
+			},
+			KinesisFirehoseInput: &types.KinesisFirehoseInput{
+				ResourceARN: ptr.String("__ResourceARN__"),
+			},
+			InputParallelism: &types.InputParallelism{
+				Count: ptr.Int32(1),
+			},
+			InputSchema: &types.SourceSchema{
+				RecordFormat: &types.RecordFormat{
+					RecordFormatType: types.RecordFormatType("JSON"),
+					MappingParameters: &types.MappingParameters{
+						JSONMappingParameters: &types.JSONMappingParameters{
+							RecordRowPath: ptr.String("__RecordRowPath__"),
+						},
+						CSVMappingParameters: &types.CSVMappingParameters{
+							RecordRowDelimiter:    ptr.String("__RecordRowDelimiter__"),
+							RecordColumnDelimiter: ptr.String("__RecordColumnDelimiter__"),
+						},
+					},
+				},
+				RecordEncoding: ptr.String("__RecordEncoding__"),
+				RecordColumns: []types.RecordColumn{
+					{
+						Name:    ptr.String("__Name__"),
+						Mapping: ptr.String("__Mapping__"),
+						SqlType: ptr.String("__SqlType__"),
+					},
+					{
+						Name:    ptr.String("__Name__"),
+						Mapping: ptr.String("__Mapping__"),
+						SqlType: ptr.String("__SqlType__"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -296,7 +350,16 @@ func TestCheckResponseSnapshot_AddApplicationInputProcessingConfiguration(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddApplicationInputProcessingConfiguration(context.Background(), &AddApplicationInputProcessingConfigurationInput{})
+	got, err := svc.AddApplicationInputProcessingConfiguration(context.Background(), &AddApplicationInputProcessingConfigurationInput{
+		ApplicationName:             ptr.String("__ApplicationName__"),
+		CurrentApplicationVersionId: ptr.Int64(1),
+		InputId:                     ptr.String("__InputId__"),
+		InputProcessingConfiguration: &types.InputProcessingConfiguration{
+			InputLambdaProcessor: &types.InputLambdaProcessor{
+				ResourceARN: ptr.String("__ResourceARN__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -358,7 +421,25 @@ func TestCheckResponseSnapshot_AddApplicationOutput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddApplicationOutput(context.Background(), &AddApplicationOutputInput{})
+	got, err := svc.AddApplicationOutput(context.Background(), &AddApplicationOutputInput{
+		ApplicationName:             ptr.String("__ApplicationName__"),
+		CurrentApplicationVersionId: ptr.Int64(1),
+		Output: &types.Output{
+			Name: ptr.String("__Name__"),
+			KinesisStreamsOutput: &types.KinesisStreamsOutput{
+				ResourceARN: ptr.String("__ResourceARN__"),
+			},
+			KinesisFirehoseOutput: &types.KinesisFirehoseOutput{
+				ResourceARN: ptr.String("__ResourceARN__"),
+			},
+			LambdaOutput: &types.LambdaOutput{
+				ResourceARN: ptr.String("__ResourceARN__"),
+			},
+			DestinationSchema: &types.DestinationSchema{
+				RecordFormatType: types.RecordFormatType("JSON"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -454,7 +535,44 @@ func TestCheckResponseSnapshot_AddApplicationReferenceDataSource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddApplicationReferenceDataSource(context.Background(), &AddApplicationReferenceDataSourceInput{})
+	got, err := svc.AddApplicationReferenceDataSource(context.Background(), &AddApplicationReferenceDataSourceInput{
+		ApplicationName:             ptr.String("__ApplicationName__"),
+		CurrentApplicationVersionId: ptr.Int64(1),
+		ReferenceDataSource: &types.ReferenceDataSource{
+			TableName: ptr.String("__TableName__"),
+			S3ReferenceDataSource: &types.S3ReferenceDataSource{
+				BucketARN: ptr.String("__BucketARN__"),
+				FileKey:   ptr.String("__FileKey__"),
+			},
+			ReferenceSchema: &types.SourceSchema{
+				RecordFormat: &types.RecordFormat{
+					RecordFormatType: types.RecordFormatType("JSON"),
+					MappingParameters: &types.MappingParameters{
+						JSONMappingParameters: &types.JSONMappingParameters{
+							RecordRowPath: ptr.String("__RecordRowPath__"),
+						},
+						CSVMappingParameters: &types.CSVMappingParameters{
+							RecordRowDelimiter:    ptr.String("__RecordRowDelimiter__"),
+							RecordColumnDelimiter: ptr.String("__RecordColumnDelimiter__"),
+						},
+					},
+				},
+				RecordEncoding: ptr.String("__RecordEncoding__"),
+				RecordColumns: []types.RecordColumn{
+					{
+						Name:    ptr.String("__Name__"),
+						Mapping: ptr.String("__Mapping__"),
+						SqlType: ptr.String("__SqlType__"),
+					},
+					{
+						Name:    ptr.String("__Name__"),
+						Mapping: ptr.String("__Mapping__"),
+						SqlType: ptr.String("__SqlType__"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -489,7 +607,21 @@ func TestCheckResponseSnapshot_AddApplicationVpcConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddApplicationVpcConfiguration(context.Background(), &AddApplicationVpcConfigurationInput{})
+	got, err := svc.AddApplicationVpcConfiguration(context.Background(), &AddApplicationVpcConfigurationInput{
+		ApplicationName:             ptr.String("__ApplicationName__"),
+		CurrentApplicationVersionId: ptr.Int64(1),
+		VpcConfiguration: &types.VpcConfiguration{
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroupIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ConditionalToken: ptr.String("__ConditionalToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -911,7 +1043,350 @@ func TestCheckResponseSnapshot_CreateApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	got, err := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		ApplicationName:        ptr.String("__ApplicationName__"),
+		ApplicationDescription: ptr.String("__ApplicationDescription__"),
+		RuntimeEnvironment:     types.RuntimeEnvironment("SQL-1_0"),
+		ServiceExecutionRole:   ptr.String("__ServiceExecutionRole__"),
+		ApplicationConfiguration: &types.ApplicationConfiguration{
+			SqlApplicationConfiguration: &types.SqlApplicationConfiguration{
+				Inputs: []types.Input{
+					{
+						NamePrefix: ptr.String("__NamePrefix__"),
+						InputProcessingConfiguration: &types.InputProcessingConfiguration{
+							InputLambdaProcessor: &types.InputLambdaProcessor{
+								ResourceARN: ptr.String("__ResourceARN__"),
+							},
+						},
+						KinesisStreamsInput: &types.KinesisStreamsInput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						KinesisFirehoseInput: &types.KinesisFirehoseInput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						InputParallelism: &types.InputParallelism{
+							Count: ptr.Int32(1),
+						},
+						InputSchema: &types.SourceSchema{
+							RecordFormat: &types.RecordFormat{
+								RecordFormatType: types.RecordFormatType("JSON"),
+								MappingParameters: &types.MappingParameters{
+									JSONMappingParameters: &types.JSONMappingParameters{
+										RecordRowPath: ptr.String("__RecordRowPath__"),
+									},
+									CSVMappingParameters: &types.CSVMappingParameters{
+										RecordRowDelimiter:    ptr.String("__RecordRowDelimiter__"),
+										RecordColumnDelimiter: ptr.String("__RecordColumnDelimiter__"),
+									},
+								},
+							},
+							RecordEncoding: ptr.String("__RecordEncoding__"),
+							RecordColumns: []types.RecordColumn{
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+							},
+						},
+					},
+					{
+						NamePrefix: ptr.String("__NamePrefix__"),
+						InputProcessingConfiguration: &types.InputProcessingConfiguration{
+							InputLambdaProcessor: &types.InputLambdaProcessor{
+								ResourceARN: ptr.String("__ResourceARN__"),
+							},
+						},
+						KinesisStreamsInput: &types.KinesisStreamsInput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						KinesisFirehoseInput: &types.KinesisFirehoseInput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						InputParallelism: &types.InputParallelism{
+							Count: ptr.Int32(1),
+						},
+						InputSchema: &types.SourceSchema{
+							RecordFormat: &types.RecordFormat{
+								RecordFormatType: types.RecordFormatType("JSON"),
+								MappingParameters: &types.MappingParameters{
+									JSONMappingParameters: &types.JSONMappingParameters{
+										RecordRowPath: ptr.String("__RecordRowPath__"),
+									},
+									CSVMappingParameters: &types.CSVMappingParameters{
+										RecordRowDelimiter:    ptr.String("__RecordRowDelimiter__"),
+										RecordColumnDelimiter: ptr.String("__RecordColumnDelimiter__"),
+									},
+								},
+							},
+							RecordEncoding: ptr.String("__RecordEncoding__"),
+							RecordColumns: []types.RecordColumn{
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+							},
+						},
+					},
+				},
+				Outputs: []types.Output{
+					{
+						Name: ptr.String("__Name__"),
+						KinesisStreamsOutput: &types.KinesisStreamsOutput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						KinesisFirehoseOutput: &types.KinesisFirehoseOutput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						LambdaOutput: &types.LambdaOutput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						DestinationSchema: &types.DestinationSchema{
+							RecordFormatType: types.RecordFormatType("JSON"),
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						KinesisStreamsOutput: &types.KinesisStreamsOutput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						KinesisFirehoseOutput: &types.KinesisFirehoseOutput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						LambdaOutput: &types.LambdaOutput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						DestinationSchema: &types.DestinationSchema{
+							RecordFormatType: types.RecordFormatType("JSON"),
+						},
+					},
+				},
+				ReferenceDataSources: []types.ReferenceDataSource{
+					{
+						TableName: ptr.String("__TableName__"),
+						S3ReferenceDataSource: &types.S3ReferenceDataSource{
+							BucketARN: ptr.String("__BucketARN__"),
+							FileKey:   ptr.String("__FileKey__"),
+						},
+						ReferenceSchema: &types.SourceSchema{
+							RecordFormat: &types.RecordFormat{
+								RecordFormatType: types.RecordFormatType("JSON"),
+								MappingParameters: &types.MappingParameters{
+									JSONMappingParameters: &types.JSONMappingParameters{
+										RecordRowPath: ptr.String("__RecordRowPath__"),
+									},
+									CSVMappingParameters: &types.CSVMappingParameters{
+										RecordRowDelimiter:    ptr.String("__RecordRowDelimiter__"),
+										RecordColumnDelimiter: ptr.String("__RecordColumnDelimiter__"),
+									},
+								},
+							},
+							RecordEncoding: ptr.String("__RecordEncoding__"),
+							RecordColumns: []types.RecordColumn{
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+							},
+						},
+					},
+					{
+						TableName: ptr.String("__TableName__"),
+						S3ReferenceDataSource: &types.S3ReferenceDataSource{
+							BucketARN: ptr.String("__BucketARN__"),
+							FileKey:   ptr.String("__FileKey__"),
+						},
+						ReferenceSchema: &types.SourceSchema{
+							RecordFormat: &types.RecordFormat{
+								RecordFormatType: types.RecordFormatType("JSON"),
+								MappingParameters: &types.MappingParameters{
+									JSONMappingParameters: &types.JSONMappingParameters{
+										RecordRowPath: ptr.String("__RecordRowPath__"),
+									},
+									CSVMappingParameters: &types.CSVMappingParameters{
+										RecordRowDelimiter:    ptr.String("__RecordRowDelimiter__"),
+										RecordColumnDelimiter: ptr.String("__RecordColumnDelimiter__"),
+									},
+								},
+							},
+							RecordEncoding: ptr.String("__RecordEncoding__"),
+							RecordColumns: []types.RecordColumn{
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+							},
+						},
+					},
+				},
+			},
+			FlinkApplicationConfiguration: &types.FlinkApplicationConfiguration{
+				CheckpointConfiguration: &types.CheckpointConfiguration{
+					ConfigurationType:          types.ConfigurationType("DEFAULT"),
+					CheckpointingEnabled:       ptr.Bool(true),
+					CheckpointInterval:         ptr.Int64(1),
+					MinPauseBetweenCheckpoints: ptr.Int64(1),
+				},
+				MonitoringConfiguration: &types.MonitoringConfiguration{
+					ConfigurationType: types.ConfigurationType("DEFAULT"),
+					MetricsLevel:      types.MetricsLevel("APPLICATION"),
+					LogLevel:          types.LogLevel("INFO"),
+				},
+				ParallelismConfiguration: &types.ParallelismConfiguration{
+					ConfigurationType:  types.ConfigurationType("DEFAULT"),
+					Parallelism:        ptr.Int32(1),
+					ParallelismPerKPU:  ptr.Int32(1),
+					AutoScalingEnabled: ptr.Bool(true),
+				},
+			},
+			EnvironmentProperties: &types.EnvironmentProperties{
+				PropertyGroups: []types.PropertyGroup{
+					{
+						PropertyGroupId: ptr.String("__PropertyGroupId__"),
+						PropertyMap: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					{
+						PropertyGroupId: ptr.String("__PropertyGroupId__"),
+						PropertyMap: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+			},
+			ApplicationCodeConfiguration: &types.ApplicationCodeConfiguration{
+				CodeContent: &types.CodeContent{
+					TextContent:    ptr.String("__TextContent__"),
+					ZipFileContent: []byte("blob"),
+					S3ContentLocation: &types.S3ContentLocation{
+						BucketARN:     ptr.String("__BucketARN__"),
+						FileKey:       ptr.String("__FileKey__"),
+						ObjectVersion: ptr.String("__ObjectVersion__"),
+					},
+				},
+				CodeContentType: types.CodeContentType("PLAINTEXT"),
+			},
+			ApplicationSnapshotConfiguration: &types.ApplicationSnapshotConfiguration{
+				SnapshotsEnabled: ptr.Bool(true),
+			},
+			ApplicationSystemRollbackConfiguration: &types.ApplicationSystemRollbackConfiguration{
+				RollbackEnabled: ptr.Bool(true),
+			},
+			VpcConfigurations: []types.VpcConfiguration{
+				{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			ZeppelinApplicationConfiguration: &types.ZeppelinApplicationConfiguration{
+				MonitoringConfiguration: &types.ZeppelinMonitoringConfiguration{
+					LogLevel: types.LogLevel("INFO"),
+				},
+				CatalogConfiguration: &types.CatalogConfiguration{
+					GlueDataCatalogConfiguration: &types.GlueDataCatalogConfiguration{
+						DatabaseARN: ptr.String("__DatabaseARN__"),
+					},
+				},
+				DeployAsApplicationConfiguration: &types.DeployAsApplicationConfiguration{
+					S3ContentLocation: &types.S3ContentBaseLocation{
+						BucketARN: ptr.String("__BucketARN__"),
+						BasePath:  ptr.String("__BasePath__"),
+					},
+				},
+				CustomArtifactsConfiguration: []types.CustomArtifactConfiguration{
+					{
+						ArtifactType: types.ArtifactType("UDF"),
+						S3ContentLocation: &types.S3ContentLocation{
+							BucketARN:     ptr.String("__BucketARN__"),
+							FileKey:       ptr.String("__FileKey__"),
+							ObjectVersion: ptr.String("__ObjectVersion__"),
+						},
+						MavenReference: &types.MavenReference{
+							GroupId:    ptr.String("__GroupId__"),
+							ArtifactId: ptr.String("__ArtifactId__"),
+							Version:    ptr.String("__Version__"),
+						},
+					},
+					{
+						ArtifactType: types.ArtifactType("UDF"),
+						S3ContentLocation: &types.S3ContentLocation{
+							BucketARN:     ptr.String("__BucketARN__"),
+							FileKey:       ptr.String("__FileKey__"),
+							ObjectVersion: ptr.String("__ObjectVersion__"),
+						},
+						MavenReference: &types.MavenReference{
+							GroupId:    ptr.String("__GroupId__"),
+							ArtifactId: ptr.String("__ArtifactId__"),
+							Version:    ptr.String("__Version__"),
+						},
+					},
+				},
+			},
+			ApplicationEncryptionConfiguration: &types.ApplicationEncryptionConfiguration{
+				KeyId:   ptr.String("__KeyId__"),
+				KeyType: types.KeyType("AWS_OWNED_KEY"),
+			},
+		},
+		CloudWatchLoggingOptions: []types.CloudWatchLoggingOption{
+			{
+				LogStreamARN: ptr.String("__LogStreamARN__"),
+			},
+			{
+				LogStreamARN: ptr.String("__LogStreamARN__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ApplicationMode: types.ApplicationMode("STREAMING"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -932,7 +1407,11 @@ func TestCheckResponseSnapshot_CreateApplicationPresignedUrl(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApplicationPresignedUrl(context.Background(), &CreateApplicationPresignedUrlInput{})
+	got, err := svc.CreateApplicationPresignedUrl(context.Background(), &CreateApplicationPresignedUrlInput{
+		ApplicationName:                    ptr.String("__ApplicationName__"),
+		UrlType:                            types.UrlType("FLINK_DASHBOARD_URL"),
+		SessionExpirationDurationInSeconds: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -951,7 +1430,10 @@ func TestCheckResponseSnapshot_CreateApplicationSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateApplicationSnapshot(context.Background(), &CreateApplicationSnapshotInput{})
+	got, err := svc.CreateApplicationSnapshot(context.Background(), &CreateApplicationSnapshotInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		SnapshotName:    ptr.String("__SnapshotName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -970,7 +1452,10 @@ func TestCheckResponseSnapshot_DeleteApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{})
+	got, err := svc.DeleteApplication(context.Background(), &DeleteApplicationInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		CreateTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1005,7 +1490,12 @@ func TestCheckResponseSnapshot_DeleteApplicationCloudWatchLoggingOption(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApplicationCloudWatchLoggingOption(context.Background(), &DeleteApplicationCloudWatchLoggingOptionInput{})
+	got, err := svc.DeleteApplicationCloudWatchLoggingOption(context.Background(), &DeleteApplicationCloudWatchLoggingOptionInput{
+		ApplicationName:             ptr.String("__ApplicationName__"),
+		CurrentApplicationVersionId: ptr.Int64(1),
+		CloudWatchLoggingOptionId:   ptr.String("__CloudWatchLoggingOptionId__"),
+		ConditionalToken:            ptr.String("__ConditionalToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1027,7 +1517,11 @@ func TestCheckResponseSnapshot_DeleteApplicationInputProcessingConfiguration(t *
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApplicationInputProcessingConfiguration(context.Background(), &DeleteApplicationInputProcessingConfigurationInput{})
+	got, err := svc.DeleteApplicationInputProcessingConfiguration(context.Background(), &DeleteApplicationInputProcessingConfigurationInput{
+		ApplicationName:             ptr.String("__ApplicationName__"),
+		CurrentApplicationVersionId: ptr.Int64(1),
+		InputId:                     ptr.String("__InputId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1049,7 +1543,11 @@ func TestCheckResponseSnapshot_DeleteApplicationOutput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApplicationOutput(context.Background(), &DeleteApplicationOutputInput{})
+	got, err := svc.DeleteApplicationOutput(context.Background(), &DeleteApplicationOutputInput{
+		ApplicationName:             ptr.String("__ApplicationName__"),
+		CurrentApplicationVersionId: ptr.Int64(1),
+		OutputId:                    ptr.String("__OutputId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1071,7 +1569,11 @@ func TestCheckResponseSnapshot_DeleteApplicationReferenceDataSource(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApplicationReferenceDataSource(context.Background(), &DeleteApplicationReferenceDataSourceInput{})
+	got, err := svc.DeleteApplicationReferenceDataSource(context.Background(), &DeleteApplicationReferenceDataSourceInput{
+		ApplicationName:             ptr.String("__ApplicationName__"),
+		CurrentApplicationVersionId: ptr.Int64(1),
+		ReferenceId:                 ptr.String("__ReferenceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1090,7 +1592,11 @@ func TestCheckResponseSnapshot_DeleteApplicationSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApplicationSnapshot(context.Background(), &DeleteApplicationSnapshotInput{})
+	got, err := svc.DeleteApplicationSnapshot(context.Background(), &DeleteApplicationSnapshotInput{
+		ApplicationName:           ptr.String("__ApplicationName__"),
+		SnapshotName:              ptr.String("__SnapshotName__"),
+		SnapshotCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1113,7 +1619,12 @@ func TestCheckResponseSnapshot_DeleteApplicationVpcConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteApplicationVpcConfiguration(context.Background(), &DeleteApplicationVpcConfigurationInput{})
+	got, err := svc.DeleteApplicationVpcConfiguration(context.Background(), &DeleteApplicationVpcConfigurationInput{
+		ApplicationName:             ptr.String("__ApplicationName__"),
+		CurrentApplicationVersionId: ptr.Int64(1),
+		VpcConfigurationId:          ptr.String("__VpcConfigurationId__"),
+		ConditionalToken:            ptr.String("__ConditionalToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1535,7 +2046,10 @@ func TestCheckResponseSnapshot_DescribeApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeApplication(context.Background(), &DescribeApplicationInput{})
+	got, err := svc.DescribeApplication(context.Background(), &DescribeApplicationInput{
+		ApplicationName:          ptr.String("__ApplicationName__"),
+		IncludeAdditionalDetails: ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1571,7 +2085,10 @@ func TestCheckResponseSnapshot_DescribeApplicationOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeApplicationOperation(context.Background(), &DescribeApplicationOperationInput{})
+	got, err := svc.DescribeApplicationOperation(context.Background(), &DescribeApplicationOperationInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		OperationId:     ptr.String("__OperationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1602,7 +2119,10 @@ func TestCheckResponseSnapshot_DescribeApplicationSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeApplicationSnapshot(context.Background(), &DescribeApplicationSnapshotInput{})
+	got, err := svc.DescribeApplicationSnapshot(context.Background(), &DescribeApplicationSnapshotInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		SnapshotName:    ptr.String("__SnapshotName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2024,7 +2544,10 @@ func TestCheckResponseSnapshot_DescribeApplicationVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeApplicationVersion(context.Background(), &DescribeApplicationVersionInput{})
+	got, err := svc.DescribeApplicationVersion(context.Background(), &DescribeApplicationVersionInput{
+		ApplicationName:      ptr.String("__ApplicationName__"),
+		ApplicationVersionId: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2089,7 +2612,22 @@ func TestCheckResponseSnapshot_DiscoverInputSchema(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DiscoverInputSchema(context.Background(), &DiscoverInputSchemaInput{})
+	got, err := svc.DiscoverInputSchema(context.Background(), &DiscoverInputSchemaInput{
+		ResourceARN:          ptr.String("__ResourceARN__"),
+		ServiceExecutionRole: ptr.String("__ServiceExecutionRole__"),
+		InputStartingPositionConfiguration: &types.InputStartingPositionConfiguration{
+			InputStartingPosition: types.InputStartingPosition("NOW"),
+		},
+		S3Configuration: &types.S3Configuration{
+			BucketARN: ptr.String("__BucketARN__"),
+			FileKey:   ptr.String("__FileKey__"),
+		},
+		InputProcessingConfiguration: &types.InputProcessingConfiguration{
+			InputLambdaProcessor: &types.InputLambdaProcessor{
+				ResourceARN: ptr.String("__ResourceARN__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2126,7 +2664,13 @@ func TestCheckResponseSnapshot_ListApplicationOperations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplicationOperations(context.Background(), &ListApplicationOperationsInput{})
+	got, err := svc.ListApplicationOperations(context.Background(), &ListApplicationOperationsInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		Limit:           ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+		Operation:       ptr.String("__Operation__"),
+		OperationStatus: types.OperationStatus("IN_PROGRESS"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2171,7 +2715,11 @@ func TestCheckResponseSnapshot_ListApplicationSnapshots(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplicationSnapshots(context.Background(), &ListApplicationSnapshotsInput{})
+	got, err := svc.ListApplicationSnapshots(context.Background(), &ListApplicationSnapshotsInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		Limit:           ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2202,7 +2750,11 @@ func TestCheckResponseSnapshot_ListApplicationVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplicationVersions(context.Background(), &ListApplicationVersionsInput{})
+	got, err := svc.ListApplicationVersions(context.Background(), &ListApplicationVersionsInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		Limit:           ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2241,7 +2793,10 @@ func TestCheckResponseSnapshot_ListApplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListApplications(context.Background(), &ListApplicationsInput{})
+	got, err := svc.ListApplications(context.Background(), &ListApplicationsInput{
+		Limit:     ptr.Int32(1),
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2271,7 +2826,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2694,7 +3251,10 @@ func TestCheckResponseSnapshot_RollbackApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RollbackApplication(context.Background(), &RollbackApplicationInput{})
+	got, err := svc.RollbackApplication(context.Background(), &RollbackApplicationInput{
+		ApplicationName:             ptr.String("__ApplicationName__"),
+		CurrentApplicationVersionId: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2715,7 +3275,32 @@ func TestCheckResponseSnapshot_StartApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartApplication(context.Background(), &StartApplicationInput{})
+	got, err := svc.StartApplication(context.Background(), &StartApplicationInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		RunConfiguration: &types.RunConfiguration{
+			FlinkRunConfiguration: &types.FlinkRunConfiguration{
+				AllowNonRestoredState: ptr.Bool(true),
+			},
+			SqlRunConfigurations: []types.SqlRunConfiguration{
+				{
+					InputId: ptr.String("__InputId__"),
+					InputStartingPositionConfiguration: &types.InputStartingPositionConfiguration{
+						InputStartingPosition: types.InputStartingPosition("NOW"),
+					},
+				},
+				{
+					InputId: ptr.String("__InputId__"),
+					InputStartingPositionConfiguration: &types.InputStartingPositionConfiguration{
+						InputStartingPosition: types.InputStartingPosition("NOW"),
+					},
+				},
+			},
+			ApplicationRestoreConfiguration: &types.ApplicationRestoreConfiguration{
+				ApplicationRestoreType: types.ApplicationRestoreType("SKIP_RESTORE_FROM_SNAPSHOT"),
+				SnapshotName:           ptr.String("__SnapshotName__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2736,7 +3321,10 @@ func TestCheckResponseSnapshot_StopApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopApplication(context.Background(), &StopApplicationInput{})
+	got, err := svc.StopApplication(context.Background(), &StopApplicationInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		Force:           ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2755,7 +3343,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2774,7 +3374,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3197,7 +3803,359 @@ func TestCheckResponseSnapshot_UpdateApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApplication(context.Background(), &UpdateApplicationInput{})
+	got, err := svc.UpdateApplication(context.Background(), &UpdateApplicationInput{
+		ApplicationName:             ptr.String("__ApplicationName__"),
+		CurrentApplicationVersionId: ptr.Int64(1),
+		ApplicationConfigurationUpdate: &types.ApplicationConfigurationUpdate{
+			SqlApplicationConfigurationUpdate: &types.SqlApplicationConfigurationUpdate{
+				InputUpdates: []types.InputUpdate{
+					{
+						InputId:          ptr.String("__InputId__"),
+						NamePrefixUpdate: ptr.String("__NamePrefixUpdate__"),
+						InputProcessingConfigurationUpdate: &types.InputProcessingConfigurationUpdate{
+							InputLambdaProcessorUpdate: &types.InputLambdaProcessorUpdate{
+								ResourceARNUpdate: ptr.String("__ResourceARNUpdate__"),
+							},
+						},
+						KinesisStreamsInputUpdate: &types.KinesisStreamsInputUpdate{
+							ResourceARNUpdate: ptr.String("__ResourceARNUpdate__"),
+						},
+						KinesisFirehoseInputUpdate: &types.KinesisFirehoseInputUpdate{
+							ResourceARNUpdate: ptr.String("__ResourceARNUpdate__"),
+						},
+						InputSchemaUpdate: &types.InputSchemaUpdate{
+							RecordFormatUpdate: &types.RecordFormat{
+								RecordFormatType: types.RecordFormatType("JSON"),
+								MappingParameters: &types.MappingParameters{
+									JSONMappingParameters: &types.JSONMappingParameters{
+										RecordRowPath: ptr.String("__RecordRowPath__"),
+									},
+									CSVMappingParameters: &types.CSVMappingParameters{
+										RecordRowDelimiter:    ptr.String("__RecordRowDelimiter__"),
+										RecordColumnDelimiter: ptr.String("__RecordColumnDelimiter__"),
+									},
+								},
+							},
+							RecordEncodingUpdate: ptr.String("__RecordEncodingUpdate__"),
+							RecordColumnUpdates: []types.RecordColumn{
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+							},
+						},
+						InputParallelismUpdate: &types.InputParallelismUpdate{
+							CountUpdate: ptr.Int32(1),
+						},
+					},
+					{
+						InputId:          ptr.String("__InputId__"),
+						NamePrefixUpdate: ptr.String("__NamePrefixUpdate__"),
+						InputProcessingConfigurationUpdate: &types.InputProcessingConfigurationUpdate{
+							InputLambdaProcessorUpdate: &types.InputLambdaProcessorUpdate{
+								ResourceARNUpdate: ptr.String("__ResourceARNUpdate__"),
+							},
+						},
+						KinesisStreamsInputUpdate: &types.KinesisStreamsInputUpdate{
+							ResourceARNUpdate: ptr.String("__ResourceARNUpdate__"),
+						},
+						KinesisFirehoseInputUpdate: &types.KinesisFirehoseInputUpdate{
+							ResourceARNUpdate: ptr.String("__ResourceARNUpdate__"),
+						},
+						InputSchemaUpdate: &types.InputSchemaUpdate{
+							RecordFormatUpdate: &types.RecordFormat{
+								RecordFormatType: types.RecordFormatType("JSON"),
+								MappingParameters: &types.MappingParameters{
+									JSONMappingParameters: &types.JSONMappingParameters{
+										RecordRowPath: ptr.String("__RecordRowPath__"),
+									},
+									CSVMappingParameters: &types.CSVMappingParameters{
+										RecordRowDelimiter:    ptr.String("__RecordRowDelimiter__"),
+										RecordColumnDelimiter: ptr.String("__RecordColumnDelimiter__"),
+									},
+								},
+							},
+							RecordEncodingUpdate: ptr.String("__RecordEncodingUpdate__"),
+							RecordColumnUpdates: []types.RecordColumn{
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+							},
+						},
+						InputParallelismUpdate: &types.InputParallelismUpdate{
+							CountUpdate: ptr.Int32(1),
+						},
+					},
+				},
+				OutputUpdates: []types.OutputUpdate{
+					{
+						OutputId:   ptr.String("__OutputId__"),
+						NameUpdate: ptr.String("__NameUpdate__"),
+						KinesisStreamsOutputUpdate: &types.KinesisStreamsOutputUpdate{
+							ResourceARNUpdate: ptr.String("__ResourceARNUpdate__"),
+						},
+						KinesisFirehoseOutputUpdate: &types.KinesisFirehoseOutputUpdate{
+							ResourceARNUpdate: ptr.String("__ResourceARNUpdate__"),
+						},
+						LambdaOutputUpdate: &types.LambdaOutputUpdate{
+							ResourceARNUpdate: ptr.String("__ResourceARNUpdate__"),
+						},
+						DestinationSchemaUpdate: &types.DestinationSchema{
+							RecordFormatType: types.RecordFormatType("JSON"),
+						},
+					},
+					{
+						OutputId:   ptr.String("__OutputId__"),
+						NameUpdate: ptr.String("__NameUpdate__"),
+						KinesisStreamsOutputUpdate: &types.KinesisStreamsOutputUpdate{
+							ResourceARNUpdate: ptr.String("__ResourceARNUpdate__"),
+						},
+						KinesisFirehoseOutputUpdate: &types.KinesisFirehoseOutputUpdate{
+							ResourceARNUpdate: ptr.String("__ResourceARNUpdate__"),
+						},
+						LambdaOutputUpdate: &types.LambdaOutputUpdate{
+							ResourceARNUpdate: ptr.String("__ResourceARNUpdate__"),
+						},
+						DestinationSchemaUpdate: &types.DestinationSchema{
+							RecordFormatType: types.RecordFormatType("JSON"),
+						},
+					},
+				},
+				ReferenceDataSourceUpdates: []types.ReferenceDataSourceUpdate{
+					{
+						ReferenceId:     ptr.String("__ReferenceId__"),
+						TableNameUpdate: ptr.String("__TableNameUpdate__"),
+						S3ReferenceDataSourceUpdate: &types.S3ReferenceDataSourceUpdate{
+							BucketARNUpdate: ptr.String("__BucketARNUpdate__"),
+							FileKeyUpdate:   ptr.String("__FileKeyUpdate__"),
+						},
+						ReferenceSchemaUpdate: &types.SourceSchema{
+							RecordFormat: &types.RecordFormat{
+								RecordFormatType: types.RecordFormatType("JSON"),
+								MappingParameters: &types.MappingParameters{
+									JSONMappingParameters: &types.JSONMappingParameters{
+										RecordRowPath: ptr.String("__RecordRowPath__"),
+									},
+									CSVMappingParameters: &types.CSVMappingParameters{
+										RecordRowDelimiter:    ptr.String("__RecordRowDelimiter__"),
+										RecordColumnDelimiter: ptr.String("__RecordColumnDelimiter__"),
+									},
+								},
+							},
+							RecordEncoding: ptr.String("__RecordEncoding__"),
+							RecordColumns: []types.RecordColumn{
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+							},
+						},
+					},
+					{
+						ReferenceId:     ptr.String("__ReferenceId__"),
+						TableNameUpdate: ptr.String("__TableNameUpdate__"),
+						S3ReferenceDataSourceUpdate: &types.S3ReferenceDataSourceUpdate{
+							BucketARNUpdate: ptr.String("__BucketARNUpdate__"),
+							FileKeyUpdate:   ptr.String("__FileKeyUpdate__"),
+						},
+						ReferenceSchemaUpdate: &types.SourceSchema{
+							RecordFormat: &types.RecordFormat{
+								RecordFormatType: types.RecordFormatType("JSON"),
+								MappingParameters: &types.MappingParameters{
+									JSONMappingParameters: &types.JSONMappingParameters{
+										RecordRowPath: ptr.String("__RecordRowPath__"),
+									},
+									CSVMappingParameters: &types.CSVMappingParameters{
+										RecordRowDelimiter:    ptr.String("__RecordRowDelimiter__"),
+										RecordColumnDelimiter: ptr.String("__RecordColumnDelimiter__"),
+									},
+								},
+							},
+							RecordEncoding: ptr.String("__RecordEncoding__"),
+							RecordColumns: []types.RecordColumn{
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+							},
+						},
+					},
+				},
+			},
+			ApplicationCodeConfigurationUpdate: &types.ApplicationCodeConfigurationUpdate{
+				CodeContentTypeUpdate: types.CodeContentType("PLAINTEXT"),
+				CodeContentUpdate: &types.CodeContentUpdate{
+					TextContentUpdate:    ptr.String("__TextContentUpdate__"),
+					ZipFileContentUpdate: []byte("blob"),
+					S3ContentLocationUpdate: &types.S3ContentLocationUpdate{
+						BucketARNUpdate:     ptr.String("__BucketARNUpdate__"),
+						FileKeyUpdate:       ptr.String("__FileKeyUpdate__"),
+						ObjectVersionUpdate: ptr.String("__ObjectVersionUpdate__"),
+					},
+				},
+			},
+			FlinkApplicationConfigurationUpdate: &types.FlinkApplicationConfigurationUpdate{
+				CheckpointConfigurationUpdate: &types.CheckpointConfigurationUpdate{
+					ConfigurationTypeUpdate:          types.ConfigurationType("DEFAULT"),
+					CheckpointingEnabledUpdate:       ptr.Bool(true),
+					CheckpointIntervalUpdate:         ptr.Int64(1),
+					MinPauseBetweenCheckpointsUpdate: ptr.Int64(1),
+				},
+				MonitoringConfigurationUpdate: &types.MonitoringConfigurationUpdate{
+					ConfigurationTypeUpdate: types.ConfigurationType("DEFAULT"),
+					MetricsLevelUpdate:      types.MetricsLevel("APPLICATION"),
+					LogLevelUpdate:          types.LogLevel("INFO"),
+				},
+				ParallelismConfigurationUpdate: &types.ParallelismConfigurationUpdate{
+					ConfigurationTypeUpdate:  types.ConfigurationType("DEFAULT"),
+					ParallelismUpdate:        ptr.Int32(1),
+					ParallelismPerKPUUpdate:  ptr.Int32(1),
+					AutoScalingEnabledUpdate: ptr.Bool(true),
+				},
+			},
+			EnvironmentPropertyUpdates: &types.EnvironmentPropertyUpdates{
+				PropertyGroups: []types.PropertyGroup{
+					{
+						PropertyGroupId: ptr.String("__PropertyGroupId__"),
+						PropertyMap: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					{
+						PropertyGroupId: ptr.String("__PropertyGroupId__"),
+						PropertyMap: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+			},
+			ApplicationSnapshotConfigurationUpdate: &types.ApplicationSnapshotConfigurationUpdate{
+				SnapshotsEnabledUpdate: ptr.Bool(true),
+			},
+			ApplicationSystemRollbackConfigurationUpdate: &types.ApplicationSystemRollbackConfigurationUpdate{
+				RollbackEnabledUpdate: ptr.Bool(true),
+			},
+			VpcConfigurationUpdates: []types.VpcConfigurationUpdate{
+				{
+					VpcConfigurationId: ptr.String("__VpcConfigurationId__"),
+					SubnetIdUpdates: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIdUpdates: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					VpcConfigurationId: ptr.String("__VpcConfigurationId__"),
+					SubnetIdUpdates: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIdUpdates: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			ZeppelinApplicationConfigurationUpdate: &types.ZeppelinApplicationConfigurationUpdate{
+				MonitoringConfigurationUpdate: &types.ZeppelinMonitoringConfigurationUpdate{
+					LogLevelUpdate: types.LogLevel("INFO"),
+				},
+				CatalogConfigurationUpdate: &types.CatalogConfigurationUpdate{
+					GlueDataCatalogConfigurationUpdate: &types.GlueDataCatalogConfigurationUpdate{
+						DatabaseARNUpdate: ptr.String("__DatabaseARNUpdate__"),
+					},
+				},
+				DeployAsApplicationConfigurationUpdate: &types.DeployAsApplicationConfigurationUpdate{
+					S3ContentLocationUpdate: &types.S3ContentBaseLocationUpdate{
+						BucketARNUpdate: ptr.String("__BucketARNUpdate__"),
+						BasePathUpdate:  ptr.String("__BasePathUpdate__"),
+					},
+				},
+				CustomArtifactsConfigurationUpdate: []types.CustomArtifactConfiguration{
+					{
+						ArtifactType: types.ArtifactType("UDF"),
+						S3ContentLocation: &types.S3ContentLocation{
+							BucketARN:     ptr.String("__BucketARN__"),
+							FileKey:       ptr.String("__FileKey__"),
+							ObjectVersion: ptr.String("__ObjectVersion__"),
+						},
+						MavenReference: &types.MavenReference{
+							GroupId:    ptr.String("__GroupId__"),
+							ArtifactId: ptr.String("__ArtifactId__"),
+							Version:    ptr.String("__Version__"),
+						},
+					},
+					{
+						ArtifactType: types.ArtifactType("UDF"),
+						S3ContentLocation: &types.S3ContentLocation{
+							BucketARN:     ptr.String("__BucketARN__"),
+							FileKey:       ptr.String("__FileKey__"),
+							ObjectVersion: ptr.String("__ObjectVersion__"),
+						},
+						MavenReference: &types.MavenReference{
+							GroupId:    ptr.String("__GroupId__"),
+							ArtifactId: ptr.String("__ArtifactId__"),
+							Version:    ptr.String("__Version__"),
+						},
+					},
+				},
+			},
+			ApplicationEncryptionConfigurationUpdate: &types.ApplicationEncryptionConfigurationUpdate{
+				KeyIdUpdate:   ptr.String("__KeyIdUpdate__"),
+				KeyTypeUpdate: types.KeyType("AWS_OWNED_KEY"),
+			},
+		},
+		ServiceExecutionRoleUpdate: ptr.String("__ServiceExecutionRoleUpdate__"),
+		RunConfigurationUpdate: &types.RunConfigurationUpdate{
+			FlinkRunConfiguration: &types.FlinkRunConfiguration{
+				AllowNonRestoredState: ptr.Bool(true),
+			},
+			ApplicationRestoreConfiguration: &types.ApplicationRestoreConfiguration{
+				ApplicationRestoreType: types.ApplicationRestoreType("SKIP_RESTORE_FROM_SNAPSHOT"),
+				SnapshotName:           ptr.String("__SnapshotName__"),
+			},
+		},
+		CloudWatchLoggingOptionUpdates: []types.CloudWatchLoggingOptionUpdate{
+			{
+				CloudWatchLoggingOptionId: ptr.String("__CloudWatchLoggingOptionId__"),
+				LogStreamARNUpdate:        ptr.String("__LogStreamARNUpdate__"),
+			},
+			{
+				CloudWatchLoggingOptionId: ptr.String("__CloudWatchLoggingOptionId__"),
+				LogStreamARNUpdate:        ptr.String("__LogStreamARNUpdate__"),
+			},
+		},
+		ConditionalToken:         ptr.String("__ConditionalToken__"),
+		RuntimeEnvironmentUpdate: types.RuntimeEnvironment("SQL-1_0"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3222,7 +4180,12 @@ func TestCheckResponseSnapshot_UpdateApplicationMaintenanceConfiguration(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateApplicationMaintenanceConfiguration(context.Background(), &UpdateApplicationMaintenanceConfigurationInput{})
+	got, err := svc.UpdateApplicationMaintenanceConfiguration(context.Background(), &UpdateApplicationMaintenanceConfigurationInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		ApplicationMaintenanceConfigurationUpdate: &types.ApplicationMaintenanceConfigurationUpdate{
+			ApplicationMaintenanceWindowStartTimeUpdate: ptr.String("__ApplicationMaintenanceWindowStartTimeUpdate__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3243,7 +4206,54 @@ func TestCheckResponseSnapshot_Error_CodeValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddApplicationInput(context.Background(), &AddApplicationInputInput{})
+	_, opErr := svc.AddApplicationInput(context.Background(), &AddApplicationInputInput{
+		ApplicationName:             ptr.String("__ApplicationName__"),
+		CurrentApplicationVersionId: ptr.Int64(1),
+		Input: &types.Input{
+			NamePrefix: ptr.String("__NamePrefix__"),
+			InputProcessingConfiguration: &types.InputProcessingConfiguration{
+				InputLambdaProcessor: &types.InputLambdaProcessor{
+					ResourceARN: ptr.String("__ResourceARN__"),
+				},
+			},
+			KinesisStreamsInput: &types.KinesisStreamsInput{
+				ResourceARN: ptr.String("__ResourceARN__"),
+			},
+			KinesisFirehoseInput: &types.KinesisFirehoseInput{
+				ResourceARN: ptr.String("__ResourceARN__"),
+			},
+			InputParallelism: &types.InputParallelism{
+				Count: ptr.Int32(1),
+			},
+			InputSchema: &types.SourceSchema{
+				RecordFormat: &types.RecordFormat{
+					RecordFormatType: types.RecordFormatType("JSON"),
+					MappingParameters: &types.MappingParameters{
+						JSONMappingParameters: &types.JSONMappingParameters{
+							RecordRowPath: ptr.String("__RecordRowPath__"),
+						},
+						CSVMappingParameters: &types.CSVMappingParameters{
+							RecordRowDelimiter:    ptr.String("__RecordRowDelimiter__"),
+							RecordColumnDelimiter: ptr.String("__RecordColumnDelimiter__"),
+						},
+					},
+				},
+				RecordEncoding: ptr.String("__RecordEncoding__"),
+				RecordColumns: []types.RecordColumn{
+					{
+						Name:    ptr.String("__Name__"),
+						Mapping: ptr.String("__Mapping__"),
+						SqlType: ptr.String("__SqlType__"),
+					},
+					{
+						Name:    ptr.String("__Name__"),
+						Mapping: ptr.String("__Mapping__"),
+						SqlType: ptr.String("__SqlType__"),
+					},
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3268,7 +4278,14 @@ func TestCheckResponseSnapshot_Error_ConcurrentModificationException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddApplicationCloudWatchLoggingOption(context.Background(), &AddApplicationCloudWatchLoggingOptionInput{})
+	_, opErr := svc.AddApplicationCloudWatchLoggingOption(context.Background(), &AddApplicationCloudWatchLoggingOptionInput{
+		ApplicationName:             ptr.String("__ApplicationName__"),
+		CurrentApplicationVersionId: ptr.Int64(1),
+		CloudWatchLoggingOption: &types.CloudWatchLoggingOption{
+			LogStreamARN: ptr.String("__LogStreamARN__"),
+		},
+		ConditionalToken: ptr.String("__ConditionalToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3293,7 +4310,14 @@ func TestCheckResponseSnapshot_Error_InvalidApplicationConfigurationException(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddApplicationCloudWatchLoggingOption(context.Background(), &AddApplicationCloudWatchLoggingOptionInput{})
+	_, opErr := svc.AddApplicationCloudWatchLoggingOption(context.Background(), &AddApplicationCloudWatchLoggingOptionInput{
+		ApplicationName:             ptr.String("__ApplicationName__"),
+		CurrentApplicationVersionId: ptr.Int64(1),
+		CloudWatchLoggingOption: &types.CloudWatchLoggingOption{
+			LogStreamARN: ptr.String("__LogStreamARN__"),
+		},
+		ConditionalToken: ptr.String("__ConditionalToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3318,7 +4342,14 @@ func TestCheckResponseSnapshot_Error_InvalidArgumentException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddApplicationCloudWatchLoggingOption(context.Background(), &AddApplicationCloudWatchLoggingOptionInput{})
+	_, opErr := svc.AddApplicationCloudWatchLoggingOption(context.Background(), &AddApplicationCloudWatchLoggingOptionInput{
+		ApplicationName:             ptr.String("__ApplicationName__"),
+		CurrentApplicationVersionId: ptr.Int64(1),
+		CloudWatchLoggingOption: &types.CloudWatchLoggingOption{
+			LogStreamARN: ptr.String("__LogStreamARN__"),
+		},
+		ConditionalToken: ptr.String("__ConditionalToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3343,7 +4374,14 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddApplicationCloudWatchLoggingOption(context.Background(), &AddApplicationCloudWatchLoggingOptionInput{})
+	_, opErr := svc.AddApplicationCloudWatchLoggingOption(context.Background(), &AddApplicationCloudWatchLoggingOptionInput{
+		ApplicationName:             ptr.String("__ApplicationName__"),
+		CurrentApplicationVersionId: ptr.Int64(1),
+		CloudWatchLoggingOption: &types.CloudWatchLoggingOption{
+			LogStreamARN: ptr.String("__LogStreamARN__"),
+		},
+		ConditionalToken: ptr.String("__ConditionalToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3368,7 +4406,350 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		ApplicationName:        ptr.String("__ApplicationName__"),
+		ApplicationDescription: ptr.String("__ApplicationDescription__"),
+		RuntimeEnvironment:     types.RuntimeEnvironment("SQL-1_0"),
+		ServiceExecutionRole:   ptr.String("__ServiceExecutionRole__"),
+		ApplicationConfiguration: &types.ApplicationConfiguration{
+			SqlApplicationConfiguration: &types.SqlApplicationConfiguration{
+				Inputs: []types.Input{
+					{
+						NamePrefix: ptr.String("__NamePrefix__"),
+						InputProcessingConfiguration: &types.InputProcessingConfiguration{
+							InputLambdaProcessor: &types.InputLambdaProcessor{
+								ResourceARN: ptr.String("__ResourceARN__"),
+							},
+						},
+						KinesisStreamsInput: &types.KinesisStreamsInput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						KinesisFirehoseInput: &types.KinesisFirehoseInput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						InputParallelism: &types.InputParallelism{
+							Count: ptr.Int32(1),
+						},
+						InputSchema: &types.SourceSchema{
+							RecordFormat: &types.RecordFormat{
+								RecordFormatType: types.RecordFormatType("JSON"),
+								MappingParameters: &types.MappingParameters{
+									JSONMappingParameters: &types.JSONMappingParameters{
+										RecordRowPath: ptr.String("__RecordRowPath__"),
+									},
+									CSVMappingParameters: &types.CSVMappingParameters{
+										RecordRowDelimiter:    ptr.String("__RecordRowDelimiter__"),
+										RecordColumnDelimiter: ptr.String("__RecordColumnDelimiter__"),
+									},
+								},
+							},
+							RecordEncoding: ptr.String("__RecordEncoding__"),
+							RecordColumns: []types.RecordColumn{
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+							},
+						},
+					},
+					{
+						NamePrefix: ptr.String("__NamePrefix__"),
+						InputProcessingConfiguration: &types.InputProcessingConfiguration{
+							InputLambdaProcessor: &types.InputLambdaProcessor{
+								ResourceARN: ptr.String("__ResourceARN__"),
+							},
+						},
+						KinesisStreamsInput: &types.KinesisStreamsInput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						KinesisFirehoseInput: &types.KinesisFirehoseInput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						InputParallelism: &types.InputParallelism{
+							Count: ptr.Int32(1),
+						},
+						InputSchema: &types.SourceSchema{
+							RecordFormat: &types.RecordFormat{
+								RecordFormatType: types.RecordFormatType("JSON"),
+								MappingParameters: &types.MappingParameters{
+									JSONMappingParameters: &types.JSONMappingParameters{
+										RecordRowPath: ptr.String("__RecordRowPath__"),
+									},
+									CSVMappingParameters: &types.CSVMappingParameters{
+										RecordRowDelimiter:    ptr.String("__RecordRowDelimiter__"),
+										RecordColumnDelimiter: ptr.String("__RecordColumnDelimiter__"),
+									},
+								},
+							},
+							RecordEncoding: ptr.String("__RecordEncoding__"),
+							RecordColumns: []types.RecordColumn{
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+							},
+						},
+					},
+				},
+				Outputs: []types.Output{
+					{
+						Name: ptr.String("__Name__"),
+						KinesisStreamsOutput: &types.KinesisStreamsOutput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						KinesisFirehoseOutput: &types.KinesisFirehoseOutput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						LambdaOutput: &types.LambdaOutput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						DestinationSchema: &types.DestinationSchema{
+							RecordFormatType: types.RecordFormatType("JSON"),
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						KinesisStreamsOutput: &types.KinesisStreamsOutput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						KinesisFirehoseOutput: &types.KinesisFirehoseOutput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						LambdaOutput: &types.LambdaOutput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						DestinationSchema: &types.DestinationSchema{
+							RecordFormatType: types.RecordFormatType("JSON"),
+						},
+					},
+				},
+				ReferenceDataSources: []types.ReferenceDataSource{
+					{
+						TableName: ptr.String("__TableName__"),
+						S3ReferenceDataSource: &types.S3ReferenceDataSource{
+							BucketARN: ptr.String("__BucketARN__"),
+							FileKey:   ptr.String("__FileKey__"),
+						},
+						ReferenceSchema: &types.SourceSchema{
+							RecordFormat: &types.RecordFormat{
+								RecordFormatType: types.RecordFormatType("JSON"),
+								MappingParameters: &types.MappingParameters{
+									JSONMappingParameters: &types.JSONMappingParameters{
+										RecordRowPath: ptr.String("__RecordRowPath__"),
+									},
+									CSVMappingParameters: &types.CSVMappingParameters{
+										RecordRowDelimiter:    ptr.String("__RecordRowDelimiter__"),
+										RecordColumnDelimiter: ptr.String("__RecordColumnDelimiter__"),
+									},
+								},
+							},
+							RecordEncoding: ptr.String("__RecordEncoding__"),
+							RecordColumns: []types.RecordColumn{
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+							},
+						},
+					},
+					{
+						TableName: ptr.String("__TableName__"),
+						S3ReferenceDataSource: &types.S3ReferenceDataSource{
+							BucketARN: ptr.String("__BucketARN__"),
+							FileKey:   ptr.String("__FileKey__"),
+						},
+						ReferenceSchema: &types.SourceSchema{
+							RecordFormat: &types.RecordFormat{
+								RecordFormatType: types.RecordFormatType("JSON"),
+								MappingParameters: &types.MappingParameters{
+									JSONMappingParameters: &types.JSONMappingParameters{
+										RecordRowPath: ptr.String("__RecordRowPath__"),
+									},
+									CSVMappingParameters: &types.CSVMappingParameters{
+										RecordRowDelimiter:    ptr.String("__RecordRowDelimiter__"),
+										RecordColumnDelimiter: ptr.String("__RecordColumnDelimiter__"),
+									},
+								},
+							},
+							RecordEncoding: ptr.String("__RecordEncoding__"),
+							RecordColumns: []types.RecordColumn{
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+							},
+						},
+					},
+				},
+			},
+			FlinkApplicationConfiguration: &types.FlinkApplicationConfiguration{
+				CheckpointConfiguration: &types.CheckpointConfiguration{
+					ConfigurationType:          types.ConfigurationType("DEFAULT"),
+					CheckpointingEnabled:       ptr.Bool(true),
+					CheckpointInterval:         ptr.Int64(1),
+					MinPauseBetweenCheckpoints: ptr.Int64(1),
+				},
+				MonitoringConfiguration: &types.MonitoringConfiguration{
+					ConfigurationType: types.ConfigurationType("DEFAULT"),
+					MetricsLevel:      types.MetricsLevel("APPLICATION"),
+					LogLevel:          types.LogLevel("INFO"),
+				},
+				ParallelismConfiguration: &types.ParallelismConfiguration{
+					ConfigurationType:  types.ConfigurationType("DEFAULT"),
+					Parallelism:        ptr.Int32(1),
+					ParallelismPerKPU:  ptr.Int32(1),
+					AutoScalingEnabled: ptr.Bool(true),
+				},
+			},
+			EnvironmentProperties: &types.EnvironmentProperties{
+				PropertyGroups: []types.PropertyGroup{
+					{
+						PropertyGroupId: ptr.String("__PropertyGroupId__"),
+						PropertyMap: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					{
+						PropertyGroupId: ptr.String("__PropertyGroupId__"),
+						PropertyMap: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+			},
+			ApplicationCodeConfiguration: &types.ApplicationCodeConfiguration{
+				CodeContent: &types.CodeContent{
+					TextContent:    ptr.String("__TextContent__"),
+					ZipFileContent: []byte("blob"),
+					S3ContentLocation: &types.S3ContentLocation{
+						BucketARN:     ptr.String("__BucketARN__"),
+						FileKey:       ptr.String("__FileKey__"),
+						ObjectVersion: ptr.String("__ObjectVersion__"),
+					},
+				},
+				CodeContentType: types.CodeContentType("PLAINTEXT"),
+			},
+			ApplicationSnapshotConfiguration: &types.ApplicationSnapshotConfiguration{
+				SnapshotsEnabled: ptr.Bool(true),
+			},
+			ApplicationSystemRollbackConfiguration: &types.ApplicationSystemRollbackConfiguration{
+				RollbackEnabled: ptr.Bool(true),
+			},
+			VpcConfigurations: []types.VpcConfiguration{
+				{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			ZeppelinApplicationConfiguration: &types.ZeppelinApplicationConfiguration{
+				MonitoringConfiguration: &types.ZeppelinMonitoringConfiguration{
+					LogLevel: types.LogLevel("INFO"),
+				},
+				CatalogConfiguration: &types.CatalogConfiguration{
+					GlueDataCatalogConfiguration: &types.GlueDataCatalogConfiguration{
+						DatabaseARN: ptr.String("__DatabaseARN__"),
+					},
+				},
+				DeployAsApplicationConfiguration: &types.DeployAsApplicationConfiguration{
+					S3ContentLocation: &types.S3ContentBaseLocation{
+						BucketARN: ptr.String("__BucketARN__"),
+						BasePath:  ptr.String("__BasePath__"),
+					},
+				},
+				CustomArtifactsConfiguration: []types.CustomArtifactConfiguration{
+					{
+						ArtifactType: types.ArtifactType("UDF"),
+						S3ContentLocation: &types.S3ContentLocation{
+							BucketARN:     ptr.String("__BucketARN__"),
+							FileKey:       ptr.String("__FileKey__"),
+							ObjectVersion: ptr.String("__ObjectVersion__"),
+						},
+						MavenReference: &types.MavenReference{
+							GroupId:    ptr.String("__GroupId__"),
+							ArtifactId: ptr.String("__ArtifactId__"),
+							Version:    ptr.String("__Version__"),
+						},
+					},
+					{
+						ArtifactType: types.ArtifactType("UDF"),
+						S3ContentLocation: &types.S3ContentLocation{
+							BucketARN:     ptr.String("__BucketARN__"),
+							FileKey:       ptr.String("__FileKey__"),
+							ObjectVersion: ptr.String("__ObjectVersion__"),
+						},
+						MavenReference: &types.MavenReference{
+							GroupId:    ptr.String("__GroupId__"),
+							ArtifactId: ptr.String("__ArtifactId__"),
+							Version:    ptr.String("__Version__"),
+						},
+					},
+				},
+			},
+			ApplicationEncryptionConfiguration: &types.ApplicationEncryptionConfiguration{
+				KeyId:   ptr.String("__KeyId__"),
+				KeyType: types.KeyType("AWS_OWNED_KEY"),
+			},
+		},
+		CloudWatchLoggingOptions: []types.CloudWatchLoggingOption{
+			{
+				LogStreamARN: ptr.String("__LogStreamARN__"),
+			},
+			{
+				LogStreamARN: ptr.String("__LogStreamARN__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ApplicationMode: types.ApplicationMode("STREAMING"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3393,7 +4774,14 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddApplicationCloudWatchLoggingOption(context.Background(), &AddApplicationCloudWatchLoggingOptionInput{})
+	_, opErr := svc.AddApplicationCloudWatchLoggingOption(context.Background(), &AddApplicationCloudWatchLoggingOptionInput{
+		ApplicationName:             ptr.String("__ApplicationName__"),
+		CurrentApplicationVersionId: ptr.Int64(1),
+		CloudWatchLoggingOption: &types.CloudWatchLoggingOption{
+			LogStreamARN: ptr.String("__LogStreamARN__"),
+		},
+		ConditionalToken: ptr.String("__ConditionalToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3418,7 +4806,14 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddApplicationCloudWatchLoggingOption(context.Background(), &AddApplicationCloudWatchLoggingOptionInput{})
+	_, opErr := svc.AddApplicationCloudWatchLoggingOption(context.Background(), &AddApplicationCloudWatchLoggingOptionInput{
+		ApplicationName:             ptr.String("__ApplicationName__"),
+		CurrentApplicationVersionId: ptr.Int64(1),
+		CloudWatchLoggingOption: &types.CloudWatchLoggingOption{
+			LogStreamARN: ptr.String("__LogStreamARN__"),
+		},
+		ConditionalToken: ptr.String("__ConditionalToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3443,7 +4838,22 @@ func TestCheckResponseSnapshot_Error_ResourceProvisionedThroughputExceededExcept
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DiscoverInputSchema(context.Background(), &DiscoverInputSchemaInput{})
+	_, opErr := svc.DiscoverInputSchema(context.Background(), &DiscoverInputSchemaInput{
+		ResourceARN:          ptr.String("__ResourceARN__"),
+		ServiceExecutionRole: ptr.String("__ServiceExecutionRole__"),
+		InputStartingPositionConfiguration: &types.InputStartingPositionConfiguration{
+			InputStartingPosition: types.InputStartingPosition("NOW"),
+		},
+		S3Configuration: &types.S3Configuration{
+			BucketARN: ptr.String("__BucketARN__"),
+			FileKey:   ptr.String("__FileKey__"),
+		},
+		InputProcessingConfiguration: &types.InputProcessingConfiguration{
+			InputLambdaProcessor: &types.InputLambdaProcessor{
+				ResourceARN: ptr.String("__ResourceARN__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3468,7 +4878,22 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DiscoverInputSchema(context.Background(), &DiscoverInputSchemaInput{})
+	_, opErr := svc.DiscoverInputSchema(context.Background(), &DiscoverInputSchemaInput{
+		ResourceARN:          ptr.String("__ResourceARN__"),
+		ServiceExecutionRole: ptr.String("__ServiceExecutionRole__"),
+		InputStartingPositionConfiguration: &types.InputStartingPositionConfiguration{
+			InputStartingPosition: types.InputStartingPosition("NOW"),
+		},
+		S3Configuration: &types.S3Configuration{
+			BucketARN: ptr.String("__BucketARN__"),
+			FileKey:   ptr.String("__FileKey__"),
+		},
+		InputProcessingConfiguration: &types.InputProcessingConfiguration{
+			InputLambdaProcessor: &types.InputLambdaProcessor{
+				ResourceARN: ptr.String("__ResourceARN__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3493,7 +4918,350 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		ApplicationName:        ptr.String("__ApplicationName__"),
+		ApplicationDescription: ptr.String("__ApplicationDescription__"),
+		RuntimeEnvironment:     types.RuntimeEnvironment("SQL-1_0"),
+		ServiceExecutionRole:   ptr.String("__ServiceExecutionRole__"),
+		ApplicationConfiguration: &types.ApplicationConfiguration{
+			SqlApplicationConfiguration: &types.SqlApplicationConfiguration{
+				Inputs: []types.Input{
+					{
+						NamePrefix: ptr.String("__NamePrefix__"),
+						InputProcessingConfiguration: &types.InputProcessingConfiguration{
+							InputLambdaProcessor: &types.InputLambdaProcessor{
+								ResourceARN: ptr.String("__ResourceARN__"),
+							},
+						},
+						KinesisStreamsInput: &types.KinesisStreamsInput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						KinesisFirehoseInput: &types.KinesisFirehoseInput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						InputParallelism: &types.InputParallelism{
+							Count: ptr.Int32(1),
+						},
+						InputSchema: &types.SourceSchema{
+							RecordFormat: &types.RecordFormat{
+								RecordFormatType: types.RecordFormatType("JSON"),
+								MappingParameters: &types.MappingParameters{
+									JSONMappingParameters: &types.JSONMappingParameters{
+										RecordRowPath: ptr.String("__RecordRowPath__"),
+									},
+									CSVMappingParameters: &types.CSVMappingParameters{
+										RecordRowDelimiter:    ptr.String("__RecordRowDelimiter__"),
+										RecordColumnDelimiter: ptr.String("__RecordColumnDelimiter__"),
+									},
+								},
+							},
+							RecordEncoding: ptr.String("__RecordEncoding__"),
+							RecordColumns: []types.RecordColumn{
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+							},
+						},
+					},
+					{
+						NamePrefix: ptr.String("__NamePrefix__"),
+						InputProcessingConfiguration: &types.InputProcessingConfiguration{
+							InputLambdaProcessor: &types.InputLambdaProcessor{
+								ResourceARN: ptr.String("__ResourceARN__"),
+							},
+						},
+						KinesisStreamsInput: &types.KinesisStreamsInput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						KinesisFirehoseInput: &types.KinesisFirehoseInput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						InputParallelism: &types.InputParallelism{
+							Count: ptr.Int32(1),
+						},
+						InputSchema: &types.SourceSchema{
+							RecordFormat: &types.RecordFormat{
+								RecordFormatType: types.RecordFormatType("JSON"),
+								MappingParameters: &types.MappingParameters{
+									JSONMappingParameters: &types.JSONMappingParameters{
+										RecordRowPath: ptr.String("__RecordRowPath__"),
+									},
+									CSVMappingParameters: &types.CSVMappingParameters{
+										RecordRowDelimiter:    ptr.String("__RecordRowDelimiter__"),
+										RecordColumnDelimiter: ptr.String("__RecordColumnDelimiter__"),
+									},
+								},
+							},
+							RecordEncoding: ptr.String("__RecordEncoding__"),
+							RecordColumns: []types.RecordColumn{
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+							},
+						},
+					},
+				},
+				Outputs: []types.Output{
+					{
+						Name: ptr.String("__Name__"),
+						KinesisStreamsOutput: &types.KinesisStreamsOutput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						KinesisFirehoseOutput: &types.KinesisFirehoseOutput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						LambdaOutput: &types.LambdaOutput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						DestinationSchema: &types.DestinationSchema{
+							RecordFormatType: types.RecordFormatType("JSON"),
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						KinesisStreamsOutput: &types.KinesisStreamsOutput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						KinesisFirehoseOutput: &types.KinesisFirehoseOutput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						LambdaOutput: &types.LambdaOutput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						DestinationSchema: &types.DestinationSchema{
+							RecordFormatType: types.RecordFormatType("JSON"),
+						},
+					},
+				},
+				ReferenceDataSources: []types.ReferenceDataSource{
+					{
+						TableName: ptr.String("__TableName__"),
+						S3ReferenceDataSource: &types.S3ReferenceDataSource{
+							BucketARN: ptr.String("__BucketARN__"),
+							FileKey:   ptr.String("__FileKey__"),
+						},
+						ReferenceSchema: &types.SourceSchema{
+							RecordFormat: &types.RecordFormat{
+								RecordFormatType: types.RecordFormatType("JSON"),
+								MappingParameters: &types.MappingParameters{
+									JSONMappingParameters: &types.JSONMappingParameters{
+										RecordRowPath: ptr.String("__RecordRowPath__"),
+									},
+									CSVMappingParameters: &types.CSVMappingParameters{
+										RecordRowDelimiter:    ptr.String("__RecordRowDelimiter__"),
+										RecordColumnDelimiter: ptr.String("__RecordColumnDelimiter__"),
+									},
+								},
+							},
+							RecordEncoding: ptr.String("__RecordEncoding__"),
+							RecordColumns: []types.RecordColumn{
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+							},
+						},
+					},
+					{
+						TableName: ptr.String("__TableName__"),
+						S3ReferenceDataSource: &types.S3ReferenceDataSource{
+							BucketARN: ptr.String("__BucketARN__"),
+							FileKey:   ptr.String("__FileKey__"),
+						},
+						ReferenceSchema: &types.SourceSchema{
+							RecordFormat: &types.RecordFormat{
+								RecordFormatType: types.RecordFormatType("JSON"),
+								MappingParameters: &types.MappingParameters{
+									JSONMappingParameters: &types.JSONMappingParameters{
+										RecordRowPath: ptr.String("__RecordRowPath__"),
+									},
+									CSVMappingParameters: &types.CSVMappingParameters{
+										RecordRowDelimiter:    ptr.String("__RecordRowDelimiter__"),
+										RecordColumnDelimiter: ptr.String("__RecordColumnDelimiter__"),
+									},
+								},
+							},
+							RecordEncoding: ptr.String("__RecordEncoding__"),
+							RecordColumns: []types.RecordColumn{
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+							},
+						},
+					},
+				},
+			},
+			FlinkApplicationConfiguration: &types.FlinkApplicationConfiguration{
+				CheckpointConfiguration: &types.CheckpointConfiguration{
+					ConfigurationType:          types.ConfigurationType("DEFAULT"),
+					CheckpointingEnabled:       ptr.Bool(true),
+					CheckpointInterval:         ptr.Int64(1),
+					MinPauseBetweenCheckpoints: ptr.Int64(1),
+				},
+				MonitoringConfiguration: &types.MonitoringConfiguration{
+					ConfigurationType: types.ConfigurationType("DEFAULT"),
+					MetricsLevel:      types.MetricsLevel("APPLICATION"),
+					LogLevel:          types.LogLevel("INFO"),
+				},
+				ParallelismConfiguration: &types.ParallelismConfiguration{
+					ConfigurationType:  types.ConfigurationType("DEFAULT"),
+					Parallelism:        ptr.Int32(1),
+					ParallelismPerKPU:  ptr.Int32(1),
+					AutoScalingEnabled: ptr.Bool(true),
+				},
+			},
+			EnvironmentProperties: &types.EnvironmentProperties{
+				PropertyGroups: []types.PropertyGroup{
+					{
+						PropertyGroupId: ptr.String("__PropertyGroupId__"),
+						PropertyMap: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					{
+						PropertyGroupId: ptr.String("__PropertyGroupId__"),
+						PropertyMap: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+			},
+			ApplicationCodeConfiguration: &types.ApplicationCodeConfiguration{
+				CodeContent: &types.CodeContent{
+					TextContent:    ptr.String("__TextContent__"),
+					ZipFileContent: []byte("blob"),
+					S3ContentLocation: &types.S3ContentLocation{
+						BucketARN:     ptr.String("__BucketARN__"),
+						FileKey:       ptr.String("__FileKey__"),
+						ObjectVersion: ptr.String("__ObjectVersion__"),
+					},
+				},
+				CodeContentType: types.CodeContentType("PLAINTEXT"),
+			},
+			ApplicationSnapshotConfiguration: &types.ApplicationSnapshotConfiguration{
+				SnapshotsEnabled: ptr.Bool(true),
+			},
+			ApplicationSystemRollbackConfiguration: &types.ApplicationSystemRollbackConfiguration{
+				RollbackEnabled: ptr.Bool(true),
+			},
+			VpcConfigurations: []types.VpcConfiguration{
+				{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			ZeppelinApplicationConfiguration: &types.ZeppelinApplicationConfiguration{
+				MonitoringConfiguration: &types.ZeppelinMonitoringConfiguration{
+					LogLevel: types.LogLevel("INFO"),
+				},
+				CatalogConfiguration: &types.CatalogConfiguration{
+					GlueDataCatalogConfiguration: &types.GlueDataCatalogConfiguration{
+						DatabaseARN: ptr.String("__DatabaseARN__"),
+					},
+				},
+				DeployAsApplicationConfiguration: &types.DeployAsApplicationConfiguration{
+					S3ContentLocation: &types.S3ContentBaseLocation{
+						BucketARN: ptr.String("__BucketARN__"),
+						BasePath:  ptr.String("__BasePath__"),
+					},
+				},
+				CustomArtifactsConfiguration: []types.CustomArtifactConfiguration{
+					{
+						ArtifactType: types.ArtifactType("UDF"),
+						S3ContentLocation: &types.S3ContentLocation{
+							BucketARN:     ptr.String("__BucketARN__"),
+							FileKey:       ptr.String("__FileKey__"),
+							ObjectVersion: ptr.String("__ObjectVersion__"),
+						},
+						MavenReference: &types.MavenReference{
+							GroupId:    ptr.String("__GroupId__"),
+							ArtifactId: ptr.String("__ArtifactId__"),
+							Version:    ptr.String("__Version__"),
+						},
+					},
+					{
+						ArtifactType: types.ArtifactType("UDF"),
+						S3ContentLocation: &types.S3ContentLocation{
+							BucketARN:     ptr.String("__BucketARN__"),
+							FileKey:       ptr.String("__FileKey__"),
+							ObjectVersion: ptr.String("__ObjectVersion__"),
+						},
+						MavenReference: &types.MavenReference{
+							GroupId:    ptr.String("__GroupId__"),
+							ArtifactId: ptr.String("__ArtifactId__"),
+							Version:    ptr.String("__Version__"),
+						},
+					},
+				},
+			},
+			ApplicationEncryptionConfiguration: &types.ApplicationEncryptionConfiguration{
+				KeyId:   ptr.String("__KeyId__"),
+				KeyType: types.KeyType("AWS_OWNED_KEY"),
+			},
+		},
+		CloudWatchLoggingOptions: []types.CloudWatchLoggingOption{
+			{
+				LogStreamARN: ptr.String("__LogStreamARN__"),
+			},
+			{
+				LogStreamARN: ptr.String("__LogStreamARN__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ApplicationMode: types.ApplicationMode("STREAMING"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3526,7 +5294,22 @@ func TestCheckResponseSnapshot_Error_UnableToDetectSchemaException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DiscoverInputSchema(context.Background(), &DiscoverInputSchemaInput{})
+	_, opErr := svc.DiscoverInputSchema(context.Background(), &DiscoverInputSchemaInput{
+		ResourceARN:          ptr.String("__ResourceARN__"),
+		ServiceExecutionRole: ptr.String("__ServiceExecutionRole__"),
+		InputStartingPositionConfiguration: &types.InputStartingPositionConfiguration{
+			InputStartingPosition: types.InputStartingPosition("NOW"),
+		},
+		S3Configuration: &types.S3Configuration{
+			BucketARN: ptr.String("__BucketARN__"),
+			FileKey:   ptr.String("__FileKey__"),
+		},
+		InputProcessingConfiguration: &types.InputProcessingConfiguration{
+			InputLambdaProcessor: &types.InputLambdaProcessor{
+				ResourceARN: ptr.String("__ResourceARN__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3551,7 +5334,350 @@ func TestCheckResponseSnapshot_Error_UnsupportedOperationException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{})
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		ApplicationName:        ptr.String("__ApplicationName__"),
+		ApplicationDescription: ptr.String("__ApplicationDescription__"),
+		RuntimeEnvironment:     types.RuntimeEnvironment("SQL-1_0"),
+		ServiceExecutionRole:   ptr.String("__ServiceExecutionRole__"),
+		ApplicationConfiguration: &types.ApplicationConfiguration{
+			SqlApplicationConfiguration: &types.SqlApplicationConfiguration{
+				Inputs: []types.Input{
+					{
+						NamePrefix: ptr.String("__NamePrefix__"),
+						InputProcessingConfiguration: &types.InputProcessingConfiguration{
+							InputLambdaProcessor: &types.InputLambdaProcessor{
+								ResourceARN: ptr.String("__ResourceARN__"),
+							},
+						},
+						KinesisStreamsInput: &types.KinesisStreamsInput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						KinesisFirehoseInput: &types.KinesisFirehoseInput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						InputParallelism: &types.InputParallelism{
+							Count: ptr.Int32(1),
+						},
+						InputSchema: &types.SourceSchema{
+							RecordFormat: &types.RecordFormat{
+								RecordFormatType: types.RecordFormatType("JSON"),
+								MappingParameters: &types.MappingParameters{
+									JSONMappingParameters: &types.JSONMappingParameters{
+										RecordRowPath: ptr.String("__RecordRowPath__"),
+									},
+									CSVMappingParameters: &types.CSVMappingParameters{
+										RecordRowDelimiter:    ptr.String("__RecordRowDelimiter__"),
+										RecordColumnDelimiter: ptr.String("__RecordColumnDelimiter__"),
+									},
+								},
+							},
+							RecordEncoding: ptr.String("__RecordEncoding__"),
+							RecordColumns: []types.RecordColumn{
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+							},
+						},
+					},
+					{
+						NamePrefix: ptr.String("__NamePrefix__"),
+						InputProcessingConfiguration: &types.InputProcessingConfiguration{
+							InputLambdaProcessor: &types.InputLambdaProcessor{
+								ResourceARN: ptr.String("__ResourceARN__"),
+							},
+						},
+						KinesisStreamsInput: &types.KinesisStreamsInput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						KinesisFirehoseInput: &types.KinesisFirehoseInput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						InputParallelism: &types.InputParallelism{
+							Count: ptr.Int32(1),
+						},
+						InputSchema: &types.SourceSchema{
+							RecordFormat: &types.RecordFormat{
+								RecordFormatType: types.RecordFormatType("JSON"),
+								MappingParameters: &types.MappingParameters{
+									JSONMappingParameters: &types.JSONMappingParameters{
+										RecordRowPath: ptr.String("__RecordRowPath__"),
+									},
+									CSVMappingParameters: &types.CSVMappingParameters{
+										RecordRowDelimiter:    ptr.String("__RecordRowDelimiter__"),
+										RecordColumnDelimiter: ptr.String("__RecordColumnDelimiter__"),
+									},
+								},
+							},
+							RecordEncoding: ptr.String("__RecordEncoding__"),
+							RecordColumns: []types.RecordColumn{
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+							},
+						},
+					},
+				},
+				Outputs: []types.Output{
+					{
+						Name: ptr.String("__Name__"),
+						KinesisStreamsOutput: &types.KinesisStreamsOutput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						KinesisFirehoseOutput: &types.KinesisFirehoseOutput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						LambdaOutput: &types.LambdaOutput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						DestinationSchema: &types.DestinationSchema{
+							RecordFormatType: types.RecordFormatType("JSON"),
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						KinesisStreamsOutput: &types.KinesisStreamsOutput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						KinesisFirehoseOutput: &types.KinesisFirehoseOutput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						LambdaOutput: &types.LambdaOutput{
+							ResourceARN: ptr.String("__ResourceARN__"),
+						},
+						DestinationSchema: &types.DestinationSchema{
+							RecordFormatType: types.RecordFormatType("JSON"),
+						},
+					},
+				},
+				ReferenceDataSources: []types.ReferenceDataSource{
+					{
+						TableName: ptr.String("__TableName__"),
+						S3ReferenceDataSource: &types.S3ReferenceDataSource{
+							BucketARN: ptr.String("__BucketARN__"),
+							FileKey:   ptr.String("__FileKey__"),
+						},
+						ReferenceSchema: &types.SourceSchema{
+							RecordFormat: &types.RecordFormat{
+								RecordFormatType: types.RecordFormatType("JSON"),
+								MappingParameters: &types.MappingParameters{
+									JSONMappingParameters: &types.JSONMappingParameters{
+										RecordRowPath: ptr.String("__RecordRowPath__"),
+									},
+									CSVMappingParameters: &types.CSVMappingParameters{
+										RecordRowDelimiter:    ptr.String("__RecordRowDelimiter__"),
+										RecordColumnDelimiter: ptr.String("__RecordColumnDelimiter__"),
+									},
+								},
+							},
+							RecordEncoding: ptr.String("__RecordEncoding__"),
+							RecordColumns: []types.RecordColumn{
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+							},
+						},
+					},
+					{
+						TableName: ptr.String("__TableName__"),
+						S3ReferenceDataSource: &types.S3ReferenceDataSource{
+							BucketARN: ptr.String("__BucketARN__"),
+							FileKey:   ptr.String("__FileKey__"),
+						},
+						ReferenceSchema: &types.SourceSchema{
+							RecordFormat: &types.RecordFormat{
+								RecordFormatType: types.RecordFormatType("JSON"),
+								MappingParameters: &types.MappingParameters{
+									JSONMappingParameters: &types.JSONMappingParameters{
+										RecordRowPath: ptr.String("__RecordRowPath__"),
+									},
+									CSVMappingParameters: &types.CSVMappingParameters{
+										RecordRowDelimiter:    ptr.String("__RecordRowDelimiter__"),
+										RecordColumnDelimiter: ptr.String("__RecordColumnDelimiter__"),
+									},
+								},
+							},
+							RecordEncoding: ptr.String("__RecordEncoding__"),
+							RecordColumns: []types.RecordColumn{
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+								{
+									Name:    ptr.String("__Name__"),
+									Mapping: ptr.String("__Mapping__"),
+									SqlType: ptr.String("__SqlType__"),
+								},
+							},
+						},
+					},
+				},
+			},
+			FlinkApplicationConfiguration: &types.FlinkApplicationConfiguration{
+				CheckpointConfiguration: &types.CheckpointConfiguration{
+					ConfigurationType:          types.ConfigurationType("DEFAULT"),
+					CheckpointingEnabled:       ptr.Bool(true),
+					CheckpointInterval:         ptr.Int64(1),
+					MinPauseBetweenCheckpoints: ptr.Int64(1),
+				},
+				MonitoringConfiguration: &types.MonitoringConfiguration{
+					ConfigurationType: types.ConfigurationType("DEFAULT"),
+					MetricsLevel:      types.MetricsLevel("APPLICATION"),
+					LogLevel:          types.LogLevel("INFO"),
+				},
+				ParallelismConfiguration: &types.ParallelismConfiguration{
+					ConfigurationType:  types.ConfigurationType("DEFAULT"),
+					Parallelism:        ptr.Int32(1),
+					ParallelismPerKPU:  ptr.Int32(1),
+					AutoScalingEnabled: ptr.Bool(true),
+				},
+			},
+			EnvironmentProperties: &types.EnvironmentProperties{
+				PropertyGroups: []types.PropertyGroup{
+					{
+						PropertyGroupId: ptr.String("__PropertyGroupId__"),
+						PropertyMap: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+					{
+						PropertyGroupId: ptr.String("__PropertyGroupId__"),
+						PropertyMap: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
+			},
+			ApplicationCodeConfiguration: &types.ApplicationCodeConfiguration{
+				CodeContent: &types.CodeContent{
+					TextContent:    ptr.String("__TextContent__"),
+					ZipFileContent: []byte("blob"),
+					S3ContentLocation: &types.S3ContentLocation{
+						BucketARN:     ptr.String("__BucketARN__"),
+						FileKey:       ptr.String("__FileKey__"),
+						ObjectVersion: ptr.String("__ObjectVersion__"),
+					},
+				},
+				CodeContentType: types.CodeContentType("PLAINTEXT"),
+			},
+			ApplicationSnapshotConfiguration: &types.ApplicationSnapshotConfiguration{
+				SnapshotsEnabled: ptr.Bool(true),
+			},
+			ApplicationSystemRollbackConfiguration: &types.ApplicationSystemRollbackConfiguration{
+				RollbackEnabled: ptr.Bool(true),
+			},
+			VpcConfigurations: []types.VpcConfiguration{
+				{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroupIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			ZeppelinApplicationConfiguration: &types.ZeppelinApplicationConfiguration{
+				MonitoringConfiguration: &types.ZeppelinMonitoringConfiguration{
+					LogLevel: types.LogLevel("INFO"),
+				},
+				CatalogConfiguration: &types.CatalogConfiguration{
+					GlueDataCatalogConfiguration: &types.GlueDataCatalogConfiguration{
+						DatabaseARN: ptr.String("__DatabaseARN__"),
+					},
+				},
+				DeployAsApplicationConfiguration: &types.DeployAsApplicationConfiguration{
+					S3ContentLocation: &types.S3ContentBaseLocation{
+						BucketARN: ptr.String("__BucketARN__"),
+						BasePath:  ptr.String("__BasePath__"),
+					},
+				},
+				CustomArtifactsConfiguration: []types.CustomArtifactConfiguration{
+					{
+						ArtifactType: types.ArtifactType("UDF"),
+						S3ContentLocation: &types.S3ContentLocation{
+							BucketARN:     ptr.String("__BucketARN__"),
+							FileKey:       ptr.String("__FileKey__"),
+							ObjectVersion: ptr.String("__ObjectVersion__"),
+						},
+						MavenReference: &types.MavenReference{
+							GroupId:    ptr.String("__GroupId__"),
+							ArtifactId: ptr.String("__ArtifactId__"),
+							Version:    ptr.String("__Version__"),
+						},
+					},
+					{
+						ArtifactType: types.ArtifactType("UDF"),
+						S3ContentLocation: &types.S3ContentLocation{
+							BucketARN:     ptr.String("__BucketARN__"),
+							FileKey:       ptr.String("__FileKey__"),
+							ObjectVersion: ptr.String("__ObjectVersion__"),
+						},
+						MavenReference: &types.MavenReference{
+							GroupId:    ptr.String("__GroupId__"),
+							ArtifactId: ptr.String("__ArtifactId__"),
+							Version:    ptr.String("__Version__"),
+						},
+					},
+				},
+			},
+			ApplicationEncryptionConfiguration: &types.ApplicationEncryptionConfiguration{
+				KeyId:   ptr.String("__KeyId__"),
+				KeyType: types.KeyType("AWS_OWNED_KEY"),
+			},
+		},
+		CloudWatchLoggingOptions: []types.CloudWatchLoggingOption{
+			{
+				LogStreamARN: ptr.String("__LogStreamARN__"),
+			},
+			{
+				LogStreamARN: ptr.String("__LogStreamARN__"),
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ApplicationMode: types.ApplicationMode("STREAMING"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

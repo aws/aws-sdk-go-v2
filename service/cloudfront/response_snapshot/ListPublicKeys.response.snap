@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<PublicKeyList xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><Items><PublicKeySummary><Comment>__Comment__</Comment><CreatedTime>2000-01-01T00:00:00Z</CreatedTime><EncodedKey>__EncodedKey__</EncodedKey><Id>__Id__</Id><Name>__Name__</Name></PublicKeySummary><PublicKeySummary><Comment>__Comment__</Comment><CreatedTime>2000-01-01T00:00:00Z</CreatedTime><EncodedKey>__EncodedKey__</EncodedKey><Id>__Id__</Id><Name>__Name__</Name></PublicKeySummary></Items><MaxItems>1</MaxItems><NextMarker>__NextMarker__</NextMarker><Quantity>1</Quantity></PublicKeyList>

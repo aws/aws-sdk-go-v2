@@ -117,7 +117,10 @@ func TestCheckResponseSnapshot_CloneReceiptRuleSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CloneReceiptRuleSet(context.Background(), &CloneReceiptRuleSetInput{})
+	got, err := svc.CloneReceiptRuleSet(context.Background(), &CloneReceiptRuleSetInput{
+		RuleSetName:         ptr.String("__RuleSetName__"),
+		OriginalRuleSetName: ptr.String("__OriginalRuleSetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -136,7 +139,11 @@ func TestCheckResponseSnapshot_CreateConfigurationSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConfigurationSet(context.Background(), &CreateConfigurationSetInput{})
+	got, err := svc.CreateConfigurationSet(context.Background(), &CreateConfigurationSetInput{
+		ConfigurationSet: &types.ConfigurationSet{
+			Name: ptr.String("__Name__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -155,7 +162,38 @@ func TestCheckResponseSnapshot_CreateConfigurationSetEventDestination(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConfigurationSetEventDestination(context.Background(), &CreateConfigurationSetEventDestinationInput{})
+	got, err := svc.CreateConfigurationSetEventDestination(context.Background(), &CreateConfigurationSetEventDestinationInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		EventDestination: &types.EventDestination{
+			Name:    ptr.String("__Name__"),
+			Enabled: true,
+			MatchingEventTypes: []types.EventType{
+				types.EventType("send"),
+				types.EventType("send"),
+			},
+			KinesisFirehoseDestination: &types.KinesisFirehoseDestination{
+				IAMRoleARN:        ptr.String("__IAMRoleARN__"),
+				DeliveryStreamARN: ptr.String("__DeliveryStreamARN__"),
+			},
+			CloudWatchDestination: &types.CloudWatchDestination{
+				DimensionConfigurations: []types.CloudWatchDimensionConfiguration{
+					{
+						DimensionName:         ptr.String("__DimensionName__"),
+						DimensionValueSource:  types.DimensionValueSource("messageTag"),
+						DefaultDimensionValue: ptr.String("__DefaultDimensionValue__"),
+					},
+					{
+						DimensionName:         ptr.String("__DimensionName__"),
+						DimensionValueSource:  types.DimensionValueSource("messageTag"),
+						DefaultDimensionValue: ptr.String("__DefaultDimensionValue__"),
+					},
+				},
+			},
+			SNSDestination: &types.SNSDestination{
+				TopicARN: ptr.String("__TopicARN__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -174,7 +212,12 @@ func TestCheckResponseSnapshot_CreateConfigurationSetTrackingOptions(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConfigurationSetTrackingOptions(context.Background(), &CreateConfigurationSetTrackingOptionsInput{})
+	got, err := svc.CreateConfigurationSetTrackingOptions(context.Background(), &CreateConfigurationSetTrackingOptionsInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		TrackingOptions: &types.TrackingOptions{
+			CustomRedirectDomain: ptr.String("__CustomRedirectDomain__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -193,7 +236,14 @@ func TestCheckResponseSnapshot_CreateCustomVerificationEmailTemplate(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCustomVerificationEmailTemplate(context.Background(), &CreateCustomVerificationEmailTemplateInput{})
+	got, err := svc.CreateCustomVerificationEmailTemplate(context.Background(), &CreateCustomVerificationEmailTemplateInput{
+		TemplateName:          ptr.String("__TemplateName__"),
+		FromEmailAddress:      ptr.String("__FromEmailAddress__"),
+		TemplateSubject:       ptr.String("__TemplateSubject__"),
+		TemplateContent:       ptr.String("__TemplateContent__"),
+		SuccessRedirectionURL: ptr.String("__SuccessRedirectionURL__"),
+		FailureRedirectionURL: ptr.String("__FailureRedirectionURL__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -212,7 +262,15 @@ func TestCheckResponseSnapshot_CreateReceiptFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateReceiptFilter(context.Background(), &CreateReceiptFilterInput{})
+	got, err := svc.CreateReceiptFilter(context.Background(), &CreateReceiptFilterInput{
+		Filter: &types.ReceiptFilter{
+			Name: ptr.String("__Name__"),
+			IpFilter: &types.ReceiptIpFilter{
+				Policy: types.ReceiptFilterPolicy("Block"),
+				Cidr:   ptr.String("__Cidr__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -231,7 +289,104 @@ func TestCheckResponseSnapshot_CreateReceiptRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateReceiptRule(context.Background(), &CreateReceiptRuleInput{})
+	got, err := svc.CreateReceiptRule(context.Background(), &CreateReceiptRuleInput{
+		RuleSetName: ptr.String("__RuleSetName__"),
+		After:       ptr.String("__After__"),
+		Rule: &types.ReceiptRule{
+			Name:      ptr.String("__Name__"),
+			Enabled:   true,
+			TlsPolicy: types.TlsPolicy("Require"),
+			Recipients: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Actions: []types.ReceiptAction{
+				{
+					S3Action: &types.S3Action{
+						TopicArn:        ptr.String("__TopicArn__"),
+						BucketName:      ptr.String("__BucketName__"),
+						ObjectKeyPrefix: ptr.String("__ObjectKeyPrefix__"),
+						KmsKeyArn:       ptr.String("__KmsKeyArn__"),
+						IamRoleArn:      ptr.String("__IamRoleArn__"),
+					},
+					BounceAction: &types.BounceAction{
+						TopicArn:      ptr.String("__TopicArn__"),
+						SmtpReplyCode: ptr.String("__SmtpReplyCode__"),
+						StatusCode:    ptr.String("__StatusCode__"),
+						Message:       ptr.String("__Message__"),
+						Sender:        ptr.String("__Sender__"),
+					},
+					WorkmailAction: &types.WorkmailAction{
+						TopicArn:        ptr.String("__TopicArn__"),
+						OrganizationArn: ptr.String("__OrganizationArn__"),
+					},
+					LambdaAction: &types.LambdaAction{
+						TopicArn:       ptr.String("__TopicArn__"),
+						FunctionArn:    ptr.String("__FunctionArn__"),
+						InvocationType: types.InvocationType("Event"),
+					},
+					StopAction: &types.StopAction{
+						Scope:    types.StopScope("RuleSet"),
+						TopicArn: ptr.String("__TopicArn__"),
+					},
+					AddHeaderAction: &types.AddHeaderAction{
+						HeaderName:  ptr.String("__HeaderName__"),
+						HeaderValue: ptr.String("__HeaderValue__"),
+					},
+					SNSAction: &types.SNSAction{
+						TopicArn: ptr.String("__TopicArn__"),
+						Encoding: types.SNSActionEncoding("UTF-8"),
+					},
+					ConnectAction: &types.ConnectAction{
+						InstanceARN: ptr.String("__InstanceARN__"),
+						IAMRoleARN:  ptr.String("__IAMRoleARN__"),
+					},
+				},
+				{
+					S3Action: &types.S3Action{
+						TopicArn:        ptr.String("__TopicArn__"),
+						BucketName:      ptr.String("__BucketName__"),
+						ObjectKeyPrefix: ptr.String("__ObjectKeyPrefix__"),
+						KmsKeyArn:       ptr.String("__KmsKeyArn__"),
+						IamRoleArn:      ptr.String("__IamRoleArn__"),
+					},
+					BounceAction: &types.BounceAction{
+						TopicArn:      ptr.String("__TopicArn__"),
+						SmtpReplyCode: ptr.String("__SmtpReplyCode__"),
+						StatusCode:    ptr.String("__StatusCode__"),
+						Message:       ptr.String("__Message__"),
+						Sender:        ptr.String("__Sender__"),
+					},
+					WorkmailAction: &types.WorkmailAction{
+						TopicArn:        ptr.String("__TopicArn__"),
+						OrganizationArn: ptr.String("__OrganizationArn__"),
+					},
+					LambdaAction: &types.LambdaAction{
+						TopicArn:       ptr.String("__TopicArn__"),
+						FunctionArn:    ptr.String("__FunctionArn__"),
+						InvocationType: types.InvocationType("Event"),
+					},
+					StopAction: &types.StopAction{
+						Scope:    types.StopScope("RuleSet"),
+						TopicArn: ptr.String("__TopicArn__"),
+					},
+					AddHeaderAction: &types.AddHeaderAction{
+						HeaderName:  ptr.String("__HeaderName__"),
+						HeaderValue: ptr.String("__HeaderValue__"),
+					},
+					SNSAction: &types.SNSAction{
+						TopicArn: ptr.String("__TopicArn__"),
+						Encoding: types.SNSActionEncoding("UTF-8"),
+					},
+					ConnectAction: &types.ConnectAction{
+						InstanceARN: ptr.String("__InstanceARN__"),
+						IAMRoleARN:  ptr.String("__IAMRoleARN__"),
+					},
+				},
+			},
+			ScanEnabled: true,
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -250,7 +405,9 @@ func TestCheckResponseSnapshot_CreateReceiptRuleSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateReceiptRuleSet(context.Background(), &CreateReceiptRuleSetInput{})
+	got, err := svc.CreateReceiptRuleSet(context.Background(), &CreateReceiptRuleSetInput{
+		RuleSetName: ptr.String("__RuleSetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -269,7 +426,14 @@ func TestCheckResponseSnapshot_CreateTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTemplate(context.Background(), &CreateTemplateInput{})
+	got, err := svc.CreateTemplate(context.Background(), &CreateTemplateInput{
+		Template: &types.Template{
+			TemplateName: ptr.String("__TemplateName__"),
+			SubjectPart:  ptr.String("__SubjectPart__"),
+			TextPart:     ptr.String("__TextPart__"),
+			HtmlPart:     ptr.String("__HtmlPart__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -288,7 +452,9 @@ func TestCheckResponseSnapshot_DeleteConfigurationSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConfigurationSet(context.Background(), &DeleteConfigurationSetInput{})
+	got, err := svc.DeleteConfigurationSet(context.Background(), &DeleteConfigurationSetInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -307,7 +473,10 @@ func TestCheckResponseSnapshot_DeleteConfigurationSetEventDestination(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConfigurationSetEventDestination(context.Background(), &DeleteConfigurationSetEventDestinationInput{})
+	got, err := svc.DeleteConfigurationSetEventDestination(context.Background(), &DeleteConfigurationSetEventDestinationInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		EventDestinationName: ptr.String("__EventDestinationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -326,7 +495,9 @@ func TestCheckResponseSnapshot_DeleteConfigurationSetTrackingOptions(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConfigurationSetTrackingOptions(context.Background(), &DeleteConfigurationSetTrackingOptionsInput{})
+	got, err := svc.DeleteConfigurationSetTrackingOptions(context.Background(), &DeleteConfigurationSetTrackingOptionsInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -345,7 +516,9 @@ func TestCheckResponseSnapshot_DeleteCustomVerificationEmailTemplate(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCustomVerificationEmailTemplate(context.Background(), &DeleteCustomVerificationEmailTemplateInput{})
+	got, err := svc.DeleteCustomVerificationEmailTemplate(context.Background(), &DeleteCustomVerificationEmailTemplateInput{
+		TemplateName: ptr.String("__TemplateName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -364,7 +537,9 @@ func TestCheckResponseSnapshot_DeleteIdentity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIdentity(context.Background(), &DeleteIdentityInput{})
+	got, err := svc.DeleteIdentity(context.Background(), &DeleteIdentityInput{
+		Identity: ptr.String("__Identity__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -383,7 +558,10 @@ func TestCheckResponseSnapshot_DeleteIdentityPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteIdentityPolicy(context.Background(), &DeleteIdentityPolicyInput{})
+	got, err := svc.DeleteIdentityPolicy(context.Background(), &DeleteIdentityPolicyInput{
+		Identity:   ptr.String("__Identity__"),
+		PolicyName: ptr.String("__PolicyName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -402,7 +580,9 @@ func TestCheckResponseSnapshot_DeleteReceiptFilter(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteReceiptFilter(context.Background(), &DeleteReceiptFilterInput{})
+	got, err := svc.DeleteReceiptFilter(context.Background(), &DeleteReceiptFilterInput{
+		FilterName: ptr.String("__FilterName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -421,7 +601,10 @@ func TestCheckResponseSnapshot_DeleteReceiptRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteReceiptRule(context.Background(), &DeleteReceiptRuleInput{})
+	got, err := svc.DeleteReceiptRule(context.Background(), &DeleteReceiptRuleInput{
+		RuleSetName: ptr.String("__RuleSetName__"),
+		RuleName:    ptr.String("__RuleName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -440,7 +623,9 @@ func TestCheckResponseSnapshot_DeleteReceiptRuleSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteReceiptRuleSet(context.Background(), &DeleteReceiptRuleSetInput{})
+	got, err := svc.DeleteReceiptRuleSet(context.Background(), &DeleteReceiptRuleSetInput{
+		RuleSetName: ptr.String("__RuleSetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -459,7 +644,9 @@ func TestCheckResponseSnapshot_DeleteTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTemplate(context.Background(), &DeleteTemplateInput{})
+	got, err := svc.DeleteTemplate(context.Background(), &DeleteTemplateInput{
+		TemplateName: ptr.String("__TemplateName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -478,7 +665,9 @@ func TestCheckResponseSnapshot_DeleteVerifiedEmailAddress(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVerifiedEmailAddress(context.Background(), &DeleteVerifiedEmailAddressInput{})
+	got, err := svc.DeleteVerifiedEmailAddress(context.Background(), &DeleteVerifiedEmailAddressInput{
+		EmailAddress: ptr.String("__EmailAddress__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -786,7 +975,13 @@ func TestCheckResponseSnapshot_DescribeConfigurationSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeConfigurationSet(context.Background(), &DescribeConfigurationSetInput{})
+	got, err := svc.DescribeConfigurationSet(context.Background(), &DescribeConfigurationSetInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		ConfigurationSetAttributeNames: []types.ConfigurationSetAttribute{
+			types.ConfigurationSetAttribute("eventDestinations"),
+			types.ConfigurationSetAttribute("eventDestinations"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -900,7 +1095,10 @@ func TestCheckResponseSnapshot_DescribeReceiptRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeReceiptRule(context.Background(), &DescribeReceiptRuleInput{})
+	got, err := svc.DescribeReceiptRule(context.Background(), &DescribeReceiptRuleInput{
+		RuleSetName: ptr.String("__RuleSetName__"),
+		RuleName:    ptr.String("__RuleName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1114,7 +1312,9 @@ func TestCheckResponseSnapshot_DescribeReceiptRuleSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeReceiptRuleSet(context.Background(), &DescribeReceiptRuleSetInput{})
+	got, err := svc.DescribeReceiptRuleSet(context.Background(), &DescribeReceiptRuleSetInput{
+		RuleSetName: ptr.String("__RuleSetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1161,7 +1361,9 @@ func TestCheckResponseSnapshot_GetCustomVerificationEmailTemplate(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCustomVerificationEmailTemplate(context.Background(), &GetCustomVerificationEmailTemplateInput{})
+	got, err := svc.GetCustomVerificationEmailTemplate(context.Background(), &GetCustomVerificationEmailTemplateInput{
+		TemplateName: ptr.String("__TemplateName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1191,7 +1393,12 @@ func TestCheckResponseSnapshot_GetIdentityDkimAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIdentityDkimAttributes(context.Background(), &GetIdentityDkimAttributesInput{})
+	got, err := svc.GetIdentityDkimAttributes(context.Background(), &GetIdentityDkimAttributesInput{
+		Identities: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1218,7 +1425,12 @@ func TestCheckResponseSnapshot_GetIdentityMailFromDomainAttributes(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIdentityMailFromDomainAttributes(context.Background(), &GetIdentityMailFromDomainAttributesInput{})
+	got, err := svc.GetIdentityMailFromDomainAttributes(context.Background(), &GetIdentityMailFromDomainAttributesInput{
+		Identities: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1249,7 +1461,12 @@ func TestCheckResponseSnapshot_GetIdentityNotificationAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIdentityNotificationAttributes(context.Background(), &GetIdentityNotificationAttributesInput{})
+	got, err := svc.GetIdentityNotificationAttributes(context.Background(), &GetIdentityNotificationAttributesInput{
+		Identities: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1272,7 +1489,13 @@ func TestCheckResponseSnapshot_GetIdentityPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIdentityPolicies(context.Background(), &GetIdentityPoliciesInput{})
+	got, err := svc.GetIdentityPolicies(context.Background(), &GetIdentityPoliciesInput{
+		Identity: ptr.String("__Identity__"),
+		PolicyNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1298,7 +1521,12 @@ func TestCheckResponseSnapshot_GetIdentityVerificationAttributes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIdentityVerificationAttributes(context.Background(), &GetIdentityVerificationAttributesInput{})
+	got, err := svc.GetIdentityVerificationAttributes(context.Background(), &GetIdentityVerificationAttributesInput{
+		Identities: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1383,7 +1611,9 @@ func TestCheckResponseSnapshot_GetTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTemplate(context.Background(), &GetTemplateInput{})
+	got, err := svc.GetTemplate(context.Background(), &GetTemplateInput{
+		TemplateName: ptr.String("__TemplateName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1412,7 +1642,10 @@ func TestCheckResponseSnapshot_ListConfigurationSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConfigurationSets(context.Background(), &ListConfigurationSetsInput{})
+	got, err := svc.ListConfigurationSets(context.Background(), &ListConfigurationSetsInput{
+		NextToken: ptr.String("__NextToken__"),
+		MaxItems:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1449,7 +1682,10 @@ func TestCheckResponseSnapshot_ListCustomVerificationEmailTemplates(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCustomVerificationEmailTemplates(context.Background(), &ListCustomVerificationEmailTemplatesInput{})
+	got, err := svc.ListCustomVerificationEmailTemplates(context.Background(), &ListCustomVerificationEmailTemplatesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1474,7 +1710,11 @@ func TestCheckResponseSnapshot_ListIdentities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIdentities(context.Background(), &ListIdentitiesInput{})
+	got, err := svc.ListIdentities(context.Background(), &ListIdentitiesInput{
+		IdentityType: types.IdentityType("EmailAddress"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxItems:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1498,7 +1738,9 @@ func TestCheckResponseSnapshot_ListIdentityPolicies(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIdentityPolicies(context.Background(), &ListIdentityPoliciesInput{})
+	got, err := svc.ListIdentityPolicies(context.Background(), &ListIdentityPoliciesInput{
+		Identity: ptr.String("__Identity__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1565,7 +1807,9 @@ func TestCheckResponseSnapshot_ListReceiptRuleSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReceiptRuleSets(context.Background(), &ListReceiptRuleSetsInput{})
+	got, err := svc.ListReceiptRuleSets(context.Background(), &ListReceiptRuleSetsInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1596,7 +1840,10 @@ func TestCheckResponseSnapshot_ListTemplates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTemplates(context.Background(), &ListTemplatesInput{})
+	got, err := svc.ListTemplates(context.Background(), &ListTemplatesInput{
+		NextToken: ptr.String("__NextToken__"),
+		MaxItems:  ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1639,7 +1886,12 @@ func TestCheckResponseSnapshot_PutConfigurationSetDeliveryOptions(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutConfigurationSetDeliveryOptions(context.Background(), &PutConfigurationSetDeliveryOptionsInput{})
+	got, err := svc.PutConfigurationSetDeliveryOptions(context.Background(), &PutConfigurationSetDeliveryOptionsInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		DeliveryOptions: &types.DeliveryOptions{
+			TlsPolicy: types.TlsPolicy("Require"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1658,7 +1910,11 @@ func TestCheckResponseSnapshot_PutIdentityPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutIdentityPolicy(context.Background(), &PutIdentityPolicyInput{})
+	got, err := svc.PutIdentityPolicy(context.Background(), &PutIdentityPolicyInput{
+		Identity:   ptr.String("__Identity__"),
+		PolicyName: ptr.String("__PolicyName__"),
+		Policy:     ptr.String("__Policy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1677,7 +1933,13 @@ func TestCheckResponseSnapshot_ReorderReceiptRuleSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ReorderReceiptRuleSet(context.Background(), &ReorderReceiptRuleSetInput{})
+	got, err := svc.ReorderReceiptRuleSet(context.Background(), &ReorderReceiptRuleSetInput{
+		RuleSetName: ptr.String("__RuleSetName__"),
+		RuleNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1698,7 +1960,74 @@ func TestCheckResponseSnapshot_SendBounce(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendBounce(context.Background(), &SendBounceInput{})
+	got, err := svc.SendBounce(context.Background(), &SendBounceInput{
+		OriginalMessageId: ptr.String("__OriginalMessageId__"),
+		BounceSender:      ptr.String("__BounceSender__"),
+		Explanation:       ptr.String("__Explanation__"),
+		MessageDsn: &types.MessageDsn{
+			ReportingMta: ptr.String("__ReportingMta__"),
+			ArrivalDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ExtensionFields: []types.ExtensionField{
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		BouncedRecipientInfoList: []types.BouncedRecipientInfo{
+			{
+				Recipient:    ptr.String("__Recipient__"),
+				RecipientArn: ptr.String("__RecipientArn__"),
+				BounceType:   types.BounceType("DoesNotExist"),
+				RecipientDsnFields: &types.RecipientDsnFields{
+					FinalRecipient:  ptr.String("__FinalRecipient__"),
+					Action:          types.DsnAction("failed"),
+					RemoteMta:       ptr.String("__RemoteMta__"),
+					Status:          ptr.String("__Status__"),
+					DiagnosticCode:  ptr.String("__DiagnosticCode__"),
+					LastAttemptDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					ExtensionFields: []types.ExtensionField{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+			},
+			{
+				Recipient:    ptr.String("__Recipient__"),
+				RecipientArn: ptr.String("__RecipientArn__"),
+				BounceType:   types.BounceType("DoesNotExist"),
+				RecipientDsnFields: &types.RecipientDsnFields{
+					FinalRecipient:  ptr.String("__FinalRecipient__"),
+					Action:          types.DsnAction("failed"),
+					RemoteMta:       ptr.String("__RemoteMta__"),
+					Status:          ptr.String("__Status__"),
+					DiagnosticCode:  ptr.String("__DiagnosticCode__"),
+					LastAttemptDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					ExtensionFields: []types.ExtensionField{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+			},
+		},
+		BounceSenderArn: ptr.String("__BounceSenderArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1730,7 +2059,86 @@ func TestCheckResponseSnapshot_SendBulkTemplatedEmail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendBulkTemplatedEmail(context.Background(), &SendBulkTemplatedEmailInput{})
+	got, err := svc.SendBulkTemplatedEmail(context.Background(), &SendBulkTemplatedEmailInput{
+		Source:    ptr.String("__Source__"),
+		SourceArn: ptr.String("__SourceArn__"),
+		ReplyToAddresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ReturnPath:           ptr.String("__ReturnPath__"),
+		ReturnPathArn:        ptr.String("__ReturnPathArn__"),
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		DefaultTags: []types.MessageTag{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Template:            ptr.String("__Template__"),
+		TemplateArn:         ptr.String("__TemplateArn__"),
+		DefaultTemplateData: ptr.String("__DefaultTemplateData__"),
+		Destinations: []types.BulkEmailDestination{
+			{
+				Destination: &types.Destination{
+					ToAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					CcAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					BccAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ReplacementTags: []types.MessageTag{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				ReplacementTemplateData: ptr.String("__ReplacementTemplateData__"),
+			},
+			{
+				Destination: &types.Destination{
+					ToAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					CcAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					BccAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ReplacementTags: []types.MessageTag{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				ReplacementTemplateData: ptr.String("__ReplacementTemplateData__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1751,7 +2159,11 @@ func TestCheckResponseSnapshot_SendCustomVerificationEmail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendCustomVerificationEmail(context.Background(), &SendCustomVerificationEmailInput{})
+	got, err := svc.SendCustomVerificationEmail(context.Background(), &SendCustomVerificationEmailInput{
+		EmailAddress:         ptr.String("__EmailAddress__"),
+		TemplateName:         ptr.String("__TemplateName__"),
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1772,7 +2184,57 @@ func TestCheckResponseSnapshot_SendEmail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendEmail(context.Background(), &SendEmailInput{})
+	got, err := svc.SendEmail(context.Background(), &SendEmailInput{
+		Source: ptr.String("__Source__"),
+		Destination: &types.Destination{
+			ToAddresses: []string{
+				"__Member__",
+				"__Member__",
+			},
+			CcAddresses: []string{
+				"__Member__",
+				"__Member__",
+			},
+			BccAddresses: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		Message: &types.Message{
+			Subject: &types.Content{
+				Data:    ptr.String("__Data__"),
+				Charset: ptr.String("__Charset__"),
+			},
+			Body: &types.Body{
+				Text: &types.Content{
+					Data:    ptr.String("__Data__"),
+					Charset: ptr.String("__Charset__"),
+				},
+				Html: &types.Content{
+					Data:    ptr.String("__Data__"),
+					Charset: ptr.String("__Charset__"),
+				},
+			},
+		},
+		ReplyToAddresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ReturnPath:    ptr.String("__ReturnPath__"),
+		SourceArn:     ptr.String("__SourceArn__"),
+		ReturnPathArn: ptr.String("__ReturnPathArn__"),
+		Tags: []types.MessageTag{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1793,7 +2255,30 @@ func TestCheckResponseSnapshot_SendRawEmail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendRawEmail(context.Background(), &SendRawEmailInput{})
+	got, err := svc.SendRawEmail(context.Background(), &SendRawEmailInput{
+		Source: ptr.String("__Source__"),
+		Destinations: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RawMessage: &types.RawMessage{
+			Data: []byte("blob"),
+		},
+		FromArn:       ptr.String("__FromArn__"),
+		SourceArn:     ptr.String("__SourceArn__"),
+		ReturnPathArn: ptr.String("__ReturnPathArn__"),
+		Tags: []types.MessageTag{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1814,7 +2299,44 @@ func TestCheckResponseSnapshot_SendTemplatedEmail(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendTemplatedEmail(context.Background(), &SendTemplatedEmailInput{})
+	got, err := svc.SendTemplatedEmail(context.Background(), &SendTemplatedEmailInput{
+		Source: ptr.String("__Source__"),
+		Destination: &types.Destination{
+			ToAddresses: []string{
+				"__Member__",
+				"__Member__",
+			},
+			CcAddresses: []string{
+				"__Member__",
+				"__Member__",
+			},
+			BccAddresses: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ReplyToAddresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ReturnPath:    ptr.String("__ReturnPath__"),
+		SourceArn:     ptr.String("__SourceArn__"),
+		ReturnPathArn: ptr.String("__ReturnPathArn__"),
+		Tags: []types.MessageTag{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		Template:             ptr.String("__Template__"),
+		TemplateArn:          ptr.String("__TemplateArn__"),
+		TemplateData:         ptr.String("__TemplateData__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1833,7 +2355,9 @@ func TestCheckResponseSnapshot_SetActiveReceiptRuleSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetActiveReceiptRuleSet(context.Background(), &SetActiveReceiptRuleSetInput{})
+	got, err := svc.SetActiveReceiptRuleSet(context.Background(), &SetActiveReceiptRuleSetInput{
+		RuleSetName: ptr.String("__RuleSetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1852,7 +2376,10 @@ func TestCheckResponseSnapshot_SetIdentityDkimEnabled(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetIdentityDkimEnabled(context.Background(), &SetIdentityDkimEnabledInput{})
+	got, err := svc.SetIdentityDkimEnabled(context.Background(), &SetIdentityDkimEnabledInput{
+		Identity:    ptr.String("__Identity__"),
+		DkimEnabled: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1871,7 +2398,10 @@ func TestCheckResponseSnapshot_SetIdentityFeedbackForwardingEnabled(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetIdentityFeedbackForwardingEnabled(context.Background(), &SetIdentityFeedbackForwardingEnabledInput{})
+	got, err := svc.SetIdentityFeedbackForwardingEnabled(context.Background(), &SetIdentityFeedbackForwardingEnabledInput{
+		Identity:          ptr.String("__Identity__"),
+		ForwardingEnabled: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1890,7 +2420,11 @@ func TestCheckResponseSnapshot_SetIdentityHeadersInNotificationsEnabled(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetIdentityHeadersInNotificationsEnabled(context.Background(), &SetIdentityHeadersInNotificationsEnabledInput{})
+	got, err := svc.SetIdentityHeadersInNotificationsEnabled(context.Background(), &SetIdentityHeadersInNotificationsEnabledInput{
+		Identity:         ptr.String("__Identity__"),
+		NotificationType: types.NotificationType("Bounce"),
+		Enabled:          true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1909,7 +2443,11 @@ func TestCheckResponseSnapshot_SetIdentityMailFromDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetIdentityMailFromDomain(context.Background(), &SetIdentityMailFromDomainInput{})
+	got, err := svc.SetIdentityMailFromDomain(context.Background(), &SetIdentityMailFromDomainInput{
+		Identity:            ptr.String("__Identity__"),
+		MailFromDomain:      ptr.String("__MailFromDomain__"),
+		BehaviorOnMXFailure: types.BehaviorOnMXFailure("UseDefaultValue"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1928,7 +2466,11 @@ func TestCheckResponseSnapshot_SetIdentityNotificationTopic(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetIdentityNotificationTopic(context.Background(), &SetIdentityNotificationTopicInput{})
+	got, err := svc.SetIdentityNotificationTopic(context.Background(), &SetIdentityNotificationTopicInput{
+		Identity:         ptr.String("__Identity__"),
+		NotificationType: types.NotificationType("Bounce"),
+		SnsTopic:         ptr.String("__SnsTopic__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1947,7 +2489,11 @@ func TestCheckResponseSnapshot_SetReceiptRulePosition(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetReceiptRulePosition(context.Background(), &SetReceiptRulePositionInput{})
+	got, err := svc.SetReceiptRulePosition(context.Background(), &SetReceiptRulePositionInput{
+		RuleSetName: ptr.String("__RuleSetName__"),
+		RuleName:    ptr.String("__RuleName__"),
+		After:       ptr.String("__After__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1968,7 +2514,10 @@ func TestCheckResponseSnapshot_TestRenderTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TestRenderTemplate(context.Background(), &TestRenderTemplateInput{})
+	got, err := svc.TestRenderTemplate(context.Background(), &TestRenderTemplateInput{
+		TemplateName: ptr.String("__TemplateName__"),
+		TemplateData: ptr.String("__TemplateData__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1987,7 +2536,9 @@ func TestCheckResponseSnapshot_UpdateAccountSendingEnabled(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAccountSendingEnabled(context.Background(), &UpdateAccountSendingEnabledInput{})
+	got, err := svc.UpdateAccountSendingEnabled(context.Background(), &UpdateAccountSendingEnabledInput{
+		Enabled: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2006,7 +2557,38 @@ func TestCheckResponseSnapshot_UpdateConfigurationSetEventDestination(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConfigurationSetEventDestination(context.Background(), &UpdateConfigurationSetEventDestinationInput{})
+	got, err := svc.UpdateConfigurationSetEventDestination(context.Background(), &UpdateConfigurationSetEventDestinationInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		EventDestination: &types.EventDestination{
+			Name:    ptr.String("__Name__"),
+			Enabled: true,
+			MatchingEventTypes: []types.EventType{
+				types.EventType("send"),
+				types.EventType("send"),
+			},
+			KinesisFirehoseDestination: &types.KinesisFirehoseDestination{
+				IAMRoleARN:        ptr.String("__IAMRoleARN__"),
+				DeliveryStreamARN: ptr.String("__DeliveryStreamARN__"),
+			},
+			CloudWatchDestination: &types.CloudWatchDestination{
+				DimensionConfigurations: []types.CloudWatchDimensionConfiguration{
+					{
+						DimensionName:         ptr.String("__DimensionName__"),
+						DimensionValueSource:  types.DimensionValueSource("messageTag"),
+						DefaultDimensionValue: ptr.String("__DefaultDimensionValue__"),
+					},
+					{
+						DimensionName:         ptr.String("__DimensionName__"),
+						DimensionValueSource:  types.DimensionValueSource("messageTag"),
+						DefaultDimensionValue: ptr.String("__DefaultDimensionValue__"),
+					},
+				},
+			},
+			SNSDestination: &types.SNSDestination{
+				TopicARN: ptr.String("__TopicARN__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2025,7 +2607,10 @@ func TestCheckResponseSnapshot_UpdateConfigurationSetReputationMetricsEnabled(t 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConfigurationSetReputationMetricsEnabled(context.Background(), &UpdateConfigurationSetReputationMetricsEnabledInput{})
+	got, err := svc.UpdateConfigurationSetReputationMetricsEnabled(context.Background(), &UpdateConfigurationSetReputationMetricsEnabledInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		Enabled:              true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2044,7 +2629,10 @@ func TestCheckResponseSnapshot_UpdateConfigurationSetSendingEnabled(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConfigurationSetSendingEnabled(context.Background(), &UpdateConfigurationSetSendingEnabledInput{})
+	got, err := svc.UpdateConfigurationSetSendingEnabled(context.Background(), &UpdateConfigurationSetSendingEnabledInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		Enabled:              true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2063,7 +2651,12 @@ func TestCheckResponseSnapshot_UpdateConfigurationSetTrackingOptions(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConfigurationSetTrackingOptions(context.Background(), &UpdateConfigurationSetTrackingOptionsInput{})
+	got, err := svc.UpdateConfigurationSetTrackingOptions(context.Background(), &UpdateConfigurationSetTrackingOptionsInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		TrackingOptions: &types.TrackingOptions{
+			CustomRedirectDomain: ptr.String("__CustomRedirectDomain__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2082,7 +2675,14 @@ func TestCheckResponseSnapshot_UpdateCustomVerificationEmailTemplate(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCustomVerificationEmailTemplate(context.Background(), &UpdateCustomVerificationEmailTemplateInput{})
+	got, err := svc.UpdateCustomVerificationEmailTemplate(context.Background(), &UpdateCustomVerificationEmailTemplateInput{
+		TemplateName:          ptr.String("__TemplateName__"),
+		FromEmailAddress:      ptr.String("__FromEmailAddress__"),
+		TemplateSubject:       ptr.String("__TemplateSubject__"),
+		TemplateContent:       ptr.String("__TemplateContent__"),
+		SuccessRedirectionURL: ptr.String("__SuccessRedirectionURL__"),
+		FailureRedirectionURL: ptr.String("__FailureRedirectionURL__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2101,7 +2701,103 @@ func TestCheckResponseSnapshot_UpdateReceiptRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateReceiptRule(context.Background(), &UpdateReceiptRuleInput{})
+	got, err := svc.UpdateReceiptRule(context.Background(), &UpdateReceiptRuleInput{
+		RuleSetName: ptr.String("__RuleSetName__"),
+		Rule: &types.ReceiptRule{
+			Name:      ptr.String("__Name__"),
+			Enabled:   true,
+			TlsPolicy: types.TlsPolicy("Require"),
+			Recipients: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Actions: []types.ReceiptAction{
+				{
+					S3Action: &types.S3Action{
+						TopicArn:        ptr.String("__TopicArn__"),
+						BucketName:      ptr.String("__BucketName__"),
+						ObjectKeyPrefix: ptr.String("__ObjectKeyPrefix__"),
+						KmsKeyArn:       ptr.String("__KmsKeyArn__"),
+						IamRoleArn:      ptr.String("__IamRoleArn__"),
+					},
+					BounceAction: &types.BounceAction{
+						TopicArn:      ptr.String("__TopicArn__"),
+						SmtpReplyCode: ptr.String("__SmtpReplyCode__"),
+						StatusCode:    ptr.String("__StatusCode__"),
+						Message:       ptr.String("__Message__"),
+						Sender:        ptr.String("__Sender__"),
+					},
+					WorkmailAction: &types.WorkmailAction{
+						TopicArn:        ptr.String("__TopicArn__"),
+						OrganizationArn: ptr.String("__OrganizationArn__"),
+					},
+					LambdaAction: &types.LambdaAction{
+						TopicArn:       ptr.String("__TopicArn__"),
+						FunctionArn:    ptr.String("__FunctionArn__"),
+						InvocationType: types.InvocationType("Event"),
+					},
+					StopAction: &types.StopAction{
+						Scope:    types.StopScope("RuleSet"),
+						TopicArn: ptr.String("__TopicArn__"),
+					},
+					AddHeaderAction: &types.AddHeaderAction{
+						HeaderName:  ptr.String("__HeaderName__"),
+						HeaderValue: ptr.String("__HeaderValue__"),
+					},
+					SNSAction: &types.SNSAction{
+						TopicArn: ptr.String("__TopicArn__"),
+						Encoding: types.SNSActionEncoding("UTF-8"),
+					},
+					ConnectAction: &types.ConnectAction{
+						InstanceARN: ptr.String("__InstanceARN__"),
+						IAMRoleARN:  ptr.String("__IAMRoleARN__"),
+					},
+				},
+				{
+					S3Action: &types.S3Action{
+						TopicArn:        ptr.String("__TopicArn__"),
+						BucketName:      ptr.String("__BucketName__"),
+						ObjectKeyPrefix: ptr.String("__ObjectKeyPrefix__"),
+						KmsKeyArn:       ptr.String("__KmsKeyArn__"),
+						IamRoleArn:      ptr.String("__IamRoleArn__"),
+					},
+					BounceAction: &types.BounceAction{
+						TopicArn:      ptr.String("__TopicArn__"),
+						SmtpReplyCode: ptr.String("__SmtpReplyCode__"),
+						StatusCode:    ptr.String("__StatusCode__"),
+						Message:       ptr.String("__Message__"),
+						Sender:        ptr.String("__Sender__"),
+					},
+					WorkmailAction: &types.WorkmailAction{
+						TopicArn:        ptr.String("__TopicArn__"),
+						OrganizationArn: ptr.String("__OrganizationArn__"),
+					},
+					LambdaAction: &types.LambdaAction{
+						TopicArn:       ptr.String("__TopicArn__"),
+						FunctionArn:    ptr.String("__FunctionArn__"),
+						InvocationType: types.InvocationType("Event"),
+					},
+					StopAction: &types.StopAction{
+						Scope:    types.StopScope("RuleSet"),
+						TopicArn: ptr.String("__TopicArn__"),
+					},
+					AddHeaderAction: &types.AddHeaderAction{
+						HeaderName:  ptr.String("__HeaderName__"),
+						HeaderValue: ptr.String("__HeaderValue__"),
+					},
+					SNSAction: &types.SNSAction{
+						TopicArn: ptr.String("__TopicArn__"),
+						Encoding: types.SNSActionEncoding("UTF-8"),
+					},
+					ConnectAction: &types.ConnectAction{
+						InstanceARN: ptr.String("__InstanceARN__"),
+						IAMRoleARN:  ptr.String("__IAMRoleARN__"),
+					},
+				},
+			},
+			ScanEnabled: true,
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2120,7 +2816,14 @@ func TestCheckResponseSnapshot_UpdateTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTemplate(context.Background(), &UpdateTemplateInput{})
+	got, err := svc.UpdateTemplate(context.Background(), &UpdateTemplateInput{
+		Template: &types.Template{
+			TemplateName: ptr.String("__TemplateName__"),
+			SubjectPart:  ptr.String("__SubjectPart__"),
+			TextPart:     ptr.String("__TextPart__"),
+			HtmlPart:     ptr.String("__HtmlPart__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2144,7 +2847,9 @@ func TestCheckResponseSnapshot_VerifyDomainDkim(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.VerifyDomainDkim(context.Background(), &VerifyDomainDkimInput{})
+	got, err := svc.VerifyDomainDkim(context.Background(), &VerifyDomainDkimInput{
+		Domain: ptr.String("__Domain__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2165,7 +2870,9 @@ func TestCheckResponseSnapshot_VerifyDomainIdentity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.VerifyDomainIdentity(context.Background(), &VerifyDomainIdentityInput{})
+	got, err := svc.VerifyDomainIdentity(context.Background(), &VerifyDomainIdentityInput{
+		Domain: ptr.String("__Domain__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2184,7 +2891,9 @@ func TestCheckResponseSnapshot_VerifyEmailAddress(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.VerifyEmailAddress(context.Background(), &VerifyEmailAddressInput{})
+	got, err := svc.VerifyEmailAddress(context.Background(), &VerifyEmailAddressInput{
+		EmailAddress: ptr.String("__EmailAddress__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2203,7 +2912,9 @@ func TestCheckResponseSnapshot_VerifyEmailIdentity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.VerifyEmailIdentity(context.Background(), &VerifyEmailIdentityInput{})
+	got, err := svc.VerifyEmailIdentity(context.Background(), &VerifyEmailIdentityInput{
+		EmailAddress: ptr.String("__EmailAddress__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2224,7 +2935,86 @@ func TestCheckResponseSnapshot_Error_AccountSendingPausedException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SendBulkTemplatedEmail(context.Background(), &SendBulkTemplatedEmailInput{})
+	_, opErr := svc.SendBulkTemplatedEmail(context.Background(), &SendBulkTemplatedEmailInput{
+		Source:    ptr.String("__Source__"),
+		SourceArn: ptr.String("__SourceArn__"),
+		ReplyToAddresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ReturnPath:           ptr.String("__ReturnPath__"),
+		ReturnPathArn:        ptr.String("__ReturnPathArn__"),
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		DefaultTags: []types.MessageTag{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Template:            ptr.String("__Template__"),
+		TemplateArn:         ptr.String("__TemplateArn__"),
+		DefaultTemplateData: ptr.String("__DefaultTemplateData__"),
+		Destinations: []types.BulkEmailDestination{
+			{
+				Destination: &types.Destination{
+					ToAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					CcAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					BccAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ReplacementTags: []types.MessageTag{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				ReplacementTemplateData: ptr.String("__ReplacementTemplateData__"),
+			},
+			{
+				Destination: &types.Destination{
+					ToAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					CcAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					BccAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ReplacementTags: []types.MessageTag{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				ReplacementTemplateData: ptr.String("__ReplacementTemplateData__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2250,7 +3040,10 @@ func TestCheckResponseSnapshot_Error_AlreadyExistsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CloneReceiptRuleSet(context.Background(), &CloneReceiptRuleSetInput{})
+	_, opErr := svc.CloneReceiptRuleSet(context.Background(), &CloneReceiptRuleSetInput{
+		RuleSetName:         ptr.String("__RuleSetName__"),
+		OriginalRuleSetName: ptr.String("__OriginalRuleSetName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2276,7 +3069,9 @@ func TestCheckResponseSnapshot_Error_CannotDeleteException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteReceiptRuleSet(context.Background(), &DeleteReceiptRuleSetInput{})
+	_, opErr := svc.DeleteReceiptRuleSet(context.Background(), &DeleteReceiptRuleSetInput{
+		RuleSetName: ptr.String("__RuleSetName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2302,7 +3097,11 @@ func TestCheckResponseSnapshot_Error_ConfigurationSetAlreadyExistsException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConfigurationSet(context.Background(), &CreateConfigurationSetInput{})
+	_, opErr := svc.CreateConfigurationSet(context.Background(), &CreateConfigurationSetInput{
+		ConfigurationSet: &types.ConfigurationSet{
+			Name: ptr.String("__Name__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2328,7 +3127,38 @@ func TestCheckResponseSnapshot_Error_ConfigurationSetDoesNotExistException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConfigurationSetEventDestination(context.Background(), &CreateConfigurationSetEventDestinationInput{})
+	_, opErr := svc.CreateConfigurationSetEventDestination(context.Background(), &CreateConfigurationSetEventDestinationInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		EventDestination: &types.EventDestination{
+			Name:    ptr.String("__Name__"),
+			Enabled: true,
+			MatchingEventTypes: []types.EventType{
+				types.EventType("send"),
+				types.EventType("send"),
+			},
+			KinesisFirehoseDestination: &types.KinesisFirehoseDestination{
+				IAMRoleARN:        ptr.String("__IAMRoleARN__"),
+				DeliveryStreamARN: ptr.String("__DeliveryStreamARN__"),
+			},
+			CloudWatchDestination: &types.CloudWatchDestination{
+				DimensionConfigurations: []types.CloudWatchDimensionConfiguration{
+					{
+						DimensionName:         ptr.String("__DimensionName__"),
+						DimensionValueSource:  types.DimensionValueSource("messageTag"),
+						DefaultDimensionValue: ptr.String("__DefaultDimensionValue__"),
+					},
+					{
+						DimensionName:         ptr.String("__DimensionName__"),
+						DimensionValueSource:  types.DimensionValueSource("messageTag"),
+						DefaultDimensionValue: ptr.String("__DefaultDimensionValue__"),
+					},
+				},
+			},
+			SNSDestination: &types.SNSDestination{
+				TopicARN: ptr.String("__TopicARN__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2354,7 +3184,86 @@ func TestCheckResponseSnapshot_Error_ConfigurationSetSendingPausedException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SendBulkTemplatedEmail(context.Background(), &SendBulkTemplatedEmailInput{})
+	_, opErr := svc.SendBulkTemplatedEmail(context.Background(), &SendBulkTemplatedEmailInput{
+		Source:    ptr.String("__Source__"),
+		SourceArn: ptr.String("__SourceArn__"),
+		ReplyToAddresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ReturnPath:           ptr.String("__ReturnPath__"),
+		ReturnPathArn:        ptr.String("__ReturnPathArn__"),
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		DefaultTags: []types.MessageTag{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Template:            ptr.String("__Template__"),
+		TemplateArn:         ptr.String("__TemplateArn__"),
+		DefaultTemplateData: ptr.String("__DefaultTemplateData__"),
+		Destinations: []types.BulkEmailDestination{
+			{
+				Destination: &types.Destination{
+					ToAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					CcAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					BccAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ReplacementTags: []types.MessageTag{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				ReplacementTemplateData: ptr.String("__ReplacementTemplateData__"),
+			},
+			{
+				Destination: &types.Destination{
+					ToAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					CcAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					BccAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ReplacementTags: []types.MessageTag{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				ReplacementTemplateData: ptr.String("__ReplacementTemplateData__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2379,7 +3288,14 @@ func TestCheckResponseSnapshot_Error_CustomVerificationEmailInvalidContentExcept
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCustomVerificationEmailTemplate(context.Background(), &CreateCustomVerificationEmailTemplateInput{})
+	_, opErr := svc.CreateCustomVerificationEmailTemplate(context.Background(), &CreateCustomVerificationEmailTemplateInput{
+		TemplateName:          ptr.String("__TemplateName__"),
+		FromEmailAddress:      ptr.String("__FromEmailAddress__"),
+		TemplateSubject:       ptr.String("__TemplateSubject__"),
+		TemplateContent:       ptr.String("__TemplateContent__"),
+		SuccessRedirectionURL: ptr.String("__SuccessRedirectionURL__"),
+		FailureRedirectionURL: ptr.String("__FailureRedirectionURL__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2405,7 +3321,14 @@ func TestCheckResponseSnapshot_Error_CustomVerificationEmailTemplateAlreadyExist
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCustomVerificationEmailTemplate(context.Background(), &CreateCustomVerificationEmailTemplateInput{})
+	_, opErr := svc.CreateCustomVerificationEmailTemplate(context.Background(), &CreateCustomVerificationEmailTemplateInput{
+		TemplateName:          ptr.String("__TemplateName__"),
+		FromEmailAddress:      ptr.String("__FromEmailAddress__"),
+		TemplateSubject:       ptr.String("__TemplateSubject__"),
+		TemplateContent:       ptr.String("__TemplateContent__"),
+		SuccessRedirectionURL: ptr.String("__SuccessRedirectionURL__"),
+		FailureRedirectionURL: ptr.String("__FailureRedirectionURL__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2431,7 +3354,9 @@ func TestCheckResponseSnapshot_Error_CustomVerificationEmailTemplateDoesNotExist
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetCustomVerificationEmailTemplate(context.Background(), &GetCustomVerificationEmailTemplateInput{})
+	_, opErr := svc.GetCustomVerificationEmailTemplate(context.Background(), &GetCustomVerificationEmailTemplateInput{
+		TemplateName: ptr.String("__TemplateName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2458,7 +3383,38 @@ func TestCheckResponseSnapshot_Error_EventDestinationAlreadyExistsException(t *t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConfigurationSetEventDestination(context.Background(), &CreateConfigurationSetEventDestinationInput{})
+	_, opErr := svc.CreateConfigurationSetEventDestination(context.Background(), &CreateConfigurationSetEventDestinationInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		EventDestination: &types.EventDestination{
+			Name:    ptr.String("__Name__"),
+			Enabled: true,
+			MatchingEventTypes: []types.EventType{
+				types.EventType("send"),
+				types.EventType("send"),
+			},
+			KinesisFirehoseDestination: &types.KinesisFirehoseDestination{
+				IAMRoleARN:        ptr.String("__IAMRoleARN__"),
+				DeliveryStreamARN: ptr.String("__DeliveryStreamARN__"),
+			},
+			CloudWatchDestination: &types.CloudWatchDestination{
+				DimensionConfigurations: []types.CloudWatchDimensionConfiguration{
+					{
+						DimensionName:         ptr.String("__DimensionName__"),
+						DimensionValueSource:  types.DimensionValueSource("messageTag"),
+						DefaultDimensionValue: ptr.String("__DefaultDimensionValue__"),
+					},
+					{
+						DimensionName:         ptr.String("__DimensionName__"),
+						DimensionValueSource:  types.DimensionValueSource("messageTag"),
+						DefaultDimensionValue: ptr.String("__DefaultDimensionValue__"),
+					},
+				},
+			},
+			SNSDestination: &types.SNSDestination{
+				TopicARN: ptr.String("__TopicARN__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2485,7 +3441,10 @@ func TestCheckResponseSnapshot_Error_EventDestinationDoesNotExistException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteConfigurationSetEventDestination(context.Background(), &DeleteConfigurationSetEventDestinationInput{})
+	_, opErr := svc.DeleteConfigurationSetEventDestination(context.Background(), &DeleteConfigurationSetEventDestinationInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		EventDestinationName: ptr.String("__EventDestinationName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2511,7 +3470,14 @@ func TestCheckResponseSnapshot_Error_FromEmailAddressNotVerifiedException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCustomVerificationEmailTemplate(context.Background(), &CreateCustomVerificationEmailTemplateInput{})
+	_, opErr := svc.CreateCustomVerificationEmailTemplate(context.Background(), &CreateCustomVerificationEmailTemplateInput{
+		TemplateName:          ptr.String("__TemplateName__"),
+		FromEmailAddress:      ptr.String("__FromEmailAddress__"),
+		TemplateSubject:       ptr.String("__TemplateSubject__"),
+		TemplateContent:       ptr.String("__TemplateContent__"),
+		SuccessRedirectionURL: ptr.String("__SuccessRedirectionURL__"),
+		FailureRedirectionURL: ptr.String("__FailureRedirectionURL__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2538,7 +3504,38 @@ func TestCheckResponseSnapshot_Error_InvalidCloudWatchDestinationException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConfigurationSetEventDestination(context.Background(), &CreateConfigurationSetEventDestinationInput{})
+	_, opErr := svc.CreateConfigurationSetEventDestination(context.Background(), &CreateConfigurationSetEventDestinationInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		EventDestination: &types.EventDestination{
+			Name:    ptr.String("__Name__"),
+			Enabled: true,
+			MatchingEventTypes: []types.EventType{
+				types.EventType("send"),
+				types.EventType("send"),
+			},
+			KinesisFirehoseDestination: &types.KinesisFirehoseDestination{
+				IAMRoleARN:        ptr.String("__IAMRoleARN__"),
+				DeliveryStreamARN: ptr.String("__DeliveryStreamARN__"),
+			},
+			CloudWatchDestination: &types.CloudWatchDestination{
+				DimensionConfigurations: []types.CloudWatchDimensionConfiguration{
+					{
+						DimensionName:         ptr.String("__DimensionName__"),
+						DimensionValueSource:  types.DimensionValueSource("messageTag"),
+						DefaultDimensionValue: ptr.String("__DefaultDimensionValue__"),
+					},
+					{
+						DimensionName:         ptr.String("__DimensionName__"),
+						DimensionValueSource:  types.DimensionValueSource("messageTag"),
+						DefaultDimensionValue: ptr.String("__DefaultDimensionValue__"),
+					},
+				},
+			},
+			SNSDestination: &types.SNSDestination{
+				TopicARN: ptr.String("__TopicARN__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2563,7 +3560,11 @@ func TestCheckResponseSnapshot_Error_InvalidConfigurationSetException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConfigurationSet(context.Background(), &CreateConfigurationSetInput{})
+	_, opErr := svc.CreateConfigurationSet(context.Background(), &CreateConfigurationSetInput{
+		ConfigurationSet: &types.ConfigurationSet{
+			Name: ptr.String("__Name__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2588,7 +3589,12 @@ func TestCheckResponseSnapshot_Error_InvalidDeliveryOptionsException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutConfigurationSetDeliveryOptions(context.Background(), &PutConfigurationSetDeliveryOptionsInput{})
+	_, opErr := svc.PutConfigurationSetDeliveryOptions(context.Background(), &PutConfigurationSetDeliveryOptionsInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		DeliveryOptions: &types.DeliveryOptions{
+			TlsPolicy: types.TlsPolicy("Require"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2615,7 +3621,38 @@ func TestCheckResponseSnapshot_Error_InvalidFirehoseDestinationException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConfigurationSetEventDestination(context.Background(), &CreateConfigurationSetEventDestinationInput{})
+	_, opErr := svc.CreateConfigurationSetEventDestination(context.Background(), &CreateConfigurationSetEventDestinationInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		EventDestination: &types.EventDestination{
+			Name:    ptr.String("__Name__"),
+			Enabled: true,
+			MatchingEventTypes: []types.EventType{
+				types.EventType("send"),
+				types.EventType("send"),
+			},
+			KinesisFirehoseDestination: &types.KinesisFirehoseDestination{
+				IAMRoleARN:        ptr.String("__IAMRoleARN__"),
+				DeliveryStreamARN: ptr.String("__DeliveryStreamARN__"),
+			},
+			CloudWatchDestination: &types.CloudWatchDestination{
+				DimensionConfigurations: []types.CloudWatchDimensionConfiguration{
+					{
+						DimensionName:         ptr.String("__DimensionName__"),
+						DimensionValueSource:  types.DimensionValueSource("messageTag"),
+						DefaultDimensionValue: ptr.String("__DefaultDimensionValue__"),
+					},
+					{
+						DimensionName:         ptr.String("__DimensionName__"),
+						DimensionValueSource:  types.DimensionValueSource("messageTag"),
+						DefaultDimensionValue: ptr.String("__DefaultDimensionValue__"),
+					},
+				},
+			},
+			SNSDestination: &types.SNSDestination{
+				TopicARN: ptr.String("__TopicARN__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2641,7 +3678,104 @@ func TestCheckResponseSnapshot_Error_InvalidLambdaFunctionException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateReceiptRule(context.Background(), &CreateReceiptRuleInput{})
+	_, opErr := svc.CreateReceiptRule(context.Background(), &CreateReceiptRuleInput{
+		RuleSetName: ptr.String("__RuleSetName__"),
+		After:       ptr.String("__After__"),
+		Rule: &types.ReceiptRule{
+			Name:      ptr.String("__Name__"),
+			Enabled:   true,
+			TlsPolicy: types.TlsPolicy("Require"),
+			Recipients: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Actions: []types.ReceiptAction{
+				{
+					S3Action: &types.S3Action{
+						TopicArn:        ptr.String("__TopicArn__"),
+						BucketName:      ptr.String("__BucketName__"),
+						ObjectKeyPrefix: ptr.String("__ObjectKeyPrefix__"),
+						KmsKeyArn:       ptr.String("__KmsKeyArn__"),
+						IamRoleArn:      ptr.String("__IamRoleArn__"),
+					},
+					BounceAction: &types.BounceAction{
+						TopicArn:      ptr.String("__TopicArn__"),
+						SmtpReplyCode: ptr.String("__SmtpReplyCode__"),
+						StatusCode:    ptr.String("__StatusCode__"),
+						Message:       ptr.String("__Message__"),
+						Sender:        ptr.String("__Sender__"),
+					},
+					WorkmailAction: &types.WorkmailAction{
+						TopicArn:        ptr.String("__TopicArn__"),
+						OrganizationArn: ptr.String("__OrganizationArn__"),
+					},
+					LambdaAction: &types.LambdaAction{
+						TopicArn:       ptr.String("__TopicArn__"),
+						FunctionArn:    ptr.String("__FunctionArn__"),
+						InvocationType: types.InvocationType("Event"),
+					},
+					StopAction: &types.StopAction{
+						Scope:    types.StopScope("RuleSet"),
+						TopicArn: ptr.String("__TopicArn__"),
+					},
+					AddHeaderAction: &types.AddHeaderAction{
+						HeaderName:  ptr.String("__HeaderName__"),
+						HeaderValue: ptr.String("__HeaderValue__"),
+					},
+					SNSAction: &types.SNSAction{
+						TopicArn: ptr.String("__TopicArn__"),
+						Encoding: types.SNSActionEncoding("UTF-8"),
+					},
+					ConnectAction: &types.ConnectAction{
+						InstanceARN: ptr.String("__InstanceARN__"),
+						IAMRoleARN:  ptr.String("__IAMRoleARN__"),
+					},
+				},
+				{
+					S3Action: &types.S3Action{
+						TopicArn:        ptr.String("__TopicArn__"),
+						BucketName:      ptr.String("__BucketName__"),
+						ObjectKeyPrefix: ptr.String("__ObjectKeyPrefix__"),
+						KmsKeyArn:       ptr.String("__KmsKeyArn__"),
+						IamRoleArn:      ptr.String("__IamRoleArn__"),
+					},
+					BounceAction: &types.BounceAction{
+						TopicArn:      ptr.String("__TopicArn__"),
+						SmtpReplyCode: ptr.String("__SmtpReplyCode__"),
+						StatusCode:    ptr.String("__StatusCode__"),
+						Message:       ptr.String("__Message__"),
+						Sender:        ptr.String("__Sender__"),
+					},
+					WorkmailAction: &types.WorkmailAction{
+						TopicArn:        ptr.String("__TopicArn__"),
+						OrganizationArn: ptr.String("__OrganizationArn__"),
+					},
+					LambdaAction: &types.LambdaAction{
+						TopicArn:       ptr.String("__TopicArn__"),
+						FunctionArn:    ptr.String("__FunctionArn__"),
+						InvocationType: types.InvocationType("Event"),
+					},
+					StopAction: &types.StopAction{
+						Scope:    types.StopScope("RuleSet"),
+						TopicArn: ptr.String("__TopicArn__"),
+					},
+					AddHeaderAction: &types.AddHeaderAction{
+						HeaderName:  ptr.String("__HeaderName__"),
+						HeaderValue: ptr.String("__HeaderValue__"),
+					},
+					SNSAction: &types.SNSAction{
+						TopicArn: ptr.String("__TopicArn__"),
+						Encoding: types.SNSActionEncoding("UTF-8"),
+					},
+					ConnectAction: &types.ConnectAction{
+						InstanceARN: ptr.String("__InstanceARN__"),
+						IAMRoleARN:  ptr.String("__IAMRoleARN__"),
+					},
+				},
+			},
+			ScanEnabled: true,
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2666,7 +3800,11 @@ func TestCheckResponseSnapshot_Error_InvalidPolicyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutIdentityPolicy(context.Background(), &PutIdentityPolicyInput{})
+	_, opErr := svc.PutIdentityPolicy(context.Background(), &PutIdentityPolicyInput{
+		Identity:   ptr.String("__Identity__"),
+		PolicyName: ptr.String("__PolicyName__"),
+		Policy:     ptr.String("__Policy__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2692,7 +3830,10 @@ func TestCheckResponseSnapshot_Error_InvalidRenderingParameterException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TestRenderTemplate(context.Background(), &TestRenderTemplateInput{})
+	_, opErr := svc.TestRenderTemplate(context.Background(), &TestRenderTemplateInput{
+		TemplateName: ptr.String("__TemplateName__"),
+		TemplateData: ptr.String("__TemplateData__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2718,7 +3859,104 @@ func TestCheckResponseSnapshot_Error_InvalidS3ConfigurationException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateReceiptRule(context.Background(), &CreateReceiptRuleInput{})
+	_, opErr := svc.CreateReceiptRule(context.Background(), &CreateReceiptRuleInput{
+		RuleSetName: ptr.String("__RuleSetName__"),
+		After:       ptr.String("__After__"),
+		Rule: &types.ReceiptRule{
+			Name:      ptr.String("__Name__"),
+			Enabled:   true,
+			TlsPolicy: types.TlsPolicy("Require"),
+			Recipients: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Actions: []types.ReceiptAction{
+				{
+					S3Action: &types.S3Action{
+						TopicArn:        ptr.String("__TopicArn__"),
+						BucketName:      ptr.String("__BucketName__"),
+						ObjectKeyPrefix: ptr.String("__ObjectKeyPrefix__"),
+						KmsKeyArn:       ptr.String("__KmsKeyArn__"),
+						IamRoleArn:      ptr.String("__IamRoleArn__"),
+					},
+					BounceAction: &types.BounceAction{
+						TopicArn:      ptr.String("__TopicArn__"),
+						SmtpReplyCode: ptr.String("__SmtpReplyCode__"),
+						StatusCode:    ptr.String("__StatusCode__"),
+						Message:       ptr.String("__Message__"),
+						Sender:        ptr.String("__Sender__"),
+					},
+					WorkmailAction: &types.WorkmailAction{
+						TopicArn:        ptr.String("__TopicArn__"),
+						OrganizationArn: ptr.String("__OrganizationArn__"),
+					},
+					LambdaAction: &types.LambdaAction{
+						TopicArn:       ptr.String("__TopicArn__"),
+						FunctionArn:    ptr.String("__FunctionArn__"),
+						InvocationType: types.InvocationType("Event"),
+					},
+					StopAction: &types.StopAction{
+						Scope:    types.StopScope("RuleSet"),
+						TopicArn: ptr.String("__TopicArn__"),
+					},
+					AddHeaderAction: &types.AddHeaderAction{
+						HeaderName:  ptr.String("__HeaderName__"),
+						HeaderValue: ptr.String("__HeaderValue__"),
+					},
+					SNSAction: &types.SNSAction{
+						TopicArn: ptr.String("__TopicArn__"),
+						Encoding: types.SNSActionEncoding("UTF-8"),
+					},
+					ConnectAction: &types.ConnectAction{
+						InstanceARN: ptr.String("__InstanceARN__"),
+						IAMRoleARN:  ptr.String("__IAMRoleARN__"),
+					},
+				},
+				{
+					S3Action: &types.S3Action{
+						TopicArn:        ptr.String("__TopicArn__"),
+						BucketName:      ptr.String("__BucketName__"),
+						ObjectKeyPrefix: ptr.String("__ObjectKeyPrefix__"),
+						KmsKeyArn:       ptr.String("__KmsKeyArn__"),
+						IamRoleArn:      ptr.String("__IamRoleArn__"),
+					},
+					BounceAction: &types.BounceAction{
+						TopicArn:      ptr.String("__TopicArn__"),
+						SmtpReplyCode: ptr.String("__SmtpReplyCode__"),
+						StatusCode:    ptr.String("__StatusCode__"),
+						Message:       ptr.String("__Message__"),
+						Sender:        ptr.String("__Sender__"),
+					},
+					WorkmailAction: &types.WorkmailAction{
+						TopicArn:        ptr.String("__TopicArn__"),
+						OrganizationArn: ptr.String("__OrganizationArn__"),
+					},
+					LambdaAction: &types.LambdaAction{
+						TopicArn:       ptr.String("__TopicArn__"),
+						FunctionArn:    ptr.String("__FunctionArn__"),
+						InvocationType: types.InvocationType("Event"),
+					},
+					StopAction: &types.StopAction{
+						Scope:    types.StopScope("RuleSet"),
+						TopicArn: ptr.String("__TopicArn__"),
+					},
+					AddHeaderAction: &types.AddHeaderAction{
+						HeaderName:  ptr.String("__HeaderName__"),
+						HeaderValue: ptr.String("__HeaderValue__"),
+					},
+					SNSAction: &types.SNSAction{
+						TopicArn: ptr.String("__TopicArn__"),
+						Encoding: types.SNSActionEncoding("UTF-8"),
+					},
+					ConnectAction: &types.ConnectAction{
+						InstanceARN: ptr.String("__InstanceARN__"),
+						IAMRoleARN:  ptr.String("__IAMRoleARN__"),
+					},
+				},
+			},
+			ScanEnabled: true,
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2745,7 +3983,38 @@ func TestCheckResponseSnapshot_Error_InvalidSNSDestinationException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConfigurationSetEventDestination(context.Background(), &CreateConfigurationSetEventDestinationInput{})
+	_, opErr := svc.CreateConfigurationSetEventDestination(context.Background(), &CreateConfigurationSetEventDestinationInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		EventDestination: &types.EventDestination{
+			Name:    ptr.String("__Name__"),
+			Enabled: true,
+			MatchingEventTypes: []types.EventType{
+				types.EventType("send"),
+				types.EventType("send"),
+			},
+			KinesisFirehoseDestination: &types.KinesisFirehoseDestination{
+				IAMRoleARN:        ptr.String("__IAMRoleARN__"),
+				DeliveryStreamARN: ptr.String("__DeliveryStreamARN__"),
+			},
+			CloudWatchDestination: &types.CloudWatchDestination{
+				DimensionConfigurations: []types.CloudWatchDimensionConfiguration{
+					{
+						DimensionName:         ptr.String("__DimensionName__"),
+						DimensionValueSource:  types.DimensionValueSource("messageTag"),
+						DefaultDimensionValue: ptr.String("__DefaultDimensionValue__"),
+					},
+					{
+						DimensionName:         ptr.String("__DimensionName__"),
+						DimensionValueSource:  types.DimensionValueSource("messageTag"),
+						DefaultDimensionValue: ptr.String("__DefaultDimensionValue__"),
+					},
+				},
+			},
+			SNSDestination: &types.SNSDestination{
+				TopicARN: ptr.String("__TopicARN__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2771,7 +4040,104 @@ func TestCheckResponseSnapshot_Error_InvalidSnsTopicException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateReceiptRule(context.Background(), &CreateReceiptRuleInput{})
+	_, opErr := svc.CreateReceiptRule(context.Background(), &CreateReceiptRuleInput{
+		RuleSetName: ptr.String("__RuleSetName__"),
+		After:       ptr.String("__After__"),
+		Rule: &types.ReceiptRule{
+			Name:      ptr.String("__Name__"),
+			Enabled:   true,
+			TlsPolicy: types.TlsPolicy("Require"),
+			Recipients: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Actions: []types.ReceiptAction{
+				{
+					S3Action: &types.S3Action{
+						TopicArn:        ptr.String("__TopicArn__"),
+						BucketName:      ptr.String("__BucketName__"),
+						ObjectKeyPrefix: ptr.String("__ObjectKeyPrefix__"),
+						KmsKeyArn:       ptr.String("__KmsKeyArn__"),
+						IamRoleArn:      ptr.String("__IamRoleArn__"),
+					},
+					BounceAction: &types.BounceAction{
+						TopicArn:      ptr.String("__TopicArn__"),
+						SmtpReplyCode: ptr.String("__SmtpReplyCode__"),
+						StatusCode:    ptr.String("__StatusCode__"),
+						Message:       ptr.String("__Message__"),
+						Sender:        ptr.String("__Sender__"),
+					},
+					WorkmailAction: &types.WorkmailAction{
+						TopicArn:        ptr.String("__TopicArn__"),
+						OrganizationArn: ptr.String("__OrganizationArn__"),
+					},
+					LambdaAction: &types.LambdaAction{
+						TopicArn:       ptr.String("__TopicArn__"),
+						FunctionArn:    ptr.String("__FunctionArn__"),
+						InvocationType: types.InvocationType("Event"),
+					},
+					StopAction: &types.StopAction{
+						Scope:    types.StopScope("RuleSet"),
+						TopicArn: ptr.String("__TopicArn__"),
+					},
+					AddHeaderAction: &types.AddHeaderAction{
+						HeaderName:  ptr.String("__HeaderName__"),
+						HeaderValue: ptr.String("__HeaderValue__"),
+					},
+					SNSAction: &types.SNSAction{
+						TopicArn: ptr.String("__TopicArn__"),
+						Encoding: types.SNSActionEncoding("UTF-8"),
+					},
+					ConnectAction: &types.ConnectAction{
+						InstanceARN: ptr.String("__InstanceARN__"),
+						IAMRoleARN:  ptr.String("__IAMRoleARN__"),
+					},
+				},
+				{
+					S3Action: &types.S3Action{
+						TopicArn:        ptr.String("__TopicArn__"),
+						BucketName:      ptr.String("__BucketName__"),
+						ObjectKeyPrefix: ptr.String("__ObjectKeyPrefix__"),
+						KmsKeyArn:       ptr.String("__KmsKeyArn__"),
+						IamRoleArn:      ptr.String("__IamRoleArn__"),
+					},
+					BounceAction: &types.BounceAction{
+						TopicArn:      ptr.String("__TopicArn__"),
+						SmtpReplyCode: ptr.String("__SmtpReplyCode__"),
+						StatusCode:    ptr.String("__StatusCode__"),
+						Message:       ptr.String("__Message__"),
+						Sender:        ptr.String("__Sender__"),
+					},
+					WorkmailAction: &types.WorkmailAction{
+						TopicArn:        ptr.String("__TopicArn__"),
+						OrganizationArn: ptr.String("__OrganizationArn__"),
+					},
+					LambdaAction: &types.LambdaAction{
+						TopicArn:       ptr.String("__TopicArn__"),
+						FunctionArn:    ptr.String("__FunctionArn__"),
+						InvocationType: types.InvocationType("Event"),
+					},
+					StopAction: &types.StopAction{
+						Scope:    types.StopScope("RuleSet"),
+						TopicArn: ptr.String("__TopicArn__"),
+					},
+					AddHeaderAction: &types.AddHeaderAction{
+						HeaderName:  ptr.String("__HeaderName__"),
+						HeaderValue: ptr.String("__HeaderValue__"),
+					},
+					SNSAction: &types.SNSAction{
+						TopicArn: ptr.String("__TopicArn__"),
+						Encoding: types.SNSActionEncoding("UTF-8"),
+					},
+					ConnectAction: &types.ConnectAction{
+						InstanceARN: ptr.String("__InstanceARN__"),
+						IAMRoleARN:  ptr.String("__IAMRoleARN__"),
+					},
+				},
+			},
+			ScanEnabled: true,
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2797,7 +4163,14 @@ func TestCheckResponseSnapshot_Error_InvalidTemplateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTemplate(context.Background(), &CreateTemplateInput{})
+	_, opErr := svc.CreateTemplate(context.Background(), &CreateTemplateInput{
+		Template: &types.Template{
+			TemplateName: ptr.String("__TemplateName__"),
+			SubjectPart:  ptr.String("__SubjectPart__"),
+			TextPart:     ptr.String("__TextPart__"),
+			HtmlPart:     ptr.String("__HtmlPart__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2822,7 +4195,12 @@ func TestCheckResponseSnapshot_Error_InvalidTrackingOptionsException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConfigurationSetTrackingOptions(context.Background(), &CreateConfigurationSetTrackingOptionsInput{})
+	_, opErr := svc.CreateConfigurationSetTrackingOptions(context.Background(), &CreateConfigurationSetTrackingOptionsInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		TrackingOptions: &types.TrackingOptions{
+			CustomRedirectDomain: ptr.String("__CustomRedirectDomain__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2847,7 +4225,10 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CloneReceiptRuleSet(context.Background(), &CloneReceiptRuleSetInput{})
+	_, opErr := svc.CloneReceiptRuleSet(context.Background(), &CloneReceiptRuleSetInput{
+		RuleSetName:         ptr.String("__RuleSetName__"),
+		OriginalRuleSetName: ptr.String("__OriginalRuleSetName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2872,7 +4253,86 @@ func TestCheckResponseSnapshot_Error_MailFromDomainNotVerifiedException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SendBulkTemplatedEmail(context.Background(), &SendBulkTemplatedEmailInput{})
+	_, opErr := svc.SendBulkTemplatedEmail(context.Background(), &SendBulkTemplatedEmailInput{
+		Source:    ptr.String("__Source__"),
+		SourceArn: ptr.String("__SourceArn__"),
+		ReplyToAddresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ReturnPath:           ptr.String("__ReturnPath__"),
+		ReturnPathArn:        ptr.String("__ReturnPathArn__"),
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		DefaultTags: []types.MessageTag{
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  ptr.String("__Name__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Template:            ptr.String("__Template__"),
+		TemplateArn:         ptr.String("__TemplateArn__"),
+		DefaultTemplateData: ptr.String("__DefaultTemplateData__"),
+		Destinations: []types.BulkEmailDestination{
+			{
+				Destination: &types.Destination{
+					ToAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					CcAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					BccAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ReplacementTags: []types.MessageTag{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				ReplacementTemplateData: ptr.String("__ReplacementTemplateData__"),
+			},
+			{
+				Destination: &types.Destination{
+					ToAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					CcAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+					BccAddresses: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				ReplacementTags: []types.MessageTag{
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Name:  ptr.String("__Name__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				ReplacementTemplateData: ptr.String("__ReplacementTemplateData__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2897,7 +4357,74 @@ func TestCheckResponseSnapshot_Error_MessageRejected(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SendBounce(context.Background(), &SendBounceInput{})
+	_, opErr := svc.SendBounce(context.Background(), &SendBounceInput{
+		OriginalMessageId: ptr.String("__OriginalMessageId__"),
+		BounceSender:      ptr.String("__BounceSender__"),
+		Explanation:       ptr.String("__Explanation__"),
+		MessageDsn: &types.MessageDsn{
+			ReportingMta: ptr.String("__ReportingMta__"),
+			ArrivalDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ExtensionFields: []types.ExtensionField{
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		BouncedRecipientInfoList: []types.BouncedRecipientInfo{
+			{
+				Recipient:    ptr.String("__Recipient__"),
+				RecipientArn: ptr.String("__RecipientArn__"),
+				BounceType:   types.BounceType("DoesNotExist"),
+				RecipientDsnFields: &types.RecipientDsnFields{
+					FinalRecipient:  ptr.String("__FinalRecipient__"),
+					Action:          types.DsnAction("failed"),
+					RemoteMta:       ptr.String("__RemoteMta__"),
+					Status:          ptr.String("__Status__"),
+					DiagnosticCode:  ptr.String("__DiagnosticCode__"),
+					LastAttemptDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					ExtensionFields: []types.ExtensionField{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+			},
+			{
+				Recipient:    ptr.String("__Recipient__"),
+				RecipientArn: ptr.String("__RecipientArn__"),
+				BounceType:   types.BounceType("DoesNotExist"),
+				RecipientDsnFields: &types.RecipientDsnFields{
+					FinalRecipient:  ptr.String("__FinalRecipient__"),
+					Action:          types.DsnAction("failed"),
+					RemoteMta:       ptr.String("__RemoteMta__"),
+					Status:          ptr.String("__Status__"),
+					DiagnosticCode:  ptr.String("__DiagnosticCode__"),
+					LastAttemptDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					ExtensionFields: []types.ExtensionField{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+			},
+		},
+		BounceSenderArn: ptr.String("__BounceSenderArn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2923,7 +4450,10 @@ func TestCheckResponseSnapshot_Error_MissingRenderingAttributeException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TestRenderTemplate(context.Background(), &TestRenderTemplateInput{})
+	_, opErr := svc.TestRenderTemplate(context.Background(), &TestRenderTemplateInput{
+		TemplateName: ptr.String("__TemplateName__"),
+		TemplateData: ptr.String("__TemplateData__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2948,7 +4478,11 @@ func TestCheckResponseSnapshot_Error_ProductionAccessNotGrantedException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SendCustomVerificationEmail(context.Background(), &SendCustomVerificationEmailInput{})
+	_, opErr := svc.SendCustomVerificationEmail(context.Background(), &SendCustomVerificationEmailInput{
+		EmailAddress:         ptr.String("__EmailAddress__"),
+		TemplateName:         ptr.String("__TemplateName__"),
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2974,7 +4508,104 @@ func TestCheckResponseSnapshot_Error_RuleDoesNotExistException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateReceiptRule(context.Background(), &CreateReceiptRuleInput{})
+	_, opErr := svc.CreateReceiptRule(context.Background(), &CreateReceiptRuleInput{
+		RuleSetName: ptr.String("__RuleSetName__"),
+		After:       ptr.String("__After__"),
+		Rule: &types.ReceiptRule{
+			Name:      ptr.String("__Name__"),
+			Enabled:   true,
+			TlsPolicy: types.TlsPolicy("Require"),
+			Recipients: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Actions: []types.ReceiptAction{
+				{
+					S3Action: &types.S3Action{
+						TopicArn:        ptr.String("__TopicArn__"),
+						BucketName:      ptr.String("__BucketName__"),
+						ObjectKeyPrefix: ptr.String("__ObjectKeyPrefix__"),
+						KmsKeyArn:       ptr.String("__KmsKeyArn__"),
+						IamRoleArn:      ptr.String("__IamRoleArn__"),
+					},
+					BounceAction: &types.BounceAction{
+						TopicArn:      ptr.String("__TopicArn__"),
+						SmtpReplyCode: ptr.String("__SmtpReplyCode__"),
+						StatusCode:    ptr.String("__StatusCode__"),
+						Message:       ptr.String("__Message__"),
+						Sender:        ptr.String("__Sender__"),
+					},
+					WorkmailAction: &types.WorkmailAction{
+						TopicArn:        ptr.String("__TopicArn__"),
+						OrganizationArn: ptr.String("__OrganizationArn__"),
+					},
+					LambdaAction: &types.LambdaAction{
+						TopicArn:       ptr.String("__TopicArn__"),
+						FunctionArn:    ptr.String("__FunctionArn__"),
+						InvocationType: types.InvocationType("Event"),
+					},
+					StopAction: &types.StopAction{
+						Scope:    types.StopScope("RuleSet"),
+						TopicArn: ptr.String("__TopicArn__"),
+					},
+					AddHeaderAction: &types.AddHeaderAction{
+						HeaderName:  ptr.String("__HeaderName__"),
+						HeaderValue: ptr.String("__HeaderValue__"),
+					},
+					SNSAction: &types.SNSAction{
+						TopicArn: ptr.String("__TopicArn__"),
+						Encoding: types.SNSActionEncoding("UTF-8"),
+					},
+					ConnectAction: &types.ConnectAction{
+						InstanceARN: ptr.String("__InstanceARN__"),
+						IAMRoleARN:  ptr.String("__IAMRoleARN__"),
+					},
+				},
+				{
+					S3Action: &types.S3Action{
+						TopicArn:        ptr.String("__TopicArn__"),
+						BucketName:      ptr.String("__BucketName__"),
+						ObjectKeyPrefix: ptr.String("__ObjectKeyPrefix__"),
+						KmsKeyArn:       ptr.String("__KmsKeyArn__"),
+						IamRoleArn:      ptr.String("__IamRoleArn__"),
+					},
+					BounceAction: &types.BounceAction{
+						TopicArn:      ptr.String("__TopicArn__"),
+						SmtpReplyCode: ptr.String("__SmtpReplyCode__"),
+						StatusCode:    ptr.String("__StatusCode__"),
+						Message:       ptr.String("__Message__"),
+						Sender:        ptr.String("__Sender__"),
+					},
+					WorkmailAction: &types.WorkmailAction{
+						TopicArn:        ptr.String("__TopicArn__"),
+						OrganizationArn: ptr.String("__OrganizationArn__"),
+					},
+					LambdaAction: &types.LambdaAction{
+						TopicArn:       ptr.String("__TopicArn__"),
+						FunctionArn:    ptr.String("__FunctionArn__"),
+						InvocationType: types.InvocationType("Event"),
+					},
+					StopAction: &types.StopAction{
+						Scope:    types.StopScope("RuleSet"),
+						TopicArn: ptr.String("__TopicArn__"),
+					},
+					AddHeaderAction: &types.AddHeaderAction{
+						HeaderName:  ptr.String("__HeaderName__"),
+						HeaderValue: ptr.String("__HeaderValue__"),
+					},
+					SNSAction: &types.SNSAction{
+						TopicArn: ptr.String("__TopicArn__"),
+						Encoding: types.SNSActionEncoding("UTF-8"),
+					},
+					ConnectAction: &types.ConnectAction{
+						InstanceARN: ptr.String("__InstanceARN__"),
+						IAMRoleARN:  ptr.String("__IAMRoleARN__"),
+					},
+				},
+			},
+			ScanEnabled: true,
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3000,7 +4631,10 @@ func TestCheckResponseSnapshot_Error_RuleSetDoesNotExistException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CloneReceiptRuleSet(context.Background(), &CloneReceiptRuleSetInput{})
+	_, opErr := svc.CloneReceiptRuleSet(context.Background(), &CloneReceiptRuleSetInput{
+		RuleSetName:         ptr.String("__RuleSetName__"),
+		OriginalRuleSetName: ptr.String("__OriginalRuleSetName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3026,7 +4660,9 @@ func TestCheckResponseSnapshot_Error_TemplateDoesNotExistException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetTemplate(context.Background(), &GetTemplateInput{})
+	_, opErr := svc.GetTemplate(context.Background(), &GetTemplateInput{
+		TemplateName: ptr.String("__TemplateName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3052,7 +4688,12 @@ func TestCheckResponseSnapshot_Error_TrackingOptionsAlreadyExistsException(t *te
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConfigurationSetTrackingOptions(context.Background(), &CreateConfigurationSetTrackingOptionsInput{})
+	_, opErr := svc.CreateConfigurationSetTrackingOptions(context.Background(), &CreateConfigurationSetTrackingOptionsInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		TrackingOptions: &types.TrackingOptions{
+			CustomRedirectDomain: ptr.String("__CustomRedirectDomain__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3078,7 +4719,9 @@ func TestCheckResponseSnapshot_Error_TrackingOptionsDoesNotExistException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteConfigurationSetTrackingOptions(context.Background(), &DeleteConfigurationSetTrackingOptionsInput{})
+	_, opErr := svc.DeleteConfigurationSetTrackingOptions(context.Background(), &DeleteConfigurationSetTrackingOptionsInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

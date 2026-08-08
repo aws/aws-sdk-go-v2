@@ -116,7 +116,9 @@ func TestCheckResponseSnapshot_CreateConfigurationSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConfigurationSet(context.Background(), &CreateConfigurationSetInput{})
+	got, err := svc.CreateConfigurationSet(context.Background(), &CreateConfigurationSetInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -135,7 +137,28 @@ func TestCheckResponseSnapshot_CreateConfigurationSetEventDestination(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConfigurationSetEventDestination(context.Background(), &CreateConfigurationSetEventDestinationInput{})
+	got, err := svc.CreateConfigurationSetEventDestination(context.Background(), &CreateConfigurationSetEventDestinationInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		EventDestination: &types.EventDestinationDefinition{
+			CloudWatchLogsDestination: &types.CloudWatchLogsDestination{
+				IamRoleArn:  ptr.String("__IamRoleArn__"),
+				LogGroupArn: ptr.String("__LogGroupArn__"),
+			},
+			Enabled: ptr.Bool(true),
+			KinesisFirehoseDestination: &types.KinesisFirehoseDestination{
+				DeliveryStreamArn: ptr.String("__DeliveryStreamArn__"),
+				IamRoleArn:        ptr.String("__IamRoleArn__"),
+			},
+			MatchingEventTypes: []types.EventType{
+				types.EventType("INITIATED_CALL"),
+				types.EventType("INITIATED_CALL"),
+			},
+			SnsDestination: &types.SnsDestination{
+				TopicArn: ptr.String("__TopicArn__"),
+			},
+		},
+		EventDestinationName: ptr.String("__EventDestinationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -154,7 +177,9 @@ func TestCheckResponseSnapshot_DeleteConfigurationSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConfigurationSet(context.Background(), &DeleteConfigurationSetInput{})
+	got, err := svc.DeleteConfigurationSet(context.Background(), &DeleteConfigurationSetInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -173,7 +198,10 @@ func TestCheckResponseSnapshot_DeleteConfigurationSetEventDestination(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConfigurationSetEventDestination(context.Background(), &DeleteConfigurationSetEventDestinationInput{})
+	got, err := svc.DeleteConfigurationSetEventDestination(context.Background(), &DeleteConfigurationSetEventDestinationInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		EventDestinationName: ptr.String("__EventDestinationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -233,7 +261,9 @@ func TestCheckResponseSnapshot_GetConfigurationSetEventDestinations(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConfigurationSetEventDestinations(context.Background(), &GetConfigurationSetEventDestinationsInput{})
+	got, err := svc.GetConfigurationSetEventDestinations(context.Background(), &GetConfigurationSetEventDestinationsInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -258,7 +288,10 @@ func TestCheckResponseSnapshot_ListConfigurationSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConfigurationSets(context.Background(), &ListConfigurationSetsInput{})
+	got, err := svc.ListConfigurationSets(context.Background(), &ListConfigurationSetsInput{
+		NextToken: ptr.String("__NextToken__"),
+		PageSize:  ptr.String("__PageSize__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -279,7 +312,27 @@ func TestCheckResponseSnapshot_SendVoiceMessage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendVoiceMessage(context.Background(), &SendVoiceMessageInput{})
+	got, err := svc.SendVoiceMessage(context.Background(), &SendVoiceMessageInput{
+		CallerId:             ptr.String("__CallerId__"),
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		Content: &types.VoiceMessageContent{
+			CallInstructionsMessage: &types.CallInstructionsMessageType{
+				Text: ptr.String("__Text__"),
+			},
+			PlainTextMessage: &types.PlainTextMessageType{
+				LanguageCode: ptr.String("__LanguageCode__"),
+				Text:         ptr.String("__Text__"),
+				VoiceId:      ptr.String("__VoiceId__"),
+			},
+			SSMLMessage: &types.SSMLMessageType{
+				LanguageCode: ptr.String("__LanguageCode__"),
+				Text:         ptr.String("__Text__"),
+				VoiceId:      ptr.String("__VoiceId__"),
+			},
+		},
+		DestinationPhoneNumber: ptr.String("__DestinationPhoneNumber__"),
+		OriginationPhoneNumber: ptr.String("__OriginationPhoneNumber__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -298,7 +351,28 @@ func TestCheckResponseSnapshot_UpdateConfigurationSetEventDestination(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateConfigurationSetEventDestination(context.Background(), &UpdateConfigurationSetEventDestinationInput{})
+	got, err := svc.UpdateConfigurationSetEventDestination(context.Background(), &UpdateConfigurationSetEventDestinationInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		EventDestination: &types.EventDestinationDefinition{
+			CloudWatchLogsDestination: &types.CloudWatchLogsDestination{
+				IamRoleArn:  ptr.String("__IamRoleArn__"),
+				LogGroupArn: ptr.String("__LogGroupArn__"),
+			},
+			Enabled: ptr.Bool(true),
+			KinesisFirehoseDestination: &types.KinesisFirehoseDestination{
+				DeliveryStreamArn: ptr.String("__DeliveryStreamArn__"),
+				IamRoleArn:        ptr.String("__IamRoleArn__"),
+			},
+			MatchingEventTypes: []types.EventType{
+				types.EventType("INITIATED_CALL"),
+				types.EventType("INITIATED_CALL"),
+			},
+			SnsDestination: &types.SnsDestination{
+				TopicArn: ptr.String("__TopicArn__"),
+			},
+		},
+		EventDestinationName: ptr.String("__EventDestinationName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -319,7 +393,9 @@ func TestCheckResponseSnapshot_Error_AlreadyExistsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConfigurationSet(context.Background(), &CreateConfigurationSetInput{})
+	_, opErr := svc.CreateConfigurationSet(context.Background(), &CreateConfigurationSetInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -344,7 +420,9 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConfigurationSet(context.Background(), &CreateConfigurationSetInput{})
+	_, opErr := svc.CreateConfigurationSet(context.Background(), &CreateConfigurationSetInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -369,7 +447,9 @@ func TestCheckResponseSnapshot_Error_InternalServiceErrorException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConfigurationSet(context.Background(), &CreateConfigurationSetInput{})
+	_, opErr := svc.CreateConfigurationSet(context.Background(), &CreateConfigurationSetInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -394,7 +474,9 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConfigurationSet(context.Background(), &CreateConfigurationSetInput{})
+	_, opErr := svc.CreateConfigurationSet(context.Background(), &CreateConfigurationSetInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -419,7 +501,28 @@ func TestCheckResponseSnapshot_Error_NotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConfigurationSetEventDestination(context.Background(), &CreateConfigurationSetEventDestinationInput{})
+	_, opErr := svc.CreateConfigurationSetEventDestination(context.Background(), &CreateConfigurationSetEventDestinationInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+		EventDestination: &types.EventDestinationDefinition{
+			CloudWatchLogsDestination: &types.CloudWatchLogsDestination{
+				IamRoleArn:  ptr.String("__IamRoleArn__"),
+				LogGroupArn: ptr.String("__LogGroupArn__"),
+			},
+			Enabled: ptr.Bool(true),
+			KinesisFirehoseDestination: &types.KinesisFirehoseDestination{
+				DeliveryStreamArn: ptr.String("__DeliveryStreamArn__"),
+				IamRoleArn:        ptr.String("__IamRoleArn__"),
+			},
+			MatchingEventTypes: []types.EventType{
+				types.EventType("INITIATED_CALL"),
+				types.EventType("INITIATED_CALL"),
+			},
+			SnsDestination: &types.SnsDestination{
+				TopicArn: ptr.String("__TopicArn__"),
+			},
+		},
+		EventDestinationName: ptr.String("__EventDestinationName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -444,7 +547,9 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateConfigurationSet(context.Background(), &CreateConfigurationSetInput{})
+	_, opErr := svc.CreateConfigurationSet(context.Background(), &CreateConfigurationSetInput{
+		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

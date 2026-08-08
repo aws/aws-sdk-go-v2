@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"applicationArn":"__ApplicationArn__","applicationId":"__ApplicationId__","attachmentsConfiguration":{"attachmentsControlMode":"ENABLED"},"autoSubscriptionConfiguration":{"autoSubscribe":"ENABLED","defaultSubscriptionType":"Q_LITE"},"clientIdsForOIDC":["__Member__","__Member__"],"createdAt":946684800,"description":"__Description__","displayName":"__DisplayName__","encryptionConfiguration":{"kmsKeyId":"__KmsKeyId__"},"error":{"errorCode":"InternalError","errorMessage":"__ErrorMessage__"},"iamIdentityProviderArn":"__IamIdentityProviderArn__","identityCenterApplicationArn":"__IdentityCenterApplicationArn__","identityType":"AWS_IAM_IDP_SAML","personalizationConfiguration":{"personalizationControlMode":"ENABLED"},"qAppsConfiguration":{"qAppsControlMode":"ENABLED"},"quickSightConfiguration":{"clientNamespace":"__ClientNamespace__"},"roleArn":"__RoleArn__","status":"CREATING","updatedAt":946684800}

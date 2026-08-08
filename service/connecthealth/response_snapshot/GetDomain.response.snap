@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","createdAt":946684800,"domainId":"__DomainId__","encryptionContext":{"encryptionType":"AWS_OWNED_KEY","kmsKeyArn":"__KmsKeyArn__"},"kmsKeyArn":"__KmsKeyArn__","name":"__Name__","status":"ACTIVE","tags":{"key0":"__Value__"},"webAppConfiguration":{"ehrRole":"__EhrRole__","idcApplicationId":"__IdcApplicationId__","idcRegion":"__IdcRegion__"},"webAppUrl":"__WebAppUrl__"}

@@ -117,7 +117,9 @@ func TestCheckResponseSnapshot_DeleteConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{})
+	got, err := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{
+		ConnectionId: ptr.String("__ConnectionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -143,7 +145,9 @@ func TestCheckResponseSnapshot_GetConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConnection(context.Background(), &GetConnectionInput{})
+	got, err := svc.GetConnection(context.Background(), &GetConnectionInput{
+		ConnectionId: ptr.String("__ConnectionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -162,7 +166,10 @@ func TestCheckResponseSnapshot_PostToConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PostToConnection(context.Background(), &PostToConnectionInput{})
+	got, err := svc.PostToConnection(context.Background(), &PostToConnectionInput{
+		Data:         []byte("blob"),
+		ConnectionId: ptr.String("__ConnectionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -181,7 +188,9 @@ func TestCheckResponseSnapshot_Error_ForbiddenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{})
+	_, opErr := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{
+		ConnectionId: ptr.String("__ConnectionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -204,7 +213,9 @@ func TestCheckResponseSnapshot_Error_GoneException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{})
+	_, opErr := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{
+		ConnectionId: ptr.String("__ConnectionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -227,7 +238,9 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{})
+	_, opErr := svc.DeleteConnection(context.Background(), &DeleteConnectionInput{
+		ConnectionId: ptr.String("__ConnectionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -252,7 +265,10 @@ func TestCheckResponseSnapshot_Error_PayloadTooLargeException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PostToConnection(context.Background(), &PostToConnectionInput{})
+	_, opErr := svc.PostToConnection(context.Background(), &PostToConnectionInput{
+		Data:         []byte("blob"),
+		ConnectionId: ptr.String("__ConnectionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

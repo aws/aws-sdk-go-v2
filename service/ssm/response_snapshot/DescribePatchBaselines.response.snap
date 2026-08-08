@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.DescribePatchBaselines
+
+{"BaselineIdentities":[{"BaselineDescription":"__BaselineDescription__","BaselineId":"__BaselineId__","BaselineName":"__BaselineName__","DefaultBaseline":true,"OperatingSystem":"WINDOWS"},{"BaselineDescription":"__BaselineDescription__","BaselineId":"__BaselineId__","BaselineName":"__BaselineName__","DefaultBaseline":true,"OperatingSystem":"WINDOWS"}],"NextToken":"__NextToken__"}

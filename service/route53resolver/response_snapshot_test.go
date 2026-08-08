@@ -132,7 +132,24 @@ func TestCheckResponseSnapshot_AssociateFirewallRuleGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateFirewallRuleGroup(context.Background(), &AssociateFirewallRuleGroupInput{})
+	got, err := svc.AssociateFirewallRuleGroup(context.Background(), &AssociateFirewallRuleGroupInput{
+		CreatorRequestId:    ptr.String("__CreatorRequestId__"),
+		FirewallRuleGroupId: ptr.String("__FirewallRuleGroupId__"),
+		VpcId:               ptr.String("__VpcId__"),
+		Priority:            ptr.Int32(1),
+		Name:                ptr.String("__Name__"),
+		MutationProtection:  types.MutationProtectionStatus("ENABLED"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -180,7 +197,15 @@ func TestCheckResponseSnapshot_AssociateResolverEndpointIpAddress(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateResolverEndpointIpAddress(context.Background(), &AssociateResolverEndpointIpAddressInput{})
+	got, err := svc.AssociateResolverEndpointIpAddress(context.Background(), &AssociateResolverEndpointIpAddressInput{
+		ResolverEndpointId: ptr.String("__ResolverEndpointId__"),
+		IpAddress: &types.IpAddressUpdate{
+			IpId:     ptr.String("__IpId__"),
+			SubnetId: ptr.String("__SubnetId__"),
+			Ip:       ptr.String("__Ip__"),
+			Ipv6:     ptr.String("__Ipv6__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -209,7 +234,10 @@ func TestCheckResponseSnapshot_AssociateResolverQueryLogConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateResolverQueryLogConfig(context.Background(), &AssociateResolverQueryLogConfigInput{})
+	got, err := svc.AssociateResolverQueryLogConfig(context.Background(), &AssociateResolverQueryLogConfigInput{
+		ResolverQueryLogConfigId: ptr.String("__ResolverQueryLogConfigId__"),
+		ResourceId:               ptr.String("__ResourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -237,7 +265,11 @@ func TestCheckResponseSnapshot_AssociateResolverRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateResolverRule(context.Background(), &AssociateResolverRuleInput{})
+	got, err := svc.AssociateResolverRule(context.Background(), &AssociateResolverRuleInput{
+		ResolverRuleId: ptr.String("__ResolverRuleId__"),
+		Name:           ptr.String("__Name__"),
+		VPCId:          ptr.String("__VPCId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -403,7 +435,72 @@ func TestCheckResponseSnapshot_BatchCreateFirewallRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchCreateFirewallRule(context.Background(), &BatchCreateFirewallRuleInput{})
+	got, err := svc.BatchCreateFirewallRule(context.Background(), &BatchCreateFirewallRuleInput{
+		CreateFirewallRuleEntries: []types.CreateFirewallRuleEntry{
+			{
+				CreatorRequestId:                ptr.String("__CreatorRequestId__"),
+				FirewallRuleGroupId:             ptr.String("__FirewallRuleGroupId__"),
+				FirewallDomainListId:            ptr.String("__FirewallDomainListId__"),
+				Priority:                        ptr.Int32(1),
+				Action:                          types.Action("ALLOW"),
+				BlockResponse:                   types.BlockResponse("NODATA"),
+				BlockOverrideDomain:             ptr.String("__BlockOverrideDomain__"),
+				BlockOverrideDnsType:            types.BlockOverrideDnsType("CNAME"),
+				BlockOverrideTtl:                ptr.Int32(1),
+				Name:                            ptr.String("__Name__"),
+				FirewallDomainRedirectionAction: types.FirewallDomainRedirectionAction("INSPECT_REDIRECTION_DOMAIN"),
+				Qtype:                           ptr.String("__Qtype__"),
+				DnsThreatProtection:             types.DnsThreatProtection("DGA"),
+				ConfidenceThreshold:             types.ConfidenceThreshold("LOW"),
+				FirewallRuleType: &types.FirewallRuleType{
+					PartnerThreatProtection: &types.PartnerThreatProtectionConfig{
+						Partner: ptr.String("__Partner__"),
+					},
+					FirewallAdvancedContentCategory: &types.FirewallAdvancedContentCategoryConfig{
+						Category: ptr.String("__Category__"),
+					},
+					FirewallAdvancedThreatCategory: &types.FirewallAdvancedThreatCategoryConfig{
+						Category: ptr.String("__Category__"),
+					},
+					DnsThreatProtection: &types.DnsThreatProtectionRuleTypeConfig{
+						Value:               ptr.String("__Value__"),
+						ConfidenceThreshold: types.ConfidenceThreshold("LOW"),
+					},
+				},
+			},
+			{
+				CreatorRequestId:                ptr.String("__CreatorRequestId__"),
+				FirewallRuleGroupId:             ptr.String("__FirewallRuleGroupId__"),
+				FirewallDomainListId:            ptr.String("__FirewallDomainListId__"),
+				Priority:                        ptr.Int32(1),
+				Action:                          types.Action("ALLOW"),
+				BlockResponse:                   types.BlockResponse("NODATA"),
+				BlockOverrideDomain:             ptr.String("__BlockOverrideDomain__"),
+				BlockOverrideDnsType:            types.BlockOverrideDnsType("CNAME"),
+				BlockOverrideTtl:                ptr.Int32(1),
+				Name:                            ptr.String("__Name__"),
+				FirewallDomainRedirectionAction: types.FirewallDomainRedirectionAction("INSPECT_REDIRECTION_DOMAIN"),
+				Qtype:                           ptr.String("__Qtype__"),
+				DnsThreatProtection:             types.DnsThreatProtection("DGA"),
+				ConfidenceThreshold:             types.ConfidenceThreshold("LOW"),
+				FirewallRuleType: &types.FirewallRuleType{
+					PartnerThreatProtection: &types.PartnerThreatProtectionConfig{
+						Partner: ptr.String("__Partner__"),
+					},
+					FirewallAdvancedContentCategory: &types.FirewallAdvancedContentCategoryConfig{
+						Category: ptr.String("__Category__"),
+					},
+					FirewallAdvancedThreatCategory: &types.FirewallAdvancedThreatCategoryConfig{
+						Category: ptr.String("__Category__"),
+					},
+					DnsThreatProtection: &types.DnsThreatProtectionRuleTypeConfig{
+						Value:               ptr.String("__Value__"),
+						ConfidenceThreshold: types.ConfidenceThreshold("LOW"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -519,7 +616,22 @@ func TestCheckResponseSnapshot_BatchDeleteFirewallRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDeleteFirewallRule(context.Background(), &BatchDeleteFirewallRuleInput{})
+	got, err := svc.BatchDeleteFirewallRule(context.Background(), &BatchDeleteFirewallRuleInput{
+		DeleteFirewallRuleEntries: []types.DeleteFirewallRuleEntry{
+			{
+				FirewallRuleGroupId:        ptr.String("__FirewallRuleGroupId__"),
+				FirewallDomainListId:       ptr.String("__FirewallDomainListId__"),
+				FirewallThreatProtectionId: ptr.String("__FirewallThreatProtectionId__"),
+				Qtype:                      ptr.String("__Qtype__"),
+			},
+			{
+				FirewallRuleGroupId:        ptr.String("__FirewallRuleGroupId__"),
+				FirewallDomainListId:       ptr.String("__FirewallDomainListId__"),
+				FirewallThreatProtectionId: ptr.String("__FirewallThreatProtectionId__"),
+				Qtype:                      ptr.String("__Qtype__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -685,7 +797,72 @@ func TestCheckResponseSnapshot_BatchUpdateFirewallRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchUpdateFirewallRule(context.Background(), &BatchUpdateFirewallRuleInput{})
+	got, err := svc.BatchUpdateFirewallRule(context.Background(), &BatchUpdateFirewallRuleInput{
+		UpdateFirewallRuleEntries: []types.UpdateFirewallRuleEntry{
+			{
+				FirewallRuleGroupId:             ptr.String("__FirewallRuleGroupId__"),
+				FirewallDomainListId:            ptr.String("__FirewallDomainListId__"),
+				FirewallThreatProtectionId:      ptr.String("__FirewallThreatProtectionId__"),
+				Priority:                        ptr.Int32(1),
+				Action:                          types.Action("ALLOW"),
+				BlockResponse:                   types.BlockResponse("NODATA"),
+				BlockOverrideDomain:             ptr.String("__BlockOverrideDomain__"),
+				BlockOverrideDnsType:            types.BlockOverrideDnsType("CNAME"),
+				BlockOverrideTtl:                ptr.Int32(1),
+				Name:                            ptr.String("__Name__"),
+				FirewallDomainRedirectionAction: types.FirewallDomainRedirectionAction("INSPECT_REDIRECTION_DOMAIN"),
+				Qtype:                           ptr.String("__Qtype__"),
+				DnsThreatProtection:             types.DnsThreatProtection("DGA"),
+				ConfidenceThreshold:             types.ConfidenceThreshold("LOW"),
+				FirewallRuleType: &types.FirewallRuleType{
+					PartnerThreatProtection: &types.PartnerThreatProtectionConfig{
+						Partner: ptr.String("__Partner__"),
+					},
+					FirewallAdvancedContentCategory: &types.FirewallAdvancedContentCategoryConfig{
+						Category: ptr.String("__Category__"),
+					},
+					FirewallAdvancedThreatCategory: &types.FirewallAdvancedThreatCategoryConfig{
+						Category: ptr.String("__Category__"),
+					},
+					DnsThreatProtection: &types.DnsThreatProtectionRuleTypeConfig{
+						Value:               ptr.String("__Value__"),
+						ConfidenceThreshold: types.ConfidenceThreshold("LOW"),
+					},
+				},
+			},
+			{
+				FirewallRuleGroupId:             ptr.String("__FirewallRuleGroupId__"),
+				FirewallDomainListId:            ptr.String("__FirewallDomainListId__"),
+				FirewallThreatProtectionId:      ptr.String("__FirewallThreatProtectionId__"),
+				Priority:                        ptr.Int32(1),
+				Action:                          types.Action("ALLOW"),
+				BlockResponse:                   types.BlockResponse("NODATA"),
+				BlockOverrideDomain:             ptr.String("__BlockOverrideDomain__"),
+				BlockOverrideDnsType:            types.BlockOverrideDnsType("CNAME"),
+				BlockOverrideTtl:                ptr.Int32(1),
+				Name:                            ptr.String("__Name__"),
+				FirewallDomainRedirectionAction: types.FirewallDomainRedirectionAction("INSPECT_REDIRECTION_DOMAIN"),
+				Qtype:                           ptr.String("__Qtype__"),
+				DnsThreatProtection:             types.DnsThreatProtection("DGA"),
+				ConfidenceThreshold:             types.ConfidenceThreshold("LOW"),
+				FirewallRuleType: &types.FirewallRuleType{
+					PartnerThreatProtection: &types.PartnerThreatProtectionConfig{
+						Partner: ptr.String("__Partner__"),
+					},
+					FirewallAdvancedContentCategory: &types.FirewallAdvancedContentCategoryConfig{
+						Category: ptr.String("__Category__"),
+					},
+					FirewallAdvancedThreatCategory: &types.FirewallAdvancedThreatCategoryConfig{
+						Category: ptr.String("__Category__"),
+					},
+					DnsThreatProtection: &types.DnsThreatProtectionRuleTypeConfig{
+						Value:               ptr.String("__Value__"),
+						ConfidenceThreshold: types.ConfidenceThreshold("LOW"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -719,7 +896,20 @@ func TestCheckResponseSnapshot_CreateFirewallDomainList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFirewallDomainList(context.Background(), &CreateFirewallDomainListInput{})
+	got, err := svc.CreateFirewallDomainList(context.Background(), &CreateFirewallDomainListInput{
+		CreatorRequestId: ptr.String("__CreatorRequestId__"),
+		Name:             ptr.String("__Name__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -775,7 +965,37 @@ func TestCheckResponseSnapshot_CreateFirewallRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFirewallRule(context.Background(), &CreateFirewallRuleInput{})
+	got, err := svc.CreateFirewallRule(context.Background(), &CreateFirewallRuleInput{
+		CreatorRequestId:                ptr.String("__CreatorRequestId__"),
+		FirewallRuleGroupId:             ptr.String("__FirewallRuleGroupId__"),
+		FirewallDomainListId:            ptr.String("__FirewallDomainListId__"),
+		Priority:                        ptr.Int32(1),
+		Action:                          types.Action("ALLOW"),
+		BlockResponse:                   types.BlockResponse("NODATA"),
+		BlockOverrideDomain:             ptr.String("__BlockOverrideDomain__"),
+		BlockOverrideDnsType:            types.BlockOverrideDnsType("CNAME"),
+		BlockOverrideTtl:                ptr.Int32(1),
+		Name:                            ptr.String("__Name__"),
+		FirewallDomainRedirectionAction: types.FirewallDomainRedirectionAction("INSPECT_REDIRECTION_DOMAIN"),
+		Qtype:                           ptr.String("__Qtype__"),
+		DnsThreatProtection:             types.DnsThreatProtection("DGA"),
+		ConfidenceThreshold:             types.ConfidenceThreshold("LOW"),
+		FirewallRuleType: &types.FirewallRuleType{
+			PartnerThreatProtection: &types.PartnerThreatProtectionConfig{
+				Partner: ptr.String("__Partner__"),
+			},
+			FirewallAdvancedContentCategory: &types.FirewallAdvancedContentCategoryConfig{
+				Category: ptr.String("__Category__"),
+			},
+			FirewallAdvancedThreatCategory: &types.FirewallAdvancedThreatCategoryConfig{
+				Category: ptr.String("__Category__"),
+			},
+			DnsThreatProtection: &types.DnsThreatProtectionRuleTypeConfig{
+				Value:               ptr.String("__Value__"),
+				ConfidenceThreshold: types.ConfidenceThreshold("LOW"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -808,7 +1028,20 @@ func TestCheckResponseSnapshot_CreateFirewallRuleGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFirewallRuleGroup(context.Background(), &CreateFirewallRuleGroupInput{})
+	got, err := svc.CreateFirewallRuleGroup(context.Background(), &CreateFirewallRuleGroupInput{
+		CreatorRequestId: ptr.String("__CreatorRequestId__"),
+		Name:             ptr.String("__Name__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -841,7 +1074,23 @@ func TestCheckResponseSnapshot_CreateOutpostResolver(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateOutpostResolver(context.Background(), &CreateOutpostResolverInput{})
+	got, err := svc.CreateOutpostResolver(context.Background(), &CreateOutpostResolverInput{
+		CreatorRequestId:      ptr.String("__CreatorRequestId__"),
+		Name:                  ptr.String("__Name__"),
+		InstanceCount:         ptr.Int32(1),
+		PreferredInstanceType: ptr.String("__PreferredInstanceType__"),
+		OutpostArn:            ptr.String("__OutpostArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -889,7 +1138,48 @@ func TestCheckResponseSnapshot_CreateResolverEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateResolverEndpoint(context.Background(), &CreateResolverEndpointInput{})
+	got, err := svc.CreateResolverEndpoint(context.Background(), &CreateResolverEndpointInput{
+		CreatorRequestId: ptr.String("__CreatorRequestId__"),
+		Name:             ptr.String("__Name__"),
+		SecurityGroupIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Direction: types.ResolverEndpointDirection("INBOUND"),
+		IpAddresses: []types.IpAddressRequest{
+			{
+				SubnetId: ptr.String("__SubnetId__"),
+				Ip:       ptr.String("__Ip__"),
+				Ipv6:     ptr.String("__Ipv6__"),
+			},
+			{
+				SubnetId: ptr.String("__SubnetId__"),
+				Ip:       ptr.String("__Ip__"),
+				Ipv6:     ptr.String("__Ipv6__"),
+			},
+		},
+		OutpostArn:            ptr.String("__OutpostArn__"),
+		PreferredInstanceType: ptr.String("__PreferredInstanceType__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ResolverEndpointType: types.ResolverEndpointType("IPV6"),
+		Protocols: []types.Protocol{
+			types.Protocol("DoH"),
+			types.Protocol("DoH"),
+		},
+		RniEnhancedMetricsEnabled:      ptr.Bool(true),
+		TargetNameServerMetricsEnabled: ptr.Bool(true),
+		Dns64Enabled:                   ptr.Bool(true),
+		Ipv6InternetAccessEnabled:      ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -921,7 +1211,21 @@ func TestCheckResponseSnapshot_CreateResolverQueryLogConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateResolverQueryLogConfig(context.Background(), &CreateResolverQueryLogConfigInput{})
+	got, err := svc.CreateResolverQueryLogConfig(context.Background(), &CreateResolverQueryLogConfigInput{
+		Name:             ptr.String("__Name__"),
+		DestinationArn:   ptr.String("__DestinationArn__"),
+		CreatorRequestId: ptr.String("__CreatorRequestId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -973,7 +1277,40 @@ func TestCheckResponseSnapshot_CreateResolverRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateResolverRule(context.Background(), &CreateResolverRuleInput{})
+	got, err := svc.CreateResolverRule(context.Background(), &CreateResolverRuleInput{
+		CreatorRequestId: ptr.String("__CreatorRequestId__"),
+		Name:             ptr.String("__Name__"),
+		RuleType:         types.RuleTypeOption("FORWARD"),
+		DomainName:       ptr.String("__DomainName__"),
+		TargetIps: []types.TargetAddress{
+			{
+				Ip:                   ptr.String("__Ip__"),
+				Port:                 ptr.Int32(1),
+				Ipv6:                 ptr.String("__Ipv6__"),
+				Protocol:             types.Protocol("DoH"),
+				ServerNameIndication: ptr.String("__ServerNameIndication__"),
+			},
+			{
+				Ip:                   ptr.String("__Ip__"),
+				Port:                 ptr.Int32(1),
+				Ipv6:                 ptr.String("__Ipv6__"),
+				Protocol:             types.Protocol("DoH"),
+				ServerNameIndication: ptr.String("__ServerNameIndication__"),
+			},
+		},
+		ResolverEndpointId: ptr.String("__ResolverEndpointId__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DelegationRecord: ptr.String("__DelegationRecord__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1007,7 +1344,9 @@ func TestCheckResponseSnapshot_DeleteFirewallDomainList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFirewallDomainList(context.Background(), &DeleteFirewallDomainListInput{})
+	got, err := svc.DeleteFirewallDomainList(context.Background(), &DeleteFirewallDomainListInput{
+		FirewallDomainListId: ptr.String("__FirewallDomainListId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1063,7 +1402,12 @@ func TestCheckResponseSnapshot_DeleteFirewallRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFirewallRule(context.Background(), &DeleteFirewallRuleInput{})
+	got, err := svc.DeleteFirewallRule(context.Background(), &DeleteFirewallRuleInput{
+		FirewallRuleGroupId:        ptr.String("__FirewallRuleGroupId__"),
+		FirewallDomainListId:       ptr.String("__FirewallDomainListId__"),
+		FirewallThreatProtectionId: ptr.String("__FirewallThreatProtectionId__"),
+		Qtype:                      ptr.String("__Qtype__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1096,7 +1440,9 @@ func TestCheckResponseSnapshot_DeleteFirewallRuleGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFirewallRuleGroup(context.Background(), &DeleteFirewallRuleGroupInput{})
+	got, err := svc.DeleteFirewallRuleGroup(context.Background(), &DeleteFirewallRuleGroupInput{
+		FirewallRuleGroupId: ptr.String("__FirewallRuleGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1129,7 +1475,9 @@ func TestCheckResponseSnapshot_DeleteOutpostResolver(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteOutpostResolver(context.Background(), &DeleteOutpostResolverInput{})
+	got, err := svc.DeleteOutpostResolver(context.Background(), &DeleteOutpostResolverInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1177,7 +1525,9 @@ func TestCheckResponseSnapshot_DeleteResolverEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResolverEndpoint(context.Background(), &DeleteResolverEndpointInput{})
+	got, err := svc.DeleteResolverEndpoint(context.Background(), &DeleteResolverEndpointInput{
+		ResolverEndpointId: ptr.String("__ResolverEndpointId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1209,7 +1559,9 @@ func TestCheckResponseSnapshot_DeleteResolverQueryLogConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResolverQueryLogConfig(context.Background(), &DeleteResolverQueryLogConfigInput{})
+	got, err := svc.DeleteResolverQueryLogConfig(context.Background(), &DeleteResolverQueryLogConfigInput{
+		ResolverQueryLogConfigId: ptr.String("__ResolverQueryLogConfigId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1261,7 +1613,9 @@ func TestCheckResponseSnapshot_DeleteResolverRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteResolverRule(context.Background(), &DeleteResolverRuleInput{})
+	got, err := svc.DeleteResolverRule(context.Background(), &DeleteResolverRuleInput{
+		ResolverRuleId: ptr.String("__ResolverRuleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1296,7 +1650,9 @@ func TestCheckResponseSnapshot_DisassociateFirewallRuleGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateFirewallRuleGroup(context.Background(), &DisassociateFirewallRuleGroupInput{})
+	got, err := svc.DisassociateFirewallRuleGroup(context.Background(), &DisassociateFirewallRuleGroupInput{
+		FirewallRuleGroupAssociationId: ptr.String("__FirewallRuleGroupAssociationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1344,7 +1700,15 @@ func TestCheckResponseSnapshot_DisassociateResolverEndpointIpAddress(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateResolverEndpointIpAddress(context.Background(), &DisassociateResolverEndpointIpAddressInput{})
+	got, err := svc.DisassociateResolverEndpointIpAddress(context.Background(), &DisassociateResolverEndpointIpAddressInput{
+		ResolverEndpointId: ptr.String("__ResolverEndpointId__"),
+		IpAddress: &types.IpAddressUpdate{
+			IpId:     ptr.String("__IpId__"),
+			SubnetId: ptr.String("__SubnetId__"),
+			Ip:       ptr.String("__Ip__"),
+			Ipv6:     ptr.String("__Ipv6__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1373,7 +1737,10 @@ func TestCheckResponseSnapshot_DisassociateResolverQueryLogConfig(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateResolverQueryLogConfig(context.Background(), &DisassociateResolverQueryLogConfigInput{})
+	got, err := svc.DisassociateResolverQueryLogConfig(context.Background(), &DisassociateResolverQueryLogConfigInput{
+		ResolverQueryLogConfigId: ptr.String("__ResolverQueryLogConfigId__"),
+		ResourceId:               ptr.String("__ResourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1401,7 +1768,10 @@ func TestCheckResponseSnapshot_DisassociateResolverRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DisassociateResolverRule(context.Background(), &DisassociateResolverRuleInput{})
+	got, err := svc.DisassociateResolverRule(context.Background(), &DisassociateResolverRuleInput{
+		VPCId:          ptr.String("__VPCId__"),
+		ResolverRuleId: ptr.String("__ResolverRuleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1427,7 +1797,9 @@ func TestCheckResponseSnapshot_GetFirewallConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFirewallConfig(context.Background(), &GetFirewallConfigInput{})
+	got, err := svc.GetFirewallConfig(context.Background(), &GetFirewallConfigInput{
+		ResourceId: ptr.String("__ResourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1461,7 +1833,9 @@ func TestCheckResponseSnapshot_GetFirewallDomainList(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFirewallDomainList(context.Background(), &GetFirewallDomainListInput{})
+	got, err := svc.GetFirewallDomainList(context.Background(), &GetFirewallDomainListInput{
+		FirewallDomainListId: ptr.String("__FirewallDomainListId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1494,7 +1868,9 @@ func TestCheckResponseSnapshot_GetFirewallRuleGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFirewallRuleGroup(context.Background(), &GetFirewallRuleGroupInput{})
+	got, err := svc.GetFirewallRuleGroup(context.Background(), &GetFirewallRuleGroupInput{
+		FirewallRuleGroupId: ptr.String("__FirewallRuleGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1529,7 +1905,9 @@ func TestCheckResponseSnapshot_GetFirewallRuleGroupAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFirewallRuleGroupAssociation(context.Background(), &GetFirewallRuleGroupAssociationInput{})
+	got, err := svc.GetFirewallRuleGroupAssociation(context.Background(), &GetFirewallRuleGroupAssociationInput{
+		FirewallRuleGroupAssociationId: ptr.String("__FirewallRuleGroupAssociationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1550,7 +1928,9 @@ func TestCheckResponseSnapshot_GetFirewallRuleGroupPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFirewallRuleGroupPolicy(context.Background(), &GetFirewallRuleGroupPolicyInput{})
+	got, err := svc.GetFirewallRuleGroupPolicy(context.Background(), &GetFirewallRuleGroupPolicyInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1583,7 +1963,9 @@ func TestCheckResponseSnapshot_GetOutpostResolver(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetOutpostResolver(context.Background(), &GetOutpostResolverInput{})
+	got, err := svc.GetOutpostResolver(context.Background(), &GetOutpostResolverInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1609,7 +1991,9 @@ func TestCheckResponseSnapshot_GetResolverConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResolverConfig(context.Background(), &GetResolverConfigInput{})
+	got, err := svc.GetResolverConfig(context.Background(), &GetResolverConfigInput{
+		ResourceId: ptr.String("__ResourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1635,7 +2019,9 @@ func TestCheckResponseSnapshot_GetResolverDnssecConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResolverDnssecConfig(context.Background(), &GetResolverDnssecConfigInput{})
+	got, err := svc.GetResolverDnssecConfig(context.Background(), &GetResolverDnssecConfigInput{
+		ResourceId: ptr.String("__ResourceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1683,7 +2069,9 @@ func TestCheckResponseSnapshot_GetResolverEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResolverEndpoint(context.Background(), &GetResolverEndpointInput{})
+	got, err := svc.GetResolverEndpoint(context.Background(), &GetResolverEndpointInput{
+		ResolverEndpointId: ptr.String("__ResolverEndpointId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1715,7 +2103,9 @@ func TestCheckResponseSnapshot_GetResolverQueryLogConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResolverQueryLogConfig(context.Background(), &GetResolverQueryLogConfigInput{})
+	got, err := svc.GetResolverQueryLogConfig(context.Background(), &GetResolverQueryLogConfigInput{
+		ResolverQueryLogConfigId: ptr.String("__ResolverQueryLogConfigId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1744,7 +2134,9 @@ func TestCheckResponseSnapshot_GetResolverQueryLogConfigAssociation(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResolverQueryLogConfigAssociation(context.Background(), &GetResolverQueryLogConfigAssociationInput{})
+	got, err := svc.GetResolverQueryLogConfigAssociation(context.Background(), &GetResolverQueryLogConfigAssociationInput{
+		ResolverQueryLogConfigAssociationId: ptr.String("__ResolverQueryLogConfigAssociationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1765,7 +2157,9 @@ func TestCheckResponseSnapshot_GetResolverQueryLogConfigPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResolverQueryLogConfigPolicy(context.Background(), &GetResolverQueryLogConfigPolicyInput{})
+	got, err := svc.GetResolverQueryLogConfigPolicy(context.Background(), &GetResolverQueryLogConfigPolicyInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1817,7 +2211,9 @@ func TestCheckResponseSnapshot_GetResolverRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResolverRule(context.Background(), &GetResolverRuleInput{})
+	got, err := svc.GetResolverRule(context.Background(), &GetResolverRuleInput{
+		ResolverRuleId: ptr.String("__ResolverRuleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1845,7 +2241,9 @@ func TestCheckResponseSnapshot_GetResolverRuleAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResolverRuleAssociation(context.Background(), &GetResolverRuleAssociationInput{})
+	got, err := svc.GetResolverRuleAssociation(context.Background(), &GetResolverRuleAssociationInput{
+		ResolverRuleAssociationId: ptr.String("__ResolverRuleAssociationId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1866,7 +2264,9 @@ func TestCheckResponseSnapshot_GetResolverRulePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetResolverRulePolicy(context.Background(), &GetResolverRulePolicyInput{})
+	got, err := svc.GetResolverRulePolicy(context.Background(), &GetResolverRulePolicyInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1890,7 +2290,11 @@ func TestCheckResponseSnapshot_ImportFirewallDomains(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ImportFirewallDomains(context.Background(), &ImportFirewallDomainsInput{})
+	got, err := svc.ImportFirewallDomains(context.Background(), &ImportFirewallDomainsInput{
+		FirewallDomainListId: ptr.String("__FirewallDomainListId__"),
+		Operation:            types.FirewallDomainImportOperation("REPLACE"),
+		DomainFileUrl:        ptr.String("__DomainFileUrl__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1925,7 +2329,10 @@ func TestCheckResponseSnapshot_ListFirewallConfigs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFirewallConfigs(context.Background(), &ListFirewallConfigsInput{})
+	got, err := svc.ListFirewallConfigs(context.Background(), &ListFirewallConfigsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1966,7 +2373,10 @@ func TestCheckResponseSnapshot_ListFirewallDomainLists(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFirewallDomainLists(context.Background(), &ListFirewallDomainListsInput{})
+	got, err := svc.ListFirewallDomainLists(context.Background(), &ListFirewallDomainListsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1991,7 +2401,11 @@ func TestCheckResponseSnapshot_ListFirewallDomains(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFirewallDomains(context.Background(), &ListFirewallDomainsInput{})
+	got, err := svc.ListFirewallDomains(context.Background(), &ListFirewallDomainsInput{
+		FirewallDomainListId: ptr.String("__FirewallDomainListId__"),
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2044,7 +2458,14 @@ func TestCheckResponseSnapshot_ListFirewallRuleGroupAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFirewallRuleGroupAssociations(context.Background(), &ListFirewallRuleGroupAssociationsInput{})
+	got, err := svc.ListFirewallRuleGroupAssociations(context.Background(), &ListFirewallRuleGroupAssociationsInput{
+		FirewallRuleGroupId: ptr.String("__FirewallRuleGroupId__"),
+		VpcId:               ptr.String("__VpcId__"),
+		Priority:            ptr.Int32(1),
+		Status:              types.FirewallRuleGroupAssociationStatus("COMPLETE"),
+		MaxResults:          ptr.Int32(1),
+		NextToken:           ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2083,7 +2504,10 @@ func TestCheckResponseSnapshot_ListFirewallRuleGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFirewallRuleGroups(context.Background(), &ListFirewallRuleGroupsInput{})
+	got, err := svc.ListFirewallRuleGroups(context.Background(), &ListFirewallRuleGroupsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2126,7 +2550,11 @@ func TestCheckResponseSnapshot_ListFirewallRuleTypes(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFirewallRuleTypes(context.Background(), &ListFirewallRuleTypesInput{})
+	got, err := svc.ListFirewallRuleTypes(context.Background(), &ListFirewallRuleTypesInput{
+		RuleType:   ptr.String("__RuleType__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2221,7 +2649,13 @@ func TestCheckResponseSnapshot_ListFirewallRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFirewallRules(context.Background(), &ListFirewallRulesInput{})
+	got, err := svc.ListFirewallRules(context.Background(), &ListFirewallRulesInput{
+		FirewallRuleGroupId: ptr.String("__FirewallRuleGroupId__"),
+		Priority:            ptr.Int32(1),
+		Action:              types.Action("ALLOW"),
+		MaxResults:          ptr.Int32(1),
+		NextToken:           ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2270,7 +2704,11 @@ func TestCheckResponseSnapshot_ListOutpostResolvers(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListOutpostResolvers(context.Background(), &ListOutpostResolversInput{})
+	got, err := svc.ListOutpostResolvers(context.Background(), &ListOutpostResolversInput{
+		OutpostArn: ptr.String("__OutpostArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2305,7 +2743,10 @@ func TestCheckResponseSnapshot_ListResolverConfigs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResolverConfigs(context.Background(), &ListResolverConfigsInput{})
+	got, err := svc.ListResolverConfigs(context.Background(), &ListResolverConfigsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2340,7 +2781,26 @@ func TestCheckResponseSnapshot_ListResolverDnssecConfigs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResolverDnssecConfigs(context.Background(), &ListResolverDnssecConfigsInput{})
+	got, err := svc.ListResolverDnssecConfigs(context.Background(), &ListResolverDnssecConfigsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2384,7 +2844,11 @@ func TestCheckResponseSnapshot_ListResolverEndpointIpAddresses(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResolverEndpointIpAddresses(context.Background(), &ListResolverEndpointIpAddressesInput{})
+	got, err := svc.ListResolverEndpointIpAddresses(context.Background(), &ListResolverEndpointIpAddressesInput{
+		ResolverEndpointId: ptr.String("__ResolverEndpointId__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2464,7 +2928,26 @@ func TestCheckResponseSnapshot_ListResolverEndpoints(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResolverEndpoints(context.Background(), &ListResolverEndpointsInput{})
+	got, err := svc.ListResolverEndpoints(context.Background(), &ListResolverEndpointsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2507,7 +2990,28 @@ func TestCheckResponseSnapshot_ListResolverQueryLogConfigAssociations(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResolverQueryLogConfigAssociations(context.Background(), &ListResolverQueryLogConfigAssociationsInput{})
+	got, err := svc.ListResolverQueryLogConfigAssociations(context.Background(), &ListResolverQueryLogConfigAssociationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		SortBy:    ptr.String("__SortBy__"),
+		SortOrder: types.SortOrder("ASCENDING"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2556,7 +3060,28 @@ func TestCheckResponseSnapshot_ListResolverQueryLogConfigs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResolverQueryLogConfigs(context.Background(), &ListResolverQueryLogConfigsInput{})
+	got, err := svc.ListResolverQueryLogConfigs(context.Background(), &ListResolverQueryLogConfigsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		SortBy:    ptr.String("__SortBy__"),
+		SortOrder: types.SortOrder("ASCENDING"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2596,7 +3121,26 @@ func TestCheckResponseSnapshot_ListResolverRuleAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResolverRuleAssociations(context.Background(), &ListResolverRuleAssociationsInput{})
+	got, err := svc.ListResolverRuleAssociations(context.Background(), &ListResolverRuleAssociationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2684,7 +3228,26 @@ func TestCheckResponseSnapshot_ListResolverRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListResolverRules(context.Background(), &ListResolverRulesInput{})
+	got, err := svc.ListResolverRules(context.Background(), &ListResolverRulesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2715,7 +3278,11 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2736,7 +3303,10 @@ func TestCheckResponseSnapshot_PutFirewallRuleGroupPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutFirewallRuleGroupPolicy(context.Background(), &PutFirewallRuleGroupPolicyInput{})
+	got, err := svc.PutFirewallRuleGroupPolicy(context.Background(), &PutFirewallRuleGroupPolicyInput{
+		Arn:                     ptr.String("__Arn__"),
+		FirewallRuleGroupPolicy: ptr.String("__FirewallRuleGroupPolicy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2757,7 +3327,10 @@ func TestCheckResponseSnapshot_PutResolverQueryLogConfigPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResolverQueryLogConfigPolicy(context.Background(), &PutResolverQueryLogConfigPolicyInput{})
+	got, err := svc.PutResolverQueryLogConfigPolicy(context.Background(), &PutResolverQueryLogConfigPolicyInput{
+		Arn:                          ptr.String("__Arn__"),
+		ResolverQueryLogConfigPolicy: ptr.String("__ResolverQueryLogConfigPolicy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2778,7 +3351,10 @@ func TestCheckResponseSnapshot_PutResolverRulePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutResolverRulePolicy(context.Background(), &PutResolverRulePolicyInput{})
+	got, err := svc.PutResolverRulePolicy(context.Background(), &PutResolverRulePolicyInput{
+		Arn:                ptr.String("__Arn__"),
+		ResolverRulePolicy: ptr.String("__ResolverRulePolicy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2797,7 +3373,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2816,7 +3404,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2842,7 +3436,10 @@ func TestCheckResponseSnapshot_UpdateFirewallConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFirewallConfig(context.Background(), &UpdateFirewallConfigInput{})
+	got, err := svc.UpdateFirewallConfig(context.Background(), &UpdateFirewallConfigInput{
+		ResourceId:       ptr.String("__ResourceId__"),
+		FirewallFailOpen: types.FirewallFailOpenStatus("ENABLED"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2866,7 +3463,14 @@ func TestCheckResponseSnapshot_UpdateFirewallDomains(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFirewallDomains(context.Background(), &UpdateFirewallDomainsInput{})
+	got, err := svc.UpdateFirewallDomains(context.Background(), &UpdateFirewallDomainsInput{
+		FirewallDomainListId: ptr.String("__FirewallDomainListId__"),
+		Operation:            types.FirewallDomainUpdateOperation("ADD"),
+		Domains: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2922,7 +3526,37 @@ func TestCheckResponseSnapshot_UpdateFirewallRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFirewallRule(context.Background(), &UpdateFirewallRuleInput{})
+	got, err := svc.UpdateFirewallRule(context.Background(), &UpdateFirewallRuleInput{
+		FirewallRuleGroupId:             ptr.String("__FirewallRuleGroupId__"),
+		FirewallDomainListId:            ptr.String("__FirewallDomainListId__"),
+		FirewallThreatProtectionId:      ptr.String("__FirewallThreatProtectionId__"),
+		Priority:                        ptr.Int32(1),
+		Action:                          types.Action("ALLOW"),
+		BlockResponse:                   types.BlockResponse("NODATA"),
+		BlockOverrideDomain:             ptr.String("__BlockOverrideDomain__"),
+		BlockOverrideDnsType:            types.BlockOverrideDnsType("CNAME"),
+		BlockOverrideTtl:                ptr.Int32(1),
+		Name:                            ptr.String("__Name__"),
+		FirewallDomainRedirectionAction: types.FirewallDomainRedirectionAction("INSPECT_REDIRECTION_DOMAIN"),
+		Qtype:                           ptr.String("__Qtype__"),
+		DnsThreatProtection:             types.DnsThreatProtection("DGA"),
+		ConfidenceThreshold:             types.ConfidenceThreshold("LOW"),
+		FirewallRuleType: &types.FirewallRuleType{
+			PartnerThreatProtection: &types.PartnerThreatProtectionConfig{
+				Partner: ptr.String("__Partner__"),
+			},
+			FirewallAdvancedContentCategory: &types.FirewallAdvancedContentCategoryConfig{
+				Category: ptr.String("__Category__"),
+			},
+			FirewallAdvancedThreatCategory: &types.FirewallAdvancedThreatCategoryConfig{
+				Category: ptr.String("__Category__"),
+			},
+			DnsThreatProtection: &types.DnsThreatProtectionRuleTypeConfig{
+				Value:               ptr.String("__Value__"),
+				ConfidenceThreshold: types.ConfidenceThreshold("LOW"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2957,7 +3591,12 @@ func TestCheckResponseSnapshot_UpdateFirewallRuleGroupAssociation(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFirewallRuleGroupAssociation(context.Background(), &UpdateFirewallRuleGroupAssociationInput{})
+	got, err := svc.UpdateFirewallRuleGroupAssociation(context.Background(), &UpdateFirewallRuleGroupAssociationInput{
+		FirewallRuleGroupAssociationId: ptr.String("__FirewallRuleGroupAssociationId__"),
+		Priority:                       ptr.Int32(1),
+		MutationProtection:             types.MutationProtectionStatus("ENABLED"),
+		Name:                           ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2990,7 +3629,12 @@ func TestCheckResponseSnapshot_UpdateOutpostResolver(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateOutpostResolver(context.Background(), &UpdateOutpostResolverInput{})
+	got, err := svc.UpdateOutpostResolver(context.Background(), &UpdateOutpostResolverInput{
+		Id:                    ptr.String("__Id__"),
+		Name:                  ptr.String("__Name__"),
+		InstanceCount:         ptr.Int32(1),
+		PreferredInstanceType: ptr.String("__PreferredInstanceType__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3016,7 +3660,10 @@ func TestCheckResponseSnapshot_UpdateResolverConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateResolverConfig(context.Background(), &UpdateResolverConfigInput{})
+	got, err := svc.UpdateResolverConfig(context.Background(), &UpdateResolverConfigInput{
+		ResourceId:             ptr.String("__ResourceId__"),
+		AutodefinedReverseFlag: types.AutodefinedReverseFlag("ENABLE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3042,7 +3689,10 @@ func TestCheckResponseSnapshot_UpdateResolverDnssecConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateResolverDnssecConfig(context.Background(), &UpdateResolverDnssecConfigInput{})
+	got, err := svc.UpdateResolverDnssecConfig(context.Background(), &UpdateResolverDnssecConfigInput{
+		ResourceId: ptr.String("__ResourceId__"),
+		Validation: types.Validation("ENABLE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3090,7 +3740,29 @@ func TestCheckResponseSnapshot_UpdateResolverEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateResolverEndpoint(context.Background(), &UpdateResolverEndpointInput{})
+	got, err := svc.UpdateResolverEndpoint(context.Background(), &UpdateResolverEndpointInput{
+		ResolverEndpointId:   ptr.String("__ResolverEndpointId__"),
+		Name:                 ptr.String("__Name__"),
+		ResolverEndpointType: types.ResolverEndpointType("IPV6"),
+		UpdateIpAddresses: []types.UpdateIpAddress{
+			{
+				IpId: ptr.String("__IpId__"),
+				Ipv6: ptr.String("__Ipv6__"),
+			},
+			{
+				IpId: ptr.String("__IpId__"),
+				Ipv6: ptr.String("__Ipv6__"),
+			},
+		},
+		Protocols: []types.Protocol{
+			types.Protocol("DoH"),
+			types.Protocol("DoH"),
+		},
+		RniEnhancedMetricsEnabled:      ptr.Bool(true),
+		TargetNameServerMetricsEnabled: ptr.Bool(true),
+		Dns64Enabled:                   ptr.Bool(true),
+		Ipv6InternetAccessEnabled:      ptr.Bool(true),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3142,7 +3814,29 @@ func TestCheckResponseSnapshot_UpdateResolverRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateResolverRule(context.Background(), &UpdateResolverRuleInput{})
+	got, err := svc.UpdateResolverRule(context.Background(), &UpdateResolverRuleInput{
+		ResolverRuleId: ptr.String("__ResolverRuleId__"),
+		Config: &types.ResolverRuleConfig{
+			Name: ptr.String("__Name__"),
+			TargetIps: []types.TargetAddress{
+				{
+					Ip:                   ptr.String("__Ip__"),
+					Port:                 ptr.Int32(1),
+					Ipv6:                 ptr.String("__Ipv6__"),
+					Protocol:             types.Protocol("DoH"),
+					ServerNameIndication: ptr.String("__ServerNameIndication__"),
+				},
+				{
+					Ip:                   ptr.String("__Ip__"),
+					Port:                 ptr.Int32(1),
+					Ipv6:                 ptr.String("__Ipv6__"),
+					Protocol:             types.Protocol("DoH"),
+					ServerNameIndication: ptr.String("__ServerNameIndication__"),
+				},
+			},
+			ResolverEndpointId: ptr.String("__ResolverEndpointId__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3163,7 +3857,24 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFirewallRuleGroup(context.Background(), &AssociateFirewallRuleGroupInput{})
+	_, opErr := svc.AssociateFirewallRuleGroup(context.Background(), &AssociateFirewallRuleGroupInput{
+		CreatorRequestId:    ptr.String("__CreatorRequestId__"),
+		FirewallRuleGroupId: ptr.String("__FirewallRuleGroupId__"),
+		VpcId:               ptr.String("__VpcId__"),
+		Priority:            ptr.Int32(1),
+		Name:                ptr.String("__Name__"),
+		MutationProtection:  types.MutationProtectionStatus("ENABLED"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3188,7 +3899,24 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFirewallRuleGroup(context.Background(), &AssociateFirewallRuleGroupInput{})
+	_, opErr := svc.AssociateFirewallRuleGroup(context.Background(), &AssociateFirewallRuleGroupInput{
+		CreatorRequestId:    ptr.String("__CreatorRequestId__"),
+		FirewallRuleGroupId: ptr.String("__FirewallRuleGroupId__"),
+		VpcId:               ptr.String("__VpcId__"),
+		Priority:            ptr.Int32(1),
+		Name:                ptr.String("__Name__"),
+		MutationProtection:  types.MutationProtectionStatus("ENABLED"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3213,7 +3941,24 @@ func TestCheckResponseSnapshot_Error_InternalServiceErrorException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFirewallRuleGroup(context.Background(), &AssociateFirewallRuleGroupInput{})
+	_, opErr := svc.AssociateFirewallRuleGroup(context.Background(), &AssociateFirewallRuleGroupInput{
+		CreatorRequestId:    ptr.String("__CreatorRequestId__"),
+		FirewallRuleGroupId: ptr.String("__FirewallRuleGroupId__"),
+		VpcId:               ptr.String("__VpcId__"),
+		Priority:            ptr.Int32(1),
+		Name:                ptr.String("__Name__"),
+		MutationProtection:  types.MutationProtectionStatus("ENABLED"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3238,7 +3983,10 @@ func TestCheckResponseSnapshot_Error_InvalidNextTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListResolverConfigs(context.Background(), &ListResolverConfigsInput{})
+	_, opErr := svc.ListResolverConfigs(context.Background(), &ListResolverConfigsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3264,7 +4012,15 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateResolverEndpointIpAddress(context.Background(), &AssociateResolverEndpointIpAddressInput{})
+	_, opErr := svc.AssociateResolverEndpointIpAddress(context.Background(), &AssociateResolverEndpointIpAddressInput{
+		ResolverEndpointId: ptr.String("__ResolverEndpointId__"),
+		IpAddress: &types.IpAddressUpdate{
+			IpId:     ptr.String("__IpId__"),
+			SubnetId: ptr.String("__SubnetId__"),
+			Ip:       ptr.String("__Ip__"),
+			Ipv6:     ptr.String("__Ipv6__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3289,7 +4045,10 @@ func TestCheckResponseSnapshot_Error_InvalidPolicyDocument(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutResolverQueryLogConfigPolicy(context.Background(), &PutResolverQueryLogConfigPolicyInput{})
+	_, opErr := svc.PutResolverQueryLogConfigPolicy(context.Background(), &PutResolverQueryLogConfigPolicyInput{
+		Arn:                          ptr.String("__Arn__"),
+		ResolverQueryLogConfigPolicy: ptr.String("__ResolverQueryLogConfigPolicy__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3314,7 +4073,15 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateResolverEndpointIpAddress(context.Background(), &AssociateResolverEndpointIpAddressInput{})
+	_, opErr := svc.AssociateResolverEndpointIpAddress(context.Background(), &AssociateResolverEndpointIpAddressInput{
+		ResolverEndpointId: ptr.String("__ResolverEndpointId__"),
+		IpAddress: &types.IpAddressUpdate{
+			IpId:     ptr.String("__IpId__"),
+			SubnetId: ptr.String("__SubnetId__"),
+			Ip:       ptr.String("__Ip__"),
+			Ipv6:     ptr.String("__Ipv6__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3339,7 +4106,19 @@ func TestCheckResponseSnapshot_Error_InvalidTagException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{})
+	_, opErr := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3365,7 +4144,24 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFirewallRuleGroup(context.Background(), &AssociateFirewallRuleGroupInput{})
+	_, opErr := svc.AssociateFirewallRuleGroup(context.Background(), &AssociateFirewallRuleGroupInput{
+		CreatorRequestId:    ptr.String("__CreatorRequestId__"),
+		FirewallRuleGroupId: ptr.String("__FirewallRuleGroupId__"),
+		VpcId:               ptr.String("__VpcId__"),
+		Priority:            ptr.Int32(1),
+		Name:                ptr.String("__Name__"),
+		MutationProtection:  types.MutationProtectionStatus("ENABLED"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3391,7 +4187,15 @@ func TestCheckResponseSnapshot_Error_ResourceExistsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateResolverEndpointIpAddress(context.Background(), &AssociateResolverEndpointIpAddressInput{})
+	_, opErr := svc.AssociateResolverEndpointIpAddress(context.Background(), &AssociateResolverEndpointIpAddressInput{
+		ResolverEndpointId: ptr.String("__ResolverEndpointId__"),
+		IpAddress: &types.IpAddressUpdate{
+			IpId:     ptr.String("__IpId__"),
+			SubnetId: ptr.String("__SubnetId__"),
+			Ip:       ptr.String("__Ip__"),
+			Ipv6:     ptr.String("__Ipv6__"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3417,7 +4221,9 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteResolverRule(context.Background(), &DeleteResolverRuleInput{})
+	_, opErr := svc.DeleteResolverRule(context.Background(), &DeleteResolverRuleInput{
+		ResolverRuleId: ptr.String("__ResolverRuleId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3443,7 +4249,24 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFirewallRuleGroup(context.Background(), &AssociateFirewallRuleGroupInput{})
+	_, opErr := svc.AssociateFirewallRuleGroup(context.Background(), &AssociateFirewallRuleGroupInput{
+		CreatorRequestId:    ptr.String("__CreatorRequestId__"),
+		FirewallRuleGroupId: ptr.String("__FirewallRuleGroupId__"),
+		VpcId:               ptr.String("__VpcId__"),
+		Priority:            ptr.Int32(1),
+		Name:                ptr.String("__Name__"),
+		MutationProtection:  types.MutationProtectionStatus("ENABLED"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3469,7 +4292,11 @@ func TestCheckResponseSnapshot_Error_ResourceUnavailableException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateResolverRule(context.Background(), &AssociateResolverRuleInput{})
+	_, opErr := svc.AssociateResolverRule(context.Background(), &AssociateResolverRuleInput{
+		ResolverRuleId: ptr.String("__ResolverRuleId__"),
+		Name:           ptr.String("__Name__"),
+		VPCId:          ptr.String("__VPCId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3494,7 +4321,23 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateOutpostResolver(context.Background(), &CreateOutpostResolverInput{})
+	_, opErr := svc.CreateOutpostResolver(context.Background(), &CreateOutpostResolverInput{
+		CreatorRequestId:      ptr.String("__CreatorRequestId__"),
+		Name:                  ptr.String("__Name__"),
+		InstanceCount:         ptr.Int32(1),
+		PreferredInstanceType: ptr.String("__PreferredInstanceType__"),
+		OutpostArn:            ptr.String("__OutpostArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3519,7 +4362,24 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFirewallRuleGroup(context.Background(), &AssociateFirewallRuleGroupInput{})
+	_, opErr := svc.AssociateFirewallRuleGroup(context.Background(), &AssociateFirewallRuleGroupInput{
+		CreatorRequestId:    ptr.String("__CreatorRequestId__"),
+		FirewallRuleGroupId: ptr.String("__FirewallRuleGroupId__"),
+		VpcId:               ptr.String("__VpcId__"),
+		Priority:            ptr.Int32(1),
+		Name:                ptr.String("__Name__"),
+		MutationProtection:  types.MutationProtectionStatus("ENABLED"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3544,7 +4404,9 @@ func TestCheckResponseSnapshot_Error_UnknownResourceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetResolverQueryLogConfigPolicy(context.Background(), &GetResolverQueryLogConfigPolicyInput{})
+	_, opErr := svc.GetResolverQueryLogConfigPolicy(context.Background(), &GetResolverQueryLogConfigPolicyInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3569,7 +4431,24 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateFirewallRuleGroup(context.Background(), &AssociateFirewallRuleGroupInput{})
+	_, opErr := svc.AssociateFirewallRuleGroup(context.Background(), &AssociateFirewallRuleGroupInput{
+		CreatorRequestId:    ptr.String("__CreatorRequestId__"),
+		FirewallRuleGroupId: ptr.String("__FirewallRuleGroupId__"),
+		VpcId:               ptr.String("__VpcId__"),
+		Priority:            ptr.Int32(1),
+		Name:                ptr.String("__Name__"),
+		MutationProtection:  types.MutationProtectionStatus("ENABLED"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

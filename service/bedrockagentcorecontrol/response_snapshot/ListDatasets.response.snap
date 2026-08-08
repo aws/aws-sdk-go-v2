@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"datasets":[{"createdAt":946684800,"datasetArn":"__DatasetArn__","datasetId":"__DatasetId__","datasetName":"__DatasetName__","description":"__Description__","draftStatus":"MODIFIED","exampleCount":1,"schemaType":"AGENTCORE_EVALUATION_PREDEFINED_V1","status":"CREATING","updatedAt":946684800},{"createdAt":946684800,"datasetArn":"__DatasetArn__","datasetId":"__DatasetId__","datasetName":"__DatasetName__","description":"__Description__","draftStatus":"MODIFIED","exampleCount":1,"schemaType":"AGENTCORE_EVALUATION_PREDEFINED_V1","status":"CREATING","updatedAt":946684800}],"nextToken":"__NextToken__"}

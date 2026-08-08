@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"clusters":[{"clusterArn":"__ClusterArn__","clusterName":"__ClusterName__","status":"CREATING"},{"clusterArn":"__ClusterArn__","clusterName":"__ClusterName__","status":"CREATING"}],"nextToken":"__NextToken__"}

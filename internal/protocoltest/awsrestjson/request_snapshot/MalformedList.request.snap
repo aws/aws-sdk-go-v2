@@ -1,5 +1,0 @@
-POST /MalformedList
-
-Content-Type: application/json
-
-{"bodyList":["__Member__","__Member__"]}

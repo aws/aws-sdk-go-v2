@@ -218,7 +218,17 @@ func TestCheckResponseSnapshot_BatchGetCaseRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetCaseRule(context.Background(), &BatchGetCaseRuleInput{})
+	got, err := svc.BatchGetCaseRule(context.Background(), &BatchGetCaseRuleInput{
+		DomainId: ptr.String("__DomainId__"),
+		CaseRules: []types.CaseRuleIdentifier{
+			{
+				Id: ptr.String("__Id__"),
+			},
+			{
+				Id: ptr.String("__Id__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -290,7 +300,17 @@ func TestCheckResponseSnapshot_BatchGetField(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchGetField(context.Background(), &BatchGetFieldInput{})
+	got, err := svc.BatchGetField(context.Background(), &BatchGetFieldInput{
+		DomainId: ptr.String("__DomainId__"),
+		Fields: []types.FieldIdentifier{
+			{
+				Id: ptr.String("__Id__"),
+			},
+			{
+				Id: ptr.String("__Id__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -322,7 +342,22 @@ func TestCheckResponseSnapshot_BatchPutFieldOptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchPutFieldOptions(context.Background(), &BatchPutFieldOptionsInput{})
+	got, err := svc.BatchPutFieldOptions(context.Background(), &BatchPutFieldOptionsInput{
+		DomainId: ptr.String("__DomainId__"),
+		FieldId:  ptr.String("__FieldId__"),
+		Options: []types.FieldOption{
+			{
+				Name:   ptr.String("__Name__"),
+				Value:  ptr.String("__Value__"),
+				Active: ptr.Bool(true),
+			},
+			{
+				Name:   ptr.String("__Name__"),
+				Value:  ptr.String("__Value__"),
+				Active: ptr.Bool(true),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -344,7 +379,31 @@ func TestCheckResponseSnapshot_CreateCase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCase(context.Background(), &CreateCaseInput{})
+	got, err := svc.CreateCase(context.Background(), &CreateCaseInput{
+		DomainId:   ptr.String("__DomainId__"),
+		TemplateId: ptr.String("__TemplateId__"),
+		Fields: []types.FieldValue{
+			{
+				Id: ptr.String("__Id__"),
+				Value: &types.FieldValueUnionMemberStringValue{
+					Value: "__FieldValueUnionMemberStringValue__",
+				},
+			},
+			{
+				Id: ptr.String("__Id__"),
+				Value: &types.FieldValueUnionMemberStringValue{
+					Value: "__FieldValueUnionMemberStringValue__",
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		PerformedBy: &types.UserUnionMemberUserArn{
+			Value: "__UserUnionMemberUserArn__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -366,7 +425,40 @@ func TestCheckResponseSnapshot_CreateCaseRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateCaseRule(context.Background(), &CreateCaseRuleInput{})
+	got, err := svc.CreateCaseRule(context.Background(), &CreateCaseRuleInput{
+		DomainId:    ptr.String("__DomainId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Rule: &types.CaseRuleDetailsMemberRequired{
+			Value: types.RequiredCaseRule{
+				DefaultValue: ptr.Bool(true),
+				Conditions: []types.BooleanCondition{
+					&types.BooleanConditionMemberEqualTo{
+						Value: types.BooleanOperands{
+							OperandOne: &types.OperandOneMemberFieldId{
+								Value: "__OperandOneMemberFieldId__",
+							},
+							OperandTwo: &types.OperandTwoMemberStringValue{
+								Value: "__OperandTwoMemberStringValue__",
+							},
+							Result: ptr.Bool(true),
+						},
+					},
+					&types.BooleanConditionMemberEqualTo{
+						Value: types.BooleanOperands{
+							OperandOne: &types.OperandOneMemberFieldId{
+								Value: "__OperandOneMemberFieldId__",
+							},
+							OperandTwo: &types.OperandTwoMemberStringValue{
+								Value: "__OperandTwoMemberStringValue__",
+							},
+							Result: ptr.Bool(true),
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -389,7 +481,9 @@ func TestCheckResponseSnapshot_CreateDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateDomain(context.Background(), &CreateDomainInput{})
+	got, err := svc.CreateDomain(context.Background(), &CreateDomainInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -411,7 +505,17 @@ func TestCheckResponseSnapshot_CreateField(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateField(context.Background(), &CreateFieldInput{})
+	got, err := svc.CreateField(context.Background(), &CreateFieldInput{
+		DomainId:    ptr.String("__DomainId__"),
+		Name:        ptr.String("__Name__"),
+		Type:        types.FieldType("Text"),
+		Description: ptr.String("__Description__"),
+		Attributes: &types.FieldAttributesMemberText{
+			Value: types.TextAttributes{
+				IsMultiline: ptr.Bool(true),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -433,7 +537,74 @@ func TestCheckResponseSnapshot_CreateLayout(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateLayout(context.Background(), &CreateLayoutInput{})
+	got, err := svc.CreateLayout(context.Background(), &CreateLayoutInput{
+		DomainId: ptr.String("__DomainId__"),
+		Name:     ptr.String("__Name__"),
+		Content: &types.LayoutContentMemberBasic{
+			Value: types.BasicLayout{
+				TopPanel: &types.LayoutSections{
+					Sections: []types.Section{
+						&types.SectionMemberFieldGroup{
+							Value: types.FieldGroup{
+								Name: ptr.String("__Name__"),
+								Fields: []types.FieldItem{
+									{
+										Id: ptr.String("__Id__"),
+									},
+									{
+										Id: ptr.String("__Id__"),
+									},
+								},
+							},
+						},
+						&types.SectionMemberFieldGroup{
+							Value: types.FieldGroup{
+								Name: ptr.String("__Name__"),
+								Fields: []types.FieldItem{
+									{
+										Id: ptr.String("__Id__"),
+									},
+									{
+										Id: ptr.String("__Id__"),
+									},
+								},
+							},
+						},
+					},
+				},
+				MoreInfo: &types.LayoutSections{
+					Sections: []types.Section{
+						&types.SectionMemberFieldGroup{
+							Value: types.FieldGroup{
+								Name: ptr.String("__Name__"),
+								Fields: []types.FieldItem{
+									{
+										Id: ptr.String("__Id__"),
+									},
+									{
+										Id: ptr.String("__Id__"),
+									},
+								},
+							},
+						},
+						&types.SectionMemberFieldGroup{
+							Value: types.FieldGroup{
+								Name: ptr.String("__Name__"),
+								Fields: []types.FieldItem{
+									{
+										Id: ptr.String("__Id__"),
+									},
+									{
+										Id: ptr.String("__Id__"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -455,7 +626,19 @@ func TestCheckResponseSnapshot_CreateRelatedItem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRelatedItem(context.Background(), &CreateRelatedItemInput{})
+	got, err := svc.CreateRelatedItem(context.Background(), &CreateRelatedItemInput{
+		DomainId: ptr.String("__DomainId__"),
+		CaseId:   ptr.String("__CaseId__"),
+		Type:     types.RelatedItemType("Contact"),
+		Content: &types.RelatedItemInputContentMemberContact{
+			Value: types.Contact{
+				ContactArn: ptr.String("__ContactArn__"),
+			},
+		},
+		PerformedBy: &types.UserUnionMemberUserArn{
+			Value: "__UserUnionMemberUserArn__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -477,7 +660,47 @@ func TestCheckResponseSnapshot_CreateTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTemplate(context.Background(), &CreateTemplateInput{})
+	got, err := svc.CreateTemplate(context.Background(), &CreateTemplateInput{
+		DomainId:    ptr.String("__DomainId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		LayoutConfiguration: &types.LayoutConfiguration{
+			DefaultLayout: ptr.String("__DefaultLayout__"),
+		},
+		RequiredFields: []types.RequiredField{
+			{
+				FieldId: ptr.String("__FieldId__"),
+			},
+			{
+				FieldId: ptr.String("__FieldId__"),
+			},
+		},
+		Status: types.TemplateStatus("Active"),
+		Rules: []types.TemplateRule{
+			{
+				CaseRuleId: ptr.String("__CaseRuleId__"),
+				FieldId:    ptr.String("__FieldId__"),
+			},
+			{
+				CaseRuleId: ptr.String("__CaseRuleId__"),
+				FieldId:    ptr.String("__FieldId__"),
+			},
+		},
+		TagPropagationConfigurations: []types.TagPropagationConfiguration{
+			{
+				ResourceType: types.TagPropagationResourceType("Cases"),
+				TagMap: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				ResourceType: types.TagPropagationResourceType("Cases"),
+				TagMap: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -496,7 +719,10 @@ func TestCheckResponseSnapshot_DeleteCase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCase(context.Background(), &DeleteCaseInput{})
+	got, err := svc.DeleteCase(context.Background(), &DeleteCaseInput{
+		DomainId: ptr.String("__DomainId__"),
+		CaseId:   ptr.String("__CaseId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -515,7 +741,10 @@ func TestCheckResponseSnapshot_DeleteCaseRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteCaseRule(context.Background(), &DeleteCaseRuleInput{})
+	got, err := svc.DeleteCaseRule(context.Background(), &DeleteCaseRuleInput{
+		DomainId:   ptr.String("__DomainId__"),
+		CaseRuleId: ptr.String("__CaseRuleId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -534,7 +763,9 @@ func TestCheckResponseSnapshot_DeleteDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDomain(context.Background(), &DeleteDomainInput{})
+	got, err := svc.DeleteDomain(context.Background(), &DeleteDomainInput{
+		DomainId: ptr.String("__DomainId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -553,7 +784,10 @@ func TestCheckResponseSnapshot_DeleteField(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteField(context.Background(), &DeleteFieldInput{})
+	got, err := svc.DeleteField(context.Background(), &DeleteFieldInput{
+		DomainId: ptr.String("__DomainId__"),
+		FieldId:  ptr.String("__FieldId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -572,7 +806,10 @@ func TestCheckResponseSnapshot_DeleteLayout(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLayout(context.Background(), &DeleteLayoutInput{})
+	got, err := svc.DeleteLayout(context.Background(), &DeleteLayoutInput{
+		DomainId: ptr.String("__DomainId__"),
+		LayoutId: ptr.String("__LayoutId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -591,7 +828,11 @@ func TestCheckResponseSnapshot_DeleteRelatedItem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRelatedItem(context.Background(), &DeleteRelatedItemInput{})
+	got, err := svc.DeleteRelatedItem(context.Background(), &DeleteRelatedItemInput{
+		DomainId:      ptr.String("__DomainId__"),
+		CaseId:        ptr.String("__CaseId__"),
+		RelatedItemId: ptr.String("__RelatedItemId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -610,7 +851,10 @@ func TestCheckResponseSnapshot_DeleteTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTemplate(context.Background(), &DeleteTemplateInput{})
+	got, err := svc.DeleteTemplate(context.Background(), &DeleteTemplateInput{
+		DomainId:   ptr.String("__DomainId__"),
+		TemplateId: ptr.String("__TemplateId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -649,7 +893,19 @@ func TestCheckResponseSnapshot_GetCase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCase(context.Background(), &GetCaseInput{})
+	got, err := svc.GetCase(context.Background(), &GetCaseInput{
+		CaseId:   ptr.String("__CaseId__"),
+		DomainId: ptr.String("__DomainId__"),
+		Fields: []types.FieldIdentifier{
+			{
+				Id: ptr.String("__Id__"),
+			},
+			{
+				Id: ptr.String("__Id__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -736,7 +992,12 @@ func TestCheckResponseSnapshot_GetCaseAuditEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCaseAuditEvents(context.Background(), &GetCaseAuditEventsInput{})
+	got, err := svc.GetCaseAuditEvents(context.Background(), &GetCaseAuditEventsInput{
+		CaseId:     ptr.String("__CaseId__"),
+		DomainId:   ptr.String("__DomainId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -774,7 +1035,9 @@ func TestCheckResponseSnapshot_GetCaseEventConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCaseEventConfiguration(context.Background(), &GetCaseEventConfigurationInput{})
+	got, err := svc.GetCaseEventConfiguration(context.Background(), &GetCaseEventConfigurationInput{
+		DomainId: ptr.String("__DomainId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -802,7 +1065,9 @@ func TestCheckResponseSnapshot_GetDomain(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDomain(context.Background(), &GetDomainInput{})
+	got, err := svc.GetDomain(context.Background(), &GetDomainInput{
+		DomainId: ptr.String("__DomainId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -895,7 +1160,10 @@ func TestCheckResponseSnapshot_GetLayout(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLayout(context.Background(), &GetLayoutInput{})
+	got, err := svc.GetLayout(context.Background(), &GetLayoutInput{
+		DomainId: ptr.String("__DomainId__"),
+		LayoutId: ptr.String("__LayoutId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -961,7 +1229,10 @@ func TestCheckResponseSnapshot_GetTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTemplate(context.Background(), &GetTemplateInput{})
+	got, err := svc.GetTemplate(context.Background(), &GetTemplateInput{
+		DomainId:   ptr.String("__DomainId__"),
+		TemplateId: ptr.String("__TemplateId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -998,7 +1269,11 @@ func TestCheckResponseSnapshot_ListCaseRules(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCaseRules(context.Background(), &ListCaseRulesInput{})
+	got, err := svc.ListCaseRules(context.Background(), &ListCaseRulesInput{
+		DomainId:   ptr.String("__DomainId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1029,7 +1304,12 @@ func TestCheckResponseSnapshot_ListCasesForContact(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListCasesForContact(context.Background(), &ListCasesForContactInput{})
+	got, err := svc.ListCasesForContact(context.Background(), &ListCasesForContactInput{
+		DomainId:   ptr.String("__DomainId__"),
+		ContactArn: ptr.String("__ContactArn__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1062,7 +1342,10 @@ func TestCheckResponseSnapshot_ListDomains(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDomains(context.Background(), &ListDomainsInput{})
+	got, err := svc.ListDomains(context.Background(), &ListDomainsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1095,7 +1378,16 @@ func TestCheckResponseSnapshot_ListFieldOptions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFieldOptions(context.Background(), &ListFieldOptionsInput{})
+	got, err := svc.ListFieldOptions(context.Background(), &ListFieldOptionsInput{
+		DomainId:   ptr.String("__DomainId__"),
+		FieldId:    ptr.String("__FieldId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Values: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1142,7 +1434,11 @@ func TestCheckResponseSnapshot_ListFields(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFields(context.Background(), &ListFieldsInput{})
+	got, err := svc.ListFields(context.Background(), &ListFieldsInput{
+		DomainId:   ptr.String("__DomainId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1175,7 +1471,11 @@ func TestCheckResponseSnapshot_ListLayouts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLayouts(context.Background(), &ListLayoutsInput{})
+	got, err := svc.ListLayouts(context.Background(), &ListLayoutsInput{
+		DomainId:   ptr.String("__DomainId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1198,7 +1498,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		Arn: ptr.String("__Arn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1261,7 +1563,15 @@ func TestCheckResponseSnapshot_ListTemplates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTemplates(context.Background(), &ListTemplatesInput{})
+	got, err := svc.ListTemplates(context.Background(), &ListTemplatesInput{
+		DomainId:   ptr.String("__DomainId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Status: []types.TemplateStatus{
+			types.TemplateStatus("Active"),
+			types.TemplateStatus("Active"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1280,7 +1590,27 @@ func TestCheckResponseSnapshot_PutCaseEventConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutCaseEventConfiguration(context.Background(), &PutCaseEventConfigurationInput{})
+	got, err := svc.PutCaseEventConfiguration(context.Background(), &PutCaseEventConfigurationInput{
+		DomainId: ptr.String("__DomainId__"),
+		EventBridge: &types.EventBridgeConfiguration{
+			Enabled: ptr.Bool(true),
+			IncludedData: &types.EventIncludedData{
+				CaseData: &types.CaseEventIncludedData{
+					Fields: []types.FieldIdentifier{
+						{
+							Id: ptr.String("__Id__"),
+						},
+						{
+							Id: ptr.String("__Id__"),
+						},
+					},
+				},
+				RelatedItemData: &types.RelatedItemEventIncludedData{
+					IncludeContent: ptr.Bool(true),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1341,7 +1671,41 @@ func TestCheckResponseSnapshot_SearchAllRelatedItems(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchAllRelatedItems(context.Background(), &SearchAllRelatedItemsInput{})
+	got, err := svc.SearchAllRelatedItems(context.Background(), &SearchAllRelatedItemsInput{
+		DomainId:   ptr.String("__DomainId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.RelatedItemTypeFilter{
+			&types.RelatedItemTypeFilterMemberContact{
+				Value: types.ContactFilter{
+					Channel: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ContactArn: ptr.String("__ContactArn__"),
+				},
+			},
+			&types.RelatedItemTypeFilterMemberContact{
+				Value: types.ContactFilter{
+					Channel: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ContactArn: ptr.String("__ContactArn__"),
+				},
+			},
+		},
+		Sorts: []types.SearchAllRelatedItemsSort{
+			{
+				SortProperty: types.SearchAllRelatedItemsSortProperty("AssociationTime"),
+				SortOrder:    types.Order("Asc"),
+			},
+			{
+				SortProperty: types.SearchAllRelatedItemsSortProperty("AssociationTime"),
+				SortOrder:    types.Order("Asc"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1407,7 +1771,40 @@ func TestCheckResponseSnapshot_SearchCases(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchCases(context.Background(), &SearchCasesInput{})
+	got, err := svc.SearchCases(context.Background(), &SearchCasesInput{
+		DomainId:   ptr.String("__DomainId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		SearchTerm: ptr.String("__SearchTerm__"),
+		Filter: &types.CaseFilterMemberField{
+			Value: &types.FieldFilterMemberEqualTo{
+				Value: types.FieldValue{
+					Id: ptr.String("__Id__"),
+					Value: &types.FieldValueUnionMemberStringValue{
+						Value: "__FieldValueUnionMemberStringValue__",
+					},
+				},
+			},
+		},
+		Sorts: []types.Sort{
+			{
+				FieldId:   ptr.String("__FieldId__"),
+				SortOrder: types.Order("Asc"),
+			},
+			{
+				FieldId:   ptr.String("__FieldId__"),
+				SortOrder: types.Order("Asc"),
+			},
+		},
+		Fields: []types.FieldIdentifier{
+			{
+				Id: ptr.String("__Id__"),
+			},
+			{
+				Id: ptr.String("__Id__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1466,7 +1863,32 @@ func TestCheckResponseSnapshot_SearchRelatedItems(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchRelatedItems(context.Background(), &SearchRelatedItemsInput{})
+	got, err := svc.SearchRelatedItems(context.Background(), &SearchRelatedItemsInput{
+		DomainId:   ptr.String("__DomainId__"),
+		CaseId:     ptr.String("__CaseId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.RelatedItemTypeFilter{
+			&types.RelatedItemTypeFilterMemberContact{
+				Value: types.ContactFilter{
+					Channel: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ContactArn: ptr.String("__ContactArn__"),
+				},
+			},
+			&types.RelatedItemTypeFilterMemberContact{
+				Value: types.ContactFilter{
+					Channel: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ContactArn: ptr.String("__ContactArn__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1485,7 +1907,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		Arn: ptr.String("__Arn__"),
+		Tags: map[string]*string{
+			"key0": ptr.String("__Value__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1504,7 +1931,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		Arn: ptr.String("__Arn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1523,7 +1956,27 @@ func TestCheckResponseSnapshot_UpdateCase(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCase(context.Background(), &UpdateCaseInput{})
+	got, err := svc.UpdateCase(context.Background(), &UpdateCaseInput{
+		DomainId: ptr.String("__DomainId__"),
+		CaseId:   ptr.String("__CaseId__"),
+		Fields: []types.FieldValue{
+			{
+				Id: ptr.String("__Id__"),
+				Value: &types.FieldValueUnionMemberStringValue{
+					Value: "__FieldValueUnionMemberStringValue__",
+				},
+			},
+			{
+				Id: ptr.String("__Id__"),
+				Value: &types.FieldValueUnionMemberStringValue{
+					Value: "__FieldValueUnionMemberStringValue__",
+				},
+			},
+		},
+		PerformedBy: &types.UserUnionMemberUserArn{
+			Value: "__UserUnionMemberUserArn__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1542,7 +1995,41 @@ func TestCheckResponseSnapshot_UpdateCaseRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateCaseRule(context.Background(), &UpdateCaseRuleInput{})
+	got, err := svc.UpdateCaseRule(context.Background(), &UpdateCaseRuleInput{
+		DomainId:    ptr.String("__DomainId__"),
+		CaseRuleId:  ptr.String("__CaseRuleId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Rule: &types.CaseRuleDetailsMemberRequired{
+			Value: types.RequiredCaseRule{
+				DefaultValue: ptr.Bool(true),
+				Conditions: []types.BooleanCondition{
+					&types.BooleanConditionMemberEqualTo{
+						Value: types.BooleanOperands{
+							OperandOne: &types.OperandOneMemberFieldId{
+								Value: "__OperandOneMemberFieldId__",
+							},
+							OperandTwo: &types.OperandTwoMemberStringValue{
+								Value: "__OperandTwoMemberStringValue__",
+							},
+							Result: ptr.Bool(true),
+						},
+					},
+					&types.BooleanConditionMemberEqualTo{
+						Value: types.BooleanOperands{
+							OperandOne: &types.OperandOneMemberFieldId{
+								Value: "__OperandOneMemberFieldId__",
+							},
+							OperandTwo: &types.OperandTwoMemberStringValue{
+								Value: "__OperandTwoMemberStringValue__",
+							},
+							Result: ptr.Bool(true),
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1561,7 +2048,17 @@ func TestCheckResponseSnapshot_UpdateField(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateField(context.Background(), &UpdateFieldInput{})
+	got, err := svc.UpdateField(context.Background(), &UpdateFieldInput{
+		DomainId:    ptr.String("__DomainId__"),
+		FieldId:     ptr.String("__FieldId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Attributes: &types.FieldAttributesMemberText{
+			Value: types.TextAttributes{
+				IsMultiline: ptr.Bool(true),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1580,7 +2077,75 @@ func TestCheckResponseSnapshot_UpdateLayout(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateLayout(context.Background(), &UpdateLayoutInput{})
+	got, err := svc.UpdateLayout(context.Background(), &UpdateLayoutInput{
+		DomainId: ptr.String("__DomainId__"),
+		LayoutId: ptr.String("__LayoutId__"),
+		Name:     ptr.String("__Name__"),
+		Content: &types.LayoutContentMemberBasic{
+			Value: types.BasicLayout{
+				TopPanel: &types.LayoutSections{
+					Sections: []types.Section{
+						&types.SectionMemberFieldGroup{
+							Value: types.FieldGroup{
+								Name: ptr.String("__Name__"),
+								Fields: []types.FieldItem{
+									{
+										Id: ptr.String("__Id__"),
+									},
+									{
+										Id: ptr.String("__Id__"),
+									},
+								},
+							},
+						},
+						&types.SectionMemberFieldGroup{
+							Value: types.FieldGroup{
+								Name: ptr.String("__Name__"),
+								Fields: []types.FieldItem{
+									{
+										Id: ptr.String("__Id__"),
+									},
+									{
+										Id: ptr.String("__Id__"),
+									},
+								},
+							},
+						},
+					},
+				},
+				MoreInfo: &types.LayoutSections{
+					Sections: []types.Section{
+						&types.SectionMemberFieldGroup{
+							Value: types.FieldGroup{
+								Name: ptr.String("__Name__"),
+								Fields: []types.FieldItem{
+									{
+										Id: ptr.String("__Id__"),
+									},
+									{
+										Id: ptr.String("__Id__"),
+									},
+								},
+							},
+						},
+						&types.SectionMemberFieldGroup{
+							Value: types.FieldGroup{
+								Name: ptr.String("__Name__"),
+								Fields: []types.FieldItem{
+									{
+										Id: ptr.String("__Id__"),
+									},
+									{
+										Id: ptr.String("__Id__"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1620,7 +2185,20 @@ func TestCheckResponseSnapshot_UpdateRelatedItem(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRelatedItem(context.Background(), &UpdateRelatedItemInput{})
+	got, err := svc.UpdateRelatedItem(context.Background(), &UpdateRelatedItemInput{
+		DomainId:      ptr.String("__DomainId__"),
+		CaseId:        ptr.String("__CaseId__"),
+		RelatedItemId: ptr.String("__RelatedItemId__"),
+		Content: &types.RelatedItemUpdateContentMemberComment{
+			Value: types.CommentUpdateContent{
+				Body:        ptr.String("__Body__"),
+				ContentType: types.CommentBodyTextType("Text/Plain"),
+			},
+		},
+		PerformedBy: &types.UserUnionMemberUserArn{
+			Value: "__UserUnionMemberUserArn__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1639,7 +2217,48 @@ func TestCheckResponseSnapshot_UpdateTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTemplate(context.Background(), &UpdateTemplateInput{})
+	got, err := svc.UpdateTemplate(context.Background(), &UpdateTemplateInput{
+		DomainId:    ptr.String("__DomainId__"),
+		TemplateId:  ptr.String("__TemplateId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		LayoutConfiguration: &types.LayoutConfiguration{
+			DefaultLayout: ptr.String("__DefaultLayout__"),
+		},
+		RequiredFields: []types.RequiredField{
+			{
+				FieldId: ptr.String("__FieldId__"),
+			},
+			{
+				FieldId: ptr.String("__FieldId__"),
+			},
+		},
+		Status: types.TemplateStatus("Active"),
+		Rules: []types.TemplateRule{
+			{
+				CaseRuleId: ptr.String("__CaseRuleId__"),
+				FieldId:    ptr.String("__FieldId__"),
+			},
+			{
+				CaseRuleId: ptr.String("__CaseRuleId__"),
+				FieldId:    ptr.String("__FieldId__"),
+			},
+		},
+		TagPropagationConfigurations: []types.TagPropagationConfiguration{
+			{
+				ResourceType: types.TagPropagationResourceType("Cases"),
+				TagMap: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				ResourceType: types.TagPropagationResourceType("Cases"),
+				TagMap: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1660,7 +2279,17 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetCaseRule(context.Background(), &BatchGetCaseRuleInput{})
+	_, opErr := svc.BatchGetCaseRule(context.Background(), &BatchGetCaseRuleInput{
+		DomainId: ptr.String("__DomainId__"),
+		CaseRules: []types.CaseRuleIdentifier{
+			{
+				Id: ptr.String("__Id__"),
+			},
+			{
+				Id: ptr.String("__Id__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1685,7 +2314,31 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateCase(context.Background(), &CreateCaseInput{})
+	_, opErr := svc.CreateCase(context.Background(), &CreateCaseInput{
+		DomainId:   ptr.String("__DomainId__"),
+		TemplateId: ptr.String("__TemplateId__"),
+		Fields: []types.FieldValue{
+			{
+				Id: ptr.String("__Id__"),
+				Value: &types.FieldValueUnionMemberStringValue{
+					Value: "__FieldValueUnionMemberStringValue__",
+				},
+			},
+			{
+				Id: ptr.String("__Id__"),
+				Value: &types.FieldValueUnionMemberStringValue{
+					Value: "__FieldValueUnionMemberStringValue__",
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		PerformedBy: &types.UserUnionMemberUserArn{
+			Value: "__UserUnionMemberUserArn__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1711,7 +2364,17 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetCaseRule(context.Background(), &BatchGetCaseRuleInput{})
+	_, opErr := svc.BatchGetCaseRule(context.Background(), &BatchGetCaseRuleInput{
+		DomainId: ptr.String("__DomainId__"),
+		CaseRules: []types.CaseRuleIdentifier{
+			{
+				Id: ptr.String("__Id__"),
+			},
+			{
+				Id: ptr.String("__Id__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1738,7 +2401,17 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetCaseRule(context.Background(), &BatchGetCaseRuleInput{})
+	_, opErr := svc.BatchGetCaseRule(context.Background(), &BatchGetCaseRuleInput{
+		DomainId: ptr.String("__DomainId__"),
+		CaseRules: []types.CaseRuleIdentifier{
+			{
+				Id: ptr.String("__Id__"),
+			},
+			{
+				Id: ptr.String("__Id__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1763,7 +2436,22 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchPutFieldOptions(context.Background(), &BatchPutFieldOptionsInput{})
+	_, opErr := svc.BatchPutFieldOptions(context.Background(), &BatchPutFieldOptionsInput{
+		DomainId: ptr.String("__DomainId__"),
+		FieldId:  ptr.String("__FieldId__"),
+		Options: []types.FieldOption{
+			{
+				Name:   ptr.String("__Name__"),
+				Value:  ptr.String("__Value__"),
+				Active: ptr.Bool(true),
+			},
+			{
+				Name:   ptr.String("__Name__"),
+				Value:  ptr.String("__Value__"),
+				Active: ptr.Bool(true),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1788,7 +2476,17 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetCaseRule(context.Background(), &BatchGetCaseRuleInput{})
+	_, opErr := svc.BatchGetCaseRule(context.Background(), &BatchGetCaseRuleInput{
+		DomainId: ptr.String("__DomainId__"),
+		CaseRules: []types.CaseRuleIdentifier{
+			{
+				Id: ptr.String("__Id__"),
+			},
+			{
+				Id: ptr.String("__Id__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1813,7 +2511,17 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchGetCaseRule(context.Background(), &BatchGetCaseRuleInput{})
+	_, opErr := svc.BatchGetCaseRule(context.Background(), &BatchGetCaseRuleInput{
+		DomainId: ptr.String("__DomainId__"),
+		CaseRules: []types.CaseRuleIdentifier{
+			{
+				Id: ptr.String("__Id__"),
+			},
+			{
+				Id: ptr.String("__Id__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

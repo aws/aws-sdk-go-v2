@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"DestinationList":[{"DeliveryDestinationArn":"__DeliveryDestinationArn__","DeliveryDestinationType":"KINESIS","Description":"__Description__","Name":"__Name__","RoleArn":"__RoleArn__"},{"DeliveryDestinationArn":"__DeliveryDestinationArn__","DeliveryDestinationType":"KINESIS","Description":"__Description__","Name":"__Name__","RoleArn":"__RoleArn__"}],"NextToken":"__NextToken__"}

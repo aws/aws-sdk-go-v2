@@ -119,7 +119,9 @@ func TestCheckResponseSnapshot_BulkPublish(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BulkPublish(context.Background(), &BulkPublishInput{})
+	got, err := svc.BulkPublish(context.Background(), &BulkPublishInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -148,7 +150,11 @@ func TestCheckResponseSnapshot_DeleteDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteDataset(context.Background(), &DeleteDatasetInput{})
+	got, err := svc.DeleteDataset(context.Background(), &DeleteDatasetInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+		IdentityId:     ptr.String("__IdentityId__"),
+		DatasetName:    ptr.String("__DatasetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -177,7 +183,11 @@ func TestCheckResponseSnapshot_DescribeDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeDataset(context.Background(), &DescribeDatasetInput{})
+	got, err := svc.DescribeDataset(context.Background(), &DescribeDatasetInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+		IdentityId:     ptr.String("__IdentityId__"),
+		DatasetName:    ptr.String("__DatasetName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -203,7 +213,9 @@ func TestCheckResponseSnapshot_DescribeIdentityPoolUsage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeIdentityPoolUsage(context.Background(), &DescribeIdentityPoolUsageInput{})
+	got, err := svc.DescribeIdentityPoolUsage(context.Background(), &DescribeIdentityPoolUsageInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -230,7 +242,10 @@ func TestCheckResponseSnapshot_DescribeIdentityUsage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeIdentityUsage(context.Background(), &DescribeIdentityUsageInput{})
+	got, err := svc.DescribeIdentityUsage(context.Background(), &DescribeIdentityUsageInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+		IdentityId:     ptr.String("__IdentityId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -255,7 +270,9 @@ func TestCheckResponseSnapshot_GetBulkPublishDetails(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBulkPublishDetails(context.Background(), &GetBulkPublishDetailsInput{})
+	got, err := svc.GetBulkPublishDetails(context.Background(), &GetBulkPublishDetailsInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -278,7 +295,9 @@ func TestCheckResponseSnapshot_GetCognitoEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetCognitoEvents(context.Background(), &GetCognitoEventsInput{})
+	got, err := svc.GetCognitoEvents(context.Background(), &GetCognitoEventsInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -311,7 +330,9 @@ func TestCheckResponseSnapshot_GetIdentityPoolConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetIdentityPoolConfiguration(context.Background(), &GetIdentityPoolConfigurationInput{})
+	got, err := svc.GetIdentityPoolConfiguration(context.Background(), &GetIdentityPoolConfigurationInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -353,7 +374,12 @@ func TestCheckResponseSnapshot_ListDatasets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListDatasets(context.Background(), &ListDatasetsInput{})
+	got, err := svc.ListDatasets(context.Background(), &ListDatasetsInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+		IdentityId:     ptr.String("__IdentityId__"),
+		NextToken:      ptr.String("__NextToken__"),
+		MaxResults:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -390,7 +416,10 @@ func TestCheckResponseSnapshot_ListIdentityPoolUsage(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListIdentityPoolUsage(context.Background(), &ListIdentityPoolUsageInput{})
+	got, err := svc.ListIdentityPoolUsage(context.Background(), &ListIdentityPoolUsageInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -439,7 +468,15 @@ func TestCheckResponseSnapshot_ListRecords(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRecords(context.Background(), &ListRecordsInput{})
+	got, err := svc.ListRecords(context.Background(), &ListRecordsInput{
+		IdentityPoolId:   ptr.String("__IdentityPoolId__"),
+		IdentityId:       ptr.String("__IdentityId__"),
+		DatasetName:      ptr.String("__DatasetName__"),
+		LastSyncCount:    ptr.Int64(1),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+		SyncSessionToken: ptr.String("__SyncSessionToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -460,7 +497,12 @@ func TestCheckResponseSnapshot_RegisterDevice(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RegisterDevice(context.Background(), &RegisterDeviceInput{})
+	got, err := svc.RegisterDevice(context.Background(), &RegisterDeviceInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+		IdentityId:     ptr.String("__IdentityId__"),
+		Platform:       types.Platform("APNS"),
+		Token:          ptr.String("__Token__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -479,7 +521,12 @@ func TestCheckResponseSnapshot_SetCognitoEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetCognitoEvents(context.Background(), &SetCognitoEventsInput{})
+	got, err := svc.SetCognitoEvents(context.Background(), &SetCognitoEventsInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+		Events: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -512,7 +559,21 @@ func TestCheckResponseSnapshot_SetIdentityPoolConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetIdentityPoolConfiguration(context.Background(), &SetIdentityPoolConfigurationInput{})
+	got, err := svc.SetIdentityPoolConfiguration(context.Background(), &SetIdentityPoolConfigurationInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+		PushSync: &types.PushSync{
+			ApplicationArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RoleArn: ptr.String("__RoleArn__"),
+		},
+		CognitoStreams: &types.CognitoStreams{
+			StreamName:      ptr.String("__StreamName__"),
+			RoleArn:         ptr.String("__RoleArn__"),
+			StreamingStatus: types.StreamingStatus("ENABLED"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -531,7 +592,12 @@ func TestCheckResponseSnapshot_SubscribeToDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SubscribeToDataset(context.Background(), &SubscribeToDatasetInput{})
+	got, err := svc.SubscribeToDataset(context.Background(), &SubscribeToDatasetInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+		IdentityId:     ptr.String("__IdentityId__"),
+		DatasetName:    ptr.String("__DatasetName__"),
+		DeviceId:       ptr.String("__DeviceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -550,7 +616,12 @@ func TestCheckResponseSnapshot_UnsubscribeFromDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UnsubscribeFromDataset(context.Background(), &UnsubscribeFromDatasetInput{})
+	got, err := svc.UnsubscribeFromDataset(context.Background(), &UnsubscribeFromDatasetInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+		IdentityId:     ptr.String("__IdentityId__"),
+		DatasetName:    ptr.String("__DatasetName__"),
+		DeviceId:       ptr.String("__DeviceId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -588,7 +659,30 @@ func TestCheckResponseSnapshot_UpdateRecords(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRecords(context.Background(), &UpdateRecordsInput{})
+	got, err := svc.UpdateRecords(context.Background(), &UpdateRecordsInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+		IdentityId:     ptr.String("__IdentityId__"),
+		DatasetName:    ptr.String("__DatasetName__"),
+		DeviceId:       ptr.String("__DeviceId__"),
+		RecordPatches: []types.RecordPatch{
+			{
+				Op:                     types.Operation("replace"),
+				Key:                    ptr.String("__Key__"),
+				Value:                  ptr.String("__Value__"),
+				SyncCount:              ptr.Int64(1),
+				DeviceLastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Op:                     types.Operation("replace"),
+				Key:                    ptr.String("__Key__"),
+				Value:                  ptr.String("__Value__"),
+				SyncCount:              ptr.Int64(1),
+				DeviceLastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		SyncSessionToken: ptr.String("__SyncSessionToken__"),
+		ClientContext:    ptr.String("__ClientContext__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -609,7 +703,9 @@ func TestCheckResponseSnapshot_Error_AlreadyStreamedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BulkPublish(context.Background(), &BulkPublishInput{})
+	_, opErr := svc.BulkPublish(context.Background(), &BulkPublishInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -634,7 +730,21 @@ func TestCheckResponseSnapshot_Error_ConcurrentModificationException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SetIdentityPoolConfiguration(context.Background(), &SetIdentityPoolConfigurationInput{})
+	_, opErr := svc.SetIdentityPoolConfiguration(context.Background(), &SetIdentityPoolConfigurationInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+		PushSync: &types.PushSync{
+			ApplicationArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RoleArn: ptr.String("__RoleArn__"),
+		},
+		CognitoStreams: &types.CognitoStreams{
+			StreamName:      ptr.String("__StreamName__"),
+			RoleArn:         ptr.String("__RoleArn__"),
+			StreamingStatus: types.StreamingStatus("ENABLED"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -659,7 +769,9 @@ func TestCheckResponseSnapshot_Error_DuplicateRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BulkPublish(context.Background(), &BulkPublishInput{})
+	_, opErr := svc.BulkPublish(context.Background(), &BulkPublishInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -684,7 +796,9 @@ func TestCheckResponseSnapshot_Error_InternalErrorException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BulkPublish(context.Background(), &BulkPublishInput{})
+	_, opErr := svc.BulkPublish(context.Background(), &BulkPublishInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -709,7 +823,12 @@ func TestCheckResponseSnapshot_Error_InvalidConfigurationException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.RegisterDevice(context.Background(), &RegisterDeviceInput{})
+	_, opErr := svc.RegisterDevice(context.Background(), &RegisterDeviceInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+		IdentityId:     ptr.String("__IdentityId__"),
+		Platform:       types.Platform("APNS"),
+		Token:          ptr.String("__Token__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -734,7 +853,30 @@ func TestCheckResponseSnapshot_Error_InvalidLambdaFunctionOutputException(t *tes
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateRecords(context.Background(), &UpdateRecordsInput{})
+	_, opErr := svc.UpdateRecords(context.Background(), &UpdateRecordsInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+		IdentityId:     ptr.String("__IdentityId__"),
+		DatasetName:    ptr.String("__DatasetName__"),
+		DeviceId:       ptr.String("__DeviceId__"),
+		RecordPatches: []types.RecordPatch{
+			{
+				Op:                     types.Operation("replace"),
+				Key:                    ptr.String("__Key__"),
+				Value:                  ptr.String("__Value__"),
+				SyncCount:              ptr.Int64(1),
+				DeviceLastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Op:                     types.Operation("replace"),
+				Key:                    ptr.String("__Key__"),
+				Value:                  ptr.String("__Value__"),
+				SyncCount:              ptr.Int64(1),
+				DeviceLastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		SyncSessionToken: ptr.String("__SyncSessionToken__"),
+		ClientContext:    ptr.String("__ClientContext__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -759,7 +901,9 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BulkPublish(context.Background(), &BulkPublishInput{})
+	_, opErr := svc.BulkPublish(context.Background(), &BulkPublishInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -784,7 +928,30 @@ func TestCheckResponseSnapshot_Error_LambdaThrottledException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateRecords(context.Background(), &UpdateRecordsInput{})
+	_, opErr := svc.UpdateRecords(context.Background(), &UpdateRecordsInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+		IdentityId:     ptr.String("__IdentityId__"),
+		DatasetName:    ptr.String("__DatasetName__"),
+		DeviceId:       ptr.String("__DeviceId__"),
+		RecordPatches: []types.RecordPatch{
+			{
+				Op:                     types.Operation("replace"),
+				Key:                    ptr.String("__Key__"),
+				Value:                  ptr.String("__Value__"),
+				SyncCount:              ptr.Int64(1),
+				DeviceLastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Op:                     types.Operation("replace"),
+				Key:                    ptr.String("__Key__"),
+				Value:                  ptr.String("__Value__"),
+				SyncCount:              ptr.Int64(1),
+				DeviceLastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		SyncSessionToken: ptr.String("__SyncSessionToken__"),
+		ClientContext:    ptr.String("__ClientContext__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -809,7 +976,30 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UpdateRecords(context.Background(), &UpdateRecordsInput{})
+	_, opErr := svc.UpdateRecords(context.Background(), &UpdateRecordsInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+		IdentityId:     ptr.String("__IdentityId__"),
+		DatasetName:    ptr.String("__DatasetName__"),
+		DeviceId:       ptr.String("__DeviceId__"),
+		RecordPatches: []types.RecordPatch{
+			{
+				Op:                     types.Operation("replace"),
+				Key:                    ptr.String("__Key__"),
+				Value:                  ptr.String("__Value__"),
+				SyncCount:              ptr.Int64(1),
+				DeviceLastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Op:                     types.Operation("replace"),
+				Key:                    ptr.String("__Key__"),
+				Value:                  ptr.String("__Value__"),
+				SyncCount:              ptr.Int64(1),
+				DeviceLastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		SyncSessionToken: ptr.String("__SyncSessionToken__"),
+		ClientContext:    ptr.String("__ClientContext__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -834,7 +1024,9 @@ func TestCheckResponseSnapshot_Error_NotAuthorizedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BulkPublish(context.Background(), &BulkPublishInput{})
+	_, opErr := svc.BulkPublish(context.Background(), &BulkPublishInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -859,7 +1051,11 @@ func TestCheckResponseSnapshot_Error_ResourceConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteDataset(context.Background(), &DeleteDatasetInput{})
+	_, opErr := svc.DeleteDataset(context.Background(), &DeleteDatasetInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+		IdentityId:     ptr.String("__IdentityId__"),
+		DatasetName:    ptr.String("__DatasetName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -884,7 +1080,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BulkPublish(context.Background(), &BulkPublishInput{})
+	_, opErr := svc.BulkPublish(context.Background(), &BulkPublishInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -909,7 +1107,11 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteDataset(context.Background(), &DeleteDatasetInput{})
+	_, opErr := svc.DeleteDataset(context.Background(), &DeleteDatasetInput{
+		IdentityPoolId: ptr.String("__IdentityPoolId__"),
+		IdentityId:     ptr.String("__IdentityId__"),
+		DatasetName:    ptr.String("__DatasetName__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

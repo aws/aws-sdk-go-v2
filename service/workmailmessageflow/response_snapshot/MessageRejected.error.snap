@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"MessageRejected","message":"__Message__"}

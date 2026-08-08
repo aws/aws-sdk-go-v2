@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSEvents.PutPartnerEvents
+
+{"Entries":[{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","EventId":"__EventId__"},{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","EventId":"__EventId__"}],"FailedEntryCount":1}

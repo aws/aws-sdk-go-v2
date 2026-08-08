@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodeCommit_20150413.GetApprovalRuleTemplate
+
+{"approvalRuleTemplate":{"approvalRuleTemplateContent":"__ApprovalRuleTemplateContent__","approvalRuleTemplateDescription":"__ApprovalRuleTemplateDescription__","approvalRuleTemplateId":"__ApprovalRuleTemplateId__","approvalRuleTemplateName":"__ApprovalRuleTemplateName__","creationDate":946684800,"lastModifiedDate":946684800,"lastModifiedUser":"__LastModifiedUser__","ruleContentSha256":"__RuleContentSha256__"}}

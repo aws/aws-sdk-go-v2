@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCloud9WorkspaceManagementService.DescribeEnvironments
+
+{"environments":[{"arn":"__Arn__","connectionType":"CONNECT_SSH","description":"__Description__","id":"__Id__","lifecycle":{"failureResource":"__FailureResource__","reason":"__Reason__","status":"CREATING"},"managedCredentialsStatus":"ENABLED_ON_CREATE","name":"__Name__","ownerArn":"__OwnerArn__","type":"ssh"},{"arn":"__Arn__","connectionType":"CONNECT_SSH","description":"__Description__","id":"__Id__","lifecycle":{"failureResource":"__FailureResource__","reason":"__Reason__","status":"CREATING"},"managedCredentialsStatus":"ENABLED_ON_CREATE","name":"__Name__","ownerArn":"__OwnerArn__","type":"ssh"}]}

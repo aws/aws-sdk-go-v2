@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"defaultResponse":true,"responseParameters":{"key0":"__Value__"},"responseTemplates":{"key0":"__Value__"},"responseType":"DEFAULT_4XX","statusCode":"__StatusCode__"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","RoutingControls":[{"ControlPanelArn":"__ControlPanelArn__","Name":"__Name__","Owner":"__Owner__","RoutingControlArn":"__RoutingControlArn__","Status":"PENDING"},{"ControlPanelArn":"__ControlPanelArn__","Name":"__Name__","Owner":"__Owner__","RoutingControlArn":"__RoutingControlArn__","Status":"PENDING"}]}

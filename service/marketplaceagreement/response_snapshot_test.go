@@ -125,7 +125,10 @@ func TestCheckResponseSnapshot_AcceptAgreementCancellationRequest(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptAgreementCancellationRequest(context.Background(), &AcceptAgreementCancellationRequestInput{})
+	got, err := svc.AcceptAgreementCancellationRequest(context.Background(), &AcceptAgreementCancellationRequestInput{
+		AgreementId:                    ptr.String("__AgreementId__"),
+		AgreementCancellationRequestId: ptr.String("__AgreementCancellationRequestId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -154,7 +157,11 @@ func TestCheckResponseSnapshot_AcceptAgreementPaymentRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptAgreementPaymentRequest(context.Background(), &AcceptAgreementPaymentRequestInput{})
+	got, err := svc.AcceptAgreementPaymentRequest(context.Background(), &AcceptAgreementPaymentRequestInput{
+		PaymentRequestId:       ptr.String("__PaymentRequestId__"),
+		AgreementId:            ptr.String("__AgreementId__"),
+		PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -175,7 +182,23 @@ func TestCheckResponseSnapshot_AcceptAgreementRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptAgreementRequest(context.Background(), &AcceptAgreementRequestInput{})
+	got, err := svc.AcceptAgreementRequest(context.Background(), &AcceptAgreementRequestInput{
+		AgreementRequestId: ptr.String("__AgreementRequestId__"),
+		PurchaseOrders: []types.PurchaseOrder{
+			{
+				ChargeId:               ptr.String("__ChargeId__"),
+				ChargeRevision:         ptr.Int64(1),
+				AgreementId:            ptr.String("__AgreementId__"),
+				PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+			},
+			{
+				ChargeId:               ptr.String("__ChargeId__"),
+				ChargeRevision:         ptr.Int64(1),
+				AgreementId:            ptr.String("__AgreementId__"),
+				PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -217,7 +240,28 @@ func TestCheckResponseSnapshot_BatchCreateBillingAdjustmentRequest(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchCreateBillingAdjustmentRequest(context.Background(), &BatchCreateBillingAdjustmentRequestInput{})
+	got, err := svc.BatchCreateBillingAdjustmentRequest(context.Background(), &BatchCreateBillingAdjustmentRequestInput{
+		BillingAdjustmentRequestEntries: []types.BatchCreateBillingAdjustmentRequestEntry{
+			{
+				AgreementId:          ptr.String("__AgreementId__"),
+				OriginalInvoiceId:    ptr.String("__OriginalInvoiceId__"),
+				AdjustmentAmount:     ptr.String("__AdjustmentAmount__"),
+				CurrencyCode:         ptr.String("__CurrencyCode__"),
+				AdjustmentReasonCode: types.BillingAdjustmentReasonCode("INCORRECT_TERMS_ACCEPTED"),
+				Description:          ptr.String("__Description__"),
+				ClientToken:          ptr.String("__ClientToken__"),
+			},
+			{
+				AgreementId:          ptr.String("__AgreementId__"),
+				OriginalInvoiceId:    ptr.String("__OriginalInvoiceId__"),
+				AdjustmentAmount:     ptr.String("__AdjustmentAmount__"),
+				CurrencyCode:         ptr.String("__CurrencyCode__"),
+				AdjustmentReasonCode: types.BillingAdjustmentReasonCode("INCORRECT_TERMS_ACCEPTED"),
+				Description:          ptr.String("__Description__"),
+				ClientToken:          ptr.String("__ClientToken__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -236,7 +280,9 @@ func TestCheckResponseSnapshot_CancelAgreement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelAgreement(context.Background(), &CancelAgreementInput{})
+	got, err := svc.CancelAgreement(context.Background(), &CancelAgreementInput{
+		AgreementId: ptr.String("__AgreementId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -264,7 +310,11 @@ func TestCheckResponseSnapshot_CancelAgreementCancellationRequest(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelAgreementCancellationRequest(context.Background(), &CancelAgreementCancellationRequestInput{})
+	got, err := svc.CancelAgreementCancellationRequest(context.Background(), &CancelAgreementCancellationRequestInput{
+		AgreementId:                    ptr.String("__AgreementId__"),
+		AgreementCancellationRequestId: ptr.String("__AgreementCancellationRequestId__"),
+		CancellationReason:             ptr.String("__CancellationReason__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -293,7 +343,10 @@ func TestCheckResponseSnapshot_CancelAgreementPaymentRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelAgreementPaymentRequest(context.Background(), &CancelAgreementPaymentRequestInput{})
+	got, err := svc.CancelAgreementPaymentRequest(context.Background(), &CancelAgreementPaymentRequestInput{
+		PaymentRequestId: ptr.String("__PaymentRequestId__"),
+		AgreementId:      ptr.String("__AgreementId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -400,7 +453,53 @@ func TestCheckResponseSnapshot_CreateAgreementRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAgreementRequest(context.Background(), &CreateAgreementRequestInput{})
+	got, err := svc.CreateAgreementRequest(context.Background(), &CreateAgreementRequestInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Intent:      types.Intent("NEW"),
+		RequestedTerms: []types.RequestedTerm{
+			{
+				Id: ptr.String("__Id__"),
+				Configuration: &types.RequestedTermConfigurationMemberConfigurableUpfrontPricingTermConfiguration{
+					Value: types.ConfigurableUpfrontPricingTermConfiguration{
+						SelectorValue: ptr.String("__SelectorValue__"),
+						Dimensions: []types.Dimension{
+							{
+								DimensionKey:   ptr.String("__DimensionKey__"),
+								DimensionValue: 1,
+							},
+							{
+								DimensionKey:   ptr.String("__DimensionKey__"),
+								DimensionValue: 1,
+							},
+						},
+					},
+				},
+			},
+			{
+				Id: ptr.String("__Id__"),
+				Configuration: &types.RequestedTermConfigurationMemberConfigurableUpfrontPricingTermConfiguration{
+					Value: types.ConfigurableUpfrontPricingTermConfiguration{
+						SelectorValue: ptr.String("__SelectorValue__"),
+						Dimensions: []types.Dimension{
+							{
+								DimensionKey:   ptr.String("__DimensionKey__"),
+								DimensionValue: 1,
+							},
+							{
+								DimensionKey:   ptr.String("__DimensionKey__"),
+								DimensionValue: 1,
+							},
+						},
+					},
+				},
+			},
+		},
+		SourceAgreementIdentifier:   ptr.String("__SourceAgreementIdentifier__"),
+		AgreementProposalIdentifier: ptr.String("__AgreementProposalIdentifier__"),
+		TaxConfiguration: &types.TaxConfiguration{
+			TaxEstimation: types.TaxEstimation("DISABLED"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -450,7 +549,9 @@ func TestCheckResponseSnapshot_DescribeAgreement(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeAgreement(context.Background(), &DescribeAgreementInput{})
+	got, err := svc.DescribeAgreement(context.Background(), &DescribeAgreementInput{
+		AgreementId: ptr.String("__AgreementId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -478,7 +579,10 @@ func TestCheckResponseSnapshot_GetAgreementCancellationRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAgreementCancellationRequest(context.Background(), &GetAgreementCancellationRequestInput{})
+	got, err := svc.GetAgreementCancellationRequest(context.Background(), &GetAgreementCancellationRequestInput{
+		AgreementCancellationRequestId: ptr.String("__AgreementCancellationRequestId__"),
+		AgreementId:                    ptr.String("__AgreementId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -523,7 +627,11 @@ func TestCheckResponseSnapshot_GetAgreementEntitlements(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAgreementEntitlements(context.Background(), &GetAgreementEntitlementsInput{})
+	got, err := svc.GetAgreementEntitlements(context.Background(), &GetAgreementEntitlementsInput{
+		AgreementId: ptr.String("__AgreementId__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -554,7 +662,10 @@ func TestCheckResponseSnapshot_GetAgreementPaymentRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAgreementPaymentRequest(context.Background(), &GetAgreementPaymentRequestInput{})
+	got, err := svc.GetAgreementPaymentRequest(context.Background(), &GetAgreementPaymentRequestInput{
+		PaymentRequestId: ptr.String("__PaymentRequestId__"),
+		AgreementId:      ptr.String("__AgreementId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -613,7 +724,11 @@ func TestCheckResponseSnapshot_GetAgreementTerms(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAgreementTerms(context.Background(), &GetAgreementTermsInput{})
+	got, err := svc.GetAgreementTerms(context.Background(), &GetAgreementTermsInput{
+		AgreementId: ptr.String("__AgreementId__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -644,7 +759,10 @@ func TestCheckResponseSnapshot_GetBillingAdjustmentRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBillingAdjustmentRequest(context.Background(), &GetBillingAdjustmentRequestInput{})
+	got, err := svc.GetBillingAdjustmentRequest(context.Background(), &GetBillingAdjustmentRequestInput{
+		AgreementId:                ptr.String("__AgreementId__"),
+		BillingAdjustmentRequestId: ptr.String("__BillingAdjustmentRequestId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -687,7 +805,15 @@ func TestCheckResponseSnapshot_ListAgreementCancellationRequests(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAgreementCancellationRequests(context.Background(), &ListAgreementCancellationRequestsInput{})
+	got, err := svc.ListAgreementCancellationRequests(context.Background(), &ListAgreementCancellationRequestsInput{
+		PartyType:     ptr.String("__PartyType__"),
+		AgreementId:   ptr.String("__AgreementId__"),
+		Status:        types.AgreementCancellationRequestStatus("PENDING_APPROVAL"),
+		AgreementType: ptr.String("__AgreementType__"),
+		Catalog:       ptr.String("__Catalog__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -730,7 +856,13 @@ func TestCheckResponseSnapshot_ListAgreementCharges(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAgreementCharges(context.Background(), &ListAgreementChargesInput{})
+	got, err := svc.ListAgreementCharges(context.Background(), &ListAgreementChargesInput{
+		Catalog:       ptr.String("__Catalog__"),
+		AgreementId:   ptr.String("__AgreementId__"),
+		AgreementType: ptr.String("__AgreementType__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -791,7 +923,20 @@ func TestCheckResponseSnapshot_ListAgreementInvoiceLineItems(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAgreementInvoiceLineItems(context.Background(), &ListAgreementInvoiceLineItemsInput{})
+	got, err := svc.ListAgreementInvoiceLineItems(context.Background(), &ListAgreementInvoiceLineItemsInput{
+		AgreementId: ptr.String("__AgreementId__"),
+		GroupBy:     types.LineItemGroupBy("INVOICE_ID"),
+		InvoiceId:   ptr.String("__InvoiceId__"),
+		InvoiceType: types.InvoiceType("INVOICE"),
+		InvoiceBillingPeriod: &types.InvoiceBillingPeriod{
+			Month: ptr.Int32(1),
+			Year:  ptr.Int32(1),
+		},
+		BeforeIssuedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		AfterIssuedTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -836,7 +981,15 @@ func TestCheckResponseSnapshot_ListAgreementPaymentRequests(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAgreementPaymentRequests(context.Background(), &ListAgreementPaymentRequestsInput{})
+	got, err := svc.ListAgreementPaymentRequests(context.Background(), &ListAgreementPaymentRequestsInput{
+		PartyType:     ptr.String("__PartyType__"),
+		AgreementType: ptr.String("__AgreementType__"),
+		Catalog:       ptr.String("__Catalog__"),
+		AgreementId:   ptr.String("__AgreementId__"),
+		Status:        types.PaymentRequestStatus("VALIDATING"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -883,7 +1036,16 @@ func TestCheckResponseSnapshot_ListBillingAdjustmentRequests(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBillingAdjustmentRequests(context.Background(), &ListBillingAdjustmentRequestsInput{})
+	got, err := svc.ListBillingAdjustmentRequests(context.Background(), &ListBillingAdjustmentRequestsInput{
+		AgreementId:   ptr.String("__AgreementId__"),
+		Status:        types.BillingAdjustmentStatus("PENDING"),
+		CreatedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MaxResults:    ptr.Int32(1),
+		Catalog:       ptr.String("__Catalog__"),
+		AgreementType: ptr.String("__AgreementType__"),
+		NextToken:     ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -911,7 +1073,11 @@ func TestCheckResponseSnapshot_RejectAgreementCancellationRequest(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RejectAgreementCancellationRequest(context.Background(), &RejectAgreementCancellationRequestInput{})
+	got, err := svc.RejectAgreementCancellationRequest(context.Background(), &RejectAgreementCancellationRequestInput{
+		AgreementId:                    ptr.String("__AgreementId__"),
+		AgreementCancellationRequestId: ptr.String("__AgreementCancellationRequestId__"),
+		RejectionReason:                ptr.String("__RejectionReason__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -941,7 +1107,11 @@ func TestCheckResponseSnapshot_RejectAgreementPaymentRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RejectAgreementPaymentRequest(context.Background(), &RejectAgreementPaymentRequestInput{})
+	got, err := svc.RejectAgreementPaymentRequest(context.Background(), &RejectAgreementPaymentRequestInput{
+		PaymentRequestId: ptr.String("__PaymentRequestId__"),
+		AgreementId:      ptr.String("__AgreementId__"),
+		RejectionReason:  ptr.String("__RejectionReason__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1036,7 +1206,31 @@ func TestCheckResponseSnapshot_SearchAgreements(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchAgreements(context.Background(), &SearchAgreementsInput{})
+	got, err := svc.SearchAgreements(context.Background(), &SearchAgreementsInput{
+		Catalog: ptr.String("__Catalog__"),
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Sort: &types.Sort{
+			SortBy:    ptr.String("__SortBy__"),
+			SortOrder: types.SortOrder("ASCENDING"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1063,7 +1257,12 @@ func TestCheckResponseSnapshot_SendAgreementCancellationRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendAgreementCancellationRequest(context.Background(), &SendAgreementCancellationRequestInput{})
+	got, err := svc.SendAgreementCancellationRequest(context.Background(), &SendAgreementCancellationRequestInput{
+		AgreementId: ptr.String("__AgreementId__"),
+		ReasonCode:  types.AgreementCancellationRequestReasonCode("INCORRECT_TERMS_ACCEPTED"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1091,7 +1290,14 @@ func TestCheckResponseSnapshot_SendAgreementPaymentRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SendAgreementPaymentRequest(context.Background(), &SendAgreementPaymentRequestInput{})
+	got, err := svc.SendAgreementPaymentRequest(context.Background(), &SendAgreementPaymentRequestInput{
+		ClientToken:  ptr.String("__ClientToken__"),
+		AgreementId:  ptr.String("__AgreementId__"),
+		TermId:       ptr.String("__TermId__"),
+		Name:         ptr.String("__Name__"),
+		ChargeAmount: ptr.String("__ChargeAmount__"),
+		Description:  ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1110,7 +1316,22 @@ func TestCheckResponseSnapshot_UpdatePurchaseOrders(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdatePurchaseOrders(context.Background(), &UpdatePurchaseOrdersInput{})
+	got, err := svc.UpdatePurchaseOrders(context.Background(), &UpdatePurchaseOrdersInput{
+		PurchaseOrders: []types.PurchaseOrder{
+			{
+				ChargeId:               ptr.String("__ChargeId__"),
+				ChargeRevision:         ptr.Int64(1),
+				AgreementId:            ptr.String("__AgreementId__"),
+				PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+			},
+			{
+				ChargeId:               ptr.String("__ChargeId__"),
+				ChargeRevision:         ptr.Int64(1),
+				AgreementId:            ptr.String("__AgreementId__"),
+				PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1133,7 +1354,10 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptAgreementCancellationRequest(context.Background(), &AcceptAgreementCancellationRequestInput{})
+	_, opErr := svc.AcceptAgreementCancellationRequest(context.Background(), &AcceptAgreementCancellationRequestInput{
+		AgreementId:                    ptr.String("__AgreementId__"),
+		AgreementCancellationRequestId: ptr.String("__AgreementCancellationRequestId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1161,7 +1385,10 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptAgreementCancellationRequest(context.Background(), &AcceptAgreementCancellationRequestInput{})
+	_, opErr := svc.AcceptAgreementCancellationRequest(context.Background(), &AcceptAgreementCancellationRequestInput{
+		AgreementId:                    ptr.String("__AgreementId__"),
+		AgreementCancellationRequestId: ptr.String("__AgreementCancellationRequestId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1187,7 +1414,10 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptAgreementCancellationRequest(context.Background(), &AcceptAgreementCancellationRequestInput{})
+	_, opErr := svc.AcceptAgreementCancellationRequest(context.Background(), &AcceptAgreementCancellationRequestInput{
+		AgreementId:                    ptr.String("__AgreementId__"),
+		AgreementCancellationRequestId: ptr.String("__AgreementCancellationRequestId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1215,7 +1445,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptAgreementCancellationRequest(context.Background(), &AcceptAgreementCancellationRequestInput{})
+	_, opErr := svc.AcceptAgreementCancellationRequest(context.Background(), &AcceptAgreementCancellationRequestInput{
+		AgreementId:                    ptr.String("__AgreementId__"),
+		AgreementCancellationRequestId: ptr.String("__AgreementCancellationRequestId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1245,7 +1478,53 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAgreementRequest(context.Background(), &CreateAgreementRequestInput{})
+	_, opErr := svc.CreateAgreementRequest(context.Background(), &CreateAgreementRequestInput{
+		ClientToken: ptr.String("__ClientToken__"),
+		Intent:      types.Intent("NEW"),
+		RequestedTerms: []types.RequestedTerm{
+			{
+				Id: ptr.String("__Id__"),
+				Configuration: &types.RequestedTermConfigurationMemberConfigurableUpfrontPricingTermConfiguration{
+					Value: types.ConfigurableUpfrontPricingTermConfiguration{
+						SelectorValue: ptr.String("__SelectorValue__"),
+						Dimensions: []types.Dimension{
+							{
+								DimensionKey:   ptr.String("__DimensionKey__"),
+								DimensionValue: 1,
+							},
+							{
+								DimensionKey:   ptr.String("__DimensionKey__"),
+								DimensionValue: 1,
+							},
+						},
+					},
+				},
+			},
+			{
+				Id: ptr.String("__Id__"),
+				Configuration: &types.RequestedTermConfigurationMemberConfigurableUpfrontPricingTermConfiguration{
+					Value: types.ConfigurableUpfrontPricingTermConfiguration{
+						SelectorValue: ptr.String("__SelectorValue__"),
+						Dimensions: []types.Dimension{
+							{
+								DimensionKey:   ptr.String("__DimensionKey__"),
+								DimensionValue: 1,
+							},
+							{
+								DimensionKey:   ptr.String("__DimensionKey__"),
+								DimensionValue: 1,
+							},
+						},
+					},
+				},
+			},
+		},
+		SourceAgreementIdentifier:   ptr.String("__SourceAgreementIdentifier__"),
+		AgreementProposalIdentifier: ptr.String("__AgreementProposalIdentifier__"),
+		TaxConfiguration: &types.TaxConfiguration{
+			TaxEstimation: types.TaxEstimation("DISABLED"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1271,7 +1550,10 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptAgreementCancellationRequest(context.Background(), &AcceptAgreementCancellationRequestInput{})
+	_, opErr := svc.AcceptAgreementCancellationRequest(context.Background(), &AcceptAgreementCancellationRequestInput{
+		AgreementId:                    ptr.String("__AgreementId__"),
+		AgreementCancellationRequestId: ptr.String("__AgreementCancellationRequestId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1308,7 +1590,10 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptAgreementCancellationRequest(context.Background(), &AcceptAgreementCancellationRequestInput{})
+	_, opErr := svc.AcceptAgreementCancellationRequest(context.Background(), &AcceptAgreementCancellationRequestInput{
+		AgreementId:                    ptr.String("__AgreementId__"),
+		AgreementCancellationRequestId: ptr.String("__AgreementCancellationRequestId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

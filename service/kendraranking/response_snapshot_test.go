@@ -120,7 +120,24 @@ func TestCheckResponseSnapshot_CreateRescoreExecutionPlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRescoreExecutionPlan(context.Background(), &CreateRescoreExecutionPlanInput{})
+	got, err := svc.CreateRescoreExecutionPlan(context.Background(), &CreateRescoreExecutionPlanInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		CapacityUnits: &types.CapacityUnitsConfiguration{
+			RescoreCapacityUnits: ptr.Int32(1),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -139,7 +156,9 @@ func TestCheckResponseSnapshot_DeleteRescoreExecutionPlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRescoreExecutionPlan(context.Background(), &DeleteRescoreExecutionPlanInput{})
+	got, err := svc.DeleteRescoreExecutionPlan(context.Background(), &DeleteRescoreExecutionPlanInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -170,7 +189,9 @@ func TestCheckResponseSnapshot_DescribeRescoreExecutionPlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeRescoreExecutionPlan(context.Background(), &DescribeRescoreExecutionPlanInput{})
+	got, err := svc.DescribeRescoreExecutionPlan(context.Background(), &DescribeRescoreExecutionPlanInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -207,7 +228,10 @@ func TestCheckResponseSnapshot_ListRescoreExecutionPlans(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRescoreExecutionPlans(context.Background(), &ListRescoreExecutionPlansInput{})
+	got, err := svc.ListRescoreExecutionPlans(context.Background(), &ListRescoreExecutionPlansInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -237,7 +261,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -268,7 +294,42 @@ func TestCheckResponseSnapshot_Rescore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.Rescore(context.Background(), &RescoreInput{})
+	got, err := svc.Rescore(context.Background(), &RescoreInput{
+		RescoreExecutionPlanId: ptr.String("__RescoreExecutionPlanId__"),
+		SearchQuery:            ptr.String("__SearchQuery__"),
+		Documents: []types.Document{
+			{
+				Id:      ptr.String("__Id__"),
+				GroupId: ptr.String("__GroupId__"),
+				Title:   ptr.String("__Title__"),
+				Body:    ptr.String("__Body__"),
+				TokenizedTitle: []string{
+					"__Member__",
+					"__Member__",
+				},
+				TokenizedBody: []string{
+					"__Member__",
+					"__Member__",
+				},
+				OriginalScore: ptr.Float32(1.0),
+			},
+			{
+				Id:      ptr.String("__Id__"),
+				GroupId: ptr.String("__GroupId__"),
+				Title:   ptr.String("__Title__"),
+				Body:    ptr.String("__Body__"),
+				TokenizedTitle: []string{
+					"__Member__",
+					"__Member__",
+				},
+				TokenizedBody: []string{
+					"__Member__",
+					"__Member__",
+				},
+				OriginalScore: ptr.Float32(1.0),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -287,7 +348,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -306,7 +379,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -325,7 +404,14 @@ func TestCheckResponseSnapshot_UpdateRescoreExecutionPlan(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRescoreExecutionPlan(context.Background(), &UpdateRescoreExecutionPlanInput{})
+	got, err := svc.UpdateRescoreExecutionPlan(context.Background(), &UpdateRescoreExecutionPlanInput{
+		Id:          ptr.String("__Id__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		CapacityUnits: &types.CapacityUnitsConfiguration{
+			RescoreCapacityUnits: ptr.Int32(1),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -346,7 +432,24 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRescoreExecutionPlan(context.Background(), &CreateRescoreExecutionPlanInput{})
+	_, opErr := svc.CreateRescoreExecutionPlan(context.Background(), &CreateRescoreExecutionPlanInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		CapacityUnits: &types.CapacityUnitsConfiguration{
+			RescoreCapacityUnits: ptr.Int32(1),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -371,7 +474,24 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRescoreExecutionPlan(context.Background(), &CreateRescoreExecutionPlanInput{})
+	_, opErr := svc.CreateRescoreExecutionPlan(context.Background(), &CreateRescoreExecutionPlanInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		CapacityUnits: &types.CapacityUnitsConfiguration{
+			RescoreCapacityUnits: ptr.Int32(1),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -396,7 +516,24 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRescoreExecutionPlan(context.Background(), &CreateRescoreExecutionPlanInput{})
+	_, opErr := svc.CreateRescoreExecutionPlan(context.Background(), &CreateRescoreExecutionPlanInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		CapacityUnits: &types.CapacityUnitsConfiguration{
+			RescoreCapacityUnits: ptr.Int32(1),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -421,7 +558,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteRescoreExecutionPlan(context.Background(), &DeleteRescoreExecutionPlanInput{})
+	_, opErr := svc.DeleteRescoreExecutionPlan(context.Background(), &DeleteRescoreExecutionPlanInput{
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -446,7 +585,9 @@ func TestCheckResponseSnapshot_Error_ResourceUnavailableException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceARN: ptr.String("__ResourceARN__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -471,7 +612,24 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRescoreExecutionPlan(context.Background(), &CreateRescoreExecutionPlanInput{})
+	_, opErr := svc.CreateRescoreExecutionPlan(context.Background(), &CreateRescoreExecutionPlanInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		CapacityUnits: &types.CapacityUnitsConfiguration{
+			RescoreCapacityUnits: ptr.Int32(1),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -496,7 +654,24 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRescoreExecutionPlan(context.Background(), &CreateRescoreExecutionPlanInput{})
+	_, opErr := svc.CreateRescoreExecutionPlan(context.Background(), &CreateRescoreExecutionPlanInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		CapacityUnits: &types.CapacityUnitsConfiguration{
+			RescoreCapacityUnits: ptr.Int32(1),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -521,7 +696,24 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRescoreExecutionPlan(context.Background(), &CreateRescoreExecutionPlanInput{})
+	_, opErr := svc.CreateRescoreExecutionPlan(context.Background(), &CreateRescoreExecutionPlanInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		CapacityUnits: &types.CapacityUnitsConfiguration{
+			RescoreCapacityUnits: ptr.Int32(1),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

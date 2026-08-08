@@ -123,7 +123,17 @@ func TestCheckResponseSnapshot_CreateTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateTemplate(context.Background(), &CreateTemplateInput{})
+	got, err := svc.CreateTemplate(context.Background(), &CreateTemplateInput{
+		TemplateName:        ptr.String("__TemplateName__"),
+		TemplateDescription: ptr.String("__TemplateDescription__"),
+		TemplateSource: &types.TemplateSourceMemberWorkflowId{
+			Value: "__TemplateSourceMemberWorkflowId__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -163,7 +173,24 @@ func TestCheckResponseSnapshot_CreateWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWorkflow(context.Background(), &CreateWorkflowInput{})
+	got, err := svc.CreateWorkflow(context.Background(), &CreateWorkflowInput{
+		Name:                       ptr.String("__Name__"),
+		Description:                ptr.String("__Description__"),
+		TemplateId:                 ptr.String("__TemplateId__"),
+		ApplicationConfigurationId: ptr.String("__ApplicationConfigurationId__"),
+		InputParameters: map[string]types.StepInput{
+			"key0": &types.StepInputMemberIntegerValue{
+				Value: 1,
+			},
+		},
+		StepTargets: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -187,7 +214,56 @@ func TestCheckResponseSnapshot_CreateWorkflowStep(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWorkflowStep(context.Background(), &CreateWorkflowStepInput{})
+	got, err := svc.CreateWorkflowStep(context.Background(), &CreateWorkflowStepInput{
+		Name:           ptr.String("__Name__"),
+		StepGroupId:    ptr.String("__StepGroupId__"),
+		WorkflowId:     ptr.String("__WorkflowId__"),
+		StepActionType: types.StepActionType("MANUAL"),
+		Description:    ptr.String("__Description__"),
+		WorkflowStepAutomationConfiguration: &types.WorkflowStepAutomationConfiguration{
+			ScriptLocationS3Bucket: ptr.String("__ScriptLocationS3Bucket__"),
+			ScriptLocationS3Key: &types.PlatformScriptKey{
+				Linux:   ptr.String("__Linux__"),
+				Windows: ptr.String("__Windows__"),
+			},
+			Command: &types.PlatformCommand{
+				Linux:   ptr.String("__Linux__"),
+				Windows: ptr.String("__Windows__"),
+			},
+			RunEnvironment: types.RunEnvironment("AWS"),
+			TargetType:     types.TargetType("SINGLE"),
+		},
+		StepTarget: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Outputs: []types.WorkflowStepOutput{
+			{
+				Name:     ptr.String("__Name__"),
+				DataType: types.DataType("STRING"),
+				Required: ptr.Bool(true),
+				Value: &types.WorkflowStepOutputUnionMemberIntegerValue{
+					Value: 1,
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				DataType: types.DataType("STRING"),
+				Required: ptr.Bool(true),
+				Value: &types.WorkflowStepOutputUnionMemberIntegerValue{
+					Value: 1,
+				},
+			},
+		},
+		Previous: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Next: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -230,7 +306,19 @@ func TestCheckResponseSnapshot_CreateWorkflowStepGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWorkflowStepGroup(context.Background(), &CreateWorkflowStepGroupInput{})
+	got, err := svc.CreateWorkflowStepGroup(context.Background(), &CreateWorkflowStepGroupInput{
+		WorkflowId:  ptr.String("__WorkflowId__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Next: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Previous: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -249,7 +337,9 @@ func TestCheckResponseSnapshot_DeleteTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteTemplate(context.Background(), &DeleteTemplateInput{})
+	got, err := svc.DeleteTemplate(context.Background(), &DeleteTemplateInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -272,7 +362,9 @@ func TestCheckResponseSnapshot_DeleteWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorkflow(context.Background(), &DeleteWorkflowInput{})
+	got, err := svc.DeleteWorkflow(context.Background(), &DeleteWorkflowInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -291,7 +383,11 @@ func TestCheckResponseSnapshot_DeleteWorkflowStep(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorkflowStep(context.Background(), &DeleteWorkflowStepInput{})
+	got, err := svc.DeleteWorkflowStep(context.Background(), &DeleteWorkflowStepInput{
+		Id:          ptr.String("__Id__"),
+		StepGroupId: ptr.String("__StepGroupId__"),
+		WorkflowId:  ptr.String("__WorkflowId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -310,7 +406,10 @@ func TestCheckResponseSnapshot_DeleteWorkflowStepGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorkflowStepGroup(context.Background(), &DeleteWorkflowStepGroupInput{})
+	got, err := svc.DeleteWorkflowStepGroup(context.Background(), &DeleteWorkflowStepGroupInput{
+		WorkflowId: ptr.String("__WorkflowId__"),
+		Id:         ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -364,7 +463,9 @@ func TestCheckResponseSnapshot_GetTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTemplate(context.Background(), &GetTemplateInput{})
+	got, err := svc.GetTemplate(context.Background(), &GetTemplateInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -424,7 +525,11 @@ func TestCheckResponseSnapshot_GetTemplateStep(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTemplateStep(context.Background(), &GetTemplateStepInput{})
+	got, err := svc.GetTemplateStep(context.Background(), &GetTemplateStepInput{
+		Id:          ptr.String("__Id__"),
+		TemplateId:  ptr.String("__TemplateId__"),
+		StepGroupId: ptr.String("__StepGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -469,7 +574,10 @@ func TestCheckResponseSnapshot_GetTemplateStepGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetTemplateStepGroup(context.Background(), &GetTemplateStepGroupInput{})
+	got, err := svc.GetTemplateStepGroup(context.Background(), &GetTemplateStepGroupInput{
+		TemplateId: ptr.String("__TemplateId__"),
+		Id:         ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -524,7 +632,9 @@ func TestCheckResponseSnapshot_GetWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorkflow(context.Background(), &GetWorkflowInput{})
+	got, err := svc.GetWorkflow(context.Background(), &GetWorkflowInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -603,7 +713,11 @@ func TestCheckResponseSnapshot_GetWorkflowStep(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorkflowStep(context.Background(), &GetWorkflowStepInput{})
+	got, err := svc.GetWorkflowStep(context.Background(), &GetWorkflowStepInput{
+		WorkflowId:  ptr.String("__WorkflowId__"),
+		StepGroupId: ptr.String("__StepGroupId__"),
+		Id:          ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -650,7 +764,10 @@ func TestCheckResponseSnapshot_GetWorkflowStepGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorkflowStepGroup(context.Background(), &GetWorkflowStepGroupInput{})
+	got, err := svc.GetWorkflowStepGroup(context.Background(), &GetWorkflowStepGroupInput{
+		Id:         ptr.String("__Id__"),
+		WorkflowId: ptr.String("__WorkflowId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -689,7 +806,10 @@ func TestCheckResponseSnapshot_ListPlugins(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListPlugins(context.Background(), &ListPluginsInput{})
+	got, err := svc.ListPlugins(context.Background(), &ListPluginsInput{
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -712,7 +832,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -759,7 +881,11 @@ func TestCheckResponseSnapshot_ListTemplateStepGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTemplateStepGroups(context.Background(), &ListTemplateStepGroupsInput{})
+	got, err := svc.ListTemplateStepGroups(context.Background(), &ListTemplateStepGroupsInput{
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+		TemplateId: ptr.String("__TemplateId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -816,7 +942,12 @@ func TestCheckResponseSnapshot_ListTemplateSteps(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTemplateSteps(context.Background(), &ListTemplateStepsInput{})
+	got, err := svc.ListTemplateSteps(context.Background(), &ListTemplateStepsInput{
+		MaxResults:  1,
+		NextToken:   ptr.String("__NextToken__"),
+		TemplateId:  ptr.String("__TemplateId__"),
+		StepGroupId: ptr.String("__StepGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -851,7 +982,11 @@ func TestCheckResponseSnapshot_ListTemplates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTemplates(context.Background(), &ListTemplatesInput{})
+	got, err := svc.ListTemplates(context.Background(), &ListTemplatesInput{
+		MaxResults: 1,
+		NextToken:  ptr.String("__NextToken__"),
+		Name:       ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -902,7 +1037,11 @@ func TestCheckResponseSnapshot_ListWorkflowStepGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkflowStepGroups(context.Background(), &ListWorkflowStepGroupsInput{})
+	got, err := svc.ListWorkflowStepGroups(context.Background(), &ListWorkflowStepGroupsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: 1,
+		WorkflowId: ptr.String("__WorkflowId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -967,7 +1106,12 @@ func TestCheckResponseSnapshot_ListWorkflowSteps(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkflowSteps(context.Background(), &ListWorkflowStepsInput{})
+	got, err := svc.ListWorkflowSteps(context.Background(), &ListWorkflowStepsInput{
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  1,
+		WorkflowId:  ptr.String("__WorkflowId__"),
+		StepGroupId: ptr.String("__StepGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1014,7 +1158,14 @@ func TestCheckResponseSnapshot_ListWorkflows(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkflows(context.Background(), &ListWorkflowsInput{})
+	got, err := svc.ListWorkflows(context.Background(), &ListWorkflowsInput{
+		MaxResults:                      1,
+		NextToken:                       ptr.String("__NextToken__"),
+		TemplateId:                      ptr.String("__TemplateId__"),
+		AdsApplicationConfigurationName: ptr.String("__AdsApplicationConfigurationName__"),
+		Status:                          types.MigrationWorkflowStatusEnum("CREATING"),
+		Name:                            ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1038,7 +1189,11 @@ func TestCheckResponseSnapshot_RetryWorkflowStep(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RetryWorkflowStep(context.Background(), &RetryWorkflowStepInput{})
+	got, err := svc.RetryWorkflowStep(context.Background(), &RetryWorkflowStepInput{
+		WorkflowId:  ptr.String("__WorkflowId__"),
+		StepGroupId: ptr.String("__StepGroupId__"),
+		Id:          ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1063,7 +1218,9 @@ func TestCheckResponseSnapshot_StartWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartWorkflow(context.Background(), &StartWorkflowInput{})
+	got, err := svc.StartWorkflow(context.Background(), &StartWorkflowInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1088,7 +1245,9 @@ func TestCheckResponseSnapshot_StopWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StopWorkflow(context.Background(), &StopWorkflowInput{})
+	got, err := svc.StopWorkflow(context.Background(), &StopWorkflowInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1107,7 +1266,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1126,7 +1290,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1151,7 +1321,12 @@ func TestCheckResponseSnapshot_UpdateTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateTemplate(context.Background(), &UpdateTemplateInput{})
+	got, err := svc.UpdateTemplate(context.Background(), &UpdateTemplateInput{
+		Id:                  ptr.String("__Id__"),
+		TemplateName:        ptr.String("__TemplateName__"),
+		TemplateDescription: ptr.String("__TemplateDescription__"),
+		ClientToken:         ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1192,7 +1367,20 @@ func TestCheckResponseSnapshot_UpdateWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWorkflow(context.Background(), &UpdateWorkflowInput{})
+	got, err := svc.UpdateWorkflow(context.Background(), &UpdateWorkflowInput{
+		Id:          ptr.String("__Id__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		InputParameters: map[string]types.StepInput{
+			"key0": &types.StepInputMemberIntegerValue{
+				Value: 1,
+			},
+		},
+		StepTargets: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1216,7 +1404,58 @@ func TestCheckResponseSnapshot_UpdateWorkflowStep(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWorkflowStep(context.Background(), &UpdateWorkflowStepInput{})
+	got, err := svc.UpdateWorkflowStep(context.Background(), &UpdateWorkflowStepInput{
+		Id:             ptr.String("__Id__"),
+		StepGroupId:    ptr.String("__StepGroupId__"),
+		WorkflowId:     ptr.String("__WorkflowId__"),
+		Name:           ptr.String("__Name__"),
+		Description:    ptr.String("__Description__"),
+		StepActionType: types.StepActionType("MANUAL"),
+		WorkflowStepAutomationConfiguration: &types.WorkflowStepAutomationConfiguration{
+			ScriptLocationS3Bucket: ptr.String("__ScriptLocationS3Bucket__"),
+			ScriptLocationS3Key: &types.PlatformScriptKey{
+				Linux:   ptr.String("__Linux__"),
+				Windows: ptr.String("__Windows__"),
+			},
+			Command: &types.PlatformCommand{
+				Linux:   ptr.String("__Linux__"),
+				Windows: ptr.String("__Windows__"),
+			},
+			RunEnvironment: types.RunEnvironment("AWS"),
+			TargetType:     types.TargetType("SINGLE"),
+		},
+		StepTarget: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Outputs: []types.WorkflowStepOutput{
+			{
+				Name:     ptr.String("__Name__"),
+				DataType: types.DataType("STRING"),
+				Required: ptr.Bool(true),
+				Value: &types.WorkflowStepOutputUnionMemberIntegerValue{
+					Value: 1,
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				DataType: types.DataType("STRING"),
+				Required: ptr.Bool(true),
+				Value: &types.WorkflowStepOutputUnionMemberIntegerValue{
+					Value: 1,
+				},
+			},
+		},
+		Previous: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Next: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Status: types.StepStatus("AWAITING_DEPENDENCIES"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1259,7 +1498,20 @@ func TestCheckResponseSnapshot_UpdateWorkflowStepGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWorkflowStepGroup(context.Background(), &UpdateWorkflowStepGroupInput{})
+	got, err := svc.UpdateWorkflowStepGroup(context.Background(), &UpdateWorkflowStepGroupInput{
+		WorkflowId:  ptr.String("__WorkflowId__"),
+		Id:          ptr.String("__Id__"),
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Next: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Previous: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1280,7 +1532,17 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTemplate(context.Background(), &CreateTemplateInput{})
+	_, opErr := svc.CreateTemplate(context.Background(), &CreateTemplateInput{
+		TemplateName:        ptr.String("__TemplateName__"),
+		TemplateDescription: ptr.String("__TemplateDescription__"),
+		TemplateSource: &types.TemplateSourceMemberWorkflowId{
+			Value: "__TemplateSourceMemberWorkflowId__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1305,7 +1567,17 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTemplate(context.Background(), &CreateTemplateInput{})
+	_, opErr := svc.CreateTemplate(context.Background(), &CreateTemplateInput{
+		TemplateName:        ptr.String("__TemplateName__"),
+		TemplateDescription: ptr.String("__TemplateDescription__"),
+		TemplateSource: &types.TemplateSourceMemberWorkflowId{
+			Value: "__TemplateSourceMemberWorkflowId__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1330,7 +1602,17 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTemplate(context.Background(), &CreateTemplateInput{})
+	_, opErr := svc.CreateTemplate(context.Background(), &CreateTemplateInput{
+		TemplateName:        ptr.String("__TemplateName__"),
+		TemplateDescription: ptr.String("__TemplateDescription__"),
+		TemplateSource: &types.TemplateSourceMemberWorkflowId{
+			Value: "__TemplateSourceMemberWorkflowId__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1355,7 +1637,9 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteTemplate(context.Background(), &DeleteTemplateInput{})
+	_, opErr := svc.DeleteTemplate(context.Background(), &DeleteTemplateInput{
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1380,7 +1664,17 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTemplate(context.Background(), &CreateTemplateInput{})
+	_, opErr := svc.CreateTemplate(context.Background(), &CreateTemplateInput{
+		TemplateName:        ptr.String("__TemplateName__"),
+		TemplateDescription: ptr.String("__TemplateDescription__"),
+		TemplateSource: &types.TemplateSourceMemberWorkflowId{
+			Value: "__TemplateSourceMemberWorkflowId__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1405,7 +1699,17 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateTemplate(context.Background(), &CreateTemplateInput{})
+	_, opErr := svc.CreateTemplate(context.Background(), &CreateTemplateInput{
+		TemplateName:        ptr.String("__TemplateName__"),
+		TemplateDescription: ptr.String("__TemplateDescription__"),
+		TemplateSource: &types.TemplateSourceMemberWorkflowId{
+			Value: "__TemplateSourceMemberWorkflowId__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

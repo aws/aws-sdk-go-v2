@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Logs_20140328.ListAggregateLogGroupSummaries
+
+{"aggregateLogGroupSummaries":[{"groupingIdentifiers":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"logGroupCount":1},{"groupingIdentifiers":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"logGroupCount":1}],"nextToken":"__NextToken__"}

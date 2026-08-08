@@ -5,3 +5,4 @@ Response-Content-Type: __ResponseContentType__
 X-Amz-Lex-Request-Attributes: __RequestAttributes__
 X-Amz-Lex-Session-State: __SessionState__
 
+__InputStream__

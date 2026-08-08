@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"DirectoryArn":"__DirectoryArn__","UpgradedSchemaArn":"__UpgradedSchemaArn__"}

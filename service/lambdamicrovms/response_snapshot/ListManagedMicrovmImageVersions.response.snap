@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"createdAt":946684800,"imageArn":"__ImageArn__","imageVersion":"__ImageVersion__","updatedAt":946684800},{"createdAt":946684800,"imageArn":"__ImageArn__","imageVersion":"__ImageVersion__","updatedAt":946684800}],"nextToken":"__NextToken__"}

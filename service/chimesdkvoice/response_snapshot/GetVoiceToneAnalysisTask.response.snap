@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"VoiceToneAnalysisTask":{"CallDetails":{"IsCaller":true,"TransactionId":"__TransactionId__","VoiceConnectorId":"__VoiceConnectorId__"},"CreatedTimestamp":"2000-01-01T00:00:00Z","StartedTimestamp":"2000-01-01T00:00:00Z","StatusMessage":"__StatusMessage__","UpdatedTimestamp":"2000-01-01T00:00:00Z","VoiceToneAnalysisTaskId":"__VoiceToneAnalysisTaskId__","VoiceToneAnalysisTaskStatus":"__VoiceToneAnalysisTaskStatus__"}}

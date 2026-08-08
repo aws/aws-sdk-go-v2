@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","scopes":[{"scopeArn":"__ScopeArn__","scopeId":"__ScopeId__","status":"SUCCEEDED"},{"scopeArn":"__ScopeArn__","scopeId":"__ScopeId__","status":"SUCCEEDED"}]}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"antennaList":[{"antennaName":"__AntennaName__","groundStationName":"__GroundStationName__","region":"__Region__"},{"antennaName":"__AntennaName__","groundStationName":"__GroundStationName__","region":"__Region__"}],"nextToken":"__NextToken__"}

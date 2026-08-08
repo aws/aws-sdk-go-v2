@@ -123,7 +123,20 @@ func TestCheckResponseSnapshot_InvokeEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InvokeEndpoint(context.Background(), &InvokeEndpointInput{})
+	got, err := svc.InvokeEndpoint(context.Background(), &InvokeEndpointInput{
+		EndpointName:            ptr.String("__EndpointName__"),
+		Body:                    []byte("blob"),
+		ContentType:             ptr.String("__ContentType__"),
+		Accept:                  ptr.String("__Accept__"),
+		CustomAttributes:        ptr.String("__CustomAttributes__"),
+		TargetModel:             ptr.String("__TargetModel__"),
+		TargetVariant:           ptr.String("__TargetVariant__"),
+		TargetContainerHostname: ptr.String("__TargetContainerHostname__"),
+		InferenceId:             ptr.String("__InferenceId__"),
+		EnableExplanations:      ptr.String("__EnableExplanations__"),
+		InferenceComponentName:  ptr.String("__InferenceComponentName__"),
+		SessionId:               ptr.String("__SessionId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -146,13 +159,29 @@ func TestCheckResponseSnapshot_InvokeEndpointAsync(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InvokeEndpointAsync(context.Background(), &InvokeEndpointAsyncInput{})
+	got, err := svc.InvokeEndpointAsync(context.Background(), &InvokeEndpointAsyncInput{
+		EndpointName:             ptr.String("__EndpointName__"),
+		ContentType:              ptr.String("__ContentType__"),
+		Accept:                   ptr.String("__Accept__"),
+		CustomAttributes:         ptr.String("__CustomAttributes__"),
+		InferenceId:              ptr.String("__InferenceId__"),
+		InputLocation:            ptr.String("__InputLocation__"),
+		S3OutputPathExtension:    ptr.String("__S3OutputPathExtension__"),
+		Filename:                 ptr.String("__Filename__"),
+		RequestTTLSeconds:        ptr.Int32(1),
+		InvocationTimeoutSeconds: ptr.Int32(1),
+		Body:                     []byte("blob"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "InvokeEndpointAsync.response", err)
 	}
+}
+
+func TestCheckResponseSnapshot_InvokeEndpointWithResponseStream(t *testing.T) {
+	t.Skip("event stream operation")
 }
 
 func TestCheckResponseSnapshot_Error_InternalDependencyException(t *testing.T) {
@@ -167,7 +196,20 @@ func TestCheckResponseSnapshot_Error_InternalDependencyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.InvokeEndpoint(context.Background(), &InvokeEndpointInput{})
+	_, opErr := svc.InvokeEndpoint(context.Background(), &InvokeEndpointInput{
+		EndpointName:            ptr.String("__EndpointName__"),
+		Body:                    []byte("blob"),
+		ContentType:             ptr.String("__ContentType__"),
+		Accept:                  ptr.String("__Accept__"),
+		CustomAttributes:        ptr.String("__CustomAttributes__"),
+		TargetModel:             ptr.String("__TargetModel__"),
+		TargetVariant:           ptr.String("__TargetVariant__"),
+		TargetContainerHostname: ptr.String("__TargetContainerHostname__"),
+		InferenceId:             ptr.String("__InferenceId__"),
+		EnableExplanations:      ptr.String("__EnableExplanations__"),
+		InferenceComponentName:  ptr.String("__InferenceComponentName__"),
+		SessionId:               ptr.String("__SessionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -192,7 +234,20 @@ func TestCheckResponseSnapshot_Error_InternalFailure(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.InvokeEndpoint(context.Background(), &InvokeEndpointInput{})
+	_, opErr := svc.InvokeEndpoint(context.Background(), &InvokeEndpointInput{
+		EndpointName:            ptr.String("__EndpointName__"),
+		Body:                    []byte("blob"),
+		ContentType:             ptr.String("__ContentType__"),
+		Accept:                  ptr.String("__Accept__"),
+		CustomAttributes:        ptr.String("__CustomAttributes__"),
+		TargetModel:             ptr.String("__TargetModel__"),
+		TargetVariant:           ptr.String("__TargetVariant__"),
+		TargetContainerHostname: ptr.String("__TargetContainerHostname__"),
+		InferenceId:             ptr.String("__InferenceId__"),
+		EnableExplanations:      ptr.String("__EnableExplanations__"),
+		InferenceComponentName:  ptr.String("__InferenceComponentName__"),
+		SessionId:               ptr.String("__SessionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -220,7 +275,20 @@ func TestCheckResponseSnapshot_Error_ModelError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.InvokeEndpoint(context.Background(), &InvokeEndpointInput{})
+	_, opErr := svc.InvokeEndpoint(context.Background(), &InvokeEndpointInput{
+		EndpointName:            ptr.String("__EndpointName__"),
+		Body:                    []byte("blob"),
+		ContentType:             ptr.String("__ContentType__"),
+		Accept:                  ptr.String("__Accept__"),
+		CustomAttributes:        ptr.String("__CustomAttributes__"),
+		TargetModel:             ptr.String("__TargetModel__"),
+		TargetVariant:           ptr.String("__TargetVariant__"),
+		TargetContainerHostname: ptr.String("__TargetContainerHostname__"),
+		InferenceId:             ptr.String("__InferenceId__"),
+		EnableExplanations:      ptr.String("__EnableExplanations__"),
+		InferenceComponentName:  ptr.String("__InferenceComponentName__"),
+		SessionId:               ptr.String("__SessionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -245,7 +313,20 @@ func TestCheckResponseSnapshot_Error_ModelNotReadyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.InvokeEndpoint(context.Background(), &InvokeEndpointInput{})
+	_, opErr := svc.InvokeEndpoint(context.Background(), &InvokeEndpointInput{
+		EndpointName:            ptr.String("__EndpointName__"),
+		Body:                    []byte("blob"),
+		ContentType:             ptr.String("__ContentType__"),
+		Accept:                  ptr.String("__Accept__"),
+		CustomAttributes:        ptr.String("__CustomAttributes__"),
+		TargetModel:             ptr.String("__TargetModel__"),
+		TargetVariant:           ptr.String("__TargetVariant__"),
+		TargetContainerHostname: ptr.String("__TargetContainerHostname__"),
+		InferenceId:             ptr.String("__InferenceId__"),
+		EnableExplanations:      ptr.String("__EnableExplanations__"),
+		InferenceComponentName:  ptr.String("__InferenceComponentName__"),
+		SessionId:               ptr.String("__SessionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -270,7 +351,20 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailable(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.InvokeEndpoint(context.Background(), &InvokeEndpointInput{})
+	_, opErr := svc.InvokeEndpoint(context.Background(), &InvokeEndpointInput{
+		EndpointName:            ptr.String("__EndpointName__"),
+		Body:                    []byte("blob"),
+		ContentType:             ptr.String("__ContentType__"),
+		Accept:                  ptr.String("__Accept__"),
+		CustomAttributes:        ptr.String("__CustomAttributes__"),
+		TargetModel:             ptr.String("__TargetModel__"),
+		TargetVariant:           ptr.String("__TargetVariant__"),
+		TargetContainerHostname: ptr.String("__TargetContainerHostname__"),
+		InferenceId:             ptr.String("__InferenceId__"),
+		EnableExplanations:      ptr.String("__EnableExplanations__"),
+		InferenceComponentName:  ptr.String("__InferenceComponentName__"),
+		SessionId:               ptr.String("__SessionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -295,7 +389,20 @@ func TestCheckResponseSnapshot_Error_ValidationError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.InvokeEndpoint(context.Background(), &InvokeEndpointInput{})
+	_, opErr := svc.InvokeEndpoint(context.Background(), &InvokeEndpointInput{
+		EndpointName:            ptr.String("__EndpointName__"),
+		Body:                    []byte("blob"),
+		ContentType:             ptr.String("__ContentType__"),
+		Accept:                  ptr.String("__Accept__"),
+		CustomAttributes:        ptr.String("__CustomAttributes__"),
+		TargetModel:             ptr.String("__TargetModel__"),
+		TargetVariant:           ptr.String("__TargetVariant__"),
+		TargetContainerHostname: ptr.String("__TargetContainerHostname__"),
+		InferenceId:             ptr.String("__InferenceId__"),
+		EnableExplanations:      ptr.String("__EnableExplanations__"),
+		InferenceComponentName:  ptr.String("__InferenceComponentName__"),
+		SessionId:               ptr.String("__SessionId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

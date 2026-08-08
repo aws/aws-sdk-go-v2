@@ -7,8 +7,10 @@ package controltower
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/controltower/document"
 	"github.com/aws/aws-sdk-go-v2/service/controltower/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -18,6 +20,7 @@ import (
 	"io/fs"
 	"net/url"
 	"os"
+	"reflect"
 	"slices"
 	"strings"
 	"testing"
@@ -180,7 +183,28 @@ func serdeNewClient() *Client {
 	})
 }
 func serdeBodyEqual(got, expected []byte) bool {
-	return bytes.Equal(got, expected)
+	if len(got) == 0 || len(expected) == 0 {
+		return bytes.Equal(got, expected)
+	}
+	gv, gok := serdeDecodeJSON(got)
+	ev, eok := serdeDecodeJSON(expected)
+	if !gok || !eok {
+		return bytes.Equal(got, expected)
+	}
+	return reflect.DeepEqual(gv, ev)
+}
+
+// serdeDecodeJSON decodes a body for structural comparison. Numbers are kept as
+// json.Number rather than float64 so a large int64 doesn't lose precision (which would
+// mask a real difference) and so numeric formatting differences still show up.
+func serdeDecodeJSON(b []byte) (any, bool) {
+	d := json.NewDecoder(bytes.NewReader(b))
+	d.UseNumber()
+	var v any
+	if err := d.Decode(&v); err != nil {
+		return nil, false
+	}
+	return v, true
 }
 func TestCheckRequestSnapshot_CreateLandingZone(t *testing.T) {
 	input := &CreateLandingZoneInput{
@@ -192,7 +216,7 @@ func TestCheckRequestSnapshot_CreateLandingZone(t *testing.T) {
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
-		Manifest: nil,
+		Manifest: document.NewLazyDocument("__Document__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -306,11 +330,11 @@ func TestCheckRequestSnapshot_EnableBaseline(t *testing.T) {
 		Parameters: []types.EnabledBaselineParameter{
 			{
 				Key:   ptr.String("__Key__"),
-				Value: nil,
+				Value: document.NewLazyDocument("__Document__"),
 			},
 			{
 				Key:   ptr.String("__Key__"),
-				Value: nil,
+				Value: document.NewLazyDocument("__Document__"),
 			},
 		},
 		BaselineIdentifier: ptr.String("__BaselineIdentifier__"),
@@ -352,11 +376,11 @@ func TestCheckRequestSnapshot_EnableControl(t *testing.T) {
 		Parameters: []types.EnabledControlParameter{
 			{
 				Key:   ptr.String("__Key__"),
-				Value: nil,
+				Value: document.NewLazyDocument("__Document__"),
 			},
 			{
 				Key:   ptr.String("__Key__"),
-				Value: nil,
+				Value: document.NewLazyDocument("__Document__"),
 			},
 		},
 	}
@@ -998,11 +1022,11 @@ func TestCheckRequestSnapshot_UpdateEnabledBaseline(t *testing.T) {
 		Parameters: []types.EnabledBaselineParameter{
 			{
 				Key:   ptr.String("__Key__"),
-				Value: nil,
+				Value: document.NewLazyDocument("__Document__"),
 			},
 			{
 				Key:   ptr.String("__Key__"),
-				Value: nil,
+				Value: document.NewLazyDocument("__Document__"),
 			},
 		},
 		EnabledBaselineIdentifier: ptr.String("__EnabledBaselineIdentifier__"),
@@ -1035,11 +1059,11 @@ func TestCheckRequestSnapshot_UpdateEnabledControl(t *testing.T) {
 		Parameters: []types.EnabledControlParameter{
 			{
 				Key:   ptr.String("__Key__"),
-				Value: nil,
+				Value: document.NewLazyDocument("__Document__"),
 			},
 			{
 				Key:   ptr.String("__Key__"),
-				Value: nil,
+				Value: document.NewLazyDocument("__Document__"),
 			},
 		},
 		EnabledControlIdentifier: ptr.String("__EnabledControlIdentifier__"),
@@ -1075,7 +1099,7 @@ func TestCheckRequestSnapshot_UpdateLandingZone(t *testing.T) {
 			types.RemediationType("INHERITANCE_DRIFT"),
 		},
 		LandingZoneIdentifier: ptr.String("__LandingZoneIdentifier__"),
-		Manifest:              nil,
+		Manifest:              document.NewLazyDocument("__Document__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1109,7 +1133,7 @@ func TestUpdateRequestSnapshot_CreateLandingZone(t *testing.T) {
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
-		Manifest: nil,
+		Manifest: document.NewLazyDocument("__Document__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1223,11 +1247,11 @@ func TestUpdateRequestSnapshot_EnableBaseline(t *testing.T) {
 		Parameters: []types.EnabledBaselineParameter{
 			{
 				Key:   ptr.String("__Key__"),
-				Value: nil,
+				Value: document.NewLazyDocument("__Document__"),
 			},
 			{
 				Key:   ptr.String("__Key__"),
-				Value: nil,
+				Value: document.NewLazyDocument("__Document__"),
 			},
 		},
 		BaselineIdentifier: ptr.String("__BaselineIdentifier__"),
@@ -1269,11 +1293,11 @@ func TestUpdateRequestSnapshot_EnableControl(t *testing.T) {
 		Parameters: []types.EnabledControlParameter{
 			{
 				Key:   ptr.String("__Key__"),
-				Value: nil,
+				Value: document.NewLazyDocument("__Document__"),
 			},
 			{
 				Key:   ptr.String("__Key__"),
-				Value: nil,
+				Value: document.NewLazyDocument("__Document__"),
 			},
 		},
 	}
@@ -1915,11 +1939,11 @@ func TestUpdateRequestSnapshot_UpdateEnabledBaseline(t *testing.T) {
 		Parameters: []types.EnabledBaselineParameter{
 			{
 				Key:   ptr.String("__Key__"),
-				Value: nil,
+				Value: document.NewLazyDocument("__Document__"),
 			},
 			{
 				Key:   ptr.String("__Key__"),
-				Value: nil,
+				Value: document.NewLazyDocument("__Document__"),
 			},
 		},
 		EnabledBaselineIdentifier: ptr.String("__EnabledBaselineIdentifier__"),
@@ -1952,11 +1976,11 @@ func TestUpdateRequestSnapshot_UpdateEnabledControl(t *testing.T) {
 		Parameters: []types.EnabledControlParameter{
 			{
 				Key:   ptr.String("__Key__"),
-				Value: nil,
+				Value: document.NewLazyDocument("__Document__"),
 			},
 			{
 				Key:   ptr.String("__Key__"),
-				Value: nil,
+				Value: document.NewLazyDocument("__Document__"),
 			},
 		},
 		EnabledControlIdentifier: ptr.String("__EnabledControlIdentifier__"),
@@ -1992,7 +2016,7 @@ func TestUpdateRequestSnapshot_UpdateLandingZone(t *testing.T) {
 			types.RemediationType("INHERITANCE_DRIFT"),
 		},
 		LandingZoneIdentifier: ptr.String("__LandingZoneIdentifier__"),
-		Manifest:              nil,
+		Manifest:              document.NewLazyDocument("__Document__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

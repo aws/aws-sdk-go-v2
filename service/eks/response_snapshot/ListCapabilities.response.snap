@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"capabilities":[{"arn":"__Arn__","capabilityName":"__CapabilityName__","createdAt":946684800,"modifiedAt":946684800,"status":"CREATING","type":"ACK","version":"__Version__"},{"arn":"__Arn__","capabilityName":"__CapabilityName__","createdAt":946684800,"modifiedAt":946684800,"status":"CREATING","type":"ACK","version":"__Version__"}],"nextToken":"__NextToken__"}

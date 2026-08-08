@@ -120,7 +120,23 @@ func TestCheckResponseSnapshot_DecryptData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DecryptData(context.Background(), &DecryptDataInput{})
+	got, err := svc.DecryptData(context.Background(), &DecryptDataInput{
+		KeyIdentifier: ptr.String("__KeyIdentifier__"),
+		CipherText:    ptr.String("__CipherText__"),
+		DecryptionAttributes: &types.EncryptionDecryptionAttributesMemberSymmetric{
+			Value: types.SymmetricEncryptionAttributes{
+				Mode:                 types.EncryptionMode("ECB"),
+				InitializationVector: ptr.String("__InitializationVector__"),
+				PaddingType:          types.PaddingType("PKCS1"),
+			},
+		},
+		WrappedKey: &types.WrappedKey{
+			WrappedKeyMaterial: &types.WrappedKeyMaterialMemberTr31KeyBlock{
+				Value: "__WrappedKeyMaterialMemberTr31KeyBlock__",
+			},
+			KeyCheckValueAlgorithm: types.KeyCheckValueAlgorithm("CMAC"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -143,7 +159,23 @@ func TestCheckResponseSnapshot_EncryptData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.EncryptData(context.Background(), &EncryptDataInput{})
+	got, err := svc.EncryptData(context.Background(), &EncryptDataInput{
+		KeyIdentifier: ptr.String("__KeyIdentifier__"),
+		PlainText:     ptr.String("__PlainText__"),
+		EncryptionAttributes: &types.EncryptionDecryptionAttributesMemberSymmetric{
+			Value: types.SymmetricEncryptionAttributes{
+				Mode:                 types.EncryptionMode("ECB"),
+				InitializationVector: ptr.String("__InitializationVector__"),
+				PaddingType:          types.PaddingType("PKCS1"),
+			},
+		},
+		WrappedKey: &types.WrappedKey{
+			WrappedKeyMaterial: &types.WrappedKeyMaterialMemberTr31KeyBlock{
+				Value: "__WrappedKeyMaterialMemberTr31KeyBlock__",
+			},
+			KeyCheckValueAlgorithm: types.KeyCheckValueAlgorithm("CMAC"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -167,7 +199,16 @@ func TestCheckResponseSnapshot_GenerateAs2805KekValidation(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GenerateAs2805KekValidation(context.Background(), &GenerateAs2805KekValidationInput{})
+	got, err := svc.GenerateAs2805KekValidation(context.Background(), &GenerateAs2805KekValidationInput{
+		KeyIdentifier: ptr.String("__KeyIdentifier__"),
+		KekValidationType: &types.As2805KekValidationTypeMemberKekValidationRequest{
+			Value: types.KekValidationRequest{
+				DeriveKeyAlgorithm: types.SymmetricKeyAlgorithm("TDES_2KEY"),
+				RandomKeyMaxLength: types.RandomKeyMaxLength("BYTES_8"),
+			},
+		},
+		RandomKeySendVariantMask: types.RandomKeySendVariantMask("VARIANT_MASK_82C0"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -190,7 +231,18 @@ func TestCheckResponseSnapshot_GenerateAuthRequestCryptogram(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GenerateAuthRequestCryptogram(context.Background(), &GenerateAuthRequestCryptogramInput{})
+	got, err := svc.GenerateAuthRequestCryptogram(context.Background(), &GenerateAuthRequestCryptogramInput{
+		KeyIdentifier:          ptr.String("__KeyIdentifier__"),
+		TransactionData:        ptr.String("__TransactionData__"),
+		MajorKeyDerivationMode: types.MajorKeyDerivationMode("EMV_OPTION_A"),
+		SessionKeyDerivationAttributes: &types.SessionKeyDerivationMemberEmvCommon{
+			Value: types.SessionKeyEmvCommon{
+				PrimaryAccountNumber:          ptr.String("__PrimaryAccountNumber__"),
+				PanSequenceNumber:             ptr.String("__PanSequenceNumber__"),
+				ApplicationTransactionCounter: ptr.String("__ApplicationTransactionCounter__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -213,7 +265,16 @@ func TestCheckResponseSnapshot_GenerateCardValidationData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GenerateCardValidationData(context.Background(), &GenerateCardValidationDataInput{})
+	got, err := svc.GenerateCardValidationData(context.Background(), &GenerateCardValidationDataInput{
+		KeyIdentifier:        ptr.String("__KeyIdentifier__"),
+		PrimaryAccountNumber: ptr.String("__PrimaryAccountNumber__"),
+		GenerationAttributes: &types.CardGenerationAttributesMemberAmexCardSecurityCodeVersion1{
+			Value: types.AmexCardSecurityCodeVersion1{
+				CardExpiryDate: ptr.String("__CardExpiryDate__"),
+			},
+		},
+		ValidationDataLength: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -236,7 +297,14 @@ func TestCheckResponseSnapshot_GenerateMac(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GenerateMac(context.Background(), &GenerateMacInput{})
+	got, err := svc.GenerateMac(context.Background(), &GenerateMacInput{
+		KeyIdentifier: ptr.String("__KeyIdentifier__"),
+		MessageData:   ptr.String("__MessageData__"),
+		GenerationAttributes: &types.MacAttributesMemberAlgorithm{
+			Value: types.MacAlgorithm("ISO9797_ALGORITHM1"),
+		},
+		MacLength: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -270,7 +338,25 @@ func TestCheckResponseSnapshot_GenerateMacEmvPinChange(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GenerateMacEmvPinChange(context.Background(), &GenerateMacEmvPinChangeInput{})
+	got, err := svc.GenerateMacEmvPinChange(context.Background(), &GenerateMacEmvPinChangeInput{
+		NewPinPekIdentifier:                         ptr.String("__NewPinPekIdentifier__"),
+		NewEncryptedPinBlock:                        ptr.String("__NewEncryptedPinBlock__"),
+		PinBlockFormat:                              types.PinBlockFormatForEmvPinChange("ISO_FORMAT_0"),
+		SecureMessagingIntegrityKeyIdentifier:       ptr.String("__SecureMessagingIntegrityKeyIdentifier__"),
+		SecureMessagingConfidentialityKeyIdentifier: ptr.String("__SecureMessagingConfidentialityKeyIdentifier__"),
+		MessageData:                                 ptr.String("__MessageData__"),
+		DerivationMethodAttributes: &types.DerivationMethodAttributesMemberEmvCommon{
+			Value: types.EmvCommonAttributes{
+				MajorKeyDerivationMode: types.MajorKeyDerivationMode("EMV_OPTION_A"),
+				PrimaryAccountNumber:   ptr.String("__PrimaryAccountNumber__"),
+				PanSequenceNumber:      ptr.String("__PanSequenceNumber__"),
+				ApplicationCryptogram:  ptr.String("__ApplicationCryptogram__"),
+				Mode:                   types.EmvEncryptionMode("ECB"),
+				PinBlockPaddingType:    types.PinBlockPaddingType("NO_PADDING"),
+				PinBlockLengthPosition: types.PinBlockLengthPosition("NONE"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -298,7 +384,24 @@ func TestCheckResponseSnapshot_GeneratePinData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GeneratePinData(context.Background(), &GeneratePinDataInput{})
+	got, err := svc.GeneratePinData(context.Background(), &GeneratePinDataInput{
+		GenerationKeyIdentifier: ptr.String("__GenerationKeyIdentifier__"),
+		EncryptionKeyIdentifier: ptr.String("__EncryptionKeyIdentifier__"),
+		GenerationAttributes: &types.PinGenerationAttributesMemberVisaPin{
+			Value: types.VisaPin{
+				PinVerificationKeyIndex: ptr.Int32(1),
+			},
+		},
+		PinDataLength:        ptr.Int32(1),
+		PrimaryAccountNumber: ptr.String("__PrimaryAccountNumber__"),
+		PinBlockFormat:       types.PinBlockFormatForPinData("ISO_FORMAT_0"),
+		EncryptionWrappedKey: &types.WrappedKey{
+			WrappedKeyMaterial: &types.WrappedKeyMaterialMemberTr31KeyBlock{
+				Value: "__WrappedKeyMaterialMemberTr31KeyBlock__",
+			},
+			KeyCheckValueAlgorithm: types.KeyCheckValueAlgorithm("CMAC"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -321,7 +424,37 @@ func TestCheckResponseSnapshot_ReEncryptData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ReEncryptData(context.Background(), &ReEncryptDataInput{})
+	got, err := svc.ReEncryptData(context.Background(), &ReEncryptDataInput{
+		IncomingKeyIdentifier: ptr.String("__IncomingKeyIdentifier__"),
+		OutgoingKeyIdentifier: ptr.String("__OutgoingKeyIdentifier__"),
+		CipherText:            ptr.String("__CipherText__"),
+		IncomingEncryptionAttributes: &types.ReEncryptionAttributesMemberSymmetric{
+			Value: types.SymmetricEncryptionAttributes{
+				Mode:                 types.EncryptionMode("ECB"),
+				InitializationVector: ptr.String("__InitializationVector__"),
+				PaddingType:          types.PaddingType("PKCS1"),
+			},
+		},
+		OutgoingEncryptionAttributes: &types.ReEncryptionAttributesMemberSymmetric{
+			Value: types.SymmetricEncryptionAttributes{
+				Mode:                 types.EncryptionMode("ECB"),
+				InitializationVector: ptr.String("__InitializationVector__"),
+				PaddingType:          types.PaddingType("PKCS1"),
+			},
+		},
+		IncomingWrappedKey: &types.WrappedKey{
+			WrappedKeyMaterial: &types.WrappedKeyMaterialMemberTr31KeyBlock{
+				Value: "__WrappedKeyMaterialMemberTr31KeyBlock__",
+			},
+			KeyCheckValueAlgorithm: types.KeyCheckValueAlgorithm("CMAC"),
+		},
+		OutgoingWrappedKey: &types.WrappedKey{
+			WrappedKeyMaterial: &types.WrappedKeyMaterialMemberTr31KeyBlock{
+				Value: "__WrappedKeyMaterialMemberTr31KeyBlock__",
+			},
+			KeyCheckValueAlgorithm: types.KeyCheckValueAlgorithm("CMAC"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -346,7 +479,28 @@ func TestCheckResponseSnapshot_TranslateKeyMaterial(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TranslateKeyMaterial(context.Background(), &TranslateKeyMaterialInput{})
+	got, err := svc.TranslateKeyMaterial(context.Background(), &TranslateKeyMaterialInput{
+		IncomingKeyMaterial: &types.IncomingKeyMaterialMemberDiffieHellmanTr31KeyBlock{
+			Value: types.IncomingDiffieHellmanTr31KeyBlock{
+				PrivateKeyIdentifier:                    ptr.String("__PrivateKeyIdentifier__"),
+				CertificateAuthorityPublicKeyIdentifier: ptr.String("__CertificateAuthorityPublicKeyIdentifier__"),
+				PublicKeyCertificate:                    ptr.String("__PublicKeyCertificate__"),
+				DeriveKeyAlgorithm:                      types.SymmetricKeyAlgorithm("TDES_2KEY"),
+				KeyDerivationFunction:                   types.KeyDerivationFunction("NIST_SP800"),
+				KeyDerivationHashAlgorithm:              types.KeyDerivationHashAlgorithm("SHA_256"),
+				DerivationData: &types.DiffieHellmanDerivationDataMemberSharedInformation{
+					Value: "__DiffieHellmanDerivationDataMemberSharedInformation__",
+				},
+				WrappedKeyBlock: ptr.String("__WrappedKeyBlock__"),
+			},
+		},
+		OutgoingKeyMaterial: &types.OutgoingKeyMaterialMemberTr31KeyBlock{
+			Value: types.OutgoingTr31KeyBlock{
+				WrappingKeyIdentifier: ptr.String("__WrappingKeyIdentifier__"),
+			},
+		},
+		KeyCheckValueAlgorithm: types.KeyCheckValueAlgorithm("CMAC"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -369,7 +523,47 @@ func TestCheckResponseSnapshot_TranslatePinData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TranslatePinData(context.Background(), &TranslatePinDataInput{})
+	got, err := svc.TranslatePinData(context.Background(), &TranslatePinDataInput{
+		IncomingKeyIdentifier: ptr.String("__IncomingKeyIdentifier__"),
+		OutgoingKeyIdentifier: ptr.String("__OutgoingKeyIdentifier__"),
+		IncomingTranslationAttributes: &types.TranslationIsoFormatsMemberIsoFormat0{
+			Value: types.TranslationPinDataIsoFormat034{
+				PrimaryAccountNumber: ptr.String("__PrimaryAccountNumber__"),
+			},
+		},
+		OutgoingTranslationAttributes: &types.TranslationIsoFormatsMemberIsoFormat0{
+			Value: types.TranslationPinDataIsoFormat034{
+				PrimaryAccountNumber: ptr.String("__PrimaryAccountNumber__"),
+			},
+		},
+		EncryptedPinBlock: ptr.String("__EncryptedPinBlock__"),
+		IncomingDukptAttributes: &types.DukptDerivationAttributes{
+			KeySerialNumber:        ptr.String("__KeySerialNumber__"),
+			DukptKeyDerivationType: types.DukptDerivationType("TDES_2KEY"),
+			DukptKeyVariant:        types.DukptKeyVariant("BIDIRECTIONAL"),
+		},
+		OutgoingDukptAttributes: &types.DukptDerivationAttributes{
+			KeySerialNumber:        ptr.String("__KeySerialNumber__"),
+			DukptKeyDerivationType: types.DukptDerivationType("TDES_2KEY"),
+			DukptKeyVariant:        types.DukptKeyVariant("BIDIRECTIONAL"),
+		},
+		IncomingWrappedKey: &types.WrappedKey{
+			WrappedKeyMaterial: &types.WrappedKeyMaterialMemberTr31KeyBlock{
+				Value: "__WrappedKeyMaterialMemberTr31KeyBlock__",
+			},
+			KeyCheckValueAlgorithm: types.KeyCheckValueAlgorithm("CMAC"),
+		},
+		OutgoingWrappedKey: &types.WrappedKey{
+			WrappedKeyMaterial: &types.WrappedKeyMaterialMemberTr31KeyBlock{
+				Value: "__WrappedKeyMaterialMemberTr31KeyBlock__",
+			},
+			KeyCheckValueAlgorithm: types.KeyCheckValueAlgorithm("CMAC"),
+		},
+		IncomingAs2805Attributes: &types.As2805PekDerivationAttributes{
+			SystemTraceAuditNumber: ptr.String("__SystemTraceAuditNumber__"),
+			TransactionAmount:      ptr.String("__TransactionAmount__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -392,7 +586,24 @@ func TestCheckResponseSnapshot_VerifyAuthRequestCryptogram(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.VerifyAuthRequestCryptogram(context.Background(), &VerifyAuthRequestCryptogramInput{})
+	got, err := svc.VerifyAuthRequestCryptogram(context.Background(), &VerifyAuthRequestCryptogramInput{
+		KeyIdentifier:          ptr.String("__KeyIdentifier__"),
+		TransactionData:        ptr.String("__TransactionData__"),
+		AuthRequestCryptogram:  ptr.String("__AuthRequestCryptogram__"),
+		MajorKeyDerivationMode: types.MajorKeyDerivationMode("EMV_OPTION_A"),
+		SessionKeyDerivationAttributes: &types.SessionKeyDerivationMemberEmvCommon{
+			Value: types.SessionKeyEmvCommon{
+				PrimaryAccountNumber:          ptr.String("__PrimaryAccountNumber__"),
+				PanSequenceNumber:             ptr.String("__PanSequenceNumber__"),
+				ApplicationTransactionCounter: ptr.String("__ApplicationTransactionCounter__"),
+			},
+		},
+		AuthResponseAttributes: &types.CryptogramAuthResponseMemberArpcMethod1{
+			Value: types.CryptogramVerificationArpcMethod1{
+				AuthResponseCode: ptr.String("__AuthResponseCode__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -414,7 +625,16 @@ func TestCheckResponseSnapshot_VerifyCardValidationData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.VerifyCardValidationData(context.Background(), &VerifyCardValidationDataInput{})
+	got, err := svc.VerifyCardValidationData(context.Background(), &VerifyCardValidationDataInput{
+		KeyIdentifier:        ptr.String("__KeyIdentifier__"),
+		PrimaryAccountNumber: ptr.String("__PrimaryAccountNumber__"),
+		VerificationAttributes: &types.CardVerificationAttributesMemberAmexCardSecurityCodeVersion1{
+			Value: types.AmexCardSecurityCodeVersion1{
+				CardExpiryDate: ptr.String("__CardExpiryDate__"),
+			},
+		},
+		ValidationData: ptr.String("__ValidationData__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -436,7 +656,15 @@ func TestCheckResponseSnapshot_VerifyMac(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.VerifyMac(context.Background(), &VerifyMacInput{})
+	got, err := svc.VerifyMac(context.Background(), &VerifyMacInput{
+		KeyIdentifier: ptr.String("__KeyIdentifier__"),
+		MessageData:   ptr.String("__MessageData__"),
+		Mac:           ptr.String("__Mac__"),
+		VerificationAttributes: &types.MacAttributesMemberAlgorithm{
+			Value: types.MacAlgorithm("ISO9797_ALGORITHM1"),
+		},
+		MacLength: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -460,7 +688,30 @@ func TestCheckResponseSnapshot_VerifyPinData(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.VerifyPinData(context.Background(), &VerifyPinDataInput{})
+	got, err := svc.VerifyPinData(context.Background(), &VerifyPinDataInput{
+		VerificationKeyIdentifier: ptr.String("__VerificationKeyIdentifier__"),
+		EncryptionKeyIdentifier:   ptr.String("__EncryptionKeyIdentifier__"),
+		VerificationAttributes: &types.PinVerificationAttributesMemberVisaPin{
+			Value: types.VisaPinVerification{
+				PinVerificationKeyIndex: ptr.Int32(1),
+				VerificationValue:       ptr.String("__VerificationValue__"),
+			},
+		},
+		EncryptedPinBlock:    ptr.String("__EncryptedPinBlock__"),
+		PrimaryAccountNumber: ptr.String("__PrimaryAccountNumber__"),
+		PinBlockFormat:       types.PinBlockFormatForPinData("ISO_FORMAT_0"),
+		PinDataLength:        ptr.Int32(1),
+		DukptAttributes: &types.DukptAttributes{
+			KeySerialNumber:     ptr.String("__KeySerialNumber__"),
+			DukptDerivationType: types.DukptDerivationType("TDES_2KEY"),
+		},
+		EncryptionWrappedKey: &types.WrappedKey{
+			WrappedKeyMaterial: &types.WrappedKeyMaterialMemberTr31KeyBlock{
+				Value: "__WrappedKeyMaterialMemberTr31KeyBlock__",
+			},
+			KeyCheckValueAlgorithm: types.KeyCheckValueAlgorithm("CMAC"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -481,7 +732,23 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DecryptData(context.Background(), &DecryptDataInput{})
+	_, opErr := svc.DecryptData(context.Background(), &DecryptDataInput{
+		KeyIdentifier: ptr.String("__KeyIdentifier__"),
+		CipherText:    ptr.String("__CipherText__"),
+		DecryptionAttributes: &types.EncryptionDecryptionAttributesMemberSymmetric{
+			Value: types.SymmetricEncryptionAttributes{
+				Mode:                 types.EncryptionMode("ECB"),
+				InitializationVector: ptr.String("__InitializationVector__"),
+				PaddingType:          types.PaddingType("PKCS1"),
+			},
+		},
+		WrappedKey: &types.WrappedKey{
+			WrappedKeyMaterial: &types.WrappedKeyMaterialMemberTr31KeyBlock{
+				Value: "__WrappedKeyMaterialMemberTr31KeyBlock__",
+			},
+			KeyCheckValueAlgorithm: types.KeyCheckValueAlgorithm("CMAC"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -506,7 +773,23 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DecryptData(context.Background(), &DecryptDataInput{})
+	_, opErr := svc.DecryptData(context.Background(), &DecryptDataInput{
+		KeyIdentifier: ptr.String("__KeyIdentifier__"),
+		CipherText:    ptr.String("__CipherText__"),
+		DecryptionAttributes: &types.EncryptionDecryptionAttributesMemberSymmetric{
+			Value: types.SymmetricEncryptionAttributes{
+				Mode:                 types.EncryptionMode("ECB"),
+				InitializationVector: ptr.String("__InitializationVector__"),
+				PaddingType:          types.PaddingType("PKCS1"),
+			},
+		},
+		WrappedKey: &types.WrappedKey{
+			WrappedKeyMaterial: &types.WrappedKeyMaterialMemberTr31KeyBlock{
+				Value: "__WrappedKeyMaterialMemberTr31KeyBlock__",
+			},
+			KeyCheckValueAlgorithm: types.KeyCheckValueAlgorithm("CMAC"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -531,7 +814,23 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DecryptData(context.Background(), &DecryptDataInput{})
+	_, opErr := svc.DecryptData(context.Background(), &DecryptDataInput{
+		KeyIdentifier: ptr.String("__KeyIdentifier__"),
+		CipherText:    ptr.String("__CipherText__"),
+		DecryptionAttributes: &types.EncryptionDecryptionAttributesMemberSymmetric{
+			Value: types.SymmetricEncryptionAttributes{
+				Mode:                 types.EncryptionMode("ECB"),
+				InitializationVector: ptr.String("__InitializationVector__"),
+				PaddingType:          types.PaddingType("PKCS1"),
+			},
+		},
+		WrappedKey: &types.WrappedKey{
+			WrappedKeyMaterial: &types.WrappedKeyMaterialMemberTr31KeyBlock{
+				Value: "__WrappedKeyMaterialMemberTr31KeyBlock__",
+			},
+			KeyCheckValueAlgorithm: types.KeyCheckValueAlgorithm("CMAC"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -556,7 +855,23 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DecryptData(context.Background(), &DecryptDataInput{})
+	_, opErr := svc.DecryptData(context.Background(), &DecryptDataInput{
+		KeyIdentifier: ptr.String("__KeyIdentifier__"),
+		CipherText:    ptr.String("__CipherText__"),
+		DecryptionAttributes: &types.EncryptionDecryptionAttributesMemberSymmetric{
+			Value: types.SymmetricEncryptionAttributes{
+				Mode:                 types.EncryptionMode("ECB"),
+				InitializationVector: ptr.String("__InitializationVector__"),
+				PaddingType:          types.PaddingType("PKCS1"),
+			},
+		},
+		WrappedKey: &types.WrappedKey{
+			WrappedKeyMaterial: &types.WrappedKeyMaterialMemberTr31KeyBlock{
+				Value: "__WrappedKeyMaterialMemberTr31KeyBlock__",
+			},
+			KeyCheckValueAlgorithm: types.KeyCheckValueAlgorithm("CMAC"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -591,7 +906,23 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DecryptData(context.Background(), &DecryptDataInput{})
+	_, opErr := svc.DecryptData(context.Background(), &DecryptDataInput{
+		KeyIdentifier: ptr.String("__KeyIdentifier__"),
+		CipherText:    ptr.String("__CipherText__"),
+		DecryptionAttributes: &types.EncryptionDecryptionAttributesMemberSymmetric{
+			Value: types.SymmetricEncryptionAttributes{
+				Mode:                 types.EncryptionMode("ECB"),
+				InitializationVector: ptr.String("__InitializationVector__"),
+				PaddingType:          types.PaddingType("PKCS1"),
+			},
+		},
+		WrappedKey: &types.WrappedKey{
+			WrappedKeyMaterial: &types.WrappedKeyMaterialMemberTr31KeyBlock{
+				Value: "__WrappedKeyMaterialMemberTr31KeyBlock__",
+			},
+			KeyCheckValueAlgorithm: types.KeyCheckValueAlgorithm("CMAC"),
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -617,7 +948,24 @@ func TestCheckResponseSnapshot_Error_VerificationFailedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.VerifyAuthRequestCryptogram(context.Background(), &VerifyAuthRequestCryptogramInput{})
+	_, opErr := svc.VerifyAuthRequestCryptogram(context.Background(), &VerifyAuthRequestCryptogramInput{
+		KeyIdentifier:          ptr.String("__KeyIdentifier__"),
+		TransactionData:        ptr.String("__TransactionData__"),
+		AuthRequestCryptogram:  ptr.String("__AuthRequestCryptogram__"),
+		MajorKeyDerivationMode: types.MajorKeyDerivationMode("EMV_OPTION_A"),
+		SessionKeyDerivationAttributes: &types.SessionKeyDerivationMemberEmvCommon{
+			Value: types.SessionKeyEmvCommon{
+				PrimaryAccountNumber:          ptr.String("__PrimaryAccountNumber__"),
+				PanSequenceNumber:             ptr.String("__PanSequenceNumber__"),
+				ApplicationTransactionCounter: ptr.String("__ApplicationTransactionCounter__"),
+			},
+		},
+		AuthResponseAttributes: &types.CryptogramAuthResponseMemberArpcMethod1{
+			Value: types.CryptogramVerificationArpcMethod1{
+				AuthResponseCode: ptr.String("__AuthResponseCode__"),
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

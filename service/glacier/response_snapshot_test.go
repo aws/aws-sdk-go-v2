@@ -116,7 +116,11 @@ func TestCheckResponseSnapshot_AbortMultipartUpload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AbortMultipartUpload(context.Background(), &AbortMultipartUploadInput{})
+	got, err := svc.AbortMultipartUpload(context.Background(), &AbortMultipartUploadInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+		UploadId:  ptr.String("__UploadId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -135,7 +139,10 @@ func TestCheckResponseSnapshot_AbortVaultLock(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AbortVaultLock(context.Background(), &AbortVaultLockInput{})
+	got, err := svc.AbortVaultLock(context.Background(), &AbortVaultLockInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -154,7 +161,13 @@ func TestCheckResponseSnapshot_AddTagsToVault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AddTagsToVault(context.Background(), &AddTagsToVaultInput{})
+	got, err := svc.AddTagsToVault(context.Background(), &AddTagsToVaultInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -177,7 +190,13 @@ func TestCheckResponseSnapshot_CompleteMultipartUpload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CompleteMultipartUpload(context.Background(), &CompleteMultipartUploadInput{})
+	got, err := svc.CompleteMultipartUpload(context.Background(), &CompleteMultipartUploadInput{
+		AccountId:   ptr.String("__AccountId__"),
+		VaultName:   ptr.String("__VaultName__"),
+		UploadId:    ptr.String("__UploadId__"),
+		ArchiveSize: ptr.String("__ArchiveSize__"),
+		Checksum:    ptr.String("__Checksum__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -196,7 +215,11 @@ func TestCheckResponseSnapshot_CompleteVaultLock(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CompleteVaultLock(context.Background(), &CompleteVaultLockInput{})
+	got, err := svc.CompleteVaultLock(context.Background(), &CompleteVaultLockInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+		LockId:    ptr.String("__LockId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -217,7 +240,10 @@ func TestCheckResponseSnapshot_CreateVault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVault(context.Background(), &CreateVaultInput{})
+	got, err := svc.CreateVault(context.Background(), &CreateVaultInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -236,7 +262,11 @@ func TestCheckResponseSnapshot_DeleteArchive(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteArchive(context.Background(), &DeleteArchiveInput{})
+	got, err := svc.DeleteArchive(context.Background(), &DeleteArchiveInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+		ArchiveId: ptr.String("__ArchiveId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -255,7 +285,10 @@ func TestCheckResponseSnapshot_DeleteVault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVault(context.Background(), &DeleteVaultInput{})
+	got, err := svc.DeleteVault(context.Background(), &DeleteVaultInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -274,7 +307,10 @@ func TestCheckResponseSnapshot_DeleteVaultAccessPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVaultAccessPolicy(context.Background(), &DeleteVaultAccessPolicyInput{})
+	got, err := svc.DeleteVaultAccessPolicy(context.Background(), &DeleteVaultAccessPolicyInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -293,7 +329,10 @@ func TestCheckResponseSnapshot_DeleteVaultNotifications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVaultNotifications(context.Background(), &DeleteVaultNotificationsInput{})
+	got, err := svc.DeleteVaultNotifications(context.Background(), &DeleteVaultNotificationsInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -402,7 +441,11 @@ func TestCheckResponseSnapshot_DescribeJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeJob(context.Background(), &DescribeJobInput{})
+	got, err := svc.DescribeJob(context.Background(), &DescribeJobInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+		JobId:     ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -428,7 +471,10 @@ func TestCheckResponseSnapshot_DescribeVault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeVault(context.Background(), &DescribeVaultInput{})
+	got, err := svc.DescribeVault(context.Background(), &DescribeVaultInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -460,7 +506,9 @@ func TestCheckResponseSnapshot_GetDataRetrievalPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetDataRetrievalPolicy(context.Background(), &GetDataRetrievalPolicyInput{})
+	got, err := svc.GetDataRetrievalPolicy(context.Background(), &GetDataRetrievalPolicyInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -471,8 +519,9 @@ func TestCheckResponseSnapshot_GetDataRetrievalPolicy(t *testing.T) {
 
 func TestCheckResponseSnapshot_GetJobOutput(t *testing.T) {
 	want := &GetJobOutputOutput{
+		Body:               io.NopCloser(bytes.NewReader([]byte("__Body__"))),
 		Checksum:           ptr.String("__Checksum__"),
-		Status:             1,
+		Status:             200,
 		ContentRange:       ptr.String("__ContentRange__"),
 		AcceptRanges:       ptr.String("__AcceptRanges__"),
 		ContentType:        ptr.String("__ContentType__"),
@@ -486,7 +535,12 @@ func TestCheckResponseSnapshot_GetJobOutput(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetJobOutput(context.Background(), &GetJobOutputInput{})
+	got, err := svc.GetJobOutput(context.Background(), &GetJobOutputInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+		JobId:     ptr.String("__JobId__"),
+		Range:     ptr.String("__Range__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -509,7 +563,10 @@ func TestCheckResponseSnapshot_GetVaultAccessPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVaultAccessPolicy(context.Background(), &GetVaultAccessPolicyInput{})
+	got, err := svc.GetVaultAccessPolicy(context.Background(), &GetVaultAccessPolicyInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -533,7 +590,10 @@ func TestCheckResponseSnapshot_GetVaultLock(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVaultLock(context.Background(), &GetVaultLockInput{})
+	got, err := svc.GetVaultLock(context.Background(), &GetVaultLockInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -560,7 +620,10 @@ func TestCheckResponseSnapshot_GetVaultNotifications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVaultNotifications(context.Background(), &GetVaultNotificationsInput{})
+	got, err := svc.GetVaultNotifications(context.Background(), &GetVaultNotificationsInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -583,7 +646,89 @@ func TestCheckResponseSnapshot_InitiateJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InitiateJob(context.Background(), &InitiateJobInput{})
+	got, err := svc.InitiateJob(context.Background(), &InitiateJobInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+		JobParameters: &types.JobParameters{
+			Format:             ptr.String("__Format__"),
+			Type:               ptr.String("__Type__"),
+			ArchiveId:          ptr.String("__ArchiveId__"),
+			Description:        ptr.String("__Description__"),
+			SNSTopic:           ptr.String("__SNSTopic__"),
+			RetrievalByteRange: ptr.String("__RetrievalByteRange__"),
+			Tier:               ptr.String("__Tier__"),
+			InventoryRetrievalParameters: &types.InventoryRetrievalJobInput{
+				StartDate: ptr.String("__StartDate__"),
+				EndDate:   ptr.String("__EndDate__"),
+				Limit:     ptr.String("__Limit__"),
+				Marker:    ptr.String("__Marker__"),
+			},
+			SelectParameters: &types.SelectParameters{
+				InputSerialization: &types.InputSerialization{
+					Csv: &types.CSVInput{
+						FileHeaderInfo:       types.FileHeaderInfo("USE"),
+						Comments:             ptr.String("__Comments__"),
+						QuoteEscapeCharacter: ptr.String("__QuoteEscapeCharacter__"),
+						RecordDelimiter:      ptr.String("__RecordDelimiter__"),
+						FieldDelimiter:       ptr.String("__FieldDelimiter__"),
+						QuoteCharacter:       ptr.String("__QuoteCharacter__"),
+					},
+				},
+				ExpressionType: types.ExpressionType("SQL"),
+				Expression:     ptr.String("__Expression__"),
+				OutputSerialization: &types.OutputSerialization{
+					Csv: &types.CSVOutput{
+						QuoteFields:          types.QuoteFields("ALWAYS"),
+						QuoteEscapeCharacter: ptr.String("__QuoteEscapeCharacter__"),
+						RecordDelimiter:      ptr.String("__RecordDelimiter__"),
+						FieldDelimiter:       ptr.String("__FieldDelimiter__"),
+						QuoteCharacter:       ptr.String("__QuoteCharacter__"),
+					},
+				},
+			},
+			OutputLocation: &types.OutputLocation{
+				S3: &types.S3Location{
+					BucketName: ptr.String("__BucketName__"),
+					Prefix:     ptr.String("__Prefix__"),
+					Encryption: &types.Encryption{
+						EncryptionType: types.EncryptionType("aws:kms"),
+						KMSKeyId:       ptr.String("__KMSKeyId__"),
+						KMSContext:     ptr.String("__KMSContext__"),
+					},
+					CannedACL: types.CannedACL("private"),
+					AccessControlList: []types.Grant{
+						{
+							Grantee: &types.Grantee{
+								Type:         types.Type("AmazonCustomerByEmail"),
+								DisplayName:  ptr.String("__DisplayName__"),
+								URI:          ptr.String("__URI__"),
+								ID:           ptr.String("__ID__"),
+								EmailAddress: ptr.String("__EmailAddress__"),
+							},
+							Permission: types.Permission("FULL_CONTROL"),
+						},
+						{
+							Grantee: &types.Grantee{
+								Type:         types.Type("AmazonCustomerByEmail"),
+								DisplayName:  ptr.String("__DisplayName__"),
+								URI:          ptr.String("__URI__"),
+								ID:           ptr.String("__ID__"),
+								EmailAddress: ptr.String("__EmailAddress__"),
+							},
+							Permission: types.Permission("FULL_CONTROL"),
+						},
+					},
+					Tagging: map[string]string{
+						"key0": "__Value__",
+					},
+					UserMetadata: map[string]string{
+						"key0": "__Value__",
+					},
+					StorageClass: types.StorageClass("STANDARD"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -605,7 +750,12 @@ func TestCheckResponseSnapshot_InitiateMultipartUpload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InitiateMultipartUpload(context.Background(), &InitiateMultipartUploadInput{})
+	got, err := svc.InitiateMultipartUpload(context.Background(), &InitiateMultipartUploadInput{
+		AccountId:          ptr.String("__AccountId__"),
+		VaultName:          ptr.String("__VaultName__"),
+		ArchiveDescription: ptr.String("__ArchiveDescription__"),
+		PartSize:           ptr.String("__PartSize__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -626,7 +776,13 @@ func TestCheckResponseSnapshot_InitiateVaultLock(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.InitiateVaultLock(context.Background(), &InitiateVaultLockInput{})
+	got, err := svc.InitiateVaultLock(context.Background(), &InitiateVaultLockInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+		Policy: &types.VaultLockPolicy{
+			Policy: ptr.String("__Policy__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -831,7 +987,14 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListJobs(context.Background(), &ListJobsInput{})
+	got, err := svc.ListJobs(context.Background(), &ListJobsInput{
+		AccountId:  ptr.String("__AccountId__"),
+		VaultName:  ptr.String("__VaultName__"),
+		Limit:      ptr.Int32(1),
+		Marker:     ptr.String("__Marker__"),
+		Statuscode: ptr.String("__Statuscode__"),
+		Completed:  ptr.String("__Completed__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -868,7 +1031,12 @@ func TestCheckResponseSnapshot_ListMultipartUploads(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMultipartUploads(context.Background(), &ListMultipartUploadsInput{})
+	got, err := svc.ListMultipartUploads(context.Background(), &ListMultipartUploadsInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+		Limit:     ptr.Int32(1),
+		Marker:    ptr.String("__Marker__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -904,7 +1072,13 @@ func TestCheckResponseSnapshot_ListParts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListParts(context.Background(), &ListPartsInput{})
+	got, err := svc.ListParts(context.Background(), &ListPartsInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+		UploadId:  ptr.String("__UploadId__"),
+		Marker:    ptr.String("__Marker__"),
+		Limit:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -936,7 +1110,9 @@ func TestCheckResponseSnapshot_ListProvisionedCapacity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListProvisionedCapacity(context.Background(), &ListProvisionedCapacityInput{})
+	got, err := svc.ListProvisionedCapacity(context.Background(), &ListProvisionedCapacityInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -959,7 +1135,10 @@ func TestCheckResponseSnapshot_ListTagsForVault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForVault(context.Background(), &ListTagsForVaultInput{})
+	got, err := svc.ListTagsForVault(context.Background(), &ListTagsForVaultInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -998,7 +1177,11 @@ func TestCheckResponseSnapshot_ListVaults(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVaults(context.Background(), &ListVaultsInput{})
+	got, err := svc.ListVaults(context.Background(), &ListVaultsInput{
+		AccountId: ptr.String("__AccountId__"),
+		Marker:    ptr.String("__Marker__"),
+		Limit:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1019,7 +1202,9 @@ func TestCheckResponseSnapshot_PurchaseProvisionedCapacity(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PurchaseProvisionedCapacity(context.Background(), &PurchaseProvisionedCapacityInput{})
+	got, err := svc.PurchaseProvisionedCapacity(context.Background(), &PurchaseProvisionedCapacityInput{
+		AccountId: ptr.String("__AccountId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1038,7 +1223,14 @@ func TestCheckResponseSnapshot_RemoveTagsFromVault(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.RemoveTagsFromVault(context.Background(), &RemoveTagsFromVaultInput{})
+	got, err := svc.RemoveTagsFromVault(context.Background(), &RemoveTagsFromVaultInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1057,7 +1249,21 @@ func TestCheckResponseSnapshot_SetDataRetrievalPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetDataRetrievalPolicy(context.Background(), &SetDataRetrievalPolicyInput{})
+	got, err := svc.SetDataRetrievalPolicy(context.Background(), &SetDataRetrievalPolicyInput{
+		AccountId: ptr.String("__AccountId__"),
+		Policy: &types.DataRetrievalPolicy{
+			Rules: []types.DataRetrievalRule{
+				{
+					Strategy:     ptr.String("__Strategy__"),
+					BytesPerHour: ptr.Int64(1),
+				},
+				{
+					Strategy:     ptr.String("__Strategy__"),
+					BytesPerHour: ptr.Int64(1),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1076,7 +1282,13 @@ func TestCheckResponseSnapshot_SetVaultAccessPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetVaultAccessPolicy(context.Background(), &SetVaultAccessPolicyInput{})
+	got, err := svc.SetVaultAccessPolicy(context.Background(), &SetVaultAccessPolicyInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+		Policy: &types.VaultAccessPolicy{
+			Policy: ptr.String("__Policy__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1095,7 +1307,17 @@ func TestCheckResponseSnapshot_SetVaultNotifications(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SetVaultNotifications(context.Background(), &SetVaultNotificationsInput{})
+	got, err := svc.SetVaultNotifications(context.Background(), &SetVaultNotificationsInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+		VaultNotificationConfig: &types.VaultNotificationConfig{
+			SNSTopic: ptr.String("__SNSTopic__"),
+			Events: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1118,7 +1340,13 @@ func TestCheckResponseSnapshot_UploadArchive(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UploadArchive(context.Background(), &UploadArchiveInput{})
+	got, err := svc.UploadArchive(context.Background(), &UploadArchiveInput{
+		VaultName:          ptr.String("__VaultName__"),
+		AccountId:          ptr.String("__AccountId__"),
+		ArchiveDescription: ptr.String("__ArchiveDescription__"),
+		Checksum:           ptr.String("__Checksum__"),
+		Body:               io.NopCloser(bytes.NewReader([]byte("__Body__"))),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1139,7 +1367,14 @@ func TestCheckResponseSnapshot_UploadMultipartPart(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UploadMultipartPart(context.Background(), &UploadMultipartPartInput{})
+	got, err := svc.UploadMultipartPart(context.Background(), &UploadMultipartPartInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+		UploadId:  ptr.String("__UploadId__"),
+		Checksum:  ptr.String("__Checksum__"),
+		Range:     ptr.String("__Range__"),
+		Body:      io.NopCloser(bytes.NewReader([]byte("__Body__"))),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1151,7 +1386,7 @@ func TestCheckResponseSnapshot_UploadMultipartPart(t *testing.T) {
 func TestCheckResponseSnapshot_Error_InsufficientCapacityException(t *testing.T) {
 	want := &types.InsufficientCapacityException{
 		Type:    ptr.String("__Type__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("InsufficientCapacityException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InsufficientCapacityException.error")
@@ -1162,7 +1397,89 @@ func TestCheckResponseSnapshot_Error_InsufficientCapacityException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.InitiateJob(context.Background(), &InitiateJobInput{})
+	_, opErr := svc.InitiateJob(context.Background(), &InitiateJobInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+		JobParameters: &types.JobParameters{
+			Format:             ptr.String("__Format__"),
+			Type:               ptr.String("__Type__"),
+			ArchiveId:          ptr.String("__ArchiveId__"),
+			Description:        ptr.String("__Description__"),
+			SNSTopic:           ptr.String("__SNSTopic__"),
+			RetrievalByteRange: ptr.String("__RetrievalByteRange__"),
+			Tier:               ptr.String("__Tier__"),
+			InventoryRetrievalParameters: &types.InventoryRetrievalJobInput{
+				StartDate: ptr.String("__StartDate__"),
+				EndDate:   ptr.String("__EndDate__"),
+				Limit:     ptr.String("__Limit__"),
+				Marker:    ptr.String("__Marker__"),
+			},
+			SelectParameters: &types.SelectParameters{
+				InputSerialization: &types.InputSerialization{
+					Csv: &types.CSVInput{
+						FileHeaderInfo:       types.FileHeaderInfo("USE"),
+						Comments:             ptr.String("__Comments__"),
+						QuoteEscapeCharacter: ptr.String("__QuoteEscapeCharacter__"),
+						RecordDelimiter:      ptr.String("__RecordDelimiter__"),
+						FieldDelimiter:       ptr.String("__FieldDelimiter__"),
+						QuoteCharacter:       ptr.String("__QuoteCharacter__"),
+					},
+				},
+				ExpressionType: types.ExpressionType("SQL"),
+				Expression:     ptr.String("__Expression__"),
+				OutputSerialization: &types.OutputSerialization{
+					Csv: &types.CSVOutput{
+						QuoteFields:          types.QuoteFields("ALWAYS"),
+						QuoteEscapeCharacter: ptr.String("__QuoteEscapeCharacter__"),
+						RecordDelimiter:      ptr.String("__RecordDelimiter__"),
+						FieldDelimiter:       ptr.String("__FieldDelimiter__"),
+						QuoteCharacter:       ptr.String("__QuoteCharacter__"),
+					},
+				},
+			},
+			OutputLocation: &types.OutputLocation{
+				S3: &types.S3Location{
+					BucketName: ptr.String("__BucketName__"),
+					Prefix:     ptr.String("__Prefix__"),
+					Encryption: &types.Encryption{
+						EncryptionType: types.EncryptionType("aws:kms"),
+						KMSKeyId:       ptr.String("__KMSKeyId__"),
+						KMSContext:     ptr.String("__KMSContext__"),
+					},
+					CannedACL: types.CannedACL("private"),
+					AccessControlList: []types.Grant{
+						{
+							Grantee: &types.Grantee{
+								Type:         types.Type("AmazonCustomerByEmail"),
+								DisplayName:  ptr.String("__DisplayName__"),
+								URI:          ptr.String("__URI__"),
+								ID:           ptr.String("__ID__"),
+								EmailAddress: ptr.String("__EmailAddress__"),
+							},
+							Permission: types.Permission("FULL_CONTROL"),
+						},
+						{
+							Grantee: &types.Grantee{
+								Type:         types.Type("AmazonCustomerByEmail"),
+								DisplayName:  ptr.String("__DisplayName__"),
+								URI:          ptr.String("__URI__"),
+								ID:           ptr.String("__ID__"),
+								EmailAddress: ptr.String("__EmailAddress__"),
+							},
+							Permission: types.Permission("FULL_CONTROL"),
+						},
+					},
+					Tagging: map[string]string{
+						"key0": "__Value__",
+					},
+					UserMetadata: map[string]string{
+						"key0": "__Value__",
+					},
+					StorageClass: types.StorageClass("STANDARD"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1178,7 +1495,7 @@ func TestCheckResponseSnapshot_Error_InsufficientCapacityException(t *testing.T)
 func TestCheckResponseSnapshot_Error_InvalidParameterValueException(t *testing.T) {
 	want := &types.InvalidParameterValueException{
 		Type:    ptr.String("__Type__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("InvalidParameterValueException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InvalidParameterValueException.error")
@@ -1189,7 +1506,11 @@ func TestCheckResponseSnapshot_Error_InvalidParameterValueException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AbortMultipartUpload(context.Background(), &AbortMultipartUploadInput{})
+	_, opErr := svc.AbortMultipartUpload(context.Background(), &AbortMultipartUploadInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+		UploadId:  ptr.String("__UploadId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1205,7 +1526,7 @@ func TestCheckResponseSnapshot_Error_InvalidParameterValueException(t *testing.T
 func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 	want := &types.LimitExceededException{
 		Type:    ptr.String("__Type__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("LimitExceededException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("LimitExceededException.error")
@@ -1216,7 +1537,13 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AddTagsToVault(context.Background(), &AddTagsToVaultInput{})
+	_, opErr := svc.AddTagsToVault(context.Background(), &AddTagsToVaultInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1232,7 +1559,7 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_MissingParameterValueException(t *testing.T) {
 	want := &types.MissingParameterValueException{
 		Type:    ptr.String("__Type__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("MissingParameterValueException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("MissingParameterValueException.error")
@@ -1243,7 +1570,11 @@ func TestCheckResponseSnapshot_Error_MissingParameterValueException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AbortMultipartUpload(context.Background(), &AbortMultipartUploadInput{})
+	_, opErr := svc.AbortMultipartUpload(context.Background(), &AbortMultipartUploadInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+		UploadId:  ptr.String("__UploadId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1259,7 +1590,7 @@ func TestCheckResponseSnapshot_Error_MissingParameterValueException(t *testing.T
 func TestCheckResponseSnapshot_Error_NoLongerSupportedException(t *testing.T) {
 	want := &types.NoLongerSupportedException{
 		Type:    ptr.String("__Type__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("NoLongerSupportedException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("NoLongerSupportedException.error")
@@ -1270,7 +1601,11 @@ func TestCheckResponseSnapshot_Error_NoLongerSupportedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AbortMultipartUpload(context.Background(), &AbortMultipartUploadInput{})
+	_, opErr := svc.AbortMultipartUpload(context.Background(), &AbortMultipartUploadInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+		UploadId:  ptr.String("__UploadId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1286,7 +1621,7 @@ func TestCheckResponseSnapshot_Error_NoLongerSupportedException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_PolicyEnforcedException(t *testing.T) {
 	want := &types.PolicyEnforcedException{
 		Type:    ptr.String("__Type__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("PolicyEnforcedException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("PolicyEnforcedException.error")
@@ -1297,7 +1632,89 @@ func TestCheckResponseSnapshot_Error_PolicyEnforcedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.InitiateJob(context.Background(), &InitiateJobInput{})
+	_, opErr := svc.InitiateJob(context.Background(), &InitiateJobInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+		JobParameters: &types.JobParameters{
+			Format:             ptr.String("__Format__"),
+			Type:               ptr.String("__Type__"),
+			ArchiveId:          ptr.String("__ArchiveId__"),
+			Description:        ptr.String("__Description__"),
+			SNSTopic:           ptr.String("__SNSTopic__"),
+			RetrievalByteRange: ptr.String("__RetrievalByteRange__"),
+			Tier:               ptr.String("__Tier__"),
+			InventoryRetrievalParameters: &types.InventoryRetrievalJobInput{
+				StartDate: ptr.String("__StartDate__"),
+				EndDate:   ptr.String("__EndDate__"),
+				Limit:     ptr.String("__Limit__"),
+				Marker:    ptr.String("__Marker__"),
+			},
+			SelectParameters: &types.SelectParameters{
+				InputSerialization: &types.InputSerialization{
+					Csv: &types.CSVInput{
+						FileHeaderInfo:       types.FileHeaderInfo("USE"),
+						Comments:             ptr.String("__Comments__"),
+						QuoteEscapeCharacter: ptr.String("__QuoteEscapeCharacter__"),
+						RecordDelimiter:      ptr.String("__RecordDelimiter__"),
+						FieldDelimiter:       ptr.String("__FieldDelimiter__"),
+						QuoteCharacter:       ptr.String("__QuoteCharacter__"),
+					},
+				},
+				ExpressionType: types.ExpressionType("SQL"),
+				Expression:     ptr.String("__Expression__"),
+				OutputSerialization: &types.OutputSerialization{
+					Csv: &types.CSVOutput{
+						QuoteFields:          types.QuoteFields("ALWAYS"),
+						QuoteEscapeCharacter: ptr.String("__QuoteEscapeCharacter__"),
+						RecordDelimiter:      ptr.String("__RecordDelimiter__"),
+						FieldDelimiter:       ptr.String("__FieldDelimiter__"),
+						QuoteCharacter:       ptr.String("__QuoteCharacter__"),
+					},
+				},
+			},
+			OutputLocation: &types.OutputLocation{
+				S3: &types.S3Location{
+					BucketName: ptr.String("__BucketName__"),
+					Prefix:     ptr.String("__Prefix__"),
+					Encryption: &types.Encryption{
+						EncryptionType: types.EncryptionType("aws:kms"),
+						KMSKeyId:       ptr.String("__KMSKeyId__"),
+						KMSContext:     ptr.String("__KMSContext__"),
+					},
+					CannedACL: types.CannedACL("private"),
+					AccessControlList: []types.Grant{
+						{
+							Grantee: &types.Grantee{
+								Type:         types.Type("AmazonCustomerByEmail"),
+								DisplayName:  ptr.String("__DisplayName__"),
+								URI:          ptr.String("__URI__"),
+								ID:           ptr.String("__ID__"),
+								EmailAddress: ptr.String("__EmailAddress__"),
+							},
+							Permission: types.Permission("FULL_CONTROL"),
+						},
+						{
+							Grantee: &types.Grantee{
+								Type:         types.Type("AmazonCustomerByEmail"),
+								DisplayName:  ptr.String("__DisplayName__"),
+								URI:          ptr.String("__URI__"),
+								ID:           ptr.String("__ID__"),
+								EmailAddress: ptr.String("__EmailAddress__"),
+							},
+							Permission: types.Permission("FULL_CONTROL"),
+						},
+					},
+					Tagging: map[string]string{
+						"key0": "__Value__",
+					},
+					UserMetadata: map[string]string{
+						"key0": "__Value__",
+					},
+					StorageClass: types.StorageClass("STANDARD"),
+				},
+			},
+		},
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1313,7 +1730,7 @@ func TestCheckResponseSnapshot_Error_PolicyEnforcedException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_RequestTimeoutException(t *testing.T) {
 	want := &types.RequestTimeoutException{
 		Type:    ptr.String("__Type__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("RequestTimeoutException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("RequestTimeoutException.error")
@@ -1324,7 +1741,13 @@ func TestCheckResponseSnapshot_Error_RequestTimeoutException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.UploadArchive(context.Background(), &UploadArchiveInput{})
+	_, opErr := svc.UploadArchive(context.Background(), &UploadArchiveInput{
+		VaultName:          ptr.String("__VaultName__"),
+		AccountId:          ptr.String("__AccountId__"),
+		ArchiveDescription: ptr.String("__ArchiveDescription__"),
+		Checksum:           ptr.String("__Checksum__"),
+		Body:               io.NopCloser(bytes.NewReader([]byte("__Body__"))),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1340,7 +1763,7 @@ func TestCheckResponseSnapshot_Error_RequestTimeoutException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 	want := &types.ResourceNotFoundException{
 		Type:    ptr.String("__Type__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("ResourceNotFoundException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ResourceNotFoundException.error")
@@ -1351,7 +1774,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AbortMultipartUpload(context.Background(), &AbortMultipartUploadInput{})
+	_, opErr := svc.AbortMultipartUpload(context.Background(), &AbortMultipartUploadInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+		UploadId:  ptr.String("__UploadId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1367,7 +1794,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 	want := &types.ServiceUnavailableException{
 		Type:    ptr.String("__Type__"),
-		Code:    ptr.String("__Code__"),
+		Code:    ptr.String("ServiceUnavailableException"),
 		Message: ptr.String("__Message__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ServiceUnavailableException.error")
@@ -1378,7 +1805,11 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AbortMultipartUpload(context.Background(), &AbortMultipartUploadInput{})
+	_, opErr := svc.AbortMultipartUpload(context.Background(), &AbortMultipartUploadInput{
+		AccountId: ptr.String("__AccountId__"),
+		VaultName: ptr.String("__VaultName__"),
+		UploadId:  ptr.String("__UploadId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

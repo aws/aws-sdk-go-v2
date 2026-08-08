@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"StatisticsNotAvailableException","code":"StatisticsNotAvailableException","detailedMessage":"__DetailedMessage__","requestId":"__RequestId__"}

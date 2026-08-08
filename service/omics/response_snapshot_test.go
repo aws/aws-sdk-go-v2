@@ -10,6 +10,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/document"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -117,7 +118,10 @@ func TestCheckResponseSnapshot_AbortMultipartReadSetUpload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AbortMultipartReadSetUpload(context.Background(), &AbortMultipartReadSetUploadInput{})
+	got, err := svc.AbortMultipartReadSetUpload(context.Background(), &AbortMultipartReadSetUploadInput{
+		SequenceStoreId: ptr.String("__SequenceStoreId__"),
+		UploadId:        ptr.String("__UploadId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -138,7 +142,9 @@ func TestCheckResponseSnapshot_AcceptShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AcceptShare(context.Background(), &AcceptShareInput{})
+	got, err := svc.AcceptShare(context.Background(), &AcceptShareInput{
+		ShareId: ptr.String("__ShareId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -170,7 +176,13 @@ func TestCheckResponseSnapshot_BatchDeleteReadSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.BatchDeleteReadSet(context.Background(), &BatchDeleteReadSetInput{})
+	got, err := svc.BatchDeleteReadSet(context.Background(), &BatchDeleteReadSetInput{
+		Ids: []string{
+			"__Member__",
+			"__Member__",
+		},
+		SequenceStoreId: ptr.String("__SequenceStoreId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -189,7 +201,9 @@ func TestCheckResponseSnapshot_CancelAnnotationImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelAnnotationImportJob(context.Background(), &CancelAnnotationImportJobInput{})
+	got, err := svc.CancelAnnotationImportJob(context.Background(), &CancelAnnotationImportJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -208,7 +222,9 @@ func TestCheckResponseSnapshot_CancelRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelRun(context.Background(), &CancelRunInput{})
+	got, err := svc.CancelRun(context.Background(), &CancelRunInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -227,7 +243,9 @@ func TestCheckResponseSnapshot_CancelRunBatch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelRunBatch(context.Background(), &CancelRunBatchInput{})
+	got, err := svc.CancelRunBatch(context.Background(), &CancelRunBatchInput{
+		BatchId: ptr.String("__BatchId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -246,7 +264,9 @@ func TestCheckResponseSnapshot_CancelVariantImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CancelVariantImportJob(context.Background(), &CancelVariantImportJobInput{})
+	got, err := svc.CancelVariantImportJob(context.Background(), &CancelVariantImportJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -267,7 +287,22 @@ func TestCheckResponseSnapshot_CompleteMultipartReadSetUpload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CompleteMultipartReadSetUpload(context.Background(), &CompleteMultipartReadSetUploadInput{})
+	got, err := svc.CompleteMultipartReadSetUpload(context.Background(), &CompleteMultipartReadSetUploadInput{
+		SequenceStoreId: ptr.String("__SequenceStoreId__"),
+		UploadId:        ptr.String("__UploadId__"),
+		Parts: []types.CompleteReadSetUploadPartListItem{
+			{
+				PartNumber: ptr.Int32(1),
+				PartSource: types.ReadSetPartSource("SOURCE1"),
+				Checksum:   ptr.String("__Checksum__"),
+			},
+			{
+				PartNumber: ptr.Int32(1),
+				PartSource: types.ReadSetPartSource("SOURCE1"),
+				Checksum:   ptr.String("__Checksum__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -312,7 +347,38 @@ func TestCheckResponseSnapshot_CreateAnnotationStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAnnotationStore(context.Background(), &CreateAnnotationStoreInput{})
+	got, err := svc.CreateAnnotationStore(context.Background(), &CreateAnnotationStoreInput{
+		Reference: &types.ReferenceItemMemberReferenceArn{
+			Value: "__ReferenceItemMemberReferenceArn__",
+		},
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		VersionName: ptr.String("__VersionName__"),
+		SseConfig: &types.SseConfig{
+			Type:   types.EncryptionType("KMS"),
+			KeyArn: ptr.String("__KeyArn__"),
+		},
+		StoreFormat: types.StoreFormat("GFF"),
+		StoreOptions: &types.StoreOptionsMemberTsvStoreOptions{
+			Value: types.TsvStoreOptions{
+				AnnotationType: types.AnnotationType("GENERIC"),
+				FormatToHeader: map[string]string{
+					"key0": "__Value__",
+				},
+				Schema: []map[string]types.SchemaValueType{
+					{
+						"key0": types.SchemaValueType("LONG"),
+					},
+					{
+						"key0": types.SchemaValueType("LONG"),
+					},
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -354,7 +420,30 @@ func TestCheckResponseSnapshot_CreateAnnotationStoreVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateAnnotationStoreVersion(context.Background(), &CreateAnnotationStoreVersionInput{})
+	got, err := svc.CreateAnnotationStoreVersion(context.Background(), &CreateAnnotationStoreVersionInput{
+		Name:        ptr.String("__Name__"),
+		VersionName: ptr.String("__VersionName__"),
+		Description: ptr.String("__Description__"),
+		VersionOptions: &types.VersionOptionsMemberTsvVersionOptions{
+			Value: types.TsvVersionOptions{
+				AnnotationType: types.AnnotationType("GENERIC"),
+				FormatToHeader: map[string]string{
+					"key0": "__Value__",
+				},
+				Schema: []map[string]types.SchemaValueType{
+					{
+						"key0": types.SchemaValueType("LONG"),
+					},
+					{
+						"key0": types.SchemaValueType("LONG"),
+					},
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -396,7 +485,26 @@ func TestCheckResponseSnapshot_CreateConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateConfiguration(context.Background(), &CreateConfigurationInput{})
+	got, err := svc.CreateConfiguration(context.Background(), &CreateConfigurationInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		RunConfigurations: &types.RunConfigurations{
+			VpcConfig: &types.VpcConfig{
+				SecurityGroupIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SubnetIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		RequestId: ptr.String("__RequestId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -429,7 +537,20 @@ func TestCheckResponseSnapshot_CreateMultipartReadSetUpload(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateMultipartReadSetUpload(context.Background(), &CreateMultipartReadSetUploadInput{})
+	got, err := svc.CreateMultipartReadSetUpload(context.Background(), &CreateMultipartReadSetUploadInput{
+		SequenceStoreId: ptr.String("__SequenceStoreId__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		SourceFileType:  types.FileType("FASTQ"),
+		SubjectId:       ptr.String("__SubjectId__"),
+		SampleId:        ptr.String("__SampleId__"),
+		GeneratedFrom:   ptr.String("__GeneratedFrom__"),
+		ReferenceArn:    ptr.String("__ReferenceArn__"),
+		Name:            ptr.String("__Name__"),
+		Description:     ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -458,7 +579,18 @@ func TestCheckResponseSnapshot_CreateReferenceStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateReferenceStore(context.Background(), &CreateReferenceStoreInput{})
+	got, err := svc.CreateReferenceStore(context.Background(), &CreateReferenceStoreInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		SseConfig: &types.SseConfig{
+			Type:   types.EncryptionType("KMS"),
+			KeyArn: ptr.String("__KeyArn__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -484,7 +616,17 @@ func TestCheckResponseSnapshot_CreateRunCache(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRunCache(context.Background(), &CreateRunCacheInput{})
+	got, err := svc.CreateRunCache(context.Background(), &CreateRunCacheInput{
+		CacheBehavior:   types.CacheBehavior("CACHE_ON_FAILURE"),
+		CacheS3Location: ptr.String("__CacheS3Location__"),
+		Description:     ptr.String("__Description__"),
+		Name:            ptr.String("__Name__"),
+		RequestId:       ptr.String("__RequestId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		CacheBucketOwnerId: ptr.String("__CacheBucketOwnerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -509,7 +651,17 @@ func TestCheckResponseSnapshot_CreateRunGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateRunGroup(context.Background(), &CreateRunGroupInput{})
+	got, err := svc.CreateRunGroup(context.Background(), &CreateRunGroupInput{
+		Name:        ptr.String("__Name__"),
+		MaxCpus:     ptr.Int32(1),
+		MaxRuns:     ptr.Int32(1),
+		MaxDuration: ptr.Int32(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		RequestId: ptr.String("__RequestId__"),
+		MaxGpus:   ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -551,7 +703,27 @@ func TestCheckResponseSnapshot_CreateSequenceStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSequenceStore(context.Background(), &CreateSequenceStoreInput{})
+	got, err := svc.CreateSequenceStore(context.Background(), &CreateSequenceStoreInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		SseConfig: &types.SseConfig{
+			Type:   types.EncryptionType("KMS"),
+			KeyArn: ptr.String("__KeyArn__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken:         ptr.String("__ClientToken__"),
+		FallbackLocation:    ptr.String("__FallbackLocation__"),
+		ETagAlgorithmFamily: types.ETagAlgorithmFamily("MD5up"),
+		PropagatedSetLevelTags: []string{
+			"__Member__",
+			"__Member__",
+		},
+		S3AccessConfig: &types.S3AccessConfig{
+			AccessLogLocation: ptr.String("__AccessLogLocation__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -574,7 +746,11 @@ func TestCheckResponseSnapshot_CreateShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateShare(context.Background(), &CreateShareInput{})
+	got, err := svc.CreateShare(context.Background(), &CreateShareInput{
+		ResourceArn:         ptr.String("__ResourceArn__"),
+		PrincipalSubscriber: ptr.String("__PrincipalSubscriber__"),
+		ShareName:           ptr.String("__ShareName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -601,7 +777,20 @@ func TestCheckResponseSnapshot_CreateVariantStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateVariantStore(context.Background(), &CreateVariantStoreInput{})
+	got, err := svc.CreateVariantStore(context.Background(), &CreateVariantStoreInput{
+		Reference: &types.ReferenceItemMemberReferenceArn{
+			Value: "__ReferenceItemMemberReferenceArn__",
+		},
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		SseConfig: &types.SseConfig{
+			Type:   types.EncryptionType("KMS"),
+			KeyArn: ptr.String("__KeyArn__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -628,7 +817,71 @@ func TestCheckResponseSnapshot_CreateWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWorkflow(context.Background(), &CreateWorkflowInput{})
+	got, err := svc.CreateWorkflow(context.Background(), &CreateWorkflowInput{
+		Name:          ptr.String("__Name__"),
+		Description:   ptr.String("__Description__"),
+		Engine:        types.WorkflowEngine("WDL"),
+		DefinitionZip: []byte("blob"),
+		DefinitionUri: ptr.String("__DefinitionUri__"),
+		Main:          ptr.String("__Main__"),
+		ParameterTemplate: map[string]types.WorkflowParameter{
+			"key0": {
+				Description: ptr.String("__Description__"),
+				Optional:    ptr.Bool(true),
+			},
+		},
+		StorageCapacity: ptr.Int32(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		RequestId:    ptr.String("__RequestId__"),
+		Accelerators: types.Accelerators("GPU"),
+		StorageType:  types.StorageType("STATIC"),
+		ContainerRegistryMap: &types.ContainerRegistryMap{
+			RegistryMappings: []types.RegistryMapping{
+				{
+					UpstreamRegistryUrl:      ptr.String("__UpstreamRegistryUrl__"),
+					EcrRepositoryPrefix:      ptr.String("__EcrRepositoryPrefix__"),
+					UpstreamRepositoryPrefix: ptr.String("__UpstreamRepositoryPrefix__"),
+					EcrAccountId:             ptr.String("__EcrAccountId__"),
+				},
+				{
+					UpstreamRegistryUrl:      ptr.String("__UpstreamRegistryUrl__"),
+					EcrRepositoryPrefix:      ptr.String("__EcrRepositoryPrefix__"),
+					UpstreamRepositoryPrefix: ptr.String("__UpstreamRepositoryPrefix__"),
+					EcrAccountId:             ptr.String("__EcrAccountId__"),
+				},
+			},
+			ImageMappings: []types.ImageMapping{
+				{
+					SourceImage:      ptr.String("__SourceImage__"),
+					DestinationImage: ptr.String("__DestinationImage__"),
+				},
+				{
+					SourceImage:      ptr.String("__SourceImage__"),
+					DestinationImage: ptr.String("__DestinationImage__"),
+				},
+			},
+		},
+		ContainerRegistryMapUri: ptr.String("__ContainerRegistryMapUri__"),
+		ReadmeMarkdown:          ptr.String("__ReadmeMarkdown__"),
+		ParameterTemplatePath:   ptr.String("__ParameterTemplatePath__"),
+		ReadmePath:              ptr.String("__ReadmePath__"),
+		DefinitionRepository: &types.DefinitionRepository{
+			ConnectionArn:    ptr.String("__ConnectionArn__"),
+			FullRepositoryId: ptr.String("__FullRepositoryId__"),
+			SourceReference: &types.SourceReference{
+				Type:  types.SourceReferenceType("BRANCH"),
+				Value: ptr.String("__Value__"),
+			},
+			ExcludeFilePatterns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		WorkflowBucketOwnerId: ptr.String("__WorkflowBucketOwnerId__"),
+		ReadmeUri:             ptr.String("__ReadmeUri__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -656,7 +909,72 @@ func TestCheckResponseSnapshot_CreateWorkflowVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateWorkflowVersion(context.Background(), &CreateWorkflowVersionInput{})
+	got, err := svc.CreateWorkflowVersion(context.Background(), &CreateWorkflowVersionInput{
+		WorkflowId:    ptr.String("__WorkflowId__"),
+		VersionName:   ptr.String("__VersionName__"),
+		DefinitionZip: []byte("blob"),
+		DefinitionUri: ptr.String("__DefinitionUri__"),
+		Accelerators:  types.Accelerators("GPU"),
+		Description:   ptr.String("__Description__"),
+		Engine:        types.WorkflowEngine("WDL"),
+		Main:          ptr.String("__Main__"),
+		ParameterTemplate: map[string]types.WorkflowParameter{
+			"key0": {
+				Description: ptr.String("__Description__"),
+				Optional:    ptr.Bool(true),
+			},
+		},
+		RequestId:       ptr.String("__RequestId__"),
+		StorageType:     types.StorageType("STATIC"),
+		StorageCapacity: ptr.Int32(1),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		WorkflowBucketOwnerId: ptr.String("__WorkflowBucketOwnerId__"),
+		ContainerRegistryMap: &types.ContainerRegistryMap{
+			RegistryMappings: []types.RegistryMapping{
+				{
+					UpstreamRegistryUrl:      ptr.String("__UpstreamRegistryUrl__"),
+					EcrRepositoryPrefix:      ptr.String("__EcrRepositoryPrefix__"),
+					UpstreamRepositoryPrefix: ptr.String("__UpstreamRepositoryPrefix__"),
+					EcrAccountId:             ptr.String("__EcrAccountId__"),
+				},
+				{
+					UpstreamRegistryUrl:      ptr.String("__UpstreamRegistryUrl__"),
+					EcrRepositoryPrefix:      ptr.String("__EcrRepositoryPrefix__"),
+					UpstreamRepositoryPrefix: ptr.String("__UpstreamRepositoryPrefix__"),
+					EcrAccountId:             ptr.String("__EcrAccountId__"),
+				},
+			},
+			ImageMappings: []types.ImageMapping{
+				{
+					SourceImage:      ptr.String("__SourceImage__"),
+					DestinationImage: ptr.String("__DestinationImage__"),
+				},
+				{
+					SourceImage:      ptr.String("__SourceImage__"),
+					DestinationImage: ptr.String("__DestinationImage__"),
+				},
+			},
+		},
+		ContainerRegistryMapUri: ptr.String("__ContainerRegistryMapUri__"),
+		ReadmeMarkdown:          ptr.String("__ReadmeMarkdown__"),
+		ParameterTemplatePath:   ptr.String("__ParameterTemplatePath__"),
+		ReadmePath:              ptr.String("__ReadmePath__"),
+		DefinitionRepository: &types.DefinitionRepository{
+			ConnectionArn:    ptr.String("__ConnectionArn__"),
+			FullRepositoryId: ptr.String("__FullRepositoryId__"),
+			SourceReference: &types.SourceReference{
+				Type:  types.SourceReferenceType("BRANCH"),
+				Value: ptr.String("__Value__"),
+			},
+			ExcludeFilePatterns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		ReadmeUri: ptr.String("__ReadmeUri__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -677,7 +995,10 @@ func TestCheckResponseSnapshot_DeleteAnnotationStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAnnotationStore(context.Background(), &DeleteAnnotationStoreInput{})
+	got, err := svc.DeleteAnnotationStore(context.Background(), &DeleteAnnotationStoreInput{
+		Name:  ptr.String("__Name__"),
+		Force: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -707,7 +1028,14 @@ func TestCheckResponseSnapshot_DeleteAnnotationStoreVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAnnotationStoreVersions(context.Background(), &DeleteAnnotationStoreVersionsInput{})
+	got, err := svc.DeleteAnnotationStoreVersions(context.Background(), &DeleteAnnotationStoreVersionsInput{
+		Name: ptr.String("__Name__"),
+		Versions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Force: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -726,7 +1054,9 @@ func TestCheckResponseSnapshot_DeleteBatch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteBatch(context.Background(), &DeleteBatchInput{})
+	got, err := svc.DeleteBatch(context.Background(), &DeleteBatchInput{
+		BatchId: ptr.String("__BatchId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -745,7 +1075,9 @@ func TestCheckResponseSnapshot_DeleteConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteConfiguration(context.Background(), &DeleteConfigurationInput{})
+	got, err := svc.DeleteConfiguration(context.Background(), &DeleteConfigurationInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -764,7 +1096,10 @@ func TestCheckResponseSnapshot_DeleteReference(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteReference(context.Background(), &DeleteReferenceInput{})
+	got, err := svc.DeleteReference(context.Background(), &DeleteReferenceInput{
+		Id:               ptr.String("__Id__"),
+		ReferenceStoreId: ptr.String("__ReferenceStoreId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -783,7 +1118,9 @@ func TestCheckResponseSnapshot_DeleteReferenceStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteReferenceStore(context.Background(), &DeleteReferenceStoreInput{})
+	got, err := svc.DeleteReferenceStore(context.Background(), &DeleteReferenceStoreInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -802,7 +1139,9 @@ func TestCheckResponseSnapshot_DeleteRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRun(context.Background(), &DeleteRunInput{})
+	got, err := svc.DeleteRun(context.Background(), &DeleteRunInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -821,7 +1160,9 @@ func TestCheckResponseSnapshot_DeleteRunBatch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRunBatch(context.Background(), &DeleteRunBatchInput{})
+	got, err := svc.DeleteRunBatch(context.Background(), &DeleteRunBatchInput{
+		BatchId: ptr.String("__BatchId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -840,7 +1181,9 @@ func TestCheckResponseSnapshot_DeleteRunCache(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRunCache(context.Background(), &DeleteRunCacheInput{})
+	got, err := svc.DeleteRunCache(context.Background(), &DeleteRunCacheInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -859,7 +1202,9 @@ func TestCheckResponseSnapshot_DeleteRunGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteRunGroup(context.Background(), &DeleteRunGroupInput{})
+	got, err := svc.DeleteRunGroup(context.Background(), &DeleteRunGroupInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -878,7 +1223,9 @@ func TestCheckResponseSnapshot_DeleteS3AccessPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteS3AccessPolicy(context.Background(), &DeleteS3AccessPolicyInput{})
+	got, err := svc.DeleteS3AccessPolicy(context.Background(), &DeleteS3AccessPolicyInput{
+		S3AccessPointArn: ptr.String("__S3AccessPointArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -897,7 +1244,9 @@ func TestCheckResponseSnapshot_DeleteSequenceStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSequenceStore(context.Background(), &DeleteSequenceStoreInput{})
+	got, err := svc.DeleteSequenceStore(context.Background(), &DeleteSequenceStoreInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -918,7 +1267,9 @@ func TestCheckResponseSnapshot_DeleteShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteShare(context.Background(), &DeleteShareInput{})
+	got, err := svc.DeleteShare(context.Background(), &DeleteShareInput{
+		ShareId: ptr.String("__ShareId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -939,7 +1290,10 @@ func TestCheckResponseSnapshot_DeleteVariantStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteVariantStore(context.Background(), &DeleteVariantStoreInput{})
+	got, err := svc.DeleteVariantStore(context.Background(), &DeleteVariantStoreInput{
+		Name:  ptr.String("__Name__"),
+		Force: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -958,7 +1312,9 @@ func TestCheckResponseSnapshot_DeleteWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorkflow(context.Background(), &DeleteWorkflowInput{})
+	got, err := svc.DeleteWorkflow(context.Background(), &DeleteWorkflowInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -977,7 +1333,10 @@ func TestCheckResponseSnapshot_DeleteWorkflowVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteWorkflowVersion(context.Background(), &DeleteWorkflowVersionInput{})
+	got, err := svc.DeleteWorkflowVersion(context.Background(), &DeleteWorkflowVersionInput{
+		WorkflowId:  ptr.String("__WorkflowId__"),
+		VersionName: ptr.String("__VersionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1035,7 +1394,9 @@ func TestCheckResponseSnapshot_GetAnnotationImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAnnotationImportJob(context.Background(), &GetAnnotationImportJobInput{})
+	got, err := svc.GetAnnotationImportJob(context.Background(), &GetAnnotationImportJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1092,7 +1453,9 @@ func TestCheckResponseSnapshot_GetAnnotationStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAnnotationStore(context.Background(), &GetAnnotationStoreInput{})
+	got, err := svc.GetAnnotationStore(context.Background(), &GetAnnotationStoreInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1142,7 +1505,10 @@ func TestCheckResponseSnapshot_GetAnnotationStoreVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetAnnotationStoreVersion(context.Background(), &GetAnnotationStoreVersionInput{})
+	got, err := svc.GetAnnotationStoreVersion(context.Background(), &GetAnnotationStoreVersionInput{
+		Name:        ptr.String("__Name__"),
+		VersionName: ptr.String("__VersionName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1171,7 +1537,7 @@ func TestCheckResponseSnapshot_GetBatch(t *testing.T) {
 			CacheBehavior:   types.CacheBehavior("CACHE_ON_FAILURE"),
 			RunGroupId:      ptr.String("__RunGroupId__"),
 			Priority:        ptr.Int32(1),
-			Parameters:      nil,
+			Parameters:      document.NewLazyDocument("__Document__"),
 			StorageCapacity: ptr.Int32(1),
 			OutputUri:       ptr.String("__OutputUri__"),
 			LogLevel:        types.RunLogLevel("OFF"),
@@ -1185,7 +1551,7 @@ func TestCheckResponseSnapshot_GetBatch(t *testing.T) {
 			WorkflowVersionName: ptr.String("__WorkflowVersionName__"),
 			NetworkingMode:      types.NetworkingMode("RESTRICTED"),
 			ConfigurationName:   ptr.String("__ConfigurationName__"),
-			EngineSettings:      nil,
+			EngineSettings:      document.NewLazyDocument("__Document__"),
 			ScratchStorageMode:  types.ScratchStorageMode("LOCAL"),
 		},
 		SubmissionSummary: &types.SubmissionSummary{
@@ -1221,7 +1587,9 @@ func TestCheckResponseSnapshot_GetBatch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetBatch(context.Background(), &GetBatchInput{})
+	got, err := svc.GetBatch(context.Background(), &GetBatchInput{
+		BatchId: ptr.String("__BatchId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1263,7 +1631,9 @@ func TestCheckResponseSnapshot_GetConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetConfiguration(context.Background(), &GetConfigurationInput{})
+	got, err := svc.GetConfiguration(context.Background(), &GetConfigurationInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1273,7 +1643,9 @@ func TestCheckResponseSnapshot_GetConfiguration(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_GetReadSet(t *testing.T) {
-	want := &GetReadSetOutput{}
+	want := &GetReadSetOutput{
+		Payload: io.NopCloser(bytes.NewReader([]byte("__Payload__"))),
+	}
 	status, header, body, err := serdeRespReadSnapshot("GetReadSet.response")
 	if errors.Is(err, fs.ErrNotExist) {
 		t.Skip("no response snapshot fixture")
@@ -1282,7 +1654,12 @@ func TestCheckResponseSnapshot_GetReadSet(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetReadSet(context.Background(), &GetReadSetInput{})
+	got, err := svc.GetReadSet(context.Background(), &GetReadSetInput{
+		Id:              ptr.String("__Id__"),
+		SequenceStoreId: ptr.String("__SequenceStoreId__"),
+		File:            types.ReadSetFile("SOURCE1"),
+		PartNumber:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1320,7 +1697,10 @@ func TestCheckResponseSnapshot_GetReadSetActivationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetReadSetActivationJob(context.Background(), &GetReadSetActivationJobInput{})
+	got, err := svc.GetReadSetActivationJob(context.Background(), &GetReadSetActivationJobInput{
+		Id:              ptr.String("__Id__"),
+		SequenceStoreId: ptr.String("__SequenceStoreId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1359,7 +1739,10 @@ func TestCheckResponseSnapshot_GetReadSetExportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetReadSetExportJob(context.Background(), &GetReadSetExportJobInput{})
+	got, err := svc.GetReadSetExportJob(context.Background(), &GetReadSetExportJobInput{
+		SequenceStoreId: ptr.String("__SequenceStoreId__"),
+		Id:              ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1426,7 +1809,10 @@ func TestCheckResponseSnapshot_GetReadSetImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetReadSetImportJob(context.Background(), &GetReadSetImportJobInput{})
+	got, err := svc.GetReadSetImportJob(context.Background(), &GetReadSetImportJobInput{
+		Id:              ptr.String("__Id__"),
+		SequenceStoreId: ptr.String("__SequenceStoreId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1497,7 +1883,10 @@ func TestCheckResponseSnapshot_GetReadSetMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetReadSetMetadata(context.Background(), &GetReadSetMetadataInput{})
+	got, err := svc.GetReadSetMetadata(context.Background(), &GetReadSetMetadataInput{
+		Id:              ptr.String("__Id__"),
+		SequenceStoreId: ptr.String("__SequenceStoreId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1507,7 +1896,9 @@ func TestCheckResponseSnapshot_GetReadSetMetadata(t *testing.T) {
 }
 
 func TestCheckResponseSnapshot_GetReference(t *testing.T) {
-	want := &GetReferenceOutput{}
+	want := &GetReferenceOutput{
+		Payload: io.NopCloser(bytes.NewReader([]byte("__Payload__"))),
+	}
 	status, header, body, err := serdeRespReadSnapshot("GetReference.response")
 	if errors.Is(err, fs.ErrNotExist) {
 		t.Skip("no response snapshot fixture")
@@ -1516,7 +1907,13 @@ func TestCheckResponseSnapshot_GetReference(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetReference(context.Background(), &GetReferenceInput{})
+	got, err := svc.GetReference(context.Background(), &GetReferenceInput{
+		Id:               ptr.String("__Id__"),
+		ReferenceStoreId: ptr.String("__ReferenceStoreId__"),
+		Range:            ptr.String("__Range__"),
+		PartNumber:       ptr.Int32(1),
+		File:             types.ReferenceFile("SOURCE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1567,7 +1964,10 @@ func TestCheckResponseSnapshot_GetReferenceImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetReferenceImportJob(context.Background(), &GetReferenceImportJobInput{})
+	got, err := svc.GetReferenceImportJob(context.Background(), &GetReferenceImportJobInput{
+		Id:               ptr.String("__Id__"),
+		ReferenceStoreId: ptr.String("__ReferenceStoreId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1616,7 +2016,10 @@ func TestCheckResponseSnapshot_GetReferenceMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetReferenceMetadata(context.Background(), &GetReferenceMetadataInput{})
+	got, err := svc.GetReferenceMetadata(context.Background(), &GetReferenceMetadataInput{
+		Id:               ptr.String("__Id__"),
+		ReferenceStoreId: ptr.String("__ReferenceStoreId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1645,7 +2048,9 @@ func TestCheckResponseSnapshot_GetReferenceStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetReferenceStore(context.Background(), &GetReferenceStoreInput{})
+	got, err := svc.GetReferenceStore(context.Background(), &GetReferenceStoreInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1672,7 +2077,7 @@ func TestCheckResponseSnapshot_GetRun(t *testing.T) {
 		Priority:        ptr.Int32(1),
 		Definition:      ptr.String("__Definition__"),
 		Digest:          ptr.String("__Digest__"),
-		Parameters:      nil,
+		Parameters:      document.NewLazyDocument("__Document__"),
 		StorageCapacity: ptr.Int32(1),
 		OutputUri:       ptr.String("__OutputUri__"),
 		LogLevel:        types.RunLogLevel("OFF"),
@@ -1718,7 +2123,7 @@ func TestCheckResponseSnapshot_GetRun(t *testing.T) {
 			},
 			VpcId: ptr.String("__VpcId__"),
 		},
-		EngineSettings: nil,
+		EngineSettings: document.NewLazyDocument("__Document__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetRun.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1728,7 +2133,13 @@ func TestCheckResponseSnapshot_GetRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRun(context.Background(), &GetRunInput{})
+	got, err := svc.GetRun(context.Background(), &GetRunInput{
+		Id: ptr.String("__Id__"),
+		Export: []types.RunExport{
+			types.RunExport("DEFINITION"),
+			types.RunExport("DEFINITION"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1760,7 +2171,9 @@ func TestCheckResponseSnapshot_GetRunCache(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRunCache(context.Background(), &GetRunCacheInput{})
+	got, err := svc.GetRunCache(context.Background(), &GetRunCacheInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1791,7 +2204,9 @@ func TestCheckResponseSnapshot_GetRunGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRunGroup(context.Background(), &GetRunGroupInput{})
+	got, err := svc.GetRunGroup(context.Background(), &GetRunGroupInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1832,7 +2247,10 @@ func TestCheckResponseSnapshot_GetRunTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetRunTask(context.Background(), &GetRunTaskInput{})
+	got, err := svc.GetRunTask(context.Background(), &GetRunTaskInput{
+		Id:     ptr.String("__Id__"),
+		TaskId: ptr.String("__TaskId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1857,7 +2275,9 @@ func TestCheckResponseSnapshot_GetS3AccessPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetS3AccessPolicy(context.Background(), &GetS3AccessPolicyInput{})
+	got, err := svc.GetS3AccessPolicy(context.Background(), &GetS3AccessPolicyInput{
+		S3AccessPointArn: ptr.String("__S3AccessPointArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1900,7 +2320,9 @@ func TestCheckResponseSnapshot_GetSequenceStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSequenceStore(context.Background(), &GetSequenceStoreInput{})
+	got, err := svc.GetSequenceStore(context.Background(), &GetSequenceStoreInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1932,7 +2354,9 @@ func TestCheckResponseSnapshot_GetShare(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetShare(context.Background(), &GetShareInput{})
+	got, err := svc.GetShare(context.Background(), &GetShareInput{
+		ShareId: ptr.String("__ShareId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1976,7 +2400,9 @@ func TestCheckResponseSnapshot_GetVariantImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVariantImportJob(context.Background(), &GetVariantImportJobInput{})
+	got, err := svc.GetVariantImportJob(context.Background(), &GetVariantImportJobInput{
+		JobId: ptr.String("__JobId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2015,7 +2441,9 @@ func TestCheckResponseSnapshot_GetVariantStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetVariantStore(context.Background(), &GetVariantStoreInput{})
+	got, err := svc.GetVariantStore(context.Background(), &GetVariantStoreInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2113,7 +2541,15 @@ func TestCheckResponseSnapshot_GetWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorkflow(context.Background(), &GetWorkflowInput{})
+	got, err := svc.GetWorkflow(context.Background(), &GetWorkflowInput{
+		Id:   ptr.String("__Id__"),
+		Type: types.WorkflowType("PRIVATE"),
+		Export: []types.WorkflowExport{
+			types.WorkflowExport("DEFINITION"),
+			types.WorkflowExport("DEFINITION"),
+		},
+		WorkflowOwnerId: ptr.String("__WorkflowOwnerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2212,7 +2648,16 @@ func TestCheckResponseSnapshot_GetWorkflowVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetWorkflowVersion(context.Background(), &GetWorkflowVersionInput{})
+	got, err := svc.GetWorkflowVersion(context.Background(), &GetWorkflowVersionInput{
+		WorkflowId:  ptr.String("__WorkflowId__"),
+		VersionName: ptr.String("__VersionName__"),
+		Type:        types.WorkflowType("PRIVATE"),
+		Export: []types.WorkflowExport{
+			types.WorkflowExport("DEFINITION"),
+			types.WorkflowExport("DEFINITION"),
+		},
+		WorkflowOwnerId: ptr.String("__WorkflowOwnerId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2263,7 +2708,18 @@ func TestCheckResponseSnapshot_ListAnnotationImportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAnnotationImportJobs(context.Background(), &ListAnnotationImportJobsInput{})
+	got, err := svc.ListAnnotationImportJobs(context.Background(), &ListAnnotationImportJobsInput{
+		MaxResults: ptr.Int32(1),
+		Ids: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+		Filter: &types.ListAnnotationImportJobsFilter{
+			Status:    types.JobStatus("SUBMITTED"),
+			StoreName: ptr.String("__StoreName__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2312,7 +2768,14 @@ func TestCheckResponseSnapshot_ListAnnotationStoreVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAnnotationStoreVersions(context.Background(), &ListAnnotationStoreVersionsInput{})
+	got, err := svc.ListAnnotationStoreVersions(context.Background(), &ListAnnotationStoreVersionsInput{
+		Name:       ptr.String("__Name__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filter: &types.ListAnnotationStoreVersionsFilter{
+			Status: types.VersionStatus("CREATING"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2373,7 +2836,17 @@ func TestCheckResponseSnapshot_ListAnnotationStores(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListAnnotationStores(context.Background(), &ListAnnotationStoresInput{})
+	got, err := svc.ListAnnotationStores(context.Background(), &ListAnnotationStoresInput{
+		Ids: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filter: &types.ListAnnotationStoresFilter{
+			Status: types.StoreStatus("CREATING"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2412,7 +2885,13 @@ func TestCheckResponseSnapshot_ListBatch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListBatch(context.Background(), &ListBatchInput{})
+	got, err := svc.ListBatch(context.Background(), &ListBatchInput{
+		MaxItems:      ptr.Int32(1),
+		StartingToken: ptr.String("__StartingToken__"),
+		Status:        types.BatchStatus("CREATING"),
+		Name:          ptr.String("__Name__"),
+		RunGroupId:    ptr.String("__RunGroupId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2449,7 +2928,10 @@ func TestCheckResponseSnapshot_ListConfigurations(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListConfigurations(context.Background(), &ListConfigurationsInput{})
+	got, err := svc.ListConfigurations(context.Background(), &ListConfigurationsInput{
+		MaxResults:    ptr.Int32(1),
+		StartingToken: ptr.String("__StartingToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2502,7 +2984,11 @@ func TestCheckResponseSnapshot_ListMultipartReadSetUploads(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListMultipartReadSetUploads(context.Background(), &ListMultipartReadSetUploadsInput{})
+	got, err := svc.ListMultipartReadSetUploads(context.Background(), &ListMultipartReadSetUploadsInput{
+		SequenceStoreId: ptr.String("__SequenceStoreId__"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2539,7 +3025,16 @@ func TestCheckResponseSnapshot_ListReadSetActivationJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReadSetActivationJobs(context.Background(), &ListReadSetActivationJobsInput{})
+	got, err := svc.ListReadSetActivationJobs(context.Background(), &ListReadSetActivationJobsInput{
+		SequenceStoreId: ptr.String("__SequenceStoreId__"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+		Filter: &types.ActivateReadSetFilter{
+			Status:        types.ReadSetActivationJobStatus("SUBMITTED"),
+			CreatedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CreatedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2578,7 +3073,16 @@ func TestCheckResponseSnapshot_ListReadSetExportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReadSetExportJobs(context.Background(), &ListReadSetExportJobsInput{})
+	got, err := svc.ListReadSetExportJobs(context.Background(), &ListReadSetExportJobsInput{
+		SequenceStoreId: ptr.String("__SequenceStoreId__"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+		Filter: &types.ExportReadSetFilter{
+			Status:        types.ReadSetExportJobStatus("SUBMITTED"),
+			CreatedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CreatedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2617,7 +3121,16 @@ func TestCheckResponseSnapshot_ListReadSetImportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReadSetImportJobs(context.Background(), &ListReadSetImportJobsInput{})
+	got, err := svc.ListReadSetImportJobs(context.Background(), &ListReadSetImportJobsInput{
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+		SequenceStoreId: ptr.String("__SequenceStoreId__"),
+		Filter: &types.ImportReadSetFilter{
+			Status:        types.ReadSetImportJobStatus("SUBMITTED"),
+			CreatedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CreatedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2656,7 +3169,17 @@ func TestCheckResponseSnapshot_ListReadSetUploadParts(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReadSetUploadParts(context.Background(), &ListReadSetUploadPartsInput{})
+	got, err := svc.ListReadSetUploadParts(context.Background(), &ListReadSetUploadPartsInput{
+		SequenceStoreId: ptr.String("__SequenceStoreId__"),
+		UploadId:        ptr.String("__UploadId__"),
+		PartSource:      types.ReadSetPartSource("SOURCE1"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+		Filter: &types.ReadSetUploadPartListFilter{
+			CreatedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CreatedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2731,7 +3254,22 @@ func TestCheckResponseSnapshot_ListReadSets(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReadSets(context.Background(), &ListReadSetsInput{})
+	got, err := svc.ListReadSets(context.Background(), &ListReadSetsInput{
+		SequenceStoreId: ptr.String("__SequenceStoreId__"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+		Filter: &types.ReadSetFilter{
+			Name:          ptr.String("__Name__"),
+			Status:        types.ReadSetStatus("ARCHIVED"),
+			ReferenceArn:  ptr.String("__ReferenceArn__"),
+			CreatedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CreatedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SampleId:      ptr.String("__SampleId__"),
+			SubjectId:     ptr.String("__SubjectId__"),
+			GeneratedFrom: ptr.String("__GeneratedFrom__"),
+			CreationType:  types.CreationType("IMPORT"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2770,7 +3308,16 @@ func TestCheckResponseSnapshot_ListReferenceImportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReferenceImportJobs(context.Background(), &ListReferenceImportJobsInput{})
+	got, err := svc.ListReferenceImportJobs(context.Background(), &ListReferenceImportJobsInput{
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+		ReferenceStoreId: ptr.String("__ReferenceStoreId__"),
+		Filter: &types.ImportReferenceFilter{
+			Status:        types.ReferenceImportJobStatus("SUBMITTED"),
+			CreatedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CreatedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2815,7 +3362,15 @@ func TestCheckResponseSnapshot_ListReferenceStores(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReferenceStores(context.Background(), &ListReferenceStoresInput{})
+	got, err := svc.ListReferenceStores(context.Background(), &ListReferenceStoresInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filter: &types.ReferenceStoreFilter{
+			Name:          ptr.String("__Name__"),
+			CreatedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CreatedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2860,7 +3415,17 @@ func TestCheckResponseSnapshot_ListReferences(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListReferences(context.Background(), &ListReferencesInput{})
+	got, err := svc.ListReferences(context.Background(), &ListReferencesInput{
+		ReferenceStoreId: ptr.String("__ReferenceStoreId__"),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+		Filter: &types.ReferenceFilter{
+			Name:          ptr.String("__Name__"),
+			Md5:           ptr.String("__Md5__"),
+			CreatedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CreatedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2901,7 +3466,10 @@ func TestCheckResponseSnapshot_ListRunCaches(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRunCaches(context.Background(), &ListRunCachesInput{})
+	got, err := svc.ListRunCaches(context.Background(), &ListRunCachesInput{
+		MaxResults:    ptr.Int32(1),
+		StartingToken: ptr.String("__StartingToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2944,7 +3512,11 @@ func TestCheckResponseSnapshot_ListRunGroups(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRunGroups(context.Background(), &ListRunGroupsInput{})
+	got, err := svc.ListRunGroups(context.Background(), &ListRunGroupsInput{
+		Name:          ptr.String("__Name__"),
+		StartingToken: ptr.String("__StartingToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -2997,7 +3569,12 @@ func TestCheckResponseSnapshot_ListRunTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRunTasks(context.Background(), &ListRunTasksInput{})
+	got, err := svc.ListRunTasks(context.Background(), &ListRunTasksInput{
+		Id:            ptr.String("__Id__"),
+		Status:        types.TaskStatus("PENDING"),
+		StartingToken: ptr.String("__StartingToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3052,7 +3629,14 @@ func TestCheckResponseSnapshot_ListRuns(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRuns(context.Background(), &ListRunsInput{})
+	got, err := svc.ListRuns(context.Background(), &ListRunsInput{
+		Name:          ptr.String("__Name__"),
+		RunGroupId:    ptr.String("__RunGroupId__"),
+		BatchId:       ptr.String("__BatchId__"),
+		StartingToken: ptr.String("__StartingToken__"),
+		MaxResults:    ptr.Int32(1),
+		Status:        types.RunStatus("PENDING"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3093,7 +3677,14 @@ func TestCheckResponseSnapshot_ListRunsInBatch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListRunsInBatch(context.Background(), &ListRunsInBatchInput{})
+	got, err := svc.ListRunsInBatch(context.Background(), &ListRunsInBatchInput{
+		BatchId:          ptr.String("__BatchId__"),
+		MaxItems:         ptr.Int32(1),
+		StartingToken:    ptr.String("__StartingToken__"),
+		SubmissionStatus: types.SubmissionStatus("SUCCESS"),
+		RunSettingId:     ptr.String("__RunSettingId__"),
+		RunId:            ptr.String("__RunId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3148,7 +3739,18 @@ func TestCheckResponseSnapshot_ListSequenceStores(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSequenceStores(context.Background(), &ListSequenceStoresInput{})
+	got, err := svc.ListSequenceStores(context.Background(), &ListSequenceStoresInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filter: &types.SequenceStoreFilter{
+			Name:          ptr.String("__Name__"),
+			CreatedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CreatedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Status:        types.SequenceStoreStatus("CREATING"),
+			UpdatedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3195,7 +3797,25 @@ func TestCheckResponseSnapshot_ListShares(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListShares(context.Background(), &ListSharesInput{})
+	got, err := svc.ListShares(context.Background(), &ListSharesInput{
+		ResourceOwner: types.ResourceOwner("SELF"),
+		Filter: &types.Filter{
+			ResourceArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Status: []types.ShareStatus{
+				types.ShareStatus("PENDING"),
+				types.ShareStatus("PENDING"),
+			},
+			Type: []types.ShareResourceType{
+				types.ShareResourceType("VARIANT_STORE"),
+				types.ShareResourceType("VARIANT_STORE"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3218,7 +3838,9 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3267,7 +3889,18 @@ func TestCheckResponseSnapshot_ListVariantImportJobs(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVariantImportJobs(context.Background(), &ListVariantImportJobsInput{})
+	got, err := svc.ListVariantImportJobs(context.Background(), &ListVariantImportJobsInput{
+		MaxResults: ptr.Int32(1),
+		Ids: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+		Filter: &types.ListVariantImportJobsFilter{
+			Status:    types.JobStatus("SUBMITTED"),
+			StoreName: ptr.String("__StoreName__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3326,7 +3959,17 @@ func TestCheckResponseSnapshot_ListVariantStores(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListVariantStores(context.Background(), &ListVariantStoresInput{})
+	got, err := svc.ListVariantStores(context.Background(), &ListVariantStoresInput{
+		MaxResults: ptr.Int32(1),
+		Ids: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+		Filter: &types.ListVariantStoresFilter{
+			Status: types.StoreStatus("CREATING"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3375,7 +4018,13 @@ func TestCheckResponseSnapshot_ListWorkflowVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkflowVersions(context.Background(), &ListWorkflowVersionsInput{})
+	got, err := svc.ListWorkflowVersions(context.Background(), &ListWorkflowVersionsInput{
+		WorkflowId:      ptr.String("__WorkflowId__"),
+		Type:            types.WorkflowType("PRIVATE"),
+		WorkflowOwnerId: ptr.String("__WorkflowOwnerId__"),
+		StartingToken:   ptr.String("__StartingToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3422,7 +4071,12 @@ func TestCheckResponseSnapshot_ListWorkflows(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListWorkflows(context.Background(), &ListWorkflowsInput{})
+	got, err := svc.ListWorkflows(context.Background(), &ListWorkflowsInput{
+		Type:          types.WorkflowType("PRIVATE"),
+		Name:          ptr.String("__Name__"),
+		StartingToken: ptr.String("__StartingToken__"),
+		MaxResults:    ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3445,7 +4099,10 @@ func TestCheckResponseSnapshot_PutS3AccessPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutS3AccessPolicy(context.Background(), &PutS3AccessPolicyInput{})
+	got, err := svc.PutS3AccessPolicy(context.Background(), &PutS3AccessPolicyInput{
+		S3AccessPointArn: ptr.String("__S3AccessPointArn__"),
+		S3AccessPolicy:   ptr.String("__S3AccessPolicy__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3466,7 +4123,38 @@ func TestCheckResponseSnapshot_StartAnnotationImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartAnnotationImportJob(context.Background(), &StartAnnotationImportJobInput{})
+	got, err := svc.StartAnnotationImportJob(context.Background(), &StartAnnotationImportJobInput{
+		DestinationName: ptr.String("__DestinationName__"),
+		RoleArn:         ptr.String("__RoleArn__"),
+		Items: []types.AnnotationImportItemSource{
+			{
+				Source: ptr.String("__Source__"),
+			},
+			{
+				Source: ptr.String("__Source__"),
+			},
+		},
+		VersionName: ptr.String("__VersionName__"),
+		FormatOptions: &types.FormatOptionsMemberTsvOptions{
+			Value: types.TsvOptions{
+				ReadOptions: &types.ReadOptions{
+					Sep:          ptr.String("__Sep__"),
+					Encoding:     ptr.String("__Encoding__"),
+					Quote:        ptr.String("__Quote__"),
+					QuoteAll:     true,
+					Escape:       ptr.String("__Escape__"),
+					EscapeQuotes: true,
+					Comment:      ptr.String("__Comment__"),
+					Header:       true,
+					LineSep:      ptr.String("__LineSep__"),
+				},
+			},
+		},
+		RunLeftNormalization: true,
+		AnnotationFields: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3490,7 +4178,18 @@ func TestCheckResponseSnapshot_StartReadSetActivationJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartReadSetActivationJob(context.Background(), &StartReadSetActivationJobInput{})
+	got, err := svc.StartReadSetActivationJob(context.Background(), &StartReadSetActivationJobInput{
+		SequenceStoreId: ptr.String("__SequenceStoreId__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		Sources: []types.StartReadSetActivationJobSourceItem{
+			{
+				ReadSetId: ptr.String("__ReadSetId__"),
+			},
+			{
+				ReadSetId: ptr.String("__ReadSetId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3515,7 +4214,20 @@ func TestCheckResponseSnapshot_StartReadSetExportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartReadSetExportJob(context.Background(), &StartReadSetExportJobInput{})
+	got, err := svc.StartReadSetExportJob(context.Background(), &StartReadSetExportJobInput{
+		SequenceStoreId: ptr.String("__SequenceStoreId__"),
+		Destination:     ptr.String("__Destination__"),
+		RoleArn:         ptr.String("__RoleArn__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		Sources: []types.ExportReadSet{
+			{
+				ReadSetId: ptr.String("__ReadSetId__"),
+			},
+			{
+				ReadSetId: ptr.String("__ReadSetId__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3540,7 +4252,45 @@ func TestCheckResponseSnapshot_StartReadSetImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartReadSetImportJob(context.Background(), &StartReadSetImportJobInput{})
+	got, err := svc.StartReadSetImportJob(context.Background(), &StartReadSetImportJobInput{
+		SequenceStoreId: ptr.String("__SequenceStoreId__"),
+		RoleArn:         ptr.String("__RoleArn__"),
+		ClientToken:     ptr.String("__ClientToken__"),
+		Sources: []types.StartReadSetImportJobSourceItem{
+			{
+				SourceFiles: &types.SourceFiles{
+					Source1: ptr.String("__Source1__"),
+					Source2: ptr.String("__Source2__"),
+				},
+				SourceFileType: types.FileType("FASTQ"),
+				SubjectId:      ptr.String("__SubjectId__"),
+				SampleId:       ptr.String("__SampleId__"),
+				GeneratedFrom:  ptr.String("__GeneratedFrom__"),
+				ReferenceArn:   ptr.String("__ReferenceArn__"),
+				Name:           ptr.String("__Name__"),
+				Description:    ptr.String("__Description__"),
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				SourceFiles: &types.SourceFiles{
+					Source1: ptr.String("__Source1__"),
+					Source2: ptr.String("__Source2__"),
+				},
+				SourceFileType: types.FileType("FASTQ"),
+				SubjectId:      ptr.String("__SubjectId__"),
+				SampleId:       ptr.String("__SampleId__"),
+				GeneratedFrom:  ptr.String("__GeneratedFrom__"),
+				ReferenceArn:   ptr.String("__ReferenceArn__"),
+				Name:           ptr.String("__Name__"),
+				Description:    ptr.String("__Description__"),
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3565,7 +4315,29 @@ func TestCheckResponseSnapshot_StartReferenceImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartReferenceImportJob(context.Background(), &StartReferenceImportJobInput{})
+	got, err := svc.StartReferenceImportJob(context.Background(), &StartReferenceImportJobInput{
+		ReferenceStoreId: ptr.String("__ReferenceStoreId__"),
+		RoleArn:          ptr.String("__RoleArn__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+		Sources: []types.StartReferenceImportJobSourceItem{
+			{
+				SourceFile:  ptr.String("__SourceFile__"),
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				SourceFile:  ptr.String("__SourceFile__"),
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3599,7 +4371,33 @@ func TestCheckResponseSnapshot_StartRun(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartRun(context.Background(), &StartRunInput{})
+	got, err := svc.StartRun(context.Background(), &StartRunInput{
+		WorkflowId:      ptr.String("__WorkflowId__"),
+		WorkflowType:    types.WorkflowType("PRIVATE"),
+		RunId:           ptr.String("__RunId__"),
+		RoleArn:         ptr.String("__RoleArn__"),
+		Name:            ptr.String("__Name__"),
+		CacheId:         ptr.String("__CacheId__"),
+		CacheBehavior:   types.CacheBehavior("CACHE_ON_FAILURE"),
+		RunGroupId:      ptr.String("__RunGroupId__"),
+		Priority:        ptr.Int32(1),
+		Parameters:      document.NewLazyDocument("__Document__"),
+		StorageCapacity: ptr.Int32(1),
+		OutputUri:       ptr.String("__OutputUri__"),
+		LogLevel:        types.RunLogLevel("OFF"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		RequestId:           ptr.String("__RequestId__"),
+		RetentionMode:       types.RunRetentionMode("RETAIN"),
+		StorageType:         types.StorageType("STATIC"),
+		WorkflowOwnerId:     ptr.String("__WorkflowOwnerId__"),
+		WorkflowVersionName: ptr.String("__WorkflowVersionName__"),
+		NetworkingMode:      types.NetworkingMode("RESTRICTED"),
+		ScratchStorageMode:  types.ScratchStorageMode("LOCAL"),
+		ConfigurationName:   ptr.String("__ConfigurationName__"),
+		EngineSettings:      document.NewLazyDocument("__Document__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3626,7 +4424,67 @@ func TestCheckResponseSnapshot_StartRunBatch(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartRunBatch(context.Background(), &StartRunBatchInput{})
+	got, err := svc.StartRunBatch(context.Background(), &StartRunBatchInput{
+		BatchName: ptr.String("__BatchName__"),
+		RequestId: ptr.String("__RequestId__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		DefaultRunSetting: &types.DefaultRunSetting{
+			WorkflowId:      ptr.String("__WorkflowId__"),
+			WorkflowType:    types.WorkflowType("PRIVATE"),
+			RoleArn:         ptr.String("__RoleArn__"),
+			Name:            ptr.String("__Name__"),
+			CacheId:         ptr.String("__CacheId__"),
+			CacheBehavior:   types.CacheBehavior("CACHE_ON_FAILURE"),
+			RunGroupId:      ptr.String("__RunGroupId__"),
+			Priority:        ptr.Int32(1),
+			Parameters:      document.NewLazyDocument("__Document__"),
+			StorageCapacity: ptr.Int32(1),
+			OutputUri:       ptr.String("__OutputUri__"),
+			LogLevel:        types.RunLogLevel("OFF"),
+			RunTags: map[string]string{
+				"key0": "__Value__",
+			},
+			RetentionMode:       types.RunRetentionMode("RETAIN"),
+			StorageType:         types.StorageType("STATIC"),
+			WorkflowOwnerId:     ptr.String("__WorkflowOwnerId__"),
+			OutputBucketOwnerId: ptr.String("__OutputBucketOwnerId__"),
+			WorkflowVersionName: ptr.String("__WorkflowVersionName__"),
+			NetworkingMode:      types.NetworkingMode("RESTRICTED"),
+			ConfigurationName:   ptr.String("__ConfigurationName__"),
+			EngineSettings:      document.NewLazyDocument("__Document__"),
+			ScratchStorageMode:  types.ScratchStorageMode("LOCAL"),
+		},
+		BatchRunSettings: &types.BatchRunSettingsMemberInlineSettings{
+			Value: []types.InlineSetting{
+				{
+					RunSettingId:        ptr.String("__RunSettingId__"),
+					Name:                ptr.String("__Name__"),
+					OutputUri:           ptr.String("__OutputUri__"),
+					Priority:            ptr.Int32(1),
+					Parameters:          document.NewLazyDocument("__Document__"),
+					OutputBucketOwnerId: ptr.String("__OutputBucketOwnerId__"),
+					RunTags: map[string]string{
+						"key0": "__Value__",
+					},
+					EngineSettings: document.NewLazyDocument("__Document__"),
+				},
+				{
+					RunSettingId:        ptr.String("__RunSettingId__"),
+					Name:                ptr.String("__Name__"),
+					OutputUri:           ptr.String("__OutputUri__"),
+					Priority:            ptr.Int32(1),
+					Parameters:          document.NewLazyDocument("__Document__"),
+					OutputBucketOwnerId: ptr.String("__OutputBucketOwnerId__"),
+					RunTags: map[string]string{
+						"key0": "__Value__",
+					},
+					EngineSettings: document.NewLazyDocument("__Document__"),
+				},
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3647,7 +4505,22 @@ func TestCheckResponseSnapshot_StartVariantImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartVariantImportJob(context.Background(), &StartVariantImportJobInput{})
+	got, err := svc.StartVariantImportJob(context.Background(), &StartVariantImportJobInput{
+		DestinationName: ptr.String("__DestinationName__"),
+		RoleArn:         ptr.String("__RoleArn__"),
+		Items: []types.VariantImportItemSource{
+			{
+				Source: ptr.String("__Source__"),
+			},
+			{
+				Source: ptr.String("__Source__"),
+			},
+		},
+		RunLeftNormalization: true,
+		AnnotationFields: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3666,7 +4539,12 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3685,7 +4563,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3731,7 +4615,10 @@ func TestCheckResponseSnapshot_UpdateAnnotationStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAnnotationStore(context.Background(), &UpdateAnnotationStoreInput{})
+	got, err := svc.UpdateAnnotationStore(context.Background(), &UpdateAnnotationStoreInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3759,7 +4646,11 @@ func TestCheckResponseSnapshot_UpdateAnnotationStoreVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateAnnotationStoreVersion(context.Background(), &UpdateAnnotationStoreVersionInput{})
+	got, err := svc.UpdateAnnotationStoreVersion(context.Background(), &UpdateAnnotationStoreVersionInput{
+		Name:        ptr.String("__Name__"),
+		VersionName: ptr.String("__VersionName__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3778,7 +4669,12 @@ func TestCheckResponseSnapshot_UpdateRunCache(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRunCache(context.Background(), &UpdateRunCacheInput{})
+	got, err := svc.UpdateRunCache(context.Background(), &UpdateRunCacheInput{
+		CacheBehavior: types.CacheBehavior("CACHE_ON_FAILURE"),
+		Description:   ptr.String("__Description__"),
+		Id:            ptr.String("__Id__"),
+		Name:          ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3797,7 +4693,14 @@ func TestCheckResponseSnapshot_UpdateRunGroup(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateRunGroup(context.Background(), &UpdateRunGroupInput{})
+	got, err := svc.UpdateRunGroup(context.Background(), &UpdateRunGroupInput{
+		Id:          ptr.String("__Id__"),
+		Name:        ptr.String("__Name__"),
+		MaxCpus:     ptr.Int32(1),
+		MaxRuns:     ptr.Int32(1),
+		MaxDuration: ptr.Int32(1),
+		MaxGpus:     ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3840,7 +4743,20 @@ func TestCheckResponseSnapshot_UpdateSequenceStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSequenceStore(context.Background(), &UpdateSequenceStoreInput{})
+	got, err := svc.UpdateSequenceStore(context.Background(), &UpdateSequenceStoreInput{
+		Id:               ptr.String("__Id__"),
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		ClientToken:      ptr.String("__ClientToken__"),
+		FallbackLocation: ptr.String("__FallbackLocation__"),
+		PropagatedSetLevelTags: []string{
+			"__Member__",
+			"__Member__",
+		},
+		S3AccessConfig: &types.S3AccessConfig{
+			AccessLogLocation: ptr.String("__AccessLogLocation__"),
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3869,7 +4785,10 @@ func TestCheckResponseSnapshot_UpdateVariantStore(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateVariantStore(context.Background(), &UpdateVariantStoreInput{})
+	got, err := svc.UpdateVariantStore(context.Background(), &UpdateVariantStoreInput{
+		Name:        ptr.String("__Name__"),
+		Description: ptr.String("__Description__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3888,7 +4807,14 @@ func TestCheckResponseSnapshot_UpdateWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWorkflow(context.Background(), &UpdateWorkflowInput{})
+	got, err := svc.UpdateWorkflow(context.Background(), &UpdateWorkflowInput{
+		Id:              ptr.String("__Id__"),
+		Name:            ptr.String("__Name__"),
+		Description:     ptr.String("__Description__"),
+		StorageType:     types.StorageType("STATIC"),
+		StorageCapacity: ptr.Int32(1),
+		ReadmeMarkdown:  ptr.String("__ReadmeMarkdown__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3907,7 +4833,14 @@ func TestCheckResponseSnapshot_UpdateWorkflowVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateWorkflowVersion(context.Background(), &UpdateWorkflowVersionInput{})
+	got, err := svc.UpdateWorkflowVersion(context.Background(), &UpdateWorkflowVersionInput{
+		WorkflowId:      ptr.String("__WorkflowId__"),
+		VersionName:     ptr.String("__VersionName__"),
+		Description:     ptr.String("__Description__"),
+		StorageType:     types.StorageType("STATIC"),
+		StorageCapacity: ptr.Int32(1),
+		ReadmeMarkdown:  ptr.String("__ReadmeMarkdown__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3928,7 +4861,13 @@ func TestCheckResponseSnapshot_UploadReadSetPart(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UploadReadSetPart(context.Background(), &UploadReadSetPartInput{})
+	got, err := svc.UploadReadSetPart(context.Background(), &UploadReadSetPartInput{
+		SequenceStoreId: ptr.String("__SequenceStoreId__"),
+		UploadId:        ptr.String("__UploadId__"),
+		PartSource:      types.ReadSetPartSource("SOURCE1"),
+		PartNumber:      ptr.Int32(1),
+		Payload:         io.NopCloser(bytes.NewReader([]byte("__Payload__"))),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -3949,7 +4888,10 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AbortMultipartReadSetUpload(context.Background(), &AbortMultipartReadSetUploadInput{})
+	_, opErr := svc.AbortMultipartReadSetUpload(context.Background(), &AbortMultipartReadSetUploadInput{
+		SequenceStoreId: ptr.String("__SequenceStoreId__"),
+		UploadId:        ptr.String("__UploadId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3974,7 +4916,9 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptShare(context.Background(), &AcceptShareInput{})
+	_, opErr := svc.AcceptShare(context.Background(), &AcceptShareInput{
+		ShareId: ptr.String("__ShareId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -3999,7 +4943,10 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AbortMultipartReadSetUpload(context.Background(), &AbortMultipartReadSetUploadInput{})
+	_, opErr := svc.AbortMultipartReadSetUpload(context.Background(), &AbortMultipartReadSetUploadInput{
+		SequenceStoreId: ptr.String("__SequenceStoreId__"),
+		UploadId:        ptr.String("__UploadId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4024,7 +4971,10 @@ func TestCheckResponseSnapshot_Error_NotSupportedOperationException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AbortMultipartReadSetUpload(context.Background(), &AbortMultipartReadSetUploadInput{})
+	_, opErr := svc.AbortMultipartReadSetUpload(context.Background(), &AbortMultipartReadSetUploadInput{
+		SequenceStoreId: ptr.String("__SequenceStoreId__"),
+		UploadId:        ptr.String("__UploadId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4049,7 +4999,12 @@ func TestCheckResponseSnapshot_Error_RangeNotSatisfiableException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetReadSet(context.Background(), &GetReadSetInput{})
+	_, opErr := svc.GetReadSet(context.Background(), &GetReadSetInput{
+		Id:              ptr.String("__Id__"),
+		SequenceStoreId: ptr.String("__SequenceStoreId__"),
+		File:            types.ReadSetFile("SOURCE1"),
+		PartNumber:      ptr.Int32(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4074,7 +5029,10 @@ func TestCheckResponseSnapshot_Error_RequestTimeoutException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AbortMultipartReadSetUpload(context.Background(), &AbortMultipartReadSetUploadInput{})
+	_, opErr := svc.AbortMultipartReadSetUpload(context.Background(), &AbortMultipartReadSetUploadInput{
+		SequenceStoreId: ptr.String("__SequenceStoreId__"),
+		UploadId:        ptr.String("__UploadId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4099,7 +5057,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AbortMultipartReadSetUpload(context.Background(), &AbortMultipartReadSetUploadInput{})
+	_, opErr := svc.AbortMultipartReadSetUpload(context.Background(), &AbortMultipartReadSetUploadInput{
+		SequenceStoreId: ptr.String("__SequenceStoreId__"),
+		UploadId:        ptr.String("__UploadId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4124,7 +5085,10 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AbortMultipartReadSetUpload(context.Background(), &AbortMultipartReadSetUploadInput{})
+	_, opErr := svc.AbortMultipartReadSetUpload(context.Background(), &AbortMultipartReadSetUploadInput{
+		SequenceStoreId: ptr.String("__SequenceStoreId__"),
+		UploadId:        ptr.String("__UploadId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4149,7 +5113,10 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AbortMultipartReadSetUpload(context.Background(), &AbortMultipartReadSetUploadInput{})
+	_, opErr := svc.AbortMultipartReadSetUpload(context.Background(), &AbortMultipartReadSetUploadInput{
+		SequenceStoreId: ptr.String("__SequenceStoreId__"),
+		UploadId:        ptr.String("__UploadId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -4174,7 +5141,10 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AbortMultipartReadSetUpload(context.Background(), &AbortMultipartReadSetUploadInput{})
+	_, opErr := svc.AbortMultipartReadSetUpload(context.Background(), &AbortMultipartReadSetUploadInput{
+		SequenceStoreId: ptr.String("__SequenceStoreId__"),
+		UploadId:        ptr.String("__UploadId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

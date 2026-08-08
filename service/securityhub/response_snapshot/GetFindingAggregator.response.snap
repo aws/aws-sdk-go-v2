@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"FindingAggregationRegion":"__FindingAggregationRegion__","FindingAggregatorArn":"__FindingAggregatorArn__","RegionLinkingMode":"__RegionLinkingMode__","Regions":["__Member__","__Member__"]}

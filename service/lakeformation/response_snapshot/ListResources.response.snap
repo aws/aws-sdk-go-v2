@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","ResourceInfoList":[{"ExpectedResourceOwnerAccount":"__ExpectedResourceOwnerAccount__","HybridAccessEnabled":true,"LastModified":946684800,"ResourceArn":"__ResourceArn__","RoleArn":"__RoleArn__","VerificationStatus":"VERIFIED","WithFederation":true,"WithPrivilegedAccess":true},{"ExpectedResourceOwnerAccount":"__ExpectedResourceOwnerAccount__","HybridAccessEnabled":true,"LastModified":946684800,"ResourceArn":"__ResourceArn__","RoleArn":"__RoleArn__","VerificationStatus":"VERIFIED","WithFederation":true,"WithPrivilegedAccess":true}]}

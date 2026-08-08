@@ -117,7 +117,11 @@ func TestCheckResponseSnapshot_AssociateEntityToThing(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.AssociateEntityToThing(context.Background(), &AssociateEntityToThingInput{})
+	got, err := svc.AssociateEntityToThing(context.Background(), &AssociateEntityToThingInput{
+		ThingName:        ptr.String("__ThingName__"),
+		EntityId:         ptr.String("__EntityId__"),
+		NamespaceVersion: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -143,7 +147,13 @@ func TestCheckResponseSnapshot_CreateFlowTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateFlowTemplate(context.Background(), &CreateFlowTemplateInput{})
+	got, err := svc.CreateFlowTemplate(context.Background(), &CreateFlowTemplateInput{
+		Definition: &types.DefinitionDocument{
+			Language: types.DefinitionLanguage("GRAPHQL"),
+			Text:     ptr.String("__Text__"),
+		},
+		CompatibleNamespaceVersion: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -174,7 +184,30 @@ func TestCheckResponseSnapshot_CreateSystemInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSystemInstance(context.Background(), &CreateSystemInstanceInput{})
+	got, err := svc.CreateSystemInstance(context.Background(), &CreateSystemInstanceInput{
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		Definition: &types.DefinitionDocument{
+			Language: types.DefinitionLanguage("GRAPHQL"),
+			Text:     ptr.String("__Text__"),
+		},
+		Target:              types.DeploymentTarget("GREENGRASS"),
+		GreengrassGroupName: ptr.String("__GreengrassGroupName__"),
+		S3BucketName:        ptr.String("__S3BucketName__"),
+		MetricsConfiguration: &types.MetricsConfiguration{
+			CloudMetricEnabled: true,
+			MetricRuleRoleArn:  ptr.String("__MetricRuleRoleArn__"),
+		},
+		FlowActionsRoleArn: ptr.String("__FlowActionsRoleArn__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -200,7 +233,13 @@ func TestCheckResponseSnapshot_CreateSystemTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.CreateSystemTemplate(context.Background(), &CreateSystemTemplateInput{})
+	got, err := svc.CreateSystemTemplate(context.Background(), &CreateSystemTemplateInput{
+		Definition: &types.DefinitionDocument{
+			Language: types.DefinitionLanguage("GRAPHQL"),
+			Text:     ptr.String("__Text__"),
+		},
+		CompatibleNamespaceVersion: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -219,7 +258,9 @@ func TestCheckResponseSnapshot_DeleteFlowTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteFlowTemplate(context.Background(), &DeleteFlowTemplateInput{})
+	got, err := svc.DeleteFlowTemplate(context.Background(), &DeleteFlowTemplateInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -260,7 +301,9 @@ func TestCheckResponseSnapshot_DeleteSystemInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSystemInstance(context.Background(), &DeleteSystemInstanceInput{})
+	got, err := svc.DeleteSystemInstance(context.Background(), &DeleteSystemInstanceInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -279,7 +322,9 @@ func TestCheckResponseSnapshot_DeleteSystemTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteSystemTemplate(context.Background(), &DeleteSystemTemplateInput{})
+	got, err := svc.DeleteSystemTemplate(context.Background(), &DeleteSystemTemplateInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -311,7 +356,9 @@ func TestCheckResponseSnapshot_DeploySystemInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeploySystemInstance(context.Background(), &DeploySystemInstanceInput{})
+	got, err := svc.DeploySystemInstance(context.Background(), &DeploySystemInstanceInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -330,7 +377,9 @@ func TestCheckResponseSnapshot_DeprecateFlowTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeprecateFlowTemplate(context.Background(), &DeprecateFlowTemplateInput{})
+	got, err := svc.DeprecateFlowTemplate(context.Background(), &DeprecateFlowTemplateInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -349,7 +398,9 @@ func TestCheckResponseSnapshot_DeprecateSystemTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeprecateSystemTemplate(context.Background(), &DeprecateSystemTemplateInput{})
+	got, err := svc.DeprecateSystemTemplate(context.Background(), &DeprecateSystemTemplateInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -374,7 +425,9 @@ func TestCheckResponseSnapshot_DescribeNamespace(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeNamespace(context.Background(), &DescribeNamespaceInput{})
+	got, err := svc.DescribeNamespace(context.Background(), &DescribeNamespaceInput{
+		NamespaceName: ptr.String("__NamespaceName__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -393,7 +446,10 @@ func TestCheckResponseSnapshot_DissociateEntityFromThing(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DissociateEntityFromThing(context.Background(), &DissociateEntityFromThingInput{})
+	got, err := svc.DissociateEntityFromThing(context.Background(), &DissociateEntityFromThingInput{
+		ThingName:  ptr.String("__ThingName__"),
+		EntityType: types.EntityType("DEVICE"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -435,7 +491,13 @@ func TestCheckResponseSnapshot_GetEntities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetEntities(context.Background(), &GetEntitiesInput{})
+	got, err := svc.GetEntities(context.Background(), &GetEntitiesInput{
+		Ids: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NamespaceVersion: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -468,7 +530,10 @@ func TestCheckResponseSnapshot_GetFlowTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFlowTemplate(context.Background(), &GetFlowTemplateInput{})
+	got, err := svc.GetFlowTemplate(context.Background(), &GetFlowTemplateInput{
+		Id:             ptr.String("__Id__"),
+		RevisionNumber: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -503,7 +568,11 @@ func TestCheckResponseSnapshot_GetFlowTemplateRevisions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetFlowTemplateRevisions(context.Background(), &GetFlowTemplateRevisionsInput{})
+	got, err := svc.GetFlowTemplateRevisions(context.Background(), &GetFlowTemplateRevisionsInput{
+		Id:         ptr.String("__Id__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -582,7 +651,9 @@ func TestCheckResponseSnapshot_GetSystemInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSystemInstance(context.Background(), &GetSystemInstanceInput{})
+	got, err := svc.GetSystemInstance(context.Background(), &GetSystemInstanceInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -615,7 +686,10 @@ func TestCheckResponseSnapshot_GetSystemTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSystemTemplate(context.Background(), &GetSystemTemplateInput{})
+	got, err := svc.GetSystemTemplate(context.Background(), &GetSystemTemplateInput{
+		Id:             ptr.String("__Id__"),
+		RevisionNumber: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -650,7 +724,11 @@ func TestCheckResponseSnapshot_GetSystemTemplateRevisions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSystemTemplateRevisions(context.Background(), &GetSystemTemplateRevisionsInput{})
+	got, err := svc.GetSystemTemplateRevisions(context.Background(), &GetSystemTemplateRevisionsInput{
+		Id:         ptr.String("__Id__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -680,7 +758,9 @@ func TestCheckResponseSnapshot_GetUploadStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetUploadStatus(context.Background(), &GetUploadStatusInput{})
+	got, err := svc.GetUploadStatus(context.Background(), &GetUploadStatusInput{
+		UploadId: ptr.String("__UploadId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -715,7 +795,11 @@ func TestCheckResponseSnapshot_ListFlowExecutionMessages(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListFlowExecutionMessages(context.Background(), &ListFlowExecutionMessagesInput{})
+	got, err := svc.ListFlowExecutionMessages(context.Background(), &ListFlowExecutionMessagesInput{
+		FlowExecutionId: ptr.String("__FlowExecutionId__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -746,7 +830,11 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{})
+	got, err := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
+		MaxResults:  ptr.Int32(1),
+		ResourceArn: ptr.String("__ResourceArn__"),
+		NextToken:   ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -789,7 +877,31 @@ func TestCheckResponseSnapshot_SearchEntities(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchEntities(context.Background(), &SearchEntitiesInput{})
+	got, err := svc.SearchEntities(context.Background(), &SearchEntitiesInput{
+		EntityTypes: []types.EntityType{
+			types.EntityType("DEVICE"),
+			types.EntityType("DEVICE"),
+		},
+		Filters: []types.EntityFilter{
+			{
+				Name: types.EntityFilterName("NAME"),
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.EntityFilterName("NAME"),
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+		NamespaceVersion: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -828,7 +940,14 @@ func TestCheckResponseSnapshot_SearchFlowExecutions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchFlowExecutions(context.Background(), &SearchFlowExecutionsInput{})
+	got, err := svc.SearchFlowExecutions(context.Background(), &SearchFlowExecutionsInput{
+		SystemInstanceId: ptr.String("__SystemInstanceId__"),
+		FlowExecutionId:  ptr.String("__FlowExecutionId__"),
+		StartTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -863,7 +982,26 @@ func TestCheckResponseSnapshot_SearchFlowTemplates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchFlowTemplates(context.Background(), &SearchFlowTemplatesInput{})
+	got, err := svc.SearchFlowTemplates(context.Background(), &SearchFlowTemplatesInput{
+		Filters: []types.FlowTemplateFilter{
+			{
+				Name: types.FlowTemplateFilterName("DEVICE_MODEL_ID"),
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.FlowTemplateFilterName("DEVICE_MODEL_ID"),
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -908,7 +1046,26 @@ func TestCheckResponseSnapshot_SearchSystemInstances(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchSystemInstances(context.Background(), &SearchSystemInstancesInput{})
+	got, err := svc.SearchSystemInstances(context.Background(), &SearchSystemInstancesInput{
+		Filters: []types.SystemInstanceFilter{
+			{
+				Name: types.SystemInstanceFilterName("SYSTEM_TEMPLATE_ID"),
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.SystemInstanceFilterName("SYSTEM_TEMPLATE_ID"),
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -943,7 +1100,26 @@ func TestCheckResponseSnapshot_SearchSystemTemplates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchSystemTemplates(context.Background(), &SearchSystemTemplatesInput{})
+	got, err := svc.SearchSystemTemplates(context.Background(), &SearchSystemTemplatesInput{
+		Filters: []types.SystemTemplateFilter{
+			{
+				Name: types.SystemTemplateFilterName("FLOW_TEMPLATE_ID"),
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.SystemTemplateFilterName("FLOW_TEMPLATE_ID"),
+				Value: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -974,7 +1150,12 @@ func TestCheckResponseSnapshot_SearchThings(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SearchThings(context.Background(), &SearchThingsInput{})
+	got, err := svc.SearchThings(context.Background(), &SearchThingsInput{
+		EntityId:         ptr.String("__EntityId__"),
+		NextToken:        ptr.String("__NextToken__"),
+		MaxResults:       ptr.Int32(1),
+		NamespaceVersion: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -993,7 +1174,19 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.TagResource(context.Background(), &TagResourceInput{})
+	got, err := svc.TagResource(context.Background(), &TagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1024,7 +1217,9 @@ func TestCheckResponseSnapshot_UndeploySystemInstance(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UndeploySystemInstance(context.Background(), &UndeploySystemInstanceInput{})
+	got, err := svc.UndeploySystemInstance(context.Background(), &UndeploySystemInstanceInput{
+		Id: ptr.String("__Id__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1043,7 +1238,13 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{})
+	got, err := svc.UntagResource(context.Background(), &UntagResourceInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		TagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1069,7 +1270,14 @@ func TestCheckResponseSnapshot_UpdateFlowTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateFlowTemplate(context.Background(), &UpdateFlowTemplateInput{})
+	got, err := svc.UpdateFlowTemplate(context.Background(), &UpdateFlowTemplateInput{
+		Id: ptr.String("__Id__"),
+		Definition: &types.DefinitionDocument{
+			Language: types.DefinitionLanguage("GRAPHQL"),
+			Text:     ptr.String("__Text__"),
+		},
+		CompatibleNamespaceVersion: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1095,7 +1303,14 @@ func TestCheckResponseSnapshot_UpdateSystemTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UpdateSystemTemplate(context.Background(), &UpdateSystemTemplateInput{})
+	got, err := svc.UpdateSystemTemplate(context.Background(), &UpdateSystemTemplateInput{
+		Id: ptr.String("__Id__"),
+		Definition: &types.DefinitionDocument{
+			Language: types.DefinitionLanguage("GRAPHQL"),
+			Text:     ptr.String("__Text__"),
+		},
+		CompatibleNamespaceVersion: ptr.Int64(1),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1116,7 +1331,14 @@ func TestCheckResponseSnapshot_UploadEntityDefinitions(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.UploadEntityDefinitions(context.Background(), &UploadEntityDefinitionsInput{})
+	got, err := svc.UploadEntityDefinitions(context.Background(), &UploadEntityDefinitionsInput{
+		Document: &types.DefinitionDocument{
+			Language: types.DefinitionLanguage("GRAPHQL"),
+			Text:     ptr.String("__Text__"),
+		},
+		SyncWithPublicNamespace:   true,
+		DeprecateExistingEntities: true,
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -1137,7 +1359,11 @@ func TestCheckResponseSnapshot_Error_InternalFailureException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateEntityToThing(context.Background(), &AssociateEntityToThingInput{})
+	_, opErr := svc.AssociateEntityToThing(context.Background(), &AssociateEntityToThingInput{
+		ThingName:        ptr.String("__ThingName__"),
+		EntityId:         ptr.String("__EntityId__"),
+		NamespaceVersion: ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1162,7 +1388,11 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateEntityToThing(context.Background(), &AssociateEntityToThingInput{})
+	_, opErr := svc.AssociateEntityToThing(context.Background(), &AssociateEntityToThingInput{
+		ThingName:        ptr.String("__ThingName__"),
+		EntityId:         ptr.String("__EntityId__"),
+		NamespaceVersion: ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1187,7 +1417,13 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFlowTemplate(context.Background(), &CreateFlowTemplateInput{})
+	_, opErr := svc.CreateFlowTemplate(context.Background(), &CreateFlowTemplateInput{
+		Definition: &types.DefinitionDocument{
+			Language: types.DefinitionLanguage("GRAPHQL"),
+			Text:     ptr.String("__Text__"),
+		},
+		CompatibleNamespaceVersion: ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1212,7 +1448,13 @@ func TestCheckResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateFlowTemplate(context.Background(), &CreateFlowTemplateInput{})
+	_, opErr := svc.CreateFlowTemplate(context.Background(), &CreateFlowTemplateInput{
+		Definition: &types.DefinitionDocument{
+			Language: types.DefinitionLanguage("GRAPHQL"),
+			Text:     ptr.String("__Text__"),
+		},
+		CompatibleNamespaceVersion: ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1237,7 +1479,9 @@ func TestCheckResponseSnapshot_Error_ResourceInUseException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteFlowTemplate(context.Background(), &DeleteFlowTemplateInput{})
+	_, opErr := svc.DeleteFlowTemplate(context.Background(), &DeleteFlowTemplateInput{
+		Id: ptr.String("__Id__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1262,7 +1506,11 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateEntityToThing(context.Background(), &AssociateEntityToThingInput{})
+	_, opErr := svc.AssociateEntityToThing(context.Background(), &AssociateEntityToThingInput{
+		ThingName:        ptr.String("__ThingName__"),
+		EntityId:         ptr.String("__EntityId__"),
+		NamespaceVersion: ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1287,7 +1535,11 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AssociateEntityToThing(context.Background(), &AssociateEntityToThingInput{})
+	_, opErr := svc.AssociateEntityToThing(context.Background(), &AssociateEntityToThingInput{
+		ThingName:        ptr.String("__ThingName__"),
+		EntityId:         ptr.String("__EntityId__"),
+		NamespaceVersion: ptr.Int64(1),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}

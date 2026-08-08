@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<DistributionIdOwnerList xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><IsTruncated>true</IsTruncated><Items><DistributionIdOwner><DistributionId>__DistributionId__</DistributionId><OwnerAccountId>__OwnerAccountId__</OwnerAccountId></DistributionIdOwner><DistributionIdOwner><DistributionId>__DistributionId__</DistributionId><OwnerAccountId>__OwnerAccountId__</OwnerAccountId></DistributionIdOwner></Items><Marker>__Marker__</Marker><MaxItems>1</MaxItems><NextMarker>__NextMarker__</NextMarker><Quantity>1</Quantity></DistributionIdOwnerList>

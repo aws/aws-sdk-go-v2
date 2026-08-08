@@ -117,7 +117,9 @@ func TestCheckResponseSnapshot_DeleteLexicon(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteLexicon(context.Background(), &DeleteLexiconInput{})
+	got, err := svc.DeleteLexicon(context.Background(), &DeleteLexiconInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -170,7 +172,12 @@ func TestCheckResponseSnapshot_DescribeVoices(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.DescribeVoices(context.Background(), &DescribeVoicesInput{})
+	got, err := svc.DescribeVoices(context.Background(), &DescribeVoicesInput{
+		Engine:                         types.Engine("standard"),
+		LanguageCode:                   types.LanguageCode("arb"),
+		IncludeAdditionalLanguageCodes: true,
+		NextToken:                      ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -202,7 +209,9 @@ func TestCheckResponseSnapshot_GetLexicon(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetLexicon(context.Background(), &GetLexiconInput{})
+	got, err := svc.GetLexicon(context.Background(), &GetLexiconInput{
+		Name: ptr.String("__Name__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -245,7 +254,9 @@ func TestCheckResponseSnapshot_GetSpeechSynthesisTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.GetSpeechSynthesisTask(context.Background(), &GetSpeechSynthesisTaskInput{})
+	got, err := svc.GetSpeechSynthesisTask(context.Background(), &GetSpeechSynthesisTaskInput{
+		TaskId: ptr.String("__TaskId__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -290,7 +301,9 @@ func TestCheckResponseSnapshot_ListLexicons(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListLexicons(context.Background(), &ListLexiconsInput{})
+	got, err := svc.ListLexicons(context.Background(), &ListLexiconsInput{
+		NextToken: ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -359,7 +372,11 @@ func TestCheckResponseSnapshot_ListSpeechSynthesisTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListSpeechSynthesisTasks(context.Background(), &ListSpeechSynthesisTasksInput{})
+	got, err := svc.ListSpeechSynthesisTasks(context.Background(), &ListSpeechSynthesisTasksInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Status:     types.TaskStatus("scheduled"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -378,13 +395,20 @@ func TestCheckResponseSnapshot_PutLexicon(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutLexicon(context.Background(), &PutLexiconInput{})
+	got, err := svc.PutLexicon(context.Background(), &PutLexiconInput{
+		Name:    ptr.String("__Name__"),
+		Content: ptr.String("__Content__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "PutLexicon.response", err)
 	}
+}
+
+func TestCheckResponseSnapshot_StartSpeechSynthesisStream(t *testing.T) {
+	t.Skip("event stream operation")
 }
 
 func TestCheckResponseSnapshot_StartSpeechSynthesisTask(t *testing.T) {
@@ -421,7 +445,26 @@ func TestCheckResponseSnapshot_StartSpeechSynthesisTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.StartSpeechSynthesisTask(context.Background(), &StartSpeechSynthesisTaskInput{})
+	got, err := svc.StartSpeechSynthesisTask(context.Background(), &StartSpeechSynthesisTaskInput{
+		Engine:       types.Engine("standard"),
+		LanguageCode: types.LanguageCode("arb"),
+		LexiconNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OutputFormat:       types.OutputFormat("json"),
+		OutputS3BucketName: ptr.String("__OutputS3BucketName__"),
+		OutputS3KeyPrefix:  ptr.String("__OutputS3KeyPrefix__"),
+		SampleRate:         ptr.String("__SampleRate__"),
+		SnsTopicArn:        ptr.String("__SnsTopicArn__"),
+		SpeechMarkTypes: []types.SpeechMarkType{
+			types.SpeechMarkType("sentence"),
+			types.SpeechMarkType("sentence"),
+		},
+		Text:     ptr.String("__Text__"),
+		TextType: types.TextType("ssml"),
+		VoiceId:  types.VoiceId("Aditi"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -432,6 +475,7 @@ func TestCheckResponseSnapshot_StartSpeechSynthesisTask(t *testing.T) {
 
 func TestCheckResponseSnapshot_SynthesizeSpeech(t *testing.T) {
 	want := &SynthesizeSpeechOutput{
+		AudioStream:       io.NopCloser(bytes.NewReader([]byte("__AudioStream__"))),
 		ContentType:       ptr.String("__ContentType__"),
 		RequestCharacters: 1,
 	}
@@ -443,7 +487,23 @@ func TestCheckResponseSnapshot_SynthesizeSpeech(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.SynthesizeSpeech(context.Background(), &SynthesizeSpeechInput{})
+	got, err := svc.SynthesizeSpeech(context.Background(), &SynthesizeSpeechInput{
+		Engine:       types.Engine("standard"),
+		LanguageCode: types.LanguageCode("arb"),
+		LexiconNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OutputFormat: types.OutputFormat("json"),
+		SampleRate:   ptr.String("__SampleRate__"),
+		SpeechMarkTypes: []types.SpeechMarkType{
+			types.SpeechMarkType("sentence"),
+			types.SpeechMarkType("sentence"),
+		},
+		Text:     ptr.String("__Text__"),
+		TextType: types.TextType("ssml"),
+		VoiceId:  types.VoiceId("Aditi"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -464,7 +524,26 @@ func TestCheckResponseSnapshot_Error_EngineNotSupportedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartSpeechSynthesisTask(context.Background(), &StartSpeechSynthesisTaskInput{})
+	_, opErr := svc.StartSpeechSynthesisTask(context.Background(), &StartSpeechSynthesisTaskInput{
+		Engine:       types.Engine("standard"),
+		LanguageCode: types.LanguageCode("arb"),
+		LexiconNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OutputFormat:       types.OutputFormat("json"),
+		OutputS3BucketName: ptr.String("__OutputS3BucketName__"),
+		OutputS3KeyPrefix:  ptr.String("__OutputS3KeyPrefix__"),
+		SampleRate:         ptr.String("__SampleRate__"),
+		SnsTopicArn:        ptr.String("__SnsTopicArn__"),
+		SpeechMarkTypes: []types.SpeechMarkType{
+			types.SpeechMarkType("sentence"),
+			types.SpeechMarkType("sentence"),
+		},
+		Text:     ptr.String("__Text__"),
+		TextType: types.TextType("ssml"),
+		VoiceId:  types.VoiceId("Aditi"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -489,7 +568,10 @@ func TestCheckResponseSnapshot_Error_InvalidLexiconException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutLexicon(context.Background(), &PutLexiconInput{})
+	_, opErr := svc.PutLexicon(context.Background(), &PutLexiconInput{
+		Name:    ptr.String("__Name__"),
+		Content: ptr.String("__Content__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -514,7 +596,12 @@ func TestCheckResponseSnapshot_Error_InvalidNextTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeVoices(context.Background(), &DescribeVoicesInput{})
+	_, opErr := svc.DescribeVoices(context.Background(), &DescribeVoicesInput{
+		Engine:                         types.Engine("standard"),
+		LanguageCode:                   types.LanguageCode("arb"),
+		IncludeAdditionalLanguageCodes: true,
+		NextToken:                      ptr.String("__NextToken__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -539,7 +626,26 @@ func TestCheckResponseSnapshot_Error_InvalidS3BucketException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartSpeechSynthesisTask(context.Background(), &StartSpeechSynthesisTaskInput{})
+	_, opErr := svc.StartSpeechSynthesisTask(context.Background(), &StartSpeechSynthesisTaskInput{
+		Engine:       types.Engine("standard"),
+		LanguageCode: types.LanguageCode("arb"),
+		LexiconNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OutputFormat:       types.OutputFormat("json"),
+		OutputS3BucketName: ptr.String("__OutputS3BucketName__"),
+		OutputS3KeyPrefix:  ptr.String("__OutputS3KeyPrefix__"),
+		SampleRate:         ptr.String("__SampleRate__"),
+		SnsTopicArn:        ptr.String("__SnsTopicArn__"),
+		SpeechMarkTypes: []types.SpeechMarkType{
+			types.SpeechMarkType("sentence"),
+			types.SpeechMarkType("sentence"),
+		},
+		Text:     ptr.String("__Text__"),
+		TextType: types.TextType("ssml"),
+		VoiceId:  types.VoiceId("Aditi"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -564,7 +670,26 @@ func TestCheckResponseSnapshot_Error_InvalidS3KeyException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartSpeechSynthesisTask(context.Background(), &StartSpeechSynthesisTaskInput{})
+	_, opErr := svc.StartSpeechSynthesisTask(context.Background(), &StartSpeechSynthesisTaskInput{
+		Engine:       types.Engine("standard"),
+		LanguageCode: types.LanguageCode("arb"),
+		LexiconNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OutputFormat:       types.OutputFormat("json"),
+		OutputS3BucketName: ptr.String("__OutputS3BucketName__"),
+		OutputS3KeyPrefix:  ptr.String("__OutputS3KeyPrefix__"),
+		SampleRate:         ptr.String("__SampleRate__"),
+		SnsTopicArn:        ptr.String("__SnsTopicArn__"),
+		SpeechMarkTypes: []types.SpeechMarkType{
+			types.SpeechMarkType("sentence"),
+			types.SpeechMarkType("sentence"),
+		},
+		Text:     ptr.String("__Text__"),
+		TextType: types.TextType("ssml"),
+		VoiceId:  types.VoiceId("Aditi"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -589,7 +714,26 @@ func TestCheckResponseSnapshot_Error_InvalidSampleRateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartSpeechSynthesisTask(context.Background(), &StartSpeechSynthesisTaskInput{})
+	_, opErr := svc.StartSpeechSynthesisTask(context.Background(), &StartSpeechSynthesisTaskInput{
+		Engine:       types.Engine("standard"),
+		LanguageCode: types.LanguageCode("arb"),
+		LexiconNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OutputFormat:       types.OutputFormat("json"),
+		OutputS3BucketName: ptr.String("__OutputS3BucketName__"),
+		OutputS3KeyPrefix:  ptr.String("__OutputS3KeyPrefix__"),
+		SampleRate:         ptr.String("__SampleRate__"),
+		SnsTopicArn:        ptr.String("__SnsTopicArn__"),
+		SpeechMarkTypes: []types.SpeechMarkType{
+			types.SpeechMarkType("sentence"),
+			types.SpeechMarkType("sentence"),
+		},
+		Text:     ptr.String("__Text__"),
+		TextType: types.TextType("ssml"),
+		VoiceId:  types.VoiceId("Aditi"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -614,7 +758,26 @@ func TestCheckResponseSnapshot_Error_InvalidSnsTopicArnException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartSpeechSynthesisTask(context.Background(), &StartSpeechSynthesisTaskInput{})
+	_, opErr := svc.StartSpeechSynthesisTask(context.Background(), &StartSpeechSynthesisTaskInput{
+		Engine:       types.Engine("standard"),
+		LanguageCode: types.LanguageCode("arb"),
+		LexiconNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OutputFormat:       types.OutputFormat("json"),
+		OutputS3BucketName: ptr.String("__OutputS3BucketName__"),
+		OutputS3KeyPrefix:  ptr.String("__OutputS3KeyPrefix__"),
+		SampleRate:         ptr.String("__SampleRate__"),
+		SnsTopicArn:        ptr.String("__SnsTopicArn__"),
+		SpeechMarkTypes: []types.SpeechMarkType{
+			types.SpeechMarkType("sentence"),
+			types.SpeechMarkType("sentence"),
+		},
+		Text:     ptr.String("__Text__"),
+		TextType: types.TextType("ssml"),
+		VoiceId:  types.VoiceId("Aditi"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -639,7 +802,26 @@ func TestCheckResponseSnapshot_Error_InvalidSsmlException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartSpeechSynthesisTask(context.Background(), &StartSpeechSynthesisTaskInput{})
+	_, opErr := svc.StartSpeechSynthesisTask(context.Background(), &StartSpeechSynthesisTaskInput{
+		Engine:       types.Engine("standard"),
+		LanguageCode: types.LanguageCode("arb"),
+		LexiconNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OutputFormat:       types.OutputFormat("json"),
+		OutputS3BucketName: ptr.String("__OutputS3BucketName__"),
+		OutputS3KeyPrefix:  ptr.String("__OutputS3KeyPrefix__"),
+		SampleRate:         ptr.String("__SampleRate__"),
+		SnsTopicArn:        ptr.String("__SnsTopicArn__"),
+		SpeechMarkTypes: []types.SpeechMarkType{
+			types.SpeechMarkType("sentence"),
+			types.SpeechMarkType("sentence"),
+		},
+		Text:     ptr.String("__Text__"),
+		TextType: types.TextType("ssml"),
+		VoiceId:  types.VoiceId("Aditi"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -664,7 +846,9 @@ func TestCheckResponseSnapshot_Error_InvalidTaskIdException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetSpeechSynthesisTask(context.Background(), &GetSpeechSynthesisTaskInput{})
+	_, opErr := svc.GetSpeechSynthesisTask(context.Background(), &GetSpeechSynthesisTaskInput{
+		TaskId: ptr.String("__TaskId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -689,7 +873,26 @@ func TestCheckResponseSnapshot_Error_LanguageNotSupportedException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartSpeechSynthesisTask(context.Background(), &StartSpeechSynthesisTaskInput{})
+	_, opErr := svc.StartSpeechSynthesisTask(context.Background(), &StartSpeechSynthesisTaskInput{
+		Engine:       types.Engine("standard"),
+		LanguageCode: types.LanguageCode("arb"),
+		LexiconNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OutputFormat:       types.OutputFormat("json"),
+		OutputS3BucketName: ptr.String("__OutputS3BucketName__"),
+		OutputS3KeyPrefix:  ptr.String("__OutputS3KeyPrefix__"),
+		SampleRate:         ptr.String("__SampleRate__"),
+		SnsTopicArn:        ptr.String("__SnsTopicArn__"),
+		SpeechMarkTypes: []types.SpeechMarkType{
+			types.SpeechMarkType("sentence"),
+			types.SpeechMarkType("sentence"),
+		},
+		Text:     ptr.String("__Text__"),
+		TextType: types.TextType("ssml"),
+		VoiceId:  types.VoiceId("Aditi"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -714,7 +917,9 @@ func TestCheckResponseSnapshot_Error_LexiconNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteLexicon(context.Background(), &DeleteLexiconInput{})
+	_, opErr := svc.DeleteLexicon(context.Background(), &DeleteLexiconInput{
+		Name: ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -739,7 +944,10 @@ func TestCheckResponseSnapshot_Error_LexiconSizeExceededException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutLexicon(context.Background(), &PutLexiconInput{})
+	_, opErr := svc.PutLexicon(context.Background(), &PutLexiconInput{
+		Name:    ptr.String("__Name__"),
+		Content: ptr.String("__Content__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -764,7 +972,26 @@ func TestCheckResponseSnapshot_Error_MarksNotSupportedForFormatException(t *test
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartSpeechSynthesisTask(context.Background(), &StartSpeechSynthesisTaskInput{})
+	_, opErr := svc.StartSpeechSynthesisTask(context.Background(), &StartSpeechSynthesisTaskInput{
+		Engine:       types.Engine("standard"),
+		LanguageCode: types.LanguageCode("arb"),
+		LexiconNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OutputFormat:       types.OutputFormat("json"),
+		OutputS3BucketName: ptr.String("__OutputS3BucketName__"),
+		OutputS3KeyPrefix:  ptr.String("__OutputS3KeyPrefix__"),
+		SampleRate:         ptr.String("__SampleRate__"),
+		SnsTopicArn:        ptr.String("__SnsTopicArn__"),
+		SpeechMarkTypes: []types.SpeechMarkType{
+			types.SpeechMarkType("sentence"),
+			types.SpeechMarkType("sentence"),
+		},
+		Text:     ptr.String("__Text__"),
+		TextType: types.TextType("ssml"),
+		VoiceId:  types.VoiceId("Aditi"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -789,7 +1016,10 @@ func TestCheckResponseSnapshot_Error_MaxLexemeLengthExceededException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutLexicon(context.Background(), &PutLexiconInput{})
+	_, opErr := svc.PutLexicon(context.Background(), &PutLexiconInput{
+		Name:    ptr.String("__Name__"),
+		Content: ptr.String("__Content__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -814,7 +1044,10 @@ func TestCheckResponseSnapshot_Error_MaxLexiconsNumberExceededException(t *testi
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutLexicon(context.Background(), &PutLexiconInput{})
+	_, opErr := svc.PutLexicon(context.Background(), &PutLexiconInput{
+		Name:    ptr.String("__Name__"),
+		Content: ptr.String("__Content__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -839,7 +1072,9 @@ func TestCheckResponseSnapshot_Error_ServiceFailureException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteLexicon(context.Background(), &DeleteLexiconInput{})
+	_, opErr := svc.DeleteLexicon(context.Background(), &DeleteLexiconInput{
+		Name: ptr.String("__Name__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -864,7 +1099,26 @@ func TestCheckResponseSnapshot_Error_SsmlMarksNotSupportedForTextTypeException(t
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartSpeechSynthesisTask(context.Background(), &StartSpeechSynthesisTaskInput{})
+	_, opErr := svc.StartSpeechSynthesisTask(context.Background(), &StartSpeechSynthesisTaskInput{
+		Engine:       types.Engine("standard"),
+		LanguageCode: types.LanguageCode("arb"),
+		LexiconNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OutputFormat:       types.OutputFormat("json"),
+		OutputS3BucketName: ptr.String("__OutputS3BucketName__"),
+		OutputS3KeyPrefix:  ptr.String("__OutputS3KeyPrefix__"),
+		SampleRate:         ptr.String("__SampleRate__"),
+		SnsTopicArn:        ptr.String("__SnsTopicArn__"),
+		SpeechMarkTypes: []types.SpeechMarkType{
+			types.SpeechMarkType("sentence"),
+			types.SpeechMarkType("sentence"),
+		},
+		Text:     ptr.String("__Text__"),
+		TextType: types.TextType("ssml"),
+		VoiceId:  types.VoiceId("Aditi"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -889,7 +1143,9 @@ func TestCheckResponseSnapshot_Error_SynthesisTaskNotFoundException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetSpeechSynthesisTask(context.Background(), &GetSpeechSynthesisTaskInput{})
+	_, opErr := svc.GetSpeechSynthesisTask(context.Background(), &GetSpeechSynthesisTaskInput{
+		TaskId: ptr.String("__TaskId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -914,7 +1170,26 @@ func TestCheckResponseSnapshot_Error_TextLengthExceededException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.StartSpeechSynthesisTask(context.Background(), &StartSpeechSynthesisTaskInput{})
+	_, opErr := svc.StartSpeechSynthesisTask(context.Background(), &StartSpeechSynthesisTaskInput{
+		Engine:       types.Engine("standard"),
+		LanguageCode: types.LanguageCode("arb"),
+		LexiconNames: []string{
+			"__Member__",
+			"__Member__",
+		},
+		OutputFormat:       types.OutputFormat("json"),
+		OutputS3BucketName: ptr.String("__OutputS3BucketName__"),
+		OutputS3KeyPrefix:  ptr.String("__OutputS3KeyPrefix__"),
+		SampleRate:         ptr.String("__SampleRate__"),
+		SnsTopicArn:        ptr.String("__SnsTopicArn__"),
+		SpeechMarkTypes: []types.SpeechMarkType{
+			types.SpeechMarkType("sentence"),
+			types.SpeechMarkType("sentence"),
+		},
+		Text:     ptr.String("__Text__"),
+		TextType: types.TextType("ssml"),
+		VoiceId:  types.VoiceId("Aditi"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -939,7 +1214,10 @@ func TestCheckResponseSnapshot_Error_UnsupportedPlsAlphabetException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutLexicon(context.Background(), &PutLexiconInput{})
+	_, opErr := svc.PutLexicon(context.Background(), &PutLexiconInput{
+		Name:    ptr.String("__Name__"),
+		Content: ptr.String("__Content__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -964,7 +1242,10 @@ func TestCheckResponseSnapshot_Error_UnsupportedPlsLanguageException(t *testing.
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutLexicon(context.Background(), &PutLexiconInput{})
+	_, opErr := svc.PutLexicon(context.Background(), &PutLexiconInput{
+		Name:    ptr.String("__Name__"),
+		Content: ptr.String("__Content__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
