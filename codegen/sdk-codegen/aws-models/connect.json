@@ -25259,6 +25259,12 @@
                     "traits": {
                         "smithy.api#enumValue": "zh-CN"
                     }
+                },
+                "MS_MY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ms-MY"
+                    }
                 }
             }
         },

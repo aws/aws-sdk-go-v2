@@ -30522,6 +30522,13 @@
                         "smithy.api#documentation": "username for destination",
                         "smithy.api#jsonName": "username"
                     }
+                },
+                "VirtualSourceAddress": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies the source IP address for outbound multicast packets.",
+                        "smithy.api#jsonName": "virtualSourceAddress"
+                    }
                 }
             },
             "traits": {

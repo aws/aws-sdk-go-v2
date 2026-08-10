@@ -1687,6 +1687,13 @@
                         "smithy.api#documentation": "<p>Creates a stateful session or identifies an existing one. You can do one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>Create a stateful session by specifying the value\n                    <code>NEW_SESSION</code>.</p>\n            </li>\n            <li>\n               <p>Send your request to an existing stateful session by specifying the ID of that\n                    session.</p>\n            </li>\n         </ul>\n         <p>With a stateful session, you can send multiple requests to a stateful model. When you\n            create a session with a stateful model, the model must create the session ID and set the\n            expiration time. The model must also provide that information in the response to your\n            request. You can get the ID and timestamp from the <code>NewSessionId</code> response\n            parameter. For any subsequent request where you specify that session ID, SageMaker AI routes the request to the same instance that supports the session.</p>",
                         "smithy.api#httpHeader": "X-Amzn-SageMaker-Session-Id"
                     }
+                },
+                "PrefixAwareId": {
+                    "target": "com.amazonaws.sagemakerruntime#PrefixAwareIdHeader",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional, stable identifier that serves as a routing hint for prefix-aware routing.\n        The service routes requests with the same prefix and the same identifier to the same\n        instance. If requests from different applications might have the same prompt prefix, set\n        a different identifier for each application to differentiate their routing\n        decisions.</p>\n         <p>Applies only to endpoints configured with a\n        <code>RoutingStrategy</code> of <code>PREFIX_AWARE</code>.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Prefix-Aware-Id"
+                    }
                 }
             },
             "traits": {
@@ -1857,6 +1864,13 @@
                         "smithy.api#documentation": "<p>The ID of a stateful session to handle your request.</p>\n         <p>You can't create a stateful session by using the\n                <code>InvokeEndpointWithResponseStream</code> action. Instead, you can create one by\n            using the <code>\n               <a>InvokeEndpoint</a>\n            </code> action. In your request, you\n            specify <code>NEW_SESSION</code> for the <code>SessionId</code> request parameter. The\n            response to that request provides the session ID for the <code>NewSessionId</code>\n            response parameter.</p>",
                         "smithy.api#httpHeader": "X-Amzn-SageMaker-Session-Id"
                     }
+                },
+                "PrefixAwareId": {
+                    "target": "com.amazonaws.sagemakerruntime#PrefixAwareIdHeader",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional, stable identifier that serves as a routing hint for prefix-aware routing.\n        The service routes requests with the same prefix and the same identifier to the same\n        instance. If requests from different applications might have the same prompt prefix, set\n        a different identifier for each application to differentiate their routing\n        decisions.</p>\n         <p>Applies only to endpoints configured with a\n        <code>RoutingStrategy</code> of <code>PREFIX_AWARE</code>.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Prefix-Aware-Id"
+                    }
                 }
             },
             "traits": {
@@ -2006,6 +2020,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A wrapper for pieces of the payload that's returned in response to a streaming\n        inference request. A streaming inference response consists of one or more payload parts.\n    </p>"
+            }
+        },
+        "com.amazonaws.sagemakerruntime#PrefixAwareIdHeader": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^\\A\\S[\\p{Print}]*\\z$"
             }
         },
         "com.amazonaws.sagemakerruntime#RequestTTLSecondsHeader": {
