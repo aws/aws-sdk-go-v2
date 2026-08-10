@@ -4,7 +4,9 @@ package controltower
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/controltower/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/controltower/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,26 @@ type EnableBaselineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableBaselineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableBaselineInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableBaselineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaselineIdentifier != nil {
+		s.WriteString(schemas.EnableBaselineInput_baselineIdentifier, *v.BaselineIdentifier)
+	}
+	if v.BaselineVersion != nil {
+		s.WriteString(schemas.EnableBaselineInput_baselineVersion, *v.BaselineVersion)
+	}
+	serializeEnabledBaselineParameters(s, schemas.EnableBaselineInput_parameters, v.Parameters)
+	serializeTagMap(s, schemas.EnableBaselineInput_tags, v.Tags)
+	if v.TargetIdentifier != nil {
+		s.WriteString(schemas.EnableBaselineInput_targetIdentifier, *v.TargetIdentifier)
+	}
+}
+
 type EnableBaselineOutput struct {
 
 	// The ARN of the EnabledBaseline resource.
@@ -76,13 +98,38 @@ type EnableBaselineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableBaselineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableBaselineOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableBaselineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.EnableBaselineOutput_arn, *v.Arn)
+	}
+	if v.OperationIdentifier != nil {
+		s.WriteString(schemas.EnableBaselineOutput_operationIdentifier, *v.OperationIdentifier)
+	}
+}
+func (v *EnableBaselineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnableBaselineOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnableBaselineOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.EnableBaselineOutput_arn, v.Arn)
+		case schemas.EnableBaselineOutput_operationIdentifier:
+			v.OperationIdentifier = new(string)
+			return d.ReadString(schemas.EnableBaselineOutput_operationIdentifier, v.OperationIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEnableBaselineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpEnableBaseline{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableBaseline, schemas.EnableBaselineInput, schemas.EnableBaselineOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpEnableBaseline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableBaseline, schemas.EnableBaselineInput, schemas.EnableBaselineOutput), output: &EnableBaselineOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

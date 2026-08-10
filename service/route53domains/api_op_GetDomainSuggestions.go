@@ -4,7 +4,9 @@ package route53domains
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,22 @@ type GetDomainSuggestionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDomainSuggestionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDomainSuggestionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDomainSuggestionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetDomainSuggestionsRequest_DomainName, *v.DomainName)
+	}
+	if v.OnlyAvailable != nil {
+		s.WriteBool(schemas.GetDomainSuggestionsRequest_OnlyAvailable, *v.OnlyAvailable)
+	}
+	s.WriteInt32(schemas.GetDomainSuggestionsRequest_SuggestionCount, v.SuggestionCount)
+}
+
 type GetDomainSuggestionsOutput struct {
 
 	// A list of possible domain names. If you specified true for OnlyAvailable in the
@@ -80,13 +98,29 @@ type GetDomainSuggestionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDomainSuggestionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDomainSuggestionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDomainSuggestionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDomainSuggestionsList(s, schemas.GetDomainSuggestionsResponse_SuggestionsList, v.SuggestionsList)
+}
+func (v *GetDomainSuggestionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDomainSuggestionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDomainSuggestionsResponse_SuggestionsList:
+			return deserializeDomainSuggestionsList(d, schemas.GetDomainSuggestionsResponse_SuggestionsList, &v.SuggestionsList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDomainSuggestionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDomainSuggestions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDomainSuggestions, schemas.GetDomainSuggestionsRequest, schemas.GetDomainSuggestionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDomainSuggestions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDomainSuggestions, schemas.GetDomainSuggestionsRequest, schemas.GetDomainSuggestionsResponse), output: &GetDomainSuggestionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

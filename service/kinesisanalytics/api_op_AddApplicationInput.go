@@ -4,7 +4,9 @@ package kinesisanalytics
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalytics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalytics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,26 @@ type AddApplicationInputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddApplicationInputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddApplicationInputRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddApplicationInputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.AddApplicationInputRequest_ApplicationName, *v.ApplicationName)
+	}
+	if v.CurrentApplicationVersionId != nil {
+		s.WriteInt64(schemas.AddApplicationInputRequest_CurrentApplicationVersionId, *v.CurrentApplicationVersionId)
+	}
+	if v.Input != nil {
+		s.WriteStruct(schemas.AddApplicationInputRequest_Input)
+		v.Input.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type AddApplicationInputOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -77,13 +99,26 @@ type AddApplicationInputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddApplicationInputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddApplicationInputResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddApplicationInputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AddApplicationInputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddApplicationInputResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddApplicationInputMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddApplicationInput{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddApplicationInput, schemas.AddApplicationInputRequest, schemas.AddApplicationInputResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddApplicationInput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddApplicationInput, schemas.AddApplicationInputRequest, schemas.AddApplicationInputResponse), output: &AddApplicationInputOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

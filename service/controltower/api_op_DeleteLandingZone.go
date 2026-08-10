@@ -4,6 +4,8 @@ package controltower
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/controltower/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type DeleteLandingZoneInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLandingZoneInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLandingZoneInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLandingZoneInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LandingZoneIdentifier != nil {
+		s.WriteString(schemas.DeleteLandingZoneInput_landingZoneIdentifier, *v.LandingZoneIdentifier)
+	}
+}
+
 type DeleteLandingZoneOutput struct {
 
 	// >A unique identifier assigned to a DeleteLandingZone operation. You can use
@@ -54,13 +68,32 @@ type DeleteLandingZoneOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLandingZoneOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLandingZoneOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLandingZoneOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationIdentifier != nil {
+		s.WriteString(schemas.DeleteLandingZoneOutput_operationIdentifier, *v.OperationIdentifier)
+	}
+}
+func (v *DeleteLandingZoneOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteLandingZoneOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteLandingZoneOutput_operationIdentifier:
+			v.OperationIdentifier = new(string)
+			return d.ReadString(schemas.DeleteLandingZoneOutput_operationIdentifier, v.OperationIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteLandingZoneMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteLandingZone{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLandingZone, schemas.DeleteLandingZoneInput, schemas.DeleteLandingZoneOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteLandingZone{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLandingZone, schemas.DeleteLandingZoneInput, schemas.DeleteLandingZoneOutput), output: &DeleteLandingZoneOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

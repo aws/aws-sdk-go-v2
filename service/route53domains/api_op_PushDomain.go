@@ -4,6 +4,8 @@ package route53domains
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type PushDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PushDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PushDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PushDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.PushDomainRequest_DomainName, *v.DomainName)
+	}
+	if v.Target != nil {
+		s.WriteString(schemas.PushDomainRequest_Target, *v.Target)
+	}
+}
+
 type PushDomainOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +67,26 @@ type PushDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PushDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PushDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PushDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPushDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPushDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PushDomain, schemas.PushDomainRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPushDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PushDomain, schemas.PushDomainRequest, nil), output: &PushDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

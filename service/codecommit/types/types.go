@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -17,6 +19,38 @@ type Approval struct {
 	UserArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Approval) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Approval)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Approval) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApprovalState != "" {
+		s.WriteString(schemas.Approval_approvalState, string(v.ApprovalState))
+	}
+	if v.UserArn != nil {
+		s.WriteString(schemas.Approval_userArn, *v.UserArn)
+	}
+}
+func (v *Approval) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Approval, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Approval_approvalState:
+			var ev string
+			if err := d.ReadString(schemas.Approval_approvalState, &ev); err != nil {
+				return err
+			}
+			v.ApprovalState = ApprovalState(ev)
+			return nil
+		case schemas.Approval_userArn:
+			v.UserArn = new(string)
+			return d.ReadString(schemas.Approval_userArn, v.UserArn)
+		}
+		return nil
+	})
 }
 
 // Returns information about an approval rule.
@@ -50,6 +84,72 @@ type ApprovalRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApprovalRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApprovalRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApprovalRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApprovalRuleContent != nil {
+		s.WriteString(schemas.ApprovalRule_approvalRuleContent, *v.ApprovalRuleContent)
+	}
+	if v.ApprovalRuleId != nil {
+		s.WriteString(schemas.ApprovalRule_approvalRuleId, *v.ApprovalRuleId)
+	}
+	if v.ApprovalRuleName != nil {
+		s.WriteString(schemas.ApprovalRule_approvalRuleName, *v.ApprovalRuleName)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.ApprovalRule_creationDate, *v.CreationDate)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.ApprovalRule_lastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.LastModifiedUser != nil {
+		s.WriteString(schemas.ApprovalRule_lastModifiedUser, *v.LastModifiedUser)
+	}
+	if v.OriginApprovalRuleTemplate != nil {
+		s.WriteStruct(schemas.ApprovalRule_originApprovalRuleTemplate)
+		v.OriginApprovalRuleTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RuleContentSha256 != nil {
+		s.WriteString(schemas.ApprovalRule_ruleContentSha256, *v.RuleContentSha256)
+	}
+}
+func (v *ApprovalRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApprovalRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApprovalRule_approvalRuleContent:
+			v.ApprovalRuleContent = new(string)
+			return d.ReadString(schemas.ApprovalRule_approvalRuleContent, v.ApprovalRuleContent)
+		case schemas.ApprovalRule_approvalRuleId:
+			v.ApprovalRuleId = new(string)
+			return d.ReadString(schemas.ApprovalRule_approvalRuleId, v.ApprovalRuleId)
+		case schemas.ApprovalRule_approvalRuleName:
+			v.ApprovalRuleName = new(string)
+			return d.ReadString(schemas.ApprovalRule_approvalRuleName, v.ApprovalRuleName)
+		case schemas.ApprovalRule_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.ApprovalRule_creationDate, v.CreationDate)
+		case schemas.ApprovalRule_lastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.ApprovalRule_lastModifiedDate, v.LastModifiedDate)
+		case schemas.ApprovalRule_lastModifiedUser:
+			v.LastModifiedUser = new(string)
+			return d.ReadString(schemas.ApprovalRule_lastModifiedUser, v.LastModifiedUser)
+		case schemas.ApprovalRule_originApprovalRuleTemplate:
+			v.OriginApprovalRuleTemplate = &OriginApprovalRuleTemplate{}
+			return v.OriginApprovalRuleTemplate.Deserialize(d)
+		case schemas.ApprovalRule_ruleContentSha256:
+			v.RuleContentSha256 = new(string)
+			return d.ReadString(schemas.ApprovalRule_ruleContentSha256, v.RuleContentSha256)
+		}
+		return nil
+	})
+}
+
 // Returns information about an event for an approval rule.
 type ApprovalRuleEventMetadata struct {
 
@@ -65,6 +165,40 @@ type ApprovalRuleEventMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApprovalRuleEventMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApprovalRuleEventMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApprovalRuleEventMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApprovalRuleContent != nil {
+		s.WriteString(schemas.ApprovalRuleEventMetadata_approvalRuleContent, *v.ApprovalRuleContent)
+	}
+	if v.ApprovalRuleId != nil {
+		s.WriteString(schemas.ApprovalRuleEventMetadata_approvalRuleId, *v.ApprovalRuleId)
+	}
+	if v.ApprovalRuleName != nil {
+		s.WriteString(schemas.ApprovalRuleEventMetadata_approvalRuleName, *v.ApprovalRuleName)
+	}
+}
+func (v *ApprovalRuleEventMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApprovalRuleEventMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApprovalRuleEventMetadata_approvalRuleContent:
+			v.ApprovalRuleContent = new(string)
+			return d.ReadString(schemas.ApprovalRuleEventMetadata_approvalRuleContent, v.ApprovalRuleContent)
+		case schemas.ApprovalRuleEventMetadata_approvalRuleId:
+			v.ApprovalRuleId = new(string)
+			return d.ReadString(schemas.ApprovalRuleEventMetadata_approvalRuleId, v.ApprovalRuleId)
+		case schemas.ApprovalRuleEventMetadata_approvalRuleName:
+			v.ApprovalRuleName = new(string)
+			return d.ReadString(schemas.ApprovalRuleEventMetadata_approvalRuleName, v.ApprovalRuleName)
+		}
+		return nil
+	})
+}
+
 // Returns information about an override event for approval rules for a pull
 // request.
 type ApprovalRuleOverriddenEventMetadata struct {
@@ -76,6 +210,38 @@ type ApprovalRuleOverriddenEventMetadata struct {
 	RevisionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ApprovalRuleOverriddenEventMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApprovalRuleOverriddenEventMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApprovalRuleOverriddenEventMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OverrideStatus != "" {
+		s.WriteString(schemas.ApprovalRuleOverriddenEventMetadata_overrideStatus, string(v.OverrideStatus))
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.ApprovalRuleOverriddenEventMetadata_revisionId, *v.RevisionId)
+	}
+}
+func (v *ApprovalRuleOverriddenEventMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApprovalRuleOverriddenEventMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApprovalRuleOverriddenEventMetadata_overrideStatus:
+			var ev string
+			if err := d.ReadString(schemas.ApprovalRuleOverriddenEventMetadata_overrideStatus, &ev); err != nil {
+				return err
+			}
+			v.OverrideStatus = OverrideStatus(ev)
+			return nil
+		case schemas.ApprovalRuleOverriddenEventMetadata_revisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.ApprovalRuleOverriddenEventMetadata_revisionId, v.RevisionId)
+		}
+		return nil
+	})
 }
 
 // Returns information about an approval rule template.
@@ -110,6 +276,70 @@ type ApprovalRuleTemplate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApprovalRuleTemplate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApprovalRuleTemplate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApprovalRuleTemplate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApprovalRuleTemplateContent != nil {
+		s.WriteString(schemas.ApprovalRuleTemplate_approvalRuleTemplateContent, *v.ApprovalRuleTemplateContent)
+	}
+	if v.ApprovalRuleTemplateDescription != nil {
+		s.WriteString(schemas.ApprovalRuleTemplate_approvalRuleTemplateDescription, *v.ApprovalRuleTemplateDescription)
+	}
+	if v.ApprovalRuleTemplateId != nil {
+		s.WriteString(schemas.ApprovalRuleTemplate_approvalRuleTemplateId, *v.ApprovalRuleTemplateId)
+	}
+	if v.ApprovalRuleTemplateName != nil {
+		s.WriteString(schemas.ApprovalRuleTemplate_approvalRuleTemplateName, *v.ApprovalRuleTemplateName)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.ApprovalRuleTemplate_creationDate, *v.CreationDate)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.ApprovalRuleTemplate_lastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.LastModifiedUser != nil {
+		s.WriteString(schemas.ApprovalRuleTemplate_lastModifiedUser, *v.LastModifiedUser)
+	}
+	if v.RuleContentSha256 != nil {
+		s.WriteString(schemas.ApprovalRuleTemplate_ruleContentSha256, *v.RuleContentSha256)
+	}
+}
+func (v *ApprovalRuleTemplate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApprovalRuleTemplate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApprovalRuleTemplate_approvalRuleTemplateContent:
+			v.ApprovalRuleTemplateContent = new(string)
+			return d.ReadString(schemas.ApprovalRuleTemplate_approvalRuleTemplateContent, v.ApprovalRuleTemplateContent)
+		case schemas.ApprovalRuleTemplate_approvalRuleTemplateDescription:
+			v.ApprovalRuleTemplateDescription = new(string)
+			return d.ReadString(schemas.ApprovalRuleTemplate_approvalRuleTemplateDescription, v.ApprovalRuleTemplateDescription)
+		case schemas.ApprovalRuleTemplate_approvalRuleTemplateId:
+			v.ApprovalRuleTemplateId = new(string)
+			return d.ReadString(schemas.ApprovalRuleTemplate_approvalRuleTemplateId, v.ApprovalRuleTemplateId)
+		case schemas.ApprovalRuleTemplate_approvalRuleTemplateName:
+			v.ApprovalRuleTemplateName = new(string)
+			return d.ReadString(schemas.ApprovalRuleTemplate_approvalRuleTemplateName, v.ApprovalRuleTemplateName)
+		case schemas.ApprovalRuleTemplate_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.ApprovalRuleTemplate_creationDate, v.CreationDate)
+		case schemas.ApprovalRuleTemplate_lastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.ApprovalRuleTemplate_lastModifiedDate, v.LastModifiedDate)
+		case schemas.ApprovalRuleTemplate_lastModifiedUser:
+			v.LastModifiedUser = new(string)
+			return d.ReadString(schemas.ApprovalRuleTemplate_lastModifiedUser, v.LastModifiedUser)
+		case schemas.ApprovalRuleTemplate_ruleContentSha256:
+			v.RuleContentSha256 = new(string)
+			return d.ReadString(schemas.ApprovalRuleTemplate_ruleContentSha256, v.RuleContentSha256)
+		}
+		return nil
+	})
+}
+
 // Returns information about a change in the approval state for a pull request.
 type ApprovalStateChangedEventMetadata struct {
 
@@ -120,6 +350,38 @@ type ApprovalStateChangedEventMetadata struct {
 	RevisionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ApprovalStateChangedEventMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApprovalStateChangedEventMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApprovalStateChangedEventMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApprovalStatus != "" {
+		s.WriteString(schemas.ApprovalStateChangedEventMetadata_approvalStatus, string(v.ApprovalStatus))
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.ApprovalStateChangedEventMetadata_revisionId, *v.RevisionId)
+	}
+}
+func (v *ApprovalStateChangedEventMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApprovalStateChangedEventMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApprovalStateChangedEventMetadata_approvalStatus:
+			var ev string
+			if err := d.ReadString(schemas.ApprovalStateChangedEventMetadata_approvalStatus, &ev); err != nil {
+				return err
+			}
+			v.ApprovalStatus = ApprovalState(ev)
+			return nil
+		case schemas.ApprovalStateChangedEventMetadata_revisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.ApprovalStateChangedEventMetadata_revisionId, v.RevisionId)
+		}
+		return nil
+	})
 }
 
 // Returns information about errors in a
@@ -138,6 +400,40 @@ type BatchAssociateApprovalRuleTemplateWithRepositoriesError struct {
 	RepositoryName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchAssociateApprovalRuleTemplateWithRepositoriesError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAssociateApprovalRuleTemplateWithRepositoriesError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAssociateApprovalRuleTemplateWithRepositoriesError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.BatchAssociateApprovalRuleTemplateWithRepositoriesError_errorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.BatchAssociateApprovalRuleTemplateWithRepositoriesError_errorMessage, *v.ErrorMessage)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.BatchAssociateApprovalRuleTemplateWithRepositoriesError_repositoryName, *v.RepositoryName)
+	}
+}
+func (v *BatchAssociateApprovalRuleTemplateWithRepositoriesError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchAssociateApprovalRuleTemplateWithRepositoriesError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchAssociateApprovalRuleTemplateWithRepositoriesError_errorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.BatchAssociateApprovalRuleTemplateWithRepositoriesError_errorCode, v.ErrorCode)
+		case schemas.BatchAssociateApprovalRuleTemplateWithRepositoriesError_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.BatchAssociateApprovalRuleTemplateWithRepositoriesError_errorMessage, v.ErrorMessage)
+		case schemas.BatchAssociateApprovalRuleTemplateWithRepositoriesError_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.BatchAssociateApprovalRuleTemplateWithRepositoriesError_repositoryName, v.RepositoryName)
+		}
+		return nil
+	})
 }
 
 // Returns information about errors in a BatchDescribeMergeConflicts operation.
@@ -161,6 +457,40 @@ type BatchDescribeMergeConflictsError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDescribeMergeConflictsError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDescribeMergeConflictsError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDescribeMergeConflictsError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExceptionName != nil {
+		s.WriteString(schemas.BatchDescribeMergeConflictsError_exceptionName, *v.ExceptionName)
+	}
+	if v.FilePath != nil {
+		s.WriteString(schemas.BatchDescribeMergeConflictsError_filePath, *v.FilePath)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.BatchDescribeMergeConflictsError_message, *v.Message)
+	}
+}
+func (v *BatchDescribeMergeConflictsError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDescribeMergeConflictsError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDescribeMergeConflictsError_exceptionName:
+			v.ExceptionName = new(string)
+			return d.ReadString(schemas.BatchDescribeMergeConflictsError_exceptionName, v.ExceptionName)
+		case schemas.BatchDescribeMergeConflictsError_filePath:
+			v.FilePath = new(string)
+			return d.ReadString(schemas.BatchDescribeMergeConflictsError_filePath, v.FilePath)
+		case schemas.BatchDescribeMergeConflictsError_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BatchDescribeMergeConflictsError_message, v.Message)
+		}
+		return nil
+	})
+}
+
 // Returns information about errors in a
 // BatchDisassociateApprovalRuleTemplateFromRepositories operation.
 type BatchDisassociateApprovalRuleTemplateFromRepositoriesError struct {
@@ -180,6 +510,40 @@ type BatchDisassociateApprovalRuleTemplateFromRepositoriesError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDisassociateApprovalRuleTemplateFromRepositoriesError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDisassociateApprovalRuleTemplateFromRepositoriesError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesError_errorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesError_errorMessage, *v.ErrorMessage)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesError_repositoryName, *v.RepositoryName)
+	}
+}
+func (v *BatchDisassociateApprovalRuleTemplateFromRepositoriesError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesError_errorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesError_errorCode, v.ErrorCode)
+		case schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesError_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesError_errorMessage, v.ErrorMessage)
+		case schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesError_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesError_repositoryName, v.RepositoryName)
+		}
+		return nil
+	})
+}
+
 // Returns information about errors in a BatchGetCommits operation.
 type BatchGetCommitsError struct {
 
@@ -194,6 +558,40 @@ type BatchGetCommitsError struct {
 	ErrorMessage *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchGetCommitsError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetCommitsError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetCommitsError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommitId != nil {
+		s.WriteString(schemas.BatchGetCommitsError_commitId, *v.CommitId)
+	}
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.BatchGetCommitsError_errorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.BatchGetCommitsError_errorMessage, *v.ErrorMessage)
+	}
+}
+func (v *BatchGetCommitsError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetCommitsError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetCommitsError_commitId:
+			v.CommitId = new(string)
+			return d.ReadString(schemas.BatchGetCommitsError_commitId, v.CommitId)
+		case schemas.BatchGetCommitsError_errorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.BatchGetCommitsError_errorCode, v.ErrorCode)
+		case schemas.BatchGetCommitsError_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.BatchGetCommitsError_errorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
 }
 
 // Returns information about errors in a BatchGetRepositories operation.
@@ -215,6 +613,50 @@ type BatchGetRepositoriesError struct {
 	RepositoryName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchGetRepositoriesError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetRepositoriesError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetRepositoriesError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != "" {
+		s.WriteString(schemas.BatchGetRepositoriesError_errorCode, string(v.ErrorCode))
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.BatchGetRepositoriesError_errorMessage, *v.ErrorMessage)
+	}
+	if v.RepositoryId != nil {
+		s.WriteString(schemas.BatchGetRepositoriesError_repositoryId, *v.RepositoryId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.BatchGetRepositoriesError_repositoryName, *v.RepositoryName)
+	}
+}
+func (v *BatchGetRepositoriesError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetRepositoriesError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetRepositoriesError_errorCode:
+			var ev string
+			if err := d.ReadString(schemas.BatchGetRepositoriesError_errorCode, &ev); err != nil {
+				return err
+			}
+			v.ErrorCode = BatchGetRepositoriesErrorCodeEnum(ev)
+			return nil
+		case schemas.BatchGetRepositoriesError_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.BatchGetRepositoriesError_errorMessage, v.ErrorMessage)
+		case schemas.BatchGetRepositoriesError_repositoryId:
+			v.RepositoryId = new(string)
+			return d.ReadString(schemas.BatchGetRepositoriesError_repositoryId, v.RepositoryId)
+		case schemas.BatchGetRepositoriesError_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.BatchGetRepositoriesError_repositoryName, v.RepositoryName)
+		}
+		return nil
+	})
 }
 
 // Returns information about a specific Git blob object.
@@ -240,6 +682,40 @@ type BlobMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BlobMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BlobMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BlobMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlobId != nil {
+		s.WriteString(schemas.BlobMetadata_blobId, *v.BlobId)
+	}
+	if v.Mode != nil {
+		s.WriteString(schemas.BlobMetadata_mode, *v.Mode)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.BlobMetadata_path, *v.Path)
+	}
+}
+func (v *BlobMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BlobMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BlobMetadata_blobId:
+			v.BlobId = new(string)
+			return d.ReadString(schemas.BlobMetadata_blobId, v.BlobId)
+		case schemas.BlobMetadata_mode:
+			v.Mode = new(string)
+			return d.ReadString(schemas.BlobMetadata_mode, v.Mode)
+		case schemas.BlobMetadata_path:
+			v.Path = new(string)
+			return d.ReadString(schemas.BlobMetadata_path, v.Path)
+		}
+		return nil
+	})
+}
+
 // Returns information about a branch.
 type BranchInfo struct {
 
@@ -250,6 +726,34 @@ type BranchInfo struct {
 	CommitId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BranchInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BranchInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BranchInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BranchName != nil {
+		s.WriteString(schemas.BranchInfo_branchName, *v.BranchName)
+	}
+	if v.CommitId != nil {
+		s.WriteString(schemas.BranchInfo_commitId, *v.CommitId)
+	}
+}
+func (v *BranchInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BranchInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BranchInfo_branchName:
+			v.BranchName = new(string)
+			return d.ReadString(schemas.BranchInfo_branchName, v.BranchName)
+		case schemas.BranchInfo_commitId:
+			v.CommitId = new(string)
+			return d.ReadString(schemas.BranchInfo_commitId, v.CommitId)
+		}
+		return nil
+	})
 }
 
 // Returns information about a specific comment.
@@ -293,6 +797,75 @@ type Comment struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Comment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Comment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Comment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorArn != nil {
+		s.WriteString(schemas.Comment_authorArn, *v.AuthorArn)
+	}
+	serializeCallerReactions(s, schemas.Comment_callerReactions, v.CallerReactions)
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.Comment_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.CommentId != nil {
+		s.WriteString(schemas.Comment_commentId, *v.CommentId)
+	}
+	if v.Content != nil {
+		s.WriteString(schemas.Comment_content, *v.Content)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.Comment_creationDate, *v.CreationDate)
+	}
+	if v.Deleted != false {
+		s.WriteBool(schemas.Comment_deleted, v.Deleted)
+	}
+	if v.InReplyTo != nil {
+		s.WriteString(schemas.Comment_inReplyTo, *v.InReplyTo)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.Comment_lastModifiedDate, *v.LastModifiedDate)
+	}
+	serializeReactionCountsMap(s, schemas.Comment_reactionCounts, v.ReactionCounts)
+}
+func (v *Comment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Comment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Comment_authorArn:
+			v.AuthorArn = new(string)
+			return d.ReadString(schemas.Comment_authorArn, v.AuthorArn)
+		case schemas.Comment_callerReactions:
+			return deserializeCallerReactions(d, schemas.Comment_callerReactions, &v.CallerReactions)
+		case schemas.Comment_clientRequestToken:
+			v.ClientRequestToken = new(string)
+			return d.ReadString(schemas.Comment_clientRequestToken, v.ClientRequestToken)
+		case schemas.Comment_commentId:
+			v.CommentId = new(string)
+			return d.ReadString(schemas.Comment_commentId, v.CommentId)
+		case schemas.Comment_content:
+			v.Content = new(string)
+			return d.ReadString(schemas.Comment_content, v.Content)
+		case schemas.Comment_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.Comment_creationDate, v.CreationDate)
+		case schemas.Comment_deleted:
+			return d.ReadBool(schemas.Comment_deleted, &v.Deleted)
+		case schemas.Comment_inReplyTo:
+			v.InReplyTo = new(string)
+			return d.ReadString(schemas.Comment_inReplyTo, v.InReplyTo)
+		case schemas.Comment_lastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.Comment_lastModifiedDate, v.LastModifiedDate)
+		case schemas.Comment_reactionCounts:
+			return deserializeReactionCountsMap(d, schemas.Comment_reactionCounts, &v.ReactionCounts)
+		}
+		return nil
+	})
+}
+
 // Returns information about comments on the comparison between two commits.
 type CommentsForComparedCommit struct {
 
@@ -321,6 +894,63 @@ type CommentsForComparedCommit struct {
 	RepositoryName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CommentsForComparedCommit) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CommentsForComparedCommit)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CommentsForComparedCommit) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterBlobId != nil {
+		s.WriteString(schemas.CommentsForComparedCommit_afterBlobId, *v.AfterBlobId)
+	}
+	if v.AfterCommitId != nil {
+		s.WriteString(schemas.CommentsForComparedCommit_afterCommitId, *v.AfterCommitId)
+	}
+	if v.BeforeBlobId != nil {
+		s.WriteString(schemas.CommentsForComparedCommit_beforeBlobId, *v.BeforeBlobId)
+	}
+	if v.BeforeCommitId != nil {
+		s.WriteString(schemas.CommentsForComparedCommit_beforeCommitId, *v.BeforeCommitId)
+	}
+	serializeComments(s, schemas.CommentsForComparedCommit_comments, v.Comments)
+	if v.Location != nil {
+		s.WriteStruct(schemas.CommentsForComparedCommit_location)
+		v.Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.CommentsForComparedCommit_repositoryName, *v.RepositoryName)
+	}
+}
+func (v *CommentsForComparedCommit) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CommentsForComparedCommit, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CommentsForComparedCommit_afterBlobId:
+			v.AfterBlobId = new(string)
+			return d.ReadString(schemas.CommentsForComparedCommit_afterBlobId, v.AfterBlobId)
+		case schemas.CommentsForComparedCommit_afterCommitId:
+			v.AfterCommitId = new(string)
+			return d.ReadString(schemas.CommentsForComparedCommit_afterCommitId, v.AfterCommitId)
+		case schemas.CommentsForComparedCommit_beforeBlobId:
+			v.BeforeBlobId = new(string)
+			return d.ReadString(schemas.CommentsForComparedCommit_beforeBlobId, v.BeforeBlobId)
+		case schemas.CommentsForComparedCommit_beforeCommitId:
+			v.BeforeCommitId = new(string)
+			return d.ReadString(schemas.CommentsForComparedCommit_beforeCommitId, v.BeforeCommitId)
+		case schemas.CommentsForComparedCommit_comments:
+			return deserializeComments(d, schemas.CommentsForComparedCommit_comments, &v.Comments)
+		case schemas.CommentsForComparedCommit_location:
+			v.Location = &Location{}
+			return v.Location.Deserialize(d)
+		case schemas.CommentsForComparedCommit_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.CommentsForComparedCommit_repositoryName, v.RepositoryName)
+		}
+		return nil
+	})
 }
 
 // Returns information about comments on a pull request.
@@ -361,6 +991,69 @@ type CommentsForPullRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CommentsForPullRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CommentsForPullRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CommentsForPullRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterBlobId != nil {
+		s.WriteString(schemas.CommentsForPullRequest_afterBlobId, *v.AfterBlobId)
+	}
+	if v.AfterCommitId != nil {
+		s.WriteString(schemas.CommentsForPullRequest_afterCommitId, *v.AfterCommitId)
+	}
+	if v.BeforeBlobId != nil {
+		s.WriteString(schemas.CommentsForPullRequest_beforeBlobId, *v.BeforeBlobId)
+	}
+	if v.BeforeCommitId != nil {
+		s.WriteString(schemas.CommentsForPullRequest_beforeCommitId, *v.BeforeCommitId)
+	}
+	serializeComments(s, schemas.CommentsForPullRequest_comments, v.Comments)
+	if v.Location != nil {
+		s.WriteStruct(schemas.CommentsForPullRequest_location)
+		v.Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PullRequestId != nil {
+		s.WriteString(schemas.CommentsForPullRequest_pullRequestId, *v.PullRequestId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.CommentsForPullRequest_repositoryName, *v.RepositoryName)
+	}
+}
+func (v *CommentsForPullRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CommentsForPullRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CommentsForPullRequest_afterBlobId:
+			v.AfterBlobId = new(string)
+			return d.ReadString(schemas.CommentsForPullRequest_afterBlobId, v.AfterBlobId)
+		case schemas.CommentsForPullRequest_afterCommitId:
+			v.AfterCommitId = new(string)
+			return d.ReadString(schemas.CommentsForPullRequest_afterCommitId, v.AfterCommitId)
+		case schemas.CommentsForPullRequest_beforeBlobId:
+			v.BeforeBlobId = new(string)
+			return d.ReadString(schemas.CommentsForPullRequest_beforeBlobId, v.BeforeBlobId)
+		case schemas.CommentsForPullRequest_beforeCommitId:
+			v.BeforeCommitId = new(string)
+			return d.ReadString(schemas.CommentsForPullRequest_beforeCommitId, v.BeforeCommitId)
+		case schemas.CommentsForPullRequest_comments:
+			return deserializeComments(d, schemas.CommentsForPullRequest_comments, &v.Comments)
+		case schemas.CommentsForPullRequest_location:
+			v.Location = &Location{}
+			return v.Location.Deserialize(d)
+		case schemas.CommentsForPullRequest_pullRequestId:
+			v.PullRequestId = new(string)
+			return d.ReadString(schemas.CommentsForPullRequest_pullRequestId, v.PullRequestId)
+		case schemas.CommentsForPullRequest_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.CommentsForPullRequest_repositoryName, v.RepositoryName)
+		}
+		return nil
+	})
+}
+
 // Returns information about a specific commit.
 type Commit struct {
 
@@ -399,6 +1092,65 @@ type Commit struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Commit) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Commit)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Commit) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalData != nil {
+		s.WriteString(schemas.Commit_additionalData, *v.AdditionalData)
+	}
+	if v.Author != nil {
+		s.WriteStruct(schemas.Commit_author)
+		v.Author.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CommitId != nil {
+		s.WriteString(schemas.Commit_commitId, *v.CommitId)
+	}
+	if v.Committer != nil {
+		s.WriteStruct(schemas.Commit_committer)
+		v.Committer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.Commit_message, *v.Message)
+	}
+	serializeParentList(s, schemas.Commit_parents, v.Parents)
+	if v.TreeId != nil {
+		s.WriteString(schemas.Commit_treeId, *v.TreeId)
+	}
+}
+func (v *Commit) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Commit, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Commit_additionalData:
+			v.AdditionalData = new(string)
+			return d.ReadString(schemas.Commit_additionalData, v.AdditionalData)
+		case schemas.Commit_author:
+			v.Author = &UserInfo{}
+			return v.Author.Deserialize(d)
+		case schemas.Commit_commitId:
+			v.CommitId = new(string)
+			return d.ReadString(schemas.Commit_commitId, v.CommitId)
+		case schemas.Commit_committer:
+			v.Committer = &UserInfo{}
+			return v.Committer.Deserialize(d)
+		case schemas.Commit_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.Commit_message, v.Message)
+		case schemas.Commit_parents:
+			return deserializeParentList(d, schemas.Commit_parents, &v.Parents)
+		case schemas.Commit_treeId:
+			v.TreeId = new(string)
+			return d.ReadString(schemas.Commit_treeId, v.TreeId)
+		}
+		return nil
+	})
+}
+
 // Information about conflicts in a merge operation.
 type Conflict struct {
 
@@ -410,6 +1162,33 @@ type Conflict struct {
 	MergeHunks []MergeHunk
 
 	noSmithyDocumentSerde
+}
+
+func (v *Conflict) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Conflict)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Conflict) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConflictMetadata != nil {
+		s.WriteStruct(schemas.Conflict_conflictMetadata)
+		v.ConflictMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMergeHunks(s, schemas.Conflict_mergeHunks, v.MergeHunks)
+}
+func (v *Conflict) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Conflict, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Conflict_conflictMetadata:
+			v.ConflictMetadata = &ConflictMetadata{}
+			return v.ConflictMetadata.Deserialize(d)
+		case schemas.Conflict_mergeHunks:
+			return deserializeMergeHunks(d, schemas.Conflict_mergeHunks, &v.MergeHunks)
+		}
+		return nil
+	})
 }
 
 // Information about the metadata for a conflict in a merge operation.
@@ -452,6 +1231,88 @@ type ConflictMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConflictMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConflictMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConflictMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentConflict != false {
+		s.WriteBool(schemas.ConflictMetadata_contentConflict, v.ContentConflict)
+	}
+	if v.FileModeConflict != false {
+		s.WriteBool(schemas.ConflictMetadata_fileModeConflict, v.FileModeConflict)
+	}
+	if v.FileModes != nil {
+		s.WriteStruct(schemas.ConflictMetadata_fileModes)
+		v.FileModes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FilePath != nil {
+		s.WriteString(schemas.ConflictMetadata_filePath, *v.FilePath)
+	}
+	if v.FileSizes != nil {
+		s.WriteStruct(schemas.ConflictMetadata_fileSizes)
+		v.FileSizes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IsBinaryFile != nil {
+		s.WriteStruct(schemas.ConflictMetadata_isBinaryFile)
+		v.IsBinaryFile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MergeOperations != nil {
+		s.WriteStruct(schemas.ConflictMetadata_mergeOperations)
+		v.MergeOperations.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NumberOfConflicts != 0 {
+		s.WriteInt32(schemas.ConflictMetadata_numberOfConflicts, v.NumberOfConflicts)
+	}
+	if v.ObjectTypeConflict != false {
+		s.WriteBool(schemas.ConflictMetadata_objectTypeConflict, v.ObjectTypeConflict)
+	}
+	if v.ObjectTypes != nil {
+		s.WriteStruct(schemas.ConflictMetadata_objectTypes)
+		v.ObjectTypes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ConflictMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConflictMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConflictMetadata_contentConflict:
+			return d.ReadBool(schemas.ConflictMetadata_contentConflict, &v.ContentConflict)
+		case schemas.ConflictMetadata_fileModeConflict:
+			return d.ReadBool(schemas.ConflictMetadata_fileModeConflict, &v.FileModeConflict)
+		case schemas.ConflictMetadata_fileModes:
+			v.FileModes = &FileModes{}
+			return v.FileModes.Deserialize(d)
+		case schemas.ConflictMetadata_filePath:
+			v.FilePath = new(string)
+			return d.ReadString(schemas.ConflictMetadata_filePath, v.FilePath)
+		case schemas.ConflictMetadata_fileSizes:
+			v.FileSizes = &FileSizes{}
+			return v.FileSizes.Deserialize(d)
+		case schemas.ConflictMetadata_isBinaryFile:
+			v.IsBinaryFile = &IsBinaryFile{}
+			return v.IsBinaryFile.Deserialize(d)
+		case schemas.ConflictMetadata_mergeOperations:
+			v.MergeOperations = &MergeOperations{}
+			return v.MergeOperations.Deserialize(d)
+		case schemas.ConflictMetadata_numberOfConflicts:
+			return d.ReadInt32(schemas.ConflictMetadata_numberOfConflicts, &v.NumberOfConflicts)
+		case schemas.ConflictMetadata_objectTypeConflict:
+			return d.ReadBool(schemas.ConflictMetadata_objectTypeConflict, &v.ObjectTypeConflict)
+		case schemas.ConflictMetadata_objectTypes:
+			v.ObjectTypes = &ObjectTypes{}
+			return v.ObjectTypes.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when
 // resolving conflicts during a merge.
 type ConflictResolution struct {
@@ -468,6 +1329,31 @@ type ConflictResolution struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConflictResolution) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConflictResolution)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConflictResolution) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeleteFileEntries(s, schemas.ConflictResolution_deleteFiles, v.DeleteFiles)
+	serializeReplaceContentEntries(s, schemas.ConflictResolution_replaceContents, v.ReplaceContents)
+	serializeSetFileModeEntries(s, schemas.ConflictResolution_setFileModes, v.SetFileModes)
+}
+func (v *ConflictResolution) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConflictResolution, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConflictResolution_deleteFiles:
+			return deserializeDeleteFileEntries(d, schemas.ConflictResolution_deleteFiles, &v.DeleteFiles)
+		case schemas.ConflictResolution_replaceContents:
+			return deserializeReplaceContentEntries(d, schemas.ConflictResolution_replaceContents, &v.ReplaceContents)
+		case schemas.ConflictResolution_setFileModes:
+			return deserializeSetFileModeEntries(d, schemas.ConflictResolution_setFileModes, &v.SetFileModes)
+		}
+		return nil
+	})
+}
+
 // A file that is deleted as part of a commit.
 type DeleteFileEntry struct {
 
@@ -477,6 +1363,28 @@ type DeleteFileEntry struct {
 	FilePath *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteFileEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFileEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFileEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilePath != nil {
+		s.WriteString(schemas.DeleteFileEntry_filePath, *v.FilePath)
+	}
+}
+func (v *DeleteFileEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFileEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFileEntry_filePath:
+			v.FilePath = new(string)
+			return d.ReadString(schemas.DeleteFileEntry_filePath, v.FilePath)
+		}
+		return nil
+	})
 }
 
 // Returns information about a set of differences for a commit specifier.
@@ -495,6 +1403,48 @@ type Difference struct {
 	ChangeType ChangeTypeEnum
 
 	noSmithyDocumentSerde
+}
+
+func (v *Difference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Difference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Difference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterBlob != nil {
+		s.WriteStruct(schemas.Difference_afterBlob)
+		v.AfterBlob.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BeforeBlob != nil {
+		s.WriteStruct(schemas.Difference_beforeBlob)
+		v.BeforeBlob.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ChangeType != "" {
+		s.WriteString(schemas.Difference_changeType, string(v.ChangeType))
+	}
+}
+func (v *Difference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Difference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Difference_afterBlob:
+			v.AfterBlob = &BlobMetadata{}
+			return v.AfterBlob.Deserialize(d)
+		case schemas.Difference_beforeBlob:
+			v.BeforeBlob = &BlobMetadata{}
+			return v.BeforeBlob.Deserialize(d)
+		case schemas.Difference_changeType:
+			var ev string
+			if err := d.ReadString(schemas.Difference_changeType, &ev); err != nil {
+				return err
+			}
+			v.ChangeType = ChangeTypeEnum(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Returns information about the approval rules applied to a pull request and
@@ -517,6 +1467,38 @@ type Evaluation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Evaluation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Evaluation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Evaluation) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeApprovalRulesNotSatisfiedList(s, schemas.Evaluation_approvalRulesNotSatisfied, v.ApprovalRulesNotSatisfied)
+	serializeApprovalRulesSatisfiedList(s, schemas.Evaluation_approvalRulesSatisfied, v.ApprovalRulesSatisfied)
+	if v.Approved != false {
+		s.WriteBool(schemas.Evaluation_approved, v.Approved)
+	}
+	if v.Overridden != false {
+		s.WriteBool(schemas.Evaluation_overridden, v.Overridden)
+	}
+}
+func (v *Evaluation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Evaluation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Evaluation_approvalRulesNotSatisfied:
+			return deserializeApprovalRulesNotSatisfiedList(d, schemas.Evaluation_approvalRulesNotSatisfied, &v.ApprovalRulesNotSatisfied)
+		case schemas.Evaluation_approvalRulesSatisfied:
+			return deserializeApprovalRulesSatisfiedList(d, schemas.Evaluation_approvalRulesSatisfied, &v.ApprovalRulesSatisfied)
+		case schemas.Evaluation_approved:
+			return d.ReadBool(schemas.Evaluation_approved, &v.Approved)
+		case schemas.Evaluation_overridden:
+			return d.ReadBool(schemas.Evaluation_overridden, &v.Overridden)
+		}
+		return nil
+	})
+}
+
 // Returns information about a file in a repository.
 type File struct {
 
@@ -536,6 +1518,50 @@ type File struct {
 	noSmithyDocumentSerde
 }
 
+func (v *File) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.File)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *File) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AbsolutePath != nil {
+		s.WriteString(schemas.File_absolutePath, *v.AbsolutePath)
+	}
+	if v.BlobId != nil {
+		s.WriteString(schemas.File_blobId, *v.BlobId)
+	}
+	if v.FileMode != "" {
+		s.WriteString(schemas.File_fileMode, string(v.FileMode))
+	}
+	if v.RelativePath != nil {
+		s.WriteString(schemas.File_relativePath, *v.RelativePath)
+	}
+}
+func (v *File) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.File, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.File_absolutePath:
+			v.AbsolutePath = new(string)
+			return d.ReadString(schemas.File_absolutePath, v.AbsolutePath)
+		case schemas.File_blobId:
+			v.BlobId = new(string)
+			return d.ReadString(schemas.File_blobId, v.BlobId)
+		case schemas.File_fileMode:
+			var ev string
+			if err := d.ReadString(schemas.File_fileMode, &ev); err != nil {
+				return err
+			}
+			v.FileMode = FileModeTypeEnum(ev)
+			return nil
+		case schemas.File_relativePath:
+			v.RelativePath = new(string)
+			return d.ReadString(schemas.File_relativePath, v.RelativePath)
+		}
+		return nil
+	})
+}
+
 // A file to be added, updated, or deleted as part of a commit.
 type FileMetadata struct {
 
@@ -553,6 +1579,44 @@ type FileMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FileMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AbsolutePath != nil {
+		s.WriteString(schemas.FileMetadata_absolutePath, *v.AbsolutePath)
+	}
+	if v.BlobId != nil {
+		s.WriteString(schemas.FileMetadata_blobId, *v.BlobId)
+	}
+	if v.FileMode != "" {
+		s.WriteString(schemas.FileMetadata_fileMode, string(v.FileMode))
+	}
+}
+func (v *FileMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileMetadata_absolutePath:
+			v.AbsolutePath = new(string)
+			return d.ReadString(schemas.FileMetadata_absolutePath, v.AbsolutePath)
+		case schemas.FileMetadata_blobId:
+			v.BlobId = new(string)
+			return d.ReadString(schemas.FileMetadata_blobId, v.BlobId)
+		case schemas.FileMetadata_fileMode:
+			var ev string
+			if err := d.ReadString(schemas.FileMetadata_fileMode, &ev); err != nil {
+				return err
+			}
+			v.FileMode = FileModeTypeEnum(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Information about file modes in a merge or pull request.
 type FileModes struct {
 
@@ -568,6 +1632,52 @@ type FileModes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FileModes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileModes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileModes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Base != "" {
+		s.WriteString(schemas.FileModes_base, string(v.Base))
+	}
+	if v.Destination != "" {
+		s.WriteString(schemas.FileModes_destination, string(v.Destination))
+	}
+	if v.Source != "" {
+		s.WriteString(schemas.FileModes_source, string(v.Source))
+	}
+}
+func (v *FileModes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileModes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileModes_base:
+			var ev string
+			if err := d.ReadString(schemas.FileModes_base, &ev); err != nil {
+				return err
+			}
+			v.Base = FileModeTypeEnum(ev)
+			return nil
+		case schemas.FileModes_destination:
+			var ev string
+			if err := d.ReadString(schemas.FileModes_destination, &ev); err != nil {
+				return err
+			}
+			v.Destination = FileModeTypeEnum(ev)
+			return nil
+		case schemas.FileModes_source:
+			var ev string
+			if err := d.ReadString(schemas.FileModes_source, &ev); err != nil {
+				return err
+			}
+			v.Source = FileModeTypeEnum(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Information about the size of files in a merge or pull request.
 type FileSizes struct {
 
@@ -581,6 +1691,37 @@ type FileSizes struct {
 	Source int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *FileSizes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileSizes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileSizes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Base != 0 {
+		s.WriteInt64(schemas.FileSizes_base, v.Base)
+	}
+	if v.Destination != 0 {
+		s.WriteInt64(schemas.FileSizes_destination, v.Destination)
+	}
+	if v.Source != 0 {
+		s.WriteInt64(schemas.FileSizes_source, v.Source)
+	}
+}
+func (v *FileSizes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileSizes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileSizes_base:
+			return d.ReadInt64(schemas.FileSizes_base, &v.Base)
+		case schemas.FileSizes_destination:
+			return d.ReadInt64(schemas.FileSizes_destination, &v.Destination)
+		case schemas.FileSizes_source:
+			return d.ReadInt64(schemas.FileSizes_source, &v.Source)
+		}
+		return nil
+	})
 }
 
 // Information about a version of a file.
@@ -605,6 +1746,45 @@ type FileVersion struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FileVersion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileVersion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileVersion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlobId != nil {
+		s.WriteString(schemas.FileVersion_blobId, *v.BlobId)
+	}
+	if v.Commit != nil {
+		s.WriteStruct(schemas.FileVersion_commit)
+		v.Commit.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.FileVersion_path, *v.Path)
+	}
+	serializeRevisionChildren(s, schemas.FileVersion_revisionChildren, v.RevisionChildren)
+}
+func (v *FileVersion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileVersion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileVersion_blobId:
+			v.BlobId = new(string)
+			return d.ReadString(schemas.FileVersion_blobId, v.BlobId)
+		case schemas.FileVersion_commit:
+			v.Commit = &Commit{}
+			return v.Commit.Deserialize(d)
+		case schemas.FileVersion_path:
+			v.Path = new(string)
+			return d.ReadString(schemas.FileVersion_path, v.Path)
+		case schemas.FileVersion_revisionChildren:
+			return deserializeRevisionChildren(d, schemas.FileVersion_revisionChildren, &v.RevisionChildren)
+		}
+		return nil
+	})
+}
+
 // Returns information about a folder in a repository.
 type Folder struct {
 
@@ -620,6 +1800,40 @@ type Folder struct {
 	TreeId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Folder) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Folder)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Folder) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AbsolutePath != nil {
+		s.WriteString(schemas.Folder_absolutePath, *v.AbsolutePath)
+	}
+	if v.RelativePath != nil {
+		s.WriteString(schemas.Folder_relativePath, *v.RelativePath)
+	}
+	if v.TreeId != nil {
+		s.WriteString(schemas.Folder_treeId, *v.TreeId)
+	}
+}
+func (v *Folder) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Folder, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Folder_absolutePath:
+			v.AbsolutePath = new(string)
+			return d.ReadString(schemas.Folder_absolutePath, v.AbsolutePath)
+		case schemas.Folder_relativePath:
+			v.RelativePath = new(string)
+			return d.ReadString(schemas.Folder_relativePath, v.RelativePath)
+		case schemas.Folder_treeId:
+			v.TreeId = new(string)
+			return d.ReadString(schemas.Folder_treeId, v.TreeId)
+		}
+		return nil
+	})
 }
 
 // Information about whether a file is binary or textual in a merge or pull
@@ -641,6 +1855,40 @@ type IsBinaryFile struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IsBinaryFile) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IsBinaryFile)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IsBinaryFile) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Base != nil {
+		s.WriteBool(schemas.IsBinaryFile_base, *v.Base)
+	}
+	if v.Destination != nil {
+		s.WriteBool(schemas.IsBinaryFile_destination, *v.Destination)
+	}
+	if v.Source != nil {
+		s.WriteBool(schemas.IsBinaryFile_source, *v.Source)
+	}
+}
+func (v *IsBinaryFile) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IsBinaryFile, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IsBinaryFile_base:
+			v.Base = new(bool)
+			return d.ReadBool(schemas.IsBinaryFile_base, v.Base)
+		case schemas.IsBinaryFile_destination:
+			v.Destination = new(bool)
+			return d.ReadBool(schemas.IsBinaryFile_destination, v.Destination)
+		case schemas.IsBinaryFile_source:
+			v.Source = new(bool)
+			return d.ReadBool(schemas.IsBinaryFile_source, v.Source)
+		}
+		return nil
+	})
+}
+
 // Returns information about the location of a change or comment in the comparison
 // between two commits or a pull request.
 type Location struct {
@@ -657,6 +1905,44 @@ type Location struct {
 	RelativeFileVersion RelativeFileVersionEnum
 
 	noSmithyDocumentSerde
+}
+
+func (v *Location) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Location)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Location) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilePath != nil {
+		s.WriteString(schemas.Location_filePath, *v.FilePath)
+	}
+	if v.FilePosition != nil {
+		s.WriteInt64(schemas.Location_filePosition, *v.FilePosition)
+	}
+	if v.RelativeFileVersion != "" {
+		s.WriteString(schemas.Location_relativeFileVersion, string(v.RelativeFileVersion))
+	}
+}
+func (v *Location) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Location, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Location_filePath:
+			v.FilePath = new(string)
+			return d.ReadString(schemas.Location_filePath, v.FilePath)
+		case schemas.Location_filePosition:
+			v.FilePosition = new(int64)
+			return d.ReadInt64(schemas.Location_filePosition, v.FilePosition)
+		case schemas.Location_relativeFileVersion:
+			var ev string
+			if err := d.ReadString(schemas.Location_relativeFileVersion, &ev); err != nil {
+				return err
+			}
+			v.RelativeFileVersion = RelativeFileVersionEnum(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Information about merge hunks in a merge or pull request operation.
@@ -682,6 +1968,51 @@ type MergeHunk struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MergeHunk) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MergeHunk)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MergeHunk) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Base != nil {
+		s.WriteStruct(schemas.MergeHunk_base)
+		v.Base.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Destination != nil {
+		s.WriteStruct(schemas.MergeHunk_destination)
+		v.Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IsConflict != false {
+		s.WriteBool(schemas.MergeHunk_isConflict, v.IsConflict)
+	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.MergeHunk_source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MergeHunk) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MergeHunk, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MergeHunk_base:
+			v.Base = &MergeHunkDetail{}
+			return v.Base.Deserialize(d)
+		case schemas.MergeHunk_destination:
+			v.Destination = &MergeHunkDetail{}
+			return v.Destination.Deserialize(d)
+		case schemas.MergeHunk_isConflict:
+			return d.ReadBool(schemas.MergeHunk_isConflict, &v.IsConflict)
+		case schemas.MergeHunk_source:
+			v.Source = &MergeHunkDetail{}
+			return v.Source.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Information about the details of a merge hunk that contains a conflict in a
 // merge or pull request operation.
 type MergeHunkDetail struct {
@@ -697,6 +2028,40 @@ type MergeHunkDetail struct {
 	StartLine *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *MergeHunkDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MergeHunkDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MergeHunkDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndLine != nil {
+		s.WriteInt32(schemas.MergeHunkDetail_endLine, *v.EndLine)
+	}
+	if v.HunkContent != nil {
+		s.WriteString(schemas.MergeHunkDetail_hunkContent, *v.HunkContent)
+	}
+	if v.StartLine != nil {
+		s.WriteInt32(schemas.MergeHunkDetail_startLine, *v.StartLine)
+	}
+}
+func (v *MergeHunkDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MergeHunkDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MergeHunkDetail_endLine:
+			v.EndLine = new(int32)
+			return d.ReadInt32(schemas.MergeHunkDetail_endLine, v.EndLine)
+		case schemas.MergeHunkDetail_hunkContent:
+			v.HunkContent = new(string)
+			return d.ReadString(schemas.MergeHunkDetail_hunkContent, v.HunkContent)
+		case schemas.MergeHunkDetail_startLine:
+			v.StartLine = new(int32)
+			return d.ReadInt32(schemas.MergeHunkDetail_startLine, v.StartLine)
+		}
+		return nil
+	})
 }
 
 // Returns information about a merge or potential merge between a source reference
@@ -718,6 +2083,49 @@ type MergeMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MergeMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MergeMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MergeMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsMerged != false {
+		s.WriteBool(schemas.MergeMetadata_isMerged, v.IsMerged)
+	}
+	if v.MergeCommitId != nil {
+		s.WriteString(schemas.MergeMetadata_mergeCommitId, *v.MergeCommitId)
+	}
+	if v.MergeOption != "" {
+		s.WriteString(schemas.MergeMetadata_mergeOption, string(v.MergeOption))
+	}
+	if v.MergedBy != nil {
+		s.WriteString(schemas.MergeMetadata_mergedBy, *v.MergedBy)
+	}
+}
+func (v *MergeMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MergeMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MergeMetadata_isMerged:
+			return d.ReadBool(schemas.MergeMetadata_isMerged, &v.IsMerged)
+		case schemas.MergeMetadata_mergeCommitId:
+			v.MergeCommitId = new(string)
+			return d.ReadString(schemas.MergeMetadata_mergeCommitId, v.MergeCommitId)
+		case schemas.MergeMetadata_mergeOption:
+			var ev string
+			if err := d.ReadString(schemas.MergeMetadata_mergeOption, &ev); err != nil {
+				return err
+			}
+			v.MergeOption = MergeOptionTypeEnum(ev)
+			return nil
+		case schemas.MergeMetadata_mergedBy:
+			v.MergedBy = new(string)
+			return d.ReadString(schemas.MergeMetadata_mergedBy, v.MergedBy)
+		}
+		return nil
+	})
+}
+
 // Information about the file operation conflicts in a merge operation.
 type MergeOperations struct {
 
@@ -729,6 +2137,42 @@ type MergeOperations struct {
 	Source ChangeTypeEnum
 
 	noSmithyDocumentSerde
+}
+
+func (v *MergeOperations) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MergeOperations)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MergeOperations) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != "" {
+		s.WriteString(schemas.MergeOperations_destination, string(v.Destination))
+	}
+	if v.Source != "" {
+		s.WriteString(schemas.MergeOperations_source, string(v.Source))
+	}
+}
+func (v *MergeOperations) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MergeOperations, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MergeOperations_destination:
+			var ev string
+			if err := d.ReadString(schemas.MergeOperations_destination, &ev); err != nil {
+				return err
+			}
+			v.Destination = ChangeTypeEnum(ev)
+			return nil
+		case schemas.MergeOperations_source:
+			var ev string
+			if err := d.ReadString(schemas.MergeOperations_source, &ev); err != nil {
+				return err
+			}
+			v.Source = ChangeTypeEnum(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Information about the type of an object in a merge operation.
@@ -746,6 +2190,52 @@ type ObjectTypes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ObjectTypes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ObjectTypes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ObjectTypes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Base != "" {
+		s.WriteString(schemas.ObjectTypes_base, string(v.Base))
+	}
+	if v.Destination != "" {
+		s.WriteString(schemas.ObjectTypes_destination, string(v.Destination))
+	}
+	if v.Source != "" {
+		s.WriteString(schemas.ObjectTypes_source, string(v.Source))
+	}
+}
+func (v *ObjectTypes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ObjectTypes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ObjectTypes_base:
+			var ev string
+			if err := d.ReadString(schemas.ObjectTypes_base, &ev); err != nil {
+				return err
+			}
+			v.Base = ObjectTypeEnum(ev)
+			return nil
+		case schemas.ObjectTypes_destination:
+			var ev string
+			if err := d.ReadString(schemas.ObjectTypes_destination, &ev); err != nil {
+				return err
+			}
+			v.Destination = ObjectTypeEnum(ev)
+			return nil
+		case schemas.ObjectTypes_source:
+			var ev string
+			if err := d.ReadString(schemas.ObjectTypes_source, &ev); err != nil {
+				return err
+			}
+			v.Source = ObjectTypeEnum(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Returns information about the template that created the approval rule for a
 // pull request.
 type OriginApprovalRuleTemplate struct {
@@ -757,6 +2247,34 @@ type OriginApprovalRuleTemplate struct {
 	ApprovalRuleTemplateName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OriginApprovalRuleTemplate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OriginApprovalRuleTemplate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OriginApprovalRuleTemplate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApprovalRuleTemplateId != nil {
+		s.WriteString(schemas.OriginApprovalRuleTemplate_approvalRuleTemplateId, *v.ApprovalRuleTemplateId)
+	}
+	if v.ApprovalRuleTemplateName != nil {
+		s.WriteString(schemas.OriginApprovalRuleTemplate_approvalRuleTemplateName, *v.ApprovalRuleTemplateName)
+	}
+}
+func (v *OriginApprovalRuleTemplate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OriginApprovalRuleTemplate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OriginApprovalRuleTemplate_approvalRuleTemplateId:
+			v.ApprovalRuleTemplateId = new(string)
+			return d.ReadString(schemas.OriginApprovalRuleTemplate_approvalRuleTemplateId, v.ApprovalRuleTemplateId)
+		case schemas.OriginApprovalRuleTemplate_approvalRuleTemplateName:
+			v.ApprovalRuleTemplateName = new(string)
+			return d.ReadString(schemas.OriginApprovalRuleTemplate_approvalRuleTemplateName, v.ApprovalRuleTemplateName)
+		}
+		return nil
+	})
 }
 
 // Returns information about a pull request.
@@ -806,6 +2324,86 @@ type PullRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PullRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PullRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PullRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeApprovalRulesList(s, schemas.PullRequest_approvalRules, v.ApprovalRules)
+	if v.AuthorArn != nil {
+		s.WriteString(schemas.PullRequest_authorArn, *v.AuthorArn)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.PullRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.PullRequest_creationDate, *v.CreationDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.PullRequest_description, *v.Description)
+	}
+	if v.LastActivityDate != nil {
+		s.WriteTime(schemas.PullRequest_lastActivityDate, *v.LastActivityDate)
+	}
+	if v.PullRequestId != nil {
+		s.WriteString(schemas.PullRequest_pullRequestId, *v.PullRequestId)
+	}
+	if v.PullRequestStatus != "" {
+		s.WriteString(schemas.PullRequest_pullRequestStatus, string(v.PullRequestStatus))
+	}
+	serializePullRequestTargetList(s, schemas.PullRequest_pullRequestTargets, v.PullRequestTargets)
+	if v.RevisionId != nil {
+		s.WriteString(schemas.PullRequest_revisionId, *v.RevisionId)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.PullRequest_title, *v.Title)
+	}
+}
+func (v *PullRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PullRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PullRequest_approvalRules:
+			return deserializeApprovalRulesList(d, schemas.PullRequest_approvalRules, &v.ApprovalRules)
+		case schemas.PullRequest_authorArn:
+			v.AuthorArn = new(string)
+			return d.ReadString(schemas.PullRequest_authorArn, v.AuthorArn)
+		case schemas.PullRequest_clientRequestToken:
+			v.ClientRequestToken = new(string)
+			return d.ReadString(schemas.PullRequest_clientRequestToken, v.ClientRequestToken)
+		case schemas.PullRequest_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.PullRequest_creationDate, v.CreationDate)
+		case schemas.PullRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PullRequest_description, v.Description)
+		case schemas.PullRequest_lastActivityDate:
+			v.LastActivityDate = new(time.Time)
+			return d.ReadTime(schemas.PullRequest_lastActivityDate, v.LastActivityDate)
+		case schemas.PullRequest_pullRequestId:
+			v.PullRequestId = new(string)
+			return d.ReadString(schemas.PullRequest_pullRequestId, v.PullRequestId)
+		case schemas.PullRequest_pullRequestStatus:
+			var ev string
+			if err := d.ReadString(schemas.PullRequest_pullRequestStatus, &ev); err != nil {
+				return err
+			}
+			v.PullRequestStatus = PullRequestStatusEnum(ev)
+			return nil
+		case schemas.PullRequest_pullRequestTargets:
+			return deserializePullRequestTargetList(d, schemas.PullRequest_pullRequestTargets, &v.PullRequestTargets)
+		case schemas.PullRequest_revisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.PullRequest_revisionId, v.RevisionId)
+		case schemas.PullRequest_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.PullRequest_title, v.Title)
+		}
+		return nil
+	})
+}
+
 // Metadata about the pull request that is used when comparing the pull request
 // source with its destination.
 type PullRequestCreatedEventMetadata struct {
@@ -825,6 +2423,46 @@ type PullRequestCreatedEventMetadata struct {
 	SourceCommitId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PullRequestCreatedEventMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PullRequestCreatedEventMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PullRequestCreatedEventMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationCommitId != nil {
+		s.WriteString(schemas.PullRequestCreatedEventMetadata_destinationCommitId, *v.DestinationCommitId)
+	}
+	if v.MergeBase != nil {
+		s.WriteString(schemas.PullRequestCreatedEventMetadata_mergeBase, *v.MergeBase)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.PullRequestCreatedEventMetadata_repositoryName, *v.RepositoryName)
+	}
+	if v.SourceCommitId != nil {
+		s.WriteString(schemas.PullRequestCreatedEventMetadata_sourceCommitId, *v.SourceCommitId)
+	}
+}
+func (v *PullRequestCreatedEventMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PullRequestCreatedEventMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PullRequestCreatedEventMetadata_destinationCommitId:
+			v.DestinationCommitId = new(string)
+			return d.ReadString(schemas.PullRequestCreatedEventMetadata_destinationCommitId, v.DestinationCommitId)
+		case schemas.PullRequestCreatedEventMetadata_mergeBase:
+			v.MergeBase = new(string)
+			return d.ReadString(schemas.PullRequestCreatedEventMetadata_mergeBase, v.MergeBase)
+		case schemas.PullRequestCreatedEventMetadata_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.PullRequestCreatedEventMetadata_repositoryName, v.RepositoryName)
+		case schemas.PullRequestCreatedEventMetadata_sourceCommitId:
+			v.SourceCommitId = new(string)
+			return d.ReadString(schemas.PullRequestCreatedEventMetadata_sourceCommitId, v.SourceCommitId)
+		}
+		return nil
+	})
 }
 
 // Returns information about a pull request event.
@@ -870,6 +2508,106 @@ type PullRequestEvent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PullRequestEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PullRequestEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PullRequestEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActorArn != nil {
+		s.WriteString(schemas.PullRequestEvent_actorArn, *v.ActorArn)
+	}
+	if v.ApprovalRuleEventMetadata != nil {
+		s.WriteStruct(schemas.PullRequestEvent_approvalRuleEventMetadata)
+		v.ApprovalRuleEventMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApprovalRuleOverriddenEventMetadata != nil {
+		s.WriteStruct(schemas.PullRequestEvent_approvalRuleOverriddenEventMetadata)
+		v.ApprovalRuleOverriddenEventMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApprovalStateChangedEventMetadata != nil {
+		s.WriteStruct(schemas.PullRequestEvent_approvalStateChangedEventMetadata)
+		v.ApprovalStateChangedEventMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventDate != nil {
+		s.WriteTime(schemas.PullRequestEvent_eventDate, *v.EventDate)
+	}
+	if v.PullRequestCreatedEventMetadata != nil {
+		s.WriteStruct(schemas.PullRequestEvent_pullRequestCreatedEventMetadata)
+		v.PullRequestCreatedEventMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PullRequestEventType != "" {
+		s.WriteString(schemas.PullRequestEvent_pullRequestEventType, string(v.PullRequestEventType))
+	}
+	if v.PullRequestId != nil {
+		s.WriteString(schemas.PullRequestEvent_pullRequestId, *v.PullRequestId)
+	}
+	if v.PullRequestMergedStateChangedEventMetadata != nil {
+		s.WriteStruct(schemas.PullRequestEvent_pullRequestMergedStateChangedEventMetadata)
+		v.PullRequestMergedStateChangedEventMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PullRequestSourceReferenceUpdatedEventMetadata != nil {
+		s.WriteStruct(schemas.PullRequestEvent_pullRequestSourceReferenceUpdatedEventMetadata)
+		v.PullRequestSourceReferenceUpdatedEventMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PullRequestStatusChangedEventMetadata != nil {
+		s.WriteStruct(schemas.PullRequestEvent_pullRequestStatusChangedEventMetadata)
+		v.PullRequestStatusChangedEventMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PullRequestEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PullRequestEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PullRequestEvent_actorArn:
+			v.ActorArn = new(string)
+			return d.ReadString(schemas.PullRequestEvent_actorArn, v.ActorArn)
+		case schemas.PullRequestEvent_approvalRuleEventMetadata:
+			v.ApprovalRuleEventMetadata = &ApprovalRuleEventMetadata{}
+			return v.ApprovalRuleEventMetadata.Deserialize(d)
+		case schemas.PullRequestEvent_approvalRuleOverriddenEventMetadata:
+			v.ApprovalRuleOverriddenEventMetadata = &ApprovalRuleOverriddenEventMetadata{}
+			return v.ApprovalRuleOverriddenEventMetadata.Deserialize(d)
+		case schemas.PullRequestEvent_approvalStateChangedEventMetadata:
+			v.ApprovalStateChangedEventMetadata = &ApprovalStateChangedEventMetadata{}
+			return v.ApprovalStateChangedEventMetadata.Deserialize(d)
+		case schemas.PullRequestEvent_eventDate:
+			v.EventDate = new(time.Time)
+			return d.ReadTime(schemas.PullRequestEvent_eventDate, v.EventDate)
+		case schemas.PullRequestEvent_pullRequestCreatedEventMetadata:
+			v.PullRequestCreatedEventMetadata = &PullRequestCreatedEventMetadata{}
+			return v.PullRequestCreatedEventMetadata.Deserialize(d)
+		case schemas.PullRequestEvent_pullRequestEventType:
+			var ev string
+			if err := d.ReadString(schemas.PullRequestEvent_pullRequestEventType, &ev); err != nil {
+				return err
+			}
+			v.PullRequestEventType = PullRequestEventType(ev)
+			return nil
+		case schemas.PullRequestEvent_pullRequestId:
+			v.PullRequestId = new(string)
+			return d.ReadString(schemas.PullRequestEvent_pullRequestId, v.PullRequestId)
+		case schemas.PullRequestEvent_pullRequestMergedStateChangedEventMetadata:
+			v.PullRequestMergedStateChangedEventMetadata = &PullRequestMergedStateChangedEventMetadata{}
+			return v.PullRequestMergedStateChangedEventMetadata.Deserialize(d)
+		case schemas.PullRequestEvent_pullRequestSourceReferenceUpdatedEventMetadata:
+			v.PullRequestSourceReferenceUpdatedEventMetadata = &PullRequestSourceReferenceUpdatedEventMetadata{}
+			return v.PullRequestSourceReferenceUpdatedEventMetadata.Deserialize(d)
+		case schemas.PullRequestEvent_pullRequestStatusChangedEventMetadata:
+			v.PullRequestStatusChangedEventMetadata = &PullRequestStatusChangedEventMetadata{}
+			return v.PullRequestStatusChangedEventMetadata.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Returns information about the change in the merge state for a pull request
 // event.
 type PullRequestMergedStateChangedEventMetadata struct {
@@ -884,6 +2622,42 @@ type PullRequestMergedStateChangedEventMetadata struct {
 	RepositoryName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PullRequestMergedStateChangedEventMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PullRequestMergedStateChangedEventMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PullRequestMergedStateChangedEventMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationReference != nil {
+		s.WriteString(schemas.PullRequestMergedStateChangedEventMetadata_destinationReference, *v.DestinationReference)
+	}
+	if v.MergeMetadata != nil {
+		s.WriteStruct(schemas.PullRequestMergedStateChangedEventMetadata_mergeMetadata)
+		v.MergeMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.PullRequestMergedStateChangedEventMetadata_repositoryName, *v.RepositoryName)
+	}
+}
+func (v *PullRequestMergedStateChangedEventMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PullRequestMergedStateChangedEventMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PullRequestMergedStateChangedEventMetadata_destinationReference:
+			v.DestinationReference = new(string)
+			return d.ReadString(schemas.PullRequestMergedStateChangedEventMetadata_destinationReference, v.DestinationReference)
+		case schemas.PullRequestMergedStateChangedEventMetadata_mergeMetadata:
+			v.MergeMetadata = &MergeMetadata{}
+			return v.MergeMetadata.Deserialize(d)
+		case schemas.PullRequestMergedStateChangedEventMetadata_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.PullRequestMergedStateChangedEventMetadata_repositoryName, v.RepositoryName)
+		}
+		return nil
+	})
 }
 
 // Information about an update to the source branch of a pull request.
@@ -907,6 +2681,46 @@ type PullRequestSourceReferenceUpdatedEventMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PullRequestSourceReferenceUpdatedEventMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PullRequestSourceReferenceUpdatedEventMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PullRequestSourceReferenceUpdatedEventMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterCommitId != nil {
+		s.WriteString(schemas.PullRequestSourceReferenceUpdatedEventMetadata_afterCommitId, *v.AfterCommitId)
+	}
+	if v.BeforeCommitId != nil {
+		s.WriteString(schemas.PullRequestSourceReferenceUpdatedEventMetadata_beforeCommitId, *v.BeforeCommitId)
+	}
+	if v.MergeBase != nil {
+		s.WriteString(schemas.PullRequestSourceReferenceUpdatedEventMetadata_mergeBase, *v.MergeBase)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.PullRequestSourceReferenceUpdatedEventMetadata_repositoryName, *v.RepositoryName)
+	}
+}
+func (v *PullRequestSourceReferenceUpdatedEventMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PullRequestSourceReferenceUpdatedEventMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PullRequestSourceReferenceUpdatedEventMetadata_afterCommitId:
+			v.AfterCommitId = new(string)
+			return d.ReadString(schemas.PullRequestSourceReferenceUpdatedEventMetadata_afterCommitId, v.AfterCommitId)
+		case schemas.PullRequestSourceReferenceUpdatedEventMetadata_beforeCommitId:
+			v.BeforeCommitId = new(string)
+			return d.ReadString(schemas.PullRequestSourceReferenceUpdatedEventMetadata_beforeCommitId, v.BeforeCommitId)
+		case schemas.PullRequestSourceReferenceUpdatedEventMetadata_mergeBase:
+			v.MergeBase = new(string)
+			return d.ReadString(schemas.PullRequestSourceReferenceUpdatedEventMetadata_mergeBase, v.MergeBase)
+		case schemas.PullRequestSourceReferenceUpdatedEventMetadata_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.PullRequestSourceReferenceUpdatedEventMetadata_repositoryName, v.RepositoryName)
+		}
+		return nil
+	})
+}
+
 // Information about a change to the status of a pull request.
 type PullRequestStatusChangedEventMetadata struct {
 
@@ -914,6 +2728,32 @@ type PullRequestStatusChangedEventMetadata struct {
 	PullRequestStatus PullRequestStatusEnum
 
 	noSmithyDocumentSerde
+}
+
+func (v *PullRequestStatusChangedEventMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PullRequestStatusChangedEventMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PullRequestStatusChangedEventMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PullRequestStatus != "" {
+		s.WriteString(schemas.PullRequestStatusChangedEventMetadata_pullRequestStatus, string(v.PullRequestStatus))
+	}
+}
+func (v *PullRequestStatusChangedEventMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PullRequestStatusChangedEventMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PullRequestStatusChangedEventMetadata_pullRequestStatus:
+			var ev string
+			if err := d.ReadString(schemas.PullRequestStatusChangedEventMetadata_pullRequestStatus, &ev); err != nil {
+				return err
+			}
+			v.PullRequestStatus = PullRequestStatusEnum(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Returns information about a pull request target.
@@ -951,6 +2791,66 @@ type PullRequestTarget struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PullRequestTarget) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PullRequestTarget)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PullRequestTarget) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationCommit != nil {
+		s.WriteString(schemas.PullRequestTarget_destinationCommit, *v.DestinationCommit)
+	}
+	if v.DestinationReference != nil {
+		s.WriteString(schemas.PullRequestTarget_destinationReference, *v.DestinationReference)
+	}
+	if v.MergeBase != nil {
+		s.WriteString(schemas.PullRequestTarget_mergeBase, *v.MergeBase)
+	}
+	if v.MergeMetadata != nil {
+		s.WriteStruct(schemas.PullRequestTarget_mergeMetadata)
+		v.MergeMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.PullRequestTarget_repositoryName, *v.RepositoryName)
+	}
+	if v.SourceCommit != nil {
+		s.WriteString(schemas.PullRequestTarget_sourceCommit, *v.SourceCommit)
+	}
+	if v.SourceReference != nil {
+		s.WriteString(schemas.PullRequestTarget_sourceReference, *v.SourceReference)
+	}
+}
+func (v *PullRequestTarget) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PullRequestTarget, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PullRequestTarget_destinationCommit:
+			v.DestinationCommit = new(string)
+			return d.ReadString(schemas.PullRequestTarget_destinationCommit, v.DestinationCommit)
+		case schemas.PullRequestTarget_destinationReference:
+			v.DestinationReference = new(string)
+			return d.ReadString(schemas.PullRequestTarget_destinationReference, v.DestinationReference)
+		case schemas.PullRequestTarget_mergeBase:
+			v.MergeBase = new(string)
+			return d.ReadString(schemas.PullRequestTarget_mergeBase, v.MergeBase)
+		case schemas.PullRequestTarget_mergeMetadata:
+			v.MergeMetadata = &MergeMetadata{}
+			return v.MergeMetadata.Deserialize(d)
+		case schemas.PullRequestTarget_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.PullRequestTarget_repositoryName, v.RepositoryName)
+		case schemas.PullRequestTarget_sourceCommit:
+			v.SourceCommit = new(string)
+			return d.ReadString(schemas.PullRequestTarget_sourceCommit, v.SourceCommit)
+		case schemas.PullRequestTarget_sourceReference:
+			v.SourceReference = new(string)
+			return d.ReadString(schemas.PullRequestTarget_sourceReference, v.SourceReference)
+		}
+		return nil
+	})
+}
+
 // Information about a file added or updated as part of a commit.
 type PutFileEntry struct {
 
@@ -973,6 +2873,51 @@ type PutFileEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutFileEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutFileEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutFileEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileContent != nil {
+		s.WriteBlob(schemas.PutFileEntry_fileContent, v.FileContent)
+	}
+	if v.FileMode != "" {
+		s.WriteString(schemas.PutFileEntry_fileMode, string(v.FileMode))
+	}
+	if v.FilePath != nil {
+		s.WriteString(schemas.PutFileEntry_filePath, *v.FilePath)
+	}
+	if v.SourceFile != nil {
+		s.WriteStruct(schemas.PutFileEntry_sourceFile)
+		v.SourceFile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutFileEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutFileEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutFileEntry_fileContent:
+			return d.ReadBlob(schemas.PutFileEntry_fileContent, &v.FileContent)
+		case schemas.PutFileEntry_fileMode:
+			var ev string
+			if err := d.ReadString(schemas.PutFileEntry_fileMode, &ev); err != nil {
+				return err
+			}
+			v.FileMode = FileModeTypeEnum(ev)
+			return nil
+		case schemas.PutFileEntry_filePath:
+			v.FilePath = new(string)
+			return d.ReadString(schemas.PutFileEntry_filePath, v.FilePath)
+		case schemas.PutFileEntry_sourceFile:
+			v.SourceFile = &SourceFileSpecifier{}
+			return v.SourceFile.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Information about the reaction values provided by users on a comment.
 type ReactionForComment struct {
 
@@ -992,6 +2937,39 @@ type ReactionForComment struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReactionForComment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReactionForComment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReactionForComment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Reaction != nil {
+		s.WriteStruct(schemas.ReactionForComment_reaction)
+		v.Reaction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeReactionUsersList(s, schemas.ReactionForComment_reactionUsers, v.ReactionUsers)
+	if v.ReactionsFromDeletedUsersCount != nil {
+		s.WriteInt32(schemas.ReactionForComment_reactionsFromDeletedUsersCount, *v.ReactionsFromDeletedUsersCount)
+	}
+}
+func (v *ReactionForComment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReactionForComment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReactionForComment_reaction:
+			v.Reaction = &ReactionValueFormats{}
+			return v.Reaction.Deserialize(d)
+		case schemas.ReactionForComment_reactionUsers:
+			return deserializeReactionUsersList(d, schemas.ReactionForComment_reactionUsers, &v.ReactionUsers)
+		case schemas.ReactionForComment_reactionsFromDeletedUsersCount:
+			v.ReactionsFromDeletedUsersCount = new(int32)
+			return d.ReadInt32(schemas.ReactionForComment_reactionsFromDeletedUsersCount, v.ReactionsFromDeletedUsersCount)
+		}
+		return nil
+	})
+}
+
 // Information about the values for reactions to a comment. CodeCommit supports a
 // limited set of reactions.
 type ReactionValueFormats struct {
@@ -1008,6 +2986,40 @@ type ReactionValueFormats struct {
 	Unicode *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReactionValueFormats) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReactionValueFormats)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReactionValueFormats) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Emoji != nil {
+		s.WriteString(schemas.ReactionValueFormats_emoji, *v.Emoji)
+	}
+	if v.ShortCode != nil {
+		s.WriteString(schemas.ReactionValueFormats_shortCode, *v.ShortCode)
+	}
+	if v.Unicode != nil {
+		s.WriteString(schemas.ReactionValueFormats_unicode, *v.Unicode)
+	}
+}
+func (v *ReactionValueFormats) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReactionValueFormats, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReactionValueFormats_emoji:
+			v.Emoji = new(string)
+			return d.ReadString(schemas.ReactionValueFormats_emoji, v.Emoji)
+		case schemas.ReactionValueFormats_shortCode:
+			v.ShortCode = new(string)
+			return d.ReadString(schemas.ReactionValueFormats_shortCode, v.ShortCode)
+		case schemas.ReactionValueFormats_unicode:
+			v.Unicode = new(string)
+			return d.ReadString(schemas.ReactionValueFormats_unicode, v.Unicode)
+		}
+		return nil
+	})
 }
 
 // Information about a replacement content entry in the conflict of a merge or
@@ -1031,6 +3043,53 @@ type ReplaceContentEntry struct {
 	FileMode FileModeTypeEnum
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReplaceContentEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplaceContentEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplaceContentEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteBlob(schemas.ReplaceContentEntry_content, v.Content)
+	}
+	if v.FileMode != "" {
+		s.WriteString(schemas.ReplaceContentEntry_fileMode, string(v.FileMode))
+	}
+	if v.FilePath != nil {
+		s.WriteString(schemas.ReplaceContentEntry_filePath, *v.FilePath)
+	}
+	if v.ReplacementType != "" {
+		s.WriteString(schemas.ReplaceContentEntry_replacementType, string(v.ReplacementType))
+	}
+}
+func (v *ReplaceContentEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplaceContentEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplaceContentEntry_content:
+			return d.ReadBlob(schemas.ReplaceContentEntry_content, &v.Content)
+		case schemas.ReplaceContentEntry_fileMode:
+			var ev string
+			if err := d.ReadString(schemas.ReplaceContentEntry_fileMode, &ev); err != nil {
+				return err
+			}
+			v.FileMode = FileModeTypeEnum(ev)
+			return nil
+		case schemas.ReplaceContentEntry_filePath:
+			v.FilePath = new(string)
+			return d.ReadString(schemas.ReplaceContentEntry_filePath, v.FilePath)
+		case schemas.ReplaceContentEntry_replacementType:
+			var ev string
+			if err := d.ReadString(schemas.ReplaceContentEntry_replacementType, &ev); err != nil {
+				return err
+			}
+			v.ReplacementType = ReplacementTypeEnum(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Information about a repository.
@@ -1073,6 +3132,88 @@ type RepositoryMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RepositoryMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RepositoryMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RepositoryMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.RepositoryMetadata_Arn, *v.Arn)
+	}
+	if v.AccountId != nil {
+		s.WriteString(schemas.RepositoryMetadata_accountId, *v.AccountId)
+	}
+	if v.CloneUrlHttp != nil {
+		s.WriteString(schemas.RepositoryMetadata_cloneUrlHttp, *v.CloneUrlHttp)
+	}
+	if v.CloneUrlSsh != nil {
+		s.WriteString(schemas.RepositoryMetadata_cloneUrlSsh, *v.CloneUrlSsh)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.RepositoryMetadata_creationDate, *v.CreationDate)
+	}
+	if v.DefaultBranch != nil {
+		s.WriteString(schemas.RepositoryMetadata_defaultBranch, *v.DefaultBranch)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.RepositoryMetadata_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.RepositoryMetadata_lastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.RepositoryDescription != nil {
+		s.WriteString(schemas.RepositoryMetadata_repositoryDescription, *v.RepositoryDescription)
+	}
+	if v.RepositoryId != nil {
+		s.WriteString(schemas.RepositoryMetadata_repositoryId, *v.RepositoryId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.RepositoryMetadata_repositoryName, *v.RepositoryName)
+	}
+}
+func (v *RepositoryMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RepositoryMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RepositoryMetadata_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.RepositoryMetadata_Arn, v.Arn)
+		case schemas.RepositoryMetadata_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.RepositoryMetadata_accountId, v.AccountId)
+		case schemas.RepositoryMetadata_cloneUrlHttp:
+			v.CloneUrlHttp = new(string)
+			return d.ReadString(schemas.RepositoryMetadata_cloneUrlHttp, v.CloneUrlHttp)
+		case schemas.RepositoryMetadata_cloneUrlSsh:
+			v.CloneUrlSsh = new(string)
+			return d.ReadString(schemas.RepositoryMetadata_cloneUrlSsh, v.CloneUrlSsh)
+		case schemas.RepositoryMetadata_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.RepositoryMetadata_creationDate, v.CreationDate)
+		case schemas.RepositoryMetadata_defaultBranch:
+			v.DefaultBranch = new(string)
+			return d.ReadString(schemas.RepositoryMetadata_defaultBranch, v.DefaultBranch)
+		case schemas.RepositoryMetadata_kmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.RepositoryMetadata_kmsKeyId, v.KmsKeyId)
+		case schemas.RepositoryMetadata_lastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.RepositoryMetadata_lastModifiedDate, v.LastModifiedDate)
+		case schemas.RepositoryMetadata_repositoryDescription:
+			v.RepositoryDescription = new(string)
+			return d.ReadString(schemas.RepositoryMetadata_repositoryDescription, v.RepositoryDescription)
+		case schemas.RepositoryMetadata_repositoryId:
+			v.RepositoryId = new(string)
+			return d.ReadString(schemas.RepositoryMetadata_repositoryId, v.RepositoryId)
+		case schemas.RepositoryMetadata_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.RepositoryMetadata_repositoryName, v.RepositoryName)
+		}
+		return nil
+	})
+}
+
 // Information about a repository name and ID.
 type RepositoryNameIdPair struct {
 
@@ -1083,6 +3224,34 @@ type RepositoryNameIdPair struct {
 	RepositoryName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RepositoryNameIdPair) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RepositoryNameIdPair)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RepositoryNameIdPair) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RepositoryId != nil {
+		s.WriteString(schemas.RepositoryNameIdPair_repositoryId, *v.RepositoryId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.RepositoryNameIdPair_repositoryName, *v.RepositoryName)
+	}
+}
+func (v *RepositoryNameIdPair) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RepositoryNameIdPair, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RepositoryNameIdPair_repositoryId:
+			v.RepositoryId = new(string)
+			return d.ReadString(schemas.RepositoryNameIdPair_repositoryId, v.RepositoryId)
+		case schemas.RepositoryNameIdPair_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.RepositoryNameIdPair_repositoryName, v.RepositoryName)
+		}
+		return nil
+	})
 }
 
 // Information about a trigger for a repository.
@@ -1125,6 +3294,46 @@ type RepositoryTrigger struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RepositoryTrigger) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RepositoryTrigger)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RepositoryTrigger) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBranchNameList(s, schemas.RepositoryTrigger_branches, v.Branches)
+	if v.CustomData != nil {
+		s.WriteString(schemas.RepositoryTrigger_customData, *v.CustomData)
+	}
+	if v.DestinationArn != nil {
+		s.WriteString(schemas.RepositoryTrigger_destinationArn, *v.DestinationArn)
+	}
+	serializeRepositoryTriggerEventList(s, schemas.RepositoryTrigger_events, v.Events)
+	if v.Name != nil {
+		s.WriteString(schemas.RepositoryTrigger_name, *v.Name)
+	}
+}
+func (v *RepositoryTrigger) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RepositoryTrigger, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RepositoryTrigger_branches:
+			return deserializeBranchNameList(d, schemas.RepositoryTrigger_branches, &v.Branches)
+		case schemas.RepositoryTrigger_customData:
+			v.CustomData = new(string)
+			return d.ReadString(schemas.RepositoryTrigger_customData, v.CustomData)
+		case schemas.RepositoryTrigger_destinationArn:
+			v.DestinationArn = new(string)
+			return d.ReadString(schemas.RepositoryTrigger_destinationArn, v.DestinationArn)
+		case schemas.RepositoryTrigger_events:
+			return deserializeRepositoryTriggerEventList(d, schemas.RepositoryTrigger_events, &v.Events)
+		case schemas.RepositoryTrigger_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RepositoryTrigger_name, v.Name)
+		}
+		return nil
+	})
+}
+
 // A trigger failed to run.
 type RepositoryTriggerExecutionFailure struct {
 
@@ -1135,6 +3344,34 @@ type RepositoryTriggerExecutionFailure struct {
 	Trigger *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RepositoryTriggerExecutionFailure) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RepositoryTriggerExecutionFailure)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RepositoryTriggerExecutionFailure) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.RepositoryTriggerExecutionFailure_failureMessage, *v.FailureMessage)
+	}
+	if v.Trigger != nil {
+		s.WriteString(schemas.RepositoryTriggerExecutionFailure_trigger, *v.Trigger)
+	}
+}
+func (v *RepositoryTriggerExecutionFailure) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RepositoryTriggerExecutionFailure, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RepositoryTriggerExecutionFailure_failureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.RepositoryTriggerExecutionFailure_failureMessage, v.FailureMessage)
+		case schemas.RepositoryTriggerExecutionFailure_trigger:
+			v.Trigger = new(string)
+			return d.ReadString(schemas.RepositoryTriggerExecutionFailure_trigger, v.Trigger)
+		}
+		return nil
+	})
 }
 
 // Information about the file mode changes.
@@ -1153,6 +3390,38 @@ type SetFileModeEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetFileModeEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetFileModeEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetFileModeEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileMode != "" {
+		s.WriteString(schemas.SetFileModeEntry_fileMode, string(v.FileMode))
+	}
+	if v.FilePath != nil {
+		s.WriteString(schemas.SetFileModeEntry_filePath, *v.FilePath)
+	}
+}
+func (v *SetFileModeEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetFileModeEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetFileModeEntry_fileMode:
+			var ev string
+			if err := d.ReadString(schemas.SetFileModeEntry_fileMode, &ev); err != nil {
+				return err
+			}
+			v.FileMode = FileModeTypeEnum(ev)
+			return nil
+		case schemas.SetFileModeEntry_filePath:
+			v.FilePath = new(string)
+			return d.ReadString(schemas.SetFileModeEntry_filePath, v.FilePath)
+		}
+		return nil
+	})
+}
+
 // Information about a source file that is part of changes made in a commit.
 type SourceFileSpecifier struct {
 
@@ -1165,6 +3434,33 @@ type SourceFileSpecifier struct {
 	IsMove bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *SourceFileSpecifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceFileSpecifier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceFileSpecifier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilePath != nil {
+		s.WriteString(schemas.SourceFileSpecifier_filePath, *v.FilePath)
+	}
+	if v.IsMove != false {
+		s.WriteBool(schemas.SourceFileSpecifier_isMove, v.IsMove)
+	}
+}
+func (v *SourceFileSpecifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceFileSpecifier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceFileSpecifier_filePath:
+			v.FilePath = new(string)
+			return d.ReadString(schemas.SourceFileSpecifier_filePath, v.FilePath)
+		case schemas.SourceFileSpecifier_isMove:
+			return d.ReadBool(schemas.SourceFileSpecifier_isMove, &v.IsMove)
+		}
+		return nil
+	})
 }
 
 // Returns information about a submodule reference in a repository folder.
@@ -1181,6 +3477,40 @@ type SubModule struct {
 	RelativePath *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SubModule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubModule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubModule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AbsolutePath != nil {
+		s.WriteString(schemas.SubModule_absolutePath, *v.AbsolutePath)
+	}
+	if v.CommitId != nil {
+		s.WriteString(schemas.SubModule_commitId, *v.CommitId)
+	}
+	if v.RelativePath != nil {
+		s.WriteString(schemas.SubModule_relativePath, *v.RelativePath)
+	}
+}
+func (v *SubModule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubModule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubModule_absolutePath:
+			v.AbsolutePath = new(string)
+			return d.ReadString(schemas.SubModule_absolutePath, v.AbsolutePath)
+		case schemas.SubModule_commitId:
+			v.CommitId = new(string)
+			return d.ReadString(schemas.SubModule_commitId, v.CommitId)
+		case schemas.SubModule_relativePath:
+			v.RelativePath = new(string)
+			return d.ReadString(schemas.SubModule_relativePath, v.RelativePath)
+		}
+		return nil
+	})
 }
 
 // Returns information about a symbolic link in a repository folder.
@@ -1201,6 +3531,50 @@ type SymbolicLink struct {
 	RelativePath *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SymbolicLink) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SymbolicLink)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SymbolicLink) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AbsolutePath != nil {
+		s.WriteString(schemas.SymbolicLink_absolutePath, *v.AbsolutePath)
+	}
+	if v.BlobId != nil {
+		s.WriteString(schemas.SymbolicLink_blobId, *v.BlobId)
+	}
+	if v.FileMode != "" {
+		s.WriteString(schemas.SymbolicLink_fileMode, string(v.FileMode))
+	}
+	if v.RelativePath != nil {
+		s.WriteString(schemas.SymbolicLink_relativePath, *v.RelativePath)
+	}
+}
+func (v *SymbolicLink) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SymbolicLink, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SymbolicLink_absolutePath:
+			v.AbsolutePath = new(string)
+			return d.ReadString(schemas.SymbolicLink_absolutePath, v.AbsolutePath)
+		case schemas.SymbolicLink_blobId:
+			v.BlobId = new(string)
+			return d.ReadString(schemas.SymbolicLink_blobId, v.BlobId)
+		case schemas.SymbolicLink_fileMode:
+			var ev string
+			if err := d.ReadString(schemas.SymbolicLink_fileMode, &ev); err != nil {
+				return err
+			}
+			v.FileMode = FileModeTypeEnum(ev)
+			return nil
+		case schemas.SymbolicLink_relativePath:
+			v.RelativePath = new(string)
+			return d.ReadString(schemas.SymbolicLink_relativePath, v.RelativePath)
+		}
+		return nil
+	})
 }
 
 // Returns information about a target for a pull request.
@@ -1224,6 +3598,40 @@ type Target struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Target) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Target)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Target) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationReference != nil {
+		s.WriteString(schemas.Target_destinationReference, *v.DestinationReference)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.Target_repositoryName, *v.RepositoryName)
+	}
+	if v.SourceReference != nil {
+		s.WriteString(schemas.Target_sourceReference, *v.SourceReference)
+	}
+}
+func (v *Target) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Target, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Target_destinationReference:
+			v.DestinationReference = new(string)
+			return d.ReadString(schemas.Target_destinationReference, v.DestinationReference)
+		case schemas.Target_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.Target_repositoryName, v.RepositoryName)
+		case schemas.Target_sourceReference:
+			v.SourceReference = new(string)
+			return d.ReadString(schemas.Target_sourceReference, v.SourceReference)
+		}
+		return nil
+	})
+}
+
 // Information about the user who made a specified commit.
 type UserInfo struct {
 
@@ -1238,6 +3646,40 @@ type UserInfo struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UserInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UserInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UserInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Date != nil {
+		s.WriteString(schemas.UserInfo_date, *v.Date)
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.UserInfo_email, *v.Email)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UserInfo_name, *v.Name)
+	}
+}
+func (v *UserInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UserInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UserInfo_date:
+			v.Date = new(string)
+			return d.ReadString(schemas.UserInfo_date, v.Date)
+		case schemas.UserInfo_email:
+			v.Email = new(string)
+			return d.ReadString(schemas.UserInfo_email, v.Email)
+		case schemas.UserInfo_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UserInfo_name, v.Name)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

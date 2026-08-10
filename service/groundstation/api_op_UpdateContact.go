@@ -5,7 +5,9 @@ package groundstation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,29 @@ type UpdateContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateContactRequest_clientToken, *v.ClientToken)
+	}
+	if v.ContactId != nil {
+		s.WriteString(schemas.UpdateContactRequest_contactId, *v.ContactId)
+	}
+	if v.SatelliteArn != nil {
+		s.WriteString(schemas.UpdateContactRequest_satelliteArn, *v.SatelliteArn)
+	}
+	if v.TrackingOverrides != nil {
+		s.WriteStruct(schemas.UpdateContactRequest_trackingOverrides)
+		v.TrackingOverrides.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateContactOutput struct {
 
 	// UUID of a contact.
@@ -60,13 +85,38 @@ type UpdateContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.UpdateContactResponse_contactId, *v.ContactId)
+	}
+	if v.VersionId != nil {
+		s.WriteInt32(schemas.UpdateContactResponse_versionId, *v.VersionId)
+	}
+}
+func (v *UpdateContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateContactResponse_contactId:
+			v.ContactId = new(string)
+			return d.ReadString(schemas.UpdateContactResponse_contactId, v.ContactId)
+		case schemas.UpdateContactResponse_versionId:
+			v.VersionId = new(int32)
+			return d.ReadInt32(schemas.UpdateContactResponse_versionId, v.VersionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContact, schemas.UpdateContactRequest, schemas.UpdateContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContact, schemas.UpdateContactRequest, schemas.UpdateContactResponse), output: &UpdateContactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

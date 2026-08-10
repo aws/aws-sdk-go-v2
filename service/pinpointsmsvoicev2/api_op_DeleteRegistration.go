@@ -4,7 +4,9 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DeleteRegistrationInput struct {
 	RegistrationId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteRegistrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRegistrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRegistrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistrationId != nil {
+		s.WriteString(schemas.DeleteRegistrationRequest_RegistrationId, *v.RegistrationId)
+	}
 }
 
 type DeleteRegistrationOutput struct {
@@ -106,13 +120,81 @@ type DeleteRegistrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRegistrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRegistrationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRegistrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringMap(s, schemas.DeleteRegistrationResult_AdditionalAttributes, v.AdditionalAttributes)
+	if v.ApprovedVersionNumber != nil {
+		s.WriteInt64(schemas.DeleteRegistrationResult_ApprovedVersionNumber, *v.ApprovedVersionNumber)
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.DeleteRegistrationResult_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.CurrentVersionNumber != nil {
+		s.WriteInt64(schemas.DeleteRegistrationResult_CurrentVersionNumber, *v.CurrentVersionNumber)
+	}
+	if v.LatestDeniedVersionNumber != nil {
+		s.WriteInt64(schemas.DeleteRegistrationResult_LatestDeniedVersionNumber, *v.LatestDeniedVersionNumber)
+	}
+	if v.RegistrationArn != nil {
+		s.WriteString(schemas.DeleteRegistrationResult_RegistrationArn, *v.RegistrationArn)
+	}
+	if v.RegistrationId != nil {
+		s.WriteString(schemas.DeleteRegistrationResult_RegistrationId, *v.RegistrationId)
+	}
+	if v.RegistrationStatus != "" {
+		s.WriteString(schemas.DeleteRegistrationResult_RegistrationStatus, string(v.RegistrationStatus))
+	}
+	if v.RegistrationType != nil {
+		s.WriteString(schemas.DeleteRegistrationResult_RegistrationType, *v.RegistrationType)
+	}
+}
+func (v *DeleteRegistrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRegistrationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRegistrationResult_AdditionalAttributes:
+			return deserializeStringMap(d, schemas.DeleteRegistrationResult_AdditionalAttributes, &v.AdditionalAttributes)
+		case schemas.DeleteRegistrationResult_ApprovedVersionNumber:
+			v.ApprovedVersionNumber = new(int64)
+			return d.ReadInt64(schemas.DeleteRegistrationResult_ApprovedVersionNumber, v.ApprovedVersionNumber)
+		case schemas.DeleteRegistrationResult_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DeleteRegistrationResult_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.DeleteRegistrationResult_CurrentVersionNumber:
+			v.CurrentVersionNumber = new(int64)
+			return d.ReadInt64(schemas.DeleteRegistrationResult_CurrentVersionNumber, v.CurrentVersionNumber)
+		case schemas.DeleteRegistrationResult_LatestDeniedVersionNumber:
+			v.LatestDeniedVersionNumber = new(int64)
+			return d.ReadInt64(schemas.DeleteRegistrationResult_LatestDeniedVersionNumber, v.LatestDeniedVersionNumber)
+		case schemas.DeleteRegistrationResult_RegistrationArn:
+			v.RegistrationArn = new(string)
+			return d.ReadString(schemas.DeleteRegistrationResult_RegistrationArn, v.RegistrationArn)
+		case schemas.DeleteRegistrationResult_RegistrationId:
+			v.RegistrationId = new(string)
+			return d.ReadString(schemas.DeleteRegistrationResult_RegistrationId, v.RegistrationId)
+		case schemas.DeleteRegistrationResult_RegistrationStatus:
+			var ev string
+			if err := d.ReadString(schemas.DeleteRegistrationResult_RegistrationStatus, &ev); err != nil {
+				return err
+			}
+			v.RegistrationStatus = types.RegistrationStatus(ev)
+			return nil
+		case schemas.DeleteRegistrationResult_RegistrationType:
+			v.RegistrationType = new(string)
+			return d.ReadString(schemas.DeleteRegistrationResult_RegistrationType, v.RegistrationType)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRegistrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRegistration, schemas.DeleteRegistrationRequest, schemas.DeleteRegistrationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRegistration, schemas.DeleteRegistrationRequest, schemas.DeleteRegistrationResult), output: &DeleteRegistrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

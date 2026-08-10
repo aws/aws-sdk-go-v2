@@ -4,6 +4,8 @@ package machinelearning
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DeleteMLModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMLModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMLModelInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMLModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MLModelId != nil {
+		s.WriteString(schemas.DeleteMLModelInput_MLModelId, *v.MLModelId)
+	}
+}
+
 // Represents the output of a DeleteMLModel operation.
 //
 // You can use the GetMLModel operation and check the value of the Status
@@ -54,13 +68,32 @@ type DeleteMLModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMLModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMLModelOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMLModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MLModelId != nil {
+		s.WriteString(schemas.DeleteMLModelOutput_MLModelId, *v.MLModelId)
+	}
+}
+func (v *DeleteMLModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteMLModelOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteMLModelOutput_MLModelId:
+			v.MLModelId = new(string)
+			return d.ReadString(schemas.DeleteMLModelOutput_MLModelId, v.MLModelId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMLModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteMLModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMLModel, schemas.DeleteMLModelInput, schemas.DeleteMLModelOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteMLModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMLModel, schemas.DeleteMLModelInput, schemas.DeleteMLModelOutput), output: &DeleteMLModelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package groundstation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -62,6 +64,35 @@ type CreateEphemerisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEphemerisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEphemerisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEphemerisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.CreateEphemerisRequest_enabled, *v.Enabled)
+	}
+	serializeEphemerisData(s, schemas.CreateEphemerisRequest_ephemeris, v.Ephemeris)
+	if v.ExpirationTime != nil {
+		s.WriteTime(schemas.CreateEphemerisRequest_expirationTime, *v.ExpirationTime)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.CreateEphemerisRequest_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateEphemerisRequest_name, *v.Name)
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.CreateEphemerisRequest_priority, *v.Priority)
+	}
+	if v.SatelliteId != nil {
+		s.WriteString(schemas.CreateEphemerisRequest_satelliteId, *v.SatelliteId)
+	}
+	serializeTagsMap(s, schemas.CreateEphemerisRequest_tags, v.Tags)
+}
+
 type CreateEphemerisOutput struct {
 
 	// The AWS Ground Station ephemeris ID.
@@ -73,13 +104,32 @@ type CreateEphemerisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEphemerisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EphemerisIdResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEphemerisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EphemerisId != nil {
+		s.WriteString(schemas.EphemerisIdResponse_ephemerisId, *v.EphemerisId)
+	}
+}
+func (v *CreateEphemerisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EphemerisIdResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EphemerisIdResponse_ephemerisId:
+			v.EphemerisId = new(string)
+			return d.ReadString(schemas.EphemerisIdResponse_ephemerisId, v.EphemerisId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEphemerisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateEphemeris{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEphemeris, schemas.CreateEphemerisRequest, schemas.EphemerisIdResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateEphemeris{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEphemeris, schemas.CreateEphemerisRequest, schemas.EphemerisIdResponse), output: &CreateEphemerisOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

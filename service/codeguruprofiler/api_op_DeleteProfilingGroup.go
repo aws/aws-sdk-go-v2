@@ -4,6 +4,8 @@ package codeguruprofiler
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,28 @@ type DeleteProfilingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProfilingGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProfilingGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProfilingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProfilingGroupName != nil {
+		s.WriteString(schemas.DeleteProfilingGroupRequest_profilingGroupName, *v.ProfilingGroupName)
+	}
+}
+func (v *DeleteProfilingGroupInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteProfilingGroupRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteProfilingGroupRequest_profilingGroupName:
+			v.ProfilingGroupName = new(string)
+			return d.ReadString(schemas.DeleteProfilingGroupRequest_profilingGroupName, v.ProfilingGroupName)
+		}
+		return nil
+	})
+}
+
 // The structure representing the deleteProfilingGroupResponse.
 type DeleteProfilingGroupOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -42,13 +66,26 @@ type DeleteProfilingGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProfilingGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProfilingGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProfilingGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteProfilingGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteProfilingGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteProfilingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteProfilingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProfilingGroup, schemas.DeleteProfilingGroupRequest, schemas.DeleteProfilingGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteProfilingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProfilingGroup, schemas.DeleteProfilingGroupRequest, schemas.DeleteProfilingGroupResponse), output: &DeleteProfilingGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

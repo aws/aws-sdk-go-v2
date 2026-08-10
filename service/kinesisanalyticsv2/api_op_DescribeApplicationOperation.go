@@ -4,7 +4,9 @@ package kinesisanalyticsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type DescribeApplicationOperationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeApplicationOperationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeApplicationOperationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeApplicationOperationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.DescribeApplicationOperationRequest_ApplicationName, *v.ApplicationName)
+	}
+	if v.OperationId != nil {
+		s.WriteString(schemas.DescribeApplicationOperationRequest_OperationId, *v.OperationId)
+	}
+}
+
 // Provides details of the operation that corresponds to the operation ID on a
 // Managed Service for Apache Flink application.
 type DescribeApplicationOperationOutput struct {
@@ -58,13 +75,34 @@ type DescribeApplicationOperationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeApplicationOperationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeApplicationOperationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeApplicationOperationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationOperationInfoDetails != nil {
+		s.WriteStruct(schemas.DescribeApplicationOperationResponse_ApplicationOperationInfoDetails)
+		v.ApplicationOperationInfoDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeApplicationOperationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeApplicationOperationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeApplicationOperationResponse_ApplicationOperationInfoDetails:
+			v.ApplicationOperationInfoDetails = &types.ApplicationOperationInfoDetails{}
+			return v.ApplicationOperationInfoDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeApplicationOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeApplicationOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplicationOperation, schemas.DescribeApplicationOperationRequest, schemas.DescribeApplicationOperationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeApplicationOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplicationOperation, schemas.DescribeApplicationOperationRequest, schemas.DescribeApplicationOperationResponse), output: &DescribeApplicationOperationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

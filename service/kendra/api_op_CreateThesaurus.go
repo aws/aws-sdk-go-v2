@@ -5,7 +5,9 @@ package kendra
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,36 @@ type CreateThesaurusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateThesaurusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateThesaurusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateThesaurusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateThesaurusRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateThesaurusRequest_Description, *v.Description)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.CreateThesaurusRequest_IndexId, *v.IndexId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateThesaurusRequest_Name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateThesaurusRequest_RoleArn, *v.RoleArn)
+	}
+	if v.SourceS3Path != nil {
+		s.WriteStruct(schemas.CreateThesaurusRequest_SourceS3Path)
+		v.SourceS3Path.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateThesaurusRequest_Tags, v.Tags)
+}
+
 type CreateThesaurusOutput struct {
 
 	// The identifier of the thesaurus.
@@ -83,13 +115,32 @@ type CreateThesaurusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateThesaurusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateThesaurusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateThesaurusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.CreateThesaurusResponse_Id, *v.Id)
+	}
+}
+func (v *CreateThesaurusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateThesaurusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateThesaurusResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateThesaurusResponse_Id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateThesaurusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateThesaurus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateThesaurus, schemas.CreateThesaurusRequest, schemas.CreateThesaurusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateThesaurus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateThesaurus, schemas.CreateThesaurusRequest, schemas.CreateThesaurusResponse), output: &CreateThesaurusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

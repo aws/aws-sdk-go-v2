@@ -5,7 +5,9 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -47,6 +49,25 @@ type CreateRcsAgentInput struct {
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateRcsAgentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRcsAgentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRcsAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateRcsAgentRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DeletionProtectionEnabled != nil {
+		s.WriteBool(schemas.CreateRcsAgentRequest_DeletionProtectionEnabled, *v.DeletionProtectionEnabled)
+	}
+	if v.OptOutListName != nil {
+		s.WriteString(schemas.CreateRcsAgentRequest_OptOutListName, *v.OptOutListName)
+	}
+	serializeTagList(s, schemas.CreateRcsAgentRequest_Tags, v.Tags)
 }
 
 type CreateRcsAgentOutput struct {
@@ -125,13 +146,105 @@ type CreateRcsAgentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRcsAgentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRcsAgentResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRcsAgentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.CreateRcsAgentResult_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	s.WriteBool(schemas.CreateRcsAgentResult_DeletionProtectionEnabled, v.DeletionProtectionEnabled)
+	if v.OptOutListName != nil {
+		s.WriteString(schemas.CreateRcsAgentResult_OptOutListName, *v.OptOutListName)
+	}
+	if v.RcsAgentArn != nil {
+		s.WriteString(schemas.CreateRcsAgentResult_RcsAgentArn, *v.RcsAgentArn)
+	}
+	if v.RcsAgentId != nil {
+		s.WriteString(schemas.CreateRcsAgentResult_RcsAgentId, *v.RcsAgentId)
+	}
+	s.WriteBool(schemas.CreateRcsAgentResult_SelfManagedOptOutsEnabled, v.SelfManagedOptOutsEnabled)
+	if v.Status != "" {
+		s.WriteString(schemas.CreateRcsAgentResult_Status, string(v.Status))
+	}
+	serializeTagList(s, schemas.CreateRcsAgentResult_Tags, v.Tags)
+	if v.TwoWayChannelArn != nil {
+		s.WriteString(schemas.CreateRcsAgentResult_TwoWayChannelArn, *v.TwoWayChannelArn)
+	}
+	if v.TwoWayChannelRole != nil {
+		s.WriteString(schemas.CreateRcsAgentResult_TwoWayChannelRole, *v.TwoWayChannelRole)
+	}
+	s.WriteBool(schemas.CreateRcsAgentResult_TwoWayEnabled, v.TwoWayEnabled)
+	if v.TwoWayMediaS3BucketName != nil {
+		s.WriteString(schemas.CreateRcsAgentResult_TwoWayMediaS3BucketName, *v.TwoWayMediaS3BucketName)
+	}
+	if v.TwoWayMediaS3KeyPrefix != nil {
+		s.WriteString(schemas.CreateRcsAgentResult_TwoWayMediaS3KeyPrefix, *v.TwoWayMediaS3KeyPrefix)
+	}
+	if v.TwoWayMediaS3Role != nil {
+		s.WriteString(schemas.CreateRcsAgentResult_TwoWayMediaS3Role, *v.TwoWayMediaS3Role)
+	}
+	serializeRcsEventTypeList(s, schemas.CreateRcsAgentResult_TwoWayRcsEventsEnabled, v.TwoWayRcsEventsEnabled)
+}
+func (v *CreateRcsAgentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRcsAgentResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRcsAgentResult_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.CreateRcsAgentResult_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.CreateRcsAgentResult_DeletionProtectionEnabled:
+			return d.ReadBool(schemas.CreateRcsAgentResult_DeletionProtectionEnabled, &v.DeletionProtectionEnabled)
+		case schemas.CreateRcsAgentResult_OptOutListName:
+			v.OptOutListName = new(string)
+			return d.ReadString(schemas.CreateRcsAgentResult_OptOutListName, v.OptOutListName)
+		case schemas.CreateRcsAgentResult_RcsAgentArn:
+			v.RcsAgentArn = new(string)
+			return d.ReadString(schemas.CreateRcsAgentResult_RcsAgentArn, v.RcsAgentArn)
+		case schemas.CreateRcsAgentResult_RcsAgentId:
+			v.RcsAgentId = new(string)
+			return d.ReadString(schemas.CreateRcsAgentResult_RcsAgentId, v.RcsAgentId)
+		case schemas.CreateRcsAgentResult_SelfManagedOptOutsEnabled:
+			return d.ReadBool(schemas.CreateRcsAgentResult_SelfManagedOptOutsEnabled, &v.SelfManagedOptOutsEnabled)
+		case schemas.CreateRcsAgentResult_Status:
+			var ev string
+			if err := d.ReadString(schemas.CreateRcsAgentResult_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RcsAgentStatus(ev)
+			return nil
+		case schemas.CreateRcsAgentResult_Tags:
+			return deserializeTagList(d, schemas.CreateRcsAgentResult_Tags, &v.Tags)
+		case schemas.CreateRcsAgentResult_TwoWayChannelArn:
+			v.TwoWayChannelArn = new(string)
+			return d.ReadString(schemas.CreateRcsAgentResult_TwoWayChannelArn, v.TwoWayChannelArn)
+		case schemas.CreateRcsAgentResult_TwoWayChannelRole:
+			v.TwoWayChannelRole = new(string)
+			return d.ReadString(schemas.CreateRcsAgentResult_TwoWayChannelRole, v.TwoWayChannelRole)
+		case schemas.CreateRcsAgentResult_TwoWayEnabled:
+			return d.ReadBool(schemas.CreateRcsAgentResult_TwoWayEnabled, &v.TwoWayEnabled)
+		case schemas.CreateRcsAgentResult_TwoWayMediaS3BucketName:
+			v.TwoWayMediaS3BucketName = new(string)
+			return d.ReadString(schemas.CreateRcsAgentResult_TwoWayMediaS3BucketName, v.TwoWayMediaS3BucketName)
+		case schemas.CreateRcsAgentResult_TwoWayMediaS3KeyPrefix:
+			v.TwoWayMediaS3KeyPrefix = new(string)
+			return d.ReadString(schemas.CreateRcsAgentResult_TwoWayMediaS3KeyPrefix, v.TwoWayMediaS3KeyPrefix)
+		case schemas.CreateRcsAgentResult_TwoWayMediaS3Role:
+			v.TwoWayMediaS3Role = new(string)
+			return d.ReadString(schemas.CreateRcsAgentResult_TwoWayMediaS3Role, v.TwoWayMediaS3Role)
+		case schemas.CreateRcsAgentResult_TwoWayRcsEventsEnabled:
+			return deserializeRcsEventTypeList(d, schemas.CreateRcsAgentResult_TwoWayRcsEventsEnabled, &v.TwoWayRcsEventsEnabled)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRcsAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateRcsAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRcsAgent, schemas.CreateRcsAgentRequest, schemas.CreateRcsAgentResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateRcsAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRcsAgent, schemas.CreateRcsAgentRequest, schemas.CreateRcsAgentResult), output: &CreateRcsAgentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

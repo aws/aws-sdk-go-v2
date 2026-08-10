@@ -4,7 +4,9 @@ package bedrockagentruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
 	"sync"
@@ -67,6 +69,33 @@ type InvokeFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeFlowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeFlowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnableTrace != nil {
+		s.WriteBool(schemas.InvokeFlowRequest_enableTrace, *v.EnableTrace)
+	}
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.InvokeFlowRequest_executionId, *v.ExecutionId)
+	}
+	if v.FlowAliasIdentifier != nil {
+		s.WriteString(schemas.InvokeFlowRequest_flowAliasIdentifier, *v.FlowAliasIdentifier)
+	}
+	if v.FlowIdentifier != nil {
+		s.WriteString(schemas.InvokeFlowRequest_flowIdentifier, *v.FlowIdentifier)
+	}
+	serializeFlowInputs(s, schemas.InvokeFlowRequest_inputs, v.Inputs)
+	if v.ModelPerformanceConfiguration != nil {
+		s.WriteStruct(schemas.InvokeFlowRequest_modelPerformanceConfiguration)
+		v.ModelPerformanceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type InvokeFlowOutput struct {
 
 	// The unique identifier for the current flow execution.
@@ -80,24 +109,44 @@ type InvokeFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeFlowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeFlowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.InvokeFlowResponse_executionId, *v.ExecutionId)
+	}
+}
+func (v *InvokeFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvokeFlowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvokeFlowResponse_executionId:
+			v.ExecutionId = new(string)
+			return d.ReadString(schemas.InvokeFlowResponse_executionId, v.ExecutionId)
+		}
+		return nil
+	})
+}
+
 // GetStream returns the type to interact with the event stream.
 func (o *InvokeFlowOutput) GetStream() *InvokeFlowEventStream {
 	return o.eventStream
 }
 
 func (c *Client) addOperationInvokeFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeFlow, schemas.InvokeFlowRequest, schemas.InvokeFlowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeFlow, schemas.InvokeFlowRequest, schemas.InvokeFlowResponse), output: &InvokeFlowOutput{}}, middleware.After); err != nil {
+		return err
+	}
+	if err := stack.Deserialize.Insert(&deserializeOpEventStreamInvokeFlow{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
 		return err
 	}
 
-	if err = addEventStreamInvokeFlowMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}

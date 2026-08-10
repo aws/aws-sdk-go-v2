@@ -5,7 +5,9 @@ package forecast
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,22 @@ type ListExplainabilitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExplainabilitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExplainabilitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExplainabilitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilters(s, schemas.ListExplainabilitiesRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListExplainabilitiesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExplainabilitiesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListExplainabilitiesOutput struct {
 
 	// An array of objects that summarize the properties of each Explainability
@@ -74,13 +92,35 @@ type ListExplainabilitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExplainabilitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExplainabilitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExplainabilitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExplainabilities(s, schemas.ListExplainabilitiesResponse_Explainabilities, v.Explainabilities)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExplainabilitiesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListExplainabilitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListExplainabilitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListExplainabilitiesResponse_Explainabilities:
+			return deserializeExplainabilities(d, schemas.ListExplainabilitiesResponse_Explainabilities, &v.Explainabilities)
+		case schemas.ListExplainabilitiesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListExplainabilitiesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListExplainabilitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListExplainabilities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExplainabilities, schemas.ListExplainabilitiesRequest, schemas.ListExplainabilitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListExplainabilities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExplainabilities, schemas.ListExplainabilitiesRequest, schemas.ListExplainabilitiesResponse), output: &ListExplainabilitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

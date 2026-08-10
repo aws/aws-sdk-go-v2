@@ -5,7 +5,9 @@ package notifications
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/notifications/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/notifications/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -78,6 +80,33 @@ type ListNotificationConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNotificationConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNotificationConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNotificationConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.ListNotificationConfigurationsRequest_channelArn, *v.ChannelArn)
+	}
+	if v.EventRuleSource != nil {
+		s.WriteString(schemas.ListNotificationConfigurationsRequest_eventRuleSource, *v.EventRuleSource)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListNotificationConfigurationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNotificationConfigurationsRequest_nextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListNotificationConfigurationsRequest_status, string(v.Status))
+	}
+	if v.Subtype != "" {
+		s.WriteString(schemas.ListNotificationConfigurationsRequest_subtype, string(v.Subtype))
+	}
+}
+
 type ListNotificationConfigurationsOutput struct {
 
 	// The NotificationConfigurations in the account.
@@ -95,13 +124,35 @@ type ListNotificationConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNotificationConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNotificationConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNotificationConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNotificationConfigurationsResponse_nextToken, *v.NextToken)
+	}
+	serializeNotificationConfigurations(s, schemas.ListNotificationConfigurationsResponse_notificationConfigurations, v.NotificationConfigurations)
+}
+func (v *ListNotificationConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNotificationConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNotificationConfigurationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNotificationConfigurationsResponse_nextToken, v.NextToken)
+		case schemas.ListNotificationConfigurationsResponse_notificationConfigurations:
+			return deserializeNotificationConfigurations(d, schemas.ListNotificationConfigurationsResponse_notificationConfigurations, &v.NotificationConfigurations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNotificationConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListNotificationConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNotificationConfigurations, schemas.ListNotificationConfigurationsRequest, schemas.ListNotificationConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListNotificationConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNotificationConfigurations, schemas.ListNotificationConfigurationsRequest, schemas.ListNotificationConfigurationsResponse), output: &ListNotificationConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

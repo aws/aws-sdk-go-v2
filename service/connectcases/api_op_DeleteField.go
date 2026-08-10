@@ -4,6 +4,8 @@ package connectcases
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,21 @@ type DeleteFieldInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFieldInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFieldRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFieldInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.DeleteFieldRequest_domainId, *v.DomainId)
+	}
+	if v.FieldId != nil {
+		s.WriteString(schemas.DeleteFieldRequest_fieldId, *v.FieldId)
+	}
+}
+
 type DeleteFieldOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -81,13 +98,26 @@ type DeleteFieldOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFieldOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFieldResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFieldOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteFieldOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFieldResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFieldMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteField{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteField, schemas.DeleteFieldRequest, schemas.DeleteFieldResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteField{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteField, schemas.DeleteFieldRequest, schemas.DeleteFieldResponse), output: &DeleteFieldOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

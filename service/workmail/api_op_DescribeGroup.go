@@ -4,7 +4,9 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -50,6 +52,21 @@ type DescribeGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.DescribeGroupRequest_GroupId, *v.GroupId)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.DescribeGroupRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type DescribeGroupOutput struct {
 
 	// The date and time when a user was deregistered from WorkMail, in UNIX epoch
@@ -82,13 +99,71 @@ type DescribeGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisabledDate != nil {
+		s.WriteTime(schemas.DescribeGroupResponse_DisabledDate, *v.DisabledDate)
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.DescribeGroupResponse_Email, *v.Email)
+	}
+	if v.EnabledDate != nil {
+		s.WriteTime(schemas.DescribeGroupResponse_EnabledDate, *v.EnabledDate)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.DescribeGroupResponse_GroupId, *v.GroupId)
+	}
+	if v.HiddenFromGlobalAddressList != false {
+		s.WriteBool(schemas.DescribeGroupResponse_HiddenFromGlobalAddressList, v.HiddenFromGlobalAddressList)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeGroupResponse_Name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.DescribeGroupResponse_State, string(v.State))
+	}
+}
+func (v *DescribeGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeGroupResponse_DisabledDate:
+			v.DisabledDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeGroupResponse_DisabledDate, v.DisabledDate)
+		case schemas.DescribeGroupResponse_Email:
+			v.Email = new(string)
+			return d.ReadString(schemas.DescribeGroupResponse_Email, v.Email)
+		case schemas.DescribeGroupResponse_EnabledDate:
+			v.EnabledDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeGroupResponse_EnabledDate, v.EnabledDate)
+		case schemas.DescribeGroupResponse_GroupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.DescribeGroupResponse_GroupId, v.GroupId)
+		case schemas.DescribeGroupResponse_HiddenFromGlobalAddressList:
+			return d.ReadBool(schemas.DescribeGroupResponse_HiddenFromGlobalAddressList, &v.HiddenFromGlobalAddressList)
+		case schemas.DescribeGroupResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeGroupResponse_Name, v.Name)
+		case schemas.DescribeGroupResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.DescribeGroupResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.EntityState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGroup, schemas.DescribeGroupRequest, schemas.DescribeGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGroup, schemas.DescribeGroupRequest, schemas.DescribeGroupResponse), output: &DescribeGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

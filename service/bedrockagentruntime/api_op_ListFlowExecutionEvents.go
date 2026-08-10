@@ -5,7 +5,9 @@ package bedrockagentruntime
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,33 @@ type ListFlowExecutionEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFlowExecutionEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFlowExecutionEventsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFlowExecutionEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventType != "" {
+		s.WriteString(schemas.ListFlowExecutionEventsRequest_eventType, string(v.EventType))
+	}
+	if v.ExecutionIdentifier != nil {
+		s.WriteString(schemas.ListFlowExecutionEventsRequest_executionIdentifier, *v.ExecutionIdentifier)
+	}
+	if v.FlowAliasIdentifier != nil {
+		s.WriteString(schemas.ListFlowExecutionEventsRequest_flowAliasIdentifier, *v.FlowAliasIdentifier)
+	}
+	if v.FlowIdentifier != nil {
+		s.WriteString(schemas.ListFlowExecutionEventsRequest_flowIdentifier, *v.FlowIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFlowExecutionEventsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFlowExecutionEventsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListFlowExecutionEventsOutput struct {
 
 	// A list of events that occurred during the flow execution. Events can include
@@ -84,13 +113,35 @@ type ListFlowExecutionEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFlowExecutionEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFlowExecutionEventsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFlowExecutionEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFlowExecutionEvents(s, schemas.ListFlowExecutionEventsResponse_flowExecutionEvents, v.FlowExecutionEvents)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFlowExecutionEventsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListFlowExecutionEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFlowExecutionEventsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFlowExecutionEventsResponse_flowExecutionEvents:
+			return deserializeFlowExecutionEvents(d, schemas.ListFlowExecutionEventsResponse_flowExecutionEvents, &v.FlowExecutionEvents)
+		case schemas.ListFlowExecutionEventsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFlowExecutionEventsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFlowExecutionEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFlowExecutionEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFlowExecutionEvents, schemas.ListFlowExecutionEventsRequest, schemas.ListFlowExecutionEventsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFlowExecutionEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFlowExecutionEvents, schemas.ListFlowExecutionEventsRequest, schemas.ListFlowExecutionEventsResponse), output: &ListFlowExecutionEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package chimesdkidentity
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -35,6 +37,18 @@ type GetAppInstanceRetentionSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAppInstanceRetentionSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAppInstanceRetentionSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAppInstanceRetentionSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppInstanceArn != nil {
+		s.WriteString(schemas.GetAppInstanceRetentionSettingsRequest_AppInstanceArn, *v.AppInstanceArn)
+	}
+}
+
 type GetAppInstanceRetentionSettingsOutput struct {
 
 	// The retention settings for the AppInstance .
@@ -50,13 +64,40 @@ type GetAppInstanceRetentionSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAppInstanceRetentionSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAppInstanceRetentionSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAppInstanceRetentionSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppInstanceRetentionSettings != nil {
+		s.WriteStruct(schemas.GetAppInstanceRetentionSettingsResponse_AppInstanceRetentionSettings)
+		v.AppInstanceRetentionSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InitiateDeletionTimestamp != nil {
+		s.WriteTime(schemas.GetAppInstanceRetentionSettingsResponse_InitiateDeletionTimestamp, *v.InitiateDeletionTimestamp)
+	}
+}
+func (v *GetAppInstanceRetentionSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAppInstanceRetentionSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAppInstanceRetentionSettingsResponse_AppInstanceRetentionSettings:
+			v.AppInstanceRetentionSettings = &types.AppInstanceRetentionSettings{}
+			return v.AppInstanceRetentionSettings.Deserialize(d)
+		case schemas.GetAppInstanceRetentionSettingsResponse_InitiateDeletionTimestamp:
+			v.InitiateDeletionTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetAppInstanceRetentionSettingsResponse_InitiateDeletionTimestamp, v.InitiateDeletionTimestamp)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAppInstanceRetentionSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAppInstanceRetentionSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAppInstanceRetentionSettings, schemas.GetAppInstanceRetentionSettingsRequest, schemas.GetAppInstanceRetentionSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAppInstanceRetentionSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAppInstanceRetentionSettings, schemas.GetAppInstanceRetentionSettingsRequest, schemas.GetAppInstanceRetentionSettingsResponse), output: &GetAppInstanceRetentionSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

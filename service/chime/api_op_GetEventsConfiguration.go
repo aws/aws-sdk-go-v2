@@ -4,7 +4,9 @@ package chime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type GetEventsConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEventsConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEventsConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEventsConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetEventsConfigurationRequest_AccountId, *v.AccountId)
+	}
+	if v.BotId != nil {
+		s.WriteString(schemas.GetEventsConfigurationRequest_BotId, *v.BotId)
+	}
+}
+
 type GetEventsConfigurationOutput struct {
 
 	// The events configuration details.
@@ -51,13 +68,34 @@ type GetEventsConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEventsConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEventsConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEventsConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventsConfiguration != nil {
+		s.WriteStruct(schemas.GetEventsConfigurationResponse_EventsConfiguration)
+		v.EventsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetEventsConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEventsConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEventsConfigurationResponse_EventsConfiguration:
+			v.EventsConfiguration = &types.EventsConfiguration{}
+			return v.EventsConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEventsConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEventsConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEventsConfiguration, schemas.GetEventsConfigurationRequest, schemas.GetEventsConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEventsConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEventsConfiguration, schemas.GetEventsConfigurationRequest, schemas.GetEventsConfigurationResponse), output: &GetEventsConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

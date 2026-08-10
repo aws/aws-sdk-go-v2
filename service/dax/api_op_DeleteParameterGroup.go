@@ -4,6 +4,8 @@ package dax
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/dax/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteParameterGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteParameterGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteParameterGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ParameterGroupName != nil {
+		s.WriteString(schemas.DeleteParameterGroupRequest_ParameterGroupName, *v.ParameterGroupName)
+	}
+}
+
 type DeleteParameterGroupOutput struct {
 
 	// A user-specified message for this action (i.e., a reason for deleting the
@@ -46,13 +60,32 @@ type DeleteParameterGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteParameterGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteParameterGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteParameterGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeletionMessage != nil {
+		s.WriteString(schemas.DeleteParameterGroupResponse_DeletionMessage, *v.DeletionMessage)
+	}
+}
+func (v *DeleteParameterGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteParameterGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteParameterGroupResponse_DeletionMessage:
+			v.DeletionMessage = new(string)
+			return d.ReadString(schemas.DeleteParameterGroupResponse_DeletionMessage, v.DeletionMessage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteParameterGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteParameterGroup, schemas.DeleteParameterGroupRequest, schemas.DeleteParameterGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteParameterGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteParameterGroup, schemas.DeleteParameterGroupRequest, schemas.DeleteParameterGroupResponse), output: &DeleteParameterGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

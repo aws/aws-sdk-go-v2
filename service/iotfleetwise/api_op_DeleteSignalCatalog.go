@@ -4,6 +4,8 @@ package iotfleetwise
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,28 @@ type DeleteSignalCatalogInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSignalCatalogInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSignalCatalogRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSignalCatalogInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteSignalCatalogRequest_name, *v.Name)
+	}
+}
+func (v *DeleteSignalCatalogInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSignalCatalogRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSignalCatalogRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteSignalCatalogRequest_name, v.Name)
+		}
+		return nil
+	})
+}
+
 type DeleteSignalCatalogOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted signal catalog.
@@ -51,13 +75,38 @@ type DeleteSignalCatalogOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSignalCatalogOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSignalCatalogResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSignalCatalogOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteSignalCatalogResponse_arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteSignalCatalogResponse_name, *v.Name)
+	}
+}
+func (v *DeleteSignalCatalogOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSignalCatalogResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSignalCatalogResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteSignalCatalogResponse_arn, v.Arn)
+		case schemas.DeleteSignalCatalogResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteSignalCatalogResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSignalCatalogMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteSignalCatalog{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSignalCatalog, schemas.DeleteSignalCatalogRequest, schemas.DeleteSignalCatalogResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteSignalCatalog{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSignalCatalog, schemas.DeleteSignalCatalogRequest, schemas.DeleteSignalCatalogResponse), output: &DeleteSignalCatalogOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

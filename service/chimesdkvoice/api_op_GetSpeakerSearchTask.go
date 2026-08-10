@@ -4,7 +4,9 @@ package chimesdkvoice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type GetSpeakerSearchTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSpeakerSearchTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSpeakerSearchTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSpeakerSearchTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SpeakerSearchTaskId != nil {
+		s.WriteString(schemas.GetSpeakerSearchTaskRequest_SpeakerSearchTaskId, *v.SpeakerSearchTaskId)
+	}
+	if v.VoiceConnectorId != nil {
+		s.WriteString(schemas.GetSpeakerSearchTaskRequest_VoiceConnectorId, *v.VoiceConnectorId)
+	}
+}
+
 type GetSpeakerSearchTaskOutput struct {
 
 	// The details of the speaker search task.
@@ -50,13 +67,34 @@ type GetSpeakerSearchTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSpeakerSearchTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSpeakerSearchTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSpeakerSearchTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SpeakerSearchTask != nil {
+		s.WriteStruct(schemas.GetSpeakerSearchTaskResponse_SpeakerSearchTask)
+		v.SpeakerSearchTask.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSpeakerSearchTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSpeakerSearchTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSpeakerSearchTaskResponse_SpeakerSearchTask:
+			v.SpeakerSearchTask = &types.SpeakerSearchTask{}
+			return v.SpeakerSearchTask.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSpeakerSearchTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSpeakerSearchTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSpeakerSearchTask, schemas.GetSpeakerSearchTaskRequest, schemas.GetSpeakerSearchTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSpeakerSearchTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSpeakerSearchTask, schemas.GetSpeakerSearchTaskRequest, schemas.GetSpeakerSearchTaskResponse), output: &GetSpeakerSearchTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

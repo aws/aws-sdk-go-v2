@@ -4,7 +4,9 @@ package fms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,27 @@ type GetViolationDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetViolationDetailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetViolationDetailsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetViolationDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MemberAccount != nil {
+		s.WriteString(schemas.GetViolationDetailsRequest_MemberAccount, *v.MemberAccount)
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.GetViolationDetailsRequest_PolicyId, *v.PolicyId)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.GetViolationDetailsRequest_ResourceId, *v.ResourceId)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.GetViolationDetailsRequest_ResourceType, *v.ResourceType)
+	}
+}
+
 type GetViolationDetailsOutput struct {
 
 	// Violation detail for a resource.
@@ -81,13 +104,34 @@ type GetViolationDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetViolationDetailsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetViolationDetailsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetViolationDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ViolationDetail != nil {
+		s.WriteStruct(schemas.GetViolationDetailsResponse_ViolationDetail)
+		v.ViolationDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetViolationDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetViolationDetailsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetViolationDetailsResponse_ViolationDetail:
+			v.ViolationDetail = &types.ViolationDetail{}
+			return v.ViolationDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetViolationDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetViolationDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetViolationDetails, schemas.GetViolationDetailsRequest, schemas.GetViolationDetailsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetViolationDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetViolationDetails, schemas.GetViolationDetailsRequest, schemas.GetViolationDetailsResponse), output: &GetViolationDetailsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

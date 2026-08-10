@@ -4,7 +4,9 @@ package chimesdkvoice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,22 @@ type AssociatePhoneNumbersWithVoiceConnectorGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociatePhoneNumbersWithVoiceConnectorGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociatePhoneNumbersWithVoiceConnectorGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociatePhoneNumbersWithVoiceConnectorGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeE164PhoneNumberList(s, schemas.AssociatePhoneNumbersWithVoiceConnectorGroupRequest_E164PhoneNumbers, v.E164PhoneNumbers)
+	if v.ForceAssociate != nil {
+		s.WriteBool(schemas.AssociatePhoneNumbersWithVoiceConnectorGroupRequest_ForceAssociate, *v.ForceAssociate)
+	}
+	if v.VoiceConnectorGroupId != nil {
+		s.WriteString(schemas.AssociatePhoneNumbersWithVoiceConnectorGroupRequest_VoiceConnectorGroupId, *v.VoiceConnectorGroupId)
+	}
+}
+
 type AssociatePhoneNumbersWithVoiceConnectorGroupOutput struct {
 
 	// If the action fails for one or more of the phone numbers in the request, a list
@@ -58,13 +76,29 @@ type AssociatePhoneNumbersWithVoiceConnectorGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociatePhoneNumbersWithVoiceConnectorGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociatePhoneNumbersWithVoiceConnectorGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociatePhoneNumbersWithVoiceConnectorGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePhoneNumberErrorList(s, schemas.AssociatePhoneNumbersWithVoiceConnectorGroupResponse_PhoneNumberErrors, v.PhoneNumberErrors)
+}
+func (v *AssociatePhoneNumbersWithVoiceConnectorGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociatePhoneNumbersWithVoiceConnectorGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociatePhoneNumbersWithVoiceConnectorGroupResponse_PhoneNumberErrors:
+			return deserializePhoneNumberErrorList(d, schemas.AssociatePhoneNumbersWithVoiceConnectorGroupResponse_PhoneNumberErrors, &v.PhoneNumberErrors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociatePhoneNumbersWithVoiceConnectorGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociatePhoneNumbersWithVoiceConnectorGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociatePhoneNumbersWithVoiceConnectorGroup, schemas.AssociatePhoneNumbersWithVoiceConnectorGroupRequest, schemas.AssociatePhoneNumbersWithVoiceConnectorGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociatePhoneNumbersWithVoiceConnectorGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociatePhoneNumbersWithVoiceConnectorGroup, schemas.AssociatePhoneNumbersWithVoiceConnectorGroupRequest, schemas.AssociatePhoneNumbersWithVoiceConnectorGroupResponse), output: &AssociatePhoneNumbersWithVoiceConnectorGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

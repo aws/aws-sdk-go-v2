@@ -4,7 +4,9 @@ package kendra
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,22 @@ type AssociateEntitiesToExperienceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateEntitiesToExperienceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateEntitiesToExperienceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateEntitiesToExperienceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssociateEntityList(s, schemas.AssociateEntitiesToExperienceRequest_EntityList, v.EntityList)
+	if v.Id != nil {
+		s.WriteString(schemas.AssociateEntitiesToExperienceRequest_Id, *v.Id)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.AssociateEntitiesToExperienceRequest_IndexId, *v.IndexId)
+	}
+}
+
 type AssociateEntitiesToExperienceOutput struct {
 
 	// Lists the users or groups in your IAM Identity Center identity source that
@@ -61,13 +79,29 @@ type AssociateEntitiesToExperienceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateEntitiesToExperienceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateEntitiesToExperienceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateEntitiesToExperienceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssociateEntitiesToExperienceFailedEntityList(s, schemas.AssociateEntitiesToExperienceResponse_FailedEntityList, v.FailedEntityList)
+}
+func (v *AssociateEntitiesToExperienceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateEntitiesToExperienceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateEntitiesToExperienceResponse_FailedEntityList:
+			return deserializeAssociateEntitiesToExperienceFailedEntityList(d, schemas.AssociateEntitiesToExperienceResponse_FailedEntityList, &v.FailedEntityList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateEntitiesToExperienceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateEntitiesToExperience{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateEntitiesToExperience, schemas.AssociateEntitiesToExperienceRequest, schemas.AssociateEntitiesToExperienceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateEntitiesToExperience{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateEntitiesToExperience, schemas.AssociateEntitiesToExperienceRequest, schemas.AssociateEntitiesToExperienceResponse), output: &AssociateEntitiesToExperienceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

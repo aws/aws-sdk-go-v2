@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,53 @@ type CreateRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRepositoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRepositoryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRepositoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionArn != nil {
+		s.WriteString(schemas.CreateRepositoryInput_connectionArn, *v.ConnectionArn)
+	}
+	if v.EncryptionKey != nil {
+		s.WriteString(schemas.CreateRepositoryInput_encryptionKey, *v.EncryptionKey)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateRepositoryInput_name, *v.Name)
+	}
+	if v.Provider != "" {
+		s.WriteString(schemas.CreateRepositoryInput_provider, string(v.Provider))
+	}
+	serializeTagList(s, schemas.CreateRepositoryInput_tags, v.Tags)
+}
+func (v *CreateRepositoryInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRepositoryInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRepositoryInput_connectionArn:
+			v.ConnectionArn = new(string)
+			return d.ReadString(schemas.CreateRepositoryInput_connectionArn, v.ConnectionArn)
+		case schemas.CreateRepositoryInput_encryptionKey:
+			v.EncryptionKey = new(string)
+			return d.ReadString(schemas.CreateRepositoryInput_encryptionKey, v.EncryptionKey)
+		case schemas.CreateRepositoryInput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateRepositoryInput_name, v.Name)
+		case schemas.CreateRepositoryInput_provider:
+			var ev string
+			if err := d.ReadString(schemas.CreateRepositoryInput_provider, &ev); err != nil {
+				return err
+			}
+			v.Provider = types.RepositoryProvider(ev)
+			return nil
+		case schemas.CreateRepositoryInput_tags:
+			return deserializeTagList(d, schemas.CreateRepositoryInput_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateRepositoryOutput struct {
 
 	// The repository link's detail data that's returned by Proton.
@@ -86,13 +135,34 @@ type CreateRepositoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRepositoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRepositoryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRepositoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Repository != nil {
+		s.WriteStruct(schemas.CreateRepositoryOutput_repository)
+		v.Repository.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateRepositoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRepositoryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRepositoryOutput_repository:
+			v.Repository = &types.Repository{}
+			return v.Repository.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateRepository{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRepository, schemas.CreateRepositoryInput, schemas.CreateRepositoryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateRepository{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRepository, schemas.CreateRepositoryInput, schemas.CreateRepositoryOutput), output: &CreateRepositoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

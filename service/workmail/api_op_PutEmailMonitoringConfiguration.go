@@ -4,6 +4,8 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type PutEmailMonitoringConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEmailMonitoringConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEmailMonitoringConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEmailMonitoringConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogGroupArn != nil {
+		s.WriteString(schemas.PutEmailMonitoringConfigurationRequest_LogGroupArn, *v.LogGroupArn)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.PutEmailMonitoringConfigurationRequest_OrganizationId, *v.OrganizationId)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.PutEmailMonitoringConfigurationRequest_RoleArn, *v.RoleArn)
+	}
+}
+
 type PutEmailMonitoringConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +72,26 @@ type PutEmailMonitoringConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEmailMonitoringConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEmailMonitoringConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEmailMonitoringConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutEmailMonitoringConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutEmailMonitoringConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutEmailMonitoringConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutEmailMonitoringConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEmailMonitoringConfiguration, schemas.PutEmailMonitoringConfigurationRequest, schemas.PutEmailMonitoringConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutEmailMonitoringConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEmailMonitoringConfiguration, schemas.PutEmailMonitoringConfigurationRequest, schemas.PutEmailMonitoringConfigurationResponse), output: &PutEmailMonitoringConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

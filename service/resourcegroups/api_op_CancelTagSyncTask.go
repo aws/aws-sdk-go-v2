@@ -4,6 +4,8 @@ package resourcegroups
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type CancelTagSyncTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelTagSyncTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelTagSyncTaskInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelTagSyncTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskArn != nil {
+		s.WriteString(schemas.CancelTagSyncTaskInput_TaskArn, *v.TaskArn)
+	}
+}
+
 type CancelTagSyncTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +62,26 @@ type CancelTagSyncTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelTagSyncTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelTagSyncTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CancelTagSyncTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelTagSyncTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelTagSyncTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelTagSyncTask, schemas.CancelTagSyncTaskInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelTagSyncTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelTagSyncTask, schemas.CancelTagSyncTaskInput, nil), output: &CancelTagSyncTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package applicationdiscoveryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,17 @@ type CreateTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTagsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigurationIdList(s, schemas.CreateTagsRequest_configurationIds, v.ConfigurationIds)
+	serializeTagSet(s, schemas.CreateTagsRequest_tags, v.Tags)
+}
+
 type CreateTagsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,13 +66,26 @@ type CreateTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTagsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTagsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTags, schemas.CreateTagsRequest, schemas.CreateTagsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTags, schemas.CreateTagsRequest, schemas.CreateTagsResponse), output: &CreateTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

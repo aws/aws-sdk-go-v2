@@ -4,7 +4,9 @@ package chimesdkmessaging
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type DescribeChannelModeratorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeChannelModeratorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeChannelModeratorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeChannelModeratorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.DescribeChannelModeratorRequest_ChannelArn, *v.ChannelArn)
+	}
+	if v.ChannelModeratorArn != nil {
+		s.WriteString(schemas.DescribeChannelModeratorRequest_ChannelModeratorArn, *v.ChannelModeratorArn)
+	}
+	if v.ChimeBearer != nil {
+		s.WriteString(schemas.DescribeChannelModeratorRequest_ChimeBearer, *v.ChimeBearer)
+	}
+}
+
 type DescribeChannelModeratorOutput struct {
 
 	// The details of the channel moderator.
@@ -58,13 +78,34 @@ type DescribeChannelModeratorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeChannelModeratorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeChannelModeratorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeChannelModeratorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelModerator != nil {
+		s.WriteStruct(schemas.DescribeChannelModeratorResponse_ChannelModerator)
+		v.ChannelModerator.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeChannelModeratorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeChannelModeratorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeChannelModeratorResponse_ChannelModerator:
+			v.ChannelModerator = &types.ChannelModerator{}
+			return v.ChannelModerator.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeChannelModeratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeChannelModerator{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeChannelModerator, schemas.DescribeChannelModeratorRequest, schemas.DescribeChannelModeratorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeChannelModerator{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeChannelModerator, schemas.DescribeChannelModeratorRequest, schemas.DescribeChannelModeratorResponse), output: &DescribeChannelModeratorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

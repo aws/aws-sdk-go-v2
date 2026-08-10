@@ -5,7 +5,9 @@ package fms
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type ListAppsListsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppsListsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppsListsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppsListsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultLists != false {
+		s.WriteBool(schemas.ListAppsListsRequest_DefaultLists, v.DefaultLists)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAppsListsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppsListsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAppsListsOutput struct {
 
 	// An array of AppsListDataSummary objects.
@@ -67,13 +87,35 @@ type ListAppsListsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppsListsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppsListsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppsListsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAppsListsData(s, schemas.ListAppsListsResponse_AppsLists, v.AppsLists)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppsListsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAppsListsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAppsListsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAppsListsResponse_AppsLists:
+			return deserializeAppsListsData(d, schemas.ListAppsListsResponse_AppsLists, &v.AppsLists)
+		case schemas.ListAppsListsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAppsListsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAppsListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAppsLists{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppsLists, schemas.ListAppsListsRequest, schemas.ListAppsListsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAppsLists{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppsLists, schemas.ListAppsListsRequest, schemas.ListAppsListsResponse), output: &ListAppsListsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

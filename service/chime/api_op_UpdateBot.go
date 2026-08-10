@@ -4,7 +4,9 @@ package chime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type UpdateBotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.UpdateBotRequest_AccountId, *v.AccountId)
+	}
+	if v.BotId != nil {
+		s.WriteString(schemas.UpdateBotRequest_BotId, *v.BotId)
+	}
+	if v.Disabled != nil {
+		s.WriteBool(schemas.UpdateBotRequest_Disabled, *v.Disabled)
+	}
+}
+
 type UpdateBotOutput struct {
 
 	// The updated bot details.
@@ -54,13 +74,34 @@ type UpdateBotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBotResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bot != nil {
+		s.WriteStruct(schemas.UpdateBotResponse_Bot)
+		v.Bot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateBotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBotResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBotResponse_Bot:
+			v.Bot = &types.Bot{}
+			return v.Bot.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBot, schemas.UpdateBotRequest, schemas.UpdateBotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateBot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBot, schemas.UpdateBotRequest, schemas.UpdateBotResponse), output: &UpdateBotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

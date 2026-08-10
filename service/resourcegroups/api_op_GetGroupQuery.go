@@ -4,7 +4,9 @@ package resourcegroups
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type GetGroupQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGroupQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGroupQueryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGroupQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Group != nil {
+		s.WriteString(schemas.GetGroupQueryInput_Group, *v.Group)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.GetGroupQueryInput_GroupName, *v.GroupName)
+	}
+}
+
 type GetGroupQueryOutput struct {
 
 	// The resource query associated with the specified group. For more information
@@ -60,13 +77,34 @@ type GetGroupQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGroupQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGroupQueryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGroupQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupQuery != nil {
+		s.WriteStruct(schemas.GetGroupQueryOutput_GroupQuery)
+		v.GroupQuery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetGroupQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGroupQueryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGroupQueryOutput_GroupQuery:
+			v.GroupQuery = &types.GroupQuery{}
+			return v.GroupQuery.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetGroupQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGroupQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGroupQuery, schemas.GetGroupQueryInput, schemas.GetGroupQueryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetGroupQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGroupQuery, schemas.GetGroupQueryInput, schemas.GetGroupQueryOutput), output: &GetGroupQueryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

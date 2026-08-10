@@ -4,7 +4,9 @@ package route53domains
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,21 @@ type CheckDomainTransferabilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckDomainTransferabilityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckDomainTransferabilityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckDomainTransferabilityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthCode != nil {
+		s.WriteString(schemas.CheckDomainTransferabilityRequest_AuthCode, *v.AuthCode)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.CheckDomainTransferabilityRequest_DomainName, *v.DomainName)
+	}
+}
+
 // The CheckDomainTransferability response includes the following elements.
 type CheckDomainTransferabilityOutput struct {
 
@@ -70,13 +87,40 @@ type CheckDomainTransferabilityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckDomainTransferabilityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckDomainTransferabilityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckDomainTransferabilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CheckDomainTransferabilityResponse_Message, *v.Message)
+	}
+	if v.Transferability != nil {
+		s.WriteStruct(schemas.CheckDomainTransferabilityResponse_Transferability)
+		v.Transferability.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CheckDomainTransferabilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CheckDomainTransferabilityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CheckDomainTransferabilityResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CheckDomainTransferabilityResponse_Message, v.Message)
+		case schemas.CheckDomainTransferabilityResponse_Transferability:
+			v.Transferability = &types.DomainTransferability{}
+			return v.Transferability.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCheckDomainTransferabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCheckDomainTransferability{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckDomainTransferability, schemas.CheckDomainTransferabilityRequest, schemas.CheckDomainTransferabilityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCheckDomainTransferability{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckDomainTransferability, schemas.CheckDomainTransferabilityRequest, schemas.CheckDomainTransferabilityResponse), output: &CheckDomainTransferabilityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

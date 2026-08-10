@@ -4,7 +4,9 @@ package chimesdkmediapipelines
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,23 @@ type UpdateMediaPipelineKinesisVideoStreamPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMediaPipelineKinesisVideoStreamPoolInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMediaPipelineKinesisVideoStreamPoolRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMediaPipelineKinesisVideoStreamPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateMediaPipelineKinesisVideoStreamPoolRequest_Identifier, *v.Identifier)
+	}
+	if v.StreamConfiguration != nil {
+		s.WriteStruct(schemas.UpdateMediaPipelineKinesisVideoStreamPoolRequest_StreamConfiguration)
+		v.StreamConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateMediaPipelineKinesisVideoStreamPoolOutput struct {
 
 	// The video stream pool configuration object.
@@ -49,13 +68,34 @@ type UpdateMediaPipelineKinesisVideoStreamPoolOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMediaPipelineKinesisVideoStreamPoolOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMediaPipelineKinesisVideoStreamPoolResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMediaPipelineKinesisVideoStreamPoolOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KinesisVideoStreamPoolConfiguration != nil {
+		s.WriteStruct(schemas.UpdateMediaPipelineKinesisVideoStreamPoolResponse_KinesisVideoStreamPoolConfiguration)
+		v.KinesisVideoStreamPoolConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateMediaPipelineKinesisVideoStreamPoolOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMediaPipelineKinesisVideoStreamPoolResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateMediaPipelineKinesisVideoStreamPoolResponse_KinesisVideoStreamPoolConfiguration:
+			v.KinesisVideoStreamPoolConfiguration = &types.KinesisVideoStreamPoolConfiguration{}
+			return v.KinesisVideoStreamPoolConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMediaPipelineKinesisVideoStreamPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMediaPipelineKinesisVideoStreamPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMediaPipelineKinesisVideoStreamPool, schemas.UpdateMediaPipelineKinesisVideoStreamPoolRequest, schemas.UpdateMediaPipelineKinesisVideoStreamPoolResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateMediaPipelineKinesisVideoStreamPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMediaPipelineKinesisVideoStreamPool, schemas.UpdateMediaPipelineKinesisVideoStreamPoolRequest, schemas.UpdateMediaPipelineKinesisVideoStreamPoolResponse), output: &UpdateMediaPipelineKinesisVideoStreamPoolOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

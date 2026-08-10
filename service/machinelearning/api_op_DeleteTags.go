@@ -4,7 +4,9 @@ package machinelearning
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,22 @@ type DeleteTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTagsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceId != nil {
+		s.WriteString(schemas.DeleteTagsInput_ResourceId, *v.ResourceId)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.DeleteTagsInput_ResourceType, string(v.ResourceType))
+	}
+	serializeTagKeyList(s, schemas.DeleteTagsInput_TagKeys, v.TagKeys)
+}
+
 // Amazon ML returns the following elements.
 type DeleteTagsOutput struct {
 
@@ -62,13 +80,42 @@ type DeleteTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTagsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceId != nil {
+		s.WriteString(schemas.DeleteTagsOutput_ResourceId, *v.ResourceId)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.DeleteTagsOutput_ResourceType, string(v.ResourceType))
+	}
+}
+func (v *DeleteTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTagsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteTagsOutput_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.DeleteTagsOutput_ResourceId, v.ResourceId)
+		case schemas.DeleteTagsOutput_ResourceType:
+			var ev string
+			if err := d.ReadString(schemas.DeleteTagsOutput_ResourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = types.TaggableResourceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTags, schemas.DeleteTagsInput, schemas.DeleteTagsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTags, schemas.DeleteTagsInput, schemas.DeleteTagsOutput), output: &DeleteTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

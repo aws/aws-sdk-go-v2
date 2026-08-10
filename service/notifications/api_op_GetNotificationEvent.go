@@ -4,7 +4,9 @@ package notifications
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/notifications/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/notifications/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -49,6 +51,21 @@ type GetNotificationEventInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNotificationEventInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNotificationEventRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNotificationEventInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetNotificationEventRequest_arn, *v.Arn)
+	}
+	if v.Locale != "" {
+		s.WriteString(schemas.GetNotificationEventRequest_locale, string(v.Locale))
+	}
+}
+
 type GetNotificationEventOutput struct {
 
 	// The ARN of the resource.
@@ -77,13 +94,52 @@ type GetNotificationEventOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNotificationEventOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNotificationEventResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNotificationEventOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetNotificationEventResponse_arn, *v.Arn)
+	}
+	if v.Content != nil {
+		s.WriteStruct(schemas.GetNotificationEventResponse_content)
+		v.Content.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetNotificationEventResponse_creationTime, *v.CreationTime)
+	}
+	if v.NotificationConfigurationArn != nil {
+		s.WriteString(schemas.GetNotificationEventResponse_notificationConfigurationArn, *v.NotificationConfigurationArn)
+	}
+}
+func (v *GetNotificationEventOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetNotificationEventResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetNotificationEventResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetNotificationEventResponse_arn, v.Arn)
+		case schemas.GetNotificationEventResponse_content:
+			v.Content = &types.NotificationEventSchema{}
+			return v.Content.Deserialize(d)
+		case schemas.GetNotificationEventResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetNotificationEventResponse_creationTime, v.CreationTime)
+		case schemas.GetNotificationEventResponse_notificationConfigurationArn:
+			v.NotificationConfigurationArn = new(string)
+			return d.ReadString(schemas.GetNotificationEventResponse_notificationConfigurationArn, v.NotificationConfigurationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetNotificationEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetNotificationEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNotificationEvent, schemas.GetNotificationEventRequest, schemas.GetNotificationEventResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetNotificationEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNotificationEvent, schemas.GetNotificationEventRequest, schemas.GetNotificationEventResponse), output: &GetNotificationEventOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

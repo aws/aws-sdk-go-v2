@@ -4,7 +4,9 @@ package groundstation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DeleteConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigId != nil {
+		s.WriteString(schemas.DeleteConfigRequest_configId, *v.ConfigId)
+	}
+	if v.ConfigType != "" {
+		s.WriteString(schemas.DeleteConfigRequest_configType, string(v.ConfigType))
+	}
+}
+
 // Response containing the ARN, ID, and type of a Config .
 type DeleteConfigOutput struct {
 
@@ -58,13 +75,48 @@ type DeleteConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigIdResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigArn != nil {
+		s.WriteString(schemas.ConfigIdResponse_configArn, *v.ConfigArn)
+	}
+	if v.ConfigId != nil {
+		s.WriteString(schemas.ConfigIdResponse_configId, *v.ConfigId)
+	}
+	if v.ConfigType != "" {
+		s.WriteString(schemas.ConfigIdResponse_configType, string(v.ConfigType))
+	}
+}
+func (v *DeleteConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigIdResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigIdResponse_configArn:
+			v.ConfigArn = new(string)
+			return d.ReadString(schemas.ConfigIdResponse_configArn, v.ConfigArn)
+		case schemas.ConfigIdResponse_configId:
+			v.ConfigId = new(string)
+			return d.ReadString(schemas.ConfigIdResponse_configId, v.ConfigId)
+		case schemas.ConfigIdResponse_configType:
+			var ev string
+			if err := d.ReadString(schemas.ConfigIdResponse_configType, &ev); err != nil {
+				return err
+			}
+			v.ConfigType = types.ConfigCapabilityType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConfig, schemas.DeleteConfigRequest, schemas.ConfigIdResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConfig, schemas.DeleteConfigRequest, schemas.ConfigIdResponse), output: &DeleteConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

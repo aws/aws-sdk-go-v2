@@ -4,7 +4,9 @@ package fms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -84,6 +86,21 @@ type PutPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteStruct(schemas.PutPolicyRequest_Policy)
+		v.Policy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.PutPolicyRequest_TagList, v.TagList)
+}
+
 type PutPolicyOutput struct {
 
 	// The details of the Firewall Manager policy.
@@ -98,13 +115,40 @@ type PutPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteStruct(schemas.PutPolicyResponse_Policy)
+		v.Policy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.PutPolicyResponse_PolicyArn, *v.PolicyArn)
+	}
+}
+func (v *PutPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutPolicyResponse_Policy:
+			v.Policy = &types.Policy{}
+			return v.Policy.Deserialize(d)
+		case schemas.PutPolicyResponse_PolicyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.PutPolicyResponse_PolicyArn, v.PolicyArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutPolicy, schemas.PutPolicyRequest, schemas.PutPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutPolicy, schemas.PutPolicyRequest, schemas.PutPolicyResponse), output: &PutPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

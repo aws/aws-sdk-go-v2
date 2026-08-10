@@ -4,7 +4,9 @@ package textract
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,18 @@ type GetLendingAnalysisSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLendingAnalysisSummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLendingAnalysisSummaryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLendingAnalysisSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.GetLendingAnalysisSummaryRequest_JobId, *v.JobId)
+	}
+}
+
 type GetLendingAnalysisSummaryOutput struct {
 
 	// The current model version of the Analyze Lending API.
@@ -77,13 +91,67 @@ type GetLendingAnalysisSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLendingAnalysisSummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLendingAnalysisSummaryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLendingAnalysisSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyzeLendingModelVersion != nil {
+		s.WriteString(schemas.GetLendingAnalysisSummaryResponse_AnalyzeLendingModelVersion, *v.AnalyzeLendingModelVersion)
+	}
+	if v.DocumentMetadata != nil {
+		s.WriteStruct(schemas.GetLendingAnalysisSummaryResponse_DocumentMetadata)
+		v.DocumentMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.GetLendingAnalysisSummaryResponse_JobStatus, string(v.JobStatus))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetLendingAnalysisSummaryResponse_StatusMessage, *v.StatusMessage)
+	}
+	if v.Summary != nil {
+		s.WriteStruct(schemas.GetLendingAnalysisSummaryResponse_Summary)
+		v.Summary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeWarnings(s, schemas.GetLendingAnalysisSummaryResponse_Warnings, v.Warnings)
+}
+func (v *GetLendingAnalysisSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLendingAnalysisSummaryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLendingAnalysisSummaryResponse_AnalyzeLendingModelVersion:
+			v.AnalyzeLendingModelVersion = new(string)
+			return d.ReadString(schemas.GetLendingAnalysisSummaryResponse_AnalyzeLendingModelVersion, v.AnalyzeLendingModelVersion)
+		case schemas.GetLendingAnalysisSummaryResponse_DocumentMetadata:
+			v.DocumentMetadata = &types.DocumentMetadata{}
+			return v.DocumentMetadata.Deserialize(d)
+		case schemas.GetLendingAnalysisSummaryResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetLendingAnalysisSummaryResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		case schemas.GetLendingAnalysisSummaryResponse_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetLendingAnalysisSummaryResponse_StatusMessage, v.StatusMessage)
+		case schemas.GetLendingAnalysisSummaryResponse_Summary:
+			v.Summary = &types.LendingSummary{}
+			return v.Summary.Deserialize(d)
+		case schemas.GetLendingAnalysisSummaryResponse_Warnings:
+			return deserializeWarnings(d, schemas.GetLendingAnalysisSummaryResponse_Warnings, &v.Warnings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLendingAnalysisSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetLendingAnalysisSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLendingAnalysisSummary, schemas.GetLendingAnalysisSummaryRequest, schemas.GetLendingAnalysisSummaryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetLendingAnalysisSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLendingAnalysisSummary, schemas.GetLendingAnalysisSummaryRequest, schemas.GetLendingAnalysisSummaryResponse), output: &GetLendingAnalysisSummaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

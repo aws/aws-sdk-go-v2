@@ -4,7 +4,9 @@ package chime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type ListSupportedPhoneNumberCountriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSupportedPhoneNumberCountriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSupportedPhoneNumberCountriesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSupportedPhoneNumberCountriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProductType != "" {
+		s.WriteString(schemas.ListSupportedPhoneNumberCountriesRequest_ProductType, string(v.ProductType))
+	}
+}
+
 type ListSupportedPhoneNumberCountriesOutput struct {
 
 	// The supported phone number countries.
@@ -45,13 +59,29 @@ type ListSupportedPhoneNumberCountriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSupportedPhoneNumberCountriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSupportedPhoneNumberCountriesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSupportedPhoneNumberCountriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePhoneNumberCountriesList(s, schemas.ListSupportedPhoneNumberCountriesResponse_PhoneNumberCountries, v.PhoneNumberCountries)
+}
+func (v *ListSupportedPhoneNumberCountriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSupportedPhoneNumberCountriesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSupportedPhoneNumberCountriesResponse_PhoneNumberCountries:
+			return deserializePhoneNumberCountriesList(d, schemas.ListSupportedPhoneNumberCountriesResponse_PhoneNumberCountries, &v.PhoneNumberCountries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSupportedPhoneNumberCountriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSupportedPhoneNumberCountries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSupportedPhoneNumberCountries, schemas.ListSupportedPhoneNumberCountriesRequest, schemas.ListSupportedPhoneNumberCountriesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSupportedPhoneNumberCountries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSupportedPhoneNumberCountries, schemas.ListSupportedPhoneNumberCountriesRequest, schemas.ListSupportedPhoneNumberCountriesResponse), output: &ListSupportedPhoneNumberCountriesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

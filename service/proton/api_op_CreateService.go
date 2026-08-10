@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -92,6 +94,79 @@ type CreateServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServiceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServiceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BranchName != nil {
+		s.WriteString(schemas.CreateServiceInput_branchName, *v.BranchName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateServiceInput_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateServiceInput_name, *v.Name)
+	}
+	if v.RepositoryConnectionArn != nil {
+		s.WriteString(schemas.CreateServiceInput_repositoryConnectionArn, *v.RepositoryConnectionArn)
+	}
+	if v.RepositoryId != nil {
+		s.WriteString(schemas.CreateServiceInput_repositoryId, *v.RepositoryId)
+	}
+	if v.Spec != nil {
+		s.WriteString(schemas.CreateServiceInput_spec, *v.Spec)
+	}
+	serializeTagList(s, schemas.CreateServiceInput_tags, v.Tags)
+	if v.TemplateMajorVersion != nil {
+		s.WriteString(schemas.CreateServiceInput_templateMajorVersion, *v.TemplateMajorVersion)
+	}
+	if v.TemplateMinorVersion != nil {
+		s.WriteString(schemas.CreateServiceInput_templateMinorVersion, *v.TemplateMinorVersion)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.CreateServiceInput_templateName, *v.TemplateName)
+	}
+}
+func (v *CreateServiceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateServiceInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateServiceInput_branchName:
+			v.BranchName = new(string)
+			return d.ReadString(schemas.CreateServiceInput_branchName, v.BranchName)
+		case schemas.CreateServiceInput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateServiceInput_description, v.Description)
+		case schemas.CreateServiceInput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateServiceInput_name, v.Name)
+		case schemas.CreateServiceInput_repositoryConnectionArn:
+			v.RepositoryConnectionArn = new(string)
+			return d.ReadString(schemas.CreateServiceInput_repositoryConnectionArn, v.RepositoryConnectionArn)
+		case schemas.CreateServiceInput_repositoryId:
+			v.RepositoryId = new(string)
+			return d.ReadString(schemas.CreateServiceInput_repositoryId, v.RepositoryId)
+		case schemas.CreateServiceInput_spec:
+			v.Spec = new(string)
+			return d.ReadString(schemas.CreateServiceInput_spec, v.Spec)
+		case schemas.CreateServiceInput_tags:
+			return deserializeTagList(d, schemas.CreateServiceInput_tags, &v.Tags)
+		case schemas.CreateServiceInput_templateMajorVersion:
+			v.TemplateMajorVersion = new(string)
+			return d.ReadString(schemas.CreateServiceInput_templateMajorVersion, v.TemplateMajorVersion)
+		case schemas.CreateServiceInput_templateMinorVersion:
+			v.TemplateMinorVersion = new(string)
+			return d.ReadString(schemas.CreateServiceInput_templateMinorVersion, v.TemplateMinorVersion)
+		case schemas.CreateServiceInput_templateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.CreateServiceInput_templateName, v.TemplateName)
+		}
+		return nil
+	})
+}
+
 type CreateServiceOutput struct {
 
 	// The service detail data that's returned by Proton.
@@ -105,13 +180,34 @@ type CreateServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServiceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServiceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Service != nil {
+		s.WriteStruct(schemas.CreateServiceOutput_service)
+		v.Service.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateServiceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateServiceOutput_service:
+			v.Service = &types.Service{}
+			return v.Service.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateService{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateService, schemas.CreateServiceInput, schemas.CreateServiceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateService{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateService, schemas.CreateServiceInput, schemas.CreateServiceOutput), output: &CreateServiceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

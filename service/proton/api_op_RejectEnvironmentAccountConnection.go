@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,28 @@ type RejectEnvironmentAccountConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RejectEnvironmentAccountConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectEnvironmentAccountConnectionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectEnvironmentAccountConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.RejectEnvironmentAccountConnectionInput_id, *v.Id)
+	}
+}
+func (v *RejectEnvironmentAccountConnectionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RejectEnvironmentAccountConnectionInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RejectEnvironmentAccountConnectionInput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RejectEnvironmentAccountConnectionInput_id, v.Id)
+		}
+		return nil
+	})
+}
+
 type RejectEnvironmentAccountConnectionOutput struct {
 
 	// The environment connection account detail data that's returned by Proton.
@@ -60,13 +84,34 @@ type RejectEnvironmentAccountConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RejectEnvironmentAccountConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectEnvironmentAccountConnectionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectEnvironmentAccountConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentAccountConnection != nil {
+		s.WriteStruct(schemas.RejectEnvironmentAccountConnectionOutput_environmentAccountConnection)
+		v.EnvironmentAccountConnection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RejectEnvironmentAccountConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RejectEnvironmentAccountConnectionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RejectEnvironmentAccountConnectionOutput_environmentAccountConnection:
+			v.EnvironmentAccountConnection = &types.EnvironmentAccountConnection{}
+			return v.EnvironmentAccountConnection.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRejectEnvironmentAccountConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRejectEnvironmentAccountConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectEnvironmentAccountConnection, schemas.RejectEnvironmentAccountConnectionInput, schemas.RejectEnvironmentAccountConnectionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRejectEnvironmentAccountConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectEnvironmentAccountConnection, schemas.RejectEnvironmentAccountConnectionInput, schemas.RejectEnvironmentAccountConnectionOutput), output: &RejectEnvironmentAccountConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package connectcases
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type ListCaseRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCaseRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCaseRulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCaseRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.ListCaseRulesRequest_domainId, *v.DomainId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCaseRulesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCaseRulesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListCaseRulesOutput struct {
 
 	// A list of field summary objects.
@@ -63,13 +83,35 @@ type ListCaseRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCaseRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCaseRulesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCaseRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCaseRuleSummaryList(s, schemas.ListCaseRulesResponse_caseRules, v.CaseRules)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCaseRulesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCaseRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCaseRulesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCaseRulesResponse_caseRules:
+			return deserializeCaseRuleSummaryList(d, schemas.ListCaseRulesResponse_caseRules, &v.CaseRules)
+		case schemas.ListCaseRulesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCaseRulesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCaseRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCaseRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCaseRules, schemas.ListCaseRulesRequest, schemas.ListCaseRulesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCaseRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCaseRules, schemas.ListCaseRulesRequest, schemas.ListCaseRulesResponse), output: &ListCaseRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

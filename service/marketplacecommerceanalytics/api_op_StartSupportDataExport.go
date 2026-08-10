@@ -4,7 +4,9 @@ package marketplacecommerceanalytics
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -103,6 +105,34 @@ type StartSupportDataExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSupportDataExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSupportDataExportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSupportDataExportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomerDefinedValues(s, schemas.StartSupportDataExportRequest_customerDefinedValues, v.CustomerDefinedValues)
+	if v.DataSetType != "" {
+		s.WriteString(schemas.StartSupportDataExportRequest_dataSetType, string(v.DataSetType))
+	}
+	if v.DestinationS3BucketName != nil {
+		s.WriteString(schemas.StartSupportDataExportRequest_destinationS3BucketName, *v.DestinationS3BucketName)
+	}
+	if v.DestinationS3Prefix != nil {
+		s.WriteString(schemas.StartSupportDataExportRequest_destinationS3Prefix, *v.DestinationS3Prefix)
+	}
+	if v.FromDate != nil {
+		s.WriteTime(schemas.StartSupportDataExportRequest_fromDate, *v.FromDate)
+	}
+	if v.RoleNameArn != nil {
+		s.WriteString(schemas.StartSupportDataExportRequest_roleNameArn, *v.RoleNameArn)
+	}
+	if v.SnsTopicArn != nil {
+		s.WriteString(schemas.StartSupportDataExportRequest_snsTopicArn, *v.SnsTopicArn)
+	}
+}
+
 // This target has been deprecated. Container for the result of the
 // StartSupportDataExport operation.
 type StartSupportDataExportOutput struct {
@@ -118,13 +148,32 @@ type StartSupportDataExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSupportDataExportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSupportDataExportResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSupportDataExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSetRequestId != nil {
+		s.WriteString(schemas.StartSupportDataExportResult_dataSetRequestId, *v.DataSetRequestId)
+	}
+}
+func (v *StartSupportDataExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSupportDataExportResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartSupportDataExportResult_dataSetRequestId:
+			v.DataSetRequestId = new(string)
+			return d.ReadString(schemas.StartSupportDataExportResult_dataSetRequestId, v.DataSetRequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartSupportDataExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartSupportDataExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSupportDataExport, schemas.StartSupportDataExportRequest, schemas.StartSupportDataExportResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartSupportDataExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSupportDataExport, schemas.StartSupportDataExportRequest, schemas.StartSupportDataExportResult), output: &StartSupportDataExportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

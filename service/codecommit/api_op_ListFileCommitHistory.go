@@ -5,7 +5,9 @@ package codecommit
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,30 @@ type ListFileCommitHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFileCommitHistoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFileCommitHistoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFileCommitHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommitSpecifier != nil {
+		s.WriteString(schemas.ListFileCommitHistoryRequest_commitSpecifier, *v.CommitSpecifier)
+	}
+	if v.FilePath != nil {
+		s.WriteString(schemas.ListFileCommitHistoryRequest_filePath, *v.FilePath)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFileCommitHistoryRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFileCommitHistoryRequest_nextToken, *v.NextToken)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.ListFileCommitHistoryRequest_repositoryName, *v.RepositoryName)
+	}
+}
+
 type ListFileCommitHistoryOutput struct {
 
 	// An array of FileVersion objects that form a directed acyclic graph (DAG) of the
@@ -69,13 +95,35 @@ type ListFileCommitHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFileCommitHistoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFileCommitHistoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFileCommitHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFileCommitHistoryResponse_nextToken, *v.NextToken)
+	}
+	serializeRevisionDag(s, schemas.ListFileCommitHistoryResponse_revisionDag, v.RevisionDag)
+}
+func (v *ListFileCommitHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFileCommitHistoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFileCommitHistoryResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFileCommitHistoryResponse_nextToken, v.NextToken)
+		case schemas.ListFileCommitHistoryResponse_revisionDag:
+			return deserializeRevisionDag(d, schemas.ListFileCommitHistoryResponse_revisionDag, &v.RevisionDag)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFileCommitHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListFileCommitHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFileCommitHistory, schemas.ListFileCommitHistoryRequest, schemas.ListFileCommitHistoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListFileCommitHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFileCommitHistory, schemas.ListFileCommitHistoryRequest, schemas.ListFileCommitHistoryResponse), output: &ListFileCommitHistoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

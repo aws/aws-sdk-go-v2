@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,28 @@ type AcceptEnvironmentAccountConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptEnvironmentAccountConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptEnvironmentAccountConnectionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptEnvironmentAccountConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.AcceptEnvironmentAccountConnectionInput_id, *v.Id)
+	}
+}
+func (v *AcceptEnvironmentAccountConnectionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcceptEnvironmentAccountConnectionInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcceptEnvironmentAccountConnectionInput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AcceptEnvironmentAccountConnectionInput_id, v.Id)
+		}
+		return nil
+	})
+}
+
 type AcceptEnvironmentAccountConnectionOutput struct {
 
 	// The environment account connection data that's returned by Proton.
@@ -56,13 +80,34 @@ type AcceptEnvironmentAccountConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptEnvironmentAccountConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptEnvironmentAccountConnectionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptEnvironmentAccountConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentAccountConnection != nil {
+		s.WriteStruct(schemas.AcceptEnvironmentAccountConnectionOutput_environmentAccountConnection)
+		v.EnvironmentAccountConnection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AcceptEnvironmentAccountConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcceptEnvironmentAccountConnectionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcceptEnvironmentAccountConnectionOutput_environmentAccountConnection:
+			v.EnvironmentAccountConnection = &types.EnvironmentAccountConnection{}
+			return v.EnvironmentAccountConnection.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAcceptEnvironmentAccountConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAcceptEnvironmentAccountConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptEnvironmentAccountConnection, schemas.AcceptEnvironmentAccountConnectionInput, schemas.AcceptEnvironmentAccountConnectionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpAcceptEnvironmentAccountConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptEnvironmentAccountConnection, schemas.AcceptEnvironmentAccountConnectionInput, schemas.AcceptEnvironmentAccountConnectionOutput), output: &AcceptEnvironmentAccountConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

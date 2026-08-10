@@ -4,6 +4,8 @@ package mgn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,28 @@ type DeleteVcenterClientInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVcenterClientInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVcenterClientRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVcenterClientInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VcenterClientID != nil {
+		s.WriteString(schemas.DeleteVcenterClientRequest_vcenterClientID, *v.VcenterClientID)
+	}
+}
+func (v *DeleteVcenterClientInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVcenterClientRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteVcenterClientRequest_vcenterClientID:
+			v.VcenterClientID = new(string)
+			return d.ReadString(schemas.DeleteVcenterClientRequest_vcenterClientID, v.VcenterClientID)
+		}
+		return nil
+	})
+}
+
 type DeleteVcenterClientOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +64,26 @@ type DeleteVcenterClientOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVcenterClientOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVcenterClientOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteVcenterClientOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVcenterClientMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVcenterClient{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVcenterClient, schemas.DeleteVcenterClientRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteVcenterClient{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVcenterClient, schemas.DeleteVcenterClientRequest, nil), output: &DeleteVcenterClientOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

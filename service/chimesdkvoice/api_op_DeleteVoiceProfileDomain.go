@@ -4,6 +4,8 @@ package chimesdkvoice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteVoiceProfileDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVoiceProfileDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVoiceProfileDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVoiceProfileDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VoiceProfileDomainId != nil {
+		s.WriteString(schemas.DeleteVoiceProfileDomainRequest_VoiceProfileDomainId, *v.VoiceProfileDomainId)
+	}
+}
+
 type DeleteVoiceProfileDomainOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteVoiceProfileDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVoiceProfileDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVoiceProfileDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteVoiceProfileDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVoiceProfileDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVoiceProfileDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVoiceProfileDomain, schemas.DeleteVoiceProfileDomainRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteVoiceProfileDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVoiceProfileDomain, schemas.DeleteVoiceProfileDomainRequest, nil), output: &DeleteVoiceProfileDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

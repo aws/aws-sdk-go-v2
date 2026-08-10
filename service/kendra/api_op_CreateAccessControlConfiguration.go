@@ -5,7 +5,9 @@ package kendra
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -89,6 +91,29 @@ type CreateAccessControlConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAccessControlConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAccessControlConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAccessControlConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePrincipalList(s, schemas.CreateAccessControlConfigurationRequest_AccessControlList, v.AccessControlList)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAccessControlConfigurationRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateAccessControlConfigurationRequest_Description, *v.Description)
+	}
+	serializeHierarchicalPrincipalList(s, schemas.CreateAccessControlConfigurationRequest_HierarchicalAccessControlList, v.HierarchicalAccessControlList)
+	if v.IndexId != nil {
+		s.WriteString(schemas.CreateAccessControlConfigurationRequest_IndexId, *v.IndexId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAccessControlConfigurationRequest_Name, *v.Name)
+	}
+}
+
 type CreateAccessControlConfigurationOutput struct {
 
 	// The identifier of the access control configuration for your documents in an
@@ -103,13 +128,32 @@ type CreateAccessControlConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAccessControlConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAccessControlConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAccessControlConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.CreateAccessControlConfigurationResponse_Id, *v.Id)
+	}
+}
+func (v *CreateAccessControlConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAccessControlConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAccessControlConfigurationResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateAccessControlConfigurationResponse_Id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAccessControlConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAccessControlConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccessControlConfiguration, schemas.CreateAccessControlConfigurationRequest, schemas.CreateAccessControlConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAccessControlConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccessControlConfiguration, schemas.CreateAccessControlConfigurationRequest, schemas.CreateAccessControlConfigurationResponse), output: &CreateAccessControlConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

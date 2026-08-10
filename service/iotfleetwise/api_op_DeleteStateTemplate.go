@@ -4,6 +4,8 @@ package iotfleetwise
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteStateTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteStateTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteStateTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteStateTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.DeleteStateTemplateRequest_identifier, *v.Identifier)
+	}
+}
+
 type DeleteStateTemplateOutput struct {
 
 	// The Amazon Resource Name (ARN) of the state template.
@@ -50,13 +64,44 @@ type DeleteStateTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteStateTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteStateTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteStateTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteStateTemplateResponse_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteStateTemplateResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteStateTemplateResponse_name, *v.Name)
+	}
+}
+func (v *DeleteStateTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteStateTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteStateTemplateResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteStateTemplateResponse_arn, v.Arn)
+		case schemas.DeleteStateTemplateResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteStateTemplateResponse_id, v.Id)
+		case schemas.DeleteStateTemplateResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteStateTemplateResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteStateTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteStateTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteStateTemplate, schemas.DeleteStateTemplateRequest, schemas.DeleteStateTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteStateTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteStateTemplate, schemas.DeleteStateTemplateRequest, schemas.DeleteStateTemplateResponse), output: &DeleteStateTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

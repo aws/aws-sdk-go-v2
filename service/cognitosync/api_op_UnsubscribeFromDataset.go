@@ -4,6 +4,8 @@ package cognitosync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitosync/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,27 @@ type UnsubscribeFromDatasetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnsubscribeFromDatasetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnsubscribeFromDatasetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsubscribeFromDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetName != nil {
+		s.WriteString(schemas.UnsubscribeFromDatasetRequest_DatasetName, *v.DatasetName)
+	}
+	if v.DeviceId != nil {
+		s.WriteString(schemas.UnsubscribeFromDatasetRequest_DeviceId, *v.DeviceId)
+	}
+	if v.IdentityId != nil {
+		s.WriteString(schemas.UnsubscribeFromDatasetRequest_IdentityId, *v.IdentityId)
+	}
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.UnsubscribeFromDatasetRequest_IdentityPoolId, *v.IdentityPoolId)
+	}
+}
+
 // Response to an UnsubscribeFromDataset request.
 type UnsubscribeFromDatasetOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -82,13 +105,26 @@ type UnsubscribeFromDatasetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnsubscribeFromDatasetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnsubscribeFromDatasetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsubscribeFromDatasetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UnsubscribeFromDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnsubscribeFromDatasetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUnsubscribeFromDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUnsubscribeFromDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UnsubscribeFromDataset, schemas.UnsubscribeFromDatasetRequest, schemas.UnsubscribeFromDatasetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUnsubscribeFromDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UnsubscribeFromDataset, schemas.UnsubscribeFromDatasetRequest, schemas.UnsubscribeFromDatasetResponse), output: &UnsubscribeFromDatasetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

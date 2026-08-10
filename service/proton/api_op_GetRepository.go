@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,38 @@ type GetRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRepositoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRepositoryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRepositoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetRepositoryInput_name, *v.Name)
+	}
+	if v.Provider != "" {
+		s.WriteString(schemas.GetRepositoryInput_provider, string(v.Provider))
+	}
+}
+func (v *GetRepositoryInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRepositoryInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRepositoryInput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetRepositoryInput_name, v.Name)
+		case schemas.GetRepositoryInput_provider:
+			var ev string
+			if err := d.ReadString(schemas.GetRepositoryInput_provider, &ev); err != nil {
+				return err
+			}
+			v.Provider = types.RepositoryProvider(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type GetRepositoryOutput struct {
 
 	// The repository link's detail data that's returned by Proton.
@@ -54,13 +88,34 @@ type GetRepositoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRepositoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRepositoryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRepositoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Repository != nil {
+		s.WriteStruct(schemas.GetRepositoryOutput_repository)
+		v.Repository.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetRepositoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRepositoryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRepositoryOutput_repository:
+			v.Repository = &types.Repository{}
+			return v.Repository.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetRepository{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRepository, schemas.GetRepositoryInput, schemas.GetRepositoryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetRepository{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRepository, schemas.GetRepositoryInput, schemas.GetRepositoryOutput), output: &GetRepositoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

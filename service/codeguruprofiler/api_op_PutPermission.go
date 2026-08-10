@@ -4,7 +4,9 @@ package codeguruprofiler
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,47 @@ type PutPermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutPermissionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutPermissionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutPermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionGroup != "" {
+		s.WriteString(schemas.PutPermissionRequest_actionGroup, string(v.ActionGroup))
+	}
+	serializePrincipals(s, schemas.PutPermissionRequest_principals, v.Principals)
+	if v.ProfilingGroupName != nil {
+		s.WriteString(schemas.PutPermissionRequest_profilingGroupName, *v.ProfilingGroupName)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.PutPermissionRequest_revisionId, *v.RevisionId)
+	}
+}
+func (v *PutPermissionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutPermissionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutPermissionRequest_actionGroup:
+			var ev string
+			if err := d.ReadString(schemas.PutPermissionRequest_actionGroup, &ev); err != nil {
+				return err
+			}
+			v.ActionGroup = types.ActionGroup(ev)
+			return nil
+		case schemas.PutPermissionRequest_principals:
+			return deserializePrincipals(d, schemas.PutPermissionRequest_principals, &v.Principals)
+		case schemas.PutPermissionRequest_profilingGroupName:
+			v.ProfilingGroupName = new(string)
+			return d.ReadString(schemas.PutPermissionRequest_profilingGroupName, v.ProfilingGroupName)
+		case schemas.PutPermissionRequest_revisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.PutPermissionRequest_revisionId, v.RevisionId)
+		}
+		return nil
+	})
+}
+
 // The structure representing the putPermissionResponse .
 type PutPermissionOutput struct {
 
@@ -96,13 +139,38 @@ type PutPermissionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutPermissionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutPermissionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutPermissionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteString(schemas.PutPermissionResponse_policy, *v.Policy)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.PutPermissionResponse_revisionId, *v.RevisionId)
+	}
+}
+func (v *PutPermissionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutPermissionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutPermissionResponse_policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.PutPermissionResponse_policy, v.Policy)
+		case schemas.PutPermissionResponse_revisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.PutPermissionResponse_revisionId, v.RevisionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutPermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutPermission, schemas.PutPermissionRequest, schemas.PutPermissionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutPermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutPermission, schemas.PutPermissionRequest, schemas.PutPermissionResponse), output: &PutPermissionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

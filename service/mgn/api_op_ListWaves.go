@@ -5,7 +5,9 @@ package mgn
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,48 @@ type ListWavesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWavesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWavesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWavesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountID != nil {
+		s.WriteString(schemas.ListWavesRequest_accountID, *v.AccountID)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListWavesRequest_filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWavesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWavesRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListWavesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWavesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWavesRequest_accountID:
+			v.AccountID = new(string)
+			return d.ReadString(schemas.ListWavesRequest_accountID, v.AccountID)
+		case schemas.ListWavesRequest_filters:
+			v.Filters = &types.ListWavesRequestFilters{}
+			return v.Filters.Deserialize(d)
+		case schemas.ListWavesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListWavesRequest_maxResults, v.MaxResults)
+		case schemas.ListWavesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWavesRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListWavesOutput struct {
 
 	// Waves list.
@@ -56,13 +100,35 @@ type ListWavesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWavesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWavesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWavesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWavesList(s, schemas.ListWavesResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWavesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListWavesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWavesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWavesResponse_items:
+			return deserializeWavesList(d, schemas.ListWavesResponse_items, &v.Items)
+		case schemas.ListWavesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWavesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWavesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWaves{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWaves, schemas.ListWavesRequest, schemas.ListWavesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWaves{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWaves, schemas.ListWavesRequest, schemas.ListWavesResponse), output: &ListWavesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

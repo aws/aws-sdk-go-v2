@@ -4,7 +4,9 @@ package codeguruprofiler
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,28 @@ type GetNotificationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNotificationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNotificationConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNotificationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProfilingGroupName != nil {
+		s.WriteString(schemas.GetNotificationConfigurationRequest_profilingGroupName, *v.ProfilingGroupName)
+	}
+}
+func (v *GetNotificationConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetNotificationConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetNotificationConfigurationRequest_profilingGroupName:
+			v.ProfilingGroupName = new(string)
+			return d.ReadString(schemas.GetNotificationConfigurationRequest_profilingGroupName, v.ProfilingGroupName)
+		}
+		return nil
+	})
+}
+
 // The structure representing the GetNotificationConfigurationResponse.
 type GetNotificationConfigurationOutput struct {
 
@@ -50,13 +74,34 @@ type GetNotificationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNotificationConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNotificationConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNotificationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotificationConfiguration != nil {
+		s.WriteStruct(schemas.GetNotificationConfigurationResponse_notificationConfiguration)
+		v.NotificationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetNotificationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetNotificationConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetNotificationConfigurationResponse_notificationConfiguration:
+			v.NotificationConfiguration = &types.NotificationConfiguration{}
+			return v.NotificationConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetNotificationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetNotificationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNotificationConfiguration, schemas.GetNotificationConfigurationRequest, schemas.GetNotificationConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetNotificationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNotificationConfiguration, schemas.GetNotificationConfigurationRequest, schemas.GetNotificationConfigurationResponse), output: &GetNotificationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

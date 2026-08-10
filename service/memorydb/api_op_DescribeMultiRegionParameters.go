@@ -4,7 +4,9 @@ package memorydb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/memorydb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/memorydb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,27 @@ type DescribeMultiRegionParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMultiRegionParametersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMultiRegionParametersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMultiRegionParametersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeMultiRegionParametersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MultiRegionParameterGroupName != nil {
+		s.WriteString(schemas.DescribeMultiRegionParametersRequest_MultiRegionParameterGroupName, *v.MultiRegionParameterGroupName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeMultiRegionParametersRequest_NextToken, *v.NextToken)
+	}
+	if v.Source != nil {
+		s.WriteString(schemas.DescribeMultiRegionParametersRequest_Source, *v.Source)
+	}
+}
+
 type DescribeMultiRegionParametersOutput struct {
 
 	// A list of parameters specific to a particular multi-region parameter group.
@@ -65,13 +88,35 @@ type DescribeMultiRegionParametersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMultiRegionParametersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMultiRegionParametersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMultiRegionParametersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMultiRegionParametersList(s, schemas.DescribeMultiRegionParametersResponse_MultiRegionParameters, v.MultiRegionParameters)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeMultiRegionParametersResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeMultiRegionParametersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMultiRegionParametersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMultiRegionParametersResponse_MultiRegionParameters:
+			return deserializeMultiRegionParametersList(d, schemas.DescribeMultiRegionParametersResponse_MultiRegionParameters, &v.MultiRegionParameters)
+		case schemas.DescribeMultiRegionParametersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeMultiRegionParametersResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMultiRegionParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeMultiRegionParameters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMultiRegionParameters, schemas.DescribeMultiRegionParametersRequest, schemas.DescribeMultiRegionParametersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeMultiRegionParameters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMultiRegionParameters, schemas.DescribeMultiRegionParametersRequest, schemas.DescribeMultiRegionParametersResponse), output: &DescribeMultiRegionParametersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

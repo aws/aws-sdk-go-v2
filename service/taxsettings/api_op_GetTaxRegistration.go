@@ -4,7 +4,9 @@ package taxsettings
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/taxsettings/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/taxsettings/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type GetTaxRegistrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTaxRegistrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTaxRegistrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTaxRegistrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetTaxRegistrationRequest_accountId, *v.AccountId)
+	}
+}
+
 type GetTaxRegistrationOutput struct {
 
 	// TRN information of the account mentioned in the request.
@@ -43,13 +57,34 @@ type GetTaxRegistrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTaxRegistrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTaxRegistrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTaxRegistrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaxRegistration != nil {
+		s.WriteStruct(schemas.GetTaxRegistrationResponse_taxRegistration)
+		v.TaxRegistration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTaxRegistrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTaxRegistrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTaxRegistrationResponse_taxRegistration:
+			v.TaxRegistration = &types.TaxRegistration{}
+			return v.TaxRegistration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTaxRegistrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTaxRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTaxRegistration, schemas.GetTaxRegistrationRequest, schemas.GetTaxRegistrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTaxRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTaxRegistration, schemas.GetTaxRegistrationRequest, schemas.GetTaxRegistrationResponse), output: &GetTaxRegistrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

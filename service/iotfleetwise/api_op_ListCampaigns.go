@@ -5,7 +5,9 @@ package iotfleetwise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,50 @@ type ListCampaignsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCampaignsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCampaignsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCampaignsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ListResponseScope != "" {
+		s.WriteString(schemas.ListCampaignsRequest_listResponseScope, string(v.ListResponseScope))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCampaignsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCampaignsRequest_nextToken, *v.NextToken)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.ListCampaignsRequest_status, *v.Status)
+	}
+}
+func (v *ListCampaignsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCampaignsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCampaignsRequest_listResponseScope:
+			var ev string
+			if err := d.ReadString(schemas.ListCampaignsRequest_listResponseScope, &ev); err != nil {
+				return err
+			}
+			v.ListResponseScope = types.ListResponseScope(ev)
+			return nil
+		case schemas.ListCampaignsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListCampaignsRequest_maxResults, v.MaxResults)
+		case schemas.ListCampaignsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCampaignsRequest_nextToken, v.NextToken)
+		case schemas.ListCampaignsRequest_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.ListCampaignsRequest_status, v.Status)
+		}
+		return nil
+	})
+}
+
 type ListCampaignsOutput struct {
 
 	//  A summary of information about each campaign.
@@ -70,13 +116,35 @@ type ListCampaignsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCampaignsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCampaignsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCampaignsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializecampaignSummaries(s, schemas.ListCampaignsResponse_campaignSummaries, v.CampaignSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCampaignsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCampaignsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCampaignsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCampaignsResponse_campaignSummaries:
+			return deserializecampaignSummaries(d, schemas.ListCampaignsResponse_campaignSummaries, &v.CampaignSummaries)
+		case schemas.ListCampaignsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCampaignsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCampaignsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListCampaigns{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCampaigns, schemas.ListCampaignsRequest, schemas.ListCampaignsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListCampaigns{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCampaigns, schemas.ListCampaignsRequest, schemas.ListCampaignsResponse), output: &ListCampaignsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

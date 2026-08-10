@@ -4,7 +4,9 @@ package notifications
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/notifications/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/notifications/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,22 @@ type UpdateEventRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEventRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEventRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEventRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateEventRuleRequest_arn, *v.Arn)
+	}
+	if v.EventPattern != nil {
+		s.WriteString(schemas.UpdateEventRuleRequest_eventPattern, *v.EventPattern)
+	}
+	serializeRegions(s, schemas.UpdateEventRuleRequest_regions, v.Regions)
+}
+
 type UpdateEventRuleOutput struct {
 
 	// The Amazon Resource Name (ARN) to use to update the EventRule .
@@ -68,13 +86,41 @@ type UpdateEventRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEventRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEventRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEventRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateEventRuleResponse_arn, *v.Arn)
+	}
+	if v.NotificationConfigurationArn != nil {
+		s.WriteString(schemas.UpdateEventRuleResponse_notificationConfigurationArn, *v.NotificationConfigurationArn)
+	}
+	serializeStatusSummaryByRegion(s, schemas.UpdateEventRuleResponse_statusSummaryByRegion, v.StatusSummaryByRegion)
+}
+func (v *UpdateEventRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEventRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEventRuleResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateEventRuleResponse_arn, v.Arn)
+		case schemas.UpdateEventRuleResponse_notificationConfigurationArn:
+			v.NotificationConfigurationArn = new(string)
+			return d.ReadString(schemas.UpdateEventRuleResponse_notificationConfigurationArn, v.NotificationConfigurationArn)
+		case schemas.UpdateEventRuleResponse_statusSummaryByRegion:
+			return deserializeStatusSummaryByRegion(d, schemas.UpdateEventRuleResponse_statusSummaryByRegion, &v.StatusSummaryByRegion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEventRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateEventRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEventRule, schemas.UpdateEventRuleRequest, schemas.UpdateEventRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateEventRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEventRule, schemas.UpdateEventRuleRequest, schemas.UpdateEventRuleResponse), output: &UpdateEventRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

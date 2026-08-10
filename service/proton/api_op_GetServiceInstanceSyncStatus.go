@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,34 @@ type GetServiceInstanceSyncStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceInstanceSyncStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceInstanceSyncStatusInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceInstanceSyncStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceInstanceName != nil {
+		s.WriteString(schemas.GetServiceInstanceSyncStatusInput_serviceInstanceName, *v.ServiceInstanceName)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.GetServiceInstanceSyncStatusInput_serviceName, *v.ServiceName)
+	}
+}
+func (v *GetServiceInstanceSyncStatusInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceInstanceSyncStatusInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceInstanceSyncStatusInput_serviceInstanceName:
+			v.ServiceInstanceName = new(string)
+			return d.ReadString(schemas.GetServiceInstanceSyncStatusInput_serviceInstanceName, v.ServiceInstanceName)
+		case schemas.GetServiceInstanceSyncStatusInput_serviceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.GetServiceInstanceSyncStatusInput_serviceName, v.ServiceName)
+		}
+		return nil
+	})
+}
+
 type GetServiceInstanceSyncStatusOutput struct {
 
 	// The service instance sync desired state that's returned by Proton
@@ -58,13 +88,50 @@ type GetServiceInstanceSyncStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceInstanceSyncStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceInstanceSyncStatusOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceInstanceSyncStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DesiredState != nil {
+		s.WriteStruct(schemas.GetServiceInstanceSyncStatusOutput_desiredState)
+		v.DesiredState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LatestSuccessfulSync != nil {
+		s.WriteStruct(schemas.GetServiceInstanceSyncStatusOutput_latestSuccessfulSync)
+		v.LatestSuccessfulSync.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LatestSync != nil {
+		s.WriteStruct(schemas.GetServiceInstanceSyncStatusOutput_latestSync)
+		v.LatestSync.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetServiceInstanceSyncStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceInstanceSyncStatusOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceInstanceSyncStatusOutput_desiredState:
+			v.DesiredState = &types.Revision{}
+			return v.DesiredState.Deserialize(d)
+		case schemas.GetServiceInstanceSyncStatusOutput_latestSuccessfulSync:
+			v.LatestSuccessfulSync = &types.ResourceSyncAttempt{}
+			return v.LatestSuccessfulSync.Deserialize(d)
+		case schemas.GetServiceInstanceSyncStatusOutput_latestSync:
+			v.LatestSync = &types.ResourceSyncAttempt{}
+			return v.LatestSync.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetServiceInstanceSyncStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetServiceInstanceSyncStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceInstanceSyncStatus, schemas.GetServiceInstanceSyncStatusInput, schemas.GetServiceInstanceSyncStatusOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetServiceInstanceSyncStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceInstanceSyncStatus, schemas.GetServiceInstanceSyncStatusInput, schemas.GetServiceInstanceSyncStatusOutput), output: &GetServiceInstanceSyncStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

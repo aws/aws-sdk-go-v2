@@ -4,7 +4,9 @@ package machinelearning
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -35,6 +37,18 @@ type GetEvaluationInput struct {
 	EvaluationId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetEvaluationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEvaluationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEvaluationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationId != nil {
+		s.WriteString(schemas.GetEvaluationInput_EvaluationId, *v.EvaluationId)
+	}
 }
 
 // Represents the output of a GetEvaluation operation and describes an Evaluation .
@@ -128,13 +142,122 @@ type GetEvaluationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEvaluationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEvaluationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEvaluationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeTime != nil {
+		s.WriteInt64(schemas.GetEvaluationOutput_ComputeTime, *v.ComputeTime)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetEvaluationOutput_CreatedAt, *v.CreatedAt)
+	}
+	if v.CreatedByIamUser != nil {
+		s.WriteString(schemas.GetEvaluationOutput_CreatedByIamUser, *v.CreatedByIamUser)
+	}
+	if v.EvaluationDataSourceId != nil {
+		s.WriteString(schemas.GetEvaluationOutput_EvaluationDataSourceId, *v.EvaluationDataSourceId)
+	}
+	if v.EvaluationId != nil {
+		s.WriteString(schemas.GetEvaluationOutput_EvaluationId, *v.EvaluationId)
+	}
+	if v.FinishedAt != nil {
+		s.WriteTime(schemas.GetEvaluationOutput_FinishedAt, *v.FinishedAt)
+	}
+	if v.InputDataLocationS3 != nil {
+		s.WriteString(schemas.GetEvaluationOutput_InputDataLocationS3, *v.InputDataLocationS3)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetEvaluationOutput_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.LogUri != nil {
+		s.WriteString(schemas.GetEvaluationOutput_LogUri, *v.LogUri)
+	}
+	if v.MLModelId != nil {
+		s.WriteString(schemas.GetEvaluationOutput_MLModelId, *v.MLModelId)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.GetEvaluationOutput_Message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetEvaluationOutput_Name, *v.Name)
+	}
+	if v.PerformanceMetrics != nil {
+		s.WriteStruct(schemas.GetEvaluationOutput_PerformanceMetrics)
+		v.PerformanceMetrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.GetEvaluationOutput_StartedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetEvaluationOutput_Status, string(v.Status))
+	}
+}
+func (v *GetEvaluationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEvaluationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEvaluationOutput_ComputeTime:
+			v.ComputeTime = new(int64)
+			return d.ReadInt64(schemas.GetEvaluationOutput_ComputeTime, v.ComputeTime)
+		case schemas.GetEvaluationOutput_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetEvaluationOutput_CreatedAt, v.CreatedAt)
+		case schemas.GetEvaluationOutput_CreatedByIamUser:
+			v.CreatedByIamUser = new(string)
+			return d.ReadString(schemas.GetEvaluationOutput_CreatedByIamUser, v.CreatedByIamUser)
+		case schemas.GetEvaluationOutput_EvaluationDataSourceId:
+			v.EvaluationDataSourceId = new(string)
+			return d.ReadString(schemas.GetEvaluationOutput_EvaluationDataSourceId, v.EvaluationDataSourceId)
+		case schemas.GetEvaluationOutput_EvaluationId:
+			v.EvaluationId = new(string)
+			return d.ReadString(schemas.GetEvaluationOutput_EvaluationId, v.EvaluationId)
+		case schemas.GetEvaluationOutput_FinishedAt:
+			v.FinishedAt = new(time.Time)
+			return d.ReadTime(schemas.GetEvaluationOutput_FinishedAt, v.FinishedAt)
+		case schemas.GetEvaluationOutput_InputDataLocationS3:
+			v.InputDataLocationS3 = new(string)
+			return d.ReadString(schemas.GetEvaluationOutput_InputDataLocationS3, v.InputDataLocationS3)
+		case schemas.GetEvaluationOutput_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetEvaluationOutput_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetEvaluationOutput_LogUri:
+			v.LogUri = new(string)
+			return d.ReadString(schemas.GetEvaluationOutput_LogUri, v.LogUri)
+		case schemas.GetEvaluationOutput_MLModelId:
+			v.MLModelId = new(string)
+			return d.ReadString(schemas.GetEvaluationOutput_MLModelId, v.MLModelId)
+		case schemas.GetEvaluationOutput_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.GetEvaluationOutput_Message, v.Message)
+		case schemas.GetEvaluationOutput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetEvaluationOutput_Name, v.Name)
+		case schemas.GetEvaluationOutput_PerformanceMetrics:
+			v.PerformanceMetrics = &types.PerformanceMetrics{}
+			return v.PerformanceMetrics.Deserialize(d)
+		case schemas.GetEvaluationOutput_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.GetEvaluationOutput_StartedAt, v.StartedAt)
+		case schemas.GetEvaluationOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetEvaluationOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.EntityStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEvaluation, schemas.GetEvaluationInput, schemas.GetEvaluationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEvaluation, schemas.GetEvaluationInput, schemas.GetEvaluationOutput), output: &GetEvaluationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

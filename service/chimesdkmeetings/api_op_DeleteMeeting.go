@@ -4,6 +4,8 @@ package chimesdkmeetings
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DeleteMeetingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMeetingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMeetingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMeetingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MeetingId != nil {
+		s.WriteString(schemas.DeleteMeetingRequest_MeetingId, *v.MeetingId)
+	}
+}
+
 type DeleteMeetingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +59,26 @@ type DeleteMeetingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMeetingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMeetingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteMeetingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMeetingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMeeting{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMeeting, schemas.DeleteMeetingRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteMeeting{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMeeting, schemas.DeleteMeetingRequest, nil), output: &DeleteMeetingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

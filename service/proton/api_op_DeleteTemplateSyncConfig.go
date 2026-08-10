@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,38 @@ type DeleteTemplateSyncConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTemplateSyncConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTemplateSyncConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTemplateSyncConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateName != nil {
+		s.WriteString(schemas.DeleteTemplateSyncConfigInput_templateName, *v.TemplateName)
+	}
+	if v.TemplateType != "" {
+		s.WriteString(schemas.DeleteTemplateSyncConfigInput_templateType, string(v.TemplateType))
+	}
+}
+func (v *DeleteTemplateSyncConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTemplateSyncConfigInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteTemplateSyncConfigInput_templateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.DeleteTemplateSyncConfigInput_templateName, v.TemplateName)
+		case schemas.DeleteTemplateSyncConfigInput_templateType:
+			var ev string
+			if err := d.ReadString(schemas.DeleteTemplateSyncConfigInput_templateType, &ev); err != nil {
+				return err
+			}
+			v.TemplateType = types.TemplateType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type DeleteTemplateSyncConfigOutput struct {
 
 	// The template sync configuration detail data that's returned by Proton.
@@ -52,13 +86,34 @@ type DeleteTemplateSyncConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTemplateSyncConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTemplateSyncConfigOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTemplateSyncConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateSyncConfig != nil {
+		s.WriteStruct(schemas.DeleteTemplateSyncConfigOutput_templateSyncConfig)
+		v.TemplateSyncConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteTemplateSyncConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTemplateSyncConfigOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteTemplateSyncConfigOutput_templateSyncConfig:
+			v.TemplateSyncConfig = &types.TemplateSyncConfig{}
+			return v.TemplateSyncConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTemplateSyncConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteTemplateSyncConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTemplateSyncConfig, schemas.DeleteTemplateSyncConfigInput, schemas.DeleteTemplateSyncConfigOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteTemplateSyncConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTemplateSyncConfig, schemas.DeleteTemplateSyncConfigInput, schemas.DeleteTemplateSyncConfigOutput), output: &DeleteTemplateSyncConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

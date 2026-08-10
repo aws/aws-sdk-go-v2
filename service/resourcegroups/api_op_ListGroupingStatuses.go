@@ -5,7 +5,9 @@ package resourcegroups
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,25 @@ type ListGroupingStatusesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroupingStatusesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroupingStatusesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroupingStatusesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListGroupingStatusesFilterList(s, schemas.ListGroupingStatusesInput_Filters, v.Filters)
+	if v.Group != nil {
+		s.WriteString(schemas.ListGroupingStatusesInput_Group, *v.Group)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListGroupingStatusesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGroupingStatusesInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListGroupingStatusesOutput struct {
 
 	// The application group identifier, expressed as an Amazon resource name (ARN) or
@@ -72,13 +93,41 @@ type ListGroupingStatusesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroupingStatusesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroupingStatusesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroupingStatusesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Group != nil {
+		s.WriteString(schemas.ListGroupingStatusesOutput_Group, *v.Group)
+	}
+	serializeGroupingStatusesList(s, schemas.ListGroupingStatusesOutput_GroupingStatuses, v.GroupingStatuses)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGroupingStatusesOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListGroupingStatusesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGroupingStatusesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGroupingStatusesOutput_Group:
+			v.Group = new(string)
+			return d.ReadString(schemas.ListGroupingStatusesOutput_Group, v.Group)
+		case schemas.ListGroupingStatusesOutput_GroupingStatuses:
+			return deserializeGroupingStatusesList(d, schemas.ListGroupingStatusesOutput_GroupingStatuses, &v.GroupingStatuses)
+		case schemas.ListGroupingStatusesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGroupingStatusesOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGroupingStatusesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGroupingStatuses{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroupingStatuses, schemas.ListGroupingStatusesInput, schemas.ListGroupingStatusesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListGroupingStatuses{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroupingStatuses, schemas.ListGroupingStatusesInput, schemas.ListGroupingStatusesOutput), output: &ListGroupingStatusesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

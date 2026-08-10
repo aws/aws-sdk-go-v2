@@ -5,7 +5,9 @@ package chimesdkmediapipelines
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,21 @@ type CreateMediaConcatenationPipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMediaConcatenationPipelineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMediaConcatenationPipelineRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMediaConcatenationPipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateMediaConcatenationPipelineRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	serializeConcatenationSinkList(s, schemas.CreateMediaConcatenationPipelineRequest_Sinks, v.Sinks)
+	serializeConcatenationSourceList(s, schemas.CreateMediaConcatenationPipelineRequest_Sources, v.Sources)
+	serializeTagList(s, schemas.CreateMediaConcatenationPipelineRequest_Tags, v.Tags)
+}
+
 type CreateMediaConcatenationPipelineOutput struct {
 
 	// A media concatenation pipeline object, the ID, source type, MediaPipelineARN ,
@@ -59,13 +76,34 @@ type CreateMediaConcatenationPipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMediaConcatenationPipelineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMediaConcatenationPipelineResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMediaConcatenationPipelineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MediaConcatenationPipeline != nil {
+		s.WriteStruct(schemas.CreateMediaConcatenationPipelineResponse_MediaConcatenationPipeline)
+		v.MediaConcatenationPipeline.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateMediaConcatenationPipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMediaConcatenationPipelineResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMediaConcatenationPipelineResponse_MediaConcatenationPipeline:
+			v.MediaConcatenationPipeline = &types.MediaConcatenationPipeline{}
+			return v.MediaConcatenationPipeline.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMediaConcatenationPipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMediaConcatenationPipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMediaConcatenationPipeline, schemas.CreateMediaConcatenationPipelineRequest, schemas.CreateMediaConcatenationPipelineResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMediaConcatenationPipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMediaConcatenationPipeline, schemas.CreateMediaConcatenationPipelineRequest, schemas.CreateMediaConcatenationPipelineResponse), output: &CreateMediaConcatenationPipelineOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

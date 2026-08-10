@@ -5,7 +5,9 @@ package migrationhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,27 @@ type ListCreatedArtifactsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCreatedArtifactsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCreatedArtifactsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCreatedArtifactsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCreatedArtifactsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MigrationTaskName != nil {
+		s.WriteString(schemas.ListCreatedArtifactsRequest_MigrationTaskName, *v.MigrationTaskName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCreatedArtifactsRequest_NextToken, *v.NextToken)
+	}
+	if v.ProgressUpdateStream != nil {
+		s.WriteString(schemas.ListCreatedArtifactsRequest_ProgressUpdateStream, *v.ProgressUpdateStream)
+	}
+}
+
 type ListCreatedArtifactsOutput struct {
 
 	// List of created artifacts up to the maximum number of results specified in the
@@ -73,13 +96,35 @@ type ListCreatedArtifactsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCreatedArtifactsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCreatedArtifactsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCreatedArtifactsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCreatedArtifactList(s, schemas.ListCreatedArtifactsResult_CreatedArtifactList, v.CreatedArtifactList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCreatedArtifactsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCreatedArtifactsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCreatedArtifactsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCreatedArtifactsResult_CreatedArtifactList:
+			return deserializeCreatedArtifactList(d, schemas.ListCreatedArtifactsResult_CreatedArtifactList, &v.CreatedArtifactList)
+		case schemas.ListCreatedArtifactsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCreatedArtifactsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCreatedArtifactsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCreatedArtifacts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCreatedArtifacts, schemas.ListCreatedArtifactsRequest, schemas.ListCreatedArtifactsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCreatedArtifacts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCreatedArtifacts, schemas.ListCreatedArtifactsRequest, schemas.ListCreatedArtifactsResult), output: &ListCreatedArtifactsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

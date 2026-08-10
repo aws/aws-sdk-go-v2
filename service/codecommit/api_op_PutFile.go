@@ -4,7 +4,9 @@ package codecommit
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -78,6 +80,42 @@ type PutFileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutFileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutFileInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutFileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BranchName != nil {
+		s.WriteString(schemas.PutFileInput_branchName, *v.BranchName)
+	}
+	if v.CommitMessage != nil {
+		s.WriteString(schemas.PutFileInput_commitMessage, *v.CommitMessage)
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.PutFileInput_email, *v.Email)
+	}
+	if v.FileContent != nil {
+		s.WriteBlob(schemas.PutFileInput_fileContent, v.FileContent)
+	}
+	if v.FileMode != "" {
+		s.WriteString(schemas.PutFileInput_fileMode, string(v.FileMode))
+	}
+	if v.FilePath != nil {
+		s.WriteString(schemas.PutFileInput_filePath, *v.FilePath)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PutFileInput_name, *v.Name)
+	}
+	if v.ParentCommitId != nil {
+		s.WriteString(schemas.PutFileInput_parentCommitId, *v.ParentCommitId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.PutFileInput_repositoryName, *v.RepositoryName)
+	}
+}
+
 type PutFileOutput struct {
 
 	// The ID of the blob, which is its SHA-1 pointer.
@@ -102,13 +140,44 @@ type PutFileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutFileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutFileOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutFileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlobId != nil {
+		s.WriteString(schemas.PutFileOutput_blobId, *v.BlobId)
+	}
+	if v.CommitId != nil {
+		s.WriteString(schemas.PutFileOutput_commitId, *v.CommitId)
+	}
+	if v.TreeId != nil {
+		s.WriteString(schemas.PutFileOutput_treeId, *v.TreeId)
+	}
+}
+func (v *PutFileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutFileOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutFileOutput_blobId:
+			v.BlobId = new(string)
+			return d.ReadString(schemas.PutFileOutput_blobId, v.BlobId)
+		case schemas.PutFileOutput_commitId:
+			v.CommitId = new(string)
+			return d.ReadString(schemas.PutFileOutput_commitId, v.CommitId)
+		case schemas.PutFileOutput_treeId:
+			v.TreeId = new(string)
+			return d.ReadString(schemas.PutFileOutput_treeId, v.TreeId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutFileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutFile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutFile, schemas.PutFileInput, schemas.PutFileOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutFile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutFile, schemas.PutFileInput, schemas.PutFileOutput), output: &PutFileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

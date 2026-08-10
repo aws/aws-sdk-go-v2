@@ -4,7 +4,9 @@ package connectcases
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -79,6 +81,26 @@ type UpdateRelatedItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRelatedItemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRelatedItemRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRelatedItemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseId != nil {
+		s.WriteString(schemas.UpdateRelatedItemRequest_caseId, *v.CaseId)
+	}
+	serializeRelatedItemUpdateContent(s, schemas.UpdateRelatedItemRequest_content, v.Content)
+	if v.DomainId != nil {
+		s.WriteString(schemas.UpdateRelatedItemRequest_domainId, *v.DomainId)
+	}
+	serializeUserUnion(s, schemas.UpdateRelatedItemRequest_performedBy, v.PerformedBy)
+	if v.RelatedItemId != nil {
+		s.WriteString(schemas.UpdateRelatedItemRequest_relatedItemId, *v.RelatedItemId)
+	}
+}
+
 type UpdateRelatedItemOutput struct {
 
 	// Time at which the related item was associated with the case.
@@ -122,13 +144,66 @@ type UpdateRelatedItemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRelatedItemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRelatedItemResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRelatedItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationTime != nil {
+		s.WriteTime(schemas.UpdateRelatedItemResponse_associationTime, *v.AssociationTime)
+	}
+	serializeRelatedItemContent(s, schemas.UpdateRelatedItemResponse_content, v.Content)
+	serializeUserUnion(s, schemas.UpdateRelatedItemResponse_createdBy, v.CreatedBy)
+	serializeUserUnion(s, schemas.UpdateRelatedItemResponse_lastUpdatedUser, v.LastUpdatedUser)
+	if v.RelatedItemArn != nil {
+		s.WriteString(schemas.UpdateRelatedItemResponse_relatedItemArn, *v.RelatedItemArn)
+	}
+	if v.RelatedItemId != nil {
+		s.WriteString(schemas.UpdateRelatedItemResponse_relatedItemId, *v.RelatedItemId)
+	}
+	serializeTags(s, schemas.UpdateRelatedItemResponse_tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.UpdateRelatedItemResponse_type, string(v.Type))
+	}
+}
+func (v *UpdateRelatedItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRelatedItemResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRelatedItemResponse_associationTime:
+			v.AssociationTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateRelatedItemResponse_associationTime, v.AssociationTime)
+		case schemas.UpdateRelatedItemResponse_content:
+			return deserializeRelatedItemContent(d, schemas.UpdateRelatedItemResponse_content, &v.Content)
+		case schemas.UpdateRelatedItemResponse_createdBy:
+			return deserializeUserUnion(d, schemas.UpdateRelatedItemResponse_createdBy, &v.CreatedBy)
+		case schemas.UpdateRelatedItemResponse_lastUpdatedUser:
+			return deserializeUserUnion(d, schemas.UpdateRelatedItemResponse_lastUpdatedUser, &v.LastUpdatedUser)
+		case schemas.UpdateRelatedItemResponse_relatedItemArn:
+			v.RelatedItemArn = new(string)
+			return d.ReadString(schemas.UpdateRelatedItemResponse_relatedItemArn, v.RelatedItemArn)
+		case schemas.UpdateRelatedItemResponse_relatedItemId:
+			v.RelatedItemId = new(string)
+			return d.ReadString(schemas.UpdateRelatedItemResponse_relatedItemId, v.RelatedItemId)
+		case schemas.UpdateRelatedItemResponse_tags:
+			return deserializeTags(d, schemas.UpdateRelatedItemResponse_tags, &v.Tags)
+		case schemas.UpdateRelatedItemResponse_type:
+			var ev string
+			if err := d.ReadString(schemas.UpdateRelatedItemResponse_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.RelatedItemType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRelatedItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRelatedItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRelatedItem, schemas.UpdateRelatedItemRequest, schemas.UpdateRelatedItemResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRelatedItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRelatedItem, schemas.UpdateRelatedItemRequest, schemas.UpdateRelatedItemResponse), output: &UpdateRelatedItemOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

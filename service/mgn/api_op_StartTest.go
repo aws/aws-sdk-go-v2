@@ -4,7 +4,9 @@ package mgn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,34 @@ type StartTestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTestRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountID != nil {
+		s.WriteString(schemas.StartTestRequest_accountID, *v.AccountID)
+	}
+	serializeStartTestRequestSourceServerIDs(s, schemas.StartTestRequest_sourceServerIDs, v.SourceServerIDs)
+	serializeTagsMap(s, schemas.StartTestRequest_tags, v.Tags)
+}
+func (v *StartTestInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartTestRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartTestRequest_accountID:
+			v.AccountID = new(string)
+			return d.ReadString(schemas.StartTestRequest_accountID, v.AccountID)
+		case schemas.StartTestRequest_sourceServerIDs:
+			return deserializeStartTestRequestSourceServerIDs(d, schemas.StartTestRequest_sourceServerIDs, &v.SourceServerIDs)
+		case schemas.StartTestRequest_tags:
+			return deserializeTagsMap(d, schemas.StartTestRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type StartTestOutput struct {
 
 	// Start Test Job response.
@@ -53,13 +83,34 @@ type StartTestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTestResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Job != nil {
+		s.WriteStruct(schemas.StartTestResponse_job)
+		v.Job.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartTestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartTestResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartTestResponse_job:
+			v.Job = &types.Job{}
+			return v.Job.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartTestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartTest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTest, schemas.StartTestRequest, schemas.StartTestResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartTest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTest, schemas.StartTestRequest, schemas.StartTestResponse), output: &StartTestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

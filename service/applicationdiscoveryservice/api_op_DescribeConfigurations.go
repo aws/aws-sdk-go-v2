@@ -4,6 +4,8 @@ package applicationdiscoveryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,16 @@ type DescribeConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigurationIdList(s, schemas.DescribeConfigurationsRequest_configurationIds, v.ConfigurationIds)
+}
+
 type DescribeConfigurationsOutput struct {
 
 	// A key in the response map. The value is an array of data.
@@ -64,13 +76,29 @@ type DescribeConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDescribeConfigurationsAttributes(s, schemas.DescribeConfigurationsResponse_configurations, v.Configurations)
+}
+func (v *DescribeConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConfigurationsResponse_configurations:
+			return deserializeDescribeConfigurationsAttributes(d, schemas.DescribeConfigurationsResponse_configurations, &v.Configurations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfigurations, schemas.DescribeConfigurationsRequest, schemas.DescribeConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfigurations, schemas.DescribeConfigurationsRequest, schemas.DescribeConfigurationsResponse), output: &DescribeConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

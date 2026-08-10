@@ -5,7 +5,9 @@ package proton
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,33 @@ type ListDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDeploymentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDeploymentsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDeploymentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComponentName != nil {
+		s.WriteString(schemas.ListDeploymentsInput_componentName, *v.ComponentName)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.ListDeploymentsInput_environmentName, *v.EnvironmentName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDeploymentsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDeploymentsInput_nextToken, *v.NextToken)
+	}
+	if v.ServiceInstanceName != nil {
+		s.WriteString(schemas.ListDeploymentsInput_serviceInstanceName, *v.ServiceInstanceName)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.ListDeploymentsInput_serviceName, *v.ServiceName)
+	}
+}
+
 type ListDeploymentsOutput struct {
 
 	// An array of deployment with summary data.
@@ -73,13 +102,35 @@ type ListDeploymentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDeploymentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDeploymentsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDeploymentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeploymentSummaryList(s, schemas.ListDeploymentsOutput_deployments, v.Deployments)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDeploymentsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDeploymentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDeploymentsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDeploymentsOutput_deployments:
+			return deserializeDeploymentSummaryList(d, schemas.ListDeploymentsOutput_deployments, &v.Deployments)
+		case schemas.ListDeploymentsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDeploymentsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeployments, schemas.ListDeploymentsInput, schemas.ListDeploymentsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeployments, schemas.ListDeploymentsInput, schemas.ListDeploymentsOutput), output: &ListDeploymentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

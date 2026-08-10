@@ -4,7 +4,9 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -73,6 +75,39 @@ type UpdatePhoneNumberInput struct {
 	TwoWayEnabled *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdatePhoneNumberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePhoneNumberRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePhoneNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeletionProtectionEnabled != nil {
+		s.WriteBool(schemas.UpdatePhoneNumberRequest_DeletionProtectionEnabled, *v.DeletionProtectionEnabled)
+	}
+	if v.InternationalSendingEnabled != nil {
+		s.WriteBool(schemas.UpdatePhoneNumberRequest_InternationalSendingEnabled, *v.InternationalSendingEnabled)
+	}
+	if v.OptOutListName != nil {
+		s.WriteString(schemas.UpdatePhoneNumberRequest_OptOutListName, *v.OptOutListName)
+	}
+	if v.PhoneNumberId != nil {
+		s.WriteString(schemas.UpdatePhoneNumberRequest_PhoneNumberId, *v.PhoneNumberId)
+	}
+	if v.SelfManagedOptOutsEnabled != nil {
+		s.WriteBool(schemas.UpdatePhoneNumberRequest_SelfManagedOptOutsEnabled, *v.SelfManagedOptOutsEnabled)
+	}
+	if v.TwoWayChannelArn != nil {
+		s.WriteString(schemas.UpdatePhoneNumberRequest_TwoWayChannelArn, *v.TwoWayChannelArn)
+	}
+	if v.TwoWayChannelRole != nil {
+		s.WriteString(schemas.UpdatePhoneNumberRequest_TwoWayChannelRole, *v.TwoWayChannelRole)
+	}
+	if v.TwoWayEnabled != nil {
+		s.WriteBool(schemas.UpdatePhoneNumberRequest_TwoWayEnabled, *v.TwoWayEnabled)
+	}
 }
 
 type UpdatePhoneNumberOutput struct {
@@ -144,13 +179,139 @@ type UpdatePhoneNumberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePhoneNumberOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePhoneNumberResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePhoneNumberOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.UpdatePhoneNumberResult_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.DeletionProtectionEnabled != false {
+		s.WriteBool(schemas.UpdatePhoneNumberResult_DeletionProtectionEnabled, v.DeletionProtectionEnabled)
+	}
+	if v.InternationalSendingEnabled != false {
+		s.WriteBool(schemas.UpdatePhoneNumberResult_InternationalSendingEnabled, v.InternationalSendingEnabled)
+	}
+	if v.IsoCountryCode != nil {
+		s.WriteString(schemas.UpdatePhoneNumberResult_IsoCountryCode, *v.IsoCountryCode)
+	}
+	if v.MessageType != "" {
+		s.WriteString(schemas.UpdatePhoneNumberResult_MessageType, string(v.MessageType))
+	}
+	if v.MonthlyLeasingPrice != nil {
+		s.WriteString(schemas.UpdatePhoneNumberResult_MonthlyLeasingPrice, *v.MonthlyLeasingPrice)
+	}
+	serializeNumberCapabilityList(s, schemas.UpdatePhoneNumberResult_NumberCapabilities, v.NumberCapabilities)
+	if v.NumberType != "" {
+		s.WriteString(schemas.UpdatePhoneNumberResult_NumberType, string(v.NumberType))
+	}
+	if v.OptOutListName != nil {
+		s.WriteString(schemas.UpdatePhoneNumberResult_OptOutListName, *v.OptOutListName)
+	}
+	if v.PhoneNumber != nil {
+		s.WriteString(schemas.UpdatePhoneNumberResult_PhoneNumber, *v.PhoneNumber)
+	}
+	if v.PhoneNumberArn != nil {
+		s.WriteString(schemas.UpdatePhoneNumberResult_PhoneNumberArn, *v.PhoneNumberArn)
+	}
+	if v.PhoneNumberId != nil {
+		s.WriteString(schemas.UpdatePhoneNumberResult_PhoneNumberId, *v.PhoneNumberId)
+	}
+	if v.RegistrationId != nil {
+		s.WriteString(schemas.UpdatePhoneNumberResult_RegistrationId, *v.RegistrationId)
+	}
+	if v.SelfManagedOptOutsEnabled != false {
+		s.WriteBool(schemas.UpdatePhoneNumberResult_SelfManagedOptOutsEnabled, v.SelfManagedOptOutsEnabled)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdatePhoneNumberResult_Status, string(v.Status))
+	}
+	if v.TwoWayChannelArn != nil {
+		s.WriteString(schemas.UpdatePhoneNumberResult_TwoWayChannelArn, *v.TwoWayChannelArn)
+	}
+	if v.TwoWayChannelRole != nil {
+		s.WriteString(schemas.UpdatePhoneNumberResult_TwoWayChannelRole, *v.TwoWayChannelRole)
+	}
+	if v.TwoWayEnabled != false {
+		s.WriteBool(schemas.UpdatePhoneNumberResult_TwoWayEnabled, v.TwoWayEnabled)
+	}
+}
+func (v *UpdatePhoneNumberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePhoneNumberResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePhoneNumberResult_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.UpdatePhoneNumberResult_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.UpdatePhoneNumberResult_DeletionProtectionEnabled:
+			return d.ReadBool(schemas.UpdatePhoneNumberResult_DeletionProtectionEnabled, &v.DeletionProtectionEnabled)
+		case schemas.UpdatePhoneNumberResult_InternationalSendingEnabled:
+			return d.ReadBool(schemas.UpdatePhoneNumberResult_InternationalSendingEnabled, &v.InternationalSendingEnabled)
+		case schemas.UpdatePhoneNumberResult_IsoCountryCode:
+			v.IsoCountryCode = new(string)
+			return d.ReadString(schemas.UpdatePhoneNumberResult_IsoCountryCode, v.IsoCountryCode)
+		case schemas.UpdatePhoneNumberResult_MessageType:
+			var ev string
+			if err := d.ReadString(schemas.UpdatePhoneNumberResult_MessageType, &ev); err != nil {
+				return err
+			}
+			v.MessageType = types.MessageType(ev)
+			return nil
+		case schemas.UpdatePhoneNumberResult_MonthlyLeasingPrice:
+			v.MonthlyLeasingPrice = new(string)
+			return d.ReadString(schemas.UpdatePhoneNumberResult_MonthlyLeasingPrice, v.MonthlyLeasingPrice)
+		case schemas.UpdatePhoneNumberResult_NumberCapabilities:
+			return deserializeNumberCapabilityList(d, schemas.UpdatePhoneNumberResult_NumberCapabilities, &v.NumberCapabilities)
+		case schemas.UpdatePhoneNumberResult_NumberType:
+			var ev string
+			if err := d.ReadString(schemas.UpdatePhoneNumberResult_NumberType, &ev); err != nil {
+				return err
+			}
+			v.NumberType = types.NumberType(ev)
+			return nil
+		case schemas.UpdatePhoneNumberResult_OptOutListName:
+			v.OptOutListName = new(string)
+			return d.ReadString(schemas.UpdatePhoneNumberResult_OptOutListName, v.OptOutListName)
+		case schemas.UpdatePhoneNumberResult_PhoneNumber:
+			v.PhoneNumber = new(string)
+			return d.ReadString(schemas.UpdatePhoneNumberResult_PhoneNumber, v.PhoneNumber)
+		case schemas.UpdatePhoneNumberResult_PhoneNumberArn:
+			v.PhoneNumberArn = new(string)
+			return d.ReadString(schemas.UpdatePhoneNumberResult_PhoneNumberArn, v.PhoneNumberArn)
+		case schemas.UpdatePhoneNumberResult_PhoneNumberId:
+			v.PhoneNumberId = new(string)
+			return d.ReadString(schemas.UpdatePhoneNumberResult_PhoneNumberId, v.PhoneNumberId)
+		case schemas.UpdatePhoneNumberResult_RegistrationId:
+			v.RegistrationId = new(string)
+			return d.ReadString(schemas.UpdatePhoneNumberResult_RegistrationId, v.RegistrationId)
+		case schemas.UpdatePhoneNumberResult_SelfManagedOptOutsEnabled:
+			return d.ReadBool(schemas.UpdatePhoneNumberResult_SelfManagedOptOutsEnabled, &v.SelfManagedOptOutsEnabled)
+		case schemas.UpdatePhoneNumberResult_Status:
+			var ev string
+			if err := d.ReadString(schemas.UpdatePhoneNumberResult_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.NumberStatus(ev)
+			return nil
+		case schemas.UpdatePhoneNumberResult_TwoWayChannelArn:
+			v.TwoWayChannelArn = new(string)
+			return d.ReadString(schemas.UpdatePhoneNumberResult_TwoWayChannelArn, v.TwoWayChannelArn)
+		case schemas.UpdatePhoneNumberResult_TwoWayChannelRole:
+			v.TwoWayChannelRole = new(string)
+			return d.ReadString(schemas.UpdatePhoneNumberResult_TwoWayChannelRole, v.TwoWayChannelRole)
+		case schemas.UpdatePhoneNumberResult_TwoWayEnabled:
+			return d.ReadBool(schemas.UpdatePhoneNumberResult_TwoWayEnabled, &v.TwoWayEnabled)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdatePhoneNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePhoneNumber, schemas.UpdatePhoneNumberRequest, schemas.UpdatePhoneNumberResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdatePhoneNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePhoneNumber, schemas.UpdatePhoneNumberRequest, schemas.UpdatePhoneNumberResult), output: &UpdatePhoneNumberOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

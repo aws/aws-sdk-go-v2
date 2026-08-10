@@ -4,7 +4,9 @@ package textract
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -41,6 +43,21 @@ type GetAdapterVersionInput struct {
 	AdapterVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetAdapterVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAdapterVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAdapterVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdapterId != nil {
+		s.WriteString(schemas.GetAdapterVersionRequest_AdapterId, *v.AdapterId)
+	}
+	if v.AdapterVersion != nil {
+		s.WriteString(schemas.GetAdapterVersionRequest_AdapterVersion, *v.AdapterVersion)
+	}
 }
 
 type GetAdapterVersionOutput struct {
@@ -109,13 +126,91 @@ type GetAdapterVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAdapterVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAdapterVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAdapterVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdapterId != nil {
+		s.WriteString(schemas.GetAdapterVersionResponse_AdapterId, *v.AdapterId)
+	}
+	if v.AdapterVersion != nil {
+		s.WriteString(schemas.GetAdapterVersionResponse_AdapterVersion, *v.AdapterVersion)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetAdapterVersionResponse_CreationTime, *v.CreationTime)
+	}
+	if v.DatasetConfig != nil {
+		s.WriteStruct(schemas.GetAdapterVersionResponse_DatasetConfig)
+		v.DatasetConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAdapterVersionEvaluationMetrics(s, schemas.GetAdapterVersionResponse_EvaluationMetrics, v.EvaluationMetrics)
+	serializeFeatureTypes(s, schemas.GetAdapterVersionResponse_FeatureTypes, v.FeatureTypes)
+	if v.KMSKeyId != nil {
+		s.WriteString(schemas.GetAdapterVersionResponse_KMSKeyId, *v.KMSKeyId)
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.GetAdapterVersionResponse_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetAdapterVersionResponse_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetAdapterVersionResponse_StatusMessage, *v.StatusMessage)
+	}
+	serializeTagMap(s, schemas.GetAdapterVersionResponse_Tags, v.Tags)
+}
+func (v *GetAdapterVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAdapterVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAdapterVersionResponse_AdapterId:
+			v.AdapterId = new(string)
+			return d.ReadString(schemas.GetAdapterVersionResponse_AdapterId, v.AdapterId)
+		case schemas.GetAdapterVersionResponse_AdapterVersion:
+			v.AdapterVersion = new(string)
+			return d.ReadString(schemas.GetAdapterVersionResponse_AdapterVersion, v.AdapterVersion)
+		case schemas.GetAdapterVersionResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetAdapterVersionResponse_CreationTime, v.CreationTime)
+		case schemas.GetAdapterVersionResponse_DatasetConfig:
+			v.DatasetConfig = &types.AdapterVersionDatasetConfig{}
+			return v.DatasetConfig.Deserialize(d)
+		case schemas.GetAdapterVersionResponse_EvaluationMetrics:
+			return deserializeAdapterVersionEvaluationMetrics(d, schemas.GetAdapterVersionResponse_EvaluationMetrics, &v.EvaluationMetrics)
+		case schemas.GetAdapterVersionResponse_FeatureTypes:
+			return deserializeFeatureTypes(d, schemas.GetAdapterVersionResponse_FeatureTypes, &v.FeatureTypes)
+		case schemas.GetAdapterVersionResponse_KMSKeyId:
+			v.KMSKeyId = new(string)
+			return d.ReadString(schemas.GetAdapterVersionResponse_KMSKeyId, v.KMSKeyId)
+		case schemas.GetAdapterVersionResponse_OutputConfig:
+			v.OutputConfig = &types.OutputConfig{}
+			return v.OutputConfig.Deserialize(d)
+		case schemas.GetAdapterVersionResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetAdapterVersionResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.AdapterVersionStatus(ev)
+			return nil
+		case schemas.GetAdapterVersionResponse_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetAdapterVersionResponse_StatusMessage, v.StatusMessage)
+		case schemas.GetAdapterVersionResponse_Tags:
+			return deserializeTagMap(d, schemas.GetAdapterVersionResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAdapterVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAdapterVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAdapterVersion, schemas.GetAdapterVersionRequest, schemas.GetAdapterVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAdapterVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAdapterVersion, schemas.GetAdapterVersionRequest, schemas.GetAdapterVersionResponse), output: &GetAdapterVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

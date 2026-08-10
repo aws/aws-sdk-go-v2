@@ -4,6 +4,8 @@ package machinelearning
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DeleteDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataSourceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.DeleteDataSourceInput_DataSourceId, *v.DataSourceId)
+	}
+}
+
 // Represents the output of a DeleteDataSource operation.
 type DeleteDataSourceOutput struct {
 
@@ -51,13 +65,32 @@ type DeleteDataSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataSourceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.DeleteDataSourceOutput_DataSourceId, *v.DataSourceId)
+	}
+}
+func (v *DeleteDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDataSourceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDataSourceOutput_DataSourceId:
+			v.DataSourceId = new(string)
+			return d.ReadString(schemas.DeleteDataSourceOutput_DataSourceId, v.DataSourceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataSource, schemas.DeleteDataSourceInput, schemas.DeleteDataSourceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataSource, schemas.DeleteDataSourceInput, schemas.DeleteDataSourceOutput), output: &DeleteDataSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package machinelearning
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DeleteEvaluationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEvaluationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEvaluationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEvaluationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationId != nil {
+		s.WriteString(schemas.DeleteEvaluationInput_EvaluationId, *v.EvaluationId)
+	}
+}
+
 //	Represents the output of a DeleteEvaluation operation. The output indicates
 //
 // that Amazon Machine Learning (Amazon ML) received the request.
@@ -56,13 +70,32 @@ type DeleteEvaluationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEvaluationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEvaluationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEvaluationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationId != nil {
+		s.WriteString(schemas.DeleteEvaluationOutput_EvaluationId, *v.EvaluationId)
+	}
+}
+func (v *DeleteEvaluationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEvaluationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteEvaluationOutput_EvaluationId:
+			v.EvaluationId = new(string)
+			return d.ReadString(schemas.DeleteEvaluationOutput_EvaluationId, v.EvaluationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEvaluation, schemas.DeleteEvaluationInput, schemas.DeleteEvaluationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEvaluation, schemas.DeleteEvaluationInput, schemas.DeleteEvaluationOutput), output: &DeleteEvaluationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

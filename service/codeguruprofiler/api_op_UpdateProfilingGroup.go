@@ -4,7 +4,9 @@ package codeguruprofiler
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,36 @@ type UpdateProfilingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProfilingGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProfilingGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProfilingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentOrchestrationConfig != nil {
+		s.WriteStruct(schemas.UpdateProfilingGroupRequest_agentOrchestrationConfig)
+		v.AgentOrchestrationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProfilingGroupName != nil {
+		s.WriteString(schemas.UpdateProfilingGroupRequest_profilingGroupName, *v.ProfilingGroupName)
+	}
+}
+func (v *UpdateProfilingGroupInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProfilingGroupRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProfilingGroupRequest_agentOrchestrationConfig:
+			v.AgentOrchestrationConfig = &types.AgentOrchestrationConfig{}
+			return v.AgentOrchestrationConfig.Deserialize(d)
+		case schemas.UpdateProfilingGroupRequest_profilingGroupName:
+			v.ProfilingGroupName = new(string)
+			return d.ReadString(schemas.UpdateProfilingGroupRequest_profilingGroupName, v.ProfilingGroupName)
+		}
+		return nil
+	})
+}
+
 // The structure representing the updateProfilingGroupResponse.
 type UpdateProfilingGroupOutput struct {
 
@@ -57,13 +89,34 @@ type UpdateProfilingGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProfilingGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProfilingGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProfilingGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProfilingGroup != nil {
+		s.WriteStruct(schemas.UpdateProfilingGroupResponse_profilingGroup)
+		v.ProfilingGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateProfilingGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProfilingGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProfilingGroupResponse_profilingGroup:
+			v.ProfilingGroup = &types.ProfilingGroupDescription{}
+			return v.ProfilingGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProfilingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateProfilingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProfilingGroup, schemas.UpdateProfilingGroupRequest, schemas.UpdateProfilingGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateProfilingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProfilingGroup, schemas.UpdateProfilingGroupRequest, schemas.UpdateProfilingGroupResponse), output: &UpdateProfilingGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

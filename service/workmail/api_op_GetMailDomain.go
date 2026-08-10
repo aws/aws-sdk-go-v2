@@ -4,7 +4,9 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type GetMailDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMailDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMailDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMailDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetMailDomainRequest_DomainName, *v.DomainName)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.GetMailDomainRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type GetMailDomainOutput struct {
 
 	// Indicates the status of a DKIM verification.
@@ -67,13 +84,59 @@ type GetMailDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMailDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMailDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMailDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DkimVerificationStatus != "" {
+		s.WriteString(schemas.GetMailDomainResponse_DkimVerificationStatus, string(v.DkimVerificationStatus))
+	}
+	if v.IsDefault != false {
+		s.WriteBool(schemas.GetMailDomainResponse_IsDefault, v.IsDefault)
+	}
+	if v.IsTestDomain != false {
+		s.WriteBool(schemas.GetMailDomainResponse_IsTestDomain, v.IsTestDomain)
+	}
+	if v.OwnershipVerificationStatus != "" {
+		s.WriteString(schemas.GetMailDomainResponse_OwnershipVerificationStatus, string(v.OwnershipVerificationStatus))
+	}
+	serializeDnsRecords(s, schemas.GetMailDomainResponse_Records, v.Records)
+}
+func (v *GetMailDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMailDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMailDomainResponse_DkimVerificationStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetMailDomainResponse_DkimVerificationStatus, &ev); err != nil {
+				return err
+			}
+			v.DkimVerificationStatus = types.DnsRecordVerificationStatus(ev)
+			return nil
+		case schemas.GetMailDomainResponse_IsDefault:
+			return d.ReadBool(schemas.GetMailDomainResponse_IsDefault, &v.IsDefault)
+		case schemas.GetMailDomainResponse_IsTestDomain:
+			return d.ReadBool(schemas.GetMailDomainResponse_IsTestDomain, &v.IsTestDomain)
+		case schemas.GetMailDomainResponse_OwnershipVerificationStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetMailDomainResponse_OwnershipVerificationStatus, &ev); err != nil {
+				return err
+			}
+			v.OwnershipVerificationStatus = types.DnsRecordVerificationStatus(ev)
+			return nil
+		case schemas.GetMailDomainResponse_Records:
+			return deserializeDnsRecords(d, schemas.GetMailDomainResponse_Records, &v.Records)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMailDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetMailDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMailDomain, schemas.GetMailDomainRequest, schemas.GetMailDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetMailDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMailDomain, schemas.GetMailDomainRequest, schemas.GetMailDomainResponse), output: &GetMailDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package chime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteRoomInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRoomInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRoomRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRoomInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DeleteRoomRequest_AccountId, *v.AccountId)
+	}
+	if v.RoomId != nil {
+		s.WriteString(schemas.DeleteRoomRequest_RoomId, *v.RoomId)
+	}
+}
+
 type DeleteRoomOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type DeleteRoomOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRoomOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRoomOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteRoomOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRoomMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRoom{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRoom, schemas.DeleteRoomRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteRoom{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRoom, schemas.DeleteRoomRequest, nil), output: &DeleteRoomOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

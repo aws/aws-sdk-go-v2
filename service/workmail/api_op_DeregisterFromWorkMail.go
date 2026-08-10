@@ -4,6 +4,8 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,21 @@ type DeregisterFromWorkMailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterFromWorkMailInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterFromWorkMailRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterFromWorkMailInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityId != nil {
+		s.WriteString(schemas.DeregisterFromWorkMailRequest_EntityId, *v.EntityId)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.DeregisterFromWorkMailRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type DeregisterFromWorkMailOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -59,13 +76,26 @@ type DeregisterFromWorkMailOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterFromWorkMailOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterFromWorkMailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterFromWorkMailOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeregisterFromWorkMailOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterFromWorkMailResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterFromWorkMailMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterFromWorkMail{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterFromWorkMail, schemas.DeregisterFromWorkMailRequest, schemas.DeregisterFromWorkMailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeregisterFromWorkMail{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterFromWorkMail, schemas.DeregisterFromWorkMailRequest, schemas.DeregisterFromWorkMailResponse), output: &DeregisterFromWorkMailOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

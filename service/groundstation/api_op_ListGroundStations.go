@@ -5,7 +5,9 @@ package groundstation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,40 @@ type ListGroundStationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroundStationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroundStationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroundStationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListGroundStationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGroundStationsRequest_nextToken, *v.NextToken)
+	}
+	if v.SatelliteId != nil {
+		s.WriteString(schemas.ListGroundStationsRequest_satelliteId, *v.SatelliteId)
+	}
+}
+func (v *ListGroundStationsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGroundStationsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGroundStationsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListGroundStationsRequest_maxResults, v.MaxResults)
+		case schemas.ListGroundStationsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGroundStationsRequest_nextToken, v.NextToken)
+		case schemas.ListGroundStationsRequest_satelliteId:
+			v.SatelliteId = new(string)
+			return d.ReadString(schemas.ListGroundStationsRequest_satelliteId, v.SatelliteId)
+		}
+		return nil
+	})
+}
+
 // Output for the ListGroundStations operation.
 type ListGroundStationsOutput struct {
 
@@ -57,13 +93,35 @@ type ListGroundStationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroundStationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroundStationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroundStationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGroundStationList(s, schemas.ListGroundStationsResponse_groundStationList, v.GroundStationList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGroundStationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListGroundStationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGroundStationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGroundStationsResponse_groundStationList:
+			return deserializeGroundStationList(d, schemas.ListGroundStationsResponse_groundStationList, &v.GroundStationList)
+		case schemas.ListGroundStationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGroundStationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGroundStationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGroundStations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroundStations, schemas.ListGroundStationsRequest, schemas.ListGroundStationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListGroundStations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroundStations, schemas.ListGroundStationsRequest, schemas.ListGroundStationsResponse), output: &ListGroundStationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

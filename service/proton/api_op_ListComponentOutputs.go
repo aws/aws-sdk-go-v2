@@ -5,7 +5,9 @@ package proton
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,40 @@ type ListComponentOutputsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListComponentOutputsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListComponentOutputsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListComponentOutputsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComponentName != nil {
+		s.WriteString(schemas.ListComponentOutputsInput_componentName, *v.ComponentName)
+	}
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.ListComponentOutputsInput_deploymentId, *v.DeploymentId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListComponentOutputsInput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListComponentOutputsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListComponentOutputsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListComponentOutputsInput_componentName:
+			v.ComponentName = new(string)
+			return d.ReadString(schemas.ListComponentOutputsInput_componentName, v.ComponentName)
+		case schemas.ListComponentOutputsInput_deploymentId:
+			v.DeploymentId = new(string)
+			return d.ReadString(schemas.ListComponentOutputsInput_deploymentId, v.DeploymentId)
+		case schemas.ListComponentOutputsInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListComponentOutputsInput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListComponentOutputsOutput struct {
 
 	// An array of component Infrastructure as Code (IaC) outputs.
@@ -65,13 +101,35 @@ type ListComponentOutputsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListComponentOutputsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListComponentOutputsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListComponentOutputsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListComponentOutputsOutput_nextToken, *v.NextToken)
+	}
+	serializeOutputsList(s, schemas.ListComponentOutputsOutput_outputs, v.Outputs)
+}
+func (v *ListComponentOutputsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListComponentOutputsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListComponentOutputsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListComponentOutputsOutput_nextToken, v.NextToken)
+		case schemas.ListComponentOutputsOutput_outputs:
+			return deserializeOutputsList(d, schemas.ListComponentOutputsOutput_outputs, &v.Outputs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListComponentOutputsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListComponentOutputs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComponentOutputs, schemas.ListComponentOutputsInput, schemas.ListComponentOutputsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListComponentOutputs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComponentOutputs, schemas.ListComponentOutputsInput, schemas.ListComponentOutputsOutput), output: &ListComponentOutputsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

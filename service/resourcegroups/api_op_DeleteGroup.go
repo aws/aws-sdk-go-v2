@@ -4,7 +4,9 @@ package resourcegroups
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type DeleteGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGroupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Group != nil {
+		s.WriteString(schemas.DeleteGroupInput_Group, *v.Group)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.DeleteGroupInput_GroupName, *v.GroupName)
+	}
+}
+
 type DeleteGroupOutput struct {
 
 	// A full description of the deleted resource group.
@@ -56,13 +73,34 @@ type DeleteGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGroupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Group != nil {
+		s.WriteStruct(schemas.DeleteGroupOutput_Group)
+		v.Group.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteGroupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteGroupOutput_Group:
+			v.Group = &types.Group{}
+			return v.Group.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGroup, schemas.DeleteGroupInput, schemas.DeleteGroupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGroup, schemas.DeleteGroupInput, schemas.DeleteGroupOutput), output: &DeleteGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

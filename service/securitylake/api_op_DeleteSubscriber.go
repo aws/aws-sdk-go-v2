@@ -4,6 +4,8 @@ package securitylake
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securitylake/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DeleteSubscriberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSubscriberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSubscriberRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSubscriberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SubscriberId != nil {
+		s.WriteString(schemas.DeleteSubscriberRequest_subscriberId, *v.SubscriberId)
+	}
+}
+
 type DeleteSubscriberOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +59,26 @@ type DeleteSubscriberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSubscriberOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSubscriberResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSubscriberOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteSubscriberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSubscriberResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSubscriberMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSubscriber{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSubscriber, schemas.DeleteSubscriberRequest, schemas.DeleteSubscriberResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSubscriber{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSubscriber, schemas.DeleteSubscriberRequest, schemas.DeleteSubscriberResponse), output: &DeleteSubscriberOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

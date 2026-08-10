@@ -4,7 +4,9 @@ package fms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type PutResourceSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutResourceSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutResourceSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutResourceSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceSet != nil {
+		s.WriteStruct(schemas.PutResourceSetRequest_ResourceSet)
+		v.ResourceSet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.PutResourceSetRequest_TagList, v.TagList)
+}
+
 type PutResourceSetOutput struct {
 
 	// Details about the resource set.
@@ -62,13 +79,40 @@ type PutResourceSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutResourceSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutResourceSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutResourceSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceSet != nil {
+		s.WriteStruct(schemas.PutResourceSetResponse_ResourceSet)
+		v.ResourceSet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceSetArn != nil {
+		s.WriteString(schemas.PutResourceSetResponse_ResourceSetArn, *v.ResourceSetArn)
+	}
+}
+func (v *PutResourceSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutResourceSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutResourceSetResponse_ResourceSet:
+			v.ResourceSet = &types.ResourceSet{}
+			return v.ResourceSet.Deserialize(d)
+		case schemas.PutResourceSetResponse_ResourceSetArn:
+			v.ResourceSetArn = new(string)
+			return d.ReadString(schemas.PutResourceSetResponse_ResourceSetArn, v.ResourceSetArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutResourceSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutResourceSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutResourceSet, schemas.PutResourceSetRequest, schemas.PutResourceSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutResourceSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutResourceSet, schemas.PutResourceSetRequest, schemas.PutResourceSetResponse), output: &PutResourceSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

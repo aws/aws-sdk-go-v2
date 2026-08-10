@@ -4,7 +4,9 @@ package route53domains
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -174,6 +176,63 @@ type TransferDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TransferDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TransferDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TransferDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdminContact != nil {
+		s.WriteStruct(schemas.TransferDomainRequest_AdminContact)
+		v.AdminContact.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AuthCode != nil {
+		s.WriteString(schemas.TransferDomainRequest_AuthCode, *v.AuthCode)
+	}
+	if v.AutoRenew != nil {
+		s.WriteBool(schemas.TransferDomainRequest_AutoRenew, *v.AutoRenew)
+	}
+	if v.BillingContact != nil {
+		s.WriteStruct(schemas.TransferDomainRequest_BillingContact)
+		v.BillingContact.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.TransferDomainRequest_DomainName, *v.DomainName)
+	}
+	if v.DurationInYears != nil {
+		s.WriteInt32(schemas.TransferDomainRequest_DurationInYears, *v.DurationInYears)
+	}
+	if v.IdnLangCode != nil {
+		s.WriteString(schemas.TransferDomainRequest_IdnLangCode, *v.IdnLangCode)
+	}
+	serializeNameserverList(s, schemas.TransferDomainRequest_Nameservers, v.Nameservers)
+	if v.PrivacyProtectAdminContact != nil {
+		s.WriteBool(schemas.TransferDomainRequest_PrivacyProtectAdminContact, *v.PrivacyProtectAdminContact)
+	}
+	if v.PrivacyProtectBillingContact != nil {
+		s.WriteBool(schemas.TransferDomainRequest_PrivacyProtectBillingContact, *v.PrivacyProtectBillingContact)
+	}
+	if v.PrivacyProtectRegistrantContact != nil {
+		s.WriteBool(schemas.TransferDomainRequest_PrivacyProtectRegistrantContact, *v.PrivacyProtectRegistrantContact)
+	}
+	if v.PrivacyProtectTechContact != nil {
+		s.WriteBool(schemas.TransferDomainRequest_PrivacyProtectTechContact, *v.PrivacyProtectTechContact)
+	}
+	if v.RegistrantContact != nil {
+		s.WriteStruct(schemas.TransferDomainRequest_RegistrantContact)
+		v.RegistrantContact.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TechContact != nil {
+		s.WriteStruct(schemas.TransferDomainRequest_TechContact)
+		v.TechContact.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // The TransferDomain response includes the following element.
 type TransferDomainOutput struct {
 
@@ -189,13 +248,32 @@ type TransferDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TransferDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TransferDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TransferDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.TransferDomainResponse_OperationId, *v.OperationId)
+	}
+}
+func (v *TransferDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TransferDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TransferDomainResponse_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.TransferDomainResponse_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTransferDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTransferDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TransferDomain, schemas.TransferDomainRequest, schemas.TransferDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpTransferDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TransferDomain, schemas.TransferDomainRequest, schemas.TransferDomainResponse), output: &TransferDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

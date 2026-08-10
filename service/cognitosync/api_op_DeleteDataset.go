@@ -4,7 +4,9 @@ package cognitosync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitosync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitosync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,24 @@ type DeleteDatasetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDatasetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDatasetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetName != nil {
+		s.WriteString(schemas.DeleteDatasetRequest_DatasetName, *v.DatasetName)
+	}
+	if v.IdentityId != nil {
+		s.WriteString(schemas.DeleteDatasetRequest_IdentityId, *v.IdentityId)
+	}
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.DeleteDatasetRequest_IdentityPoolId, *v.IdentityPoolId)
+	}
+}
+
 // Response to a successful DeleteDataset request.
 type DeleteDatasetOutput struct {
 
@@ -72,13 +92,34 @@ type DeleteDatasetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDatasetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDatasetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDatasetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Dataset != nil {
+		s.WriteStruct(schemas.DeleteDatasetResponse_Dataset)
+		v.Dataset.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDatasetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDatasetResponse_Dataset:
+			v.Dataset = &types.Dataset{}
+			return v.Dataset.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataset, schemas.DeleteDatasetRequest, schemas.DeleteDatasetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataset, schemas.DeleteDatasetRequest, schemas.DeleteDatasetResponse), output: &DeleteDatasetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

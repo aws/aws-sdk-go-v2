@@ -4,7 +4,9 @@ package forecast
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -190,6 +192,56 @@ type CreateAutoPredictorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAutoPredictorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAutoPredictorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAutoPredictorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataConfig != nil {
+		s.WriteStruct(schemas.CreateAutoPredictorRequest_DataConfig)
+		v.DataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EncryptionConfig != nil {
+		s.WriteStruct(schemas.CreateAutoPredictorRequest_EncryptionConfig)
+		v.EncryptionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExplainPredictor != nil {
+		s.WriteBool(schemas.CreateAutoPredictorRequest_ExplainPredictor, *v.ExplainPredictor)
+	}
+	serializeForecastDimensions(s, schemas.CreateAutoPredictorRequest_ForecastDimensions, v.ForecastDimensions)
+	if v.ForecastFrequency != nil {
+		s.WriteString(schemas.CreateAutoPredictorRequest_ForecastFrequency, *v.ForecastFrequency)
+	}
+	if v.ForecastHorizon != nil {
+		s.WriteInt32(schemas.CreateAutoPredictorRequest_ForecastHorizon, *v.ForecastHorizon)
+	}
+	serializeForecastTypes(s, schemas.CreateAutoPredictorRequest_ForecastTypes, v.ForecastTypes)
+	if v.MonitorConfig != nil {
+		s.WriteStruct(schemas.CreateAutoPredictorRequest_MonitorConfig)
+		v.MonitorConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OptimizationMetric != "" {
+		s.WriteString(schemas.CreateAutoPredictorRequest_OptimizationMetric, string(v.OptimizationMetric))
+	}
+	if v.PredictorName != nil {
+		s.WriteString(schemas.CreateAutoPredictorRequest_PredictorName, *v.PredictorName)
+	}
+	if v.ReferencePredictorArn != nil {
+		s.WriteString(schemas.CreateAutoPredictorRequest_ReferencePredictorArn, *v.ReferencePredictorArn)
+	}
+	serializeTags(s, schemas.CreateAutoPredictorRequest_Tags, v.Tags)
+	if v.TimeAlignmentBoundary != nil {
+		s.WriteStruct(schemas.CreateAutoPredictorRequest_TimeAlignmentBoundary)
+		v.TimeAlignmentBoundary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateAutoPredictorOutput struct {
 
 	// The Amazon Resource Name (ARN) of the predictor.
@@ -201,13 +253,32 @@ type CreateAutoPredictorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAutoPredictorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAutoPredictorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAutoPredictorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PredictorArn != nil {
+		s.WriteString(schemas.CreateAutoPredictorResponse_PredictorArn, *v.PredictorArn)
+	}
+}
+func (v *CreateAutoPredictorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAutoPredictorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAutoPredictorResponse_PredictorArn:
+			v.PredictorArn = new(string)
+			return d.ReadString(schemas.CreateAutoPredictorResponse_PredictorArn, v.PredictorArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAutoPredictorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAutoPredictor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAutoPredictor, schemas.CreateAutoPredictorRequest, schemas.CreateAutoPredictorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAutoPredictor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAutoPredictor, schemas.CreateAutoPredictorRequest, schemas.CreateAutoPredictorResponse), output: &CreateAutoPredictorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

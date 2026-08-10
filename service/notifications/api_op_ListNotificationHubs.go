@@ -5,7 +5,9 @@ package notifications
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/notifications/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/notifications/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListNotificationHubsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNotificationHubsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNotificationHubsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNotificationHubsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListNotificationHubsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNotificationHubsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListNotificationHubsOutput struct {
 
 	// The NotificationHubs in the account.
@@ -54,13 +71,35 @@ type ListNotificationHubsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNotificationHubsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNotificationHubsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNotificationHubsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNotificationHubsResponse_nextToken, *v.NextToken)
+	}
+	serializeNotificationHubs(s, schemas.ListNotificationHubsResponse_notificationHubs, v.NotificationHubs)
+}
+func (v *ListNotificationHubsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNotificationHubsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNotificationHubsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNotificationHubsResponse_nextToken, v.NextToken)
+		case schemas.ListNotificationHubsResponse_notificationHubs:
+			return deserializeNotificationHubs(d, schemas.ListNotificationHubsResponse_notificationHubs, &v.NotificationHubs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNotificationHubsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListNotificationHubs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNotificationHubs, schemas.ListNotificationHubsRequest, schemas.ListNotificationHubsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListNotificationHubs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNotificationHubs, schemas.ListNotificationHubsRequest, schemas.ListNotificationHubsResponse), output: &ListNotificationHubsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

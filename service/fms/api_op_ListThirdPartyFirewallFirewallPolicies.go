@@ -5,7 +5,9 @@ package fms
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,24 @@ type ListThirdPartyFirewallFirewallPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListThirdPartyFirewallFirewallPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListThirdPartyFirewallFirewallPoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListThirdPartyFirewallFirewallPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListThirdPartyFirewallFirewallPoliciesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListThirdPartyFirewallFirewallPoliciesRequest_NextToken, *v.NextToken)
+	}
+	if v.ThirdPartyFirewall != "" {
+		s.WriteString(schemas.ListThirdPartyFirewallFirewallPoliciesRequest_ThirdPartyFirewall, string(v.ThirdPartyFirewall))
+	}
+}
+
 type ListThirdPartyFirewallFirewallPoliciesOutput struct {
 
 	// The value that you will use for NextToken in the next
@@ -74,13 +94,35 @@ type ListThirdPartyFirewallFirewallPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListThirdPartyFirewallFirewallPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListThirdPartyFirewallFirewallPoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListThirdPartyFirewallFirewallPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListThirdPartyFirewallFirewallPoliciesResponse_NextToken, *v.NextToken)
+	}
+	serializeThirdPartyFirewallFirewallPolicies(s, schemas.ListThirdPartyFirewallFirewallPoliciesResponse_ThirdPartyFirewallFirewallPolicies, v.ThirdPartyFirewallFirewallPolicies)
+}
+func (v *ListThirdPartyFirewallFirewallPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListThirdPartyFirewallFirewallPoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListThirdPartyFirewallFirewallPoliciesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListThirdPartyFirewallFirewallPoliciesResponse_NextToken, v.NextToken)
+		case schemas.ListThirdPartyFirewallFirewallPoliciesResponse_ThirdPartyFirewallFirewallPolicies:
+			return deserializeThirdPartyFirewallFirewallPolicies(d, schemas.ListThirdPartyFirewallFirewallPoliciesResponse_ThirdPartyFirewallFirewallPolicies, &v.ThirdPartyFirewallFirewallPolicies)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListThirdPartyFirewallFirewallPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListThirdPartyFirewallFirewallPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListThirdPartyFirewallFirewallPolicies, schemas.ListThirdPartyFirewallFirewallPoliciesRequest, schemas.ListThirdPartyFirewallFirewallPoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListThirdPartyFirewallFirewallPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListThirdPartyFirewallFirewallPolicies, schemas.ListThirdPartyFirewallFirewallPoliciesRequest, schemas.ListThirdPartyFirewallFirewallPoliciesResponse), output: &ListThirdPartyFirewallFirewallPoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

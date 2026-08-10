@@ -5,7 +5,9 @@ package appmesh
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,54 @@ type UpdateVirtualServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVirtualServiceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVirtualServiceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVirtualServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateVirtualServiceInput_clientToken, *v.ClientToken)
+	}
+	if v.MeshName != nil {
+		s.WriteString(schemas.UpdateVirtualServiceInput_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.UpdateVirtualServiceInput_meshOwner, *v.MeshOwner)
+	}
+	if v.Spec != nil {
+		s.WriteStruct(schemas.UpdateVirtualServiceInput_spec)
+		v.Spec.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VirtualServiceName != nil {
+		s.WriteString(schemas.UpdateVirtualServiceInput_virtualServiceName, *v.VirtualServiceName)
+	}
+}
+func (v *UpdateVirtualServiceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateVirtualServiceInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateVirtualServiceInput_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.UpdateVirtualServiceInput_clientToken, v.ClientToken)
+		case schemas.UpdateVirtualServiceInput_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.UpdateVirtualServiceInput_meshName, v.MeshName)
+		case schemas.UpdateVirtualServiceInput_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.UpdateVirtualServiceInput_meshOwner, v.MeshOwner)
+		case schemas.UpdateVirtualServiceInput_spec:
+			v.Spec = &types.VirtualServiceSpec{}
+			return v.Spec.Deserialize(d)
+		case schemas.UpdateVirtualServiceInput_virtualServiceName:
+			v.VirtualServiceName = new(string)
+			return d.ReadString(schemas.UpdateVirtualServiceInput_virtualServiceName, v.VirtualServiceName)
+		}
+		return nil
+	})
+}
+
 type UpdateVirtualServiceOutput struct {
 
 	// A full description of the virtual service that was updated.
@@ -70,13 +120,34 @@ type UpdateVirtualServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVirtualServiceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVirtualServiceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVirtualServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualService != nil {
+		s.WriteStruct(schemas.UpdateVirtualServiceOutput_virtualService)
+		v.VirtualService.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateVirtualServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateVirtualServiceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateVirtualServiceOutput_virtualService:
+			v.VirtualService = &types.VirtualServiceData{}
+			return v.VirtualService.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateVirtualServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateVirtualService{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVirtualService, schemas.UpdateVirtualServiceInput, schemas.UpdateVirtualServiceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateVirtualService{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVirtualService, schemas.UpdateVirtualServiceInput, schemas.UpdateVirtualServiceOutput), output: &UpdateVirtualServiceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

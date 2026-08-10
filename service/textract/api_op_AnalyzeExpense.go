@@ -4,7 +4,9 @@ package textract
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,20 @@ type AnalyzeExpenseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AnalyzeExpenseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnalyzeExpenseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnalyzeExpenseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Document != nil {
+		s.WriteStruct(schemas.AnalyzeExpenseRequest_Document)
+		v.Document.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type AnalyzeExpenseOutput struct {
 
 	// Information about the input document.
@@ -77,13 +93,37 @@ type AnalyzeExpenseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AnalyzeExpenseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnalyzeExpenseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnalyzeExpenseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentMetadata != nil {
+		s.WriteStruct(schemas.AnalyzeExpenseResponse_DocumentMetadata)
+		v.DocumentMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeExpenseDocumentList(s, schemas.AnalyzeExpenseResponse_ExpenseDocuments, v.ExpenseDocuments)
+}
+func (v *AnalyzeExpenseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnalyzeExpenseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnalyzeExpenseResponse_DocumentMetadata:
+			v.DocumentMetadata = &types.DocumentMetadata{}
+			return v.DocumentMetadata.Deserialize(d)
+		case schemas.AnalyzeExpenseResponse_ExpenseDocuments:
+			return deserializeExpenseDocumentList(d, schemas.AnalyzeExpenseResponse_ExpenseDocuments, &v.ExpenseDocuments)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAnalyzeExpenseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAnalyzeExpense{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AnalyzeExpense, schemas.AnalyzeExpenseRequest, schemas.AnalyzeExpenseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAnalyzeExpense{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AnalyzeExpense, schemas.AnalyzeExpenseRequest, schemas.AnalyzeExpenseResponse), output: &AnalyzeExpenseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

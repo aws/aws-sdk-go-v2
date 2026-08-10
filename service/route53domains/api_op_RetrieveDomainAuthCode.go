@@ -4,6 +4,8 @@ package route53domains
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type RetrieveDomainAuthCodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetrieveDomainAuthCodeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrieveDomainAuthCodeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetrieveDomainAuthCodeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.RetrieveDomainAuthCodeRequest_DomainName, *v.DomainName)
+	}
+}
+
 // The RetrieveDomainAuthCode response includes the following element.
 type RetrieveDomainAuthCodeOutput struct {
 
@@ -48,13 +62,32 @@ type RetrieveDomainAuthCodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetrieveDomainAuthCodeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrieveDomainAuthCodeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetrieveDomainAuthCodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthCode != nil {
+		s.WriteString(schemas.RetrieveDomainAuthCodeResponse_AuthCode, *v.AuthCode)
+	}
+}
+func (v *RetrieveDomainAuthCodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetrieveDomainAuthCodeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetrieveDomainAuthCodeResponse_AuthCode:
+			v.AuthCode = new(string)
+			return d.ReadString(schemas.RetrieveDomainAuthCodeResponse_AuthCode, v.AuthCode)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRetrieveDomainAuthCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRetrieveDomainAuthCode{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RetrieveDomainAuthCode, schemas.RetrieveDomainAuthCodeRequest, schemas.RetrieveDomainAuthCodeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRetrieveDomainAuthCode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RetrieveDomainAuthCode, schemas.RetrieveDomainAuthCodeRequest, schemas.RetrieveDomainAuthCodeResponse), output: &RetrieveDomainAuthCodeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

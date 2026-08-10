@@ -4,6 +4,8 @@ package connectcases
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DeleteCaseRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCaseRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCaseRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCaseRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseRuleId != nil {
+		s.WriteString(schemas.DeleteCaseRuleRequest_caseRuleId, *v.CaseRuleId)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.DeleteCaseRuleRequest_domainId, *v.DomainId)
+	}
+}
+
 type DeleteCaseRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +66,26 @@ type DeleteCaseRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCaseRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCaseRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCaseRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCaseRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCaseRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCaseRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCaseRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCaseRule, schemas.DeleteCaseRuleRequest, schemas.DeleteCaseRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCaseRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCaseRule, schemas.DeleteCaseRuleRequest, schemas.DeleteCaseRuleResponse), output: &DeleteCaseRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package ssmsap
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssmsap/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type StartApplicationRefreshInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartApplicationRefreshInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartApplicationRefreshInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartApplicationRefreshInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.StartApplicationRefreshInput_ApplicationId, *v.ApplicationId)
+	}
+}
+
 type StartApplicationRefreshOutput struct {
 
 	// The ID of the operation.
@@ -44,13 +58,32 @@ type StartApplicationRefreshOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartApplicationRefreshOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartApplicationRefreshOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartApplicationRefreshOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.StartApplicationRefreshOutput_OperationId, *v.OperationId)
+	}
+}
+func (v *StartApplicationRefreshOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartApplicationRefreshOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartApplicationRefreshOutput_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.StartApplicationRefreshOutput_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartApplicationRefreshMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartApplicationRefresh{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartApplicationRefresh, schemas.StartApplicationRefreshInput, schemas.StartApplicationRefreshOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartApplicationRefresh{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartApplicationRefresh, schemas.StartApplicationRefreshInput, schemas.StartApplicationRefreshOutput), output: &StartApplicationRefreshOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

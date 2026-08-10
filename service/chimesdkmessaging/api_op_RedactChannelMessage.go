@@ -4,6 +4,8 @@ package chimesdkmessaging
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,27 @@ type RedactChannelMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RedactChannelMessageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedactChannelMessageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedactChannelMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.RedactChannelMessageRequest_ChannelArn, *v.ChannelArn)
+	}
+	if v.ChimeBearer != nil {
+		s.WriteString(schemas.RedactChannelMessageRequest_ChimeBearer, *v.ChimeBearer)
+	}
+	if v.MessageId != nil {
+		s.WriteString(schemas.RedactChannelMessageRequest_MessageId, *v.MessageId)
+	}
+	if v.SubChannelId != nil {
+		s.WriteString(schemas.RedactChannelMessageRequest_SubChannelId, *v.SubChannelId)
+	}
+}
+
 type RedactChannelMessageOutput struct {
 
 	// The ARN of the channel containing the messages that you want to redact.
@@ -70,13 +93,44 @@ type RedactChannelMessageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RedactChannelMessageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedactChannelMessageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedactChannelMessageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.RedactChannelMessageResponse_ChannelArn, *v.ChannelArn)
+	}
+	if v.MessageId != nil {
+		s.WriteString(schemas.RedactChannelMessageResponse_MessageId, *v.MessageId)
+	}
+	if v.SubChannelId != nil {
+		s.WriteString(schemas.RedactChannelMessageResponse_SubChannelId, *v.SubChannelId)
+	}
+}
+func (v *RedactChannelMessageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RedactChannelMessageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RedactChannelMessageResponse_ChannelArn:
+			v.ChannelArn = new(string)
+			return d.ReadString(schemas.RedactChannelMessageResponse_ChannelArn, v.ChannelArn)
+		case schemas.RedactChannelMessageResponse_MessageId:
+			v.MessageId = new(string)
+			return d.ReadString(schemas.RedactChannelMessageResponse_MessageId, v.MessageId)
+		case schemas.RedactChannelMessageResponse_SubChannelId:
+			v.SubChannelId = new(string)
+			return d.ReadString(schemas.RedactChannelMessageResponse_SubChannelId, v.SubChannelId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRedactChannelMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRedactChannelMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RedactChannelMessage, schemas.RedactChannelMessageRequest, schemas.RedactChannelMessageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRedactChannelMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RedactChannelMessage, schemas.RedactChannelMessageRequest, schemas.RedactChannelMessageResponse), output: &RedactChannelMessageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

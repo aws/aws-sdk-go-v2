@@ -4,7 +4,9 @@ package cognitosync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitosync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitosync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,18 @@ type GetIdentityPoolConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdentityPoolConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdentityPoolConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdentityPoolConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.GetIdentityPoolConfigurationRequest_IdentityPoolId, *v.IdentityPoolId)
+	}
+}
+
 // The output for the GetIdentityPoolConfiguration operation.
 type GetIdentityPoolConfigurationOutput struct {
 
@@ -79,13 +93,48 @@ type GetIdentityPoolConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdentityPoolConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdentityPoolConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdentityPoolConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CognitoStreams != nil {
+		s.WriteStruct(schemas.GetIdentityPoolConfigurationResponse_CognitoStreams)
+		v.CognitoStreams.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.GetIdentityPoolConfigurationResponse_IdentityPoolId, *v.IdentityPoolId)
+	}
+	if v.PushSync != nil {
+		s.WriteStruct(schemas.GetIdentityPoolConfigurationResponse_PushSync)
+		v.PushSync.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetIdentityPoolConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIdentityPoolConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIdentityPoolConfigurationResponse_CognitoStreams:
+			v.CognitoStreams = &types.CognitoStreams{}
+			return v.CognitoStreams.Deserialize(d)
+		case schemas.GetIdentityPoolConfigurationResponse_IdentityPoolId:
+			v.IdentityPoolId = new(string)
+			return d.ReadString(schemas.GetIdentityPoolConfigurationResponse_IdentityPoolId, v.IdentityPoolId)
+		case schemas.GetIdentityPoolConfigurationResponse_PushSync:
+			v.PushSync = &types.PushSync{}
+			return v.PushSync.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIdentityPoolConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIdentityPoolConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdentityPoolConfiguration, schemas.GetIdentityPoolConfigurationRequest, schemas.GetIdentityPoolConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIdentityPoolConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdentityPoolConfiguration, schemas.GetIdentityPoolConfigurationRequest, schemas.GetIdentityPoolConfigurationResponse), output: &GetIdentityPoolConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

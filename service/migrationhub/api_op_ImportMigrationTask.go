@@ -4,6 +4,8 @@ package migrationhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhub/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type ImportMigrationTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportMigrationTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportMigrationTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportMigrationTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DryRun != false {
+		s.WriteBool(schemas.ImportMigrationTaskRequest_DryRun, v.DryRun)
+	}
+	if v.MigrationTaskName != nil {
+		s.WriteString(schemas.ImportMigrationTaskRequest_MigrationTaskName, *v.MigrationTaskName)
+	}
+	if v.ProgressUpdateStream != nil {
+		s.WriteString(schemas.ImportMigrationTaskRequest_ProgressUpdateStream, *v.ProgressUpdateStream)
+	}
+}
+
 type ImportMigrationTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +74,26 @@ type ImportMigrationTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportMigrationTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportMigrationTaskResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportMigrationTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ImportMigrationTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportMigrationTaskResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportMigrationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportMigrationTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportMigrationTask, schemas.ImportMigrationTaskRequest, schemas.ImportMigrationTaskResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpImportMigrationTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportMigrationTask, schemas.ImportMigrationTaskRequest, schemas.ImportMigrationTaskResult), output: &ImportMigrationTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

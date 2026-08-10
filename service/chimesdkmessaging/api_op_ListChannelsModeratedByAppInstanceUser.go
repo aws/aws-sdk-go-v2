@@ -5,7 +5,9 @@ package chimesdkmessaging
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type ListChannelsModeratedByAppInstanceUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListChannelsModeratedByAppInstanceUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListChannelsModeratedByAppInstanceUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListChannelsModeratedByAppInstanceUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppInstanceUserArn != nil {
+		s.WriteString(schemas.ListChannelsModeratedByAppInstanceUserRequest_AppInstanceUserArn, *v.AppInstanceUserArn)
+	}
+	if v.ChimeBearer != nil {
+		s.WriteString(schemas.ListChannelsModeratedByAppInstanceUserRequest_ChimeBearer, *v.ChimeBearer)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListChannelsModeratedByAppInstanceUserRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListChannelsModeratedByAppInstanceUserRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListChannelsModeratedByAppInstanceUserOutput struct {
 
 	// The moderated channels in the request.
@@ -64,13 +87,35 @@ type ListChannelsModeratedByAppInstanceUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListChannelsModeratedByAppInstanceUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListChannelsModeratedByAppInstanceUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListChannelsModeratedByAppInstanceUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeChannelModeratedByAppInstanceUserSummaryList(s, schemas.ListChannelsModeratedByAppInstanceUserResponse_Channels, v.Channels)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListChannelsModeratedByAppInstanceUserResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListChannelsModeratedByAppInstanceUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListChannelsModeratedByAppInstanceUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListChannelsModeratedByAppInstanceUserResponse_Channels:
+			return deserializeChannelModeratedByAppInstanceUserSummaryList(d, schemas.ListChannelsModeratedByAppInstanceUserResponse_Channels, &v.Channels)
+		case schemas.ListChannelsModeratedByAppInstanceUserResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListChannelsModeratedByAppInstanceUserResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListChannelsModeratedByAppInstanceUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListChannelsModeratedByAppInstanceUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChannelsModeratedByAppInstanceUser, schemas.ListChannelsModeratedByAppInstanceUserRequest, schemas.ListChannelsModeratedByAppInstanceUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListChannelsModeratedByAppInstanceUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChannelsModeratedByAppInstanceUser, schemas.ListChannelsModeratedByAppInstanceUserRequest, schemas.ListChannelsModeratedByAppInstanceUserResponse), output: &ListChannelsModeratedByAppInstanceUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

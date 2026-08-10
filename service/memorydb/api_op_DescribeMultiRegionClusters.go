@@ -5,7 +5,9 @@ package memorydb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/memorydb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/memorydb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,27 @@ type DescribeMultiRegionClustersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMultiRegionClustersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMultiRegionClustersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMultiRegionClustersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeMultiRegionClustersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MultiRegionClusterName != nil {
+		s.WriteString(schemas.DescribeMultiRegionClustersRequest_MultiRegionClusterName, *v.MultiRegionClusterName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeMultiRegionClustersRequest_NextToken, *v.NextToken)
+	}
+	if v.ShowClusterDetails != nil {
+		s.WriteBool(schemas.DescribeMultiRegionClustersRequest_ShowClusterDetails, *v.ShowClusterDetails)
+	}
+}
+
 type DescribeMultiRegionClustersOutput struct {
 
 	// A list of multi-Region clusters.
@@ -56,13 +79,35 @@ type DescribeMultiRegionClustersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMultiRegionClustersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMultiRegionClustersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMultiRegionClustersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMultiRegionClusterList(s, schemas.DescribeMultiRegionClustersResponse_MultiRegionClusters, v.MultiRegionClusters)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeMultiRegionClustersResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeMultiRegionClustersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMultiRegionClustersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMultiRegionClustersResponse_MultiRegionClusters:
+			return deserializeMultiRegionClusterList(d, schemas.DescribeMultiRegionClustersResponse_MultiRegionClusters, &v.MultiRegionClusters)
+		case schemas.DescribeMultiRegionClustersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeMultiRegionClustersResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMultiRegionClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeMultiRegionClusters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMultiRegionClusters, schemas.DescribeMultiRegionClustersRequest, schemas.DescribeMultiRegionClustersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeMultiRegionClusters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMultiRegionClusters, schemas.DescribeMultiRegionClustersRequest, schemas.DescribeMultiRegionClustersResponse), output: &DescribeMultiRegionClustersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

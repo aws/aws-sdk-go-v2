@@ -4,7 +4,9 @@ package forecast
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,22 @@ type CreateMonitorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMonitorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMonitorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMonitorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MonitorName != nil {
+		s.WriteString(schemas.CreateMonitorRequest_MonitorName, *v.MonitorName)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.CreateMonitorRequest_ResourceArn, *v.ResourceArn)
+	}
+	serializeTags(s, schemas.CreateMonitorRequest_Tags, v.Tags)
+}
+
 type CreateMonitorOutput struct {
 
 	// The Amazon Resource Name (ARN) of the monitor resource.
@@ -59,13 +77,32 @@ type CreateMonitorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMonitorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMonitorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMonitorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MonitorArn != nil {
+		s.WriteString(schemas.CreateMonitorResponse_MonitorArn, *v.MonitorArn)
+	}
+}
+func (v *CreateMonitorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMonitorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMonitorResponse_MonitorArn:
+			v.MonitorArn = new(string)
+			return d.ReadString(schemas.CreateMonitorResponse_MonitorArn, v.MonitorArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMonitorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateMonitor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMonitor, schemas.CreateMonitorRequest, schemas.CreateMonitorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateMonitor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMonitor, schemas.CreateMonitorRequest, schemas.CreateMonitorResponse), output: &CreateMonitorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package kendra
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,22 @@ type DisassociatePersonasFromEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociatePersonasFromEntitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociatePersonasFromEntitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociatePersonasFromEntitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEntityIdsList(s, schemas.DisassociatePersonasFromEntitiesRequest_EntityIds, v.EntityIds)
+	if v.Id != nil {
+		s.WriteString(schemas.DisassociatePersonasFromEntitiesRequest_Id, *v.Id)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.DisassociatePersonasFromEntitiesRequest_IndexId, *v.IndexId)
+	}
+}
+
 type DisassociatePersonasFromEntitiesOutput struct {
 
 	// Lists the users or groups in your IAM Identity Center identity source that
@@ -62,13 +80,29 @@ type DisassociatePersonasFromEntitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociatePersonasFromEntitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociatePersonasFromEntitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociatePersonasFromEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedEntityList(s, schemas.DisassociatePersonasFromEntitiesResponse_FailedEntityList, v.FailedEntityList)
+}
+func (v *DisassociatePersonasFromEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociatePersonasFromEntitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociatePersonasFromEntitiesResponse_FailedEntityList:
+			return deserializeFailedEntityList(d, schemas.DisassociatePersonasFromEntitiesResponse_FailedEntityList, &v.FailedEntityList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociatePersonasFromEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociatePersonasFromEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociatePersonasFromEntities, schemas.DisassociatePersonasFromEntitiesRequest, schemas.DisassociatePersonasFromEntitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisassociatePersonasFromEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociatePersonasFromEntities, schemas.DisassociatePersonasFromEntitiesRequest, schemas.DisassociatePersonasFromEntitiesResponse), output: &DisassociatePersonasFromEntitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -85,6 +87,122 @@ type BatchPrediction struct {
 	TotalRecordCount *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchPrediction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPrediction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPrediction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchPredictionDataSourceId != nil {
+		s.WriteString(schemas.BatchPrediction_BatchPredictionDataSourceId, *v.BatchPredictionDataSourceId)
+	}
+	if v.BatchPredictionId != nil {
+		s.WriteString(schemas.BatchPrediction_BatchPredictionId, *v.BatchPredictionId)
+	}
+	if v.ComputeTime != nil {
+		s.WriteInt64(schemas.BatchPrediction_ComputeTime, *v.ComputeTime)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.BatchPrediction_CreatedAt, *v.CreatedAt)
+	}
+	if v.CreatedByIamUser != nil {
+		s.WriteString(schemas.BatchPrediction_CreatedByIamUser, *v.CreatedByIamUser)
+	}
+	if v.FinishedAt != nil {
+		s.WriteTime(schemas.BatchPrediction_FinishedAt, *v.FinishedAt)
+	}
+	if v.InputDataLocationS3 != nil {
+		s.WriteString(schemas.BatchPrediction_InputDataLocationS3, *v.InputDataLocationS3)
+	}
+	if v.InvalidRecordCount != nil {
+		s.WriteInt64(schemas.BatchPrediction_InvalidRecordCount, *v.InvalidRecordCount)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.BatchPrediction_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.MLModelId != nil {
+		s.WriteString(schemas.BatchPrediction_MLModelId, *v.MLModelId)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.BatchPrediction_Message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.BatchPrediction_Name, *v.Name)
+	}
+	if v.OutputUri != nil {
+		s.WriteString(schemas.BatchPrediction_OutputUri, *v.OutputUri)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.BatchPrediction_StartedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.BatchPrediction_Status, string(v.Status))
+	}
+	if v.TotalRecordCount != nil {
+		s.WriteInt64(schemas.BatchPrediction_TotalRecordCount, *v.TotalRecordCount)
+	}
+}
+func (v *BatchPrediction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPrediction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPrediction_BatchPredictionDataSourceId:
+			v.BatchPredictionDataSourceId = new(string)
+			return d.ReadString(schemas.BatchPrediction_BatchPredictionDataSourceId, v.BatchPredictionDataSourceId)
+		case schemas.BatchPrediction_BatchPredictionId:
+			v.BatchPredictionId = new(string)
+			return d.ReadString(schemas.BatchPrediction_BatchPredictionId, v.BatchPredictionId)
+		case schemas.BatchPrediction_ComputeTime:
+			v.ComputeTime = new(int64)
+			return d.ReadInt64(schemas.BatchPrediction_ComputeTime, v.ComputeTime)
+		case schemas.BatchPrediction_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.BatchPrediction_CreatedAt, v.CreatedAt)
+		case schemas.BatchPrediction_CreatedByIamUser:
+			v.CreatedByIamUser = new(string)
+			return d.ReadString(schemas.BatchPrediction_CreatedByIamUser, v.CreatedByIamUser)
+		case schemas.BatchPrediction_FinishedAt:
+			v.FinishedAt = new(time.Time)
+			return d.ReadTime(schemas.BatchPrediction_FinishedAt, v.FinishedAt)
+		case schemas.BatchPrediction_InputDataLocationS3:
+			v.InputDataLocationS3 = new(string)
+			return d.ReadString(schemas.BatchPrediction_InputDataLocationS3, v.InputDataLocationS3)
+		case schemas.BatchPrediction_InvalidRecordCount:
+			v.InvalidRecordCount = new(int64)
+			return d.ReadInt64(schemas.BatchPrediction_InvalidRecordCount, v.InvalidRecordCount)
+		case schemas.BatchPrediction_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.BatchPrediction_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.BatchPrediction_MLModelId:
+			v.MLModelId = new(string)
+			return d.ReadString(schemas.BatchPrediction_MLModelId, v.MLModelId)
+		case schemas.BatchPrediction_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BatchPrediction_Message, v.Message)
+		case schemas.BatchPrediction_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.BatchPrediction_Name, v.Name)
+		case schemas.BatchPrediction_OutputUri:
+			v.OutputUri = new(string)
+			return d.ReadString(schemas.BatchPrediction_OutputUri, v.OutputUri)
+		case schemas.BatchPrediction_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.BatchPrediction_StartedAt, v.StartedAt)
+		case schemas.BatchPrediction_Status:
+			var ev string
+			if err := d.ReadString(schemas.BatchPrediction_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = EntityStatus(ev)
+			return nil
+		case schemas.BatchPrediction_TotalRecordCount:
+			v.TotalRecordCount = new(int64)
+			return d.ReadInt64(schemas.BatchPrediction_TotalRecordCount, v.TotalRecordCount)
+		}
+		return nil
+	})
 }
 
 //	Represents the output of the GetDataSource operation.
@@ -173,6 +291,137 @@ type DataSource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DataSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeStatistics != false {
+		s.WriteBool(schemas.DataSource_ComputeStatistics, v.ComputeStatistics)
+	}
+	if v.ComputeTime != nil {
+		s.WriteInt64(schemas.DataSource_ComputeTime, *v.ComputeTime)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DataSource_CreatedAt, *v.CreatedAt)
+	}
+	if v.CreatedByIamUser != nil {
+		s.WriteString(schemas.DataSource_CreatedByIamUser, *v.CreatedByIamUser)
+	}
+	if v.DataLocationS3 != nil {
+		s.WriteString(schemas.DataSource_DataLocationS3, *v.DataLocationS3)
+	}
+	if v.DataRearrangement != nil {
+		s.WriteString(schemas.DataSource_DataRearrangement, *v.DataRearrangement)
+	}
+	if v.DataSizeInBytes != nil {
+		s.WriteInt64(schemas.DataSource_DataSizeInBytes, *v.DataSizeInBytes)
+	}
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.DataSource_DataSourceId, *v.DataSourceId)
+	}
+	if v.FinishedAt != nil {
+		s.WriteTime(schemas.DataSource_FinishedAt, *v.FinishedAt)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.DataSource_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.DataSource_Message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DataSource_Name, *v.Name)
+	}
+	if v.NumberOfFiles != nil {
+		s.WriteInt64(schemas.DataSource_NumberOfFiles, *v.NumberOfFiles)
+	}
+	if v.RDSMetadata != nil {
+		s.WriteStruct(schemas.DataSource_RDSMetadata)
+		v.RDSMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RedshiftMetadata != nil {
+		s.WriteStruct(schemas.DataSource_RedshiftMetadata)
+		v.RedshiftMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.DataSource_RoleARN, *v.RoleARN)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.DataSource_StartedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DataSource_Status, string(v.Status))
+	}
+}
+func (v *DataSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataSource_ComputeStatistics:
+			return d.ReadBool(schemas.DataSource_ComputeStatistics, &v.ComputeStatistics)
+		case schemas.DataSource_ComputeTime:
+			v.ComputeTime = new(int64)
+			return d.ReadInt64(schemas.DataSource_ComputeTime, v.ComputeTime)
+		case schemas.DataSource_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DataSource_CreatedAt, v.CreatedAt)
+		case schemas.DataSource_CreatedByIamUser:
+			v.CreatedByIamUser = new(string)
+			return d.ReadString(schemas.DataSource_CreatedByIamUser, v.CreatedByIamUser)
+		case schemas.DataSource_DataLocationS3:
+			v.DataLocationS3 = new(string)
+			return d.ReadString(schemas.DataSource_DataLocationS3, v.DataLocationS3)
+		case schemas.DataSource_DataRearrangement:
+			v.DataRearrangement = new(string)
+			return d.ReadString(schemas.DataSource_DataRearrangement, v.DataRearrangement)
+		case schemas.DataSource_DataSizeInBytes:
+			v.DataSizeInBytes = new(int64)
+			return d.ReadInt64(schemas.DataSource_DataSizeInBytes, v.DataSizeInBytes)
+		case schemas.DataSource_DataSourceId:
+			v.DataSourceId = new(string)
+			return d.ReadString(schemas.DataSource_DataSourceId, v.DataSourceId)
+		case schemas.DataSource_FinishedAt:
+			v.FinishedAt = new(time.Time)
+			return d.ReadTime(schemas.DataSource_FinishedAt, v.FinishedAt)
+		case schemas.DataSource_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DataSource_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.DataSource_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DataSource_Message, v.Message)
+		case schemas.DataSource_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DataSource_Name, v.Name)
+		case schemas.DataSource_NumberOfFiles:
+			v.NumberOfFiles = new(int64)
+			return d.ReadInt64(schemas.DataSource_NumberOfFiles, v.NumberOfFiles)
+		case schemas.DataSource_RDSMetadata:
+			v.RDSMetadata = &RDSMetadata{}
+			return v.RDSMetadata.Deserialize(d)
+		case schemas.DataSource_RedshiftMetadata:
+			v.RedshiftMetadata = &RedshiftMetadata{}
+			return v.RedshiftMetadata.Deserialize(d)
+		case schemas.DataSource_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.DataSource_RoleARN, v.RoleARN)
+		case schemas.DataSource_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.DataSource_StartedAt, v.StartedAt)
+		case schemas.DataSource_Status:
+			var ev string
+			if err := d.ReadString(schemas.DataSource_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = EntityStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 //	Represents the output of GetEvaluation operation.
 //
 // The content consists of the detailed metadata and data file information and the
@@ -254,6 +503,112 @@ type Evaluation struct {
 	Status EntityStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *Evaluation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Evaluation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Evaluation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeTime != nil {
+		s.WriteInt64(schemas.Evaluation_ComputeTime, *v.ComputeTime)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Evaluation_CreatedAt, *v.CreatedAt)
+	}
+	if v.CreatedByIamUser != nil {
+		s.WriteString(schemas.Evaluation_CreatedByIamUser, *v.CreatedByIamUser)
+	}
+	if v.EvaluationDataSourceId != nil {
+		s.WriteString(schemas.Evaluation_EvaluationDataSourceId, *v.EvaluationDataSourceId)
+	}
+	if v.EvaluationId != nil {
+		s.WriteString(schemas.Evaluation_EvaluationId, *v.EvaluationId)
+	}
+	if v.FinishedAt != nil {
+		s.WriteTime(schemas.Evaluation_FinishedAt, *v.FinishedAt)
+	}
+	if v.InputDataLocationS3 != nil {
+		s.WriteString(schemas.Evaluation_InputDataLocationS3, *v.InputDataLocationS3)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.Evaluation_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.MLModelId != nil {
+		s.WriteString(schemas.Evaluation_MLModelId, *v.MLModelId)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.Evaluation_Message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Evaluation_Name, *v.Name)
+	}
+	if v.PerformanceMetrics != nil {
+		s.WriteStruct(schemas.Evaluation_PerformanceMetrics)
+		v.PerformanceMetrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.Evaluation_StartedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Evaluation_Status, string(v.Status))
+	}
+}
+func (v *Evaluation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Evaluation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Evaluation_ComputeTime:
+			v.ComputeTime = new(int64)
+			return d.ReadInt64(schemas.Evaluation_ComputeTime, v.ComputeTime)
+		case schemas.Evaluation_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Evaluation_CreatedAt, v.CreatedAt)
+		case schemas.Evaluation_CreatedByIamUser:
+			v.CreatedByIamUser = new(string)
+			return d.ReadString(schemas.Evaluation_CreatedByIamUser, v.CreatedByIamUser)
+		case schemas.Evaluation_EvaluationDataSourceId:
+			v.EvaluationDataSourceId = new(string)
+			return d.ReadString(schemas.Evaluation_EvaluationDataSourceId, v.EvaluationDataSourceId)
+		case schemas.Evaluation_EvaluationId:
+			v.EvaluationId = new(string)
+			return d.ReadString(schemas.Evaluation_EvaluationId, v.EvaluationId)
+		case schemas.Evaluation_FinishedAt:
+			v.FinishedAt = new(time.Time)
+			return d.ReadTime(schemas.Evaluation_FinishedAt, v.FinishedAt)
+		case schemas.Evaluation_InputDataLocationS3:
+			v.InputDataLocationS3 = new(string)
+			return d.ReadString(schemas.Evaluation_InputDataLocationS3, v.InputDataLocationS3)
+		case schemas.Evaluation_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.Evaluation_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.Evaluation_MLModelId:
+			v.MLModelId = new(string)
+			return d.ReadString(schemas.Evaluation_MLModelId, v.MLModelId)
+		case schemas.Evaluation_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.Evaluation_Message, v.Message)
+		case schemas.Evaluation_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Evaluation_Name, v.Name)
+		case schemas.Evaluation_PerformanceMetrics:
+			v.PerformanceMetrics = &PerformanceMetrics{}
+			return v.PerformanceMetrics.Deserialize(d)
+		case schemas.Evaluation_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.Evaluation_StartedAt, v.StartedAt)
+		case schemas.Evaluation_Status:
+			var ev string
+			if err := d.ReadString(schemas.Evaluation_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = EntityStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 //	Represents the output of a GetMLModel operation.
@@ -387,6 +742,147 @@ type MLModel struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MLModel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MLModel)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MLModel) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Algorithm != "" {
+		s.WriteString(schemas.MLModel_Algorithm, string(v.Algorithm))
+	}
+	if v.ComputeTime != nil {
+		s.WriteInt64(schemas.MLModel_ComputeTime, *v.ComputeTime)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.MLModel_CreatedAt, *v.CreatedAt)
+	}
+	if v.CreatedByIamUser != nil {
+		s.WriteString(schemas.MLModel_CreatedByIamUser, *v.CreatedByIamUser)
+	}
+	if v.EndpointInfo != nil {
+		s.WriteStruct(schemas.MLModel_EndpointInfo)
+		v.EndpointInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FinishedAt != nil {
+		s.WriteTime(schemas.MLModel_FinishedAt, *v.FinishedAt)
+	}
+	if v.InputDataLocationS3 != nil {
+		s.WriteString(schemas.MLModel_InputDataLocationS3, *v.InputDataLocationS3)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.MLModel_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.MLModelId != nil {
+		s.WriteString(schemas.MLModel_MLModelId, *v.MLModelId)
+	}
+	if v.MLModelType != "" {
+		s.WriteString(schemas.MLModel_MLModelType, string(v.MLModelType))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.MLModel_Message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.MLModel_Name, *v.Name)
+	}
+	if v.ScoreThreshold != nil {
+		s.WriteFloat32(schemas.MLModel_ScoreThreshold, *v.ScoreThreshold)
+	}
+	if v.ScoreThresholdLastUpdatedAt != nil {
+		s.WriteTime(schemas.MLModel_ScoreThresholdLastUpdatedAt, *v.ScoreThresholdLastUpdatedAt)
+	}
+	if v.SizeInBytes != nil {
+		s.WriteInt64(schemas.MLModel_SizeInBytes, *v.SizeInBytes)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.MLModel_StartedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.MLModel_Status, string(v.Status))
+	}
+	if v.TrainingDataSourceId != nil {
+		s.WriteString(schemas.MLModel_TrainingDataSourceId, *v.TrainingDataSourceId)
+	}
+	serializeTrainingParameters(s, schemas.MLModel_TrainingParameters, v.TrainingParameters)
+}
+func (v *MLModel) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MLModel, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MLModel_Algorithm:
+			var ev string
+			if err := d.ReadString(schemas.MLModel_Algorithm, &ev); err != nil {
+				return err
+			}
+			v.Algorithm = Algorithm(ev)
+			return nil
+		case schemas.MLModel_ComputeTime:
+			v.ComputeTime = new(int64)
+			return d.ReadInt64(schemas.MLModel_ComputeTime, v.ComputeTime)
+		case schemas.MLModel_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.MLModel_CreatedAt, v.CreatedAt)
+		case schemas.MLModel_CreatedByIamUser:
+			v.CreatedByIamUser = new(string)
+			return d.ReadString(schemas.MLModel_CreatedByIamUser, v.CreatedByIamUser)
+		case schemas.MLModel_EndpointInfo:
+			v.EndpointInfo = &RealtimeEndpointInfo{}
+			return v.EndpointInfo.Deserialize(d)
+		case schemas.MLModel_FinishedAt:
+			v.FinishedAt = new(time.Time)
+			return d.ReadTime(schemas.MLModel_FinishedAt, v.FinishedAt)
+		case schemas.MLModel_InputDataLocationS3:
+			v.InputDataLocationS3 = new(string)
+			return d.ReadString(schemas.MLModel_InputDataLocationS3, v.InputDataLocationS3)
+		case schemas.MLModel_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.MLModel_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.MLModel_MLModelId:
+			v.MLModelId = new(string)
+			return d.ReadString(schemas.MLModel_MLModelId, v.MLModelId)
+		case schemas.MLModel_MLModelType:
+			var ev string
+			if err := d.ReadString(schemas.MLModel_MLModelType, &ev); err != nil {
+				return err
+			}
+			v.MLModelType = MLModelType(ev)
+			return nil
+		case schemas.MLModel_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MLModel_Message, v.Message)
+		case schemas.MLModel_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.MLModel_Name, v.Name)
+		case schemas.MLModel_ScoreThreshold:
+			v.ScoreThreshold = new(float32)
+			return d.ReadFloat32(schemas.MLModel_ScoreThreshold, v.ScoreThreshold)
+		case schemas.MLModel_ScoreThresholdLastUpdatedAt:
+			v.ScoreThresholdLastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.MLModel_ScoreThresholdLastUpdatedAt, v.ScoreThresholdLastUpdatedAt)
+		case schemas.MLModel_SizeInBytes:
+			v.SizeInBytes = new(int64)
+			return d.ReadInt64(schemas.MLModel_SizeInBytes, v.SizeInBytes)
+		case schemas.MLModel_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.MLModel_StartedAt, v.StartedAt)
+		case schemas.MLModel_Status:
+			var ev string
+			if err := d.ReadString(schemas.MLModel_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = EntityStatus(ev)
+			return nil
+		case schemas.MLModel_TrainingDataSourceId:
+			v.TrainingDataSourceId = new(string)
+			return d.ReadString(schemas.MLModel_TrainingDataSourceId, v.TrainingDataSourceId)
+		case schemas.MLModel_TrainingParameters:
+			return deserializeTrainingParameters(d, schemas.MLModel_TrainingParameters, &v.TrainingParameters)
+		}
+		return nil
+	})
+}
+
 // Measurements of how well the MLModel performed on known observations. One of
 // the following metrics is returned, based on the type of the MLModel :
 //
@@ -407,6 +903,25 @@ type PerformanceMetrics struct {
 	Properties map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PerformanceMetrics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PerformanceMetrics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PerformanceMetrics) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePerformanceMetricsProperties(s, schemas.PerformanceMetrics_Properties, v.Properties)
+}
+func (v *PerformanceMetrics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PerformanceMetrics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PerformanceMetrics_Properties:
+			return deserializePerformanceMetricsProperties(d, schemas.PerformanceMetrics_Properties, &v.Properties)
+		}
+		return nil
+	})
 }
 
 // The output from a Predict operation:
@@ -438,6 +953,40 @@ type Prediction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Prediction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Prediction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Prediction) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDetailsMap(s, schemas.Prediction_details, v.Details)
+	if v.PredictedLabel != nil {
+		s.WriteString(schemas.Prediction_predictedLabel, *v.PredictedLabel)
+	}
+	serializeScoreValuePerLabelMap(s, schemas.Prediction_predictedScores, v.PredictedScores)
+	if v.PredictedValue != nil {
+		s.WriteFloat32(schemas.Prediction_predictedValue, *v.PredictedValue)
+	}
+}
+func (v *Prediction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Prediction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Prediction_details:
+			return deserializeDetailsMap(d, schemas.Prediction_details, &v.Details)
+		case schemas.Prediction_predictedLabel:
+			v.PredictedLabel = new(string)
+			return d.ReadString(schemas.Prediction_predictedLabel, v.PredictedLabel)
+		case schemas.Prediction_predictedScores:
+			return deserializeScoreValuePerLabelMap(d, schemas.Prediction_predictedScores, &v.PredictedScores)
+		case schemas.Prediction_predictedValue:
+			v.PredictedValue = new(float32)
+			return d.ReadFloat32(schemas.Prediction_predictedValue, v.PredictedValue)
+		}
+		return nil
+	})
+}
+
 // The database details of an Amazon RDS database.
 type RDSDatabase struct {
 
@@ -452,6 +1001,34 @@ type RDSDatabase struct {
 	InstanceIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RDSDatabase) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RDSDatabase)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RDSDatabase) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.RDSDatabase_DatabaseName, *v.DatabaseName)
+	}
+	if v.InstanceIdentifier != nil {
+		s.WriteString(schemas.RDSDatabase_InstanceIdentifier, *v.InstanceIdentifier)
+	}
+}
+func (v *RDSDatabase) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RDSDatabase, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RDSDatabase_DatabaseName:
+			v.DatabaseName = new(string)
+			return d.ReadString(schemas.RDSDatabase_DatabaseName, v.DatabaseName)
+		case schemas.RDSDatabase_InstanceIdentifier:
+			v.InstanceIdentifier = new(string)
+			return d.ReadString(schemas.RDSDatabase_InstanceIdentifier, v.InstanceIdentifier)
+		}
+		return nil
+	})
 }
 
 // The database credentials to connect to a database on an RDS DB instance.
@@ -472,6 +1049,34 @@ type RDSDatabaseCredentials struct {
 	Username *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RDSDatabaseCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RDSDatabaseCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RDSDatabaseCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Password != nil {
+		s.WriteString(schemas.RDSDatabaseCredentials_Password, *v.Password)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.RDSDatabaseCredentials_Username, *v.Username)
+	}
+}
+func (v *RDSDatabaseCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RDSDatabaseCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RDSDatabaseCredentials_Password:
+			v.Password = new(string)
+			return d.ReadString(schemas.RDSDatabaseCredentials_Password, v.Password)
+		case schemas.RDSDatabaseCredentials_Username:
+			v.Username = new(string)
+			return d.ReadString(schemas.RDSDatabaseCredentials_Username, v.Username)
+		}
+		return nil
+	})
 }
 
 // The data specification of an Amazon Relational Database Service (Amazon RDS)
@@ -655,6 +1260,89 @@ type RDSDataSpec struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RDSDataSpec) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RDSDataSpec)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RDSDataSpec) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataRearrangement != nil {
+		s.WriteString(schemas.RDSDataSpec_DataRearrangement, *v.DataRearrangement)
+	}
+	if v.DataSchema != nil {
+		s.WriteString(schemas.RDSDataSpec_DataSchema, *v.DataSchema)
+	}
+	if v.DataSchemaUri != nil {
+		s.WriteString(schemas.RDSDataSpec_DataSchemaUri, *v.DataSchemaUri)
+	}
+	if v.DatabaseCredentials != nil {
+		s.WriteStruct(schemas.RDSDataSpec_DatabaseCredentials)
+		v.DatabaseCredentials.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DatabaseInformation != nil {
+		s.WriteStruct(schemas.RDSDataSpec_DatabaseInformation)
+		v.DatabaseInformation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceRole != nil {
+		s.WriteString(schemas.RDSDataSpec_ResourceRole, *v.ResourceRole)
+	}
+	if v.S3StagingLocation != nil {
+		s.WriteString(schemas.RDSDataSpec_S3StagingLocation, *v.S3StagingLocation)
+	}
+	serializeEDPSecurityGroupIds(s, schemas.RDSDataSpec_SecurityGroupIds, v.SecurityGroupIds)
+	if v.SelectSqlQuery != nil {
+		s.WriteString(schemas.RDSDataSpec_SelectSqlQuery, *v.SelectSqlQuery)
+	}
+	if v.ServiceRole != nil {
+		s.WriteString(schemas.RDSDataSpec_ServiceRole, *v.ServiceRole)
+	}
+	if v.SubnetId != nil {
+		s.WriteString(schemas.RDSDataSpec_SubnetId, *v.SubnetId)
+	}
+}
+func (v *RDSDataSpec) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RDSDataSpec, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RDSDataSpec_DataRearrangement:
+			v.DataRearrangement = new(string)
+			return d.ReadString(schemas.RDSDataSpec_DataRearrangement, v.DataRearrangement)
+		case schemas.RDSDataSpec_DataSchema:
+			v.DataSchema = new(string)
+			return d.ReadString(schemas.RDSDataSpec_DataSchema, v.DataSchema)
+		case schemas.RDSDataSpec_DataSchemaUri:
+			v.DataSchemaUri = new(string)
+			return d.ReadString(schemas.RDSDataSpec_DataSchemaUri, v.DataSchemaUri)
+		case schemas.RDSDataSpec_DatabaseCredentials:
+			v.DatabaseCredentials = &RDSDatabaseCredentials{}
+			return v.DatabaseCredentials.Deserialize(d)
+		case schemas.RDSDataSpec_DatabaseInformation:
+			v.DatabaseInformation = &RDSDatabase{}
+			return v.DatabaseInformation.Deserialize(d)
+		case schemas.RDSDataSpec_ResourceRole:
+			v.ResourceRole = new(string)
+			return d.ReadString(schemas.RDSDataSpec_ResourceRole, v.ResourceRole)
+		case schemas.RDSDataSpec_S3StagingLocation:
+			v.S3StagingLocation = new(string)
+			return d.ReadString(schemas.RDSDataSpec_S3StagingLocation, v.S3StagingLocation)
+		case schemas.RDSDataSpec_SecurityGroupIds:
+			return deserializeEDPSecurityGroupIds(d, schemas.RDSDataSpec_SecurityGroupIds, &v.SecurityGroupIds)
+		case schemas.RDSDataSpec_SelectSqlQuery:
+			v.SelectSqlQuery = new(string)
+			return d.ReadString(schemas.RDSDataSpec_SelectSqlQuery, v.SelectSqlQuery)
+		case schemas.RDSDataSpec_ServiceRole:
+			v.ServiceRole = new(string)
+			return d.ReadString(schemas.RDSDataSpec_ServiceRole, v.ServiceRole)
+		case schemas.RDSDataSpec_SubnetId:
+			v.SubnetId = new(string)
+			return d.ReadString(schemas.RDSDataSpec_SubnetId, v.SubnetId)
+		}
+		return nil
+	})
+}
+
 // The datasource details that are specific to Amazon RDS.
 type RDSMetadata struct {
 
@@ -692,6 +1380,60 @@ type RDSMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RDSMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RDSMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RDSMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataPipelineId != nil {
+		s.WriteString(schemas.RDSMetadata_DataPipelineId, *v.DataPipelineId)
+	}
+	if v.Database != nil {
+		s.WriteStruct(schemas.RDSMetadata_Database)
+		v.Database.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DatabaseUserName != nil {
+		s.WriteString(schemas.RDSMetadata_DatabaseUserName, *v.DatabaseUserName)
+	}
+	if v.ResourceRole != nil {
+		s.WriteString(schemas.RDSMetadata_ResourceRole, *v.ResourceRole)
+	}
+	if v.SelectSqlQuery != nil {
+		s.WriteString(schemas.RDSMetadata_SelectSqlQuery, *v.SelectSqlQuery)
+	}
+	if v.ServiceRole != nil {
+		s.WriteString(schemas.RDSMetadata_ServiceRole, *v.ServiceRole)
+	}
+}
+func (v *RDSMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RDSMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RDSMetadata_DataPipelineId:
+			v.DataPipelineId = new(string)
+			return d.ReadString(schemas.RDSMetadata_DataPipelineId, v.DataPipelineId)
+		case schemas.RDSMetadata_Database:
+			v.Database = &RDSDatabase{}
+			return v.Database.Deserialize(d)
+		case schemas.RDSMetadata_DatabaseUserName:
+			v.DatabaseUserName = new(string)
+			return d.ReadString(schemas.RDSMetadata_DatabaseUserName, v.DatabaseUserName)
+		case schemas.RDSMetadata_ResourceRole:
+			v.ResourceRole = new(string)
+			return d.ReadString(schemas.RDSMetadata_ResourceRole, v.ResourceRole)
+		case schemas.RDSMetadata_SelectSqlQuery:
+			v.SelectSqlQuery = new(string)
+			return d.ReadString(schemas.RDSMetadata_SelectSqlQuery, v.SelectSqlQuery)
+		case schemas.RDSMetadata_ServiceRole:
+			v.ServiceRole = new(string)
+			return d.ReadString(schemas.RDSMetadata_ServiceRole, v.ServiceRole)
+		}
+		return nil
+	})
+}
+
 // Describes the real-time endpoint information for an MLModel .
 type RealtimeEndpointInfo struct {
 
@@ -723,6 +1465,49 @@ type RealtimeEndpointInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RealtimeEndpointInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RealtimeEndpointInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RealtimeEndpointInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.RealtimeEndpointInfo_CreatedAt, *v.CreatedAt)
+	}
+	if v.EndpointStatus != "" {
+		s.WriteString(schemas.RealtimeEndpointInfo_EndpointStatus, string(v.EndpointStatus))
+	}
+	if v.EndpointUrl != nil {
+		s.WriteString(schemas.RealtimeEndpointInfo_EndpointUrl, *v.EndpointUrl)
+	}
+	if v.PeakRequestsPerSecond != 0 {
+		s.WriteInt32(schemas.RealtimeEndpointInfo_PeakRequestsPerSecond, v.PeakRequestsPerSecond)
+	}
+}
+func (v *RealtimeEndpointInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RealtimeEndpointInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RealtimeEndpointInfo_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.RealtimeEndpointInfo_CreatedAt, v.CreatedAt)
+		case schemas.RealtimeEndpointInfo_EndpointStatus:
+			var ev string
+			if err := d.ReadString(schemas.RealtimeEndpointInfo_EndpointStatus, &ev); err != nil {
+				return err
+			}
+			v.EndpointStatus = RealtimeEndpointStatus(ev)
+			return nil
+		case schemas.RealtimeEndpointInfo_EndpointUrl:
+			v.EndpointUrl = new(string)
+			return d.ReadString(schemas.RealtimeEndpointInfo_EndpointUrl, v.EndpointUrl)
+		case schemas.RealtimeEndpointInfo_PeakRequestsPerSecond:
+			return d.ReadInt32(schemas.RealtimeEndpointInfo_PeakRequestsPerSecond, &v.PeakRequestsPerSecond)
+		}
+		return nil
+	})
+}
+
 // Describes the database details required to connect to an Amazon Redshift
 // database.
 type RedshiftDatabase struct {
@@ -738,6 +1523,34 @@ type RedshiftDatabase struct {
 	DatabaseName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RedshiftDatabase) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedshiftDatabase)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedshiftDatabase) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.RedshiftDatabase_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.RedshiftDatabase_DatabaseName, *v.DatabaseName)
+	}
+}
+func (v *RedshiftDatabase) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RedshiftDatabase, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RedshiftDatabase_ClusterIdentifier:
+			v.ClusterIdentifier = new(string)
+			return d.ReadString(schemas.RedshiftDatabase_ClusterIdentifier, v.ClusterIdentifier)
+		case schemas.RedshiftDatabase_DatabaseName:
+			v.DatabaseName = new(string)
+			return d.ReadString(schemas.RedshiftDatabase_DatabaseName, v.DatabaseName)
+		}
+		return nil
+	})
 }
 
 // Describes the database credentials for connecting to a database on an Amazon
@@ -765,6 +1578,34 @@ type RedshiftDatabaseCredentials struct {
 	Username *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RedshiftDatabaseCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedshiftDatabaseCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedshiftDatabaseCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Password != nil {
+		s.WriteString(schemas.RedshiftDatabaseCredentials_Password, *v.Password)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.RedshiftDatabaseCredentials_Username, *v.Username)
+	}
+}
+func (v *RedshiftDatabaseCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RedshiftDatabaseCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RedshiftDatabaseCredentials_Password:
+			v.Password = new(string)
+			return d.ReadString(schemas.RedshiftDatabaseCredentials_Password, v.Password)
+		case schemas.RedshiftDatabaseCredentials_Username:
+			v.Username = new(string)
+			return d.ReadString(schemas.RedshiftDatabaseCredentials_Username, v.Username)
+		}
+		return nil
+	})
 }
 
 // Describes the data specification of an Amazon Redshift DataSource .
@@ -916,6 +1757,68 @@ type RedshiftDataSpec struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RedshiftDataSpec) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedshiftDataSpec)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedshiftDataSpec) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataRearrangement != nil {
+		s.WriteString(schemas.RedshiftDataSpec_DataRearrangement, *v.DataRearrangement)
+	}
+	if v.DataSchema != nil {
+		s.WriteString(schemas.RedshiftDataSpec_DataSchema, *v.DataSchema)
+	}
+	if v.DataSchemaUri != nil {
+		s.WriteString(schemas.RedshiftDataSpec_DataSchemaUri, *v.DataSchemaUri)
+	}
+	if v.DatabaseCredentials != nil {
+		s.WriteStruct(schemas.RedshiftDataSpec_DatabaseCredentials)
+		v.DatabaseCredentials.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DatabaseInformation != nil {
+		s.WriteStruct(schemas.RedshiftDataSpec_DatabaseInformation)
+		v.DatabaseInformation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3StagingLocation != nil {
+		s.WriteString(schemas.RedshiftDataSpec_S3StagingLocation, *v.S3StagingLocation)
+	}
+	if v.SelectSqlQuery != nil {
+		s.WriteString(schemas.RedshiftDataSpec_SelectSqlQuery, *v.SelectSqlQuery)
+	}
+}
+func (v *RedshiftDataSpec) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RedshiftDataSpec, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RedshiftDataSpec_DataRearrangement:
+			v.DataRearrangement = new(string)
+			return d.ReadString(schemas.RedshiftDataSpec_DataRearrangement, v.DataRearrangement)
+		case schemas.RedshiftDataSpec_DataSchema:
+			v.DataSchema = new(string)
+			return d.ReadString(schemas.RedshiftDataSpec_DataSchema, v.DataSchema)
+		case schemas.RedshiftDataSpec_DataSchemaUri:
+			v.DataSchemaUri = new(string)
+			return d.ReadString(schemas.RedshiftDataSpec_DataSchemaUri, v.DataSchemaUri)
+		case schemas.RedshiftDataSpec_DatabaseCredentials:
+			v.DatabaseCredentials = &RedshiftDatabaseCredentials{}
+			return v.DatabaseCredentials.Deserialize(d)
+		case schemas.RedshiftDataSpec_DatabaseInformation:
+			v.DatabaseInformation = &RedshiftDatabase{}
+			return v.DatabaseInformation.Deserialize(d)
+		case schemas.RedshiftDataSpec_S3StagingLocation:
+			v.S3StagingLocation = new(string)
+			return d.ReadString(schemas.RedshiftDataSpec_S3StagingLocation, v.S3StagingLocation)
+		case schemas.RedshiftDataSpec_SelectSqlQuery:
+			v.SelectSqlQuery = new(string)
+			return d.ReadString(schemas.RedshiftDataSpec_SelectSqlQuery, v.SelectSqlQuery)
+		}
+		return nil
+	})
+}
+
 // Describes the DataSource details specific to Amazon Redshift.
 type RedshiftMetadata struct {
 
@@ -936,6 +1839,42 @@ type RedshiftMetadata struct {
 	SelectSqlQuery *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RedshiftMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedshiftMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedshiftMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatabaseUserName != nil {
+		s.WriteString(schemas.RedshiftMetadata_DatabaseUserName, *v.DatabaseUserName)
+	}
+	if v.RedshiftDatabase != nil {
+		s.WriteStruct(schemas.RedshiftMetadata_RedshiftDatabase)
+		v.RedshiftDatabase.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SelectSqlQuery != nil {
+		s.WriteString(schemas.RedshiftMetadata_SelectSqlQuery, *v.SelectSqlQuery)
+	}
+}
+func (v *RedshiftMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RedshiftMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RedshiftMetadata_DatabaseUserName:
+			v.DatabaseUserName = new(string)
+			return d.ReadString(schemas.RedshiftMetadata_DatabaseUserName, v.DatabaseUserName)
+		case schemas.RedshiftMetadata_RedshiftDatabase:
+			v.RedshiftDatabase = &RedshiftDatabase{}
+			return v.RedshiftDatabase.Deserialize(d)
+		case schemas.RedshiftMetadata_SelectSqlQuery:
+			v.SelectSqlQuery = new(string)
+			return d.ReadString(schemas.RedshiftMetadata_SelectSqlQuery, v.SelectSqlQuery)
+		}
+		return nil
+	})
 }
 
 // Describes the data specification of a DataSource .
@@ -1071,6 +2010,46 @@ type S3DataSpec struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3DataSpec) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3DataSpec)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3DataSpec) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataLocationS3 != nil {
+		s.WriteString(schemas.S3DataSpec_DataLocationS3, *v.DataLocationS3)
+	}
+	if v.DataRearrangement != nil {
+		s.WriteString(schemas.S3DataSpec_DataRearrangement, *v.DataRearrangement)
+	}
+	if v.DataSchema != nil {
+		s.WriteString(schemas.S3DataSpec_DataSchema, *v.DataSchema)
+	}
+	if v.DataSchemaLocationS3 != nil {
+		s.WriteString(schemas.S3DataSpec_DataSchemaLocationS3, *v.DataSchemaLocationS3)
+	}
+}
+func (v *S3DataSpec) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3DataSpec, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3DataSpec_DataLocationS3:
+			v.DataLocationS3 = new(string)
+			return d.ReadString(schemas.S3DataSpec_DataLocationS3, v.DataLocationS3)
+		case schemas.S3DataSpec_DataRearrangement:
+			v.DataRearrangement = new(string)
+			return d.ReadString(schemas.S3DataSpec_DataRearrangement, v.DataRearrangement)
+		case schemas.S3DataSpec_DataSchema:
+			v.DataSchema = new(string)
+			return d.ReadString(schemas.S3DataSpec_DataSchema, v.DataSchema)
+		case schemas.S3DataSpec_DataSchemaLocationS3:
+			v.DataSchemaLocationS3 = new(string)
+			return d.ReadString(schemas.S3DataSpec_DataSchemaLocationS3, v.DataSchemaLocationS3)
+		}
+		return nil
+	})
+}
+
 // A custom key-value pair associated with an ML object, such as an ML model.
 type Tag struct {
 
@@ -1084,6 +2063,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

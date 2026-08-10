@@ -4,7 +4,9 @@ package mgn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,27 @@ type GetNetworkMigrationMapperSegmentConstructInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNetworkMigrationMapperSegmentConstructInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNetworkMigrationMapperSegmentConstructRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNetworkMigrationMapperSegmentConstructInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConstructID != nil {
+		s.WriteString(schemas.GetNetworkMigrationMapperSegmentConstructRequest_constructID, *v.ConstructID)
+	}
+	if v.NetworkMigrationDefinitionID != nil {
+		s.WriteString(schemas.GetNetworkMigrationMapperSegmentConstructRequest_networkMigrationDefinitionID, *v.NetworkMigrationDefinitionID)
+	}
+	if v.NetworkMigrationExecutionID != nil {
+		s.WriteString(schemas.GetNetworkMigrationMapperSegmentConstructRequest_networkMigrationExecutionID, *v.NetworkMigrationExecutionID)
+	}
+	if v.SegmentID != nil {
+		s.WriteString(schemas.GetNetworkMigrationMapperSegmentConstructRequest_segmentID, *v.SegmentID)
+	}
+}
+
 type GetNetworkMigrationMapperSegmentConstructOutput struct {
 
 	// The construct metadata including type, name, and configuration.
@@ -61,13 +84,34 @@ type GetNetworkMigrationMapperSegmentConstructOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNetworkMigrationMapperSegmentConstructOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNetworkMigrationMapperSegmentConstructResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNetworkMigrationMapperSegmentConstructOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Construct != nil {
+		s.WriteStruct(schemas.GetNetworkMigrationMapperSegmentConstructResponse_construct)
+		v.Construct.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetNetworkMigrationMapperSegmentConstructOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetNetworkMigrationMapperSegmentConstructResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetNetworkMigrationMapperSegmentConstructResponse_construct:
+			v.Construct = &types.NetworkMigrationMapperSegmentConstruct{}
+			return v.Construct.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetNetworkMigrationMapperSegmentConstructMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetNetworkMigrationMapperSegmentConstruct{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNetworkMigrationMapperSegmentConstruct, schemas.GetNetworkMigrationMapperSegmentConstructRequest, schemas.GetNetworkMigrationMapperSegmentConstructResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetNetworkMigrationMapperSegmentConstruct{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNetworkMigrationMapperSegmentConstruct, schemas.GetNetworkMigrationMapperSegmentConstructRequest, schemas.GetNetworkMigrationMapperSegmentConstructResponse), output: &GetNetworkMigrationMapperSegmentConstructOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

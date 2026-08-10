@@ -4,7 +4,9 @@ package mgn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,34 @@ type ArchiveApplicationInput struct {
 	AccountID *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ArchiveApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ArchiveApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ArchiveApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountID != nil {
+		s.WriteString(schemas.ArchiveApplicationRequest_accountID, *v.AccountID)
+	}
+	if v.ApplicationID != nil {
+		s.WriteString(schemas.ArchiveApplicationRequest_applicationID, *v.ApplicationID)
+	}
+}
+func (v *ArchiveApplicationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ArchiveApplicationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ArchiveApplicationRequest_accountID:
+			v.AccountID = new(string)
+			return d.ReadString(schemas.ArchiveApplicationRequest_accountID, v.AccountID)
+		case schemas.ArchiveApplicationRequest_applicationID:
+			v.ApplicationID = new(string)
+			return d.ReadString(schemas.ArchiveApplicationRequest_applicationID, v.ApplicationID)
+		}
+		return nil
+	})
 }
 
 type ArchiveApplicationOutput struct {
@@ -75,13 +105,85 @@ type ArchiveApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ArchiveApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Application)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ArchiveApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationAggregatedStatus != nil {
+		s.WriteStruct(schemas.Application_applicationAggregatedStatus)
+		v.ApplicationAggregatedStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApplicationID != nil {
+		s.WriteString(schemas.Application_applicationID, *v.ApplicationID)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.Application_arn, *v.Arn)
+	}
+	if v.CreationDateTime != nil {
+		s.WriteString(schemas.Application_creationDateTime, *v.CreationDateTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Application_description, *v.Description)
+	}
+	if v.IsArchived != nil {
+		s.WriteBool(schemas.Application_isArchived, *v.IsArchived)
+	}
+	if v.LastModifiedDateTime != nil {
+		s.WriteString(schemas.Application_lastModifiedDateTime, *v.LastModifiedDateTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Application_name, *v.Name)
+	}
+	serializeTagsMap(s, schemas.Application_tags, v.Tags)
+	if v.WaveID != nil {
+		s.WriteString(schemas.Application_waveID, *v.WaveID)
+	}
+}
+func (v *ArchiveApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Application, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Application_applicationAggregatedStatus:
+			v.ApplicationAggregatedStatus = &types.ApplicationAggregatedStatus{}
+			return v.ApplicationAggregatedStatus.Deserialize(d)
+		case schemas.Application_applicationID:
+			v.ApplicationID = new(string)
+			return d.ReadString(schemas.Application_applicationID, v.ApplicationID)
+		case schemas.Application_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Application_arn, v.Arn)
+		case schemas.Application_creationDateTime:
+			v.CreationDateTime = new(string)
+			return d.ReadString(schemas.Application_creationDateTime, v.CreationDateTime)
+		case schemas.Application_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Application_description, v.Description)
+		case schemas.Application_isArchived:
+			v.IsArchived = new(bool)
+			return d.ReadBool(schemas.Application_isArchived, v.IsArchived)
+		case schemas.Application_lastModifiedDateTime:
+			v.LastModifiedDateTime = new(string)
+			return d.ReadString(schemas.Application_lastModifiedDateTime, v.LastModifiedDateTime)
+		case schemas.Application_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Application_name, v.Name)
+		case schemas.Application_tags:
+			return deserializeTagsMap(d, schemas.Application_tags, &v.Tags)
+		case schemas.Application_waveID:
+			v.WaveID = new(string)
+			return d.ReadString(schemas.Application_waveID, v.WaveID)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationArchiveApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpArchiveApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ArchiveApplication, schemas.ArchiveApplicationRequest, schemas.Application)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpArchiveApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ArchiveApplication, schemas.ArchiveApplicationRequest, schemas.Application), output: &ArchiveApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

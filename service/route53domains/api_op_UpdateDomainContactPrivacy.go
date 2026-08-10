@@ -4,6 +4,8 @@ package route53domains
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -95,6 +97,30 @@ type UpdateDomainContactPrivacyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDomainContactPrivacyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDomainContactPrivacyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDomainContactPrivacyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdminPrivacy != nil {
+		s.WriteBool(schemas.UpdateDomainContactPrivacyRequest_AdminPrivacy, *v.AdminPrivacy)
+	}
+	if v.BillingPrivacy != nil {
+		s.WriteBool(schemas.UpdateDomainContactPrivacyRequest_BillingPrivacy, *v.BillingPrivacy)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.UpdateDomainContactPrivacyRequest_DomainName, *v.DomainName)
+	}
+	if v.RegistrantPrivacy != nil {
+		s.WriteBool(schemas.UpdateDomainContactPrivacyRequest_RegistrantPrivacy, *v.RegistrantPrivacy)
+	}
+	if v.TechPrivacy != nil {
+		s.WriteBool(schemas.UpdateDomainContactPrivacyRequest_TechPrivacy, *v.TechPrivacy)
+	}
+}
+
 // The UpdateDomainContactPrivacy response includes the following element.
 type UpdateDomainContactPrivacyOutput struct {
 
@@ -108,13 +134,32 @@ type UpdateDomainContactPrivacyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDomainContactPrivacyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDomainContactPrivacyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDomainContactPrivacyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.UpdateDomainContactPrivacyResponse_OperationId, *v.OperationId)
+	}
+}
+func (v *UpdateDomainContactPrivacyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDomainContactPrivacyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDomainContactPrivacyResponse_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.UpdateDomainContactPrivacyResponse_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDomainContactPrivacyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDomainContactPrivacy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDomainContactPrivacy, schemas.UpdateDomainContactPrivacyRequest, schemas.UpdateDomainContactPrivacyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateDomainContactPrivacy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDomainContactPrivacy, schemas.UpdateDomainContactPrivacyRequest, schemas.UpdateDomainContactPrivacyResponse), output: &UpdateDomainContactPrivacyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

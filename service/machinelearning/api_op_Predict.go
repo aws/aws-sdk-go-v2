@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	mlcust "github.com/aws/aws-sdk-go-v2/service/machinelearning/internal/customizations"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
@@ -48,6 +49,22 @@ type PredictInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PredictInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PredictInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PredictInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MLModelId != nil {
+		s.WriteString(schemas.PredictInput_MLModelId, *v.MLModelId)
+	}
+	if v.PredictEndpoint != nil {
+		s.WriteString(schemas.PredictInput_PredictEndpoint, *v.PredictEndpoint)
+	}
+	serializeRecord(s, schemas.PredictInput_Record, v.Record)
+}
+
 type PredictOutput struct {
 
 	// The output from a Predict operation:
@@ -70,13 +87,34 @@ type PredictOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PredictOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PredictOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PredictOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Prediction != nil {
+		s.WriteStruct(schemas.PredictOutput_Prediction)
+		v.Prediction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PredictOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PredictOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PredictOutput_Prediction:
+			v.Prediction = &types.Prediction{}
+			return v.Prediction.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPredictMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPredict{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Predict, schemas.PredictInput, schemas.PredictOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPredict{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Predict, schemas.PredictInput, schemas.PredictOutput), output: &PredictOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

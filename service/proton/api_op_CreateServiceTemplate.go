@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,59 @@ type CreateServiceTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServiceTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServiceTemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServiceTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateServiceTemplateInput_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateServiceTemplateInput_displayName, *v.DisplayName)
+	}
+	if v.EncryptionKey != nil {
+		s.WriteString(schemas.CreateServiceTemplateInput_encryptionKey, *v.EncryptionKey)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateServiceTemplateInput_name, *v.Name)
+	}
+	if v.PipelineProvisioning != "" {
+		s.WriteString(schemas.CreateServiceTemplateInput_pipelineProvisioning, string(v.PipelineProvisioning))
+	}
+	serializeTagList(s, schemas.CreateServiceTemplateInput_tags, v.Tags)
+}
+func (v *CreateServiceTemplateInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateServiceTemplateInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateServiceTemplateInput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateServiceTemplateInput_description, v.Description)
+		case schemas.CreateServiceTemplateInput_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.CreateServiceTemplateInput_displayName, v.DisplayName)
+		case schemas.CreateServiceTemplateInput_encryptionKey:
+			v.EncryptionKey = new(string)
+			return d.ReadString(schemas.CreateServiceTemplateInput_encryptionKey, v.EncryptionKey)
+		case schemas.CreateServiceTemplateInput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateServiceTemplateInput_name, v.Name)
+		case schemas.CreateServiceTemplateInput_pipelineProvisioning:
+			var ev string
+			if err := d.ReadString(schemas.CreateServiceTemplateInput_pipelineProvisioning, &ev); err != nil {
+				return err
+			}
+			v.PipelineProvisioning = types.Provisioning(ev)
+			return nil
+		case schemas.CreateServiceTemplateInput_tags:
+			return deserializeTagList(d, schemas.CreateServiceTemplateInput_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateServiceTemplateOutput struct {
 
 	// The service template detail data that's returned by Proton.
@@ -82,13 +137,34 @@ type CreateServiceTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServiceTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServiceTemplateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServiceTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceTemplate != nil {
+		s.WriteStruct(schemas.CreateServiceTemplateOutput_serviceTemplate)
+		v.ServiceTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateServiceTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateServiceTemplateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateServiceTemplateOutput_serviceTemplate:
+			v.ServiceTemplate = &types.ServiceTemplate{}
+			return v.ServiceTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateServiceTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateServiceTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServiceTemplate, schemas.CreateServiceTemplateInput, schemas.CreateServiceTemplateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateServiceTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServiceTemplate, schemas.CreateServiceTemplateInput, schemas.CreateServiceTemplateOutput), output: &CreateServiceTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

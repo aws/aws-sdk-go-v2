@@ -5,7 +5,9 @@ package appmesh
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,57 @@ type CreateVirtualServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVirtualServiceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVirtualServiceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVirtualServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateVirtualServiceInput_clientToken, *v.ClientToken)
+	}
+	if v.MeshName != nil {
+		s.WriteString(schemas.CreateVirtualServiceInput_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.CreateVirtualServiceInput_meshOwner, *v.MeshOwner)
+	}
+	if v.Spec != nil {
+		s.WriteStruct(schemas.CreateVirtualServiceInput_spec)
+		v.Spec.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateVirtualServiceInput_tags, v.Tags)
+	if v.VirtualServiceName != nil {
+		s.WriteString(schemas.CreateVirtualServiceInput_virtualServiceName, *v.VirtualServiceName)
+	}
+}
+func (v *CreateVirtualServiceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVirtualServiceInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVirtualServiceInput_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateVirtualServiceInput_clientToken, v.ClientToken)
+		case schemas.CreateVirtualServiceInput_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.CreateVirtualServiceInput_meshName, v.MeshName)
+		case schemas.CreateVirtualServiceInput_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.CreateVirtualServiceInput_meshOwner, v.MeshOwner)
+		case schemas.CreateVirtualServiceInput_spec:
+			v.Spec = &types.VirtualServiceSpec{}
+			return v.Spec.Deserialize(d)
+		case schemas.CreateVirtualServiceInput_tags:
+			return deserializeTagList(d, schemas.CreateVirtualServiceInput_tags, &v.Tags)
+		case schemas.CreateVirtualServiceInput_virtualServiceName:
+			v.VirtualServiceName = new(string)
+			return d.ReadString(schemas.CreateVirtualServiceInput_virtualServiceName, v.VirtualServiceName)
+		}
+		return nil
+	})
+}
+
 type CreateVirtualServiceOutput struct {
 
 	// The full description of your virtual service following the create call.
@@ -86,13 +139,34 @@ type CreateVirtualServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVirtualServiceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVirtualServiceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVirtualServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualService != nil {
+		s.WriteStruct(schemas.CreateVirtualServiceOutput_virtualService)
+		v.VirtualService.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateVirtualServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVirtualServiceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVirtualServiceOutput_virtualService:
+			v.VirtualService = &types.VirtualServiceData{}
+			return v.VirtualService.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVirtualServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateVirtualService{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVirtualService, schemas.CreateVirtualServiceInput, schemas.CreateVirtualServiceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateVirtualService{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVirtualService, schemas.CreateVirtualServiceInput, schemas.CreateVirtualServiceOutput), output: &CreateVirtualServiceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package ssmquicksetup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssmquicksetup/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,24 @@ type UpdateConfigurationManagerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConfigurationManagerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConfigurationManagerInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConfigurationManagerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateConfigurationManagerInput_Description, *v.Description)
+	}
+	if v.ManagerArn != nil {
+		s.WriteString(schemas.UpdateConfigurationManagerInput_ManagerArn, *v.ManagerArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateConfigurationManagerInput_Name, *v.Name)
+	}
+}
+
 type UpdateConfigurationManagerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +66,26 @@ type UpdateConfigurationManagerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConfigurationManagerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConfigurationManagerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateConfigurationManagerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConfigurationManagerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateConfigurationManager{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConfigurationManager, schemas.UpdateConfigurationManagerInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateConfigurationManager{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConfigurationManager, schemas.UpdateConfigurationManagerInput, nil), output: &UpdateConfigurationManagerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

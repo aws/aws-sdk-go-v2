@@ -4,7 +4,9 @@ package chime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type GetRoomInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRoomInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRoomRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRoomInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetRoomRequest_AccountId, *v.AccountId)
+	}
+	if v.RoomId != nil {
+		s.WriteString(schemas.GetRoomRequest_RoomId, *v.RoomId)
+	}
+}
+
 type GetRoomOutput struct {
 
 	// The room details.
@@ -51,13 +68,34 @@ type GetRoomOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRoomOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRoomResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRoomOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Room != nil {
+		s.WriteStruct(schemas.GetRoomResponse_Room)
+		v.Room.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetRoomOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRoomResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRoomResponse_Room:
+			v.Room = &types.Room{}
+			return v.Room.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRoomMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRoom{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRoom, schemas.GetRoomRequest, schemas.GetRoomResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRoom{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRoom, schemas.GetRoomRequest, schemas.GetRoomResponse), output: &GetRoomOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

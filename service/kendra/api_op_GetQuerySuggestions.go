@@ -4,7 +4,9 @@ package kendra
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,30 @@ type GetQuerySuggestionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQuerySuggestionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQuerySuggestionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQuerySuggestionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeSuggestionsConfig != nil {
+		s.WriteStruct(schemas.GetQuerySuggestionsRequest_AttributeSuggestionsConfig)
+		v.AttributeSuggestionsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.GetQuerySuggestionsRequest_IndexId, *v.IndexId)
+	}
+	if v.MaxSuggestionsCount != nil {
+		s.WriteInt32(schemas.GetQuerySuggestionsRequest_MaxSuggestionsCount, *v.MaxSuggestionsCount)
+	}
+	if v.QueryText != nil {
+		s.WriteString(schemas.GetQuerySuggestionsRequest_QueryText, *v.QueryText)
+	}
+	serializeSuggestionTypes(s, schemas.GetQuerySuggestionsRequest_SuggestionTypes, v.SuggestionTypes)
+}
+
 type GetQuerySuggestionsOutput struct {
 
 	// The identifier for a list of query suggestions for an index.
@@ -81,13 +107,35 @@ type GetQuerySuggestionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQuerySuggestionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQuerySuggestionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQuerySuggestionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QuerySuggestionsId != nil {
+		s.WriteString(schemas.GetQuerySuggestionsResponse_QuerySuggestionsId, *v.QuerySuggestionsId)
+	}
+	serializeSuggestionList(s, schemas.GetQuerySuggestionsResponse_Suggestions, v.Suggestions)
+}
+func (v *GetQuerySuggestionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetQuerySuggestionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetQuerySuggestionsResponse_QuerySuggestionsId:
+			v.QuerySuggestionsId = new(string)
+			return d.ReadString(schemas.GetQuerySuggestionsResponse_QuerySuggestionsId, v.QuerySuggestionsId)
+		case schemas.GetQuerySuggestionsResponse_Suggestions:
+			return deserializeSuggestionList(d, schemas.GetQuerySuggestionsResponse_Suggestions, &v.Suggestions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetQuerySuggestionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetQuerySuggestions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQuerySuggestions, schemas.GetQuerySuggestionsRequest, schemas.GetQuerySuggestionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetQuerySuggestions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQuerySuggestions, schemas.GetQuerySuggestionsRequest, schemas.GetQuerySuggestionsResponse), output: &GetQuerySuggestionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -48,6 +50,21 @@ type DescribeUserInput struct {
 	UserId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.DescribeUserRequest_OrganizationId, *v.OrganizationId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.DescribeUserRequest_UserId, *v.UserId)
+	}
 }
 
 type DescribeUserOutput struct {
@@ -145,13 +162,183 @@ type DescribeUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.City != nil {
+		s.WriteString(schemas.DescribeUserResponse_City, *v.City)
+	}
+	if v.Company != nil {
+		s.WriteString(schemas.DescribeUserResponse_Company, *v.Company)
+	}
+	if v.Country != nil {
+		s.WriteString(schemas.DescribeUserResponse_Country, *v.Country)
+	}
+	if v.Department != nil {
+		s.WriteString(schemas.DescribeUserResponse_Department, *v.Department)
+	}
+	if v.DisabledDate != nil {
+		s.WriteTime(schemas.DescribeUserResponse_DisabledDate, *v.DisabledDate)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.DescribeUserResponse_DisplayName, *v.DisplayName)
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.DescribeUserResponse_Email, *v.Email)
+	}
+	if v.EnabledDate != nil {
+		s.WriteTime(schemas.DescribeUserResponse_EnabledDate, *v.EnabledDate)
+	}
+	if v.FirstName != nil {
+		s.WriteString(schemas.DescribeUserResponse_FirstName, *v.FirstName)
+	}
+	if v.HiddenFromGlobalAddressList != false {
+		s.WriteBool(schemas.DescribeUserResponse_HiddenFromGlobalAddressList, v.HiddenFromGlobalAddressList)
+	}
+	if v.IdentityProviderIdentityStoreId != nil {
+		s.WriteString(schemas.DescribeUserResponse_IdentityProviderIdentityStoreId, *v.IdentityProviderIdentityStoreId)
+	}
+	if v.IdentityProviderUserId != nil {
+		s.WriteString(schemas.DescribeUserResponse_IdentityProviderUserId, *v.IdentityProviderUserId)
+	}
+	if v.Initials != nil {
+		s.WriteString(schemas.DescribeUserResponse_Initials, *v.Initials)
+	}
+	if v.JobTitle != nil {
+		s.WriteString(schemas.DescribeUserResponse_JobTitle, *v.JobTitle)
+	}
+	if v.LastName != nil {
+		s.WriteString(schemas.DescribeUserResponse_LastName, *v.LastName)
+	}
+	if v.MailboxDeprovisionedDate != nil {
+		s.WriteTime(schemas.DescribeUserResponse_MailboxDeprovisionedDate, *v.MailboxDeprovisionedDate)
+	}
+	if v.MailboxProvisionedDate != nil {
+		s.WriteTime(schemas.DescribeUserResponse_MailboxProvisionedDate, *v.MailboxProvisionedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeUserResponse_Name, *v.Name)
+	}
+	if v.Office != nil {
+		s.WriteString(schemas.DescribeUserResponse_Office, *v.Office)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.DescribeUserResponse_State, string(v.State))
+	}
+	if v.Street != nil {
+		s.WriteString(schemas.DescribeUserResponse_Street, *v.Street)
+	}
+	if v.Telephone != nil {
+		s.WriteString(schemas.DescribeUserResponse_Telephone, *v.Telephone)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.DescribeUserResponse_UserId, *v.UserId)
+	}
+	if v.UserRole != "" {
+		s.WriteString(schemas.DescribeUserResponse_UserRole, string(v.UserRole))
+	}
+	if v.ZipCode != nil {
+		s.WriteString(schemas.DescribeUserResponse_ZipCode, *v.ZipCode)
+	}
+}
+func (v *DescribeUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeUserResponse_City:
+			v.City = new(string)
+			return d.ReadString(schemas.DescribeUserResponse_City, v.City)
+		case schemas.DescribeUserResponse_Company:
+			v.Company = new(string)
+			return d.ReadString(schemas.DescribeUserResponse_Company, v.Company)
+		case schemas.DescribeUserResponse_Country:
+			v.Country = new(string)
+			return d.ReadString(schemas.DescribeUserResponse_Country, v.Country)
+		case schemas.DescribeUserResponse_Department:
+			v.Department = new(string)
+			return d.ReadString(schemas.DescribeUserResponse_Department, v.Department)
+		case schemas.DescribeUserResponse_DisabledDate:
+			v.DisabledDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeUserResponse_DisabledDate, v.DisabledDate)
+		case schemas.DescribeUserResponse_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.DescribeUserResponse_DisplayName, v.DisplayName)
+		case schemas.DescribeUserResponse_Email:
+			v.Email = new(string)
+			return d.ReadString(schemas.DescribeUserResponse_Email, v.Email)
+		case schemas.DescribeUserResponse_EnabledDate:
+			v.EnabledDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeUserResponse_EnabledDate, v.EnabledDate)
+		case schemas.DescribeUserResponse_FirstName:
+			v.FirstName = new(string)
+			return d.ReadString(schemas.DescribeUserResponse_FirstName, v.FirstName)
+		case schemas.DescribeUserResponse_HiddenFromGlobalAddressList:
+			return d.ReadBool(schemas.DescribeUserResponse_HiddenFromGlobalAddressList, &v.HiddenFromGlobalAddressList)
+		case schemas.DescribeUserResponse_IdentityProviderIdentityStoreId:
+			v.IdentityProviderIdentityStoreId = new(string)
+			return d.ReadString(schemas.DescribeUserResponse_IdentityProviderIdentityStoreId, v.IdentityProviderIdentityStoreId)
+		case schemas.DescribeUserResponse_IdentityProviderUserId:
+			v.IdentityProviderUserId = new(string)
+			return d.ReadString(schemas.DescribeUserResponse_IdentityProviderUserId, v.IdentityProviderUserId)
+		case schemas.DescribeUserResponse_Initials:
+			v.Initials = new(string)
+			return d.ReadString(schemas.DescribeUserResponse_Initials, v.Initials)
+		case schemas.DescribeUserResponse_JobTitle:
+			v.JobTitle = new(string)
+			return d.ReadString(schemas.DescribeUserResponse_JobTitle, v.JobTitle)
+		case schemas.DescribeUserResponse_LastName:
+			v.LastName = new(string)
+			return d.ReadString(schemas.DescribeUserResponse_LastName, v.LastName)
+		case schemas.DescribeUserResponse_MailboxDeprovisionedDate:
+			v.MailboxDeprovisionedDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeUserResponse_MailboxDeprovisionedDate, v.MailboxDeprovisionedDate)
+		case schemas.DescribeUserResponse_MailboxProvisionedDate:
+			v.MailboxProvisionedDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeUserResponse_MailboxProvisionedDate, v.MailboxProvisionedDate)
+		case schemas.DescribeUserResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeUserResponse_Name, v.Name)
+		case schemas.DescribeUserResponse_Office:
+			v.Office = new(string)
+			return d.ReadString(schemas.DescribeUserResponse_Office, v.Office)
+		case schemas.DescribeUserResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.DescribeUserResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.EntityState(ev)
+			return nil
+		case schemas.DescribeUserResponse_Street:
+			v.Street = new(string)
+			return d.ReadString(schemas.DescribeUserResponse_Street, v.Street)
+		case schemas.DescribeUserResponse_Telephone:
+			v.Telephone = new(string)
+			return d.ReadString(schemas.DescribeUserResponse_Telephone, v.Telephone)
+		case schemas.DescribeUserResponse_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.DescribeUserResponse_UserId, v.UserId)
+		case schemas.DescribeUserResponse_UserRole:
+			var ev string
+			if err := d.ReadString(schemas.DescribeUserResponse_UserRole, &ev); err != nil {
+				return err
+			}
+			v.UserRole = types.UserRole(ev)
+			return nil
+		case schemas.DescribeUserResponse_ZipCode:
+			v.ZipCode = new(string)
+			return d.ReadString(schemas.DescribeUserResponse_ZipCode, v.ZipCode)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUser, schemas.DescribeUserRequest, schemas.DescribeUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUser, schemas.DescribeUserRequest, schemas.DescribeUserResponse), output: &DescribeUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

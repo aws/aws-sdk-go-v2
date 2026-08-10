@@ -4,7 +4,9 @@ package memorydb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/memorydb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/memorydb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,19 @@ type UpdateParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateParameterGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateParameterGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateParameterGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ParameterGroupName != nil {
+		s.WriteString(schemas.UpdateParameterGroupRequest_ParameterGroupName, *v.ParameterGroupName)
+	}
+	serializeParameterNameValueList(s, schemas.UpdateParameterGroupRequest_ParameterNameValues, v.ParameterNameValues)
+}
+
 type UpdateParameterGroupOutput struct {
 
 	// The updated parameter group
@@ -53,13 +68,34 @@ type UpdateParameterGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateParameterGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateParameterGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateParameterGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ParameterGroup != nil {
+		s.WriteStruct(schemas.UpdateParameterGroupResponse_ParameterGroup)
+		v.ParameterGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateParameterGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateParameterGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateParameterGroupResponse_ParameterGroup:
+			v.ParameterGroup = &types.ParameterGroup{}
+			return v.ParameterGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateParameterGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateParameterGroup, schemas.UpdateParameterGroupRequest, schemas.UpdateParameterGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateParameterGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateParameterGroup, schemas.UpdateParameterGroupRequest, schemas.UpdateParameterGroupResponse), output: &UpdateParameterGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

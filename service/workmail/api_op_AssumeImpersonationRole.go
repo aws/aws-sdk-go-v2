@@ -4,6 +4,8 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type AssumeImpersonationRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssumeImpersonationRoleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssumeImpersonationRoleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssumeImpersonationRoleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImpersonationRoleId != nil {
+		s.WriteString(schemas.AssumeImpersonationRoleRequest_ImpersonationRoleId, *v.ImpersonationRoleId)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.AssumeImpersonationRoleRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type AssumeImpersonationRoleOutput struct {
 
 	// The authentication token's validity, in seconds.
@@ -53,13 +70,38 @@ type AssumeImpersonationRoleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssumeImpersonationRoleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssumeImpersonationRoleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssumeImpersonationRoleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpiresIn != nil {
+		s.WriteInt64(schemas.AssumeImpersonationRoleResponse_ExpiresIn, *v.ExpiresIn)
+	}
+	if v.Token != nil {
+		s.WriteString(schemas.AssumeImpersonationRoleResponse_Token, *v.Token)
+	}
+}
+func (v *AssumeImpersonationRoleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssumeImpersonationRoleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssumeImpersonationRoleResponse_ExpiresIn:
+			v.ExpiresIn = new(int64)
+			return d.ReadInt64(schemas.AssumeImpersonationRoleResponse_ExpiresIn, v.ExpiresIn)
+		case schemas.AssumeImpersonationRoleResponse_Token:
+			v.Token = new(string)
+			return d.ReadString(schemas.AssumeImpersonationRoleResponse_Token, v.Token)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssumeImpersonationRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssumeImpersonationRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssumeImpersonationRole, schemas.AssumeImpersonationRoleRequest, schemas.AssumeImpersonationRoleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssumeImpersonationRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssumeImpersonationRole, schemas.AssumeImpersonationRoleRequest, schemas.AssumeImpersonationRoleResponse), output: &AssumeImpersonationRoleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

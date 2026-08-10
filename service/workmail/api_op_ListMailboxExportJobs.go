@@ -5,7 +5,9 @@ package workmail
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListMailboxExportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMailboxExportJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMailboxExportJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMailboxExportJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMailboxExportJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMailboxExportJobsRequest_NextToken, *v.NextToken)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.ListMailboxExportJobsRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type ListMailboxExportJobsOutput struct {
 
 	// The mailbox export job details.
@@ -56,13 +76,35 @@ type ListMailboxExportJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMailboxExportJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMailboxExportJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMailboxExportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeJobs(s, schemas.ListMailboxExportJobsResponse_Jobs, v.Jobs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMailboxExportJobsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListMailboxExportJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMailboxExportJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMailboxExportJobsResponse_Jobs:
+			return deserializeJobs(d, schemas.ListMailboxExportJobsResponse_Jobs, &v.Jobs)
+		case schemas.ListMailboxExportJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMailboxExportJobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMailboxExportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMailboxExportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMailboxExportJobs, schemas.ListMailboxExportJobsRequest, schemas.ListMailboxExportJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListMailboxExportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMailboxExportJobs, schemas.ListMailboxExportJobsRequest, schemas.ListMailboxExportJobsResponse), output: &ListMailboxExportJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

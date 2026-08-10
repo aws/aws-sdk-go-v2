@@ -4,7 +4,9 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetDefaultRetentionPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDefaultRetentionPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDefaultRetentionPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDefaultRetentionPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.GetDefaultRetentionPolicyRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type GetDefaultRetentionPolicyOutput struct {
 
 	// The retention policy description.
@@ -54,13 +68,47 @@ type GetDefaultRetentionPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDefaultRetentionPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDefaultRetentionPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDefaultRetentionPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.GetDefaultRetentionPolicyResponse_Description, *v.Description)
+	}
+	serializeFolderConfigurations(s, schemas.GetDefaultRetentionPolicyResponse_FolderConfigurations, v.FolderConfigurations)
+	if v.Id != nil {
+		s.WriteString(schemas.GetDefaultRetentionPolicyResponse_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetDefaultRetentionPolicyResponse_Name, *v.Name)
+	}
+}
+func (v *GetDefaultRetentionPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDefaultRetentionPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDefaultRetentionPolicyResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetDefaultRetentionPolicyResponse_Description, v.Description)
+		case schemas.GetDefaultRetentionPolicyResponse_FolderConfigurations:
+			return deserializeFolderConfigurations(d, schemas.GetDefaultRetentionPolicyResponse_FolderConfigurations, &v.FolderConfigurations)
+		case schemas.GetDefaultRetentionPolicyResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetDefaultRetentionPolicyResponse_Id, v.Id)
+		case schemas.GetDefaultRetentionPolicyResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetDefaultRetentionPolicyResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDefaultRetentionPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDefaultRetentionPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDefaultRetentionPolicy, schemas.GetDefaultRetentionPolicyRequest, schemas.GetDefaultRetentionPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDefaultRetentionPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDefaultRetentionPolicy, schemas.GetDefaultRetentionPolicyRequest, schemas.GetDefaultRetentionPolicyResponse), output: &GetDefaultRetentionPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

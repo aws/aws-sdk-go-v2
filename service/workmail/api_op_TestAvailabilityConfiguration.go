@@ -4,7 +4,9 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,31 @@ type TestAvailabilityConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestAvailabilityConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestAvailabilityConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestAvailabilityConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.TestAvailabilityConfigurationRequest_DomainName, *v.DomainName)
+	}
+	if v.EwsProvider != nil {
+		s.WriteStruct(schemas.TestAvailabilityConfigurationRequest_EwsProvider)
+		v.EwsProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LambdaProvider != nil {
+		s.WriteStruct(schemas.TestAvailabilityConfigurationRequest_LambdaProvider)
+		v.LambdaProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.TestAvailabilityConfigurationRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type TestAvailabilityConfigurationOutput struct {
 
 	// String containing the reason for a failed test if TestPassed is false.
@@ -68,13 +95,37 @@ type TestAvailabilityConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestAvailabilityConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestAvailabilityConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestAvailabilityConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailureReason != nil {
+		s.WriteString(schemas.TestAvailabilityConfigurationResponse_FailureReason, *v.FailureReason)
+	}
+	if v.TestPassed != false {
+		s.WriteBool(schemas.TestAvailabilityConfigurationResponse_TestPassed, v.TestPassed)
+	}
+}
+func (v *TestAvailabilityConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestAvailabilityConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestAvailabilityConfigurationResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.TestAvailabilityConfigurationResponse_FailureReason, v.FailureReason)
+		case schemas.TestAvailabilityConfigurationResponse_TestPassed:
+			return d.ReadBool(schemas.TestAvailabilityConfigurationResponse_TestPassed, &v.TestPassed)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTestAvailabilityConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTestAvailabilityConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestAvailabilityConfiguration, schemas.TestAvailabilityConfigurationRequest, schemas.TestAvailabilityConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpTestAvailabilityConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestAvailabilityConfiguration, schemas.TestAvailabilityConfigurationRequest, schemas.TestAvailabilityConfigurationResponse), output: &TestAvailabilityConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

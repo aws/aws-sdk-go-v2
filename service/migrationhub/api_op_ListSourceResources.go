@@ -5,7 +5,9 @@ package migrationhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,27 @@ type ListSourceResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSourceResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSourceResourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSourceResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSourceResourcesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MigrationTaskName != nil {
+		s.WriteString(schemas.ListSourceResourcesRequest_MigrationTaskName, *v.MigrationTaskName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSourceResourcesRequest_NextToken, *v.NextToken)
+	}
+	if v.ProgressUpdateStream != nil {
+		s.WriteString(schemas.ListSourceResourcesRequest_ProgressUpdateStream, *v.ProgressUpdateStream)
+	}
+}
+
 type ListSourceResourcesOutput struct {
 
 	// If the response includes a NextToken value, that means that there are more
@@ -78,13 +101,35 @@ type ListSourceResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSourceResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSourceResourcesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSourceResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSourceResourcesResult_NextToken, *v.NextToken)
+	}
+	serializeSourceResourceList(s, schemas.ListSourceResourcesResult_SourceResourceList, v.SourceResourceList)
+}
+func (v *ListSourceResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSourceResourcesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSourceResourcesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSourceResourcesResult_NextToken, v.NextToken)
+		case schemas.ListSourceResourcesResult_SourceResourceList:
+			return deserializeSourceResourceList(d, schemas.ListSourceResourcesResult_SourceResourceList, &v.SourceResourceList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSourceResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSourceResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSourceResources, schemas.ListSourceResourcesRequest, schemas.ListSourceResourcesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListSourceResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSourceResources, schemas.ListSourceResourcesRequest, schemas.ListSourceResourcesResult), output: &ListSourceResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

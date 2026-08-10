@@ -5,7 +5,9 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,26 @@ type DescribeRcsAgentCountryLaunchStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRcsAgentCountryLaunchStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRcsAgentCountryLaunchStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRcsAgentCountryLaunchStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCountryLaunchStatusFilterList(s, schemas.DescribeRcsAgentCountryLaunchStatusRequest_Filters, v.Filters)
+	serializeIsoCountryCodeList(s, schemas.DescribeRcsAgentCountryLaunchStatusRequest_IsoCountryCodes, v.IsoCountryCodes)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeRcsAgentCountryLaunchStatusRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRcsAgentCountryLaunchStatusRequest_NextToken, *v.NextToken)
+	}
+	if v.RcsAgentId != nil {
+		s.WriteString(schemas.DescribeRcsAgentCountryLaunchStatusRequest_RcsAgentId, *v.RcsAgentId)
+	}
+}
+
 type DescribeRcsAgentCountryLaunchStatusOutput struct {
 
 	// The Amazon Resource Name (ARN) of the RCS agent.
@@ -77,13 +99,47 @@ type DescribeRcsAgentCountryLaunchStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRcsAgentCountryLaunchStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRcsAgentCountryLaunchStatusResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRcsAgentCountryLaunchStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCountryLaunchStatusInformationList(s, schemas.DescribeRcsAgentCountryLaunchStatusResult_CountryLaunchStatus, v.CountryLaunchStatus)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRcsAgentCountryLaunchStatusResult_NextToken, *v.NextToken)
+	}
+	if v.RcsAgentArn != nil {
+		s.WriteString(schemas.DescribeRcsAgentCountryLaunchStatusResult_RcsAgentArn, *v.RcsAgentArn)
+	}
+	if v.RcsAgentId != nil {
+		s.WriteString(schemas.DescribeRcsAgentCountryLaunchStatusResult_RcsAgentId, *v.RcsAgentId)
+	}
+}
+func (v *DescribeRcsAgentCountryLaunchStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRcsAgentCountryLaunchStatusResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRcsAgentCountryLaunchStatusResult_CountryLaunchStatus:
+			return deserializeCountryLaunchStatusInformationList(d, schemas.DescribeRcsAgentCountryLaunchStatusResult_CountryLaunchStatus, &v.CountryLaunchStatus)
+		case schemas.DescribeRcsAgentCountryLaunchStatusResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeRcsAgentCountryLaunchStatusResult_NextToken, v.NextToken)
+		case schemas.DescribeRcsAgentCountryLaunchStatusResult_RcsAgentArn:
+			v.RcsAgentArn = new(string)
+			return d.ReadString(schemas.DescribeRcsAgentCountryLaunchStatusResult_RcsAgentArn, v.RcsAgentArn)
+		case schemas.DescribeRcsAgentCountryLaunchStatusResult_RcsAgentId:
+			v.RcsAgentId = new(string)
+			return d.ReadString(schemas.DescribeRcsAgentCountryLaunchStatusResult_RcsAgentId, v.RcsAgentId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRcsAgentCountryLaunchStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeRcsAgentCountryLaunchStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRcsAgentCountryLaunchStatus, schemas.DescribeRcsAgentCountryLaunchStatusRequest, schemas.DescribeRcsAgentCountryLaunchStatusResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeRcsAgentCountryLaunchStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRcsAgentCountryLaunchStatus, schemas.DescribeRcsAgentCountryLaunchStatusRequest, schemas.DescribeRcsAgentCountryLaunchStatusResult), output: &DescribeRcsAgentCountryLaunchStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

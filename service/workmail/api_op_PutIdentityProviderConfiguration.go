@@ -4,7 +4,9 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,31 @@ type PutIdentityProviderConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutIdentityProviderConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutIdentityProviderConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutIdentityProviderConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationMode != "" {
+		s.WriteString(schemas.PutIdentityProviderConfigurationRequest_AuthenticationMode, string(v.AuthenticationMode))
+	}
+	if v.IdentityCenterConfiguration != nil {
+		s.WriteStruct(schemas.PutIdentityProviderConfigurationRequest_IdentityCenterConfiguration)
+		v.IdentityCenterConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.PutIdentityProviderConfigurationRequest_OrganizationId, *v.OrganizationId)
+	}
+	if v.PersonalAccessTokenConfiguration != nil {
+		s.WriteStruct(schemas.PutIdentityProviderConfigurationRequest_PersonalAccessTokenConfiguration)
+		v.PersonalAccessTokenConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PutIdentityProviderConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -61,13 +88,26 @@ type PutIdentityProviderConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutIdentityProviderConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutIdentityProviderConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutIdentityProviderConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutIdentityProviderConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutIdentityProviderConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutIdentityProviderConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutIdentityProviderConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutIdentityProviderConfiguration, schemas.PutIdentityProviderConfigurationRequest, schemas.PutIdentityProviderConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutIdentityProviderConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutIdentityProviderConfiguration, schemas.PutIdentityProviderConfigurationRequest, schemas.PutIdentityProviderConfigurationResponse), output: &PutIdentityProviderConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

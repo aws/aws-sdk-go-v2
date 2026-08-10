@@ -4,6 +4,8 @@ package bedrockagentruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type DeleteSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SessionIdentifier != nil {
+		s.WriteString(schemas.DeleteSessionRequest_sessionIdentifier, *v.SessionIdentifier)
+	}
+}
+
 type DeleteSessionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +60,26 @@ type DeleteSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSession, schemas.DeleteSessionRequest, schemas.DeleteSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSession, schemas.DeleteSessionRequest, schemas.DeleteSessionResponse), output: &DeleteSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

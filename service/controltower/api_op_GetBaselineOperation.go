@@ -4,7 +4,9 @@ package controltower
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/controltower/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/controltower/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type GetBaselineOperationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBaselineOperationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBaselineOperationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBaselineOperationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationIdentifier != nil {
+		s.WriteString(schemas.GetBaselineOperationInput_operationIdentifier, *v.OperationIdentifier)
+	}
+}
+
 type GetBaselineOperationOutput struct {
 
 	// A baselineOperation object that shows information about the specified operation
@@ -54,13 +68,34 @@ type GetBaselineOperationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBaselineOperationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBaselineOperationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBaselineOperationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaselineOperation != nil {
+		s.WriteStruct(schemas.GetBaselineOperationOutput_baselineOperation)
+		v.BaselineOperation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetBaselineOperationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBaselineOperationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBaselineOperationOutput_baselineOperation:
+			v.BaselineOperation = &types.BaselineOperation{}
+			return v.BaselineOperation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBaselineOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBaselineOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBaselineOperation, schemas.GetBaselineOperationInput, schemas.GetBaselineOperationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBaselineOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBaselineOperation, schemas.GetBaselineOperationInput, schemas.GetBaselineOperationOutput), output: &GetBaselineOperationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

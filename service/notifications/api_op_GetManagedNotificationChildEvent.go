@@ -4,7 +4,9 @@ package notifications
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/notifications/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/notifications/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -39,6 +41,21 @@ type GetManagedNotificationChildEventInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetManagedNotificationChildEventInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetManagedNotificationChildEventRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetManagedNotificationChildEventInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetManagedNotificationChildEventRequest_arn, *v.Arn)
+	}
+	if v.Locale != "" {
+		s.WriteString(schemas.GetManagedNotificationChildEventRequest_locale, string(v.Locale))
+	}
+}
+
 type GetManagedNotificationChildEventOutput struct {
 
 	// The ARN of the resource.
@@ -68,13 +85,52 @@ type GetManagedNotificationChildEventOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetManagedNotificationChildEventOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetManagedNotificationChildEventResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetManagedNotificationChildEventOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetManagedNotificationChildEventResponse_arn, *v.Arn)
+	}
+	if v.Content != nil {
+		s.WriteStruct(schemas.GetManagedNotificationChildEventResponse_content)
+		v.Content.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetManagedNotificationChildEventResponse_creationTime, *v.CreationTime)
+	}
+	if v.ManagedNotificationConfigurationArn != nil {
+		s.WriteString(schemas.GetManagedNotificationChildEventResponse_managedNotificationConfigurationArn, *v.ManagedNotificationConfigurationArn)
+	}
+}
+func (v *GetManagedNotificationChildEventOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetManagedNotificationChildEventResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetManagedNotificationChildEventResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetManagedNotificationChildEventResponse_arn, v.Arn)
+		case schemas.GetManagedNotificationChildEventResponse_content:
+			v.Content = &types.ManagedNotificationChildEvent{}
+			return v.Content.Deserialize(d)
+		case schemas.GetManagedNotificationChildEventResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetManagedNotificationChildEventResponse_creationTime, v.CreationTime)
+		case schemas.GetManagedNotificationChildEventResponse_managedNotificationConfigurationArn:
+			v.ManagedNotificationConfigurationArn = new(string)
+			return d.ReadString(schemas.GetManagedNotificationChildEventResponse_managedNotificationConfigurationArn, v.ManagedNotificationConfigurationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetManagedNotificationChildEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetManagedNotificationChildEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedNotificationChildEvent, schemas.GetManagedNotificationChildEventRequest, schemas.GetManagedNotificationChildEventResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetManagedNotificationChildEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedNotificationChildEvent, schemas.GetManagedNotificationChildEventRequest, schemas.GetManagedNotificationChildEventResponse), output: &GetManagedNotificationChildEventOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

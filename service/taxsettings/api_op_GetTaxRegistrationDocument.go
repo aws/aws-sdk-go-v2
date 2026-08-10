@@ -4,7 +4,9 @@ package taxsettings
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/taxsettings/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/taxsettings/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,25 @@ type GetTaxRegistrationDocumentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTaxRegistrationDocumentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTaxRegistrationDocumentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTaxRegistrationDocumentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationS3Location != nil {
+		s.WriteStruct(schemas.GetTaxRegistrationDocumentRequest_destinationS3Location)
+		v.DestinationS3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaxDocumentMetadata != nil {
+		s.WriteStruct(schemas.GetTaxRegistrationDocumentRequest_taxDocumentMetadata)
+		v.TaxDocumentMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetTaxRegistrationDocumentOutput struct {
 
 	// The file path of the Amazon S3 bucket where you want to download your tax
@@ -53,13 +74,38 @@ type GetTaxRegistrationDocumentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTaxRegistrationDocumentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTaxRegistrationDocumentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTaxRegistrationDocumentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationFilePath != nil {
+		s.WriteString(schemas.GetTaxRegistrationDocumentResponse_destinationFilePath, *v.DestinationFilePath)
+	}
+	if v.PresignedS3Url != nil {
+		s.WriteString(schemas.GetTaxRegistrationDocumentResponse_presignedS3Url, *v.PresignedS3Url)
+	}
+}
+func (v *GetTaxRegistrationDocumentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTaxRegistrationDocumentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTaxRegistrationDocumentResponse_destinationFilePath:
+			v.DestinationFilePath = new(string)
+			return d.ReadString(schemas.GetTaxRegistrationDocumentResponse_destinationFilePath, v.DestinationFilePath)
+		case schemas.GetTaxRegistrationDocumentResponse_presignedS3Url:
+			v.PresignedS3Url = new(string)
+			return d.ReadString(schemas.GetTaxRegistrationDocumentResponse_presignedS3Url, v.PresignedS3Url)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTaxRegistrationDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTaxRegistrationDocument{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTaxRegistrationDocument, schemas.GetTaxRegistrationDocumentRequest, schemas.GetTaxRegistrationDocumentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTaxRegistrationDocument{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTaxRegistrationDocument, schemas.GetTaxRegistrationDocumentRequest, schemas.GetTaxRegistrationDocumentResponse), output: &GetTaxRegistrationDocumentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

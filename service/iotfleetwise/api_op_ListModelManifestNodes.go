@@ -5,7 +5,9 @@ package iotfleetwise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,40 @@ type ListModelManifestNodesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelManifestNodesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelManifestNodesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelManifestNodesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListModelManifestNodesRequest_maxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListModelManifestNodesRequest_name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelManifestNodesRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListModelManifestNodesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListModelManifestNodesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListModelManifestNodesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListModelManifestNodesRequest_maxResults, v.MaxResults)
+		case schemas.ListModelManifestNodesRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ListModelManifestNodesRequest_name, v.Name)
+		case schemas.ListModelManifestNodesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListModelManifestNodesRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListModelManifestNodesOutput struct {
 
 	//  The token to retrieve the next set of results, or null if there are no more
@@ -65,13 +101,35 @@ type ListModelManifestNodesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelManifestNodesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelManifestNodesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelManifestNodesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelManifestNodesResponse_nextToken, *v.NextToken)
+	}
+	serializeNodes(s, schemas.ListModelManifestNodesResponse_nodes, v.Nodes)
+}
+func (v *ListModelManifestNodesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListModelManifestNodesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListModelManifestNodesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListModelManifestNodesResponse_nextToken, v.NextToken)
+		case schemas.ListModelManifestNodesResponse_nodes:
+			return deserializeNodes(d, schemas.ListModelManifestNodesResponse_nodes, &v.Nodes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListModelManifestNodesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListModelManifestNodes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelManifestNodes, schemas.ListModelManifestNodesRequest, schemas.ListModelManifestNodesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListModelManifestNodes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelManifestNodes, schemas.ListModelManifestNodesRequest, schemas.ListModelManifestNodesResponse), output: &ListModelManifestNodesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

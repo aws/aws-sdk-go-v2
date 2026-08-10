@@ -4,6 +4,8 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type DeleteAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.DeleteAliasRequest_Alias, *v.Alias)
+	}
+	if v.EntityId != nil {
+		s.WriteString(schemas.DeleteAliasRequest_EntityId, *v.EntityId)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.DeleteAliasRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type DeleteAliasOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +72,26 @@ type DeleteAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAliasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAliasResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAlias, schemas.DeleteAliasRequest, schemas.DeleteAliasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAlias, schemas.DeleteAliasRequest, schemas.DeleteAliasResponse), output: &DeleteAliasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

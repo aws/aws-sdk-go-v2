@@ -4,6 +4,8 @@ package notifications
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/notifications/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DisassociateChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DisassociateChannelRequest_arn, *v.Arn)
+	}
+	if v.NotificationConfigurationArn != nil {
+		s.WriteString(schemas.DisassociateChannelRequest_notificationConfigurationArn, *v.NotificationConfigurationArn)
+	}
+}
+
 type DisassociateChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +64,26 @@ type DisassociateChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateChannel, schemas.DisassociateChannelRequest, schemas.DisassociateChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateChannel, schemas.DisassociateChannelRequest, schemas.DisassociateChannelResponse), output: &DisassociateChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

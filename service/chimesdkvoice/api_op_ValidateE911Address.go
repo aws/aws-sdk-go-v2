@@ -4,7 +4,9 @@ package chimesdkvoice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,36 @@ type ValidateE911AddressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidateE911AddressInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidateE911AddressRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidateE911AddressInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ValidateE911AddressRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.City != nil {
+		s.WriteString(schemas.ValidateE911AddressRequest_City, *v.City)
+	}
+	if v.Country != nil {
+		s.WriteString(schemas.ValidateE911AddressRequest_Country, *v.Country)
+	}
+	if v.PostalCode != nil {
+		s.WriteString(schemas.ValidateE911AddressRequest_PostalCode, *v.PostalCode)
+	}
+	if v.State != nil {
+		s.WriteString(schemas.ValidateE911AddressRequest_State, *v.State)
+	}
+	if v.StreetInfo != nil {
+		s.WriteString(schemas.ValidateE911AddressRequest_StreetInfo, *v.StreetInfo)
+	}
+	if v.StreetNumber != nil {
+		s.WriteString(schemas.ValidateE911AddressRequest_StreetNumber, *v.StreetNumber)
+	}
+}
+
 type ValidateE911AddressOutput struct {
 
 	// The validated address.
@@ -100,13 +132,48 @@ type ValidateE911AddressOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidateE911AddressOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidateE911AddressResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidateE911AddressOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteStruct(schemas.ValidateE911AddressResponse_Address)
+		v.Address.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AddressExternalId != nil {
+		s.WriteString(schemas.ValidateE911AddressResponse_AddressExternalId, *v.AddressExternalId)
+	}
+	serializeCandidateAddressList(s, schemas.ValidateE911AddressResponse_CandidateAddressList, v.CandidateAddressList)
+	if v.ValidationResult != 0 {
+		s.WriteInt32(schemas.ValidateE911AddressResponse_ValidationResult, v.ValidationResult)
+	}
+}
+func (v *ValidateE911AddressOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidateE911AddressResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidateE911AddressResponse_Address:
+			v.Address = &types.Address{}
+			return v.Address.Deserialize(d)
+		case schemas.ValidateE911AddressResponse_AddressExternalId:
+			v.AddressExternalId = new(string)
+			return d.ReadString(schemas.ValidateE911AddressResponse_AddressExternalId, v.AddressExternalId)
+		case schemas.ValidateE911AddressResponse_CandidateAddressList:
+			return deserializeCandidateAddressList(d, schemas.ValidateE911AddressResponse_CandidateAddressList, &v.CandidateAddressList)
+		case schemas.ValidateE911AddressResponse_ValidationResult:
+			return d.ReadInt32(schemas.ValidateE911AddressResponse_ValidationResult, &v.ValidationResult)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationValidateE911AddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpValidateE911Address{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidateE911Address, schemas.ValidateE911AddressRequest, schemas.ValidateE911AddressResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpValidateE911Address{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidateE911Address, schemas.ValidateE911AddressRequest, schemas.ValidateE911AddressResponse), output: &ValidateE911AddressOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

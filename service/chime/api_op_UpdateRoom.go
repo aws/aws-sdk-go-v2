@@ -4,7 +4,9 @@ package chime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type UpdateRoomInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRoomInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRoomRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRoomInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.UpdateRoomRequest_AccountId, *v.AccountId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateRoomRequest_Name, *v.Name)
+	}
+	if v.RoomId != nil {
+		s.WriteString(schemas.UpdateRoomRequest_RoomId, *v.RoomId)
+	}
+}
+
 type UpdateRoomOutput struct {
 
 	// The room details.
@@ -54,13 +74,34 @@ type UpdateRoomOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRoomOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRoomResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRoomOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Room != nil {
+		s.WriteStruct(schemas.UpdateRoomResponse_Room)
+		v.Room.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateRoomOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRoomResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRoomResponse_Room:
+			v.Room = &types.Room{}
+			return v.Room.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRoomMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRoom{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRoom, schemas.UpdateRoomRequest, schemas.UpdateRoomResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRoom{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRoom, schemas.UpdateRoomRequest, schemas.UpdateRoomResponse), output: &UpdateRoomOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

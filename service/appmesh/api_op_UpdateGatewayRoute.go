@@ -5,7 +5,9 @@ package appmesh
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,60 @@ type UpdateGatewayRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGatewayRouteInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGatewayRouteInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGatewayRouteInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateGatewayRouteInput_clientToken, *v.ClientToken)
+	}
+	if v.GatewayRouteName != nil {
+		s.WriteString(schemas.UpdateGatewayRouteInput_gatewayRouteName, *v.GatewayRouteName)
+	}
+	if v.MeshName != nil {
+		s.WriteString(schemas.UpdateGatewayRouteInput_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.UpdateGatewayRouteInput_meshOwner, *v.MeshOwner)
+	}
+	if v.Spec != nil {
+		s.WriteStruct(schemas.UpdateGatewayRouteInput_spec)
+		v.Spec.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VirtualGatewayName != nil {
+		s.WriteString(schemas.UpdateGatewayRouteInput_virtualGatewayName, *v.VirtualGatewayName)
+	}
+}
+func (v *UpdateGatewayRouteInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGatewayRouteInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGatewayRouteInput_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.UpdateGatewayRouteInput_clientToken, v.ClientToken)
+		case schemas.UpdateGatewayRouteInput_gatewayRouteName:
+			v.GatewayRouteName = new(string)
+			return d.ReadString(schemas.UpdateGatewayRouteInput_gatewayRouteName, v.GatewayRouteName)
+		case schemas.UpdateGatewayRouteInput_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.UpdateGatewayRouteInput_meshName, v.MeshName)
+		case schemas.UpdateGatewayRouteInput_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.UpdateGatewayRouteInput_meshOwner, v.MeshOwner)
+		case schemas.UpdateGatewayRouteInput_spec:
+			v.Spec = &types.GatewayRouteSpec{}
+			return v.Spec.Deserialize(d)
+		case schemas.UpdateGatewayRouteInput_virtualGatewayName:
+			v.VirtualGatewayName = new(string)
+			return d.ReadString(schemas.UpdateGatewayRouteInput_virtualGatewayName, v.VirtualGatewayName)
+		}
+		return nil
+	})
+}
+
 type UpdateGatewayRouteOutput struct {
 
 	// A full description of the gateway route that was updated.
@@ -75,13 +131,34 @@ type UpdateGatewayRouteOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGatewayRouteOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGatewayRouteOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGatewayRouteOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayRoute != nil {
+		s.WriteStruct(schemas.UpdateGatewayRouteOutput_gatewayRoute)
+		v.GatewayRoute.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateGatewayRouteOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGatewayRouteOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGatewayRouteOutput_gatewayRoute:
+			v.GatewayRoute = &types.GatewayRouteData{}
+			return v.GatewayRoute.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGatewayRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateGatewayRoute{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGatewayRoute, schemas.UpdateGatewayRouteInput, schemas.UpdateGatewayRouteOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateGatewayRoute{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGatewayRoute, schemas.UpdateGatewayRouteInput, schemas.UpdateGatewayRouteOutput), output: &UpdateGatewayRouteOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

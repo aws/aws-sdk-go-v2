@@ -5,7 +5,9 @@ package mgn
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,48 @@ type DescribeJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountID != nil {
+		s.WriteString(schemas.DescribeJobsRequest_accountID, *v.AccountID)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.DescribeJobsRequest_filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeJobsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeJobsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeJobsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeJobsRequest_accountID:
+			v.AccountID = new(string)
+			return d.ReadString(schemas.DescribeJobsRequest_accountID, v.AccountID)
+		case schemas.DescribeJobsRequest_filters:
+			v.Filters = &types.DescribeJobsRequestFilters{}
+			return v.Filters.Deserialize(d)
+		case schemas.DescribeJobsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.DescribeJobsRequest_maxResults, v.MaxResults)
+		case schemas.DescribeJobsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeJobsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type DescribeJobsOutput struct {
 
 	// Request to describe Job log items.
@@ -61,13 +105,35 @@ type DescribeJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeJobsList(s, schemas.DescribeJobsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeJobsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeJobsResponse_items:
+			return deserializeJobsList(d, schemas.DescribeJobsResponse_items, &v.Items)
+		case schemas.DescribeJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeJobsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeJobs, schemas.DescribeJobsRequest, schemas.DescribeJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeJobs, schemas.DescribeJobsRequest, schemas.DescribeJobsResponse), output: &DescribeJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

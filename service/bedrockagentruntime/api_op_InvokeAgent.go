@@ -4,7 +4,9 @@ package bedrockagentruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
 	"sync"
@@ -126,6 +128,59 @@ type InvokeAgentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeAgentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeAgentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentAliasId != nil {
+		s.WriteString(schemas.InvokeAgentRequest_agentAliasId, *v.AgentAliasId)
+	}
+	if v.AgentId != nil {
+		s.WriteString(schemas.InvokeAgentRequest_agentId, *v.AgentId)
+	}
+	if v.BedrockModelConfigurations != nil {
+		s.WriteStruct(schemas.InvokeAgentRequest_bedrockModelConfigurations)
+		v.BedrockModelConfigurations.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EnableTrace != nil {
+		s.WriteBool(schemas.InvokeAgentRequest_enableTrace, *v.EnableTrace)
+	}
+	if v.EndSession != nil {
+		s.WriteBool(schemas.InvokeAgentRequest_endSession, *v.EndSession)
+	}
+	if v.InputText != nil {
+		s.WriteString(schemas.InvokeAgentRequest_inputText, *v.InputText)
+	}
+	if v.MemoryId != nil {
+		s.WriteString(schemas.InvokeAgentRequest_memoryId, *v.MemoryId)
+	}
+	if v.PromptCreationConfigurations != nil {
+		s.WriteStruct(schemas.InvokeAgentRequest_promptCreationConfigurations)
+		v.PromptCreationConfigurations.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.InvokeAgentRequest_sessionId, *v.SessionId)
+	}
+	if v.SessionState != nil {
+		s.WriteStruct(schemas.InvokeAgentRequest_sessionState)
+		v.SessionState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.InvokeAgentRequest_sourceArn, *v.SourceArn)
+	}
+	if v.StreamingConfigurations != nil {
+		s.WriteStruct(schemas.InvokeAgentRequest_streamingConfigurations)
+		v.StreamingConfigurations.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type InvokeAgentOutput struct {
 
 	// The MIME type of the input data in the request. The default value is
@@ -150,24 +205,56 @@ type InvokeAgentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeAgentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeAgentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeAgentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentType != nil {
+		s.WriteString(schemas.InvokeAgentResponse_contentType, *v.ContentType)
+	}
+	if v.MemoryId != nil {
+		s.WriteString(schemas.InvokeAgentResponse_memoryId, *v.MemoryId)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.InvokeAgentResponse_sessionId, *v.SessionId)
+	}
+}
+func (v *InvokeAgentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvokeAgentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvokeAgentResponse_contentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.InvokeAgentResponse_contentType, v.ContentType)
+		case schemas.InvokeAgentResponse_memoryId:
+			v.MemoryId = new(string)
+			return d.ReadString(schemas.InvokeAgentResponse_memoryId, v.MemoryId)
+		case schemas.InvokeAgentResponse_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.InvokeAgentResponse_sessionId, v.SessionId)
+		}
+		return nil
+	})
+}
+
 // GetStream returns the type to interact with the event stream.
 func (o *InvokeAgentOutput) GetStream() *InvokeAgentEventStream {
 	return o.eventStream
 }
 
 func (c *Client) addOperationInvokeAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeAgent, schemas.InvokeAgentRequest, schemas.InvokeAgentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeAgent, schemas.InvokeAgentRequest, schemas.InvokeAgentResponse), output: &InvokeAgentOutput{}}, middleware.After); err != nil {
+		return err
+	}
+	if err := stack.Deserialize.Insert(&deserializeOpEventStreamInvokeAgent{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
 		return err
 	}
 
-	if err = addEventStreamInvokeAgentMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}

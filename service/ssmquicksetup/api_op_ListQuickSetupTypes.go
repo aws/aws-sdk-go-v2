@@ -4,7 +4,9 @@ package ssmquicksetup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssmquicksetup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmquicksetup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,22 @@ type ListQuickSetupTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQuickSetupTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQuickSetupTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ListQuickSetupTypesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type ListQuickSetupTypesOutput struct {
 
 	// An array of Quick Setup types.
@@ -39,13 +57,29 @@ type ListQuickSetupTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQuickSetupTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQuickSetupTypesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQuickSetupTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeQuickSetupTypeList(s, schemas.ListQuickSetupTypesOutput_QuickSetupTypeList, v.QuickSetupTypeList)
+}
+func (v *ListQuickSetupTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListQuickSetupTypesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListQuickSetupTypesOutput_QuickSetupTypeList:
+			return deserializeQuickSetupTypeList(d, schemas.ListQuickSetupTypesOutput_QuickSetupTypeList, &v.QuickSetupTypeList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListQuickSetupTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListQuickSetupTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQuickSetupTypes, nil, schemas.ListQuickSetupTypesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListQuickSetupTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQuickSetupTypes, nil, schemas.ListQuickSetupTypesOutput), output: &ListQuickSetupTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

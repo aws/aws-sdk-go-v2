@@ -5,7 +5,9 @@ package route53domains
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,24 @@ type ListPricesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPricesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPricesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPricesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListPricesRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListPricesRequest_MaxItems, *v.MaxItems)
+	}
+	if v.Tld != nil {
+		s.WriteString(schemas.ListPricesRequest_Tld, *v.Tld)
+	}
+}
+
 type ListPricesOutput struct {
 
 	// If there are more prices than you specified for MaxItems in the request, submit
@@ -80,13 +100,35 @@ type ListPricesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPricesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPricesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPricesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextPageMarker != nil {
+		s.WriteString(schemas.ListPricesResponse_NextPageMarker, *v.NextPageMarker)
+	}
+	serializeDomainPriceList(s, schemas.ListPricesResponse_Prices, v.Prices)
+}
+func (v *ListPricesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPricesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPricesResponse_NextPageMarker:
+			v.NextPageMarker = new(string)
+			return d.ReadString(schemas.ListPricesResponse_NextPageMarker, v.NextPageMarker)
+		case schemas.ListPricesResponse_Prices:
+			return deserializeDomainPriceList(d, schemas.ListPricesResponse_Prices, &v.Prices)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPricesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPrices{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPrices, schemas.ListPricesRequest, schemas.ListPricesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPrices{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPrices, schemas.ListPricesRequest, schemas.ListPricesResponse), output: &ListPricesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

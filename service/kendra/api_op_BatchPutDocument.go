@@ -4,7 +4,9 @@ package kendra
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -81,6 +83,27 @@ type BatchPutDocumentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutDocumentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutDocumentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutDocumentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomDocumentEnrichmentConfiguration != nil {
+		s.WriteStruct(schemas.BatchPutDocumentRequest_CustomDocumentEnrichmentConfiguration)
+		v.CustomDocumentEnrichmentConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDocumentList(s, schemas.BatchPutDocumentRequest_Documents, v.Documents)
+	if v.IndexId != nil {
+		s.WriteString(schemas.BatchPutDocumentRequest_IndexId, *v.IndexId)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.BatchPutDocumentRequest_RoleArn, *v.RoleArn)
+	}
+}
+
 type BatchPutDocumentOutput struct {
 
 	// A list of documents that were not added to the index because the document
@@ -99,13 +122,29 @@ type BatchPutDocumentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutDocumentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutDocumentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutDocumentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchPutDocumentResponseFailedDocuments(s, schemas.BatchPutDocumentResponse_FailedDocuments, v.FailedDocuments)
+}
+func (v *BatchPutDocumentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPutDocumentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPutDocumentResponse_FailedDocuments:
+			return deserializeBatchPutDocumentResponseFailedDocuments(d, schemas.BatchPutDocumentResponse_FailedDocuments, &v.FailedDocuments)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchPutDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchPutDocument{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutDocument, schemas.BatchPutDocumentRequest, schemas.BatchPutDocumentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchPutDocument{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutDocument, schemas.BatchPutDocumentRequest, schemas.BatchPutDocumentResponse), output: &BatchPutDocumentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

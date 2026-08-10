@@ -5,7 +5,9 @@ package migrationhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,27 @@ type ListDiscoveredResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDiscoveredResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDiscoveredResourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDiscoveredResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDiscoveredResourcesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MigrationTaskName != nil {
+		s.WriteString(schemas.ListDiscoveredResourcesRequest_MigrationTaskName, *v.MigrationTaskName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDiscoveredResourcesRequest_NextToken, *v.NextToken)
+	}
+	if v.ProgressUpdateStream != nil {
+		s.WriteString(schemas.ListDiscoveredResourcesRequest_ProgressUpdateStream, *v.ProgressUpdateStream)
+	}
+}
+
 type ListDiscoveredResourcesOutput struct {
 
 	// Returned list of discovered resources associated with the given MigrationTask.
@@ -63,13 +86,35 @@ type ListDiscoveredResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDiscoveredResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDiscoveredResourcesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDiscoveredResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDiscoveredResourceList(s, schemas.ListDiscoveredResourcesResult_DiscoveredResourceList, v.DiscoveredResourceList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDiscoveredResourcesResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDiscoveredResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDiscoveredResourcesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDiscoveredResourcesResult_DiscoveredResourceList:
+			return deserializeDiscoveredResourceList(d, schemas.ListDiscoveredResourcesResult_DiscoveredResourceList, &v.DiscoveredResourceList)
+		case schemas.ListDiscoveredResourcesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDiscoveredResourcesResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDiscoveredResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDiscoveredResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDiscoveredResources, schemas.ListDiscoveredResourcesRequest, schemas.ListDiscoveredResourcesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDiscoveredResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDiscoveredResources, schemas.ListDiscoveredResourcesRequest, schemas.ListDiscoveredResourcesResult), output: &ListDiscoveredResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

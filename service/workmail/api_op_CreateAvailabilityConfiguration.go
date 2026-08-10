@@ -5,7 +5,9 @@ package workmail
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,34 @@ type CreateAvailabilityConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAvailabilityConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAvailabilityConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAvailabilityConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAvailabilityConfigurationRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.CreateAvailabilityConfigurationRequest_DomainName, *v.DomainName)
+	}
+	if v.EwsProvider != nil {
+		s.WriteStruct(schemas.CreateAvailabilityConfigurationRequest_EwsProvider)
+		v.EwsProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LambdaProvider != nil {
+		s.WriteStruct(schemas.CreateAvailabilityConfigurationRequest_LambdaProvider)
+		v.LambdaProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.CreateAvailabilityConfigurationRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type CreateAvailabilityConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,13 +90,26 @@ type CreateAvailabilityConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAvailabilityConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAvailabilityConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAvailabilityConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateAvailabilityConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAvailabilityConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAvailabilityConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAvailabilityConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAvailabilityConfiguration, schemas.CreateAvailabilityConfigurationRequest, schemas.CreateAvailabilityConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAvailabilityConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAvailabilityConfiguration, schemas.CreateAvailabilityConfigurationRequest, schemas.CreateAvailabilityConfigurationResponse), output: &CreateAvailabilityConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

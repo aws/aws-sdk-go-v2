@@ -4,7 +4,9 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -79,6 +81,25 @@ type PutMailboxPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutMailboxPermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutMailboxPermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutMailboxPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityId != nil {
+		s.WriteString(schemas.PutMailboxPermissionsRequest_EntityId, *v.EntityId)
+	}
+	if v.GranteeId != nil {
+		s.WriteString(schemas.PutMailboxPermissionsRequest_GranteeId, *v.GranteeId)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.PutMailboxPermissionsRequest_OrganizationId, *v.OrganizationId)
+	}
+	serializePermissionValues(s, schemas.PutMailboxPermissionsRequest_PermissionValues, v.PermissionValues)
+}
+
 type PutMailboxPermissionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -86,13 +107,26 @@ type PutMailboxPermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutMailboxPermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutMailboxPermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutMailboxPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutMailboxPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutMailboxPermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutMailboxPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutMailboxPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutMailboxPermissions, schemas.PutMailboxPermissionsRequest, schemas.PutMailboxPermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutMailboxPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutMailboxPermissions, schemas.PutMailboxPermissionsRequest, schemas.PutMailboxPermissionsResponse), output: &PutMailboxPermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

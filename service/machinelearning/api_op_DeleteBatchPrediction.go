@@ -4,6 +4,8 @@ package machinelearning
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DeleteBatchPredictionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBatchPredictionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBatchPredictionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBatchPredictionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchPredictionId != nil {
+		s.WriteString(schemas.DeleteBatchPredictionInput_BatchPredictionId, *v.BatchPredictionId)
+	}
+}
+
 //	Represents the output of a DeleteBatchPrediction operation.
 //
 // You can use the GetBatchPrediction operation and check the value of the Status
@@ -54,13 +68,32 @@ type DeleteBatchPredictionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBatchPredictionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBatchPredictionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBatchPredictionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchPredictionId != nil {
+		s.WriteString(schemas.DeleteBatchPredictionOutput_BatchPredictionId, *v.BatchPredictionId)
+	}
+}
+func (v *DeleteBatchPredictionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBatchPredictionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteBatchPredictionOutput_BatchPredictionId:
+			v.BatchPredictionId = new(string)
+			return d.ReadString(schemas.DeleteBatchPredictionOutput_BatchPredictionId, v.BatchPredictionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBatchPredictionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteBatchPrediction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBatchPrediction, schemas.DeleteBatchPredictionInput, schemas.DeleteBatchPredictionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteBatchPrediction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBatchPrediction, schemas.DeleteBatchPredictionInput, schemas.DeleteBatchPredictionOutput), output: &DeleteBatchPredictionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package applicationdiscoveryservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,22 @@ type DescribeContinuousExportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeContinuousExportsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeContinuousExportsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeContinuousExportsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContinuousExportIds(s, schemas.DescribeContinuousExportsRequest_exportIds, v.ExportIds)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeContinuousExportsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeContinuousExportsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type DescribeContinuousExportsOutput struct {
 
 	// A list of continuous export descriptions.
@@ -56,13 +74,35 @@ type DescribeContinuousExportsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeContinuousExportsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeContinuousExportsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeContinuousExportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContinuousExportDescriptions(s, schemas.DescribeContinuousExportsResponse_descriptions, v.Descriptions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeContinuousExportsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeContinuousExportsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeContinuousExportsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeContinuousExportsResponse_descriptions:
+			return deserializeContinuousExportDescriptions(d, schemas.DescribeContinuousExportsResponse_descriptions, &v.Descriptions)
+		case schemas.DescribeContinuousExportsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeContinuousExportsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeContinuousExportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeContinuousExports{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeContinuousExports, schemas.DescribeContinuousExportsRequest, schemas.DescribeContinuousExportsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeContinuousExports{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeContinuousExports, schemas.DescribeContinuousExportsRequest, schemas.DescribeContinuousExportsResponse), output: &DescribeContinuousExportsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

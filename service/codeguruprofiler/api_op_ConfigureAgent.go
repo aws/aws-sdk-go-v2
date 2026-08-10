@@ -4,7 +4,9 @@ package codeguruprofiler
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,37 @@ type ConfigureAgentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfigureAgentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigureAgentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigureAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetInstanceId != nil {
+		s.WriteString(schemas.ConfigureAgentRequest_fleetInstanceId, *v.FleetInstanceId)
+	}
+	serializeMetadata(s, schemas.ConfigureAgentRequest_metadata, v.Metadata)
+	if v.ProfilingGroupName != nil {
+		s.WriteString(schemas.ConfigureAgentRequest_profilingGroupName, *v.ProfilingGroupName)
+	}
+}
+func (v *ConfigureAgentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigureAgentRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigureAgentRequest_fleetInstanceId:
+			v.FleetInstanceId = new(string)
+			return d.ReadString(schemas.ConfigureAgentRequest_fleetInstanceId, v.FleetInstanceId)
+		case schemas.ConfigureAgentRequest_metadata:
+			return deserializeMetadata(d, schemas.ConfigureAgentRequest_metadata, &v.Metadata)
+		case schemas.ConfigureAgentRequest_profilingGroupName:
+			v.ProfilingGroupName = new(string)
+			return d.ReadString(schemas.ConfigureAgentRequest_profilingGroupName, v.ProfilingGroupName)
+		}
+		return nil
+	})
+}
+
 // The structure representing the configureAgentResponse.
 type ConfigureAgentOutput struct {
 
@@ -88,13 +121,34 @@ type ConfigureAgentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfigureAgentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigureAgentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigureAgentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.ConfigureAgentResponse_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ConfigureAgentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigureAgentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigureAgentResponse_configuration:
+			v.Configuration = &types.AgentConfiguration{}
+			return v.Configuration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationConfigureAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpConfigureAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfigureAgent, schemas.ConfigureAgentRequest, schemas.ConfigureAgentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpConfigureAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfigureAgent, schemas.ConfigureAgentRequest, schemas.ConfigureAgentResponse), output: &ConfigureAgentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package kendra
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DeleteExperienceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteExperienceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteExperienceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteExperienceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteExperienceRequest_Id, *v.Id)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.DeleteExperienceRequest_IndexId, *v.IndexId)
+	}
+}
+
 type DeleteExperienceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +65,26 @@ type DeleteExperienceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteExperienceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteExperienceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteExperienceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteExperienceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteExperienceResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteExperienceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteExperience{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteExperience, schemas.DeleteExperienceRequest, schemas.DeleteExperienceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteExperience{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteExperience, schemas.DeleteExperienceRequest, schemas.DeleteExperienceResponse), output: &DeleteExperienceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

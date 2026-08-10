@@ -5,7 +5,9 @@ package memorydb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/memorydb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/memorydb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type DescribeSubnetGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSubnetGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSubnetGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSubnetGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeSubnetGroupsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSubnetGroupsRequest_NextToken, *v.NextToken)
+	}
+	if v.SubnetGroupName != nil {
+		s.WriteString(schemas.DescribeSubnetGroupsRequest_SubnetGroupName, *v.SubnetGroupName)
+	}
+}
+
 type DescribeSubnetGroupsOutput struct {
 
 	// An optional argument to pass in case the total number of records exceeds the
@@ -65,13 +85,35 @@ type DescribeSubnetGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSubnetGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSubnetGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSubnetGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSubnetGroupsResponse_NextToken, *v.NextToken)
+	}
+	serializeSubnetGroupList(s, schemas.DescribeSubnetGroupsResponse_SubnetGroups, v.SubnetGroups)
+}
+func (v *DescribeSubnetGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSubnetGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSubnetGroupsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeSubnetGroupsResponse_NextToken, v.NextToken)
+		case schemas.DescribeSubnetGroupsResponse_SubnetGroups:
+			return deserializeSubnetGroupList(d, schemas.DescribeSubnetGroupsResponse_SubnetGroups, &v.SubnetGroups)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSubnetGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSubnetGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSubnetGroups, schemas.DescribeSubnetGroupsRequest, schemas.DescribeSubnetGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeSubnetGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSubnetGroups, schemas.DescribeSubnetGroupsRequest, schemas.DescribeSubnetGroupsResponse), output: &DescribeSubnetGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

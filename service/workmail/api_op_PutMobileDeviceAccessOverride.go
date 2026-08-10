@@ -4,7 +4,9 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,30 @@ type PutMobileDeviceAccessOverrideInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutMobileDeviceAccessOverrideInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutMobileDeviceAccessOverrideRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutMobileDeviceAccessOverrideInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.PutMobileDeviceAccessOverrideRequest_Description, *v.Description)
+	}
+	if v.DeviceId != nil {
+		s.WriteString(schemas.PutMobileDeviceAccessOverrideRequest_DeviceId, *v.DeviceId)
+	}
+	if v.Effect != "" {
+		s.WriteString(schemas.PutMobileDeviceAccessOverrideRequest_Effect, string(v.Effect))
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.PutMobileDeviceAccessOverrideRequest_OrganizationId, *v.OrganizationId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.PutMobileDeviceAccessOverrideRequest_UserId, *v.UserId)
+	}
+}
+
 type PutMobileDeviceAccessOverrideOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -69,13 +95,26 @@ type PutMobileDeviceAccessOverrideOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutMobileDeviceAccessOverrideOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutMobileDeviceAccessOverrideResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutMobileDeviceAccessOverrideOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutMobileDeviceAccessOverrideOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutMobileDeviceAccessOverrideResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutMobileDeviceAccessOverrideMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutMobileDeviceAccessOverride{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutMobileDeviceAccessOverride, schemas.PutMobileDeviceAccessOverrideRequest, schemas.PutMobileDeviceAccessOverrideResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutMobileDeviceAccessOverride{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutMobileDeviceAccessOverride, schemas.PutMobileDeviceAccessOverrideRequest, schemas.PutMobileDeviceAccessOverrideResponse), output: &PutMobileDeviceAccessOverrideOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

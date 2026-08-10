@@ -4,6 +4,8 @@ package forecast
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteExplainabilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteExplainabilityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteExplainabilityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteExplainabilityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExplainabilityArn != nil {
+		s.WriteString(schemas.DeleteExplainabilityRequest_ExplainabilityArn, *v.ExplainabilityArn)
+	}
+}
+
 type DeleteExplainabilityOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type DeleteExplainabilityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteExplainabilityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteExplainabilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteExplainabilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteExplainabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteExplainability{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteExplainability, schemas.DeleteExplainabilityRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteExplainability{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteExplainability, schemas.DeleteExplainabilityRequest, nil), output: &DeleteExplainabilityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

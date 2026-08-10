@@ -4,7 +4,9 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,30 @@ type GetMobileDeviceAccessEffectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMobileDeviceAccessEffectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMobileDeviceAccessEffectRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMobileDeviceAccessEffectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceModel != nil {
+		s.WriteString(schemas.GetMobileDeviceAccessEffectRequest_DeviceModel, *v.DeviceModel)
+	}
+	if v.DeviceOperatingSystem != nil {
+		s.WriteString(schemas.GetMobileDeviceAccessEffectRequest_DeviceOperatingSystem, *v.DeviceOperatingSystem)
+	}
+	if v.DeviceType != nil {
+		s.WriteString(schemas.GetMobileDeviceAccessEffectRequest_DeviceType, *v.DeviceType)
+	}
+	if v.DeviceUserAgent != nil {
+		s.WriteString(schemas.GetMobileDeviceAccessEffectRequest_DeviceUserAgent, *v.DeviceUserAgent)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.GetMobileDeviceAccessEffectRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type GetMobileDeviceAccessEffectOutput struct {
 
 	// The effect of the simulated access, ALLOW or DENY , after evaluating mobile
@@ -66,13 +92,39 @@ type GetMobileDeviceAccessEffectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMobileDeviceAccessEffectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMobileDeviceAccessEffectResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMobileDeviceAccessEffectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Effect != "" {
+		s.WriteString(schemas.GetMobileDeviceAccessEffectResponse_Effect, string(v.Effect))
+	}
+	serializeMobileDeviceAccessMatchedRuleList(s, schemas.GetMobileDeviceAccessEffectResponse_MatchedRules, v.MatchedRules)
+}
+func (v *GetMobileDeviceAccessEffectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMobileDeviceAccessEffectResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMobileDeviceAccessEffectResponse_Effect:
+			var ev string
+			if err := d.ReadString(schemas.GetMobileDeviceAccessEffectResponse_Effect, &ev); err != nil {
+				return err
+			}
+			v.Effect = types.MobileDeviceAccessRuleEffect(ev)
+			return nil
+		case schemas.GetMobileDeviceAccessEffectResponse_MatchedRules:
+			return deserializeMobileDeviceAccessMatchedRuleList(d, schemas.GetMobileDeviceAccessEffectResponse_MatchedRules, &v.MatchedRules)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMobileDeviceAccessEffectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetMobileDeviceAccessEffect{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMobileDeviceAccessEffect, schemas.GetMobileDeviceAccessEffectRequest, schemas.GetMobileDeviceAccessEffectResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetMobileDeviceAccessEffect{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMobileDeviceAccessEffect, schemas.GetMobileDeviceAccessEffectRequest, schemas.GetMobileDeviceAccessEffectResponse), output: &GetMobileDeviceAccessEffectOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

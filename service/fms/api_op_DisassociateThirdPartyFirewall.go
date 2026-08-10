@@ -4,7 +4,9 @@ package fms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DisassociateThirdPartyFirewallInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateThirdPartyFirewallInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateThirdPartyFirewallRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateThirdPartyFirewallInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ThirdPartyFirewall != "" {
+		s.WriteString(schemas.DisassociateThirdPartyFirewallRequest_ThirdPartyFirewall, string(v.ThirdPartyFirewall))
+	}
+}
+
 type DisassociateThirdPartyFirewallOutput struct {
 
 	// The current status for the disassociation of a Firewall Manager administrators
@@ -49,13 +63,36 @@ type DisassociateThirdPartyFirewallOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateThirdPartyFirewallOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateThirdPartyFirewallResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateThirdPartyFirewallOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ThirdPartyFirewallStatus != "" {
+		s.WriteString(schemas.DisassociateThirdPartyFirewallResponse_ThirdPartyFirewallStatus, string(v.ThirdPartyFirewallStatus))
+	}
+}
+func (v *DisassociateThirdPartyFirewallOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateThirdPartyFirewallResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateThirdPartyFirewallResponse_ThirdPartyFirewallStatus:
+			var ev string
+			if err := d.ReadString(schemas.DisassociateThirdPartyFirewallResponse_ThirdPartyFirewallStatus, &ev); err != nil {
+				return err
+			}
+			v.ThirdPartyFirewallStatus = types.ThirdPartyFirewallAssociationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateThirdPartyFirewallMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateThirdPartyFirewall{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateThirdPartyFirewall, schemas.DisassociateThirdPartyFirewallRequest, schemas.DisassociateThirdPartyFirewallResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisassociateThirdPartyFirewall{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateThirdPartyFirewall, schemas.DisassociateThirdPartyFirewallRequest, schemas.DisassociateThirdPartyFirewallResponse), output: &DisassociateThirdPartyFirewallOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

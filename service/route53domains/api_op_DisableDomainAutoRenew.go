@@ -4,6 +4,8 @@ package route53domains
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DisableDomainAutoRenewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableDomainAutoRenewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableDomainAutoRenewRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableDomainAutoRenewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DisableDomainAutoRenewRequest_DomainName, *v.DomainName)
+	}
+}
+
 type DisableDomainAutoRenewOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DisableDomainAutoRenewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableDomainAutoRenewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableDomainAutoRenewResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableDomainAutoRenewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisableDomainAutoRenewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisableDomainAutoRenewResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisableDomainAutoRenewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisableDomainAutoRenew{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableDomainAutoRenew, schemas.DisableDomainAutoRenewRequest, schemas.DisableDomainAutoRenewResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisableDomainAutoRenew{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableDomainAutoRenew, schemas.DisableDomainAutoRenewRequest, schemas.DisableDomainAutoRenewResponse), output: &DisableDomainAutoRenewOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

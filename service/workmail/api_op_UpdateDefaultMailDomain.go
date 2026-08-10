@@ -4,6 +4,8 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type UpdateDefaultMailDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDefaultMailDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDefaultMailDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDefaultMailDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.UpdateDefaultMailDomainRequest_DomainName, *v.DomainName)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.UpdateDefaultMailDomainRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type UpdateDefaultMailDomainOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +64,26 @@ type UpdateDefaultMailDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDefaultMailDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDefaultMailDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDefaultMailDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateDefaultMailDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDefaultMailDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDefaultMailDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDefaultMailDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDefaultMailDomain, schemas.UpdateDefaultMailDomainRequest, schemas.UpdateDefaultMailDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateDefaultMailDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDefaultMailDomain, schemas.UpdateDefaultMailDomainRequest, schemas.UpdateDefaultMailDomainResponse), output: &UpdateDefaultMailDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package cloud9
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloud9/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type DeleteEnvironmentMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEnvironmentMembershipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEnvironmentMembershipRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEnvironmentMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.DeleteEnvironmentMembershipRequest_environmentId, *v.EnvironmentId)
+	}
+	if v.UserArn != nil {
+		s.WriteString(schemas.DeleteEnvironmentMembershipRequest_userArn, *v.UserArn)
+	}
+}
+
 type DeleteEnvironmentMembershipOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +68,26 @@ type DeleteEnvironmentMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEnvironmentMembershipOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEnvironmentMembershipResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEnvironmentMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteEnvironmentMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEnvironmentMembershipResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEnvironmentMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteEnvironmentMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEnvironmentMembership, schemas.DeleteEnvironmentMembershipRequest, schemas.DeleteEnvironmentMembershipResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteEnvironmentMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEnvironmentMembership, schemas.DeleteEnvironmentMembershipRequest, schemas.DeleteEnvironmentMembershipResult), output: &DeleteEnvironmentMembershipOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

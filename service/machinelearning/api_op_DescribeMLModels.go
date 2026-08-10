@@ -5,7 +5,9 @@ package machinelearning
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -115,6 +117,48 @@ type DescribeMLModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMLModelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMLModelsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMLModelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EQ != nil {
+		s.WriteString(schemas.DescribeMLModelsInput_EQ, *v.EQ)
+	}
+	if v.FilterVariable != "" {
+		s.WriteString(schemas.DescribeMLModelsInput_FilterVariable, string(v.FilterVariable))
+	}
+	if v.GE != nil {
+		s.WriteString(schemas.DescribeMLModelsInput_GE, *v.GE)
+	}
+	if v.GT != nil {
+		s.WriteString(schemas.DescribeMLModelsInput_GT, *v.GT)
+	}
+	if v.LE != nil {
+		s.WriteString(schemas.DescribeMLModelsInput_LE, *v.LE)
+	}
+	if v.LT != nil {
+		s.WriteString(schemas.DescribeMLModelsInput_LT, *v.LT)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeMLModelsInput_Limit, *v.Limit)
+	}
+	if v.NE != nil {
+		s.WriteString(schemas.DescribeMLModelsInput_NE, *v.NE)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeMLModelsInput_NextToken, *v.NextToken)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.DescribeMLModelsInput_Prefix, *v.Prefix)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.DescribeMLModelsInput_SortOrder, string(v.SortOrder))
+	}
+}
+
 // Represents the output of a DescribeMLModels operation. The content is
 // essentially a list of MLModel .
 type DescribeMLModelsOutput struct {
@@ -132,13 +176,35 @@ type DescribeMLModelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMLModelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMLModelsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMLModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeMLModelsOutput_NextToken, *v.NextToken)
+	}
+	serializeMLModels(s, schemas.DescribeMLModelsOutput_Results, v.Results)
+}
+func (v *DescribeMLModelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMLModelsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMLModelsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeMLModelsOutput_NextToken, v.NextToken)
+		case schemas.DescribeMLModelsOutput_Results:
+			return deserializeMLModels(d, schemas.DescribeMLModelsOutput_Results, &v.Results)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMLModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeMLModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMLModels, schemas.DescribeMLModelsInput, schemas.DescribeMLModelsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeMLModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMLModels, schemas.DescribeMLModelsInput, schemas.DescribeMLModelsOutput), output: &DescribeMLModelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

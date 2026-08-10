@@ -4,7 +4,9 @@ package cognitosync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitosync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitosync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -39,6 +41,18 @@ type GetBulkPublishDetailsInput struct {
 	IdentityPoolId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetBulkPublishDetailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBulkPublishDetailsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBulkPublishDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.GetBulkPublishDetailsRequest_IdentityPoolId, *v.IdentityPoolId)
+	}
 }
 
 // The output for the GetBulkPublishDetails operation.
@@ -79,13 +93,60 @@ type GetBulkPublishDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBulkPublishDetailsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBulkPublishDetailsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBulkPublishDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BulkPublishCompleteTime != nil {
+		s.WriteTime(schemas.GetBulkPublishDetailsResponse_BulkPublishCompleteTime, *v.BulkPublishCompleteTime)
+	}
+	if v.BulkPublishStartTime != nil {
+		s.WriteTime(schemas.GetBulkPublishDetailsResponse_BulkPublishStartTime, *v.BulkPublishStartTime)
+	}
+	if v.BulkPublishStatus != "" {
+		s.WriteString(schemas.GetBulkPublishDetailsResponse_BulkPublishStatus, string(v.BulkPublishStatus))
+	}
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.GetBulkPublishDetailsResponse_FailureMessage, *v.FailureMessage)
+	}
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.GetBulkPublishDetailsResponse_IdentityPoolId, *v.IdentityPoolId)
+	}
+}
+func (v *GetBulkPublishDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBulkPublishDetailsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBulkPublishDetailsResponse_BulkPublishCompleteTime:
+			v.BulkPublishCompleteTime = new(time.Time)
+			return d.ReadTime(schemas.GetBulkPublishDetailsResponse_BulkPublishCompleteTime, v.BulkPublishCompleteTime)
+		case schemas.GetBulkPublishDetailsResponse_BulkPublishStartTime:
+			v.BulkPublishStartTime = new(time.Time)
+			return d.ReadTime(schemas.GetBulkPublishDetailsResponse_BulkPublishStartTime, v.BulkPublishStartTime)
+		case schemas.GetBulkPublishDetailsResponse_BulkPublishStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetBulkPublishDetailsResponse_BulkPublishStatus, &ev); err != nil {
+				return err
+			}
+			v.BulkPublishStatus = types.BulkPublishStatus(ev)
+			return nil
+		case schemas.GetBulkPublishDetailsResponse_FailureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.GetBulkPublishDetailsResponse_FailureMessage, v.FailureMessage)
+		case schemas.GetBulkPublishDetailsResponse_IdentityPoolId:
+			v.IdentityPoolId = new(string)
+			return d.ReadString(schemas.GetBulkPublishDetailsResponse_IdentityPoolId, v.IdentityPoolId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBulkPublishDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBulkPublishDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBulkPublishDetails, schemas.GetBulkPublishDetailsRequest, schemas.GetBulkPublishDetailsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBulkPublishDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBulkPublishDetails, schemas.GetBulkPublishDetailsRequest, schemas.GetBulkPublishDetailsResponse), output: &GetBulkPublishDetailsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

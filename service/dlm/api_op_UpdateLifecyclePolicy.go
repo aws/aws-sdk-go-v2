@@ -4,7 +4,9 @@ package dlm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/dlm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dlm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -100,6 +102,50 @@ type UpdateLifecyclePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLifecyclePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLifecyclePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLifecyclePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CopyTags != nil {
+		s.WriteBool(schemas.UpdateLifecyclePolicyRequest_CopyTags, *v.CopyTags)
+	}
+	if v.CreateInterval != nil {
+		s.WriteInt32(schemas.UpdateLifecyclePolicyRequest_CreateInterval, *v.CreateInterval)
+	}
+	serializeCrossRegionCopyTargetList(s, schemas.UpdateLifecyclePolicyRequest_CrossRegionCopyTargets, v.CrossRegionCopyTargets)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateLifecyclePolicyRequest_Description, *v.Description)
+	}
+	if v.Exclusions != nil {
+		s.WriteStruct(schemas.UpdateLifecyclePolicyRequest_Exclusions)
+		v.Exclusions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.UpdateLifecyclePolicyRequest_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.ExtendDeletion != nil {
+		s.WriteBool(schemas.UpdateLifecyclePolicyRequest_ExtendDeletion, *v.ExtendDeletion)
+	}
+	if v.PolicyDetails != nil {
+		s.WriteStruct(schemas.UpdateLifecyclePolicyRequest_PolicyDetails)
+		v.PolicyDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.UpdateLifecyclePolicyRequest_PolicyId, *v.PolicyId)
+	}
+	if v.RetainInterval != nil {
+		s.WriteInt32(schemas.UpdateLifecyclePolicyRequest_RetainInterval, *v.RetainInterval)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.UpdateLifecyclePolicyRequest_State, string(v.State))
+	}
+}
+
 type UpdateLifecyclePolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -107,13 +153,26 @@ type UpdateLifecyclePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLifecyclePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLifecyclePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLifecyclePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateLifecyclePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLifecyclePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLifecyclePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateLifecyclePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLifecyclePolicy, schemas.UpdateLifecyclePolicyRequest, schemas.UpdateLifecyclePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateLifecyclePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLifecyclePolicy, schemas.UpdateLifecyclePolicyRequest, schemas.UpdateLifecyclePolicyResponse), output: &UpdateLifecyclePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package chimesdkidentity
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DescribeAppInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAppInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAppInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAppInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppInstanceArn != nil {
+		s.WriteString(schemas.DescribeAppInstanceRequest_AppInstanceArn, *v.AppInstanceArn)
+	}
+}
+
 type DescribeAppInstanceOutput struct {
 
 	// The ARN, metadata, created and last-updated timestamps, and the name of the
@@ -46,13 +60,34 @@ type DescribeAppInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAppInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAppInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAppInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppInstance != nil {
+		s.WriteStruct(schemas.DescribeAppInstanceResponse_AppInstance)
+		v.AppInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAppInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAppInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAppInstanceResponse_AppInstance:
+			v.AppInstance = &types.AppInstance{}
+			return v.AppInstance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAppInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAppInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAppInstance, schemas.DescribeAppInstanceRequest, schemas.DescribeAppInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAppInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAppInstance, schemas.DescribeAppInstanceRequest, schemas.DescribeAppInstanceResponse), output: &DescribeAppInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

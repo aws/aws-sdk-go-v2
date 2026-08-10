@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,40 @@ type UpdateServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateServiceInput_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateServiceInput_name, *v.Name)
+	}
+	if v.Spec != nil {
+		s.WriteString(schemas.UpdateServiceInput_spec, *v.Spec)
+	}
+}
+func (v *UpdateServiceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServiceInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServiceInput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateServiceInput_description, v.Description)
+		case schemas.UpdateServiceInput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateServiceInput_name, v.Name)
+		case schemas.UpdateServiceInput_spec:
+			v.Spec = new(string)
+			return d.ReadString(schemas.UpdateServiceInput_spec, v.Spec)
+		}
+		return nil
+	})
+}
+
 type UpdateServiceOutput struct {
 
 	// The service detail data that's returned by Proton.
@@ -76,13 +112,34 @@ type UpdateServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Service != nil {
+		s.WriteStruct(schemas.UpdateServiceOutput_service)
+		v.Service.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServiceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServiceOutput_service:
+			v.Service = &types.Service{}
+			return v.Service.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateService{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateService, schemas.UpdateServiceInput, schemas.UpdateServiceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateService{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateService, schemas.UpdateServiceInput, schemas.UpdateServiceOutput), output: &UpdateServiceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package forecast
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DeleteWhatIfAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWhatIfAnalysisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWhatIfAnalysisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWhatIfAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WhatIfAnalysisArn != nil {
+		s.WriteString(schemas.DeleteWhatIfAnalysisRequest_WhatIfAnalysisArn, *v.WhatIfAnalysisArn)
+	}
+}
+
 type DeleteWhatIfAnalysisOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +59,26 @@ type DeleteWhatIfAnalysisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWhatIfAnalysisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWhatIfAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteWhatIfAnalysisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWhatIfAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteWhatIfAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWhatIfAnalysis, schemas.DeleteWhatIfAnalysisRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteWhatIfAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWhatIfAnalysis, schemas.DeleteWhatIfAnalysisRequest, nil), output: &DeleteWhatIfAnalysisOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

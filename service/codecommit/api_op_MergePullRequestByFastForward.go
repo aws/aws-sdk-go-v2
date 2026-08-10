@@ -4,7 +4,9 @@ package codecommit
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type MergePullRequestByFastForwardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MergePullRequestByFastForwardInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MergePullRequestByFastForwardInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MergePullRequestByFastForwardInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PullRequestId != nil {
+		s.WriteString(schemas.MergePullRequestByFastForwardInput_pullRequestId, *v.PullRequestId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.MergePullRequestByFastForwardInput_repositoryName, *v.RepositoryName)
+	}
+	if v.SourceCommitId != nil {
+		s.WriteString(schemas.MergePullRequestByFastForwardInput_sourceCommitId, *v.SourceCommitId)
+	}
+}
+
 type MergePullRequestByFastForwardOutput struct {
 
 	// Information about the specified pull request, including the merge.
@@ -58,13 +78,34 @@ type MergePullRequestByFastForwardOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MergePullRequestByFastForwardOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MergePullRequestByFastForwardOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MergePullRequestByFastForwardOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PullRequest != nil {
+		s.WriteStruct(schemas.MergePullRequestByFastForwardOutput_pullRequest)
+		v.PullRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MergePullRequestByFastForwardOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MergePullRequestByFastForwardOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MergePullRequestByFastForwardOutput_pullRequest:
+			v.PullRequest = &types.PullRequest{}
+			return v.PullRequest.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMergePullRequestByFastForwardMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpMergePullRequestByFastForward{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MergePullRequestByFastForward, schemas.MergePullRequestByFastForwardInput, schemas.MergePullRequestByFastForwardOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpMergePullRequestByFastForward{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MergePullRequestByFastForward, schemas.MergePullRequestByFastForwardInput, schemas.MergePullRequestByFastForwardOutput), output: &MergePullRequestByFastForwardOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

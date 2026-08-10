@@ -5,7 +5,9 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,23 @@ type DescribeProtectConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProtectConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProtectConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProtectConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeProtectConfigurationFilterList(s, schemas.DescribeProtectConfigurationsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeProtectConfigurationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeProtectConfigurationsRequest_NextToken, *v.NextToken)
+	}
+	serializeProtectConfigurationIdList(s, schemas.DescribeProtectConfigurationsRequest_ProtectConfigurationIds, v.ProtectConfigurationIds)
+}
+
 type DescribeProtectConfigurationsOutput struct {
 
 	// The token to be used for the next set of paginated results. You don't need to
@@ -60,13 +79,35 @@ type DescribeProtectConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProtectConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProtectConfigurationsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProtectConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeProtectConfigurationsResult_NextToken, *v.NextToken)
+	}
+	serializeProtectConfigurationInformationList(s, schemas.DescribeProtectConfigurationsResult_ProtectConfigurations, v.ProtectConfigurations)
+}
+func (v *DescribeProtectConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeProtectConfigurationsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeProtectConfigurationsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeProtectConfigurationsResult_NextToken, v.NextToken)
+		case schemas.DescribeProtectConfigurationsResult_ProtectConfigurations:
+			return deserializeProtectConfigurationInformationList(d, schemas.DescribeProtectConfigurationsResult_ProtectConfigurations, &v.ProtectConfigurations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeProtectConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeProtectConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProtectConfigurations, schemas.DescribeProtectConfigurationsRequest, schemas.DescribeProtectConfigurationsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeProtectConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProtectConfigurations, schemas.DescribeProtectConfigurationsRequest, schemas.DescribeProtectConfigurationsResult), output: &DescribeProtectConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

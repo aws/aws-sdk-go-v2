@@ -4,7 +4,9 @@ package memorydb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/memorydb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/memorydb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,28 @@ type CopySnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopySnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopySnapshotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopySnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CopySnapshotRequest_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.SourceSnapshotName != nil {
+		s.WriteString(schemas.CopySnapshotRequest_SourceSnapshotName, *v.SourceSnapshotName)
+	}
+	serializeTagList(s, schemas.CopySnapshotRequest_Tags, v.Tags)
+	if v.TargetBucket != nil {
+		s.WriteString(schemas.CopySnapshotRequest_TargetBucket, *v.TargetBucket)
+	}
+	if v.TargetSnapshotName != nil {
+		s.WriteString(schemas.CopySnapshotRequest_TargetSnapshotName, *v.TargetSnapshotName)
+	}
+}
+
 type CopySnapshotOutput struct {
 
 	// Represents a copy of an entire cluster as of the time when the snapshot was
@@ -71,13 +95,34 @@ type CopySnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopySnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopySnapshotResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopySnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Snapshot != nil {
+		s.WriteStruct(schemas.CopySnapshotResponse_Snapshot)
+		v.Snapshot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CopySnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CopySnapshotResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CopySnapshotResponse_Snapshot:
+			v.Snapshot = &types.Snapshot{}
+			return v.Snapshot.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCopySnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCopySnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopySnapshot, schemas.CopySnapshotRequest, schemas.CopySnapshotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCopySnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopySnapshot, schemas.CopySnapshotRequest, schemas.CopySnapshotResponse), output: &CopySnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

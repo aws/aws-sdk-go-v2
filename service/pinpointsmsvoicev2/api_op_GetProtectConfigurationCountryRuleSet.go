@@ -4,7 +4,9 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type GetProtectConfigurationCountryRuleSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProtectConfigurationCountryRuleSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProtectConfigurationCountryRuleSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProtectConfigurationCountryRuleSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NumberCapability != "" {
+		s.WriteString(schemas.GetProtectConfigurationCountryRuleSetRequest_NumberCapability, string(v.NumberCapability))
+	}
+	if v.ProtectConfigurationId != nil {
+		s.WriteString(schemas.GetProtectConfigurationCountryRuleSetRequest_ProtectConfigurationId, *v.ProtectConfigurationId)
+	}
+}
+
 type GetProtectConfigurationCountryRuleSetOutput struct {
 
 	// A map of ProtectConfigurationCountryRuleSetInformation objects that contain the
@@ -75,13 +92,51 @@ type GetProtectConfigurationCountryRuleSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProtectConfigurationCountryRuleSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProtectConfigurationCountryRuleSetResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProtectConfigurationCountryRuleSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeProtectConfigurationCountryRuleSet(s, schemas.GetProtectConfigurationCountryRuleSetResult_CountryRuleSet, v.CountryRuleSet)
+	if v.NumberCapability != "" {
+		s.WriteString(schemas.GetProtectConfigurationCountryRuleSetResult_NumberCapability, string(v.NumberCapability))
+	}
+	if v.ProtectConfigurationArn != nil {
+		s.WriteString(schemas.GetProtectConfigurationCountryRuleSetResult_ProtectConfigurationArn, *v.ProtectConfigurationArn)
+	}
+	if v.ProtectConfigurationId != nil {
+		s.WriteString(schemas.GetProtectConfigurationCountryRuleSetResult_ProtectConfigurationId, *v.ProtectConfigurationId)
+	}
+}
+func (v *GetProtectConfigurationCountryRuleSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetProtectConfigurationCountryRuleSetResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetProtectConfigurationCountryRuleSetResult_CountryRuleSet:
+			return deserializeProtectConfigurationCountryRuleSet(d, schemas.GetProtectConfigurationCountryRuleSetResult_CountryRuleSet, &v.CountryRuleSet)
+		case schemas.GetProtectConfigurationCountryRuleSetResult_NumberCapability:
+			var ev string
+			if err := d.ReadString(schemas.GetProtectConfigurationCountryRuleSetResult_NumberCapability, &ev); err != nil {
+				return err
+			}
+			v.NumberCapability = types.NumberCapability(ev)
+			return nil
+		case schemas.GetProtectConfigurationCountryRuleSetResult_ProtectConfigurationArn:
+			v.ProtectConfigurationArn = new(string)
+			return d.ReadString(schemas.GetProtectConfigurationCountryRuleSetResult_ProtectConfigurationArn, v.ProtectConfigurationArn)
+		case schemas.GetProtectConfigurationCountryRuleSetResult_ProtectConfigurationId:
+			v.ProtectConfigurationId = new(string)
+			return d.ReadString(schemas.GetProtectConfigurationCountryRuleSetResult_ProtectConfigurationId, v.ProtectConfigurationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetProtectConfigurationCountryRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetProtectConfigurationCountryRuleSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProtectConfigurationCountryRuleSet, schemas.GetProtectConfigurationCountryRuleSetRequest, schemas.GetProtectConfigurationCountryRuleSetResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetProtectConfigurationCountryRuleSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProtectConfigurationCountryRuleSet, schemas.GetProtectConfigurationCountryRuleSetRequest, schemas.GetProtectConfigurationCountryRuleSetResult), output: &GetProtectConfigurationCountryRuleSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

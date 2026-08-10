@@ -5,7 +5,9 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -82,6 +84,40 @@ type CreateEventDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEventDestinationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEventDestinationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEventDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateEventDestinationRequest_ClientToken, *v.ClientToken)
+	}
+	if v.CloudWatchLogsDestination != nil {
+		s.WriteStruct(schemas.CreateEventDestinationRequest_CloudWatchLogsDestination)
+		v.CloudWatchLogsDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.CreateEventDestinationRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.EventDestinationName != nil {
+		s.WriteString(schemas.CreateEventDestinationRequest_EventDestinationName, *v.EventDestinationName)
+	}
+	if v.KinesisFirehoseDestination != nil {
+		s.WriteStruct(schemas.CreateEventDestinationRequest_KinesisFirehoseDestination)
+		v.KinesisFirehoseDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeEventTypeList(s, schemas.CreateEventDestinationRequest_MatchingEventTypes, v.MatchingEventTypes)
+	if v.SnsDestination != nil {
+		s.WriteStruct(schemas.CreateEventDestinationRequest_SnsDestination)
+		v.SnsDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateEventDestinationOutput struct {
 
 	// The ARN of the configuration set.
@@ -99,13 +135,46 @@ type CreateEventDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEventDestinationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEventDestinationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEventDestinationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetArn != nil {
+		s.WriteString(schemas.CreateEventDestinationResult_ConfigurationSetArn, *v.ConfigurationSetArn)
+	}
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.CreateEventDestinationResult_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.EventDestination != nil {
+		s.WriteStruct(schemas.CreateEventDestinationResult_EventDestination)
+		v.EventDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateEventDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEventDestinationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEventDestinationResult_ConfigurationSetArn:
+			v.ConfigurationSetArn = new(string)
+			return d.ReadString(schemas.CreateEventDestinationResult_ConfigurationSetArn, v.ConfigurationSetArn)
+		case schemas.CreateEventDestinationResult_ConfigurationSetName:
+			v.ConfigurationSetName = new(string)
+			return d.ReadString(schemas.CreateEventDestinationResult_ConfigurationSetName, v.ConfigurationSetName)
+		case schemas.CreateEventDestinationResult_EventDestination:
+			v.EventDestination = &types.EventDestination{}
+			return v.EventDestination.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEventDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateEventDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEventDestination, schemas.CreateEventDestinationRequest, schemas.CreateEventDestinationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateEventDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEventDestination, schemas.CreateEventDestinationRequest, schemas.CreateEventDestinationResult), output: &CreateEventDestinationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

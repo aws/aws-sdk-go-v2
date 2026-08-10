@@ -4,6 +4,8 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,24 @@ type UpdatePrimaryEmailAddressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePrimaryEmailAddressInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePrimaryEmailAddressRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePrimaryEmailAddressInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Email != nil {
+		s.WriteString(schemas.UpdatePrimaryEmailAddressRequest_Email, *v.Email)
+	}
+	if v.EntityId != nil {
+		s.WriteString(schemas.UpdatePrimaryEmailAddressRequest_EntityId, *v.EntityId)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.UpdatePrimaryEmailAddressRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type UpdatePrimaryEmailAddressOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -65,13 +85,26 @@ type UpdatePrimaryEmailAddressOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePrimaryEmailAddressOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePrimaryEmailAddressResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePrimaryEmailAddressOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdatePrimaryEmailAddressOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePrimaryEmailAddressResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePrimaryEmailAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdatePrimaryEmailAddress{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePrimaryEmailAddress, schemas.UpdatePrimaryEmailAddressRequest, schemas.UpdatePrimaryEmailAddressResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdatePrimaryEmailAddress{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePrimaryEmailAddress, schemas.UpdatePrimaryEmailAddressRequest, schemas.UpdatePrimaryEmailAddressResponse), output: &UpdatePrimaryEmailAddressOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

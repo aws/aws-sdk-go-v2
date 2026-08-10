@@ -4,6 +4,8 @@ package ssmquicksetup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssmquicksetup/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,31 @@ type UpdateConfigurationDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConfigurationDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConfigurationDefinitionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConfigurationDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateConfigurationDefinitionInput_Id, *v.Id)
+	}
+	if v.LocalDeploymentAdministrationRoleArn != nil {
+		s.WriteString(schemas.UpdateConfigurationDefinitionInput_LocalDeploymentAdministrationRoleArn, *v.LocalDeploymentAdministrationRoleArn)
+	}
+	if v.LocalDeploymentExecutionRoleName != nil {
+		s.WriteString(schemas.UpdateConfigurationDefinitionInput_LocalDeploymentExecutionRoleName, *v.LocalDeploymentExecutionRoleName)
+	}
+	if v.ManagerArn != nil {
+		s.WriteString(schemas.UpdateConfigurationDefinitionInput_ManagerArn, *v.ManagerArn)
+	}
+	serializeConfigurationParametersMap(s, schemas.UpdateConfigurationDefinitionInput_Parameters, v.Parameters)
+	if v.TypeVersion != nil {
+		s.WriteString(schemas.UpdateConfigurationDefinitionInput_TypeVersion, *v.TypeVersion)
+	}
+}
+
 type UpdateConfigurationDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,13 +84,26 @@ type UpdateConfigurationDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConfigurationDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConfigurationDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateConfigurationDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConfigurationDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateConfigurationDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConfigurationDefinition, schemas.UpdateConfigurationDefinitionInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateConfigurationDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConfigurationDefinition, schemas.UpdateConfigurationDefinitionInput, nil), output: &UpdateConfigurationDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

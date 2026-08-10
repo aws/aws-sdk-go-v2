@@ -5,7 +5,9 @@ package controltower
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/controltower/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/controltower/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,32 @@ type ListEnabledControlsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnabledControlsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnabledControlsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnabledControlsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListEnabledControlsInput_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IncludeChildren != false {
+		s.WriteBool(schemas.ListEnabledControlsInput_includeChildren, v.IncludeChildren)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEnabledControlsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnabledControlsInput_nextToken, *v.NextToken)
+	}
+	if v.TargetIdentifier != nil {
+		s.WriteString(schemas.ListEnabledControlsInput_targetIdentifier, *v.TargetIdentifier)
+	}
+}
+
 type ListEnabledControlsOutput struct {
 
 	// Lists the controls enabled by Amazon Web Services Control Tower on the
@@ -73,13 +101,35 @@ type ListEnabledControlsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnabledControlsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnabledControlsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnabledControlsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEnabledControls(s, schemas.ListEnabledControlsOutput_enabledControls, v.EnabledControls)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnabledControlsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListEnabledControlsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEnabledControlsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEnabledControlsOutput_enabledControls:
+			return deserializeEnabledControls(d, schemas.ListEnabledControlsOutput_enabledControls, &v.EnabledControls)
+		case schemas.ListEnabledControlsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEnabledControlsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEnabledControlsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEnabledControls{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnabledControls, schemas.ListEnabledControlsInput, schemas.ListEnabledControlsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEnabledControls{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnabledControls, schemas.ListEnabledControlsInput, schemas.ListEnabledControlsOutput), output: &ListEnabledControlsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

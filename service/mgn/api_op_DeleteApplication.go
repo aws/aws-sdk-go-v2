@@ -4,6 +4,8 @@ package mgn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,34 @@ type DeleteApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountID != nil {
+		s.WriteString(schemas.DeleteApplicationRequest_accountID, *v.AccountID)
+	}
+	if v.ApplicationID != nil {
+		s.WriteString(schemas.DeleteApplicationRequest_applicationID, *v.ApplicationID)
+	}
+}
+func (v *DeleteApplicationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteApplicationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteApplicationRequest_accountID:
+			v.AccountID = new(string)
+			return d.ReadString(schemas.DeleteApplicationRequest_accountID, v.AccountID)
+		case schemas.DeleteApplicationRequest_applicationID:
+			v.ApplicationID = new(string)
+			return d.ReadString(schemas.DeleteApplicationRequest_applicationID, v.ApplicationID)
+		}
+		return nil
+	})
+}
+
 type DeleteApplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +73,26 @@ type DeleteApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApplication, schemas.DeleteApplicationRequest, schemas.DeleteApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApplication, schemas.DeleteApplicationRequest, schemas.DeleteApplicationResponse), output: &DeleteApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

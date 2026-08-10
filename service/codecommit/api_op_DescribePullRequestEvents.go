@@ -5,7 +5,9 @@ package codecommit
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,30 @@ type DescribePullRequestEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePullRequestEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePullRequestEventsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePullRequestEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActorArn != nil {
+		s.WriteString(schemas.DescribePullRequestEventsInput_actorArn, *v.ActorArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribePullRequestEventsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribePullRequestEventsInput_nextToken, *v.NextToken)
+	}
+	if v.PullRequestEventType != "" {
+		s.WriteString(schemas.DescribePullRequestEventsInput_pullRequestEventType, string(v.PullRequestEventType))
+	}
+	if v.PullRequestId != nil {
+		s.WriteString(schemas.DescribePullRequestEventsInput_pullRequestId, *v.PullRequestId)
+	}
+}
+
 type DescribePullRequestEventsOutput struct {
 
 	// Information about the pull request events.
@@ -70,13 +96,35 @@ type DescribePullRequestEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePullRequestEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePullRequestEventsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePullRequestEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribePullRequestEventsOutput_nextToken, *v.NextToken)
+	}
+	serializePullRequestEventList(s, schemas.DescribePullRequestEventsOutput_pullRequestEvents, v.PullRequestEvents)
+}
+func (v *DescribePullRequestEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePullRequestEventsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePullRequestEventsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribePullRequestEventsOutput_nextToken, v.NextToken)
+		case schemas.DescribePullRequestEventsOutput_pullRequestEvents:
+			return deserializePullRequestEventList(d, schemas.DescribePullRequestEventsOutput_pullRequestEvents, &v.PullRequestEvents)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePullRequestEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePullRequestEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePullRequestEvents, schemas.DescribePullRequestEventsInput, schemas.DescribePullRequestEventsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribePullRequestEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePullRequestEvents, schemas.DescribePullRequestEventsInput, schemas.DescribePullRequestEventsOutput), output: &DescribePullRequestEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package chimesdkvoice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetVoiceConnectorTerminationHealthInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVoiceConnectorTerminationHealthInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVoiceConnectorTerminationHealthRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVoiceConnectorTerminationHealthInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VoiceConnectorId != nil {
+		s.WriteString(schemas.GetVoiceConnectorTerminationHealthRequest_VoiceConnectorId, *v.VoiceConnectorId)
+	}
+}
+
 type GetVoiceConnectorTerminationHealthOutput struct {
 
 	// The termination health details.
@@ -46,13 +60,34 @@ type GetVoiceConnectorTerminationHealthOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVoiceConnectorTerminationHealthOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVoiceConnectorTerminationHealthResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVoiceConnectorTerminationHealthOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TerminationHealth != nil {
+		s.WriteStruct(schemas.GetVoiceConnectorTerminationHealthResponse_TerminationHealth)
+		v.TerminationHealth.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetVoiceConnectorTerminationHealthOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetVoiceConnectorTerminationHealthResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetVoiceConnectorTerminationHealthResponse_TerminationHealth:
+			v.TerminationHealth = &types.TerminationHealth{}
+			return v.TerminationHealth.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetVoiceConnectorTerminationHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetVoiceConnectorTerminationHealth{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVoiceConnectorTerminationHealth, schemas.GetVoiceConnectorTerminationHealthRequest, schemas.GetVoiceConnectorTerminationHealthResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetVoiceConnectorTerminationHealth{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVoiceConnectorTerminationHealth, schemas.GetVoiceConnectorTerminationHealthRequest, schemas.GetVoiceConnectorTerminationHealthResponse), output: &GetVoiceConnectorTerminationHealthOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

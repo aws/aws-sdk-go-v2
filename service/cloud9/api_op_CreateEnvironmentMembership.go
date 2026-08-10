@@ -4,7 +4,9 @@ package cloud9
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloud9/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloud9/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,24 @@ type CreateEnvironmentMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEnvironmentMembershipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEnvironmentMembershipRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEnvironmentMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.CreateEnvironmentMembershipRequest_environmentId, *v.EnvironmentId)
+	}
+	if v.Permissions != "" {
+		s.WriteString(schemas.CreateEnvironmentMembershipRequest_permissions, string(v.Permissions))
+	}
+	if v.UserArn != nil {
+		s.WriteString(schemas.CreateEnvironmentMembershipRequest_userArn, *v.UserArn)
+	}
+}
+
 type CreateEnvironmentMembershipOutput struct {
 
 	// Information about the environment member that was added.
@@ -67,13 +87,34 @@ type CreateEnvironmentMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEnvironmentMembershipOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEnvironmentMembershipResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEnvironmentMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Membership != nil {
+		s.WriteStruct(schemas.CreateEnvironmentMembershipResult_membership)
+		v.Membership.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateEnvironmentMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEnvironmentMembershipResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEnvironmentMembershipResult_membership:
+			v.Membership = &types.EnvironmentMember{}
+			return v.Membership.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEnvironmentMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateEnvironmentMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnvironmentMembership, schemas.CreateEnvironmentMembershipRequest, schemas.CreateEnvironmentMembershipResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateEnvironmentMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnvironmentMembership, schemas.CreateEnvironmentMembershipRequest, schemas.CreateEnvironmentMembershipResult), output: &CreateEnvironmentMembershipOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

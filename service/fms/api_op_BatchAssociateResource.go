@@ -4,7 +4,9 @@ package fms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,19 @@ type BatchAssociateResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAssociateResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAssociateResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAssociateResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIdentifierList(s, schemas.BatchAssociateResourceRequest_Items, v.Items)
+	if v.ResourceSetIdentifier != nil {
+		s.WriteString(schemas.BatchAssociateResourceRequest_ResourceSetIdentifier, *v.ResourceSetIdentifier)
+	}
+}
+
 type BatchAssociateResourceOutput struct {
 
 	// The resources that failed to associate to the resource set.
@@ -60,13 +75,35 @@ type BatchAssociateResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAssociateResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAssociateResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAssociateResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedItemList(s, schemas.BatchAssociateResourceResponse_FailedItems, v.FailedItems)
+	if v.ResourceSetIdentifier != nil {
+		s.WriteString(schemas.BatchAssociateResourceResponse_ResourceSetIdentifier, *v.ResourceSetIdentifier)
+	}
+}
+func (v *BatchAssociateResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchAssociateResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchAssociateResourceResponse_FailedItems:
+			return deserializeFailedItemList(d, schemas.BatchAssociateResourceResponse_FailedItems, &v.FailedItems)
+		case schemas.BatchAssociateResourceResponse_ResourceSetIdentifier:
+			v.ResourceSetIdentifier = new(string)
+			return d.ReadString(schemas.BatchAssociateResourceResponse_ResourceSetIdentifier, v.ResourceSetIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchAssociateResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchAssociateResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAssociateResource, schemas.BatchAssociateResourceRequest, schemas.BatchAssociateResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchAssociateResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAssociateResource, schemas.BatchAssociateResourceRequest, schemas.BatchAssociateResourceResponse), output: &BatchAssociateResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

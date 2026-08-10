@@ -4,7 +4,9 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,41 @@ type SendNotifyVoiceMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendNotifyVoiceMessageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendNotifyVoiceMessageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendNotifyVoiceMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.SendNotifyVoiceMessageRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	serializeContextMap(s, schemas.SendNotifyVoiceMessageRequest_Context, v.Context)
+	if v.DestinationPhoneNumber != nil {
+		s.WriteString(schemas.SendNotifyVoiceMessageRequest_DestinationPhoneNumber, *v.DestinationPhoneNumber)
+	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.SendNotifyVoiceMessageRequest_DryRun, v.DryRun)
+	}
+	if v.MessageFeedbackEnabled != nil {
+		s.WriteBool(schemas.SendNotifyVoiceMessageRequest_MessageFeedbackEnabled, *v.MessageFeedbackEnabled)
+	}
+	if v.NotifyConfigurationId != nil {
+		s.WriteString(schemas.SendNotifyVoiceMessageRequest_NotifyConfigurationId, *v.NotifyConfigurationId)
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.SendNotifyVoiceMessageRequest_TemplateId, *v.TemplateId)
+	}
+	serializeTemplateVariableSubstitutionMap(s, schemas.SendNotifyVoiceMessageRequest_TemplateVariables, v.TemplateVariables)
+	if v.TimeToLive != nil {
+		s.WriteInt32(schemas.SendNotifyVoiceMessageRequest_TimeToLive, *v.TimeToLive)
+	}
+	if v.VoiceId != "" {
+		s.WriteString(schemas.SendNotifyVoiceMessageRequest_VoiceId, string(v.VoiceId))
+	}
+}
+
 type SendNotifyVoiceMessageOutput struct {
 
 	// The unique identifier for the message.
@@ -91,13 +128,44 @@ type SendNotifyVoiceMessageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendNotifyVoiceMessageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendNotifyVoiceMessageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendNotifyVoiceMessageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageId != nil {
+		s.WriteString(schemas.SendNotifyVoiceMessageResult_MessageId, *v.MessageId)
+	}
+	if v.ResolvedMessageBody != nil {
+		s.WriteString(schemas.SendNotifyVoiceMessageResult_ResolvedMessageBody, *v.ResolvedMessageBody)
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.SendNotifyVoiceMessageResult_TemplateId, *v.TemplateId)
+	}
+}
+func (v *SendNotifyVoiceMessageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendNotifyVoiceMessageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendNotifyVoiceMessageResult_MessageId:
+			v.MessageId = new(string)
+			return d.ReadString(schemas.SendNotifyVoiceMessageResult_MessageId, v.MessageId)
+		case schemas.SendNotifyVoiceMessageResult_ResolvedMessageBody:
+			v.ResolvedMessageBody = new(string)
+			return d.ReadString(schemas.SendNotifyVoiceMessageResult_ResolvedMessageBody, v.ResolvedMessageBody)
+		case schemas.SendNotifyVoiceMessageResult_TemplateId:
+			v.TemplateId = new(string)
+			return d.ReadString(schemas.SendNotifyVoiceMessageResult_TemplateId, v.TemplateId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendNotifyVoiceMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSendNotifyVoiceMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendNotifyVoiceMessage, schemas.SendNotifyVoiceMessageRequest, schemas.SendNotifyVoiceMessageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpSendNotifyVoiceMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendNotifyVoiceMessage, schemas.SendNotifyVoiceMessageRequest, schemas.SendNotifyVoiceMessageResult), output: &SendNotifyVoiceMessageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

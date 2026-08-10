@@ -4,6 +4,8 @@ package chime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type LogoutUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LogoutUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LogoutUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LogoutUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.LogoutUserRequest_AccountId, *v.AccountId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.LogoutUserRequest_UserId, *v.UserId)
+	}
+}
+
 type LogoutUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +63,26 @@ type LogoutUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LogoutUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LogoutUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LogoutUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *LogoutUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LogoutUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationLogoutUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpLogoutUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.LogoutUser, schemas.LogoutUserRequest, schemas.LogoutUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpLogoutUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.LogoutUser, schemas.LogoutUserRequest, schemas.LogoutUserResponse), output: &LogoutUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

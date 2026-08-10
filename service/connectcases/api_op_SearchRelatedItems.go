@@ -5,7 +5,9 @@ package connectcases
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,49 @@ type SearchRelatedItemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchRelatedItemsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchRelatedItemsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchRelatedItemsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseId != nil {
+		s.WriteString(schemas.SearchRelatedItemsRequest_caseId, *v.CaseId)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.SearchRelatedItemsRequest_domainId, *v.DomainId)
+	}
+	serializeRelatedItemFilterList(s, schemas.SearchRelatedItemsRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchRelatedItemsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchRelatedItemsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *SearchRelatedItemsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchRelatedItemsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchRelatedItemsRequest_caseId:
+			v.CaseId = new(string)
+			return d.ReadString(schemas.SearchRelatedItemsRequest_caseId, v.CaseId)
+		case schemas.SearchRelatedItemsRequest_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.SearchRelatedItemsRequest_domainId, v.DomainId)
+		case schemas.SearchRelatedItemsRequest_filters:
+			return deserializeRelatedItemFilterList(d, schemas.SearchRelatedItemsRequest_filters, &v.Filters)
+		case schemas.SearchRelatedItemsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.SearchRelatedItemsRequest_maxResults, v.MaxResults)
+		case schemas.SearchRelatedItemsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchRelatedItemsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type SearchRelatedItemsOutput struct {
 
 	// A list of items related to a case.
@@ -70,13 +115,35 @@ type SearchRelatedItemsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchRelatedItemsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchRelatedItemsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchRelatedItemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchRelatedItemsResponse_nextToken, *v.NextToken)
+	}
+	serializeSearchRelatedItemsResponseItemList(s, schemas.SearchRelatedItemsResponse_relatedItems, v.RelatedItems)
+}
+func (v *SearchRelatedItemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchRelatedItemsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchRelatedItemsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchRelatedItemsResponse_nextToken, v.NextToken)
+		case schemas.SearchRelatedItemsResponse_relatedItems:
+			return deserializeSearchRelatedItemsResponseItemList(d, schemas.SearchRelatedItemsResponse_relatedItems, &v.RelatedItems)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchRelatedItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchRelatedItems{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchRelatedItems, schemas.SearchRelatedItemsRequest, schemas.SearchRelatedItemsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchRelatedItems{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchRelatedItems, schemas.SearchRelatedItemsRequest, schemas.SearchRelatedItemsResponse), output: &SearchRelatedItemsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,24 @@ type UpdateMailboxQuotaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMailboxQuotaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMailboxQuotaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMailboxQuotaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MailboxQuota != nil {
+		s.WriteInt32(schemas.UpdateMailboxQuotaRequest_MailboxQuota, *v.MailboxQuota)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.UpdateMailboxQuotaRequest_OrganizationId, *v.OrganizationId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.UpdateMailboxQuotaRequest_UserId, *v.UserId)
+	}
+}
+
 type UpdateMailboxQuotaOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -61,13 +81,26 @@ type UpdateMailboxQuotaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMailboxQuotaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMailboxQuotaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMailboxQuotaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateMailboxQuotaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMailboxQuotaResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMailboxQuotaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateMailboxQuota{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMailboxQuota, schemas.UpdateMailboxQuotaRequest, schemas.UpdateMailboxQuotaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateMailboxQuota{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMailboxQuota, schemas.UpdateMailboxQuotaRequest, schemas.UpdateMailboxQuotaResponse), output: &UpdateMailboxQuotaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

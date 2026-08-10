@@ -5,7 +5,9 @@ package proton
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -97,6 +99,68 @@ type UpdateServiceInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceInstanceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateServiceInstanceInput_clientToken, *v.ClientToken)
+	}
+	if v.DeploymentType != "" {
+		s.WriteString(schemas.UpdateServiceInstanceInput_deploymentType, string(v.DeploymentType))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateServiceInstanceInput_name, *v.Name)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.UpdateServiceInstanceInput_serviceName, *v.ServiceName)
+	}
+	if v.Spec != nil {
+		s.WriteString(schemas.UpdateServiceInstanceInput_spec, *v.Spec)
+	}
+	if v.TemplateMajorVersion != nil {
+		s.WriteString(schemas.UpdateServiceInstanceInput_templateMajorVersion, *v.TemplateMajorVersion)
+	}
+	if v.TemplateMinorVersion != nil {
+		s.WriteString(schemas.UpdateServiceInstanceInput_templateMinorVersion, *v.TemplateMinorVersion)
+	}
+}
+func (v *UpdateServiceInstanceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServiceInstanceInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServiceInstanceInput_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.UpdateServiceInstanceInput_clientToken, v.ClientToken)
+		case schemas.UpdateServiceInstanceInput_deploymentType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateServiceInstanceInput_deploymentType, &ev); err != nil {
+				return err
+			}
+			v.DeploymentType = types.DeploymentUpdateType(ev)
+			return nil
+		case schemas.UpdateServiceInstanceInput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateServiceInstanceInput_name, v.Name)
+		case schemas.UpdateServiceInstanceInput_serviceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.UpdateServiceInstanceInput_serviceName, v.ServiceName)
+		case schemas.UpdateServiceInstanceInput_spec:
+			v.Spec = new(string)
+			return d.ReadString(schemas.UpdateServiceInstanceInput_spec, v.Spec)
+		case schemas.UpdateServiceInstanceInput_templateMajorVersion:
+			v.TemplateMajorVersion = new(string)
+			return d.ReadString(schemas.UpdateServiceInstanceInput_templateMajorVersion, v.TemplateMajorVersion)
+		case schemas.UpdateServiceInstanceInput_templateMinorVersion:
+			v.TemplateMinorVersion = new(string)
+			return d.ReadString(schemas.UpdateServiceInstanceInput_templateMinorVersion, v.TemplateMinorVersion)
+		}
+		return nil
+	})
+}
+
 type UpdateServiceInstanceOutput struct {
 
 	// The service instance summary data that's returned by Proton.
@@ -110,13 +174,34 @@ type UpdateServiceInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceInstanceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceInstance != nil {
+		s.WriteStruct(schemas.UpdateServiceInstanceOutput_serviceInstance)
+		v.ServiceInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateServiceInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServiceInstanceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServiceInstanceOutput_serviceInstance:
+			v.ServiceInstance = &types.ServiceInstance{}
+			return v.ServiceInstance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateServiceInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateServiceInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceInstance, schemas.UpdateServiceInstanceInput, schemas.UpdateServiceInstanceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateServiceInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceInstance, schemas.UpdateServiceInstanceInput, schemas.UpdateServiceInstanceOutput), output: &UpdateServiceInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

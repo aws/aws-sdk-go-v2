@@ -4,7 +4,9 @@ package controltower
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/controltower/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/controltower/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetEnabledControlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEnabledControlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEnabledControlInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEnabledControlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnabledControlIdentifier != nil {
+		s.WriteString(schemas.GetEnabledControlInput_enabledControlIdentifier, *v.EnabledControlIdentifier)
+	}
+}
+
 type GetEnabledControlOutput struct {
 
 	// Information about the enabled control.
@@ -49,13 +63,34 @@ type GetEnabledControlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEnabledControlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEnabledControlOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEnabledControlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnabledControlDetails != nil {
+		s.WriteStruct(schemas.GetEnabledControlOutput_enabledControlDetails)
+		v.EnabledControlDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetEnabledControlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEnabledControlOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEnabledControlOutput_enabledControlDetails:
+			v.EnabledControlDetails = &types.EnabledControlDetails{}
+			return v.EnabledControlDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEnabledControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEnabledControl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnabledControl, schemas.GetEnabledControlInput, schemas.GetEnabledControlOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEnabledControl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnabledControl, schemas.GetEnabledControlInput, schemas.GetEnabledControlOutput), output: &GetEnabledControlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

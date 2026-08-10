@@ -4,7 +4,9 @@ package iotfleetwise
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,28 @@ type GetDecoderManifestInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDecoderManifestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDecoderManifestRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDecoderManifestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetDecoderManifestRequest_name, *v.Name)
+	}
+}
+func (v *GetDecoderManifestInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDecoderManifestRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDecoderManifestRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetDecoderManifestRequest_name, v.Name)
+		}
+		return nil
+	})
 }
 
 type GetDecoderManifestOutput struct {
@@ -81,13 +105,78 @@ type GetDecoderManifestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDecoderManifestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDecoderManifestResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDecoderManifestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetDecoderManifestResponse_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetDecoderManifestResponse_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetDecoderManifestResponse_description, *v.Description)
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.GetDecoderManifestResponse_lastModificationTime, *v.LastModificationTime)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.GetDecoderManifestResponse_message, *v.Message)
+	}
+	if v.ModelManifestArn != nil {
+		s.WriteString(schemas.GetDecoderManifestResponse_modelManifestArn, *v.ModelManifestArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetDecoderManifestResponse_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetDecoderManifestResponse_status, string(v.Status))
+	}
+}
+func (v *GetDecoderManifestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDecoderManifestResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDecoderManifestResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetDecoderManifestResponse_arn, v.Arn)
+		case schemas.GetDecoderManifestResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetDecoderManifestResponse_creationTime, v.CreationTime)
+		case schemas.GetDecoderManifestResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetDecoderManifestResponse_description, v.Description)
+		case schemas.GetDecoderManifestResponse_lastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.GetDecoderManifestResponse_lastModificationTime, v.LastModificationTime)
+		case schemas.GetDecoderManifestResponse_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.GetDecoderManifestResponse_message, v.Message)
+		case schemas.GetDecoderManifestResponse_modelManifestArn:
+			v.ModelManifestArn = new(string)
+			return d.ReadString(schemas.GetDecoderManifestResponse_modelManifestArn, v.ModelManifestArn)
+		case schemas.GetDecoderManifestResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetDecoderManifestResponse_name, v.Name)
+		case schemas.GetDecoderManifestResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetDecoderManifestResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ManifestStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDecoderManifestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetDecoderManifest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDecoderManifest, schemas.GetDecoderManifestRequest, schemas.GetDecoderManifestResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetDecoderManifest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDecoderManifest, schemas.GetDecoderManifestRequest, schemas.GetDecoderManifestResponse), output: &GetDecoderManifestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

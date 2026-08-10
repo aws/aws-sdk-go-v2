@@ -4,6 +4,8 @@ package fms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,15 @@ type GetNotificationChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNotificationChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNotificationChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNotificationChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetNotificationChannelOutput struct {
 
 	// The IAM role that is used by Firewall Manager to record activity to SNS.
@@ -42,13 +53,38 @@ type GetNotificationChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNotificationChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNotificationChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNotificationChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SnsRoleName != nil {
+		s.WriteString(schemas.GetNotificationChannelResponse_SnsRoleName, *v.SnsRoleName)
+	}
+	if v.SnsTopicArn != nil {
+		s.WriteString(schemas.GetNotificationChannelResponse_SnsTopicArn, *v.SnsTopicArn)
+	}
+}
+func (v *GetNotificationChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetNotificationChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetNotificationChannelResponse_SnsRoleName:
+			v.SnsRoleName = new(string)
+			return d.ReadString(schemas.GetNotificationChannelResponse_SnsRoleName, v.SnsRoleName)
+		case schemas.GetNotificationChannelResponse_SnsTopicArn:
+			v.SnsTopicArn = new(string)
+			return d.ReadString(schemas.GetNotificationChannelResponse_SnsTopicArn, v.SnsTopicArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetNotificationChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetNotificationChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNotificationChannel, schemas.GetNotificationChannelRequest, schemas.GetNotificationChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetNotificationChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNotificationChannel, schemas.GetNotificationChannelRequest, schemas.GetNotificationChannelResponse), output: &GetNotificationChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

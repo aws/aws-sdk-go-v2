@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,34 @@ type CancelServiceInstanceDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelServiceInstanceDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelServiceInstanceDeploymentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelServiceInstanceDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceInstanceName != nil {
+		s.WriteString(schemas.CancelServiceInstanceDeploymentInput_serviceInstanceName, *v.ServiceInstanceName)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.CancelServiceInstanceDeploymentInput_serviceName, *v.ServiceName)
+	}
+}
+func (v *CancelServiceInstanceDeploymentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelServiceInstanceDeploymentInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelServiceInstanceDeploymentInput_serviceInstanceName:
+			v.ServiceInstanceName = new(string)
+			return d.ReadString(schemas.CancelServiceInstanceDeploymentInput_serviceInstanceName, v.ServiceInstanceName)
+		case schemas.CancelServiceInstanceDeploymentInput_serviceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.CancelServiceInstanceDeploymentInput_serviceName, v.ServiceName)
+		}
+		return nil
+	})
+}
+
 type CancelServiceInstanceDeploymentOutput struct {
 
 	// The service instance summary data that's returned by Proton.
@@ -68,13 +98,34 @@ type CancelServiceInstanceDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelServiceInstanceDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelServiceInstanceDeploymentOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelServiceInstanceDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceInstance != nil {
+		s.WriteStruct(schemas.CancelServiceInstanceDeploymentOutput_serviceInstance)
+		v.ServiceInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CancelServiceInstanceDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelServiceInstanceDeploymentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelServiceInstanceDeploymentOutput_serviceInstance:
+			v.ServiceInstance = &types.ServiceInstance{}
+			return v.ServiceInstance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelServiceInstanceDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCancelServiceInstanceDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelServiceInstanceDeployment, schemas.CancelServiceInstanceDeploymentInput, schemas.CancelServiceInstanceDeploymentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCancelServiceInstanceDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelServiceInstanceDeployment, schemas.CancelServiceInstanceDeploymentInput, schemas.CancelServiceInstanceDeploymentOutput), output: &CancelServiceInstanceDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

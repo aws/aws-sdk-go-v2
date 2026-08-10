@@ -5,7 +5,9 @@ package mgn
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,26 @@ type ListNetworkMigrationDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNetworkMigrationDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNetworkMigrationDefinitionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNetworkMigrationDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListNetworkMigrationDefinitionsRequest_filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListNetworkMigrationDefinitionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNetworkMigrationDefinitionsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListNetworkMigrationDefinitionsOutput struct {
 
 	// A list of network migration definition summaries.
@@ -54,13 +76,35 @@ type ListNetworkMigrationDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNetworkMigrationDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNetworkMigrationDefinitionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNetworkMigrationDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNetworkMigrationDefinitionSummariesList(s, schemas.ListNetworkMigrationDefinitionsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNetworkMigrationDefinitionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListNetworkMigrationDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNetworkMigrationDefinitionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNetworkMigrationDefinitionsResponse_items:
+			return deserializeNetworkMigrationDefinitionSummariesList(d, schemas.ListNetworkMigrationDefinitionsResponse_items, &v.Items)
+		case schemas.ListNetworkMigrationDefinitionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNetworkMigrationDefinitionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNetworkMigrationDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListNetworkMigrationDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNetworkMigrationDefinitions, schemas.ListNetworkMigrationDefinitionsRequest, schemas.ListNetworkMigrationDefinitionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListNetworkMigrationDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNetworkMigrationDefinitions, schemas.ListNetworkMigrationDefinitionsRequest, schemas.ListNetworkMigrationDefinitionsResponse), output: &ListNetworkMigrationDefinitionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

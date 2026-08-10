@@ -5,7 +5,9 @@ package fms
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,24 @@ type ListComplianceStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListComplianceStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListComplianceStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListComplianceStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListComplianceStatusRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListComplianceStatusRequest_NextToken, *v.NextToken)
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.ListComplianceStatusRequest_PolicyId, *v.PolicyId)
+	}
+}
+
 type ListComplianceStatusOutput struct {
 
 	// If you have more PolicyComplianceStatus objects than the number that you
@@ -70,13 +90,35 @@ type ListComplianceStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListComplianceStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListComplianceStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListComplianceStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListComplianceStatusResponse_NextToken, *v.NextToken)
+	}
+	serializePolicyComplianceStatusList(s, schemas.ListComplianceStatusResponse_PolicyComplianceStatusList, v.PolicyComplianceStatusList)
+}
+func (v *ListComplianceStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListComplianceStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListComplianceStatusResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListComplianceStatusResponse_NextToken, v.NextToken)
+		case schemas.ListComplianceStatusResponse_PolicyComplianceStatusList:
+			return deserializePolicyComplianceStatusList(d, schemas.ListComplianceStatusResponse_PolicyComplianceStatusList, &v.PolicyComplianceStatusList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListComplianceStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListComplianceStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComplianceStatus, schemas.ListComplianceStatusRequest, schemas.ListComplianceStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListComplianceStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComplianceStatus, schemas.ListComplianceStatusRequest, schemas.ListComplianceStatusResponse), output: &ListComplianceStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

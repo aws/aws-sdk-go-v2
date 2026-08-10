@@ -4,6 +4,8 @@ package textract
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteAdapterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAdapterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAdapterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAdapterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdapterId != nil {
+		s.WriteString(schemas.DeleteAdapterRequest_AdapterId, *v.AdapterId)
+	}
+}
+
 type DeleteAdapterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteAdapterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAdapterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAdapterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAdapterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAdapterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAdapterResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAdapterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAdapter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAdapter, schemas.DeleteAdapterRequest, schemas.DeleteAdapterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteAdapter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAdapter, schemas.DeleteAdapterRequest, schemas.DeleteAdapterResponse), output: &DeleteAdapterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

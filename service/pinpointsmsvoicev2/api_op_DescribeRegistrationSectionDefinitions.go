@@ -5,7 +5,9 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,25 @@ type DescribeRegistrationSectionDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRegistrationSectionDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRegistrationSectionDefinitionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRegistrationSectionDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeRegistrationSectionDefinitionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRegistrationSectionDefinitionsRequest_NextToken, *v.NextToken)
+	}
+	if v.RegistrationType != nil {
+		s.WriteString(schemas.DescribeRegistrationSectionDefinitionsRequest_RegistrationType, *v.RegistrationType)
+	}
+	serializeSectionPathList(s, schemas.DescribeRegistrationSectionDefinitionsRequest_SectionPaths, v.SectionPaths)
+}
+
 type DescribeRegistrationSectionDefinitionsOutput struct {
 
 	// An array of RegistrationSectionDefinition objects.
@@ -71,13 +92,41 @@ type DescribeRegistrationSectionDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRegistrationSectionDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRegistrationSectionDefinitionsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRegistrationSectionDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRegistrationSectionDefinitionsResult_NextToken, *v.NextToken)
+	}
+	serializeRegistrationSectionDefinitionList(s, schemas.DescribeRegistrationSectionDefinitionsResult_RegistrationSectionDefinitions, v.RegistrationSectionDefinitions)
+	if v.RegistrationType != nil {
+		s.WriteString(schemas.DescribeRegistrationSectionDefinitionsResult_RegistrationType, *v.RegistrationType)
+	}
+}
+func (v *DescribeRegistrationSectionDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRegistrationSectionDefinitionsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRegistrationSectionDefinitionsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeRegistrationSectionDefinitionsResult_NextToken, v.NextToken)
+		case schemas.DescribeRegistrationSectionDefinitionsResult_RegistrationSectionDefinitions:
+			return deserializeRegistrationSectionDefinitionList(d, schemas.DescribeRegistrationSectionDefinitionsResult_RegistrationSectionDefinitions, &v.RegistrationSectionDefinitions)
+		case schemas.DescribeRegistrationSectionDefinitionsResult_RegistrationType:
+			v.RegistrationType = new(string)
+			return d.ReadString(schemas.DescribeRegistrationSectionDefinitionsResult_RegistrationType, v.RegistrationType)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRegistrationSectionDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeRegistrationSectionDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRegistrationSectionDefinitions, schemas.DescribeRegistrationSectionDefinitionsRequest, schemas.DescribeRegistrationSectionDefinitionsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeRegistrationSectionDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRegistrationSectionDefinitions, schemas.DescribeRegistrationSectionDefinitionsRequest, schemas.DescribeRegistrationSectionDefinitionsResult), output: &DescribeRegistrationSectionDefinitionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

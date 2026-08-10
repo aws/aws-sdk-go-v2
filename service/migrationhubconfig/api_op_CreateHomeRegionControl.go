@@ -4,7 +4,9 @@ package migrationhubconfig
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhubconfig/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubconfig/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,26 @@ type CreateHomeRegionControlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHomeRegionControlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHomeRegionControlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHomeRegionControlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DryRun != false {
+		s.WriteBool(schemas.CreateHomeRegionControlRequest_DryRun, v.DryRun)
+	}
+	if v.HomeRegion != nil {
+		s.WriteString(schemas.CreateHomeRegionControlRequest_HomeRegion, *v.HomeRegion)
+	}
+	if v.Target != nil {
+		s.WriteStruct(schemas.CreateHomeRegionControlRequest_Target)
+		v.Target.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateHomeRegionControlOutput struct {
 
 	// This object is the HomeRegionControl object that's returned by a successful
@@ -56,13 +78,34 @@ type CreateHomeRegionControlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHomeRegionControlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHomeRegionControlResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHomeRegionControlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HomeRegionControl != nil {
+		s.WriteStruct(schemas.CreateHomeRegionControlResult_HomeRegionControl)
+		v.HomeRegionControl.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateHomeRegionControlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateHomeRegionControlResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateHomeRegionControlResult_HomeRegionControl:
+			v.HomeRegionControl = &types.HomeRegionControl{}
+			return v.HomeRegionControl.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateHomeRegionControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateHomeRegionControl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHomeRegionControl, schemas.CreateHomeRegionControlRequest, schemas.CreateHomeRegionControlResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateHomeRegionControl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHomeRegionControl, schemas.CreateHomeRegionControlRequest, schemas.CreateHomeRegionControlResult), output: &CreateHomeRegionControlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

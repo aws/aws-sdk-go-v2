@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,28 @@ type DeleteEnvironmentTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEnvironmentTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEnvironmentTemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEnvironmentTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteEnvironmentTemplateInput_name, *v.Name)
+	}
+}
+func (v *DeleteEnvironmentTemplateInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEnvironmentTemplateInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteEnvironmentTemplateInput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteEnvironmentTemplateInput_name, v.Name)
+		}
+		return nil
+	})
+}
+
 type DeleteEnvironmentTemplateOutput struct {
 
 	// The detailed data of the environment template being deleted.
@@ -48,13 +72,34 @@ type DeleteEnvironmentTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEnvironmentTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEnvironmentTemplateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEnvironmentTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentTemplate != nil {
+		s.WriteStruct(schemas.DeleteEnvironmentTemplateOutput_environmentTemplate)
+		v.EnvironmentTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteEnvironmentTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEnvironmentTemplateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteEnvironmentTemplateOutput_environmentTemplate:
+			v.EnvironmentTemplate = &types.EnvironmentTemplate{}
+			return v.EnvironmentTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEnvironmentTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteEnvironmentTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEnvironmentTemplate, schemas.DeleteEnvironmentTemplateInput, schemas.DeleteEnvironmentTemplateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteEnvironmentTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEnvironmentTemplate, schemas.DeleteEnvironmentTemplateInput, schemas.DeleteEnvironmentTemplateOutput), output: &DeleteEnvironmentTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

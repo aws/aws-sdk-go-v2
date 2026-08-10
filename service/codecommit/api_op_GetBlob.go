@@ -4,6 +4,8 @@ package codecommit
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type GetBlobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBlobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBlobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBlobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlobId != nil {
+		s.WriteString(schemas.GetBlobInput_blobId, *v.BlobId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.GetBlobInput_repositoryName, *v.RepositoryName)
+	}
+}
+
 // Represents the output of a get blob operation.
 type GetBlobOutput struct {
 
@@ -53,13 +70,31 @@ type GetBlobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBlobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBlobOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBlobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteBlob(schemas.GetBlobOutput_content, v.Content)
+	}
+}
+func (v *GetBlobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBlobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBlobOutput_content:
+			return d.ReadBlob(schemas.GetBlobOutput_content, &v.Content)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBlobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetBlob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBlob, schemas.GetBlobInput, schemas.GetBlobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetBlob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBlob, schemas.GetBlobInput, schemas.GetBlobOutput), output: &GetBlobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,38 @@ type GetTemplateSyncConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTemplateSyncConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTemplateSyncConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTemplateSyncConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateName != nil {
+		s.WriteString(schemas.GetTemplateSyncConfigInput_templateName, *v.TemplateName)
+	}
+	if v.TemplateType != "" {
+		s.WriteString(schemas.GetTemplateSyncConfigInput_templateType, string(v.TemplateType))
+	}
+}
+func (v *GetTemplateSyncConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTemplateSyncConfigInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTemplateSyncConfigInput_templateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.GetTemplateSyncConfigInput_templateName, v.TemplateName)
+		case schemas.GetTemplateSyncConfigInput_templateType:
+			var ev string
+			if err := d.ReadString(schemas.GetTemplateSyncConfigInput_templateType, &ev); err != nil {
+				return err
+			}
+			v.TemplateType = types.TemplateType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type GetTemplateSyncConfigOutput struct {
 
 	// The template sync configuration detail data that's returned by Proton.
@@ -52,13 +86,34 @@ type GetTemplateSyncConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTemplateSyncConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTemplateSyncConfigOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTemplateSyncConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateSyncConfig != nil {
+		s.WriteStruct(schemas.GetTemplateSyncConfigOutput_templateSyncConfig)
+		v.TemplateSyncConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTemplateSyncConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTemplateSyncConfigOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTemplateSyncConfigOutput_templateSyncConfig:
+			v.TemplateSyncConfig = &types.TemplateSyncConfig{}
+			return v.TemplateSyncConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTemplateSyncConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetTemplateSyncConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTemplateSyncConfig, schemas.GetTemplateSyncConfigInput, schemas.GetTemplateSyncConfigOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetTemplateSyncConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTemplateSyncConfig, schemas.GetTemplateSyncConfigInput, schemas.GetTemplateSyncConfigOutput), output: &GetTemplateSyncConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

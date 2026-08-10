@@ -4,6 +4,8 @@ package kendra
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type StartDataSourceSyncJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDataSourceSyncJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDataSourceSyncJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDataSourceSyncJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.StartDataSourceSyncJobRequest_Id, *v.Id)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.StartDataSourceSyncJobRequest_IndexId, *v.IndexId)
+	}
+}
+
 type StartDataSourceSyncJobOutput struct {
 
 	// Identifies a particular synchronization job.
@@ -55,13 +72,32 @@ type StartDataSourceSyncJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDataSourceSyncJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDataSourceSyncJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDataSourceSyncJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.StartDataSourceSyncJobResponse_ExecutionId, *v.ExecutionId)
+	}
+}
+func (v *StartDataSourceSyncJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDataSourceSyncJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartDataSourceSyncJobResponse_ExecutionId:
+			v.ExecutionId = new(string)
+			return d.ReadString(schemas.StartDataSourceSyncJobResponse_ExecutionId, v.ExecutionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDataSourceSyncJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartDataSourceSyncJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDataSourceSyncJob, schemas.StartDataSourceSyncJobRequest, schemas.StartDataSourceSyncJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartDataSourceSyncJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDataSourceSyncJob, schemas.StartDataSourceSyncJobRequest, schemas.StartDataSourceSyncJobResponse), output: &StartDataSourceSyncJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

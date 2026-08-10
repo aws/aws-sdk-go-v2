@@ -5,7 +5,9 @@ package machinelearning
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -112,6 +114,48 @@ type DescribeBatchPredictionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBatchPredictionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBatchPredictionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBatchPredictionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EQ != nil {
+		s.WriteString(schemas.DescribeBatchPredictionsInput_EQ, *v.EQ)
+	}
+	if v.FilterVariable != "" {
+		s.WriteString(schemas.DescribeBatchPredictionsInput_FilterVariable, string(v.FilterVariable))
+	}
+	if v.GE != nil {
+		s.WriteString(schemas.DescribeBatchPredictionsInput_GE, *v.GE)
+	}
+	if v.GT != nil {
+		s.WriteString(schemas.DescribeBatchPredictionsInput_GT, *v.GT)
+	}
+	if v.LE != nil {
+		s.WriteString(schemas.DescribeBatchPredictionsInput_LE, *v.LE)
+	}
+	if v.LT != nil {
+		s.WriteString(schemas.DescribeBatchPredictionsInput_LT, *v.LT)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeBatchPredictionsInput_Limit, *v.Limit)
+	}
+	if v.NE != nil {
+		s.WriteString(schemas.DescribeBatchPredictionsInput_NE, *v.NE)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeBatchPredictionsInput_NextToken, *v.NextToken)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.DescribeBatchPredictionsInput_Prefix, *v.Prefix)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.DescribeBatchPredictionsInput_SortOrder, string(v.SortOrder))
+	}
+}
+
 // Represents the output of a DescribeBatchPredictions operation. The content is
 // essentially a list of BatchPrediction s.
 type DescribeBatchPredictionsOutput struct {
@@ -129,13 +173,35 @@ type DescribeBatchPredictionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBatchPredictionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBatchPredictionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBatchPredictionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeBatchPredictionsOutput_NextToken, *v.NextToken)
+	}
+	serializeBatchPredictions(s, schemas.DescribeBatchPredictionsOutput_Results, v.Results)
+}
+func (v *DescribeBatchPredictionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeBatchPredictionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeBatchPredictionsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeBatchPredictionsOutput_NextToken, v.NextToken)
+		case schemas.DescribeBatchPredictionsOutput_Results:
+			return deserializeBatchPredictions(d, schemas.DescribeBatchPredictionsOutput_Results, &v.Results)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeBatchPredictionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeBatchPredictions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBatchPredictions, schemas.DescribeBatchPredictionsInput, schemas.DescribeBatchPredictionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeBatchPredictions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBatchPredictions, schemas.DescribeBatchPredictionsInput, schemas.DescribeBatchPredictionsOutput), output: &DescribeBatchPredictionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

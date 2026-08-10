@@ -4,7 +4,9 @@ package machinelearning
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -87,6 +89,29 @@ type CreateDataSourceFromS3Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataSourceFromS3Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataSourceFromS3Input)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataSourceFromS3Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeStatistics != false {
+		s.WriteBool(schemas.CreateDataSourceFromS3Input_ComputeStatistics, v.ComputeStatistics)
+	}
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.CreateDataSourceFromS3Input_DataSourceId, *v.DataSourceId)
+	}
+	if v.DataSourceName != nil {
+		s.WriteString(schemas.CreateDataSourceFromS3Input_DataSourceName, *v.DataSourceName)
+	}
+	if v.DataSpec != nil {
+		s.WriteStruct(schemas.CreateDataSourceFromS3Input_DataSpec)
+		v.DataSpec.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 //	Represents the output of a CreateDataSourceFromS3 operation, and is an
 //
 // acknowledgement that Amazon ML received the request.
@@ -105,13 +130,32 @@ type CreateDataSourceFromS3Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataSourceFromS3Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataSourceFromS3Output)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataSourceFromS3Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.CreateDataSourceFromS3Output_DataSourceId, *v.DataSourceId)
+	}
+}
+func (v *CreateDataSourceFromS3Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDataSourceFromS3Output, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDataSourceFromS3Output_DataSourceId:
+			v.DataSourceId = new(string)
+			return d.ReadString(schemas.CreateDataSourceFromS3Output_DataSourceId, v.DataSourceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDataSourceFromS3Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDataSourceFromS3{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataSourceFromS3, schemas.CreateDataSourceFromS3Input, schemas.CreateDataSourceFromS3Output)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDataSourceFromS3{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataSourceFromS3, schemas.CreateDataSourceFromS3Input, schemas.CreateDataSourceFromS3Output), output: &CreateDataSourceFromS3Output{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package securitylake
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securitylake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securitylake/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,30 @@ type UpdateSubscriberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSubscriberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSubscriberRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSubscriberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLogSourceResourceList(s, schemas.UpdateSubscriberRequest_sources, v.Sources)
+	if v.SubscriberDescription != nil {
+		s.WriteString(schemas.UpdateSubscriberRequest_subscriberDescription, *v.SubscriberDescription)
+	}
+	if v.SubscriberId != nil {
+		s.WriteString(schemas.UpdateSubscriberRequest_subscriberId, *v.SubscriberId)
+	}
+	if v.SubscriberIdentity != nil {
+		s.WriteStruct(schemas.UpdateSubscriberRequest_subscriberIdentity)
+		v.SubscriberIdentity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SubscriberName != nil {
+		s.WriteString(schemas.UpdateSubscriberRequest_subscriberName, *v.SubscriberName)
+	}
+}
+
 type UpdateSubscriberOutput struct {
 
 	// The updated subscriber information.
@@ -62,13 +88,34 @@ type UpdateSubscriberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSubscriberOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSubscriberResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSubscriberOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Subscriber != nil {
+		s.WriteStruct(schemas.UpdateSubscriberResponse_subscriber)
+		v.Subscriber.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateSubscriberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSubscriberResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSubscriberResponse_subscriber:
+			v.Subscriber = &types.SubscriberResource{}
+			return v.Subscriber.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSubscriberMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSubscriber{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSubscriber, schemas.UpdateSubscriberRequest, schemas.UpdateSubscriberResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSubscriber{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSubscriber, schemas.UpdateSubscriberRequest, schemas.UpdateSubscriberResponse), output: &UpdateSubscriberOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

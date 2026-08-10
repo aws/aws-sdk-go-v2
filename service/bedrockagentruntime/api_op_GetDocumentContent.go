@@ -4,7 +4,9 @@ package bedrockagentruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,32 @@ type GetDocumentContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDocumentContentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDocumentContentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDocumentContentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.GetDocumentContentRequest_dataSourceId, *v.DataSourceId)
+	}
+	if v.DocumentId != nil {
+		s.WriteString(schemas.GetDocumentContentRequest_documentId, *v.DocumentId)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.GetDocumentContentRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.OutputFormat != "" {
+		s.WriteString(schemas.GetDocumentContentRequest_outputFormat, string(v.OutputFormat))
+	}
+	if v.UserContext != nil {
+		s.WriteStruct(schemas.GetDocumentContentRequest_userContext)
+		v.UserContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetDocumentContentOutput struct {
 
 	// The MIME type of the document content. For RAW format, this is the original
@@ -78,13 +106,44 @@ type GetDocumentContentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDocumentContentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDocumentContentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDocumentContentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentContentLength != nil {
+		s.WriteInt64(schemas.GetDocumentContentResponse_documentContentLength, *v.DocumentContentLength)
+	}
+	if v.MimeType != nil {
+		s.WriteString(schemas.GetDocumentContentResponse_mimeType, *v.MimeType)
+	}
+	if v.PresignedUrl != nil {
+		s.WriteString(schemas.GetDocumentContentResponse_presignedUrl, *v.PresignedUrl)
+	}
+}
+func (v *GetDocumentContentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDocumentContentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDocumentContentResponse_documentContentLength:
+			v.DocumentContentLength = new(int64)
+			return d.ReadInt64(schemas.GetDocumentContentResponse_documentContentLength, v.DocumentContentLength)
+		case schemas.GetDocumentContentResponse_mimeType:
+			v.MimeType = new(string)
+			return d.ReadString(schemas.GetDocumentContentResponse_mimeType, v.MimeType)
+		case schemas.GetDocumentContentResponse_presignedUrl:
+			v.PresignedUrl = new(string)
+			return d.ReadString(schemas.GetDocumentContentResponse_presignedUrl, v.PresignedUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDocumentContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDocumentContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDocumentContent, schemas.GetDocumentContentRequest, schemas.GetDocumentContentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDocumentContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDocumentContent, schemas.GetDocumentContentRequest, schemas.GetDocumentContentResponse), output: &GetDocumentContentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package securitylake
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securitylake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securitylake/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,22 @@ type ListDataLakeExceptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataLakeExceptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataLakeExceptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataLakeExceptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataLakeExceptionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataLakeExceptionsRequest_nextToken, *v.NextToken)
+	}
+	serializeRegionList(s, schemas.ListDataLakeExceptionsRequest_regions, v.Regions)
+}
+
 type ListDataLakeExceptionsOutput struct {
 
 	// Lists the failures that cannot be retried.
@@ -64,13 +82,35 @@ type ListDataLakeExceptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataLakeExceptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataLakeExceptionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataLakeExceptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataLakeExceptionList(s, schemas.ListDataLakeExceptionsResponse_exceptions, v.Exceptions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataLakeExceptionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDataLakeExceptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataLakeExceptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataLakeExceptionsResponse_exceptions:
+			return deserializeDataLakeExceptionList(d, schemas.ListDataLakeExceptionsResponse_exceptions, &v.Exceptions)
+		case schemas.ListDataLakeExceptionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataLakeExceptionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataLakeExceptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataLakeExceptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataLakeExceptions, schemas.ListDataLakeExceptionsRequest, schemas.ListDataLakeExceptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataLakeExceptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataLakeExceptions, schemas.ListDataLakeExceptionsRequest, schemas.ListDataLakeExceptionsResponse), output: &ListDataLakeExceptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

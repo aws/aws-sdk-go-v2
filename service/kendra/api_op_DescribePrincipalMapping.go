@@ -4,7 +4,9 @@ package kendra
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,24 @@ type DescribePrincipalMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePrincipalMappingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePrincipalMappingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePrincipalMappingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.DescribePrincipalMappingRequest_DataSourceId, *v.DataSourceId)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.DescribePrincipalMappingRequest_GroupId, *v.GroupId)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.DescribePrincipalMappingRequest_IndexId, *v.IndexId)
+	}
+}
+
 type DescribePrincipalMappingOutput struct {
 
 	// Shows the identifier of the data source to see information on the processing of
@@ -88,13 +108,47 @@ type DescribePrincipalMappingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePrincipalMappingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePrincipalMappingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePrincipalMappingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.DescribePrincipalMappingResponse_DataSourceId, *v.DataSourceId)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.DescribePrincipalMappingResponse_GroupId, *v.GroupId)
+	}
+	serializeGroupOrderingIdSummaries(s, schemas.DescribePrincipalMappingResponse_GroupOrderingIdSummaries, v.GroupOrderingIdSummaries)
+	if v.IndexId != nil {
+		s.WriteString(schemas.DescribePrincipalMappingResponse_IndexId, *v.IndexId)
+	}
+}
+func (v *DescribePrincipalMappingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePrincipalMappingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePrincipalMappingResponse_DataSourceId:
+			v.DataSourceId = new(string)
+			return d.ReadString(schemas.DescribePrincipalMappingResponse_DataSourceId, v.DataSourceId)
+		case schemas.DescribePrincipalMappingResponse_GroupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.DescribePrincipalMappingResponse_GroupId, v.GroupId)
+		case schemas.DescribePrincipalMappingResponse_GroupOrderingIdSummaries:
+			return deserializeGroupOrderingIdSummaries(d, schemas.DescribePrincipalMappingResponse_GroupOrderingIdSummaries, &v.GroupOrderingIdSummaries)
+		case schemas.DescribePrincipalMappingResponse_IndexId:
+			v.IndexId = new(string)
+			return d.ReadString(schemas.DescribePrincipalMappingResponse_IndexId, v.IndexId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePrincipalMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePrincipalMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePrincipalMapping, schemas.DescribePrincipalMappingRequest, schemas.DescribePrincipalMappingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribePrincipalMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePrincipalMapping, schemas.DescribePrincipalMappingRequest, schemas.DescribePrincipalMappingResponse), output: &DescribePrincipalMappingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

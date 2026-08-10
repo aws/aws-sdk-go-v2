@@ -4,6 +4,8 @@ package mediastoredata
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediastoredata/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"io"
 	"time"
@@ -66,6 +68,21 @@ type GetObjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetObjectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetObjectRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetObjectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Path != nil {
+		s.WriteString(schemas.GetObjectRequest_Path, *v.Path)
+	}
+	if v.Range != nil {
+		s.WriteString(schemas.GetObjectRequest_Range, *v.Range)
+	}
+}
+
 type GetObjectOutput struct {
 
 	// The HTML status code of the request. Status codes ranging from 200 to 299
@@ -107,13 +124,73 @@ type GetObjectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetObjectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetObjectResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetObjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheControl != nil {
+		s.WriteString(schemas.GetObjectResponse_CacheControl, *v.CacheControl)
+	}
+	if v.ContentLength != nil {
+		s.WriteInt64(schemas.GetObjectResponse_ContentLength, *v.ContentLength)
+	}
+	if v.ContentRange != nil {
+		s.WriteString(schemas.GetObjectResponse_ContentRange, *v.ContentRange)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.GetObjectResponse_ContentType, *v.ContentType)
+	}
+	if v.ETag != nil {
+		s.WriteString(schemas.GetObjectResponse_ETag, *v.ETag)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.GetObjectResponse_LastModified, *v.LastModified)
+	}
+	s.WriteInt32(schemas.GetObjectResponse_StatusCode, v.StatusCode)
+}
+func (v *GetObjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetObjectResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetObjectResponse_CacheControl:
+			v.CacheControl = new(string)
+			return d.ReadString(schemas.GetObjectResponse_CacheControl, v.CacheControl)
+		case schemas.GetObjectResponse_ContentLength:
+			v.ContentLength = new(int64)
+			return d.ReadInt64(schemas.GetObjectResponse_ContentLength, v.ContentLength)
+		case schemas.GetObjectResponse_ContentRange:
+			v.ContentRange = new(string)
+			return d.ReadString(schemas.GetObjectResponse_ContentRange, v.ContentRange)
+		case schemas.GetObjectResponse_ContentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.GetObjectResponse_ContentType, v.ContentType)
+		case schemas.GetObjectResponse_ETag:
+			v.ETag = new(string)
+			return d.ReadString(schemas.GetObjectResponse_ETag, v.ETag)
+		case schemas.GetObjectResponse_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.GetObjectResponse_LastModified, v.LastModified)
+		case schemas.GetObjectResponse_StatusCode:
+			return d.ReadInt32(schemas.GetObjectResponse_StatusCode, &v.StatusCode)
+		}
+		return nil
+	})
+}
+func (v *GetObjectOutput) GetPayloadStream() io.Reader { return v.Body }
+
+var _ smithy.StreamingInput = (*GetObjectOutput)(nil)
+
+func (v *GetObjectOutput) SetPayloadStream(r io.ReadCloser) { v.Body = r }
+
+var _ smithy.StreamingOutput = (*GetObjectOutput)(nil)
+
 func (c *Client) addOperationGetObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetObject{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetObject, schemas.GetObjectRequest, schemas.GetObjectResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetObject{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetObject, schemas.GetObjectRequest, schemas.GetObjectResponse), output: &GetObjectOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

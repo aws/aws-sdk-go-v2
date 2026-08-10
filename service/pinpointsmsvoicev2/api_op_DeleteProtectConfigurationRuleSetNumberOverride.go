@@ -4,7 +4,9 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,21 @@ type DeleteProtectConfigurationRuleSetNumberOverrideInput struct {
 	ProtectConfigurationId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteProtectConfigurationRuleSetNumberOverrideInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProtectConfigurationRuleSetNumberOverrideRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProtectConfigurationRuleSetNumberOverrideInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationPhoneNumber != nil {
+		s.WriteString(schemas.DeleteProtectConfigurationRuleSetNumberOverrideRequest_DestinationPhoneNumber, *v.DestinationPhoneNumber)
+	}
+	if v.ProtectConfigurationId != nil {
+		s.WriteString(schemas.DeleteProtectConfigurationRuleSetNumberOverrideRequest_ProtectConfigurationId, *v.ProtectConfigurationId)
+	}
 }
 
 type DeleteProtectConfigurationRuleSetNumberOverrideOutput struct {
@@ -83,13 +100,72 @@ type DeleteProtectConfigurationRuleSetNumberOverrideOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProtectConfigurationRuleSetNumberOverrideOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProtectConfigurationRuleSetNumberOverrideOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_Action, string(v.Action))
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.DestinationPhoneNumber != nil {
+		s.WriteString(schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_DestinationPhoneNumber, *v.DestinationPhoneNumber)
+	}
+	if v.ExpirationTimestamp != nil {
+		s.WriteTime(schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_ExpirationTimestamp, *v.ExpirationTimestamp)
+	}
+	if v.IsoCountryCode != nil {
+		s.WriteString(schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_IsoCountryCode, *v.IsoCountryCode)
+	}
+	if v.ProtectConfigurationArn != nil {
+		s.WriteString(schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_ProtectConfigurationArn, *v.ProtectConfigurationArn)
+	}
+	if v.ProtectConfigurationId != nil {
+		s.WriteString(schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_ProtectConfigurationId, *v.ProtectConfigurationId)
+	}
+}
+func (v *DeleteProtectConfigurationRuleSetNumberOverrideOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_Action:
+			var ev string
+			if err := d.ReadString(schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = types.ProtectConfigurationRuleOverrideAction(ev)
+			return nil
+		case schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_DestinationPhoneNumber:
+			v.DestinationPhoneNumber = new(string)
+			return d.ReadString(schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_DestinationPhoneNumber, v.DestinationPhoneNumber)
+		case schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_ExpirationTimestamp:
+			v.ExpirationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_ExpirationTimestamp, v.ExpirationTimestamp)
+		case schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_IsoCountryCode:
+			v.IsoCountryCode = new(string)
+			return d.ReadString(schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_IsoCountryCode, v.IsoCountryCode)
+		case schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_ProtectConfigurationArn:
+			v.ProtectConfigurationArn = new(string)
+			return d.ReadString(schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_ProtectConfigurationArn, v.ProtectConfigurationArn)
+		case schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_ProtectConfigurationId:
+			v.ProtectConfigurationId = new(string)
+			return d.ReadString(schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_ProtectConfigurationId, v.ProtectConfigurationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteProtectConfigurationRuleSetNumberOverrideMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteProtectConfigurationRuleSetNumberOverride{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProtectConfigurationRuleSetNumberOverride, schemas.DeleteProtectConfigurationRuleSetNumberOverrideRequest, schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteProtectConfigurationRuleSetNumberOverride{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProtectConfigurationRuleSetNumberOverride, schemas.DeleteProtectConfigurationRuleSetNumberOverrideRequest, schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult), output: &DeleteProtectConfigurationRuleSetNumberOverrideOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package mgn
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,37 @@ type DescribeReplicationConfigurationTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReplicationConfigurationTemplatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReplicationConfigurationTemplatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReplicationConfigurationTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeReplicationConfigurationTemplatesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeReplicationConfigurationTemplatesRequest_nextToken, *v.NextToken)
+	}
+	serializeReplicationConfigurationTemplateIDs(s, schemas.DescribeReplicationConfigurationTemplatesRequest_replicationConfigurationTemplateIDs, v.ReplicationConfigurationTemplateIDs)
+}
+func (v *DescribeReplicationConfigurationTemplatesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeReplicationConfigurationTemplatesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeReplicationConfigurationTemplatesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.DescribeReplicationConfigurationTemplatesRequest_maxResults, v.MaxResults)
+		case schemas.DescribeReplicationConfigurationTemplatesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeReplicationConfigurationTemplatesRequest_nextToken, v.NextToken)
+		case schemas.DescribeReplicationConfigurationTemplatesRequest_replicationConfigurationTemplateIDs:
+			return deserializeReplicationConfigurationTemplateIDs(d, schemas.DescribeReplicationConfigurationTemplatesRequest_replicationConfigurationTemplateIDs, &v.ReplicationConfigurationTemplateIDs)
+		}
+		return nil
+	})
+}
+
 type DescribeReplicationConfigurationTemplatesOutput struct {
 
 	// Request to describe Replication Configuration template by items.
@@ -53,13 +86,35 @@ type DescribeReplicationConfigurationTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReplicationConfigurationTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReplicationConfigurationTemplatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReplicationConfigurationTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeReplicationConfigurationTemplates(s, schemas.DescribeReplicationConfigurationTemplatesResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeReplicationConfigurationTemplatesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeReplicationConfigurationTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeReplicationConfigurationTemplatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeReplicationConfigurationTemplatesResponse_items:
+			return deserializeReplicationConfigurationTemplates(d, schemas.DescribeReplicationConfigurationTemplatesResponse_items, &v.Items)
+		case schemas.DescribeReplicationConfigurationTemplatesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeReplicationConfigurationTemplatesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReplicationConfigurationTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeReplicationConfigurationTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReplicationConfigurationTemplates, schemas.DescribeReplicationConfigurationTemplatesRequest, schemas.DescribeReplicationConfigurationTemplatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeReplicationConfigurationTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReplicationConfigurationTemplates, schemas.DescribeReplicationConfigurationTemplatesRequest, schemas.DescribeReplicationConfigurationTemplatesResponse), output: &DescribeReplicationConfigurationTemplatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

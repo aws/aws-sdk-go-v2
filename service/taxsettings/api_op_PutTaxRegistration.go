@@ -4,7 +4,9 @@ package taxsettings
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/taxsettings/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/taxsettings/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -238,6 +240,23 @@ type PutTaxRegistrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTaxRegistrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutTaxRegistrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTaxRegistrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.PutTaxRegistrationRequest_accountId, *v.AccountId)
+	}
+	if v.TaxRegistrationEntry != nil {
+		s.WriteStruct(schemas.PutTaxRegistrationRequest_taxRegistrationEntry)
+		v.TaxRegistrationEntry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PutTaxRegistrationOutput struct {
 
 	// The status of your TRN stored in the system after processing. Based on the
@@ -251,13 +270,36 @@ type PutTaxRegistrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTaxRegistrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutTaxRegistrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTaxRegistrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.PutTaxRegistrationResponse_status, string(v.Status))
+	}
+}
+func (v *PutTaxRegistrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutTaxRegistrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutTaxRegistrationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.PutTaxRegistrationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TaxRegistrationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutTaxRegistrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutTaxRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTaxRegistration, schemas.PutTaxRegistrationRequest, schemas.PutTaxRegistrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutTaxRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTaxRegistration, schemas.PutTaxRegistrationRequest, schemas.PutTaxRegistrationResponse), output: &PutTaxRegistrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

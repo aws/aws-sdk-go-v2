@@ -4,7 +4,9 @@ package codecommit
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -81,6 +83,50 @@ type MergeBranchesByThreeWayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MergeBranchesByThreeWayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MergeBranchesByThreeWayInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MergeBranchesByThreeWayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorName != nil {
+		s.WriteString(schemas.MergeBranchesByThreeWayInput_authorName, *v.AuthorName)
+	}
+	if v.CommitMessage != nil {
+		s.WriteString(schemas.MergeBranchesByThreeWayInput_commitMessage, *v.CommitMessage)
+	}
+	if v.ConflictDetailLevel != "" {
+		s.WriteString(schemas.MergeBranchesByThreeWayInput_conflictDetailLevel, string(v.ConflictDetailLevel))
+	}
+	if v.ConflictResolution != nil {
+		s.WriteStruct(schemas.MergeBranchesByThreeWayInput_conflictResolution)
+		v.ConflictResolution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConflictResolutionStrategy != "" {
+		s.WriteString(schemas.MergeBranchesByThreeWayInput_conflictResolutionStrategy, string(v.ConflictResolutionStrategy))
+	}
+	if v.DestinationCommitSpecifier != nil {
+		s.WriteString(schemas.MergeBranchesByThreeWayInput_destinationCommitSpecifier, *v.DestinationCommitSpecifier)
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.MergeBranchesByThreeWayInput_email, *v.Email)
+	}
+	if v.KeepEmptyFolders != false {
+		s.WriteBool(schemas.MergeBranchesByThreeWayInput_keepEmptyFolders, v.KeepEmptyFolders)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.MergeBranchesByThreeWayInput_repositoryName, *v.RepositoryName)
+	}
+	if v.SourceCommitSpecifier != nil {
+		s.WriteString(schemas.MergeBranchesByThreeWayInput_sourceCommitSpecifier, *v.SourceCommitSpecifier)
+	}
+	if v.TargetBranch != nil {
+		s.WriteString(schemas.MergeBranchesByThreeWayInput_targetBranch, *v.TargetBranch)
+	}
+}
+
 type MergeBranchesByThreeWayOutput struct {
 
 	// The commit ID of the merge in the destination or target branch.
@@ -95,13 +141,38 @@ type MergeBranchesByThreeWayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MergeBranchesByThreeWayOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MergeBranchesByThreeWayOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MergeBranchesByThreeWayOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommitId != nil {
+		s.WriteString(schemas.MergeBranchesByThreeWayOutput_commitId, *v.CommitId)
+	}
+	if v.TreeId != nil {
+		s.WriteString(schemas.MergeBranchesByThreeWayOutput_treeId, *v.TreeId)
+	}
+}
+func (v *MergeBranchesByThreeWayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MergeBranchesByThreeWayOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MergeBranchesByThreeWayOutput_commitId:
+			v.CommitId = new(string)
+			return d.ReadString(schemas.MergeBranchesByThreeWayOutput_commitId, v.CommitId)
+		case schemas.MergeBranchesByThreeWayOutput_treeId:
+			v.TreeId = new(string)
+			return d.ReadString(schemas.MergeBranchesByThreeWayOutput_treeId, v.TreeId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMergeBranchesByThreeWayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpMergeBranchesByThreeWay{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MergeBranchesByThreeWay, schemas.MergeBranchesByThreeWayInput, schemas.MergeBranchesByThreeWayOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpMergeBranchesByThreeWay{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MergeBranchesByThreeWay, schemas.MergeBranchesByThreeWayInput, schemas.MergeBranchesByThreeWayOutput), output: &MergeBranchesByThreeWayOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,56 @@ type UpdateServiceSyncConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceSyncConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceSyncConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceSyncConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Branch != nil {
+		s.WriteString(schemas.UpdateServiceSyncConfigInput_branch, *v.Branch)
+	}
+	if v.FilePath != nil {
+		s.WriteString(schemas.UpdateServiceSyncConfigInput_filePath, *v.FilePath)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.UpdateServiceSyncConfigInput_repositoryName, *v.RepositoryName)
+	}
+	if v.RepositoryProvider != "" {
+		s.WriteString(schemas.UpdateServiceSyncConfigInput_repositoryProvider, string(v.RepositoryProvider))
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.UpdateServiceSyncConfigInput_serviceName, *v.ServiceName)
+	}
+}
+func (v *UpdateServiceSyncConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServiceSyncConfigInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServiceSyncConfigInput_branch:
+			v.Branch = new(string)
+			return d.ReadString(schemas.UpdateServiceSyncConfigInput_branch, v.Branch)
+		case schemas.UpdateServiceSyncConfigInput_filePath:
+			v.FilePath = new(string)
+			return d.ReadString(schemas.UpdateServiceSyncConfigInput_filePath, v.FilePath)
+		case schemas.UpdateServiceSyncConfigInput_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.UpdateServiceSyncConfigInput_repositoryName, v.RepositoryName)
+		case schemas.UpdateServiceSyncConfigInput_repositoryProvider:
+			var ev string
+			if err := d.ReadString(schemas.UpdateServiceSyncConfigInput_repositoryProvider, &ev); err != nil {
+				return err
+			}
+			v.RepositoryProvider = types.RepositoryProvider(ev)
+			return nil
+		case schemas.UpdateServiceSyncConfigInput_serviceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.UpdateServiceSyncConfigInput_serviceName, v.ServiceName)
+		}
+		return nil
+	})
+}
+
 type UpdateServiceSyncConfigOutput struct {
 
 	// The detailed data of the Proton Ops file.
@@ -67,13 +119,34 @@ type UpdateServiceSyncConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceSyncConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceSyncConfigOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceSyncConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceSyncConfig != nil {
+		s.WriteStruct(schemas.UpdateServiceSyncConfigOutput_serviceSyncConfig)
+		v.ServiceSyncConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateServiceSyncConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServiceSyncConfigOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServiceSyncConfigOutput_serviceSyncConfig:
+			v.ServiceSyncConfig = &types.ServiceSyncConfig{}
+			return v.ServiceSyncConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateServiceSyncConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateServiceSyncConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceSyncConfig, schemas.UpdateServiceSyncConfigInput, schemas.UpdateServiceSyncConfigOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateServiceSyncConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceSyncConfig, schemas.UpdateServiceSyncConfigInput, schemas.UpdateServiceSyncConfigOutput), output: &UpdateServiceSyncConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

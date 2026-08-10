@@ -5,7 +5,9 @@ package groundstation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type ListDataflowEndpointGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataflowEndpointGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataflowEndpointGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataflowEndpointGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataflowEndpointGroupsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataflowEndpointGroupsRequest_nextToken, *v.NextToken)
+	}
+}
+
 // Output for the ListDataflowEndpointGroups operation.
 type ListDataflowEndpointGroupsOutput struct {
 
@@ -54,13 +71,35 @@ type ListDataflowEndpointGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataflowEndpointGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataflowEndpointGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataflowEndpointGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataflowEndpointGroupList(s, schemas.ListDataflowEndpointGroupsResponse_dataflowEndpointGroupList, v.DataflowEndpointGroupList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataflowEndpointGroupsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDataflowEndpointGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataflowEndpointGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataflowEndpointGroupsResponse_dataflowEndpointGroupList:
+			return deserializeDataflowEndpointGroupList(d, schemas.ListDataflowEndpointGroupsResponse_dataflowEndpointGroupList, &v.DataflowEndpointGroupList)
+		case schemas.ListDataflowEndpointGroupsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataflowEndpointGroupsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataflowEndpointGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataflowEndpointGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataflowEndpointGroups, schemas.ListDataflowEndpointGroupsRequest, schemas.ListDataflowEndpointGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataflowEndpointGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataflowEndpointGroups, schemas.ListDataflowEndpointGroupsRequest, schemas.ListDataflowEndpointGroupsResponse), output: &ListDataflowEndpointGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

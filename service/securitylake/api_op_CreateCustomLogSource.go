@@ -4,7 +4,9 @@ package securitylake
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securitylake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securitylake/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,27 @@ type CreateCustomLogSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomLogSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomLogSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomLogSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.CreateCustomLogSourceRequest_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeOcsfEventClassList(s, schemas.CreateCustomLogSourceRequest_eventClasses, v.EventClasses)
+	if v.SourceName != nil {
+		s.WriteString(schemas.CreateCustomLogSourceRequest_sourceName, *v.SourceName)
+	}
+	if v.SourceVersion != nil {
+		s.WriteString(schemas.CreateCustomLogSourceRequest_sourceVersion, *v.SourceVersion)
+	}
+}
+
 type CreateCustomLogSourceOutput struct {
 
 	// The third-party custom source that was created.
@@ -73,13 +96,34 @@ type CreateCustomLogSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomLogSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomLogSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomLogSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Source != nil {
+		s.WriteStruct(schemas.CreateCustomLogSourceResponse_source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateCustomLogSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCustomLogSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCustomLogSourceResponse_source:
+			v.Source = &types.CustomLogSourceResource{}
+			return v.Source.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCustomLogSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCustomLogSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomLogSource, schemas.CreateCustomLogSourceRequest, schemas.CreateCustomLogSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCustomLogSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomLogSource, schemas.CreateCustomLogSourceRequest, schemas.CreateCustomLogSourceResponse), output: &CreateCustomLogSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

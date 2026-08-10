@@ -4,7 +4,9 @@ package chime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type PutEventsConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEventsConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEventsConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEventsConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.PutEventsConfigurationRequest_AccountId, *v.AccountId)
+	}
+	if v.BotId != nil {
+		s.WriteString(schemas.PutEventsConfigurationRequest_BotId, *v.BotId)
+	}
+	if v.LambdaFunctionArn != nil {
+		s.WriteString(schemas.PutEventsConfigurationRequest_LambdaFunctionArn, *v.LambdaFunctionArn)
+	}
+	if v.OutboundEventsHTTPSEndpoint != nil {
+		s.WriteString(schemas.PutEventsConfigurationRequest_OutboundEventsHTTPSEndpoint, *v.OutboundEventsHTTPSEndpoint)
+	}
+}
+
 type PutEventsConfigurationOutput struct {
 
 	// The configuration that allows a bot to receive outgoing events. Can be an HTTPS
@@ -59,13 +82,34 @@ type PutEventsConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEventsConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEventsConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEventsConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventsConfiguration != nil {
+		s.WriteStruct(schemas.PutEventsConfigurationResponse_EventsConfiguration)
+		v.EventsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutEventsConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutEventsConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutEventsConfigurationResponse_EventsConfiguration:
+			v.EventsConfiguration = &types.EventsConfiguration{}
+			return v.EventsConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutEventsConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutEventsConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEventsConfiguration, schemas.PutEventsConfigurationRequest, schemas.PutEventsConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutEventsConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEventsConfiguration, schemas.PutEventsConfigurationRequest, schemas.PutEventsConfigurationResponse), output: &PutEventsConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package groundstation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type GetConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigId != nil {
+		s.WriteString(schemas.GetConfigRequest_configId, *v.ConfigId)
+	}
+	if v.ConfigType != "" {
+		s.WriteString(schemas.GetConfigRequest_configType, string(v.ConfigType))
+	}
+}
+
 // Output for the GetConfig operation.
 type GetConfigOutput struct {
 
@@ -77,13 +94,60 @@ type GetConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigArn != nil {
+		s.WriteString(schemas.GetConfigResponse_configArn, *v.ConfigArn)
+	}
+	serializeConfigTypeData(s, schemas.GetConfigResponse_configData, v.ConfigData)
+	if v.ConfigId != nil {
+		s.WriteString(schemas.GetConfigResponse_configId, *v.ConfigId)
+	}
+	if v.ConfigType != "" {
+		s.WriteString(schemas.GetConfigResponse_configType, string(v.ConfigType))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetConfigResponse_name, *v.Name)
+	}
+	serializeTagsMap(s, schemas.GetConfigResponse_tags, v.Tags)
+}
+func (v *GetConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConfigResponse_configArn:
+			v.ConfigArn = new(string)
+			return d.ReadString(schemas.GetConfigResponse_configArn, v.ConfigArn)
+		case schemas.GetConfigResponse_configData:
+			return deserializeConfigTypeData(d, schemas.GetConfigResponse_configData, &v.ConfigData)
+		case schemas.GetConfigResponse_configId:
+			v.ConfigId = new(string)
+			return d.ReadString(schemas.GetConfigResponse_configId, v.ConfigId)
+		case schemas.GetConfigResponse_configType:
+			var ev string
+			if err := d.ReadString(schemas.GetConfigResponse_configType, &ev); err != nil {
+				return err
+			}
+			v.ConfigType = types.ConfigCapabilityType(ev)
+			return nil
+		case schemas.GetConfigResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetConfigResponse_name, v.Name)
+		case schemas.GetConfigResponse_tags:
+			return deserializeTagsMap(d, schemas.GetConfigResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfig, schemas.GetConfigRequest, schemas.GetConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfig, schemas.GetConfigRequest, schemas.GetConfigResponse), output: &GetConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

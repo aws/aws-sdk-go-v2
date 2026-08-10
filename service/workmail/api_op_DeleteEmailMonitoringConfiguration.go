@@ -4,6 +4,8 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteEmailMonitoringConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEmailMonitoringConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEmailMonitoringConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEmailMonitoringConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.DeleteEmailMonitoringConfigurationRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type DeleteEmailMonitoringConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteEmailMonitoringConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEmailMonitoringConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEmailMonitoringConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEmailMonitoringConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteEmailMonitoringConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEmailMonitoringConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEmailMonitoringConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteEmailMonitoringConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEmailMonitoringConfiguration, schemas.DeleteEmailMonitoringConfigurationRequest, schemas.DeleteEmailMonitoringConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteEmailMonitoringConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEmailMonitoringConfiguration, schemas.DeleteEmailMonitoringConfigurationRequest, schemas.DeleteEmailMonitoringConfigurationResponse), output: &DeleteEmailMonitoringConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

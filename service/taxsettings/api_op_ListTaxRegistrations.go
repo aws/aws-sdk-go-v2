@@ -5,7 +5,9 @@ package taxsettings
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/taxsettings/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/taxsettings/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type ListTaxRegistrationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTaxRegistrationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTaxRegistrationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTaxRegistrationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTaxRegistrationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTaxRegistrationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListTaxRegistrationsOutput struct {
 
 	// The list of account details. This contains account Ids and TRN Information for
@@ -55,13 +72,35 @@ type ListTaxRegistrationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTaxRegistrationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTaxRegistrationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTaxRegistrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountDetailsList(s, schemas.ListTaxRegistrationsResponse_accountDetails, v.AccountDetails)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTaxRegistrationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListTaxRegistrationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTaxRegistrationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTaxRegistrationsResponse_accountDetails:
+			return deserializeAccountDetailsList(d, schemas.ListTaxRegistrationsResponse_accountDetails, &v.AccountDetails)
+		case schemas.ListTaxRegistrationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTaxRegistrationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTaxRegistrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTaxRegistrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTaxRegistrations, schemas.ListTaxRegistrationsRequest, schemas.ListTaxRegistrationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTaxRegistrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTaxRegistrations, schemas.ListTaxRegistrationsRequest, schemas.ListTaxRegistrationsResponse), output: &ListTaxRegistrationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

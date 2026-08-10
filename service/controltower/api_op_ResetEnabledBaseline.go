@@ -4,6 +4,8 @@ package controltower
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/controltower/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type ResetEnabledBaselineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetEnabledBaselineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetEnabledBaselineInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetEnabledBaselineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnabledBaselineIdentifier != nil {
+		s.WriteString(schemas.ResetEnabledBaselineInput_enabledBaselineIdentifier, *v.EnabledBaselineIdentifier)
+	}
+}
+
 type ResetEnabledBaselineOutput struct {
 
 	// The ID (in UUID format) of the asynchronous ResetEnabledBaseline operation.
@@ -53,13 +67,32 @@ type ResetEnabledBaselineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetEnabledBaselineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetEnabledBaselineOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetEnabledBaselineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationIdentifier != nil {
+		s.WriteString(schemas.ResetEnabledBaselineOutput_operationIdentifier, *v.OperationIdentifier)
+	}
+}
+func (v *ResetEnabledBaselineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResetEnabledBaselineOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResetEnabledBaselineOutput_operationIdentifier:
+			v.OperationIdentifier = new(string)
+			return d.ReadString(schemas.ResetEnabledBaselineOutput_operationIdentifier, v.OperationIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResetEnabledBaselineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpResetEnabledBaseline{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetEnabledBaseline, schemas.ResetEnabledBaselineInput, schemas.ResetEnabledBaselineOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpResetEnabledBaseline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetEnabledBaseline, schemas.ResetEnabledBaselineInput, schemas.ResetEnabledBaselineOutput), output: &ResetEnabledBaselineOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

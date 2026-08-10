@@ -4,6 +4,8 @@ package groundstation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetAgentConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgentConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgentConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgentConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentId != nil {
+		s.WriteString(schemas.GetAgentConfigurationRequest_agentId, *v.AgentId)
+	}
+}
+
 type GetAgentConfigurationOutput struct {
 
 	// UUID of agent.
@@ -49,13 +63,38 @@ type GetAgentConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgentConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgentConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgentConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentId != nil {
+		s.WriteString(schemas.GetAgentConfigurationResponse_agentId, *v.AgentId)
+	}
+	if v.TaskingDocument != nil {
+		s.WriteString(schemas.GetAgentConfigurationResponse_taskingDocument, *v.TaskingDocument)
+	}
+}
+func (v *GetAgentConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAgentConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAgentConfigurationResponse_agentId:
+			v.AgentId = new(string)
+			return d.ReadString(schemas.GetAgentConfigurationResponse_agentId, v.AgentId)
+		case schemas.GetAgentConfigurationResponse_taskingDocument:
+			v.TaskingDocument = new(string)
+			return d.ReadString(schemas.GetAgentConfigurationResponse_taskingDocument, v.TaskingDocument)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAgentConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAgentConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgentConfiguration, schemas.GetAgentConfigurationRequest, schemas.GetAgentConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAgentConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgentConfiguration, schemas.GetAgentConfigurationRequest, schemas.GetAgentConfigurationResponse), output: &GetAgentConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package codeguruprofiler
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -81,6 +83,72 @@ type ListProfileTimesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProfileTimesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProfileTimesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProfileTimesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListProfileTimesRequest_endTime, *v.EndTime)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProfileTimesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProfileTimesRequest_nextToken, *v.NextToken)
+	}
+	if v.OrderBy != "" {
+		s.WriteString(schemas.ListProfileTimesRequest_orderBy, string(v.OrderBy))
+	}
+	if v.Period != "" {
+		s.WriteString(schemas.ListProfileTimesRequest_period, string(v.Period))
+	}
+	if v.ProfilingGroupName != nil {
+		s.WriteString(schemas.ListProfileTimesRequest_profilingGroupName, *v.ProfilingGroupName)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListProfileTimesRequest_startTime, *v.StartTime)
+	}
+}
+func (v *ListProfileTimesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProfileTimesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProfileTimesRequest_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.ListProfileTimesRequest_endTime, v.EndTime)
+		case schemas.ListProfileTimesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListProfileTimesRequest_maxResults, v.MaxResults)
+		case schemas.ListProfileTimesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProfileTimesRequest_nextToken, v.NextToken)
+		case schemas.ListProfileTimesRequest_orderBy:
+			var ev string
+			if err := d.ReadString(schemas.ListProfileTimesRequest_orderBy, &ev); err != nil {
+				return err
+			}
+			v.OrderBy = types.OrderBy(ev)
+			return nil
+		case schemas.ListProfileTimesRequest_period:
+			var ev string
+			if err := d.ReadString(schemas.ListProfileTimesRequest_period, &ev); err != nil {
+				return err
+			}
+			v.Period = types.AggregationPeriod(ev)
+			return nil
+		case schemas.ListProfileTimesRequest_profilingGroupName:
+			v.ProfilingGroupName = new(string)
+			return d.ReadString(schemas.ListProfileTimesRequest_profilingGroupName, v.ProfilingGroupName)
+		case schemas.ListProfileTimesRequest_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ListProfileTimesRequest_startTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
 // The structure representing the listProfileTimesResponse.
 type ListProfileTimesOutput struct {
 
@@ -102,13 +170,35 @@ type ListProfileTimesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProfileTimesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProfileTimesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProfileTimesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProfileTimesResponse_nextToken, *v.NextToken)
+	}
+	serializeProfileTimes(s, schemas.ListProfileTimesResponse_profileTimes, v.ProfileTimes)
+}
+func (v *ListProfileTimesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProfileTimesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProfileTimesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProfileTimesResponse_nextToken, v.NextToken)
+		case schemas.ListProfileTimesResponse_profileTimes:
+			return deserializeProfileTimes(d, schemas.ListProfileTimesResponse_profileTimes, &v.ProfileTimes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProfileTimesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProfileTimes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProfileTimes, schemas.ListProfileTimesRequest, schemas.ListProfileTimesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProfileTimes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProfileTimes, schemas.ListProfileTimesRequest, schemas.ListProfileTimesResponse), output: &ListProfileTimesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

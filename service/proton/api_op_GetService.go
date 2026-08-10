@@ -6,7 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -41,6 +43,28 @@ type GetServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetServiceInput_name, *v.Name)
+	}
+}
+func (v *GetServiceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceInput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetServiceInput_name, v.Name)
+		}
+		return nil
+	})
+}
+
 type GetServiceOutput struct {
 
 	// The detailed data of the requested service.
@@ -52,13 +76,34 @@ type GetServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Service != nil {
+		s.WriteStruct(schemas.GetServiceOutput_service)
+		v.Service.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceOutput_service:
+			v.Service = &types.Service{}
+			return v.Service.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetService{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetService, schemas.GetServiceInput, schemas.GetServiceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetService{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetService, schemas.GetServiceInput, schemas.GetServiceOutput), output: &GetServiceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

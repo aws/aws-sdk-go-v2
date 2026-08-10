@@ -4,7 +4,9 @@ package dax
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/dax/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dax/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type RebootNodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootNodeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootNodeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootNodeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.RebootNodeRequest_ClusterName, *v.ClusterName)
+	}
+	if v.NodeId != nil {
+		s.WriteString(schemas.RebootNodeRequest_NodeId, *v.NodeId)
+	}
+}
+
 type RebootNodeOutput struct {
 
 	// A description of the DAX cluster after a node has been rebooted.
@@ -54,13 +71,34 @@ type RebootNodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootNodeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootNodeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootNodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteStruct(schemas.RebootNodeResponse_Cluster)
+		v.Cluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RebootNodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RebootNodeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RebootNodeResponse_Cluster:
+			v.Cluster = &types.Cluster{}
+			return v.Cluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRebootNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRebootNode{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootNode, schemas.RebootNodeRequest, schemas.RebootNodeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRebootNode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootNode, schemas.RebootNodeRequest, schemas.RebootNodeResponse), output: &RebootNodeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

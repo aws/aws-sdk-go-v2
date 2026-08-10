@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,28 @@ type GetServiceTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceTemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetServiceTemplateInput_name, *v.Name)
+	}
+}
+func (v *GetServiceTemplateInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceTemplateInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceTemplateInput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetServiceTemplateInput_name, v.Name)
+		}
+		return nil
+	})
+}
+
 type GetServiceTemplateOutput struct {
 
 	// The detailed data of the requested service template.
@@ -49,13 +73,34 @@ type GetServiceTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceTemplateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceTemplate != nil {
+		s.WriteStruct(schemas.GetServiceTemplateOutput_serviceTemplate)
+		v.ServiceTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetServiceTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceTemplateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceTemplateOutput_serviceTemplate:
+			v.ServiceTemplate = &types.ServiceTemplate{}
+			return v.ServiceTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetServiceTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetServiceTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceTemplate, schemas.GetServiceTemplateInput, schemas.GetServiceTemplateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetServiceTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceTemplate, schemas.GetServiceTemplateInput, schemas.GetServiceTemplateOutput), output: &GetServiceTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

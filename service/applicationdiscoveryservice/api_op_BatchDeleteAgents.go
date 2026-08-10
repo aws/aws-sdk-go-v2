@@ -4,7 +4,9 @@ package applicationdiscoveryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,16 @@ type BatchDeleteAgentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteAgentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteAgentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteAgentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeleteAgents(s, schemas.BatchDeleteAgentsRequest_deleteAgents, v.DeleteAgents)
+}
+
 type BatchDeleteAgentsOutput struct {
 
 	//  A list of agent IDs that failed to delete during the deletion task, each
@@ -49,13 +61,29 @@ type BatchDeleteAgentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteAgentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteAgentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteAgentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchDeleteAgentErrors(s, schemas.BatchDeleteAgentsResponse_errors, v.Errors)
+}
+func (v *BatchDeleteAgentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteAgentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteAgentsResponse_errors:
+			return deserializeBatchDeleteAgentErrors(d, schemas.BatchDeleteAgentsResponse_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteAgentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDeleteAgents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteAgents, schemas.BatchDeleteAgentsRequest, schemas.BatchDeleteAgentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchDeleteAgents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteAgents, schemas.BatchDeleteAgentsRequest, schemas.BatchDeleteAgentsResponse), output: &BatchDeleteAgentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

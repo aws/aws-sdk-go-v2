@@ -4,7 +4,9 @@ package ssmquicksetup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssmquicksetup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmquicksetup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type GetConfigurationManagerInput struct {
 	ManagerArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetConfigurationManagerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfigurationManagerInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfigurationManagerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManagerArn != nil {
+		s.WriteString(schemas.GetConfigurationManagerInput_ManagerArn, *v.ManagerArn)
+	}
 }
 
 type GetConfigurationManagerOutput struct {
@@ -70,13 +84,65 @@ type GetConfigurationManagerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfigurationManagerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfigurationManagerOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfigurationManagerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigurationDefinitionsList(s, schemas.GetConfigurationManagerOutput_ConfigurationDefinitions, v.ConfigurationDefinitions)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetConfigurationManagerOutput_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetConfigurationManagerOutput_Description, *v.Description)
+	}
+	if v.LastModifiedAt != nil {
+		s.WriteTime(schemas.GetConfigurationManagerOutput_LastModifiedAt, *v.LastModifiedAt)
+	}
+	if v.ManagerArn != nil {
+		s.WriteString(schemas.GetConfigurationManagerOutput_ManagerArn, *v.ManagerArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetConfigurationManagerOutput_Name, *v.Name)
+	}
+	serializeStatusSummariesList(s, schemas.GetConfigurationManagerOutput_StatusSummaries, v.StatusSummaries)
+	serializeTagsMap(s, schemas.GetConfigurationManagerOutput_Tags, v.Tags)
+}
+func (v *GetConfigurationManagerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConfigurationManagerOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConfigurationManagerOutput_ConfigurationDefinitions:
+			return deserializeConfigurationDefinitionsList(d, schemas.GetConfigurationManagerOutput_ConfigurationDefinitions, &v.ConfigurationDefinitions)
+		case schemas.GetConfigurationManagerOutput_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetConfigurationManagerOutput_CreatedAt, v.CreatedAt)
+		case schemas.GetConfigurationManagerOutput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetConfigurationManagerOutput_Description, v.Description)
+		case schemas.GetConfigurationManagerOutput_LastModifiedAt:
+			v.LastModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.GetConfigurationManagerOutput_LastModifiedAt, v.LastModifiedAt)
+		case schemas.GetConfigurationManagerOutput_ManagerArn:
+			v.ManagerArn = new(string)
+			return d.ReadString(schemas.GetConfigurationManagerOutput_ManagerArn, v.ManagerArn)
+		case schemas.GetConfigurationManagerOutput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetConfigurationManagerOutput_Name, v.Name)
+		case schemas.GetConfigurationManagerOutput_StatusSummaries:
+			return deserializeStatusSummariesList(d, schemas.GetConfigurationManagerOutput_StatusSummaries, &v.StatusSummaries)
+		case schemas.GetConfigurationManagerOutput_Tags:
+			return deserializeTagsMap(d, schemas.GetConfigurationManagerOutput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConfigurationManagerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConfigurationManager{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfigurationManager, schemas.GetConfigurationManagerInput, schemas.GetConfigurationManagerOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConfigurationManager{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfigurationManager, schemas.GetConfigurationManagerInput, schemas.GetConfigurationManagerOutput), output: &GetConfigurationManagerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

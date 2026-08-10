@@ -4,6 +4,8 @@ package applicationdiscoveryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,22 @@ type ExportConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ExportConfigurationsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type ExportConfigurationsOutput struct {
 
 	// A unique identifier that you can use to query the export status.
@@ -47,13 +65,32 @@ type ExportConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportId != nil {
+		s.WriteString(schemas.ExportConfigurationsResponse_exportId, *v.ExportId)
+	}
+}
+func (v *ExportConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportConfigurationsResponse_exportId:
+			v.ExportId = new(string)
+			return d.ReadString(schemas.ExportConfigurationsResponse_exportId, v.ExportId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExportConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpExportConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportConfigurations, nil, schemas.ExportConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpExportConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportConfigurations, nil, schemas.ExportConfigurationsResponse), output: &ExportConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

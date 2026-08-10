@@ -5,7 +5,9 @@ package connectcases
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,40 @@ type ListFieldsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFieldsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFieldsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFieldsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.ListFieldsRequest_domainId, *v.DomainId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFieldsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFieldsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListFieldsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFieldsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFieldsRequest_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.ListFieldsRequest_domainId, v.DomainId)
+		case schemas.ListFieldsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListFieldsRequest_maxResults, v.MaxResults)
+		case schemas.ListFieldsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFieldsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListFieldsOutput struct {
 
 	// List of detailed field information.
@@ -59,13 +95,35 @@ type ListFieldsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFieldsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFieldsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFieldsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFieldSummaryList(s, schemas.ListFieldsResponse_fields, v.Fields)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFieldsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListFieldsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFieldsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFieldsResponse_fields:
+			return deserializeFieldSummaryList(d, schemas.ListFieldsResponse_fields, &v.Fields)
+		case schemas.ListFieldsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFieldsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFieldsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFields{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFields, schemas.ListFieldsRequest, schemas.ListFieldsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFields{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFields, schemas.ListFieldsRequest, schemas.ListFieldsResponse), output: &ListFieldsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

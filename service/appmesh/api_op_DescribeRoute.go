@@ -4,7 +4,9 @@ package appmesh
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,46 @@ type DescribeRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRouteInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRouteInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRouteInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MeshName != nil {
+		s.WriteString(schemas.DescribeRouteInput_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.DescribeRouteInput_meshOwner, *v.MeshOwner)
+	}
+	if v.RouteName != nil {
+		s.WriteString(schemas.DescribeRouteInput_routeName, *v.RouteName)
+	}
+	if v.VirtualRouterName != nil {
+		s.WriteString(schemas.DescribeRouteInput_virtualRouterName, *v.VirtualRouterName)
+	}
+}
+func (v *DescribeRouteInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRouteInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRouteInput_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.DescribeRouteInput_meshName, v.MeshName)
+		case schemas.DescribeRouteInput_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.DescribeRouteInput_meshOwner, v.MeshOwner)
+		case schemas.DescribeRouteInput_routeName:
+			v.RouteName = new(string)
+			return d.ReadString(schemas.DescribeRouteInput_routeName, v.RouteName)
+		case schemas.DescribeRouteInput_virtualRouterName:
+			v.VirtualRouterName = new(string)
+			return d.ReadString(schemas.DescribeRouteInput_virtualRouterName, v.VirtualRouterName)
+		}
+		return nil
+	})
+}
+
 type DescribeRouteOutput struct {
 
 	// The full description of your route.
@@ -64,13 +106,34 @@ type DescribeRouteOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRouteOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRouteOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRouteOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Route != nil {
+		s.WriteStruct(schemas.DescribeRouteOutput_route)
+		v.Route.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeRouteOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRouteOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRouteOutput_route:
+			v.Route = &types.RouteData{}
+			return v.Route.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeRoute{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRoute, schemas.DescribeRouteInput, schemas.DescribeRouteOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeRoute{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRoute, schemas.DescribeRouteInput, schemas.DescribeRouteOutput), output: &DescribeRouteOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

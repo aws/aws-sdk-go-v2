@@ -4,7 +4,9 @@ package iotfleetwise
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,47 @@ type UpdateCampaignInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCampaignInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCampaignRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCampaignInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.UpdateCampaignRequest_action, string(v.Action))
+	}
+	serializeDataExtraDimensionNodePathList(s, schemas.UpdateCampaignRequest_dataExtraDimensions, v.DataExtraDimensions)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateCampaignRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateCampaignRequest_name, *v.Name)
+	}
+}
+func (v *UpdateCampaignInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCampaignRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCampaignRequest_action:
+			var ev string
+			if err := d.ReadString(schemas.UpdateCampaignRequest_action, &ev); err != nil {
+				return err
+			}
+			v.Action = types.UpdateCampaignAction(ev)
+			return nil
+		case schemas.UpdateCampaignRequest_dataExtraDimensions:
+			return deserializeDataExtraDimensionNodePathList(d, schemas.UpdateCampaignRequest_dataExtraDimensions, &v.DataExtraDimensions)
+		case schemas.UpdateCampaignRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateCampaignRequest_description, v.Description)
+		case schemas.UpdateCampaignRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateCampaignRequest_name, v.Name)
+		}
+		return nil
+	})
+}
+
 type UpdateCampaignOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the campaign.
@@ -86,13 +129,48 @@ type UpdateCampaignOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCampaignOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCampaignResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCampaignOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateCampaignResponse_arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateCampaignResponse_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateCampaignResponse_status, string(v.Status))
+	}
+}
+func (v *UpdateCampaignOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCampaignResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCampaignResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateCampaignResponse_arn, v.Arn)
+		case schemas.UpdateCampaignResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateCampaignResponse_name, v.Name)
+		case schemas.UpdateCampaignResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateCampaignResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CampaignStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCampaignMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateCampaign{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCampaign, schemas.UpdateCampaignRequest, schemas.UpdateCampaignResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateCampaign{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCampaign, schemas.UpdateCampaignRequest, schemas.UpdateCampaignResponse), output: &UpdateCampaignOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

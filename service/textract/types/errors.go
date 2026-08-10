@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -35,6 +36,33 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AccessDeniedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessDeniedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessDeniedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.AccessDeniedException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.AccessDeniedException_Message, *v.Message)
+	}
+}
+func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessDeniedException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.AccessDeniedException_Code, v.Code)
+		case schemas.AccessDeniedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccessDeniedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Amazon Textract isn't able to read the document. For more information on the
 // document limits in Amazon Textract, see limits.
@@ -64,6 +92,33 @@ func (e *BadDocumentException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BadDocumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *BadDocumentException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BadDocumentException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BadDocumentException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.BadDocumentException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.BadDocumentException_Message, *v.Message)
+	}
+}
+func (v *BadDocumentException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BadDocumentException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BadDocumentException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.BadDocumentException_Code, v.Code)
+		case schemas.BadDocumentException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BadDocumentException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Updating or deleting a resource can cause an inconsistent state.
 type ConflictException struct {
@@ -92,6 +147,33 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.ConflictException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ConflictException_Message, *v.Message)
+	}
+}
+func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConflictException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ConflictException_Code, v.Code)
+		case schemas.ConflictException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConflictException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The document can't be processed because it's too large. The maximum document
 // size for synchronous operations 10 MB. The maximum document size for
@@ -122,6 +204,33 @@ func (e *DocumentTooLargeException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DocumentTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DocumentTooLargeException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentTooLargeException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentTooLargeException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.DocumentTooLargeException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.DocumentTooLargeException_Message, *v.Message)
+	}
+}
+func (v *DocumentTooLargeException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentTooLargeException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentTooLargeException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.DocumentTooLargeException_Code, v.Code)
+		case schemas.DocumentTooLargeException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DocumentTooLargeException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates you have exceeded the maximum number of active human in the loop
 // workflows available
@@ -154,6 +263,51 @@ func (e *HumanLoopQuotaExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *HumanLoopQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *HumanLoopQuotaExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HumanLoopQuotaExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HumanLoopQuotaExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.HumanLoopQuotaExceededException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.HumanLoopQuotaExceededException_Message, *v.Message)
+	}
+	if v.QuotaCode != nil {
+		s.WriteString(schemas.HumanLoopQuotaExceededException_QuotaCode, *v.QuotaCode)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.HumanLoopQuotaExceededException_ResourceType, *v.ResourceType)
+	}
+	if v.ServiceCode != nil {
+		s.WriteString(schemas.HumanLoopQuotaExceededException_ServiceCode, *v.ServiceCode)
+	}
+}
+func (v *HumanLoopQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HumanLoopQuotaExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HumanLoopQuotaExceededException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.HumanLoopQuotaExceededException_Code, v.Code)
+		case schemas.HumanLoopQuotaExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.HumanLoopQuotaExceededException_Message, v.Message)
+		case schemas.HumanLoopQuotaExceededException_QuotaCode:
+			v.QuotaCode = new(string)
+			return d.ReadString(schemas.HumanLoopQuotaExceededException_QuotaCode, v.QuotaCode)
+		case schemas.HumanLoopQuotaExceededException_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.HumanLoopQuotaExceededException_ResourceType, v.ResourceType)
+		case schemas.HumanLoopQuotaExceededException_ServiceCode:
+			v.ServiceCode = new(string)
+			return d.ReadString(schemas.HumanLoopQuotaExceededException_ServiceCode, v.ServiceCode)
+		}
+		return nil
+	})
+}
 
 // A ClientRequestToken input parameter was reused with an operation, but at least
 // one of the other input parameters is different from the previous call to the
@@ -186,6 +340,33 @@ func (e *IdempotentParameterMismatchException) ErrorCode() string {
 func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *IdempotentParameterMismatchException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdempotentParameterMismatchException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdempotentParameterMismatchException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.IdempotentParameterMismatchException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.IdempotentParameterMismatchException_Message, *v.Message)
+	}
+}
+func (v *IdempotentParameterMismatchException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdempotentParameterMismatchException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdempotentParameterMismatchException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.IdempotentParameterMismatchException_Code, v.Code)
+		case schemas.IdempotentParameterMismatchException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.IdempotentParameterMismatchException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Amazon Textract experienced a service issue. Try your call again.
 type InternalServerError struct {
@@ -214,6 +395,33 @@ func (e *InternalServerError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServerError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServerError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServerError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.InternalServerError_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InternalServerError_Message, *v.Message)
+	}
+}
+func (v *InternalServerError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServerError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServerError_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.InternalServerError_Code, v.Code)
+		case schemas.InternalServerError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServerError_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An invalid job identifier was passed to an asynchronous analysis operation.
 type InvalidJobIdException struct {
@@ -242,6 +450,33 @@ func (e *InvalidJobIdException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidJobIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidJobIdException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidJobIdException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidJobIdException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.InvalidJobIdException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidJobIdException_Message, *v.Message)
+	}
+}
+func (v *InvalidJobIdException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidJobIdException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidJobIdException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.InvalidJobIdException_Code, v.Code)
+		case schemas.InvalidJobIdException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidJobIdException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 //	Indicates you do not have decrypt permissions with the KMS key entered, or the
 //
@@ -272,6 +507,33 @@ func (e *InvalidKMSKeyException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidKMSKeyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidKMSKeyException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidKMSKeyException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidKMSKeyException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.InvalidKMSKeyException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidKMSKeyException_Message, *v.Message)
+	}
+}
+func (v *InvalidKMSKeyException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidKMSKeyException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidKMSKeyException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.InvalidKMSKeyException_Code, v.Code)
+		case schemas.InvalidKMSKeyException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidKMSKeyException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An input parameter violated a constraint. For example, in synchronous
 // operations, an InvalidParameterException exception occurs when neither of the
@@ -303,6 +565,33 @@ func (e *InvalidParameterException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidParameterException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidParameterException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidParameterException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.InvalidParameterException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidParameterException_Message, *v.Message)
+	}
+}
+func (v *InvalidParameterException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidParameterException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidParameterException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.InvalidParameterException_Code, v.Code)
+		case schemas.InvalidParameterException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidParameterException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Amazon Textract is unable to access the S3 object that's specified in the
 // request. for more information, [Configure Access to Amazon S3]For troubleshooting information, see [Troubleshooting Amazon S3]
@@ -335,6 +624,33 @@ func (e *InvalidS3ObjectException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidS3ObjectException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidS3ObjectException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidS3ObjectException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidS3ObjectException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.InvalidS3ObjectException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidS3ObjectException_Message, *v.Message)
+	}
+}
+func (v *InvalidS3ObjectException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidS3ObjectException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidS3ObjectException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.InvalidS3ObjectException_Code, v.Code)
+		case schemas.InvalidS3ObjectException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidS3ObjectException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An Amazon Textract service limit was exceeded. For example, if you start too
 // many asynchronous jobs concurrently, calls to start operations (
@@ -367,6 +683,33 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.LimitExceededException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.LimitExceededException_Message, *v.Message)
+	}
+}
+func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LimitExceededException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.LimitExceededException_Code, v.Code)
+		case schemas.LimitExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LimitExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The number of requests exceeded your throughput limit. If you want to increase
 // this limit, contact Amazon Textract.
@@ -398,6 +741,33 @@ func (e *ProvisionedThroughputExceededException) ErrorCode() string {
 func (e *ProvisionedThroughputExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *ProvisionedThroughputExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProvisionedThroughputExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProvisionedThroughputExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.ProvisionedThroughputExceededException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ProvisionedThroughputExceededException_Message, *v.Message)
+	}
+}
+func (v *ProvisionedThroughputExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProvisionedThroughputExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProvisionedThroughputExceededException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ProvisionedThroughputExceededException_Code, v.Code)
+		case schemas.ProvisionedThroughputExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ProvisionedThroughputExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Returned when an operation tried to access a nonexistent resource.
 type ResourceNotFoundException struct {
@@ -426,6 +796,33 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.ResourceNotFoundException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_Message, *v.Message)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_Code, v.Code)
+		case schemas.ResourceNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Returned when a request cannot be completed as it would exceed a maximum
 // service quota.
@@ -455,6 +852,33 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ServiceQuotaExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceQuotaExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceQuotaExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.ServiceQuotaExceededException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceQuotaExceededException_Message, *v.Message)
+	}
+}
+func (v *ServiceQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceQuotaExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceQuotaExceededException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_Code, v.Code)
+		case schemas.ServiceQuotaExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Amazon Textract is temporarily unable to process the request. Try your call
 // again.
@@ -484,6 +908,33 @@ func (e *ThrottlingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ThrottlingException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ThrottlingException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ThrottlingException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.ThrottlingException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ThrottlingException_Message, *v.Message)
+	}
+}
+func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ThrottlingException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ThrottlingException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ThrottlingException_Code, v.Code)
+		case schemas.ThrottlingException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ThrottlingException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The format of the input document isn't supported. Documents for operations can
 // be in PNG, JPEG, PDF, or TIFF format.
@@ -513,6 +964,33 @@ func (e *UnsupportedDocumentException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedDocumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnsupportedDocumentException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnsupportedDocumentException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsupportedDocumentException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.UnsupportedDocumentException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.UnsupportedDocumentException_Message, *v.Message)
+	}
+}
+func (v *UnsupportedDocumentException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnsupportedDocumentException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnsupportedDocumentException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.UnsupportedDocumentException_Code, v.Code)
+		case schemas.UnsupportedDocumentException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnsupportedDocumentException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that a request was not valid. Check request for proper formatting.
 type ValidationException struct {
@@ -541,3 +1019,30 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ValidationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.ValidationException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationException_Message, *v.Message)
+	}
+}
+func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ValidationException_Code, v.Code)
+		case schemas.ValidationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationException_Message, v.Message)
+		}
+		return nil
+	})
+}

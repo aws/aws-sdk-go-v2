@@ -4,6 +4,8 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DeleteMobileDeviceAccessRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMobileDeviceAccessRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMobileDeviceAccessRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMobileDeviceAccessRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MobileDeviceAccessRuleId != nil {
+		s.WriteString(schemas.DeleteMobileDeviceAccessRuleRequest_MobileDeviceAccessRuleId, *v.MobileDeviceAccessRuleId)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.DeleteMobileDeviceAccessRuleRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type DeleteMobileDeviceAccessRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +66,26 @@ type DeleteMobileDeviceAccessRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMobileDeviceAccessRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMobileDeviceAccessRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMobileDeviceAccessRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteMobileDeviceAccessRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteMobileDeviceAccessRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMobileDeviceAccessRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteMobileDeviceAccessRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMobileDeviceAccessRule, schemas.DeleteMobileDeviceAccessRuleRequest, schemas.DeleteMobileDeviceAccessRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteMobileDeviceAccessRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMobileDeviceAccessRule, schemas.DeleteMobileDeviceAccessRuleRequest, schemas.DeleteMobileDeviceAccessRuleResponse), output: &DeleteMobileDeviceAccessRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

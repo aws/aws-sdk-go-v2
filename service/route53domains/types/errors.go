@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -35,6 +36,27 @@ func (e *DnssecLimitExceeded) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DnssecLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DnssecLimitExceeded) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DnssecLimitExceeded)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DnssecLimitExceeded) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DnssecLimitExceeded_message, *v.Message)
+	}
+}
+func (v *DnssecLimitExceeded) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DnssecLimitExceeded, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DnssecLimitExceeded_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DnssecLimitExceeded_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The number of domains has exceeded the allowed threshold for the account.
 type DomainLimitExceeded struct {
@@ -61,6 +83,27 @@ func (e *DomainLimitExceeded) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DomainLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DomainLimitExceeded) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainLimitExceeded)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DomainLimitExceeded) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DomainLimitExceeded_message, *v.Message)
+	}
+}
+func (v *DomainLimitExceeded) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainLimitExceeded, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainLimitExceeded_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DomainLimitExceeded_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request is already in progress for the domain.
 type DuplicateRequest struct {
@@ -89,6 +132,33 @@ func (e *DuplicateRequest) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DuplicateRequest) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DuplicateRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DuplicateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DuplicateRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DuplicateRequest_message, *v.Message)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DuplicateRequest_requestId, *v.RequestId)
+	}
+}
+func (v *DuplicateRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DuplicateRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DuplicateRequest_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DuplicateRequest_message, v.Message)
+		case schemas.DuplicateRequest_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DuplicateRequest_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 
 // The requested item is not acceptable. For example, for APIs that accept a
 // domain name, the request might specify a domain name that doesn't belong to the
@@ -118,6 +188,27 @@ func (e *InvalidInput) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidInput) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidInput_message, *v.Message)
+	}
+}
+func (v *InvalidInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidInput_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidInput_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The number of operations or jobs running exceeded the allowed threshold for the
 // account.
@@ -145,6 +236,27 @@ func (e *OperationLimitExceeded) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *OperationLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *OperationLimitExceeded) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OperationLimitExceeded)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OperationLimitExceeded) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.OperationLimitExceeded_message, *v.Message)
+	}
+}
+func (v *OperationLimitExceeded) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OperationLimitExceeded, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OperationLimitExceeded_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.OperationLimitExceeded_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The top-level domain is currently undergoing maintenance and the request cannot
 // be processed. Try again later.
@@ -174,6 +286,33 @@ func (e *TLDInMaintenance) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TLDInMaintenance) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TLDInMaintenance) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TLDInMaintenance)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TLDInMaintenance) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TLDInMaintenance_message, *v.Message)
+	}
+	if v.Tld != nil {
+		s.WriteString(schemas.TLDInMaintenance_tld, *v.Tld)
+	}
+}
+func (v *TLDInMaintenance) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TLDInMaintenance, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TLDInMaintenance_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TLDInMaintenance_message, v.Message)
+		case schemas.TLDInMaintenance_tld:
+			v.Tld = new(string)
+			return d.ReadString(schemas.TLDInMaintenance_tld, v.Tld)
+		}
+		return nil
+	})
+}
 
 // The top-level domain does not support this operation.
 type TLDRulesViolation struct {
@@ -200,6 +339,27 @@ func (e *TLDRulesViolation) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TLDRulesViolation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TLDRulesViolation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TLDRulesViolation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TLDRulesViolation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TLDRulesViolation_message, *v.Message)
+	}
+}
+func (v *TLDRulesViolation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TLDRulesViolation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TLDRulesViolation_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TLDRulesViolation_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Amazon Route 53 does not support this top-level domain (TLD).
 type UnsupportedTLD struct {
@@ -226,3 +386,24 @@ func (e *UnsupportedTLD) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedTLD) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnsupportedTLD) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnsupportedTLD)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsupportedTLD) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UnsupportedTLD_message, *v.Message)
+	}
+}
+func (v *UnsupportedTLD) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnsupportedTLD, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnsupportedTLD_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnsupportedTLD_message, v.Message)
+		}
+		return nil
+	})
+}

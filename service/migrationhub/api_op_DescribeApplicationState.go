@@ -4,7 +4,9 @@ package migrationhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -36,6 +38,18 @@ type DescribeApplicationStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeApplicationStateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeApplicationStateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeApplicationStateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.DescribeApplicationStateRequest_ApplicationId, *v.ApplicationId)
+	}
+}
+
 type DescribeApplicationStateOutput struct {
 
 	// Status of the application - Not Started, In-Progress, Complete.
@@ -50,13 +64,42 @@ type DescribeApplicationStateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeApplicationStateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeApplicationStateResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeApplicationStateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationStatus != "" {
+		s.WriteString(schemas.DescribeApplicationStateResult_ApplicationStatus, string(v.ApplicationStatus))
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.DescribeApplicationStateResult_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+}
+func (v *DescribeApplicationStateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeApplicationStateResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeApplicationStateResult_ApplicationStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeApplicationStateResult_ApplicationStatus, &ev); err != nil {
+				return err
+			}
+			v.ApplicationStatus = types.ApplicationStatus(ev)
+			return nil
+		case schemas.DescribeApplicationStateResult_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeApplicationStateResult_LastUpdatedTime, v.LastUpdatedTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeApplicationStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeApplicationState{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplicationState, schemas.DescribeApplicationStateRequest, schemas.DescribeApplicationStateResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeApplicationState{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplicationState, schemas.DescribeApplicationStateRequest, schemas.DescribeApplicationStateResult), output: &DescribeApplicationStateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

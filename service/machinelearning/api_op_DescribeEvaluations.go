@@ -5,7 +5,9 @@ package machinelearning
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -110,6 +112,48 @@ type DescribeEvaluationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEvaluationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEvaluationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEvaluationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EQ != nil {
+		s.WriteString(schemas.DescribeEvaluationsInput_EQ, *v.EQ)
+	}
+	if v.FilterVariable != "" {
+		s.WriteString(schemas.DescribeEvaluationsInput_FilterVariable, string(v.FilterVariable))
+	}
+	if v.GE != nil {
+		s.WriteString(schemas.DescribeEvaluationsInput_GE, *v.GE)
+	}
+	if v.GT != nil {
+		s.WriteString(schemas.DescribeEvaluationsInput_GT, *v.GT)
+	}
+	if v.LE != nil {
+		s.WriteString(schemas.DescribeEvaluationsInput_LE, *v.LE)
+	}
+	if v.LT != nil {
+		s.WriteString(schemas.DescribeEvaluationsInput_LT, *v.LT)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeEvaluationsInput_Limit, *v.Limit)
+	}
+	if v.NE != nil {
+		s.WriteString(schemas.DescribeEvaluationsInput_NE, *v.NE)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeEvaluationsInput_NextToken, *v.NextToken)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.DescribeEvaluationsInput_Prefix, *v.Prefix)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.DescribeEvaluationsInput_SortOrder, string(v.SortOrder))
+	}
+}
+
 // Represents the query results from a DescribeEvaluations operation. The content
 // is essentially a list of Evaluation .
 type DescribeEvaluationsOutput struct {
@@ -127,13 +171,35 @@ type DescribeEvaluationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEvaluationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEvaluationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEvaluationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeEvaluationsOutput_NextToken, *v.NextToken)
+	}
+	serializeEvaluations(s, schemas.DescribeEvaluationsOutput_Results, v.Results)
+}
+func (v *DescribeEvaluationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEvaluationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEvaluationsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeEvaluationsOutput_NextToken, v.NextToken)
+		case schemas.DescribeEvaluationsOutput_Results:
+			return deserializeEvaluations(d, schemas.DescribeEvaluationsOutput_Results, &v.Results)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEvaluationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEvaluations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEvaluations, schemas.DescribeEvaluationsInput, schemas.DescribeEvaluationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEvaluations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEvaluations, schemas.DescribeEvaluationsInput, schemas.DescribeEvaluationsOutput), output: &DescribeEvaluationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package textract
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,16 @@ type AnalyzeIDInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AnalyzeIDInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnalyzeIDRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnalyzeIDInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDocumentPages(s, schemas.AnalyzeIDRequest_DocumentPages, v.DocumentPages)
+}
+
 type AnalyzeIDOutput struct {
 
 	// The version of the AnalyzeIdentity API being used to process documents.
@@ -55,13 +67,43 @@ type AnalyzeIDOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AnalyzeIDOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnalyzeIDResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnalyzeIDOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyzeIDModelVersion != nil {
+		s.WriteString(schemas.AnalyzeIDResponse_AnalyzeIDModelVersion, *v.AnalyzeIDModelVersion)
+	}
+	if v.DocumentMetadata != nil {
+		s.WriteStruct(schemas.AnalyzeIDResponse_DocumentMetadata)
+		v.DocumentMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIdentityDocumentList(s, schemas.AnalyzeIDResponse_IdentityDocuments, v.IdentityDocuments)
+}
+func (v *AnalyzeIDOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnalyzeIDResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnalyzeIDResponse_AnalyzeIDModelVersion:
+			v.AnalyzeIDModelVersion = new(string)
+			return d.ReadString(schemas.AnalyzeIDResponse_AnalyzeIDModelVersion, v.AnalyzeIDModelVersion)
+		case schemas.AnalyzeIDResponse_DocumentMetadata:
+			v.DocumentMetadata = &types.DocumentMetadata{}
+			return v.DocumentMetadata.Deserialize(d)
+		case schemas.AnalyzeIDResponse_IdentityDocuments:
+			return deserializeIdentityDocumentList(d, schemas.AnalyzeIDResponse_IdentityDocuments, &v.IdentityDocuments)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAnalyzeIDMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAnalyzeID{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AnalyzeID, schemas.AnalyzeIDRequest, schemas.AnalyzeIDResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAnalyzeID{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AnalyzeID, schemas.AnalyzeIDRequest, schemas.AnalyzeIDResponse), output: &AnalyzeIDOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

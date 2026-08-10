@@ -4,7 +4,9 @@ package ssmsap
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssmsap/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmsap/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,34 @@ type GetComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComponentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComponentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetComponentInput_ApplicationId, *v.ApplicationId)
+	}
+	if v.ComponentId != nil {
+		s.WriteString(schemas.GetComponentInput_ComponentId, *v.ComponentId)
+	}
+}
+func (v *GetComponentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetComponentInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetComponentInput_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.GetComponentInput_ApplicationId, v.ApplicationId)
+		case schemas.GetComponentInput_ComponentId:
+			v.ComponentId = new(string)
+			return d.ReadString(schemas.GetComponentInput_ComponentId, v.ComponentId)
+		}
+		return nil
+	})
+}
+
 type GetComponentOutput struct {
 
 	// The component of an application registered with AWS Systems Manager for SAP.
@@ -54,13 +84,37 @@ type GetComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComponentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComponentOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComponentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Component != nil {
+		s.WriteStruct(schemas.GetComponentOutput_Component)
+		v.Component.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.GetComponentOutput_Tags, v.Tags)
+}
+func (v *GetComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetComponentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetComponentOutput_Component:
+			v.Component = &types.Component{}
+			return v.Component.Deserialize(d)
+		case schemas.GetComponentOutput_Tags:
+			return deserializeTagMap(d, schemas.GetComponentOutput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComponent, schemas.GetComponentInput, schemas.GetComponentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComponent, schemas.GetComponentInput, schemas.GetComponentOutput), output: &GetComponentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

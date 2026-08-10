@@ -4,7 +4,9 @@ package taxsettings
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/taxsettings/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/taxsettings/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,20 @@ type PutSupplementalTaxRegistrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutSupplementalTaxRegistrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutSupplementalTaxRegistrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutSupplementalTaxRegistrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaxRegistrationEntry != nil {
+		s.WriteStruct(schemas.PutSupplementalTaxRegistrationRequest_taxRegistrationEntry)
+		v.TaxRegistrationEntry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PutSupplementalTaxRegistrationOutput struct {
 
 	//  Unique authority ID for the supplemental TRN information that was stored.
@@ -55,13 +71,42 @@ type PutSupplementalTaxRegistrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutSupplementalTaxRegistrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutSupplementalTaxRegistrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutSupplementalTaxRegistrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorityId != nil {
+		s.WriteString(schemas.PutSupplementalTaxRegistrationResponse_authorityId, *v.AuthorityId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.PutSupplementalTaxRegistrationResponse_status, string(v.Status))
+	}
+}
+func (v *PutSupplementalTaxRegistrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutSupplementalTaxRegistrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutSupplementalTaxRegistrationResponse_authorityId:
+			v.AuthorityId = new(string)
+			return d.ReadString(schemas.PutSupplementalTaxRegistrationResponse_authorityId, v.AuthorityId)
+		case schemas.PutSupplementalTaxRegistrationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.PutSupplementalTaxRegistrationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TaxRegistrationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutSupplementalTaxRegistrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutSupplementalTaxRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSupplementalTaxRegistration, schemas.PutSupplementalTaxRegistrationRequest, schemas.PutSupplementalTaxRegistrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutSupplementalTaxRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSupplementalTaxRegistration, schemas.PutSupplementalTaxRegistrationRequest, schemas.PutSupplementalTaxRegistrationResponse), output: &PutSupplementalTaxRegistrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

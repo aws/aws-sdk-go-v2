@@ -5,7 +5,9 @@ package workmail
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListOrganizationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOrganizationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOrganizationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOrganizationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListOrganizationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOrganizationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListOrganizationsOutput struct {
 
 	// The token to use to retrieve the next page of results. The value is "null" when
@@ -53,13 +70,35 @@ type ListOrganizationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOrganizationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOrganizationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOrganizationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOrganizationsResponse_NextToken, *v.NextToken)
+	}
+	serializeOrganizationSummaries(s, schemas.ListOrganizationsResponse_OrganizationSummaries, v.OrganizationSummaries)
+}
+func (v *ListOrganizationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOrganizationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOrganizationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOrganizationsResponse_NextToken, v.NextToken)
+		case schemas.ListOrganizationsResponse_OrganizationSummaries:
+			return deserializeOrganizationSummaries(d, schemas.ListOrganizationsResponse_OrganizationSummaries, &v.OrganizationSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOrganizationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListOrganizations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOrganizations, schemas.ListOrganizationsRequest, schemas.ListOrganizationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListOrganizations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOrganizations, schemas.ListOrganizationsRequest, schemas.ListOrganizationsResponse), output: &ListOrganizationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

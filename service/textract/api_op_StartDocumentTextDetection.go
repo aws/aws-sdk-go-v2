@@ -4,7 +4,9 @@ package textract
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,39 @@ type StartDocumentTextDetectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDocumentTextDetectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDocumentTextDetectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDocumentTextDetectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartDocumentTextDetectionRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DocumentLocation != nil {
+		s.WriteStruct(schemas.StartDocumentTextDetectionRequest_DocumentLocation)
+		v.DocumentLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobTag != nil {
+		s.WriteString(schemas.StartDocumentTextDetectionRequest_JobTag, *v.JobTag)
+	}
+	if v.KMSKeyId != nil {
+		s.WriteString(schemas.StartDocumentTextDetectionRequest_KMSKeyId, *v.KMSKeyId)
+	}
+	if v.NotificationChannel != nil {
+		s.WriteStruct(schemas.StartDocumentTextDetectionRequest_NotificationChannel)
+		v.NotificationChannel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.StartDocumentTextDetectionRequest_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartDocumentTextDetectionOutput struct {
 
 	// The identifier of the text detection job for the document. Use JobId to
@@ -93,13 +128,32 @@ type StartDocumentTextDetectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDocumentTextDetectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDocumentTextDetectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDocumentTextDetectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StartDocumentTextDetectionResponse_JobId, *v.JobId)
+	}
+}
+func (v *StartDocumentTextDetectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDocumentTextDetectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartDocumentTextDetectionResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartDocumentTextDetectionResponse_JobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDocumentTextDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartDocumentTextDetection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDocumentTextDetection, schemas.StartDocumentTextDetectionRequest, schemas.StartDocumentTextDetectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartDocumentTextDetection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDocumentTextDetection, schemas.StartDocumentTextDetectionRequest, schemas.StartDocumentTextDetectionResponse), output: &StartDocumentTextDetectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

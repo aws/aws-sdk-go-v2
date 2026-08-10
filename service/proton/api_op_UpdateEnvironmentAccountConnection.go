@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,46 @@ type UpdateEnvironmentAccountConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEnvironmentAccountConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEnvironmentAccountConnectionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEnvironmentAccountConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodebuildRoleArn != nil {
+		s.WriteString(schemas.UpdateEnvironmentAccountConnectionInput_codebuildRoleArn, *v.CodebuildRoleArn)
+	}
+	if v.ComponentRoleArn != nil {
+		s.WriteString(schemas.UpdateEnvironmentAccountConnectionInput_componentRoleArn, *v.ComponentRoleArn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateEnvironmentAccountConnectionInput_id, *v.Id)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateEnvironmentAccountConnectionInput_roleArn, *v.RoleArn)
+	}
+}
+func (v *UpdateEnvironmentAccountConnectionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEnvironmentAccountConnectionInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEnvironmentAccountConnectionInput_codebuildRoleArn:
+			v.CodebuildRoleArn = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentAccountConnectionInput_codebuildRoleArn, v.CodebuildRoleArn)
+		case schemas.UpdateEnvironmentAccountConnectionInput_componentRoleArn:
+			v.ComponentRoleArn = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentAccountConnectionInput_componentRoleArn, v.ComponentRoleArn)
+		case schemas.UpdateEnvironmentAccountConnectionInput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentAccountConnectionInput_id, v.Id)
+		case schemas.UpdateEnvironmentAccountConnectionInput_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentAccountConnectionInput_roleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
+
 type UpdateEnvironmentAccountConnectionOutput struct {
 
 	// The environment account connection detail data that's returned by Proton.
@@ -77,13 +119,34 @@ type UpdateEnvironmentAccountConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEnvironmentAccountConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEnvironmentAccountConnectionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEnvironmentAccountConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentAccountConnection != nil {
+		s.WriteStruct(schemas.UpdateEnvironmentAccountConnectionOutput_environmentAccountConnection)
+		v.EnvironmentAccountConnection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateEnvironmentAccountConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEnvironmentAccountConnectionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEnvironmentAccountConnectionOutput_environmentAccountConnection:
+			v.EnvironmentAccountConnection = &types.EnvironmentAccountConnection{}
+			return v.EnvironmentAccountConnection.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEnvironmentAccountConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateEnvironmentAccountConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEnvironmentAccountConnection, schemas.UpdateEnvironmentAccountConnectionInput, schemas.UpdateEnvironmentAccountConnectionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateEnvironmentAccountConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEnvironmentAccountConnection, schemas.UpdateEnvironmentAccountConnectionInput, schemas.UpdateEnvironmentAccountConnectionOutput), output: &UpdateEnvironmentAccountConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

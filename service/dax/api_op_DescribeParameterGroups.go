@@ -4,7 +4,9 @@ package dax
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/dax/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dax/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,22 @@ type DescribeParameterGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeParameterGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeParameterGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeParameterGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeParameterGroupsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeParameterGroupsRequest_NextToken, *v.NextToken)
+	}
+	serializeParameterGroupNameList(s, schemas.DescribeParameterGroupsRequest_ParameterGroupNames, v.ParameterGroupNames)
+}
+
 type DescribeParameterGroupsOutput struct {
 
 	// Provides an identifier to allow retrieval of paginated results.
@@ -60,13 +78,35 @@ type DescribeParameterGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeParameterGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeParameterGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeParameterGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeParameterGroupsResponse_NextToken, *v.NextToken)
+	}
+	serializeParameterGroupList(s, schemas.DescribeParameterGroupsResponse_ParameterGroups, v.ParameterGroups)
+}
+func (v *DescribeParameterGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeParameterGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeParameterGroupsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeParameterGroupsResponse_NextToken, v.NextToken)
+		case schemas.DescribeParameterGroupsResponse_ParameterGroups:
+			return deserializeParameterGroupList(d, schemas.DescribeParameterGroupsResponse_ParameterGroups, &v.ParameterGroups)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeParameterGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeParameterGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeParameterGroups, schemas.DescribeParameterGroupsRequest, schemas.DescribeParameterGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeParameterGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeParameterGroups, schemas.DescribeParameterGroupsRequest, schemas.DescribeParameterGroupsResponse), output: &DescribeParameterGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

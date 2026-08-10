@@ -4,6 +4,8 @@ package resourcegroupstaggingapi
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,15 @@ func (c *Client) DescribeReportCreation(ctx context.Context, params *DescribeRep
 
 type DescribeReportCreationInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeReportCreationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReportCreationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReportCreationInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 type DescribeReportCreationOutput struct {
@@ -62,13 +73,50 @@ type DescribeReportCreationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReportCreationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReportCreationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReportCreationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.DescribeReportCreationOutput_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.S3Location != nil {
+		s.WriteString(schemas.DescribeReportCreationOutput_S3Location, *v.S3Location)
+	}
+	if v.StartDate != nil {
+		s.WriteString(schemas.DescribeReportCreationOutput_StartDate, *v.StartDate)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.DescribeReportCreationOutput_Status, *v.Status)
+	}
+}
+func (v *DescribeReportCreationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeReportCreationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeReportCreationOutput_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.DescribeReportCreationOutput_ErrorMessage, v.ErrorMessage)
+		case schemas.DescribeReportCreationOutput_S3Location:
+			v.S3Location = new(string)
+			return d.ReadString(schemas.DescribeReportCreationOutput_S3Location, v.S3Location)
+		case schemas.DescribeReportCreationOutput_StartDate:
+			v.StartDate = new(string)
+			return d.ReadString(schemas.DescribeReportCreationOutput_StartDate, v.StartDate)
+		case schemas.DescribeReportCreationOutput_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.DescribeReportCreationOutput_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReportCreationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeReportCreation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReportCreation, schemas.DescribeReportCreationInput, schemas.DescribeReportCreationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeReportCreation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReportCreation, schemas.DescribeReportCreationInput, schemas.DescribeReportCreationOutput), output: &DescribeReportCreationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

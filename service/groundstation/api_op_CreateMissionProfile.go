@@ -4,7 +4,9 @@ package groundstation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,39 @@ type CreateMissionProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMissionProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMissionProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMissionProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactPostPassDurationSeconds != nil {
+		s.WriteInt32(schemas.CreateMissionProfileRequest_contactPostPassDurationSeconds, *v.ContactPostPassDurationSeconds)
+	}
+	if v.ContactPrePassDurationSeconds != nil {
+		s.WriteInt32(schemas.CreateMissionProfileRequest_contactPrePassDurationSeconds, *v.ContactPrePassDurationSeconds)
+	}
+	serializeDataflowEdgeList(s, schemas.CreateMissionProfileRequest_dataflowEdges, v.DataflowEdges)
+	if v.MinimumViableContactDurationSeconds != nil {
+		s.WriteInt32(schemas.CreateMissionProfileRequest_minimumViableContactDurationSeconds, *v.MinimumViableContactDurationSeconds)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateMissionProfileRequest_name, *v.Name)
+	}
+	serializeKmsKey(s, schemas.CreateMissionProfileRequest_streamsKmsKey, v.StreamsKmsKey)
+	if v.StreamsKmsRole != nil {
+		s.WriteString(schemas.CreateMissionProfileRequest_streamsKmsRole, *v.StreamsKmsRole)
+	}
+	serializeTagsMap(s, schemas.CreateMissionProfileRequest_tags, v.Tags)
+	if v.TelemetrySinkConfigArn != nil {
+		s.WriteString(schemas.CreateMissionProfileRequest_telemetrySinkConfigArn, *v.TelemetrySinkConfigArn)
+	}
+	if v.TrackingConfigArn != nil {
+		s.WriteString(schemas.CreateMissionProfileRequest_trackingConfigArn, *v.TrackingConfigArn)
+	}
+}
+
 // Response containing the ID of a mission profile.
 type CreateMissionProfileOutput struct {
 
@@ -88,13 +123,32 @@ type CreateMissionProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMissionProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MissionProfileIdResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMissionProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MissionProfileId != nil {
+		s.WriteString(schemas.MissionProfileIdResponse_missionProfileId, *v.MissionProfileId)
+	}
+}
+func (v *CreateMissionProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MissionProfileIdResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MissionProfileIdResponse_missionProfileId:
+			v.MissionProfileId = new(string)
+			return d.ReadString(schemas.MissionProfileIdResponse_missionProfileId, v.MissionProfileId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMissionProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMissionProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMissionProfile, schemas.CreateMissionProfileRequest, schemas.MissionProfileIdResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMissionProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMissionProfile, schemas.CreateMissionProfileRequest, schemas.MissionProfileIdResponse), output: &CreateMissionProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

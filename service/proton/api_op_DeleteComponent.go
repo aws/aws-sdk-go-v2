@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,28 @@ type DeleteComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteComponentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteComponentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteComponentInput_name, *v.Name)
+	}
+}
+func (v *DeleteComponentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteComponentInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteComponentInput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteComponentInput_name, v.Name)
+		}
+		return nil
+	})
+}
+
 type DeleteComponentOutput struct {
 
 	// The detailed data of the component being deleted.
@@ -51,13 +75,34 @@ type DeleteComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteComponentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteComponentOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteComponentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Component != nil {
+		s.WriteStruct(schemas.DeleteComponentOutput_component)
+		v.Component.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteComponentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteComponentOutput_component:
+			v.Component = &types.Component{}
+			return v.Component.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteComponent, schemas.DeleteComponentInput, schemas.DeleteComponentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteComponent, schemas.DeleteComponentInput, schemas.DeleteComponentOutput), output: &DeleteComponentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

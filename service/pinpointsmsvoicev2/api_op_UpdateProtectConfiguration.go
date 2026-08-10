@@ -4,6 +4,8 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -36,6 +38,21 @@ type UpdateProtectConfigurationInput struct {
 	DeletionProtectionEnabled *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateProtectConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProtectConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProtectConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeletionProtectionEnabled != nil {
+		s.WriteBool(schemas.UpdateProtectConfigurationRequest_DeletionProtectionEnabled, *v.DeletionProtectionEnabled)
+	}
+	if v.ProtectConfigurationId != nil {
+		s.WriteString(schemas.UpdateProtectConfigurationRequest_ProtectConfigurationId, *v.ProtectConfigurationId)
+	}
 }
 
 type UpdateProtectConfigurationOutput struct {
@@ -75,13 +92,50 @@ type UpdateProtectConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProtectConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProtectConfigurationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProtectConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.UpdateProtectConfigurationResult_AccountDefault, v.AccountDefault)
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.UpdateProtectConfigurationResult_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	s.WriteBool(schemas.UpdateProtectConfigurationResult_DeletionProtectionEnabled, v.DeletionProtectionEnabled)
+	if v.ProtectConfigurationArn != nil {
+		s.WriteString(schemas.UpdateProtectConfigurationResult_ProtectConfigurationArn, *v.ProtectConfigurationArn)
+	}
+	if v.ProtectConfigurationId != nil {
+		s.WriteString(schemas.UpdateProtectConfigurationResult_ProtectConfigurationId, *v.ProtectConfigurationId)
+	}
+}
+func (v *UpdateProtectConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProtectConfigurationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProtectConfigurationResult_AccountDefault:
+			return d.ReadBool(schemas.UpdateProtectConfigurationResult_AccountDefault, &v.AccountDefault)
+		case schemas.UpdateProtectConfigurationResult_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.UpdateProtectConfigurationResult_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.UpdateProtectConfigurationResult_DeletionProtectionEnabled:
+			return d.ReadBool(schemas.UpdateProtectConfigurationResult_DeletionProtectionEnabled, &v.DeletionProtectionEnabled)
+		case schemas.UpdateProtectConfigurationResult_ProtectConfigurationArn:
+			v.ProtectConfigurationArn = new(string)
+			return d.ReadString(schemas.UpdateProtectConfigurationResult_ProtectConfigurationArn, v.ProtectConfigurationArn)
+		case schemas.UpdateProtectConfigurationResult_ProtectConfigurationId:
+			v.ProtectConfigurationId = new(string)
+			return d.ReadString(schemas.UpdateProtectConfigurationResult_ProtectConfigurationId, v.ProtectConfigurationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProtectConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateProtectConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProtectConfiguration, schemas.UpdateProtectConfigurationRequest, schemas.UpdateProtectConfigurationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateProtectConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProtectConfiguration, schemas.UpdateProtectConfigurationRequest, schemas.UpdateProtectConfigurationResult), output: &UpdateProtectConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

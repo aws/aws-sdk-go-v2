@@ -4,7 +4,9 @@ package codecommit
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,19 @@ type BatchDisassociateApprovalRuleTemplateFromRepositoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDisassociateApprovalRuleTemplateFromRepositoriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDisassociateApprovalRuleTemplateFromRepositoriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApprovalRuleTemplateName != nil {
+		s.WriteString(schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesInput_approvalRuleTemplateName, *v.ApprovalRuleTemplateName)
+	}
+	serializeRepositoryNameList(s, schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesInput_repositoryNames, v.RepositoryNames)
+}
+
 type BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput struct {
 
 	// A list of repository names that have had their association with the template
@@ -65,13 +80,32 @@ type BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRepositoryNameList(s, schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput_disassociatedRepositoryNames, v.DisassociatedRepositoryNames)
+	serializeBatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList(s, schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput_errors, v.Errors)
+}
+func (v *BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput_disassociatedRepositoryNames:
+			return deserializeRepositoryNameList(d, schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput_disassociatedRepositoryNames, &v.DisassociatedRepositoryNames)
+		case schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput_errors:
+			return deserializeBatchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList(d, schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDisassociateApprovalRuleTemplateFromRepositoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDisassociateApprovalRuleTemplateFromRepositories{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDisassociateApprovalRuleTemplateFromRepositories, schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesInput, schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchDisassociateApprovalRuleTemplateFromRepositories{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDisassociateApprovalRuleTemplateFromRepositories, schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesInput, schemas.BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput), output: &BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

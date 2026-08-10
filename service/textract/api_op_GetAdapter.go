@@ -4,7 +4,9 @@ package textract
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -37,6 +39,18 @@ type GetAdapterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAdapterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAdapterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAdapterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdapterId != nil {
+		s.WriteString(schemas.GetAdapterRequest_AdapterId, *v.AdapterId)
+	}
+}
+
 type GetAdapterOutput struct {
 
 	// A string identifying the adapter that information has been retrieved for.
@@ -67,13 +81,66 @@ type GetAdapterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAdapterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAdapterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAdapterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdapterId != nil {
+		s.WriteString(schemas.GetAdapterResponse_AdapterId, *v.AdapterId)
+	}
+	if v.AdapterName != nil {
+		s.WriteString(schemas.GetAdapterResponse_AdapterName, *v.AdapterName)
+	}
+	if v.AutoUpdate != "" {
+		s.WriteString(schemas.GetAdapterResponse_AutoUpdate, string(v.AutoUpdate))
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetAdapterResponse_CreationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetAdapterResponse_Description, *v.Description)
+	}
+	serializeFeatureTypes(s, schemas.GetAdapterResponse_FeatureTypes, v.FeatureTypes)
+	serializeTagMap(s, schemas.GetAdapterResponse_Tags, v.Tags)
+}
+func (v *GetAdapterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAdapterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAdapterResponse_AdapterId:
+			v.AdapterId = new(string)
+			return d.ReadString(schemas.GetAdapterResponse_AdapterId, v.AdapterId)
+		case schemas.GetAdapterResponse_AdapterName:
+			v.AdapterName = new(string)
+			return d.ReadString(schemas.GetAdapterResponse_AdapterName, v.AdapterName)
+		case schemas.GetAdapterResponse_AutoUpdate:
+			var ev string
+			if err := d.ReadString(schemas.GetAdapterResponse_AutoUpdate, &ev); err != nil {
+				return err
+			}
+			v.AutoUpdate = types.AutoUpdate(ev)
+			return nil
+		case schemas.GetAdapterResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetAdapterResponse_CreationTime, v.CreationTime)
+		case schemas.GetAdapterResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetAdapterResponse_Description, v.Description)
+		case schemas.GetAdapterResponse_FeatureTypes:
+			return deserializeFeatureTypes(d, schemas.GetAdapterResponse_FeatureTypes, &v.FeatureTypes)
+		case schemas.GetAdapterResponse_Tags:
+			return deserializeTagMap(d, schemas.GetAdapterResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAdapterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAdapter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAdapter, schemas.GetAdapterRequest, schemas.GetAdapterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAdapter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAdapter, schemas.GetAdapterRequest, schemas.GetAdapterResponse), output: &GetAdapterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

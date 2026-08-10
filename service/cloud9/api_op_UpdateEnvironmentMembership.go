@@ -4,7 +4,9 @@ package cloud9
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloud9/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloud9/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,24 @@ type UpdateEnvironmentMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEnvironmentMembershipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEnvironmentMembershipRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEnvironmentMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.UpdateEnvironmentMembershipRequest_environmentId, *v.EnvironmentId)
+	}
+	if v.Permissions != "" {
+		s.WriteString(schemas.UpdateEnvironmentMembershipRequest_permissions, string(v.Permissions))
+	}
+	if v.UserArn != nil {
+		s.WriteString(schemas.UpdateEnvironmentMembershipRequest_userArn, *v.UserArn)
+	}
+}
+
 type UpdateEnvironmentMembershipOutput struct {
 
 	// Information about the environment member whose settings were changed.
@@ -68,13 +88,34 @@ type UpdateEnvironmentMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEnvironmentMembershipOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEnvironmentMembershipResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEnvironmentMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Membership != nil {
+		s.WriteStruct(schemas.UpdateEnvironmentMembershipResult_membership)
+		v.Membership.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateEnvironmentMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEnvironmentMembershipResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEnvironmentMembershipResult_membership:
+			v.Membership = &types.EnvironmentMember{}
+			return v.Membership.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEnvironmentMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateEnvironmentMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEnvironmentMembership, schemas.UpdateEnvironmentMembershipRequest, schemas.UpdateEnvironmentMembershipResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateEnvironmentMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEnvironmentMembership, schemas.UpdateEnvironmentMembershipRequest, schemas.UpdateEnvironmentMembershipResult), output: &UpdateEnvironmentMembershipOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

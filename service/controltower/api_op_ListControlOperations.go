@@ -5,7 +5,9 @@ package controltower
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/controltower/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/controltower/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,26 @@ type ListControlOperationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListControlOperationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListControlOperationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListControlOperationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListControlOperationsInput_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListControlOperationsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListControlOperationsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListControlOperationsOutput struct {
 
 	// Returns a list of output from control operations.
@@ -58,13 +80,35 @@ type ListControlOperationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListControlOperationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListControlOperationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListControlOperationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeControlOperations(s, schemas.ListControlOperationsOutput_controlOperations, v.ControlOperations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListControlOperationsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListControlOperationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListControlOperationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListControlOperationsOutput_controlOperations:
+			return deserializeControlOperations(d, schemas.ListControlOperationsOutput_controlOperations, &v.ControlOperations)
+		case schemas.ListControlOperationsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListControlOperationsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListControlOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListControlOperations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListControlOperations, schemas.ListControlOperationsInput, schemas.ListControlOperationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListControlOperations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListControlOperations, schemas.ListControlOperationsInput, schemas.ListControlOperationsOutput), output: &ListControlOperationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

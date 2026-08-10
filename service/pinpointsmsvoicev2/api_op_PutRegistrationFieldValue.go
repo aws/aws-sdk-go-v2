@@ -4,6 +4,8 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,28 @@ type PutRegistrationFieldValueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRegistrationFieldValueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRegistrationFieldValueRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRegistrationFieldValueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FieldPath != nil {
+		s.WriteString(schemas.PutRegistrationFieldValueRequest_FieldPath, *v.FieldPath)
+	}
+	if v.RegistrationAttachmentId != nil {
+		s.WriteString(schemas.PutRegistrationFieldValueRequest_RegistrationAttachmentId, *v.RegistrationAttachmentId)
+	}
+	if v.RegistrationId != nil {
+		s.WriteString(schemas.PutRegistrationFieldValueRequest_RegistrationId, *v.RegistrationId)
+	}
+	serializeSelectChoiceList(s, schemas.PutRegistrationFieldValueRequest_SelectChoices, v.SelectChoices)
+	if v.TextValue != nil {
+		s.WriteString(schemas.PutRegistrationFieldValueRequest_TextValue, *v.TextValue)
+	}
+}
+
 type PutRegistrationFieldValueOutput struct {
 
 	// The path to the registration form field. You can use DescribeRegistrationFieldDefinitions for a list of FieldPaths.
@@ -84,13 +108,65 @@ type PutRegistrationFieldValueOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRegistrationFieldValueOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRegistrationFieldValueResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRegistrationFieldValueOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FieldPath != nil {
+		s.WriteString(schemas.PutRegistrationFieldValueResult_FieldPath, *v.FieldPath)
+	}
+	if v.RegistrationArn != nil {
+		s.WriteString(schemas.PutRegistrationFieldValueResult_RegistrationArn, *v.RegistrationArn)
+	}
+	if v.RegistrationAttachmentId != nil {
+		s.WriteString(schemas.PutRegistrationFieldValueResult_RegistrationAttachmentId, *v.RegistrationAttachmentId)
+	}
+	if v.RegistrationId != nil {
+		s.WriteString(schemas.PutRegistrationFieldValueResult_RegistrationId, *v.RegistrationId)
+	}
+	serializeSelectChoiceList(s, schemas.PutRegistrationFieldValueResult_SelectChoices, v.SelectChoices)
+	if v.TextValue != nil {
+		s.WriteString(schemas.PutRegistrationFieldValueResult_TextValue, *v.TextValue)
+	}
+	if v.VersionNumber != nil {
+		s.WriteInt64(schemas.PutRegistrationFieldValueResult_VersionNumber, *v.VersionNumber)
+	}
+}
+func (v *PutRegistrationFieldValueOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutRegistrationFieldValueResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutRegistrationFieldValueResult_FieldPath:
+			v.FieldPath = new(string)
+			return d.ReadString(schemas.PutRegistrationFieldValueResult_FieldPath, v.FieldPath)
+		case schemas.PutRegistrationFieldValueResult_RegistrationArn:
+			v.RegistrationArn = new(string)
+			return d.ReadString(schemas.PutRegistrationFieldValueResult_RegistrationArn, v.RegistrationArn)
+		case schemas.PutRegistrationFieldValueResult_RegistrationAttachmentId:
+			v.RegistrationAttachmentId = new(string)
+			return d.ReadString(schemas.PutRegistrationFieldValueResult_RegistrationAttachmentId, v.RegistrationAttachmentId)
+		case schemas.PutRegistrationFieldValueResult_RegistrationId:
+			v.RegistrationId = new(string)
+			return d.ReadString(schemas.PutRegistrationFieldValueResult_RegistrationId, v.RegistrationId)
+		case schemas.PutRegistrationFieldValueResult_SelectChoices:
+			return deserializeSelectChoiceList(d, schemas.PutRegistrationFieldValueResult_SelectChoices, &v.SelectChoices)
+		case schemas.PutRegistrationFieldValueResult_TextValue:
+			v.TextValue = new(string)
+			return d.ReadString(schemas.PutRegistrationFieldValueResult_TextValue, v.TextValue)
+		case schemas.PutRegistrationFieldValueResult_VersionNumber:
+			v.VersionNumber = new(int64)
+			return d.ReadInt64(schemas.PutRegistrationFieldValueResult_VersionNumber, v.VersionNumber)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutRegistrationFieldValueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpPutRegistrationFieldValue{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRegistrationFieldValue, schemas.PutRegistrationFieldValueRequest, schemas.PutRegistrationFieldValueResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpPutRegistrationFieldValue{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRegistrationFieldValue, schemas.PutRegistrationFieldValueRequest, schemas.PutRegistrationFieldValueResult), output: &PutRegistrationFieldValueOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

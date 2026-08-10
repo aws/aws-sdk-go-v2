@@ -5,7 +5,9 @@ package appmesh
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,46 @@ type ListVirtualNodesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVirtualNodesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVirtualNodesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVirtualNodesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListVirtualNodesInput_limit, *v.Limit)
+	}
+	if v.MeshName != nil {
+		s.WriteString(schemas.ListVirtualNodesInput_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.ListVirtualNodesInput_meshOwner, *v.MeshOwner)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVirtualNodesInput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListVirtualNodesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVirtualNodesInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVirtualNodesInput_limit:
+			v.Limit = new(int32)
+			return d.ReadInt32(schemas.ListVirtualNodesInput_limit, v.Limit)
+		case schemas.ListVirtualNodesInput_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.ListVirtualNodesInput_meshName, v.MeshName)
+		case schemas.ListVirtualNodesInput_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.ListVirtualNodesInput_meshOwner, v.MeshOwner)
+		case schemas.ListVirtualNodesInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVirtualNodesInput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListVirtualNodesOutput struct {
 
 	// The list of existing virtual nodes for the specified service mesh.
@@ -76,13 +118,35 @@ type ListVirtualNodesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVirtualNodesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVirtualNodesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVirtualNodesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVirtualNodesOutput_nextToken, *v.NextToken)
+	}
+	serializeVirtualNodeList(s, schemas.ListVirtualNodesOutput_virtualNodes, v.VirtualNodes)
+}
+func (v *ListVirtualNodesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVirtualNodesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVirtualNodesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVirtualNodesOutput_nextToken, v.NextToken)
+		case schemas.ListVirtualNodesOutput_virtualNodes:
+			return deserializeVirtualNodeList(d, schemas.ListVirtualNodesOutput_virtualNodes, &v.VirtualNodes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVirtualNodesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListVirtualNodes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVirtualNodes, schemas.ListVirtualNodesInput, schemas.ListVirtualNodesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListVirtualNodes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVirtualNodes, schemas.ListVirtualNodesInput, schemas.ListVirtualNodesOutput), output: &ListVirtualNodesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

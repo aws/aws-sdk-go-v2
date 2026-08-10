@@ -4,7 +4,9 @@ package chime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetAccountRequest_AccountId, *v.AccountId)
+	}
+}
+
 type GetAccountOutput struct {
 
 	// The Amazon Chime account details.
@@ -46,13 +60,34 @@ type GetAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Account != nil {
+		s.WriteStruct(schemas.GetAccountResponse_Account)
+		v.Account.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccountResponse_Account:
+			v.Account = &types.Account{}
+			return v.Account.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccount, schemas.GetAccountRequest, schemas.GetAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccount, schemas.GetAccountRequest, schemas.GetAccountResponse), output: &GetAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

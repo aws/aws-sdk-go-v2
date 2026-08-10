@@ -5,7 +5,9 @@ package proton
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,46 @@ type ListServiceInstanceOutputsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceInstanceOutputsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceInstanceOutputsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceInstanceOutputsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.ListServiceInstanceOutputsInput_deploymentId, *v.DeploymentId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceInstanceOutputsInput_nextToken, *v.NextToken)
+	}
+	if v.ServiceInstanceName != nil {
+		s.WriteString(schemas.ListServiceInstanceOutputsInput_serviceInstanceName, *v.ServiceInstanceName)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.ListServiceInstanceOutputsInput_serviceName, *v.ServiceName)
+	}
+}
+func (v *ListServiceInstanceOutputsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceInstanceOutputsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceInstanceOutputsInput_deploymentId:
+			v.DeploymentId = new(string)
+			return d.ReadString(schemas.ListServiceInstanceOutputsInput_deploymentId, v.DeploymentId)
+		case schemas.ListServiceInstanceOutputsInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceInstanceOutputsInput_nextToken, v.NextToken)
+		case schemas.ListServiceInstanceOutputsInput_serviceInstanceName:
+			v.ServiceInstanceName = new(string)
+			return d.ReadString(schemas.ListServiceInstanceOutputsInput_serviceInstanceName, v.ServiceInstanceName)
+		case schemas.ListServiceInstanceOutputsInput_serviceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.ListServiceInstanceOutputsInput_serviceName, v.ServiceName)
+		}
+		return nil
+	})
+}
+
 type ListServiceInstanceOutputsOutput struct {
 
 	// An array of service instance Infrastructure as Code (IaC) outputs.
@@ -66,13 +108,35 @@ type ListServiceInstanceOutputsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceInstanceOutputsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceInstanceOutputsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceInstanceOutputsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceInstanceOutputsOutput_nextToken, *v.NextToken)
+	}
+	serializeOutputsList(s, schemas.ListServiceInstanceOutputsOutput_outputs, v.Outputs)
+}
+func (v *ListServiceInstanceOutputsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceInstanceOutputsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceInstanceOutputsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceInstanceOutputsOutput_nextToken, v.NextToken)
+		case schemas.ListServiceInstanceOutputsOutput_outputs:
+			return deserializeOutputsList(d, schemas.ListServiceInstanceOutputsOutput_outputs, &v.Outputs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListServiceInstanceOutputsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListServiceInstanceOutputs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceInstanceOutputs, schemas.ListServiceInstanceOutputsInput, schemas.ListServiceInstanceOutputsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListServiceInstanceOutputs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceInstanceOutputs, schemas.ListServiceInstanceOutputsInput, schemas.ListServiceInstanceOutputsOutput), output: &ListServiceInstanceOutputsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeOrganizationInput struct {
 	OrganizationId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeOrganizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOrganizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.DescribeOrganizationRequest_OrganizationId, *v.OrganizationId)
+	}
 }
 
 type DescribeOrganizationOutput struct {
@@ -78,13 +92,91 @@ type DescribeOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOrganizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOrganizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.DescribeOrganizationResponse_ARN, *v.ARN)
+	}
+	if v.Alias != nil {
+		s.WriteString(schemas.DescribeOrganizationResponse_Alias, *v.Alias)
+	}
+	if v.CompletedDate != nil {
+		s.WriteTime(schemas.DescribeOrganizationResponse_CompletedDate, *v.CompletedDate)
+	}
+	if v.DefaultMailDomain != nil {
+		s.WriteString(schemas.DescribeOrganizationResponse_DefaultMailDomain, *v.DefaultMailDomain)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.DescribeOrganizationResponse_DirectoryId, *v.DirectoryId)
+	}
+	if v.DirectoryType != nil {
+		s.WriteString(schemas.DescribeOrganizationResponse_DirectoryType, *v.DirectoryType)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.DescribeOrganizationResponse_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.InteroperabilityEnabled != false {
+		s.WriteBool(schemas.DescribeOrganizationResponse_InteroperabilityEnabled, v.InteroperabilityEnabled)
+	}
+	if v.MigrationAdmin != nil {
+		s.WriteString(schemas.DescribeOrganizationResponse_MigrationAdmin, *v.MigrationAdmin)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.DescribeOrganizationResponse_OrganizationId, *v.OrganizationId)
+	}
+	if v.State != nil {
+		s.WriteString(schemas.DescribeOrganizationResponse_State, *v.State)
+	}
+}
+func (v *DescribeOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeOrganizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeOrganizationResponse_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.DescribeOrganizationResponse_ARN, v.ARN)
+		case schemas.DescribeOrganizationResponse_Alias:
+			v.Alias = new(string)
+			return d.ReadString(schemas.DescribeOrganizationResponse_Alias, v.Alias)
+		case schemas.DescribeOrganizationResponse_CompletedDate:
+			v.CompletedDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeOrganizationResponse_CompletedDate, v.CompletedDate)
+		case schemas.DescribeOrganizationResponse_DefaultMailDomain:
+			v.DefaultMailDomain = new(string)
+			return d.ReadString(schemas.DescribeOrganizationResponse_DefaultMailDomain, v.DefaultMailDomain)
+		case schemas.DescribeOrganizationResponse_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.DescribeOrganizationResponse_DirectoryId, v.DirectoryId)
+		case schemas.DescribeOrganizationResponse_DirectoryType:
+			v.DirectoryType = new(string)
+			return d.ReadString(schemas.DescribeOrganizationResponse_DirectoryType, v.DirectoryType)
+		case schemas.DescribeOrganizationResponse_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.DescribeOrganizationResponse_ErrorMessage, v.ErrorMessage)
+		case schemas.DescribeOrganizationResponse_InteroperabilityEnabled:
+			return d.ReadBool(schemas.DescribeOrganizationResponse_InteroperabilityEnabled, &v.InteroperabilityEnabled)
+		case schemas.DescribeOrganizationResponse_MigrationAdmin:
+			v.MigrationAdmin = new(string)
+			return d.ReadString(schemas.DescribeOrganizationResponse_MigrationAdmin, v.MigrationAdmin)
+		case schemas.DescribeOrganizationResponse_OrganizationId:
+			v.OrganizationId = new(string)
+			return d.ReadString(schemas.DescribeOrganizationResponse_OrganizationId, v.OrganizationId)
+		case schemas.DescribeOrganizationResponse_State:
+			v.State = new(string)
+			return d.ReadString(schemas.DescribeOrganizationResponse_State, v.State)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrganization, schemas.DescribeOrganizationRequest, schemas.DescribeOrganizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrganization, schemas.DescribeOrganizationRequest, schemas.DescribeOrganizationResponse), output: &DescribeOrganizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package fms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type ListResourceSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceSetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceSetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResourceSetsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceSetsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListResourceSetsOutput struct {
 
 	// When you request a list of objects with a MaxResults setting, if the number of
@@ -60,13 +77,35 @@ type ListResourceSetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceSetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceSetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceSetsResponse_NextToken, *v.NextToken)
+	}
+	serializeResourceSetSummaryList(s, schemas.ListResourceSetsResponse_ResourceSets, v.ResourceSets)
+}
+func (v *ListResourceSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResourceSetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResourceSetsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResourceSetsResponse_NextToken, v.NextToken)
+		case schemas.ListResourceSetsResponse_ResourceSets:
+			return deserializeResourceSetSummaryList(d, schemas.ListResourceSetsResponse_ResourceSets, &v.ResourceSets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResourceSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListResourceSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceSets, schemas.ListResourceSetsRequest, schemas.ListResourceSetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListResourceSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceSets, schemas.ListResourceSetsRequest, schemas.ListResourceSetsResponse), output: &ListResourceSetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

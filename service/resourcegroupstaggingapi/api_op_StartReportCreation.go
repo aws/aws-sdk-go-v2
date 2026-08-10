@@ -4,6 +4,8 @@ package resourcegroupstaggingapi
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,18 @@ type StartReportCreationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartReportCreationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartReportCreationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartReportCreationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Bucket != nil {
+		s.WriteString(schemas.StartReportCreationInput_S3Bucket, *v.S3Bucket)
+	}
+}
+
 type StartReportCreationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -67,13 +81,26 @@ type StartReportCreationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartReportCreationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartReportCreationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartReportCreationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StartReportCreationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartReportCreationOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartReportCreationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartReportCreation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartReportCreation, schemas.StartReportCreationInput, schemas.StartReportCreationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartReportCreation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartReportCreation, schemas.StartReportCreationInput, schemas.StartReportCreationOutput), output: &StartReportCreationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

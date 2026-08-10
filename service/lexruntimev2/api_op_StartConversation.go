@@ -4,8 +4,9 @@ package lexruntimev2
 
 import (
 	"context"
-	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
+	"github.com/aws/aws-sdk-go-v2/service/lexruntimev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexruntimev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -105,6 +106,30 @@ type StartConversationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartConversationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartConversationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartConversationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotAliasId != nil {
+		s.WriteString(schemas.StartConversationRequest_botAliasId, *v.BotAliasId)
+	}
+	if v.BotId != nil {
+		s.WriteString(schemas.StartConversationRequest_botId, *v.BotId)
+	}
+	if v.ConversationMode != "" {
+		s.WriteString(schemas.StartConversationRequest_conversationMode, string(v.ConversationMode))
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.StartConversationRequest_localeId, *v.LocaleId)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.StartConversationRequest_sessionId, *v.SessionId)
+	}
+}
+
 type StartConversationOutput struct {
 	eventStream *StartConversationEventStream
 
@@ -114,27 +139,41 @@ type StartConversationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartConversationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartConversationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartConversationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StartConversationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartConversationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 // GetStream returns the type to interact with the event stream.
 func (o *StartConversationOutput) GetStream() *StartConversationEventStream {
 	return o.eventStream
 }
 
 func (c *Client) addOperationStartConversationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartConversation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartConversation, schemas.StartConversationRequest, schemas.StartConversationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartConversation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartConversation, schemas.StartConversationRequest, schemas.StartConversationResponse), output: &StartConversationOutput{}}, middleware.After); err != nil {
+		return err
+	}
+	if err := smithyhttp.AddInitializeStreamWriter(stack); err != nil {
+		return err
+	}
+	if err := stack.Deserialize.Insert(&deserializeOpEventStreamStartConversation{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
 		return err
 	}
 
-	if err = addEventStreamStartConversationMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddRequireMinimumProtocol(stack, 2, 0); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -145,9 +184,6 @@ func (c *Client) addOperationStartConversationMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
-		return err
-	}
-	if err = eventstreamapi.AddInitializeStreamWriter(stack); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

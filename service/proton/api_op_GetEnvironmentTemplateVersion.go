@@ -5,7 +5,9 @@ package proton
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -51,6 +53,40 @@ type GetEnvironmentTemplateVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEnvironmentTemplateVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEnvironmentTemplateVersionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEnvironmentTemplateVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MajorVersion != nil {
+		s.WriteString(schemas.GetEnvironmentTemplateVersionInput_majorVersion, *v.MajorVersion)
+	}
+	if v.MinorVersion != nil {
+		s.WriteString(schemas.GetEnvironmentTemplateVersionInput_minorVersion, *v.MinorVersion)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.GetEnvironmentTemplateVersionInput_templateName, *v.TemplateName)
+	}
+}
+func (v *GetEnvironmentTemplateVersionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEnvironmentTemplateVersionInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEnvironmentTemplateVersionInput_majorVersion:
+			v.MajorVersion = new(string)
+			return d.ReadString(schemas.GetEnvironmentTemplateVersionInput_majorVersion, v.MajorVersion)
+		case schemas.GetEnvironmentTemplateVersionInput_minorVersion:
+			v.MinorVersion = new(string)
+			return d.ReadString(schemas.GetEnvironmentTemplateVersionInput_minorVersion, v.MinorVersion)
+		case schemas.GetEnvironmentTemplateVersionInput_templateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.GetEnvironmentTemplateVersionInput_templateName, v.TemplateName)
+		}
+		return nil
+	})
+}
+
 type GetEnvironmentTemplateVersionOutput struct {
 
 	// The detailed data of the requested environment template version.
@@ -64,13 +100,34 @@ type GetEnvironmentTemplateVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEnvironmentTemplateVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEnvironmentTemplateVersionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEnvironmentTemplateVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentTemplateVersion != nil {
+		s.WriteStruct(schemas.GetEnvironmentTemplateVersionOutput_environmentTemplateVersion)
+		v.EnvironmentTemplateVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetEnvironmentTemplateVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEnvironmentTemplateVersionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEnvironmentTemplateVersionOutput_environmentTemplateVersion:
+			v.EnvironmentTemplateVersion = &types.EnvironmentTemplateVersion{}
+			return v.EnvironmentTemplateVersion.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEnvironmentTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetEnvironmentTemplateVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnvironmentTemplateVersion, schemas.GetEnvironmentTemplateVersionInput, schemas.GetEnvironmentTemplateVersionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetEnvironmentTemplateVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnvironmentTemplateVersion, schemas.GetEnvironmentTemplateVersionInput, schemas.GetEnvironmentTemplateVersionOutput), output: &GetEnvironmentTemplateVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

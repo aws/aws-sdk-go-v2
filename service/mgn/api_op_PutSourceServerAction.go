@@ -4,7 +4,9 @@ package mgn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -81,6 +83,104 @@ type PutSourceServerActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutSourceServerActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutSourceServerActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutSourceServerActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountID != nil {
+		s.WriteString(schemas.PutSourceServerActionRequest_accountID, *v.AccountID)
+	}
+	if v.ActionID != nil {
+		s.WriteString(schemas.PutSourceServerActionRequest_actionID, *v.ActionID)
+	}
+	if v.ActionName != nil {
+		s.WriteString(schemas.PutSourceServerActionRequest_actionName, *v.ActionName)
+	}
+	if v.Active != nil {
+		s.WriteBool(schemas.PutSourceServerActionRequest_active, *v.Active)
+	}
+	if v.Category != "" {
+		s.WriteString(schemas.PutSourceServerActionRequest_category, string(v.Category))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.PutSourceServerActionRequest_description, *v.Description)
+	}
+	if v.DocumentIdentifier != nil {
+		s.WriteString(schemas.PutSourceServerActionRequest_documentIdentifier, *v.DocumentIdentifier)
+	}
+	if v.DocumentVersion != nil {
+		s.WriteString(schemas.PutSourceServerActionRequest_documentVersion, *v.DocumentVersion)
+	}
+	serializeSsmDocumentExternalParameters(s, schemas.PutSourceServerActionRequest_externalParameters, v.ExternalParameters)
+	if v.MustSucceedForCutover != nil {
+		s.WriteBool(schemas.PutSourceServerActionRequest_mustSucceedForCutover, *v.MustSucceedForCutover)
+	}
+	if v.Order != nil {
+		s.WriteInt32(schemas.PutSourceServerActionRequest_order, *v.Order)
+	}
+	serializeSsmDocumentParameters(s, schemas.PutSourceServerActionRequest_parameters, v.Parameters)
+	if v.SourceServerID != nil {
+		s.WriteString(schemas.PutSourceServerActionRequest_sourceServerID, *v.SourceServerID)
+	}
+	if v.TimeoutSeconds != nil {
+		s.WriteInt32(schemas.PutSourceServerActionRequest_timeoutSeconds, *v.TimeoutSeconds)
+	}
+}
+func (v *PutSourceServerActionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutSourceServerActionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutSourceServerActionRequest_accountID:
+			v.AccountID = new(string)
+			return d.ReadString(schemas.PutSourceServerActionRequest_accountID, v.AccountID)
+		case schemas.PutSourceServerActionRequest_actionID:
+			v.ActionID = new(string)
+			return d.ReadString(schemas.PutSourceServerActionRequest_actionID, v.ActionID)
+		case schemas.PutSourceServerActionRequest_actionName:
+			v.ActionName = new(string)
+			return d.ReadString(schemas.PutSourceServerActionRequest_actionName, v.ActionName)
+		case schemas.PutSourceServerActionRequest_active:
+			v.Active = new(bool)
+			return d.ReadBool(schemas.PutSourceServerActionRequest_active, v.Active)
+		case schemas.PutSourceServerActionRequest_category:
+			var ev string
+			if err := d.ReadString(schemas.PutSourceServerActionRequest_category, &ev); err != nil {
+				return err
+			}
+			v.Category = types.ActionCategory(ev)
+			return nil
+		case schemas.PutSourceServerActionRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PutSourceServerActionRequest_description, v.Description)
+		case schemas.PutSourceServerActionRequest_documentIdentifier:
+			v.DocumentIdentifier = new(string)
+			return d.ReadString(schemas.PutSourceServerActionRequest_documentIdentifier, v.DocumentIdentifier)
+		case schemas.PutSourceServerActionRequest_documentVersion:
+			v.DocumentVersion = new(string)
+			return d.ReadString(schemas.PutSourceServerActionRequest_documentVersion, v.DocumentVersion)
+		case schemas.PutSourceServerActionRequest_externalParameters:
+			return deserializeSsmDocumentExternalParameters(d, schemas.PutSourceServerActionRequest_externalParameters, &v.ExternalParameters)
+		case schemas.PutSourceServerActionRequest_mustSucceedForCutover:
+			v.MustSucceedForCutover = new(bool)
+			return d.ReadBool(schemas.PutSourceServerActionRequest_mustSucceedForCutover, v.MustSucceedForCutover)
+		case schemas.PutSourceServerActionRequest_order:
+			v.Order = new(int32)
+			return d.ReadInt32(schemas.PutSourceServerActionRequest_order, v.Order)
+		case schemas.PutSourceServerActionRequest_parameters:
+			return deserializeSsmDocumentParameters(d, schemas.PutSourceServerActionRequest_parameters, &v.Parameters)
+		case schemas.PutSourceServerActionRequest_sourceServerID:
+			v.SourceServerID = new(string)
+			return d.ReadString(schemas.PutSourceServerActionRequest_sourceServerID, v.SourceServerID)
+		case schemas.PutSourceServerActionRequest_timeoutSeconds:
+			v.TimeoutSeconds = new(int32)
+			return d.ReadInt32(schemas.PutSourceServerActionRequest_timeoutSeconds, v.TimeoutSeconds)
+		}
+		return nil
+	})
+}
+
 type PutSourceServerActionOutput struct {
 
 	// Source server post migration custom action ID.
@@ -125,13 +225,96 @@ type PutSourceServerActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutSourceServerActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceServerActionDocument)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutSourceServerActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionID != nil {
+		s.WriteString(schemas.SourceServerActionDocument_actionID, *v.ActionID)
+	}
+	if v.ActionName != nil {
+		s.WriteString(schemas.SourceServerActionDocument_actionName, *v.ActionName)
+	}
+	if v.Active != nil {
+		s.WriteBool(schemas.SourceServerActionDocument_active, *v.Active)
+	}
+	if v.Category != "" {
+		s.WriteString(schemas.SourceServerActionDocument_category, string(v.Category))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.SourceServerActionDocument_description, *v.Description)
+	}
+	if v.DocumentIdentifier != nil {
+		s.WriteString(schemas.SourceServerActionDocument_documentIdentifier, *v.DocumentIdentifier)
+	}
+	if v.DocumentVersion != nil {
+		s.WriteString(schemas.SourceServerActionDocument_documentVersion, *v.DocumentVersion)
+	}
+	serializeSsmDocumentExternalParameters(s, schemas.SourceServerActionDocument_externalParameters, v.ExternalParameters)
+	if v.MustSucceedForCutover != nil {
+		s.WriteBool(schemas.SourceServerActionDocument_mustSucceedForCutover, *v.MustSucceedForCutover)
+	}
+	if v.Order != nil {
+		s.WriteInt32(schemas.SourceServerActionDocument_order, *v.Order)
+	}
+	serializeSsmDocumentParameters(s, schemas.SourceServerActionDocument_parameters, v.Parameters)
+	if v.TimeoutSeconds != nil {
+		s.WriteInt32(schemas.SourceServerActionDocument_timeoutSeconds, *v.TimeoutSeconds)
+	}
+}
+func (v *PutSourceServerActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceServerActionDocument, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceServerActionDocument_actionID:
+			v.ActionID = new(string)
+			return d.ReadString(schemas.SourceServerActionDocument_actionID, v.ActionID)
+		case schemas.SourceServerActionDocument_actionName:
+			v.ActionName = new(string)
+			return d.ReadString(schemas.SourceServerActionDocument_actionName, v.ActionName)
+		case schemas.SourceServerActionDocument_active:
+			v.Active = new(bool)
+			return d.ReadBool(schemas.SourceServerActionDocument_active, v.Active)
+		case schemas.SourceServerActionDocument_category:
+			var ev string
+			if err := d.ReadString(schemas.SourceServerActionDocument_category, &ev); err != nil {
+				return err
+			}
+			v.Category = types.ActionCategory(ev)
+			return nil
+		case schemas.SourceServerActionDocument_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.SourceServerActionDocument_description, v.Description)
+		case schemas.SourceServerActionDocument_documentIdentifier:
+			v.DocumentIdentifier = new(string)
+			return d.ReadString(schemas.SourceServerActionDocument_documentIdentifier, v.DocumentIdentifier)
+		case schemas.SourceServerActionDocument_documentVersion:
+			v.DocumentVersion = new(string)
+			return d.ReadString(schemas.SourceServerActionDocument_documentVersion, v.DocumentVersion)
+		case schemas.SourceServerActionDocument_externalParameters:
+			return deserializeSsmDocumentExternalParameters(d, schemas.SourceServerActionDocument_externalParameters, &v.ExternalParameters)
+		case schemas.SourceServerActionDocument_mustSucceedForCutover:
+			v.MustSucceedForCutover = new(bool)
+			return d.ReadBool(schemas.SourceServerActionDocument_mustSucceedForCutover, v.MustSucceedForCutover)
+		case schemas.SourceServerActionDocument_order:
+			v.Order = new(int32)
+			return d.ReadInt32(schemas.SourceServerActionDocument_order, v.Order)
+		case schemas.SourceServerActionDocument_parameters:
+			return deserializeSsmDocumentParameters(d, schemas.SourceServerActionDocument_parameters, &v.Parameters)
+		case schemas.SourceServerActionDocument_timeoutSeconds:
+			v.TimeoutSeconds = new(int32)
+			return d.ReadInt32(schemas.SourceServerActionDocument_timeoutSeconds, v.TimeoutSeconds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutSourceServerActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutSourceServerAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSourceServerAction, schemas.PutSourceServerActionRequest, schemas.SourceServerActionDocument)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutSourceServerAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSourceServerAction, schemas.PutSourceServerActionRequest, schemas.SourceServerActionDocument), output: &PutSourceServerActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

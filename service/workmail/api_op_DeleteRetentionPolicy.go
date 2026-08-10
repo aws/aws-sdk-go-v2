@@ -4,6 +4,8 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteRetentionPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRetentionPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRetentionPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRetentionPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteRetentionPolicyRequest_Id, *v.Id)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.DeleteRetentionPolicyRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type DeleteRetentionPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type DeleteRetentionPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRetentionPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRetentionPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRetentionPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteRetentionPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRetentionPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRetentionPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRetentionPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRetentionPolicy, schemas.DeleteRetentionPolicyRequest, schemas.DeleteRetentionPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteRetentionPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRetentionPolicy, schemas.DeleteRetentionPolicyRequest, schemas.DeleteRetentionPolicyResponse), output: &DeleteRetentionPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

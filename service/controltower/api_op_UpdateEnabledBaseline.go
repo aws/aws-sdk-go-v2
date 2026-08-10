@@ -4,7 +4,9 @@ package controltower
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/controltower/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/controltower/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,22 @@ type UpdateEnabledBaselineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEnabledBaselineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEnabledBaselineInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEnabledBaselineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaselineVersion != nil {
+		s.WriteString(schemas.UpdateEnabledBaselineInput_baselineVersion, *v.BaselineVersion)
+	}
+	if v.EnabledBaselineIdentifier != nil {
+		s.WriteString(schemas.UpdateEnabledBaselineInput_enabledBaselineIdentifier, *v.EnabledBaselineIdentifier)
+	}
+	serializeEnabledBaselineParameters(s, schemas.UpdateEnabledBaselineInput_parameters, v.Parameters)
+}
+
 type UpdateEnabledBaselineOutput struct {
 
 	// The ID (in UUID format) of the asynchronous UpdateEnabledBaseline operation.
@@ -61,13 +79,32 @@ type UpdateEnabledBaselineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEnabledBaselineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEnabledBaselineOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEnabledBaselineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationIdentifier != nil {
+		s.WriteString(schemas.UpdateEnabledBaselineOutput_operationIdentifier, *v.OperationIdentifier)
+	}
+}
+func (v *UpdateEnabledBaselineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEnabledBaselineOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEnabledBaselineOutput_operationIdentifier:
+			v.OperationIdentifier = new(string)
+			return d.ReadString(schemas.UpdateEnabledBaselineOutput_operationIdentifier, v.OperationIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEnabledBaselineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateEnabledBaseline{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEnabledBaseline, schemas.UpdateEnabledBaselineInput, schemas.UpdateEnabledBaselineOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateEnabledBaseline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEnabledBaseline, schemas.UpdateEnabledBaselineInput, schemas.UpdateEnabledBaselineOutput), output: &UpdateEnabledBaselineOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

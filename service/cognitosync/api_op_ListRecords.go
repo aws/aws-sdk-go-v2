@@ -4,7 +4,9 @@ package cognitosync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitosync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitosync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -89,6 +91,36 @@ type ListRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecordsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecordsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetName != nil {
+		s.WriteString(schemas.ListRecordsRequest_DatasetName, *v.DatasetName)
+	}
+	if v.IdentityId != nil {
+		s.WriteString(schemas.ListRecordsRequest_IdentityId, *v.IdentityId)
+	}
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.ListRecordsRequest_IdentityPoolId, *v.IdentityPoolId)
+	}
+	if v.LastSyncCount != nil {
+		s.WriteInt64(schemas.ListRecordsRequest_LastSyncCount, *v.LastSyncCount)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRecordsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecordsRequest_NextToken, *v.NextToken)
+	}
+	if v.SyncSessionToken != nil {
+		s.WriteString(schemas.ListRecordsRequest_SyncSessionToken, *v.SyncSessionToken)
+	}
+}
+
 // Returned for a successful ListRecordsRequest.
 type ListRecordsOutput struct {
 
@@ -125,13 +157,71 @@ type ListRecordsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecordsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecordsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != 0 {
+		s.WriteInt32(schemas.ListRecordsResponse_Count, v.Count)
+	}
+	if v.DatasetDeletedAfterRequestedSyncCount != false {
+		s.WriteBool(schemas.ListRecordsResponse_DatasetDeletedAfterRequestedSyncCount, v.DatasetDeletedAfterRequestedSyncCount)
+	}
+	if v.DatasetExists != false {
+		s.WriteBool(schemas.ListRecordsResponse_DatasetExists, v.DatasetExists)
+	}
+	if v.DatasetSyncCount != nil {
+		s.WriteInt64(schemas.ListRecordsResponse_DatasetSyncCount, *v.DatasetSyncCount)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteString(schemas.ListRecordsResponse_LastModifiedBy, *v.LastModifiedBy)
+	}
+	serializeMergedDatasetNameList(s, schemas.ListRecordsResponse_MergedDatasetNames, v.MergedDatasetNames)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecordsResponse_NextToken, *v.NextToken)
+	}
+	serializeRecordList(s, schemas.ListRecordsResponse_Records, v.Records)
+	if v.SyncSessionToken != nil {
+		s.WriteString(schemas.ListRecordsResponse_SyncSessionToken, *v.SyncSessionToken)
+	}
+}
+func (v *ListRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRecordsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRecordsResponse_Count:
+			return d.ReadInt32(schemas.ListRecordsResponse_Count, &v.Count)
+		case schemas.ListRecordsResponse_DatasetDeletedAfterRequestedSyncCount:
+			return d.ReadBool(schemas.ListRecordsResponse_DatasetDeletedAfterRequestedSyncCount, &v.DatasetDeletedAfterRequestedSyncCount)
+		case schemas.ListRecordsResponse_DatasetExists:
+			return d.ReadBool(schemas.ListRecordsResponse_DatasetExists, &v.DatasetExists)
+		case schemas.ListRecordsResponse_DatasetSyncCount:
+			v.DatasetSyncCount = new(int64)
+			return d.ReadInt64(schemas.ListRecordsResponse_DatasetSyncCount, v.DatasetSyncCount)
+		case schemas.ListRecordsResponse_LastModifiedBy:
+			v.LastModifiedBy = new(string)
+			return d.ReadString(schemas.ListRecordsResponse_LastModifiedBy, v.LastModifiedBy)
+		case schemas.ListRecordsResponse_MergedDatasetNames:
+			return deserializeMergedDatasetNameList(d, schemas.ListRecordsResponse_MergedDatasetNames, &v.MergedDatasetNames)
+		case schemas.ListRecordsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRecordsResponse_NextToken, v.NextToken)
+		case schemas.ListRecordsResponse_Records:
+			return deserializeRecordList(d, schemas.ListRecordsResponse_Records, &v.Records)
+		case schemas.ListRecordsResponse_SyncSessionToken:
+			v.SyncSessionToken = new(string)
+			return d.ReadString(schemas.ListRecordsResponse_SyncSessionToken, v.SyncSessionToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecords, schemas.ListRecordsRequest, schemas.ListRecordsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecords, schemas.ListRecordsRequest, schemas.ListRecordsResponse), output: &ListRecordsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

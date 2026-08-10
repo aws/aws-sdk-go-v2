@@ -4,6 +4,8 @@ package forecast
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeletePredictorBacktestExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePredictorBacktestExportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePredictorBacktestExportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePredictorBacktestExportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PredictorBacktestExportJobArn != nil {
+		s.WriteString(schemas.DeletePredictorBacktestExportJobRequest_PredictorBacktestExportJobArn, *v.PredictorBacktestExportJobArn)
+	}
+}
+
 type DeletePredictorBacktestExportJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeletePredictorBacktestExportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePredictorBacktestExportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePredictorBacktestExportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeletePredictorBacktestExportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePredictorBacktestExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeletePredictorBacktestExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePredictorBacktestExportJob, schemas.DeletePredictorBacktestExportJobRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeletePredictorBacktestExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePredictorBacktestExportJob, schemas.DeletePredictorBacktestExportJobRequest, nil), output: &DeletePredictorBacktestExportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

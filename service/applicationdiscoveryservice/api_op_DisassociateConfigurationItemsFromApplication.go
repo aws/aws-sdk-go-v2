@@ -4,6 +4,8 @@ package applicationdiscoveryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,19 @@ type DisassociateConfigurationItemsFromApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateConfigurationItemsFromApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateConfigurationItemsFromApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateConfigurationItemsFromApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationConfigurationId != nil {
+		s.WriteString(schemas.DisassociateConfigurationItemsFromApplicationRequest_applicationConfigurationId, *v.ApplicationConfigurationId)
+	}
+	serializeConfigurationIdList(s, schemas.DisassociateConfigurationItemsFromApplicationRequest_configurationIds, v.ConfigurationIds)
+}
+
 type DisassociateConfigurationItemsFromApplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +60,26 @@ type DisassociateConfigurationItemsFromApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateConfigurationItemsFromApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateConfigurationItemsFromApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateConfigurationItemsFromApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateConfigurationItemsFromApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateConfigurationItemsFromApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateConfigurationItemsFromApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateConfigurationItemsFromApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateConfigurationItemsFromApplication, schemas.DisassociateConfigurationItemsFromApplicationRequest, schemas.DisassociateConfigurationItemsFromApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisassociateConfigurationItemsFromApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateConfigurationItemsFromApplication, schemas.DisassociateConfigurationItemsFromApplicationRequest, schemas.DisassociateConfigurationItemsFromApplicationResponse), output: &DisassociateConfigurationItemsFromApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package notifications
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/notifications/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DisassociateOrganizationalUnitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateOrganizationalUnitInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateOrganizationalUnitRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateOrganizationalUnitInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotificationConfigurationArn != nil {
+		s.WriteString(schemas.DisassociateOrganizationalUnitRequest_notificationConfigurationArn, *v.NotificationConfigurationArn)
+	}
+	if v.OrganizationalUnitId != nil {
+		s.WriteString(schemas.DisassociateOrganizationalUnitRequest_organizationalUnitId, *v.OrganizationalUnitId)
+	}
+}
+
 type DisassociateOrganizationalUnitOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +64,26 @@ type DisassociateOrganizationalUnitOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateOrganizationalUnitOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateOrganizationalUnitResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateOrganizationalUnitOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateOrganizationalUnitOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateOrganizationalUnitResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateOrganizationalUnitMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateOrganizationalUnit{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateOrganizationalUnit, schemas.DisassociateOrganizationalUnitRequest, schemas.DisassociateOrganizationalUnitResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateOrganizationalUnit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateOrganizationalUnit, schemas.DisassociateOrganizationalUnitRequest, schemas.DisassociateOrganizationalUnitResponse), output: &DisassociateOrganizationalUnitOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

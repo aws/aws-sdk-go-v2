@@ -4,6 +4,8 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,24 @@ type DeleteMailboxPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMailboxPermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMailboxPermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMailboxPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityId != nil {
+		s.WriteString(schemas.DeleteMailboxPermissionsRequest_EntityId, *v.EntityId)
+	}
+	if v.GranteeId != nil {
+		s.WriteString(schemas.DeleteMailboxPermissionsRequest_GranteeId, *v.GranteeId)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.DeleteMailboxPermissionsRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type DeleteMailboxPermissionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -72,13 +92,26 @@ type DeleteMailboxPermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMailboxPermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMailboxPermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMailboxPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteMailboxPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteMailboxPermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMailboxPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteMailboxPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMailboxPermissions, schemas.DeleteMailboxPermissionsRequest, schemas.DeleteMailboxPermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteMailboxPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMailboxPermissions, schemas.DeleteMailboxPermissionsRequest, schemas.DeleteMailboxPermissionsResponse), output: &DeleteMailboxPermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

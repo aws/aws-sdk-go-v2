@@ -4,6 +4,8 @@ package securitylake
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securitylake/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type CreateDataLakeExceptionSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataLakeExceptionSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataLakeExceptionSubscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataLakeExceptionSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExceptionTimeToLive != nil {
+		s.WriteInt64(schemas.CreateDataLakeExceptionSubscriptionRequest_exceptionTimeToLive, *v.ExceptionTimeToLive)
+	}
+	if v.NotificationEndpoint != nil {
+		s.WriteString(schemas.CreateDataLakeExceptionSubscriptionRequest_notificationEndpoint, *v.NotificationEndpoint)
+	}
+	if v.SubscriptionProtocol != nil {
+		s.WriteString(schemas.CreateDataLakeExceptionSubscriptionRequest_subscriptionProtocol, *v.SubscriptionProtocol)
+	}
+}
+
 type CreateDataLakeExceptionSubscriptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +72,26 @@ type CreateDataLakeExceptionSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataLakeExceptionSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataLakeExceptionSubscriptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataLakeExceptionSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateDataLakeExceptionSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDataLakeExceptionSubscriptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDataLakeExceptionSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataLakeExceptionSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataLakeExceptionSubscription, schemas.CreateDataLakeExceptionSubscriptionRequest, schemas.CreateDataLakeExceptionSubscriptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataLakeExceptionSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataLakeExceptionSubscription, schemas.CreateDataLakeExceptionSubscriptionRequest, schemas.CreateDataLakeExceptionSubscriptionResponse), output: &CreateDataLakeExceptionSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

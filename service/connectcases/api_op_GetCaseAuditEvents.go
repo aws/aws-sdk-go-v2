@@ -5,7 +5,9 @@ package connectcases
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,27 @@ type GetCaseAuditEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCaseAuditEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCaseAuditEventsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCaseAuditEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseId != nil {
+		s.WriteString(schemas.GetCaseAuditEventsRequest_caseId, *v.CaseId)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.GetCaseAuditEventsRequest_domainId, *v.DomainId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetCaseAuditEventsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCaseAuditEventsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetCaseAuditEventsOutput struct {
 
 	// A list of case audits where each represents a particular edit of the case.
@@ -65,13 +88,35 @@ type GetCaseAuditEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCaseAuditEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCaseAuditEventsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCaseAuditEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuditEventsList(s, schemas.GetCaseAuditEventsResponse_auditEvents, v.AuditEvents)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCaseAuditEventsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *GetCaseAuditEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCaseAuditEventsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCaseAuditEventsResponse_auditEvents:
+			return deserializeAuditEventsList(d, schemas.GetCaseAuditEventsResponse_auditEvents, &v.AuditEvents)
+		case schemas.GetCaseAuditEventsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetCaseAuditEventsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCaseAuditEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCaseAuditEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCaseAuditEvents, schemas.GetCaseAuditEventsRequest, schemas.GetCaseAuditEventsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCaseAuditEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCaseAuditEvents, schemas.GetCaseAuditEventsRequest, schemas.GetCaseAuditEventsResponse), output: &GetCaseAuditEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

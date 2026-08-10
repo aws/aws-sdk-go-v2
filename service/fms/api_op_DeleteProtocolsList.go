@@ -4,6 +4,8 @@ package fms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteProtocolsListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProtocolsListInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProtocolsListRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProtocolsListInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ListId != nil {
+		s.WriteString(schemas.DeleteProtocolsListRequest_ListId, *v.ListId)
+	}
+}
+
 type DeleteProtocolsListOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteProtocolsListOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProtocolsListOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProtocolsListOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteProtocolsListOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteProtocolsListMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteProtocolsList{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProtocolsList, schemas.DeleteProtocolsListRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteProtocolsList{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProtocolsList, schemas.DeleteProtocolsListRequest, nil), output: &DeleteProtocolsListOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

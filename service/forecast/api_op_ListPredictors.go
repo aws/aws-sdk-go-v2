@@ -5,7 +5,9 @@ package forecast
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,22 @@ type ListPredictorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPredictorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPredictorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPredictorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilters(s, schemas.ListPredictorsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPredictorsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPredictorsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListPredictorsOutput struct {
 
 	// If the response is truncated, Amazon Forecast returns this token. To retrieve
@@ -79,13 +97,35 @@ type ListPredictorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPredictorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPredictorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPredictorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPredictorsResponse_NextToken, *v.NextToken)
+	}
+	serializePredictors(s, schemas.ListPredictorsResponse_Predictors, v.Predictors)
+}
+func (v *ListPredictorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPredictorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPredictorsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPredictorsResponse_NextToken, v.NextToken)
+		case schemas.ListPredictorsResponse_Predictors:
+			return deserializePredictors(d, schemas.ListPredictorsResponse_Predictors, &v.Predictors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPredictorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPredictors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPredictors, schemas.ListPredictorsRequest, schemas.ListPredictorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPredictors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPredictors, schemas.ListPredictorsRequest, schemas.ListPredictorsResponse), output: &ListPredictorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

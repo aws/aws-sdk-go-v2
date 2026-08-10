@@ -4,7 +4,9 @@ package route53domains
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,23 @@ type AssociateDelegationSignerToDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateDelegationSignerToDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateDelegationSignerToDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateDelegationSignerToDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.AssociateDelegationSignerToDomainRequest_DomainName, *v.DomainName)
+	}
+	if v.SigningAttributes != nil {
+		s.WriteStruct(schemas.AssociateDelegationSignerToDomainRequest_SigningAttributes)
+		v.SigningAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type AssociateDelegationSignerToDomainOutput struct {
 
 	// The identifier for tracking the progress of the request. To query the operation
@@ -63,13 +82,32 @@ type AssociateDelegationSignerToDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateDelegationSignerToDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateDelegationSignerToDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateDelegationSignerToDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.AssociateDelegationSignerToDomainResponse_OperationId, *v.OperationId)
+	}
+}
+func (v *AssociateDelegationSignerToDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateDelegationSignerToDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateDelegationSignerToDomainResponse_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.AssociateDelegationSignerToDomainResponse_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateDelegationSignerToDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateDelegationSignerToDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateDelegationSignerToDomain, schemas.AssociateDelegationSignerToDomainRequest, schemas.AssociateDelegationSignerToDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateDelegationSignerToDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateDelegationSignerToDomain, schemas.AssociateDelegationSignerToDomainRequest, schemas.AssociateDelegationSignerToDomainResponse), output: &AssociateDelegationSignerToDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

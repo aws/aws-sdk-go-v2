@@ -4,7 +4,9 @@ package chimesdkvoice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type GetVoiceToneAnalysisTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVoiceToneAnalysisTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVoiceToneAnalysisTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVoiceToneAnalysisTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsCaller != nil {
+		s.WriteBool(schemas.GetVoiceToneAnalysisTaskRequest_IsCaller, *v.IsCaller)
+	}
+	if v.VoiceConnectorId != nil {
+		s.WriteString(schemas.GetVoiceToneAnalysisTaskRequest_VoiceConnectorId, *v.VoiceConnectorId)
+	}
+	if v.VoiceToneAnalysisTaskId != nil {
+		s.WriteString(schemas.GetVoiceToneAnalysisTaskRequest_VoiceToneAnalysisTaskId, *v.VoiceToneAnalysisTaskId)
+	}
+}
+
 type GetVoiceToneAnalysisTaskOutput struct {
 
 	// The details of the voice tone analysis task.
@@ -56,13 +76,34 @@ type GetVoiceToneAnalysisTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVoiceToneAnalysisTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVoiceToneAnalysisTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVoiceToneAnalysisTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VoiceToneAnalysisTask != nil {
+		s.WriteStruct(schemas.GetVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask)
+		v.VoiceToneAnalysisTask.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetVoiceToneAnalysisTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetVoiceToneAnalysisTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask:
+			v.VoiceToneAnalysisTask = &types.VoiceToneAnalysisTask{}
+			return v.VoiceToneAnalysisTask.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetVoiceToneAnalysisTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetVoiceToneAnalysisTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVoiceToneAnalysisTask, schemas.GetVoiceToneAnalysisTaskRequest, schemas.GetVoiceToneAnalysisTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetVoiceToneAnalysisTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVoiceToneAnalysisTask, schemas.GetVoiceToneAnalysisTaskRequest, schemas.GetVoiceToneAnalysisTaskResponse), output: &GetVoiceToneAnalysisTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

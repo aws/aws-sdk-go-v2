@@ -4,7 +4,9 @@ package chime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -51,6 +53,23 @@ type PutRetentionSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRetentionSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRetentionSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRetentionSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.PutRetentionSettingsRequest_AccountId, *v.AccountId)
+	}
+	if v.RetentionSettings != nil {
+		s.WriteStruct(schemas.PutRetentionSettingsRequest_RetentionSettings)
+		v.RetentionSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PutRetentionSettingsOutput struct {
 
 	// The timestamp representing the time at which the specified items are
@@ -66,13 +85,40 @@ type PutRetentionSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRetentionSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRetentionSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRetentionSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InitiateDeletionTimestamp != nil {
+		s.WriteTime(schemas.PutRetentionSettingsResponse_InitiateDeletionTimestamp, *v.InitiateDeletionTimestamp)
+	}
+	if v.RetentionSettings != nil {
+		s.WriteStruct(schemas.PutRetentionSettingsResponse_RetentionSettings)
+		v.RetentionSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutRetentionSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutRetentionSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutRetentionSettingsResponse_InitiateDeletionTimestamp:
+			v.InitiateDeletionTimestamp = new(time.Time)
+			return d.ReadTime(schemas.PutRetentionSettingsResponse_InitiateDeletionTimestamp, v.InitiateDeletionTimestamp)
+		case schemas.PutRetentionSettingsResponse_RetentionSettings:
+			v.RetentionSettings = &types.RetentionSettings{}
+			return v.RetentionSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutRetentionSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutRetentionSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRetentionSettings, schemas.PutRetentionSettingsRequest, schemas.PutRetentionSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutRetentionSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRetentionSettings, schemas.PutRetentionSettingsRequest, schemas.PutRetentionSettingsResponse), output: &PutRetentionSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

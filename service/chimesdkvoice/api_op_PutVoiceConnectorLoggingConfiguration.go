@@ -4,7 +4,9 @@ package chimesdkvoice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,23 @@ type PutVoiceConnectorLoggingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutVoiceConnectorLoggingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutVoiceConnectorLoggingConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutVoiceConnectorLoggingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoggingConfiguration != nil {
+		s.WriteStruct(schemas.PutVoiceConnectorLoggingConfigurationRequest_LoggingConfiguration)
+		v.LoggingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VoiceConnectorId != nil {
+		s.WriteString(schemas.PutVoiceConnectorLoggingConfigurationRequest_VoiceConnectorId, *v.VoiceConnectorId)
+	}
+}
+
 type PutVoiceConnectorLoggingConfigurationOutput struct {
 
 	// The updated logging configuration.
@@ -50,13 +69,34 @@ type PutVoiceConnectorLoggingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutVoiceConnectorLoggingConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutVoiceConnectorLoggingConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutVoiceConnectorLoggingConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoggingConfiguration != nil {
+		s.WriteStruct(schemas.PutVoiceConnectorLoggingConfigurationResponse_LoggingConfiguration)
+		v.LoggingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutVoiceConnectorLoggingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutVoiceConnectorLoggingConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutVoiceConnectorLoggingConfigurationResponse_LoggingConfiguration:
+			v.LoggingConfiguration = &types.LoggingConfiguration{}
+			return v.LoggingConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutVoiceConnectorLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutVoiceConnectorLoggingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutVoiceConnectorLoggingConfiguration, schemas.PutVoiceConnectorLoggingConfigurationRequest, schemas.PutVoiceConnectorLoggingConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutVoiceConnectorLoggingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutVoiceConnectorLoggingConfiguration, schemas.PutVoiceConnectorLoggingConfigurationRequest, schemas.PutVoiceConnectorLoggingConfigurationResponse), output: &PutVoiceConnectorLoggingConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

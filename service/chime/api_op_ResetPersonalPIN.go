@@ -4,7 +4,9 @@ package chime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type ResetPersonalPINInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetPersonalPINInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetPersonalPINRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetPersonalPINInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ResetPersonalPINRequest_AccountId, *v.AccountId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.ResetPersonalPINRequest_UserId, *v.UserId)
+	}
+}
+
 type ResetPersonalPINOutput struct {
 
 	// The user details and new personal meeting PIN.
@@ -51,13 +68,34 @@ type ResetPersonalPINOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetPersonalPINOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetPersonalPINResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetPersonalPINOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.User != nil {
+		s.WriteStruct(schemas.ResetPersonalPINResponse_User)
+		v.User.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ResetPersonalPINOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResetPersonalPINResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResetPersonalPINResponse_User:
+			v.User = &types.User{}
+			return v.User.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResetPersonalPINMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpResetPersonalPIN{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetPersonalPIN, schemas.ResetPersonalPINRequest, schemas.ResetPersonalPINResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpResetPersonalPIN{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetPersonalPIN, schemas.ResetPersonalPINRequest, schemas.ResetPersonalPINResponse), output: &ResetPersonalPINOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

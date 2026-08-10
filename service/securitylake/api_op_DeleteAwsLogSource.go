@@ -4,7 +4,9 @@ package securitylake
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securitylake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securitylake/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,16 @@ type DeleteAwsLogSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAwsLogSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAwsLogSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAwsLogSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAwsLogSourceConfigurationList(s, schemas.DeleteAwsLogSourceRequest_sources, v.Sources)
+}
+
 type DeleteAwsLogSourceOutput struct {
 
 	// Deletion of the Amazon Web Services sources failed as the account is not a part
@@ -55,13 +67,29 @@ type DeleteAwsLogSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAwsLogSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAwsLogSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAwsLogSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountList(s, schemas.DeleteAwsLogSourceResponse_failed, v.Failed)
+}
+func (v *DeleteAwsLogSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAwsLogSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAwsLogSourceResponse_failed:
+			return deserializeAccountList(d, schemas.DeleteAwsLogSourceResponse_failed, &v.Failed)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAwsLogSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAwsLogSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAwsLogSource, schemas.DeleteAwsLogSourceRequest, schemas.DeleteAwsLogSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAwsLogSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAwsLogSource, schemas.DeleteAwsLogSourceRequest, schemas.DeleteAwsLogSourceResponse), output: &DeleteAwsLogSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

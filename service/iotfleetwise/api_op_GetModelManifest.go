@@ -4,7 +4,9 @@ package iotfleetwise
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,28 @@ type GetModelManifestInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetModelManifestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetModelManifestRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetModelManifestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetModelManifestRequest_name, *v.Name)
+	}
+}
+func (v *GetModelManifestInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetModelManifestRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetModelManifestRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetModelManifestRequest_name, v.Name)
+		}
+		return nil
+	})
 }
 
 type GetModelManifestOutput struct {
@@ -74,13 +98,72 @@ type GetModelManifestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetModelManifestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetModelManifestResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetModelManifestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetModelManifestResponse_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetModelManifestResponse_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetModelManifestResponse_description, *v.Description)
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.GetModelManifestResponse_lastModificationTime, *v.LastModificationTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetModelManifestResponse_name, *v.Name)
+	}
+	if v.SignalCatalogArn != nil {
+		s.WriteString(schemas.GetModelManifestResponse_signalCatalogArn, *v.SignalCatalogArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetModelManifestResponse_status, string(v.Status))
+	}
+}
+func (v *GetModelManifestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetModelManifestResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetModelManifestResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetModelManifestResponse_arn, v.Arn)
+		case schemas.GetModelManifestResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetModelManifestResponse_creationTime, v.CreationTime)
+		case schemas.GetModelManifestResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetModelManifestResponse_description, v.Description)
+		case schemas.GetModelManifestResponse_lastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.GetModelManifestResponse_lastModificationTime, v.LastModificationTime)
+		case schemas.GetModelManifestResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetModelManifestResponse_name, v.Name)
+		case schemas.GetModelManifestResponse_signalCatalogArn:
+			v.SignalCatalogArn = new(string)
+			return d.ReadString(schemas.GetModelManifestResponse_signalCatalogArn, v.SignalCatalogArn)
+		case schemas.GetModelManifestResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetModelManifestResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ManifestStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetModelManifestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetModelManifest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetModelManifest, schemas.GetModelManifestRequest, schemas.GetModelManifestResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetModelManifest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetModelManifest, schemas.GetModelManifestRequest, schemas.GetModelManifestResponse), output: &GetModelManifestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

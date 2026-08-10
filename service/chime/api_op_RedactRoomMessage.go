@@ -4,6 +4,8 @@ package chime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type RedactRoomMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RedactRoomMessageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedactRoomMessageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedactRoomMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.RedactRoomMessageRequest_AccountId, *v.AccountId)
+	}
+	if v.MessageId != nil {
+		s.WriteString(schemas.RedactRoomMessageRequest_MessageId, *v.MessageId)
+	}
+	if v.RoomId != nil {
+		s.WriteString(schemas.RedactRoomMessageRequest_RoomId, *v.RoomId)
+	}
+}
+
 type RedactRoomMessageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +70,26 @@ type RedactRoomMessageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RedactRoomMessageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedactRoomMessageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedactRoomMessageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RedactRoomMessageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RedactRoomMessageResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRedactRoomMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRedactRoomMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RedactRoomMessage, schemas.RedactRoomMessageRequest, schemas.RedactRoomMessageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRedactRoomMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RedactRoomMessage, schemas.RedactRoomMessageRequest, schemas.RedactRoomMessageResponse), output: &RedactRoomMessageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

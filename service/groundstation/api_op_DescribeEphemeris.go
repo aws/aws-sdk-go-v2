@@ -4,7 +4,9 @@ package groundstation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeEphemerisInput struct {
 	EphemerisId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeEphemerisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEphemerisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEphemerisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EphemerisId != nil {
+		s.WriteString(schemas.DescribeEphemerisRequest_ephemerisId, *v.EphemerisId)
+	}
 }
 
 type DescribeEphemerisOutput struct {
@@ -82,13 +96,91 @@ type DescribeEphemerisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEphemerisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEphemerisResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEphemerisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeEphemerisResponse_creationTime, *v.CreationTime)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.DescribeEphemerisResponse_enabled, *v.Enabled)
+	}
+	if v.EphemerisId != nil {
+		s.WriteString(schemas.DescribeEphemerisResponse_ephemerisId, *v.EphemerisId)
+	}
+	serializeEphemerisErrorReasonList(s, schemas.DescribeEphemerisResponse_errorReasons, v.ErrorReasons)
+	if v.InvalidReason != "" {
+		s.WriteString(schemas.DescribeEphemerisResponse_invalidReason, string(v.InvalidReason))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeEphemerisResponse_name, *v.Name)
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.DescribeEphemerisResponse_priority, *v.Priority)
+	}
+	if v.SatelliteId != nil {
+		s.WriteString(schemas.DescribeEphemerisResponse_satelliteId, *v.SatelliteId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeEphemerisResponse_status, string(v.Status))
+	}
+	serializeEphemerisTypeDescription(s, schemas.DescribeEphemerisResponse_suppliedData, v.SuppliedData)
+	serializeTagsMap(s, schemas.DescribeEphemerisResponse_tags, v.Tags)
+}
+func (v *DescribeEphemerisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEphemerisResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEphemerisResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeEphemerisResponse_creationTime, v.CreationTime)
+		case schemas.DescribeEphemerisResponse_enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.DescribeEphemerisResponse_enabled, v.Enabled)
+		case schemas.DescribeEphemerisResponse_ephemerisId:
+			v.EphemerisId = new(string)
+			return d.ReadString(schemas.DescribeEphemerisResponse_ephemerisId, v.EphemerisId)
+		case schemas.DescribeEphemerisResponse_errorReasons:
+			return deserializeEphemerisErrorReasonList(d, schemas.DescribeEphemerisResponse_errorReasons, &v.ErrorReasons)
+		case schemas.DescribeEphemerisResponse_invalidReason:
+			var ev string
+			if err := d.ReadString(schemas.DescribeEphemerisResponse_invalidReason, &ev); err != nil {
+				return err
+			}
+			v.InvalidReason = types.EphemerisInvalidReason(ev)
+			return nil
+		case schemas.DescribeEphemerisResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeEphemerisResponse_name, v.Name)
+		case schemas.DescribeEphemerisResponse_priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.DescribeEphemerisResponse_priority, v.Priority)
+		case schemas.DescribeEphemerisResponse_satelliteId:
+			v.SatelliteId = new(string)
+			return d.ReadString(schemas.DescribeEphemerisResponse_satelliteId, v.SatelliteId)
+		case schemas.DescribeEphemerisResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeEphemerisResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.EphemerisStatus(ev)
+			return nil
+		case schemas.DescribeEphemerisResponse_suppliedData:
+			return deserializeEphemerisTypeDescription(d, schemas.DescribeEphemerisResponse_suppliedData, &v.SuppliedData)
+		case schemas.DescribeEphemerisResponse_tags:
+			return deserializeTagsMap(d, schemas.DescribeEphemerisResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEphemerisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeEphemeris{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEphemeris, schemas.DescribeEphemerisRequest, schemas.DescribeEphemerisResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeEphemeris{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEphemeris, schemas.DescribeEphemerisRequest, schemas.DescribeEphemerisResponse), output: &DescribeEphemerisOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

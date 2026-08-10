@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mediastoredata/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -32,6 +33,27 @@ func (e *ContainerNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ContainerNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ContainerNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ContainerNotFoundException_Message, *v.Message)
+	}
+}
+func (v *ContainerNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ContainerNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The service is temporarily unavailable.
 type InternalServerError struct {
@@ -58,6 +80,27 @@ func (e *InternalServerError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServerError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServerError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServerError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InternalServerError_Message, *v.Message)
+	}
+}
+func (v *InternalServerError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServerError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServerError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServerError_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Could not perform an operation on an object that does not exist.
 type ObjectNotFoundException struct {
@@ -84,6 +127,27 @@ func (e *ObjectNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ObjectNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ObjectNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ObjectNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ObjectNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ObjectNotFoundException_Message, *v.Message)
+	}
+}
+func (v *ObjectNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ObjectNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ObjectNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ObjectNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The requested content range is not valid.
 type RequestedRangeNotSatisfiableException struct {
@@ -111,4 +175,25 @@ func (e *RequestedRangeNotSatisfiableException) ErrorCode() string {
 }
 func (e *RequestedRangeNotSatisfiableException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+func (v *RequestedRangeNotSatisfiableException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestedRangeNotSatisfiableException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestedRangeNotSatisfiableException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.RequestedRangeNotSatisfiableException_Message, *v.Message)
+	}
+}
+func (v *RequestedRangeNotSatisfiableException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestedRangeNotSatisfiableException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestedRangeNotSatisfiableException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.RequestedRangeNotSatisfiableException_Message, v.Message)
+		}
+		return nil
+	})
 }

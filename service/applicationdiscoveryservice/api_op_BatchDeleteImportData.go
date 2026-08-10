@@ -4,7 +4,9 @@ package applicationdiscoveryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,19 @@ type BatchDeleteImportDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteImportDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteImportDataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteImportDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeleteHistory != false {
+		s.WriteBool(schemas.BatchDeleteImportDataRequest_deleteHistory, v.DeleteHistory)
+	}
+	serializeToDeleteIdentifierList(s, schemas.BatchDeleteImportDataRequest_importTaskIds, v.ImportTaskIds)
+}
+
 type BatchDeleteImportDataOutput struct {
 
 	// Error messages returned for each import task that you deleted as a response for
@@ -57,13 +72,29 @@ type BatchDeleteImportDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteImportDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteImportDataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteImportDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchDeleteImportDataErrorList(s, schemas.BatchDeleteImportDataResponse_errors, v.Errors)
+}
+func (v *BatchDeleteImportDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteImportDataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteImportDataResponse_errors:
+			return deserializeBatchDeleteImportDataErrorList(d, schemas.BatchDeleteImportDataResponse_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteImportDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDeleteImportData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteImportData, schemas.BatchDeleteImportDataRequest, schemas.BatchDeleteImportDataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchDeleteImportData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteImportData, schemas.BatchDeleteImportDataRequest, schemas.BatchDeleteImportDataResponse), output: &BatchDeleteImportDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

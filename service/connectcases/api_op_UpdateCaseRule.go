@@ -4,7 +4,9 @@ package connectcases
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,28 @@ type UpdateCaseRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCaseRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCaseRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCaseRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseRuleId != nil {
+		s.WriteString(schemas.UpdateCaseRuleRequest_caseRuleId, *v.CaseRuleId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateCaseRuleRequest_description, *v.Description)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.UpdateCaseRuleRequest_domainId, *v.DomainId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateCaseRuleRequest_name, *v.Name)
+	}
+	serializeCaseRuleDetails(s, schemas.UpdateCaseRuleRequest_rule, v.Rule)
+}
+
 type UpdateCaseRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -59,13 +83,26 @@ type UpdateCaseRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCaseRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCaseRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCaseRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateCaseRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCaseRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCaseRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCaseRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCaseRule, schemas.UpdateCaseRuleRequest, schemas.UpdateCaseRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCaseRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCaseRule, schemas.UpdateCaseRuleRequest, schemas.UpdateCaseRuleResponse), output: &UpdateCaseRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

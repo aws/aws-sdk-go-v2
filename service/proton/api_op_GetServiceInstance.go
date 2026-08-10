@@ -5,7 +5,9 @@ package proton
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -46,6 +48,34 @@ type GetServiceInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceInstanceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetServiceInstanceInput_name, *v.Name)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.GetServiceInstanceInput_serviceName, *v.ServiceName)
+	}
+}
+func (v *GetServiceInstanceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceInstanceInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceInstanceInput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetServiceInstanceInput_name, v.Name)
+		case schemas.GetServiceInstanceInput_serviceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.GetServiceInstanceInput_serviceName, v.ServiceName)
+		}
+		return nil
+	})
+}
+
 type GetServiceInstanceOutput struct {
 
 	// The detailed data of the requested service instance.
@@ -59,13 +89,34 @@ type GetServiceInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceInstanceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceInstance != nil {
+		s.WriteStruct(schemas.GetServiceInstanceOutput_serviceInstance)
+		v.ServiceInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetServiceInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceInstanceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceInstanceOutput_serviceInstance:
+			v.ServiceInstance = &types.ServiceInstance{}
+			return v.ServiceInstance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetServiceInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetServiceInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceInstance, schemas.GetServiceInstanceInput, schemas.GetServiceInstanceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetServiceInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceInstance, schemas.GetServiceInstanceInput, schemas.GetServiceInstanceOutput), output: &GetServiceInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

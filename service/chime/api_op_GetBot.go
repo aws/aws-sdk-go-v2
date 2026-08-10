@@ -4,7 +4,9 @@ package chime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type GetBotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetBotRequest_AccountId, *v.AccountId)
+	}
+	if v.BotId != nil {
+		s.WriteString(schemas.GetBotRequest_BotId, *v.BotId)
+	}
+}
+
 type GetBotOutput struct {
 
 	// The chat bot details.
@@ -51,13 +68,34 @@ type GetBotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBotResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bot != nil {
+		s.WriteStruct(schemas.GetBotResponse_Bot)
+		v.Bot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetBotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBotResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBotResponse_Bot:
+			v.Bot = &types.Bot{}
+			return v.Bot.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBot, schemas.GetBotRequest, schemas.GetBotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBot, schemas.GetBotRequest, schemas.GetBotResponse), output: &GetBotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

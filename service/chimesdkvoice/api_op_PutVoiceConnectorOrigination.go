@@ -4,7 +4,9 @@ package chimesdkvoice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,23 @@ type PutVoiceConnectorOriginationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutVoiceConnectorOriginationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutVoiceConnectorOriginationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutVoiceConnectorOriginationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Origination != nil {
+		s.WriteStruct(schemas.PutVoiceConnectorOriginationRequest_Origination)
+		v.Origination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VoiceConnectorId != nil {
+		s.WriteString(schemas.PutVoiceConnectorOriginationRequest_VoiceConnectorId, *v.VoiceConnectorId)
+	}
+}
+
 type PutVoiceConnectorOriginationOutput struct {
 
 	// The updated origination settings.
@@ -50,13 +69,34 @@ type PutVoiceConnectorOriginationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutVoiceConnectorOriginationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutVoiceConnectorOriginationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutVoiceConnectorOriginationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Origination != nil {
+		s.WriteStruct(schemas.PutVoiceConnectorOriginationResponse_Origination)
+		v.Origination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutVoiceConnectorOriginationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutVoiceConnectorOriginationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutVoiceConnectorOriginationResponse_Origination:
+			v.Origination = &types.Origination{}
+			return v.Origination.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutVoiceConnectorOriginationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutVoiceConnectorOrigination{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutVoiceConnectorOrigination, schemas.PutVoiceConnectorOriginationRequest, schemas.PutVoiceConnectorOriginationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutVoiceConnectorOrigination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutVoiceConnectorOrigination, schemas.PutVoiceConnectorOriginationRequest, schemas.PutVoiceConnectorOriginationResponse), output: &PutVoiceConnectorOriginationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

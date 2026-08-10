@@ -4,6 +4,8 @@ package dax
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/dax/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeleteSubnetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSubnetGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSubnetGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSubnetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SubnetGroupName != nil {
+		s.WriteString(schemas.DeleteSubnetGroupRequest_SubnetGroupName, *v.SubnetGroupName)
+	}
+}
+
 type DeleteSubnetGroupOutput struct {
 
 	// A user-specified message for this action (i.e., a reason for deleting the
@@ -47,13 +61,32 @@ type DeleteSubnetGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSubnetGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSubnetGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSubnetGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeletionMessage != nil {
+		s.WriteString(schemas.DeleteSubnetGroupResponse_DeletionMessage, *v.DeletionMessage)
+	}
+}
+func (v *DeleteSubnetGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSubnetGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSubnetGroupResponse_DeletionMessage:
+			v.DeletionMessage = new(string)
+			return d.ReadString(schemas.DeleteSubnetGroupResponse_DeletionMessage, v.DeletionMessage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteSubnetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSubnetGroup, schemas.DeleteSubnetGroupRequest, schemas.DeleteSubnetGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteSubnetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSubnetGroup, schemas.DeleteSubnetGroupRequest, schemas.DeleteSubnetGroupResponse), output: &DeleteSubnetGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

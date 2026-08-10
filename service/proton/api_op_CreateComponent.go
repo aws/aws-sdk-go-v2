@@ -5,7 +5,9 @@ package proton
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -97,6 +99,79 @@ type CreateComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateComponentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateComponentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateComponentInput_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateComponentInput_description, *v.Description)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.CreateComponentInput_environmentName, *v.EnvironmentName)
+	}
+	if v.Manifest != nil {
+		s.WriteString(schemas.CreateComponentInput_manifest, *v.Manifest)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateComponentInput_name, *v.Name)
+	}
+	if v.ServiceInstanceName != nil {
+		s.WriteString(schemas.CreateComponentInput_serviceInstanceName, *v.ServiceInstanceName)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.CreateComponentInput_serviceName, *v.ServiceName)
+	}
+	if v.ServiceSpec != nil {
+		s.WriteString(schemas.CreateComponentInput_serviceSpec, *v.ServiceSpec)
+	}
+	serializeTagList(s, schemas.CreateComponentInput_tags, v.Tags)
+	if v.TemplateFile != nil {
+		s.WriteString(schemas.CreateComponentInput_templateFile, *v.TemplateFile)
+	}
+}
+func (v *CreateComponentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateComponentInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateComponentInput_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateComponentInput_clientToken, v.ClientToken)
+		case schemas.CreateComponentInput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateComponentInput_description, v.Description)
+		case schemas.CreateComponentInput_environmentName:
+			v.EnvironmentName = new(string)
+			return d.ReadString(schemas.CreateComponentInput_environmentName, v.EnvironmentName)
+		case schemas.CreateComponentInput_manifest:
+			v.Manifest = new(string)
+			return d.ReadString(schemas.CreateComponentInput_manifest, v.Manifest)
+		case schemas.CreateComponentInput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateComponentInput_name, v.Name)
+		case schemas.CreateComponentInput_serviceInstanceName:
+			v.ServiceInstanceName = new(string)
+			return d.ReadString(schemas.CreateComponentInput_serviceInstanceName, v.ServiceInstanceName)
+		case schemas.CreateComponentInput_serviceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.CreateComponentInput_serviceName, v.ServiceName)
+		case schemas.CreateComponentInput_serviceSpec:
+			v.ServiceSpec = new(string)
+			return d.ReadString(schemas.CreateComponentInput_serviceSpec, v.ServiceSpec)
+		case schemas.CreateComponentInput_tags:
+			return deserializeTagList(d, schemas.CreateComponentInput_tags, &v.Tags)
+		case schemas.CreateComponentInput_templateFile:
+			v.TemplateFile = new(string)
+			return d.ReadString(schemas.CreateComponentInput_templateFile, v.TemplateFile)
+		}
+		return nil
+	})
+}
+
 type CreateComponentOutput struct {
 
 	// The detailed data of the created component.
@@ -110,13 +185,34 @@ type CreateComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateComponentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateComponentOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateComponentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Component != nil {
+		s.WriteStruct(schemas.CreateComponentOutput_component)
+		v.Component.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateComponentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateComponentOutput_component:
+			v.Component = &types.Component{}
+			return v.Component.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComponent, schemas.CreateComponentInput, schemas.CreateComponentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComponent, schemas.CreateComponentInput, schemas.CreateComponentOutput), output: &CreateComponentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package chimesdkmessaging
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,27 @@ type GetChannelMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetChannelMessageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetChannelMessageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetChannelMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.GetChannelMessageRequest_ChannelArn, *v.ChannelArn)
+	}
+	if v.ChimeBearer != nil {
+		s.WriteString(schemas.GetChannelMessageRequest_ChimeBearer, *v.ChimeBearer)
+	}
+	if v.MessageId != nil {
+		s.WriteString(schemas.GetChannelMessageRequest_MessageId, *v.MessageId)
+	}
+	if v.SubChannelId != nil {
+		s.WriteString(schemas.GetChannelMessageRequest_SubChannelId, *v.SubChannelId)
+	}
+}
+
 type GetChannelMessageOutput struct {
 
 	// The details of and content in the message.
@@ -64,13 +87,34 @@ type GetChannelMessageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetChannelMessageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetChannelMessageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetChannelMessageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelMessage != nil {
+		s.WriteStruct(schemas.GetChannelMessageResponse_ChannelMessage)
+		v.ChannelMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetChannelMessageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetChannelMessageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetChannelMessageResponse_ChannelMessage:
+			v.ChannelMessage = &types.ChannelMessage{}
+			return v.ChannelMessage.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetChannelMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetChannelMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChannelMessage, schemas.GetChannelMessageRequest, schemas.GetChannelMessageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetChannelMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChannelMessage, schemas.GetChannelMessageRequest, schemas.GetChannelMessageResponse), output: &GetChannelMessageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

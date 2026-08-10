@@ -4,6 +4,8 @@ package route53domains
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,19 @@ type DeleteTagsForDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTagsForDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTagsForDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTagsForDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DeleteTagsForDomainRequest_DomainName, *v.DomainName)
+	}
+	serializeTagKeyList(s, schemas.DeleteTagsForDomainRequest_TagsToDelete, v.TagsToDelete)
+}
+
 type DeleteTagsForDomainOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +64,26 @@ type DeleteTagsForDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTagsForDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTagsForDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTagsForDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteTagsForDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTagsForDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTagsForDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteTagsForDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTagsForDomain, schemas.DeleteTagsForDomainRequest, schemas.DeleteTagsForDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteTagsForDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTagsForDomain, schemas.DeleteTagsForDomainRequest, schemas.DeleteTagsForDomainResponse), output: &DeleteTagsForDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

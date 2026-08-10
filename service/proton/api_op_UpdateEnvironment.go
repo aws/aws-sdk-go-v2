@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -170,6 +172,94 @@ type UpdateEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEnvironmentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodebuildRoleArn != nil {
+		s.WriteString(schemas.UpdateEnvironmentInput_codebuildRoleArn, *v.CodebuildRoleArn)
+	}
+	if v.ComponentRoleArn != nil {
+		s.WriteString(schemas.UpdateEnvironmentInput_componentRoleArn, *v.ComponentRoleArn)
+	}
+	if v.DeploymentType != "" {
+		s.WriteString(schemas.UpdateEnvironmentInput_deploymentType, string(v.DeploymentType))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateEnvironmentInput_description, *v.Description)
+	}
+	if v.EnvironmentAccountConnectionId != nil {
+		s.WriteString(schemas.UpdateEnvironmentInput_environmentAccountConnectionId, *v.EnvironmentAccountConnectionId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateEnvironmentInput_name, *v.Name)
+	}
+	if v.ProtonServiceRoleArn != nil {
+		s.WriteString(schemas.UpdateEnvironmentInput_protonServiceRoleArn, *v.ProtonServiceRoleArn)
+	}
+	if v.ProvisioningRepository != nil {
+		s.WriteStruct(schemas.UpdateEnvironmentInput_provisioningRepository)
+		v.ProvisioningRepository.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Spec != nil {
+		s.WriteString(schemas.UpdateEnvironmentInput_spec, *v.Spec)
+	}
+	if v.TemplateMajorVersion != nil {
+		s.WriteString(schemas.UpdateEnvironmentInput_templateMajorVersion, *v.TemplateMajorVersion)
+	}
+	if v.TemplateMinorVersion != nil {
+		s.WriteString(schemas.UpdateEnvironmentInput_templateMinorVersion, *v.TemplateMinorVersion)
+	}
+}
+func (v *UpdateEnvironmentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEnvironmentInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEnvironmentInput_codebuildRoleArn:
+			v.CodebuildRoleArn = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentInput_codebuildRoleArn, v.CodebuildRoleArn)
+		case schemas.UpdateEnvironmentInput_componentRoleArn:
+			v.ComponentRoleArn = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentInput_componentRoleArn, v.ComponentRoleArn)
+		case schemas.UpdateEnvironmentInput_deploymentType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateEnvironmentInput_deploymentType, &ev); err != nil {
+				return err
+			}
+			v.DeploymentType = types.DeploymentUpdateType(ev)
+			return nil
+		case schemas.UpdateEnvironmentInput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentInput_description, v.Description)
+		case schemas.UpdateEnvironmentInput_environmentAccountConnectionId:
+			v.EnvironmentAccountConnectionId = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentInput_environmentAccountConnectionId, v.EnvironmentAccountConnectionId)
+		case schemas.UpdateEnvironmentInput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentInput_name, v.Name)
+		case schemas.UpdateEnvironmentInput_protonServiceRoleArn:
+			v.ProtonServiceRoleArn = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentInput_protonServiceRoleArn, v.ProtonServiceRoleArn)
+		case schemas.UpdateEnvironmentInput_provisioningRepository:
+			v.ProvisioningRepository = &types.RepositoryBranchInput{}
+			return v.ProvisioningRepository.Deserialize(d)
+		case schemas.UpdateEnvironmentInput_spec:
+			v.Spec = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentInput_spec, v.Spec)
+		case schemas.UpdateEnvironmentInput_templateMajorVersion:
+			v.TemplateMajorVersion = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentInput_templateMajorVersion, v.TemplateMajorVersion)
+		case schemas.UpdateEnvironmentInput_templateMinorVersion:
+			v.TemplateMinorVersion = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentInput_templateMinorVersion, v.TemplateMinorVersion)
+		}
+		return nil
+	})
+}
+
 type UpdateEnvironmentOutput struct {
 
 	// The environment detail data that's returned by Proton.
@@ -183,13 +273,34 @@ type UpdateEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEnvironmentOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Environment != nil {
+		s.WriteStruct(schemas.UpdateEnvironmentOutput_environment)
+		v.Environment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEnvironmentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEnvironmentOutput_environment:
+			v.Environment = &types.Environment{}
+			return v.Environment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEnvironment, schemas.UpdateEnvironmentInput, schemas.UpdateEnvironmentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEnvironment, schemas.UpdateEnvironmentInput, schemas.UpdateEnvironmentOutput), output: &UpdateEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

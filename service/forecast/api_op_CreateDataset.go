@@ -4,7 +4,9 @@ package forecast
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -154,6 +156,38 @@ type CreateDatasetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDatasetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDatasetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataFrequency != nil {
+		s.WriteString(schemas.CreateDatasetRequest_DataFrequency, *v.DataFrequency)
+	}
+	if v.DatasetName != nil {
+		s.WriteString(schemas.CreateDatasetRequest_DatasetName, *v.DatasetName)
+	}
+	if v.DatasetType != "" {
+		s.WriteString(schemas.CreateDatasetRequest_DatasetType, string(v.DatasetType))
+	}
+	if v.Domain != "" {
+		s.WriteString(schemas.CreateDatasetRequest_Domain, string(v.Domain))
+	}
+	if v.EncryptionConfig != nil {
+		s.WriteStruct(schemas.CreateDatasetRequest_EncryptionConfig)
+		v.EncryptionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Schema != nil {
+		s.WriteStruct(schemas.CreateDatasetRequest_Schema)
+		v.Schema.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreateDatasetRequest_Tags, v.Tags)
+}
+
 type CreateDatasetOutput struct {
 
 	// The Amazon Resource Name (ARN) of the dataset.
@@ -165,13 +199,32 @@ type CreateDatasetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDatasetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDatasetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDatasetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetArn != nil {
+		s.WriteString(schemas.CreateDatasetResponse_DatasetArn, *v.DatasetArn)
+	}
+}
+func (v *CreateDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDatasetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDatasetResponse_DatasetArn:
+			v.DatasetArn = new(string)
+			return d.ReadString(schemas.CreateDatasetResponse_DatasetArn, v.DatasetArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataset, schemas.CreateDatasetRequest, schemas.CreateDatasetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataset, schemas.CreateDatasetRequest, schemas.CreateDatasetResponse), output: &CreateDatasetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

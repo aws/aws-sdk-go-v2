@@ -4,7 +4,9 @@ package appmesh
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,40 @@ type DescribeVirtualNodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVirtualNodeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVirtualNodeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVirtualNodeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MeshName != nil {
+		s.WriteString(schemas.DescribeVirtualNodeInput_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.DescribeVirtualNodeInput_meshOwner, *v.MeshOwner)
+	}
+	if v.VirtualNodeName != nil {
+		s.WriteString(schemas.DescribeVirtualNodeInput_virtualNodeName, *v.VirtualNodeName)
+	}
+}
+func (v *DescribeVirtualNodeInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeVirtualNodeInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeVirtualNodeInput_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.DescribeVirtualNodeInput_meshName, v.MeshName)
+		case schemas.DescribeVirtualNodeInput_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.DescribeVirtualNodeInput_meshOwner, v.MeshOwner)
+		case schemas.DescribeVirtualNodeInput_virtualNodeName:
+			v.VirtualNodeName = new(string)
+			return d.ReadString(schemas.DescribeVirtualNodeInput_virtualNodeName, v.VirtualNodeName)
+		}
+		return nil
+	})
+}
+
 type DescribeVirtualNodeOutput struct {
 
 	// The full description of your virtual node.
@@ -59,13 +95,34 @@ type DescribeVirtualNodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVirtualNodeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVirtualNodeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVirtualNodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualNode != nil {
+		s.WriteStruct(schemas.DescribeVirtualNodeOutput_virtualNode)
+		v.VirtualNode.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeVirtualNodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeVirtualNodeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeVirtualNodeOutput_virtualNode:
+			v.VirtualNode = &types.VirtualNodeData{}
+			return v.VirtualNode.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeVirtualNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeVirtualNode{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVirtualNode, schemas.DescribeVirtualNodeInput, schemas.DescribeVirtualNodeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeVirtualNode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVirtualNode, schemas.DescribeVirtualNodeInput, schemas.DescribeVirtualNodeOutput), output: &DescribeVirtualNodeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

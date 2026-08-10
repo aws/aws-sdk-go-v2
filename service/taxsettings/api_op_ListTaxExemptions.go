@@ -5,7 +5,9 @@ package taxsettings
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/taxsettings/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/taxsettings/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListTaxExemptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTaxExemptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTaxExemptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTaxExemptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTaxExemptionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTaxExemptionsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListTaxExemptionsOutput struct {
 
 	// The token to retrieve the next set of results.
@@ -51,13 +68,35 @@ type ListTaxExemptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTaxExemptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTaxExemptionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTaxExemptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTaxExemptionsResponse_nextToken, *v.NextToken)
+	}
+	serializeTaxExemptionDetailsMap(s, schemas.ListTaxExemptionsResponse_taxExemptionDetailsMap, v.TaxExemptionDetailsMap)
+}
+func (v *ListTaxExemptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTaxExemptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTaxExemptionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTaxExemptionsResponse_nextToken, v.NextToken)
+		case schemas.ListTaxExemptionsResponse_taxExemptionDetailsMap:
+			return deserializeTaxExemptionDetailsMap(d, schemas.ListTaxExemptionsResponse_taxExemptionDetailsMap, &v.TaxExemptionDetailsMap)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTaxExemptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTaxExemptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTaxExemptions, schemas.ListTaxExemptionsRequest, schemas.ListTaxExemptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTaxExemptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTaxExemptions, schemas.ListTaxExemptionsRequest, schemas.ListTaxExemptionsResponse), output: &ListTaxExemptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

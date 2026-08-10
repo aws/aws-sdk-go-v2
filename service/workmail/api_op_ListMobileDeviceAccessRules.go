@@ -4,7 +4,9 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type ListMobileDeviceAccessRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMobileDeviceAccessRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMobileDeviceAccessRulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMobileDeviceAccessRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.ListMobileDeviceAccessRulesRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type ListMobileDeviceAccessRulesOutput struct {
 
 	// The list of mobile device access rules that exist under the specified WorkMail
@@ -46,13 +60,29 @@ type ListMobileDeviceAccessRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMobileDeviceAccessRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMobileDeviceAccessRulesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMobileDeviceAccessRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMobileDeviceAccessRulesList(s, schemas.ListMobileDeviceAccessRulesResponse_Rules, v.Rules)
+}
+func (v *ListMobileDeviceAccessRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMobileDeviceAccessRulesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMobileDeviceAccessRulesResponse_Rules:
+			return deserializeMobileDeviceAccessRulesList(d, schemas.ListMobileDeviceAccessRulesResponse_Rules, &v.Rules)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMobileDeviceAccessRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMobileDeviceAccessRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMobileDeviceAccessRules, schemas.ListMobileDeviceAccessRulesRequest, schemas.ListMobileDeviceAccessRulesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListMobileDeviceAccessRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMobileDeviceAccessRules, schemas.ListMobileDeviceAccessRulesRequest, schemas.ListMobileDeviceAccessRulesResponse), output: &ListMobileDeviceAccessRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

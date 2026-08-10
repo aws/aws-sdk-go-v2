@@ -5,7 +5,9 @@ package memorydb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/memorydb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/memorydb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,26 @@ type DescribeServiceUpdatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeServiceUpdatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeServiceUpdatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeServiceUpdatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClusterNameList(s, schemas.DescribeServiceUpdatesRequest_ClusterNames, v.ClusterNames)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeServiceUpdatesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeServiceUpdatesRequest_NextToken, *v.NextToken)
+	}
+	if v.ServiceUpdateName != nil {
+		s.WriteString(schemas.DescribeServiceUpdatesRequest_ServiceUpdateName, *v.ServiceUpdateName)
+	}
+	serializeServiceUpdateStatusList(s, schemas.DescribeServiceUpdatesRequest_Status, v.Status)
+}
+
 type DescribeServiceUpdatesOutput struct {
 
 	// An optional argument to pass in case the total number of records exceeds the
@@ -69,13 +91,35 @@ type DescribeServiceUpdatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeServiceUpdatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeServiceUpdatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeServiceUpdatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeServiceUpdatesResponse_NextToken, *v.NextToken)
+	}
+	serializeServiceUpdateList(s, schemas.DescribeServiceUpdatesResponse_ServiceUpdates, v.ServiceUpdates)
+}
+func (v *DescribeServiceUpdatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeServiceUpdatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeServiceUpdatesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeServiceUpdatesResponse_NextToken, v.NextToken)
+		case schemas.DescribeServiceUpdatesResponse_ServiceUpdates:
+			return deserializeServiceUpdateList(d, schemas.DescribeServiceUpdatesResponse_ServiceUpdates, &v.ServiceUpdates)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeServiceUpdatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeServiceUpdates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeServiceUpdates, schemas.DescribeServiceUpdatesRequest, schemas.DescribeServiceUpdatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeServiceUpdates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeServiceUpdates, schemas.DescribeServiceUpdatesRequest, schemas.DescribeServiceUpdatesResponse), output: &DescribeServiceUpdatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package securitylake
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securitylake/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type RegisterDataLakeDelegatedAdministratorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterDataLakeDelegatedAdministratorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterDataLakeDelegatedAdministratorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterDataLakeDelegatedAdministratorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.RegisterDataLakeDelegatedAdministratorRequest_accountId, *v.AccountId)
+	}
+}
+
 type RegisterDataLakeDelegatedAdministratorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type RegisterDataLakeDelegatedAdministratorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterDataLakeDelegatedAdministratorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterDataLakeDelegatedAdministratorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterDataLakeDelegatedAdministratorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RegisterDataLakeDelegatedAdministratorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterDataLakeDelegatedAdministratorResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterDataLakeDelegatedAdministratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterDataLakeDelegatedAdministrator{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterDataLakeDelegatedAdministrator, schemas.RegisterDataLakeDelegatedAdministratorRequest, schemas.RegisterDataLakeDelegatedAdministratorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterDataLakeDelegatedAdministrator{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterDataLakeDelegatedAdministrator, schemas.RegisterDataLakeDelegatedAdministratorRequest, schemas.RegisterDataLakeDelegatedAdministratorResponse), output: &RegisterDataLakeDelegatedAdministratorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

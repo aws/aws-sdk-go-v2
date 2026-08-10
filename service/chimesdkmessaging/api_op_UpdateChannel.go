@@ -4,7 +4,9 @@ package chimesdkmessaging
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,30 @@ type UpdateChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.UpdateChannelRequest_ChannelArn, *v.ChannelArn)
+	}
+	if v.ChimeBearer != nil {
+		s.WriteString(schemas.UpdateChannelRequest_ChimeBearer, *v.ChimeBearer)
+	}
+	if v.Metadata != nil {
+		s.WriteString(schemas.UpdateChannelRequest_Metadata, *v.Metadata)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.UpdateChannelRequest_Mode, string(v.Mode))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateChannelRequest_Name, *v.Name)
+	}
+}
+
 type UpdateChannelOutput struct {
 
 	// The ARN of the channel.
@@ -65,13 +91,32 @@ type UpdateChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.UpdateChannelResponse_ChannelArn, *v.ChannelArn)
+	}
+}
+func (v *UpdateChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateChannelResponse_ChannelArn:
+			v.ChannelArn = new(string)
+			return d.ReadString(schemas.UpdateChannelResponse_ChannelArn, v.ChannelArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChannel, schemas.UpdateChannelRequest, schemas.UpdateChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChannel, schemas.UpdateChannelRequest, schemas.UpdateChannelResponse), output: &UpdateChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

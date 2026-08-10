@@ -5,7 +5,9 @@ package bedrockagentruntime
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,33 @@ type GetAgentMemoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgentMemoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgentMemoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgentMemoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentAliasId != nil {
+		s.WriteString(schemas.GetAgentMemoryRequest_agentAliasId, *v.AgentAliasId)
+	}
+	if v.AgentId != nil {
+		s.WriteString(schemas.GetAgentMemoryRequest_agentId, *v.AgentId)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.GetAgentMemoryRequest_maxItems, *v.MaxItems)
+	}
+	if v.MemoryId != nil {
+		s.WriteString(schemas.GetAgentMemoryRequest_memoryId, *v.MemoryId)
+	}
+	if v.MemoryType != "" {
+		s.WriteString(schemas.GetAgentMemoryRequest_memoryType, string(v.MemoryType))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetAgentMemoryRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetAgentMemoryOutput struct {
 
 	// Contains details of the sessions stored in the memory
@@ -77,13 +106,35 @@ type GetAgentMemoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgentMemoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgentMemoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgentMemoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMemories(s, schemas.GetAgentMemoryResponse_memoryContents, v.MemoryContents)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetAgentMemoryResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *GetAgentMemoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAgentMemoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAgentMemoryResponse_memoryContents:
+			return deserializeMemories(d, schemas.GetAgentMemoryResponse_memoryContents, &v.MemoryContents)
+		case schemas.GetAgentMemoryResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetAgentMemoryResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAgentMemoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAgentMemory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgentMemory, schemas.GetAgentMemoryRequest, schemas.GetAgentMemoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAgentMemory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgentMemory, schemas.GetAgentMemoryRequest, schemas.GetAgentMemoryResponse), output: &GetAgentMemoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

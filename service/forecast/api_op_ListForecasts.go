@@ -5,7 +5,9 @@ package forecast
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,22 @@ type ListForecastsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListForecastsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListForecastsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListForecastsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilters(s, schemas.ListForecastsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListForecastsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListForecastsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListForecastsOutput struct {
 
 	// An array of objects that summarize each forecast's properties.
@@ -78,13 +96,35 @@ type ListForecastsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListForecastsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListForecastsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListForecastsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeForecasts(s, schemas.ListForecastsResponse_Forecasts, v.Forecasts)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListForecastsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListForecastsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListForecastsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListForecastsResponse_Forecasts:
+			return deserializeForecasts(d, schemas.ListForecastsResponse_Forecasts, &v.Forecasts)
+		case schemas.ListForecastsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListForecastsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListForecastsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListForecasts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListForecasts, schemas.ListForecastsRequest, schemas.ListForecastsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListForecasts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListForecasts, schemas.ListForecastsRequest, schemas.ListForecastsResponse), output: &ListForecastsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

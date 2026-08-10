@@ -5,7 +5,9 @@ package kendra
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -124,6 +126,45 @@ type CreateIndexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIndexInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIndexRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateIndexRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateIndexRequest_Description, *v.Description)
+	}
+	if v.Edition != "" {
+		s.WriteString(schemas.CreateIndexRequest_Edition, string(v.Edition))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateIndexRequest_Name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateIndexRequest_RoleArn, *v.RoleArn)
+	}
+	if v.ServerSideEncryptionConfiguration != nil {
+		s.WriteStruct(schemas.CreateIndexRequest_ServerSideEncryptionConfiguration)
+		v.ServerSideEncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateIndexRequest_Tags, v.Tags)
+	if v.UserContextPolicy != "" {
+		s.WriteString(schemas.CreateIndexRequest_UserContextPolicy, string(v.UserContextPolicy))
+	}
+	if v.UserGroupResolutionConfiguration != nil {
+		s.WriteStruct(schemas.CreateIndexRequest_UserGroupResolutionConfiguration)
+		v.UserGroupResolutionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeUserTokenConfigurationList(s, schemas.CreateIndexRequest_UserTokenConfigurations, v.UserTokenConfigurations)
+}
+
 type CreateIndexOutput struct {
 
 	// The identifier of the index. Use this identifier when you query an index, set
@@ -136,13 +177,32 @@ type CreateIndexOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIndexOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIndexResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIndexOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.CreateIndexResponse_Id, *v.Id)
+	}
+}
+func (v *CreateIndexOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateIndexResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateIndexResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateIndexResponse_Id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIndex, schemas.CreateIndexRequest, schemas.CreateIndexResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIndex, schemas.CreateIndexRequest, schemas.CreateIndexResponse), output: &CreateIndexOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

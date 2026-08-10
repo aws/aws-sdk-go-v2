@@ -5,7 +5,9 @@ package chimesdkmediapipelines
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type ListMediaCapturePipelinesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMediaCapturePipelinesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMediaCapturePipelinesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMediaCapturePipelinesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMediaCapturePipelinesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMediaCapturePipelinesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListMediaCapturePipelinesOutput struct {
 
 	// The media pipeline objects in the list.
@@ -50,13 +67,35 @@ type ListMediaCapturePipelinesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMediaCapturePipelinesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMediaCapturePipelinesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMediaCapturePipelinesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMediaCapturePipelineSummaryList(s, schemas.ListMediaCapturePipelinesResponse_MediaCapturePipelines, v.MediaCapturePipelines)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMediaCapturePipelinesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListMediaCapturePipelinesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMediaCapturePipelinesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMediaCapturePipelinesResponse_MediaCapturePipelines:
+			return deserializeMediaCapturePipelineSummaryList(d, schemas.ListMediaCapturePipelinesResponse_MediaCapturePipelines, &v.MediaCapturePipelines)
+		case schemas.ListMediaCapturePipelinesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMediaCapturePipelinesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMediaCapturePipelinesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMediaCapturePipelines{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMediaCapturePipelines, schemas.ListMediaCapturePipelinesRequest, schemas.ListMediaCapturePipelinesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMediaCapturePipelines{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMediaCapturePipelines, schemas.ListMediaCapturePipelinesRequest, schemas.ListMediaCapturePipelinesResponse), output: &ListMediaCapturePipelinesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

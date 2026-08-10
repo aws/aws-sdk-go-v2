@@ -4,7 +4,9 @@ package iotfleetwise
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,22 @@ type GetLoggingOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLoggingOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLoggingOptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLoggingOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetLoggingOptionsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLoggingOptionsRequest, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type GetLoggingOptionsOutput struct {
 
 	// Returns information about log delivery to Amazon CloudWatch Logs.
@@ -41,13 +59,34 @@ type GetLoggingOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLoggingOptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLoggingOptionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLoggingOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLogDelivery != nil {
+		s.WriteStruct(schemas.GetLoggingOptionsResponse_cloudWatchLogDelivery)
+		v.CloudWatchLogDelivery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetLoggingOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLoggingOptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLoggingOptionsResponse_cloudWatchLogDelivery:
+			v.CloudWatchLogDelivery = &types.CloudWatchLogDeliveryOptions{}
+			return v.CloudWatchLogDelivery.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLoggingOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetLoggingOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLoggingOptions, schemas.GetLoggingOptionsRequest, schemas.GetLoggingOptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetLoggingOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLoggingOptions, schemas.GetLoggingOptionsRequest, schemas.GetLoggingOptionsResponse), output: &GetLoggingOptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package mgn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,22 @@ type StartNetworkMigrationCodeGenerationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartNetworkMigrationCodeGenerationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartNetworkMigrationCodeGenerationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartNetworkMigrationCodeGenerationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCodeGenerationOutputFormatTypes(s, schemas.StartNetworkMigrationCodeGenerationRequest_codeGenerationOutputFormatTypes, v.CodeGenerationOutputFormatTypes)
+	if v.NetworkMigrationDefinitionID != nil {
+		s.WriteString(schemas.StartNetworkMigrationCodeGenerationRequest_networkMigrationDefinitionID, *v.NetworkMigrationDefinitionID)
+	}
+	if v.NetworkMigrationExecutionID != nil {
+		s.WriteString(schemas.StartNetworkMigrationCodeGenerationRequest_networkMigrationExecutionID, *v.NetworkMigrationExecutionID)
+	}
+}
+
 type StartNetworkMigrationCodeGenerationOutput struct {
 
 	// The unique identifier of the code generation job that was started.
@@ -55,13 +73,32 @@ type StartNetworkMigrationCodeGenerationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartNetworkMigrationCodeGenerationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartNetworkMigrationCodeGenerationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartNetworkMigrationCodeGenerationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobID != nil {
+		s.WriteString(schemas.StartNetworkMigrationCodeGenerationResponse_jobID, *v.JobID)
+	}
+}
+func (v *StartNetworkMigrationCodeGenerationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartNetworkMigrationCodeGenerationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartNetworkMigrationCodeGenerationResponse_jobID:
+			v.JobID = new(string)
+			return d.ReadString(schemas.StartNetworkMigrationCodeGenerationResponse_jobID, v.JobID)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartNetworkMigrationCodeGenerationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartNetworkMigrationCodeGeneration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartNetworkMigrationCodeGeneration, schemas.StartNetworkMigrationCodeGenerationRequest, schemas.StartNetworkMigrationCodeGenerationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartNetworkMigrationCodeGeneration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartNetworkMigrationCodeGeneration, schemas.StartNetworkMigrationCodeGenerationRequest, schemas.StartNetworkMigrationCodeGenerationResponse), output: &StartNetworkMigrationCodeGenerationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

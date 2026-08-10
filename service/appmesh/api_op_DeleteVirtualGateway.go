@@ -4,7 +4,9 @@ package appmesh
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,40 @@ type DeleteVirtualGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVirtualGatewayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVirtualGatewayInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVirtualGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MeshName != nil {
+		s.WriteString(schemas.DeleteVirtualGatewayInput_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.DeleteVirtualGatewayInput_meshOwner, *v.MeshOwner)
+	}
+	if v.VirtualGatewayName != nil {
+		s.WriteString(schemas.DeleteVirtualGatewayInput_virtualGatewayName, *v.VirtualGatewayName)
+	}
+}
+func (v *DeleteVirtualGatewayInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVirtualGatewayInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteVirtualGatewayInput_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.DeleteVirtualGatewayInput_meshName, v.MeshName)
+		case schemas.DeleteVirtualGatewayInput_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.DeleteVirtualGatewayInput_meshOwner, v.MeshOwner)
+		case schemas.DeleteVirtualGatewayInput_virtualGatewayName:
+			v.VirtualGatewayName = new(string)
+			return d.ReadString(schemas.DeleteVirtualGatewayInput_virtualGatewayName, v.VirtualGatewayName)
+		}
+		return nil
+	})
+}
+
 type DeleteVirtualGatewayOutput struct {
 
 	// The virtual gateway that was deleted.
@@ -60,13 +96,34 @@ type DeleteVirtualGatewayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVirtualGatewayOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVirtualGatewayOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVirtualGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualGateway != nil {
+		s.WriteStruct(schemas.DeleteVirtualGatewayOutput_virtualGateway)
+		v.VirtualGateway.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteVirtualGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVirtualGatewayOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteVirtualGatewayOutput_virtualGateway:
+			v.VirtualGateway = &types.VirtualGatewayData{}
+			return v.VirtualGateway.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVirtualGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVirtualGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVirtualGateway, schemas.DeleteVirtualGatewayInput, schemas.DeleteVirtualGatewayOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteVirtualGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVirtualGateway, schemas.DeleteVirtualGatewayInput, schemas.DeleteVirtualGatewayOutput), output: &DeleteVirtualGatewayOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package codestarconnections
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codestarconnections/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codestarconnections/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type ListRepositorySyncDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRepositorySyncDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRepositorySyncDefinitionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRepositorySyncDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RepositoryLinkId != nil {
+		s.WriteString(schemas.ListRepositorySyncDefinitionsInput_RepositoryLinkId, *v.RepositoryLinkId)
+	}
+	if v.SyncType != "" {
+		s.WriteString(schemas.ListRepositorySyncDefinitionsInput_SyncType, string(v.SyncType))
+	}
+}
+
 type ListRepositorySyncDefinitionsOutput struct {
 
 	// The list of repository sync definitions returned by the request. A
@@ -60,13 +77,35 @@ type ListRepositorySyncDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRepositorySyncDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRepositorySyncDefinitionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRepositorySyncDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRepositorySyncDefinitionsOutput_NextToken, *v.NextToken)
+	}
+	serializeRepositorySyncDefinitionList(s, schemas.ListRepositorySyncDefinitionsOutput_RepositorySyncDefinitions, v.RepositorySyncDefinitions)
+}
+func (v *ListRepositorySyncDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRepositorySyncDefinitionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRepositorySyncDefinitionsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRepositorySyncDefinitionsOutput_NextToken, v.NextToken)
+		case schemas.ListRepositorySyncDefinitionsOutput_RepositorySyncDefinitions:
+			return deserializeRepositorySyncDefinitionList(d, schemas.ListRepositorySyncDefinitionsOutput_RepositorySyncDefinitions, &v.RepositorySyncDefinitions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRepositorySyncDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListRepositorySyncDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRepositorySyncDefinitions, schemas.ListRepositorySyncDefinitionsInput, schemas.ListRepositorySyncDefinitionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListRepositorySyncDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRepositorySyncDefinitions, schemas.ListRepositorySyncDefinitionsInput, schemas.ListRepositorySyncDefinitionsOutput), output: &ListRepositorySyncDefinitionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

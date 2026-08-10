@@ -4,7 +4,9 @@ package lexruntimev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexruntimev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexruntimev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,27 @@ type GetSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotAliasId != nil {
+		s.WriteString(schemas.GetSessionRequest_botAliasId, *v.BotAliasId)
+	}
+	if v.BotId != nil {
+		s.WriteString(schemas.GetSessionRequest_botId, *v.BotId)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.GetSessionRequest_localeId, *v.LocaleId)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.GetSessionRequest_sessionId, *v.SessionId)
+	}
+}
+
 type GetSessionOutput struct {
 
 	// A list of intents that Amazon Lex V2 determined might satisfy the user's
@@ -86,13 +109,46 @@ type GetSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInterpretations(s, schemas.GetSessionResponse_interpretations, v.Interpretations)
+	serializeMessages(s, schemas.GetSessionResponse_messages, v.Messages)
+	if v.SessionId != nil {
+		s.WriteString(schemas.GetSessionResponse_sessionId, *v.SessionId)
+	}
+	if v.SessionState != nil {
+		s.WriteStruct(schemas.GetSessionResponse_sessionState)
+		v.SessionState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSessionResponse_interpretations:
+			return deserializeInterpretations(d, schemas.GetSessionResponse_interpretations, &v.Interpretations)
+		case schemas.GetSessionResponse_messages:
+			return deserializeMessages(d, schemas.GetSessionResponse_messages, &v.Messages)
+		case schemas.GetSessionResponse_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.GetSessionResponse_sessionId, v.SessionId)
+		case schemas.GetSessionResponse_sessionState:
+			v.SessionState = &types.SessionState{}
+			return v.SessionState.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSession, schemas.GetSessionRequest, schemas.GetSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSession, schemas.GetSessionRequest, schemas.GetSessionResponse), output: &GetSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

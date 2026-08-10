@@ -4,7 +4,9 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,38 @@ type UpdateResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BookingOptions != nil {
+		s.WriteStruct(schemas.UpdateResourceRequest_BookingOptions)
+		v.BookingOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateResourceRequest_Description, *v.Description)
+	}
+	if v.HiddenFromGlobalAddressList != nil {
+		s.WriteBool(schemas.UpdateResourceRequest_HiddenFromGlobalAddressList, *v.HiddenFromGlobalAddressList)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateResourceRequest_Name, *v.Name)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.UpdateResourceRequest_OrganizationId, *v.OrganizationId)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.UpdateResourceRequest_ResourceId, *v.ResourceId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.UpdateResourceRequest_Type, string(v.Type))
+	}
+}
+
 type UpdateResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -73,13 +107,26 @@ type UpdateResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResource, schemas.UpdateResourceRequest, schemas.UpdateResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResource, schemas.UpdateResourceRequest, schemas.UpdateResourceResponse), output: &UpdateResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

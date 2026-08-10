@@ -4,7 +4,9 @@ package iotfleetwise
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,50 @@ type UpdateModelManifestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateModelManifestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateModelManifestRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateModelManifestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateModelManifestRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateModelManifestRequest_name, *v.Name)
+	}
+	serializeNodePaths(s, schemas.UpdateModelManifestRequest_nodesToAdd, v.NodesToAdd)
+	serializeNodePaths(s, schemas.UpdateModelManifestRequest_nodesToRemove, v.NodesToRemove)
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateModelManifestRequest_status, string(v.Status))
+	}
+}
+func (v *UpdateModelManifestInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateModelManifestRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateModelManifestRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateModelManifestRequest_description, v.Description)
+		case schemas.UpdateModelManifestRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateModelManifestRequest_name, v.Name)
+		case schemas.UpdateModelManifestRequest_nodesToAdd:
+			return deserializeNodePaths(d, schemas.UpdateModelManifestRequest_nodesToAdd, &v.NodesToAdd)
+		case schemas.UpdateModelManifestRequest_nodesToRemove:
+			return deserializeNodePaths(d, schemas.UpdateModelManifestRequest_nodesToRemove, &v.NodesToRemove)
+		case schemas.UpdateModelManifestRequest_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateModelManifestRequest_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ManifestStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type UpdateModelManifestOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the updated vehicle model.
@@ -69,13 +115,38 @@ type UpdateModelManifestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateModelManifestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateModelManifestResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateModelManifestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateModelManifestResponse_arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateModelManifestResponse_name, *v.Name)
+	}
+}
+func (v *UpdateModelManifestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateModelManifestResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateModelManifestResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateModelManifestResponse_arn, v.Arn)
+		case schemas.UpdateModelManifestResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateModelManifestResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateModelManifestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateModelManifest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateModelManifest, schemas.UpdateModelManifestRequest, schemas.UpdateModelManifestResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateModelManifest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateModelManifest, schemas.UpdateModelManifestRequest, schemas.UpdateModelManifestResponse), output: &UpdateModelManifestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

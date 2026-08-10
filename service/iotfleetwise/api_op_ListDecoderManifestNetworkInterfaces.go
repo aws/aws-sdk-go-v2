@@ -5,7 +5,9 @@ package iotfleetwise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,40 @@ type ListDecoderManifestNetworkInterfacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDecoderManifestNetworkInterfacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDecoderManifestNetworkInterfacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDecoderManifestNetworkInterfacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDecoderManifestNetworkInterfacesRequest_maxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListDecoderManifestNetworkInterfacesRequest_name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDecoderManifestNetworkInterfacesRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDecoderManifestNetworkInterfacesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDecoderManifestNetworkInterfacesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDecoderManifestNetworkInterfacesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListDecoderManifestNetworkInterfacesRequest_maxResults, v.MaxResults)
+		case schemas.ListDecoderManifestNetworkInterfacesRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ListDecoderManifestNetworkInterfacesRequest_name, v.Name)
+		case schemas.ListDecoderManifestNetworkInterfacesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDecoderManifestNetworkInterfacesRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListDecoderManifestNetworkInterfacesOutput struct {
 
 	//  A list of information about network interfaces.
@@ -65,13 +101,35 @@ type ListDecoderManifestNetworkInterfacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDecoderManifestNetworkInterfacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDecoderManifestNetworkInterfacesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDecoderManifestNetworkInterfacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNetworkInterfaces(s, schemas.ListDecoderManifestNetworkInterfacesResponse_networkInterfaces, v.NetworkInterfaces)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDecoderManifestNetworkInterfacesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDecoderManifestNetworkInterfacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDecoderManifestNetworkInterfacesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDecoderManifestNetworkInterfacesResponse_networkInterfaces:
+			return deserializeNetworkInterfaces(d, schemas.ListDecoderManifestNetworkInterfacesResponse_networkInterfaces, &v.NetworkInterfaces)
+		case schemas.ListDecoderManifestNetworkInterfacesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDecoderManifestNetworkInterfacesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDecoderManifestNetworkInterfacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListDecoderManifestNetworkInterfaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDecoderManifestNetworkInterfaces, schemas.ListDecoderManifestNetworkInterfacesRequest, schemas.ListDecoderManifestNetworkInterfacesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListDecoderManifestNetworkInterfaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDecoderManifestNetworkInterfaces, schemas.ListDecoderManifestNetworkInterfacesRequest, schemas.ListDecoderManifestNetworkInterfacesResponse), output: &ListDecoderManifestNetworkInterfacesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

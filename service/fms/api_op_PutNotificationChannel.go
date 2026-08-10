@@ -4,6 +4,8 @@ package fms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,21 @@ type PutNotificationChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutNotificationChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutNotificationChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutNotificationChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SnsRoleName != nil {
+		s.WriteString(schemas.PutNotificationChannelRequest_SnsRoleName, *v.SnsRoleName)
+	}
+	if v.SnsTopicArn != nil {
+		s.WriteString(schemas.PutNotificationChannelRequest_SnsTopicArn, *v.SnsTopicArn)
+	}
+}
+
 type PutNotificationChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,13 +75,26 @@ type PutNotificationChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutNotificationChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutNotificationChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutNotificationChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutNotificationChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutNotificationChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutNotificationChannel, schemas.PutNotificationChannelRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutNotificationChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutNotificationChannel, schemas.PutNotificationChannelRequest, nil), output: &PutNotificationChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

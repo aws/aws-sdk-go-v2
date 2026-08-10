@@ -4,6 +4,8 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DisassociateProtectConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateProtectConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateProtectConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateProtectConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.DisassociateProtectConfigurationRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.ProtectConfigurationId != nil {
+		s.WriteString(schemas.DisassociateProtectConfigurationRequest_ProtectConfigurationId, *v.ProtectConfigurationId)
+	}
+}
+
 type DisassociateProtectConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the configuration set.
@@ -66,13 +83,50 @@ type DisassociateProtectConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateProtectConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateProtectConfigurationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateProtectConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetArn != nil {
+		s.WriteString(schemas.DisassociateProtectConfigurationResult_ConfigurationSetArn, *v.ConfigurationSetArn)
+	}
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.DisassociateProtectConfigurationResult_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.ProtectConfigurationArn != nil {
+		s.WriteString(schemas.DisassociateProtectConfigurationResult_ProtectConfigurationArn, *v.ProtectConfigurationArn)
+	}
+	if v.ProtectConfigurationId != nil {
+		s.WriteString(schemas.DisassociateProtectConfigurationResult_ProtectConfigurationId, *v.ProtectConfigurationId)
+	}
+}
+func (v *DisassociateProtectConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateProtectConfigurationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateProtectConfigurationResult_ConfigurationSetArn:
+			v.ConfigurationSetArn = new(string)
+			return d.ReadString(schemas.DisassociateProtectConfigurationResult_ConfigurationSetArn, v.ConfigurationSetArn)
+		case schemas.DisassociateProtectConfigurationResult_ConfigurationSetName:
+			v.ConfigurationSetName = new(string)
+			return d.ReadString(schemas.DisassociateProtectConfigurationResult_ConfigurationSetName, v.ConfigurationSetName)
+		case schemas.DisassociateProtectConfigurationResult_ProtectConfigurationArn:
+			v.ProtectConfigurationArn = new(string)
+			return d.ReadString(schemas.DisassociateProtectConfigurationResult_ProtectConfigurationArn, v.ProtectConfigurationArn)
+		case schemas.DisassociateProtectConfigurationResult_ProtectConfigurationId:
+			v.ProtectConfigurationId = new(string)
+			return d.ReadString(schemas.DisassociateProtectConfigurationResult_ProtectConfigurationId, v.ProtectConfigurationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateProtectConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDisassociateProtectConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateProtectConfiguration, schemas.DisassociateProtectConfigurationRequest, schemas.DisassociateProtectConfigurationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDisassociateProtectConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateProtectConfiguration, schemas.DisassociateProtectConfigurationRequest, schemas.DisassociateProtectConfigurationResult), output: &DisassociateProtectConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

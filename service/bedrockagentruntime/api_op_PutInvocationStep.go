@@ -4,7 +4,9 @@ package bedrockagentruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -74,6 +76,28 @@ type PutInvocationStepInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutInvocationStepInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutInvocationStepRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutInvocationStepInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvocationIdentifier != nil {
+		s.WriteString(schemas.PutInvocationStepRequest_invocationIdentifier, *v.InvocationIdentifier)
+	}
+	if v.InvocationStepId != nil {
+		s.WriteString(schemas.PutInvocationStepRequest_invocationStepId, *v.InvocationStepId)
+	}
+	if v.InvocationStepTime != nil {
+		s.WriteTime(schemas.PutInvocationStepRequest_invocationStepTime, *v.InvocationStepTime)
+	}
+	serializeInvocationStepPayload(s, schemas.PutInvocationStepRequest_payload, v.Payload)
+	if v.SessionIdentifier != nil {
+		s.WriteString(schemas.PutInvocationStepRequest_sessionIdentifier, *v.SessionIdentifier)
+	}
+}
+
 type PutInvocationStepOutput struct {
 
 	// The unique identifier of the invocation step in UUID format.
@@ -87,13 +111,32 @@ type PutInvocationStepOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutInvocationStepOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutInvocationStepResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutInvocationStepOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvocationStepId != nil {
+		s.WriteString(schemas.PutInvocationStepResponse_invocationStepId, *v.InvocationStepId)
+	}
+}
+func (v *PutInvocationStepOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutInvocationStepResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutInvocationStepResponse_invocationStepId:
+			v.InvocationStepId = new(string)
+			return d.ReadString(schemas.PutInvocationStepResponse_invocationStepId, v.InvocationStepId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutInvocationStepMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutInvocationStep{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutInvocationStep, schemas.PutInvocationStepRequest, schemas.PutInvocationStepResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutInvocationStep{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutInvocationStep, schemas.PutInvocationStepRequest, schemas.PutInvocationStepResponse), output: &PutInvocationStepOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

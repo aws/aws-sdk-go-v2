@@ -5,7 +5,9 @@ package chime
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListBotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBotsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBotsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBotsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListBotsRequest_AccountId, *v.AccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBotsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBotsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListBotsOutput struct {
 
 	// List of bots and bot details.
@@ -56,13 +76,35 @@ type ListBotsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBotsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBotsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBotList(s, schemas.ListBotsResponse_Bots, v.Bots)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBotsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListBotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBotsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBotsResponse_Bots:
+			return deserializeBotList(d, schemas.ListBotsResponse_Bots, &v.Bots)
+		case schemas.ListBotsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBotsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBots{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBots, schemas.ListBotsRequest, schemas.ListBotsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBots{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBots, schemas.ListBotsRequest, schemas.ListBotsResponse), output: &ListBotsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

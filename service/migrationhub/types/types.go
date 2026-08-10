@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/migrationhub/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -24,6 +26,44 @@ type ApplicationState struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplicationState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationState)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationState) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ApplicationState_ApplicationId, *v.ApplicationId)
+	}
+	if v.ApplicationStatus != "" {
+		s.WriteString(schemas.ApplicationState_ApplicationStatus, string(v.ApplicationStatus))
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.ApplicationState_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+}
+func (v *ApplicationState) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationState, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationState_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.ApplicationState_ApplicationId, v.ApplicationId)
+		case schemas.ApplicationState_ApplicationStatus:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationState_ApplicationStatus, &ev); err != nil {
+				return err
+			}
+			v.ApplicationStatus = ApplicationStatus(ev)
+			return nil
+		case schemas.ApplicationState_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.ApplicationState_LastUpdatedTime, v.LastUpdatedTime)
+		}
+		return nil
+	})
+}
+
 // An ARN of the AWS cloud resource target receiving the migration (e.g., AMI, EC2
 // instance, RDS instance, etc.).
 type CreatedArtifact struct {
@@ -40,6 +80,34 @@ type CreatedArtifact struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatedArtifact) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatedArtifact)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatedArtifact) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreatedArtifact_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreatedArtifact_Name, *v.Name)
+	}
+}
+func (v *CreatedArtifact) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatedArtifact, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatedArtifact_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreatedArtifact_Description, v.Description)
+		case schemas.CreatedArtifact_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreatedArtifact_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // Object representing the on-premises resource being migrated.
 type DiscoveredResource struct {
 
@@ -54,6 +122,34 @@ type DiscoveredResource struct {
 	Description *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DiscoveredResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DiscoveredResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DiscoveredResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationId != nil {
+		s.WriteString(schemas.DiscoveredResource_ConfigurationId, *v.ConfigurationId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DiscoveredResource_Description, *v.Description)
+	}
+}
+func (v *DiscoveredResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DiscoveredResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DiscoveredResource_ConfigurationId:
+			v.ConfigurationId = new(string)
+			return d.ReadString(schemas.DiscoveredResource_ConfigurationId, v.ConfigurationId)
+		case schemas.DiscoveredResource_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DiscoveredResource_Description, v.Description)
+		}
+		return nil
+	})
 }
 
 // Represents a migration task in a migration tool.
@@ -77,6 +173,51 @@ type MigrationTask struct {
 	UpdateDateTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *MigrationTask) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MigrationTask)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MigrationTask) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MigrationTaskName != nil {
+		s.WriteString(schemas.MigrationTask_MigrationTaskName, *v.MigrationTaskName)
+	}
+	if v.ProgressUpdateStream != nil {
+		s.WriteString(schemas.MigrationTask_ProgressUpdateStream, *v.ProgressUpdateStream)
+	}
+	serializeLatestResourceAttributeList(s, schemas.MigrationTask_ResourceAttributeList, v.ResourceAttributeList)
+	if v.Task != nil {
+		s.WriteStruct(schemas.MigrationTask_Task)
+		v.Task.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateDateTime != nil {
+		s.WriteTime(schemas.MigrationTask_UpdateDateTime, *v.UpdateDateTime)
+	}
+}
+func (v *MigrationTask) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MigrationTask, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MigrationTask_MigrationTaskName:
+			v.MigrationTaskName = new(string)
+			return d.ReadString(schemas.MigrationTask_MigrationTaskName, v.MigrationTaskName)
+		case schemas.MigrationTask_ProgressUpdateStream:
+			v.ProgressUpdateStream = new(string)
+			return d.ReadString(schemas.MigrationTask_ProgressUpdateStream, v.ProgressUpdateStream)
+		case schemas.MigrationTask_ResourceAttributeList:
+			return deserializeLatestResourceAttributeList(d, schemas.MigrationTask_ResourceAttributeList, &v.ResourceAttributeList)
+		case schemas.MigrationTask_Task:
+			v.Task = &Task{}
+			return v.Task.Deserialize(d)
+		case schemas.MigrationTask_UpdateDateTime:
+			v.UpdateDateTime = new(time.Time)
+			return d.ReadTime(schemas.MigrationTask_UpdateDateTime, v.UpdateDateTime)
+		}
+		return nil
+	})
 }
 
 // MigrationTaskSummary includes MigrationTaskName , ProgressPercent ,
@@ -106,6 +247,62 @@ type MigrationTaskSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MigrationTaskSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MigrationTaskSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MigrationTaskSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MigrationTaskName != nil {
+		s.WriteString(schemas.MigrationTaskSummary_MigrationTaskName, *v.MigrationTaskName)
+	}
+	if v.ProgressPercent != nil {
+		s.WriteInt32(schemas.MigrationTaskSummary_ProgressPercent, *v.ProgressPercent)
+	}
+	if v.ProgressUpdateStream != nil {
+		s.WriteString(schemas.MigrationTaskSummary_ProgressUpdateStream, *v.ProgressUpdateStream)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.MigrationTaskSummary_Status, string(v.Status))
+	}
+	if v.StatusDetail != nil {
+		s.WriteString(schemas.MigrationTaskSummary_StatusDetail, *v.StatusDetail)
+	}
+	if v.UpdateDateTime != nil {
+		s.WriteTime(schemas.MigrationTaskSummary_UpdateDateTime, *v.UpdateDateTime)
+	}
+}
+func (v *MigrationTaskSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MigrationTaskSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MigrationTaskSummary_MigrationTaskName:
+			v.MigrationTaskName = new(string)
+			return d.ReadString(schemas.MigrationTaskSummary_MigrationTaskName, v.MigrationTaskName)
+		case schemas.MigrationTaskSummary_ProgressPercent:
+			v.ProgressPercent = new(int32)
+			return d.ReadInt32(schemas.MigrationTaskSummary_ProgressPercent, v.ProgressPercent)
+		case schemas.MigrationTaskSummary_ProgressUpdateStream:
+			v.ProgressUpdateStream = new(string)
+			return d.ReadString(schemas.MigrationTaskSummary_ProgressUpdateStream, v.ProgressUpdateStream)
+		case schemas.MigrationTaskSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.MigrationTaskSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = Status(ev)
+			return nil
+		case schemas.MigrationTaskSummary_StatusDetail:
+			v.StatusDetail = new(string)
+			return d.ReadString(schemas.MigrationTaskSummary_StatusDetail, v.StatusDetail)
+		case schemas.MigrationTaskSummary_UpdateDateTime:
+			v.UpdateDateTime = new(time.Time)
+			return d.ReadTime(schemas.MigrationTaskSummary_UpdateDateTime, v.UpdateDateTime)
+		}
+		return nil
+	})
+}
+
 // A migration-task progress update.
 type MigrationTaskUpdate struct {
 
@@ -121,6 +318,46 @@ type MigrationTaskUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MigrationTaskUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MigrationTaskUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MigrationTaskUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MigrationTaskState != nil {
+		s.WriteStruct(schemas.MigrationTaskUpdate_MigrationTaskState)
+		v.MigrationTaskState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateDateTime != nil {
+		s.WriteTime(schemas.MigrationTaskUpdate_UpdateDateTime, *v.UpdateDateTime)
+	}
+	if v.UpdateType != "" {
+		s.WriteString(schemas.MigrationTaskUpdate_UpdateType, string(v.UpdateType))
+	}
+}
+func (v *MigrationTaskUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MigrationTaskUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MigrationTaskUpdate_MigrationTaskState:
+			v.MigrationTaskState = &Task{}
+			return v.MigrationTaskState.Deserialize(d)
+		case schemas.MigrationTaskUpdate_UpdateDateTime:
+			v.UpdateDateTime = new(time.Time)
+			return d.ReadTime(schemas.MigrationTaskUpdate_UpdateDateTime, v.UpdateDateTime)
+		case schemas.MigrationTaskUpdate_UpdateType:
+			var ev string
+			if err := d.ReadString(schemas.MigrationTaskUpdate_UpdateType, &ev); err != nil {
+				return err
+			}
+			v.UpdateType = UpdateType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Summary of the AWS resource used for access control that is implicitly linked
 // to your AWS account.
 type ProgressUpdateStreamSummary struct {
@@ -129,6 +366,28 @@ type ProgressUpdateStreamSummary struct {
 	ProgressUpdateStreamName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ProgressUpdateStreamSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProgressUpdateStreamSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProgressUpdateStreamSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProgressUpdateStreamName != nil {
+		s.WriteString(schemas.ProgressUpdateStreamSummary_ProgressUpdateStreamName, *v.ProgressUpdateStreamName)
+	}
+}
+func (v *ProgressUpdateStreamSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProgressUpdateStreamSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProgressUpdateStreamSummary_ProgressUpdateStreamName:
+			v.ProgressUpdateStreamName = new(string)
+			return d.ReadString(schemas.ProgressUpdateStreamSummary_ProgressUpdateStreamName, v.ProgressUpdateStreamName)
+		}
+		return nil
+	})
 }
 
 // Attribute associated with a resource.
@@ -161,6 +420,38 @@ type ResourceAttribute struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourceAttribute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceAttribute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceAttribute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.ResourceAttribute_Type, string(v.Type))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ResourceAttribute_Value, *v.Value)
+	}
+}
+func (v *ResourceAttribute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceAttribute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceAttribute_Type:
+			var ev string
+			if err := d.ReadString(schemas.ResourceAttribute_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ResourceAttributeType(ev)
+			return nil
+		case schemas.ResourceAttribute_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ResourceAttribute_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // A source resource can be a source server, a migration wave, an application, or
 // any other resource that you track.
 type SourceResource struct {
@@ -182,6 +473,40 @@ type SourceResource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SourceResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.SourceResource_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SourceResource_Name, *v.Name)
+	}
+	if v.StatusDetail != nil {
+		s.WriteString(schemas.SourceResource_StatusDetail, *v.StatusDetail)
+	}
+}
+func (v *SourceResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceResource_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.SourceResource_Description, v.Description)
+		case schemas.SourceResource_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SourceResource_Name, v.Name)
+		case schemas.SourceResource_StatusDetail:
+			v.StatusDetail = new(string)
+			return d.ReadString(schemas.SourceResource_StatusDetail, v.StatusDetail)
+		}
+		return nil
+	})
+}
+
 // Task object encapsulating task information.
 type Task struct {
 
@@ -199,6 +524,44 @@ type Task struct {
 	StatusDetail *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Task) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Task)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Task) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProgressPercent != nil {
+		s.WriteInt32(schemas.Task_ProgressPercent, *v.ProgressPercent)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Task_Status, string(v.Status))
+	}
+	if v.StatusDetail != nil {
+		s.WriteString(schemas.Task_StatusDetail, *v.StatusDetail)
+	}
+}
+func (v *Task) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Task, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Task_ProgressPercent:
+			v.ProgressPercent = new(int32)
+			return d.ReadInt32(schemas.Task_ProgressPercent, v.ProgressPercent)
+		case schemas.Task_Status:
+			var ev string
+			if err := d.ReadString(schemas.Task_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = Status(ev)
+			return nil
+		case schemas.Task_StatusDetail:
+			v.StatusDetail = new(string)
+			return d.ReadString(schemas.Task_StatusDetail, v.StatusDetail)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

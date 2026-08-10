@@ -4,7 +4,9 @@ package taxsettings
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/taxsettings/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/taxsettings/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,15 @@ type GetTaxInheritanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTaxInheritanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTaxInheritanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTaxInheritanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetTaxInheritanceOutput struct {
 
 	// The tax inheritance status.
@@ -39,13 +50,36 @@ type GetTaxInheritanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTaxInheritanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTaxInheritanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTaxInheritanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HeritageStatus != "" {
+		s.WriteString(schemas.GetTaxInheritanceResponse_heritageStatus, string(v.HeritageStatus))
+	}
+}
+func (v *GetTaxInheritanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTaxInheritanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTaxInheritanceResponse_heritageStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetTaxInheritanceResponse_heritageStatus, &ev); err != nil {
+				return err
+			}
+			v.HeritageStatus = types.HeritageStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTaxInheritanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTaxInheritance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTaxInheritance, schemas.GetTaxInheritanceRequest, schemas.GetTaxInheritanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTaxInheritance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTaxInheritance, schemas.GetTaxInheritanceRequest, schemas.GetTaxInheritanceResponse), output: &GetTaxInheritanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

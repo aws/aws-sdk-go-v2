@@ -4,7 +4,9 @@ package migrationhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,29 @@ type AssociateCreatedArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateCreatedArtifactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateCreatedArtifactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateCreatedArtifactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedArtifact != nil {
+		s.WriteStruct(schemas.AssociateCreatedArtifactRequest_CreatedArtifact)
+		v.CreatedArtifact.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.AssociateCreatedArtifactRequest_DryRun, v.DryRun)
+	}
+	if v.MigrationTaskName != nil {
+		s.WriteString(schemas.AssociateCreatedArtifactRequest_MigrationTaskName, *v.MigrationTaskName)
+	}
+	if v.ProgressUpdateStream != nil {
+		s.WriteString(schemas.AssociateCreatedArtifactRequest_ProgressUpdateStream, *v.ProgressUpdateStream)
+	}
+}
+
 type AssociateCreatedArtifactOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -69,13 +94,26 @@ type AssociateCreatedArtifactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateCreatedArtifactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateCreatedArtifactResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateCreatedArtifactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateCreatedArtifactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateCreatedArtifactResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateCreatedArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateCreatedArtifact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateCreatedArtifact, schemas.AssociateCreatedArtifactRequest, schemas.AssociateCreatedArtifactResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateCreatedArtifact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateCreatedArtifact, schemas.AssociateCreatedArtifactRequest, schemas.AssociateCreatedArtifactResult), output: &AssociateCreatedArtifactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

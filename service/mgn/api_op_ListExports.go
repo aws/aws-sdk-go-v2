@@ -5,7 +5,9 @@ package mgn
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,42 @@ type ListExportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExportsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExportsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExportsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListExportsRequest_filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListExportsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExportsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListExportsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListExportsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListExportsRequest_filters:
+			v.Filters = &types.ListExportsRequestFilters{}
+			return v.Filters.Deserialize(d)
+		case schemas.ListExportsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListExportsRequest_maxResults, v.MaxResults)
+		case schemas.ListExportsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListExportsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 // List export response.
 type ListExportsOutput struct {
 
@@ -55,13 +93,35 @@ type ListExportsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExportsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExportsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExportsList(s, schemas.ListExportsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExportsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListExportsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListExportsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListExportsResponse_items:
+			return deserializeExportsList(d, schemas.ListExportsResponse_items, &v.Items)
+		case schemas.ListExportsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListExportsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListExportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListExports{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExports, schemas.ListExportsRequest, schemas.ListExportsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListExports{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExports, schemas.ListExportsRequest, schemas.ListExportsResponse), output: &ListExportsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package codecommit
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -81,6 +83,50 @@ type MergeBranchesBySquashInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MergeBranchesBySquashInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MergeBranchesBySquashInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MergeBranchesBySquashInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorName != nil {
+		s.WriteString(schemas.MergeBranchesBySquashInput_authorName, *v.AuthorName)
+	}
+	if v.CommitMessage != nil {
+		s.WriteString(schemas.MergeBranchesBySquashInput_commitMessage, *v.CommitMessage)
+	}
+	if v.ConflictDetailLevel != "" {
+		s.WriteString(schemas.MergeBranchesBySquashInput_conflictDetailLevel, string(v.ConflictDetailLevel))
+	}
+	if v.ConflictResolution != nil {
+		s.WriteStruct(schemas.MergeBranchesBySquashInput_conflictResolution)
+		v.ConflictResolution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConflictResolutionStrategy != "" {
+		s.WriteString(schemas.MergeBranchesBySquashInput_conflictResolutionStrategy, string(v.ConflictResolutionStrategy))
+	}
+	if v.DestinationCommitSpecifier != nil {
+		s.WriteString(schemas.MergeBranchesBySquashInput_destinationCommitSpecifier, *v.DestinationCommitSpecifier)
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.MergeBranchesBySquashInput_email, *v.Email)
+	}
+	if v.KeepEmptyFolders != false {
+		s.WriteBool(schemas.MergeBranchesBySquashInput_keepEmptyFolders, v.KeepEmptyFolders)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.MergeBranchesBySquashInput_repositoryName, *v.RepositoryName)
+	}
+	if v.SourceCommitSpecifier != nil {
+		s.WriteString(schemas.MergeBranchesBySquashInput_sourceCommitSpecifier, *v.SourceCommitSpecifier)
+	}
+	if v.TargetBranch != nil {
+		s.WriteString(schemas.MergeBranchesBySquashInput_targetBranch, *v.TargetBranch)
+	}
+}
+
 type MergeBranchesBySquashOutput struct {
 
 	// The commit ID of the merge in the destination or target branch.
@@ -95,13 +141,38 @@ type MergeBranchesBySquashOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MergeBranchesBySquashOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MergeBranchesBySquashOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MergeBranchesBySquashOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommitId != nil {
+		s.WriteString(schemas.MergeBranchesBySquashOutput_commitId, *v.CommitId)
+	}
+	if v.TreeId != nil {
+		s.WriteString(schemas.MergeBranchesBySquashOutput_treeId, *v.TreeId)
+	}
+}
+func (v *MergeBranchesBySquashOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MergeBranchesBySquashOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MergeBranchesBySquashOutput_commitId:
+			v.CommitId = new(string)
+			return d.ReadString(schemas.MergeBranchesBySquashOutput_commitId, v.CommitId)
+		case schemas.MergeBranchesBySquashOutput_treeId:
+			v.TreeId = new(string)
+			return d.ReadString(schemas.MergeBranchesBySquashOutput_treeId, v.TreeId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMergeBranchesBySquashMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpMergeBranchesBySquash{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MergeBranchesBySquash, schemas.MergeBranchesBySquashInput, schemas.MergeBranchesBySquashOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpMergeBranchesBySquash{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MergeBranchesBySquash, schemas.MergeBranchesBySquashInput, schemas.MergeBranchesBySquashOutput), output: &MergeBranchesBySquashOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package forecast
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -46,6 +48,18 @@ type DescribeDatasetGroupInput struct {
 	DatasetGroupArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeDatasetGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDatasetGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDatasetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetGroupArn != nil {
+		s.WriteString(schemas.DescribeDatasetGroupRequest_DatasetGroupArn, *v.DatasetGroupArn)
+	}
 }
 
 type DescribeDatasetGroupOutput struct {
@@ -97,13 +111,69 @@ type DescribeDatasetGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDatasetGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDatasetGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDatasetGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeDatasetGroupResponse_CreationTime, *v.CreationTime)
+	}
+	serializeArnList(s, schemas.DescribeDatasetGroupResponse_DatasetArns, v.DatasetArns)
+	if v.DatasetGroupArn != nil {
+		s.WriteString(schemas.DescribeDatasetGroupResponse_DatasetGroupArn, *v.DatasetGroupArn)
+	}
+	if v.DatasetGroupName != nil {
+		s.WriteString(schemas.DescribeDatasetGroupResponse_DatasetGroupName, *v.DatasetGroupName)
+	}
+	if v.Domain != "" {
+		s.WriteString(schemas.DescribeDatasetGroupResponse_Domain, string(v.Domain))
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.DescribeDatasetGroupResponse_LastModificationTime, *v.LastModificationTime)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.DescribeDatasetGroupResponse_Status, *v.Status)
+	}
+}
+func (v *DescribeDatasetGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDatasetGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDatasetGroupResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeDatasetGroupResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeDatasetGroupResponse_DatasetArns:
+			return deserializeArnList(d, schemas.DescribeDatasetGroupResponse_DatasetArns, &v.DatasetArns)
+		case schemas.DescribeDatasetGroupResponse_DatasetGroupArn:
+			v.DatasetGroupArn = new(string)
+			return d.ReadString(schemas.DescribeDatasetGroupResponse_DatasetGroupArn, v.DatasetGroupArn)
+		case schemas.DescribeDatasetGroupResponse_DatasetGroupName:
+			v.DatasetGroupName = new(string)
+			return d.ReadString(schemas.DescribeDatasetGroupResponse_DatasetGroupName, v.DatasetGroupName)
+		case schemas.DescribeDatasetGroupResponse_Domain:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDatasetGroupResponse_Domain, &ev); err != nil {
+				return err
+			}
+			v.Domain = types.Domain(ev)
+			return nil
+		case schemas.DescribeDatasetGroupResponse_LastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeDatasetGroupResponse_LastModificationTime, v.LastModificationTime)
+		case schemas.DescribeDatasetGroupResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.DescribeDatasetGroupResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDatasetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDatasetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDatasetGroup, schemas.DescribeDatasetGroupRequest, schemas.DescribeDatasetGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDatasetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDatasetGroup, schemas.DescribeDatasetGroupRequest, schemas.DescribeDatasetGroupResponse), output: &DescribeDatasetGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

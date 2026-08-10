@@ -4,6 +4,8 @@ package kinesisanalyticsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,24 @@ type DeleteApplicationReferenceDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteApplicationReferenceDataSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteApplicationReferenceDataSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteApplicationReferenceDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.DeleteApplicationReferenceDataSourceRequest_ApplicationName, *v.ApplicationName)
+	}
+	if v.CurrentApplicationVersionId != nil {
+		s.WriteInt64(schemas.DeleteApplicationReferenceDataSourceRequest_CurrentApplicationVersionId, *v.CurrentApplicationVersionId)
+	}
+	if v.ReferenceId != nil {
+		s.WriteString(schemas.DeleteApplicationReferenceDataSourceRequest_ReferenceId, *v.ReferenceId)
+	}
+}
+
 type DeleteApplicationReferenceDataSourceOutput struct {
 
 	// The application Amazon Resource Name (ARN).
@@ -65,13 +85,38 @@ type DeleteApplicationReferenceDataSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteApplicationReferenceDataSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteApplicationReferenceDataSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteApplicationReferenceDataSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationARN != nil {
+		s.WriteString(schemas.DeleteApplicationReferenceDataSourceResponse_ApplicationARN, *v.ApplicationARN)
+	}
+	if v.ApplicationVersionId != nil {
+		s.WriteInt64(schemas.DeleteApplicationReferenceDataSourceResponse_ApplicationVersionId, *v.ApplicationVersionId)
+	}
+}
+func (v *DeleteApplicationReferenceDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteApplicationReferenceDataSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteApplicationReferenceDataSourceResponse_ApplicationARN:
+			v.ApplicationARN = new(string)
+			return d.ReadString(schemas.DeleteApplicationReferenceDataSourceResponse_ApplicationARN, v.ApplicationARN)
+		case schemas.DeleteApplicationReferenceDataSourceResponse_ApplicationVersionId:
+			v.ApplicationVersionId = new(int64)
+			return d.ReadInt64(schemas.DeleteApplicationReferenceDataSourceResponse_ApplicationVersionId, v.ApplicationVersionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteApplicationReferenceDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteApplicationReferenceDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApplicationReferenceDataSource, schemas.DeleteApplicationReferenceDataSourceRequest, schemas.DeleteApplicationReferenceDataSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteApplicationReferenceDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApplicationReferenceDataSource, schemas.DeleteApplicationReferenceDataSourceRequest, schemas.DeleteApplicationReferenceDataSourceResponse), output: &DeleteApplicationReferenceDataSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

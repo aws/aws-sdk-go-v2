@@ -4,7 +4,9 @@ package appmesh
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,40 @@ type DescribeVirtualRouterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVirtualRouterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVirtualRouterInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVirtualRouterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MeshName != nil {
+		s.WriteString(schemas.DescribeVirtualRouterInput_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.DescribeVirtualRouterInput_meshOwner, *v.MeshOwner)
+	}
+	if v.VirtualRouterName != nil {
+		s.WriteString(schemas.DescribeVirtualRouterInput_virtualRouterName, *v.VirtualRouterName)
+	}
+}
+func (v *DescribeVirtualRouterInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeVirtualRouterInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeVirtualRouterInput_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.DescribeVirtualRouterInput_meshName, v.MeshName)
+		case schemas.DescribeVirtualRouterInput_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.DescribeVirtualRouterInput_meshOwner, v.MeshOwner)
+		case schemas.DescribeVirtualRouterInput_virtualRouterName:
+			v.VirtualRouterName = new(string)
+			return d.ReadString(schemas.DescribeVirtualRouterInput_virtualRouterName, v.VirtualRouterName)
+		}
+		return nil
+	})
+}
+
 type DescribeVirtualRouterOutput struct {
 
 	// The full description of your virtual router.
@@ -59,13 +95,34 @@ type DescribeVirtualRouterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVirtualRouterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVirtualRouterOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVirtualRouterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualRouter != nil {
+		s.WriteStruct(schemas.DescribeVirtualRouterOutput_virtualRouter)
+		v.VirtualRouter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeVirtualRouterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeVirtualRouterOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeVirtualRouterOutput_virtualRouter:
+			v.VirtualRouter = &types.VirtualRouterData{}
+			return v.VirtualRouter.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeVirtualRouterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeVirtualRouter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVirtualRouter, schemas.DescribeVirtualRouterInput, schemas.DescribeVirtualRouterOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeVirtualRouter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVirtualRouter, schemas.DescribeVirtualRouterInput, schemas.DescribeVirtualRouterOutput), output: &DescribeVirtualRouterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

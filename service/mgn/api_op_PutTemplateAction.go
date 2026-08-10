@@ -4,7 +4,9 @@ package mgn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -81,6 +83,104 @@ type PutTemplateActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTemplateActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutTemplateActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTemplateActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionID != nil {
+		s.WriteString(schemas.PutTemplateActionRequest_actionID, *v.ActionID)
+	}
+	if v.ActionName != nil {
+		s.WriteString(schemas.PutTemplateActionRequest_actionName, *v.ActionName)
+	}
+	if v.Active != nil {
+		s.WriteBool(schemas.PutTemplateActionRequest_active, *v.Active)
+	}
+	if v.Category != "" {
+		s.WriteString(schemas.PutTemplateActionRequest_category, string(v.Category))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.PutTemplateActionRequest_description, *v.Description)
+	}
+	if v.DocumentIdentifier != nil {
+		s.WriteString(schemas.PutTemplateActionRequest_documentIdentifier, *v.DocumentIdentifier)
+	}
+	if v.DocumentVersion != nil {
+		s.WriteString(schemas.PutTemplateActionRequest_documentVersion, *v.DocumentVersion)
+	}
+	serializeSsmDocumentExternalParameters(s, schemas.PutTemplateActionRequest_externalParameters, v.ExternalParameters)
+	if v.LaunchConfigurationTemplateID != nil {
+		s.WriteString(schemas.PutTemplateActionRequest_launchConfigurationTemplateID, *v.LaunchConfigurationTemplateID)
+	}
+	if v.MustSucceedForCutover != nil {
+		s.WriteBool(schemas.PutTemplateActionRequest_mustSucceedForCutover, *v.MustSucceedForCutover)
+	}
+	if v.OperatingSystem != nil {
+		s.WriteString(schemas.PutTemplateActionRequest_operatingSystem, *v.OperatingSystem)
+	}
+	if v.Order != nil {
+		s.WriteInt32(schemas.PutTemplateActionRequest_order, *v.Order)
+	}
+	serializeSsmDocumentParameters(s, schemas.PutTemplateActionRequest_parameters, v.Parameters)
+	if v.TimeoutSeconds != nil {
+		s.WriteInt32(schemas.PutTemplateActionRequest_timeoutSeconds, *v.TimeoutSeconds)
+	}
+}
+func (v *PutTemplateActionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutTemplateActionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutTemplateActionRequest_actionID:
+			v.ActionID = new(string)
+			return d.ReadString(schemas.PutTemplateActionRequest_actionID, v.ActionID)
+		case schemas.PutTemplateActionRequest_actionName:
+			v.ActionName = new(string)
+			return d.ReadString(schemas.PutTemplateActionRequest_actionName, v.ActionName)
+		case schemas.PutTemplateActionRequest_active:
+			v.Active = new(bool)
+			return d.ReadBool(schemas.PutTemplateActionRequest_active, v.Active)
+		case schemas.PutTemplateActionRequest_category:
+			var ev string
+			if err := d.ReadString(schemas.PutTemplateActionRequest_category, &ev); err != nil {
+				return err
+			}
+			v.Category = types.ActionCategory(ev)
+			return nil
+		case schemas.PutTemplateActionRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PutTemplateActionRequest_description, v.Description)
+		case schemas.PutTemplateActionRequest_documentIdentifier:
+			v.DocumentIdentifier = new(string)
+			return d.ReadString(schemas.PutTemplateActionRequest_documentIdentifier, v.DocumentIdentifier)
+		case schemas.PutTemplateActionRequest_documentVersion:
+			v.DocumentVersion = new(string)
+			return d.ReadString(schemas.PutTemplateActionRequest_documentVersion, v.DocumentVersion)
+		case schemas.PutTemplateActionRequest_externalParameters:
+			return deserializeSsmDocumentExternalParameters(d, schemas.PutTemplateActionRequest_externalParameters, &v.ExternalParameters)
+		case schemas.PutTemplateActionRequest_launchConfigurationTemplateID:
+			v.LaunchConfigurationTemplateID = new(string)
+			return d.ReadString(schemas.PutTemplateActionRequest_launchConfigurationTemplateID, v.LaunchConfigurationTemplateID)
+		case schemas.PutTemplateActionRequest_mustSucceedForCutover:
+			v.MustSucceedForCutover = new(bool)
+			return d.ReadBool(schemas.PutTemplateActionRequest_mustSucceedForCutover, v.MustSucceedForCutover)
+		case schemas.PutTemplateActionRequest_operatingSystem:
+			v.OperatingSystem = new(string)
+			return d.ReadString(schemas.PutTemplateActionRequest_operatingSystem, v.OperatingSystem)
+		case schemas.PutTemplateActionRequest_order:
+			v.Order = new(int32)
+			return d.ReadInt32(schemas.PutTemplateActionRequest_order, v.Order)
+		case schemas.PutTemplateActionRequest_parameters:
+			return deserializeSsmDocumentParameters(d, schemas.PutTemplateActionRequest_parameters, &v.Parameters)
+		case schemas.PutTemplateActionRequest_timeoutSeconds:
+			v.TimeoutSeconds = new(int32)
+			return d.ReadInt32(schemas.PutTemplateActionRequest_timeoutSeconds, v.TimeoutSeconds)
+		}
+		return nil
+	})
+}
+
 type PutTemplateActionOutput struct {
 
 	// Template post migration custom action ID.
@@ -128,13 +228,102 @@ type PutTemplateActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTemplateActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TemplateActionDocument)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTemplateActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionID != nil {
+		s.WriteString(schemas.TemplateActionDocument_actionID, *v.ActionID)
+	}
+	if v.ActionName != nil {
+		s.WriteString(schemas.TemplateActionDocument_actionName, *v.ActionName)
+	}
+	if v.Active != nil {
+		s.WriteBool(schemas.TemplateActionDocument_active, *v.Active)
+	}
+	if v.Category != "" {
+		s.WriteString(schemas.TemplateActionDocument_category, string(v.Category))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.TemplateActionDocument_description, *v.Description)
+	}
+	if v.DocumentIdentifier != nil {
+		s.WriteString(schemas.TemplateActionDocument_documentIdentifier, *v.DocumentIdentifier)
+	}
+	if v.DocumentVersion != nil {
+		s.WriteString(schemas.TemplateActionDocument_documentVersion, *v.DocumentVersion)
+	}
+	serializeSsmDocumentExternalParameters(s, schemas.TemplateActionDocument_externalParameters, v.ExternalParameters)
+	if v.MustSucceedForCutover != nil {
+		s.WriteBool(schemas.TemplateActionDocument_mustSucceedForCutover, *v.MustSucceedForCutover)
+	}
+	if v.OperatingSystem != nil {
+		s.WriteString(schemas.TemplateActionDocument_operatingSystem, *v.OperatingSystem)
+	}
+	if v.Order != nil {
+		s.WriteInt32(schemas.TemplateActionDocument_order, *v.Order)
+	}
+	serializeSsmDocumentParameters(s, schemas.TemplateActionDocument_parameters, v.Parameters)
+	if v.TimeoutSeconds != nil {
+		s.WriteInt32(schemas.TemplateActionDocument_timeoutSeconds, *v.TimeoutSeconds)
+	}
+}
+func (v *PutTemplateActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TemplateActionDocument, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TemplateActionDocument_actionID:
+			v.ActionID = new(string)
+			return d.ReadString(schemas.TemplateActionDocument_actionID, v.ActionID)
+		case schemas.TemplateActionDocument_actionName:
+			v.ActionName = new(string)
+			return d.ReadString(schemas.TemplateActionDocument_actionName, v.ActionName)
+		case schemas.TemplateActionDocument_active:
+			v.Active = new(bool)
+			return d.ReadBool(schemas.TemplateActionDocument_active, v.Active)
+		case schemas.TemplateActionDocument_category:
+			var ev string
+			if err := d.ReadString(schemas.TemplateActionDocument_category, &ev); err != nil {
+				return err
+			}
+			v.Category = types.ActionCategory(ev)
+			return nil
+		case schemas.TemplateActionDocument_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.TemplateActionDocument_description, v.Description)
+		case schemas.TemplateActionDocument_documentIdentifier:
+			v.DocumentIdentifier = new(string)
+			return d.ReadString(schemas.TemplateActionDocument_documentIdentifier, v.DocumentIdentifier)
+		case schemas.TemplateActionDocument_documentVersion:
+			v.DocumentVersion = new(string)
+			return d.ReadString(schemas.TemplateActionDocument_documentVersion, v.DocumentVersion)
+		case schemas.TemplateActionDocument_externalParameters:
+			return deserializeSsmDocumentExternalParameters(d, schemas.TemplateActionDocument_externalParameters, &v.ExternalParameters)
+		case schemas.TemplateActionDocument_mustSucceedForCutover:
+			v.MustSucceedForCutover = new(bool)
+			return d.ReadBool(schemas.TemplateActionDocument_mustSucceedForCutover, v.MustSucceedForCutover)
+		case schemas.TemplateActionDocument_operatingSystem:
+			v.OperatingSystem = new(string)
+			return d.ReadString(schemas.TemplateActionDocument_operatingSystem, v.OperatingSystem)
+		case schemas.TemplateActionDocument_order:
+			v.Order = new(int32)
+			return d.ReadInt32(schemas.TemplateActionDocument_order, v.Order)
+		case schemas.TemplateActionDocument_parameters:
+			return deserializeSsmDocumentParameters(d, schemas.TemplateActionDocument_parameters, &v.Parameters)
+		case schemas.TemplateActionDocument_timeoutSeconds:
+			v.TimeoutSeconds = new(int32)
+			return d.ReadInt32(schemas.TemplateActionDocument_timeoutSeconds, v.TimeoutSeconds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutTemplateActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutTemplateAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTemplateAction, schemas.PutTemplateActionRequest, schemas.TemplateActionDocument)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutTemplateAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTemplateAction, schemas.PutTemplateActionRequest, schemas.TemplateActionDocument), output: &PutTemplateActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

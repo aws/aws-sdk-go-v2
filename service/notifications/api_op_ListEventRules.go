@@ -5,7 +5,9 @@ package notifications
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/notifications/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/notifications/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListEventRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEventRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEventRulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEventRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEventRulesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEventRulesRequest_nextToken, *v.NextToken)
+	}
+	if v.NotificationConfigurationArn != nil {
+		s.WriteString(schemas.ListEventRulesRequest_notificationConfigurationArn, *v.NotificationConfigurationArn)
+	}
+}
+
 type ListEventRulesOutput struct {
 
 	// A list of EventRules .
@@ -61,13 +81,35 @@ type ListEventRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEventRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEventRulesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEventRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEventRules(s, schemas.ListEventRulesResponse_eventRules, v.EventRules)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEventRulesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListEventRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEventRulesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEventRulesResponse_eventRules:
+			return deserializeEventRules(d, schemas.ListEventRulesResponse_eventRules, &v.EventRules)
+		case schemas.ListEventRulesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEventRulesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEventRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEventRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventRules, schemas.ListEventRulesRequest, schemas.ListEventRulesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEventRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventRules, schemas.ListEventRulesRequest, schemas.ListEventRulesResponse), output: &ListEventRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

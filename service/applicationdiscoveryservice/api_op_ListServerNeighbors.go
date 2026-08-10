@@ -4,7 +4,9 @@ package applicationdiscoveryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,28 @@ type ListServerNeighborsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServerNeighborsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServerNeighborsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServerNeighborsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationId != nil {
+		s.WriteString(schemas.ListServerNeighborsRequest_configurationId, *v.ConfigurationId)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListServerNeighborsRequest_maxResults, v.MaxResults)
+	}
+	serializeConfigurationIdList(s, schemas.ListServerNeighborsRequest_neighborConfigurationIds, v.NeighborConfigurationIds)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServerNeighborsRequest_nextToken, *v.NextToken)
+	}
+	if v.PortInformationNeeded != false {
+		s.WriteBool(schemas.ListServerNeighborsRequest_portInformationNeeded, v.PortInformationNeeded)
+	}
+}
+
 type ListServerNeighborsOutput struct {
 
 	// List of distinct servers that are one hop away from the given server.
@@ -75,13 +99,40 @@ type ListServerNeighborsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServerNeighborsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServerNeighborsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServerNeighborsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KnownDependencyCount != 0 {
+		s.WriteInt64(schemas.ListServerNeighborsResponse_knownDependencyCount, v.KnownDependencyCount)
+	}
+	serializeNeighborDetailsList(s, schemas.ListServerNeighborsResponse_neighbors, v.Neighbors)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServerNeighborsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListServerNeighborsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServerNeighborsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServerNeighborsResponse_knownDependencyCount:
+			return d.ReadInt64(schemas.ListServerNeighborsResponse_knownDependencyCount, &v.KnownDependencyCount)
+		case schemas.ListServerNeighborsResponse_neighbors:
+			return deserializeNeighborDetailsList(d, schemas.ListServerNeighborsResponse_neighbors, &v.Neighbors)
+		case schemas.ListServerNeighborsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServerNeighborsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListServerNeighborsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListServerNeighbors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServerNeighbors, schemas.ListServerNeighborsRequest, schemas.ListServerNeighborsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListServerNeighbors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServerNeighbors, schemas.ListServerNeighborsRequest, schemas.ListServerNeighborsResponse), output: &ListServerNeighborsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

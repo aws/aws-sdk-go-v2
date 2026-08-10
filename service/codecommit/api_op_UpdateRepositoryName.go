@@ -4,6 +4,8 @@ package codecommit
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type UpdateRepositoryNameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRepositoryNameInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRepositoryNameInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRepositoryNameInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NewName != nil {
+		s.WriteString(schemas.UpdateRepositoryNameInput_newName, *v.NewName)
+	}
+	if v.OldName != nil {
+		s.WriteString(schemas.UpdateRepositoryNameInput_oldName, *v.OldName)
+	}
+}
+
 type UpdateRepositoryNameOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +69,26 @@ type UpdateRepositoryNameOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRepositoryNameOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRepositoryNameOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateRepositoryNameOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRepositoryNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateRepositoryName{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRepositoryName, schemas.UpdateRepositoryNameInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateRepositoryName{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRepositoryName, schemas.UpdateRepositoryNameInput, nil), output: &UpdateRepositoryNameOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

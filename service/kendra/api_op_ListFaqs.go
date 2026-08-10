@@ -5,7 +5,9 @@ package kendra
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListFaqsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFaqsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFaqsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFaqsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexId != nil {
+		s.WriteString(schemas.ListFaqsRequest_IndexId, *v.IndexId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFaqsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFaqsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListFaqsOutput struct {
 
 	// Summary information about the FAQs for a specified index.
@@ -59,13 +79,35 @@ type ListFaqsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFaqsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFaqsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFaqsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFaqSummaryItems(s, schemas.ListFaqsResponse_FaqSummaryItems, v.FaqSummaryItems)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFaqsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListFaqsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFaqsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFaqsResponse_FaqSummaryItems:
+			return deserializeFaqSummaryItems(d, schemas.ListFaqsResponse_FaqSummaryItems, &v.FaqSummaryItems)
+		case schemas.ListFaqsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFaqsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFaqsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListFaqs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFaqs, schemas.ListFaqsRequest, schemas.ListFaqsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListFaqs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFaqs, schemas.ListFaqsRequest, schemas.ListFaqsResponse), output: &ListFaqsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

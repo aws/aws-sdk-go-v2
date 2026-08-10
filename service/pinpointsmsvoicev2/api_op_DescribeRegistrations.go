@@ -5,7 +5,9 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,23 @@ type DescribeRegistrationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRegistrationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRegistrationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRegistrationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRegistrationFilterList(s, schemas.DescribeRegistrationsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeRegistrationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRegistrationsRequest_NextToken, *v.NextToken)
+	}
+	serializeRegistrationIdList(s, schemas.DescribeRegistrationsRequest_RegistrationIds, v.RegistrationIds)
+}
+
 type DescribeRegistrationsOutput struct {
 
 	// An array of RegistrationInformation objects.
@@ -60,13 +79,35 @@ type DescribeRegistrationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRegistrationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRegistrationsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRegistrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRegistrationsResult_NextToken, *v.NextToken)
+	}
+	serializeRegistrationInformationList(s, schemas.DescribeRegistrationsResult_Registrations, v.Registrations)
+}
+func (v *DescribeRegistrationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRegistrationsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRegistrationsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeRegistrationsResult_NextToken, v.NextToken)
+		case schemas.DescribeRegistrationsResult_Registrations:
+			return deserializeRegistrationInformationList(d, schemas.DescribeRegistrationsResult_Registrations, &v.Registrations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRegistrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeRegistrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRegistrations, schemas.DescribeRegistrationsRequest, schemas.DescribeRegistrationsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeRegistrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRegistrations, schemas.DescribeRegistrationsRequest, schemas.DescribeRegistrationsResult), output: &DescribeRegistrationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

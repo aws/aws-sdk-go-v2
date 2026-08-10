@@ -4,6 +4,8 @@ package chime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DisassociatePhoneNumberFromUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociatePhoneNumberFromUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociatePhoneNumberFromUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociatePhoneNumberFromUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DisassociatePhoneNumberFromUserRequest_AccountId, *v.AccountId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.DisassociatePhoneNumberFromUserRequest_UserId, *v.UserId)
+	}
+}
+
 type DisassociatePhoneNumberFromUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +63,26 @@ type DisassociatePhoneNumberFromUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociatePhoneNumberFromUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociatePhoneNumberFromUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociatePhoneNumberFromUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociatePhoneNumberFromUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociatePhoneNumberFromUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociatePhoneNumberFromUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociatePhoneNumberFromUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociatePhoneNumberFromUser, schemas.DisassociatePhoneNumberFromUserRequest, schemas.DisassociatePhoneNumberFromUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociatePhoneNumberFromUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociatePhoneNumberFromUser, schemas.DisassociatePhoneNumberFromUserRequest, schemas.DisassociatePhoneNumberFromUserResponse), output: &DisassociatePhoneNumberFromUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,28 @@ type CancelComponentDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelComponentDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelComponentDeploymentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelComponentDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComponentName != nil {
+		s.WriteString(schemas.CancelComponentDeploymentInput_componentName, *v.ComponentName)
+	}
+}
+func (v *CancelComponentDeploymentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelComponentDeploymentInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelComponentDeploymentInput_componentName:
+			v.ComponentName = new(string)
+			return d.ReadString(schemas.CancelComponentDeploymentInput_componentName, v.ComponentName)
+		}
+		return nil
+	})
+}
+
 type CancelComponentDeploymentOutput struct {
 
 	// The detailed data of the component with the deployment that is being canceled.
@@ -54,13 +78,34 @@ type CancelComponentDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelComponentDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelComponentDeploymentOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelComponentDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Component != nil {
+		s.WriteStruct(schemas.CancelComponentDeploymentOutput_component)
+		v.Component.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CancelComponentDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelComponentDeploymentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelComponentDeploymentOutput_component:
+			v.Component = &types.Component{}
+			return v.Component.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelComponentDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCancelComponentDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelComponentDeployment, schemas.CancelComponentDeploymentInput, schemas.CancelComponentDeploymentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCancelComponentDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelComponentDeployment, schemas.CancelComponentDeploymentInput, schemas.CancelComponentDeploymentOutput), output: &CancelComponentDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

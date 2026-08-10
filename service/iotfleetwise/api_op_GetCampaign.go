@@ -4,7 +4,9 @@ package iotfleetwise
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -39,6 +41,28 @@ type GetCampaignInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetCampaignInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCampaignRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCampaignInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetCampaignRequest_name, *v.Name)
+	}
+}
+func (v *GetCampaignInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCampaignRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCampaignRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetCampaignRequest_name, v.Name)
+		}
+		return nil
+	})
 }
 
 type GetCampaignOutput struct {
@@ -134,13 +158,150 @@ type GetCampaignOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCampaignOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCampaignResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCampaignOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetCampaignResponse_arn, *v.Arn)
+	}
+	serializeCollectionScheme(s, schemas.GetCampaignResponse_collectionScheme, v.CollectionScheme)
+	if v.Compression != "" {
+		s.WriteString(schemas.GetCampaignResponse_compression, string(v.Compression))
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetCampaignResponse_creationTime, *v.CreationTime)
+	}
+	serializeDataDestinationConfigs(s, schemas.GetCampaignResponse_dataDestinationConfigs, v.DataDestinationConfigs)
+	serializeDataExtraDimensionNodePathList(s, schemas.GetCampaignResponse_dataExtraDimensions, v.DataExtraDimensions)
+	serializeDataPartitions(s, schemas.GetCampaignResponse_dataPartitions, v.DataPartitions)
+	if v.Description != nil {
+		s.WriteString(schemas.GetCampaignResponse_description, *v.Description)
+	}
+	if v.DiagnosticsMode != "" {
+		s.WriteString(schemas.GetCampaignResponse_diagnosticsMode, string(v.DiagnosticsMode))
+	}
+	if v.ExpiryTime != nil {
+		s.WriteTime(schemas.GetCampaignResponse_expiryTime, *v.ExpiryTime)
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.GetCampaignResponse_lastModificationTime, *v.LastModificationTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetCampaignResponse_name, *v.Name)
+	}
+	if v.PostTriggerCollectionDuration != nil {
+		s.WriteInt64(schemas.GetCampaignResponse_postTriggerCollectionDuration, *v.PostTriggerCollectionDuration)
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.GetCampaignResponse_priority, *v.Priority)
+	}
+	if v.SignalCatalogArn != nil {
+		s.WriteString(schemas.GetCampaignResponse_signalCatalogArn, *v.SignalCatalogArn)
+	}
+	serializeSignalInformationList(s, schemas.GetCampaignResponse_signalsToCollect, v.SignalsToCollect)
+	serializeSignalFetchInformationList(s, schemas.GetCampaignResponse_signalsToFetch, v.SignalsToFetch)
+	if v.SpoolingMode != "" {
+		s.WriteString(schemas.GetCampaignResponse_spoolingMode, string(v.SpoolingMode))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetCampaignResponse_startTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetCampaignResponse_status, string(v.Status))
+	}
+	if v.TargetArn != nil {
+		s.WriteString(schemas.GetCampaignResponse_targetArn, *v.TargetArn)
+	}
+}
+func (v *GetCampaignOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCampaignResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCampaignResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetCampaignResponse_arn, v.Arn)
+		case schemas.GetCampaignResponse_collectionScheme:
+			return deserializeCollectionScheme(d, schemas.GetCampaignResponse_collectionScheme, &v.CollectionScheme)
+		case schemas.GetCampaignResponse_compression:
+			var ev string
+			if err := d.ReadString(schemas.GetCampaignResponse_compression, &ev); err != nil {
+				return err
+			}
+			v.Compression = types.Compression(ev)
+			return nil
+		case schemas.GetCampaignResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetCampaignResponse_creationTime, v.CreationTime)
+		case schemas.GetCampaignResponse_dataDestinationConfigs:
+			return deserializeDataDestinationConfigs(d, schemas.GetCampaignResponse_dataDestinationConfigs, &v.DataDestinationConfigs)
+		case schemas.GetCampaignResponse_dataExtraDimensions:
+			return deserializeDataExtraDimensionNodePathList(d, schemas.GetCampaignResponse_dataExtraDimensions, &v.DataExtraDimensions)
+		case schemas.GetCampaignResponse_dataPartitions:
+			return deserializeDataPartitions(d, schemas.GetCampaignResponse_dataPartitions, &v.DataPartitions)
+		case schemas.GetCampaignResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetCampaignResponse_description, v.Description)
+		case schemas.GetCampaignResponse_diagnosticsMode:
+			var ev string
+			if err := d.ReadString(schemas.GetCampaignResponse_diagnosticsMode, &ev); err != nil {
+				return err
+			}
+			v.DiagnosticsMode = types.DiagnosticsMode(ev)
+			return nil
+		case schemas.GetCampaignResponse_expiryTime:
+			v.ExpiryTime = new(time.Time)
+			return d.ReadTime(schemas.GetCampaignResponse_expiryTime, v.ExpiryTime)
+		case schemas.GetCampaignResponse_lastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.GetCampaignResponse_lastModificationTime, v.LastModificationTime)
+		case schemas.GetCampaignResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetCampaignResponse_name, v.Name)
+		case schemas.GetCampaignResponse_postTriggerCollectionDuration:
+			v.PostTriggerCollectionDuration = new(int64)
+			return d.ReadInt64(schemas.GetCampaignResponse_postTriggerCollectionDuration, v.PostTriggerCollectionDuration)
+		case schemas.GetCampaignResponse_priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.GetCampaignResponse_priority, v.Priority)
+		case schemas.GetCampaignResponse_signalCatalogArn:
+			v.SignalCatalogArn = new(string)
+			return d.ReadString(schemas.GetCampaignResponse_signalCatalogArn, v.SignalCatalogArn)
+		case schemas.GetCampaignResponse_signalsToCollect:
+			return deserializeSignalInformationList(d, schemas.GetCampaignResponse_signalsToCollect, &v.SignalsToCollect)
+		case schemas.GetCampaignResponse_signalsToFetch:
+			return deserializeSignalFetchInformationList(d, schemas.GetCampaignResponse_signalsToFetch, &v.SignalsToFetch)
+		case schemas.GetCampaignResponse_spoolingMode:
+			var ev string
+			if err := d.ReadString(schemas.GetCampaignResponse_spoolingMode, &ev); err != nil {
+				return err
+			}
+			v.SpoolingMode = types.SpoolingMode(ev)
+			return nil
+		case schemas.GetCampaignResponse_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.GetCampaignResponse_startTime, v.StartTime)
+		case schemas.GetCampaignResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetCampaignResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CampaignStatus(ev)
+			return nil
+		case schemas.GetCampaignResponse_targetArn:
+			v.TargetArn = new(string)
+			return d.ReadString(schemas.GetCampaignResponse_targetArn, v.TargetArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCampaignMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetCampaign{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCampaign, schemas.GetCampaignRequest, schemas.GetCampaignResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetCampaign{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCampaign, schemas.GetCampaignRequest, schemas.GetCampaignResponse), output: &GetCampaignOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

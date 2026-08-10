@@ -4,7 +4,9 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DescribeIdentityProviderConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeIdentityProviderConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeIdentityProviderConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeIdentityProviderConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.DescribeIdentityProviderConfigurationRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type DescribeIdentityProviderConfigurationOutput struct {
 
 	//  The authentication mode used in WorkMail.
@@ -53,13 +67,52 @@ type DescribeIdentityProviderConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeIdentityProviderConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeIdentityProviderConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeIdentityProviderConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationMode != "" {
+		s.WriteString(schemas.DescribeIdentityProviderConfigurationResponse_AuthenticationMode, string(v.AuthenticationMode))
+	}
+	if v.IdentityCenterConfiguration != nil {
+		s.WriteStruct(schemas.DescribeIdentityProviderConfigurationResponse_IdentityCenterConfiguration)
+		v.IdentityCenterConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PersonalAccessTokenConfiguration != nil {
+		s.WriteStruct(schemas.DescribeIdentityProviderConfigurationResponse_PersonalAccessTokenConfiguration)
+		v.PersonalAccessTokenConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeIdentityProviderConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeIdentityProviderConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeIdentityProviderConfigurationResponse_AuthenticationMode:
+			var ev string
+			if err := d.ReadString(schemas.DescribeIdentityProviderConfigurationResponse_AuthenticationMode, &ev); err != nil {
+				return err
+			}
+			v.AuthenticationMode = types.IdentityProviderAuthenticationMode(ev)
+			return nil
+		case schemas.DescribeIdentityProviderConfigurationResponse_IdentityCenterConfiguration:
+			v.IdentityCenterConfiguration = &types.IdentityCenterConfiguration{}
+			return v.IdentityCenterConfiguration.Deserialize(d)
+		case schemas.DescribeIdentityProviderConfigurationResponse_PersonalAccessTokenConfiguration:
+			v.PersonalAccessTokenConfiguration = &types.PersonalAccessTokenConfiguration{}
+			return v.PersonalAccessTokenConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeIdentityProviderConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeIdentityProviderConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeIdentityProviderConfiguration, schemas.DescribeIdentityProviderConfigurationRequest, schemas.DescribeIdentityProviderConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeIdentityProviderConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeIdentityProviderConfiguration, schemas.DescribeIdentityProviderConfigurationRequest, schemas.DescribeIdentityProviderConfigurationResponse), output: &DescribeIdentityProviderConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

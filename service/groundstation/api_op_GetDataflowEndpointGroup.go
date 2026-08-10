@@ -4,7 +4,9 @@ package groundstation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type GetDataflowEndpointGroupInput struct {
 	DataflowEndpointGroupId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDataflowEndpointGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataflowEndpointGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataflowEndpointGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataflowEndpointGroupId != nil {
+		s.WriteString(schemas.GetDataflowEndpointGroupRequest_dataflowEndpointGroupId, *v.DataflowEndpointGroupId)
+	}
 }
 
 // Output for the GetDataflowEndpointGroup operation.
@@ -68,13 +82,56 @@ type GetDataflowEndpointGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataflowEndpointGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataflowEndpointGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataflowEndpointGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactPostPassDurationSeconds != nil {
+		s.WriteInt32(schemas.GetDataflowEndpointGroupResponse_contactPostPassDurationSeconds, *v.ContactPostPassDurationSeconds)
+	}
+	if v.ContactPrePassDurationSeconds != nil {
+		s.WriteInt32(schemas.GetDataflowEndpointGroupResponse_contactPrePassDurationSeconds, *v.ContactPrePassDurationSeconds)
+	}
+	if v.DataflowEndpointGroupArn != nil {
+		s.WriteString(schemas.GetDataflowEndpointGroupResponse_dataflowEndpointGroupArn, *v.DataflowEndpointGroupArn)
+	}
+	if v.DataflowEndpointGroupId != nil {
+		s.WriteString(schemas.GetDataflowEndpointGroupResponse_dataflowEndpointGroupId, *v.DataflowEndpointGroupId)
+	}
+	serializeEndpointDetailsList(s, schemas.GetDataflowEndpointGroupResponse_endpointsDetails, v.EndpointsDetails)
+	serializeTagsMap(s, schemas.GetDataflowEndpointGroupResponse_tags, v.Tags)
+}
+func (v *GetDataflowEndpointGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataflowEndpointGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataflowEndpointGroupResponse_contactPostPassDurationSeconds:
+			v.ContactPostPassDurationSeconds = new(int32)
+			return d.ReadInt32(schemas.GetDataflowEndpointGroupResponse_contactPostPassDurationSeconds, v.ContactPostPassDurationSeconds)
+		case schemas.GetDataflowEndpointGroupResponse_contactPrePassDurationSeconds:
+			v.ContactPrePassDurationSeconds = new(int32)
+			return d.ReadInt32(schemas.GetDataflowEndpointGroupResponse_contactPrePassDurationSeconds, v.ContactPrePassDurationSeconds)
+		case schemas.GetDataflowEndpointGroupResponse_dataflowEndpointGroupArn:
+			v.DataflowEndpointGroupArn = new(string)
+			return d.ReadString(schemas.GetDataflowEndpointGroupResponse_dataflowEndpointGroupArn, v.DataflowEndpointGroupArn)
+		case schemas.GetDataflowEndpointGroupResponse_dataflowEndpointGroupId:
+			v.DataflowEndpointGroupId = new(string)
+			return d.ReadString(schemas.GetDataflowEndpointGroupResponse_dataflowEndpointGroupId, v.DataflowEndpointGroupId)
+		case schemas.GetDataflowEndpointGroupResponse_endpointsDetails:
+			return deserializeEndpointDetailsList(d, schemas.GetDataflowEndpointGroupResponse_endpointsDetails, &v.EndpointsDetails)
+		case schemas.GetDataflowEndpointGroupResponse_tags:
+			return deserializeTagsMap(d, schemas.GetDataflowEndpointGroupResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataflowEndpointGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataflowEndpointGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataflowEndpointGroup, schemas.GetDataflowEndpointGroupRequest, schemas.GetDataflowEndpointGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataflowEndpointGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataflowEndpointGroup, schemas.GetDataflowEndpointGroupRequest, schemas.GetDataflowEndpointGroupResponse), output: &GetDataflowEndpointGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

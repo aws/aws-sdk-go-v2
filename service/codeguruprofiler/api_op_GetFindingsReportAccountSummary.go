@@ -5,7 +5,9 @@ package codeguruprofiler
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,40 @@ type GetFindingsReportAccountSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingsReportAccountSummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingsReportAccountSummaryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingsReportAccountSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DailyReportsOnly != nil {
+		s.WriteBool(schemas.GetFindingsReportAccountSummaryRequest_dailyReportsOnly, *v.DailyReportsOnly)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetFindingsReportAccountSummaryRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetFindingsReportAccountSummaryRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *GetFindingsReportAccountSummaryInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFindingsReportAccountSummaryRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFindingsReportAccountSummaryRequest_dailyReportsOnly:
+			v.DailyReportsOnly = new(bool)
+			return d.ReadBool(schemas.GetFindingsReportAccountSummaryRequest_dailyReportsOnly, v.DailyReportsOnly)
+		case schemas.GetFindingsReportAccountSummaryRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.GetFindingsReportAccountSummaryRequest_maxResults, v.MaxResults)
+		case schemas.GetFindingsReportAccountSummaryRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetFindingsReportAccountSummaryRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 // The structure representing the GetFindingsReportAccountSummaryResponse.
 type GetFindingsReportAccountSummaryOutput struct {
 
@@ -81,13 +117,35 @@ type GetFindingsReportAccountSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingsReportAccountSummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingsReportAccountSummaryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingsReportAccountSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetFindingsReportAccountSummaryResponse_nextToken, *v.NextToken)
+	}
+	serializeFindingsReportSummaries(s, schemas.GetFindingsReportAccountSummaryResponse_reportSummaries, v.ReportSummaries)
+}
+func (v *GetFindingsReportAccountSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFindingsReportAccountSummaryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFindingsReportAccountSummaryResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetFindingsReportAccountSummaryResponse_nextToken, v.NextToken)
+		case schemas.GetFindingsReportAccountSummaryResponse_reportSummaries:
+			return deserializeFindingsReportSummaries(d, schemas.GetFindingsReportAccountSummaryResponse_reportSummaries, &v.ReportSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFindingsReportAccountSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFindingsReportAccountSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingsReportAccountSummary, schemas.GetFindingsReportAccountSummaryRequest, schemas.GetFindingsReportAccountSummaryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFindingsReportAccountSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingsReportAccountSummary, schemas.GetFindingsReportAccountSummaryRequest, schemas.GetFindingsReportAccountSummaryResponse), output: &GetFindingsReportAccountSummaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

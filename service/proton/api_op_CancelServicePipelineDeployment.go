@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,28 @@ type CancelServicePipelineDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelServicePipelineDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelServicePipelineDeploymentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelServicePipelineDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceName != nil {
+		s.WriteString(schemas.CancelServicePipelineDeploymentInput_serviceName, *v.ServiceName)
+	}
+}
+func (v *CancelServicePipelineDeploymentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelServicePipelineDeploymentInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelServicePipelineDeploymentInput_serviceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.CancelServicePipelineDeploymentInput_serviceName, v.ServiceName)
+		}
+		return nil
+	})
+}
+
 type CancelServicePipelineDeploymentOutput struct {
 
 	// The service pipeline detail data that's returned by Proton.
@@ -63,13 +87,34 @@ type CancelServicePipelineDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelServicePipelineDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelServicePipelineDeploymentOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelServicePipelineDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Pipeline != nil {
+		s.WriteStruct(schemas.CancelServicePipelineDeploymentOutput_pipeline)
+		v.Pipeline.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CancelServicePipelineDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelServicePipelineDeploymentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelServicePipelineDeploymentOutput_pipeline:
+			v.Pipeline = &types.ServicePipeline{}
+			return v.Pipeline.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelServicePipelineDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCancelServicePipelineDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelServicePipelineDeployment, schemas.CancelServicePipelineDeploymentInput, schemas.CancelServicePipelineDeploymentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCancelServicePipelineDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelServicePipelineDeployment, schemas.CancelServicePipelineDeploymentInput, schemas.CancelServicePipelineDeploymentOutput), output: &CancelServicePipelineDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

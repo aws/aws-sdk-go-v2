@@ -4,7 +4,9 @@ package memorydb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/memorydb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/memorydb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -113,6 +115,65 @@ type UpdateClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClusterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ACLName != nil {
+		s.WriteString(schemas.UpdateClusterRequest_ACLName, *v.ACLName)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.UpdateClusterRequest_ClusterName, *v.ClusterName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateClusterRequest_Description, *v.Description)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.UpdateClusterRequest_Engine, *v.Engine)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.UpdateClusterRequest_EngineVersion, *v.EngineVersion)
+	}
+	if v.IpDiscovery != "" {
+		s.WriteString(schemas.UpdateClusterRequest_IpDiscovery, string(v.IpDiscovery))
+	}
+	if v.MaintenanceWindow != nil {
+		s.WriteString(schemas.UpdateClusterRequest_MaintenanceWindow, *v.MaintenanceWindow)
+	}
+	if v.NodeType != nil {
+		s.WriteString(schemas.UpdateClusterRequest_NodeType, *v.NodeType)
+	}
+	if v.ParameterGroupName != nil {
+		s.WriteString(schemas.UpdateClusterRequest_ParameterGroupName, *v.ParameterGroupName)
+	}
+	if v.ReplicaConfiguration != nil {
+		s.WriteStruct(schemas.UpdateClusterRequest_ReplicaConfiguration)
+		v.ReplicaConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSecurityGroupIdsList(s, schemas.UpdateClusterRequest_SecurityGroupIds, v.SecurityGroupIds)
+	if v.ShardConfiguration != nil {
+		s.WriteStruct(schemas.UpdateClusterRequest_ShardConfiguration)
+		v.ShardConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnapshotRetentionLimit != nil {
+		s.WriteInt32(schemas.UpdateClusterRequest_SnapshotRetentionLimit, *v.SnapshotRetentionLimit)
+	}
+	if v.SnapshotWindow != nil {
+		s.WriteString(schemas.UpdateClusterRequest_SnapshotWindow, *v.SnapshotWindow)
+	}
+	if v.SnsTopicArn != nil {
+		s.WriteString(schemas.UpdateClusterRequest_SnsTopicArn, *v.SnsTopicArn)
+	}
+	if v.SnsTopicStatus != nil {
+		s.WriteString(schemas.UpdateClusterRequest_SnsTopicStatus, *v.SnsTopicStatus)
+	}
+}
+
 type UpdateClusterOutput struct {
 
 	// The updated cluster.
@@ -124,13 +185,34 @@ type UpdateClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClusterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteStruct(schemas.UpdateClusterResponse_Cluster)
+		v.Cluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateClusterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateClusterResponse_Cluster:
+			v.Cluster = &types.Cluster{}
+			return v.Cluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCluster, schemas.UpdateClusterRequest, schemas.UpdateClusterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCluster, schemas.UpdateClusterRequest, schemas.UpdateClusterResponse), output: &UpdateClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

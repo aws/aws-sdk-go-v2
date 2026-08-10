@@ -4,7 +4,9 @@ package mgn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,43 @@ type StartExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartExportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartExportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Bucket != nil {
+		s.WriteString(schemas.StartExportRequest_s3Bucket, *v.S3Bucket)
+	}
+	if v.S3BucketOwner != nil {
+		s.WriteString(schemas.StartExportRequest_s3BucketOwner, *v.S3BucketOwner)
+	}
+	if v.S3Key != nil {
+		s.WriteString(schemas.StartExportRequest_s3Key, *v.S3Key)
+	}
+	serializeTagsMap(s, schemas.StartExportRequest_tags, v.Tags)
+}
+func (v *StartExportInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartExportRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartExportRequest_s3Bucket:
+			v.S3Bucket = new(string)
+			return d.ReadString(schemas.StartExportRequest_s3Bucket, v.S3Bucket)
+		case schemas.StartExportRequest_s3BucketOwner:
+			v.S3BucketOwner = new(string)
+			return d.ReadString(schemas.StartExportRequest_s3BucketOwner, v.S3BucketOwner)
+		case schemas.StartExportRequest_s3Key:
+			v.S3Key = new(string)
+			return d.ReadString(schemas.StartExportRequest_s3Key, v.S3Key)
+		case schemas.StartExportRequest_tags:
+			return deserializeTagsMap(d, schemas.StartExportRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Start export response.
 type StartExportOutput struct {
 
@@ -58,13 +97,34 @@ type StartExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartExportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartExportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportTask != nil {
+		s.WriteStruct(schemas.StartExportResponse_exportTask)
+		v.ExportTask.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartExportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartExportResponse_exportTask:
+			v.ExportTask = &types.ExportTask{}
+			return v.ExportTask.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartExport, schemas.StartExportRequest, schemas.StartExportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartExport, schemas.StartExportRequest, schemas.StartExportResponse), output: &StartExportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

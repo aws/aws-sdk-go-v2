@@ -5,7 +5,9 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -55,6 +57,22 @@ type CreateOptOutListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOptOutListInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOptOutListRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOptOutListInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateOptOutListRequest_ClientToken, *v.ClientToken)
+	}
+	if v.OptOutListName != nil {
+		s.WriteString(schemas.CreateOptOutListRequest_OptOutListName, *v.OptOutListName)
+	}
+	serializeTagList(s, schemas.CreateOptOutListRequest_Tags, v.Tags)
+}
+
 type CreateOptOutListOutput struct {
 
 	// The time when the pool was created, in [UNIX epoch time] format.
@@ -77,13 +95,47 @@ type CreateOptOutListOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOptOutListOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOptOutListResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOptOutListOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.CreateOptOutListResult_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.OptOutListArn != nil {
+		s.WriteString(schemas.CreateOptOutListResult_OptOutListArn, *v.OptOutListArn)
+	}
+	if v.OptOutListName != nil {
+		s.WriteString(schemas.CreateOptOutListResult_OptOutListName, *v.OptOutListName)
+	}
+	serializeTagList(s, schemas.CreateOptOutListResult_Tags, v.Tags)
+}
+func (v *CreateOptOutListOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateOptOutListResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateOptOutListResult_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.CreateOptOutListResult_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.CreateOptOutListResult_OptOutListArn:
+			v.OptOutListArn = new(string)
+			return d.ReadString(schemas.CreateOptOutListResult_OptOutListArn, v.OptOutListArn)
+		case schemas.CreateOptOutListResult_OptOutListName:
+			v.OptOutListName = new(string)
+			return d.ReadString(schemas.CreateOptOutListResult_OptOutListName, v.OptOutListName)
+		case schemas.CreateOptOutListResult_Tags:
+			return deserializeTagList(d, schemas.CreateOptOutListResult_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateOptOutListMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateOptOutList{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOptOutList, schemas.CreateOptOutListRequest, schemas.CreateOptOutListResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateOptOutList{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOptOutList, schemas.CreateOptOutListRequest, schemas.CreateOptOutListResult), output: &CreateOptOutListOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

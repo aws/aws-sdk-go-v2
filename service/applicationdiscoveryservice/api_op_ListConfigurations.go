@@ -5,7 +5,9 @@ package applicationdiscoveryservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,26 @@ type ListConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationType != "" {
+		s.WriteString(schemas.ListConfigurationsRequest_configurationType, string(v.ConfigurationType))
+	}
+	serializeFilters(s, schemas.ListConfigurationsRequest_filters, v.Filters)
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListConfigurationsRequest_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfigurationsRequest_nextToken, *v.NextToken)
+	}
+	serializeOrderByList(s, schemas.ListConfigurationsRequest_orderBy, v.OrderBy)
+}
+
 type ListConfigurationsOutput struct {
 
 	// Returns configuration details, including the configuration ID, attribute names,
@@ -83,13 +105,35 @@ type ListConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigurations(s, schemas.ListConfigurationsResponse_configurations, v.Configurations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfigurationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConfigurationsResponse_configurations:
+			return deserializeConfigurations(d, schemas.ListConfigurationsResponse_configurations, &v.Configurations)
+		case schemas.ListConfigurationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConfigurationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfigurations, schemas.ListConfigurationsRequest, schemas.ListConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfigurations, schemas.ListConfigurationsRequest, schemas.ListConfigurationsResponse), output: &ListConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

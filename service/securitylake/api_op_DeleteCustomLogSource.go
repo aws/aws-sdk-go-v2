@@ -4,6 +4,8 @@ package securitylake
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securitylake/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteCustomLogSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCustomLogSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCustomLogSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCustomLogSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceName != nil {
+		s.WriteString(schemas.DeleteCustomLogSourceRequest_sourceName, *v.SourceName)
+	}
+	if v.SourceVersion != nil {
+		s.WriteString(schemas.DeleteCustomLogSourceRequest_sourceVersion, *v.SourceVersion)
+	}
+}
+
 type DeleteCustomLogSourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type DeleteCustomLogSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCustomLogSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCustomLogSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCustomLogSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCustomLogSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCustomLogSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCustomLogSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCustomLogSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCustomLogSource, schemas.DeleteCustomLogSourceRequest, schemas.DeleteCustomLogSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCustomLogSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCustomLogSource, schemas.DeleteCustomLogSourceRequest, schemas.DeleteCustomLogSourceResponse), output: &DeleteCustomLogSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

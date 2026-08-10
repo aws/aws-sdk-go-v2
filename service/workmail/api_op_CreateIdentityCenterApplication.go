@@ -5,6 +5,8 @@ package workmail
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type CreateIdentityCenterApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIdentityCenterApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIdentityCenterApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIdentityCenterApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateIdentityCenterApplicationRequest_ClientToken, *v.ClientToken)
+	}
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.CreateIdentityCenterApplicationRequest_InstanceArn, *v.InstanceArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateIdentityCenterApplicationRequest_Name, *v.Name)
+	}
+}
+
 type CreateIdentityCenterApplicationOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the application.
@@ -57,13 +77,32 @@ type CreateIdentityCenterApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIdentityCenterApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIdentityCenterApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIdentityCenterApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.CreateIdentityCenterApplicationResponse_ApplicationArn, *v.ApplicationArn)
+	}
+}
+func (v *CreateIdentityCenterApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateIdentityCenterApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateIdentityCenterApplicationResponse_ApplicationArn:
+			v.ApplicationArn = new(string)
+			return d.ReadString(schemas.CreateIdentityCenterApplicationResponse_ApplicationArn, v.ApplicationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateIdentityCenterApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateIdentityCenterApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIdentityCenterApplication, schemas.CreateIdentityCenterApplicationRequest, schemas.CreateIdentityCenterApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateIdentityCenterApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIdentityCenterApplication, schemas.CreateIdentityCenterApplicationRequest, schemas.CreateIdentityCenterApplicationResponse), output: &CreateIdentityCenterApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

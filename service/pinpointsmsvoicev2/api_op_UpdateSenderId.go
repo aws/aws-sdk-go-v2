@@ -4,7 +4,9 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type UpdateSenderIdInput struct {
 	DeletionProtectionEnabled *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateSenderIdInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSenderIdRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSenderIdInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeletionProtectionEnabled != nil {
+		s.WriteBool(schemas.UpdateSenderIdRequest_DeletionProtectionEnabled, *v.DeletionProtectionEnabled)
+	}
+	if v.IsoCountryCode != nil {
+		s.WriteString(schemas.UpdateSenderIdRequest_IsoCountryCode, *v.IsoCountryCode)
+	}
+	if v.SenderId != nil {
+		s.WriteString(schemas.UpdateSenderIdRequest_SenderId, *v.SenderId)
+	}
 }
 
 type UpdateSenderIdOutput struct {
@@ -92,13 +112,65 @@ type UpdateSenderIdOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSenderIdOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSenderIdResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSenderIdOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.UpdateSenderIdResult_DeletionProtectionEnabled, v.DeletionProtectionEnabled)
+	if v.IsoCountryCode != nil {
+		s.WriteString(schemas.UpdateSenderIdResult_IsoCountryCode, *v.IsoCountryCode)
+	}
+	serializeMessageTypeList(s, schemas.UpdateSenderIdResult_MessageTypes, v.MessageTypes)
+	if v.MonthlyLeasingPrice != nil {
+		s.WriteString(schemas.UpdateSenderIdResult_MonthlyLeasingPrice, *v.MonthlyLeasingPrice)
+	}
+	s.WriteBool(schemas.UpdateSenderIdResult_Registered, v.Registered)
+	if v.RegistrationId != nil {
+		s.WriteString(schemas.UpdateSenderIdResult_RegistrationId, *v.RegistrationId)
+	}
+	if v.SenderId != nil {
+		s.WriteString(schemas.UpdateSenderIdResult_SenderId, *v.SenderId)
+	}
+	if v.SenderIdArn != nil {
+		s.WriteString(schemas.UpdateSenderIdResult_SenderIdArn, *v.SenderIdArn)
+	}
+}
+func (v *UpdateSenderIdOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSenderIdResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSenderIdResult_DeletionProtectionEnabled:
+			return d.ReadBool(schemas.UpdateSenderIdResult_DeletionProtectionEnabled, &v.DeletionProtectionEnabled)
+		case schemas.UpdateSenderIdResult_IsoCountryCode:
+			v.IsoCountryCode = new(string)
+			return d.ReadString(schemas.UpdateSenderIdResult_IsoCountryCode, v.IsoCountryCode)
+		case schemas.UpdateSenderIdResult_MessageTypes:
+			return deserializeMessageTypeList(d, schemas.UpdateSenderIdResult_MessageTypes, &v.MessageTypes)
+		case schemas.UpdateSenderIdResult_MonthlyLeasingPrice:
+			v.MonthlyLeasingPrice = new(string)
+			return d.ReadString(schemas.UpdateSenderIdResult_MonthlyLeasingPrice, v.MonthlyLeasingPrice)
+		case schemas.UpdateSenderIdResult_Registered:
+			return d.ReadBool(schemas.UpdateSenderIdResult_Registered, &v.Registered)
+		case schemas.UpdateSenderIdResult_RegistrationId:
+			v.RegistrationId = new(string)
+			return d.ReadString(schemas.UpdateSenderIdResult_RegistrationId, v.RegistrationId)
+		case schemas.UpdateSenderIdResult_SenderId:
+			v.SenderId = new(string)
+			return d.ReadString(schemas.UpdateSenderIdResult_SenderId, v.SenderId)
+		case schemas.UpdateSenderIdResult_SenderIdArn:
+			v.SenderIdArn = new(string)
+			return d.ReadString(schemas.UpdateSenderIdResult_SenderIdArn, v.SenderIdArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSenderIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateSenderId{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSenderId, schemas.UpdateSenderIdRequest, schemas.UpdateSenderIdResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateSenderId{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSenderId, schemas.UpdateSenderIdRequest, schemas.UpdateSenderIdResult), output: &UpdateSenderIdOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

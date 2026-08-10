@@ -4,7 +4,9 @@ package appmesh
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,46 @@ type DeleteGatewayRouteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGatewayRouteInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGatewayRouteInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGatewayRouteInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayRouteName != nil {
+		s.WriteString(schemas.DeleteGatewayRouteInput_gatewayRouteName, *v.GatewayRouteName)
+	}
+	if v.MeshName != nil {
+		s.WriteString(schemas.DeleteGatewayRouteInput_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.DeleteGatewayRouteInput_meshOwner, *v.MeshOwner)
+	}
+	if v.VirtualGatewayName != nil {
+		s.WriteString(schemas.DeleteGatewayRouteInput_virtualGatewayName, *v.VirtualGatewayName)
+	}
+}
+func (v *DeleteGatewayRouteInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteGatewayRouteInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteGatewayRouteInput_gatewayRouteName:
+			v.GatewayRouteName = new(string)
+			return d.ReadString(schemas.DeleteGatewayRouteInput_gatewayRouteName, v.GatewayRouteName)
+		case schemas.DeleteGatewayRouteInput_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.DeleteGatewayRouteInput_meshName, v.MeshName)
+		case schemas.DeleteGatewayRouteInput_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.DeleteGatewayRouteInput_meshOwner, v.MeshOwner)
+		case schemas.DeleteGatewayRouteInput_virtualGatewayName:
+			v.VirtualGatewayName = new(string)
+			return d.ReadString(schemas.DeleteGatewayRouteInput_virtualGatewayName, v.VirtualGatewayName)
+		}
+		return nil
+	})
+}
+
 type DeleteGatewayRouteOutput struct {
 
 	// The gateway route that was deleted.
@@ -64,13 +106,34 @@ type DeleteGatewayRouteOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGatewayRouteOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGatewayRouteOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGatewayRouteOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayRoute != nil {
+		s.WriteStruct(schemas.DeleteGatewayRouteOutput_gatewayRoute)
+		v.GatewayRoute.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteGatewayRouteOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteGatewayRouteOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteGatewayRouteOutput_gatewayRoute:
+			v.GatewayRoute = &types.GatewayRouteData{}
+			return v.GatewayRoute.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteGatewayRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteGatewayRoute{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGatewayRoute, schemas.DeleteGatewayRouteInput, schemas.DeleteGatewayRouteOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteGatewayRoute{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGatewayRoute, schemas.DeleteGatewayRouteInput, schemas.DeleteGatewayRouteOutput), output: &DeleteGatewayRouteOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package applicationdiscoveryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -82,6 +84,24 @@ type StartExportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartExportTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartExportTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartExportTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.StartExportTaskRequest_endTime, *v.EndTime)
+	}
+	serializeExportDataFormats(s, schemas.StartExportTaskRequest_exportDataFormat, v.ExportDataFormat)
+	serializeExportFilters(s, schemas.StartExportTaskRequest_filters, v.Filters)
+	serializeExportPreferences(s, schemas.StartExportTaskRequest_preferences, v.Preferences)
+	if v.StartTime != nil {
+		s.WriteTime(schemas.StartExportTaskRequest_startTime, *v.StartTime)
+	}
+}
+
 type StartExportTaskOutput struct {
 
 	// A unique identifier used to query the status of an export request.
@@ -93,13 +113,32 @@ type StartExportTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartExportTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartExportTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartExportTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportId != nil {
+		s.WriteString(schemas.StartExportTaskResponse_exportId, *v.ExportId)
+	}
+}
+func (v *StartExportTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartExportTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartExportTaskResponse_exportId:
+			v.ExportId = new(string)
+			return d.ReadString(schemas.StartExportTaskResponse_exportId, v.ExportId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartExportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartExportTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartExportTask, schemas.StartExportTaskRequest, schemas.StartExportTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartExportTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartExportTask, schemas.StartExportTaskRequest, schemas.StartExportTaskResponse), output: &StartExportTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

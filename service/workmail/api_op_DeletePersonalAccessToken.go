@@ -4,6 +4,8 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeletePersonalAccessTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePersonalAccessTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePersonalAccessTokenRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePersonalAccessTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.DeletePersonalAccessTokenRequest_OrganizationId, *v.OrganizationId)
+	}
+	if v.PersonalAccessTokenId != nil {
+		s.WriteString(schemas.DeletePersonalAccessTokenRequest_PersonalAccessTokenId, *v.PersonalAccessTokenId)
+	}
+}
+
 type DeletePersonalAccessTokenOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type DeletePersonalAccessTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePersonalAccessTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePersonalAccessTokenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePersonalAccessTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeletePersonalAccessTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePersonalAccessTokenResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePersonalAccessTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeletePersonalAccessToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePersonalAccessToken, schemas.DeletePersonalAccessTokenRequest, schemas.DeletePersonalAccessTokenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeletePersonalAccessToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePersonalAccessToken, schemas.DeletePersonalAccessTokenRequest, schemas.DeletePersonalAccessTokenResponse), output: &DeletePersonalAccessTokenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

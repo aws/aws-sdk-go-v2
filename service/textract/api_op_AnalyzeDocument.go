@@ -4,7 +4,9 @@ package textract
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -102,6 +104,36 @@ type AnalyzeDocumentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AnalyzeDocumentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnalyzeDocumentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnalyzeDocumentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdaptersConfig != nil {
+		s.WriteStruct(schemas.AnalyzeDocumentRequest_AdaptersConfig)
+		v.AdaptersConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Document != nil {
+		s.WriteStruct(schemas.AnalyzeDocumentRequest_Document)
+		v.Document.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFeatureTypes(s, schemas.AnalyzeDocumentRequest_FeatureTypes, v.FeatureTypes)
+	if v.HumanLoopConfig != nil {
+		s.WriteStruct(schemas.AnalyzeDocumentRequest_HumanLoopConfig)
+		v.HumanLoopConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QueriesConfig != nil {
+		s.WriteStruct(schemas.AnalyzeDocumentRequest_QueriesConfig)
+		v.QueriesConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type AnalyzeDocumentOutput struct {
 
 	// The version of the model used to analyze the document.
@@ -122,13 +154,51 @@ type AnalyzeDocumentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AnalyzeDocumentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnalyzeDocumentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnalyzeDocumentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyzeDocumentModelVersion != nil {
+		s.WriteString(schemas.AnalyzeDocumentResponse_AnalyzeDocumentModelVersion, *v.AnalyzeDocumentModelVersion)
+	}
+	serializeBlockList(s, schemas.AnalyzeDocumentResponse_Blocks, v.Blocks)
+	if v.DocumentMetadata != nil {
+		s.WriteStruct(schemas.AnalyzeDocumentResponse_DocumentMetadata)
+		v.DocumentMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HumanLoopActivationOutput != nil {
+		s.WriteStruct(schemas.AnalyzeDocumentResponse_HumanLoopActivationOutput)
+		v.HumanLoopActivationOutput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AnalyzeDocumentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnalyzeDocumentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnalyzeDocumentResponse_AnalyzeDocumentModelVersion:
+			v.AnalyzeDocumentModelVersion = new(string)
+			return d.ReadString(schemas.AnalyzeDocumentResponse_AnalyzeDocumentModelVersion, v.AnalyzeDocumentModelVersion)
+		case schemas.AnalyzeDocumentResponse_Blocks:
+			return deserializeBlockList(d, schemas.AnalyzeDocumentResponse_Blocks, &v.Blocks)
+		case schemas.AnalyzeDocumentResponse_DocumentMetadata:
+			v.DocumentMetadata = &types.DocumentMetadata{}
+			return v.DocumentMetadata.Deserialize(d)
+		case schemas.AnalyzeDocumentResponse_HumanLoopActivationOutput:
+			v.HumanLoopActivationOutput = &types.HumanLoopActivationOutput{}
+			return v.HumanLoopActivationOutput.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAnalyzeDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAnalyzeDocument{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AnalyzeDocument, schemas.AnalyzeDocumentRequest, schemas.AnalyzeDocumentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAnalyzeDocument{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AnalyzeDocument, schemas.AnalyzeDocumentRequest, schemas.AnalyzeDocumentResponse), output: &AnalyzeDocumentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

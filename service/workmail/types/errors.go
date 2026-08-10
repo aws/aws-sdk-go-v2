@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,6 +34,27 @@ func (e *DirectoryInUseException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DirectoryInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DirectoryInUseException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DirectoryInUseException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DirectoryInUseException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DirectoryInUseException_Message, *v.Message)
+	}
+}
+func (v *DirectoryInUseException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DirectoryInUseException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DirectoryInUseException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DirectoryInUseException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The directory service doesn't recognize the credentials supplied by WorkMail.
 type DirectoryServiceAuthenticationFailedException struct {
@@ -61,6 +83,27 @@ func (e *DirectoryServiceAuthenticationFailedException) ErrorCode() string {
 func (e *DirectoryServiceAuthenticationFailedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *DirectoryServiceAuthenticationFailedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DirectoryServiceAuthenticationFailedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DirectoryServiceAuthenticationFailedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DirectoryServiceAuthenticationFailedException_Message, *v.Message)
+	}
+}
+func (v *DirectoryServiceAuthenticationFailedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DirectoryServiceAuthenticationFailedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DirectoryServiceAuthenticationFailedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DirectoryServiceAuthenticationFailedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The directory is unavailable. It might be located in another Region or deleted.
 type DirectoryUnavailableException struct {
@@ -87,6 +130,27 @@ func (e *DirectoryUnavailableException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DirectoryUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DirectoryUnavailableException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DirectoryUnavailableException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DirectoryUnavailableException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DirectoryUnavailableException_Message, *v.Message)
+	}
+}
+func (v *DirectoryUnavailableException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DirectoryUnavailableException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DirectoryUnavailableException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DirectoryUnavailableException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The email address that you're trying to assign is already created for a
 // different user, group, or resource.
@@ -114,6 +178,27 @@ func (e *EmailAddressInUseException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EmailAddressInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *EmailAddressInUseException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EmailAddressInUseException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EmailAddressInUseException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.EmailAddressInUseException_Message, *v.Message)
+	}
+}
+func (v *EmailAddressInUseException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EmailAddressInUseException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EmailAddressInUseException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EmailAddressInUseException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The user, group, or resource that you're trying to register is already
 // registered.
@@ -141,6 +226,27 @@ func (e *EntityAlreadyRegisteredException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EntityAlreadyRegisteredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *EntityAlreadyRegisteredException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityAlreadyRegisteredException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntityAlreadyRegisteredException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.EntityAlreadyRegisteredException_Message, *v.Message)
+	}
+}
+func (v *EntityAlreadyRegisteredException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityAlreadyRegisteredException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityAlreadyRegisteredException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EntityAlreadyRegisteredException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The identifier supplied for the user, group, or resource does not exist in your
 // organization.
@@ -168,6 +274,27 @@ func (e *EntityNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EntityNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *EntityNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntityNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.EntityNotFoundException_Message, *v.Message)
+	}
+}
+func (v *EntityNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EntityNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You are performing an operation on a user, group, or resource that isn't in the
 // expected state, such as trying to delete an active user.
@@ -195,6 +322,27 @@ func (e *EntityStateException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EntityStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *EntityStateException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityStateException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntityStateException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.EntityStateException_Message, *v.Message)
+	}
+}
+func (v *EntityStateException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityStateException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityStateException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EntityStateException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The configuration for a resource isn't valid. A resource must either be able to
 // auto-respond to requests or have at least one delegate associated that can do so
@@ -223,6 +371,27 @@ func (e *InvalidConfigurationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidConfigurationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidConfigurationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidConfigurationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidConfigurationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidConfigurationException_Message, *v.Message)
+	}
+}
+func (v *InvalidConfigurationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidConfigurationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidConfigurationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidConfigurationException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You SES configuration has customizations that WorkMail cannot save. The error
 // message lists the invalid setting. For examples of invalid settings, refer to [CreateReceiptRule].
@@ -254,6 +423,27 @@ func (e *InvalidCustomSesConfigurationException) ErrorCode() string {
 func (e *InvalidCustomSesConfigurationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *InvalidCustomSesConfigurationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidCustomSesConfigurationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidCustomSesConfigurationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidCustomSesConfigurationException_Message, *v.Message)
+	}
+}
+func (v *InvalidCustomSesConfigurationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidCustomSesConfigurationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidCustomSesConfigurationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidCustomSesConfigurationException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // One or more of the input parameters don't match the service's restrictions.
 type InvalidParameterException struct {
@@ -280,6 +470,27 @@ func (e *InvalidParameterException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidParameterException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidParameterException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidParameterException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidParameterException_Message, *v.Message)
+	}
+}
+func (v *InvalidParameterException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidParameterException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidParameterException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidParameterException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The supplied password doesn't match the minimum security constraints, such as
 // length or use of special characters.
@@ -307,6 +518,27 @@ func (e *InvalidPasswordException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidPasswordException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidPasswordException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidPasswordException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidPasswordException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidPasswordException_Message, *v.Message)
+	}
+}
+func (v *InvalidPasswordException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidPasswordException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidPasswordException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidPasswordException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request exceeds the limit of the resource.
 type LimitExceededException struct {
@@ -333,6 +565,27 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.LimitExceededException_Message, *v.Message)
+	}
+}
+func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LimitExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LimitExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The domain you're trying to change is in use by another user or organization in
 // your account. See the error message for details.
@@ -360,6 +613,27 @@ func (e *MailDomainInUseException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *MailDomainInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *MailDomainInUseException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MailDomainInUseException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MailDomainInUseException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.MailDomainInUseException_Message, *v.Message)
+	}
+}
+func (v *MailDomainInUseException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MailDomainInUseException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MailDomainInUseException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MailDomainInUseException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The domain specified is not found in your organization.
 type MailDomainNotFoundException struct {
@@ -386,6 +660,27 @@ func (e *MailDomainNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *MailDomainNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *MailDomainNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MailDomainNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MailDomainNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.MailDomainNotFoundException_Message, *v.Message)
+	}
+}
+func (v *MailDomainNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MailDomainNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MailDomainNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MailDomainNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // After a domain has been added to the organization, it must be verified. The
 // domain is not yet verified.
@@ -413,6 +708,27 @@ func (e *MailDomainStateException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *MailDomainStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *MailDomainStateException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MailDomainStateException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MailDomainStateException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.MailDomainStateException_Message, *v.Message)
+	}
+}
+func (v *MailDomainStateException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MailDomainStateException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MailDomainStateException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MailDomainStateException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The user, group, or resource name isn't unique in WorkMail.
 type NameAvailabilityException struct {
@@ -439,6 +755,27 @@ func (e *NameAvailabilityException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NameAvailabilityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NameAvailabilityException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NameAvailabilityException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NameAvailabilityException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.NameAvailabilityException_Message, *v.Message)
+	}
+}
+func (v *NameAvailabilityException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NameAvailabilityException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NameAvailabilityException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NameAvailabilityException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An operation received a valid organization identifier that either doesn't
 // belong or exist in the system.
@@ -466,6 +803,27 @@ func (e *OrganizationNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *OrganizationNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *OrganizationNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.OrganizationNotFoundException_Message, *v.Message)
+	}
+}
+func (v *OrganizationNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.OrganizationNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The organization must have a valid state to perform certain operations on the
 // organization or its members.
@@ -493,6 +851,27 @@ func (e *OrganizationStateException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *OrganizationStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *OrganizationStateException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationStateException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationStateException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.OrganizationStateException_Message, *v.Message)
+	}
+}
+func (v *OrganizationStateException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationStateException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationStateException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.OrganizationStateException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // This user, group, or resource name is not allowed in WorkMail.
 type ReservedNameException struct {
@@ -519,6 +898,27 @@ func (e *ReservedNameException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ReservedNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ReservedNameException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReservedNameException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReservedNameException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ReservedNameException_Message, *v.Message)
+	}
+}
+func (v *ReservedNameException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReservedNameException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReservedNameException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ReservedNameException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The resource cannot be found.
 type ResourceNotFoundException struct {
@@ -545,6 +945,27 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_Message, *v.Message)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The resource can have up to 50 user-applied tags.
 type TooManyTagsException struct {
@@ -571,6 +992,27 @@ func (e *TooManyTagsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TooManyTagsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TooManyTagsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TooManyTagsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TooManyTagsException_Message, *v.Message)
+	}
+}
+func (v *TooManyTagsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TooManyTagsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TooManyTagsException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TooManyTagsException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You can't perform a write operation against a read-only directory.
 type UnsupportedOperationException struct {
@@ -597,3 +1039,24 @@ func (e *UnsupportedOperationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnsupportedOperationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnsupportedOperationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsupportedOperationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UnsupportedOperationException_Message, *v.Message)
+	}
+}
+func (v *UnsupportedOperationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnsupportedOperationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnsupportedOperationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnsupportedOperationException_Message, v.Message)
+		}
+		return nil
+	})
+}

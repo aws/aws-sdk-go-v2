@@ -5,7 +5,9 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -47,6 +49,25 @@ type CreateVerifiedDestinationNumberInput struct {
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateVerifiedDestinationNumberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVerifiedDestinationNumberRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVerifiedDestinationNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateVerifiedDestinationNumberRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DestinationPhoneNumber != nil {
+		s.WriteString(schemas.CreateVerifiedDestinationNumberRequest_DestinationPhoneNumber, *v.DestinationPhoneNumber)
+	}
+	if v.RcsAgentId != nil {
+		s.WriteString(schemas.CreateVerifiedDestinationNumberRequest_RcsAgentId, *v.RcsAgentId)
+	}
+	serializeTagList(s, schemas.CreateVerifiedDestinationNumberRequest_Tags, v.Tags)
 }
 
 type CreateVerifiedDestinationNumberOutput struct {
@@ -95,13 +116,69 @@ type CreateVerifiedDestinationNumberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVerifiedDestinationNumberOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVerifiedDestinationNumberResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVerifiedDestinationNumberOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.CreateVerifiedDestinationNumberResult_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.DestinationPhoneNumber != nil {
+		s.WriteString(schemas.CreateVerifiedDestinationNumberResult_DestinationPhoneNumber, *v.DestinationPhoneNumber)
+	}
+	if v.RcsAgentId != nil {
+		s.WriteString(schemas.CreateVerifiedDestinationNumberResult_RcsAgentId, *v.RcsAgentId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateVerifiedDestinationNumberResult_Status, string(v.Status))
+	}
+	serializeTagList(s, schemas.CreateVerifiedDestinationNumberResult_Tags, v.Tags)
+	if v.VerifiedDestinationNumberArn != nil {
+		s.WriteString(schemas.CreateVerifiedDestinationNumberResult_VerifiedDestinationNumberArn, *v.VerifiedDestinationNumberArn)
+	}
+	if v.VerifiedDestinationNumberId != nil {
+		s.WriteString(schemas.CreateVerifiedDestinationNumberResult_VerifiedDestinationNumberId, *v.VerifiedDestinationNumberId)
+	}
+}
+func (v *CreateVerifiedDestinationNumberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVerifiedDestinationNumberResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVerifiedDestinationNumberResult_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.CreateVerifiedDestinationNumberResult_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.CreateVerifiedDestinationNumberResult_DestinationPhoneNumber:
+			v.DestinationPhoneNumber = new(string)
+			return d.ReadString(schemas.CreateVerifiedDestinationNumberResult_DestinationPhoneNumber, v.DestinationPhoneNumber)
+		case schemas.CreateVerifiedDestinationNumberResult_RcsAgentId:
+			v.RcsAgentId = new(string)
+			return d.ReadString(schemas.CreateVerifiedDestinationNumberResult_RcsAgentId, v.RcsAgentId)
+		case schemas.CreateVerifiedDestinationNumberResult_Status:
+			var ev string
+			if err := d.ReadString(schemas.CreateVerifiedDestinationNumberResult_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.VerificationStatus(ev)
+			return nil
+		case schemas.CreateVerifiedDestinationNumberResult_Tags:
+			return deserializeTagList(d, schemas.CreateVerifiedDestinationNumberResult_Tags, &v.Tags)
+		case schemas.CreateVerifiedDestinationNumberResult_VerifiedDestinationNumberArn:
+			v.VerifiedDestinationNumberArn = new(string)
+			return d.ReadString(schemas.CreateVerifiedDestinationNumberResult_VerifiedDestinationNumberArn, v.VerifiedDestinationNumberArn)
+		case schemas.CreateVerifiedDestinationNumberResult_VerifiedDestinationNumberId:
+			v.VerifiedDestinationNumberId = new(string)
+			return d.ReadString(schemas.CreateVerifiedDestinationNumberResult_VerifiedDestinationNumberId, v.VerifiedDestinationNumberId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVerifiedDestinationNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateVerifiedDestinationNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVerifiedDestinationNumber, schemas.CreateVerifiedDestinationNumberRequest, schemas.CreateVerifiedDestinationNumberResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateVerifiedDestinationNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVerifiedDestinationNumber, schemas.CreateVerifiedDestinationNumberRequest, schemas.CreateVerifiedDestinationNumberResult), output: &CreateVerifiedDestinationNumberOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

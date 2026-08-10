@@ -4,6 +4,8 @@ package mgn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type StartNetworkMigrationDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartNetworkMigrationDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartNetworkMigrationDeploymentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartNetworkMigrationDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetworkMigrationDefinitionID != nil {
+		s.WriteString(schemas.StartNetworkMigrationDeploymentRequest_networkMigrationDefinitionID, *v.NetworkMigrationDefinitionID)
+	}
+	if v.NetworkMigrationExecutionID != nil {
+		s.WriteString(schemas.StartNetworkMigrationDeploymentRequest_networkMigrationExecutionID, *v.NetworkMigrationExecutionID)
+	}
+}
+
 type StartNetworkMigrationDeploymentOutput struct {
 
 	// The unique identifier of the deployer job that was started.
@@ -50,13 +67,32 @@ type StartNetworkMigrationDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartNetworkMigrationDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartNetworkMigrationDeployerJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartNetworkMigrationDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobID != nil {
+		s.WriteString(schemas.StartNetworkMigrationDeployerJobResponse_jobID, *v.JobID)
+	}
+}
+func (v *StartNetworkMigrationDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartNetworkMigrationDeployerJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartNetworkMigrationDeployerJobResponse_jobID:
+			v.JobID = new(string)
+			return d.ReadString(schemas.StartNetworkMigrationDeployerJobResponse_jobID, v.JobID)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartNetworkMigrationDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartNetworkMigrationDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartNetworkMigrationDeployment, schemas.StartNetworkMigrationDeploymentRequest, schemas.StartNetworkMigrationDeployerJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartNetworkMigrationDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartNetworkMigrationDeployment, schemas.StartNetworkMigrationDeploymentRequest, schemas.StartNetworkMigrationDeployerJobResponse), output: &StartNetworkMigrationDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

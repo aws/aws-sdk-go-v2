@@ -4,7 +4,9 @@ package fms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type AssociateThirdPartyFirewallInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateThirdPartyFirewallInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateThirdPartyFirewallRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateThirdPartyFirewallInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ThirdPartyFirewall != "" {
+		s.WriteString(schemas.AssociateThirdPartyFirewallRequest_ThirdPartyFirewall, string(v.ThirdPartyFirewall))
+	}
+}
+
 type AssociateThirdPartyFirewallOutput struct {
 
 	// The current status for setting a Firewall Manager policy administrator's
@@ -64,13 +78,36 @@ type AssociateThirdPartyFirewallOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateThirdPartyFirewallOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateThirdPartyFirewallResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateThirdPartyFirewallOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ThirdPartyFirewallStatus != "" {
+		s.WriteString(schemas.AssociateThirdPartyFirewallResponse_ThirdPartyFirewallStatus, string(v.ThirdPartyFirewallStatus))
+	}
+}
+func (v *AssociateThirdPartyFirewallOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateThirdPartyFirewallResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateThirdPartyFirewallResponse_ThirdPartyFirewallStatus:
+			var ev string
+			if err := d.ReadString(schemas.AssociateThirdPartyFirewallResponse_ThirdPartyFirewallStatus, &ev); err != nil {
+				return err
+			}
+			v.ThirdPartyFirewallStatus = types.ThirdPartyFirewallAssociationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateThirdPartyFirewallMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateThirdPartyFirewall{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateThirdPartyFirewall, schemas.AssociateThirdPartyFirewallRequest, schemas.AssociateThirdPartyFirewallResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateThirdPartyFirewall{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateThirdPartyFirewall, schemas.AssociateThirdPartyFirewallRequest, schemas.AssociateThirdPartyFirewallResponse), output: &AssociateThirdPartyFirewallOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

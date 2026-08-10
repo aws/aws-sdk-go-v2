@@ -4,6 +4,8 @@ package cognitosync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitosync/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,18 @@ type BulkPublishInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BulkPublishInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BulkPublishRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BulkPublishInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.BulkPublishRequest_IdentityPoolId, *v.IdentityPoolId)
+	}
+}
+
 // The output for the BulkPublish operation.
 type BulkPublishOutput struct {
 
@@ -56,13 +70,32 @@ type BulkPublishOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BulkPublishOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BulkPublishResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BulkPublishOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.BulkPublishResponse_IdentityPoolId, *v.IdentityPoolId)
+	}
+}
+func (v *BulkPublishOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BulkPublishResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BulkPublishResponse_IdentityPoolId:
+			v.IdentityPoolId = new(string)
+			return d.ReadString(schemas.BulkPublishResponse_IdentityPoolId, v.IdentityPoolId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBulkPublishMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBulkPublish{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BulkPublish, schemas.BulkPublishRequest, schemas.BulkPublishResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBulkPublish{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BulkPublish, schemas.BulkPublishRequest, schemas.BulkPublishResponse), output: &BulkPublishOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

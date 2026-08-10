@@ -5,7 +5,9 @@ package mgn
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,26 @@ type ListImportFileEnrichmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImportFileEnrichmentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImportFileEnrichmentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImportFileEnrichmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListImportFileEnrichmentsRequest_filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListImportFileEnrichmentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImportFileEnrichmentsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListImportFileEnrichmentsOutput struct {
 
 	// A list of import file enrichment jobs.
@@ -54,13 +76,35 @@ type ListImportFileEnrichmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImportFileEnrichmentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImportFileEnrichmentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImportFileEnrichmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeImportFileEnrichmentsList(s, schemas.ListImportFileEnrichmentsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImportFileEnrichmentsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListImportFileEnrichmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListImportFileEnrichmentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListImportFileEnrichmentsResponse_items:
+			return deserializeImportFileEnrichmentsList(d, schemas.ListImportFileEnrichmentsResponse_items, &v.Items)
+		case schemas.ListImportFileEnrichmentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListImportFileEnrichmentsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListImportFileEnrichmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListImportFileEnrichments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImportFileEnrichments, schemas.ListImportFileEnrichmentsRequest, schemas.ListImportFileEnrichmentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListImportFileEnrichments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImportFileEnrichments, schemas.ListImportFileEnrichmentsRequest, schemas.ListImportFileEnrichmentsResponse), output: &ListImportFileEnrichmentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

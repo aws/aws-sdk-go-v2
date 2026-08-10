@@ -4,6 +4,8 @@ package mgn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,40 @@ type RemoveSourceServerActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveSourceServerActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveSourceServerActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveSourceServerActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountID != nil {
+		s.WriteString(schemas.RemoveSourceServerActionRequest_accountID, *v.AccountID)
+	}
+	if v.ActionID != nil {
+		s.WriteString(schemas.RemoveSourceServerActionRequest_actionID, *v.ActionID)
+	}
+	if v.SourceServerID != nil {
+		s.WriteString(schemas.RemoveSourceServerActionRequest_sourceServerID, *v.SourceServerID)
+	}
+}
+func (v *RemoveSourceServerActionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveSourceServerActionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoveSourceServerActionRequest_accountID:
+			v.AccountID = new(string)
+			return d.ReadString(schemas.RemoveSourceServerActionRequest_accountID, v.AccountID)
+		case schemas.RemoveSourceServerActionRequest_actionID:
+			v.ActionID = new(string)
+			return d.ReadString(schemas.RemoveSourceServerActionRequest_actionID, v.ActionID)
+		case schemas.RemoveSourceServerActionRequest_sourceServerID:
+			v.SourceServerID = new(string)
+			return d.ReadString(schemas.RemoveSourceServerActionRequest_sourceServerID, v.SourceServerID)
+		}
+		return nil
+	})
+}
+
 type RemoveSourceServerActionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +84,26 @@ type RemoveSourceServerActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveSourceServerActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveSourceServerActionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveSourceServerActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RemoveSourceServerActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveSourceServerActionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveSourceServerActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveSourceServerAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveSourceServerAction, schemas.RemoveSourceServerActionRequest, schemas.RemoveSourceServerActionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveSourceServerAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveSourceServerAction, schemas.RemoveSourceServerActionRequest, schemas.RemoveSourceServerActionResponse), output: &RemoveSourceServerActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

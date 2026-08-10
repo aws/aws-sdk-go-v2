@@ -5,7 +5,9 @@ package connectcases
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,49 @@ type ListFieldOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFieldOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFieldOptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFieldOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.ListFieldOptionsRequest_domainId, *v.DomainId)
+	}
+	if v.FieldId != nil {
+		s.WriteString(schemas.ListFieldOptionsRequest_fieldId, *v.FieldId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFieldOptionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFieldOptionsRequest_nextToken, *v.NextToken)
+	}
+	serializeValuesList(s, schemas.ListFieldOptionsRequest_values, v.Values)
+}
+func (v *ListFieldOptionsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFieldOptionsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFieldOptionsRequest_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.ListFieldOptionsRequest_domainId, v.DomainId)
+		case schemas.ListFieldOptionsRequest_fieldId:
+			v.FieldId = new(string)
+			return d.ReadString(schemas.ListFieldOptionsRequest_fieldId, v.FieldId)
+		case schemas.ListFieldOptionsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListFieldOptionsRequest_maxResults, v.MaxResults)
+		case schemas.ListFieldOptionsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFieldOptionsRequest_nextToken, v.NextToken)
+		case schemas.ListFieldOptionsRequest_values:
+			return deserializeValuesList(d, schemas.ListFieldOptionsRequest_values, &v.Values)
+		}
+		return nil
+	})
+}
+
 type ListFieldOptionsOutput struct {
 
 	// A list of FieldOption objects.
@@ -67,13 +112,35 @@ type ListFieldOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFieldOptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFieldOptionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFieldOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFieldOptionsResponse_nextToken, *v.NextToken)
+	}
+	serializeFieldOptionsList(s, schemas.ListFieldOptionsResponse_options, v.Options)
+}
+func (v *ListFieldOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFieldOptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFieldOptionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFieldOptionsResponse_nextToken, v.NextToken)
+		case schemas.ListFieldOptionsResponse_options:
+			return deserializeFieldOptionsList(d, schemas.ListFieldOptionsResponse_options, &v.Options)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFieldOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFieldOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFieldOptions, schemas.ListFieldOptionsRequest, schemas.ListFieldOptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFieldOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFieldOptions, schemas.ListFieldOptionsRequest, schemas.ListFieldOptionsResponse), output: &ListFieldOptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

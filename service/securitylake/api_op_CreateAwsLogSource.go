@@ -4,7 +4,9 @@ package securitylake
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securitylake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securitylake/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,16 @@ type CreateAwsLogSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAwsLogSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAwsLogSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAwsLogSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAwsLogSourceConfigurationList(s, schemas.CreateAwsLogSourceRequest_sources, v.Sources)
+}
+
 type CreateAwsLogSourceOutput struct {
 
 	// Lists all accounts in which enabling a natively supported Amazon Web Services
@@ -57,13 +69,29 @@ type CreateAwsLogSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAwsLogSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAwsLogSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAwsLogSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountList(s, schemas.CreateAwsLogSourceResponse_failed, v.Failed)
+}
+func (v *CreateAwsLogSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAwsLogSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAwsLogSourceResponse_failed:
+			return deserializeAccountList(d, schemas.CreateAwsLogSourceResponse_failed, &v.Failed)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAwsLogSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAwsLogSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAwsLogSource, schemas.CreateAwsLogSourceRequest, schemas.CreateAwsLogSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAwsLogSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAwsLogSource, schemas.CreateAwsLogSourceRequest, schemas.CreateAwsLogSourceResponse), output: &CreateAwsLogSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

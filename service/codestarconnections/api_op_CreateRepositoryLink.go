@@ -4,7 +4,9 @@ package codestarconnections
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codestarconnections/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codestarconnections/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,28 @@ type CreateRepositoryLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRepositoryLinkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRepositoryLinkInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRepositoryLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionArn != nil {
+		s.WriteString(schemas.CreateRepositoryLinkInput_ConnectionArn, *v.ConnectionArn)
+	}
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.CreateRepositoryLinkInput_EncryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.OwnerId != nil {
+		s.WriteString(schemas.CreateRepositoryLinkInput_OwnerId, *v.OwnerId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.CreateRepositoryLinkInput_RepositoryName, *v.RepositoryName)
+	}
+	serializeTagList(s, schemas.CreateRepositoryLinkInput_Tags, v.Tags)
+}
+
 type CreateRepositoryLinkOutput struct {
 
 	// The returned information about the created repository link.
@@ -67,13 +91,34 @@ type CreateRepositoryLinkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRepositoryLinkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRepositoryLinkOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRepositoryLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RepositoryLinkInfo != nil {
+		s.WriteStruct(schemas.CreateRepositoryLinkOutput_RepositoryLinkInfo)
+		v.RepositoryLinkInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateRepositoryLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRepositoryLinkOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRepositoryLinkOutput_RepositoryLinkInfo:
+			v.RepositoryLinkInfo = &types.RepositoryLinkInfo{}
+			return v.RepositoryLinkInfo.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRepositoryLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateRepositoryLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRepositoryLink, schemas.CreateRepositoryLinkInput, schemas.CreateRepositoryLinkOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateRepositoryLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRepositoryLink, schemas.CreateRepositoryLinkInput, schemas.CreateRepositoryLinkOutput), output: &CreateRepositoryLinkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

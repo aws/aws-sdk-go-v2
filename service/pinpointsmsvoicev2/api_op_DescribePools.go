@@ -5,7 +5,9 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,26 @@ type DescribePoolsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePoolsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePoolsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePoolsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePoolFilterList(s, schemas.DescribePoolsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribePoolsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribePoolsRequest_NextToken, *v.NextToken)
+	}
+	if v.Owner != "" {
+		s.WriteString(schemas.DescribePoolsRequest_Owner, string(v.Owner))
+	}
+	serializePoolIdList(s, schemas.DescribePoolsRequest_PoolIds, v.PoolIds)
+}
+
 type DescribePoolsOutput struct {
 
 	// The token to be used for the next set of paginated results. If this field is
@@ -80,13 +102,35 @@ type DescribePoolsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePoolsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePoolsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePoolsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribePoolsResult_NextToken, *v.NextToken)
+	}
+	serializePoolInformationList(s, schemas.DescribePoolsResult_Pools, v.Pools)
+}
+func (v *DescribePoolsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePoolsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePoolsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribePoolsResult_NextToken, v.NextToken)
+		case schemas.DescribePoolsResult_Pools:
+			return deserializePoolInformationList(d, schemas.DescribePoolsResult_Pools, &v.Pools)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePoolsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribePools{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePools, schemas.DescribePoolsRequest, schemas.DescribePoolsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribePools{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePools, schemas.DescribePoolsRequest, schemas.DescribePoolsResult), output: &DescribePoolsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

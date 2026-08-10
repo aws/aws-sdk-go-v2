@@ -5,7 +5,9 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,23 @@ type DescribeRegistrationTypeDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRegistrationTypeDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRegistrationTypeDefinitionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRegistrationTypeDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRegistrationTypeFilterList(s, schemas.DescribeRegistrationTypeDefinitionsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeRegistrationTypeDefinitionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRegistrationTypeDefinitionsRequest_NextToken, *v.NextToken)
+	}
+	serializeRegistrationTypeList(s, schemas.DescribeRegistrationTypeDefinitionsRequest_RegistrationTypes, v.RegistrationTypes)
+}
+
 type DescribeRegistrationTypeDefinitionsOutput struct {
 
 	// The type of registration form. The list of RegistrationTypes can be found using
@@ -64,13 +83,35 @@ type DescribeRegistrationTypeDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRegistrationTypeDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRegistrationTypeDefinitionsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRegistrationTypeDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRegistrationTypeDefinitionsResult_NextToken, *v.NextToken)
+	}
+	serializeRegistrationTypeDefinitionList(s, schemas.DescribeRegistrationTypeDefinitionsResult_RegistrationTypeDefinitions, v.RegistrationTypeDefinitions)
+}
+func (v *DescribeRegistrationTypeDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRegistrationTypeDefinitionsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRegistrationTypeDefinitionsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeRegistrationTypeDefinitionsResult_NextToken, v.NextToken)
+		case schemas.DescribeRegistrationTypeDefinitionsResult_RegistrationTypeDefinitions:
+			return deserializeRegistrationTypeDefinitionList(d, schemas.DescribeRegistrationTypeDefinitionsResult_RegistrationTypeDefinitions, &v.RegistrationTypeDefinitions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRegistrationTypeDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeRegistrationTypeDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRegistrationTypeDefinitions, schemas.DescribeRegistrationTypeDefinitionsRequest, schemas.DescribeRegistrationTypeDefinitionsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeRegistrationTypeDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRegistrationTypeDefinitions, schemas.DescribeRegistrationTypeDefinitionsRequest, schemas.DescribeRegistrationTypeDefinitionsResult), output: &DescribeRegistrationTypeDefinitionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

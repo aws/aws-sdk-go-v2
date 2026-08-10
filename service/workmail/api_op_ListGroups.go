@@ -5,7 +5,9 @@ package workmail
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,29 @@ type ListGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListGroupsRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListGroupsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGroupsRequest_NextToken, *v.NextToken)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.ListGroupsRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type ListGroupsOutput struct {
 
 	// The overview of groups for an organization.
@@ -61,13 +86,35 @@ type ListGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGroups(s, schemas.ListGroupsResponse_Groups, v.Groups)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGroupsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGroupsResponse_Groups:
+			return deserializeGroups(d, schemas.ListGroupsResponse_Groups, &v.Groups)
+		case schemas.ListGroupsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGroupsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroups, schemas.ListGroupsRequest, schemas.ListGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroups, schemas.ListGroupsRequest, schemas.ListGroupsResponse), output: &ListGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

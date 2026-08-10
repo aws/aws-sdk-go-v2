@@ -4,7 +4,9 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -40,6 +42,21 @@ type GetImpersonationRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetImpersonationRoleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetImpersonationRoleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetImpersonationRoleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImpersonationRoleId != nil {
+		s.WriteString(schemas.GetImpersonationRoleRequest_ImpersonationRoleId, *v.ImpersonationRoleId)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.GetImpersonationRoleRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type GetImpersonationRoleOutput struct {
 
 	// The date when the impersonation role was created.
@@ -69,13 +86,69 @@ type GetImpersonationRoleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetImpersonationRoleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetImpersonationRoleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetImpersonationRoleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateCreated != nil {
+		s.WriteTime(schemas.GetImpersonationRoleResponse_DateCreated, *v.DateCreated)
+	}
+	if v.DateModified != nil {
+		s.WriteTime(schemas.GetImpersonationRoleResponse_DateModified, *v.DateModified)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetImpersonationRoleResponse_Description, *v.Description)
+	}
+	if v.ImpersonationRoleId != nil {
+		s.WriteString(schemas.GetImpersonationRoleResponse_ImpersonationRoleId, *v.ImpersonationRoleId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetImpersonationRoleResponse_Name, *v.Name)
+	}
+	serializeImpersonationRuleList(s, schemas.GetImpersonationRoleResponse_Rules, v.Rules)
+	if v.Type != "" {
+		s.WriteString(schemas.GetImpersonationRoleResponse_Type, string(v.Type))
+	}
+}
+func (v *GetImpersonationRoleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetImpersonationRoleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetImpersonationRoleResponse_DateCreated:
+			v.DateCreated = new(time.Time)
+			return d.ReadTime(schemas.GetImpersonationRoleResponse_DateCreated, v.DateCreated)
+		case schemas.GetImpersonationRoleResponse_DateModified:
+			v.DateModified = new(time.Time)
+			return d.ReadTime(schemas.GetImpersonationRoleResponse_DateModified, v.DateModified)
+		case schemas.GetImpersonationRoleResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetImpersonationRoleResponse_Description, v.Description)
+		case schemas.GetImpersonationRoleResponse_ImpersonationRoleId:
+			v.ImpersonationRoleId = new(string)
+			return d.ReadString(schemas.GetImpersonationRoleResponse_ImpersonationRoleId, v.ImpersonationRoleId)
+		case schemas.GetImpersonationRoleResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetImpersonationRoleResponse_Name, v.Name)
+		case schemas.GetImpersonationRoleResponse_Rules:
+			return deserializeImpersonationRuleList(d, schemas.GetImpersonationRoleResponse_Rules, &v.Rules)
+		case schemas.GetImpersonationRoleResponse_Type:
+			var ev string
+			if err := d.ReadString(schemas.GetImpersonationRoleResponse_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.ImpersonationRoleType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetImpersonationRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetImpersonationRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImpersonationRole, schemas.GetImpersonationRoleRequest, schemas.GetImpersonationRoleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetImpersonationRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImpersonationRole, schemas.GetImpersonationRoleRequest, schemas.GetImpersonationRoleResponse), output: &GetImpersonationRoleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

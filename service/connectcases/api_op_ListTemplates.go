@@ -5,7 +5,9 @@ package connectcases
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,43 @@ type ListTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTemplatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTemplatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.ListTemplatesRequest_domainId, *v.DomainId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTemplatesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTemplatesRequest_nextToken, *v.NextToken)
+	}
+	serializeTemplateStatusFilters(s, schemas.ListTemplatesRequest_status, v.Status)
+}
+func (v *ListTemplatesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTemplatesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTemplatesRequest_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.ListTemplatesRequest_domainId, v.DomainId)
+		case schemas.ListTemplatesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListTemplatesRequest_maxResults, v.MaxResults)
+		case schemas.ListTemplatesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTemplatesRequest_nextToken, v.NextToken)
+		case schemas.ListTemplatesRequest_status:
+			return deserializeTemplateStatusFilters(d, schemas.ListTemplatesRequest_status, &v.Status)
+		}
+		return nil
+	})
+}
+
 type ListTemplatesOutput struct {
 
 	// List of template summary objects.
@@ -78,13 +117,35 @@ type ListTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTemplatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTemplatesResponse_nextToken, *v.NextToken)
+	}
+	serializeTemplateSummaryList(s, schemas.ListTemplatesResponse_templates, v.Templates)
+}
+func (v *ListTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTemplatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTemplatesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTemplatesResponse_nextToken, v.NextToken)
+		case schemas.ListTemplatesResponse_templates:
+			return deserializeTemplateSummaryList(d, schemas.ListTemplatesResponse_templates, &v.Templates)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTemplates, schemas.ListTemplatesRequest, schemas.ListTemplatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTemplates, schemas.ListTemplatesRequest, schemas.ListTemplatesResponse), output: &ListTemplatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

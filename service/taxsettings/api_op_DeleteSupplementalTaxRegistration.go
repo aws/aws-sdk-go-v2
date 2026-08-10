@@ -4,6 +4,8 @@ package taxsettings
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/taxsettings/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteSupplementalTaxRegistrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSupplementalTaxRegistrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSupplementalTaxRegistrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSupplementalTaxRegistrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorityId != nil {
+		s.WriteString(schemas.DeleteSupplementalTaxRegistrationRequest_authorityId, *v.AuthorityId)
+	}
+}
+
 type DeleteSupplementalTaxRegistrationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteSupplementalTaxRegistrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSupplementalTaxRegistrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSupplementalTaxRegistrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSupplementalTaxRegistrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteSupplementalTaxRegistrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSupplementalTaxRegistrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSupplementalTaxRegistrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSupplementalTaxRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSupplementalTaxRegistration, schemas.DeleteSupplementalTaxRegistrationRequest, schemas.DeleteSupplementalTaxRegistrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSupplementalTaxRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSupplementalTaxRegistration, schemas.DeleteSupplementalTaxRegistrationRequest, schemas.DeleteSupplementalTaxRegistrationResponse), output: &DeleteSupplementalTaxRegistrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type SubmitRegistrationVersionInput struct {
 	AwsReview bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *SubmitRegistrationVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubmitRegistrationVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubmitRegistrationVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsReview != false {
+		s.WriteBool(schemas.SubmitRegistrationVersionRequest_AwsReview, v.AwsReview)
+	}
+	if v.RegistrationId != nil {
+		s.WriteString(schemas.SubmitRegistrationVersionRequest_RegistrationId, *v.RegistrationId)
+	}
 }
 
 type SubmitRegistrationVersionOutput struct {
@@ -98,13 +115,65 @@ type SubmitRegistrationVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubmitRegistrationVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubmitRegistrationVersionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubmitRegistrationVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.SubmitRegistrationVersionResult_AwsReview, v.AwsReview)
+	if v.RegistrationArn != nil {
+		s.WriteString(schemas.SubmitRegistrationVersionResult_RegistrationArn, *v.RegistrationArn)
+	}
+	if v.RegistrationId != nil {
+		s.WriteString(schemas.SubmitRegistrationVersionResult_RegistrationId, *v.RegistrationId)
+	}
+	if v.RegistrationVersionStatus != "" {
+		s.WriteString(schemas.SubmitRegistrationVersionResult_RegistrationVersionStatus, string(v.RegistrationVersionStatus))
+	}
+	if v.RegistrationVersionStatusHistory != nil {
+		s.WriteStruct(schemas.SubmitRegistrationVersionResult_RegistrationVersionStatusHistory)
+		v.RegistrationVersionStatusHistory.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VersionNumber != nil {
+		s.WriteInt64(schemas.SubmitRegistrationVersionResult_VersionNumber, *v.VersionNumber)
+	}
+}
+func (v *SubmitRegistrationVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubmitRegistrationVersionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubmitRegistrationVersionResult_AwsReview:
+			return d.ReadBool(schemas.SubmitRegistrationVersionResult_AwsReview, &v.AwsReview)
+		case schemas.SubmitRegistrationVersionResult_RegistrationArn:
+			v.RegistrationArn = new(string)
+			return d.ReadString(schemas.SubmitRegistrationVersionResult_RegistrationArn, v.RegistrationArn)
+		case schemas.SubmitRegistrationVersionResult_RegistrationId:
+			v.RegistrationId = new(string)
+			return d.ReadString(schemas.SubmitRegistrationVersionResult_RegistrationId, v.RegistrationId)
+		case schemas.SubmitRegistrationVersionResult_RegistrationVersionStatus:
+			var ev string
+			if err := d.ReadString(schemas.SubmitRegistrationVersionResult_RegistrationVersionStatus, &ev); err != nil {
+				return err
+			}
+			v.RegistrationVersionStatus = types.RegistrationVersionStatus(ev)
+			return nil
+		case schemas.SubmitRegistrationVersionResult_RegistrationVersionStatusHistory:
+			v.RegistrationVersionStatusHistory = &types.RegistrationVersionStatusHistory{}
+			return v.RegistrationVersionStatusHistory.Deserialize(d)
+		case schemas.SubmitRegistrationVersionResult_VersionNumber:
+			v.VersionNumber = new(int64)
+			return d.ReadInt64(schemas.SubmitRegistrationVersionResult_VersionNumber, v.VersionNumber)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSubmitRegistrationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSubmitRegistrationVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubmitRegistrationVersion, schemas.SubmitRegistrationVersionRequest, schemas.SubmitRegistrationVersionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpSubmitRegistrationVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubmitRegistrationVersion, schemas.SubmitRegistrationVersionRequest, schemas.SubmitRegistrationVersionResult), output: &SubmitRegistrationVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

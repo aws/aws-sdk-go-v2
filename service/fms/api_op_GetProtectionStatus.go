@@ -4,7 +4,9 @@ package fms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -67,6 +69,33 @@ type GetProtectionStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProtectionStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProtectionStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProtectionStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetProtectionStatusRequest_EndTime, *v.EndTime)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetProtectionStatusRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MemberAccountId != nil {
+		s.WriteString(schemas.GetProtectionStatusRequest_MemberAccountId, *v.MemberAccountId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetProtectionStatusRequest_NextToken, *v.NextToken)
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.GetProtectionStatusRequest_PolicyId, *v.PolicyId)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetProtectionStatusRequest_StartTime, *v.StartTime)
+	}
+}
+
 type GetProtectionStatusOutput struct {
 
 	// The ID of the Firewall Manager administrator account for this policy.
@@ -108,13 +137,54 @@ type GetProtectionStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProtectionStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProtectionStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProtectionStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdminAccountId != nil {
+		s.WriteString(schemas.GetProtectionStatusResponse_AdminAccountId, *v.AdminAccountId)
+	}
+	if v.Data != nil {
+		s.WriteString(schemas.GetProtectionStatusResponse_Data, *v.Data)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetProtectionStatusResponse_NextToken, *v.NextToken)
+	}
+	if v.ServiceType != "" {
+		s.WriteString(schemas.GetProtectionStatusResponse_ServiceType, string(v.ServiceType))
+	}
+}
+func (v *GetProtectionStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetProtectionStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetProtectionStatusResponse_AdminAccountId:
+			v.AdminAccountId = new(string)
+			return d.ReadString(schemas.GetProtectionStatusResponse_AdminAccountId, v.AdminAccountId)
+		case schemas.GetProtectionStatusResponse_Data:
+			v.Data = new(string)
+			return d.ReadString(schemas.GetProtectionStatusResponse_Data, v.Data)
+		case schemas.GetProtectionStatusResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetProtectionStatusResponse_NextToken, v.NextToken)
+		case schemas.GetProtectionStatusResponse_ServiceType:
+			var ev string
+			if err := d.ReadString(schemas.GetProtectionStatusResponse_ServiceType, &ev); err != nil {
+				return err
+			}
+			v.ServiceType = types.SecurityServiceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetProtectionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetProtectionStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProtectionStatus, schemas.GetProtectionStatusRequest, schemas.GetProtectionStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetProtectionStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProtectionStatus, schemas.GetProtectionStatusRequest, schemas.GetProtectionStatusResponse), output: &GetProtectionStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

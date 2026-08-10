@@ -5,7 +5,9 @@ package iotfleetwise
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,40 @@ type ListDecoderManifestSignalsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDecoderManifestSignalsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDecoderManifestSignalsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDecoderManifestSignalsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDecoderManifestSignalsRequest_maxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListDecoderManifestSignalsRequest_name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDecoderManifestSignalsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDecoderManifestSignalsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDecoderManifestSignalsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDecoderManifestSignalsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListDecoderManifestSignalsRequest_maxResults, v.MaxResults)
+		case schemas.ListDecoderManifestSignalsRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ListDecoderManifestSignalsRequest_name, v.Name)
+		case schemas.ListDecoderManifestSignalsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDecoderManifestSignalsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListDecoderManifestSignalsOutput struct {
 
 	//  The token to retrieve the next set of results, or null if there are no more
@@ -65,13 +101,35 @@ type ListDecoderManifestSignalsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDecoderManifestSignalsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDecoderManifestSignalsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDecoderManifestSignalsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDecoderManifestSignalsResponse_nextToken, *v.NextToken)
+	}
+	serializeSignalDecoders(s, schemas.ListDecoderManifestSignalsResponse_signalDecoders, v.SignalDecoders)
+}
+func (v *ListDecoderManifestSignalsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDecoderManifestSignalsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDecoderManifestSignalsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDecoderManifestSignalsResponse_nextToken, v.NextToken)
+		case schemas.ListDecoderManifestSignalsResponse_signalDecoders:
+			return deserializeSignalDecoders(d, schemas.ListDecoderManifestSignalsResponse_signalDecoders, &v.SignalDecoders)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDecoderManifestSignalsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListDecoderManifestSignals{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDecoderManifestSignals, schemas.ListDecoderManifestSignalsRequest, schemas.ListDecoderManifestSignalsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListDecoderManifestSignals{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDecoderManifestSignals, schemas.ListDecoderManifestSignalsRequest, schemas.ListDecoderManifestSignalsResponse), output: &ListDecoderManifestSignalsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

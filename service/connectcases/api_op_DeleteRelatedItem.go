@@ -4,6 +4,8 @@ package connectcases
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,24 @@ type DeleteRelatedItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRelatedItemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRelatedItemRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRelatedItemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseId != nil {
+		s.WriteString(schemas.DeleteRelatedItemRequest_caseId, *v.CaseId)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.DeleteRelatedItemRequest_domainId, *v.DomainId)
+	}
+	if v.RelatedItemId != nil {
+		s.WriteString(schemas.DeleteRelatedItemRequest_relatedItemId, *v.RelatedItemId)
+	}
+}
+
 type DeleteRelatedItemOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +75,26 @@ type DeleteRelatedItemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRelatedItemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRelatedItemResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRelatedItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteRelatedItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRelatedItemResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRelatedItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRelatedItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRelatedItem, schemas.DeleteRelatedItemRequest, schemas.DeleteRelatedItemResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteRelatedItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRelatedItem, schemas.DeleteRelatedItemRequest, schemas.DeleteRelatedItemResponse), output: &DeleteRelatedItemOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

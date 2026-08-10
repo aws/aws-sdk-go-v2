@@ -4,7 +4,9 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -54,6 +56,24 @@ type GetMobileDeviceAccessOverrideInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMobileDeviceAccessOverrideInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMobileDeviceAccessOverrideRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMobileDeviceAccessOverrideInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceId != nil {
+		s.WriteString(schemas.GetMobileDeviceAccessOverrideRequest_DeviceId, *v.DeviceId)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.GetMobileDeviceAccessOverrideRequest_OrganizationId, *v.OrganizationId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.GetMobileDeviceAccessOverrideRequest_UserId, *v.UserId)
+	}
+}
+
 type GetMobileDeviceAccessOverrideOutput struct {
 
 	// The date the override was first created.
@@ -80,13 +100,66 @@ type GetMobileDeviceAccessOverrideOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMobileDeviceAccessOverrideOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMobileDeviceAccessOverrideResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMobileDeviceAccessOverrideOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateCreated != nil {
+		s.WriteTime(schemas.GetMobileDeviceAccessOverrideResponse_DateCreated, *v.DateCreated)
+	}
+	if v.DateModified != nil {
+		s.WriteTime(schemas.GetMobileDeviceAccessOverrideResponse_DateModified, *v.DateModified)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetMobileDeviceAccessOverrideResponse_Description, *v.Description)
+	}
+	if v.DeviceId != nil {
+		s.WriteString(schemas.GetMobileDeviceAccessOverrideResponse_DeviceId, *v.DeviceId)
+	}
+	if v.Effect != "" {
+		s.WriteString(schemas.GetMobileDeviceAccessOverrideResponse_Effect, string(v.Effect))
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.GetMobileDeviceAccessOverrideResponse_UserId, *v.UserId)
+	}
+}
+func (v *GetMobileDeviceAccessOverrideOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMobileDeviceAccessOverrideResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMobileDeviceAccessOverrideResponse_DateCreated:
+			v.DateCreated = new(time.Time)
+			return d.ReadTime(schemas.GetMobileDeviceAccessOverrideResponse_DateCreated, v.DateCreated)
+		case schemas.GetMobileDeviceAccessOverrideResponse_DateModified:
+			v.DateModified = new(time.Time)
+			return d.ReadTime(schemas.GetMobileDeviceAccessOverrideResponse_DateModified, v.DateModified)
+		case schemas.GetMobileDeviceAccessOverrideResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetMobileDeviceAccessOverrideResponse_Description, v.Description)
+		case schemas.GetMobileDeviceAccessOverrideResponse_DeviceId:
+			v.DeviceId = new(string)
+			return d.ReadString(schemas.GetMobileDeviceAccessOverrideResponse_DeviceId, v.DeviceId)
+		case schemas.GetMobileDeviceAccessOverrideResponse_Effect:
+			var ev string
+			if err := d.ReadString(schemas.GetMobileDeviceAccessOverrideResponse_Effect, &ev); err != nil {
+				return err
+			}
+			v.Effect = types.MobileDeviceAccessRuleEffect(ev)
+			return nil
+		case schemas.GetMobileDeviceAccessOverrideResponse_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.GetMobileDeviceAccessOverrideResponse_UserId, v.UserId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMobileDeviceAccessOverrideMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetMobileDeviceAccessOverride{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMobileDeviceAccessOverride, schemas.GetMobileDeviceAccessOverrideRequest, schemas.GetMobileDeviceAccessOverrideResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetMobileDeviceAccessOverride{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMobileDeviceAccessOverride, schemas.GetMobileDeviceAccessOverrideRequest, schemas.GetMobileDeviceAccessOverrideResponse), output: &GetMobileDeviceAccessOverrideOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

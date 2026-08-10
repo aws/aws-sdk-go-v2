@@ -4,7 +4,9 @@ package notifications
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/notifications/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/notifications/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type DeregisterNotificationHubInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterNotificationHubInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterNotificationHubRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterNotificationHubInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotificationHubRegion != nil {
+		s.WriteString(schemas.DeregisterNotificationHubRequest_notificationHubRegion, *v.NotificationHubRegion)
+	}
+}
+
 type DeregisterNotificationHubOutput struct {
 
 	// The NotificationConfiguration Region.
@@ -57,13 +71,40 @@ type DeregisterNotificationHubOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterNotificationHubOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterNotificationHubResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterNotificationHubOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotificationHubRegion != nil {
+		s.WriteString(schemas.DeregisterNotificationHubResponse_notificationHubRegion, *v.NotificationHubRegion)
+	}
+	if v.StatusSummary != nil {
+		s.WriteStruct(schemas.DeregisterNotificationHubResponse_statusSummary)
+		v.StatusSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeregisterNotificationHubOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterNotificationHubResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeregisterNotificationHubResponse_notificationHubRegion:
+			v.NotificationHubRegion = new(string)
+			return d.ReadString(schemas.DeregisterNotificationHubResponse_notificationHubRegion, v.NotificationHubRegion)
+		case schemas.DeregisterNotificationHubResponse_statusSummary:
+			v.StatusSummary = &types.NotificationHubStatusSummary{}
+			return v.StatusSummary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterNotificationHubMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeregisterNotificationHub{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterNotificationHub, schemas.DeregisterNotificationHubRequest, schemas.DeregisterNotificationHubResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeregisterNotificationHub{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterNotificationHub, schemas.DeregisterNotificationHubRequest, schemas.DeregisterNotificationHubResponse), output: &DeregisterNotificationHubOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

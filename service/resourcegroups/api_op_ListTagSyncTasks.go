@@ -5,7 +5,9 @@ package resourcegroups
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,22 @@ type ListTagSyncTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagSyncTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagSyncTasksInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagSyncTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListTagSyncTasksFilterList(s, schemas.ListTagSyncTasksInput_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTagSyncTasksInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTagSyncTasksInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListTagSyncTasksOutput struct {
 
 	// If present, indicates that more output is available than is included in the
@@ -67,13 +85,35 @@ type ListTagSyncTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagSyncTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagSyncTasksOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagSyncTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTagSyncTasksOutput_NextToken, *v.NextToken)
+	}
+	serializeTagSyncTaskList(s, schemas.ListTagSyncTasksOutput_TagSyncTasks, v.TagSyncTasks)
+}
+func (v *ListTagSyncTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTagSyncTasksOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTagSyncTasksOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTagSyncTasksOutput_NextToken, v.NextToken)
+		case schemas.ListTagSyncTasksOutput_TagSyncTasks:
+			return deserializeTagSyncTaskList(d, schemas.ListTagSyncTasksOutput_TagSyncTasks, &v.TagSyncTasks)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTagSyncTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTagSyncTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagSyncTasks, schemas.ListTagSyncTasksInput, schemas.ListTagSyncTasksOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTagSyncTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagSyncTasks, schemas.ListTagSyncTasksInput, schemas.ListTagSyncTasksOutput), output: &ListTagSyncTasksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

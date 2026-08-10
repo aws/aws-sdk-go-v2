@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/taxsettings/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -27,6 +29,52 @@ type AccountDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AccountDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.AccountDetails_accountId, *v.AccountId)
+	}
+	if v.AccountMetaData != nil {
+		s.WriteStruct(schemas.AccountDetails_accountMetaData)
+		v.AccountMetaData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaxInheritanceDetails != nil {
+		s.WriteStruct(schemas.AccountDetails_taxInheritanceDetails)
+		v.TaxInheritanceDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaxRegistration != nil {
+		s.WriteStruct(schemas.AccountDetails_taxRegistration)
+		v.TaxRegistration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AccountDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountDetails_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.AccountDetails_accountId, v.AccountId)
+		case schemas.AccountDetails_accountMetaData:
+			v.AccountMetaData = &AccountMetaData{}
+			return v.AccountMetaData.Deserialize(d)
+		case schemas.AccountDetails_taxInheritanceDetails:
+			v.TaxInheritanceDetails = &TaxInheritanceDetails{}
+			return v.TaxInheritanceDetails.Deserialize(d)
+		case schemas.AccountDetails_taxRegistration:
+			v.TaxRegistration = &TaxRegistrationWithJurisdiction{}
+			return v.TaxRegistration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The meta data information associated with the account.
 type AccountMetaData struct {
 
@@ -46,6 +94,55 @@ type AccountMetaData struct {
 	Seller *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AccountMetaData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountMetaData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountMetaData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountName != nil {
+		s.WriteString(schemas.AccountMetaData_accountName, *v.AccountName)
+	}
+	if v.Address != nil {
+		s.WriteStruct(schemas.AccountMetaData_address)
+		v.Address.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAddressRoleMap(s, schemas.AccountMetaData_addressRoleMap, v.AddressRoleMap)
+	if v.AddressType != "" {
+		s.WriteString(schemas.AccountMetaData_addressType, string(v.AddressType))
+	}
+	if v.Seller != nil {
+		s.WriteString(schemas.AccountMetaData_seller, *v.Seller)
+	}
+}
+func (v *AccountMetaData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountMetaData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountMetaData_accountName:
+			v.AccountName = new(string)
+			return d.ReadString(schemas.AccountMetaData_accountName, v.AccountName)
+		case schemas.AccountMetaData_address:
+			v.Address = &Address{}
+			return v.Address.Deserialize(d)
+		case schemas.AccountMetaData_addressRoleMap:
+			return deserializeAddressRoleMap(d, schemas.AccountMetaData_addressRoleMap, &v.AddressRoleMap)
+		case schemas.AccountMetaData_addressType:
+			var ev string
+			if err := d.ReadString(schemas.AccountMetaData_addressType, &ev); err != nil {
+				return err
+			}
+			v.AddressType = AddressRoleType(ev)
+			return nil
+		case schemas.AccountMetaData_seller:
+			v.Seller = new(string)
+			return d.ReadString(schemas.AccountMetaData_seller, v.Seller)
+		}
+		return nil
+	})
 }
 
 // Additional tax information associated with your tax registration number (TRN).
@@ -130,6 +227,206 @@ type AdditionalInfoRequest struct {
 	VietnamAdditionalInfo *VietnamAdditionalInfo
 
 	noSmithyDocumentSerde
+}
+
+func (v *AdditionalInfoRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdditionalInfoRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdditionalInfoRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BelgiumAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoRequest_belgiumAdditionalInfo)
+		v.BelgiumAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CanadaAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoRequest_canadaAdditionalInfo)
+		v.CanadaAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ChileAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoRequest_chileAdditionalInfo)
+		v.ChileAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EgyptAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoRequest_egyptAdditionalInfo)
+		v.EgyptAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EstoniaAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoRequest_estoniaAdditionalInfo)
+		v.EstoniaAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FranceAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoRequest_franceAdditionalInfo)
+		v.FranceAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GeorgiaAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoRequest_georgiaAdditionalInfo)
+		v.GeorgiaAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GreeceAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoRequest_greeceAdditionalInfo)
+		v.GreeceAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IndonesiaAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoRequest_indonesiaAdditionalInfo)
+		v.IndonesiaAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IsraelAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoRequest_israelAdditionalInfo)
+		v.IsraelAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ItalyAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoRequest_italyAdditionalInfo)
+		v.ItalyAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KenyaAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoRequest_kenyaAdditionalInfo)
+		v.KenyaAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MalaysiaAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoRequest_malaysiaAdditionalInfo)
+		v.MalaysiaAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PhilippinesAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoRequest_philippinesAdditionalInfo)
+		v.PhilippinesAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PolandAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoRequest_polandAdditionalInfo)
+		v.PolandAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RomaniaAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoRequest_romaniaAdditionalInfo)
+		v.RomaniaAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SaudiArabiaAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoRequest_saudiArabiaAdditionalInfo)
+		v.SaudiArabiaAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SouthKoreaAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoRequest_southKoreaAdditionalInfo)
+		v.SouthKoreaAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SpainAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoRequest_spainAdditionalInfo)
+		v.SpainAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TurkeyAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoRequest_turkeyAdditionalInfo)
+		v.TurkeyAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UkraineAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoRequest_ukraineAdditionalInfo)
+		v.UkraineAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UzbekistanAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoRequest_uzbekistanAdditionalInfo)
+		v.UzbekistanAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VietnamAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoRequest_vietnamAdditionalInfo)
+		v.VietnamAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AdditionalInfoRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdditionalInfoRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdditionalInfoRequest_belgiumAdditionalInfo:
+			v.BelgiumAdditionalInfo = &BelgiumAdditionalInfo{}
+			return v.BelgiumAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoRequest_canadaAdditionalInfo:
+			v.CanadaAdditionalInfo = &CanadaAdditionalInfo{}
+			return v.CanadaAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoRequest_chileAdditionalInfo:
+			v.ChileAdditionalInfo = &ChileAdditionalInfo{}
+			return v.ChileAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoRequest_egyptAdditionalInfo:
+			v.EgyptAdditionalInfo = &EgyptAdditionalInfo{}
+			return v.EgyptAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoRequest_estoniaAdditionalInfo:
+			v.EstoniaAdditionalInfo = &EstoniaAdditionalInfo{}
+			return v.EstoniaAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoRequest_franceAdditionalInfo:
+			v.FranceAdditionalInfo = &FranceAdditionalInfo{}
+			return v.FranceAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoRequest_georgiaAdditionalInfo:
+			v.GeorgiaAdditionalInfo = &GeorgiaAdditionalInfo{}
+			return v.GeorgiaAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoRequest_greeceAdditionalInfo:
+			v.GreeceAdditionalInfo = &GreeceAdditionalInfo{}
+			return v.GreeceAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoRequest_indonesiaAdditionalInfo:
+			v.IndonesiaAdditionalInfo = &IndonesiaAdditionalInfo{}
+			return v.IndonesiaAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoRequest_israelAdditionalInfo:
+			v.IsraelAdditionalInfo = &IsraelAdditionalInfo{}
+			return v.IsraelAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoRequest_italyAdditionalInfo:
+			v.ItalyAdditionalInfo = &ItalyAdditionalInfo{}
+			return v.ItalyAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoRequest_kenyaAdditionalInfo:
+			v.KenyaAdditionalInfo = &KenyaAdditionalInfo{}
+			return v.KenyaAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoRequest_malaysiaAdditionalInfo:
+			v.MalaysiaAdditionalInfo = &MalaysiaAdditionalInfo{}
+			return v.MalaysiaAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoRequest_philippinesAdditionalInfo:
+			v.PhilippinesAdditionalInfo = &PhilippinesAdditionalInfo{}
+			return v.PhilippinesAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoRequest_polandAdditionalInfo:
+			v.PolandAdditionalInfo = &PolandAdditionalInfo{}
+			return v.PolandAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoRequest_romaniaAdditionalInfo:
+			v.RomaniaAdditionalInfo = &RomaniaAdditionalInfo{}
+			return v.RomaniaAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoRequest_saudiArabiaAdditionalInfo:
+			v.SaudiArabiaAdditionalInfo = &SaudiArabiaAdditionalInfo{}
+			return v.SaudiArabiaAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoRequest_southKoreaAdditionalInfo:
+			v.SouthKoreaAdditionalInfo = &SouthKoreaAdditionalInfo{}
+			return v.SouthKoreaAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoRequest_spainAdditionalInfo:
+			v.SpainAdditionalInfo = &SpainAdditionalInfo{}
+			return v.SpainAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoRequest_turkeyAdditionalInfo:
+			v.TurkeyAdditionalInfo = &TurkeyAdditionalInfo{}
+			return v.TurkeyAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoRequest_ukraineAdditionalInfo:
+			v.UkraineAdditionalInfo = &UkraineAdditionalInfo{}
+			return v.UkraineAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoRequest_uzbekistanAdditionalInfo:
+			v.UzbekistanAdditionalInfo = &UzbekistanAdditionalInfo{}
+			return v.UzbekistanAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoRequest_vietnamAdditionalInfo:
+			v.VietnamAdditionalInfo = &VietnamAdditionalInfo{}
+			return v.VietnamAdditionalInfo.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 //	Additional tax information associated with your TRN. The Tax Settings API
@@ -218,6 +515,222 @@ type AdditionalInfoResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdditionalInfoResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdditionalInfoResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdditionalInfoResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BelgiumAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_belgiumAdditionalInfo)
+		v.BelgiumAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BrazilAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_brazilAdditionalInfo)
+		v.BrazilAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CanadaAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_canadaAdditionalInfo)
+		v.CanadaAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ChileAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_chileAdditionalInfo)
+		v.ChileAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EgyptAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_egyptAdditionalInfo)
+		v.EgyptAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EstoniaAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_estoniaAdditionalInfo)
+		v.EstoniaAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FranceAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_franceAdditionalInfo)
+		v.FranceAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GeorgiaAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_georgiaAdditionalInfo)
+		v.GeorgiaAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GreeceAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_greeceAdditionalInfo)
+		v.GreeceAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IndiaAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_indiaAdditionalInfo)
+		v.IndiaAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IndonesiaAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_indonesiaAdditionalInfo)
+		v.IndonesiaAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IsraelAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_israelAdditionalInfo)
+		v.IsraelAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ItalyAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_italyAdditionalInfo)
+		v.ItalyAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KenyaAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_kenyaAdditionalInfo)
+		v.KenyaAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MalaysiaAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_malaysiaAdditionalInfo)
+		v.MalaysiaAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PhilippinesAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_philippinesAdditionalInfo)
+		v.PhilippinesAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PolandAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_polandAdditionalInfo)
+		v.PolandAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RomaniaAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_romaniaAdditionalInfo)
+		v.RomaniaAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SaudiArabiaAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_saudiArabiaAdditionalInfo)
+		v.SaudiArabiaAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SouthKoreaAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_southKoreaAdditionalInfo)
+		v.SouthKoreaAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SpainAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_spainAdditionalInfo)
+		v.SpainAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TurkeyAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_turkeyAdditionalInfo)
+		v.TurkeyAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UkraineAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_ukraineAdditionalInfo)
+		v.UkraineAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UzbekistanAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_uzbekistanAdditionalInfo)
+		v.UzbekistanAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VietnamAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_vietnamAdditionalInfo)
+		v.VietnamAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AdditionalInfoResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdditionalInfoResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdditionalInfoResponse_belgiumAdditionalInfo:
+			v.BelgiumAdditionalInfo = &BelgiumAdditionalInfo{}
+			return v.BelgiumAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_brazilAdditionalInfo:
+			v.BrazilAdditionalInfo = &BrazilAdditionalInfo{}
+			return v.BrazilAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_canadaAdditionalInfo:
+			v.CanadaAdditionalInfo = &CanadaAdditionalInfo{}
+			return v.CanadaAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_chileAdditionalInfo:
+			v.ChileAdditionalInfo = &ChileAdditionalInfo{}
+			return v.ChileAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_egyptAdditionalInfo:
+			v.EgyptAdditionalInfo = &EgyptAdditionalInfo{}
+			return v.EgyptAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_estoniaAdditionalInfo:
+			v.EstoniaAdditionalInfo = &EstoniaAdditionalInfo{}
+			return v.EstoniaAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_franceAdditionalInfo:
+			v.FranceAdditionalInfo = &FranceAdditionalInfo{}
+			return v.FranceAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_georgiaAdditionalInfo:
+			v.GeorgiaAdditionalInfo = &GeorgiaAdditionalInfo{}
+			return v.GeorgiaAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_greeceAdditionalInfo:
+			v.GreeceAdditionalInfo = &GreeceAdditionalInfo{}
+			return v.GreeceAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_indiaAdditionalInfo:
+			v.IndiaAdditionalInfo = &IndiaAdditionalInfo{}
+			return v.IndiaAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_indonesiaAdditionalInfo:
+			v.IndonesiaAdditionalInfo = &IndonesiaAdditionalInfo{}
+			return v.IndonesiaAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_israelAdditionalInfo:
+			v.IsraelAdditionalInfo = &IsraelAdditionalInfo{}
+			return v.IsraelAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_italyAdditionalInfo:
+			v.ItalyAdditionalInfo = &ItalyAdditionalInfo{}
+			return v.ItalyAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_kenyaAdditionalInfo:
+			v.KenyaAdditionalInfo = &KenyaAdditionalInfo{}
+			return v.KenyaAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_malaysiaAdditionalInfo:
+			v.MalaysiaAdditionalInfo = &MalaysiaAdditionalInfo{}
+			return v.MalaysiaAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_philippinesAdditionalInfo:
+			v.PhilippinesAdditionalInfo = &PhilippinesAdditionalInfo{}
+			return v.PhilippinesAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_polandAdditionalInfo:
+			v.PolandAdditionalInfo = &PolandAdditionalInfo{}
+			return v.PolandAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_romaniaAdditionalInfo:
+			v.RomaniaAdditionalInfo = &RomaniaAdditionalInfo{}
+			return v.RomaniaAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_saudiArabiaAdditionalInfo:
+			v.SaudiArabiaAdditionalInfo = &SaudiArabiaAdditionalInfo{}
+			return v.SaudiArabiaAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_southKoreaAdditionalInfo:
+			v.SouthKoreaAdditionalInfo = &SouthKoreaAdditionalInfo{}
+			return v.SouthKoreaAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_spainAdditionalInfo:
+			v.SpainAdditionalInfo = &SpainAdditionalInfo{}
+			return v.SpainAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_turkeyAdditionalInfo:
+			v.TurkeyAdditionalInfo = &TurkeyAdditionalInfo{}
+			return v.TurkeyAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_ukraineAdditionalInfo:
+			v.UkraineAdditionalInfo = &UkraineAdditionalInfo{}
+			return v.UkraineAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_uzbekistanAdditionalInfo:
+			v.UzbekistanAdditionalInfo = &UzbekistanAdditionalInfo{}
+			return v.UzbekistanAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_vietnamAdditionalInfo:
+			v.VietnamAdditionalInfo = &VietnamAdditionalInfo{}
+			return v.VietnamAdditionalInfo.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The details of the address associated with the TRN information.
 type Address struct {
 
@@ -263,6 +776,70 @@ type Address struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Address) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Address)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Address) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressLine1 != nil {
+		s.WriteString(schemas.Address_addressLine1, *v.AddressLine1)
+	}
+	if v.AddressLine2 != nil {
+		s.WriteString(schemas.Address_addressLine2, *v.AddressLine2)
+	}
+	if v.AddressLine3 != nil {
+		s.WriteString(schemas.Address_addressLine3, *v.AddressLine3)
+	}
+	if v.City != nil {
+		s.WriteString(schemas.Address_city, *v.City)
+	}
+	if v.CountryCode != nil {
+		s.WriteString(schemas.Address_countryCode, *v.CountryCode)
+	}
+	if v.DistrictOrCounty != nil {
+		s.WriteString(schemas.Address_districtOrCounty, *v.DistrictOrCounty)
+	}
+	if v.PostalCode != nil {
+		s.WriteString(schemas.Address_postalCode, *v.PostalCode)
+	}
+	if v.StateOrRegion != nil {
+		s.WriteString(schemas.Address_stateOrRegion, *v.StateOrRegion)
+	}
+}
+func (v *Address) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Address, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Address_addressLine1:
+			v.AddressLine1 = new(string)
+			return d.ReadString(schemas.Address_addressLine1, v.AddressLine1)
+		case schemas.Address_addressLine2:
+			v.AddressLine2 = new(string)
+			return d.ReadString(schemas.Address_addressLine2, v.AddressLine2)
+		case schemas.Address_addressLine3:
+			v.AddressLine3 = new(string)
+			return d.ReadString(schemas.Address_addressLine3, v.AddressLine3)
+		case schemas.Address_city:
+			v.City = new(string)
+			return d.ReadString(schemas.Address_city, v.City)
+		case schemas.Address_countryCode:
+			v.CountryCode = new(string)
+			return d.ReadString(schemas.Address_countryCode, v.CountryCode)
+		case schemas.Address_districtOrCounty:
+			v.DistrictOrCounty = new(string)
+			return d.ReadString(schemas.Address_districtOrCounty, v.DistrictOrCounty)
+		case schemas.Address_postalCode:
+			v.PostalCode = new(string)
+			return d.ReadString(schemas.Address_postalCode, v.PostalCode)
+		case schemas.Address_stateOrRegion:
+			v.StateOrRegion = new(string)
+			return d.ReadString(schemas.Address_stateOrRegion, v.StateOrRegion)
+		}
+		return nil
+	})
+}
+
 // The address domain associate with the tax information.
 type Authority struct {
 
@@ -275,6 +852,34 @@ type Authority struct {
 	State *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Authority) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Authority)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Authority) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Country != nil {
+		s.WriteString(schemas.Authority_country, *v.Country)
+	}
+	if v.State != nil {
+		s.WriteString(schemas.Authority_state, *v.State)
+	}
+}
+func (v *Authority) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Authority, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Authority_country:
+			v.Country = new(string)
+			return d.ReadString(schemas.Authority_country, v.Country)
+		case schemas.Authority_state:
+			v.State = new(string)
+			return d.ReadString(schemas.Authority_state, v.State)
+		}
+		return nil
+	})
 }
 
 //	The error object for representing failures in the BatchDeleteTaxRegistration
@@ -301,6 +906,40 @@ type BatchDeleteTaxRegistrationError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteTaxRegistrationError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteTaxRegistrationError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteTaxRegistrationError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.BatchDeleteTaxRegistrationError_accountId, *v.AccountId)
+	}
+	if v.Code != nil {
+		s.WriteString(schemas.BatchDeleteTaxRegistrationError_code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.BatchDeleteTaxRegistrationError_message, *v.Message)
+	}
+}
+func (v *BatchDeleteTaxRegistrationError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteTaxRegistrationError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteTaxRegistrationError_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.BatchDeleteTaxRegistrationError_accountId, v.AccountId)
+		case schemas.BatchDeleteTaxRegistrationError_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.BatchDeleteTaxRegistrationError_code, v.Code)
+		case schemas.BatchDeleteTaxRegistrationError_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BatchDeleteTaxRegistrationError_message, v.Message)
+		}
+		return nil
+	})
+}
+
 //	The error object for representing failures in the BatchPutTaxRegistration
 //
 // operation.
@@ -325,6 +964,40 @@ type BatchPutTaxRegistrationError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutTaxRegistrationError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutTaxRegistrationError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutTaxRegistrationError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.BatchPutTaxRegistrationError_accountId, *v.AccountId)
+	}
+	if v.Code != nil {
+		s.WriteString(schemas.BatchPutTaxRegistrationError_code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.BatchPutTaxRegistrationError_message, *v.Message)
+	}
+}
+func (v *BatchPutTaxRegistrationError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPutTaxRegistrationError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPutTaxRegistrationError_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.BatchPutTaxRegistrationError_accountId, v.AccountId)
+		case schemas.BatchPutTaxRegistrationError_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.BatchPutTaxRegistrationError_code, v.Code)
+		case schemas.BatchPutTaxRegistrationError_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BatchPutTaxRegistrationError_message, v.Message)
+		}
+		return nil
+	})
+}
+
 // Additional tax information associated with your TRN in Belgium.
 type BelgiumAdditionalInfo struct {
 
@@ -336,6 +1009,34 @@ type BelgiumAdditionalInfo struct {
 	PeppolId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BelgiumAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BelgiumAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BelgiumAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsMercuriusBoxEnabled != nil {
+		s.WriteBool(schemas.BelgiumAdditionalInfo_isMercuriusBoxEnabled, *v.IsMercuriusBoxEnabled)
+	}
+	if v.PeppolId != nil {
+		s.WriteString(schemas.BelgiumAdditionalInfo_peppolId, *v.PeppolId)
+	}
+}
+func (v *BelgiumAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BelgiumAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BelgiumAdditionalInfo_isMercuriusBoxEnabled:
+			v.IsMercuriusBoxEnabled = new(bool)
+			return d.ReadBool(schemas.BelgiumAdditionalInfo_isMercuriusBoxEnabled, v.IsMercuriusBoxEnabled)
+		case schemas.BelgiumAdditionalInfo_peppolId:
+			v.PeppolId = new(string)
+			return d.ReadString(schemas.BelgiumAdditionalInfo_peppolId, v.PeppolId)
+		}
+		return nil
+	})
 }
 
 // Additional tax information associated with your TRN in Brazil.
@@ -350,6 +1051,34 @@ type BrazilAdditionalInfo struct {
 	LegalNatureCode *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BrazilAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BrazilAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BrazilAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CcmCode != nil {
+		s.WriteString(schemas.BrazilAdditionalInfo_ccmCode, *v.CcmCode)
+	}
+	if v.LegalNatureCode != nil {
+		s.WriteString(schemas.BrazilAdditionalInfo_legalNatureCode, *v.LegalNatureCode)
+	}
+}
+func (v *BrazilAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BrazilAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BrazilAdditionalInfo_ccmCode:
+			v.CcmCode = new(string)
+			return d.ReadString(schemas.BrazilAdditionalInfo_ccmCode, v.CcmCode)
+		case schemas.BrazilAdditionalInfo_legalNatureCode:
+			v.LegalNatureCode = new(string)
+			return d.ReadString(schemas.BrazilAdditionalInfo_legalNatureCode, v.LegalNatureCode)
+		}
+		return nil
+	})
 }
 
 // Additional tax information associated with your TRN in Canada .
@@ -392,6 +1121,46 @@ type CanadaAdditionalInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CanadaAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CanadaAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CanadaAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CanadaQuebecSalesTaxNumber != nil {
+		s.WriteString(schemas.CanadaAdditionalInfo_canadaQuebecSalesTaxNumber, *v.CanadaQuebecSalesTaxNumber)
+	}
+	if v.CanadaRetailSalesTaxNumber != nil {
+		s.WriteString(schemas.CanadaAdditionalInfo_canadaRetailSalesTaxNumber, *v.CanadaRetailSalesTaxNumber)
+	}
+	if v.IsResellerAccount != nil {
+		s.WriteBool(schemas.CanadaAdditionalInfo_isResellerAccount, *v.IsResellerAccount)
+	}
+	if v.ProvincialSalesTaxId != nil {
+		s.WriteString(schemas.CanadaAdditionalInfo_provincialSalesTaxId, *v.ProvincialSalesTaxId)
+	}
+}
+func (v *CanadaAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CanadaAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CanadaAdditionalInfo_canadaQuebecSalesTaxNumber:
+			v.CanadaQuebecSalesTaxNumber = new(string)
+			return d.ReadString(schemas.CanadaAdditionalInfo_canadaQuebecSalesTaxNumber, v.CanadaQuebecSalesTaxNumber)
+		case schemas.CanadaAdditionalInfo_canadaRetailSalesTaxNumber:
+			v.CanadaRetailSalesTaxNumber = new(string)
+			return d.ReadString(schemas.CanadaAdditionalInfo_canadaRetailSalesTaxNumber, v.CanadaRetailSalesTaxNumber)
+		case schemas.CanadaAdditionalInfo_isResellerAccount:
+			v.IsResellerAccount = new(bool)
+			return d.ReadBool(schemas.CanadaAdditionalInfo_isResellerAccount, v.IsResellerAccount)
+		case schemas.CanadaAdditionalInfo_provincialSalesTaxId:
+			v.ProvincialSalesTaxId = new(string)
+			return d.ReadString(schemas.CanadaAdditionalInfo_provincialSalesTaxId, v.ProvincialSalesTaxId)
+		}
+		return nil
+	})
+}
+
 // Additional tax information associated with your TRN in Chile.
 type ChileAdditionalInfo struct {
 
@@ -402,6 +1171,38 @@ type ChileAdditionalInfo struct {
 	DocumentType ChileDocumentType
 
 	noSmithyDocumentSerde
+}
+
+func (v *ChileAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChileAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChileAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BusinessActivity != nil {
+		s.WriteString(schemas.ChileAdditionalInfo_businessActivity, *v.BusinessActivity)
+	}
+	if v.DocumentType != "" {
+		s.WriteString(schemas.ChileAdditionalInfo_documentType, string(v.DocumentType))
+	}
+}
+func (v *ChileAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChileAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChileAdditionalInfo_businessActivity:
+			v.BusinessActivity = new(string)
+			return d.ReadString(schemas.ChileAdditionalInfo_businessActivity, v.BusinessActivity)
+		case schemas.ChileAdditionalInfo_documentType:
+			var ev string
+			if err := d.ReadString(schemas.ChileAdditionalInfo_documentType, &ev); err != nil {
+				return err
+			}
+			v.DocumentType = ChileDocumentType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The location of the Amazon S3 bucket that you specify to download your tax
@@ -420,6 +1221,34 @@ type DestinationS3Location struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DestinationS3Location) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DestinationS3Location)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DestinationS3Location) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteString(schemas.DestinationS3Location_bucket, *v.Bucket)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.DestinationS3Location_prefix, *v.Prefix)
+	}
+}
+func (v *DestinationS3Location) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DestinationS3Location, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DestinationS3Location_bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.DestinationS3Location_bucket, v.Bucket)
+		case schemas.DestinationS3Location_prefix:
+			v.Prefix = new(string)
+			return d.ReadString(schemas.DestinationS3Location_prefix, v.Prefix)
+		}
+		return nil
+	})
+}
+
 // Additional tax information to specify for a TRN in Egypt.
 type EgyptAdditionalInfo struct {
 
@@ -433,6 +1262,34 @@ type EgyptAdditionalInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EgyptAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EgyptAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EgyptAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UniqueIdentificationNumber != nil {
+		s.WriteString(schemas.EgyptAdditionalInfo_uniqueIdentificationNumber, *v.UniqueIdentificationNumber)
+	}
+	if v.UniqueIdentificationNumberExpirationDate != nil {
+		s.WriteString(schemas.EgyptAdditionalInfo_uniqueIdentificationNumberExpirationDate, *v.UniqueIdentificationNumberExpirationDate)
+	}
+}
+func (v *EgyptAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EgyptAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EgyptAdditionalInfo_uniqueIdentificationNumber:
+			v.UniqueIdentificationNumber = new(string)
+			return d.ReadString(schemas.EgyptAdditionalInfo_uniqueIdentificationNumber, v.UniqueIdentificationNumber)
+		case schemas.EgyptAdditionalInfo_uniqueIdentificationNumberExpirationDate:
+			v.UniqueIdentificationNumberExpirationDate = new(string)
+			return d.ReadString(schemas.EgyptAdditionalInfo_uniqueIdentificationNumberExpirationDate, v.UniqueIdentificationNumberExpirationDate)
+		}
+		return nil
+	})
+}
+
 // Additional tax information associated with your TRN in Estonia.
 type EstoniaAdditionalInfo struct {
 
@@ -443,6 +1300,28 @@ type EstoniaAdditionalInfo struct {
 	RegistryCommercialCode *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EstoniaAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EstoniaAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EstoniaAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistryCommercialCode != nil {
+		s.WriteString(schemas.EstoniaAdditionalInfo_registryCommercialCode, *v.RegistryCommercialCode)
+	}
+}
+func (v *EstoniaAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EstoniaAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EstoniaAdditionalInfo_registryCommercialCode:
+			v.RegistryCommercialCode = new(string)
+			return d.ReadString(schemas.EstoniaAdditionalInfo_registryCommercialCode, v.RegistryCommercialCode)
+		}
+		return nil
+	})
 }
 
 // The exemption certificate.
@@ -461,6 +1340,33 @@ type ExemptionCertificate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExemptionCertificate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExemptionCertificate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExemptionCertificate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentFile != nil {
+		s.WriteBlob(schemas.ExemptionCertificate_documentFile, v.DocumentFile)
+	}
+	if v.DocumentName != nil {
+		s.WriteString(schemas.ExemptionCertificate_documentName, *v.DocumentName)
+	}
+}
+func (v *ExemptionCertificate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExemptionCertificate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExemptionCertificate_documentFile:
+			return d.ReadBlob(schemas.ExemptionCertificate_documentFile, &v.DocumentFile)
+		case schemas.ExemptionCertificate_documentName:
+			v.DocumentName = new(string)
+			return d.ReadString(schemas.ExemptionCertificate_documentName, v.DocumentName)
+		}
+		return nil
+	})
+}
+
 // Additional tax information associated with your TRN in France.
 type FranceAdditionalInfo struct {
 
@@ -470,6 +1376,28 @@ type FranceAdditionalInfo struct {
 	SirenNumber *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FranceAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FranceAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FranceAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SirenNumber != nil {
+		s.WriteString(schemas.FranceAdditionalInfo_sirenNumber, *v.SirenNumber)
+	}
+}
+func (v *FranceAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FranceAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FranceAdditionalInfo_sirenNumber:
+			v.SirenNumber = new(string)
+			return d.ReadString(schemas.FranceAdditionalInfo_sirenNumber, v.SirenNumber)
+		}
+		return nil
+	})
 }
 
 // Additional tax information associated with your TRN in Georgia.
@@ -483,6 +1411,32 @@ type GeorgiaAdditionalInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GeorgiaAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GeorgiaAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GeorgiaAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PersonType != "" {
+		s.WriteString(schemas.GeorgiaAdditionalInfo_personType, string(v.PersonType))
+	}
+}
+func (v *GeorgiaAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GeorgiaAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GeorgiaAdditionalInfo_personType:
+			var ev string
+			if err := d.ReadString(schemas.GeorgiaAdditionalInfo_personType, &ev); err != nil {
+				return err
+			}
+			v.PersonType = PersonType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Additional tax information to specify for a TRN in Greece.
 type GreeceAdditionalInfo struct {
 
@@ -492,6 +1446,28 @@ type GreeceAdditionalInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GreeceAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GreeceAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GreeceAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContractingAuthorityCode != nil {
+		s.WriteString(schemas.GreeceAdditionalInfo_contractingAuthorityCode, *v.ContractingAuthorityCode)
+	}
+}
+func (v *GreeceAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GreeceAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GreeceAdditionalInfo_contractingAuthorityCode:
+			v.ContractingAuthorityCode = new(string)
+			return d.ReadString(schemas.GreeceAdditionalInfo_contractingAuthorityCode, v.ContractingAuthorityCode)
+		}
+		return nil
+	})
+}
+
 // Additional tax information in India.
 type IndiaAdditionalInfo struct {
 
@@ -499,6 +1475,28 @@ type IndiaAdditionalInfo struct {
 	Pan *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *IndiaAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IndiaAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IndiaAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Pan != nil {
+		s.WriteString(schemas.IndiaAdditionalInfo_pan, *v.Pan)
+	}
+}
+func (v *IndiaAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IndiaAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IndiaAdditionalInfo_pan:
+			v.Pan = new(string)
+			return d.ReadString(schemas.IndiaAdditionalInfo_pan, v.Pan)
+		}
+		return nil
+	})
 }
 
 // Additional tax information associated with your TRN in Indonesia.
@@ -519,6 +1517,44 @@ type IndonesiaAdditionalInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IndonesiaAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IndonesiaAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IndonesiaAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DecisionNumber != nil {
+		s.WriteString(schemas.IndonesiaAdditionalInfo_decisionNumber, *v.DecisionNumber)
+	}
+	if v.PpnExceptionDesignationCode != nil {
+		s.WriteString(schemas.IndonesiaAdditionalInfo_ppnExceptionDesignationCode, *v.PpnExceptionDesignationCode)
+	}
+	if v.TaxRegistrationNumberType != "" {
+		s.WriteString(schemas.IndonesiaAdditionalInfo_taxRegistrationNumberType, string(v.TaxRegistrationNumberType))
+	}
+}
+func (v *IndonesiaAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IndonesiaAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IndonesiaAdditionalInfo_decisionNumber:
+			v.DecisionNumber = new(string)
+			return d.ReadString(schemas.IndonesiaAdditionalInfo_decisionNumber, v.DecisionNumber)
+		case schemas.IndonesiaAdditionalInfo_ppnExceptionDesignationCode:
+			v.PpnExceptionDesignationCode = new(string)
+			return d.ReadString(schemas.IndonesiaAdditionalInfo_ppnExceptionDesignationCode, v.PpnExceptionDesignationCode)
+		case schemas.IndonesiaAdditionalInfo_taxRegistrationNumberType:
+			var ev string
+			if err := d.ReadString(schemas.IndonesiaAdditionalInfo_taxRegistrationNumberType, &ev); err != nil {
+				return err
+			}
+			v.TaxRegistrationNumberType = IndonesiaTaxRegistrationNumberType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Additional tax information associated with your TRN in Israel.
 type IsraelAdditionalInfo struct {
 
@@ -536,6 +1572,42 @@ type IsraelAdditionalInfo struct {
 	DealerType IsraelDealerType
 
 	noSmithyDocumentSerde
+}
+
+func (v *IsraelAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IsraelAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IsraelAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomerType != "" {
+		s.WriteString(schemas.IsraelAdditionalInfo_customerType, string(v.CustomerType))
+	}
+	if v.DealerType != "" {
+		s.WriteString(schemas.IsraelAdditionalInfo_dealerType, string(v.DealerType))
+	}
+}
+func (v *IsraelAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IsraelAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IsraelAdditionalInfo_customerType:
+			var ev string
+			if err := d.ReadString(schemas.IsraelAdditionalInfo_customerType, &ev); err != nil {
+				return err
+			}
+			v.CustomerType = IsraelCustomerType(ev)
+			return nil
+		case schemas.IsraelAdditionalInfo_dealerType:
+			var ev string
+			if err := d.ReadString(schemas.IsraelAdditionalInfo_dealerType, &ev); err != nil {
+				return err
+			}
+			v.DealerType = IsraelDealerType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Additional tax information associated with your TRN in Italy.
@@ -564,6 +1636,56 @@ type ItalyAdditionalInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ItalyAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ItalyAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ItalyAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CigNumber != nil {
+		s.WriteString(schemas.ItalyAdditionalInfo_cigNumber, *v.CigNumber)
+	}
+	if v.CupNumber != nil {
+		s.WriteString(schemas.ItalyAdditionalInfo_cupNumber, *v.CupNumber)
+	}
+	if v.CustomerType != "" {
+		s.WriteString(schemas.ItalyAdditionalInfo_customerType, string(v.CustomerType))
+	}
+	if v.SdiAccountId != nil {
+		s.WriteString(schemas.ItalyAdditionalInfo_sdiAccountId, *v.SdiAccountId)
+	}
+	if v.TaxCode != nil {
+		s.WriteString(schemas.ItalyAdditionalInfo_taxCode, *v.TaxCode)
+	}
+}
+func (v *ItalyAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ItalyAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ItalyAdditionalInfo_cigNumber:
+			v.CigNumber = new(string)
+			return d.ReadString(schemas.ItalyAdditionalInfo_cigNumber, v.CigNumber)
+		case schemas.ItalyAdditionalInfo_cupNumber:
+			v.CupNumber = new(string)
+			return d.ReadString(schemas.ItalyAdditionalInfo_cupNumber, v.CupNumber)
+		case schemas.ItalyAdditionalInfo_customerType:
+			var ev string
+			if err := d.ReadString(schemas.ItalyAdditionalInfo_customerType, &ev); err != nil {
+				return err
+			}
+			v.CustomerType = CustomerType(ev)
+			return nil
+		case schemas.ItalyAdditionalInfo_sdiAccountId:
+			v.SdiAccountId = new(string)
+			return d.ReadString(schemas.ItalyAdditionalInfo_sdiAccountId, v.SdiAccountId)
+		case schemas.ItalyAdditionalInfo_taxCode:
+			v.TaxCode = new(string)
+			return d.ReadString(schemas.ItalyAdditionalInfo_taxCode, v.TaxCode)
+		}
+		return nil
+	})
+}
+
 // The jurisdiction details of the TRN information of the customers. This doesn't
 // contain full legal address, and contains only country code and
 // state/region/province.
@@ -581,6 +1703,34 @@ type Jurisdiction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Jurisdiction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Jurisdiction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Jurisdiction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CountryCode != nil {
+		s.WriteString(schemas.Jurisdiction_countryCode, *v.CountryCode)
+	}
+	if v.StateOrRegion != nil {
+		s.WriteString(schemas.Jurisdiction_stateOrRegion, *v.StateOrRegion)
+	}
+}
+func (v *Jurisdiction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Jurisdiction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Jurisdiction_countryCode:
+			v.CountryCode = new(string)
+			return d.ReadString(schemas.Jurisdiction_countryCode, v.CountryCode)
+		case schemas.Jurisdiction_stateOrRegion:
+			v.StateOrRegion = new(string)
+			return d.ReadString(schemas.Jurisdiction_stateOrRegion, v.StateOrRegion)
+		}
+		return nil
+	})
+}
+
 // Additional tax information associated with your TRN in Kenya.
 type KenyaAdditionalInfo struct {
 
@@ -590,6 +1740,32 @@ type KenyaAdditionalInfo struct {
 	PersonType PersonType
 
 	noSmithyDocumentSerde
+}
+
+func (v *KenyaAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KenyaAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KenyaAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PersonType != "" {
+		s.WriteString(schemas.KenyaAdditionalInfo_personType, string(v.PersonType))
+	}
+}
+func (v *KenyaAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KenyaAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KenyaAdditionalInfo_personType:
+			var ev string
+			if err := d.ReadString(schemas.KenyaAdditionalInfo_personType, &ev); err != nil {
+				return err
+			}
+			v.PersonType = PersonType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Additional tax information associated with your TRN in Malaysia.
@@ -635,6 +1811,37 @@ type MalaysiaAdditionalInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MalaysiaAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MalaysiaAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalaysiaAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BusinessRegistrationNumber != nil {
+		s.WriteString(schemas.MalaysiaAdditionalInfo_businessRegistrationNumber, *v.BusinessRegistrationNumber)
+	}
+	serializeMalaysiaServiceTaxCodesList(s, schemas.MalaysiaAdditionalInfo_serviceTaxCodes, v.ServiceTaxCodes)
+	if v.TaxInformationNumber != nil {
+		s.WriteString(schemas.MalaysiaAdditionalInfo_taxInformationNumber, *v.TaxInformationNumber)
+	}
+}
+func (v *MalaysiaAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MalaysiaAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MalaysiaAdditionalInfo_businessRegistrationNumber:
+			v.BusinessRegistrationNumber = new(string)
+			return d.ReadString(schemas.MalaysiaAdditionalInfo_businessRegistrationNumber, v.BusinessRegistrationNumber)
+		case schemas.MalaysiaAdditionalInfo_serviceTaxCodes:
+			return deserializeMalaysiaServiceTaxCodesList(d, schemas.MalaysiaAdditionalInfo_serviceTaxCodes, &v.ServiceTaxCodes)
+		case schemas.MalaysiaAdditionalInfo_taxInformationNumber:
+			v.TaxInformationNumber = new(string)
+			return d.ReadString(schemas.MalaysiaAdditionalInfo_taxInformationNumber, v.TaxInformationNumber)
+		}
+		return nil
+	})
+}
+
 // Additional tax information associated with your TRN in the Philippines.
 type PhilippinesAdditionalInfo struct {
 
@@ -643,6 +1850,28 @@ type PhilippinesAdditionalInfo struct {
 	IsVatRegistered *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *PhilippinesAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PhilippinesAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PhilippinesAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsVatRegistered != nil {
+		s.WriteBool(schemas.PhilippinesAdditionalInfo_isVatRegistered, *v.IsVatRegistered)
+	}
+}
+func (v *PhilippinesAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PhilippinesAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PhilippinesAdditionalInfo_isVatRegistered:
+			v.IsVatRegistered = new(bool)
+			return d.ReadBool(schemas.PhilippinesAdditionalInfo_isVatRegistered, v.IsVatRegistered)
+		}
+		return nil
+	})
 }
 
 // Additional tax information associated with your TRN in Poland.
@@ -663,6 +1892,44 @@ type PolandAdditionalInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PolandAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolandAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolandAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndividualRegistrationNumber != nil {
+		s.WriteString(schemas.PolandAdditionalInfo_individualRegistrationNumber, *v.IndividualRegistrationNumber)
+	}
+	if v.IsGroupVatEnabled != nil {
+		s.WriteBool(schemas.PolandAdditionalInfo_isGroupVatEnabled, *v.IsGroupVatEnabled)
+	}
+	if v.TaxRegistrationNumberType != "" {
+		s.WriteString(schemas.PolandAdditionalInfo_taxRegistrationNumberType, string(v.TaxRegistrationNumberType))
+	}
+}
+func (v *PolandAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolandAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolandAdditionalInfo_individualRegistrationNumber:
+			v.IndividualRegistrationNumber = new(string)
+			return d.ReadString(schemas.PolandAdditionalInfo_individualRegistrationNumber, v.IndividualRegistrationNumber)
+		case schemas.PolandAdditionalInfo_isGroupVatEnabled:
+			v.IsGroupVatEnabled = new(bool)
+			return d.ReadBool(schemas.PolandAdditionalInfo_isGroupVatEnabled, v.IsGroupVatEnabled)
+		case schemas.PolandAdditionalInfo_taxRegistrationNumberType:
+			var ev string
+			if err := d.ReadString(schemas.PolandAdditionalInfo_taxRegistrationNumberType, &ev); err != nil {
+				return err
+			}
+			v.TaxRegistrationNumberType = PolandTaxRegistrationNumberType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Additional tax information to specify for a TRN in Romania.
 type RomaniaAdditionalInfo struct {
 
@@ -675,6 +1942,32 @@ type RomaniaAdditionalInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RomaniaAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RomaniaAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RomaniaAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaxRegistrationNumberType != "" {
+		s.WriteString(schemas.RomaniaAdditionalInfo_taxRegistrationNumberType, string(v.TaxRegistrationNumberType))
+	}
+}
+func (v *RomaniaAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RomaniaAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RomaniaAdditionalInfo_taxRegistrationNumberType:
+			var ev string
+			if err := d.ReadString(schemas.RomaniaAdditionalInfo_taxRegistrationNumberType, &ev); err != nil {
+				return err
+			}
+			v.TaxRegistrationNumberType = TaxRegistrationNumberType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Additional tax information associated with your TRN in Saudi Arabia.
 type SaudiArabiaAdditionalInfo struct {
 
@@ -682,6 +1975,32 @@ type SaudiArabiaAdditionalInfo struct {
 	TaxRegistrationNumberType SaudiArabiaTaxRegistrationNumberType
 
 	noSmithyDocumentSerde
+}
+
+func (v *SaudiArabiaAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SaudiArabiaAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SaudiArabiaAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaxRegistrationNumberType != "" {
+		s.WriteString(schemas.SaudiArabiaAdditionalInfo_taxRegistrationNumberType, string(v.TaxRegistrationNumberType))
+	}
+}
+func (v *SaudiArabiaAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SaudiArabiaAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SaudiArabiaAdditionalInfo_taxRegistrationNumberType:
+			var ev string
+			if err := d.ReadString(schemas.SaudiArabiaAdditionalInfo_taxRegistrationNumberType, &ev); err != nil {
+				return err
+			}
+			v.TaxRegistrationNumberType = SaudiArabiaTaxRegistrationNumberType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The Amazon S3 bucket in your account where your tax document is located.
@@ -698,6 +2017,34 @@ type SourceS3Location struct {
 	Key *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SourceS3Location) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceS3Location)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceS3Location) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteString(schemas.SourceS3Location_bucket, *v.Bucket)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.SourceS3Location_key, *v.Key)
+	}
+}
+func (v *SourceS3Location) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceS3Location, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceS3Location_bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.SourceS3Location_bucket, v.Bucket)
+		case schemas.SourceS3Location_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.SourceS3Location_key, v.Key)
+		}
+		return nil
+	})
 }
 
 // Additional tax information associated with your TRN in South Korea.
@@ -724,6 +2071,40 @@ type SouthKoreaAdditionalInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SouthKoreaAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SouthKoreaAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SouthKoreaAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BusinessRepresentativeName != nil {
+		s.WriteString(schemas.SouthKoreaAdditionalInfo_businessRepresentativeName, *v.BusinessRepresentativeName)
+	}
+	if v.ItemOfBusiness != nil {
+		s.WriteString(schemas.SouthKoreaAdditionalInfo_itemOfBusiness, *v.ItemOfBusiness)
+	}
+	if v.LineOfBusiness != nil {
+		s.WriteString(schemas.SouthKoreaAdditionalInfo_lineOfBusiness, *v.LineOfBusiness)
+	}
+}
+func (v *SouthKoreaAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SouthKoreaAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SouthKoreaAdditionalInfo_businessRepresentativeName:
+			v.BusinessRepresentativeName = new(string)
+			return d.ReadString(schemas.SouthKoreaAdditionalInfo_businessRepresentativeName, v.BusinessRepresentativeName)
+		case schemas.SouthKoreaAdditionalInfo_itemOfBusiness:
+			v.ItemOfBusiness = new(string)
+			return d.ReadString(schemas.SouthKoreaAdditionalInfo_itemOfBusiness, v.ItemOfBusiness)
+		case schemas.SouthKoreaAdditionalInfo_lineOfBusiness:
+			v.LineOfBusiness = new(string)
+			return d.ReadString(schemas.SouthKoreaAdditionalInfo_lineOfBusiness, v.LineOfBusiness)
+		}
+		return nil
+	})
+}
+
 // Additional tax information associated with your TRN in Spain.
 type SpainAdditionalInfo struct {
 
@@ -733,6 +2114,32 @@ type SpainAdditionalInfo struct {
 	RegistrationType RegistrationType
 
 	noSmithyDocumentSerde
+}
+
+func (v *SpainAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SpainAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SpainAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistrationType != "" {
+		s.WriteString(schemas.SpainAdditionalInfo_registrationType, string(v.RegistrationType))
+	}
+}
+func (v *SpainAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SpainAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SpainAdditionalInfo_registrationType:
+			var ev string
+			if err := d.ReadString(schemas.SpainAdditionalInfo_registrationType, &ev); err != nil {
+				return err
+			}
+			v.RegistrationType = RegistrationType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Supplemental TRN details.
@@ -771,6 +2178,68 @@ type SupplementalTaxRegistration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SupplementalTaxRegistration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SupplementalTaxRegistration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SupplementalTaxRegistration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteStruct(schemas.SupplementalTaxRegistration_address)
+		v.Address.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AuthorityId != nil {
+		s.WriteString(schemas.SupplementalTaxRegistration_authorityId, *v.AuthorityId)
+	}
+	if v.LegalName != nil {
+		s.WriteString(schemas.SupplementalTaxRegistration_legalName, *v.LegalName)
+	}
+	if v.RegistrationId != nil {
+		s.WriteString(schemas.SupplementalTaxRegistration_registrationId, *v.RegistrationId)
+	}
+	if v.RegistrationType != "" {
+		s.WriteString(schemas.SupplementalTaxRegistration_registrationType, string(v.RegistrationType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.SupplementalTaxRegistration_status, string(v.Status))
+	}
+}
+func (v *SupplementalTaxRegistration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SupplementalTaxRegistration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SupplementalTaxRegistration_address:
+			v.Address = &Address{}
+			return v.Address.Deserialize(d)
+		case schemas.SupplementalTaxRegistration_authorityId:
+			v.AuthorityId = new(string)
+			return d.ReadString(schemas.SupplementalTaxRegistration_authorityId, v.AuthorityId)
+		case schemas.SupplementalTaxRegistration_legalName:
+			v.LegalName = new(string)
+			return d.ReadString(schemas.SupplementalTaxRegistration_legalName, v.LegalName)
+		case schemas.SupplementalTaxRegistration_registrationId:
+			v.RegistrationId = new(string)
+			return d.ReadString(schemas.SupplementalTaxRegistration_registrationId, v.RegistrationId)
+		case schemas.SupplementalTaxRegistration_registrationType:
+			var ev string
+			if err := d.ReadString(schemas.SupplementalTaxRegistration_registrationType, &ev); err != nil {
+				return err
+			}
+			v.RegistrationType = SupplementalTaxRegistrationType(ev)
+			return nil
+		case schemas.SupplementalTaxRegistration_status:
+			var ev string
+			if err := d.ReadString(schemas.SupplementalTaxRegistration_status, &ev); err != nil {
+				return err
+			}
+			v.Status = TaxRegistrationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 //	The supplemental TRN information to provide when adding or updating a
 //
 // supplemental TRN.
@@ -799,6 +2268,52 @@ type SupplementalTaxRegistrationEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SupplementalTaxRegistrationEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SupplementalTaxRegistrationEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SupplementalTaxRegistrationEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteStruct(schemas.SupplementalTaxRegistrationEntry_address)
+		v.Address.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LegalName != nil {
+		s.WriteString(schemas.SupplementalTaxRegistrationEntry_legalName, *v.LegalName)
+	}
+	if v.RegistrationId != nil {
+		s.WriteString(schemas.SupplementalTaxRegistrationEntry_registrationId, *v.RegistrationId)
+	}
+	if v.RegistrationType != "" {
+		s.WriteString(schemas.SupplementalTaxRegistrationEntry_registrationType, string(v.RegistrationType))
+	}
+}
+func (v *SupplementalTaxRegistrationEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SupplementalTaxRegistrationEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SupplementalTaxRegistrationEntry_address:
+			v.Address = &Address{}
+			return v.Address.Deserialize(d)
+		case schemas.SupplementalTaxRegistrationEntry_legalName:
+			v.LegalName = new(string)
+			return d.ReadString(schemas.SupplementalTaxRegistrationEntry_legalName, v.LegalName)
+		case schemas.SupplementalTaxRegistrationEntry_registrationId:
+			v.RegistrationId = new(string)
+			return d.ReadString(schemas.SupplementalTaxRegistrationEntry_registrationId, v.RegistrationId)
+		case schemas.SupplementalTaxRegistrationEntry_registrationType:
+			var ev string
+			if err := d.ReadString(schemas.SupplementalTaxRegistrationEntry_registrationType, &ev); err != nil {
+				return err
+			}
+			v.RegistrationType = SupplementalTaxRegistrationType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The metadata for your tax document.
 type TaxDocumentMetadata struct {
 
@@ -818,6 +2333,34 @@ type TaxDocumentMetadata struct {
 	TaxDocumentName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TaxDocumentMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaxDocumentMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaxDocumentMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaxDocumentAccessToken != nil {
+		s.WriteString(schemas.TaxDocumentMetadata_taxDocumentAccessToken, *v.TaxDocumentAccessToken)
+	}
+	if v.TaxDocumentName != nil {
+		s.WriteString(schemas.TaxDocumentMetadata_taxDocumentName, *v.TaxDocumentName)
+	}
+}
+func (v *TaxDocumentMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaxDocumentMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaxDocumentMetadata_taxDocumentAccessToken:
+			v.TaxDocumentAccessToken = new(string)
+			return d.ReadString(schemas.TaxDocumentMetadata_taxDocumentAccessToken, v.TaxDocumentAccessToken)
+		case schemas.TaxDocumentMetadata_taxDocumentName:
+			v.TaxDocumentName = new(string)
+			return d.ReadString(schemas.TaxDocumentMetadata_taxDocumentName, v.TaxDocumentName)
+		}
+		return nil
+	})
 }
 
 // The tax exemption.
@@ -848,6 +2391,66 @@ type TaxExemption struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TaxExemption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaxExemption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaxExemption) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Authority != nil {
+		s.WriteStruct(schemas.TaxExemption_authority)
+		v.Authority.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EffectiveDate != nil {
+		s.WriteTime(schemas.TaxExemption_effectiveDate, *v.EffectiveDate)
+	}
+	if v.ExpirationDate != nil {
+		s.WriteTime(schemas.TaxExemption_expirationDate, *v.ExpirationDate)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.TaxExemption_status, string(v.Status))
+	}
+	if v.SystemEffectiveDate != nil {
+		s.WriteTime(schemas.TaxExemption_systemEffectiveDate, *v.SystemEffectiveDate)
+	}
+	if v.TaxExemptionType != nil {
+		s.WriteStruct(schemas.TaxExemption_taxExemptionType)
+		v.TaxExemptionType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TaxExemption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaxExemption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaxExemption_authority:
+			v.Authority = &Authority{}
+			return v.Authority.Deserialize(d)
+		case schemas.TaxExemption_effectiveDate:
+			v.EffectiveDate = new(time.Time)
+			return d.ReadTime(schemas.TaxExemption_effectiveDate, v.EffectiveDate)
+		case schemas.TaxExemption_expirationDate:
+			v.ExpirationDate = new(time.Time)
+			return d.ReadTime(schemas.TaxExemption_expirationDate, v.ExpirationDate)
+		case schemas.TaxExemption_status:
+			var ev string
+			if err := d.ReadString(schemas.TaxExemption_status, &ev); err != nil {
+				return err
+			}
+			v.Status = EntityExemptionAccountStatus(ev)
+			return nil
+		case schemas.TaxExemption_systemEffectiveDate:
+			v.SystemEffectiveDate = new(time.Time)
+			return d.ReadTime(schemas.TaxExemption_systemEffectiveDate, v.SystemEffectiveDate)
+		case schemas.TaxExemption_taxExemptionType:
+			v.TaxExemptionType = &TaxExemptionType{}
+			return v.TaxExemptionType.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The tax exemption details.
 type TaxExemptionDetails struct {
 
@@ -868,6 +2471,43 @@ type TaxExemptionDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TaxExemptionDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaxExemptionDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaxExemptionDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HeritageObtainedDetails != nil {
+		s.WriteBool(schemas.TaxExemptionDetails_heritageObtainedDetails, *v.HeritageObtainedDetails)
+	}
+	if v.HeritageObtainedParentEntity != nil {
+		s.WriteString(schemas.TaxExemptionDetails_heritageObtainedParentEntity, *v.HeritageObtainedParentEntity)
+	}
+	if v.HeritageObtainedReason != nil {
+		s.WriteString(schemas.TaxExemptionDetails_heritageObtainedReason, *v.HeritageObtainedReason)
+	}
+	serializeTaxExemptions(s, schemas.TaxExemptionDetails_taxExemptions, v.TaxExemptions)
+}
+func (v *TaxExemptionDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaxExemptionDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaxExemptionDetails_heritageObtainedDetails:
+			v.HeritageObtainedDetails = new(bool)
+			return d.ReadBool(schemas.TaxExemptionDetails_heritageObtainedDetails, v.HeritageObtainedDetails)
+		case schemas.TaxExemptionDetails_heritageObtainedParentEntity:
+			v.HeritageObtainedParentEntity = new(string)
+			return d.ReadString(schemas.TaxExemptionDetails_heritageObtainedParentEntity, v.HeritageObtainedParentEntity)
+		case schemas.TaxExemptionDetails_heritageObtainedReason:
+			v.HeritageObtainedReason = new(string)
+			return d.ReadString(schemas.TaxExemptionDetails_heritageObtainedReason, v.HeritageObtainedReason)
+		case schemas.TaxExemptionDetails_taxExemptions:
+			return deserializeTaxExemptions(d, schemas.TaxExemptionDetails_taxExemptions, &v.TaxExemptions)
+		}
+		return nil
+	})
+}
+
 // The tax exemption type.
 type TaxExemptionType struct {
 
@@ -883,6 +2523,37 @@ type TaxExemptionType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TaxExemptionType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaxExemptionType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaxExemptionType) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuthorities(s, schemas.TaxExemptionType_applicableJurisdictions, v.ApplicableJurisdictions)
+	if v.Description != nil {
+		s.WriteString(schemas.TaxExemptionType_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.TaxExemptionType_displayName, *v.DisplayName)
+	}
+}
+func (v *TaxExemptionType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaxExemptionType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaxExemptionType_applicableJurisdictions:
+			return deserializeAuthorities(d, schemas.TaxExemptionType_applicableJurisdictions, &v.ApplicableJurisdictions)
+		case schemas.TaxExemptionType_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.TaxExemptionType_description, v.Description)
+		case schemas.TaxExemptionType_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.TaxExemptionType_displayName, v.DisplayName)
+		}
+		return nil
+	})
+}
+
 // Tax inheritance information associated with the account.
 type TaxInheritanceDetails struct {
 
@@ -893,6 +2564,34 @@ type TaxInheritanceDetails struct {
 	ParentEntityId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TaxInheritanceDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaxInheritanceDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaxInheritanceDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InheritanceObtainedReason != nil {
+		s.WriteString(schemas.TaxInheritanceDetails_inheritanceObtainedReason, *v.InheritanceObtainedReason)
+	}
+	if v.ParentEntityId != nil {
+		s.WriteString(schemas.TaxInheritanceDetails_parentEntityId, *v.ParentEntityId)
+	}
+}
+func (v *TaxInheritanceDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaxInheritanceDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaxInheritanceDetails_inheritanceObtainedReason:
+			v.InheritanceObtainedReason = new(string)
+			return d.ReadString(schemas.TaxInheritanceDetails_inheritanceObtainedReason, v.InheritanceObtainedReason)
+		case schemas.TaxInheritanceDetails_parentEntityId:
+			v.ParentEntityId = new(string)
+			return d.ReadString(schemas.TaxInheritanceDetails_parentEntityId, v.ParentEntityId)
+		}
+		return nil
+	})
 }
 
 // Your TRN information.
@@ -943,6 +2642,89 @@ type TaxRegistration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TaxRegistration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaxRegistration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaxRegistration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalTaxInformation != nil {
+		s.WriteStruct(schemas.TaxRegistration_additionalTaxInformation)
+		v.AdditionalTaxInformation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CertifiedEmailId != nil {
+		s.WriteString(schemas.TaxRegistration_certifiedEmailId, *v.CertifiedEmailId)
+	}
+	if v.LegalAddress != nil {
+		s.WriteStruct(schemas.TaxRegistration_legalAddress)
+		v.LegalAddress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LegalName != nil {
+		s.WriteString(schemas.TaxRegistration_legalName, *v.LegalName)
+	}
+	if v.RegistrationId != nil {
+		s.WriteString(schemas.TaxRegistration_registrationId, *v.RegistrationId)
+	}
+	if v.RegistrationType != "" {
+		s.WriteString(schemas.TaxRegistration_registrationType, string(v.RegistrationType))
+	}
+	if v.Sector != "" {
+		s.WriteString(schemas.TaxRegistration_sector, string(v.Sector))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.TaxRegistration_status, string(v.Status))
+	}
+	serializeTaxDocumentMetadatas(s, schemas.TaxRegistration_taxDocumentMetadatas, v.TaxDocumentMetadatas)
+}
+func (v *TaxRegistration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaxRegistration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaxRegistration_additionalTaxInformation:
+			v.AdditionalTaxInformation = &AdditionalInfoResponse{}
+			return v.AdditionalTaxInformation.Deserialize(d)
+		case schemas.TaxRegistration_certifiedEmailId:
+			v.CertifiedEmailId = new(string)
+			return d.ReadString(schemas.TaxRegistration_certifiedEmailId, v.CertifiedEmailId)
+		case schemas.TaxRegistration_legalAddress:
+			v.LegalAddress = &Address{}
+			return v.LegalAddress.Deserialize(d)
+		case schemas.TaxRegistration_legalName:
+			v.LegalName = new(string)
+			return d.ReadString(schemas.TaxRegistration_legalName, v.LegalName)
+		case schemas.TaxRegistration_registrationId:
+			v.RegistrationId = new(string)
+			return d.ReadString(schemas.TaxRegistration_registrationId, v.RegistrationId)
+		case schemas.TaxRegistration_registrationType:
+			var ev string
+			if err := d.ReadString(schemas.TaxRegistration_registrationType, &ev); err != nil {
+				return err
+			}
+			v.RegistrationType = TaxRegistrationType(ev)
+			return nil
+		case schemas.TaxRegistration_sector:
+			var ev string
+			if err := d.ReadString(schemas.TaxRegistration_sector, &ev); err != nil {
+				return err
+			}
+			v.Sector = Sector(ev)
+			return nil
+		case schemas.TaxRegistration_status:
+			var ev string
+			if err := d.ReadString(schemas.TaxRegistration_status, &ev); err != nil {
+				return err
+			}
+			v.Status = TaxRegistrationStatus(ev)
+			return nil
+		case schemas.TaxRegistration_taxDocumentMetadatas:
+			return deserializeTaxDocumentMetadatas(d, schemas.TaxRegistration_taxDocumentMetadatas, &v.TaxDocumentMetadatas)
+		}
+		return nil
+	})
+}
+
 // The tax registration document.
 type TaxRegistrationDocFile struct {
 
@@ -959,6 +2741,33 @@ type TaxRegistrationDocFile struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TaxRegistrationDocFile) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaxRegistrationDocFile)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaxRegistrationDocFile) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileContent != nil {
+		s.WriteBlob(schemas.TaxRegistrationDocFile_fileContent, v.FileContent)
+	}
+	if v.FileName != nil {
+		s.WriteString(schemas.TaxRegistrationDocFile_fileName, *v.FileName)
+	}
+}
+func (v *TaxRegistrationDocFile) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaxRegistrationDocFile, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaxRegistrationDocFile_fileContent:
+			return d.ReadBlob(schemas.TaxRegistrationDocFile_fileContent, &v.FileContent)
+		case schemas.TaxRegistrationDocFile_fileName:
+			v.FileName = new(string)
+			return d.ReadString(schemas.TaxRegistrationDocFile_fileName, v.FileName)
+		}
+		return nil
+	})
+}
+
 // Tax registration document information.
 type TaxRegistrationDocument struct {
 
@@ -969,6 +2778,38 @@ type TaxRegistrationDocument struct {
 	S3Location *SourceS3Location
 
 	noSmithyDocumentSerde
+}
+
+func (v *TaxRegistrationDocument) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaxRegistrationDocument)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaxRegistrationDocument) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.File != nil {
+		s.WriteStruct(schemas.TaxRegistrationDocument_file)
+		v.File.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3Location != nil {
+		s.WriteStruct(schemas.TaxRegistrationDocument_s3Location)
+		v.S3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TaxRegistrationDocument) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaxRegistrationDocument, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaxRegistrationDocument_file:
+			v.File = &TaxRegistrationDocFile{}
+			return v.File.Deserialize(d)
+		case schemas.TaxRegistrationDocument_s3Location:
+			v.S3Location = &SourceS3Location{}
+			return v.S3Location.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The TRN information you provide when you add a new TRN, or update.
@@ -1025,6 +2866,84 @@ type TaxRegistrationEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TaxRegistrationEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaxRegistrationEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaxRegistrationEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalTaxInformation != nil {
+		s.WriteStruct(schemas.TaxRegistrationEntry_additionalTaxInformation)
+		v.AdditionalTaxInformation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CertifiedEmailId != nil {
+		s.WriteString(schemas.TaxRegistrationEntry_certifiedEmailId, *v.CertifiedEmailId)
+	}
+	if v.LegalAddress != nil {
+		s.WriteStruct(schemas.TaxRegistrationEntry_legalAddress)
+		v.LegalAddress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LegalName != nil {
+		s.WriteString(schemas.TaxRegistrationEntry_legalName, *v.LegalName)
+	}
+	if v.RegistrationId != nil {
+		s.WriteString(schemas.TaxRegistrationEntry_registrationId, *v.RegistrationId)
+	}
+	if v.RegistrationType != "" {
+		s.WriteString(schemas.TaxRegistrationEntry_registrationType, string(v.RegistrationType))
+	}
+	if v.Sector != "" {
+		s.WriteString(schemas.TaxRegistrationEntry_sector, string(v.Sector))
+	}
+	if v.VerificationDetails != nil {
+		s.WriteStruct(schemas.TaxRegistrationEntry_verificationDetails)
+		v.VerificationDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TaxRegistrationEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaxRegistrationEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaxRegistrationEntry_additionalTaxInformation:
+			v.AdditionalTaxInformation = &AdditionalInfoRequest{}
+			return v.AdditionalTaxInformation.Deserialize(d)
+		case schemas.TaxRegistrationEntry_certifiedEmailId:
+			v.CertifiedEmailId = new(string)
+			return d.ReadString(schemas.TaxRegistrationEntry_certifiedEmailId, v.CertifiedEmailId)
+		case schemas.TaxRegistrationEntry_legalAddress:
+			v.LegalAddress = &Address{}
+			return v.LegalAddress.Deserialize(d)
+		case schemas.TaxRegistrationEntry_legalName:
+			v.LegalName = new(string)
+			return d.ReadString(schemas.TaxRegistrationEntry_legalName, v.LegalName)
+		case schemas.TaxRegistrationEntry_registrationId:
+			v.RegistrationId = new(string)
+			return d.ReadString(schemas.TaxRegistrationEntry_registrationId, v.RegistrationId)
+		case schemas.TaxRegistrationEntry_registrationType:
+			var ev string
+			if err := d.ReadString(schemas.TaxRegistrationEntry_registrationType, &ev); err != nil {
+				return err
+			}
+			v.RegistrationType = TaxRegistrationType(ev)
+			return nil
+		case schemas.TaxRegistrationEntry_sector:
+			var ev string
+			if err := d.ReadString(schemas.TaxRegistrationEntry_sector, &ev); err != nil {
+				return err
+			}
+			v.Sector = Sector(ev)
+			return nil
+		case schemas.TaxRegistrationEntry_verificationDetails:
+			v.VerificationDetails = &VerificationDetails{}
+			return v.VerificationDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Your TRN information with jurisdiction details. This doesn't contain the full
 // legal address associated with the TRN information.
 type TaxRegistrationWithJurisdiction struct {
@@ -1074,6 +2993,89 @@ type TaxRegistrationWithJurisdiction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TaxRegistrationWithJurisdiction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaxRegistrationWithJurisdiction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaxRegistrationWithJurisdiction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalTaxInformation != nil {
+		s.WriteStruct(schemas.TaxRegistrationWithJurisdiction_additionalTaxInformation)
+		v.AdditionalTaxInformation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CertifiedEmailId != nil {
+		s.WriteString(schemas.TaxRegistrationWithJurisdiction_certifiedEmailId, *v.CertifiedEmailId)
+	}
+	if v.Jurisdiction != nil {
+		s.WriteStruct(schemas.TaxRegistrationWithJurisdiction_jurisdiction)
+		v.Jurisdiction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LegalName != nil {
+		s.WriteString(schemas.TaxRegistrationWithJurisdiction_legalName, *v.LegalName)
+	}
+	if v.RegistrationId != nil {
+		s.WriteString(schemas.TaxRegistrationWithJurisdiction_registrationId, *v.RegistrationId)
+	}
+	if v.RegistrationType != "" {
+		s.WriteString(schemas.TaxRegistrationWithJurisdiction_registrationType, string(v.RegistrationType))
+	}
+	if v.Sector != "" {
+		s.WriteString(schemas.TaxRegistrationWithJurisdiction_sector, string(v.Sector))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.TaxRegistrationWithJurisdiction_status, string(v.Status))
+	}
+	serializeTaxDocumentMetadatas(s, schemas.TaxRegistrationWithJurisdiction_taxDocumentMetadatas, v.TaxDocumentMetadatas)
+}
+func (v *TaxRegistrationWithJurisdiction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaxRegistrationWithJurisdiction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaxRegistrationWithJurisdiction_additionalTaxInformation:
+			v.AdditionalTaxInformation = &AdditionalInfoResponse{}
+			return v.AdditionalTaxInformation.Deserialize(d)
+		case schemas.TaxRegistrationWithJurisdiction_certifiedEmailId:
+			v.CertifiedEmailId = new(string)
+			return d.ReadString(schemas.TaxRegistrationWithJurisdiction_certifiedEmailId, v.CertifiedEmailId)
+		case schemas.TaxRegistrationWithJurisdiction_jurisdiction:
+			v.Jurisdiction = &Jurisdiction{}
+			return v.Jurisdiction.Deserialize(d)
+		case schemas.TaxRegistrationWithJurisdiction_legalName:
+			v.LegalName = new(string)
+			return d.ReadString(schemas.TaxRegistrationWithJurisdiction_legalName, v.LegalName)
+		case schemas.TaxRegistrationWithJurisdiction_registrationId:
+			v.RegistrationId = new(string)
+			return d.ReadString(schemas.TaxRegistrationWithJurisdiction_registrationId, v.RegistrationId)
+		case schemas.TaxRegistrationWithJurisdiction_registrationType:
+			var ev string
+			if err := d.ReadString(schemas.TaxRegistrationWithJurisdiction_registrationType, &ev); err != nil {
+				return err
+			}
+			v.RegistrationType = TaxRegistrationType(ev)
+			return nil
+		case schemas.TaxRegistrationWithJurisdiction_sector:
+			var ev string
+			if err := d.ReadString(schemas.TaxRegistrationWithJurisdiction_sector, &ev); err != nil {
+				return err
+			}
+			v.Sector = Sector(ev)
+			return nil
+		case schemas.TaxRegistrationWithJurisdiction_status:
+			var ev string
+			if err := d.ReadString(schemas.TaxRegistrationWithJurisdiction_status, &ev); err != nil {
+				return err
+			}
+			v.Status = TaxRegistrationStatus(ev)
+			return nil
+		case schemas.TaxRegistrationWithJurisdiction_taxDocumentMetadatas:
+			return deserializeTaxDocumentMetadatas(d, schemas.TaxRegistrationWithJurisdiction_taxDocumentMetadatas, &v.TaxDocumentMetadatas)
+		}
+		return nil
+	})
+}
+
 // Additional tax information associated with your TRN in Turkey.
 type TurkeyAdditionalInfo struct {
 
@@ -1102,6 +3104,50 @@ type TurkeyAdditionalInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TurkeyAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TurkeyAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TurkeyAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Industries != "" {
+		s.WriteString(schemas.TurkeyAdditionalInfo_industries, string(v.Industries))
+	}
+	if v.KepEmailId != nil {
+		s.WriteString(schemas.TurkeyAdditionalInfo_kepEmailId, *v.KepEmailId)
+	}
+	if v.SecondaryTaxId != nil {
+		s.WriteString(schemas.TurkeyAdditionalInfo_secondaryTaxId, *v.SecondaryTaxId)
+	}
+	if v.TaxOffice != nil {
+		s.WriteString(schemas.TurkeyAdditionalInfo_taxOffice, *v.TaxOffice)
+	}
+}
+func (v *TurkeyAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TurkeyAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TurkeyAdditionalInfo_industries:
+			var ev string
+			if err := d.ReadString(schemas.TurkeyAdditionalInfo_industries, &ev); err != nil {
+				return err
+			}
+			v.Industries = Industries(ev)
+			return nil
+		case schemas.TurkeyAdditionalInfo_kepEmailId:
+			v.KepEmailId = new(string)
+			return d.ReadString(schemas.TurkeyAdditionalInfo_kepEmailId, v.KepEmailId)
+		case schemas.TurkeyAdditionalInfo_secondaryTaxId:
+			v.SecondaryTaxId = new(string)
+			return d.ReadString(schemas.TurkeyAdditionalInfo_secondaryTaxId, v.SecondaryTaxId)
+		case schemas.TurkeyAdditionalInfo_taxOffice:
+			v.TaxOffice = new(string)
+			return d.ReadString(schemas.TurkeyAdditionalInfo_taxOffice, v.TaxOffice)
+		}
+		return nil
+	})
+}
+
 // Additional tax information associated with your TRN in Ukraine.
 type UkraineAdditionalInfo struct {
 
@@ -1111,6 +3157,32 @@ type UkraineAdditionalInfo struct {
 	UkraineTrnType UkraineTrnType
 
 	noSmithyDocumentSerde
+}
+
+func (v *UkraineAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UkraineAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UkraineAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UkraineTrnType != "" {
+		s.WriteString(schemas.UkraineAdditionalInfo_ukraineTrnType, string(v.UkraineTrnType))
+	}
+}
+func (v *UkraineAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UkraineAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UkraineAdditionalInfo_ukraineTrnType:
+			var ev string
+			if err := d.ReadString(schemas.UkraineAdditionalInfo_ukraineTrnType, &ev); err != nil {
+				return err
+			}
+			v.UkraineTrnType = UkraineTrnType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Additional tax information to specify for a TRN in Uzbekistan.
@@ -1127,6 +3199,38 @@ type UzbekistanAdditionalInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UzbekistanAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UzbekistanAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UzbekistanAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaxRegistrationNumberType != "" {
+		s.WriteString(schemas.UzbekistanAdditionalInfo_taxRegistrationNumberType, string(v.TaxRegistrationNumberType))
+	}
+	if v.VatRegistrationNumber != nil {
+		s.WriteString(schemas.UzbekistanAdditionalInfo_vatRegistrationNumber, *v.VatRegistrationNumber)
+	}
+}
+func (v *UzbekistanAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UzbekistanAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UzbekistanAdditionalInfo_taxRegistrationNumberType:
+			var ev string
+			if err := d.ReadString(schemas.UzbekistanAdditionalInfo_taxRegistrationNumberType, &ev); err != nil {
+				return err
+			}
+			v.TaxRegistrationNumberType = UzbekistanTaxRegistrationNumberType(ev)
+			return nil
+		case schemas.UzbekistanAdditionalInfo_vatRegistrationNumber:
+			v.VatRegistrationNumber = new(string)
+			return d.ReadString(schemas.UzbekistanAdditionalInfo_vatRegistrationNumber, v.VatRegistrationNumber)
+		}
+		return nil
+	})
+}
+
 // The information about the specified parameter in the request that caused an
 // error.
 type ValidationExceptionField struct {
@@ -1137,6 +3241,28 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_name, *v.Name)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Required information to verify your TRN.
@@ -1150,6 +3276,31 @@ type VerificationDetails struct {
 	TaxRegistrationDocuments []TaxRegistrationDocument
 
 	noSmithyDocumentSerde
+}
+
+func (v *VerificationDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerificationDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerificationDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateOfBirth != nil {
+		s.WriteString(schemas.VerificationDetails_dateOfBirth, *v.DateOfBirth)
+	}
+	serializeTaxRegistrationDocuments(s, schemas.VerificationDetails_taxRegistrationDocuments, v.TaxRegistrationDocuments)
+}
+func (v *VerificationDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VerificationDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VerificationDetails_dateOfBirth:
+			v.DateOfBirth = new(string)
+			return d.ReadString(schemas.VerificationDetails_dateOfBirth, v.DateOfBirth)
+		case schemas.VerificationDetails_taxRegistrationDocuments:
+			return deserializeTaxRegistrationDocuments(d, schemas.VerificationDetails_taxRegistrationDocuments, &v.TaxRegistrationDocuments)
+		}
+		return nil
+	})
 }
 
 // Additional tax information to specify for a TRN in Vietnam.
@@ -1172,6 +3323,46 @@ type VietnamAdditionalInfo struct {
 	PaymentVoucherNumberDate *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VietnamAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VietnamAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VietnamAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ElectronicTransactionCodeNumber != nil {
+		s.WriteString(schemas.VietnamAdditionalInfo_electronicTransactionCodeNumber, *v.ElectronicTransactionCodeNumber)
+	}
+	if v.EnterpriseIdentificationNumber != nil {
+		s.WriteString(schemas.VietnamAdditionalInfo_enterpriseIdentificationNumber, *v.EnterpriseIdentificationNumber)
+	}
+	if v.PaymentVoucherNumber != nil {
+		s.WriteString(schemas.VietnamAdditionalInfo_paymentVoucherNumber, *v.PaymentVoucherNumber)
+	}
+	if v.PaymentVoucherNumberDate != nil {
+		s.WriteString(schemas.VietnamAdditionalInfo_paymentVoucherNumberDate, *v.PaymentVoucherNumberDate)
+	}
+}
+func (v *VietnamAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VietnamAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VietnamAdditionalInfo_electronicTransactionCodeNumber:
+			v.ElectronicTransactionCodeNumber = new(string)
+			return d.ReadString(schemas.VietnamAdditionalInfo_electronicTransactionCodeNumber, v.ElectronicTransactionCodeNumber)
+		case schemas.VietnamAdditionalInfo_enterpriseIdentificationNumber:
+			v.EnterpriseIdentificationNumber = new(string)
+			return d.ReadString(schemas.VietnamAdditionalInfo_enterpriseIdentificationNumber, v.EnterpriseIdentificationNumber)
+		case schemas.VietnamAdditionalInfo_paymentVoucherNumber:
+			v.PaymentVoucherNumber = new(string)
+			return d.ReadString(schemas.VietnamAdditionalInfo_paymentVoucherNumber, v.PaymentVoucherNumber)
+		case schemas.VietnamAdditionalInfo_paymentVoucherNumberDate:
+			v.PaymentVoucherNumberDate = new(string)
+			return d.ReadString(schemas.VietnamAdditionalInfo_paymentVoucherNumberDate, v.PaymentVoucherNumberDate)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

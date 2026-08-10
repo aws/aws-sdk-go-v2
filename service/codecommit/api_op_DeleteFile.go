@@ -4,6 +4,8 @@ package codecommit
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,39 @@ type DeleteFileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFileInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BranchName != nil {
+		s.WriteString(schemas.DeleteFileInput_branchName, *v.BranchName)
+	}
+	if v.CommitMessage != nil {
+		s.WriteString(schemas.DeleteFileInput_commitMessage, *v.CommitMessage)
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.DeleteFileInput_email, *v.Email)
+	}
+	if v.FilePath != nil {
+		s.WriteString(schemas.DeleteFileInput_filePath, *v.FilePath)
+	}
+	if v.KeepEmptyFolders != false {
+		s.WriteBool(schemas.DeleteFileInput_keepEmptyFolders, v.KeepEmptyFolders)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteFileInput_name, *v.Name)
+	}
+	if v.ParentCommitId != nil {
+		s.WriteString(schemas.DeleteFileInput_parentCommitId, *v.ParentCommitId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.DeleteFileInput_repositoryName, *v.RepositoryName)
+	}
+}
+
 type DeleteFileOutput struct {
 
 	// The blob ID removed from the tree as part of deleting the file.
@@ -105,13 +140,50 @@ type DeleteFileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFileOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlobId != nil {
+		s.WriteString(schemas.DeleteFileOutput_blobId, *v.BlobId)
+	}
+	if v.CommitId != nil {
+		s.WriteString(schemas.DeleteFileOutput_commitId, *v.CommitId)
+	}
+	if v.FilePath != nil {
+		s.WriteString(schemas.DeleteFileOutput_filePath, *v.FilePath)
+	}
+	if v.TreeId != nil {
+		s.WriteString(schemas.DeleteFileOutput_treeId, *v.TreeId)
+	}
+}
+func (v *DeleteFileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFileOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFileOutput_blobId:
+			v.BlobId = new(string)
+			return d.ReadString(schemas.DeleteFileOutput_blobId, v.BlobId)
+		case schemas.DeleteFileOutput_commitId:
+			v.CommitId = new(string)
+			return d.ReadString(schemas.DeleteFileOutput_commitId, v.CommitId)
+		case schemas.DeleteFileOutput_filePath:
+			v.FilePath = new(string)
+			return d.ReadString(schemas.DeleteFileOutput_filePath, v.FilePath)
+		case schemas.DeleteFileOutput_treeId:
+			v.TreeId = new(string)
+			return d.ReadString(schemas.DeleteFileOutput_treeId, v.TreeId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteFile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFile, schemas.DeleteFileInput, schemas.DeleteFileOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteFile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFile, schemas.DeleteFileInput, schemas.DeleteFileOutput), output: &DeleteFileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

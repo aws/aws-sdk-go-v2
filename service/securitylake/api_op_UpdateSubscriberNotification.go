@@ -4,7 +4,9 @@ package securitylake
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securitylake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securitylake/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,19 @@ type UpdateSubscriberNotificationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSubscriberNotificationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSubscriberNotificationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSubscriberNotificationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNotificationConfiguration(s, schemas.UpdateSubscriberNotificationRequest_configuration, v.Configuration)
+	if v.SubscriberId != nil {
+		s.WriteString(schemas.UpdateSubscriberNotificationRequest_subscriberId, *v.SubscriberId)
+	}
+}
+
 type UpdateSubscriberNotificationOutput struct {
 
 	// The subscriber endpoint to which exception messages are posted.
@@ -51,13 +66,32 @@ type UpdateSubscriberNotificationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSubscriberNotificationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSubscriberNotificationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSubscriberNotificationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SubscriberEndpoint != nil {
+		s.WriteString(schemas.UpdateSubscriberNotificationResponse_subscriberEndpoint, *v.SubscriberEndpoint)
+	}
+}
+func (v *UpdateSubscriberNotificationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSubscriberNotificationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSubscriberNotificationResponse_subscriberEndpoint:
+			v.SubscriberEndpoint = new(string)
+			return d.ReadString(schemas.UpdateSubscriberNotificationResponse_subscriberEndpoint, v.SubscriberEndpoint)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSubscriberNotificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSubscriberNotification{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSubscriberNotification, schemas.UpdateSubscriberNotificationRequest, schemas.UpdateSubscriberNotificationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSubscriberNotification{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSubscriberNotification, schemas.UpdateSubscriberNotificationRequest, schemas.UpdateSubscriberNotificationResponse), output: &UpdateSubscriberNotificationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

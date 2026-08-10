@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,28 @@ type GetServiceSyncConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceSyncConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceSyncConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceSyncConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceName != nil {
+		s.WriteString(schemas.GetServiceSyncConfigInput_serviceName, *v.ServiceName)
+	}
+}
+func (v *GetServiceSyncConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceSyncConfigInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceSyncConfigInput_serviceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.GetServiceSyncConfigInput_serviceName, v.ServiceName)
+		}
+		return nil
+	})
+}
+
 type GetServiceSyncConfigOutput struct {
 
 	// The detailed data of the requested service sync configuration.
@@ -47,13 +71,34 @@ type GetServiceSyncConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceSyncConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceSyncConfigOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceSyncConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceSyncConfig != nil {
+		s.WriteStruct(schemas.GetServiceSyncConfigOutput_serviceSyncConfig)
+		v.ServiceSyncConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetServiceSyncConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceSyncConfigOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceSyncConfigOutput_serviceSyncConfig:
+			v.ServiceSyncConfig = &types.ServiceSyncConfig{}
+			return v.ServiceSyncConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetServiceSyncConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetServiceSyncConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceSyncConfig, schemas.GetServiceSyncConfigInput, schemas.GetServiceSyncConfigOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetServiceSyncConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceSyncConfig, schemas.GetServiceSyncConfigInput, schemas.GetServiceSyncConfigOutput), output: &GetServiceSyncConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

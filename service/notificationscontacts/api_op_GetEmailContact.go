@@ -4,7 +4,9 @@ package notificationscontacts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/notificationscontacts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/notificationscontacts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetEmailContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEmailContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEmailContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEmailContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetEmailContactRequest_arn, *v.Arn)
+	}
+}
+
 type GetEmailContactOutput struct {
 
 	// The email contact for the provided email address.
@@ -47,13 +61,34 @@ type GetEmailContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEmailContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEmailContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEmailContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailContact != nil {
+		s.WriteStruct(schemas.GetEmailContactResponse_emailContact)
+		v.EmailContact.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetEmailContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEmailContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEmailContactResponse_emailContact:
+			v.EmailContact = &types.EmailContact{}
+			return v.EmailContact.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEmailContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEmailContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEmailContact, schemas.GetEmailContactRequest, schemas.GetEmailContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEmailContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEmailContact, schemas.GetEmailContactRequest, schemas.GetEmailContactResponse), output: &GetEmailContactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

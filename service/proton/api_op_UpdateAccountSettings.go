@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,48 @@ type UpdateAccountSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccountSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccountSettingsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccountSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeletePipelineProvisioningRepository != nil {
+		s.WriteBool(schemas.UpdateAccountSettingsInput_deletePipelineProvisioningRepository, *v.DeletePipelineProvisioningRepository)
+	}
+	if v.PipelineCodebuildRoleArn != nil {
+		s.WriteString(schemas.UpdateAccountSettingsInput_pipelineCodebuildRoleArn, *v.PipelineCodebuildRoleArn)
+	}
+	if v.PipelineProvisioningRepository != nil {
+		s.WriteStruct(schemas.UpdateAccountSettingsInput_pipelineProvisioningRepository)
+		v.PipelineProvisioningRepository.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PipelineServiceRoleArn != nil {
+		s.WriteString(schemas.UpdateAccountSettingsInput_pipelineServiceRoleArn, *v.PipelineServiceRoleArn)
+	}
+}
+func (v *UpdateAccountSettingsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAccountSettingsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAccountSettingsInput_deletePipelineProvisioningRepository:
+			v.DeletePipelineProvisioningRepository = new(bool)
+			return d.ReadBool(schemas.UpdateAccountSettingsInput_deletePipelineProvisioningRepository, v.DeletePipelineProvisioningRepository)
+		case schemas.UpdateAccountSettingsInput_pipelineCodebuildRoleArn:
+			v.PipelineCodebuildRoleArn = new(string)
+			return d.ReadString(schemas.UpdateAccountSettingsInput_pipelineCodebuildRoleArn, v.PipelineCodebuildRoleArn)
+		case schemas.UpdateAccountSettingsInput_pipelineProvisioningRepository:
+			v.PipelineProvisioningRepository = &types.RepositoryBranchInput{}
+			return v.PipelineProvisioningRepository.Deserialize(d)
+		case schemas.UpdateAccountSettingsInput_pipelineServiceRoleArn:
+			v.PipelineServiceRoleArn = new(string)
+			return d.ReadString(schemas.UpdateAccountSettingsInput_pipelineServiceRoleArn, v.PipelineServiceRoleArn)
+		}
+		return nil
+	})
+}
+
 type UpdateAccountSettingsOutput struct {
 
 	// The Proton pipeline service role and repository data shared across the Amazon
@@ -73,13 +117,34 @@ type UpdateAccountSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccountSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccountSettingsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccountSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountSettings != nil {
+		s.WriteStruct(schemas.UpdateAccountSettingsOutput_accountSettings)
+		v.AccountSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAccountSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAccountSettingsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAccountSettingsOutput_accountSettings:
+			v.AccountSettings = &types.AccountSettings{}
+			return v.AccountSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAccountSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateAccountSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccountSettings, schemas.UpdateAccountSettingsInput, schemas.UpdateAccountSettingsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateAccountSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccountSettings, schemas.UpdateAccountSettingsInput, schemas.UpdateAccountSettingsOutput), output: &UpdateAccountSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

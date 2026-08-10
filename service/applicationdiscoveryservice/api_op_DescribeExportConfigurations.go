@@ -5,7 +5,9 @@ package applicationdiscoveryservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,22 @@ type DescribeExportConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeExportConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeExportConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeExportConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExportIds(s, schemas.DescribeExportConfigurationsRequest_exportIds, v.ExportIds)
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.DescribeExportConfigurationsRequest_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeExportConfigurationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type DescribeExportConfigurationsOutput struct {
 
 	//
@@ -58,13 +76,35 @@ type DescribeExportConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeExportConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeExportConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeExportConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExportsInfo(s, schemas.DescribeExportConfigurationsResponse_exportsInfo, v.ExportsInfo)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeExportConfigurationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeExportConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeExportConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeExportConfigurationsResponse_exportsInfo:
+			return deserializeExportsInfo(d, schemas.DescribeExportConfigurationsResponse_exportsInfo, &v.ExportsInfo)
+		case schemas.DescribeExportConfigurationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeExportConfigurationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeExportConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeExportConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExportConfigurations, schemas.DescribeExportConfigurationsRequest, schemas.DescribeExportConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeExportConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExportConfigurations, schemas.DescribeExportConfigurationsRequest, schemas.DescribeExportConfigurationsResponse), output: &DescribeExportConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package notifications
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/notifications/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/notifications/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -60,6 +62,39 @@ type ListManagedNotificationEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedNotificationEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedNotificationEventsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedNotificationEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListManagedNotificationEventsRequest_endTime, *v.EndTime)
+	}
+	if v.Locale != "" {
+		s.WriteString(schemas.ListManagedNotificationEventsRequest_locale, string(v.Locale))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListManagedNotificationEventsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListManagedNotificationEventsRequest_nextToken, *v.NextToken)
+	}
+	if v.OrganizationalUnitId != nil {
+		s.WriteString(schemas.ListManagedNotificationEventsRequest_organizationalUnitId, *v.OrganizationalUnitId)
+	}
+	if v.RelatedAccount != nil {
+		s.WriteString(schemas.ListManagedNotificationEventsRequest_relatedAccount, *v.RelatedAccount)
+	}
+	if v.Source != nil {
+		s.WriteString(schemas.ListManagedNotificationEventsRequest_source, *v.Source)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListManagedNotificationEventsRequest_startTime, *v.StartTime)
+	}
+}
+
 type ListManagedNotificationEventsOutput struct {
 
 	// A list of Managed Notification Events matching the request criteria.
@@ -77,13 +112,35 @@ type ListManagedNotificationEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedNotificationEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedNotificationEventsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedNotificationEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeManagedNotificationEvents(s, schemas.ListManagedNotificationEventsResponse_managedNotificationEvents, v.ManagedNotificationEvents)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListManagedNotificationEventsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListManagedNotificationEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListManagedNotificationEventsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListManagedNotificationEventsResponse_managedNotificationEvents:
+			return deserializeManagedNotificationEvents(d, schemas.ListManagedNotificationEventsResponse_managedNotificationEvents, &v.ManagedNotificationEvents)
+		case schemas.ListManagedNotificationEventsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListManagedNotificationEventsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListManagedNotificationEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListManagedNotificationEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedNotificationEvents, schemas.ListManagedNotificationEventsRequest, schemas.ListManagedNotificationEventsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListManagedNotificationEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedNotificationEvents, schemas.ListManagedNotificationEventsRequest, schemas.ListManagedNotificationEventsResponse), output: &ListManagedNotificationEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

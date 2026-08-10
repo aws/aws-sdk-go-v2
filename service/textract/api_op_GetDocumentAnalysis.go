@@ -4,7 +4,9 @@ package textract
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -98,6 +100,24 @@ type GetDocumentAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDocumentAnalysisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDocumentAnalysisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDocumentAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.GetDocumentAnalysisRequest_JobId, *v.JobId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetDocumentAnalysisRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetDocumentAnalysisRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetDocumentAnalysisOutput struct {
 
 	//
@@ -132,13 +152,68 @@ type GetDocumentAnalysisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDocumentAnalysisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDocumentAnalysisResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDocumentAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyzeDocumentModelVersion != nil {
+		s.WriteString(schemas.GetDocumentAnalysisResponse_AnalyzeDocumentModelVersion, *v.AnalyzeDocumentModelVersion)
+	}
+	serializeBlockList(s, schemas.GetDocumentAnalysisResponse_Blocks, v.Blocks)
+	if v.DocumentMetadata != nil {
+		s.WriteStruct(schemas.GetDocumentAnalysisResponse_DocumentMetadata)
+		v.DocumentMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.GetDocumentAnalysisResponse_JobStatus, string(v.JobStatus))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetDocumentAnalysisResponse_NextToken, *v.NextToken)
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetDocumentAnalysisResponse_StatusMessage, *v.StatusMessage)
+	}
+	serializeWarnings(s, schemas.GetDocumentAnalysisResponse_Warnings, v.Warnings)
+}
+func (v *GetDocumentAnalysisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDocumentAnalysisResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDocumentAnalysisResponse_AnalyzeDocumentModelVersion:
+			v.AnalyzeDocumentModelVersion = new(string)
+			return d.ReadString(schemas.GetDocumentAnalysisResponse_AnalyzeDocumentModelVersion, v.AnalyzeDocumentModelVersion)
+		case schemas.GetDocumentAnalysisResponse_Blocks:
+			return deserializeBlockList(d, schemas.GetDocumentAnalysisResponse_Blocks, &v.Blocks)
+		case schemas.GetDocumentAnalysisResponse_DocumentMetadata:
+			v.DocumentMetadata = &types.DocumentMetadata{}
+			return v.DocumentMetadata.Deserialize(d)
+		case schemas.GetDocumentAnalysisResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetDocumentAnalysisResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		case schemas.GetDocumentAnalysisResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetDocumentAnalysisResponse_NextToken, v.NextToken)
+		case schemas.GetDocumentAnalysisResponse_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetDocumentAnalysisResponse_StatusMessage, v.StatusMessage)
+		case schemas.GetDocumentAnalysisResponse_Warnings:
+			return deserializeWarnings(d, schemas.GetDocumentAnalysisResponse_Warnings, &v.Warnings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDocumentAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDocumentAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDocumentAnalysis, schemas.GetDocumentAnalysisRequest, schemas.GetDocumentAnalysisResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDocumentAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDocumentAnalysis, schemas.GetDocumentAnalysisRequest, schemas.GetDocumentAnalysisResponse), output: &GetDocumentAnalysisOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package groundstation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type ListConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfigsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfigsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfigsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListConfigsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfigsRequest_nextToken, *v.NextToken)
+	}
+}
+
 // Output for the ListConfigs operation.
 type ListConfigsOutput struct {
 
@@ -54,13 +71,35 @@ type ListConfigsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfigsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfigsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigList(s, schemas.ListConfigsResponse_configList, v.ConfigList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfigsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConfigsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConfigsResponse_configList:
+			return deserializeConfigList(d, schemas.ListConfigsResponse_configList, &v.ConfigList)
+		case schemas.ListConfigsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConfigsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfigs, schemas.ListConfigsRequest, schemas.ListConfigsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfigs, schemas.ListConfigsRequest, schemas.ListConfigsResponse), output: &ListConfigsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

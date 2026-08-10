@@ -4,6 +4,8 @@ package controltower
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/controltower/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DisableBaselineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableBaselineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableBaselineInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableBaselineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnabledBaselineIdentifier != nil {
+		s.WriteString(schemas.DisableBaselineInput_enabledBaselineIdentifier, *v.EnabledBaselineIdentifier)
+	}
+}
+
 type DisableBaselineOutput struct {
 
 	// The ID (in UUID format) of the asynchronous DisableBaseline operation. This
@@ -53,13 +67,32 @@ type DisableBaselineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableBaselineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableBaselineOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableBaselineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationIdentifier != nil {
+		s.WriteString(schemas.DisableBaselineOutput_operationIdentifier, *v.OperationIdentifier)
+	}
+}
+func (v *DisableBaselineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisableBaselineOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisableBaselineOutput_operationIdentifier:
+			v.OperationIdentifier = new(string)
+			return d.ReadString(schemas.DisableBaselineOutput_operationIdentifier, v.OperationIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisableBaselineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisableBaseline{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableBaseline, schemas.DisableBaselineInput, schemas.DisableBaselineOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisableBaseline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableBaseline, schemas.DisableBaselineInput, schemas.DisableBaselineOutput), output: &DisableBaselineOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

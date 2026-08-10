@@ -4,7 +4,9 @@ package textract
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,24 @@ type GetDocumentTextDetectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDocumentTextDetectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDocumentTextDetectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDocumentTextDetectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.GetDocumentTextDetectionRequest_JobId, *v.JobId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetDocumentTextDetectionRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetDocumentTextDetectionRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetDocumentTextDetectionOutput struct {
 
 	// The results of the text-detection operation.
@@ -109,13 +129,68 @@ type GetDocumentTextDetectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDocumentTextDetectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDocumentTextDetectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDocumentTextDetectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBlockList(s, schemas.GetDocumentTextDetectionResponse_Blocks, v.Blocks)
+	if v.DetectDocumentTextModelVersion != nil {
+		s.WriteString(schemas.GetDocumentTextDetectionResponse_DetectDocumentTextModelVersion, *v.DetectDocumentTextModelVersion)
+	}
+	if v.DocumentMetadata != nil {
+		s.WriteStruct(schemas.GetDocumentTextDetectionResponse_DocumentMetadata)
+		v.DocumentMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.GetDocumentTextDetectionResponse_JobStatus, string(v.JobStatus))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetDocumentTextDetectionResponse_NextToken, *v.NextToken)
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetDocumentTextDetectionResponse_StatusMessage, *v.StatusMessage)
+	}
+	serializeWarnings(s, schemas.GetDocumentTextDetectionResponse_Warnings, v.Warnings)
+}
+func (v *GetDocumentTextDetectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDocumentTextDetectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDocumentTextDetectionResponse_Blocks:
+			return deserializeBlockList(d, schemas.GetDocumentTextDetectionResponse_Blocks, &v.Blocks)
+		case schemas.GetDocumentTextDetectionResponse_DetectDocumentTextModelVersion:
+			v.DetectDocumentTextModelVersion = new(string)
+			return d.ReadString(schemas.GetDocumentTextDetectionResponse_DetectDocumentTextModelVersion, v.DetectDocumentTextModelVersion)
+		case schemas.GetDocumentTextDetectionResponse_DocumentMetadata:
+			v.DocumentMetadata = &types.DocumentMetadata{}
+			return v.DocumentMetadata.Deserialize(d)
+		case schemas.GetDocumentTextDetectionResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetDocumentTextDetectionResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		case schemas.GetDocumentTextDetectionResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetDocumentTextDetectionResponse_NextToken, v.NextToken)
+		case schemas.GetDocumentTextDetectionResponse_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetDocumentTextDetectionResponse_StatusMessage, v.StatusMessage)
+		case schemas.GetDocumentTextDetectionResponse_Warnings:
+			return deserializeWarnings(d, schemas.GetDocumentTextDetectionResponse_Warnings, &v.Warnings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDocumentTextDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDocumentTextDetection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDocumentTextDetection, schemas.GetDocumentTextDetectionRequest, schemas.GetDocumentTextDetectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDocumentTextDetection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDocumentTextDetection, schemas.GetDocumentTextDetectionRequest, schemas.GetDocumentTextDetectionResponse), output: &GetDocumentTextDetectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

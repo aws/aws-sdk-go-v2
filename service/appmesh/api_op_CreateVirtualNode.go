@@ -5,7 +5,9 @@ package appmesh
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -92,6 +94,57 @@ type CreateVirtualNodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVirtualNodeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVirtualNodeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVirtualNodeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateVirtualNodeInput_clientToken, *v.ClientToken)
+	}
+	if v.MeshName != nil {
+		s.WriteString(schemas.CreateVirtualNodeInput_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.CreateVirtualNodeInput_meshOwner, *v.MeshOwner)
+	}
+	if v.Spec != nil {
+		s.WriteStruct(schemas.CreateVirtualNodeInput_spec)
+		v.Spec.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateVirtualNodeInput_tags, v.Tags)
+	if v.VirtualNodeName != nil {
+		s.WriteString(schemas.CreateVirtualNodeInput_virtualNodeName, *v.VirtualNodeName)
+	}
+}
+func (v *CreateVirtualNodeInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVirtualNodeInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVirtualNodeInput_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateVirtualNodeInput_clientToken, v.ClientToken)
+		case schemas.CreateVirtualNodeInput_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.CreateVirtualNodeInput_meshName, v.MeshName)
+		case schemas.CreateVirtualNodeInput_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.CreateVirtualNodeInput_meshOwner, v.MeshOwner)
+		case schemas.CreateVirtualNodeInput_spec:
+			v.Spec = &types.VirtualNodeSpec{}
+			return v.Spec.Deserialize(d)
+		case schemas.CreateVirtualNodeInput_tags:
+			return deserializeTagList(d, schemas.CreateVirtualNodeInput_tags, &v.Tags)
+		case schemas.CreateVirtualNodeInput_virtualNodeName:
+			v.VirtualNodeName = new(string)
+			return d.ReadString(schemas.CreateVirtualNodeInput_virtualNodeName, v.VirtualNodeName)
+		}
+		return nil
+	})
+}
+
 type CreateVirtualNodeOutput struct {
 
 	// The full description of your virtual node following the create call.
@@ -105,13 +158,34 @@ type CreateVirtualNodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVirtualNodeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVirtualNodeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVirtualNodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualNode != nil {
+		s.WriteStruct(schemas.CreateVirtualNodeOutput_virtualNode)
+		v.VirtualNode.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateVirtualNodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVirtualNodeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVirtualNodeOutput_virtualNode:
+			v.VirtualNode = &types.VirtualNodeData{}
+			return v.VirtualNode.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVirtualNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateVirtualNode{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVirtualNode, schemas.CreateVirtualNodeInput, schemas.CreateVirtualNodeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateVirtualNode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVirtualNode, schemas.CreateVirtualNodeInput, schemas.CreateVirtualNodeOutput), output: &CreateVirtualNodeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

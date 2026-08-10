@@ -4,7 +4,9 @@ package codeguruprofiler
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -86,6 +88,46 @@ type GetRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetRecommendationsRequest_endTime, *v.EndTime)
+	}
+	if v.Locale != nil {
+		s.WriteString(schemas.GetRecommendationsRequest_locale, *v.Locale)
+	}
+	if v.ProfilingGroupName != nil {
+		s.WriteString(schemas.GetRecommendationsRequest_profilingGroupName, *v.ProfilingGroupName)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetRecommendationsRequest_startTime, *v.StartTime)
+	}
+}
+func (v *GetRecommendationsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRecommendationsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRecommendationsRequest_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.GetRecommendationsRequest_endTime, v.EndTime)
+		case schemas.GetRecommendationsRequest_locale:
+			v.Locale = new(string)
+			return d.ReadString(schemas.GetRecommendationsRequest_locale, v.Locale)
+		case schemas.GetRecommendationsRequest_profilingGroupName:
+			v.ProfilingGroupName = new(string)
+			return d.ReadString(schemas.GetRecommendationsRequest_profilingGroupName, v.ProfilingGroupName)
+		case schemas.GetRecommendationsRequest_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.GetRecommendationsRequest_startTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
 // The structure representing the GetRecommendationsResponse.
 type GetRecommendationsOutput struct {
 
@@ -124,13 +166,50 @@ type GetRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnomalies(s, schemas.GetRecommendationsResponse_anomalies, v.Anomalies)
+	if v.ProfileEndTime != nil {
+		s.WriteTime(schemas.GetRecommendationsResponse_profileEndTime, *v.ProfileEndTime)
+	}
+	if v.ProfileStartTime != nil {
+		s.WriteTime(schemas.GetRecommendationsResponse_profileStartTime, *v.ProfileStartTime)
+	}
+	if v.ProfilingGroupName != nil {
+		s.WriteString(schemas.GetRecommendationsResponse_profilingGroupName, *v.ProfilingGroupName)
+	}
+	serializeRecommendations(s, schemas.GetRecommendationsResponse_recommendations, v.Recommendations)
+}
+func (v *GetRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRecommendationsResponse_anomalies:
+			return deserializeAnomalies(d, schemas.GetRecommendationsResponse_anomalies, &v.Anomalies)
+		case schemas.GetRecommendationsResponse_profileEndTime:
+			v.ProfileEndTime = new(time.Time)
+			return d.ReadTime(schemas.GetRecommendationsResponse_profileEndTime, v.ProfileEndTime)
+		case schemas.GetRecommendationsResponse_profileStartTime:
+			v.ProfileStartTime = new(time.Time)
+			return d.ReadTime(schemas.GetRecommendationsResponse_profileStartTime, v.ProfileStartTime)
+		case schemas.GetRecommendationsResponse_profilingGroupName:
+			v.ProfilingGroupName = new(string)
+			return d.ReadString(schemas.GetRecommendationsResponse_profilingGroupName, v.ProfilingGroupName)
+		case schemas.GetRecommendationsResponse_recommendations:
+			return deserializeRecommendations(d, schemas.GetRecommendationsResponse_recommendations, &v.Recommendations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecommendations, schemas.GetRecommendationsRequest, schemas.GetRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecommendations, schemas.GetRecommendationsRequest, schemas.GetRecommendationsResponse), output: &GetRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

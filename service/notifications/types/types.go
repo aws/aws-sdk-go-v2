@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/notifications/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -14,6 +16,25 @@ type AggregationDetail struct {
 	SummarizationDimensions []SummarizationDimensionDetail
 
 	noSmithyDocumentSerde
+}
+
+func (v *AggregationDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AggregationDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AggregationDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSummarizationDimensionDetails(s, schemas.AggregationDetail_summarizationDimensions, v.SummarizationDimensions)
+}
+func (v *AggregationDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AggregationDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AggregationDetail_summarizationDimensions:
+			return deserializeSummarizationDimensionDetails(d, schemas.AggregationDetail_summarizationDimensions, &v.SummarizationDimensions)
+		}
+		return nil
+	})
 }
 
 // Key-value collection that indicate how notifications are grouped.
@@ -30,6 +51,34 @@ type AggregationKey struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AggregationKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AggregationKey)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AggregationKey) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.AggregationKey_name, *v.Name)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.AggregationKey_value, *v.Value)
+	}
+}
+func (v *AggregationKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AggregationKey, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AggregationKey_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AggregationKey_name, v.Name)
+		case schemas.AggregationKey_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.AggregationKey_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Provides additional information about the aggregation key.
@@ -66,6 +115,58 @@ type AggregationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AggregationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AggregationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AggregationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSummarizationDimensionOverviews(s, schemas.AggregationSummary_additionalSummarizationDimensions, v.AdditionalSummarizationDimensions)
+	if v.AggregatedAccounts != nil {
+		s.WriteStruct(schemas.AggregationSummary_aggregatedAccounts)
+		v.AggregatedAccounts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAggregationKeys(s, schemas.AggregationSummary_aggregatedBy, v.AggregatedBy)
+	if v.AggregatedOrganizationalUnits != nil {
+		s.WriteStruct(schemas.AggregationSummary_aggregatedOrganizationalUnits)
+		v.AggregatedOrganizationalUnits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AggregatedRegions != nil {
+		s.WriteStruct(schemas.AggregationSummary_aggregatedRegions)
+		v.AggregatedRegions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventCount != nil {
+		s.WriteInt32(schemas.AggregationSummary_eventCount, *v.EventCount)
+	}
+}
+func (v *AggregationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AggregationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AggregationSummary_additionalSummarizationDimensions:
+			return deserializeSummarizationDimensionOverviews(d, schemas.AggregationSummary_additionalSummarizationDimensions, &v.AdditionalSummarizationDimensions)
+		case schemas.AggregationSummary_aggregatedAccounts:
+			v.AggregatedAccounts = &SummarizationDimensionOverview{}
+			return v.AggregatedAccounts.Deserialize(d)
+		case schemas.AggregationSummary_aggregatedBy:
+			return deserializeAggregationKeys(d, schemas.AggregationSummary_aggregatedBy, &v.AggregatedBy)
+		case schemas.AggregationSummary_aggregatedOrganizationalUnits:
+			v.AggregatedOrganizationalUnits = &SummarizationDimensionOverview{}
+			return v.AggregatedOrganizationalUnits.Deserialize(d)
+		case schemas.AggregationSummary_aggregatedRegions:
+			v.AggregatedRegions = &SummarizationDimensionOverview{}
+			return v.AggregatedRegions.Deserialize(d)
+		case schemas.AggregationSummary_eventCount:
+			v.EventCount = new(int32)
+			return d.ReadInt32(schemas.AggregationSummary_eventCount, v.EventCount)
+		}
+		return nil
+	})
+}
+
 // The key-value pair of properties for an event.
 type Dimension struct {
 
@@ -80,6 +181,34 @@ type Dimension struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Dimension) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Dimension)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Dimension) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.Dimension_name, *v.Name)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Dimension_value, *v.Value)
+	}
+}
+func (v *Dimension) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Dimension, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Dimension_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Dimension_name, v.Name)
+		case schemas.Dimension_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Dimension_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Provides additional information about the current EventRule status.
@@ -124,6 +253,38 @@ type EventRuleStatusSummary struct {
 	Status EventRuleStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *EventRuleStatusSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventRuleStatusSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventRuleStatusSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Reason != nil {
+		s.WriteString(schemas.EventRuleStatusSummary_reason, *v.Reason)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.EventRuleStatusSummary_status, string(v.Status))
+	}
+}
+func (v *EventRuleStatusSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventRuleStatusSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventRuleStatusSummary_reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.EventRuleStatusSummary_reason, v.Reason)
+		case schemas.EventRuleStatusSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.EventRuleStatusSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = EventRuleStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains a complete list of fields related to an EventRule .
@@ -198,6 +359,67 @@ type EventRuleStructure struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EventRuleStructure) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventRuleStructure)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventRuleStructure) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.EventRuleStructure_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.EventRuleStructure_creationTime, *v.CreationTime)
+	}
+	if v.EventPattern != nil {
+		s.WriteString(schemas.EventRuleStructure_eventPattern, *v.EventPattern)
+	}
+	if v.EventType != nil {
+		s.WriteString(schemas.EventRuleStructure_eventType, *v.EventType)
+	}
+	serializeManagedRuleArns(s, schemas.EventRuleStructure_managedRules, v.ManagedRules)
+	if v.NotificationConfigurationArn != nil {
+		s.WriteString(schemas.EventRuleStructure_notificationConfigurationArn, *v.NotificationConfigurationArn)
+	}
+	serializeRegions(s, schemas.EventRuleStructure_regions, v.Regions)
+	if v.Source != nil {
+		s.WriteString(schemas.EventRuleStructure_source, *v.Source)
+	}
+	serializeStatusSummaryByRegion(s, schemas.EventRuleStructure_statusSummaryByRegion, v.StatusSummaryByRegion)
+}
+func (v *EventRuleStructure) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventRuleStructure, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventRuleStructure_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.EventRuleStructure_arn, v.Arn)
+		case schemas.EventRuleStructure_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.EventRuleStructure_creationTime, v.CreationTime)
+		case schemas.EventRuleStructure_eventPattern:
+			v.EventPattern = new(string)
+			return d.ReadString(schemas.EventRuleStructure_eventPattern, v.EventPattern)
+		case schemas.EventRuleStructure_eventType:
+			v.EventType = new(string)
+			return d.ReadString(schemas.EventRuleStructure_eventType, v.EventType)
+		case schemas.EventRuleStructure_managedRules:
+			return deserializeManagedRuleArns(d, schemas.EventRuleStructure_managedRules, &v.ManagedRules)
+		case schemas.EventRuleStructure_notificationConfigurationArn:
+			v.NotificationConfigurationArn = new(string)
+			return d.ReadString(schemas.EventRuleStructure_notificationConfigurationArn, v.NotificationConfigurationArn)
+		case schemas.EventRuleStructure_regions:
+			return deserializeRegions(d, schemas.EventRuleStructure_regions, &v.Regions)
+		case schemas.EventRuleStructure_source:
+			v.Source = new(string)
+			return d.ReadString(schemas.EventRuleStructure_source, v.Source)
+		case schemas.EventRuleStructure_statusSummaryByRegion:
+			return deserializeStatusSummaryByRegion(d, schemas.EventRuleStructure_statusSummaryByRegion, &v.StatusSummaryByRegion)
+		}
+		return nil
+	})
+}
+
 // Provides a summary of channel associations for a managed notification
 // configuration.
 type ManagedNotificationChannelAssociationSummary struct {
@@ -250,6 +472,48 @@ type ManagedNotificationChannelAssociationSummary struct {
 	OverrideOption ChannelAssociationOverrideOption
 
 	noSmithyDocumentSerde
+}
+
+func (v *ManagedNotificationChannelAssociationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedNotificationChannelAssociationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedNotificationChannelAssociationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelIdentifier != nil {
+		s.WriteString(schemas.ManagedNotificationChannelAssociationSummary_channelIdentifier, *v.ChannelIdentifier)
+	}
+	if v.ChannelType != "" {
+		s.WriteString(schemas.ManagedNotificationChannelAssociationSummary_channelType, string(v.ChannelType))
+	}
+	if v.OverrideOption != "" {
+		s.WriteString(schemas.ManagedNotificationChannelAssociationSummary_overrideOption, string(v.OverrideOption))
+	}
+}
+func (v *ManagedNotificationChannelAssociationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedNotificationChannelAssociationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedNotificationChannelAssociationSummary_channelIdentifier:
+			v.ChannelIdentifier = new(string)
+			return d.ReadString(schemas.ManagedNotificationChannelAssociationSummary_channelIdentifier, v.ChannelIdentifier)
+		case schemas.ManagedNotificationChannelAssociationSummary_channelType:
+			var ev string
+			if err := d.ReadString(schemas.ManagedNotificationChannelAssociationSummary_channelType, &ev); err != nil {
+				return err
+			}
+			v.ChannelType = ChannelType(ev)
+			return nil
+		case schemas.ManagedNotificationChannelAssociationSummary_overrideOption:
+			var ev string
+			if err := d.ReadString(schemas.ManagedNotificationChannelAssociationSummary_overrideOption, &ev); err != nil {
+				return err
+			}
+			v.OverrideOption = ChannelAssociationOverrideOption(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A ManagedNotificationChildEvent is a notification-focused representation of an
@@ -345,6 +609,113 @@ type ManagedNotificationChildEvent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ManagedNotificationChildEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedNotificationChildEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedNotificationChildEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregateManagedNotificationEventArn != nil {
+		s.WriteString(schemas.ManagedNotificationChildEvent_aggregateManagedNotificationEventArn, *v.AggregateManagedNotificationEventArn)
+	}
+	if v.AggregationDetail != nil {
+		s.WriteStruct(schemas.ManagedNotificationChildEvent_aggregationDetail)
+		v.AggregationDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ManagedNotificationChildEvent_endTime, *v.EndTime)
+	}
+	if v.EventStatus != "" {
+		s.WriteString(schemas.ManagedNotificationChildEvent_eventStatus, string(v.EventStatus))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ManagedNotificationChildEvent_id, *v.Id)
+	}
+	if v.MessageComponents != nil {
+		s.WriteStruct(schemas.ManagedNotificationChildEvent_messageComponents)
+		v.MessageComponents.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NotificationType != "" {
+		s.WriteString(schemas.ManagedNotificationChildEvent_notificationType, string(v.NotificationType))
+	}
+	if v.OrganizationalUnitId != nil {
+		s.WriteString(schemas.ManagedNotificationChildEvent_organizationalUnitId, *v.OrganizationalUnitId)
+	}
+	if v.SchemaVersion != "" {
+		s.WriteString(schemas.ManagedNotificationChildEvent_schemaVersion, string(v.SchemaVersion))
+	}
+	if v.SourceEventDetailUrl != nil {
+		s.WriteString(schemas.ManagedNotificationChildEvent_sourceEventDetailUrl, *v.SourceEventDetailUrl)
+	}
+	if v.SourceEventDetailUrlDisplayText != nil {
+		s.WriteString(schemas.ManagedNotificationChildEvent_sourceEventDetailUrlDisplayText, *v.SourceEventDetailUrlDisplayText)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ManagedNotificationChildEvent_startTime, *v.StartTime)
+	}
+	serializeTextParts(s, schemas.ManagedNotificationChildEvent_textParts, v.TextParts)
+}
+func (v *ManagedNotificationChildEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedNotificationChildEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedNotificationChildEvent_aggregateManagedNotificationEventArn:
+			v.AggregateManagedNotificationEventArn = new(string)
+			return d.ReadString(schemas.ManagedNotificationChildEvent_aggregateManagedNotificationEventArn, v.AggregateManagedNotificationEventArn)
+		case schemas.ManagedNotificationChildEvent_aggregationDetail:
+			v.AggregationDetail = &AggregationDetail{}
+			return v.AggregationDetail.Deserialize(d)
+		case schemas.ManagedNotificationChildEvent_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.ManagedNotificationChildEvent_endTime, v.EndTime)
+		case schemas.ManagedNotificationChildEvent_eventStatus:
+			var ev string
+			if err := d.ReadString(schemas.ManagedNotificationChildEvent_eventStatus, &ev); err != nil {
+				return err
+			}
+			v.EventStatus = EventStatus(ev)
+			return nil
+		case schemas.ManagedNotificationChildEvent_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ManagedNotificationChildEvent_id, v.Id)
+		case schemas.ManagedNotificationChildEvent_messageComponents:
+			v.MessageComponents = &MessageComponents{}
+			return v.MessageComponents.Deserialize(d)
+		case schemas.ManagedNotificationChildEvent_notificationType:
+			var ev string
+			if err := d.ReadString(schemas.ManagedNotificationChildEvent_notificationType, &ev); err != nil {
+				return err
+			}
+			v.NotificationType = NotificationType(ev)
+			return nil
+		case schemas.ManagedNotificationChildEvent_organizationalUnitId:
+			v.OrganizationalUnitId = new(string)
+			return d.ReadString(schemas.ManagedNotificationChildEvent_organizationalUnitId, v.OrganizationalUnitId)
+		case schemas.ManagedNotificationChildEvent_schemaVersion:
+			var ev string
+			if err := d.ReadString(schemas.ManagedNotificationChildEvent_schemaVersion, &ev); err != nil {
+				return err
+			}
+			v.SchemaVersion = SchemaVersion(ev)
+			return nil
+		case schemas.ManagedNotificationChildEvent_sourceEventDetailUrl:
+			v.SourceEventDetailUrl = new(string)
+			return d.ReadString(schemas.ManagedNotificationChildEvent_sourceEventDetailUrl, v.SourceEventDetailUrl)
+		case schemas.ManagedNotificationChildEvent_sourceEventDetailUrlDisplayText:
+			v.SourceEventDetailUrlDisplayText = new(string)
+			return d.ReadString(schemas.ManagedNotificationChildEvent_sourceEventDetailUrlDisplayText, v.SourceEventDetailUrlDisplayText)
+		case schemas.ManagedNotificationChildEvent_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ManagedNotificationChildEvent_startTime, v.StartTime)
+		case schemas.ManagedNotificationChildEvent_textParts:
+			return deserializeTextParts(d, schemas.ManagedNotificationChildEvent_textParts, &v.TextParts)
+		}
+		return nil
+	})
+}
+
 // Describes an overview and metadata for a ManagedNotificationChildEvent .
 type ManagedNotificationChildEventOverview struct {
 
@@ -383,6 +754,66 @@ type ManagedNotificationChildEventOverview struct {
 	OrganizationalUnitId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ManagedNotificationChildEventOverview) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedNotificationChildEventOverview)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedNotificationChildEventOverview) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregateManagedNotificationEventArn != nil {
+		s.WriteString(schemas.ManagedNotificationChildEventOverview_aggregateManagedNotificationEventArn, *v.AggregateManagedNotificationEventArn)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.ManagedNotificationChildEventOverview_arn, *v.Arn)
+	}
+	if v.ChildEvent != nil {
+		s.WriteStruct(schemas.ManagedNotificationChildEventOverview_childEvent)
+		v.ChildEvent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ManagedNotificationChildEventOverview_creationTime, *v.CreationTime)
+	}
+	if v.ManagedNotificationConfigurationArn != nil {
+		s.WriteString(schemas.ManagedNotificationChildEventOverview_managedNotificationConfigurationArn, *v.ManagedNotificationConfigurationArn)
+	}
+	if v.OrganizationalUnitId != nil {
+		s.WriteString(schemas.ManagedNotificationChildEventOverview_organizationalUnitId, *v.OrganizationalUnitId)
+	}
+	if v.RelatedAccount != nil {
+		s.WriteString(schemas.ManagedNotificationChildEventOverview_relatedAccount, *v.RelatedAccount)
+	}
+}
+func (v *ManagedNotificationChildEventOverview) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedNotificationChildEventOverview, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedNotificationChildEventOverview_aggregateManagedNotificationEventArn:
+			v.AggregateManagedNotificationEventArn = new(string)
+			return d.ReadString(schemas.ManagedNotificationChildEventOverview_aggregateManagedNotificationEventArn, v.AggregateManagedNotificationEventArn)
+		case schemas.ManagedNotificationChildEventOverview_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ManagedNotificationChildEventOverview_arn, v.Arn)
+		case schemas.ManagedNotificationChildEventOverview_childEvent:
+			v.ChildEvent = &ManagedNotificationChildEventSummary{}
+			return v.ChildEvent.Deserialize(d)
+		case schemas.ManagedNotificationChildEventOverview_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ManagedNotificationChildEventOverview_creationTime, v.CreationTime)
+		case schemas.ManagedNotificationChildEventOverview_managedNotificationConfigurationArn:
+			v.ManagedNotificationConfigurationArn = new(string)
+			return d.ReadString(schemas.ManagedNotificationChildEventOverview_managedNotificationConfigurationArn, v.ManagedNotificationConfigurationArn)
+		case schemas.ManagedNotificationChildEventOverview_organizationalUnitId:
+			v.OrganizationalUnitId = new(string)
+			return d.ReadString(schemas.ManagedNotificationChildEventOverview_organizationalUnitId, v.OrganizationalUnitId)
+		case schemas.ManagedNotificationChildEventOverview_relatedAccount:
+			v.RelatedAccount = new(string)
+			return d.ReadString(schemas.ManagedNotificationChildEventOverview_relatedAccount, v.RelatedAccount)
+		}
+		return nil
+	})
 }
 
 // Describes a short summary and metadata for a ManagedNotificationChildEvent .
@@ -455,6 +886,76 @@ type ManagedNotificationChildEventSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ManagedNotificationChildEventSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedNotificationChildEventSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedNotificationChildEventSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationDetail != nil {
+		s.WriteStruct(schemas.ManagedNotificationChildEventSummary_aggregationDetail)
+		v.AggregationDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventStatus != "" {
+		s.WriteString(schemas.ManagedNotificationChildEventSummary_eventStatus, string(v.EventStatus))
+	}
+	if v.MessageComponents != nil {
+		s.WriteStruct(schemas.ManagedNotificationChildEventSummary_messageComponents)
+		v.MessageComponents.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NotificationType != "" {
+		s.WriteString(schemas.ManagedNotificationChildEventSummary_notificationType, string(v.NotificationType))
+	}
+	if v.SchemaVersion != "" {
+		s.WriteString(schemas.ManagedNotificationChildEventSummary_schemaVersion, string(v.SchemaVersion))
+	}
+	if v.SourceEventMetadata != nil {
+		s.WriteStruct(schemas.ManagedNotificationChildEventSummary_sourceEventMetadata)
+		v.SourceEventMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ManagedNotificationChildEventSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedNotificationChildEventSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedNotificationChildEventSummary_aggregationDetail:
+			v.AggregationDetail = &AggregationDetail{}
+			return v.AggregationDetail.Deserialize(d)
+		case schemas.ManagedNotificationChildEventSummary_eventStatus:
+			var ev string
+			if err := d.ReadString(schemas.ManagedNotificationChildEventSummary_eventStatus, &ev); err != nil {
+				return err
+			}
+			v.EventStatus = EventStatus(ev)
+			return nil
+		case schemas.ManagedNotificationChildEventSummary_messageComponents:
+			v.MessageComponents = &MessageComponentsSummary{}
+			return v.MessageComponents.Deserialize(d)
+		case schemas.ManagedNotificationChildEventSummary_notificationType:
+			var ev string
+			if err := d.ReadString(schemas.ManagedNotificationChildEventSummary_notificationType, &ev); err != nil {
+				return err
+			}
+			v.NotificationType = NotificationType(ev)
+			return nil
+		case schemas.ManagedNotificationChildEventSummary_schemaVersion:
+			var ev string
+			if err := d.ReadString(schemas.ManagedNotificationChildEventSummary_schemaVersion, &ev); err != nil {
+				return err
+			}
+			v.SchemaVersion = SchemaVersion(ev)
+			return nil
+		case schemas.ManagedNotificationChildEventSummary_sourceEventMetadata:
+			v.SourceEventMetadata = &ManagedSourceEventMetadataSummary{}
+			return v.SourceEventMetadata.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes the basic structure and properties of a
 // ManagedNotificationConfiguration .
 type ManagedNotificationConfigurationStructure struct {
@@ -475,6 +976,40 @@ type ManagedNotificationConfigurationStructure struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ManagedNotificationConfigurationStructure) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedNotificationConfigurationStructure)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedNotificationConfigurationStructure) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ManagedNotificationConfigurationStructure_arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ManagedNotificationConfigurationStructure_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ManagedNotificationConfigurationStructure_name, *v.Name)
+	}
+}
+func (v *ManagedNotificationConfigurationStructure) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedNotificationConfigurationStructure, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedNotificationConfigurationStructure_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ManagedNotificationConfigurationStructure_arn, v.Arn)
+		case schemas.ManagedNotificationConfigurationStructure_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ManagedNotificationConfigurationStructure_description, v.Description)
+		case schemas.ManagedNotificationConfigurationStructure_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ManagedNotificationConfigurationStructure_name, v.Name)
+		}
+		return nil
+	})
 }
 
 // A notification-focused representation of an event. They contain semantic
@@ -568,6 +1103,117 @@ type ManagedNotificationEvent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ManagedNotificationEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedNotificationEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedNotificationEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationEventType != "" {
+		s.WriteString(schemas.ManagedNotificationEvent_aggregationEventType, string(v.AggregationEventType))
+	}
+	if v.AggregationSummary != nil {
+		s.WriteStruct(schemas.ManagedNotificationEvent_aggregationSummary)
+		v.AggregationSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ManagedNotificationEvent_endTime, *v.EndTime)
+	}
+	if v.EventStatus != "" {
+		s.WriteString(schemas.ManagedNotificationEvent_eventStatus, string(v.EventStatus))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ManagedNotificationEvent_id, *v.Id)
+	}
+	if v.MessageComponents != nil {
+		s.WriteStruct(schemas.ManagedNotificationEvent_messageComponents)
+		v.MessageComponents.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NotificationType != "" {
+		s.WriteString(schemas.ManagedNotificationEvent_notificationType, string(v.NotificationType))
+	}
+	if v.OrganizationalUnitId != nil {
+		s.WriteString(schemas.ManagedNotificationEvent_organizationalUnitId, *v.OrganizationalUnitId)
+	}
+	if v.SchemaVersion != "" {
+		s.WriteString(schemas.ManagedNotificationEvent_schemaVersion, string(v.SchemaVersion))
+	}
+	if v.SourceEventDetailUrl != nil {
+		s.WriteString(schemas.ManagedNotificationEvent_sourceEventDetailUrl, *v.SourceEventDetailUrl)
+	}
+	if v.SourceEventDetailUrlDisplayText != nil {
+		s.WriteString(schemas.ManagedNotificationEvent_sourceEventDetailUrlDisplayText, *v.SourceEventDetailUrlDisplayText)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ManagedNotificationEvent_startTime, *v.StartTime)
+	}
+	serializeTextParts(s, schemas.ManagedNotificationEvent_textParts, v.TextParts)
+}
+func (v *ManagedNotificationEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedNotificationEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedNotificationEvent_aggregationEventType:
+			var ev string
+			if err := d.ReadString(schemas.ManagedNotificationEvent_aggregationEventType, &ev); err != nil {
+				return err
+			}
+			v.AggregationEventType = AggregationEventType(ev)
+			return nil
+		case schemas.ManagedNotificationEvent_aggregationSummary:
+			v.AggregationSummary = &AggregationSummary{}
+			return v.AggregationSummary.Deserialize(d)
+		case schemas.ManagedNotificationEvent_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.ManagedNotificationEvent_endTime, v.EndTime)
+		case schemas.ManagedNotificationEvent_eventStatus:
+			var ev string
+			if err := d.ReadString(schemas.ManagedNotificationEvent_eventStatus, &ev); err != nil {
+				return err
+			}
+			v.EventStatus = EventStatus(ev)
+			return nil
+		case schemas.ManagedNotificationEvent_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ManagedNotificationEvent_id, v.Id)
+		case schemas.ManagedNotificationEvent_messageComponents:
+			v.MessageComponents = &MessageComponents{}
+			return v.MessageComponents.Deserialize(d)
+		case schemas.ManagedNotificationEvent_notificationType:
+			var ev string
+			if err := d.ReadString(schemas.ManagedNotificationEvent_notificationType, &ev); err != nil {
+				return err
+			}
+			v.NotificationType = NotificationType(ev)
+			return nil
+		case schemas.ManagedNotificationEvent_organizationalUnitId:
+			v.OrganizationalUnitId = new(string)
+			return d.ReadString(schemas.ManagedNotificationEvent_organizationalUnitId, v.OrganizationalUnitId)
+		case schemas.ManagedNotificationEvent_schemaVersion:
+			var ev string
+			if err := d.ReadString(schemas.ManagedNotificationEvent_schemaVersion, &ev); err != nil {
+				return err
+			}
+			v.SchemaVersion = SchemaVersion(ev)
+			return nil
+		case schemas.ManagedNotificationEvent_sourceEventDetailUrl:
+			v.SourceEventDetailUrl = new(string)
+			return d.ReadString(schemas.ManagedNotificationEvent_sourceEventDetailUrl, v.SourceEventDetailUrl)
+		case schemas.ManagedNotificationEvent_sourceEventDetailUrlDisplayText:
+			v.SourceEventDetailUrlDisplayText = new(string)
+			return d.ReadString(schemas.ManagedNotificationEvent_sourceEventDetailUrlDisplayText, v.SourceEventDetailUrlDisplayText)
+		case schemas.ManagedNotificationEvent_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ManagedNotificationEvent_startTime, v.StartTime)
+		case schemas.ManagedNotificationEvent_textParts:
+			return deserializeTextParts(d, schemas.ManagedNotificationEvent_textParts, &v.TextParts)
+		}
+		return nil
+	})
+}
+
 // Describes an overview and metadata for a ManagedNotificationEvent.
 type ManagedNotificationEventOverview struct {
 
@@ -625,6 +1271,81 @@ type ManagedNotificationEventOverview struct {
 	OrganizationalUnitId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ManagedNotificationEventOverview) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedNotificationEventOverview)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedNotificationEventOverview) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAggregatedNotificationRegions(s, schemas.ManagedNotificationEventOverview_aggregatedNotificationRegions, v.AggregatedNotificationRegions)
+	if v.AggregationEventType != "" {
+		s.WriteString(schemas.ManagedNotificationEventOverview_aggregationEventType, string(v.AggregationEventType))
+	}
+	if v.AggregationSummary != nil {
+		s.WriteStruct(schemas.ManagedNotificationEventOverview_aggregationSummary)
+		v.AggregationSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.ManagedNotificationEventOverview_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ManagedNotificationEventOverview_creationTime, *v.CreationTime)
+	}
+	if v.ManagedNotificationConfigurationArn != nil {
+		s.WriteString(schemas.ManagedNotificationEventOverview_managedNotificationConfigurationArn, *v.ManagedNotificationConfigurationArn)
+	}
+	if v.NotificationEvent != nil {
+		s.WriteStruct(schemas.ManagedNotificationEventOverview_notificationEvent)
+		v.NotificationEvent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OrganizationalUnitId != nil {
+		s.WriteString(schemas.ManagedNotificationEventOverview_organizationalUnitId, *v.OrganizationalUnitId)
+	}
+	if v.RelatedAccount != nil {
+		s.WriteString(schemas.ManagedNotificationEventOverview_relatedAccount, *v.RelatedAccount)
+	}
+}
+func (v *ManagedNotificationEventOverview) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedNotificationEventOverview, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedNotificationEventOverview_aggregatedNotificationRegions:
+			return deserializeAggregatedNotificationRegions(d, schemas.ManagedNotificationEventOverview_aggregatedNotificationRegions, &v.AggregatedNotificationRegions)
+		case schemas.ManagedNotificationEventOverview_aggregationEventType:
+			var ev string
+			if err := d.ReadString(schemas.ManagedNotificationEventOverview_aggregationEventType, &ev); err != nil {
+				return err
+			}
+			v.AggregationEventType = AggregationEventType(ev)
+			return nil
+		case schemas.ManagedNotificationEventOverview_aggregationSummary:
+			v.AggregationSummary = &AggregationSummary{}
+			return v.AggregationSummary.Deserialize(d)
+		case schemas.ManagedNotificationEventOverview_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ManagedNotificationEventOverview_arn, v.Arn)
+		case schemas.ManagedNotificationEventOverview_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ManagedNotificationEventOverview_creationTime, v.CreationTime)
+		case schemas.ManagedNotificationEventOverview_managedNotificationConfigurationArn:
+			v.ManagedNotificationConfigurationArn = new(string)
+			return d.ReadString(schemas.ManagedNotificationEventOverview_managedNotificationConfigurationArn, v.ManagedNotificationConfigurationArn)
+		case schemas.ManagedNotificationEventOverview_notificationEvent:
+			v.NotificationEvent = &ManagedNotificationEventSummary{}
+			return v.NotificationEvent.Deserialize(d)
+		case schemas.ManagedNotificationEventOverview_organizationalUnitId:
+			v.OrganizationalUnitId = new(string)
+			return d.ReadString(schemas.ManagedNotificationEventOverview_organizationalUnitId, v.OrganizationalUnitId)
+		case schemas.ManagedNotificationEventOverview_relatedAccount:
+			v.RelatedAccount = new(string)
+			return d.ReadString(schemas.ManagedNotificationEventOverview_relatedAccount, v.RelatedAccount)
+		}
+		return nil
+	})
 }
 
 // A short summary of a ManagedNotificationEvent . This is only used when listing
@@ -691,6 +1412,68 @@ type ManagedNotificationEventSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ManagedNotificationEventSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedNotificationEventSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedNotificationEventSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventStatus != "" {
+		s.WriteString(schemas.ManagedNotificationEventSummary_eventStatus, string(v.EventStatus))
+	}
+	if v.MessageComponents != nil {
+		s.WriteStruct(schemas.ManagedNotificationEventSummary_messageComponents)
+		v.MessageComponents.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NotificationType != "" {
+		s.WriteString(schemas.ManagedNotificationEventSummary_notificationType, string(v.NotificationType))
+	}
+	if v.SchemaVersion != "" {
+		s.WriteString(schemas.ManagedNotificationEventSummary_schemaVersion, string(v.SchemaVersion))
+	}
+	if v.SourceEventMetadata != nil {
+		s.WriteStruct(schemas.ManagedNotificationEventSummary_sourceEventMetadata)
+		v.SourceEventMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ManagedNotificationEventSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedNotificationEventSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedNotificationEventSummary_eventStatus:
+			var ev string
+			if err := d.ReadString(schemas.ManagedNotificationEventSummary_eventStatus, &ev); err != nil {
+				return err
+			}
+			v.EventStatus = EventStatus(ev)
+			return nil
+		case schemas.ManagedNotificationEventSummary_messageComponents:
+			v.MessageComponents = &MessageComponentsSummary{}
+			return v.MessageComponents.Deserialize(d)
+		case schemas.ManagedNotificationEventSummary_notificationType:
+			var ev string
+			if err := d.ReadString(schemas.ManagedNotificationEventSummary_notificationType, &ev); err != nil {
+				return err
+			}
+			v.NotificationType = NotificationType(ev)
+			return nil
+		case schemas.ManagedNotificationEventSummary_schemaVersion:
+			var ev string
+			if err := d.ReadString(schemas.ManagedNotificationEventSummary_schemaVersion, &ev); err != nil {
+				return err
+			}
+			v.SchemaVersion = SchemaVersion(ev)
+			return nil
+		case schemas.ManagedNotificationEventSummary_sourceEventMetadata:
+			v.SourceEventMetadata = &ManagedSourceEventMetadataSummary{}
+			return v.SourceEventMetadata.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A short summary and metadata for a managed notification event.
 type ManagedSourceEventMetadataSummary struct {
 
@@ -714,6 +1497,40 @@ type ManagedSourceEventMetadataSummary struct {
 	EventOriginRegion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ManagedSourceEventMetadataSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedSourceEventMetadataSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedSourceEventMetadataSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventOriginRegion != nil {
+		s.WriteString(schemas.ManagedSourceEventMetadataSummary_eventOriginRegion, *v.EventOriginRegion)
+	}
+	if v.EventType != nil {
+		s.WriteString(schemas.ManagedSourceEventMetadataSummary_eventType, *v.EventType)
+	}
+	if v.Source != nil {
+		s.WriteString(schemas.ManagedSourceEventMetadataSummary_source, *v.Source)
+	}
+}
+func (v *ManagedSourceEventMetadataSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedSourceEventMetadataSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedSourceEventMetadataSummary_eventOriginRegion:
+			v.EventOriginRegion = new(string)
+			return d.ReadString(schemas.ManagedSourceEventMetadataSummary_eventOriginRegion, v.EventOriginRegion)
+		case schemas.ManagedSourceEventMetadataSummary_eventType:
+			v.EventType = new(string)
+			return d.ReadString(schemas.ManagedSourceEventMetadataSummary_eventType, v.EventType)
+		case schemas.ManagedSourceEventMetadataSummary_source:
+			v.Source = new(string)
+			return d.ReadString(schemas.ManagedSourceEventMetadataSummary_source, v.Source)
+		}
+		return nil
+	})
 }
 
 // Describes a media element.
@@ -740,6 +1557,50 @@ type MediaElement struct {
 	Url *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MediaElement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MediaElement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MediaElement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Caption != nil {
+		s.WriteString(schemas.MediaElement_caption, *v.Caption)
+	}
+	if v.MediaId != nil {
+		s.WriteString(schemas.MediaElement_mediaId, *v.MediaId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.MediaElement_type, string(v.Type))
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.MediaElement_url, *v.Url)
+	}
+}
+func (v *MediaElement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MediaElement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MediaElement_caption:
+			v.Caption = new(string)
+			return d.ReadString(schemas.MediaElement_caption, v.Caption)
+		case schemas.MediaElement_mediaId:
+			v.MediaId = new(string)
+			return d.ReadString(schemas.MediaElement_mediaId, v.MediaId)
+		case schemas.MediaElement_type:
+			var ev string
+			if err := d.ReadString(schemas.MediaElement_type, &ev); err != nil {
+				return err
+			}
+			v.Type = MediaElementType(ev)
+			return nil
+		case schemas.MediaElement_url:
+			v.Url = new(string)
+			return d.ReadString(schemas.MediaElement_url, v.Url)
+		}
+		return nil
+	})
 }
 
 // Contains information about a member account.
@@ -772,6 +1633,56 @@ type MemberAccount struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MemberAccount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MemberAccount)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MemberAccount) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.MemberAccount_accountId, *v.AccountId)
+	}
+	if v.NotificationConfigurationArn != nil {
+		s.WriteString(schemas.MemberAccount_notificationConfigurationArn, *v.NotificationConfigurationArn)
+	}
+	if v.OrganizationalUnitId != nil {
+		s.WriteString(schemas.MemberAccount_organizationalUnitId, *v.OrganizationalUnitId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.MemberAccount_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.MemberAccount_statusReason, *v.StatusReason)
+	}
+}
+func (v *MemberAccount) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MemberAccount, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MemberAccount_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.MemberAccount_accountId, v.AccountId)
+		case schemas.MemberAccount_notificationConfigurationArn:
+			v.NotificationConfigurationArn = new(string)
+			return d.ReadString(schemas.MemberAccount_notificationConfigurationArn, v.NotificationConfigurationArn)
+		case schemas.MemberAccount_organizationalUnitId:
+			v.OrganizationalUnitId = new(string)
+			return d.ReadString(schemas.MemberAccount_organizationalUnitId, v.OrganizationalUnitId)
+		case schemas.MemberAccount_status:
+			var ev string
+			if err := d.ReadString(schemas.MemberAccount_status, &ev); err != nil {
+				return err
+			}
+			v.Status = MemberAccountNotificationConfigurationStatus(ev)
+			return nil
+		case schemas.MemberAccount_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.MemberAccount_statusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
+
 // Describes the components of a notification message.
 type MessageComponents struct {
 
@@ -795,6 +1706,43 @@ type MessageComponents struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MessageComponents) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MessageComponents)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MessageComponents) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompleteDescription != nil {
+		s.WriteString(schemas.MessageComponents_completeDescription, *v.CompleteDescription)
+	}
+	serializeDimensions(s, schemas.MessageComponents_dimensions, v.Dimensions)
+	if v.Headline != nil {
+		s.WriteString(schemas.MessageComponents_headline, *v.Headline)
+	}
+	if v.ParagraphSummary != nil {
+		s.WriteString(schemas.MessageComponents_paragraphSummary, *v.ParagraphSummary)
+	}
+}
+func (v *MessageComponents) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MessageComponents, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MessageComponents_completeDescription:
+			v.CompleteDescription = new(string)
+			return d.ReadString(schemas.MessageComponents_completeDescription, v.CompleteDescription)
+		case schemas.MessageComponents_dimensions:
+			return deserializeDimensions(d, schemas.MessageComponents_dimensions, &v.Dimensions)
+		case schemas.MessageComponents_headline:
+			v.Headline = new(string)
+			return d.ReadString(schemas.MessageComponents_headline, v.Headline)
+		case schemas.MessageComponents_paragraphSummary:
+			v.ParagraphSummary = new(string)
+			return d.ReadString(schemas.MessageComponents_paragraphSummary, v.ParagraphSummary)
+		}
+		return nil
+	})
+}
+
 // Contains the headline message component.
 type MessageComponentsSummary struct {
 
@@ -804,6 +1752,28 @@ type MessageComponentsSummary struct {
 	Headline *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MessageComponentsSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MessageComponentsSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MessageComponentsSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Headline != nil {
+		s.WriteString(schemas.MessageComponentsSummary_headline, *v.Headline)
+	}
+}
+func (v *MessageComponentsSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MessageComponentsSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MessageComponentsSummary_headline:
+			v.Headline = new(string)
+			return d.ReadString(schemas.MessageComponentsSummary_headline, v.Headline)
+		}
+		return nil
+	})
 }
 
 // Contains the complete list of fields for a NotificationConfiguration.
@@ -856,6 +1826,76 @@ type NotificationConfigurationStructure struct {
 	Subtype NotificationConfigurationSubtype
 
 	noSmithyDocumentSerde
+}
+
+func (v *NotificationConfigurationStructure) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotificationConfigurationStructure)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotificationConfigurationStructure) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationDuration != "" {
+		s.WriteString(schemas.NotificationConfigurationStructure_aggregationDuration, string(v.AggregationDuration))
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.NotificationConfigurationStructure_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.NotificationConfigurationStructure_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.NotificationConfigurationStructure_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.NotificationConfigurationStructure_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.NotificationConfigurationStructure_status, string(v.Status))
+	}
+	if v.Subtype != "" {
+		s.WriteString(schemas.NotificationConfigurationStructure_subtype, string(v.Subtype))
+	}
+}
+func (v *NotificationConfigurationStructure) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotificationConfigurationStructure, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotificationConfigurationStructure_aggregationDuration:
+			var ev string
+			if err := d.ReadString(schemas.NotificationConfigurationStructure_aggregationDuration, &ev); err != nil {
+				return err
+			}
+			v.AggregationDuration = AggregationDuration(ev)
+			return nil
+		case schemas.NotificationConfigurationStructure_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.NotificationConfigurationStructure_arn, v.Arn)
+		case schemas.NotificationConfigurationStructure_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.NotificationConfigurationStructure_creationTime, v.CreationTime)
+		case schemas.NotificationConfigurationStructure_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.NotificationConfigurationStructure_description, v.Description)
+		case schemas.NotificationConfigurationStructure_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.NotificationConfigurationStructure_name, v.Name)
+		case schemas.NotificationConfigurationStructure_status:
+			var ev string
+			if err := d.ReadString(schemas.NotificationConfigurationStructure_status, &ev); err != nil {
+				return err
+			}
+			v.Status = NotificationConfigurationStatus(ev)
+			return nil
+		case schemas.NotificationConfigurationStructure_subtype:
+			var ev string
+			if err := d.ReadString(schemas.NotificationConfigurationStructure_subtype, &ev); err != nil {
+				return err
+			}
+			v.Subtype = NotificationConfigurationSubtype(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes a short summary of a NotificationEvent . This is only used when
@@ -918,6 +1958,84 @@ type NotificationEventOverview struct {
 	OrganizationalUnitId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NotificationEventOverview) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotificationEventOverview)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotificationEventOverview) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregateNotificationEventArn != nil {
+		s.WriteString(schemas.NotificationEventOverview_aggregateNotificationEventArn, *v.AggregateNotificationEventArn)
+	}
+	if v.AggregationEventType != "" {
+		s.WriteString(schemas.NotificationEventOverview_aggregationEventType, string(v.AggregationEventType))
+	}
+	if v.AggregationSummary != nil {
+		s.WriteStruct(schemas.NotificationEventOverview_aggregationSummary)
+		v.AggregationSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.NotificationEventOverview_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.NotificationEventOverview_creationTime, *v.CreationTime)
+	}
+	if v.NotificationConfigurationArn != nil {
+		s.WriteString(schemas.NotificationEventOverview_notificationConfigurationArn, *v.NotificationConfigurationArn)
+	}
+	if v.NotificationEvent != nil {
+		s.WriteStruct(schemas.NotificationEventOverview_notificationEvent)
+		v.NotificationEvent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OrganizationalUnitId != nil {
+		s.WriteString(schemas.NotificationEventOverview_organizationalUnitId, *v.OrganizationalUnitId)
+	}
+	if v.RelatedAccount != nil {
+		s.WriteString(schemas.NotificationEventOverview_relatedAccount, *v.RelatedAccount)
+	}
+}
+func (v *NotificationEventOverview) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotificationEventOverview, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotificationEventOverview_aggregateNotificationEventArn:
+			v.AggregateNotificationEventArn = new(string)
+			return d.ReadString(schemas.NotificationEventOverview_aggregateNotificationEventArn, v.AggregateNotificationEventArn)
+		case schemas.NotificationEventOverview_aggregationEventType:
+			var ev string
+			if err := d.ReadString(schemas.NotificationEventOverview_aggregationEventType, &ev); err != nil {
+				return err
+			}
+			v.AggregationEventType = AggregationEventType(ev)
+			return nil
+		case schemas.NotificationEventOverview_aggregationSummary:
+			v.AggregationSummary = &AggregationSummary{}
+			return v.AggregationSummary.Deserialize(d)
+		case schemas.NotificationEventOverview_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.NotificationEventOverview_arn, v.Arn)
+		case schemas.NotificationEventOverview_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.NotificationEventOverview_creationTime, v.CreationTime)
+		case schemas.NotificationEventOverview_notificationConfigurationArn:
+			v.NotificationConfigurationArn = new(string)
+			return d.ReadString(schemas.NotificationEventOverview_notificationConfigurationArn, v.NotificationConfigurationArn)
+		case schemas.NotificationEventOverview_notificationEvent:
+			v.NotificationEvent = &NotificationEventSummary{}
+			return v.NotificationEvent.Deserialize(d)
+		case schemas.NotificationEventOverview_organizationalUnitId:
+			v.OrganizationalUnitId = new(string)
+			return d.ReadString(schemas.NotificationEventOverview_organizationalUnitId, v.OrganizationalUnitId)
+		case schemas.NotificationEventOverview_relatedAccount:
+			v.RelatedAccount = new(string)
+			return d.ReadString(schemas.NotificationEventOverview_relatedAccount, v.RelatedAccount)
+		}
+		return nil
+	})
 }
 
 // A NotificationEvent is a notification-focused representation of an event. They
@@ -1040,6 +2158,134 @@ type NotificationEventSchema struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NotificationEventSchema) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotificationEventSchema)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotificationEventSchema) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregateNotificationEventArn != nil {
+		s.WriteString(schemas.NotificationEventSchema_aggregateNotificationEventArn, *v.AggregateNotificationEventArn)
+	}
+	if v.AggregationEventType != "" {
+		s.WriteString(schemas.NotificationEventSchema_aggregationEventType, string(v.AggregationEventType))
+	}
+	if v.AggregationSummary != nil {
+		s.WriteStruct(schemas.NotificationEventSchema_aggregationSummary)
+		v.AggregationSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.NotificationEventSchema_endTime, *v.EndTime)
+	}
+	if v.EventStatus != "" {
+		s.WriteString(schemas.NotificationEventSchema_eventStatus, string(v.EventStatus))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.NotificationEventSchema_id, *v.Id)
+	}
+	serializeMedia(s, schemas.NotificationEventSchema_media, v.Media)
+	if v.MessageComponents != nil {
+		s.WriteStruct(schemas.NotificationEventSchema_messageComponents)
+		v.MessageComponents.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NotificationType != "" {
+		s.WriteString(schemas.NotificationEventSchema_notificationType, string(v.NotificationType))
+	}
+	if v.OrganizationalUnitId != nil {
+		s.WriteString(schemas.NotificationEventSchema_organizationalUnitId, *v.OrganizationalUnitId)
+	}
+	if v.SchemaVersion != "" {
+		s.WriteString(schemas.NotificationEventSchema_schemaVersion, string(v.SchemaVersion))
+	}
+	if v.SourceEventDetailUrl != nil {
+		s.WriteString(schemas.NotificationEventSchema_sourceEventDetailUrl, *v.SourceEventDetailUrl)
+	}
+	if v.SourceEventDetailUrlDisplayText != nil {
+		s.WriteString(schemas.NotificationEventSchema_sourceEventDetailUrlDisplayText, *v.SourceEventDetailUrlDisplayText)
+	}
+	if v.SourceEventMetadata != nil {
+		s.WriteStruct(schemas.NotificationEventSchema_sourceEventMetadata)
+		v.SourceEventMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.NotificationEventSchema_startTime, *v.StartTime)
+	}
+	serializeTextParts(s, schemas.NotificationEventSchema_textParts, v.TextParts)
+}
+func (v *NotificationEventSchema) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotificationEventSchema, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotificationEventSchema_aggregateNotificationEventArn:
+			v.AggregateNotificationEventArn = new(string)
+			return d.ReadString(schemas.NotificationEventSchema_aggregateNotificationEventArn, v.AggregateNotificationEventArn)
+		case schemas.NotificationEventSchema_aggregationEventType:
+			var ev string
+			if err := d.ReadString(schemas.NotificationEventSchema_aggregationEventType, &ev); err != nil {
+				return err
+			}
+			v.AggregationEventType = AggregationEventType(ev)
+			return nil
+		case schemas.NotificationEventSchema_aggregationSummary:
+			v.AggregationSummary = &AggregationSummary{}
+			return v.AggregationSummary.Deserialize(d)
+		case schemas.NotificationEventSchema_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.NotificationEventSchema_endTime, v.EndTime)
+		case schemas.NotificationEventSchema_eventStatus:
+			var ev string
+			if err := d.ReadString(schemas.NotificationEventSchema_eventStatus, &ev); err != nil {
+				return err
+			}
+			v.EventStatus = EventStatus(ev)
+			return nil
+		case schemas.NotificationEventSchema_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.NotificationEventSchema_id, v.Id)
+		case schemas.NotificationEventSchema_media:
+			return deserializeMedia(d, schemas.NotificationEventSchema_media, &v.Media)
+		case schemas.NotificationEventSchema_messageComponents:
+			v.MessageComponents = &MessageComponents{}
+			return v.MessageComponents.Deserialize(d)
+		case schemas.NotificationEventSchema_notificationType:
+			var ev string
+			if err := d.ReadString(schemas.NotificationEventSchema_notificationType, &ev); err != nil {
+				return err
+			}
+			v.NotificationType = NotificationType(ev)
+			return nil
+		case schemas.NotificationEventSchema_organizationalUnitId:
+			v.OrganizationalUnitId = new(string)
+			return d.ReadString(schemas.NotificationEventSchema_organizationalUnitId, v.OrganizationalUnitId)
+		case schemas.NotificationEventSchema_schemaVersion:
+			var ev string
+			if err := d.ReadString(schemas.NotificationEventSchema_schemaVersion, &ev); err != nil {
+				return err
+			}
+			v.SchemaVersion = SchemaVersion(ev)
+			return nil
+		case schemas.NotificationEventSchema_sourceEventDetailUrl:
+			v.SourceEventDetailUrl = new(string)
+			return d.ReadString(schemas.NotificationEventSchema_sourceEventDetailUrl, v.SourceEventDetailUrl)
+		case schemas.NotificationEventSchema_sourceEventDetailUrlDisplayText:
+			v.SourceEventDetailUrlDisplayText = new(string)
+			return d.ReadString(schemas.NotificationEventSchema_sourceEventDetailUrlDisplayText, v.SourceEventDetailUrlDisplayText)
+		case schemas.NotificationEventSchema_sourceEventMetadata:
+			v.SourceEventMetadata = &SourceEventMetadata{}
+			return v.SourceEventMetadata.Deserialize(d)
+		case schemas.NotificationEventSchema_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.NotificationEventSchema_startTime, v.StartTime)
+		case schemas.NotificationEventSchema_textParts:
+			return deserializeTextParts(d, schemas.NotificationEventSchema_textParts, &v.TextParts)
+		}
+		return nil
+	})
+}
+
 // Describes a short summary and metadata for a NotificationEvent .
 type NotificationEventSummary struct {
 
@@ -1104,6 +2350,68 @@ type NotificationEventSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NotificationEventSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotificationEventSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotificationEventSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventStatus != "" {
+		s.WriteString(schemas.NotificationEventSummary_eventStatus, string(v.EventStatus))
+	}
+	if v.MessageComponents != nil {
+		s.WriteStruct(schemas.NotificationEventSummary_messageComponents)
+		v.MessageComponents.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NotificationType != "" {
+		s.WriteString(schemas.NotificationEventSummary_notificationType, string(v.NotificationType))
+	}
+	if v.SchemaVersion != "" {
+		s.WriteString(schemas.NotificationEventSummary_schemaVersion, string(v.SchemaVersion))
+	}
+	if v.SourceEventMetadata != nil {
+		s.WriteStruct(schemas.NotificationEventSummary_sourceEventMetadata)
+		v.SourceEventMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *NotificationEventSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotificationEventSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotificationEventSummary_eventStatus:
+			var ev string
+			if err := d.ReadString(schemas.NotificationEventSummary_eventStatus, &ev); err != nil {
+				return err
+			}
+			v.EventStatus = EventStatus(ev)
+			return nil
+		case schemas.NotificationEventSummary_messageComponents:
+			v.MessageComponents = &MessageComponentsSummary{}
+			return v.MessageComponents.Deserialize(d)
+		case schemas.NotificationEventSummary_notificationType:
+			var ev string
+			if err := d.ReadString(schemas.NotificationEventSummary_notificationType, &ev); err != nil {
+				return err
+			}
+			v.NotificationType = NotificationType(ev)
+			return nil
+		case schemas.NotificationEventSummary_schemaVersion:
+			var ev string
+			if err := d.ReadString(schemas.NotificationEventSummary_schemaVersion, &ev); err != nil {
+				return err
+			}
+			v.SchemaVersion = SchemaVersion(ev)
+			return nil
+		case schemas.NotificationEventSummary_sourceEventMetadata:
+			v.SourceEventMetadata = &SourceEventMetadataSummary{}
+			return v.SourceEventMetadata.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes an overview of a NotificationHub .
 //
 // A NotificationConfiguration is an account-level setting used to select the
@@ -1129,6 +2437,48 @@ type NotificationHubOverview struct {
 	LastActivationTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *NotificationHubOverview) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotificationHubOverview)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotificationHubOverview) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.NotificationHubOverview_creationTime, *v.CreationTime)
+	}
+	if v.LastActivationTime != nil {
+		s.WriteTime(schemas.NotificationHubOverview_lastActivationTime, *v.LastActivationTime)
+	}
+	if v.NotificationHubRegion != nil {
+		s.WriteString(schemas.NotificationHubOverview_notificationHubRegion, *v.NotificationHubRegion)
+	}
+	if v.StatusSummary != nil {
+		s.WriteStruct(schemas.NotificationHubOverview_statusSummary)
+		v.StatusSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *NotificationHubOverview) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotificationHubOverview, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotificationHubOverview_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.NotificationHubOverview_creationTime, v.CreationTime)
+		case schemas.NotificationHubOverview_lastActivationTime:
+			v.LastActivationTime = new(time.Time)
+			return d.ReadTime(schemas.NotificationHubOverview_lastActivationTime, v.LastActivationTime)
+		case schemas.NotificationHubOverview_notificationHubRegion:
+			v.NotificationHubRegion = new(string)
+			return d.ReadString(schemas.NotificationHubOverview_notificationHubRegion, v.NotificationHubRegion)
+		case schemas.NotificationHubOverview_statusSummary:
+			v.StatusSummary = &NotificationHubStatusSummary{}
+			return v.StatusSummary.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Provides additional information about the current NotificationHub status.
@@ -1164,6 +2514,38 @@ type NotificationHubStatusSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NotificationHubStatusSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotificationHubStatusSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotificationHubStatusSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Reason != nil {
+		s.WriteString(schemas.NotificationHubStatusSummary_reason, *v.Reason)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.NotificationHubStatusSummary_status, string(v.Status))
+	}
+}
+func (v *NotificationHubStatusSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotificationHubStatusSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotificationHubStatusSummary_reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.NotificationHubStatusSummary_reason, v.Reason)
+		case schemas.NotificationHubStatusSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.NotificationHubStatusSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = NotificationHubStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Orgs Service trust for User Notifications.
 type NotificationsAccessForOrganization struct {
 
@@ -1173,6 +2555,32 @@ type NotificationsAccessForOrganization struct {
 	AccessStatus AccessStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *NotificationsAccessForOrganization) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotificationsAccessForOrganization)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotificationsAccessForOrganization) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessStatus != "" {
+		s.WriteString(schemas.NotificationsAccessForOrganization_accessStatus, string(v.AccessStatus))
+	}
+}
+func (v *NotificationsAccessForOrganization) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotificationsAccessForOrganization, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotificationsAccessForOrganization_accessStatus:
+			var ev string
+			if err := d.ReadString(schemas.NotificationsAccessForOrganization_accessStatus, &ev); err != nil {
+				return err
+			}
+			v.AccessStatus = AccessStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A resource affected by or closely linked to an event.
@@ -1196,6 +2604,43 @@ type Resource struct {
 	Tags []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Resource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Resource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Resource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Resource_arn, *v.Arn)
+	}
+	if v.DetailUrl != nil {
+		s.WriteString(schemas.Resource_detailUrl, *v.DetailUrl)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Resource_id, *v.Id)
+	}
+	serializeTags(s, schemas.Resource_tags, v.Tags)
+}
+func (v *Resource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Resource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Resource_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Resource_arn, v.Arn)
+		case schemas.Resource_detailUrl:
+			v.DetailUrl = new(string)
+			return d.ReadString(schemas.Resource_detailUrl, v.DetailUrl)
+		case schemas.Resource_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Resource_id, v.Id)
+		case schemas.Resource_tags:
+			return deserializeTags(d, schemas.Resource_tags, &v.Tags)
+		}
+		return nil
+	})
 }
 
 // Describes the metadata for a source event.
@@ -1247,6 +2692,67 @@ type SourceEventMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SourceEventMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceEventMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceEventMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventOccurrenceTime != nil {
+		s.WriteTime(schemas.SourceEventMetadata_eventOccurrenceTime, *v.EventOccurrenceTime)
+	}
+	if v.EventOriginRegion != nil {
+		s.WriteString(schemas.SourceEventMetadata_eventOriginRegion, *v.EventOriginRegion)
+	}
+	if v.EventType != nil {
+		s.WriteString(schemas.SourceEventMetadata_eventType, *v.EventType)
+	}
+	if v.EventTypeVersion != nil {
+		s.WriteString(schemas.SourceEventMetadata_eventTypeVersion, *v.EventTypeVersion)
+	}
+	if v.RelatedAccount != nil {
+		s.WriteString(schemas.SourceEventMetadata_relatedAccount, *v.RelatedAccount)
+	}
+	serializeResources(s, schemas.SourceEventMetadata_relatedResources, v.RelatedResources)
+	if v.Source != nil {
+		s.WriteString(schemas.SourceEventMetadata_source, *v.Source)
+	}
+	if v.SourceEventId != nil {
+		s.WriteString(schemas.SourceEventMetadata_sourceEventId, *v.SourceEventId)
+	}
+}
+func (v *SourceEventMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceEventMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceEventMetadata_eventOccurrenceTime:
+			v.EventOccurrenceTime = new(time.Time)
+			return d.ReadTime(schemas.SourceEventMetadata_eventOccurrenceTime, v.EventOccurrenceTime)
+		case schemas.SourceEventMetadata_eventOriginRegion:
+			v.EventOriginRegion = new(string)
+			return d.ReadString(schemas.SourceEventMetadata_eventOriginRegion, v.EventOriginRegion)
+		case schemas.SourceEventMetadata_eventType:
+			v.EventType = new(string)
+			return d.ReadString(schemas.SourceEventMetadata_eventType, v.EventType)
+		case schemas.SourceEventMetadata_eventTypeVersion:
+			v.EventTypeVersion = new(string)
+			return d.ReadString(schemas.SourceEventMetadata_eventTypeVersion, v.EventTypeVersion)
+		case schemas.SourceEventMetadata_relatedAccount:
+			v.RelatedAccount = new(string)
+			return d.ReadString(schemas.SourceEventMetadata_relatedAccount, v.RelatedAccount)
+		case schemas.SourceEventMetadata_relatedResources:
+			return deserializeResources(d, schemas.SourceEventMetadata_relatedResources, &v.RelatedResources)
+		case schemas.SourceEventMetadata_source:
+			v.Source = new(string)
+			return d.ReadString(schemas.SourceEventMetadata_source, v.Source)
+		case schemas.SourceEventMetadata_sourceEventId:
+			v.SourceEventId = new(string)
+			return d.ReadString(schemas.SourceEventMetadata_sourceEventId, v.SourceEventId)
+		}
+		return nil
+	})
+}
+
 // Contains metadata about the event that caused the NotificationEvent . For other
 // specific values, see sourceEventMetadata .
 type SourceEventMetadataSummary struct {
@@ -1281,6 +2787,40 @@ type SourceEventMetadataSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SourceEventMetadataSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceEventMetadataSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceEventMetadataSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventOriginRegion != nil {
+		s.WriteString(schemas.SourceEventMetadataSummary_eventOriginRegion, *v.EventOriginRegion)
+	}
+	if v.EventType != nil {
+		s.WriteString(schemas.SourceEventMetadataSummary_eventType, *v.EventType)
+	}
+	if v.Source != nil {
+		s.WriteString(schemas.SourceEventMetadataSummary_source, *v.Source)
+	}
+}
+func (v *SourceEventMetadataSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceEventMetadataSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceEventMetadataSummary_eventOriginRegion:
+			v.EventOriginRegion = new(string)
+			return d.ReadString(schemas.SourceEventMetadataSummary_eventOriginRegion, v.EventOriginRegion)
+		case schemas.SourceEventMetadataSummary_eventType:
+			v.EventType = new(string)
+			return d.ReadString(schemas.SourceEventMetadataSummary_eventType, v.EventType)
+		case schemas.SourceEventMetadataSummary_source:
+			v.Source = new(string)
+			return d.ReadString(schemas.SourceEventMetadataSummary_source, v.Source)
+		}
+		return nil
+	})
+}
+
 // Provides detailed information about the dimensions used for event summarization
 // and aggregation.
 type SummarizationDimensionDetail struct {
@@ -1296,6 +2836,34 @@ type SummarizationDimensionDetail struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SummarizationDimensionDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SummarizationDimensionDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SummarizationDimensionDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.SummarizationDimensionDetail_name, *v.Name)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.SummarizationDimensionDetail_value, *v.Value)
+	}
+}
+func (v *SummarizationDimensionDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SummarizationDimensionDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SummarizationDimensionDetail_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SummarizationDimensionDetail_name, v.Name)
+		case schemas.SummarizationDimensionDetail_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.SummarizationDimensionDetail_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Provides an overview of how data is summarized across different dimensions.
@@ -1315,6 +2883,37 @@ type SummarizationDimensionOverview struct {
 	SampleValues []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SummarizationDimensionOverview) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SummarizationDimensionOverview)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SummarizationDimensionOverview) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteInt32(schemas.SummarizationDimensionOverview_count, *v.Count)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SummarizationDimensionOverview_name, *v.Name)
+	}
+	serializeSampleAggregationDimensionValues(s, schemas.SummarizationDimensionOverview_sampleValues, v.SampleValues)
+}
+func (v *SummarizationDimensionOverview) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SummarizationDimensionOverview, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SummarizationDimensionOverview_count:
+			v.Count = new(int32)
+			return d.ReadInt32(schemas.SummarizationDimensionOverview_count, v.Count)
+		case schemas.SummarizationDimensionOverview_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SummarizationDimensionOverview_name, v.Name)
+		case schemas.SummarizationDimensionOverview_sampleValues:
+			return deserializeSampleAggregationDimensionValues(d, schemas.SummarizationDimensionOverview_sampleValues, &v.SampleValues)
+		}
+		return nil
+	})
 }
 
 // Describes text information objects containing fields that determine how text
@@ -1342,6 +2941,47 @@ type TextPartValue struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TextPartValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TextPartValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TextPartValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayText != nil {
+		s.WriteString(schemas.TextPartValue_displayText, *v.DisplayText)
+	}
+	serializeTextByLocale(s, schemas.TextPartValue_textByLocale, v.TextByLocale)
+	if v.Type != "" {
+		s.WriteString(schemas.TextPartValue_type, string(v.Type))
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.TextPartValue_url, *v.Url)
+	}
+}
+func (v *TextPartValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TextPartValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TextPartValue_displayText:
+			v.DisplayText = new(string)
+			return d.ReadString(schemas.TextPartValue_displayText, v.DisplayText)
+		case schemas.TextPartValue_textByLocale:
+			return deserializeTextByLocale(d, schemas.TextPartValue_textByLocale, &v.TextByLocale)
+		case schemas.TextPartValue_type:
+			var ev string
+			if err := d.ReadString(schemas.TextPartValue_type, &ev); err != nil {
+				return err
+			}
+			v.Type = TextPartType(ev)
+			return nil
+		case schemas.TextPartValue_url:
+			v.Url = new(string)
+			return d.ReadString(schemas.TextPartValue_url, v.Url)
+		}
+		return nil
+	})
+}
+
 // Stores information about a field passed inside a request that resulted in an
 // exception.
 type ValidationExceptionField struct {
@@ -1357,6 +2997,34 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_name, *v.Name)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
+		case schemas.ValidationExceptionField_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_name, v.Name)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

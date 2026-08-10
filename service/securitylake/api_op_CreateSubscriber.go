@@ -4,7 +4,9 @@ package securitylake
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securitylake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securitylake/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,29 @@ type CreateSubscriberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSubscriberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSubscriberRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSubscriberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessTypeList(s, schemas.CreateSubscriberRequest_accessTypes, v.AccessTypes)
+	serializeLogSourceResourceList(s, schemas.CreateSubscriberRequest_sources, v.Sources)
+	if v.SubscriberDescription != nil {
+		s.WriteString(schemas.CreateSubscriberRequest_subscriberDescription, *v.SubscriberDescription)
+	}
+	if v.SubscriberIdentity != nil {
+		s.WriteStruct(schemas.CreateSubscriberRequest_subscriberIdentity)
+		v.SubscriberIdentity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SubscriberName != nil {
+		s.WriteString(schemas.CreateSubscriberRequest_subscriberName, *v.SubscriberName)
+	}
+	serializeTagList(s, schemas.CreateSubscriberRequest_tags, v.Tags)
+}
+
 type CreateSubscriberOutput struct {
 
 	// Retrieve information about the subscriber created using the CreateSubscriber
@@ -71,13 +96,34 @@ type CreateSubscriberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSubscriberOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSubscriberResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSubscriberOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Subscriber != nil {
+		s.WriteStruct(schemas.CreateSubscriberResponse_subscriber)
+		v.Subscriber.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateSubscriberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSubscriberResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSubscriberResponse_subscriber:
+			v.Subscriber = &types.SubscriberResource{}
+			return v.Subscriber.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSubscriberMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSubscriber{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSubscriber, schemas.CreateSubscriberRequest, schemas.CreateSubscriberResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSubscriber{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSubscriber, schemas.CreateSubscriberRequest, schemas.CreateSubscriberResponse), output: &CreateSubscriberOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

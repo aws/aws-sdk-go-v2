@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,28 @@ type CancelEnvironmentDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelEnvironmentDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelEnvironmentDeploymentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelEnvironmentDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.CancelEnvironmentDeploymentInput_environmentName, *v.EnvironmentName)
+	}
+}
+func (v *CancelEnvironmentDeploymentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelEnvironmentDeploymentInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelEnvironmentDeploymentInput_environmentName:
+			v.EnvironmentName = new(string)
+			return d.ReadString(schemas.CancelEnvironmentDeploymentInput_environmentName, v.EnvironmentName)
+		}
+		return nil
+	})
+}
+
 type CancelEnvironmentDeploymentOutput struct {
 
 	// The environment summary data that's returned by Proton.
@@ -63,13 +87,34 @@ type CancelEnvironmentDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelEnvironmentDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelEnvironmentDeploymentOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelEnvironmentDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Environment != nil {
+		s.WriteStruct(schemas.CancelEnvironmentDeploymentOutput_environment)
+		v.Environment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CancelEnvironmentDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelEnvironmentDeploymentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelEnvironmentDeploymentOutput_environment:
+			v.Environment = &types.Environment{}
+			return v.Environment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelEnvironmentDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCancelEnvironmentDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelEnvironmentDeployment, schemas.CancelEnvironmentDeploymentInput, schemas.CancelEnvironmentDeploymentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCancelEnvironmentDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelEnvironmentDeployment, schemas.CancelEnvironmentDeploymentInput, schemas.CancelEnvironmentDeploymentOutput), output: &CancelEnvironmentDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package machinelearning
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DescribeTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTagsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceId != nil {
+		s.WriteString(schemas.DescribeTagsInput_ResourceId, *v.ResourceId)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.DescribeTagsInput_ResourceType, string(v.ResourceType))
+	}
+}
+
 // Amazon ML returns the following elements.
 type DescribeTagsOutput struct {
 
@@ -57,13 +74,45 @@ type DescribeTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTagsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceId != nil {
+		s.WriteString(schemas.DescribeTagsOutput_ResourceId, *v.ResourceId)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.DescribeTagsOutput_ResourceType, string(v.ResourceType))
+	}
+	serializeTagList(s, schemas.DescribeTagsOutput_Tags, v.Tags)
+}
+func (v *DescribeTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTagsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTagsOutput_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.DescribeTagsOutput_ResourceId, v.ResourceId)
+		case schemas.DescribeTagsOutput_ResourceType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeTagsOutput_ResourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = types.TaggableResourceType(ev)
+			return nil
+		case schemas.DescribeTagsOutput_Tags:
+			return deserializeTagList(d, schemas.DescribeTagsOutput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTags, schemas.DescribeTagsInput, schemas.DescribeTagsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTags, schemas.DescribeTagsInput, schemas.DescribeTagsOutput), output: &DescribeTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

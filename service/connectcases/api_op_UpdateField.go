@@ -4,7 +4,9 @@ package connectcases
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,49 @@ type UpdateFieldInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFieldInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFieldRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFieldInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFieldAttributes(s, schemas.UpdateFieldRequest_attributes, v.Attributes)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateFieldRequest_description, *v.Description)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.UpdateFieldRequest_domainId, *v.DomainId)
+	}
+	if v.FieldId != nil {
+		s.WriteString(schemas.UpdateFieldRequest_fieldId, *v.FieldId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateFieldRequest_name, *v.Name)
+	}
+}
+func (v *UpdateFieldInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFieldRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFieldRequest_attributes:
+			return deserializeFieldAttributes(d, schemas.UpdateFieldRequest_attributes, &v.Attributes)
+		case schemas.UpdateFieldRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateFieldRequest_description, v.Description)
+		case schemas.UpdateFieldRequest_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.UpdateFieldRequest_domainId, v.DomainId)
+		case schemas.UpdateFieldRequest_fieldId:
+			v.FieldId = new(string)
+			return d.ReadString(schemas.UpdateFieldRequest_fieldId, v.FieldId)
+		case schemas.UpdateFieldRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateFieldRequest_name, v.Name)
+		}
+		return nil
+	})
+}
+
 type UpdateFieldOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +100,26 @@ type UpdateFieldOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFieldOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFieldResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFieldOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateFieldOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFieldResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFieldMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateField{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateField, schemas.UpdateFieldRequest, schemas.UpdateFieldResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateField{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateField, schemas.UpdateFieldRequest, schemas.UpdateFieldResponse), output: &UpdateFieldOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

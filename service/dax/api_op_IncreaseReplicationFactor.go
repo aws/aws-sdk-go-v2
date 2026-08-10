@@ -4,7 +4,9 @@ package dax
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/dax/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dax/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,20 @@ type IncreaseReplicationFactorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IncreaseReplicationFactorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IncreaseReplicationFactorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IncreaseReplicationFactorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAvailabilityZoneList(s, schemas.IncreaseReplicationFactorRequest_AvailabilityZones, v.AvailabilityZones)
+	if v.ClusterName != nil {
+		s.WriteString(schemas.IncreaseReplicationFactorRequest_ClusterName, *v.ClusterName)
+	}
+	s.WriteInt32(schemas.IncreaseReplicationFactorRequest_NewReplicationFactor, v.NewReplicationFactor)
+}
+
 type IncreaseReplicationFactorOutput struct {
 
 	// A description of the DAX cluster, with its new replication factor.
@@ -55,13 +71,34 @@ type IncreaseReplicationFactorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IncreaseReplicationFactorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IncreaseReplicationFactorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IncreaseReplicationFactorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteStruct(schemas.IncreaseReplicationFactorResponse_Cluster)
+		v.Cluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *IncreaseReplicationFactorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IncreaseReplicationFactorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IncreaseReplicationFactorResponse_Cluster:
+			v.Cluster = &types.Cluster{}
+			return v.Cluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationIncreaseReplicationFactorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpIncreaseReplicationFactor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.IncreaseReplicationFactor, schemas.IncreaseReplicationFactorRequest, schemas.IncreaseReplicationFactorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpIncreaseReplicationFactor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.IncreaseReplicationFactor, schemas.IncreaseReplicationFactorRequest, schemas.IncreaseReplicationFactorResponse), output: &IncreaseReplicationFactorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

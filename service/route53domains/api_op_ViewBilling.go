@@ -5,7 +5,9 @@ package route53domains
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -60,6 +62,27 @@ type ViewBillingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ViewBillingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ViewBillingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ViewBillingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.End != nil {
+		s.WriteTime(schemas.ViewBillingRequest_End, *v.End)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ViewBillingRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ViewBillingRequest_MaxItems, *v.MaxItems)
+	}
+	if v.Start != nil {
+		s.WriteTime(schemas.ViewBillingRequest_Start, *v.Start)
+	}
+}
+
 // The ViewBilling response includes the following elements.
 type ViewBillingOutput struct {
 
@@ -77,13 +100,35 @@ type ViewBillingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ViewBillingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ViewBillingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ViewBillingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBillingRecords(s, schemas.ViewBillingResponse_BillingRecords, v.BillingRecords)
+	if v.NextPageMarker != nil {
+		s.WriteString(schemas.ViewBillingResponse_NextPageMarker, *v.NextPageMarker)
+	}
+}
+func (v *ViewBillingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ViewBillingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ViewBillingResponse_BillingRecords:
+			return deserializeBillingRecords(d, schemas.ViewBillingResponse_BillingRecords, &v.BillingRecords)
+		case schemas.ViewBillingResponse_NextPageMarker:
+			v.NextPageMarker = new(string)
+			return d.ReadString(schemas.ViewBillingResponse_NextPageMarker, v.NextPageMarker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationViewBillingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpViewBilling{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ViewBilling, schemas.ViewBillingRequest, schemas.ViewBillingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpViewBilling{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ViewBilling, schemas.ViewBillingRequest, schemas.ViewBillingResponse), output: &ViewBillingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

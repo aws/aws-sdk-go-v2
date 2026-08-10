@@ -4,7 +4,9 @@ package machinelearning
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type CreateRealtimeEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRealtimeEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRealtimeEndpointInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRealtimeEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MLModelId != nil {
+		s.WriteString(schemas.CreateRealtimeEndpointInput_MLModelId, *v.MLModelId)
+	}
+}
+
 // Represents the output of an CreateRealtimeEndpoint operation.
 //
 // The result contains the MLModelId and the endpoint information for the MLModel .
@@ -57,13 +71,40 @@ type CreateRealtimeEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRealtimeEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRealtimeEndpointOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRealtimeEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MLModelId != nil {
+		s.WriteString(schemas.CreateRealtimeEndpointOutput_MLModelId, *v.MLModelId)
+	}
+	if v.RealtimeEndpointInfo != nil {
+		s.WriteStruct(schemas.CreateRealtimeEndpointOutput_RealtimeEndpointInfo)
+		v.RealtimeEndpointInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateRealtimeEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRealtimeEndpointOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRealtimeEndpointOutput_MLModelId:
+			v.MLModelId = new(string)
+			return d.ReadString(schemas.CreateRealtimeEndpointOutput_MLModelId, v.MLModelId)
+		case schemas.CreateRealtimeEndpointOutput_RealtimeEndpointInfo:
+			v.RealtimeEndpointInfo = &types.RealtimeEndpointInfo{}
+			return v.RealtimeEndpointInfo.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRealtimeEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateRealtimeEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRealtimeEndpoint, schemas.CreateRealtimeEndpointInput, schemas.CreateRealtimeEndpointOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateRealtimeEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRealtimeEndpoint, schemas.CreateRealtimeEndpointInput, schemas.CreateRealtimeEndpointOutput), output: &CreateRealtimeEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

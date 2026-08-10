@@ -4,7 +4,9 @@ package codecommit
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type GetCommentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCommentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCommentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCommentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommentId != nil {
+		s.WriteString(schemas.GetCommentInput_commentId, *v.CommentId)
+	}
+}
+
 type GetCommentOutput struct {
 
 	// The contents of the comment.
@@ -50,13 +64,34 @@ type GetCommentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCommentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCommentOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCommentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Comment != nil {
+		s.WriteStruct(schemas.GetCommentOutput_comment)
+		v.Comment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCommentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCommentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCommentOutput_comment:
+			v.Comment = &types.Comment{}
+			return v.Comment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCommentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetComment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComment, schemas.GetCommentInput, schemas.GetCommentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetComment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComment, schemas.GetCommentInput, schemas.GetCommentOutput), output: &GetCommentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

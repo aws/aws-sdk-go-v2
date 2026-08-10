@@ -4,6 +4,8 @@ package notifications
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/notifications/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type AssociateOrganizationalUnitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateOrganizationalUnitInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateOrganizationalUnitRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateOrganizationalUnitInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotificationConfigurationArn != nil {
+		s.WriteString(schemas.AssociateOrganizationalUnitRequest_notificationConfigurationArn, *v.NotificationConfigurationArn)
+	}
+	if v.OrganizationalUnitId != nil {
+		s.WriteString(schemas.AssociateOrganizationalUnitRequest_organizationalUnitId, *v.OrganizationalUnitId)
+	}
+}
+
 type AssociateOrganizationalUnitOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +63,26 @@ type AssociateOrganizationalUnitOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateOrganizationalUnitOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateOrganizationalUnitResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateOrganizationalUnitOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateOrganizationalUnitOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateOrganizationalUnitResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateOrganizationalUnitMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateOrganizationalUnit{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateOrganizationalUnit, schemas.AssociateOrganizationalUnitRequest, schemas.AssociateOrganizationalUnitResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateOrganizationalUnit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateOrganizationalUnit, schemas.AssociateOrganizationalUnitRequest, schemas.AssociateOrganizationalUnitResponse), output: &AssociateOrganizationalUnitOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

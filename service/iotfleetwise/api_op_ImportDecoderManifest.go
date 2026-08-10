@@ -4,7 +4,9 @@ package iotfleetwise
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,31 @@ type ImportDecoderManifestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportDecoderManifestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportDecoderManifestRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportDecoderManifestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.ImportDecoderManifestRequest_name, *v.Name)
+	}
+	serializeNetworkFileDefinitions(s, schemas.ImportDecoderManifestRequest_networkFileDefinitions, v.NetworkFileDefinitions)
+}
+func (v *ImportDecoderManifestInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportDecoderManifestRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportDecoderManifestRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ImportDecoderManifestRequest_name, v.Name)
+		case schemas.ImportDecoderManifestRequest_networkFileDefinitions:
+			return deserializeNetworkFileDefinitions(d, schemas.ImportDecoderManifestRequest_networkFileDefinitions, &v.NetworkFileDefinitions)
+		}
+		return nil
+	})
+}
+
 type ImportDecoderManifestOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the decoder manifest that was imported.
@@ -62,13 +89,38 @@ type ImportDecoderManifestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportDecoderManifestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportDecoderManifestResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportDecoderManifestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ImportDecoderManifestResponse_arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ImportDecoderManifestResponse_name, *v.Name)
+	}
+}
+func (v *ImportDecoderManifestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportDecoderManifestResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportDecoderManifestResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ImportDecoderManifestResponse_arn, v.Arn)
+		case schemas.ImportDecoderManifestResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ImportDecoderManifestResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportDecoderManifestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpImportDecoderManifest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportDecoderManifest, schemas.ImportDecoderManifestRequest, schemas.ImportDecoderManifestResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpImportDecoderManifest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportDecoderManifest, schemas.ImportDecoderManifestRequest, schemas.ImportDecoderManifestResponse), output: &ImportDecoderManifestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

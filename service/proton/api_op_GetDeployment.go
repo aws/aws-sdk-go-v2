@@ -4,7 +4,9 @@ package proton
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,30 @@ type GetDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeploymentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComponentName != nil {
+		s.WriteString(schemas.GetDeploymentInput_componentName, *v.ComponentName)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.GetDeploymentInput_environmentName, *v.EnvironmentName)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetDeploymentInput_id, *v.Id)
+	}
+	if v.ServiceInstanceName != nil {
+		s.WriteString(schemas.GetDeploymentInput_serviceInstanceName, *v.ServiceInstanceName)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.GetDeploymentInput_serviceName, *v.ServiceName)
+	}
+}
+
 type GetDeploymentOutput struct {
 
 	// The detailed data of the requested deployment.
@@ -60,13 +86,34 @@ type GetDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeploymentOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Deployment != nil {
+		s.WriteStruct(schemas.GetDeploymentOutput_deployment)
+		v.Deployment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDeploymentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDeploymentOutput_deployment:
+			v.Deployment = &types.Deployment{}
+			return v.Deployment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeployment, schemas.GetDeploymentInput, schemas.GetDeploymentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeployment, schemas.GetDeploymentInput, schemas.GetDeploymentOutput), output: &GetDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

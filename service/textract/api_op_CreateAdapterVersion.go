@@ -5,7 +5,9 @@ package textract
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -84,6 +86,35 @@ type CreateAdapterVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAdapterVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAdapterVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAdapterVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdapterId != nil {
+		s.WriteString(schemas.CreateAdapterVersionRequest_AdapterId, *v.AdapterId)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateAdapterVersionRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DatasetConfig != nil {
+		s.WriteStruct(schemas.CreateAdapterVersionRequest_DatasetConfig)
+		v.DatasetConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KMSKeyId != nil {
+		s.WriteString(schemas.CreateAdapterVersionRequest_KMSKeyId, *v.KMSKeyId)
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.CreateAdapterVersionRequest_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateAdapterVersionRequest_Tags, v.Tags)
+}
+
 type CreateAdapterVersionOutput struct {
 
 	// A string containing the unique ID for the adapter that has received a new
@@ -99,13 +130,38 @@ type CreateAdapterVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAdapterVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAdapterVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAdapterVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdapterId != nil {
+		s.WriteString(schemas.CreateAdapterVersionResponse_AdapterId, *v.AdapterId)
+	}
+	if v.AdapterVersion != nil {
+		s.WriteString(schemas.CreateAdapterVersionResponse_AdapterVersion, *v.AdapterVersion)
+	}
+}
+func (v *CreateAdapterVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAdapterVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAdapterVersionResponse_AdapterId:
+			v.AdapterId = new(string)
+			return d.ReadString(schemas.CreateAdapterVersionResponse_AdapterId, v.AdapterId)
+		case schemas.CreateAdapterVersionResponse_AdapterVersion:
+			v.AdapterVersion = new(string)
+			return d.ReadString(schemas.CreateAdapterVersionResponse_AdapterVersion, v.AdapterVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAdapterVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAdapterVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAdapterVersion, schemas.CreateAdapterVersionRequest, schemas.CreateAdapterVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAdapterVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAdapterVersion, schemas.CreateAdapterVersionRequest, schemas.CreateAdapterVersionResponse), output: &CreateAdapterVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

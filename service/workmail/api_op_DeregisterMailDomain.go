@@ -4,6 +4,8 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DeregisterMailDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterMailDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterMailDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterMailDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DeregisterMailDomainRequest_DomainName, *v.DomainName)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.DeregisterMailDomainRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type DeregisterMailDomainOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +65,26 @@ type DeregisterMailDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterMailDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterMailDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterMailDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeregisterMailDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterMailDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterMailDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterMailDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterMailDomain, schemas.DeregisterMailDomainRequest, schemas.DeregisterMailDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeregisterMailDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterMailDomain, schemas.DeregisterMailDomainRequest, schemas.DeregisterMailDomainResponse), output: &DeregisterMailDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

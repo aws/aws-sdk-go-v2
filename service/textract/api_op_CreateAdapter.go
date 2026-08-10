@@ -5,7 +5,9 @@ package textract
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,29 @@ type CreateAdapterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAdapterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAdapterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAdapterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdapterName != nil {
+		s.WriteString(schemas.CreateAdapterRequest_AdapterName, *v.AdapterName)
+	}
+	if v.AutoUpdate != "" {
+		s.WriteString(schemas.CreateAdapterRequest_AutoUpdate, string(v.AutoUpdate))
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateAdapterRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateAdapterRequest_Description, *v.Description)
+	}
+	serializeFeatureTypes(s, schemas.CreateAdapterRequest_FeatureTypes, v.FeatureTypes)
+	serializeTagMap(s, schemas.CreateAdapterRequest_Tags, v.Tags)
+}
+
 type CreateAdapterOutput struct {
 
 	// A string containing the unique ID for the adapter that has been created.
@@ -71,13 +96,32 @@ type CreateAdapterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAdapterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAdapterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAdapterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdapterId != nil {
+		s.WriteString(schemas.CreateAdapterResponse_AdapterId, *v.AdapterId)
+	}
+}
+func (v *CreateAdapterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAdapterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAdapterResponse_AdapterId:
+			v.AdapterId = new(string)
+			return d.ReadString(schemas.CreateAdapterResponse_AdapterId, v.AdapterId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAdapterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAdapter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAdapter, schemas.CreateAdapterRequest, schemas.CreateAdapterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAdapter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAdapter, schemas.CreateAdapterRequest, schemas.CreateAdapterResponse), output: &CreateAdapterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

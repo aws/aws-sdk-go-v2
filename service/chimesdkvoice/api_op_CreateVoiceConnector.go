@@ -4,7 +4,9 @@ package chimesdkvoice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -82,6 +84,31 @@ type CreateVoiceConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVoiceConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVoiceConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVoiceConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsRegion != "" {
+		s.WriteString(schemas.CreateVoiceConnectorRequest_AwsRegion, string(v.AwsRegion))
+	}
+	if v.IntegrationType != "" {
+		s.WriteString(schemas.CreateVoiceConnectorRequest_IntegrationType, string(v.IntegrationType))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateVoiceConnectorRequest_Name, *v.Name)
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.CreateVoiceConnectorRequest_NetworkType, string(v.NetworkType))
+	}
+	if v.RequireEncryption != nil {
+		s.WriteBool(schemas.CreateVoiceConnectorRequest_RequireEncryption, *v.RequireEncryption)
+	}
+	serializeTagList(s, schemas.CreateVoiceConnectorRequest_Tags, v.Tags)
+}
+
 type CreateVoiceConnectorOutput struct {
 
 	// The details of the Voice Connector.
@@ -93,13 +120,34 @@ type CreateVoiceConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVoiceConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVoiceConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVoiceConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VoiceConnector != nil {
+		s.WriteStruct(schemas.CreateVoiceConnectorResponse_VoiceConnector)
+		v.VoiceConnector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateVoiceConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVoiceConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVoiceConnectorResponse_VoiceConnector:
+			v.VoiceConnector = &types.VoiceConnector{}
+			return v.VoiceConnector.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVoiceConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateVoiceConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVoiceConnector, schemas.CreateVoiceConnectorRequest, schemas.CreateVoiceConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateVoiceConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVoiceConnector, schemas.CreateVoiceConnectorRequest, schemas.CreateVoiceConnectorResponse), output: &CreateVoiceConnectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

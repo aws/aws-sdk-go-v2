@@ -4,7 +4,9 @@ package notifications
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/notifications/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/notifications/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type AssociateManagedNotificationAccountContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateManagedNotificationAccountContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateManagedNotificationAccountContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateManagedNotificationAccountContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactIdentifier != "" {
+		s.WriteString(schemas.AssociateManagedNotificationAccountContactRequest_contactIdentifier, string(v.ContactIdentifier))
+	}
+	if v.ManagedNotificationConfigurationArn != nil {
+		s.WriteString(schemas.AssociateManagedNotificationAccountContactRequest_managedNotificationConfigurationArn, *v.ManagedNotificationConfigurationArn)
+	}
+}
+
 type AssociateManagedNotificationAccountContactOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +66,26 @@ type AssociateManagedNotificationAccountContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateManagedNotificationAccountContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateManagedNotificationAccountContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateManagedNotificationAccountContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateManagedNotificationAccountContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateManagedNotificationAccountContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateManagedNotificationAccountContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateManagedNotificationAccountContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateManagedNotificationAccountContact, schemas.AssociateManagedNotificationAccountContactRequest, schemas.AssociateManagedNotificationAccountContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateManagedNotificationAccountContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateManagedNotificationAccountContact, schemas.AssociateManagedNotificationAccountContactRequest, schemas.AssociateManagedNotificationAccountContactResponse), output: &AssociateManagedNotificationAccountContactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

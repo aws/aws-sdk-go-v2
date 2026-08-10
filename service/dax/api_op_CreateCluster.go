@@ -4,7 +4,9 @@ package dax
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/dax/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dax/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -151,6 +153,54 @@ type CreateClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateClusterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAvailabilityZoneList(s, schemas.CreateClusterRequest_AvailabilityZones, v.AvailabilityZones)
+	if v.ClusterEndpointEncryptionType != "" {
+		s.WriteString(schemas.CreateClusterRequest_ClusterEndpointEncryptionType, string(v.ClusterEndpointEncryptionType))
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.CreateClusterRequest_ClusterName, *v.ClusterName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateClusterRequest_Description, *v.Description)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.CreateClusterRequest_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.CreateClusterRequest_NetworkType, string(v.NetworkType))
+	}
+	if v.NodeType != nil {
+		s.WriteString(schemas.CreateClusterRequest_NodeType, *v.NodeType)
+	}
+	if v.NotificationTopicArn != nil {
+		s.WriteString(schemas.CreateClusterRequest_NotificationTopicArn, *v.NotificationTopicArn)
+	}
+	if v.ParameterGroupName != nil {
+		s.WriteString(schemas.CreateClusterRequest_ParameterGroupName, *v.ParameterGroupName)
+	}
+	if v.PreferredMaintenanceWindow != nil {
+		s.WriteString(schemas.CreateClusterRequest_PreferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
+	}
+	s.WriteInt32(schemas.CreateClusterRequest_ReplicationFactor, v.ReplicationFactor)
+	if v.SSESpecification != nil {
+		s.WriteStruct(schemas.CreateClusterRequest_SSESpecification)
+		v.SSESpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSecurityGroupIdentifierList(s, schemas.CreateClusterRequest_SecurityGroupIds, v.SecurityGroupIds)
+	if v.SubnetGroupName != nil {
+		s.WriteString(schemas.CreateClusterRequest_SubnetGroupName, *v.SubnetGroupName)
+	}
+	serializeTagList(s, schemas.CreateClusterRequest_Tags, v.Tags)
+}
+
 type CreateClusterOutput struct {
 
 	// A description of the DAX cluster that you have created.
@@ -162,13 +212,34 @@ type CreateClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateClusterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteStruct(schemas.CreateClusterResponse_Cluster)
+		v.Cluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateClusterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateClusterResponse_Cluster:
+			v.Cluster = &types.Cluster{}
+			return v.Cluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCluster, schemas.CreateClusterRequest, schemas.CreateClusterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCluster, schemas.CreateClusterRequest, schemas.CreateClusterResponse), output: &CreateClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

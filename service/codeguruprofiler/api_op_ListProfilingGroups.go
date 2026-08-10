@@ -5,7 +5,9 @@ package codeguruprofiler
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,40 @@ type ListProfilingGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProfilingGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProfilingGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProfilingGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeDescription != nil {
+		s.WriteBool(schemas.ListProfilingGroupsRequest_includeDescription, *v.IncludeDescription)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProfilingGroupsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProfilingGroupsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListProfilingGroupsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProfilingGroupsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProfilingGroupsRequest_includeDescription:
+			v.IncludeDescription = new(bool)
+			return d.ReadBool(schemas.ListProfilingGroupsRequest_includeDescription, v.IncludeDescription)
+		case schemas.ListProfilingGroupsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListProfilingGroupsRequest_maxResults, v.MaxResults)
+		case schemas.ListProfilingGroupsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProfilingGroupsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 // The structure representing the listProfilingGroupsResponse.
 type ListProfilingGroupsOutput struct {
 
@@ -90,13 +126,38 @@ type ListProfilingGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProfilingGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProfilingGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProfilingGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProfilingGroupsResponse_nextToken, *v.NextToken)
+	}
+	serializeProfilingGroupNames(s, schemas.ListProfilingGroupsResponse_profilingGroupNames, v.ProfilingGroupNames)
+	serializeProfilingGroupDescriptions(s, schemas.ListProfilingGroupsResponse_profilingGroups, v.ProfilingGroups)
+}
+func (v *ListProfilingGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProfilingGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProfilingGroupsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProfilingGroupsResponse_nextToken, v.NextToken)
+		case schemas.ListProfilingGroupsResponse_profilingGroupNames:
+			return deserializeProfilingGroupNames(d, schemas.ListProfilingGroupsResponse_profilingGroupNames, &v.ProfilingGroupNames)
+		case schemas.ListProfilingGroupsResponse_profilingGroups:
+			return deserializeProfilingGroupDescriptions(d, schemas.ListProfilingGroupsResponse_profilingGroups, &v.ProfilingGroups)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProfilingGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProfilingGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProfilingGroups, schemas.ListProfilingGroupsRequest, schemas.ListProfilingGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProfilingGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProfilingGroups, schemas.ListProfilingGroupsRequest, schemas.ListProfilingGroupsResponse), output: &ListProfilingGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package groundstation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -37,6 +39,18 @@ type DescribeContactInput struct {
 	ContactId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.DescribeContactRequest_contactId, *v.ContactId)
+	}
 }
 
 // Output for the DescribeContact operation.
@@ -115,13 +129,146 @@ type DescribeContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.DescribeContactResponse_contactId, *v.ContactId)
+	}
+	if v.ContactStatus != "" {
+		s.WriteString(schemas.DescribeContactResponse_contactStatus, string(v.ContactStatus))
+	}
+	serializeDataflowList(s, schemas.DescribeContactResponse_dataflowList, v.DataflowList)
+	if v.EndTime != nil {
+		s.WriteTime(schemas.DescribeContactResponse_endTime, *v.EndTime)
+	}
+	if v.Ephemeris != nil {
+		s.WriteStruct(schemas.DescribeContactResponse_ephemeris)
+		v.Ephemeris.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.DescribeContactResponse_errorMessage, *v.ErrorMessage)
+	}
+	if v.GroundStation != nil {
+		s.WriteString(schemas.DescribeContactResponse_groundStation, *v.GroundStation)
+	}
+	if v.MaximumElevation != nil {
+		s.WriteStruct(schemas.DescribeContactResponse_maximumElevation)
+		v.MaximumElevation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MissionProfileArn != nil {
+		s.WriteString(schemas.DescribeContactResponse_missionProfileArn, *v.MissionProfileArn)
+	}
+	if v.PostPassEndTime != nil {
+		s.WriteTime(schemas.DescribeContactResponse_postPassEndTime, *v.PostPassEndTime)
+	}
+	if v.PrePassStartTime != nil {
+		s.WriteTime(schemas.DescribeContactResponse_prePassStartTime, *v.PrePassStartTime)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.DescribeContactResponse_region, *v.Region)
+	}
+	if v.SatelliteArn != nil {
+		s.WriteString(schemas.DescribeContactResponse_satelliteArn, *v.SatelliteArn)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.DescribeContactResponse_startTime, *v.StartTime)
+	}
+	serializeTagsMap(s, schemas.DescribeContactResponse_tags, v.Tags)
+	if v.TrackingOverrides != nil {
+		s.WriteStruct(schemas.DescribeContactResponse_trackingOverrides)
+		v.TrackingOverrides.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Version != nil {
+		s.WriteStruct(schemas.DescribeContactResponse_version)
+		v.Version.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VisibilityEndTime != nil {
+		s.WriteTime(schemas.DescribeContactResponse_visibilityEndTime, *v.VisibilityEndTime)
+	}
+	if v.VisibilityStartTime != nil {
+		s.WriteTime(schemas.DescribeContactResponse_visibilityStartTime, *v.VisibilityStartTime)
+	}
+}
+func (v *DescribeContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeContactResponse_contactId:
+			v.ContactId = new(string)
+			return d.ReadString(schemas.DescribeContactResponse_contactId, v.ContactId)
+		case schemas.DescribeContactResponse_contactStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeContactResponse_contactStatus, &ev); err != nil {
+				return err
+			}
+			v.ContactStatus = types.ContactStatus(ev)
+			return nil
+		case schemas.DescribeContactResponse_dataflowList:
+			return deserializeDataflowList(d, schemas.DescribeContactResponse_dataflowList, &v.DataflowList)
+		case schemas.DescribeContactResponse_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeContactResponse_endTime, v.EndTime)
+		case schemas.DescribeContactResponse_ephemeris:
+			v.Ephemeris = &types.EphemerisResponseData{}
+			return v.Ephemeris.Deserialize(d)
+		case schemas.DescribeContactResponse_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.DescribeContactResponse_errorMessage, v.ErrorMessage)
+		case schemas.DescribeContactResponse_groundStation:
+			v.GroundStation = new(string)
+			return d.ReadString(schemas.DescribeContactResponse_groundStation, v.GroundStation)
+		case schemas.DescribeContactResponse_maximumElevation:
+			v.MaximumElevation = &types.Elevation{}
+			return v.MaximumElevation.Deserialize(d)
+		case schemas.DescribeContactResponse_missionProfileArn:
+			v.MissionProfileArn = new(string)
+			return d.ReadString(schemas.DescribeContactResponse_missionProfileArn, v.MissionProfileArn)
+		case schemas.DescribeContactResponse_postPassEndTime:
+			v.PostPassEndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeContactResponse_postPassEndTime, v.PostPassEndTime)
+		case schemas.DescribeContactResponse_prePassStartTime:
+			v.PrePassStartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeContactResponse_prePassStartTime, v.PrePassStartTime)
+		case schemas.DescribeContactResponse_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.DescribeContactResponse_region, v.Region)
+		case schemas.DescribeContactResponse_satelliteArn:
+			v.SatelliteArn = new(string)
+			return d.ReadString(schemas.DescribeContactResponse_satelliteArn, v.SatelliteArn)
+		case schemas.DescribeContactResponse_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeContactResponse_startTime, v.StartTime)
+		case schemas.DescribeContactResponse_tags:
+			return deserializeTagsMap(d, schemas.DescribeContactResponse_tags, &v.Tags)
+		case schemas.DescribeContactResponse_trackingOverrides:
+			v.TrackingOverrides = &types.TrackingOverrides{}
+			return v.TrackingOverrides.Deserialize(d)
+		case schemas.DescribeContactResponse_version:
+			v.Version = &types.ContactVersion{}
+			return v.Version.Deserialize(d)
+		case schemas.DescribeContactResponse_visibilityEndTime:
+			v.VisibilityEndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeContactResponse_visibilityEndTime, v.VisibilityEndTime)
+		case schemas.DescribeContactResponse_visibilityStartTime:
+			v.VisibilityStartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeContactResponse_visibilityStartTime, v.VisibilityStartTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeContact, schemas.DescribeContactRequest, schemas.DescribeContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeContact, schemas.DescribeContactRequest, schemas.DescribeContactResponse), output: &DescribeContactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

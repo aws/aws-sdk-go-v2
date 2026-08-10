@@ -4,7 +4,9 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type ListAccessControlRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccessControlRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccessControlRulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccessControlRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.ListAccessControlRulesRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type ListAccessControlRulesOutput struct {
 
 	// The access control rules.
@@ -45,13 +59,29 @@ type ListAccessControlRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccessControlRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccessControlRulesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccessControlRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessControlRulesList(s, schemas.ListAccessControlRulesResponse_Rules, v.Rules)
+}
+func (v *ListAccessControlRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAccessControlRulesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAccessControlRulesResponse_Rules:
+			return deserializeAccessControlRulesList(d, schemas.ListAccessControlRulesResponse_Rules, &v.Rules)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAccessControlRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAccessControlRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccessControlRules, schemas.ListAccessControlRulesRequest, schemas.ListAccessControlRulesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAccessControlRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccessControlRules, schemas.ListAccessControlRulesRequest, schemas.ListAccessControlRulesResponse), output: &ListAccessControlRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

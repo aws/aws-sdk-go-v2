@@ -4,7 +4,9 @@ package applicationdiscoveryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,16 @@ type StopDataCollectionByAgentIdsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopDataCollectionByAgentIdsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopDataCollectionByAgentIdsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopDataCollectionByAgentIdsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentIds(s, schemas.StopDataCollectionByAgentIdsRequest_agentIds, v.AgentIds)
+}
+
 type StopDataCollectionByAgentIdsOutput struct {
 
 	// Information about the agents that were instructed to stop collecting data.
@@ -47,13 +59,29 @@ type StopDataCollectionByAgentIdsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopDataCollectionByAgentIdsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopDataCollectionByAgentIdsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopDataCollectionByAgentIdsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentConfigurationStatusList(s, schemas.StopDataCollectionByAgentIdsResponse_agentsConfigurationStatus, v.AgentsConfigurationStatus)
+}
+func (v *StopDataCollectionByAgentIdsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopDataCollectionByAgentIdsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopDataCollectionByAgentIdsResponse_agentsConfigurationStatus:
+			return deserializeAgentConfigurationStatusList(d, schemas.StopDataCollectionByAgentIdsResponse_agentsConfigurationStatus, &v.AgentsConfigurationStatus)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopDataCollectionByAgentIdsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopDataCollectionByAgentIds{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopDataCollectionByAgentIds, schemas.StopDataCollectionByAgentIdsRequest, schemas.StopDataCollectionByAgentIdsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopDataCollectionByAgentIds{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopDataCollectionByAgentIds, schemas.StopDataCollectionByAgentIdsRequest, schemas.StopDataCollectionByAgentIdsResponse), output: &StopDataCollectionByAgentIdsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

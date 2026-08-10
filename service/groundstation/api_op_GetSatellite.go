@@ -4,7 +4,9 @@ package groundstation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetSatelliteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSatelliteInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSatelliteRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSatelliteInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SatelliteId != nil {
+		s.WriteString(schemas.GetSatelliteRequest_satelliteId, *v.SatelliteId)
+	}
+}
+
 // Output for the GetSatellite operation.
 type GetSatelliteOutput struct {
 
@@ -59,13 +73,54 @@ type GetSatelliteOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSatelliteOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSatelliteResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSatelliteOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentEphemeris != nil {
+		s.WriteStruct(schemas.GetSatelliteResponse_currentEphemeris)
+		v.CurrentEphemeris.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeGroundStationIdList(s, schemas.GetSatelliteResponse_groundStations, v.GroundStations)
+	if v.NoradSatelliteID != 0 {
+		s.WriteInt32(schemas.GetSatelliteResponse_noradSatelliteID, v.NoradSatelliteID)
+	}
+	if v.SatelliteArn != nil {
+		s.WriteString(schemas.GetSatelliteResponse_satelliteArn, *v.SatelliteArn)
+	}
+	if v.SatelliteId != nil {
+		s.WriteString(schemas.GetSatelliteResponse_satelliteId, *v.SatelliteId)
+	}
+}
+func (v *GetSatelliteOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSatelliteResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSatelliteResponse_currentEphemeris:
+			v.CurrentEphemeris = &types.EphemerisMetaData{}
+			return v.CurrentEphemeris.Deserialize(d)
+		case schemas.GetSatelliteResponse_groundStations:
+			return deserializeGroundStationIdList(d, schemas.GetSatelliteResponse_groundStations, &v.GroundStations)
+		case schemas.GetSatelliteResponse_noradSatelliteID:
+			return d.ReadInt32(schemas.GetSatelliteResponse_noradSatelliteID, &v.NoradSatelliteID)
+		case schemas.GetSatelliteResponse_satelliteArn:
+			v.SatelliteArn = new(string)
+			return d.ReadString(schemas.GetSatelliteResponse_satelliteArn, v.SatelliteArn)
+		case schemas.GetSatelliteResponse_satelliteId:
+			v.SatelliteId = new(string)
+			return d.ReadString(schemas.GetSatelliteResponse_satelliteId, v.SatelliteId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSatelliteMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSatellite{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSatellite, schemas.GetSatelliteRequest, schemas.GetSatelliteResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSatellite{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSatellite, schemas.GetSatelliteRequest, schemas.GetSatelliteResponse), output: &GetSatelliteOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

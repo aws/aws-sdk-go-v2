@@ -5,7 +5,9 @@ package resourcegroups
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,26 @@ type SearchResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchResourcesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchResourcesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchResourcesInput_NextToken, *v.NextToken)
+	}
+	if v.ResourceQuery != nil {
+		s.WriteStruct(schemas.SearchResourcesInput_ResourceQuery)
+		v.ResourceQuery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SearchResourcesOutput struct {
 
 	// If present, indicates that more output is available than is included in the
@@ -96,13 +118,38 @@ type SearchResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchResourcesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchResourcesOutput_NextToken, *v.NextToken)
+	}
+	serializeQueryErrorList(s, schemas.SearchResourcesOutput_QueryErrors, v.QueryErrors)
+	serializeResourceIdentifierList(s, schemas.SearchResourcesOutput_ResourceIdentifiers, v.ResourceIdentifiers)
+}
+func (v *SearchResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchResourcesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchResourcesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchResourcesOutput_NextToken, v.NextToken)
+		case schemas.SearchResourcesOutput_QueryErrors:
+			return deserializeQueryErrorList(d, schemas.SearchResourcesOutput_QueryErrors, &v.QueryErrors)
+		case schemas.SearchResourcesOutput_ResourceIdentifiers:
+			return deserializeResourceIdentifierList(d, schemas.SearchResourcesOutput_ResourceIdentifiers, &v.ResourceIdentifiers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchResources, schemas.SearchResourcesInput, schemas.SearchResourcesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchResources, schemas.SearchResourcesInput, schemas.SearchResourcesOutput), output: &SearchResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package ssmquicksetup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssmquicksetup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmquicksetup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,23 @@ type CreateConfigurationManagerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConfigurationManagerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConfigurationManagerInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConfigurationManagerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigurationDefinitionsInputList(s, schemas.CreateConfigurationManagerInput_ConfigurationDefinitions, v.ConfigurationDefinitions)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateConfigurationManagerInput_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateConfigurationManagerInput_Name, *v.Name)
+	}
+	serializeTagsMap(s, schemas.CreateConfigurationManagerInput_Tags, v.Tags)
+}
+
 type CreateConfigurationManagerOutput struct {
 
 	// The ARN for the newly created configuration manager.
@@ -59,13 +78,32 @@ type CreateConfigurationManagerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConfigurationManagerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConfigurationManagerOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConfigurationManagerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManagerArn != nil {
+		s.WriteString(schemas.CreateConfigurationManagerOutput_ManagerArn, *v.ManagerArn)
+	}
+}
+func (v *CreateConfigurationManagerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConfigurationManagerOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConfigurationManagerOutput_ManagerArn:
+			v.ManagerArn = new(string)
+			return d.ReadString(schemas.CreateConfigurationManagerOutput_ManagerArn, v.ManagerArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConfigurationManagerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConfigurationManager{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConfigurationManager, schemas.CreateConfigurationManagerInput, schemas.CreateConfigurationManagerOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateConfigurationManager{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConfigurationManager, schemas.CreateConfigurationManagerInput, schemas.CreateConfigurationManagerOutput), output: &CreateConfigurationManagerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package workmail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,24 @@ type RegisterToWorkMailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterToWorkMailInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterToWorkMailRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterToWorkMailInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Email != nil {
+		s.WriteString(schemas.RegisterToWorkMailRequest_Email, *v.Email)
+	}
+	if v.EntityId != nil {
+		s.WriteString(schemas.RegisterToWorkMailRequest_EntityId, *v.EntityId)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.RegisterToWorkMailRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type RegisterToWorkMailOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -70,13 +90,26 @@ type RegisterToWorkMailOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterToWorkMailOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterToWorkMailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterToWorkMailOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RegisterToWorkMailOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterToWorkMailResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterToWorkMailMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterToWorkMail{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterToWorkMail, schemas.RegisterToWorkMailRequest, schemas.RegisterToWorkMailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRegisterToWorkMail{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterToWorkMail, schemas.RegisterToWorkMailRequest, schemas.RegisterToWorkMailResponse), output: &RegisterToWorkMailOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

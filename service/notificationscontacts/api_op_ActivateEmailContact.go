@@ -4,6 +4,8 @@ package notificationscontacts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/notificationscontacts/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type ActivateEmailContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActivateEmailContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivateEmailContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivateEmailContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ActivateEmailContactRequest_arn, *v.Arn)
+	}
+	if v.Code != nil {
+		s.WriteString(schemas.ActivateEmailContactRequest_code, *v.Code)
+	}
+}
+
 type ActivateEmailContactOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +68,26 @@ type ActivateEmailContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActivateEmailContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivateEmailContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivateEmailContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ActivateEmailContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivateEmailContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationActivateEmailContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpActivateEmailContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ActivateEmailContact, schemas.ActivateEmailContactRequest, schemas.ActivateEmailContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpActivateEmailContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ActivateEmailContact, schemas.ActivateEmailContactRequest, schemas.ActivateEmailContactResponse), output: &ActivateEmailContactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
